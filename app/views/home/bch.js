@@ -12,7 +12,7 @@ export default ['$scope', 'articlesService', '$rootScope', 'translationService',
         $scope.announcementCounts = 3;
         if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
           $scope.recordCount = 8;
-          $scope.announcementCounts = 6;
+          //$scope.announcementCounts = 6;
         }
         $scope.exportVueComponent = {
           components: { homepageRecords }
@@ -23,4 +23,12 @@ export default ['$scope', 'articlesService', '$rootScope', 'translationService',
           scrollTop: $("#homePageMapSection").offset().top
         }, 1000);
       }
+
+      $scope.scrollTo = function (anchor){
+        $('html, body').animate({
+          scrollTop: $("#"+ anchor).offset().top
+        }, 1000);
+      }
+
+      
     }];

@@ -1,121 +1,147 @@
 <div>
-    <div class="home-section-top-bch min-vh-100" >
-        <div class="container">
+    <div class="home-section-top-bch">
+        <div class="container py-5">
 
-            <h1 class="lh-sm color-white mx-0 mx-md-3 pt-md-5 pb-md-2 pt-lg-5 pb-lg-2 fs-size-paragraph pt-2">
-                {{::('bchHomeT.bchDescription'|$translate)}}</h1>
+            <span class="lh-sm fs-4 color-white my-3">
+                {{::('bchHomeT.bchDescription'|$translate)}}
+            </span>
 
-            <div class="row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
-
-                <div class="rounded col-12 col-lg-4 d-flex py-lg-3 px-0 px-md-2">
-                    <div class="card w-100 shadow-lg border-0 m-3 bg-white visited-background">
-                        <div class="card-body px-2 pt-2">
-                            <div class="d-flex position-relative ">
-                               
-                                <i class="bi bi-lightbulb display-4 color-orange main-page-boxes-icons" alt="learn about bch"></i>
-                                <div class="ps-2">
-                                    <h2 class="fw-bold text-left mt-2 mb-2">{{::('bchHomeT.aboutBch'|$translate)}}</h2>
-                                    <ul>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="kb">{{::('bchHomeT.aboutBch'|$translate)}}</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="https://bch.cbd.int/protocol">{{::('bchHomeT.aboutProtocol'|$translate)}}</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/faqs">{{::('bchHomeT.faq'|$translate)}}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+            <div class="row mt-2 py-3">
+                <div class="col-sm-12 col-md-4 p-2 d-none d-sm-none d-md-none d-lg-block" style="white-space:nowrap;">
+                    <a class="text-decoration-none cursor-pointer link-light" ng-click="scrollTo('homePageMapSection');">
+                        <div
+                            class="rounded p-2 fs-5 p-1 bg-bch text-uppercase border border-1 border-dark border-secondary w-100 text-center">
+                            <i class="bi bi-globe"></i>
+                            {{::('bchHomeT.exploreMap'|$translate)}}
+                            <i class="fa  fa-arrow-down"></i>
                         </div>
-                        <div class="rounded-0 card-footer link-card-footer text-muted p-0">
-                            <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white py-0 d-flex justify-content-end align-items-center" rel="noopener" translation-url href="kb">
-                                <p class="m-0">{{::('bchHomeT.getStarted'|$translate)}}</p>
-                                <i class="bi bi-arrow-right-short fw-bolder fs-3"></i> </a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
-
-                <div class="rounded col-12 col-lg-4 d-flex py-lg-3 px-0 px-md-2">
-                    <div class="card w-100 shadow-lg border-0 m-3 bg-white visited-background">
-                        <div class="card-body px-2 pt-2">
-                            <div class="d-flex position-relative ">
-                                <i class="bi bi-search display-4 color-orange main-page-boxes-icons" alt="search bch"></i>
-                                <div  class="ps-2">
-                                    <h2 class="fw-bold text-left mt-2 mb-2">{{::('bchHomeT.searchRecords'|$translate)}}</h2>
-
-                                    <ul>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="search?openTour">{{::('bchHomeT.takeTour'|$translate)}}</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/finding-information/Searching-for-information-in-the-BCH/619c553a4f1f30000140eeb2">{{::('bchHomeT.helpSearch'|$translate)}}</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="registries">{{::('bchHomeT.registries'|$translate)}}</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="search?currentPage=1&tab=nationalRecords&group=government&group=schema&schema=cpbNationalReport4">{{::('bchHomeT.fourthNR'|$translate)}}</a></li>
-                                    </ul>
-
-
-                                </div>
-                            </div>
+                <div class="col-sm-12 col-md-4 p-2" style="white-space:nowrap;">
+                    <a class="text-decoration-none cursor-pointer link-light " ng-click="scrollTo('gettingStartedSection');">
+                        <div
+                            class="rounded p-2 fs-5 p-1 bg-bch text-uppercase border border-1 border-dark border-secondary w-100 text-center">
+                            <i class="bi bi-lightbulb"></i>
+                            {{::('bchHomeT.getStarted'|$translate)}}
+                            <i class="fa  fa-arrow-down"></i>
                         </div>
-                        <div class="rounded-0 card-footer link-card-footer text-muted p-0">
-                            <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white py-0 d-flex justify-content-end align-items-center" rel="noopener" translation-url href="search">
-                                <p class="m-0">{{::('bchHomeT.search'|$translate)}} </p>
-                                <i class="bi bi-arrow-right-short fw-bolder fs-3"></i> </a>
-                        </div>
-                    </div>
-
+                    </a>
                 </div>
-
-                <div class="rounded col-12 col-lg-4 d-flex py-lg-3 px-0 px-md-2">
-                    <div class="card w-100 shadow-lg border-0 m-3 bg-white visited-background">
-                        <div class="card-body px-2 pt-2">
-                            <div class="d-flex position-relative ">
-                                <i class="bi bi-upload display-4 color-orange main-page-boxes-icons" alt="search bch"></i>
-                                <div class="ps-2">
-                                    <h2 class="fw-bold text-left mt-2 mb-2">{{::('bchHomeT.submitRecords'|$translate)}}</h2>
-                                    
-                                    <ul>
-                                        <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener" translation-url href="signin">{{::('bchHomeT.signIn'|$translate)}}</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="register?openTour">{{::('bchHomeT.takeTour'|$translate)}}</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-BCH/619c554858029700017ff45f">{{::('bchHomeT.helpRecords'|$translate)}}</a></li>
-                                    </ul>
-                                   
-                                </div>
-                            </div>
+                <div class="col-sm-12 col-md-4 p-2" style="white-space:nowrap;"> <a
+                        class="text-decoration-none cursor-pointer link-light " ng-click="scrollTo('recentRecordsSection');">
+                        <div
+                            class="rounded p-2 fs-5  p-1 bg-bch text-uppercase border border-1 border-dark border-secondary w-100 text-center">
+                            <i class="bi bi-table"></i>
+                            {{::('bchHomeT.recentRecords'|$translate)}}
+                            <i class="fa  fa-arrow-down"></i>
                         </div>
-                        <div class="rounded-0 card-footer link-card-footer text-muted p-0">
-                            <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white py-0 d-flex justify-content-end align-items-center" rel="noopener" translation-url href="register">
-                                <p class="m-0">{{::('bchHomeT.submit'|$translate)}}</p>
-                                <i class="bi bi-arrow-right-short fw-bolder fs-3"></i> </a>
-                        </div>
-                    </div>
-
-                </div>
-
+                    </a></div>
             </div>
-            <div class="mt-2 mt-lg-5 p-2 text-center d-none d-lg-block">
-                <a class= "text-decoration-none cursor-pointer" ng-click="exploreMore();">
-                  <span class="rounded fs-3 py-2 px-4 color-white new-explore-btn">{{::('bchHomeT.exploreMap'|$translate)}} <i class="bi bi-arrow-down-short fs-1 fw-bolder"></i></span>
-                </a>
-            </div >
-            
+            <div>
+                <p class="fs-2 m-0 mt-4 color-white">
+                    {{::('bchHomeT.announcements'|$translate)}}
+                    <hr class="m-0 color-white">
+                </p>
+                <div ng-if="announcementCounts" class="pt-3">
+                    <home-articles tags="bch-announcement" summary="1" counts="{{announcementCounts}}"></home-articles>
+                </div>
+                <div class="text-end mt-4 card-down-margin">
+                    <a class="nav-link fs-6 fw-bold text-uppercase color-white" href="kb/tags/bch-announcement/">
+                        {{::('bchHomeT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
+                </div>
+            </div>
+
         </div>
     </div>
- <!-- ToD min-vh-100  -->
-    <div id="homePageMapSection" class="bg-white d-none d-lg-block overflow-hidden" >
+
+    <div id="homePageMapSection" class="max-vh-100 bg-white d-none d-lg-block overflow-hidden">
         <home-map></home-map>
     </div>
 
-
-    <div class="">
-        <div class="container">
-            <p class="fs-1 m-0 pt-md-4 mt-4 fw-bold">{{::('bchHomeT.announcements'|$translate)}}
+    <!-- Gettingstarted -->
+    <div class="container pb-3 mb-3" id="gettingStartedSection">
+        <div class="row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
+            <p class="fs-2 m-0 pt-md-4 mt-4 fw-bold ">
+                 {{::('bchHomeT.getStarted'|$translate)}}
                 <hr class="m-0">
             </p>
-            <div ng-if="announcementCounts">
-                <home-articles tags="BCH-Announcement" counts="{{announcementCounts}}"></home-articles>
+            <div class="rounded col-12 col-lg-4 d-flex py-lg-3">
+                <div class="card w-100 shadow-lg border-0 m-3 bg-white ">
+                    <h5 class="card-header bg-bch">
+                        <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
+                            href="kb/tags/about/About">
+                            <i class="bi bi-lightbulb pe-3" alt="Learn"></i>
+                            {{::('bchHomeT.learn'|$translate)}}
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </h5>
+                    <div class="card-body">
+                        <ul>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="kb">{{::('bchHomeT.aboutBch'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="https://bch.cbd.int/protocol">{{::('bchHomeT.aboutProtocol'|$translate)}}</a>
+                            </li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="kb/faqs">{{::('bchHomeT.faq'|$translate)}}</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="text-end mt-4 card-down-margin">
-                <a rel="noopener" translation-url class="nav-link fs-6 text-muted fw-bold text-uppercase py-0 d-flex justify-content-end align-items-center" href="kb/tags/bch-announcement/">
-                    <p class="m-0">{{::('bchHomeT.seeMore'|$translate)}}</p>
-                    <i class="bi bi-arrow-right-short fw-bolder fs-3 lh-1"></i> </a>
+            <div class="rounded col-12 col-lg-4 d-flex py-lg-3">
+                <div class="card w-100 shadow-lg border-0 m-3 bg-white ">
+                    <h5 class="card-header bg-bch">
+                        <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
+                            href="search">
+                            <i class="bi bi-search pe-3" alt="Search"></i>
+                            {{::('bchHomeT.search'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
+                    </h5>
+                    <div class="card-body">
+                        <ul>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="search?openTour">{{::('bchHomeT.takeTour'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="kb/tags/finding-information/Searching-for-information-in-the-BCH/619c553a4f1f30000140eeb2">{{::('bchHomeT.helpSearch'|$translate)}}</a>
+                            </li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="registries">{{::('bchHomeT.registries'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="search?currentPage=1&tab=nationalRecords&group=government&group=schema&schema=cpbNationalReport4">{{::('bchHomeT.fourthNR'|$translate)}}</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded col-12 col-lg-4 d-flex py-lg-3">
+                <div class="card w-100 shadow-lg border-0 m-3 bg-white ">
+                    <h5 class="card-header bg-bch">
+                        <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
+                            href="register">
+                            <i class="bi bi-upload  pe-3" alt="Share"></i>
+                            {{::('bchHomeT.submit'|$translate)}}
+                            <i class="fa fa-arrow-right"></i> </a>
+                    </h5>
+                    <div class="card-body">
+                        <ul>
+                            <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener"
+                                    translation-url href="signin">{{::('bchHomeT.signIn'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="register?openTour">{{::('bchHomeT.takeTour'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-BCH/619c554858029700017ff45f">{{::('bchHomeT.helpRecords'|$translate)}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="home-page-record">
+    <!-- END Gettingstarted -->
+
+    <div class="max-vh-100 home-page-record pt-4 mt-4" id="recentRecordsSection">
         <div class="container ">
             <p class="fs-1 m-0 fw-bold">{{::('bchHomeT.nationalRecords'|$translate)}}
                 <hr class="m-0">

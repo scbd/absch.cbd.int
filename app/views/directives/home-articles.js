@@ -8,17 +8,26 @@ import '~/services/main';
                 template: template,
                 scope   : {
                     tags: '@?',
-                    counts: '@'
+                    counts: '@',
+                    summary: '@',
+                    horizontal: '@'
                 },
                 controller: ['$scope', '$http','$q', '$filter', '$location', 'articlesService', 'locale',
                     function($scope, $http, $q, $filter, $location, articlesService, locale) {
                     
+                      
                         $scope.locale = locale;
                         $scope.status   = "loading";
                         $scope.error    = null;
                         $scope.imageSize = {_400 : '400x400'}
                         if (!$scope.counts) {
                             $scope.counts = 20;
+                        }
+                        if (!$scope.summary) {
+                            $scope.summary = 0;
+                        }
+                        if (!$scope.horizontal) {
+                            $scope.horizontal = 0;
                         }
                         $scope.articles = [];
 

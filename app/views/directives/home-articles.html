@@ -1,25 +1,85 @@
 <div id="Announcements">
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" ng-if="!horizontal">
         <!-- ToDo  style="height:256px" BS-5  -->
         <div class="col" ng-repeat="article in articles | orderBy:'meta.createdOn':true">
             <div style="height:256px" class="card my-2 position-relative shadow bg-white visited-background cursor-pointer">
+               
                 <span class="badge bg-secondary position-absolute top-0 end-0"><span
-                        ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
-        
-                <div style="width:100%;height:120px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url, imageSize._400)}}');">
+                    ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
+
+                <div style="width:100%;height:200px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url, imageSize._400)}}');">
                     &nbsp;
                 </div>
         
-                <div class="card-body border-top" style="min-height:120px;">
+                <div class="card-body border-top position-relative" style="min-height:80px;">
+
+                   
+
                     <a class="stretched-link text-dark text-decoration-none card-title"
                         ng-click="loadArticle(article._id)">
-                       <h6 class="fw-bold"> <span ng-bind="article.title | lstring:locale"></span></h6>
+                       <h6 class="fw-bold" style="overflow: hidden;"> <span ng-bind="article.title | lstring:locale"></span></h6>
                     </a>
-                    <p class="card-text mt-2"> <span ng-bind="article.summary | lstring:locale"></span></p>
+                    <p ng-if="summary" class="card-text mt-2" style="overflow: hidden;"> <span ng-bind="article.summary | lstring:locale"></span></p>
                 </div>
             </div>
         </div>
      </div>
+
+
+
+<div ng-if="horizontal" >
+     <div class="row row-cols-1 row-cols-md-2 g-3" >
+        <div class="col" ng-repeat="article in articles | orderBy:'meta.createdOn':true">
+                <div class="card mb-3 w-100 border shadow-lg" style="height:120px;" >
+                <div class="row g-0">
+                <div class="col-4" >
+                    <div style="border:1px solid #ddd;margin:5px;width:100%;height:110px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url, imageSize._400)}}');">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="card-body position-relative">
+                        <span class="badge bg-secondary position-absolute top-0 end-0"><span
+                                ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
+                        <a class="stretched-link text-dark text-decoration-none card-title"
+                                ng-click="loadArticle(article._id)">
+                        <h5 class="card-title ms-2 mt-3" style="overflow: hidden;" ><span ng-bind="article.title | lstring:locale"></span></h5>  </a>
+                        <p class="card-text ms-2" style="overflow: hidden;" ng-if="summary"><span ng-bind="article.summary | lstring:locale"></span></p> 
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!-- 
+<div class="row" ng-if="horizontal" ng-repeat="article in articles | orderBy:'meta.createdOn':true">
+    <div class="col">
+   
+
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{::getSizedImage(article.coverImage.url, imageSize._400)}}" class="card-img-top" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body position-relative">
+                <span class="badge bg-secondary position-absolute top-0 end-0"><span ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
+              <h5 class="card-title">
+                <span ng-bind="article.title | lstring:locale"></span></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div> -->
+
+
+   
+
+
+
 </div>
 

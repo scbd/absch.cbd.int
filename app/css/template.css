@@ -371,10 +371,7 @@ body.modal-open .modal-backdrop.fade.show{
     align-self: flex-start;
 }
 
-.new-explore-btn{
-    background: #00405C;
-    text-transform: uppercase;
-}
+
 .nav-link-country-profiles .dropdown-item {
     white-space: inherit;
 } 
@@ -383,7 +380,6 @@ body.modal-open .modal-backdrop.fade.show{
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 42px;
 }
 .record-callout span a {
     max-width: 90%;

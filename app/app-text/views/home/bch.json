@@ -3,10 +3,10 @@
     "aboutBch": "Learn about the BCH",
     "aboutProtocol": "About the Protocol",
     "faq": "FAQs",
-    "getStarted": "Get Started",
+    "getStarted": "Get started",
     "searchRecords": "Search records",
-    "takeTour": "Take the Tour",
-    "helpSearch": "Help using the Search",
+    "takeTour": "Take the tour",
+    "helpSearch": "Help using the search",
     "registries": "Registries: LMO-Organism-Gene",
     "fourthNR": "Fourth National Reports",
     "search": "Search",
@@ -18,5 +18,7 @@
     "announcements": "Announcements",
     "seeMore": "See more",
     "nationalRecords": "National records",
-    "referenceRecords": "Reference records"
+    "referenceRecords": "Reference records",
+    "learn": "Learn",
+    "recentRecords": "Recent records"
 }

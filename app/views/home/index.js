@@ -20,7 +20,7 @@ export default ['$scope','$rootScope', 'translationService', function ($scope, $
 
         if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
           $scope.recordCount = 8;
-          $scope.announcementCounts = 6;
+          //$scope.announcementCounts = 6;
         }
 
         var today= moment.utc();
@@ -57,5 +57,12 @@ export default ['$scope','$rootScope', 'translationService', function ($scope, $
           scrollTop: $("#homePageMapSection").offset().top
         }, 1000);
       }
+
+      $scope.scrollTo = function (anchor){
+        $('html, body').animate({
+          scrollTop: $("#"+ anchor).offset().top
+        }, 1000);
+      }
+
 
     }];
