@@ -2,6 +2,8 @@ import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-abs-national-report.directive.html";
 import '~/views/directives/record-options';
+import viewAbsNRT from '~/app-text/views/forms/view/abs/view-abs-national-report.json';
+import numbers from '~/app-text/numbers.json';
 
 app.directive("viewAbsNationalReport", [function () {
 	return {
@@ -15,9 +17,9 @@ app.directive("viewAbsNationalReport", [function () {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		controller : ["$scope", "commonjs", "$filter", function ($scope, commonjs, $filter)
-		{
-			
+		controller: ["$scope", "commonjs", "$filter", "translationService", function ($scope, commonjs, $filter, translationService) {
+				translationService.set('viewAbsNRT', viewAbsNRT);
+				translationService.set('numbers', numbers);
 			
 			
 			//====================
