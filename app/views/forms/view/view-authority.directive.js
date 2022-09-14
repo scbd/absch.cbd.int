@@ -77,13 +77,19 @@ import viewAuthorityT from '~/app-text/views/forms/view/view-authority.json';
 									return _.includes( root, t.identifier );
 								} );
 							} else {
-								if ( item.narrowerTerms != undefined && item.narrowerTerms.length > 0 ) {
+								if ( item.narrowerTerms != undefined && item.narrowerTerms.length > 0 && $scope.document.cpbOrganismTypes.length!=1 ) {
 									terms = _.filter( terms, function ( t ) {
 										return item.identifier != t.identifier;
 									} );
 								}
 							}
 						} );
+						//for old data: remove parent
+						if($scope.document.cpbOrganismTypes.length==1){
+							terms = _.filter( terms, function ( t ) {
+								return _.includes( t, $scope.document.cpbOrganismTypes[0].identifier );
+							} );
+						}
 						return terms;
 					}
 				}
