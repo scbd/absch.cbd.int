@@ -329,13 +329,6 @@ export const bchLeftMenuFilters = {
             "relatedField":"scopes_REL_ss"
         },
         {
-            "type": "thesaurus",
-            "term": "regions",
-            "title": bchFilters.geographicalRegion,
-            "field": "operationalRegions_ss",
-            "relatedField":"operationalRegions_REL_ss"
-        },
-        {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
