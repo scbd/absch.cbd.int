@@ -37,8 +37,8 @@ import { languages } from '~/app-data/un-languages';
                         await updateUserSettings($scope.userSettings);
                     };
 
-                    $scope.updateFrequency = async function(frequency){
-                        $scope.userSettings.frequency = frequency;
+                    $scope.updateFrequency = async function(alertFrequency){
+                        $scope.userSettings.alertFrequency = alertFrequency;
 
                         await updateUserSettings($scope.userSettings);
                     };
@@ -46,13 +46,14 @@ import { languages } from '~/app-data/un-languages';
                     async function init(){
                         $scope.updating = true;
                         try{
-                            const settings = (await $http.get('/api/v2016/settings/'+`${realm.value}-${$scope.user.userID}`)).data;
+                            const settings = await $http.get('/api/v2016/settings/'+`${realm.value}-${$scope.user.userID}`);
                             
                             if(settings)
                                 $scope.userSettings = settings;
                         }
                         catch(e){
-                            safeApply(()=>$scope.error = e);
+                            if(e.status != 404)
+                                safeApply(()=>$scope.error = e.data);
                         }
                         finally{
                             safeApply(()=>$scope.updating = false);
