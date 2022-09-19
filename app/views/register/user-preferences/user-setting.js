@@ -49,7 +49,7 @@ import { languages } from '~/app-data/un-languages';
                             const settings = await $http.get('/api/v2016/settings/'+`${realm.value}-${$scope.user.userID}`);
                             
                             if(settings)
-                                $scope.userSettings = settings;
+                                $scope.userSettings = settings.data;
                         }
                         catch(e){
                             if(e.status != 404)
