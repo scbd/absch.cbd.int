@@ -24,7 +24,7 @@ app.directive('countryProfile', function() {
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
                 }
-                $scope.jurisdictionTerms = thesaurusService.getDomainTerms('msrJurisdictions', { other: true, otherType: 'lstring' });
+                //$scope.jurisdictionTerms = thesaurusService.getDomainTerms('msrJurisdictions', { other: true, otherType: 'lstring' });
                 $scope.loadRecords  = loadRecords;
                 $scope.sortMeasure  = "[jurisdiction_sort, type_sort, status_sort, createdDate_dt, title_t]";
                 var countryRecords  = {};
@@ -62,24 +62,24 @@ app.directive('countryProfile', function() {
                 
                 }
 
-                $scope.onJurisdictionChange = async function (jurisdiction) {
-                    $scope.jd = [];
-                    if (jurisdiction){
-                        _.forEach(jurisdiction, function (term) { 
-                            $scope.jd.push(term.identifier) 
-                        }); 
-                    } 
-                }
+                //$scope.onJurisdictionChange = async function (jurisdiction) {
+                //     $scope.jd = [];
+                //     if (jurisdiction){
+                //         _.forEach(jurisdiction, function (term) { 
+                //             $scope.jd.push(term.identifier) 
+                //         }); 
+                //     } 
+                // }
 
-                $scope.toggleAll = function (event) {
-                    let isChecked = event.currentTarget.checked;
-                    let ele = document.getElementsByClassName('msr-chk');
-                    for (var i = 0; i < ele.length; i++) {
-                        if (isChecked)
-                            ele[i].checked = true;
-                        else ele[i].checked = false;
-                    }
-                }
+                // $scope.toggleAll = function (event) {
+                //     let isChecked = event.currentTarget.checked;
+                //     let ele = document.getElementsByClassName('msr-chk');
+                //     for (var i = 0; i < ele.length; i++) {
+                //         if (isChecked)
+                //             ele[i].checked = true;
+                //         else ele[i].checked = false;
+                //     }
+                // }
 
                 function loadCountryRecords(code){
                     const groupField = 'grp_government_schema_s';

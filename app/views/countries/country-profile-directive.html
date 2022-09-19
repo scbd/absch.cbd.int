@@ -46,18 +46,29 @@
 
             <div ng-if="schema.shortCode=='MSR'">
                 <div class="w-100 mb-4">
-                    <legend>{{::('countryProfileDirectiveT.selectMeasures'|$translate)}}</legend>
-                    <span class="fw-bold float-start">Jurisdiction:</span><div km-term-check name="jurisdiction" ng-model="jurisdiction" terms="jurisdictionTerms" class="jurisdiction"
-                                   binding-type="term[]" show-other="false" ng-change="onJurisdictionChange(jurisdiction)" locales="document.header.languages"></div>
-                        <div><input type="checkbox" class="m-1 mt-1 float-start" ng-click="toggleAll($event)" checked/> All</div>
-                        <div ng-repeat="measure in schema.docs|orderBy:sortMeasure | SearchTerms:jd" class="py-1 border-bottom" 
-                        ng-class="{'bg-nationalmsr':measure.rec_meta1[0] === 'National / Federal','bg-subnationalmsr':measure.rec_meta1[0] === 'Sub-national','bg-communitymsr':measure.rec_meta1[0] === 'Community','bg-regionalmsr':measure.rec_meta1[0] === 'Regional / Multilateral'
-                        ,'bg-othermsr':measure.rec_meta1[0] === 'Other' }">
+                   
+                    <!-- <div class="fs-6">
+                        <span class="fw-bold">
+                            {{::('countryProfileDirectiveT.jurisdiction'|$translate)}}:
+                        </span>
+                        <span km-term-check name="jurisdiction" ng-model="jurisdiction" terms="jurisdictionTerms"
+                            class="d-inline jurisdiction" binding-type="term[]" show-other="false"
+                            ng-change="onJurisdictionChange(jurisdiction)" locales="document.header.languages">
+                        </span>
+                    </div> -->
 
-                        <input type="checkbox" ng-model="measure.measureMatrix" class="ms-1 mt-2 float-start msr-chk" />
-                      <result-default doc="measure" external-link="true" type="measure"></result-default>
-                        </div>
-                        <!--<a rel="noopener" translation-url  class="link" style="margin-top:20px;" ng-click="selectAllForMatrix()" > select <span ng-if="!measureMatrixDocuments.selectAll">all</span><span ng-if="measureMatrixDocuments.selectAll">none</span></a>-->
+                    <legend>{{::('countryProfileDirectiveT.selectMeasures'|$translate)}}</legend>
+                    <table class="w-100">
+                        <tr ng-repeat="measure in schema.docs|orderBy:sortMeasure | SearchTerms:jd" class="py-1">
+                            <td class="align-top pe-2"><input type="checkbox" ng-model="measure.measureMatrix" class="ms-1 mt-2 p-3 float-start msr-chk" /></td>
+                            <td><result-default doc="measure" external-link="true" type="national"></result-default></td>
+                        </tr>
+                        <!-- <tr>
+                            <td><input type="checkbox" class="m-1 p-3 mt-1 float-start" ng-click="toggleAll($event)" checked /></td>
+                            <td><span class="bold"> {{::('countryProfileDirectiveT.selectAll'|$translate)}}</span></td>
+                        </tr> -->
+                    </table>
+
                     </div>   
                         
                     <div class="mb-3">
