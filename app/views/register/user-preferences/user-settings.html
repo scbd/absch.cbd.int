@@ -46,12 +46,12 @@
                 <p class="card-text">{{::('userSettingsT.frequencyDescription'|$translate)}}</p>
                 <div class="btn-group">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ng-disabled="updating">
-                        <span ng-if="!userSettings.frequency">{{::('userSettingsT.frequencyDropdown'|$translate)}}</span>
-                        <span>{{frequencies[userSettings.frequency]}}</span>
+                        <span ng-if="!userSettings.alertFrequency">{{::('userSettingsT.frequencyDropdown'|$translate)}}</span>
+                        <span>{{frequencies[userSettings.alertFrequency]}}</span>
                     </button>
                     <ul class="dropdown-menu">
                         <li ng-repeat="(key, frequency) in frequencies">
-                            <a class="dropdown-item" ng-class="{'active': userSettings.frequency == key}" ng-click="updateFrequency(key)" href="#">{{frequency}}</a>
+                            <a class="dropdown-item" ng-class="{'active': userSettings.alertFrequency == key}" ng-click="updateFrequency(key)" href="#">{{frequency}}</a>
                         </li>
                     </ul>
                   </div>
