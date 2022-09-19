@@ -3,7 +3,7 @@
 	<span register-top-menu></span>
 
 	<div class="innerPageContent register-content card card-1-notrans m-0 p-3 mb-5">
-
+		
 		<div class="register-content-header bg-secondary text-white">
 			<div class="p-2">
 				<h3>{{::('preferencesT.userPreferences'|$translate)}}</h3>
@@ -11,12 +11,29 @@
 		</div>
 
 		<div class="p-2 bg-white">
-			<h1 class="border-bottom my-4">
-				{{::('preferencesT.emailNotification'|$translate)}} <small class="fs-6">{{::('preferencesT.keepUpToDate'|$translate)}}</small>
-			</h1>
-
-			<user-alerts  collection="subscriptions" collection-filter='{{alertFilter}}'
-			 run-query="runFilter(filter)"></user-alerts>
+		
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+				  <button ng-click="tab='setting'" class="nav-link active" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" 
+				  	role="tab" aria-controls="nav-settings" aria-selected="true">{{::('preferencesT.settingsTab'|$translate)}}</button>
+				  <button ng-click="tab='user-alerts'" class="nav-link" id="nav-user-alerts-tab" data-bs-toggle="tab" data-bs-target="#nav-user-alerts" type="button" 
+				  	role="tab" aria-controls="nav-user-alerts" aria-selected="false">{{::('preferencesT.alertsTab'|$translate)}}</button>
+				</div>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+					<user-settings ng-if="tab=='setting'"></user-settings>
+				</div>
+				<div class="tab-pane fade" id="nav-user-alerts" role="tabpanel" aria-labelledby="nav-user-alerts-tab">
+					<div ng-if="tab=='user-alerts'">
+						<h1 class="border-bottom my-4">
+							{{::('preferencesT.emailNotification'|$translate)}} <small class="fs-6">{{::('preferencesT.keepUpToDate'|$translate)}}</small>
+						</h1>
+						<user-alerts  collection="subscriptions" collection-filter='{{alertFilter}}' run-query="runFilter(filter)"></user-alerts>
+					</div>
+				</div>
+			</div>
+		
 
 		</div>
 

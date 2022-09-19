@@ -1,0 +1,62 @@
+<div>
+    <h1 class="border-bottom my-4">
+        {{::('userSettingsT.settingsDescription'|$translate)}}
+    </h1>
+    <div class="row">
+        <div class="col-sm-12">
+            
+            <div ng-if="error" class="alert alert-danger d-flex" role="alert">
+                <i class="bi bi-exclamation-triangle m-1"></i>
+                <div class="m-1">
+                  <ul>
+                    <li ng-repeat="e in error.errors">{{e.message}}</li>
+                  </ul>
+                </div>
+            </div>
+            <div class="d-flex" ng-if="updating">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">{{::('userSettingsT.updating'|$translate)}}...</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{::('userSettingsT.languageHeader'|$translate)}}</h5>
+              <p class="card-text">{{::('userSettingsT.languageDescription'|$translate)}}</p>
+             
+              <div class="btn-group">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ng-disabled="updating">
+                    <span ng-if="!userSettings.language">{{::('userSettingsT.languageDropdown'|$translate)}}</span>
+                    <span>{{languages[userSettings.language]}}</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="(key, lang) in languages">
+                        <a class="dropdown-item" ng-class="{'active': userSettings.language == key}" ng-click="updateLanguage(key)" href="#">{{lang}}</a>
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{::('userSettingsT.frequencyHeader'|$translate)}}</h5>
+                <p class="card-text">{{::('userSettingsT.frequencyDescription'|$translate)}}</p>
+                <div class="btn-group">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ng-disabled="updating">
+                        <span ng-if="!userSettings.frequency">{{::('userSettingsT.frequencyDropdown'|$translate)}}</span>
+                        <span>{{frequencies[userSettings.frequency]}}</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="(key, frequency) in frequencies">
+                            <a class="dropdown-item" ng-class="{'active': userSettings.frequency == key}" ng-click="updateFrequency(key)" href="#">{{frequency}}</a>
+                        </li>
+                    </ul>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
