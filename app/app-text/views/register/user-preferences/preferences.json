@@ -1,5 +1,7 @@
 {
     "userPreferences": "User Preferences",
     "emailNotification": "Email notifications and predefined searches",
-    "keepUpToDate": "Keep up to date when records are published."
+    "keepUpToDate": "Keep up to date when records are published.",   
+    "settingsTab": "Settings",
+    "alertsTab":"User Alerts"
 }
