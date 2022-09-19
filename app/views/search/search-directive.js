@@ -972,6 +972,9 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     }
 
                     function updateQueryString(field, values){
+                        if($scope.isAlertSearch)
+                            return;
+                            
                         if(field!='sort'){
                             $location.search('currentPage', 1);
                             $scope.searchResult.currentPage = 1;

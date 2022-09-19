@@ -70,7 +70,7 @@
                     <button ng-href="#" id="clearSearchFilter" ng-if="canShowSaveFilter()"
                         class="bg-white cusor-pointer btn btn-sm btn-default bold" ng-click="clearFilter()"> <i
                             class="bi bi-x-circle-fill" aria-hidden="true"></i> {{::('searchDirectiveT.clearFilters'|$translate)}} </button>
-                    <span class="btn-group float-end dashboard-tour">
+                    <span class="btn-group float-end dashboard-tour" ng-if="!isAlertSearch">
                         <a rel="noopener" ng-href="#" class="text-decoration-none help-tour link2" ng-click="tour()">
                             <i class="fa fa-question-circle color-white" aria-hidden="true"></i>
                             <span class="d-none d-lg-inline-block  color-white">{{::('searchDirectiveT.tour'|$translate)}}</span>
@@ -141,7 +141,7 @@
                                 <i ng-if="showFilters =='regionFilter'" class="bi bi-x-circle-fill"></i>
                                 <i ng-if="!showFilters || showFilters!='regionFilter'" class="fa fa-caret-down"></i>
                             </a></li>
-                        <li id="dateFilterTab" ng-show="!skipDateFilter"> <a id="dateFilterTabJR" rel="noopener" href=""
+                        <li id="dateFilterTab" ng-show="!isAlertSearch"> <a id="dateFilterTabJR" rel="noopener" href=""
                                 ng-class="{'active':showFilters=='dateFilter', 'text-bch':(isBCH && showFilters=='dateFilter'), 'text-abs':(isABS && showFilters=='dateFilter')}"
                                 ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"
                                 class="btn color-white">
@@ -150,7 +150,7 @@
                                 <i ng-if="!showFilters || showFilters!='dateFilter'" class="fa fa-caret-down"></i>
                             </a> </li>
 
-                        <li id="searchFilterTab" ng-show="user && user.isAuthenticated"> <a rel="noopener" href=""
+                        <li id="searchFilterTab" ng-show="user && user.isAuthenticated && !isAlertSearch"> <a rel="noopener" href=""
                                 ng-class="{'active':showFilters=='userSearchFilter'}"
                                 ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')"
                                 class="btn color-orange">
@@ -445,7 +445,7 @@
     <div class="d-none">
         <span id="exportDisabledMessage">{{::('searchDirectiveT.exportDisabled'|$translate)}}</span>
     </div>
-    <joyride ng-if="tourOn"></joyride>
+    <joyride ng-if="tourOn !isAlertSearch"></joyride>
     <script type="text/ng-template" trados-translation="true" id="saveMySearchDialog">
         <div class="modal-header">
             <h3 class="modal-title">
