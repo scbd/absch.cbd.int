@@ -47,6 +47,23 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                             title : userAlertsT.systemOverviewFilterTitle
                         }
                     }
+                    const systemQueries = {
+                        absPermit : [{
+                                "otherType": "national",
+                                "type"     : "schema",
+                                "id"       : 'absPermit'
+                            },
+                            {
+                                "type": "country",
+                                "id": $scope.user.government
+                            }
+                        ],
+                        recordsOverview : [{
+                                "type": "recordsOverview",
+                                "id": "recordsOverview"
+                            }
+                        ]
+                    }
 
                     //==============================================================
                     function loadSavedFilters() {
