@@ -41,11 +41,11 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                                 "filters": [{
                                     "type": "custom",
                                     "isSystemAlert":"true",
-                                    "name": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                                    "name": userAlertsT.irccFilterName,
                                     "id": "entitiesToWhomPICGrantedCountry",
                                     "query": 'entitiesToWhomPICGrantedCountry_ss:' + $scope.user.government
                                 }],
-                                "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                                "queryTitle": userAlertsT.irccQueryTitle,
                                 "meta": {
                                     "createdOn": moment.utc().format()
                                 }
@@ -68,6 +68,23 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                             });
                         }
                     }
+                    const systemQueries = {
+                        absPermit : [{
+                                "otherType": "national",
+                                "type"     : "schema",
+                                "id"       : 'absPermit'
+                            },
+                            {
+                                "type": "country",
+                                "id": $scope.user.government
+                            }
+                        ],
+                        recordsOverview : [{
+                                "type": "recordsOverview",
+                                "id": "recordsOverview"
+                            }
+                        ]
+                    }
 
                     //==============================================================
                     function loadSavedFilters() {
@@ -83,7 +100,10 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                                 query = JSON.parse($scope.collectionFilter);
                                 $scope.loading = true;
                                 query.realm = realm.value;
-                                query['$or'] = [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}];
+                                query['$and'] = [
+                                    { $or : [{ isSystemAlert : false},{ isSystemAlert :{$exists: false}}]},
+                                    { $or : [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}]}
+                                ]
                             } 
                             IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {
@@ -137,29 +157,26 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
 
                     //==============================================================
                     $scope.hasUserSubscribed = function (event) {
-                        return $scope.systemAlertsSubscription &&
-                            _.some($scope.systemAlertsSubscription, function (alert) {
+                        
+                        const query = systemQueries[event];
+                        const hasSubscribed = $scope.systemAlertsSubscription &&
+                            $scope.systemAlertsSubscription.find(alert=>{
                                 return alert.isSystemAlert &&
-                                    _.includes(_.map(alert.filters, 'id'), event);
+                                    alert.filters.find(e=>e.id == event && e.type == query[0].type);
                             });
+
+                            return hasSubscribed;
                     };
 
                     //==============================================================
                     $scope.subscribe = function (event) {
+                       
                         var document = {
                             queryTitle: event + " system alert",
                             isSystemAlert: true,
                             realm: realm.value,
                             sendEmail: true,
-                            filters: [{
-                                    "type": "national",
-                                    "id": event
-                                },
-                                {
-                                    "type": "country",
-                                    "id": $scope.user.government
-                                }
-                            ]
+                            filters: systemQueries[event]
                         };
                         IGenericService.create('v2016', 'me/subscriptions', document)
                             .then(function (data) {
@@ -203,12 +220,13 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                     //==============================================================
                     $scope.unsubscribe = function (event) {
                         if ($scope.systemAlertsSubscription) {
-                            var event = _.find($scope.systemAlertsSubscription, function (alert) {
+                            const query = systemQueries[event];
+                            var event =  $scope.systemAlertsSubscription.find(alert=>{
                                 return alert.isSystemAlert &&
-                                    _.includes(_.map(alert.filters, 'id'), event);
-                            })
+                                    alert.filters.find(e=>e.id == event && e.type == query[0].type)
+                            });
                             IGenericService.delete('v2016', 'me/subscriptions', event._id)
-                                .then(function (event) {
+                                .then(function (result) {
                                     $scope.systemAlertsSubscription
                                         .splice($scope.systemAlertsSubscription.indexOf(event), 1)
                                 });

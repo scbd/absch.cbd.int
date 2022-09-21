@@ -1,6 +1,11 @@
 {
-    "systemAlert": "system alert",
-    "certificatesInfo": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+    "myAlertsHeading" : "My Alerts",
+    "systemAlertHeading": "System alerts",
+
+    "irccFilterName" : "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+    "irccQueryTitle" : "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+    "systemOverviewFilterName" : "Keep me informed on all new and updated clearing-house records",
+    "systemOverviewQueryTitle" : "All new and updated clearing-house records",
     "emailMe": "Email me",
     "search": "Search",
     "edit": "Edit",
@@ -16,4 +21,5 @@
     "cancel": "Cancel",
     "save": "Save",
     "searchTitle": "Search title"
+
 }

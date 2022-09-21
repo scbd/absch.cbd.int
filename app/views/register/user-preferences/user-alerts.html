@@ -8,39 +8,67 @@
         }
     </style>
     <div class="container-fluid">
-        <div ng-if="showSystemAlerts && isABS">
-            <div class="row p-0 py-1 bg-light">
-                <div class="col-7 col-md-8">
-                    <small class="color-red">{{::('userAlertsT.systemAlert'|$translate)}}</small><br>
+        <div ng-if="showSystemAlerts">
+
+            <div class="row m-0 p-2 mt-2">
+                <h2 class="p-0">
+                    <small class="fs-6">{{::('userAlertsT.systemAlertHeading'|$translate)}}</small>                
+                </h2>
+                <hr>
+            </div>
+            <div class="row m-0 p-2 bg-light mt-2">
+                <div class="col-7 col-md-8">                    
                     <span class="bold">
-                        {{::('userAlertsT.certificatesInfo'|$translate)}}
+                        {{::('userAlertsT.systemOverviewFilterName'|$translate)}}
                     </span>
                 </div>
-                <div class="col-1 text-center color-darkgray">
-                    <small>{{::('userAlertsT.emailMe'|$translate)}}</small>
-                    <div ng-click="subscribe('absPermit')" class="color-white cursor-pointer" ng-if="!hasUserSubscribed('absPermit')">
+                <div class="col-1 offset-1 offset-md-0 text-center text-secondary">
+                    <small class="d-none d-md-block">{{::('userAlertsT.emailMe'|$translate)}}</small>
+                    <div ng-click="subscribe('recordsOverview')" class="cursor-pointer" ng-if="!hasUserSubscribed('recordsOverview')">
                         <i class="fa fa-square fa-2x"></i></div>
-                    <div ng-click="unsubscribe('absPermit')" class="color-darkgray cursor-pointer" ng-if="hasUserSubscribed('absPermit')">
+                    <div ng-click="unsubscribe('recordsOverview')" class="cursor-pointer" ng-if="hasUserSubscribed('recordsOverview')">
                         <i class="fa fa-check-square fa-2x"></i></div>
                 </div>
-                <div class="col-1 text-center color-darkgray" ng-click="runSystemFilter()">
-                    <small class="hidden-xs">{{::('userAlertsT.search'|$translate)}}</small>
-                    <div class="cursor-pointer">
-                        <i class="fa fa-search fa-2x"></i> </div>
+                <div class="col-1 text-center color-darkgray">                   
                 </div>
-                <div class="col-1 text-center color-white">
-                    <small class="hidden-xs">{{::('userAlertsT.edit'|$translate)}}</small>
-                    <div class="cursor-pointer">
-                        <i class="fa fa-edit fa-2x"></i></div>
+                <div class="col-1 text-center color-white">                   
                 </div>
-                <div class="col-1 text-center color-white">
-                    <small class="hidden-xs">{{::('userAlertsT.delete'|$translate)}}</small>
+                <div class="col-1 text-center color-white">                   
+                </div>
+            </div>
+            <div class="row m-0 p-2 bg-light mt-2" ng-if="isABS">
+                <div class="col-7 col-md-8">                    
+                    <span class="bold">
+                        {{::('userAlertsT.irccFilterName'|$translate)}}
+                    </span>
+                </div>
+                <div class="col-1 offset-1 offset-md-0 text-center text-secondary">
+                    <small class="d-none d-md-block">{{::('userAlertsT.emailMe'|$translate)}}</small>
+                    <div ng-click="subscribe('absPermit')" class="cursor-pointer" ng-if="!hasUserSubscribed('absPermit')">
+                        <i class="fa fa-square fa-2x"></i></div>
+                    <div ng-click="unsubscribe('absPermit')" class="cursor-pointer" ng-if="hasUserSubscribed('absPermit')">
+                        <i class="fa fa-check-square fa-2x"></i></div>
+                </div>
+                <div class="col-1 text-center color-darkgray" >
+                    <!-- ng-click="runSystemFilter()" -->
+                    <!-- <small class="hidden-xs">{{::('userAlertsT.search'|$translate)}}</small>
                     <div class="cursor-pointer">
-                        <i class="fa fa-trash-o fa-2x"></i></div>
+                        <i class="fa fa-search fa-2x"></i> </div> -->
+                </div>
+                <div class="col-1 text-center color-white">                   
+                </div>
+                <div class="col-1 text-center color-white">                   
                 </div>
             </div>
         </div>
-
+        <br>
+        <div class="row m-0 p-2 mt-2">
+            <h2 class="p-0">
+                <small class="fs-6">{{::('userAlertsT.myAlertsHeading'|$translate)}}</small>
+                <button  ng-if="!loading" type="button" class="btn btn-primary btn-sm float-end add-edit-search rounded-1" ng-click="addEdit()"><i class="bi bi-plus"></i>{{::('userAlertsT.addNew'|$translate)}}</button>
+            </h2>
+            <hr>
+        </div>
         <div ng-repeat="record in userFilters | orderBy:'-meta.modifiedOn'">
             <div class="row m-0 p-2 bg-light mt-2" ng-hide="record.pendingStatus || del">
                 <div class="col-7 col-md-8 p-0">
@@ -82,7 +110,8 @@
         </div>
     </div>
     <br>
-    <button  ng-if="!loading" type="button" class="btn btn-primary btn-sm float-end add-edit-search rounded-1" ng-click="addEdit()"><i class="bi bi-plus"></i>{{::('userAlertsT.addNew'|$translate)}}</button>
+    
+
     <div class="clearfix d-inline-block"></div>
     <div ng-if="loading" class="text-center mb-5"> <i class="fa fa-spinner fa-spin"></i> {{::('userAlertsT.loading'|$translate)}}</div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">
