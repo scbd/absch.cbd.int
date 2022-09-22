@@ -48,21 +48,27 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                         }
                     }
                     const systemQueries = {
-                        absPermit : [{
-                                "otherType": "national",
-                                "type"     : "schema",
-                                "id"       : 'absPermit'
-                            },
-                            {
-                                "type": "country",
-                                "id": $scope.user.government
-                            }
-                        ],
-                        recordsOverview : [{
-                                "type": "recordsOverview",
-                                "id": "recordsOverview"
-                            }
-                        ]
+                        absPermit : {
+                            filters : [{
+                                    "otherType": "national",
+                                    "type"     : "schema",
+                                    "id"       : 'absPermit'
+                                },
+                                {
+                                    "type": "country",
+                                    "id": $scope.user.government
+                                }
+                            ],
+                            title : userAlertsT.irccFilterTitle
+                        },
+                        recordsOverview : {
+                            filters : [{
+                                    "type": "recordsOverview",
+                                    "id": "recordsOverview"
+                                }
+                            ],
+                            title : userAlertsT.systemOverviewFilterTitle
+                        }
                     }
 
                     //==============================================================
