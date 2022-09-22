@@ -69,21 +69,27 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                         }
                     }
                     const systemQueries = {
-                        absPermit : [{
-                                "otherType": "national",
-                                "type"     : "schema",
-                                "id"       : 'absPermit'
-                            },
-                            {
-                                "type": "country",
-                                "id": $scope.user.government
-                            }
-                        ],
-                        recordsOverview : [{
-                                "type": "recordsOverview",
-                                "id": "recordsOverview"
-                            }
-                        ]
+                        absPermit : {
+                            filters : [{
+                                    "otherType": "national",
+                                    "type"     : "schema",
+                                    "id"       : 'absPermit'
+                                },
+                                {
+                                    "type": "country",
+                                    "id": $scope.user.government
+                                }
+                            ],
+                            title : userAlertsT.irccFilterTitle
+                        },
+                        recordsOverview : {
+                            filters : [{
+                                    "type": "recordsOverview",
+                                    "id": "recordsOverview"
+                                }
+                            ],
+                            title : userAlertsT.systemOverviewFilterTitle
+                        }
                     }
 
                     //==============================================================
@@ -162,7 +168,7 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                         const hasSubscribed = $scope.systemAlertsSubscription &&
                             $scope.systemAlertsSubscription.find(alert=>{
                                 return alert.isSystemAlert &&
-                                    alert.filters.find(e=>e.id == event && e.type == query[0].type);
+                                    alert.filters.find(e=>e.id == event && e.type == query.filters[0].type);
                             });
 
                             return hasSubscribed;
@@ -172,11 +178,11 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                     $scope.subscribe = function (event) {
                        
                         var document = {
-                            queryTitle: event + " system alert",
+                            queryTitle: systemQueries[event].title,
                             isSystemAlert: true,
                             realm: realm.value,
                             sendEmail: true,
-                            filters: systemQueries[event]
+                            filters: systemQueries[event].filters
                         };
                         IGenericService.create('v2016', 'me/subscriptions', document)
                             .then(function (data) {
@@ -223,7 +229,7 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                             const query = systemQueries[event];
                             var event =  $scope.systemAlertsSubscription.find(alert=>{
                                 return alert.isSystemAlert &&
-                                    alert.filters.find(e=>e.id == event && e.type == query[0].type)
+                                    alert.filters.find(e=>e.id == event && e.type == query.filters[0].type)
                             });
                             IGenericService.delete('v2016', 'me/subscriptions', event._id)
                                 .then(function (result) {
