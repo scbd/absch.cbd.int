@@ -79,7 +79,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         $scope.searchFilters = {};
                         $scope.setFilters    = {};
                         $scope.relatedKeywords = {};
-                        $scope.isAlertSearch = $attrs.isAlertSearch,
+                        $scope.isAlertSearch = $attrs.isAlertSearch == 'true',
                         $scope.searchResult = {
                             sortFields      : ['updatedDate_dt desc'],
                             currentTab      : 'allRecords',
@@ -555,10 +555,11 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     async function init(){
                         $scope.searchResult.loading = true;
                         leftMenuSchemaFieldMapping = await loadLeftMenuFieldMapping();
-                        loadFilters().then(()=>{
+                        return loadFilters().then(async ()=>{
 
-                            var query =  $location.search();
-                            var currentPage = query.currentPage||1;
+                            let subscriptionQueryPromise;
+                            let query =  $location.search();
+                            let currentPage = query.currentPage||1;
                             if(query.currentPage)
                                 $scope.searchResult.currentPage = currentPage;
                             if(query.rowsPerPage)
@@ -588,28 +589,36 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 setExternalFilters(filters);
                             }
                             else if($routeParams.id && !$scope.isAlertSearch) {
+                                const qsDateFilter = query.dateFilter;                                
                                 $scope.clearFilter();
                                 $scope.searchAlertError = '';
-                                IGenericService.get('v2016', 'me/subscriptions', $routeParams.id)
-                                .then(function (data) {
-                                    setExternalFilters(data);
-                                })
-                                .catch(function (err) {
-                                    console.error(err)//ToDo: will update for correct error text
+                                subscriptionQueryPromise = IGenericService.get('v2016', 'me/subscriptions', $routeParams.id)
+                                        .then(function (data) {
+                                            setExternalFilters(data);
+                                            if(qsDateFilter){
+                                                applyQSDateFilter(qsDateFilter);
+                                            }
+                                        })
+                                        .catch(function (err) {
+                                            console.error(err)//ToDo: will update for correct error text
 
-                                    if(err.status == 403){
-                                        $scope.searchAlertError = "The search query is currently private and cannot be accessed by you. Please contact the owner to make the query public for further use.";
-                                    }
-                                    else{
-                                        $scope.searchAlertError = err?.statusText;
-                                    }
-                                });
+                                            if(err.status == 403){
+                                                $scope.searchAlertError = "The search query is currently private and cannot be accessed by you. Please contact the owner to make the query public for further use.";
+                                            }
+                                            else{
+                                                $scope.searchAlertError = err?.statusText;
+                                            }
+                                        });
                             }
                             else{                               
                                 if(query.schema){
                                     $scope.saveFilter(query.schema);
                                 }
                             }
+
+                            if(subscriptionQueryPromise)
+                                await subscriptionQueryPromise;
+
                             if(query.text){
                                     $scope.saveFreeTextFilter(query.text);
                             }
@@ -648,21 +657,25 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 });                                
                             }
                             if(query.dateFilter){
-                                var dates = query.dateFilter.split(' - ');
-                                const dateFilter = {
-                                    field:'updatedDate_dt',
-                                    value : {
-                                        start : moment(dates[0], dateFormat),
-                                        end : moment(dates[1], dateFormat)
-                                    }
-                                }
-                                $scope.saveDateFilter(dateFilter.field, undefined, dateFilter)
+                                applyQSDateFilter(query.dateFilter);
                             }
                             if(query["raw-query"]){
                                 saveRawQueryFilter(query["raw-query"]);
                             }
 
                             $timeout(function(){updateQueryResult(currentPage);}, 200)
+
+                            function applyQSDateFilter(qsDateFilter) {
+                                var dates = qsDateFilter.split(' - ');
+                                const dateFilter = {
+                                    field: 'updatedDate_dt',
+                                    value: {
+                                        start: moment(dates[0], dateFormat),
+                                        end: moment(dates[1], dateFormat)
+                                    }
+                                };
+                                $scope.saveDateFilter(dateFilter.field, undefined, dateFilter);
+                            }
                         })
                         .catch(e=>{
                             console.error(e)
