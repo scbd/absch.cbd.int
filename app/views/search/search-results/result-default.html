@@ -98,7 +98,7 @@
                         <span ng-bind="doc.rec_meta3.join(', ')"  ng-class="{'color-red':isRevoked(doc.rec_meta3)}"></span>
                     </li>
                     <li class="hidden-xs" ng-if="::doc.rec_meta5 && type != reference" id="meta5">
-                        <span ng-bind="doc.rec_meta5"></span>
+                        <span ng-bind="doc.rec_meta5[0]"></span>
                     </li>
                     <li ng-if="::doc.schema_s !=='meeting'">
                         <span class="last-span" ng-if="::type!='scbd'" ng-bind="::doc.rec_date | formatDate"></span>
