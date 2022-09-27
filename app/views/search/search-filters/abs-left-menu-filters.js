@@ -116,18 +116,19 @@ export const absLeftMenuFilters = {
 		{
 			"type": "check",
 			"title": absFilters.measureKeyElementAccess,
-			"term": "Access",
-			"field": "meta5_EN_txt"		},
+			"value": "Access",
+			"field": "meta5_EN_txt"		
+		},
 		{
 			"type": "check",
 			"title": absFilters.measureKeyElementBenefitsharing,
-			"term": "Benefit-sharing",
+			"value": "Benefit-sharing",
 			"field": "meta5_EN_txt"
 		},
 		{
 			"type": "check",
 			"title": absFilters.measureKeyElementCompliance,
-			"term": "Compliance",
+			"value": "Compliance",
 			"field": "meta5_EN_txt"
 		}
 

@@ -1243,8 +1243,11 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
                                     }
                                     else if( filter.type == 'check' && filter.filterValue!== undefined){
-                                        if(filter.filterValue)
-                                        subQuery = filter.field + ':' + solr.escape(filter.term);
+                                        if(filter.filterValue){
+                                            subQuery = filter.field + ':' + solr.escape(filter.value);
+                                        }
+                                        else 
+                                            filter.filterValue = undefined;
                                     }
                                     if(subQuery){
                                         if(filter.excludeResult)
