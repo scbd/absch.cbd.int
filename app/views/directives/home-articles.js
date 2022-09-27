@@ -8,9 +8,21 @@ import '~/services/main';
                 template: template,
                 scope   : {
                     tags: '@?',
-                    counts: '@',
-                    summary: '@',
-                    horizontal: '@'
+                    counts: '@'
+                },
+                link: function($scope, $element, $attributes){
+
+                    if (!$attributes.showSummary) {
+                        $scope.showSummary = false;
+                    }
+                    else
+                        $scope.showSummary = $attributes.showSummary;
+
+                    if (!$attributes.layout) {
+                        $scope.layout = "vertical";
+                    }
+                    else
+                        $scope.layout = $attributes.layout;
                 },
                 controller: ['$scope', '$http','$q', '$filter', '$location', 'articlesService', 'locale',
                     function($scope, $http, $q, $filter, $location, articlesService, locale) {
@@ -23,12 +35,7 @@ import '~/services/main';
                         if (!$scope.counts) {
                             $scope.counts = 20;
                         }
-                        if (!$scope.summary) {
-                            $scope.summary = 0;
-                        }
-                        if (!$scope.horizontal) {
-                            $scope.horizontal = 0;
-                        }
+                       
                         $scope.articles = [];
 
                         loadArticles();
