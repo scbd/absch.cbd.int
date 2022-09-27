@@ -2,6 +2,10 @@
     <header class="px-3 d-sm-none d-md-none">
         <nav class="navbar navbar-sm navbar-light bg-light rounded">
             <div ng-click="showNav = !showNav" style="cursor: pointer;">
+
+                <button class="navbar-toggler collapsed px-2" type="button" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>  
                 <span class="realm-base-acronym fw-bold color-green"> {{::('abschHeaderT.abs'|$translate)}} </span>
                 <span class="realm-base-acronym text-uppercase color-green fw-bold">{{::('abschHeaderT.clearingHouse'|$translate)}}</span>
                 </span>
