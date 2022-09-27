@@ -4,8 +4,8 @@
     "aboutNagoya": "About the Nagoya Protocol",
     "searchRecords": "Search records",
     "submitRecords": "Submit records",
-    "countryProfiles": "Country Profiles",
-    "nra": "National Report Analyzer",
+    "countryProfiles": "Country profiles",
+    "nra": "National report analyzer",
     "abs": "ABS",
     "help": "Need help?",
     "introduction": "Introduction to the ABSCH",
@@ -14,5 +14,7 @@
     "InfoSharingObligations": "Information sharing obligations",
     "interoperability": "Interoperability",
     "offlineFormats": "Offline common formats",
-    "contactUs": "Contact us"
+    "contactUs": "Contact us",
+    "clearingHouse": "Clearing-House"
+
 }

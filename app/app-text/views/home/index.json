@@ -4,12 +4,12 @@
     "aboutAbs": "Learn about the ABSCH",
     "aboutProtocol": "About the Nagoya Protocol",
     "faq": "FAQs",
-    "getStarted": "Get Started",
+    "getStarted": "Get started",
     "searchRecords": "Search records",
-    "takeTour": "Take the Tour",
+    "takeTour": "Take the tour",
     "helpFindingInfo": "Help finding information",
-    "countryProfiles": "Country Profiles",
-    "nationalReports": "National Reports",
+    "countryProfiles": "Country profiles",
+    "nationalReports": "National reports",
     "search": "Search",
     "submitRecords": "Submit records",
     "signIn": "Sign in",
@@ -20,5 +20,8 @@
     "announcements": "Announcements",
     "seeMore": "See more",
     "nationalRecords": "National records",
-    "referenceRecords": "Reference records"
+    "referenceRecords": "Reference records",
+    "learn": "Learn",
+    "recentRecords": "Recent records"
+
 }

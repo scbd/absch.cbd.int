@@ -10,9 +10,24 @@ import '~/services/main';
                     tags: '@?',
                     counts: '@'
                 },
+                link: function($scope, $element, $attributes){
+
+                    if (!$attributes.showSummary) {
+                        $scope.showSummary = false;
+                    }
+                    else
+                        $scope.showSummary = $attributes.showSummary;
+
+                    if (!$attributes.layout) {
+                        $scope.layout = "vertical";
+                    }
+                    else
+                        $scope.layout = $attributes.layout;
+                },
                 controller: ['$scope', '$http','$q', '$filter', '$location', 'articlesService', 'locale',
                     function($scope, $http, $q, $filter, $location, articlesService, locale) {
                     
+                      
                         $scope.locale = locale;
                         $scope.status   = "loading";
                         $scope.error    = null;
@@ -20,6 +35,7 @@ import '~/services/main';
                         if (!$scope.counts) {
                             $scope.counts = 20;
                         }
+                       
                         $scope.articles = [];
 
                         loadArticles();
