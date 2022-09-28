@@ -48,19 +48,6 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                         }
                     }
                     const systemQueries = {
-                        absPermit : {
-                            filters : [{
-                                    "otherType": "national",
-                                    "type"     : "schema",
-                                    "id"       : 'absPermit'
-                                },
-                                {
-                                    "type": "country",
-                                    "id": $scope.user.government
-                                }
-                            ],
-                            title : userAlertsT.irccFilterTitle
-                        },
                         recordsOverview : {
                             filters : [{
                                     "type": "recordsOverview",
