@@ -3,6 +3,12 @@
         <i class="fa fa-spin fa-spinner fa-5x m-auto" ></i>
     </div>
 
+    <div class="pull-right">
+        <span export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export countries data to excel/csv"></span>
+    </div>
+    <br/>
+    <br/>
+    
     <div class="country-profile-list bg-white" ng-repeat="schema in countryRecords | orderBy:'index'" ng-if="schema">
         
         <h4 id="div{{schema.shortCode}}" class=" bg-grey link1 border-bottom p-2" 
