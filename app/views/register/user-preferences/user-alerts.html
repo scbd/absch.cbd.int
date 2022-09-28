@@ -22,42 +22,18 @@
                         {{::('userAlertsT.systemOverviewFilterTitle'|$translate)}}
                     </span>
                 </div>
-                <div class="col-1 offset-1 offset-md-0 text-center text-secondary">
-                    <small class="d-none d-md-block">{{::('userAlertsT.emailMe'|$translate)}}</small>
-                    <div ng-click="subscribe('recordsOverview')" class="cursor-pointer" ng-if="!hasUserSubscribed('recordsOverview')">
-                        <i class="fa fa-square fa-2x"></i></div>
-                    <div ng-click="unsubscribe('recordsOverview')" class="cursor-pointer" ng-if="hasUserSubscribed('recordsOverview')">
-                        <i class="fa fa-check-square fa-2x"></i></div>
-                </div>
                 <div class="col-1 text-center color-darkgray">                   
                 </div>
                 <div class="col-1 text-center color-white">                   
                 </div>
                 <div class="col-1 text-center color-white">                   
                 </div>
-            </div>
-            <div class="row m-0 p-2 bg-light mt-2" ng-if="isABS">
-                <div class="col-7 col-md-8">                    
-                    <span class="bold">
-                        {{::('userAlertsT.irccFilterTitle'|$translate)}}
-                    </span>
-                </div>
                 <div class="col-1 offset-1 offset-md-0 text-center text-secondary">
                     <small class="d-none d-md-block">{{::('userAlertsT.emailMe'|$translate)}}</small>
-                    <div ng-click="subscribe('absPermit')" class="cursor-pointer" ng-if="!hasUserSubscribed('absPermit')">
-                        <i class="fa fa-square fa-2x"></i></div>
-                    <div ng-click="unsubscribe('absPermit')" class="cursor-pointer" ng-if="hasUserSubscribed('absPermit')">
-                        <i class="fa fa-check-square fa-2x"></i></div>
-                </div>
-                <div class="col-1 text-center color-darkgray" >
-                    <!-- ng-click="runSystemFilter()" -->
-                    <!-- <small class="hidden-xs">{{::('userAlertsT.search'|$translate)}}</small>
-                    <div class="cursor-pointer">
-                        <i class="fa fa-search fa-2x"></i> </div> -->
-                </div>
-                <div class="col-1 text-center color-white">                   
-                </div>
-                <div class="col-1 text-center color-white">                   
+                    <div ng-click="subscribe('recordsOverview')" class="cursor-pointer" ng-if="!hasUserSubscribed('recordsOverview')">
+                        <i class="bi bi-square fs-4"></i></div>
+                    <div ng-click="unsubscribe('recordsOverview')" class="cursor-pointer" ng-if="hasUserSubscribed('recordsOverview')">
+                        <i class="bi bi-check-square fs-4"></i></div>
                 </div>
             </div>
         </div>
@@ -82,15 +58,6 @@
                         </span>
                     </span>
                 </div>
-                <div class="col-1 offset-1 offset-md-0 text-center text-secondary">
-                    <small class="d-none d-md-block">{{::('userAlertsT.emailMe'|$translate)}} </small>
-                    <div ng-click="emailSubscribe(record, true)" ng-show="!hasUserEmailSubscribed(record)" class="cursor-pointer">
-                        <i class="bi bi-square fs-4"></i>
-                    </div>
-                    <div class="text-secondary" ng-click="emailSubscribe(record, false)" ng-show="hasUserEmailSubscribed(record)" class="cursor-pointer">
-                        <i class="bi bi-check-square fs-4"></i> 
-                    </div>
-                </div>
                 <div class="col-1 text-center text-secondary">
                     <small class="d-none d-md-block">{{::('userAlertsT.search'|$translate)}}</small>
                     <div class="cursor-pointer" ng-hide="del" ng-click="runFilter(record._id)" >
@@ -106,11 +73,19 @@
                     <div class="cursor-pointer" ng-hide="del" ng-click="del=!!record._id;confirmDelete(record)" ng-disabled="!record._id">
                         <i class="bi bi-trash-fill fs-4"></i></div>
                 </div>
+                <div class="col-1 offset-1 offset-md-0 text-center text-secondary">
+                    <small class="d-none d-md-block">{{::('userAlertsT.emailMe'|$translate)}} </small>
+                    <div ng-click="emailSubscribe(record, true)" ng-show="!hasUserEmailSubscribed(record)" class="cursor-pointer">
+                        <i class="bi bi-square fs-4"></i>
+                    </div>
+                    <div class="text-secondary" ng-click="emailSubscribe(record, false)" ng-show="hasUserEmailSubscribed(record)" class="cursor-pointer">
+                        <i class="bi bi-check-square fs-4"></i> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <br>
-    
+    <br>    
 
     <div class="clearfix d-inline-block"></div>
     <div ng-if="loading" class="text-center mb-5"> <i class="fa fa-spinner fa-spin"></i> {{::('userAlertsT.loading'|$translate)}}</div>

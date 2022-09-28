@@ -606,7 +606,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                                 $scope.searchAlertError = "The search query is currently private and cannot be accessed by you. Please contact the owner to make the query public for further use.";
                                             }
                                             else{
-                                                $scope.searchAlertError = err?.statusText;
+                                                $scope.searchAlertError = err?.data?.message || err?.data || err?.statusText;
                                             }
                                         });
                             }
