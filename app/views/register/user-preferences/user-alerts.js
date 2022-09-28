@@ -24,7 +24,6 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
             controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService', 'solr', 'locale', 'translationService',
                 function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr, locale, translationService) {
                     $scope.realm = realm;
-                    var systemSearches = [];
                     $scope.user = $rootScope.user;
                     $scope.skipKeywordsFilter = false;
                     $scope.skipKeywordsFilter = true; // ToDo: remove one skipKeywordsFilter
@@ -34,54 +33,8 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                     $scope.isABS = realm.is('ABS');
                     $scope.isDeleteAllow = false ;
                     translationService.set('userAlertsT', userAlertsT); 
-                    if ($scope.user?.government) {
-                        if($scope.isABS){
-                            systemSearches = [{
-                                system: true,
-                                "filters": [{
-                                    "type": "custom",
-                                    "isSystemAlert":"true",
-                                    "name": userAlertsT.irccFilterName,
-                                    "id": "entitiesToWhomPICGrantedCountry",
-                                    "query": 'entitiesToWhomPICGrantedCountry_ss:' + $scope.user.government
-                                }],
-                                "queryTitle": userAlertsT.irccQueryTitle,
-                                "meta": {
-                                    "createdOn": moment.utc().format()
-                                }
-                            }];
-                        }
-                        if (roleService.isPublishingAuthority() ||
-                            roleService.isNationalAuthorizedUser() ||
-                            roleService.isNationalFocalPoint()) {
-
-                            $scope.showSystemAlerts = true;
-                            var query = {
-                                realm: realm.value,
-                                isSystemAlert: true,
-                                $or : [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}]
-                            };
-    
-                            IGenericService.query('v2016', 'me/subscriptions', query)
-                                .then(function (data) {
-                                    $scope.systemAlertsSubscription = data;
-                            });
-                        }
-                    }
+                    
                     const systemQueries = {
-                        absPermit : {
-                            filters : [{
-                                    "otherType": "national",
-                                    "type"     : "schema",
-                                    "id"       : 'absPermit'
-                                },
-                                {
-                                    "type": "country",
-                                    "id": $scope.user.government
-                                }
-                            ],
-                            title : userAlertsT.irccFilterTitle
-                        },
                         recordsOverview : {
                             filters : [{
                                     "type": "recordsOverview",
@@ -113,13 +66,21 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                             } 
                             IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {
-                                    // if ($scope.collection == "search-queries" && $scope.user.government) {
-                                    //     _.first(systemSearches).filters[0].query += $scope.user.government;
-                                    //     $scope.userFilters = _.union(systemSearches, data);
-                                    // } else
                                     $scope.loading = false;
                                     $scope.userFilters = data;
                                 });
+
+                            var overviewAlertQuery = {
+                                realm: realm.value,
+                                isSystemAlert: true,
+                                $or : [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}],
+                                'filters.type': 'recordsOverview',
+                            };
+
+                            IGenericService.query('v2016', 'me/subscriptions', overviewAlertQuery)
+                                .then(function (data) {
+                                    $scope.systemAlertsSubscription = data;
+                            });
                         }
                     }
 
@@ -139,7 +100,7 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
 
                      //==============================================================
                      $scope.runSystemFilter = function () {
-                        $scope.runFilter(systemSearches[0].filters);
+                        // $scope.runFilter();
                      }
                     //==============================================================
                     $scope.runFilter = function (id)
