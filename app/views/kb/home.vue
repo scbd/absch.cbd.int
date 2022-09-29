@@ -1,22 +1,12 @@
 <template>
 <div>
-     <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
-   
     <div class="knowledge-base">
         <search></search>
         <section class="categories">
             <div class="container p-0">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <header>
-                            <div class="categerios-parahraph">
-                                <div class="col">
-                                    <p>{{ $t("the") }} <b>{{$realm.chShortName+ " "}}<span class="text-capitalize">{{ $t("knowledgeBase") }}</span></b> {{ $t("kbParagraph")}}</p>
-                                </div>
-                            </div>                                    
-                        </header>
-                    </div>
                     <div class="col-lg-8">
+                        <p class="fs-5">{{ $t("the") }} <b>{{$realm.chShortName+ " "}}<span class="text-capitalize">{{ $t("knowledgeBase") }}</span></b> {{ $t("kbParagraph")}}</p>
                         <categories-group></categories-group>
                     </div>
                     <div class="col-lg-4">

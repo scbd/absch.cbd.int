@@ -4,8 +4,14 @@
         <h4>{{ $t("popularTags") }}</h4>
 				<hr>
         <div class="tag-scroll" v-if="!loading">
+            <div class="tagcloud" >
+                <a href="#" class="btn btn-mini" @click="goToAdminTag($realm.is('BCH') ? 'bch-announcement' : 'absch-announcement')">Announcements</a>
+            </div>
             <div class="tagcloud" v-for="tag in popularTags">
                 <a href="#" class="btn btn-mini" @click="goToAdminTag(tag.adminTags[0])">{{tag.title}}</a>
+            </div>
+            <div class="tagcloud" >
+                <a href="#" class="btn btn-mini" @click="goToAdminTag('faq')">FAQs</a>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
         <hr>
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <ul>
-            <li v-for="article in articles">
+            <li v-for="article in articles" class="mb-2">
                 <a :href="`${articleUrl(article)}`">{{article.title|lstring($locale)}}</a>
             </li>
         </ul>

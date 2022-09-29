@@ -1,7 +1,5 @@
 <template>
   <div>
-    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
-
     <div class="knowledge-base">
       <search @changeSearch="onChangeSearch"></search>
       <section class="categories">

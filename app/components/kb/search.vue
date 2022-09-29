@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col col-md-8">
-                            <h1 class="fs-1 fw-bold">{{$realm.chShortName+ " "}}<span class="text-uppercase">{{ $t("knowledgeBase") }}</span></h1>
+                            <h1>{{$realm.chShortName+ " "}}<span>{{ $t("knowledgeBase") }}</span></h1>
 
                               <div class="searchbar">
                                 <input v-on:keyup.enter="goToSearchArticles()" class="search_input" type="text" v-model="search" placeholder="Search the knowledge base..." />

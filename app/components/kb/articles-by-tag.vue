@@ -10,23 +10,25 @@
 					<hr>
 
                     <div class="kb-listing w-100">
-                        <ul class="article-with-tags-ul">
-                            <li class="article-with-tags-li" v-for="article in articles">
-								<a class="cursor-pointer text-decoration-none" :href="`${articleUrl(article, tag)}`">
-									<span class="article-title">
-										{{article.title|lstring($locale)}}
-									</span>
-									<div v-if="article.summary" class="article-summary">
-										{{article.summary|lstring($locale)}}...
-									</div>
-								</a>
-                              <div class="inner-area">
-                                <i class="fa fa-tag" aria-hidden="true"></i>
-                                <a class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-                              </div>
 
-                            </li>
-                        </ul>
+                    <div v-for="article in articles">
+                        <div class="card mb-3" >
+                            <div class="d-flex flex-row bd-highlight ">
+                                <div class="p-2 bd-highlight"  v-if="article.coverImage" >
+                                    <img class="img-fluid img-thumbnail" style="max-height:140px;" v-bind:src="getSizedImage(article.coverImage.url, '300x300')" >
+                                </div>
+                                <div class="p-2 bd-highlight w-100">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a class="link-dark stretched-link" :href="`${articleUrl(article, tag)}`">{{article.title|lstring($locale)}}</a></h5>
+                                    <p  v-if="article.summary" class="card-text h-100">{{article.summary|lstring($locale)}}</p>
+                                    <p class="card-text">
+                                        <small><a :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags" class="btn-sm btn-outline-secondary me-2"> {{tag}} </a></small>
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                     <div v-if="articlesCount<1" class="alert alert-warning">
                         <strong>{{ $t("noResultFound") }}</strong>
@@ -126,6 +128,7 @@ export default {
             const f = {
                 [`title`]: 1,
                 [`summary`]: 1,
+                [`coverImage`]: 1,
                 adminTags: 1,
                 "meta.modifiedOn": 1,
                 _id: 1
@@ -161,6 +164,11 @@ export default {
                 this.loading = false;
             }
         },
+        getSizedImage(url, size){
+            return url && url
+            .replace(/attachments.cbd.int\//, '$&'+size+'/')
+            .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&'+size+'/')
+        }
     },
     i18n: {
         messages: {

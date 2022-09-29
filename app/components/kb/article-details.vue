@@ -4,6 +4,11 @@
             <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
             <div>
                 <div class="article-description mt-0 single">
+                  
+                   <div v-if="article.coverImage" class="max-height:450px;" > 
+                         <img v-bind:src="getSizedImage(article.coverImage.url, '800x800')" class="img-fluid">
+                   </div>
+
                     <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
                     <div v-if="!loading">
                         <header>
@@ -78,6 +83,7 @@
                 }
             finally {
                 this.loading = false;
+
             }
         },		
 		methods: {
@@ -91,7 +97,12 @@
             },
             articleUrl(article, tag){
                 return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
-            }
+            },
+            getSizedImage(url, size){
+                            return url && url
+                            .replace(/attachments.cbd.int\//, '$&'+size+'/')
+                            .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&'+size+'/')
+             }
 		},
 		i18n: { messages:{ en: i18n }}
 	}

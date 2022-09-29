@@ -3,7 +3,7 @@ import Vue from 'Vue';
 
 export function formatDate(datetime, format) {
     if (format === undefined)
-        format = 'DD MMM YYYY HH:mm';
+        format = 'DD MMM YYYY';
 
     return formatMomentDate(datetime, 'format',format);
 }
