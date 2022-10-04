@@ -1,5 +1,5 @@
 import app from '~/app';
-import _ from 'lodash';
+import _, { filter } from 'lodash';
 import moment from 'moment';
 import 'ngDialog';
 import 'angular-animate';
@@ -496,14 +496,21 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         updateQueryResult();
                     };
 
-                    $scope.onExportClick = function({listType, fields}){
+                    $scope.onExportClick = function({listType, fields, format, fileName}){
                         
-                        var viewType = $scope.searchResult.viewType;
+                        var viewType = $scope.searchResult.viewType;  
+                        let isGeneric = true;
+                        let schema;
+                        const filters = getSelectedFilters('schema');
+                        if(filters.length == 1 && !filters[0].excludeResult && !filters[0].disabled){
+                            isGeneric = false;
+                            schema    = filters[0].id
+                        }
                         if(['default', 'list', 'group'].includes(viewType)){
-                            return $scope.searchResult.listViewApi.onExport({listType, fields});
+                            return $scope.searchResult.listViewApi.onExport({listType, fields, isGeneric, schema, format, fileName});
                         }
                         else if(viewType == 'group'){
-                            return $scope.searchResult.listViewApi.onExport({listType, fields});
+                            return $scope.searchResult.listViewApi.onExport({listType, fields, isGeneric, schema, format, fileName});
                             // resultQuery = $scope.searchResult.groupViewApi.export(queryOptions, sortFields, pageNumber||1);
                         }
                         else if($scope.searchResult.viewType == 'matrix'){

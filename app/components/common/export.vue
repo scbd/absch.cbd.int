@@ -25,46 +25,69 @@
                         <div v-if="loading" class="alert alert-info">
                             <i class="fa fa-spin fa-spinner" v-if="loading" ></i> {{$t('processing')}}
                         </div>
-                        <div id="divTable"  style="max-height:300px;overflow:scroll; ">
+                        <div id="divTable"  style="max-height:300px;overflow:scroll; " v-if="!loading" >
                                 <div>
                                     {{$t('recordsFound')}}
                                     {{numFound}}
                                 </div>
-
-                                <table id="datatable" class="table table-striped table-bordered table-condensed">
-                                    <thead> 
-                                        <tr>
-                                            <th class="tableexport-string">{{$t('type')}}</th>
-                                            <th class="tableexport-string">{{$t('uid')}}</th>
-                                            <th class="tableexport-string">{{$t('government')}}</th>
-                                            <th class="tableexport-string" style="max-width:30%">{{$t('title')}} </th>
-                                            <th style="white-space:nowrap;" class="tableexport-string">{{$t('info1')}} </th>
-                                            <th style="white-space:nowrap;" class="tableexport-string">{{$t('info2')}} </th>
-                                            <th style="white-space:nowrap;" class="tableexport-string">{{$t('info3')}} </th>
-                                            <th style="white-space:nowrap;" class="tableexport-string">{{$t('info4')}} </th>
-                                            <th style="white-space:nowrap;" class="tableexport-string">{{$t('publishedDate')}}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(row, index) in downloadDocs" :key="index">
-                                            
-                                            <td class="tableexport-string">{{row.rec_schema}}</td>
-                                            <td class="tableexport-string">
-                                                <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
-                                                    {{(row.rec_uniqueIdentifier||'')|capitalize}}
-                                                </a>
-                                            </td>
-                                            <td class="tableexport-string">{{row.rec_government}}</td>
-                                            <td class="tableexport-string">{{row.rec_title}}</td>
-                                            <td class="tableexport-string">{{(row.rec_meta1||[]).join(', ')}}</td>
-                                            <td class="tableexport-string">{{(row.rec_meta2||[]).join(', ')}}</td>
-                                            <td class="tableexport-string">{{(row.rec_meta3||[]).join(', ')}}</td>
-                                            <td class="tableexport-string">{{(row.rec_meta4||[]).join(', ')}}</td>  
-                                            <td class="tableexport-string">{{row.rec_date|formatDate}}</td>                          
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            <h3 class="color-red bold">{{$t('sampleMessage')}}</h3>
+                                <div v-if="isGeneric">
+                                    <table id="datatable" class="table table-striped table-bordered table-condensed">
+                                        <thead> 
+                                            <tr>
+                                                <th class="tableexport-string">{{$t('type')}}</th>
+                                                <th class="tableexport-string">{{$t('uid')}}</th>
+                                                <th class="tableexport-string">{{$t('government')}}</th>
+                                                <th class="tableexport-string" style="max-width:30%">{{$t('title')}} </th>
+                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('info1')}} </th>
+                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('info2')}} </th>
+                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('info3')}} </th>
+                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('info4')}} </th>
+                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('publishedDate')}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(row, index) in downloadDocs" :key="index">
+                                                
+                                                <td class="tableexport-string">{{row.rec_schema}}</td>
+                                                <td class="tableexport-string">
+                                                    <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
+                                                        {{(row.rec_uniqueIdentifier||'')|capitalize}}
+                                                    </a>
+                                                </td>
+                                                <td class="tableexport-string">{{row.rec_government}}</td>
+                                                <td class="tableexport-string">{{row.rec_title}}</td>
+                                                <td class="tableexport-string">{{(row.rec_meta1||[]).join(', ')}}</td>
+                                                <td class="tableexport-string">{{(row.rec_meta2||[]).join(', ')}}</td>
+                                                <td class="tableexport-string">{{(row.rec_meta3||[]).join(', ')}}</td>
+                                                <td class="tableexport-string">{{(row.rec_meta4||[]).join(', ')}}</td>  
+                                                <td class="tableexport-string">{{row.rec_date|formatDate}}</td>                          
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div v-if="!isGeneric">
+                                    <table id="datatable" class="table table-striped table-bordered table-condensed">
+                                        <thead> 
+                                            <tr>
+                                                <th v-for="field in schemaFields" :key="index">{{field}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(row, index) in downloadDocs" :key="index">                                                
+                                                <td v-for="(field, key) in schemaFields" :key="index">
+                                                    <span v-if="typeof row[key] == 'string'">{{row[key]}}</span>
+                                                    <span v-if="Array.isArray(row[key])">
+                                                        <ul class="p-0 list-inline">
+                                                            <li v-for="item in row[key]">{{item}}</li>
+                                                        </ul>
+                                                    </span>                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            
+                            <h3 class="color-red bold" v-if="!loading">{{$t('sampleMessage')}}</h3>
                         </div>
                     </div>
                     <div class="modal-footer ">
@@ -105,7 +128,8 @@ import '../kb/filters';
 				numFound      : 0,
 				downloadFormat: 'xlsx',
 				loading       : false,
-                open: false
+                isGeneric     : true,
+                schemaFields  : []
 			}
 		},
 		created(){
@@ -118,32 +142,58 @@ import '../kb/filters';
 		methods: {
             async openDialog(){
                 this.modal.show('static');
-                const {docs, numFound } = await this.getDownloadRecords({fields, listType:'initial'});
-                this.downloadDocs = docs
-                this.numFound     = numFound;
+                this.loading      = true; 
+                try{
+                    const {docs, numFound, isGeneric, schemaFields } = await this.getDownloadRecords({fields, listType:'initial', format:'json'});
+                    this.downloadDocs = docs
+                    this.numFound     = numFound;
+                    this.isGeneric    = isGeneric;
+                    this.schemaFields = schemaFields;                   
+                }
+                finally{
+                    this.loading = false;
+                }
             },
 			async exportRecords(){
                 
                 this.loading      = true; 
-                const fileName    = this.fileName||`${this.$realm.uIdPrefix}-data`;
-                                    await import('tableexport');
-                const info        = await this.getDownloadRecords({fields, listType:'all'});
-                this.downloadDocs = info.docs;
-                this.numFound     = info.numFound;
-                setTimeout(()=>{
-                    $('#datatable').tableExport({
-                        formats: ["xlsx", "xls", "csv"],
-                        filename: fileName,
-                    });
-                    $(`.${this.downloadFormat}`).click(); 
+                const fileName    = this.fileName||`${this.$realm.uIdPrefix}-${new Date().getTime().toString(36)}.xlsx`
 
-                    this.downloadDocs = this.downloadDocs.slice(0, 24);
+                try{
+                    if(this.isGeneric){
+                                            await import('tableexport');
+                        const info        = await this.getDownloadRecords({fields, listType:'all'});
+                        this.downloadDocs = info.docs;
+                        this.numFound     = info.numFound;
+                        setTimeout(()=>{
+                            $('#datatable').tableExport({
+                                formats: ["xlsx", "xls", "csv"],
+                                filename: fileName,
+                            });
+                            $(`.${this.downloadFormat}`).click(); 
+
+                            this.downloadDocs = this.downloadDocs.slice(0, 24);
+                        }, 500);
+                    }
+                    else{
+                        const info = await this.getDownloadRecords({fields, listType:'all', fileName, format : this.downloadFormat});
+                    }
+                }
+                catch(e){
+                    console.error(e)
+                }
+                finally{
                     this.loading = false;
-                }, 500);
+                }
                 
             },
             closeDialog(){
                 this.modal.hide();
+                this.downloadDocs   =  [];
+				this.numFound       =  0;
+				this.loading        =  false;
+                this.isGeneric      =  true;
+                this.schemaFields   =  [];
             }
 		},
 		i18n: { messages:{ en: i18n }} 

@@ -1,0 +1,29 @@
+{
+    "focalPoint.uniqueIdentifier": "UID",
+    "focalPoint.country"         : "Country",
+    "focalPoint.name"            : "Name",
+    "focalPoint.type"            : "Type(s) of Focal Point",
+    "focalPoint.function"        : "Function",
+    "focalPoint.department"      : "Department",
+    "focalPoint.organization"    : "Organization",
+    "focalPoint.address"         : "Address",
+    "focalPoint.telephone"       : "Telephone(s)",
+    "focalPoint.fax"             : "Fax(s)",
+    "focalPoint.email"           : "Email(s)",
+    "focalPoint.publishedOn"     : "Publication Date",
+
+    "organization.uniqueId"        : "UID",
+    "organization.name"            : "Name of the Organization",
+    "organization.address"         : "Address of the organization",
+    "organization.phones"          : "Phone number(s)",
+    "organization.faxes"           : "Fax number(s)",
+    "organization.emails"          : "Email(s)",
+    "organization.websites"        : "Website address",
+    "organization.contacts"        : "Contact person in the organization",
+    "organization.contactsEmails"  : "Email of Contact person or Related Organizations",
+    "organization.organizationType": "Type of organization",
+    "organization.areasOfWork"     : "Areas of work",
+    "organization.publishedOn"     : "Publication Date"
+
+
+}
