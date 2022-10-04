@@ -1,4 +1,4 @@
-import fieldsT from '~/app-text/views/search/search-results/bch-download-fields.json';
+import fieldsT from '~/app-text/views/search/search-results/abs-download-fields.json';
 
 export const downloadFields = {	
 	"focalPoint" : {
