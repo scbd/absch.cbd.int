@@ -16,6 +16,7 @@ export const downloadFields = {
        "publishedOn"      : fieldsT["focalPoint.publishedOn"     ],        
     },
     "absPermit" : {
+        "uniqueId"                    : fieldsT["absPermit.uniqueIdentifier"            ],
         "government"                  : fieldsT["absPermit.government"                  ],
         "cnaLink"                     : fieldsT["absPermit.cnaLink"                     ],
         "permitReference"             : fieldsT["absPermit.permitReference"             ],
