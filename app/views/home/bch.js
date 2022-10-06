@@ -17,16 +17,10 @@ export default ['$scope', 'articlesService', '$rootScope', 'translationService',
           components: { homepageRecords }
         }
 
-      $scope.exploreMore = function (  ){
-        $('html, body').animate({
-          scrollTop: $("#homePageMapSection").offset().top
-        }, 1000);
-      }
-
       $scope.scrollTo = function (anchor){
         $('html, body').animate({
           scrollTop: $("#"+ anchor).offset().top
-        }, 1000);
+        }, 0);
       }
 
       

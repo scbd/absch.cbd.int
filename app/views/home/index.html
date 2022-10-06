@@ -11,7 +11,7 @@
                     <a class="text-decoration-none cursor-pointer link-light" ng-click="scrollTo('homePageMapSection');">
                         <div class="rounded p-2 fs-5 p-1 bg-green text-uppercase border border-1 border-dark border-secondary w-100 text-center">
                             <i class="bi bi-globe"></i>
-                            {{::('absHomeT.exploreMap'|$translate)}}
+                            <span class="px-2">{{::('absHomeT.exploreMap'|$translate)}}</span>
                             <i class="fa  fa-arrow-down"></i>
                         </div>
                     </a>
@@ -20,7 +20,7 @@
                     <a class="text-decoration-none cursor-pointer link-light " ng-click="scrollTo('gettingStartedSection');">
                         <div class="rounded p-2 fs-5 p-1  bg-green text-uppercase border border-1 border-dark border-secondary w-100 text-center">
                             <i class="bi bi-lightbulb"></i>
-                            {{::('absHomeT.getStarted'|$translate)}}
+                            <span class="px-2">{{::('absHomeT.getStarted'|$translate)}}</span>
                             <i class="fa  fa-arrow-down"></i>
                         </div>
                     </a>
@@ -29,7 +29,7 @@
                         class="text-decoration-none cursor-pointer link-light " ng-click="scrollTo('recentRecordsSection');">
                         <div class="rounded p-2 fs-5  p-1  bg-green text-uppercase border border-1 border-dark border-secondary w-100 text-center">
                             <i class="bi bi-table"></i>
-                            {{::('absHomeT.recentRecords'|$translate)}}
+                            <span class="px-2">{{::('absHomeT.recentRecords'|$translate)}}</span>
                             <i class="fa  fa-arrow-down"></i>
                         </div>
                     </a></div>
@@ -43,8 +43,8 @@
                     <home-articles tags="absch-announcement" layout="vertical" show-summary="true" counts="{{announcementCounts}}"></home-articles>
                 </div>
                 <div class="text-end mt-4 card-down-margin">
-                    <a class="nav-link fs-6 fw-bold text-uppercase color-white" href="kb/tags/absch-announcement/">
-                        {{::('absHomeT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
+                    <a class="nav-link fs-6 fw-bold text-uppercase color-white"  href="kb/tags/absch-announcement/">
+                      {{::('absHomeT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i>  </a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
     <!-- Gettingstarted -->
     <div class="container pb-3 mb-3" id="gettingStartedSection">
         <div class="row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
-            <p class="fs-2 m-0 pt-md-4 mt-4 fw-bold ">
+            <p class="fs-1 m-0 fw-bold ">
                 {{::('absHomeT.getStarted'|$translate)}}
                 <hr class="m-0">
             </p>
@@ -66,7 +66,7 @@
                     <h5 class="card-header bg-green">
                         <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
                             href="kb/tags/about/About">
-                            <i class="bi bi-lightbulb pe-3" alt="Learn"></i>
+                            <i class="bi bi-lightbulb pe-3 fs-4" alt="Learn"></i>
                             {{::('absHomeT.learn'|$translate)}}
                             <i class="fa fa-arrow-right"></i>
                         </a>
@@ -91,7 +91,7 @@
                     <h5 class="card-header bg-green">
                         <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
                             href="search">
-                            <i class="bi bi-search pe-3" alt="Search"></i>
+                            <i class="bi bi-search pe-3 fs-4" alt="Search"></i>
                             {{::('absHomeT.search'|$translate)}} 
                             <i class="fa fa-arrow-right"></i> </a>
                     </h5>
@@ -116,7 +116,7 @@
                     <h5 class="card-header bg-green">
                         <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
                             href="register">
-                            <i class="bi bi-upload pe-3" alt="Share"></i>
+                            <i class="bi bi-upload pe-3 fs-4" alt="Share"></i>
                             {{::('absHomeT.submit'|$translate)}}
                             <i class="fa fa-arrow-right"></i> </a>
                     </h5>
