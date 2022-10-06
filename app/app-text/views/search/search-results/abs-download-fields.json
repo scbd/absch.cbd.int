@@ -26,6 +26,7 @@
     "organization.publishedOn"     : "Publication Date",
 
 
+    "absPermit.uniqueIdentifier"            : "UID",
     "absPermit.government"                  : "Country",
     "absPermit.cnaLink"                     : "Issuing authority",
     "absPermit.permitReference"             : "Details of the permit and its equivalent",
@@ -42,7 +43,7 @@
     "absPermit.usages"                      : "Indicate if the permit or its equivalent covers commercial and/or non-commercial use",
     "absPermit.usagesDescription"           : "Additional information about the specified uses covered by the permit or its equivalent or use restrictions",
     "absPermit.thirdPartyTransferCondition" : "Conditions for third party transfer",
-    "absPermit.permitFiles"        : "Documentation",
+    "absPermit.permitFiles"                 : "Documentation",
     "absPermit.relevantInformation"         : "Additional information"
 
 

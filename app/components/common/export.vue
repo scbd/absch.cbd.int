@@ -200,6 +200,9 @@ import '../kb/filters';
                 this.schemaFields   =  [];
             },
             formatString(text){
+                if(!text)
+                    return;
+                    
                 if(text.startsWith('http')){
                     if(text.length > 35)
                         return `<a target="_blank" href="${text}">${text.substr(0, 35)}...</a>`
