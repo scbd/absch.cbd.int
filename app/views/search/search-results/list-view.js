@@ -121,8 +121,14 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
                     if($scope.loading)
                         return;
                     
-                    if(!downloadFields)
-                        downloadFields = (await import('~/app-data/bch/download-fields')).downloadFields;
+                    if(!downloadFields){
+                        if(realm.is('ABS')){
+                            downloadFields = (await import('~/app-data/abs/download-fields')).downloadFields;
+                        }
+                        else if(realm.is('BCH')){
+                            downloadFields = (await import('~/app-data/bch/download-fields')).downloadFields;
+                        }
+                    }
 
                     if(options.listType == 'initial'){
                         return executeExportQuery(false, 25, 0);

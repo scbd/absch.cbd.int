@@ -17,9 +17,9 @@
                         <div class="form-group color-black">
                             {{$t('downloadFormat')}}
                             <span class="radio" style="display: initial;">
-                                <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat" />{{$t('xls')}}</label>                   
-                                <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" />{{$t('xlsx')}}</label>                   
-                                <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" />{{$t('csv')}}</label>
+                                <!-- <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat" />{{$t('xls')}}</label>                    -->
+                                <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" /> {{$t('xlsx')}}</label>                   
+                                <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" /> {{$t('csv')}}</label>
                             </span>
                         </div>
                         <div v-if="loading" class="alert alert-info">
@@ -75,10 +75,14 @@
                                         <tbody>
                                             <tr v-for="(row, index) in downloadDocs" :key="index">                                                
                                                 <td v-for="(field, key) in schemaFields" :key="index">
-                                                    <span v-if="typeof row[key] == 'string'">{{row[key]}}</span>
+                                                    <span v-if="typeof row[key] == 'string'">
+                                                       <span v-html="formatString(row[key])"></span>
+                                                    </span>
                                                     <span v-if="Array.isArray(row[key])">
                                                         <ul class="p-0 list-inline">
-                                                            <li v-for="item in row[key]">{{item}}</li>
+                                                            <li v-for="item in row[key]">
+                                                                <span v-html="formatString(item)"></span>
+                                                            </li>
                                                         </ul>
                                                     </span>                                                    
                                                 </td>
@@ -194,6 +198,19 @@ import '../kb/filters';
 				this.loading        =  false;
                 this.isGeneric      =  true;
                 this.schemaFields   =  [];
+            },
+            formatString(text){
+                if(text.startsWith('http')){
+                    if(text.length > 35)
+                        return `<a target="_blank" href="${text}">${text.substr(0, 35)}...</a>`
+                    
+                    return `<a target="_blank" href="${text}">${text}...</a>`
+                }
+
+                if(text.length > 50)
+                    return text.substr(0, 50)+'...';
+
+                return text;
             }
 		},
 		i18n: { messages:{ en: i18n }} 

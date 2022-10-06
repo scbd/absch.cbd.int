@@ -1,6 +1,6 @@
 {
     "focalPoint.uniqueIdentifier": "UID",
-    "focalPoint.country"         : "Country",
+    "focalPoint.government"         : "Country",
     "focalPoint.name"            : "Name",
     "focalPoint.type"            : "Type(s) of Focal Point",
     "focalPoint.function"        : "Function",
@@ -23,7 +23,27 @@
     "organization.contactsEmails"  : "Email of Contact person or Related Organizations",
     "organization.organizationType": "Type of organization",
     "organization.areasOfWork"     : "Areas of work",
-    "organization.publishedOn"     : "Publication Date"
+    "organization.publishedOn"     : "Publication Date",
+
+
+    "absPermit.government"                  : "Country",
+    "absPermit.cnaLink"                     : "Issuing authority",
+    "absPermit.permitReference"             : "Details of the permit and its equivalent",
+    "absPermit.dateOfIssuance"              : "Date of issuance of the permit or its equivalent ",
+    "absPermit.dateOfExpiry"                : "Date of expiry of the permit or its equivalent",
+    "absPermit.providersLink"               : "The provider",
+    "absPermit.picGranted"                  : "Confirmation that prior informed consent (PIC) was obtained or granted",
+    "absPermit.entitiesToWhomPICGrantedLink": "Person or entity to whom prior informed consent (PIC) was granted",
+    "absPermit.matEstablished"              : "Mutually Agreed Terms (MAT) information",
+    "absPermit.subjectMatter"               : "Subject-matter or genetic resource",
+    "absPermit.keywords"                    : "Keywords",
+    "absPermit.specimens"                   : "Specimen data",
+    "absPermit.taxonomies"                  : "Taxonomy",
+    "absPermit.usages"                      : "Indicate if the permit or its equivalent covers commercial and/or non-commercial use",
+    "absPermit.usagesDescription"           : "Additional information about the specified uses covered by the permit or its equivalent or use restrictions",
+    "absPermit.thirdPartyTransferCondition" : "Conditions for third party transfer",
+    "absPermit.permitFiles"        : "Documentation",
+    "absPermit.relevantInformation"         : "Additional information"
 
 
 }
