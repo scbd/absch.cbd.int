@@ -1,8 +1,8 @@
 {
   "loadingRecord": "Détails du fichier en cours de téléchargement...",
-  "invalidReference": "",
-  "errorLoading": "",
-  "cna": "",
+  "invalidReference": "La référence étant <i>invalide</i>, l'item pourrait ne pas avoir été publié correctement.",
+  "errorLoading": "Erreur de charment des détails pour",
+  "cna": "Autorité nationale compétente :",
   "nfp": "Correspondant national :",
   "person": "Personne :",
   "organization": "Organisation :",
@@ -10,8 +10,8 @@
   "deleted": "Ce fichier lié a été effacé.",
   "phone": "Téléphone :",
   "fax": "Télécopieur :",
-  "email": "",
+  "email": "Courriel :",
   "website": "Site Web :",
-  "pendingApproval": "",
-  "viewRequest": ""
+  "pendingApproval": "LE FICHIER EST EN ATTENTE D’APPROBATION",
+  "viewRequest": "Voir la demande"
 }

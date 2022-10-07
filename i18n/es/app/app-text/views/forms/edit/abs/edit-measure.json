@@ -42,7 +42,7 @@
   "regulatoryInformation": "Información del contacto regulatorio",
   "authorities": "Institución de contacto",
   "elementsMeasure": "Elementos de la medida",
-  "formatMessage": "El formato para grabar los <i>Elementos de las medidas</i> ha cambiado. ",
+  "formatMessage": "El formato para grabar los <i>Elementos de las medidas</i> ha cambiado. Este registro debe actualizarse de manera manual. La lista a continuación de <i>Elementos de las medidas</i> pertenece a la versión anterior y se presenta para que sirva como referencia a fin de brindar asistencia para la actualización de este registro.",
   "mesasureNotApplicable": "Elementos que no corresponden a esta medida.",
   "mesasureNotApplicableInfo": "Sírvase seleccionar qué elementos están incluidos en la medida que se está registrando y determine los artículos o secciones pertinentes de la medida para cada elemento seleccionado. Esta información brindará asistencia para mostrar información sobre el marco jurídico nacional y ayudará a los eventuales usuarios a comprender el acceso, la participación en los beneficios y o los requisitos de cumplimiento del país. A veces, el contenido y los elementos de la medida están relacionados con los objetivos y planes de aplicación del acceso y la participación en los beneficios en el plano nacional. Este podría ser el caso, por ejemplo, de algunas estrategias o planes de acción en materia de APB. En esos casos, se podría indicar qué elementos de la medida no corresponden, haciendo clic en la casilla de verificación que se presenta a continuación.",
   "additionalInformation": "Información adicional",

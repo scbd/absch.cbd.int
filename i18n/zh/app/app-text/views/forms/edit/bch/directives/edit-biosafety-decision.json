@@ -38,7 +38,7 @@
   "LMOProcessing": "直接用作食品或饲料，或用于加工目的之改性活生物体（LMO-FFP）",
   "uses": "改性活生物体用途",
   "takenInAccordanceWithA116": "决定是否是在缺乏国内监管框架和符合条款11.6的条件下作出的？",
-  "note": "<strong></strong> 上方<i>决定、通知、沟通或声明主题</i>字段中的前两个类别已选中，表明该记录是同时针对有意引入到环境中的及直接用作食品或饲料，或用于加工目的改性活生物体的决定。因此，下面的<i>决定类型</i>字段不可编辑，因为相关信息（包括进口商/出口商或申请人的联系方式）已提供。如果情况并非如此，则请创建两个不同的记录，一个用于关于有意引入到环境中的改性活生物体的决定，另一个用于关于直接用作食品或饲料，或用于加工目的的改性活生物体的决定。",
+  "note": "<strong>注意：</strong>上方<i>决定、通知、沟通或声明主题</i>字段中的前两个类别已选中，表明该记录是同时针对有意引入到环境中的及直接用作食品或饲料，或用于加工目的改性活生物体的决定。因此，下面的<i>决定类型</i>字段不可编辑，因为相关信息（包括进口商/出口商或申请人的联系方式）已提供。如果情况并非如此，则请创建两个不同的记录，一个用于关于有意引入到环境中的改性活生物体的决定，另一个用于关于直接用作食品或饲料，或用于加工目的的改性活生物体的决定。",
   "resultDecision": "决定所导致的结果",
   "conditions": "指定条件",
   "extensionPeriod": "指定延长期限的天数",
@@ -64,10 +64,10 @@
   "otherTransboundryBrief": "无法识别相关改性活生物体情况的简要描述",
   "sharing": "与其他数据库共享信息",
   "isForCommercialUse": "此决定是否涉及与商业用途相关的改性活生物体？",
-  "isForCommercialUseInfo": "",
+  "isForCommercialUseInfo": "此决定是否应提交给经合组织秘书处，以便纳入<a rel='noopener' translation-url href='https://biotrackproductdatabase.oecd.org/' target='_blank'> BioTrack 产品数据库</a>？",
   "foodSafety": "此决定和食品安全有关吗？",
   "guidelineSafety": "是否按照<i>《食品标准法典委员会重组 DNA 植物食品安全评估指南》开展？</i>",
-  "codexConducted": "",
+  "codexConducted": "此信息是否应转发至<a rel='noopener' translation-url href='https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/' target='_blank'><u>粮农组织转基因粮食平台</u></a>",
   "LMOIdentification": "改性活生物体和风险评估",
   "modifiedOrganisms": "改性活生物体识别",
   "riskAssessments": "风险评估",
@@ -85,5 +85,6 @@
   "relevantInformation": "其它相关信息",
   "relevantDocumentsInfo": "请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档",
   "notes": "注",
-  "notesInfo": "“注”字段仅供个人使用。仅当编辑记录时才显示，但不会在记录发布时显示。此字段不适用于保密信息。"
+  "notesInfo": "“注”字段仅供个人使用。仅当编辑记录时才显示，但不会在记录发布时显示。此字段不适用于保密信息。",
+  "typeOfDecision": "决定类型"
 }

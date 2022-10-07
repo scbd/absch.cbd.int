@@ -28,7 +28,7 @@
   "genesInfo": "Es preferible que en esta sección se haga referencia a todos los elementos genéticos introducidos en este OVM, tales como promotores, secuencias de codificación de la proteína y terminadores. Como mínimo, es obligatorio consignar TODAS las secuencias de codificación de la proteína.",
   "geneConstructs": "Constructo elementos genéticos",
   "geneNotes": "Notas relacionadas con los elementos genéticos presentes en este OVM",
-  "geneNotesInfo": "",
+  "geneNotesInfo": "Por favor, especifique si alguno de estos elementos se ha modificado a partir de la secuencia registrada en el Registro de Elemento Genético del CIISB y cómo se relacionan entre sí en este OVM, por ejemplo, \"secuencia de codificación de la proteína <i>epsps</i> bajo control del promotor <i>35S</i> y el terminador <i>nos</i>\".",
   "LMOCharacteristics": "Características del OVM",
   "updatingTrait": "Actualizando el rasgo...",
   "modifiedTraits": "Rasgos modificados",
@@ -37,7 +37,7 @@
   "affectedGeneNotes": "Por favor describa cómo la expresión del(los) gen(es) se vio afectada",
   "commonUses": "Uso(s) común(es) del OVM",
   "commonUsesInfo": "Seleccione tantas opciones como sea preciso.",
-  "addContact": "",
+  "addContact": "Agregue un contacto",
   "detectionMethod": "Método(s) de detección",
   "detectionMethodInfo": "La información sobre métodos de detección de la Base de datos de métodos de detección de CropLife International y el Laboratorio de Referencia de la UE para alimentos y piensos genéticamente modificados (EURL-GMFF) se importa dinámicamente de cada base de datos respectiva. Por tanto, estos enlaces no pueden editarse o eliminarse manualmente.",
   "externalLinks": "Enlace(s) externo(s)",
@@ -48,5 +48,5 @@
   "relevantDocumentsInfo": "Por favor, utilice este campo para proporcionar otras direcciones web pertinentes y/o uno o más documentos pertinentes que se almacenarán en la base de datos para que los usuarios los descarguen",
   "notes": "Notas",
   "notesInfo": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.",
-  "addGeneticElement": ""
+  "addGeneticElement": "Agregue un elemento genético"
 }

@@ -1,12 +1,12 @@
 {
-  "compareWithPrevious": "",
-  "compareWithSurvey": "Comparer avec l'Enquête sur les indicateurs du Plan stratégique (2014) Question",
-  "surveyQuestion": "",
+  "compareWithPrevious": "Comparer avec vos rapports antérieurs",
+  "compareWithSurvey": "Comparer avec l'enquête sur les indicateurs du Plan stratégique (2014) Question",
+  "surveyQuestion": "Question d’enquête.",
   "question": "Question",
   "total": "TOTAL",
-  "firstNR": "",
-  "secondNR": "",
-  "thirdNR": "",
-  "forthNR": "",
+  "firstNR": "1ER RN",
+  "secondNR": "2E RN",
+  "thirdNR": "3E RN",
+  "forthNR": "4E RN",
   "note": "<b>Note :</b> L’outil de comparaison ne comprend que les pays qui ont répondu à cette question dans deux de leurs rapports nationaux. Ainsi, le total du décompte et des pourcentages peut changer en appliquant l’outil de comparaison."
 }

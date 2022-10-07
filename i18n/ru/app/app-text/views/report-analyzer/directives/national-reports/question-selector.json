@@ -1,16 +1,16 @@
 {
   "nationalReport": "Национальный доклад",
-  "filter": "",
+  "filter": "Фильтровать по стране(-ам) и/или региону(-ам)",
   "breakdownRegions": "Разбивка по регионам КБР",
   "selectCountries": "Выбрать страны",
   "selectRegions": "Выбрать регионы",
-  "protocolParties": "",
-  "protocolNonParties": "",
-  "nklsParty": "",
+  "protocolParties": "Разбивка по Сторонам Картахенского протокола",
+  "protocolNonParties": "Разбивка по государствам, не являющимся Сторонами Картахенского протокола",
+  "nklsParty": "Разбивка по Сторонам Дополнительного протокола",
   "selectMessage": "Страны или регионы не выбраны",
   "allQuestions": "Все вопросы и/или разделы доклада",
   "surveyQuestion": "Вопрос обследования",
   "question": "Вопрос",
-  "countries": "",
+  "countries": "Страны",
   "regions": "Регионы"
 }

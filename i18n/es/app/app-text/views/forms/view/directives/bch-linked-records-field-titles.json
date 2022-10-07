@@ -25,7 +25,7 @@
   "organization.linkedOrganizations": "Enlace a cualquier otra organización relacionada que pueda estar en la base de datos (por ejemplo, FMAM y PNUMA-FMAM)",
   "laboratoryDetection.organization": "Nombre del laboratorio y de la organización relacionada o que coordina",
   "laboratoryDetection.detectableLmos": "OVM detectable(s) por el laboratorio",
-  "laboratoryDetection.detectableGenes": "",
+  "laboratoryDetection.detectableGenes": "Elemento(s) genético(s) detectable(s) por el laboratorio",
   "resource.organizations": "Organización(es) a cargo de la autoría",
   "resource.modifiedOrganisms": "Identificación del/de los OVM",
   "resource.organisms": "Identificación del/de los organismo(s)",
@@ -46,7 +46,7 @@
   "capacityBuildingInitiative.collaboratingPartners": "Asociado(s) en colaboración",
   "capacityBuildingInitiative.coreFundingSources": "Fuente(s) de financiación",
   "capacityBuildingInitiative.coFinancingSources": "Fuente(s) de cofinanciación",
-  "capacityBuildingInitiative.resultsReference": "",
+  "capacityBuildingInitiative.resultsReference": "Número de registro en la Biblioteca Virtual",
   "submission.organizations": "Organización(es)",
   "submission.records": "Registro(s) relacionado(s)",
   "submission.notifications": "Notificación(es) relacionada(s)"

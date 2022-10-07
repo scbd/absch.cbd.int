@@ -11,6 +11,6 @@
   "faxNumber": "传真号码",
   "emails": "电子邮件",
   "webAddress": "网站地址",
-  "additionalInfo": "",
+  "additionalInfo": "额外信息",
   "otherRelevant": "其他相关网站地址和/或附加文件"
 }

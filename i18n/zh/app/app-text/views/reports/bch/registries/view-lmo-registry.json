@@ -7,7 +7,7 @@
   "lmoInfo": "改性活生物体注册信息提供了在生物安全信息交换所注册的所有改性活生物体的概要信息，包括转化事件，基因修改，以及每条记录的",
   "uniqueCode": "唯一标识代码",
   "lmoLink": "（如适用）。可通过登记薄记录访问所有提及这些生物体之决定和风险评估报告的链接。",
-  "clickHere": "",
+  "clickHere": "单击<a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=modifiedOrganism'>这里</a>，以对此登记簿中可用的所有改性活生物体记录进行深入搜索。",
   "loading": "正在加载...",
   "error": "载入登记簿记录时出错，请重试。",
   "totalRecords": "总记录数量：",

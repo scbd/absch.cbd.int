@@ -1,6 +1,6 @@
 {
   "reports": "报告",
   "view": "查看",
-  "noReportsAvailable": "",
+  "noReportsAvailable": "目前无可用报告。",
   "loading": "正在加载..."
 }

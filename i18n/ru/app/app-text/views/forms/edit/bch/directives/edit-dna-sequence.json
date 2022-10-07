@@ -13,7 +13,7 @@
   "donorOrganismCollectionPoint": "Пункт сбора или приобретения организма(-ов)-донора(-ов)",
   "andOr": "и/или",
   "geographicCoordinates": "Географические координаты",
-  "geographicCoordinatesInfo": "",
+  "geographicCoordinatesInfo": "Только файлы с расширением .geojson",
   "characteristicsSequence": "Характеристики кодирующей белок последовательности",
   "proteinName": "Название белка, экспрессированного с помощью данной кодирующей последовательности",
   "biologicalFunction": "Биологическая функция белка",

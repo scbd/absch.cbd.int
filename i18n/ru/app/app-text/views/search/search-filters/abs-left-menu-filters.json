@@ -28,7 +28,7 @@
   "doesTheApplicantNeedToProvideAnyDocuments": "Заявитель должен предоставить документы",
   "areThereApplicationFees": "Имеется сбор за рассмотрение заявок",
   "howLongDoesApplicationProcessTake": "Продолжительность процесса рассмотрения заявок",
-  "IRRCFreeText": "Произвольный текст/Регистрационный номер разрешения или эквивалентного документа",
+  "IRRCFreeText": "Произвольный текст/регистрационный номер разрешения или эквивалентного документа",
   "absPermitIssuingAuthority": "Орган выдачи",
   "absPermitJurisdiction": "Район юрисдикции",
   "absPermitSubjectMK": "Тема",

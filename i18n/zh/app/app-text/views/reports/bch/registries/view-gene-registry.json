@@ -4,7 +4,7 @@
   "lmoTitle": "改性活生物体登记薄",
   "organismRegistry": "生物体登记薄",
   "geneInfo": "基因片段登记簿汇总了与在生物安全信息交换所登记的改性活生物体有关的基因片段的信息，包括供体生物体、赋予性状和生物功能等信息。该登记簿包括每个基因片段的记录链接，可通过此类链接找到更多详细信息。含有特定基因片段的改性活生物体在单个记录的最下方提及。",
-  "clickHere": "",
+  "clickHere": "单击<a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=dnaSequence' >这里</a>，以对此登记簿中可用的所有基因片段记录进行深入搜索。",
   "loading": "正在加载...",
   "error": "载入登记簿记录时出错，请重试。",
   "totalRecords": "总记录数量：",

@@ -4,9 +4,9 @@
   "nonParty": "غير طرف",
   "nonPartyToCartagena": "غير طرف في بروتوكول قرطاجنة",
   "cartagenaProtocol": "بروتوكول قرطاجنة للسلامة الأحيائية",
-  "ratified": "صدقت على البروتوكول لكنها ليست طرفًا بعد",
+  "ratified": "صدَّق على البروتوكول وليس طرفًا بعد",
   "signatory": "الطرف المُوقع",
-  "entersIntoForce": "",
+  "entersIntoForce": "تاريخ بدء السريان:",
   "suppProtocol": "البروتوكول التكميلي",
   "nagoyaProtocol": "بروتوكول ناغويا"
 }

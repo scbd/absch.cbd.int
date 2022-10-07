@@ -1,9 +1,9 @@
 {
-  "loading": "",
-  "filter": "",
+  "loading": "Cargando los datos de la Matriz",
+  "filter": "Filtro cambiado, reiniciando la búsqueda de datos",
   "exportResult": "Exportar resultados",
   "format": "Descargar formato:",
-  "csv": "",
+  "csv": "valores separados por comas",
   "name": "Nombre del archivo:",
   "close": "Cerrar",
   "download": "Descargar"

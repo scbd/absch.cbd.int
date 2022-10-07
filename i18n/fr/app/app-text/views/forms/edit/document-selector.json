@@ -1,9 +1,9 @@
 {
-  "addRecord": "",
-  "addRecords": "",
+  "addRecord": "Ajouter un fichier",
+  "addRecords": "Ajouter un/des fichier(s)",
   "noRecords": "Aucun lien d'enregistrement.",
   "linkedRecords": "Fichiers liés.",
-  "pleaseSelect": "",
+  "pleaseSelect": "Veuillez choisir parmi les enregistrements publiés ci-dessous :",
   "pleaseSelectInfo": "Si le fichier n'est pas listé, veuillez créer un nouveau fichier.",
   "all": "Ensemble",
   "myRecords": "Mes fichiers",
@@ -21,9 +21,9 @@
   "noRecordSelected": "Vous n’avez pas sélectionné de fichiers.",
   "loading": "chargement en cours...",
   "select": "Sélectionner",
-  "clearRecords": "",
+  "clearRecords": "Enlever les fichiers sélectionnés",
   "create": "Créer",
-  "showExisting": "",
+  "showExisting": "Montrer les fichiers existants",
   "cancel": "Annuler",
   "noRecordFound": "Aucun fichier trouvé"
 }

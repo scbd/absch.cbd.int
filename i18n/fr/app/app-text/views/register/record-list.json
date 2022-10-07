@@ -1,5 +1,5 @@
 {
-  "tour": "",
+  "tour": "Faites un tour",
   "all": "Ensemble",
   "requests": "Demandes",
   "published": "Publié",
@@ -18,7 +18,7 @@
   "loading": "chargement en cours...",
   "noRecordsFound": "Aucun fichier trouvé.",
   "processing": "En cours...",
-  "revoked": "",
+  "revoked": "Revoqué",
   "pendingApproval": "En attente d'approbation",
   "field": "Champs",
   "fieldCurrentRevision": "Révision en cours des champs",
@@ -26,7 +26,7 @@
   "update": "Mise à jour",
   "confirmChanges": "Confirmer le changement du/des fichier (s) suivant(s)",
   "draftRecord": "FICHIER BROUILLON",
-  "uniqueId": "",
+  "uniqueId": "Identifiant unique :",
   "summary": "Résumé :",
   "deleteDraft": "Annuler le brouillon",
   "publishedRecord": "FICHIER PUBLIÉ",
@@ -34,8 +34,8 @@
   "amendmentDescription": "Veuillez entrer un résumé de la raison de la révocation de ce CCIR",
   "enterSummary": "Veuillez entrer un résumé de la raison de la révocation de ce CCIR",
   "revokeIrrc": "Révoquer ce CCIR",
-  "requestDeletion": "",
-  "deleteRecord": "",
+  "requestDeletion": "Demander la suppression de ce fichier",
+  "deleteRecord": "Supprimer un fichier",
   "cancel": "Annuler",
   "duplicate": "Dupliquer",
   "duplicateRecord": "Dupliquer le fichier",
@@ -50,5 +50,5 @@
   "locked": "Verrouillé pour l’édition",
   "delete": "Supprimer",
   "edit": "Modifier",
-  "note": "Note : "
+  "note": "Note : Tout brouillon en attente sera aussi supprimé"
 }

@@ -1,11 +1,12 @@
 {
   "dashboard": "لوحة التحكم",
-  "requests": "طلبات",
+  "requests": "الطلبات",
   "notifications": "الإشعارات",
   "alerts": "التنبيهات",
-  "userManagement": "إدارة المستخدمين",
-  "preferences": "تفضيلات",
-  "admin": "الإدارة",
+  "userManagement": "إعدادات المستخدم",
+  "preferences": "التفضيلات",
+  "admin": "تفضيلات المستخدم",
   "menu": "القائمة",
-  "reports": "التقارير"
+  "reports": "التقارير",
+  "mySharing": "مشاركاتي"
 }

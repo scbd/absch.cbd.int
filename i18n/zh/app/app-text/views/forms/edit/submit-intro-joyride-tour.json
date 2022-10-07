@@ -9,7 +9,7 @@
   },
   "submissionForm": {
     "title": "添加新记录：提交信息表",
-    "content": "</u> 标有<span style='color: red;'>红色</span>星号（<span style='color: red;'>*</span>）的字段为必填字段。部分字段具有描述性文字，可协助您填写表格。"
+    "content": "填写“提交信息表”的字段。<br><u>注：</u>标有<span style='color: red;'>红色</span>星号（<span style='color: red;'>*</span>）的字段为必填字段。部分字段具有描述性文字，可协助您填写表格。"
   },
   "saveDraft": {
     "title": "保存草稿",

@@ -17,11 +17,11 @@
   "organization": "Organisation/division",
   "roles": "Rôles",
   "add": "Ajouter",
-  "authorizedUser": "",
-  "showAdditionalRoles": "",
-  "hideAdditionalRoles": "",
-  "loading": "",
-  "showMore": "",
-  "showLess": "",
+  "authorizedUser": "utilisateur autorisé",
+  "showAdditionalRoles": "Montrer les rôles supplémentaires",
+  "hideAdditionalRoles": "Montrer les rôles supplémentaires",
+  "loading": "Chargement en cours...",
+  "showMore": "Voir plus",
+  "showLess": "Voir moins",
   "addAuthorizedUser": "Ajouter un utilisateur autorisé"
 }

@@ -1,11 +1,11 @@
 {
   "countryProfiles": {
     "title": "Profils des pays",
-    "content": ""
+    "content": "La liste déroulante « Profils des pays » dans la barre de navigation supérieure vous permet de sélectionner un pays d'intérêt pour afficher sa page de profil. <br><br> Vous pouvez également accéder à un aperçu des fichiers nationaux pour tous les pays.<br><br>Explorons la « Vue d'ensemble - Liste de tous les pays »."
   },
   "listOfRecords": {
     "title": "Liste des fichiers",
-    "content": "Sur cette page, vous pouvez voir un aperçu de tous les fichiers nationaux. Les numéros indiqués dans les cercles noirs représentent le nombre total de fichiers publiés sous chaque type de fichier. <br><br> <u> CN) afin de voir le titre complet du type de fichier national."
+    "content": "Sur cette page, vous pouvez voir un aperçu de tous les fichiers nationaux. Les numéros indiqués dans les cercles noirs représentent le nombre total de fichiers publiés sous chaque type de fichier. Les numéros montrés dans les <span style='color:#1FA65D;'>carrés verts</span> indiquent combien de fichiers de ce type existent pour un pays donné.<br><br> <u>conseil :</u> placez le curseur sur un acronyme (par exemple :  CN) afin de voir le titre complet du type de fichier national."
   },
   "sortingRecords": {
     "title": "Classer les fichiers",
@@ -17,7 +17,7 @@
   },
   "sortingRecordsCountries": {
     "title": "Classer les fichiers : Pays",
-    "content": "</u> "
+    "content": "Cliquez ici pour sélectionner un ou plusieurs pays de votre choix <br><br><u>Conseil :</u> Cliquez sur le nom d’une pays ou sur un <span style='color:#1FA65D;'>carré vert</span> pour aller directement sur la page de profil de ce pays."
   },
   "sortingRecordsPartyStatus": {
     "title": "Classer les fichiers : Statut de la Partie",
@@ -25,7 +25,7 @@
   },
   "sortingRecordsRegions": {
     "title": "Classer les fichiers : Régions",
-    "content": "Cliquez ici pour filtrer par région. </u> "
+    "content": "Cliquez ici pour filtrer par région. Vous pouvez sélectionner de multiples régions ou sous-régions <br><br><u>Conseil :</u> Pour rechercher dans les 5 groupes régionaux des Nations Unies, tapez « CBD » dans la zone de recherche, puis sélectionnez la ou les régions d'intérêt."
   },
   "exportingRecords": {
     "title": "Exporter des fichiers",

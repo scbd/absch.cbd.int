@@ -15,7 +15,7 @@
   "characteristicsSequence": "خصائص تسلسل ترميز البروتين",
   "proteinName": "اسم البروتين المذكور في تسلسل الترميز",
   "biologicalFunction": "الوظيفة البيولوجية للبروتين",
-  "traits": "",
+  "traits": "الصفات والاستخدامات ذات الصلة في مجال التكنولوجيا الحيوية",
   "additionalInformation": "معلومات إضافية",
-  "anyOtherInformation": ""
+  "anyOtherInformation": "مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما"
 }

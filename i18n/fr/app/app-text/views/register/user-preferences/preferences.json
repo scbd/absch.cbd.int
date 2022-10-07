@@ -1,5 +1,5 @@
 {
   "userPreferences": "Préférences de l’usager",
-  "emailNotification": "",
-  "keepUpToDate": ""
+  "emailNotification": "Notifications courriels et recherches prédéfinies",
+  "keepUpToDate": "Mise à jour lorsque vos fichiers sont sauvegardés"
 }

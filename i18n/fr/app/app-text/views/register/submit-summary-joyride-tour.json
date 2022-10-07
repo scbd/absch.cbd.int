@@ -1,38 +1,38 @@
 {
   "welcome": {
     "title": "Résumé des fichiers",
-    "content": "<p> <br><br></p>"
+    "content": "<p>Sur cette page, vous pouvez afficher une liste de tous les fichiers sous le type de fichiers que vous avez sélectionné, ainsi que leur statut. <br><br>Vous pouvez filtrer les fichiers existants et en créer de nouveaux, ainsi que dupliquer, modifier ou supprimer un fichier.</p>"
   },
   "filters": {
     "title": "Filtres",
-    "content": "<p></p>"
+    "content": "<p>Utilisez ces filtres pour afficher une liste de tous les fichiers, publiés, brouillons ou en attente d'approbation.</p>"
   },
   "Keyword": {
     "title": "Mot clé",
-    "content": "<p></p>"
+    "content": "<p>Recherchez dans la liste en tapant un mot de votre choix.</p>"
   },
   "adding": {
     "title": "Ajouter un nouveau fichier",
-    "content": "<p></p>"
+    "content": "<p>Cliquez sur le bouton. <b>Ajouter un nouveau </b> pour commencer à créer un nouveau fichier.</p>"
   },
   "duplicate": {
     "title": "Dupliquer le fichier",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour créer un duplicata du fichier existant.</p>"
   },
   "edit": {
     "title": "Éditer un fichier",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour créer un duplicata du fichier existant.</p>"
   },
   "delete": {
     "title": "Supprimer un fichier",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour créer un duplicata du fichier existant.</p>"
   },
   "needHelp": {
     "title": "Besoin d'aide?",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur le tableau de bord.</p>"
   },
   "needMoreHelp": {
     "title": "Encore besoin d’aide?",
-    "content": "<p></p>"
+    "content": "<p>Utilisez la fonction de clavardage pour nous envoyer un message et obtenir plus d’aide.</p>"
   }
 }

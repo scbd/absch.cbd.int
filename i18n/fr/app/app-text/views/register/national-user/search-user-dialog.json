@@ -1,6 +1,6 @@
 {
   "searchNominee": "Rechercher un nominé",
-  "searchNomineeInfo": "",
+  "searchNomineeInfo": "Veuillez entrer l’adresse courriel de la personne que vous souhaiter nominer et cliquer sur le bouton de recherche .",
   "emailAddress": "Adresse courriel du nominé",
   "mandatory": "Ce champs est obligatoire",
   "emailIncomplete": "Le courriel est invalide ou incomplet",

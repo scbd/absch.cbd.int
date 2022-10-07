@@ -1,5 +1,5 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
   "country": "1. Pays",
   "title": "2. Titre :",
@@ -8,7 +8,7 @@
   "jurisdiction": "4. Zone de juridiction :",
   "jurisdictionInfo": "Juridiction dans laquelle ces clauses contractuelles types nationales sont applicables",
   "nameSubJurisdiction": "Nom de la juridiction sous-nationale",
-  "communityName": "",
+  "communityName": "Nom de la communauté",
   "jurisdictionName": "Nom de d’autres juridictions",
   "relevantMeasures": "5. Mesures APA pertinentes :",
   "relevantMeasuresInfo": "Veuillez fournit les mesures APA pertinentes.",
@@ -17,7 +17,7 @@
   "attachments": "Pièce jointe*",
   "resourceLinks": "Lien à la ressource",
   "relevantInformation": "8. a) informations pertinentes sur la/les pièce (s) jointe(s) :",
-  "relevantDocuments": "",
+  "relevantDocuments": "8. b) Veuillez joindre les documents,les ressources et les fichiers pertinents",
   "notes": "Notes",
   "notesInfos": "Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles."
 }

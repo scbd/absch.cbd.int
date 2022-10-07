@@ -1,14 +1,14 @@
 {
-  "partyToNagoyaProtocol": "",
-  "notPartyToNagoyaProtocol": "",
+  "partyToNagoyaProtocol": "Partie au Protocole Nagoya",
+  "notPartyToNagoyaProtocol": "Non Partie au Protocole de Nagoya",
   "ratifiedNotYetParty": "Ayant ratifié, mais n’étant pas encore Partie au Protocole",
   "dkText": "La ratification par le Danemark du Protocole de ne s’applique pas au Groenland et aux îles Féroé.",
   "fkText": "Un différend existe entre les gouvernements de l'Argentine et du Royaume-Uni de Grande-Bretagne et d'Irlande du Nord concernant la souveraineté sur les îles Falkland (Malvinas).",
   "ehText": "Territoire non autonome",
-  "gbText": "",
-  "gbTitle14": "Anguilla; Les Bermudes; Territoire antarctique britannique; Territoire britannique de l'Océan Indien; Îles Vierges britanniques; Îles Caïmans; Les îles Falkland; Gibraltar; Montserrat; Îles Pitcairn; Sainte-Hélène, Ascension et Tristan da Cunha; Géorgie du Sud et îles Sandwich du Sud; Zones de souveraineté d'Akrotiri et de Dhekelia; îles Turques-et-Caïques",
-  "overseasTerritories": "",
+  "gbText": "La ratification du Protocole de Nagoya par le Royaume-Uni ne s’étend pas à",
+  "gbTitle14": "Anguila; Les Bermudes; Territoire antarctique britannique; Territoire britannique de l'Océan Indien; Îles Vierges britanniques; Îles Caïmans; Les îles Falkland; Gibraltar; Montserrat; Îles Pitcairn; Sainte-Hélène, Ascension et Tristan da Cunha; Géorgie du Sud et îles Sandwich du Sud; Zones de souveraineté d'Akrotiri et de Dhekelia; îles Turques-et-Caïques",
+  "overseasTerritories": "14. Territoires d'outre-mer",
   "or": "ou",
   "gbTitle3": "Bailliage de Jersey, le bailliage de Guernesey et l'île de Man",
-  "crownDependencies": ""
+  "crownDependencies": "3. Dépendances de la Couronne"
 }

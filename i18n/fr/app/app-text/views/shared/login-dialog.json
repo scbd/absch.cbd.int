@@ -1,13 +1,13 @@
 {
   "pleaseSignIn": "Veuillez vous connecter pour publier de l’information au",
   "howRegister": "Comment m’inscrire pour obtenir un compte CDB?",
-  "anyPersonSignUp": " ",
+  "anyPersonSignUp": "Toute personne peut avoir un compte CBD qui lui permettra d'enregistrer des informations dans toutes les centres d'échange d’information de la CDB, y compris le Centre d'échange pour la prévention des risques biotechnologiques (CEPRB), le Centre d'échange sur l'accès et le partage des avantages (CE-APA) et le Centre d'échange en vertu de la Convention. (CEC) Vous pouvez vous inscrire pour créer un compte CDB au",
   "makeSure": "Assure-vous d’entrer toutes les informations requises, tel qu’indiqué dans le formulaire. Vous recevrez automatique un courriel avec un hyperlien sur lequel vous devrez cliquer pour confirmer votre compte.",
   "forgotPassword": "Vous avez oublié votre mot de passe ?",
   "clickHere": "Cliquez ici",
-  "resetPassword": " On vous demandera votre adresse électronique et, si vous êtes un utilisateur inscrit, un courriel vous sera immédiatement envoyé à votre compte de messagerie électronique inscrit avec les instructions à suivre pour créer un nouveau mot de passe.",
+  "resetPassword": "pour réinitialiser votre mot de passe On vous demandera votre adresse électronique et, si vous êtes un utilisateur inscrit, un courriel vous sera immédiatement envoyé à votre compte de messagerie électronique inscrit avec les instructions à suivre pour créer un nouveau mot de passe.",
   "displayProblems": "Avez-vous des problèmes avec l'affichage du Centre d’échange?",
-  "recentVersions": "",
+  "recentVersions": "Le a été conçu pour l’usager qui utilise les versions récentes des navigateurs Internet récents (Firefox, Chrome or Internet Explorer 9+)",
   "technicalSupport": "Pour du soutien technique, contactez notre service d’aide au :",
-  "seeFaq": ""
+  "seeFaq": "Consultez la Foire aux questions (FAQs)"
 }

@@ -4,7 +4,7 @@
   "lmoTitle": "Directorio de OVM",
   "organismRegistry": "Directorio de organismos",
   "organismInfo": "En el Directorio de organismos se incluye información resumida sobre aquellos organismos que se han registrado en el CIISB como organismos parentales, receptores o donantes. El Directorio incluye enlaces a los registros de cada organismo en los que puede encontrarse información adicional sobre características biológicas pertinentes, incluidos datos como la clasificación taxonómica, el nombre común, el origen, el centro de origen y el centro de diversidad genética. Al pie de cada registro individual, se proporcionan enlaces a los registros de OMV pertinentes.",
-  "clickHere": "",
+  "clickHere": "Haga clic <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=organism'></a>  aquí para realizar una búsqueda a fondo de todos los registros de OVM disponibles en este Directorio.",
   "loading": "Cargando...",
   "error": "Error al cargar los registros del Directorio, intente nuevamente.",
   "totalRecords": "Registros totales:",

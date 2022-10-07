@@ -32,6 +32,7 @@
   "userRoleReport": "Rapport sur le rôle de l’usager",
   "commonIssues": "Questions communes",
   "matrix": "Matrice",
-  "kb": "",
-  "embed": ""
+  "kb": "La Base des connaissances",
+  "embed": "Url intégrée",
+  "mySharing": "Mes partages"
 }

@@ -20,7 +20,7 @@
   "subjects": "生物安全专题领域",
   "raRecommend": "您是否建议将此文档用作“关于改性活生物体风险评估的指导意见”的背景材料？",
   "raAuthorAffiliation": "作者所属组织",
-  "raSubjects": "",
+  "raSubjects": "与本背景材料相关的“改性活生物体风险评估指导意见”章节",
   "addressModifiedOrganisms": "此资源是否涉及一个或多个特定的改性活生物体？",
   "modifiedOrganisms": "改性活生物体识别",
   "addressOrganisms": "此资源是否涉及一个或多个具体的生物体？",
@@ -29,7 +29,7 @@
   "genes": "基因识别",
   "absThematicAreas": "获取和惠益分享专题领域",
   "keyAreas": "该资源所涉及的能力建设和发展的关键领域和战略措施",
-  "mccKeywords": "",
-  "additionalInformation": "",
+  "mccKeywords": "用于描述将提交之行为准则、指导方针和最佳做法和/或标准之内容的关键词",
+  "additionalInformation": "额外信息",
   "relevantDocuments": "其他相关网站地址和/或附加文件"
 }

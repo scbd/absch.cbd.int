@@ -1,17 +1,17 @@
 {
-  "loadingRecord": "",
-  "invalidReference": "",
-  "errorLoading": "",
-  "cna": "",
-  "nfp": "",
-  "person": "",
+  "loadingRecord": "正在加载记录细节...",
+  "invalidReference": "推荐人<i>无效</i>，该项目可能已经取消发布。",
+  "errorLoading": "加载以下项目的细节时出现错误：",
+  "cna": "国家主管部门：",
+  "nfp": "国家联络点：",
+  "person": "个人：",
   "organization": "组织：",
   "relatedOrganization": "相关机构",
   "deleted": "该链接记录已被删除。",
-  "phone": "",
+  "phone": "电话号码：",
   "fax": "传真：",
-  "email": "",
+  "email": "电子邮箱地址：",
   "website": "网站:",
-  "pendingApproval": "",
-  "viewRequest": ""
+  "pendingApproval": "此记录待批准",
+  "viewRequest": "查看请求"
 }

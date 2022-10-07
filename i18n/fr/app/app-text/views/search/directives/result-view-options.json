@@ -14,7 +14,7 @@
   "cancel": "Annuler",
   "apply": "Appliquer",
   "groupByField": "Trier par champs (sélectionnez un ou plusieurs champs)",
-  "groupBy": "",
-  "government": "",
+  "groupBy": "Groupé par",
+  "government": "Gouvernement",
   "recordType": "Type de fichier"
 }

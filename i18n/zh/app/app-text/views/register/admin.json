@@ -2,7 +2,7 @@
   "admin": "管理",
   "viewList": "查看用户报告的记录列表",
   "manageReportedRecords": "管理已报告记录",
-  "commonIssues": "",
+  "commonIssues": "常见问题",
   "commonAbschIssues": "常见获取和惠益分享信息交换所问题",
   "manageWorkflowRecords": "管理工作流程记录",
   "viewStatus": "查看获取和惠益分享信息交换所记录工作流程状态",
@@ -17,6 +17,6 @@
   "viewClientError": "查看客户端错误",
   "errorLogs": "错误日志",
   "validateTranslation": "验证翻译",
-  "enable": "",
-  "disable": ""
+  "enable": "启用",
+  "disable": "禁用"
 }

@@ -1,5 +1,5 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
   "organization": "Nom du laboratoire et coordonnées",
   "relatedOrganization": "Organisations reliées",
@@ -20,8 +20,8 @@
   "additionalInformation": "Informations supplémentaires",
   "relevantInformationInfo": "Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordé ailleurs dans le fichier.",
   "relevantDocuments": "Autres documents pertinents",
-  "relevantInformation": "",
-  "relevantDocumentsInfo": "",
+  "relevantInformation": "Tout autre information utile",
+  "relevantDocumentsInfo": "Veuillez utiliser ce champ pour toutes autres adresses de sites Web et/ou documents pertinents à conserver dans la base de données aux fins de téléchargement par les utilisateurs.",
   "notes": "Notes",
   "notesInfo": "Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles."
 }

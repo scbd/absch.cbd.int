@@ -5,7 +5,7 @@
   "scientificName": "Nombre científico",
   "scientificNameInfo": "El nombre científico de un organismo se compone generalmente del nombre del género, seguido de la denominación específica. Por ejemplo: <i>Oryza sativa</i> es el nombre científico del arroz.",
   "taxonomicClassification": "Clasificación Taxonómica",
-  "taxonomicClassificationInfo": "La clasificación taxonómica es la designación formal de un organismo. Ejemplo: género: ",
+  "taxonomicClassificationInfo": "La clasificación taxonómica es la designación formal de un organismo. Ejemplo: género: <i>Oryza</i>; especie: <i>sativa</i>.",
   "realm": "Dominio",
   "subRealm": "Subdominio",
   "kingdom": "Reino",

@@ -25,7 +25,7 @@
   "resource.organisms": "Идентификация организма(-ов)",
   "resource.genes": "Идентификация гена(-ов)",
   "capacityBuildingInitiative.contacts": "Контактное лицо",
-  "capacityBuildingInitiative.broaderProjects": "",
+  "capacityBuildingInitiative.broaderProjects": "Запись в Механизме посредничества о данном проекте или данной программе",
   "capacityBuildingInitiative.implementingAgencies": "Осуществляющее(-ие) учреждение(-я) или осуществляющая(-ие) организация(-и)",
   "capacityBuildingInitiative.executingAgencies": "учреждение(-ия)-исполнитель (исполнители) или организация(-ии)-исполнитель (исполнители)",
   "capacityBuildingInitiative.collaboratingPartners": "Сотрудничающий(-ие) партнер(ы)",

@@ -1,67 +1,67 @@
 {
   "welcome": {
     "title": "Bienvenue sur la page Recherche",
-    "content": "<p> </p>"
+    "content": "<p>La page de recherche vous permet d'interroger toutes les informations publiées dans le Centre d'échange. Les fichiers peuvent être trouvés en tapant un mot dans le champ de recherche de texte libre et/ou en utilisant une combinaison de filtres pour affiner votre recherche.</p>"
   },
   "globalSearch": {
     "title": "Filtres globaux",
-    "content": "<p></p>"
+    "content": "<p>Les filtres globaux vous permettent de rechercher dans toute la base de données dans toutes les catégories de fichiers en sélectionnant une ou plusieurs options dans les filtres <b>types de fichiers, mots-clés, pays, régions</b> et <b>Date</b></p>"
   },
   "freeText": {
     "title": "Recherche de texte libre",
-    "content": "<p></u> </p>"
+    "content": "<p>Cette case de recherche vous permet de sonder la base de données au complet en tapant le(s) mot(s) de votre choix<br><br><u> Conseil :</u> Changer la langue du site Web (coin droit en haut) avant de taper dans cette langue.</p>"
   },
   "recordTypesFilterTab": {
     "title": "Filtres par types de fichier",
-    "content": "<p> </p>"
+    "content": "<p>Sélectionnez un ou plusieurs types de fichiers pour rechercher par catégorie(s) d'enregistrements spécifiques : National, de référence ou SCDB.</p>"
   },
   "keywordsFilterTab": {
     "title": "Chercher par mot clé",
-    "content": "<p></p>"
+    "content": "<p>Sélectionnez un ou plusieurs mots-clés dans la liste.<br>Si vous avez déjà filtré par type de fichier, les filtres de mots-clés affichés s'appliqueront spécifiquement à ce type de fichier.</p>"
   },
   "countryFilterTab": {
     "title": "Chercher par pays",
-    "content": "<p></u>  </p>"
+    "content": "<p>Sélectionnez un ou plusieurs pays à partir de la liste <br><br><u>Conseil :</u> Cliquez sur une lettre pour voir tous les pays qui commencent par cette lettre. Vous pouvez également filtrer par pays qui sont 'Parties', 'Non-Parties' et 'Ratifiés, pas encore Parties'.</p>"
   },
   "regionFilterTab": {
     "title": "Chercher par région",
-    "content": "<p></p>"
+    "content": "<p>Sélectionnez dans la liste prédéfinie de régions et/ou de groupes régionaux.</p>"
   },
   "dateFilterTab": {
     "title": "Chercher par date",
-    "content": "<p> </p>"
+    "content": "<p>Le filtre de <b>Date</b> vous permet de rechercher des enregistrements publiés dans (i) une plage de dates prédéterminée (par exemple, « 7 derniers jours »); ou (ii) une plage de dates que vous pouvez spécifier (« Plage personnalisée » ); ou (iii) un jour spécifique de n'importe quelle année. </p>"
   },
   "closeFilterTab": {
     "title": "Résultats de la recherche",
-    "content": "<p></p>"
+    "content": "<p>Pour afficher les résultats de la recherche, faites défiler vers le bas ou cliquez sur le bouton <b>(x)</b> dans le coin supérieur droit.</p></p>"
   },
   "searchResult": {
     "title": "Résultats de la recherche : onglets",
-    "content": "<p> </u> </p>"
+    "content": "<p>Les résultats de la recherche sont présentés dans des tableaux séparés et organisés par catégorie de fichier. Cliquez sur le tableau afin de visualiser les fichiers associés avec cette catégorie. <br><br><u>Note </u> Le cercle noir indique le nombre total d'enregistrements dans chaque catégorie et changera automatiquement en fonction de vos sélections de recherche.</p>"
   },
   "subFilters": {
     "title": "sous-filtres",
-    "content": "<p></p>"
+    "content": "<p>Les sous-filtres apparaissent lorsque vous sélectionnez un ou plusieurs types de fichier dans le filtre global <b>Types de fichier</b>. <br>Ils apparaissent sur le côté gauche et sont associés à chaque type de fichier sélectionné.<br>Vous pouvez utiliser des sous-filtres en combinaison avec des filtres globaux pour affiner davantage votre recherche.</p>"
   },
   "recordView": {
     "title": "Résultats de la recherche : Voir les fichiers",
-    "content": "<p></p>"
+    "content": "<p>Une fois que vous avez localisé le fichier qui vous intéresse, cliquez dessus pour afficher tous les détails.</p>"
   },
   "viewType": {
     "title": "Résultats de la recherche : Voir le type",
-    "content": "<p></p>"
+    "content": "<p>Vous pouvez modifier l'affichage des fichiers en sélectionnant l'option préférée dans la liste déroulante.</p>"
   },
   "sortBy": {
     "title": "Résultats de la recherche : Trier",
-    "content": "<p></p>"
+    "content": "<p>Trier les résultats de votre recherche en sélectionnant un ou plusieurs champs.</p>"
   },
   "sendRecords": {
     "title": "Résultats de la recherche : Partager",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour partager vos résultats de recherche.</p>"
   },
   "exportRecords": {
     "title": "Résultats de la recherche : Exporter",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour exporter les informations en format tableau.</p>"
   },
   "needHelp": {
     "title": "Besoin d’aide?",

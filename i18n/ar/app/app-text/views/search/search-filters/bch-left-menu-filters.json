@@ -1,7 +1,7 @@
 {
-  "freeText": "نص حر",
+  "freeText": "نص حر (عام أو غير محدد)",
   "other": "أخرى",
-  "authoritySubjectAreas": "",
+  "authoritySubjectAreas": "الوظائف أو المهام الإدارية",
   "authorityTypeOfOrganisms": "أنواع الكائنات الحية الواقعة تحت مسؤولية هذه السلطة",
   "authorityDecisionTypeOfOrganisms": "أنواع الكائنات الحية الواقعة تحت مسؤولية هذه السلطة",
   "biosafetyDecisionTypes": "نوع القرار/الوثيقة",
@@ -19,7 +19,7 @@
   "biosafetyLawJurisdictions": "منطقة الاختصاص",
   "biosafetyLawSubjectAreas": "مجالات الموضوع",
   "capacityBuildingInitiativeJurisdictions": "النطاق الجغرافي",
-  "capacityBuildingInitiativeCbiStatus": "",
+  "capacityBuildingInitiativeCbiStatus": "الحالة",
   "capacityBuildingInitiativeCbiCats": "فئات مبادرات تطوير القدرات",
   "capacityBuildingInitiativeCbiAudience": "المجموعات/الجهات المستفيدة الرئيسية المستهدفة",
   "biosafetyThematicAreas": "محاور وموضوعات السلامة الأحيائية",

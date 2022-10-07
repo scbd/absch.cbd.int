@@ -13,7 +13,7 @@
   "websiteAddressInfo": "请提供网站的完整网址（如：http://bch.cbd.int）",
   "timeframeInformation": "确认或更新信息的时间表",
   "categoryInformation": "请注意，此类别的信息要求在提交一年之后进行确认和更新。在到期之后，我们将要求您在3个月内确认或更新该记录。在此阶段之后，如果没有收到确认，该记录将被标记为“未确认”",
-  "additionalInformation": "",
+  "additionalInformation": "额外信息",
   "relevantinformation": "其它相关信息",
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
   "relevantDocuments": "任何其他相关文件",

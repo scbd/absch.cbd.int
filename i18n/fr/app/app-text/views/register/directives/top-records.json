@@ -1,11 +1,11 @@
 {
-  "latestTenRecords": "",
+  "latestTenRecords": "Derniers 10 fichiers",
   "status": "Statut",
   "title": "Titre",
-  "updatedBy": "",
+  "updatedBy": "Mise à jour",
   "published": "Publié",
   "draft": "Brouillon",
-  "request": "",
-  "on": "",
-  "seeMore": ""
+  "request": "Demande",
+  "on": "le",
+  "seeMore": "Voir plus"
 }

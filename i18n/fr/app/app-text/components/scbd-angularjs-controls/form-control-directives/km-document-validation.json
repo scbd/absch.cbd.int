@@ -2,6 +2,6 @@
   "analyzingDocument": "Analyse de votre document ...",
   "savingDocument": "Sauvegarde de votre document...",
   "valid": "Votre document est valide.",
-  "contains": "",
-  "errors": ""
+  "contains": "Votre document contient",
+  "errors": "Des erreurs."
 }

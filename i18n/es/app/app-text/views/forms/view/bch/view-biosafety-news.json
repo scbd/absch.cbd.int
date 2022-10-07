@@ -4,7 +4,7 @@
   "title": "Título",
   "links": "Enlace(s) útil(es)",
   "abstract": "Resumen",
-  "newsText": "",
+  "newsText": "Texto de las noticias",
   "addInfo": "Información adicional",
   "relevantDocuments": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes"
 }

@@ -1,7 +1,7 @@
 {
   "actions": "Medidas",
-  "oups": "",
-  "oops": "",
+  "oups": "<b>¡Uy!</b> Lo lamentamos, pero no está autorizado a designar un usuario.",
+  "oops": "<b>¡Uy!</b> Lo lamentamos, pero hubo un problema.",
   "userToBeCreated": "Usuario a crear:",
   "governmentAffiliationGranted": "Se otorgará la afiliación del Gobierno:",
   "governmentAffiliationRevoked": "Se revocará la afiliación del gobierno:",

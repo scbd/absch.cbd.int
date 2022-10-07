@@ -1,5 +1,5 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
   "country": "1. Pays",
   "selectCountry": "Veuillez choisir un pays...",
@@ -9,7 +9,7 @@
   "areaJurisdiction": "3. Zone de juridiction :",
   "areaJurisdictionInfo": "Quel est le cadre juridique (loi) qui encadre cette procédure d’APA",
   "jurisdictionName": "Nom de la juridiction sous-nationale",
-  "nameCommunity": "",
+  "nameCommunity": "Nom de la communauté",
   "nameOtherJurisdiction": "Nom de d’autres juridictions",
   "nameJurisdiction": "4. Où faire des demandes d’accès?",
   "nameJurisdictionInfo": "Veuillez fournir les contacts, coordonnées ou les liens appropriés.",

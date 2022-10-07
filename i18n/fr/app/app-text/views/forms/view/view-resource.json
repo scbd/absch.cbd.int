@@ -1,5 +1,5 @@
 {
-  "generalInformation": "",
+  "generalInformation": "Informations générales",
   "title": "Titre",
   "resourceTypes": "Type de ressource",
   "authors": "Nom(s) de l’auteur",
@@ -20,7 +20,7 @@
   "subjects": "Domaines thématiques de la prévention des risques biotechnologiques",
   "raRecommend": "Aimeriez-vous recommander ce document comme document de référence pour les « Directives pour l'évaluation des risques liés aux organismes vivants modifiés » ?",
   "raAuthorAffiliation": "Affiliation de l’auteur(e)",
-  "raSubjects": "",
+  "raSubjects": "Section(s) des « Directives sur l’évaluation de risques des organismes vivants modifiés » à laquelle/auxquelles ce document de référence est lié.",
   "addressModifiedOrganisms": "Ces ressources traitent-elles d'une ou de plusieurs catégories d'organismes, de gènes ou d'OVM spécifiques* ?",
   "modifiedOrganisms": "Identification du ou des OVM",
   "addressOrganisms": "Ces ressources traitent-elles d'une ou de plusieurs catégories d'organismes, de gènes ou d'OVM spécifiques?",
@@ -29,7 +29,7 @@
   "genes": "Identification du/des gènes",
   "absThematicAreas": "Domaines thématiques APA",
   "keyAreas": "* Domaines clés et mesures stratégiques pour le renforcement et le développement des capacités abordés par la ressource",
-  "mccKeywords": "",
-  "additionalInformation": "",
+  "mccKeywords": "Mots-clés pertinents pour décrire le contenu du code de conduite, des directives et des pratiques exemplaires et/ou normes soumises",
+  "additionalInformation": "Informations supplémentaires",
   "relevantDocuments": "Autres sites web pertinents et/ou documents en pièce jointe"
 }

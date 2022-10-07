@@ -1,12 +1,12 @@
 {
   "lastUpdated": "Dernière mise à jour le :",
-  "loading": "",
+  "loading": "Chargement en cours...",
   "show10": "Montrer les 10 fichiers suivants",
-  "showRemaining": "",
+  "showRemaining": "Montrer le reste",
   "records": "Fichiers",
   "selectMeasures": "Sélectionnez les mesures APA devant être montrées dans l'aperçu",
   "entry": "Entrée en vigueur :",
-  "adoption": "",
-  "until": "",
-  "retired": ""
+  "adoption": "Adoption",
+  "until": "jusqu’à",
+  "retired": "Retiré :"
 }

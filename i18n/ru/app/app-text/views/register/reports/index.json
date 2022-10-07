@@ -1,6 +1,6 @@
 {
-  "reports": "Доклады",
+  "reports": "Отчеты",
   "view": "Просмотр",
-  "noReportsAvailable": "",
-  "loading": ""
+  "noReportsAvailable": "На данный момент отчетов нет",
+  "loading": "Загрузка..."
 }

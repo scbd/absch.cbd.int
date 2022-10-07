@@ -2,9 +2,9 @@
   "addFile": "Ajouter un fichier",
   "addLink": "Ajouter un lien",
   "editingLink": "Éditer le lien",
-  "urlOfTheWebsite": "",
-  "website": "",
-  "warning": "<strong></strong> La valeur spécifiée n'est pas une URL valide.",
+  "urlOfTheWebsite": "Veuillez joindre au document l'adresse URL complète (ex. : ",
+  "website": "Et le nom du site Web (ex. : La Convention sur la diversité biologique)",
+  "warning": "<strong>Avertissement!</strong> La valeur spécifiée n'est pas une URL valide.",
   "linkType": "Assurez-vous que l'URL commence par http: // ou https: //",
   "protocol": "Un Protocole est requis (https:// or http://)",
   "validUrl": "Veuillez fournir une adresse URL valide",
@@ -16,10 +16,10 @@
   "save": "Sauvegarder",
   "uploadingFile": "Transfert du fichier ...",
   "error": "Une erreur est survenue...",
-  "uploading": "",
+  "uploading": "En cours de chargement",
   "fileName": "Nom de fichier",
   "tags": "Tags",
   "example": "exemple",
-  "examplWebsite": " Site Web du SCBD",
-  "exampleBiodiversityarget": " Biodiversité, objectif Aichi"
+  "examplWebsite": "exemple : Site Web du SCBD",
+  "exampleBiodiversityarget": "exemple : Biodiversité, objectif Aichi"
 }

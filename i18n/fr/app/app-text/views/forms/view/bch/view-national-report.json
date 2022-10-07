@@ -1,12 +1,12 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "contactPerson": "Personne contat qui soumet le rapport",
   "country": "Pays",
   "organizationsStakeholders": "Organisations/parties prenantes ayant consulté ou pris part à la préparation du présent rapport.",
-  "timePeriod": "",
+  "timePeriod": "Période visée par le présent rapport",
   "from": "De",
   "to": "À",
-  "additionalInformation": "",
-  "seconds": "",
+  "additionalInformation": "Informations supplémentaires",
+  "seconds": "secondes.",
   "redirectNow": "Rediriger maintenant"
 }
