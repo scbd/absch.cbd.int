@@ -19,7 +19,7 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
                 api:'='
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-                let downloadFields;
+                let downloadSchemas;
                 translationService.set('viewResultT', viewResultT);
                 $scope.recordLoader = {};
                 $scope.api = {
@@ -121,12 +121,12 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
                     if($scope.loading)
                         return;
                     
-                    if(!downloadFields){
+                    if(!downloadSchemas){
                         if(realm.is('ABS')){
-                            downloadFields = (await import('~/app-data/abs/download-fields')).downloadFields;
+                            downloadSchemas = (await import('~/app-data/abs/download-schemas')).downloadSchemas;
                         }
                         else if(realm.is('BCH')){
-                            downloadFields = (await import('~/app-data/bch/download-fields')).downloadFields;
+                            downloadSchemas = (await import('~/app-data/bch/download-schemas')).downloadSchemas;
                         }
                     }
 
@@ -158,10 +158,10 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
                         // if its single schema and transformed for download user new api else fallback to client side excel                        
                         if(!options.isGeneric){
     
-                            if(downloadFields[options.schema]){
+                            if(downloadSchemas[options.schema]){
                                 return schemaDownload({
                                     query : lQuery, 
-                                    fields : downloadFields[options.schema], 
+                                    fields : downloadSchemas[options.schema], 
                                     loadAll, 
                                     schema : options.schema,
                                     format : options.format,
@@ -210,7 +210,7 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
                         config.responseType = "arraybuffer"
                     }
                     // since the download api does not provide numFound, query index
-                    const downloadRecordsPromise  = $http.post(`/api/v2022/documents/schemas/${schema}/download`, 
+                    const downloadRecordsPromise  = $http.post(`/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`, 
                                                                 {query:searchQuery, fields }, 
                                                                 {...config, headers });
 

@@ -1,6 +1,6 @@
-import fieldsT from '~/app-text/views/search/search-results/bch-download-fields.json';
+import fieldsT from '~/app-text/views/search/search-results/common-download-schemas.json';
 
-export const downloadFields = {	
+export const downloadSchemas = {	
 	"focalPoint" : {
        "uniqueId"         : fieldsT["focalPoint.uniqueIdentifier"],
        "government"       : fieldsT["focalPoint.country"         ],

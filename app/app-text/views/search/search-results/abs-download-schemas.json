@@ -1,0 +1,28 @@
+{
+    "absPermit.uniqueId"                    : "UID",
+    "absPermit.government"                  : "Country",
+    "absPermit.absCNALink"                     : "Issuing authority",
+    "absPermit.permitReference"             : "Reference number of the permit or its equivalent",
+    "absPermit.referenceToNationalPermit"   : "Additional national references or identifiers",
+    "absPermit.relatedIRCCs"                : "Links to other internationally recognized certificate(s) of compliance (IRCC) that relate(s) to this permit",
+    "absPermit.dateOfIssuance"              : "Date of issuance of the permit or its equivalent ",
+    "absPermit.dateOfExpiry"                : "Date of expiry of the permit or its equivalent",
+    "absPermit.providersLink"               : "The provider",
+    "absPermit.picGranted"                  : "Confirmation that prior informed consent (PIC) was obtained or granted",
+    "absPermit.entitiesToWhomPICGrantedLink": "Person or entity to whom prior informed consent (PIC) was granted",
+    "absPermit.picInformation"              : "Additional information on PIC",
+    "absPermit.matEstablished"              : "Mutually Agreed Terms (MAT) information",
+    "absPermit.matInformation"              : "Additional information on MAT",
+    "absPermit.subjectMatter"               : "Subject-matter or genetic resource",
+    "absPermit.keywords"                    : "Keywords",
+    "absPermit.specimens"                   : "Specimen data",
+    "absPermit.taxonomies"                  : "Taxonomy",
+    "absPermit.usages"                      : "Usage type",
+    "absPermit.usagesDescription"           : "Additional information about the specified uses covered by the permit or its equivalent or use restrictions",
+    "absPermit.thirdPartyTransferCondition" : "Conditions for third party transfer",
+    "absPermit.permitFiles"                 : "Documentation",
+    "absPermit.permitDescription"           : "Documentation- Short description of the attached links and/or files",
+    "absPermit.relevantInformation"         : "Additional information"
+
+
+}
