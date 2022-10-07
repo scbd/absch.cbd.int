@@ -215,6 +215,7 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
                                                                 {...config, headers });
 
                     if(loadAll){
+                        
                         const response = await downloadRecordsPromise;
                         const blob = new Blob([response.data], { type: response.headers('content-type') });
                         const file = new File([blob], fileName, { type: response.headers('content-type') });

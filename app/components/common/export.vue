@@ -14,84 +14,98 @@
                         <button type="button" class="border-0 close" @click="closeDialog()" aria-label="Close" ><i class="bi bi-x-circle-fill icon-lg"></i></button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group color-black">
-                            {{$t('downloadFormat')}}
-                            <span class="radio" style="display: initial;">
-                                <!-- <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat" />{{$t('xls')}}</label>                    -->
-                                <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" /> {{$t('xlsx')}}</label>                   
-                                <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" /> {{$t('csv')}}</label>
-                            </span>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group color-black">
+                                    {{$t('downloadFormat')}}
+                                    <span class="radio" style="display: initial;">
+                                        <!-- <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat" />{{$t('xls')}}</label>                    -->
+                                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" /> {{$t('xlsx')}}</label>                   
+                                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" /> {{$t('csv')}}</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <span class="float-end" style="padding-top: 20px;">
+                                    {{$t('recordsFound')}}: <strong>{{numFound}}</strong>
+                                </span>
+                            </div>
                         </div>
-                        <div v-if="loading" class="alert alert-info">
-                            <i class="fa fa-spin fa-spinner" v-if="loading" ></i> {{$t('processing')}}
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div v-if="loading" class="alert alert-info">
+                                    <i class="fa fa-spin fa-spinner" v-if="loading" ></i> {{$t('processing')}}
+                                </div>
+                            </div>
                         </div>
-                        <div id="divTable"  style="max-height:300px;overflow:scroll; " v-if="!loading" >
-                                <div>
-                                    {{$t('recordsFound')}}
-                                    {{numFound}}
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="divTable"  style="max-height:300px;overflow:scroll; " v-if="!loading" >                               
+                                        <div v-if="isGeneric">
+                                            <table id="datatable" class="table table-striped table-bordered table-condensed">
+                                                <thead> 
+                                                    <tr>
+                                                        <th class="tableexport-string">{{$t('type')}}</th>
+                                                        <th class="tableexport-string">{{$t('uid')}}</th>
+                                                        <th class="tableexport-string">{{$t('government')}}</th>
+                                                        <th class="tableexport-string" style="max-width:30%">{{$t('title')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('info1')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('info2')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('info3')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('info4')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('publishedDate')}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(row, index) in downloadDocs" :key="index">
+                                                        
+                                                        <td class="tableexport-string">{{row.rec_schema}}</td>
+                                                        <td class="tableexport-string">
+                                                            <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
+                                                                {{(row.rec_uniqueIdentifier||'')|capitalize}}
+                                                            </a>
+                                                        </td>
+                                                        <td class="tableexport-string">{{row.rec_government}}</td>
+                                                        <td class="tableexport-string">{{row.rec_title}}</td>
+                                                        <td class="tableexport-string">{{(row.rec_meta1||[]).join(', ')}}</td>
+                                                        <td class="tableexport-string">{{(row.rec_meta2||[]).join(', ')}}</td>
+                                                        <td class="tableexport-string">{{(row.rec_meta3||[]).join(', ')}}</td>
+                                                        <td class="tableexport-string">{{(row.rec_meta4||[]).join(', ')}}</td>  
+                                                        <td class="tableexport-string">{{row.rec_date|formatDate}}</td>                          
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div v-if="!isGeneric">
+                                            <table id="datatable" class="table table-striped table-bordered table-condensed">
+                                                <thead> 
+                                                    <tr>
+                                                        <th v-for="field in schemaFields" :key="index">{{field}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(row, index) in downloadDocs" :key="index">                                                
+                                                        <td v-for="(field, key) in schemaFields" :key="index">
+                                                            <span v-if="typeof row[key] == 'string'">
+                                                            <span v-html="formatString(row[key])"></span>
+                                                            </span>
+                                                            <span v-if="Array.isArray(row[key])">
+                                                                <ul class="p-0 list-inline">
+                                                                    <li v-for="item in row[key]">
+                                                                        <span v-html="formatString(item)"></span>
+                                                                    </li>
+                                                                </ul>
+                                                            </span>                                                    
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    
+                                    <h3 class="color-red bold" v-if="!loading">{{$t('sampleMessage')}}</h3>
                                 </div>
-                                <div v-if="isGeneric">
-                                    <table id="datatable" class="table table-striped table-bordered table-condensed">
-                                        <thead> 
-                                            <tr>
-                                                <th class="tableexport-string">{{$t('type')}}</th>
-                                                <th class="tableexport-string">{{$t('uid')}}</th>
-                                                <th class="tableexport-string">{{$t('government')}}</th>
-                                                <th class="tableexport-string" style="max-width:30%">{{$t('title')}} </th>
-                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('info1')}} </th>
-                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('info2')}} </th>
-                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('info3')}} </th>
-                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('info4')}} </th>
-                                                <th style="white-space:nowrap;" class="tableexport-string">{{$t('publishedDate')}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="(row, index) in downloadDocs" :key="index">
-                                                
-                                                <td class="tableexport-string">{{row.rec_schema}}</td>
-                                                <td class="tableexport-string">
-                                                    <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
-                                                        {{(row.rec_uniqueIdentifier||'')|capitalize}}
-                                                    </a>
-                                                </td>
-                                                <td class="tableexport-string">{{row.rec_government}}</td>
-                                                <td class="tableexport-string">{{row.rec_title}}</td>
-                                                <td class="tableexport-string">{{(row.rec_meta1||[]).join(', ')}}</td>
-                                                <td class="tableexport-string">{{(row.rec_meta2||[]).join(', ')}}</td>
-                                                <td class="tableexport-string">{{(row.rec_meta3||[]).join(', ')}}</td>
-                                                <td class="tableexport-string">{{(row.rec_meta4||[]).join(', ')}}</td>  
-                                                <td class="tableexport-string">{{row.rec_date|formatDate}}</td>                          
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div v-if="!isGeneric">
-                                    <table id="datatable" class="table table-striped table-bordered table-condensed">
-                                        <thead> 
-                                            <tr>
-                                                <th v-for="field in schemaFields" :key="index">{{field}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="(row, index) in downloadDocs" :key="index">                                                
-                                                <td v-for="(field, key) in schemaFields" :key="index">
-                                                    <span v-if="typeof row[key] == 'string'">
-                                                       <span v-html="formatString(row[key])"></span>
-                                                    </span>
-                                                    <span v-if="Array.isArray(row[key])">
-                                                        <ul class="p-0 list-inline">
-                                                            <li v-for="item in row[key]">
-                                                                <span v-html="formatString(item)"></span>
-                                                            </li>
-                                                        </ul>
-                                                    </span>                                                    
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            
-                            <h3 class="color-red bold" v-if="!loading">{{$t('sampleMessage')}}</h3>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer ">
@@ -133,7 +147,8 @@ import '../kb/filters';
 				downloadFormat: 'xlsx',
 				loading       : false,
                 isGeneric     : true,
-                schemaFields  : []
+                schemaFields  : [],
+                schema        : undefined
 			}
 		},
 		created(){
@@ -148,11 +163,12 @@ import '../kb/filters';
                 this.modal.show('static');
                 this.loading      = true; 
                 try{
-                    const {docs, numFound, isGeneric, schemaFields } = await this.getDownloadRecords({fields, listType:'initial', format:'json'});
+                    const {docs, numFound, isGeneric, schemaFields,schema } = await this.getDownloadRecords({fields, listType:'initial', format:'json'});
                     this.downloadDocs = docs
                     this.numFound     = numFound;
                     this.isGeneric    = isGeneric;
-                    this.schemaFields = schemaFields;                   
+                    this.schemaFields = schemaFields;
+                    this.schema       = schema;                   
                 }
                 finally{
                     this.loading = false;
@@ -161,7 +177,7 @@ import '../kb/filters';
 			async exportRecords(){
                 
                 this.loading      = true; 
-                const fileName    = this.fileName||`${this.$realm.uIdPrefix}-${new Date().getTime().toString(36)}.xlsx`
+                const fileName    = this.fileName||`${this.$realm.uIdPrefix}-${this.schema}-${new Date().getTime().toString(36)}.${this.downloadFormat}`
 
                 try{
                     if(this.isGeneric){
