@@ -13,32 +13,7 @@ export { default as template } from './index.html';
 export default ['$scope','$rootScope', 'translationService', function ($scope, $rootScope, translationService) {
 
         translationService.set('absHomeT', absHomeT);
-        $scope.locale = 'en';
-        var today= moment.utc();
-        var entry= moment.utc("2014-10-12");
-        $scope.entryintoforce = today.diff(entry, 'hours', true) >= 0 ? true:false;
-
-        $scope.yearsSinceEntry = today.diff(entry, 'years', true);
-        var years = Math.floor($scope.yearsSinceEntry);
-
-        var monthsYears = entry;
-        if(years >= 1){
-            monthsYears = entry.add(years, 'year');
-            $scope.monthsSinceEntry = today.diff(monthsYears, 'month', true);
-        }
-        else{
-            $scope.monthsSinceEntry = today.diff(monthsYears, 'month', true) ;
-        }
-        var months = Math.floor($scope.monthsSinceEntry);
-
-        monthsYears = monthsYears.add(months, 'month');
-        $scope.daysSinceEntry = today.diff(monthsYears, 'days', true);
-        var days = Math.round($scope.daysSinceEntry) ;
-
-        $scope.yearsSinceEntry = years;
-        $scope.monthsSinceEntry = months;
-        $scope.daysSinceEntry = days;
-
+       
         $scope.exportVueComponent = {
           components: { homepageRecords }
         }
@@ -48,6 +23,5 @@ export default ['$scope','$rootScope', 'translationService', function ($scope, $
           scrollTop: $("#"+ anchor).offset().top
         }, 0);
       }
-
 
     }];
