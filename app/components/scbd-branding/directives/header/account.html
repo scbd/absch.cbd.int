@@ -26,15 +26,10 @@
         <i class="fa fa-key fs-6"></i>&nbsp; {{::('accountHeaderT.password'|$translate)}}</a>
     </li>
     <hr style="margin: 10px 0 0 0;padding: 0;"/>
- 
     <li>
-      <a rel="noopener" translation-url class="color-black" href="/register/user-preferences/subscriptions">
+      <a rel="noopener" translation-url class="color-black" href="/register/user-preferences">
         <i class="bi bi-envelope-fill"></i>&nbsp; {{::('accountHeaderT.emailAlerts'|$translate)}}</a>
-    </li>
-    <li>
-      <a rel="noopener" translation-url class="color-black" href="/register/user-preferences/saved-searches">
-        <i class="bi bi-save2-fill"></i>&nbsp; {{::('accountHeaderT.savedSearches'|$translate)}}</a>
-    </li>    
+    </li> 
       <hr style="margin: 10px 0 0 0;padding: 0;"/>
     <li>
       <a rel="noopener" translation-url class="color-black" href="#" ng-click="actionSignOut()">

@@ -2,10 +2,9 @@
     "dashboard": "Dashboard",
     "requests": "Requests",
     "notifications": "Notifications",
-    "alerts": "Alerts",
     "userManagement": "User Management",
-    "preferences": "Preferences",
-    "admin": "ADMIN",
+    "preferences": "Email Alerts",
+    "admin": "Admin",
     "menu": "Menu",
     "reports": "Reports",
     "mySharing": "My sharing"

@@ -1,9 +1,7 @@
 {
     "myAlertsHeading" : "My Alerts",
-    "systemAlertHeading": "System alerts",
+    "systemAlertHeading": "Overview alerts",
 
-    "irccFilterTitle" : "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-    "irccQueryName" : "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
     "systemOverviewFilterTitle" : "Keep me informed on all new and updated clearing-house records",
     "systemOverviewQueryName" : "All new and updated clearing-house records",
     "emailMe": "Email me",
@@ -20,6 +18,9 @@
     "sendEmail": "Send me an email when records relevant to this search are added or updated.",
     "cancel": "Cancel",
     "save": "Save",
-    "searchTitle": "Search title"
+    "searchTitle": "Search title",
+    "frequencyHeader":"Email alerts frequency",
+    "frequencyDescription":"Set the frequency of email alerts you receive from the Clearing-House",
+    "frequencyDropdown":"Select frequency"
 
 }

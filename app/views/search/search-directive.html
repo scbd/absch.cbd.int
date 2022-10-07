@@ -445,7 +445,7 @@
     <div class="d-none">
         <span id="exportDisabledMessage">{{::('searchDirectiveT.exportDisabled'|$translate)}}</span>
     </div>
-    <joyride ng-if="tourOn !isAlertSearch"></joyride>
+    <joyride ng-if="tourOn && !isAlertSearch"></joyride>
     <script type="text/ng-template" trados-translation="true" id="saveMySearchDialog">
         <div class="modal-header">
             <h3 class="modal-title">

@@ -52,8 +52,7 @@
                     <span ng-if="isPA && pendingCount>0 " ng-bind="pendingCount"></span>
                 </a>
                 <a type="button" class="btn btn-light btn-sm mx-1 fw-bold border-0 text-gray-66" rel="noopener" translation-url href="/register/notifications" ng-class="{'tabactivated':path.indexOf('notifications') > 0}">
-                    <span ng-if="isABS"> {{::('registerTopMenuT.notifications'|$translate)}} </span>
-                    <span ng-if="isBCH"> {{::('registerTopMenuT.alerts'|$translate)}} </span>
+                    {{::('registerTopMenuT.notifications'|$translate)}}
                 </a>
                 <a ng-if="user.government || roles.isAdministrator" type="button" class="btn btn-light btn-sm mx-1 border-0 fw-bold text-gray-66" rel="noopener" translation-url
                     ng-class="{'tabactivated':path.indexOf('national-users')>0}" href="/register/national-users"> 
