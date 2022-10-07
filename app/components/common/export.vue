@@ -210,7 +210,7 @@ import '../kb/filters';
                     return `<a target="_blank" href="${text}">${text}...</a>`
                 }
 
-                if(text.length > 50)
+                if(text.length > 50 && !text.startsWith('<a'))
                     return text.substr(0, 50)+'...';
 
                 return text;
