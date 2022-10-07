@@ -6,7 +6,7 @@
   "name": "Nom",
   "transformationEvent": "Événement de transformation",
   "hasUniqueIdentification": "Cet OVM possède-t-il un identifiant unique?",
-  "hasUniqueIdentificationInfo": "Le BCH utilise actuellement le système d'identifiant unique figurant dans les Directives de l'OCDE pour la désignation des identifiants uniques pour les plantes transgéniques (par ex. MON-ØØ81Ø-6). ",
+  "hasUniqueIdentificationInfo": "Le BCH utilise actuellement le système d'identifiant unique figurant dans les Directives de l'OCDE pour la désignation des identifiants uniques pour les plantes transgéniques (par ex. MON-ØØ81Ø-6). Pour plus d'informations, consultez",
   "uniqueIdentification": "Identifiant unique",
   "developer": "Développeur(s)",
   "description": "Description",

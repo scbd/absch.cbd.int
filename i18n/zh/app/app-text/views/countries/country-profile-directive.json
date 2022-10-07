@@ -5,8 +5,8 @@
   "showRemaining": "显示剩余",
   "records": "条记录",
   "selectMeasures": "选择要在概览中显示的获取和惠益分享措施",
-  "entry": "",
-  "adoption": "",
+  "entry": "生效：",
+  "adoption": "通过：",
   "until": "止至：",
-  "retired": ""
+  "retired": "已淘汰："
 }

@@ -4,7 +4,7 @@
   "percentageColumn": "Pourcentage par colonne",
   "percentageOverall": "Pourcentage global",
   "toggleDropdown": "Basculer la liste déroulante",
-  "backToSettings": "",
+  "backToSettings": "Retour vers les paramètres",
   "currentAnalysis": "L'analyse en cours est filtrée de sorte à ne présenter que les rapports qui",
   "removeFilter": "Retirer le filtre",
   "question": "Question",
@@ -15,7 +15,7 @@
   "percentColumn": "Affichage des pourcentages de différentes réponses données (lignes). Dans ce cas, la somme de toutes les valeurs d'une colonne est égale à 100 %.",
   "percentGlobal": "Affichage des pourcentages de toutes les réponses données. Dans ce cas, la somme de toutes les valeurs (lignes et colonnes) est égale à 100 %.",
   "close": "Fermer",
-  "subSection": "",
+  "subSection": "Sous section ",
   "country": "Pays",
   "export": "Exporter",
   "print": "Imprimer"

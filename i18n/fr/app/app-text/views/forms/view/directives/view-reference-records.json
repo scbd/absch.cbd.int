@@ -1,11 +1,11 @@
 {
-  "recordsReferencing": "",
-  "showInSearch": "",
+  "recordsReferencing": "Fichiers en référencement à ce document",
+  "showInSearch": "Montrer dans la recherche",
   "recordType": "Type de fichier",
   "field": "Champs",
   "records": "Fichier(s) :",
-  "hide": "",
-  "show": "",
+  "hide": "Masquer ",
+  "show": "Montrer",
   "country": "Pays",
   "title": "Titre",
   "updatedOn": "Mis à jour le"

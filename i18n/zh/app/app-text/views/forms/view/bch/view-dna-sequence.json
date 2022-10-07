@@ -16,6 +16,6 @@
   "proteinName": "编码序列表达之蛋白质的名称",
   "biologicalFunction": "该蛋白质的生物功能",
   "traits": "生物科技中的相关性状或用途",
-  "additionalInformation": "",
+  "additionalInformation": "额外信息",
   "anyOtherInformation": "其他相关网站地址和/或附加文件"
 }

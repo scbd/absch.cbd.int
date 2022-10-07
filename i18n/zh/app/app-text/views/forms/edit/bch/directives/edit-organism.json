@@ -43,7 +43,7 @@
   "compatibleSpeciesInfo": "根据分类学类别（属和种的名称）提供已知与记录中生物体杂交的物种列表",
   "pathogenicity": "已知致病性和/或致敏性",
   "commonUses": "常见用途",
-  "additionalInformation": "",
+  "additionalInformation": "额外信息",
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
   "relevantDocuments": "任何其他相关文件",
   "relevantInformation": "其它相关信息",

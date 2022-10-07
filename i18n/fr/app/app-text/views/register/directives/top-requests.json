@@ -1,12 +1,12 @@
 {
-  "pendingRequests": "",
-  "loading...": "",
-  "publish": "",
-  "delete": "",
-  "SCBDReview": "",
-  "pending": "",
-  "your": "",
-  "approval": "",
-  "expiresOn": "",
-  "seeMore": ""
+  "pendingRequests": "Demandes en attente",
+  "loading...": "chargement en cours...",
+  "publish": "PUBLIÉ",
+  "delete": "SUPPRIMÉ",
+  "SCBDReview": "RÉVISION DE LA SCBD EN ATTENTE",
+  "pending": "EN ATTENTE",
+  "your": "DE VOTRE",
+  "approval": "APPROBATION",
+  "expiresOn": "Expire le",
+  "seeMore": "Voir plus"
 }

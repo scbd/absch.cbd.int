@@ -64,10 +64,10 @@
   "otherTransboundryBrief": "Breve descripción cuando no haya sido posible identificar el OVM en cuestión",
   "sharing": "Intercambio de información con otras bases de datos",
   "isForCommercialUse": "¿Esta decisión está relacionada con un OVM para uso comercial?",
-  "isForCommercialUseInfo": "",
-  "foodSafety": "",
+  "isForCommercialUseInfo": "¿Esta decisión debería enviarse a la Secretaría de la OCDE para su posible inclusión en la <a rel='noopener' translation-url href='https://biotrackproductdatabase.oecd.org/' target='_blank'> Base de datos de productos BioTrack</a>?",
+  "foodSafety": "¿Esta decisión está relacionada con la inocuidad de los alimentos?",
   "guidelineSafety": "¿Se realizó de conformidad con las <i>Directrices del Codex Alimentarius para la realización de la evaluación de la inocuidad de los alimentos obtenidos de plantas de ADN recombinante</i>?",
-  "codexConducted": "",
+  "codexConducted": "¿Esta información debería enviarse a la Secretaría de la <a rel='noopener' translation-url href='https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/' target='_blank'><u> Plataforma de la FAO de alimentos modificados genéticamente</u></a>? ",
   "LMOIdentification": "Identificación y evaluación del riesgo del OVM",
   "modifiedOrganisms": "Identificación del OVM",
   "riskAssessments": "Evaluación del riesgo",
@@ -85,5 +85,6 @@
   "relevantInformation": "Cualquier otra información pertinente",
   "relevantDocumentsInfo": "Por favor, utilice este campo para proporcionar otras direcciones web pertinentes y/o uno o más documentos pertinentes que se almacenarán en la base de datos para que los usuarios los descarguen",
   "notes": "Notas",
-  "notesInfo": "El campo “Notas” es para uso personal. Solo puede verse cuando se edita el registro, pero no permanece visible cuando se lo publica. Este campo no está destinado a ser usado para información confidencial."
+  "notesInfo": "El campo “Notas” es para uso personal. Solo puede verse cuando se edita el registro, pero no permanece visible cuando se lo publica. Este campo no está destinado a ser usado para información confidencial.",
+  "typeOfDecision": "Tipo de decisión"
 }

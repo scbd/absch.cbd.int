@@ -37,16 +37,16 @@
   "affectedGeneNotes": "请描述基因表达如何受到影响",
   "commonUses": "改性活生物体常见用途",
   "commonUsesInfo": "选择所有适用选项",
-  "addContact": "",
+  "addContact": "添加联系人",
   "detectionMethod": "探测方法",
   "detectionMethodInfo": "来自国际作物保护联盟检测方法数据库和欧盟转基因食品和饲料基准实验室（EURL-GMFF）的检测方法信息从各自的数据库动态导入。因此，这些链接无法手动编辑或删除。",
   "externalLinks": "外部链接",
-  "additionalInformation": "",
+  "additionalInformation": "额外信息",
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
   "relevantDocuments": "任何其他相关文件",
   "relevantInformation": "其它相关信息",
   "relevantDocumentsInfo": "请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档",
   "notes": "注",
   "notesInfo": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。",
-  "addGeneticElement": ""
+  "addGeneticElement": "添加基因片段"
 }

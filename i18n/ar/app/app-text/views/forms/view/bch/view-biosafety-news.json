@@ -3,8 +3,8 @@
   "country": "البلد",
   "title": "العنوان",
   "links": "الرابط/الروابط ذات الصلة",
-  "abstract": "ملخص",
-  "newsText": "نص الأخبار",
+  "abstract": "الملخص",
+  "newsText": "نص الخبر",
   "addInfo": "معلومات إضافية",
-  "relevantDocuments": ""
+  "relevantDocuments": "مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما"
 }

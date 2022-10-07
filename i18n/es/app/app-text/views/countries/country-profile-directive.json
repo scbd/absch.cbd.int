@@ -6,7 +6,7 @@
   "records": "registros",
   "selectMeasures": "Seleccionar las medidas en materia de APB que se mostrarán en el panorama general",
   "entry": "Entrada en vigor:",
-  "adoption": "",
+  "adoption": "Aprobación:",
   "until": "hasta",
-  "retired": ""
+  "retired": "Retirado:"
 }

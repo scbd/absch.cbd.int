@@ -1,23 +1,23 @@
 {
   "welcome": {
     "title": "Vous êtes invité(e) à ajouter un nouveau fichier",
-    "content": "<p>    Publier</p>"
+    "content": "<p>Sur cette page, vous pouvez ajouter (créer) un nouveau fichier.<br>L'ajout 'un nouveau fichier est divisé en 4 étapes principales :<br>Étape 1 : Introduction<br>Étape 2 : Formulaire de soumissions<br>Étape 3: Révision<br>Étape 4: Publier</p>"
   },
   "introduction": {
     "title": "Ajouter un nouveau fichier : Introduction",
-    "content": "<p></p>"
+    "content": "<p>La section «  Introduction » contient un bref résumé du type d'enregistrement sélectionné et de brèves instructions sur la manière de soumettre les informations.</p>"
   },
   "submissionForm": {
     "title": "Ajouter un nouveau fichier : Formulaire de soumission",
-    "content": "</u>  Certains champs ont un texte descriptif pour vous aider à remplir le formulaire."
+    "content": "Complétez les champs dans le formulaire de soumission<br><u>Note:</u> Les champs marqués d'un <span style='color: red;'>*</span>) astérisque <span style='color: red;'>rouge(*)</span> sont obligatoires. Certains champs ont un texte descriptif pour vous aider à remplir le formulaire."
   },
   "saveDraft": {
     "title": "Enregistrer le brouillon",
-    "content": " Une fois que votre brouillon est sauvegardé, vous pourrez le partager par courriel ou l'exporter en PDF."
+    "content": "Il est recommandé de sauvegarder votre fichier périodiquement pendant le processus de soumission.<br>Vous pouvez également sauvegarder le dossier en tant que brouillon et continuer votre soumission à une date ultérieure.<br><u>Note</u> : Une fois que votre brouillon est sauvegardé, vous pourrez le partager par courriel ou l'exporter en PDF."
   },
   "review": {
     "title": "Ajouter un nouveau fichier : Examen",
-    "content": " Assurez-vous de les compléter afin de procéder à la publication de votre dossier."
+    "content": "Une fois que vous avez rempli le « formulaire de soumission », cliquez ici pour le réviser.<br>Si les champs obligatoires n'ont pas été remplis, la « révision » les mettra en évidence. Assurez-vous de les compléter afin de procéder à la publication de votre dossier."
   },
   "publish": {
     "title": "Publier",
@@ -25,10 +25,10 @@
   },
   "needHelp": {
     "title": "Besoin d'aide?",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur le processus de soumission de fichier.</p>"
   },
   "needMoreHelp": {
     "title": "Encore besoin d’aide?",
-    "content": "<p></p>"
+    "content": "<p>Utilisez la fonction de clavardage pour nous envoyer un message et obtenir plus d’aide.</p>"
   }
 }

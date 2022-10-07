@@ -1,8 +1,8 @@
 {
   "close": "Fermer",
-  "implementedBy": "",
-  "executedBy": "",
-  "collaboration": "",
+  "implementedBy": "Mis en oeuvre par",
+  "executedBy": "Exécuté par",
+  "collaboration": "Avec la collaboration de",
   "author": "Auteur(s) :",
   "organizations": "Organisations",
   "source": "SOURCE:"

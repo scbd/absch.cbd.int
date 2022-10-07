@@ -1,5 +1,5 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "country": "Pays",
   "ProfileExpert": "Profil de l'expert",
   "briefProfile": "Profil résumé",
@@ -21,7 +21,7 @@
   "postEducation": "Éducation post-secondaire",
   "formalEducation": "A. Éducation formelle",
   "firstDegree": "Diplôme de premier cycle",
-  "titleDegree": "",
+  "titleDegree": "Titre du diplôme ou autre mention universitaire et discipline",
   "institution": "Nom de l'établissement universitaire",
   "secondDegree": "Diplôme de deuxième cycle : (ex.: Maîtrise en microbiologie)",
   "thirdDegree": "Troisième diplôme",

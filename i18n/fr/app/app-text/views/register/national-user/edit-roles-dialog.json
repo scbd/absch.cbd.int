@@ -1,8 +1,8 @@
 {
-  "accessPermission": "",
-  "selectFunction": "",
-  "granted": "",
-  "revoked": "",
-  "cancel": "",
-  "next": ""
+  "accessPermission": "Accorder/ révoquer des rôles",
+  "selectFunction": "Veuillez choisir quelles fonctions vous voulez assigner à l’usager",
+  "granted": "Rôle (s) à assigner :",
+  "revoked": "Rôle (s) à révoquer :",
+  "cancel": "Annuler",
+  "next": "Suivant"
 }

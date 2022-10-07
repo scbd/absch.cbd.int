@@ -1,6 +1,6 @@
 {
   "reports": "Rapports",
   "view": "Vue",
-  "noReportsAvailable": "",
-  "loading": ""
+  "noReportsAvailable": "Pas de rapports disponibles à ce moment.",
+  "loading": "Chargement en cours..."
 }

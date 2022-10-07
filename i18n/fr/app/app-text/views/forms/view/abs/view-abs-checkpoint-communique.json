@@ -1,5 +1,5 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "government": "Pays émetteur du communiqué de point de contrôle",
   "title": "Titre de ce communiqué de point de contrôle",
   "checkpoints": "Point(s) de contrôle qui ont collecté ou reçu l’information",
@@ -9,7 +9,7 @@
   "referenceNumbers": "Numéro(s) de référence des autres certificats de conformité reconnus à l’échelle internationale en lien avec ce communiqué.",
   "IRCCsNotAvailable": "Le certificat de conformité internationalement reconnu n'est pas disponible",
   "geneticResource": "Source des la ressource génétique",
-  "entityWhoGrantedPIC": "",
+  "entityWhoGrantedPIC": "La personne ou entité ayant accordé le consentement préalable en connaissance de cause (CPCC)",
   "subjectMatter": "Objet ou ressources génétiques pertinents pour les informations recueillies ou reçues",
   "addSubjectMatter": "Détails optionnels et supplémentaires sur le sujet",
   "specimens": "Données sur l’échantillon",

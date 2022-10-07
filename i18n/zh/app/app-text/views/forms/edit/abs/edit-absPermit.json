@@ -69,7 +69,7 @@
   "permitFiles": "许可证或同等证照的副本，或其他相关公开获取文件",
   "permitFilesInfo": "如果需要，请使用此字段上传许可证、同等证照或其他相关文件的副本，或者提供其在国家网站上副本的链接。包括对链接或附件的简短说明。请注意，这些信息将通过获取和惠益分享信息交换所公开，因此不应包含机密信息，也不应包含指向机密信息的链接。",
   "permitDescription": "所附链接和/或文件的简短说明",
-  "additionalInformation": "",
+  "additionalInformation": "额外信息",
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
   "relevantDocumentsInfo": "其他相关网站地址和/或附加文件",
   "notes": "注",

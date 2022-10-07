@@ -1,5 +1,5 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "country": "Pays",
   "nameCNA": "Nom de l'autorité nationale compétente",
   "nameCA": "Nom de l'autorité nationale compétente",
@@ -19,8 +19,8 @@
   "yes": "Oui",
   "no": "Non",
   "shortDescriptionRegulatory": "Description détaillée des fonctions de réglementation",
-  "ShortDescriptionResponsibilities": "",
-  "additionalInformation": "",
+  "ShortDescriptionResponsibilities": "Brève description des responsabilités de l'autorité compétente",
+  "additionalInformation": "Informations supplémentaires",
   "otherRelevantWebsite": "Autres sites web pertinents et/ou documents en pièce jointe",
   "administrativeFunctions": "Fonctions administratives"
 }

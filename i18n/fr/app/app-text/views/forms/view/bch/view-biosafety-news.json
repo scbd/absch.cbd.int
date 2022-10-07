@@ -1,10 +1,10 @@
 {
-  "generalInfo": "",
-  "country": "",
-  "title": "",
-  "links": "",
-  "abstract": "",
-  "newsText": "",
-  "addInfo": "",
-  "relevantDocuments": ""
+  "generalInfo": "Informations générales",
+  "country": "Pays",
+  "title": "Titre",
+  "links": "Lien(s) utile(s)",
+  "abstract": "Résumé analytique",
+  "newsText": "Texte de la nouvelle",
+  "addInfo": "Information supplémentaire",
+  "relevantDocuments": "Autres sites web pertinents et/ou documents en pièce jointe"
 }

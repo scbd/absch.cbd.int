@@ -65,8 +65,8 @@
   "publicationDate": "Fecha de publicación",
   "cbiGeographicScope": "Alcance geográfico",
   "cbiStatus": "Estado",
-  "cbiCats": "",
-  "cbiAudience": "",
+  "cbiCats": "Categoría(s) de las actividades de desarrollo de las capacidades",
+  "cbiAudience": "Principal(es) grupo(s) de destinatario(s)/beneficiario(s)",
   "cbiTAkeyAreas": "Áreas temáticas",
   "cbiFundingSrc": "Tipo(s) de fuentes de financiación",
   "buildContactsUserCountry": "País de la persona o entidad a la que se otorgó el CFP"

@@ -22,6 +22,6 @@
   "updating": "更新",
   "close": "关闭",
   "generatePDFRecord": "生成该记录草稿的 PDF 文件：",
-  "pleaseNote": "<strong>请注意！</strong>加载这个进程需要较长时间。 ",
+  "pleaseNote": "<strong>请注意！</strong>加载这个进程需要较长时间。共享记录草稿的推荐方法是使用<strong>共享</strong>（Share）功能。",
   "selectLanguage": "选择一种语言来启动PDF生成进程。"
 }

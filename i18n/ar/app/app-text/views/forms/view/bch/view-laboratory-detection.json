@@ -7,8 +7,8 @@
   "certifications": "شهادات اعتماد المعمل",
   "detectionMethods": "أنواع وسائل الرصد/تحديد الهوية المستخدمة في المعمل",
   "lmoTypes": "أنواع الكائنات الحية المُحوَّرة",
-  "detectableLmos": "",
+  "detectableLmos": "الكائنات الحية المحورة التي يكشفها ويرصدها المعمل",
   "detectableGenes": "العناصر الجينية التي يرصدها المعمل",
   "additionalInformation": "معلومات إضافية",
-  "relevantDocuments": ""
+  "relevantDocuments": "مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما"
 }

@@ -4,9 +4,9 @@
   "breakdownCbdRegions": "Ventilation par régions de la CBD",
   "selectCountries": "Sélectionnez un/des pays",
   "selectRegions": "Sélectionnez une/des région",
-  "breakdownProtocolParties": "",
+  "breakdownProtocolParties": "Répartition par Non- Parties au Protocole",
   "breakdownProtocolNonParties": "Répartition par Non- Parties au Protocole",
   "nationalReportAnalyzer": "Analyseur des rapports nationaux",
   "nationalReportAnalyzerInfo": "Cet outil en ligne permet de sélectionner des sections ou questions spécifiques du rapport et de montrer les résultats relatifs par pays ou par région.",
-  "analyze": ""
+  "analyze": "Analyser"
 }

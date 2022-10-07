@@ -1,42 +1,42 @@
 {
   "welcome": {
     "title": "Bienvenue sur la page Soumettre : Tableau de bord",
-    "content": "<p> </p>"
+    "content": "<p>Le tableau de bord est votre espace de travail personnel. Ici, vous pouvez voir, soumettre, réviser et modifier les fichiers, en fonction de votre rôle d'utilisateur, ainsi que mettre à jour les informations de votre profil.</p>"
   },
   "personalInformation": {
     "title": "Vos informations personnelles",
-    "content": "<p> </p>"
+    "content": "<p>La section « Bienvenue » s'ouvre lorsque vous cliquez sur la « flèche vers le bas ». Ici, vous pouvez voir et mettre à jour les informations de votre profil.</p>"
   },
   "recordOverview": {
     "title": "Aperçu du fichier",
-    "content": "<p> </p>"
+    "content": "<p>Cette section classe les fichiers en <i>fichiers nationaux</i> et <i></i>fichiers de référence<i></i> et les présentations en fonction de votre rôle d'utilisateur. Elle vous montre aussi le statut de divers fichiers.</p>"
   },
   "yourRecordsStatus": {
     "title": "Vos fichiers : statut",
-    "content": "<p> </p>"
+    "content": "<p>Les trois dernières colonnes indiquent le statut des fichiers pour chaque type de fichier. Les chiffres dans chaque colonne indiquent le nombre de fichiers publiés, les fichiers qui sont des brouillons et les fichiers en attente d'approbation..<br><br><u>Conseil :</u> cliquez sur n'importe quel chiffre pour voir la liste récapitulative des tous les fichiers et leur statut pour le type de fichiers sélectionné.</p>"
   },
   "yourRecordsOffline": {
     "title": "Vos fichiers : formats hors ligne",
-    "content": "<p> </p>"
+    "content": "<p>Dans cette colonne, vous pouvez afficher et télécharger des formats hors ligne dans la langue de votre choix.<br>Les formats hors ligne sont des fichiers Word qui contiennent les mêmes informations que le « formulaire de soumission » en ligne. Leur objectif principal est de vous aider à recueillir des informations avant de les soumettre en ligne.</p>"
   },
   "quickView": {
     "title": "Aperçu rapide",
-    "content": "<p></p>"
+    "content": "<p>Cliquez sur la « flèche vers le bas » pour afficher les 10 derniers fichiers publiés.</p>"
   },
   "addNewRecord": {
     "title": "Ajouter un nouveau fichier<p>",
-    "content": "<p></p>"
+    "content": "<p>Cliquez sur l'icône « + » pour créer un nouveau fichier</p>"
   },
   "viewAllRecords": {
     "title": "Voir tous les fichiers",
-    "content": "<p> </u>  </p>"
+    "content": "<p>Cliquez sur l'icône « liste » pour afficher un résumé de tous les fichiers pour le type de fichier correspondant. Sur la page qui s’ouvre, vous pourrez filtrer les fichiers existants et en créer de nouveaux, ainsi que dupliquer, éditer ou supprimer une fichier.<br><br><u>Conseil :</u>  Vous pouvez aussi cliquer sur le titre du type de fichier (par exemple :, cliquer sur « Contact (CON) »).</p>"
   },
   "needHelp": {
     "title": "Besoin d'aide?",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur le tableau de bord.</p>"
   },
   "needMoreHelp": {
     "title": "Encore besoin d’aide?",
-    "content": "<p></p>"
+    "content": "<p>Utilisez la fonction de clavardage pour nous envoyer un message et obtenir plus d’aide.</p>"
   }
 }

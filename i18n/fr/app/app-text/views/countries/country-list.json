@@ -1,6 +1,6 @@
 {
   "country": "Pays",
-  "status": "",
+  "status": "Statut",
   "regions": "Régions",
   "nonParty": "Non Partie",
   "party": "Partie",
@@ -10,16 +10,16 @@
   "sortAlphabeticalZa": "Odre alphabétique Z à A",
   "partyStatus": "Statut de la Partie",
   "parties": "Parties",
-  "toCartagenaProtocol": "",
-  "partiesToSuppProtocol": "",
+  "toCartagenaProtocol": "au Protocole de Cartagena",
+  "partiesToSuppProtocol": "Parties au Protocole additionnel",
   "ratified": "Ayant ratifié, mais n’étant pas encore Partie au Protocole",
   "nonParties": "Non Parties",
   "showAll": "Montrer tout",
   "export": "Exporter",
-  "noCountries": "",
-  "since": "",
-  "nonPartyToCartagena": "",
-  "partyToCartagena": "",
-  "partyToSuppProtocol": "",
-  "partyToNagoyaProtocol": ""
+  "noCountries": "Aucun pays trouvé pour le filtre sélectionné",
+  "since": "depuis",
+  "nonPartyToCartagena": "Non Partie Partie au Protocole de Cartagena",
+  "partyToCartagena": "Partie au Protocole de Cartagena",
+  "partyToSuppProtocol": "Partie au Protocole additionnel",
+  "partyToNagoyaProtocol": "Partie au Protocole Nagoya"
 }

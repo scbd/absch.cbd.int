@@ -19,12 +19,12 @@
   "amendedMeasures": "此措施将修订以下内容：",
   "summaryAmendments": "修订摘要",
   "authorities": "监管联系方式",
-  "measureAmendedBy": "",
+  "measureAmendedBy": "此措施修改人员：",
   "relationships": "关系",
   "relatedTo": "此措施涉及：",
   "relationshipsDescription": "关系描述",
   "elements": "措施要素",
   "elementsText": "此措施的要素不适用此措施。",
-  "addInfo": "",
+  "addInfo": "额外信息",
   "relevantDocuments": "其他相关网站地址和/或附加文件"
 }

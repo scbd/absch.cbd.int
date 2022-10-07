@@ -8,9 +8,9 @@
   "organization": "المنظمة/المؤسسة",
   "addressContact": "عنوان الاتصال",
   "phoneNumber": "أرقام الهواتف",
-  "faxNumber": "",
-  "emails": "",
+  "faxNumber": "أرقام الفاكس",
+  "emails": "عناوين البريد الإلكتروني",
   "webAddress": "عناوين المواقع الإلكتروني",
   "additionalInfo": "معلومات إضافية",
-  "otherRelevant": ""
+  "otherRelevant": "مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما"
 }

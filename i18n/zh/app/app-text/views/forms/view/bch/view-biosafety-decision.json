@@ -53,15 +53,15 @@
   "pointOfContact": "可供索取进一步资料的联络点",
   "sharing": "与其他数据库共享信息",
   "isForCommercialUse": "此决定是否涉及与商业用途相关的改性活生物体？",
-  "isForCommercialUseInfo": "",
+  "isForCommercialUseInfo": "此决定是否应提交给经合组织秘书处，以便纳入<a rel='noopener' translation-url href='https://biotrackproductdatabase.oecd.org/' target='_blank'> BioTrack 产品数据库</a>？",
   "foodSafety": "此决定和食品安全有关吗？",
   "isForFoodSafety": "是否按照《食品标准法典委员会",
   "guidelineSafety": "重组 DNA 植物食品安全评估指南》开展？",
-  "codexConducted": "",
+  "codexConducted": "此信息是否应转发至<a rel='noopener' translation-url href='https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/' target='_blank'><u>粮农组织转基因粮食平台</u></a>",
   "LMOIdentification": "改性活生物体和风险评估",
   "modifiedOrganisms": "改性活生物体识别",
   "riskAssessments": "风险评估",
   "documentDecision": "关于决定、通讯往来、通知或宣告的文件",
-  "additionalInformation": "",
+  "additionalInformation": "额外信息",
   "otherRelevantWebsite": "其他相关网站地址和/或附加文件"
 }

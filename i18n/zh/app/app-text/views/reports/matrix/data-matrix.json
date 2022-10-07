@@ -1,9 +1,9 @@
 {
-  "loading": "",
-  "filter": "",
+  "loading": "正在加载矩阵数据",
+  "filter": "筛选条件已更改，重新开始数据抓取",
   "exportResult": "导出结果",
   "format": "下载格式：",
-  "csv": "",
+  "csv": "逗号分隔值",
   "name": "文件名：",
   "close": "关闭",
   "download": "下载"

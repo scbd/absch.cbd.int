@@ -1,14 +1,14 @@
 {
-  "addConstruct": "Ajouter Construct",
-  "geneConstruct": "Gène Construct",
+  "addConstruct": "Ajouter une construction",
+  "geneConstruct": "Construction génétique",
   "geneConstructInfo": "Utilisez la souris pour faire glisser une forme et l'ajouter à la construction dans un emplacement prévu à cet effet",
   "dragConstruct": "Faites glisser la forme ici pour supprimer la construction",
   "dropLocation": "Lieu de dépôt",
   "cancel": "Annuler",
   "save": "Sauvegarder",
-  "transcriptionStart": "",
-  "transcriptionStop": "",
-  "transcriptionElement": "",
+  "transcriptionStart": "Débuter la transcription",
+  "transcriptionStop": "Arrêter la transcription",
+  "transcriptionElement": "Élément de la transcription",
   "selectGene": "Sélectionnez gène",
-  "kb": ""
+  "kb": "KB"
 }

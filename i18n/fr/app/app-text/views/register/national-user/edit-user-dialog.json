@@ -1,6 +1,6 @@
 {
-  "newUser": "",
-  "contactDetails": "",
+  "newUser": "Nouvel utilisateur",
+  "contactDetails": "Coordonnées",
   "nominee": "Veuillez fournir les coordonnées de base et  renseignements du nominé",
   "firstName": "Prénom",
   "lastName": "Nom",

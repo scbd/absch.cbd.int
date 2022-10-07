@@ -2,12 +2,12 @@
   "admin": "Admin",
   "viewList": "Voir la liste de fichiers présentés par les usagers",
   "manageReportedRecords": "Gérer les fichiers présentés",
-  "commonIssues": "",
+  "commonIssues": "Questions communes",
   "commonAbschIssues": "Questions communes CE-APA",
   "manageWorkflowRecords": "Gérer le flux des travaux des fichiers",
   "viewStatus": "Voir le statut du flux des travaux des fichiers du CE-APA",
   "multipleFilters": "Afficher le décompte du CE-APA avec l'option graphique et plusieurs filtres",
-  "reportCounts": "",
+  "reportCounts": "Compte des rapports",
   "viewIrrcCount": "Voir le compte des CCRI",
   "irrcCounts": "Comptages des CCRI",
   "viewCountries": "Voir les pays avec/sans responsabilités APA",
@@ -17,6 +17,6 @@
   "viewClientError": "Voir les erreurs des clients",
   "errorLogs": "Registre des erreurs",
   "validateTranslation": "Valider la traduction",
-  "enable": "",
-  "disable": ""
+  "enable": "Activer",
+  "disable": "Désactiver"
 }

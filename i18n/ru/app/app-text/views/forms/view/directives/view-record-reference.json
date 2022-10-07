@@ -1,17 +1,17 @@
 {
   "loadingRecord": "загрузка сведений о записи...",
-  "invalidReference": "",
-  "errorLoading": "",
-  "cna": "",
+  "invalidReference": "<i>Недействительная</i> ссылка, элемент мог быть не опубликован.",
+  "errorLoading": "Ошибка при загрузке сведений о",
+  "cna": "Компетентный национальный орган:",
   "nfp": "Национальный координационный центр:",
   "person": "Физическое лицо:",
   "organization": "Организация:",
-  "relatedOrganization": "",
+  "relatedOrganization": "Смежная организация",
   "deleted": "Эта связанная запись удалена.",
-  "phone": "",
-  "fax": "",
-  "email": "",
+  "phone": "Телефон:",
+  "fax": "Факс:",
+  "email": "Адрес эл. почты:",
   "website": "Веб-сайт:",
-  "pendingApproval": "",
-  "viewRequest": ""
+  "pendingApproval": "ЗАПИСЬ НА УТВЕРЖДЕНИИ",
+  "viewRequest": "Просмотреть запрос"
 }

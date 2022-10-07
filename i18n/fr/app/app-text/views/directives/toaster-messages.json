@@ -1,8 +1,8 @@
 {
-  "draftSaveMessage": "",
-  "closeWithoutSaving": "",
-  "publishRequestedSCBD": " ",
-  "publishRequestedABS": " ",
-  "publishRequestedBCH": " ",
-  "recordPublished": " "
+  "draftSaveMessage": "votre fichier a été enregistré comme brouillon",
+  "closeWithoutSaving": "Votre fichier a été fermé sans être sauvegardé",
+  "publishRequestedSCBD": "Fichier sauvegardé Une demande de publication a été envoyée au SCDB",
+  "publishRequestedABS": "Fichier sauvegardé Une demande de publication a été envoyée à votre autorité de publication",
+  "publishRequestedBCH": "Fichier sauvegardé Une demande de publication a été envoyée au CN-CEPRB",
+  "recordPublished": "Fichier publié Le fichier ne sera pas publiquement accessible sur le Centre d’échange"
 }

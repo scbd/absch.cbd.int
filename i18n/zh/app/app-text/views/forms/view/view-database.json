@@ -3,7 +3,7 @@
   "title": "网站或数据库名称",
   "description": "描述",
   "url": "网站 URL",
-  "addInfo": "",
+  "addInfo": "额外信息",
   "relevantDocuments": "其他相关网站地址和/或附加文件",
   "country": "国家"
 }

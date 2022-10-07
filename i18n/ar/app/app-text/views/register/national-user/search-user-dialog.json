@@ -11,7 +11,7 @@
   "nominateEmailAddress": "رشح مستخدمًا جديدًا باستخدام عنوان البريد الإلكتروني التالي",
   "firstName": "الاسم الأول",
   "lastName": "الاسم الأخير",
-  "organization": "",
+  "organization": "المنظمة",
   "email": "البريد الإلكتروني",
   "continue": "مواصلة مع",
   "cancel": "إلغاء",

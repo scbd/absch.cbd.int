@@ -1,5 +1,5 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "revokeCertificate": "CE CERTIFICAT A ÉTÉ <u>RÉVOQUÉ</u> ET N'EST PLUS VALIDE",
   "updatedCertificate": "CE CERTIFICAT A ÉTÉ <u>MIS À JOUR</u>. UNE NOUVELLE VERSION A ÉTÉ ÉLABORÉE ET <u>CETTE VERSION N’EST PLUS DISPONIBLE.</u>",
   "SeeAmendmentHistory": "Voir l'historique des modifications pour plus d'informations.",
@@ -31,7 +31,7 @@
   "gisFiles": "Coordonnées géographiques",
   "usages": "Type d’utilisation permis par le permis ou son équivalent",
   "usagesConfidential": "Type d’utilisation permis par le permis ou son équivalent",
-  "usagesDescription": "",
+  "usagesDescription": "Informations supplémentaires sur les utilisations spécifiques couvertes par le permis ou son équivalent ainsi que les restrictions d’usage :",
   "thirdPartyTransferCondition": "Conditions de transfert vers une tiers partie",
   "documentation": "Documentation",
   "permitFiles": "Copie du permis ou de son équivalent, ou de tout autre document pertinent non confidentiel",
@@ -39,5 +39,5 @@
   "addInfo": "Informations supplémentaires",
   "relevantDocuments": "Autres sites web pertinents et/ou documents en pièce jointe",
   "amendmentHistory": "Historique des amendements",
-  "infoUtilization": ""
+  "infoUtilization": "Information sur l’utilisation de la ou des ressource(s) génétique(s)"
 }

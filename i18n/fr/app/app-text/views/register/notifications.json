@@ -1,5 +1,5 @@
 {
   "notifications": "Notifications",
-  "manageNotifications": "",
-  "pageInfo": "Sur cette page, vous trouverez toutes les notifications provenant de toutes les plateformes d'échange (CE-CBD, CE-PRB et CE-APA). Le centre d'échange dispose d'un système de notifications interne pour traiter les demandes de publication, les rappels pour mettre à jour les enregistrements ou pour avertir que certains documents pourraient expirer. "
+  "manageNotifications": "Gérer vos notifications de courriels",
+  "pageInfo": "Sur cette page, vous trouverez toutes les notifications provenant de toutes les plateformes d'échange (CE-CBD, CE-PRB et CE-APA). Le centre d'échange dispose d'un système de notifications interne pour traiter les demandes de publication, les rappels pour mettre à jour les enregistrements ou pour avertir que certains documents pourraient expirer. Cette page vous permettra de suivre l'état de vos fichiers et de déterminer quelles sont les demandes de publications en attente ou lorsqu'une demande a été approuvée, rappelée ou rejetée sur l'une des plateformes du centre d'échange."
 }

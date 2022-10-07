@@ -12,7 +12,7 @@
   "title": "Título del documento",
   "legislativeDetails": "Información legislativa",
   "typeRegulation": "Tipo de ley/reglamentación",
-  "typeRegulationInfo": "",
+  "typeRegulationInfo": "Una <i>ley </i> es, por lo general, una legislación (un estatuto) promulgada por un gobierno nacional; una <i>reglamentación</i> es, por lo general, un acto o proceso de control a través de normas o restricciones, con fuerza legal, emitida por un organismo administrativo o un gobierno local; una <i>directriz</i> es, por lo general, un documento que anuncia la política que un organismo intenta poner en práctica en futuras decisiones o la orientación que seguirá el organismo en el ejercicio de su discreción administrativa; un <i>resumen de una reglamentación</i> es un resumen del marco reglamentario nacional en materia de seguridad de la biotecnología en práctica o que el país esté elaborando.",
   "jurisdiction": "Zona de jurisdicción",
   "jurisdictionInfo": "Indique la jurisdicción en la que se aplica la ley, reglamentación, directriz o acuerdo. Este campo también puede utilizarse para indicar exclusiones territoriales a las medidas.",
   "lowerAustria": "Por ej., Baja Austria",

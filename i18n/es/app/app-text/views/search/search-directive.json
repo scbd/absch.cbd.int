@@ -12,7 +12,7 @@
   "globalFilter": "FILTROS GENERALES:",
   "recordTypes": "Tipos de registros",
   "searchTheCH": "Buscar en el Centro de Intercambio de Información",
-  "keywords": "",
+  "keywords": "Palabras clave",
   "country": "País",
   "regions": "Regiones",
   "date": "Fecha",
@@ -24,7 +24,7 @@
   "updating": "Actualizando",
   "results": "resultados...",
   "close": "Cerrar",
-  "all": "",
+  "all": "Todos",
   "records": "registros",
   "national": "Registros nacionales",
   "reference": "Registros de referencia",
@@ -39,5 +39,6 @@
   "searchClearingHouse": "Buscar en el Centro de Intercambio de Información",
   "saveFilter": "Guardar filtro",
   "closeEditing": "Cerrar la edición",
-  "obsoleteSchemaMessage": " "
+  "obsoleteSchemaMessage": "Los siguientes formatos ya no son compatibles con el Centro de Intercambio de Información sobre Seguridad de la Biotecnología. Para obtener más informaciópn, sírvase visitar el sitio bch.cbd.int o ponerse en contacto con bch@cbd.int:",
+  "loading": "cargando"
 }

@@ -1,7 +1,7 @@
 {
   "languageSwitch": "Changer la langue",
-  "pleaseWait": "",
-  "ch": "",
-  "site": "",
+  "pleaseWait": "Veuillez patienter pendant que nous vous redirigeons vers ",
+  "ch": "le site du ",
+  "site": "Centre d'échange d'information",
   "technicalSupport": "Pour du soutien technique, contactez notre service d’aide au :"
 }

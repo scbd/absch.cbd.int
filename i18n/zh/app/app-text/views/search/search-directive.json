@@ -39,5 +39,6 @@
   "searchClearingHouse": "搜索信息交换所",
   "saveFilter": "保存筛选条件",
   "closeEditing": "关闭编辑",
-  "obsoleteSchemaMessage": " "
+  "obsoleteSchemaMessage": "生物安全信息交换所不再支持以下格式。如需更多信息，请访问bch.cbd.int 或联系 bch@cbd.int：",
+  "loading": "正在加载"
 }

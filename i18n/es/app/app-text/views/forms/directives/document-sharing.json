@@ -22,6 +22,6 @@
   "updating": "actualizando...",
   "close": "Cerrar",
   "generatePDFRecord": "Generar un PDF de este registro borrador:",
-  "pleaseNote": "<strong>¡Por favor, tener en cuenta!</strong> Este proceso tarde bastante en cargar. ",
+  "pleaseNote": "<strong>¡Por favor, tener en cuenta!</strong> Este proceso tarde bastante en cargar. El método recomendado para compartir registros borrador es usar la función <strong>Compartir</strong>.",
   "selectLanguage": "Seleccione un idioma para iniciar el proceso de generación de PDF."
 }
