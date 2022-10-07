@@ -8,15 +8,9 @@ import bchHomeT from '~/app-text/views/home/bch.json';
 
 export default ['$scope', 'articlesService', '$rootScope', 'translationService', function ($scope, articlesService, $rootScope, translationService) {
         translationService.set('bchHomeT', bchHomeT);
-        $scope.recordCount = 4;
-        $scope.announcementCounts = 3;
-        if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
-          $scope.recordCount = 8;
-        }
         $scope.exportVueComponent = {
           components: { homepageRecords }
         }
-
       $scope.scrollTo = function (anchor){
         $('html, body').animate({
           scrollTop: $("#"+ anchor).offset().top

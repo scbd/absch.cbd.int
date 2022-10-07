@@ -13,15 +13,7 @@ export { default as template } from './index.html';
 export default ['$scope','$rootScope', 'translationService', function ($scope, $rootScope, translationService) {
 
         translationService.set('absHomeT', absHomeT);
-
-        $scope.recordCount = 4;
-        $scope.announcementCounts = 3;
         $scope.locale = 'en';
-
-        if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
-          $scope.recordCount = 8;
-        }
-
         var today= moment.utc();
         var entry= moment.utc("2014-10-12");
         $scope.entryintoforce = today.diff(entry, 'hours', true) >= 0 ? true:false;
