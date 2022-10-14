@@ -53,7 +53,7 @@
                             </ul>
                         </div>
                         <div >
-                            <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText' && filter.type!='yesNo'" class="color-darkgrey not" style="cursor: pointer;" 
+                            <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText' && filter.type!='check' && filter.type!='yesNo' && filter.type!='label'" class="color-darkgrey not" style="cursor: pointer;" 
                                 ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)" ng-class="{'disabled strikeout':filter.disabled}">
                                 <div ng-class="{'exclude-filter':filter.excludeResult}" class="overflow-auto">
                                     <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">{{::('leftSideFilterT.not'|$translate)}}</span>
@@ -61,6 +61,9 @@
                                     <span class="fa fa-chevron-right float-end"></span>    
                                     <!-- <i class="fa fa-chevron-right float-end" style="margin-top:5px" aria-hidden="true"></i>           -->
                                 </div>
+                            </div>
+                            <div ng-if="filter.type=='label'" >
+                                <h6 ng-bind="filter.title" class="text-muted pt-2"></h6>
                             </div>
                             <div ng-if="filter.type=='date'" >
                                 <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
@@ -76,10 +79,35 @@
                                 </form>
                             </div>
                             <div ng-if="filter.type=='yesNo'" >
-                                <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
-                                <button type="button" ng-disabled="filter.disabled" ng-if="filter.filterValue!==undefined" class="btn btn-sm btn-default float-end" ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
-                                <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="true"   ng-change="onFilterDateChange(filter)"/> {{::('leftSideFilterT.yes'|$translate)}} </label>
-                                <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> {{::('leftSideFilterT.no'|$translate)}} </label>
+                                <div class="d-flex bd-highlight flex-nowrap">
+                                    <div class="flex-fill bd-highlight">
+                                        <label ng-bind="filter.title" ng-class="{'disabled strikeout':filter.disabled}"></label>
+                                    </div>
+                                    <div class="flex-fill bd-highlight text-end text-nowrap">
+                                        <label class="radio-inline me-2"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue"
+                                                ng-value="true" ng-change="onFilterDateChange(filter)" /> {{::('leftSideFilterT.yes'|$translate)}}
+                                        </label>
+                                        <label class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue"
+                                                ng-value="false" ng-change="onFilterDateChange(filter)" /> {{::('leftSideFilterT.no'|$translate)}}
+                                        </label>
+                                        <button type="button" ng-disabled="filter.disabled" ng-if="filter.filterValue!==undefined"
+                                            class="btn btn-sm btn-outline-dark ms-2"
+                                            ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="filter.type=='check'" >
+                                <div class="d-flex bd-highlight flex-nowrap">
+                                    <div class="flex-fill bd-highlight">
+                                        <label ng-bind="filter.title" ng-class="{'disabled strikeout':filter.disabled}"></label> 
+                                    </div>
+                                    <div class="flex-fill bd-highlight text-end text-nowrap">
+                                        <span class="radio-inline me-2">
+                                            <input ng-disabled="filter.disabled" type="checkbox" ng-model="filter.filterValue"
+                                               ng-value="filter.value" ng-change="onFilterDateChange(filter)" /> 
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             <div ng-if="filter.type=='solrRecords'">
                                 <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">                                    

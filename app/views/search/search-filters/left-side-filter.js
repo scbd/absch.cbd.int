@@ -305,6 +305,9 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                     }
 
                     function clearFilterOptions(filter){
+                        if(filter.type=='check')
+                            filter.filterValue = undefined;
+                        
                         if(filter.type!='solrRecords'){
                             _.forEach(filter.selectedItems, function(item){
                                 $element.find('#' + item.identifier).tooltip('hide')

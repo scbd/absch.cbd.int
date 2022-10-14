@@ -1239,8 +1239,15 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     else if(filter.type == 'date' && filter.filterValue){
                                         subQuery = buildDateFieldQuery(filter);
                                     }
-                                    else if(filter.type == 'yesNo' && filter.filterValue!== undefined){
+                                    else if( filter.type == 'yesNo'  && filter.filterValue!== undefined){
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
+                                    }
+                                    else if( filter.type == 'check' && filter.filterValue!== undefined){
+                                        if(filter.filterValue){
+                                            subQuery = filter.field + ':' + solr.escape(filter.value);
+                                        }
+                                        else 
+                                            filter.filterValue = undefined;
                                     }
                                     if(subQuery){
                                         if(filter.excludeResult)

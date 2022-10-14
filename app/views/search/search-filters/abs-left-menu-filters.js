@@ -108,7 +108,30 @@ export const absLeftMenuFilters = {
 			"type": "yesNo",
 			"title": absFilters.measureIsModelContractualClause,
 			"field": "isModelContractualClause_b"
+		},
+		{
+			"type": "label",
+			"title": absFilters.measureKeyElements		
+		},
+		{
+			"type": "check",
+			"title": absFilters.measureKeyElementAccess,
+			"value": "Access",
+			"field": "meta5_EN_txt"		
+		},
+		{
+			"type": "check",
+			"title": absFilters.measureKeyElementBenefitsharing,
+			"value": "Benefit-sharing",
+			"field": "meta5_EN_txt"
+		},
+		{
+			"type": "check",
+			"title": absFilters.measureKeyElementCompliance,
+			"value": "Compliance",
+			"field": "meta5_EN_txt"
 		}
+
 	],
 	"absProcedure" : [{
 		"type": "freeText",
