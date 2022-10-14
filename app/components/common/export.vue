@@ -15,6 +15,14 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    {{$t('exportInformation')}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
                             <div class="col-6">
                                 <div class="form-group color-black">
                                     {{$t('downloadFormat')}}

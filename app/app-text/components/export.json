@@ -18,8 +18,8 @@
     "publishedDate":"Published date",
     "sampleMessage":"This is only sample of the information to be exported. All records retrieved by this search will be included in the export.",
     "cancel":"Cancel",
-    "download":"Download"
-    
+    "download":"Download",
+    "exportInformation" : "To export all available fields, please select one \"Record type\" global filter at a time."  
     
     
 }
