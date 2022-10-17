@@ -13,17 +13,19 @@
 
                     <div v-for="article in articles">
                         <div class="card mb-3" >
+
                             <div class="d-flex flex-row bd-highlight ">
                                 <div class="p-2 bd-highlight"  v-if="article.coverImage" >
                                     <img class="img-fluid img-thumbnail" style="max-height:140px;" v-bind:src="getSizedImage(article.coverImage.url, '300x300')" >
                                 </div>
                                 <div class="p-2 bd-highlight w-100">
                                 <div class="card-body">
+                                    <span class="badge bg-secondary position-absolute top-0 end-0">{{article.meta.createdOn|formatDate('DD MMM YYYY')}}</span>
+
                                     <h5 class="card-title"><a class="link-dark stretched-link" :href="`${articleUrl(article, tag)}`">{{article.title|lstring($locale)}}</a></h5>
                                     <p  v-if="article.summary" class="card-text h-100">{{article.summary|lstring($locale)}}</p>
-                                    <p class="card-text">
-                                        <small><a :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags" class="btn-sm btn-outline-secondary me-2"> {{tag}} </a></small>
-                                    </p>
+
+                                  
                                 </div>
                                 </div>
                             </div>
@@ -130,7 +132,7 @@ export default {
                 [`summary`]: 1,
                 [`coverImage`]: 1,
                 adminTags: 1,
-                "meta.modifiedOn": 1,
+                "meta": 1,
                 _id: 1
             };
             const groupTags = JSON.stringify([encodeURIComponent(tag)]);

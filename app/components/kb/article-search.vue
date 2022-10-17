@@ -1,44 +1,58 @@
 <template>
-  <div>
-      <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-      <div v-if="!loading">
-        <div class="article-by-tags" v-if="articles">
-          <h2>
-            {{$t("searchResults") }} <span><small>({{articlesCount}})</small></span>
-          </h2>
-          <hr>
+    <div>
+        <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg"></i> {{ $t("loading") }}...</div>
+        <div v-if="!loading">
+            <div class="article-by-tags" v-if="articles">
+                <h2>
+                    {{$t("searchResults") }} <span><small>({{articlesCount}})</small></span>
+                </h2>
+                <hr>
 
-          <div class="kb-listing w-100">
-            <ul class="article-with-tags-ul">
-              <li class="article-with-tags-li" v-for="article in articles">
-                <a class="text-decoration-none" :href="`${articleUrl(article, realmTag)}`">
-                  <span class="article-title">
-                    {{article.title|lstring($locale)}}
-                  </span>
-                  <div v-if="article.content" class="article-summary">
-                    {{article.content|lstring($locale)}}
-                  </div>
-                  <div v-if="article.summary" class="article-summary">
-                    {{article.summary|lstring($locale)}}
-                  </div>
-                </a>
-                <div class="inner-area">
-                  <i class="fa fa-tag" aria-hidden="true"></i>
-                  <a class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
+                <div v-for="article in articles">
+                    <div class="card mb-3">
+
+                        <div class="d-flex flex-row bd-highlight ">
+                            <div class="p-2 bd-highlight" v-if="article.coverImage">
+                                <img class="img-fluid img-thumbnail" style="max-height:140px;"
+                                    v-bind:src="getSizedImage(article.coverImage.url, '300x300')">
+                            </div>
+                            <div class="p-2 bd-highlight w-100">
+                                <div class="card-body">
+                                    <span class="badge bg-secondary position-absolute top-0 end-0">
+                                        {{article.meta.createdOn|formatDate('DD MMM YYYY')}}</span>
+
+                                    <h5 class="card-title"><a class="link-dark"
+                                            :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{article.title|lstring($locale)}}</a>
+                                    </h5>
+                                    <p v-if="article.summary" class="card-text h-100">
+                                        {{article.adminTags[0]}} - {{article.adminTags[1]}}
+                                        <a class="link-dark" :href="`${articleUrl(article, getTag(article.adminTags) )}`">
+                                            {{article.summary|lstring($locale)}}
+                                        </a>
+                                    </p>
+
+                                    <div class="inner-area">
+                                        <i class="fa fa-tag" aria-hidden="true"></i>
+                                        <a class="btn btn-mini" :href="`${tagUrl(tag)}`"  v-for="tag in article.adminTags">{{tag}}</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
-              </li>
-            </ul>
-          </div>
-          <div v-if="articlesCount<1" class="alert alert-warning">
-            <strong>{{ $t("noResultFound") }}</strong>
-          </div>
+                
+                <div v-if="articlesCount<1" class="alert alert-warning">
+                    <strong>{{ $t("noResultFound") }}</strong>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="d-inline-block" v-if="articlesCount>10">
-        <paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>
-      </div>
-      </div>
+        <div class="d-inline-block" v-if="articlesCount>10">
+            <paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage"
+                :current-page="pageNumber"></paginate>
+        </div>
+    </div>
 </template>
 <script>
 
@@ -79,13 +93,24 @@ export default {
         this.loadArticles(1);
     },
     methods: {
+        getTag(adminTags) {
+            var realm = this.$realm.is('BCH') ? 'bch' : 'absch';
+            console.log(realm);
+            if(adminTags && adminTags.length >= 2){
+                if(adminTags[0] == realm)
+                    return  adminTags[1];
+                else
+                    return  adminTags[0];
+            }
+            else return realm;
+        },
         tagUrl(tag) {
             const tagDetails = this.categories.find(e => e.adminTags.includes(tag))
             const tagTitle = (tagDetails?.title || '');
             return this.getUrl(tagTitle, undefined, tag);
         },
-        articleUrl(article, tag){
-        return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
+        articleUrl(article, tag) {
+            return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
         },
         onChangePage(pageNumber) {
             this.article = [];
@@ -106,28 +131,28 @@ export default {
                 const match = {
                     "$match": {
                         "$and": [{
-                                "$or": [{
-                                        [`title.${this.$locale}`]: {
-                                            "$$contains": (this.search)
-                                        }
-                                    },
-                                    {
-                                        [`summary.${this.$locale}`]: {
-                                            "$$contains": (this.search)
-                                        }
-                                    },
-                                    {
-                                        [`content.${this.$locale}`]: {
-                                            "$$contains": (this.search)
-                                        }
-                                    }
-                                ]
+                            "$or": [{
+                                [`title.${this.$locale}`]: {
+                                    "$$contains": (this.search)
+                                }
                             },
                             {
-                                "adminTags": {
-                                    $all: [this.realmTag]
+                                [`summary.${this.$locale}`]: {
+                                    "$$contains": (this.search)
+                                }
+                            },
+                            {
+                                [`content.${this.$locale}`]: {
+                                    "$$contains": (this.search)
                                 }
                             }
+                            ]
+                        },
+                        {
+                            "adminTags": {
+                                $all: [this.realmTag]
+                            }
+                        }
                         ]
                     }
                 };
@@ -161,8 +186,9 @@ export default {
                 {
                     [`title`]: 1,
                     [`summary`]: 1,
+                    [`coverImage`]: 1,
                     adminTags: 1,
-                    "meta.modifiedOn": 1,
+                    "meta": 1,
                     _id: 1
                 }
             });
@@ -189,13 +215,18 @@ export default {
                     this.articlesCount = count[0].count;
                 }
             }
-            catch(e) {
+            catch (e) {
                 console.error(e);
             }
             finally {
                 this.loading = false;
             }
         },
+        getSizedImage(url, size) {
+            return url && url
+                .replace(/attachments.cbd.int\//, '$&' + size + '/')
+                .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/')
+        }
     },
     i18n: {
         messages: {

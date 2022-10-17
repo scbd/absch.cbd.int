@@ -102,8 +102,8 @@
 }
 .knowledge-base .categories-list .view-more,.side-bar .right-side-articles .view-more{
 	text-align: end;
-	bottom: 0.6rem;
-	right: 0.6rem;
+	/* bottom: 0.6rem;
+	right: 0.6rem; */
 
 	font-style: normal;
 	font-weight: normal;

@@ -15,7 +15,7 @@
                             <h2>{{article.title|lstring($locale)}}</h2>
                         </header>
                         <div class="detail-custom-tag">
-                            <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{article.meta.createdOn|formatDate}}</div>
+                            <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{article.meta.createdOn|formatDate('DD MMM YYYY')}}</div>
                             <div class="inner-area" v-if="article.customTags.length>0"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp; {{article.customTagsInfo[0].title|lstring($locale)}}</div>
                         </div>
                         <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)"></div>
