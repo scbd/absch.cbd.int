@@ -3,9 +3,9 @@
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg"></i> {{ $t("loading") }}...</div>
         <div v-if="!loading">
             <div class="article-by-tags" v-if="articles">
-                <h2>
+                <h4>
                     {{$t("searchResults") }} <span><small>({{articlesCount}})</small></span>
-                </h2>
+                </h4>
                 <hr>
 
                 <div v-for="article in articles">

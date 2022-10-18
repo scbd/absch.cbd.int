@@ -1,13 +1,14 @@
 <template>
-    <div class="widget fix widget_categories mt-2 right-side-articles relevant-articles">
-        <h4>
-            <span>{{ $t("relevantArticles") }}</span>
+    <div>
+        <h4 v-if="!hideTitle">
+           {{ $t("relevantArticles") }} 
+            <hr></hr>
         </h4>
-        <hr>
+        
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <ul>
-            <li v-for="article in articles" class="mb-2">
-                <a :href="`${articleUrl(article)}`">{{article.title|lstring($locale)}}</a>
+            <li v-for="article in articles" class="mb-1">
+                <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{article.title|lstring($locale)}}</a>
             </li>
         </ul>
         <div v-if="articles.length<1 && !loading" class="alert alert-warning">
@@ -26,7 +27,12 @@ export default {
     components: {},
     props: {
         tag: String,
-        type: String
+        type: String,
+        hideTitle: Boolean,
+        sort: {
+            type: Boolean,
+            default: false
+        }
     },
     data: () => {
         return {
@@ -39,18 +45,25 @@ export default {
     },
     mixins: [articlesMaxin],
     async mounted() {
+
         let ag = [];
         ag.push({"$match":{"$and":[{"adminTags": { $all : [this.$realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
         ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(this.tag)}]}});
         ag.push({"$project" : {[`title`]:1}});
-        ag.push({"$limit" : 10});
+        ag.push({"$limit" : 6});
+        if(this.sort)
+            ag.push({"$sort" : {"meta.modifiedOn":-1}});
+ 
         const query = {
           "ag" : JSON.stringify(ag)
         };
         try {
             const articlesList = await this.articlesApi.queryArticles(query);
             if ((articlesList || []).length) {
-              this.articles = articlesList;
+              if(this.sort)
+                 this.articles = articlesList;
+              else
+                this.articles = this.shuffleArray(articlesList);
             }
         }
         catch(e) {
@@ -63,6 +76,17 @@ export default {
     methods: {
       articleUrl(article) {
             return this.getUrl(this.$options.filters.lstring(article.title), article._id, this.tag);
+        },
+        shuffleArray(array) {
+            let curId = array.length;
+            while (0 !== curId) {
+                let randId = Math.floor(Math.random() * curId);
+                curId -= 1;
+                let tmp = array[curId];
+                array[curId] = array[randId];
+                array[randId] = tmp;
+            }
+            return array;
         },
     },
     i18n: {

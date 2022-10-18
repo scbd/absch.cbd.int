@@ -1,14 +1,11 @@
 <template>
-    <div>
-								
-        <div class="side-bar">
-            <div class="widget fix widget_categories mt-2 right-side-articles">
+        <div>
+            <div class="mb-3">
                <div v-if="tag"><relevant-articles></relevant-articles></div>
 			   <div v-if="!tag && $realm.is('BCH')"><faq-articles></faq-articles></div>
-                </div>
-                  <popular-tags is-categories="true"></popular-tags>
+            </div>
+            <popular-tags is-categories="true"></popular-tags>
         </div>
-    </div>
 </template>
 
 <script>

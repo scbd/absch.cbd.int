@@ -9,9 +9,6 @@
     </div>
 </template>
 
-<style>
-    @import url('app/css/vue/kb/style.css');
-</style>
 
 <script>
 

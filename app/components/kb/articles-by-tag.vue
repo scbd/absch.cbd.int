@@ -4,9 +4,9 @@
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
             <div class="row match-height" v-if="!loading">
                 <div class="article-by-tags" v-if="articles">
-                    <h2>
+                    <h4>
 						{{tagDetails.title}} <span><small>({{articlesCount}})</small></span>
-					</h2>
+					</h4>
 					<hr>
 
                     <div class="kb-listing w-100">

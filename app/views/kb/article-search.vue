@@ -11,10 +11,6 @@
   </div>
 </template>
 
-<style>
-@import url('app/css/vue/kb/style.css');
-</style>
-
 <script>
 
 import articleSearch from '../../components/kb/article-search.vue';
