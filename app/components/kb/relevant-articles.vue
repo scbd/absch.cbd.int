@@ -78,15 +78,10 @@ export default {
             return this.getUrl(this.$options.filters.lstring(article.title), article._id, this.tag);
         },
         shuffleArray(array) {
-            let curId = array.length;
-            while (0 !== curId) {
-                let randId = Math.floor(Math.random() * curId);
-                curId -= 1;
-                let tmp = array[curId];
-                array[curId] = array[randId];
-                array[randId] = tmp;
-            }
-            return array;
+            return array
+                .map(value => ({ value, sort: Math.random()*100}))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({ value }) => value)
         },
     },
     i18n: {
