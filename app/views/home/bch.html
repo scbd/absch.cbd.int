@@ -12,7 +12,7 @@
                         <div
                             class="rounded p-2 fs-5 p-1 bg-bch text-uppercase border border-1 border-dark border-secondary w-100 text-center">
                             <i class="bi bi-globe"></i>
-                            {{::('bchHomeT.exploreMap'|$translate)}}
+                            <span class="px-2">{{::('bchHomeT.exploreMap'|$translate)}}</span>
                             <i class="fa  fa-arrow-down"></i>
                         </div>
                     </a>
@@ -22,7 +22,7 @@
                         <div
                             class="rounded p-2 fs-5 p-1 bg-bch text-uppercase border border-1 border-dark border-secondary w-100 text-center">
                             <i class="bi bi-lightbulb"></i>
-                            {{::('bchHomeT.getStarted'|$translate)}}
+                            <span class="px-2">{{::('bchHomeT.getStarted'|$translate)}}</span>
                             <i class="fa  fa-arrow-down"></i>
                         </div>
                     </a>
@@ -32,7 +32,7 @@
                         <div
                             class="rounded p-2 fs-5  p-1 bg-bch text-uppercase border border-1 border-dark border-secondary w-100 text-center">
                             <i class="bi bi-table"></i>
-                            {{::('bchHomeT.recentRecords'|$translate)}}
+                            <span class="px-2">{{::('bchHomeT.recentRecords'|$translate)}}</span>
                             <i class="fa  fa-arrow-down"></i>
                         </div>
                     </a></div>
@@ -42,12 +42,13 @@
                     {{::('bchHomeT.announcements'|$translate)}}
                     <hr class="m-0 color-white">
                 </p>
-                <div ng-if="announcementCounts" class="pt-3">
-                    <home-articles tags="bch-announcement" layout="vertical" show-summary="true" counts="{{announcementCounts}}"></home-articles>
+                <div class="pt-3">
+                    <home-articles tags="bch-announcement" counts="3"></home-articles>
                 </div>
                 <div class="text-end mt-4 card-down-margin">
                     <a class="nav-link fs-6 fw-bold text-uppercase color-white" href="kb/tags/bch-announcement/">
-                        {{::('bchHomeT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
+                        <span class="p-1" style="background-color: #00405C;border:1px solid #000000;border-radius: 5px;">
+                        {{::('bchHomeT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i> </span></a>
                 </div>
             </div>
 
@@ -61,7 +62,7 @@
     <!-- Gettingstarted -->
     <div class="container pb-3 mb-3" id="gettingStartedSection">
         <div class="row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
-            <p class="fs-2 m-0 pt-md-4 mt-4 fw-bold ">
+            <p class="fs-2 m-0 fw-bold">
                  {{::('bchHomeT.getStarted'|$translate)}}
                 <hr class="m-0">
             </p>
@@ -70,7 +71,7 @@
                     <h5 class="card-header bg-bch">
                         <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
                             href="kb/tags/about/About">
-                            <i class="bi bi-lightbulb pe-3" alt="Learn"></i>
+                            <i class="bi bi-lightbulb pe-3 fs-4" alt="Learn"></i>
                             {{::('bchHomeT.learn'|$translate)}}
                             <i class="fa fa-arrow-right"></i>
                         </a>
@@ -93,7 +94,7 @@
                     <h5 class="card-header bg-bch">
                         <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
                             href="search">
-                            <i class="bi bi-search pe-3" alt="Search"></i>
+                            <i class="bi bi-search pe-3 fs-4" alt="Search"></i>
                             {{::('bchHomeT.search'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
                     </h5>
                     <div class="card-body">
@@ -119,7 +120,7 @@
                     <h5 class="card-header bg-bch">
                         <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
                             href="register">
-                            <i class="bi bi-upload  pe-3" alt="Share"></i>
+                            <i class="bi bi-upload  pe-3 fs-4" alt="Share"></i>
                             {{::('bchHomeT.submit'|$translate)}}
                             <i class="fa fa-arrow-right"></i> </a>
                     </h5>
@@ -143,7 +144,7 @@
 
     <div class="max-vh-100 home-page-record pt-4 mt-4" id="recentRecordsSection">
         <div class="container ">
-            <p class="fs-1 m-0 fw-bold">{{::('bchHomeT.nationalRecords'|$translate)}}
+            <p class="fs-2 m-0 fw-bold">{{::('bchHomeT.nationalRecords'|$translate)}}
                 <hr class="m-0">
             </p>
             <div ng-if="exportVueComponent">
@@ -153,7 +154,7 @@
     </div>
     <div class="home-page-record">
         <div class="container ">
-            <p class="fs-1 m-0 fw-bold">{{::('bchHomeT.referenceRecords'|$translate)}}
+            <p class="fs-2 m-0 fw-bold">{{::('bchHomeT.referenceRecords'|$translate)}}
                 <hr class="m-0">
             </p>
             <div ng-if="exportVueComponent">

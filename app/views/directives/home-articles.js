@@ -10,23 +10,9 @@ import '~/services/main';
                     tags: '@?',
                     counts: '@'
                 },
-                link: function($scope, $element, $attributes){
-
-                    if (!$attributes.showSummary) {
-                        $scope.showSummary = false;
-                    }
-                    else
-                        $scope.showSummary = $attributes.showSummary;
-
-                    if (!$attributes.layout) {
-                        $scope.layout = "vertical";
-                    }
-                    else
-                        $scope.layout = $attributes.layout;
-                },
+               
                 controller: ['$scope', '$http','$q', '$filter', '$location', 'articlesService', 'locale',
                     function($scope, $http, $q, $filter, $location, articlesService, locale) {
-                    
                       
                         $scope.locale = locale;
                         $scope.status   = "loading";
@@ -64,7 +50,6 @@ import '~/services/main';
                         //---------------------------------------------------------------------
                          $scope.getSizedImage = function(url, size){
                             // return url;
-            
                             return url && url
                             .replace(/attachments.cbd.int\//, '$&'+size+'/')
                             .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&'+size+'/')
