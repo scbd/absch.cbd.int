@@ -1,10 +1,11 @@
 <template>
     <div>
-        <h4 v-if="!hideTitle">
-           {{ $t("relevantArticles") }} 
-            <hr></hr>
-        </h4>
-        
+        <slot name="title">
+            <h4>
+            {{ $t("relevantArticles") }} 
+                <hr></hr>
+            </h4>
+        </slot>
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <ul>
             <li v-for="article in articles" class="mb-1">
@@ -28,7 +29,6 @@ export default {
     props: {
         tag: String,
         type: String,
-        hideTitle: Boolean,
         sort: {
             type: Boolean,
             default: false

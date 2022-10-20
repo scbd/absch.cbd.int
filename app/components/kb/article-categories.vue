@@ -10,7 +10,9 @@
                     </li>
                 </ul>
                 <div v-if="category.articles.length == 0">
-                    <relevant-articles :tag="category.adminTags[0]" hide-title="true" sort="true"></relevant-articles>
+                    <relevant-articles :tag="category.adminTags[0]" sort="true">
+                        <template #title><span></span></template>
+                    </relevant-articles>
                 </div>
                 <div>
                     <a class="float-end text-decoration-none link-secondary text-uppercase bold" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
