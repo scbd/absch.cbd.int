@@ -1,12 +1,12 @@
 <template>
-    <div class="widget fix widget_categories mt-2 right-side-articles" v-bind:class="{ 'side-popular-tags': !isCategories }">
+    <div class="mt-4">
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <h4>{{ $t("popularTags") }}</h4>
 				<hr>
-        <div class="tag-scroll" v-if="!loading">
-            <div class="tagcloud" v-for="tag in popularTags">
-                <a href="#" class="btn btn-mini" @click="goToAdminTag(tag.adminTags[0])">{{tag.title}}</a>
-            </div>
+        <div v-if="!loading">
+            <button v-for="tag in popularTags" type="button"  class="btn btn-sm btn-outline-secondary m-1 me-2" @click="goToAdminTag(tag.adminTags[0])">
+               {{tag.title}}
+            </button>
         </div>
     </div>
 </template>

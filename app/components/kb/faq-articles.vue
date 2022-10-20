@@ -1,13 +1,13 @@
 <template>
-    <div class="widget fix widget_categories right-side-articles">
+    <div>
         <h4>
            <span>{{ $t("faqs") }}</span>
         </h4>
         <hr>
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
          <ul>
-            <li v-for="article in articles">
-                <a :href="`${articleUrl(article)}`">{{article.title}}</a>
+            <li v-for="article in articles" class="mb-1">
+                <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{article.title}}</a>
             </li>
         </ul>
     </div>

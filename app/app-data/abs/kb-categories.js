@@ -1,4 +1,11 @@
-export const categories = [{
+export const categories = [
+  {
+    "title": "Announcements",
+    "adminTags": [
+      "absch-announcement"
+    ],
+    "articles": []
+  },{
     "title": "About the ABS Clearing-House",
     "adminTags": [
       "about"

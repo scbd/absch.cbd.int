@@ -1,20 +1,21 @@
 <template>
     <div>
-        <div class="row match-height">
-            <div class="col-md-12 col-sm-12 " v-for="category in KbCategories">
-                <div class="categories-list widget_categories tag-count">
-                    <h3><a :href="`${tagUrl(category)}`">{{category.title}}</a></h3>
-                   <hr>
-                    <ul class="cate-list-ul" style="list-style: none;">
-                        <li class="cate-list-li" v-for="article in category.articles">
-                            <a v-if="article.identifier" :href="`${articleUrl(article, category.adminTags[0])}`">{{article.title}}</a>
-                            <a v-if="article.url" :href="article.url" target="_blank">{{article.title}}</a>
-                        </li>
-                    </ul>
-                    <hr class="mt-3"></hr>
-                    <div>
-                        <a class="float-end text-decoration-none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
-                    </div>
+        <div class="card shadow-sm mb-3" v-for="category in KbCategories">
+            <div class="card-body">
+                <h4 class="pb-2"><a :href="`${tagUrl(category)}`">{{category.title}}</a></h4>
+                <ul v-if="category.articles.length > 0" >
+                    <li v-for="article in category.articles" class="mb-1">
+                        <a v-if="article.identifier" class="link-dark fs-6" :href="`${articleUrl(article, category.adminTags[0])}`">{{article.title}}</a>
+                        <a v-if="article.url" :href="article.url" class="link-dark fs-6" target="_blank">{{article.title}}</a>
+                    </li>
+                </ul>
+                <div v-if="category.articles.length == 0">
+                    <relevant-articles :tag="category.adminTags[0]" sort="true">
+                        <template #title><span></span></template>
+                    </relevant-articles>
+                </div>
+                <div>
+                    <a class="float-end text-decoration-none link-secondary text-uppercase bold" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
                 </div>
             </div>
         </div>
@@ -23,10 +24,14 @@
 
 <script>
 import i18n from '../../app-text/components/kb.json';
+import relevantArticles from './relevant-articles.vue';
 import articlesMaxin from '../maxin/article';
 export default {
     name: 'KbArticleCategories',
     props: {},
+    components: {
+        relevantArticles
+    },
     data: () => {
         return {
             KbCategories: [],
@@ -42,12 +47,12 @@ export default {
         tagUrl(category) {
             return this.getUrl(category.title, undefined, category.adminTags[0]);
         },
-        articleUrl(article, tag){
-          if(article.url){
-           return article.url
-           } else {
-            return this.getUrl(article.title, article.identifier, tag);
-          }
+        articleUrl(article, tag) {
+            if (article.url) {
+                return article.url
+            } else {
+                return this.getUrl(article.title, article.identifier, tag);
+            }
         }
     },
     i18n: {

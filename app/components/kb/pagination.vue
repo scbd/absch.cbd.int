@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center text-center">
         <v-pagination v-if="recordCount>recordsPerPage" v-model="currentPage" 
         :per-page="recordsPerPage" :records="recordCount" @paginate="setPage()"></v-pagination>
     </div>

@@ -3,16 +3,14 @@ import Vue from 'Vue';
 
 export function formatDate(datetime, format) {
     if (format === undefined)
-        format = 'DD MMM YYYY HH:mm';
+        format = 'DD MMM YYYY  HH:mm';
 
     return formatMomentDate(datetime, 'format',format);
 }
-
 export function formatMomentDate(datetime, method, arg1, arg2, arg3) {
     if(datetime)
         return moment.utc(datetime)[method](arg1, arg2, arg3);    
 }
-
 export function lstring(ltext, locale) {
   
     if(Number.isInteger(ltext)) //is number to handle generic implementation of NR

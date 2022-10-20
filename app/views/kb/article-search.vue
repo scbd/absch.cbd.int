@@ -1,7 +1,5 @@
 <template>
   <div>
-    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
-
     <div class="knowledge-base">
       <search @changeSearch="onChangeSearch"></search>
       <section class="categories">
@@ -12,10 +10,6 @@
     </div>
   </div>
 </template>
-
-<style>
-@import url('app/css/vue/kb/style.css');
-</style>
 
 <script>
 

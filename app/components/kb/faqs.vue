@@ -2,28 +2,30 @@
     <div>
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-        <div class="mt-3 kb-faq" v-if="!loading">
-            <h2 class="fs-4 fw-bold">
+        <div v-if="!loading">
+            <h4 class="fs-4 fw-bold">
 				{{ $t("frequentlyAskedQuestions") }} 
 				<span v-if="faqFilterTag && faqFilterTag!='faq'">
 					{{ $t("for") }} <strong>{{faqFilterTag}}</strong></span> 
 				<strong>({{faqCount}})</strong>
 				<hr/>
-			</h2>
-            <main>
-                <details v-for="article in faqs" class="mb-2">
-                    <summary>{{article.title|lstring($locale)}}</summary>
-                    <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)"></div>                    
-					<div v-if="article.adminTags" class="detail-custom-tag">
-						<div class="tagcloud">
-							<a class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-						</div>
-					</div>
+			</h4>
+            <main class="mb-4">
+                <details v-for="article in faqs" class="card mb-3">
+                    <summary class="fs-5 p-2">
+						<span class="card-title">{{article.title|lstring($locale)}}</span>
+					</summary>
+                    <div class="p-2 faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)">
+					</div>   
+					<div v-if="article.adminTags" class="card-footer">
+                        <a v-for="tag in article.adminTags" type="button"
+                            class="btn btn-sm btn-outline-secondary m-1 me-2" :href="`${tagUrl(tag)}`">
+                            {{tag}}
+						</a>
+                    </div>
                 </details>
             </main>
-
         </div>
-
 		<div v-if="faqCount>10">
 			<paginate :records-per-page="recordsPerPage" :record-count="faqCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>
 		</div>
