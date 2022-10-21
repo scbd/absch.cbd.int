@@ -14,12 +14,12 @@
                         &nbsp;
                     </div>
 
-                    <div class="card-body border-top position-relative" style="min-height:80px;">
+                    <div class="card-body border-top position-relative overflow-scroll" style="min-height:80px;">
                         <a class="stretched-link text-dark text-decoration-none card-title" ng-href="{{article.url}}">
-                            <h6 class="fw-bold" style="overflow: hidden;"> <span
+                            <h6 class="fw-bold" > <span
                                     ng-bind="article.title | lstring:locale"></span></h6>
                         </a>
-                        <p class="card-text mt-2" style="overflow: hidden;"> <span
+                        <p class="card-text mt-2" > <span
                                 ng-bind="article.summary | lstring:locale"></span></p> 
                     </div>
                 </div>

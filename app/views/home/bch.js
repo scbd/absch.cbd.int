@@ -8,6 +8,12 @@ import bchHomeT from '~/app-text/views/home/bch.json';
 
 export default ['$scope', 'articlesService', '$rootScope', 'translationService', function ($scope, articlesService, $rootScope, translationService) {
         translationService.set('bchHomeT', bchHomeT);
+        
+        $scope.recordCount = 4;
+        if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
+          $scope.recordCount = 8;
+        }
+
         $scope.exportVueComponent = {
           components: { homepageRecords }
         }

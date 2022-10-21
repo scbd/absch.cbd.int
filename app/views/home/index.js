@@ -13,7 +13,12 @@ export { default as template } from './index.html';
 export default ['$scope','$rootScope', 'translationService', function ($scope, $rootScope, translationService) {
 
         translationService.set('absHomeT', absHomeT);
-       
+
+        $scope.recordCount = 4;
+        if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
+          $scope.recordCount = 8;
+        }
+        
         $scope.exportVueComponent = {
           components: { homepageRecords }
         }
