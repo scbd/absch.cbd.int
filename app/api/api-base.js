@@ -8,7 +8,7 @@ if(/\.cbddev\.xyz$/i.test(window.location.hostname)) sitePrefixUrl= 'https://api
 if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 
 const cache          = new Map()
-const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
+const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000, tokenReader: defaultTokenReader }
 
 export default class ApiBase
 {
@@ -80,4 +80,33 @@ export function mapObjectId(id){
 
 export function isObjectId(id){
   return /^[a-f0-9]{24}/i.test(id);
+}
+
+export function stringifyUrlParams(params){
+
+  if(typeof(params) != 'object')
+    return params;
+
+  params = { ...params };
+
+  const keys = Object.keys(params);
+
+  for(let key of keys) {
+
+    let val = params[key];
+
+    if(val===null)      continue;
+    if(val===undefined) continue;
+
+    if(typeof(val)=='object') val = JSON.stringify(val);
+
+    params[key] = val;
+  }
+
+  return params;
+}
+
+export function defaultTokenReader() {
+  const token = window?.Vue?.prototype?.$auth?.strategy?.token?.get();
+  return token ? { token } : null;
 }

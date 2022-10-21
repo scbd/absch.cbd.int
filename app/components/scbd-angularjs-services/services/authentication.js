@@ -133,6 +133,8 @@ import './apiUrl';
             else
                 pToken = undefined;
 
+            window?.Vue?.prototype?.$auth.setUserToken(token);
+
             return $q.when(authenticationFrameQ).then(function(authenticationFrame){
 
                 if(Vue?.prototype.$auth)
@@ -301,6 +303,9 @@ import './apiUrl';
 
             currentUser = user || undefined;
             $rootScope.user = user || anonymous();
+
+            if(window?.Vue.prototype.$auth)
+                window?.Vue?.prototype?.$auth?.setUser(currentUser)
             
 			if(Vue?.prototype.$auth)
                 Vue.prototype.$auth.setUser($rootScope.user);

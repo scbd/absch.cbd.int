@@ -19,6 +19,7 @@
     "ky": "0.26.0",
     "lodash": "4.17.15",
     "mime": "1.4.1",
+    "path-to-regexp": "^6.2.1",
     "superagent": "5.0.8"
   },
   "devDependencies": {

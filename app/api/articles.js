@@ -1,5 +1,5 @@
 
-import ApiBase, { tryCastToApiError } from './api-base';
+import ApiBase, { tryCastToApiError, stringifyUrlParams } from './api-base';
 
 export default class ArticlesApi extends ApiBase
 {
@@ -14,6 +14,9 @@ export default class ArticlesApi extends ApiBase
   }
 
   async queryArticles(params)  {
+
+    params = stringifyUrlParams(params);
+
     return this.http.get(`api/v2017/articles`, { params })
                     .then(res => res.data)
                     .catch(tryCastToApiError);
