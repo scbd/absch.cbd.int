@@ -1,4 +1,4 @@
-﻿import app from '~/app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./record-loader.directive.html';
 import '~/components/scbd-angularjs-services/main';
@@ -25,9 +25,9 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$rootScope', 'apiToken', 'translationService',
+		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', '$rootScope', 'apiToken', 'translationService', '$http',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $rootScope, apiToken, translationService) {
+		realm, $compile, searchService, IWorkflows, appLocale, solr, $rootScope, apiToken, translationService, $http) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -62,7 +62,7 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 					
 					$scope.$watch("document", function (_new) {
 						$scope.error = null;
-						if(!_new)return;// due to cache loaddocument calls first before the first watch on documents gets called.
+						if(!_new)return;// due to cache load document calls first before the first watch on documents gets called.
 						$scope.internalDocument 	= _new;
 						$scope.internalDocumentInfo = $scope.documentInfo || $scope.internalDocumentInfo;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
@@ -147,7 +147,10 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 					//==================================
 					//
 					//==================================
-					$scope.loadDocument = function (documentSchema, documentID, documentRevision) {
+					$scope.loadDocument = async function (documentSchema, documentID, documentRevision) {
+
+						const schemaName = $filter("mapSchema")(documentSchema);
+						const schema	 = realm.schemas[schemaName];
 
 						if (documentSchema &&
 							_.includes(["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
@@ -160,8 +163,14 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
-							const skipRealm = _.includes(['focalpoint', 'nfp'], (documentSchema||'').toLowerCase()) 
-							$scope.load(documentID, documentRevision, skipRealm);
+							let recordOwnerRealm;
+							if(schema.type == 'reference' || schemaName == 'focalPoint'){								
+								recordOwnerRealm = await hasChmRealm(documentID);
+								if(recordOwnerRealm){
+									$scope.recordOwnerRealm = recordOwnerRealm;
+								}
+							}
+							$scope.load(documentID, documentRevision, recordOwnerRealm);
 						}
 					};
 
@@ -177,15 +186,15 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 					//==================================
 					//
 					//==================================
-					$scope.load = function (identifier, version, skipRealm) {
+					$scope.load = function (identifier, version, otherRealm) {
 
 						$scope.error = undefined;
 						var qDocument;
 						var qDocumentInfo;
 						
 						var config = {};						
-						if(skipRealm)					
-							config.headers = {realm : undefined};
+						if(otherRealm)					
+							config.headers = {realm : otherRealm};
 
 						if (version == 'draft') {
 							qDocument = storage.drafts.get(identifier, undefined, config).then(function (result) { return result.data || result });
@@ -222,7 +231,7 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 							$scope.error = undefined;
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
-								$scope.load(identifier, 'draft', skipRealm);
+								$scope.load(identifier, 'draft', otherRealm);
 								$scope.error = error;
 							}								
 						})
