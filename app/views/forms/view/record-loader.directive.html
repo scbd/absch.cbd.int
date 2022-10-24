@@ -104,6 +104,9 @@
                 </button>
             </h3>
         </div>
+        <div class="alert alert-danger comapre-message" role="alert" ng-if="comparisonRecordNotFound">
+            {{::('recordLoaderT.comparisonRecordNotFound'|$translate)}}
+        </div>
 
         <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">
             <div>
