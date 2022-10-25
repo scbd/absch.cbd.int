@@ -54,7 +54,7 @@ export default {
     portalId()             { return this.$route.params.portalId; },
     introduction()         { return this.articles.find  (a=>a.adminTags.includes('introduction')) },
     calendarOfActivities() { return this.articles.find  (a=>a.adminTags.includes('calendar')) },
-    resources()            { return this.articles.filter(a=>!Object.values(Tags).some(t=>a.adminTags.includes(t))) },
+    resources()            { return this.articles.filter(a=>!Object.values(Tags).some(t=>a.adminTags.includes(t)) && !/^forum:/.test(a)) },
     menu()                 { return this.buildMenu() }
   },
   methods:{
@@ -65,6 +65,8 @@ export default {
     '$route': onRouteChange
   },
   async created() {
+
+    const { portalId } = this;
 
     this.articlesApi = new ArticlesApi();
     this.forumsApi   = new ForumsApi();
@@ -77,7 +79,7 @@ export default {
     });
 
     const qForums = this.forumsApi.queryForums({
-      q: { tags: ["realm:BCH"] }
+      q: { tags: ["realm:BCH", `portal:${portalId}` ] }
     });
 
     const [ articles, forums ] = await Promise.all([qArticles, qForums]);
@@ -97,26 +99,32 @@ function onRouteChange(route) {
 
   let component = match?.route?.component || PageNotFound;
 
-  while (this.$refs.view.firstChild) {
-      this.$refs.view.removeChild(this.$refs.view.lastChild);
+  while (this.$refs.view.firstChild) { //Cleanup view placeholder
+      const element  = this.$refs.view.lastChild;
+      const instance = element.$component;
+
+      this.$refs.view.removeChild(element);
+
+      if(instance) instance.$destroy();
   }
 
-  if(component) {
+  if(component) { // instanciate component into placeholder location
 
     const matchParams    = match?.params;
     const subRouteParams = match?.route?.params;
 
     const propsData      = { ...(routeParams||{}), ...(matchParams||{}), ...(subRouteParams||{}) }
     const ComponentClass = Vue.extend(component);
-    const instance       = new ComponentClass({ propsData });
+    const instance       = new ComponentClass({ parent: this, propsData });
     
-    instance.$mount();
+    this.$refs.view.appendChild(document.createElement('div'));
 
-    this.$refs.view.appendChild(instance.$el);
+    instance.$mount(this.$refs.view.lastChild);
+    instance.$el.$component = instance;
+
 
     if(document.documentElement.scrollTop > this.$refs.view.offsetTop)
         this.$refs.view.scrollIntoView();
-
   }
 }
 
@@ -144,7 +152,7 @@ function buildMenu() {
   }
 
   if(forums.length==1) {
-    const { forumId } = forums[0].forumId;
+    const { forumId } = forums[0];
     menu.menus.push({
       title : "Discussion Forum",
       url : `${basePath}${subRouter.compile('forum', { forumId })}`,

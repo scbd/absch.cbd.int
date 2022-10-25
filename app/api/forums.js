@@ -15,9 +15,17 @@ export default class ForumsApi extends ApiBase
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
-  async getForum(id)  {
+  
+  async getForum(forumId)  {
 
-    return this.http.get(`api/v2014/discussions/forums/${encodeURIComponent(id)}`)
+    return this.http.get(`api/v2014/discussions/forums/${encodeURIComponent(forumId)}`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async getThreads(forumId)  {
+
+    return this.http.get(`api/v2014/discussions/forums/${encodeURIComponent(forumId)}/threads`)
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }

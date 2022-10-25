@@ -1,51 +1,81 @@
 <template>
-    <div>
+  <div>
 
-      <Article v-if="article" :article="article"></Article>
+    <Article v-if="article" :article="article"></Article>
 
-      <div class="p-4 m-4" style="border:solid green 1px;">
-       Vue
-       {{date}}
-       <button @click="date='2022-01-01'">2022-01-01</button>
-       <button @click="date='2022-02-02'">2022-02-02</button>
-       <button @click="date='2022-03-03'">2022-03-03</button>
-       <input v-model="date">
-       <button @click="show=!show">{{show}}</button>
+    <div v-if="threads && threads.length" class=" mb-3">
+      <h3>TOC</h3>
+      <ul>
+        <li v-for="thread in threads" :key="thread.threadId">
+          <a :href="`#thread${thread.threadId}`">{{ thread.subject | lstring }}</a>
+        </li>
+      </ul>
+    </div>
 
-      <div v-if="show" class="p-4 m-4" style="border:solid red 1px;">
-        ANGULAR
-        <ng :date.sync="date">
-          <div v-pre>
-            <km-date ng-model="date"></km-date>
-            <input   ng-model="date">
-          </div>
-        </ng>
+
+    <div class="card mb-3" v-for="thread in threads" :key="thread.threadId">
+      <h5 class="card-header">
+        <a :name="`thread${thread.threadId}`"></a>
+        {{ thread.subject | lstring }}
+      </h5>
+      <div class="card-body">
+        <!-- <h5 class="card-title"></h5> -->
+        <p class="card-text" v-html="thread.htmlMessage"></p>
       </div>
-      
+      <div class="card-footer">
+        TODO Attachments
+      </div>
     </div>
 
-    </div>
-  </template>
+    <!-- <ng :forum-id="forumId" post-url="http://www" >
+        <div v-pre>
+          <forum-threads forum-id="forumId" post-url="postUrl"></forum-threads>
+        </div>
+      </ng> -->
+
+  </div>
+</template>
   
-  <script>
-
-import '~/components/scbd-angularjs-controls/form-control-directives/km-date.js';
+<script>
+import Article from '~/components/articles/article.vue';
+import ArticlesApi from '~/api/articles.js';
+import ForumsApi from '~/api/forums';
 import VueAngular from './vue-angular.js'
+import 'cbd-forums';
 
-  export default {
-    name:'Forum',
-    components: { ng: VueAngular },
-    data(){
-      return { 
-        date : '2022-10-20',
-        myPlaceholder:'hello',
-        show: true
-       }
-    },
-    props: {
-      forumId: Number
+export default {
+  name: 'Forum',
+  components: { ng: VueAngular, Article },
+  props: {
+    forumId: Number
+  },
+  data() {
+    return {
+      article: null,
+      threads: []
     }
+  },
+  computed: {
+    portalId() { return this.$route.params.portalId; },
+  },
+  async created() {
+
+    const { portalId, forumId } = this;
+
+    const tags = ["introduction", `forum:${forumId}`];
+
+    var ag = [{ $match: { adminTags: { $all: tags } } }];
+
+    const articlesApi = new ArticlesApi();
+    const forumsApi = new ForumsApi();
+
+    const [article] = await articlesApi.queryArticles({ ag });
+    const threads = await forumsApi.getThreads(forumId);
+
+    this.article = article;
+    this.threads = threads
   }
-  </script>
+}
+</script>
   
 
