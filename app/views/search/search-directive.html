@@ -404,44 +404,6 @@
             width: 70% !important;
         }
     </style>
-    <script type="text/ng-template" trados-translation="true" id="saveFilterDialog">
-
-         <div class="modal-header">
-            <h3 class="modal-title">
-                {{::('searchDirectiveT.saveFilter'|$translate)}}
-            </h3>
-        </div>
-        <div class="modal-body">
-            <form>
-                <fieldset>
-                    <div class="form-group">
-                        <label for="filterTitle">{{::('searchDirectiveT.filterTitle'|$translate)}}</label>
-                        <input if="filterTitle" type="text" ng-model="record.queryTitle" class="form-control" placeholder="{{::('searchDirectiveT.filterTitle'|$translate)}}" />
-                    </div>
-                    <div class="form-group">
-                        <label for="filters">Filters</label><br/>
-                        <span id="filters" ng-repeat="filter in record.filters mb-2 me-2">
-                            <span class="label label-info">
-                                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span><span ng-bind="filter.name"></span>
-                                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label for="sendEmail">
-                            <input type="checkbox" name="sendEmail" ng-model="record.sendEmail" />
-                             {{::('searchDirectiveT.email'|$translate)}}
-                        </label>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('searchDirectiveT.cancel'|$translate)}}</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="saveFilter()" ng-disabled="loading">{{::('searchDirectiveT.save'|$translate)}}</button>
-        </div>
-    </script>
-
     <div class="d-none">
         <span id="exportDisabledMessage">{{::('searchDirectiveT.exportDisabled'|$translate)}}</span>
     </div>
@@ -468,13 +430,6 @@
                 <p ng-repeat="error in errors" ng-bind="error"></p>
             </div>
         </div>
-        <span class="saved-filters-list" ng-repeat="filter in saveThisFilter">
-            <span ng-if="filter.type" class="label label-info">
-                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
-                <span ng-bind="getFilterName(filter.name)"></span>
-                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
-            </span>
-        </span>
         <div class="modal-footer">
             <!-- <button type="button" class="btn btn-default float-start" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('searchDirectiveT.cancel'|$translate)}}</button> -->
             <button type="button" class="btn btn-primary btn-sm px-3" aria-label="Save" ng-click="save(document)" ng-disabled="loading">{{::('searchDirectiveT.save'|$translate)}}</button>

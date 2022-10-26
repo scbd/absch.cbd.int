@@ -114,6 +114,7 @@
     <br>    
 
     <div class="clearfix d-inline-block"></div>
+    
     <div ng-if="loading" class="text-center mb-5"> <i class="fa fa-spinner fa-spin"></i> {{::('userAlertsT.loading'|$translate)}}</div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">
         <div class="alert  bg-grey mt-3" role="alert">

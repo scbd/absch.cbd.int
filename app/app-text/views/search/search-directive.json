@@ -33,7 +33,7 @@
     "cancel": "Cancel",
     "save": "Save",
     "exportDisabled": "Please wait for the query to finish before exporting.",
-    "createFilter": "Create or edit a saved search filter",
+    "createFilter": "Save search filter(s)",
     "title": "Title for this saved search:",
     "SearchTitle": "Search title",
     "searchClearingHouse": "Search the Clearing-House",

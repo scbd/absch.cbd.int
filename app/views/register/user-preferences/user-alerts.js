@@ -22,8 +22,8 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                 collectionFilter: '@?'
             },
             link: function ($scope, element, attrs) {},
-            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService', 'solr', 'locale', 'translationService',
-                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr, locale, translationService) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', 'searchService', 'roleService', '$route', '$element', 'localStorageService', 'solr', 'locale', 'translationService',
+                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, searchService, roleService, $route, $element, localStorageService, solr, locale, translationService) {
                     $scope.realm = realm;
                     $scope.user = $rootScope.user;
                     $scope.skipKeywordsFilter = false;
@@ -258,12 +258,13 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                                             }, 600);
                                             return;
                                         }
-
+                                        
                                         $scope.loading = true;
                                         var operation;
 
                                         document.isSystemAlert = false;
                                         //ToDo: will update as per API accepted format
+                                        //Duplicate Code exists in search-directive.js
                                         let userAlertSearchFilter = $scope.getLeftSubFilters();
                                         let leftFilterQuery = {}
                                         _.forEach(userAlertSearchFilter, function(filters, key){
@@ -278,6 +279,9 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                                         document.filters = _.values($scope.setFilters);
                                         document.subFilters = leftFilterQuery; // pass only selected sub-filters query 
                                         document.realm = realm.value;
+
+                                        document.solrQuery = buildSolrQuery()
+
                                         if (!document._id)
                                             operation = IGenericService.create('v2016', 'me/subscriptions', document);
                                         else
@@ -293,6 +297,26 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                                     $scope.closeDialog = function () {
                                         ngDialog.close();
                                     };
+
+                                    function buildSolrQuery(){
+        
+                                        const searchQuery = $scope.buildSearchQuery();
+                                        
+                                        var fieldQueries = _([searchQuery.tagQueries]).flatten().compact().value();
+        
+                                        if(!_.find(fieldQueries, function(q){ return ~q.indexOf('realm_ss:')})){
+                                            fieldQueries.push('realm_ss:' + realm.value.toLowerCase())
+                                        }
+        
+                                        var solrQuery = {
+                                            df    : searchService.localizeFields(searchQuery.df||'text_EN_txt'),
+                                            fq    : _(fieldQueries).flatten().compact().uniq().value(),
+                                            q     : searchQuery.query,
+                                            fl    : 'identifier_s',
+                                        }
+        
+                                        return solrQuery;
+                                    }
 
                                 }]
                             });
@@ -321,6 +345,7 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                                         }
                                     });
                             }
+
                         }
                     };
 

@@ -36,9 +36,10 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
                 'joyrideService', '$timeout', 'locale', 'solr', 'toastr', '$log', 'IGenericService', 'translationService',
+                'searchService',
             function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService, 
-                $timeout, locale, solr, toastr, $log, IGenericService, translationService) {
+                $timeout, locale, solr, toastr, $log, IGenericService, translationService, searchService) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
                             buildContactsUserCountryfn : buildContactsUserCountryfn
@@ -753,6 +754,12 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     };
                     $scope.canShowSaveFilter = function(){
                         return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
+                    }
+
+                    $scope.buildSearchQuery = buildSearchQuery;
+
+                    $scope.getLeftSubFilters = function(){
+                        return leftMenuFilters
                     }
 
                     function saveRawQueryFilter(query){
@@ -1486,7 +1493,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     }
 
                     function getSchemaFieldMapping(schema){
-                        return leftMenuSchemaFieldMapping[schema];
+                        return leftMenuSchemaFieldMapping && leftMenuSchemaFieldMapping[schema];
                     }
 
                     function onLeftFilterUpdate(filters){
@@ -1494,9 +1501,6 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         updateQueryResult();
                     }
 
-                    $scope.getLeftSubFilters = function(){
-                        return leftMenuFilters
-                    }
                     async function loadLeftMenuFieldMapping(){
                         
                         if(isABS) {
@@ -1509,7 +1513,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         }
                     }
 
-	                $scope.showSaveFilter = function ( filters ) {
+	                $scope.showSaveFilter = function () {
 
                         if (!$rootScope.user || !$rootScope.user.isAuthenticated ) {
                             var signIn = $scope.$on( 'signIn', function ( evt, data ) {
@@ -1520,17 +1524,18 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             $( '#loginDialog' ).modal( "show" );
                         } else {
 
+                            const selectedFilters = $scope.setFilters;
+                            const leftMenuFilters = $scope.getLeftSubFilters();
                             ngDialog.open({
                                 className: 'ngdialog-theme-default wide save-this-search-alert',
                                 template: 'saveMySearchDialog',
                                 controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
-                                    $scope.saveThisFilter = filters;
                                     $scope.save = function (document) {
                                         $scope.errors = [];
                                         if (!document || document.queryTitle == '') {
                                             $scope.errors.push('Please enter title of the alert')
                                         }
-                                        if (!$scope.saveThisFilter || _.isEmpty($scope.saveThisFilter)) {
+                                        if (!selectedFilters || _.isEmpty(selectedFilters)) {
                                             $scope.errors.push('Please select at least one filter')
                                         }
                                         if ($scope.errors && $scope.errors.length > 0) {
@@ -1544,23 +1549,24 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                         var operation;
 
                                         document.isSystemAlert = false;
+                                        //Duplicate Code exists in user-alerts.js
+                                        
                                         let leftFilterQuery = {}
-                                        _.forEach(leftMenuFilters, function(f, key){
-                                            _.forEach(f, function(filter){
-                                                if(!_.isEmpty(filter.selectedItems)){
+                                        _.forEach(leftMenuFilters, function(filters, key){
+                                            _.forEach(filters, function(filter){
+                                                 if(!_.isEmpty(filter.selectedItems)){
                                                     leftFilterQuery[key] = leftFilterQuery[key] || [];
                                                     const  {field, relatedField, searchRelated, term, title, type } = filter
                                                     leftFilterQuery[key].push({field, relatedField, searchRelated, selectedItems:filter.selectedItems, term, title, type});
                                                 }
                                             });
                                         });
-                                        document.filters = _.values($scope.saveThisFilter);
-                                        document.subFilters = leftFilterQuery; // pass only selected sub-filters query
+                                        document.filters = _.values(selectedFilters);
+                                        document.subFilters = leftFilterQuery; // pass only selected sub-filters query 
                                         document.realm = realm.value;
-                                        if (!document._id)
-                                            operation = IGenericService.create('v2016', 'me/subscriptions', document);
-                                        else
-                                            operation = IGenericService.update('v2016', 'me/subscriptions', document._id, document);
+                                        document.solrQuery = buildSolrQuery();
+                                        
+                                        operation = IGenericService.create('v2016', 'me/subscriptions', document);
 
                                         operation.then(function (data) {
                                             $scope.closeDialog();
@@ -1568,12 +1574,30 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                                 document._id = data.id;
                                         });
                                     };
-                                        $scope.getFilterName = function (name) {
-                                            return (typeof name === "object")?name[locale]:name;
-                                        }
                                     $scope.closeDialog = function () {
                                         ngDialog.close();
                                     };
+
+
+                                    function buildSolrQuery(){
+        
+                                        const searchQuery = buildSearchQuery();
+                                        
+                                        var fieldQueries = _([searchQuery.tagQueries]).flatten().compact().value();
+        
+                                        if(!_.find(fieldQueries, function(q){ return ~q.indexOf('realm_ss:')})){
+                                            fieldQueries.push('realm_ss:' + realm.value.toLowerCase())
+                                        }
+        
+                                        var solrQuery = {
+                                            df    : searchService.localizeFields(searchQuery.df||'text_EN_txt'),
+                                            fq    : _(fieldQueries).flatten().compact().uniq().value(),
+                                            q     : searchQuery.query,
+                                            fl    : 'identifier_s',
+                                        }
+        
+                                        return solrQuery;
+                                    }
 
                                 }]
                             });

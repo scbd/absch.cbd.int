@@ -40,11 +40,11 @@ import './solr';
                     }
 
                     var queryListParameters = {
-                        df    : localizeFields(searchQuery.df||'text_EN_txt'),
+                        df    : this.localizeFields(searchQuery.df||'text_EN_txt'),
                         fq    : _(fieldQueries).flatten().compact().uniq().value(),
                         q     : searchQuery.query,
-                        sort  : localizeFields(searchQuery.sort),
-                        fl    : localizeFields(searchQuery.fields),
+                        sort  : this.localizeFields(searchQuery.sort),
+                        fl    : this.localizeFields(searchQuery.fields),
                         wt    : 'json',
                         start : searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
                         rows  : searchQuery.rowsPerPage,
@@ -67,8 +67,6 @@ import './solr';
                             queryListParameters['facet.pivot']  = searchQuery.pivotFacetFields;
                     }
 
-                    // console.log("list:" + q + searchQuery.query);
-
                     return $http.post('/api/v2013/index/select', queryListParameters, { timeout: queryCanceler })
                             .then(function(data){
                                 if(searchQuery.facet){ /// Normalize Facets                                   
@@ -89,19 +87,19 @@ import './solr';
                         
                     // searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryGroupParameters = {
-                        df    : localizeFields(searchQuery.df||'text_EN_txt'),
+                        df    : this.localizeFields(searchQuery.df||'text_EN_txt'),
                         fq    : _(['realm_ss:' + appConfigService.currentRealm.toLowerCase()]).union(searchQuery.fieldQuery).flatten().compact().uniq().value(),
                         'q': searchQuery.query,
-                        'sort': localizeFields(searchQuery.sort),
-                        'fl': localizeFields(searchQuery.fields),
-                        'wt': 'json',
+                        'sort': this.localizeFields(searchQuery.sort),
+                        'fl'  : this.localizeFields(searchQuery.fields),
+                        'wt'  : 'json',
                         'start': searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
                         'rows': searchQuery.rowsPerPage,
                         'group': true,
                         'group.ngroups': true,
                         'group.field': searchQuery.groupField,
                         'group.limit': searchQuery.groupLimit,
-                        'group.sort': localizeFields(searchQuery.groupSort)
+                        'group.sort' : this.localizeFields(searchQuery.groupSort)
                     };
 
                     if(searchQuery.highlight){
@@ -273,7 +271,7 @@ import './solr';
                     return facets;
                 };
 
-                function localizeFields(fields){
+                this.localizeFields = function localizeFields(fields){
                     if(!fields)
                         return;
                         
@@ -283,7 +281,7 @@ import './solr';
 
                     return fields;
                 }
-
+                
                 this.readFacets = readFacets2;
 
             }
