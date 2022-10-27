@@ -164,7 +164,7 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 						}
 						else if (documentID) {
 							let recordOwnerRealm;
-							if(schema.type == 'reference' || schemaName == 'focalPoint'){								
+							if(schemaName && (schema.type == 'reference' || schemaName == 'focalPoint')){								
 								recordOwnerRealm = await hasChmRealm(documentID);
 								if(recordOwnerRealm){
 									$scope.recordOwnerRealm = recordOwnerRealm;
@@ -174,11 +174,11 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 						}
 					};
 
-					$scope.timeLaspe = 20;
+					$scope.timeLapse = 20;
 					function closeWindow() {
-						if ($scope.timeLaspe == 0)
+						if ($scope.timeLapse == 0)
 							window.close();
-						$scope.timeLaspe--;
+						$scope.timeLapse--;
 						$timeout(function () { closeWindow(); }, 1000)
 					}
 					
