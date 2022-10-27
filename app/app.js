@@ -4,10 +4,18 @@ import "angular-sanitize";
 import "angular-loggly-logger";
 import "angular-joyride";
 import "ngMeta";
-import { CreateAngularVuePlainPlugin,  AngularVueRouterPlugin } from 'angular-vue-plugins';
+
+import { 
+  CreateAngularVuePlainPlugin,  
+  AngularVueRouterPlugin, 
+  AngularVueRoutePlugin, 
+  AngularVuePlugin,
+  AngularVueDirective 
+//} from 'angular-vue-plugins';
+} from './tmp-angular-vue.js';
 import AngularVueAuthPlugin from '~/plugins/angular-vue-auth-plugin';
 
-var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", "angularVue"]));
+var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
   var logToConsole = true;
   LogglyLoggerProvider.includeUrl(true).includeUserAgent(true).includeTimestamp(true).sendConsoleErrors(true).logToConsole(logToConsole).ignoreMessageRegex(/\bDocument not found in the specified realm\b/).endpoint("/error-logs");
@@ -49,7 +57,7 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
 
 }]);
 
-
+app.directive('ngVue', AngularVueDirective);
 app.run(["realm", "locale", '$injector', 'authentication', function (realm, locale, $injector,authentication) {
 
   registerVuePlugin('$realm', realm);
@@ -58,6 +66,9 @@ app.run(["realm", "locale", '$injector', 'authentication', function (realm, loca
   registerVuePlugin('$ngApp', app);
   registerVuePlugin('$ngInjector', $injector);
 
+  const vueApp = new Vue({});
+
+  window.Vue.use(new AngularVuePlugin({ $injector, ngApp: app, vueApp }));
   window.Vue.use(new AngularVueAuthPlugin  ($injector));
   window.Vue.use(new AngularVueRoutePlugin ($injector));
   window.Vue.use(new AngularVueRouterPlugin($injector));
@@ -127,59 +138,3 @@ export const AngularVueAuthPlugin = ($injector) =>{
     }
 };
 export default app;
-
-
-function AngularVueRoutePlugin($injector) {
-
-  if(!$injector)
-      throw new Error('Angular $injector not provided, cannot use AngularVueRoutePlugin plugin');
-
-  const $location  = $injector.get('$location');
-  const $route     = $injector.get('$route');
-  const $rootScope = $injector.get('$rootScope');
-
-  if(!$location)
-      throw new Error('Angular $location service not available, cannot use AngularVueRoutePlugin plugin');
-  if(!$route)
-      throw new Error('Angular $route service not available, cannot use AngularVueRoutePlugin');
-
-  const observableRoute = window.Vue.observable({
-    _route : null
-  })
-
-  function updateRoute() {
-    const path   = $location.path();
-    const query  = { ...($location.search()    || {})};
-    const params = { ...($route.current?.params|| {})};
-
-    observableRoute._route = {
-      get path()   { return path; },
-      get query()  { return { ...query  }; },
-      get params() { return { ...params }; }
-    }
-  }
-
-  $rootScope.$on('$routeUpdate', ()=> { 
-    updateRoute();
-  })
-
-  if(!$route.current) { // initial route (at boot time)
-    const cancelWatch = $rootScope.$watch(()=>$route.current, (currentRoute)=>{
-      if(currentRoute===undefined) return;
-      cancelWatch();
-      updateRoute();
-    });
-  }
-
-  updateRoute();
-
-  return {
-      install(Vue, options) {
-          if(!Vue.prototype.$route) {
-            Object.defineProperty(Vue.prototype, '$route', {
-              get () { return observableRoute._route }
-            })
-          }
-      }
-    }
-};

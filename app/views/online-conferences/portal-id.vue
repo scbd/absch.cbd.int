@@ -16,8 +16,9 @@ import Vue from 'vue';
 import ArticlesApi from '~/api/articles';
 import ForumsApi from '~/api/forums';
 import SideMenu from '~/components/menus/side-menu.vue';
-import Forum from './forum-id.vue'
 import Article from './article-id.vue'
+import Forum from './forum-id.vue'
+import Thread from './thread-id.vue'
 import SubRouter from "../../services/router.js";
 import { compile }  from "path-to-regexp";
 import PageNotFound from '~/views/shared/404.vue';
@@ -28,7 +29,7 @@ const subRouter = new SubRouter([
   { path: '/:identifier(calendar)',           name : "calendar",  component: Article },
   { path: '/resources/:identifier',           name : "resources", component: Article },
   { path: '/forum/:forumId',                  name : "forum",     component: Forum },
-  { path: '/forum/:forumId/thread/:threadId', name : "thread",    component: Forum },
+  { path: '/forum/:forumId/thread/:threadId', name : "thread",    component: Thread },
 ]);
 
 const Tags = {
@@ -121,7 +122,6 @@ function onRouteChange(route) {
 
     instance.$mount(this.$refs.view.lastChild);
     instance.$el.$component = instance;
-
 
     if(document.documentElement.scrollTop > this.$refs.view.offsetTop)
         this.$refs.view.scrollIntoView();

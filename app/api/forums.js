@@ -29,4 +29,25 @@ export default class ForumsApi extends ApiBase
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
+
+  async getThread(threadId)  {
+
+    return this.http.get(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async getPosts(threadId)  {
+
+    return this.http.get(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/posts`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async getPost(postId)  {
+
+    return this.http.get(`api/v2014/discussions/posts/${encodeURIComponent(postId)}`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
 }
