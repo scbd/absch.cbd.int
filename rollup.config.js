@@ -89,8 +89,9 @@ function bundle(entryPoint, locale, baseDir='app') {
       dynamicImportVariables({ }),
       commonjs({ include: 'node_modules/**/*.js'}),
       nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
-      isWatchOn ? null : getBabelOutputPlugin({
+      getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+        plugins: ['@babel/plugin-proposal-class-properties'],
         allowAllFormats: true
       }),
       isWatchOn ? null : terser({ mangle: false }) // DISABLE IN DEV
