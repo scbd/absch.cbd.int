@@ -69,7 +69,9 @@ import viewAuthorityT from '~/app-text/views/forms/view/view-authority.json';
 				}
 
 				$scope.onOrganismTypesTerms = function(terms) {
-					if (($scope.document || {}).cpbOrganismTypes) {
+					if ($scope.document?.cpbOrganismTypes) {
+						const selectedIdentifiers = $scope.document.cpbOrganismTypes.map(e=>e.identifier);
+
 						_.forEach( terms, function ( item ) {
 							var root = _.find( $scope.document.cpbOrganismTypes, { identifier : '8DAB2400-CF00-44B2-ADCF-49AABF66B9B0' } );
 							if ( root ) {
@@ -78,9 +80,19 @@ import viewAuthorityT from '~/app-text/views/forms/view/view-authority.json';
 								} );
 							} else {
 								if ( item.narrowerTerms != undefined && item.narrowerTerms.length > 0 ) {
-									terms = _.filter( terms, function ( t ) {
-										return item.identifier != t.identifier;
-									} );
+
+									const narrowerSelected 	= _(selectedIdentifiers).intersection(item.narrowerTerms).value();
+									const selfSelected		= _.includes(selectedIdentifiers, item.identifier)
+									if(narrowerSelected.length){
+										terms = _.filter( terms, function ( t ) {
+											return item.identifier != t.identifier;
+										} );
+									}
+									else if (selfSelected){
+										terms = _.filter( terms, function ( t ) {
+											return !_.includes(item.narrowerTerms, t.identifier);
+										} );
+									}									
 								}
 							}
 						} );
