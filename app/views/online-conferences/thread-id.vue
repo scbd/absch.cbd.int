@@ -32,22 +32,33 @@
       <div v-if="!posts">Loading {{thread.replies}} replies...</div>
     </div>
 
-
-    <div v-for="post in posts" :key="post.postId">
-      <a :name="`post${post.postId}`"></a>
+    <div v-if="thread">
+      <em>{{thread.replies}} replie(s)</em>
       <hr>
+    </div>
 
-      <span class="float-end">#{{post.postId}}</span>
-      <h5 v-if="post.subject != thread.subject && post.subject != `RE: ${thread.subject}`">
-        {{ post.subject | lstring }}</span>
-      </h5>
-      <p class="float-none" v-html="post.htmlMessage"></p>
+    <div class="ms-4">
 
-      <span class="float-end">{{post.createdOn}}</span>
-      <em>{{post.createdBy}}</em>
-      <a v-if="post.replies">
-        - TODO: {{post.replies}} replies <i class="fa fa-caret-down"></i>
-      </a>
+      <div v-for="post in posts" :key="post.postId">
+        <a :name="`post${post.postId}`"></a>
+        <div class="mb-1">
+          <span class="float-end ms-1">#{{post.postId}}</span>
+          <span class="float-end ms-1">{{post.createdOn}}</span>
+          <em>{{post.createdBy}}</em>
+        </div>
+
+        <h5 v-if="post.subject != thread.subject && post.subject != `RE: ${thread.subject}`">
+          {{ post.subject | lstring }}
+        </h5>
+        <p class="float-none" v-html="post.htmlMessage"></p>
+        <div  v-if="post.replies" class="text-end">
+          <a>
+            - TODO: {{post.replies}} replies <i class="fa fa-caret-down"></i>
+          </a>
+        </div>
+
+        <hr>
+      </div>
     </div>
   </div>
 </template>
