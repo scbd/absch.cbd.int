@@ -15,14 +15,20 @@
 
       <span class="float-end">{{thread.createdOn}}</span>
       <em>{{thread.createdBy}}</em>
+
+
       <hr >
 
-      <h6>TODO Files</h6>
-      <ul class="list-unstyled">
-        <li><a href="#" class="card-link">Report of the Ad Hoc Technical Expert Group on Synthetic Biology</a></li>
-        <li><a href="#" class="card-link">Initial Matrix on indicators.docx</a></li>
-      </ul>
-
+      <div v-if="thread.attachmentCount">
+        <h6 class="card-subtitle mb-2 text-muted">File(s)</h6>
+        <ul class="list-unstyled">
+          <li v-for="attachment in thread.attachments" :key="attachment.attachmentId">
+            <a :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}`" class="card-link">
+              {{attachment.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
       <div v-if="!posts">Loading {{thread.replies}} replies...</div>
     </div>
 

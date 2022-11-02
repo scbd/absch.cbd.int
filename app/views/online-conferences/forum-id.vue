@@ -14,27 +14,35 @@
       </ul>
     </div>
 
-    <div class="card mb-3" v-for="thread in threads" :key="thread.threadId">
-      <h5 class="card-header">
-        <a :name="`thread${thread.threadId}`" :href="getThreadUrl(thread.threadId)">
-        {{ thread.subject | lstring }}
-        </a>
-      </h5>
-      <div class="card-body">
-        <!-- <h5 class="card-title"></h5> -->
-        <p class="card-text" v-html="thread.htmlMessage"></p>
 
-        <hr >
+    <div v-for="thread in threads" :key="thread.threadId">
+      <a :name="`thread${thread.threadId}`"></a>
+      <div class="card mb-3">
+        <h5 class="card-header">
+          <a :href="getThreadUrl(thread.threadId)" style="color:inherit">
+          {{ thread.subject | lstring }}
+          </a>
+        </h5>
+        <div class="card-body">
+          <!-- <h5 class="card-title"></h5> -->
+          <p class="card-text" v-html="thread.htmlMessage"></p>
 
-        <h6 class="card-subtitle mb-2 text-muted">Background document(s)</h6>
-        <ul class="list-unstyled">
-          <li><a href="#" class="card-link">TODO: Report of the Ad Hoc Technical Expert Group on Synthetic Biology</a></li>
-          <li><a href="#" class="card-link">TODO: Initial Matrix on indicators.docx</a></li>
-        </ul>
+          <div v-if="thread.attachmentCount">
+            <hr >
+            <h6 class="card-subtitle mb-2 text-muted">Background document(s)</h6>
+            <ul class="list-unstyled">
+              <li v-for="attachment in thread.attachments" :key="attachment.attachmentId">
+                <a :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}`" class="card-link">
+                  {{attachment.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
 
-      </div>
-      <div class="card-footer">
-        <a :href="getThreadUrl(thread.threadId)">{{thread.replies}} replies</a>
+        </div>
+        <div class="card-footer">
+          <a :href="getThreadUrl(thread.threadId)">{{thread.replies}} replies</a>
+        </div>
       </div>
     </div>
   </div>
@@ -83,6 +91,8 @@ export default {
     this.article = (await qArticle)[0];
     this.forum   =  await qForum;
     this.threads =  await qThreads
+    
+    this.$nextTick(()=>jumpToAnchor());
   }
 }
 
