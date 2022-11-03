@@ -66,7 +66,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.livingModifiedOrganism,
             "field": "modifiedOrganisms_ss"
@@ -332,7 +332,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.livingModifiedOrganism,
             "field": "modifiedOrganisms_ss"
@@ -493,7 +493,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.livingModifiedOrganism,
             "field": "modifiedOrganisms_ss"
@@ -636,7 +636,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.laboratoryDetectionDetectableLmos,
             "field": "detectableLmos_ss"
@@ -694,7 +694,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.livingModifiedOrganism,
             "field": "bchModifiedOrganisms_ss"
