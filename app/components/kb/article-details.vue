@@ -3,7 +3,7 @@
         <div class="row mt-3">
             <div class="col-lg-8">
                 <link type="text/css" rel="stylesheet"
-                    href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
+                    href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@35.0.0/build/content-style.css">
                 <div class="card shadow-sm mb-3">
                     <div v-if="article.coverImage">
                         <img class="card-img-top" v-bind:src="getSizedImage(article.coverImage.url, '800x800')">
