@@ -3,18 +3,18 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" ng-if="!horizontal">
             <!-- ToDo  style="height:256px" BS-5  -->
             <div class="col" ng-repeat="article in articles | orderBy:'meta.createdOn':true">
-                <div style="height:256px"
+                <div style="height:360px"
                     class="card my-2 position-relative shadow bg-white visited-background cursor-pointer">
 
                     <span class="badge bg-secondary position-absolute top-0 end-0"><span
                             ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
 
                     <div
-                        style="width:100%;height:200px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url, imageSize._400)}}');">
+                        style="width:100%;height:240px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url, imageSize._400)}}');">
                         &nbsp;
                     </div>
 
-                    <div class="card-body border-top position-relative overflow-scroll" style="min-height:80px;">
+                    <div class="card-body border-top position-relative" style="min-height:100px;">
                         <a class="stretched-link text-dark text-decoration-none card-title" ng-href="{{article.url}}">
                             <h6 class="fw-bold" > <span
                                     ng-bind="article.title | lstring:locale"></span></h6>
