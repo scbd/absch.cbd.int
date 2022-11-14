@@ -51,7 +51,7 @@
                    
                     <legend>{{::('countryProfileDirectiveT.selectMeasures'|$translate)}}</legend>
                     <table class="w-100">
-                        <tr ng-repeat="measure in schema.docs|orderBy:sortMeasure | SearchTerms:jd" class="py-1">
+                        <tr ng-repeat="measure in schema.docs|orderBy:sortMeasure" class="py-1">
                             <td class="align-top pe-2"><input type="checkbox" ng-model="measure.measureMatrix" class="ms-1 mt-2 p-3 float-start msr-chk" /></td>
                             <td><result-default doc="measure" external-link="true" type="national"></result-default></td>
                         </tr>
