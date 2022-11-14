@@ -315,7 +315,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                     if(mapCountry)//not sure if this is correct
                       mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.nonParty;
               }
-              mapCountry.originalColorReal = mapCountry.colorReal;
+              mapCountry.originalColorReal = mapCountry?.colorReal;
   
               if( $scope.isBCH && country.isParty && _.includes(['RS','GB'], country.code)){
                 var territoryCode =  country.code == 'RS' ? 'XK' : 'GI' 

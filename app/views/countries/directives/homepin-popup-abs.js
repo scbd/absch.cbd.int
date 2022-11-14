@@ -2,7 +2,7 @@ import app from '~/app';
 import template from './homepin-popup-abs.html';
 import homepinPopupAbsTranslation from '~/app-text/views/countries/directives/homepin-popup-abs.json';
 
-app.directive('homepinPopupAbs', ['translationService', '$routeParams', function(translationService, $routeParams){
+app.directive('homepinPopupAbs', ['translationService', '$routeParams', '$location', function(translationService, $routeParams, $location){
     return {
         restrict:'E',
         replace: true,
@@ -21,7 +21,7 @@ app.directive('homepinPopupAbs', ['translationService', '$routeParams', function
                     }
                 }
                 else{
-                    window.location.href = `countries/${currentCountryCode}/${code}`;
+                    $location.path(`countries/${currentCountryCode}/${code}`);
                 }
             }
         }
