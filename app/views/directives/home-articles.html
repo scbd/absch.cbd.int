@@ -2,10 +2,14 @@
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3" ng-if="!horizontal">
             <!-- ToDo  style="height:256px" BS-5  -->
-            <div class="col" ng-repeat="article in articles | orderBy:'meta.createdOn':true">
+            <div class="d-flex justify-content-center" ng-if="loading" style="width:100%;color:#fff">
+                <span >{{::('homeArticlesT.loading'|$translate)}}...&nbsp;</span>
+                <div class="spinner-border" role="status"></div>
+              </div>
+            <div class="col" ng-repeat="article in articles | orderBy:'meta.createdOn':true" ng-if="!loading && articles.length">
                 <div style="height:360px"
                     class="card my-2 position-relative shadow bg-white visited-background cursor-pointer">
-
+                    <a class="stretched-link text-dark text-decoration-none card-title" style="display: contents" ng-href="{{article.url}}"></a>
                     <span class="badge bg-secondary position-absolute top-0 end-0"><span
                             ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
 

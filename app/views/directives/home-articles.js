@@ -1,6 +1,8 @@
 import app from '~/app';
 import template from 'text!./home-articles.html';
 import '~/services/main';
+import homeArticlesT from '~/app-text/views/directives/home-articles.json'
+
         app.directive('homeArticles', function($http) {
             return {
                 restrict: 'EAC',
@@ -11,9 +13,10 @@ import '~/services/main';
                     counts: '@'
                 },
                
-                controller: ['$scope', '$http','$q', '$filter', '$location', 'articlesService', 'locale',
-                    function($scope, $http, $q, $filter, $location, articlesService, locale) {
+                controller: ['$scope', '$http','$q', '$filter', '$location', 'articlesService', 'locale', 'translationService',
+                    function($scope, $http, $q, $filter, $location, articlesService, locale, translationService) {
                       
+                        translationService.set('homeArticlesT', homeArticlesT);  
                         $scope.locale = locale;
                         $scope.status   = "loading";
                         $scope.error    = null;
@@ -27,7 +30,8 @@ import '~/services/main';
                         loadArticles();
                         //---------------------------------------------------------------------
                         function loadArticles(){
-                            const tag = $scope.tags||"absch-announcement";
+                            $scope.loading = true;
+                            const tag = $scope.tags;
                             var ag = [];
                             ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(tag)}]}});
                             ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
@@ -45,6 +49,7 @@ import '~/services/main';
                                     return e;
                                 });
                               })
+                              .finally(()=>$scope.loading = false)
 
                           }
                         //---------------------------------------------------------------------
