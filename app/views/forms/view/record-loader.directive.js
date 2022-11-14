@@ -25,9 +25,9 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$rootScope', 'apiToken', 'translationService',
+		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', '$rootScope', 'apiToken', 'translationService', '$http',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $rootScope, apiToken, translationService) {
+		realm, $compile, searchService, IWorkflows, appLocale, solr, $rootScope, apiToken, translationService, $http) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -62,7 +62,7 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 					
 					$scope.$watch("document", function (_new) {
 						$scope.error = null;
-						if(!_new)return;// due to cache loaddocument calls first before the first watch on documents gets called.
+						if(!_new)return;// due to cache load document calls first before the first watch on documents gets called.
 						$scope.internalDocument 	= _new;
 						$scope.internalDocumentInfo = $scope.documentInfo || $scope.internalDocumentInfo;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
@@ -147,7 +147,10 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 					//==================================
 					//
 					//==================================
-					$scope.loadDocument = function (documentSchema, documentID, documentRevision) {
+					$scope.loadDocument = async function (documentSchema, documentID, documentRevision) {
+
+						const schemaName = $filter("mapSchema")(documentSchema);
+						const schema	 = realm.schemas[schemaName];
 
 						if (documentSchema &&
 							_.includes(["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
@@ -160,16 +163,22 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
-							const skipRealm = _.includes(['focalpoint', 'nfp'], (documentSchema||'').toLowerCase()) 
-							$scope.load(documentID, documentRevision, skipRealm);
+							let recordOwnerRealm;
+							if(schemaName && (schema.type == 'reference' || schemaName == 'focalPoint')){								
+								recordOwnerRealm = await hasChmRealm(documentID);
+								if(recordOwnerRealm){
+									$scope.recordOwnerRealm = recordOwnerRealm;
+								}
+							}
+							$scope.load(documentID, documentRevision, recordOwnerRealm);
 						}
 					};
 
-					$scope.timeLaspe = 20;
+					$scope.timeLapse = 20;
 					function closeWindow() {
-						if ($scope.timeLaspe == 0)
+						if ($scope.timeLapse == 0)
 							window.close();
-						$scope.timeLaspe--;
+						$scope.timeLapse--;
 						$timeout(function () { closeWindow(); }, 1000)
 					}
 					
@@ -177,15 +186,15 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 					//==================================
 					//
 					//==================================
-					$scope.load = function (identifier, version, skipRealm) {
+					$scope.load = function (identifier, version, otherRealm) {
 
 						$scope.error = undefined;
 						var qDocument;
 						var qDocumentInfo;
 						
 						var config = {};						
-						if(skipRealm)					
-							config.headers = {realm : undefined};
+						if(otherRealm)					
+							config.headers = {realm : otherRealm};
 
 						if (version == 'draft') {
 							qDocument = storage.drafts.get(identifier, undefined, config).then(function (result) { return result.data || result });
@@ -222,7 +231,7 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 							$scope.error = undefined;
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
-								$scope.load(identifier, 'draft', skipRealm);
+								$scope.load(identifier, 'draft', otherRealm);
 								$scope.error = error;
 							}								
 						})
@@ -254,6 +263,7 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 					});
 
 					$scope.showDifference = async function(revision){
+						$scope.comparisonRecordNotFound = undefined;
 						if($scope.isComparing && !revision)return;
 	
 						if($scope.comparingRevision)// if comparingRevision has value meaning user compared a version, load the original document
@@ -270,10 +280,26 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 									directiveHtml 	: directiveHtml.replace("ng-model='internalDocument'", "ng-model='prevDocument'")
 								}
 							})
-							storage.documents.get($scope.internalDocumentInfo.identifier + '@' + (revision||$scope.internalDocumentInfo.latestRevision))
+							let config;
+							if($scope.recordOwnerRealm){
+								config = {
+									headers : { realm : $scope.recordOwnerRealm}
+								}
+							}
+							storage.documents
+							.get($scope.internalDocumentInfo.identifier + '@' + (revision||$scope.internalDocumentInfo.latestRevision), undefined, config)
 							.then(function (result) { 
 								$scope.prevDocument = result.data
-							}).then(compareWithPrev)	
+							})
+							.then(compareWithPrev)	
+							.catch(e=>{
+								if((e.data||e).statusCode == 404)
+									$scope.comparisonRecordNotFound = true;
+								// else ignore								
+							})
+							.finally(()=>{
+								$scope.isComparing = false;
+							})
 						}	
 						else{
 							$scope.showDifferenceOn = false;
@@ -479,6 +505,25 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 						if(schema == 'countryProfile'                   ){ return await import('~/views/forms/view/bch/view-country-profile.directive') };
 						if(schema == 'submission'                       ){ return await import('~/views/forms/view/view-submission.directive') };
 
+					}
+
+					async function hasChmRealm(identifier){
+						let query = `identifier_s:${solr.escape(identifier)}`
+						if(!isNaN(identifier))
+							query += ` OR _documentId_i:${solr.escape(identifier)}`
+						const queryParameters = {
+							q : `_state_s:public AND (${query})`,
+							fl : 'realm_ss'
+						};
+
+						const result = (await  $http.post('/api/v2013/index', queryParameters)).data;
+
+						if(result.response.docs.length){
+							const chmRealm = result.response.docs[0].realm_ss.filter(e=>/^CHM\\b|$/i.test(e));
+
+							if(chmRealm.length)
+								return chmRealm[0];
+						}
 					}
 
 					$scope.api = {

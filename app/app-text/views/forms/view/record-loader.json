@@ -32,5 +32,6 @@
     "comparing": "Comparing",
     "loading": "Loading...",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "comparisonRecordNotFound" : "The version of the record to compare was not found."
 }

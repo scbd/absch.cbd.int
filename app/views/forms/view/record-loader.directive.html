@@ -32,7 +32,7 @@
             </br>
             </br>
             </br>
-            {{::('recordLoaderT.closeAutomatically'|$translate)}} <span ng-bind="timeLaspe"></span> {{::('recordLoaderT.seconds'|$translate)}}
+            {{::('recordLoaderT.closeAutomatically'|$translate)}} <span ng-bind="timeLapse"></span> {{::('recordLoaderT.seconds'|$translate)}}
         </div>
 
         <div class="jumbotron bg-white" role="alert" ng-if="documentError">
@@ -103,6 +103,9 @@
                     ng-click="closeComparison()"> {{::('recordLoaderT.closeComparison'|$translate)}}
                 </button>
             </h3>
+        </div>
+        <div class="alert alert-danger comapre-message" role="alert" ng-if="comparisonRecordNotFound">
+            {{::('recordLoaderT.comparisonRecordNotFound'|$translate)}}
         </div>
 
         <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">

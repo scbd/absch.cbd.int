@@ -221,16 +221,12 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                    $q.when(commonjs.getCountries())
                    .then(function(data){
                        $scope.protocolCountries = [];
-                       if($scope.isBch)
-                            $scope.supProtocolCountries = [];
                        _.forEach(data, function(country){
                             $scope.protocolCountries[country.code.toLowerCase()] = {
-                                title : country.name, isProtocolParty : country.isParty, code : country.code.toLowerCase()
-                            }
-                            if($scope.isBch){
-                                $scope.supProtocolCountries[country.code.toLowerCase()] = {
-                                    title : country.name, isNKLSParty : country.isNKLSParty, code : country.code.toLowerCase()
-                                }
+                                title : country.name, 
+                                isProtocolParty : country.isParty, 
+                                code : country.code.toLowerCase(),
+                                isNKLSParty : country.isNKLSParty
                             }
                        });
                    })

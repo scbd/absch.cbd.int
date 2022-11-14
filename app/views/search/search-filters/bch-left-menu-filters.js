@@ -66,7 +66,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.livingModifiedOrganism,
             "field": "modifiedOrganisms_ss"
@@ -99,10 +99,10 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:commonNames_RU_ss,url_ss",
-                "fq": [ "schema_s:organism AND commonNames_RU_ss:*"],
+                "fl": "identifier_s,rec_title:commonNames_EN_ss,url_ss",
+                "fq": [ "schema_s:organism AND commonNames_EN_ss:*"],
                 "searchFields":["commonNames_EN_txt"],
-                "s":"commonNames_RU_ss asc"
+                "s":"commonNames_EN_ss asc"
             },
             "title": bchFilters.ParentalOrganismCommonName,
             "field": "lmoIdentifiers_ss",
@@ -265,7 +265,7 @@ export const bchLeftMenuFilters = {
                 "fl": "identifier_s,rec_title:commonNames_EN_txt,url_ss",
                 "fq": [ "schema_s:organism AND commonNames_EN_txt:*"],
                 "searchFields":["commonNames_EN_txt"],
-                "s":"commonNames_RU_ss"
+                "s":"commonNames_EN_ss asc"
             },
             "title": bchFilters.dnaSequenceDonorCommonNames,
             "field": "geneDonorOrganismsIdentifiers_ss"
@@ -276,7 +276,7 @@ export const bchLeftMenuFilters = {
                 "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
                 "searchFields":["scientificName_t"],
-                "s":"scientificName_s"
+                "s":"scientificName_s asc"
             },
             "title": bchFilters.dnaSequenceDonorScientificNames,
             "field": "geneDonorOrganismsIdentifiers_ss"
@@ -332,7 +332,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.livingModifiedOrganism,
             "field": "modifiedOrganisms_ss"
@@ -493,7 +493,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.livingModifiedOrganism,
             "field": "modifiedOrganisms_ss"
@@ -636,7 +636,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.laboratoryDetectionDetectableLmos,
             "field": "detectableLmos_ss"
@@ -694,7 +694,7 @@ export const bchLeftMenuFilters = {
             "type": "solrRecords",
             "query": {
                 "fq": [ "schema_s:modifiedOrganism"],
-                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
+                "searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "transformationEvent_t", "text_EN_txt"]
             },
             "title": bchFilters.livingModifiedOrganism,
             "field": "bchModifiedOrganisms_ss"
