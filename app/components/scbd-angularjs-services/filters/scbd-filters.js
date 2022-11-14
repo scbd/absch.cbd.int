@@ -466,7 +466,7 @@ import '../services/locale';
     };
 
   }]);
-  
+   
   function normalizeText(text) {
 
 		if(!text) return null;
