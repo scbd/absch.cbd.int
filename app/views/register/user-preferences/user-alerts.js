@@ -47,16 +47,6 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                             title : userAlertsT.systemOverviewFilterTitle
                         }
                     }
-                    const systemQueries = {
-                        recordsOverview : {
-                            filters : [{
-                                    "type": "recordsOverview",
-                                    "id": "recordsOverview"
-                                }
-                            ],
-                            title : userAlertsT.systemOverviewFilterTitle
-                        }
-                    }
 
                     //==============================================================
                     function loadSavedFilters() {
