@@ -6,9 +6,10 @@ import '~/views/directives/party-status';
 import './result-default';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import viewResultT from '~/app-text/views/search/search-results/view-result.json';
+import {exportRecords} from './export'
 
-app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', 'solr', 'translationService', 
-        function (searchService, realm, $timeout, $location, $q, solr, translationService) {
+app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', '$http', 'translationService', 
+        function (searchService, realm, $timeout, $location, $q, $http, translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -22,7 +23,9 @@ app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$
                 translationService.set('viewResultT', viewResultT);
                 $scope.recordLoader = {};
                 $scope.api = {
-                    updateResult : updateResult
+                    updateResult : updateResult,
+                    onExport     : onExport,
+                    isBusy       : false
                 };
                 $scope.searchResult = {
                     schemas    : realm.schemas,
@@ -188,7 +191,8 @@ app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$
                             $scope.searchResult.sortBy      = lQuery.sort;
                             $scope.searchResult.facetFields = lQuery.facetFields;
                             $scope.searchResult.currentPage = pageNumber;
-                            
+
+                            $scope.searchResult.queryOptions= options;                            
                             $scope.searchResult.groupOptions= options;
                             $scope.searchResult.groupSort = lQuery.groupSort
 
@@ -270,6 +274,15 @@ app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$
 
                 }
 
+                async function onExport(options){
+
+                    if($scope.loading)
+                        return;
+                    
+                    return exportRecords(options, realm, searchService, 
+                            { queryOptions : $scope.searchResult.queryOptions, sort:$scope.searchResult.sort  } , $http);
+
+                }
                 function groupFieldQuery(group){
                     var parentField = '';
                     if(group.parent)

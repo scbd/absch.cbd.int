@@ -502,16 +502,19 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         let isGeneric = true;
                         let schema;
                         const filters = getSelectedFilters('schema');
+                        
+                        if(viewType == 'default' && $scope.searchResult.currentTab == 'nationalRecords')
+                            viewType = 'group';
+                            
                         if(filters.length == 1 && !filters[0].excludeResult && !filters[0].disabled){
                             isGeneric = false;
                             schema    = filters[0].id
                         }
-                        if(['default', 'list', 'group'].includes(viewType)){
+                        if(['default', 'list'].includes(viewType)){
                             return $scope.searchResult.listViewApi.onExport({listType, fields, isGeneric, schema, format, fileName});
                         }
                         else if(viewType == 'group'){
-                            return $scope.searchResult.listViewApi.onExport({listType, fields, isGeneric, schema, format, fileName});
-                            // resultQuery = $scope.searchResult.groupViewApi.export(queryOptions, sortFields, pageNumber||1);
+                            return $scope.searchResult.groupViewApi.onExport({listType, fields, isGeneric, schema, format, fileName});
                         }
                         else if($scope.searchResult.viewType == 'matrix'){
                             if($scope.searchResult.matrixViewApi.isBusy)
