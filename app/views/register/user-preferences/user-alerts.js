@@ -7,6 +7,7 @@ import '~/services/main';
 import '~/views/register/directives/register-top-menu';
 import '~/components/scbd-angularjs-services/main';
 import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.json';
+import frequencies from '~/app-text/views/register/user-preferences/frequency.json'
 
     app.directive("userAlerts", ['$rootScope', 'ngDialog', '$routeParams', function ($rootScope, ngDialog, $routeParams) {
 
@@ -21,10 +22,9 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                 collectionFilter: '@?'
             },
             link: function ($scope, element, attrs) {},
-            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService', 'solr', 'locale', 'translationService',
-                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr, locale, translationService) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', 'searchService', 'roleService', '$route', '$element', 'localStorageService', 'solr', 'locale', 'translationService',
+                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, searchService, roleService, $route, $element, localStorageService, solr, locale, translationService) {
                     $scope.realm = realm;
-                    var systemSearches = [];
                     $scope.user = $rootScope.user;
                     $scope.skipKeywordsFilter = false;
                     $scope.skipKeywordsFilter = true; // ToDo: remove one skipKeywordsFilter
@@ -33,39 +33,18 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                     $scope.systemAlertsSubscription = [];
                     $scope.isABS = realm.is('ABS');
                     $scope.isDeleteAllow = false ;
+                    $scope.frequencies = frequencies;
+                    $scope.userSettings = {};
                     translationService.set('userAlertsT', userAlertsT); 
-                    if ($scope.user?.government) {
-                        if($scope.isABS){
-                            systemSearches = [{
-                                system: true,
-                                "filters": [{
-                                    "type": "custom",
-                                    "isSystemAlert":"true",
-                                    "name": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                                    "id": "entitiesToWhomPICGrantedCountry",
-                                    "query": 'entitiesToWhomPICGrantedCountry_ss:' + $scope.user.government
-                                }],
-                                "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                                "meta": {
-                                    "createdOn": moment.utc().format()
+                    
+                    const systemQueries = {
+                        recordsOverview : {
+                            filters : [{
+                                    "type": "recordsOverview",
+                                    "id": "recordsOverview"
                                 }
-                            }];
-                        }
-                        if (roleService.isPublishingAuthority() ||
-                            roleService.isNationalAuthorizedUser() ||
-                            roleService.isNationalFocalPoint()) {
-
-                            $scope.showSystemAlerts = true;
-                            var query = {
-                                realm: realm.value,
-                                isSystemAlert: true,
-                                $or : [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}]
-                            };
-    
-                            IGenericService.query('v2016', 'me/subscriptions', query)
-                                .then(function (data) {
-                                    $scope.systemAlertsSubscription = data;
-                            });
+                            ],
+                            title : userAlertsT.systemOverviewFilterTitle
                         }
                     }
 
@@ -83,24 +62,35 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                                 query = JSON.parse($scope.collectionFilter);
                                 $scope.loading = true;
                                 query.realm = realm.value;
-                                query['$or'] = [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}];
+                                query['$and'] = [
+                                    { $or : [{ isSystemAlert : false},{ isSystemAlert :{$exists: false}}]},
+                                    { $or : [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}]}
+                                ]
                             } 
                             IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {
-                                    // if ($scope.collection == "search-queries" && $scope.user.government) {
-                                    //     _.first(systemSearches).filters[0].query += $scope.user.government;
-                                    //     $scope.userFilters = _.union(systemSearches, data);
-                                    // } else
                                     $scope.loading = false;
                                     $scope.userFilters = data;
                                 });
+
+                            var overviewAlertQuery = {
+                                realm: realm.value,
+                                isSystemAlert: true,
+                                $or : [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}],
+                                'filters.type': 'recordsOverview',
+                            };
+
+                            IGenericService.query('v2016', 'me/subscriptions', overviewAlertQuery)
+                                .then(function (data) {
+                                    $scope.systemAlertsSubscription = data;
+                            });
                         }
                     }
 
                     //==============================================================
                     $rootScope.$on('signIn', function (evt, user) {
                         $scope.user = user;
-                        loadSavedFilters();
+                        init();
                     });
 
                     //==============================================================
@@ -113,7 +103,7 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
 
                      //==============================================================
                      $scope.runSystemFilter = function () {
-                        $scope.runFilter(systemSearches[0].filters);
+                        // $scope.runFilter();
                      }
                     //==============================================================
                     $scope.runFilter = function (id)
@@ -137,29 +127,26 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
 
                     //==============================================================
                     $scope.hasUserSubscribed = function (event) {
-                        return $scope.systemAlertsSubscription &&
-                            _.some($scope.systemAlertsSubscription, function (alert) {
+                        
+                        const query = systemQueries[event];
+                        const hasSubscribed = $scope.systemAlertsSubscription &&
+                            $scope.systemAlertsSubscription.find(alert=>{
                                 return alert.isSystemAlert &&
-                                    _.includes(_.map(alert.filters, 'id'), event);
+                                    alert.filters.find(e=>e.id == event && e.type == query.filters[0].type);
                             });
+
+                            return hasSubscribed;
                     };
 
                     //==============================================================
                     $scope.subscribe = function (event) {
+                       
                         var document = {
-                            queryTitle: event + " system alert",
+                            queryTitle: systemQueries[event].title,
                             isSystemAlert: true,
                             realm: realm.value,
                             sendEmail: true,
-                            filters: [{
-                                    "type": "national",
-                                    "id": event
-                                },
-                                {
-                                    "type": "country",
-                                    "id": $scope.user.government
-                                }
-                            ]
+                            filters: systemQueries[event].filters
                         };
                         IGenericService.create('v2016', 'me/subscriptions', document)
                             .then(function (data) {
@@ -203,12 +190,13 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                     //==============================================================
                     $scope.unsubscribe = function (event) {
                         if ($scope.systemAlertsSubscription) {
-                            var event = _.find($scope.systemAlertsSubscription, function (alert) {
+                            const query = systemQueries[event];
+                            var event =  $scope.systemAlertsSubscription.find(alert=>{
                                 return alert.isSystemAlert &&
-                                    _.includes(_.map(alert.filters, 'id'), event);
-                            })
+                                    alert.filters.find(e=>e.id == event && e.type == query.filters[0].type)
+                            });
                             IGenericService.delete('v2016', 'me/subscriptions', event._id)
-                                .then(function (event) {
+                                .then(function (result) {
                                     $scope.systemAlertsSubscription
                                         .splice($scope.systemAlertsSubscription.indexOf(event), 1)
                                 });
@@ -270,12 +258,13 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                                             }, 600);
                                             return;
                                         }
-
+                                        
                                         $scope.loading = true;
                                         var operation;
 
                                         document.isSystemAlert = false;
                                         //ToDo: will update as per API accepted format
+                                        //Duplicate Code exists in search-directive.js
                                         let userAlertSearchFilter = $scope.getLeftSubFilters();
                                         let leftFilterQuery = {}
                                         _.forEach(userAlertSearchFilter, function(filters, key){
@@ -290,6 +279,9 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                                         document.filters = _.values($scope.setFilters);
                                         document.subFilters = leftFilterQuery; // pass only selected sub-filters query 
                                         document.realm = realm.value;
+
+                                        document.solrQuery = buildSolrQuery()
+
                                         if (!document._id)
                                             operation = IGenericService.create('v2016', 'me/subscriptions', document);
                                         else
@@ -305,6 +297,26 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                                     $scope.closeDialog = function () {
                                         ngDialog.close();
                                     };
+
+                                    function buildSolrQuery(){
+        
+                                        const searchQuery = $scope.buildSearchQuery();
+                                        
+                                        var fieldQueries = _([searchQuery.tagQueries]).flatten().compact().value();
+        
+                                        if(!_.find(fieldQueries, function(q){ return ~q.indexOf('realm_ss:')})){
+                                            fieldQueries.push('realm_ss:' + realm.value.toLowerCase())
+                                        }
+        
+                                        var solrQuery = {
+                                            df    : searchService.localizeFields(searchQuery.df||'text_EN_txt'),
+                                            fq    : _(fieldQueries).flatten().compact().uniq().value(),
+                                            q     : searchQuery.query,
+                                            fl    : 'identifier_s',
+                                        }
+        
+                                        return solrQuery;
+                                    }
 
                                 }]
                             });
@@ -333,6 +345,7 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                                         }
                                     });
                             }
+
                         }
                     };
 
@@ -341,8 +354,67 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                             return name[locale]
                         else return name;
                     }
+                    
 
-                    loadSavedFilters();
+                    $scope.updateFrequency = async function(alertFrequency){
+                        $scope.userSettings.alertFrequency = alertFrequency;
+
+                        await updateUserSettings($scope.userSettings);
+                    };
+
+                    async function init(){
+                        $scope.updating = true;
+                        try{
+                            loadSavedFilters();
+                            const settings = await $http.get('/api/v2016/settings/'+`${realm.value}-${$scope.user.userID}`);
+                            
+                            if(settings)
+                                $scope.userSettings = settings.data;
+                        }
+                        catch(e){
+                            if(e.status != 404)
+                                safeApply(()=>$scope.error = e.data);
+                        }
+                        finally{
+                            safeApply(()=>$scope.updating = false);
+                        }
+                    }
+
+                    async function updateUserSettings(data){
+                        if(!data.realm)
+                            data.realm = realm.value;
+                        
+                        //backend schema was changed to consolidated all setting..to have ch based setting only, create realm + user userID
+                        if(!data.userId)
+                            data.userId = `${realm.value}-${$scope.user.userID}`;
+                                                    
+                        $scope.updating = true;
+                        $scope.error = undefined;
+
+                        try{
+                            let settingPromise;
+                            if(data._id)
+                                settingPromise = $http.put('/api/v2016/settings/'+data.userId, data);
+                            else
+                                settingPromise = $http.post('/api/v2016/settings', data);
+
+                            const settingResponse = await settingPromise;
+                            if(settingResponse.status == 200 && settingResponse.data.id)
+                                $scope.userSettings._id =  settingResponse.data.id;
+                        }
+                        catch(e){
+                            safeApply(()=>$scope.error = e.data);
+                        }
+                        finally{
+                            safeApply(()=>$scope.updating = false);
+                        }
+
+                    }
+                    function safeApply(fn) {
+                        ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
+                    } 
+
+                    init();
                 }
             ]
         };

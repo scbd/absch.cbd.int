@@ -89,7 +89,7 @@ function bundle(entryPoint, locale, baseDir='app') {
       dynamicImportVariables({ }),
       commonjs({ include: 'node_modules/**/*.js'}),
       nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
-      getBabelOutputPlugin({
+      isWatchOn ? null : getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
         allowAllFormats: true
       }),

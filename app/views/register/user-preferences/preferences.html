@@ -2,22 +2,16 @@
 
 	<span register-top-menu></span>
 
-	<div class="innerPageContent register-content card card-1-notrans m-0 p-3 mb-5">
-
+	<div class="innerPageContent register-content m-0 p-3">
+		
 		<div class="register-content-header bg-secondary text-white">
 			<div class="p-2">
-				<h3>{{::('preferencesT.userPreferences'|$translate)}}</h3>
+				<h3>{{::('preferencesT.alertsTab'|$translate)}}</h3>
 			</div>
 		</div>
 
 		<div class="p-2 bg-white">
-			<h1 class="border-bottom my-4">
-				{{::('preferencesT.emailNotification'|$translate)}} <small class="fs-6">{{::('preferencesT.keepUpToDate'|$translate)}}</small>
-			</h1>
-
-			<user-alerts  collection="subscriptions" collection-filter='{{alertFilter}}'
-			 run-query="runFilter(filter)"></user-alerts>
-
+			<user-alerts  collection="subscriptions" collection-filter='{{alertFilter}}' run-query="runFilter(filter)"></user-alerts>
 		</div>
 
 	</div>
