@@ -340,8 +340,8 @@ import './apiUrl';
         return {
             request: function(config) {
 
-                var trusted = /^https:\/\/api.cbd.int\//i.test(config.url) ||
-                    /^https:\/\/localhost[:\/]/i.test(config.url) ||
+                var trusted = /^https:\/\/*.(cbd.int|cbddev.xyz)\//i.test(config.url) ||
+                    /^http:\/\/localhost[:\/]/i.test(config.url) ||
                     /^\/\w+/i.test(config.url);
 
                 var hasAuthorization = (config.headers || {}).hasOwnProperty('Authorization') ||
@@ -382,7 +382,7 @@ import './apiUrl';
 
         return {
             request: function(config) {
-
+                
                 if(config && config.params && config.params.skipRealmHeader){
                     config.params.skipRealmHeader   = undefined;
                     config.headers.realm            = undefined;
@@ -394,9 +394,8 @@ import './apiUrl';
                 if((config.headers || {}).hasOwnProperty('realm'))
                     return config;
 
-                var trusted = /^https:\/\/api.cbd.int\//i.test(config.url) ||
-                /^https:\/\/eunomia.cbd.int\//i.test(config.url) ||
-                    /^https:\/\/localhost[:\/]/i.test(config.url) ||
+                var trusted = /^https:\/\/*.(cbd.int|cbddev.xyz)\//i.test(config.url) ||
+                    /^http:\/\/localhost[:\/]/i.test(config.url) ||
                     /^\/\w+/i.test(config.url);
 
                if (trusted && realm) {

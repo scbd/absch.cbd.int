@@ -281,8 +281,7 @@ import './solr';
 
                     return fields;
                 }
-                
-                this.readFacets = readFacets2;
+                this.readFacets     = readFacets2;
 
             }
         }

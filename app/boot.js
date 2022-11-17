@@ -207,7 +207,10 @@ export default function bootApp(window, require, defineX) {
         return Plotly;
     });
 
-    defineX('vue', ['Vue'], function(Vue){ return Vue; });    
+    defineX('vue', ['Vue'], function(Vue){
+        Vue.config.devtools = true;
+        return Vue; 
+    });    
     defineX('Vue', [cdnHost +'vue@2.6.12/dist/vue.min.js', 'vue-i18n'], function(Vue, i18n){
         window.Vue = Vue;
         window.VueI18n = i18n;
