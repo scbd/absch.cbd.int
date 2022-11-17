@@ -12,7 +12,7 @@
     "edit": "Edit",
     "rejectNotDelete": "Reject (do not delete)",
     "reject": "Reject",
-    "delete": "Delete",
+    "delete": "Approve Deletion",
     "cancelRequest": "Cancel request",
     "workFlowAssign": "The workflow is assigned to following users",
     "visible": "visible only to admin users",
