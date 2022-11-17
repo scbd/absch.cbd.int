@@ -20,7 +20,7 @@
         <i ng-if="::item.language">
             [
                 <span ng-if="::(locales[item.language]||locales['lang-'+item.language])"  ng-bind="::locales[item.language]||locales['lang-'+item.language]"></span>
-                <span ng-if="::!(locales[item.language]||locales['lang-'+item.language])" ng-bind="::getNonUNLanguage(item.language)|term:locale"></span>
+                <span ng-if="::!(locales[item.language]||locales['lang-'+item.language])" ng-bind="(getNonUNLanguage(item.language)|term:locale)"></span>
             ]
         </i>
     </script>
