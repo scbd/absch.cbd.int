@@ -53,16 +53,16 @@
                             <span >{{::('taskIdT.edit'|$translate)}}</span>
                         </button>
                         </div>
+                        <div style="display:inline;padding:5px;"  ng-show="activity.name == 'deleteRecord'">
+                                <button type="button" class="btn btn-danger bold" ng-click="confirmDelete()" ng-disabled="isUpdating">
+                                <span >{{::('taskIdT.delete'|$translate)}}</span>
+                            </button>
+                        </div>
                         <div style="display:inline;padding:5px;" >
                             <button type="button" class="btn btn-warning bold" ng-click="showRejectDialog()" ng-disabled="isUpdating">
                            <span ng-if="activity.name == 'deleteRecord'" >{{::('taskIdT.rejectNotDelete'|$translate)}}</span>
                            <span ng-if="activity.name != 'deleteRecord'" >{{::('taskIdT.reject'|$translate)}}</span>
                         </button>
-                        </div>
-                        <div style="display:inline;padding:5px;"  ng-show="activity.name == 'deleteRecord'">
-                                <button type="button" class="btn btn-danger bold" ng-click="confirmDelete()" ng-disabled="isUpdating">
-                                <span >{{::('taskIdT.delete'|$translate)}}</span>
-                            </button>
                         </div>
                     </div>
 

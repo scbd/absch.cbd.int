@@ -20,7 +20,7 @@
     "save": "Save",
     "searchTitle": "Search title",
     "frequencyHeader":"Email alerts frequency",
-    "frequencyDescription":"Set the frequency of email alerts you receive from the Clearing-House",
+    "frequencyDescription":"Set the frequency of email alerts that you wish to receive from the clearing-house",
     "frequencyDropdown":"Select frequency"
 
 }

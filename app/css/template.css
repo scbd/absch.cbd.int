@@ -3420,3 +3420,6 @@ embed-footer{
 .country-profile-list .jurisdiction ul:first-of-type li.other-term{
     display: none;
 }
+.ngdialog.ngdialog-theme-default .ngdialog-content{
+    padding: 0px!important;
+}
