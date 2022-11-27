@@ -35,8 +35,7 @@ import moment from 'moment';
                 urls: [
                     'https://training-absch.cbd.int', 
                     'https://training-bch.cbd.int' , 
-                    'https://bch-training.cbd.int' , 
-                    'https://bch-demo.cbd.int' 
+                    'https://bch-training.cbd.int'
                 ],
                 realms: ['ABS-TRG', 'BCH-TRG']
             };
@@ -85,7 +84,7 @@ import moment from 'moment';
                         url = 'https://bch-training.cbd.int'; break;
                     case 'BCH-DEV': {
                         if ($location.absUrl().indexOf('http://localhost:') >= 0)
-                            url = 'http://localhost:2000'
+                            url = 'http://localhost:2010'
                         else
                             url = 'https://bch.cbddev.xyz'; break;
                     }

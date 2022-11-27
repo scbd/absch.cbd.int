@@ -53,11 +53,11 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                         $scope.loading = false;
                         if ($scope.user && $scope.user.isAuthenticated) {
                             var query = {};
-                            if ($routeParams.id) {
-                                    query['_id'] = { $oid : $routeParams.id};
-                                    $scope.isDeleteAllow = true;
-                            }
-                            else{
+                            // if ($routeParams.id) {
+                            //         query['_id'] = { $oid : $routeParams.id};
+                            //         $scope.isDeleteAllow = true;
+                            // }
+                            // else{
                             if ($scope.collectionFilter)
                                 query = JSON.parse($scope.collectionFilter);
                                 $scope.loading = true;
@@ -66,7 +66,7 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                                     { $or : [{ isSystemAlert : false},{ isSystemAlert :{$exists: false}}]},
                                     { $or : [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}]}
                                 ]
-                            } 
+                            // } 
                             IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {
                                     $scope.loading = false;

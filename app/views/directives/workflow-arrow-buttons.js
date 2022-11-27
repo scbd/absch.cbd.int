@@ -732,7 +732,7 @@ import workflowButtonsT from '~/app-text/views/directives/workflow-arrow-buttons
 
                     var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
                        'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
-                       'https://bch-demo.cbd.int/', 'https://bch.cbddev.xyz/', 'https://bch-training.cbd.int/' , 
+                       'https://bch.cbddev.xyz/', 'https://bch-training.cbd.int/' , 
                        'https://bch.cbd.int/' , 
                    ]
                    $timeout(function() {
