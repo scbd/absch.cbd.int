@@ -102,9 +102,6 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                                         activeReport.partyReportCount    = _.intersection(parties, reportCountries).length;
                                         activeReport.nonPartyReportCount = _.intersection(nonParties, reportCountries).length;                                        
 
-                                        if(reportType == 'cpbNationalReport2'){ //special case for BCH NR2
-                                            activeReport.nonPartyReportCount = 0
-                                        }
                                 });
                             });
                 }
