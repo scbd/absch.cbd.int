@@ -19,6 +19,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 import shareRecord from '~/components/common/share-record.vue';
 import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 
+const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 	app.run(function($templateCache){
 		$templateCache.put('view-print-header.html', printHeaderTemplate)
 		$templateCache.put('view-print-footer.html', printFooterTemplate)
@@ -392,26 +393,24 @@ import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 						})
 					};
 
-					function compareWithPrev(){
+					async function compareWithPrev(){
 						//timeout so that the directive is rendered.
-						$timeout(function(){
-										
-							var view1 = $element.find('#compareSchemaView .compare-diff');
+						await sleep(300);
+						var view1 = $element.find('#compareSchemaView .compare-diff');
 
-							_.forEach(view1, function(e, i){
-								var cssClasses = e.className.split(' ')
-								var compareClass = _.find(cssClasses, function(c){
-									if(/^compare_/.test(c))
-										return c;
-								})
-								var newHtml = $element.find('#schemaView .compare-diff.' + compareClass);
-								// console.log(newHtml.html())
-								if (!newHtml.html()) return;
-								let output = htmlDiff(e.innerHTML, newHtml.html());
-								newHtml.html(output);
-							});
-							$scope.isComparing = false;
-						}, 300)
+						_.forEach(view1, function(e, i){
+							var cssClasses = e.className.split(' ')
+							var compareClass = _.find(cssClasses, function(c){
+								if(/^compare_/.test(c))
+									return c;
+							})
+							var newHtml = $element.find('#schemaView .compare-diff.' + compareClass);
+							// console.log(newHtml.html())
+							if (!newHtml.html()) return;
+							let output = htmlDiff(e.innerHTML, newHtml.html());
+							newHtml.html(output);
+						});
+						$scope.isComparing = false;
 					}
 
 					async function loadViewDirective(schema, beforeReplace) {
