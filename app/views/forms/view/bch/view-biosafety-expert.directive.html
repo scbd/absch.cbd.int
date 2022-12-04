@@ -131,12 +131,6 @@
 				<km-value-ml  km-pre value="document.previousEmployment.name" locales="locale"></km-value-ml>
 				</div>
 			</div>
-			<div ng-if="document.previousEmployment.organizationType">
-				<label>{{::('viewExpT.organizationType'|$translate)}}</label>
-				<div compare-val class="km-value">
-					<span  ng-bind="document.previousEmployment|term:locale"></span>
-				</div>
-			</div>
 			<div ng-if="document.previousEmployment.department">
 				<label>{{::('viewExpT.department'|$translate)}}</label>
 				<div compare-val>
