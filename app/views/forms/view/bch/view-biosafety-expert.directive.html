@@ -134,7 +134,7 @@
 			<div ng-if="document.previousEmployment.organizationType">
 				<label>{{::('viewExpT.organizationType'|$translate)}}</label>
 				<div compare-val class="km-value">
-					<span  ng-bind="document.currentEmployment.previousEmployment|term:locale"></span>
+					<span  ng-bind="document.previousEmployment|term:locale"></span>
 				</div>
 			</div>
 			<div ng-if="document.previousEmployment.department">
@@ -239,7 +239,7 @@
 				</div>
 			</section>
 			<section ng-if="document.thirdEducation" style="padding-top: 10px;">
-				<U>{{::('viewExpT.thirdEducation'|$translate)}}</U>
+				<U>{{::('viewExpT.thirdDegree'|$translate)}}</U>
 				<div ng-if="document.thirdEducation.title">
 					<label>{{::('viewExpT.titleDegree'|$translate)}}</label>
 					<div compare-val>
