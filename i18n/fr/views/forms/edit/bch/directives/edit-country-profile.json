@@ -1,0 +1,14 @@
+{
+  "generalInfo": "",
+  "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
+  "country": "Pays",
+  "selectOption": "Veuillez choisir un pays...",
+  "additionalInformation": "Informations supplémentaires pour le profil du pays",
+  "relevantInformationInfo": "Veuillez utiliser ce champs pour fournir toute information supplémentaire pertinente qui devrait apparaître dans le profil de votre pays.",
+  "notes": "Notes",
+  "notesInfo": "Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.",
+  "countryProfile": "Profil des pays pour le Centre d'échange sur la prévention des risques biotechnologiques.",
+  "countryProfileInfo": "Un seul enregistrement de profil de pays est autorisé dans le Centre d'échange pour la prévention des risques biotechnologiques pour chaque gouvernement. Le profil de pays de votre gouvernement existe déjà dans le Centre d'échange pour la prévention des risques biotechnologiques. ",
+  "seconds": "",
+  "redirectNow": "Rediriger maintenant"
+}

@@ -1,0 +1,8 @@
+{
+  "draftSaveMessage": "Su registro fue guardado como borrador",
+  "closeWithoutSaving": "Su registro fue cerrado sin guardar.",
+  "publishRequestedSCBD": "Registro guardado. Se envió una solicitud de publicación a su Secretaría del CDB.",
+  "publishRequestedABS": "Registro guardado. Se envió una solicitud de publicación a su autoridad publicadora.",
+  "publishRequestedBCH": "Registro guardado. Se envió una solicitud de publicación a su CIISB-PFN.",
+  "recordPublished": "Registro publicado. Se podrá acceder ahora al registro en el Centro de Intercambio de Información."
+}

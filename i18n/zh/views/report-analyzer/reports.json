@@ -1,0 +1,14 @@
+{
+  "overview": "概述",
+  "report": "报告",
+  "deadline": "截止日期",
+  "numberOfParties": "缔约方数量",
+  "atTheDeadline": "在截止日期",
+  "byParties": "缔约方*",
+  "byNonParties": "非缔约方*",
+  "total": "合计",
+  "partyStatusReport": "提交报告截止日期时的缔约方身份",
+  "nationalReportAnalyzer": "国家报告分析器",
+  "nationalReportAnalyzerInfo": "此工具让您可以选择报告的特定部分或问题，并按国家或地区显示结果。",
+  "analyze": "分析"
+}

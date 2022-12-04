@@ -1,0 +1,20 @@
+{
+  "registries": "Registres",
+  "geneticElementRegistry": "Registre d'éléments génétiques",
+  "lmoTitle": "Registre d’OVM",
+  "organismRegistry": "Registre des organismes",
+  "lmoRegistry": "",
+  "lmoInfo": "",
+  "uniqueCode": "",
+  "lmoLink": " Liens vers toutes les décisions et évaluations des risques qui font allusion à ces organismes est possible à travers le registre.",
+  "clickHere": "",
+  "loading": "",
+  "error": "Erreur dans le chargement des fichiers, veuillez essayer de nouveau.",
+  "totalRecords": "Nombre total de fichiers :",
+  "export": "Exporter",
+  "recordID": "Numéro d'identification du dossier",
+  "name": "Identifiant unique",
+  "identity": "Événement de transformation et d’identité",
+  "organism": "Organisme",
+  "description": "Description"
+}

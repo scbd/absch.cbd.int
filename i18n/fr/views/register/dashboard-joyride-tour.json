@@ -1,0 +1,42 @@
+{
+  "welcome": {
+    "title": "Bienvenue sur la page Soumettre : Tableau de bord",
+    "content": "<p> </p>"
+  },
+  "personalInformation": {
+    "title": "Vos informations personnelles",
+    "content": "<p> </p>"
+  },
+  "recordOverview": {
+    "title": "Aperçu du fichier",
+    "content": "<p> </p>"
+  },
+  "yourRecordsStatus": {
+    "title": "Vos fichiers : statut",
+    "content": "<p> </p>"
+  },
+  "yourRecordsOffline": {
+    "title": "Vos fichiers : formats hors ligne",
+    "content": "<p> </p>"
+  },
+  "quickView": {
+    "title": "Aperçu rapide",
+    "content": "<p></p>"
+  },
+  "addNewRecord": {
+    "title": "Ajouter un nouveau fichier<p>",
+    "content": "<p></p>"
+  },
+  "viewAllRecords": {
+    "title": "Voir tous les fichiers",
+    "content": "<p> </u>  </p>"
+  },
+  "needHelp": {
+    "title": "Besoin d'aide?",
+    "content": "<p></p>"
+  },
+  "needMoreHelp": {
+    "title": "Encore besoin d’aide?",
+    "content": "<p></p>"
+  }
+}

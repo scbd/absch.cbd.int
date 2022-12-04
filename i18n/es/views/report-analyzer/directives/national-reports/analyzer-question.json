@@ -1,0 +1,12 @@
+{
+  "compareWithPrevious": "Comparar con el/los informe(s) anteriore(es)",
+  "compareWithSurvey": "Comparar con la pregunta Encuesta sobre indicadores del Plan Estratégico de 2014",
+  "surveyQuestion": "Pregunta de la encuesta",
+  "question": "Pregunta",
+  "total": "Total",
+  "firstNR": "Primer informe nacional",
+  "secondNR": "Segundo informe nacional",
+  "thirdNR": "Tercer informe nacional",
+  "forthNR": "Cuarto informe nacional",
+  "note": "<b>Nota:</b> La herramienta comparativa solo comprende a aquellos países que han respondido las preguntas en ambos informes nacionales. En este sentido, los recuentos y porcentajes totales pueden cambiar cuando se aplica la herramienta comparativa."
+}

@@ -1,0 +1,12 @@
+{
+  "generalInfo": "一般信息",
+  "contactPerson": "提交报告的联系人",
+  "country": "国家",
+  "organizationsStakeholders": "被咨询或参与编写本报告的组织/利益攸关方：",
+  "timePeriod": "本报告的时间跨度：",
+  "from": "发件人",
+  "to": "收件人",
+  "additionalInformation": "额外信息",
+  "seconds": "秒后被重定向到该记录。",
+  "redirectNow": "现在引导"
+}

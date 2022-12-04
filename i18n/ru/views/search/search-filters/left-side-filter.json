@@ -1,0 +1,20 @@
+{
+  "subFilter": "ВЛОЖЕННЫЕ ФИЛЬТРЫ",
+  "clearAllFilters": "Очистить все фильтры",
+  "remove": "Удалить",
+  "temporarilyDisable": "Временно отключить",
+  "reEnable": "Включить повторно",
+  "excludeResults": "Исключить результаты",
+  "includeResults": "Включить результаты",
+  "clearFilters": "Очистить фильтры",
+  "clear": "очистить",
+  "yes": "Да",
+  "no": "Нет",
+  "not": "НЕТ",
+  "searchRelation": "Поиск по связи",
+  "loading": "загрузка ...",
+  "searchRelated": "Поиск связанных элементов",
+  "cancel": "Отменить",
+  "apply": "Применить",
+  "searchIn": "Поиск в:"
+}

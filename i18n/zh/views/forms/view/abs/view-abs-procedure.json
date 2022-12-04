@@ -1,0 +1,21 @@
+{
+  "generalInfo": "一般信息",
+  "country": "国家",
+  "description": "获取和惠益分享程序说明",
+  "title": "标题",
+  "jurisdiction": "辖区",
+  "contactsLinks": "应在哪里提出获取申请",
+  "requirements": "潜在用户获取申请需要满足的条件或要求",
+  "descriptionLinks": "获取和惠益分享程序的逐步说明或视觉展示",
+  "hasApplicationDocuments": "申请人是否需要提供任何文档",
+  "applicationInformation": "申请表信息或所需文档",
+  "applicationLinks": "相关申请表/文档或网站链接",
+  "applicationContacts": "关于应向谁提出申请的信息",
+  "hasApplicationFees": "需付申请费吗？",
+  "applicationFeesInformation": "关于申请费的额外信息",
+  "duration": "申请过程需要多长时间",
+  "relevantMeasures": "相关获取和惠益分享措施",
+  "keywords": "关键词",
+  "addInfo": "",
+  "relevantDocuments": "其他相关链接或附件"
+}

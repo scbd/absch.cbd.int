@@ -1,0 +1,9 @@
+{
+  "keywords": "palabras clave seleccionadas.",
+  "search": "Buscar en la lista (mínimo tres caracteres para iniciar la búsqueda)",
+  "keywordNotFound": "Palabra clave no encontrada.",
+  "clearSelection": "Eliminar selección",
+  "loading": "Cargando...",
+  "pleaseSpecify": "Por favor, especifique",
+  "otherElement": "otro elemento"
+}

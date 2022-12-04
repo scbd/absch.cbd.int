@@ -1,0 +1,15 @@
+{
+  "generalInfo": "",
+  "country": "Pays",
+  "checkpointName": "Nom du point de contrôle",
+  "cpResponsibilities": "Responsabilités des points de contrôle",
+  "stage": "Phase de l’information collectée ou reçue",
+  "jurisdiction": "Domaine de juridiction",
+  "authority": "Autorité(s) devant recevoir les copies de courtoisie des communiqués des points de contrôle",
+  "authorityInfo": "Toutes les autorités nationales et tous les contacts indiqués ci-dessous recevront par courrier électronique des communiqués des points de contrôle contenant les informations collectées ou reçues et publiées par ce point de contrôle.",
+  "allCnaOne": "",
+  "allCnaTow": "",
+  "noAddAuthorities": "Aucune autorité supplémentaire n'a été sélectionnée pour recevoir les copies automatiques par courrier électronique des communiqués publiés par ce point de contrôle.",
+  "additionalInformation": "Informations complémentaires",
+  "relevantLinks": "Autres sites Internet ou fichiers en pièces jointes"
+}

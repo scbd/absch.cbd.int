@@ -1,0 +1,16 @@
+{
+  "type": "النوع",
+  "country": "",
+  "name": "الاسم",
+  "typeOfOrganization": "نوع المنظمة",
+  "jobTitle": "المُسَمَّى الوظيفي",
+  "department": "القسم / الفرع /الوحدة",
+  "organization": "المنظمة/المؤسسة",
+  "addressContact": "عنوان الاتصال",
+  "phoneNumber": "أرقام الهواتف",
+  "faxNumber": "",
+  "emails": "",
+  "webAddress": "عناوين المواقع الإلكتروني",
+  "additionalInfo": "معلومات إضافية",
+  "otherRelevant": ""
+}

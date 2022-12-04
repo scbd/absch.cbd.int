@@ -1,0 +1,20 @@
+{
+  "defaultView": "默认视图",
+  "list": "列表",
+  "group": "群组",
+  "matrix": "矩阵",
+  "sort": "排序",
+  "export": "导出",
+  "sortByField": "按字段排序（选择一项或多项）",
+  "sortBy": "排序方式",
+  "thenBy": "第二方式",
+  "relevance": "相关性：",
+  "relevanceInfo": "相关性排名是对文档结果进行排序的过程，以便将那些最可能与您的查询相关的文档显示在顶部。",
+  "relevanceLink": "相关性不能与其他领域一起使用。",
+  "cancel": "取消",
+  "apply": "应用",
+  "groupByField": "按字段分组（选择一项或多项）",
+  "groupBy": "分组方式：",
+  "government": "政府",
+  "recordType": "记录类型"
+}

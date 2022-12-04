@@ -1,0 +1,23 @@
+{
+  "exportButton": "تصدير",
+  "dialogTitle": "تصدير",
+  "downloadFormat": "صيغة التنزيل",
+  "xls": "XLS (Excel)",
+  "xlsx": "XLSX (Excel)",
+  "csv": "CSV (comma separated values)",
+  "processing": "قيد التنفيذ...",
+  "recordsFound": "سجلات موجودة",
+  "type": "النوع",
+  "uid": "المُعرِّف الفريد",
+  "government": "جهات حكومية",
+  "title": "العنوان",
+  "info1": "المعلومة 1",
+  "info2": "المعلومة 2",
+  "info3": "المعلومة 3",
+  "info4": "المعلومة 4",
+  "publishedDate": "تاريخ النشر",
+  "sampleMessage": "هذه عينة فقط من المعلومات التي سيتم تصديرها. كل السجلات التي يعرضها هذا البحث مشمولة في ملف التصدير الناتج.",
+  "cancel": "إلغاء",
+  "download": "تنزيل",
+  "exportInformation": ""
+}

@@ -1,0 +1,19 @@
+{
+  "searchNominee": "Rechercher un nominé",
+  "searchNomineeInfo": "",
+  "emailAddress": "Adresse courriel du nominé",
+  "mandatory": "Ce champs est obligatoire",
+  "emailIncomplete": "Le courriel est invalide ou incomplet",
+  "oups": "<b>Oups...</b> Nous sommes désolés, vous n’êtes pas autorisé à nominer un nouvel usager.",
+  "oops": "<b>Oups...</b> Nous sommes désolés, une erreur est survenue.",
+  "userNotFound": "Usager non trouvée :",
+  "userInfo": "Veuillez noter que l'adresse courriel spécifiée ne correspond pas au compte existant de cet usager. Vous pouvez cependant procéder avec la nomination en initiant la création d’un nouveau compte d’usager. Le nouvel utilisateur recevra un courriel avec un lien pour activer son compte et créer un mot de passe.",
+  "nominateEmailAddress": "Nommez un nouvel utilisateur en utilisant l'adresse courriel suivante",
+  "firstName": "Prénom",
+  "lastName": "Nom",
+  "organization": "Organisation",
+  "email": "Courriel :",
+  "continue": "Continuer avec",
+  "cancel": "Annuler",
+  "next": "Suivant"
+}

@@ -1,0 +1,16 @@
+{
+  "nationalReport": "国家报告",
+  "filter": "",
+  "breakdownRegions": "按生物多样性公约地区细分",
+  "selectCountries": "选择国家或地区",
+  "selectRegions": "选择地区",
+  "protocolParties": "",
+  "protocolNonParties": "",
+  "nklsParty": "",
+  "selectMessage": "未选定任何国家或地区",
+  "allQuestions": "该报告的所有问题和/或部分",
+  "surveyQuestion": "调查问题",
+  "question": "问题",
+  "countries": "",
+  "regions": "区域"
+}

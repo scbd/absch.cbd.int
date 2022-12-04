@@ -1,0 +1,21 @@
+{
+  "generalInfo": "معلومات عامة",
+  "title": "العنوان",
+  "name": "اسم العنصر الجيني",
+  "synonymNames": "الأسماء البديلة للعناصر الجينية (المصطلحات)",
+  "abbreviation": "الاختصار",
+  "category": "الفئة",
+  "isSynthetic": "هل العنصر الجيني جزيء تركيبي؟",
+  "yes": "نعم",
+  "no": "لا",
+  "donorOrganism": "الكائن المانح",
+  "donorOrganisms": "الكائنات المانحة",
+  "donorOrganismCollectionPoint": "نقطة التجميع أو الحصول على الكائنات المانحة",
+  "geographicCoordinates": "الإحداثيات الجغرافية",
+  "characteristicsSequence": "خصائص تسلسل ترميز البروتين",
+  "proteinName": "اسم البروتين المذكور في تسلسل الترميز",
+  "biologicalFunction": "الوظيفة البيولوجية للبروتين",
+  "traits": "",
+  "additionalInformation": "معلومات إضافية",
+  "anyOtherInformation": ""
+}

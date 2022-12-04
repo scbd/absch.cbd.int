@@ -1,0 +1,12 @@
+{
+  "actions": "خطوات مقترحة",
+  "oups": "",
+  "oops": "",
+  "userToBeCreated": "المستخدم الذي سيتم إنشاؤه:",
+  "governmentAffiliationGranted": "الانتساب الحكومي الذي سيتم منحه:",
+  "governmentAffiliationRevoked": "الانتساب الحكومي الذي سيتم رفضه:",
+  "granted": "الأدوار التي سيتم منحها:",
+  "revoked": "الأدوار التي سيتم رفضها:",
+  "cancel": "إلغاء",
+  "proceed": "استمرار"
+}
