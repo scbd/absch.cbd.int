@@ -1,0 +1,16 @@
+{
+  "nationalReport": "Informe nacional",
+  "filter": "Filtrar por país(es) o región(es)",
+  "breakdownRegions": "Desglosar por regiones del CDB",
+  "selectCountries": "Seleccionar países",
+  "selectRegions": "Seleccionar regiones",
+  "protocolParties": "Desglosar por Partes en el Protocolo de Cartagena",
+  "protocolNonParties": "Desglosar por No Partes en el Protocolo de Cartagena",
+  "nklsParty": "Desglosar por Partes en el Protocolo suplementario",
+  "selectMessage": "No se han seleccionado países ni regiones",
+  "allQuestions": "Todas las preguntas y/o secciones del informe",
+  "surveyQuestion": "Pregunta de la encuesta",
+  "question": "Pregunta",
+  "countries": "Países",
+  "regions": "Regiones"
+}

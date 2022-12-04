@@ -1,0 +1,22 @@
+{
+  "admin": "Admin",
+  "viewList": "Ver la lista de registros informados por usuarios",
+  "manageReportedRecords": "Gestionar los registros informados",
+  "commonIssues": "Cuestiones comunes",
+  "commonAbschIssues": "Cuestiones comunes relativas al Centro de Intercambio de Información sobre APB",
+  "manageWorkflowRecords": "Gestionar los registros del flujo del trabajo",
+  "viewStatus": "Ver la situación de los registros del flujo del trabajo del Centro de Intercambio de Información sobre APB",
+  "multipleFilters": "Ver los recuentos del Centro de Intercambio de Información sobre APB con opciones de gráficos y filtros múltiples",
+  "reportCounts": "Informar recuentos",
+  "viewIrrcCount": "Ver recuentos del CCRI",
+  "irrcCounts": "Recuentos de CCRI",
+  "viewCountries": "Ver países con/sin funciones en el Centro de Intercambio de Información sobre APB",
+  "userRoleReport": "Informe de funciones de usuarios",
+  "viewEmailList": "Ver la lista de usuarios que utilizan la suscripción al correo electrónico.",
+  "subscriptions": "Suscripciones",
+  "viewClientError": "Ver errores por parte del cliente",
+  "errorLogs": "Registros de errores",
+  "validateTranslation": "Validar traducción",
+  "enable": "Activar",
+  "disable": "Desactivar"
+}

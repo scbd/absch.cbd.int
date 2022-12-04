@@ -1,0 +1,12 @@
+{
+  "actions": "Actions",
+  "oups": "",
+  "oops": "",
+  "userToBeCreated": "Usager à ajouter :",
+  "governmentAffiliationGranted": "Affiliation à un gouvernement",
+  "governmentAffiliationRevoked": "L’affiliation gouvernementale sera révoquée :",
+  "granted": "Rôle (s) à assigner :",
+  "revoked": "Rôle (s) à révoquer :",
+  "cancel": "Annuler",
+  "proceed": ""
+}

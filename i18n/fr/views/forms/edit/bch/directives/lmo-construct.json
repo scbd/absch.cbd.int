@@ -1,0 +1,14 @@
+{
+  "addConstruct": "Ajouter Construct",
+  "geneConstruct": "Gène Construct",
+  "geneConstructInfo": "Utilisez la souris pour faire glisser une forme et l'ajouter à la construction dans un emplacement prévu à cet effet",
+  "dragConstruct": "Faites glisser la forme ici pour supprimer la construction",
+  "dropLocation": "Lieu de dépôt",
+  "cancel": "Annuler",
+  "save": "Sauvegarder",
+  "transcriptionStart": "",
+  "transcriptionStop": "",
+  "transcriptionElement": "",
+  "selectGene": "Sélectionnez gène",
+  "kb": ""
+}

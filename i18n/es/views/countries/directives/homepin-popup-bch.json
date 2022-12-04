@@ -1,0 +1,15 @@
+{
+  "partyToCartagenaProtocol": "Parte en el Protocolo de Cartagena",
+  "notPartyToCartagenaProtocol": "No Parte en el Protocolo de Cartagena",
+  "ratifiedNotYetParty": "Ratificado, pero todavía no es Parte",
+  "partyToSuppProtocol": "Partes en el Protocolo suplementario",
+  "dkText": "La ratificación de Dinamarca del Protocolo de Cartagena no se aplica a Groenlandia y las Islas Feroe.",
+  "fkText": "Existe una disputa entre el Gobierno de la Argentina y el del Reino Unido de Gran Bretaña e Irlanda del Norte en relación con la soberanía de las Islas Falklands (Islas Malvinas).",
+  "ehText": "Territorio no autónomo.",
+  "gbText": "La ratificación del Protocolo de Cartagena por parte del Reino Unido no incluye:",
+  "gbTitle13": "",
+  "overseasTerritories": "13 territorios de ultramar",
+  "or": "o",
+  "gbTitle3": "Bailía de Jersey; Isla de Guernesey e Isla de Man",
+  "crownDependencies": "3 Dependencias de la Corona"
+}

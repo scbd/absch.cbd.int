@@ -1,0 +1,19 @@
+{
+  "generalInfo": "一般信息",
+  "languageToPublish": "请选择您希望提交之记录的语言：",
+  "country": "国家",
+  "title": "记录标题",
+  "selectOption": "请选择一个国家...",
+  "links": "相关链接",
+  "linksInfo": "请提供网站网址（如：http://bch.cbd.int）和网站名称（如“生物安全信息交换所”）。",
+  "abstract": "摘要",
+  "abstractInfo": "（最多80单词）",
+  "newsText": "新闻文本",
+  "newsTextInfo": "（最多300单词）",
+  "otherRelevantInformation": "其它相关信息",
+  "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
+  "anyrelevantDocuments": "任何其他相关文件",
+  "anyrelevantDocumentsInfo": "请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档。",
+  "notes": "注",
+  "notesInfos": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
+}
