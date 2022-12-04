@@ -1,0 +1,14 @@
+{
+  "addConstruct": "إضافة تكوين الجين",
+  "geneConstruct": "تكوين الجين",
+  "geneConstructInfo": "يرجى استخدام الماوس لسحب الشكل لإضافته إلى التكوين على موقع الإسقاط",
+  "dragConstruct": "اسحب الشكل هنا لإزالة التكوين",
+  "dropLocation": "موقع الإسقاط",
+  "cancel": "إلغاء",
+  "save": "حفظ",
+  "transcriptionStart": "بداية النسخ",
+  "transcriptionStop": "نهاية النسخ",
+  "transcriptionElement": "عنصر النسخ",
+  "selectGene": "تحديد الجين",
+  "kb": "كيلوبايت"
+}

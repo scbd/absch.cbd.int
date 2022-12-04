@@ -1,0 +1,20 @@
+{
+  "registries": "Directorios",
+  "geneticElementRegistry": "Directorio de elementos genéticos",
+  "lmoTitle": "Directorio de OVM",
+  "organismRegistry": "Directorio de organismos",
+  "lmoRegistry": "Directorio de organismos vivos modificados (OVM)",
+  "lmoInfo": "",
+  "uniqueCode": "y el código único de identificación",
+  "lmoLink": "(si está disponible) para cada registro. En el Directorio es posible acceder a los enlaces a todas las decisiones e informes de evaluaciones del riesgo relativos a estos organismos.",
+  "clickHere": "Haga clic aquí <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=modifiedOrganism'>here</a> para realizar una búsqueda a fondo de todos los registros de OVM disponibles en este Directorio.",
+  "loading": "Cargando...",
+  "error": "Error al cargar los registros del Directorio, intente nuevamente.",
+  "totalRecords": "Registros totales:",
+  "export": "exportar",
+  "recordID": "Identificación del registro",
+  "name": "Identificación única",
+  "identity": "Identidad y evento de transformación",
+  "organism": "Organismo",
+  "description": "Descripción"
+}

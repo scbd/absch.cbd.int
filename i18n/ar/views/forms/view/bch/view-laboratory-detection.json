@@ -1,0 +1,14 @@
+{
+  "generalInfo": "معلومات عامة",
+  "organization": "اسم المعمل وإحداثياته",
+  "relatedOrganization": "منظمة ذات صلة",
+  "services": "الخدمات والأنشطة المُقدَّمة",
+  "collaborativeAgreements": "الاتفاقيات التعاونية",
+  "certifications": "شهادات اعتماد المعمل",
+  "detectionMethods": "أنواع وسائل الرصد/تحديد الهوية المستخدمة في المعمل",
+  "lmoTypes": "أنواع الكائنات الحية المُحوَّرة",
+  "detectableLmos": "",
+  "detectableGenes": "العناصر الجينية التي يرصدها المعمل",
+  "additionalInformation": "معلومات إضافية",
+  "relevantDocuments": ""
+}

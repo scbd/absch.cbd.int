@@ -1,0 +1,20 @@
+{
+  "subFilter": "sous-filtres",
+  "clearAllFilters": "Supprimer les filtres",
+  "remove": "Supprimer",
+  "temporarilyDisable": "Temporairement indisponible",
+  "reEnable": "Réactiver",
+  "excludeResults": "Exclure des résultats",
+  "includeResults": "Iniclure des résultats",
+  "clearFilters": "Supprimer les filtres",
+  "clear": "effacer",
+  "yes": "Oui",
+  "no": "Non",
+  "not": "SANS",
+  "searchRelation": "",
+  "loading": "chargement en cours...",
+  "searchRelated": "Recherche connexe",
+  "cancel": "Annuler",
+  "apply": "Appliquer",
+  "searchIn": ""
+}

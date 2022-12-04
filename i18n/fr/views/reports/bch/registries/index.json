@@ -1,0 +1,11 @@
+{
+  "lmoTitle": "Registre des Organismes Vivants Modifiés (OVM)",
+  "lmoInfo": "",
+  "uniqueCode": "",
+  "lmoLink": " Liens vers toutes les décisions et évaluations des risques qui font allusion à ces organismes est possible à travers le registre.",
+  "viewRegistry": "Voir le registre",
+  "organismRegistry": "Registre des organismes",
+  "organismInfo": "Le registre des organismes comprend les organismes qui ont été enregistrés au CEPRB comme des organismes parents, récepteurs ou donneurs. Chaque registre fournit des liens vers des fichiers sur chaque organisme et des informations sur les caractéristiques biologiques, notamment sur la classification taxonomique, le nom commun, l’origine, le centre d’origine et le centre de diversité génétique. Des liens vers les fichiers pertinents en référence à l’organisme sont fournis dans la partie inférieure de chaque enregistrement individuel.",
+  "geneticElementRegistry": "Registre d'éléments génétiques",
+  "geneInfo": "Le registre des éléments génétiques fournit un résumé des informations sur les éléments génétiques associés aux OVM enregistrés dans le CEPRB, y compris des informations sur l'organisme donneur, les traits conférés et la fonction biologique. Le registre comprend des liens vers les enregistrements sur chaque élément génétique où plus de détails peuvent être trouvés. Les OVM contenant l'élément génétique particulier sont référencés au bas du fichier individuelle."
+}

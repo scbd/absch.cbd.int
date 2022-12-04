@@ -25,7 +25,7 @@
     "titleDegree": "Title of the Degree or other academic distinction and subject",
     "institution": "Name of academic institution",
     "secondDegree": "Second Degree (e.g. M.Sc. in Microbiology)",
-    "thirdDegree": "Third Degree",
+    "thirdDegree": "Third Degree (e.g. Ph.D. in Microbiology)",
     "otherQualifications": "B. Other professional qualifications",
     "areasOfExpertise": "Areas of expertise",
     "publications": "Publications",

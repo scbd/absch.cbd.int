@@ -1,0 +1,17 @@
+{
+  "loadingRecord": "Détails du fichier en cours de téléchargement...",
+  "invalidReference": "",
+  "errorLoading": "",
+  "cna": "",
+  "nfp": "Correspondant national :",
+  "person": "Personne :",
+  "organization": "Organisation :",
+  "relatedOrganization": "Organisations reliées",
+  "deleted": "Ce fichier lié a été effacé.",
+  "phone": "Téléphone :",
+  "fax": "Télécopieur :",
+  "email": "",
+  "website": "Site Web :",
+  "pendingApproval": "",
+  "viewRequest": ""
+}

@@ -1,0 +1,18 @@
+{
+  "generalInfo": "一般信息",
+  "languageToPublish": "请选择您希望提交之记录的语言：",
+  "country": "国家",
+  "selectOption": "请选择一个国家...",
+  "question": "问题",
+  "showPrevious": "显示先前的回答",
+  "hidePrevious": "隐藏先前的答案",
+  "contactPerson": "提交报告的联系人",
+  "organizationsStakeholders": "被咨询或参与编写本报告的组织/利益攸关方：",
+  "timePeriod": "本报告的时间跨度：",
+  "to": "收件人",
+  "fourthNationalReport": "第四次国家报告",
+  "previousAnswerMapping": "请注意，此问题所涵盖时期的每种报告格式均不同。",
+  "NR4Info": "每个政府只能一条第四次国家记录，贵政府已经有了一条第四次国家报告记录，您将于",
+  "seconds": "秒后被重定向到该记录。",
+  "redirectNow": "现在引导"
+}

@@ -1,0 +1,21 @@
+{
+  "generalInfo": "一般信息",
+  "languageToPublish": "请选择您希望提交之记录的语言：",
+  "country": "国家",
+  "jurisdiction": "辖区：",
+  "selectOption": "请选择一个国家...",
+  "or": "或者",
+  "submissionInformation": "提交信息的内容",
+  "titleSubmission": "提交信息的标题",
+  "organization": "机构",
+  "helpTitle": "帮助：提交",
+  "dateSubmission": "提交日期",
+  "notifications": "相关通知",
+  "records": "相关记录",
+  "thematicAreas": "专题领域",
+  "documents": "文件",
+  "otherRelevantInformation": "其它相关信息",
+  "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
+  "notes": "注",
+  "notesInfos": "“注”字段仅供个人使用。仅当编辑记录时才显示，但不会在记录发布时显示。此字段不适用于保密信息。"
+}

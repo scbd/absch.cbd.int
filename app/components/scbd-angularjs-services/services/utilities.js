@@ -81,8 +81,7 @@ import Enumerable from 'linqjs';
             var trainingRealms = {
                 urls: [
                     'https://training-absch.cbd.int', 
-                    'https://bch-training.cbd.int' , 
-                    'https://bch-demo.cbd.int' 
+                    'https://bch-training.cbd.int'
                 ],
                 realms: ['ABS-TRG', 'BCH-TRG']
             };

@@ -1,0 +1,16 @@
+{
+  "type": "Tipo",
+  "country": "País",
+  "name": "Nombre",
+  "typeOfOrganization": "Tipo de organización",
+  "jobTitle": "Título del puesto",
+  "department": "Departamento / División / Unidad",
+  "organization": "Organización",
+  "addressContact": "Dirección de contacto",
+  "phoneNumber": "Número(s) de teléfono",
+  "faxNumber": "Número(s) de fax",
+  "emails": "Correo electrónico:",
+  "webAddress": "Dirección(es) del sitio web",
+  "additionalInfo": "Información adicional",
+  "otherRelevant": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes"
+}

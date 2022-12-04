@@ -1,0 +1,13 @@
+{
+  "newUser": "",
+  "contactDetails": "",
+  "nominee": "Veuillez fournir les coordonnées de base et  renseignements du nominé",
+  "firstName": "Prénom",
+  "lastName": "Nom",
+  "organization": "Organisation",
+  "email": "Courriel :",
+  "mandatory": "Ce champs est obligatoire",
+  "emailIncomplete": "Le courriel est invalide ou incomplet",
+  "cancel": "Annuler",
+  "next": "Suivant"
+}

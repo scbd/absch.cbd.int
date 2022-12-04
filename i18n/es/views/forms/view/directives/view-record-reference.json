@@ -1,0 +1,17 @@
+{
+  "loadingRecord": "cargando información sobre el registro...",
+  "invalidReference": "La referencia es <i>inválida</i>, puede que el artículo no haya sido publicado.",
+  "errorLoading": "Error al cargar información sobre",
+  "cna": "Autoridad Nacional Competente:",
+  "nfp": "Punto Focal Nacional:",
+  "person": "Persona:",
+  "organization": "Organización:",
+  "relatedOrganization": "Organización relacionada",
+  "deleted": "Este enlace al registro ha sido borrado.",
+  "phone": "Teléfono:",
+  "fax": "Fax:",
+  "email": "Correo electrónico:",
+  "website": "Sitio web:",
+  "pendingApproval": "ESTE REGISTRO ESTÁ PENDIENTE DE APROBACIÓN",
+  "viewRequest": "Ver solicitud"
+}

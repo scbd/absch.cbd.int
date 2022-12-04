@@ -1,0 +1,14 @@
+{
+  "generalInfo": "Información general",
+  "languageToPublish": "Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:",
+  "country": "País",
+  "selectOption": "Seleccione un país…",
+  "additionalInformation": "Información adicional para el perfil del país",
+  "relevantInformationInfo": "Utilice este campo para aportar información adicional pertinente que aparecerá como parte del perfil del país.",
+  "notes": "Notas",
+  "notesInfo": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.",
+  "countryProfile": "Perfil del país para el Centro de Intercambio de la Información sobre Seguridad de la Biotecnología",
+  "countryProfileInfo": "Se permite que cada gobierno presente un solo registro de perfil del país en el Centro de Intercambio de Información sobre Seguridad de la Biotecnología. El perfil del país de su gobierno ya existe en el Centro de Intercambio de Información sobre Seguridad de la Biotecnología. Se lo redirigirá al registro en",
+  "seconds": "segundos.",
+  "redirectNow": "Redirigir ahora"
+}

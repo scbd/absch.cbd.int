@@ -139,7 +139,7 @@ export default {
             const groupLimit = this.recordsPerPage;
             const groupSkip = (pageNumber - 1) * this.recordsPerPage
             const groupSort = {
-                "meta.modifiedOn": -1
+                "meta.createdOn": -1
             };
 
             try {
