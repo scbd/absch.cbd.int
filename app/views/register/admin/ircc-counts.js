@@ -55,7 +55,7 @@ import 'chart-js';
                     $scope.loadingFacets = true;
                      var nationalRecordsQuery = {
                         rowsPerPage : 1000,
-                        fields: 'government_s,government_EN_s,schema_s,dateOfExpiry_dt,usages_EN_ss,entitiesToWhomPICGrantedConfidential_b,usagesConfidential_b,keywords_EN_ss,entitiesToWhomPICGrantedCountry_ss,entitiesToWhomPICGrantedCountry_EN_ss',
+                        fields: 'government_s,government_EN_s,schema_s,dateOfExpiry_dt,usages_EN_ss,entitiesToWhomPICGrantedConfidential_b,usagesConfidential_b,keywords_EN_ss,entitiesToWhomPICGrantedCountries_ss,entitiesToWhomPICGrantedCountries_EN_ss',
                         query: 'schema_s:(schema_s:absPermit )'
                     };
 
@@ -106,7 +106,7 @@ import 'chart-js';
                                     ///////GrantedTo
                                     //////////////////////////////
                                     nationalRecords.GrantedTo.national = _.filter(data, function(doc){
-                                                            return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
+                                                            return _.includes(doc.entitiesToWhomPICGrantedCountries_EN_ss, doc.government_EN_s);
                                                         }).length
                                     nationalRecords.GrantedTo.confidential       =  count(data, 'entitiesToWhomPICGrantedConfidential_b', true);
                                     nationalRecords.GrantedTo.nonConfidential    =  count(data, 'entitiesToWhomPICGrantedConfidential_b', false);
@@ -115,19 +115,19 @@ import 'chart-js';
                                     ///////UsageAndGranted
                                     //////////////////////////////
                                     nationalRecords.UsageAndGranted.commercialNational = _.filter(data, function(doc){
-                                        return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                        return _.includes(doc.entitiesToWhomPICGrantedCountries_EN_ss, doc.government_EN_s)
                                                 && _.includes(doc.usages_EN_ss, 'Commercial');
                                     }).length
                                     nationalRecords.UsageAndGranted.nonCommercialNational = _.filter(data, function(doc){
-                                        return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                        return _.includes(doc.entitiesToWhomPICGrantedCountries_EN_ss, doc.government_EN_s)
                                             && _.includes(doc.usages_EN_ss, 'Non-Commercial');
                                     }).length;            
                                     nationalRecords.UsageAndGranted.commercialForeign = _.filter(data, function(doc){
-                                        return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                        return !_.includes(doc.entitiesToWhomPICGrantedCountries_EN_ss, doc.government_EN_s)
                                                 && _.includes(doc.usages_EN_ss, 'Commercial');
                                     }).length
                                     nationalRecords.UsageAndGranted.nonCommercialForeign = _.filter(data, function(doc){
-                                        return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                        return !_.includes(doc.entitiesToWhomPICGrantedCountries_EN_ss, doc.government_EN_s)
                                             && _.includes(doc.usages_EN_ss, 'Non-Commercial');
                                     }).length;
                                     
@@ -155,8 +155,8 @@ import 'chart-js';
                                             ///////////////////////////
                                             ///////Top user countries
                                             //////////////////////////
-                                            if(doc.entitiesToWhomPICGrantedCountry_EN_ss){
-                                                _.forEach(doc.entitiesToWhomPICGrantedCountry_EN_ss, function(country){
+                                            if(doc.entitiesToWhomPICGrantedCountries_EN_ss){
+                                                _.forEach(doc.entitiesToWhomPICGrantedCountries_EN_ss, function(country){
 
                                                     if( doc.government_EN_s!=country){
                                                         if(!nationalRecords.userCountries[country])
