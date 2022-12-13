@@ -217,7 +217,7 @@ export const absLeftMenuFilters = {
 			"type": "customListFn",
 			"fn": "cbdCountriesCustomFn",
 			"title": absFilters.absPermitCountries,
-			"field": "entitiesToWhomPICGrantedCountries_ss"
+			"field": "entitiesToWhomPICGrantedCountry_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -325,7 +325,7 @@ export const absLeftMenuFilters = {
 		{
 			"type": "solrRecords",
 			"query": {
-				"q": "schema_s:(entityWhoGrantedPIC)",
+				"q": "schema_s:(contact authority)",
 				"sort":"title_s"
 			},
 			"title": absFilters.personEntityWhoGrantedConsent,
@@ -334,7 +334,7 @@ export const absLeftMenuFilters = {
 		{
 			"type": "solrRecords",
 			"query": {
-				"q": "schema_s:(personsAtCheckpoint)",
+				"q": "schema_s:(contact authority)",
 				"sort":"title_s"
 			},
 			"title": absFilters.personsAtCheckpointUtilizing,
@@ -343,7 +343,7 @@ export const absLeftMenuFilters = {
 		{
 			"type": "solrRecords",
 			"query": {
-				"q": "schema_s:(entityToWhomPICGranted)",
+				"q": "schema_s:(contact authority)",
 				"sort":"title_s"
 			},
 			"title": absFilters.personEntityWhoGrantedConsentGranted,
