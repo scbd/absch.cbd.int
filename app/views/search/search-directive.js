@@ -593,7 +593,8 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             if(query.searchShareQueryId){
                                 if(query.embed)
                                     $scope.hideSubFilters = true;
-                                $scope.clearFilter();
+                                if(!query.searchShareQueryId.startsWith('legacy-widget_'))
+                                    $scope.clearFilter();
                                 $scope.searchAlertError = '';
                                 const filters = localStorageService.get($routeParams.searchShareQueryId);
                                 $scope.obsoleteSchemas = localStorageService.get(`${$routeParams.searchShareQueryId}_obsoleteSchemas`);
