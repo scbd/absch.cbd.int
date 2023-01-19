@@ -33,6 +33,8 @@ export default async function(){
                             : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
   
   return[
+          esmBundle('app-data/abs/download-schemas.js', 'en'),
+          esmBundle('app-data/bch/download-schemas.js', 'en'),
           simpleBundle('assets/widgets.js', 'en'),
           simpleBundle('assets/legacy-ajax-plugin.js', 'en'),
           ...locales.map(locale => bundle('boot.js', locale))
@@ -119,6 +121,26 @@ function simpleBundle(entryPoint, locale, baseDir='app') {
         allowAllFormats: true
       }),
       isWatchOn ? null : terser({ mangle: false }) // DISABLE IN DEV
+    ]
+  }
+}
+
+function esmBundle(entryPoint, locale, baseDir='app') {
+
+  const entryPointPath = path.join(baseDir||'', entryPoint);
+  const targetDir      = path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(entryPoint));
+
+  return {
+    input : entryPointPath,
+    output: [{
+      format   : 'esm',
+      sourcemap: false,
+      dir : targetDir,
+      name : entryPoint.replace(/[^a-z0-9]/ig, "_"),
+      exports: 'named'
+    }],
+    plugins:[
+      json({ namedExports: true }),
     ]
   }
 }

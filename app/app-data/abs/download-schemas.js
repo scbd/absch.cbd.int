@@ -1,5 +1,5 @@
-import fieldsT from '~/app-text/views/search/search-results/abs-download-schemas.json';
-import { downloadSchemas as commonDownloadSchemas } from '~/app-data/common-download-schemas';
+import fieldsT from '../../app-text/views/search/search-results/abs-download-schemas.json';
+import { downloadSchemas as commonDownloadSchemas } from '../common-download-schemas';
 
 export const downloadSchemas = {	
 	...commonDownloadSchemas,
