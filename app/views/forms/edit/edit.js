@@ -454,7 +454,8 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
     $scope.onBuildDocumentSelectorQuery = function(options){
       var queries = {
           fieldQueries    : options.fieldQueries||[],
-          query           : options.query || '*:*'
+          query           : options.query || '*:*',
+          sort            : options.sort
       }
       if(options.schemas)
         queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(' ') + ')')

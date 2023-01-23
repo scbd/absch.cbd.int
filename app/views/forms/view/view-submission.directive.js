@@ -33,20 +33,19 @@ import '~/views/forms/directives/view-terms-hierarchy';
 									}
                 }
 
-                $scope.$watch("document.notifications", function(newVal, oldVal)
-				{
-					if(newVal!=oldVal){
-						if(~($scope.notifications||[]).length || newVal!=oldVal){
-							var query = {
-								query: "symbol_s:(" + _.map(newVal, 'identifier').map(solr.escape).join(' ') + ')',
-								fields: "identifier_s,title_s,acronym_s,reference_s, symbol_s"
-							};
-							searchService.list(query).then(function(data){
-								$scope.notifications  = data.data.response.docs;
-							});
-						}
+                $scope.$watch("document.notifications", function(newVal, oldVal){
+
+					if(~($scope.notifications||[]).length || newVal!=oldVal){
+						const selectedIds = _.map(newVal, 'identifier').map(solr.escape)
+						var query = {
+							query: `identifier_s:(${selectedIds.join(' ')}) OR symbol_s:(${selectedIds.join(' ')})`,
+							fields: "identifier_s,title_s,acronym_s,reference_s, symbol_s"
+						};
+						searchService.list(query).then(function(data){
+							$scope.notifications  = data.data.response.docs;
+						});
 					}
-					else
+					else if(!newVal)
 						$scope.notifications  = [];
 				});
             }

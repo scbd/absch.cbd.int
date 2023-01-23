@@ -28,7 +28,7 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
       
       var queryOptions = {
         realm       : realm.value,
-        fieldQueries:['schema_s:organization OR (schema_s:contact AND type_s:organization)' ],
+        fieldQueries:['schema_s:organization' ],
         searchText  : searchText
       }
       
@@ -46,15 +46,11 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
 
      $scope.onNotificationQuery = function(searchText){
        var queryOptions = {
-        realm       : realm.value,
-         schemas	  : ['notification'],
-         searchText: searchText
+          realm       : realm.value,
+          schemas	  : ['notification'],
+          searchText: searchText,
+          sort      : 'updatedDate_dt desc'
        }
-       if ($scope.document.government)
-           queryOptions.government = $scope.document.government.identifier;
-      
-       //queryOptions.identifier = (($scope.document||{​​​​​}​​​​​).header||{​​​​​}​​​​​).identifier
-
        return $scope.onBuildDocumentSelectorQuery(queryOptions);
      }
 
@@ -92,7 +88,8 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
     $scope.onNotificationSelected = function(){
         if((($scope.document||{}).notifications||[]).length){
             var selected = _.map($scope.document.notifications, 'identifier');
-            var query = 'schema_s:notification AND symbol_s:(' + _.map(selected, solr.escape).join(' ') + ')';
+            const selectedIds = _.map(selected, solr.escape);
+            var query = `schema_s:notification AND (identifier_s:(${selectedIds.join(' ')} OR symbol_s:(${selectedIds.join(' ')})))`;
             searchService.list({
                 query : query,
                 fields: $scope.notificationQuery.fl

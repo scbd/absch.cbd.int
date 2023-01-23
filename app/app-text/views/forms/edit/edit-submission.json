@@ -17,5 +17,6 @@
     "otherRelevantInformation": "Any other relevant information",
     "relevantInformationInfo": "Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.",
     "notes": "Notes",
-    "notesInfos": "The “Notes” field is for your personal use. It can only be seen when the record is being edited but is not visible when the record is published. This field is not meant to be used for confidential information."
+    "notesInfos": "The “Notes” field is for your personal use. It can only be seen when the record is being edited but is not visible when the record is published. This field is not meant to be used for confidential information.",
+    "selectOne": "Please select one of the following:"
 }

@@ -140,6 +140,7 @@ import '~/components/scbd-angularjs-services/main';
                 }
 
                 function toggleOption(element) {
+                    
                     var mapping = $scope.mapping(element);
                     var spliceIndex = indexOfPredicate($scope.binding, function(item) {
                         return _.isEqual(item, mapping);
@@ -246,7 +247,9 @@ import '~/components/scbd-angularjs-services/main';
 
                 //Toggle whether or not to show the all options
                 $scope.toggleAllOptions = function(buttonActivate) {
-                    
+
+                    if($scope.ngDisabledFn())
+                        return;
                     if (buttonActivate) //TODO: rename to 'showAll' or something                   
                         $scope.buttonActivated = true;
 
@@ -340,7 +343,7 @@ import '~/components/scbd-angularjs-services/main';
 
                 $scope.$watch('binding', function(newValue) { //jshint ignore:line
                     if ($scope.multiple) {
-                        //if multiepl select box, then we need to revers map the displaySpan texts
+                        //if multiple select box, then we need to revers map the displaySpan texts
                         if ($scope.selectbox)
                             GetSourceItems().then(function(items) {
                                 for (var i = 0; i < $scope.binding.length; ++i)
@@ -364,6 +367,9 @@ import '~/components/scbd-angularjs-services/main';
                     // $scope.ngChange(newValue);
                 });
 
+                $scope.clearSelection = function(){
+                    $scope.binding = undefined;
+                }
 
                 function reverseMap(value, items) {
                     var foundItem = '';
