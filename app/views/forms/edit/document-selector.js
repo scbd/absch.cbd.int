@@ -53,8 +53,8 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             $scope.searchResult = {
                 rowsPerPage :25,
                 currentPage :1,
-                sortBy      :$attr.sortByField||'updatedDate_dt',
-                sortSequence:' asc'  
+                sortBy      :$attr.sortByField   ||'updatedDate_dt',
+                sortSequence:` ${($attr.sortBySequence||'asc').trim()}`  
             }
             $scope.allowNew = {
                 show    : $attr.allowNew=='true',

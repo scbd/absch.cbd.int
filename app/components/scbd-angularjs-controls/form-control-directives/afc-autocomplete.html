@@ -15,6 +15,10 @@
 			<span class="input-group-text fw-bolder cursor-pointer" id="addon-wrapping" ng-click="toggleAllOptions(true);" ng-disabled="ngDisabledFn()"
 				ng-blur="delayHideOptions()" tabindex="-1" ng-class="{disabled:ngDisabledFn()}"><i class="bi bi-caret-down-fill"></i>
 			</span>
+			<span class="input-group-text fw-bolder cursor-pointer" id="addon-wrapping" ng-click="clearSelection();"
+				ng-if="binding && !ngDisabledFn()"
+				ng-blur="delayHideOptions()" tabindex="-1" ng-class="{disabled:ngDisabledFn()}" title="clear selection"><i class="bi bi-x"></i>
+			</span>
 	</div>
 
 	<div class="list-group">
