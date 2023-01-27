@@ -8,6 +8,8 @@ import 'ngDialog';
 import '~/services/main'; // jshint ignore:line
 import documentSelectorT from '~/app-text/views/forms/edit/document-selector.json';
 
+import {Tooltip} from 'bootstrap';
+
 app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService',
     function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService) {
 
@@ -654,8 +656,21 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             }
 
             function showToolTip(){
-                $timeout(function(){              
-                    $('#' + dialogId + ' [data-bs-toggle="tooltip"]').tooltip()
+                $timeout(function(){        
+                    // 
+                    console.log( $('#' + dialogId + ' [data-bs-toggle="tooltip"]'))  
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new Tooltip(tooltipTriggerEl)
+                    })
+                    // $(`#${dialogId} [data-bs-toggle="tooltip"]`).map(e=>{
+                    //     new Tooltip(e);
+                    // })
+                    // new Tooltip()
+                    // $('#' + dialogId ).tooltip({
+                    //     selector : '[data-bs-toggle=tooltip]',
+                    //     container : 'body'
+                    //   })
                 }, 300); 
             }
 
