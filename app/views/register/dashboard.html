@@ -446,75 +446,84 @@
                 </div>
 
                 <div ng-if="::roles.isSchemaUser('contact') || roles.is('Administrator')"   class="m-0 mt-2 mb-3 ">
-                    <div class="mb-1 border-bottom bold color-darkgrey">{{::('dashboardT.contactRecords'|$translate)}}</div>
+                    <div class="mb-1 border-bottom bold color-darkgrey">{{::('dashboardT.otherRecords'|$translate)}}</div>
                     <div class="pb-2">
                         <table class="overview table w-100">
                             <thead></thead>
                             <tbody>
-                                <tr class="visited-background">
+                                <tr ng-repeat-start="schema in otherRecordSchemas" class="visited-background" ng-if="::roles.isSchemaUser(schema) || roles.is('Administrator')">
                                     <td class="table_width">
                                         <div class="btn-group btn-group-sm table_width" role="group">
-                                            <button id="quickViewContact" type="button" class="btn btn-outline-dark p-0"
+                                            <button id="quickView{{schema}}" type="button" class="btn btn-outline-dark p-0"
                                                 title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"
-                                                ng-click="showTopRecords($event,'contact')">
+                                                ng-click="showTopRecords($event,schema)">
                                                 <i class="bi bi-chevron-down p-1 cursor-pointer"
-                                                    ng-class="{'bi bi-chevron-down':!topRecords['contact'], 'bi bi-chevron-up':topRecords['contact']}"
+                                                    ng-class="{'bi bi-chevron-down':!topRecords[schema], 'bi bi-chevron-up':topRecords[schema]}"
                                                     aria-hidden="true"></i></button>
-                                            <button id="addNewRecordContact" type="button"
+                                            <button id="addNewRecord{{schema}}" type="button"
                                                 class="btn btn-outline-dark p-0" title="{{::('dashboardT.addRecord'|$translate)}}"
-                                                data-bs-toggle="tooltip" ng-click="gotoNew($event,'contact')"><i
+                                                data-bs-toggle="tooltip" ng-click="gotoNew($event,schema)"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
-                                            <button id="viewListContact" type="button" class="btn btn-outline-dark p-0"
+                                            <button id="viewList{{schema}}" type="button" class="btn btn-outline-dark p-0"
                                                 title="{{::('dashboardT.viewAllRecords'|$translate)}}" data-bs-toggle="tooltip"
-                                                ng-click="gotoList($event,'contact')"><i
+                                                ng-click="gotoList($event,schema)"><i
                                                     class="bi bi-list fs-5 fw-bold d-inline-flex"></i></button>
                                         </div>
                                     </td>
                                     <td class="table-min-width">
-                                        <a rel="noopener" translation-url href="#" ng-click="gotoList($event,'contact')"
+                                        <a rel="noopener" translation-url href="#" ng-click="gotoList($event,schema)"
                                             class="color-darkgrey ps-2 text-decoration-none">
-                                            <span ng-bind="schemas['contact'].titlePlural|lstring:locale"></span>
-                                            (<span ng-bind="schemas['contact'].shortCode|lstring:locale"></span>)
+                                            <span ng-bind="schemas[schema].titlePlural|lstring:locale"></span>
+                                            (<span ng-bind="schemas[schema].shortCode|lstring:locale"></span>)
                                         </a>
-                                        <span ng-if="schemas['contact'].description" href="#"
+                                        <span ng-if="schemas[schema].description" href="#"
                                             class="helpinfoInline fa fa-info-circle color-litegrey"
                                             data-bs-toggle="tooltip" data-html="true"
-                                            title="{{schemas['contact'].description|lstring:locale}}"
+                                            title="{{schemas[schema].description|lstring:locale}}"
                                             data-container="body"></span>
 
                                     </td>
                                     <td class="table_max_width text-end">
                                         <span class="table_display_none" ng-include="'offline-formats'"
-                                            onload="schema='contact'"></span>
+                                            onload="schema=schema"></span>
                                     </td>
                                     <td class="text-center table_display_none td_width"><a rel="noopener"
                                             translation-url ng-href="/register/CON/status/published"
                                             class="badge bg-success text-decoration-none"
-                                            ng-class="{'bg-litegrey': facets('contact','publish')===0}"
-                                            ng-bind="facets('contact','publish')"></a>
+                                            ng-class="{'bg-litegrey': facets(schema,'publish')===0}"
+                                            ng-bind="facets(schema,'publish')"></a>
                                     </td>
 
                                     <td class="text-center  table_display_none td_width"><a rel="noopener"
                                             translation-url ng-href="/register/CON/status/drafts"
                                             class="badge bg-secondary text-decoration-none"
-                                            ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}"
-                                            ng-bind="Math.max(0, facets('contact','draft') - facets('contact','request'))"></a>
+                                            ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}"
+                                            ng-bind="Math.max(0, facets(schema,'draft') - facets(schema,'request'))"></a>
                                     </td>
 
                                     <td class="text-center  table_display_none td_width"><a rel="noopener"
                                             translation-url ng-href="/register/CON/status/requests"
                                             class="badge bg-danger text-decoration-none"
-                                            ng-class="{'bg-litegrey': facets('contact','request')===0}"
-                                            ng-bind="facets('contact','request')"></a>
+                                            ng-class="{'bg-litegrey': facets(schema,'request')===0}"
+                                            ng-bind="facets(schema,'request')"></a>
 
                                     </td>
                                 </tr>
+                                <tr ng-if="topRecords[schema]" class="w-100" style="background-color:#e1e1e1;">
+                                    <td colspan="6">                                    
+                                    <top-records schema="{{schema}}" top="10" show-schema-name="false">
+                                    </top-records>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat-end>
+                                    <td colspan="6"></td>
+                                </tr>
                             </tbody>
                         </table>
-                        <div ng-if="topRecords['contact']" class="w-100"  style="background-color:#e1e1e1;">
+                        <!-- <div ng-if="topRecords['contact']" class="w-100"  style="background-color:#e1e1e1;">
                             <top-records schema="contact" top="10" class="pt-1" show-schema-name="false">
                             </top-records>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

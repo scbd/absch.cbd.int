@@ -8,6 +8,8 @@ import 'ngDialog';
 import '~/services/main'; // jshint ignore:line
 import documentSelectorT from '~/app-text/views/forms/edit/document-selector.json';
 
+import {Tooltip} from 'bootstrap';
+
 app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService',
     function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService) {
 
@@ -54,7 +56,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 rowsPerPage :25,
                 currentPage :1,
                 sortBy      :$attr.sortByField   ||'updatedDate_dt',
-                sortSequence:` ${($attr.sortBySequence||'asc').trim()}`  
+                sortSequence:` ${($attr.sortBySequence||(!$attr.sortByField ? 'desc' : 'asc')).trim()}`  
             }
             $scope.allowNew = {
                 show    : $attr.allowNew=='true',
@@ -355,8 +357,13 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     var sortExpression  = getSortField(rawQuery.fields)
                     var sortSequence    = $scope.search.sortSequence||' asc';
 
-                    if(!sortExpression)
-                        sortExpression = rawQuery.sort||('updatedDate_dt' + sortSequence);
+                    if(!sortExpression){
+                        sortExpression = rawQuery.sort;
+                        if(!sortExpression)
+                            sortExpression = `${$scope.searchResult?.sortBy} ${$scope.searchResult?.sortSequence}`
+                        if(!sortExpression)
+                            sortExpression = 'updatedDate_dt desc';
+                    }
                     else
                         sortExpression+= sortSequence;
 
@@ -559,6 +566,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 $scope.allowNew.editingOn = false;
                 $scope.search.keyword = '';
                 $scope.searchResult = {
+                    ...$scope.searchResult,
                     rowsPerPage:25,
                     currentPage:1
                 }
@@ -580,6 +588,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 })
                 
                 function onDialogOpened(name){
+                    showToolTip();
                     $scope.openingDialog = false;
                     var height = ($(window).height()/2)+20; 
                     $(`#${dialogId} .modal-body .tab-content`).css('max-height', height + 'px');  
@@ -647,8 +656,21 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             }
 
             function showToolTip(){
-                $timeout(function(){              
-                    $('#' + dialogId + ' [data-bs-toggle="tooltip"]').tooltip()
+                $timeout(function(){        
+                    // 
+                    console.log( $('#' + dialogId + ' [data-bs-toggle="tooltip"]'))  
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new Tooltip(tooltipTriggerEl)
+                    })
+                    // $(`#${dialogId} [data-bs-toggle="tooltip"]`).map(e=>{
+                    //     new Tooltip(e);
+                    // })
+                    // new Tooltip()
+                    // $('#' + dialogId ).tooltip({
+                    //     selector : '[data-bs-toggle=tooltip]',
+                    //     container : 'body'
+                    //   })
                 }, 300); 
             }
 

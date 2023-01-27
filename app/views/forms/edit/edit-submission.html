@@ -28,7 +28,7 @@
 
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="header.languages" required
-                                                caption="{{::('editsubmissionT.selectOne'|$translate)}}">       
+                                                caption="{{::('editsubmissionT.selectOne'|$translate)}}" style="margin-bottom: 0px;">       
                                                 <div class="row">                                 
                                                     <div class="col-md-5">
                                                         <div class="km-control-group" name="government" caption="{{::('editsubmissionT.country'|$translate)}}">
@@ -148,7 +148,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="cpbThematicAreas" caption="">
+                                            <div class="km-control-group" name="cpbThematicAreas" caption="" style="margin-bottom: 0px;">
                                                 <div km-term-check name="cpbThematicAreas"
                                                     ng-model="document.cpbThematicAreas"
                                                     terms="options.bchThematicAreas()" binding-type="term[]" locales="document.header.languages"></div>
