@@ -3098,7 +3098,7 @@ div legend {
     color: #333;
     border: 0;
     border-bottom: 1px solid #e5e5e5;
-    margin-top: 20px;
+    margin-top: 10px;
 	font-size:20px;
 }
 .date .input-group-addon{
@@ -3259,11 +3259,12 @@ section .no-shadow{
 
 .editForm .no-shadow{
     min-height: 20px;
-    padding: 19px;
+    padding: 10px;
     margin-bottom: 20px;
     background-color: #f5f5f5;
     border: 1px solid #e3e3e3;
     border-radius: 4px;
+    padding-bottom: 5px;
 }
 .edit-national-report .time-period div[ng-transclude]{
     display: flex

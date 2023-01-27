@@ -25,6 +25,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             $scope.Math             = window.Math;
             $scope.nationalSchemas  = _.without(realm.nationalSchemas, 'contact', 'focalPoint', 'absMeasureStatus');
             $scope.referenceSchemas = _.without(realm.referenceSchemas, 'capacityBuildingResource');
+            $scope.otherRecordSchemas = ['contact'];
             $scope.topRecords       = {};
             $scope.user             = $rootScope.user;
             $scope.showRecords      = true;
@@ -74,7 +75,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         $scope.showProfileInfo = false;
                         if($scope.topRecords["CON"]) {
                             $scope.topRecords["CON"] = false;
-                            $element.find("#quickViewContact").click();
+                            $element.find("#quickViewcontact").click();
                         }
                     },
                     steps : [
@@ -120,7 +121,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         {
                             appendToBody: true,
                             type        : 'element',
-                            selector    : "#quickViewContact",
+                            selector    : "#quickViewcontact",
                             title       : joyRideText.quickView.title,
                             content     : joyRideText.quickView.content,
                             placement   : 'right',
@@ -183,10 +184,10 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                 }
 
                 function showTopRecord(resumeJoyride){
-                    document.querySelector('#quickViewContact').scrollIntoView({
+                    document.querySelector('#quickViewcontact').scrollIntoView({
                         behavior: 'smooth'
                     });
-                    $element.find("#quickViewContact").click();
+                    $element.find("#quickViewcontact").click();
                     $scope.topRecords["CON"] = !$scope.topRecords["CON"];
                     $timeout(resumeJoyride, 100);
                 }
