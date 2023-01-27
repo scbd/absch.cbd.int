@@ -54,7 +54,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 rowsPerPage :25,
                 currentPage :1,
                 sortBy      :$attr.sortByField   ||'updatedDate_dt',
-                sortSequence:` ${($attr.sortBySequence||'asc').trim()}`  
+                sortSequence:` ${($attr.sortBySequence||(!$attr.sortByField ? 'desc' : 'asc')).trim()}`  
             }
             $scope.allowNew = {
                 show    : $attr.allowNew=='true',
@@ -355,8 +355,13 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     var sortExpression  = getSortField(rawQuery.fields)
                     var sortSequence    = $scope.search.sortSequence||' asc';
 
-                    if(!sortExpression)
-                        sortExpression = rawQuery.sort||('updatedDate_dt' + sortSequence);
+                    if(!sortExpression){
+                        sortExpression = rawQuery.sort;
+                        if(!sortExpression)
+                            sortExpression = `${$scope.searchResult?.sortBy} ${$scope.searchResult?.sortSequence}`
+                        if(!sortExpression)
+                            sortExpression = 'updatedDate_dt desc';
+                    }
                     else
                         sortExpression+= sortSequence;
 
@@ -559,6 +564,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 $scope.allowNew.editingOn = false;
                 $scope.search.keyword = '';
                 $scope.searchResult = {
+                    ...$scope.searchResult,
                     rowsPerPage:25,
                     currentPage:1
                 }
@@ -580,6 +586,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 })
                 
                 function onDialogOpened(name){
+                    showToolTip();
                     $scope.openingDialog = false;
                     var height = ($(window).height()/2)+20; 
                     $(`#${dialogId} .modal-body .tab-content`).css('max-height', height + 'px');  
