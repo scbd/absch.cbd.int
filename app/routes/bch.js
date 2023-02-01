@@ -45,6 +45,7 @@ const bchRouteUrls = {
   cms_content                          : { component: ()=>import('~/views/shared/cms-content') },
   help_forbidden                       : { component: ()=>import('~/views/shared/403') },
   help_not_found                       : { component: ()=>import('~/views/shared/404') },
+  portalsHome                          : { component: ()=>import('~/views/portals') }, 
 };
 
 app.config(["$routeProvider", function ($routeProvider) {
@@ -92,6 +93,9 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync("/onlineconferences/:subpath*?", {  templateUrl: "views/shared/cms-content.html",  target: "https://bch.cbd.int/onlineconferences/:subpath",  controller: function () {    return commonRoutes.importQ("views/shared/cms-content");  }}).
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
+  whenAsync('/portals/risk-assessment',                           { ...mapView(angularViewWrapper),                    "label":routesLabels.RiskAssessmentPortal, "resolve":{ ...bchRouteUrls.portalsHome, "routePrams":injectRouteParams({ "type":"articles", tags:['bch', 'portals', 'risk-assessment']})}}).
+
+  
   otherwise({
     templateUrl: commonRoutes.baseUrl + "views/shared/404.html",
     label: routesLabels.pageNotFound

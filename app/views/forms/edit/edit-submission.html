@@ -25,22 +25,29 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
-                                            <div class="km-control-group" required name="government" caption="{{::('editsubmissionT.country'|$translate)}}"
-                                                required>
-                                                <div afc-autocomplete required name="government"
-                                                    ng-disabled="document.organizations" ng-model="document.government"
-                                                    source="options.countries" filter="genericFilter"
-                                                    mapping="genericMapping" selectbox="true"
-                                                    placeholder="{{::('editsubmissionT.selectOption'|$translate)}}"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1"><strong style="padding-left:50px;">{{::('editsubmissionT.or'|$translate)}}</strong></div>
-                                        <div class="col-md-6">
-                                            <div class="km-control-group" name="organization"
-                                                caption="{{::('editsubmissionT.organization'|$translate)}}" required>
-                                                <div document-selector ng-model="document.organizations"  type="checkbox" ng-disabled="document.government" question="organizations"
-                                                     on-build-query="onContactQuery(searchText)" allow-new-schema="organization">
+
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="header.languages" required
+                                                caption="{{::('editsubmissionT.selectOne'|$translate)}}" style="margin-bottom: 0px;">       
+                                                <div class="row">                                 
+                                                    <div class="col-md-5">
+                                                        <div class="km-control-group" name="government" caption="{{::('editsubmissionT.country'|$translate)}}">
+                                                            <div afc-autocomplete required name="government"
+                                                                ng-disabled="document.organizations" ng-model="document.government"
+                                                                source="options.countries" filter="genericFilter"
+                                                                mapping="genericMapping" selectbox="true"
+                                                                placeholder="{{::('editsubmissionT.selectOption'|$translate)}}"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1"><strong style="padding-left:50px;">{{::('editsubmissionT.or'|$translate)}}</strong></div>
+                                                    <div class="col-md-6">
+                                                        <div class="km-control-group" name="organizations"
+                                                            caption="{{::('editsubmissionT.organization'|$translate)}}">
+                                                            <div document-selector ng-model="document.organizations"  type="checkbox" ng-disabled="document.government" question="organizations"
+                                                                on-build-query="onContactQuery(searchText)" allow-new-schema="organization">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,7 +148,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="cpbThematicAreas" caption="">
+                                            <div class="km-control-group" name="cpbThematicAreas" caption="" style="margin-bottom: 0px;">
                                                 <div km-term-check name="cpbThematicAreas"
                                                     ng-model="document.cpbThematicAreas"
                                                     terms="options.bchThematicAreas()" binding-type="term[]" locales="document.header.languages"></div>

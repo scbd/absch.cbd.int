@@ -10,5 +10,6 @@
     "geneRegistry":"Gene registry",
     "forbidden":"Forbidden",
     "notFound":"Not found",
-    "pageNotFound":"Page not found"
+    "pageNotFound":"Page not found",
+    "RiskAssessmentPortal" : "Risk Assessment"
 }
