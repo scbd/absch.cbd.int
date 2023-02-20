@@ -10,10 +10,10 @@ import {
   AngularVueRouterPlugin, 
   AngularVueRoutePlugin, 
   AngularVuePlugin,
-  AngularVueDirective 
+  AngularVueDirective,
+  AngularVueAuthPlugin
 //} from 'angular-vue-plugins';
 } from './tmp-angular-vue.js';
-import AngularVueAuthPlugin from '~/plugins/angular-vue-auth-plugin';
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
@@ -66,13 +66,14 @@ app.run(["realm", "locale", '$injector', 'authentication', function (realm, loca
   registerVuePlugin('$ngApp', app);
   registerVuePlugin('$ngInjector', $injector);
 
-  const vueApp = new Vue({});
+  const vueRootApp = new Vue({});
 
-  window.Vue.use(new AngularVuePlugin({ $injector, ngApp: app, vueApp }));
-  window.Vue.use(new AngularVueAuthPlugin  ($injector));
+  window.Vue.use(new AngularVuePlugin({ $injector, ngApp: app, vueApp: vueRootApp }));
   window.Vue.use(new AngularVueRoutePlugin ($injector));
   window.Vue.use(new AngularVueRouterPlugin($injector));
-  window.Vue.use(new AngularVueAuthPlugin($injector));
+  window.Vue.use(new AngularVueAuthPlugin  ({
+    logout() { $injector.get("authentication").signOut(); },
+  }));
   
 }]);
 
