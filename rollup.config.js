@@ -29,7 +29,7 @@ export default async function(){
   
   externals = [...externals, ...await loadExternals()];
 
-  const locales = isWatchOn ? ['en']
+  const locales = isWatchOn ? ['en']//, 'fr']
                             : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
   
   return[

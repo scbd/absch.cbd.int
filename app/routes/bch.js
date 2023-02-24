@@ -1,8 +1,9 @@
 import app from '~/app';
 import commonRoutes from "./common-routes";
 import "angular-route";
-import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
+import { securize, resolveLiteral, mapView, currentUser, injectRouteParams } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper';
+import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import routesLabels from '~/app-text/routes/bch-route-labels.json';
 import * as theBch from '~/views/home/bch';
 
@@ -45,7 +46,9 @@ const bchRouteUrls = {
   cms_content                          : { component: ()=>import('~/views/shared/cms-content') },
   help_forbidden                       : { component: ()=>import('~/views/shared/403') },
   help_not_found                       : { component: ()=>import('~/views/shared/404') },
-  portalsHome                          : { component: ()=>import('~/views/portals') }, 
+  portal                               : { component: ()=>import('~/views/portals/index.vue') },
+  portalId                             : { component: ()=>import('~/views/portals/portal-id.vue') },
+
 };
 
 app.config(["$routeProvider", function ($routeProvider) {
@@ -86,14 +89,17 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/registries/living-modified-organisms',              { ...mapView(angularViewWrapper),                    "label":routesLabels.lmoRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_living_modified_organisms}}).
   whenAsync('/registries/organisms',                              { ...mapView(angularViewWrapper),                    "label":routesLabels.organismsRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_organisms}}).
   whenAsync('/registries/genetic-elements',                       { ...mapView(angularViewWrapper),                    "label":routesLabels.geneRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_genetic_elements}}).
-  whenAsync('/about/countryprofile.shtml',                        {"redirectTo":"/countries/:country"}). 
-  whenAsync("/countries/:country", { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/countryprofile.shtml?country=:country", controller: function () {   return commonRoutes.importQ("views/shared/cms-content"); }}).
-  whenAsync("/about/:subpath*?", { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/:subpath", controller: function () {   return commonRoutes.importQ("views/shared/cms-content"); }}).
-  whenAsync("/protocol/:subpath*?", {  templateUrl: "views/shared/cms-content.html",  target: "https://bch.cbd.int/protocol/:subpath",  controller: function () {    return commonRoutes.importQ("views/shared/cms-content");  }}).
-  whenAsync("/onlineconferences/:subpath*?", {  templateUrl: "views/shared/cms-content.html",  target: "https://bch.cbd.int/onlineconferences/:subpath",  controller: function () {    return commonRoutes.importQ("views/shared/cms-content");  }}).
+  whenAsync('/about/countryprofile.shtml',                        { redirectTo:  "/countries/:country"}). 
+  // whenAsync("/countries/:country",                                { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/countryprofile.shtml?country=:country", controller: ()=>import("views/shared/cms-content") }).
+  // whenAsync("/about/:subpath*?",                                  { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/:subpath",                              controller: ()=>import("views/shared/cms-content") }).
+  // whenAsync("/protocol/:subpath*?",                               { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/protocol/:subpath",                           controller: ()=>import("views/shared/cms-content") }).
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
   whenAsync('/portals/risk-assessment',                           { ...mapView(angularViewWrapper),                    "label":routesLabels.RiskAssessmentPortal, "resolve":{ ...bchRouteUrls.portalsHome, "routePrams":injectRouteParams({ "type":"articles", tags:['bch', 'portals', 'risk-assessment']})}}).
+
+  whenAsync('/portals',                                 { ...mapView(vueViewWrapper),                        "label":"Online forums and portals",       "resolve":{ ...bchRouteUrls.portal, },  "param":"true","resolveController":true}).
+  whenAsync('/portals/:portalId/:subPath*?',            { ...mapView(vueViewWrapper),                        "label":"The Portal...",                   "resolve":{ ...bchRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false }).
+
   
   
   otherwise({

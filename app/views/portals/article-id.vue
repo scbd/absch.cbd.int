@@ -29,12 +29,8 @@ export default {
 
     const { portalId, identifier } = this;
 
-    const tags = ["realm:BCH", `portal:${portalId}`];
 
-    if (identifier && !isObjectId(identifier))
-      tags.push(`${identifier}`); 
-
-    var ag = [{ $match: { adminTags: { $all: tags } } }];
+    var ag = [];
 
     if (isObjectId(identifier))
       ag.push({ $match: { _id: mapObjectId(identifier) } });

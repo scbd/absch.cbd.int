@@ -70,9 +70,6 @@ const commonRouteUrls = {
     kbTags: { component: () => import('~/views/kb/adminTags.vue') },
     shareDocument                               : { component: ()=>import('~/views/forms/view/shared-document') },
     draftDocumentPdf                            : { component: ()=>import('~/views/pdf-viewer/draft-document-pdf-link') },
-    onlineConferences                           : { component: ()=>import('~/views/online-conferences/index.vue') },
-    onlineConferencesPortal                     : { component: ()=>import('~/views/online-conferences/portal-id.vue') },
-
     submissionsOnNotifications                  : { component: ()=>import('~/views/reports/submissions') }
 }
 
@@ -166,8 +163,6 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/share/email/:type/:accessKey',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
 
   whenAsync('/submissions-to-notifications',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.submissionsOnNotifications, "resolve":{ ...commonRouteUrls.submissionsOnNotifications,         },"param":"true","resolveController":true,"reloadOnSearch":false}).
-  whenAsync('/onlineconferences',                                 { ...mapView(vueViewWrapper),                        "label":"Online forums and portals",   "resolve":{ ...commonRouteUrls.onlineConferences,                            },"param":"true","resolveController":true}).
-  whenAsync('/onlineconferences/:portalId/:subPath*?',            { ...mapView(vueViewWrapper),                        "label":"The Portal...",   "resolve":{ ...commonRouteUrls.onlineConferencesPortal,   user: currentUser(), basePath:()=>'/onlineconferences/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false }).
   whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}})
 }]);
 

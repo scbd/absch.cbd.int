@@ -6,6 +6,7 @@
       </div>
       <div class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-9 gx-2 gy-2" >
         <div class="bg-white p-4" ref="view"></div>
+        <pre>{{ __menu }}</pre>
       </div>
     </div>
   </div>
@@ -22,14 +23,18 @@ import Thread from './thread-id.vue'
 import SubRouter from "../../services/router.js";
 import { compile }  from "path-to-regexp";
 import PageNotFound from '~/views/shared/404.vue';
+import ___MENUS from './menus.json'
 
 
-const subRouter = new SubRouter([
-  { path: '/',                                name : "home",      component: Article, params: { identifier: 'introduction' } },
-  { path: '/:identifier(calendar)',           name : "calendar",  component: Article },
-  { path: '/resources/:identifier',           name : "resources", component: Article },
-  { path: '/forum/:forumId',                  name : "forum",     component: Forum },
-  { path: '/forum/:forumId/thread/:threadId', name : "thread",    component: Thread },
+class MenusApi {
+  async get(slug) { 
+    return ___MENUS.find(m=>m.slug==slug);
+  }
+};
+
+
+
+let subRouter = new SubRouter([
 ]);
 
 const Tags = {
@@ -48,14 +53,12 @@ export default {
   data() { 
     return {
       articles: [],
-      forums: []
+      forums: [],
+      portalMenu: {}
     };
   },
   computed : {
     portalId()             { return this.$route.params.portalId; },
-    introduction()         { return this.articles.find  (a=>a.adminTags.includes('introduction')) },
-    calendarOfActivities() { return this.articles.find  (a=>a.adminTags.includes('calendar')) },
-    resources()            { return this.articles.filter(a=>!Object.values(Tags).some(t=>a.adminTags.includes(t)) && !/^forum:/.test(a)) },
     menu()                 { return this.buildMenu() }
   },
   methods:{
@@ -69,25 +72,17 @@ export default {
 
     const { portalId } = this;
 
+
+    this.menusApi    = new MenusApi();
     this.articlesApi = new ArticlesApi();
     this.forumsApi   = new ForumsApi();
 
-    const qArticles = this.articlesApi.queryArticles({ 
-      ag: [ 
-        { $match   : { adminTags:{ $all :["realm:BCH", `portal:${this.portalId}`] } } },
-        { $project : { adminTags:1, title:1 } },
-      ]
-    });
+    const portalMenu = await this.menusApi.get(portalId);
 
-    const qForums = this.forumsApi.queryForums({
-      q: { tags: ["realm:BCH", `portal:${portalId}` ] }
-    });
+    subRouter = buildRoutes(portalMenu);
 
-    const [ articles, forums ] = await Promise.all([qArticles, qForums]);
-
-    this.articles = articles;
-    this.forums   = forums;
-
+    this .portalMenu = portalMenu;
+    
     this.onRouteChange(this.$route);
   }
 }
@@ -128,60 +123,88 @@ function onRouteChange(route) {
   }
 }
 
-function buildMenu() {
-  const basePath = compile(this.basePath)(this.$route.params).replace(/^\//g, '');
+const CONTENT_TYPES = {
+  "*"     : { component: Article },
+  article : { component: Article },
+  forum   : { component: Forum, subRoutes: [ { path: '/thread/:threadId', component: Thread } ] },
+}
 
-  const {
-    introduction,
-    calendarOfActivities,
-    forums,
-    resources
-  }  = this;
+function combine(...parts) {
+  return parts.filter(o=>o).join('/').replace(/\/+/g, '/');
+}
+
+function buildRoutes(portalMenu) {
+
+  const routes = [];
+
+  const addRoute = ({ slug, children, content }, parentPath) => {
+    const path         = combine(parentPath, slug);
+    const [ type ]     = Object.keys(content || {});
+    const contentType  = CONTENT_TYPES[type||'*'] || CONTENT_TYPES['*'];
+    const { component, subRoutes } = contentType || {};
+
+    const params    = { 
+      identifier: content?.article?.id,
+      forumId:    content?.forum?.id 
+    };
+
+    routes.push({ path, component, params })
+
+    for(let subRoute of subRoutes || []) {
+      routes.push({ 
+        path      : combine(path, subRoute.path), 
+        component : subRoute.component || component, 
+        params    : subRoute.params
+      })
+    }
+
+    for(let child of children || [])
+      addRoute(child, path);
+  }
+
+  addRoute({ ...portalMenu, slug: '' }, '/');
+
+  console.dir(routes);
+
+  return new SubRouter(routes);
+}
+
+function buildMenu() {
+  
+  const basePath = compile(`${this.basePath}`)(this.$route.params).replace(/^\//g, '');
+
+  const { portalMenu } = this;
+
+  if(!portalMenu) {
+    return {
+      url : `${basePath}`,
+      title : "Loading...",
+    }
+  }
+
+  const menu = toMenu({ ...portalMenu, slug:''}, basePath);
+
+  return menu;
+}
+
+
+function toMenu({ slug, url, title, children }, basePath) {
+
+  const menuPath = [basePath, slug].filter(o=>o).join('/');
 
   const menu = {
-    url : `${basePath}`,
-    title : introduction ? introduction.title : "Loading...",
-    menus : []
-  }
+    url: url || menuPath,
+    title,
+  };
 
-  if(calendarOfActivities) {
-    menu.menus.push({
-      url : `${basePath}${subRouter.compile('calendar', { identifier: 'calendar' })}`,
-      title : calendarOfActivities.title,
-    })
-  }
-
-  if(forums.length==1) {
-    const { forumId } = forums[0];
-    menu.menus.push({
-      title : "Discussion Forum",
-      url : `${basePath}${subRouter.compile('forum', { forumId })}`,
-    })
-  }
-
-  if(forums.length>1) {
-    menu.menus.push({
-      title : "Discussion Fora",
-      menus : forums.map(({forumId, title})=>({
-        url: `${basePath}${subRouter.compile('forum', { forumId })}`,
-        title: title
-      }))
-    })
-  }
-
-  if(resources.length) {
-    menu.menus.push({
-      title : "Additional Resources",
-      menus: resources.map(({_id, title})=>({
-        url: `${basePath}${subRouter.compile('resources', { identifier: _id })}`,
-        title: title
-      }))
-    })
+  for(let child of children || []) {
+    menu.menus = menu.menus || [];
+    menu.menus.push(toMenu(child, menuPath))
   }
 
   return menu;
-
 }
+
 </script>
 <style scoped>
 .menu-sticky {
