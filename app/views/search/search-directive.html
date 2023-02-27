@@ -1,5 +1,5 @@
 <div id="innerPage">
-    <div class="mastHead pt-4" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
+    <div class="mastHead pt-4 global-filters" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
         <h1 class="text-white">{{::('searchDirectiveT.search'|$translate)}}</h1>
         <div id="search-new" >
             <div class="row">
@@ -168,9 +168,6 @@
 
             </div>
         </div>
-
-
-
 
         <div class="container-fluid position-relative" ng-show="showFilters || searchKeyword">
             <style>

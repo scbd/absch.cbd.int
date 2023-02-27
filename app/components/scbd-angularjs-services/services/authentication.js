@@ -93,6 +93,8 @@ import './apiUrl';
 
                 pToken = t;
 
+                if(Vue?.prototype.$auth)
+                    Vue.prototype.$auth.setUserToken(pToken);
                 return t;
 
             }).catch(function(error) {
@@ -133,21 +135,24 @@ import './apiUrl';
 
             return $q.when(authenticationFrameQ).then(function(authenticationFrame){
 
-            if (authenticationFrame) {
+                if(Vue?.prototype.$auth)
+                    Vue.prototype.$auth.setUserToken(pToken);
 
-                var msg = {
-                    type: "setAuthenticationToken",
-                    authenticationToken: token,
-                    authenticationEmail: email,
-                    expiration        : expiration
-                };
+                if (authenticationFrame) {
 
-                authenticationFrame.contentWindow.postMessage(JSON.stringify(msg), ACCOUNTS_URL);
-            }
+                    var msg = {
+                        type: "setAuthenticationToken",
+                        authenticationToken: token,
+                        authenticationEmail: email,
+                        expiration        : expiration
+                    };
 
-            if (email) {
-                $rootScope.lastLoginEmail = email;
-            }
+                    authenticationFrame.contentWindow.postMessage(JSON.stringify(msg), ACCOUNTS_URL);
+                }
+
+                if (email) {
+                    $rootScope.lastLoginEmail = email;
+                }
             });
         }
 
@@ -297,6 +302,9 @@ import './apiUrl';
             currentUser = user || undefined;
             $rootScope.user = user || anonymous();
             
+			if(Vue?.prototype.$auth)
+                Vue.prototype.$auth.setUser($rootScope.user);
+                
             if (user && user.isAuthenticated && !user.isEmailVerified) {
                 $rootScope.$broadcast('event:auth-emailVerification', {
                     message: 'Email verification pending. Please verify you email before submitting any data.'
@@ -329,7 +337,8 @@ import './apiUrl';
             getUser: getUser,
             signIn: signIn,
             signOut: signOut,
-            isEmailVerified:isEmailVerified
+            isEmailVerified:isEmailVerified,
+            accountsBaseUrl:()=>ACCOUNTS_URL
         };
 
     }]);
