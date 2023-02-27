@@ -101,6 +101,8 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             searchKeyword   : ''
                         }   
                         $scope.hideSubFilters = false;
+                        $scope.isInternalEmbed = $attrs.internalEmbed == 'true';
+                        const includeSchemas   = $attrs.includeSchemas?.split(',')
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
@@ -383,7 +385,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
                     $scope.saveFreeTextFilter = function(text, $event) {
 
-                        if(!text && text.length <= 0)
+                        if(!text || text.length <= 0)
                             return;
 
                         var fid = text;
@@ -568,9 +570,35 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         leftMenuSchemaFieldMapping = await loadLeftMenuFieldMapping();
                         return loadFilters().then(async ()=>{
 
+                            const excludeSchemas = $attrs.excludeSchemas?.split(',')||[];
+                            if(excludeSchemas.length){
+                                excludeSchemas.forEach(sk=>{
+                                    if($scope.searchFilters[sk])
+                                        delete $scope.searchFilters[sk];
+                                    if(leftMenuSchemaFieldMapping[sk])
+                                        delete leftMenuSchemaFieldMapping[sk];
+                                })
+                            }
+                            if(includeSchemas?.length){
+                                var schemaFilters = getSearchFilters('schema');                                
+                                schemaFilters.forEach(sk=>{
+                                    if(sk.type == 'schema' && !includeSchemas.includes(sk.id)){
+                                        if($scope.searchFilters[sk.id])
+                                            delete $scope.searchFilters[sk.id];
+                                        if(leftMenuSchemaFieldMapping[sk.id])
+                                            delete leftMenuSchemaFieldMapping[sk.id];
+                                    }
+                                })
+                            }
                             let subscriptionQueryPromise;
                             let query =  $location.search();
                             let currentPage = query.currentPage||1;
+
+                            if(includeSchemas){
+                                // $scope.clearFilter();
+                                query.schema = includeSchemas; 
+                            }
+
                             if(query.currentPage)
                                 $scope.searchResult.currentPage = currentPage;
                             if(query.rowsPerPage)
@@ -591,7 +619,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 $scope.searchResult.viewType = query.viewType;
 
                             if(query.searchShareQueryId){
-                                if(query.embed)
+                                if(query.embed && !query.showSubFilters)
                                     $scope.hideSubFilters = true;
                                 if(!query.searchShareQueryId.startsWith('legacy-widget_'))
                                     $scope.clearFilter();
@@ -624,7 +652,16 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             }
                             else{                               
                                 if(query.schema){
-                                    $scope.saveFilter(query.schema);
+                                    let schemas = query.schema;
+                                    if(typeof schemas == 'string')
+                                        schemas = [schemas];
+
+                                    schemas.forEach(e=>{
+                                        const schemaFilter = $scope.searchFilters[e]
+                                        if(schemaFilter && !$scope.setFilters[schemaFilter.id] && !$scope.isAlertSearch)
+                                            $scope.saveFilter({...schemaFilter});
+                                    });    
+                                    // $scope.saveFilter(query.schema);
                                 }
                             }
 
@@ -688,6 +725,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 };
                                 $scope.saveDateFilter(dateFilter.field, undefined, dateFilter);
                             }
+                            $scope.$emit('evt:searchFiltersLoaded', {leftMenuFilters, globalFilters:$scope.searchFilters})
                         })
                         .catch(e=>{
                             console.error(e)
@@ -744,23 +782,23 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 chKeywordsFilter = loadBCHKeywordFilters();
 
                             return $q.all([loadSchemaFilters(), loadCountryFilters(), loadRegionsFilters(), loadDateFilters(), chKeywordsFilter])
-                            .then(function(){
-                                var query =  $location.search();
-                                if(query.schema){
-                                    var schemaFilters = getSearchFilters('schema')
-                                    if(!_.isArray(query.schema))
-                                        query.schema = [query.schema];
+                            // .then(function(){
+                            //     var query =  $location.search();
+                            //     if(query.schema){
+                            //         var schemaFilters = getSearchFilters('schema')
+                            //         if(!_.isArray(query.schema))
+                            //             query.schema = [query.schema];
 
-                                    _.forEach(query.schema, function(s){
-                                        var sch = _.find(schemaFilters, {id:s});
-                                        if (!$scope.isAlertSearch) {
-                                            $scope.saveFilter(sch)
-                                        }
-                                    })
-                                }
-                                // console.log($scope.searchFilters)
-                                // localStorageService.set("searchFilters", $scope.searchFilters);
-                            })
+                            //         _.forEach(query.schema, function(s){
+                            //             var sch = _.find(schemaFilters, {id:s});
+                            //             if (!$scope.isAlertSearch) {
+                            //                 $scope.saveFilter(sch)
+                            //             }
+                            //         })
+                            //     }
+                            //     // console.log($scope.searchFilters)
+                            //     // localStorageService.set("searchFilters", $scope.searchFilters);
+                            // })
                         }                
                     };
                     $scope.canShowSaveFilter = function(){
@@ -812,10 +850,9 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     };
 
                     function loadSchemaFilters() {
-
                         _.forEach(realm.schemas, function (schema, key) {
-                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
-                                        'description': $filter('lstring')((schema.description || {})), otherType:schema.type });
+                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
+                                    'description': $filter('lstring')((schema.description || {})), otherType:schema.type });
                         })
                         if(isBCH){
                             addFilter('partyToProtocol' , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Cartagena Protocol on Biosafety'             , 'id': 'partyToProtocol' , 'description': '' });
@@ -1062,7 +1099,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             schemaTypes[key] = facet;
                             schemaTypes.all = schemaTypes.all + (schemaTypes[key]||0);
                         });
-                        var facets = {
+                        facets = {
                                         schemaTypes: schemaTypes, 
                                         schemas   : facets.facet_fields['schema_s'], 
                                         keywords  : facets.facet_fields['all_terms_ss'],
@@ -1170,11 +1207,11 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         var partyStatusQuery    = buildPartyStatusQuery();
                         var regionQuery         = _.compact([buildFieldQuery('region',   'countryRegions_ss'), buildFieldQuery('region',   'countryRegions_REL_ss')]).join(' OR ');
                         var textQuery           = buildFreeTextQuery('freeText', 'text_EN_txt');
-                        // var rawQuery            = buildRawQuery(); //TODO find if there is any use and switch to new query based approach
+                        var rawQuery            = buildRawQuery(); //TODO find if there is any use and switch to new query based approach
 
                         var dateQuery           = buildDateQuery();
 
-                        var queries            = _.compact([dateQuery, textQuery]);//, rawQuery
+                        var queries            = _.compact([dateQuery, textQuery, rawQuery]);//
                         var query              = '';
                         const highlight        = textQuery!=undefined||schemaSubQuery.freeTextQuery!=undefined;
                         if(queries.length)
@@ -1188,9 +1225,14 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         tagQueries.keywords    =  keywordQuery;
                         tagQueries.government  =  countryQuery;
                         tagQueries.region      =  regionQuery;
+
                         //special query for Contact as only records which have reference contact are searchable.
                         tagQueries.contact     =  '(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))';
-                       
+                        const excludeSchemas = $attrs.excludeSchemas?.split(',')||[];
+                        if(excludeSchemas.length){
+                            tagQueries.excludeSchemas =  `(*:* NOT schema_s : (${excludeSchemas.join(' ')}))`
+                        }
+                       // end special query 
                         if(schemaSubQuery.freeTextQuery){ //append subfilters query to general query to benefit highlighting and relevance
                             query = solr.andOr(_.compact([query, tagQueries.schemaSub]), 'AND')
                         }
@@ -1250,7 +1292,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                             subQuery = q;
                                     }
                                     else if(!_.isEmpty(filter.selectedItems)){
-                                        var ids = _.map(filter.selectedItems, s=>s.identifier.toString().replace(/\@[0-9]{1,3}$/, ''));
+                                        let ids = [];
                                         if(filter.type == 'freeText'){                                          
                                             ids = _.map(filter.selectedItems,  function(filter){
                                                 return {name:filter.title};
@@ -1261,6 +1303,12 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                                 freeTexQueries.push(subQuery)
                                         }
                                         else{
+
+                                            let selectedItems = filter.selectedItems;
+                                            if(filter.selectionType == "radio" && filter.type == "solrRecords")
+                                                selectedItems = [filter.selectedItems];
+
+                                            ids = _.map(selectedItems, s=>s.identifier.toString().replace(/\@[0-9]{1,3}$/, ''));
                                             var field = filter.field;
                                             if(filter.searchRelated && filter.relatedField)
                                                 field = filter.relatedField;
@@ -1276,12 +1324,8 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     else if( filter.type == 'yesNo'  && filter.filterValue!== undefined){
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
                                     }
-                                    else if( filter.type == 'check' && filter.filterValue!== undefined){
-                                        if(filter.filterValue){
-                                            subQuery = filter.field + ':' + solr.escape(filter.value);
-                                        }
-                                        else 
-                                            filter.filterValue = undefined;
+                                    else if(['check', 'radioList'].includes(filter.type) && filter.filterValue!== undefined){
+                                        subQuery = filter.field + ':' + solr.escape(filter.filterValue);
                                     }
                                     if(subQuery){
                                         if(filter.excludeResult)
@@ -1510,6 +1554,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     function onLeftFilterUpdate(filters){
                         leftMenuFilters = filters;
                         updateQueryResult();
+                        $scope.$emit('evt:onLeftMenuFilterUpdate', leftMenuFilters );
                     }
 
                     async function loadLeftMenuFieldMapping(){

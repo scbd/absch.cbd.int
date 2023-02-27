@@ -71,6 +71,7 @@ const commonRouteUrls = {
     shareDocument                               : { component: ()=>import('~/views/forms/view/shared-document') },
     draftDocumentPdf                            : { component: ()=>import('~/views/pdf-viewer/draft-document-pdf-link') },
 
+    submissionsOnNotifications                  : { component: ()=>import('~/views/reports/submissions') }
 }
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -162,6 +163,9 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/share/link/:type/:accessKey',                       { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
   whenAsync('/share/email/:type/:accessKey',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
 
+  whenAsync('/submissions-to-notifications',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.submissionsOnNotifications, "resolve":{ ...commonRouteUrls.submissionsOnNotifications,         },"param":"true","resolveController":true,"reloadOnSearch":false}).
+  // whenAsync('/submissions-to-notifications/:notification?',       { ...mapView(angularViewWrapper),                    "label":'notification_label'                   , "resolve":{ ...commonRouteUrls.submissionsOnNotifications,         },"param":"true","resolveController":true,"reloadOnSearch":false}).
+  
   whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}})
 }]);
 

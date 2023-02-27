@@ -15,6 +15,12 @@ app.directive('viewNotification', [function() {
 		},
 		controller: ['$scope', function ($scope) {
 			
+			const documentWatch = $scope.$watch("document", (newVal)=>{
+				if(newVal){
+					$scope.notificationSymbol = `NT-${$scope.document?.symbol_s}`;
+					documentWatch();
+				}
+			});
 			
 		}]
 	}

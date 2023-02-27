@@ -58,5 +58,10 @@
   "resourceNotifications": "Notification(s)",
   "resourceOrganizations": "Organization(s)",
   "resourceCpbThematicAreas": "Thematic areas",
-  "resourceDate": "Submission Date"
+  "resourceDate": "Submission Date",
+  "submissionCountries": "Countries(s)",
+  "submissionByType"  : "Submission by",
+  "submissionByTypeParty" : "Party",
+  "submissionByTypeNonParty"  : "Non-Party",
+  "submissionByTypeOrganization"  : "Organization"
 }

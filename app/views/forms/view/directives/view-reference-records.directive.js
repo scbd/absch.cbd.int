@@ -12,7 +12,9 @@ app.directive("viewReferencedRecords", [function () {
 		restrict: "EA",
 		template: template ,
 		replace: true,
-		transclude: false,
+		transclude: {
+			showInSearch:'?showInSearch'
+		},
 		scope: {
 			model: "=ngModel",
 			locale: "=",

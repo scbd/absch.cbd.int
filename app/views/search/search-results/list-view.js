@@ -13,7 +13,7 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
         return {
             restrict: 'EA',
             replace: true,
-            require:'^searchDirective',
+            require:'?^searchDirective',
             template: template, 
             scope: {
                 api:'='
@@ -72,7 +72,8 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
 
                         $scope.searchResult.sortBy      = lQuery.sort;
                         $scope.searchResult.currentPage = pageNumber;
-                        $scope.searchResult.facets   = searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts);
+                        if(searchDirectiveCtrl)
+                            $scope.searchResult.facets   = searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts);
 
                         if(result.data.highlighting){
                             _.forEach($scope.searchResult.docs, function(doc){

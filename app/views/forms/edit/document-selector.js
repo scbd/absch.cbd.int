@@ -551,6 +551,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 		    //==================================
 		    $scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
+                    console.log(newValue)
                      $scope.syncDocuments();
                      $scope.showAddButton = true;
 		        }

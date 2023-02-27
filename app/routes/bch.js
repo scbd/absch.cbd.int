@@ -94,7 +94,7 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
   whenAsync('/portals/risk-assessment',                           { ...mapView(angularViewWrapper),                    "label":routesLabels.RiskAssessmentPortal, "resolve":{ ...bchRouteUrls.portalsHome, "routePrams":injectRouteParams({ "type":"articles", tags:['bch', 'portals', 'risk-assessment']})}}).
-
+  
   
   otherwise({
     templateUrl: commonRoutes.baseUrl + "views/shared/404.html",
