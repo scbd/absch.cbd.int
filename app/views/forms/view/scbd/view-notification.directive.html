@@ -7,14 +7,22 @@
 		<document-date></document-date>
 
 
-        <div ng-show="document.title_EN_t">
+        <div ng-if="document.title_EN_t">
 			<label>Title</label>
 			<span class="km-value">
 				{{document.title_EN_t}}
 			</span>
 		</div>
         
-		<div ng-show="document.deadline_s">
+		<div ng-if="document.symbol_s">
+			<label>Symbol</label>
+			<span class="km-value">
+				<a ng-href="/submissions-to-notifications?notification={{document.symbol_s}}">
+					{{document.symbol_s| lstring:locale}}
+				</a>
+			</span>
+		</div>
+		<div ng-if="document.deadline_s">
 			<label>Deadline</label>
 			<span class="km-value">
 				{{document.deadline_s| formatDate}}
@@ -23,41 +31,47 @@
 
 		
 
-		<div ng-show="document.description_EN_t">
+		<div ng-if="document.description_EN_t">
 			<label>Description</label>
 			<span class="km-value">
 				{{document.description_EN_t}}
 			</span>
 		</div>
 <!--
-		<div ng-show="document.text_EN_txt">
+		<div ng-if="document.text_EN_txt">
 			<label>Text</label>
 			<span class="km-value">
 				{{document.text_EN_txt | lstring:locale}}
 			</span>
 		</div> -->
-		<div ng-show="document.reference_s">
+		<div ng-if="document.reference_s">
 			<label>Reference</label>
 			<span class="km-value">
-				{{document.reference_s| lstring:locale}}
+				<a ng-href="/submissions-to-notifications?notification={{document.symbol_s}}">
+					{{document.reference_s| lstring:locale}}
+				</a>
 			</span>
 		</div>
 
-		<div ng-show="document.sender_s">
+		<div ng-if="document.sender_s">
 			<label>Sender</label>
 			<span class="km-value">
 				{{document.sender_s| lstring:locale}}
 			</span>
 		</div>
 
-		<div ng-show="document.recipient_ss">
-			<label>Recipient</label>
+		<div ng-if="document.recipient_ss">
+			<label>Recipient(s)</label>
 			<span class="km-value">
-				{{document.recipient_ss| lstring:locale}}
+				<ul class="list">
+					<li ng-repeat="recipient in document.recipient_ss">
+						{{recipient}}
+					</li>
+				</ul>
 			</span>
 		</div>
 
-		<div ng-show="document.url_ss">
+		<div ng-if="document.url_ss">
 			<label>Document Link</label>
 			<span class="km-value">
 				<ul class="list">
@@ -69,7 +83,14 @@
 				</ul>
 			</span>
 		</div>
-
+		<div ng-if="notificationSymbol">
+			<view-referenced-records ng-model="notificationSymbol" on-data-fetch="onReferencedRecordsDataFetch(data)">
+				<show-in-search>
+					<a rel="noopener" target="_blank" ng-href="/submissions-to-notifications?notification={{document.symbol_s| encodeURIComponent }}"
+					class="float-end btn btn-primary btn-sm p-0 px-1">{{::('viewReferenceRecordsT.showInSubmissions'|$translate)}}</a>
+				</show-in-search>
+			</view-referenced-records>
+		</div>
 	</div>
 	<div document-metadata  class="panel-footer"></div>
 </div>

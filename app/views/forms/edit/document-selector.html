@@ -7,7 +7,10 @@
                 #rec .title {color:#111;font-size:12px; font-weight:bold;}
                 #rec .meta {max-width:20%;}
                 .col-title {color:#333; text-transform: uppercase; font-size: 12px; font-weight: bold;}
-                ul.pagination{margin: 0px;}                
+                ul.pagination{margin: 0px;}      
+                .tooltip.show {
+                    z-index: 10000;
+                }          
         </style>
 
 
@@ -177,7 +180,7 @@
                                         <td class="title width-min-30"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td>
                                         <!-- <td ng-bind="doc.rec_countryName"></td> -->
                                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
-                                        <td class="summary" data-bs-toggle="tooltip" data-bs-html="true" ng-bind="doc.rec_summary | limitTo:200"  data-bs-title="doc.rec_summary"></td>
+                                        <td class="summary" ng-bind="doc.rec_summary | limitTo:200"></td>
                                         <td class="meta"> 
                                             <span ng-bind="doc.meta"></span>  
                                         </td>
@@ -296,7 +299,7 @@
                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
                         <td class="title width-min-30"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title"></span></a></td>
                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
-                        <td class="summary" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="doc.rec_summary" ng-bind="doc.rec_summary | limitTo:200"></td>
+                        <td class="summary" ng-bind="doc.rec_summary | limitTo:200"></td>
                         <td class="meta"> 
                             <span ng-bind="doc.meta"></span>                            
                         </td>

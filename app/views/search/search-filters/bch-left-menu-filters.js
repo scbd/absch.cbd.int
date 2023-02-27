@@ -727,15 +727,33 @@ export const bchLeftMenuFilters = {
             "title": bchFilters.freeText,
             "field": "text_EN_txt"
         },
+		{
+			"type": "radioList",
+			"title": bchFilters.submissionByType,
+			"field": "submissionByType_s",
+            "values" : [
+                { label : bchFilters.submissionByTypeParty       , value : 'party'},
+                { label : bchFilters.submissionByTypeNonParty    , value : 'nonParty'},
+                { label : bchFilters.submissionByTypeOrganization, value : 'organization'}
+            ]
+		},
         {
             "type": "solrRecords",
             "query": {
                 "fl": "identifier_s:symbol_s,rec_summary:title_s,rec_title:concat(symbol_s,' - ',reference_s),rec_date:updatedDate_dt,schema_s",
-                "fq": [ "schema_s:notification"]
+                "fq": [ "schema_s:notification"],
+                "lookupField":"symbol_s"
             },
             "title": bchFilters.resourceNotifications,
-            "field": "notifications_ss"
+            "field": "notifications_ss",
+            "selectionType":"radio"
         },
+		{
+			"type": "customListFn",
+			"fn": "cbdCountriesCustomFn",
+			"title": bchFilters.submissionCountries,
+			"field": "government_s"
+		},
         {
             "type": "solrRecords",
             "query": {

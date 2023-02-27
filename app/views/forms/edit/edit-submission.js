@@ -1,4 +1,4 @@
-﻿import app from '~/app';
+import app from '~/app';
 import _ from 'lodash';
 import '~/views/forms/edit/edit';
 import '~/views/forms/view/view-submission.directive';
@@ -49,7 +49,9 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
           realm       : realm.value,
           schemas	  : ['notification'],
           searchText: searchText,
-          sort      : 'updatedDate_dt desc'
+          sort      : 'updatedDate_dt desc',
+          fields    : 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s,'+
+                      '_revision_i, rec_title:title_EN_t,rec_summary:summary_t, rec_type:type_EN_t, '+ $scope.notificationQuery.fl
        }
        return $scope.onBuildDocumentSelectorQuery(queryOptions);
      }

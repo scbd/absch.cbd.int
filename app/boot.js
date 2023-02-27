@@ -125,7 +125,7 @@ export default function bootApp(window, require, defineX) {
             'printThis'                 : cdnHost + 'print-this@1.9.0/printThis',
             'diacritics'                : cdnHost + 'diacritic@0.0.2/diacritics',
             'pdfjs-dist/build/pdf'      : cdnHost + 'pdfjs-dist@2.0.489/build/pdf.min',
-        'pdfjs-dist/build/pdf.worker': cdnHost + 'pdfjs-dist@2.0.489/build/pdf.worker.min ',       
+           'pdfjs-dist/build/pdf.worker': cdnHost + 'pdfjs-dist@2.0.489/build/pdf.worker.min ',       
             'pdf-object'                : cdnHost + 'pdfobject@2.0.201604172/pdfobject.min',
             
             
@@ -149,6 +149,11 @@ export default function bootApp(window, require, defineX) {
             'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
             'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
             'vue-pagination-2'          : `${cdnHost}vue-pagination-2@3.0.91/dist/vue-pagination-2.min`,
+
+
+            'luxon'                     : `${cdnHost}luxon@1.25.0/build/amd/luxon`,
+            'scbd-common-countdown'     :           'libs/@scbd/common/dist/components/countdown/cop-15.umd',
+            'scbd-common-articles'      :           'libs/@scbd/common/dist/components/articles/index.umd',
             
         },
         'shim': {
@@ -211,7 +216,7 @@ export default function bootApp(window, require, defineX) {
         Vue.config.devtools = true;
         return Vue; 
     });    
-    defineX('Vue', [cdnHost +'vue@2.6.12/dist/vue.min.js', 'vue-i18n'], function(Vue, i18n){
+    defineX('Vue', [cdnHost +'vue@2.7.10/dist/vue.min.js', 'vue-i18n'], function(Vue, i18n){
         window.Vue = Vue;
         window.VueI18n = i18n;
 

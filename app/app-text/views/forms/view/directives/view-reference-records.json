@@ -9,5 +9,6 @@
     "country": "Country",
     "title": "Title",
     "updatedOn": "Updated on",
-    "noRecords":"This record is not referenced in other record(s)"
+    "noRecords":"This record is not referenced in other record(s)",
+    "showInSubmissions":"Show in submissions"
 }

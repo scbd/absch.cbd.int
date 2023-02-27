@@ -49,10 +49,12 @@
                 <label>Notifications</label>
                 <div compare-val>
                     <div class="km-value" ng-repeat="notification in notifications" style="margin-bottom:5px;">
-                        <strong>
-                            <span ng-bind="notification.reference_s"></span>
-                            <i ng-show="notification.symbol_s" ng-bind="'('+ notification.symbol_s +')'"></i>
-                        </strong>
+                        <a target="_blank" ng-href="/database/NT/{{notification | uniqueID}}">
+                            <strong>                            
+                                <span ng-bind="notification.reference_s"></span>
+                                <i ng-show="notification.symbol_s" ng-bind="'('+ notification.symbol_s +')'"></i>
+                            </strong>
+                        </a>
                         <div ng-bind="notification.title_s"></div>
                     </div>
                 </div>

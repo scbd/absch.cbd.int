@@ -1,4 +1,4 @@
-﻿import app from '~/app';
+import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-submission.directive.html";
 import '~/views/directives/record-options';
@@ -39,7 +39,7 @@ import '~/views/forms/directives/view-terms-hierarchy';
 						const selectedIds = _.map(newVal, 'identifier').map(solr.escape)
 						var query = {
 							query: `identifier_s:(${selectedIds.join(' ')}) OR symbol_s:(${selectedIds.join(' ')})`,
-							fields: "identifier_s,title_s,acronym_s,reference_s, symbol_s"
+							fields: "id,identifier_s,title_s,acronym_s,reference_s, symbol_s, uniqueIdentifier_s,schema:schema_s"
 						};
 						searchService.list(query).then(function(data){
 							$scope.notifications  = data.data.response.docs;

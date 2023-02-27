@@ -455,7 +455,8 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
       var queries = {
           fieldQueries    : options.fieldQueries||[],
           query           : options.query || '*:*',
-          sort            : options.sort
+          sort            : options.sort,
+          fields          : options.fields
       }
       if(options.schemas)
         queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(' ') + ')')
@@ -480,7 +481,6 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
           else 
             queries.query   = (options.searchField||'text_EN_txt:') + queryText;
       }
-
       return queries;
 
     } 

@@ -551,6 +551,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 		    //==================================
 		    $scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
+                    console.log(newValue)
                      $scope.syncDocuments();
                      $scope.showAddButton = true;
 		        }
@@ -657,21 +658,12 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 
             function showToolTip(){
                 $timeout(function(){        
-                    // 
-                    console.log( $('#' + dialogId + ' [data-bs-toggle="tooltip"]'))  
-                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                    
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('#' + dialogId + ' [data-bs-toggle="tooltip"]'))
                     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                    return new Tooltip(tooltipTriggerEl)
+                        return new Tooltip(tooltipTriggerEl)
                     })
-                    // $(`#${dialogId} [data-bs-toggle="tooltip"]`).map(e=>{
-                    //     new Tooltip(e);
-                    // })
-                    // new Tooltip()
-                    // $('#' + dialogId ).tooltip({
-                    //     selector : '[data-bs-toggle=tooltip]',
-                    //     container : 'body'
-                    //   })
-                }, 300); 
+                }, 1500); 
             }
 
 			function removeRevisionNumber(identifier){
