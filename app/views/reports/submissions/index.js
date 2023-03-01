@@ -2,7 +2,6 @@ import app from '~/app';
 import _ from 'lodash';
 import '~/services/main'; ;
 import submissionsOnNotificationsT from '~/app-text/views/reports/submissions/submissions-to-notifications.json';
-import { default as countdown } from 'scbd-common-countdown';
 import { cbdArticle } from 'scbd-common-articles'
 import Vue from 'Vue';
 import '~/views/search/search-directive';
@@ -16,7 +15,6 @@ export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'tra
 	translationService.set('submissionsOnNotificationsT', submissionsOnNotificationsT);   
 
 	Vue.component('CbdArticle', cbdArticle);
-	Vue.component('countdown', countdown);		
 	
 	function loadNotification(){
 		if(activeNotification){
@@ -37,13 +35,17 @@ export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'tra
 		const tags = ['bch', 'introduction', 'notification', activeNotification];
 		$scope.adminTags = tags;
 		match.adminTags = { $all: tags};
-
+console.log('d')
 		const search = $location.search();
 		if(activeNotification == '2023-007'){
-			if(search.para && [7, 8].includes(search.para))
-				match.adminTags.$all.push(`para${search.para}`);
+			const para = {
+				'C075B8D5-5826-4EFE-8659-0BF275DE1959' : 'para7',
+				'22067677-2F8B-45BC-955D-7F9F29AB1E69' : 'para8'
+			}
+			if(search.keyword && search.keyword.some(e=>para[e]))
+				match.adminTags.$all.push(para[search.keyword]);
 			else{
-				match.adminTags.$nin = ['para7', 'para8'] 
+				match.adminTags.$nin = Object.values(para);
 			}
 		}	
 
