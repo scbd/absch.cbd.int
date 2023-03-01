@@ -700,8 +700,18 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     keywords = [keywords];
 
                                 keywords.forEach(e=>{
-                                    const keywordFilter = $scope.searchFilters[e]
-                                    if(!$scope.setFilters[keywordFilter.id])
+                                    let keywordFilter = $scope.searchFilters[e]
+                                    if(!keywordFilter && query.notification == '2023-007'){ 
+                                        //special case for BCH notification 2023-007
+                                        keywordFilter = {
+                                            identifier : e,
+                                            title: {en : e},
+                                            skipDisplay:true
+                                        }
+                                        addKeywordFilter(keywordFilter);
+                                        keywordFilter = $scope.searchFilters[e]
+                                    }
+                                    if(keywordFilter && !$scope.setFilters[keywordFilter.id])
                                         $scope.saveFilter({...keywordFilter});
                                 });                                
                             }
