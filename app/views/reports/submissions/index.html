@@ -33,10 +33,12 @@
 				<div class="col-md-12" style="margin-top:5px;padding: 0px 20px;" ng-if="articleQuery">   
 					<div class="km-value">
 						<cbd-article ng-vue ng-vue-expose="&onArticleLoad" :query="articleQuery" v-if="articleQuery"
-						@load="onArticleLoad($event)" hide-cover-image="true" show-edit="true" :admin-tags="adminTags"></cbd-article>
+						@load="onArticleLoad($event)" :hide-cover-image="true" :show-edit="true" :admin-tags="adminTags">
+							<!-- <template #empty-article></template> -->
+						</cbd-article>
 					</div>                
 				</div>
-				<div class="col-md-12">
+				<div class="col-md-12">					
 					<search-directive internal-embed="true" include-schemas="submission">
 					</search-directive>
 				</div>

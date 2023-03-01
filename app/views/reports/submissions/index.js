@@ -9,8 +9,8 @@ import '~/views/search/search-directive';
 import '~/css/search.css';
 
 export { default as template } from './index.html';
-export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'translationService', 'breadcrumbs', 'roleService',
-	function ($scope, $location, $timeout, searchService, solr, translationService, breadcrumbs, roleService){
+export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'translationService', 'breadcrumbs', 'roleService', 'realm',
+	function ($scope, $location, $timeout, searchService, solr, translationService, breadcrumbs, roleService, realm){
 
 	let activeNotification;
 	translationService.set('submissionsOnNotificationsT', submissionsOnNotificationsT);   
@@ -33,36 +33,44 @@ export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'tra
 	}
 	function buildQuery(){
 		let ag   = [];
-		const tags = ['introduction', 'notification', activeNotification];
+		let match = {}		
+		const tags = ['bch', 'introduction', 'notification', activeNotification];
 		$scope.adminTags = tags;
-		console.log($scope.adminTags);
-		// if($route.current.params.code)
-		// 	tags.push(encodeURIComponent($route.current.params.code));
-		
-		let match = { "adminTags" : { $all: tags}};
+		match.adminTags = { $all: tags};
+
+		const search = $location.search();
+		if(activeNotification == '2023-007'){
+			if(search.para && [7, 8].includes(search.para))
+				match.adminTags.$all.push(`para${search.para}`);
+			else{
+				match.adminTags.$nin = ['para7', 'para8'] 
+			}
+		}	
 
 		ag.push({"$match"   : match });
 		ag.push({"$project" : { title:1, content:1, coverImage:1}});
 		ag.push({"$limit"   : 1 });
 
-		$scope.articleQuery = { ag : JSON.stringify(ag) };;
+		$scope.articleQuery = { ag : JSON.stringify(ag) };
 	}
 	$scope.onArticleLoad = function(article){
+		$scope.isLoading = false;
 		if(!article && !roleService.isUserInRoles(['oasisArticleEditor', 'Administrator'])){
 			$scope.articleQuery = undefined;
 			return;
 		}
-		$scope.isLoading = false;
 	}
 
 	$scope.$on('evt:onLeftMenuFilterUpdate', (evt, leftMenuFilters)=>{
-		console.log(leftMenuFilters);
 		let selectedNotification
 		if(leftMenuFilters?.submission.length){
 			const notificationFilter = leftMenuFilters.submission.find(f=>f.field=="notifications_ss");
 			selectedNotification = notificationFilter?.selectedItems?.identifier
 			$location.search({notification:selectedNotification})
 			breadcrumbs.options = {'notification_label': selectedNotification };
+
+			if(!selectedNotification && $location.search().keyword)
+				$location.search({keyword:undefined})
 		}
 		else 
 			selectedNotification = undefined;
@@ -77,7 +85,6 @@ export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'tra
 	});
 
 	$scope.$on('evt:searchFiltersLoaded', (evt, { leftMenuFilters })=>{
-		console.log('hie')
 		if($location.search().notification){
 			const notificationFilter = leftMenuFilters.submission.find(f=>f.field=="notifications_ss");
 			notificationFilter.selectedItems = { identifier: $location.search().notification}
