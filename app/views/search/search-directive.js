@@ -30,9 +30,10 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
     app.directive('searchDirective', function() {
         return {
-            restrict: 'EAC',
+            restrict: 'EA',
             replace: true,
             template: template, 
+            scope : {},
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
                 'joyrideService', '$timeout', 'locale', 'solr', 'toastr', '$log', 'IGenericService', 'translationService',
@@ -1571,11 +1572,11 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         
                         if(isABS) {
                             const {absLeftMenuFilters} = await import('./search-filters/abs-left-menu-filters.js');
-                            return absLeftMenuFilters;
+                            return { ...absLeftMenuFilters};
                         }
                         else {
                             const { bchLeftMenuFilters } = await import('./search-filters/bch-left-menu-filters.js');
-                            return bchLeftMenuFilters;
+                            return { ...bchLeftMenuFilters };
                         }
                     }
 
