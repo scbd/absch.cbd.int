@@ -35,7 +35,7 @@ export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'tra
 		const tags = ['bch', 'introduction', 'notification', activeNotification];
 		$scope.adminTags = tags;
 		match.adminTags = { $all: tags};
-console.log('d')
+
 		const search = $location.search();
 		if(activeNotification == '2023-007'){
 			const para = {
