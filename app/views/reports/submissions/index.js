@@ -68,11 +68,13 @@ export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'tra
 		if(leftMenuFilters?.submission.length){
 			const notificationFilter = leftMenuFilters.submission.find(f=>f.field=="notifications_ss");
 			selectedNotification = notificationFilter?.selectedItems?.identifier
-			$location.search({notification:selectedNotification})
+			$location.search('notification', selectedNotification)
 			breadcrumbs.options = {'notification_label': selectedNotification };
-
-			if(!selectedNotification && $location.search().keyword)
-				$location.search({keyword:undefined})
+			
+			if(!selectedNotification && $location.search().keyword){
+				$scope.removeFilter($scope.setFilters[$location.search().keyword]);
+				$location.search('keyword', undefined)
+			}
 		}
 		else 
 			selectedNotification = undefined;
