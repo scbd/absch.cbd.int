@@ -32,8 +32,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
         return {
             restrict: 'EA',
             replace: true,
-            template: template, 
-            scope : {},
+            template: template,
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
                 'joyrideService', '$timeout', 'locale', 'solr', 'toastr', '$log', 'IGenericService', 'translationService',
