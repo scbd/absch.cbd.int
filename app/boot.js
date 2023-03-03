@@ -152,7 +152,7 @@ export default function bootApp(window, require, defineX) {
 
 
             'luxon'                     : `${cdnHost}luxon@1.25.0/build/amd/luxon`,
-            'scbd-common-articles'      : `${cdnHost}@scbd/common@0.1.0/dist/components/articles/index.umd`,
+            'scbd-common-articles'      : `${cdnHost}@scbd/common@0.1.1/dist/components/articles/index.umd`,
             
         },
         'shim': {
