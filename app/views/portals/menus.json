@@ -26,7 +26,7 @@
                 }
             },
             {
-                "slug": "forum",
+                "slug": "fred",
                 "title": {
                     "en": "Forum"
                 },
@@ -42,12 +42,10 @@
                     "en": "Additional Resources"
                 },
                 "content": {
-                    "articles": {
-                        "tags": [
-                            "portal:synbio"
-                        ]
+                    "article": {
+                        "id": "6362b33898b10f0001d36334"
                     }
-                },
+        },
                 "children": [
                     {
                         "slug": "r1",
@@ -68,7 +66,18 @@
                             "article": {
                                 "id": "5f4418f9b704c80001b000bd"
                             }
-                        }
+                        },
+                        "children": [{
+                            "slug": "fred",
+                            "title": {
+                                "en": "Forum2"
+                            },
+                            "content": {
+                                "forum": {
+                                    "id": 17625
+                                }
+                            }
+                        }]
                     }
                 ]
             },

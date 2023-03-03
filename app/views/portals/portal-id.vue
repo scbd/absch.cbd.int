@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <div class="row row-eq-height">
-      <div class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3 gx-2 gy-2">
-          <side-menu :menu="menu"  class="menu-sticky"></side-menu>
-      </div>
-      <div class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-9 gx-2 gy-2" >
+      <aside class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3 gx-2 gy-2">
+          <side-menu :menu="menu"  class="menu-sticky mt-1"></side-menu>
+      </aside>
+      <main class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-9 gx-2 gy-2" >
+        {{ $route }}
         <div class="bg-white p-4" ref="view"></div>
-        <pre>{{ __menu }}</pre>
-      </div>
+      </main>
     </div>
   </div>
 </template>
@@ -23,24 +23,16 @@ import Thread from './thread-id.vue'
 import SubRouter from "../../services/router.js";
 import { compile }  from "path-to-regexp";
 import PageNotFound from '~/views/shared/404.vue';
-import ___MENUS from './menus.json'
 
 
 class MenusApi {
   async get(slug) { 
-    return ___MENUS.find(m=>m.slug==slug);
+    const { default: menus } = await import('./menus.json')
+    return menus.find(m=>m.slug==slug);
   }
 };
 
-
-
-let subRouter = new SubRouter([
-]);
-
-const Tags = {
-  introduction : "introduction",
-  calendar : "calendar"
-}
+let subRouter = new SubRouter([]);
 
 export default {
   name:'onlineConferences',
@@ -52,14 +44,12 @@ export default {
   },
   data() { 
     return {
-      articles: [],
-      forums: [],
-      portalMenu: {}
+      portalMenu: null
     };
   },
   computed : {
-    portalId()             { return this.$route.params.portalId; },
-    menu()                 { return this.buildMenu() }
+    portalId() { return this.$route.params.portalId; },
+    menu()     { return this.buildMenu() }
   },
   methods:{
     buildMenu,
@@ -72,7 +62,6 @@ export default {
 
     const { portalId } = this;
 
-
     this.menusApi    = new MenusApi();
     this.articlesApi = new ArticlesApi();
     this.forumsApi   = new ForumsApi();
@@ -81,7 +70,7 @@ export default {
 
     subRouter = buildRoutes(portalMenu);
 
-    this .portalMenu = portalMenu;
+    this.portalMenu = portalMenu;
     
     this.onRouteChange(this.$route);
   }
@@ -124,7 +113,7 @@ function onRouteChange(route) {
 }
 
 const CONTENT_TYPES = {
-  "*"     : { component: Article },
+  "*"     : { },
   article : { component: Article },
   forum   : { component: Forum, subRoutes: [ { path: '/thread/:threadId', component: Thread } ] },
 }
@@ -135,38 +124,44 @@ function combine(...parts) {
 
 function buildRoutes(portalMenu) {
 
-  const routes = [];
-
-  const addRoute = ({ slug, children, content }, parentPath) => {
-    const path         = combine(parentPath, slug);
-    const [ type ]     = Object.keys(content || {});
-    const contentType  = CONTENT_TYPES[type||'*'] || CONTENT_TYPES['*'];
-    const { component, subRoutes } = contentType || {};
-
-    const params    = { 
-      identifier: content?.article?.id,
-      forumId:    content?.forum?.id 
-    };
-
-    routes.push({ path, component, params })
-
-    for(let subRoute of subRoutes || []) {
-      routes.push({ 
-        path      : combine(path, subRoute.path), 
-        component : subRoute.component || component, 
-        params    : subRoute.params
-      })
-    }
-
-    for(let child of children || [])
-      addRoute(child, path);
-  }
-
-  addRoute({ ...portalMenu, slug: '' }, '/');
+  const routes = toRoutes({ ...portalMenu, slug: '' }, '/');
 
   console.dir(routes);
 
   return new SubRouter(routes);
+}
+
+function toRoutes({ slug, children, content }, parentPath) {
+
+  const path         = combine(parentPath, slug);
+  const [ type ]     = Object.keys(content || {});
+  const contentType  = CONTENT_TYPES[type||'*'] || CONTENT_TYPES['*'];
+  const { component, subRoutes } = contentType || {};
+
+  const params = { 
+    identifier: content?.article?.id,
+    forumId:    content?.forum?.id 
+  };
+
+  const routes = [
+    { path, component, params }
+  ];
+
+  for(let subRoute of subRoutes || []) {
+    routes.push({ 
+      path      : combine(path, subRoute.path), 
+      component : subRoute.component || component, 
+      params    : subRoute.params
+    })
+  }
+
+  for(let child of children || []) {
+    for(let route of toRoutes(child, path)) {
+      routes.push(route);
+    }
+  }
+
+  return routes;
 }
 
 function buildMenu() {
