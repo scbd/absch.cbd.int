@@ -57,7 +57,7 @@ app.run(["realm", "locale", '$injector', 'authentication', function (realm, loca
 
   window.Vue.use(new AngularVueRoutePlugin ($injector));
   window.Vue.use(new AngularVueRouterPlugin($injector));
-  window.Vue.use(AngularVueAuthPlugin($injector));
+  window.Vue.use(new AngularVueAuthPlugin($injector));
   
 }]);
 
