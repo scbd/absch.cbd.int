@@ -47,7 +47,14 @@ export function injectRouteParams(params) {
 
 export function currentUser() {
   return ["$q", "authentication", function ($q, authentication) {
-    return $q.when(authentication.getUser());
+    return $q.when(authentication.getUser())
+        .then((user)=>{
+
+            if(Vue?.prototype.$auth)
+                Vue.prototype.$auth.setUser(user);
+
+            return user;
+        });
   }];
 }
 

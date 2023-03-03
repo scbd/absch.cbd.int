@@ -376,7 +376,7 @@
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"> </i>
                         <div class="notification-title notification-spacing5">
-                            {{notification.data.message || '{{::('xuserNotificationsPanelT.newRecordPublished'|$translate)}}'}}
+                            {{notification.data.message||('xuserNotificationsPanelT.newRecordPublished'|$translate)}}
                         </div>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>

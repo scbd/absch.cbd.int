@@ -8,8 +8,10 @@
     <div ng-if="!loading && referenceRecords">
         <legend>
             {{::('viewReferenceRecordsT.recordsReferencing'|$translate)}}
-            <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}"
-            class="float-end btn btn-primary btn-sm p-0 px-1">{{::('viewReferenceRecordsT.showInSearch'|$translate)}}</a>
+            <span ng-transclude="showInSearch">
+                <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}"
+                class="float-end btn btn-primary btn-sm p-0 px-1">{{::('viewReferenceRecordsT.showInSearch'|$translate)}}</a>
+            </span>
         </legend>
         <table class="table table-bordered table-condensed w-100">
             <tr>

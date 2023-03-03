@@ -8,6 +8,7 @@
     "@bower_components/jquery": "jquery/jquery-dist#3.3.1",
     "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11",
     "@bower_components/require-shim": "zetlen/require-shim#95b5aaea4530fb2861cc475497c7b4c62204628d",
+    "@scbd/common": "^0.0.10",
     "cheerio": "1.0.0-rc.3",
     "compression": "1.7.4",
     "cookie-parser": "1.4.3",
@@ -41,7 +42,7 @@
     "strip-bom": "^5.0.0",
     "superagent": "5.0.8",
     "touch": "^3.1.0",
-    "vue-template-compiler": "2.6.10"
+    "vue-template-compiler": "2.7.14"
   },
   "engine": "node >= 14.0",
   "private": true,

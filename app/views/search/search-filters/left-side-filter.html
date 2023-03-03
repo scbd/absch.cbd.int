@@ -53,7 +53,7 @@
                             </ul>
                         </div>
                         <div >
-                            <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText' && filter.type!='check' && filter.type!='yesNo' && filter.type!='label'" class="color-darkgrey not" style="cursor: pointer;" 
+                            <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText'  && filter.type!='radioList' && filter.type!='check' && filter.type!='yesNo' && filter.type!='label'" class="color-darkgrey not" style="cursor: pointer;" 
                                 ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)" ng-class="{'disabled strikeout':filter.disabled}">
                                 <div ng-class="{'exclude-filter':filter.excludeResult}" class="overflow-auto">
                                     <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">{{::('leftSideFilterT.not'|$translate)}}</span>
@@ -109,11 +109,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div ng-if="filter.type=='radioList'" >
+                                <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
+                                <button type="button" ng-if="filter.filterValue" class="btn btn-sm btn-default float-end" ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
+                                                                   
+                                <div class="flex-fill bd-highlight text-nowrap pt-2" >
+                                    <label class="radio-inline me-2" ng-repeat="radioFilter in filter.values">
+                                        <input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" name="{{schema + '_'+ filter.field}}"
+                                            ng-value="radioFilter.value" ng-change="onFilterDateChange(filter)" /> {{radioFilter.label}}
+                                    </label>
+                                </div>
+                            </div>
                             <div ng-if="filter.type=='solrRecords'">
                                 <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">                                    
                                     <div ng-class="{'exclude-filter':filter.excludeResult}">
                                         <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">{{::('leftSideFilterT.not'|$translate)}}</span>
-                                        <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="checkbox"
+                                        <!-- {{filter.selectedItems}} -->
+                                        <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="{{filter.selectionType||'checkbox'}}"
                                             on-build-query="onBuildQuery(searchText, tab, filter)" on-records-fetched="onRecordsFetched(data, query, filter)"
                                             lookup-field={{::filter.query.lookupField}} skip-sync-documents="true" instance-id="{{filter.$$hashKey}}"
                                             filter="true" ng-change="recordSelected(item, filter)" skip-government="true" list-view="true">

@@ -54,7 +54,7 @@
             </th>
             <!-- show countries if expanded[region.identifier] -->
             <th style="width:25px" ng-if="expanded[region.identifier]" ng-repeat="country in region.countries|filter:{visible:true} track by country.identifier">
-               <a rel="noopener" href="/database/records/{{::reportsMap[country.identifier].documentId}}" target="_report" data-bs-toggle="tooltip" title="{{::country.title|lstring}}" ng-bind="::(country.identifier|uppercase)"></a>
+               <a rel="noopener" href="/database/record/{{::reportsMap[country.identifier].documentId}}" target="_report" data-bs-toggle="tooltip" title="{{::country.title|lstring}}" ng-bind="::(country.identifier|uppercase)"></a>
             </th>
             <th ng-repeat-end ng-show="::false"></th>
             <th style="width:10px;background-color:white"></th>

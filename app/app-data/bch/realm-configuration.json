@@ -826,7 +826,7 @@
       },
       "pdf": {
         "documents": {
-          "path": "database/records/:documentID/:revision?print=true",
+          "path": "database/record/:documentID/:revision?print=true",
           "fields": [
             "documentID",
             "revision"

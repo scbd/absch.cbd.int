@@ -1,0 +1,49 @@
+<div id="innerPage">
+	<style>
+		.search-tabs, .global-filters{
+			display: none;
+		}
+		#search-new{
+			padding-left: 0px!important;
+			padding-top: 0px!important;
+		}
+	</style>
+	<div class="mastHead text-white">
+		<h1>{{::('submissionsOnNotificationsT.title'|$translate)}}</h1>
+		<div>
+			{{::('submissionsOnNotificationsT.info1'|$translate)}}
+		</div>
+		<div>{{::('submissionsOnNotificationsT.info2'|$translate)}}</div>
+	</div>
+	<div class="innerPageContent">
+		<div class="registry-sections">
+			<div class="row pt-2 easing">
+				<div class="col-md-12" style="margin-top:5px;padding: 0px 20px;" ng-if="notification">                   
+					<div class="km-value">
+                        <a target="_blank" ng-href="/database/NT/{{notification | uniqueID}}">
+                            <strong>                            
+                                <span ng-bind="notification.reference_s"></span>
+                                <i ng-show="notification.symbol_s" ng-bind="'('+ notification.symbol_s +')'"></i>
+                            </strong> 
+							<i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                        </a>
+                        <h3 ng-bind="notification.title_s"></h3>
+                    </div>
+				</div>
+				<div class="col-md-12" style="margin-top:5px;padding: 0px 20px;" ng-if="articleQuery">   
+					<div class="km-value">
+						<cbd-article ng-vue ng-vue-expose="&onArticleLoad" :query="articleQuery" v-if="articleQuery"
+						@load="onArticleLoad($event)" :hide-cover-image="true" :show-edit="true" :admin-tags="adminTags">
+							<!-- <template #empty-article></template> -->
+						</cbd-article>
+					</div>                
+				</div>
+				<div class="col-md-12">					
+					<search-directive internal-embed="true" include-schemas="submission">
+					</search-directive>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
