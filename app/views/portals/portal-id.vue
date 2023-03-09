@@ -56,7 +56,7 @@ export default {
     onRouteChange
   },
   watch: {
-    '$route': onRouteChange
+    '$route.path': onRouteChange
   },
   async created() {
 

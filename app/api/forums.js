@@ -37,9 +37,13 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async getPosts(threadId)  {
+  async getPosts(postId, { all } = {})  {
 
-    return this.http.get(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/posts`)
+    const params = stringifyUrlParams({
+      type : all ? "flat" : undefined
+    });
+    
+    return this.http.get(`api/v2014/discussions/posts/${encodeURIComponent(postId)}/posts`, { params })
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
