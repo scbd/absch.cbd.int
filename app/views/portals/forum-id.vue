@@ -2,8 +2,10 @@
   <div>
 
     <h1 v-if="!article && forum">{{forum.title|lstring}}</h1>
-
-    <Article v-if="article" :article="article"></Article>
+    
+    <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true" 
+      @load="onArticleLoad($event)" :admin-tags="articleAdminTags">
+    </cbd-article>
 
     <div v-if="threads && threads.length" class=" mb-3">
       <h4>Table of Content</h4>
@@ -49,20 +51,21 @@
 </template>
   
 <script>
-import Article from '~/components/articles/article.vue';
-import ArticlesApi from '~/api/articles.js';
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
+import { cbdArticle } from 'scbd-common-articles';
 
 export default {
   name: 'Forum',
-  components: { Article },
+  components:{ CbdArticle:cbdArticle },
   props: {
     forumId: Number
   },
   data() {
     return {
       article: null,
+      articleQuery: null,
+      articleAdminTags:null,
       threads: []
     }
   },
@@ -71,24 +74,24 @@ export default {
   },
   methods: {
     jumpToAnchor,
-    getThreadUrl
+    getThreadUrl,
+    onArticleLoad
   },
   async created() {
 
     const { portalId, forumId } = this;
 
-    const tags = ["introduction", `forum:${forumId}`];
+    this.articleAdminTags = ["introduction", `forum:${forumId}`];
 
-    var ag = [{ $match: { adminTags: { $all: tags } } }];
+    var ag = [{ $match: { adminTags: { $all: this.articleAdminTags } } }];
+    this.articleQuery = { ag : JSON.stringify(ag) };
 
-    const articlesApi = new ArticlesApi();
     const forumsApi = new ForumsApi();
 
-    const qArticle  = articlesApi.queryArticles({ ag });
+
     const qForum    = forumsApi.getForum  (forumId);
     const qThreads  = forumsApi.getThreads(forumId);
 
-    this.article = (await qArticle)[0];
     this.forum   =  await qForum;
     this.threads =  await qThreads
     
@@ -98,6 +101,15 @@ export default {
 
 function getThreadUrl(threadId) {
   return `${this.$route.path}/thread/${encodeURIComponent(threadId)}`.replace(/^\/+/, '');
+}
+
+function onArticleLoad(article){
+  console.log(article)
+  this.article = article;
+  // if(!article && !this.$auth?.hasScope(['oasisArticleEditor', 'Administrator'])){
+	// 		this.articleQuery = undefined;
+	// 		return;
+	// 	}
 }
 
 </script>

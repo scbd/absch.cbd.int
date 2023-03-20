@@ -124,7 +124,7 @@ function u() {
         e.userToken = t;
       },
       logout: function logout() {
-        if (!t) throw new Error("Not Implemented");
+        if (!t) throw new Error("logout Not Implemented");
         t();
       },
       fetchUser: function fetchUser() {
@@ -139,7 +139,7 @@ function u() {
                     _context.next = 2;
                     break;
                   }
-                  throw new Error("Not Implemented");
+                  throw new Error("fetchUser Not Implemented");
                 case 2:
                   _context.next = 4;
                   return r();
@@ -165,13 +165,13 @@ function u() {
         });
       },
       refreshTokens: function refreshTokens() {
-        throw new Error("Not Implemented");
+        throw new Error("refreshTokens Not Implemented");
       },
       onError: function onError() {
-        throw new Error("Not Implemented");
+        throw new Error("onError Not Implemented");
       },
       onRedirect: function onRedirect() {
-        throw new Error("Not Implemented");
+        throw new Error("onRedirect Not Implemented");
       },
       strategy: {
         token: {
@@ -183,7 +183,7 @@ function u() {
           }
         },
         get refreshToken() {
-          throw new Error("Not Implemented");
+          throw new Error("refreshToken Not Implemented");
         }
       }
     };

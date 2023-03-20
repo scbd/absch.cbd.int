@@ -1,25 +1,25 @@
 <template>
   <div>
-    <Article v-if="article" :article="article">
-    </Article>
+    <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true">
+      <!-- @load="onArticleLoad($event)" :admin-tags="adminTags" -->
+    </cbd-article>
   </div>
 </template>
   
 <script>
 
 import { mapObjectId, isObjectId } from '~/api/api-base.js';
-import ArticlesApi from '~/api/articles';
-import Article from '~/components/articles/article.vue';
+import { cbdArticle } from 'scbd-common-articles';
 
 export default {
   name: 'ArticleId',
-  components:{ Article },
+  components:{ CbdArticle:cbdArticle },
   props: {
     identifier: String,
   },
   data() {
     return {
-      article: null
+      articleQuery: null
     }
   },
   computed: {
@@ -35,11 +35,8 @@ export default {
     if (isObjectId(identifier))
       ag.push({ $match: { _id: mapObjectId(identifier) } });
 
-    const articlesApi = new ArticlesApi();
+    this.articleQuery = { ag : JSON.stringify(ag) };
 
-    const [article] = await articlesApi.queryArticles({ ag });
-
-    this.article = article;
   }
 
 }
