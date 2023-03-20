@@ -30,6 +30,18 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
+  async createThread(forumId, { subject, message })  {
+
+    var data = {
+      subject,
+      message
+    };
+
+    return this.http.post(`api/v2014/discussions/forums/${encodeURIComponent(forumId)}/threads`, data)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
   async getThread(threadId)  {
 
     return this.http.get(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}`)
@@ -48,9 +60,33 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
+  async createPost(parentId, { message, subject })  {
+
+    var data = {
+      subject,
+      message
+    };
+
+    return this.http.put(`api/v2014/discussions/posts/${encodeURIComponent(parentId)}/posts`, data)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
   async getPost(postId)  {
 
     return this.http.get(`api/v2014/discussions/posts/${encodeURIComponent(postId)}`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async updatePost(postId, { message, subject })  {
+
+    var data = {
+      subject,
+      message
+    };
+
+    return this.http.put(`api/v2014/discussions/posts/${encodeURIComponent(postId)}`, data)
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }

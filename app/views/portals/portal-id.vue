@@ -5,7 +5,8 @@
           <side-menu :menu="menu"  class="menu-sticky mt-1"></side-menu>
       </aside>
       <main class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-9 gx-2 gy-2" >
-        {{ $route }}
+        {{ $route }}<br>
+        {{ portalRoute }}<br>
         <div class="bg-white p-4" ref="view"></div>
       </main>
     </div>
@@ -49,14 +50,25 @@ export default {
   },
   computed : {
     portalId() { return this.$route.params.portalId; },
-    menu()     { return this.buildMenu() }
+    menu()     { return this.buildMenu() },
+    path()     { 
+      const { subPath } = this.$route.params;
+      const path      = `/${subPath||''}`;
+      return path; 
+    },
+    portalRoute()     { 
+      const { path, $route } = this;
+      const { subPath, ...params } = $route.params;
+
+      return { ...$route, path, params }; 
+    }
   },
   methods:{
     buildMenu,
     onRouteChange
   },
   watch: {
-    '$route.path': onRouteChange
+    path: onRouteChange
   },
   async created() {
 
@@ -72,15 +84,16 @@ export default {
 
     this.portalMenu = portalMenu;
     
-    this.onRouteChange(this.$route);
+    this.onRouteChange();
   }
 }
 
-function onRouteChange(route) {
-  const { subPath, ...routeParams } = route.params;
+function onRouteChange() {
+  
+  const { portalRoute } = this;
+  const { path, params: routeParams }  = portalRoute;
 
-  const path      = `/${subPath||''}`;
-  const match     = subRouter.match(path);
+  const match  = subRouter.match(path);
 
   let component = match?.route?.component || PageNotFound;
 
