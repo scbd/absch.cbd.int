@@ -1,8 +1,9 @@
 <template>
   <ul class="list-unstyled" :class="[`level-${level}`]">
-    <li class="mb-1" v-for="(menu, index) in menus" :key="index" >
+    <!-- {{ menu.menus }} -->
+    <li class="mb-1" v-for="(menu, index) in menus" :key="index" :class="{['menu-border'] : index < menus.length-1  }">
       
-      <a :href="menu.url" class="btn btn-toggle align-items-center rounded"
+      <a :href="menu.url" class="btn btn-toggle align-items-center rounded" style="width:100%"
       :class="{active : !hasSubMenu(menu) && selected(menu)}"
       :data-bs-toggle="hasSubMenu(menu) ? 'collapse' : null"
       :data-bs-target="hasSubMenu(menu) ? `#collapse-menu-${level}-${index}` : null"
@@ -33,10 +34,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .side-menu .sub-menu {
   margin-left: 1rem;
+}
+.side-menu .menu-border{
+  /* border-bottom: 1px solid #dcd7d7; */
+  border-bottom: 1px solid #324252;
 }
 
 .side-menu .btn-toggle {
@@ -47,11 +52,12 @@ export default {
   color: rgba(0, 0, 0, .65);
   background-color: transparent;
   border: 0;
+  color: #fff;
 }
 .side-menu .btn-toggle:hover,
 .side-menu .btn-toggle:focus {
   color: rgba(0, 0, 0, .85);
-  background-color: #d2f4ea;
+  background-color: #324252;
 }
 
 .side-menu .btn-toggle.active {
@@ -89,7 +95,7 @@ export default {
 }
 .side-menu .btn-toggle-nav a:hover,
 .btn-toggle-nav a:focus {
-  background-color: #d2f4ea;
+  background-color: #324252;
 }
 
 

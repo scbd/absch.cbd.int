@@ -1,11 +1,16 @@
 <template>
   <nav class="side-menu">
     <ul class="list-unstyled">
-      <li>
-        <a :href="menu.url" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-          <h4>{{ menu.title | lstring($locale) }}</h4>
+      <li style="border-bottom: 1px solid #324252;">
+        <a :href="menu.url" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom menu-header">
+          <h4 class="w-100">{{ menu.title | lstring($locale) }}</h4>
+          <button type="button" class="btn btn-default float-end mb-1" 
+            @click="showHideMenu()" :class="{'d-block' : isSmallScreen, 'd-none':!isSmallScreen}">
+                <i class="fa fa-bars"></i> <span class="caret"></span>
+          </button>
         </a>
-        <div>
+        
+        <div class="main-menus" :class="{'d-none' : isSmallScreen && !expandMenu, 'd-block': expandMenu}">
           <side-menu-sub v-if="menu.menus && menu.menus.length" :menus="menu.menus" />
         </div>
       </li>
@@ -18,10 +23,41 @@ import SideMenuSub from './side-menu-sub.vue'
 export default {
   name: 'SideMenu',
   components: { SideMenuSub },
+  data(){
+    return {
+      expandMenu : false
+    }
+  },
   props: {
     menu: Object,
   },
+  computed:{
+    isSmallScreen(){
+      return ['xs', 'sm'].includes(window.deviceSize);
+    }
+  },
+  methods:{
+    showHideMenu(){
+      this.expandMenu = !this.expandMenu;
+    }
+  }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.side-menu{
+  border: 1px solid #e3e0e0;
+  /* padding: 5px; */
+  box-shadow: 0px 0px 25px #00000070;
+  background: #3e5165;
+}
+.menu-header{
+  color: #fff;
+  padding: 10px 10px 0px 10px!important;
+  margin: 0px;
+}
+.side-menu .list-unstyled{
+  margin-bottom: 0px!important;
+}
+
+</style>

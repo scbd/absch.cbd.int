@@ -2,6 +2,7 @@
   <div>
     <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true">
       <!-- @load="onArticleLoad($event)" :admin-tags="adminTags" -->
+      <template #article-empty>&nbsp;</template>
     </cbd-article>
   </div>
 </template>

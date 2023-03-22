@@ -5,6 +5,7 @@
     
     <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true" 
       @load="onArticleLoad($event)" :admin-tags="articleAdminTags">
+      <template #article-empty>&nbsp;</template>
     </cbd-article>
 
     <div v-if="threads && threads.length" class=" mb-3">
@@ -106,10 +107,10 @@ function getThreadUrl(threadId) {
 function onArticleLoad(article){
   console.log(article)
   this.article = article;
-  // if(!article && !this.$auth?.hasScope(['oasisArticleEditor', 'Administrator'])){
-	// 		this.articleQuery = undefined;
-	// 		return;
-	// 	}
+  if(!article && !this.$auth?.hasScope(['oasisArticleEditor', 'Administrator'])){
+			this.articleQuery = undefined;
+			return;
+	}
 }
 
 </script>
