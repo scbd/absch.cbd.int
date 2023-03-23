@@ -30,7 +30,7 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async createThread(forumId, { subject, message })  {
+  async createThread (forumId, { subject, message })  {
 
     var data = {
       subject,
@@ -67,7 +67,7 @@ export default class ForumsApi extends ApiBase
       message
     };
 
-    return this.http.put(`api/v2014/discussions/posts/${encodeURIComponent(parentId)}/posts`, data)
+    return this.http.post(`api/v2014/discussions/posts/${encodeURIComponent(parentId)}/posts`, data)
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }

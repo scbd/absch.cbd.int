@@ -108,5 +108,6 @@ export function stringifyUrlParams(params){
 
 export function defaultTokenReader() {
   const token = window?.Vue?.prototype?.$auth?.strategy?.token?.get();
-  return token ? { token } : null;
+  console.log(token)
+  return token;
 }

@@ -1,7 +1,6 @@
 <template>
-
     <div ref="modal" class="modal fade" style="display: block;" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
@@ -10,25 +9,15 @@
         <div class="modal-body">
             <div v-if="post" class="forum-post p-3">
 
-                <div class="header mt-2 mb-2">
+                <input type="text" class="form-control"  v-model="subject">
 
-                    <!-- <div class="user">
-                        <span class="username">{{ post.createdBy }} </span>
-                        <span class="organization">{{ post.createdByOrganization }} </span>
-                    </div>
+                <textarea ref="body" class="form-control" rows="10" v-model="message"></textarea> 
 
-                    <div class="post-info">
-                        <span class="date" :title="formatDateTime(post.createdOn)" @click="showFullDateTime = !showFullDateTime">{{ showFullDateTime ? formatDateTime(post.createdOn) : fromNow(post.createdOn)  }}</span>
-                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-up"></i></a>
-                        <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a>
-                    </div> -->
-
-                </div>
-
+<!--                     
                 <div ref="body" class="body p-2 border" 
                     contenteditable="true" 
                     v-html="post.htmlMessage" 
-                    @blur="post.htmlMessage = $event.target.innerHTML"></div>
+                    @blur="post.htmlMessage = $event.target.innerHTML"></div> -->
 
                 <div class="attachments" v-if="post.attachmentCount">
                     <h6 class="card-subtitle mb-2 text-muted">File(s)</h6>
@@ -44,6 +33,7 @@
             </div>
         </div>
         <div class="modal-footer">
+            {{ loading }}
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" @click="save()">Save</button>
         </div>
@@ -58,6 +48,7 @@ import bootstrap from 'bootstrap'
 import moment from 'moment';
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
+import func from 'vue-editor-bridge';
 
 export default {
     name: 'EditPost',
@@ -67,19 +58,22 @@ export default {
         postId:   { type:  Number },
         parentId: { type:  Number },
         forumId:  { type:  Number },
-        forumId:  { type:  Number },
+        quote:    { type:  String },
     },
     data() {
         return {
             post: null,
-            parent: null
+            parent: null,
+            loading: false
         }
     },
     computed: {
+        subject: { get() { return this?.post?.subject }, set(value) { return this.post.subject = value } },
+        message: { get() { return this?.post?.message }, set(value) { return this.post.message = value } }
     },
     methods: {
-        load,
-        save,
+        load: pending(load),
+        save: pending(save),
         close,
     },
     created : load,
@@ -99,7 +93,7 @@ export default {
 
 async function load() {
 
-    const { postId, parentId, forumId } = this;
+    const { postId, parentId, forumId, quote } = this;
 
     const forumsApi = new ForumsApi();
     this.forumsApi = forumsApi;
@@ -114,13 +108,15 @@ async function load() {
     else if(parentId) { 
         const parent = await forumsApi.getPost(parentId);
 
+        console.log(quote)
+
         this.parent = parent;
         this.post = { 
             postId: null, 
             parentId : parent.postId,
             forumId  : parent.forumId,
             subject  : parent.subject,
-            htmlMessage: '<p></p>'
+            message  : quote ? `> ${quote}`.replace(/\n/g, '\n> ') : ''
         };
     }
     else if(forumId) { 
@@ -131,7 +127,7 @@ async function load() {
             parentId : null,
             forumId  : forum.forumId,
             subject  : '',
-            htmlMessage: '<p></p>'
+            message  : ''
         };
         this.parent = null;
     }
@@ -140,37 +136,21 @@ async function load() {
 
 async function save() {
 
-    const { forumsApi, postId, parentId, forumId } = this;
+    const { forumsApi, postId, parentId, forumId, subject, message } = this;
+
+    const data = {
+        subject, 
+        message
+    };
 
     if(postId) { 
-        const subject = this.post.subject;
-        const message = this.post.htmlMessage;
-
-        await forumsApi.updatePost(postId, { subject, message });
+        await forumsApi.updatePost(postId, data);
     }
     else if(parentId) { 
-        const parent = await forumsApi.getPost(parentId);
-
-        this.parent = parent;
-        this.post = { 
-            postId: null, 
-            parentId : parent.postId,
-            forumId  : parent.forumId,
-            subject  : parent.subject,
-            htmlMessage: '<p></p>'
-        };
+        await forumsApi.createPost(parentId, data);
     }
     else if(forumId) { 
-        const forum = await forumsApi.getForum(forumId);
-
-        this.post = { 
-            postId: null, 
-            parentId : null,
-            forumId  : forum.forumId,
-            subject  : '',
-            htmlMessage: '<p></p>'
-        };
-        this.parent = null;
+        await forumsApi.createThread(forumId, data);
     }
     else throw new Error("Unsupported control path");
 
@@ -182,51 +162,24 @@ function close() {
     modal.hide();
 }
 
+function pending(delegate) {
+    return async function(...params) {
+        try
+        {
+            this.loading = true
+            await delegate.call(this, ...params)
+        }
+        finally{
+            this.loading = false;
+        }
+    }
+
+}
+
 </script>
 
 <style scoped>
 
-.forum-post {
-    border-top: solid 1px #c0c0c0;
-}
-.forum-post > .header {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-}
-.forum-post > .header > .user {
-    flex-grow: 1;
-}
-.forum-post > .header > .user > .username {
-    font-weight: bold;
-}
 
-.forum-post > .header > .post-info {
-    flex-grow: 0;
-    white-space: nowrap;
-}
-
-.forum-post > .header > .post-info > .date {
-    font-size: 90%;
-}
-
-.forum-post > .footer {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-}
-
-.forum-post > .footer > .replies {
-    flex-grow: 1;
-}
-.forum-post > .footer > .actions {
-    flex-grow: 0;
-}
-
-
-.forum-post > .replies {
-    border: solid 1px #c0c0c0;
-    border-top: none;
-}
 
 </style>

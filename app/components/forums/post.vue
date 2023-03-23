@@ -17,7 +17,7 @@
 
         </div>
 
-        <p class="body" v-html="post.htmlMessage"></p>
+        <p ref="body" class="body" v-html="post.htmlMessage"></p>
 
         <div class="attachments" v-if="post.attachmentCount">
             <h6 class="card-subtitle mb-2 text-muted">File(s)</h6>
@@ -38,18 +38,24 @@
                 </button>
             </div>
             <div class="action">
-                <button class="btn btn-primary btn-sm" @click.prevent="toggleReplies()">
-                    <i class="fa fa-reply"></i> 
-                    Reply
-                </button>
-                <button class="btn btn-light btn-sm" @click.prevent="edit=!edit">
+                <button v-if="canEdit" class="btn btn-light btn-sm" @click.prevent="edit = { postId: post.postId }">
                     <i class="fa fa-edit"></i> 
                     Edit
                 </button>
-            </div>
+                <div class="dropdown d-inline-block" >
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-reply"></i> 
+                        Reply
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" @click.prevent="edit = { parentId: post.threadId, quote: getSelection() }"> <i class="fa fa-reply"></i> Reply to the main topic</a></li>
+                        <li><a class="dropdown-item" href="#" @click.prevent="edit = { parentId: post.postId,   quote: getSelection() }"> <i class="fa fa-reply-all"></i> Reply to {{post.createdBy}}</a></li>
+                    </ul>
+                </div>              
+          </div>
         </div>
 
-        <edit-post v-if="edit" :post-id="post.postId" @close="edit=false"></edit-post>
+        <edit-post v-if="edit" v-bind="edit" @close="edit=false"></edit-post>
 
         <div v-if="posts" class="replies ms-4 mt-2">
             <post v-for="reply in posts" :key="reply.postId" :post="reply" />
@@ -62,6 +68,9 @@ import moment from 'moment';
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import EditPost from './edit-post.vue';
+import rangy from 'rangy';
+import { convert } from 'html-to-text';
+
 
 export default {
     name: 'Post',
@@ -88,13 +97,45 @@ export default {
             const { postId   : parentPostId } = this.$parent.post || {};
 
             return parentPostId && parentPostId == postParentId;
-        }
+        },
+        canPost()    { return this?.post?.security?.canPost    || false; },
+        canEdit()    { return this?.post?.security?.canEdit    || false; },
+        canDelete()  { return this?.post?.security?.canDelete  || false; },
+        canApprove() { return this?.post?.security?.canApprove || false; },
     },
     methods: {
         toggleReplies,
         jumpToAnchor() { this.$nextTick(jumpToAnchor)},
         fromNow(datetime) { return moment(datetime).fromNow(); },
-        formatDateTime(datetime) { return moment(datetime).format('D MMM YYYY HH:mm'); }
+        formatDateTime(datetime) { return moment(datetime).format('D MMM YYYY HH:mm'); },
+        getSelection() { 
+
+            // get the selection
+            var sel = rangy.getSelection();
+            
+            if (!sel.toString())
+                return "";
+
+            const ranges = sel.getAllRanges();
+
+            // create range for element, where selection is allowed
+
+            const cutRange = rangy.createRange();  
+            cutRange.selectNode(this.$refs.body);
+
+            // make an array of intersections of current selection ranges and the cutRange
+            const goodRanges = [];
+
+            ranges.map(r=>cutRange.intersection(r))
+                  .filter(r=>r)
+                  .forEach(r=>goodRanges.push(r));
+
+            sel.setRanges(goodRanges);            
+
+            var text = convert(sel.toHtml());
+
+            return text;
+        },
     }
 }
 
