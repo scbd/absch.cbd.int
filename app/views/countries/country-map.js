@@ -302,7 +302,9 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         function changeAreaColor(country, mapCountry) {
             if(!mapCountry)
               mapCountry = getMapObject(country.code);
-  
+              
+            if(!mapCountry)
+              return;
               
               if (country && mapCountry) {
                   if (($scope.isABS && country.isInbetweenParty))
