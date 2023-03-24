@@ -40,7 +40,7 @@
                 <span><span ng-bind="workflow.daysToApproval"></span> {{::('taskIdT.days'|$translate)}}</span>
             </div> 
             <!-- need to change to json -->
-            <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'" style="padding-top:20px;">
+            <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'" ng-if="$index ==0" style="padding-top:20px;">
 
                     <div  id="buttonsDiv" ng-show="isAssignedToMe(activity) || isAdmin()">
                         <div  style="display:inline;padding:5px;" ng-show="activity.name != 'deleteRecord' ">
