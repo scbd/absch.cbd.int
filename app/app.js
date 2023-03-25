@@ -69,9 +69,7 @@ function registerVuePlugin(name, service){
   const newPlugin = new CreateAngularVuePlainPlugin(name, service)
   window.Vue.use(newPlugin);
 }
-
-
-export const AngularVueAuthPlugin = ($injector) =>{
+function AngularVueAuthPlugin($injector){
 
   if(!$injector)
       throw new Error('Angular $injector not provided, cannot use AngularVueRoutePlugin plugin');
