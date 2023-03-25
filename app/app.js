@@ -30,6 +30,10 @@ app.factory("$exceptionHandler", ["$log", function ($log) {
         exception = JSON.stringify(parsedException || exception);
       } catch (e) {}
     }
+    if (typeof exception == "string")
+      exception += `\n URl : ${window.location.href}`
+    else
+      exception.errorUrl = exception += `\n URl : ${window.location.href}`;
     $log.error(exception);
   };
 }]);
@@ -65,9 +69,7 @@ function registerVuePlugin(name, service){
   const newPlugin = new CreateAngularVuePlainPlugin(name, service)
   window.Vue.use(newPlugin);
 }
-
-
-export const AngularVueAuthPlugin = ($injector) =>{
+function AngularVueAuthPlugin($injector){
 
   if(!$injector)
       throw new Error('Angular $injector not provided, cannot use AngularVueRoutePlugin plugin');

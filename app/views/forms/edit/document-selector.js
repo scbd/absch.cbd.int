@@ -10,8 +10,8 @@ import documentSelectorT from '~/app-text/views/forms/edit/document-selector.jso
 
 import {Tooltip} from 'bootstrap';
 
-app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService',
-    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService) {
+app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm',
+    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm) {
 
 	return {
 		restrict   : "EA",
@@ -395,12 +395,33 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                                     
                                     doc.meta = [...(doc.rec_meta1||[]), ...(doc.rec_meta2||[]), ...(doc.rec_meta3||[])].join(', ')
                                 }
+                                else if(doc.url_ss?.length){
+                                    doc.url_ss = doc.url_ss.map(url=>{
+                                                        if(typeof url == 'string' && url.startsWith('/doc/')){
+                                                            return `https://www.cbd.int${url}`
+                                                        }
+                                                        return url;
+                                                });
+                                    
+                                    doc.url =  doc.url_ss[0];
+                                    // Blaise 24.03.2023 
+                                    // its possible that some record types might have multiple urls 
+                                    // for eg. NFP can belong to multiple realms, find the best url if possible
+                                    if(doc.url_ss.length > 1){
+                                        const realmDoc = doc.url.find(d=>d.startsWith(realm.baseURL));
+                                        if(realmDoc)
+                                            doc.url = realmDoc;
+                                    }
+                                    //
+                                }
                                 else{
                                     //incase if the directive receives fl list from view, convert _txt to string 
                                     if(_.isArray(val)) 
                                         doc[key] = val.join(', ');
                                 }
                             })
+
+                            
                             return doc;
                        });
                        
