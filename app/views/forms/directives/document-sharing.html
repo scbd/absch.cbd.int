@@ -55,7 +55,7 @@
                                                 <td>{{::('documentSharingT.linkEmail'|$translate)}}</td>
                                                 <td class="d-none d-sm-table-cell text-start">Created on</td>
                                             </tr>
-                                            <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
+                                            <tr ng-repeat="link in sharedLinks | orderBy:'-meta.createdOn'">
                                                 <td ng-bind="$index+1"></td>
                                                 <td>
                                                     <span ng-bind="link.expiry|formatDateWithTime"></span>
