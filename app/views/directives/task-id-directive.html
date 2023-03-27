@@ -40,8 +40,7 @@
                 <span><span ng-bind="workflow.daysToApproval"></span> {{::('taskIdT.days'|$translate)}}</span>
             </div> 
             <!-- need to change to json -->
-            <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'" ng-if="$index ==0" style="padding-top:20px;">
-
+            <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'-createdOn'" ng-if="$index==0" style="padding-top:20px;">
                     <div  id="buttonsDiv" ng-show="isAssignedToMe(activity) || isAdmin()">
                         <div  style="display:inline;padding:5px;" ng-show="activity.name != 'deleteRecord' ">
                             <button type="button" class="btn btn-success bold" ng-click="updateActivity({ action : 'approve' })" ng-disabled="isUpdating">
@@ -73,7 +72,7 @@
                     </div>
                     <div ng-if="isAdmin()">
                         <br/>
-                        <strong>{{::('taskIdT.workFlowAssign'|$translate)}} </strong> ({{::('taskIdT.visible'|$translate)}})
+                        <strong>{{::('taskIdT.workFlowAssign'|$translate)}} {{activity.createdOn | formatDateWithTime}}</strong> ({{::('taskIdT.visible'|$translate)}})
                         <table class="table table-bordered mt-2" width="100%">
                             <tr ng-repeat="user in activity.assignedTo_info">
                                 <td ng-bind="user.userID"></td>

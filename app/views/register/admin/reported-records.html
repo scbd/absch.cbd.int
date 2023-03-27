@@ -23,7 +23,7 @@
                     <div class="col-2"></div>
                 </div>
                 <div class="row table-striped p-2 border-bottom"
-                ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
+                ng-repeat="record in reportRecords | orderBy:'-reportedOn'">
                     <div ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)">
                         <div class="col-2">
                            <span ng-bind="record.schema|schemaName"></span>
