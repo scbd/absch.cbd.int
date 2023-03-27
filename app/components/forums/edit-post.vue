@@ -45,10 +45,7 @@
     
 <script>
 import bootstrap from 'bootstrap'
-import moment from 'moment';
 import ForumsApi from '~/api/forums';
-import jumpToAnchor from '~/services/jump-to-anchor.js';
-import func from 'vue-editor-bridge';
 
 export default {
     name: 'EditPost',

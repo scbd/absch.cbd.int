@@ -115,7 +115,7 @@ function u() {
         return e.user;
       },
       get loggedIn() {
-        return user && user.isAuthenticated;
+        return !!(e.user && e?.user?.isAuthenticated);
       },
       setUser: function setUser(t) {
         e.user = t;

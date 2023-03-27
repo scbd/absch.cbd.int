@@ -90,4 +90,11 @@ export default class ForumsApi extends ApiBase
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
+
+  async deletePost(postId)  {
+
+    return this.http.delete(`api/v2014/discussions/posts/${encodeURIComponent(postId)}`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
 }

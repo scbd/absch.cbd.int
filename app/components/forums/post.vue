@@ -38,12 +38,16 @@
                 </button>
             </div>
             <div class="action">
+                <button v-if="canDelete" class="btn btn-danger btn-sm" @click.prevent="deletePost()">
+                    <i class="fa fa-times"></i> 
+                    Delete
+                </button>
                 <button v-if="canEdit" class="btn btn-light btn-sm" @click.prevent="edit = { postId: post.postId }">
                     <i class="fa fa-edit"></i> 
                     Edit
                 </button>
                 <div class="dropdown d-inline-block" >
-                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" :disabled="!loggedIn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-reply"></i> 
                         Reply
                     </button>
@@ -55,10 +59,10 @@
           </div>
         </div>
 
-        <edit-post v-if="edit" v-bind="edit" @close="edit=false"></edit-post>
+        <edit-post v-if="edit" v-bind="edit" @close="edit=false; refresh()"></edit-post>
 
         <div v-if="posts" class="replies ms-4 mt-2">
-            <post v-for="reply in posts" :key="reply.postId" :post="reply" />
+            <post v-for="reply in posts" :key="reply.postId" :post="reply" @refresh="refresh()" />
         </div>
     </div>
 </template>
@@ -69,7 +73,7 @@ import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import EditPost from './edit-post.vue';
 import rangy from 'rangy';
-import { convert } from 'html-to-text';
+import { convert as htmlToText } from 'html-to-text';
 
 
 export default {
@@ -78,6 +82,7 @@ export default {
     props: {
         post: Object,
     },
+    emits: ['refresh'],
     data() {
         return {
             posts: this?.post?.posts || null,
@@ -98,6 +103,7 @@ export default {
 
             return parentPostId && parentPostId == postParentId;
         },
+        loggedIn()   { return this.$auth.loggedIn; },
         canPost()    { return this?.post?.security?.canPost    || false; },
         canEdit()    { return this?.post?.security?.canEdit    || false; },
         canDelete()  { return this?.post?.security?.canDelete  || false; },
@@ -108,6 +114,8 @@ export default {
         jumpToAnchor() { this.$nextTick(jumpToAnchor)},
         fromNow(datetime) { return moment(datetime).fromNow(); },
         formatDateTime(datetime) { return moment(datetime).format('D MMM YYYY HH:mm'); },
+        refresh() { this.$emit('refresh'); },
+        deletePost,
         getSelection() { 
 
             // get the selection
@@ -132,11 +140,23 @@ export default {
 
             sel.setRanges(goodRanges);            
 
-            var text = convert(sel.toHtml());
+            const html = sel.toHtml();
+            const text = htmlToText(html);
 
             return text;
         },
     }
+}
+
+async function deletePost() {
+
+    const { post } = this;
+    const { postId } = post;
+    const forumsApi = new ForumsApi();
+
+    await forumsApi.deletePost(postId);
+
+    this.refresh();
 }
 
 async function toggleReplies() {

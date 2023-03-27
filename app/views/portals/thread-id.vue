@@ -1,13 +1,14 @@
 <template>
   <div>
     <div v-if="!thread">Loading...</div>
+    <div v-else>
 
-    <h1>{{ thread.subject | lstring }}</h1>
+      <h1>{{ thread.subject | lstring }}</h1> 
 
-    <post v-if="thread" :post="thread" />
+      <post :post="thread" @refresh="refresh()"  />
 
-    <post v-if="posts" v-for="reply in posts" :key="reply.postId" :post="reply" />
-
+      <post v-if="posts" v-for="reply in posts" :key="reply.postId" :post="reply" @refresh="load()" />
+    </div>
   </div>
 </template>
   
@@ -33,24 +34,29 @@ export default {
     portalId() { return this.$route.params.portalId; },
   },
   methods: {
-    jumpToAnchor
+    jumpToAnchor,
+    load
   },
-  async created() {
 
-    const { threadId, forumId } = this;
-
-    const forumsApi = new ForumsApi();
-
-    const qThread = forumsApi.getThread(threadId);
-    const qPosts  = forumsApi.getPosts (threadId, { all: true });
-    
-    this.thread = { ...await qThread, replies:0 };
-    this.posts  = await qPosts;
-    
+  async created() { 
+    await this.load();
     this.$nextTick(()=>jumpToAnchor());
   }
-}
+};
 
+
+async function load() {
+
+  const { threadId, forumId } = this;
+
+  const forumsApi = new ForumsApi();
+
+  const qThread = forumsApi.getThread(threadId);
+  const qPosts  = forumsApi.getPosts (threadId, { all: true });
+  
+  this.thread = { ...await qThread, replies:0 };
+  this.posts  = await qPosts;
+}
 
 </script>
   
