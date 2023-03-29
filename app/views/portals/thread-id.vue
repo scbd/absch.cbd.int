@@ -35,7 +35,8 @@ export default {
   },
   methods: {
     jumpToAnchor,
-    load
+    load,
+    async refresh() { this.load(); }
   },
 
   async created() { 
@@ -43,7 +44,6 @@ export default {
     this.$nextTick(()=>jumpToAnchor());
   }
 };
-
 
 async function load() {
 

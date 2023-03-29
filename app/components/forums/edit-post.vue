@@ -3,24 +3,28 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">
+                Modal title
+                <i v-if="loading" class="fa fa-cog fa-spin"></i> 
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div v-if="post" class="forum-post p-3">
+            <div v-if="post">
 
-                <input type="text" class="form-control"  v-model="subject">
+                <input type="text" class="form-control mb-2"  v-model="subject">
 
-                <textarea ref="body" class="form-control" rows="10" v-model="message"></textarea> 
+                <textarea ref="body" class="form-control mb-2" rows="10" v-model="message"></textarea> 
 
 <!--                     
                 <div ref="body" class="body p-2 border" 
                     contenteditable="true" 
                     v-html="post.htmlMessage" 
                     @blur="post.htmlMessage = $event.target.innerHTML"></div> -->
+                
 
                 <div class="attachments" v-if="post.attachmentCount">
-                    <h6 class="card-subtitle mb-2 text-muted">File(s)</h6>
+                    <h6 class="card-subtitle text-muted">File(s)</h6>
                     <ul class="list-unstyled">
                         <li v-for="attachment in post.attachments" :key="attachment.attachmentId">
                             <a :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}`" class="card-link">
@@ -33,9 +37,10 @@
             </div>
         </div>
         <div class="modal-footer">
-            {{ loading }}
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="save()">Save</button>
+            <button type="button" :disabled="saving" class="btn btn-primary" @click="save()">
+                Save <i v-if="saving" class="fa fa-cog fa-spin"></i> 
+            </button>
         </div>
         </div>
     </div>
@@ -46,6 +51,7 @@
 <script>
 import bootstrap from 'bootstrap'
 import ForumsApi from '~/api/forums';
+import pending   from '~/services/pending-call'
 
 export default {
     name: 'EditPost',
@@ -61,7 +67,8 @@ export default {
         return {
             post: null,
             parent: null,
-            loading: false
+            loading: false,
+            saving: false
         }
     },
     computed: {
@@ -69,11 +76,11 @@ export default {
         message: { get() { return this?.post?.message }, set(value) { return this.post.message = value } }
     },
     methods: {
-        load: pending(load),
-        save: pending(save),
+        load: pending(load, function(on) { this.loading = on }),
+        save: pending(save, function(on) { this.saving  = on }),
         close,
     },
-    created : load,
+    created() { this.load() },
     mounted() {
 
         const el = this.$refs.modal
@@ -151,26 +158,12 @@ async function save() {
     }
     else throw new Error("Unsupported control path");
 
-    this.close();
+    this.close(true);
 }
 
 function close() {
     const { modal } = this;
     modal.hide();
-}
-
-function pending(delegate) {
-    return async function(...params) {
-        try
-        {
-            this.loading = true
-            await delegate.call(this, ...params)
-        }
-        finally{
-            this.loading = false;
-        }
-    }
-
 }
 
 </script>

@@ -35,7 +35,7 @@
             <h6 class="card-subtitle mb-2 text-muted">Background document(s)</h6>
             <ul class="list-unstyled">
               <li v-for="attachment in thread.attachments" :key="attachment.attachmentId">
-                <a :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}`" class="card-link">
+                <a target="_blank" :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}?stream`" class="card-link">
                   {{attachment.name}}
                 </a>
               </li>

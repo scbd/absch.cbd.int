@@ -7,11 +7,13 @@
             <div class="user">
                 <span class="username">{{ post.createdBy }} </span>
                 <span class="organization">{{ post.createdByOrganization }} </span>
+                <span class="text-muted" >#{{post.postId}}</span> 
             </div>
 
             <div class="post-info">
                 <span class="date" :title="formatDateTime(post.createdOn)" @click="showFullDateTime = !showFullDateTime">{{ showFullDateTime ? formatDateTime(post.createdOn) : fromNow(post.createdOn)  }}</span>
-                <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-up"></i></a>
+                <span v-if="post.createdOn!=post.updatedOn" class="date" :title="`${formatDateTime(post.updatedOn)} by ${post.updatedBy}`" @click="showFullDateTime = !showFullDateTime"> <i class="fa fa-edit"></i> {{ showFullDateTime ? formatDateTime(post.updatedOn) : fromNow(post.updatedOn)  }}</span>
+                <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="`reply to #${post.parentId}`"><i class="fa fa-arrow-up"></i></a>
                 <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a>
             </div>
 
@@ -23,7 +25,7 @@
             <h6 class="card-subtitle mb-2 text-muted">File(s)</h6>
             <ul class="list-unstyled">
                 <li v-for="attachment in post.attachments" :key="attachment.attachmentId">
-                    <a :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}`" class="card-link">
+                    <a target="_blank" :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}?stream`" class="card-link">
                         {{ attachment.name }}
                     </a>
                 </li>
@@ -38,14 +40,26 @@
                 </button>
             </div>
             <div class="action">
-                <button v-if="canDelete" class="btn btn-danger btn-sm" @click.prevent="deletePost()">
-                    <i class="fa fa-times"></i> 
-                    Delete
-                </button>
-                <button v-if="canEdit" class="btn btn-light btn-sm" @click.prevent="edit = { postId: post.postId }">
-                    <i class="fa fa-edit"></i> 
-                    Edit
-                </button>
+                <div v-if="canEdit" class="btn-group">
+                    <button type="button" class="btn btn-light btn-sm" @click.prevent="edit = { postId: post.postId }">
+                        <i class="fa fa-edit"></i> Edit
+                    </button>
+                    <button type="button" class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" @click.prevent="edit = { postId: post.postId }">
+                            <i class="fa fa-edit"></i> Edit</a>
+                        </li>
+                        <li v-if="canDelete && !post.replies"><hr class="dropdown-divider"></li>
+                        <li v-if="canDelete && !post.replies"><a class="dropdown-item text-danger" href="#" @click.prevent="deletePost()">
+                            <i class="fa fa-times"></i> Delete</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+
                 <div class="dropdown d-inline-block" >
                     <button class="btn btn-primary btn-sm dropdown-toggle" :disabled="!loggedIn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-reply"></i> 
@@ -114,7 +128,7 @@ export default {
         jumpToAnchor() { this.$nextTick(jumpToAnchor)},
         fromNow(datetime) { return moment(datetime).fromNow(); },
         formatDateTime(datetime) { return moment(datetime).format('D MMM YYYY HH:mm'); },
-        refresh() { this.$emit('refresh'); },
+        refresh,
         deletePost,
         getSelection() { 
 
@@ -150,8 +164,14 @@ export default {
 
 async function deletePost() {
 
+
     const { post } = this;
-    const { postId } = post;
+    const { postId, createdBy } = post;
+
+    const msg = `You are about to delete message #${postId} from ${createdBy}.\n\nAre you sure you want to continue?`;
+
+    if(!confirm(msg)) return;
+
     const forumsApi = new ForumsApi();
 
     await forumsApi.deletePost(postId);
@@ -173,6 +193,16 @@ async function toggleReplies() {
     const posts = await forumsApi.getPosts(postId);
 
     this.posts = posts;
+}
+
+function refresh() {
+
+    if(this.posts) {
+        this.toggleReplies();
+        this.toggleReplies();
+    }
+
+    this.$emit('refresh');
 }
 
 
