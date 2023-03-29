@@ -5,8 +5,6 @@
           <side-menu :menu="menu"  class="menu-sticky mt-1"></side-menu>
       </aside>
       <main class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-9 gx-2 gy-2" >
-        {{ $route }}<br>
-        {{ portalRoute }}<br>
         <div class="bg-white p-4" ref="view"></div>
       </main>
     </div>
@@ -17,6 +15,7 @@
 import Vue from 'vue';
 import ArticlesApi from '~/api/articles';
 import ForumsApi from '~/api/forums';
+import MenusApi from '~/api/portals';
 import SideMenu from '~/components/menus/side-menu.vue';
 import Article from './article-id.vue'
 import Forum from './forum-id.vue'
@@ -24,14 +23,6 @@ import Thread from './thread-id.vue'
 import SubRouter from "../../services/router.js";
 import { compile }  from "path-to-regexp";
 import PageNotFound from '~/views/shared/404.vue';
-
-
-class MenusApi {
-  async get(slug) { 
-    const { default: menus } = await import('./menus.json')
-    return menus.find(m=>m.slug==slug);
-  }
-};
 
 let subRouter = new SubRouter([]);
 
@@ -78,7 +69,7 @@ export default {
     this.articlesApi = new ArticlesApi();
     this.forumsApi   = new ForumsApi();
 
-    const portalMenu = await this.menusApi.get(portalId);
+    const portalMenu = await this.menusApi.getPortalByCode(portalId);
 
     subRouter = buildRoutes(portalMenu);
 
@@ -93,9 +84,8 @@ function onRouteChange() {
   const { portalRoute } = this;
   const { path, params: routeParams }  = portalRoute;
 
-  const match  = subRouter.match(path);
-
-  let component = match?.route?.component || PageNotFound;
+  const match     = subRouter.match(path);
+  const component = match?.route?.component || PageNotFound;
 
   while (this.$refs.view.firstChild) { //Cleanup view placeholder
       const element  = this.$refs.view.lastChild;
@@ -144,7 +134,7 @@ function buildRoutes(portalMenu) {
   return new SubRouter(routes);
 }
 
-function toRoutes({ slug, children, content }, parentPath) {
+function toRoutes({ slug, menus, content }, parentPath) {
 
   const path         = combine(parentPath, slug);
   const [ type ]     = Object.keys(content || {});
@@ -168,7 +158,7 @@ function toRoutes({ slug, children, content }, parentPath) {
     })
   }
 
-  for(let child of children || []) {
+  for(let child of menus || []) {
     for(let route of toRoutes(child, path)) {
       routes.push(route);
     }
@@ -196,7 +186,7 @@ function buildMenu() {
 }
 
 
-function toMenu({ slug, url, title, children }, basePath) {
+function toMenu({ slug, url, title, menus }, basePath) {
 
   const menuPath = [basePath, slug].filter(o=>o).join('/');
 
@@ -205,7 +195,7 @@ function toMenu({ slug, url, title, children }, basePath) {
     title,
   };
 
-  for(let child of children || []) {
+  for(let child of menus || []) {
     menu.menus = menu.menus || [];
     menu.menus.push(toMenu(child, menuPath))
   }
