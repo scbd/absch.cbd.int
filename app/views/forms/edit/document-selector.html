@@ -177,9 +177,9 @@
                                             class="input-wh"/>
                                         </td>
                                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
-                                        <td class="title width-min-30"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td>
+                                        <td class="title width-min-30"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td>
                                         <!-- <td ng-bind="doc.rec_countryName"></td> -->
-                                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
+                                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
                                         <td class="summary" ng-bind="doc.rec_summary | limitTo:200"></td>
                                         <td class="meta"> 
                                             <span ng-bind="doc.meta"></span>  
@@ -297,8 +297,8 @@
                             <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" />
                         </td>
                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
-                        <td class="title width-min-30"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title"></span></a></td>
-                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
+                        <td class="title width-min-30"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title"></span></a></td>
+                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
                         <td class="summary" ng-bind="doc.rec_summary | limitTo:200"></td>
                         <td class="meta"> 
                             <span ng-bind="doc.meta"></span>                            

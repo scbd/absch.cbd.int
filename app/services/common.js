@@ -35,21 +35,28 @@ import '~/views/report-analyzer/filters/ascii';
                 }
                 //==================================================================================
                 this.getReferenceRecordIndex = function(schema, documentId) {
-
+                    
+                    const params = {
+                        q  : `id: ${documentId}`
+                    }
                     var item = [];
-                    var queryFields = 'fl=id,identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
+                    var queryFields = 'id,identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
                     if (schema.toUpperCase() == "FOCALPOINT" || schema.toUpperCase() == "NFP") {
                         queryFields += 'description_EN_t,government_s,government_EN_t,organization_EN_t,function_EN_t,department_EN_t,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_ss,telephone_ss,ctgList_ss,fax_ss,address_EN_t';
                     } else if (schema.toUpperCase() == "MEETING" || schema.toUpperCase() == "MT") {
                         queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
                     } else if (schema.toUpperCase() == "NOTIFICATION" || schema.toUpperCase() == "NT") {
+                        params.q = `(id: ${documentId} OR symbol_s: ${documentId})`
                         queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
+
                     } else if (_.includes(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase())) {
                         queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
                     }
 
-                    return $http.get("/api/v2013/index/select?" + queryFields + "&q=id:" + documentId)
+                    params.fl = queryFields;
+
+                    return $http.get("/api/v2013/index/select", { params })
                         .then(function(result) {
 
                             item.data = result.data.response.docs[0];
