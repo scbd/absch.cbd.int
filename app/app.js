@@ -4,9 +4,18 @@ import "angular-sanitize";
 import "angular-loggly-logger";
 import "angular-joyride";
 import "ngMeta";
-import { CreateAngularVuePlainPlugin, AngularVueRoutePlugin, AngularVueRouterPlugin } from 'angular-vue-plugins';
 
-var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", "angularVue"]));
+import { 
+  CreateAngularVuePlainPlugin,  
+  AngularVueRouterPlugin, 
+  AngularVueRoutePlugin, 
+  AngularVuePlugin,
+  AngularVueDirective,
+  AngularVueAuthPlugin
+//} from 'angular-vue-plugins';
+} from './tmp-angular-vue.js';
+
+var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
   var logToConsole = true;
   LogglyLoggerProvider.includeUrl(true).includeUserAgent(true).includeTimestamp(true).sendConsoleErrors(true).logToConsole(logToConsole).ignoreMessageRegex(/\bDocument not found in the specified realm\b/).endpoint("/error-logs");
@@ -30,6 +39,10 @@ app.factory("$exceptionHandler", ["$log", function ($log) {
         exception = JSON.stringify(parsedException || exception);
       } catch (e) {}
     }
+    if (typeof exception == "string")
+      exception += `\n URl : ${window.location.href}`
+    else
+      exception.errorUrl = exception += `\n URl : ${window.location.href}`;
     $log.error(exception);
   };
 }]);
@@ -48,16 +61,24 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
 
 }]);
 
-
+app.directive('ngVue', AngularVueDirective);
 app.run(["realm", "locale", '$injector', 'authentication', function (realm, locale, $injector,authentication) {
 
   registerVuePlugin('$realm', realm);
   registerVuePlugin('$locale', locale);
   registerVuePlugin('$accountsBaseUrl', authentication.accountsBaseUrl())
+  registerVuePlugin('$ngApp', app);
+  registerVuePlugin('$ngInjector', $injector);
 
+  const vueRootApp = new Vue({});
+
+  window.Vue.use(new AngularVuePlugin({ $injector, ngApp: app, vueApp: vueRootApp }));
   window.Vue.use(new AngularVueRoutePlugin ($injector));
   window.Vue.use(new AngularVueRouterPlugin($injector));
-  window.Vue.use(AngularVueAuthPlugin($injector));
+  window.Vue.use(new AngularVueAuthPlugin  ({
+    logout() { authentication.signOut(); },
+    fetchUser() { return authentication.getUser(); }
+  }));
   
 }]);
 
@@ -66,60 +87,4 @@ function registerVuePlugin(name, service){
   window.Vue.use(newPlugin);
 }
 
-
-export const AngularVueAuthPlugin = ($injector) =>{
-
-  if(!$injector)
-      throw new Error('Angular $injector not provided, cannot use AngularVueRoutePlugin plugin');
-
-  let user;
-  let userToken;
-
-  const auth ={
-      get user()          { return user; },
-      get loggedIn()      { return user && user.isAuthenticated },
-      setUser(newUser)    { user = newUser },
-      setUserToken(token) { userToken = token; },
-
-      logout()        { 
-          const authentication = $injector.get('authentication');
-          return authentication.signOut();
-      },
-      fetchUser()     { 
-          const authentication = $injector.get('authentication');
-          return authentication.getUser();
-      },
-      hasScope(scopeName)      { 
-
-          let rolesToValidate = [];
-          if(typeof scopeName == 'string')
-              rolesToValidate = [scopeName];
-          else if(!Array.isArray(scopeName))
-              throw new Error("`scopeName` must be string or array od string");
-
-          rolesToValidate = scopeName;
-
-          const hasRole = rolesToValidate.find(scope=>user?.roles.includes(scope));
-
-          return !!hasRole;
-      },
-      refreshTokens() { throw new Error('Not Implemented'); },
-      onError()       { throw new Error('Not Implemented'); },
-      onRedirect()    { throw new Error('Not Implemented'); },
-      strategy :      { 
-          token : { 
-              get()      { return userToken; },
-              set(token) { userToken = token }                
-          },
-          get refreshToken() { throw new Error('Not Implemented');  }            
-       },
-  }
-
-  return {
-      install(Vue, options) {
-          if(!Vue.prototype.$auth)
-              Vue.prototype.$auth = auth;
-      }
-    }
-};
 export default app;

@@ -16,8 +16,12 @@ export function lstring(ltext, locale) {
     if(Number.isInteger(ltext)) //is number to handle generic implementation of NR
       return ltext;
   
-    if (!ltext)
+      if (!ltext)
       return "";
+
+    if (typeof(ltext) === 'string')
+    return ltext;
+      
     let sText="";
     if (!sText && locale)
       sText = ltext[locale];

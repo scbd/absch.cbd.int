@@ -39,6 +39,19 @@ export function importQ(module) {
 //============================================================
 //
 //============================================================
+export async function asyncLogError(defered) {
+    try {
+        return await Promise.resolve(defered);
+    }
+    catch(err) {
+        console.error(err);
+        throw err;
+    }
+}
+
+//============================================================
+//
+//============================================================
 export function injectRouteParams(params) {
   return ["$route", function ($route) {
     return _.defaults($route.current.params, params);

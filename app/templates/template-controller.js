@@ -67,7 +67,8 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
 
             for (let media in breakpoints) {
                 if (window.matchMedia(media).matches) {
-                    return breakpoints[media];
+                    $window.deviceSize = breakpoints[media];
+                    return $window.deviceSize;
                 }
             }
 

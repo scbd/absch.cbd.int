@@ -1,0 +1,94 @@
+[
+    {
+        "_id": "123456789123456789123456",
+        "realms": [
+            "bch"
+        ],
+        "slug": "synbio",
+        "title": {
+            "en": "Syntetic Biology"
+        },
+        "content": {
+            "article": {
+                "id": "634fef6af9e46a000186c365"
+            }
+        },
+        "children": [
+            {
+                "slug": "calendar",
+                "title": {
+                    "en": "Calendar of Activities"
+                },
+                "content": {
+                    "article": {
+                        "id": "63503c01f9e46a000186c3e3"
+                    }
+                }
+            },
+            {
+                "slug": "fred",
+                "title": {
+                    "en": "Forum"
+                },
+                "content": {
+                    "forum": {
+                        "id": 17625
+                    }
+                }
+            },
+            {
+                "slug": "resources",
+                "title": {
+                    "en": "Additional Resources"
+                },
+                "content": {
+                    "article": {
+                        "id": "6362b33898b10f0001d36334"
+                    }
+        },
+                "children": [
+                    {
+                        "slug": "r1",
+                        "title": {
+                            "en": "Add res1"
+                        },
+                        "content": {
+                            "article": {
+                                "id": "6362b33898b10f0001d36334"
+                            }
+                        }
+                    },{
+                        "slug": "the-cop",
+                        "title": {
+                            "en": "Add resource 2"
+                        },
+                        "content": {
+                            "article": {
+                                "id": "5f4418f9b704c80001b000bd"
+                            }
+                        },
+                        "children": [{
+                            "slug": "fred",
+                            "title": {
+                                "en": "Forum2"
+                            },
+                            "content": {
+                                "forum": {
+                                    "id": 17625
+                                }
+                            }
+                        }]
+                    }
+                ]
+            },
+            {
+                "url": "https://bch.cbd.int/synbio/",
+                "target": "_blank",
+                "title": {
+                    "en": "2019 consultations",
+                    "fr": "Consultations de 2019"
+                }
+            }
+        ]
+    }
+]
