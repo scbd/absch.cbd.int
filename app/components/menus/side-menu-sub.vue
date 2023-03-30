@@ -41,7 +41,7 @@ export default {
 }
 .side-menu .menu-border{
   /* border-bottom: 1px solid #dcd7d7; */
-  border-bottom: 1px solid #324252;
+  border-bottom: 1px solid #999;
 }
 
 .side-menu .btn-toggle {

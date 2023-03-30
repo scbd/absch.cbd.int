@@ -5,9 +5,11 @@
 
       <h1>{{ thread.subject | lstring }}</h1> 
 
-      <post :post="thread" @refresh="refresh()"  />
+      <post :post="thread" class="mb-2" @refresh="refresh()"  />
 
-      <post v-if="posts" v-for="reply in posts" :key="reply.postId" :post="reply" @refresh="load()" />
+      <a name="replies"></a>
+
+      <post v-if="posts" class="mb-2 border-top" v-for="reply in posts" :key="reply.postId" :post="reply" @refresh="refresh()" />
     </div>
   </div>
 </template>
@@ -21,11 +23,11 @@ export default {
   name: 'Forum',
   components: { Post },
   props: {
-    forumId: Number,
     threadId: Number
   },
   data() {
     return {
+      forum: null,
       thread: null,
       posts: null
     }
@@ -47,15 +49,20 @@ export default {
 
 async function load() {
 
-  const { threadId, forumId } = this;
+  const { threadId } = this;
 
   const forumsApi = new ForumsApi();
 
   const qThread = forumsApi.getThread(threadId);
   const qPosts  = forumsApi.getPosts (threadId, { all: true });
+
+  const thread = await qThread
+  const { forumId } = thread; 
+  const qForum = forumsApi.getForum(forumId);
   
-  this.thread = { ...await qThread, replies:0 };
+  this.thread = { ...thread, replies:0 };
   this.posts  = await qPosts;
+  this.forum  = await qForum;
 }
 
 </script>

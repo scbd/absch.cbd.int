@@ -2,7 +2,7 @@
   <nav class="side-menu">
     <ul class="list-unstyled">
       <li style="border-bottom: 1px solid #324252;">
-        <a :href="menu.url" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom menu-header">
+        <a :href="menu.url" class="d-flex align-items-center pb-3 mb-1 link-dark text-decoration-none border-bottom menu-header">
           <h4 class="w-100">{{ menu.title | lstring($locale) }}</h4>
           <button type="button" class="btn btn-default float-end mb-1" 
             @click="showHideMenu()" :class="{'d-block' : isSmallScreen, 'd-none':!isSmallScreen}">
@@ -49,13 +49,21 @@ export default {
   border: 1px solid #e3e0e0;
   /* padding: 5px; */
   box-shadow: 0px 0px 25px #00000070;
-  background: #3e5165;
+  background: #00405C;
 }
 .menu-header{
   color: #fff;
   padding: 10px 10px 0px 10px!important;
   margin: 0px;
 }
+
+.side-menu .menu-header:hover,
+.side-menu .menu-header:focus {
+  color: rgba(200, 200, 200, .85) !important;
+  background-color: #324252;
+}
+
+
 .side-menu .list-unstyled{
   margin-bottom: 0px!important;
 }
