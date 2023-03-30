@@ -85,9 +85,9 @@ export default {
 
         const el = this.$refs.modal
         const modal = bootstrap.Modal.getOrCreateInstance(el)
-        
+
         el.addEventListener('shown.bs.modal',  ()=>this.$emit('show'));
-        el.addEventListener('hidden.bs.modal', ()=>this.$emit('close'));
+        el.addEventListener('hidden.bs.modal', ()=>this.$emit('close', this.post));
 
         modal.show();
 
@@ -111,8 +111,6 @@ async function load() {
     }
     else if(parentId) { 
         const parent = await forumsApi.getPost(parentId);
-
-        console.log(quote)
 
         this.parent = parent;
         this.post = { 
@@ -148,13 +146,13 @@ async function save() {
     };
 
     if(postId) { 
-        await forumsApi.updatePost(postId, data);
+        this.post = await forumsApi.updatePost(postId, data);
     }
     else if(parentId) { 
-        await forumsApi.createPost(parentId, data);
+        this.post = await forumsApi.createPost(parentId, data);
     }
     else if(forumId) { 
-        await forumsApi.createThread(forumId, data);
+        this.post = await forumsApi.createThread(forumId, data);
     }
     else throw new Error("Unsupported control path");
 
