@@ -3,6 +3,25 @@
     <div v-if="!thread">Loading...</div>
     <div v-else>
 
+      <div v-if="loggedIn" class="p-2 mb-2 bg-white">
+        <div class="row">
+          <div class="col align-self-center">
+          </div>
+          <div class="col-auto align-self-center">
+
+            <button v-if="subscription" :disabled="subscribing"
+              class="btn btn-sm" :class="{ 'btn-outline-dark':!subscription.watching, 'btn-dark': subscription.watching }" type="button"
+              @click="toggleSubscription()">
+              <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> Unsubscribe from topic mailing list</span>
+              <span v-else><i class="fa fa-envelope-o"></i> Subscribe to topic mailing list</span>
+              <i v-if="subscribing" class="fa fa-cog fa-spin"></i>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+
       <h1>{{ thread.subject | lstring }}</h1> 
 
       <post :post="thread" class="mb-2" @refresh="refresh()"  />
@@ -18,6 +37,7 @@
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import Post from '~/components/forums/post.vue';
+import pending   from '~/services/pending-call'
 
 export default {
   name: 'Forum',
@@ -29,16 +49,21 @@ export default {
     return {
       forum: null,
       thread: null,
-      posts: null
+      posts: null,
+      subscription: null,
+      subscribing: false,
     }
   },
   computed: {
     portalId() { return this.$route.params.portalId; },
+    loggedIn() { return this.$auth.loggedIn; },
+
   },
   methods: {
     jumpToAnchor,
     load,
-    async refresh() { this.load(); }
+    async refresh() { this.load(); },
+    toggleSubscription: pending(toggleSubscription, function(on) { this.subscribing = on }),
   },
 
   async created() { 
@@ -55,6 +80,7 @@ async function load() {
 
   const qThread = forumsApi.getThread(threadId);
   const qPosts  = forumsApi.getPosts (threadId, { all: true });
+  const qWatch   = forumsApi.getThreadSubscription(threadId);
 
   const thread = await qThread
   const { forumId } = thread; 
@@ -63,7 +89,22 @@ async function load() {
   this.thread = { ...thread, replies:0 };
   this.posts  = await qPosts;
   this.forum  = await qForum;
+  this.subscription = await qWatch;
 }
+
+async function toggleSubscription() {
+
+  const { threadId, subscription } = this;
+  const { watching } = subscription;
+  const forumsApi = new ForumsApi();
+
+  const qWatch = watching 
+              ? forumsApi.deleteThreadSubscription(threadId)
+              : forumsApi.addThreadSubscription(threadId);
+
+  this.subscription = await qWatch;
+}
+
 
 </script>
   

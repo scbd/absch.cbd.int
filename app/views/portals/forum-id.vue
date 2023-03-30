@@ -20,12 +20,25 @@
         </ul>
       </div>
 
-      <div>
+      <div v-if="forum.security.canPost || forum.security.canEdit || loggedIn" class="border forum-control-bar p-2 mb-2 bg-white">
         <div class="row">
           <div class="col align-self-center">
+            <a v-if="forum.security.canEdit" class="btn btn-light btn-sm" type="button"
+              :href="`https://bch.cbd.int/cms/ui/forums/management/forummanagement.aspx?forumid=${encodeURIComponent(forumId)}&returnurl=${encodeURIComponent(browserUrl())}`">
+              <i class="fa fa-cog"></i> Forum properties
+            </a>
           </div>
           <div class="col-auto align-self-center">
-            <button v-if="forum.security.canPost" class="btn btn-primary btn-sm" :disabled="!loggedIn" type="button"
+
+            <button v-if="subscription" :disabled="subscribing"
+              class="btn btn-sm" :class="{ 'btn-outline-dark':!subscription.watching, 'btn-dark': subscription.watching }" type="button"
+              @click="toggleSubscription()">
+              <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> Unsubscribe from mailing list</span>
+              <span v-else><i class="fa fa-envelope-o"></i> Subscribe to mailing list</span>
+              <i v-if="subscribing" class="fa fa-cog fa-spin"></i>
+            </button>
+
+            <button v-if="forum.security.canPost" class="btn btn-success btn-sm" :disabled="!loggedIn" type="button"
               @click="edit = { forumId: forumId }">
               <i class="fa fa-plus"></i> New Topic
             </button>
@@ -87,6 +100,7 @@ import jumpToAnchor from '~/services/jump-to-anchor.js';
 import { cbdArticle } from 'scbd-common-articles';
 import Post from '~/components/forums/post.vue';
 import EditPost from '~/components/forums/edit-post.vue';
+import pending   from '~/services/pending-call'
 
 export default {
   name: 'Forum',
@@ -104,6 +118,8 @@ export default {
       articleQuery: null,
       articleAdminTags: null,
       forum: null,
+      subscription: null,
+      subscribing: false,
       threads: [],
       edit: null
     }
@@ -116,7 +132,9 @@ export default {
     jumpToAnchor,
     getThreadUrl,
     onArticleLoad,
-    refresh
+    refresh,
+    toggleSubscription: pending(toggleSubscription, function(on) { this.subscribing = on }),
+    browserUrl() { return window.location.href; }
   },
   async created() {
 
@@ -130,9 +148,11 @@ export default {
     const forumsApi = new ForumsApi();
     const qForum = forumsApi.getForum(forumId);
     const qThreads = forumsApi.getThreads(forumId);
+    const qWatch   = forumsApi.getForumSubscription(forumId);
 
-    this.forum = await qForum;
+    this.forum   = await qForum;
     this.threads = await qThreads
+    this.subscription = await qWatch
 
     this.$nextTick(() => jumpToAnchor());
   }
@@ -158,10 +178,29 @@ function refresh({ threadId, postId }) {
 
     this.$router.push({ path, hash });
   }
+}
 
+async function toggleSubscription() {
 
+  const { forumId, subscription } = this;
+  const { watching } = subscription;
+  const forumsApi = new ForumsApi();
+
+  const qWatch = watching 
+               ? forumsApi.deleteForumSubscription(forumId)
+               : forumsApi.addForumSubscription(forumId);
+
+  this.subscription = await qWatch;
 }
 
 </script>
-  
+ 
+<style scoped>
 
+.forum-control-bar {
+  position: sticky; 
+  top: 0px;
+  z-index:1;
+}
+
+</style>

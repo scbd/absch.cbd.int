@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="row row-eq-height">
-      <aside class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3 gx-2 gy-2">
+      <aside class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-3 gx-2 gy-2">
           <side-menu :menu="menu"  class="menu-sticky mt-1"></side-menu>
       </aside>
-      <main class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-9 gx-2 gy-2" >
+      <main class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-8 col-xxl-9 gx-2 gy-2" >
         <div class="bg-white p-4" ref="view"></div>
       </main>
     </div>
