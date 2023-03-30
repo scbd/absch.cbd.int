@@ -46,7 +46,7 @@ export default {
 
 .side-menu .btn-toggle {
   display: inline-flex;
-  align-items: center;
+  text-align: left;
   padding: .25rem .5rem;
   font-weight: normal;
   color: rgba(0, 0, 0, .65);
