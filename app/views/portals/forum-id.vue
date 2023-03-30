@@ -7,7 +7,7 @@
       @load="onArticleLoad($event)" :admin-tags="articleAdminTags">
       <template #article-empty>&nbsp;</template>
     </cbd-article>
-    {{ forum }}
+        
     <div v-if="forum">
 
       <div v-if="threads && threads.length" class=" mb-3">
