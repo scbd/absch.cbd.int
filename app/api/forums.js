@@ -97,4 +97,47 @@ export default class ForumsApi extends ApiBase
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
+
+  async getForumSubscription(forumId)  {
+
+    return this.http.get(`api/v2014/discussions/forums/${encodeURIComponent(forumId)}/watch`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async addForumSubscription(forumId)  {
+
+    return this.http.put(`api/v2014/discussions/forums/${encodeURIComponent(forumId)}/watch`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async deleteForumSubscription(forumId)  {
+
+    return this.http.delete(`api/v2014/discussions/forums/${encodeURIComponent(forumId)}/watch`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+
+  async getThreadSubscription(threadId)  {
+
+    return this.http.get(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/watch`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async addThreadSubscription(threadId)  {
+
+    return this.http.put(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/watch`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async deleteThreadSubscription(threadId)  {
+
+    return this.http.delete(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/watch`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }  
 }
