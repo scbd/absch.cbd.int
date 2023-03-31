@@ -1,4 +1,4 @@
-
+import axios from 'axios'
 import ApiBase, { tryCastToApiError, stringifyUrlParams } from './api-base';
 
 export default class ForumsApi extends ApiBase
@@ -97,6 +97,36 @@ export default class ForumsApi extends ApiBase
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
+
+  // ATTACHMENTS
+
+  async uploadAttachment(htmlFileObject)  {
+
+    const { name: filename, size } = htmlFileObject;
+
+    const slot = await this.http.post(`api/v2014/discussions/attachments`, { filename })
+                           .then(res => res.data)
+                           .catch(tryCastToApiError);
+
+    const { url: putUrl, ...file } = slot;
+    const { contentType } = file;
+
+    const result = await axios.put(putUrl, htmlFileObject, { headers: { 'Content-Type': contentType } }).catch(tryCastToApiError);
+
+    return { size, ...file };
+  }
+
+  async getAttachmentDirectUrl(attachmentId)  {
+
+    const result = await this.http.get(`api/v2014/discussions/attachments/${encodeURIComponent(attachmentId)}`)
+                             .then(res => res.data)
+                             .catch(tryCastToApiError);
+
+    return result
+  }
+
+
+  // SUBSCRIPTIONS
 
   async getForumSubscription(forumId)  {
 

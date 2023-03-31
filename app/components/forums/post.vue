@@ -15,8 +15,8 @@
                     <div class="post-info">
                         <span class="date" :title="formatDateTime(post.createdOn)" @click="showFullDateTime = !showFullDateTime">{{ showFullDateTime ? formatDateTime(post.createdOn) : fromNow(post.createdOn)  }}</span>
                         <span v-if="post.createdOn!=post.updatedOn" class="date" :title="`${formatDateTime(post.updatedOn)} by ${post.updatedBy}`" @click="showFullDateTime = !showFullDateTime"> <i class="fa fa-edit"></i> {{ showFullDateTime ? formatDateTime(post.updatedOn) : fromNow(post.updatedOn)  }}</span>
-                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="`reply to #${post.parentId}`"><i class="fa fa-arrow-up"></i></a>
-                        <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a>
+                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="`This is a reply to #${post.parentId}`"><i class="fa fa-arrow-up"></i></a>
+                        <!-- <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a> -->
                     </div>
                 </div>
             </div>

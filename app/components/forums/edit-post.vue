@@ -28,7 +28,7 @@
                     <ul class="list-unstyled">
                         <li v-for="attachment in post.attachments" :key="attachment.attachmentId">
                             <a :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}`" class="card-link">
-                                {{ attachment.name }}
+                                {{ attachment.filename }}
                             </a>
                         </li>
                     </ul>
@@ -37,6 +37,7 @@
             </div>
         </div>
         <div class="modal-footer">
+            <AttachmentUpload @file="fileUploaded($event)"></AttachmentUpload>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" :disabled="saving" class="btn btn-primary" @click="save()">
                 Save <i v-if="saving" class="fa fa-cog fa-spin"></i> 
@@ -52,10 +53,11 @@
 import bootstrap from 'bootstrap'
 import ForumsApi from '~/api/forums';
 import pending   from '~/services/pending-call'
+import AttachmentUpload from '~/components/forums/attachment-upload.vue';
 
 export default {
     name: 'EditPost',
-    components: {},
+    components: { AttachmentUpload },
     emits: ['show', 'close'],
     props: {
         postId:   { type:  Number },
@@ -79,6 +81,7 @@ export default {
         load: pending(load, function(on) { this.loading = on }),
         save: pending(save, function(on) { this.saving  = on }),
         close,
+        fileUploaded,
     },
     created() { this.load() },
     mounted() {
@@ -157,6 +160,12 @@ async function save() {
     else throw new Error("Unsupported control path");
 
     this.close(true);
+}
+
+function fileUploaded(attachmentInfo) {
+
+    console.log(attachmentInfo)
+    this.post.attachments.push(attachmentInfo);
 }
 
 function close() {
