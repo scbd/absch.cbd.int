@@ -95,9 +95,13 @@ import moment from 'moment';
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import EditPost from './edit-post.vue';
+import Vue from 'vue';
 import rangy from 'rangy';
 import { convert as htmlToText } from 'html-to-text';
 
+const globalState = Vue.observable({
+    showFullDateTime : null
+})
 
 export default {
     name: 'Post',
@@ -109,7 +113,6 @@ export default {
     data() {
         return {
             posts: this?.post?.posts || null,
-            showFullDateTime: false,
             edit: false
         }
     },
@@ -125,6 +128,10 @@ export default {
             const { postId   : parentPostId } = this.$parent.post || {};
 
             return parentPostId && parentPostId == postParentId;
+        },
+        showFullDateTime: { 
+            get()  { return globalState.showFullDateTime; }, 
+            set(v) { globalState.showFullDateTime = v; }
         },
         loggedIn()   { return this.$auth.loggedIn; },
         canPost()    { return this?.post?.security?.canPost    || false; },
@@ -234,6 +241,7 @@ function refresh($event) {
 
 .forum-post > .header .post-info > .date {
     font-size: 90%;
+    cursor: help;
 }
 
 
