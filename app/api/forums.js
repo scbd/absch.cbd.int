@@ -30,11 +30,12 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async createThread (forumId, { subject, message })  {
+  async createThread (forumId, { subject, message, attachments })  {
 
     var data = {
       subject,
-      message
+      message,
+      attachments
     };
 
     return this.http.post(`api/v2014/discussions/forums/${encodeURIComponent(forumId)}/threads`, data)
@@ -60,11 +61,12 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async createPost(parentId, { message, subject })  {
+  async createPost(parentId, { subject, message, attachments })  {
 
     var data = {
       subject,
-      message
+      message,
+      attachments
     };
 
     return this.http.post(`api/v2014/discussions/posts/${encodeURIComponent(parentId)}/posts`, data)
@@ -79,11 +81,12 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async updatePost(postId, { message, subject })  {
+  async updatePost(postId, { subject, message, attachments })  {
 
     var data = {
       subject,
-      message
+      message,
+      attachments
     };
 
     return this.http.put(`api/v2014/discussions/posts/${encodeURIComponent(postId)}`, data)
@@ -113,7 +116,9 @@ export default class ForumsApi extends ApiBase
 
     const result = await axios.put(putUrl, htmlFileObject, { headers: { 'Content-Type': contentType } }).catch(tryCastToApiError);
 
-    return { size, ...file };
+    const { guid : attachmentId } = file;
+
+    return { size, attachmentId, ...file };
   }
 
   async getAttachmentDirectUrl(attachmentId)  {

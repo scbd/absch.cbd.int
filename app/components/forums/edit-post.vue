@@ -4,7 +4,9 @@
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">
-                Modal title
+                <span v-if="postId">Edit post</span>
+                <span v-else-if="parentId">Post a reply</span>
+                <span v-else-if="forumId">Create a new thread</span>
                 <i v-if="loading" class="fa fa-cog fa-spin"></i> 
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -23,25 +25,42 @@
                     @blur="post.htmlMessage = $event.target.innerHTML"></div> -->
                 
 
-                <div class="attachments" v-if="post.attachmentCount">
-                    <h6 class="card-subtitle text-muted">File(s)</h6>
-                    <ul class="list-unstyled">
-                        <li v-for="attachment in post.attachments" :key="attachment.attachmentId">
-                            <a :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}`" class="card-link">
-                                {{ attachment.filename }}
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <div class="attachments" v-if="forum.allowAttachments || attachments.length">
+                    <h6 class="card-subtitle text-muted">Attachments(s)</h6>
 
+                    <div class="container">
+                        <div class="row g-1">
+                            <div class="col-12 col-md-6 col-lg-4" v-for="attachment in attachments" :key="attachment.attachmentId">
+
+                                <div class=" p-1">
+                                    <button class="btn btn-sm " :class="{ 'btn-outline-danger' : !deletedBy, 'btn-outline-dark': attachment.deletedBy }"  @click="toggleDeleted(attachment.attachmentId)" type="button" >
+                                        <i class="fa" :class="{ 'fa-times' : !attachment.deletedBy, 'fa-undo': attachment.deletedBy }"></i>
+                                    </button>
+                                    <attachment :attachment="attachment"/>
+                                </div>
+                            </div>
+
+                            <div class="col-12" >
+                                <div class=" p-1">
+                                    <attachment-upload @file="fileUploaded($event)"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
-            <AttachmentUpload @file="fileUploaded($event)"></AttachmentUpload>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" :disabled="saving" class="btn btn-primary" @click="save()">
-                Save <i v-if="saving" class="fa fa-cog fa-spin"></i> 
-            </button>
+            <div class="row w-100">
+                <div class="col">
+                </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" :disabled="saving" class="btn btn-primary" @click="save()">
+                        Save <i v-if="saving" class="fa fa-cog fa-spin"></i> 
+                    </button>
+                </div>
+            </div>
         </div>
         </div>
     </div>
@@ -53,11 +72,12 @@
 import bootstrap from 'bootstrap'
 import ForumsApi from '~/api/forums';
 import pending   from '~/services/pending-call'
-import AttachmentUpload from '~/components/forums/attachment-upload.vue';
+import Attachment from './attachment.vue';
+import AttachmentUpload from './attachment-upload.vue';
 
 export default {
     name: 'EditPost',
-    components: { AttachmentUpload },
+    components: { AttachmentUpload, Attachment},
     emits: ['show', 'close'],
     props: {
         postId:   { type:  Number },
@@ -67,21 +87,25 @@ export default {
     },
     data() {
         return {
-            post: null,
+            forum: null,
             parent: null,
+            post: null,
             loading: false,
             saving: false
         }
     },
     computed: {
         subject: { get() { return this?.post?.subject }, set(value) { return this.post.subject = value } },
-        message: { get() { return this?.post?.message }, set(value) { return this.post.message = value } }
+        message: { get() { return this?.post?.message }, set(value) { return this.post.message = value } },
+        attachments: { get() { return this?.post?.attachments }, set(value) { return this.post.attachments = value } }
     },
     methods: {
         load: pending(load, function(on) { this.loading = on }),
         save: pending(save, function(on) { this.saving  = on }),
         close,
         fileUploaded,
+        toggleDeleted,
+        sizeText,
     },
     created() { this.load() },
     mounted() {
@@ -108,44 +132,52 @@ async function load() {
     if(postId) { 
         const post   = await forumsApi.getPost(postId);
         const parent = await forumsApi.getPost(post.parentId);
+        const forum  = await forumsApi.getForum(post.forumId);
 
-        this.post = post;
+        this.forum  = forum;
         this.parent = parent;
+        this.post   = post;
     }
     else if(parentId) { 
         const parent = await forumsApi.getPost(parentId);
+        const forum  = await forumsApi.getForum(parent.forumId);
 
+        this.forum  = forum;
         this.parent = parent;
-        this.post = { 
+        this.post   = { 
             postId: null, 
             parentId : parent.postId,
             forumId  : parent.forumId,
             subject  : parent.subject,
-            message  : quote ? `> ${quote}`.replace(/\n/g, '\n> ') : ''
+            message  : quote ? `> ${quote}`.replace(/\n/g, '\n> ') : '',
+            attachments: []
         };
     }
     else if(forumId) { 
         const forum = await forumsApi.getForum(forumId);
 
-        this.post = { 
+        this.forum  = forum;
+        this.parent = null;
+        this.post   = { 
             postId: null, 
             parentId : null,
             forumId  : forum.forumId,
             subject  : '',
-            message  : ''
+            message  : '',
+            attachments: []
         };
-        this.parent = null;
     }
     else throw new Error("Unsupported control path");
 }
 
 async function save() {
 
-    const { forumsApi, postId, parentId, forumId, subject, message } = this;
+    const { forumsApi, postId, parentId, forumId, subject, message, attachments } = this;
 
     const data = {
         subject, 
-        message
+        message,
+        attachments
     };
 
     if(postId) { 
@@ -162,10 +194,35 @@ async function save() {
     this.close(true);
 }
 
+function toggleDeleted(attachmentId) {
+
+    const { attachments, $auth }  = this;
+    const index = attachments.findIndex(a=>a.attachmentId == attachmentId);
+
+    if(index<0) return;
+
+    var attachment = attachments[index];
+
+    if(attachment.deletedBy) attachment = { ...attachment, deletedBy : null };
+    else                     attachment = { ...attachment, deletedBy : $auth.user.name || 'me' };
+
+    attachments[index] = attachment;
+
+    this.attachments = [...attachments]; //Force refresh
+}
+
+function sizeText(size) {
+
+    if(size<1024)       return `${size} B` 
+    if(size/1024 <1024) return `${(size/1024).toFixed(1)} kB` 
+    
+    return `${(size/1024/1024).toFixed(1)} MB` 
+}
+
 function fileUploaded(attachmentInfo) {
 
     console.log(attachmentInfo)
-    this.post.attachments.push(attachmentInfo);
+    this.attachments.push(attachmentInfo);
 }
 
 function close() {
@@ -176,7 +233,6 @@ function close() {
 </script>
 
 <style scoped>
-
 
 
 </style>

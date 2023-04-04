@@ -1,13 +1,16 @@
 <template>
     <span>
-        <button @click="$refs.files.click()">Upload</button>
-        <input ref="files" type="file" multiple @change="uploadFile($event)">
-        
+        <button :disabled="disabled" class="btn btn-light" @click="$refs.files.click()">
+            <i class="fa fa-upload"></i>
+            Upload document(s)
+        </button>
+        <input v-if="!disabled" ref="files" type="file" multiple @change="uploadFile($event)" style="display:none">
     </span>
 </template>
     
 <script>
 import ForumsApi from '~/api/forums';
+import pending   from '~/services/pending-call'
 
 
 export default {
@@ -18,12 +21,13 @@ export default {
     emits: ['file'],
     data() {
         return {
+            disabled : false
         }
     },
     computed: {
     },
     methods: {
-        uploadFile,
+        uploadFile: pending(uploadFile, function(on) { this.disabled = on })
     }
 }
 
@@ -40,7 +44,6 @@ async function uploadFile({ target }) {
 
     await Promise.all(qUploads);
 }
-
 
 </script>
 

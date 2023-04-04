@@ -25,12 +25,10 @@
         <div ref="body" class="body mb-2" v-html="post.htmlMessage"></div>
 
         <div class="attachments" v-if="post.attachmentCount">
-            <h6 class="card-subtitle mb-2 text-muted">File(s)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Attachment(s)</h6>
             <ul class="list-unstyled">
                 <li v-for="attachment in post.attachments" :key="attachment.attachmentId">
-                    <a target="_blank" :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}?stream`" class="card-link">
-                        {{ attachment.name }}
-                    </a>
+                    <attachment :attachment="attachment"/>
                 </li>
             </ul>
         </div>
@@ -98,6 +96,7 @@ import EditPost from './edit-post.vue';
 import Vue from 'vue';
 import rangy from 'rangy';
 import { convert as htmlToText } from 'html-to-text';
+import Attachment from './attachment.vue';
 
 const globalState = Vue.observable({
     showFullDateTime : null
@@ -105,7 +104,7 @@ const globalState = Vue.observable({
 
 export default {
     name: 'Post',
-    components: { EditPost },
+    components: { EditPost, Attachment },
     props: {
         post: Object,
     },
