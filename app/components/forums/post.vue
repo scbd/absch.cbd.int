@@ -15,8 +15,8 @@
                     <div class="post-info">
                         <span class="date" :title="formatDateTime(post.createdOn)" @click="showFullDateTime = !showFullDateTime">{{ showFullDateTime ? formatDateTime(post.createdOn) : fromNow(post.createdOn)  }}</span>
                         <span v-if="post.createdOn!=post.updatedOn" class="date" :title="`${formatDateTime(post.updatedOn)} by ${post.updatedBy}`" @click="showFullDateTime = !showFullDateTime"> <i class="fa fa-edit"></i> {{ showFullDateTime ? formatDateTime(post.updatedOn) : fromNow(post.updatedOn)  }}</span>
-                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="`reply to #${post.parentId}`"><i class="fa fa-arrow-up"></i></a>
-                        <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a>
+                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="`This is a reply to #${post.parentId}`"><i class="fa fa-arrow-up"></i></a>
+                        <!-- <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a> -->
                     </div>
                 </div>
             </div>
@@ -25,12 +25,10 @@
         <div ref="body" class="body mb-2" v-html="post.htmlMessage"></div>
 
         <div class="attachments" v-if="post.attachmentCount">
-            <h6 class="card-subtitle mb-2 text-muted">File(s)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Attachment(s)</h6>
             <ul class="list-unstyled">
                 <li v-for="attachment in post.attachments" :key="attachment.attachmentId">
-                    <a target="_blank" :href="`/api/v2014/discussions/attachments/${attachment.attachmentId}?stream`" class="card-link">
-                        {{ attachment.name }}
-                    </a>
+                    <attachment :attachment="attachment"/>
                 </li>
             </ul>
         </div>
@@ -95,13 +93,18 @@ import moment from 'moment';
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import EditPost from './edit-post.vue';
+import Vue from 'vue';
 import rangy from 'rangy';
 import { convert as htmlToText } from 'html-to-text';
+import Attachment from './attachment.vue';
 
+const globalState = Vue.observable({
+    showFullDateTime : null
+})
 
 export default {
     name: 'Post',
-    components: { EditPost },
+    components: { EditPost, Attachment },
     props: {
         post: Object,
     },
@@ -109,7 +112,6 @@ export default {
     data() {
         return {
             posts: this?.post?.posts || null,
-            showFullDateTime: false,
             edit: false
         }
     },
@@ -125,6 +127,10 @@ export default {
             const { postId   : parentPostId } = this.$parent.post || {};
 
             return parentPostId && parentPostId == postParentId;
+        },
+        showFullDateTime: { 
+            get()  { return globalState.showFullDateTime; }, 
+            set(v) { globalState.showFullDateTime = v; }
         },
         loggedIn()   { return this.$auth.loggedIn; },
         canPost()    { return this?.post?.security?.canPost    || false; },
@@ -234,6 +240,7 @@ function refresh($event) {
 
 .forum-post > .header .post-info > .date {
     font-size: 90%;
+    cursor: help;
 }
 
 

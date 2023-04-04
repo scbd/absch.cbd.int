@@ -11,7 +11,7 @@
     <div v-if="forum">
 
       <div v-if="threads && threads.length" class=" mb-3">
-        <h4>Table of Content</h4>
+        <h3>Table of Contents</h3>
         <ul>
           <li v-for="thread in threads" :key="thread.threadId">
             <a @click.prevent="jumpToAnchor(`thread${thread.threadId}`)" :href="`#thread${thread.threadId}`">{{
@@ -62,7 +62,7 @@
           <div class="card-footer">
             <div class="row">
               <div class="col align-self-center">
-                <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">no reply</a>
+                <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">No replies</a>
                 <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the reply »</a>
                 <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the {{ thread.replies }}
                   replies »</a>

@@ -1,4 +1,4 @@
-
+import axios from 'axios'
 import ApiBase, { tryCastToApiError, stringifyUrlParams } from './api-base';
 
 export default class ForumsApi extends ApiBase
@@ -30,11 +30,12 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async createThread (forumId, { subject, message })  {
+  async createThread (forumId, { subject, message, attachments })  {
 
     var data = {
       subject,
-      message
+      message,
+      attachments
     };
 
     return this.http.post(`api/v2014/discussions/forums/${encodeURIComponent(forumId)}/threads`, data)
@@ -60,11 +61,12 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async createPost(parentId, { message, subject })  {
+  async createPost(parentId, { subject, message, attachments })  {
 
     var data = {
       subject,
-      message
+      message,
+      attachments
     };
 
     return this.http.post(`api/v2014/discussions/posts/${encodeURIComponent(parentId)}/posts`, data)
@@ -79,11 +81,12 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async updatePost(postId, { message, subject })  {
+  async updatePost(postId, { subject, message, attachments })  {
 
     var data = {
       subject,
-      message
+      message,
+      attachments
     };
 
     return this.http.put(`api/v2014/discussions/posts/${encodeURIComponent(postId)}`, data)
@@ -97,6 +100,38 @@ export default class ForumsApi extends ApiBase
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
+
+  // ATTACHMENTS
+
+  async uploadAttachment(htmlFileObject)  {
+
+    const { name: filename, size } = htmlFileObject;
+
+    const slot = await this.http.post(`api/v2014/discussions/attachments`, { filename })
+                           .then(res => res.data)
+                           .catch(tryCastToApiError);
+
+    const { url: putUrl, ...file } = slot;
+    const { contentType } = file;
+
+    const result = await axios.put(putUrl, htmlFileObject, { headers: { 'Content-Type': contentType } }).catch(tryCastToApiError);
+
+    const { guid : attachmentId } = file;
+
+    return { size, attachmentId, ...file };
+  }
+
+  async getAttachmentDirectUrl(attachmentId)  {
+
+    const result = await this.http.get(`api/v2014/discussions/attachments/${encodeURIComponent(attachmentId)}`)
+                             .then(res => res.data)
+                             .catch(tryCastToApiError);
+
+    return result
+  }
+
+
+  // SUBSCRIPTIONS
 
   async getForumSubscription(forumId)  {
 
