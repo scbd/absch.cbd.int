@@ -55,7 +55,9 @@ app.directive('kmLinkList', ['MimeService', function (MimeService){
 
 				$scope.getNonUNLanguage = function(lang){
 					return {
-						identifier:'lang-'+lang
+						// legacy bch fix replace * bf 04-04-2023
+						// some lang already have 'lang-' bf 04-04-2023
+						identifier: (lang?.startWith('lang-') ? '' : 'lang-') + (lang?.replace('*', ''))
 					}
 				}
 
