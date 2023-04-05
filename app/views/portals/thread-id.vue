@@ -109,3 +109,11 @@ async function toggleSubscription() {
 </script>
   
 
+
+<style scoped>
+
+.anchor-margin {
+  scroll-margin-top:20px;
+}
+
+</style>

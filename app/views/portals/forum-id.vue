@@ -7,20 +7,21 @@
       @load="onArticleLoad($event)" :admin-tags="articleAdminTags">
       <template #article-empty>&nbsp;</template>
     </cbd-article>
-        
+
     <div v-if="forum">
 
       <div v-if="threads && threads.length" class=" mb-3">
         <h3>Table of Contents</h3>
         <ul>
           <li v-for="thread in threads" :key="thread.threadId">
-            <a @click.prevent="jumpToAnchor(`thread${thread.threadId}`)" :href="`#thread${thread.threadId}`">{{
+            <a :href="`#thread${thread.threadId}`">{{
               thread.subject | lstring }}</a>
           </li>
         </ul>
       </div>
 
-      <div v-if="forum.security.canPost || forum.security.canEdit || loggedIn" class="border forum-control-bar p-2 mb-2 bg-white">
+      <div v-if="forum.security.canPost || forum.security.canEdit || loggedIn"
+        class="border forum-control-bar p-2 mb-2 bg-white">
         <div class="row">
           <div class="col align-self-center">
             <a v-if="forum.security.canEdit" class="btn btn-light btn-sm" type="button"
@@ -30,12 +31,15 @@
           </div>
           <div class="col-auto align-self-center">
 
-            <button v-if="subscription" :disabled="subscribing"
-              class="btn btn-sm" :class="{ 'btn-outline-dark':!subscription.watching, 'btn-dark': subscription.watching }" type="button"
+            <loading v-if="loading" caption="Refreshing...." />
+
+
+            <button v-if="subscription" :disabled="subscribing" class="btn btn-sm"
+              :class="{ 'btn-outline-dark': !subscription.watching, 'btn-dark': subscription.watching }" type="button"
               @click="toggleSubscription()">
               <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> Unsubscribe from mailing list</span>
               <span v-else><i class="fa fa-envelope-o"></i> Subscribe to mailing list</span>
-              <i v-if="subscribing" class="fa fa-cog fa-spin"></i>
+              <loading v-if="subscribing" />
             </button>
 
             <button v-if="forum.security.canPost" class="btn btn-success btn-sm" :disabled="!loggedIn" type="button"
@@ -47,27 +51,41 @@
       </div>
 
       <div v-for="thread in threads" :key="thread.threadId">
-        <a :name="`thread${thread.threadId}`"></a>
-        <div class="card mb-3">
+        <a class="anchor-margin" :name="`thread${thread.threadId}`"></a>
+        <div class="card mb-3" :class="highlightPostClasses(thread.threadId)">
           <h5 class="card-header">
             <a :href="getThreadUrl(thread.threadId)" style="color:inherit">
               {{ thread.subject | lstring }}
             </a>
           </h5>
+
           <div class="card-body">
+            <post :post="thread" @refresh="refresh($event)">
+              <template v-slot:showReplies="{ replies }">
 
-            <post :post="{ ...thread, replies: 0 }" @refresh="refresh($event)" />
+                <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`">Read the post »</a>
+                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the reply »</a>
+                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the {{ replies  }} replies  »</a>
 
+
+              </template>
+            </post>
           </div>
+
           <div class="card-footer">
             <div class="row">
               <div class="col align-self-center">
                 <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">No replies</a>
-                <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the reply »</a>
-                <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the {{ thread.replies }}
-                  replies »</a>
+                <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">One reply</a>
+                <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ thread.replies }} replies</a>
               </div>
               <div class="col-auto align-self-center">
+                <span v-if="thread.lastPostId && thread.lastPostId!=thread.threadId">
+                  <a :href="`${getThreadUrl(thread.threadId)}#${thread.lastPostId}`">
+                    Last reply <relative-datetime class="date" :date="thread.lastPostOn"></relative-datetime> by
+                    {{ thread.lastPostBy }},
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -91,6 +109,8 @@
       <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; refresh($event)"></edit-post>
     </div>
 
+    <loading v-if="loading" />
+
   </div>
 </template>
   
@@ -101,6 +121,8 @@ import { cbdArticle } from 'scbd-common-articles';
 import Post from '~/components/forums/post.vue';
 import EditPost from '~/components/forums/edit-post.vue';
 import pending   from '~/services/pending-call'
+import Loading  from '~/components/common/loading.vue'
+import RelativeDatetime from '~/components/common/relative-datetime.vue';
 
 export default {
   name: 'Forum',
@@ -108,6 +130,8 @@ export default {
     CbdArticle: cbdArticle,
     Post,
     EditPost,
+    Loading,
+    RelativeDatetime
   },
   props: {
     forumId: Number
@@ -118,9 +142,10 @@ export default {
       articleQuery: null,
       articleAdminTags: null,
       forum: null,
+      threads: [],
       subscription: null,
       subscribing: false,
-      threads: [],
+      loading:false,
       edit: null
     }
   },
@@ -132,51 +157,61 @@ export default {
     jumpToAnchor,
     getThreadUrl,
     onArticleLoad,
-    refresh,
-    toggleSubscription: pending(toggleSubscription, function(on) { this.subscribing = on }),
-    browserUrl() { return window.location.href; }
+    refresh:            pending(refresh, 'loading'),
+    load:               pending(load, 'loading'),
+    toggleSubscription: pending(toggleSubscription, 'subscribing'),
+    browserUrl() { return window.location.href; },
+    highlightPostClasses,
   },
+
   async created() {
 
-    const { portalId, forumId } = this;
+    this.forumsApi = new ForumsApi();
 
-    this.articleAdminTags = ["introduction", `forum:${forumId}`];
-
-    var ag = [{ $match: { adminTags: { $all: this.articleAdminTags } } }];
-    this.articleQuery = { ag: JSON.stringify(ag) };
-
-    const forumsApi = new ForumsApi();
-    const qForum = forumsApi.getForum(forumId);
-    const qThreads = forumsApi.getThreads(forumId);
-    const qWatch   = forumsApi.getForumSubscription(forumId);
-
-    this.forum   = await qForum;
-    this.threads = await qThreads
-    this.subscription = await qWatch
+    await this.load();
 
     this.$nextTick(() => jumpToAnchor());
   }
 }
 
-function getThreadUrl(threadId) {
-  return `${this.$route.path}/thread/${encodeURIComponent(threadId)}`.replace(/^\/+/, '');
+async function load() {
+
+  const { forumsApi, forumId } = this;
+
+  this.articleAdminTags = ["introduction", `forum:${forumId}`];
+
+  var ag = [{ $match: { adminTags: { $all: this.articleAdminTags } } }];
+  this.articleQuery = { ag: JSON.stringify(ag) };
+
+  const qForum   = forumsApi.getForum(forumId);
+  const qThreads = forumsApi.getThreads(forumId);
+  const qWatch   = forumsApi.getForumSubscription(forumId);
+
+  this.forum   = await qForum;
+  this.threads = await qThreads
+  this.subscription = await qWatch
 }
 
-function onArticleLoad(article) {
-  this.article = article;
-  if (!article && !this.$auth?.hasScope(['oasisArticleEditor', 'Administrator'])) {
-    this.articleQuery = undefined;
-    return;
-  }
-}
+async function refresh({ threadId, postId }) {
 
-function refresh({ threadId, postId }) {
 
   if (threadId != postId) {
+
     const path = this.getThreadUrl(threadId);
     const hash = `${postId}`;
 
     this.$router.push({ path, hash });
+  }
+  else {
+
+    const { forumsApi, forumId } = this;
+    const hash = `thread${threadId}`;
+
+    this.threads = await forumsApi.getThreads(forumId);
+
+    this.$router.push({ hash });
+
+    this.$nextTick(() => jumpToAnchor());
   }
 }
 
@@ -187,10 +222,32 @@ async function toggleSubscription() {
   const forumsApi = new ForumsApi();
 
   const qWatch = watching 
-               ? forumsApi.deleteForumSubscription(forumId)
-               : forumsApi.addForumSubscription(forumId);
+              ? forumsApi.deleteForumSubscription(forumId)
+              : forumsApi.addForumSubscription(forumId);
 
   this.subscription = await qWatch;
+}
+
+function highlightPostClasses(postId) {
+
+  if(this.$route.hash == `#thread${postId}`)
+    return ['bg-info', 'bg-opacity-25'];
+  
+  return [];
+}
+
+function getThreadUrl(threadId) {
+  return `${this.$route.path}/thread/${encodeURIComponent(threadId)}`.replace(/^\/+/, '');
+}
+
+function onArticleLoad(article) {
+  
+  this.article = article;
+
+  if (!article && !this.$auth?.hasScope(['oasisArticleEditor', 'Administrator'])) {
+    this.articleQuery = undefined;
+    return;
+  }
 }
 
 </script>
@@ -201,6 +258,10 @@ async function toggleSubscription() {
   position: sticky; 
   top: 0px;
   z-index:1;
+}
+
+.anchor-margin {
+  scroll-margin-top:50px;
 }
 
 </style>

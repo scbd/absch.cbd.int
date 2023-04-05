@@ -2,7 +2,7 @@
   <nav class="side-menu">
     <ul class="list-unstyled">
       <li style="border-bottom: 1px solid #324252;">
-        <a :href="menu.url" class="d-flex align-items-center pb-3 mb-1 link-dark text-decoration-none border-bottom menu-header">
+        <a :href="menu.url" class="d-flex align-items-center pb-3 mb-1 text-decoration-none border-bottom menu-header">
           <h4 class="w-100">{{ menu.title | lstring($locale) }}</h4>
           <button type="button" class="btn btn-default float-end mb-1" 
             @click="showHideMenu()" :class="{'d-block' : isSmallScreen, 'd-none':!isSmallScreen}">

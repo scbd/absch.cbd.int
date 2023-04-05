@@ -33,7 +33,7 @@ export default {
         },
     },
     methods: {
-        initDownloadLink: pending(initDownloadLink, (on)=>this.loading=on)
+        initDownloadLink: pending(initDownloadLink, 'loading')
     },
 }
 

@@ -38,11 +38,15 @@ function AngularVueRoutePlugin($injector) {
   function updateRoute() {
     var _$route$current;
     var path = $location.path();
+    var hash = $location.hash();
     var query = _objectSpread({}, $location.search() || {});
     var params = _objectSpread({}, ((_$route$current = $route.current) === null || _$route$current === void 0 ? void 0 : _$route$current.params) || {});
     observableRoute._route = {
       get path() {
         return path;
+      },
+      get hash() {
+        return hash ? "#".concat(hash) : '';
       },
       get query() {
         return _objectSpread({}, query);
