@@ -1,6 +1,6 @@
 <template>
-    <div class="forum-post">
-        <a v-if="!showLinkToSelf" :name="`${post.postId}`"></a>
+    <div class="forum-post" :class="highlightPostClasses(post.postId)">
+        <a v-if="!showLinkToSelf" class="anchor-margin"  :name="`${post.postId}`"></a>
 
         <div class="header mt-2 mb-2">
             <div class="row">
@@ -13,8 +13,11 @@
                 </div>
                 <div class="col-auto align-self-center">
                     <div class="post-info">
-                        <span class="date" :title="formatDateTime(post.createdOn)" @click="showFullDateTime = !showFullDateTime">{{ showFullDateTime ? formatDateTime(post.createdOn) : fromNow(post.createdOn)  }}</span>
-                        <span v-if="post.createdOn!=post.updatedOn" class="date" :title="`${formatDateTime(post.updatedOn)} by ${post.updatedBy}`" @click="showFullDateTime = !showFullDateTime"> <i class="fa fa-edit"></i> {{ showFullDateTime ? formatDateTime(post.updatedOn) : fromNow(post.updatedOn)  }}</span>
+                        <relative-datetime class="date" :date="post.createdOn"></relative-datetime>
+                        <span v-if="post.createdOn!=post.updatedOn">
+                            <i class="fa fa-edit"></i>
+                            <relative-datetime class="date" :title="`| by ${post.updatedBy}`" :date="post.updatedOn"></relative-datetime>
+                        </span>
                         <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="`This is a reply to #${post.parentId}`"><i class="fa fa-arrow-up"></i></a>
                         <!-- <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a> -->
                     </div>
@@ -35,11 +38,15 @@
         <div class="footer">
             <div class="row">
                 <div class="col align-self-center">
-                    <button class="btn btn-light btn-sm" @click.prevent="toggleReplies()" v-if="post.replies">
-                        <span v-if="post.replies == 1">{{ post.replies }} reply</span>
-                        <span v-if="post.replies > 1">{{ post.replies }} replies</span>
-                        <i class="fa" :class="{ 'fa-caret-up' : !!posts, 'fa-caret-down' : !posts }"></i>
-                    </button>
+
+                    <slot name="showReplies" v-bind:replies="post.replies" v-bind:posts="posts">
+                        <button class="btn btn-light btn-sm" @click.prevent="toggleReplies()" v-if="post.replies">
+                            <span v-if="post.replies == 1">{{ post.replies }} reply</span>
+                            <span v-if="post.replies > 1">{{ post.replies }} replies</span>
+                            <i class="fa" :class="{ 'fa-caret-up' : !!posts, 'fa-caret-down' : !posts }"></i>
+                        </button>
+                    </slot>
+
                 </div>
                 <div class="col-auto align-self-center">
                     <div v-if="canEdit" class="btn-group">
@@ -82,29 +89,27 @@
 
         <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit=null; refresh($event)"></edit-post>
 
-        <div v-if="posts" class="replies mt-2 border-start border-bottom">
-            <post v-for="reply in posts" class="border-top ps-3 mb-2" :key="reply.postId" :post="reply" @refresh="refresh($event)" />
-        </div>
+        <slot name="replies">
+            <div v-if="posts" class="replies mt-2 border-start border-bottom">
+                <post v-for="reply in posts" class="border-top ps-3 mb-2" :key="reply.postId" :post="reply" @refresh="refresh($event)" />
+            </div>
+        </slot>
     </div>
 </template>
     
 <script>
-import moment from 'moment';
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import EditPost from './edit-post.vue';
-import Vue from 'vue';
 import rangy from 'rangy';
 import { convert as htmlToText } from 'html-to-text';
 import Attachment from './attachment.vue';
+import RelativeDatetime from '~/components/common/relative-datetime.vue';
 
-const globalState = Vue.observable({
-    showFullDateTime : null
-})
 
 export default {
     name: 'Post',
-    components: { EditPost, Attachment },
+    components: { EditPost, Attachment, RelativeDatetime },
     props: {
         post: Object,
     },
@@ -128,10 +133,6 @@ export default {
 
             return parentPostId && parentPostId == postParentId;
         },
-        showFullDateTime: { 
-            get()  { return globalState.showFullDateTime; }, 
-            set(v) { globalState.showFullDateTime = v; }
-        },
         loggedIn()   { return this.$auth.loggedIn; },
         canPost()    { return this?.post?.security?.canPost    || false; },
         canEdit()    { return this?.post?.security?.canEdit    || false; },
@@ -141,10 +142,9 @@ export default {
     methods: {
         toggleReplies,
         jumpToAnchor() { this.$nextTick(jumpToAnchor)},
-        fromNow(datetime) { return moment(datetime).fromNow(); },
-        formatDateTime(datetime) { return moment(datetime).format('D MMM YYYY HH:mm'); },
         refresh,
         deletePost,
+        highlightPostClasses,
         getSelection() { 
 
             // get the selection
@@ -210,6 +210,14 @@ async function toggleReplies() {
     this.posts = posts;
 }
 
+function highlightPostClasses(postId) {
+
+if(this.$route.hash == `#${postId}`)
+  return ['bg-info', 'bg-opacity-25', 'p-2'];
+
+return [];
+}
+
 function refresh($event) {
 
     if(this.posts) {
@@ -229,6 +237,10 @@ function refresh($event) {
     /* border-top: solid 1px #c0c0c0; */
 }
 
+.anchor-margin {
+  scroll-margin-top:50px;
+}
+
 .forum-post > .header .user > .username {
     font-weight: bold;
 }
@@ -240,7 +252,6 @@ function refresh($event) {
 
 .forum-post > .header .post-info > .date {
     font-size: 90%;
-    cursor: help;
 }
 
 

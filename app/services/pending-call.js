@@ -1,5 +1,10 @@
 export default function pending(delegate, activation) {
 
+    if(typeof(activation)=='string') {
+        const prop = activation;
+        activation = function(on) { this[prop] = on };
+    }
+
     return function(...params) {
 
         const onFinally = ()=>{ activation.call(this, false); }
