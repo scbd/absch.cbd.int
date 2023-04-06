@@ -7,8 +7,11 @@
     :target="menu.target"
     @click="toggle($event)" 
     >
-    {{menu.title|lstring($locale)}} &nbsp;
-    <i v-if="!!menu.target" class="fa fa-external-link" aria-hidden="true"></i>
+    {{menu.title|lstring($locale)}}
+
+    <span v-if="!!menu.target" >
+      &nbsp;<i class="fa fa-external-link" aria-hidden="true"></i>
+    </span>
   </a>
     <div v-if="menus.length" ref="subMenu" class="collapse sub-menu">
       <ul class="list-unstyled" :class="[`level-${level}`]">
