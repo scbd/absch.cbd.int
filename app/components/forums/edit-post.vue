@@ -36,7 +36,7 @@
                                     <button class="btn btn-sm " :class="{ 'btn-outline-danger' : !deletedBy, 'btn-outline-dark': attachment.deletedBy }"  @click="toggleDeleted(attachment.attachmentId)" type="button" >
                                         <i class="fa" :class="{ 'fa-times' : !attachment.deletedBy, 'fa-undo': attachment.deletedBy }"></i>
                                     </button>
-                                    <attachment :attachment="attachment"/>
+                                    <attachment :attachment="attachment" :auto-unlock="true"/>
                                 </div>
                             </div>
 
