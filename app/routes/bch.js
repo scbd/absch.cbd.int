@@ -96,7 +96,7 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
 
-  whenAsync('/portals',                                 { ...mapView(vueViewWrapper),                        "label":"Online forums and portals",       "resolve":{ ...bchRouteUrls.portal, },  "param":"true","resolveController":true}).
+  //whenAsync('/portals',                                 { ...mapView(vueViewWrapper),                        "label":"Online forums and portals",       "resolve":{ ...bchRouteUrls.portal, },  "param":"true","resolveController":true}).
   whenAsync('/portals/:portalId/:subPath*?',            { ...mapView(vueViewWrapper),                        "label":routesLabels.RiskAssessmentPortal,                   "resolve":{ ...bchRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false }).
 
   
