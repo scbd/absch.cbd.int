@@ -1,7 +1,7 @@
 <template>
     <span ref="tooltip" :class="{ deleted: deleted }" data-bs-toggle="tooltip" data-bs-placement="top">
         <loading v-if="loading" />
-        <i v-if="!loading && !attachment.isPublic" class="fa" :class="{ 'fa-lock' : locked, 'fa-unlock': !locked }" aria-hidden="true"></i>
+        <i v-if="!loading && !isPublic" class="fa" :class="{ 'fa-lock' : locked, 'fa-unlock': !locked }" aria-hidden="true"></i>
         <a :href="url" :class="{ disabled: loading }" target="_blank" class="card-link" @click="unlock($event)">
             {{ attachment.filename }}
         </a>
@@ -22,6 +22,7 @@ export default {
     },
     props: {
         attachment:  { type:  Object, required: true },
+        autoUnlock:  { type:  Boolean, default: false },
     },
     data() { 
         return { 
@@ -35,9 +36,13 @@ export default {
         deleted() { 
             return !!this.attachment.deletedBy 
         },
-        locked() {
-            const { directUrl, attachment } = this;
+        isPublic() {
+            const { attachment } = this;
             const { isPublic } = attachment;
+            return isPublic;
+        },
+        locked() {
+            const { isPublic, directUrl } = this;
             return !isPublic && !directUrl;
         },
         url() { 
@@ -58,10 +63,17 @@ export default {
         
     },
     mounted() {
+
+        const { locked, autoUnlock } = this;
+
+        if(locked && autoUnlock)
+            this.unlock();
+
         this.tooltip = new bootstrap.Tooltip(this.$refs.tooltip, {
             html:true,
             title: ()=>{ return this.tooltipMessageHtml; }
         });
+
     }
 }
 
@@ -94,8 +106,7 @@ function sizeText() {
 }
 function tooltipMessageHtml() {
 
-    const { attachment, locked, loading } = this;
-    const { isPublic } = attachment;
+    const { isPublic, locked, loading } = this;
 
     if(isPublic) return '';
     if(loading)  return '<i class="fa fa-cog fa-spin"></i> Attachment getting unlocked.<br>Please wait...';
