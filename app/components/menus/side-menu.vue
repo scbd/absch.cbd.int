@@ -2,16 +2,18 @@
   <nav class="side-menu">
     <ul class="list-unstyled">
       <li style="border-bottom: 1px solid #324252;">
-        <a :href="menu.url" class="d-flex align-items-center pb-3 mb-1 text-decoration-none border-bottom menu-header">
+        <a :href="menu.url" class="d-flex align-items-center pb-3 mb-1 text-decoration-none menu-header">
           <h4 class="w-100">{{ menu.title | lstring($locale) }}</h4>
-          <button type="button" class="btn btn-default float-end mb-1" 
-            @click="showHideMenu()" :class="{'d-block' : isSmallScreen, 'd-none':!isSmallScreen}">
+          <button type="button" class="btn btn-default color-white float-end mb-1 d-block d-sm-none"
+            @click="toggleMenu()">
                 <i class="fa fa-bars"></i> <span class="caret"></span>
           </button>
         </a>
         
-        <div class="main-menus" :class="{'d-none' : isSmallScreen && !expandMenu, 'd-block': expandMenu}">
-          <side-menu-sub v-if="menu.menus && menu.menus.length" :menus="menu.menus" />
+        <div v-if="menu.menus && menu.menus.length" class="main-menus d-sm-block" :class="{'d-none' : !expandMenu }">
+          <ul class="list-unstyled" :class="[`level-0`]">
+            <side-menu-sub v-for="(menu, index) in menu.menus" :key="index" :level="1" :menu="menu" />
+          </ul>
         </div>
       </li>
     </ul>
@@ -31,16 +33,11 @@ export default {
   props: {
     menu: Object,
   },
-  computed:{
-    isSmallScreen(){
-      return ['xs', 'sm'].includes(window.deviceSize);
-    }
-  },
   methods:{
-    showHideMenu(){
+    toggleMenu(){
       this.expandMenu = !this.expandMenu;
     }
-  }
+  },
 }
 </script>
 
