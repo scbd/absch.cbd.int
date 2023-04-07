@@ -16,7 +16,7 @@
 
                 <input v-if="forumId || postId" type="text" class="form-control mb-2"  v-model="subject">
                 <h3 v-else>{{subject}}</h3>
-                <div v-if="parent" class="mb-2">
+                <div v-if="parent && parent.postId!=post.postId" class="mb-2">
                     <div v-if="parent.postId==parent.threadId">In reply to the <a href="#parentBody" data-bs-toggle="collapse">main topic</a></div>
                     <div v-else>
                         In reply to <cite :title="parent.createdBy">{{parent.createdBy}}</cite> <a href="#parentBody" data-bs-toggle="collapse">post #{{parent.postId}}</a>
