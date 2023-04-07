@@ -109,10 +109,10 @@ function tooltipMessageHtml() {
     const { isPublic, locked, loading } = this;
 
     if(isPublic) return '';
-    if(loading)  return '<i class="fa fa-cog fa-spin"></i> Attachment getting unlocked.<br>Please wait...';
+    if(loading)  return '<i class="fa fa-cog fa-spin"></i>The attachment is unlocking. Please wait...';
     if(locked)   return '<i class="fa fa-lock"></i> Attachment is locked.<br>Please click the attachment file link to unlock...';
 
-    return '<i class="fa fa-check"></i> Attachment is ready to download.<br>Please click the attachment file link to access the file...';
+    return '<i class="fa fa-check"></i> Attachment is ready to download.<br>Please click the attachment to access the file.';
 }
 
 </script>
