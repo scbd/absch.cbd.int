@@ -67,13 +67,13 @@
                         </ul>
                     </div>
 
-                    <button v-if="post.postId == post.threadId" class="btn btn-primary btn-sm" :disabled="!loggedIn" type="button" 
+                    <button v-if="post.postId == post.threadId" class="btn btn-primary btn-sm" :disabled="!loggedIn || !canPost" type="button" 
                         @click="edit = { parentId: post.threadId, quote: getSelection() }">
                         <i class="fa fa-reply"></i> Reply
                     </button>
 
                     <div  v-else class="dropdown d-inline-block" >
-                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" :disabled="!loggedIn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" :disabled="!loggedIn || !canPost" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-reply"></i> 
                             Reply
                         </button>
