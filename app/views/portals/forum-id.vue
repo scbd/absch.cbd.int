@@ -242,7 +242,11 @@ function highlightPostClasses(postId) {
 }
 
 function getThreadUrl(threadId) {
-  return `${this.$route.path}/thread/${encodeURIComponent(threadId)}`.replace(/^\/+/, '');
+  return joinPath(this.$route.path, `thread/${encodeURIComponent(threadId)}`);
+}
+
+function joinPath(...parts) {
+  return parts.map(o=>o.replace(/(^\/+|\/+$)/g, '')).join('/');
 }
 
 function onArticleLoad(article) {
