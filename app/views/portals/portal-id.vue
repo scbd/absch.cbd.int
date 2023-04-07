@@ -129,8 +129,6 @@ function buildRoutes(portalMenu) {
 
   const routes = toRoutes({ ...portalMenu, slug: '' }, '/');
 
-  console.dir(routes);
-
   return new SubRouter(routes);
 }
 
