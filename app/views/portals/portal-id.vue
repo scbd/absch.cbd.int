@@ -184,9 +184,10 @@ function buildMenu() {
 }
 
 
-function toMenu({ slug, url, target, title, content, menus }, basePath) {
+function toMenu({ slug, url: menuUrl, title, content, menus }, basePath) {
 
   const menuPath = [basePath, slug].filter(o=>o).join('/');
+  const { url, target } = menuUrl || {};
 
   const menu = {
     url: url || menuPath,
