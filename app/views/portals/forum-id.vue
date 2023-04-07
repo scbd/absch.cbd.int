@@ -54,9 +54,13 @@
         <a class="anchor-margin" :name="`thread${thread.threadId}`"></a>
         <div class="card mb-3" :class="highlightPostClasses(thread.threadId)">
           <h5 class="card-header">
+
+            <i v-if="thread.isPinned" class="float-end fa fa-thumb-tack" title="This post is pinned to remain at the top of the thread list"></i>
+            
             <a :href="getThreadUrl(thread.threadId)" style="color:inherit">
               {{ thread.subject | lstring }}
             </a>
+            
           </h5>
 
           <div class="card-body">
