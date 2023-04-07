@@ -56,9 +56,8 @@ function AngularVueRoutePlugin($injector) {
       }
     };
   }
-  $rootScope.$on('$routeUpdate', function () {
-    updateRoute();
-  });
+  $rootScope.$on('$routeUpdate', updateRoute);
+  $rootScope.$on('$routeChangeSuccess', updateRoute);
   if (!$route.current) {
     // initial route (at boot time)
     var cancelWatch = $rootScope.$watch(function () {
