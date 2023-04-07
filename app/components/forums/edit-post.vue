@@ -14,7 +14,15 @@
         <div class="modal-body">
             <div v-if="post">
 
-                <input type="text" class="form-control mb-2"  v-model="subject">
+                <input v-if="forumId || postId" type="text" class="form-control mb-2"  v-model="subject">
+                <h3 v-else>{{subject}}</h3>
+                <div v-if="parent" class="mb-2">
+                    <div v-if="parent.postId==parent.threadId">In reply to the <a href="#parentBody" data-bs-toggle="collapse">main topic</a></div>
+                    <div v-else>
+                        In reply to <cite :title="parent.createdBy">{{parent.createdBy}}</cite> <a href="#parentBody" data-bs-toggle="collapse">post #{{parent.postId}}</a>
+                    </div>
+                    <blockquote class="border-start border-4 p-2 collapse mt-2" id="parentBody" v-html="parent.htmlMessage"></blockquote>
+                </div>
 
                 <textarea ref="body" class="form-control mb-2" rows="10" v-model="message"></textarea> 
 
@@ -33,7 +41,11 @@
                             <div class="col-12 col-md-6 col-lg-4" v-for="attachment in attachments" :key="attachment.attachmentId">
 
                                 <div class=" p-1">
-                                    <button class="btn btn-sm " :class="{ 'btn-outline-danger' : !deletedBy, 'btn-outline-dark': attachment.deletedBy }"  @click="toggleDeleted(attachment.attachmentId)" type="button" >
+                                    <button class="btn btn-sm "  type="button"
+                                    :class="{ 'btn-outline-danger' : !attachment.deletedBy, 'btn-outline-dark': attachment.deletedBy }"  
+                                    @click="toggleDeleted(attachment.attachmentId)" 
+                                    :title="attachment.deletedBy ? 'Undo remove attachment' : 'Remove attachment'"
+                                    >
                                         <i class="fa" :class="{ 'fa-times' : !attachment.deletedBy, 'fa-undo': attachment.deletedBy }"></i>
                                     </button>
                                     <attachment :attachment="attachment" :auto-unlock="true"/>
@@ -220,8 +232,6 @@ function sizeText(size) {
 }
 
 function fileUploaded(attachmentInfo) {
-
-    console.log(attachmentInfo)
     this.attachments.push(attachmentInfo);
 }
 
@@ -230,9 +240,15 @@ function close() {
     modal.hide();
 }
 
+
+
 </script>
 
 <style scoped>
 
+blockquote {
+    max-height: 200px;
+    overflow-y: scroll;
+}
 
 </style>
