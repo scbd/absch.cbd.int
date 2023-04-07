@@ -48,7 +48,7 @@
                     </slot>
 
                 </div>
-                <div class="col-auto align-self-center">
+                <div v-if="isOpen" class="col-auto align-self-center">
                     <div v-if="canEdit" class="btn-group">
                         <button type="button" class="btn btn-light btn-sm" @click.prevent="edit = { postId: post.postId }">
                             <i class="fa fa-edit"></i> Edit
@@ -133,11 +133,12 @@ export default {
 
             return parentPostId && parentPostId == postParentId;
         },
-        loggedIn()   { return this.$auth.loggedIn; },
-        canPost()    { return this?.post?.security?.canPost    || false; },
-        canEdit()    { return this?.post?.security?.canEdit    || false; },
-        canDelete()  { return this?.post?.security?.canDelete  || false; },
-        canApprove() { return this?.post?.security?.canApprove || false; },
+        loggedIn()   { return !!this.$auth.loggedIn; },
+        isOpen()     { return !!this?.post?.isOpen },
+        canPost()    { return !!this?.post?.security?.canPost },
+        canEdit()    { return !!this?.post?.security?.canEdit },
+        canDelete()  { return !!this?.post?.security?.canDelete },
+        canApprove() { return !!this?.post?.security?.canApprove },
     },
     methods: {
         toggleReplies,

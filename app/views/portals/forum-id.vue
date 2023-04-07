@@ -29,7 +29,7 @@
               <i class="fa fa-cog"></i> Forum properties
             </a>
           </div>
-          <div class="col-auto align-self-center">
+          <div v-if="isOpen" class="col-auto align-self-center">
 
             <loading v-if="loading" caption="Refreshing...." />
 
@@ -152,6 +152,7 @@ export default {
   computed: {
     portalId() { return this.$route.params.portalId; },
     loggedIn() { return this.$auth.loggedIn; },
+    isOpen()   { return this.forum?.isOpen; },
   },
   methods: {
     jumpToAnchor,
