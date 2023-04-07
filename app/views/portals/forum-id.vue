@@ -97,19 +97,6 @@
 
       </div>
 
-      <div>
-        <div class="row">
-          <div class="col align-self-center">
-          </div>
-          <div class="col-auto align-self-center">
-            <button v-if="forum.security.canPost" class="btn btn-primary btn-sm" :disabled="!loggedIn" type="button"
-              @click="edit = { forumId: forumId }">
-              <i class="fa fa-plus"></i> New Topic
-            </button>
-          </div>
-        </div>
-      </div>
-
       <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; refresh($event)"></edit-post>
     </div>
 
