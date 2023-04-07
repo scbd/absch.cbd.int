@@ -1,6 +1,6 @@
 import app from '~/app';
 import commonRoutes from "./common-routes";
-import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
+import { securize, asyncLogError, mapView } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
 import routesLabels from '~/app-text/routes/abs-route-labels.json';
 import * as theAbs from '~/views/home/index';
@@ -11,29 +11,29 @@ app.value("showHelp", {
 
 const abschRouteUrls = {
    theAbs,
-   forums                                         : { component: ()=>import('~/views/forums/forum-list-view') },
-   forums_list_view                                      : { component: ()=>import('~/views/forums/thread-list-view') },
-   post_list_view                                 : { component: ()=>import('~/views/forums/post-list-view') },   
-   register_admin_ircc_counts                     : { component: ()=>import('~/views/register/admin/ircc-counts') },
-   register_MSR_edit                   : { component: ()=>import('~/views/forms/edit/abs/edit-measure') },
-  //  register_SMSR_edit                   : { component: ()=>import('~/views/forms/edit/abs/edit-measure-status') },
-   register_NDB_edit                   : { component: ()=>import('~/views/forms/edit/edit-database') },
-   register_IRCC_edit                  : { component: ()=>import('~/views/forms/edit/abs/edit-absPermit') },
-   register_CP_edit                    : { component: ()=>import('~/views/forms/edit/abs/edit-absCheckpoint') },
-   register_PRO_edit                   : { component: ()=>import('~/views/forms/edit/abs/edit-absProcedure') },
-   register_CPC_edit                   : { component: ()=>import('~/views/forms/edit/abs/edit-absCheckpointCommunique') },
-   register_NR_edit                    : { component: ()=>import('~/views/forms/edit/abs/edit-absNationalReport') },
-   register_CDI_edit                   : { component: ()=>import('~/views/forms/edit/edit-capacityBuildingInitiative') },
-   register_A19A20_edit                : { component: ()=>import('~/views/forms/edit/edit-modelContractualClause') },
-   register_CPP_edit                   : { component: ()=>import('~/views/forms/edit/edit-communityProtocol') },
-   register_ORG_edit                   : { component: ()=>import('~/views/forms/edit/edit-organization') },
-   register_NMCC_edit                  : { component: ()=>import('~/views/forms/edit/abs/edit-abs-national-model-contractual-clause') },
-   help_videos_videoId                            : { component: ()=>import('~/views/about/videos') },
-  //  help_common_formats_commonFormat               : { component: ()=>import('~/views/about/common-formats') },
-   about                                         : { component: ()=>import('~/views/about/about') },
-   pdf_templates_contacts_schema                  : { component: ()=>import('~/views/pdf-templates/abs-contacts-pdf') },
-   pdf_templates_checkpoint_communique_documentId : { component: ()=>import('~/views/pdf-templates/checkpoint-communique') },
-   pdf_templates_ircc_documentId                  : { component: ()=>import('~/views/pdf-templates/ircc') },
+   forums                              : { component: ()=>asyncLogError(import('~/views/forums/forum-list-view')) },
+   forums_list_view                    : { component: ()=>asyncLogError(import('~/views/forums/thread-list-view')) },
+   post_list_view                      : { component: ()=>asyncLogError(import('~/views/forums/post-list-view')) },
+   register_admin_ircc_counts          : { component: ()=>asyncLogError(import('~/views/register/admin/ircc-counts')) },
+   register_MSR_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-measure')) },
+  //  register_SMSR_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-measure-status')) },
+   register_NDB_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-database')) },
+   register_IRCC_edit                  : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absPermit')) },
+   register_CP_edit                    : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absCheckpoint')) },
+   register_PRO_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absProcedure')) },
+   register_CPC_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absCheckpointCommunique')) },
+   register_NR_edit                    : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absNationalReport')) },
+   register_CDI_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-capacityBuildingInitiative')) },
+   register_A19A20_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-modelContractualClause')) },
+   register_CPP_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-communityProtocol')) },
+   register_ORG_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-organization')) },
+   register_NMCC_edit                  : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-abs-national-model-contractual-clause')) },
+   help_videos_videoId                            : { component: ()=>asyncLogError(import('~/views/about/videos')) },
+  //  help_common_formats_commonFormat            : { component: ()=>asyncLogError(import('~/views/about/common-formats')) },
+   about                                          : { component: ()=>asyncLogError(import('~/views/about/about')) },
+   pdf_templates_contacts_schema                  : { component: ()=>asyncLogError(import('~/views/pdf-templates/abs-contacts-pdf')) },
+   pdf_templates_checkpoint_communique_documentId : { component: ()=>asyncLogError(import('~/views/pdf-templates/checkpoint-communique')) },
+   pdf_templates_ircc_documentId                  : { component: ()=>asyncLogError(import('~/views/pdf-templates/ircc')) },
 };
 
 app.config(["$routeProvider", function ($routeProvider) {

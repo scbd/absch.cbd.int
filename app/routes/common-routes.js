@@ -4,7 +4,7 @@ import "angular-route";
 import "~/services/main";
 import "~/components/scbd-angularjs-services/main";
 import routesLabels from '~/app-text/routes/common-routes-labels.json';
-import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
+import { securize, asyncLogError, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
 
@@ -12,66 +12,64 @@ var baseUrl = require.toUrl("").replace(/\?v=.*$/, "");
 var lang = window.scbdApp.lang;
 
 const commonRouteUrls = {
-    lang_langCode                               : { component: ()=>import('~/views/shared/lang') },
-    signin                                      : { component: ()=>import('~/views/shared/login-dialog') },
-    verify_email                                : { component: ()=>import('~/views/shared/verify-email') },
-    help_403                                    : { component: ()=>import('~/views/shared/403') },
-    mailbox                                     : { component: ()=>import('~/views/mailbox/inbox') },
-    search                                      : { component: ()=>import('~/views/search/search-page') },
-    countries                                   : { component: ()=>import('~/views/countries/country-list') },
-    countries_code_schema                       : { component: ()=>import('~/views/countries/country-profile') },
-    reports                                     : { component: ()=>import('~/views/report-analyzer/reports') },
-    reports_analyzer                            : { component: ()=>import('~/views/report-analyzer/analyzer') },
-    articles                                    : { component: ()=>import('~/views/forms/view/view-articles') },
-    database_record                             : { component: ()=>import('~/views/forms/view/records-id') },
-    database_record_documentID                  : { component: ()=>import('~/views/forms/view/records-id') },
-    pdf_type_schema_documentId_revision         : { component: ()=>import('~/views/pdf-viewer/records-pdf-viewer') },
-    register                                    : { component: ()=>import('~/views/register/dashboard') },
-    register_requests                           : { component: ()=>import('~/views/register/requests') },
-    register_user_preferences_tab               : { component: ()=>import('~/views/register/user-preferences/preferences') },
-    shared_urls                                 : { component: ()=>import('~/views/register/shared-urls/shared-urls') },
-    register_admin                              : { component: ()=>import('~/views/register/admin') },
-    register_notifications                      : { component: ()=>import('~/views/register/notifications') },
-    register_stats                              : { component: ()=>import('~/views/register/manage/stats') },
-    register_reports                            : { component: ()=>import('~/views/register/reports/index') },
-    register_reports_report                     : { component: ()=>import('~/views/register/reports/report') },
-    register_document_type_status_status        : { component: ()=>import('~/views/register/record-list') },
-    register_national_users                     : { component: ()=>import('~/views/register/national-users/national-user-list') },
-    register_document_type                      : { component: ()=>import('~/views/register/record-list') },
-    register_CON_new                            : { component: ()=>import('~/views/forms/edit/edit-contact') },
-    register_CNA_new                            : { component: ()=>import('~/views/forms/edit/edit-authority') },
-    register_NDB_new                            : { component: ()=>import('~/views/forms/edit/edit-database') },
-    register_VLR_new                            : { component: ()=>import('~/views/forms/edit/edit-resource') },
-    register_ORG_new                            : { component: ()=>import('~/views/forms/edit/edit-organization') },
-    register_SUB_new                            : { component: ()=>import('~/views/forms/edit/edit-submission') },
-    register_CDI_new                            : { component: ()=>import('~/views/forms/edit/edit-capacityBuildingInitiative') },
-    register_CNA_identifier_edit                : { component: ()=>import('~/views/forms/edit/edit-authority') },
-    register_CON_identifier_edit                : { component: ()=>import('~/views/forms/edit/edit-contact') },
-    register_NDB_identifier_edit                : { component: ()=>import('~/views/forms/edit/edit-database') },
-    register_ORG_identifier_edit                : { component: ()=>import('~/views/forms/edit/edit-organization') },
-    register_VLR_identifier_edit                : { component: ()=>import('~/views/forms/edit/edit-resource') },
-    register_SUB_identifier_edit                : { component: ()=>import('~/views/forms/edit/edit-submission') },
-    register_CDI_identifier_edit                : { component: ()=>import('~/views/forms/edit/edit-capacityBuildingInitiative') },
-    register_document_type_documentID_view      : { component: ()=>import('~/views/register/record-details') },
-    register_admin_requests                     : { component: ()=>import('~/views/register/requests') },
-    register_admin_reported_records             : { component: ()=>import('~/views/register/admin/reported-records') },
-    register_admin_report_counts                : { component: ()=>import('~/views/register/admin/report-count') },
-    register_admin_error_logs                   : { component: ()=>import('~/views/register/admin/error-logs') },
-    register_admin_subscriptions                : { component: ()=>import('~/views/register/admin/subscriptions') },
-    register_admin_user_role_report             : { component: ()=>import('~/views/register/admin/user-role-report') },
-    register_admin_common_issues                : { component: ()=>import('~/views/register/admin/common-issues') },
-    reports_matrix                              : { component: ()=>import('~/views/reports/matrix/index') },
-    embed                                       : { component: ()=>import('~/views/embed/index') },
-
-    kb                                          : { component: ()=>import('~/views/kb/home.vue') },
-    kbFaqs                                          : { component: ()=>import('~/views/kb/faqs.vue') },
-    kbSearch                                          : { component: ()=>import('~/views/kb/article-search.vue') },
-    kbArticles: { component: () => import('~/views/kb/articles.vue') },
-    kbTags: { component: () => import('~/views/kb/adminTags.vue') },
-    shareDocument                               : { component: ()=>import('~/views/forms/view/shared-document') },
-    draftDocumentPdf                            : { component: ()=>import('~/views/pdf-viewer/draft-document-pdf-link') },
-
-    submissionsOnNotifications                  : { component: ()=>import('~/views/reports/submissions') }
+    lang_langCode                               : { component: ()=>asyncLogError(import('~/views/shared/lang')) },
+    signin                                      : { component: ()=>asyncLogError(import('~/views/shared/login-dialog')) },
+    verify_email                                : { component: ()=>asyncLogError(import('~/views/shared/verify-email')) },
+    help_403                                    : { component: ()=>asyncLogError(import('~/views/shared/403')) },
+    mailbox                                     : { component: ()=>asyncLogError(import('~/views/mailbox/inbox')) },
+    search                                      : { component: ()=>asyncLogError(import('~/views/search/search-page')) },
+    countries                                   : { component: ()=>asyncLogError(import('~/views/countries/country-list')) },
+    countries_code_schema                       : { component: ()=>asyncLogError(import('~/views/countries/country-profile')) },
+    reports                                     : { component: ()=>asyncLogError(import('~/views/report-analyzer/reports')) },
+    reports_analyzer                            : { component: ()=>asyncLogError(import('~/views/report-analyzer/analyzer')) },
+    articles                                    : { component: ()=>asyncLogError(import('~/views/forms/view/view-articles')) },
+    database_record                             : { component: ()=>asyncLogError(import('~/views/forms/view/records-id')) },
+    database_record_documentID                  : { component: ()=>asyncLogError(import('~/views/forms/view/records-id')) },
+    pdf_type_schema_documentId_revision         : { component: ()=>asyncLogError(import('~/views/pdf-viewer/records-pdf-viewer')) },
+    register                                    : { component: ()=>asyncLogError(import('~/views/register/dashboard')) },
+    register_requests                           : { component: ()=>asyncLogError(import('~/views/register/requests')) },
+    register_user_preferences_tab               : { component: ()=>asyncLogError(import('~/views/register/user-preferences/preferences')) },
+    shared_urls                                 : { component: ()=>asyncLogError(import('~/views/register/shared-urls/shared-urls')) },
+    register_admin                              : { component: ()=>asyncLogError(import('~/views/register/admin')) },
+    register_notifications                      : { component: ()=>asyncLogError(import('~/views/register/notifications')) },
+    register_stats                              : { component: ()=>asyncLogError(import('~/views/register/manage/stats')) },
+    register_reports                            : { component: ()=>asyncLogError(import('~/views/register/reports/index')) },
+    register_reports_report                     : { component: ()=>asyncLogError(import('~/views/register/reports/report')) },
+    register_document_type_status_status        : { component: ()=>asyncLogError(import('~/views/register/record-list')) },
+    register_national_users                     : { component: ()=>asyncLogError(import('~/views/register/national-users/national-user-list')) },
+    register_document_type                      : { component: ()=>asyncLogError(import('~/views/register/record-list')) },
+    register_CON_new                            : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-contact')) },
+    register_CNA_new                            : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-authority')) },
+    register_NDB_new                            : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-database')) },
+    register_VLR_new                            : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-resource')) },
+    register_ORG_new                            : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-organization')) },
+    register_SUB_new                            : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-submission')) },
+    register_CDI_new                            : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-capacityBuildingInitiative')) },
+    register_CNA_identifier_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-authority')) },
+    register_CON_identifier_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-contact')) },
+    register_NDB_identifier_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-database')) },
+    register_ORG_identifier_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-organization')) },
+    register_VLR_identifier_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-resource')) },
+    register_SUB_identifier_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-submission')) },
+    register_CDI_identifier_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-capacityBuildingInitiative')) },
+    register_document_type_documentID_view      : { component: ()=>asyncLogError(import('~/views/register/record-details')) },
+    register_admin_requests                     : { component: ()=>asyncLogError(import('~/views/register/requests')) },
+    register_admin_reported_records             : { component: ()=>asyncLogError(import('~/views/register/admin/reported-records')) },
+    register_admin_report_counts                : { component: ()=>asyncLogError(import('~/views/register/admin/report-count')) },
+    register_admin_error_logs                   : { component: ()=>asyncLogError(import('~/views/register/admin/error-logs')) },
+    register_admin_subscriptions                : { component: ()=>asyncLogError(import('~/views/register/admin/subscriptions')) },
+    register_admin_user_role_report             : { component: ()=>asyncLogError(import('~/views/register/admin/user-role-report')) },
+    register_admin_common_issues                : { component: ()=>asyncLogError(import('~/views/register/admin/common-issues')) },
+    reports_matrix                              : { component: ()=>asyncLogError(import('~/views/reports/matrix/index')) },
+    embed                                       : { component: ()=>asyncLogError(import('~/views/embed/index')) },
+    kb                                          : { component: ()=>asyncLogError(import('~/views/kb/home.vue')) },
+    kbFaqs                                      : { component: ()=>asyncLogError(import('~/views/kb/faqs.vue')) },
+    kbSearch                                    : { component: ()=>asyncLogError(import('~/views/kb/article-search.vue')) },
+    kbArticles                                  : { component: ()=>asyncLogError(import('~/views/kb/articles.vue')) },
+    kbTags                                      : { component: ()=>asyncLogError(import('~/views/kb/adminTags.vue')) },
+    shareDocument                               : { component: ()=>asyncLogError(import('~/views/forms/view/shared-document')) },
+    draftDocumentPdf                            : { component: ()=>asyncLogError(import('~/views/pdf-viewer/draft-document-pdf-link')) },
+    submissionsOnNotifications                   : { component: ()=>asyncLogError(import('~/views/reports/submissions')) }
 }
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -164,8 +162,6 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/share/email/:type/:accessKey',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
 
   whenAsync('/submissions-to-notifications',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.submissionsOnNotifications, "resolve":{ ...commonRouteUrls.submissionsOnNotifications,         },"param":"true","resolveController":true,"reloadOnSearch":false}).
-  // whenAsync('/submissions-to-notifications/:notification?',       { ...mapView(angularViewWrapper),                    "label":'notification_label'                   , "resolve":{ ...commonRouteUrls.submissionsOnNotifications,         },"param":"true","resolveController":true,"reloadOnSearch":false}).
-  
   whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}})
 }]);
 

@@ -1,51 +1,54 @@
 import app from '~/app';
 import commonRoutes from "./common-routes";
 import "angular-route";
-import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
+import { securize, asyncLogError, mapView, currentUser, injectRouteParams } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper';
+import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import routesLabels from '~/app-text/routes/bch-route-labels.json';
 import * as theBch from '~/views/home/bch';
 
 const bchRouteUrls = {
   theBch,
-  submit                               : { component: ()=>import('~/views/register/record-types') },
-  register_BCHN_new                    : { component: ()=>import('~/views/forms/edit/bch/edit-biosafety-news') },
-  register_DEC_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-biosafety-decision') },
-  register_RA_new                      : { component: ()=>import('~/views/forms/edit/bch/edit-risk-assessment') },
-  register_IRA_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-risk-assessment') },
-  register_LAW_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-law') },
-  register_ORGA_new                    : { component: ()=>import('~/views/forms/edit/bch/edit-organism') },
-  register_GENE_new                    : { component: ()=>import('~/views/forms/edit/bch/edit-dna-sequence') },
-  register_LMO_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-modified-organism') },
-  register_BIRC_new                    : { component: ()=>import('~/views/forms/edit/edit-resource') },
-  register_NR4_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-national-report-4') },
-  register_SPCA_new                    : { component: ()=>import('~/views/forms/edit/edit-authority') },
-  register_LAB_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-laboratory-detection') },
-  register_EXP_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-biosafety-expert') },
-  register_BCP_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-country-profile') },
-  register_DEC_identifier_edit         : { component: ()=>import('~/views/forms/edit/bch/edit-biosafety-decision') },
-  register_RA_identifier_edit          : { component: ()=>import('~/views/forms/edit/bch/edit-risk-assessment') },
-  register_IRA_identifier_edit         : { component: ()=>import('~/views/forms/edit/bch/edit-risk-assessment') },
-  register_LAW_identifier_edit         : { component: ()=>import('~/views/forms/edit/bch/edit-law') },
-  register_ORGA_identifier_edit        : { component: ()=>import('~/views/forms/edit/bch/edit-organism') },
-  register_GENE_identifier_edit        : { component: ()=>import('~/views/forms/edit/bch/edit-dna-sequence') },
-  register_LMO_identifier_edit         : { component: ()=>import('~/views/forms/edit/bch/edit-modified-organism') },
-  register_BIRC_identifier_edit        : { component: ()=>import('~/views/forms/edit/edit-resource') },
-  register_NR4_identifier_edit         : { component: ()=>import('~/views/forms/edit/bch/edit-national-report-4') },
-  register_SPCA_identifier_edit        : { component: ()=>import('~/views/forms/edit/edit-authority') },
-  register_LAB_identifier_edit         : { component: ()=>import('~/views/forms/edit/bch/edit-laboratory-detection') },
-  register_BCHN_identifier_edit        : { component: ()=>import('~/views/forms/edit/bch/edit-biosafety-news') },
-  register_EXP_identifier_edit         : { component: ()=>import('~/views/forms/edit/bch/edit-biosafety-expert') },
-  reports_lmo_documentId_tab           : { component: ()=>import('~/views/reports/bch/lmo-decisions-risk-assessments') },
-  register_BCP_identifier_edit         : { component: ()=>import('~/views/forms/edit/bch/edit-country-profile') },
-  registries                           : { component: ()=>import('~/views/reports/bch/registries/index') },
-  registries_living_modified_organisms : { component: ()=>import('~/views/reports/bch/registries/view-lmo-registry') },
-  registries_organisms                 : { component: ()=>import('~/views/reports/bch/registries/view-orga-registry') },
-  registries_genetic_elements          : { component: ()=>import('~/views/reports/bch/registries/view-gene-registry') },
-  cms_content                          : { component: ()=>import('~/views/shared/cms-content') },
-  help_forbidden                       : { component: ()=>import('~/views/shared/403') },
-  help_not_found                       : { component: ()=>import('~/views/shared/404') },
-  portalsHome                          : { component: ()=>import('~/views/portals') }, 
+  submit                               : { component: ()=>asyncLogError(import('~/views/register/record-types')) },
+  register_BCHN_new                    : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-biosafety-news')) },
+  register_DEC_new                     : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-biosafety-decision')) },
+  register_RA_new                      : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-risk-assessment')) },
+  register_IRA_new                     : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-risk-assessment')) },
+  register_LAW_new                     : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-law')) },
+  register_ORGA_new                    : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-organism')) },
+  register_GENE_new                    : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-dna-sequence')) },
+  register_LMO_new                     : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-modified-organism')) },
+  register_BIRC_new                    : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-resource')) },
+  register_NR4_new                     : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-national-report-4')) },
+  register_SPCA_new                    : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-authority')) },
+  register_LAB_new                     : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-laboratory-detection')) },
+  register_EXP_new                     : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-biosafety-expert')) },
+  register_BCP_new                     : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-country-profile')) },
+  register_DEC_identifier_edit         : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-biosafety-decision')) },
+  register_RA_identifier_edit          : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-risk-assessment')) },
+  register_IRA_identifier_edit         : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-risk-assessment')) },
+  register_LAW_identifier_edit         : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-law')) },
+  register_ORGA_identifier_edit        : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-organism')) },
+  register_GENE_identifier_edit        : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-dna-sequence')) },
+  register_LMO_identifier_edit         : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-modified-organism')) },
+  register_BIRC_identifier_edit        : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-resource')) },
+  register_NR4_identifier_edit         : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-national-report-4')) },
+  register_SPCA_identifier_edit        : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-authority')) },
+  register_LAB_identifier_edit         : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-laboratory-detection')) },
+  register_BCHN_identifier_edit        : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-biosafety-news')) },
+  register_EXP_identifier_edit         : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-biosafety-expert')) },
+  reports_lmo_documentId_tab           : { component: ()=>asyncLogError(import('~/views/reports/bch/lmo-decisions-risk-assessments')) },
+  register_BCP_identifier_edit         : { component: ()=>asyncLogError(import('~/views/forms/edit/bch/edit-country-profile')) },
+  registries                           : { component: ()=>asyncLogError(import('~/views/reports/bch/registries/index')) },
+  registries_living_modified_organisms : { component: ()=>asyncLogError(import('~/views/reports/bch/registries/view-lmo-registry')) },
+  registries_organisms                 : { component: ()=>asyncLogError(import('~/views/reports/bch/registries/view-orga-registry')) },
+  registries_genetic_elements          : { component: ()=>asyncLogError(import('~/views/reports/bch/registries/view-gene-registry')) },
+  cms_content                          : { component: ()=>asyncLogError(import('~/views/shared/cms-content')) },
+  help_forbidden                       : { component: ()=>asyncLogError(import('~/views/shared/403')) },
+  help_not_found                       : { component: ()=>asyncLogError(import('~/views/shared/404')) },
+  portal                               : { component: ()=>asyncLogError(import('~/views/portals/index.vue')) },
+  portalId                             : { component: ()=>asyncLogError(import('~/views/portals/portal-id.vue')) },
+
 };
 
 app.config(["$routeProvider", function ($routeProvider) {
@@ -86,14 +89,16 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/registries/living-modified-organisms',              { ...mapView(angularViewWrapper),                    "label":routesLabels.lmoRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_living_modified_organisms}}).
   whenAsync('/registries/organisms',                              { ...mapView(angularViewWrapper),                    "label":routesLabels.organismsRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_organisms}}).
   whenAsync('/registries/genetic-elements',                       { ...mapView(angularViewWrapper),                    "label":routesLabels.geneRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_genetic_elements}}).
-  whenAsync('/about/countryprofile.shtml',                        {"redirectTo":"/countries/:country"}). 
-  whenAsync("/countries/:country", { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/countryprofile.shtml?country=:country", controller: function () {   return commonRoutes.importQ("views/shared/cms-content"); }}).
-  whenAsync("/about/:subpath*?", { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/:subpath", controller: function () {   return commonRoutes.importQ("views/shared/cms-content"); }}).
-  whenAsync("/protocol/:subpath*?", {  templateUrl: "views/shared/cms-content.html",  target: "https://bch.cbd.int/protocol/:subpath",  controller: function () {    return commonRoutes.importQ("views/shared/cms-content");  }}).
-  whenAsync("/onlineconferences/:subpath*?", {  templateUrl: "views/shared/cms-content.html",  target: "https://bch.cbd.int/onlineconferences/:subpath",  controller: function () {    return commonRoutes.importQ("views/shared/cms-content");  }}).
+  whenAsync('/about/countryprofile.shtml',                        { redirectTo:  "/countries/:country"}). 
+  // whenAsync("/countries/:country",                                { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/countryprofile.shtml?country=:country", controller: ()=>import("views/shared/cms-content") }).
+  // whenAsync("/about/:subpath*?",                                  { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/:subpath",                              controller: ()=>import("views/shared/cms-content") }).
+  // whenAsync("/protocol/:subpath*?",                               { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/protocol/:subpath",                           controller: ()=>import("views/shared/cms-content") }).
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
-  whenAsync('/portals/risk-assessment',                           { ...mapView(angularViewWrapper),                    "label":routesLabels.RiskAssessmentPortal, "resolve":{ ...bchRouteUrls.portalsHome, "routePrams":injectRouteParams({ "type":"articles", tags:['bch', 'portals', 'risk-assessment']})}}).
+
+  //whenAsync('/portals',                                 { ...mapView(vueViewWrapper),                        "label":"Online forums and portals",       "resolve":{ ...bchRouteUrls.portal, },  "param":"true","resolveController":true}).
+  whenAsync('/portals/:portalId/:subPath*?',            { ...mapView(vueViewWrapper),                        "label":routesLabels.RiskAssessmentPortal,                   "resolve":{ ...bchRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false }).
+
   
   
   otherwise({

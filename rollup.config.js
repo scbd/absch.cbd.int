@@ -29,7 +29,7 @@ export default async function(){
   
   externals = [...externals, ...await loadExternals()];
 
-  const locales = isWatchOn ? ['en']
+  const locales = isWatchOn ? ['en']//, 'fr']
                             : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
   
   return[
@@ -89,8 +89,9 @@ function bundle(entryPoint, locale, baseDir='app') {
       dynamicImportVariables({ }),
       commonjs({ include: 'node_modules/**/*.js'}),
       nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
-      isWatchOn ? null : getBabelOutputPlugin({
+      getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+        plugins: ['@babel/plugin-proposal-class-properties'],
         allowAllFormats: true
       }),
       isWatchOn ? null : terser({ mangle: false }) // DISABLE IN DEV

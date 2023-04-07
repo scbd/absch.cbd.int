@@ -8,7 +8,14 @@ export default ['$scope', 'apiToken', '$route', 'component','realm', 'locale','$
 
   component = component.default || component;
   $scope.tokenReader = function(){ return apiToken.get()}
-  
+
+  const locals = { ...$route.current.locals };
+
+  delete locals.component;
+  delete locals.$template; 
+  delete locals.$scope;
+
+  $scope.locals      = locals;
   $scope.vueOptions  = {
     components: { component },
     i18n: new VueI18n({ locale: 'en', fallbackLocale: 'en', messages: { en: {} } })
