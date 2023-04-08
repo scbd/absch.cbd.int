@@ -54,7 +54,7 @@
 
                             <div class="col-12" >
                                 <div class=" p-1">
-                                    <attachment-upload @file="fileUploaded($event)"/>
+                                    <attachment-upload :forum-id="forum.forumId" @file="fileUploaded($event)"/>
                                 </div>
                             </div>
                         </div>
