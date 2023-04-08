@@ -103,18 +103,24 @@ export default class ForumsApi extends ApiBase
 
   // ATTACHMENTS
 
-  async uploadAttachment(htmlFileObject)  {
+  async uploadAttachment(forumId, htmlFileObject)  {
 
     const { name: filename, size } = htmlFileObject;
 
-    const slot = await this.http.post(`api/v2014/discussions/attachments`, { filename })
-                           .then(res => res.data)
-                           .catch(tryCastToApiError);
+    const slot = await this.http.post(`api/v2014/discussions/attachments`, { filename, forumId }).then(res => res.data).catch(tryCastToApiError);
+    const me   = await this.http.get (`api/v2013/authentication/user`).then(res => res.data).catch(tryCastToApiError);
 
     const { url: putUrl, ...file } = slot;
     const { contentType } = file;
 
-    const result = await axios.put(putUrl, htmlFileObject, { headers: { 'Content-Type': contentType } }).catch(tryCastToApiError);
+    const headers = {
+      'Content-Type': contentType,
+      'x-amz-meta-user' : me.userID,
+      'x-amz-meta-filename' : filename,
+      'x-amz-meta-forum-id' : forumId,
+    };
+
+    const result = await axios.put(putUrl, htmlFileObject, { headers }).catch(tryCastToApiError);
 
     const { guid : attachmentId } = file;
 

@@ -17,6 +17,7 @@ export default {
     name: 'AttachmentUpload',
     components: {  },
     props: {
+        forumId : { type:Number, required: true },
     },
     emits: ['file'],
     data() {
@@ -34,11 +35,11 @@ export default {
 async function uploadFile({ target }) {
 
     const forumsApi = new ForumsApi();
-
     const files = [ ...target.files ]; //convert to array;
+    const { forumId } = this;
 
     var qUploads = files.map(async(file)=>{
-        const resFile = await forumsApi.uploadAttachment(file);
+        const resFile = await forumsApi.uploadAttachment(forumId, file);
         this.$emit('file', resFile);
     });
 
