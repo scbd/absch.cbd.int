@@ -175,6 +175,18 @@ export default {
 
             return text;
         },
+    },
+    mounted() {
+
+        const { loggedIn, $router }  = this;        
+
+        const { postId } = this.post;
+        const { hash } = this.$route;
+
+        if(hash == `#${postId}-reply`) {
+            $router.replace({ hash: `#${postId}` });
+            if(loggedIn) this.edit  =  { parentId: postId };
+        }
     }
 }
 
