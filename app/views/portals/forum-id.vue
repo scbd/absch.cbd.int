@@ -14,7 +14,7 @@
         <h3>Table of Contents</h3>
         <ul>
           <li v-for="thread in threads" :key="thread.threadId">
-            <a :href="`#thread${thread.threadId}`">{{
+            <a :href="`#${thread.threadId}`">{{
               thread.subject | lstring }}</a>
           </li>
         </ul>
@@ -51,7 +51,7 @@
       </div>
 
       <div v-for="thread in threads" :key="thread.threadId">
-        <a class="anchor-margin" :name="`thread${thread.threadId}`"></a>
+        <a class="anchor-margin" :name="`${thread.threadId}`"></a>
         <div class="card mb-3" :class="highlightPostClasses(thread.threadId)">
           <h5 class="card-header">
 
@@ -64,7 +64,7 @@
           </h5>
 
           <div class="card-body">
-            <post :post="thread" @refresh="refresh($event)">
+            <post :post="thread" @refresh="refresh($event)" :highlight-on-hash="false">
               <template v-slot:showReplies="{ replies }">
 
                 <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`">Read the post »</a>
@@ -146,7 +146,6 @@ export default {
     isOpen()   { return this.forum?.isOpen; },
   },
   methods: {
-    jumpToAnchor,
     getThreadUrl,
     onArticleLoad,
     refresh:            pending(refresh, 'loading'),
@@ -194,10 +193,10 @@ async function refresh({ threadId, postId }) {
 
     this.$router.push({ path, hash });
   }
-  else {
+  else if(threadId) {
 
     const { forumsApi, forumId } = this;
-    const hash = `thread${threadId}`;
+    const hash = `${threadId}`;
 
     this.threads = await forumsApi.getThreads(forumId);
 
@@ -222,7 +221,7 @@ async function toggleSubscription() {
 
 function highlightPostClasses(postId) {
 
-  if(this.$route.hash == `#thread${postId}`)
+  if(this.$route.hash == `#${postId}`)
     return ['bg-info', 'bg-opacity-25'];
   
   return [];
