@@ -73,6 +73,9 @@
                     <div ng-if="isAdmin()">
                         <br/>
                         <strong>{{::('taskIdT.workFlowAssign'|$translate)}} {{activity.createdOn | formatDateWithTime}}</strong> ({{::('taskIdT.visible'|$translate)}})
+                        <span class="badge bg-secondary">
+                            {{workflow.workflowAge.age}} {{workflow.workflowAge.type}}
+                        </span>
                         <table class="table table-bordered mt-2" width="100%">
                             <tr ng-repeat="user in activity.assignedTo_info">
                                 <td ng-bind="user.userID"></td>

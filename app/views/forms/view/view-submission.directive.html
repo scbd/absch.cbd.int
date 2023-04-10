@@ -25,6 +25,7 @@
                         <ul class="list">
                             <li ng-repeat="item in document.organizations" >
                                 <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+                                <hr ng-if="document.organizations.length > 1 && !$last">
                             </li>
                         </ul>                        
                     </div>
