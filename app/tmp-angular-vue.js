@@ -1,15 +1,18 @@
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _wrapRegExp() { _wrapRegExp = function _wrapRegExp(re, groups) { return new BabelRegExp(re, void 0, groups); }; var _super = RegExp.prototype, _groups = new WeakMap(); function BabelRegExp(re, flags, groups) { var _this = new RegExp(re, flags); return _groups.set(_this, groups || _groups.get(re)), _setPrototypeOf(_this, BabelRegExp.prototype); } function buildGroups(result, re) { var g = _groups.get(re); return Object.keys(g).reduce(function (groups, name) { var i = g[name]; if ("number" == typeof i) groups[name] = result[i];else { for (var k = 0; void 0 === result[i[k]] && k + 1 < i.length;) { k++; } groups[name] = result[i[k]]; } return groups; }, Object.create(null)); } return _inherits(BabelRegExp, RegExp), BabelRegExp.prototype.exec = function (str) { var result = _super.exec.call(this, str); return result && (result.groups = buildGroups(result, this)), result; }, BabelRegExp.prototype[Symbol.replace] = function (str, substitution) { if ("string" == typeof substitution) { var groups = _groups.get(this); return _super[Symbol.replace].call(this, str, substitution.replace(/\$<([^>]+)>/g, function (_, name) { return "$" + groups[name]; })); } if ("function" == typeof substitution) { var _this = this; return _super[Symbol.replace].call(this, str, function () { var args = arguments; return "object" != _typeof(args[args.length - 1]) && (args = [].slice.call(args)).push(buildGroups(args, _this)), substitution.apply(this, args); }); } return _super[Symbol.replace].call(this, str, substitution); }, _wrapRegExp.apply(this, arguments); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, catch: function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -37,11 +40,15 @@ function AngularVueRoutePlugin($injector) {
   });
   function updateRoute() {
     var _$route$current;
+    var fullPath = $location.url();
     var path = $location.path();
     var hash = $location.hash();
     var query = _objectSpread({}, $location.search() || {});
     var params = _objectSpread({}, ((_$route$current = $route.current) === null || _$route$current === void 0 ? void 0 : _$route$current.params) || {});
     observableRoute._route = {
+      get fullPath() {
+        return fullPath;
+      },
       get path() {
         return path;
       },
@@ -119,6 +126,7 @@ function AngularVueRouterPlugin($injector) {
 }
 function angularVueAuthPlugin() {
   var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+    _login = _ref2.login,
     _logout = _ref2.logout,
     _fetchUser = _ref2.fetchUser;
   var state = Vue.observable({
@@ -139,32 +147,30 @@ function angularVueAuthPlugin() {
     setUserToken: function setUserToken(token) {
       state.userToken = token;
     },
-    logout: function logout() {
-      if (!_logout) {
-        throw new Error('Not Implemented');
-      }
-      _logout();
-    },
-    fetchUser: function fetchUser() {
-      var _this2 = this;
+    login: function login() {
+      var _arguments = arguments,
+        _this2 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var user;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_fetchUser) {
+                if (_login) {
                   _context.next = 2;
                   break;
                 }
-                throw new Error('Not Implemented');
+                throw new Error('"login" Not Implemented');
               case 2:
-                _context.next = 4;
-                return _fetchUser();
+                if (!_this2.loggedIn) {
+                  _context.next = 4;
+                  break;
+                }
+                return _context.abrupt("return");
               case 4:
-                user = _context.sent;
-                _this2.setUser(user);
-                return _context.abrupt("return", user);
+                _context.next = 6;
+                return _login.apply(void 0, _toConsumableArray(_arguments));
+              case 6:
+                return _context.abrupt("return", _context.sent);
               case 7:
               case "end":
                 return _context.stop();
@@ -173,14 +179,48 @@ function angularVueAuthPlugin() {
         }, _callee);
       }))();
     },
-    hasScope: function hasScope(scopeName) {
+    logout: function logout() {
+      if (!_logout) {
+        throw new Error('"logout" Not Implemented');
+      }
+      _logout();
+    },
+    fetchUser: function fetchUser() {
       var _this3 = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var user;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (_fetchUser) {
+                  _context2.next = 2;
+                  break;
+                }
+                throw new Error('"fetchUser" Not Implemented');
+              case 2:
+                _context2.next = 4;
+                return _fetchUser();
+              case 4:
+                user = _context2.sent;
+                _this3.setUser(user);
+                return _context2.abrupt("return", user);
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    hasScope: function hasScope(scopeName) {
+      var _this4 = this;
       var rolesToValidate = [];
       if (typeof scopeName === 'string') rolesToValidate = [scopeName];else if (!Array.isArray(scopeName)) throw new Error('`scopeName` must be string or array od string');
       rolesToValidate = scopeName;
       var hasRole = rolesToValidate.find(function (scope) {
-        var _this3$user;
-        return (_this3$user = _this3.user) === null || _this3$user === void 0 ? void 0 : _this3$user.roles.includes(scope);
+        var _this4$user;
+        return (_this4$user = _this4.user) === null || _this4$user === void 0 ? void 0 : _this4$user.roles.includes(scope);
       });
       return !!hasRole;
     },
@@ -1170,11 +1210,11 @@ var capitalize = capitalize_1,
  * _.camelCase('__FOO_BAR__');
  * // => 'fooBar'
  */
-var camelCase = createCompounder$1(function (result, word, index) {
+var camelCase$1 = createCompounder$1(function (result, word, index) {
   word = word.toLowerCase();
   return result + (index ? capitalize(word) : word);
 });
-var camelCase_1 = camelCase;
+var camelCase_1 = camelCase$1;
 function safeApply($scope, fn) {
   var phase = $scope.$root.$$phase;
   if (phase == '$apply' || phase == '$digest') {
@@ -1203,7 +1243,7 @@ var AngularVueComponent = {
   },
   mounted: function mounted() {
     var _angular$element$pare,
-      _this4 = this;
+      _this5 = this;
     if (!this.$ngVue) throw new Error("AngularVuePlugin not installed");
     var $injector = this.$ngVue.$injector;
 
@@ -1213,12 +1253,12 @@ var AngularVueComponent = {
     this.$scope = $scope;
     Object.keys(this.$attrs).forEach(function (attrKey) {
       var propKey = camelCase_1(attrKey);
-      console.debug("vue(ng): initial set vue => ng (".concat(propKey, "):"), _this4.$attrs[attrKey]);
-      $scope[propKey] = _this4.$attrs[attrKey];
+      console.debug("vue(ng): initial set vue => ng (".concat(propKey, "):"), _this5.$attrs[attrKey]);
+      $scope[propKey] = _this5.$attrs[attrKey];
 
       // From Vue => Angular
-      _this4.$watch(function () {
-        return _this4.$attrs[attrKey];
+      _this5.$watch(function () {
+        return _this5.$attrs[attrKey];
       }, function (v) {
         if ($scope.$$destroyed) return;
         safeApply($scope, function () {
@@ -1232,9 +1272,9 @@ var AngularVueComponent = {
       $scope.$watch(function () {
         return $scope[propKey];
       }, function (v) {
-        if (_this4.$attrs[attrKey] === v) return;
+        if (_this5.$attrs[attrKey] === v) return;
         console.debug("vue(ng): ng => vue (".concat(propKey, ")"), v);
-        _this4.$emit("update:".concat(propKey), v);
+        _this5.$emit("update:".concat(propKey), v);
       });
     });
     var domElement = renderVNodeToDomElement(this.$slots.default); // convert default slot to domElement
@@ -3144,7 +3184,7 @@ var DataView = _DataView,
   Map = _Map,
   Promise$1 = _Promise,
   Set$1 = _Set,
-  WeakMap = _WeakMap,
+  _WeakMap2 = _WeakMap,
   baseGetTag$1 = _baseGetTag,
   toSource = _toSource;
 
@@ -3161,7 +3201,7 @@ var dataViewCtorString = toSource(DataView),
   mapCtorString = toSource(Map),
   promiseCtorString = toSource(Promise$1),
   setCtorString = toSource(Set$1),
-  weakMapCtorString = toSource(WeakMap);
+  weakMapCtorString = toSource(_WeakMap2);
 
 /**
  * Gets the `toStringTag` of `value`.
@@ -3173,7 +3213,7 @@ var dataViewCtorString = toSource(DataView),
 var getTag$4 = baseGetTag$1;
 
 // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
-if (DataView && getTag$4(new DataView(new ArrayBuffer(1))) != dataViewTag$3 || Map && getTag$4(new Map()) != mapTag$4 || Promise$1 && getTag$4(Promise$1.resolve()) != promiseTag || Set$1 && getTag$4(new Set$1()) != setTag$4 || WeakMap && getTag$4(new WeakMap()) != weakMapTag$1) {
+if (DataView && getTag$4(new DataView(new ArrayBuffer(1))) != dataViewTag$3 || Map && getTag$4(new Map()) != mapTag$4 || Promise$1 && getTag$4(Promise$1.resolve()) != promiseTag || Set$1 && getTag$4(new Set$1()) != setTag$4 || _WeakMap2 && getTag$4(new _WeakMap2()) != weakMapTag$1) {
   getTag$4 = function getTag$4(value) {
     var result = baseGetTag$1(value),
       Ctor = result == objectTag$3 ? value.constructor : undefined,
@@ -6100,5 +6140,196 @@ var ngVue = [function () {
     }
   }
 }];
-export { angularVueAuthPlugin as AngularVueAuthPlugin, ngVue as AngularVueDirective, AngularVuePlugin, AngularVueRoutePlugin, AngularVueRouterPlugin, CreateAngularVuePlainPlugin, AngularVueComponent as VueAngularComponent };
+var camelCase = _.camelCase;
+var ngVue2 = [function () {
+  return {
+    restrict: 'A',
+    terminal: true,
+    // any directive with lower priority will be ignored
+    priority: 1001,
+    // 1 more than ngNonBindable => disable angular interpolation!
+    link: function link($scope, _ref5, attr) {
+      var _ref6 = _slicedToArray(_ref5, 1),
+        element = _ref6[0];
+      patchVModel(element, attr);
+      var options = $scope.$eval(attr.ngVue || "{}");
+      var data = {};
+      var computed = {};
+      var methods = {};
+      var managedProps = parseAttributes(attr);
+      managedProps.filter(function (_ref7) {
+        var type = _ref7.type;
+        return type == 'bind';
+      }).forEach(function (_ref8) {
+        var rawAttribute = _ref8.rawAttribute,
+          name = _ref8.name,
+          expression = _ref8.expression,
+          modifiers = _ref8.modifiers;
+        var dataName = "ngVueDataWrapper_".concat(name);
+        data[dataName] = $scope.$eval(expression);
+        computed[name] = {
+          get: function get() {
+            return data[dataName];
+          }
+        };
+        if (modifiers.includes('sync')) {
+          computed[name].set = function (v) {
+            if ($scope.$eval(expression) === v) return;
+            $scope.$apply(function () {
+              console.debug("vue(".concat(name, ") => ng(").concat(expression, "):"), v);
+              $scope.$eval("".concat(expression, " = $event"), {
+                $event: v
+              });
+            });
+          };
+        }
+        $scope.$watch(expression, function (v) {
+          if (data[dataName] === v) return;
+          console.debug("ng(".concat(expression, ") => vue(").concat(name, "): "), v);
+          data[dataName] = v;
+        });
+        element.attributes[rawAttribute].value = dataName;
+      });
+      managedProps.filter(function (_ref9) {
+        var type = _ref9.type;
+        return type == 'event';
+      }).forEach(function (_ref10) {
+        var rawAttribute = _ref10.rawAttribute,
+          name = _ref10.name,
+          expression = _ref10.expression;
+        var methodName = "ngVueDelegateWrapper_".concat(camelCase(name));
+        methods[methodName] = function ($event) {
+          $scope.$apply(function () {
+            console.debug("vue(".concat(name, ") calling ng(").concat(expression, "):"), $event);
+            $scope.$eval(expression, {
+              $event: $event
+            });
+          });
+        };
+        element.attributes[rawAttribute].value = "".concat(methodName, "($event)");
+      });
+      console.debug(element.outerHTML);
+      var vm = new Vue(_objectSpread(_objectSpread({}, options), {}, {
+        data: data,
+        computed: computed,
+        methods: methods
+      }));
+      $scope.$on("$destroy", function () {
+        vm.$destroy();
+      });
+      vm.$mount(element);
+      managedProps.filter(function (_ref11) {
+        var type = _ref11.type,
+          modifiers = _ref11.modifiers;
+        return type == 'bind' && modifiers.includes('sync');
+      }).forEach(function (_ref12) {
+        var name = _ref12.name,
+          expression = _ref12.expression,
+          updateEvent = _ref12.updateEvent;
+        vm.$children.forEach(function (c) {
+          c.$on("update:".concat(name), function (v) {
+            $scope.$apply(function () {
+              console.debug("vue(".concat(updateEvent, ") => ng(").concat(expression, ") ="), v);
+              $scope.$eval("".concat(expression, " = $event"), {
+                $event: v
+              });
+            });
+          });
+        });
+      });
+    }
+  };
+}];
+var vBindRE = /*#__PURE__*/_wrapRegExp(/^(?:v\x2Dbind:|:)([a-z0-9-]+)((\.[a-z]+)*)$/i, {
+  name: 1,
+  modifiers: 2
+});
+var vOnRE = /*#__PURE__*/_wrapRegExp(/^(?:v\x2Don:|@)([a-z0-9-]+(?::[a-z0-9-]+)*)((\.[a-z]+)*)$/i, {
+  name: 1,
+  modifiers: 2
+});
+var vDirectivesRE = /*#__PURE__*/_wrapRegExp(/^(v\x2Dmodel|v\x2Dhtml|v\x2Dtext|v\x2Dshow|v\x2Dclass|v\x2Dattr|v\x2Dstyle|v\x2Dif)((\.[a-z]+)*)$/i, {
+  name: 1,
+  modifiers: 2
+});
+function patchVModel(element, attr) {
+  // replace v-model="myNgVal" with :value="myNgVal" & @input="myNgVal=$event.target.value"
+
+  var vModelAttrKey = Object.keys(attr).find(function (key) {
+    return /^vModel\.?/.test(key);
+  });
+  if (!vModelAttrKey) return;
+  var expression = attr[vModelAttrKey];
+  var rawAttr = attr.$attr[vModelAttrKey];
+  var modifiers = rawAttr.replace(/^v-model/i, '');
+  delete attr[vModelAttrKey];
+  delete attr.$attr[vModelAttrKey];
+  element.removeAttributeNode(element.attributes[rawAttr]);
+  attr.value = expression;
+  attr.$attr.value = "v-bind:value".concat(modifiers);
+  attr.input = "".concat(expression, " = ($event.target ? $event.target.value : $event)");
+  attr.$attr.input = 'v-on:input';
+  element.setAttribute(attr.$attr.value, attr.value);
+  element.setAttribute(attr.$attr.input, attr.input);
+}
+function parseAttributes(attr) {
+  var results = Object.keys(attr).map(function (ngAttrName) {
+    var rawAttribute = attr.$attr[ngAttrName];
+    var expression = attr[ngAttrName];
+    if (vBindRE.test(rawAttribute)) {
+      var _rawAttribute$match = rawAttribute.match(vBindRE),
+        groups = _rawAttribute$match.groups;
+      var name = camelCase(groups.name);
+      var modifiers = (groups.modifiers || '').split('.').filter(function (o) {
+        return o;
+      });
+      var type = 'bind';
+      return {
+        type: type,
+        rawAttribute: rawAttribute,
+        name: name,
+        expression: expression,
+        modifiers: modifiers
+      };
+    }
+    if (vDirectivesRE.test(rawAttribute)) {
+      var _rawAttribute$match2 = rawAttribute.match(vDirectivesRE),
+        _groups2 = _rawAttribute$match2.groups;
+      var _name = camelCase(_groups2.name);
+      var _modifiers = (_groups2.modifiers || '').split('.').filter(function (o) {
+        return o;
+      });
+      var _type = 'bind';
+      return {
+        type: _type,
+        rawAttribute: rawAttribute,
+        name: _name,
+        expression: expression,
+        modifiers: _modifiers
+      };
+    }
+    if (vOnRE.test(rawAttribute)) {
+      var _rawAttribute$match3 = rawAttribute.match(vOnRE),
+        _groups3 = _rawAttribute$match3.groups;
+      var _name2 = _groups3.name.split(':').map(function (p) {
+        return camelCase(p);
+      }).join(':');
+      var _modifiers2 = (_groups3.modifiers || '').split('.').filter(function (o) {
+        return o;
+      });
+      var _type2 = 'event';
+      return {
+        type: _type2,
+        rawAttribute: rawAttribute,
+        name: _name2,
+        expression: expression,
+        modifiers: _modifiers2
+      };
+    }
+  });
+  return results.filter(function (o) {
+    return !!o;
+  });
+}
+export { ngVue2 as AngularVue2Directive, angularVueAuthPlugin as AngularVueAuthPlugin, ngVue as AngularVueDirective, AngularVuePlugin, AngularVueRoutePlugin, AngularVueRouterPlugin, CreateAngularVuePlainPlugin, AngularVueComponent as VueAngularComponent };
 //# sourceMappingURL=index.mjs.map

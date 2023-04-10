@@ -13,8 +13,10 @@
                 </div>
                 <div class="col-auto align-self-center">
                     <div class="post-info">
-                        <relative-datetime class="date" :date="post.createdOn"></relative-datetime>
-                        <span v-if="post.createdOn!=post.updatedOn">
+                        <span class="date">
+                            <relative-datetime :date="post.createdOn"></relative-datetime>
+                        </span>
+                        <span class="date" v-if="post.createdOn!=post.updatedOn">
                             <i class="fa fa-edit"></i>
                             <relative-datetime class="date" :title="`| by ${post.updatedBy}`" :date="post.updatedOn"></relative-datetime>
                         </span>
@@ -50,14 +52,14 @@
                 </div>
                 <div v-if="isOpen" class="col-auto align-self-center">
                     <div v-if="canEdit" class="btn-group">
-                        <button type="button" class="btn btn-light btn-sm" @click.prevent="edit = { postId: post.postId }">
+                        <button type="button" class="btn btn-light btn-sm" @click.prevent="edit()">
                             <i class="fa fa-edit"></i> Edit
                         </button>
                         <button type="button" class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" @click.prevent="edit = { postId: post.postId }">
+                            <li><a class="dropdown-item" href="#" @click.prevent="edit()">
                                 <i class="fa fa-edit"></i> Edit</a>
                             </li>
                             <li v-if="canDelete && !post.replies"><hr class="dropdown-divider"></li>
@@ -67,27 +69,35 @@
                         </ul>
                     </div>
 
-                    <button v-if="post.postId == post.threadId" class="btn btn-primary btn-sm" :disabled="!loggedIn || !canPost" type="button" 
-                        @click="edit = { parentId: post.threadId, quote: getSelection() }">
+                    <button v-if="!loggedIn" class="btn btn-outline-success btn-sm" type="button" 
+                        @click="loginToReply(post.postId)">
+                        <i class="fa fa-reply" aria-hidden="true"></i> Sign-in to reply
+                    </button>
+
+                    <button v-else-if="canPost && post.postId == post.threadId" class="btn btn-primary btn-sm" :disabled="!canPost" type="button" 
+                        @click="reply(post.threadId, getSelection())">
                         <i class="fa fa-reply"></i> Reply
                     </button>
 
-                    <div  v-else class="dropdown d-inline-block" >
-                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" :disabled="!loggedIn || !canPost" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div  v-else-if="canPost" class="dropdown d-inline-block" >
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" :disabled="!canPost" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-reply"></i> 
                             Reply
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" @click.prevent="edit = { parentId: post.threadId, quote: getSelection() }"> <i class="fa fa-reply"></i> Reply to the main topic</a></li>
-                            <li><a class="dropdown-item" href="#" @click.prevent="edit = { parentId: post.postId,   quote: getSelection() }"> <i class="fa fa-reply-all"></i> Reply to {{post.createdBy}}</a></li>
+                            <li><a class="dropdown-item" href="#" @click.prevent="reply(post.threadId)"> <i class="fa fa-reply"></i> Reply to the main topic</a></li>
+                            <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> Reply to {{post.createdBy}}</a></li>
                         </ul>
-                    </div>              
+                    </div>
+                    <div v-else>
+                        <i class="text-muted">Sorry you are not allowed to post to this forum.</i>
+                    </div>          
                 </div>              
           </div>
         </div>
 
 
-        <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit=null; refresh($event)"></edit-post>
+        <edit-post v-if="editing" class="p-2" v-bind="editing" @close="editing=null; refresh($event)"></edit-post>
 
         <slot name="replies">
             <div v-if="posts" class="replies mt-2 border-start border-bottom">
@@ -112,12 +122,13 @@ export default {
     components: { EditPost, Attachment, RelativeDatetime },
     props: {
         post: Object,
+        highlightOnHash: { type: Boolean, default: true }
     },
     emits: ['refresh'],
     data() {
         return {
             posts: this?.post?.posts || null,
-            edit: false
+            editing: null
         }
     },
     computed: {
@@ -143,7 +154,10 @@ export default {
     methods: {
         toggleReplies,
         jumpToAnchor() { this.$nextTick(jumpToAnchor)},
+        loginToReply,
         refresh,
+        edit,
+        reply,
         deletePost,
         highlightPostClasses,
         getSelection() { 
@@ -185,13 +199,32 @@ export default {
 
         if(hash == `#${postId}-reply`) {
             $router.replace({ hash: `#${postId}` });
-            if(loggedIn) this.edit  =  { parentId: postId };
+            this.reply(postId);
         }
     }
 }
 
-async function deletePost() {
+function edit() {
 
+    const { loggedIn, canEdit, post } = this;
+
+    if (!loggedIn) return;
+    if (!canEdit) return;
+
+    this.editing = { postId: post.postId }
+}
+
+function reply(parentId, quote) {
+
+    const { loggedIn, canPost, post } = this;
+
+    if (!loggedIn) return;
+    if (!canPost)  return;
+
+    this.editing = { parentId: parentId, quote }
+}
+
+async function deletePost() {
 
     const { post } = this;
     const { postId, createdBy } = post;
@@ -225,10 +258,12 @@ async function toggleReplies() {
 
 function highlightPostClasses(postId) {
 
-if(this.$route.hash == `#${postId}`)
-  return ['bg-info', 'bg-opacity-25', 'p-2'];
+    const { highlightOnHash, $route } = this;
 
-return [];
+    if (highlightOnHash && $route.hash == `#${postId}`)
+        return ['bg-info', 'bg-opacity-25', 'p-2'];
+
+    return [];
 }
 
 function refresh($event) {
@@ -241,7 +276,15 @@ function refresh($event) {
     this.$emit('refresh', $event);
 }
 
+function loginToReply(replyToId) {
 
+    const { $router, $auth } = this;
+
+    $router.push({ hash: `#${replyToId}-reply`});
+
+    $auth.login();
+
+}
 </script>
 
 <style scoped>

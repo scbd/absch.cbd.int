@@ -76,8 +76,23 @@ app.run(["realm", "locale", '$injector', 'authentication', function (realm, loca
   window.Vue.use(new AngularVueRoutePlugin ($injector));
   window.Vue.use(new AngularVueRouterPlugin($injector));
   window.Vue.use(new AngularVueAuthPlugin  ({
+    fetchUser() { return authentication.getUser(); },
     logout() { authentication.signOut(); },
-    fetchUser() { return authentication.getUser(); }
+    async login() {
+      console.log("$auth: force sign in");
+
+      const { $route, $router, $ngVue } = Vue.prototype;
+      const appConfigService = $ngVue.$injector.get('appConfigService')
+
+      const { fullPath, query } = $route;
+      let { returnUrl } = query;
+
+      if (!returnUrl) returnUrl = fullPath;
+
+      const path = appConfigService.getSiteMapUrls().user.signIn
+
+      $router.push({ path, query: {...query, returnUrl }, hash: null });
+    }
   }));
   
 }]);
