@@ -75,8 +75,24 @@ export default {
   },
 
   async created() { 
-    await this.load();
-    this.$nextTick(()=>jumpToAnchor());
+    this.ready = this.load();
+  },
+  async mounted() {
+
+    await this.ready;
+
+    this.$nextTick(()=>{ 
+
+      let { hash } = this.$route;
+      const postIdRe = /^#?(\d+)-.*/;
+    
+      if(postIdRe.test(hash)) {
+        hash = hash.replace(postIdRe, "#$1");
+      }
+
+      jumpToAnchor(hash);    
+    });
+
   }
 };
 
