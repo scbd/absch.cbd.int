@@ -14,7 +14,7 @@
         <div class="modal-body">
             <div v-if="post">
 
-                <input v-if="forumId || postId" type="text" class="form-control mb-2"  v-model="subject">
+                <input v-if="forumId || postId" type="text" class="form-control mb-2"  v-model="subject" placeholder="Type the subject of your post here">
                 <h3 v-else>{{subject}}</h3>
                 <div v-if="parent && parent.postId!=post.postId" class="mb-2">
                     <div v-if="parent.postId==parent.threadId">In reply to the <a href="#parentBody" data-bs-toggle="collapse">main topic</a></div>
@@ -24,7 +24,7 @@
                     <blockquote class="border-start border-4 p-2 collapse mt-2" id="parentBody" v-html="parent.htmlMessage"></blockquote>
                 </div>
 
-                <textarea ref="body" class="form-control mb-2" rows="10" v-model="message"></textarea> 
+                <textarea ref="body" class="form-control mb-2" rows="10" v-model="message" placeholder="Type your message here"></textarea> 
 
 <!--                     
                 <div ref="body" class="body p-2 border" 
