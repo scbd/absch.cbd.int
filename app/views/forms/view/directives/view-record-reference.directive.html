@@ -33,16 +33,25 @@
                     <span ng-bind="document.body.name | lstring:locale"></span>
                     <span ng-show="document.body.acronym" ng-bind="'(' + (document.body.acronym | lstring:locale) + ')'"></span>
                 </b>&nbsp;	
-                <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
+                <a class="text-decoration-none" rel="noopener" translation-url  
+                ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
                     <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
                 </a>
                 <span ng-include="'workflow-status-section'"></span>
+                <span class="alert-danger rounded"
+                    ng-if="!document.deletedOn && document.latestRevision > 1 && document.latestRevision > document.revision">
+                    <small>
+                        This document has been updated. This is not the latest published version.
+                        <a rel="noopener" ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}" 
+                            target="_blank">Click here to view the latest version of the record.</a>
+                    </small>
+                </span>
             </div>	
             <div km-terms ng-model="document.body.organizationType">
                 <span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
             </div>
             
-            <div ng-include="'reference-contact-address'" onload="contactAddress=document.body"></div>            
+            <div ng-include="'reference-contact-address'" onload="contactAddress=document.body;info=document"></div>            
         </div>
     </script>
 
@@ -51,7 +60,7 @@
             <a class="text-decoration-none" rel="noopener" translation-url ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
                 <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
             </a>
-            <span ng-include="'workflow-status-section'">
+            <span ng-include="'workflow-status-section'"></span>
         </span>
         <span class="selected-reference-name" ng-if="!options.hideSchema" ng-bind="document.body.header.schema | schemaName"></span>
         <span class="selected-reference-title" ng-if="document.workingDocumentTitle||document.title"
@@ -59,6 +68,14 @@
         <span ng-if="!(document.workingDocumentTitle||document.title)">
             <span class="selected-reference-title" ng-if="document.body.title" ng-bind="document.body.title | lstring:locale"></span> 
             <span class="selected-reference-title" ng-if="!document.body.title && document.body.name" ng-bind="document.body.name | lstring:locale"></span>
+        </span>
+
+        <span class="alert-danger rounded" ng-if="!document.deletedOn && document.latestRevision > 1 && document.latestRevision > document.revision">
+            <small>
+                This document has been updated. This is not the latest published version.
+                <a rel="noopener" ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}" 
+                    target="_blank">Click here to view the latest version of the record.</a>
+            </small>
         </span>
     </script>
 
@@ -85,10 +102,18 @@
                     </span>      
                 </span>
             </span>   | 
-            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.body.revision|encodeURIComponent}}" target="_blank">
+            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
               <span ng-bind="document | uniqueID"></span> <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
             </a>   
             <span ng-include="'workflow-status-section'"></span>
+            <span class="alert-danger rounded"
+                ng-if="!document.deletedOn && document.latestRevision > 1 && document.latestRevision > document.revision">
+                <small>
+                    This document has been updated. This is not the latest published version.
+                    <a rel="noopener" ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}" 
+                        target="_blank">Click here to view the latest version of the record.</a>
+                </small>
+            </span>
         </div>
 
         <blockquote ng-show="options.showContact" class="blockquote fs-small-8">
@@ -135,7 +160,7 @@
 
             </div>
             
-            <span ng-if="document" onload="contactAddress=document.body"
+            <span ng-if="document" onload="contactAddress=document.body;info=document"
                 ng-include="'reference-contact-address'"></span>
             <div class="mt-5 text-start" ng-if="options.isContactTypePerson && document.body.contactOrganization && document.body.contactOrganizationDetail">
                 <div class="fw-bold text-uppercase text-secondary mb-2" style="font-size:12px;border-bottom:1px solid #ccc;">
@@ -153,7 +178,7 @@
                 <div ng-if="document.body.contactOrganizationDetail.organizationType">
                     <span ng-bind="document.body.contactOrganizationDetail.organizationType|term"></span>
                 </div>
-                <div ng-if="document.body.contactOrganizationDetail" onload="contactAddress=document.body.contactOrganizationDetail" 
+                <div ng-if="document.body.contactOrganizationDetail" onload="contactAddress=document.body.contactOrganizationDetail;info=document.body.contactOrganizationDetail.info" 
                     ng-include="'reference-contact-address'"></div>
             </div>
         </blockquote>
@@ -175,17 +200,17 @@
         <div ng-show="contactAddress.faxes">
             {{::('viewRecordReferenceT.fax'|$translate)}} <span ng-repeat="item in contactAddress.faxes"><span ng-bind="item"></span><span ng-show="!$last">, </span></span>
         </div>
-        <div ng-show="contactAddress.emails" class="float-start pe-2">
+        <div ng-show="contactAddress.emails">
             {{::('viewRecordReferenceT.email'|$translate)}} <span ng-repeat="item in contactAddress.emails track by $index"><a class="text-decoration-none" rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><span ng-bind="item"></span></a><span ng-show="!$last">, </span></span>
         </div>
-        <div ng-show="contactAddress.websites" class="float-start pe-2">
+        <div ng-show="contactAddress.websites">
             {{::('viewRecordReferenceT.website'|$translate)}} <span ng-repeat="item in contactAddress.websites"><a class="text-decoration-none" rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}" ng-bind="item.url"></a><span ng-show="!$last">, </span></span>
         </div>
         <div ng-if="options.isCNA">
             <!--website url is used when generating certificates-->
-            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="{{websiteUrl}}/database/{{contactAddress.header.schema | urlSchemaShortName|encodeURIComponent}}/{{(contactAddress) | uniqueIDWithoutRevision|encodeURIComponent}}/{{contactAddress.info.revision|encodeURIComponent}}" target="_blank">
+            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="{{websiteUrl}}/database/{{contactAddress.header.schema | urlSchemaShortName|encodeURIComponent}}/{{(info||contactAddress) | uniqueIDWithoutRevision|encodeURIComponent}}/{{(info.revision||contactAddress.info.revision)|encodeURIComponent}}" target="_blank">
                 <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> 
-                <span ng-bind="(contactAddress) | uniqueID"></span>
+                <span ng-bind="(info||contactAddress) | uniqueID"></span>
             </a>
             <!--{{options.isCNA}}
         {{contactAddress | uniqueID}}{{contactAddress}}-->
