@@ -50,7 +50,7 @@
                     </slot>
 
                 </div>
-                <div v-if="isOpen" class="col-auto align-self-center">
+                <div class="col-auto align-self-center">
                     <div v-if="canEdit" class="btn-group">
                         <button type="button" class="btn btn-light btn-sm" @click.prevent="edit()">
                             <i class="fa fa-edit"></i> Edit
@@ -69,29 +69,32 @@
                         </ul>
                     </div>
 
-                    <button v-if="!loggedIn" class="btn btn-outline-success btn-sm" type="button" 
-                        @click="loginToReply(post.postId)">
-                        <i class="fa fa-reply" aria-hidden="true"></i> Sign-in to reply
-                    </button>
+                    <div class="d-inline" v-if="isOpen">
 
-                    <button v-else-if="canPost && post.postId == post.threadId" class="btn btn-primary btn-sm" :disabled="!canPost" type="button" 
-                        @click="reply(post.threadId, getSelection())">
-                        <i class="fa fa-reply"></i> Reply
-                    </button>
-
-                    <div  v-else-if="canPost" class="dropdown d-inline-block" >
-                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" :disabled="!canPost" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-reply"></i> 
-                            Reply
+                        <button v-if="!loggedIn" class="btn btn-outline-success btn-sm" type="button" 
+                            @click="loginToReply(post.postId)">
+                            <i class="fa fa-reply" aria-hidden="true"></i> Sign-in to reply
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" @click.prevent="reply(post.threadId)"> <i class="fa fa-reply"></i> Reply to the main topic</a></li>
-                            <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> Reply to {{post.createdBy}}</a></li>
-                        </ul>
-                    </div>
-                    <div v-else>
-                        <i class="text-muted">Sorry you are not allowed to post to this forum.</i>
-                    </div>          
+
+                        <button v-else-if="canPost && post.postId == post.threadId" class="btn btn-primary btn-sm" :disabled="!canPost" type="button" 
+                            @click="reply(post.threadId, getSelection())">
+                            <i class="fa fa-reply"></i> Reply
+                        </button>
+
+                        <div  v-else-if="canPost" class="dropdown d-inline-block" >
+                            <button class="btn btn-outline-primary btn-sm dropdown-toggle" :disabled="!canPost" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-reply"></i> 
+                                Reply
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.threadId)"> <i class="fa fa-reply"></i> Reply to the main topic</a></li>
+                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> Reply to {{post.createdBy}}</a></li>
+                            </ul>
+                        </div>
+                        <div v-else>
+                            <i class="text-muted">Sorry you are not allowed to post to this forum.</i>
+                        </div>   
+                    </div>       
                 </div>              
           </div>
         </div>
