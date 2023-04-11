@@ -13,7 +13,7 @@ import Enumerable from 'linqjs';
                     var oTerm = {
                         identifier: value.identifier,
                         title: value.title,
-                        description: value.description,
+                        description: value.longDescription||value.description,
                         type:value.type,
                         multiple:value.multiple,
                         originalObject:value

@@ -10,7 +10,7 @@
 					<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" 
 					ng-value="term.identifier" name="bindingName_{{uniqueId}}" ng-disabled="ngDisabledFn()"/>
 						<span ng-bind="term.title||term.name | lstring:locale"></span>
-							<span ng-if="showDescription" class="km-term-radio-description" ng-bind="(term.longDescription||term.description)|lstring:locale"></span>
+							<span ng-if="showDescription" class="km-term-radio-description" ng-bind="term.description | lstring:locale"></span>
 				</label>
 
 				<ul class="list-unstyled">
