@@ -7,7 +7,7 @@ import '~/components/scbd-angularjs-controls/main';
 import 'ngDialog';
 import '~/services/main'; // jshint ignore:line
 import documentSelectorT from '~/app-text/views/forms/edit/document-selector.json';
-
+import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
 import {Tooltip} from 'bootstrap';
 
 app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm',
@@ -39,7 +39,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 		},
 		link : function($scope, $element, $attr, ngModelController) {
             var dialogId;
-            var focalPointRegex = /^52000000cbd022/;
+            var focalPointRegex = /^52000000cbd022/;            
             translationService.set('documentSelectorT', documentSelectorT);
             $scope.rawDocuments = [];
             $scope.selectedDocuments=[];
@@ -64,7 +64,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 title   : $attr.allowNewButtonTitle,
                 schemas : _.compact(($attr.allowNewSchema||'').split(',')),
             };     
-
+            $scope.upgradedReferencedIdentifiers = {};
             $scope.showMyGovFilter = $scope.allowNew.schemas.includes('contact')
             //==================================
             //
@@ -128,7 +128,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                         var config;                            
                          if(focalPointRegex.test($scope.model.identifier))
                             config = {headers  : {realm:undefined}};
-						docs.push(IStorage.documents.get($scope.model.identifier, undefined, config));
+						docs.push(IStorage.documents.get($scope.model.identifier, {info:true}, config));
 					}
 					else{
 	                    _.forEach($scope.model, function (mod) {
@@ -136,17 +136,21 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                                 var config;
                                 if(focalPointRegex.test(mod.identifier))
 									config = {headers  : {realm:undefined}};
-								docs.push(IStorage.documents.get(mod.identifier,undefined, config));
+								docs.push(IStorage.documents.get(mod.identifier,{info:true}, config));
                             }
 	                    });
 					}
 
 					$q.all(docs)
 					.then(function(results){
-							$scope.selectedDocuments = _.map(results, function(result){
-                                                            return result.data || {};
-                                                        });
-                            var selectedDocuments = _.map($scope.model, function(d){return removeRevisionNumber(d.identifier)});
+							$scope.selectedDocuments = _.map(results, function(result){ return result.data?.body||{}; });
+
+                            // update model reference with latest revision
+                            results.forEach(({data})=>{
+                                verifyAndUpdateRevision(data, data.identifier);
+                            })
+
+                            var selectedDocuments    = _.map($scope.model, function(d){return removeRevisionNumber(d.identifier)});
                             var selectedRawDocuments = _.filter($scope.rawDocuments.docs, function(doc){
                                 return _.includes(selectedDocuments, doc.identifier_s);
                             });
@@ -648,9 +652,9 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 
             $scope.onNewRecordSubmitted = function(data){
                 if(data.state == 'running'){
-                    if(!$scope.runningWorklfows)
-                        $scope.runningWorklfows={};
-                    $scope.runningWorklfows[data.data.identifier+'@1'] = true;
+                    if(!$scope.runningWorkflows)
+                        $scope.runningWorkflows={};
+                    $scope.runningWorkflows[data.data.identifier+'@1'] = true;
                 }
                 if(!$scope.rawDocuments.docs)
                     $scope.rawDocuments.docs = [];
@@ -751,6 +755,30 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 if(schema == 'organization'                 ){ return await import('~/views/forms/edit/directives/edit-organization.directive'); }                
                 if(schema == 'resource'                     ){ return await import('~/views/forms/edit/directives/edit-resource.directive'); }
                 if(schema == 'capacityBuildingInitiative'   ){ return await import('~/views/forms/edit/directives/edit-capacity-building-initiative.directive'); }
+            }
+
+            function verifyAndUpdateRevision(documentInfo, modelIdentifier){
+                
+                if(documentInfo.revision < documentInfo.latestRevision){
+                    const identifier = documentIdWithoutRevision(modelIdentifier);
+                    const newIdentifier = `${identifier}@${documentInfo.latestRevision}`;
+
+                    if($scope.type == 'radio'){
+                        if($scope.model.identifier != newIdentifier){
+                            $scope.model.identifier = newIdentifier;
+                        }
+                    }
+                    else{
+                        const oldReference      = $scope.model.find(e=>documentIdWithoutRevision(e.identifier) == identifier);
+                        if(oldReference && oldReference.identifier != newIdentifier){
+                            oldReference.identifier = newIdentifier;
+                        }
+                    }
+                    $scope.upgradedReferencedIdentifiers[newIdentifier] = {
+                        newRevision : documentInfo.latestRevision,
+                        oldRevision : documentInfo.revision
+                    };
+                }
             }
 		},
 
