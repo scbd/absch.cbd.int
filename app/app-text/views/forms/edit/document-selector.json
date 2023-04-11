@@ -25,7 +25,6 @@
     "create": "Create",
     "showExisting": "Show Existing",
     "cancel": "Cancel",
-    "noRecordFound": "no records found."
-
-
+    "noRecordFound": "no records found.",
+    "revisionUpdated": "The reference to this record was updated to latest revision"
 }

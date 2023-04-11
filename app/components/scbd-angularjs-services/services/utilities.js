@@ -110,3 +110,21 @@ import Enumerable from 'linqjs';
 export function S4() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 }
+
+export function documentIdRevision(identifier){
+
+    var revisionRegex =  /@([0-9]{1,3})/;
+
+    if(revisionRegex.test(identifier)){
+        const match = identifier.match(revisionRegex);
+
+        return match[1]
+    }
+}
+export function documentIdWithoutRevision(identifier){
+
+    if(identifier && identifier.indexOf('@')>=0)
+        return identifier.substr(0, identifier.indexOf('@'))
+    
+    return identifier;
+}
