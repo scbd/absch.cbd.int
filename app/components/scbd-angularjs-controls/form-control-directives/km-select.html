@@ -3,7 +3,7 @@
 		<a rel="noopener" ng-click="clicked(item)" href=""
 		  ng-bind="item.title||item.name | lstring:currentLocale | truncate:120:'...'" class="text-decoration-none text-secondary ps-3 dropdown-item">
 		</a>
-		<div class="km-select-description py-1 px-5" ng-if="showDescription=='true' && item.description" ng-bind="item.description">
+		<div class="km-select-description py-1 px-5" ng-if="showDescription=='true' && item.description" ng-bind="item.description|lstring:currentLocale">
 		</div>
 		<i class="bi bi-check position-absolute fw-bolder color-black fs-5" ng-show="item.selected"></i>
 		<ul class="dropdown-inline-submenu" ng-if="item.children">
