@@ -217,7 +217,7 @@ export const absLeftMenuFilters = {
 			"type": "customListFn",
 			"fn": "cbdCountriesCustomFn",
 			"title": absFilters.absPermitCountries,
-			"field": "entitiesToWhomPICGrantedCountry_ss"
+			"field": "entitiesToWhomPICGrantedCountries_ss"
 		},
 		{
 			"type": "thesaurus",
