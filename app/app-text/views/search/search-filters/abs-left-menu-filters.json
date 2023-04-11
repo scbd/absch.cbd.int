@@ -55,7 +55,7 @@
   "relatedIRCC":"Related IRCC",
   "IRRCCollectedReceivedInformation": "Checkpoint/s that collected or received the information",
   "personEntityWhoGrantedConsent": "Person/entity who granted prior informed consent (PIC)",
-  "personEntityWhoGrantedConsentGranted": "Person/entity who granted prior informed consent (PIC) was granted",
+  "personEntityWhoGrantedConsentGranted": "Person/entity to whom  prior informed consent (PIC) was granted",
   "personsAtCheckpointUtilizing":"Person/entity making information available to the checkpoint on the utilization of the genetic resource",
   "sourceGeneticResourceOrATK": "Source country",
   "absCCDateOfGranted":"Date of information was gathered",
