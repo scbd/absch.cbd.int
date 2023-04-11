@@ -57,7 +57,7 @@ app.directive('kmLinkList', ['MimeService', function (MimeService){
 					return {
 						// legacy bch fix replace * bf 04-04-2023
 						// some lang already have 'lang-' bf 04-04-2023
-						identifier: (lang?.startWith('lang-') ? '' : 'lang-') + (lang?.replace('*', ''))
+						identifier: (lang?.startsWith('lang-') ? '' : 'lang-') + (lang?.replace('*', ''))
 					}
 				}
 
