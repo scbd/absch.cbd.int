@@ -50,8 +50,8 @@
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td class="mb-4">
-                            <small class="alert-danger rounded p-1" ng-if="upgradedReferencedIdentifiers[doc.identifier]">
-                                {{::('documentSelectorT.revisionUpdated'|$translate)}} 
+                            <small class="alert alert-danger rounded p-1" ng-if="upgradedReferencedIdentifiers[doc.identifier]">
+                                {{::('documentSelectorT.revisionUpdated'|$translate)}}, 
                                 {{upgradedReferencedIdentifiers[doc.identifier].oldRevision}} <i class="bi bi-shuffle"></i> {{upgradedReferencedIdentifiers[doc.identifier].newRevision}}
                             </small>
                             <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-record-reference ng-model="doc" 
@@ -66,8 +66,8 @@
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td class="mb-4">
-                            <small class="alert-danger rounded p-1" ng-if="upgradedReferencedIdentifiers[doc.identifier]">
-                                {{::('documentSelectorT.revisionUpdated'|$translate)}} 
+                            <small class="alert alert-danger rounded p-1" ng-if="upgradedReferencedIdentifiers[doc.identifier]">
+                                {{::('documentSelectorT.revisionUpdated'|$translate)}}, 
                                 {{upgradedReferencedIdentifiers[doc.identifier].oldRevision}} <i class="bi bi-shuffle"></i> {{upgradedReferencedIdentifiers[doc.identifier].newRevision}}
                             </small>
                             <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-record-reference ng-model="model" 
