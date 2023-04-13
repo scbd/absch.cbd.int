@@ -12,8 +12,7 @@ import {
   AngularVuePlugin,
   AngularVueDirective,
   AngularVueAuthPlugin
-//} from 'angular-vue-plugins';
-} from './tmp-angular-vue.js';
+} from 'angular-vue';
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
@@ -73,9 +72,9 @@ app.run(["realm", "locale", '$injector', 'authentication', function (realm, loca
   const vueRootApp = new Vue({});
 
   window.Vue.use(new AngularVuePlugin({ $injector, ngApp: app, vueApp: vueRootApp }));
-  window.Vue.use(new AngularVueRoutePlugin ($injector));
-  window.Vue.use(new AngularVueRouterPlugin($injector));
-  window.Vue.use(new AngularVueAuthPlugin  ({
+  window.Vue.use(new AngularVueRoutePlugin());
+  window.Vue.use(new AngularVueRouterPlugin());
+  window.Vue.use(new AngularVueAuthPlugin({
     fetchUser() { return authentication.getUser(); },
     logout() { authentication.signOut(); },
     async login() {
