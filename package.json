@@ -47,6 +47,7 @@
     "vue-template-compiler": "2.7.14"
   },
   "peerDependencies": {
+    "@scbd/angular-vue": "4.0.0",
     "rangy": "1.3.1"
   },
   "engine": "node >= 14.0",
