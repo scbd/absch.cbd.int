@@ -68,8 +68,8 @@
               <template v-slot:showReplies="{ replies }">
 
                 <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`">Read the post »</a>
-                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the reply »</a>
-                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the {{ replies  }} replies  »</a>
+                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comment"></i> Read the reply »</a>
+                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comments"></i> Read the {{ replies  }} replies  »</a>
 
 
               </template>
@@ -82,6 +82,11 @@
                 <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">No replies</a>
                 <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">One reply</a>
                 <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ thread.replies }} replies</a>
+                <span v-if="thread.isClosed">
+                  |
+                  <em>This thread is closed to comment</em>
+                </span>
+                
               </div>
               <div class="col-auto align-self-center">
                 <span v-if="thread.lastPostId && thread.lastPostId!=thread.threadId">
