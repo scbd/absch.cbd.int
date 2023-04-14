@@ -21,7 +21,7 @@
                     <div v-else>
                         In reply to <cite :title="parent.createdBy">{{parent.createdBy}}</cite> <a href="#parentBody" data-bs-toggle="collapse">post #{{parent.postId}}</a>
                     </div>
-                    <blockquote class="border-start border-4 p-2 collapse mt-2" id="parentBody" v-html="parent.htmlMessage"></blockquote>
+                    <blockquote class="border-start border-4 p-2 collapse mt-2" id="parentBody" ref="parentBody" v-html="parent.htmlMessage"></blockquote>
                 </div>
 
                 <textarea ref="body" class="form-control mb-2" rows="10" v-model="message" placeholder="Type your message here"></textarea> 
@@ -119,11 +119,12 @@ export default {
         toggleDeleted,
         sizeText,
     },
-    created() { this.load() },
-    mounted() {
+    created() { this.ready = this.load() },
+    async mounted() {
 
-        const el = this.$refs.modal
-        const modal = bootstrap.Modal.getOrCreateInstance(el)
+        const { postId, parentId } = this;
+        const el = this.$refs.modal;
+        const modal = bootstrap.Modal.getOrCreateInstance(el);
 
         el.addEventListener('shown.bs.modal',  ()=>this.$emit('show'));
         el.addEventListener('hidden.bs.modal', ()=>this.$emit('close', this.post));
@@ -131,6 +132,16 @@ export default {
         modal.show();
 
         this.modal = modal;
+
+        await this.ready;
+
+        if(!postId && parentId) { // Preview parent post
+            this.$nextTick(()=>{
+                const { parentBody } = this.$refs;
+                const parentPostBodyPreview = bootstrap.Collapse.getOrCreateInstance(parentBody);
+                parentPostBodyPreview.show();
+            })
+        }
     }
 }
 
