@@ -84,7 +84,7 @@
                 <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ thread.replies }} replies</a>
                 <span v-if="thread.isClosed">
                   |
-                  <em>This thread is closed to comment</em>
+                  <em>This thread is closed for comments</em>
                 </span>
                 
               </div>

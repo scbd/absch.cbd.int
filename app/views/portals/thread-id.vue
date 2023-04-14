@@ -9,7 +9,7 @@
           <div class="col align-self-center">
             <b>{{ thread.subject | lstring }}</b>
             <div v-if="forum && forum.isClosed"><em>This forum is closed to comments.</em></div>  
-            <div v-if="thread.isClosed"><em>This thread is closed to comments.</em></div>  
+            <div v-if="thread.isClosed"><em>This thread is closed for comments.</em></div>  
           </div>
 
           <div class="col-auto align-self-center">
