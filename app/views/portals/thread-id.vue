@@ -73,12 +73,13 @@ export default {
     portalId() { return this.$route.params.portalId; },
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.thread?.isOpen; },
-
+  },
+  watch: {
+    loggedIn: load
   },
   methods: {
-    jumpToAnchor,
     load,
-    async refresh() { this.load(); },
+    refresh : load,
     toggleSubscription: pending(toggleSubscription, function(on) { this.subscribing = on }),
   },
 
@@ -106,17 +107,17 @@ export default {
 
 async function load() {
 
-  const { threadId } = this;
+  const { threadId, loggedIn } = this;
 
   const forumsApi = new ForumsApi();
 
   const qThread = forumsApi.getThread(threadId);
   const qPosts  = forumsApi.getPosts (threadId, { all: true });
-  const qWatch   = forumsApi.getThreadSubscription(threadId);
 
   const thread = await qThread
   const { forumId } = thread; 
   const qForum = forumsApi.getForum(forumId);
+  const qWatch = loggedIn ? forumsApi.getThreadSubscription(threadId) : null;
   
   this.thread = thread;
   this.posts  = await qPosts;
@@ -127,7 +128,7 @@ async function load() {
 async function toggleSubscription() {
 
   const { threadId, subscription } = this;
-  const { watching } = subscription;
+  const { watching } = subscription || { watching: false };
   const forumsApi = new ForumsApi();
 
   const qWatch = watching 
