@@ -168,7 +168,7 @@
             <div class="row bg-light m-0 pt-2 py-1" ng-if="showRecordsSection==true">
 
                 <div ng-if="::roles.isNationalUser||roles.is('Administrator')" class="m-0 mt-2 mb-3 ">                    
-                    <div ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
+                    <div >
                         <table class="overview table w-100">
                             <thead class="mb-1">
                                 <tr class="fw-bold" ng-if="::roles.isUser">
@@ -279,7 +279,8 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr class="visited-background" ng-repeat-start="schema in nationalSchemas">
+                                <tr class="visited-background" ng-repeat-start="schema in nationalSchemas" 
+                                    ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                                     <td class="table_width">
                                         <div class="btn-group bg-white btn-group-sm table_width" role="group">
                                             <button type="button" class="btn btn-outline-dark p-0"
@@ -337,13 +338,14 @@
                                             ng-bind="facets(schema,'request')"></a>
                                     </td>
                                 </tr>                                
-                                <tr ng-if="topRecords[schema]" class="w-100" style="background-color:#e1e1e1;">
+                                <tr ng-if="topRecords[schema]" class="w-100" style="background-color:#e1e1e1;"
+                                    ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                                     <td colspan="6">                                    
                                     <top-records schema="{{schema}}" top="10" show-schema-name="false">
                                     </top-records>
                                     </td>
                                 </tr>
-                                <tr ng-repeat-end>
+                                <tr ng-repeat-end ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                                     <td colspan="6"></td>
                                 </tr>
                             </tbody>
