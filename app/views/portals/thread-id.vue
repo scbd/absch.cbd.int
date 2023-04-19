@@ -3,16 +3,16 @@
     <div v-if="!thread"><loading caption="Loading..."/></div>
     <div v-else>
 
-      <div class="p-2 mb-2 bg-white">
+
+      <div class="border bg-white thread-control-bar p-2 mb-2 bg-white">
         <div class="row">
           <div class="col align-self-center">
-
-            <div v-if="!isOpen" class="alert alert-secondary" role="alert">
-              This thread is closed to comments.
-            </div>
-
+            <b>{{ thread.subject | lstring }}</b>
+            <div v-if="forum && forum.isClosed"><em>This forum is closed to comments.</em></div>  
+            <div v-if="thread.isClosed"><em>This thread is closed for comments.</em></div>  
           </div>
-          <div v-if="loggedIn" class="col-auto align-self-center">
+
+          <div class="col-auto align-self-center">
 
             <button v-if="isOpen && subscription" :disabled="subscribing"
               class="btn btn-sm" :class="{ 'btn-outline-dark':!subscription.watching, 'btn-dark': subscription.watching }" type="button"
@@ -28,9 +28,17 @@
 
       <h1>{{ thread.subject | lstring }}</h1> 
 
-      <post :post="thread" class="mb-2" @refresh="refresh()"  />
+      <post :post="thread" class="mb-2" @refresh="refresh()">
+        <template v-slot:showReplies="{ replies }">
+            <em>
+              <a class="anchor-margin" name="replies"></a>
+              <span v-if="replies == 0">No replies</span>
+              <span v-if="replies == 1"><i class="fa fa-comment"></i> One reply</span>
+              <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ replies  }} replies</span>
+            </em>
+        </template>
+      </post>
 
-      <a name="replies"></a>
 
       <div v-if="posts" >
         <post class="mb-2 border-top" v-for="reply in posts" :key="reply.postId" :post="reply" @refresh="refresh()" />
@@ -110,7 +118,7 @@ async function load() {
   const { forumId } = thread; 
   const qForum = forumsApi.getForum(forumId);
   
-  this.thread = { ...thread, replies:0 };
+  this.thread = thread;
   this.posts  = await qPosts;
   this.forum  = await qForum;
   this.subscription = await qWatch;
@@ -136,8 +144,16 @@ async function toggleSubscription() {
 
 <style scoped>
 
+.thread-control-bar {
+  position: sticky; 
+  top: 0px;
+  z-index:1;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
 .anchor-margin {
-  scroll-margin-top:20px;
+  scroll-margin-top:50px;
 }
 
 </style>
