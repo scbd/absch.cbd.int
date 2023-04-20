@@ -28,6 +28,7 @@ export default {
         return { 
             loading: false,
             directUrl: null,
+            expiresOn: null
         }
     },
     computed: {
@@ -55,13 +56,15 @@ export default {
         tooltipMessageHtml(msg) {
             if(!this.$refs.tooltip) return;
 
-            bootstrap.Tooltip.getOrCreateInstance(this.$refs.tooltip).show();
+            if(this?.tooltip?._popper) // if tooltip visible
+                this.tooltip.show();   // refresh display
         }
     },
     methods: {
         unlock,
-        
+        resetLock
     },
+    beforeDestroy : resetLock,
     mounted() {
 
         const { locked, autoUnlock } = this;
@@ -74,7 +77,7 @@ export default {
             title: ()=>{ return this.tooltipMessageHtml; }
         });
 
-    }
+    },
 }
 
 async function unlock($event) {
@@ -86,13 +89,35 @@ async function unlock($event) {
     if($event) $event.preventDefault();
     if(loading) return;
 
+    this.resetLock();
+
     const delegate = pending(async ()=>{
         const forumsApi = new ForumsApi();
         const { url, expire } = await forumsApi.getAttachmentDirectUrl(attachmentId);
-        this.directUrl = url
+
+        this.directUrl = url;
+        this.expiresOn = expire;
+
+        if(expire) {
+            const expiresOn = new Date(expire);
+            const expiresMs = Math.max(expiresOn.getTime() - Date.now(), 0); // total ms
+            
+            this.timer = setTimeout(() => this.resetLock(), expiresMs);
+        }
+
     }, 'loading');
 
     delegate.call(this);
+}
+
+function resetLock() {
+
+    const { timer } = this;
+
+    if(timer) clearTimeout(timer);
+
+    this.timer = null;
+    this.directUrl = null;
 }
 
 function sizeText() {
