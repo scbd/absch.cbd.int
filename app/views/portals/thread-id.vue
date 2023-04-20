@@ -6,6 +6,9 @@
 
       <div class="border bg-white thread-control-bar p-2 mb-2 bg-white">
         <div class="row">
+          <div v-if="forumUrl" class="col-auto ge-0 align-self-center">
+            <a :href="forumUrl.replace(/^\/+/, '')" class="btn btn-light" title="Back to forum"><i class="fa fa-caret-left" aria-hidden="true"></i></a>
+          </div>
           <div class="col align-self-center">
             <b>{{ thread.subject | lstring }}</b>
             <div v-if="forum && forum.isClosed"><em>This forum is closed to comments.</em></div>  
@@ -73,7 +76,17 @@ export default {
     portalId() { return this.$route.params.portalId; },
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.thread?.isOpen; },
+    forumUrl() { 
+      const threadPathPart = /\/thread\/\d+$/;
+      const { threadId } = this;
+      const { path } = this.$route;
+      
+      if(!threadPathPart.test(path)) return null;
 
+      const forumUrl = `${path.replace(threadPathPart, "")}#${encodeURIComponent(threadId)}`;
+
+      return forumUrl;
+    }
   },
   methods: {
     jumpToAnchor,
@@ -154,6 +167,14 @@ async function toggleSubscription() {
 
 .anchor-margin {
   scroll-margin-top:50px;
+}
+
+.ge-0 {
+  padding-right: 0px;
+}
+
+body[dir="rtl"] .ge-0 {
+  padding-left: 0px;
 }
 
 </style>
