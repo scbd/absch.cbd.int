@@ -150,6 +150,9 @@ export default {
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.forum?.isOpen; },
   },
+  watch: {
+    loggedIn: load
+  },
   methods: {
     getThreadUrl,
     onArticleLoad,
@@ -172,7 +175,7 @@ export default {
 
 async function load() {
 
-  const { forumsApi, forumId } = this;
+  const { forumsApi, forumId, loggedIn} = this;
 
   this.articleAdminTags = ["introduction", `forum:${forumId}`];
 
@@ -181,7 +184,7 @@ async function load() {
 
   const qForum   = forumsApi.getForum(forumId);
   const qThreads = forumsApi.getThreads(forumId);
-  const qWatch   = forumsApi.getForumSubscription(forumId);
+  const qWatch   = loggedIn ? forumsApi.getForumSubscription(forumId) : null;
 
   this.forum   = await qForum;
   this.threads = await qThreads
@@ -214,7 +217,7 @@ async function refresh({ threadId, postId }) {
 async function toggleSubscription() {
 
   const { forumId, subscription } = this;
-  const { watching } = subscription;
+  const { watching } = subscription || { watching: false };
   const forumsApi = new ForumsApi();
 
   const qWatch = watching 
