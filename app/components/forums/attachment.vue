@@ -102,7 +102,8 @@ async function unlock($event) {
             const expiresOn = new Date(expire);
             const expiresMs = Math.max(expiresOn.getTime() - Date.now(), 0); // total ms
             
-            this.timer = setTimeout(() => this.resetLock(), expiresMs);
+            if(expiresMs)
+                this.timer = setTimeout(() => this.resetLock(), expiresMs);
         }
 
     }, 'loading');
