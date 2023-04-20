@@ -6,6 +6,9 @@
 
       <div class="border bg-white thread-control-bar p-2 mb-2 bg-white">
         <div class="row">
+          <div v-if="forumUrl" class="col-auto ge-0 align-self-center">
+            <a :href="forumUrl.replace(/^\/+/, '')" class="btn btn-light" title="Back to forum"><i class="fa fa-caret-left" aria-hidden="true"></i></a>
+          </div>
           <div class="col align-self-center">
             <b>{{ thread.subject | lstring }}</b>
             <div v-if="forum && forum.isClosed"><em>This forum is closed to comments.</em></div>  
@@ -73,12 +76,24 @@ export default {
     portalId() { return this.$route.params.portalId; },
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.thread?.isOpen; },
+    forumUrl() { 
+      const threadPathPart = /\/thread\/\d+$/;
+      const { threadId } = this;
+      const { path } = this.$route;
+      
+      if(!threadPathPart.test(path)) return null;
 
+      const forumUrl = `${path.replace(threadPathPart, "")}#${encodeURIComponent(threadId)}`;
+
+      return forumUrl;
+    }
+  },
+  watch: {
+    loggedIn: load
   },
   methods: {
-    jumpToAnchor,
     load,
-    async refresh() { this.load(); },
+    refresh : load,
     toggleSubscription: pending(toggleSubscription, function(on) { this.subscribing = on }),
   },
 
@@ -106,17 +121,17 @@ export default {
 
 async function load() {
 
-  const { threadId } = this;
+  const { threadId, loggedIn } = this;
 
   const forumsApi = new ForumsApi();
 
   const qThread = forumsApi.getThread(threadId);
   const qPosts  = forumsApi.getPosts (threadId, { all: true });
-  const qWatch   = forumsApi.getThreadSubscription(threadId);
 
   const thread = await qThread
   const { forumId } = thread; 
   const qForum = forumsApi.getForum(forumId);
+  const qWatch = loggedIn ? forumsApi.getThreadSubscription(threadId) : null;
   
   this.thread = thread;
   this.posts  = await qPosts;
@@ -127,7 +142,7 @@ async function load() {
 async function toggleSubscription() {
 
   const { threadId, subscription } = this;
-  const { watching } = subscription;
+  const { watching } = subscription || { watching: false };
   const forumsApi = new ForumsApi();
 
   const qWatch = watching 
@@ -154,6 +169,14 @@ async function toggleSubscription() {
 
 .anchor-margin {
   scroll-margin-top:50px;
+}
+
+.ge-0 {
+  padding-right: 0px;
+}
+
+body[dir="rtl"] .ge-0 {
+  padding-left: 0px;
 }
 
 </style>
