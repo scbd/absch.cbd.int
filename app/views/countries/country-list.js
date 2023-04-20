@@ -385,7 +385,7 @@ import '~/views/report-analyzer/filters/ascii';
             
             if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
                 $scope.loadingMap = true;
-                angular.element($element).ready(async function () {                    
+                (async function () {                    
                     await import('~/views/countries/country-map')
                     $scope.$apply(function(){
                         var mapElement = $element.find('#Jumbotron')
@@ -393,7 +393,7 @@ import '~/views/report-analyzer/filters/ascii';
                         $compile(mapElement.contents())($scope);
                         $scope.loadingMap = false;
                     });
-                });
+                })();
             }
 
             $scope.export = function(){
