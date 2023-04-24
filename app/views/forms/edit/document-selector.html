@@ -43,28 +43,37 @@
             <div class="col-12">
                 <br />
                 <table class="table width-100 pb-1" id="search-new">
-                    <tr ng-repeat="doc in model" ng-if="type!='radio'">
+                    <!-- border-bottom: 1px solid #f0e8e8; -->
+                    <tr ng-repeat="doc in model" ng-if="type!='radio'" ng-class="{'border-bottom-1' : model.length > 1}">
                         <td class="mb-3 width-1">
-                            <a rel="noopener" translation-url  class="btn btn-default border-secondary" ng-click="removeDocument(doc)" class="link color-red">
+                            <a rel="noopener" translation-url  class="btn btn-default border-secondary link color-red" ng-click="removeDocument(doc)">
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td class="mb-4">
+                            <small class="alert alert-danger rounded p-1" ng-if="upgradedReferencedIdentifiers[doc.identifier]">
+                                {{::('documentSelectorT.revisionUpdated'|$translate)}}, 
+                                {{upgradedReferencedIdentifiers[doc.identifier].oldRevision}} <i class="bi bi-shuffle"></i> {{upgradedReferencedIdentifiers[doc.identifier].newRevision}}
+                            </small>
                             <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-record-reference ng-model="doc" 
-                                locale="locale" class="km-value" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
+                                locale="locale" class="km-value" wait-for-workflow="{{runningWorkflows[doc.identifier] ? 'true':'false'}}"></div>
                             <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-record-reference ng-model="doc.identifier" 
-                                locale="locale" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
+                                locale="locale" wait-for-workflow="{{runningWorkflows[doc.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
                     <tr ng-if="type=='radio' && model">
                         <td class="mb-3 width-1">
-                            <a rel="noopener" translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
+                            <a rel="noopener" translation-url  class="btn btn-default link color-red" ng-click="removeDocument(model)">
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td class="mb-4">
+                            <small class="alert alert-danger rounded p-1" ng-if="upgradedReferencedIdentifiers[doc.identifier]">
+                                {{::('documentSelectorT.revisionUpdated'|$translate)}}, 
+                                {{upgradedReferencedIdentifiers[doc.identifier].oldRevision}} <i class="bi bi-shuffle"></i> {{upgradedReferencedIdentifiers[doc.identifier].newRevision}}
+                            </small>
                             <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-record-reference ng-model="model" 
-                                locale="locale" class="km-value"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
+                                locale="locale" class="km-value"  wait-for-workflow="{{runningWorkflows[model.identifier] ? 'true':'false'}}"></div>
                             <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-record-reference ng-model="model.identifier" 
-                                locale="locale"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
+                                locale="locale"  wait-for-workflow="{{runningWorkflows[model.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
                 </table>

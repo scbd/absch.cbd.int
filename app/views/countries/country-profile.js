@@ -58,14 +58,14 @@ import countryProfileT from '~/app-text/views/countries/country-profile.json';
       
       if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
         $scope.loadingMap = true;
-        angular.element(document).ready(async function () {
+        (async function () {
             await import('~/views/countries/country-map')
             $scope.$apply(function(){
                 var mapElement = $element.find('#Jumbotron');
                 $compile(mapElement.append('<country-map  hide-title="1" zoom-to="{{code}}" ></country-map>'))($scope);
                 $scope.loadingMap = false;                    
             });
-        });
+        })();
       }
 
     }
