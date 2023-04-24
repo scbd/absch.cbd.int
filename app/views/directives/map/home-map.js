@@ -39,14 +39,14 @@ import '~/services/main';
             if($rootScope.deviceSize !== 'sm' && $rootScope.deviceSize !== 'xs'){
               // Delay loading map by 2 sec
               $scope.loadingMap = true;
-              angular.element(document).ready(async function () {
+              (async function () {
                 await import('~/views/countries/country-map')
                 $scope.$apply(function(){
                     var mapElement = $element.find('#homeMap')
                     $compile(mapElement.append('<country-map zoom-to="{{code}}" style="min-height:650px" ></country-map>'))($scope);
                     $scope.loadingMap = false;
                 });
-              });
+              })();
             }
 
            
