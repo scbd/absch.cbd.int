@@ -197,7 +197,7 @@ import '~/components/scbd-angularjs-services/main';
                 children: transform(d.children || d.narrowerTerms),
                 selected: false,
                 metadata: d.metadata,
-                description: d.description
+                description: d.longDescription||d.description
               };
             });
           }

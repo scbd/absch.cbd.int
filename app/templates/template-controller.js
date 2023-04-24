@@ -28,8 +28,8 @@ app.config(["toastrConfig", function(toastrConfig) {
     });
 }]);
 
-export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger','ngMeta',
-    function ($rootScope, $location, $window, $scope, locale, realm, localStorageService, logglyLogger, ngMeta) {
+export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger','ngMeta', 'CacheFactory',
+    function ($rootScope, $location, $window, $scope, locale, realm, localStorageService, logglyLogger, ngMeta, CacheFactory) {
 
         var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
         $rootScope.pageTitle = { text: "" };
@@ -113,6 +113,14 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
                 if (pushNotification.data && pushNotification.data.realm == realm.value) {
                     localStorageService.remove('governmentFacets');
                     localStorageService.remove('searchFilters');
+
+                    const documentCache = CacheFactory.get('storageDocument');
+                    documentCache.removeAll();
+                    // const cachedDocumentKeys = documentCache.keys();
+                    // const cacheDocumentKey = cachedDocumentKeys.find(e=>e.indexOf(pushNotification?.data?.identifier))
+                    // const cacheDocument    = documentCache.get()
+                    // const res = documentCache.remove(cacheDocumentKey)
+                    // console.debug(cacheDocument, res)
                 }
             }
         });

@@ -85,7 +85,7 @@
 						</tr>
 					</table>
 				</span>
-				<div class="km-select-description" ng-if="showDescription && term.description" ng-bind="term.description" style="padding: 3px 25px;">
+				<div class="km-select-description" ng-if="showDescription && term.description" ng-bind="term.description|lstring:locale" style="padding: 3px 25px;">
 				</div>
 				<ul class="list-unstyled">
 					<li ng:repeat="term in term.narrowerTerms" ng-include="'term-check-tree-renderer.html'">
