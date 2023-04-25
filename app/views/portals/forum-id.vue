@@ -8,7 +8,9 @@
       <template #article-empty>&nbsp;</template>
     </cbd-article>
 
-    <div v-if="forum">
+    <error-pane v-if="error" :error="error" />
+
+    <div v-else-if="forum">
 
       <div v-if="threads && threads.length" class=" mb-3">
         <h3>Table of Contents</h3>
@@ -119,6 +121,7 @@ import EditPost from '~/components/forums/edit-post.vue';
 import pending   from '~/services/pending-call'
 import Loading  from '~/components/common/loading.vue'
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
+import ErrorPane from '~/components/common/error.vue';
 
 export default {
   name: 'Forum',
@@ -127,6 +130,7 @@ export default {
     Post,
     EditPost,
     Loading,
+    ErrorPane,
     RelativeDatetime
   },
   props: {
@@ -142,6 +146,7 @@ export default {
       subscription: null,
       subscribing: false,
       loading:false,
+      error: null,
       edit: null
     }
   },
@@ -175,20 +180,28 @@ export default {
 
 async function load() {
 
-  const { forumsApi, forumId, loggedIn} = this;
+  this.error = null;
 
-  this.articleAdminTags = ["introduction", `forum:${forumId}`];
+  try {
 
-  var ag = [{ $match: { adminTags: { $all: this.articleAdminTags } } }];
-  this.articleQuery = { ag: JSON.stringify(ag) };
+    const { forumsApi, forumId, loggedIn} = this;
 
-  const qForum   = forumsApi.getForum(forumId);
-  const qThreads = forumsApi.getThreads(forumId);
-  const qWatch   = loggedIn ? forumsApi.getForumSubscription(forumId) : null;
+    this.articleAdminTags = ["introduction", `forum:${forumId}`];
 
-  this.forum   = await qForum;
-  this.threads = await qThreads
-  this.subscription = await qWatch
+    var ag = [{ $match: { adminTags: { $all: this.articleAdminTags } } }];
+    this.articleQuery = { ag: JSON.stringify(ag) };
+
+    const qForum   = forumsApi.getForum(forumId);
+    const qThreads = forumsApi.getThreads(forumId);
+    const qWatch   = loggedIn ? forumsApi.getForumSubscription(forumId) : null;
+
+    this.forum   = await qForum;
+    this.threads = await qThreads
+    this.subscription = await qWatch
+  }
+  catch(err) {
+    this.error = err;
+  }
 }
 
 async function refresh({ threadId, postId }) {

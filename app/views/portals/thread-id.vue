@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="!thread"><loading caption="Loading..."/></div>
+    <div v-if="!thread && !error"><loading caption="Loading..."/></div>
+
+    <error-pane v-else-if="error" :error="error" />
+
     <div v-else>
 
 
@@ -58,10 +61,11 @@ import jumpToAnchor from '~/services/jump-to-anchor.js';
 import Post from '~/components/forums/post.vue';
 import pending   from '~/services/pending-call'
 import Loading  from '~/components/common/loading.vue'
+import ErrorPane from '~/components/common/error.vue';
 
 export default {
   name: 'Forum',
-  components: { Post, Loading },
+  components: { Post, Loading, ErrorPane },
   props: {
     threadId: Number
   },
@@ -70,6 +74,7 @@ export default {
       forum: null,
       thread: null,
       posts: null,
+      error: null,
       subscription: null,
       subscribing: false,
     }
@@ -123,22 +128,30 @@ export default {
 
 async function load() {
 
-  const { threadId, loggedIn } = this;
+  this.error = null;
 
-  const forumsApi = new ForumsApi();
+  try {
 
-  const qThread = forumsApi.getThread(threadId);
-  const qPosts  = forumsApi.getPosts (threadId, { all: true });
+    const { threadId, loggedIn } = this;
 
-  const thread = await qThread
-  const { forumId } = thread; 
-  const qForum = forumsApi.getForum(forumId);
-  const qWatch = loggedIn ? forumsApi.getThreadSubscription(threadId) : null;
-  
-  this.thread = thread;
-  this.posts  = await qPosts;
-  this.forum  = await qForum;
-  this.subscription = await qWatch;
+    const forumsApi = new ForumsApi();
+
+    const qThread = forumsApi.getThread(threadId);
+    const qPosts  = forumsApi.getPosts (threadId, { all: true });
+
+    const thread = await qThread
+    const { forumId } = thread; 
+    const qForum = forumsApi.getForum(forumId);
+    const qWatch = loggedIn ? forumsApi.getThreadSubscription(threadId) : null;
+    
+    this.thread = thread;
+    this.posts  = await qPosts;
+    this.forum  = await qForum;
+    this.subscription = await qWatch;
+  }
+  catch(err) {
+    this.error = err;
+  }
 }
 
 async function toggleSubscription() {
