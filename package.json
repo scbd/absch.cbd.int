@@ -4,7 +4,6 @@
   "dependencies": {
     "@bower_components/ammap3": "amcharts/ammap3#3.21.6",
     "@bower_components/angular-flex": "scbd/angular-flex.git#2.2.0",
-    "@bower_components/cbd-forums": "scbd/forums#1.2.11",
     "@bower_components/jquery": "jquery/jquery-dist#3.3.1",
     "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11",
     "@bower_components/require-shim": "zetlen/require-shim#95b5aaea4530fb2861cc475497c7b4c62204628d",

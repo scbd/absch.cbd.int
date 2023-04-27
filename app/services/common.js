@@ -18,10 +18,6 @@ import '~/views/report-analyzer/filters/ascii';
         app.factory('linqjs', [function() {
              return Enumerable;
         }])
-        //Temp for cbd-forums
-        app.factory('underscore', [function() {
-            return _;
-       }])
     app.factory('commonjs', ['$http', 'thesaurusService', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus', 'locale',
         function($http, thesaurusService, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus, locale) {
