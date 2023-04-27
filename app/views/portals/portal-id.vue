@@ -19,6 +19,7 @@ import MenusApi from '~/api/portals';
 import SideMenu from '~/components/menus/side-menu.vue';
 import Article from './article-id.vue'
 import Forum from './forum-id.vue'
+import ForumLoP from './forum-lop-id.vue'
 import Thread from './thread-id.vue'
 import SubRouter from "../../services/router.js";
 import { compile }  from "path-to-regexp";
@@ -119,6 +120,7 @@ const CONTENT_TYPES = {
   "*"     : { },
   article : { component: Article },
   forum   : { component: Forum, subRoutes: [ { path: '/thread/:threadId', component: Thread } ] },
+  forumLoP: { component: ForumLoP }
 }
 
 function combine(...parts) {
@@ -139,11 +141,15 @@ function toRoutes({ slug, menus, content }, parentPath) {
   const contentType  = CONTENT_TYPES[type||'*'] || CONTENT_TYPES['*'];
   const { component, subRoutes } = contentType || {};
 
-  const params = { 
+  let params = { 
     identifier: content?.article?.id,
-    forumId:    content?.forum?.id 
+    forumId:    content?.forum?.id, 
   };
 
+  if(content?.forumLoP?.forumId){
+    params.forumId =  content?.forumLoP?.forumId 
+  };
+  
   const routes = [
     { path, component, params }
   ];
