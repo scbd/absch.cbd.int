@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Forum List of Participants</h1>
+    <h1>List of Participants</h1>
     <forum-participants :forumId="forumId" ></forum-participants>
   </div>
 </template>

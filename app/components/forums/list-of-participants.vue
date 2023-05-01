@@ -1,7 +1,8 @@
 <template >
   <div>
-    <div v-if="!participants.length"><loading caption="Loading..."/></div>
-    <div v-else>
+    <error-pane v-if="error" :error="error" />
+    <div v-else-if="loading"><loading caption="Loading..."/></div>
+    <div v-else-if="participants">
       <div v-if="parties.length">
         <h3>Parties</h3>
         <table class="table table-striped table-sm">
@@ -15,14 +16,14 @@
           <tbody>
             <tr v-for="(participant, index) in parties" :key="index">
               <td scope="row">{{index+1}}</td>
-              <td>{{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ participant.country | lstring($locale) }} </td>
+              <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
+              <td>{{ participant.country.name | lstring($locale) }} </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div v-if="nonparties.length">
+      <div v-if="nonParties.length">
         <h3>Non-Parties</h3>
         <table class="table table-striped table-sm">
           <thead>
@@ -33,10 +34,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(participant, index) in nonparties" :key="index">
-              <td scope="row">{{index+1}}</td>
-              <td>{{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ participant.country | lstring($locale) }} </td>
+            <tr v-for="(participant, index) in nonParties" :key="index">
+              <td scope="row">{{parties.length + index + 1}}</td>
+              <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
+              <td>{{ participant.country.name | lstring($locale) }} </td>
             </tr>
           </tbody>
         </table>
@@ -54,8 +55,8 @@
           </thead>
           <tbody>
             <tr v-for="(participant, index) in organizations" :key="index">
-              <td scope="row">{{index+1}}</td>
-              <td>{{ participant.firstName }} {{ participant.lastName }}</td>
+              <td scope="row">{{parties.length + nonParties.length + index + 1}}</td>
+              <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
               <td>{{ participant.organization | lstring($locale) }} </td>
             </tr>
           </tbody>
@@ -69,7 +70,9 @@
 import ForumsApi from '~/api/forums';
 import ForumParticipants from '~/components/forums/list-of-participants.vue';
 import Loading  from '~/components/common/loading.vue'
-import '../kb/filters';
+import pending  from '~/services/pending-call'
+import { lstring } from '../kb/filters';
+import func from 'vue-editor-bridge';
 
 export default {
   name:'ForumParticipants',
@@ -79,34 +82,50 @@ export default {
   },
   data() {
     return {
-      participants: [],      
+      participants: [],
+      loading: false,
+      error: null
     }
   },
   computed: {
-    parties() {
-      return this.participants.filter(function(p) { return p.type == 'party'; })
-                              .sort((a, b) => (a.country[this.$locale].localeCompare(b.country[this.$locale]) || a.lastName.localeCompare(b.lastName)));
-                       
-    },
-    nonparties() {
-      return this.participants.filter(function(p) { return p.type == 'non-party'; })
-                              .sort((a, b) => (a.country[this.$locale].localeCompare(b.country[this.$locale]) || a.lastName.localeCompare(b.lastName)));
-    },
-    organizations() {
-      return this.participants.filter(function(p) { return p.type == 'observer'; })
-                              .sort((a, b) => {
-                                if(a.organization[this.$locale] > b.organization[this.$locale]) return 1;
-                                if(a.organization[this.$locale] < b.organization[this.$locale]) return -1;
-                                return Number(a.lastName.localeCompare(b.lastName));
-                              });
-    }    
+    parties()       { return this.participants.filter(({ type }) =>  type == 'party'); },
+    nonParties()    { return this.participants.filter(({ type }) =>  type == 'non-party'); },
+    organizations() { return this.participants.filter(({ type }) =>  type == 'observer'); },
   },
-  async created() {
- 
+  methods: {
+    load: pending(load, 'loading')
+  },
+  created() {
+    this.load();
+  }
+}
+
+async function load() {
+
+  try {
+
+    const { $locale } = this;
     const forumsApi     = new ForumsApi();
     const qParticipants = forumsApi.getForumParticipants(this.forumId);
 
-    this.participants = await qParticipants;
+    let participants = await qParticipants;
+
+    participants = participants.sort((a, b)=>{
+
+      const strA = `${lstring(a.country?.name || a.organization, $locale)} | ${a.lastName || ''} | ${a.firstName || ''}`;
+      const strB = `${lstring(b.country?.name || b.organization, $locale)} | ${b.lastName || ''} | ${b.firstName || ''}`;
+
+      return strA.localeCompare(strB);
+    });
+
+    this.participants = participants;
+
+  }
+  catch(err) {
+    this.error = err;
   }
 }
+
+
 </script>
+
