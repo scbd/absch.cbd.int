@@ -83,7 +83,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 							if(result?.data?.body?.contactOrganization){
 								return storage.documents.get(result.data.body.contactOrganization.identifier, { info : true})
 								.then(function(organizationDetails){
-									result.data.body.contactOrganizationDetail = { ...organizationDetails.data.body,  deletedOn:organizationDetails.data.deletedOn};
+									result.data.body.contactOrganizationDetail = { ...organizationDetails.data.body, info:organizationDetails.data,  deletedOn:organizationDetails.data.deletedOn};
 									return result.data;
 								})
 							}

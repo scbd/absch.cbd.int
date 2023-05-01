@@ -182,9 +182,41 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }  
 
+  // PIN
+
+  async pinThread(threadId)  {
+
+    return this.http.put(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/pin`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async unpinThread(threadId)  {
+
+    return this.http.delete(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/pin`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  // Close
+
+  async closeThread(threadId)  {
+
+    return this.http.put(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/close`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async openThread(threadId)  {
+
+    return this.http.delete(`api/v2014/discussions/threads/${encodeURIComponent(threadId)}/close`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
   async getForumParticipants(forumId)  {
 
-    return this.http.get(`/api/v2014/discussions/forums/${encodeURIComponent(forumId)}/lop`)
+    return this.http.get(`/api/v2014/discussions/forums/${encodeURIComponent(forumId)}/participants`)
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }

@@ -55,9 +55,14 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
   });
   ngMeta.init();
 
-  const joyrideTemplate = (await import('~/views/directives/joyride-template.html')).default;
-  $templateCache.put('ngJoyrideDefault.html', joyrideTemplate)
+  let joyrideTemplate  = (await import('~/views/directives/joyride-template.html')).default;
+  const joyrideTemplateT = (await import('~/app-text/views/directives/joyride-template.json')).default;
 
+  for (const key in joyrideTemplateT) {
+    joyrideTemplate = joyrideTemplate.replace(`{{${key}}}`, joyrideTemplateT[key]);    
+  } 
+  $templateCache.put('ngJoyrideDefault.html', joyrideTemplate);
+  
 }]);
 
 app.directive('ngVue', AngularVueDirective);

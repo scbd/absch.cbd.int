@@ -62,7 +62,27 @@
                             <li><a class="dropdown-item" href="#" @click.prevent="edit()">
                                 <i class="fa fa-edit"></i> Edit</a>
                             </li>
+
+                            <li v-if="canPin || canClose"><hr class="dropdown-divider"></li>
+
+                            <li v-if="canPin">
+                                <a class="dropdown-item" href="#" @click.prevent="togglePin()">
+                                    <i class="fa fa-thumb-tack"></i> 
+                                    <span v-if="post.isPinned">Unpin</span>
+                                    <span v-else>Pin</span>
+                                </a>
+                            </li>
+
+                            <li v-if="canClose">
+                                <a class="dropdown-item" href="#" @click.prevent="toggleClose()">
+                                    <i class="fa fa-comments"></i>
+                                    <span v-if="post.isClosed">Open</span>
+                                    <span v-else>Close</span>
+                                </a>
+                            </li>
+                            
                             <li v-if="canDelete && !post.replies"><hr class="dropdown-divider"></li>
+
                             <li v-if="canDelete && !post.replies"><a class="dropdown-item text-danger" href="#" @click.prevent="deletePost()">
                                 <i class="fa fa-times"></i> Delete</a>
                             </li>
@@ -153,6 +173,8 @@ export default {
         canEdit()    { return !!this?.post?.security?.canEdit },
         canDelete()  { return !!this?.post?.security?.canDelete },
         canApprove() { return !!this?.post?.security?.canApprove },
+        canClose()   { return !!this?.post?.security?.canClose },
+        canPin()     { return !!this?.post?.security?.canPin },
     },
     methods: {
         toggleReplies,
@@ -162,6 +184,8 @@ export default {
         edit,
         reply,
         deletePost,
+        togglePin,
+        toggleClose,
         highlightPostClasses,
         getSelection() { 
 
@@ -239,6 +263,39 @@ async function deletePost() {
     const forumsApi = new ForumsApi();
 
     await forumsApi.deletePost(postId);
+
+    this.refresh(post);
+}
+
+async function togglePin() {
+
+    const { post } = this;
+    const { postId, isPinned } = post;
+
+    const forumsApi = new ForumsApi();
+
+    const pendingCall =  isPinned 
+                      ? forumsApi.unpinThread(postId)
+                      : forumsApi.pinThread(postId);
+
+    await forumsApi.pinThread(postId, isPinned);
+
+    this.refresh(post);
+
+}
+
+async function toggleClose() {
+
+    const { post } = this;
+    const { postId, isClosed } = post;
+
+    const forumsApi = new ForumsApi();
+
+    const pendingCall = isClosed 
+                      ? forumsApi. openThread(postId)
+                      : forumsApi.closeThread(postId);
+
+    await pendingCall;
 
     this.refresh(post);
 }

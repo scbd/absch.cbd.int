@@ -8,7 +8,9 @@
       <template #article-empty>&nbsp;</template>
     </cbd-article>
 
-    <div v-if="forum">
+    <error-pane v-if="error" :error="error" />
+
+    <div v-else-if="forum">
 
       <div v-if="threads && threads.length" class=" mb-3">
         <h3>Table of Contents</h3>
@@ -68,8 +70,8 @@
               <template v-slot:showReplies="{ replies }">
 
                 <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`">Read the post »</a>
-                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the reply »</a>
-                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`">Read the {{ replies  }} replies  »</a>
+                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comment"></i> Read the reply »</a>
+                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comments"></i> Read the {{ replies  }} replies  »</a>
 
 
               </template>
@@ -82,6 +84,11 @@
                 <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">No replies</a>
                 <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">One reply</a>
                 <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ thread.replies }} replies</a>
+                <span v-if="thread.isClosed">
+                  |
+                  <em>This thread is closed for comments</em>
+                </span>
+                
               </div>
               <div class="col-auto align-self-center">
                 <span v-if="thread.lastPostId && thread.lastPostId!=thread.threadId">
@@ -114,6 +121,7 @@ import EditPost from '~/components/forums/edit-post.vue';
 import pending   from '~/services/pending-call'
 import Loading  from '~/components/common/loading.vue'
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
+import ErrorPane from '~/components/common/error.vue';
 
 export default {
   name: 'Forum',
@@ -122,6 +130,7 @@ export default {
     Post,
     EditPost,
     Loading,
+    ErrorPane,
     RelativeDatetime
   },
   props: {
@@ -137,6 +146,7 @@ export default {
       subscription: null,
       subscribing: false,
       loading:false,
+      error: null,
       edit: null
     }
   },
@@ -144,6 +154,9 @@ export default {
     portalId() { return this.$route.params.portalId; },
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.forum?.isOpen; },
+  },
+  watch: {
+    loggedIn: load
   },
   methods: {
     getThreadUrl,
@@ -167,20 +180,28 @@ export default {
 
 async function load() {
 
-  const { forumsApi, forumId } = this;
+  this.error = null;
 
-  this.articleAdminTags = ["introduction", `forum:${forumId}`];
+  try {
 
-  var ag = [{ $match: { adminTags: { $all: this.articleAdminTags } } }];
-  this.articleQuery = { ag: JSON.stringify(ag) };
+    const { forumsApi, forumId, loggedIn} = this;
 
-  const qForum   = forumsApi.getForum(forumId);
-  const qThreads = forumsApi.getThreads(forumId);
-  const qWatch   = forumsApi.getForumSubscription(forumId);
+    this.articleAdminTags = ["introduction", `forum:${forumId}`];
 
-  this.forum   = await qForum;
-  this.threads = await qThreads
-  this.subscription = await qWatch
+    var ag = [{ $match: { adminTags: { $all: this.articleAdminTags } } }];
+    this.articleQuery = { ag: JSON.stringify(ag) };
+
+    const qForum   = forumsApi.getForum(forumId);
+    const qThreads = forumsApi.getThreads(forumId);
+    const qWatch   = loggedIn ? forumsApi.getForumSubscription(forumId) : null;
+
+    this.forum   = await qForum;
+    this.threads = await qThreads
+    this.subscription = await qWatch
+  }
+  catch(err) {
+    this.error = err;
+  }
 }
 
 async function refresh({ threadId, postId }) {
@@ -209,7 +230,7 @@ async function refresh({ threadId, postId }) {
 async function toggleSubscription() {
 
   const { forumId, subscription } = this;
-  const { watching } = subscription;
+  const { watching } = subscription || { watching: false };
   const forumsApi = new ForumsApi();
 
   const qWatch = watching 

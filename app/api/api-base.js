@@ -10,6 +10,14 @@ if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 const cache          = new Map()
 const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000, tokenReader: defaultTokenReader }
 
+const HttpStatusApiCode = {
+  400: "invalidParameter",
+  401: "unauthorized",
+  403: "forbidden",
+  404: "notFound",
+  500: "internalServerError",
+  501: "notImplemented",
+}
 export default class ApiBase
 {
   constructor(options) {
@@ -66,9 +74,22 @@ async function loadAsyncHeaders(baseConfig) {
 
 export function tryCastToApiError(error) {
 
-  if(error && error.response && error.response.data && error.response.data.code) {
+  if(error?.response?.data?.code || error?.response?.data?.statusCode) {
       const apiError = error.response.data
-      throw error.response.data;
+      throw { cause: error, ...apiError };
+  }
+
+  if(error.response?.status && HttpStatusApiCode[error.response?.status]) {
+    const { message } = error;
+    const { status: statusCode } = error.response;
+    const code = HttpStatusApiCode[statusCode];
+
+    const craftedApiError = new Error(message, { cause: error });
+
+    craftedApiError.code       = code;
+    craftedApiError.statusCode = statusCode;
+
+    throw craftedApiError;
   }
 
   throw error

@@ -1,18 +1,26 @@
 <template>
   <div>
-    <div v-if="!thread"><loading caption="Loading..."/></div>
+    <div v-if="!thread && !error"><loading caption="Loading..."/></div>
+
+    <error-pane v-else-if="error" :error="error" />
+
     <div v-else>
 
-      <div class="p-2 mb-2 bg-white">
+
+      <div class="border bg-white thread-control-bar p-2 mb-2 bg-white">
         <div class="row">
-          <div class="col align-self-center">
-
-            <div v-if="!isOpen" class="alert alert-secondary" role="alert">
-              This thread is closed to comments.
-            </div>
-
+          <div v-if="forumUrl" class="col-auto ge-0 align-self-center">
+            <a :href="forumUrl.replace(/^\/+/, '')" class="btn btn-light" title="Back to forum">
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
           </div>
-          <div v-if="loggedIn" class="col-auto align-self-center">
+          <div class="col align-self-center">
+            <b>{{ thread.subject | lstring }}</b>
+            <div v-if="forum && forum.isClosed"><em>This forum is closed to comments.</em></div>  
+            <div v-if="thread.isClosed"><em>This thread is closed for comments.</em></div>  
+          </div>
+
+          <div class="col-auto align-self-center">
 
             <button v-if="isOpen && subscription" :disabled="subscribing"
               class="btn btn-sm" :class="{ 'btn-outline-dark':!subscription.watching, 'btn-dark': subscription.watching }" type="button"
@@ -28,9 +36,17 @@
 
       <h1>{{ thread.subject | lstring }}</h1> 
 
-      <post :post="thread" class="mb-2" @refresh="refresh()"  />
+      <post :post="thread" class="mb-2" @refresh="refresh()">
+        <template v-slot:showReplies="{ replies }">
+            <em>
+              <a class="anchor-margin" name="replies"></a>
+              <span v-if="replies == 0">No replies</span>
+              <span v-if="replies == 1"><i class="fa fa-comment"></i> One reply</span>
+              <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ replies  }} replies</span>
+            </em>
+        </template>
+      </post>
 
-      <a name="replies"></a>
 
       <div v-if="posts" >
         <post class="mb-2 border-top" v-for="reply in posts" :key="reply.postId" :post="reply" @refresh="refresh()" />
@@ -45,10 +61,11 @@ import jumpToAnchor from '~/services/jump-to-anchor.js';
 import Post from '~/components/forums/post.vue';
 import pending   from '~/services/pending-call'
 import Loading  from '~/components/common/loading.vue'
+import ErrorPane from '~/components/common/error.vue';
 
 export default {
   name: 'Forum',
-  components: { Post, Loading },
+  components: { Post, Loading, ErrorPane },
   props: {
     threadId: Number
   },
@@ -57,6 +74,7 @@ export default {
       forum: null,
       thread: null,
       posts: null,
+      error: null,
       subscription: null,
       subscribing: false,
     }
@@ -65,12 +83,24 @@ export default {
     portalId() { return this.$route.params.portalId; },
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.thread?.isOpen; },
+    forumUrl() { 
+      const threadPathPart = /\/thread\/\d+$/;
+      const { threadId } = this;
+      const { path } = this.$route;
+      
+      if(!threadPathPart.test(path)) return null;
 
+      const forumUrl = `${path.replace(threadPathPart, "")}#${encodeURIComponent(threadId)}`;
+
+      return forumUrl;
+    }
+  },
+  watch: {
+    loggedIn: load
   },
   methods: {
-    jumpToAnchor,
     load,
-    async refresh() { this.load(); },
+    refresh : load,
     toggleSubscription: pending(toggleSubscription, function(on) { this.subscribing = on }),
   },
 
@@ -98,28 +128,36 @@ export default {
 
 async function load() {
 
-  const { threadId } = this;
+  this.error = null;
 
-  const forumsApi = new ForumsApi();
+  try {
 
-  const qThread = forumsApi.getThread(threadId);
-  const qPosts  = forumsApi.getPosts (threadId, { all: true });
-  const qWatch   = forumsApi.getThreadSubscription(threadId);
+    const { threadId, loggedIn } = this;
 
-  const thread = await qThread
-  const { forumId } = thread; 
-  const qForum = forumsApi.getForum(forumId);
-  
-  this.thread = { ...thread, replies:0 };
-  this.posts  = await qPosts;
-  this.forum  = await qForum;
-  this.subscription = await qWatch;
+    const forumsApi = new ForumsApi();
+
+    const qThread = forumsApi.getThread(threadId);
+    const qPosts  = forumsApi.getPosts (threadId, { all: true });
+
+    const thread = await qThread
+    const { forumId } = thread; 
+    const qForum = forumsApi.getForum(forumId);
+    const qWatch = loggedIn ? forumsApi.getThreadSubscription(threadId) : null;
+    
+    this.thread = thread;
+    this.posts  = await qPosts;
+    this.forum  = await qForum;
+    this.subscription = await qWatch;
+  }
+  catch(err) {
+    this.error = err;
+  }
 }
 
 async function toggleSubscription() {
 
   const { threadId, subscription } = this;
-  const { watching } = subscription;
+  const { watching } = subscription || { watching: false };
   const forumsApi = new ForumsApi();
 
   const qWatch = watching 
@@ -136,8 +174,24 @@ async function toggleSubscription() {
 
 <style scoped>
 
+.thread-control-bar {
+  position: sticky; 
+  top: 0px;
+  z-index:1;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
 .anchor-margin {
-  scroll-margin-top:20px;
+  scroll-margin-top:50px;
+}
+
+.ge-0 {
+  padding-right: 0px;
+}
+
+body[dir="rtl"] .ge-0 {
+  padding-left: 0px;
 }
 
 </style>
