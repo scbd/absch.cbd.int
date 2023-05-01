@@ -213,4 +213,11 @@ export default class ForumsApi extends ApiBase
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
+
+  async getForumParticipants(forumId)  {
+
+    return this.http.get(`/api/v2014/discussions/forums/${encodeURIComponent(forumId)}/participants`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
 }

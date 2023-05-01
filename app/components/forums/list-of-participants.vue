@@ -1,0 +1,131 @@
+<template >
+  <div>
+    <error-pane v-if="error" :error="error" />
+    <div v-else-if="loading"><loading caption="Loading..."/></div>
+    <div v-else-if="participants">
+      <div v-if="parties.length">
+        <h3>Parties</h3>
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Government</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(participant, index) in parties" :key="index">
+              <td scope="row">{{index+1}}</td>
+              <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
+              <td>{{ participant.country.name | lstring($locale) }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div v-if="nonParties.length">
+        <h3>Non-Parties</h3>
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Government</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(participant, index) in nonParties" :key="index">
+              <td scope="row">{{parties.length + index + 1}}</td>
+              <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
+              <td>{{ participant.country.name | lstring($locale) }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div v-if="organizations.length">
+        <h3>Observers</h3>
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Organization</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(participant, index) in organizations" :key="index">
+              <td scope="row">{{parties.length + nonParties.length + index + 1}}</td>
+              <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
+              <td>{{ participant.organization | lstring($locale) }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>      
+    </div>  
+  </div>  
+</template>
+
+<script>
+import ForumsApi from '~/api/forums';
+import ForumParticipants from '~/components/forums/list-of-participants.vue';
+import Loading  from '~/components/common/loading.vue'
+import pending  from '~/services/pending-call'
+import { lstring } from '../kb/filters';
+import func from 'vue-editor-bridge';
+
+export default {
+  name:'ForumParticipants',
+  components:{ ForumParticipants, Loading  },
+  props: { 
+    forumId: Number,
+  },
+  data() {
+    return {
+      participants: [],
+      loading: false,
+      error: null
+    }
+  },
+  computed: {
+    parties()       { return this.participants.filter(({ type }) =>  type == 'party'); },
+    nonParties()    { return this.participants.filter(({ type }) =>  type == 'non-party'); },
+    organizations() { return this.participants.filter(({ type }) =>  type == 'observer'); },
+  },
+  methods: {
+    load: pending(load, 'loading')
+  },
+  created() {
+    this.load();
+  }
+}
+
+async function load() {
+
+  try {
+
+    const { $locale } = this;
+    const forumsApi     = new ForumsApi();
+    const qParticipants = forumsApi.getForumParticipants(this.forumId);
+
+    let participants = await qParticipants;
+
+    participants = participants.sort((a, b)=>{
+
+      const strA = `${lstring(a.country?.name || a.organization, $locale)} | ${a.lastName || ''} | ${a.firstName || ''}`;
+      const strB = `${lstring(b.country?.name || b.organization, $locale)} | ${b.lastName || ''} | ${b.firstName || ''}`;
+
+      return strA.localeCompare(strB);
+    });
+
+    this.participants = participants;
+
+  }
+  catch(err) {
+    this.error = err;
+  }
+}
+
+
+</script>
+
