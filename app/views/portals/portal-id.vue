@@ -141,15 +141,11 @@ function toRoutes({ slug, menus, content }, parentPath) {
   const contentType  = CONTENT_TYPES[type||'*'] || CONTENT_TYPES['*'];
   const { component, subRoutes } = contentType || {};
 
-  let params = { 
-    identifier: content?.article?.id,
-    forumId:    content?.forum?.id, 
-  };
+  const params = !content ? {} : { ... (content[type] || {}) };
 
-  if(content?.forumLoP?.forumId){
-    params.forumId =  content?.forumLoP?.forumId 
-  };
-  
+  if(type=='article' && !params.identifier) params.identifier = params.id; // TMP Fix
+  if(type=='forum'   && !params.forumId   ) params.forumId    = params.id; // TMP Fix
+
   const routes = [
     { path, component, params }
   ];
