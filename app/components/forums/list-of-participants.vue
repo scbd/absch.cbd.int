@@ -3,6 +3,9 @@
     <error-pane v-if="error" :error="error" />
     <div v-else-if="loading"><loading caption="Loading..."/></div>
     <div v-else-if="participants">
+
+      <div v-if="participants.length==0">The list is empty</div>
+
       <div v-if="parties.length">
         <h3>Parties</h3>
         <table class="table table-striped table-sm">
@@ -44,7 +47,7 @@
       </div>
       
       <div v-if="organizations.length">
-        <h3>Observers</h3>
+        <h3>Organizations</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -72,11 +75,11 @@ import ForumParticipants from '~/components/forums/list-of-participants.vue';
 import Loading  from '~/components/common/loading.vue'
 import pending  from '~/services/pending-call'
 import { lstring } from '../kb/filters';
-import func from 'vue-editor-bridge';
+import ErrorPane from '~/components/common/error.vue';
 
 export default {
   name:'ForumParticipants',
-  components:{ ForumParticipants, Loading  },
+  components:{ ForumParticipants, Loading, ErrorPane  },
   props: { 
     forumId: Number,
   },
@@ -101,6 +104,8 @@ export default {
 }
 
 async function load() {
+
+  this.error = null;
 
   try {
 

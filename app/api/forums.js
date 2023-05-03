@@ -214,9 +214,15 @@ export default class ForumsApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async getForumParticipants(forumId)  {
+  async getForumParticipants(forumId, treaty=null)  {
 
-    return this.http.get(`/api/v2014/discussions/forums/${encodeURIComponent(forumId)}/participants`)
+    treaty = treaty || undefined;
+
+    const params = {
+      treaty
+    };
+
+    return this.http.get(`/api/v2014/discussions/forums/${encodeURIComponent(forumId)}/participants`, { params })
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
