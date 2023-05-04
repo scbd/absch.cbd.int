@@ -1,13 +1,13 @@
 <template >
   <div>
     <error-pane v-if="error" :error="error" />
-    <div v-else-if="loading"><loading caption="Loading..."/></div>
+    <div v-else-if="loading"><loading :caption="$t('loading')"/></div>
     <div v-else-if="participants">
 
       <div v-if="participants.length==0">{{ $t("listIsEmpty") }}</div>
 
       <div v-if="parties.length">
-        <h3>Parties</h3>
+        <h3>{{ $t("parties") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -27,7 +27,7 @@
       </div>
 
       <div v-if="nonParties.length">
-        <h3>Non-Parties</h3>
+        <h3>{{ $t("non-parties") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -47,7 +47,7 @@
       </div>
       
       <div v-if="organizations.length">
-        <h3>Organizations</h3>
+        <h3>{{ $t("organizations") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>

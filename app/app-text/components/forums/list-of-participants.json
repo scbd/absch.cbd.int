@@ -5,5 +5,7 @@
   "non-parties" : "Non-Parties",
   "observers"   : "Observers",
   "organization": "Organization",
-  "listIsEmpty" : "The list is empty"
+  "organizations": "Organizations",
+  "listIsEmpty" : "The list is empty",
+  "loading"     : "Loading..."
 }
