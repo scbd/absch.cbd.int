@@ -16,7 +16,7 @@ export default {
   name: 'ArticleId',
   components:{ CbdArticle:cbdArticle },
   props: {
-    identifier: String,
+    articleId: String,
   },
   data() {
     return {
@@ -28,13 +28,13 @@ export default {
   },
   async created() {
 
-    const { portalId, identifier } = this;
+    const { portalId, articleId } = this;
 
 
     var ag = [];
 
-    if (isObjectId(identifier))
-      ag.push({ $match: { _id: mapObjectId(identifier) } });
+    if (isObjectId(articleId))
+      ag.push({ $match: { _id: mapObjectId(articleId) } });
 
     this.articleQuery = { ag : JSON.stringify(ag) };
 
