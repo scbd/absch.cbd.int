@@ -12,15 +12,15 @@
 
             <document-date></document-date> <br>
             <div class="col-md-12">
-                <legend>General Information</legend>
+                <legend>{{::('viewSubmissionT.generalInfo'|$translate)}}</legend>
                 <div ng-if="document.government">
-                    <label>Country</label>
+                    <label>{{::('viewSubmissionT.country'|$translate)}}</label>
                     <div compare-val>
                         <div class="km-value km-pre" ng-bind="document.government | term:lstring:locale"></div>
                     </div>
                 </div>
                 <div ng-if="document.organizations">
-                    <label>Organization(s)</label>
+                    <label>{{::('viewSubmissionT.organization'|$translate)}}</label>
                     <div class="km-value" compare-val>
                         <ul class="list">
                             <li ng-repeat="item in document.organizations" >
@@ -32,22 +32,22 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <legend>Submission Information</legend>
+                <legend>{{::('viewSubmissionT.submissionInformation'|$translate)}}</legend>
                 <div ng-if="document.title">
-                    <label>Title of the submission</label>
+                    <label>{{::('viewSubmissionT.titleSubmission'|$translate)}}</label>
                     <div compare-val>
                         <km-value-ml value="document.title" locales="locale"></km-value-ml>
                     </div>
                 </div>
                 <div ng-if="document.date">
-                    <label>Date of Submission</label>
+                    <label>{{::('viewSubmissionT.dateSubmission'|$translate)}}</label>
                     <div compare-val>
                         <div class="km-value km-pre" ng-bind="document.date | formatDate"></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-12" ng-if="document.notifications">
-                <label>Notifications</label>
+                <label>{{::('viewSubmissionT.notifications'|$translate)}}</label>
                 <div compare-val>
                     <div class="km-value" ng-repeat="notification in notifications" style="margin-bottom:5px;">
                         <a target="_blank" ng-href="/database/NT/{{notification | uniqueID}}">
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="col-md-12" ng-if="document.records">
-                <label>Related record(s)</label>
+                <label>{{::('viewSubmissionT.records'|$translate)}}</label>
                 <div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.records" >
@@ -73,7 +73,7 @@
 
             <div class="col-md-12"
                 ng-if="document.cbdThematicAreas || document.absThematicAreas || document.cpbThematicAreas">
-                <legend>Thematic areas</legend>
+                <legend>{{::('viewSubmissionT.thematicAreas'|$translate)}}</legend>
                 <div ng-if="document.cbdThematicAreas">
                     <div class="km-value" compare-val>
                         <ul  class="list">
@@ -97,13 +97,13 @@
 
             <div class="col-md-12">
                 <div ng-show="document.relevantDocuments">
-                    <legend>Documents</legend>
+                    <legend>{{::('viewSubmissionT.documents'|$translate)}}</legend>
                     <div compare-val>
                         <div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>	
                     </div>                    
                 </div>
                 <div ng-show="document.relevantInformation">
-                    <label>Any other relevant information</label>
+                    <label>{{::('viewSubmissionT.otherRelevantInformation'|$translate)}}</label>
                     <div compare-val>
                         <km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
                     </div>
