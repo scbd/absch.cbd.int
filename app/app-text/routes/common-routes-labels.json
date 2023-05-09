@@ -35,5 +35,7 @@
   "kb":"Knowledge base",
   "embed": "Embed url",
   "mySharing": "My sharing",
-  "submissionsOnNotifications": "Submissions to Notifications"
+  "submissionsOnNotifications": "Submissions to Notifications",
+  "portals" : "Online forums and portals",
+  "portalId" : "Portal"
 }

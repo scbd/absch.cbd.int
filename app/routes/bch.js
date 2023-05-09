@@ -46,9 +46,6 @@ const bchRouteUrls = {
   cms_content                          : { component: ()=>asyncLogError(import('~/views/shared/cms-content')) },
   help_forbidden                       : { component: ()=>asyncLogError(import('~/views/shared/403')) },
   help_not_found                       : { component: ()=>asyncLogError(import('~/views/shared/404')) },
-  portal                               : { component: ()=>asyncLogError(import('~/views/portals/index.vue')) },
-  portalId                             : { component: ()=>asyncLogError(import('~/views/portals/portal-id.vue')) },
-
 };
 
 app.config(["$routeProvider", function ($routeProvider) {
@@ -95,11 +92,6 @@ app.config(["$routeProvider", function ($routeProvider) {
   // whenAsync("/protocol/:subpath*?",                               { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/protocol/:subpath",                           controller: ()=>import("views/shared/cms-content") }).
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
-
-  //whenAsync('/portals',                                 { ...mapView(vueViewWrapper),                        "label":"Online forums and portals",       "resolve":{ ...bchRouteUrls.portal, },  "param":"true","resolveController":true}).
-  whenAsync('/portals/:portalId/:subPath*?',            { ...mapView(vueViewWrapper),                        "label":routesLabels.RiskAssessmentPortal,                   "resolve":{ ...bchRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false }).
-
-  
   
   otherwise({
     templateUrl: commonRoutes.baseUrl + "views/shared/404.html",

@@ -1,4 +1,26 @@
-
 embed-footer {
- /* display: block; */
+    /* display: block; */
+}
+
+
+/* Portal Side-Menu */
+.side-menu,
+.side-menu .btn-toggle {
+    color: #fff;
+    background-color: #564c4d;
+}
+
+.side-menu .menu-header {
+    color: #fff;
+}
+
+.side-menu .menu-header,
+.side-menu .btn-toggle {
+    color: #fff !important;
+    font-weight: normal;
+}
+.side-menu .btn-toggle:hover,
+.side-menu .btn-toggle:focus {
+    color: #fff !important;
+    background-color: #6c757d;
 }

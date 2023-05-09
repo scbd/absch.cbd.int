@@ -97,12 +97,9 @@ export default {
   display: inline-flex;
   text-align: left;
   padding: .25rem .5rem;
-  font-weight: normal;
   font-size: 14pt;
   color: rgba(0, 0, 0, .65);
-  background-color: transparent;
   border: 0;
-  color: #fff;
 }
 
 .side-menu ul.level-1 .btn-toggle {
@@ -111,8 +108,6 @@ export default {
 
 .side-menu .btn-toggle:hover,
 .side-menu .btn-toggle:focus {
-  color: rgba(200, 200, 200, .85) !important;
-  background-color: #324252;
 }
 
 .side-menu .btn-toggle.active {
