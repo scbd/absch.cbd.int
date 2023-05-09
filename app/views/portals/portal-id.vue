@@ -65,12 +65,13 @@ export default {
   async created() {
 
     const { portalId } = this;
+    const { realm } = this.$realm;
 
     this.menusApi    = new MenusApi();
     this.articlesApi = new ArticlesApi();
     this.forumsApi   = new ForumsApi();
 
-    const portalMenu = await this.menusApi.getPortalByCode(portalId);
+    const portalMenu = await this.menusApi.getPortalByCode(realm, portalId);
 
     subRouter = buildRoutes(portalMenu);
 

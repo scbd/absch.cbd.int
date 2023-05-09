@@ -69,8 +69,10 @@ const commonRouteUrls = {
     kbTags                                      : { component: ()=>asyncLogError(import('~/views/kb/adminTags.vue')) },
     shareDocument                               : { component: ()=>asyncLogError(import('~/views/forms/view/shared-document')) },
     draftDocumentPdf                            : { component: ()=>asyncLogError(import('~/views/pdf-viewer/draft-document-pdf-link')) },
-    submissionsOnNotifications                   : { component: ()=>asyncLogError(import('~/views/reports/submissions')) }
-}
+    submissionsOnNotifications                  : { component: ()=>asyncLogError(import('~/views/reports/submissions')) },
+    portal                                      : { component: ()=>asyncLogError(import('~/views/portals/index.vue')) },
+    portalId                                    : { component: ()=>asyncLogError(import('~/views/portals/portal-id.vue')) },
+  }
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
@@ -162,7 +164,11 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/share/email/:type/:accessKey',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
 
   whenAsync('/submissions-to-notifications',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.submissionsOnNotifications, "resolve":{ ...commonRouteUrls.submissionsOnNotifications,         },"param":"true","resolveController":true,"reloadOnSearch":false}).
-  whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}})
+  whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}}).
+
+  //whenAsync('/portals',                                           { ...mapView(vueViewWrapper),                        "label":routesLabels.portals,       "resolve":{ ...commonRouteUrls.portal, },  "param":"true","resolveController":true}).
+  whenAsync('/portals/:portalId/:subPath*?',                      { ...mapView(vueViewWrapper),                        "label":routesLabels.portalId,                   "resolve":{ ...commonRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false })
+
 }]);
 
 export default {

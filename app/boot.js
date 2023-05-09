@@ -142,7 +142,6 @@ export default function bootApp(window, require, defineX) {
             'ky'                        :           'libs/globals/ky',
 
             'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
-            'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
             'shim'                      :           'libs/require-shim/src/shim',
             
             'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
@@ -158,7 +157,6 @@ export default function bootApp(window, require, defineX) {
             'datepicker-range'              : { 'deps': ['jquery', 'externalCss'] },  
             'ngStorage'                     : { 'deps': ['angular'] },
             'ngInfiniteScroll'              : { 'deps': ['angular'] },
-            'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
             'toastr'                        : { 'deps': ['angular', 'angular-animate'] },
             'ngDialog'                      : { 'deps': ['angular', 'externalCss'] },
             'angular-loggly-logger'         : { 'deps': ['angular'] },

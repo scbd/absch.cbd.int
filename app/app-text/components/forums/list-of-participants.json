@@ -1,0 +1,11 @@
+{
+  "parties"     : "Parties",
+  "name"        : "Name",
+  "government"  : "Government",
+  "non-parties" : "Non-Parties",
+  "observers"   : "Observers",
+  "organization": "Organization",
+  "organizations": "Organizations",
+  "listIsEmpty" : "The list is empty",
+  "loading"     : "Loading..."
+}

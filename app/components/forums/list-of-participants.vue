@@ -1,19 +1,19 @@
 <template >
   <div>
     <error-pane v-if="error" :error="error" />
-    <div v-else-if="loading"><loading caption="Loading..."/></div>
+    <div v-else-if="loading"><loading :caption="$t('loading')"/></div>
     <div v-else-if="participants">
 
-      <div v-if="participants.length==0">The list is empty</div>
+      <div v-if="participants.length==0">{{ $t("listIsEmpty") }}</div>
 
       <div v-if="parties.length">
-        <h3>Parties</h3>
+        <h3>{{ $t("parties") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Government</th>
+              <th scope="col">{{ $t("name") }}</th>
+              <th scope="col">{{ $t("government") }}</th>
             </tr>
           </thead>
           <tbody>
@@ -27,13 +27,13 @@
       </div>
 
       <div v-if="nonParties.length">
-        <h3>Non-Parties</h3>
+        <h3>{{ $t("non-parties") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Government</th>
+              <th scope="col">{{ $t("name") }}</th>
+              <th scope="col">{{ $t("government") }}</th>
             </tr>
           </thead>
           <tbody>
@@ -47,13 +47,13 @@
       </div>
       
       <div v-if="organizations.length">
-        <h3>Organizations</h3>
+        <h3>{{ $t("organizations") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Organization</th>
+              <th scope="col">{{ $t("name") }}</th>
+              <th scope="col">{{ $t("organization") }}</th>
             </tr>
           </thead>
           <tbody>
@@ -72,10 +72,12 @@
 <script>
 import ForumsApi from '~/api/forums';
 import ForumParticipants from '~/components/forums/list-of-participants.vue';
+import i18n from '../../app-text/components/forums/list-of-participants.json';
 import Loading  from '~/components/common/loading.vue'
 import pending  from '~/services/pending-call'
 import { lstring } from '../kb/filters';
 import ErrorPane from '~/components/common/error.vue';
+
 
 export default {
   name:'ForumParticipants',
@@ -100,6 +102,11 @@ export default {
   },
   created() {
     this.load();
+  },
+  i18n: {
+      messages: {
+          en: i18n
+      }
   }
 }
 
@@ -133,4 +140,3 @@ async function load() {
 
 
 </script>
-

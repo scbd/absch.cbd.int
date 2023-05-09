@@ -16,13 +16,16 @@ export default class PortalApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async getPortalByCode(slug) { 
+  async getPortalByCode(realm, slug) { 
 
-    const q = { slug };
+    const q = { 
+      slug, 
+      realms: realm 
+    };
 
     const [ portal ] = await this.queryPortals({ q })
 
-    if(!portal) throw { statusCode: 404, message: "not found" };
+    if(!portal) throw { code:'notFound', statusCode: 404, message: "not found" };
 
     return portal;
   }  
