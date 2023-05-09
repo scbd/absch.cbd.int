@@ -234,7 +234,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" required  caption="{{::('editCBIT.agencyOrganization'|$translate)}}">
 											<div class="help-info">{{::('editCBIT.inExecutingRoles'|$translate)}}</div>
-											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />Implementing agency(ies) or organization(s)</label></div>
+											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />{{::('editCBIT.implementingAgenciesOrOrg'|$translate)}}</label></div>
 
 											<div class="row" >
 												<div class="col-md-12">
@@ -308,7 +308,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="km-control-group tabular-term-check" name="cbdSubjects"
-												caption="Related CBD subject areas">
+												caption="{{::('editCBIT.relatedCbdSubject'|$translate)}}">
 											<div km-term-check name="cbdSubjects" ng-model="document.cbdSubjects"
 													terms="cbdSubjects()" binding-type="term[]" tabular-shape="true"></div>
 										</div>
@@ -338,7 +338,7 @@
 								<div class="row" ng-if="isBCH">
 									<div class="col-md-12">
 										<div class="km-control-group tabular-term-check fourth-column" required name="cpbThematicAreas"
-												caption="Biosafety thematic areas">
+												caption="{{::('editCBIT.biosafetyThematicAreas'|$translate)}}">
 												<div km-term-check required name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
 												terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true" tabular-shape="true"></div>
 										</div>
