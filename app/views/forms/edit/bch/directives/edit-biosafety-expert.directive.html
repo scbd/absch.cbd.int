@@ -454,7 +454,7 @@
                                                 <legend>{{::('editBiosafetyExpertT.professionalMemberships'|$translate)}} </legend>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="professionalMemberships" caption="Professional memberships">
+														<div class="km-control-group" name="professionalMemberships" caption="{{::('editBiosafetyExpertT.professionalMemberships'|$translate)}}">
 															<div class="help-block" ng-bind-html="::('editBiosafetyExpertT.listUpToThreeSocieties'|$translate)"></div>
 															<div  km-inputtext-list max-entries="3" type="lstring" name="professionalMemberships" ng-model="document.professionalMemberships" locales="document.header.languages"></div>
 														</div>
