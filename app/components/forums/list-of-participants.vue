@@ -71,7 +71,6 @@
 
 <script>
 import ForumsApi from '~/api/forums';
-import ForumParticipants from '~/components/forums/list-of-participants.vue';
 import i18n from '../../app-text/components/forums/list-of-participants.json';
 import Loading  from '~/components/common/loading.vue'
 import pending  from '~/services/pending-call'
@@ -81,7 +80,7 @@ import ErrorPane from '~/components/common/error.vue';
 
 export default {
   name:'ForumParticipants',
-  components:{ ForumParticipants, Loading, ErrorPane  },
+  components:{ Loading, ErrorPane  },
   props: { 
     forumId: Number,
   },

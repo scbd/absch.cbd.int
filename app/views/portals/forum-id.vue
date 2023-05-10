@@ -30,6 +30,8 @@
               :href="`https://bch.cbd.int/cms/ui/forums/management/forummanagement.aspx?forumid=${encodeURIComponent(forumId)}&returnurl=${encodeURIComponent(browserUrl())}`">
               <i class="fa fa-cog"></i> Forum properties
             </a>
+
+            <em v-if="forum.isClosed">This forum is closed for comments.</em>
           </div>
           <div v-if="isOpen" class="col-auto align-self-center">
 
@@ -84,9 +86,10 @@
                 <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">No replies</a>
                 <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">One reply</a>
                 <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ thread.replies }} replies</a>
-                <span v-if="thread.isClosed">
+                <span v-if="thread.isClosed || forum.isClosed">
                   |
-                  <em>This thread is closed for comments</em>
+                  <em v-if="forum.isClosed">This forum is closed for comments.</em>
+                  <em v-else-if="thread.isClosed">This thread is closed for comments</em>
                 </span>
                 
               </div>
