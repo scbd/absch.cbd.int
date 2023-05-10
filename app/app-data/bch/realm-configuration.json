@@ -246,6 +246,30 @@
                 "ar": "المواقع الإلكترونية أو قواعد البيانات الوطنية المتعلقة بالسلامة الأحيائية"
             }
         },
+        "cpbNationalReport5" : {
+            "type" : "national",
+             "title" : {
+             "en" : "Fifth National Report on the Implementation of the Cartagena Protocol on Biosafety",
+             "ar" : "التقرير الوطني الرابع حول تنفيذ بروتوكول قرطاجنة للسلامة الأحيائية",
+             "ru" : "Четвёртый национальный доклад об осуществлении Картахенского протокола по биобезопасности",
+             "fr" : "Quatrième rapport national sur l'application du Protocole de Cartagena sur la biosécurité",
+             "es" : "Cuarto informe nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+             "zh" : "《卡塔赫纳生物安全议定书》执行情况第四次国家报告"
+             },
+             "description" : {
+             "en" : "Fifth National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 1 October 2019)"
+             },
+             "shortCode" : "NR5",
+             "titlePlural" : {
+             "en" : "Fifth National Reports on the Implementation of the Cartagena Protocol on Biosafety"
+             },
+             "nationalAuthorizedUser" : [ 
+             "BCH-DEV-AuthorizedUserForNationalReports", 
+             "BchAuthorizedUser-Dev", 
+             "AuthorizedUser", 
+             "NFP-CPB"
+             ]
+        },
         "cpbNationalReport4": {
             "type": "national",
             "title": {
