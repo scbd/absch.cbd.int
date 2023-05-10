@@ -263,10 +263,10 @@
              "titlePlural" : {
              "en" : "Fifth National Reports on the Implementation of the Cartagena Protocol on Biosafety"
              },
-             "nationalAuthorizedUser" : [ 
-             "BCH-DEV-AuthorizedUserForNationalReports", 
-             "BchAuthorizedUser-Dev", 
-             "AuthorizedUser", 
+             "nationalAuthorizedUser" : [
+             "BCH-DEV-AuthorizedUserForNationalReports",
+             "BchAuthorizedUser-Dev",
+             "AuthorizedUser",
              "NFP-CPB"
              ]
         },
