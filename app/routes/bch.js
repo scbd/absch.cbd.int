@@ -92,6 +92,7 @@ app.config(["$routeProvider", function ($routeProvider) {
   // whenAsync("/protocol/:subpath*?",                               { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/protocol/:subpath",                           controller: ()=>import("views/shared/cms-content") }).
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
+  whenAsync('/forums',                                            { resolve: { redirectTo: () => window.location.replace("https://bch.cbd.int/onlineconferences") } }).
   
   otherwise({
     templateUrl: commonRoutes.baseUrl + "views/shared/404.html",
