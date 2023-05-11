@@ -11,10 +11,12 @@ module.exports = async function(req, res){
         'bch'   : 'app/app-data/bch/report-analyzer'
     }
     try{
-    const reportData = await import(`../${reportPaths[clearingHouse]}/${report}.js`)
-    res.status(200).json(reportData);
+        
+        const reportData = await import(`../${reportPaths[clearingHouse]}/${report}.js`)
+        res.status(200).json(reportData);
     }
     catch(e){
         console.log(e)
+        res.status(500).send('Internal server error')
     }
 }
