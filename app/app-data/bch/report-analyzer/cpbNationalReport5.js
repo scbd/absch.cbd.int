@@ -68,6 +68,14 @@ export const cpbNationalReport5 = [
                      "mandatory":true
                   },
                   {
+                     "key":"Q08_a",
+                     "section":"Article2",
+                     "number":"",
+                     "type":"lstring",
+                     "title": nr5T.article2_questions8_a_title,
+                     "multiple":false
+                  },
+                  {
                      "key":"Q009",
                      "section":"Article2",
                      "number":"9",
