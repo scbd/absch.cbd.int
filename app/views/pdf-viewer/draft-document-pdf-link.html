@@ -1,5 +1,15 @@
-﻿<div>
-    <div class="alert alert-info">
-        <i class="fa fa-spin fa-spinner" ></i> Generating PDF link...
+﻿<div class="container">
+    <div class="row">
+        <div class="col-12 m-5">
+            <div class="alert alert-info" ng-if="!error">
+                <i class="fa fa-spin fa-spinner" ></i> 
+                Generating PDF link...<br/>
+                <div ng-bind-html="messages"></div>
+            </div>
+            <div class="alert alert-danger" ng-if="error">
+                <strong>Error!</Strong>
+                <div>{{error}}</div>
+            </div>
+        </div>
     </div>
 </div>
