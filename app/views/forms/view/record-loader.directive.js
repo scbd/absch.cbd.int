@@ -135,6 +135,9 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							else if (docNum.length == 4)
 								documentID = docNum[3];
 
+							if(!documentSchema){
+								documentSchema = $filter('mapSchema')(docNum[1])
+							}
 						}
 						documentID = commonjs.integerToHex(documentID, documentSchema);
 
@@ -152,9 +155,9 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
 						const schemaName = $filter("mapSchema")(documentSchema);
 						const schema	 = realm.schemas[schemaName];
-
-						if (documentSchema &&
-							_.includes(["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
+						const scbdSchemas= ["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"];
+						
+						if (documentSchema && scbdSchemas.includes(documentSchema.toUpperCase())) {
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
 								.then(function (data) {
