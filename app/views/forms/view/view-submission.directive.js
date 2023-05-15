@@ -4,8 +4,9 @@ import template from "text!./view-submission.directive.html";
 import '~/views/directives/record-options';
 import '~/services/main';
 import '~/views/forms/directives/view-terms-hierarchy';
+import viewSubmissionT from '~/app-text/views/forms/view/view-submission.json';
 
-    app.directive("viewSubmission", ['searchService', 'solr', function (searchService, solr) {
+    app.directive("viewSubmission", ['searchService', 'solr', 'translationService', function (searchService, solr, translationService) {
         return {
             restrict   : "EA",
             template: template ,
@@ -17,6 +18,8 @@ import '~/views/forms/directives/view-terms-hierarchy';
                 hide	: "@"
             },
             link:function($scope){
+				translationService.set('viewSubmissionT', viewSubmissionT);
+
                 $scope.onThematicAreasTerms = function(terms){
 									if(($scope.document||{}).cpbThematicAreas){
 										_.forEach(terms, function(item){
