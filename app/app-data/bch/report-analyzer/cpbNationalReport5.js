@@ -1,8 +1,8 @@
-import nr5T from '~/app-text/views/forms/edit/directives/edit-national-report-5.json';
+import nr5T from '~/app-text/views/forms/edit/bch/edit-national-report-5.json';
 
 export const cpbNationalReport5 = [
    {
-               "key":"General",
+               "key":"Article2",
                "title": nr5T.article2_title,
                "questions":[
                   {
@@ -10,28 +10,28 @@ export const cpbNationalReport5 = [
                      "section":"Article2",
                      "number":"7",
                      "type":"option",
-                     "title": nr5T.article2_questions7_title,
+                     "title": nr5T.article2_question7_title,
                      "multiple":false,
                      "options":[
                         {
                            "value":"implementation.fullInPlace",
-                           "title": nr5T.article2_questions7_options0_title
+                           "title": nr5T.article2_question7_options0_title
                         },
                         {
                            "value":"implementation.partiallyInPlace",
-                           "title": nr5T.article2_questions7_options1_title
+                           "title": nr5T.article2_question7_options1_title
                         },
                         {
                            "value":"implementation.temporaryMeasures",
-                           "title": nr5T.article2_questions7_options2_title
+                           "title": nr5T.article2_question7_options2_title
                         },
                         {
                            "value":"implementation.draftMeasures",
-                           "title": nr5T.article2_questions7_options3_title
+                           "title": nr5T.article2_question7_options3_title
                         },
                         {
                            "value":"implementation.none",
-                           "title": nr5T.article2_questions7_options4_title
+                           "title": nr5T.article2_question7_options4_title
                         }
                      ],
                      "mandatory":true
@@ -41,29 +41,30 @@ export const cpbNationalReport5 = [
                      "section":"Article2",
                      "number":"8",
                      "type":"option",
-                     "title": nr5T.article2_questions8_title,
+                     "title": nr5T.article2_question8_title,
                      "multiple":true,
                      "options":[
                         {
                            "value":"instrument.nationalBiosafetyLaws",
-                           "title": nr5T.article2_questions8_options0_title
+                           "title": nr5T.article2_question8_options0_title
                         },
                         {
                            "value":"instrument.nationalBiosafetyRegulations",
-                           "title": nr5T.article2_questions8_options1_title
+                           "title": nr5T.article2_question8_options1_title
                         },
                         {
                            "value":"instrument.biosafetyGuidelines",
-                           "title": nr5T.article2_questions8_options2_title
+                           "title": nr5T.article2_question8_options2_title
                         },
                         {
                            "value":"instrument.indirectLaws",
-                           "title": nr5T.article2_questions8_options3_title
+                           "title": nr5T.article2_question8_options3_title
                         },
                         {
                            "value":"instrument.none",
-                           "title": nr5T.article2_questions8_options4_title
-                        }
+                           "title": nr5T.article2_question8_options4_title
+                        },
+                        
                      ],
                      "mandatory":true
                   },
@@ -80,7 +81,7 @@ export const cpbNationalReport5 = [
                      "section":"Article2",
                      "number":"9",
                      "type":"option",
-                     "title": nr5T.article2_questions9_title,
+                     "title": nr5T.article2_question9_title,
                      "multiple":false,
                      "options":[
                         {
@@ -105,7 +106,7 @@ export const cpbNationalReport5 = [
                      "section":"Article2",
                      "number":"10",
                      "type":"option",
-                     "title": nr5T.article2_questions10_title,
+                     "title": nr5T.article2_question10_title,
                      "multiple":false,
                      "options":[
                         {
@@ -131,7 +132,7 @@ export const cpbNationalReport5 = [
                      "section": "Article2",
                      "number": "",
                      "type": "option",
-                     "title": nr5T.article2_questions10_options0_title,
+                     "title": nr5T.article2_question10_question0_title,
                      "multiple": false,
                      "options": [
                         {
@@ -150,7 +151,7 @@ export const cpbNationalReport5 = [
                      "section": "Article2",
                      "number": "11",
                      "type": "option",
-                     "title": nr5T.article2_questions11_title,
+                     "title": nr5T.article2_question11_title,
                      "multiple": false,
                      "options": [
                         {
@@ -170,7 +171,7 @@ export const cpbNationalReport5 = [
                            "values":[
                               "true"
                            ],
-                           "trigger":"enable"
+                           "trigger":"visible"
                         }
                      ]
                   },
@@ -180,7 +181,7 @@ export const cpbNationalReport5 = [
                      "section":"Article2",
                      "number":"12",
                      "type":"option",
-                     "title": nr5T.article2_questions12_title,
+                     "title": nr5T.article2_question12_title,
                      "multiple":false,
                      "options":[
                         {
@@ -209,7 +210,7 @@ export const cpbNationalReport5 = [
                      "section":"Article2",
                      "number":"",
                      "type":"option",
-                     "title": nr5T.article2_questions12_question0_title,
+                     "title": nr5T.isThisNumberAdequate,
                      "multiple":false,
                      "options":[
                         {
@@ -228,7 +229,7 @@ export const cpbNationalReport5 = [
                      "section":"Article2",
                      "number":"13",
                      "type":"lstring",
-                     "title": nr5T.article2_questions13_title,
+                     "title": nr5T.article2_question13_title,
                      "multiple":false
                   }
                   
