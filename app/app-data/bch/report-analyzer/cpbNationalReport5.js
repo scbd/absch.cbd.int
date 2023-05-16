@@ -1135,7 +1135,7 @@ export const cpbNationalReport5 = [
          "title": nr5T.article13_title,
          "questions":[
             {
-               "key":"Q0045",
+               "key":"Q045",
                "section":"Article13",
                "number":"45",
                "type":"option",
@@ -1159,7 +1159,7 @@ export const cpbNationalReport5 = [
                "mandatory":true
             },
             {
-               "key":"Q0046",
+               "key":"Q046",
                "section":"Article13",
                "number":"46",
                "type":"option",
