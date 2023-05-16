@@ -469,7 +469,6 @@ export const cpbNationalReport5 = [
                      {
                         "value":"true.some",
                         "title": nr5T.inSomeCasesOnly,
-                        "type":"lstring"
                      },
                      {
                         "value":"false",
@@ -492,7 +491,6 @@ export const cpbNationalReport5 = [
                      {
                         "value":"true.some",
                         "title": nr5T.inSomeCasesOnly,
-                        "type":"lstring"
                      },
                      {
                         "value":"false",
@@ -571,7 +569,16 @@ export const cpbNationalReport5 = [
                         "title": nr5T.no
                      }
                   ],
+                  mandatory:true,
                   "validations":[
+                     {
+                        "question":"Q026_adq",
+                        "type":"@hasValues",
+                        "values":[
+                           "true"
+                        ],
+                        "trigger":"visible"
+                     },
                      {
                         "question":"Q027",
                         "type":"@hasValues",
@@ -590,7 +597,14 @@ export const cpbNationalReport5 = [
                      }
                   ]
                },
-
+               {
+                  "key":"Q026_adq",
+                  "section":"Article2",
+                  "number":"",
+                  "type":"lstring",
+                  "title": nr5T.articles7_10_question26_question0_title,
+                  "multiple":false
+               },
                {
                   "key":"Q027",
                   "section":"Articles7-10",
@@ -656,7 +670,11 @@ export const cpbNationalReport5 = [
                   "options":[
                      {
                         "value":"true",
-                        "title": nr5T.yes
+                        "title": nr5T.yesAlways
+                     },
+                     {
+                        "value":"true.some",
+                        "title": nr5T.inSomeCasesOnly,
                      },
                      {
                         "value":"false",
@@ -675,6 +693,10 @@ export const cpbNationalReport5 = [
                      {
                         "value":"true",
                         "title": nr5T.yes
+                     },
+                     {
+                        "value":"true.some",
+                        "title": nr5T.inSomeCasesOnly,
                      },
                      {
                         "value":"false",
@@ -723,8 +745,7 @@ export const cpbNationalReport5 = [
                      },
                      {
                         "value":"true.some",
-                        "title": nr5T.inSomeCasesOnly,
-                        "type":"lstring"
+                        "title": nr5T.inSomeCasesOnly
                      },
                      {
                         "value":"false",
