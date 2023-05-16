@@ -1129,5 +1129,176 @@ export const cpbNationalReport5 = [
                "multiple":false
             }
          ]
+      },
+      {
+         "key":"Article13",
+         "title": nr5T.article13_title,
+         "questions":[
+            {
+               "key":"Q0045",
+               "section":"Article13",
+               "number":"45",
+               "type":"option",
+               "title": nr5T.article13_question45_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q0046",
+               "section":"Article13",
+               "number":"46",
+               "type":"option",
+               "title": nr5T.article13_question46_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q047",
+                     "type":"@hasValues",
+                     "values":[
+                        "true"
+                     ],
+                     "trigger":"visible"
+                  },
+                  {
+                     "question":"Q048",
+                     "type":"@hasValues",
+                     "values":[
+                        "true"
+                     ],
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q047",
+               "section":"Article13",
+               "number":"47",
+               "type":"option",
+               "title": nr5T.article13_question47_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"1+",
+                     "title": nr5T.oneToFive
+                  },
+                  {
+                     "value":"5+",
+                     "title": nr5T.fiveOrMore
+                  }
+               ]
+            },
+            {
+               "key":"Q048",
+               "section":"Article13",
+               "number":"48",
+               "type":"option",
+               "title": nr5T.article13_question48_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yesAlways
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.inSomeCasesOnly,
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q049",
+               "section":"Article13",
+               "number":"49",
+               "type":"lstring",
+               "title": nr5T.article13_question49_title,
+               "multiple":false
+            }
+         ]
+      },
+      {
+         "key":"Article14",
+         "title": nr5T.article14_title,
+         "questions":[
+            {
+               "key":"Q050",
+               "section":"Article14",
+               "number":"50",
+               "type":"option",
+               "title": nr5T.article14_question50_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"1+",
+                     "title": nr5T.none
+                  },
+                  {
+                     "value":"1+",
+                     "title": nr5T.oneToFour
+                  },
+                  {
+                     "value":"5+",
+                     "title": nr5T.fiveToNine
+                  },
+                  {
+                     "value":"10+",
+                     "title": nr5T.tenOrMore
+                  }
+               ],
+               mandatory:true,
+               "validations":[
+                  {
+                     "question":"Q051",
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ],
+            },
+            {
+               "key":"Q051",
+               "section":"Article14",
+               "number":"51",
+               "type":"lstring",
+               "title": nr5T.article14_question51_title,
+               "multiple":false
+            },
+            {
+               "key":"Q052",
+               "section":"Article14",
+               "number":"52",
+               "type":"lstring",
+               "title": nr5T.article14_question52_title,
+               "multiple":false
+            }
+         ]
       }
 ]
