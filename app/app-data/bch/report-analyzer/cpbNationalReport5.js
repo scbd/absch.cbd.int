@@ -232,7 +232,7 @@ export const cpbNationalReport5 = [
             "title": nr5T.article5_title,
             "questions":[
                {
-                  "key":"Q0014",
+                  "key":"Q014",
                   "section":"Article5",
                   "number":"14",
                   "type":"option",
@@ -271,7 +271,7 @@ export const cpbNationalReport5 = [
             "title": nr5T.article6_title,
             "questions":[
                {
-                  "key":"Q0016",
+                  "key":"Q016",
                   "section":"Article6",
                   "number":"16",
                   "type":"option",
@@ -295,7 +295,7 @@ export const cpbNationalReport5 = [
                   "mandatory":true
                },
                {
-                  "key":"Q0017",
+                  "key":"Q017",
                   "section":"Article6",
                   "number":"17",
                   "type":"option",
@@ -319,7 +319,7 @@ export const cpbNationalReport5 = [
                   "mandatory":true
                },
                {
-                  "key":"Q0018",
+                  "key":"Q018",
                   "section":"Article6",
                   "number":"18",
                   "type":"option",
@@ -768,7 +768,7 @@ export const cpbNationalReport5 = [
             "title": nr5T.article11_title,
             "questions":[
                {
-                  "key":"Q0031",
+                  "key":"Q031",
                   "section":"Article11",
                   "number":"31",
                   "type":"option",
@@ -792,7 +792,7 @@ export const cpbNationalReport5 = [
                   "mandatory":true
                },
                {
-                  "key":"Q0032",
+                  "key":"Q032",
                   "section":"Article11",
                   "number":"32",
                   "type":"option",
@@ -843,7 +843,7 @@ export const cpbNationalReport5 = [
                   "mandatory":true
                },
                {
-                  "key":"Q0034",
+                  "key":"Q034",
                   "section":"Article11",
                   "number":"34",
                   "type":"option",
