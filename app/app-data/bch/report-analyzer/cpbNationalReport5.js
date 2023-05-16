@@ -908,7 +908,7 @@ export const cpbNationalReport5 = [
          "title": nr5T.article12_title,
          "questions":[
             {
-               "key":"Q0037",
+               "key":"Q037",
                "section":"Article12",
                "number":"37",
                "type":"option",
@@ -932,7 +932,7 @@ export const cpbNationalReport5 = [
                "mandatory":true
             },
             {
-               "key":"Q0038",
+               "key":"Q038",
                "section":"Article12",
                "number":"38",
                "type":"option",
@@ -999,7 +999,7 @@ export const cpbNationalReport5 = [
                ]
             },
             {
-               "key":"Q0040",
+               "key":"Q040",
                "section":"Article12",
                "number":"40",
                "type":"option",
@@ -1049,7 +1049,7 @@ export const cpbNationalReport5 = [
                ]
             },
             {
-               "key":"Q0042",
+               "key":"Q042",
                "section":"Article12",
                "number":"42",
                "type":"option",
