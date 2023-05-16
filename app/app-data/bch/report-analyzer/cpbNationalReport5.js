@@ -1300,5 +1300,849 @@ export const cpbNationalReport5 = [
                "multiple":false
             }
          ]
+      },
+      {
+         "key":"Articles15-16",
+         "title": nr5T.articles15_16_title,
+         "questions":[
+            {
+               "key":"Q053",
+               "section":"Articles15-16",
+               "number":"53",
+               "type":"option",
+               "title": nr5T.articles15_16_question53_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q053_a",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q053_a",
+               "section":"Articles15-16",
+               "number":"",
+               "type":"option",
+               "title": nr5T.articles15_16_question53_a_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"014054D1-2B72-7ABD-E615-D0A374590A95",
+                     "title": nr5T.articles15_16_question53_a_option0_title
+                  },
+                  {
+                     "value":"94C9FDC9-49C0-7F7C-9A36-90571DBA6442",
+                     "title": nr5T.articles15_16_question53_a_option1_title
+                  },
+                  {
+                     "value":"29B97F6B-066E-BE64-0FA3-66060DEE737D",
+                     "title": nr5T.articles15_16_question53_a_option2_title
+                  },
+                  {
+                     "value":"2314EDF6-3B1D-D44D-253D-18B14EFC5C67",
+                     "title": nr5T.articles15_16_question53_a_option3_title
+                  },
+                  {
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                     "title": nr5T.other,
+                     "type":"lstring"
+                  }
+               ]
+            },
+            {
+               "key":"Q054",
+               "section":"Articles15-16",
+               "number":"54",
+               "type":"option",
+               "title": nr5T.articles15_16_question54_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"legend55-68",
+               "section":"Articles15-16",
+               "number":"",
+               "type":"legend",
+               "title": nr5T.articles15_16_legend_55_68
+            },
+            {
+               "key":"Q055",
+               "section":"Articles15-16",
+               "number":"55",
+               "type":"option",
+               "title": nr5T.articles15_16_question55_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q056",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  },
+                  {
+                     "question":"Q057",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  },
+                  {
+                     "question":"Q058",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q056",
+               "section":"Articles15-16",
+               "number":"56",
+               "type":"option",
+               "title": nr5T.articles15_16_question56_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"1+",
+                     "title": nr5T.oneToNine
+                  },
+                  {
+                     "value":"10+",
+                     "title": nr5T.tenTenFortyNine
+                  },
+                  {
+                     "value":"50+",
+                     "title": nr5T.fiftyToNinetyNine
+                  },
+                  {
+                     "value":"100+",
+                     "title": nr5T.hundredOrMore
+                  }
+               ]
+            },
+            {
+               "key":"Q057",
+               "section":"Articles15-16",
+               "number":"57",
+               "type":"term",
+               "title": nr5T.articles15_16_question57_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"42A3DCAE-5FD8-4218-941D-DF11D4AE65FA",
+                     "title": nr5T.articles15_16_question57_option0_title
+                  },
+                  {
+                     "value":"D6B59E8A-D82C-4516-917A-A745ACDA5931",
+                     "title": nr5T.articles15_16_question57_option1_title
+                  },
+                  {
+                     "value":"015737FC-ABC2-460C-A099-06A1B01E649A",
+                     "title": nr5T.articles15_16_question57_option2_title
+                  },
+                  {
+                     "value":"91BEAF12-ABE1-4294-AD3B-507935894C78",
+                     "title": nr5T.articles15_16_question57_option3_title
+                  },
+                  {
+                     "value":"1D96153B-1625-44E4-AD5E-D26429044B29",
+                     "title": nr5T.articles15_16_question57_option4_title
+                  },
+                  {
+                     "value":"6430E4F4-9E5F-48BE-B4ED-9E1A4FED981E",
+                     "title": nr5T.articles15_16_question57_option5_title
+                  },
+                  {
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                     "title": nr5T.other,
+                     "type":"lstring"
+                  }
+               ]
+            },
+            {
+               "key":"Q058",
+               "section":"Articles15-16",
+               "number":"58",
+               "type":"option",
+               "title": nr5T.articles15_16_question58_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yesAlways
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.inSomeCasesOnly,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q059",
+               "section":"Articles15-16",
+               "number":"59",
+               "type":"sub-section",
+               "title": nr5T.articles15_16_question59_title,
+               "multiple":false,
+               "mandatory":true,
+               "questions":[
+                  {
+                     "key":"Q059_a",
+                     "section":"Articles15-16",
+                     "number":"a",
+                     "type":"option",
+                     "title": nr5T.articles15_16_question59_a_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yesInAllCases
+                        },
+                        {
+                           "value":"true.some",
+                           "title": nr5T.inSomeCases
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q059_b",
+                     "section":"Articles15-16",
+                     "number":"b",
+                     "type":"option",
+                     "title": nr5T.articles15_16_question59_b_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yesInAllCases
+                        },
+                        {
+                           "value":"true.some",
+                           "title": nr5T.inSomeCases
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "key":"Q060",
+               "section":"Articles15-16",
+               "number":"60",
+               "type":"option",
+               "title": nr5T.articles15_16_question60_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q061",
+               "section":"Articles15-16",
+               "number":"61",
+               "type":"option",
+               "title": nr5T.articles15_16_question61_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q062",
+               "section":"Articles15-16",
+               "number":"62",
+               "type":"option",
+               "title": nr5T.articles15_16_question62_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q063",
+               "section":"Articles15-16",
+               "number":"63",
+               "type":"option",
+               "title": nr5T.articles15_16_question63_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q064",
+               "section":"Articles15-16",
+               "number":"64",
+               "type":"option",
+               "title": nr5T.articles15_16_question64_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q065",
+               "section":"Articles15-16",
+               "number":"65",
+               "type":"option",
+               "title": nr5T.articles15_16_question65_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q066",
+               "section":"Articles15-16",
+               "number":"66",
+               "type":"sub-section",
+               "title": nr5T.articles15_16_question66_title,
+               "multiple":false,
+               "mandatory":true,
+               "questions":[
+                  {
+                     "key":"Q066_a",
+                     "section":"Articles15-16",
+                     "number":"a",
+                     "type":"option",
+                     "title": nr5T.riskAssessment,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q066_b",
+                     "section":"Articles15-16",
+                     "number":"b",
+                     "type":"option",
+                     "title": nr5T.riskManagement,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "key":"Q067",
+               "section":"Articles15-16",
+               "number":"67",
+               "type":"option",
+               "title": nr5T.articles15_16_question67_title,
+               "multiple":false,
+               "mandatory":true,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q068",
+               "section":"Articles15-16",
+               "number":"68",
+               "type":"option",
+               "title": nr5T.articles15_16_question68_title,
+               "multiple":false,
+               "mandatory":true,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"legend69-72",
+               "section":"Articles15-16",
+               "number":"",
+               "type":"legend",
+               "title": nr5T.articles15_16_legend_69_72
+            },
+            {
+               "key":"Q069",
+               "section":"Articles15-16",
+               "number":"69",
+               "type":"sub-section",
+               "title": nr5T.articles15_16_question69_title,
+               "multiple":false,
+               "mandatory":true,
+               "questions":[
+                  {
+                     "key":"Q069_a",
+                     "section":"Articles15-16",
+                     "number":"a",
+                     "type":"option",
+                     "title": nr5T.articles15_16_question69_a_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q069_b",
+                     "section":"Articles15-16",
+                     "number":"b",
+                     "type":"option",
+                     "title": nr5T.articles15_16_question69_b_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q069_c",
+                     "section":"Articles15-16",
+                     "number":"c",
+                     "type":"option",
+                     "title": nr5T.articles15_16_question69_c_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q069_d",
+                     "section":"Articles15-16",
+                     "number":"d",
+                     "type":"option",
+                     "title": nr5T.articles15_16_question69_d_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "key":"Q070",
+               "section":"Articles15-16",
+               "number":"70",
+               "type":"sub-section",
+               "title": nr5T.articles15_16_question70_title,
+               "multiple":false,
+               "mandatory":true,
+               "questions":[
+                  {
+                     "key":"Q070_a",
+                     "section":"Articles15-16",
+                     "number":"a",
+                     "type":"option",
+                     "title": nr5T.riskAssessment,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"0",
+                           "title": nr5T.none
+                        },
+                        {
+                           "value":"1+",
+                           "title": nr5T.oneToNine
+                        },
+                        {
+                           "value":"10+",
+                           "title": nr5T.tenTenFortyNine
+                        },
+                        {
+                           "value":"50+",
+                           "title": nr5T.fiftyToNinetyNine
+                        },
+                        {
+                           "value":"100+",
+                           "title": nr5T.hundredOrMore
+                        }
+                     ],
+                     "validations":[
+                        {
+                           "baseQuestion":"Q070",
+                           "question":"Q070_a_adq",
+                           "values":[
+                              "0"
+                           ],
+                           "type":"@hasValuesExcept",
+                           "trigger":"visible"
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q070_a_adq",
+                     "section":"Articles15-16",
+                     "number":"",
+                     "type":"option",
+                     "title": nr5T.isThisNumberAdequate,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q070_b",
+                     "section":"Articles15-16",
+                     "number":"b",
+                     "type":"option",
+                     "title": nr5T.riskManagement,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"0",
+                           "title": nr5T.none
+                        },
+                        {
+                           "value":"1+",
+                           "title": nr5T.oneToNine
+                        },
+                        {
+                           "value":"10+",
+                           "title": nr5T.tenTenFortyNine
+                        },
+                        {
+                           "value":"50+",
+                           "title": nr5T.fiftyToNinetyNine
+                        },
+                        {
+                           "value":"100+",
+                           "title": nr5T.hundredOrMore
+                        }
+                     ],
+                     "validations":[
+                        {
+                           "baseQuestion":"Q070",
+                           "question":"Q070_b_adq",
+                           "values":[
+                              "0"
+                           ],
+                           "type":"@hasValuesExcept",
+                           "trigger":"visible"
+                        }
+                     ],
+                     "mandatory":true
+                  },
+                  {
+                     "key":"Q070_b_adq",
+                     "section":"Articles15-16",
+                     "number":"",
+                     "type":"option",
+                     "title": nr5T.isThisNumberAdequate,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q070_c",
+                     "section":"Articles15-16",
+                     "number":"c",
+                     "type":"option",
+                     "title": nr5T.monitoring,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"0",
+                           "title": nr5T.none
+                        },
+                        {
+                           "value":"1+",
+                           "title": nr5T.oneToNine
+                        },
+                        {
+                           "value":"10+",
+                           "title": nr5T.tenTenFortyNine
+                        },
+                        {
+                           "value":"50+",
+                           "title": nr5T.fiftyToNinetyNine
+                        },
+                        {
+                           "value":"100+",
+                           "title": nr5T.hundredOrMore
+                        }
+                     ],
+                     "validations":[
+                        {
+                           "baseQuestion":"Q070",
+                           "question":"Q070_c_adq",
+                           "values":[
+                              "0"
+                           ],
+                           "type":"@hasValuesExcept",
+                           "trigger":"visible"
+                        }
+                     ],
+                     "mandatory":true
+                  },
+                  {
+                     "key":"Q070_c_adq",
+                     "section":"Articles15-16",
+                     "number":"",
+                     "type":"option",
+                     "title": nr5T.isThisNumberAdequate,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  }
+               ]
+            },
+
+            {
+               "key":"Q071",
+               "section":"Articles15-16",
+               "number":"71",
+               "type":"option",
+               "title": nr5T.articles15_16_question71_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q071_a",
+                     "type":"@hasValues",
+                     "values":[
+                        "true"
+                     ],
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q071_a",
+               "section":"Articles15-16",
+               "number":"",
+               "type":"option",
+               "title": nr5T.articles15_16_question71_question0_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"505AA0C7-CBB7-4961-9956-83588F6C1C20",
+                     "title": nr5T.articles15_16_question71_question0_option0_title
+                  },
+                  {
+                     "value":"D331F2BB-0664-4878-ACF6-D716B1CD1EDC",
+                     "title": nr5T.articles15_16_question71_question0_option1_title
+                  },
+                  {
+                     "value":"A971DAA9-2DB7-4BBD-8867-F310EC820914",
+                     "title": nr5T.articles15_16_question71_question0_option2_title
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q072",
+               "section":"Articles15-16",
+               "number":"72",
+               "type":"lstring",
+               "title": nr5T.articles15_16_question72_title,
+               "multiple":false
+            }
+
+         ]
       }
 ]
