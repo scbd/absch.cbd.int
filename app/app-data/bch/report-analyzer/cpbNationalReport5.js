@@ -2439,8 +2439,7 @@ export const cpbNationalReport5 = [
                      "title": nr5T.other,
                      "type":"lstring"
                   }
-               ],
-               "mandatory":true
+               ]
             },
             {
                "key":"Q085",
@@ -2604,6 +2603,7 @@ export const cpbNationalReport5 = [
                "type":"sub-section",
                "title": nr5T.article18_question90_title,
                "multiple":false,
+               "mandatory":true,
                "questions":[
                   {
                      "key":"Q090_a",
@@ -2621,8 +2621,7 @@ export const cpbNationalReport5 = [
                            "value":"false",
                            "title": nr5T.no
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   },
                   {
                      "key":"Q090_b",
@@ -2640,8 +2639,7 @@ export const cpbNationalReport5 = [
                            "value":"false",
                            "title": nr5T.no
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   }
                ]
             },
@@ -2652,6 +2650,7 @@ export const cpbNationalReport5 = [
                "type":"sub-section",
                "title": nr5T.article18_question91_title,
                "multiple":false,
+               "mandatory":true,
                "questions":[
                   {
                      "key":"Q091_a",
@@ -2669,8 +2668,7 @@ export const cpbNationalReport5 = [
                            "value":"false",
                            "title": nr5T.no
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   },
                   {
                      "key":"Q091_b",
@@ -2688,8 +2686,7 @@ export const cpbNationalReport5 = [
                            "value":"false",
                            "title": nr5T.no
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   }
                ]
             },
@@ -2700,6 +2697,7 @@ export const cpbNationalReport5 = [
                "type":"sub-section",
                "title": nr5T.article18_question92_title,
                "multiple":false,
+               "mandatory":true,
                "questions":[
                   {
                      "key":"Q092_a",
@@ -2717,8 +2715,7 @@ export const cpbNationalReport5 = [
                            "value":"false",
                            "title": nr5T.no
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   },
                   {
                      "key":"Q092_b",
@@ -2736,8 +2733,7 @@ export const cpbNationalReport5 = [
                            "value":"false",
                            "title": nr5T.no
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   }
                ]
             },
@@ -2807,6 +2803,7 @@ export const cpbNationalReport5 = [
                "type":"sub-section",
                "title": nr5T.article18_question94_title,
                "multiple":false,
+               "mandatory":true,
                "questions":[
                   {
                      "key":"Q094_a",
@@ -2824,8 +2821,7 @@ export const cpbNationalReport5 = [
                            "value":"false",
                            "title": nr5T.no
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   },
                   {
                      "key":"Q094_b",
@@ -2843,8 +2839,7 @@ export const cpbNationalReport5 = [
                            "value":"false",
                            "title": nr5T.no
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   }
                ]
             },
@@ -2907,8 +2902,7 @@ export const cpbNationalReport5 = [
                      "value":"50+",
                      "title": nr5T.fiftyOrMore
                   }
-               ],
-               "mandatory":true
+               ]
             },
             {
                "key":"Q097",
