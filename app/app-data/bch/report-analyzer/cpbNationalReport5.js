@@ -1438,6 +1438,14 @@ export const cpbNationalReport5 = [
                      ],
                      "type":"@hasValues",
                      "trigger":"visible"
+                  },
+                  {
+                     "question":"Q059",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
                   }
                ]
             },
@@ -1769,7 +1777,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.articles15_16_question67_title,
                "multiple":false,
-               "mandatory":true,
                "options":[
                   {
                      "value":"true",
