@@ -2320,7 +2320,14 @@ export const cpbNationalReport5 = [
                      "title": nr5T.no
                   }
                ],
-               "mandatory":true
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q082",
+                     "type":"&is79Or82Or81",
+                     "trigger":"visible"
+                  }
+               ]
             },
             {
                "key":"Q080",
@@ -2344,7 +2351,14 @@ export const cpbNationalReport5 = [
                      "title": nr5T.no
                   }
                ],
-               "mandatory":true
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q082",
+                     "type":"&is79Or82Or81",
+                     "trigger":"visible"
+                  }
+               ]
             },
             {
                "key":"Q081",
@@ -2368,7 +2382,14 @@ export const cpbNationalReport5 = [
                      "title": nr5T.no
                   }
                ],
-               "mandatory":true
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q082",
+                     "type":"&is79Or82Or81",
+                     "trigger":"visible"
+                  }
+               ]
             },
             {
                "key":"Q082",
@@ -2463,7 +2484,17 @@ export const cpbNationalReport5 = [
                      "title": nr5T.no
                   }
                ],
-               "mandatory":true
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q086",
+                     "values":[
+                        "0"
+                     ],
+                     "type":"@hasValuesExcept",
+                     "trigger":"visible"
+                  }
+               ]
             },
             {
                "key":"Q086",
@@ -2872,7 +2903,14 @@ export const cpbNationalReport5 = [
                      "title": nr5T.fiftyOrMore
                   }
                ],
-               "mandatory":true
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q096",
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
             },
             {
                "key":"Q096",
