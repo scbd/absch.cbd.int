@@ -601,7 +601,7 @@ export const cpbNationalReport5 = [
                   "key":"Q026_adq",
                   "section":"Article2",
                   "number":"",
-                  "type":"int",
+                  "type":"lstring",
                   "title": nr5T.articles7_10_question26_question0_title,
                   "multiple":false
                },
