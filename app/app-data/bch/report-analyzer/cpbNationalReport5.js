@@ -232,7 +232,7 @@ export const cpbNationalReport5 = [
             "title": nr5T.article5_title,
             "questions":[
                {
-                  "key":"Q0014",
+                  "key":"Q014",
                   "section":"Article5",
                   "number":"14",
                   "type":"option",
@@ -271,7 +271,7 @@ export const cpbNationalReport5 = [
             "title": nr5T.article6_title,
             "questions":[
                {
-                  "key":"Q0016",
+                  "key":"Q016",
                   "section":"Article6",
                   "number":"16",
                   "type":"option",
@@ -295,7 +295,7 @@ export const cpbNationalReport5 = [
                   "mandatory":true
                },
                {
-                  "key":"Q0017",
+                  "key":"Q017",
                   "section":"Article6",
                   "number":"17",
                   "type":"option",
@@ -319,7 +319,7 @@ export const cpbNationalReport5 = [
                   "mandatory":true
                },
                {
-                  "key":"Q0018",
+                  "key":"Q018",
                   "section":"Article6",
                   "number":"18",
                   "type":"option",
@@ -762,5 +762,145 @@ export const cpbNationalReport5 = [
                   "multiple":false
                }
             ]
-      }
+      },
+      {
+            "key":"Article11",
+            "title": nr5T.article11_title,
+            "questions":[
+               {
+                  "key":"Q031",
+                  "section":"Article11",
+                  "number":"31",
+                  "type":"option",
+                  "title": nr5T.article11_question31_title,
+                  "multiple":false,
+                  "options":[
+                     {
+                        "value":"true",
+                        "title": nr5T.yes
+                     },
+                     {
+                        "value":"true.some",
+                        "title": nr5T.yesToSomeExtent,
+                        "type":"lstring"
+                     },
+                     {
+                        "value":"false",
+                        "title": nr5T.no
+                     }
+                  ],
+                  "mandatory":true
+               },
+               {
+                  "key":"Q032",
+                  "section":"Article11",
+                  "number":"32",
+                  "type":"option",
+                  "title": nr5T.article11_question32_title,
+                  "multiple":false,
+                  "options":[
+                     {
+                        "value":"true",
+                        "title": nr5T.yes
+                     },
+                     {
+                        "value":"true.some",
+                        "title": nr5T.yesToSomeExtent,
+                        "type":"lstring"
+                     },
+                     {
+                        "value":"false",
+                        "title": nr5T.no
+                     }
+                  ],
+                  "mandatory":true
+               },
+               {
+                  "key":"Q033",
+                  "section":"Article11",
+                  "number":"33",
+                  "type":"option",
+                  "title": nr5T.article11_question33_title,
+                  "multiple":false,
+                  "options":[
+                     {
+                        "value":"0",
+                        "title": nr5T.none
+                     },
+                     {
+                        "value":"1+",
+                        "title": nr5T.oneToFour
+                     },
+                     {
+                        "value":"5+",
+                        "title": nr5T.fiveToNine
+                     },
+                     {
+                        "value":"10+",
+                        "title": nr5T.tenOrMore
+                     }
+                  ],
+                  "mandatory":true
+               },
+               {
+                  "key":"Q034",
+                  "section":"Article11",
+                  "number":"34",
+                  "type":"option",
+                  "title": nr5T.article11_question34_title,
+                  "multiple":false,
+                  "options":[
+                     {
+                        "value":"true",
+                        "title": nr5T.yes
+                     },
+                     {
+                        "value":"true.some",
+                        "title": nr5T.yesToSomeExtent,
+                        "type":"lstring"
+                     },
+                     {
+                        "value":"false",
+                        "title": nr5T.no
+                     }
+                  ],
+                  "mandatory":true
+               },
+               {
+                  "key":"Q035",
+                  "section":"Article11",
+                  "number":"35",
+                  "type":"option",
+                  "title": nr5T.article11_question35_title,
+                  "multiple":false,
+                  "options":[
+                     {
+                        "value":"0",
+                        "title": nr5T.none
+                     },
+                     {
+                        "value":"1+",
+                        "title": nr5T.oneToFour
+                     },
+                     {
+                        "value":"5+",
+                        "title": nr5T.fiveToNine
+                     },
+                     {
+                        "value":"10+",
+                        "title": nr5T.tenOrMore
+                     }
+                  ],
+                  "mandatory":true
+               },
+               {
+                  "key":"Q036",
+                  "section":"Article11",
+                  "number":"36",
+                  "type":"lstring",
+                  "title": nr5T.article11_question36_title,
+                  "multiple":false
+               }
+            ]
+   }
 ]
