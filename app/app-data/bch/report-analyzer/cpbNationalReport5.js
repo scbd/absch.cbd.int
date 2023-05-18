@@ -1998,8 +1998,7 @@ export const cpbNationalReport5 = [
                            "type":"@hasValuesExcept",
                            "trigger":"visible"
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   },
                   {
                      "key":"Q070_b_adq",
@@ -2058,8 +2057,7 @@ export const cpbNationalReport5 = [
                            "type":"@hasValuesExcept",
                            "trigger":"visible"
                         }
-                     ],
-                     "mandatory":true
+                     ]
                   },
                   {
                      "key":"Q070_c_adq",
@@ -2129,7 +2127,8 @@ export const cpbNationalReport5 = [
                   },
                   {
                      "value":"A971DAA9-2DB7-4BBD-8867-F310EC820914",
-                     "title": nr5T.articles15_16_question71_question0_option2_title
+                     "title": nr5T.articles15_16_question71_question0_option2_title,
+                     "type":"lstring"
                   }
                ],
                "mandatory":true
