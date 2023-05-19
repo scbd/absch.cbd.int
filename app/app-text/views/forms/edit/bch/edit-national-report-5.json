@@ -23,6 +23,7 @@
     "hundredOrMore": "100 or more",
     "other": "Other",
     "none" : "None",
+    "noneDecisions": "None (decisions taken without consultation)",
     "riskAssessment": "Risk assessment:",
     "riskManagement": "Risk management:",
     "monitoring": "Monitoring:",
@@ -292,5 +293,19 @@
     "article22_question123_options15_title":"Liability and redress",
     "article22_question124_title": "If you answered Yes to question 122, has your country prioritized its capacity-building needs?",
     "article22_question125_title": "Does your country have in place a functional national mechanism for coordinating biosafety capacity-building initiatives?",
-    "article22_question126_title": "Please use the space below to provide further details on the implementation of Article 22 in your country, including further details about your experience in accessing GEF funds:"
+    "article22_question126_title": "Please use the space below to provide further details on the implementation of Article 22 in your country, including further details about your experience in accessing GEF funds:",
+    "article23_title": "Article 23 – Public awareness and participation",
+    "article23_question127_title": "Is biosafety public awareness, education and/or participation addressed in legislation or policy in your country?",
+    "article23_question128_title": "Has your country established a mechanism to ensure public access to information on LMOs?",
+    "article23_question129_title": "Has your country established a mechanism to facilitate and promote public participation, including consultation, in the decision-making process regarding LMOs?",
+    "article23_question130_title": "Has your country informed the public about existing modalities for public participation in the decision-making process regarding LMOs?",
+    "article23_question131_title": "In the current reporting period, how many times has your country consulted the public in the decision-making process regarding LMOs?",
+    "article23_question132_title": "In the current reporting period, has your country made the results of decisions regarding LMOs available to the public?",
+    "article23_question133_title": "Has your country informed the public about the means to access the Biosafety Clearing-House?",
+    "article23_question134_title": "Has biosafety been addressed or integrated in educational and training programmes in your country?",
+    "article23_question135_title": "Does your country have in place a national communication strategy on biosafety?",
+    "article23_question136_title": "Does your country have any awareness and outreach programmes on biosafety?",
+    "article23_question137_title": "Does your country currently have a national biosafety website?",
+    "article23_question138_title": "In the current reporting period, has your country accessed resource materials for facilitating and promoting public awareness, education and participation in biosafety?",
+    "article23_question139_title": "Please use the space below to provide further details on the implementation of Article 23 in your country:"
 }
