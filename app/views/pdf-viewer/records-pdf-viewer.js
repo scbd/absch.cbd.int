@@ -73,7 +73,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             if(devRealm.test(realm.value))
                 baseApiUrl = '';
 
-            var src = baseApiUrl + '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}&code={{documentId}}';
+            var src = '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}&code={{documentId}}';
             
             if($route.current.params.code){
                 src = '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?code={{code}}';
@@ -90,7 +90,8 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                         .replace("{{revision}}", $route.current.params.revision)
                         .replace("{{schema}}", $route.current.params.schema)
                         .replace("{{code}}", $route.current.params.code);
-            return src;
+
+            return baseApiUrl + src;
         }
 
         function loadPdfDocumentDetails(code){
