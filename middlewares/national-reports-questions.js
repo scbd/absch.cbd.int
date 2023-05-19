@@ -20,7 +20,7 @@ module.exports = async function(req, res){
     try{
         const reportPath = path.join('..', 'app', `${reportDetails.questionsUrl}.js`)
         const reportData = await import(reportPath)
-        res.status(200).json(reportData);
+        res.status(200).json(Object.values(reportData)[0]);
     }
     catch(e){
         console.log(e)
