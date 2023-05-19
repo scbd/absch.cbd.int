@@ -324,5 +324,12 @@
     "article26_question149_title": "Does your country have any specific approaches or requirements that facilitate how socioeconomic considerations should be taken into account in LMO decision-making?",
     "article26_question150_title": "Has your country used resource materials for taking socioeconomic considerations into account?",
     "article26_question151_title": "In the current reporting period, have socioeconomic considerations arising from the impact of LMOs been taken into account in decision-making?",
-    "article26_question152_title":  "Please use the space below to provide further details on the implementation of Article 26 in your country:"   
+    "article26_question152_title":  "Please use the space below to provide further details on the implementation of Article 26 in your country:",
+    "article28_title":  "Article 28 – Financial mechanism and resources",
+    "article28_question153_title":  "In the current reporting period, how much funding (in the equivalent of US dollars) has your country mobilized to support implementation of the Cartagena Protocol beyond the regular national budgetary allocation?",
+    "article28_question153_option0_title": "1 to 4,999 USD",
+    "article28_question153_option1_title": "5,000 to 49,999 USD",
+    "article28_question153_option2_title": "50,000 to 99,999 USD",
+    "article28_question153_option3_title": "100,000 to 499,000 USD",
+    "article28_question153_option4_title": "500,000 USD or more"    
 }

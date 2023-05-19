@@ -4716,5 +4716,46 @@ export const cpbNationalReport5 = [
                "multiple":false
             }
          ]
+      },
+      {
+         "key":"Article28",
+         "title": nr5T.article28_title,
+         "questions":[
+            {
+               "key":"Q153",
+               "section":"Article28",
+               "number":"153",
+               "type":"option",
+               "title": nr5T.article28_question153_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"USD0",
+                     "title": nr5T.none
+                  },
+                  {
+                     "value":"USD1-4999",
+                     "title": nr5T.article28_question153_option0_title
+                  },
+                  {
+                     "value":"USD5000-49999",
+                     "title": nr5T.article28_question153_option1_title
+                  },
+                  {
+                     "value":"USD50000-99999",
+                     "title": nr5T.article28_question153_option2_title
+                  },
+                  {
+                     "value":"USD100000-499000",
+                     "title": nr5T.article28_question153_option3_title
+                  },
+                  {
+                     "value":"USD500000+",
+                     "title": nr5T.article28_question153_option4_title
+                  }
+               ],
+               "mandatory":true
+            }
+         ]
       }
 ]
