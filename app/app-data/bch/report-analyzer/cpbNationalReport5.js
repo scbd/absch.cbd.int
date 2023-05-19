@@ -4637,5 +4637,84 @@ export const cpbNationalReport5 = [
                "multiple":false
             }
          ]
+      },
+      {
+         "key":"Article26",
+         "title": nr5T.article26_title,
+         "questions":[
+            {
+               "key":"Q149",
+               "section":"Article26",
+               "number":"149",
+               "type":"option",
+               "title": nr5T.article26_question149_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q150",
+               "section":"Article26",
+               "number":"150",
+               "type":"option",
+               "title": nr5T.article26_question150_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q151",
+               "section":"Article26",
+               "number":"151",
+               "type":"option",
+               "title": nr5T.article26_question151_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yesAlways
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.inSomeCasesOnly
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  },
+                  {
+                     "value":"false.na",
+                     "title": nr5T.notApplicable
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q152",
+               "section":"Article26",
+               "number":"152",
+               "type":"lstring",
+               "title": nr5T.article26_question152_title,
+               "multiple":false
+            }
+         ]
       }
 ]
