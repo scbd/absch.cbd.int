@@ -3616,5 +3616,66 @@ export const cpbNationalReport5 = [
                "multiple":false,
             },
          ]
-      }
+      },
+      {
+         "key":"Article21",
+         "title": nr5T.article21_title,
+         "questions":[
+            {
+               "key":"Q109",
+               "section":"Article21",
+               "number":"109",
+               "type":"option",
+               "title": nr5T.article21_question109_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q110",
+               "section":"Article21",
+               "number":"110",
+               "type":"option",
+               "title": nr5T.article21_question110_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yesAlways
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.inSomeCasesOnly
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q111",
+               "section":"Article21",
+               "number":"111",
+               "type":"lstring",
+               "title": nr5T.article21_question111_title,
+               "multiple":false
+            }
+         ]
+      }   
 ]
