@@ -1,4 +1,4 @@
-import nr5T from '~/app-text/views/forms/edit/bch/edit-national-report-5.json';
+import nr5T from '../../../app-text/views/forms/edit/bch/edit-national-report-5.json';
 
 export const cpbNationalReport5 = [
    {

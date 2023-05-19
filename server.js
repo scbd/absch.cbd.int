@@ -46,6 +46,7 @@ if(process.env.COMPRESS=='true'){
 }
 
 // Set routes
+app.get('/national-report-questions/:report', require('./middlewares/national-reports-questions'));
 app.use('/widgets.js',                               express.static(`${__dirname}/dist/en/app/assets/widgets.js`));
 app.use('/legacy-ajax-plugin.js',                    express.static(`${__dirname}/dist/en/app/assets/legacy-ajax-plugin.js`));
 app.use('/app/assets/widget-example.html',           express.static(`${__dirname}/app/assets/${process.env.CLEARINGHOUSE}-widget-example.html`));

@@ -1,8 +1,10 @@
 {
-    "absNR1Title"       : "ABS - Interim National Report on the Implementation of the Nagoya Protocol",
+    "absNRTitle"        : "ABS - Interim National Report on the Implementation of the Nagoya Protocol",
+    "absNR1Title"       : "ABS - First National Report",
     "bchInterimNRTitle" : "CPB - Interim National Report",
     "bchNR1Title"       : "CPB - First National Report",
     "bchNR2Title"       : "CPB - Second National Report",
     "bchNR3Title"       : "CPB - Third National Report",
-    "bchNR4Title"       : "CPB - Fourth National Report"
+    "bchNR4Title"       : "CPB - Fourth National Report",
+    "bchNR5Title"       : "CPB - Fifth National Report"
 }
