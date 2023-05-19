@@ -3678,5 +3678,490 @@ export const cpbNationalReport5 = [
                "multiple":false
             }
          ]
-      }   
+      },
+      {
+         "key":"Article22",
+         "title": nr5T.article22_title,
+         "questions":[
+            {
+               "key":"Q112",
+               "section":"Article22",
+               "number":"112",
+               "type":"option",
+               "title": nr5T.article22_question112_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q113",
+               "section":"Article22",
+               "number":"113",
+               "type":"option",
+               "title": nr5T.article22_question113_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q114",
+                     "values":[
+                        "true",
+                        "true.some"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q114",
+               "section":"Article22",
+               "number":"114",
+               "type":"option",
+               "title": nr5T.article22_question114_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"channels.bilateral",
+                     "title": nr5T.bilateral
+                  },
+                  {
+                     "value":"channels.regional",
+                     "title": nr5T.regional
+                  },
+                  {
+                     "value":"channels.multilateral",
+                     "title": nr5T.multilateral
+                  }
+               ]
+            },
+            {
+               "key":"Q115",
+               "section":"Article22",
+               "number":"115",
+               "type":"option",
+               "title": nr5T.article22_question115_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q116",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q116",
+               "section":"Article22",
+               "number":"116",
+               "type":"option",
+               "title": nr5T.article22_question116_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"channels.bilateral",
+                     "title": nr5T.bilateral
+                  },
+                  {
+                     "value":"channels.regional",
+                     "title": nr5T.regional
+                  },
+                  {
+                     "value":"channels.multilateral",
+                     "title": nr5T.multilateral
+                  }
+               ]
+            },
+            {
+               "key":"Q117",
+               "section":"Article22",
+               "number":"117",
+               "type":"option",
+               "title": nr5T.article22_question117_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  },
+                  {
+                     "value":"false.na",
+                     "title": nr5T.notApplicable
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q118",
+               "section":"Article22",
+               "number":"118",
+               "type":"term",
+               "title": nr5T.article22_question118_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q119",
+                     "values":[
+                        "true.some",
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  },
+                  {
+                     "question":"Q120",
+                     "values":[
+                        "true.some",
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q119",
+               "section":"Article22",
+               "number":"119",
+               "type":"term",
+               "title": nr5T.article22_question119_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"BB3CA716-E122-4445-9FAD-9F6B440363BD",
+                     "title": nr5T.article22_question119_options0_title
+                  },
+                  {
+                     "value":"68250AA6-75F1-470D-A8E7-85ECDF703D00",
+                     "title": nr5T.article22_question119_options1_title
+                  },
+                  {
+                     "value":"7C980FF4-3C5B-4711-81F9-BA6F28C12598",
+                     "title": nr5T.article22_question119_options2_title
+                  },
+                  {
+                     "value":"B6B916B4-1700-430C-BCFB-FCE81D6F1349",
+                     "title": nr5T.article22_question119_options3_title
+                  },
+                  {
+                     "value":"8419162A-8A34-46AC-8AF2-3D2905F9BA08",
+                     "title": nr5T.article22_question119_options4_title
+                  },
+                  {
+                     "value":"AF59E45F-3AC2-4F71-889C-B42E83F75A8A",
+                     "title": nr5T.article22_question119_options5_title
+                  },
+                  {
+                     "value":"85C0A7F0-D527-40C1-B50D-2363EA600F2D",
+                     "title": nr5T.article22_question119_options6_title
+                  },
+                  {
+                     "value":"6F6C058C-6741-4878-A448-AE56299821A8",
+                     "title": nr5T.article22_question119_options7_title
+                  },
+                  {
+                     "value":"0FF8F112-C0E9-4A18-83E1-40D4EF61503E",
+                     "title": nr5T.article22_question119_options8_title
+                  },
+                  {
+                     "value":"76DB23A3-F880-4AC8-8602-DF9DC45EECAF",
+                     "title": nr5T.article22_question119_options9_title
+                  },
+                  {
+                     "value":"A16727EE-FE61-43FF-8530-35A9C7261247",
+                     "title": nr5T.article22_question119_options10_title
+                  },
+                  {
+                     "value":"3E7615C5-7DFC-4E04-9D26-6C80B4B1DED8",
+                     "title": nr5T.article22_question119_options11_title
+                  },
+                  {
+                     "value":"D9AC6B7F-316B-483B-8E74-A5EC87343C81",
+                     "title": nr5T.article22_question119_options12_title
+                  },
+                  {
+                     "value":"09063980-88D9-4826-9F54-CB3EAC36641A",
+                     "title": nr5T.article22_question119_options13_title
+                  },
+                  {
+                     "value":"799CD9B1-4571-4C2A-A459-F78E004D7F32",
+                     "title": nr5T.article22_question119_options14_title
+                  },
+                  {
+                     "value":"667CD9B1-4571-4C2A-A459-F78E004D7D96",
+                     "title": nr5T.article22_question119_options15_title
+                  },
+                  {
+                     "value":"other",
+                     "title": nr5T.other,
+                     "type":"lstring"
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q120",
+               "section":"Article22",
+               "number":"120",
+               "type":"option",
+               "title": nr5T.article22_question120_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q121",
+               "section":"Article22",
+               "number":"121",
+               "type":"option",
+               "title": nr5T.article22_question121_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q122",
+               "section":"Article22",
+               "number":"122",
+               "type":"option",
+               "title": nr5T.article22_question122_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true,
+               "validations":[
+                  {
+                     "question":"Q123",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  },
+                  {
+                     "question":"Q124",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q123",
+               "section":"Article22",
+               "number":"123",
+               "type":"term",
+               "title": nr5T.article22_question123_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"BB3CA716-E122-4445-9FAD-9F6B440363BD",
+                     "title": nr5T.article22_question123_options0_title
+                  },
+                  {
+                     "value":"68250AA6-75F1-470D-A8E7-85ECDF703D00",
+                     "title": nr5T.article22_question123_options1_title
+                  },
+                  {
+                     "value":"7C980FF4-3C5B-4711-81F9-BA6F28C12598",
+                     "title": nr5T.article22_question123_options2_title
+                  },
+                  {
+                     "value":"B6B916B4-1700-430C-BCFB-FCE81D6F1349",
+                     "title": nr5T.article22_question123_options3_title
+                  },
+                  {
+                     "value":"8419162A-8A34-46AC-8AF2-3D2905F9BA08",
+                     "title": nr5T.article22_question123_options4_title
+                  },
+                  {
+                     "value":"AF59E45F-3AC2-4F71-889C-B42E83F75A8A",
+                     "title": nr5T.article22_question123_options5_title
+                  },
+                  {
+                     "value":"85C0A7F0-D527-40C1-B50D-2363EA600F2D",
+                     "title": nr5T.article22_question123_options6_title
+                  },
+                  {
+                     "value":"6F6C058C-6741-4878-A448-AE56299821A8",
+                     "title": nr5T.article22_question123_options7_title
+                  },
+                  {
+                     "value":"0FF8F112-C0E9-4A18-83E1-40D4EF61503E",
+                     "title": nr5T.article22_question123_options8_title
+                  },
+                  {
+                     "value":"76DB23A3-F880-4AC8-8602-DF9DC45EECAF",
+                     "title": nr5T.article22_question123_options9_title
+                  },
+                  {
+                     "value":"A16727EE-FE61-43FF-8530-35A9C7261247",
+                     "title": nr5T.article22_question123_options10_title
+                  },
+                  {
+                     "value":"3E7615C5-7DFC-4E04-9D26-6C80B4B1DED8",
+                     "title": nr5T.article22_question123_options11_title
+                  },
+                  {
+                     "value":"D9AC6B7F-316B-483B-8E74-A5EC87343C81",
+                     "title": nr5T.article22_question123_options12_title
+                  },
+                  {
+                     "value":"09063980-88D9-4826-9F54-CB3EAC36641A",
+                     "title": nr5T.article22_question123_options13_title
+                  },
+                  {
+                     "value":"799CD9B1-4571-4C2A-A459-F78E004D7F32",
+                     "title": nr5T.article22_question123_options14_title
+                  },
+                  {
+                     "value":"667CD9B1-4571-4C2A-A459-F78E004D7D96",
+                     "title": nr5T.article22_question123_options15_title
+                  },
+                  {
+                     "value":"other",
+                     "title": nr5T.other,
+                     "type":"lstring"
+                  }
+               ]
+            },
+            {
+               "key":"Q124",
+               "section":"Article22",
+               "number":"124",
+               "type":"option",
+               "title": nr5T.article22_question124_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q125",
+               "section":"Article22",
+               "number":"125",
+               "type":"option",
+               "title": nr5T.article22_question125_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q126",
+               "section":"Article22",
+               "number":"126",
+               "type":"lstring",
+               "title": nr5T.article22_question126_title,
+               "multiple":false
+            }
+         ]
+      }
 ]
