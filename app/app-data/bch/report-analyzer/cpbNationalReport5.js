@@ -2411,7 +2411,7 @@ export const cpbNationalReport5 = [
                      "title": nr5T.asPartOfOtherDocumentation
                   },
                   {
-                     "value":"other",
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                      "title": nr5T.other,
                      "type":"lstring"
                   }
@@ -2459,7 +2459,7 @@ export const cpbNationalReport5 = [
                      "title": nr5T.asPartOfOtherDocumentation
                   },
                   {
-                     "value":"other",
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                      "title": nr5T.other,
                      "type":"lstring"
                   }
@@ -2516,7 +2516,7 @@ export const cpbNationalReport5 = [
                      "title": nr5T.asPartOfOtherDocumentation
                   },
                   {
-                     "value":"other",
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                      "title": nr5T.other,
                      "type":"lstring"
                   }
@@ -3959,7 +3959,7 @@ export const cpbNationalReport5 = [
                      "title": nr5T.article22_question119_options15_title
                   },
                   {
-                     "value":"other",
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                      "title": nr5T.other,
                      "type":"lstring"
                   }
@@ -4114,7 +4114,7 @@ export const cpbNationalReport5 = [
                      "title": nr5T.article22_question123_options15_title
                   },
                   {
-                     "value":"other",
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                      "title": nr5T.other,
                      "type":"lstring"
                   }
