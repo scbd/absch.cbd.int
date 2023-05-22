@@ -113,6 +113,9 @@ export const cpbNationalReport5 = [
                   "validations":[
                      {
                         "question":"Q010_adq",
+                        "values":[
+                           "true"
+                        ],
                         "type":"@hasValues",
                         "trigger":"visible"
                      }
