@@ -3585,7 +3585,8 @@ export const cpbNationalReport5 = [
                      "value":"false",
                      "title": nr5T.no
                   }
-               ]
+               ],
+               "mandatory":true
             },
             {
                "key":"Q107",
