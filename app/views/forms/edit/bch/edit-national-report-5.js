@@ -104,6 +104,11 @@ import {cpbNationalReport4} from '~/app-data/bch/report-analyzer/cpbNationalRepo
                     "tab":18,
                     "title":"154 - 158",
                     "sections" : [{key:"Article33"}, {key:"Cooperation"}]
+               },
+               {
+                    "tab":19,
+                    "title":"159 - 176",
+                    "sections" : [{key:"Nagoya"}, {key:"OtherInformation"}, {key:"Comments"}]
                }
            ];
            //ToDo Move to report analyzer common folder. 
