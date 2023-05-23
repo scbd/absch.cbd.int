@@ -4757,5 +4757,241 @@ export const cpbNationalReport5 = [
                "mandatory":true
             }
          ]
+      },
+      {
+         "key":"Article33",
+         "title": nr5T.article33_title,
+         "description": nr5T.article33_description,
+         "questions":[
+            {
+               "key":"Q154",
+               "section":"Article33",
+               "number":"154",
+               "type":"option",
+               "title": nr5T.article33_question154_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  },
+               ],
+               "mandatory":true
+            }
+         ]
+      },
+      {
+         "key":"Cooperation",
+         "title": nr5T.cooperation_title,
+         "description": nr5T.cooperation_description,
+         "questions":[
+            {
+               "key":"Q155",
+               "section":"Cooperation",
+               "number":"155",
+               "type":"sub-section",
+               "title": nr5T.cooperation_question155_title,
+               "multiple":false,  
+               "mandatory":true,             
+               "questions":[
+                  {
+                     "key":"Q155_a",
+                     "section":"Cooperation",
+                     "number":"a",
+                     "type":"option",
+                     "title": nr5T.cooperation_question155_a_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ],
+                  },
+                  {
+                     "key":"Q155_b",
+                     "section":"Cooperation",
+                     "number":"b",
+                     "type":"option",
+                     "title": nr5T.cooperation_question155_b_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ],                  
+                  },
+                  {
+                     "key":"Q155_c",
+                     "section":"Cooperation",
+                     "number":"c",
+                     "type":"option",
+                     "title": nr5T.cooperation_question155_c_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ],
+                     "validations":[
+                        {
+                           "question":"Q155_c_adq",
+                           "values":[
+                              "true"
+                           ],
+                           "type":"@hasValues",
+                           "trigger":"visible"
+                        }
+                     ],
+                  },
+                                    {
+                     "key":"Q155_d",
+                     "section":"Cooperation",
+                     "number":"d",
+                     "type":"option",
+                     "title": nr5T.cooperation_question155_d_title,
+                     "multiple":false,                     
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q155_e",
+                     "section":"Cooperation",
+                     "number":"e",
+                     "type":"option",
+                     "title": nr5T.cooperation_question155_e_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "key": "Q155_c_adq",
+               "section": "Cooperation",
+               "number": "",
+               "type": "option",
+               "title": nr5T.cooperation_question155_c_option0_title,
+               "multiple": false,
+               "options": [
+                  {
+                     "value": "true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value": "false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q156",
+               "section":"Cooperation",
+               "number":"156",
+               "type":"option",
+               "title": nr5T.cooperation_question156_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q157",
+               "section":"Cooperation",
+               "number":"157",
+               "type":"sub-section",
+               "title": nr5T.cooperation_question157_title,
+               "multiple":false,
+               "mandatory":true,
+               "questions":[
+                  {
+                     "key":"Q157_a",
+                     "section":"Cooperation",
+                     "number":"a",
+                     "type":"option",
+                     "title": nr5T.cooperation_question157_a_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q157_b",
+                     "section":"Cooperation",
+                     "number":"b",
+                     "type":"option",
+                     "title": nr5T.cooperation_question157_b_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ]
+                  },
+               ]
+            },
+            {
+               "key":"Q158",
+               "section":"Cooperation",
+               "number":"158",
+               "type":"lstring",
+               "title": nr5T.cooperation_question158_title,
+               "multiple":false
+            }
+         ]
       }
 ]
