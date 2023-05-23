@@ -295,6 +295,19 @@
               "zh": "检查站公报"
           }
       },
+      "absNationalReport1" : {
+          "type" : "national",
+          "title" : {
+              "en" : "1st National Reports on the Implementation of the Nagoya Protocol"
+          },
+          "description" : {
+              "en" : "1st national reports on implementation of the Nagoya Protocol on Access and Benefit-sharing (due 1 November 2017)"
+          },
+          "shortCode" : "NR1",
+          "titlePlural" : {
+              "en" : "1st National Reports on the Implementation of the Nagoya Protocol"
+          }
+      },
       "absNationalReport": {
           "type": "national",
           "title": {
