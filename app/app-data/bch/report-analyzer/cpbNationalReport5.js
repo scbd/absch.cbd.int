@@ -4163,5 +4163,273 @@ export const cpbNationalReport5 = [
                "multiple":false
             }
          ]
+      },
+      {
+         "key":"Article23",
+         "title": nr5T.article23_title,
+         "questions":[
+            {
+               "key":"Q127",
+               "section":"Article23",
+               "number":"127",
+               "type":"option",
+               "title": nr5T.article23_question127_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q128",
+               "section":"Article23",
+               "number":"128",
+               "type":"option",
+               "title": nr5T.article23_question128_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q129",
+               "section":"Article23",
+               "number":"129",
+               "type":"option",
+               "title": nr5T.article23_question129_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q130",
+               "section":"Article23",
+               "number":"130",
+               "type":"option",
+               "title": nr5T.article23_question130_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"true.some",
+                     "title": nr5T.yesToSomeExtent,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q131",
+               "section":"Article23",
+               "number":"131",
+               "type":"option",
+               "title": nr5T.article23_question131_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"none",
+                     "title": nr5T.noneDecisions
+                  },
+                  {
+                     "value":"1+",
+                     "title": nr5T.oneToFour
+                  },
+                  {
+                     "value":"5+",
+                     "title": nr5T.fiveOrMore
+                  },
+                  {
+                     "value":"false.na",
+                     "title": nr5T.notApplicable
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q132",
+               "section":"Article23",
+               "number":"132",
+               "type":"option",
+               "title": nr5T.article23_question132_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q133",
+               "section":"Article23",
+               "number":"133",
+               "type":"option",
+               "title": nr5T.article23_question133_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q134",
+               "section":"Article23",
+               "number":"134",
+               "type":"option",
+               "title": nr5T.article23_question134_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q135",
+               "section":"Article23",
+               "number":"135",
+               "type":"option",
+               "title": nr5T.article23_question135_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q136",
+               "section":"Article23",
+               "number":"136",
+               "type":"option",
+               "title": nr5T.article23_question136_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q137",
+               "section":"Article23",
+               "number":"137",
+               "type":"option",
+               "title": nr5T.article23_question137_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes // ToDo Yes: [Please provide website address] for 137 and 107 question
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q138",
+               "section":"Article23",
+               "number":"138",
+               "type":"option",
+               "title": nr5T.article23_question138_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "mandatory":true
+            },
+            {
+               "key":"Q139",
+               "section":"Article23",
+               "number":"139",
+               "type":"lstring",
+               "title": nr5T.article23_question139_title,
+               "multiple":false
+            }
+         ]
       }
 ]
