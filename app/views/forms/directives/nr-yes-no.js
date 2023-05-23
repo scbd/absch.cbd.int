@@ -16,6 +16,8 @@ import _ from 'lodash';
                 locales: "="
             },
             link: function($scope, $element, $attr, ngModelController) {
+                
+                $scope.customValueLabel = $attr.customValueLabel||'Please Specify ';
                 $scope.answer = {}
                 
                 $scope.updateAnswer = function(){
