@@ -91,6 +91,7 @@ export const npNationalReport1 = [
             "title": nr1T.part_II_question4_1_title,
             "multiple": false,
             "mandatory": true,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
@@ -114,6 +115,7 @@ export const npNationalReport1 = [
             "title": nr1T.part_II_question4_2_title,
             "multiple": false,
             "mandatory": true,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
@@ -182,6 +184,7 @@ export const npNationalReport1 = [
             "title": nr1T.part_II_question5_1_title,
             "multiple": false,
             "mandatory": true,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
@@ -204,6 +207,7 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.part_II_question5_2_title,
             "multiple": false,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
