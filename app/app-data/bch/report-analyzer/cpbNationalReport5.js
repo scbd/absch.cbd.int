@@ -113,9 +113,6 @@ export const cpbNationalReport5 = [
                   "validations":[
                      {
                         "question":"Q010_adq",
-                        "values":[
-                           "true"
-                        ],
                         "type":"@hasValues",
                         "trigger":"visible"
                      }
@@ -4993,6 +4990,559 @@ export const cpbNationalReport5 = [
                "number":"158",
                "type":"lstring",
                "title": nr5T.cooperation_question158_title,
+               "multiple":false
+            }
+         ]
+      },
+      {
+         "key":"Nagoya",
+         "title": nr5T.nagoya_title,
+         "description": nr5T.nagoya_description,
+         "questions":[
+            {
+               "key":"Q159",
+               "section":"Nagoya",
+               "number":"159",
+               "type":"option",
+               "title": nr5T.nagoya_question159_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "validations":[
+                  {
+                     "question":"Q159_adq",
+                     "values":[
+                        "false"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q159_adq",
+               "section":"Nagoya",
+               "number":"",
+               "type":"option",
+               "title": nr5T.nagoya_question159_options0_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q160",
+               "section":"Nagoya",
+               "number":"160",
+               "type":"option",
+               "title": nr5T.nagoya_question160_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"74B17D51-786F-3D68-3B76-A50121842925",
+                     "title": nr5T.nagoya_question160_options0_title
+                  },
+                  {
+                     "value":"FAA03A2A-F79E-1347-22E3-0EB4815DF05B",
+                     "title": nr5T.nagoya_question160_options1_title
+                  },
+                  {
+                     "value":"EFCE3DC1-BED6-041D-0AEA-93B0F04AE166",
+                     "title": nr5T.nagoya_question160_options2_title
+                  },
+                  {
+                     "value":"2B4110FC-8B86-50E6-851F-08AF1A43CFEC",
+                     "title": nr5T.nagoya_question160_options3_title
+                  },
+                  {
+                     "value":"C9B01C6D-6B40-1A67-B5A0-DDB7FF6B9CE9",
+                     "title": nr5T.nagoya_question160_options4_title
+                  }
+               ],
+            },
+            {
+               "key":"Q161",
+               "section":"Nagoya",
+               "number":"161",
+               "type":"option",
+               "title": nr5T.nagoya_question161_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"6BAF09B7-6331-04E6-479D-C1C1B0D55ECD",
+                     "title": nr5T.nagoya_question161_options0_title
+                  },
+                  {
+                     "value":"0D3A9BB1-B378-174D-F4DD-1217D79D8B21",
+                     "title": nr5T.nagoya_question161_options1_title
+                  },
+                  {
+                     "value":"BA743C79-B202-4611-16C4-2C7D4678ACEB",
+                     "title": nr5T.nagoya_question161_options2_title
+                  },
+                  {
+                     "value":"9067DB5B-E33B-655D-83A3-32D4D562618F",
+                     "title": nr5T.nagoya_question161_options3_title,
+                     "type":"lstring"
+                  }
+               ]
+            },
+            {
+               "key":"Q162",
+               "section":"Nagoya",
+               "number":"162",
+               "type":"sub-section",
+               "title": nr5T.nagoya_question162_title,
+               "multiple":false,
+               "questions":[
+                  {
+                     "key":"Q162_a",
+                     "section":"Nagoya",
+                     "number":"a",
+                     "type":"option",
+                     "title": nr5T.nagoya_question162_a_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ],
+                     "validations":[
+                        {
+                           "question":"Q163",
+                           "values":[
+                              "true"
+                           ],
+                           "type":"@hasValues",
+                           "trigger":"visible"
+                        },
+                        {
+                           "question":"Q164",
+                           "values":[
+                              "true"
+                           ],
+                           "type":"@hasValues",
+                           "trigger":"visible"
+                        },
+                        {
+                           "question":"Q165",
+                           "values":[
+                              "true"
+                           ],
+                           "type":"@hasValues",
+                           "trigger":"visible"
+                        }
+                     ]
+                  },
+                  {
+                     "key":"Q162_b",
+                     "section":"Nagoya",
+                     "number":"b",
+                     "type":"option",
+                     "title": nr5T.nagoya_question162_b_title,
+                     "multiple":false,
+                     "options":[
+                        {
+                           "value":"true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value":"false",
+                           "title": nr5T.no
+                        }
+                     ],
+                     "validations":[
+                        {
+                           "question":"Q165",
+                           "values":[
+                              "true"
+                           ],
+                           "type":"@hasValues",
+                           "trigger":"visible"
+                        }
+                     ]
+                  }
+               ]
+            },
+            {
+               "key":"Q163",
+               "section":"Nagoya",
+               "number":"163",
+               "type":"option",
+               "title": nr5T.nagoya_question163_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"true.inform",
+                     "title": nr5T.nagoya_question163_options0_title
+                  },
+                  {
+                     "value":"true.evaluate",
+                     "title": nr5T.nagoya_question163_options1_title
+                  },
+                  {
+                     "value":"true.response",
+                     "title": nr5T.nagoya_question163_options2_title
+                  },
+                  {
+                     "value":"true.other",
+                     "title": nr5T.nagoya_question163_options3_title,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q164",
+               "section":"Nagoya",
+               "number":"164",
+               "type":"option",
+               "title": nr5T.nagoya_question164_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q165",
+               "section":"Nagoya",
+               "number":"165",
+               "type":"option",
+               "title": nr5T.nagoya_question165_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "validations":[
+                  {
+                     "question":"Q166",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q166",
+               "section":"Nagoya",
+               "number":"166",
+               "type":"option",
+               "title": nr5T.nagoya_question166_title,
+               "multiple": true,
+               "mandatory": true, 
+               "options":[
+                  {
+                     "value":"8F627A99-7CD4-D892-80EA-12C58607508F",
+                     "title": nr5T.nagoya_question166_options0_title
+                  },
+                  {
+                     "value":"888E88C5-0C25-76A8-B3C8-48C3FDAE5215",
+                     "title": nr5T.nagoya_question166_options1_title
+                  },
+                  {
+                     "value":"B985EF7B-B94E-BF56-3D56-BE2ACE2BB835",
+                     "title": nr5T.nagoya_question166_options2_title
+                  },
+                  {
+                     "value":"ADEF00D6-0901-8750-1069-5CBA877011CC",
+                     "title": nr5T.nagoya_question166_options3_title
+                  },
+                  {
+                     "value":"3F54E971-E791-FE00-5312-F7FF07C818B1",
+                     "title": nr5T.nagoya_question166_options4_title
+                  },
+                  {
+                     "value":"2D8B29DD-0703-6130-BE79-389F5278C21D",
+                     "title": nr5T.nagoya_question166_options5_title
+                  },
+                  {
+                     "value":"D475D239-517E-9D8B-E1F9-4C453039C792",
+                     "title": nr5T.nagoya_question166_options6_title
+                  },
+                  {
+                     "value":"8BD75295-88DF-2A32-A150-1132670E19A9",
+                     "title": nr5T.nagoya_question166_options7_title
+                  },
+                  {
+                     "value":"58FE50CB-9958-4F9F-FEE4-861628BDC6F7",
+                     "title": nr5T.nagoya_question166_options8_title
+                  },
+                  {
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                     "title": nr5T.other,
+                     "type":"lstring"
+                  }
+               ]
+            },
+            {
+               "key":"Q167",
+               "section":"Nagoya",
+               "number":"167",
+               "type":"option",
+               "title": nr5T.nagoya_question167_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "validations":[
+                  {
+                     "question":"Q168",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q168",
+               "section":"Nagoya",
+               "number":"168",
+               "type":"option",
+               "title": nr5T.nagoya_question168_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"2DAA6BFF-9EB2-F99E-AA11-CB348A25E7F2",
+                     "title": nr5T.nagoya_question168_options0_title
+                  },
+                  {
+                     "value":"6065EDB8-C5A4-BA81-5271-B2F93159A471",
+                     "title": nr5T.nagoya_question168_options1_title
+                  },
+                  {
+                     "value":"A038303D-7049-E34F-8381-5B59702BBCF6",
+                     "title": nr5T.nagoya_question168_options2_title
+                  },
+                  {
+                     "value":"9C54DE71-9B5A-5579-7B7B-E49DA2AB43CA",
+                     "title": nr5T.nagoya_question168_options3_title
+                  },
+                  {
+                     "value":"34BCA89E-DCBF-586E-02FD-37E6FFD186A4",
+                     "title": nr5T.nagoya_question168_options4_title
+                  },
+                  {
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                     "title": nr5T.other,
+                     "type":"lstring"
+                  }
+               ]
+            },
+            {
+               "key":"Q169",
+               "section":"Nagoya",
+               "number":"169",
+               "type":"option",
+               "title": nr5T.nagoya_question169_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "validations":[
+                  {
+                     "question":"Q170",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q170",
+               "section":"Nagoya",
+               "number":"170",
+               "type":"option",
+               "title": nr5T.nagoya_question170_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"69C39AF0-E97E-A277-5741-BC14BB5FFCB7",
+                     "title": nr5T.nagoya_question170_options0_title
+                  },
+                  {
+                     "value":"D12679C3-AE57-50EA-648E-9F0DC02B18E8",
+                     "title": nr5T.nagoya_question170_options1_title
+                  },
+                  {
+                     "value":"89B8212D-4CB0-FF9E-2107-F1D8D77C86D5",
+                     "title": nr5T.nagoya_question170_options2_title
+                  },
+                  {
+                     "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                     "title": nr5T.other,
+                     "type":"lstring"
+                  }
+               ]
+            },
+            {
+               "key":"Q171",
+               "section":"Nagoya",
+               "number":"171",
+               "type":"option",
+               "title": nr5T.nagoya_question171_title,
+               "multiple":true,
+               "options":[
+                  {
+                     "value":"878DF5F5-0B5E-48E1-6A42-80867A101675",
+                     "title": nr5T.nagoya_question171_options0_title
+                  },
+                  {
+                     "value":"0FC0DC50-EFAE-1C83-74F5-7A7D0205DB0A",
+                     "title": nr5T.nagoya_question171_options1_title
+                  },
+                  {
+                     "value":"true",
+                     "title": nr5T.nagoya_question171_options2_title,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q172",
+               "section":"Nagoya",
+               "number":"172",
+               "type":"option",
+               "title": nr5T.nagoya_question172_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ],
+               "validations":[
+                  {
+                     "question":"Q173",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"visible"
+                  }
+               ]
+            },
+            {
+               "key":"Q173",
+               "section":"Nagoya",
+               "number":"173",
+               "type":"option",
+               "title": nr5T.nagoya_question173_title,
+               "multiple":false,
+               "options":[
+                  {
+                     "value":"true",
+                     "title": nr5T.yes,
+                     "type":"lstring"
+                  },
+                  {
+                     "value":"false",
+                     "title": nr5T.no
+                  }
+               ]
+            },
+            {
+               "key":"Q174",
+               "section":"Nagoya",
+               "number":"174",
+               "type":"lstring",
+               "title": nr5T.nagoya_question174_title,
+               "multiple":false
+            }
+         ]
+      },
+      {
+         "key":"OtherInformation",
+         "title": nr5T.other_title,
+         "questions":[
+            {
+               "key":"Q175",
+               "section":"OtherInformation",
+               "number":"175",
+               "type":"lstring",
+               "title": nr5T.other_question175_title,
+               "multiple":false
+            }
+         ]
+      },
+      {
+         "key":"Comments",
+         "title": nr5T.Comments_title,
+         "questions":[
+            {
+               "key":"Q176",
+               "section":"Comments",
+               "number":"176",
+               "type":"lstring",
+               "title": nr5T.comments_question176_title,
                "multiple":false
             }
          ]
