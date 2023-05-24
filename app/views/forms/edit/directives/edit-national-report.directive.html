@@ -232,7 +232,7 @@
 
                             <div ng-switch="question.multiple">
                                 <div ng-switch-when="false">
-                                    <div nr-yes-no question="question" ng-model="document[question.key]" ng-change="updateAnswer(question)"
+                                    <div nr-yes-no question="question" custom-value-caption="{{question.customValueCaption}}" ng-model="document[question.key]" ng-change="updateAnswer(question)"
                                     locales="document.header.languages"></div>
                                 </div>
                                 <div ng-switch-when="true">
