@@ -63,7 +63,7 @@ export const npNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q004_1",
+                  "question": "Q004_a",
                   "values": [
                      "true"
                   ],
@@ -71,7 +71,7 @@ export const npNationalReport1 = [
                   "trigger": "enable"
                },
                {
-                  "question": "Q004_2",
+                  "question": "Q004_b",
                   "values": [
                      "true"
                   ],
@@ -82,13 +82,14 @@ export const npNationalReport1 = [
             "customValueCaption": nr1T.provideMoreInfo
          },
          {
-            "key": "Q004_1",
+            "key": "Q004_a",
             "section": "Part-II",
             "number": "4.1",
             "type": "option",
             "title": nr1T.part_II_question4_1_title,
             "multiple": false,
             "mandatory": true,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
@@ -105,13 +106,14 @@ export const npNationalReport1 = [
             ]
          },
          {
-            "key": "Q004_2",
+            "key": "Q004_b",
             "section": "Part-II",
             "number": "4.2",
             "type": "option",
             "title": nr1T.part_II_question4_2_title,
             "multiple": false,
             "mandatory": true,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
@@ -153,7 +155,7 @@ export const npNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q005_1",
+                  "question": "Q005_a",
                   "values": [
                      "true"
                   ],
@@ -161,7 +163,7 @@ export const npNationalReport1 = [
                   "trigger": "enable"
                },
                {
-                  "question": "Q005_2",
+                  "question": "Q005_b",
                   "values": [
                      "true"
                   ],
@@ -172,13 +174,14 @@ export const npNationalReport1 = [
             "customValueCaption": nr1T.provideMoreInfo
          },
          {
-            "key": "Q005_1",
+            "key": "Q005_a",
             "section": "Part-II",
             "number": "5.1",
             "type": "option",
             "title": nr1T.part_II_question5_1_title,
             "multiple": false,
             "mandatory": true,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
@@ -195,12 +198,13 @@ export const npNationalReport1 = [
             ]
          },
          {
-            "key": "Q005_2",
+            "key": "Q005_b",
             "section": "Part-II",
             "number": "5.2",
             "type": "option",
             "title": nr1T.part_II_question5_2_title,
             "multiple": false,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
