@@ -91,6 +91,7 @@ export const npNationalReport1 = [
             "title": nr1T.part_II_question4_1_title,
             "multiple": false,
             "mandatory": true,
+            "hasValidation": true,
             "options": [
                {
                   "value": "true",
