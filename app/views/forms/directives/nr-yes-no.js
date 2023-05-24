@@ -17,7 +17,7 @@ import _ from 'lodash';
             },
             link: function($scope, $element, $attr, ngModelController) {
                 
-                $scope.customValueLabel = $attr.customValueLabel||'Please Specify ';
+                $scope.caption = $attr.caption||'Please Specify ';
                 $scope.answer = {}
                 
                 $scope.updateAnswer = function(){
