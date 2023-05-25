@@ -1,4 +1,5 @@
 {
+    "question": "Question",
     "yes"  : "Yes",
     "no"   : "No",
     "yesAlways":  "Yes, always",
