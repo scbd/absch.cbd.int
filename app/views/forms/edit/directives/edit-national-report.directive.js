@@ -127,8 +127,8 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
                          //     console.log(mapping)
                          // }
  
-                         if(!mapQuestion)
-                         mapQuestion.hasValidation = true;
+                         if(mapQuestion && !mapQuestion.hasValidation)
+                            mapQuestion.hasValidation = true;
                          if(validationPositive){
                              mapQuestion[mapping.trigger] = true;                            
                              if(baseQuestion && mapping.trigger!='visible')

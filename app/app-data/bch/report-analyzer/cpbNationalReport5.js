@@ -424,7 +424,7 @@ export const cpbNationalReport5 = [
                         "values":[
                            "true"
                         ],
-                        "trigger":"visible"
+                        "trigger":"enable"
                      },
                      {
                         "question":"Q024",
