@@ -1,8 +1,9 @@
 ﻿import app from '~/app';
 import nrYesNoTemplate from 'text!./nr-yes-no.html';
 import _ from 'lodash';
+import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
 
-    app.directive('nrYesNo', ['$timeout', function ($timeout) {
+    app.directive('nrYesNo', ['$timeout', 'translationService', function ($timeout, translationService) {
         return {
             restrict: 'EA',
             template: nrYesNoTemplate,
@@ -16,8 +17,8 @@ import _ from 'lodash';
                 locales: "="
             },
             link: function($scope, $element, $attr, ngModelController) {
-                
-                $scope.caption = $attr.caption||'Please Specify ';
+                translationService.set('nrYesNoT', nrYesNoT);
+                $scope.caption = $attr.caption;
                 $scope.answer = {}
                 
                 $scope.updateAnswer = function(){
