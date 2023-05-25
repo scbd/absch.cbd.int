@@ -30,6 +30,8 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
             onPostSubmitFn     : "&onPostSubmit"
 		},
 		link : function($scope, $element, $attr){
+        $scope.isBCH        = realm.is('BCH');
+        $scope.isABS        = realm.is('ABS');
          $scope.multiTermModel = {};
          translationService.set('editNRT', editNRT);
          translationService.set('numbers', numbers);

@@ -6,7 +6,7 @@
             <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
                 <li class="nav-item" ng-repeat="tab in reportTabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
                     <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
-                        {{::('editNRT.question'|$translate)}} <span ng-bind="::tab.title"></span>
+                       <span ng-if="isBCH">{{::('editNRT.question'|$translate)}}</span> <span ng-bind="::tab.title"></span>
                     </a>
                 </li>
             </ul>
@@ -119,7 +119,7 @@
 
                             <div ng-switch="question.multiple">
                                 <div ng-switch-when="false">
-                                    <div nr-yes-no question="question" custom-value-caption="{{question.customValueCaption}}" ng-model="document[question.key]" ng-change="updateAnswer(question)"
+                                    <div nr-yes-no question="question" caption="{{question.caption}}" ng-model="document[question.key]" ng-change="updateAnswer(question)"
                                     locales="document.header.languages"></div>
                                 </div>
                                 <div ng-switch-when="true">
@@ -133,6 +133,15 @@
                         <div ng-switch-when="lstring">
                             <div km-textbox-ml rows=4 name="question.key" 
                                 ng-model="document[question.key]" locales="document.header.languages" ></div>
+                        </div>
+                        <div ng-switch-when="richText">
+                            <div km-rich-textbox rows=4 name="question.key" 
+                                ng-model="document[question.key]" locales="document.header.languages" ></div>
+                        </div>
+                        <div ng-switch-when="link">
+                            <div km-link name="question.key"
+                                ng-model="document[question.key]" allow-link="true"
+                                allow-file="true"></div>
                         </div>
                         <div ng-switch-default>
                             {{question}}
