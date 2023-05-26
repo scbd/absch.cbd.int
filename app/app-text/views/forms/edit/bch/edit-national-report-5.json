@@ -402,5 +402,9 @@
     "nagoya_question171_options2_title": "Yes, in other instruments:",
     "nagoya_question172_title": "Have there been any occurrences of damage resulting from LMOs in your country?",
     "nagoya_question173_title": "If you answered <i>Yes</i> to question 172, have response measures been taken?",
-    "nagoya_question174_title": "Please use the space below to provide further details on any activities undertaken in your country towards the implementation of the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress:"
+    "nagoya_question174_title": "Please use the space below to provide further details on any activities undertaken in your country towards the implementation of the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress:",
+    "other_title": "Other information",
+    "other_question175_title": "Please use this field to provide any other information on issues related to national implementation of the Cartagena Protocol and the Supplementary Protocol, including any obstacles or impediments encountered:",
+    "Comments_title": "Comments on reporting format",
+    "comments_question176_title": "Please use this field to provide any information on difficulties that you have encountered in filling in this report, and suggestions for its improvement."
 }
