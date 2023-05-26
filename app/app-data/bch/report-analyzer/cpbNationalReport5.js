@@ -2324,7 +2324,7 @@ export const cpbNationalReport5 = [
                "validations":[
                   {
                      "question":"Q082",
-                     "type":"&is79Or82Or81",
+                     "type":"&is79Or80Or81",
                      "trigger":"visible"
                   }
                ]
@@ -2355,7 +2355,7 @@ export const cpbNationalReport5 = [
                "validations":[
                   {
                      "question":"Q082",
-                     "type":"&is79Or82Or81",
+                     "type":"&is79Or80Or81",
                      "trigger":"visible"
                   }
                ]
@@ -2386,7 +2386,7 @@ export const cpbNationalReport5 = [
                "validations":[
                   {
                      "question":"Q082",
-                     "type":"&is79Or82Or81",
+                     "type":"&is79Or80Or81",
                      "trigger":"visible"
                   }
                ]
@@ -5086,20 +5086,23 @@ export const cpbNationalReport5 = [
                "options":[
                   {
                      "value":"6BAF09B7-6331-04E6-479D-C1C1B0D55ECD",
-                     "title": nr5T.nagoya_question161_options0_title
+                     "title": nr5T.nagoya_question161_options0_title,
+                     "type":"lstring"
                   },
                   {
                      "value":"0D3A9BB1-B378-174D-F4DD-1217D79D8B21",
-                     "title": nr5T.nagoya_question161_options1_title
+                     "title": nr5T.nagoya_question161_options1_title,
+                     "type":"lstring"
                   },
                   {
                      "value":"BA743C79-B202-4611-16C4-2C7D4678ACEB",
-                     "title": nr5T.nagoya_question161_options2_title
+                     "title": nr5T.nagoya_question161_options2_title,
+                     "type":"lstring"
                   },
                   {
                      "value":"9067DB5B-E33B-655D-83A3-32D4D562618F",
-                     "title": nr5T.nagoya_question161_options3_title,
-                     "type":"lstring"
+                     "title": nr5T.nagoya_question161_options3_title
+                     
                   }
                ]
             },
@@ -5147,10 +5150,7 @@ export const cpbNationalReport5 = [
                         },
                         {
                            "question":"Q165",
-                           "values":[
-                              "true"
-                           ],
-                           "type":"@hasValues",
+                           "type":"&is162_aOr162_b",
                            "trigger":"visible"
                         }
                      ]
@@ -5175,10 +5175,7 @@ export const cpbNationalReport5 = [
                      "validations":[
                         {
                            "question":"Q165",
-                           "values":[
-                              "true"
-                           ],
-                           "type":"@hasValues",
+                           "type":"&is162_aOr162_b",
                            "trigger":"visible"
                         }
                      ]
