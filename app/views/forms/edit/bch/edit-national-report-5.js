@@ -178,98 +178,59 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
       },
       {
           "tab":2,
-          "title":"7 - 13",
-          "sections" : [{key:"General"}, {key:"Article2"}]
+          "title":"7 - 15",
+          "sections" : [{key:"General"}, {key:"Article2"},{key:"Article5"}]
       },
       {
           "tab":3,
-          "title":"14 - 19",
-          "sections" : [{key:"Article5"}, {key:"Article6"}]
+          "title":"16 - 30",
+          "sections" : [{key:"Article6"},{key:"Articles7-10"}]
       },
       {
            "tab":4,
-           "title":"20 - 30",
-           "sections" : [{key:"Articles7-10"}]
+           "title":"31 - 44",
+           "sections" : [{key:"Article11"},{key:"Article12"}]
       },
       {
            "tab":5,
-           "title":"31 - 36",
-           "sections" : [{key:"Article11"}]
-      },
-      {
-           "tab":5,
-           "title":"37 - 44",
-           "sections" : [{key:"Article12"}]
-      },
-      {
-           "tab":6,
            "title":"45 - 52",
            "sections" : [{key:"Article13"},{key:"Article14"}]
       },
       {
+           "tab":6,
+           "title":"53 - 78",
+           "sections" : [{key:"Articles15-16"}, {key:"Article17"}]
+      },
+
+      {
            "tab":7,
-           "title":"53 - 72",
-           "sections" : [{key:"Articles15-16"}]
+           "title":"79 - 101",
+           "sections" : [{key:"Article18"},{key:"Article19"}]
       },
       {
            "tab":8,
-           "title":"73 - 78",
-           "sections" : [{key:"Article17"}]
+           "title":"102 - 126",
+           "sections" : [{key:"Article20"},{key:"Article21"},{key:"Article22"}]
       },
       {
            "tab":9,
-           "title":"79 - 97",
-           "sections" : [{key:"Article18"}]
+           "title":"127 - 148",
+           "sections" : [{key:"Article23"},{key:"Article24"},{key:"Article25"}]
       },
       {
            "tab":10,
-           "title":"98 - 101",
-           "sections" : [{key:"Article19"}]
+           "title":"149 - 158",
+           "sections" : [{key:"Article26"}, {key:"Article28"},{key:"Article33"}, {key:"Cooperation"}]
       },
       {
            "tab":11,
-           "title":"102 - 108",
-           "sections" : [{key:"Article20"}]
+           "title":"159 - 174",
+           "sections" : [{key:"Nagoya"}]
       },
       {
            "tab":12,
-           "title":"109 - 111",
-           "sections" : [{key:"Article21"}]
-      },
-      {
-           "tab":13,
-           "title":"112 - 126",
-           "sections" : [{key:"Article22"}]
-      },
-      {
-           "tab":14,
-           "title":"127 - 139",
-           "sections" : [{key:"Article23"}]
-      },
-      {
-           "tab":15,
-           "title":"140 - 144",
-           "sections" : [{key:"Article24"}]
-      },
-      {
-           "tab":16,
-           "title":"145 - 148",
-           "sections" : [{key:"Article25"}]
-      },
-      {
-           "tab":17,
-           "title":"149 - 153",
-           "sections" : [{key:"Article26"}, {key:"Article28"}]
-      },
-      {
-           "tab":18,
-           "title":"154 - 158",
-           "sections" : [{key:"Article33"}, {key:"Cooperation"}]
-      },
-      {
-           "tab":19,
-           "title":"159 - 176",
-           "sections" : [{key:"Nagoya"}, {key:"OtherInformation"}, {key:"Comments"}]
+           "title":"175 - 176",
+           "sections" : [{key:"OtherInformation"},{key:"Comments"}]
       }
   ];
          $scope.questions = [cpbNationalReport5, cpbNationalReport4];
