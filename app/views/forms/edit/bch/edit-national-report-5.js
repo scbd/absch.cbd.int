@@ -9,7 +9,6 @@ import '~/views/forms/directives/nr-yes-no';
 import '~/views/forms/edit/document-selector';
 import '~/views/directives/block-region-directive';
 // ToDo import view directive once developed
-import '~/components/scbd-angularjs-services/main';
 export { default as template } from './edit-national-report-5.html';
 import 'ngDialog';
 import '~/views/forms/edit/directives/edit-national-report.directive';
@@ -17,9 +16,9 @@ import {cpbNationalReport5} from '~/app-data/bch/report-analyzer/cpbNationalRepo
 import {cpbNationalReport4} from '~/app-data/bch/report-analyzer/cpbNationalReport4';
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json'; 
 import numbers from '~/app-text/numbers.json';
-export default ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
+export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout", 
 'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm', 'translationService',
-function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
+function ($scope,  $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
     
      $scope.multiTermModel = {};
      
@@ -31,7 +30,7 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
         var user = $rootScope.user;
         $scope.activeTab = 1     
        
-        $scope.customValidations = {} // ToDo get from directive if required
+        $scope.customValidations = {} ;
         // TODO: read from mapping file
         var previousAnswerMapping = $scope.previousAnswerMapping = {};
 
@@ -49,10 +48,6 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 
-        $scope.customValidations = {
-            is79Or82Or81   : is79Or82Or81,
-            is141Or142 : is141Or142
-        }
         //==================================
         //
         //==================================
@@ -76,7 +71,10 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
         function is79Or82Or81(){
             return ($scope.document['Q079']||{}).value == 'true' || ($scope.document['Q081']||{}).value == 'true' || ($scope.document['Q082']||{}).value == 'true';
         }
-
+        $scope.customValidations = {
+            is79Or82Or81   : is79Or82Or81,
+            is141Or142 : is141Or142
+        }
         $scope.onGovernmentChange = function(government){
             if(government && $scope.document){
 
@@ -110,15 +108,7 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
                            $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value, customValue: e.additionalInformation }});
                        }
                    })
-                   //transformNrData();//workaround as in the first call not all questions are built so the disable/visible clause does not work.
-
                }
-               //render remaining tabs
-               // var timeout = 2000;
-               // _.each($scope.nr4Tabs, function(t){                 
-               //     $timeout(function(){ t.render=true}, timeout );
-               //     timeout += 1000;
-               // })
            });
        }
 

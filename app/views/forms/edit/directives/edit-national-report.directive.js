@@ -2,11 +2,10 @@ import app from '~/app';
 import template from "text!./edit-national-report.directive.html";
 import _ from 'lodash';
 import 'ngDialog';
-
-import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json'; // ToDo move the common folder
+import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
 import numbers from '~/app-text/numbers.json';
-app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate", "$http", "commonjs", "IStorage", "$timeout", "$routeParams", "Thesaurus", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'ngDialog', 'realm', 'solr', 'translationService',
-    function ($controller, $rootScope, $interpolate, $http, commonjs, storage, $timeout, $routeParams, thesaurus, $q, guid, editFormUtility, locale, thesaurusService, ngDialog, realm, solr, translationService) {
+app.directive("editNationalReport", ["$controller",  "$http", "$timeout", 'guid', 'ngDialog', 'realm', 'translationService',
+    function ($controller,  $http, $timeout, guid, ngDialog, realm, translationService) {
 
 	return {
 		restrict   : "AE",
@@ -14,9 +13,10 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
 		replace    : true,
 		transclude : true,
 		scope      : {
-            reportTabs         : "=",
+            reportTabs: "=",
             questions : "=",
             customValidations: "=",
+            // getDocumentFn : '&document',
             document: '=document'
 		},
 		link : function($scope, $element, $attr){
@@ -26,7 +26,6 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
          translationService.set('editNRT', editNRT);
          translationService.set('numbers', numbers);
          $scope.tab = 'intro';
-         //var user = $rootScope.user;
          $scope.activeTab = 1     
         
          // TODO: read from mapping file
@@ -39,7 +38,6 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
          //
          //==================================
       
-         
          $scope.setTab = function(index, isScroll){
              if(isScroll){
                  window.scrollTo(0, 0);
@@ -108,14 +106,8 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
                              else if(mapping.type === '@hasValuesExcept'){
                                  validationPositive   = !_.some(answers, function(a){ return a && mapping.values.indexOf(a.value)>=0});
                              }
-                             // else{
-                             //     console.log(mapping)
-                             // }
                          }
-                         // else{
-                         //     console.log(mapping)
-                         // }
- 
+
                          if(mapQuestion && !mapQuestion.hasValidation)
                             mapQuestion.hasValidation = true;
                          if(validationPositive){
@@ -144,8 +136,6 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
              
          }
  
-         
-        
 
         $scope.isQuestionDisabled = function(question){
             if(question.hasValidation){
@@ -212,7 +202,7 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
             if(question.validations)
                 $scope.updateAnswer(question, baseQuestion);
         }
-
+        //ToDo change the path https://api.cbd.int/api/v2015/national-reports-cpb-3 dynamically
         async function loadPreviousReport(){
             if(!$scope.document)
                 return;
@@ -264,10 +254,9 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
            // mappingReport();
 
             $timeout(function(){
-                transformNrData();     
-                //console.log("customValidations", $scope.customValidations)       
+                transformNrData();          
             }, 200);
-            //Todo use  $scope.getDocumentFn();
+            //Todo 
             $scope.setDocument({}).then(function(document){
                  console.log("document", document)  
                 if(document && document.header.identifier){
@@ -280,9 +269,8 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
                 }
             });
         }
-
         
-        init(); //ToDo
+        init();
     }
   }
 }]);
