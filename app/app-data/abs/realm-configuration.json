@@ -323,6 +323,36 @@
               "zh": "《名古屋议定书》执行情况临时国家报告"
           }
       },
+      "absNationalReport1": {
+        "type": "national",
+        "title": {
+            "en": "First National Reports on the Implementation of the Nagoya Protocol",
+            "ar": "التقارير الوطنية الأولى عن تنفيذ بروتوكول ناغويا",
+            "es": "Informes nacionales provisionales sobre la aplicación del Protocolo de Nagoya",
+            "fr": "Primeros informes nacionales sobre la implementación del Protocolo de Nagoya",
+            "ru": "Первые национальные доклады о выполнении Нагойского протокола",
+            "zh": "关于名古屋议定书执行情况的第一份国家报告"
+        },
+        "description": {
+            "en": "First national reports on implementation of the Nagoya Protocol on Access and Benefit-sharing",
+            "ar": "",
+            "es": "",
+            "fr": "",
+            "ru": "",
+            "zh": ""
+        },
+        "shortCode": "NR1",
+        "titlePlural": {
+            "en": "First National Reports on the Implementation of the Nagoya Protocol",
+            "ar": "",
+            "es": "",
+            "fr": "",
+            "ru": "",
+            "zh": ""
+        }
+    },
+
+
       "resource": {
           "type": "reference",
           "publishingAuthorities": [

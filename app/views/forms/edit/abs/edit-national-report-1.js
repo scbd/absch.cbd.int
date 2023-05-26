@@ -17,9 +17,9 @@ import {npNationalReport1} from '~/app-data/abs/report-analyzer/npNationalReport
 import {cpbNationalReport4} from '~/app-data/bch/report-analyzer/cpbNationalReport4';
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json'; 
 import numbers from '~/app-text/numbers.json';
-export default ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
+export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout", 
 'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm', 'translationService',
-function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
+function ($scope,  $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
     
      $scope.multiTermModel = {};
      
@@ -31,7 +31,7 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
         var user = $rootScope.user;
         $scope.activeTab = 1     
        
-        $scope.customValidations = {} // ToDo get from directive if required
+        $scope.customValidations = {} ;
         // TODO: read from mapping file
         var previousAnswerMapping = $scope.previousAnswerMapping = {};
 
@@ -99,24 +99,63 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
                            $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value, customValue: e.additionalInformation }});
                        }
                    })
-                   //transformNrData();//workaround as in the first call not all questions are built so the disable/visible clause does not work.
-
                }
-               //render remaining tabs
-               // var timeout = 2000;
-               // _.each($scope.nr4Tabs, function(t){                 
-               //     $timeout(function(){ t.render=true}, timeout );
-               //     timeout += 1000;
-               // })
            });
        }
 
-    
+       function verifyCountryHasReport(){
+        $q.all([
+            storage.documents.query("(type eq '$scope.cpbCurrentReport')", "my", {$top:10}),
+            storage.drafts.query("(type eq '$scope.cpbCurrentReport')", {$top:10})
+        ])
+        .then(function(nationalRecords) {
+            var filterByGovernment = function(item){
+                return item && (item.metadata||{}).government == $scope.document.government.identifier
+            }              
+            var published   = _.find((nationalRecords[0].data||{}).Items,  filterByGovernment);
+            var draft       = _.find((nationalRecords[1].data||{}).Items,  filterByGovernment);
+
+            if (((published || draft) && (!$routeParams.identifier || $routeParams.identifier != (draft||published).identifier))) {
+                $scope.blockEditForm = true;
+                ngDialog.open({
+                    template: 'recordExistsTemplate.html',													
+                    closeByDocument: false,
+                    closeByEscape: false,
+                    showClose: false,
+                    closeByNavigation: false,
+                    controller: ['$scope', '$timeout', '$location', function($scope, $timeout, $location) {
+                        $scope.alertSeconds = 10;
+                        time();
+
+                        function time(){
+                            $timeout(function(){
+                                if($scope.alertSeconds == 1){																	
+                                    $scope.openExisting();
+                                }
+                                else{
+                                    $scope.alertSeconds--;																
+                                    time()
+                                }
+                            }, 1000)
+                        }
+                        $scope.openExisting = function() {
+                            ngDialog.close();
+                            $location.path('register/NR4/' + (draft||published).identifier+'/edit');
+                        }
+                    }]
+                });
+            }
+            else{
+
+            }
+        });
+    }
        init(); //ToDo
    
     $scope.tabs = [{
         "tab":1,
-        "title":"1 - 6",
+        "title":"Part-I",
+        "sections" : [{key:"contact"}],
         render:true
     },
     {

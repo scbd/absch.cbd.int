@@ -1,4 +1,5 @@
 <div>
+    <edit-header></edit-header>
     <style>
         .disabled {
             -moz-opacity:.50;filter:alpha(opacity=50);opacity:.50;
@@ -13,20 +14,17 @@
             position: relative;
         }
     </style>
-     <edit-header></edit-header>
     <div class="innerPageEditForm">
-    
+
+        
         <div class="registerpage-content edit-national-report" style="padding-bottom:30px;" ng-class="{'block-position' : blockEditForm || isLoading()}">
 
-            <div block-region activate="blockEditForm || isLoading()"></div>
-
+            <div block-region activate="blockEditForm || isLoading()"></div>      
             <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
                 tab="tab" on-step-change="onStepChange(tab)" validation-report="validationReport" on-post-close="onPostClose()" 
-                on-error="onError(error, errorCode)">  
-                <edit-form>
-                    
-                    <div edit-national-report report-tabs="tabs" questions="questions" document="getCleanDocument()"></div>    
- 
+                on-error="onError(error, errorCode)">
+                <edit-form>                    
+                    <edit-national-report report-tabs="tabs" questions="questions" custom-validations="customValidations" document="document"></edit-national-report>      
                 </edit-form>
                 <review-form>
                     <view-cpb-national-report-4 ng-model="review.document" locale="review.locale" allow-drafts="true"></view-cpb-national-report-4>
