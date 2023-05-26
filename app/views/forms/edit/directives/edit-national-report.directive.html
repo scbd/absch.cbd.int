@@ -79,14 +79,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div ng-if="tab.tab==1"  class="section-pane panel panel-default" id="section1" 
-                                        style="margin-bottom:3px!important">
-                                        
+                                    <div ng-if="tab.tab==1"  class="section-pane panel panel-default" id="section1" style="margin-bottom:3px!important"> 
                                         <div class="panel-heading">
                                             <strong>{{::('editNRT.generalInfo'|$translate)}}</strong>
                                         </div>
                                         <div class="panel-body" style="padding:0px">
-                                            <div ng-include="'contact'"></div>
+                                            <div ng-include="tab.sections[0].key"></div>
                                         </div>
                                     </div>
                                 </div>

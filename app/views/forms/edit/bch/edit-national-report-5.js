@@ -161,9 +161,11 @@ function ($scope,  $rootScope, locale, $q, $controller, $timeout, commonjs, stor
     }
        init(); //ToDo
    
-       $scope.tabs = [{
+      $scope.tabs = [
+      {
           "tab":1,
           "title":"1 - 6",
+          "sections" : [{key:"contact"}],
           render:true
       },
       {
