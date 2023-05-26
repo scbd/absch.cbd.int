@@ -32,7 +32,7 @@ export const npNationalReport1 = [
                   "type": "lstring"
                }
             ],
-            "customValueCaption": nr1T.provideMoreInfo
+            "caption": nr1T.provideMoreInfo
          },
          {
             "key": "Article13.2",
@@ -79,7 +79,7 @@ export const npNationalReport1 = [
                   "trigger": "enable"
                }
             ],
-            "customValueCaption": nr1T.provideMoreInfo
+            "caption": nr1T.provideMoreInfo
          },
          {
             "key": "Q004_a",
@@ -171,7 +171,7 @@ export const npNationalReport1 = [
                   "trigger": "enable"
                }
             ],
-            "customValueCaption": nr1T.provideMoreInfo
+            "caption": nr1T.provideMoreInfo
          },
          {
             "key": "Q005_a",
