@@ -136,6 +136,10 @@
                             <div km-rich-textbox rows=4 name="question.key" 
                                 ng-model="document[question.key]" locales="document.header.languages" ></div>
                         </div>
+                        <div ng-switch-when="int">
+                            <input type="number" name="question.key"
+                                 ng-model="document[question.key]" locales="document.header.languages" class="form-control"/>
+                        </div>
                         <div ng-switch-when="link">
                             <div km-link name="question.key"
                                 ng-model="document[question.key]" allow-link="true"
