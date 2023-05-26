@@ -49,6 +49,10 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 
+        $scope.customValidations = {
+            is79Or82Or81   : is79Or82Or81,
+            is141Or142 : is141Or142
+        }
         //==================================
         //
         //==================================
@@ -64,6 +68,14 @@ function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs
 
             return $scope.sanitizeDocument(document);
         };
+
+        function is141Or142(){
+            return ($scope.document['Q141']||{}).value == 'true' || ($scope.document['Q142']||{}).value == 'true';
+        }
+
+        function is79Or82Or81(){
+            return ($scope.document['Q079']||{}).value == 'true' || ($scope.document['Q081']||{}).value == 'true' || ($scope.document['Q082']||{}).value == 'true';
+        }
 
         $scope.onGovernmentChange = function(government){
             if(government && $scope.document){

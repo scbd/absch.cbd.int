@@ -1,18 +1,9 @@
 import app from '~/app';
 import template from "text!./edit-national-report.directive.html";
 import _ from 'lodash';
-// import '~/views/directives/workflow-arrow-buttons';
-import '~/components/scbd-angularjs-services/main';
-import '~/views/forms/edit/editFormUtility';
-import '~/views/forms/edit/edit';
-import '~/services/main';
-import '~/views/forms/directives/nr-yes-no';
-import '~/views/forms/edit/document-selector';
-import '~/views/directives/block-region-directive';
-import '~/components/scbd-angularjs-services/main';
 import 'ngDialog';
 
-import editNRT from '~/app-text/views/forms/edit/bch/edit-national-report-5.json'; // ToDo move the common folder
+import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json'; // ToDo move the common folder
 import numbers from '~/app-text/numbers.json';
 app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate", "$http", "commonjs", "IStorage", "$timeout", "$routeParams", "Thesaurus", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'ngDialog', 'realm', 'solr', 'translationService',
     function ($controller, $rootScope, $interpolate, $http, commonjs, storage, $timeout, $routeParams, thesaurus, $q, guid, editFormUtility, locale, thesaurusService, ngDialog, realm, solr, translationService) {
@@ -25,9 +16,8 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
 		scope      : {
             reportTabs         : "=",
             questions : "=",
-            getDocumentFn : '&document',
-			form               : "=form",
-            onPostSubmitFn     : "&onPostSubmit"
+            customValidations: "=",
+            document: '=document'
 		},
 		link : function($scope, $element, $attr){
         $scope.isBCH        = realm.is('BCH');
@@ -39,7 +29,6 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
          //var user = $rootScope.user;
          $scope.activeTab = 1     
         
-         $scope.customValidations = {} // ToDo get from directive if required
          // TODO: read from mapping file
          var previousAnswerMapping = $scope.previousAnswerMapping = {};
          $controller('editController', {
@@ -224,15 +213,63 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
                 $scope.updateAnswer(question, baseQuestion);
         }
 
+        async function loadPreviousReport(){
+            if(!$scope.document)
+                return;
+            const cpbPreviousReport = $scope.questions[1];
+            var params = { q: {'government.identifier':$scope.document.government.identifier }};
+            $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params : params} )
+                 .then(function(result){
+                     var prevReportAnswers = result.data[0];
+                     var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
+
+                     _.forEach(previousAnswerMapping, function(mapping, key){
+                        
+                        var prevQuestion    = _.find(prevReportQuestions, {key:mapping.prevQuestion})
+                        if(prevQuestion){
+                            mapping.previousQuestion          = { title : prevQuestion.title };
+                            if(prevReportAnswers){
+                                var prevAnswer = prevReportAnswers[mapping.prevQuestion];
+                                if(_.isArray(prevAnswer)){
+                                    mapping.previousQuestion.type = 'array';
+                                    mapping.previousQuestion.answer   = _.map(prevAnswer, function(answer){ 
+                                            return (_.find(prevQuestion.options, {value: answer.identifier||answer})||{}).title
+                                    })
+                                }
+                                else if(_.isObject(prevAnswer)){
+                                    if(prevAnswer.en||prevAnswer.fr||prevAnswer.es||prevAnswer.ar||prevAnswer.ru||prevAnswer.zh){
+                                        mapping.previousQuestion.answer   = prevAnswer;
+                                        mapping.previousQuestion.type = 'lstring';
+                                    }
+                                    else{
+                                        mapping.previousQuestion.answer   = (_.find(prevQuestion.options, {value: prevAnswer.identifier||prevAnswer})||{}).title;
+                                        mapping.previousQuestion.type = 'string';
+                                    }
+                                }
+                                else{
+                                    mapping.previousQuestion.answer   = (_.find(prevQuestion.options, {value: prevAnswer})||{}).title;
+                                    mapping.previousQuestion.type = 'string'
+                                }
+                            }
+                        }
+                        else 
+                            console.log(mapping)
+                     })
+
+                     return prevReportAnswers;
+                })
+        }
 
         function init(){
            // mappingReport();
 
             $timeout(function(){
-                transformNrData();            
+                transformNrData();     
+                //console.log("customValidations", $scope.customValidations)       
             }, 200);
             //Todo use  $scope.getDocumentFn();
             $scope.setDocument({}).then(function(document){
+                 console.log("document", document)  
                 if(document && document.header.identifier){
                     _.forEach(document, function(element, key){
                         if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
@@ -240,7 +277,6 @@ app.directive("editNationalReport", ["$controller", "$rootScope", "$interpolate"
                         }
                     })
                     transformNrData();
-
                 }
             });
         }
