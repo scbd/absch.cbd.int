@@ -241,17 +241,20 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ],
             "validations": [
@@ -264,8 +267,7 @@ export const npNationalReport1 = [
                   "type": "@hasValues",
                   "trigger": "enable"
                }
-            ],
-            "caption": nr1T.pleaseExplainYourResponse
+            ]
          },
          {
             "key": "Q007_a",
@@ -309,20 +311,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yesInAllCases,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesInSomeCases,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.part_III_question8_option2_title,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
-            ],
-            "caption": nr1T.pleaseExplainYourResponse
+            ]
          },
          {
             "key": "question9_legend",
@@ -350,20 +354,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
-            ],
-            "caption": nr1T.pleaseExplainYourResponse
+            ]
          },
          {
             "key": "Article6.3_c",
@@ -384,20 +390,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ],
-            "caption": nr1T.pleaseExplainYourResponse,
             "validations": [
                {
                   "question": "Q010_a",
@@ -450,20 +458,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
-            ],
-            "caption": nr1T.pleaseExplainYourResponse
+            ]
          },
 
 
@@ -488,20 +498,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yesInAllCases,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ],
-            "caption": nr1T.pleaseExplainYourResponse,
             "validations": [
                {
                   "question": "Q012_a",
@@ -550,15 +562,16 @@ export const npNationalReport1 = [
                {
                   "value": "true.some",
                   "title": nr1T.yesInSomeCases,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
-            ],
-            "caption": nr1T.pleaseExplainYourResponse
+            ]
          },
          {
             "key": "Article6.3_g",
@@ -579,20 +592,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ],
-            "caption": nr1T.pleaseExplainYourResponse,
             "validations": [
                {
                   "question": "Q013_a",
