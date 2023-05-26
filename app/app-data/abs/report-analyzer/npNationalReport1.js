@@ -24,15 +24,16 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.provideMoreInfo
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.provideMoreInfo
                }
-            ],
-            "caption": nr1T.provideMoreInfo
+            ]
          },
          {
             "key": "Article13.2",
@@ -53,12 +54,14 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.provideMoreInfo
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.provideMoreInfo
                }
             ],
             "validations": [
@@ -78,8 +81,7 @@ export const npNationalReport1 = [
                   "type": "@hasValues",
                   "trigger": "enable"
                }
-            ],
-            "caption": nr1T.provideMoreInfo
+            ]
          },
          {
             "key": "Q004_a",
@@ -145,12 +147,14 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.provideMoreInfo
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.provideMoreInfo
                }
             ],
             "validations": [
@@ -170,8 +174,7 @@ export const npNationalReport1 = [
                   "type": "@hasValues",
                   "trigger": "enable"
                }
-            ],
-            "caption": nr1T.provideMoreInfo
+            ]
          },
          {
             "key": "Q005_a",
