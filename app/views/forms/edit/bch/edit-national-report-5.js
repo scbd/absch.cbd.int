@@ -165,7 +165,7 @@ function ($scope,  $rootScope, locale, $q, $controller, $timeout, commonjs, stor
       {
           "tab":1,
           "title":"1 - 6",
-          "sections" : [{key:"contact"}],
+          "ngIncludeId": "contact",
           render:true
       },
       {
