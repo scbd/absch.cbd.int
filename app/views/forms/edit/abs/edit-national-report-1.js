@@ -155,7 +155,7 @@ function ($scope,  $rootScope, locale, $q, $controller, $timeout, commonjs, stor
     $scope.tabs = [{
         "tab":1,
         "title":"Part-I",
-        "sections" : [{key:"contact"}],
+        "ngIncludeId":  "contact",
         render:true
     },
     {
