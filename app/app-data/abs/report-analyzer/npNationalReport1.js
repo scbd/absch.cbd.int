@@ -277,7 +277,6 @@ export const npNationalReport1 = [
             "title": nr1T.part_III_question7_1_title,
             "multiple": false,
             "mandatory": true,
-            "hasValidation": true,
             "options": [
                {
                   "value": "60CD889F-4E08-450C-A67C-5F29A2B1E704",
@@ -425,7 +424,6 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question10_1_title,
             "multiple": false,
-            "hasValidation": true,
             "options": [
                {
                   "value": "true",
@@ -542,7 +540,6 @@ export const npNationalReport1 = [
             "type": "int",
             "title": nr1T.part_III_question12_1_title,
             "multiple": false,
-            "hasValidation": true,
             "mandatory": true
          },
          {
@@ -552,7 +549,6 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question12_2_title,
             "multiple": false,
-            "hasValidation": true,
             "mandatory": true,
             "options": [
                {
@@ -627,7 +623,6 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question13_1_title,
             "multiple": false,
-            "hasValidation": true,
             "options": [
                {
                   "value": "true",
@@ -645,13 +640,10 @@ export const npNationalReport1 = [
             "section": "Part-III",
             "number": "14",
             "type": "link",
-            "title": nr1T.part_III_question14_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
 
       ]
    }
-
-
-   
 ]
