@@ -6,11 +6,16 @@
     "yesToSomeExtent":  "Yes, to some extent:",    
     "other": "Other",
     "none" : "None",
+    "one": "One",
+    "lessThanThree": "Less than three ",
+    "betweenThreeAndFive": "Between 3 and 5",
+    "betweenFiveAndTen": "Between 5 and 10",
+    "tenOrMore": "10 or more",
     "websiteName": "URL and website name",
-    "attachment":   "Attachment",
-    "pleaseSpecify": "Please Specify",
+    "attachment": "Attachment",
     "pleaseExplainYourResponse": "Please explain your response",
-    "provideFurtherInformation": "Please provide further information on your response",
+    "pleaseProvideFurtherInformation": "Please provide further information on your response.",
+    "reportingPeriod": "Please explain your response and, if applicable, provide a summary of activities carried out during the reporting period.",
     "additionalInformation": "Additional information.",
     "provideMoreInfo":  "Please provide more information on your response and a summary of difficulties and challenges encountered.",
     "notApplicable":   "Not applicable",
@@ -133,14 +138,12 @@
     "part_IX_question43_title": "Has implementation of the Nagoya Protocol contributed to conservation and sustainable use of biodiversity in your country?",
     "part_IX_question43_custom_caption": "Please explain your response and provide, if available, supporting data or examples of impact at national and/or local levels",
     "part_IX_question44_title": "Has your country received monetary benefits from granting access to genetic resources for their utilization and/or access to traditional knowledge associated with genetic resources during the reporting period?",
-    
     "part_IX_question44_a_option0_title": "Access fees and/or up-front payments",
     "part_IX_question44_a_option1_title": "Milestone payments, royalties and/or license fees",
     "part_IX_question44_a_option2_title": "Research funding, grants and/or scholarships",
     "part_IX_question44_a_option3_title": "Contributions to a national or local fund",
     "part_IX_question44_a_option4_title": "Salaries",
     "part_IX_question44_a_option5_title": "Joint ventures",
-    
     "part_IX_question44_1_title": "Please provide the amount of monetary benefits received during the reporting period (in United States dollars) from granting access to genetic resources and/or traditional knowledge associated with genetic resources.",
     "part_IX_question45_title": "Has your country received non-monetary benefits from granting access to genetic resources for their utilization and/or access to traditional knowledge associated with genetic resources during the reporting period?",
     "part_IX_question45_a_option0_title": "Sharing of information, research results",
@@ -155,29 +158,57 @@
     "article11_2": "Article 11.2",
     "part_X_question47_title": "Has your country endeavoured to cooperate, with the involvement of indigenous peoples and local communities concerned where applicable, in instances where the same genetic resources are found in situ within the territory of more than one Party?",
     "part_X_question48_title": "Has your country endeavoured to cooperate in instances where the same traditional knowledge associated with genetic resources is shared by one or more indigenous peoples and local communities in several Parties?",
-    
+
+
+    "part_XI_title": "Part XI - Model contractual clauses, codes of conduct, guidelines and best practices and/or standards (Articles 19 and 20)",
+    "article19": "Article 19",
+    "part_XI_question50_title": "Has your country encouraged other actors to develop, update and use model contractual clauses for mutually agreed terms?",
+    "article20": "Article 20",
+    "part_XI_question51_title": "Has your country encouraged other actors to develop, update and use of codes of conduct, guidelines and best practices or standards?",
+    "part_XI_question52_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
+
+    "part_XII_title": "Part XII - Awareness-raising and capacity (Articles 21 and 22)",
+    "article21": "Article 21",
+    "part_XII_question53_title": "Has your country taken measures to raise awareness of the importance of genetic resources and traditional knowledge associated with genetic resources and related access and benefit-sharing issues?",
+    "part_XII_question53_1_title": "Has your country adopted an awareness-raising strategy for the Nagoya Protocol on ABS?",
+    "article22": "Article 22",
+    "part_XII_question54_title": "Has your country taken measures to build and develop its capacity and strengthen its human resources and institutional capacities to effectively implement the Protocol?",
+    "part_XII_question54_1_title": "Please provide data, if available, on capacity-building activities carried out during the reporting period.",
+    "part_XII_question54_a_option1_title": "Number of people trained:",
+    "part_XII_question54_b_option1_title": "Number of workshops/trainings:",
+    "part_XII_question54_c_option1_title": "Number of active capacity-building and development initiatives:",
+    "part_XII_question55_title": "Has your country taken measures to build and develop the capacity and strengthen human resources and institutional capacities of other Parties   to effectively implement the Protocol? ",
+    "part_XII_question56_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
+
     "part_XIII_title": "Part XIII - Technology transfer, collaboration and cooperation (Article 23)",
     "article23": "Article 23",
     "part_XIII_question57_title": "Has your country collaborated and cooperated in technical and scientific research and development programmes related to ABS during the reporting period?",
     "part_XIII_question58_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
-    
-    
+
     "part_XIV_title": "Part XIV - Financial resources (Article 25) and resource mobilization",
     "article25": "Article 25",
     "part_XIV_question59_title": "Has your country made financial or other resources available to other Parties for the purpose of implementing the Protocol during the reporting period?",
     "part_XIV_question60_title": "Has your country received financial or other resources from other Parties or financial institutions for the purpose of implementing the Protocol during the reporting period?",
-    "part_XIV_question60_a_option0_title": "From other Parties (please specify):",
-    "part_XIV_question60_a_option1_title": "From the Global Environmental Facility (GEF)",
-    "part_XIV_question60_a_option2_title": "From financial institutions other than the GEF (please specify):",
-    "part_XIV_question60_a_option3_title": "From other sources (please specify):",
-    "part_XIV_question60_1_title": "Please provide the amount of resources received (in United States dollars) during the reporting period",
+    "part_XIV_question60_option0_title": "From other Parties",
+    "part_XIV_question60_option1_title": "From the Global Environmental Facility (GEF)",
+    "part_XIV_question60_option2_title": "From financial institutions other than the GEF",
+    "part_XIV_question60_option3_title": "From other sources",
+    "part_XIV_question60_1_title": "Please provide the amount of resources received (in United States dollars) during the reporting period.",
     "part_XIV_question61_title": "Has your country established a mechanism for budgetary allocations of funds for the operation of your national ABS framework?",
     "part_XIV_question62_title": "Does your country have full-time staff working in functions directly related to the implementation of the Nagoya Protocol? If so, how many?",
-    "part_XIV_question62_a_option0_title": "One",
-    "part_XIV_question62_a_option1_title": "Less than three",
-    "part_XIV_question62_a_option2_title": "Between 3 and 5",
-    "part_XIV_question62_a_option3_title": "Between 5 and 10",
-    "part_XIV_question62_a_option4_title": "10 or more",
-    "part_XIV_question63_title": "Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol.",
-    "part_XIV_question64_title": "Please provide information on the status of funds mobilized in support of the implementation of the Protocol."
+    "part_XIV_question63_title": "Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol. ",
+    "part_XIV_question64_title": "Please provide information on the status of funds mobilized in support of the implementation of the Protocol. ",
+    "part_XIV_question65_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
+
+
+    "part_XV_title": "Part XV – Measures related to other international instruments (Article 4)",
+    "part_XIV_question66_title": "Is your country a Party to a specialized international access and benefit-sharing instrument?",
+    "part_XIV_question66_1_title": "Has your country adopted measures to implement this instrument?",
+   
+
+    "part_XVI_title": "Part XVI – Optional additional information",
+    "part_XVI_question67_title": "Please provide any other relevant information that may not have been addressed elsewhere in the report.",
+    "part_XVI_question68_title": "Please provide any comments or suggestions that you may have regarding the format of this report or the reporting guidelines.",
+    "part_XVI_question69_title": "Notes:"
+ 
 }
