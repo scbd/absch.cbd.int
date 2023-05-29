@@ -163,7 +163,7 @@ export const cpbNationalReport5 = [
                         "values":[
                            "true"
                         ],
-                        "trigger":"visible"
+                        "trigger":"enable"
                      }
                   ]
                },
@@ -432,7 +432,7 @@ export const cpbNationalReport5 = [
                         "values":[
                            "true"
                         ],
-                        "trigger":"visible"
+                        "trigger":"enable"
                      },
                      {
                         "baseQuestion":"Q025",
@@ -441,7 +441,7 @@ export const cpbNationalReport5 = [
                         "values":[
                            "true"
                         ],
-                        "trigger":"visible"
+                        "trigger":"enable"
                      },
                      {
                         "baseQuestion":"Q025",
@@ -450,7 +450,7 @@ export const cpbNationalReport5 = [
                         "values":[
                            "true"
                         ],
-                        "trigger":"visible"
+                        "trigger":"enable"
                      },
                   ]
                },
@@ -585,7 +585,7 @@ export const cpbNationalReport5 = [
                         "values":[
                            "true"
                         ],
-                        "trigger":"visible"
+                        "trigger":"enable"
                      },
                      {
                         "question":"Q028",
@@ -593,7 +593,7 @@ export const cpbNationalReport5 = [
                         "values":[
                            "true"
                         ],
-                        "trigger":"visible"
+                        "trigger":"enable"
                      }
                   ]
                },
@@ -956,7 +956,7 @@ export const cpbNationalReport5 = [
                      "values":[
                         "true"
                      ],
-                     "trigger":"visible"
+                     "trigger":"enable"
                   },
                   {
                      "question":"Q040",
@@ -964,7 +964,7 @@ export const cpbNationalReport5 = [
                      "values":[
                         "true"
                      ],
-                     "trigger":"visible"
+                     "trigger":"enable"
                   },
                   {
                      "question":"Q042",
@@ -972,7 +972,7 @@ export const cpbNationalReport5 = [
                      "values":[
                         "true"
                      ],
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -1022,7 +1022,7 @@ export const cpbNationalReport5 = [
                      "values":[
                         "true"
                      ],
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -1183,7 +1183,7 @@ export const cpbNationalReport5 = [
                      "values":[
                         "true"
                      ],
-                     "trigger":"visible"
+                     "trigger":"enable"
                   },
                   {
                      "question":"Q048",
@@ -1191,7 +1191,7 @@ export const cpbNationalReport5 = [
                      "values":[
                         "true"
                      ],
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -1279,7 +1279,7 @@ export const cpbNationalReport5 = [
                   {
                      "question":"Q051",
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ],
             },
@@ -1330,7 +1330,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -1421,7 +1421,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   },
                   {
                      "question":"Q057",
@@ -1429,7 +1429,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   },
                   {
                      "question":"Q058",
@@ -1437,7 +1437,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   },
                   {
                      "question":"Q059",
@@ -1445,7 +1445,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -2211,7 +2211,7 @@ export const cpbNationalReport5 = [
                         "0"
                      ],
                      "type":"@hasValuesExcept",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ],
                "mandatory":true
@@ -2325,7 +2325,7 @@ export const cpbNationalReport5 = [
                   {
                      "question":"Q082",
                      "type":"&is79Or80Or81",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -2356,7 +2356,7 @@ export const cpbNationalReport5 = [
                   {
                      "question":"Q082",
                      "type":"&is79Or80Or81",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -2387,7 +2387,7 @@ export const cpbNationalReport5 = [
                   {
                      "question":"Q082",
                      "type":"&is79Or80Or81",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -2492,7 +2492,7 @@ export const cpbNationalReport5 = [
                         "0"
                      ],
                      "type":"@hasValuesExcept",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -2908,7 +2908,7 @@ export const cpbNationalReport5 = [
                   {
                      "question":"Q096",
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -3737,7 +3737,7 @@ export const cpbNationalReport5 = [
                         "true.some"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -3789,7 +3789,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -3870,7 +3870,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   },
                   {
                      "question":"Q120",
@@ -3879,7 +3879,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -4026,7 +4026,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   },
                   {
                      "question":"Q124",
@@ -4034,7 +4034,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -4477,7 +4477,7 @@ export const cpbNationalReport5 = [
                   {
                      "question":"Q143",
                      "type":"&is141Or142",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -4503,7 +4503,7 @@ export const cpbNationalReport5 = [
                   {
                      "question":"Q143",
                      "type":"&is141Or142",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -5138,7 +5138,7 @@ export const cpbNationalReport5 = [
                               "true"
                            ],
                            "type":"@hasValues",
-                           "trigger":"visible"
+                           "trigger":"enable"
                         },
                         {
                            "question":"Q164",
@@ -5146,12 +5146,12 @@ export const cpbNationalReport5 = [
                               "true"
                            ],
                            "type":"@hasValues",
-                           "trigger":"visible"
+                           "trigger":"enable"
                         },
                         {
                            "question":"Q165",
                            "type":"&is162_aOr162_b",
-                           "trigger":"visible"
+                           "trigger":"enable"
                         }
                      ]
                   },
@@ -5176,7 +5176,7 @@ export const cpbNationalReport5 = [
                         {
                            "question":"Q165",
                            "type":"&is162_aOr162_b",
-                           "trigger":"visible"
+                           "trigger":"enable"
                         }
                      ]
                   }
@@ -5255,7 +5255,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -5336,7 +5336,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -5400,7 +5400,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
@@ -5483,7 +5483,7 @@ export const cpbNationalReport5 = [
                         "true"
                      ],
                      "type":"@hasValues",
-                     "trigger":"visible"
+                     "trigger":"enable"
                   }
                ]
             },
