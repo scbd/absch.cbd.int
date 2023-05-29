@@ -670,7 +670,7 @@ export const npNationalReport1 = [
          },
          {
             "key": "Q015",
-            "section": "Part-V",
+            "section": "Part-IV",
             "number": "15",
             "type": "option",
             "title": nr1T.part_IV_question15_title,
@@ -706,7 +706,7 @@ export const npNationalReport1 = [
          },
          {
             "key": "Q016",
-            "section": "Part-V",
+            "section": "Part-IV",
             "number": "16",
             "type": "option",
             "title": nr1T.part_IV_question16_title,
@@ -742,7 +742,7 @@ export const npNationalReport1 = [
          },
          {
             "key": "Q017",
-            "section": "Part-V",
+            "section": "Part-IV",
             "number": "17",
             "type": "option",
             "title": nr1T.part_IV_question17_title,
@@ -771,7 +771,7 @@ export const npNationalReport1 = [
          },
          {
             "key": "Q018",
-            "section": "Part-V",
+            "section": "Part-IV",
             "number": "18",
             "type": "link",
             "title": nr1T.provideInformationOnLessons,
