@@ -634,7 +634,7 @@ export const npNationalReport1 = [
             "section": "Part-III",
             "number": "14",
             "type": "link",
-            "title": nr1T.part_III_question14_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
 
@@ -753,7 +753,7 @@ export const npNationalReport1 = [
             "section": "Part-V",
             "number": "18",
             "type": "link",
-            "title": nr1T.part_IV_question18_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
       ]
@@ -1172,7 +1172,7 @@ export const npNationalReport1 = [
             "section": "Part-V",
             "number": "24",
             "type": "link",
-            "title": nr1T.part_V_question24_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
 
@@ -1325,7 +1325,7 @@ export const npNationalReport1 = [
             "section": "Part-II",
             "number": "29",
             "type": "link",
-            "title": nr1T.part_VI_question29_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
 
@@ -1485,7 +1485,7 @@ export const npNationalReport1 = [
             "section": "Part-VII",
             "number": "33",
             "type": "link",
-            "title": nr1T.part_VII_question33_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
       ]
@@ -1788,7 +1788,7 @@ export const npNationalReport1 = [
             "section": "Part-VIII",
             "number": "41",
             "type": "link",
-            "title": nr1T.part_VIII_question41_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
          
@@ -1886,7 +1886,7 @@ export const npNationalReport1 = [
                {
                   "question": "Q044_b",
                   "values": [
-                     "0"
+                     "false"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -1898,7 +1898,7 @@ export const npNationalReport1 = [
          {
             "key": "Q044_a",
             "section": "Part-IX",
-            "number": "44.1",
+            "number": "",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": false,
@@ -1941,14 +1941,10 @@ export const npNationalReport1 = [
             "section": "Part-IX",
             "number": "44.1",
             "type": "int",
-            "title": nr1T.part_II_question6_title,
+            "title": nr1T.part_IX_question44_1_title,
             "multiple": false,
             "mandatory": true
          },
-
-
-
-
 
 
          {
@@ -1966,7 +1962,9 @@ export const npNationalReport1 = [
                },
                {
                   "value": "false",
-                  "title": nr1T.notApplicable
+                  "title": nr1T.notApplicable,
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                }
             ],
             "validations": [
@@ -1974,14 +1972,6 @@ export const npNationalReport1 = [
                   "question": "Q045_a",
                   "values": [
                      "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               },
-               {
-                  "question": "Q045_b",
-                  "values": [
-                     "0"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -1999,49 +1989,41 @@ export const npNationalReport1 = [
             "mandatory": true,
             "options": [
                {
-                  "value": "ToDo-GUID",
+                  "value": "C8500203-E701-46F6-9388-7E4A4E68B3F2",
                   "title": nr1T.part_IX_question45_a_option0_title
                },
                {
-                  "value": "ToDo-GUID",
+                  "value": "FC0D8F91-EA81-4ED2-87FA-B83C0240FB2A",
                   "title": nr1T.part_IX_question45_a_option1_title
                },
                {
-                  "value": "ToDo-GUID",
+                  "value": "BEC84DD2-496F-48A9-816F-048606BAD40C",
                   "title": nr1T.part_IX_question45_a_option2_title
                },
                {
-                  "value": "ToDo-GUID",
+                  "value": "E5E463F6-6CE2-4EC5-9FC7-D08AB1B75F19",
                   "title": nr1T.part_IX_question45_a_option3_title
                },
                {
-                  "value": "ToDo-GUID",
+                  "value": "EB8A599D-806F-42C6-9609-007FB2111036",
                   "title": nr1T.part_IX_question45_a_option4_title
                },
                {
-                  "value": "ToDo-GUID",
-                  "title": nr1T.part_IX_question45_a_option5_title
-               },
-               {
-                  "value": "ToDo-GUID",
+                  "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                   "title": nr1T.other,
                   "type":"lstring"
                }
             ]
          },
-         
          {
-            "key": "Q044_b",
+            "key": "Q046",
             "section": "Part-IX",
-            "number": "44.1",
-            "type": "int",
-            "title": nr1T.part_II_question6_title,
+            "number": "46",
+            "type": "link",
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false,
             "mandatory": true
          } 
       ]
    }
-
-
-  
 ]

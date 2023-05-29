@@ -14,6 +14,7 @@
     "notApplicable":   "Not applicable",
     "part_I_title": "Part I - General information",
     "pleaseSelectAll": "please select all those that apply",
+    "provideInformationOnLessons": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
     "general": "General",
     "country": "Country",
     "part_I_question2_title": "Time period covered by this report",
@@ -53,7 +54,6 @@
     "part_III_question12_2_title": "Has your country published relevant information on permits or their equivalent as internationally recognized certificates of compliance to the ABS Clearing-House?", 
     "part_III_question13_title": "Does your country have rules and procedures for requiring and establishing mutually agreed terms?",
     "part_III_question13_1_title": "Has your country published National Model Contractual Clauses to the ABS Clearing-House? ",
-    "part_III_question14_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
 
 
 
@@ -64,9 +64,7 @@
     "part_IV_question15_title": "Does your country have measures in place requiring that benefits from the utilization of genetic resources, as well as subsequent applications and commercialization, be shared with the Party providing such resources?",
     "part_IV_question16_title": "Does your country have measures in place aiming to ensure that benefits from the utilization of genetic resources held by indigenous peoples and local communities are shared with the indigenous peoples and local communities concerned?",
     "part_IV_question17_title": "Has your country taken measures in order that benefits arising from the utilization of traditional knowledge associated with genetic resources are shared with indigenous peoples and local communities holding such knowledge?",
-    "part_IV_question18_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
-
-    
+   
     
     
     "part_V_title": "Part V - Measures on compliance with domestic legislation or regulatory requirements on ABS (Articles 15 and Article 16) and monitoring the utilization of genetic resources (Article 17)",
@@ -87,9 +85,7 @@
     "part_V_question21_3_title": "Has your country provided the information referred to in Article 17.1 (a)(i) to relevant national authorities and to the Party providing prior informed consent through other means than the ABS Clearing-House?",
     "part_V_question22_title": "Has your country taken measures to encourage users and providers to include provisions in mutually agreed terms to share information on the implementation of such terms?",
     "part_V_question23_title": "Does your country encourage the use of cost-effective communication tools and systems to monitor utilization and enhance transparency?",
-    "part_V_question24_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
-    
-    
+       
     "part_VI_title": "Part VI - Measures on compliance with mutually agreed terms (Article 18)",
     "article18_1": "Article 18.1",
     "article18_2": "Article 18.2",
@@ -99,8 +95,7 @@
     "part_VI_question26_title": "Does your country ensure that opportunity to seek recourse is available under your legal systems in case of disputes arising from mutually agreed terms?",
     "part_VI_question27_title": "Has your country taken measures regarding access to justice?",
     "part_VI_question28_title": "Has your country taken measures regarding utilization of mechanisms on mutual recognition and enforcement of foreign judgements and arbitral awards?",
-    "part_VI_question29_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
-    
+     
     "part_VII_title": "Part VII - Measures addressing special considerations (Article 8)",
     "article18_a": "Article 8(a)",
     "article18_b": "Article 8(b)",
@@ -109,7 +104,6 @@
     "part_VII_question31_title": "In the development and implementation of its ABS legislation or regulatory requirements, has your country paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health?",
     "part_VII_question31_1_title": "In such cases, has your country considered the need for expeditious access to genetic resources and expeditious fair and equitable sharing, including access to affordable treatments by those in need?",
     "part_VII_question32_title": "In the development and implementation of its ABS legislation or regulatory requirements, has your country considered the importance of genetic resources for food and agriculture and their special role for food security?",
-    "part_VII_question33_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
     
     
     "part_VIII_title": "Part VIII – Measures related to indigenous peoples and local communities (Articles 6, 7 and 12)",
@@ -130,7 +124,6 @@
     "part_VIII_question38_title": "Has your country established mechanisms, with the effective participation of indigenous peoples and local communities concerned, to inform potential users of traditional knowledge associated with genetic resources about their obligations?",
     "part_VIII_question39_title": "Has your country supported the development by indigenous peoples and local communities, including women within these communities, of community protocols, minimum requirements for mutually agreed terms and model contractual clauses?",
     "part_VIII_question40_title": "Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous peoples and local communities?",
-    "part_VIII_question41_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
     
     "part_IX_title": "Part IX - Contribution to conservation and sustainable use (Article 9) and benefits received",
     "article9": "Article 9",
@@ -138,12 +131,14 @@
     "part_IX_question43_title": "Has implementation of the Nagoya Protocol contributed to conservation and sustainable use of biodiversity in your country?",
     "part_IX_question43_custom_caption": "Please explain your response and provide, if available, supporting data or examples of impact at national and/or local levels",
     "part_IX_question44_title": "Has your country received monetary benefits from granting access to genetic resources for their utilization and/or access to traditional knowledge associated with genetic resources during the reporting period?",
+    
     "part_IX_question44_a_option0_title": "Access fees and/or up-front payments",
     "part_IX_question44_a_option1_title": "Milestone payments, royalties and/or license fees",
     "part_IX_question44_a_option2_title": "Research funding, grants and/or scholarships",
     "part_IX_question44_a_option3_title": "Contributions to a national or local fund",
     "part_IX_question44_a_option4_title": "Salaries",
     "part_IX_question44_a_option5_title": "Joint ventures",
+    
     "part_IX_question44_1_title": "Please provide the amount of monetary benefits received during the reporting period (in United States dollars) from granting access to genetic resources and/or traditional knowledge associated with genetic resources.",
     "part_IX_question45_title": "Has your country received non-monetary benefits from granting access to genetic resources for their utilization and/or access to traditional knowledge associated with genetic resources during the reporting period?",
     "part_IX_question45_a_option0_title": "Sharing of information, research results",
@@ -151,13 +146,11 @@
     "part_IX_question45_a_option2_title": "Access to and transfer of technology",
     "part_IX_question45_a_option3_title": "Capacity-building, capacity development and/or trainings",
     "part_IX_question45_a_option4_title": "Sustainable development benefits (such as improved food security, livelihood security, etc.)",
-    "part_IX_question46_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
     
     
     "part_X_title": "Part X – Transboundary Cooperation (Article 11)",
     "article11_1": "Article 11.1",
     "article11_2": "Article 11.2",
     "part_X_question47_title": "Has your country endeavoured to cooperate, with the involvement of indigenous peoples and local communities concerned where applicable, in instances where the same genetic resources are found in situ within the territory of more than one Party?",
-    "part_X_question48_title": "Has your country endeavoured to cooperate in instances where the same traditional knowledge associated with genetic resources is shared by one or more indigenous peoples and local communities in several Parties?",
-    "part_X_question49_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section."
+    "part_X_question48_title": "Has your country endeavoured to cooperate in instances where the same traditional knowledge associated with genetic resources is shared by one or more indigenous peoples and local communities in several Parties?"
 }
