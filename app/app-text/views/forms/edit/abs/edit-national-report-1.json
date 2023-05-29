@@ -8,7 +8,9 @@
     "none" : "None",
     "websiteName": "URL and website name",
     "attachment":   "Attachment",
+    "pleaseSpecify": "Please Specify",
     "pleaseExplainYourResponse": "Please explain your response",
+    "provideFurtherInformation": "Please provide further information on your response",
     "additionalInformation": "Additional information.",
     "provideMoreInfo":  "Please provide more information on your response and a summary of difficulties and challenges encountered.",
     "notApplicable":   "Not applicable",
@@ -157,5 +159,25 @@
     "part_XIII_title": "Part XIII - Technology transfer, collaboration and cooperation (Article 23)",
     "article23": "Article 23",
     "part_XIII_question57_title": "Has your country collaborated and cooperated in technical and scientific research and development programmes related to ABS during the reporting period?",
-    "part_XIII_question58_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section."
+    "part_XIII_question58_title": "Please provide information on lessons learned, what worked well and why, difficulties, challenges and underlying causes, and any other information relevant to this section.",
+    
+    
+    "part_XIV_title": "Part XIV - Financial resources (Article 25) and resource mobilization",
+    "article25": "Article 25",
+    "part_XIV_question59_title": "Has your country made financial or other resources available to other Parties for the purpose of implementing the Protocol during the reporting period?",
+    "part_XIV_question60_title": "Has your country received financial or other resources from other Parties or financial institutions for the purpose of implementing the Protocol during the reporting period?",
+    "part_XIV_question60_a_option0_title": "From other Parties (please specify):",
+    "part_XIV_question60_a_option1_title": "From the Global Environmental Facility (GEF)",
+    "part_XIV_question60_a_option2_title": "From financial institutions other than the GEF (please specify):",
+    "part_XIV_question60_a_option3_title": "From other sources (please specify):",
+    "part_XIV_question60_1_title": "Please provide the amount of resources received (in United States dollars) during the reporting period",
+    "part_XIV_question61_title": "Has your country established a mechanism for budgetary allocations of funds for the operation of your national ABS framework?",
+    "part_XIV_question62_title": "Does your country have full-time staff working in functions directly related to the implementation of the Nagoya Protocol? If so, how many?",
+    "part_XIV_question62_a_option0_title": "One",
+    "part_XIV_question62_a_option1_title": "Less than three",
+    "part_XIV_question62_a_option2_title": "Between 3 and 5",
+    "part_XIV_question62_a_option3_title": "Between 5 and 10",
+    "part_XIV_question62_a_option4_title": "10 or more",
+    "part_XIV_question63_title": "Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol.",
+    "part_XIV_question64_title": "Please provide information on the status of funds mobilized in support of the implementation of the Protocol."
 }
