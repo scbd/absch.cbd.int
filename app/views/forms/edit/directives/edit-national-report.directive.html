@@ -5,7 +5,7 @@
             <div class="col-xs-12">
                 <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
                     <span class="m-2 fw-bold" ng-if="isBCH">{{::('editNRT.question'|$translate)}}:</span>
-                    <li class="nav-item" ng-repeat="tab in reportTabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
+                    <li class="nav-item border mx-1" ng-repeat="tab in reportTabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
                         <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
                              <span ng-bind="::tab.title"></span>
                         </a>

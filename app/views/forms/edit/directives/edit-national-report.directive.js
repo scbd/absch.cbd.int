@@ -16,12 +16,11 @@ app.directive("editNationalReport", ["$controller",  "$http", "$timeout", 'guid'
             reportTabs: "=",
             questions : "=",
             customValidations: "=",
-            // getDocumentFn : '&document',
             document: '=document'
 		},
-		link : function($scope, $element, $attr){
-        $scope.isBCH        = realm.is('BCH');
-        $scope.isABS        = realm.is('ABS');
+		link : function($scope){
+         $scope.isBCH        = realm.is('BCH');
+         $scope.isABS        = realm.is('ABS');
          $scope.multiTermModel = {};
          translationService.set('editNRT', editNRT);
          translationService.set('numbers', numbers);
@@ -257,8 +256,7 @@ app.directive("editNationalReport", ["$controller",  "$http", "$timeout", 'guid'
                 transformNrData();          
             }, 200);
             //Todo 
-            $scope.setDocument({}).then(function(document){
-                 console.log("document", document)  
+            $scope.setDocument({}).then(function(document){ 
                 if(document && document.header.identifier){
                     _.forEach(document, function(element, key){
                         if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
@@ -274,6 +272,3 @@ app.directive("editNationalReport", ["$controller",  "$http", "$timeout", 'guid'
     }
   }
 }]);
-
-
-
