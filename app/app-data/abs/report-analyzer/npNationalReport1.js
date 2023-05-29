@@ -779,7 +779,4 @@ export const npNationalReport1 = [
          }
       ]
    }
-
-
-   
 ]
