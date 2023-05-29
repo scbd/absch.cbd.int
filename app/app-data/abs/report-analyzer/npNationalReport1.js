@@ -2119,6 +2119,56 @@ export const npNationalReport1 = [
             "multiple": false
          }
       ]
+   },
+   {
+      "key": "Part-XIII",
+      "title": nr1T.part_XIII_title,
+      "questions": [
+         {
+            "key": "Article23",
+            "section": "Part-XIII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.article23
+         },
+         {
+            "key": "Q057",
+            "section": "Part-XIII",
+            "number": "57",
+            "type": "option",
+            "title": nr1T.part_XIII_question57_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               }
+            ]            
+         },
+         {
+            "key": "Q058",
+            "section": "Part-XIII",
+            "number": "58",
+            "type": "link",
+            "title": nr1T.part_XIII_question58_title,
+            "multiple": false
+         }
+      ]
    }
 
 ]

@@ -212,6 +212,26 @@ function ($scope,  $rootScope, locale, $q, $controller, $timeout, commonjs, stor
          "tab":12,
          "title":"Part-XII",
          "sections" : [{key:"Part-XII"}]
+     },
+     {
+         "tab":13,
+         "title":"Part-XIII",
+         "sections" : [{key:"Part-XIII"}]
+     },
+     {
+         "tab":14,
+         "title":"Part-XIV",
+         "sections" : [{key:"Part-XIV"}]
+     },
+     {
+         "tab":15,
+         "title":"Part-XV",
+         "sections" : [{key:"Part-XV"}]
+     },
+     {
+         "tab":16,
+         "title":"Part-XVII",
+         "sections" : [{key:"Part-XVII"}]
      }
 ];
  $scope.questions = [npNationalReport1, cpbNationalReport4];
