@@ -540,7 +540,14 @@ export const npNationalReport1 = [
             "type": "int",
             "title": nr1T.part_III_question12_1_title,
             "multiple": false,
-            "mandatory": true
+            "mandatory": true,
+            "additionalInfo":[
+               {
+                  "field":"furtherInfo",
+                  "title" : nr1T.additionalInformation,
+                  "type":"string"
+               }
+            ]
          },
          {
             "key": "Q012_b",
@@ -553,7 +560,7 @@ export const npNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yesInAllCases
+                  "title": nr1T.yesInAllCases,
                },
                {
                   "value": "true.some",
