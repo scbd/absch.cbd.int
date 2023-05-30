@@ -189,7 +189,7 @@
                 </div>
             <div class="mt-2 control-group">
                 <label class="ng-binding">URL and website name</label>
-                <div km-link name="question{{question.key}}_link" ng-model="document.relevantDocuments" allow-link="true"
+                <div km-link name="question{{question.key}}_link" ng-model="document[question.key].relevantDocuments" allow-link="true"
                      allow-file="true" identifier="document.header.identifier"></div>
             </div>
 
