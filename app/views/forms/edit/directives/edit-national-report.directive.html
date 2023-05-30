@@ -1,111 +1,135 @@
 <div>
-  
-        <div class="row">
-                            
-            <div class="col-xs-12">
-                <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
-                    <span class="m-2 fw-bold" ng-if="isBCH">{{::('editNRT.question'|$translate)}}:</span>
-                    <li class="nav-item border mx-1" ng-repeat="tab in reportTabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
-                        <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
-                             <span ng-bind="::tab.title"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
+                <span class="m-2 fw-bold" ng-if="isBCH">{{::('editNRT.question'|$translate)}}:</span>
+                <li class="nav-item border mx-1" ng-repeat="tab in reportTabs"
+                    ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
+                    <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
+                        <span ng-bind="::tab.title"></span>
+                    </a>
+                </li>
+            </ul>
         </div>
-            <div>
-                <legend name="formInfo" style="display:none"></legend>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="tab-content">
+    </div>
+    <div>
+        <legend name="formInfo" style="display:none"></legend>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="tab-content">
+                    <div class="tab-pane" ng-repeat="tab in reportTabs" id="tab{{$index}}" ng-class="{'active': $index==0}" ng-if="tab.render">
+                        <div style="margin-bottom:20px;">
+                            <div ng-if="tab.ngIncludeId" ng-include="tab.ngIncludeId"></div>
+                            <div class="section-pane panel panel-default" ng-repeat="section in tab.sections"
+                                id="section{{$index+1}}" style="margin-bottom:3px!important">
+                                <div class="panel-heading">
+                                    <strong ng-bind-html="::section.title"></strong>
+                                    <div ng-bind-html="::section.description" ng-if="section.description"></div>
+                                </div>
+                                <div class="panel-body" style="padding:0px">
+                                    <div ng-if="section.footnote" ng-bind-html="::section.footnote" style="font-size:10px;padding:10px"></div>
+                                    <div ng-repeat="question in section.questions"
+                                        style="border:1px solid #eee;margin:5px" class="row"
+                                        ng-class="{'disabled': isQuestionDisabled(question) }"
+                                        ng-if="section.questions.length && question.visible">
 
-                            <div class="tab-pane" ng-repeat="tab in reportTabs" id="tab{{$index}}" ng-class="{'active': $index==0}" ng-if="tab.render" >
-                                <!-- ng-if="activeTab==$index+1" -->
-                                <div style="margin-bottom:20px;">
+                                        <div class="col-md-12" style="padding:10px;position: relative;" block-region
+                                            activate="isQuestionDisabled(question)" skip-loading-icon="true">
 
-                                    <div class="section-pane panel panel-default" ng-repeat="section in tab.sections"
-                                        id="section{{$index+1}}" style="margin-bottom:3px!important">
+                                            <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
+                                                <div class="form-group"
+                                                    ng-class="{'has-error' : hasError(question.key) }"
+                                                    style="margin-bottom:5px">
 
-                                        <div class="panel-heading">
-                                            <strong  ng-bind-html="::section.title"></strong>
-                                            <div ng-bind-html="::section.description" ng-if="section.description"></div>
-                                        </div>
-                                        <div class="panel-body" style="padding:0px">
-                                            <div ng-if="section.footnote" ng-bind-html="::section.footnote" style="font-size:10px;padding:10px"></div>
-                                            <div ng-if="tab.ngIncludeId" ng-include="tab.ngIncludeId"></div>
-                                            <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px"
-                                                class="row" ng-class="{'disabled': isQuestionDisabled(question) }" ng-if="section.questions.length && question.visible" >
-
-                                                <div class="col-md-12" style="padding:10px;position: relative;" block-region activate="isQuestionDisabled(question)" skip-loading-icon="true">
-
-                                                    <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
-                                                        <div class="form-group" ng-class="{'has-error' : hasError(question.key) }" style="margin-bottom:5px">
-
-                                                            <label name="{{::question.key}}" for="{{::question.key}}" class="control-label bold d-inline" 
-                                                                ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
-                                                            </label>                                                          
-                                                            <div class="float-end">
-                                                                <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-outline-secondary btn-sm">{{::('editNRT.showPrevious'|$translate)}}</button>
-                                                                <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-outline-secondary btn-sm">{{::('editNRT.hidePrevious'|$translate)}}</button>
-                                                            </div>
-                                                        </div>         
-                                                    </div>
-
-                                                    <div ng-if="question.type !='legend'" class="mt-3">
-                                                        <!-- Incase of subquestion wrap questions inside new section -->
-                                                        <div ng-if="question.type=='sub-section'" style="padding:20px">
-                                                            <div ng-repeat="subQuestion in question.questions" style="border:1px solid #eee;margin:5px;padding:10px"
-                                                                class="row" ng-class="{'disabled': isQuestionDisabled(subQuestion)}"  ng-if="subQuestion.visible">
-                                                                <div class="col-md-12" style="padding-left:0px;padding-right: 0px;" block-region activate="isQuestionDisabled(subQuestion)" skip-loading-icon="true">
-
-                                                                    <div class="form-group" ng-class="{'has-error' : hasError(subQuestion.key) }" style="margin-bottom:5px">
-                                                                        <label name="{{::subQuestion.key}}" for="{{::subQuestion.key}}" class="control-label bold d-inline" 
-                                                                            ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)" ng-required="subQuestion.mandatory">
-                                                                        </label>        
-                                                                        <div class="float-end">
-                                                                            <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-outline-secondary btn-sm">{{::('editNRT.showPrevious'|$translate)}}</button>
-                                                                            <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-outline-secondary btn-sm">{{::('editNRT.hidePrevious'|$translate)}}</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div ng-include="'question'" onload="question=subQuestion" class="mt-2 pe-0"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div ng-if="question.type!=='sub-section'">
-                                                            <div ng-include="'question'"></div>
-                                                        </div>
+                                                    <label name="{{::question.key}}" for="{{::question.key}}"
+                                                        class="control-label bold d-inline"
+                                                        ng-bind-html="::(spaceSubQuestion(question.number) + question.title)"
+                                                        ng-required="question.mandatory">
+                                                    </label>
+                                                    <div class="float-end">
+                                                        <button type="button"
+                                                            ng-if="previousAnswerMapping[question.key] && !question.showPrevious"
+                                                            ng-click="question.showPrevious = !question.showPrevious"
+                                                            class="btn btn-outline-secondary btn-sm">{{::('editNRT.showPrevious'|$translate)}}</button>
+                                                        <button type="button"
+                                                            ng-if="previousAnswerMapping[question.key] && question.showPrevious"
+                                                            ng-click="question.showPrevious = !question.showPrevious"
+                                                            class="btn btn-outline-secondary btn-sm">{{::('editNRT.hidePrevious'|$translate)}}</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
+                                            <div ng-if="question.type !='legend'" class="mt-3">
+                                                <!-- Incase of subquestion wrap questions inside new section -->
+                                                <div ng-if="question.type=='sub-section'" style="padding:20px">
+                                                    <div ng-repeat="subQuestion in question.questions"
+                                                        style="border:1px solid #eee;margin:5px;padding:10px"
+                                                        class="row"
+                                                        ng-class="{'disabled': isQuestionDisabled(subQuestion)}"
+                                                        ng-if="subQuestion.visible">
+                                                        <div class="col-md-12"
+                                                            style="padding-left:0px;padding-right: 0px;" block-region
+                                                            activate="isQuestionDisabled(subQuestion)"
+                                                            skip-loading-icon="true">
+
+                                                            <div class="form-group"
+                                                                ng-class="{'has-error' : hasError(subQuestion.key) }"
+                                                                style="margin-bottom:5px">
+                                                                <label name="{{::subQuestion.key}}"
+                                                                    for="{{::subQuestion.key}}"
+                                                                    class="control-label bold d-inline"
+                                                                    ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)"
+                                                                    ng-required="subQuestion.mandatory">
+                                                                </label>
+                                                                <div class="float-end">
+                                                                    <button type="button"
+                                                                        ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious"
+                                                                        ng-click="subQuestion.showPrevious = !subQuestion.showPrevious"
+                                                                        class="btn btn-outline-secondary btn-sm">{{::('editNRT.showPrevious'|$translate)}}</button>
+                                                                    <button type="button"
+                                                                        ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"
+                                                                        ng-click="subQuestion.showPrevious = !subQuestion.showPrevious"
+                                                                        class="btn btn-outline-secondary btn-sm">{{::('editNRT.hidePrevious'|$translate)}}</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div ng-include="'question'" onload="question=subQuestion"
+                                                            class="mt-2 pe-0"></div>
+                                                    </div>
+                                                </div>
+                                                <div ng-if="question.type!=='sub-section'">
+                                                    <div ng-include="'question'"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
-                    <span class="m-2 fw-bold" ng-if="isBCH">{{::('editNRT.question'|$translate)}}:</span>
-                    <li class="nav-item" ng-repeat="tab in reportTabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index,true)" style="cursor: hand">
-                        <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
-                             <span ng-bind="::tab.title"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </div>
-     
-        <script type="text/ng-template" id="question" trados-translation="true">
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
+                <span class="m-2 fw-bold" ng-if="isBCH">{{::('editNRT.question'|$translate)}}:</span>
+                <li class="nav-item" ng-repeat="tab in reportTabs" ng-class="{'active': $index==activeTab-1}"
+                    ng-click="setTab($index,true)" style="cursor: hand">
+                    <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
+                        <span ng-bind="::tab.title"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/ng-template" id="question" trados-translation="true">
             <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
                 <div class="col-md-8" style="padding-left: 5px;">
                     <div ng-switch="question.type">
                         <div ng-switch-when="option|term" ng-switch-when-separator="|">
-
                             <div ng-switch="question.multiple">
                                 <div ng-switch-when="false">
                                     <div nr-yes-no question="question" caption="{{question.caption}}" ng-model="document[question.key]" ng-change="updateAnswer(question)"
@@ -117,7 +141,6 @@
                                     locales="document.header.languages" custom-value-placeholder="{{question.customValuePlaceholder}}"></div>
                                 </div>
                             </div>
-
                         </div>
                         <div ng-switch-when="lstring">
                             <div km-textbox-ml rows=4 name="question.key" 
@@ -157,21 +180,19 @@
                     </div>
                 </div>
             </div>
-        </script>
+    </script>
 
-        <script type="text/ng-template" id="link" trados-translation="true">
-            
+    <script type="text/ng-template" id="link" trados-translation="true">
             <div class="mt-2 control-group">
                 <div km-textbox-ml rows=4 name="question.key" 
-                                ng-model="document[question.key]" locales="document.header.languages" ></div>
+                    ng-model="document[question.key]" locales="document.header.languages" ></div>
                 </div>
             <div class="mt-2 control-group">
-                <label class="ng-binding">Name</label>
-                <!-- // ToDo use link directive here  -->
+                <label class="ng-binding">URL and website name</label>
+                <div km-link name="question{{question.key}}_link" ng-model="document.relevantDocuments" allow-link="true"
+                     allow-file="true" identifier="document.header.identifier"></div>
             </div>
-            
 
-            
         </script>
-    </div>
+</div>
 </div>
