@@ -279,11 +279,11 @@ export const npNationalReport1 = [
             "mandatory": true,
             "options": [
                {
-                  "value": "60CD889F-4E08-450C-A67C-5F29A2B1E704",
+                  "value": "true",
                   "title": nr1T.part_III_question7_1_option0_title
                },
                {
-                  "value": "0C4A8689-6DA4-4EC1-8AC3-9017941C67A6",
+                  "value": "true.some",
                   "title": nr1T.part_III_question7_1_option1_title
                },
                {
