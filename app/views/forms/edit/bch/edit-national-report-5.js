@@ -22,7 +22,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         var user = $rootScope.user;
         $scope.activeTab = 1;
         $scope.multiTermModel = {};
-        $scope.questionKeys = [];
         $scope.customValidations = {};
 
         translationService.set('editNRT', editNRT);
@@ -210,12 +209,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         function init() {
 
-            cpbNationalReport5.forEach((e) => {
-                e.questions.forEach((question) => {
-                  const key = question.key;
-                  $scope.questionKeys.push(key);
-                });
-              });
             $scope.setDocument({}).then(function (document) {
                 if (document && document.header.identifier) {
                     _.forEach(document, function (element, key) {
