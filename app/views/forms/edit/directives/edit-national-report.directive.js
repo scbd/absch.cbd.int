@@ -17,9 +17,9 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
-                document: '=document' // ToDo replace with ngModel
+                document: "=ngModel"
             },
-            link: function ($scope) {
+            link: function($scope, element, attrs) {
                 $scope.isBCH = realm.is('BCH');
                 $scope.isABS = realm.is('ABS');
                 $scope.multiTermModel = {};
