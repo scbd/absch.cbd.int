@@ -127,11 +127,12 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         };
 
         function is141Or142() {
-            return ($scope.document['Q141'] || {}).value == 'true' || ($scope.document['Q142'] || {}).value == 'true';
+            console.log("$scope.questionKeys",$scope.questionKeys)
+            return ($scope.questionKeys['Q141'] || {}).value == 'true' || ($scope.questionKeys['Q142'] || {}).value == 'true';
         }
 
         function is79Or82Or81() {
-            return ($scope.document['Q079'] || {}).value == 'true' || ($scope.document['Q081'] || {}).value == 'true' || ($scope.document['Q082'] || {}).value == 'true';
+            return ($scope.questionKeys['Q079'] || {}).value == 'true' || ($scope.questionKeys['Q081'] || {}).value == 'true' || ($scope.questionKeys['Q082'] || {}).value == 'true';
         }
         $scope.customValidations = {
             is79Or82Or81: is79Or82Or81,
