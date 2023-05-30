@@ -161,6 +161,11 @@
                             {{question}}
                         </div>
                     </div>
+                    <div ng-if="question.additionalInfo">
+                        <label>{{question.additionalInfo[0].title}} </label>
+                        <div  km-textbox-ml rows=4 name="{{question.key}}_additionalInfo" 
+                        ng-model="document[question.key]._additionalInfo" locales="document.header.languages" ></div>
+                    </div>
                 </div>
                 <div class="col-md-4" ng-if="question.showPrevious">
                     <div style="border: 2px solid #fff;padding:5px">
