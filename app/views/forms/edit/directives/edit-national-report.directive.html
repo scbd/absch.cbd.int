@@ -19,7 +19,7 @@
                 <div class="tab-content">
                     <div class="tab-pane" ng-repeat="tab in reportTabs" id="tab{{$index}}" ng-class="{'active': $index==0}" ng-if="tab.render">
                         <div style="margin-bottom:20px;">
-                            <div ng-if="tab.ngIncludeId" ng-include="tab.ngIncludeId"></div>
+                            <div ng-if="tab.ngIncludeId" ng-include="tab.ngIncludeId" onload="formScope = $parent.$parent.$parent"></div>
                             <div class="section-pane panel panel-default" ng-repeat="section in tab.sections"
                                 id="section{{$index+1}}" style="margin-bottom:3px!important">
                                 <div class="panel-heading">

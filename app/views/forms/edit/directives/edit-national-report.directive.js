@@ -34,22 +34,22 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 //==================================
                 //
                 //==================================
-                $scope.onContactQuery = function (searchText) {
-                    var queryOptions = {
-                        realm: realm.value,
-                        searchText: searchText,
-                    }
-                    if ($scope.isBCH) {
-                        queryOptions.schemas = ['contact', 'focalPoint'];
-                        queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
-                    }
-                    else {
-                        // ToDo: change for ABS
-                        queryOptions.schemas = ['contact', 'focalPoint'];
-                        queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
-                    }
-                    return $scope.onBuildDocumentSelectorQuery(queryOptions);
-                }
+                // $scope.onContactQuery = function (searchText) {
+                //     var queryOptions = {
+                //         realm: realm.value,
+                //         searchText: searchText,
+                //     }
+                //     if ($scope.isBCH) {
+                //         queryOptions.schemas = ['contact', 'focalPoint'];
+                //         queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
+                //     }
+                //     else {
+                //         // ToDo: change for ABS
+                //         queryOptions.schemas = ['contact', 'focalPoint'];
+                //         queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
+                //     }
+                //     return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                // }
 
                 $scope.onGovernmentChange = function (government) {
                     if (government && $scope.document) {
