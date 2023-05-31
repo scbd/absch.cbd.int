@@ -17,6 +17,7 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
+                onContactQuery: '&',
                 document: '=document' // ToDo replace with ngModel
             },
             link: function ($scope) {
