@@ -27,8 +27,6 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                 translationService.set('numbers', numbers);
                 $scope.activeTab = 1
 
-                // TODO: read from mapping file
-                var previousAnswerMapping = $scope.previousAnswerMapping = {};
                 $controller('editController', {
                     $scope: $scope
                 });
@@ -158,7 +156,6 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                     return false;
                 };
 
-
                 async function transformNrData() {
                     $scope.cpbCurrentReport = $scope.questions[0];
 
@@ -167,7 +164,6 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                         _.forEach(tab.sections, function (section) {
 
                             var dataSection = _.find($scope.cpbCurrentReport, { key: section.key });
-                            console.log("dataSection: " + dataSection);
 
                             _.extend(section, dataSection || {})
 
@@ -202,71 +198,13 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                     if (question.validations)
                         $scope.updateAnswer(question, baseQuestion);
                 }
-                //ToDo change the path https://api.cbd.int/api/v2015/national-reports-cpb-3 dynamically
-                async function loadPreviousReport() {
-                    if (!$scope.document)
-                        return;
-                    const cpbPreviousReport = $scope.questions[1];
-                    var params = { q: { 'government.identifier': $scope.document.government.identifier } };
-                    $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params: params })
-                        .then(function (result) {
-                            var prevReportAnswers = result.data[0];
-                            var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
-
-                            _.forEach(previousAnswerMapping, function (mapping, key) {
-
-                                var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
-                                if (prevQuestion) {
-                                    mapping.previousQuestion = { title: prevQuestion.title };
-                                    if (prevReportAnswers) {
-                                        var prevAnswer = prevReportAnswers[mapping.prevQuestion];
-                                        if (_.isArray(prevAnswer)) {
-                                            mapping.previousQuestion.type = 'array';
-                                            mapping.previousQuestion.answer = _.map(prevAnswer, function (answer) {
-                                                return (_.find(prevQuestion.options, { value: answer.identifier || answer }) || {}).title
-                                            })
-                                        }
-                                        else if (_.isObject(prevAnswer)) {
-                                            if (prevAnswer.en || prevAnswer.fr || prevAnswer.es || prevAnswer.ar || prevAnswer.ru || prevAnswer.zh) {
-                                                mapping.previousQuestion.answer = prevAnswer;
-                                                mapping.previousQuestion.type = 'lstring';
-                                            }
-                                            else {
-                                                mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer.identifier || prevAnswer }) || {}).title;
-                                                mapping.previousQuestion.type = 'string';
-                                            }
-                                        }
-                                        else {
-                                            mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer }) || {}).title;
-                                            mapping.previousQuestion.type = 'string'
-                                        }
-                                    }
-                                }
-                                else
-                                    console.log(mapping)
-                            })
-
-                            return prevReportAnswers;
-                        })
-                }
+                
 
                 function init() {
-                    // mappingReport();
 
                     $timeout(function () {
                         transformNrData();
                     }, 200);
-                    //Todo 
-                    // $scope.setDocument({}).then(function(document){ 
-                    //     if(document && document.header.identifier){
-                    //         _.forEach(document, function(element, key){
-                    //             if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
-                    //                 $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value, customValue: e.additionalInformation }});
-                    //             }
-                    //         })
-                    //         transformNrData();
-                    //     }
-                    // });
                 }
 
                 init();

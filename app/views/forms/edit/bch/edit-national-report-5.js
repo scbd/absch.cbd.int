@@ -100,16 +100,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             $scope: $scope
         });
 
-        $scope.onContactQuery = function (searchText) {
-            var queryOptions = {
-                schemas: ['contact', 'focalPoint'],
-                realm: realm.value,
-                searchText: searchText,
-                query: `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
-            }
-            return $scope.onBuildDocumentSelectorQuery(queryOptions);
-        }
-
         //==================================
         //
         //==================================
@@ -126,6 +116,16 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             return $scope.sanitizeDocument(document);
         };
 
+        $scope.onContactQuery = function (searchText) {
+            var queryOptions = {
+                schemas: ['contact', 'focalPoint'],
+                realm: realm.value,
+                searchText: searchText,
+                query: `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
+            }
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
+
         function is141Or142() {
             return ($scope.document['Q141'] || {}).value == 'true' || ($scope.document['Q142'] || {}).value == 'true';
         }
@@ -133,32 +133,24 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         function is79Or82Or81() {
             return ($scope.document['Q079'] || {}).value == 'true' || ($scope.document['Q081'] || {}).value == 'true' || ($scope.document['Q082'] || {}).value == 'true';
         }
+
         $scope.customValidations = {
             is79Or82Or81: is79Or82Or81,
             is141Or142: is141Or142
         }
+
         //ToDo update for NR5
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
-
                 verifyCountryHasReport();
-                commonjs.getCountry(government.identifier).then(function (country) {
-                    $scope.document['Q012_party'] = { value: country.isParty.toString() };
-                    if (country.isParty) {
-                        $scope.document['Q012_progressForParty'] = undefined;
-                        $scope.document['Q013'] = undefined;
-                    }
-                    var question = $scope.reportTabs[1].sections[0].questions[0];
-                    question.hasValidation = true;
-                    question.enable = false;
-                    $scope.updateAnswer(question);
-                    loadPreviousReport();
-                })
+                loadPreviousReport();
             }
         }
+
         $scope.userHasGovernment = function () {
             return user.government;
         }
+
          // ToDo directive for this
          function verifyCountryHasReport() {
             $q.all([
@@ -206,6 +198,54 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
                     }
                 });
+        }
+        
+        //ToDo change the path https://api.cbd.int/api/v2015/national-reports-cpb-3 dynamically
+        async function loadPreviousReport() {
+            if (!$scope.document)
+                return;
+            const cpbPreviousReport = $scope.questions[1];
+            var params = { q: { 'government.identifier': $scope.document.government.identifier } };
+            $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params: params })
+                .then(function (result) {
+                    var prevReportAnswers = result.data[0];
+                    var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
+
+                    _.forEach(previousAnswerMapping, function (mapping, key) {
+
+                        var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
+                        if (prevQuestion) {
+                            mapping.previousQuestion = { title: prevQuestion.title };
+                            if (prevReportAnswers) {
+                                var prevAnswer = prevReportAnswers[mapping.prevQuestion];
+                                if (_.isArray(prevAnswer)) {
+                                    mapping.previousQuestion.type = 'array';
+                                    mapping.previousQuestion.answer = _.map(prevAnswer, function (answer) {
+                                        return (_.find(prevQuestion.options, { value: answer.identifier || answer }) || {}).title
+                                    })
+                                }
+                                else if (_.isObject(prevAnswer)) {
+                                    if (prevAnswer.en || prevAnswer.fr || prevAnswer.es || prevAnswer.ar || prevAnswer.ru || prevAnswer.zh) {
+                                        mapping.previousQuestion.answer = prevAnswer;
+                                        mapping.previousQuestion.type = 'lstring';
+                                    }
+                                    else {
+                                        mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer.identifier || prevAnswer }) || {}).title;
+                                        mapping.previousQuestion.type = 'string';
+                                    }
+                                }
+                                else {
+                                    mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer }) || {}).title;
+                                    mapping.previousQuestion.type = 'string'
+                                }
+                            }
+                        }
+                        else
+                            console.log(mapping)
+                    })
+
+                    return prevReportAnswers;
+                })
         }
 
         function init() {
