@@ -7,6 +7,7 @@ import '~/views/forms/edit/edit';
 import '~/services/main';
 import '~/views/forms/edit/document-selector';
 import '~/views/directives/block-region-directive';
+import '~/views/forms/view/bch/view-national-report-5.directive';
 // ToDo import view directive once developed
 export { default as template } from './edit-national-report-5.html';
 import 'ngDialog';
