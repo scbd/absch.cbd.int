@@ -12,12 +12,11 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
             restrict: "AE",
             template: template,
             replace: true,
-            transclude : false,
+            transclude: false,
             scope: {
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
-                onContactQuery: '&',
                 document: '=document' // ToDo replace with ngModel
             },
             link: function ($scope) {
@@ -47,6 +46,23 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                     }, 200);
                     $scope.activeTab = index + 1;
                     $scope.reportTabs[index].render = true;
+                }
+
+                $scope.onContactQuery = function (searchText) {
+                    var queryOptions = {
+                        realm: realm.value,
+                        searchText: searchText,
+                    }
+                    if ($scope.isBCH) {
+                        queryOptions.schemas = ['contact', 'focalPoint'];
+                        queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
+                    }
+                    else {
+                        // ToDo: change for ABS
+                        queryOptions.schemas = ['contact', 'focalPoint'];
+                        queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
+                    }
+                    return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
 
                 $scope.updateAnswer = function (question, baseQuestionNumber) {
@@ -199,7 +215,7 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                     if (question.validations)
                         $scope.updateAnswer(question, baseQuestion);
                 }
-                
+
 
                 function init() {
 

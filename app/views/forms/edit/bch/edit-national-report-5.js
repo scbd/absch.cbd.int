@@ -116,16 +116,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             return $scope.sanitizeDocument(document);
         };
 
-        $scope.onContactQuery = function (searchText) {
-            var queryOptions = {
-                schemas: ['contact', 'focalPoint'],
-                realm: realm.value,
-                searchText: searchText,
-                query: `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
-            }
-            return $scope.onBuildDocumentSelectorQuery(queryOptions);
-        }
-
         function is141Or142() {
             return ($scope.document['Q141'] || {}).value == 'true' || ($scope.document['Q142'] || {}).value == 'true';
         }
@@ -151,7 +141,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             return user.government;
         }
 
-         // ToDo directive for this
+         // ToDo move to common file
          function verifyCountryHasReport() {
             $q.all([
                 storage.documents.query("(type eq '$scope.cpbCurrentReport')", "my", { $top: 10 }),
