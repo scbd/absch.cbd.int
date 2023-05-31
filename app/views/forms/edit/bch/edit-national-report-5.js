@@ -8,7 +8,6 @@ import '~/services/main';
 import '~/views/forms/edit/document-selector';
 import '~/views/directives/block-region-directive';
 import '~/views/forms/view/bch/view-national-report-5.directive';
-// ToDo import view directive once developed
 export { default as template } from './edit-national-report-5.html';
 import 'ngDialog';
 import '~/views/forms/edit/directives/edit-national-report.directive';
@@ -129,113 +128,9 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             is141Or142: is141Or142
         }
 
-        //ToDo update for NR5
-        $scope.onGovernmentChange = function (government) {
-            if (government && $scope.document) {
-                verifyCountryHasReport();
-                loadPreviousReport();
-            }
-        }
 
         $scope.userHasGovernment = function () {
             return user.government;
-        }
-
-         // ToDo move to common file
-         function verifyCountryHasReport() {
-            $q.all([
-                storage.documents.query("(type eq '$scope.cpbCurrentReport')", "my", { $top: 10 }),
-                storage.drafts.query("(type eq '$scope.cpbCurrentReport')", { $top: 10 })
-            ])
-                .then(function (nationalRecords) {
-                    var filterByGovernment = function (item) {
-                        return item && (item.metadata || {}).government == $scope.document.government.identifier
-                    }
-                    var published = _.find((nationalRecords[0].data || {}).Items, filterByGovernment);
-                    var draft = _.find((nationalRecords[1].data || {}).Items, filterByGovernment);
-
-                    if (((published || draft) && (!$routeParams.identifier || $routeParams.identifier != (draft || published).identifier))) {
-                        $scope.blockEditForm = true;
-                        ngDialog.open({
-                            template: 'recordExistsTemplate.html',
-                            closeByDocument: false,
-                            closeByEscape: false,
-                            showClose: false,
-                            closeByNavigation: false,
-                            controller: ['$scope', '$timeout', '$location', function ($scope, $timeout, $location) {
-                                $scope.alertSeconds = 10;
-                                time();
-
-                                function time() {
-                                    $timeout(function () {
-                                        if ($scope.alertSeconds == 1) {
-                                            $scope.openExisting();
-                                        }
-                                        else {
-                                            $scope.alertSeconds--;
-                                            time()
-                                        }
-                                    }, 1000)
-                                }
-                                $scope.openExisting = function () {
-                                    ngDialog.close();
-                                    $location.path('register/NR4/' + (draft || published).identifier + '/edit');
-                                }
-                            }]
-                        });
-                    }
-                    else {
-
-                    }
-                });
-        }
-        
-        //ToDo change the path https://api.cbd.int/api/v2015/national-reports-cpb-3 dynamically
-        async function loadPreviousReport() {
-            if (!$scope.document)
-                return;
-            const cpbPreviousReport = $scope.questions[1];
-            var params = { q: { 'government.identifier': $scope.document.government.identifier } };
-            $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params: params })
-                .then(function (result) {
-                    var prevReportAnswers = result.data[0];
-                    var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
-
-                    _.forEach(previousAnswerMapping, function (mapping, key) {
-
-                        var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
-                        if (prevQuestion) {
-                            mapping.previousQuestion = { title: prevQuestion.title };
-                            if (prevReportAnswers) {
-                                var prevAnswer = prevReportAnswers[mapping.prevQuestion];
-                                if (_.isArray(prevAnswer)) {
-                                    mapping.previousQuestion.type = 'array';
-                                    mapping.previousQuestion.answer = _.map(prevAnswer, function (answer) {
-                                        return (_.find(prevQuestion.options, { value: answer.identifier || answer }) || {}).title
-                                    })
-                                }
-                                else if (_.isObject(prevAnswer)) {
-                                    if (prevAnswer.en || prevAnswer.fr || prevAnswer.es || prevAnswer.ar || prevAnswer.ru || prevAnswer.zh) {
-                                        mapping.previousQuestion.answer = prevAnswer;
-                                        mapping.previousQuestion.type = 'lstring';
-                                    }
-                                    else {
-                                        mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer.identifier || prevAnswer }) || {}).title;
-                                        mapping.previousQuestion.type = 'string';
-                                    }
-                                }
-                                else {
-                                    mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer }) || {}).title;
-                                    mapping.previousQuestion.type = 'string'
-                                }
-                            }
-                        }
-                        else
-                            console.log(mapping)
-                    })
-
-                    return prevReportAnswers;
-                })
         }
 
         function init() {

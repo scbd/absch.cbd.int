@@ -1,12 +1,12 @@
 import app from '~/app';
-import '~/views/forms/directives/nr-yes-no';
-import template from "text!./edit-national-report.directive.html";
 import _ from 'lodash';
 import 'ngDialog';
+import '~/views/forms/directives/nr-yes-no';
+import template from "text!./edit-national-report.directive.html";
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
 import numbers from '~/app-text/numbers.json';
-app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid', 'ngDialog', 'realm', 'translationService',
-    function ($controller, $http, $timeout, guid, ngDialog, realm, translationService) {
+app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$routeParams', "$timeout", "$q", 'guid', 'ngDialog', 'realm', 'translationService',
+    function ($controller, $http, storage, $routeParams, $timeout, $q, guid, ngDialog, realm, translationService) {
 
         return {
             restrict: "AE",
@@ -26,7 +26,7 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                 translationService.set('editNRT', editNRT);
                 translationService.set('numbers', numbers);
                 $scope.activeTab = 1
-
+                // previousAnswerMapping = {}; // ToDo will get from file
                 $controller('editController', {
                     $scope: $scope
                 });
@@ -34,20 +34,6 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                 //==================================
                 //
                 //==================================
-
-                $scope.setTab = function (index, isScroll) {
-                    if (isScroll) {
-                        window.scrollTo(0, 0);
-                    }
-                    $("ul.page-tabs").find("li").removeClass("active");
-                    $timeout(function () {
-                        $('ul.page-tabs a[href="#tab' + index + '"]').tab('show');
-                        $("ul.page-tabs").find('#tab' + index).parents('li').addClass("active");
-                    }, 200);
-                    $scope.activeTab = index + 1;
-                    $scope.reportTabs[index].render = true;
-                }
-
                 $scope.onContactQuery = function (searchText) {
                     var queryOptions = {
                         realm: realm.value,
@@ -63,6 +49,125 @@ app.directive("editNationalReport", ["$controller", "$http", "$timeout", 'guid',
                         queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
                     }
                     return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
+
+                $scope.onGovernmentChange = function (government) {
+                    if (government && $scope.document) {
+                        verifyCountryHasReport();
+                        loadPreviousReport();
+                    }
+                }
+
+                function verifyCountryHasReport() {
+                    console.log("verifyCountryHasReport is called")
+                    $q.all([
+                        storage.documents.query("(type eq '$scope.cpbCurrentReport')", "my", { $top: 10 }),
+                        storage.drafts.query("(type eq '$scope.cpbCurrentReport')", { $top: 10 })
+                    ])
+                        .then(function (nationalRecords) {
+                            var filterByGovernment = function (item) {
+                                return item && (item.metadata || {}).government == $scope.document.government.identifier
+                            }
+                            var published = _.find((nationalRecords[0].data || {}).Items, filterByGovernment);
+                            var draft = _.find((nationalRecords[1].data || {}).Items, filterByGovernment);
+
+                            if (((published || draft) && (!$routeParams.identifier || $routeParams.identifier != (draft || published).identifier))) {
+                                $scope.blockEditForm = true;
+                                ngDialog.open({
+                                    template: 'recordExistsTemplate.html',
+                                    closeByDocument: false,
+                                    closeByEscape: false,
+                                    showClose: false,
+                                    closeByNavigation: false,
+                                    controller: ['$scope', '$timeout', '$location', function ($scope, $timeout, $location) {
+                                        $scope.alertSeconds = 10;
+                                        time();
+
+                                        function time() {
+                                            $timeout(function () {
+                                                if ($scope.alertSeconds == 1) {
+                                                    $scope.openExisting();
+                                                }
+                                                else {
+                                                    $scope.alertSeconds--;
+                                                    time()
+                                                }
+                                            }, 1000)
+                                        }
+                                        $scope.openExisting = function () {
+                                            ngDialog.close();
+                                            $location.path('register/NR4/' + (draft || published).identifier + '/edit');
+                                        }
+                                    }]
+                                });
+                            }
+                            else {
+
+                            }
+                        });
+                }
+
+                //ToDo change the path https://api.cbd.int/api/v2015/national-reports-cpb-3 dynamically
+                async function loadPreviousReport() {
+                    if (!$scope.document)
+                        return;
+                    const cpbPreviousReport = $scope.questions[1];
+                    var params = { q: { 'government.identifier': $scope.document.government.identifier } };
+                    $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params: params })
+                        .then(function (result) {
+                            var prevReportAnswers = result.data[0];
+                            var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
+
+                            _.forEach(previousAnswerMapping, function (mapping, key) {
+
+                                var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
+                                if (prevQuestion) {
+                                    mapping.previousQuestion = { title: prevQuestion.title };
+                                    if (prevReportAnswers) {
+                                        var prevAnswer = prevReportAnswers[mapping.prevQuestion];
+                                        if (_.isArray(prevAnswer)) {
+                                            mapping.previousQuestion.type = 'array';
+                                            mapping.previousQuestion.answer = _.map(prevAnswer, function (answer) {
+                                                return (_.find(prevQuestion.options, { value: answer.identifier || answer }) || {}).title
+                                            })
+                                        }
+                                        else if (_.isObject(prevAnswer)) {
+                                            if (prevAnswer.en || prevAnswer.fr || prevAnswer.es || prevAnswer.ar || prevAnswer.ru || prevAnswer.zh) {
+                                                mapping.previousQuestion.answer = prevAnswer;
+                                                mapping.previousQuestion.type = 'lstring';
+                                            }
+                                            else {
+                                                mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer.identifier || prevAnswer }) || {}).title;
+                                                mapping.previousQuestion.type = 'string';
+                                            }
+                                        }
+                                        else {
+                                            mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer }) || {}).title;
+                                            mapping.previousQuestion.type = 'string'
+                                        }
+                                    }
+                                }
+                                else
+                                    console.log(mapping)
+                            })
+
+                            return prevReportAnswers;
+                        })
+                }
+                //==================================
+                //
+                //==================================
+                $scope.setTab = function (index, isScroll) {
+                    if (isScroll) {
+                        window.scrollTo(0, 0);
+                    }
+                    $("ul.page-tabs").find("li").removeClass("active");
+                    $timeout(function () {
+                        $('ul.page-tabs a[href="#tab' + index + '"]').tab('show');
+                        $("ul.page-tabs").find('#tab' + index).parents('li').addClass("active");
+                    }, 200);
+                    $scope.activeTab = index + 1;
+                    $scope.reportTabs[index].render = true;
                 }
 
                 $scope.updateAnswer = function (question, baseQuestionNumber) {
