@@ -1,7 +1,7 @@
 <div>
     <div class="row">
         <div class="col-xs-12">
-            <ul class="page-tabs nav nav-tabs" id="nrTabs">
+            <ul class="page-tabs nav nav-tabs mb-3" id="nrTabs">
                 <span class="m-2 fw-bold" ng-if="isBCH">{{::('editNRT.question'|$translate)}}:</span>
                 <li class="nav-item" ng-repeat="tab in reportTabs"
                     ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
