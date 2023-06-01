@@ -798,20 +798,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ],
-            "caption": nr1T.pleaseExplainYourResponse,
             "validations": [
                {
                   "question": "Q019_a",
@@ -845,15 +847,16 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                }
             ],
-            "caption": nr1T.additionalInformation,
          },
          {
             "key": "Q019_b",
@@ -867,15 +870,16 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                }
-            ],
-            "caption": nr1T.additionalInformation
+            ]
          },
          {
             "key": "Article16",
@@ -896,20 +900,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ],
-            "caption": nr1T.pleaseExplainYourResponse,
             "validations": [
                {
                   "question": "Q020_a",
@@ -943,15 +949,16 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                }
-            ],
-            "caption": nr1T.additionalInformation
+            ]
          },
          {
             "key": "Q020_b",
@@ -965,15 +972,16 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
                }
-            ],
-            "caption": nr1T.additionalInformation
+            ]
          },
 
          {
@@ -995,20 +1003,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yesInAllCases,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesInSomeCases,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ],
-            "caption": nr1T.pleaseExplainYourResponse,
             "validations": [
                {
                   "question": "Q021_a",
@@ -1074,17 +1084,17 @@ export const npNationalReport1 = [
                {
                   "value": "true.some",
                   "title": nr1T.yesInSomeCases,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                   
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
-            ],
-            "caption": nr1T.pleaseExplainYourResponse,
-
+            ]
          },
          {
             "key": "Q021_c",
@@ -1124,20 +1134,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
-            ],
-            "caption": nr1T.pleaseExplainYourResponse
+            ]
          },
          {
             "key": "Article17_1_c",
@@ -1158,20 +1170,22 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
-            ],
-            "caption": nr1T.pleaseExplainYourResponse
+            ]
          },
          {
             "key": "Q024",
