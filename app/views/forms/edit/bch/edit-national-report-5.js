@@ -111,7 +111,13 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 
-        
+         $scope.onGovernmentChange = function (government) {
+            if (government && $scope.document) {
+                $scope.$broadcast('loadPreviousReportEvent', 
+                    {countryId:government.identifier, 
+                    nrReport:'https://api/v2019/report-analyzer/national-report-cpb-4'}); // ToDo: change api link
+            }
+        }
         //==================================
         //
         //==================================

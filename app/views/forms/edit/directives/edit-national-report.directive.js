@@ -31,70 +31,16 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     $scope: $scope
                 });
 
-                //handle in edit form with events
-                $scope.onGovernmentChange = function (government) {
-                    if (government && $scope.document) {
-                        verifyCountryHasReport();
-                        loadPreviousReport();
-                    }
-                }
-                // directive pass schema name and country id
-                function verifyCountryHasReport() {
-                    console.log("verifyCountryHasReport is called")
-                    $q.all([
-                        storage.documents.query("(type eq '$scope.cpbCurrentReport')", "my", { $top: 10 }),
-                        storage.drafts.query("(type eq '$scope.cpbCurrentReport')", { $top: 10 })
-                    ])
-                        .then(function (nationalRecords) {
-                            var filterByGovernment = function (item) {
-                                return item && (item.metadata || {}).government == $scope.document.government.identifier
-                            }
-                            var published = _.find((nationalRecords[0].data || {}).Items, filterByGovernment);
-                            var draft = _.find((nationalRecords[1].data || {}).Items, filterByGovernment);
-
-                            if (((published || draft) && (!$routeParams.identifier || $routeParams.identifier != (draft || published).identifier))) {
-                                $scope.blockEditForm = true;
-                                ngDialog.open({
-                                    template: 'recordExistsTemplate.html',
-                                    closeByDocument: false,
-                                    closeByEscape: false,
-                                    showClose: false,
-                                    closeByNavigation: false,
-                                    controller: ['$scope', '$timeout', '$location', function ($scope, $timeout, $location) {
-                                        $scope.alertSeconds = 10;
-                                        time();
-
-                                        function time() {
-                                            $timeout(function () {
-                                                if ($scope.alertSeconds == 1) {
-                                                    $scope.openExisting();
-                                                }
-                                                else {
-                                                    $scope.alertSeconds--;
-                                                    time()
-                                                }
-                                            }, 1000)
-                                        }
-                                        $scope.openExisting = function () {
-                                            ngDialog.close();
-                                            $location.path('register/NR4/' + (draft || published).identifier + '/edit');
-                                        }
-                                    }]
-                                });
-                            }
-                            else {
-
-                            }
-                        });
-                }
-
-                //ToDo change the path https://api.cbd.int/api/v2015/national-reports-cpb-3 dynamically
-                async function loadPreviousReport() {
+                $scope.$on('loadPreviousReportEvent', function(evt, evtParams){
+                    loadPreviousReport(evtParams.nrReport, evtParams.countryId );
+                })
+                
+                async function loadPreviousReport(nrReport, countryId) {
                     if (!$scope.document)
                         return;
                     const cpbPreviousReport = $scope.questions[1];
-                    var params = { q: { 'government.identifier': $scope.document.government.identifier } };
-                    $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params: params })
+                    var params = { q: { 'government.identifier': countryId } };
+                    $http.get(nrReport, { params: params })
                         .then(function (result) {
                             var prevReportAnswers = result.data[0];
                             var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();

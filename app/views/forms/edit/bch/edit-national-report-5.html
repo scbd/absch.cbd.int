@@ -59,7 +59,8 @@
                         <div class="col-sm-12">
                             <div class="km-control-group" name="government" required caption="{{::('numbers.one'|$translate)}}.{{::('editNRT.country'|$translate)}}">
                                 <div afc-autocomplete required name="government" ng-disabled="userHasGovernment()" ng-model="formScope.$parent.document.government" source="options.countries"
-                                    filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editNRT.selectOption'|$translate)}}" ng-change="onGovernmentChange(formScope.$parent.document.government)"></div>
+                                    filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editNRT.selectOption'|$translate)}}" ng-change="formScope.$parent.onGovernmentChange(formScope.$parent.document.government)"></div>
+                                <!-- <has-government-record ng-if="formScope.$parent.document.government" schema="cpbNationalReport5" government="formScope.$parent.document.government.identifier"></has-government-record> -->
                             </div>
                         </div>
                     </div>
