@@ -540,7 +540,14 @@ export const npNationalReport1 = [
             "type": "int",
             "title": nr1T.part_III_question12_1_title,
             "multiple": false,
-            "mandatory": true
+            "mandatory": true,
+            "additionalInformation":[
+               {
+                  "field":"furtherInfo",
+                  "title" : nr1T.additionalInformation,
+                  "type":"string"
+               }
+            ]
          },
          {
             "key": "Q012_b",
