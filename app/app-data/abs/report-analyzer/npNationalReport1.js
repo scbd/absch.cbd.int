@@ -1348,13 +1348,182 @@ export const npNationalReport1 = [
          },
          {
             "key": "Q029",
-            "section": "Part-II",
+            "section": "Part-VI",
             "number": "29",
             "type": "link",
             "title": nr1T.part_VI_question29_title,
             "multiple": false
          }
 
+      ]
+   },
+ 
+   {
+      "key": "Part-VII",
+      "title": nr1T.part_VII_title,
+      "questions": [
+         {
+            "key": "Article18_a",
+            "section": "Part-VII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.article18_a
+         },
+         {
+            "key": "Q030",
+            "section": "Part-VII",
+            "number": "30",
+            "type": "option",
+            "title": nr1T.part_VII_question30_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false.na",
+                  "title": nr1T.notApplicable,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               }
+            ]
+         },
+
+
+         {
+            "key": "Article18_b",
+            "section": "Part-VII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.article18_b
+         },
+         {
+            "key": "Q031",
+            "section": "Part-VII",
+            "number": "31",
+            "type": "option",
+            "title": nr1T.part_VII_question31_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               }
+            ],
+            "validations": [
+               {
+                  "question": "Q031_a",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               }
+            ]
+         },
+
+         {
+            "key": "Q031_a",
+            "section": "Part-VII",
+            "number": "31.1",
+            "type": "option",
+            "title": nr1T.part_VII_question31_1_title,
+            "multiple": false,
+            "hasValidation": true,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
+               }
+            ]
+         },
+
+
+         {
+            "key": "Article18_c",
+            "section": "Part-VII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.article18_c
+         },
+         {
+            "key": "Q032",
+            "section": "Part-VII",
+            "number": "32",
+            "type": "option",
+            "title": nr1T.part_VII_question32_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               }
+            ]
+         },
+         {
+            "key": "Q033",
+            "section": "Part-VII",
+            "number": "33",
+            "type": "link",
+            "title": nr1T.part_VII_question33_title,
+            "multiple": false
+         }
       ]
    }
 ]
