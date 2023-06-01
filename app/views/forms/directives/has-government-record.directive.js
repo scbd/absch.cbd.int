@@ -1,19 +1,26 @@
 ﻿import app from '~/app';
 import _ from 'lodash';
+import '~/services/main';
+import '~/components/scbd-angularjs-services/main';
+import template from './has-government-record.directive.html';
+import hasGovernmentRecordT from '~/app-text/views/forms/directives/has-government-record.json';
+import 'ngDialog';
 
 app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$timeout", "$q", 'guid', 'ngDialog', 'realm', 'translationService',
     function ($http, storage, $routeParams, $timeout, $q, guid, ngDialog, realm, translationService) {
 
         return {
+            template: template,
             restrict: "EAC",
             replace: true,
             transclude: false,
             scope: {
                 governmentId: '=',
-				schemaName: "="
+				schemaName: "=",
+                docType: "="
             },
-            link: function ($scope) {
-
+            link: function ($scope, $timeout) {
+                translationService.set('hasGovernmentRecordT', hasGovernmentRecordT);
 				$scope.$watch('governmentId', function () {
                     verifyCountryHasReport($scope.governmentId)					 
 				});
@@ -55,7 +62,7 @@ app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$tim
                                     }
                                     $scope.openExisting = function() {
                                         ngDialog.close();
-                                        $location.path('register/NR5/' + (draft||published).identifier+'/edit');
+                                        $location.path(`register/${$scope.docType}/` + (draft||published).identifier+'/edit');
                                     }
                                 }]
                             });
@@ -68,4 +75,4 @@ app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$tim
 			}			 
 		};
 	
-    }]);
+    }])

@@ -1,0 +1,15 @@
+﻿<div>
+    <script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
+        <div style="margin:10px;">
+            <h1>{{::('hasGovernmentRecordT.fnationalReport'|$translate)}}</h1>
+            <hr>
+            <div class=" alert alert-danger">
+                <div class="bi bi-exclamation-sign"></div>
+                <div>{{::('hasGovernmentRecordT.NRInfo'|$translate)}} <span ng-bind="alertSeconds"></span> {{::('hasGovernmentRecordT.seconds'|$translate)}}</div>
+            </div>
+            <div class="ngdialog-buttons">
+                <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">{{::('hasGovernmentRecordT.redirectNow'|$translate)}}</button>
+            </div>
+        </div>
+    </script>
+</div>
