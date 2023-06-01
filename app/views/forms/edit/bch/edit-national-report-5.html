@@ -45,80 +45,148 @@
                 <div class="panel-heading">
                     <strong>{{::('editNRT.generalInfo'|$translate)}}</strong>
                 </div>
-                <div class="panel-body" style="margin:20px">
-                    <div class="row">
-                        <div class="col-xs-12" >
-                            <div class="km-control-group" name="header.languages" required caption="{{::('editNRT.languageToPublish'|$translate)}}">
-                                <div class="indent">
-                                    <div km-form-languages multiple required name="header.languages" ng-model="formScope.$parent.document.header.languages"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="km-control-group" name="government" required caption="{{::('numbers.one'|$translate)}}.{{::('editNRT.country'|$translate)}}">
-                                <div afc-autocomplete required name="government" ng-disabled="userHasGovernment()" ng-model="formScope.$parent.document.government" source="options.countries"
-                                    filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editNRT.selectOption'|$translate)}}" ng-change="formScope.$parent.onGovernmentChange(formScope.$parent.document.government)"></div>
-                                <!-- <has-government-record ng-if="formScope.$parent.document.government" schema="cpbNationalReport5" government="formScope.$parent.document.government.identifier"></has-government-record> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="km-control-group" required name="stakeholders" caption="{{::('numbers.two'|$translate)}}. {{::('editNRT.organizationsStakeholders'|$translate)}}">
-                                <div km-textbox-ml name="stakeholders" required ng-model="formScope.$parent.document.stakeholders" locales="formScope.$parent.document.header.languages"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="km-control-group" name="contact" caption="{{::('editNRT.contactPerson'|$translate)}}" required>											
-                                <div document-selector ng-model="formScope.$parent.document.contact" question="contact"  type="radio"
-                                ng-disabled="!formScope.$parent.document.government.identifier" on-build-query="formScope.$parent.onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>			
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="km-control-group" required name="date" caption="{{::('numbers.three'|$translate)}}. {{::('editNRT.dateOfSubmission'|$translate)}}">
-                                <div km-date placeholder="YYYY-MM-DD" name="date" ng-model="formScope.$parent.document.date"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                            <div class="col-12">
-                                <div class="km-control-group time-period" required name="date" caption="{{::('numbers.four'|$translate)}}. {{::('editNRT.timePeriod'|$translate)}}">
-                                    <div class="col-md-5 col-sm-12">
-                                        <div km-date placeholder="YYYY-MM-DD" name="reportPeriodStartDate" required ng-model="formScope.$parent.document.reportPeriodStartDate"></div>
-                                    </div> 
-                                    <div class="col-sm-2 text-center">
-                                        <strong>{{::('editNRT.to'|$translate)}}</strong>
+                <div class="panel-body" style="padding:0px">
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
+                            <div class="mt-3">
+                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-8" style="padding-left: 5px;">
+                                        <div class="km-control-group  bold d-inline" name="header.languages" required
+                                            caption="{{::('editNRT.languageToPublish'|$translate)}}">
+                                            <div class="indent">
+                                                <div km-form-languages multiple required name="header.languages"
+                                                    ng-model="formScope.$parent.document.header.languages"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-5 col-sm-12">
-                                        <div km-date placeholder="YYYY-MM-DD" name="reportPeriodEndDate" required ng-model="formScope.$parent.document.reportPeriodEndDate"></div>
-                                    </div>                                
                                 </div>
                             </div>
+                        </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="km-control-group"  name="Q005" caption="{{::('numbers.five'|$translate)}}. {{::('editNRT.ifNotPartyToCP'|$translate)}}">
-                                <div km-yes-no required ng-model="formScope.$parent.document.Q005" locales="formScope.$parent.document.header.languages"></div>
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
+                            <div class="mt-3">
+                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-8" style="padding-left: 5px;">
+                                        <div class="km-control-group  bold d-inline" name="government" required
+                                            caption="{{::('numbers.one'|$translate)}}. {{::('editNRT.country'|$translate)}}">
+                                            <div afc-autocomplete required name="government" ng-disabled="userHasGovernment()"
+                                                ng-model="formScope.$parent.document.government" source="options.countries"
+                                                filter="genericFilter" mapping="genericMapping" selectbox="true"
+                                                placeholder="{{::('editNRT.selectOption'|$translate)}}"
+                                                ng-change="formScope.$parent.onGovernmentChange(formScope.$parent.document.government)">
+                                            </div>
+                                            <has-government-record ng-if="formScope.$parent.document.government"
+                                                schema="cpbNationalReport5"
+                                                government="formScope.$parent.document.government.identifier"></has-government-record>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="km-control-group" name="Q006" caption="{{::('numbers.six'|$translate)}}. {{::('editNRT.provideDetails'|$translate)}}">
-                                <div km-textbox-ml ng-model="formScope.$parent.document.Q006" placeholder="" locales="formScope.$parent.document.header.languages"></div>
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
+                            <div class="mt-3">
+                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-8" style="padding-left: 5px;">
+                                        <div class="km-control-group  bold d-inline" required name="stakeholders"
+                                            caption="{{::('numbers.two'|$translate)}}. {{::('editNRT.organizationsStakeholders'|$translate)}}">
+                                            <div km-textbox-ml name="stakeholders" required
+                                                ng-model="formScope.$parent.document.stakeholders"
+                                                locales="formScope.$parent.document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
+                            <div class="mt-3">
+                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-8" style="padding-left: 5px;">
+                                        <div class="km-control-group  bold d-inline" name="contact"
+                                            caption="{{::('editNRT.contactPerson'|$translate)}}" required>
+                                            <div document-selector ng-model="formScope.$parent.document.contact" question="contact"
+                                                type="radio" ng-disabled="!formScope.$parent.document.government.identifier"
+                                                on-build-query="formScope.$parent.onContactQuery(searchText)" allow-new="true"
+                                                allow-new-schema="contact"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
+                            <div class="mt-3">
+                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-8" style="padding-left: 5px;">
+                                        <div class="km-control-group  bold d-inline" required name="date"
+                                            caption="{{::('numbers.three'|$translate)}}. {{::('editNRT.dateOfSubmission'|$translate)}}">
+                                            <div km-date placeholder="YYYY-MM-DD" name="date"
+                                                ng-model="formScope.$parent.document.date"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
+                            <div class="mt-3">
+                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-8" style="padding-left: 5px;">
+                                        <div class="km-control-group control-label bold d-inline time-period" required name="date"
+                                            caption="{{::('numbers.four'|$translate)}}. {{::('editNRT.timePeriod'|$translate)}}">
+                                            <div class="col-md-5 col-sm-12">
+                                                <div km-date placeholder="YYYY-MM-DD" name="reportPeriodStartDate" required
+                                                    ng-model="formScope.$parent.document.reportPeriodStartDate"></div>
+                                            </div>
+                                            <div class="col-sm-2 text-center">
+                                                <strong>{{::('editNRT.to'|$translate)}}</strong>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12">
+                                                <div km-date placeholder="YYYY-MM-DD" name="reportPeriodEndDate" required
+                                                    ng-model="formScope.$parent.document.reportPeriodEndDate"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
+                            <div class="mt-3">
+                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-8" style="padding-left: 5px;">
+                                        <div class="km-control-group control-label bold d-inline" name="Q005"
+                                            caption="{{::('numbers.five'|$translate)}}. {{::('editNRT.ifNotPartyToCP'|$translate)}}">
+                                            <div km-yes-no required ng-model="formScope.$parent.document.Q005"
+                                                locales="formScope.$parent.document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
+                            <div class="mt-3">
+                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-8" style="padding-left: 5px;">
+                                        <div class="km-control-group control-label bold d-inline" name="Q006"
+                                            caption="{{::('numbers.six'|$translate)}}. {{::('editNRT.provideDetails'|$translate)}}">
+                                            <div km-textbox-ml ng-model="formScope.$parent.document.Q006" placeholder=""
+                                                locales="formScope.$parent.document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </script>
