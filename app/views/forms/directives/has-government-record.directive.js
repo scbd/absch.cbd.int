@@ -55,7 +55,7 @@ app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$tim
                                     }
                                     $scope.openExisting = function() {
                                         ngDialog.close();
-                                        $location.path('register/NR4/' + (draft||published).identifier+'/edit');
+                                        $location.path('register/NR5/' + (draft||published).identifier+'/edit');
                                     }
                                 }]
                             });
