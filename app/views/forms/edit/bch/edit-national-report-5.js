@@ -98,23 +98,20 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         $controller('editController', {
             $scope: $scope
         });
-
-        $scope.onContactQuery = function (searchText) {
+        //==================================
+        //
+        //==================================
+        $scope.onContactQuery = function(searchText){
             var queryOptions = {
-                realm: realm.value,
-                searchText: searchText,
-            }
-            if ($scope.isBCH) {
-                queryOptions.schemas = ['contact', 'focalPoint'];
-                queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
-            }
-            else {
-                // ToDo: change for ABS
-                queryOptions.schemas = ['contact', 'focalPoint'];
-                queryOptions.query = `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`;
+            schemas : ['contact', 'focalPoint'],
+            realm : realm.value,
+            searchText: searchText,
+            query : `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
             }
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
+
+        
         //==================================
         //
         //==================================
