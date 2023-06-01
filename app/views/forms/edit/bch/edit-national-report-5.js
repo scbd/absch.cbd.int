@@ -7,6 +7,7 @@ import '~/views/forms/edit/edit';
 import '~/services/main';
 import '~/views/forms/edit/document-selector';
 import '~/views/directives/block-region-directive';
+// import '~/views/forms/directives/has-government-record.directive';
 import '~/views/forms/view/bch/view-national-report-5.directive';
 export { default as template } from './edit-national-report-5.html';
 import 'ngDialog';
@@ -115,7 +116,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             if (government && $scope.document) {
                 $scope.$broadcast('loadPreviousReportEvent', 
                     {countryId:government.identifier, 
-                    nrReport:'https://api/v2019/report-analyzer/national-report-cpb-4'}); // ToDo: change api link
+                    nrReport:'cpbNationalReport4'}); // ToDo: change api link
             }
         }
         //==================================

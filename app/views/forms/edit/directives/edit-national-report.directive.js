@@ -4,6 +4,7 @@ import 'ngDialog';
 import '~/views/forms/directives/nr-yes-no';
 import template from "text!./edit-national-report.directive.html";
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
+import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import numbers from '~/app-text/numbers.json';
 app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$routeParams', "$timeout", "$q", 'guid', 'ngDialog', 'realm', 'translationService',
     function ($controller, $http, storage, $routeParams, $timeout, $q, guid, ngDialog, realm, translationService) {
@@ -22,11 +23,13 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
             link: function ($scope) {
                 $scope.isBCH = realm.is('BCH');
                 $scope.isABS = realm.is('ABS');
+                var appName  = realm.value.replace(/-.*/,'').toLowerCase();
                 $scope.multiTermModel = {};
                 translationService.set('editNRT', editNRT);
                 translationService.set('numbers', numbers);
                 $scope.activeTab = 1
-                // previousAnswerMapping = {}; // ToDo will get from file
+                // TODO: read from mapping file
+                var previousAnswerMapping = $scope.previousAnswerMapping = {};
                 $controller('editController', {
                     $scope: $scope
                 });
@@ -35,12 +38,13 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     loadPreviousReport(evtParams.nrReport, evtParams.countryId );
                 })
                 
-                async function loadPreviousReport(nrReport, countryId) {
+                async function loadPreviousReport(nrReportSchema, countryId) {
                     if (!$scope.document)
                         return;
                     const cpbPreviousReport = $scope.questions[1];
+                    $scope.reportApiDetails = _.find(analyzerMapping[appName], {type:nrReportSchema});
                     var params = { q: { 'government.identifier': countryId } };
-                    $http.get(nrReport, { params: params })
+                    $http.get('https:/'+$scope.reportApiDetails.dataUrl, { params: params })
                         .then(function (result) {
                             var prevReportAnswers = result.data[0];
                             var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
