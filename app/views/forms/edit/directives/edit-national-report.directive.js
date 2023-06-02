@@ -14,13 +14,15 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
             template: template,
             replace: true,
             transclude: false,
+            // require: "?ngModel",
             scope: {
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
+                binding: '=ngModel',
                 document: '=document' // ToDo replace with ngModel
             },
-            link: function ($scope) {
+            link: function ($scope, ngModelController) {
                 $scope.isBCH = realm.is('BCH');
                 $scope.isABS = realm.is('ABS');
                 var appName  = realm.value.replace(/-.*/,'').toLowerCase();
@@ -32,6 +34,10 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 $controller('editController', {
                     $scope: $scope
                 });
+                // ToDo: 
+                $scope.onQuestionUpdate = function(){
+                    ngModelController.$setViewValue($scope.binding);
+                  }
 
                 $scope.$on('loadPreviousReportEvent', function(evt, evtParams){
                     loadPreviousReport(evtParams);
