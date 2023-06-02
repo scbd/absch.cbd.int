@@ -34,25 +34,23 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 $controller('editController', {
                     $scope: $scope
                 });
-                // ToDo: 
-                $scope.onQuestionUpdate = function(){
-                    ngModelController.$setViewValue($scope.binding);
-                  }
-
-                $scope.$on('loadPreviousReportEvent', function(evt, evtParams){
-                    loadPreviousReport(evtParams);
+                // ToDo:  
+                //   $scope.$watch('binding', function(newVal, oldVal) {
+                //     if($scope.binding && newVal!=oldVal ){
+                //       init();
+                //     }
+                //   });
+                $scope.$on('loadPreviousReportEvent', function(evt, [nrReportSchema,countryId,previousAnswerMapping]){
+                    loadPreviousReport(...[nrReportSchema,countryId,previousAnswerMapping]);
                 })
                 
-                async function loadPreviousReport(fnParams) {
+                async function loadPreviousReport(nrReportSchema,countryId,previousAnswerMapping) {
                     if (!$scope.document)
-                        return;                   
-                    const nrReportSchema = fnParams.nrReportSchema;
-                    const countryId = fnParams.countryId;
-                    const previousAnswerMapping = fnParams.previousAnswerMapping;            
+                        return;                             
                     const cpbPreviousReport = $scope.questions[1];
                     $scope.reportApiDetails = _.find(analyzerMapping[appName], {type:nrReportSchema});
                     var params = { q: { 'government.identifier': countryId } };
-                    $http.get('https:/'+$scope.reportApiDetails.dataUrl, { params: params })
+                    $http.get($scope.reportApiDetails.dataUrl, { params: params })
                         .then(function (result) {
                             var prevReportAnswers = result.data[0];
                             var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
@@ -186,6 +184,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                             }
                         })
                     }
+                    // ngModelController.$setViewValue($scope.binding); //ToDo
                 }
 
                 $scope.spaceSubQuestion = function (number) {

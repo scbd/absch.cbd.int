@@ -113,11 +113,11 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
 
-                $scope.$broadcast('loadPreviousReportEvent', {
-                    nrReportSchema: 'cpbNationalReport4',
-                    countryId: government.identifier,
-                    previousAnswerMapping: $scope.previousAnswerMapping
-                });
+                $scope.$broadcast('loadPreviousReportEvent', [
+                    'cpbNationalReport4',
+                    government.identifier,
+                    $scope.previousAnswerMapping
+                ]);
             }
         }
 
