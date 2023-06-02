@@ -2152,5 +2152,97 @@ export const npNationalReport1 = [
             "mandatory": true
          } 
       ]
+   },
+   {
+      "key": "Part-X",
+      "title": nr1T.part_X_title,
+      "questions": [
+         {
+            "key": "Article11.1",
+            "section": "Part-X",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.article11_1
+         },
+         {
+            "key": "Q047",
+            "section": "Part-X",
+            "number": "47",
+            "type": "option",
+            "title": nr1T.part_X_question47_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false.na",
+                  "title": nr1T.notApplicable,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               }
+            ]            
+         },
+         {
+            "key": "Q048",
+            "section": "Part-X",
+            "number": "48",
+            "type": "option",
+            "title": nr1T.part_X_question48_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
+                  "value": "false.na",
+                  "title": nr1T.notApplicable,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               }
+            ],
+            
+         },
+         {
+            "key": "Q049",
+            "section": "Part-X",
+            "number": "49",
+            "type": "link",
+            "title": nr1T.part_X_question49_title,
+            "multiple": false
+         }
+      ]
    }
 ]
