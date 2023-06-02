@@ -114,9 +114,12 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
          $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
-                $scope.$broadcast('loadPreviousReportEvent', 
-                    {countryId:government.identifier, 
-                    nrReport:'cpbNationalReport4'}); // ToDo: change api link
+
+                $scope.$broadcast('loadPreviousReportEvent', {
+                    nrReportSchema:'cpbNationalReport4',
+                    countryId:government.identifier, 
+                    previousAnswerMapping: $scope.previousAnswerMapping
+                });
             }
         }
         //==================================

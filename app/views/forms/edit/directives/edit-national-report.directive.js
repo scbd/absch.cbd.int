@@ -27,20 +27,22 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 $scope.multiTermModel = {};
                 translationService.set('editNRT', editNRT);
                 translationService.set('numbers', numbers);
-                $scope.activeTab = 1
-                // TODO: read from mapping file
-                var previousAnswerMapping = $scope.previousAnswerMapping = {};
+                $scope.activeTab = 1;
+                
                 $controller('editController', {
                     $scope: $scope
                 });
 
                 $scope.$on('loadPreviousReportEvent', function(evt, evtParams){
-                    loadPreviousReport(evtParams.nrReport, evtParams.countryId );
+                    loadPreviousReport(evtParams);
                 })
                 
-                async function loadPreviousReport(nrReportSchema, countryId) {
+                async function loadPreviousReport(fnParams) {
                     if (!$scope.document)
-                        return;
+                        return;                   
+                    const nrReportSchema = fnParams.nrReportSchema;
+                    const countryId = fnParams.countryId;
+                    const previousAnswerMapping = fnParams.previousAnswerMapping;            
                     const cpbPreviousReport = $scope.questions[1];
                     $scope.reportApiDetails = _.find(analyzerMapping[appName], {type:nrReportSchema});
                     var params = { q: { 'government.identifier': countryId } };
