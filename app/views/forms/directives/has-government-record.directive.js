@@ -6,8 +6,8 @@ import template from './has-government-record.directive.html';
 import hasGovernmentRecordT from '~/app-text/views/forms/directives/has-government-record.json';
 import 'ngDialog';
 
-app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$timeout", "$q", 'guid', 'ngDialog', 'realm', 'translationService',
-    function ($http, storage, $routeParams, $timeout, $q, guid, ngDialog, realm, translationService) {
+app.directive("hasGovernmentRecord", ['IStorage', '$routeParams', 'realm', "$timeout", "$q", 'ngDialog', 'translationService',
+    function (storage, $routeParams, realm, $timeout, $q, ngDialog, translationService) {
 
         return {
             template: template,
@@ -16,10 +16,9 @@ app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$tim
             transclude: false,
             scope: {
                 governmentId: '=',
-				schemaName: "=",
-                docType: "="
+				schemaName: "="
             },
-            link: function ($scope, $timeout) {
+            link: function ($scope) {
                 translationService.set('hasGovernmentRecordT', hasGovernmentRecordT);
 				$scope.$watch('governmentId', function () {
                     verifyCountryHasReport($scope.governmentId)					 
@@ -36,6 +35,7 @@ app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$tim
                         }              
                         var published   = _.find((nationalRecords[0].data||{}).Items,  filterByGovernment);
                         var draft       = _.find((nationalRecords[1].data||{}).Items,  filterByGovernment);
+                        var schemaName = $scope.schemaName ;
         
                         if (((published || draft) && (!$routeParams.identifier || $routeParams.identifier != (draft||published).identifier))) {
                             $scope.blockEditForm = true;
@@ -45,8 +45,10 @@ app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$tim
                                 closeByEscape: false,
                                 showClose: false,
                                 closeByNavigation: false,
-                                controller: ['$scope', '$timeout', '$location', function($scope, $timeout, $location) {
+                                controller: ['$scope', '$timeout', 'realm', '$location', function($scope, $timeout, realm, $location) {
                                     $scope.alertSeconds = 10;
+                                    $scope.schemaTitle = realm.schemas[schemaName].title.en; // ToDo: translation
+                                    var shortCode = realm.schemas[schemaName].shortCode
                                     time();
         
                                     function time(){
@@ -62,7 +64,7 @@ app.directive("hasGovernmentRecord", ["$http", 'IStorage', '$routeParams', "$tim
                                     }
                                     $scope.openExisting = function() {
                                         ngDialog.close();
-                                        $location.path(`register/${$scope.docType}/` + (draft||published).identifier+'/edit');
+                                        $location.path(`register/${shortCode}/` + (draft||published).identifier+'/edit');
                                     }
                                 }]
                             });

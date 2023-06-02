@@ -1,7 +1,6 @@
 {
-    "nationalReport": "national report",
-    "previousAnswerMapping": "Please note that the period covered by this question is different in each reporting format.",
-    "NRInfo": "Only one record of the fourth national report is allowed for each government, the fourth national report already exists for your government, you will be redirected to the record in",
+    
+    "message": "Only one record is allowed for each government, the record already exists for your government, you will be redirected to the record in",
     "seconds": "seconds.",
     "redirectNow": "Redirect now"
 }
