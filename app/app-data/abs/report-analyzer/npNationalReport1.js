@@ -113,7 +113,7 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.part_II_question4_2_title,
             "multiple": false,
-            "mandatory": true,
+            "mandatory": true,    
             "options": [
                {
                   "value": "true",
@@ -181,7 +181,7 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.part_II_question5_1_title,
             "multiple": false,
-            "mandatory": true,
+            "mandatory": true,          
             "options": [
                {
                   "value": "true",
@@ -203,7 +203,7 @@ export const npNationalReport1 = [
             "number": "5.2",
             "type": "option",
             "title": nr1T.part_II_question5_2_title,
-            "multiple": false,
+            "multiple": false,      
             "options": [
                {
                   "value": "true",
@@ -541,11 +541,11 @@ export const npNationalReport1 = [
             "title": nr1T.part_III_question12_1_title,
             "multiple": false,
             "mandatory": true,
-            "additionalInformation": [
+            "additionalInformation":[
                {
-                  "field": "furtherInfo",
-                  "title": nr1T.additionalInformation,
-                  "type": "string"
+                  "field":"furtherInfo",
+                  "title" : nr1T.additionalInformation,
+                  "type":"string"
                }
             ]
          },
@@ -1074,7 +1074,7 @@ export const npNationalReport1 = [
             "number": "21.2",
             "type": "option",
             "title": nr1T.part_V_question21_2_title,
-            "multiple": false,
+            "multiple": false,    
             "mandatory": true,
             "options": [
                {
@@ -1086,7 +1086,7 @@ export const npNationalReport1 = [
                   "title": nr1T.yesInSomeCases,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse
-
+                  
                },
                {
                   "value": "false",
@@ -1102,7 +1102,7 @@ export const npNationalReport1 = [
             "number": "21.3",
             "type": "option",
             "title": nr1T.part_V_question21_3_title,
-            "multiple": false,
+            "multiple": false,   
             "mandatory": true,
             "options": [
                {
@@ -1357,7 +1357,7 @@ export const npNationalReport1 = [
 
       ]
    },
-
+ 
    {
       "key": "Part-VII",
       "title": nr1T.part_VII_title,
@@ -1521,7 +1521,7 @@ export const npNationalReport1 = [
             "section": "Part-VII",
             "number": "33",
             "type": "link",
-            "title": nr1T.provideInformationOnLessons,
+            "title": nr1T.part_VII_question33_title,
             "multiple": false
          }
       ]
@@ -1551,6 +1551,64 @@ export const npNationalReport1 = [
                   "type": "lstring",
                   "caption": nr1T.additionalInformation
                }
+            ],
+            "validations": [
+               {
+                  "question": "Q035",
+                  "values": [
+                     "false"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q036",
+                  "values": [
+                     "false"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q037",
+                  "values": [
+                     "false"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q038",
+                  "values": [
+                     "false"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q039",
+                  "values": [
+                     "false"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q040",
+                  "values": [
+                     "false"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q041",
+                  "values": [
+                     "false"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               }
             ]
          },
          {
@@ -1567,7 +1625,7 @@ export const npNationalReport1 = [
             "type": "legend",
             "title": nr1T.article16_2_and_6_3
          },
-
+         
          {
             "key": "Q035",
             "section": "Part-VIII",
@@ -1852,614 +1910,7 @@ export const npNationalReport1 = [
             "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
-
-      ]
-   },
-   {
-      "key": "Part-IX",
-      "title": nr1T.part_IX_title,
-      "questions": [
-         {
-            "key": "Article9",
-            "section": "Part-IX",
-            "number": "",
-            "type": "legend",
-            "title": nr1T.article9
-         },
-         {
-            "key": "Q042",
-            "section": "Part-IX",
-            "number": "42",
-            "type": "option",
-            "title": nr1T.part_IX_question42_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "true.some",
-                  "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               }
-            ]
-         },
-         {
-            "key": "Q043",
-            "section": "Part-IX",
-            "number": "43",
-            "type": "option",
-            "title": nr1T.part_IX_question43_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.part_IX_question43_custom_caption
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.part_IX_question43_custom_caption
-               }
-            ]
-         },
-
-         {
-            "key": "Q044",
-            "section": "Part-IX",
-            "number": "44",
-            "type": "option",
-            "title": nr1T.part_IX_question44_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.notApplicable
-               }
-            ],
-            "validations": [
-               {
-                  "question": "Q044_a",
-                  "values": [
-                     "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               },
-               {
-                  "question": "Q044_b",
-                  "values": [
-                     "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               }
-            ]
-         },
-
-         {
-            "key": "Q044_a",
-            "section": "Part-IX",
-            "number": "",
-            "type": "option",
-            "title": nr1T.pleaseSelectAll,
-            "multiple": true,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "C52DEF5B-3062-45AB-968D-B835248C3341",
-                  "title": nr1T.part_IX_question44_a_option0_title
-               },
-               {
-                  "value": "5625F27F-CB4F-4C52-9E3E-E3A29057ADFF",
-                  "title": nr1T.part_IX_question44_a_option1_title
-               },
-               {
-                  "value": "1A0765A5-93E2-4B98-852F-E23038E8FA48",
-                  "title": nr1T.part_IX_question44_a_option2_title
-               },
-               {
-                  "value": "5BA5F92A-660E-4977-B38E-68C109971179",
-                  "title": nr1T.part_IX_question44_a_option3_title
-               },
-               {
-                  "value": "2F6B4F32-5052-446A-89CE-34FA569B81EB",
-                  "title": nr1T.part_IX_question44_a_option4_title
-               },
-               {
-                  "value": "DA8600D9-FF79-4B08-A800-D2E5B2CC419D",
-                  "title": nr1T.part_IX_question44_a_option5_title
-               },
-               {
-                  "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
-                  "title": nr1T.other,
-                  "type": "lstring"
-               }
-            ]
-         },
-         {
-            "key": "Q044_b",
-            "section": "Part-IX",
-            "number": "44.1",
-            "type": "int",
-            "title": nr1T.part_IX_question44_1_title,
-            "multiple": false,
-            "mandatory": true,
-            "additionalInformation": [
-               {
-                  "field": "furtherInfo",
-                  "title": nr1T.additionalInformation,
-                  "type": "string"
-               }
-            ]
-         },
-         {
-            "key": "Q045",
-            "section": "Part-IX",
-            "number": "45",
-            "type": "option",
-            "title": nr1T.part_IX_question45_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes
-               },
-               {
-                  "value": "false.na",
-                  "title": nr1T.notApplicable,
-                  "type": "lstring",
-                  "caption": nr1T.additionalInformation
-               }
-            ],
-            "validations": [
-               {
-                  "question": "Q045_a",
-                  "values": [
-                     "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               }
-            ]
-         },
-
-         {
-            "key": "Q045_a",
-            "section": "Part-IX",
-            "number": "",
-            "type": "option",
-            "title": nr1T.pleaseSelectAll,
-            "multiple": true,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "C8500203-E701-46F6-9388-7E4A4E68B3F2",
-                  "title": nr1T.part_IX_question45_a_option0_title
-               },
-               {
-                  "value": "FC0D8F91-EA81-4ED2-87FA-B83C0240FB2A",
-                  "title": nr1T.part_IX_question45_a_option1_title
-               },
-               {
-                  "value": "BEC84DD2-496F-48A9-816F-048606BAD40C",
-                  "title": nr1T.part_IX_question45_a_option2_title
-               },
-               {
-                  "value": "E5E463F6-6CE2-4EC5-9FC7-D08AB1B75F19",
-                  "title": nr1T.part_IX_question45_a_option3_title
-               },
-               {
-                  "value": "EB8A599D-806F-42C6-9609-007FB2111036",
-                  "title": nr1T.part_IX_question45_a_option4_title
-               },
-               {
-                  "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
-                  "title": nr1T.other,
-                  "type": "lstring"
-               }
-            ]
-         },
-         {
-            "key": "Q046",
-            "section": "Part-IX",
-            "number": "46",
-            "type": "link",
-            "title": nr1T.provideInformationOnLessons,
-            "multiple": false,
-            "mandatory": true
-         }
-      ]
-   },
-   {
-      "key": "Part-X",
-      "title": nr1T.part_X_title,
-      "questions": [
-         {
-            "key": "Article11.1",
-            "section": "Part-X",
-            "number": "",
-            "type": "legend",
-            "title": nr1T.article11_1
-         },
-         {
-            "key": "Q047",
-            "section": "Part-X",
-            "number": "47",
-            "type": "option",
-            "title": nr1T.part_X_question47_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "true.some",
-                  "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "false.na",
-                  "title": nr1T.notApplicable,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               }
-            ]
-         },
-         {
-            "key": "Q048",
-            "section": "Part-X",
-            "number": "48",
-            "type": "option",
-            "title": nr1T.part_X_question48_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "true.some",
-                  "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "false.na",
-                  "title": nr1T.notApplicable,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               }
-            ],
-
-         },
-         {
-            "key": "Q049",
-            "section": "Part-X",
-            "number": "49",
-            "type": "link",
-            "title": nr1T.part_X_question49_title,
-            "multiple": false
-         }
-      ]
-   },
-   {
-      "key": "Part-XI",
-      "title": nr1T.part_XI_title,
-      "questions": [
-         {
-            "key": "article19",
-            "section": "Part-XI",
-            "number": "",
-            "type": "legend",
-            "title": nr1T.article19
-         },
-         {
-            "key": "Q050",
-            "section": "Part-XI",
-            "number": "50",
-            "type": "option",
-            "title": nr1T.part_XI_question50_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "true.some",
-                  "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               }
-            ]
-         },
-         {
-            "key": "Article20",
-            "section": "Part-XI",
-            "number": "",
-            "type": "legend",
-            "title": nr1T.article20
-         },
-         {
-            "key": "Q051",
-            "section": "Part-XI",
-            "number": "51",
-            "type": "option",
-            "title": nr1T.part_XI_question51_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "true.some",
-                  "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
-               }
-            ]
-         },
-         {
-            "key": "Q052",
-            "section": "Part-XI",
-            "number": "52",
-            "type": "link",
-            "title": nr1T.provideInformationOnLessons,
-            "multiple": false
-         }
-      ]
-   },
-   {
-      "key": "Part-XII",
-      "title": nr1T.part_XII_title,
-      "questions": [
-         {
-            "key": "article21",
-            "section": "Part-XII",
-            "number": "",
-            "type": "legend",
-            "title": nr1T.article21
-         },
-         {
-            "key": "Q053",
-            "section": "Part-XII",
-            "number": "53",
-            "type": "option",
-            "title": nr1T.part_XII_question53_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               },
-               {
-                  "value": "true.some",
-                  "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               }
-            ],
-            "validations": [
-               {
-                  "question": "Q053_a",
-                  "values": [
-                     "true",
-                     "true.some"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               }
-            ]
-         },
-         {
-            "key": "Q053_a",
-            "section": "Part-XII",
-            "number": "53.1",
-            "type": "option",
-            "title": nr1T.part_XII_question53_1_title,
-            "multiple": false,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.additionalInformation
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.additionalInformation
-               }
-            ]
-         },
-         {
-            "key": "article22",
-            "section": "Part-XII",
-            "number": "",
-            "type": "legend",
-            "title": nr1T.article22
-         },
-         {
-            "key": "Q054",
-            "section": "Part-XII",
-            "number": "54",
-            "type": "option",
-            "title": nr1T.part_XII_question54_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               },
-               {
-                  "value": "true.some",
-                  "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               }
-            ],
-            "validations": [
-               {
-                  "question": "Q054_a",
-                  "values": [
-                     "true",
-                     "true.some"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               }
-            ]
-         },
-         {
-            "key": "Q054_a",
-            "section": "Part-XII",
-            "number": "54.1",
-            "type": "option",
-            "title": nr1T.part_XII_question54_1_title,
-            "multiple": true,
-            "options": [
-               {
-                  "value": "10FD7CBC-79AB-4BE9-876B-021E1A41F511",
-                  "title": nr1T.part_XII_question54_a_option1_title,
-                  "type": "int"
-               },
-               {
-                  "value": "344E105F-C29F-47F4-B6BF-725D3082BFBE",
-                  "title": nr1T.part_XII_question54_b_option1_title,
-                  "type": "int"
-               },
-               {
-                  "value": "65763772-4533-4AF1-9C46-E2BCDC462F6D",
-                  "title": nr1T.part_XII_question54_c_option1_title,
-                  "type": "int"
-               }
-            ],
-            "additionalInformation": [ // ToDo need to verify
-               {
-                  "field": "furtherInfo",
-                  "title": nr1T.additionalInformation,
-                  "type": "string"
-               }
-            ]
-         },
-
-         {
-            "key": "Q055",
-            "section": "Part-XII",
-            "number": "55",
-            "type": "option",
-            "title": nr1T.part_XII_question55_title,
-            "multiple": false,
-            "mandatory": true,
-            "options": [
-               {
-                  "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               },
-               {
-                  "value": "true.some",
-                  "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               },
-               {
-                  "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.reportingPeriod
-               }
-            ]
-         },
-         {
-            "key": "Q056",
-            "section": "Part-XII",
-            "number": "56",
-            "type": "link",
-            "title": nr1T.provideInformationOnLessons,
-            "multiple": false
-         }
+         
       ]
    }
 ]
