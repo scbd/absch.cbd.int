@@ -19,7 +19,7 @@ import numbers from '~/app-text/numbers.json';
 export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout",
     'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm', 'translationService',
     function ($scope, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
- 
+
         var user = $rootScope.user;
         $scope.activeTab = 1;
         $scope.multiTermModel = {};
@@ -27,6 +27,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         translationService.set('editNRT', editNRT);
         translationService.set('numbers', numbers);
+        $scope.previousAnswerMapping = {}; // TODO: read from mapping file
 
         $scope.tabs = [
             {
@@ -93,8 +94,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             }
         ];
         $scope.questions = [cpbNationalReport5, cpbNationalReport4];
-        // TODO: read from mapping file
-        var previousAnswerMapping = $scope.previousAnswerMapping = {};
 
         $controller('editController', {
             $scope: $scope
@@ -102,25 +101,42 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         //==================================
         //
         //==================================
-        $scope.onContactQuery = function(searchText){
+        $scope.onContactQuery = function (searchText) {
             var queryOptions = {
-            schemas : ['contact', 'focalPoint'],
-            realm : realm.value,
-            searchText: searchText,
-            query : `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
+                schemas: ['contact', 'focalPoint'],
+                realm: realm.value,
+                searchText: searchText,
+                query: `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
             }
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 
-         $scope.onGovernmentChange = function (government) {
+        $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
 
                 $scope.$broadcast('loadPreviousReportEvent', {
-                    nrReportSchema:'cpbNationalReport4',
-                    countryId:government.identifier, 
+                    nrReportSchema: 'cpbNationalReport4',
+                    countryId: government.identifier,
                     previousAnswerMapping: $scope.previousAnswerMapping
                 });
             }
+        }
+
+        function is141Or142() {
+            return ($scope.document['Q141'] || {}).value == 'true' || ($scope.document['Q142'] || {}).value == 'true';
+        }
+
+        function is79Or82Or81() {
+            return ($scope.document['Q079'] || {}).value == 'true' || ($scope.document['Q081'] || {}).value == 'true' || ($scope.document['Q082'] || {}).value == 'true';
+        }
+
+        $scope.customValidations = {
+            is79Or82Or81: is79Or82Or81,
+            is141Or142: is141Or142
+        }
+
+        $scope.userHasGovernment = function () {
+            return user.government;
         }
         //==================================
         //
@@ -138,24 +154,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             return $scope.sanitizeDocument(document);
         };
 
-        function is141Or142() {
-            return ($scope.document['Q141'] || {}).value == 'true' || ($scope.document['Q142'] || {}).value == 'true';
-        }
-
-        function is79Or82Or81() {
-            return ($scope.document['Q079'] || {}).value == 'true' || ($scope.document['Q081'] || {}).value == 'true' || ($scope.document['Q082'] || {}).value == 'true';
-        }
-
-        $scope.customValidations = {
-            is79Or82Or81: is79Or82Or81,
-            is141Or142: is141Or142
-        }
-
-
-        $scope.userHasGovernment = function () {
-            return user.government;
-        }
-
         function init() {
 
             $scope.setDocument({}).then(function (document) {
@@ -168,7 +166,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 }
             });
         }
-       
+
         init();
 
     }];
