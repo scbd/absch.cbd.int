@@ -21,7 +21,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
     function ($scope, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
 
         var user = $rootScope.user;
-        $scope.activeTab = 1;
         $scope.multiTermModel = {};
         $scope.customValidations = {};
 
