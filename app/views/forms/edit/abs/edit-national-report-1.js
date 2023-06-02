@@ -20,7 +20,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
     function ($scope, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
 
         var user = $rootScope.user;
-        $scope.activeTab = 1;
         $scope.multiTermModel = {};
         $scope.customValidations = {};
 
@@ -111,12 +110,34 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         ];
         $scope.questions = [npNationalReport1, cpbNationalReport4];       
     
-        // TODO: read from mapping file
-        var previousAnswerMapping = $scope.previousAnswerMapping = {};
+
 
         $controller('editController', {
             $scope: $scope
         });
+        //==================================
+        //
+        //==================================
+        $scope.onContactQuery = function (searchText) {
+            var queryOptions = {
+                schemas: ['contact', 'focalPoint'],
+                realm: realm.value,
+                searchText: searchText,
+                query: `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
+            }
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
+
+        $scope.onGovernmentChange = function (government) {
+            if (government && $scope.document) {
+
+                $scope.$broadcast('loadPreviousReportEvent', {
+                    nrReportSchema: 'cpbNationalReport4',
+                    countryId: government.identifier,
+                    previousAnswerMapping: $scope.previousAnswerMapping
+                });
+            }
+        }
 
         //==================================
         //
@@ -134,11 +155,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             return $scope.sanitizeDocument(document);
         };
 
-        $scope.userHasGovernment = function () {
-            return user.government;
-        }
-
-
         function init() {
 
             $scope.setDocument({}).then(function (document) {
@@ -152,6 +168,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             });
         }
 
-        init(); //ToDo
+        init();
 
     }];
