@@ -14,11 +14,16 @@
                 on-step-change="onStepChange(tab)" validation-report="validationReport" on-post-close="onPostClose()"
                 on-error="onError(error, errorCode)">
                 <edit-form>
-                    <edit-national-report report-tabs="tabs" questions="questions"
-                        custom-validations="customValidations" document="document">
+                    {{questionAnswers}}
+                    <br/>Document
+                    {{document}}
+                    <edit-national-report ng-if="document" report-tabs="tabs" questions="questions"
+                        custom-validations="customValidations" locales="document.header.languages" 
+                        identifier="document.header.identifier" ng-model="questionAnswers" ng-change="$parent.onQuestionAnswerChange()">
                     </edit-national-report>
                 </edit-form>
                 <review-form>
+                    {{review.document}}
                     <view-cpb-national-report-5 ng-model="review.document" locale="review.locale"
                         allow-drafts="true"></view-cpb-national-report-5>
                 </review-form>

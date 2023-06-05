@@ -127,27 +127,27 @@
                         <div ng-switch-when="option|term" ng-switch-when-separator="|">
                             <div ng-switch="question.multiple">
                                 <div ng-switch-when="false">
-                                    <div nr-yes-no question="question" caption="{{question.caption}}" ng-model="document[question.key]" ng-change="updateAnswer(question)"
-                                    locales="document.header.languages"></div>
+                                    <div nr-yes-no question="question" caption="{{question.caption}}" ng-model="binding[question.key]" ng-change="updateAnswer(question)"
+                                    locales="locales"></div>
                                 </div>
                                 <div ng-switch-when="true">
                                     <div km-term-check name="{{question.key}}" ng-change="updateAnswer(question)"
                                     ng-model="multiTermModel[question.key]" terms="question.optionsMapping" binding-type="term[]"
-                                    locales="document.header.languages" custom-value-placeholder="{{question.customValuePlaceholder}}"></div>
+                                    locales="locales" custom-value-placeholder="{{question.customValuePlaceholder}}"></div>
                                 </div>
                             </div>
                         </div>
                         <div ng-switch-when="lstring">
                             <div km-textbox-ml rows=4 name="question.key" 
-                                ng-model="document[question.key]" locales="document.header.languages" ></div>
+                                ng-model="binding[question.key]" locales="locales" ></div>
                         </div>
                         <div ng-switch-when="lstringRte">
                             <div km-rich-textbox rows=4 name="question.key" 
-                                ng-model="document[question.key]" locales="document.header.languages" ></div>
+                                ng-model="binding[question.key]" locales="locales" ></div>
                         </div>
                         <div ng-switch-when="int">
                             <input type="number" name="question.key"
-                                 ng-model="document[question.key]" locales="document.header.languages" class="form-control"/>
+                                 ng-model="binding[question.key]" locales="locales" class="form-control"/>
                         </div>
                         <div ng-switch-when="link">
                             <div ng-include="'link'"></div>
@@ -159,7 +159,7 @@
                     <div ng-if="question.additionalInfo">
                         <label>{{question.additionalInfo[0].title}} </label>
                         <div  km-textbox-ml rows=4 name="{{question.key}}_additionalInfo" 
-                        ng-model="document[question.key]._additionalInfo" locales="document.header.languages" ></div>
+                        ng-model="binding[question.key]._additionalInfo" locales="locales" ></div>
                     </div>
                 </div>
                 <div class="col-md-4" ng-if="question.showPrevious">
@@ -185,12 +185,12 @@
     <script type="text/ng-template" id="link" trados-translation="true">
             <div class="mt-2 control-group">
                 <div km-textbox-ml rows=4 name="question.key" 
-                    ng-model="document[question.key]" locales="document.header.languages" ></div>
+                    ng-model="binding[question.key]" locales="locales" ></div>
                 </div>
             <div class="mt-2 control-group">
                 <label class="ng-binding">URL and website name</label>
-                <div km-link name="question{{question.key}}_link" ng-model="document[question.key].relevantDocuments" allow-link="true"
-                     allow-file="true" identifier="document.header.identifier"></div>
+                <div km-link name="question{{question.key}}_link" ng-model="binding[question.key].relevantbindings" allow-link="true"
+                     allow-file="true" identifier="identifier"></div>
             </div>
 
         </script>

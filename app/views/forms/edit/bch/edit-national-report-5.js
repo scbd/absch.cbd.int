@@ -26,7 +26,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         translationService.set('editNRT', editNRT);
         translationService.set('numbers', numbers);
-        $scope.previousAnswerMapping = {}; // TODO: read from mapping file
+        $scope.previousAnswersMapping = {}; // TODO: read from mapping file
 
         $scope.tabs = [
             {
@@ -112,11 +112,16 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
-                $scope.$broadcast('loadPreviousReportEvent', [
-                    'cpbNationalReport4',
-                    government.identifier,
-                    $scope.previousAnswerMapping
-                ]);
+                $scope.$broadcast('loadPreviousReportEvent', {
+                    government : government.identifier,
+                    previousAnswersMapping : {
+                        schema : 'cpbNationalReport4',
+                        mapping : $scope.previousAnswersMapping
+                    }
+                });
+            }
+            else{
+                //TODO : cleanup existing 
             }
         }
 
@@ -146,18 +151,34 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             if (!document)
                 return undefined;
 
+            $scope.document = document = {...document, ...($scope.questionAnswers||{})}
+
             if (/^\s*$/g.test(document.notes))
                 document.notes = undefined;
 
             return $scope.sanitizeDocument(document);
         };
 
+        $scope.onQuestionAnswerChange = function(){
+            console.log('h')
+            $scope.document = {...($scope.document), ...($scope.questionAnswers||{})}
+        }
+
+        //Not a good solution, check for ngChange event
+        $scope.$watch('questionAnswers', function(newVal){
+            console.log(newVal);
+            $scope.document = {...($scope.document), ...($scope.questionAnswers||{})}
+        })
+
         function init() {
 
             $scope.setDocument({}).then(function (document) {
+                $scope.questionAnswers = {};
                 if (document && document.header.identifier) {
+
                     _.forEach(document, function (element, key) {
                         if (/^Q/.test(key) && _.isArray(element)) {//only fields starting with Q
+                            $scope.questionAnswers[key] = element;
                             $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
                         }
                     })

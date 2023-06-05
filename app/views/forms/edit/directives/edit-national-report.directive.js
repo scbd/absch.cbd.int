@@ -13,16 +13,17 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
             restrict: "AE",
             template: template,
             replace: true,
-            transclude: false,
-            // require: "?ngModel",
+            require: "?ngModel",
             scope: {
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
                 binding: '=ngModel',
-                document: '=document' // ToDo replace with ngModel
+                identifier: '@',
+                locales: '='
+                // document: '=document' // ToDo replace with ngModel
             },
-            link: function ($scope, ngModelController) {
+            link: function ($scope, $element, $attrs, ngModelController) {
                 $scope.isBCH = realm.is('BCH');
                 $scope.isABS = realm.is('ABS');
                 var appName  = realm.value.replace(/-.*/,'').toLowerCase();
@@ -40,25 +41,26 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 //       init();
                 //     }
                 //   });
-                var evtLoadPreviousReportEvent = $scope.$on('loadPreviousReportEvent', function(evt, [nrReportSchema,countryId,previousAnswerMapping]){
-                    loadPreviousReport(...[nrReportSchema,countryId,previousAnswerMapping]);
+                var evtLoadPreviousReportEvent = $scope.$on('loadPreviousReportEvent', function(evt, data){
+                    const {government,previousAnswersMapping} = data;
+                    loadPreviousReport({government,previousAnswersMapping});
                 })
                 
                 // $scope.$on('$destroy', function(){
                 //     evtLoadPreviousReportEvent();
                 // });
-                async function loadPreviousReport(nrReportSchema,countryId,previousAnswerMapping) {
-                    if (!$scope.document)
-                        return;                             
+                async function loadPreviousReport({government,previousAnswersMapping}) {
+                    // if (!$scope.document)
+                    //     return;                             
                     const cpbPreviousReport = $scope.questions[1];
-                    $scope.reportApiDetails = _.find(analyzerMapping[appName], {type:nrReportSchema});
-                    var params = { q: { 'government.identifier': countryId } };
+                    $scope.reportApiDetails = _.find(analyzerMapping[appName], {type:previousAnswersMapping.schema});
+                    var params = { q: { 'government.identifier': government } };
                     $http.get($scope.reportApiDetails.dataUrl, { params: params })
                         .then(function (result) {
                             var prevReportAnswers = result.data[0];
                             var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
 
-                            _.forEach(previousAnswerMapping, function (mapping, key) {
+                            _.forEach(previousAnswersMapping.mapping, function (mapping, key) {
 
                                 var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
                                 if (prevQuestion) {
@@ -114,10 +116,11 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                     if (question.multiple) {
                         if (!$scope.multiTermModel[question.key])
-                            $scope.document[question.key] = undefined;
+                            $scope.binding[question.key] = undefined;
                         else {
-                            $scope.document[question.key] = _.map($scope.multiTermModel[question.key], function (t) { return { value: t.identifier, additionalInformation: t.customValue } })
+                            $scope.binding[question.key] = _.map($scope.multiTermModel[question.key], function (t) { return { value: t.identifier, additionalInformation: t.customValue } })
                         }
+                        // ngModelController.$setViewValue($scope.binding);
                     }
                     var lQuestion = question;
                     if (question.validations) {
@@ -138,7 +141,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                     mapQuestion = _.find(dataSection.questions, { key: mapping.question });
                                 }
 
-                                var answer = $scope.document[lQuestion.key];
+                                var answer = $scope.binding[lQuestion.key];
 
                                 var answers = answer;
                                 if (!question.multiple)
@@ -175,7 +178,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                         baseQuestion[mapping.trigger] = true;
                                 }
                                 else {
-                                    $scope.document[mapQuestion.key] = undefined;
+                                    $scope.binding[mapQuestion.key] = undefined;
                                     mapQuestion[mapping.trigger] = false
                                     if (baseQuestion && mapping.trigger != 'visible')
                                         baseQuestion[mapping.trigger] = false;
@@ -187,7 +190,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                             }
                         })
                     }
-                    // ngModelController.$setViewValue($scope.binding); //ToDo
+                    ngModelController.$setViewValue($scope.binding, 'change'); //ToDo
                 }
 
                 $scope.spaceSubQuestion = function (number) {
