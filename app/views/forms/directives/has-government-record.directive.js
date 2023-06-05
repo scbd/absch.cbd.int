@@ -3,7 +3,7 @@ import _ from 'lodash';
 import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
 import template from './has-government-record.directive.html';
-import hasGovernmentRecordT from '~/app-text/views/forms/directives/has-government-record.json';
+//import hasGovernmentRecordT from '~/app-text/views/forms/directives/has-government-record.json';
 import 'ngDialog';
 
 app.directive("hasGovernmentRecord", ['IStorage', '$routeParams', 'realm', "$timeout", "$q", 'ngDialog', 'translationService',
@@ -19,7 +19,7 @@ app.directive("hasGovernmentRecord", ['IStorage', '$routeParams', 'realm', "$tim
 				schemaName: "="
             },
             link: function ($scope) {
-                translationService.set('hasGovernmentRecordT', hasGovernmentRecordT);
+                //translationService.set('hasGovernmentRecordT', hasGovernmentRecordT);
 				$scope.$watch('governmentId', function () {
                     verifyCountryHasReport($scope.governmentId)					 
 				});

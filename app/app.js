@@ -66,10 +66,11 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
 }]);
 
 app.directive('ngVue', AngularVueDirective);
-app.run(["realm", "locale", '$injector', 'authentication', function (realm, locale, $injector,authentication) {
+app.run(["realm", "locale", 'IStorage', '$injector', 'authentication', function (realm, locale, storage, $injector,authentication) {
 
   registerVuePlugin('$realm', realm);
   registerVuePlugin('$locale', locale);
+  registerVuePlugin('$storage,', storage);
   registerVuePlugin('$accountsBaseUrl', authentication.accountsBaseUrl())
   registerVuePlugin('$ngApp', app);
   registerVuePlugin('$ngInjector', $injector);

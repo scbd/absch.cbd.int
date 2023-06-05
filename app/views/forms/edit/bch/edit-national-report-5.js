@@ -9,6 +9,7 @@ import '~/views/forms/edit/document-selector';
 import '~/views/directives/block-region-directive';
 import '~/views/forms/directives/has-government-record.directive';
 import '~/views/forms/view/bch/view-national-report-5.directive';
+import verifySingleRecord from '~/components/common/verify-single-record.vue';
 export { default as template } from './edit-national-report-5.html';
 import 'ngDialog';
 import '~/views/forms/edit/directives/edit-national-report.directive';
@@ -27,6 +28,10 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         translationService.set('editNRT', editNRT);
         translationService.set('numbers', numbers);
         $scope.previousAnswerMapping = {}; // TODO: read from mapping file
+        $scope.storages = storage;
+        $scope.exportVueComponent = {
+            components: { verifySingleRecord }
+        }
 
         $scope.tabs = [
             {
@@ -112,7 +117,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
-
+                $scope.government = government.identifier; //ToDo: remove if accessed from Script tag
                 $scope.$broadcast('loadPreviousReportEvent', [
                     'cpbNationalReport4',
                     government.identifier,
