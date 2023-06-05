@@ -40,10 +40,13 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 //       init();
                 //     }
                 //   });
-                $scope.$on('loadPreviousReportEvent', function(evt, [nrReportSchema,countryId,previousAnswerMapping]){
+                var evtLoadPreviousReportEvent = $scope.$on('loadPreviousReportEvent', function(evt, [nrReportSchema,countryId,previousAnswerMapping]){
                     loadPreviousReport(...[nrReportSchema,countryId,previousAnswerMapping]);
                 })
                 
+                // $scope.$on('$destroy', function(){
+                //     evtLoadPreviousReportEvent();
+                // });
                 async function loadPreviousReport(nrReportSchema,countryId,previousAnswerMapping) {
                     if (!$scope.document)
                         return;                             
