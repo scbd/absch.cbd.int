@@ -1933,19 +1933,19 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring",
+                  "type": "lstringRte",
                   "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring",
+                  "type": "lstringRte",
                   "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring",
+                  "type": "lstringRte",
                   "caption": nr1T.pleaseExplainYourResponse
                }
             ]
@@ -1962,13 +1962,13 @@ export const npNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring",
+                  "type": "lstringRte",
                   "caption": nr1T.part_IX_question43_custom_caption
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring",
+                  "type": "lstringRte",
                   "caption": nr1T.part_IX_question43_custom_caption
                }
             ]
@@ -2064,7 +2064,7 @@ export const npNationalReport1 = [
                {
                   "field":"furtherInfo",
                   "title" : nr1T.additionalInformation,
-                  "type":"string"
+                  "type":"lstringRte"
                }
             ]
          },
@@ -2082,7 +2082,7 @@ export const npNationalReport1 = [
                   "title": nr1T.yes
                },
                {
-                  "value": "false.na",
+                  "value": "false",
                   "title": nr1T.notApplicable,
                   "type": "lstring",
                   "caption": nr1T.additionalInformation
