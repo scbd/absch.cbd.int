@@ -2891,5 +2891,37 @@ export const npNationalReport1 = [
             ]
          }
       ]
+   },
+   {
+      "key": "Part-XV",
+      "title": nr1T.part_XVI_title,
+      "questions": [
+         {
+            "key": "Q067",
+            "section": "Part-XVI",
+            "number": "67",
+            "type": "link",
+            "title": nr1T.part_XVI_question67_title,
+            "multiple": false
+         },
+         {
+            "key": "Q068",
+            "section": "Part-XVI",
+            "number": "68",
+            "type": "lstring",
+            "title": nr1T.part_XVI_question68_title,
+            "multiple": false
+         },
+         {
+            "key": "Q069",
+            "section": "Part-XV",
+            "number": "69",
+            "type": "lstring",
+            "title": nr1T.part_XVI_question69_title,
+            "multiple": false,
+            "footnote": nr1T.part_XVI_question69_footnote_42
+         }
+      ]
    }
+
 ]
