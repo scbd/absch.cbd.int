@@ -2342,9 +2342,209 @@ export const npNationalReport1 = [
             "section": "Part-XI",
             "number": "52",
             "type": "link",
-            "title": nr1T.part_XI_question52_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          } 
+      ]
+   },
+   {
+      "key": "Part-XII",
+      "title": nr1T.part_XII_title,
+      "questions": [
+         {
+            "key": "article21",
+            "section": "Part-XII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.article21
+         },
+         {
+            "key": "Q053",
+            "section": "Part-XII",
+            "number": "53",
+            "type": "option",
+            "title": nr1T.part_XII_question53_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod
+               }
+            ],
+            "validations": [
+               {
+                  "question": "Q053_a",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               }
+            ]
+         },
+         {
+            "key": "Q053_a",
+            "section": "Part-XII",
+            "number": "53.1",
+            "type": "option",
+            "title": nr1T.part_XII_question53_1_title,
+            "multiple": false,
+            "footnote": nr1T.part_XII_question53_1_footnote_35,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation
+               }
+            ]
+         },
+         {
+            "key": "article22",
+            "section": "Part-XII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.article22
+         },
+         {
+            "key": "Q054",
+            "section": "Part-XII",
+            "number": "54",
+            "type": "option",
+            "title": nr1T.part_XII_question54_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "footnote": nr1T.part_XII_question54_footnote_36
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "footnote": nr1T.part_XII_question54_footnote_36
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "footnote": nr1T.part_XII_question54_footnote_36
+               }
+            ],
+            "validations": [
+               {
+                  "question": "Q054_a",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               }
+            ]
+         },
+         {
+            "key": "Q054_a",
+            "section": "Part-XII",
+            "number": "54.1",
+            "type": "option",
+            "title": nr1T.part_XII_question54_1_title,
+            "multiple": true,
+            "options": [   
+               {
+                  "value": "10FD7CBC-79AB-4BE9-876B-021E1A41F511",
+                  "title": nr1T.part_XII_question54_a_option1_title,
+                  "type": "int"
+               },
+               {
+                  "value": "344E105F-C29F-47F4-B6BF-725D3082BFBE",
+                  "title": nr1T.part_XII_question54_b_option1_title,
+                  "type": "int"
+               },
+               {
+                  "value": "65763772-4533-4AF1-9C46-E2BCDC462F6D",
+                  "title": nr1T.part_XII_question54_c_option1_title,
+                  "type": "int"
+               }
+            ],
+            "additionalInformation":[ // ToDo need to verify
+               {
+                  "field":"furtherInfo",
+                  "title" : nr1T.additionalInformation,
+                  "type":"string"
+               }
+            ]
+         },
+
+         {
+            "key": "Q055",
+            "section": "Part-XII",
+            "number": "55",
+            "type": "option",
+            "title": nr1T.part_XII_question55_title,
+            "multiple": false,
+            "mandatory": true,
+            "footnote": nr1T.part_XII_question55_footnote_37,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "footnote": nr1T.part_XII_question55_footnote_38
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "footnote": nr1T.part_XII_question55_footnote_38
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "footnote": nr1T.part_XII_question55_footnote_38
+               }
+            ]
+         },
+         {
+            "key": "Q056",
+            "section": "Part-XII",
+            "number": "56",
+            "type": "link",
+            "title": nr1T.provideInformationOnLessons,
+            "multiple": false
+         }
       ]
    }
 ]
