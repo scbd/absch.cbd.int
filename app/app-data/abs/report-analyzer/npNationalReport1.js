@@ -2013,9 +2013,9 @@ export const npNationalReport1 = [
             "additionalInformation":[
                {
                   "field":"furtherInfo",
-                  "title" : nr1T.additionalInformation,
+                  "title" : nr1T.additionalInformation+'<sup>26</sup>',
                   "type":"lstringRte",
-                  "footnote":nr1T.part_IX_question44_1_footnote
+                  "footnote":nr1T.part_IX_question44_1_footnote_26
                }
             ]
          },
@@ -2077,21 +2077,21 @@ export const npNationalReport1 = [
             "title": nr1T.part_IX_question45_title,
             "multiple": false,
             "mandatory": true,
-            "footnote": nr1T.part_IX_question45_footnote,
+            "footnote": nr1T.part_IX_question45_footnote_27,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.additionalInformation,
-                  "footnote":nr1T.part_IX_question45_footnote_addInfo
+                  "caption": nr1T.additionalInformation+'<sup>28</sup>',
+                  "footnote":nr1T.part_IX_question45_footnote_addInfo_28
                },
                {
                   "value": "false",
                   "title": nr1T.notApplicable,
                   "type": "lstring",
-                  "caption": nr1T.additionalInformation,
-                  "footnote":nr1T.part_IX_question45_footnote_addInfo
+                  "caption": nr1T.additionalInformation+'<sup>28</sup>',
+                  "footnote":nr1T.part_IX_question45_footnote_addInfo_28
                }
             ],
             "validations": [
