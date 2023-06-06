@@ -2831,5 +2831,65 @@ export const npNationalReport1 = [
             "multiple": false
          }
       ]
+   },
+   {
+      "key": "Part-XV",
+      "title": nr1T.part_XV_title,
+      "questions": [
+         {
+            "key": "Q066",
+            "section": "Part-XV",
+            "number": "66",
+            "type": "option",
+            "title": nr1T.part_XIV_question66_title,
+            "multiple": false,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseProvideFurtherInformation
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseProvideFurtherInformation
+               }
+            ],
+            "validations": [
+               {
+                  "question": "Q066_a",
+                  "values": [
+                     "true"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               }
+            ]
+         },
+         {
+            "key": "Q066_a",
+            "section": "Part-XV",
+            "number": "66.1",
+            "type": "option",
+            "title": nr1T.part_XIV_question66_1_title,
+            "multiple": false,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no
+               }
+            ]
+         }
+      ]
    }
 ]
