@@ -2342,7 +2342,7 @@ export const npNationalReport1 = [
             "section": "Part-XI",
             "number": "52",
             "type": "link",
-            "title": nr1T.part_XI_question52_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          } 
       ]
@@ -2405,6 +2405,7 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.part_XII_question53_1_title,
             "multiple": false,
+            "footnote": nr1T.part_XII_question53_1_footnote_35,
             "options": [
                {
                   "value": "true",
@@ -2440,19 +2441,22 @@ export const npNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod
+                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "footnote": nr1T.part_XII_question54_footnote_36
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod
+                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "footnote": nr1T.part_XII_question54_footnote_36
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod
+                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "footnote": nr1T.part_XII_question54_footnote_36
                }
             ],
             "validations": [
@@ -2508,24 +2512,28 @@ export const npNationalReport1 = [
             "title": nr1T.part_XII_question55_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_XII_question55_footnote_37,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod
+                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "footnote": nr1T.part_XII_question55_footnote_38
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod
+                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "footnote": nr1T.part_XII_question55_footnote_38
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod
+                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "footnote": nr1T.part_XII_question55_footnote_38
                }
             ]
          },
