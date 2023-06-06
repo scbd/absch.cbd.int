@@ -21,7 +21,6 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 binding: '=ngModel',
                 identifier: '@',
                 locales: '='
-                // document: '=document' // ToDo replace with ngModel
             },
             link: function ($scope, $element, $attrs, ngModelController) {
                 $scope.isBCH = realm.is('BCH');
@@ -31,6 +30,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 translationService.set('editNRT', editNRT);
                 translationService.set('numbers', numbers);
                 $scope.activeTab = 1;
+                $scope.previousAnswerMapping = {};
                 
                 $controller('editController', {
                     $scope: $scope
@@ -51,7 +51,8 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 // });
                 async function loadPreviousReport({government,previousAnswersMapping}) {
                     // if (!$scope.document)
-                    //     return;                             
+                    //     return;
+                    $scope.previousAnswerMapping = previousAnswersMapping.mapping;          
                     const cpbPreviousReport = $scope.questions[1];
                     $scope.reportApiDetails = _.find(analyzerMapping[appName], {type:previousAnswersMapping.schema});
                     var params = { q: { 'government.identifier': government } };

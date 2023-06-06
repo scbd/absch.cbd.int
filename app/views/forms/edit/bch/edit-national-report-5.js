@@ -26,7 +26,18 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         translationService.set('editNRT', editNRT);
         translationService.set('numbers', numbers);
-        $scope.previousAnswersMapping = {}; // TODO: read from mapping file
+        //ToDo: load from file, for testing only
+        $scope.previousAnswersMapping = {
+            "Q011"        : { prevQuestion : "Q018",   showMessage: false },
+            "Q012"        : { prevQuestion : "Q019",   showMessage: false },
+            "Q013"        : { prevQuestion : "Q020",   showMessage: false },
+            "Q014"        : { prevQuestion : "Q021",   showMessage: false },
+            "Q015"        : { prevQuestion : "Q022",   showMessage: false },
+            "Q016"        : { prevQuestion : "Q023",   showMessage: false },
+            "Q017"        : { prevQuestion : "Q024",   showMessage: false },
+            "Q018"        : { prevQuestion : "Q025",   showMessage: false },
+            "Q019"        : { prevQuestion : "Q026",   showMessage: false }
+        }
 
         $scope.tabs = [
             {
