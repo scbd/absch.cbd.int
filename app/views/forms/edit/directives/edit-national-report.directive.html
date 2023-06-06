@@ -97,6 +97,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div ng-if="question.footnote" ng-bind-html="::question.footnote" style="font-size:10px;padding:10px"></div>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +128,7 @@
                         <div ng-switch-when="option|term" ng-switch-when-separator="|">
                             <div ng-switch="question.multiple">
                                 <div ng-switch-when="false">
-                                    <div nr-yes-no question="question" caption="{{question.caption}}" ng-model="binding[question.key]" ng-change="updateAnswer(question)"
+                                    <div nr-yes-no question="question" ng-model="binding[question.key]" ng-change="updateAnswer(question)"
                                     locales="locales"></div>
                                 </div>
                                 <div ng-switch-when="true">
@@ -156,10 +157,10 @@
                             {{question}}
                         </div>
                     </div>
-                    <div ng-if="question.additionalInfo">
-                        <label>{{question.additionalInfo[0].title}} </label>
-                        <div  km-textbox-ml rows=4 name="{{question.key}}_additionalInfo" 
-                        ng-model="binding[question.key]._additionalInfo" locales="locales" ></div>
+                    <div ng-if="question.additionalInformation">
+                        <label>{{question.additionalInformation[0].title}} </label>
+                        <div  km-textbox-ml rows=4 name="{{question.key}}additionalInformation" 
+                        ng-model="binding[question.key].additionalInformation" locales="locales"></div>
                     </div>
                 </div>
                 <div class="col-md-4" ng-if="question.showPrevious">
