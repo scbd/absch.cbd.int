@@ -2250,7 +2250,7 @@ export const npNationalReport1 = [
             "section": "Part-X",
             "number": "49",
             "type": "link",
-            "title": nr1T.part_X_question49_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
       ]
