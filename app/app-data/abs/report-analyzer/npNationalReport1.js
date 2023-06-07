@@ -2875,6 +2875,7 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.part_XIV_question66_1_title,
             "multiple": false,
+            "mandatory": true,
             "options": [
                {
                   "value": "true",
