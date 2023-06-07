@@ -2780,6 +2780,7 @@ export const npNationalReport1 = [
             "type": "option",
             "title": nr1T.pleaseSpecify,
             "multiple": false,
+            "mandatory": true,
             "options": [
                {
                   "value": "1",
