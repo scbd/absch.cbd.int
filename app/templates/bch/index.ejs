@@ -185,10 +185,11 @@
 
         });
         if('<%=googleAnalyticsCode%>'!=''){
-            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', '<%=googleAnalyticsCode%>', 'auto');
-            ga('set',    'hostname', window.location.hostname);
-            ga('set',    'location', undefined);
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('hostname', window.location.hostname);
+            gtag('config', '<%=googleAnalyticsCode%>');
         }
         
     </script>
