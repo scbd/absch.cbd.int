@@ -170,16 +170,19 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             return $scope.sanitizeDocument(document);
         };
 
-        $scope.onQuestionAnswerChange = function(){
-            console.log('h')
-            $scope.document = {...($scope.document), ...($scope.questionAnswers||{})}
+        $scope.onQuestionAnswerChange = function(questionAnswers){
+            $timeout(function () {
+                if(questionAnswers){
+                    $scope.document = {...($scope.document), ...(questionAnswers||{})};
+                }
+            },200);
         }
 
         //Not a good solution, check for ngChange event
-        $scope.$watch('questionAnswers', function(newVal){
-            console.log(newVal);
-            $scope.document = {...($scope.document), ...($scope.questionAnswers||{})}
-        })
+        // $scope.$watch('questionAnswers', function(newVal){
+        //     console.log(newVal);
+        //     $scope.document = {...($scope.document), ...($scope.questionAnswers||{})}
+        // })
 
         function init() {
 
