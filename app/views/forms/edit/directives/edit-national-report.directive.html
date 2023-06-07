@@ -140,14 +140,14 @@
                         </div>
                         <div ng-switch-when="lstring">
                             <div km-textbox-ml rows=4 name="question.key" 
-                                ng-model="binding[question.key]" locales="locales" ></div>
+                                ng-model="binding[question.key]" locales="locales" ng-change="updateAnswer(question)"></div>
                         </div>
                         <div ng-switch-when="lstringRte">
                             <div km-rich-textbox rows=4 name="question.key" 
-                                ng-model="binding[question.key]" locales="locales" ></div>
+                                ng-model="binding[question.key]" locales="locales" ng-change="updateAnswer(question)" ></div>
                         </div>
                         <div ng-switch-when="int">
-                            <input type="number" name="question.key"
+                            <input type="number" name="question.key" ng-change="updateAnswer(question)"
                                  ng-model="binding[question.key]" locales="locales" class="form-control"/>
                         </div>
                         <div ng-switch-when="link">
@@ -159,7 +159,7 @@
                     </div>
                     <div ng-if="question.additionalInformation">
                         <label>{{question.additionalInformation[0].title}} </label>
-                        <div  km-textbox-ml rows=4 name="{{question.key}}additionalInformation" 
+                        <div  km-textbox-ml rows=4 name="{{question.key}}additionalInformation"  ng-change="updateAnswer(question)"
                         ng-model="binding[question.key].additionalInformation" locales="locales"></div>
                     </div>
                 </div>
@@ -185,13 +185,14 @@
 
     <script type="text/ng-template" id="link" trados-translation="true">
             <div class="mt-2 control-group">
-                <div km-textbox-ml rows=4 name="question.key" 
+                <div km-textbox-ml rows=4 name="question.key" ng-change="updateAnswer(question)"
                     ng-model="binding[question.key]" locales="locales" ></div>
                 </div>
             <div class="mt-2 control-group">
                 <label class="ng-binding">URL and website name</label>
+                <!-- What is relevantbindings? -->
                 <div km-link name="question{{question.key}}_link" ng-model="binding[question.key].relevantbindings" allow-link="true"
-                     allow-file="true" identifier="identifier"></div>
+                     allow-file="true" identifier="identifier" ng-change="updateAnswer(question)"></div>
             </div>
 
         </script>

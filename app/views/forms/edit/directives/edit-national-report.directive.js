@@ -1,3 +1,4 @@
+import angular from 'angular-flex';
 import app from '~/app';
 import _ from 'lodash';
 import 'ngDialog';
@@ -6,6 +7,7 @@ import template from "text!./edit-national-report.directive.html";
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
 import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import numbers from '~/app-text/numbers.json';
+
 app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$routeParams', "$timeout", "$q", 'guid', 'ngDialog', 'realm', 'translationService',
     function ($controller, $http, storage, $routeParams, $timeout, $q, guid, ngDialog, realm, translationService) {
 
@@ -15,10 +17,10 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
             replace: true,
             require: "?ngModel",
             scope: {
+                binding: '=ngModel',
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
-                binding: '=ngModel',
                 identifier: '@',
                 locales: '='
             },
@@ -26,29 +28,30 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 $scope.isBCH = realm.is('BCH');
                 $scope.isABS = realm.is('ABS');
                 var appName  = realm.value.replace(/-.*/,'').toLowerCase();
+                var hasInitialized = false;
                 $scope.multiTermModel = {};
                 translationService.set('editNRT', editNRT);
                 translationService.set('numbers', numbers);
                 $scope.activeTab = 1;
                 $scope.previousAnswerMapping = {};
                 
-                $controller('editController', {
-                    $scope: $scope
+                $scope.$watch('binding', function(newVal, oldVal) {
+                    const cleanNewVal = _.pickBy(newVal, _.identity);
+                    const cleanOldVal = _.pickBy(oldVal, _.identity)
+                    if($scope.binding && (!hasInitialized || !angular.equals(cleanNewVal, cleanOldVal) )){
+                        init();
+                        hasInitialized = hasInitialized || true;
+                    }
                 });
-                // ToDo:  
-                //   $scope.$watch('binding', function(newVal, oldVal) {
-                //     if($scope.binding && newVal!=oldVal ){
-                //       init();
-                //     }
-                //   });
                 var evtLoadPreviousReportEvent = $scope.$on('loadPreviousReportEvent', function(evt, data){
                     const {government,previousAnswersMapping} = data;
                     loadPreviousReport({government,previousAnswersMapping});
                 })
                 
-                // $scope.$on('$destroy', function(){
-                //     evtLoadPreviousReportEvent();
-                // });
+                $scope.$on('$destroy', function(){
+                    evtLoadPreviousReportEvent();
+                });
+
                 async function loadPreviousReport({government,previousAnswersMapping}) {
                     // if (!$scope.document)
                     //     return;
@@ -114,6 +117,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 }
 
                 $scope.updateAnswer = function (question, baseQuestionNumber) {
+                    $scope.binding = $scope.binding || {};
 
                     if (question.multiple) {
                         if (!$scope.multiTermModel[question.key])
@@ -152,7 +156,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                                 if ((answers || []).length > 0) {
                                     if (/&[a-z]*/.test(mapping.type)) {
-                                        validationPositive = $scope.customValidations[mapping.type.replace(/^&/, '')]();
+                                        validationPositive = $scope.customValidations[mapping.type.replace(/^&/, '')]($scope.binding);
                                     }
                                     else if (mapping.type === '@hasAdditionalValues') {
 
@@ -191,7 +195,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                             }
                         })
                     }
-                    ngModelController.$setViewValue($scope.binding, 'change'); //ToDo
+                    ngModelController.$setViewValue(_.pickBy($scope.binding, _.identity), 'change'); //ToDo
                 }
 
                 $scope.spaceSubQuestion = function (number) {
@@ -274,7 +278,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }, 200);
                 }
 
-                init();
+                // init();
             }
         }
     }]);

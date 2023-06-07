@@ -13,13 +13,10 @@
                 document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
                 on-step-change="onStepChange(tab)" validation-report="validationReport" on-post-close="onPostClose()"
                 on-error="onError(error, errorCode)">
-                <edit-form>
-                    {{questionAnswers}}
-                    <br/>Document
-                    {{document}}
-                    <edit-national-report ng-if="document" report-tabs="tabs" questions="questions"
+                <edit-form>       
+                    <edit-national-report ng-if="documentReady && document && questionAnswers" report-tabs="tabs" questions="questions"
                         custom-validations="customValidations" locales="document.header.languages" 
-                        identifier="document.header.identifier" ng-model="questionAnswers" ng-click="onQuestionAnswerChange(questionAnswers)">
+                        identifier="document.header.identifier" ng-model="questionAnswers" ng-change="onQuestionAnswerChange(questionAnswers)">
                     </edit-national-report>
                 </edit-form>
                 <review-form>
@@ -62,11 +59,15 @@
                                     <div class="col-md-4" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="government" required
                                             caption="{{::('numbers.one'|$translate)}}. {{::('editNRT.country'|$translate)}}">
-                                            <div afc-autocomplete required name="government" ng-disabled="userHasGovernment()"
-                                                ng-model="formScope.$parent.document.government" source="options.countries"
+                                            
+                                            <div afc-autocomplete required name="government" ng-if="!formScope.$parent.userHasGovernment()" ng-disabled="formScope.$parent.userHasGovernment()"
+                                                ng-model="formScope.$parent.document.government" source="formScope.$parent.governmentList"
                                                 filter="genericFilter" mapping="genericMapping" selectbox="true"
                                                 placeholder="{{::('editNRT.selectOption'|$translate)}}"
                                                 ng-change="formScope.$parent.onGovernmentChange(formScope.$parent.document.government)">
+                                            </div>
+                                            <div class="km-value" ng-if="formScope.$parent.userHasGovernment()">
+                                                <span ng-bind="formScope.$parent.document.government|term:locale"></span>
                                             </div>
                                             <!-- <div ng-if="exportVueComponent && government">
                                                 <verify-single-record ng-vue="exportVueComponent" :storages="storages" schema="cpbNationalReport4" :government="government"></verify-single-record>

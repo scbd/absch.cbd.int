@@ -136,12 +136,12 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             }
         }
 
-        function is141Or142() {
-            return ($scope.questionAnswers['Q141'] || {}).value == 'true' || ($scope.questionAnswers['Q142'] || {}).value == 'true';
+        function is141Or142(questionAnswers) {
+            return (questionAnswers['Q141'] || {}).value == 'true' || (questionAnswers['Q142'] || {}).value == 'true';
         }
 
-        function is79Or82Or81() {
-            return ($scope.questionAnswers['Q079'] || {}).value == 'true' || ($scope.questionAnswers['Q081'] || {}).value == 'true' || ($scope.questionAnswers['Q082'] || {}).value == 'true';
+        function is79Or82Or81(questionAnswers) {
+            return (questionAnswers['Q079'] || {}).value == 'true' || (questionAnswers['Q081'] || {}).value == 'true' || (questionAnswers['Q082'] || {}).value == 'true';
         }
 
         $scope.customValidations = {
@@ -152,6 +152,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         $scope.userHasGovernment = function () {
             return user.government;
         }
+        $scope.governmentList = $scope.options.countries;
         //==================================
         //
         //==================================
@@ -162,8 +163,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             if (!document)
                 return undefined;
 
-            $scope.document = document = {...document, ...($scope.questionAnswers||{})}
-
             if (/^\s*$/g.test(document.notes))
                 document.notes = undefined;
 
@@ -171,31 +170,29 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         };
 
         $scope.onQuestionAnswerChange = function(questionAnswers){
-            $timeout(function () {
-                if(questionAnswers){
-                    $scope.document = {...($scope.document), ...(questionAnswers||{})};
-                }
-            },200);
+            safeApply(()=>{
+                $scope.document = {...($scope.document), ...(questionAnswers||{})};
+            })
         }
 
-        //Not a good solution, check for ngChange event
-        // $scope.$watch('questionAnswers', function(newVal){
-        //     console.log(newVal);
-        //     $scope.document = {...($scope.document), ...($scope.questionAnswers||{})}
-        // })
+        function safeApply(fn) {
+            ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
+        } 
 
         function init() {
-
+            $scope.documentReady = false
             $scope.setDocument({}).then(function (document) {
                 $scope.questionAnswers = {};
                 if (document && document.header.identifier) {
 
                     _.forEach(document, function (element, key) {
-                        if (/^Q/.test(key) && _.isArray(element)) {//only fields starting with Q
+                        if (/^Q/.test(key)) {//only fields starting with Q
                             $scope.questionAnswers[key] = element;
-                            $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
+                            if(_.isArray(element))
+                                $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
                         }
                     })
+                    $scope.documentReady = true;
                 }
             });
         }
