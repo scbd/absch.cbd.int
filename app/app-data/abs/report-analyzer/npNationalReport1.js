@@ -2909,18 +2909,9 @@ export const npNationalReport1 = [
             "key": "Q068",
             "section": "Part-XVI",
             "number": "68",
-            "type": "lstring",
+            "type": "lstringRte",
             "title": nr1T.part_XVI_question68_title,
             "multiple": false
-         },
-         {
-            "key": "Q069",
-            "section": "Part-XV",
-            "number": "69",
-            "type": "lstring",
-            "title": nr1T.part_XVI_question69_title,
-            "multiple": false,
-            "footnote": nr1T.part_XVI_question69_footnote_42
          }
       ]
    }
