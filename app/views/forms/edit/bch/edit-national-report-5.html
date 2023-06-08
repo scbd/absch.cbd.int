@@ -62,7 +62,7 @@
                                             
                                             <div afc-autocomplete required name="government" ng-if="!formScope.$parent.userHasGovernment()" ng-disabled="formScope.$parent.userHasGovernment()"
                                                 ng-model="formScope.$parent.document.government" source="formScope.$parent.governmentList"
-                                                filter="genericFilter" mapping="genericMapping" selectbox="true"
+                                                filter="formScope.$parent.genericFilter" mapping="formScope.$parent.genericMapping" selectbox="true"
                                                 placeholder="{{::('editNRT.selectOption'|$translate)}}"
                                                 ng-change="formScope.$parent.onGovernmentChange(formScope.$parent.document.government)">
                                             </div>
