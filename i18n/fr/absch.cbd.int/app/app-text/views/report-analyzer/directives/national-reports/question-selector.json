@@ -1,0 +1,16 @@
+{
+  "nationalReport": "Rapport national",
+  "filter": "Filtrer par pays et/ou région",
+  "breakdownRegions": "Ventilation par régions de la CBD",
+  "selectCountries": "Sélectionnez un/des pays",
+  "selectRegions": "Sélectionnez une/des région",
+  "protocolParties": "Classification selon les Parties au Protocole",
+  "protocolNonParties": "Classification selon les Non-Parties au Protocole",
+  "nklsParty": "Classification selon les Parties au Protocole additionnel",
+  "selectMessage": "Aucun pays ou régions sélectionnés",
+  "allQuestions": "Toutes les questions et/ou les sections du rapport",
+  "surveyQuestion": "Question de sondage",
+  "question": "Question",
+  "countries": "Pays",
+  "regions": "Régions"
+}
