@@ -1,0 +1,13 @@
+{
+  "generalInfo": "一般信息",
+  "country": "国家",
+  "organization": "机构",
+  "submissionInformation": "提交信息的内容",
+  "titleSubmission": "提交信息的标题",
+  "dateSubmission": "提交日期",
+  "notifications": "相关通知",
+  "records": "相关记录",
+  "thematicAreas": "专题领域",
+  "documents": "文件",
+  "otherRelevantInformation": "其它相关信息"
+}
