@@ -1,0 +1,14 @@
+{
+  "lastUpdated": "上次更新日期：",
+  "loading": "正在加载...",
+  "show10": "显示下 10 条记录",
+  "showRemaining": "显示剩余",
+  "records": "条记录",
+  "selectMeasures": "选择要在概览中显示的记录",
+  "entry": "生效：",
+  "adoption": "通过：",
+  "until": "止至：",
+  "retired": "已淘汰：",
+  "jurisdiction": "按管辖权筛选记录",
+  "selectAll": "全选"
+}

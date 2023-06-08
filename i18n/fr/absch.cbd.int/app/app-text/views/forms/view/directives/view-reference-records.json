@@ -1,0 +1,14 @@
+{
+  "recordsReferencing": "Les fichiers qui font référence à ce document",
+  "showInSearch": "Montré dans la recherche",
+  "recordType": "Type de fichier",
+  "field": "Champs",
+  "records": "Fichier(s) :",
+  "hide": "Masquer ",
+  "show": "Montrer",
+  "country": "Pays",
+  "title": "Titre",
+  "updatedOn": "Mis à jour le",
+  "noRecords": "Ce fichier n’a pas été référencé par d’autres fichiers",
+  "showInSubmissions": "Montrer dans les soumissions"
+}

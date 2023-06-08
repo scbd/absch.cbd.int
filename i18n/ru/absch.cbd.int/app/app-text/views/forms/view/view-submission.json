@@ -1,0 +1,13 @@
+{
+  "generalInfo": "Общая информация",
+  "country": "Страна",
+  "organization": "Организация(-и)",
+  "submissionInformation": "Представление информации",
+  "titleSubmission": "Название представления",
+  "dateSubmission": "Дата представления",
+  "notifications": "Связанное(-ые) уведомление(-я)",
+  "records": "Связанная(-ые) запись(-и)",
+  "thematicAreas": "Тематические области",
+  "documents": "Документы",
+  "otherRelevantInformation": "Любая другая актуальная информация"
+}
