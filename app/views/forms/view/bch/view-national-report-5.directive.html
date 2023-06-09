@@ -1,0 +1,96 @@
+﻿<div id="Record" class="record panel panel-default">
+
+	<div class="record-body panel-body bg-white">
+
+		<div class="panel-heading bg-blue">
+			<h4>
+				<span ng-bind="::document.header.schema|schemaName"></span>
+				<span class="color-white">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
+			</h4>
+		</div>
+
+		<div class="section-pane panel panel-default" style="margin-bottom:3px!important">
+
+			<div class="panel-heading">{{::('viewNr5T.generalInfo'|$translate)}}</div>
+			<div class="panel-body" style="padding:0px">
+				<div style="margin:5px" class="row">
+					<div ng-show="document.government">
+						<label name="country">{{::('numbers.one'|$translate)}}. {{::('viewNr5T.country'|$translate)}}</label>
+						<div class="km-value" comapre-val>
+							<a rel="noopener"
+								ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}"
+								target={{target}}>{{document.government|term:locale}}</a>
+						</div>
+					</div>
+
+					<div ng-show="document.contact">
+						</br>
+						<label>{{::('numbers.two'|$translate)}}. {{::('viewNr5T.contactPerson'|$translate)}}</label>
+						<div class="km-value" comapre-val>
+							<view-record-reference ng-model='document.contact' locale="locale" skip-realm="true">
+							</view-record-reference>
+						</div>
+					</div>
+
+					<div ng-show="document.stakeholders">
+						</br>
+						<label>{{::('viewNr5T.organizationsStakeholders'|$translate)}} </label>
+						<div comapre-val>
+							<km-value-ml value="document.stakeholders" locales="locale"></km-value-ml>
+						</div>
+					</div>
+
+					<div ng-show="document.date">
+						</br>
+						<label>{{::('numbers.three'|$translate)}}. {{::('viewNr5T.submissionDate'|$translate)}} </label>
+						<div comapre-val>
+							<div class="km-value" ng-bind="document.date|formatDate"></div>
+
+						</div>
+					</div>
+
+					<div ng-show="document.reportPeriodStartDate || document.reportPeriodEndDate">
+						</br>
+						<label>{{::('numbers.four'|$translate)}}.
+							{{::('viewNr5T.timePeriod'|$translate)}}</label>
+						<div class="row">
+							<div class="col-xs-6" ng-if="document.reportPeriodStartDate">
+								<label>{{::('viewNr5T.from'|$translate)}}</label>
+								<div comapre-val>
+									<div class="km-value" ng-bind="document.reportPeriodStartDate|formatDate"></div>
+								</div>
+							</div>
+							<div class="col-xs-6" ng-if="document.reportPeriodEndDate">
+								<label>{{::('viewNr5T.to'|$translate)}}</label>
+								<div comapre-val>
+									<div class="km-value" ng-bind="document.reportPeriodEndDate|formatDate"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div ng-show="document.Q005">
+						</br>
+						<label>{{::('numbers.five'|$translate)}}. {{::('viewNr5T.q005_title'|$translate)}} </label>
+						<div comapre-val>
+							<km-value-bool value="document.Q005" locales="locale"></km-value-bool>
+						</div>
+					</div>
+					<div ng-show="document.Q006">
+						</br>
+						<label>{{::('numbers.six'|$translate)}}. {{::('viewNr5T.q006_title'|$translate)}} </label>
+						<div comapre-val>
+							<km-value-ml value="document.Q006" locales="locale"></km-value-ml>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<document-date></document-date>
+
+		<div view-national-report document="document" report-questions="nr5Data" locale="locale"></div>
+
+	</div>
+</div>
