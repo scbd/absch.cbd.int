@@ -22,12 +22,12 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 questions: "=",
                 customValidations: "=",
                 identifier: '@',
-                locales: '='
+                locales: '=',
+                multiTermModel: '='
             },
             link: function ($scope, $element, $attrs, ngModelController) {
                 $scope.isBCH = realm.is('BCH');
                 $scope.isABS = realm.is('ABS');
-                $scope.multiTermModel = {};
                 $scope.previousAnswerMapping = {};
                 $scope.activeTab = 1;
                 var appName = realm.value.replace(/-.*/, '').toLowerCase();
