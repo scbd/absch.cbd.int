@@ -30,7 +30,7 @@
     },
     mixins: [articlesMaxin],
     async mounted(){
-        const stakeholders = await this.loadKbStakeholders(this.$realm.is('BCH'));
+        const stakeholders = await this.loadKbStakeholders(this.$realm.is('ABS'));
         this.Tags = stakeholders;
         this.loading= false;
       },

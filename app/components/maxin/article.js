@@ -50,9 +50,9 @@ export default {
 
             }
         },
-        async loadKbStakeholders(isBch){
+        async loadKbStakeholders(isAbs){
             let stakeholders
-            if(!isBch) {
+            if(isAbs) {
                 stakeholders = (await import('~/app-data/abs/kb-stakeholders.js')).stakeholders;
             }
             else {
