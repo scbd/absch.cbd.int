@@ -234,7 +234,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 function getMultiTermModel() {
                     _.forEach($scope.binding, function (element, key) {
 
-                        if (/^Q/.test(key) && _.isArray(element)) {//only fields starting with Q
+                        if (/^Q/.test(key)) {//only fields starting with Q
                             if (_.isArray(element))
                                 $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
                         }
