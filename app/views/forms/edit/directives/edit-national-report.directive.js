@@ -57,13 +57,13 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 async function loadPreviousReport({ government, previousAnswersMapping }) {
 
                     $scope.previousAnswerMapping = previousAnswersMapping.mapping;
-                    const cpbPreviousReport = $scope.questions[1];
+                    const previousReport = $scope.questions[1];
                     $scope.reportApiDetails = _.find(analyzerMapping[appName], { type: previousAnswersMapping.schema });
                     var params = { q: { 'government.identifier': government } };
                     $http.get($scope.reportApiDetails.dataUrl, { params: params })
                         .then(function (result) {
                             var prevReportAnswers = result.data[0];
-                            var prevReportQuestions = _(cpbPreviousReport).map('questions').compact().flatten().value();
+                            var prevReportQuestions = _(previousReport).map('questions').compact().flatten().value();
 
                             _.forEach(previousAnswersMapping.mapping, function (mapping, key) {
 
@@ -75,7 +75,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                         if (_.isArray(prevAnswer)) {
                                             mapping.previousQuestion.type = 'array';
                                             mapping.previousQuestion.answer = _.map(prevAnswer, function (answer) {
-                                                return (_.find(prevQuestion.options, { value: answer.identifier || answer }) || {}).title
+                                                return (_.find(prevQuestion.options, { value: answer.value || answer }) || {}).title
                                             })
                                         }
                                         else if (_.isObject(prevAnswer)) {
@@ -84,7 +84,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                                 mapping.previousQuestion.type = 'lstring';
                                             }
                                             else {
-                                                mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer.identifier || prevAnswer }) || {}).title;
+                                                mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer.value || prevAnswer }) || {}).title;
                                                 mapping.previousQuestion.type = 'string';
                                             }
                                         }
@@ -133,7 +133,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                         var mappings = question.validations || [];
 
                         _.forEach(mappings, function (mapping) {
-                            var dataSection = _.find($scope.cpbCurrentReport, { key: mapping.key || question.section });
+                            var dataSection = _.find($scope.currentReport, { key: mapping.key || question.section });
                             if (dataSection) {
                                 var mapQuestion;
                                 var validationPositive = false;
@@ -228,13 +228,13 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 };
 
                 async function transformNrData() {
-                    $scope.cpbCurrentReport = $scope.questions[0];
+                    $scope.currentReport = $scope.questions[0];
 
                     _.forEach($scope.reportTabs, function (tab) {
 
                         _.forEach(tab.sections, function (section) {
 
-                            var dataSection = _.find($scope.cpbCurrentReport, { key: section.key });
+                            var dataSection = _.find($scope.currentReport, { key: section.key });
 
                             _.extend(section, dataSection || {})
 
@@ -271,10 +271,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 }
 
                 function init() {
-
-                    $timeout(function () {
-                        transformNrData();
-                    }, 200);
+                    transformNrData();
                 }
             }
         }
