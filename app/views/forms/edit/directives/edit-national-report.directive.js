@@ -35,76 +35,12 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                 translationService.set('editNRT', editNRT);
                 translationService.set('numbers', numbers);
-                
-                const bindingWatch  = $scope.$watch('binding', function (newVal, oldVal) {
-                    const cleanNewVal = _.pickBy(newVal, _.identity);
-                    const cleanOldVal = _.pickBy(oldVal, _.identity)
-                    if ($scope.binding && !hasInitialized) {
-                        init();
-                        bindingWatch();
-                        hasInitialized = hasInitialized || true;
-                    }
-                });
 
-                var evtLoadPreviousReportEvent = $scope.$on('loadPreviousReportEvent', function (evt, data) {
-                    const { government, previousAnswersMapping } = data;
-                    loadPreviousReport({ government, previousAnswersMapping });
-                })
 
-                $scope.$on('$destroy', function () {
-                    evtLoadPreviousReportEvent();
-                });
-
-                async function loadPreviousReport({ government, previousAnswersMapping }) {
-
-                    $scope.previousAnswerMapping = previousAnswersMapping.mapping;
-                    const previousReport = $scope.questions[1];
-                    $scope.reportApiDetails = _.find(analyzerMapping[appName], { type: previousAnswersMapping.schema });
-                    var params = { q: { 'government.identifier': government } };
-                    $http.get($scope.reportApiDetails.dataUrl, { params: params })
-                        .then(function (result) {
-                            var prevReportAnswers = result.data[0];
-                            var prevReportQuestions = _(previousReport).map('questions').compact().flatten().value();
-
-                            _.forEach(previousAnswersMapping.mapping, function (mapping, key) {
-
-                                var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
-                                if (prevQuestion) {
-                                    mapping.previousQuestion = { title: prevQuestion.title };
-                                    if (prevReportAnswers) {
-                                        var prevAnswer = prevReportAnswers[mapping.prevQuestion];
-                                        if (_.isArray(prevAnswer)) {
-                                            mapping.previousQuestion.type = 'array';
-                                            mapping.previousQuestion.answer = _.map(prevAnswer, function (answer) {
-                                                return (_.find(prevQuestion.options, { value: answer.value || answer }) || {}).title
-                                            })
-                                        }
-                                        else if (_.isObject(prevAnswer)) {
-                                            if (prevAnswer.en || prevAnswer.fr || prevAnswer.es || prevAnswer.ar || prevAnswer.ru || prevAnswer.zh) {
-                                                mapping.previousQuestion.answer = prevAnswer;
-                                                mapping.previousQuestion.type = 'lstring';
-                                            }
-                                            else {
-                                                mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer.value || prevAnswer }) || {}).title;
-                                                mapping.previousQuestion.type = 'string';
-                                            }
-                                        }
-                                        else {
-                                            mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer }) || {}).title;
-                                            mapping.previousQuestion.type = 'string'
-                                        }
-                                    }
-                                }
-                                else
-                                    console.log(mapping)
-                            })
-
-                            return prevReportAnswers;
-                        })
-                }
                 //==================================
                 //
                 //==================================
+
                 $scope.setTab = function (index, isScroll) {
                     if (isScroll) {
                         window.scrollTo(0, 0);
@@ -116,16 +52,6 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }, 200);
                     $scope.activeTab = index + 1;
                     $scope.reportTabs[index].render = true;
-                }
-
-                function getMultiTermModel (){
-                    _.forEach($scope.binding, function (element, key) {
-                        
-                        if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
-                            if (_.isArray(element))
-                                $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
-                        }
-                    })
                 }
 
                 $scope.updateAnswer = function (question, baseQuestionNumber) {
@@ -236,6 +162,84 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                     return false;
                 };
+                $scope.$on('$destroy', function () {
+                    evtLoadPreviousReportEvent();
+                });
+                //==================================
+                //
+                //==================================
+                const bindingWatch = $scope.$watch('binding', function (newVal, oldVal) {
+                    const cleanNewVal = _.pickBy(newVal, _.identity);
+                    const cleanOldVal = _.pickBy(oldVal, _.identity)
+                    if ($scope.binding && !hasInitialized) {
+                        init();
+                        bindingWatch();
+                        hasInitialized = hasInitialized || true;
+                    }
+                });
+
+                var evtLoadPreviousReportEvent = $scope.$on('loadPreviousReportEvent', function (evt, data) {
+                    const { government, previousAnswersMapping } = data;
+                    loadPreviousReport({ government, previousAnswersMapping });
+                })
+
+                async function loadPreviousReport({ government, previousAnswersMapping }) {
+
+                    $scope.previousAnswerMapping = previousAnswersMapping.mapping;
+                    const previousReport = $scope.questions[1];
+                    $scope.reportApiDetails = _.find(analyzerMapping[appName], { type: previousAnswersMapping.schema });
+                    var params = { q: { 'government.identifier': government } };
+                    $http.get($scope.reportApiDetails.dataUrl, { params: params })
+                        .then(function (result) {
+                            var prevReportAnswers = result.data[0];
+                            var prevReportQuestions = _(previousReport).map('questions').compact().flatten().value();
+
+                            _.forEach(previousAnswersMapping.mapping, function (mapping, key) {
+
+                                var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
+                                if (prevQuestion) {
+                                    mapping.previousQuestion = { title: prevQuestion.title };
+                                    if (prevReportAnswers) {
+                                        var prevAnswer = prevReportAnswers[mapping.prevQuestion];
+                                        if (_.isArray(prevAnswer)) {
+                                            mapping.previousQuestion.type = 'array';
+                                            mapping.previousQuestion.answer = _.map(prevAnswer, function (answer) {
+                                                return (_.find(prevQuestion.options, { value: answer.value || answer }) || {}).title
+                                            })
+                                        }
+                                        else if (_.isObject(prevAnswer)) {
+                                            if (prevAnswer.en || prevAnswer.fr || prevAnswer.es || prevAnswer.ar || prevAnswer.ru || prevAnswer.zh) {
+                                                mapping.previousQuestion.answer = prevAnswer;
+                                                mapping.previousQuestion.type = 'lstring';
+                                            }
+                                            else {
+                                                mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer.value || prevAnswer }) || {}).title;
+                                                mapping.previousQuestion.type = 'string';
+                                            }
+                                        }
+                                        else {
+                                            mapping.previousQuestion.answer = (_.find(prevQuestion.options, { value: prevAnswer }) || {}).title;
+                                            mapping.previousQuestion.type = 'string'
+                                        }
+                                    }
+                                }
+                                else
+                                    console.log(mapping)
+                            })
+
+                            return prevReportAnswers;
+                        })
+                }
+
+                function getMultiTermModel() {
+                    _.forEach($scope.binding, function (element, key) {
+
+                        if (/^Q/.test(key) && _.isArray(element)) {//only fields starting with Q
+                            if (_.isArray(element))
+                                $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
+                        }
+                    })
+                }
 
                 async function transformNrData() {
                     $scope.currentReport = $scope.questions[0];
