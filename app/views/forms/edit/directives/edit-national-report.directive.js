@@ -22,12 +22,12 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 questions: "=",
                 customValidations: "=",
                 identifier: '@',
-                locales: '=',
-                multiTermModel: '='
+                locales: '='
             },
             link: function ($scope, $element, $attrs, ngModelController) {
                 $scope.isBCH = realm.is('BCH');
                 $scope.isABS = realm.is('ABS');
+                $scope.multiTermModel = {};
                 $scope.previousAnswerMapping = {};
                 $scope.activeTab = 1;
                 var appName = realm.value.replace(/-.*/, '').toLowerCase();
@@ -117,9 +117,18 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     $scope.reportTabs[index].render = true;
                 }
 
+                function getMultiTermModel (){
+                    _.forEach($scope.binding, function (element, key) {
+                        
+                        if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
+                            if (_.isArray(element))
+                                $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
+                        }
+                    })
+                }
+
                 $scope.updateAnswer = function (question, baseQuestionNumber) {
                     $scope.binding = $scope.binding || {};
-
                     if (question.multiple) {
                         if (!$scope.multiTermModel[question.key])
                             $scope.binding[question.key] = undefined;
@@ -272,6 +281,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                 function init() {
                     transformNrData();
+                    getMultiTermModel();
                 }
             }
         }
