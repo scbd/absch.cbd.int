@@ -36,11 +36,12 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 translationService.set('editNRT', editNRT);
                 translationService.set('numbers', numbers);
                 
-                $scope.$watch('binding', function (newVal, oldVal) {
+                const bindingWatch  = $scope.$watch('binding', function (newVal, oldVal) {
                     const cleanNewVal = _.pickBy(newVal, _.identity);
                     const cleanOldVal = _.pickBy(oldVal, _.identity)
-                    if ($scope.binding && (!hasInitialized || !angular.equals(cleanNewVal, cleanOldVal))) {
+                    if ($scope.binding && !hasInitialized) {
                         init();
+                        bindingWatch();
                         hasInitialized = hasInitialized || true;
                     }
                 });
