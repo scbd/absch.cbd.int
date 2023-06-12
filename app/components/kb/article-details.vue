@@ -40,6 +40,7 @@
                 </div>
                 <div>
                     <popular-tags></popular-tags>
+                    <stakeholder-tags></stakeholder-tags>
                 </div>
             </div>
         </div>
@@ -52,12 +53,14 @@ import relevantArticles from "./relevant-articles.vue";
 import ArticlesApi from './article-api';
 import './filters';
 import popularTags from './popular-tags.vue';
+import stakeholderTags from './stakeholder-tags.vue';
 import articlesMaxin from '../maxin/article';
 export default {
     name: 'KbArticleDetails',
     components: {
         relevantArticles,
-        popularTags
+        popularTags,
+        stakeholderTags
     },
     props: {
     },

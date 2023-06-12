@@ -50,6 +50,17 @@ export default {
 
             }
         },
+        async loadKbStakeholders(isBch){
+            let stakeholders
+            if(!isBch) {
+                stakeholders = (await import('~/app-data/abs/kb-stakeholders.js')).stakeholders;
+            }
+            else {
+                return null;
+            }
+            return stakeholders;
+        },
+
         getUrl(title, id, tag){
             const urlTitle = title ? title.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-') : undefined;
             if(title && id){

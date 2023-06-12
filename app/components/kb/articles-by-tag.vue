@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="articlesCount<1" class="alert alert-warning">
+                    <div v-if="articlesCount<1" class="alert alert-light">
                         <strong>{{ $t("noResultFound") }}</strong>
                     </div>
                 </div>
@@ -49,6 +49,7 @@
             </div>
             <div>
                 <popular-tags></popular-tags>
+                <stakeholder-tags></stakeholder-tags>
             </div>
         </div>
     </div>
@@ -61,6 +62,7 @@ import relevantArticles from "./relevant-articles.vue";
 import ArticlesApi from './article-api';
 import './filters';
 import popularTags from './popular-tags.vue';
+import stakeholderTags from './stakeholder-tags.vue';
 import articlesMaxin from '../maxin/article';
 
 export default {
@@ -68,7 +70,8 @@ export default {
     components: {
         relevantArticles,
         paginate,
-        popularTags
+        popularTags,
+        stakeholderTags
     },
     props: {},
     created() {

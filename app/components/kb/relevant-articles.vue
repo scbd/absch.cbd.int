@@ -12,7 +12,7 @@
                 <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{article.title|lstring($locale)}}</a>
             </li>
         </ul>
-        <div v-if="articles.length<1 && !loading" class="alert alert-warning">
+        <div v-if="articles.length<1 && !loading" class="alert alert-light">
             <strong>{{ $t("noResultFound") }}</strong>
         </div>
     </div>
