@@ -192,12 +192,12 @@
 
     <script type="text/ng-template" id="link" trados-translation="true">
             <div class="mt-2 control-group">
-                <div km-textbox-ml rows=4 name="question.key" ng-change="updateAnswer(question)"
-                    ng-model="binding[question.key]" locales="locales" ></div>
+                <div km-rich-textbox rows=4 name="question.key" ng-change="updateAnswer(question)"
+                    ng-model="binding[question.key].additionalInformation" locales="locales" ></div>
                 </div>
             <div class="mt-2 control-group">
                 <label class="ng-binding">URL and website name</label>
-                <div km-link name="question{{question.key}}_link" ng-model="binding[question.key].relevantbindings" allow-link="true"
+                <div km-link name="question{{question.key}}_link" ng-model="binding[question.key].links" allow-link="true"
                      allow-file="true" identifier="identifier" ng-change="updateAnswer(question)"></div>
             </div>
 
