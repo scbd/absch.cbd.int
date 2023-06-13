@@ -169,8 +169,7 @@
         });
     </script>
     
-    
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%=googleAnalyticsCode%>"></script>
     <script src="https://www.recaptcha.net/recaptcha/api.js"></script>
     <script>
        function addLoadEvent(func) {
@@ -185,10 +184,10 @@
 
         });
         if('<%=googleAnalyticsCode%>'!=''){
-            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', '<%=googleAnalyticsCode%>', 'auto');
-            ga('set',    'hostname', window.location.hostname);
-            ga('set',    'location', undefined);
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '<%=googleAnalyticsCode%>');
         }
         
     </script>
