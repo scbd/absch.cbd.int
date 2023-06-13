@@ -21,21 +21,10 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
     'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm', 'translationService',
     function ($scope, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
 
-        $scope.multiTermModel = {};
         $scope.customValidations = {};
         $scope.questions = [cpbNationalReport5, cpbNationalReport4];
-        var user = $rootScope.user;
-
-        translationService.set('editNRT', editNRT);
-        translationService.set('numbers', numbers);
-
-        const output = {};
-        _.forEach(prevQuestionsMapping, function (value, key) {
-            output[key] = { prevQuestion: value, showMessage: false };
-        });
-
         $scope.previousAnswersMapping = output;
-
+        $scope.governmentList = $scope.options.countries;
         $scope.tabs = [
             {
                 "tab": 1,
@@ -101,6 +90,12 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             }
         ];
 
+        var user = $rootScope.user;
+        const output = {};
+
+        translationService.set('editNRT', editNRT);
+        translationService.set('numbers', numbers);
+
         $controller('editController', {
             $scope: $scope
         });
@@ -128,27 +123,11 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 });
             }
         }
-
-        function is141Or142(questionAnswers) {
-            return (questionAnswers['Q141'] || {}).value == 'true' || (questionAnswers['Q142'] || {}).value == 'true';
-        }
-
-        function is79Or82Or81(questionAnswers) {
-            return (questionAnswers['Q079'] || {}).value == 'true' || (questionAnswers['Q081'] || {}).value == 'true' || (questionAnswers['Q082'] || {}).value == 'true';
-        }
-
-        $scope.customValidations = {
-            is79Or82Or81: is79Or82Or81,
-            is141Or142: is141Or142
-        }
-
+        
         $scope.userHasGovernment = function () {
             return user.government;
         }
-        $scope.governmentList = $scope.options.countries;
-        //==================================
-        //
-        //==================================
+
         $scope.getCleanDocument = function (document) {
 
             document = document || $scope.document;
@@ -167,6 +146,25 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 $scope.document = { ...($scope.document), ...(questionAnswers || {}) };
             })
         }
+        //==================================
+        //
+        //==================================
+        _.forEach(prevQuestionsMapping, function (value, key) {
+            output[key] = { prevQuestion: value, showMessage: false };
+        });
+
+        function is141Or142(questionAnswers) {
+            return (questionAnswers['Q141'] || {}).value == 'true' || (questionAnswers['Q142'] || {}).value == 'true';
+        }
+
+        function is79Or82Or81(questionAnswers) {
+            return (questionAnswers['Q079'] || {}).value == 'true' || (questionAnswers['Q081'] || {}).value == 'true' || (questionAnswers['Q082'] || {}).value == 'true';
+        }
+
+        $scope.customValidations = {
+            is79Or82Or81: is79Or82Or81,
+            is141Or142: is141Or142
+        }
 
         function safeApply(fn) {
             ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
@@ -181,8 +179,9 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                     _.forEach(document, function (element, key) {
                         if (/^Q/.test(key)) {//only fields starting with Q
                             $scope.questionAnswers[key] = element;
-                            if (_.isArray(element))
-                                $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
+                            //ToDo: remove after testing
+                            // if (_.isArray(element))
+                            //     $scope.multiTermModel[key] = _.map(element, function (e) { return { identifier: e.value, customValue: e.additionalInformation } });
                         }
                     })
                     $scope.documentReady = true;
