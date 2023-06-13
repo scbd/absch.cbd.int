@@ -97,7 +97,9 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
 
         $rootScope.$on('$routeChangeSuccess', function (evt, current) {
             if($window.scbdApp.analytics){
-                $window.ga('pageview', basePath + $location.path());
+                $window.gtag('event', 'page_view', {
+                    'page_location' : basePath+$location.path()
+                });
             }
 
             ngMeta.resetMeta();
