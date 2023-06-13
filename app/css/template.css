@@ -985,6 +985,10 @@ footer .logo {
     opacity: 0.3;
     color: #fff;
 }
+
+.edit-national-report .panel-body .active.dimmer {
+    color: transparent;
+}
 .active.dimmer .block-text{
     font-size: larger;
 }
