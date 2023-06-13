@@ -15,7 +15,6 @@
             </div>
             <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px" class="row"
                 ng-class="{'disabled': !document[question.key] && question.type!= 'legend' && !question.questions}">
-
                 <div ng-include="'question-answer'"></div>
 
                 <div ng-if="question.questions" ng-repeat="subQuestion in question.questions"
@@ -25,7 +24,6 @@
                 </div>
             </div>
         </div>
-
         <script type="text/ng-template" id="question-answer">
 
             <div style="padding:10px;">
@@ -38,30 +36,58 @@
                         </div>
                     </strong>
                 </div>
-                <div ng-if="document[question.key]">
-                    <div ng-if="question.type!='text' && question.type!='lstring'">
-                        <div comapre-val>
-                        <km-value-ml ng-if="document[question.key].value"
-                            value="displayText(document[question.key].value, question)" locales="locale"></km-value-ml>
-                        </div>
-                        <div ng-if="question.multiple" class="km-value" comapre-val>
-                            <ul class="list">
-                                <li ng-repeat="item in document[question.key]" >
-                                    <span ng-bind="displayText(item.value, question)"></span>
-                                    <span ng-if="item.additionalInformation!=undefined" ng-bind="'(' + (item.additionalInformation|lstring:locale) + ')'"></span>
-                                </li>
-                            </ul>                            
-                        </div>
-                        <div ng-if="document[question.key].additionalInformation">
-                            <label>{{::('viewNationalReportT.additionalInformation'|$translate)}}</label>
-                            <div comapre-val>
-                            <km-value-ml value="::document[question.key].additionalInformation" locales="locale"></km-value-ml>
+                <div ng-switch="question.type">
+
+                    <div ng-switch-when="option|term" ng-switch-when-separator="|">
+                        <div ng-switch="question.multiple">
+                            <div ng-switch-when="false">
+                                <km-value-ml ng-if="document[question.key].value"
+                                    value="displayText(document[question.key].value, question)" locales="locale"></km-value-ml>
+                            </div>
+                            <div ng-switch-when="true">
+                                <ul class="list">
+                                    <li ng-repeat="item in document[question.key]">
+                                        <span ng-bind="displayText(item.value, question)"></span>
+                                        <span ng-if="item.additionalInformation!=undefined"
+                                            ng-bind="'(' + (item.additionalInformation|lstring:locale) + ')'"></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div ng-if="question.type=='text' || question.type=='lstring'">
+                
+                    <div ng-switch-when="lstring">
                         <div comapre-val>
-                        <km-value-ml value="document[question.key]" locales="locale"></km-value-ml>
+                            <km-value-ml value="document[question.key]" locales="locale"></km-value-ml>
+                        </div>
+                    </div>
+                
+                    <div ng-switch-when="lstringRte">
+                        <div comapre-val>
+                            <km-value-ml value="document[question.key]" html locales="locale"></km-value-ml>
+                        </div>
+                    </div>
+                
+                    <div ng-switch-when="int">
+                        <div comapre-val>
+                            <km-value-ml value="document[question.key]" locales="locale"></km-value-ml>
+                        </div>
+                    </div>
+                
+                    <div ng-switch-when="link">
+                        <div comapre-val>
+                            <label class="ng-binding">URL and website name</label>
+                            <km-link-list ng-model="document[question.key].links" class="mt-1"></km-link-list>
+                        </div>
+                    </div>
+                
+                    <div ng-switch-default>
+                        {{question}}
+                    </div>
+                    <div ng-if="document[question.key].additionalInformation">
+                        <label>{{::('viewNationalReportT.additionalInformation'|$translate)}}</label>
+                        <div comapre-val>
+                            <km-value-ml value="::document[question.key].additionalInformation" html locales="locale"></km-value-ml>
                         </div>
                     </div>
                 </div>
