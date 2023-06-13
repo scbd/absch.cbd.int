@@ -22,6 +22,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
     function ($scope, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
 
         $scope.customValidations = {};
+        $scope.previousAnswersMapping = {};
         $scope.questions = [cpbNationalReport5, cpbNationalReport4];
         
         $scope.tabs = [
@@ -94,7 +95,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         // }
 
         var user = $rootScope.user;
-        const output = {};
 
         translationService.set('editNRT', editNRT);
         translationService.set('numbers', numbers);
@@ -153,10 +153,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         //==================================
         //
         //==================================
-        _.forEach(prevQuestionsMapping, function (value, key) {
-            output[key] = { prevQuestion: value, showMessage: false };
-        });
-        $scope.previousAnswersMapping = output;
+        
         function is141Or142(questionAnswers) {
             return (questionAnswers['Q141'] || {}).value == 'true' || (questionAnswers['Q142'] || {}).value == 'true';
         }
@@ -180,6 +177,11 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         }
 
         function init() {
+
+            _.forEach(prevQuestionsMapping, function (value, key) {
+                $scope.previousAnswersMapping[key] = { prevQuestion: value, showMessage: false };
+            });
+            
             $scope.documentReady = false
             $scope.setDocument({}).then(function (document) {
                 $scope.questionAnswers = {};
