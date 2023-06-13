@@ -23,8 +23,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.customValidations = {};
         $scope.questions = [cpbNationalReport5, cpbNationalReport4];
-        $scope.previousAnswersMapping = output;
-        $scope.governmentList = $scope.options.countries;
+        
         $scope.tabs = [
             {
                 "tab": 1,
@@ -89,6 +88,10 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 "sections": [{ key: "OtherInformation" }, { key: "Comments" }]
             }
         ];
+        //ToDo: add verifySingleRecord
+        // $scope.exportVueComponent = {
+        //     components: { verifySingleRecord }
+        // }
 
         var user = $rootScope.user;
         const output = {};
@@ -99,6 +102,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         $controller('editController', {
             $scope: $scope
         });
+        $scope.governmentList = $scope.options.countries;
         //==================================
         //
         //==================================
@@ -152,18 +156,23 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         _.forEach(prevQuestionsMapping, function (value, key) {
             output[key] = { prevQuestion: value, showMessage: false };
         });
-
+        $scope.previousAnswersMapping = output;
         function is141Or142(questionAnswers) {
             return (questionAnswers['Q141'] || {}).value == 'true' || (questionAnswers['Q142'] || {}).value == 'true';
         }
 
-        function is79Or82Or81(questionAnswers) {
-            return (questionAnswers['Q079'] || {}).value == 'true' || (questionAnswers['Q081'] || {}).value == 'true' || (questionAnswers['Q082'] || {}).value == 'true';
+        function is79Or80Or81(questionAnswers) {
+            return (questionAnswers['Q079'] || {}).value == 'true' || (questionAnswers['Q080'] || {}).value == 'true' || (questionAnswers['Q081'] || {}).value == 'true';
+        }
+
+        function is162_aOr162_b(questionAnswers) {
+            return (questionAnswers['Q162_a'] || {}).value == 'true' || (questionAnswers['Q162_b'] || {}).value == 'true';
         }
 
         $scope.customValidations = {
-            is79Or82Or81: is79Or82Or81,
-            is141Or142: is141Or142
+            is79Or80Or81: is79Or80Or81,
+            is141Or142: is141Or142,
+            is162_aOr162_b: is162_aOr162_b
         }
 
         function safeApply(fn) {
