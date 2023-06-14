@@ -22,12 +22,12 @@ export const analyzerMapping =
             ]
         },
         {
-            "type"         : "npNationalReport1",
+            "type"         : "absNationalReport1",
             "title"        : reportAnalyzerMappingJson.absNR1Title,
-            "questionsUrl" : "app-data/abs/report-analyzer/npNationalReport1",
-            "mappingsUrl"  : "app-data/abs/report-analyzer/mapping/npNationalReport1.json",
+            "questionsUrl" : "app-data/abs/report-analyzer/absNationalReport1",
+            "mappingsUrl"  : "app-data/abs/report-analyzer/mapping/absNationalReport1.json",
             "dataUrl"      : "/api/v2017/national-reports-np-1",
-            "infoBlockUrl"  : "views/report-analyzer/includes/npNationalReport1.html",
+            "infoBlockUrl"  : "views/report-analyzer/includes/absNationalReport1.html",
             "year"          : "2023",
             "deadline"      : "2023-10-01",
             "offlineFormats": [

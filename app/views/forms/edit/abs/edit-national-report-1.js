@@ -7,13 +7,13 @@ import '~/views/forms/edit/edit';
 import '~/services/main';
 import '~/views/forms/edit/document-selector';
 import '~/views/directives/block-region-directive';
-// import '~/views/forms/view/abs/view-national-report-1.directive';
+import '~/views/forms/view/abs/view-national-report-1.directive';
 // import verifySingleRecord from '~/components/common/verify-single-record.vue';
 export { default as template } from './edit-national-report-1.html';
 import 'ngDialog';
 import '~/views/forms/edit/directives/edit-national-report.directive';
 import { npInterimNationalReport1 } from '~/app-data/abs/report-analyzer/npInterimNationalReport1';
-import { npNationalReport1 } from '~/app-data/abs/report-analyzer/npNationalReport1';
+import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1';
 import prevQuestionsMapping from '~/app-data/abs/report-analyzer/mapping/npNationalReoprtInterim-1.json';
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
 import numbers from '~/app-text/numbers.json';
@@ -23,7 +23,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.customValidations = {};
         $scope.previousAnswersMapping = {};
-        $scope.questions = [npNationalReport1, npInterimNationalReport1];
+        $scope.questions = [absNationalReport1, npInterimNationalReport1];
 
         $scope.tabs = [
         {
