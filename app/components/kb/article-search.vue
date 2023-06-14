@@ -43,7 +43,7 @@
 
                 </div>
                 
-                <div v-if="articlesCount<1" class="alert alert-warning">
+                <div v-if="articlesCount<1" class="alert alert-light">
                     <strong>{{ $t("noResultFound") }}</strong>
                 </div>
             </div>

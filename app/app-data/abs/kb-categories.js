@@ -154,5 +154,76 @@ export const categories = [
         "url": "https://www.cbd.int/meetings/ABS-IAC-CH-01"
       }
     ]
+  },
+  {
+    "title": "Governments",
+    "adminTags": [
+      "governments"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Parties",
+    "adminTags": [
+      "parties"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Non-Parties",
+    "adminTags": [
+      "non-parties"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Users of genetic resources",
+    "adminTags": [
+      "users"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Business/Private sector",
+    "adminTags": [
+      "business"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Research/Academia",
+    "adminTags": [
+      "research"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Indigenous Peoples",
+    "adminTags": [
+      "iplc"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Local communities",
+    "adminTags": [
+      "iplc"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Capacity-building Partners",
+    "adminTags": [
+      "partner"
+    ],
+    "articles": []
+  },
+  {
+    "title": "Donors",
+    "adminTags": [
+      "donors"
+    ],
+    "articles": []
   }
+
 ]
