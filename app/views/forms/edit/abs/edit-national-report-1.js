@@ -104,8 +104,8 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         },
         {
             "tab": 16,
-            "title": "Part-XVII",
-            "sections": [{ key: "Part-XVII" }]
+            "title": "Part-XVI",
+            "sections": [{ key: "Part-XVI" }]
         }
         ];
 
