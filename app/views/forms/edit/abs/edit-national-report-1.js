@@ -109,9 +109,9 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         }
         ];
 
-        // $scope.exportVueComponent = {
-        //     components: { verifySingleRecord }
-        // }
+        $scope.exportVueComponent = {
+            components: { verifySingleRecord }
+        }
 
         var user = $rootScope.user;
 
