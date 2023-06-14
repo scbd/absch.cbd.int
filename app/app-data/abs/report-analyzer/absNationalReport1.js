@@ -1,6 +1,6 @@
 ﻿import nr1T from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
 
-export const npNationalReport1 = [
+export const absNationalReport1 = [
    {
       "key": "Part-II",
       "title": nr1T.part_II_title,
