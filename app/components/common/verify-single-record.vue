@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isLoading"><loading caption="Validating if record exists for the government..."/></div>
+        <div v-if="isLoading" class="text-warning fs-5 loadingIcon"><loading caption="Validating if record exists for the government..."/></div>
         <div class="modal fade" ref="verifyModal" data-backdrop="static"  tabindex="-1" aria-hidden="true">      
         <div class="modal-dialog modal-dialog-centered"  role="document">
             <div class="modal-content">
@@ -124,4 +124,11 @@
         i18n: { messages:{ en: i18n }} 
 	}
 </script>
-  
+<style>
+    .loadingIcon {
+    top: 39.5%;
+    position: absolute;
+    left: 37%;
+    z-index: 1;
+    }
+</style>
