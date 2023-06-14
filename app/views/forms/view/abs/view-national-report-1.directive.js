@@ -1,7 +1,7 @@
 import app from '~/app';
 import template from "text!./view-national-report-1.directive.html";
 import _ from 'lodash';
-import { npNationalReport1 } from '~/app-data/abs/report-analyzer/npNationalReport1';
+import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1';
 import '~/views/forms/view/view-national-report.directive';
 import '~/views/directives/record-options';
 import '~/views/forms/view/directives/view-record-reference.directive';
@@ -23,7 +23,7 @@ import numbers from '~/app-text/numbers.json';
 			link : function ($scope){
 				translationService.set('viewNr1T', viewNr1T);
 				translationService.set('numbers', numbers);
-				$scope.nr1Data = npNationalReport1;			
+				$scope.nr1Data = absNationalReport1;			
 			}
 		};
 	}]);
