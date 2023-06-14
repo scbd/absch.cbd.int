@@ -23,7 +23,9 @@ export default class DocumentShareApi extends ApiBase
         return this.http.post(`api/v2018/document-sharing/anon-sharing`, params,{ headers: {'x-captcha-v2-badge-token':grecaptchaToken}})
                    .then(res => res.data).catch(tryCastToApiError);
     }
-    
+    async queryDocuments(params)  {
+        return this.http.get(`api/v2013/documents/`, { params }).then(res => res.data).catch(tryCastToApiError);
+    }
     async revoke(id) {
         return this.http.delete(`api/v2018/document-sharing/${id}/revoke`).then(res => res.data).catch(tryCastToApiError);
     }

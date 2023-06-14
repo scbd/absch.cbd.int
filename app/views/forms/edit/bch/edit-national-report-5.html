@@ -20,8 +20,7 @@
                         identifier="document.header.identifier" ng-model="questionAnswers"
                         ng-change="onQuestionAnswerChange(questionAnswers)">
                     </edit-national-report>
-                    <!-- ToDo: add verify-single-record -->
-                    <!-- <div ng-if="exportVueComponent && document.government">
+                    <div ng-if="exportVueComponent && document.government">
                         <verify-single-record ng-vue="exportVueComponent" 
                             schema="cpbNationalReport5" :government="document.government.identifier">
                         </verify-single-record>
@@ -37,6 +36,7 @@
     </div>
 
     <div>
+    
         <script type="text/ng-template" id="contact">
             <div class="section-pane panel panel-default" id="section1" style="margin-bottom:3px!important"> 
                 <div class="panel-heading">
