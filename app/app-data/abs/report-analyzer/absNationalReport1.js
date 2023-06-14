@@ -2660,7 +2660,7 @@ export const absNationalReport1 = [
                      "true"
                   ],
                   "type": "@hasValues",
-                  "trigger": "visible"
+                  "trigger": "enable"
                },
                {
                   "question": "Q060_b",
@@ -2784,23 +2784,23 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "1",
-                  "title": nr1T.part_XIV_question62_a_option0_title
+                  "title": nr1T.one
                },
                {
                   "value": "1+",
-                  "title": nr1T.part_XIV_question62_a_option1_title
+                  "title": nr1T.lessThanThree
                },
                {
                   "value": "3+",
-                  "title": nr1T.part_XIV_question62_a_option2_title
+                  "title": nr1T.betweenThreeAndFive
                },
                {
                   "value": "5+",
-                  "title": nr1T.part_XIV_question62_a_option3_title
+                  "title": nr1T.betweenFiveAndTen
                },
                {
                   "value": "10+",
-                  "title": nr1T.part_XIV_question62_a_option4_title
+                  "title": nr1T.tenOrMore
                }
             ]            
          },
@@ -2894,7 +2894,7 @@ export const absNationalReport1 = [
       ]
    },
    {
-      "key": "Part-XV",
+      "key": "Part-XVI",
       "title": nr1T.part_XVI_title,
       "questions": [
          {
