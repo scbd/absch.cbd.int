@@ -31,7 +31,7 @@
                 <div style="padding-left:0px;padding-right: 0px;">
                     <strong>
                         <div comapre-val>
-                        <label name="{{question.key}}" for="{{question.key}}"
+                        <label ng-if="question.type!= 'legend'" name="{{question.key}}" for="{{question.key}}"
                                 ng-bind-html="::spaceSubQuestion(question.number) + question.title" ></label>
                         </div>
                     </strong>
@@ -76,11 +76,17 @@
                 
                     <div ng-switch-when="link">
                         <div comapre-val>
-                            <label class="ng-binding">URL and website name</label>
+                            <label class="ng-binding">{{::('viewNationalReportT.websiteName'|$translate)}}</label>
                             <km-link-list ng-model="document[question.key].links" class="mt-1"></km-link-list>
                         </div>
                     </div>
-                
+                    <div ng-switch-when="legend">
+                         <legend ng-bind-html="question.title"></legend>
+                    </div>
+
+                    <div ng-switch-when="sub-section">
+                       <!-- ToDo: remove after testing-->
+                    </div>
                     <div ng-switch-default>
                         {{question}}
                     </div>
