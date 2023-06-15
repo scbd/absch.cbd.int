@@ -18,7 +18,6 @@ import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
             },
             link: function($scope, $element, $attr, ngModelController) {
                 translationService.set('nrYesNoT', nrYesNoT);
-                $scope.caption = $attr.caption;
                 $scope.answer = {}
                 
                 $scope.updateAnswer = function(){
@@ -32,7 +31,12 @@ import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
 
                     $scope.binding = {  value : value, additionalInformation : additionalInformation };
 
-                    $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:value})
+                    // $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:value});
+
+                    $scope.hasAdditionalInformation = ($scope.question.options || []).filter(function(option) {
+                        return (option.type === 'lstring' || option.type === 'lstringRte') && option.value === value;
+                      })[0];
+                      
                     
                     ngModelController.$setViewValue($scope.binding);                      
 
@@ -43,7 +47,10 @@ import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
                         $scope.answer.value          = _.indexOf($scope.question.options, _.find($scope.question.options, { value: $scope.binding.value}));
                         $scope.answer.additionalInformation = $scope.binding.additionalInformation;
 
-                        $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:$scope.binding.value})
+                        // $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:$scope.binding.value});
+                        $scope.hasAdditionalInformation = ($scope.question.options || []).filter(function(option) {
+                            return (option.type === 'lstring' || option.type === 'lstringRte') && option.value === $scope.binding.value;
+                          })[0];
                     }
                     else{
                         $scope.answer = {}
@@ -53,5 +60,4 @@ import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
             }
         }
     }])
-
 

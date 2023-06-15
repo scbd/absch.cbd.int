@@ -8,7 +8,7 @@ import '~/services/main';
 import '~/views/forms/edit/document-selector';
 import '~/views/directives/block-region-directive';
 import '~/views/forms/view/bch/view-national-report-5.directive';
-// import verifySingleRecord from '~/components/common/verify-single-record.vue';
+import verifySingleRecord from '~/components/common/verify-single-record.vue';
 export { default as template } from './edit-national-report-5.html';
 import 'ngDialog';
 import '~/views/forms/edit/directives/edit-national-report.directive';
@@ -89,10 +89,10 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 "sections": [{ key: "OtherInformation" }, { key: "Comments" }]
             }
         ];
-        //ToDo: add verifySingleRecord
-        // $scope.exportVueComponent = {
-        //     components: { verifySingleRecord }
-        // }
+        
+        $scope.exportVueComponent = {
+            components: { verifySingleRecord }
+        }
 
         var user = $rootScope.user;
 
