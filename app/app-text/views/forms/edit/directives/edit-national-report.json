@@ -18,5 +18,6 @@
     "previousAnswerMapping": "Please note that the period covered by this question is different in each reporting format.",
     "NR4Info": "Only one record of the fourth national report is allowed for each government, the fourth national report already exists for your government, you will be redirected to the record in",
     "seconds": "seconds.",
-    "redirectNow": "Redirect now"
+    "redirectNow": "Redirect now",
+    "websiteName": "URL and website name"
 }

@@ -14,6 +14,7 @@
                 on-step-change="onStepChange(tab)" validation-report="validationReport" on-post-close="onPostClose()"
                 on-error="onError(error, errorCode)">
                 <edit-form>
+                <form class="editForm" name="editForm">
                     <edit-national-report ng-if="documentReady && document && questionAnswers" report-tabs="tabs"
                         questions="questions" custom-validations="customValidations" locales="document.header.languages"
                         identifier="document.header.identifier" ng-model="questionAnswers"
@@ -25,6 +26,7 @@
                             schema="cpbNationalReport5" :government="document.government.identifier">
                         </verify-single-record>
                     </div> -->
+                </form>
                 </edit-form>
                 <review-form>
                     <view-cpb-national-report-5 ng-model="review.document" locale="review.locale"
@@ -44,7 +46,7 @@
                     <div style="border:1px solid #eee;margin:5px" class="row">
                         <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
                             <div class="mt-3">
-                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                <div style="padding:10px 3px" class="col-md-12">
                                     <div class="col-md-8" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="header.languages" required
                                             caption="{{::('editNRT.languageToPublish'|$translate)}}">
@@ -61,7 +63,7 @@
                     <div style="border:1px solid #eee;margin:5px" class="row">
                         <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
                             <div class="mt-3">
-                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                <div style="padding:10px 3px" class="col-md-12">
                                     <div class="col-md-4" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="government" required
                                             caption="{{::('numbers.one'|$translate)}}. {{::('editNRT.country'|$translate)}}">
@@ -87,7 +89,7 @@
                     <div style="border:1px solid #eee;margin:5px" class="row">
                         <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
                             <div class="mt-3">
-                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                <div style="padding:10px 3px" class="col-md-12">
                                     <div class="col-md-8" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" required name="stakeholders"
                                             caption="{{::('numbers.two'|$translate)}}. {{::('editNRT.organizationsStakeholders'|$translate)}}">
@@ -103,7 +105,7 @@
                     <div style="border:1px solid #eee;margin:5px" class="row">
                         <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
                             <div class="mt-3">
-                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                <div style="padding:10px 3px" class="col-md-12">
                                     <div class="col-md-8" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="contact"
                                             caption="{{::('editNRT.contactPerson'|$translate)}}" required>
@@ -120,7 +122,7 @@
                     <div style="border:1px solid #eee;margin:5px" class="row">
                         <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
                             <div class="mt-3">
-                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                <div style="padding:10px 3px" class="col-md-12">
                                     <div class="col-md-4" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" required name="date"
                                             caption="{{::('numbers.three'|$translate)}}. {{::('editNRT.dateOfSubmission'|$translate)}}">
@@ -135,7 +137,7 @@
                     <div style="border:1px solid #eee;margin:5px" class="row">
                         <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
                             <div class="mt-3">
-                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                <div style="padding:10px 3px" class="col-md-12">
                                     <div class="col-md-4" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline time-period" bold="true" required name="date"
                                             caption="{{::('numbers.four'|$translate)}}. {{::('editNRT.timePeriod'|$translate)}}">
@@ -159,7 +161,7 @@
                     <div style="border:1px solid #eee;margin:5px" class="row">
                         <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
                             <div class="mt-3">
-                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                <div style="padding:10px 3px" class="col-md-12">
                                     <div class="col-md-8" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="Q005"
                                             caption="{{::('numbers.five'|$translate)}}. {{::('editNRT.ifNotPartyToCP'|$translate)}}">
@@ -174,7 +176,7 @@
                     <div style="border:1px solid #eee;margin:5px" class="row">
                         <div class="col-md-12" style="padding:10px;position: relative;" block-region skip-loading-icon="true">
                             <div class="mt-3">
-                                <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+                                <div style="padding:10px 3px" class="col-md-12">
                                     <div class="col-md-8" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="Q006"
                                             caption="{{::('numbers.six'|$translate)}}. {{::('editNRT.provideDetails'|$translate)}}">
