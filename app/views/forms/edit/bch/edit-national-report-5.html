@@ -20,8 +20,7 @@
                         identifier="document.header.identifier" ng-model="questionAnswers"
                         ng-change="onQuestionAnswerChange(questionAnswers)">
                     </edit-national-report>
-                    <!-- ToDo: add verify-single-record -->
-                    <!-- <div ng-if="exportVueComponent && document.government">
+                    <div ng-if="exportVueComponent && document.government">
                         <verify-single-record ng-vue="exportVueComponent" 
                             schema="cpbNationalReport5" :government="document.government.identifier">
                         </verify-single-record>
@@ -37,6 +36,7 @@
     </div>
 
     <div>
+    
         <script type="text/ng-template" id="contact">
             <div class="section-pane panel panel-default" id="section1" style="margin-bottom:3px!important"> 
                 <div class="panel-heading">
@@ -68,18 +68,12 @@
                                         <div class="km-control-group d-inline" bold="true" name="government" required
                                             caption="{{::('numbers.one'|$translate)}}. {{::('editNRT.country'|$translate)}}">
                                             
-                                            <div afc-autocomplete required name="government" ng-if="!formScope.$parent.userHasGovernment()" ng-disabled="formScope.$parent.userHasGovernment()"
+                                            <div afc-autocomplete required name="government" ng-disabled="formScope.$parent.userHasGovernment()"
                                                 ng-model="formScope.$parent.document.government" source="formScope.$parent.governmentList"
                                                 filter="formScope.$parent.genericFilter" mapping="formScope.$parent.genericMapping" selectbox="true"
                                                 placeholder="{{::('editNRT.selectOption'|$translate)}}"
                                                 ng-change="formScope.$parent.onGovernmentChange(formScope.$parent.document.government)">
                                             </div>
-                                            <div class="km-value" ng-if="formScope.$parent.userHasGovernment()">
-                                                <span ng-bind="formScope.$parent.document.government|term:locale"></span>
-                                            </div>
-                                            <!-- <div ng-if="formScope.$parent.exportVueComponent && formScope.$parent.document.government">
-                                                <verify-single-record ng-vue="formScope.$parent.exportVueComponent" schema="cpbNationalReport5" :government="formScope.$parent.government.identifier"></verify-single-record>
-                                            </div> -->
                                          </div>
                                     </div>
                                 </div>
