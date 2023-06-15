@@ -68,18 +68,12 @@
                                         <div class="km-control-group d-inline" bold="true" name="government" required
                                             caption="{{::('numbers.one'|$translate)}}. {{::('editNRT.country'|$translate)}}">
                                             
-                                            <div afc-autocomplete required name="government" ng-if="!formScope.$parent.userHasGovernment()" ng-disabled="formScope.$parent.userHasGovernment()"
+                                            <div afc-autocomplete required name="government" ng-disabled="formScope.$parent.userHasGovernment()"
                                                 ng-model="formScope.$parent.document.government" source="formScope.$parent.governmentList"
                                                 filter="formScope.$parent.genericFilter" mapping="formScope.$parent.genericMapping" selectbox="true"
                                                 placeholder="{{::('editNRT.selectOption'|$translate)}}"
                                                 ng-change="formScope.$parent.onGovernmentChange(formScope.$parent.document.government)">
                                             </div>
-                                            <div class="km-value" ng-if="formScope.$parent.userHasGovernment()">
-                                                <span ng-bind="formScope.$parent.document.government|term:locale"></span>
-                                            </div>
-                                            <!-- <div ng-if="formScope.$parent.exportVueComponent && formScope.$parent.document.government">
-                                                <verify-single-record ng-vue="formScope.$parent.exportVueComponent" schema="cpbNationalReport5" :government="formScope.$parent.government.identifier"></verify-single-record>
-                                            </div> -->
                                          </div>
                                     </div>
                                 </div>
