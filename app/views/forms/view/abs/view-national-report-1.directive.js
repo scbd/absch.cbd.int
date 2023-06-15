@@ -8,7 +8,7 @@ import '~/views/forms/view/directives/view-record-reference.directive';
 import viewNr1T from '~/app-text/views/forms/view/abs/view-national-report.json';
 import numbers from '~/app-text/numbers.json';
 
-	app.directive("viewNpbNationalReport1", ['translationService', function (translationService) {
+	app.directive("viewNationalReport1", ['translationService', function (translationService) {
 		return {
 			restrict   : "EAC",
 			template: template ,
