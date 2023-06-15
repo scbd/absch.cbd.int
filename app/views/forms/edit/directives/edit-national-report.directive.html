@@ -1,4 +1,4 @@
-<div>
+<div class="edit-national-report">
     <div class="row">
         <div class="col-xs-12">
             <ul class="page-tabs nav nav-tabs mb-3" id="nrTabs">
@@ -40,7 +40,7 @@
                                         <div class="col-md-12" style="padding:10px;position: relative;" block-region
                                             activate="isQuestionDisabled(question)" skip-loading-icon="true">
                                             <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
-                                                <div class="form-group"
+                                                <div class="km-control-group"
                                                     ng-class="{'has-error' : hasError(question.key) }"
                                                     style="margin-bottom:5px">
                                                     <label name="{{::question.key}}" for="{{::question.key}}"
@@ -73,7 +73,7 @@
                                                             activate="isQuestionDisabled(subQuestion)"
                                                             skip-loading-icon="true">
 
-                                                            <div class="form-group"
+                                                            <div class="km-control-group"
                                                                 ng-class="{'has-error' : hasError(subQuestion.key) }"
                                                                 style="margin-bottom:5px">
                                                                 <label name="{{::subQuestion.key}}"
@@ -120,8 +120,7 @@
                 <span class="m-2 fw-bold" ng-if="isBCH">{{::('editNRT.question'|$translate)}}:</span>
                 <li class="nav-item" ng-repeat="tab in reportTabs" ng-class="{'active': $index==activeTab-1}"
                     ng-click="setTab($index,true)" style="cursor: hand">
-                    <a ng-class="{'active': $index==0}" rel="noopener" class="nav-link" translation-url
-                        href="#tab{{$index}}" data-bs-toggle="tab">
+                    <a ng-class="{'active': $index==0}" rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
                         <span ng-bind="::tab.title"></span>
                     </a>
                 </li>
@@ -129,8 +128,8 @@
         </div>
     </div>
     <script type="text/ng-template" id="question" trados-translation="true">
-            <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
-                <div class="col-md-8" style="padding-left: 5px;">
+            <div style="padding:10px 3px" class="col-md-12">
+                <div class="col-md-12" style="padding-left: 5px;">
                     <div ng-switch="question.type">
                         <div ng-switch-when="option|term" ng-switch-when-separator="|">
                             <div ng-switch="question.multiple">
@@ -196,7 +195,7 @@
                     ng-model="binding[question.key].additionalInformation" locales="locales" ></div>
                 </div>
             <div class="mt-2 control-group">
-                <label class="ng-binding">URL and website name</label>
+                <label class="ng-binding">{{::('editNRT.websiteName'|$translate)}}</label>
                 <div km-link name="question{{question.key}}_link" ng-model="binding[question.key].links" allow-link="true"
                      allow-file="true" identifier="identifier" ng-change="updateAnswer(question)"></div>
             </div>
