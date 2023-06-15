@@ -20,12 +20,11 @@
                         identifier="document.header.identifier" ng-model="questionAnswers"
                         ng-change="onQuestionAnswerChange(questionAnswers)">
                     </edit-national-report>
-                    <!-- ToDo: use verify single record -->
-                    <!-- <div ng-if="exportVueComponent && document.government">
+                    <div ng-if="exportVueComponent && document.government">
                         <verify-single-record ng-vue="exportVueComponent" 
                             schema="absNationalReport1" :government="document.government.identifier">
                         </verify-single-record>
-                    </div> -->
+                    </div>
                 </form>
                 </edit-form>
                 <review-form>

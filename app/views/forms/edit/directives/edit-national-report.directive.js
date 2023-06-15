@@ -21,7 +21,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
-                identifier: '@',
+                identifier: '=',
                 locales: '='
             },
             link: function ($scope, $element, $attrs, ngModelController) {

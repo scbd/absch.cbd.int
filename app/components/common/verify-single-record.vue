@@ -109,7 +109,7 @@ export default {
             }              
             const published   = (records[0]||{}).Items?.find(filterByGovernment);
             const draft       = (records[1]||{}).Items?.find(filterByGovernment);
-            this.existingIdentifier = (published||draft).identifier;
+            this.existingIdentifier = (published||draft)?.identifier;
 
             if (((published || draft) && (!this.$route.params.identifier || this.$route.params.identifier != this.existingIdentifier))) {
                 this.modal = new Modal(this.$refs.verifyModal);
