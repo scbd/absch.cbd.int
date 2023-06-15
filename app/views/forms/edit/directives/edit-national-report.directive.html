@@ -145,7 +145,7 @@
                             </div>
                         </div>
                         <div ng-switch-when="lstring">
-                            <div km-textbox-ml rows=4 name="question.key" 
+                            <div km-textbox-ml name="question.key" 
                                 ng-model="binding[question.key]" locales="locales" ng-change="updateAnswer(question)"></div>
                         </div>
                         <div ng-switch-when="lstringRte">
@@ -163,9 +163,10 @@
                             {{question}}
                         </div>
                     </div>
+                    <!-- ToDo: need condition if question.lstring or question.lstringRte  -->
                     <div ng-if="question.additionalInformation">
                         <label>{{question.additionalInformation[0].title}} </label>
-                        <div  km-textbox-ml rows=4 name="{{question.key}}additionalInformation"  ng-change="updateAnswer(question)"
+                        <div  km-textbox-ml name="{{question.key}}additionalInformation"  ng-change="updateAnswer(question)"
                         ng-model="binding[question.key].additionalInformation" locales="locales"></div>
                     </div>
                 </div>
