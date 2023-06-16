@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-if="isLoading" class="text-warning fs-5 loadingIcon">
-            <loading caption="Validating if record exists for the government..."/>
+        <div v-if="isLoading" class="fs-5">
+            <LoadingModal caption="Validating if record exists for the government..."/>
         </div>
         <div class="modal fade" ref="verifyModal" data-bs-backdrop="static" data-bs-keyboard="false" 
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">      
@@ -36,16 +36,16 @@
 </template>
   
 <script>
-import DocumentShareApi from "~/api/document-share"; // move to common file if required
+import KmDocumentApi from "~/api/km-document";
 import { Modal } from "bootstrap";
 import i18n from '../../app-text/components/common/verify-single-record.json';
-import Loading  from '~/components/common/loading.vue'
+import LoadingModal  from '~/components/common/loading-modal.vue'
 
-const documentShareApi = new DocumentShareApi();
+const kmDocumentApi = new KmDocumentApi();
 
 export default {
     name: 'verifySingleRecord',
-    components : { Modal, Loading },
+    components : { Modal, LoadingModal },
     props: ["schema", "government"],
     data(){
         return {
@@ -102,7 +102,7 @@ export default {
             let queryDraft = {...query};
             queryDraft.collection = 'mydraft';
 
-            const records = await Promise.all([documentShareApi.queryDocuments(query),documentShareApi.queryDocuments(queryDraft)]);
+            const records = await Promise.all([kmDocumentApi.queryDocuments(query),kmDocumentApi.queryDocuments(queryDraft)]);
 
             const filterByGovernment = function(item){
                 return item?.metadata?.government == government
@@ -123,11 +123,3 @@ export default {
     i18n: { messages:{ en: i18n }} 
 }
 </script>
-<style>
-    .loadingIcon {
-    top: 39.5%;
-    position: absolute;
-    left: 37%;
-    z-index: 1;
-    }
-</style>
