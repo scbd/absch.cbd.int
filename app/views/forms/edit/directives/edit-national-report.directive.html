@@ -163,11 +163,14 @@
                             {{question}}
                         </div>
                     </div>
-                    <!-- ToDo: need condition if question.lstring or question.lstringRte  -->
-                    <div ng-if="question.additionalInformation">
+                    <div ng-if="question.additionalInformation" class="mt-3">
                         <label>{{question.additionalInformation[0].title}} </label>
-                        <div  km-textbox-ml name="{{question.key}}additionalInformation"  ng-change="updateAnswer(question)"
-                        ng-model="binding[question.key].additionalInformation" locales="locales"></div>
+                        <div ng-if="question.additionalInformation[0].type === 'lstring'"  km-textbox-ml name="{{question.key}}_additionalInformation"  ng-change="updateAnswer(question)"
+                            ng-model="binding[question.key].additionalInformation" locales="locales"></div>
+
+                        <div ng-if="question.additionalInformation[0].type === 'lstringRte'"  km-rich-textbox name="{{question.key}}_additionalInformation"  ng-change="updateAnswer(question)"
+                            ng-model="binding[question.key].additionalInformation" locales="locales"></div>
+
                     </div>
                 </div>
                 <div class="col-md-4" ng-if="question.showPrevious">
