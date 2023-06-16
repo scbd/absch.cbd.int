@@ -159,7 +159,7 @@
                                     <div class="col-md-8" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="Q005"
                                             caption="{{::('numbers.five'|$translate)}}. {{::('editNRT.ifNotPartyToCP'|$translate)}}">
-                                            <div km-yes-no required ng-model="formScope.$parent.document.Q005"
+                                            <div km-yes-no required ng-model="formScope.$parent.document.Q005.value"
                                                 locales="formScope.$parent.document.header.languages"></div>
                                         </div>
                                     </div>
@@ -174,7 +174,7 @@
                                     <div class="col-md-8" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="Q006"
                                             caption="{{::('numbers.six'|$translate)}}. {{::('editNRT.provideDetails'|$translate)}}">
-                                            <div km-textbox-ml ng-model="formScope.$parent.document.Q006" placeholder=""
+                                            <div km-textbox-ml ng-model="formScope.$parent.document.Q006.value" placeholder=""
                                                 locales="formScope.$parent.document.header.languages"></div>
                                         </div>
                                     </div>

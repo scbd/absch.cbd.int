@@ -2499,7 +2499,7 @@ export const absNationalReport1 = [
                {
                   "field":"furtherInfo",
                   "title" : nr1T.additionalInformation,
-                  "type":"string"
+                  "type":"lstring"
                }
             ]
          },
