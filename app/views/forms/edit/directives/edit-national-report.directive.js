@@ -21,7 +21,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
-                identifier: '@',
+                identifier: '=',
                 locales: '='
             },
             link: function ($scope, $element, $attrs, ngModelController) {
@@ -51,7 +51,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                         $("ul.page-tabs").find('#tab' + index).parents('li').addClass("active");
                     }, 200);
                     $scope.activeTab = index + 1;
-                    $scope.reportTabs[index].render = true;
+                    // $scope.reportTabs[index].render = true; // ToDo: remove 
                 }
 
                 $scope.updateAnswer = function (question, baseQuestionNumber) {

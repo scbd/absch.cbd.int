@@ -1,13 +1,8 @@
 <div>
     <edit-header></edit-header>
-    <style>
-        .block-position {
-            position: relative;
-        }
-    </style>
     <div class="innerPageEditForm">
         <div class="registerpage-content edit-national-report" style="padding-bottom:30px;"
-            ng-class="{'block-position' : blockEditForm || isLoading()}">
+            ng-class="{'position-relative' : blockEditForm || isLoading()}">
             <div block-region activate="blockEditForm || isLoading()"></div>
             <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
                 document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
@@ -20,12 +15,11 @@
                         identifier="document.header.identifier" ng-model="questionAnswers"
                         ng-change="onQuestionAnswerChange(questionAnswers)">
                     </edit-national-report>
-                    <!-- ToDo: use verify single record -->
-                    <!-- <div ng-if="exportVueComponent && document.government">
+                    <div ng-if="exportVueComponent && document.government && isCountryChange">
                         <verify-single-record ng-vue="exportVueComponent" 
                             schema="absNationalReport1" :government="document.government.identifier">
                         </verify-single-record>
-                    </div> -->
+                    </div>
                 </form>
                 </edit-form>
                 <review-form>

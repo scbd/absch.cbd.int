@@ -14,7 +14,7 @@
                 <div ng-if="section.footnote" ng-bind-html="section.footnote" style="font-size:10px;padding:10px"></div>
             </div>
             <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px" class="row"
-                ng-class="{'disabled': !document[question.key] && question.type!= 'legend' && !question.questions}">
+                ng-class="{'disabled': !document[question.key] && question.type!= 'legend' && !question.questions, 'isLegend': question.type == 'legend'}">
                 <div ng-include="'question-answer'"></div>
 
                 <div ng-if="question.questions" ng-repeat="subQuestion in question.questions"
@@ -26,7 +26,7 @@
         </div>
         <script type="text/ng-template" id="question-answer">
 
-            <div style="padding:10px;">
+            <div>
 
                 <div style="padding-left:0px;padding-right: 0px;">
                     <strong>
@@ -58,19 +58,19 @@
                 
                     <div ng-switch-when="lstring">
                         <div comapre-val>
-                            <km-value-ml value="document[question.key]" locales="locale"></km-value-ml>
+                            <km-value-ml value="document[question.key].value" locales="locale"></km-value-ml>
                         </div>
                     </div>
                 
                     <div ng-switch-when="lstringRte">
                         <div comapre-val>
-                            <km-value-ml value="document[question.key]" html locales="locale"></km-value-ml>
+                            <km-value-ml value="document[question.key].value" html locales="locale"></km-value-ml>
                         </div>
                     </div>
                 
                     <div ng-switch-when="int">
                         <div comapre-val>
-                            <km-value-ml value="document[question.key]" locales="locale"></km-value-ml>
+                            <km-value-ml value="document[question.key].value" locales="locale"></km-value-ml>
                         </div>
                     </div>
                 
