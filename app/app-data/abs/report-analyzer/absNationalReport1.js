@@ -1,4 +1,4 @@
-﻿import nr1T from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
+import nr1T from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
 
 export const absNationalReport1 = [
    {
@@ -2494,14 +2494,14 @@ export const absNationalReport1 = [
                   "title": nr1T.part_XII_question54_c_option1_title,
                   "type": "int"
                }
-            ],
-            "additionalInformation":[ // ToDo need to verify
-               {
-                  "field":"furtherInfo",
-                  "title" : nr1T.additionalInformation,
-                  "type":"lstring"
-               }
             ]
+         },
+         {
+            "key": "Q054_b",
+            "section": "Part-XII",
+            "number": "",
+            "type": "lstring",
+            "title": nr1T.additionalInformation,
          },
 
          {
