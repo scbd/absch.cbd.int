@@ -468,6 +468,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					async function fetchEditDirectives(schema){
 
 						if(schema == 'absNationalReport'                ){ return await import('~/views/forms/view/abs/view-abs-national-report.directive') };
+						if(schema == 'absNationalReport1'                ){ return await import('~/views/forms/view/abs/view-national-report-1.directive') };
 						if(schema == 'absCheckpoint'                    ){ return await import('~/views/forms/view/abs/view-abs-checkpoint.directive') };
 						if(schema == 'absCheckpointCommunique'          ){ return await import('~/views/forms/view/abs/view-abs-checkpoint-communique.directive') };
 						if(schema == 'absPermit'                        ){ return await import('~/views/forms/view/abs/view-abs-permit.directive') };
@@ -496,6 +497,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if(schema == 'cpbNationalReport2'               ){ return await import('~/views/forms/view/bch/view-national-report-2.directive') };
 						if(schema == 'cpbNationalReport3'               ){ return await import('~/views/forms/view/bch/view-national-report-3.directive') };
 						if(schema == 'cpbNationalReport4'               ){ return await import('~/views/forms/view/bch/view-national-report-4.directive') };
+						if(schema == 'cpbNationalReport5'               ){ return await import('~/views/forms/view/bch/view-national-report-5.directive') };
 						if(schema == 'expert'                           ){ return await import('~/views/forms/view/bch/view-biosafety-expert.directive') };
 						if(schema == 'expertAssignment'                 ){ return await import('~/views/forms/view/bch/view-expert-assignment.directive') };
 						if(schema == 'independentRiskAssessment'        ){ return await import('~/views/forms/view/bch/view-risk-assessment.directive') };
