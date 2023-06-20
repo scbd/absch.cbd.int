@@ -116,15 +116,24 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 
-        $scope.onGovernmentChange = function (government) {
-            if (government && $scope.document) {
+        function loadPreviousReport(government){
+           $timeout(function(){
                 $scope.$broadcast('loadPreviousReportEvent', {
-                    government: government.identifier,
+                    government: government,
                     previousAnswersMapping: {
                         schema: 'cpbNationalReport4',
                         mapping: $scope.previousAnswersMapping
                     }
                 });
+            },200);            
+        }
+
+        $scope.onGovernmentChange = function (government) {
+            if (government && $scope.document) {
+                commonjs.getCountry(government.identifier).then(function(country){
+                    $scope.document['Q005'] = { value : country.isParty.toString() };
+                })
+                loadPreviousReport(government.identifier);
             }
         }
         
@@ -186,7 +195,9 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             $scope.setDocument({}).then(function (document) {
                 $scope.questionAnswers = {};
                 if (document && document.header.identifier) {
-
+                    if($routeParams?.identifier && $scope.document.government?.identifier){
+                        loadPreviousReport($scope.document.government.identifier);
+                    }
                     _.forEach(document, function (element, key) {
                         if (/^Q/.test(key)) {//only fields starting with Q
                             $scope.questionAnswers[key] = element;

@@ -3,7 +3,7 @@
         <label class="radio-inline">
             <input type="radio" ng-model="answer.value" ng-value="{{$index}}" name="{{question.key}}"  
                 ng-disabled="ngDisabledFn()" ng-change="updateAnswer()"/>
-            <span ng-bind="option.title"></span>
+            <span ng-bind-html="option.title"></span>
         </label>
     </div>
     <div class="pt-2" ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value">

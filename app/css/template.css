@@ -3428,3 +3428,6 @@ embed-footer{
 .ngdialog.ngdialog-theme-default .ngdialog-content{
     padding: 0px!important;
 }
+.edit-national-report .isLegend {
+    border: none !important;
+}

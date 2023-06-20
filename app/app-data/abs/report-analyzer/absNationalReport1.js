@@ -1,4 +1,4 @@
-﻿import nr1T from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
+import nr1T from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
 
 export const absNationalReport1 = [
    {
@@ -545,7 +545,7 @@ export const absNationalReport1 = [
                {
                   "field":"furtherInfo",
                   "title" : nr1T.additionalInformation,
-                  "type":"string"
+                  "type":"lstringRte"
                }
             ]
          },
@@ -1192,7 +1192,7 @@ export const absNationalReport1 = [
             "section": "Part-V",
             "number": "24",
             "type": "link",
-            "title": nr1T.part_V_question24_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
 
@@ -1351,7 +1351,7 @@ export const absNationalReport1 = [
             "section": "Part-VI",
             "number": "29",
             "type": "link",
-            "title": nr1T.part_VI_question29_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
 
@@ -1555,7 +1555,7 @@ export const absNationalReport1 = [
                {
                   "question": "Q035",
                   "values": [
-                     "false"
+                     "true"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -1563,7 +1563,7 @@ export const absNationalReport1 = [
                {
                   "question": "Q036",
                   "values": [
-                     "false"
+                     "true"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -1571,7 +1571,7 @@ export const absNationalReport1 = [
                {
                   "question": "Q037",
                   "values": [
-                     "false"
+                     "true"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -1579,7 +1579,7 @@ export const absNationalReport1 = [
                {
                   "question": "Q038",
                   "values": [
-                     "false"
+                     "true"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -1587,7 +1587,7 @@ export const absNationalReport1 = [
                {
                   "question": "Q039",
                   "values": [
-                     "false"
+                     "true"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -1595,7 +1595,7 @@ export const absNationalReport1 = [
                {
                   "question": "Q040",
                   "values": [
-                     "false"
+                     "true"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -1603,7 +1603,7 @@ export const absNationalReport1 = [
                {
                   "question": "Q041",
                   "values": [
-                     "false"
+                     "true"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
@@ -2494,14 +2494,14 @@ export const absNationalReport1 = [
                   "title": nr1T.part_XII_question54_c_option1_title,
                   "type": "int"
                }
-            ],
-            "additionalInformation":[ // ToDo need to verify
-               {
-                  "field":"furtherInfo",
-                  "title" : nr1T.additionalInformation,
-                  "type":"string"
-               }
             ]
+         },
+         {
+            "key": "Q054_b",
+            "section": "Part-XII",
+            "number": "",
+            "type": "lstring",
+            "title": nr1T.additionalInformation,
          },
 
          {
@@ -2841,7 +2841,7 @@ export const absNationalReport1 = [
             "section": "Part-XV",
             "number": "66",
             "type": "option",
-            "title": nr1T.part_XIV_question66_title,
+            "title": nr1T.part_XV_question66_title,
             "multiple": false,
             "options": [
                {
@@ -2873,7 +2873,7 @@ export const absNationalReport1 = [
             "section": "Part-XV",
             "number": "66.1",
             "type": "option",
-            "title": nr1T.part_XIV_question66_1_title,
+            "title": nr1T.part_XV_question66_1_title,
             "multiple": false,
             "mandatory": true,
             "options": [
