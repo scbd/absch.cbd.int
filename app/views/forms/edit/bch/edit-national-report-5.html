@@ -15,7 +15,7 @@
                         identifier="document.header.identifier" ng-model="questionAnswers"
                         ng-change="onQuestionAnswerChange(questionAnswers)">
                     </edit-national-report>
-                    <div ng-if="exportVueComponent && document.government && isCountryChange">
+                    <div ng-if="exportVueComponent && documentReady && document && document.government && isCountryChange">
                         <verify-single-record ng-vue="exportVueComponent" 
                             schema="cpbNationalReport5" :government="document.government.identifier">
                         </verify-single-record>
@@ -154,7 +154,7 @@
                                     <div class="col-md-12" style="padding-left: 5px;">
                                         <div class="km-control-group d-inline" bold="true" name="Q005"
                                             caption="{{::('numbers.five'|$translate)}}. {{::('editNRT.ifNotPartyToCP'|$translate)}}">
-                                            <div km-yes-no required ng-model="formScope.$parent.document.Q005.value"
+                                            <div km-yes-no required ng-disabled="formScope.$parent.document.government" ng-model="formScope.$parent.document.Q005.value"
                                                 locales="formScope.$parent.document.header.languages"></div>
                                         </div>
                                     </div>

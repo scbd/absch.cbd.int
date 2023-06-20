@@ -131,6 +131,9 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
+                commonjs.getCountry(government.identifier).then(function(country){
+                    $scope.document['Q005'] = { value : country.isParty.toString() };
+                })
                 $scope.isCountryChange = true;
                 loadPreviousReport(government.identifier);
             }
