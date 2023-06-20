@@ -21,6 +21,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
+                validationReport: "=",
                 identifier: '=',
                 locales: '='
             },
