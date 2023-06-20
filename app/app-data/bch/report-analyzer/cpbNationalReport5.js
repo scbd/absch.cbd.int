@@ -602,6 +602,7 @@ export const cpbNationalReport5 = [
                   "section":"Article2",
                   "number":"",
                   "type":"int",
+                  "mandatory":true,
                   "title": nr5T.articles7_10_question26_question0_title,
                   "multiple":false
                },
