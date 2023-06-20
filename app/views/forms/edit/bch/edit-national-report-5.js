@@ -90,7 +90,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             }
         ];
         
-        $scope.isCountryChange = false;
         $scope.exportVueComponent = {
             components: { verifySingleRecord }
         }
@@ -134,7 +133,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 commonjs.getCountry(government.identifier).then(function(country){
                     $scope.document['Q005'] = { value : country.isParty.toString() };
                 })
-                $scope.isCountryChange = true;
                 loadPreviousReport(government.identifier);
             }
         }

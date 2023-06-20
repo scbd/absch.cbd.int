@@ -109,7 +109,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         }
         ];
 
-        $scope.isCountryChange = false;
         $scope.exportVueComponent = {
             components: { verifySingleRecord }
         }
@@ -129,7 +128,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
-                $scope.isCountryChange = true;
                 // ToDo: Once Mapping is completed
                 // $scope.$broadcast('loadPreviousReportEvent', {
                 //     government: government.identifier,
