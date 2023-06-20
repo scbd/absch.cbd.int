@@ -11,7 +11,9 @@
 
 		<div class="section-pane panel panel-default" style="margin-bottom:3px!important">
 
-			<div class="panel-heading">{{::('viewNr5T.generalInfo'|$translate)}}</div>
+			<div class="panel-heading">
+			<strong>{{::('viewNr5T.generalInfo'|$translate)}}</strong>
+			</div>
 			<div class="panel-body" style="padding:0px">
 				<div style="margin:5px" class="row">
 					<div ng-show="document.government">
@@ -80,7 +82,7 @@
 						</br>
 						<label>{{::('numbers.six'|$translate)}}. {{::('viewNr5T.q006_title'|$translate)}} </label>
 						<div comapre-val>
-							<km-value-ml value="document.Q006" locales="locale"></km-value-ml>
+							<km-value-ml value="document.Q006.value" locales="locale"></km-value-ml>
 						</div>
 					</div>
 

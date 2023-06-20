@@ -1,4 +1,4 @@
-﻿<div>
+<div>
 
     <div class="section-pane panel panel-default" ng-repeat="section in reportQuestions" id="section{{$index+1}}" style="margin-bottom:3px!important">
         <div class="panel-heading">
@@ -13,12 +13,12 @@
             <div comapre-val>
                 <div ng-if="section.footnote" ng-bind-html="section.footnote" style="font-size:10px;padding:10px"></div>
             </div>
-            <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px" class="row"
+            <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px" class="row py-3"
                 ng-class="{'disabled': !document[question.key] && question.type!= 'legend' && !question.questions, 'isLegend': question.type == 'legend'}">
                 <div ng-include="'question-answer'"></div>
 
                 <div ng-if="question.questions" ng-repeat="subQuestion in question.questions"
-                    style="border:1px solid #eee;margin:10px" class="row"
+                    style="border:1px solid #eee;margin:10px" class="row  py-3"
                     ng-class="{'disabled': !document[subQuestion.key]}">
                     <div ng-include="'question-answer'" ng-if="question.questions" onload="question=subQuestion"></div>
                 </div>
