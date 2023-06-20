@@ -65,11 +65,14 @@
 						<span ng-bind-html="term.title||term.name | lstring:locale"></span>
 				</label>
 				<div ng-if="(otherTermIdentifier==term.identifier ||term.type) && !term.multiple && selectedItems[term.identifier].selected">
-					<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
-					ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
-					<div ng-if="term.type=='lstring'" style="padding-left:50px;"> 
-						<strong>({{::('kmTermCheckT.pleaseSpecify'|$translate)}}) </strong>
-						<div km-textbox-ml name="custom value"  placeholder="{{::customValuePlaceholder}}"
+					<div style="padding-left:15px;"> 
+						<label name="chk_{{term.identifier}}_customValue" for="chk_{{term.identifier}}_customValue">
+							<strong >{{::('kmTermCheckT.pleaseSpecify'|$translate)}} </strong>
+						</label>
+						<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
+							ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
+					
+						<div ng-if="term.type=='lstring'" km-textbox-ml name="custom value"  placeholder="{{::customValuePlaceholder}}"
 							required ng-model="selectedItems[term.identifier].customValue" locales="locales"  ng-change="save()"></div>
 					</div>
 				</div>
