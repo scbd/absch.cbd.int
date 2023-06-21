@@ -20,6 +20,7 @@ export const absNationalReport1 = [
             "title": nr1T.part_II_question3_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_II_question3_footnote_4,
             "options": [
                {
                   "value": "true",
@@ -228,6 +229,7 @@ export const absNationalReport1 = [
    {
       "key": "Part-III",
       "title": nr1T.part_III_title,
+      "footnote": nr1T.part_III_title_footnote_5,
       "questions": [
          {
             "key": "Q007",
@@ -424,6 +426,7 @@ export const absNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question10_1_title,
             "multiple": false,
+            "footnote": nr1T.part_III_question10_1_title_footnote_6,
             "options": [
                {
                   "value": "true",
@@ -452,24 +455,25 @@ export const absNationalReport1 = [
             "title": nr1T.part_III_question11_title,
             "multiple": false,
             "mandatory": true,
+            "footnote":nr1T.part_III_question11_addInfo_footnote_7,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>7</sup>"
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>7</sup>"
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>7</sup>"
                }
             ]
          },
@@ -492,24 +496,25 @@ export const absNationalReport1 = [
             "title": nr1T.part_III_question12_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_III_question12_addInfo_footnote_8,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yesInAllCases,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>8</sup>"
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>8</sup>"
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>8</sup>"
                }
             ],
             "validations": [
@@ -591,24 +596,25 @@ export const absNationalReport1 = [
             "title": nr1T.part_III_question13_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_III_question13_addInfo_footnote_9,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>"
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>"
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>"
                }
             ],
             "validations": [
@@ -630,6 +636,7 @@ export const absNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question13_1_title,
             "multiple": false,
+            "footnote": nr1T.part_III_question13_1_title_footnote_10,
             "options": [
                {
                   "value": "true",
@@ -672,24 +679,25 @@ export const absNationalReport1 = [
             "title": nr1T.part_IV_question15_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_IV_question15_addInfo_footnote_11,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>11</sup>"
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>11</sup>"
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>11</sup>"
                }
             ]
          },
@@ -708,24 +716,25 @@ export const absNationalReport1 = [
             "title": nr1T.part_IV_question16_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_IV_question16_addInfo_footnote_12,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>12</sup>"
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>12</sup>"
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>12</sup>"
                }
             ]
          },
@@ -744,24 +753,25 @@ export const absNationalReport1 = [
             "title": nr1T.part_IV_question17_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_IV_question17_addInfo_footnote_13,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>13</sup>"
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>13</sup>"
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>13</sup>"
                }
             ]
          },
@@ -794,24 +804,25 @@ export const absNationalReport1 = [
             "title": nr1T.part_V_question19_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_IV_question19_addInfo_footnote_14,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>14</sup>"
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>14</sup>"
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>14</sup>"
                }
             ],
             "validations": [
@@ -999,24 +1010,28 @@ export const absNationalReport1 = [
             "title": nr1T.part_V_question21_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_V_question21_title_footnote_15,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yesInAllCases,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>16</sup>",
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesInSomeCases,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>16</sup>",
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>16</sup>",
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
                }
             ],
             "validations": [
@@ -1130,24 +1145,25 @@ export const absNationalReport1 = [
             "title": nr1T.part_V_question22_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_V_question22_addInfo_footnote_18,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>18</sup>"
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>18</sup>"
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse+"<sup>18</sup>"
                }
             ]
          },
