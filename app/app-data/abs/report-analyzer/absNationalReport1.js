@@ -2284,7 +2284,7 @@ export const absNationalReport1 = [
                },
                {
                   "value": "false.na",
-                  "title": nr1T.notApplicable,
+                  "title": nr1T.notApplicable+'<sup>31</sup>',
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse+'<sup>32</sup>',
                   "footnote": nr1T.part_X_question48_title_footnote_32
