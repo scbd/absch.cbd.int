@@ -10,16 +10,11 @@
                 on-error="onError(error, errorCode)">
                 <edit-form>
                 <form class="editForm" name="editForm">
-                    <edit-national-report ng-if="documentReady && document && questionAnswers" report-tabs="tabs"
+                    <edit-national-report ng-if="documentReady && document && questionAnswers" report-tabs="tabs" validation-report="validationReport"
                         questions="questions" locales="document.header.languages"
                         identifier="document.header.identifier" ng-model="questionAnswers"
                         ng-change="onQuestionAnswerChange(questionAnswers)">
                     </edit-national-report>
-                    <div ng-if="exportVueComponent && documentReady && document && document.government">
-                        <verify-single-record ng-vue="exportVueComponent" 
-                            schema="absNationalReport1" :government="document.government.identifier">
-                        </verify-single-record>
-                    </div>
                 </form>
                 </edit-form>
                 <review-form>
@@ -27,6 +22,11 @@
                         allow-drafts="true"></view-national-report-1>
                 </review-form>
             </workflow-arrow-buttons>
+            <div ng-if="exportVueComponent && documentReady && document && document.government">
+                <verify-single-record ng-vue="exportVueComponent" 
+                    schema="absNationalReport1" :government="document.government.identifier">
+                </verify-single-record>
+            </div>
         </div>
     </div>
 
@@ -101,6 +101,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div style="font-size:10px;padding:10px" ng-bind-html="('editNRT.part_II_question2_footnote_3'|$translate)">
+                                
                                 </div>
                             </div>
                         </div>

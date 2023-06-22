@@ -1,5 +1,6 @@
 {
     "message": "Only one record is allowed for each government, the record already exists for your government, you will be redirected to the record in",
     "seconds": "seconds.",
-    "redirectNow": "Redirect now"
+    "redirectNow": "Redirect now",
+    "validatingRecord": "Validating if record exists for the government..."
 }

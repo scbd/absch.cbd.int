@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isLoading" class="fs-5">
-            <LoadingModal caption="Validating if record exists for the government..."/>
+            <LoadingModal :caption="$t('validatingRecord')"/>
         </div>
         <div class="modal fade" ref="verifyModal" data-bs-backdrop="static" data-bs-keyboard="false" 
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">      
@@ -63,7 +63,6 @@ export default {
     },
     watch: {
         government: function (newValue, oldValue) {
-            console.log(newValue);
             this.countryHasReport(this.government);
         } 
     },
