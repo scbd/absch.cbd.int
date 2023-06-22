@@ -15,11 +15,6 @@
                         identifier="document.header.identifier" ng-model="questionAnswers"
                         ng-change="onQuestionAnswerChange(questionAnswers)">
                     </edit-national-report>
-                    <div ng-if="exportVueComponent && documentReady && document && document.government">
-                        <verify-single-record ng-vue="exportVueComponent" 
-                            schema="cpbNationalReport5" :government="document.government.identifier">
-                        </verify-single-record>
-                    </div>
                 </form>
                 </edit-form>
                 <review-form>
@@ -27,6 +22,11 @@
                         allow-drafts="true"></view-cpb-national-report-5>
                 </review-form>
             </workflow-arrow-buttons>
+            <div ng-if="exportVueComponent && documentReady && document && document.government">
+                <verify-single-record ng-vue="exportVueComponent" 
+                    schema="cpbNationalReport5" :government="document.government.identifier">
+                </verify-single-record>
+            </div>
         </div>
     </div>
 
