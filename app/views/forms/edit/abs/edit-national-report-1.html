@@ -10,7 +10,7 @@
                 on-error="onError(error, errorCode)">
                 <edit-form>
                 <form class="editForm" name="editForm">
-                    <edit-national-report ng-if="documentReady && document && questionAnswers" report-tabs="tabs"
+                    <edit-national-report ng-if="documentReady && document && questionAnswers" report-tabs="tabs" validation-report="validationReport"
                         questions="questions" locales="document.header.languages"
                         identifier="document.header.identifier" ng-model="questionAnswers"
                         ng-change="onQuestionAnswerChange(questionAnswers)">

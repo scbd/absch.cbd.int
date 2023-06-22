@@ -21,6 +21,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 reportTabs: "=",
                 questions: "=",
                 customValidations: "=",
+                validationReport: "=",
                 identifier: '=',
                 locales: '='
             },
@@ -254,12 +255,18 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                             _.forEach(section.questions, function (question) {
 
-                                if (question.type != 'sub-section')
-                                    transformQuestion(question)
+                                if (question.type != 'sub-section') {
+                                    $timeout(function () {
+                                        transformQuestion(question);
+                                    },1);
+                                }
                                 else {
                                     question.visible = true;
                                     _.forEach(question.questions, function (subQuestion) {
-                                        transformQuestion(subQuestion);//, question.key1
+                                        $timeout(function () {
+                                            transformQuestion(subQuestion);//, question.key1
+                                        },1);
+
                                     })
                                 }
 
