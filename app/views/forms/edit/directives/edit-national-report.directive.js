@@ -255,8 +255,11 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                             _.forEach(section.questions, function (question) {
 
-                                if (question.type != 'sub-section')
-                                    transformQuestion(question)
+                                if (question.type != 'sub-section') {
+                                    $timeout(function () {
+                                        transformQuestion(question);
+                                    },100);
+                            }
                                 else {
                                     question.visible = true;
                                     _.forEach(question.questions, function (subQuestion) {
