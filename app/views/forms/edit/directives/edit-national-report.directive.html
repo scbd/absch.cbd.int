@@ -174,17 +174,17 @@
                             style="font-size:10px;padding:10px"></div>
                     </div>
                 </div>
-                <div class="col-md-4" ng-if="question.showPrevious">
+                <div class="col-md-12 bg-light bg-gradient mt-2" ng-if="question.showPrevious">
                     <div style="border: 2px solid #fff;padding:5px">
                         <div class="alert alert-info" ng-if="previousAnswerMapping[question.key].showMessage">
                             * {{::('editNRT.previousAnswerMapping'|$translate)}}
                         </div>
                         <div>
-                            <strong ng-bind="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong>
+                            <strong ng-bind-html="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong>
                         </div>
-                        <div class="card card-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
+                        <div class="card card-sm mt-2" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
                             ng-bind="::((previousAnswerMapping[question.key].previousQuestion.answer.value||previousAnswerMapping[question.key].previousQuestion.answer)|lstring)"></div>
-                        <div class="card card-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
+                        <div class="card card-sm mt-2" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
                             <ul class="list">
                                 <li ng-repeat="val in previousAnswerMapping[question.key].previousQuestion.answer" ng-bind="::((val.value||val)|lstring)"></li>
                             </ul>
