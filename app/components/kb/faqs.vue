@@ -13,7 +13,11 @@
             <main class="mb-4">
                 <details v-for="article in faqs" class="card mb-3">
                     <summary class="fs-5 p-2">
-						<span class="card-title">{{article.title|lstring($locale)}}</span>
+						<a class="ps-2 bold small text-secondary view-article-link" target="_new"
+						:href="`${articleUrl(article, getTag(article.adminTags) )}`">
+						<i class="fa fa-external-link"></i>
+					</a>
+					<span class="card-title">{{article.title|lstring($locale)}}</span>
 					</summary>
                     <div class="p-2 faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)">
 					</div>   
@@ -72,10 +76,28 @@
 				const tagTitle 	 = (tagDetails?.title||'');
                 return this.getUrl(tagTitle, undefined, tag);
 			},
+
+			getTag(adminTags) {
+				var realm = this.$realm.is('BCH') ? 'bch' : 'absch';
+				//console.log(realm);
+				if(adminTags && adminTags.length >= 2){
+					if(adminTags[0] == realm)
+						return  adminTags[1];
+					else
+						return  adminTags[0];
+				}
+				else return realm;
+        	},
+
+			articleUrl(article, tag) {
+            	return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
+        	},
+
 			onChangePage(pageNumber) {
 				this.pageNumber = pageNumber;
 				this.article=[];
 				this.loading = true;
+				window.scrollTo(0,0);
 				this.loadFaqs(pageNumber);
 			},
 			async loadFaqs(pageNumber){
@@ -119,3 +141,10 @@
 		i18n: { messages:{ en: i18n }}
 	}
 </script>
+<style>
+.view-article-link {
+	position: absolute; 
+	right: 5px; 
+	top: 10px;
+}
+</style>
