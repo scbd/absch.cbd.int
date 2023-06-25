@@ -24,8 +24,7 @@
                                     <h5 class="card-title"><a class="link-dark"
                                             :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{article.title|lstring($locale)}}</a>
                                     </h5>
-                                    <p v-if="article.summary" class="card-text h-100">
-                                        {{article.adminTags[0]}} - {{article.adminTags[1]}}
+                                        <p v-if="article.summary" class="card-text h-100">
                                         <a class="link-dark" :href="`${articleUrl(article, getTag(article.adminTags) )}`">
                                             {{article.summary|lstring($locale)}}
                                         </a>
@@ -115,6 +114,7 @@ export default {
         onChangePage(pageNumber) {
             this.article = [];
             this.loading = true;
+            window.scrollTo(0,0);
             this.loadArticles(pageNumber);
         },
         async loadArticles(pageNumber, text) {
