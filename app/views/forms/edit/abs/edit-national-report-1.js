@@ -129,15 +129,13 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
-                $scope.isCountryChange = true;
-                // ToDo: Once Mapping is completed
-                // $scope.$broadcast('loadPreviousReportEvent', {
-                //     government: government.identifier,
-                //     previousAnswersMapping: {
-                //         schema: 'absNationalReport',
-                //         mapping: $scope.previousAnswersMapping
-                //     }
-                // });
+                $scope.$broadcast('loadPreviousReportEvent', {
+                    government: government.identifier,
+                    previousAnswersMapping: {
+                        schema: 'npInterimNationalReport1',
+                        mapping: $scope.previousAnswersMapping
+                    }
+                });
             }
         }
         
