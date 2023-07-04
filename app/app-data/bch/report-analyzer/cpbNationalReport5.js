@@ -5152,25 +5152,19 @@ export const cpbNationalReport5 = [
                "number":"161",
                "type":"option",
                "title": nr5T.nagoya_question161_title,
-               "multiple":false,
+               "multiple":true,
                "options":[
                   {
                      "value":"6BAF09B7-6331-04E6-479D-C1C1B0D55ECD",
-                     "title": nr5T.nagoya_question161_options0_title,
-                     "type":"lstring",
-                     "caption": nr5T.informationOnInstruments
+                     "title": nr5T.nagoya_question161_options0_title
                   },
                   {
                      "value":"0D3A9BB1-B378-174D-F4DD-1217D79D8B21",
-                     "title": nr5T.nagoya_question161_options1_title,
-                     "type":"lstring",
-                     "caption": nr5T.informationOnInstruments
+                     "title": nr5T.nagoya_question161_options1_title
                   },
                   {
                      "value":"BA743C79-B202-4611-16C4-2C7D4678ACEB",
-                     "title": nr5T.nagoya_question161_options2_title,
-                     "type":"lstring",
-                     "caption": nr5T.informationOnInstruments
+                     "title": nr5T.nagoya_question161_options2_title
                   },
                   {
                      "value":"9067DB5B-E33B-655D-83A3-32D4D562618F",
@@ -5178,6 +5172,14 @@ export const cpbNationalReport5 = [
                      
                   }
                ]
+            },
+            {
+               "key":"Q161_a",
+               "section":"Nagoya",
+               "number":"",
+               "type":"lstring",
+               "title": nr5T.informationOnInstruments,
+               "multiple":false
             },
             {
                "key":"Q162",
