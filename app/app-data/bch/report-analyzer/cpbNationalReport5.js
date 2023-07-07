@@ -5316,7 +5316,8 @@ export const cpbNationalReport5 = [
                   },
                   {
                      "value":"false",
-                     "title": nr5T.no
+                     "title": nr5T.no,
+                     "exclusive":true
                   }
                ]
             },

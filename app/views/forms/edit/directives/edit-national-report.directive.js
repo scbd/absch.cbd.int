@@ -134,7 +134,25 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }
                     ngModelController.$setViewValue(_.pickBy($scope.binding, _.identity), 'change'); //ToDo
                 }
+                $scope.onOptionSecleted = function ($element, value, question){
+                    if(question){
+                        console.log($element, value, question);
 
+                        const exclusiveOptions = question.options.find(e=>e.exclusive);
+                        if(exclusiveOptions.length){
+                            // 1. enable all options
+
+                            // 2. verify if exclusive option is selected
+                            // 3. if exclusive selected disable all other
+                                const valueIdentifiers = value?.map(e=>e.identifier)
+                                if(_.intersection(exclusiveOptions, valueIdentifiers).length){
+                                    //dsisable other options
+                                    console.log('exclusive found')
+                                }
+                            // 4. else if exclusive not selected, disable exclusive
+                        }
+                    }
+                }
                 $scope.spaceSubQuestion = function (number) {
                     if ((number || '') == '') return '';
                     return number.replace(/([0-9]{1,3})([a-z])/, '$1 $2') + '. '
