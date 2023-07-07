@@ -3,10 +3,10 @@
     <link href="/app/css/record.css" rel="stylesheet">
     <register-top-menu></register-top-menu>
 
-    <div ng-if="isTRG" class="mt-3 mx-4 p-2 alert alert-danger text-danger">
-        <span ng-if="isBch" ng-bind-html="::('dashboardT.bchTrainingSiteText'|$translate)">
+    <div ng-if="isTrg" class="mt-3 mx-4 p-2 alert alert-danger text-danger">
+        <span ng-if="isBch" ng-bind-html="::('dashboardT.bchTrainingSiteMessage'|$translate)">
         </span>
-        <span ng-if="isAbs" ng-bind-html="::('dashboardT.absTrainingSiteText'|$translate)">
+        <span ng-if="isAbs" ng-bind-html="::('dashboardT.absTrainingSiteMessage'|$translate)">
         </span>
     </div>
     <div class="innerPageContent register-content m-0 p-3">

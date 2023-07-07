@@ -31,7 +31,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             $scope.showRecords      = true;
             $scope.isBch            = realm.is('BCH');
             $scope.isAbs            = realm.is('ABS');
-            $scope.isTRG = realm.value.includes("TRG");
+            $scope.isTrg = realm.value.includes("TRG");
 
             translationService.set('dashboardT', dashboardT);
             var schemaFacets = {};
