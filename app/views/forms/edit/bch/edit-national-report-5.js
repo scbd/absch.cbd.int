@@ -168,7 +168,12 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         }
 
         function is79Or80Or81(questionAnswers) {
-            return (questionAnswers['Q079'] || {}).value == 'true' || (questionAnswers['Q080'] || {}).value == 'true' || (questionAnswers['Q081'] || {}).value == 'true';
+            return (questionAnswers['Q079'] || {}).value == 'true' || 
+                   (questionAnswers['Q079'] || {}).value == 'true.some' || 
+                   (questionAnswers['Q080'] || {}).value == 'true' || 
+                   (questionAnswers['Q080'] || {}).value == 'true.some' || 
+                   (questionAnswers['Q081'] || {}).value == 'true' || 
+                   (questionAnswers['Q081'] || {}).value == 'true.some';
         }
 
         function is162_aOr162_b(questionAnswers) {
