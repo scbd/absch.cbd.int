@@ -122,6 +122,9 @@ export const cpbNationalReport5 = [
                      {
                         "question":"Q010_adq",
                         "type":"@hasValues",
+                        "values":[
+                           "true"
+                        ],
                         "trigger":"visible"
                      }
                   ],
