@@ -14,7 +14,7 @@
                 <details v-for="article in faqs" class="card mb-3">
                     <summary class="fs-5 p-2">
 						<a class="ps-2 bold small text-secondary view-article-link" target="_new"
-						:href="`${articleUrl(article, getTag(article.adminTags) )}`">
+						:href="`${articleUrl(article, getAdminTag() )}`">
 						<i class="fa fa-external-link"></i>
 					</a>
 					<span class="card-title">{{article.title|lstring($locale)}}</span>
@@ -77,16 +77,9 @@
                 return this.getUrl(tagTitle, undefined, tag);
 			},
 
-			getTag(adminTags) {
-				var realm = this.$realm.is('BCH') ? 'bch' : 'absch';
-				//console.log(realm);
-				if(adminTags && adminTags.length >= 2){
-					if(adminTags[0] == realm)
-						return  adminTags[1];
-					else
-						return  adminTags[0];
-				}
-				else return realm;
+			getAdminTag() {
+				return this.$realm.is('BCH') ? 'bch' : 'absch';
+				
         	},
 
 			articleUrl(article, tag) {
