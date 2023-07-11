@@ -2173,7 +2173,7 @@ export const absNationalReport1 = [
          {
             "key": "Q044_a",
             "section": "Part-IX",
-            "number": "",
+            "number": "44.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
@@ -2213,7 +2213,7 @@ export const absNationalReport1 = [
          {
             "key": "Q044_b",
             "section": "Part-IX",
-            "number": "44.1",
+            "number": "44.2",
             "type": "int",
             "title": nr1T.part_IX_question44_1_title,
             "multiple": false,
@@ -2259,7 +2259,7 @@ export const absNationalReport1 = [
          {
             "key": "Q045_a",
             "section": "Part-IX",
-            "number": "",
+            "number": "45.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
@@ -2670,7 +2670,7 @@ export const absNationalReport1 = [
          {
             "key": "Q054_b",
             "section": "Part-XII",
-            "number": "",
+            "number": "54.2",
             "type": "lstring",
             "title": nr1T.additionalInformation,
          },
@@ -2861,7 +2861,7 @@ export const absNationalReport1 = [
          {
             "key": "Q060_a",
             "section": "Part-XIV",
-            "number": "",
+            "number": "60.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
@@ -2891,7 +2891,7 @@ export const absNationalReport1 = [
          {
             "key": "Q060_b",
             "section": "Part-XIV",
-            "number": "60.1",
+            "number": "60.2",
             "type": "int",
             "title": nr1T.part_XIV_question60_1_title,
             "multiple": false
@@ -2961,7 +2961,7 @@ export const absNationalReport1 = [
          {
             "key": "Q062_a",
             "section": "Part-XIV",
-            "number": "",
+            "number": "62.1",
             "type": "option",
             "title": nr1T.pleaseSpecify,
             "multiple": false,
