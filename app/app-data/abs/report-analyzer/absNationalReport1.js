@@ -2936,14 +2936,14 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.provideFurtherInformation+'<sup>39</sup>',
+                  "caption": nr1T.pleaseProvideFurtherInformation+'<sup>39</sup>',
                   "footnote": nr1T.part_XIV_question62_footnote_39
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.provideFurtherInformation+'<sup>39</sup>',
+                  "caption": nr1T.pleaseProvideFurtherInformation+'<sup>39</sup>',
                   "footnote": nr1T.part_XIV_question62_footnote_39
                }
             ],
