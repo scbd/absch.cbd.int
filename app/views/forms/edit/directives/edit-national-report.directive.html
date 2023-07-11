@@ -159,6 +159,10 @@
                         <div ng-switch-when="link">
                             <div ng-include="'link'"></div>
                         </div>
+                        <div ng-switch-when="notes">
+                            <div km-notes name="question.key" 
+                                ng-model="binding[question.key].value" locales="locales" ng-change="updateAnswer(question)"></div>
+                        </div>
                         <div ng-switch-default>
                             {{question}}
                         </div>
