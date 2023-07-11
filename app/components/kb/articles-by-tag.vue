@@ -110,6 +110,7 @@ export default {
             this.pageNumber = pageNumber;
             this.article = [];
             this.loading = true;
+            window.scrollTo(0,0);
             this.loadArticles(pageNumber, this.tag);
         },
         async loadArticles(pageNumber, tag) {
