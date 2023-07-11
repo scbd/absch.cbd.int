@@ -97,7 +97,7 @@
                 </tr>
 
 <!--                <tbody ng-repeat="record in  records">-->
-                <tbody ng-repeat="record in (filteredRecords = (records | filter:statusFilter | orderBy:orderBy))">
+                <tbody class="border-0" ng-repeat="record in (filteredRecords = (records | filter:statusFilter | orderBy:orderBy))">
                     <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
 
                         <td class="ps-1 fs-small-8 w-25">
