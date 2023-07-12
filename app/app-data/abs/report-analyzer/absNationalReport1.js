@@ -327,6 +327,62 @@ export const absNationalReport1 = [
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse
                }
+            ],
+            "validations": [
+               {
+                  "question": "Q009",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type":"@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q010",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type":"@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q011",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type":"@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q012",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type":"@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q013",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type":"@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q014",
+                  "values": [
+                     "true",
+                     "true.some"
+                  ],
+                  "type":"@hasValues",
+                  "trigger": "enable"
+               }
             ]
          },
          {
