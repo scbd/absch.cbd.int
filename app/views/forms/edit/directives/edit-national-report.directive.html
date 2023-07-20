@@ -43,7 +43,8 @@
                                                 <div class="form-group"
                                                     ng-class="{'has-error' : hasError(question.key) }"
                                                     style="margin-bottom:5px">
-                                                    <label name="{{::question.key}}" for="{{::question.key}}"
+                                                    <legend ng-if="question.type == 'legend'" ng-bind-html="::question.title"></legend>
+                                                    <label ng-if="question.type != 'legend'" name="{{::question.key}}" for="{{::question.key}}"
                                                         class="control-label bold d-inline"
                                                         ng-bind-html="::(spaceSubQuestion(question.number) + question.title)"
                                                         ng-required="question.mandatory">
