@@ -20,5 +20,8 @@
     "NR4Info": "Only one record of the fourth national report is allowed for each government, the fourth national report already exists for your government, you will be redirected to the record in",
     "seconds": "seconds.",
     "redirectNow": "Redirect now",
-    "websiteName": "URL and website name"
+    "websiteName": "URL and website name",
+    "notes": "Notes<sup>42</sup>",
+    "notes_footnote": "<sup>42</sup>The field “Notes” is for personal reference and can be seen only when the record is being edited."
+ 
 }
