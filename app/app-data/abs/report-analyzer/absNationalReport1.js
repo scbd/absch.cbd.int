@@ -217,11 +217,18 @@ export const absNationalReport1 = [
             ]
          },
          {
+            "key": "Q006-addInfo",
+            "section": "Part-II",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
+         },
+         {
             "key": "Q006",
             "section": "Part-II",
             "number": "6",
             "type": "link",
-            "title": nr1T.part_II_question6_title,
+            "title": nr1T.provideInformationOnLessons,
             "multiple": false
          }
       ]
@@ -710,7 +717,13 @@ export const absNationalReport1 = [
                }
             ]
          },
-
+         {
+            "key": "Q014-addInfo",
+            "section": "Part-III",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
+         },
          {
             "key": "Q014",
             "section": "Part-III",
@@ -842,6 +855,13 @@ export const absNationalReport1 = [
                   "footnote": nr1T.part_IV_question17_addInfo_footnote_13
                }
             ]
+         },
+         {
+            "key": "Q018-addInfo",
+            "section": "Part-IV",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
          },
          {
             "key": "Q018",
@@ -1279,6 +1299,13 @@ export const absNationalReport1 = [
             ]
          },
          {
+            "key": "Q024-addInfo",
+            "section": "Part-V",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
+         },
+         {
             "key": "Q024",
             "section": "Part-V",
             "number": "24",
@@ -1437,6 +1464,13 @@ export const absNationalReport1 = [
                   "caption": nr1T.pleaseExplainYourResponse
                }
             ]
+         },
+         {
+            "key": "Q029-addInfo",
+            "section": "Part-VI",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
          },
          {
             "key": "Q029",
@@ -1607,6 +1641,13 @@ export const absNationalReport1 = [
                   "caption": nr1T.pleaseExplainYourResponse
                }
             ]
+         },
+         {
+            "key": "Q033-addInfo",
+            "section": "Part-VII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
          },
          {
             "key": "Q033",
@@ -2000,7 +2041,13 @@ export const absNationalReport1 = [
                }
             ]
          },
-
+         {
+            "key": "Q041-addInfo",
+            "section": "Part-VIII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
+         },
          {
             "key": "Q041",
             "section": "Part-VIII",
@@ -2246,6 +2293,13 @@ export const absNationalReport1 = [
             ]
          },
          {
+            "key": "Q046-addInfo",
+            "section": "Part-IX",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
+         },
+         {
             "key": "Q046",
             "section": "Part-IX",
             "number": "46",
@@ -2349,6 +2403,13 @@ export const absNationalReport1 = [
             
          },
          {
+            "key": "Q049-addInfo",
+            "section": "Part-X",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
+         },
+         {
             "key": "Q049",
             "section": "Part-X",
             "number": "49",
@@ -2439,6 +2500,13 @@ export const absNationalReport1 = [
                   "footnote": nr1T.part_XI_question51_title_footnote_34
                }
             ]
+         },
+         {
+            "key": "Q052-addInfo",
+            "section": "Part-XI",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
          },
          {
             "key": "Q052",
@@ -2641,6 +2709,13 @@ export const absNationalReport1 = [
             ]
          },
          {
+            "key": "Q056-addInfo",
+            "section": "Part-XII",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
+         },
+         {
             "key": "Q056",
             "section": "Part-XII",
             "number": "56",
@@ -2689,6 +2764,13 @@ export const absNationalReport1 = [
                "caption": nr1T.pleaseExplainYourResponse
             }
          ]
+      },
+      {
+         "key": "Q058-addInfo",
+         "section": "Part-XIII",
+         "number": "",
+         "type": "legend",
+         "title": nr1T.additionalInformation
       },
       {
          "key": "Q058",
@@ -2924,6 +3006,13 @@ export const absNationalReport1 = [
             "title": nr1T.part_XIV_question64_title,
             "multiple": false,
             "footnote": nr1T.part_XIV_question64_footnote_41
+         },
+         {
+            "key": "Q065-addInfo",
+            "section": "Part-XIV",
+            "number": "",
+            "type": "legend",
+            "title": nr1T.additionalInformation
          },
          {
             "key": "Q065",
