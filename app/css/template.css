@@ -3044,10 +3044,12 @@ button.btn.btn-default{
     -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
     box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
 }
-.record-body .section-pane.panel .panel-heading{
+.record-body .section-pane.panel .panel-heading,
+.edit-national-report .section-pane.panel .panel-heading {
     color: #333;
     background-color: #f5f5f5;
     border-color: #ddd;
+    padding: 10px;
 }
 #NotificationsPanel .dropdown-menu.show li a,
 .register-content-content .registerpage-content table ul li a {

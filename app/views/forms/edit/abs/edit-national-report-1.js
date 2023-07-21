@@ -106,6 +106,12 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             "tab": 16,
             "title": "Part-XVI",
             "sections": [{ key: "Part-XVI" }]
+        },
+        {
+            "tab": 17,
+            "title": "Notes",
+            "ngIncludeId": "notes",
+            render: true
         }
         ];
 
