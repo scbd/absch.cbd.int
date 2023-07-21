@@ -87,7 +87,13 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 "tab": 12,
                 "title": "175 - 176",
                 "sections": [{ key: "OtherInformation" }, { key: "Comments" }]
-            }
+            },
+            {
+                "tab": 13,
+                "title": "Notes",
+                "ngIncludeId": "notes",
+                render: true
+            }    
         ];
         
         $scope.exportVueComponent = {
