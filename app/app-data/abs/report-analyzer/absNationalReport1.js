@@ -3071,15 +3071,21 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yes
+                  "title": nr1T.yes,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseProvideFurtherInformation
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesToSomeExtent
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseProvideFurtherInformation
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseProvideFurtherInformation
                }
             ]
          }
