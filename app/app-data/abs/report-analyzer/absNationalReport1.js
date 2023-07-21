@@ -737,14 +737,14 @@ export const absNationalReport1 = [
    },
    {
       "key": "Part-IV",
-      "title": nr1T.part_VI_title,
+      "title": nr1T.part_IV_title,
       "questions": [
          {
-            "key": "Article15_3",
+            "key": "Article5_3",
             "section": "Part-IV",
             "number": "",
             "type": "legend",
-            "title": nr1T.article15_3
+            "title": nr1T.article5_3
          },
          {
             "key": "Q015",
@@ -779,11 +779,11 @@ export const absNationalReport1 = [
             ]
          },
          {
-            "key": "Article15_2",
+            "key": "Article5_2",
             "section": "Part-IV",
             "number": "",
             "type": "legend",
-            "title": nr1T.article15_2
+            "title": nr1T.article5_2
          },
          {
             "key": "Q016",
@@ -818,11 +818,11 @@ export const absNationalReport1 = [
             ]
          },
          {
-            "key": "Article15_5",
+            "key": "Article5_5",
             "section": "Part-IV",
             "number": "",
             "type": "legend",
-            "title": nr1T.article15_5
+            "title": nr1T.article5_5
          },
          {
             "key": "Q017",
@@ -2936,14 +2936,14 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.provideFurtherInformation+'<sup>39</sup>',
+                  "caption": nr1T.pleaseProvideFurtherInformation+'<sup>39</sup>',
                   "footnote": nr1T.part_XIV_question62_footnote_39
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.provideFurtherInformation+'<sup>39</sup>',
+                  "caption": nr1T.pleaseProvideFurtherInformation+'<sup>39</sup>',
                   "footnote": nr1T.part_XIV_question62_footnote_39
                }
             ],
