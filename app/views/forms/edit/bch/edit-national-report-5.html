@@ -180,5 +180,29 @@
                 </div>
             </div>
         </script>
+         <script type="text/ng-template" id="notes">
+            <div class="section-pane panel panel-default" id="sectionNotes" style="margin-bottom:3px!important">
+                      <div class="panel-body" style="padding:0px">
+                    <div style="border:1px solid #eee;margin:5px" class="row">
+                        <div class="col-md-12" style="padding:10px;position: relative;">
+                            <div class="mt-3">
+                                <div style="padding:10px 3px" class="col-md-12">
+                                    <div class="col-md-12" style="padding-left: 5px;">
+                                        <legend ng-bind-html="::('editNRT.notes'|$translate)"></legend>
+                                        <div class="km-control-group d-inline" bold="true" name="notes">
+                                            <div class="indent">
+                                                <div km-notes name="notes" 
+                                                    ng-model="formScope.$parent.document.notes" locales="locales"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="font-size:10px;padding:10px" ng-bind-html="('editNRT.notes_footnote'|$translate)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
     </div>
 </div>
