@@ -3433,3 +3433,7 @@ embed-footer{
 .edit-national-report .isLegend {
     border: none !important;
 }
+.disabled {
+    background-color:#f1f1f1;
+    opacity: 50%;
+}
