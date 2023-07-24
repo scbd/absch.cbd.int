@@ -144,8 +144,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         function getPartyStatus(government) {
             if (government && $scope.document) {
                     commonjs.getCountry(government.identifier).then(function(country){
-                    // $scope.document['Q005'] = { value : country.isParty.toString() };
-                    $scope.isParty = country.isParty.toString();
+                    $scope.document['Q005'] = { value : country.isParty.toString() };
                 });
             }
         }
@@ -160,7 +159,6 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
             if (!document)
                 return undefined;
-                getPartyStatus(document.government);
 
             if (/^\s*$/g.test(document.notes))
                 document.notes = undefined;
@@ -212,6 +210,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             
             $scope.documentReady = false
             $scope.setDocument({}).then(function (document) {
+                getPartyStatus(document.government);
                 $scope.questionAnswers = {};
                 if (document && document.header.identifier) {
                     if($routeParams?.identifier && $scope.document.government?.identifier){
