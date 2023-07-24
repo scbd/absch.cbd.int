@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="articlesCount<1" class="alert alert-warning">
+                    <div v-if="articlesCount<1" class="alert alert-light">
                         <strong>{{ $t("noResultFound") }}</strong>
                     </div>
                 </div>
@@ -110,6 +110,7 @@ export default {
             this.pageNumber = pageNumber;
             this.article = [];
             this.loading = true;
+            window.scrollTo(0,0);
             this.loadArticles(pageNumber, this.tag);
         },
         async loadArticles(pageNumber, tag) {
