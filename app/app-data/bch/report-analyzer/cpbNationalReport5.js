@@ -1300,7 +1300,7 @@ export const cpbNationalReport5 = [
                "multiple":false,
                "options":[
                   {
-                     "value":"1+",
+                     "value":"0",
                      "title": nr5T.none
                   },
                   {
@@ -1320,7 +1320,10 @@ export const cpbNationalReport5 = [
                "validations":[
                   {
                      "question":"Q051",
-                     "type":"@hasValues",
+                     "values":[
+                        "0"
+                     ],
+                     "type":"@hasValuesExcept",
                      "trigger":"enable"
                   }
                ],
@@ -1331,8 +1334,7 @@ export const cpbNationalReport5 = [
                "number":"51",
                "type":"lstring",
                "title": nr5T.article14_question51_title,
-               "multiple":false,
-               "mandatory": true
+               "multiple":false
             },
             {
                "key":"Q052",
