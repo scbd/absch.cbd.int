@@ -44,7 +44,7 @@
                                 <km-value-ml ng-if="document[question.key].value"
                                     value="displayText(document[question.key].value, question)" locales="locale"></km-value-ml>
                             </div>
-                            <div ng-switch-when="true">
+                            <div ng-switch-when="true" class="km-value" comapre-val>
                                 <ul class="list">
                                     <li ng-repeat="item in document[question.key]">
                                         <span ng-bind="displayText(item.value, question)"></span>

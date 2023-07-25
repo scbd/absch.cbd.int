@@ -26,7 +26,7 @@
                                 onload="formScope = $parent.$parent.$parent"></div>
                             <div class="section-pane panel panel-default" ng-repeat="section in tab.sections"
                                 id="section{{$index+1}}" style="margin-bottom:3px!important">
-                                <div class="panel-heading">
+                                <div class="panel-heading" ng-if="section.title || section.description">
                                     <strong ng-bind-html="::section.title"></strong>
                                     <div ng-bind-html="::section.description" ng-if="section.description"></div>
                                 </div>
