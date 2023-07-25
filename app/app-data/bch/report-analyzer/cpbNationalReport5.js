@@ -4,6 +4,7 @@ export const cpbNationalReport5 = [
    {
             "key":"Article2",
             "title": nr5T.article2_title,
+            "description": nr5T.article2_description,
             "questions":[
                {
                   "key":"Q007",
@@ -31,7 +32,8 @@ export const cpbNationalReport5 = [
                      },
                      {
                         "value":"implementation.none",
-                        "title": nr5T.article2_question7_options4_title
+                        "title": nr5T.article2_question7_options4_title,
+                        "exclusive":true
                      }
                   ],
                   "mandatory":true
@@ -62,7 +64,8 @@ export const cpbNationalReport5 = [
                      },
                      {
                         "value":"instrument.none",
-                        "title": nr5T.article2_question8_options4_title
+                        "title": nr5T.article2_question8_options4_title,
+                        "exclusive":true
                      },
                      
                   ],
