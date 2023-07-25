@@ -634,7 +634,6 @@ export const cpbNationalReport5 = [
                   "type":"option",
                   "title": nr5T.articles7_10_question27_title,
                   "multiple":true,
-                  "mandatory": true,
                   "options":[
                      {
                         "value":"3B9ECE67-B35C-40FF-8C06-4EA5FF762899",
@@ -690,7 +689,6 @@ export const cpbNationalReport5 = [
                   "type":"option",
                   "title": nr5T.articles7_10_question27_question1_question0_title,
                   "multiple":false,
-                  "mandatory":true,
                   "options":[
                      {
                         "value":"true",
@@ -713,7 +711,6 @@ export const cpbNationalReport5 = [
                   "type":"option",
                   "title": nr5T.articles7_10_question27_question2_question0_title,
                   "multiple":false,
-                  "mandatory":true,
                   "options":[
                      {
                         "value":"true",
