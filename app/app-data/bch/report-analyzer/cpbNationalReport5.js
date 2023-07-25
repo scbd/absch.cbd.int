@@ -1121,7 +1121,6 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.article12_question43_question0_title,
                      "multiple":false,
-                     "mandatory": true,
                      "options":[
                         {
                            "value":"true",
@@ -1144,7 +1143,6 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.article12_question43_question1_title,
                      "multiple":false,
-                     "mandatory": true,
                      "options":[
                         {
                            "value":"true",
