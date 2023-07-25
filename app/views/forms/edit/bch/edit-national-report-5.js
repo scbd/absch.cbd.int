@@ -87,7 +87,13 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 "tab": 12,
                 "title": "175 - 176",
                 "sections": [{ key: "OtherInformation" }, { key: "Comments" }]
-            }
+            },
+            {
+                "tab": 13,
+                "title": "Notes",
+                "ngIncludeId": "notes",
+                render: true
+            }    
         ];
         
         $scope.isCountryChange = false;
@@ -131,10 +137,16 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
-                commonjs.getCountry(government.identifier).then(function(country){
-                    $scope.document['Q005'] = { value : country.isParty.toString() };
-                })
+                getPartyStatus(government);
                 loadPreviousReport(government.identifier);
+            }
+        }
+        
+        function getPartyStatus(government) {
+            if (government && $scope.document) {
+                    commonjs.getCountry(government.identifier).then(function(country){
+                    $scope.document['Q005'] = { value : country.isParty.toString() };
+                });
             }
         }
         
@@ -199,6 +211,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             
             $scope.documentReady = false
             $scope.setDocument({}).then(function (document) {
+                getPartyStatus(document.government);
                 $scope.questionAnswers = {};
                 if (document && document.header.identifier) {
                     if($routeParams?.identifier && $scope.document.government?.identifier){

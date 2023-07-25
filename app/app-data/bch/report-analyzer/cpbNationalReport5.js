@@ -4,6 +4,7 @@ export const cpbNationalReport5 = [
    {
             "key":"Article2",
             "title": nr5T.article2_title,
+            "description": nr5T.article2_description,
             "questions":[
                {
                   "key":"Q007",
@@ -31,7 +32,8 @@ export const cpbNationalReport5 = [
                      },
                      {
                         "value":"implementation.none",
-                        "title": nr5T.article2_question7_options4_title
+                        "title": nr5T.article2_question7_options4_title,
+                        "exclusive":true
                      }
                   ],
                   "mandatory":true
@@ -62,7 +64,8 @@ export const cpbNationalReport5 = [
                      },
                      {
                         "value":"instrument.none",
-                        "title": nr5T.article2_question8_options4_title
+                        "title": nr5T.article2_question8_options4_title,
+                        "exclusive":true
                      },
                      
                   ],
@@ -631,7 +634,6 @@ export const cpbNationalReport5 = [
                   "type":"option",
                   "title": nr5T.articles7_10_question27_title,
                   "multiple":true,
-                  "mandatory": true,
                   "options":[
                      {
                         "value":"3B9ECE67-B35C-40FF-8C06-4EA5FF762899",
@@ -687,7 +689,6 @@ export const cpbNationalReport5 = [
                   "type":"option",
                   "title": nr5T.articles7_10_question27_question1_question0_title,
                   "multiple":false,
-                  "mandatory":true,
                   "options":[
                      {
                         "value":"true",
@@ -710,7 +711,6 @@ export const cpbNationalReport5 = [
                   "type":"option",
                   "title": nr5T.articles7_10_question27_question2_question0_title,
                   "multiple":false,
-                  "mandatory":true,
                   "options":[
                      {
                         "value":"true",
@@ -1118,7 +1118,6 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.article12_question43_question0_title,
                      "multiple":false,
-                     "mandatory": true,
                      "options":[
                         {
                            "value":"true",
@@ -1141,7 +1140,6 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.article12_question43_question1_title,
                      "multiple":false,
-                     "mandatory": true,
                      "options":[
                         {
                            "value":"true",
@@ -1299,7 +1297,7 @@ export const cpbNationalReport5 = [
                "multiple":false,
                "options":[
                   {
-                     "value":"1+",
+                     "value":"0",
                      "title": nr5T.none
                   },
                   {
@@ -1319,7 +1317,10 @@ export const cpbNationalReport5 = [
                "validations":[
                   {
                      "question":"Q051",
-                     "type":"@hasValues",
+                     "values":[
+                        "0"
+                     ],
+                     "type":"@hasValuesExcept",
                      "trigger":"enable"
                   }
                ],
@@ -1330,8 +1331,7 @@ export const cpbNationalReport5 = [
                "number":"51",
                "type":"lstring",
                "title": nr5T.article14_question51_title,
-               "multiple":false,
-               "mandatory": true
+               "multiple":false
             },
             {
                "key":"Q052",
