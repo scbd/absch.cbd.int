@@ -2478,7 +2478,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article18_question82_title,
                "multiple":false,
-               "mandatory": true,
                "options":[
                   {
                      "value":"lmoSpecific",
@@ -2493,8 +2492,7 @@ export const cpbNationalReport5 = [
                      "title": nr5T.other,
                      "type":"lstring"
                   }
-               ],
-               "mandatory":true
+               ]
             },
             {
                "key":"Q083",
@@ -2503,6 +2501,7 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article18_question83_title,
                "multiple":false,
+               "mandatory":true,
                "options":[
                   {
                      "value":"true",
@@ -2518,7 +2517,17 @@ export const cpbNationalReport5 = [
                      "title": nr5T.no
                   }
                ],
-               "mandatory":true
+               "validations":[
+                  {
+                     "question":"Q084",
+                     "values":[
+                        "true",
+                        "true.some"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"enable"
+                  }
+               ]
             },
             {
                "key":"Q084",
@@ -2570,7 +2579,7 @@ export const cpbNationalReport5 = [
                   {
                      "question":"Q086",
                      "values":[
-                        "0"
+                        "false"
                      ],
                      "type":"@hasValuesExcept",
                      "trigger":"enable"
@@ -3003,7 +3012,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article18_question96_title,
                "multiple":false,
-               "mandatory": true,
                "options":[
                   {
                      "value":"0",
