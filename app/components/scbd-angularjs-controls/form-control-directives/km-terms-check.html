@@ -67,7 +67,7 @@
 				<div ng-if="(otherTermIdentifier==term.identifier ||term.type) && !term.multiple && selectedItems[term.identifier].selected">
 					<div style="padding-left:15px;"> 
 						<label name="chk_{{term.identifier}}_customValue" for="chk_{{term.identifier}}_customValue">
-							<strong >{{::('kmTermCheckT.pleaseSpecify'|$translate)}} </strong>
+							{{::('kmTermCheckT.pleaseSpecify'|$translate)}}
 						</label>
 						<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
 							ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
