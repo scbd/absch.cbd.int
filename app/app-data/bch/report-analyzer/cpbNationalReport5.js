@@ -4613,7 +4613,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article24_question143_title,
                "multiple":false,
-               "mandatory":true,
                "options":[
                   {
                      "value":"true",
@@ -4634,7 +4633,7 @@ export const cpbNationalReport5 = [
                "section":"Article24",
                "number":"144",
                "type":"lstring",
-               "title": nr5T.article24_question142_title,
+               "title": nr5T.article24_question144_title,
                "multiple":false
             }
          ]
@@ -4643,7 +4642,7 @@ export const cpbNationalReport5 = [
       {
          "key":"Article25",
          "title": nr5T.article25_title,
-         "footnote": nr5T.article25_footnote,
+         "footnote": nr5T.article25_footnote_7,
          "questions":[
             {
                "key":"Q145",
@@ -4713,7 +4712,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article25_question147_title,
                "multiple":false,
-               "mandatory":true,
                "options":[
                   {
                      "value":"true",
