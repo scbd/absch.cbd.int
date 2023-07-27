@@ -5633,7 +5633,7 @@ export const cpbNationalReport5 = [
                "key":"Q175",
                "section":"OtherInformation",
                "number":"175",
-               "type":"lstring",
+               "type":"lstringRte",
                "title": nr5T.other_question175_title,
                "multiple":false
             }
@@ -5647,7 +5647,7 @@ export const cpbNationalReport5 = [
                "key":"Q176",
                "section":"Comments",
                "number":"176",
-               "type":"lstring",
+               "type":"lstringRte",
                "title": nr5T.comments_question176_title,
                "multiple":false
             }
