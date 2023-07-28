@@ -1920,7 +1920,8 @@ legend+ .help-info {
     z-index:10010!important;
 }
 sup {
-    font-size: 8px;;
+    /* font-size: 8px; */
+    font-size: x-small;
 }
 a.disabled{
     color:#BBB!important;

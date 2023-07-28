@@ -47,9 +47,9 @@
                             <div ng-switch-when="true" class="km-value" comapre-val>
                                 <ul class="list">
                                     <li ng-repeat="item in document[question.key]">
-                                        <span ng-bind="displayText(item.value, question)"></span>
+                                        <span ng-bind-html="displayText(item.value, question)"></span>
                                         <span ng-if="item.additionalInformation!=undefined"
-                                            ng-bind="'(' + (item.additionalInformation|lstring:locale) + ')'"></span>
+                                            ng-bind-html="'(' + (item.additionalInformation|lstring:locale) + ')'"></span>
                                     </li>
                                 </ul>
                             </div>

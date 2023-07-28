@@ -179,6 +179,10 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         function is141Or142(questionAnswers) {
             return (questionAnswers['Q141'] || {}).value == 'true' || (questionAnswers['Q142'] || {}).value == 'true';
         }
+        
+        function is66_aOr66_b(questionAnswers) {
+            return (questionAnswers['Q066_a'] || {}).value == 'true' || (questionAnswers['Q066_b'] || {}).value == 'true';
+        }
 
         function is79Or80Or81(questionAnswers) {
             return (questionAnswers['Q079'] || {}).value == 'true' || 
@@ -196,7 +200,8 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         $scope.customValidations = {
             is79Or80Or81: is79Or80Or81,
             is141Or142: is141Or142,
-            is162_aOr162_b: is162_aOr162_b
+            is162_aOr162_b: is162_aOr162_b,
+            is66_aOr66_b: is66_aOr66_b
         }
 
         function safeApply(fn) {
