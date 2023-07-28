@@ -3140,6 +3140,7 @@ export const cpbNationalReport5 = [
                "number":"102",
                "type":"sub-section",
                "title": nr5T.article20_question102_title,
+               "footnote": nr5T.article20_question102_footnote_6,
                "questions":[
                   {
                      "key":"Q102_a",
@@ -3842,7 +3843,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article22_question114_title,
                "multiple":true,
-               "mandatory": true,
                "options":[
                   {
                      "value":"channels.bilateral",
@@ -3895,7 +3895,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article22_question116_title,
                "multiple":true,
-               "mandatory": true,
                "options":[
                   {
                      "value":"channels.bilateral",
@@ -4141,7 +4140,6 @@ export const cpbNationalReport5 = [
                "type":"term",
                "title": nr5T.article22_question123_title,
                "multiple":true,
-               "mandatory": true,
                "options":[
                   {
                      "value":"BB3CA716-E122-4445-9FAD-9F6B440363BD",
@@ -4613,7 +4611,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article24_question143_title,
                "multiple":false,
-               "mandatory":true,
                "options":[
                   {
                      "value":"true",
@@ -4634,7 +4631,7 @@ export const cpbNationalReport5 = [
                "section":"Article24",
                "number":"144",
                "type":"lstring",
-               "title": nr5T.article24_question142_title,
+               "title": nr5T.article24_question144_title,
                "multiple":false
             }
          ]
@@ -4643,7 +4640,7 @@ export const cpbNationalReport5 = [
       {
          "key":"Article25",
          "title": nr5T.article25_title,
-         "footnote": nr5T.article25_footnote,
+         "footnote": nr5T.article25_footnote_7,
          "questions":[
             {
                "key":"Q145",
@@ -4713,7 +4710,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.article25_question147_title,
                "multiple":false,
-               "mandatory":true,
                "options":[
                   {
                      "value":"true",
@@ -4954,6 +4950,7 @@ export const cpbNationalReport5 = [
                      ],
                      "validations":[
                         {
+                           "baseQuestion":"Q155",
                            "question":"Q155_c_adq",
                            "values":[
                               "true"
@@ -4962,6 +4959,25 @@ export const cpbNationalReport5 = [
                            "trigger":"visible"
                         }
                      ],
+                  },
+                  {
+                     "key": "Q155_c_adq",
+                     "section": "Cooperation",
+                     "number": "",
+                     "type": "option",
+                     "title": nr5T.cooperation_question155_c_option0_title,
+                     "multiple": false,
+                     "mandatory":true,
+                     "options": [
+                        {
+                           "value": "true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value": "false",
+                           "title": nr5T.no
+                        }
+                     ]
                   },
                                     {
                      "key":"Q155_d",
@@ -4998,25 +5014,6 @@ export const cpbNationalReport5 = [
                            "title": nr5T.no
                         }
                      ]
-                  }
-               ]
-            },
-            {
-               "key": "Q155_c_adq",
-               "section": "Cooperation",
-               "number": "",
-               "type": "option",
-               "title": nr5T.cooperation_question155_c_option0_title,
-               "multiple": false,
-               "mandatory":true,
-               "options": [
-                  {
-                     "value": "true",
-                     "title": nr5T.yes
-                  },
-                  {
-                     "value": "false",
-                     "title": nr5T.no
                   }
                ]
             },
