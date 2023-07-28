@@ -4950,6 +4950,7 @@ export const cpbNationalReport5 = [
                      ],
                      "validations":[
                         {
+                           "baseQuestion":"Q155",
                            "question":"Q155_c_adq",
                            "values":[
                               "true"
@@ -4958,6 +4959,25 @@ export const cpbNationalReport5 = [
                            "trigger":"visible"
                         }
                      ],
+                  },
+                  {
+                     "key": "Q155_c_adq",
+                     "section": "Cooperation",
+                     "number": "",
+                     "type": "option",
+                     "title": nr5T.cooperation_question155_c_option0_title,
+                     "multiple": false,
+                     "mandatory":true,
+                     "options": [
+                        {
+                           "value": "true",
+                           "title": nr5T.yes
+                        },
+                        {
+                           "value": "false",
+                           "title": nr5T.no
+                        }
+                     ]
                   },
                                     {
                      "key":"Q155_d",
@@ -4994,25 +5014,6 @@ export const cpbNationalReport5 = [
                            "title": nr5T.no
                         }
                      ]
-                  }
-               ]
-            },
-            {
-               "key": "Q155_c_adq",
-               "section": "Cooperation",
-               "number": "",
-               "type": "option",
-               "title": nr5T.cooperation_question155_c_option0_title,
-               "multiple": false,
-               "mandatory":true,
-               "options": [
-                  {
-                     "value": "true",
-                     "title": nr5T.yes
-                  },
-                  {
-                     "value": "false",
-                     "title": nr5T.no
                   }
                ]
             },
