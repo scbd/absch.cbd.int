@@ -20,7 +20,7 @@ export const absNationalReport1 = [
             "title": nr1T.part_II_question3_title,
             "multiple": false,
             "mandatory": true,
-            "footnote": nr1T.part_II_question3_footnote_4,
+            "footnote": nr1T.part_II_question3_footnote_3,
             "options": [
                {
                   "value": "true",
@@ -99,11 +99,15 @@ export const absNationalReport1 = [
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesToSomeExtent
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -190,11 +194,15 @@ export const absNationalReport1 = [
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesToSomeExtent
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -221,7 +229,7 @@ export const absNationalReport1 = [
             "section": "Part-II",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformationOnInstitutional
          },
          {
             "key": "Q006",
@@ -236,7 +244,7 @@ export const absNationalReport1 = [
    {
       "key": "Part-III",
       "title": nr1T.part_III_title,
-      "footnote": nr1T.part_III_title_footnote_5,
+      "footnote": nr1T.part_III_title_footnote_4,
       "questions": [
          {
             "key": "Q007",
@@ -246,6 +254,7 @@ export const absNationalReport1 = [
             "title": nr1T.part_III_question7_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_III_question7_footnote_5,
             "options": [
                {
                   "value": "true",
@@ -289,15 +298,19 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.part_III_question7_1_option0_title
+                  "title": nr1T.yes
                },
                {
                   "value": "true.some",
-                  "title": nr1T.part_III_question7_1_option1_title
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -493,11 +506,17 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yes
+                  "title": nr1T.yes,
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring"
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring"
                }
             ]
          },
@@ -522,9 +541,6 @@ export const absNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>7</sup>",
-                  "footnote":nr1T.part_III_question11_addInfo_footnote_7
                },
                {
                   "value": "true.some",
@@ -564,10 +580,7 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yesInAllCases,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>8</sup>",
-                  "footnote": nr1T.part_III_question12_addInfo_footnote_8
+                  "title": nr1T.yes,
                },
                {
                   "value": "true.some",
@@ -616,8 +629,9 @@ export const absNationalReport1 = [
             "additionalInformation":[
                {
                   "field":"furtherInfo",
-                  "title" : nr1T.additionalInformation,
-                  "type":"lstringRte"
+                  "title" : nr1T.additionalInformation+'<sup>9</sup>',
+                  "type":"lstring",
+                  "footnote": nr1T.part_III_question12_1_footnote,
                }
             ]
          },
@@ -632,11 +646,11 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yesInAllCases,
+                  "title": nr1T.yes
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesInSomeCases,
+                  "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse
                },
@@ -667,23 +681,18 @@ export const absNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>",
-                  "footnote": nr1T.part_III_question13_addInfo_footnote_9
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>",
-                  "footnote": nr1T.part_III_question13_addInfo_footnote_9
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>",
-                  "footnote": nr1T.part_III_question13_addInfo_footnote_9
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ],
             "validations": [
@@ -709,11 +718,19 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yes
+                  "title": nr1T.yes,
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -1184,14 +1201,13 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yesInAllCases
+                  "title": nr1T.yes
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesInSomeCases,
+                  "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse
-                  
                },
                {
                   "value": "false",
@@ -1822,6 +1838,10 @@ export const absNationalReport1 = [
                   "title": nr1T.yes
                },
                {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent
+               },
+               {
                   "value": "false",
                   "title": nr1T.no
                }
@@ -1839,6 +1859,10 @@ export const absNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent
                },
                {
                   "value": "false",

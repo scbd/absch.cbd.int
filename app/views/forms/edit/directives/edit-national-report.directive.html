@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="panel-body" style="padding:0px">
                                     <div ng-if="section.footnote" ng-bind-html="::section.footnote"
-                                        style="font-size:10px;padding:10px"></div>
+                                        style="font-size:10px;padding:10px" class="fw-light text-muted"></div>
                                     <div ng-repeat="question in section.questions"
                                         style="border:1px solid #eee;margin:5px" class="row"
                                         ng-class="{'disabled': isQuestionDisabled(question), 'isLegend': question.type == 'legend' }"
