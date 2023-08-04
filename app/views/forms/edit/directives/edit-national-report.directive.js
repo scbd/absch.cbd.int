@@ -136,8 +136,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 }
                 $scope.onOptionSelected = function ($element, value, question){
                     if(question){
-                        console.log($element, value, question);
-
+                        
                         const exclusiveOptions = question.options.filter(e=>e.exclusive);
                         if(Object.keys(exclusiveOptions).length>0) {
                             // 1. enable all options
@@ -149,11 +148,9 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                 const exclusiveIdentifiers = exclusiveOptions?.map(e=>e.value)
                                 if(_.intersection(exclusiveIdentifiers, valueIdentifiers).length){
                                     //disable other options
-                                    console.log('exclusive found')
                                     question.options.filter(e=>!e.exclusive).forEach(e=>{
                                         disableCheckbox(`chk_${e.value}`);
-                                    })
-                                   
+                                    })                                   
                                 }
                                 else{
                                     // 4. else if exclusive not selected, disable exclusive
