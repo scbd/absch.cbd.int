@@ -134,7 +134,42 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }
                     ngModelController.$setViewValue(_.pickBy($scope.binding, _.identity), 'change'); //ToDo
                 }
+                $scope.onOptionSelected = function ($element, value, question){
+                    if(question){
+                        
+                        const exclusiveOptions = question.options.filter(e=>e.exclusive);
+                        if(Object.keys(exclusiveOptions).length>0) {
+                            // 1. enable all options
+                            $element.find(`input[type=checkbox]`).attr('disabled', false)
+                            // 2. verify if exclusive option is selected
+                            // 3. if exclusive selected disable all other
+                            if(value?.length){
+                                const valueIdentifiers = value?.map(e=>e.identifier);
+                                const exclusiveIdentifiers = exclusiveOptions?.map(e=>e.value)
+                                if(_.intersection(exclusiveIdentifiers, valueIdentifiers).length){
+                                    //disable other options
+                                    question.options.filter(e=>!e.exclusive).forEach(e=>{
+                                        disableCheckbox(`chk_${e.value}`);
+                                    })                                   
+                                }
+                                else{
+                                    // 4. else if exclusive not selected, disable exclusive
+                                    exclusiveIdentifiers.forEach(e=>{
+                                        disableCheckbox(`chk_${e}`)
+                                    })
+                                }
+                            }
+                            
+                        }
 
+                        function disableCheckbox(id){
+                            angular.forEach($element.find('input[type=checkbox]'), function(node){                                        
+                                if(id == node.id)                                      
+                                    node.disabled = true;
+                            })
+                        }
+                    }
+                }
                 $scope.spaceSubQuestion = function (number) {
                     if ((number || '') == '') return '';
                     return number.replace(/([0-9]{1,3})([a-z])/, '$1 $2') + '. '

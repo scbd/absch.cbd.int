@@ -141,7 +141,7 @@
                                 <div ng-switch-when="true">
                                     <div km-term-check name="{{question.key}}" ng-change="updateAnswer(question)"
                                     ng-model="multiTermModel[question.key]" terms="question.optionsMapping" binding-type="term[]"
-                                    locales="locales" custom-value-placeholder="{{question.customValuePlaceholder}}"></div>
+                                    locales="locales" custom-value-placeholder="{{question.customValuePlaceholder}}" on-option-selected="onOptionSelected($element, value, question)"></div>
                                 </div>
                             </div>
                         </div>
