@@ -134,22 +134,42 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }
                     ngModelController.$setViewValue(_.pickBy($scope.binding, _.identity), 'change'); //ToDo
                 }
-                $scope.onOptionSecleted = function ($element, value, question){
+                $scope.onOptionSelected = function ($element, value, question){
                     if(question){
                         console.log($element, value, question);
 
-                        const exclusiveOptions = question.options.find(e=>e.exclusive);
-                        if(exclusiveOptions.length){
+                        const exclusiveOptions = question.options.filter(e=>e.exclusive);
+                        if(Object.keys(exclusiveOptions).length>0) {
                             // 1. enable all options
-
+                            $element.find(`input[type=checkbox]`).attr('disabled', false)
                             // 2. verify if exclusive option is selected
                             // 3. if exclusive selected disable all other
-                                const valueIdentifiers = value?.map(e=>e.identifier)
-                                if(_.intersection(exclusiveOptions, valueIdentifiers).length){
-                                    //dsisable other options
+                            if(value?.length){
+                                const valueIdentifiers = value?.map(e=>e.identifier);
+                                const exclusiveIdentifiers = exclusiveOptions?.map(e=>e.value)
+                                if(_.intersection(exclusiveIdentifiers, valueIdentifiers).length){
+                                    //disable other options
                                     console.log('exclusive found')
+                                    question.options.filter(e=>!e.exclusive).forEach(e=>{
+                                        disableCheckbox(`chk_${e.value}`);
+                                    })
+                                   
                                 }
-                            // 4. else if exclusive not selected, disable exclusive
+                                else{
+                                    // 4. else if exclusive not selected, disable exclusive
+                                    exclusiveIdentifiers.forEach(e=>{
+                                        disableCheckbox(`chk_${e}`)
+                                    })
+                                }
+                            }
+                            
+                        }
+
+                        function disableCheckbox(id){
+                            angular.forEach($element.find('input[type=checkbox]'), function(node){                                        
+                                if(id == node.id)                                      
+                                    node.disabled = true;
+                            })
                         }
                     }
                 }
