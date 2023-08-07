@@ -502,21 +502,22 @@ export const absNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question10_1_title,
             "multiple": false,
-            "footnote": nr1T.part_III_question10_1_title_footnote_6,
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yes,
+                  "title": nr1T.yes
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
                   "title": nr1T.no,
-                  "type": "lstring"
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
