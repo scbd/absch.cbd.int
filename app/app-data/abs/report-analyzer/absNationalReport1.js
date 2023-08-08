@@ -559,10 +559,6 @@ export const absNationalReport1 = [
                }
             ]
          },
-
-
-
-
          {
             "key": "Article6.3_e",
             "section": "Part-III",
@@ -687,13 +683,15 @@ export const absNationalReport1 = [
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_III_question13_addInfo_footnote_10
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_III_question13_addInfo_footnote_10
                }
             ],
             "validations": [
@@ -715,7 +713,6 @@ export const absNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question13_1_title,
             "multiple": false,
-            "footnote": nr1T.part_III_question13_1_title_footnote_10,
             "options": [
                {
                   "value": "true",
@@ -779,21 +776,21 @@ export const absNationalReport1 = [
                   "title": nr1T.yes,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question15_addInfo_footnote_11
+                  "footnote": nr1T.part_IV_question15_addInfo_footnote_13
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question15_addInfo_footnote_11
+                  "footnote": nr1T.part_IV_question15_addInfo_footnote_13
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question15_addInfo_footnote_11
+                  "footnote": nr1T.part_IV_question15_addInfo_footnote_13
                }
             ]
          },
@@ -818,21 +815,21 @@ export const absNationalReport1 = [
                   "title": nr1T.yes,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question16_addInfo_footnote_12
+                  "footnote": nr1T.part_IV_question16_addInfo_footnote_14
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question16_addInfo_footnote_12
+                  "footnote": nr1T.part_IV_question16_addInfo_footnote_14
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question16_addInfo_footnote_12
+                  "footnote": nr1T.part_IV_question16_addInfo_footnote_14
                }
             ]
          },
@@ -857,21 +854,21 @@ export const absNationalReport1 = [
                   "title": nr1T.yes,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question17_addInfo_footnote_13
+                  "footnote": nr1T.part_IV_question17_addInfo_footnote_15
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question17_addInfo_footnote_13
+                  "footnote": nr1T.part_IV_question17_addInfo_footnote_15
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question17_addInfo_footnote_13
+                  "footnote": nr1T.part_IV_question17_addInfo_footnote_15
                }
             ]
          },
@@ -918,21 +915,21 @@ export const absNationalReport1 = [
                   "title": nr1T.yes,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question19_addInfo_footnote_14
+                  "footnote": nr1T.part_IV_question19_addInfo_footnote_17
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question19_addInfo_footnote_14
+                  "footnote": nr1T.part_IV_question19_addInfo_footnote_17
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_IV_question19_addInfo_footnote_14
+                  "footnote": nr1T.part_IV_question19_addInfo_footnote_17
                }
             ],
             "validations": [
@@ -1120,28 +1117,28 @@ export const absNationalReport1 = [
             "title": nr1T.part_V_question21_title,
             "multiple": false,
             "mandatory": true,
-            "footnote": nr1T.part_V_question21_title_footnote_15,
+            "footnote": nr1T.part_V_question21_title_footnote_18,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yesInAllCases,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_19,
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesInSomeCases,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_19,
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse,
-                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_19,
                }
             ],
             "validations": [
