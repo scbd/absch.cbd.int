@@ -8,13 +8,12 @@
     </div>
     <div class="pt-2" ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value">
         <div class="km-control-group" name="question{{question.key}}_additionalInformation" caption="{{hasAdditionalInformation.caption ? hasAdditionalInformation.caption : ('nrYesNoT.pleaseSpecify'|$translate)}}">
-           <div ng-if="hasAdditionalInformation.footnote" ng-bind-html="hasAdditionalInformation.footnote" style="font-size:10px;padding:10px"></div>
             <div ng-if="hasAdditionalInformation.type == 'lstring'" km-textbox-ml name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales" 
                 ng-change="updateAnswer()"></div>
             <div ng-if="hasAdditionalInformation.type == 'lstringRte'" km-rich-textbox rows="4" name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales" 
                 ng-change="updateAnswer()"></div>
         </div>
-        <div ng-if="hasAdditionalInformation.footnote" ng-bind-html="hasAdditionalInformation.footnote" style="font-size:10px;padding:10px"></div>
+        <div ng-if="hasAdditionalInformation.footnote" ng-bind-html="hasAdditionalInformation.footnote" style="font-size:10px;padding:10px" class="fw-light text-muted"></div>
     </div>
 
 </div>
