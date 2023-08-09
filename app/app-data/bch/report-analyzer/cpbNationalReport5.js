@@ -5199,7 +5199,8 @@ export const cpbNationalReport5 = [
                   },
                   {
                      "value":"9067DB5B-E33B-655D-83A3-32D4D562618F",
-                     "title": nr5T.nagoyaKualaLumpur_question161_options3_title
+                     "title": nr5T.nagoyaKualaLumpur_question161_options3_title,
+                     "exclusive":true
                      
                   }
                ]
@@ -5295,7 +5296,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.nagoyaKualaLumpur_question163_title,
                "multiple":true,
-               "mandatory":true,
                "options":[
                   {
                      "value":"true.inform",
@@ -5316,7 +5316,8 @@ export const cpbNationalReport5 = [
                   },
                   {
                      "value":"false",
-                     "title": nr5T.no
+                     "title": nr5T.no,
+                     "exclusive":true
                   }
                ]
             },
@@ -5327,7 +5328,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.nagoyaKualaLumpur_question164_title,
                "multiple":false,
-               "mandatory":true,
                "options":[
                   {
                      "value":"true",
@@ -5456,7 +5456,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.nagoyaKualaLumpur_question168_title,
                "multiple":true,
-               "mandatory":true,
                "options":[
                   {
                      "value":"2DAA6BFF-9EB2-F99E-AA11-CB348A25E7F2",
@@ -5521,7 +5520,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.nagoyaKualaLumpur_question170_title,
                "multiple":true,
-               "mandatory":true,
                "options":[
                   {
                      "value":"69C39AF0-E97E-A277-5741-BC14BB5FFCB7",
@@ -5565,7 +5563,8 @@ export const cpbNationalReport5 = [
                   },
                   {
                      "value":"false",
-                     "title": nr5T.no
+                     "title": nr5T.no,
+                     "exclusive":true
                   }
                ]
             },
@@ -5605,7 +5604,6 @@ export const cpbNationalReport5 = [
                "type":"option",
                "title": nr5T.nagoyaKualaLumpur_question173_title,
                "multiple":false,
-               "mandatory":true,
                "options":[
                   {
                      "value":"true",
@@ -5636,7 +5634,7 @@ export const cpbNationalReport5 = [
                "key":"Q175",
                "section":"OtherInformation",
                "number":"175",
-               "type":"lstring",
+               "type":"lstringRte",
                "title": nr5T.other_question175_title,
                "multiple":false
             }
@@ -5650,7 +5648,7 @@ export const cpbNationalReport5 = [
                "key":"Q176",
                "section":"Comments",
                "number":"176",
-               "type":"lstring",
+               "type":"lstringRte",
                "title": nr5T.comments_question176_title,
                "multiple":false
             }

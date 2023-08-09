@@ -20,7 +20,7 @@ export const absNationalReport1 = [
             "title": nr1T.part_II_question3_title,
             "multiple": false,
             "mandatory": true,
-            "footnote": nr1T.part_II_question3_footnote_4,
+            "footnote": nr1T.part_II_question3_footnote_3,
             "options": [
                {
                   "value": "true",
@@ -99,11 +99,15 @@ export const absNationalReport1 = [
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesToSomeExtent
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -190,11 +194,15 @@ export const absNationalReport1 = [
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesToSomeExtent
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -221,7 +229,7 @@ export const absNationalReport1 = [
             "section": "Part-II",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformationOnInstitutional
          },
          {
             "key": "Q006",
@@ -236,7 +244,7 @@ export const absNationalReport1 = [
    {
       "key": "Part-III",
       "title": nr1T.part_III_title,
-      "footnote": nr1T.part_III_title_footnote_5,
+      "footnote": nr1T.part_III_title_footnote_4,
       "questions": [
          {
             "key": "Q007",
@@ -246,6 +254,7 @@ export const absNationalReport1 = [
             "title": nr1T.part_III_question7_title,
             "multiple": false,
             "mandatory": true,
+            "footnote": nr1T.part_III_question7_footnote_5,
             "options": [
                {
                   "value": "true",
@@ -289,15 +298,19 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.part_III_question7_1_option0_title
+                  "title": nr1T.yes
                },
                {
                   "value": "true.some",
-                  "title": nr1T.part_III_question7_1_option1_title
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -489,15 +502,22 @@ export const absNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question10_1_title,
             "multiple": false,
-            "footnote": nr1T.part_III_question10_1_title_footnote_6,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes
                },
                {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -522,30 +542,23 @@ export const absNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>7</sup>",
-                  "footnote":nr1T.part_III_question11_addInfo_footnote_7
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>7</sup>",
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote":nr1T.part_III_question11_addInfo_footnote_7
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>7</sup>",
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote":nr1T.part_III_question11_addInfo_footnote_7
                }
             ]
          },
-
-
-
-
          {
             "key": "Article6.3_e",
             "section": "Part-III",
@@ -564,23 +577,20 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yesInAllCases,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>8</sup>",
-                  "footnote": nr1T.part_III_question12_addInfo_footnote_8
+                  "title": nr1T.yes,
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>8</sup>",
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_III_question12_addInfo_footnote_8
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>8</sup>",
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_III_question12_addInfo_footnote_8
                }
             ],
@@ -617,7 +627,8 @@ export const absNationalReport1 = [
                {
                   "field":"furtherInfo",
                   "title" : nr1T.additionalInformation,
-                  "type":"lstringRte"
+                  "type":"lstring",
+                  "footnote": nr1T.part_III_question12_1_footnote,
                }
             ]
          },
@@ -632,11 +643,11 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yesInAllCases,
+                  "title": nr1T.yes
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesInSomeCases,
+                  "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse
                },
@@ -667,23 +678,20 @@ export const absNationalReport1 = [
                {
                   "value": "true",
                   "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>",
-                  "footnote": nr1T.part_III_question13_addInfo_footnote_9
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>",
-                  "footnote": nr1T.part_III_question13_addInfo_footnote_9
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_III_question13_addInfo_footnote_10
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>9</sup>",
-                  "footnote": nr1T.part_III_question13_addInfo_footnote_9
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_III_question13_addInfo_footnote_10
                }
             ],
             "validations": [
@@ -705,15 +713,22 @@ export const absNationalReport1 = [
             "type": "option",
             "title": nr1T.part_III_question13_1_title,
             "multiple": false,
-            "footnote": nr1T.part_III_question13_1_title_footnote_10,
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yes
+                  "title": nr1T.yes,
+               },
+               {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                },
                {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -722,7 +737,8 @@ export const absNationalReport1 = [
             "section": "Part-III",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q014",
@@ -759,22 +775,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>11</sup>",
-                  "footnote": nr1T.part_IV_question15_addInfo_footnote_11
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question15_addInfo_footnote_13
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>11</sup>",
-                  "footnote": nr1T.part_IV_question15_addInfo_footnote_11
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question15_addInfo_footnote_13
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>11</sup>",
-                  "footnote": nr1T.part_IV_question15_addInfo_footnote_11
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question15_addInfo_footnote_13
                }
             ]
          },
@@ -798,22 +814,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>12</sup>",
-                  "footnote": nr1T.part_IV_question16_addInfo_footnote_12
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question16_addInfo_footnote_14
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>12</sup>",
-                  "footnote": nr1T.part_IV_question16_addInfo_footnote_12
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question16_addInfo_footnote_14
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>12</sup>",
-                  "footnote": nr1T.part_IV_question16_addInfo_footnote_12
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question16_addInfo_footnote_14
                }
             ]
          },
@@ -837,22 +853,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>13</sup>",
-                  "footnote": nr1T.part_IV_question17_addInfo_footnote_13
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question17_addInfo_footnote_15
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>13</sup>",
-                  "footnote": nr1T.part_IV_question17_addInfo_footnote_13
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question17_addInfo_footnote_15
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>13</sup>",
-                  "footnote": nr1T.part_IV_question17_addInfo_footnote_13
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question17_addInfo_footnote_15
                }
             ]
          },
@@ -861,7 +877,8 @@ export const absNationalReport1 = [
             "section": "Part-IV",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q018",
@@ -897,22 +914,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>14</sup>",
-                  "footnote": nr1T.part_IV_question19_addInfo_footnote_14
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question19_addInfo_footnote_17
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>14</sup>",
-                  "footnote": nr1T.part_IV_question19_addInfo_footnote_14
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question19_addInfo_footnote_17
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>14</sup>",
-                  "footnote": nr1T.part_IV_question19_addInfo_footnote_14
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_IV_question19_addInfo_footnote_17
                }
             ],
             "validations": [
@@ -1100,28 +1117,28 @@ export const absNationalReport1 = [
             "title": nr1T.part_V_question21_title,
             "multiple": false,
             "mandatory": true,
-            "footnote": nr1T.part_V_question21_title_footnote_15,
+            "footnote": nr1T.part_V_question21_title_footnote_18,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yesInAllCases,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>16</sup>",
-                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_19,
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesInSomeCases,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>16</sup>",
-                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_19,
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>16</sup>",
-                  "footnote": nr1T.part_V_question21_addInfo_footnote_16,
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question21_addInfo_footnote_19,
                }
             ],
             "validations": [
@@ -1184,14 +1201,13 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yesInAllCases
+                  "title": nr1T.yes
                },
                {
                   "value": "true.some",
-                  "title": nr1T.yesInSomeCases,
+                  "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
                   "caption": nr1T.pleaseExplainYourResponse
-                  
                },
                {
                   "value": "false",
@@ -1240,22 +1256,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>18</sup>",
-                  "footnote": nr1T.part_V_question22_addInfo_footnote_18
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question22_addInfo_footnote_21
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>18</sup>",
-                  "footnote": nr1T.part_V_question22_addInfo_footnote_18
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question22_addInfo_footnote_21
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>18</sup>",
-                  "footnote": nr1T.part_V_question22_addInfo_footnote_18
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question22_addInfo_footnote_21
                }
             ]
          },
@@ -1279,22 +1295,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>19</sup>",
-                  "footnote": nr1T.part_V_question23_addInfo_footnote_19
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question23_addInfo_footnote_22
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>19</sup>",
-                  "footnote": nr1T.part_V_question23_addInfo_footnote_19
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question23_addInfo_footnote_22
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>19</sup>",
-                  "footnote": nr1T.part_V_question23_addInfo_footnote_19
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_V_question23_addInfo_footnote_22
                }
             ]
          },
@@ -1303,7 +1319,8 @@ export const absNationalReport1 = [
             "section": "Part-V",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q024",
@@ -1319,7 +1336,7 @@ export const absNationalReport1 = [
    {
       "key": "Part-VI",
       "title": nr1T.part_VI_title,
-      "footnote": nr1T.part_VI_title_footnote_20,
+      "footnote": nr1T.part_VI_title_footnote_24,
       "questions": [
          {
             "key": "Article18.1",
@@ -1470,7 +1487,8 @@ export const absNationalReport1 = [
             "section": "Part-VI",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q029",
@@ -1503,31 +1521,36 @@ export const absNationalReport1 = [
             "title": nr1T.part_VII_question30_title,
             "multiple": false,
             "mandatory": true,
-            "footnote": nr1T.part_VII_question30_option_footnote_21,
+            "footnote": nr1T.part_VII_question30_option_footnote_26,
             "options": [
                {
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
+
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                },
                {
                   "value": "false.na",
-                  "title": nr1T.notApplicable+"<sup>21</sup>",
+                  "title": nr1T.notApplicable,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                }
             ]
          },
@@ -1553,19 +1576,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                }
             ],
             "validations": [
@@ -1626,19 +1652,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.absMeasuresAddressTheseConsiderations
                }
             ]
          },
@@ -1647,7 +1676,8 @@ export const absNationalReport1 = [
             "section": "Part-VII",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q033",
@@ -1822,8 +1852,16 @@ export const absNationalReport1 = [
                   "title": nr1T.yes
                },
                {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -1841,8 +1879,16 @@ export const absNationalReport1 = [
                   "title": nr1T.yes
                },
                {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
+               },
+               {
                   "value": "false",
-                  "title": nr1T.no
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.pleaseExplainYourResponse
                }
             ]
          },
@@ -1941,22 +1987,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>22</sup>",
-                  "footnote": nr1T.part_VIII_question38_addInfo_footnote_22
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_VIII_question38_addInfo_footnote_31
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>22</sup>",
-                  "footnote": nr1T.part_VIII_question38_addInfo_footnote_22
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_VIII_question38_addInfo_footnote_31
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>22</sup>",
-                  "footnote": nr1T.part_VIII_question38_addInfo_footnote_22
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_VIII_question38_addInfo_footnote_31
                }
             ]
          },
@@ -1981,22 +2027,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>23</sup>",
-                  "footnote": nr1T.part_VIII_question39_addInfo_footnote_23
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_VIII_question39_addInfo_footnote_32
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>23</sup>",
-                  "footnote": nr1T.part_VIII_question39_addInfo_footnote_23
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_VIII_question39_addInfo_footnote_32
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>23</sup>",
-                  "footnote": nr1T.part_VIII_question39_addInfo_footnote_23
+                  "caption": nr1T.pleaseExplainYourResponse,
+                  "footnote": nr1T.part_VIII_question39_addInfo_footnote_32
                }
             ]
          },
@@ -2022,21 +2068,21 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>24</sup>",
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_VIII_question40_addInfo_footnote_24
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>24</sup>",
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_VIII_question40_addInfo_footnote_24
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstringRte",
-                  "caption": nr1T.pleaseExplainYourResponse+"<sup>24</sup>",
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_VIII_question40_addInfo_footnote_24
                }
             ]
@@ -2046,7 +2092,8 @@ export const absNationalReport1 = [
             "section": "Part-VIII",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q041",
@@ -2115,6 +2162,12 @@ export const absNationalReport1 = [
                   "caption": nr1T.part_IX_question43_custom_caption
                },
                {
+                  "value": "true.some",
+                  "title": nr1T.yesToSomeExtent,
+                  "type": "lstringRte",
+                  "caption": nr1T.part_IX_question43_custom_caption
+               },
+               {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstringRte",
@@ -2139,6 +2192,10 @@ export const absNationalReport1 = [
                },
                {
                   "value": "false",
+                  "title": nr1T.no
+               },
+               {
+                  "value": "false.na",
                   "title": nr1T.notApplicable
                }
             ],
@@ -2163,9 +2220,9 @@ export const absNationalReport1 = [
             "additionalInformation":[
                {
                   "field":"furtherInfo",
-                  "title" : nr1T.additionalInformation+'<sup>26</sup>',
+                  "title" : nr1T.additionalInformation,
                   "type":"lstringRte",
-                  "footnote":nr1T.part_IX_question44_1_footnote_26
+                  "footnote":nr1T.part_IX_question44_1_footnote_35
                }
             ]
          },
@@ -2233,15 +2290,22 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.additionalInformation+'<sup>28</sup>',
-                  "footnote":nr1T.part_IX_question45_footnote_addInfo_28
+                  "caption": nr1T.additionalInformation,
+                  "footnote":nr1T.part_IX_question45_footnote_addInfo_36
                },
                {
                   "value": "false",
+                  "title": nr1T.no,
+                  "type": "lstring",
+                  "caption": nr1T.additionalInformation,
+                  "footnote":nr1T.part_IX_question45_footnote_addInfo_36
+               },
+               {
+                  "value": "false.na",
                   "title": nr1T.notApplicable,
                   "type": "lstring",
-                  "caption": nr1T.additionalInformation+'<sup>28</sup>',
-                  "footnote":nr1T.part_IX_question45_footnote_addInfo_28
+                  "caption": nr1T.additionalInformation,
+                  "footnote": nr1T.part_IX_question45_footnote_addInfo_36
                }
             ],
             "validations": [
@@ -2297,7 +2361,8 @@ export const absNationalReport1 = [
             "section": "Part-IX",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q046",
@@ -2335,28 +2400,28 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>30</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_X_question47_title_footnote_30
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>30</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_X_question47_title_footnote_30
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>30</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_X_question47_title_footnote_30
                },
                {
                   "value": "false.na",
-                  "title": nr1T.notApplicable+'<sup>29</sup>',
+                  "title": nr1T.notApplicable,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>30</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_X_question47_title_footnote_30
                }
             ]            
@@ -2375,28 +2440,28 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>32</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_X_question48_title_footnote_32
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>32</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_X_question48_title_footnote_32
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>32</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_X_question48_title_footnote_32
                },
                {
                   "value": "false.na",
-                  "title": nr1T.notApplicable+'<sup>31</sup>',
+                  "title": nr1T.notApplicable,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>32</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_X_question48_title_footnote_32
                }
             ],
@@ -2407,7 +2472,8 @@ export const absNationalReport1 = [
             "section": "Part-X",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q049",
@@ -2443,21 +2509,21 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>33</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_XI_question50_title_footnote_33
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>33</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_XI_question50_title_footnote_33
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>33</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_XI_question50_title_footnote_33
                }
             ]
@@ -2482,21 +2548,21 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>34</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_XI_question51_title_footnote_34
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>34</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_XI_question51_title_footnote_34
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseExplainYourResponse+'<sup>34</sup>',
+                  "caption": nr1T.pleaseExplainYourResponse,
                   "footnote": nr1T.part_XI_question51_title_footnote_34
                }
             ]
@@ -2506,7 +2572,8 @@ export const absNationalReport1 = [
             "section": "Part-XI",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q052",
@@ -2612,21 +2679,21 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "caption": nr1T.reportingPeriod,
                   "footnote": nr1T.part_XII_question54_footnote_36
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "caption": nr1T.reportingPeriod,
                   "footnote": nr1T.part_XII_question54_footnote_36
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod+'<sup>36</sup>',
+                  "caption": nr1T.reportingPeriod,
                   "footnote": nr1T.part_XII_question54_footnote_36
                }
             ],
@@ -2672,7 +2739,7 @@ export const absNationalReport1 = [
             "section": "Part-XII",
             "number": "54.2",
             "type": "lstring",
-            "title": nr1T.additionalInformation,
+            "title": nr1T.part_XII_question54_b_title,
          },
 
          {
@@ -2713,7 +2780,8 @@ export const absNationalReport1 = [
             "section": "Part-XII",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q056",
@@ -2770,7 +2838,8 @@ export const absNationalReport1 = [
          "section": "Part-XIII",
          "number": "",
          "type": "legend",
-         "title": nr1T.additionalInformation
+         "title": nr1T.additionalInformation,
+         "footnote": nr1T.additionalInformation_footnotes
       },
       {
          "key": "Q058",
@@ -2936,14 +3005,14 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.pleaseProvideFurtherInformation+'<sup>39</sup>',
+                  "caption": nr1T.pleaseProvideFurtherInformation,
                   "footnote": nr1T.part_XIV_question62_footnote_39
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.pleaseProvideFurtherInformation+'<sup>39</sup>',
+                  "caption": nr1T.pleaseProvideFurtherInformation,
                   "footnote": nr1T.part_XIV_question62_footnote_39
                }
             ],
@@ -2963,7 +3032,7 @@ export const absNationalReport1 = [
             "section": "Part-XIV",
             "number": "62.1",
             "type": "option",
-            "title": nr1T.pleaseSpecify,
+            "title": nr1T.part_XIV_question62_option_title,
             "multiple": false,
             "mandatory": true,
             "options": [
@@ -3012,7 +3081,8 @@ export const absNationalReport1 = [
             "section": "Part-XIV",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformation
+            "title": nr1T.additionalInformation,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q065",

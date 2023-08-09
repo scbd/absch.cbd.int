@@ -26,7 +26,8 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                 required: "@",
                 layout: "@",
                 locales: '=?',
-                beforeSearch: '&?'
+                beforeSearch: '&?',
+                onOptionSelected: '&?'
             },
             link: function($scope, $element, $attr, ngModelController) {
                 translationService.set('kmTermCheckT', kmTermCheckT);
@@ -205,6 +206,9 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                     if (!angular.equals(oNewBinding, $scope.binding)){
                         $scope.binding = oNewBinding;
                         ngModelController.$setViewValue($scope.binding);
+                    }
+                    if($scope.onOptionSelected){
+                        $scope.onOptionSelected({$element, value:$scope.binding});
                     }
                 };
 
