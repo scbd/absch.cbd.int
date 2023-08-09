@@ -2295,7 +2295,7 @@ export const absNationalReport1 = [
                },
                {
                   "value": "false",
-                  "title": nr1T.notApplicable,
+                  "title": nr1T.no,
                   "type": "lstring",
                   "caption": nr1T.additionalInformation,
                   "footnote":nr1T.part_IX_question45_footnote_addInfo_36
@@ -2838,7 +2838,8 @@ export const absNationalReport1 = [
          "section": "Part-XIII",
          "number": "",
          "type": "legend",
-         "title": nr1T.additionalInformation
+         "title": nr1T.additionalInformation,
+         "footnote": nr1T.additionalInformation_footnotes
       },
       {
          "key": "Q058",
