@@ -2734,6 +2734,7 @@ export const cpbNationalReport5 = [
                      "number":"a",
                      "type":"option",
                      "title": nr5T.article18_question90_a_title,
+                     "mandatory":true,
                      "multiple":false,
                      "options":[
                         {
@@ -2752,6 +2753,7 @@ export const cpbNationalReport5 = [
                      "number":"b",
                      "type":"option",
                      "title": nr5T.article18_question90_b_title,
+                     "mandatory":true,
                      "multiple":false,
                      "options":[
                         {
@@ -2782,6 +2784,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.article18_question91_a_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -2800,6 +2803,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.article18_question91_b_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -2828,6 +2832,7 @@ export const cpbNationalReport5 = [
                      "number":"a",
                      "type":"option",
                      "title": nr5T.article18_question92_a_title,
+                     "mandatory":true,
                      "multiple":false,
                      "options":[
                         {
@@ -2846,6 +2851,7 @@ export const cpbNationalReport5 = [
                      "number":"b",
                      "type":"option",
                      "title": nr5T.article18_question92_b_title,
+                     "mandatory":true,
                      "multiple":false,
                      "options":[
                         {
@@ -2935,6 +2941,7 @@ export const cpbNationalReport5 = [
                      "number":"a",
                      "type":"option",
                      "title": nr5T.article18_question94_a_title,
+                     "mandatory":true,
                      "multiple":false,
                      "options":[
                         {
@@ -2953,6 +2960,7 @@ export const cpbNationalReport5 = [
                      "number":"b",
                      "type":"option",
                      "title": nr5T.article18_question94_b_title,
+                     "mandatory":true,
                      "multiple":false,
                      "options":[
                         {
@@ -4902,6 +4910,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.cooperation_question155_a_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -4920,6 +4929,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.cooperation_question155_b_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -4938,6 +4948,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.cooperation_question155_c_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -4985,7 +4996,8 @@ export const cpbNationalReport5 = [
                      "number":"d",
                      "type":"option",
                      "title": nr5T.cooperation_question155_d_title,
-                     "multiple":false,                     
+                     "multiple":false,
+                     "mandatory":true,                     
                      "options":[
                         {
                            "value":"true",
@@ -5004,6 +5016,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.cooperation_question155_e_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -5052,6 +5065,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.cooperation_question157_a_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -5070,6 +5084,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.cooperation_question157_b_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
