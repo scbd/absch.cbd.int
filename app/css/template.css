@@ -1923,6 +1923,10 @@ sup {
     /* font-size: 8px; */
     font-size: x-small;
 }
+.nr sup {
+    display: none;
+  }
+
 a.disabled{
     color:#BBB!important;
 }
