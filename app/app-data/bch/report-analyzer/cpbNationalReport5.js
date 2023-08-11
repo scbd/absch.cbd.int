@@ -1798,6 +1798,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.riskAssessment,
                      "multiple":false,
+                     "mandatory": true,
                      "options":[
                         {
                            "value":"true",
@@ -1823,6 +1824,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.riskManagement,
                      "multiple":false,
+                     "mandatory": true,
                      "options":[
                         {
                            "value":"true",
