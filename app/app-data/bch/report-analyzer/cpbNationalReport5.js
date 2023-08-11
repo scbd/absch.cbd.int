@@ -1907,6 +1907,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.articles15_16_question69_a_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -1925,6 +1926,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.articles15_16_question69_b_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -1943,6 +1945,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.articles15_16_question69_c_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -1961,6 +1964,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.articles15_16_question69_d_title,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"true",
@@ -1990,6 +1994,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.riskAssessment,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"0",
@@ -2050,6 +2055,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.riskManagement,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"0",
@@ -2110,6 +2116,7 @@ export const cpbNationalReport5 = [
                      "type":"option",
                      "title": nr5T.monitoring,
                      "multiple":false,
+                     "mandatory":true,
                      "options":[
                         {
                            "value":"0",
@@ -3948,7 +3955,7 @@ export const cpbNationalReport5 = [
                "key":"Q118",
                "section":"Article22",
                "number":"118",
-               "type":"term",
+               "type":"option",
                "title": nr5T.article22_question118_title,
                "multiple":false,
                "options":[
