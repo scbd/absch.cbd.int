@@ -37,6 +37,9 @@
 
             <loading v-if="loading" caption="Refreshing...." />
 
+            <a v-if="hasHelp" class="btn btn-sm" @click="showHelp = true">
+              <i class="fa fa-question-circle" aria-hidden="true"></i> Help
+            </a>
 
             <button v-if="subscription" :disabled="subscribing" class="btn btn-sm"
               :class="{ 'btn-outline-dark': !subscription.watching, 'btn-dark': subscription.watching }" type="button"
@@ -108,6 +111,11 @@
       </div>
 
       <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; refresh($event)"></edit-post>
+
+      <simple-modal v-if="showHelp" @close="showHelp = false" :title="$options.filters.lstring(helpArticle.title)">
+        <cbd-article :article="helpArticle" :hide-cover-image="false" :show-edit="false"  />
+      </simple-modal>
+
     </div>
 
     <loading v-if="loading" />
@@ -117,6 +125,7 @@
   
 <script>
 import ForumsApi from '~/api/forums';
+import ArticlesApi from '~/api/articles';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import { cbdArticle } from 'scbd-common-articles';
 import Post from '~/components/forums/post.vue';
@@ -125,6 +134,7 @@ import pending   from '~/services/pending-call'
 import Loading  from '~/components/common/loading.vue'
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
 import ErrorPane from '~/components/common/error.vue';
+import SimpleModal from '~/components/common/modal.vue';
 
 export default {
   name: 'Forum',
@@ -134,7 +144,8 @@ export default {
     EditPost,
     Loading,
     ErrorPane,
-    RelativeDatetime
+    RelativeDatetime,
+    SimpleModal
   },
   props: {
     forumId: Number
@@ -150,6 +161,8 @@ export default {
       subscribing: false,
       loading:false,
       error: null,
+      helpArticle: null,
+      showHelp: null,
       edit: null
     }
   },
@@ -157,6 +170,9 @@ export default {
     portalId() { return this.$route.params.portalId; },
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.forum?.isOpen; },
+    hasHelp()  { return !!this.helpArticle; },
+    get showHelp() { return !!this.helpArticle?.visible;}, 
+    set showHelp(value) { if(this.helpArticle) this.helpArticle.visible = value }, 
   },
   watch: {
     loggedIn: load
@@ -174,6 +190,7 @@ export default {
   async created() {
 
     this.forumsApi = new ForumsApi();
+    this.articleApi = new ArticlesApi();
 
     await this.load();
 
@@ -187,7 +204,7 @@ async function load() {
 
   try {
 
-    const { forumsApi, forumId, loggedIn} = this;
+    const { forumsApi, articleApi, forumId, loggedIn} = this;
 
     this.articleAdminTags = ["introduction", `forum:${forumId}`];
 
@@ -201,6 +218,8 @@ async function load() {
     this.forum   = await qForum;
     this.threads = await qThreads
     this.subscription = await qWatch
+
+    this.helpArticle = await articleApi.queryArticles({ q: { adminTags : { $all: ['forums', 'getting-help'] } }, fo: 1});
   }
   catch(err) {
     this.error = err;
