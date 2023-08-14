@@ -154,9 +154,6 @@ function toRoutes({ slug, menus, content }, parentPath) {
 
   const params = !content ? {} : { ... (content[type] || {}) };
 
-  if(type=='article' && !params.articleId) params.articleId = params.id; // TMP Fix
-  if(type=='forum'   && !params.forumId)   params.forumId   = params.id; // TMP Fix
-
   const routes = [
     { path, component, params }
   ];
