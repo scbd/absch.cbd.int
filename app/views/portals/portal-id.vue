@@ -57,15 +57,25 @@ export default {
   },
   methods:{
     buildMenu,
-    onRouteChange
+    onRouteChange,
+    initializePortal,
   },
   watch: {
-    path: onRouteChange
+    portalId: initializePortal
   },
   async created() {
+    await this.initializePortal();
+  }
+}
 
-    const { portalId } = this;
+async function initializePortal() {
+
+  console.log('initializePortal', this.portalId)
+
+    const { portalId, unwatchPath } = this;
     const { realm } = this.$realm;
+
+    if(unwatchPath) unwatchPath();
 
     this.menusApi    = new MenusApi();
     this.articlesApi = new ArticlesApi();
@@ -75,10 +85,10 @@ export default {
 
     subRouter = buildRoutes(portalMenu);
 
-    this.portalMenu = portalMenu;
-    
+    this.portalMenu  = portalMenu;
+    this.unwatchPath = this.$watch('path', onRouteChange);
+
     this.onRouteChange();
-  }
 }
 
 function onRouteChange() {
