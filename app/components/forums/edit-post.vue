@@ -4,9 +4,9 @@
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">
-                <span v-if="postId">Edit post</span>
-                <span v-else-if="parentId">Post a reply</span>
-                <span v-else-if="forumId">Create a new thread</span>
+                <span v-if="postId">{{ $t('titleEditPost') }}</span>
+                <span v-else-if="parentId">{{ $t('titlePostReply') }}</span>
+                <span v-else-if="forumId">{{ $t('titleCreateThread') }}</span>
                 <i v-if="loading" class="fa fa-cog fa-spin"></i> 
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -14,17 +14,19 @@
         <div class="modal-body">
             <div v-if="post">
 
-                <input v-if="forumId || postId" type="text" class="form-control mb-2"  v-model="subject" placeholder="Type the subject of your post here">
+                <input v-if="forumId || postId" type="text" class="form-control mb-2"  v-model="subject" :placeholder="$t('placeholderSubject')">
                 <h3 v-else>{{subject}}</h3>
                 <div v-if="parent && parent.postId!=post.postId" class="mb-2">
-                    <div v-if="parent.postId==parent.threadId">In reply to the <a href="#parentBody" data-bs-toggle="collapse">main topic</a></div>
+                    <div v-if="parent.postId==parent.threadId">
+                        <a href="#parentBody" data-bs-toggle="collapse"> {{ $t('inReplyToMainThread') }}</a>
+                    </div>
                     <div v-else>
-                        In reply to <cite :title="parent.createdBy">{{parent.createdBy}}</cite> <a href="#parentBody" data-bs-toggle="collapse">post #{{parent.postId}}</a>
+                        <a href="#parentBody" data-bs-toggle="collapse"> {{ $t('inReplyToPost', { name: parent.createdBy, postId: parent.postId }) }}</a>
                     </div>
                     <blockquote class="border-start border-4 p-2 collapse mt-2" id="parentBody" ref="parentBody" v-html="parent.htmlMessage"></blockquote>
                 </div>
 
-                <textarea ref="body" class="form-control mb-2" rows="10" v-model="message" placeholder="Type your message here"></textarea> 
+                <textarea ref="body" class="form-control mb-2" rows="10" v-model="message" :placeholder="$t('placeholderMessage')"></textarea> 
 
 <!--                     
                 <div ref="body" class="body p-2 border" 
@@ -34,7 +36,7 @@
                 
 
                 <div class="attachments" v-if="forum.allowAttachments || attachments.length">
-                    <h6 class="card-subtitle text-muted">Attachments(s)</h6>
+                    <h6 class="card-subtitle text-muted">{{ $t('attachments') }}</h6>
 
                     <div class="container">
                         <div class="row g-1">
@@ -44,7 +46,7 @@
                                     <button class="btn btn-sm "  type="button"
                                     :class="{ 'btn-outline-danger' : !attachment.deletedBy, 'btn-outline-dark': attachment.deletedBy }"  
                                     @click="toggleDeleted(attachment.attachmentId)" 
-                                    :title="attachment.deletedBy ? 'Undo remove attachment' : 'Remove attachment'"
+                                    :title="attachment.deletedBy ? $t('buttonUndeleteAttachement') : $t('buttonDeleteAttachement')"
                                     >
                                         <i class="fa" :class="{ 'fa-times' : !attachment.deletedBy, 'fa-undo': attachment.deletedBy }"></i>
                                     </button>
@@ -67,9 +69,9 @@
                 <div class="col">
                 </div>
                 <div class="col-auto">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('buttonClose') }}</button>
                     <button type="button" :disabled="saving" class="btn btn-primary" @click="save()">
-                        Save <i v-if="saving" class="fa fa-cog fa-spin"></i> 
+                        {{ $t('buttonSave') }} <i v-if="saving" class="fa fa-cog fa-spin"></i> 
                     </button>
                 </div>
             </div>
@@ -86,9 +88,11 @@ import ForumsApi from '~/api/forums';
 import pending   from '~/services/pending-call'
 import Attachment from './attachment.vue';
 import AttachmentUpload from './attachment-upload.vue';
+import i18n from '../../app-text/components/forums/edit-post.json';
 
 export default {
     name: 'EditPost',
+    i18n: { messages: { en: i18n } },
     components: { AttachmentUpload, Attachment},
     emits: ['show', 'close'],
     props: {

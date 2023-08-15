@@ -6,7 +6,7 @@
         <div class="modal-header">
             <slot name="header">
                 <h5 class="modal-title" id="staticBackdropLabel">
-                    {{ title }}
+                    {{ title | lstring }}
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </slot>
@@ -21,7 +21,7 @@
                     <div class="col">
                     </div>
                     <div class="col-auto">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t("closeButton") }}</button>
                     </div>
                 </div>
             </slot>
@@ -34,12 +34,14 @@
     
 <script>
 import bootstrap from 'bootstrap'
+import i18n from "../../app-text/components/common/modal.json";
 
 export default {
     name: 'SimpleModal',
+    i18n: { messages: { en: i18n } },
     emits: ['show', 'close'],
     props: {
-        title:    { type:  String },
+        title:    { type:  [String, Object] },
     },
     computed: {
     },

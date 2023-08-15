@@ -2,7 +2,7 @@
     <span>
         <button :disabled="disabled" class="btn btn-light" @click="$refs.files.click()">
             <i class="fa fa-upload"></i>
-            Upload document(s)
+            {{ $t('buttonUploadDocuments') }}
         </button>
         <input v-if="!disabled" ref="files" type="file" multiple @change="uploadFile($event)" style="display:none">
     </span>
@@ -11,10 +11,12 @@
 <script>
 import ForumsApi from '~/api/forums';
 import pending   from '~/services/pending-call'
+import i18n from '../../app-text/components/forums/edit-post.json';
 
 
 export default {
     name: 'AttachmentUpload',
+    i18n: { messages: { en: i18n } },
     components: {  },
     props: {
         forumId : { type:Number, required: true },
