@@ -1,0 +1,21 @@
+{
+  "titleCreateThread" : "Create a new thread",
+  "titlePostReply" : "Post a reply",
+  "titleEditPost" : "Edit post",
+  "attachments" : "Attachments(s)",
+  "placeholderSubject": "Type the subject of your post here",
+  "placeholderMessage": "Type your message here",
+  "inReplyToMainThread" : "In reply to the main topic",
+  "inReplyToPost" : "In reply to {name} post #{postId}",
+  "attachmentLocked" : "Attachment is locked.\nPlease click the attachment file link to unlock...",
+  "attachmentUnlocking" : "The attachment is unlocking. Please wait...",
+  "attachmentUnlocked" : "Attachment is ready to download.\nPlease click the attachment to access the file.",
+  "buttonUploadDocuments" : "Upload document(s)x",
+  "buttonDeleteAttachement" : "Remove attachment",
+  "buttonUndeleteAttachement" : "Undo remove attachment",
+  "buttonClose" : "Close",
+  "buttonSave" : "Save",
+  "sizeB"  : "{size} B",
+  "sizeKB" : "{size} kB",
+  "sizeMB" : "{size} MB"
+}

@@ -14,9 +14,12 @@ import ForumsApi from '~/api/forums';
 import pending   from '~/services/pending-call'
 import Loading   from '~/components/common/loading.vue'
 import bootstrap from  'bootstrap';
+import i18n from '../../app-text/components/forums/edit-post.json';
+import { encode as encodeHtml } from '~/services/html.js'
 
 export default {
     name: 'Attachment',
+    i18n: { messages: { en: i18n } },
     components: {
         Loading
     },
@@ -125,20 +128,24 @@ function sizeText() {
 
     const { size } = this.attachment;
 
-    if(size<1024)       return `${size} B` 
-    if(size/1024 <1024) return `${(size/1024).toFixed(1)} kB` 
+    if(size<1024)       return this.$t('sizeB',  {size : size }); 
+    if(size/1024 <1024) return this.$t('sizeKB', {size : (size/1024).toFixed(1)}); 
 
-    return `${(size/1024/1024).toFixed(1)} MB` 
+    return this.$t('sizeMB', {size : (size/1024/1024).toFixed(1)});
 }
 function tooltipMessageHtml() {
 
     const { isPublic, locked, loading } = this;
 
     if(isPublic) return '';
-    if(loading)  return '<i class="fa fa-cog fa-spin"></i>The attachment is unlocking. Please wait...';
-    if(locked)   return '<i class="fa fa-lock"></i> Attachment is locked.<br>Please click the attachment file link to unlock...';
+    if(loading)  return `<i class="fa fa-cog fa-spin"></i>${ encodeTextToHtml(this.$t('attachmentUnlocking')) }`;
+    if(locked)   return `<i class="fa fa-lock"></i>${ encodeTextToHtml(this.$t('attachmentLocked')) }`;
 
-    return '<i class="fa fa-check"></i> Attachment is ready to download.<br>Please click the attachment to access the file.';
+    return `<i class="fa fa-check"></i>${ encodeTextToHtml(this.$t('attachmentUnlocked')) }`;
+}
+
+function encodeTextToHtml(text) {
+    return encodeHtml(text).replace('/\n/g', "<br>\n");
 }
 
 </script>
