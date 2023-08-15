@@ -13,7 +13,7 @@
     <div v-else-if="forum">
 
       <div v-if="threads && threads.length" class=" mb-3">
-        <h3>Table of Contents</h3>
+        <h3>{{ $t("tableOfContents") }}</h3>
         <ul>
           <li v-for="thread in threads" :key="thread.threadId">
             <a :href="`#${thread.threadId}`">{{
@@ -28,30 +28,30 @@
           <div class="col align-self-center">
             <a v-if="forum.security.canEdit" class="btn btn-light btn-sm" type="button"
               :href="`https://bch.cbd.int/cms/ui/forums/management/forummanagement.aspx?forumid=${encodeURIComponent(forumId)}&returnurl=${encodeURIComponent(browserUrl())}`">
-              <i class="fa fa-cog"></i> Forum properties
+              <i class="fa fa-cog"></i> {{ $t('buttonForumProperties') }}
             </a>
 
-            <em v-if="forum.isClosed">This forum is closed for comments.</em>
+            <em v-if="forum.isClosed">{{ $t('forumIsClosedForComments') }}</em>
           </div>
           <div v-if="isOpen" class="col-auto align-self-center">
 
-            <loading v-if="loading" caption="Refreshing...." />
+            <loading v-if="loading" :caption="$t('refreshing')" />
 
             <a v-if="hasHelp" class="btn btn-sm" @click="showHelp = true">
-              <i class="fa fa-question-circle" aria-hidden="true"></i> Help
+              <i class="fa fa-question-circle" aria-hidden="true"></i> {{ $t('buttonHelp') }}
             </a>
 
             <button v-if="subscription" :disabled="subscribing" class="btn btn-sm"
               :class="{ 'btn-outline-dark': !subscription.watching, 'btn-dark': subscription.watching }" type="button"
               @click="toggleSubscription()">
-              <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> Unsubscribe from mailing list</span>
-              <span v-else><i class="fa fa-envelope-o"></i> Subscribe to mailing list</span>
+              <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> {{ $t('buttonUnsubscribe') }} </span>
+              <span v-else><i class="fa fa-envelope-o"></i> {{ $t('buttonSubscribe') }} </span>
               <loading v-if="subscribing" />
             </button>
 
             <button v-if="forum.security.canPost" class="btn btn-success btn-sm" :disabled="!loggedIn" type="button"
               @click="edit = { forumId: forumId }">
-              <i class="fa fa-plus"></i> New Topic
+              <i class="fa fa-plus"></i> {{ $t('buttonCreateThread' )}}
             </button>
           </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="card mb-3" :class="highlightPostClasses(thread.threadId)">
           <h5 class="card-header">
 
-            <i v-if="thread.isPinned" class="float-end fa fa-thumb-tack" title="This post is pinned to remain at the top of the thread list"></i>
+            <i v-if="thread.isPinned" class="float-end fa fa-thumb-tack" :title="$t('pinnedThread')"></i>
             
             <a :href="getThreadUrl(thread.threadId)" style="color:inherit">
               {{ thread.subject | lstring }}
@@ -74,9 +74,9 @@
             <post :post="thread" @refresh="refresh($event)" :highlight-on-hash="false">
               <template v-slot:showReplies="{ replies }">
 
-                <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`">Read the post »</a>
-                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comment"></i> Read the reply »</a>
-                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comments"></i> Read the {{ replies  }} replies  »</a>
+                <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`"> {{ $t('buttonReadPost') }}</a>
+                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comment"></i> {{ $t('buttonReadReply', { count: replies }) }}</a>
+                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comments"></i> {{ $t('buttonReadReplies', { count: replies }) }}</a>
 
 
               </template>
@@ -86,22 +86,21 @@
           <div class="card-footer">
             <div class="row">
               <div class="col align-self-center">
-                <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">No replies</a>
-                <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">One reply</a>
-                <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ thread.replies }} replies</a>
+                <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">{{ $t('linkNoReplies') }}</a>
+                <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ $t('linkOneReply') }}</a>
+                <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ $t('linkXReplies', { replies: thread.replies }) }}</a>
                 <span v-if="thread.isClosed || forum.isClosed">
                   |
-                  <em v-if="forum.isClosed">This forum is closed for comments.</em>
-                  <em v-else-if="thread.isClosed">This thread is closed for comments</em>
+                  <em v-if="forum.isClosed">{{ $t('forumIsClosedForComments') }}</em>
+                  <em v-else-if="thread.isClosed">{{ $t('threadIsClosedForComments') }}</em>
                 </span>
                 
               </div>
               <div class="col-auto align-self-center">
                 <span v-if="thread.lastPostId && thread.lastPostId!=thread.threadId">
                   <a :href="`${getThreadUrl(thread.threadId)}#${thread.lastPostId}`">
-                    Last reply <relative-datetime class="date" :date="thread.lastPostOn"></relative-datetime> by
-                    {{ thread.lastPostBy }},
-                  </a>
+                    {{ $t('LastReplyOn', {datetime: ""}) }} <relative-datetime class="date" :date="thread.lastPostOn" />
+                    {{ $t('LastReplyBy', {name: thread.lastPostBy }) }}                   </a>
                 </span>
               </div>
             </div>
@@ -135,9 +134,11 @@ import Loading  from '~/components/common/loading.vue'
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
 import ErrorPane from '~/components/common/error.vue';
 import SimpleModal from '~/components/common/modal.vue';
+import i18n from "~/app-text/views/portals/forums.json";
 
 export default {
   name: 'Forum',
+  i18n: { messages: { en: i18n } },
   components: {
     CbdArticle: cbdArticle,
     Post,

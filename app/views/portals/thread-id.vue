@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!thread && !error"><loading caption="Loading..."/></div>
+    <div v-if="!thread && !error"><loading :caption="$t('loading')"/></div>
 
     <error-pane v-else-if="error" :error="error" />
 
@@ -16,8 +16,8 @@
           </div>
           <div class="col align-self-center">
             <b>{{ thread.subject | lstring }}</b>
-            <div v-if="forum && forum.isClosed"><em>This forum is closed for comments.</em></div>  
-            <div v-else-if="thread.isClosed"><em>This thread is closed for comments.</em></div>  
+            <div v-if="forum && forum.isClosed"><em>{{ $t('forumIsClosedForComments') }}</em></div>  
+            <div v-else-if="thread.isClosed"><em>{{ $t('threadIsClosedForComments') }}</em></div>  
           </div>
 
           <div class="col-auto align-self-center">
@@ -25,8 +25,8 @@
             <button v-if="isOpen && subscription" :disabled="subscribing"
               class="btn btn-sm" :class="{ 'btn-outline-dark':!subscription.watching, 'btn-dark': subscription.watching }" type="button"
               @click="toggleSubscription()">
-              <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> Unsubscribe from topic mailing list</span>
-              <span v-else><i class="fa fa-envelope-o"></i> Subscribe to topic mailing list</span>
+              <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> {{ $t('buttonUnsubscribe') }} </span>
+              <span v-else><i class="fa fa-envelope-o"></i> {{ $t('buttonSubscribe') }} </span>
               <i v-if="subscribing" class="fa fa-cog fa-spin"></i>
             </button>
 
@@ -40,9 +40,9 @@
         <template v-slot:showReplies="{ replies }">
             <em>
               <a class="anchor-margin" name="replies"></a>
-              <span v-if="replies == 0">No replies</span>
-              <span v-if="replies == 1"><i class="fa fa-comment"></i> One reply</span>
-              <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ replies  }} replies</span>
+              <span v-if="replies == 0"> {{ $t('linkNoReplies', { count: replies }) }}</span>
+              <span v-if="replies == 1"><i class="fa fa-comment"></i> {{ $t('linkOneReply', { count: replies }) }} </span>
+              <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ $t('linkXReplies', { count: replies }) }} </span>
             </em>
         </template>
       </post>
@@ -62,9 +62,11 @@ import Post from '~/components/forums/post.vue';
 import pending   from '~/services/pending-call'
 import Loading  from '~/components/common/loading.vue'
 import ErrorPane from '~/components/common/error.vue';
+import i18n from "~/app-text/views/portals/forums.json";
 
 export default {
   name: 'Forum',
+  i18n: { messages: { en: i18n } },
   components: { Post, Loading, ErrorPane },
   props: {
     threadId: Number
