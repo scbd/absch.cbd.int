@@ -2211,6 +2211,7 @@ export const cpbNationalReport5 = [
                "multiple":true,
                "mandatory":true,
                "footnote": nr5T.articles15_16_question71_footnote_3+'<br>'+nr5T.articles15_16_question71_footnote_4,
+               "footnotePosition": 'bottom',
                "options":[
                   {
                      "value":"505AA0C7-CBB7-4961-9956-83588F6C1C20",
