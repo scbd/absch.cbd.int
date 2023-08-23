@@ -75,7 +75,9 @@
 						</br>
 						<label>{{::('numbers.five'|$translate)}}. {{::('viewNr5T.q005_title'|$translate)}} </label>
 						<div comapre-val>
-							<km-value-bool value="document.Q005" locales="locale"></km-value-bool>
+							<div class="km-value">
+								{{document.Q005.value=='true'?'Yes':'No'}}
+							</div>
 						</div>
 					</div>
 					<div ng-show="document.Q006">
