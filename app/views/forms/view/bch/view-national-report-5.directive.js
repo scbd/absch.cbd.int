@@ -23,7 +23,10 @@ import numbers from '~/app-text/numbers.json';
 			link : function ($scope){
 				translationService.set('viewNr5T', viewNr5T);
 				translationService.set('numbers', numbers);
-				$scope.nr5Data = cpbNationalReport5;			
+				$scope.nr5Data = cpbNationalReport5;	
+				$scope.$watch('document', function(){
+					$scope.isParty = $scope.document.Q005.value=='true'?true:false;
+				})
 			}
 		};
 	}]);
