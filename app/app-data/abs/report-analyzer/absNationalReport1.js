@@ -229,7 +229,8 @@ export const absNationalReport1 = [
             "section": "Part-II",
             "number": "",
             "type": "legend",
-            "title": nr1T.additionalInformationOnInstitutional
+            "title": nr1T.additionalInformationOnInstitutional,
+            "footnote": nr1T.additionalInformation_footnotes
          },
          {
             "key": "Q006",
@@ -2756,21 +2757,21 @@ export const absNationalReport1 = [
                   "value": "true",
                   "title": nr1T.yes,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "caption": nr1T.reportingPeriod,
                   "footnote": nr1T.part_XII_question55_footnote_38
                },
                {
                   "value": "true.some",
                   "title": nr1T.yesToSomeExtent,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "caption": nr1T.reportingPeriod,
                   "footnote": nr1T.part_XII_question55_footnote_38
                },
                {
                   "value": "false",
                   "title": nr1T.no,
                   "type": "lstring",
-                  "caption": nr1T.reportingPeriod+'<sub>38</sup>',
+                  "caption": nr1T.reportingPeriod,
                   "footnote": nr1T.part_XII_question55_footnote_38
                }
             ]
