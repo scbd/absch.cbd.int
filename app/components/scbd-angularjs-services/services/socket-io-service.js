@@ -26,7 +26,7 @@ import './utilities';
                 if(authToken){
                     query += '&authorization=' + authToken;
                 }
-                socket = io(apiServer, { query: query });
+                socket = io(apiServer, { transports: ["websocket"], query: query });
                 socket.connect(apiServer, query);
 
                 socket.on('connect', onConnect);
