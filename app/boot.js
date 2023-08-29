@@ -141,7 +141,7 @@ export default function bootApp(window, require, defineX) {
             'angular-vue'               : cdnHost + '@scbd/angular-vue@4.0.0/dist/index.min',
             'ky'                        :           'libs/globals/ky',
 
-            'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
+            'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min',
             'shim'                      :           'libs/require-shim/src/shim',
             
             'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
