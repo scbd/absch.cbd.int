@@ -12,6 +12,7 @@ import verifySingleRecord from '~/components/common/verify-single-record.vue';
 export { default as template } from './edit-national-report-5.html';
 import 'ngDialog';
 import '~/views/forms/edit/directives/edit-national-report.directive';
+import '~/views/forms/directives/nr-yes-no';
 import prevQuestionsMapping from '~/app-data/bch/report-analyzer/mapping/cpbNationalReport5-4.json';
 import { cpbNationalReport5 } from '~/app-data/bch/report-analyzer/cpbNationalReport5';
 import { cpbNationalReport4 } from '~/app-data/bch/report-analyzer/cpbNationalReport4';
@@ -24,7 +25,23 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         $scope.customValidations = {};
         $scope.previousAnswersMapping = {};
         $scope.questions = [cpbNationalReport5, cpbNationalReport4];
-        
+        $scope.question_005 = {
+            "key": "Q005",
+            "number": "5",
+            "type": "option",
+            "title": "",
+            "multiple": false,
+            "options": [
+               {
+                  "value": "true",
+                  "title": 'Yes'
+               },
+               {
+                  "value": "false",
+                  "title": 'No'
+               }
+            ]
+         }
         $scope.tabs = [
             {
                 "tab": 1,
@@ -145,7 +162,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         function getPartyStatus(government) {
             if (government && $scope.document) {
                     commonjs.getCountry(government.identifier).then(function(country){
-                    if(!$scope.document['Q005'])
+                    if(country.isParty)
                         $scope.document['Q005'] = { value : country.isParty.toString() };
                     $scope.isParty = $scope.document['Q005']?.value == 'true'?true:false ;
                 });
