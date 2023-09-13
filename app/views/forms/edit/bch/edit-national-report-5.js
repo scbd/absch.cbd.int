@@ -18,6 +18,8 @@ import { cpbNationalReport5 } from '~/app-data/bch/report-analyzer/cpbNationalRe
 import { cpbNationalReport4 } from '~/app-data/bch/report-analyzer/cpbNationalReport4';
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
 import numbers from '~/app-text/numbers.json';
+import yesNoT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-yes-no.json';
+
 export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout",
     'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm', 'translationService',
     function ($scope, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
@@ -34,11 +36,11 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             "options": [
                {
                   "value": "true",
-                  "title": 'Yes'
+                  "title": yesNoT.yes
                },
                {
                   "value": "false",
-                  "title": 'No'
+                  "title": yesNoT.no
                }
             ]
          }
@@ -162,9 +164,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
         function getPartyStatus(government) {
             if (government && $scope.document) {
                     commonjs.getCountry(government.identifier).then(function(country){
-                    if(country.isParty)
-                        $scope.document['Q005'] = { value : country.isParty.toString() };
-                    $scope.isParty = $scope.document['Q005']?.value == 'true'?true:false ;
+                    $scope.isParty = country.isParty ;
                 });
             }
         }
