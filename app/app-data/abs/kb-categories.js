@@ -128,6 +128,13 @@ export const categories = [
     ]
   },
   {
+    "title": "E-Learning",
+    "adminTags": [
+      "elearning"
+    ],
+    "articles": []
+  },
+  {
     "title": "Informal Advisory Committee (IAC)",
     "adminTags": [
       "meetings",
