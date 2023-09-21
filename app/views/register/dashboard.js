@@ -132,7 +132,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         {
                             appendToBody: true,
                             type        : 'element',
-                            selector    : "#addNewRecordContact",
+                            selector    : "#addNewRecordcontact",
                             title       : joyRideText.addNewRecord.title,
                             content     : joyRideText.addNewRecord.content,
                             placement   : 'right',
@@ -141,7 +141,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         {
                             appendToBody: true,
                             type        : 'element',
-                            selector    : "#viewListContact",
+                            selector    : "#viewListcontact",
                             title       : joyRideText.viewAllRecords.title,
                             content     : joyRideText.viewAllRecords.content,
                             placement   : 'right'
