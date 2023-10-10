@@ -20,7 +20,7 @@
                             <i class="fa fa-edit"></i>
                             <relative-datetime class="date" :title="`| by ${post.updatedBy}`" :date="post.updatedOn"></relative-datetime>
                         </span>
-                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="`This is a reply to #${post.parentId}`"><i class="fa fa-arrow-up"></i></a>
+                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="$t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
                         <!-- <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a> -->
                     </div>
                 </div>
@@ -30,7 +30,7 @@
         <div ref="body" class="body mb-2" v-html="post.htmlMessage"></div>
 
         <div class="attachments" v-if="post.attachmentCount">
-            <h6 class="card-subtitle mb-2 text-muted">Attachment(s)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ $t('titleAttachments') }}</h6>
             <ul class="list-unstyled">
                 <li v-for="attachment in post.attachments" :key="attachment.attachmentId">
                     <attachment :attachment="attachment"/>
@@ -43,8 +43,7 @@
 
                     <slot name="showReplies" v-bind:replies="post.replies" v-bind:posts="posts">
                         <button class="btn btn-light btn-sm" @click.prevent="toggleReplies()" v-if="post.replies">
-                            <span v-if="post.replies == 1">{{ post.replies }} reply</span>
-                            <span v-if="post.replies > 1">{{ post.replies }} replies</span>
+                            {{ $tc('replies', post.replies, { count: post.replies}) }}
                             <i class="fa" :class="{ 'fa-caret-up' : !!posts, 'fa-caret-down' : !posts }"></i>
                         </button>
                     </slot>
@@ -53,14 +52,14 @@
                 <div class="col-auto align-self-center">
                     <div v-if="canEdit" class="btn-group">
                         <button type="button" class="btn btn-light btn-sm" @click.prevent="edit()">
-                            <i class="fa fa-edit"></i> Edit
+                            <i class="fa fa-edit"></i> {{ $t('buttonEdit') }}
                         </button>
                         <button type="button" class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#" @click.prevent="edit()">
-                                <i class="fa fa-edit"></i> Edit</a>
+                                <i class="fa fa-edit"></i> {{ $t('buttonEdit') }} </a>
                             </li>
 
                             <li v-if="canPin || canClose"><hr class="dropdown-divider"></li>
@@ -68,23 +67,23 @@
                             <li v-if="canPin">
                                 <a class="dropdown-item" href="#" @click.prevent="togglePin()">
                                     <i class="fa fa-thumb-tack"></i> 
-                                    <span v-if="post.isPinned">Unpin</span>
-                                    <span v-else>Pin</span>
+                                    <span v-if="post.isPinned">{{ $t('buttonUnpinThread') }}</span>
+                                    <span v-else>{{ $t('buttonPinThread') }}</span>
                                 </a>
                             </li>
 
                             <li v-if="canClose">
                                 <a class="dropdown-item" href="#" @click.prevent="toggleClose()">
                                     <i class="fa fa-comments"></i>
-                                    <span v-if="post.isClosed">Open</span>
-                                    <span v-else>Close</span>
+                                    <span v-if="post.isClosed">{{ $t('buttonOpenThread') }}</span>
+                                    <span v-else>{{ $t('buttonCloseThread') }}</span>
                                 </a>
                             </li>
                             
                             <li v-if="canDelete && !post.replies"><hr class="dropdown-divider"></li>
 
                             <li v-if="canDelete && !post.replies"><a class="dropdown-item text-danger" href="#" @click.prevent="deletePost()">
-                                <i class="fa fa-times"></i> Delete</a>
+                                <i class="fa fa-times"></i> {{ $t('buttonDeletePost') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -93,26 +92,26 @@
 
                         <button v-if="!loggedIn" class="btn btn-outline-success btn-sm" type="button" 
                             @click="loginToReply(post.postId)">
-                            <i class="fa fa-reply" aria-hidden="true"></i> Sign-in to reply
+                            <i class="fa fa-reply" aria-hidden="true"></i> {{ $t('buttonSignInToReply') }}
                         </button>
 
                         <button v-else-if="canPost && post.postId == post.threadId" class="btn btn-primary btn-sm" :disabled="!canPost" type="button" 
                             @click="reply(post.threadId, getSelection())">
-                            <i class="fa fa-reply"></i> Reply
+                            <i class="fa fa-reply"></i> {{ $t('buttonReplyToPost') }}
                         </button>
 
                         <div  v-else-if="canPost" class="dropdown d-inline-block" >
                             <button class="btn btn-outline-primary btn-sm dropdown-toggle" :disabled="!canPost" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-reply"></i> 
-                                Reply
+                                {{ $t('buttonReplyToPost') }}
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.threadId)"> <i class="fa fa-reply"></i> Reply to the main topic</a></li>
-                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> Reply to {{post.createdBy}}</a></li>
+                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.threadId)"> <i class="fa fa-reply"></i> {{ $t('buttonReplyToMainThread') }} </a></li>
+                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> {{ $t('buttonReplyToPerson', {name: post.createdBy }) }}</a></li>
                             </ul>
                         </div>
                         <div v-else>
-                            <i class="text-muted">Sorry you are not allowed to post to this forum.</i>
+                            <i class="text-muted"> {{ $t('notAllowedToPost') }}</i>
                         </div>   
                     </div>       
                 </div>              
@@ -138,10 +137,12 @@ import rangy from 'rangy';
 import { convert as htmlToText } from 'html-to-text';
 import Attachment from './attachment.vue';
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
+import i18n from '../../app-text/components/forums/post.json';
 
 
 export default {
     name: 'Post',
+    i18n: { messages: { en: i18n } },
     components: { EditPost, Attachment, RelativeDatetime },
     props: {
         post: Object,
