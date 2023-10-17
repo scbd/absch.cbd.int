@@ -418,41 +418,7 @@
               "ru": "Инициативы по развитию потенциала",
               "zh": "能力发展倡议"
           }
-      },
-      "capacityBuildingResource": {
-          "type": "reference",
-          "assign": [
-              "AbsPACapacityBuildingResource"
-          ],
-          "notify": [
-              "AbsPACapacityBuildingResource"
-          ],
-          "title": {
-              "en": "Capacity-building Resource",
-              "ar": "مصدر مرجعي حول بناء القدرات",
-              "es": "Recurso para la creación de capacidad",
-              "fr": "Ressources pour le renforcement des capacités",
-              "ru": "Ресурс по созданию потенциала",
-              "zh": "能力建设资源"
-          },
-          "description": {
-              "en": "Capacity-building Resources",
-              "ar": "المصادر والمراجع حول بناء القدرات",
-              "es": "Recursos para la creación de capacidad",
-              "fr": "Ressources pour le renforcement des capacités",
-              "ru": "Ресурсы по созданию потенциала",
-              "zh": "能力建设资源"
-          },
-          "shortCode": "CBR",
-          "titlePlural": {
-              "en": "Capacity-building Resources",
-              "ar": "المصادر والمراجع حول بناء القدرات",
-              "es": "Recursos para la creación de capacidad",
-              "fr": "Ressources pour le renforcement des capacités",
-              "ru": "Ресурсы по созданию потенциала",
-              "zh": "能力建设资源"
-          }
-      },
+      },      
       "modelContractualClause": {
           "type": "reference",
           "assign": [
