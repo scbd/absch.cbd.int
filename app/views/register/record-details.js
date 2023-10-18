@@ -73,7 +73,7 @@ import '~/views/directives/task-id-directive';
                     roleService.isNationalFocalPoint() ||
                     roleService.isIAC() ||
                     roleService.isAdministrator() ||
-                    _.includes(['resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
+                    _.includes(['resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingInitiative'], $scope.schema);
 
             }
 

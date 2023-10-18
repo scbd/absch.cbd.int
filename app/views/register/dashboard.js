@@ -24,7 +24,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             $scope.languages        = commonjs.languages;
             $scope.Math             = window.Math;
             $scope.nationalSchemas  = _.without(realm.nationalSchemas, 'contact', 'focalPoint', 'absMeasureStatus');
-            $scope.referenceSchemas = _.without(realm.referenceSchemas, 'capacityBuildingResource');
+            $scope.referenceSchemas = _.without(realm.referenceSchemas);
             $scope.otherRecordSchemas = ['contact'];
             $scope.topRecords       = {};
             $scope.user             = $rootScope.user;
@@ -316,7 +316,6 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         "capacityBuildingInitiative": realm.schemaRoles("capacityBuildingInitiative")
                     };
                     if(realm.is('ABS', true)){
-                        referenceApproverRoles["capacityBuildingResource"]  = realm.schemaRoles("capacityBuildingResource"  )
                         referenceApproverRoles["modelContractualClause"  ]  = realm.schemaRoles("modelContractualClause"    )
                         referenceApproverRoles["communityProtocol"       ]  = realm.schemaRoles("communityProtocol"         )
                     }
