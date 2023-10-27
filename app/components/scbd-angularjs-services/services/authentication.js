@@ -348,7 +348,7 @@ import './apiUrl';
 
     }]);
 
-    app.factory('authenticationHttpIntercepter', ["$q", "apiToken", "$rootScope",
+    app.factory('authenticationHttpInterceptor', ["$q", "apiToken", "$rootScope",
      function($q, apiToken, $rootScope) {
 
         return {
@@ -392,7 +392,7 @@ import './apiUrl';
         };
     }]);
 
-    app.factory('realmHttpIntercepter', ["realm", function(realm) {
+    app.factory('realmHttpInterceptor', ["realm", function(realm) {
 
         return {
             request: function(config) {
@@ -423,7 +423,7 @@ import './apiUrl';
         };
     }]);
 
-    app.factory('apiURLHttpIntercepter', ["apiUrl", "$window", function(apiUrl, $window) {
+    app.factory('apiURLHttpInterceptor', ["apiUrl", "$window", function(apiUrl, $window) {
 
             return {
                 request: function(config) {
@@ -460,7 +460,7 @@ import './apiUrl';
         }
     ]);
 
-    app.factory('genericIntercepter', ["locale", function(locale) {
+    app.factory('genericInterceptor', ["locale", function(locale) {
 
             return {
                 request: function(config) {
@@ -495,16 +495,29 @@ import './apiUrl';
 
                 if(rewrite)
                     config.url = 'https://api.cbd.int' + config.url;
+                // else if( /localhost[:\/]/i.test(location.host))
+                //     config.url = 'https://api.cbddev.xyz' + config.url;
 
+                const isCbdApiRequest = /\/api\/v20\d{2}/i.test(config.url.toLowerCase())      &&
+                                        (
+                                            /^https:\/\/api\.cbd\.int\//i.test(config.url)     ||
+                                            /^https:\/\/api\.cbddev\.xyz\//i.test(config.url)
+                                        );
+                if(isCbdApiRequest){
+                    config.headers = angular.extend(config.headers || {}, {
+                        'x-referer': window.location.href
+                    });
+                }
+                
                 return config;
             }
         };
     }]);
     app.config(['$httpProvider', function($httpProvider) {
-        $httpProvider.interceptors.push('authenticationHttpIntercepter');
-        $httpProvider.interceptors.push('realmHttpIntercepter');
-        $httpProvider.interceptors.push('apiURLHttpIntercepter');
-        $httpProvider.interceptors.push('genericIntercepter');
+        $httpProvider.interceptors.push('authenticationHttpInterceptor');
+        $httpProvider.interceptors.push('realmHttpInterceptor');
+        $httpProvider.interceptors.push('apiURLHttpInterceptor');
+        $httpProvider.interceptors.push('genericInterceptor');
         $httpProvider.interceptors.push('apiRebase');
     }]);
 
