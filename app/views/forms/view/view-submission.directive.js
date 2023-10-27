@@ -40,13 +40,18 @@ import viewSubmissionT from '~/app-text/views/forms/view/view-submission.json';
 
 					if(~($scope.notifications||[]).length || newVal!=oldVal){
 						const selectedIds = _.map(newVal, 'identifier').map(solr.escape)
-						var query = {
-							query: `identifier_s:(${selectedIds.join(' ')}) OR symbol_s:(${selectedIds.join(' ')})`,
-							fields: "id,identifier_s,title_s,acronym_s,reference_s, symbol_s, uniqueIdentifier_s,schema:schema_s"
-						};
-						searchService.list(query).then(function(data){
-							$scope.notifications  = data.data.response.docs;
-						});
+						if(selectedIds?.length){
+							var query = {
+								query: `identifier_s:(${selectedIds.join(' ')}) OR symbol_s:(${selectedIds.join(' ')})`,
+								fields: "id,identifier_s,title_s,acronym_s,reference_s, symbol_s, uniqueIdentifier_s,schema:schema_s"
+							};
+							searchService.list(query).then(function(data){
+								$scope.notifications  = data.data.response.docs;
+							});
+						}
+						else{
+							$scope.notifications  = [];
+						}
 					}
 					else if(!newVal)
 						$scope.notifications  = [];
