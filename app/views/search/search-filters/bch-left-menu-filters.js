@@ -268,7 +268,8 @@ export const bchLeftMenuFilters = {
                 "s":"commonNames_EN_ss asc"
             },
             "title": bchFilters.dnaSequenceDonorCommonNames,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "geneDonorOrganismsIdentifiers_ss",
+            "customResultFn":"convertArrayTitleResult"
         },
         {
             "type": "solrRecords",
@@ -279,7 +280,8 @@ export const bchLeftMenuFilters = {
                 "s":"scientificName_s asc"
             },
             "title": bchFilters.dnaSequenceDonorScientificNames,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "geneDonorOrganismsIdentifiers_ss",
+            "customResultFn":"convertArrayTitleResult"
         }
     ],
     "biosafetyExpert": [
@@ -443,7 +445,8 @@ export const bchLeftMenuFilters = {
                 "searchFields":["commonNames_EN_txt"]
             },
             "title": bchFilters.modifiedOrganismLmoIdentifiersCommon,
-            "field": "lmoIdentifiers_ss"
+            "field": "lmoIdentifiers_ss",
+            "customResultFn":"convertArrayTitleResult"
         },
         {
             "type": "solrRecords",
@@ -463,7 +466,8 @@ export const bchLeftMenuFilters = {
                 "searchFields":["commonNames_EN_txt"]
             },
             "title": bchFilters.dnaSequenceDonorCommonNames,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "geneDonorOrganismsIdentifiers_ss",
+            "customResultFn":"convertArrayTitleResult"
         },
         {
             "type": "solrRecords",
@@ -473,7 +477,8 @@ export const bchLeftMenuFilters = {
                 "searchFields":["scientificName_t"]
             },
             "title": bchFilters.dnaSequenceDonorScientificNames,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "geneDonorOrganismsIdentifiers_ss",
+            "customResultFn":"convertArrayTitleResult"
         }
     ],
     "nationalRiskAssessment": [
@@ -530,7 +535,8 @@ export const bchLeftMenuFilters = {
                 "searchFields":["commonNames_EN_txt"]
             },
             "title": bchFilters.ParentalOrganismCommonName,
-            "field": "lmoIdentifiers_ss"
+            "field": "lmoIdentifiers_ss",
+            "customResultFn":"convertArrayTitleResult"
         },
         {
             "type": "solrRecords",

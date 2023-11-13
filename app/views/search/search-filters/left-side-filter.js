@@ -147,7 +147,6 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                         }, 0);                      
                     }
                     $scope.removeSchema = (schema)=>{
-                        console.log($scope.leftMenuFilters)
                         searchDirectiveCtrl.removeGlobalFilter(schema);
                     }
                     $scope.removeSchemaFilters = function (option, filter) {
@@ -264,7 +263,8 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                         organismNamesQuery
                     }
                     $scope.customResult = {
-                        organismNamesResult
+                        organismNamesResult,
+                        convertArrayTitleResult
                     }
 
                     $scope.$on('evt:updateLeftMenuFilters', (evt, leftMenuFilters)=>{
@@ -302,6 +302,18 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                             pageCount: newResult.length,
                             start   : 0
                         }
+                    }
+
+
+                    function convertArrayTitleResult(filter, data, query){
+                       
+                        data.docs.forEach(e=>{
+                            if(e.rec_title && Array.isArray(e.rec_title)){                               
+                                e.rec_title = e.rec_title.join(', ');
+                            }
+                        });
+
+                        return data
                     }
 
                     function clearFilterOptions(filter){
