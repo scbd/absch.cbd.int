@@ -147,7 +147,6 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                         }, 0);                      
                     }
                     $scope.removeSchema = (schema)=>{
-                        console.log($scope.leftMenuFilters)
                         searchDirectiveCtrl.removeGlobalFilter(schema);
                     }
                     $scope.removeSchemaFilters = function (option, filter) {
@@ -255,7 +254,6 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                     }
 
                     $scope.onRecordsFetched = function(data, query, filter){
-                        console.log(data);
                         if(filter.customResultFn)
                             data = $scope.customResult[filter.customResultFn](filter, data, query);
                         return data;
