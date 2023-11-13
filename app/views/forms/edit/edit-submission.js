@@ -91,14 +91,19 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         if((($scope.document||{}).notifications||[]).length){
             var selected = _.map($scope.document.notifications, 'identifier');
             const selectedIds = _.map(selected, solr.escape);
-            var query = `schema_s:notification AND (identifier_s:(${selectedIds.join(' ')} OR symbol_s:(${selectedIds.join(' ')})))`;
-            searchService.list({
-                query : query,
-                fields: $scope.notificationQuery.fl
-            })
-            .then(function(result){                
-                $scope.notifications = formatRecords(result.data.response.docs);
-            });
+            if(selectedIds?.length){
+							var query = `schema_s:notification AND (identifier_s:(${selectedIds.join(' ')} OR symbol_s:(${selectedIds.join(' ')})))`;
+              searchService.list({
+                  query : query,
+                  fields: $scope.notificationQuery.fl
+              })
+              .then(function(result){                
+                  $scope.notifications = formatRecords(result.data.response.docs);
+              });
+            }
+            else{
+              $scope.notifications = [];
+            }
         }
         else
             $scope.notifications = [];
