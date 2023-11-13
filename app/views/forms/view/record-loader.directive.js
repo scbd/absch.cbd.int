@@ -476,7 +476,6 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if(schema == 'absNationalModelContractualClause'){ return await import('~/views/forms/view/abs/view-abs-national-model-contractual-clause.directive') };
 						if(schema == 'absProcedure'                     ){ return await import('~/views/forms/view/abs/view-abs-procedure.directive') };
 						if(schema == 'capacityBuildingInitiative'       ){ return await import('~/views/forms/view/view-capacity-building-initiative.directive') };
-						if(schema == 'capacityBuildingResource'         ){ return await import('~/views/forms/view/view-capacity-building-resource.directive') };
 						if(schema == 'contact'                          ){ return await import('~/views/forms/view/view-contact.directive') };
 						if(schema == 'authority'                        ){ return await import('~/views/forms/view/view-authority.directive') };
 						if(schema == 'supplementaryAuthority'           ){ return await import('~/views/forms/view/view-supplementary-authority.directive') };

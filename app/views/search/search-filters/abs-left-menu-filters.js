@@ -433,11 +433,6 @@ export const absLeftMenuFilters = {
 		"title": absFilters.freeText,
 		"field": "text_EN_txt"
 		}],
-	"capacityBuildingResource" : [{
-		"type": "freeText",
-		"title": absFilters.freeText,
-		"field": "text_EN_txt"
-		}],
 	"capacityBuildingInitiative": [
 		{
 			"type": "freeText",
