@@ -147,7 +147,6 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                         }, 0);                      
                     }
                     $scope.removeSchema = (schema)=>{
-                        console.log($scope.leftMenuFilters)
                         searchDirectiveCtrl.removeGlobalFilter(schema);
                     }
                     $scope.removeSchemaFilters = function (option, filter) {

@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="panel-body" style="padding:0px">
                                     <div ng-if="section.footnote" ng-bind-html="::section.footnote"
-                                        style="font-size:10px;padding:10px" class="fw-light text-muted"></div>
+                                    class="small text-muted"></div>
                                     <div ng-repeat="question in section.questions"
                                         style="border:1px solid #eee;margin:5px" class="row"
                                         ng-class="{'disabled': isQuestionDisabled(question), 'isLegend': question.type == 'legend' }"
@@ -169,7 +169,7 @@
                     <div ng-if="question.additionalInformation" class="mt-3">
                         <label ng-bind-html="question.additionalInformation[0].title"></label>
                         <div ng-if="question.additionalInformation[0].footnote" ng-bind-html="::question.additionalInformation[0].footnote"
-                            style="font-size:10px;padding:10px"></div>
+                        class="small text-muted"></div>
                         <div ng-if="question.additionalInformation[0].type === 'lstring'"  km-textbox-ml name="{{question.key}}_additionalInformation"  ng-change="updateAnswer(question)"
                             ng-model="binding[question.key].additionalInformation" locales="locales"></div>
 
