@@ -89,6 +89,8 @@
                                         <div class="km-control-group d-inline time-period" bold="true" required name="date"
                                             caption="{{::('numbers.two'|$translate)}}. {{::('editNRT.timePeriod'|$translate)}}">
                                             <div class="col-md-5 col-sm-12">
+                                                <label style="height:0px;width:0px;display: inline;" for="reportPeriodStartDate"><span style="display:none;">{{::('editNRT.reportPeriodStartDate'|$translate)}}</span></label>
+                                                <label style="height:0px;width:0px;display: inline;" for="reportPeriodEndDate"><span style="display:none;">{{::('editNRT.reportPeriodEndDate'|$translate)}}</span></label>
                                                 <div km-date placeholder="YYYY-MM-DD" name="reportPeriodStartDate" required
                                                     ng-model="formScope.$parent.document.reportPeriodStartDate"></div>
                                             </div>
