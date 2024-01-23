@@ -2202,14 +2202,6 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q044_A_opt",
-                  "values": [
-                     "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               },
-               {
                   "question": "Q044_A_1",
                   "values": [
                      "true"
@@ -2224,13 +2216,23 @@ export const absNationalReport1 = [
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
+               },
+               {
+                  "question": "Q044_A_3",
+                  "values": [
+                     "true",
+                     "false",
+                     "false.na",
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
                }
             ]
          },
          {
-            "key": "Q044_A_opt",
+            "key": "Q044_A_1",
             "section": "Part-IX",
-            "number": "44.A.Option",
+            "number": "44.A.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
@@ -2268,18 +2270,18 @@ export const absNationalReport1 = [
             ]
          },   
          {
-            "key": "Q044_A_1",
+            "key": "Q044_A_2",
             "section": "Part-IX",
-            "number": "44.A.1",
+            "number": "44.A.2",
             "type": "int",
             "title": nr1T.part_IX_question44_A_1_title,
             "multiple": false,
             "mandatory": true
          },   
          {
-            "key": "Q044_A_2",
+            "key": "Q044_A_3",
             "section": "Part-IX",
-            "number": "44.A.2",
+            "number": "44.A.3",
             "title" : nr1T.additionalInformation,
             "type":"lstringRte",
             "footnote":nr1T.part_IX_question44_A_2_footnote_35,
@@ -2311,14 +2313,6 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q044_B_opt",
-                  "values": [
-                     "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               },
-               {
                   "question": "Q044_B_1",
                   "values": [
                      "true"
@@ -2338,9 +2332,9 @@ export const absNationalReport1 = [
          },
          
          {
-            "key": "Q044_B_opt",
+            "key": "Q044_B_1",
             "section": "Part-IX",
-            "number": "44.B.Option",
+            "number": "44.B.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
@@ -2374,9 +2368,9 @@ export const absNationalReport1 = [
             ]
          }, 
          {
-            "key": "Q044_B_1",
+            "key": "Q044_B_2",
             "section": "Part-IX",
-            "number": "44.B.1",
+            "number": "44.B.2",
             "title" : nr1T.additionalInformation,
             "type":"lstringRte",
             "footnote":nr1T.part_IX_question44_B_1_footnote_36,
@@ -2408,14 +2402,6 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q045_A_opt",
-                  "values": [
-                     "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               },
-               {
                   "question": "Q045_A_1",
                   "values": [
                      "true"
@@ -2425,6 +2411,14 @@ export const absNationalReport1 = [
                },
                {
                   "question": "Q045_A_2",
+                  "values": [
+                     "true"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q045_A_3",
                   "values": [
                      "true",
                      "false",
@@ -2437,9 +2431,9 @@ export const absNationalReport1 = [
          },
 
          {
-            "key": "Q045_A_opt",
+            "key": "Q045_A_1",
             "section": "Part-IX",
-            "number": "45.A.Option",
+            "number": "45.A.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
@@ -2478,18 +2472,18 @@ export const absNationalReport1 = [
          },
             
          {
-            "key": "Q045_A_1",
+            "key": "Q045_A_2",
             "section": "Part-IX",
-            "number": "45.A.1",
+            "number": "45.A.2",
             "type": "int",
             "title": nr1T.part_IX_question45_A_1_title,
             "multiple": false,
             "mandatory": true
          }, 
          {
-            "key": "Q045_A_2",
+            "key": "Q045_A_3",
             "section": "Part-IX",
-            "number": "45.A.2",
+            "number": "45.A.3",
             "title" : nr1T.additionalInformation,
             "type":"lstringRte",
             "multiple": false,
@@ -2520,7 +2514,7 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q045_B_opt",
+                  "question": "Q045_B_1",
                   "values": [
                      "true"
                   ],
@@ -2528,7 +2522,7 @@ export const absNationalReport1 = [
                   "trigger": "enable"
                },
                {
-                  "question": "Q045_B_1",
+                  "question": "Q045_B_2",
                   "values": [
                      "true",
                      "false",
@@ -2541,9 +2535,9 @@ export const absNationalReport1 = [
          },
 
          {
-            "key": "Q045_B_opt",
+            "key": "Q045_B_1",
             "section": "Part-IX",
-            "number": "45.B.Option",
+            "number": "45.B.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
@@ -2577,9 +2571,9 @@ export const absNationalReport1 = [
             ]
          },
          {
-            "key": "Q045_B_1",
+            "key": "Q045_B_2",
             "section": "Part-IX",
-            "number": "45.B.1",
+            "number": "45.B.2",
             "title" : nr1T.additionalInformation,
             "footnote": nr1T.part_IX_question45_B_footnote_addInfo_38,
             "type":"lstringRte",
