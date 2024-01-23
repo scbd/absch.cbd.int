@@ -13,6 +13,8 @@
     "ifNotPartyToCP": "If your country is not a Party to the Cartagena Protocol on Biosafety, is there any national process in place towards becoming a Party?",
     "provideDetails": "Please use the space below to provide any further details:",
     "timePeriod": "Time period covered by this report",
+    "reportPeriodStartDate":"Time period covered by this report start date",
+    "reportPeriodEndDate":"Time period covered by this report end date",
     "part_I_question2_footnote_2": "For countries that submitted an interim national report on the implementation of the Nagoya Protocol, the first national report should cover the time elapsed since the submission of the interim national report (e.g. from 2 November 2017 to 30 June 2025). For countries that were not required to submit an interim national report, the first national report should cover the time period since the entry into force of the Nagoya Protocol for the country.",
     "to": "to",
     "fourthNationalReport": "Fourth national report",

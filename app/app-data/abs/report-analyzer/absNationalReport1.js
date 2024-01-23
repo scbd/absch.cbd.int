@@ -2202,7 +2202,7 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q044_A_option",
+                  "question": "Q044_A_opt",
                   "values": [
                      "true"
                   ],
@@ -2228,7 +2228,7 @@ export const absNationalReport1 = [
             ]
          },
          {
-            "key": "Q044_A_option",
+            "key": "Q044_A_opt",
             "section": "Part-IX",
             "number": "44.A.Option",
             "type": "option",
@@ -2284,7 +2284,7 @@ export const absNationalReport1 = [
             "type":"lstringRte",
             "footnote":nr1T.part_IX_question44_A_2_footnote_35,
             "multiple": false,
-            "mandatory": true
+            "mandatory": false
          },
 
          {
@@ -2311,7 +2311,7 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q044_B_option",
+                  "question": "Q044_B_opt",
                   "values": [
                      "true"
                   ],
@@ -2338,7 +2338,7 @@ export const absNationalReport1 = [
          },
          
          {
-            "key": "Q044_B_option",
+            "key": "Q044_B_opt",
             "section": "Part-IX",
             "number": "44.B.Option",
             "type": "option",
@@ -2408,7 +2408,7 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q045_A_Option",
+                  "question": "Q045_A_opt",
                   "values": [
                      "true"
                   ],
@@ -2437,7 +2437,7 @@ export const absNationalReport1 = [
          },
 
          {
-            "key": "Q045_A_Option",
+            "key": "Q045_A_opt",
             "section": "Part-IX",
             "number": "45.A.Option",
             "type": "option",
@@ -2520,7 +2520,7 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q045_B_Option",
+                  "question": "Q045_B_opt",
                   "values": [
                      "true"
                   ],
@@ -2541,7 +2541,7 @@ export const absNationalReport1 = [
          },
 
          {
-            "key": "Q045_B_Option",
+            "key": "Q045_B_opt",
             "section": "Part-IX",
             "number": "45.B.Option",
             "type": "option",
