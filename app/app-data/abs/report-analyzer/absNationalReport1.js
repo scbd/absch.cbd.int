@@ -2178,14 +2178,14 @@ export const absNationalReport1 = [
          },
 
          {
-            "key": "Q044",
+            "key": "Q044_A",
             "section": "Part-IX",
-            "number": "44",
+            "number": "44.A",
             "type": "option",
-            "title": nr1T.part_IX_question44_title,
+            "title": nr1T.part_IX_question44_A_title,
             "multiple": false,
             "mandatory": true,
-            "footnote": nr1T.part_IX_question44_title_footnote_25,
+            "footnote": nr1T.part_IX_question44_A_title_footnote_25,
             "options": [
                {
                   "value": "true",
@@ -2202,7 +2202,7 @@ export const absNationalReport1 = [
             ],
             "validations": [
                {
-                  "question": "Q044_a",
+                  "question": "Q044_A_1",
                   "values": [
                      "true"
                   ],
@@ -2210,28 +2210,29 @@ export const absNationalReport1 = [
                   "trigger": "enable"
                },
                {
-                  "question": "Q044_b",
+                  "question": "Q044_A_2",
                   "values": [
                      "true"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
-               }
-            ],
-            "additionalInformation":[
+               },
                {
-                  "field":"furtherInfo",
-                  "title" : nr1T.additionalInformation,
-                  "type":"lstringRte",
-                  "footnote":nr1T.part_IX_question44_1_footnote_35
+                  "question": "Q044_A_3",
+                  "values": [
+                     "true",
+                     "false",
+                     "false.na",
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
                }
             ]
          },
-
          {
-            "key": "Q044_a",
+            "key": "Q044_A_1",
             "section": "Part-IX",
-            "number": "44.1",
+            "number": "44.A.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
@@ -2239,27 +2240,27 @@ export const absNationalReport1 = [
             "options": [
                {
                   "value": "C52DEF5B-3062-45AB-968D-B835248C3341",
-                  "title": nr1T.part_IX_question44_a_option0_title
+                  "title": nr1T.part_IX_question44_A_option0_title
                },
                {
                   "value": "5625F27F-CB4F-4C52-9E3E-E3A29057ADFF",
-                  "title": nr1T.part_IX_question44_a_option1_title
+                  "title": nr1T.part_IX_question44_A_option1_title
                },
                {
                   "value": "1A0765A5-93E2-4B98-852F-E23038E8FA48",
-                  "title": nr1T.part_IX_question44_a_option2_title
+                  "title": nr1T.part_IX_question44_A_option2_title
                },
                {
                   "value": "5BA5F92A-660E-4977-B38E-68C109971179",
-                  "title": nr1T.part_IX_question44_a_option3_title
+                  "title": nr1T.part_IX_question44_A_option3_title
                },
                {
                   "value": "2F6B4F32-5052-446A-89CE-34FA569B81EB",
-                  "title": nr1T.part_IX_question44_a_option4_title
+                  "title": nr1T.part_IX_question44_A_option4_title
                },
                {
                   "value": "DA8600D9-FF79-4B08-A800-D2E5B2CC419D",
-                  "title": nr1T.part_IX_question44_a_option5_title
+                  "title": nr1T.part_IX_question44_A_option5_title
                },
                {
                   "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
@@ -2269,49 +2270,58 @@ export const absNationalReport1 = [
             ]
          },   
          {
-            "key": "Q044_b",
+            "key": "Q044_A_2",
             "section": "Part-IX",
-            "number": "44.2",
+            "number": "44.A.2",
             "type": "int",
-            "title": nr1T.part_IX_question44_1_title,
+            "title": nr1T.part_IX_question44_A_1_title,
             "multiple": false,
             "mandatory": true
-         },
+         },   
          {
-            "key": "Q045",
+            "key": "Q044_A_3",
             "section": "Part-IX",
-            "number": "45",
+            "number": "44.A.3",
+            "title" : nr1T.additionalInformation,
+            "type":"lstringRte",
+            "footnote":nr1T.part_IX_question44_A_2_footnote_35,
+            "multiple": false,
+            "mandatory": false
+         },
+
+         {
+            "key": "Q044_B",
+            "section": "Part-IX",
+            "number": "44.B",
             "type": "option",
-            "title": nr1T.part_IX_question45_title,
+            "title": nr1T.part_IX_question44_B_title,
             "multiple": false,
             "mandatory": true,
-            "footnote": nr1T.part_IX_question45_footnote_27,
             "options": [
                {
                   "value": "true",
-                  "title": nr1T.yes,
-                  "type": "lstring",
-                  "caption": nr1T.additionalInformation,
-                  "footnote":nr1T.part_IX_question45_footnote_addInfo_36
+                  "title": nr1T.yes
                },
                {
                   "value": "false",
-                  "title": nr1T.no,
-                  "type": "lstring",
-                  "caption": nr1T.additionalInformation,
-                  "footnote":nr1T.part_IX_question45_footnote_addInfo_36
+                  "title": nr1T.no
                },
                {
                   "value": "false.na",
-                  "title": nr1T.notApplicable,
-                  "type": "lstring",
-                  "caption": nr1T.additionalInformation,
-                  "footnote": nr1T.part_IX_question45_footnote_addInfo_36
+                  "title": nr1T.notApplicable
                }
             ],
             "validations": [
                {
-                  "question": "Q045_a",
+                  "question": "Q044_B_1",
+                  "values": [
+                     "true"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q044_B_2",
                   "values": [
                      "true"
                   ],
@@ -2320,51 +2330,257 @@ export const absNationalReport1 = [
                }
             ]
          },
-
+         
          {
-            "key": "Q045_a",
+            "key": "Q044_B_1",
             "section": "Part-IX",
-            "number": "45.1",
+            "number": "44.B.1",
             "type": "option",
             "title": nr1T.pleaseSelectAll,
             "multiple": true,
             "mandatory": true,
             "options": [
                {
-                  "value": "C8500203-E701-46F6-9388-7E4A4E68B3F2",
-                  "title": nr1T.part_IX_question45_a_option0_title
+                  "value": "d84412c6-2e41-49e7-a616-f732671ba166",
+                  "title": nr1T.part_IX_question44_B_option0_title
                },
                {
-                  "value": "FC0D8F91-EA81-4ED2-87FA-B83C0240FB2A",
-                  "title": nr1T.part_IX_question45_a_option1_title
+                  "value": "72908aa6-04c1-4128-a34c-babcccba6ef2",
+                  "title": nr1T.part_IX_question44_B_option1_title
                },
                {
-                  "value": "BEC84DD2-496F-48A9-816F-048606BAD40C",
-                  "title": nr1T.part_IX_question45_a_option2_title
+                  "value": "8f569ccf-8373-4657-ab20-5bae218e95e8",
+                  "title": nr1T.part_IX_question44_B_option2_title
                },
                {
-                  "value": "E5E463F6-6CE2-4EC5-9FC7-D08AB1B75F19",
-                  "title": nr1T.part_IX_question45_a_option3_title
+                  "value": "a1285dfd-7eee-4df3-9255-25c7c1003154",
+                  "title": nr1T.part_IX_question44_B_option3_title
                },
                {
-                  "value": "EB8A599D-806F-42C6-9609-007FB2111036",
-                  "title": nr1T.part_IX_question45_a_option4_title
+                  "value": "8556cd8f-3fa7-487b-854f-823600d588cd",
+                  "title": nr1T.part_IX_question44_B_option4_title
                },
                {
-                  "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                  "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                  "title": nr1T.other,
+                  "type":"lstring"
+               }
+            ]
+         }, 
+         {
+            "key": "Q044_B_2",
+            "section": "Part-IX",
+            "number": "44.B.2",
+            "title" : nr1T.additionalInformation,
+            "type":"lstringRte",
+            "footnote":nr1T.part_IX_question44_B_1_footnote_36,
+            "multiple": false,
+            "mandatory": false
+         },
+
+         {
+            "key": "Q045_A",
+            "section": "Part-IX",
+            "number": "45.A",
+            "type": "option",
+            "title": nr1T.part_IX_question45_A_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no
+               },
+               {
+                  "value": "false.na",
+                  "title": nr1T.notApplicable
+               }
+            ],
+            "validations": [
+               {
+                  "question": "Q045_A_1",
+                  "values": [
+                     "true"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q045_A_2",
+                  "values": [
+                     "true"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q045_A_3",
+                  "values": [
+                     "true",
+                     "false",
+                     "false.na"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               }
+            ]
+         },
+
+         {
+            "key": "Q045_A_1",
+            "section": "Part-IX",
+            "number": "45.A.1",
+            "type": "option",
+            "title": nr1T.pleaseSelectAll,
+            "multiple": true,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "C52DEF5B-3062-45AB-968D-B835248C3341",
+                  "title": nr1T.part_IX_question44_A_option0_title
+               },
+               {
+                  "value": "5625F27F-CB4F-4C52-9E3E-E3A29057ADFF",
+                  "title": nr1T.part_IX_question44_A_option1_title
+               },
+               {
+                  "value": "1A0765A5-93E2-4B98-852F-E23038E8FA48",
+                  "title": nr1T.part_IX_question44_A_option2_title
+               },
+               {
+                  "value": "5BA5F92A-660E-4977-B38E-68C109971179",
+                  "title": nr1T.part_IX_question44_A_option3_title
+               },
+               {
+                  "value": "2F6B4F32-5052-446A-89CE-34FA569B81EB",
+                  "title": nr1T.part_IX_question44_A_option4_title
+               },
+               {
+                  "value": "DA8600D9-FF79-4B08-A800-D2E5B2CC419D",
+                  "title": nr1T.part_IX_question44_A_option5_title
+               },
+               {
+                  "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                  "title": nr1T.other,
+                  "type":"lstring"
+               }
+            ]
+         },
+            
+         {
+            "key": "Q045_A_2",
+            "section": "Part-IX",
+            "number": "45.A.2",
+            "type": "int",
+            "title": nr1T.part_IX_question45_A_1_title,
+            "multiple": false,
+            "mandatory": true
+         }, 
+         {
+            "key": "Q045_A_3",
+            "section": "Part-IX",
+            "number": "45.A.3",
+            "title" : nr1T.additionalInformation,
+            "type":"lstringRte",
+            "multiple": false,
+            "mandatory": false
+         },
+         
+         {
+            "key": "Q045_B",
+            "section": "Part-IX",
+            "number": "45.B",
+            "type": "option",
+            "title": nr1T.part_IX_question45_B_title,
+            "multiple": false,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "true",
+                  "title": nr1T.yes
+               },
+               {
+                  "value": "false",
+                  "title": nr1T.no
+               },
+               {
+                  "value": "false.na",
+                  "title": nr1T.notApplicable
+               }
+            ],
+            "validations": [
+               {
+                  "question": "Q045_B_1",
+                  "values": [
+                     "true"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               },
+               {
+                  "question": "Q045_B_2",
+                  "values": [
+                     "true",
+                     "false",
+                     "false.na"
+                  ],
+                  "type": "@hasValues",
+                  "trigger": "enable"
+               }
+            ]
+         },
+
+         {
+            "key": "Q045_B_1",
+            "section": "Part-IX",
+            "number": "45.B.1",
+            "type": "option",
+            "title": nr1T.pleaseSelectAll,
+            "multiple": true,
+            "mandatory": true,
+            "options": [
+               {
+                  "value": "d84412c6-2e41-49e7-a616-f732671ba166",
+                  "title": nr1T.part_IX_question44_B_option0_title
+               },
+               {
+                  "value": "72908aa6-04c1-4128-a34c-babcccba6ef2",
+                  "title": nr1T.part_IX_question44_B_option1_title
+               },
+               {
+                  "value": "8f569ccf-8373-4657-ab20-5bae218e95e8",
+                  "title": nr1T.part_IX_question44_B_option2_title
+               },
+               {
+                  "value": "a1285dfd-7eee-4df3-9255-25c7c1003154",
+                  "title": nr1T.part_IX_question44_B_option3_title
+               },
+               {
+                  "value": "8556cd8f-3fa7-487b-854f-823600d588cd",
+                  "title": nr1T.part_IX_question44_B_option4_title
+               },
+               {
+                  "value":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                   "title": nr1T.other,
                   "type":"lstring"
                }
             ]
          },
          {
-            "key": "Q046-addInfo",
+            "key": "Q045_B_2",
             "section": "Part-IX",
-            "number": "",
-            "type": "legend",
-            "title": nr1T.additionalInformation,
-            "footnote": nr1T.additionalInformation_footnotes
+            "number": "45.B.2",
+            "title" : nr1T.additionalInformation,
+            "footnote": nr1T.part_IX_question45_B_footnote_addInfo_38,
+            "type":"lstringRte",
+            "multiple": false,
+            "mandatory": false
          },
+
          {
             "key": "Q046",
             "section": "Part-IX",
