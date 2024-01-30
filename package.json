@@ -43,7 +43,8 @@
     "strip-bom": "^5.0.0",
     "superagent": "5.0.8",
     "touch": "^3.1.0",
-    "vue-template-compiler": "2.7.15"
+    "vue": "2.7.16",
+    "vue-template-compiler": "2.7.16"
   },
   "peerDependencies": {
     "@scbd/angular-vue": "4.0.0",
