@@ -27,7 +27,7 @@ export default function injectCssToDom(options = {}) {
 
       if(!isCss) return null;
 
-      if(isUrl(updatedId)) {// link to URL => let RequireJS handle it for now
+      if(isOverHttp(updatedId)) {// link to URL => let RequireJS handle it for now
         return {id: importeeId, external: true};
       }
 
@@ -41,7 +41,7 @@ export default function injectCssToDom(options = {}) {
    //     console.log("css", importeeId, resolved);
         if(!resolved)          return { id: updatedId }
         if(resolved.external)  return null;
-        if(isUrl(resolved.id)) return { id: `css!${resolved.id}`, external: true}
+        if(isOverHttp(resolved.id)) return { id: `css!${resolved.id}`, external: true}
         
         injectable.push(resolved.id)
 
@@ -67,9 +67,10 @@ export default function injectCssToDom(options = {}) {
   };
 }
 
-function isUrl(url) {
+function isOverHttp(url) {
   try { 
-    return !!(new URL(url)); // valid if we can parse it
+    const parsedUrl = new URL(url)
+    return /^https?:$/i.test(parsedUrl?.protocol || ''); // valid if we can parse it
   }
   catch {
     return false;
