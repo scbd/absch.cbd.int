@@ -2,12 +2,8 @@
     "theChm":"CHM",
     "submit":"Submit",
     "new":"New",
-    "edit":"Edit",
-    "lmoDecisions":"LMO decisions",
+    "edit":"Edit",  
     "registries":"Registries",
-    "lmoRegistry":"LMO registry",
-    "organismsRegistry":"Organisms registry",
-    "geneRegistry":"Gene registry",
     "forbidden":"Forbidden",
     "notFound":"Not found",
     "pageNotFound":"Page not found"
