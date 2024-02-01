@@ -17,7 +17,7 @@
 		<div ng-if="document.symbol_s">
 			<label>Symbol</label>
 			<span class="km-value">
-				<a ng-href="/submissions-to-notifications?notification={{document.symbol_s}}">
+				<a ng-href="{{isBCH ? '/submissions-to-notifications?notification=' : 'https://www.cbd.int/notifications/'}}{{document.symbol_s}}" target="{{!isBCH ? '_blank' : ''}}">
 					{{document.symbol_s| lstring:locale}}
 				</a>
 			</span>
@@ -47,7 +47,7 @@
 		<div ng-if="document.reference_s">
 			<label>Reference</label>
 			<span class="km-value">
-				<a ng-href="/submissions-to-notifications?notification={{document.symbol_s}}">
+				<a ng-href="{{isBCH ? '/submissions-to-notifications?notification=' : 'https://www.cbd.int/notifications/'}}{{document.symbol_s}}" target="{{!isBCH ? '_blank' : ''}}">
 					{{document.reference_s| lstring:locale}}
 				</a>
 			</span>
