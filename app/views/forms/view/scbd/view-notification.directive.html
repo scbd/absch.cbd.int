@@ -76,7 +76,7 @@
 			<span class="km-value">
 				<ul class="list">
 					<li ng-repeat="url in document.url_ss">
-						<a rel="noopener" translation-url  ng-href="{{url}}" target="_">
+						<a rel="noopener" translation-url  ng-href="{{ getUrl(url) }}" target="_">
 							<span ng-bind="url"></span>
 						</a>
 					</li>

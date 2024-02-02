@@ -15,6 +15,9 @@ app.directive('viewNotification', ['realm',function(realm) {
 		},
 		controller: ['$scope', function ($scope) {
 			$scope.isBCH = realm.is('BCH');
+			$scope.getUrl = function(url) {
+				return /^\/notification/.test(url) ? `https://www.cbd.int${url}` : url;
+			  }; 
 			const documentWatch = $scope.$watch("document", (newVal)=>{
 				if(newVal){
 					$scope.notificationSymbol = `NT-${$scope.document?.symbol_s}`;
