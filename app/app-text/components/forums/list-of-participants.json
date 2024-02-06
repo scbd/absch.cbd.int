@@ -7,5 +7,6 @@
   "organization": "Organization",
   "organizations": "Organizations",
   "listIsEmpty" : "The list is empty",
-  "loading"     : "Loading..."
+  "loading"     : "Loading...",
+  "government_organization" : "Government / Organization"
 }
