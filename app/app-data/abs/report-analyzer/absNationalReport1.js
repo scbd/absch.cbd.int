@@ -245,7 +245,7 @@ export const absNationalReport1 = [
    {
       "key": "Part-III",
       "title": nr1T.part_III_title,
-      "footnote": nr1T.part_III_title_footnote_4,
+      "description": nr1T.part_III_title_footnote_4,
       "questions": [
          {
             "key": "Q007",
@@ -1337,7 +1337,7 @@ export const absNationalReport1 = [
    {
       "key": "Part-VI",
       "title": nr1T.part_VI_title,
-      "footnote": nr1T.part_VI_title_footnote_24,
+      "description": nr1T.part_VI_title_footnote_24,
       "questions": [
          {
             "key": "Article18.1",

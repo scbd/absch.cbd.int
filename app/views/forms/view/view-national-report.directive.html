@@ -1,18 +1,19 @@
 <div class="national-report-view">
 
     <div class="section-pane panel panel-default" ng-repeat="section in reportQuestions" id="section{{$index+1}}" style="margin-bottom:3px!important">
-        <div class="panel-heading">
+        <div class="panel-heading border-bottom">
             <div comapre-val>
                 <strong ng-bind-html="section.title"></strong>
             </div>
             <div comapre-val>
                 <div ng-bind-html="section.description" ng-if="section.description"></div>
             </div>
+            <div comapre-val>
+                <div ng-if="section.footnote" ng-bind-html="section.footnote" ></div>
+            </div>
         </div>
         <div class="panel-body" style="padding:0px">
-            <div comapre-val>
-                <div ng-if="section.footnote" ng-bind-html="section.footnote" class="small text-muted"></div>
-            </div>
+           
             <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px" class="row py-3"
                 ng-class="{'disabled': !document[question.key] && question.type!= 'legend' && !question.questions, 'isLegend': question.type == 'legend'}">
                 <div ng-include="'question-answer'"></div>

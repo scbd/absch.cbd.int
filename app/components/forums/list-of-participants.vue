@@ -64,7 +64,27 @@
             </tr>
           </tbody>
         </table>
-      </div>      
+      </div>
+      
+      <div v-if="members.length">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">{{ $t("name") }}</th>
+              <th scope="col">{{  $t("government_organization") }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(participant, index) in members" :key="index">
+              <td scope="row">{{ index + 1}}</td>
+              <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
+              <td v-if="participant.country">{{ participant.country.name | lstring($locale) }} </td>
+              <td v-else>{{ participant.organization | lstring($locale) }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div> 
     </div>  
   </div>  
 </template>
@@ -95,6 +115,7 @@ export default {
     parties()       { return this.participants.filter(({ type }) =>  type == 'party'); },
     nonParties()    { return this.participants.filter(({ type }) =>  type == 'non-party'); },
     organizations() { return this.participants.filter(({ type }) =>  type == 'observer'); },
+    members()       { return this.participants.filter(({ type }) =>  type == 'member') ; }
   },
   methods: {
     load: pending(load, 'loading')
@@ -123,8 +144,8 @@ async function load() {
 
     participants = participants.sort((a, b)=>{
 
-      const strA = `${lstring(a.country?.name || a.organization, $locale)} | ${a.lastName || ''} | ${a.firstName || ''}`;
-      const strB = `${lstring(b.country?.name || b.organization, $locale)} | ${b.lastName || ''} | ${b.firstName || ''}`;
+      const strA = `${a.country ? 0 : 1 } | ${lstring(a.country?.name || a.organization, $locale)} | ${a.lastName || ''} | ${a.firstName || ''}`;
+      const strB = `${b.country ? 0 : 1 } | ${lstring(b.country?.name || b.organization, $locale)} | ${b.lastName || ''} | ${b.firstName || ''}`;
 
       return strA.localeCompare(strB);
     });

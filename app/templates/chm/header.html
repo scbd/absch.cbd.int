@@ -1,0 +1,142 @@
+<div ng-class="{'bg-black': isTRG, 'bg-white':!isTRG}">
+    <header class="px-2 d-sm-none d-md-none">
+        <nav class="navbar navbar-sm navbar-light bg-light rounded" >
+            <div ng-click="showNav = !showNav"  style="cursor: pointer;" >
+                <button class="navbar-toggler collapsed px-2" type="button" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>   
+                <span class="realm-base-acronym fw-bold color-orange"> {{::('chmHeaderT.chm'|$translate)}}  </span> 
+                <span class="fw-bold fs-md-4 text-uppercase color-orange ">{{::('chmHeaderT.clearingHouseMechanism'|$translate)}}</span>
+                <span ng-if="isDEV" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">
+                    {{::('chmHeaderT.development'|$translate)}}</span>
+                <span ng-if="isTRG" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">
+                        {{::('chmHeaderT.training'|$translate)}}</span>
+            </div>
+              <div ng-if="showNav" class="navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url href=".">{{::('chmHeaderT.home'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >{{::('chmHeaderT.about'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/search" >{{::('chmHeaderT.search'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/register" >{{::('chmHeaderT.submit'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/countries" >{{::('chmHeaderT.countryProfiles'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >{{::('chmHeaderT.help'|$translate)}}</a></li>
+<!--                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/reports" >National reports</a></li>-->
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/forums">{{::('chmHeaderT.forums'|$translate)}}</a></li>
+                </ul>
+              </div>
+          </nav>
+    </header>
+
+    <header class="pt-2 nav-lg-header">
+        <div class="">
+            <a href="." class="realm-base-acronym color-orange mx-3 px-lg-4">
+                {{::('chmHeaderT.chm'|$translate)}}
+                <span class="fw-bold ch-name">{{::('chmHeaderT.clearingHouseMechanism'|$translate)}}</span>
+                <span ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
+                    {{::('chmHeaderT.development'|$translate)}}</span>
+                <span ng-if="isTRG" class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
+                        {{::('chmHeaderT.training'|$translate)}}</span>
+
+            </a>
+        </div>
+    </header>
+
+    <nav class="border-bottom nav-lg-header" ng-class="{'text-white':isTRG}">
+        <div class="mx-0 mx-md-4 d-flex flex-wrap">
+            <ul class="nav me-auto mx-2">
+                <li class="nav-item"><a rel="noopener" translation-url href="." class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0"
+                        aria-current="page">
+                        <span>{{::('chmHeaderT.home'|$translate)}}</span> 
+                    </a>
+                </li>
+                <li class="nav-item"><a rel="noopener" translation-url href="/kb"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('chmHeaderT.about'|$translate)}}</a></li>
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown">
+                    <a rel="noopener" translation-url href="/search" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
+                        id="dropdownMenuButton1" aria-expanded="false">{{::('chmHeaderT.search'|$translate)}}</a>
+                    <ul class="dropdown-menu p-0" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton1" >
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="search">{{::('chmHeaderT.records'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/submissions-to-notifications">{{::('chmHeaderT.submissionsOnNotifications'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/reports">{{::('chmHeaderT.nra'|$translate)}}</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a rel="noopener" translation-url href="/register"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('chmHeaderT.submit'|$translate)}}</a>
+                </li>
+
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown">
+                    <a id="countryProfile" rel="noopener" translation-url href="/countries" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
+                          id="dropdownMenuButton2" aria-expanded="false">
+                             <span class="d-sm-none d-md-inline-block">{{::('chmHeaderT.countryProfiles'|$translate)}}</span> 
+                             <span class="d-none d-sm-inline-block d-md-none">
+                        {{::('chmHeaderT.countries'|$translate)}} </span>
+                    </a>
+
+                    <ul class="dropdown-menu bg-darkgrey">
+                    
+                        <li class="ps-2 pe-2 pb-2">
+                            <input type="text" class="form-control" placeholder="Search countries" ng-click="countrySearch($event)"
+                                ng-model="countrySearchQuery" />
+                        </li>
+                    <li>
+                        <ul class="nav-link-country-profiles bg-white">
+                            <li ng-repeat="c in countries | filter:startsWith track by c.code">
+                                <a rel="noopener" translation-url class="dropdown-item  fw-bold fs-small-8"
+                                    ng-href="countries/{{::c.code|encodeURIComponent}}">
+                                    <span ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
+                                        {{::c.name | lstring:locale}}
+                                    </span> </a>
+                            </li>
+                        </ul>
+                    </li>
+                        <li class="text-center m-2 mb-1">
+                            <a class="link-light" rel="noopener" translation-url href="countries"> {{::('chmHeaderT.overviewAllCountries'|$translate)}}
+                                <i class="fa fa-arrow-right"></i> </a>
+                        </li>
+                    </ul>
+                </li>
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown">
+                    <a href="/kb/tags/getting-help/Where-can-I-find-Help-to-use-the-CHM-/619c55574f1f30000140eeea" rel="noopener" translation-url class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
+                        id="dropdownMenuButton3" aria-expanded="false">{{::('chmHeaderT.help'|$translate)}}</a>
+                    <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb">{{::('chmHeaderT.kb'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/faqs">{{::('chmHeaderT.faq'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://chm3-vle.unep.org/" target="_blank">{{::('chmHeaderT.trainingMaterials'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://chm-training.cbd.int">{{::('chmHeaderT.trainingSite'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/articles/619c55580c1ff000011c1c46/Contact-us/chm">{{::('chmHeaderT.contactUs'|$translate)}}</a></li>
+                    </ul>
+                </li>
+             
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown">
+                    <a href="#" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
+                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">{{::('chmHeaderT.forums'|$translate)}}</a>
+                    <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/chm-on-chm">{{::('chmHeaderT.chmForum'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/risk-assessment/forum">{{::('chmHeaderT.portalsRiskAssessment'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/detection">{{::('chmHeaderT.networkLabsForum'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/chm-iac">{{::('chmHeaderT.chmIac'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/regional-advisors">{{::('chmHeaderT.unepForum'|$translate)}}</a></li>
+                    </ul>
+                </li>
+    
+                <li ng-if="isTRG" class="nav-item"><a href="https://chm.cbd.int/"
+                    style="color: black !important;"    class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('chmHeaderT.leaveTrainingSite'|$translate)}}</a></li>
+            </ul>
+            <ul class="nav">
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown protocol-options">
+                    <a href="#"  class="fw-bold menu-navigation-link nav-link link-dark p-0 dropdown-toggle" type="button"
+                        id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span> {{::('chmHeaderT.protocol'|$translate)}} </span> 
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://chm.cbd.int/protocol">{{::('chmHeaderT.cartagenaProtocol'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://chm.cbd.int/protocol/supplementary/">{{::('chmHeaderT.suppProtocol'|$translate)}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <breadcrumbs></breadcrumbs>
+</div>
