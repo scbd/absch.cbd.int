@@ -1,0 +1,385 @@
+﻿[
+    {
+      "_id": "5400a10fb02e1ab8752d2124",
+      "hosts": [
+        "chm.cbd.int"
+      ],
+      "realm": "CHM",
+      "uIdPrefix": "CHM",
+      "displayName": "Clearing-House Mechanism",
+      "email": "chm@cbd.int",
+      "adminRoles": [
+        "ChmDocumentValidationAdministrator"
+      ],
+      "nfpRoles": [
+        "ChmNrNationalFocalPoint"
+      ],
+      "notificationTemplateFolder": "CHM",
+      "baseURL": "https://chm.cbd.int",
+      "roles": {
+        "administrator": [
+          "ChmAdministrator"
+        ],
+        "publishingAuthorities": [
+          "ChmNrNationalFocalPoint"
+        ],
+        "iac": [],
+        "nationalAuthorizedUser": [
+          "ChmNrNationalAuthorizedUser"
+        ],
+        "nationalFocalPoint": [
+          "ChmNrNationalFocalPoint"
+        ]
+      },
+      "schemas": {
+        "nationalReport6": {
+          "title": {
+            "en": "Sixth National Report"
+          },
+          "type": "national",
+          "publishingAuthorities": [
+            "ChmNrNationalFocalPoint",
+            "NFP-CBD"
+          ]
+        },
+        "nationalTarget": {
+          "title": {
+            "en": "National Target"
+          },
+          "type": "national",
+          "publishingAuthorities": [
+            "ChmNrNationalFocalPoint",
+            "NFP-CBD"
+          ]
+        },
+        "nationalAssessment": {
+          "type": "national",
+          "title": {
+            "en": "Progress Assessment"
+          },
+          "publishingAuthorities": [
+            "ChmNrNationalFocalPoint",
+            "NFP-CBD"
+          ]
+        },
+        "nationalReport": {
+          "type": "national",
+          "title": {
+            "en": "National Report"
+          },
+          "notify": [
+            "ChmNrNationalFocalPoint"
+          ],
+          "publishingAuthorities": [
+            "ChmNrNationalFocalPoint"
+          ]
+        },
+        "nationalIndicator": {
+          "type": "national",
+          "title": {
+            "en": "National Indicator"
+          }
+        },
+        "implementationActivity": {
+          "type": "national",
+          "title": {
+            "en": "Implementation Activity"
+          }
+        },
+        "nationalSupportTool": {
+          "type": "national",
+          "title": {
+            "en": "Guidance and Support Tools"
+          }
+        },
+        "resourceMobilisation": {
+          "type": "national",
+          "title": {
+            "en": "Financial Reporting Framework 2015"
+          },
+          "publishingAuthorities": [
+            "ChmRmFocalPoint"
+          ],
+          "nationalAuthorizedUsers": [
+            "ChmRmNAU"
+          ],
+          "notify": [
+            "ChmRmFocalPoint"
+          ]
+        },
+        "resourceMobilisation2020": {
+          "type": "national",
+          "title": {
+            "en": "Financial Reporting Framework 2020"
+          },
+          "publishingAuthorities": [
+            "ChmRmFocalPoint"
+          ],
+          "nationalAuthorizedUsers": [
+            "ChmRmNAU"
+          ]
+        },
+        "aichiTarget": {
+          "type": "reference",
+          "title": {
+            "en": "Aichi Biodiversity Target"
+          }
+        },
+        "resource": {
+          "title": {
+            "en": "Virtual Library Resource"
+          },
+          "type": "reference",
+          "publishingAuthorities": [
+            "ChmDocumentValidationTeamMember"
+          ]
+        },
+        "lwEvent": {
+          "type": "reference",
+          "title": {
+            "en": "Life Web Event"
+          },
+          "publishingAuthorities": [
+            "LifeWebAdmin"
+          ]
+        },
+        "lwProject": {
+          "type": "reference",
+          "title": {
+            "en": "Life Web Project"
+          },
+          "publishingAuthorities": [
+            "LifeWebAdmin"
+          ]
+        },
+        "lwDonor": {
+          "type": "reference",
+          "title": {
+            "en": "Life Web Donor"
+          },
+          "publishingAuthorities": [
+            "LifeWebAdmin"
+          ]
+        },
+        "lwCampaign": {
+          "type": "reference",
+          "title": {
+            "en": "Life Web Campain"
+          },
+          "publishingAuthorities": [
+            "LifeWebAdmin"
+          ]
+        },
+        "undbPartner": {
+          "type": "reference",
+          "title": {
+            "en": "UNDB Partner"
+          },
+          "publishingAuthorities": [
+            "undb-administrator"
+          ]
+        },
+        "undbAction": {
+          "type": "reference",
+          "title": {
+            "en": "UNDB Actions"
+          },
+          "publishingAuthorities": [
+            "undb-administrator"
+          ]
+        },
+        "undbActor": {
+          "type": "reference",
+          "title": {
+            "en": "UNDB Actors"
+          },
+          "publishingAuthorities": [
+            "undb-administrator"
+          ]
+        },
+        "undbParty": {
+          "type": "reference",
+          "title": {
+            "en": "UNDB Party Profile"
+          },
+          "publishingAuthorities": [
+            "undb-administrator"
+          ]
+        },
+        "bbiOpportunity": {
+          "type": "reference",
+          "title": {
+            "en": "BBI Opportunity Offer"
+          },
+          "publishingAuthorities": [
+            "BbiAdministrator"
+          ]
+        },
+        "bbiProfile": {
+          "type": "reference",
+          "title": {
+            "en": "BBI Provider Profile"
+          },
+          "publishingAuthorities": [
+            "BbiAdministrator"
+          ]
+        },
+        "bbiRequest": {
+          "type": "reference",
+          "title": {
+            "en": "BBI Assistance Request"
+          },
+          "publishingAuthorities": [
+            "BbiAdministrator"
+          ]
+        },
+        "bbiContact": {
+          "type": "reference",
+          "title": {
+            "en": "BBI Related Contact"
+          },
+          "publishingAuthorities": [
+            "BbiAdministrator"
+          ]
+        },
+        "event": {
+          "type": "reference",
+          "title": {
+            "en": "Event"
+          },
+          "publishingAuthorities": [
+            "undb-administrator"
+          ]
+        },
+        "organization": {
+          "type": "reference",
+          "publishingAuthorities": [
+            "ChmDocumentValidationTeamMember",
+            "BbiAdministrator",
+            "undb-administrator"
+          ],
+          "title": {
+            "en": "Organization"
+          }
+        },
+        "marineEbsa": {
+          "type": "scbd",
+          "title": {
+            "en": "Marine EBSA"
+          },
+          "publishingAuthorities": [
+            "ChmAdministrator"
+          ]
+        },
+        "caseStudy": {
+          "type": "scbd",
+          "title": {
+            "en": "Case Study"
+          },
+          "publishingAuthorities": [
+            "ChmAdministrator"
+          ]
+        },
+        "focalPoint": {
+          "type": "scbd",
+          "title": {
+            "en": "Focal Point"
+          },
+          "publishingAuthorities": [
+            "Administrator"
+          ]
+        },
+        "strategicPlanIndicator": {
+          "type": "scbd",
+          "title": {
+            "en": "Strategic Plan Indicator"
+          },
+          "publishingAuthorities": [
+            "ChmAdministrator"
+          ]
+        },
+        "capacityBuildingInitiative": {
+          "type": "reference",
+          "title": {
+            "en": "Capacity-building Initiative"
+          },
+          "publishingAuthorities": [
+            "Chm-CBIPublishingAuthority",
+            "ChmAdministrator"
+          ]
+        },
+        "capacityBuildingResource": {
+          "type": "reference",
+          "title": {
+            "en": "Capacity-building Resource"
+          },
+          "publishingAuthorities": [
+            "Chm-CBIPublishingAuthority"
+          ]
+        },
+        "submission": {
+          "type": "reference",
+          "title": {
+            "en": "Submissions"
+          },
+          "publishingAuthorities": [
+            "ChmSubmissionValidationTeamMember"
+          ]
+        },
+        "contact": {
+          "type": "national",
+          "title": {
+            "en": "Contact"
+          },
+          "titlePlural": {
+            "en": "Contacts"
+          },
+          "description": {
+            "en": "Contact details of a person or organization"
+          },
+          "shortCode": "CON"
+        }
+      },
+      "pdf": {
+        "documents": {
+          "path": "database/record?documentID=:documentID&print=true&mixLocale=:mixLocale",
+          "fields": [
+            "documentID",
+            "revision",
+            "mixLocale"
+          ],
+          "fileName": ":documentID-:revision",
+          "s3": {
+            "bucket": "pdf-cache-prod",
+            "folder": "chm"
+          },
+          "usePrincePdf": true,
+          "link": true
+        },
+        "draft-documents": {
+          "path": "database/share/:code?print=true&&mixLocale=:mixLocale",
+          "fields": [
+            "code",
+            "mixLocale"
+          ],
+          "fileName": "language:documentID-:revision",
+          "usePrincePdf": true,
+          "link": true
+        },
+        "scbd-records": {
+          "path": "database/record?documentID=:documentID&print=true",
+          "fields": [
+            "documentID",
+            "revision",
+            "schema"
+          ],
+          "fileName": ":documentID",
+          "s3": {
+            "bucket": "pdf-cache-prod",
+            "folder": "chm"
+          },
+          "usePrincePdf": false
+        }
+      }
+    }
+  ]

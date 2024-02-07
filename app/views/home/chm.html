@@ -1,0 +1,166 @@
+<div>
+    <div class="home-section-top-chm">
+        <div class="container py-5">
+
+            <span class="lh-sm fs-4 color-white my-3">
+                {{::('chmHomeT.chmDescription'|$translate)}}
+            </span>
+
+            <div class="row mt-2 py-3">
+                <div class="col-sm-12 col-md-4 p-2 d-none d-sm-none d-md-none d-lg-block" style="white-space:nowrap;">
+                    <a class="text-decoration-none cursor-pointer link-light" ng-click="scrollTo('homePageMapSection');">
+                        <div
+                            class="rounded p-2 fs-5 p-1 bg-chm text-uppercase border border-1 border-dark border-secondary w-100 text-center">
+                            <i class="bi bi-globe"></i>
+                            <span class="px-2">{{::('chmHomeT.exploreMap'|$translate)}}</span>
+                            <i class="fa  fa-arrow-down"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 p-2" style="white-space:nowrap;">
+                    <a class="text-decoration-none cursor-pointer link-light " ng-click="scrollTo('gettingStartedSection');">
+                        <div
+                            class="rounded p-2 fs-5 p-1 bg-chm text-uppercase border border-1 border-dark border-secondary w-100 text-center">
+                            <i class="bi bi-lightbulb"></i>
+                            <span class="px-2">{{::('chmHomeT.getStarted'|$translate)}}</span>
+                            <i class="fa  fa-arrow-down"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 p-2" style="white-space:nowrap;"> <a
+                        class="text-decoration-none cursor-pointer link-light " ng-click="scrollTo('recentRecordsSection');">
+                        <div
+                            class="rounded p-2 fs-5  p-1 bg-chm text-uppercase border border-1 border-dark border-secondary w-100 text-center">
+                            <i class="bi bi-table"></i>
+                            <span class="px-2">{{::('chmHomeT.recentRecords'|$translate)}}</span>
+                            <i class="fa  fa-arrow-down"></i>
+                        </div>
+                    </a></div>
+            </div>
+            <div>
+                <p class="fs-2 m-0 mt-4 color-white">
+                    {{::('chmHomeT.announcements'|$translate)}}
+                    <hr class="m-0 color-white">
+                </p>
+                <div class="pt-3">
+                    <home-articles tags="chm-announcement" counts="3"></home-articles>
+                </div>
+                <div class="text-end mt-4 card-down-margin">
+                    <a class="nav-link fs-6 fw-bold text-uppercase color-white" href="kb/tags/chm-announcement/">
+                        <span class="p-1" style="background-color: #00405C;border:1px solid #000000;border-radius: 5px;">
+                        {{::('chmHomeT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i> </span></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="homePageMapSection" class="max-vh-100 bg-white d-none d-lg-block overflow-hidden">
+        <home-map></home-map>
+    </div>
+
+    <!-- Gettingstarted -->
+    <div class="container pb-3 mb-3" id="gettingStartedSection">
+        <div class="row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
+            <p class="fs-2 m-0 fw-bold">
+                 {{::('chmHomeT.getStarted'|$translate)}}
+                <hr class="m-0">
+            </p>
+            <div class="rounded col-12 col-lg-4 d-flex py-lg-3">
+                <div class="card w-100 shadow-lg border-0 m-3 bg-white ">
+                    <h5 class="card-header bg-chm">
+                        <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
+                            href="kb/tags/about/About">
+                            <i class="bi bi-lightbulb pe-3 fs-4" alt="Learn"></i>
+                            {{::('chmHomeT.learn'|$translate)}}
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </h5>
+                    <div class="card-body">
+                        <ul>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="kb">{{::('chmHomeT.aboutChm'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="https://chm.cbd.int/protocol">{{::('chmHomeT.aboutProtocol'|$translate)}}</a>
+                            </li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="kb/faqs">{{::('chmHomeT.faq'|$translate)}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded col-12 col-lg-4 d-flex py-lg-3">
+                <div class="card w-100 shadow-lg border-0 m-3 bg-white ">
+                    <h5 class="card-header bg-chm">
+                        <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
+                            href="search">
+                            <i class="bi bi-search pe-3 fs-4" alt="Search"></i>
+                            {{::('chmHomeT.search'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
+                    </h5>
+                    <div class="card-body">
+                        <ul>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="search?openTour">{{::('chmHomeT.takeTour'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="kb/tags/finding-information/Searching-for-information-in-the-CHM/619c553a4f1f30000140eeb2">{{::('chmHomeT.helpSearch'|$translate)}}</a>
+                            </li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="registries">{{::('chmHomeT.registries'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="search?currentPage=1&tab=nationalRecords&group=government&group=schema&schema=cpbNationalReport4">{{::('chmHomeT.fourthNR'|$translate)}}</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded col-12 col-lg-4 d-flex py-lg-3">
+                <div class="card w-100 shadow-lg border-0 m-3 bg-white ">
+                    <h5 class="card-header bg-chm">
+                        <a class="link-light fs-6 fw-bold text-uppercase" rel="noopener" translation-url
+                            href="register">
+                            <i class="bi bi-upload  pe-3 fs-4" alt="Share"></i>
+                            {{::('chmHomeT.submit'|$translate)}}
+                            <i class="fa fa-arrow-right"></i> </a>
+                    </h5>
+                    <div class="card-body">
+                        <ul>
+                            <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener"
+                                    translation-url href="signin">{{::('chmHomeT.signIn'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="register?openTour">{{::('chmHomeT.takeTour'|$translate)}}</a></li>
+                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                                    href="kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-CHM/619c554858029700017ff45f">{{::('chmHomeT.helpRecords'|$translate)}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END Gettingstarted -->
+
+    <div class="max-vh-100 home-page-record pt-4 mt-4" id="recentRecordsSection">
+        <div class="container ">
+            <p class="fs-2 m-0 fw-bold">{{::('chmHomeT.nationalRecords'|$translate)}}
+                <hr class="m-0">
+            </p>
+            <div ng-if="exportVueComponent">
+                <homepage-records ng-vue="exportVueComponent" type="national" :rows="recordCount"></homepage-records>
+            </div>
+        </div>
+    </div>
+    <div class="home-page-record">
+        <div class="container ">
+            <p class="fs-2 m-0 fw-bold">{{::('chmHomeT.referenceRecords'|$translate)}}
+                <hr class="m-0">
+            </p>
+            <div ng-if="exportVueComponent">
+                <homepage-records ng-vue="exportVueComponent" type="reference" :rows="recordCount"></homepage-records>
+            </div>
+        </div>
+    </div>
+
+</div>
