@@ -161,7 +161,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
 								.then(function (data) {
-									$scope.internalDocument = data.data;
+									$scope.internalDocument = $scope.internalDocumentInfo = data.data;
 									$scope.loading = false;
 								});
 							loadViewDirective(documentSchema);
