@@ -32,7 +32,7 @@ import 'datepicker-range';
               'Last six months' : [moment().subtract(6,   'month' ).startOf('month'), moment()],
               'Last 12 months'  : [moment().subtract(12,  'month' ).startOf('month'), moment()],
               'Last 2 years'    : [moment().subtract(2,   'year'  ).startOf('month'), moment()],
-              'Last 5 years 1'    : [moment().subtract(5,   'year'  ).startOf('month'), moment()]
+              'Last 5 years'    : [moment().subtract(5,   'year'  ).startOf('month'), moment()]
             },
             locale: {
               format: dateFormat,              
