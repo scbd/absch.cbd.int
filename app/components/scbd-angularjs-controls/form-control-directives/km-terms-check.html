@@ -61,12 +61,12 @@
 			<script type="text/ng-template" id="term-check-tree-renderer.html">
 				<label>
 					<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
-						ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier}}"/> 
+						ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier|escape}}"/>
 						<span ng-bind-html="term.title||term.name | lstring:locale"></span>
 				</label>
 				<div ng-if="(otherTermIdentifier==term.identifier ||term.type) && !term.multiple && selectedItems[term.identifier].selected">
 					<div style="padding-left:15px;"> 
-						<label name="chk_{{term.identifier}}_customValue" for="chk_{{term.identifier}}_customValue">
+						<label name="chk_{{term.identifier|escape}}_customValue" for="chk_{{term.identifier|escape}}_customValue">
 							{{::('kmTermCheckT.pleaseSpecify'|$translate)}}
 						</label>
 						<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
