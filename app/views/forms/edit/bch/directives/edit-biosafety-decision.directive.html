@@ -310,7 +310,7 @@
 									<div class="row" ng-if="decisionResult.conditions">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="conditions" caption="{{::('editBiosafetyDecisionT.conditions'|$translate)}}">
-												<div km-textbox-ml name="conditions" required ng-model="document.conditions" locales="document.header.languages"></div>
+												<div km-rich-textbox rows="4" name="conditions" required ng-model="document.conditions" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
