@@ -83,8 +83,9 @@
 
 		<div ng-show="document.type">
 			<label>{{::('viewMeasureT.type'|$translate)}}</label>
-			<div class="km-value"  compare-val>
+			<div class="km-value"  compare-val>  
 				<span ng-bind="document.type|term:locale"></span>
+				<span ng-if="document.otherTypeName">(<span ng-bind="document.otherTypeName|lstring:locale"></span>)</span>
 			</div>
 		</div>
 
