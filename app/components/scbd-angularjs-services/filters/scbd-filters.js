@@ -35,9 +35,9 @@ import '../services/locale';
   //
   //
   //============================================================
-  app.filter('escape', function() {
+  app.filter('escapeHtmlAttribuetId', function() {
     return function(value) {
-      return value.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, '\\$&');
+      return value.replace(/[^-_:.a-z0-9]/gi, '_');
     };
   });
 
