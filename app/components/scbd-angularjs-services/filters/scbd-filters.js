@@ -235,7 +235,13 @@ import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
     };
   }]);
 
-
+  app.filter("targetBlank", function () {
+    return function (target) {
+      if (!target)
+        return "";
+      return setAnchorTarget(target);
+    };
+  }); 
   //============================================================
   //
   //
