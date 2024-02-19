@@ -3,6 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import scbdSchemaDetails from './schema-name.json';
 import '../services/locale';
+import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
     
   app.directive("translationUrl", ['$browser', function($browser){
     return {
@@ -37,7 +38,9 @@ import '../services/locale';
   //============================================================
   app.filter('escapeHtmlAttribuetId', function() {
     return function(value) {
-      return value.replace(/[^-_:.a-z0-9]/gi, '_');
+      if(!value)
+        return
+      return escapeHtmlAttributeId(value);
     };
   });
 

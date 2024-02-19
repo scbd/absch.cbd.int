@@ -11,4 +11,5 @@ import './services/mime.type.service';
 import './services/locale';
 import './services/extended-route';
 import './services/apiUrl';
+import './services/escape-html-attribute-id'
 export {default as scbdSchemas} from './filters/schema-name.json'
