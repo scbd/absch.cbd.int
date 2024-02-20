@@ -1,5 +1,5 @@
 ﻿
-module.exports = function(proxy, options){  
+export default function(proxy, options){  
 
     return function(req, res){ 
         proxy.web(req, res, { 

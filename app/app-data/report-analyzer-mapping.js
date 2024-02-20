@@ -1,4 +1,4 @@
-import reportAnalyzerMappingJson from '../app-text/report-analyzer/report-analyzer-mapping.json';
+import reportAnalyzerMappingJson from '../app-text/report-analyzer/report-analyzer-mapping.json' assert { type: "json" };
 
 export const analyzerMapping =
 {

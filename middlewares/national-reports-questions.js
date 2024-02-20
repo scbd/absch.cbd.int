@@ -1,7 +1,7 @@
 import path from 'path';
 import {analyzerMapping} from '../app/app-data/report-analyzer-mapping.js'
 
-module.exports = async function(req, res){
+export default async function(req, res){
 
     let clearingHouse = process.env.CLEARINGHOUSE.toLowerCase();
     let report        = req.params.report;
