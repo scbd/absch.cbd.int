@@ -5,15 +5,15 @@ import alias                    from '@rollup/plugin-alias';
 import nodeResolve              from '@rollup/plugin-node-resolve'
 import json                     from '@rollup/plugin-json';
 import commonjs                 from '@rollup/plugin-commonjs';
-import dynamicImportVariables   from 'rollup-plugin-dynamic-import-variables';
-import vue                      from 'rollup-plugin-vue'
-import copy                     from 'rollup-plugin-copy'
+import dynamicImportVariables   from '@rollup/plugin-dynamic-import-vars';
+import vue                      from 'rollup-plugin-vue';
+import copy                     from 'rollup-plugin-copy';
 import { string }               from "rollup-plugin-string";
-import { terser }               from 'rollup-plugin-terser';
+import terser                   from '@rollup/plugin-terser';
 import bootWebApp, { cdnUrl }   from './app/boot.js';
-import injectCssToDom           from './rollup/inject-css-to-dom';
-import resolveLocalized         from './rollup/resolve-localized';
-import stripBom                 from './rollup/strip-bom';
+import injectCssToDom           from './rollup/inject-css-to-dom.js';
+import resolveLocalized         from './rollup/resolve-localized.js';
+import stripBom                 from './rollup/strip-bom.js';
 
 const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
@@ -85,9 +85,10 @@ function bundle(entryPoint, locale, baseDir='app') {
       }),
       string({ include: "**/*.html" }),
       json({ namedExports: true }),
-      injectCssToDom(),
+   //   css(),
       vue(),
-      dynamicImportVariables({ }),
+      injectCssToDom(),
+      dynamicImportVariables({ include:`${baseDir}/**/*.js` }),
       commonjs({ include: 'node_modules/**/*.js'}),
       nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
       isWatchOn ? null : getBabelOutputPlugin({

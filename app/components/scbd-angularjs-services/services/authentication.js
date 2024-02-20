@@ -21,6 +21,8 @@ import './apiUrl';
     app.factory('apiToken', ["$q", "$rootScope", "$window", "$document", "$timeout", "$location",
      function($q, $rootScope, $window, $document, $timeout, $location) {
 
+        const tokenChangeHandlers = []
+
         var pToken;
         var authenticationFrameQ = $q(function(resolve, reject){
             var search = $location.search();
@@ -93,8 +95,8 @@ import './apiUrl';
 
                 pToken = t;
 
-                if(Vue?.prototype.$auth)
-                    Vue.prototype.$auth.setUserToken(pToken);
+                tokenChange(pToken);
+                
                 return t;
 
             }).catch(function(error) {
@@ -133,12 +135,11 @@ import './apiUrl';
             else
                 pToken = undefined;
 
-            window?.Vue?.prototype?.$auth.setUserToken(token);
+            tokenChange(token);
 
             return $q.when(authenticationFrameQ).then(function(authenticationFrame){
 
-                if(Vue?.prototype.$auth)
-                    Vue.prototype.$auth.setUserToken(pToken);
+                tokenChange(token);
 
                 if (authenticationFrame) {
 
@@ -171,12 +172,23 @@ import './apiUrl';
             return authenticationToken;
         }
 
+        function tokenChange(token) {
+            tokenChangeHandlers.forEach(handler=>handler(token));
+        }
+
+        function onTokenChange(handler) {
+            tokenChangeHandlers.push(handler);
+        }
+
         return {
             get: getToken,
-            set: setToken
+            set: setToken,
+            onTokenChange
         };
     }]);
     app.factory('authentication', ["$http", "$rootScope", "$q", "apiToken", function($http, $rootScope, $q, apiToken) {
+
+        const userChangeHandlers = []
 
         var currentUser = null;
 
@@ -304,11 +316,7 @@ import './apiUrl';
             currentUser = user || undefined;
             $rootScope.user = user || anonymous();
 
-            if(window?.Vue.prototype.$auth)
-                window?.Vue?.prototype?.$auth?.setUser(currentUser)
-            
-			if(Vue?.prototype.$auth)
-                Vue.prototype.$auth.setUser($rootScope.user);
+            userChange($rootScope.user);
                 
             if (user && user.isAuthenticated && !user.isEmailVerified) {
                 $rootScope.$broadcast('event:auth-emailVerification', {
@@ -338,12 +346,21 @@ import './apiUrl';
             // signOut(true);
         });
 
+        function userChange(user) {
+            userChangeHandlers.forEach(handler=>handler(user));
+        }
+
+        function onUserChange(handler) {
+            userChangeHandlers.push(handler);
+        }
+
         return {
             getUser: getUser,
             signIn: signIn,
             signOut: signOut,
             isEmailVerified:isEmailVerified,
-            accountsBaseUrl:()=>ACCOUNTS_URL
+            accountsBaseUrl:()=>ACCOUNTS_URL,
+            onUserChange
         };
 
     }]);

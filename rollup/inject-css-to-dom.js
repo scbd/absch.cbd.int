@@ -5,6 +5,7 @@ export default function injectCssToDom(options = {}) {
 
   const injectable = []
   const cssPluginTag = /^css!/; 
+  const cssExtension = /\.css$/; 
 
   return {
     name: 'injectCss',
@@ -19,9 +20,7 @@ export default function injectCssToDom(options = {}) {
         isCss     = true;
       }
 
-      const extension = path.extname(importeeId);
-
-      if(extension == '.css') {
+      if(cssExtension.test(importeeId)) {
         isCss = true;
       }
 
@@ -31,7 +30,7 @@ export default function injectCssToDom(options = {}) {
         return {id: importeeId, external: true};
       }
 
-      if(extension != '.css') {
+      if(!cssExtension.test(importeeId)) {
         console.warn("css!", "missing file extension (.css)", importeeId, "->", importer);
       }
 
@@ -50,7 +49,9 @@ export default function injectCssToDom(options = {}) {
     },
 
     transform(css, id) {
-      if (!injectable.includes(id)) return null;
+
+      if(!cssExtension.test(id))
+        return null;
 
       try {
         const parsed = JSON.stringify(css);
