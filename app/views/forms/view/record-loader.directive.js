@@ -365,16 +365,12 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.showDifferenceButton = false;
 						}		
 					}
-					//ToDo: will remove and will schema.type at html
-					$scope.isReference  = function(schema){
-						let x =  true;
-						const referenceSchemas = appConfigService.referenceSchemas;
-						// x =  schema.toLowerCase().includes(referenceSchemas);
-						x =  referenceSchemas.includes(schema.toLowerCase());
-						console.log('value of x', x)
-						return x;
-					}
-
+					$scope.isReference  = function(schemaName){
+						if(schemaName){
+							const referenceSchemas = appConfigService.referenceSchemas;
+							return referenceSchemas.indexOf(schemaName) !== -1;
+						}
+					}	
 					function canEdit() {
 
 						return authentication.getUser()

@@ -110,7 +110,8 @@
 
         <!-- Document Header -->
         <!-- use schema.type for condition  -->
-        <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="isReference(internalDocumentInfo.metadata.schema) ? 'bg-blue' : 'bg-orange'" style="padding-top: 8px; padding-left: 2px;" ng-if="!loading && internalDocumentInfo">
+        <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="isReference(internalDocumentInfo.metadata.schema) ?'bg-orange':'bg-blue'"
+            style="padding-top: 8px; padding-left: 2px;" ng-if="!loading && internalDocumentInfo">
                 <!-- Schema Title with short code: copied from view pages -->
                 <span class="floa-start text-uppercase p-2">
                     <span ng-bind="::internalDocumentInfo.metadata.schema|schemaName"></span>
