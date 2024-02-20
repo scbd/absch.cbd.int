@@ -92,7 +92,7 @@ function bundle(entryPoint, locale, baseDir='app') {
       commonjs({ include: 'node_modules/**/*.js'}),
       nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
       isWatchOn ? null : getBabelOutputPlugin({
-        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"} ], { plugins: ['@babel/plugin-transform-private-methods'] }],
         plugins: ['@babel/plugin-proposal-class-properties'],
         allowAllFormats: true
       }),
