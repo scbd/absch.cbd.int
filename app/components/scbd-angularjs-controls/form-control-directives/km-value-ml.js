@@ -16,16 +16,11 @@ import template from 'text!./km-value-ml.html'; ;
 			},
 			link: function ($scope, element, attrs)
 			{
-				$scope.targetParams = {
-					target: '_blank', 
-					selector: "a[href^='https://'], a[href^='http://']"
-				}
 				$scope.markdown = attrs.hasOwnProperty("markdown");
 				$scope.kmPre	= attrs.hasOwnProperty("kmPre");
 				$scope.html		= attrs.hasOwnProperty("html");
 
 				$scope.$watch('locales', function(text) {
-					// console.log($scope.locales, _.isString($scope.locales))
 					if(_.isString($scope.locales)){
 						$scope.localesToDisplay = [$scope.locales]
 					}

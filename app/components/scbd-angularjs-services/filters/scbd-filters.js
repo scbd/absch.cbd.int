@@ -3,8 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import scbdSchemaDetails from './schema-name.json';
 import '../services/locale';
-import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
-import setAnchorTarget from '../services/set-anchor-target'
+import { setAnchorTarget, escapeHtmlAttributeId } from '~/services/html.js'
     
   app.directive("translationUrl", ['$browser', function($browser){
     return {
@@ -32,18 +31,15 @@ import setAnchorTarget from '../services/set-anchor-target'
     };		
   }]);
 
-  app.directive('setAnchorTarget', function($timeout) {
+  app.directive('anchorTarget', function($timeout) {
     return {
         restrict: 'A',
-        scope: {
-          setAnchorTarget: '='
-        },
-        link: function(scope, $element) {
-            const selector = scope.setAnchorTarget.selector ;
-            const target = scope.setAnchorTarget.target ;
+        link: function(scope, $element, $attr) {
+            const target    = $attr.anchorTarget || '_blank';
+            const selector  = $attr.anchorTargetSelector || "a[href^='https://'], a[href^='http://']";
             $timeout(function() {
-              setAnchorTarget($element, selector, target )
-          },500);
+                setAnchorTarget($element, selector, target )
+            },500);
         }
       }
   });
@@ -52,7 +48,7 @@ import setAnchorTarget from '../services/set-anchor-target'
   //
   //
   //============================================================
-  app.filter('escapeHtmlAttribuetId', function() {
+  app.filter('escapeHtmlAttributeId', function() {
     return function(value) {
       if(!value)
         return
