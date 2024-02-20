@@ -3,7 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import scbdSchemaDetails from './schema-name.json';
 import '../services/locale';
-import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
+import { setAnchorTarget, escapeHtmlAttributeId } from '~/services/html.js'
     
   app.directive("translationUrl", ['$browser', function($browser){
     return {
@@ -31,12 +31,24 @@ import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
     };		
   }]);
 
+  app.directive('anchorTarget', function($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, $element, $attr) {
+            const target    = $attr.anchorTarget || '_blank';
+            const selector  = $attr.anchorTargetSelector || "a[href^='https://'], a[href^='http://']";
+            $timeout(function() {
+                setAnchorTarget($element, selector, target )
+            },500);
+        }
+      }
+  });
   //============================================================
   //
   //
   //
   //============================================================
-  app.filter('escapeHtmlAttribuetId', function() {
+  app.filter('escapeHtmlAttributeId', function() {
     return function(value) {
       if(!value)
         return
@@ -234,7 +246,6 @@ import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
       return $sce.trustAsHtml(value);
     };
   }]);
-
 
   //============================================================
   //
