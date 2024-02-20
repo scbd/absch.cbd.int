@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex justify-content-center text-center">
-        <v-pagination v-if="recordCount>recordsPerPage" v-model="currentPage" 
+        <v-pagination v-if="recordCount>recordsPerPage" v-model="internalCurrentPage" 
         :per-page="recordsPerPage" :records="recordCount" @paginate="setPage()"></v-pagination>
     </div>
 </template>
@@ -15,6 +15,12 @@ export default {
         recordCount     : Number,
         recordsPerPage  : Number,
         currentPage     : Number
+    },
+    computed : {
+        internalCurrentPage : {
+            get()  { return this.currentPage },
+            set(p) { this.$emit('update:currentPage', p) }
+        }
     },
     data() {
         return {            
