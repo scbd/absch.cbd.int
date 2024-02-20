@@ -16,7 +16,10 @@ import template from 'text!./km-value-ml.html'; ;
 			},
 			link: function ($scope, element, attrs)
 			{
-				
+				$scope.targetParams = {
+					target: '_blank', 
+					selector: "a[href^='https://'], a[href^='http://']"
+				}
 				$scope.markdown = attrs.hasOwnProperty("markdown");
 				$scope.kmPre	= attrs.hasOwnProperty("kmPre");
 				$scope.html		= attrs.hasOwnProperty("html");

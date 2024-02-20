@@ -1,10 +1,10 @@
-export default function setAnchorTarget(value) {
+export default function setAnchorTarget(element, selector, target) {
 
-    var anchorElements = value[0].querySelectorAll('a[href^="https://"], a[href^="http://"]');
+    var anchorElements = element[0].querySelectorAll(selector);
 
     anchorElements.forEach(function (anchorElement) {
         if (anchorElement && !anchorElement.getAttribute('target')) {
-            anchorElement.setAttribute('target', '_blank');
+            anchorElement.setAttribute('target', target);
         }
     });
 

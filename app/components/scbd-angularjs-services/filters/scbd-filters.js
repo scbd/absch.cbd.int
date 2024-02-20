@@ -35,9 +35,14 @@ import setAnchorTarget from '../services/set-anchor-target'
   app.directive('setAnchorTarget', function($timeout) {
     return {
         restrict: 'A',
+        scope: {
+          setAnchorTarget: '='
+        },
         link: function(scope, $element) {
+            const selector = scope.setAnchorTarget.selector ;
+            const target = scope.setAnchorTarget.target ;
             $timeout(function() {
-              setAnchorTarget($element)
+              setAnchorTarget($element, selector, target )
           },500);
         }
       }
