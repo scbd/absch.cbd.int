@@ -131,7 +131,7 @@
             <!-- ng-if="showDifferenceButton"  style="display: none;"-->
 
             <div class="btn-group dropdown" role="group">
-                <button ng-if="!showDifferenceButton" ng-disabled="isComparing"
+                <button ng-if="showComparison" ng-disabled="isComparing"
                     class="btn btn-sm dropdown-toggle fs-small-8 p-0 px-1 color-white" type="button"
                     id="comparisonMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                     ng-click="loadRecordRevisions()">

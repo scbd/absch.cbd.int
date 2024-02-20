@@ -349,11 +349,15 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 									else
 										$scope.workflowRequestType = "publishing";
 								});
-							if($scope.internalDocumentInfo.revision > 1)
-								$scope.showDifferenceButton = true
+							if($scope.internalDocumentInfo.latestRevision >= 1)
+							{
+								$scope.showDifferenceButton = true;
+								$scope.showComparison = false
+							}
 						}
 						else if($scope.internalDocumentInfo?.latestRevision > 1){
 							$scope.showComparison = true;//$attr.showComparison == 'true'
+							$scope.showDifferenceButton = false;
 						}		
 					}
 
