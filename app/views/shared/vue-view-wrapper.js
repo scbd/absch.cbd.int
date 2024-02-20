@@ -1,4 +1,3 @@
-import 'angular-vue'
 import VueI18n from 'vue-i18n'
 import '~/components/scbd-branding/main';
 

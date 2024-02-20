@@ -119,7 +119,6 @@ export default function bootApp(window, require, defineX) {
             'xlsx'                      : cdnHost + 'xlsx@0.14.0/dist/xlsx',
             'jszip'                     : cdnHost + 'xlsx@0.14.0/dist/jszip',
 
-
             'chart-js'                  : cdnHost + 'chart.js@1.1.1/Chart.min',
             'printThis'                 : cdnHost + 'print-this@1.9.0/printThis',
             'diacritics'                : cdnHost + 'diacritic@0.0.2/diacritics',
@@ -137,8 +136,6 @@ export default function bootApp(window, require, defineX) {
             'plotly-renderers'          : cdnHost + 'pivottable@2.23.0/dist/plotly_renderers',
 
 
-//            'angular-vue'               : cdnHost + '@scbd/angular-vue@4.0.0/dist/index.min',
-            'angular-vue'               : 'http://127.0.0.1:8081/dist/index',
             'ky'                        :           'libs/globals/ky',
 
             'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min',
@@ -177,8 +174,7 @@ export default function bootApp(window, require, defineX) {
             'pivottable'                    : { 'deps': ['jquery', 'jquery-ui', 'angular', 'externalCss']},
             'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']},
 
-            'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
-            'vue-pagination-2'              : { 'deps': ['angular-vue'] }
+            'vue-pagination-2'              : { 'deps': [] }
             
         },
         urlArgs: function(id, url) {

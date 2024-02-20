@@ -25,7 +25,6 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
-import 'angular-vue'
 import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
     app.directive('searchDirective', function() {
