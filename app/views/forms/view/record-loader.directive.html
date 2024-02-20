@@ -123,7 +123,7 @@
         </div>
         <div ng-if="showDifferenceButton||showComparison" class="full-text-display float-end compare-buttons pe-2 position-relative text-white"
             style="top:7px;">
-            <button type="button" ng-if="!showComparison" ng-disabled="isComparing" class="btn btn-success btn-sm"
+            <button type="button" ng-if="showDifferenceButton" ng-disabled="isComparing" class="btn btn-success btn-sm"
                 ng-click="showDifference()">
                 <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> {{::('recordLoaderT.showDifference'|$translate)}}
             </button>

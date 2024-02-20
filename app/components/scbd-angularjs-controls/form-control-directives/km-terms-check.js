@@ -11,8 +11,8 @@ import kmTermCheckT from '~/app-text/components/scbd-angularjs-controls/form-con
     //
     //
     //============================================================
-app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translationService',
-    function ($q, thesaurus, $timeout, locale, translationService ) {
+app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translationService', '$filter',
+    function ($q, thesaurus, $timeout, locale, translationService, $filter ) {
         return {
             restrict: 'EAC',
             template: template,
@@ -235,13 +235,13 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                                 if(allChildSelected){
                                     if(mySelectedChildren.length == term.narrowerTerms.length){
                                         $scope.selectedItems[identifier].selected = true;
-                                        $element.find('#chk_'+identifier).prop('indeterminate', false)
+                                        $element.find('#chk_'+$filter('escapeHtmlAttribuetId')(identifier)).prop('indeterminate', false)
                                     }
                                 }
                                 else{ 
                                     $scope.selectedItems[identifier].selected = selected;
                                     if($scope.selectedItems[identifier].selected)
-                                        $element.find('#chk_'+identifier).prop('indeterminate', false)
+                                        $element.find('#chk_'+$filter('escapeHtmlAttribuetId')(identifier)).prop('indeterminate', false)
                                 }
 
                                 if(term && term[type])//narrowerTerms||broaderTerms
@@ -257,7 +257,7 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                             var term = _.find($scope.terms, {identifier:identifier});
                             if(term && !($scope.selectedItems[identifier]||{}).selected){
                                 var hasChildSelected = isSelectedOrIndertiminante(term.narrowerTerms);
-                                $element.find('#chk_'+identifier).prop('indeterminate', hasChildSelected||val);
+                                $element.find('#chk_'+$filter('escapeHtmlAttribuetId')(identifier)).prop('indeterminate', hasChildSelected||val);
                             }
                             if(term && term.broaderTerms)
                                 setIndeterminanteParents(term.broaderTerms, val);
@@ -267,7 +267,7 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
 
                 function isSelectedOrIndertiminante(terms){
                     var has = _.find(terms, function(identifier){ 
-                        return ($scope.selectedItems[identifier]||{}).selected||$element.find('#chk_'+identifier).prop('indeterminate')==true
+                        return ($scope.selectedItems[identifier]||{}).selected||$element.find('#chk_'+$filter('escapeHtmlAttribuetId')(identifier)).prop('indeterminate')==true
                     });
                     return has != undefined;
                 }
