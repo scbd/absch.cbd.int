@@ -1,5 +1,5 @@
 ﻿
-module.exports = function(req, res){
+export default function(req, res){
     let sitemapName = process.env.CLEARINGHOUSE.toLowerCase();
     if(req.params.num)
         sitemapName += req.params.num;
