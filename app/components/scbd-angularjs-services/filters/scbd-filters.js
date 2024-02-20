@@ -4,6 +4,7 @@ import moment from 'moment';
 import scbdSchemaDetails from './schema-name.json';
 import '../services/locale';
 import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
+import setAnchorTarget from '../services/set-anchor-target'
     
   app.directive("translationUrl", ['$browser', function($browser){
     return {
@@ -31,6 +32,16 @@ import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
     };		
   }]);
 
+  app.directive('setAnchorTarget', function($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, $element) {
+            $timeout(function() {
+              setAnchorTarget($element)
+          },500);
+        }
+      }
+  });
   //============================================================
   //
   //
@@ -235,13 +246,6 @@ import escapeHtmlAttributeId from '../services/escape-html-attribute-id'
     };
   }]);
 
-  app.filter("targetBlank", function () {
-    return function (target) {
-      if (!target)
-        return "";
-      return setAnchorTarget(target);
-    };
-  }); 
   //============================================================
   //
   //

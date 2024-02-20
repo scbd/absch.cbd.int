@@ -1,11 +1,12 @@
-import $ from 'jquery';
-
 export default function setAnchorTarget(value) {
-    const $htmlObject = $(value);
-    $htmlObject.find('a[href^="https://"],a[href^="http://"]').each(function() {
-        if (!$(this).attr('target')) {
-            $(this).attr('target', '_blank');
+
+    var anchorElements = value[0].querySelectorAll('a[href^="https://"], a[href^="http://"]');
+
+    anchorElements.forEach(function (anchorElement) {
+        if (anchorElement && !anchorElement.getAttribute('target')) {
+            anchorElement.setAttribute('target', '_blank');
         }
     });
-    return $htmlObject.prop('outerHTML');
+
+    return anchorElements;
 }
