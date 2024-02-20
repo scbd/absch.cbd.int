@@ -8,6 +8,7 @@
     "@bower_components/jquery": "jquery/jquery-dist#3.3.1",
     "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11",
     "@bower_components/require-shim": "zetlen/require-shim#95b5aaea4530fb2861cc475497c7b4c62204628d",
+    "@scbd/angular-vue": "https://github.com/scbd/angular-vue.git#ng-vue-3",
     "@scbd/common": "^0.0.10",
     "cheerio": "1.0.0-rc.3",
     "compression": "1.7.4",
@@ -18,6 +19,7 @@
     "http-proxy": "1.17.0",
     "ky": "0.26.0",
     "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "mime": "1.4.1",
     "path-to-regexp": "^6.2.1",
     "superagent": "5.0.8"
@@ -46,7 +48,6 @@
     "vue": "3.4.19"
   },
   "peerDependencies": {
-    "@scbd/angular-vue": "4.0.0",
     "rangy": "1.3.1"
   },
   "engine": "node >= 14.0",
