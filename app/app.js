@@ -9,10 +9,10 @@ import {
     createNgVue,
     createAuth,
     createRouter,
-    createRoute, 
+    createRoute,
     createService,
     NgVueDirective 
-}     from 'angular-vue' 
+}     from '@scbd/angular-vue/src/index.js' 
 import {
     createI18n
 } from 'vue-i18n';
