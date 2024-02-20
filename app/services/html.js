@@ -6,6 +6,24 @@ export function encode(text) {
 
 export function decode(text) {
   const container = document.createElement('textarea');
-  container.innerinnerHTMLText = text;
+  container.innerHTML = text;
   return container.innerText;
+}
+
+
+export function setAnchorTarget(element, selector, target) {
+
+  var anchorElements = element[0].querySelectorAll(selector);
+
+  anchorElements.forEach(function (anchorElement) {
+      if (anchorElement && !anchorElement.getAttribute('target')) {
+          anchorElement.setAttribute('target', target);
+      }
+  });
+
+  return anchorElements;
+}
+
+export function escapeHtmlAttributeId(value) {
+  return value.replace(/[^-_:.a-z0-9]/gi, '_');
 }
