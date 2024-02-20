@@ -26,9 +26,9 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', '$rootScope', 'apiToken', 'translationService', '$http',
+		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', '$rootScope', 'apiToken', 'translationService', '$http',"appConfigService",
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		realm, $compile, searchService, IWorkflows, appLocale, solr, $rootScope, apiToken, translationService, $http) {
+		realm, $compile, searchService, IWorkflows, appLocale, solr, $rootScope, apiToken, translationService, $http, appConfigService) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -40,6 +40,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				locale: "=?",
 				hide: "@",
 				showDetails: "=",
+				showDoc: "=",
 				api: '=?',
 				documentInfo: "=?",
 			},
@@ -74,6 +75,10 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 								$scope.revisionNo = 'draft'
 						}
 					});
+					//close record in record list
+					$scope.closeDoc = function(){
+						$scope.showDoc = false;
+					}
 
 					$scope.shareVueComponent = {
 						components:{shareRecord}
@@ -359,6 +364,15 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.showComparison = true;//$attr.showComparison == 'true'
 							$scope.showDifferenceButton = false;
 						}		
+					}
+					//ToDo: will remove and will schema.type at html
+					$scope.isReference  = function(schema){
+						let x =  true;
+						const referenceSchemas = appConfigService.referenceSchemas;
+						// x =  schema.toLowerCase().includes(referenceSchemas);
+						x =  referenceSchemas.includes(schema.toLowerCase());
+						console.log('value of x', x)
+						return x;
 					}
 
 					function canEdit() {
