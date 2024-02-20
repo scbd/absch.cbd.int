@@ -98,7 +98,7 @@
 		<!-- ToDo: will we use this ?, we don't have this in edit  -->
 		<div ng-show="document.registeredMeasuresDescription">
 			<div class="km-value km-pre" compare-val>
-				<km-value-ml value="document.registeredMeasuresDescription" locale="locale"></km-value-ml>
+				<km-value-ml value="document.registeredMeasuresDescription" locale="locale" html></km-value-ml>
 			</div>
 		</div>
 
@@ -133,7 +133,7 @@
 			<div ng-show="document.amendmentsDescription">
 				<label>{{::('viewMeasureT.summaryAmendments'|$translate)}}</label>
 				<div compare-val>
-					<km-value-ml value="document.amendmentsDescription" locales="locale"></km-value-ml>
+					<km-value-ml value="document.amendmentsDescription" locales="locale" html></km-value-ml>
 				</div>
 			</div>
 
