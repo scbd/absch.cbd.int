@@ -84,7 +84,6 @@ function bundle(entryPoint, locale, baseDir='app') {
       }),
       string({ include: "**/*.html" }),
       json({ namedExports: true }),
-   //   css(),
       vue(),
       injectCssToDom(),
       dynamicImportVariables({ include:`${baseDir}/**/*.js` }),
