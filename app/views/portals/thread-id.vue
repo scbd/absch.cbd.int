@@ -15,7 +15,7 @@
             </a>
           </div>
           <div class="col align-self-center">
-            <b>{{ thread.subject | lstring }}</b>
+            <b>{{ lstring(thread.subject) }}</b>
             <div v-if="forum && forum.isClosed"><em>{{ $t('forumIsClosedForComments') }}</em></div>  
             <div v-else-if="thread.isClosed"><em>{{ $t('threadIsClosedForComments') }}</em></div>  
           </div>
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <h1>{{ thread.subject | lstring }}</h1> 
+      <h1>{{ lstring(thread.subject) }}</h1> 
 
       <post :post="thread" class="mb-2" @refresh="refresh()">
         <template v-slot:showReplies="{ replies }">
@@ -63,6 +63,7 @@ import pending   from '~/services/pending-call'
 import Loading  from '~/components/common/loading.vue'
 import ErrorPane from '~/components/common/error.vue';
 import i18n from "~/app-text/views/portals/forums.json";
+import { lstring } from '../../components/kb/filters';
 
 export default {
   name: 'Forum',
@@ -101,6 +102,7 @@ export default {
     loggedIn: load
   },
   methods: {
+    lstring,
     load,
     refresh : load,
     toggleSubscription: pending(toggleSubscription, function(on) { this.subscribing = on }),

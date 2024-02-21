@@ -9,7 +9,7 @@
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <ul>
             <li v-for="article in articles" class="mb-1">
-                <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{article.title|lstring($locale)}}</a>
+                <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{lstring(article.title, $locale)}}</a>
             </li>
         </ul>
         <div v-if="articles.length<1 && !loading" class="alert alert-light">
@@ -22,7 +22,7 @@
 import ArticlesApi from './article-api';
 import i18n from '../../app-text/components/kb.json';
 import articlesMaxin from '../maxin/article';
-import './filters';
+import { lstring } from './filters';
 export default {
     name: 'kbRelevantArticles',
     components: {},
@@ -74,8 +74,9 @@ export default {
         }
     },
     methods: {
+        lstring,
       articleUrl(article) {
-            return this.getUrl(this.$options.filters.lstring(article.title), article._id, this.tag);
+            return this.getUrl(lstring(article.title), article._id, this.tag);
         },
         shuffleArray(array) {
             return array

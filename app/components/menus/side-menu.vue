@@ -3,7 +3,7 @@
     <ul class="list-unstyled">
       <li style="border-bottom: 1px solid #324252;">
         <a :href="menu.url" class="d-flex align-items-center pb-3 mb-1 text-decoration-none menu-header btn-toggle">
-          <h4 class="w-100">{{ menu.title | lstring($locale) }}</h4>
+          <h4 class="w-100">{{ lstring(menu.title, $locale) }}</h4>
           <button type="button" class="btn btn-default color-white float-end mb-1 d-block d-sm-none"
             @click="toggleMenu()">
                 <i class="fa fa-bars"></i> <span class="caret"></span>
@@ -22,6 +22,9 @@
 
 <script>
 import SideMenuSub from './side-menu-sub.vue'
+import { lstring } from '../kb/filters';
+
+
 export default {
   name: 'SideMenu',
   components: { SideMenuSub },
@@ -34,6 +37,7 @@ export default {
     menu: Object,
   },
   methods:{
+    lstring,
     toggleMenu(){
       this.expandMenu = !this.expandMenu;
     }
