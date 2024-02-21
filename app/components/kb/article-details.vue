@@ -14,15 +14,15 @@
 
                     <div class="card-body" v-if="!loading">
                        
-                        <h2 class="card-title">{{article.title|lstring($locale)}}</h2>
+                        <h2 class="card-title">{{lstring(article.title, $locale)}}</h2>
                        
                         <div class="p-1 mb-3 text-white bg-darkgrey bold">
                             <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;
-                            {{article.meta.createdOn|formatDate('DD MMM YYYY')}}
+                            {{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}
                         </div>
 
                         <div v-if="article.content" class="card-text full-details ck ck-content ck-rounded-corners ck-blurred"
-                            v-html="$options.filters.lstring(article.content,$locale)">
+                            v-html="lstring(article.content,$locale)">
                         </div>
                     </div>
                     <div v-if="article.adminTags" class="card-footer">
@@ -53,6 +53,8 @@ import ArticlesApi from './article-api';
 import './filters';
 import popularTags from './popular-tags.vue';
 import articlesMaxin from '../maxin/article';
+import { formatDate, lstring } from './filters';
+
 export default {
     name: 'KbArticleDetails',
     components: {
@@ -93,6 +95,8 @@ export default {
         }
     },
     methods: {
+        formatDate,
+        lstring,
         back() {
             window.history.back();
         },
@@ -102,7 +106,7 @@ export default {
             return this.getUrl(tagTitle, undefined, tag);
         },
         articleUrl(article, tag) {
-            return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
+            return this.getUrl(lstring(article.title), article._id, tag);
         },
         getSizedImage(url, size) {
             return url && url
