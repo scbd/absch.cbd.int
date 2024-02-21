@@ -1,12 +1,10 @@
-import VueI18n from 'vue-i18n'
 import '~/components/scbd-branding/main';
+import { defineComponent } from 'vue';
 
 export { default as template } from './vue-view-wrapper.html';
 
-export default ['$scope', 'apiToken', '$route', 'component','realm', 'locale','$location', function ($scope, apiToken, $route, component, realm, locale, $location) {
-
-  component = component.default || component;
-  $scope.tokenReader = function(){ return apiToken.get()}
+export default ['$scope', '$route', 'component', function ($scope, $route, component) {
+  component = defineComponent(component.default || component);
 
   const locals = { ...$route.current.locals };
 
@@ -14,9 +12,8 @@ export default ['$scope', 'apiToken', '$route', 'component','realm', 'locale','$
   delete locals.$template; 
   delete locals.$scope;
 
-  $scope.locals      = locals;
+  $scope.locals      = { ...locals };
   $scope.vueOptions  = {
-    components: { component },
-    i18n: new VueI18n({ locale: 'en', fallbackLocale: 'en', messages: { en: {} } })
+    components: { viewComponent: component }
   };
 }];
