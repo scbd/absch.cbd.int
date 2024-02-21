@@ -7,7 +7,7 @@
     :target="menu.target"
     @click="toggle($event)" 
     >
-    {{menu.title|lstring($locale)}}
+    {{lstring(menu.title)}}
 
     <span v-if="!!menu.target" >
       &nbsp;<i class="fa fa-external-link" aria-hidden="true"></i>
@@ -23,6 +23,7 @@
 
 <script>
 import bootstrap from 'bootstrap';
+import { lstring } from '../kb/filters';
 
 export default {
     name: 'SideMenuSub',
@@ -54,6 +55,7 @@ export default {
       }
     },
     methods: {
+      lstring,
       toggle($event) {
 
         const { hasSubMenu } = this;

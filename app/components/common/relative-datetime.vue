@@ -6,10 +6,9 @@
 <script>
 
 import moment from 'moment';
+import { ref } from 'vue';
 
-const globalState = Vue.observable({
-    showFullDateTime : false
-})
+const showFullDateTime = ref(false);
 
 export default {
     name: 'Loading',
@@ -20,8 +19,8 @@ export default {
 
     computed: {
         showFullDateTime: {
-            get()  { return globalState.showFullDateTime; }, 
-            set(v) { globalState.showFullDateTime = v; }
+            get()  { return showFullDateTime.value; }, 
+            set(v) { showFullDateTime.value = v; }
         },
         absoluteTime() {
             const { date } = this;
