@@ -6,6 +6,9 @@
             <div class="container p-0">
                 <div class="row">
                     <div class="col-lg-8">
+                        {{$i18n}}
+                        $t("knowledgeBase")
+
                         <p class="fs-5">{{ $t("the") }} <b>{{$realm.chShortName+ " "}}<span class="text-capitalize">{{ $t("knowledgeBase") }}</span></b> {{ $t("kbParagraph")}}</p>
                         <categories-group></categories-group>
                     </div>

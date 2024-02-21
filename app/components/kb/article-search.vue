@@ -19,14 +19,14 @@
                             <div class="p-2 bd-highlight w-100">
                                 <div class="card-body">
                                     <span class="badge bg-secondary position-absolute top-0 end-0">
-                                        {{article.meta.createdOn|formatDate('DD MMM YYYY')}}</span>
+                                        {{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}</span>
 
                                     <h5 class="card-title"><a class="link-dark"
-                                            :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{article.title|lstring($locale)}}</a>
+                                            :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{lstring(article.title, $locale)}}</a>
                                     </h5>
                                         <p v-if="article.summary" class="card-text h-100">
                                         <a class="link-dark" :href="`${articleUrl(article, getTag(article.adminTags) )}`">
-                                            {{article.summary|lstring($locale)}}
+                                            {{lstring(article.summary, $locale)}}
                                         </a>
                                     </p>
 
@@ -60,6 +60,7 @@ import paginate from './pagination.vue';
 import ArticlesApi from './article-api';
 import './filters';
 import articlesMaxin from '../maxin/article';
+import { formatDate, lstring } from './filters';
 
 export default {
     name: 'KbArticlesByTag',
@@ -92,6 +93,7 @@ export default {
         this.loadArticles(1);
     },
     methods: {
+        formatDate,
         getTag(adminTags) {
             var realm = this.$realm.is('BCH') ? 'bch' : 'absch';
             console.log(realm);
@@ -109,7 +111,7 @@ export default {
             return this.getUrl(tagTitle, undefined, tag);
         },
         articleUrl(article, tag) {
-            return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
+            return this.getUrl(lstring(article.title), article._id, tag);
         },
         onChangePage(pageNumber) {
             this.article = [];
