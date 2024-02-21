@@ -5,14 +5,16 @@
           <side-menu :menu="menu"  class="menu-sticky mt-1"></side-menu>
       </aside>
       <main class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-8 col-xxl-9 gx-2 gy-2" >
-        <div class="bg-white p-4" ref="view"></div>
+        <div class="bg-white p-4" ref="view">
+            <component :is="viewInstance" v-if="viewInstance" v-bind="viewProps"/>
+        </div>
       </main>
     </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
+import { defineComponent, shallowRef } from 'vue';
 import ArticlesApi from '~/api/articles';
 import ForumsApi from '~/api/forums';
 import MenusApi from '~/api/portals';
@@ -37,7 +39,9 @@ export default {
   },
   data() { 
     return {
-      portalMenu: null
+      portalMenu: null,
+      viewInstance: shallowRef(null),
+      viewProps : null,
     };
   },
   computed : {
@@ -70,8 +74,6 @@ export default {
 
 async function initializePortal() {
 
-  console.log('initializePortal', this.portalId)
-
     const { portalId, unwatchPath } = this;
     const { realm } = this.$realm;
 
@@ -99,28 +101,16 @@ function onRouteChange() {
   const match     = subRouter.match(path);
   const component = match?.route?.component || PageNotFound;
 
-  while (this.$refs.view.firstChild) { //Cleanup view placeholder
-      const element  = this.$refs.view.lastChild;
-      const instance = element.$component;
-
-      this.$refs.view.removeChild(element);
-
-      if(instance) instance.$destroy();
-  }
+  this.viewInstance = shallowRef(null);
+  this.viewProps    = null;
 
   if(component) { // instanciate component into placeholder location
 
     const matchParams    = match?.params;
     const subRouteParams = match?.route?.params;
 
-    const propsData      = { ...(routeParams||{}), ...(matchParams||{}), ...(subRouteParams||{}) }
-    const ComponentClass = Vue.extend(component);
-    const instance       = new ComponentClass({ parent: this, propsData });
-    
-    this.$refs.view.appendChild(document.createElement('div'));
-
-    instance.$mount(this.$refs.view.lastChild);
-    instance.$el.$component = instance;
+    this.viewProps    = { ...(routeParams||{}), ...(matchParams||{}), ...(subRouteParams||{}) };
+    this.viewInstance = shallowRef(defineComponent(component));
 
     if(document.documentElement.scrollTop > this.$refs.view.offsetTop)
         this.$refs.view.scrollIntoView();
