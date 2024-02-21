@@ -49,7 +49,7 @@
   "absPermitDateOfExpiry":"Date of expiry",
   "absPermitHasThirdParty":"IRCCs that have specified conditions for 3rd party transfer",
   "absPermitReferencedByCPC":"IRCCs that have been referenced in a checkpoint communiqué",
-  "SubjectMatter":"Subject-matter or genetic resource",
+  "SubjectMatter":"Subject matter has been identified as confidential",
   "absCCSourceCountry":"Source country",
   "absCPCheckpointGranted":"Checkpoint that gathered the information",
   "relatedIRCC":"Related IRCC",
