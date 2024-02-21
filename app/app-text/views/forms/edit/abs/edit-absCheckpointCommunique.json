@@ -12,7 +12,7 @@
     "certificate": "Details of the internationally recognized certificate of compliance",
     "IRCCsNotAvailable": "The internationally recognized certificate of compliance (IRCC) is not available",
     "IRCCs": "Links to internationally recognized certificate(s) of compliance (IRCC) that relate to this communiqué",
-    "IRCCsInfo": "Here, the reference of the IRCC is to be included if a user of a genetic resource presented an IRCC to the checkpoint. Use the different filters or the unique identifier in the text field to search for the existing relevant IRCC. If the IRCC is not available you need to select the option “This information is not available” and the grey box below will be enabled. Please note that Checkpoint Communiqués should not be issued on the use of a countries own genetic resources (i.e. when the user and provider country are the same).",
+    "IRCCsInfo": "Here, the reference of the IRCC is to be included if a user of a genetic resource presented an IRCC to the checkpoint. Use the different filters or the unique identifier in the text field to search for the existing relevant IRCC. If the IRCC is not available you need to select the option “This information is not available” and the grey box below will be enabled.",
     "IRCCComplain": "This section is required when the internationally recognized certificate of compliance (IRCC) is not available.",
     "geneticResource": "Source of the genetic resource",
     "geneticResourceInfo": "Select the country/ies which is/are the source of the genetic resource. The country/ies selected will be notified once this record is published. The source country should not include the country publishing this Checkpoint Communiqué.",
