@@ -75,14 +75,16 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
   registerPlugin(createService('$realm', realm));
   registerPlugin(createService('$locale', locale));
   registerPlugin(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
-  registerPlugin(createService('$ngApp', app));
-  registerPlugin(createService('$ngInjector', $injector));
 
-  const ngVue = createNgVue({ $injector, ngApp: app });
+  const ngVue   = createNgVue({ $injector, ngApp: app });
+  const $i18n   = createI18n({ locale, fallbackLocale: 'en'});
+  const $route  = createRoute ({ plugins: { ngVue }});
+  const $router = createRouter ({ plugins: { ngVue }});
+
   registerPlugin(ngVue);
-  registerPlugin(createI18n({}));
-  registerPlugin(createRoute ({ plugins: { ngVue }}));
-  registerPlugin(createRouter({ plugins: { ngVue }}));
+  registerPlugin($i18n);
+  registerPlugin($route);
+  registerPlugin( $router);
 
   const authPlugin = createAuth ({ 
     fetchUser() { return authentication.getUser(); },
@@ -90,8 +92,7 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
     async login() {
       console.log("$auth: force sign in");
 
-      const { $route, $router, $ngVue } = Vue.prototype;
-      const appConfigService = $ngVue.$injector.get('appConfigService')
+      const appConfigService = $injector.get('appConfigService')
 
       const { fullPath, query } = $route;
       let { returnUrl } = query;
