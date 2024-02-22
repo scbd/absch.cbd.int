@@ -161,7 +161,9 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						const schemaName = $filter("mapSchema")(documentSchema);
 						const schema	 = realm.schemas[schemaName];
 						const scbdSchemas= ["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"];
-						
+						if(schema){
+							$scope.documentHeader = {title: $filter('lstring')(schema.titlePlural||schema.title, appLocale) , shortCode: schema.shortCode};
+						}
 						if (documentSchema && scbdSchemas.includes(documentSchema.toUpperCase())) {
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
