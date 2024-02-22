@@ -365,11 +365,19 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.showDifferenceButton = false;
 						}		
 					}
-					$scope.isReference  = function(schemaName){
+					$scope.getHeaderColor  = function(schemaName){
+						var bgClass = 'bg-darkgrey';
 						if(schemaName){
 							const referenceSchemas = appConfigService.referenceSchemas;
-							return referenceSchemas.indexOf(schemaName) !== -1;
+							if(referenceSchemas.indexOf(schemaName) !== -1)
+							{
+								bgClass = 'bg-orange';
+							}
+							else{
+								bgClass = 'bg-blue';
+							}
 						}
+						return bgClass ;
 					}	
 					function canEdit() {
 
