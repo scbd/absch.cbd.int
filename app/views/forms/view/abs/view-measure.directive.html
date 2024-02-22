@@ -1,10 +1,10 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading bg-blue">
+	<!-- <div class="panel-heading bg-blue">
 		<h4 ng-show="display('header')">
 			<span ng-bind="::document.header.schema|schemaName"></span>
 			<span class="color-white">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
 		</h4>
-	</div>
+	</div> -->
 	<div class="record-body panel-body bg-white">
 
 			
@@ -83,9 +83,8 @@
 
 		<div ng-show="document.type">
 			<label>{{::('viewMeasureT.type'|$translate)}}</label>
-			<div class="km-value"  compare-val>  
+			<div class="km-value"  compare-val>
 				<span ng-bind="document.type|term:locale"></span>
-				<span ng-if="document.otherTypeName">(<span ng-bind="document.otherTypeName|lstring:locale"></span>)</span>
 			</div>
 		</div>
 
