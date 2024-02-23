@@ -40,6 +40,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				locale: "=?",
 				hide: "@",
 				showDetails: "=",
+				showDoc: "=",
 				api: '=?',
 				documentInfo: "=?",
 			},
@@ -74,6 +75,10 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 								$scope.revisionNo = 'draft'
 						}
 					});
+					//close record in result default page
+					$scope.closeDoc = function(){
+						$scope.showDoc = false;
+					}
 
 					$scope.shareVueComponent = {
 						components:{shareRecord}
@@ -175,6 +180,9 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 								}
 							}
 							$scope.load(documentID, documentRevision, recordOwnerRealm);
+						}
+						if (schema){
+							$scope.documentHeader = {schemaTitle: $filter('lstring')(schema.title, appLocale) , shortCode: schema.shortCode, bgClass: getHeaderColor(schema.type)};
 						}
 					};
 
@@ -360,7 +368,21 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.showDifferenceButton = false;
 						}		
 					}
-
+					function getHeaderColor(schemaType) {
+						let bgClass = 'bg-darkgrey';
+						switch (schemaType) {
+							case 'national':
+								bgClass = 'bg-blue';
+								break;
+							case 'reference':
+								bgClass = 'bg-orange';
+								break;
+							case 'scbd':
+								bgClass = 'bg-darkgrey';
+								break;
+						}
+						return bgClass;
+					}	
 					function canEdit() {
 
 						return authentication.getUser()
