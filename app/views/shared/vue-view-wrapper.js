@@ -1,5 +1,5 @@
 import '~/components/scbd-branding/main';
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 
 export { default as template } from './vue-view-wrapper.html';
 
@@ -12,7 +12,7 @@ export default ['$scope', '$route', 'component', function ($scope, $route, compo
   delete locals.$template; 
   delete locals.$scope;
 
-  $scope.locals      = { ...locals };
+  $scope.vueProps    = reactive({ ...locals });
   $scope.vueOptions  = {
     components: { viewComponent: component }
   };
