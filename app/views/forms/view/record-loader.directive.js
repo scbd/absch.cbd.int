@@ -162,7 +162,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						const schema	 = realm.schemas[schemaName];
 						const scbdSchemas= ["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"];
 						if(schema){
-							$scope.documentHeader = {title: $filter('lstring')(schema.titlePlural||schema.title, appLocale) , shortCode: schema.shortCode};
+							$scope.documentHeader = {schemaTitle: $filter('lstring')(schema.titlePlural||schema.title, appLocale) , shortCode: schema.shortCode, bgClass: getHeaderColor(schema.type)};
 						}
 						if (documentSchema && scbdSchemas.includes(documentSchema.toUpperCase())) {
 							$scope.loading = true;
@@ -367,20 +367,22 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.showDifferenceButton = false;
 						}		
 					}
-					$scope.getHeaderColor  = function(schemaName){
-						var bgClass = 'bg-darkgrey';
-						if(schemaName){
-							const referenceSchemas = appConfigService.referenceSchemas;
-							if(referenceSchemas.indexOf(schemaName) !== -1)
-							{
-								bgClass = 'bg-orange';
-							}
-							else{
+					function getHeaderColor(type) {
+						let bgClass = 'bg-darkgrey';
+						switch (type) {
+							case 'national':
 								bgClass = 'bg-blue';
-							}
+								break;
+							case 'reference':
+								bgClass = 'bg-orange';
+								break;
+							case 'scbd':
+								bgClass = 'bg-darkgrey';
+								break;
 						}
-						return bgClass ;
-					}	
+						return bgClass;
+					}
+						
 					function canEdit() {
 
 						return authentication.getUser()
