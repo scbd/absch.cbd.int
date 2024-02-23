@@ -6,7 +6,7 @@
       </aside>
       <main class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-8 col-xxl-9 gx-2 gy-2" >
         <div class="bg-white p-4" ref="view">
-            <component :is="viewInstance" v-if="viewInstance" v-bind="viewProps"/>
+            <component :is="viewComponent" v-if="viewComponent" ref="viewInstance" v-bind="viewProps"/>
         </div>
       </main>
     </div>
@@ -40,7 +40,7 @@ export default {
   data() { 
     return {
       portalMenu: null,
-      viewInstance: shallowRef(null),
+      viewComponent: shallowRef(null),
       viewProps : null,
     };
   },
@@ -100,17 +100,17 @@ function onRouteChange() {
 
   const match     = subRouter.match(path);
   const component = match?.route?.component || PageNotFound;
-
-  this.viewInstance = shallowRef(null);
-  this.viewProps    = null;
+  
+  this.viewComponent = null;
+  this.viewProps     = null;
 
   if(component) { // instanciate component into placeholder location
 
     const matchParams    = match?.params;
     const subRouteParams = match?.route?.params;
 
-    this.viewProps    = { ...(routeParams||{}), ...(matchParams||{}), ...(subRouteParams||{}) };
-    this.viewInstance = shallowRef(defineComponent(component));
+    this.viewProps     = { ...(routeParams||{}), ...(matchParams||{}), ...(subRouteParams||{}) };
+    this.viewComponent = defineComponent(component);
 
     if(document.documentElement.scrollTop > this.$refs.view.offsetTop)
         this.$refs.view.scrollIntoView();
