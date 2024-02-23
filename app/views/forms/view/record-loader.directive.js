@@ -462,7 +462,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						var divSelector = '#schemaView'
 						var name 		= snake_case(lschema);
 						var directiveHtml =
-							"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
+							"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale' hide-title='true'></DIRECTIVE>"
 								.replace(/DIRECTIVE/g, 'view-' + name);
 						$scope.$apply(function () {
 							if(typeof beforeReplace == 'function'){
