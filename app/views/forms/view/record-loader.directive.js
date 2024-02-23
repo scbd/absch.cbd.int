@@ -181,8 +181,8 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							}
 							$scope.load(documentID, documentRevision, recordOwnerRealm);
 						}
-						if (schema){
-							$scope.documentHeader = {schemaTitle: $filter('lstring')(schema.title, appLocale) , shortCode: schema.shortCode, bgClass: getHeaderColor(schema.type)};
+						if (documentSchema){
+							setDocumentHeader(documentSchema)
 						}
 					};
 
@@ -367,6 +367,15 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.showComparison = true;//$attr.showComparison == 'true'
 							$scope.showDifferenceButton = false;
 						}		
+						if($scope.internalDocumentInfo.metadata.schema)
+							setDocumentHeader($scope.internalDocumentInfo.metadata.schema);
+					}
+
+					function setDocumentHeader (schemaTitle){
+						const schemaName = $filter("mapSchema")(schemaTitle);
+						const schema	 = realm.schemas[schemaName];
+						$scope.documentHeader = {schemaTitle: $filter('lstring')(schema.title, appLocale) , shortCode: schema.shortCode, bgClass: getHeaderColor(schema.type)};
+						
 					}
 					function getHeaderColor(schemaType) {
 						let bgClass = 'bg-darkgrey';
