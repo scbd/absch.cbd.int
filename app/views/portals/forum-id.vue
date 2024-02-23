@@ -164,7 +164,6 @@ export default {
       loading:false,
       error: null,
       helpArticle: null,
-      showHelp: null,
       edit: null
     }
   },
@@ -173,8 +172,10 @@ export default {
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.forum?.isOpen; },
     hasHelp()  { return !!this.helpArticle; },
-    get showHelp() { return !!this.helpArticle?.visible;}, 
-    set showHelp(value) { if(this.helpArticle) this.helpArticle.visible = value }, 
+    showHelp: { 
+      get()      { return !!this.helpArticle?.visible;} , 
+      set(value) { if(this.helpArticle) this.helpArticle.visible = value }
+    }, 
   },
   watch: {
     loggedIn: load
