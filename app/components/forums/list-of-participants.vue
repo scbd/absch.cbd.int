@@ -20,7 +20,7 @@
             <tr v-for="(participant, index) in parties" :key="index">
               <td scope="row">{{index+1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ participant.country.name | lstring($locale) }} </td>
+              <td>{{ lstring(participant.country.name, $locale) }} </td>
             </tr>
           </tbody>
         </table>
@@ -40,7 +40,7 @@
             <tr v-for="(participant, index) in nonParties" :key="index">
               <td scope="row">{{parties.length + index + 1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ participant.country.name | lstring($locale) }} </td>
+              <td>{{ lstring(participant.country.name, $locale) }} </td>
             </tr>
           </tbody>
         </table>
@@ -60,7 +60,7 @@
             <tr v-for="(participant, index) in organizations" :key="index">
               <td scope="row">{{parties.length + nonParties.length + index + 1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ participant.organization | lstring($locale) }} </td>
+              <td>{{ lstring(participant.organization | $locale) }} </td>
             </tr>
           </tbody>
         </table>
@@ -79,8 +79,8 @@
             <tr v-for="(participant, index) in members" :key="index">
               <td scope="row">{{ index + 1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td v-if="participant.country">{{ participant.country.name | lstring($locale) }} </td>
-              <td v-else>{{ participant.organization | lstring($locale) }} </td>
+              <td v-if="participant.country">{{ lstring(participant.country.name, $locale) }} </td>
+              <td v-else>{{ lstring(participant.organization, $locale) }} </td>
             </tr>
           </tbody>
         </table>
@@ -118,6 +118,7 @@ export default {
     members()       { return this.participants.filter(({ type }) =>  type == 'member') ; }
   },
   methods: {
+    lstring,
     load: pending(load, 'loading')
   },
   created() {
