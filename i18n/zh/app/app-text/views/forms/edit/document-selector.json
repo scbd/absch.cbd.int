@@ -25,5 +25,6 @@
   "create": "创建",
   "showExisting": "显示现有记录",
   "cancel": "取消",
-  "noRecordFound": "未找到记录。"
+  "noRecordFound": "未找到记录。",
+  "revisionUpdated": "对此记录的引用已更新至其最新版本。"
 }

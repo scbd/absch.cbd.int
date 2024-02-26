@@ -1,12 +1,12 @@
 {
   "exportButton": "تصدير",
   "dialogTitle": "تصدير",
-  "downloadFormat": "صيغة التنزيل:",
+  "downloadFormat": "صيغة التنزيل",
   "xls": "XLS (Excel)",
   "xlsx": "XLSX (Excel)",
   "csv": "CSV (comma separated values)",
   "processing": "قيد التنفيذ...",
-  "recordsFound": "عدد السجلات المتاحة:",
+  "recordsFound": "سجلات موجودة",
   "type": "النوع",
   "uid": "المُعرِّف الفريد",
   "government": "جهات حكومية",
@@ -18,5 +18,6 @@
   "publishedDate": "تاريخ النشر",
   "sampleMessage": "هذه عينة فقط من المعلومات التي سيتم تصديرها. كل السجلات التي يعرضها هذا البحث مشمولة في ملف التصدير الناتج.",
   "cancel": "إلغاء",
-  "download": "تنزيل"
+  "download": "تنزيل",
+  "exportInformation": "لتصدير جميع الخانات المتاحة، يرجى تحديد فلتر تصفية عام واحد من فئة \"نوع السجل\" في كل مرة."
 }

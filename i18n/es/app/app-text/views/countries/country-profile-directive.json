@@ -4,9 +4,11 @@
   "show10": "mostrar los próximos 10 registros",
   "showRemaining": "mostrar los restantes",
   "records": "registros",
-  "selectMeasures": "Seleccionar las medidas en materia de APB que se mostrarán en el panorama general",
+  "selectMeasures": "Seleccionar los registros que se mostrarán en el panorama general",
   "entry": "Entrada en vigor:",
   "adoption": "Aprobación:",
   "until": "hasta",
-  "retired": "Retirado:"
+  "retired": "Retirado:",
+  "jurisdiction": "Filtrar registros por jurisdicción",
+  "selectAll": "Seleccionar todo"
 }

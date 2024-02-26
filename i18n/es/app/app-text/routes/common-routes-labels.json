@@ -28,11 +28,12 @@
   "reportedRecords": "Registros informados",
   "reportCounts": "Informar recuentos",
   "errorLogs": "Registros de errores",
-  "subscriptions": "Suscripciones",
+  "subscriptions": "Alertas de correos electrónicos",
   "userRoleReport": "Informe de funciones de los usuarios",
   "commonIssues": "Cuestiones comunes",
   "matrix": "Matriz",
   "kb": "Base de conocimientos",
   "embed": "Insertar URL",
-  "mySharing": "Mi participación"
+  "mySharing": "Mi participación",
+  "submissionsOnNotifications": "Presentaciones a partir de notificaciones"
 }

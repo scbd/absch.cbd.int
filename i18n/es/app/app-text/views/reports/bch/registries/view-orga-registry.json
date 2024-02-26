@@ -9,5 +9,9 @@
   "error": "Error al cargar los registros del Directorio, intente nuevamente.",
   "totalRecords": "Registros totales:",
   "export": "exportar",
-  "click": "Hacer clic"
+  "click": "Hacer clic",
+  "recordID": "Identificación del registro",
+  "scientificName": "Nombre científico",
+  "commonName": "Nombre común",
+  "description": "Descripción"
 }

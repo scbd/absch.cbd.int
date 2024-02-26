@@ -4,9 +4,11 @@
   "show10": "Montrer les 10 fichiers suivants",
   "showRemaining": "Montrer le reste",
   "records": "Fichiers",
-  "selectMeasures": "Sélectionnez les mesures APA devant être montrées dans l'aperçu",
+  "selectMeasures": "Sélectionnez les fichiers devant être montrés dans l'aperçu",
   "entry": "Entrée en vigueur :",
-  "adoption": "Adoption",
-  "until": "jusqu’à",
-  "retired": "Retiré :"
+  "adoption": "Adoption:",
+  "until": "jusqu’au",
+  "retired": "Retiré",
+  "jurisdiction": "Filtres de fichiers par juridiction",
+  "selectAll": "Tout sélectionner"
 }
