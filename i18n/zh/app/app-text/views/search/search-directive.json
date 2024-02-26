@@ -33,7 +33,7 @@
   "cancel": "取消",
   "save": "保存",
   "exportDisabled": "请等查询结束后再导出。",
-  "createFilter": "创建或编辑已保存的搜索筛选条件",
+  "createFilter": "保存搜索筛选条件",
   "title": "此已保存搜索的标题：",
   "SearchTitle": "搜索标题",
   "searchClearingHouse": "搜索信息交换所",

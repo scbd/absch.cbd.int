@@ -1,12 +1,12 @@
 {
   "exportButton": "Exportar",
   "dialogTitle": "Exportar",
-  "downloadFormat": "Descargar formato:",
+  "downloadFormat": "Descargar formato",
   "xls": "XLS (Excel)",
   "xlsx": "XLSX (Excel)",
   "csv": "CSV (valores separados por comas)",
   "processing": "Procesando...",
-  "recordsFound": "Registros encontrados:",
+  "recordsFound": "No se encontraron registros",
   "type": "Tipo",
   "uid": "Identificador Único",
   "government": "Gobierno",
@@ -18,5 +18,6 @@
   "publishedDate": "Fecha de publicación",
   "sampleMessage": "Esta es solo una muestra de la información a exportar. Todos los registros encontrados en esta búsqueda se incluirán en la exportación.",
   "cancel": "Cancelar",
-  "download": "Descargar"
+  "download": "Descargar",
+  "exportInformation": "Para exportar todos los campos disponibles, seleccione un filtro general \"Tipo de registro\" por vez."
 }

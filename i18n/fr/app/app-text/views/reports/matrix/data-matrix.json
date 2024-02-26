@@ -1,9 +1,9 @@
 {
-  "loading": "Chargement des données de la Matrice",
-  "filter": "Filtre modifié, redémarrage de la récupération des données",
+  "loading": "",
+  "filter": "",
   "exportResult": "Exporter les résultats",
   "format": "Format de téléchargement :",
-  "csv": "la virgule sépare les entrées",
+  "csv": "",
   "name": "Nom de fichier",
   "close": "Fermer",
   "download": "Télécharger"

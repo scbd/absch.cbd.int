@@ -28,11 +28,12 @@
   "reportedRecords": "Fichiers présentés",
   "reportCounts": "Décompte",
   "errorLogs": "Protocoles d'erreurs",
-  "subscriptions": "Inscriptions",
+  "subscriptions": "Alertes courriel",
   "userRoleReport": "Rapport sur le rôle de l’usager",
   "commonIssues": "Questions communes",
   "matrix": "Matrice",
   "kb": "La Base des connaissances",
   "embed": "Url intégrée",
-  "mySharing": "Mes partages"
+  "mySharing": "Mes partages",
+  "submissionsOnNotifications": "Soumissions de notifications"
 }

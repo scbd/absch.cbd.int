@@ -1,7 +1,7 @@
 {
   "generalInfo": "معلومات عامة",
   "languageToPublish": "يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:",
-  "country": "البلد",
+  "country": "",
   "selectOption": "يُرجى تحديد البلد...",
   "question": "الأسئلة",
   "showPrevious": "عرض الإجابة السابقة",

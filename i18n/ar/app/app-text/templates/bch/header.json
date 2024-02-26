@@ -11,7 +11,7 @@
   "help": "المساعدة",
   "forums": "المنتديات",
   "records": "السجلات",
-  "registries": "قواعد التسجيل",
+  "registries": "السجلات",
   "lmo": "الكائن الحي المحور",
   "organism": "الكائن الحي",
   "gene": "الجين",
@@ -19,15 +19,17 @@
   "countries": "البلد",
   "overviewAllCountries": "نبذة عامة - عرض كل البلدان",
   "kb": "قاعدة المعرفة",
-  "faq": "الأسئلة الشائعة والمتكررة",
+  "faq": "الأسئلة المتكررة",
   "trainingSite": "موقع التدريب",
   "contactUs": "اتصل بنا",
   "forumsPortals": "المنتديات والبوابات",
+  "portalsRiskAssessment": "تقييم المخاطر وإدارة المخاطر",
   "bchForum": "منتدى غرفة تبادل معلومات السلامة الأحيائية",
   "unepForum": "منتدى المستشارين الإقليميين لبرنامج الأمم المتحدة للبيئة",
   "leaveTrainingSite": "مغادرة موقع التدريب",
   "trainingMaterials": "مراجع التدريب",
   "protocol": "البروتوكول",
   "cartagenaProtocol": "بروتوكول قرطاجنة",
-  "suppProtocol": "البروتوكول التكميلي"
+  "suppProtocol": "البروتوكول التكميلي",
+  "submissionsOnNotifications": "الوثائق المرسلة استجابة للإخطارات"
 }

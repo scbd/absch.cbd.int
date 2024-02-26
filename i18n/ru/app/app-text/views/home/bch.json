@@ -3,7 +3,7 @@
   "aboutBch": "Узнать о МПБ",
   "aboutProtocol": "О Протоколе",
   "faq": "ЧЗВ",
-  "getStarted": "Начать",
+  "getStarted": "Начало работы",
   "searchRecords": "Поиск записей",
   "takeTour": "Посмотреть обзор",
   "helpSearch": "Справка по использованию поиска",
@@ -18,5 +18,7 @@
   "announcements": "Объявления",
   "seeMore": "Подробнее",
   "nationalRecords": "Национальные записи",
-  "referenceRecords": "Справочные записи"
+  "referenceRecords": "Справочные записи",
+  "learn": "Узнать",
+  "recentRecords": "Последние записи"
 }

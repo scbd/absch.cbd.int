@@ -24,7 +24,7 @@
   "fieldCurrentRevision": "Revisión del campo actual",
   "referenceRecordRevision": "Revisión del registro de referencia",
   "update": "Actualizar",
-  "confirmChanges": "Confirmar cambio en el/los siguientes registro(s)",
+  "confirmDelete": "¿Está seguro de que quiere borrar este registro?",
   "draftRecord": "REGISTRO BORRADOR",
   "uniqueId": "Identificador único:",
   "summary": "Resumen:",

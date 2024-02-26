@@ -1,17 +1,17 @@
 {
-  "loadingRecord": "تفاصيل السجل قيد التحميل...",
-  "invalidReference": "المرجع <i>غير صالح</i>، ربما تم إلغاء أو إيقاف نشر البند.",
-  "errorLoading": "حدث خطأ في تحميل تفاصيل",
-  "cna": "السلطة الوطنية المختصة:",
+  "loadingRecord": "",
+  "invalidReference": "",
+  "errorLoading": "",
+  "cna": "",
   "nfp": "نقطة الاتصال الوطنية:",
   "person": "أفراد:",
   "organization": "منظمة:",
   "relatedOrganization": "منظمة ذات صلة",
   "deleted": "تم حذف هذا السجل المرتبط.",
   "phone": "الهاتف:",
-  "fax": "الفاكس:",
-  "email": "البريد الإلكتروني:",
+  "fax": "فـاكـس:",
+  "email": "",
   "website": "الموقع الإلكتروني:",
-  "pendingApproval": "السيد قيد الموافقة",
-  "viewRequest": "عرض الطلب"
+  "pendingApproval": "",
+  "viewRequest": ""
 }

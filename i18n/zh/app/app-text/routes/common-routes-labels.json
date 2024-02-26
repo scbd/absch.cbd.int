@@ -28,11 +28,12 @@
   "reportedRecords": "已报告记录",
   "reportCounts": "报告计数",
   "errorLogs": "错误日志",
-  "subscriptions": "订阅",
+  "subscriptions": "电子邮件提示",
   "userRoleReport": "用户角色报告",
   "commonIssues": "常见问题",
   "matrix": "矩阵",
   "kb": "知识库",
   "embed": "嵌入网址",
-  "mySharing": "我的共享"
+  "mySharing": "我的共享",
+  "submissionsOnNotifications": "提交以发布通知"
 }
