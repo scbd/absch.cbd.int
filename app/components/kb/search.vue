@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import i18n from '../../app-text/components/kb.json';
+import i18n from '~/app-text/components/kb.json';
 export default {
     name: 'kbAutoCompleteSearch',
     data: () => {

@@ -15,7 +15,7 @@
 
 import articleSearch from '../../components/kb/article-search.vue';
 import search from '../../components/kb/search.vue';
-import i18n from '../../app-text/components/kb.json';
+import i18n from '~/app-text/components/kb.json';
 
 export default {
   name:'kbHome',

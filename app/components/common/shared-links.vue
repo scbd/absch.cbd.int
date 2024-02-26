@@ -103,7 +103,7 @@
 
 <script>
     import DocumentShareApi from "~/api/document-share";
-    import i18n from "../../app-text/components/common/shared-links.json"; 
+    import i18n from "~/app-text/components/common/shared-links.json"; 
     import '../kb/filters';
     import { Modal, Toast } from "bootstrap";
     export default {

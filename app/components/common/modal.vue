@@ -34,7 +34,7 @@
     
 <script>
 import bootstrap from 'bootstrap'
-import i18n from "../../app-text/components/common/modal.json";
+import i18n from "~/app-text/components/common/modal.json";
 
 export default {
     name: 'SimpleModal',
