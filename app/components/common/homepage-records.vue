@@ -45,82 +45,78 @@
 </div>
 </template>
 
-<script>
-    import ArticlesApi  from '../kb/article-api';
-	  import i18n from '../../app-text/components/common/homepage-records.json';
-    import "../kb/filters";
-    import { formatDate } from '~/components/kb/filters'
+<script setup>
+  import ArticlesApi  from '../kb/article-api';
+  import i18n from '../../app-text/components/common/homepage-records.json';
+  import "../kb/filters";
+  import { formatDate } from '~/components/kb/filters';
+  import { ref, onMounted } from 'vue';
+  //ToD: import $router and $realm
+  const recordList = ref([]);
+  const loading = ref(true);
+  const sort = 'updatedDate_dt desc';
+  const { type, rows } = defineProps ({
+        type: { type: String, required: true },
+        rows: { type: Number, required: false },
+    })
 
-	export default {
-    props:{
-        type:String,
-        rows: Number
-    },
-		data:  () => {
-			return {
-                recordList: [],
-                loading: true,
-                sort: 'updatedDate_dt desc'
-			}
-		},
-		created(){
-			this.articlesApi = new ArticlesApi();
-		},
-    mounted() {
-        this.records();
-    },
-    methods:{
-
-      formatDate,
-
-      async records()
-      {
-          const query = {
-              "fq": [
-                  "{!tag=version}(*:* NOT version_s:*)",
-                  "{!tag=schemaType}schemaType_s:"+this.type, 
-                  "{!tag=contact}(*:* NOT schema_s:contact)", 
-                  "realm_ss:"+this.$realm.value],
-              "q": "''",
-              "sort": this.sort,
-              "fl": "id, schema_EN_t, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t",
-              "wt": "json",
-              "start": 0,
-              "rows": this.rows
-          };
-          const responseList = await this.articlesApi.getRecords(query);
+  const articlesApi = new ArticlesApi();
+  onMounted(() => {
+    records();
+  });
+  const records = async () => {
+    //ToDo: $realm.value  
+    const query = {
+      "fq": [
+        "{!tag=version}(*:* NOT version_s:*)",
+        "{!tag=schemaType}schemaType_s:" + type,
+        "{!tag=contact}(*:* NOT schema_s:contact)",
+        "realm_ss:" + 'BCH-DEV'
+      ],
+      "q": "''",
+      "sort": sort,
+      "fl": "id, schema_EN_t, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t",
+      "wt": "json",
+      "start": 0,
+      "rows": rows
+    };
+    const responseList = await articlesApi.getRecords(query);
 
         console.log('mounted', responseList)
 
-          if ((responseList?.response?.docs || []).length) {
-              this.recordList = responseList?.response?.docs;
-          }
-          this.loading = false;
-      },
-      seeMore(){
-           
-           if(this.type == 'reference') 
-              this.$router.push({path: 'search', query: { currentPage: '1', tab: 'referenceRecords' }});
-           else this.$router.push({path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
-      },
-      recordUrl(record){
-        if(!record.uniqueIdentifier_s)
-          return;
-        const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
-        const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
-        const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
-        return `database/${shortCode}/${uid}`;
-      }
-  },
-		i18n: { messages:{ en: i18n }} 
-	}
+    if ((responseList?.response?.docs || []).length) {
+      recordList.value = responseList?.response?.docs;
+    }
+    loading.value = false;
+  };
+
+  //ToDo: will check once the $router get available.
+  const seeMore = () => {
+    if (type == 'reference')
+      $router.push({ path: 'search', query: { currentPage: '1', tab: 'referenceRecords' } });
+    else
+      $router.push({ path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' } });
+  };
+
+  const recordUrl = function (record){
+          if(!record.uniqueIdentifier_s)
+            return;
+          const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
+          const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
+          const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
+          return `database/${shortCode}/${uid}`;
+  };
+  // i18n = { messages:{ en: i18n }} 
 </script>
-<style>
-  .loading{text-align: center;
-    margin: 100px auto;
-  }
-  .home-page-records .meta-links:hover{
-    text-decoration: dotted;
-    background: #eee;
-  }
+
+<style scoped>
+.loading {
+  text-align: center;
+  margin: 100px auto;
+}
+
+.home-page-records .meta-links:hover {
+  text-decoration: dotted;
+  background: #eee;
+}
 </style>
