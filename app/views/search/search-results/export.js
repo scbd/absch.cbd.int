@@ -1,6 +1,18 @@
 import _ from 'lodash';
 import saveAs from 'file-saverjs'
-
+//ToDo:
+export const getDownloadSchemaFields = async (schemaName, realm) =>
+{   
+    let downloadSchemas;
+    if(realm.is('ABS')){
+        downloadSchemas = (await import('~/app-data/bch/download-schemas')).downloadSchemas;
+        return downloadSchemas[schemaName];
+    }
+    else if(realm.is('BCH')){
+        downloadSchemas = (await import('~/app-data/bch/download-schemas')).downloadSchemas;
+        return downloadSchemas[schemaName];
+    }
+}
 let downloadSchemas;
 
 export const exportRecords = async(options, realm, searchService, searchResult, $http)=>{
@@ -17,7 +29,7 @@ export const exportRecords = async(options, realm, searchService, searchResult, 
     if(options.listType == 'initial'){
         return executeExportQuery(false, 25, 0);
     }
-    else if(options.listType == 'all'){
+    else if(options.listType == 'all' || options.listType == 'selected'){
         return executeExportQuery(true, 1000, 0);
     }
     
@@ -28,8 +40,14 @@ export const exportRecords = async(options, realm, searchService, searchResult, 
         docs        = docs        || []
 
         const queryOptions = searchResult.queryOptions;
+        //ToDo: TypeError: options.fields.join is not a function
+        let optionsFields;
+        if(options.isGeneric){
+             optionsFields = options.fields.join(',') }
+        else { 
+            optionsFields = options.fields }
         const lQuery = {
-            fields         : options.fields.join(','),
+            fields         : optionsFields,
             fieldQuery     : _.uniq(queryOptions.tagQueries),
             query          : queryOptions.query||undefined,
             rowsPerPage    : rowsPerPage||1000,
@@ -40,12 +58,27 @@ export const exportRecords = async(options, realm, searchService, searchResult, 
             lQuery.sort    = searchResult.sort;
 
         // if its single schema and transformed for download user new api else fallback to client side excel                        
-        if(!options.isGeneric){
+        if(!options.isGeneric && options.listType=='initial'){
 
             if(downloadSchemas[options.schema]){
                 return schemaDownload({
                     query : lQuery, 
                     fields : downloadSchemas[options.schema], 
+                    loadAll, 
+                    schema : options.schema,
+                    format : options.format,
+                    fileName : options.fileName,
+                    searchService,
+                    realm, $http
+                });    
+            }
+        }
+
+        if(!options.isGeneric && options.listType!='initial'){
+            if(downloadSchemas[options.schema]){
+                return schemaDownload({
+                    query : lQuery, 
+                    fields : options.fields, 
                     loadAll, 
                     schema : options.schema,
                     format : options.format,

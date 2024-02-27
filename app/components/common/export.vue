@@ -23,17 +23,49 @@
                         </div>
                         
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-9">
                                 <div class="form-group color-black">
                                     {{$t('downloadFormat')}}
                                     <span class="radio" style="display: initial;">
                                         <!-- <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat" />{{$t('xls')}}</label>                    -->
                                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" /> {{$t('xlsx')}}</label>                   
                                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" /> {{$t('csv')}}</label>
-                                    </span>
-                                </div>
+                                        <button v-if="!isGeneric" @click="openModal" class="btn btn-primary">Customize fields</button>
+                                    </span>                        
+                                </div> 
+                                <div v-if="!isGeneric">
+                                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="customizedFieldsModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="customizedFieldsModalLabel">Select customized fields</h5>
+                                                <button type="button" data-bs-dismiss="modal" class="border-0 close" @click="closeModal()"
+                                                    aria-label="Close"><i class="bi bi-x-circle-fill icon-lg"></i></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="d-flex align-items-center float-end mb-3">
+                                                    <label class="text-sm">
+                                                        <input type="checkbox" @click="selectAll" v-model="selectAllCheckbox"> Select All
+                                                    </label>
+                                                    <a @click="clearAll" class="btn btn-link btn-sm">
+                                                        <i class="bi bi-x"></i> Clear All
+                                                    </a>
+                                                </div>
+                                                <div v-for="(value, key) in optionFields" :key="key" v-if="value !== undefined" class="form-check">
+                                                    <input type="checkbox" :id="key" :value="key" v-model="selectedFields" class="form-check-input">
+                                                    <label :for="key" class="form-check-label">{{ value }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" @click="updateFields">{{$t('apply')}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>           
                             </div>
-                            <div class="col-6">
+                           
+                            <div class="col-3">
                                 <span class="float-end" style="padding-top: 20px;">
                                     {{$t('recordsFound')}}: <strong>{{numFound}}</strong>
                                 </span>
@@ -133,7 +165,7 @@ import i18n from '../../app-text/components/export.json';
 import { Modal } from "bootstrap";
 import '../kb/filters';
     
-    const fields = [
+    let fields = [
         'rec_schema:schema_EN_s',
         'rec_uniqueIdentifier:uniqueIdentifier_s',
         'rec_government:government_EN_s',
@@ -155,8 +187,11 @@ import '../kb/filters';
 				downloadFormat: 'xlsx',
 				loading       : false,
                 isGeneric     : true,
-                schemaFields  : [],
-                schema        : undefined
+                schemaFields  : [],  
+                schema        : undefined,
+                selectAllCheckbox: false,
+                optionFields :  {},
+                selectedFields: []
 			}
 		},
 		created(){
@@ -167,15 +202,61 @@ import '../kb/filters';
         },
 		
 		methods: {
+            openModal() 
+            { 
+                $('#myModal').modal('show');
+            },
+            closeModal() { 
+                $('#myModal').modal('hide');
+            },
+            selectAll() {
+                this.selectedFields = Object.keys(this.optionFields);
+            },
+            clearAll() { 
+            },
+            updateFields() {
+                if(this.selectedFields && this.selectedFields.length>0) { 
+                    let uiFields = {};
+                    this.selectedFields.forEach((field) => {
+                    if (this.optionFields[field] !== undefined)
+                        uiFields[field] = this.optionFields[field];
+                    });
+                    this.schemaFields = uiFields;  
+                    this.closeModal();
+                }
+            }, 
+            // updateFields(){
+            //     let uiFields = {};
+            //     this.selectedFields.forEach((field) => {
+            //         if (this.optionFields[field] !== undefined)
+            //             uiFields[field] = this.optionFields[field]; //Select only selected
+            //         });
+            //     this.schemaFields = uiFields;     // to update UI in dialog     
+            // },
             async openDialog(){
                 this.modal.show('static');
                 this.loading      = true; 
-                try{
+                fields =    [
+                            'rec_schema:schema_EN_s',
+                            'rec_uniqueIdentifier:uniqueIdentifier_s',
+                            'rec_government:government_EN_s',
+                            'rec_title:title_EN_s',
+                            'rec_meta1:meta1_EN_txt',
+                            'rec_meta2:meta2_EN_txt',
+                            'rec_meta3:meta3_EN_txt',
+                            'rec_meta4:meta4_EN_txt',
+                            'rec_date:updatedDate_dt',
+                    ];
+            try{
+                    this.selectedFields = [];
+                    this.selectAllCheckbox = false;
+                    this.schemaFields = [];
                     const {docs, numFound, isGeneric, schemaFields,schema } = await this.getDownloadRecords({fields, listType:'initial', format:'json'});
                     this.downloadDocs = docs
                     this.numFound     = numFound;
                     this.isGeneric    = isGeneric;
                     this.schemaFields = schemaFields;
+                    this.optionFields = schemaFields; // to show fields options in dialog 
                     this.schema       = schema;                   
                 }
                 finally{
@@ -190,6 +271,7 @@ import '../kb/filters';
                 try{
                     if(this.isGeneric){
                                             await import('tableexport');
+                                            //ToDo: await this.getDownloadRecords({fields:[this.schemaFields], listType:'all'});
                         const info        = await this.getDownloadRecords({fields, listType:'all'});
                         this.downloadDocs = info.docs;
                         this.numFound     = info.numFound;
@@ -204,6 +286,7 @@ import '../kb/filters';
                         }, 500);
                     }
                     else{
+                        fields  = this.schemaFields ;
                         const info = await this.getDownloadRecords({fields, listType:'all', fileName, format : this.downloadFormat});
                     }
                 }
