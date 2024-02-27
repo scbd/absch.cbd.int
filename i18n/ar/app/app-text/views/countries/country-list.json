@@ -1,5 +1,5 @@
 {
-  "country": "البلد",
+  "country": "",
   "status": "الحالة",
   "regions": "المناطق",
   "nonParty": "غير طرف",
@@ -12,7 +12,7 @@
   "parties": "أطراف البروتوكول",
   "toCartagenaProtocol": "بروتوكول قرطاجنة",
   "partiesToSuppProtocol": "الأطراف في البروتوكول التكميلي",
-  "ratified": "صدقت على البروتوكول وليست طرفًا بعد.",
+  "ratified": "صدقت على البروتوكول لكنها ليست طرفًا بعد.",
   "nonParties": "غير أطراف",
   "showAll": "عرض الكل",
   "export": "تصدير",

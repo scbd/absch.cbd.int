@@ -16,7 +16,7 @@
   "title": "Название",
   "uniqueIdentifier": "Уникальный идентификатор",
   "summary": "Резюме",
-  "recordUid": "УИ записи",
+  "recordUid": "УИД записи",
   "metaInformation": "Метаинформация",
   "noRecordSelected": "Записи не выбраны.",
   "loading": "загрузка...",
@@ -25,5 +25,6 @@
   "create": "Создать",
   "showExisting": "Показать существующие",
   "cancel": "Отменить",
-  "noRecordFound": "записей не найдено."
+  "noRecordFound": "записей не найдено.",
+  "revisionUpdated": "Ссылка на эту запись была обновлена до ее последней пересмотренной версии."
 }

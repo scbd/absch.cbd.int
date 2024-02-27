@@ -32,5 +32,6 @@
   "comparing": "Сравнение",
   "loading": "Загрузка...",
   "edit": "Правка",
-  "delete": "Удалить"
+  "delete": "Удалить",
+  "comparisonRecordNotFound": "Версия записи для сравнения не найдена."
 }

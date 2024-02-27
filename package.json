@@ -31,6 +31,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "11.1.0",
     "@vue/compiler-sfc": "3.0.5",
+    "fs-finder": "^1.8.1",
     "glob": "^7.1.6",
     "rollup": "2.77.0",
     "rollup-plugin-amd": "^4.0.0",
@@ -58,7 +59,8 @@
     "build": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "dev": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c --watch",
     "eslint": "npx eslint . --fix",
-    "clean-reinstall": "rm -rf ./node_modules && yarn install"
+    "clean-reinstall": "rm -rf ./node_modules && yarn install",
+    "import-translation": "node script/copy-translation-files.js"
   },
   "engines": {
     "yarn": ">= 1.0.0"

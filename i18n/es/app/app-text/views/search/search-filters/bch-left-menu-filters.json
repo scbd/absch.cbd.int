@@ -58,5 +58,10 @@
   "resourceNotifications": "Notificación(es)",
   "resourceOrganizations": "Organización(es)",
   "resourceCpbThematicAreas": "Áreas temáticas",
-  "resourceDate": "Fecha de presentación"
+  "resourceDate": "Fecha de presentación",
+  "submissionCountries": "País(es)",
+  "submissionByType": "Presentación de",
+  "submissionByTypeParty": "Parte",
+  "submissionByTypeNonParty": "No Parte",
+  "submissionByTypeOrganization": "Organización"
 }

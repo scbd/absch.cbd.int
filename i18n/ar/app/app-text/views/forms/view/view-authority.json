@@ -18,9 +18,9 @@
   "designatedCA": "هل هذه هي السلطة المختصة الوحيدة المُعيَّنة بموجب البروتوكول التكميلي في بلدك؟",
   "yes": "نعم",
   "no": "لا",
-  "shortDescriptionRegulatory": "وصف مُختصر للوظائف التنظيمية",
+  "shortDescriptionRegulatory": "وصف مُفصّل للوظائف التنظيمية",
   "ShortDescriptionResponsibilities": "وصف مختصر لمسؤوليات السلطة المختصة",
   "additionalInformation": "معلومات إضافية",
   "otherRelevantWebsite": "مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما",
-  "administrativeFunctions": "الوظائف الإدارية"
+  "administrativeFunctions": "السلطات الإدارية"
 }

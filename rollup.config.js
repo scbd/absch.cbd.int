@@ -56,6 +56,7 @@ function bundle(entryPoint, locale, baseDir='app') {
     external: externals,
     plugins : [
       alias({ entries : [
+        { find: /^(..\/)+(.*)\.json$/,   replacement:`${process.cwd()}/${baseDir}/$2.json` },
         { find: /^~\/(.*)/,   replacement:`${process.cwd()}/${baseDir}/$1` },
         { find: /^json!(.*)/, replacement:`$1` },
         { find: /^text!(.*)/, replacement:`$1` },

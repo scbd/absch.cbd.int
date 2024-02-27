@@ -24,7 +24,7 @@
   "fieldCurrentRevision": "字段当前版本",
   "referenceRecordRevision": "参考记录版本",
   "update": "更新",
-  "confirmChanges": "确认更改为以下记录",
+  "confirmDelete": "确定要删除此记录吗？",
   "draftRecord": "草案记录",
   "uniqueId": "唯一识别码：",
   "summary": "摘要",

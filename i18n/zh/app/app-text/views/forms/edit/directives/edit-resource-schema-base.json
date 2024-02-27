@@ -36,9 +36,11 @@
   "riskAssessmentSubject": "有关改性活生物体风险评估的指导",
   "riskAssessmentSubjectNotes": "将一种资源推荐为“改性活生物体风险评估指南”背景材料的功能正在开发中。",
   "addressModifiedOrganisms": "此资源是否涉及一个或多个特定的改性活生物体？",
+  "addressOrganisms": "此资源是否涉及一个或多个具体的生物体？",
+  "addressGenes": "此资源是否涉及一个或多个具体的遗传片段？",
   "modifiedOrganisms": "改性活生物体识别",
   "organismIdentification": "生物体识别",
-  "geneIdentification": "基因识别",
+  "geneIdentification": "基因片段标识",
   "geneIdentificationInfo": "基因片段信息是指DNA序列，包括基因、调控DNA序列和其它用于创造改性活生物体的核酸。它们可以进行蛋白质编码或具有特定的调控功能。",
   "keywordsRelatedAccess": "与获取和惠益分享有关的关键词",
   "mccKeywords": "请选择相关关键词，以描述将提交之行为准则、指导方针和最佳做法和/或标准的内容",
@@ -50,6 +52,6 @@
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
   "relevantDocuments": "任何其他相关文件",
   "relevantDocumentsInfo": "请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档",
-  "notes": "注",
+  "notes": "备注",
   "notesInfos": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
 }

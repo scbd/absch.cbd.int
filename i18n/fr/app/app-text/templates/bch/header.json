@@ -18,16 +18,18 @@
   "nra": "Analyseur des rapports nationaux",
   "countries": "Pays",
   "overviewAllCountries": "Aperçu - Liste des pays",
-  "kb": "Base des connaissances",
+  "kb": "La Base des connaissances",
   "faq": "FAQs",
-  "trainingSite": "Site de formation du CEPRB",
+  "trainingSite": "Site de formation",
   "contactUs": "Contactez-nous",
   "forumsPortals": "Forums et portails",
+  "portalsRiskAssessment": "Évaluation et gestion des risques",
   "bchForum": "Le CEPRB sur son Forum",
-  "unepForum": "Forum régional des conseillers du PNUE",
-  "leaveTrainingSite": "Site de formation du CEPRB",
+  "unepForum": "Forum régional aviseur du PNUE",
+  "leaveTrainingSite": "Quittez le site de formation",
   "trainingMaterials": "Matériel de formation",
   "protocol": "Protocole",
   "cartagenaProtocol": "Protocole de Cartagena",
-  "suppProtocol": "Protocole additionnel"
+  "suppProtocol": "Protocole additionnel",
+  "submissionsOnNotifications": "Soumissions de notifications"
 }

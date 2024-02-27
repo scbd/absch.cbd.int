@@ -1,13 +1,13 @@
 {
-  "generalInfo": "Общая информация",
-  "country": "Страна",
-  "title": "Название",
-  "summary": "Резюме или аннотация",
-  "jurisdiction": "Район юрисдикции:",
-  "relevantMeasures": "Соответствующая(-ие) мера(-ы) в области ДГРСИВ:",
-  "keywords": "Ключевые слова",
-  "thematicArea": "Тематическая(-ие) область(-и):",
-  "attachments": "Прикрепленные файлы, документы или ресурсы",
-  "addInfo": "Дополнительная информация",
-  "links": "Ссылки или прикрепленные файлы или документы"
+  "generalInfo": "",
+  "country": "",
+  "title": "",
+  "summary": "",
+  "jurisdiction": "",
+  "relevantMeasures": "",
+  "keywords": "",
+  "thematicArea": "",
+  "attachments": "",
+  "addInfo": "",
+  "links": ""
 }
