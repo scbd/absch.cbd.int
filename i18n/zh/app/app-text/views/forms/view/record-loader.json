@@ -32,5 +32,6 @@
   "comparing": "正在比较",
   "loading": "正在加载...",
   "edit": "编辑",
-  "delete": "删除"
+  "delete": "删除",
+  "comparisonRecordNotFound": "要比较的记录版本未找到。"
 }

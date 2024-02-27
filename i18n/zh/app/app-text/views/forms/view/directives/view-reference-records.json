@@ -8,5 +8,7 @@
   "show": "显示",
   "country": "国家",
   "title": "标题",
-  "updatedOn": "更新日期："
+  "updatedOn": "更新日期：",
+  "noRecords": "其他记录中未引用此记录",
+  "showInSubmissions": "在提交材料中显示"
 }

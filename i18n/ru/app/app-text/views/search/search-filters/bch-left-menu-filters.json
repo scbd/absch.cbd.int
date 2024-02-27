@@ -17,13 +17,13 @@
   "ParentalOrganismScientificName": "Родительский организм (научное название)",
   "biosafetyLawLegislationAgreementTypes": "Тип закона/нормативного положения",
   "biosafetyLawJurisdictions": "Район юрисдикции",
-  "biosafetyLawSubjectAreas": "Тематические области",
+  "biosafetyLawSubjectAreas": "Предметные области",
   "capacityBuildingInitiativeJurisdictions": "Географический охват",
   "capacityBuildingInitiativeCbiStatus": "Статус",
   "capacityBuildingInitiativeCbiCats": "Категория(-ии) мероприятий по развитию потенциала",
   "capacityBuildingInitiativeCbiAudience": "Основная(-ые) целевая(-ые) группа(-ы)/бенефициар(ы)",
   "biosafetyThematicAreas": "Тематические области биобезопасности",
-  "CbdSubjects": "Тематические области КБР",
+  "CbdSubjects": "Предметные области КБР",
   "capacityBuildingInitiativecbiFundingSrc": "Тип(ы) источника(-ов) финансирования",
   "dnaSequenceFamily": "Категория",
   "dnaSequenceIsSynthetic": "Синтетическая молекула",
@@ -58,5 +58,10 @@
   "resourceNotifications": "Уведомление(-я)",
   "resourceOrganizations": "Организация(-и)",
   "resourceCpbThematicAreas": "Тематические области",
-  "resourceDate": "Дата представления"
+  "resourceDate": "Дата представления",
+  "submissionCountries": "Страна(-ы)",
+  "submissionByType": "Автор представления",
+  "submissionByTypeParty": "Сторона",
+  "submissionByTypeNonParty": "Государство, не являющееся Стороной",
+  "submissionByTypeOrganization": "Организация"
 }

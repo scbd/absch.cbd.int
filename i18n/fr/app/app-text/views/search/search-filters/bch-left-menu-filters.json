@@ -58,5 +58,10 @@
   "resourceNotifications": "Notification(s)",
   "resourceOrganizations": "Organisation(s)",
   "resourceCpbThematicAreas": "Domaines thématiques",
-  "resourceDate": "Date de soumission"
+  "resourceDate": "Date de soumission",
+  "submissionCountries": "Pays",
+  "submissionByType": "Soumission par",
+  "submissionByTypeParty": "Partie",
+  "submissionByTypeNonParty": "Non Partie",
+  "submissionByTypeOrganization": "Organisation"
 }

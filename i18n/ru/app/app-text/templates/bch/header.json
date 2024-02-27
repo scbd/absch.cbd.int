@@ -1,10 +1,10 @@
 {
   "bch": "МПБ",
   "biosafetyClearingHouse": "Механизм посредничества по биобезопасности",
-  "development": "ДЛЯ РАЗРАБОТЧИКОВ",
+  "development": "РАЗРАБОТКА",
   "training": "ОБУЧЕНИЕ",
   "home": "главная",
-  "about": "о мп",
+  "about": "о МПБ",
   "search": "поиск",
   "submit": "представить",
   "countryProfiles": "Профили стран",
@@ -23,11 +23,13 @@
   "trainingSite": "Учебный сайт",
   "contactUs": "Свяжитесь с нами",
   "forumsPortals": "Форумы и порталы",
-  "bchForum": "Форум «МПБ о МПБ»",
+  "portalsRiskAssessment": "Оценка рисков и регулирование рисков",
+  "bchForum": "Форум «МПБ по МПБ»",
   "unepForum": "Форум региональных консультантов ЮНЕП",
   "leaveTrainingSite": "Выйти из учебного сайта",
   "trainingMaterials": "Учебные материалы",
   "protocol": "Протокол",
   "cartagenaProtocol": "Картахенский протокол",
-  "suppProtocol": "Дополнительный протокол"
+  "suppProtocol": "Дополнительный протокол",
+  "submissionsOnNotifications": "Материалы, представленные в ответ на уведомления"
 }

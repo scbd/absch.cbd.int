@@ -23,11 +23,13 @@
   "trainingSite": "培训网站",
   "contactUs": "联系我们",
   "forumsPortals": "论坛和门户",
+  "portalsRiskAssessment": "风险评估和风险管理",
   "bchForum": "BCH 中的 BCH 论坛",
   "unepForum": "环境署区域顾问论坛",
   "leaveTrainingSite": "离开培训网站",
   "trainingMaterials": "培训教材",
   "protocol": "议定书",
   "cartagenaProtocol": "卡塔赫纳议定书",
-  "suppProtocol": "补充议定书"
+  "suppProtocol": "补充议定书",
+  "submissionsOnNotifications": "提交以发布通知"
 }

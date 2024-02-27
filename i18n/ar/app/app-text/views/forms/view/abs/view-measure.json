@@ -1,6 +1,6 @@
 {
   "generalInfo": "معلومات عامة",
-  "country": "البلد",
+  "country": "",
   "title": "العنوان",
   "description": "وصف موجز",
   "jurisdiction": "منطقة (مناطق) الاختصاص",
@@ -26,5 +26,5 @@
   "elements": "عناصر التدبير",
   "elementsText": "عناصر التدبير لا تنطبق على هذا التدبير",
   "addInfo": "معلومات إضافية",
-  "relevantDocuments": "مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما"
+  "relevantDocuments": ""
 }

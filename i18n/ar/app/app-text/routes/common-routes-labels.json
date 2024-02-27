@@ -5,7 +5,7 @@
   "help_403": "خطأ 403",
   "mailbox": "صندوق البريد",
   "search": "بحث",
-  "countryProfiles": "معلومات الدول",
+  "countryProfiles": "معلومات البلدان",
   "countryProfile": "country_name",
   "reports": "التقارير",
   "reportsAnalyzer": "أداة التحليل",
@@ -28,11 +28,12 @@
   "reportedRecords": "سجلات تم الإبلاغ عنها",
   "reportCounts": "إنشاء تقارير بالإحصائيات",
   "errorLogs": "سجلات الأخطاء",
-  "subscriptions": "الاشتراكات",
+  "subscriptions": "تنبيهات البريد الإلكتروني",
   "userRoleReport": "تقرير أدوار المستخدمين",
   "commonIssues": "المسائل المشتركة",
   "matrix": "جدول",
   "kb": "قاعدة المعرفة",
-  "embed": "تضمين عنوان موقع",
-  "mySharing": "مشاركاتي"
+  "embed": "دمج رابط عنوان الموقع",
+  "mySharing": "السجلات التي أرسلتها للآخرين",
+  "submissionsOnNotifications": "الوثائق المرسلة استجابة للإخطارات"
 }

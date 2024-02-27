@@ -2,11 +2,10 @@
   "dashboard": "Личный кабинет",
   "requests": "Запросы",
   "notifications": "Уведомления",
-  "alerts": "Оповещения",
   "userManagement": "Управление пользователями",
-  "preferences": "Настройки",
-  "admin": "АДМИН",
+  "preferences": "Оповещения по электронной почте",
+  "admin": "Админ",
   "menu": "Меню",
   "reports": "Отчеты",
-  "mySharing": "Мои совместные ресурсы"
+  "mySharing": "Общие ресурсы"
 }

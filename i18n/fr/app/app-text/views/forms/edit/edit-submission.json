@@ -8,7 +8,7 @@
   "submissionInformation": "Soumettre une information",
   "titleSubmission": "Titre de la soumission",
   "organization": "Organisation(s)",
-  "helpTitle": "Aide : Soumission",
+  "helpTitle": "Aide Soumission",
   "dateSubmission": "Date de soumission",
   "notifications": "Notifications connexes",
   "records": "Fichier(s) connexe(s) :",
@@ -17,5 +17,6 @@
   "otherRelevantInformation": "Tout autre information utile",
   "relevantInformationInfo": "Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordés ailleurs dans le fichier.",
   "notes": "Notes",
-  "notesInfos": "Le champs ‘Notes’ est réservé à votre usage personnel. Il peut seulement être vu lorsqu’un dossier est en mode édition mais n’est pas visible lorsque celui-ci est publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles."
+  "notesInfos": "Le champs ‘Notes’ est réservé à votre usage personnel. Il peut seulement être vu lorsqu’un dossier est en mode édition mais n’est pas visible lorsque celui-ci est publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.",
+  "selectOne": "Veuillez choisir une des options suivantes:"
 }

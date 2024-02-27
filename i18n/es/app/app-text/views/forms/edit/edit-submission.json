@@ -17,5 +17,6 @@
   "otherRelevantInformation": "Cualquier otra información pertinente",
   "relevantInformationInfo": "Por favor, utilice este campo para proporcionar cualquier otra información pertinente que no se haya podido incluir en otro lugar del registro.",
   "notes": "Notas",
-  "notesInfos": "El campo ”Notas” es para uso personal. Solo puede verse cuando se edita el registro, pero no permanece visible cuando se lo publica. Este campo no está destinado a ser usado para información confidencial."
+  "notesInfos": "El campo ”Notas” es para uso personal. Solo puede verse cuando se edita el registro, pero no permanece visible cuando se lo publica. Este campo no está destinado a ser usado para información confidencial.",
+  "selectOne": "Por favor, seleccione una de las siguientes opciones:"
 }

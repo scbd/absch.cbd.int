@@ -28,13 +28,13 @@
     "@babel/core": "7.12.10",
     "@babel/plugin-transform-private-methods": "^7.23.3",
     "@babel/preset-env": "7.12.11",
-    "@rollup/plugin-alias": "5.1.0",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "25.0.7",
-    "@rollup/plugin-dynamic-import-vars": "^2.1.2",
-    "@rollup/plugin-json": "6.1.0",
-    "@rollup/plugin-node-resolve": "15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-alias": "^3.1.2",
+    "@rollup/plugin-babel": "5.2.2",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "11.1.0",
+    "@vue/compiler-sfc": "3.0.5",
+    "fs-finder": "^1.8.1",
     "glob": "^7.1.6",
     "glob-to-regexp": "^0.4.1",
     "rollup": "4.12.0",
@@ -59,7 +59,8 @@
     "build": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "dev": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup --strictDeprecations -c --watch",
     "eslint": "npx eslint . --fix",
-    "clean-reinstall": "rm -rf ./node_modules && yarn install"
+    "clean-reinstall": "rm -rf ./node_modules && yarn install",
+    "import-translation": "node script/copy-translation-files.js"
   },
   "engines": {
     "yarn": ">= 1.0.0"

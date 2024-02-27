@@ -58,5 +58,10 @@
   "resourceNotifications": "通知",
   "resourceOrganizations": "机构",
   "resourceCpbThematicAreas": "专题领域",
-  "resourceDate": "提交日期"
+  "resourceDate": "提交日期",
+  "submissionCountries": "国家/地区",
+  "submissionByType": "提交人",
+  "submissionByTypeParty": "缔约方",
+  "submissionByTypeNonParty": "非缔约方",
+  "submissionByTypeOrganization": "机构"
 }

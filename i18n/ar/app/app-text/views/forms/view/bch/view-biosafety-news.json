@@ -1,10 +1,10 @@
 {
   "generalInfo": "معلومات عامة",
-  "country": "البلد",
+  "country": "",
   "title": "العنوان",
   "links": "الرابط/الروابط ذات الصلة",
-  "abstract": "الملخص",
-  "newsText": "نص الخبر",
+  "abstract": "ملخص",
+  "newsText": "نص الأخبار",
   "addInfo": "معلومات إضافية",
-  "relevantDocuments": "مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما"
+  "relevantDocuments": ""
 }

@@ -1,12 +1,12 @@
 {
   "exportButton": "Exporter",
   "dialogTitle": "Exporter",
-  "downloadFormat": "Format de téléchargement :",
+  "downloadFormat": "Format de téléchargement",
   "xls": "XLS (Excel)",
   "xlsx": "XLS (Excel)",
   "csv": "CSV (la virgule sépare les entrées)",
   "processing": "En cours...",
-  "recordsFound": "Fichiers trouvés :",
+  "recordsFound": "Fichiers trouvés",
   "type": "Type",
   "uid": "UID",
   "government": "Gouvernement",
@@ -18,5 +18,6 @@
   "publishedDate": "Date de publication",
   "sampleMessage": "Il s’agit du seul échantillon d’informations devant être exporté Tous les fichiers extraits de cette recherche seront inclus dans l'exportation",
   "cancel": "Annuler",
-  "download": "Télécharger"
+  "download": "Télécharger",
+  "exportInformation": "Pour exporter tous les champs disponibles, veuillez sélectionner un seul filtre général de « type de fichier » à la fois."
 }

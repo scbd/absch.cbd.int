@@ -1,12 +1,11 @@
 {
   "dashboard": "لوحة التحكم",
   "requests": "الطلبات",
-  "notifications": "الإشعارات",
-  "alerts": "التنبيهات",
-  "userManagement": "إعدادات المستخدم",
-  "preferences": "التفضيلات",
-  "admin": "تفضيلات المستخدم",
+  "notifications": "الإخطارات",
+  "userManagement": "إدارة المستخدمين",
+  "preferences": "تنبيهات البريد الإلكتروني",
+  "admin": "مسؤول الإدارة",
   "menu": "القائمة",
   "reports": "التقارير",
-  "mySharing": "مشاركاتي"
+  "mySharing": "الملفات التي أرسلتها للآخرين"
 }

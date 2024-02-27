@@ -1,11 +1,11 @@
 {
   "latestTenRecords": "أحدث 10 سجلات",
-  "status": "الحالة",
+  "status": "حالة",
   "title": "العنوان",
   "updatedBy": "قام بالتحديث",
   "published": "منشور",
-  "draft": "مسودة",
-  "request": "طلب",
+  "draft": "",
+  "request": "مطلوب",
   "on": "في",
   "seeMore": "انظر المزيد"
 }
