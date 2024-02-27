@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import i18n from '~/app-text/components/kb.json';
+import i18n from '../../app-text/components/kb.json';
 import relevantArticles from './relevant-articles.vue';
 import articlesMaxin from '../maxin/article';
 export default {

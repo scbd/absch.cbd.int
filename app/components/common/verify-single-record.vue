@@ -38,7 +38,7 @@
 <script>
 import KmDocumentApi from "~/api/km-document";
 import { Modal } from "bootstrap";
-import i18n from '~/app-text/components/common/verify-single-record.json';
+import i18n from '../../app-text/components/common/verify-single-record.json';
 import LoadingModal  from '~/components/common/loading-modal.vue'
 
 const kmDocumentApi = new KmDocumentApi();

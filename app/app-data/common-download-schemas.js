@@ -1,4 +1,4 @@
-import fieldsT from '~/app-text/views/search/search-results/common-download-schemas.json';
+import fieldsT from '../app-text/views/search/search-results/common-download-schemas.json';
 
 export const downloadSchemas = {	
 	"focalPoint" : {

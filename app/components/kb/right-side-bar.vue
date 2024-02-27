@@ -9,7 +9,7 @@
 </template>
 
 <script>
-	import i18n from '~/app-text/components/kb.json';
+	import i18n from '../../app-text/components/kb.json';
 	import relevantArticles from './relevant-articles.vue';
 	import faqArticles from './faq-articles.vue';
 	import popularTags from './popular-tags.vue';

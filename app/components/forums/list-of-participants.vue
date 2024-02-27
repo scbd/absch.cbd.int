@@ -91,7 +91,7 @@
 
 <script>
 import ForumsApi from '~/api/forums';
-import i18n from '~/app-text/components/forums/list-of-participants.json';
+import i18n from '../../app-text/components/forums/list-of-participants.json';
 import Loading  from '~/components/common/loading.vue'
 import pending  from '~/services/pending-call'
 import { lstring } from '../kb/filters';

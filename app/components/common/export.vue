@@ -129,7 +129,7 @@
 </template>
 
 <script>
-import i18n from '~/app-text/components/export.json';
+import i18n from '../../app-text/components/export.json';
 import { Modal } from "bootstrap";
 import '../kb/filters';
     

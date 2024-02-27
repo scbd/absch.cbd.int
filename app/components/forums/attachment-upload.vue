@@ -11,7 +11,7 @@
 <script>
 import ForumsApi from '~/api/forums';
 import pending   from '~/services/pending-call'
-import i18n from '~/app-text/components/forums/edit-post.json';
+import i18n from '../../app-text/components/forums/edit-post.json';
 
 
 export default {

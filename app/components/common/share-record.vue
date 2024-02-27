@@ -183,7 +183,7 @@
 import DocumentShareApi from "~/api/document-share";
 import SubscriptionsApi from "~/api/subscriptions";
 import { Modal, Toast } from "bootstrap";
-import i18n from "~/app-text/components/common/share-record.json";
+import i18n from "../../app-text/components/common/share-record.json";
 import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
 
 

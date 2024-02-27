@@ -137,7 +137,7 @@ import rangy from 'rangy';
 import { convert as htmlToText } from 'html-to-text';
 import Attachment from './attachment.vue';
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
-import i18n from '~/app-text/components/forums/post.json';
+import i18n from '../../app-text/components/forums/post.json';
 
 
 export default {

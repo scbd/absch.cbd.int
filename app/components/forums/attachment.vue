@@ -14,7 +14,7 @@ import ForumsApi from '~/api/forums';
 import pending   from '~/services/pending-call'
 import Loading   from '~/components/common/loading.vue'
 import bootstrap from  'bootstrap';
-import i18n from '~/app-text/components/forums/edit-post.json';
+import i18n from '../../app-text/components/forums/edit-post.json';
 import { encode as encodeHtml } from '~/services/html.js'
 
 export default {

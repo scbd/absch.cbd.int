@@ -1,4 +1,4 @@
-import nr1T from '~/app-text/views/forms/edit/abs/edit-national-report-1.json';
+import nr1T from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
 
 export const absNationalReport1 = [
    {

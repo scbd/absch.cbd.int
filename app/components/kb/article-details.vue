@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import i18n from '~/app-text/components/kb.json';
+import i18n from '../../app-text/components/kb.json';
 import relevantArticles from "./relevant-articles.vue";
 import ArticlesApi from './article-api';
 import './filters';
