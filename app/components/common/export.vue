@@ -132,8 +132,9 @@
 import i18n from '../../app-text/components/export.json';
 import { Modal } from "bootstrap";
 import '../kb/filters';
+import {getDownloadSchemaFields} from '../../views/search/search-results/export.js'
     
-    const fields = [
+    let fields = [
         'rec_schema:schema_EN_s',
         'rec_uniqueIdentifier:uniqueIdentifier_s',
         'rec_government:government_EN_s',
@@ -167,6 +168,13 @@ import '../kb/filters';
         },
 		
 		methods: {
+            async downloadSchemaFields(schemaName) {
+                try {
+                    this.schemaFields = await getDownloadSchemaFields(schemaName);
+                } catch (error) {
+                    console.error('Error fetching download schema fields:', error);
+                }
+            },
             async openDialog(){
                 this.modal.show('static');
                 this.loading      = true; 
@@ -175,8 +183,8 @@ import '../kb/filters';
                     this.downloadDocs = docs
                     this.numFound     = numFound;
                     this.isGeneric    = isGeneric;
-                    this.schemaFields = schemaFields;
-                    this.schema       = schema;                   
+                    this.schema       = schema;
+                    this.downloadSchemaFields(this.schema);
                 }
                 finally{
                     this.loading = false;
@@ -204,6 +212,7 @@ import '../kb/filters';
                         }, 500);
                     }
                     else{
+                        fields=this.schemaFields;
                         const info = await this.getDownloadRecords({fields, listType:'all', fileName, format : this.downloadFormat});
                     }
                 }

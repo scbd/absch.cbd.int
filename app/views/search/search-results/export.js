@@ -1,10 +1,22 @@
 import _ from 'lodash';
 import saveAs from 'file-saverjs'
 
+export const getDownloadSchemaFields = async(schemaName) =>
+{   
+    let downloadSchemas;
+    // if(realm.is('ABS')){
+        downloadSchemas = (await import('~/app-data/bch/download-schemas')).downloadSchemas;
+        return downloadSchemas[schemaName];
+    // }
+    // else if(realm.is('BCH')){
+    //     downloadSchemas = (await import('~/app-data/bch/download-schemas')).downloadSchemas;
+    //     return downloadSchemas[schemaName];
+    // }
+}
 let downloadSchemas;
 
 export const exportRecords = async(options, realm, searchService, searchResult, $http)=>{
-    
+    //ToDo: UI is not working if we remove 
     if(!downloadSchemas){
         if(realm.is('ABS')){
             downloadSchemas = (await import('~/app-data/abs/download-schemas')).downloadSchemas;
@@ -29,11 +41,17 @@ export const exportRecords = async(options, realm, searchService, searchResult, 
 
         const queryOptions = searchResult.queryOptions;
         const lQuery = {
-            fields         : options.fields.join(','),
             fieldQuery     : _.uniq(queryOptions.tagQueries),
             query          : queryOptions.query||undefined,
             rowsPerPage    : rowsPerPage||1000,
             currentPage    : pageNumber
+        }
+        //ToDo:
+        if(options.listType == 'initial'){
+            lQuery.fields    = options.fields.join(',');
+        }
+        else{
+            lQuery.fields    = options.fields;
         }
 
         if(searchResult?.sort != 'relevance asc')
