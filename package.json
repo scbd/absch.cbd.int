@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
+    "@babel/plugin-transform-private-methods": "^7.23.3",
     "@babel/preset-env": "7.12.11",
     "@rollup/plugin-alias": "5.1.0",
     "@rollup/plugin-babel": "^6.0.4",
