@@ -77,7 +77,7 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
   registerPlugin(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
 
   const ngVue   = createNgVue({ $injector, ngApp: app });
-  const $i18n   = createI18n({ locale, fallbackLocale: 'en'});
+  const $i18n   = createI18n({ locale, fallbackLocale: 'en', legacy:false});
   const $route  = createRoute ({ plugins: { ngVue }});
   const $router = createRouter ({ plugins: { ngVue }});
 
