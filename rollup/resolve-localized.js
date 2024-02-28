@@ -18,12 +18,18 @@ export default function resolveLocalized(options = { }) {
   return {
     name: 'resolveLocalized',
 
-    resolveId(importeeId, importer) {
+    async resolveId(importeeId, importer) {
 
-      if (basePatternRe.test(importeeId)) {
+      const resolved = await this.resolve(importeeId, importer, { skipSelf: true });
 
-        const relativeFilePath = path.relative(baseDir, importeeId);
-        const originalFilePath = importeeId;
+      const { external, id: absolutePath }  = resolved;
+
+      if(external) return resolved;
+      
+      if (basePatternRe.test(absolutePath)) {
+
+        const relativeFilePath = path.relative(baseDir, absolutePath);
+        const originalFilePath = absolutePath;
         const localizedFilePath = path.join(localizedDir, relativeFilePath);
 
         let shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath);
