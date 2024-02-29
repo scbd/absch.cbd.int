@@ -134,12 +134,12 @@ import Loading  from '~/components/common/loading.vue'
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
 import ErrorPane from '~/components/common/error.vue';
 import SimpleModal from '~/components/common/modal.vue';
-import i18n from "~/app-text/views/portals/forums.json";
+import messages from "~/app-text/views/portals/forums.json";
 import { lstring } from '../../components/kb/filters';
 
 export default {
   name: 'Forum',
-  i18n: { messages: { en: i18n } },
+  i18n: { messages },
   components: {
     CbdArticle: cbdArticle,
     Post,
