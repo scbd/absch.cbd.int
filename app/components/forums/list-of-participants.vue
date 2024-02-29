@@ -1,66 +1,66 @@
 <template >
   <div>
     <error-pane v-if="error" :error="error" />
-    <div v-else-if="loading"><loading :caption="$t('loading')"/></div>
+    <div v-else-if="loading"><loading :caption="t('loading')"/></div>
     <div v-else-if="participants">
 
-      <div v-if="participants.length==0">{{ $t("listIsEmpty") }}</div>
+      <div v-if="participants.length==0">{{ t("listIsEmpty") }}</div>
 
       <div v-if="parties.length">
-        <h3>{{ $t("parties") }}</h3>
+        <h3>{{ t("parties") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">{{ $t("name") }}</th>
-              <th scope="col">{{ $t("government") }}</th>
+              <th scope="col">{{ t("name") }}</th>
+              <th scope="col">{{ t("government") }}</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(participant, index) in parties" :key="index">
               <td scope="row">{{index+1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ lstring(participant.country.name, $locale) }} </td>
+              <td>{{ lstring(participant.country.name, locale) }} </td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <div v-if="nonParties.length">
-        <h3>{{ $t("non-parties") }}</h3>
+        <h3>{{ t("non-parties") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">{{ $t("name") }}</th>
-              <th scope="col">{{ $t("government") }}</th>
+              <th scope="col">{{ t("name") }}</th>
+              <th scope="col">{{ t("government") }}</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(participant, index) in nonParties" :key="index">
               <td scope="row">{{parties.length + index + 1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ lstring(participant.country.name, $locale) }} </td>
+              <td>{{ lstring(participant.country.name, locale) }} </td>
             </tr>
           </tbody>
         </table>
       </div>
       
       <div v-if="organizations.length">
-        <h3>{{ $t("organizations") }}</h3>
+        <h3>{{ t("organizations") }}</h3>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">{{ $t("name") }}</th>
-              <th scope="col">{{ $t("organization") }}</th>
+              <th scope="col">{{ t("name") }}</th>
+              <th scope="col">{{ t("organization") }}</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(participant, index) in organizations" :key="index">
               <td scope="row">{{parties.length + nonParties.length + index + 1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ lstring(participant.organization | $locale) }} </td>
+              <td>{{ lstring(participant.organization | locale) }} </td>
             </tr>
           </tbody>
         </table>
@@ -71,16 +71,16 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">{{ $t("name") }}</th>
-              <th scope="col">{{  $t("government_organization") }}</th>
+              <th scope="col">{{ t("name") }}</th>
+              <th scope="col">{{  t("government_organization") }}</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(participant, index) in members" :key="index">
               <td scope="row">{{ index + 1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td v-if="participant.country">{{ lstring(participant.country.name, $locale) }} </td>
-              <td v-else>{{ lstring(participant.organization, $locale) }} </td>
+              <td v-if="participant.country">{{ lstring(participant.country.name, locale) }} </td>
+              <td v-else>{{ lstring(participant.organization, locale) }} </td>
             </tr>
           </tbody>
         </table>
@@ -89,9 +89,15 @@
   </div>  
 </template>
 
+<script setup>
+import { useI18n } from 'vue-i18n';
+import messages from '../../app-text/components/forums/list-of-participants.json';
+
+const { t, locale } = useI18n({ messages });
+</script>
+
 <script>
 import ForumsApi from '~/api/forums';
-import i18n from '../../app-text/components/forums/list-of-participants.json';
 import Loading  from '~/components/common/loading.vue'
 import pending  from '~/services/pending-call'
 import { lstring } from '../kb/filters';
@@ -123,11 +129,6 @@ export default {
   },
   created() {
     this.load();
-  },
-  i18n: {
-      messages: {
-          en: i18n
-      }
   }
 }
 
