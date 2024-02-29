@@ -72,12 +72,12 @@ app.directive('ngVue', NgVueDirective);
 
 app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function (realm, locale, $injector, apiToken, authentication) {
 
-  registerPlugin(createService('$realm', realm));
+  registerPlugin(createService('$realm', realm)); // use  useRealm() | import { useRealm  } from '~/services/composables/realm.js';
   registerPlugin(createService('$locale', locale));
   registerPlugin(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
 
   const ngVue   = createNgVue({ $injector, ngApp: app });
-  const $i18n   = createI18n({ locale, fallbackLocale: 'en'});
+  const $i18n   = createI18n({ locale, fallbackLocale: 'en', legacy:false});
   const $route  = createRoute ({ plugins: { ngVue }});
   const $router = createRouter ({ plugins: { ngVue }});
 
