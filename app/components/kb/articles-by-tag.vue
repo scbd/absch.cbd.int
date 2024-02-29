@@ -20,10 +20,10 @@
                                 </div>
                                 <div class="p-2 bd-highlight w-100">
                                 <div class="card-body">
-                                    <span class="badge bg-secondary position-absolute top-0 end-0">{{article.meta.createdOn|formatDate('DD MMM YYYY')}}</span>
+                                    <span class="badge bg-secondary position-absolute top-0 end-0">{{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}</span>
 
-                                    <h5 class="card-title"><a class="link-dark stretched-link" :href="`${articleUrl(article, tag)}`">{{article.title|lstring($locale)}}</a></h5>
-                                    <p  v-if="article.summary" class="card-text h-100">{{article.summary|lstring($locale)}}</p>
+                                    <h5 class="card-title"><a class="link-dark stretched-link" :href="`${articleUrl(article, tag)}`">{{lstring(article.title, $locale)}}</a></h5>
+                                    <p  v-if="article.summary" class="card-text h-100">{{lstring(article.summary, $locale)}}</p>
 
                                   
                                 </div>
@@ -62,6 +62,7 @@ import ArticlesApi from './article-api';
 import './filters';
 import popularTags from './popular-tags.vue';
 import articlesMaxin from '../maxin/article';
+import {formatDate, lstring} from './filters';
 
 export default {
     name: 'KbArticlesByTag',
@@ -98,13 +99,15 @@ export default {
         }
     },
     methods: {
+        formatDate,
+        lstring,
         tagUrl(tag) {
             const tagDetails = this.categories.find(e => e.adminTags.includes(tag))
             const tagTitle = (tagDetails?.title || '');
             return this.getUrl(tagTitle, undefined, tag);
         },
         articleUrl(article, tag){
-            return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
+            return this.getUrl(lstring(article.title), article._id, tag);
         },
         onChangePage(pageNumber) {
             this.pageNumber = pageNumber;

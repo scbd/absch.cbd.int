@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 v-if="!article && forum">{{ forum.title | lstring }}</h1>
+    <h1 v-if="!article && forum">{{ lstring(forum.title) }}</h1>
 
     <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true"
       @load="onArticleLoad($event)" :admin-tags="articleAdminTags">
@@ -17,7 +17,7 @@
         <ul>
           <li v-for="thread in threads" :key="thread.threadId">
             <a :href="`#${thread.threadId}`">{{
-              thread.subject | lstring }}</a>
+              lstring(thread.subject) }}</a>
           </li>
         </ul>
       </div>
@@ -65,7 +65,7 @@
             <i v-if="thread.isPinned" class="float-end fa fa-thumb-tack" :title="$t('pinnedThread')"></i>
             
             <a :href="getThreadUrl(thread.threadId)" style="color:inherit">
-              {{ thread.subject | lstring }}
+              {{ lstring(thread.subject) }}
             </a>
             
           </h5>
@@ -111,7 +111,7 @@
 
       <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; refresh($event)"></edit-post>
 
-      <simple-modal v-if="showHelp" @close="showHelp = false" :title="$options.filters.lstring(helpArticle.title)">
+      <simple-modal v-if="showHelp" @close="showHelp = false" :title="lstring(helpArticle.title)">
         <cbd-article :article="helpArticle" :hide-cover-image="false" :show-edit="false"  />
       </simple-modal>
 
@@ -134,11 +134,12 @@ import Loading  from '~/components/common/loading.vue'
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
 import ErrorPane from '~/components/common/error.vue';
 import SimpleModal from '~/components/common/modal.vue';
-import i18n from "~/app-text/views/portals/forums.json";
+import messages from "~/app-text/views/portals/forums.json";
+import { lstring } from '../../components/kb/filters';
 
 export default {
   name: 'Forum',
-  i18n: { messages: { en: i18n } },
+  i18n: { messages },
   components: {
     CbdArticle: cbdArticle,
     Post,
@@ -163,7 +164,6 @@ export default {
       loading:false,
       error: null,
       helpArticle: null,
-      showHelp: null,
       edit: null
     }
   },
@@ -172,13 +172,16 @@ export default {
     loggedIn() { return this.$auth.loggedIn; },
     isOpen()   { return this.forum?.isOpen; },
     hasHelp()  { return !!this.helpArticle; },
-    get showHelp() { return !!this.helpArticle?.visible;}, 
-    set showHelp(value) { if(this.helpArticle) this.helpArticle.visible = value }, 
+    showHelp: { 
+      get()      { return !!this.helpArticle?.visible;} , 
+      set(value) { if(this.helpArticle) this.helpArticle.visible = value }
+    }, 
   },
   watch: {
     loggedIn: load
   },
   methods: {
+    lstring,
     getThreadUrl,
     onArticleLoad,
     refresh:            pending(refresh, 'loading'),

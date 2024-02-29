@@ -4,15 +4,18 @@ import "angular-sanitize";
 import "angular-loggly-logger";
 import "angular-joyride";
 import "ngMeta";
-
 import { 
-  CreateAngularVuePlainPlugin,  
-  AngularVueRouterPlugin, 
-  AngularVueRoutePlugin, 
-  AngularVuePlugin,
-  AngularVueDirective,
-  AngularVueAuthPlugin
-} from 'angular-vue';
+    registerPlugin,
+    createNgVue,
+    createAuth,
+    createRouter,
+    createRoute,
+    createService,
+    NgVueDirective 
+}     from '@scbd/angular-vue/src/index.js' 
+import {
+    createI18n
+} from 'vue-i18n';
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
@@ -65,28 +68,31 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
   
 }]);
 
-app.directive('ngVue', AngularVueDirective);
-app.run(["realm", "locale", '$injector', 'authentication', function (realm, locale, $injector,authentication) {
+app.directive('ngVue', NgVueDirective);
 
-  registerVuePlugin('$realm', realm);
-  registerVuePlugin('$locale', locale);
-  registerVuePlugin('$accountsBaseUrl', authentication.accountsBaseUrl())
-  registerVuePlugin('$ngApp', app);
-  registerVuePlugin('$ngInjector', $injector);
+app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function (realm, locale, $injector, apiToken, authentication) {
 
-  const vueRootApp = new Vue({});
+  registerPlugin(createService('$realm', realm)); // use  useRealm() | import { useRealm  } from '~/services/composables/realm.js';
+  registerPlugin(createService('$locale', locale));
+  registerPlugin(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
 
-  window.Vue.use(new AngularVuePlugin({ $injector, ngApp: app, vueApp: vueRootApp }));
-  window.Vue.use(new AngularVueRoutePlugin());
-  window.Vue.use(new AngularVueRouterPlugin());
-  window.Vue.use(new AngularVueAuthPlugin({
+  const ngVue   = createNgVue({ $injector, ngApp: app });
+  const $i18n   = createI18n({ locale, fallbackLocale: 'en', legacy:false});
+  const $route  = createRoute ({ plugins: { ngVue }});
+  const $router = createRouter ({ plugins: { ngVue }});
+
+  registerPlugin(ngVue);
+  registerPlugin($i18n);
+  registerPlugin($route);
+  registerPlugin( $router);
+
+  const authPlugin = createAuth ({ 
     fetchUser() { return authentication.getUser(); },
     logout() { authentication.signOut(); },
     async login() {
       console.log("$auth: force sign in");
 
-      const { $route, $router, $ngVue } = Vue.prototype;
-      const appConfigService = $ngVue.$injector.get('appConfigService')
+      const appConfigService = $injector.get('appConfigService')
 
       const { fullPath, query } = $route;
       let { returnUrl } = query;
@@ -97,13 +103,13 @@ app.run(["realm", "locale", '$injector', 'authentication', function (realm, loca
 
       $router.push({ path, query: {...query, returnUrl }, hash: null });
     }
-  }));
+  });
+
+  authentication.onUserChange ((user)  => authPlugin.user(user) );
+  apiToken      .onTokenChange((token) => authPlugin.token(token) );
+
+  registerPlugin(authPlugin);
   
 }]);
-
-function registerVuePlugin(name, service){
-  const newPlugin = new CreateAngularVuePlainPlugin(name, service)
-  window.Vue.use(newPlugin);
-}
 
 export default app;

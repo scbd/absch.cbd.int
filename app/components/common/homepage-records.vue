@@ -6,7 +6,7 @@
   <div class="d-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(0,4)">
       <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
-        <span class="badge position-absolute top-0 end-0 date-badge">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
+        <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
         <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
         <p class="record-summary-text"><span v-if="record.rec_summary">{{record.rec_summary}}</span></p>
         <div style="bottom:5px;" class="w-100 position-absolute">
@@ -23,7 +23,7 @@
    <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(4,8)">
       <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
-        <span class="badge position-absolute top-0 end-0 date-badge">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
+        <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
         <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
         <p class="record-summary-text"><span v-if="record.rec_summary">{{record.rec_summary}}</span></p>
         
@@ -49,6 +49,7 @@
     import ArticlesApi  from '../kb/article-api';
 	  import i18n from '../../app-text/components/common/homepage-records.json';
     import "../kb/filters";
+    import { formatDate } from '~/components/kb/filters'
 
 	export default {
     props:{
@@ -70,9 +71,10 @@
     },
     methods:{
 
+      formatDate,
+
       async records()
       {
-
           const query = {
               "fq": [
                   "{!tag=version}(*:* NOT version_s:*)",
@@ -87,6 +89,9 @@
               "rows": this.rows
           };
           const responseList = await this.articlesApi.getRecords(query);
+
+        console.log('mounted', responseList)
+
           if ((responseList?.response?.docs || []).length) {
               this.recordList = responseList?.response?.docs;
           }

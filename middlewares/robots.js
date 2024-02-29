@@ -1,5 +1,5 @@
 ﻿
-module.exports = function(req, res){
+export default function(req, res){
 
     var isValidHost = ['absch.cbd.int', 'beta.bch.cbd.int', 'bch.cbd.int'].includes(req.headers['host']);
 
