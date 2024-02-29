@@ -166,7 +166,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
 								.then(function (data) {
-									$scope.internalDocument = $scope.internalDocumentInfo = data.data;
+									$scope.internalDocument = $scope.internalDocumentInfo = {...data.data, type : documentSchema };
 									$scope.loading = false;
 								});
 							loadViewDirective(documentSchema);
@@ -377,20 +377,15 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						$scope.documentHeader = {schemaTitle: $filter('lstring')(schema.title, appLocale) , shortCode: schema.shortCode, bgClass: getHeaderColor(schema.type)};
 						
 					}
-					function getHeaderColor(schemaType) {
-						let bgClass = 'bg-darkgrey';
-						switch (schemaType) {
-							case 'national':
-								bgClass = 'bg-blue';
-								break;
-							case 'reference':
-								bgClass = 'bg-orange';
-								break;
-							case 'scbd':
-								bgClass = 'bg-darkgrey';
-								break;
-						}
-						return bgClass;
+					function getHeaderColor(schemaName) {
+						const schema	 = realm.schemas[schemaName];
+						const defaultColor = 'bg-darkgrey';
+
+						if(schema?.type == 'national') 	return 'bg-blue';
+						if(schema?.type == 'reference') return 'bg-orange';
+						if(schema?.type == 'scbd') 		return defaultColor;
+								
+						return defaultColor
 					}	
 					function canEdit() {
 
@@ -471,7 +466,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						var divSelector = '#schemaView'
 						var name 		= snake_case(lschema);
 						var directiveHtml =
-							"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale' hide-title='true'></DIRECTIVE>"
+							"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
 								.replace(/DIRECTIVE/g, 'view-' + name);
 						$scope.$apply(function () {
 							if(typeof beforeReplace == 'function'){

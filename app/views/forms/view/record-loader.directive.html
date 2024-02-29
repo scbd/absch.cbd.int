@@ -110,12 +110,12 @@
 
         <!-- Document Header -->
         <!-- use schema.type for condition  -->
-        <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="documentHeader.bgClass"
+        <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="{::getHeaderColor(internalDocumentInfo.type)}"
             style="padding-top: 8px; padding-left: 2px;" ng-if="!loading && internalDocumentInfo">
                 <!-- Schema Title with short code: copied from view pages -->
                 <span class="floa-start color-white text-uppercase p-2">
-                    <span ng-bind="::documentHeader.schemaTitle"></span>
-                    <span>(<span ng-bind="::(documentHeader.shortCode)"></span>)</span>
+                    <span ng-bind="::internalDocumentInfo.type|schemaName"></span>
+                    <span>(<span ng-bind="::(internalDocumentInfo.type|schemaShortName)"></span>)</span>
                 </span>  
                 <!--Right Side buttons -->
                 <div class="float-end position-relative text-white d-flex">
