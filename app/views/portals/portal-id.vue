@@ -26,6 +26,7 @@ import Thread from './thread-id.vue'
 import SubRouter from "../../services/router.js";
 import { compile }  from "path-to-regexp";
 import PageNotFound from '~/views/shared/404.vue';
+import { useRealm  } from '~/services/composables/realm.js';
 
 let subRouter = new SubRouter([]);
 
@@ -33,6 +34,10 @@ export default {
   name:'onlineConferences',
   components:{
     SideMenu
+  },
+  setup() {
+    const realm = useRealm();
+    return { realm };
   },
   props:{
     basePath: String
@@ -75,7 +80,7 @@ export default {
 async function initializePortal() {
 
     const { portalId, unwatchPath } = this;
-    const { realm } = this.$realm;
+    const { realm } = this;
 
     if(unwatchPath) unwatchPath();
 
@@ -83,7 +88,7 @@ async function initializePortal() {
     this.articlesApi = new ArticlesApi();
     this.forumsApi   = new ForumsApi();
 
-    const portalMenu = await this.menusApi.getPortalByCode(realm, portalId);
+    const portalMenu = await this.menusApi.getPortalByCode(realm.value, portalId);
 
     subRouter = buildRoutes(portalMenu);
 
