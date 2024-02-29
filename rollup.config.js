@@ -14,6 +14,7 @@ import bootWebApp, { cdnUrl }   from './app/boot.js';
 import injectCssToDom           from './rollup/inject-css-to-dom.js';
 import resolveLocalized         from './rollup/resolve-localized.js';
 import stripBom                 from './rollup/strip-bom.js';
+import mergeI18n                from './rollup/merge-i18n.js'
 
 const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
@@ -65,7 +66,14 @@ function bundle(entryPoint, locale, baseDir='app') {
       stripBom(),
       resolveLocalized({ 
         baseDir:      `${process.cwd()}/${baseDir}`,
-        localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}`
+        localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}`,
+      }),
+      mergeI18n({ 
+        include:      `**/*.json`,
+        baseDir:      `${process.cwd()}/${baseDir}/app-text`,
+        localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}/app-text`,
+        defaultLocale: 'en',
+        locale
       }),
       copy({
         verbose: true,
