@@ -52,7 +52,7 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "cnaKeywords",
 			"title": absFilters.keywords,
-			"field": "absGeneticResourceTypes_REL_ss"
+			"field": "absGeneticResourceTypes_ss"
 		},
 		{
 			"type": "yesNo",
