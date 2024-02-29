@@ -181,9 +181,6 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							}
 							$scope.load(documentID, documentRevision, recordOwnerRealm);
 						}
-						if (documentSchema){
-							setDocumentHeader(documentSchema)
-						}
 					};
 
 					$scope.timeLapse = 20;
@@ -343,7 +340,14 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						$scope.comparingRevision = undefined;
 						loadViewDirective($scope.internalDocument.header.schema);
 					}
-					
+					$scope.getHeaderColor = function(schemaName) {
+						const schema	 = realm.schemas[schemaName];
+						const defaultColor = 'bg-darkgrey';
+						if(schema?.type == 'national') 	return 'bg-blue';
+						if(schema?.type == 'reference') return 'bg-orange';
+						if(schema?.type == 'scbd') 		return defaultColor;		
+						return defaultColor
+					}
 					//==================================
 					//
 					//==================================
@@ -366,26 +370,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						else if($scope.internalDocumentInfo?.latestRevision > 1){
 							$scope.showComparison = true;//$attr.showComparison == 'true'
 							$scope.showDifferenceButton = false;
-						}		
-						if($scope.internalDocumentInfo.metadata.schema)
-							setDocumentHeader($scope.internalDocumentInfo.metadata.schema);
-					}
-
-					function setDocumentHeader (schemaTitle){
-						const schemaName = $filter("mapSchema")(schemaTitle);
-						const schema	 = realm.schemas[schemaName];
-						$scope.documentHeader = {schemaTitle: $filter('lstring')(schema.title, appLocale) , shortCode: schema.shortCode, bgClass: getHeaderColor(schema.type)};
-						
-					}
-					function getHeaderColor(schemaName) {
-						const schema	 = realm.schemas[schemaName];
-						const defaultColor = 'bg-darkgrey';
-
-						if(schema?.type == 'national') 	return 'bg-blue';
-						if(schema?.type == 'reference') return 'bg-orange';
-						if(schema?.type == 'scbd') 		return defaultColor;
-								
-						return defaultColor
+						}
 					}	
 					function canEdit() {
 

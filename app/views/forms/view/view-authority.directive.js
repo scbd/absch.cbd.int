@@ -18,8 +18,7 @@ import viewAuthorityT from '~/app-text/views/forms/view/view-authority.json';
 				target  : "@linkTarget",
 				locale      : "=",
 				allowDrafts : "@",
-				hide : "@",
-				hideTitle: "=?"
+				hide : "@"
 			},
 			link : function ($scope)
 			{
