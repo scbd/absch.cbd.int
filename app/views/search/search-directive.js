@@ -1334,8 +1334,12 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     else if( filter.type == 'yesNo'  && filter.filterValue!== undefined){
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
                                     }
-                                    else if(['check', 'radioList'].includes(filter.type) && filter.filterValue!== undefined){
+
+                                    else if(filter.type == 'radioList' && filter.filterValue!== undefined){
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
+                                    }
+                                    else if(filter.type == 'check' && filter.filterValue!== undefined && filter.filterValue!==false){
+                                        subQuery = filter.field + ':' + solr.escape(filter.value);
                                     }
                                     if(subQuery){
                                         if(filter.excludeResult)
