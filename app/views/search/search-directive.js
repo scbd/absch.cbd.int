@@ -1334,13 +1334,10 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     else if( filter.type == 'yesNo'  && filter.filterValue!== undefined){
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
                                     }
-                                    // else if(['check', 'radioList'].includes(filter.type) && filter.filterValue!== undefined){
-                                    //     subQuery = filter.field + ':' + solr.escape(filter.filterValue);
-                                    // }
+
                                     else if(filter.type == 'radioList' && filter.filterValue!== undefined){
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
                                     }
-                                    //We need to pass filter.value in the query for filter.type == 'check' because the radio button is passing True/False in filter.filterValue. 
                                     else if(filter.type == 'check' && filter.filterValue!== undefined && filter.filterValue!==false){
                                         subQuery = filter.field + ':' + solr.escape(filter.value);
                                     }
