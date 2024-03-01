@@ -40,7 +40,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				locale: "=?",
 				hide: "@",
 				showDetails: "=",
-				showDoc: "=",
+				isClose: "<", // to hide the close button on single record view
 				api: '=?',
 				documentInfo: "=?",
 			},
@@ -77,7 +77,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					});
 					//close record in result default page
 					$scope.closeDoc = function(){
-						$scope.showDoc = false;
+						$scope.$emit('recordClosedEvent', false);
 					}
 
 					$scope.shareVueComponent = {
@@ -173,7 +173,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						}
 						else if (documentID) {
 							let recordOwnerRealm;
-							if(schemaName && (schema.type == 'reference' || schemaName == 'focalPoint')){								
+							if(schemaName && (schema?.type == 'reference' || schemaName == 'focalPoint')){								
 								recordOwnerRealm = await hasChmRealm(documentID);
 								if(recordOwnerRealm){
 									$scope.recordOwnerRealm = recordOwnerRealm;
