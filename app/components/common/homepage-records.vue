@@ -88,9 +88,8 @@
     };
     const responseList = await articlesApi.getRecords(query);
 
-    if ((responseList?.response?.docs || []).length) {
-      recordList.value = responseList?.response?.docs;
-    }
+    recordList.value = responseList?.response?.docs || [];
+
     loading.value = false;
   };
 
