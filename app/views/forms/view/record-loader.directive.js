@@ -77,7 +77,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					});
 					//close record in result default page
 					$scope.closeDoc = function(){
-						$scope.$emit('recordClosedEvent', false);
+						$scope.$emit('evt:closeRecord', false);
 					}
 
 					$scope.shareVueComponent = {

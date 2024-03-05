@@ -34,7 +34,7 @@ app.directive('resultDefault', ["$timeout", "translationService", function ($tim
                 $scope.isRevoked = function(values){
                     return values.includes('Revoked')
                 }
-                $scope.$on('recordClosedEvent', function(event, closeDoc) {
+                $scope.$on('evt:closeRecord', function(evt, closeDoc) {
                     $scope.showDoc = closeDoc;
                });
                 
