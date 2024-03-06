@@ -15,50 +15,38 @@
                     </relevant-articles>
                 </div>
                 <div>
-                    <a class="float-end text-decoration-none link-secondary text-uppercase bold" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
+                    <a class="float-end text-decoration-none link-secondary text-uppercase bold" :href="`${tagUrl(category)}`">{{ t("viewMore") }}</a>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script>
-import i18n from '../../app-text/components/kb.json';
-import relevantArticles from './relevant-articles.vue';
-import articlesMaxin from '../maxin/article';
-export default {
-    name: 'KbArticleCategories',
-    props: {},
-    components: {
-        relevantArticles
-    },
-    data: () => {
-        return {
-            KbCategories: [],
-            loading: true,
-        }
-    },
-    mixins: [articlesMaxin],
-    async mounted() {
-        const categories = await this.loadKbCategories(this.$realm.is('BCH'));
-        this.KbCategories = categories.filter(tag => tag.adminTags[0] != "faq");
-    },
-    methods: {
-        tagUrl(category) {
-            return this.getUrl(category.title, undefined, category.adminTags[0]);
-        },
-        articleUrl(article, tag) {
+<script setup>
+    import relevantArticles from './relevant-articles.vue';
+    import { useI18n } from 'vue-i18n';
+    import messages from '../../app-text/components/kb.json';
+    import { useRealm } from '../../services/composables/realm.js';
+    import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
+    import { ref, onMounted } from "vue";
+    const { t } = useI18n({ messages });
+    const realm = useRealm();
+    const KbCategories = ref([]);
+
+    onMounted(async ()=>{
+        const categories = await loadKbCategories(realm.is('BCH'));
+        KbCategories.value = categories.filter(tag => tag.adminTags[0] != "faq");
+    })
+    
+    const tagUrl = function (category) {
+            return getUrl(category.title, undefined, category.adminTags[0]);
+    }
+
+    const articleUrl = function (article, tag) {
             if (article.url) {
                 return article.url
             } else {
-                return this.getUrl(article.title, article.identifier, tag);
+                return getUrl(article.title, article.identifier, tag);
             }
-        }
-    },
-    i18n: {
-        messages: {
-            en: i18n
-        }
     }
-}
 </script>
