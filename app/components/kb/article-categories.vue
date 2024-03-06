@@ -32,7 +32,6 @@
     const { t } = useI18n({ messages });
     const realm = useRealm();
     const KbCategories = ref([]);
-    const loading = ref(true);
 
     onMounted(async ()=>{
         const categories = await loadKbCategories(realm.is('BCH'));

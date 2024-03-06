@@ -58,7 +58,7 @@
 	let recordsPerPage = 10;
 	
 	onMounted(async ()=>{
-		faqFilterTag.value = route.params?.tag?.replace(/"/g, ""); 
+		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
 		categories.value = await loadKbCategories(true);
 		loadFaqs(1);
 	})

@@ -20,7 +20,7 @@
   const tag = ref('');
   
   onMounted(() => {
-	  tag.value = route.params?.tag;
+	  tag.value = route.value.params?.tag;
   });
   
 </script>

@@ -31,11 +31,10 @@
     import { ref  } from 'vue';
     const search = ref('');
 
-    const  goToSearchArticles = function() {
-
+    const  goToSearchArticles = async function() {
                 if (search.value) {
-                    if (route?.params?.search) {
-                        $emit('changeSearch', search.value);
+                    if (route.value?.params?.search) {
+                        emit('changeSearch', search.value); //ToDo: emit is not working for now
                     } else {
                         router.push({
                             path: `/kb/kbSearch/${encodeURIComponent( search.value )}`
