@@ -40,11 +40,14 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				locale: "=?",
 				hide: "@",
 				showDetails: "=",
-				isClose: "<", // to hide the close button on single record view
 				api: '=?',
 				documentInfo: "=?",
 			},
 			link: function ($scope, $element, $attr) {
+				$scope.hideClose = false;
+				if($attr.hideClose){ 
+					$scope.hideClose = true;
+				}				
 				translationService.set('recordLoaderT', recordLoaderT);
 				$scope.tokenReader = function(){ return apiToken.get()}
 
