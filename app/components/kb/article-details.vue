@@ -60,7 +60,7 @@
     const { t } = useI18n({ messages });
     const realm = useRealm();
     const route = useRoute();
-    const article = ref([]);
+    const article = ref({});
     const categories = ref([]);
     const loading = ref(true);
     const tag = ref('');
