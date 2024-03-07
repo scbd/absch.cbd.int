@@ -6,7 +6,7 @@ import '~/views/forms/directives/nr-yes-no';
 import template from "text!./edit-national-report.directive.html";
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
 import { analyzerMapping } from '~/app-data/report-analyzer-mapping';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
 
 app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$routeParams', "$timeout", "$q", 'guid', 'ngDialog', 'realm', 'translationService',
     function ($controller, $http, storage, $routeParams, $timeout, $q, guid, ngDialog, realm, translationService) {
