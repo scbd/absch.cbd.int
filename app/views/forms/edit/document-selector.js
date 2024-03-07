@@ -540,7 +540,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 var queryParameters = {
                     fields       : ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined,
                     'query'      : queryField + ':("' +_.map(identifiers,solr.escape).join('" "') +'")',
-                    'rowsPerPage': $scope.searchResult.rowsPerPage                    
+                    'rowsPerPage':  $scope.model?.length  
                 };
                 return searchService.list(queryParameters, null).then(function(result){                    
                     return $scope.tempSelectedDocuments = _.map(result.data.response.docs, function(doc){
