@@ -981,14 +981,13 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         const  usages  = await thesaurusService.getDomainTerms('usage')
                         .then(function (o) { return o; })
                         usages.push({
-                            "identifier": "confidential",
-                            "name": "confidential",
+                            "identifier": "usagesConfidential_b",
+                            "name": "usagesConfidential_b",
                             "title": {
                                 "en": "Confidential"
                             }
                         })
-                        return usages
-                        
+                        return usages    
                     }
 
                     async function cbdCountriesCustomFn() {
@@ -1311,8 +1310,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     var subQuery;
                                     if(filter.disabled)
                                         return;
-                                    if(filter.fieldfn!=undefined){ //custom function   
-                                        console.log('filter', filter)                                         
+                                    if(filter.fieldfn!=undefined){ //custom function                                           
                                         var q = customQueryFn[filter.fieldfn](filter);
                                         if(q)
                                             subQuery = q;
@@ -1521,23 +1519,26 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             return 'country_s:(' + solr.escape(countries.join(' ')) + ') AND referencedPermits_ss:*';
                         }
                     }
-
-                    // identifier: "confidential" 
-                    function buildCustomConfidentialQueryFn(filter){
-                        let query = [];
-                        const confidentialFieldMapping  ={
-                            usage : 'usagesConfidential_b'
-                        }
-                        var usages =  _.map(filter.selectedItems, 'identifier') .filter(e=>e!= 'confidential')
-                        console.log('usages: ', usages)
-                        if(usages?.length>0)
-                             query = [`${filter.field}:(${solr.escape(usages.join(' '))} )`];
-                        if(filter.selectedItems?.find(e=>e== 'confidential'))
-                            query.push(`${confidentialFieldMapping[filter.term]}:true`);
-
-                            return solr.andOr(query, 'OR');
+                    
+                    function buildCustomConfidentialQueryFn(filter) {
+                        let query = [];  
+                        let confidentialObject ={};          
+                        let termFields = _.map(filter.selectedItems, 'identifier').filter(e => e !== 'usagesConfidential_b');
+                        if(filter?.selectedItems)
+                            confidentialObject = filter?.selectedItems['usagesConfidential_b'];
+                        
+                        if (termFields?.length > 0) {
+                            query.push(`usages_ss:(${solr.escape(termFields.join(' '))})`);
+                        }  
+                        if (confidentialObject) {
+                            query.push('usagesConfidential_b: true');
+                        }  
+                        if(query.length > 0){ 
+                           return solr.andOr(query, 'OR');
+                        } 
+                        return undefined
                     }
-
+                   
                     function buildAdvanceSettingsQuery(filters, field){
 
                         var validValues     =   _(filters).map(function(filter){
