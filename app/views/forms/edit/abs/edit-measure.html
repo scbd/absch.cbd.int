@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div required class="km-control-group" name="status" caption="{{::('editAbsMeasureT.legalStatus'|$translate)}}">
+                                            <div class="km-control-group" name="status" caption="{{::('editAbsMeasureT.legalStatus'|$translate)}}">
                                                 <div class="help-info">
                                                     {{::('editAbsMeasureT.legalStatusInfo'|$translate)}}
                                                 </div>
@@ -101,7 +101,7 @@
                                         <div class="clearfix"></div>
                                         <div class="col-xs-12">
                                             <div ng-show="isNotLegallyBinded()">
-                                                <div class="km-control-group" name="adoption" required caption="{{::('editAbsMeasureT.adoptionDate'|$translate)}}">
+                                                <div class="km-control-group" name="adoption" caption="{{::('editAbsMeasureT.adoptionDate'|$translate)}}">
                                                     <div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption"></div>
                                                 </div>
                                             </div>
