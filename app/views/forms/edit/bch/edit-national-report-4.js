@@ -11,7 +11,7 @@ import '~/views/forms/view/bch/view-national-report-4.directive';
 import '~/components/scbd-angularjs-services/main';
 import 'ngDialog';
 import editNR4T from '~/app-text/views/forms/edit/bch/edit-national-report-4.json';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
     export { default as template } from './edit-national-report-4.html';
 
   export default ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 

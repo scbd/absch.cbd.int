@@ -1,7 +1,7 @@
-﻿import template from 'text!./pagination.html';
+import template from 'text!./pagination.html';
 import app from '~/app';
 import paginationT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/pagination.json';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
 
 app.directive('pagination', ['$location', 'translationService', 
     function ($location, translationService) {
