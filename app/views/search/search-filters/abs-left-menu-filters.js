@@ -226,10 +226,10 @@ export const absLeftMenuFilters = {
 			"field": "keywords_ss"
 		},
 		{
-			"type": "thesaurus",
-			"term": "usage",
+			"type": "customListFn",
+			"fn": "usagesCustomFn",
 			"title": absFilters.usage,
-			"field": "usages_ss"
+			"fieldfn": "buildCustomConfidentialQueryFn"
 		},
 		{
 			"type": "yesNo",

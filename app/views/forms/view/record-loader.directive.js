@@ -44,6 +44,10 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				documentInfo: "=?",
 			},
 			link: function ($scope, $element, $attr) {
+				$scope.hideClose = false;
+				if($attr.hideClose){ 
+					$scope.hideClose = true;
+				}				
 				translationService.set('recordLoaderT', recordLoaderT);
 				$scope.tokenReader = function(){ return apiToken.get()}
 
@@ -74,6 +78,10 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 								$scope.revisionNo = 'draft'
 						}
 					});
+					//close record in result default page
+					$scope.closeDoc = function(){
+						$scope.$emit('evt:closeRecord', false);
+					}
 
 					$scope.shareVueComponent = {
 						components:{shareRecord}
@@ -161,14 +169,14 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
 								.then(function (data) {
-									$scope.internalDocument = $scope.internalDocumentInfo = data.data;
+									$scope.internalDocument = $scope.internalDocumentInfo = {...data.data, type : documentSchema };
 									$scope.loading = false;
 								});
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
 							let recordOwnerRealm;
-							if(schemaName && (schema.type == 'reference' || schemaName == 'focalPoint')){								
+							if(schemaName && (schema?.type == 'reference' || schemaName == 'focalPoint')){								
 								recordOwnerRealm = await hasChmRealm(documentID);
 								if(recordOwnerRealm){
 									$scope.recordOwnerRealm = recordOwnerRealm;
@@ -335,7 +343,14 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						$scope.comparingRevision = undefined;
 						loadViewDirective($scope.internalDocument.header.schema);
 					}
-					
+					$scope.getHeaderColor = function(schemaName) {
+						const schema	 = realm.schemas[schemaName];
+						const defaultColor = 'bg-darkgrey';
+						if(schema?.type == 'national') 	return 'bg-blue';
+						if(schema?.type == 'reference') return 'bg-orange';
+						if(schema?.type == 'scbd') 		return defaultColor;		
+						return defaultColor
+					}
 					//==================================
 					//
 					//==================================
@@ -358,9 +373,8 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						else if($scope.internalDocumentInfo?.latestRevision > 1){
 							$scope.showComparison = true;//$attr.showComparison == 'true'
 							$scope.showDifferenceButton = false;
-						}		
-					}
-
+						}
+					}	
 					function canEdit() {
 
 						return authentication.getUser()
