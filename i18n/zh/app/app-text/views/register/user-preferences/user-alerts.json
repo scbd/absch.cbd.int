@@ -1,6 +1,8 @@
 {
-  "systemAlert": "系统提示",
-  "certificatesInfo": "表示事先知情同意书已授予我所在司法辖区中用户的已发布证书（国际公认合规证书）",
+  "myAlertsHeading": "我的提醒",
+  "systemAlertHeading": "汇总提醒",
+  "systemOverviewFilterTitle": "随时向我通知所有新的和更新的信息交换所记录",
+  "systemOverviewQueryName": "所有新的和更新的信息交换所记录",
   "emailMe": "给我发邮件",
   "search": "搜索",
   "edit": "编辑",
@@ -15,5 +17,8 @@
   "sendEmail": "当与此搜索相关的记录添加或更新时，给我发送电子邮件。",
   "cancel": "取消",
   "save": "保存",
-  "searchTitle": "搜索标题"
+  "searchTitle": "搜索标题",
+  "frequencyHeader": "电子邮件提醒频率",
+  "frequencyDescription": "设置您希望从信息交换所收到电子邮件提醒的频次",
+  "frequencyDropdown": "选择频次"
 }

@@ -16,6 +16,7 @@
   "documents": "文件",
   "otherRelevantInformation": "其它相关信息",
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
-  "notes": "注",
-  "notesInfos": "“注”字段仅供个人使用。仅当编辑记录时才显示，但不会在记录发布时显示。此字段不适用于保密信息。"
+  "notes": "备注",
+  "notesInfos": "“注”字段仅供个人使用。仅当编辑记录时才显示，但不会在记录发布时显示。此字段不适用于保密信息。",
+  "selectOne": "请选择以下一项："
 }

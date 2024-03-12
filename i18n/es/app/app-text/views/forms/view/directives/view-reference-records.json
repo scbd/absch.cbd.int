@@ -8,5 +8,7 @@
   "show": "Mostrar",
   "country": "País",
   "title": "Título",
-  "updatedOn": "Actualizado el"
+  "updatedOn": "Actualizado el",
+  "noRecords": "No se hace referencia a este registro en otro(s) registro(s)",
+  "showInSubmissions": "Mostrar en presentaciones"
 }

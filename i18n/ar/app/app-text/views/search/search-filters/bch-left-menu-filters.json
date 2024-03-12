@@ -1,7 +1,7 @@
 {
-  "freeText": "نص حر (عام أو غير محدد)",
+  "freeText": "نص حر",
   "other": "أخرى",
-  "authoritySubjectAreas": "الوظائف أو المهام الإدارية",
+  "authoritySubjectAreas": "السلطات الإدارية",
   "authorityTypeOfOrganisms": "أنواع الكائنات الحية الواقعة تحت مسؤولية هذه السلطة",
   "authorityDecisionTypeOfOrganisms": "أنواع الكائنات الحية الواقعة تحت مسؤولية هذه السلطة",
   "biosafetyDecisionTypes": "نوع القرار/الوثيقة",
@@ -58,5 +58,10 @@
   "resourceNotifications": "الإخطارات",
   "resourceOrganizations": "المنظمات/المؤسسات",
   "resourceCpbThematicAreas": "المحاور والموضوعات",
-  "resourceDate": "تاريخ التقديم"
+  "resourceDate": "تاريخ التقديم",
+  "submissionCountries": "البلد (البلدان)",
+  "submissionByType": "الجهة المُرسلة",
+  "submissionByTypeParty": "طرف",
+  "submissionByTypeNonParty": "غير طرف",
+  "submissionByTypeOrganization": "المنظمة"
 }

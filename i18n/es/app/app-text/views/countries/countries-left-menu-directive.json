@@ -1,12 +1,12 @@
 {
-  "countryInformation": "Información sobre los países",
-  "map": "Mapa",
-  "selectCountry": "Seleccionar un país",
-  "filterByStatus": "Filtrar por situación de la Parte en el Protocolo de Nagoya",
-  "all": "Todos",
-  "party": "Parte",
-  "nonParty": "No Parte",
-  "filterByRecordTypes": "Filtrar el país por tipos de registro",
-  "countries": "Países",
-  "records": "Registros"
+  "countryInformation": "",
+  "map": "",
+  "selectCountry": "",
+  "filterByStatus": "",
+  "all": "",
+  "party": "",
+  "nonParty": "",
+  "filterByRecordTypes": "",
+  "countries": "",
+  "records": ""
 }

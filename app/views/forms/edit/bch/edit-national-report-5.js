@@ -17,7 +17,7 @@ import prevQuestionsMapping from '~/app-data/bch/report-analyzer/mapping/cpbNati
 import { cpbNationalReport5 } from '~/app-data/bch/report-analyzer/cpbNationalReport5';
 import { cpbNationalReport4 } from '~/app-data/bch/report-analyzer/cpbNationalReport4';
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
 import yesNoT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-yes-no.json';
 
 export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout",

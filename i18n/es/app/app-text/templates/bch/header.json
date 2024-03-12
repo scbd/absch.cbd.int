@@ -23,11 +23,13 @@
   "trainingSite": "Sitio de capacitación",
   "contactUs": "Contáctenos",
   "forumsPortals": "Foros y portales",
+  "portalsRiskAssessment": "Evaluación del riesgo y gestión del riesgo",
   "bchForum": "CIISB en el foro de CIISB",
   "unepForum": "Foro Regional de Asesores del PNUMA",
   "leaveTrainingSite": "Salir del sitio de capacitación",
   "trainingMaterials": "Materiales de capacitación",
   "protocol": "Protocolo",
   "cartagenaProtocol": "Protocolo de Cartagena",
-  "suppProtocol": "Protocolo suplementario"
+  "suppProtocol": "Protocolo suplementario",
+  "submissionsOnNotifications": "Envíos a notificaciones"
 }

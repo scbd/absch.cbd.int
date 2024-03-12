@@ -35,6 +35,7 @@
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "fs-finder": "^1.8.1",
     "glob": "^7.1.6",
     "glob-to-regexp": "^0.4.1",
     "rollup": "4.12.0",
@@ -59,7 +60,8 @@
     "build": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "dev": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup --strictDeprecations -c --watch",
     "eslint": "npx eslint . --fix",
-    "clean-reinstall": "rm -rf ./node_modules && yarn install"
+    "clean-reinstall": "rm -rf ./node_modules && yarn install",
+    "import-translation": "node script/copy-translation-files.js"
   },
   "engines": {
     "yarn": ">= 1.0.0"

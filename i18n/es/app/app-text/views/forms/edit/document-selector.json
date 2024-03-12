@@ -25,5 +25,6 @@
   "create": "Crear",
   "showExisting": "Mostrar existentes",
   "cancel": "Cancelar",
-  "noRecordFound": "no se encontraron registros."
+  "noRecordFound": "no se encontraron registros.",
+  "revisionUpdated": "La referencia a este registro se ha actualizado según su última revisión"
 }

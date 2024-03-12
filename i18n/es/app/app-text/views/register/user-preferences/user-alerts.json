@@ -1,10 +1,12 @@
 {
-  "systemAlert": "alerta del sistema",
-  "certificatesInfo": "Certificados (CCRI) publicados que indican que se ha otorgado un consentimiento fundamentado previo (CFP) a un usuario dentro de mi jurisdicción",
+  "myAlertsHeading": "Mis alertas",
+  "systemAlertHeading": "Avisos generales",
+  "systemOverviewFilterTitle": "Mantenerme informado de todas las novedades y actualizaciones relativas a los registros del Centro de Intercambio de Información",
+  "systemOverviewQueryName": "Todas las novedades y actualizaciones relativas a los registros del Centro de Intercambio de Información",
   "emailMe": "Enviarme un correo electrónico",
   "search": "Buscar",
   "edit": "Editar",
-  "delete": "Eliminar",
+  "delete": "Borrar",
   "addNew": "Agregar nuevo",
   "loading": "Cargando...",
   "isAuthenticated": "No tiene ninguna búsqueda ni alerta guardadas.",
@@ -15,5 +17,8 @@
   "sendEmail": "Enviarme un correo electrónico cuando se agreguen o actualicen registros pertinentes para esta búsqueda.",
   "cancel": "Cancelar",
   "save": "Guardar",
-  "searchTitle": "Buscar título"
+  "searchTitle": "Buscar título",
+  "frequencyHeader": "Frecuencia de los avisos por correo electrónico",
+  "frequencyDescription": "Establecer la frecuencia de las alertas de correos electrónicos que desearía recibir del Centro de Intercambio de Información",
+  "frequencyDropdown": "Seleccionar frecuencia"
 }

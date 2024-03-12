@@ -9,5 +9,9 @@
   "error": "载入登记簿记录时出错，请重试。",
   "totalRecords": "总记录数量：",
   "export": "导出",
-  "click": "单击"
+  "click": "单击",
+  "recordID": "记录 ID",
+  "scientificName": "学名",
+  "commonName": "常用名",
+  "description": "描述"
 }

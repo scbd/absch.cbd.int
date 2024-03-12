@@ -26,10 +26,10 @@
   "addressOrganisms": "此资源是否涉及一个或多个具体的生物体？",
   "organisms": "生物体识别",
   "addressGenes": "此资源是否涉及一个或多个具体的遗传片段？",
-  "genes": "基因识别",
+  "genes": "基因片段标识",
   "absThematicAreas": "获取和惠益分享专题领域",
   "keyAreas": "该资源所涉及的能力建设和发展的关键领域和战略措施",
   "mccKeywords": "用于描述将提交之行为准则、指导方针和最佳做法和/或标准之内容的关键词",
-  "additionalInformation": "额外信息",
+  "additionalInformation": "更多信息",
   "relevantDocuments": "其他相关网站地址和/或附加文件"
 }
