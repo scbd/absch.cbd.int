@@ -6,7 +6,7 @@ import globToRegExp from 'glob-to-regexp';
 
 const mappings = {};
 
-export default function resolveLocalized(options = {}) {
+export default function mergeI18n(options = {}) {
 
   const {
     include,
