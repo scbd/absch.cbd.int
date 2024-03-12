@@ -3441,3 +3441,8 @@ embed-footer{
     background-color:#f1f1f1;
     opacity: 50%;
 }
+@media (min-width: 992px) and (max-width: 1382px) {
+    .document-selection-modal .modal-body .pagination .page-item-responsive {
+      display: none !important;
+    }
+  }
