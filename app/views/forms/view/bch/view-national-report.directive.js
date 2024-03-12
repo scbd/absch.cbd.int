@@ -2,7 +2,7 @@ import app from '~/app';
 import template from "text!./view-national-report.directive.html";
 import '~/views/forms/view/directives/view-record-reference.directive';
 import viewNationalReportT from '~/app-text/views/forms/view/bch/view-national-report.json';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
  
 app.directive("viewNationalReport",  ['translationService', function (translationService) {
 	return {

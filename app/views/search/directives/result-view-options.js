@@ -1,4 +1,4 @@
-﻿import template from 'text!./result-view-options.html';
+import template from 'text!./result-view-options.html';
 import app from '~/app';
 import _ from 'lodash';
 import 'ngDialog';
@@ -169,6 +169,7 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                 $scope.getDownloadRecords = function(options){                        
                     // const  { docs, numFound } = $scope.searchResult.data;
                     // return { docs, numFound };
+                    options = options || {}
                     return $scope.onExport({options});
                 }
 
