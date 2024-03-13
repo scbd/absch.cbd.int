@@ -984,7 +984,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             "identifier": "usagesConfidential_b",
                             "name": "usagesConfidential_b",
                             "title": {
-                                "en": "Confidential"
+                                "en": searchDirectiveT.confidential
                             }
                         })
                         return usages    
