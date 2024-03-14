@@ -2,13 +2,14 @@ import app from '~/app';
 import commonRoutes from "./common-routes";
 import { securize, asyncLogError, mapView } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
-import routesLabels from '~/app-text/routes/abs-route-labels.json';
+import routesLabelsTranslations from '~/app-text/routes/abs-route-labels.json';
+import { mergeTranslationKeys } from '../services/translation-service';
 import * as theAbs from '~/views/home/index';
 
 app.value("showHelp", {
   value: false
 });
-
+const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 const abschRouteUrls = {
    theAbs,
    register_admin_ircc_counts          : { component: ()=>asyncLogError(import('~/views/register/admin/ircc-counts')) },
