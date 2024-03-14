@@ -110,6 +110,9 @@
                             <li class="nav-item pe-4">
                                 <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">{{::('documentSelectorT.selected'|$translate)}} <span ng-if="recordCount"></span></a>
                             </li>
+                            <li class="nav-item pe-4">
+                                <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myDrafts" ng-click="changeTab('myDrafts');">Link draft records <span ng-if="recordCount"></span></a>
+                            </li>
                         </ul>
                         <div class="float-end d-none d-md-block w-50">                                
                             <form ng-submit="searchFreeText(search.keyword)" class="input-group">
@@ -198,6 +201,11 @@
                             </table>
                             <div ng-if="!$parent.tempSelectedDocuments.length"> {{::('documentSelectorT.noRecordSelected'|$translate)}}</div>
                         </div>
+                    </div>
+                    <div id="myDrafts" class="tab-pane bg-white">
+                        <div ng-if="activeTab=='myDrafts'">
+                            <div ng-include="'documentSelectionMyDrafts'"></div>
+                        </div>                        
                     </div>
                 
                 </div>
@@ -329,5 +337,30 @@
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
                 max-page-count="4"></div> 
         </div>
+    </script>
+    <script type="text/ng-template" trados-translation="true" id="documentSelectionMyDrafts"> 
+        <div ng-if="isLoading" class="text-center"> <i class="fa fa-spinner fa-spin"></i> {{::('documentSelectorT.loading'|$translate)}}</div>
+        <div ng-if="!isLoading && rawDocuments.length===0" class="text-center"> {{::('documentSelectorT.noRecordFound'|$translate)}}</div> 
+            <table ng-if="!isLoading && rawDocuments.length" class="table table-condensed table-striped w-100">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>title</th>
+                        <th>summary</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="doc in rawDocuments">
+                        <td  class="width-0">
+                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)"class="input_width_height"/>
+                            <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" 
+                            class="input-wh"/>
+                        </td>  
+                        <td class="title width-min-30"> <span ng-bind="doc.title|lstring:locale"></span></td>
+                        <td class="summary"><span ng-bind="doc.summary|lstring:locale"></span></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
     </script>
     </div>
