@@ -5,7 +5,7 @@ import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import 'toastr';
-import joyRideText      from '~/app-text/views/search/search-joyride-tour.json';
+import joyRideTextTranslations from '~/app-text/views/search/search-joyride-tour.json';
 import  { scbdSchemas } from '~/components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
 import {getLimitedTerms} from '~/services/common';
@@ -25,8 +25,10 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
-import searchDirectiveT from '~/app-text/views/search/search-directive.json';
-
+import 'angular-vue'
+import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
+import { mergeTranslationKeys } from '../../services/translation-service.js';
+const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
     app.directive('searchDirective', function() {
         return {
             restrict: 'EA',
@@ -41,7 +43,8 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                 $timeout, locale, solr, toastr, $log, IGenericService, translationService, searchService) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
-                            buildContactsUserCountryfn : buildContactsUserCountryfn
+                            buildContactsUserCountryfn : buildContactsUserCountryfn,
+                            buildCustomConfidentialQueryFn : buildCustomConfidentialQueryFn
                         }
                         translationService.set('searchDirectiveT', searchDirectiveT);
                         var leftMenuSchemaFieldMapping;
@@ -975,6 +978,19 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     
                     }
 
+                    async function usagesCustomFn(){
+                        const  usages  = await thesaurusService.getDomainTerms('usage')
+                        .then(function (o) { return o; })
+                        usages.push({
+                            "identifier": "usagesConfidential_b",
+                            "name": "usagesConfidential_b",
+                            "title": {
+                                "en": searchDirectiveT.confidential
+                            }
+                        })
+                        return usages    
+                    }
+
                     async function cbdCountriesCustomFn() {
                         return thesaurusService.getDomainTerms('countries').then(function (o) { return _.sortBy(o, 'name'); })
                     }
@@ -1295,7 +1311,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     var subQuery;
                                     if(filter.disabled)
                                         return;
-                                    if(filter.fieldfn!=undefined){ //custom function                                            
+                                    if(filter.fieldfn!=undefined){ //custom function                                           
                                         var q = customQueryFn[filter.fieldfn](filter);
                                         if(q)
                                             subQuery = q;
@@ -1504,6 +1520,26 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             return 'country_s:(' + solr.escape(countries.join(' ')) + ') AND referencedPermits_ss:*';
                         }
                     }
+                    
+                    function buildCustomConfidentialQueryFn(filter) {
+                        let query = [];  
+                        let confidentialObject ={};          
+                        let termFields = _.map(filter.selectedItems, 'identifier').filter(e => e !== 'usagesConfidential_b');
+                        if(filter?.selectedItems)
+                            confidentialObject = filter?.selectedItems['usagesConfidential_b'];
+                        
+                        if (termFields?.length > 0) {
+                            query.push(`usages_ss:(${solr.escape(termFields.join(' '))})`);
+                        }  
+                        if (confidentialObject) {
+                            query.push('usagesConfidential_b: true');
+                        }  
+                        if(query.length > 0){ 
+                           return solr.andOr(query, 'OR');
+                        } 
+                        return undefined
+                    }
+                   
                     function buildAdvanceSettingsQuery(filters, field){
 
                         var validValues     =   _(filters).map(function(filter){
@@ -1675,7 +1711,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
 
                     init();
-
+                    
                     this.getAllSearchFilters      = getAllSearchFilters     ;
                     this.getSearchFilters         = getSearchFilters        ;
                     this.addFilter                = addFilter               ;
@@ -1691,7 +1727,8 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     this.cbdSubjectsCustomFn      = cbdSubjectsCustomFn     ;
                     this.vlrResourceCustomFn      = vlrResourceCustomFn     ;
                     this.cbdCountriesCustomFn     = cbdCountriesCustomFn    ;
-                    this.getFocalPointTypes       = getFocalPointTypes
+                    this.getFocalPointTypes       = getFocalPointTypes      ;
+                    this.usagesCustomFn           = usagesCustomFn
             }]//controller
         };
     });

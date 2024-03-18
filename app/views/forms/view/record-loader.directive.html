@@ -108,62 +108,74 @@
             {{::('recordLoaderT.comparisonRecordNotFound'|$translate)}}
         </div>
 
-        <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">
-            <div>
-                <span class="color-white">|&nbsp;</span>
-                <a rel="noopener" translation-url title="{{::('recordLoaderT.edit'|$translate)}}" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
-                    class="btn btn-sm text-black action-button p-0 px-1 color-white" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocument.header.identifier|encodeURIComponent}}/edit">
-                    <i class="bi bi-pencil-square color-white"></i> <span class="d-none d-sm-inline-block">{{::('recordLoaderT.edit'|$translate)}}</span>
-                </a>
-                <button title="{{::('recordLoaderT.delete'|$translate)}}" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button"
-                    class="btn btn-default" ng-click="askDelete(record)">
-                    <i class="fa fa-trash-o"></i>
-                </button>
-            </div>
-        </div>
-        <div ng-if="showDifferenceButton||showComparison" class="full-text-display float-end compare-buttons pe-2 position-relative text-white"
-            style="top:7px;">
-            <button type="button" ng-if="showDifferenceButton" ng-disabled="isComparing" class="btn btn-success btn-sm"
-                ng-click="showDifference()">
-                <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> {{::('recordLoaderT.showDifference'|$translate)}}
-            </button>
-            <!-- for comparing with older versions -->
-            <!-- ng-if="showDifferenceButton"  style="display: none;"-->
+        <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="::getHeaderColor(internalDocumentInfo.type)"
+            style="padding-top: 8px; padding-left: 2px;" ng-if="!loading && internalDocumentInfo">
+                <span class="floa-start color-white text-uppercase p-2">
+                    <span ng-bind="::internalDocumentInfo.type|schemaName"></span>
+                    <span>(<span ng-bind="::(internalDocumentInfo.type|schemaShortName)"></span>)</span>
+                </span>  
+                <div class="float-end position-relative text-white d-flex">
+                    <div record-options></div>
+                    <div id="sendRecords" ng-if="shareVueComponent && internalDocumentInfo" class="full-text-display ps-2 pe-1 float-end compare-buttons">
+                        <span class="color-white">|&nbsp;</span>
+                        <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
+                    </div>
+                    <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">
+                        <div>
+                            <span class="color-white">|&nbsp;</span>
+                            <a rel="noopener" translation-url title="{{::('recordLoaderT.edit'|$translate)}}" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
+                                class="btn btn-sm text-black action-button p-0 px-1 color-white" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocument.header.identifier|encodeURIComponent}}/edit">
+                                <i class="bi bi-pencil-square color-white"></i> <span class="d-none d-sm-inline-block color-white">{{::('recordLoaderT.edit'|$translate)}}</span>
+                            </a>
+                            <button title="{{::('recordLoaderT.delete'|$translate)}}" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button"
+                                class="btn btn-default" ng-click="askDelete(record)">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </div>
+                    </div> 
 
-            <div class="btn-group dropdown" role="group">
-                <button ng-if="showComparison" ng-disabled="isComparing"
-                    class="btn btn-sm dropdown-toggle fs-small-8 p-0 px-1 color-white" type="button"
-                    id="comparisonMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    ng-click="loadRecordRevisions()">
-                    <span class="color-white">|&nbsp;&nbsp;</span>
-                    <i class="fa fa-history color-white"></i>
-                    <span class="color-white d-none d-sm-inline-block" ng-if="!comparingRevision">{{::('recordLoaderT.compare'|$translate)}} </span>
-                    <span class="color-white d-none d-sm-inline-block" ng-if="comparingRevision">{{::('recordLoaderT.comparing'|$translate)}} <span
-                            ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="comparisonMenu">
-                    <li ng-if="loadingRevisions" ng-disabled="isComparing">
-                        <a class="dropdown-item" ng-href="#"><i class="fa fa-spin fa-spinner"></i> {{::('recordLoaderT.loading'|$translate)}}</a>
-                    </li>
-                    <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions" ng-disabled="isComparing"
-                        ng-class="{'active':revision.revision==comparingRevision}">
-                        <a class="dropdown-item" ng-href="#" ng-click="showDifference(revision.revision)"
-                            ng-bind="revision.uniqueIdentifier"></a>
-                    </li>
-                </ul>
-            </div>
-            <div ng-if="isComparing">
-                <div id="compareSchemaView"></div>
-            </div>
-        </div>
-        <div id="sendRecords" ng-if="shareVueComponent && internalDocumentInfo" class="share-single-document full-text-display pe-2 float-end compare-buttons">
-            <span class="color-white">|&nbsp;</span>
-            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
-        </div>
-        <div class="float-end pe-2 position-relative text-white" style="top:7px;" ng-show="!loading && !error && internalDocumentInfo">
-            <div record-options></div>
-        </div>
+                    <div ng-if="showDifferenceButton||showComparison" class="full-text-display float-end compare-buttons pe-2 position-relative text-white">
+                        <button type="button" ng-if="showDifferenceButton" ng-disabled="isComparing" class="btn btn-success btn-sm"
+                            ng-click="showDifference()">
+                            <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> {{::('recordLoaderT.showDifference'|$translate)}}
+                        </button>          
+                        <div class="btn-group dropdown" role="group">
+                            <button ng-if="showComparison" ng-disabled="isComparing"
+                                class="btn btn-sm dropdown-toggle fs-small-8 p-0 px-1 color-white" type="button"
+                                id="comparisonMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                ng-click="loadRecordRevisions()">
+                                <span class="color-white">|&nbsp;&nbsp;</span>
+                                <i class="fa fa-history color-white"></i>
+                                <span class="color-white d-none d-sm-inline-block" ng-if="!comparingRevision">{{::('recordLoaderT.compare'|$translate)}} </span>
+                                <span class="color-white d-none d-sm-inline-block" ng-if="comparingRevision">{{::('recordLoaderT.comparing'|$translate)}} <span
+                                        ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="comparisonMenu">
+                                <li ng-if="loadingRevisions" ng-disabled="isComparing">
+                                    <a class="dropdown-item" ng-href="#"><i class="fa fa-spin fa-spinner"></i> {{::('recordLoaderT.loading'|$translate)}}</a>
+                                </li>
+                                <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions" ng-disabled="isComparing"
+                                    ng-class="{'active':revision.revision==comparingRevision}">
+                                    <a class="dropdown-item" ng-href="#" ng-click="showDifference(revision.revision)"
+                                        ng-bind="revision.uniqueIdentifier"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div ng-if="isComparing">
+                            <div id="compareSchemaView"></div>
+                        </div>
+                    </div> 
+                    <div ng-show="hideClose" class="full-text-display float-end compare-buttons pe-2 ps-2 position-relative text-white">
+                        <span class="color-white">|&nbsp;</span>
+                        <a rel="noopener" title="{{::('resultDefaultT.close'|$translate)}}"
+                            class="btn btn-sm   p-0 px-1 color-white"
+                            ng-click="closeDoc()">
+                            <i class="bi bi-x-circle"></i> <span class="d-none d-sm-inline-block">Close</span>
+                        </a>
+                    </div>
+                </div> 
+        </div>   
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> {{::('recordLoaderT.loading'|$translate)}}</span>
         <div id="schemaView" ng-show="internalDocument"></div>
     </div>

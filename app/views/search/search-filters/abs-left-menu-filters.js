@@ -1,4 +1,7 @@
-import absFilters from '~/app-text/views/search/search-filters/abs-left-menu-filters.json';
+import absFiltersTranslations from '~/app-text/views/search/search-filters/abs-left-menu-filters.json';
+import { mergeTranslationKeys } from '../../../services/translation-service';
+
+const absFilters = mergeTranslationKeys(absFiltersTranslations);
 
 export const absLeftMenuFilters = {
 	"contact" : [{
@@ -226,10 +229,10 @@ export const absLeftMenuFilters = {
 			"field": "keywords_ss"
 		},
 		{
-			"type": "thesaurus",
-			"term": "usage",
+			"type": "customListFn",
+			"fn": "usagesCustomFn",
 			"title": absFilters.usage,
-			"field": "usages_ss"
+			"fieldfn": "buildCustomConfidentialQueryFn"
 		},
 		{
 			"type": "yesNo",

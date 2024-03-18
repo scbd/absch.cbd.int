@@ -1,4 +1,6 @@
-import bchFilters from '~/app-text/views/search/search-filters/bch-left-menu-filters.json';
+import bchFiltersTranslations from '~/app-text/views/search/search-filters/bch-left-menu-filters.json';
+import { mergeTranslationKeys } from '../../../services/translation-service';
+const bchFilters = mergeTranslationKeys(bchFiltersTranslations);
 export const bchLeftMenuFilters = {
     "authority": [
         {

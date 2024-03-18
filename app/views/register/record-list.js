@@ -9,9 +9,10 @@ import '~/views/forms/edit/editFormUtility';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
-import joyRideText from '~/app-text/views/register/submit-summary-joyride-tour.json';
-import recordListT from '~/app-text/views/register/record-list.json';
-
+import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
+import recordListT from '~/app-text/views/register/record-list.json'; 
+import { mergeTranslationKeys } from '../../services/translation-service';
+const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
         export { default as template } from './record-list.html';
 
         export default ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
