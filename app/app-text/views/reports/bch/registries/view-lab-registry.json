@@ -1,0 +1,19 @@
+{
+    "registries": "Registries",
+    "geneticElementRegistry": "Genetic Element Registry",
+    "labTitle": "Laboratories (LAB) Registry",
+    "lmoTitle": "LMO Registry",
+    "organismRegistry": "Organism Registry",
+    "labRegistry": "Laboratory Registry",
+    "labInfo": "The LAB Registry provides summary of information on all laboratories, registered in the BCH, that are involved in the detection and identification of living modified organisms (LMOs). For more information on sampling, detection and identification of LMOs, please refer to the dedicated <a class='text-decoration-underline' rel='noopener' translation-url target='_blank' href='https://bch.cbd.int/en/portals/detection'>portal</a>.",
+    "clickHere": "Click <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=laboratoryDetection'>here</a> to perform an in-depth search of all LAB records available in this Registry.",
+    "loading": "Loading...",
+    "error": "Error loading registry records, please try again.",
+    "totalRecords": "Total records:",
+    "export": "Export",
+    "click": "Click",
+    "recordID": "Record ID",
+    "laboratoryName": "Laboratory name",
+    "servicesAndActivities": "Services and activities performed",
+    "typesOfDetection": "Types of detection/identification method(s) available for use in the laboratory"
+}
