@@ -5,10 +5,11 @@ import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/block-region-directive';
 import '~/components/scbd-angularjs-controls/main';
 import 'angular-joyride';
-import joyRideText from '~/app-text/views/countries/country-profile-joyride-tour.json';
+import joyRideTextTranslations from '~/app-text/views/countries/country-profile-joyride-tour.json';
 import countryListTranslation from '~/app-text/views/countries/country-list.json';
 import '~/views/report-analyzer/filters/ascii';
-
+import { mergeTranslationKeys } from '../../services/translation-service';
+const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
     export { default as template } from './country-list.html';
 
   export default ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 

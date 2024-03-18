@@ -5,7 +5,7 @@ import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import 'toastr';
-import joyRideText      from '~/app-text/views/search/search-joyride-tour.json';
+import joyRideTextTranslations from '~/app-text/views/search/search-joyride-tour.json';
 import  { scbdSchemas } from '~/components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
 import {getLimitedTerms} from '~/services/common';
@@ -25,8 +25,10 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
-import searchDirectiveT from '~/app-text/views/search/search-directive.json';
-
+import 'angular-vue'
+import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
+import { mergeTranslationKeys } from '../../services/translation-service.js';
+const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
     app.directive('searchDirective', function() {
         return {
             restrict: 'EA',
@@ -983,7 +985,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             "identifier": "usagesConfidential_b",
                             "name": "usagesConfidential_b",
                             "title": {
-                                "en": "Confidential"
+                                "en": searchDirectiveT.confidential
                             }
                         })
                         return usages    
