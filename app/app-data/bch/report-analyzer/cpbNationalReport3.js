@@ -1,5 +1,6 @@
-import nr3Data from '../../../app-text/report-analyzer/bch-cpbNationalReport3.json';
-
+import nr3Translation from '../../../app-text/report-analyzer/bch-cpbNationalReport3.json';
+import { mergeTranslationKeys } from '~/services/translation-service';
+const nr3Data = mergeTranslationKeys(nr3Translation);
 export const cpbNationalReport3 = [
   {
      "key":"General",
