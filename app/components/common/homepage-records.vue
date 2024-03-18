@@ -86,33 +86,8 @@
       "start": 0,
       "rows": rows
     };
-    const responseList = await articlesApi.getRecords(query);
-
-<script>
-    import ArticlesApi  from '../kb/article-api';
-	  import i18n from '../../app-text/components/common/homepage-records.json';
-    import "../kb/filters";
-    import { formatDate } from '~/components/kb/filters'
-    recordList.value = responseList?.response?.docs || [];
-
-    loading.value = false;
-  };
-
-  const seeMore = () => {
-    if (type == 'reference')
-    router.push({ path: 'search', query: { currentPage: '1', tab: 'referenceRecords' } });
-    else
-    router.push({ path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' } });
-  };
-
-  const recordUrl = function (record){
-    if(!record.uniqueIdentifier_s)
-      return;
-    const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
-    const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
-    const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
-    return `database/${shortCode}/${uid}`;
-  };
+    recordList.value = await articlesApi.getRecords(query);
+  }
 </script>
   
   <style scoped>

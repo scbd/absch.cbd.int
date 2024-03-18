@@ -26,8 +26,8 @@
                         </div>
                     </div>
                     <div v-if="article.adminTags" class="card-footer">
-                        <a v-for="tag in article.adminTags" type="button"
-                            class="btn btn-sm btn-outline-secondary m-1 me-2" :href="`${tagUrl(tag)}`">
+                        <a v-for="tag in article.adminTags" :key="tag" 
+                            type="button" class="btn btn-sm btn-outline-secondary m-1 me-2" :href="`${tagUrl(tag)}`">
                             {{tag}}
                         </a>
                     </div>
@@ -46,44 +46,6 @@
     </div>
 </template>
 
-<script>
-import i18n from '../../app-text/components/kb.json';
-import relevantArticles from "./relevant-articles.vue";
-import ArticlesApi from './article-api';
-import './filters';
-import popularTags from './popular-tags.vue';
-import articlesMaxin from '../maxin/article';
-import { formatDate, lstring } from './filters';
-
-export default {
-    name: 'KbArticleDetails',
-    components: {
-        relevantArticles,
-        popularTags
-    },
-    props: {
-    },
-    data: () => {
-        return {
-            article: [],
-            categories: [],
-            loading: true
-        }
-    },
-    created() {
-        this.tag = (this.$route.params.tag).replace(/"/g, "");
-        this.articlesApi = new ArticlesApi();
-    },
-    mixins: [articlesMaxin],
-    async mounted() {
-        this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
-        if (this.$route.params == undefined) return;
-        try {
-            let id = (this.$route.params.id).replace(/"/g, "");
-            let article = await this.articlesApi.getArticleById(encodeURIComponent(id));
-            article = article || { meta: {} }
-            if (article?.content != undefined) {
-                this.article = article;
 <script setup>
     import { ref, onMounted } from "vue";
     import { useI18n } from 'vue-i18n';
@@ -129,20 +91,14 @@ export default {
             window.history.back();
         };
     const tagUrl = function (tag) { 
-            const tagDetails = categories.value.find(e => e.adminTags.includes(tag))
-            const tagTitle = (tagDetails?.title || '');
-            return this.getUrl(tagTitle, undefined, tag);
-        },
-        articleUrl(article, tag) {
-            return this.getUrl(lstring(article.title), article._id, tag);
-        },
-        getSizedImage(url, size) {
-            return getUrl(tagTitle, undefined, tag);
-        };
-
-    const getSizedImage = function (url, size) {
-            return url && url
-                .replace(/attachments.cbd.int\//, '$&' + size + '/')
-                .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/')
-        }
+        const tagDetails = categories.value.find(e => e.adminTags.includes(tag))
+        const tagTitle = (tagDetails?.title || '');
+        return this.getUrl(tagTitle, undefined, tag);
+    }
+    function articleUrl(article, tag) {
+        return this.getUrl(lstring(article.title), article._id, tag);
+    }
+    function getSizedImage(url, size) {
+        return getUrl(tagTitle, undefined, tag);
+    };
 </script>
