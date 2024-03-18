@@ -1,5 +1,6 @@
-﻿import nr1Data from '../../../app-text/report-analyzer/abs-npInterimNationalReport1.json';
-
+﻿import interimReportT from '../../../app-text/report-analyzer/abs-npInterimNationalReport1.json';
+import { mergeTranslationKeys } from '~/services/translation-service';
+const nr1Data = mergeTranslationKeys(interimReportT);
 export const npInterimNationalReport1 = [
     {
        "key":"General",

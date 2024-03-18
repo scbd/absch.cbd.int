@@ -88,6 +88,11 @@
     };
     const responseList = await articlesApi.getRecords(query);
 
+<script>
+    import ArticlesApi  from '../kb/article-api';
+	  import i18n from '../../app-text/components/common/homepage-records.json';
+    import "../kb/filters";
+    import { formatDate } from '~/components/kb/filters'
     recordList.value = responseList?.response?.docs || [];
 
     loading.value = false;

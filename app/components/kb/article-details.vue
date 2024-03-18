@@ -46,6 +46,44 @@
     </div>
 </template>
 
+<script>
+import i18n from '../../app-text/components/kb.json';
+import relevantArticles from "./relevant-articles.vue";
+import ArticlesApi from './article-api';
+import './filters';
+import popularTags from './popular-tags.vue';
+import articlesMaxin from '../maxin/article';
+import { formatDate, lstring } from './filters';
+
+export default {
+    name: 'KbArticleDetails',
+    components: {
+        relevantArticles,
+        popularTags
+    },
+    props: {
+    },
+    data: () => {
+        return {
+            article: [],
+            categories: [],
+            loading: true
+        }
+    },
+    created() {
+        this.tag = (this.$route.params.tag).replace(/"/g, "");
+        this.articlesApi = new ArticlesApi();
+    },
+    mixins: [articlesMaxin],
+    async mounted() {
+        this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
+        if (this.$route.params == undefined) return;
+        try {
+            let id = (this.$route.params.id).replace(/"/g, "");
+            let article = await this.articlesApi.getArticleById(encodeURIComponent(id));
+            article = article || { meta: {} }
+            if (article?.content != undefined) {
+                this.article = article;
 <script setup>
     import { ref, onMounted } from "vue";
     import { useI18n } from 'vue-i18n';
@@ -93,6 +131,12 @@
     const tagUrl = function (tag) { 
             const tagDetails = categories.value.find(e => e.adminTags.includes(tag))
             const tagTitle = (tagDetails?.title || '');
+            return this.getUrl(tagTitle, undefined, tag);
+        },
+        articleUrl(article, tag) {
+            return this.getUrl(lstring(article.title), article._id, tag);
+        },
+        getSizedImage(url, size) {
             return getUrl(tagTitle, undefined, tag);
         };
 

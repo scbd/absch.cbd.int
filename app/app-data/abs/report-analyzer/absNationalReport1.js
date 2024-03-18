@@ -1,5 +1,6 @@
-import nr1T from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
-
+import nr1Translation from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
+import { mergeTranslationKeys } from '~/services/translation-service';
+const nr1T = mergeTranslationKeys(nr1Translation);
 export const absNationalReport1 = [
    {
       "key": "Part-II",
