@@ -1,4 +1,6 @@
-import fpCategoryTitle from '~/app-text/report-analyzer/bch-focal-point-category.json';
+import fpCategoryTitleTranslations from '~/app-text/report-analyzer/bch-focal-point-category.json';
+import { mergeTranslationKeys } from '../../services/translation-service';
+const fpCategoryTitle = mergeTranslationKeys(fpCategoryTitleTranslations);
 
 export const categories = [
     { 
