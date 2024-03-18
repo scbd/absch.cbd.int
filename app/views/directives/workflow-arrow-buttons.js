@@ -7,9 +7,10 @@ import 'ngDialog';
 import 'toastr';
 import '~/views/forms/directives/document-sharing';
 import 'ck-editor-css';
-import toasterMessages from '~/app-text/views/directives/toaster-messages.json';
+import toasterMessagesTranslations from '~/app-text/views/directives/toaster-messages.json';
 import workflowButtonsT from '~/app-text/views/directives/workflow-arrow-buttons.json';
-
+import { mergeTranslationKeys } from '../../services/translation-service';
+const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
     'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog', '$window', 'translationService',
