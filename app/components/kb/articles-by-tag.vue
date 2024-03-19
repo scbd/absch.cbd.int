@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-lg-8">
-            <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
+            <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
             <div class="row match-height" v-if="!loading">
                 <div class="article-by-tags" v-if="articles">
                     <h4>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div v-if="articlesCount<1" class="alert alert-light">
-                        <strong>{{ $t("noResultFound") }}</strong>
+                        <strong>{{ t("noResultFound") }}</strong>
                     </div>
                 </div>
             </div>
@@ -53,76 +53,62 @@
         </div>
     </div>
 </template>
-<script>
+<script setup>
+    import { ref, onMounted } from "vue";
+    import { useI18n } from 'vue-i18n';
+    import messages from '../../app-text/components/kb.json';
+    import relevantArticles from './relevant-articles.vue';
+    import paginate from './pagination.vue';
+    import popularTags from './popular-tags.vue';
+    import ArticlesApi from './article-api';
+    import { formatDate, lstring } from './filters';
+    import './filters';
+    import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
+    import { useRealm } from '../../services/composables/realm.js';
+    import {  useRoute } from "@scbd/angular-vue/src/index.js";
+    const { t } = useI18n({ messages });
+    const articlesApi = new ArticlesApi();
+    const realm = useRealm();
+    const route = useRoute();
+    const articles = ref({}); 
+    const loading = ref(true);
+    const tag = ref('');
+    let tagDetails =  {};
+    let articlesCount = 0;
+    let pageNumber=  1;
+    let recordsPerPage = 10;
 
-	import i18n from '../../app-text/components/kb.json';
-import paginate from './pagination.vue';
-import relevantArticles from "./relevant-articles.vue";
-import ArticlesApi from './article-api';
-import './filters';
-import popularTags from './popular-tags.vue';
-import articlesMaxin from '../maxin/article';
-import {formatDate, lstring} from './filters';
-
-export default {
-    name: 'KbArticlesByTag',
-    components: {
-        relevantArticles,
-        paginate,
-        popularTags
-    },
-    props: {},
-    created() {
-        this.articlesApi = new ArticlesApi();
-    },
-    data: () => {
-        return {
-            articles: [],
-            loading: true,
-            tagDetails: {},
-            categories: {},
-            articlesCount: 0,
-            pageNumber: 1,
-            recordsPerPage: 10
-        }
-    },
-    mixins: [articlesMaxin],
-    async mounted() {
-        const tag = (this.$route.params.tag).replace(/"/g, "");
-        if (tag != undefined && tag != null) {
-            this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
-            this.tagDetails = this.categories.find(e => e.adminTags.includes(tag)) || {
-                title: tag
+    onMounted(async () => {  
+        const paramTag = (route.value?.params?.tag).replace(/"/g, "");
+        if (paramTag != undefined && paramTag != null) {
+            const categories = await loadKbCategories(realm.is('BCH'));
+            tagDetails = categories.find(e => e.adminTags.includes(paramTag)) || {
+                title: paramTag
             };
-            this.tag = tag;
-            this.loadArticles(1, tag);
+            tag.value = paramTag;
+            loadArticles(1, paramTag);
         }
-    },
-    methods: {
-        formatDate,
-        lstring,
-        tagUrl(tag) {
-            const tagDetails = this.categories.find(e => e.adminTags.includes(tag))
-            const tagTitle = (tagDetails?.title || '');
-            return this.getUrl(tagTitle, undefined, tag);
-        },
-        articleUrl(article, tag){
-            return this.getUrl(lstring(article.title), article._id, tag);
-        },
-        onChangePage(pageNumber) {
-            this.pageNumber = pageNumber;
-            this.article = [];
-            this.loading = true;
-            window.scrollTo(0,0);
-            this.loadArticles(pageNumber, this.tag);
-        },
-        async loadArticles(pageNumber, tag) {
+    })
 
-            this.articlesCount = 0;
-            this.articles = [];
+    const articleUrl= function (article, tag){
+            return getUrl(lstring(article.title), article._id, tag);
+        };
+
+    const onChangePage  = function(pageNumber) {
+            pageNumber = pageNumber;
+            articles.value = []; // ToDo ?????
+            loading.value = true;
+            window.scrollTo(0,0);
+            loadArticles(pageNumber, tag.value);
+        };
+
+    const loadArticles = async function (pageNumber, tag) {
+
+            articlesCount = 0;
+            articles.value = [];
             const q = {
                 $and: [{
-                        adminTags: this.$realm.is('BCH') ? 'bch' : 'abs'
+                        adminTags: realm.is('BCH') ? 'bch' : 'abs'
                     },
                     {
                         adminTags: {
@@ -140,14 +126,14 @@ export default {
                 _id: 1
             };
             const groupTags = JSON.stringify([encodeURIComponent(tag)]);
-            const groupLimit = this.recordsPerPage;
-            const groupSkip = (pageNumber - 1) * this.recordsPerPage
+            const groupLimit = recordsPerPage;
+            const groupSkip = (pageNumber - 1) * recordsPerPage
             const groupSort = {
                 "meta.createdOn": -1
             };
 
             try {
-                const result = await this.articlesApi.queryArticleGroup('adminTags', {
+                const result = await articlesApi.queryArticleGroup('adminTags', {
                   q,
                   f,
                   groupLimit,
@@ -158,8 +144,8 @@ export default {
                 if (result?.length) {
 
                   result.forEach(element => {
-                    this.articlesCount = this.articlesCount + element.count;
-                    this.articles = [...this.articles, ...element.articles];
+                    articlesCount = articlesCount + element.count;
+                    articles.value = [...articles.value, ...element.articles];
                   });
                 }
             }
@@ -167,19 +153,13 @@ export default {
                 console.error(e);
             }
             finally {
-                this.loading = false;
+                loading.value = false;
             }
-        },
-        getSizedImage(url, size){
+        };
+
+    const getSizedImage = function (url, size){
             return url && url
             .replace(/attachments.cbd.int\//, '$&'+size+'/')
             .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&'+size+'/')
-        }
-    },
-    i18n: {
-        messages: {
-            en: i18n
-        }
-    }
-}
+        };
 </script>
