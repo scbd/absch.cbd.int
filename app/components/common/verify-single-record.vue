@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isLoading" class="fs-5">
-            <LoadingModal :caption="$t('validatingRecord')"/>
+            <LoadingModal :caption="t('validatingRecord')"/>
         </div>
         <div class="modal fade" ref="verifyModal" data-bs-backdrop="static" data-bs-keyboard="false" 
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">      
@@ -18,16 +18,16 @@
                                 <div class="alert alert-danger">
                                     <div class="bi bi-exclamation-sign"></div>
                                     <div>
-                                    {{$t('message')}}
+                                    {{t('message')}}
                                     <span>{{ alertSeconds }}</span>
-                                    {{$t('seconds')}}
+                                    {{t('seconds')}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer mt-0 d-block">
-                            <button type="button" @click="openExisting()" class="btn btn-primary px-3 float-end ng-binding">{{$t('redirectNow')}}</button>
+                            <button type="button" @click="openExisting()" class="btn btn-primary px-3 float-end ng-binding">{{t('redirectNow')}}</button>
                     </div>
                 </div>
             </div>
@@ -35,72 +35,80 @@
     </div>    
 </template>
   
-<script>
-import KmDocumentApi from "~/api/km-document";
-import { Modal } from "bootstrap";
-import i18n from '../../app-text/components/common/verify-single-record.json';
-import LoadingModal  from '~/components/common/loading-modal.vue'
+<script setup>
+    import { ref, onMounted, watch } from "vue";
+    import { useI18n } from 'vue-i18n';
+    import messages from '../../app-text/components/common/verify-single-record.json';
+    import { useRealm } from '../../services/composables/realm.js';
+    import { useRoute, useRouter } from "@scbd/angular-vue/src/index.js";
+    import KmDocumentApi from "~/api/km-document";
+    import { Modal } from "bootstrap";
+    import LoadingModal  from '~/components/common/loading-modal.vue';
+    const { t } = useI18n({ messages });
+    const realm = useRealm();
+    const route = useRoute();
+    const router = useRouter();
+    const kmDocumentApi = new KmDocumentApi();
 
-const kmDocumentApi = new KmDocumentApi();
+    let modal = null;
+    const schemaTitle = ref('');
+    const alertSeconds = ref(10);
+    const isLoading = ref(false);
+    const verifyModal = ref(null);
+    let existingIdentifier = [];
+    
+    const {schema, government } = defineProps({
+        schema: String,
+        government: String
+        });
 
-export default {
-    name: 'verifySingleRecord',
-    components : { Modal, LoadingModal },
-    props: ["schema", "government"],
-    data(){
-        return {
-            modal: null,
-            schemaTitle: '',
-            alertSeconds: 10,
-            isLoading: false,
-            existingIdentifier: []
-        }
-    },
-    created(){
-        this.schemaTitle = this.$realm.schemas[this.schema].title.en;
-        if(this.government)
-            this.countryHasReport(this.government);
-    },
-    watch: {
-        government: function (newValue, oldValue) {
-            this.countryHasReport(this.government);
-        } 
-    },
-    methods:{                
-        startTime(){
+    onMounted(() => {
+        schemaTitle.value = realm.schemas[schema].title.en;
+        if (government)
+            countryHasReport(government);
+    });
+    //ToDo: ?
+    watch(government, (newValue, oldValue) => {
+        countryHasReport(newValue);
+    });
+
+    const startTime = function (){
             setTimeout(()=>{
-                if(this.alertSeconds == 1){																	
-                    this.openExisting();
+                if(alertSeconds.value == 1){																	
+                    openExisting();
                 }
                 else{
-                    this.alertSeconds --;																
-                    this.startTime();
+                    alertSeconds.value --;																
+                    startTime();
                 }
             }, 1000)
-        },
+        };
 
-        openDialog(){
-            this.isLoading = false;
-            this.modal.show('static');  
-            this.startTime();
-        },
-        openExisting(){
-            const shortCode = this.$realm.schemas[this.schema].shortCode;
-            this.modal.hide();
-            this.$router.push({
-                path: `register/${shortCode}/${this.existingIdentifier}/edit`
+    const openDialog = function(){
+            isLoading.value = false;
+            modal.show('static');  
+            startTime();
+        };
+
+    const openExisting = function (){
+            const shortCode = realm.schemas[schema].shortCode;
+            modal.hide();
+            router.push({
+                path: `register/${shortCode}/${existingIdentifier}/edit`
             });
-        },
-        async countryHasReport(government){
-            this.isLoading = true;
+        };
+    const countryHasReport = async function (government){
+            isLoading.value = true;
             const query = {
-                $filter : `(type eq '${this.schema}')`,
+                $filter : `(type eq '${schema}')`,
                 $top: 10,
                 collection: 'my'
             }
             let queryDraft = {...query};
             queryDraft.collection = 'mydraft';
-
+            // ToDo:
+            // http://localhost:2010/api/v2013/documents/?$filter=(type+eq+cpbNationalReport5)&$top=10&collection=my
+            // {"statusCode": 401,"code": "unauthorized"}
             const records = await Promise.all([kmDocumentApi.queryDocuments(query),kmDocumentApi.queryDocuments(queryDraft)]);
 
             const filterByGovernment = function(item){
@@ -108,17 +116,13 @@ export default {
             }              
             const published   = (records[0]||{}).Items?.find(filterByGovernment);
             const draft       = (records[1]||{}).Items?.find(filterByGovernment);
-            this.existingIdentifier = (published||draft)?.identifier;
+            existingIdentifier = (published||draft)?.identifier;
 
-            if (((published || draft) && (!this.$route.params.identifier || this.$route.params.identifier != this.existingIdentifier))) {
-                this.modal = new Modal(this.$refs.verifyModal);
-                this.openDialog();
+            if (((published || draft) && (!route.params.identifier || route.params.identifier != existingIdentifier))) {
+                modal = new Modal(verifyModal.value); // todo ref
+                openDialog();
             } else {
-                this.isLoading = false;
+                isLoading.value = false;
             }
-        }
-    },
-
-    i18n: { messages:{ en: i18n }} 
-}
+    }
 </script>
