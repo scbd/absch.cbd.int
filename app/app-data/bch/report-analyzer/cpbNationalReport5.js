@@ -1,5 +1,6 @@
-import nr5T from '../../../app-text/views/forms/edit/bch/edit-national-report-5.json';
-
+import nr5Translation from '../../../app-text/views/forms/edit/bch/edit-national-report-5.json';
+import { mergeTranslationKeys } from '~/services/translation-service';
+const nr5T = mergeTranslationKeys(nr5Translation);
 export const cpbNationalReport5 = [
    {
             "key":"Article2",

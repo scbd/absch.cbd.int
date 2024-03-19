@@ -49,7 +49,6 @@ async function copyFiles(source, destination){
             const directory = directories[i];
             
             var lang = directory.split('-');
-            console.log(lang)
             if(lang && lang.length > 1){
                 if(supportedLanguages.includes(lang[0])){
                     var language = lang[0];
@@ -73,7 +72,7 @@ async function copyFolderFiles(sourceRootPath, source, lang, destination){
         const stats = await fs.stat(filepath)
             
         if(stats.isFile()){
-            const destinationFileName = `${destination}/${lang}${filepath.replace(sourceRootPath, '')}`
+            const destinationFileName = `${destination}/${lang}${filepath.replace(sourceRootPath, '').replace('/absch.cbd.int', '')}`
             console.log(destinationFileName)
 
             const dirName = path.dirname(destinationFileName);
