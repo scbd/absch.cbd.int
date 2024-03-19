@@ -2,101 +2,89 @@
     <div class="alert d-flex align-items-center" role="alert" :class="alertClass">
 
         <div v-if="error.code == 'notFound'">
-            <h4 class="alert-heading">Not found!</h4>
+            <h4 class="alert-heading">{{ t('notFound') }}</h4>
             <p>
-                It seems like the resource you are trying to access could not be found. Please double-check the URL.
+                {{ t('notFoundText') }}
             </p>
             <p>
-                We apologize for any inconvenience this may have caused, Thank you for your understanding and cooperation.
+                {{ t('notFoundApology') }}
             </p>
 
             <hr>
 
             <a @click.prevent="back()" href="" class="alert-link">
-                Click here to go back to the previous page.
+                {{ t('backLink') }}
             </a>
         </div>
 
         <div v-else-if="error.code == 'unauthorized'">
-            <h4 class="alert-heading">Authorization required!</h4>
+            <h4 class="alert-heading">{{ t('unauthorized') }}</h4>
             <p>
-                It seems like the resource you are trying to access is restricted and requires authentication.
-                To access this resource, you'll need to <a class="alert-link" href="#" @click.prevent="login()">sign in</a>
-                using your credentials.
+                {{ t('unauthorizedText') }} <a class="alert-link" href="#" @click.prevent="login()">{{ t('signIn') }}</a>
+                {{ t('usingCredential') }} 
             </p>
             <p>
-                Don't worry, signing in is a quick and easy process, and it will ensure that you have the proper permissions
-                to view the content you're looking for.
-                Once you've signed in, you should be able to access the resource and all its benefits.
-            </p>
+                {{ t('unauthorizedBenefits') }}</p>
             <p>
-                Thank you for your understanding and cooperation in this matter.
+                {{ t('unauthorizedApology') }}
             </p>
 
             <hr>
 
             <a @click.prevent="login()" href="" class="alert-link">
-                Please sign me in!
+                {{ t('signInLink') }}
             </a>
         </div>
 
         <div v-else-if="error.code == 'forbidden'">
-            <h4 class="alert-heading">Forbidden</h4>
+            <h4 class="alert-heading">{{ t('forbidden') }}</h4>
             <p>
-                It appears that the resource you are attempting to access is forbidden, and unfortunately, you do not have
-                permission to view it at this time.
+                {{ t('forbiddenText') }} 
             </p>
             <p>
-                If you believe this is a mistake or you feel that you should have access to this resource, please
-                <a class="alert-link" href="mailto:secretariat@cbd.int">contact the Secretariat</a>.
-            </p>
-
-            <p>
-                You can <a @click.prevent="refresh()" href="#" class="alert-link">try refreshing the page</a> to see
-                if it resolves the error.
+                {{ t('forbiddenContact') }} 
+                <a class="alert-link" href="mailto:secretariat@cbd.int">{{ t('contact') }}</a>.
             </p>
 
             <p>
-                We apologize for any inconvenience this may have caused, we want to ensure that only authorized users have
-                access to sensitive information.
-                Thank you for your understanding and cooperation.
+                {{ t('youCan') }} <a @click.prevent="refresh()" href="#" class="alert-link">{{ t('try') }} </a> {{ t('watch') }}
+            </p>
+
+            <p>
+                {{ t('forbiddenApology') }}
             </p>
 
         </div>
 
 
         <div v-else>
-            <h4 class="alert-heading">Unexpected error!</h4>
+            <h4 class="alert-heading">{{ t('unexpected') }}</h4>
 
             <p>
-                We are sorry to inform you that an unexpected error has occurred on this page.
-                We understand that this is very unfortunate and may have caused inconvenience to you.
+                {{ t('unexpectedText') }} </p>
+
+            <p>
+                {{ t('youCan') }} <a @click.prevent="refresh()" href="#" class="alert-link">{{ t('try') }} </a> {{ t('watch') }}
             </p>
 
             <p>
-                You can <a @click.prevent="refresh()" href="#" class="alert-link">try refreshing the page</a> to see
-                if it resolves the error.
-            </p>
-
-            <p>
-                Please don't hesitate to <a class="alert-link" href="mailto:secretariat@cbd.int">contact the Secretariat</a>
-                if you have any further questions or concerns.
+                {{ t('unexpectedContact') }} <a class="alert-link" href="mailto:secretariat@cbd.int">{{ t('contact') }}</a>
+                {{ t('concern') }}
             </p>
 
             <hr>
 
             <div>
-                If you would like <a class="alert-link" href="#" @click.prevent="moreInfo()">more information about this
-                    message</a>, you can <a class="alert-link" href="#" @click.prevent="moreInfo()">click here</a>.
+                {{ t('moreInfoLink') }} <a class="alert-link" href="#" @click.prevent="moreInfo()">{{ t('moreInformation') }} </a>, {{ t('youCan') }} <a class="alert-link" href="#" @click.prevent="moreInfo()">{{ t('clickHere') }}</a>.
             </div>
 
             <div v-if="showMoreInfo">
                 <hr>
                 <div v-if="error.code">
-                    Error: <b>{{ error.code }}</b>
+                    {{ t('errorLabel') }} <b>{{ error.code }}</b>
                 </div>
                 <div>
-                    Message: {{ error.message }}
+                    {{ t('messageLabel') }} {{ error.message }}
                 </div>
             </div>
 
@@ -106,36 +94,43 @@
     </div>
 </template>
     
-<script>
-
-export default {
-    name: 'Error',
-    props: {
+<script setup>
+    import {useAuth} from '@scbd/angular-vue/src/index.js';
+    import { defineProps, ref ,computed } from 'vue';
+    import { useI18n } from 'vue-i18n';
+    import messages from '../../app-text/components/error.json';
+    const auth = useAuth();
+    const { t } = useI18n({ messages });
+    const { error } = defineProps({
         error: {
-            type: Object,
-            require: true
-
-        },
+        type: Object,
+        required: true,
     },
-    data() {
-        return { showMoreInfo: false }
-    },
-    computed: {
-        alertClass() {
+    });
 
-            if (this.error.code == 'notFound') return 'alert-secondary';
-            if (this.error.code == 'unauthorized') return 'alert-primary';
-            if (this.error.code == 'forbidden') return 'alert-warning';
+const showMoreInfo = ref(false);
 
-            return 'alert-danger'
-        }
-    },
-    methods: {
-        login()    { this.$auth.login(); },
-        refresh()  { location.reload(); },
-        back()     { history.back(); },
-        moreInfo() { this.showMoreInfo = !this.showMoreInfo }
-    }
-};
+    const alertClass = computed(() => {
+        if (error.code === 'notFound') return 'alert-secondary';
+        if (error.code === 'unauthorized') return 'alert-primary';
+        if (error.code === 'forbidden') return 'alert-warning';
 
+        return 'alert-danger';
+        });
+
+    const login = () => {
+        auth.login();
+    };
+
+    const refresh = () => {
+        location.reload();
+    };
+
+    const back = () => {
+        history.back();
+    };
+
+    const moreInfo = () => {
+        showMoreInfo.value = !showMoreInfo.value;
+    };
 </script>
