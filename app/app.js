@@ -106,7 +106,7 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
   });
 
   authentication.onUserChange ((user)  => authPlugin.user(user) );
-  apiToken      .onTokenChange((token) => authPlugin.token(token) );
+  apiToken      .onTokenChange((token) => authPlugin.token('userToken', token, token.expiration) );
 
   registerPlugin(authPlugin);
   

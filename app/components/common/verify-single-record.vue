@@ -46,7 +46,7 @@
     import LoadingModal  from '~/components/common/loading-modal.vue';
     const { t } = useI18n({ messages });
     const realm = useRealm();
-    const route = useRoute();
+    const route = useRoute().value;
     const router = useRouter();
     const kmDocumentApi = new KmDocumentApi();
 
