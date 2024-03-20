@@ -14,9 +14,9 @@ export default ['$scope', 'searchService', '$element', '$rootScope', 'translatio
 			$scope.isLoading = true;
 			//ToDo: need laboratoryName 
 			var searchQuery = {
-				fields:  'recordId:uniqueIdentifier_s,laboratoryName:title_EN_s,servicesAndActivities:services_EN_ss,typesOfDetection:detectionMethods_EN_txt,url_ss',
+				fields:  'recordId:uniqueIdentifier_s,laboratoryName:title_EN_s,servicesAndActivities:services_EN_ss,typesOfDetection:detectionMethods_EN_ss,url_ss',
 				query:  'schema_s:laboratoryDetection',
-				sort:	'scientificName_s asc',
+				sort:	'title_EN_s asc',
 				rowsPerPage: 10000
 			};
 			return searchService.list(searchQuery)
