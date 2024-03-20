@@ -8,7 +8,7 @@ import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/countries/country-profile-joyride-tour.json';
 import countryListTranslation from '~/app-text/views/countries/country-list.json';
 import '~/views/report-analyzer/filters/ascii';
-import { mergeTranslationKeys } from '../../services/translation-service';
+import { mergeTranslationKeys } from '../../services/translation-merge';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
     export { default as template } from './country-list.html';
 
