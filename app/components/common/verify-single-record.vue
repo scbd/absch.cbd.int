@@ -106,9 +106,7 @@
             }
             let queryDraft = {...query};
             queryDraft.collection = 'mydraft';
-            // ToDo:
-            // http://localhost:2010/api/v2013/documents/?$filter=(type+eq+cpbNationalReport5)&$top=10&collection=my
-            // {"statusCode": 401,"code": "unauthorized"}
+            
             const records = await Promise.all([kmDocumentApi.queryDocuments(query),kmDocumentApi.queryDocuments(queryDraft)]);
 
             const filterByGovernment = function(item){
