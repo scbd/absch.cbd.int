@@ -7,7 +7,7 @@ import routesLabelsTranslations from '~/app-text/routes/common-routes-labels.jso
 import { securize, asyncLogError, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
-import { mergeTranslationKeys } from '../services/translation-service';
+import { mergeTranslationKeys } from '../services/translation-merge';
 const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 var baseUrl = require.toUrl("").replace(/\?v=.*$/, "");
 var lang = window.scbdApp.lang;
