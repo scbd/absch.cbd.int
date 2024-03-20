@@ -91,14 +91,14 @@
             window.history.back();
         };
     const tagUrl = function (tag) { 
-        const tagDetails = categories.value.find(e => e.adminTags.includes(tag))
-        const tagTitle = (tagDetails?.title || '');
-        return this.getUrl(tagTitle, undefined, tag);
-    }
-    function articleUrl(article, tag) {
-        return this.getUrl(lstring(article.title), article._id, tag);
-    }
-    function getSizedImage(url, size) {
-        return getUrl(tagTitle, undefined, tag);
-    };
+            const tagDetails = categories.value.find(e => e.adminTags.includes(tag))
+            const tagTitle = (tagDetails?.title || '');
+            return getUrl(tagTitle, undefined, tag);
+        };
+
+    const getSizedImage = function (url, size) {
+            return url && url
+                .replace(/attachments.cbd.int\//, '$&' + size + '/')
+                .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/')
+        }
 </script>
