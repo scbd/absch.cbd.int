@@ -314,13 +314,7 @@ import numbers from '~/app-text/common/numbers.json';
                             else if(mapping.type === '@hasValuesExcept'){
                                 validationPositive   = !_.some(answers, function(a){ return a && mapping.values.indexOf(a.value)>=0});
                             }
-                            // else{
-                            //     console.log(mapping)
-                            // }
                         }
-                        // else{
-                        //     console.log(mapping)
-                        // }
 
                         if(!mapQuestion)
                         mapQuestion.hasValidation = true;
@@ -500,8 +494,6 @@ import numbers from '~/app-text/common/numbers.json';
                                 }
                             }
                         }
-                        else 
-                            console.log(mapping)
                      })
 
                      return prevReportAnswers;
