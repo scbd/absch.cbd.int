@@ -2,93 +2,79 @@
     <div>
         <slot name="title">
             <h4>
-            {{ $t("relevantArticles") }} 
-                <hr></hr>
+            {{ t("relevantArticles") }}
+                <hr/>
             </h4>
         </slot>
-        <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
+        <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
         <ul>
             <li v-for="article in articles" class="mb-1">
                 <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{lstring(article.title, $locale)}}</a>
             </li>
         </ul>
         <div v-if="articles.length<1 && !loading" class="alert alert-light">
-            <strong>{{ $t("noResultFound") }}</strong>
+            <strong>{{ t("noResultFound") }}</strong>
         </div>
     </div>
-</template>
-
-<script>
-import ArticlesApi from './article-api';
-import i18n from '../../app-text/components/kb.json';
-import articlesMaxin from '../maxin/article';
-import { lstring } from './filters';
-export default {
-    name: 'kbRelevantArticles',
-    components: {},
-    props: {
-        tag: String,
-        type: String,
+  </template>
+  
+<script setup>
+    import { ref, onMounted } from "vue";
+    import ArticlesApi from "./article-api";
+    import { getUrl } from '../../services/composables/articles.js';
+    import { lstring } from "./filters";
+    import { useRealm } from '../../services/composables/realm.js';
+    import { useI18n } from 'vue-i18n';
+    import messages from '../../app-text/components/kb.json';
+    const { t } = useI18n({ messages });
+    const realm = useRealm();
+    const { tag, type, sort } = defineProps({
+        tag: { type: String, required: false },
+        type:{ type: String, required: false },
         sort: {
-            type: Boolean,
-            default: false
-        }
-    },
-    data: () => {
-        return {
-            articles: [],
-            loading: true
-        }
-    },
-    created() {
-        this.articlesApi = new ArticlesApi();
-    },
-    mixins: [articlesMaxin],
-    async mounted() {
+                type: Boolean,
+                required: false,
+                default: false
+            }
+    });
 
-        let ag = [];
-        ag.push({"$match":{"$and":[{"adminTags": { $all : [this.$realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
-        ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(this.tag)}]}});
+    const articles = ref([]);
+    const loading = ref(true);
+    const articlesApi = new ArticlesApi();
+
+    onMounted(async () => {
+    let ag = [];
+    ag.push({"$match":{"$and":[{"adminTags": { $all : [realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
+        ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(tag)}]}});
         ag.push({"$project" : {[`title`]:1}});
         ag.push({"$limit" : 6});
-        if(this.sort)
+        if(sort)
             ag.push({"$sort" : {"meta.modifiedOn":-1}});
- 
+
         const query = {
-          "ag" : JSON.stringify(ag)
+            "ag" : JSON.stringify(ag)
         };
-        try {
-            const articlesList = await this.articlesApi.queryArticles(query);
-            if ((articlesList || []).length) {
-              if(this.sort)
-                 this.articles = articlesList;
-              else
-                this.articles = this.shuffleArray(articlesList);
-            }
+    try {
+        const articlesList = await articlesApi.queryArticles(query);
+        if ((articlesList || []).length) {
+        if (sort) articles.value = articlesList;
+        else articles.value = shuffleArray(articlesList);
         }
-        catch(e) {
-           console.error(e);
-        }
-        finally {
-            this.loading = false;
-        }
-    },
-    methods: {
-        lstring,
-      articleUrl(article) {
-            return this.getUrl(lstring(article.title), article._id, this.tag);
-        },
-        shuffleArray(array) {
-            return array
-                .map(value => ({ value, sort: Math.random()*100}))
-                .sort((a, b) => a.sort - b.sort)
-                .map(({ value }) => value)
-        },
-    },
-    i18n: {
-        messages: {
-            en: i18n
-        }
+    } catch (e) {
+        console.error(e);
+    } finally {
+        loading.value = false;
     }
-}
+    });
+
+    const articleUrl = (article) => {
+        return getUrl(lstring(article.title), article._id, tag);
+    };
+
+    const shuffleArray = (array) => {
+        return array.map((value) => ({ value, sort: Math.random() * 100 }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({ value }) => value);
+    };
+ 
 </script>
