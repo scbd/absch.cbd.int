@@ -1,0 +1,79 @@
+<div>
+	<div class="container-fluid">
+		<div class="panel panel-default registry-details">
+			<div class="panel-heading">
+				<h2>{{::('viewLabRegistryT.labTitle'|$translate)}}</h2>
+			</div>
+			<div class="panel-body bg-white">
+				<div class="row">
+					<div class="col-md-2">
+						<div ng-class="{'btn-group':deviceSize=='xs'}" class="w-100">
+							<button ng-if="deviceSize=='xs'" type="button" class="w-100 btn btn-default dropdown-toggle"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fa fa-bars"></i> {{::('viewLabRegistryT.registries'|$translate)}} <span class="caret"></span>
+							</button>
+							<ul ng-class="{'dropdown-menu':deviceSize=='xs','list-group':deviceSize!='xs'}">
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>{{::('viewLabRegistryT.registries'|$translate)}}</b></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url
+										href="/registries/living-modified-organisms">{{::('viewLabRegistryT.lmoTitle'|$translate)}}</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url
+										href="/registries/organisms">{{::('viewLabRegistryT.organismRegistry'|$translate)}}</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url
+										href="/registries/genetic-elements">{{::('viewLabRegistryT.geneticElementRegistry'|$translate)}}</a></li>
+										<li class="list-group-item active"><a rel="noopener" translation-url
+											href="/registries/laboratories">{{::('viewLabRegistryT.labRegistry'|$translate)}}</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-12 col-md-10 ps-3">
+						<p class="p-borders p-bo pt-2">
+							<span ng-bind-html="::('viewLabRegistryT.labInfo'|$translate)"></span>
+						</p>
+						<p class="fst-italic py-2 color-black fw-bold">
+							<span ng-bind-html="::('viewLabRegistryT.clickHere'|$translate)"></span>
+						</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> {{::('viewLabRegistryT.loading'|$translate)}}</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> {{::('viewLabRegistryT.error'|$translate)}}</h3></div>
+						<div ng-if="!isLoading && !isError">						
+						<div class="row">
+							<div class="col-md-12">
+								<strong>{{::('viewLabRegistryT.totalRecords'|$translate)}}  <span ng-bind="::numFound" class="text-bold"></span></strong>							
+								<button type="button" class="btn btn-default float-end" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!labRecords.length || readyForExport">
+									<i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> {{::('viewLabRegistryT.export'|$translate)}}
+								</button>
+							</div>
+						</div>
+						<div>
+							<table class="table" id="labExport">
+								<thead>
+									<tr>
+										<th class="display-18">{{::('viewLabRegistryT.recordID'|$translate)}}</th>
+										<th class="display-20">{{::('viewLabRegistryT.laboratoryName'|$translate)}}</th>
+										<th class="display-32">{{::('viewLabRegistryT.servicesAndActivities'|$translate)}}</th>
+										<th class="display-30 hidden-xs">{{::('viewLabRegistryT.typesOfDetection'|$translate)}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in ::labRecords">
+										<td class="tableexport-string">
+											<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}">
+												<span class="text-uppercase" ng-bind="::row.recordId"></span>
+											</a>
+										</td>
+										<td class="tableexport-string"><span ng-bind="::row.laboratoryName"></span></td>
+										<td class="tableexport-string">
+											<span ng-bind="::row.servicesAndActivities.join(', ')"></span>	
+										</td>
+										<td class="tableexport-string truncate-description hidden-xs">
+											<span ng-bind="::row.typesOfDetection.join(', ')"></span>	
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
