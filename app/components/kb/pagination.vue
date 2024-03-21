@@ -19,19 +19,22 @@
   </template>
   
   <script setup>
-  import { ref, computed, defineProps, defineExpose, getCurrentInstance } from 'vue';
+  import { ref, computed, defineProps, defineExpose, defineEmits } from 'vue'; 
   import Paginate from 'vuejs-paginate-next';
   
   const { recordCount, recordsPerPage, currentPage } = defineProps({
     recordCount: { type: Number, required: true },
-    recordsPerPage: { type: Number, required: true },
+    recordsPerPage: { type: Number, required: true }, // ToDo: will add number of records per page
     currentPage: { type: Number, required: true }
   });
+
+  const emit = defineEmits(['changePage']);
+
   const internalCurrentPage = ref(currentPage);
-  const instance = getCurrentInstance(); // to get this
+  
   const setPage = (page) => {  
     internalCurrentPage.value = page;    
-    instance.emit('changePage', page);
+    emit('changePage', page);
   };
   const pageCount = computed(() => Math.ceil(recordCount / recordsPerPage));
 </script>
