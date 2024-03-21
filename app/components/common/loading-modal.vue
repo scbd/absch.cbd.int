@@ -15,23 +15,20 @@
   </div>
 </template>
     
-<script>
-    export default {
-        name: "LoadingModal",
-        props: {
-            caption: {
-            type: String,
-            default: null,
-            },
-        },
-    };
+<script setup>
+  const { caption } = defineProps({
+      caption: {
+      type: String,
+      default : null
+      }
+  });
 </script>
-<style>
-    .show .content {
-        margin: 20% 30%;
-        position: fixed;
-    }
-        .show .content span {
-        color: #fff;
-    }
+<style scoped>
+  .show .content {
+      margin: 20% 30%;
+      position: fixed;
+  }
+  .show .content span {
+      color: #fff;
+  }
 </style>

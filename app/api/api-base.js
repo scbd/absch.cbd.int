@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { isFunction } from 'lodash'
+import {useAuth} from '@scbd/angular-vue/src/index.js';
 
 let sitePrefixUrl = 'https://api.cbd.int';
 
@@ -127,7 +128,8 @@ export function stringifyUrlParams(params){
   return params;
 }
 
-export function defaultTokenReader() {
-  const token = window?.Vue?.prototype?.$auth?.strategy?.token?.get();
-  return token;
+export async function defaultTokenReader() {
+  const auth = useAuth();
+  const userToken = await auth.token();
+  return userToken;
 }
