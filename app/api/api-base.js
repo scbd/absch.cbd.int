@@ -130,6 +130,6 @@ export function stringifyUrlParams(params){
 
 export async function defaultTokenReader() {
   const auth = useAuth();
-  const userToken = await auth.token(undefined);
+  const userToken = await auth.token();
   return userToken;
 }
