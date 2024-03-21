@@ -4,17 +4,12 @@
         {{  caption || '' }}
     </span>
 </template>
-    
-<script>
 
-export default {
-    name: 'Loading',
-    props: {
-        caption:  { 
-            type:  String, 
-            default : null },
-    },
-}
-
-
+<script setup>
+    const { caption } = defineProps({
+        caption: {
+        type: String,
+        default : null
+        }
+    });
 </script>
