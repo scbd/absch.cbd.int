@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isLoading" class="fs-5">
-            <LoadingModal :caption="t('validatingRecord')"/>
+            <loading-modal :caption="t('validatingRecord')"/>
         </div>
         <div class="modal fade" ref="verifyModal" data-bs-backdrop="static" data-bs-keyboard="false" 
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">      
