@@ -22,8 +22,7 @@
     "lodash-es": "^4.17.21",
     "mime": "1.4.1",
     "path-to-regexp": "^6.2.1",
-    "superagent": "5.0.8",
-    "vuejs-paginate-next": "^1.0.2"
+    "superagent": "5.0.8"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
