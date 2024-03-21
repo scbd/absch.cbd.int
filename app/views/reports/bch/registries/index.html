@@ -55,6 +55,25 @@
 				</div>
 
 			</div>
+			<div class="row pt-2">
+				<div class="col-lg-4">
+					<ul class="list-group my-1">
+						<li class="list-group-item">
+							<h4 class="fs-6">
+								<strong>
+									{{::('indexRegistriesT.laboratoryRegistry'|$translate)}}
+									<span class="badge rounded-pill bg-secondary float-end" ng-bind="::count.laboratoryDetection"></span>
+								</strong>
+							</h4>
+							<p class="card-box">{{::('indexRegistriesT.labInfo'|$translate)}}
+							<div>
+								<a rel="noopener" translation-url class="btn btn-sm btn-outline-secondary"
+									href="/registries/laboratories" role="button">{{::('indexRegistriesT.viewRegistry'|$translate)}} </a>
+							</div>
+						</li>
+					</ul>
+				</div> 
+			</div>
 		</div>
 	</div>
 

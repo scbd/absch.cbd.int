@@ -6,7 +6,7 @@ import indexRegistriesT from '~/app-text/views/reports/bch/registries/index.json
 	export { default as template } from './index.html';
 export default ['$scope', 'searchService', 'toastr', '$log', 'solr', 'translationService',
 	function ($scope, searchService, toastr, $log, solr, translationService) {
-				var schemas = ["organism", "modifiedOrganism", "dnaSequence"];
+				var schemas = ["organism", "modifiedOrganism", "dnaSequence", "laboratoryDetection"];
 				translationService.set('indexRegistriesT', indexRegistriesT);      
 				loadRecords();
 				function loadRecords(schema) {
