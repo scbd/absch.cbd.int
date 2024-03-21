@@ -1,38 +1,37 @@
 <template>
     <div class="d-flex justify-content-center text-center">
-        <v-pagination v-if="recordCount>recordsPerPage" v-model="internalCurrentPage" 
-        :per-page="recordsPerPage" :records="recordCount" @paginate="setPage()"></v-pagination>
+      <paginate v-if="recordCount"
+        :page-count="pageCount"
+        :first-last-button="true"
+        :page-range="recordsPerPage"
+        :margin-pages="1"
+        :click-handler="setPage"
+        :prev-text="'Prev'"
+        :next-text="'Next'"
+        :first-button-text="'First'"
+        :last-button-text="'Last'"
+        :container-class="'pagination'"
+        :page-class="'page-item'"
+        v-model="internalCurrentPage"
+      >
+      </paginate>
     </div>
-</template>
-
-<script>
-import 'vue-pagination-2';
-
-export default {
-    name:'kbPagination',
-    components: { vPagination : window["Pagination"] },
-    props:{
-        recordCount     : Number,
-        recordsPerPage  : Number,
-        currentPage     : Number
-    },
-    computed : {
-        internalCurrentPage : {
-            get()  { return this.currentPage },
-            set(p) { this.$emit('update:currentPage', p) }
-        }
-    },
-    data() {
-        return {            
-        }
-    },
-    mounted() {
-        // this.currentPage = this.currentPage || 1;
-    },
-    methods: {
-        setPage(page) {            
-            this.$emit('changePage', this.currentPage);
-        }
-    }
-}
+  </template>
+  
+  <script setup>
+  import { ref, computed, defineProps, defineExpose, getCurrentInstance } from 'vue';
+  import Paginate from 'vuejs-paginate-next';
+  
+  const { recordCount, recordsPerPage, currentPage } = defineProps({
+    recordCount: { type: Number, required: true },
+    recordsPerPage: { type: Number, required: true },
+    currentPage: { type: Number, required: true }
+  });
+  const internalCurrentPage = ref(currentPage);
+  const instance = getCurrentInstance(); // to get this
+  const setPage = (page) => {  
+    internalCurrentPage.value = page;    
+    instance.emit('changePage', page);
+  };
+  const pageCount = computed(() => Math.ceil(recordCount / recordsPerPage));
 </script>
