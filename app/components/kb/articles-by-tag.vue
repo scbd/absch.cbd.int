@@ -58,7 +58,7 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import relevantArticles from './relevant-articles.vue';
-    import paginate from './pagination.vue';
+    import paginate from '../common/pagination.vue';
     import popularTags from './popular-tags.vue';
     import ArticlesApi from './article-api';
     import { formatDate, lstring } from './filters';

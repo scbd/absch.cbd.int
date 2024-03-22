@@ -37,7 +37,7 @@
 </template>
 <script setup>
 	import { ref, onMounted } from 'vue';
-	import Paginate from './pagination.vue';
+	import Paginate from '../common/pagination.vue';
 	import ArticlesApi from './article-api';
 	import { loadKbCategories , getUrl } from '../../services/composables/articles.js'
 	import { lstring } from './filters';

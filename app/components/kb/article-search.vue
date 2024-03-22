@@ -56,7 +56,7 @@
 <script>
 
 import i18n from '../../app-text/components/kb.json';
-import paginate from './pagination.vue';
+import paginate from '../common/pagination.vue';
 import ArticlesApi from './article-api';
 import './filters';
 import articlesMaxin from '../maxin/article';
