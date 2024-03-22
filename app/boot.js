@@ -142,8 +142,6 @@ export default function bootApp(window, require, defineX) {
             'shim'                      :           'libs/require-shim/src/shim',
             
             'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
-            'vuejs-paginate-next'       : 'https://unpkg.com/vuejs-paginate-next@1.0.2/dist/vuejs-paginate-next.umd.js', 
-
 
             'luxon'                     : `${cdnHost}luxon@1.25.0/build/amd/luxon`,
             'scbd-common-articles'      : `${cdnHost}@scbd/common@0.1.1/dist/components/articles/index.umd`,
@@ -172,9 +170,7 @@ export default function bootApp(window, require, defineX) {
             'angucomplete-alt'              : { 'deps': ['angular', 'externalCss']},
 
             'pivottable'                    : { 'deps': ['jquery', 'jquery-ui', 'angular', 'externalCss']},
-            'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']},
-
-            'vuejs-paginate-next'              : { 'deps': [] }
+            'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']}
             
         },
         urlArgs: function(id, url) {
