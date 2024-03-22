@@ -16,31 +16,10 @@
     </div>
 </template>
 
-<script>
+<script setup>
 
     import Faqs from '../../components/kb/faqs.vue';
     import sideBar from '../../components/kb/right-side-bar.vue';
     import search from '../../components/kb/search.vue';
 
-    export default {
-        name:'kbFaqs',
-        components:{
-            Faqs,
-            sideBar,
-            search
-        },
-
-        props:{
-        },
-        data:  () => {
-            return {
-
-            }
-        },
-        watch: {
-            tokenReader: function(tokenReader) {
-                // if(tokenReader) addApiOptions({ tokenReader })
-            }
-        }
-    }
 </script>
