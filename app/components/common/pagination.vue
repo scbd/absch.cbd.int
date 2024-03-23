@@ -1,12 +1,24 @@
 <template>
-  <nav  class="pagination d-flex justify-content-center text-center" v-if="recordCount">
-    <button class="page-item" v-if="firstLastButton" @click="setPage(1)" :disabled="internalCurrentPage === 1">{{ firstButtonText }}</button>
-    <button class="page-item" @click="previousPage" :disabled="internalCurrentPage === 1">{{ prevText }}</button>
-    <template v-for="pageNumber in visiblePageNumbers" :key="pageNumber">
-      <button class="page-item" @click="setPage(pageNumber)" :class="{ 'active': internalCurrentPage === pageNumber }">{{ pageNumber }}</button>
-    </template>
-    <button class="page-item" @click="nextPage" :disabled="internalCurrentPage === pageCount">{{ nextText }}</button>
-    <button class="page-item" v-if="firstLastButton" @click="setPage(pageCount)" :disabled="internalCurrentPage === pageCount">{{ lastButtonText }}</button>
+  <nav v-if="recordCount" aria-label="Pagination" class="pagination d-flex justify-content-center text-center">
+    <ul class="pagination">
+    <li v-if="firstLastButton" @click="setPage(1)" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
+    <a class="page-link">{{ firstButtonText }}</a>
+      </li>
+      <li @click="previousPage" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
+        <a class="page-link">{{ prevText }}</a>
+      </li>
+      <template v-for="pageNumber in visiblePageNumbers" :key="pageNumber">
+        <li @click="setPage(pageNumber)" :class="{ 'active': internalCurrentPage === pageNumber }" class="page-item">
+          <a class="page-link">{{ pageNumber }}</a>
+        </li>
+      </template>
+      <li @click="nextPage" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
+        <a class="page-link">{{ nextText }}</a>
+      </li>
+      <li v-if="lastButtonText" @click="setPage(pageCount)" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
+        <a class="page-link">{{ lastButtonText }}</a>
+      </li>
+    </ul>
   </nav>
 
 </template>
@@ -63,12 +75,14 @@ const visiblePageNumbers = computed(() => {
 const previousPage = () => {
   if (internalCurrentPage.value > 1) {
     internalCurrentPage.value--;
+    setPage(internalCurrentPage.value);
   }
 };
 
 const nextPage = () => {
   if (internalCurrentPage.value < pageCount.value) {
     internalCurrentPage.value++;
+    setPage(internalCurrentPage.value);
   }
 };
 </script>
@@ -77,5 +91,9 @@ const nextPage = () => {
 .pagination{
   /* ToDo: change the style  */
   font-size: 20px;
+  cursor: pointer;
+}
+.disabled {
+  cursor:default !important;
 }
 </style>
