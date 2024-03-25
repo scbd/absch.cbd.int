@@ -1,23 +1,35 @@
 <template>
   <nav v-if="recordCount" aria-label="Pagination" class="pagination d-flex justify-content-center text-center">
     <ul class="pagination">
-    <li v-if="firstLastButton" @click="setPage(1)" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
-    <a class="page-link">{{ firstButtonText }}</a>
+
+      <li v-if="firstLastButton" @click="setPage(1)" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
+        <a class="page-link">{{ firstButtonText }}</a>
       </li>
+      
       <li @click="previousPage" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
         <a class="page-link">{{ prevText }}</a>
       </li>
-      <template v-for="pageNumber in visiblePageNumbers" :key="pageNumber">
-        <li @click="setPage(pageNumber)" :class="{ 'active': internalCurrentPage === pageNumber }" class="page-item">
-          <a class="page-link">{{ pageNumber }}</a>
-        </li>
-      </template>
+      
+      <li v-if="visiblePageNumbers[0] > 1" class="page-item">
+        <a class="page-link">...</a>
+      </li>
+
+      <li v-for="pageNumber in visiblePageNumbers" :key="pageNumber" @click="setPage(pageNumber)" :class="{ 'active': internalCurrentPage === pageNumber }" class="page-item">
+        <a class="page-link">{{ pageNumber }}</a>
+      </li>
+
+      <li v-if="visiblePageNumbers[visiblePageNumbers.length - 1] < pageCount" class="page-item">
+        <a class="page-link">...</a>
+      </li>
+
       <li @click="nextPage" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
         <a class="page-link">{{ nextText }}</a>
       </li>
+
       <li v-if="lastButtonText" @click="setPage(pageCount)" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
         <a class="page-link">{{ lastButtonText }}</a>
       </li>
+
     </ul>
   </nav>
 
