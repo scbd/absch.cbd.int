@@ -3,33 +3,34 @@
     <span style="cursor: help" :title="`${absoluteTime} ${title||''}`" @click="showFullDateTime = !showFullDateTime">{{ showFullDateTime ? absoluteTime : relativeTime }}</span>
 </template>
     
-<script>
+<script setup>
+    import moment from 'moment';
+    import { ref } from 'vue';
+    const showFullDateTime = ref(false);
 
-import moment from 'moment';
-import { ref } from 'vue';
-
-const showFullDateTime = ref(false);
-
-export default {
-    name: 'Loading',
-    props: {
-        date:  { type:  [String, Date] },
-        title: { type:  String, default:'' }
-    },
-
-    computed: {
-        showFullDateTime: {
-            get()  { return showFullDateTime.value; }, 
-            set(v) { showFullDateTime.value = v; }
-        },
-        absoluteTime() {
-            const { date } = this;
-            return date ? moment(date).format('D MMM YYYY HH:mm') : '';
-        },
-        relativeTime() {
-            const { date } = this;
-            return date ? moment(date).fromNow() : '';
+    const props = defineProps({
+        date: { type: [String, Date] },
+        title: { type: String, default: '' }
+    });
+    const showFullDateTimeComputed = computed({
+        get: () => showFullDateTime.value,
+        set: (newValue) => {
+            showFullDateTime.value = newValue;
         }
-    }
-}
+    });
+
+    const absoluteTime = computed(() => {
+        return props.date ? moment(props.date).format('D MMM YYYY HH:mm') : '';
+    });
+
+    const relativeTime = computed(() => {
+        return props.date ? moment(props.date).fromNow() : '';
+    });
+
+    // const showFullDateTime = computed(() => {
+    //         get()  { return showFullDateTime.value; }, 
+    //         set(v) { showFullDateTime.value = v; }
+    // });
+
+
 </script>
