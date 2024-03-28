@@ -1,33 +1,30 @@
 <template>
-        <div>
-            <div class="mb-3">
-               <div v-if="tag"><relevant-articles></relevant-articles></div>
-			   <div v-if="!tag && $realm.is('BCH')"><faq-articles></faq-articles></div>
-            </div>
-            <popular-tags is-categories="true"></popular-tags>
-        </div>
+	<div class="mb-3">
+		<div v-if="tag">
+			<relevant-articles></relevant-articles>
+		</div>
+		<div v-if="!tag && realm.is('BCH')">
+			<faq-articles></faq-articles>
+		</div>
+	</div>
+	<popular-tags is-categories="true"></popular-tags>
 </template>
 
-<script>
-	import i18n from '../../app-text/components/kb.json';
+<script setup>
+
+	import { ref, onMounted } from "vue";
 	import relevantArticles from './relevant-articles.vue';
 	import faqArticles from './faq-articles.vue';
 	import popularTags from './popular-tags.vue';
-	export default {
-      name:'kbRightSideBar',
-		components:{
-			popularTags,
-			relevantArticles,
-			faqArticles
-		},
-		data:  () => {
-        return {
-            tag:''
-        }
-		},
-		created(){
-			this.tag = (this.$route.params.tag)
-		},
-		i18n: { messages:{ en: i18n }}
-	}
+	import { useRealm } from '../../services/composables/realm.js';
+	import { useRoute } from "@scbd/angular-vue/src/index.js"; 
+
+	const realm = useRealm();
+	const route = useRoute();
+	const tag = ref('');
+
+	onMounted(() => {
+		tag.value = route.value.params?.tag;
+	});
+
 </script>
