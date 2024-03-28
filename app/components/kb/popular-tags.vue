@@ -11,7 +11,7 @@
     </div>
   </template>
   
-  <script setup>
+<script setup>
     import { ref, onMounted } from "vue";
     import { useRealm } from '../../services/composables/realm.js';
     import { useI18n } from 'vue-i18n';
@@ -21,7 +21,7 @@
     const { t } = useI18n({ messages });
     const realm = useRealm();
     const router = useRouter();
-    const popularTags = ref('');
+    const popularTags = ref([]);
     const loading = ref(true);
   
     const goToAdminTag = (tag) => {
@@ -33,9 +33,14 @@
     };
   
     onMounted(async () => {
+      try {
         const categories = await loadKbCategories(realm.is('BCH'));
         popularTags.value = categories;
+      } catch (error) {
+          console.error("Error loading categories:", error);
+      } finally {
         loading.value = false;
-    });
-  
-  </script>
+      }
+  });
+
+</script>
