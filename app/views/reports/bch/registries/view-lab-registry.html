@@ -60,7 +60,7 @@
 												<span class="text-uppercase" ng-bind="::row.recordId"></span>
 											</a>
 										</td>
-										<td class="tableexport-string"><span ng-bind="::row.laboratoryName"></span></td>
+										<td class="tableexport-string"><span ng-bind="::removeLabFromStart(row.laboratoryName)"></span></td>
 										<td class="tableexport-string">
 											<span ng-bind="::row.servicesAndActivities.join(', ')"></span>	
 										</td>
