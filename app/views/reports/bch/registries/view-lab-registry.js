@@ -51,6 +51,13 @@ export default ['$scope', 'searchService', '$element', '$rootScope', 'translatio
 				}, 200)
 			});
 		}
+		$scope.removeLabFromStart= function (str) {
+			if (str.startsWith('LAB -')) {
+				return str.slice(6);
+			} else {
+				return str;
+			}
+		}
 
 		loadRecords();
 }];
