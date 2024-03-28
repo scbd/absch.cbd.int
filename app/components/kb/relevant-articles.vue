@@ -21,14 +21,15 @@
 <script setup>
     import { ref, onMounted } from "vue";
     import ArticlesApi from "./article-api";
-    import { getUrl } from '../../services/composables/articles.js';
+    import { getUrl, shuffleArray } from '../../services/composables/articles.js';
     import { lstring } from "./filters";
     import { useRealm } from '../../services/composables/realm.js';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     const { t } = useI18n({ messages });
     const realm = useRealm();
-    const { tag, type, sort } = defineProps({
+
+    const props = defineProps({
         tag: { type: String, required: false },
         type:{ type: String, required: false },
         sort: {
@@ -45,10 +46,10 @@
     onMounted(async () => {
     let ag = [];
     ag.push({"$match":{"$and":[{"adminTags": { $all : [realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
-        ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(tag)}]}});
+        ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(props.tag)}]}});
         ag.push({"$project" : {[`title`]:1}});
         ag.push({"$limit" : 6});
-        if(sort)
+        if(props.sort)
             ag.push({"$sort" : {"meta.modifiedOn":-1}});
 
         const query = {
@@ -57,7 +58,7 @@
     try {
         const articlesList = await articlesApi.queryArticles(query);
         if ((articlesList || []).length) {
-        if (sort) articles.value = articlesList;
+        if (props.sort) articles.value = articlesList;
         else articles.value = shuffleArray(articlesList);
         }
     } catch (e) {
@@ -68,13 +69,7 @@
     });
 
     const articleUrl = (article) => {
-        return getUrl(lstring(article.title), article._id, tag);
-    };
-
-    const shuffleArray = (array) => {
-        return array.map((value) => ({ value, sort: Math.random() * 100 }))
-                .sort((a, b) => a.sort - b.sort)
-                .map(({ value }) => value);
+        return getUrl(lstring(article.title), article._id, props.tag);
     };
  
 </script>
