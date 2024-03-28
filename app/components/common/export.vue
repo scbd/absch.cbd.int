@@ -137,7 +137,7 @@
     import messages from '../../app-text/components/export.json';
     const { t } = useI18n({ messages });
     const realm = useRealm();
-    const fields = [
+    let fields = [
         'rec_schema:schema_EN_s',
         'rec_uniqueIdentifier:uniqueIdentifier_s',
         'rec_government:government_EN_s',
@@ -163,7 +163,7 @@
         modal = new Modal(exportModal.value)
     })
 
-    const { fileName} = defineProps({
+    const props = defineProps({
         fileName: {type: String},
     })
 
@@ -187,7 +187,7 @@
                 let info = undefined;
                 
                 loading.value      = true; 
-                fileName    = fileName||`${realm.uIdPrefix}-${schema}-${new Date().getTime().toString(36)}.${downloadFormat.value}`
+                let fileName    = props.fileName||`${realm.uIdPrefix}-${schema}-${new Date().getTime().toString(36)}.${downloadFormat.value}`
 
                 try{
                     if(isGeneric){
