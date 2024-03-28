@@ -48,7 +48,7 @@ export async function loadKbCategories(isBch, locale) {
                 return categories;
 
             }
-        };
+};
 
         export function getUrl(title, id, tag){
             const urlTitle = title ? title.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-') : undefined;
@@ -60,3 +60,9 @@ export async function loadKbCategories(isBch, locale) {
                 return `kb/tags/${encodeURIComponent( tag )}`;
             }
         };
+
+    export function shuffleArray (array) {
+        return array.map((value) => ({ value, sort: Math.random() * 100 }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
+    };
