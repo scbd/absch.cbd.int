@@ -1,48 +1,29 @@
 <template>
-  <div>
-    <div class="knowledge-base">
-      <search @changeSearch="onChangeSearch"></search>
-      <section class="categories">
-        <div class="container p-0">
-          <article-search ref="articlesearch"></article-search>
-        </div>
-      </section>
-    </div>
+  <div class="knowledge-base">
+    <search @changeSearch="onChangeSearch"></search>
+    <section class="categories">
+      <div class="container p-0">
+        <article-search ref="articleSearchRef"></article-search>
+      </div>
+    </section>
   </div>
 </template>
 
-<script>
+<script setup>
+  import { ref } from 'vue';
+  import articleSearch from '../../components/kb/article-search.vue';
+  import search from '../../components/kb/search.vue';
+  import { useRouter } from "@scbd/angular-vue/src/index.js";
+  const router = useRouter();
+  const articleSearchRef = ref(null);
 
-import articleSearch from '../../components/kb/article-search.vue';
-import search from '../../components/kb/search.vue';
-import i18n from '../../app-text/components/kb.json';
-
-export default {
-  name:'kbHome',
-  components:{
-    articleSearch,
-    search
-  },
-
-  props:{
-  },
-  data:  () => {
-    return {
-
+  const onChangeSearch = (text) => {
+    if (articleSearchRef.value) {
+      router.push({
+        path: `/kb/kbSearch/${encodeURIComponent( text )}`
+      });
+      articleSearchRef.value.loadArticles(1, text);
     }
-  },
+  };
 
-  watch: {
-    tokenReader: function(tokenReader) {
-      // if(tokenReader) addApiOptions({ tokenReader })
-    }
-  },
-   methods: {
-      onChangeSearch(text) {
-        this.$refs.articlesearch.loadArticles(1,text);
-      },
-    },
-  i18n: { messages:{ en: i18n }}
-
-}
 </script>
