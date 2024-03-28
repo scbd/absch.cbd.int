@@ -65,7 +65,7 @@
       const route = useRoute();
       const { t, locale } = useI18n({ messages });
       const realm = useRealm();
-      const articlesApi = ref(new ArticlesApi());
+      const articlesApi = new ArticlesApi();
       const articles = ref([]);
       const loading = ref(true);
       const pageNumber = ref(1);
@@ -169,7 +169,7 @@
                 const countQuery = { "ag": JSON.stringify(countAg) };
                 const searchQuery = { "ag": JSON.stringify(searchAg) };
                 try {
-                    const [count, articlesList] = await Promise.all([articlesApi.value.queryArticles(countQuery), articlesApi.value.queryArticles(searchQuery)]);
+                    const [count, articlesList] = await Promise.all([articlesApi.queryArticles(countQuery), articlesApi.queryArticles(searchQuery)]);
                     if ((articlesList || []).length) {
                     articles.value = articlesList;
                     articlesCount.value = count[0].count;
