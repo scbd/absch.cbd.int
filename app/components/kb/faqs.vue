@@ -37,7 +37,7 @@
 </template>
 <script setup>
 	import { ref, onMounted } from 'vue';
-	import Paginate from './pagination.vue';
+	import Paginate from '../common/pagination.vue';
 	import ArticlesApi from './article-api';
 	import { loadKbCategories , getUrl } from '../../services/composables/articles.js'
 	import { lstring } from './filters';
@@ -55,7 +55,8 @@
 	const categories = ref([]);
 	const loading = ref(true);
 	const faqCount = ref(0);
-	let pageNumber = 1;
+	// let pageNumber = 1;
+	let pageNumber = ref(1);
 	let recordsPerPage = 10;
 	
 	onMounted(async ()=>{
@@ -80,12 +81,13 @@
         return getUrl(lstring(article.title), article._id, tag);
     };
 
-	const onChangePage = function(pageNumber) {
-		pageNumber = pageNumber;
-		article=[];
+	const onChangePage = function(p) {
+		pageNumber.value = p;
+		// article=[];
+		faqs.value = [];
 		loading.value = true;
 		window.scrollTo(0,0);
-		loadFaqs(pageNumber);
+		loadFaqs(p);
 	};
 	
 	const loadFaqs = async function (pageNumber){
