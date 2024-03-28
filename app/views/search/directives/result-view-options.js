@@ -27,7 +27,7 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
 
                 $scope.exportVueComponent = {
                     components:{tableExport},
-                    setup: myInjectSetupFunction()
+                    setup: myInjectSetupFunction
                 }
 
                 // function myInjectSetupFunction () {
