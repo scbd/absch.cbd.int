@@ -1,3 +1,4 @@
+import { provide } from 'vue'; // ToDo:  ?
 import template from 'text!./result-view-options.html';
 import app from '~/app';
 import _ from 'lodash';
@@ -23,8 +24,37 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
             },
             link: function ($scope, $element, $attr, searchDirectiveCtrl) {
                 translationService.set('resultViewOptionsT', resultViewOptionsT);
+
                 $scope.exportVueComponent = {
-                    components:{tableExport}
+                    components:{tableExport},
+                    setup: myInjectSetupFunction()
+                }
+
+                // function myInjectSetupFunction () {
+                //     provide('getDownloadRecords', (options)=>{
+                //         options = options || {}
+                //         return $scope.onExport({options})
+                //     });
+                // };
+
+                function myInjectSetupFunction () {
+                    provide('getDownloadRecords', (options)=>{
+                        console.log(options);
+                        return safeApply($scope, ()=>{ 
+                            options = options || {}
+                            return $scope.onExport({options})
+                        });
+                    });
+                }
+
+                function safeApply ($scope, fn) {
+                    const phase = $scope.$root.$$phase;
+                  
+                    if (phase === '$apply' || phase === '$digest') {
+                      return fn();
+                    } else {
+                      return $scope.$apply(fn);
+                    }
                 }
 
                 $scope.shareVueComponent = {
@@ -164,13 +194,6 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                     const query = searchDirectiveCtrl.getAllSearchFilters();
                     const type = "chm-search-result"
                     return {type, query}
-                }
-
-                $scope.getDownloadRecords = function(options){                        
-                    // const  { docs, numFound } = $scope.searchResult.data;
-                    // return { docs, numFound };
-                    options = options || {}
-                    return $scope.onExport({options});
                 }
 
                 function showGroupByDialog(){

@@ -129,7 +129,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted } from "vue";
+    import { ref, onMounted, inject } from "vue";
     import { Modal } from "bootstrap";
     import '../kb/filters';
     import { useRealm } from '../../services/composables/realm.js';
@@ -157,13 +157,13 @@
     let schema = undefined ;
     let modal = null;
     const downloadFormat  = ref('xlsx');
+    const getDownloadRecords = inject('getDownloadRecords');
 
     onMounted( async ()=>{
         modal = new Modal(exportModal.value)
     })
 
-    const { getDownloadRecords, fileName} = defineProps({
-        getDownloadRecords: {type: Function},
+    const { fileName} = defineProps({
         fileName: {type: String},
     })
 
