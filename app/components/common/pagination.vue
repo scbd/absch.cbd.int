@@ -1,13 +1,13 @@
 <template>
-  <nav v-if="recordCount" aria-label="Pagination" class="pagination d-flex justify-content-center text-center">
+  <nav v-if="props.recordCount" aria-label="{{ t('pagination') }}" class="pagination d-flex justify-content-center text-center">
     <ul class="pagination">
 
-      <li v-if="firstLastButton" @click="setPage(1)" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
-        <a class="page-link">{{ firstButtonText }}</a>
+      <li v-if="props.firstLastButton" @click="setPage(1)" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
+        <a class="page-link">{{ props.firstButtonText }}</a>
       </li>
       
       <li @click="previousPage" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
-        <a class="page-link">{{ prevText }}</a>
+        <a class="page-link">{{ props.prevText }}</a>
       </li>
       
       <li v-if="visiblePageNumbers[0] > 1" class="page-item">
@@ -23,11 +23,11 @@
       </li>
 
       <li @click="nextPage" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
-        <a class="page-link">{{ nextText }}</a>
+        <a class="page-link">{{ props.nextText }}</a>
       </li>
 
-      <li v-if="lastButtonText" @click="setPage(pageCount)" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
-        <a class="page-link">{{ lastButtonText }}</a>
+      <li v-if="props.lastButtonText" @click="setPage(pageCount)" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
+        <a class="page-link">{{ props.lastButtonText }}</a>
       </li>
 
     </ul>
@@ -37,8 +37,11 @@
 
 <script setup>
 import { ref, computed, defineProps, defineEmits } from 'vue';
+import { useI18n } from 'vue-i18n';
+import messages from '../../app-text/components/common/pagination.json';
+const { t } = useI18n({ messages });
 
-const { recordCount, recordsPerPage, currentPage, firstLastButton, firstButtonText, lastButtonText, prevText, nextText } = defineProps({
+const props = defineProps({
   recordCount: { type: Number, required: true },
   recordsPerPage: { type: Number, required: true },
   currentPage: { type: Number, required: true },
@@ -51,14 +54,14 @@ const { recordCount, recordsPerPage, currentPage, firstLastButton, firstButtonTe
 
 const emit = defineEmits(['changePage']);
 
-const internalCurrentPage = ref(currentPage);
+const internalCurrentPage = ref(props.currentPage);
 
 const setPage = (page) => {
   internalCurrentPage.value = page;
   emit('changePage', page);
 };
 
-const pageCount = computed(() => Math.ceil(recordCount / recordsPerPage));
+const pageCount = computed(() => Math.ceil(props.recordCount / props.recordsPerPage));
 
 const visiblePageNumbers = computed(() => {
   const totalPages = pageCount.value;
