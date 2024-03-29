@@ -70,8 +70,10 @@
                                                         
                                                         <td class="tableexport-string">{{row.rec_schema}}</td>
                                                         <td class="tableexport-string">
-                                                            <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
-                                                                {{(row.rec_uniqueIdentifier||'')|capitalize}}
+                                                            <!-- <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`"> -->
+                                                                <!-- ToDo: ?? -->
+                                                            <a v-if="row.rec_uniqueIdentifier" rel="noopener" target="_blank" :href="`database/${(row.rec_uniqueIdentifier).toUpperCase()}`">
+                                                                {{ (row.rec_uniqueIdentifier).toUpperCase() }}
                                                             </a>
                                                         </td>
                                                         <td class="tableexport-string">{{row.rec_government}}</td>
@@ -191,8 +193,8 @@
 
                 try{
                     if(isGeneric){
-                                            await import('tableexport');
-                         info        = await getDownloadRecords({fields, listType:'all'});
+                        await import('tableexport');
+                        info        = await getDownloadRecords({fields, listType:'all', fileName, format : downloadFormat.value});
                         downloadDocs.value = info.docs;
                         numFound.value     = info.numFound;
                         setTimeout(()=>{
