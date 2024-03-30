@@ -28,8 +28,14 @@ export const exportRecords = async(options, realm, searchService, searchResult, 
         docs        = docs        || []
 
         const queryOptions = searchResult.queryOptions;
+        //fix error: TypeError: options.fields.join is not a function
+        let optionsFields;
+        if(options.isGeneric){
+             optionsFields = options.fields.join(',') }
+        else { 
+            optionsFields = options.fields }
         const lQuery = {
-            fields         : options.fields.join(','),
+            fields         : optionsFields,
             fieldQuery     : _.uniq(queryOptions.tagQueries),
             query          : queryOptions.query||undefined,
             rowsPerPage    : rowsPerPage||1000,
@@ -40,12 +46,27 @@ export const exportRecords = async(options, realm, searchService, searchResult, 
             lQuery.sort    = searchResult.sort;
 
         // if its single schema and transformed for download user new api else fallback to client side excel                        
-        if(!options.isGeneric){
+        if(!options.isGeneric && options.listType=='initial'){
 
             if(downloadSchemas[options.schema]){
                 return schemaDownload({
                     query : lQuery, 
                     fields : downloadSchemas[options.schema], 
+                    loadAll, 
+                    schema : options.schema,
+                    format : options.format,
+                    fileName : options.fileName,
+                    searchService,
+                    realm, $http
+                });    
+            }
+        }
+
+        if(!options.isGeneric && options.listType!='initial'){
+            if(downloadSchemas[options.schema]){
+                return schemaDownload({
+                    query : lQuery, 
+                    fields : options.fields, 
                     loadAll, 
                     schema : options.schema,
                     format : options.format,
