@@ -52,11 +52,7 @@ export default ['$scope', 'searchService', '$element', '$rootScope', 'translatio
 			});
 		}
 		$scope.removeLabFromStart= function (str) {
-			if (str.startsWith('LAB -')) {
-				return str.slice(6);
-			} else {
-				return str;
-			}
+			return str.replace(/^LAB\s*-\s*/i, '');
 		}
 
 		loadRecords();
