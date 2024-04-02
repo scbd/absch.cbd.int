@@ -10,7 +10,7 @@
                     </li>
                 </ul>
                 <div v-if="category.articles.length == 0">
-                    <relevant-articles :tag="category.adminTags[0]" sort="true">
+                    <relevant-articles :tag="category.adminTags[0]" :sort="true">
                         <template #title><span></span></template>
                     </relevant-articles>
                 </div>
