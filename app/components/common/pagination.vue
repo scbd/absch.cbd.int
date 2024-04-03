@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps, defineEmits } from 'vue';
+import { computed, defineProps, defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
 import messages from '../../app-text/components/common/pagination.json';
 const { t } = useI18n({ messages });
@@ -54,11 +54,17 @@ const props = defineProps({
 
 const emit = defineEmits(['changePage']);
 
-const internalCurrentPage = ref(props.currentPage);
+const internalCurrentPage = computed({
+  get() {
+    return props.currentPage;
+  },
+  set(page) {
+    emit('changePage', page);
+  }
+});
 
 const setPage = (page) => {
   internalCurrentPage.value = page;
-  emit('changePage', page);
 };
 
 const pageCount = computed(() => Math.ceil(props.recordCount / props.recordsPerPage));
