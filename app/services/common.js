@@ -531,3 +531,15 @@ export function stringToHash(text, radix){
 
     return Math.abs(hash).toString(radix||24);
 }
+
+export function safeApply ($scope, fn) {
+
+    const phase = $scope.$root.$$phase;
+
+    if (phase === '$apply' || phase === '$digest') {
+        return fn();
+    } 
+    else {
+        return $scope.$apply(fn);
+    }
+}

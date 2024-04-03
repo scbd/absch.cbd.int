@@ -6,6 +6,7 @@ import 'ngDialog';
 import tableExport from '~/components/common/export.vue';
 import shareRecord from '~/components/common/share-record.vue';
 import resultViewOptionsT from '~/app-text/views/search/directives/result-view-options.json';
+import { safeApply } from '~/services/common'
 
 app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken', '$rootScope', 'translationService',
     function ($location, ngDialog, locale, apiToken, $rootScope, translationService) {
@@ -30,31 +31,13 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                     setup: myInjectSetupFunction
                 }
 
-                // function myInjectSetupFunction () {
-                //     provide('getDownloadRecords', (options)=>{
-                //         options = options || {}
-                //         return $scope.onExport({options})
-                //     });
-                // };
-
                 function myInjectSetupFunction () {
                     provide('getDownloadRecords', (options)=>{
-                        console.log(options);
                         return safeApply($scope, ()=>{ 
                             options = options || {}
                             return $scope.onExport({options})
                         });
                     });
-                }
-
-                function safeApply ($scope, fn) {
-                    const phase = $scope.$root.$$phase;
-                  
-                    if (phase === '$apply' || phase === '$digest') {
-                      return fn();
-                    } else {
-                      return $scope.$apply(fn);
-                    }
                 }
 
                 $scope.shareVueComponent = {

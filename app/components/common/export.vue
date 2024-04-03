@@ -70,9 +70,7 @@
                                                         
                                                         <td class="tableexport-string">{{row.rec_schema}}</td>
                                                         <td class="tableexport-string">
-                                                            <!-- <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`"> -->
-                                                                <!-- ToDo: ?? -->
-                                                            <a v-if="row.rec_uniqueIdentifier" rel="noopener" target="_blank" :href="`database/${(row.rec_uniqueIdentifier).toUpperCase()}`">
+                                                            <a v-if="row.rec_uniqueIdentifier" rel="noopener" target="_blank" :href="`database/${encodeURIComponent((row.rec_uniqueIdentifier).toUpperCase())}`">
                                                                 {{ (row.rec_uniqueIdentifier).toUpperCase() }}
                                                             </a>
                                                         </td>
@@ -131,7 +129,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted, inject } from "vue";
+    import { ref, shallowRef, onMounted, inject } from "vue";
     import { Modal } from "bootstrap";
     import '../kb/filters';
     import { useRealm } from '../../services/composables/realm.js';
@@ -150,7 +148,7 @@
         'rec_meta4:meta4_EN_txt',
         'rec_date:updatedDate_dt',
     ];
-    const exportModal = ref(null);
+    const exportModal = shallowRef(null);
     const downloadDocs =ref([]);
     const numFound = ref(0);
     const loading = ref(false);
@@ -173,7 +171,6 @@
                 modal.show('static');
                 loading.value = true; 
                 try{
-                        console.log('getDownloadRecords', typeof getDownloadRecords) // type of getDownloadRecords object, it should be function.
                         const responseData = await getDownloadRecords({fields, listType:'initial', format:'json'});
                         downloadDocs.value = responseData.docs
                         numFound.value     = responseData.numFound;
