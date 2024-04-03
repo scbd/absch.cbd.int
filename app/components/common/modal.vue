@@ -32,23 +32,21 @@
 
 </template>
 <script setup>
-    import { ref, onMounted } from "vue";
+    import { shallowRef, onMounted } from "vue";
     import { Modal } from "bootstrap";
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/common/modal.json';
     import { lstring } from '../../components/kb/filters';
     const { t, locale } = useI18n({ messages });
-    const modalRef = ref(null);
-    const titleRef = ref('')
+    const modalRef = shallowRef(null);
     let modal = null;
     
-    const { title } = defineProps({
+    const props = defineProps({
         title: [String, Object], 
         required: true,
     });
 
     onMounted(() => {
-        titleRef.value = title;
         modal = new Modal(modalRef.value);
     });
 
@@ -65,7 +63,8 @@
     defineExpose({show, close})
 </script>
 
-<!-- How to use:  <template>
+<!-- How to use:  
+ <template>
     <div>
       <button @click="showModal">Open Modal</button>
       <Modal ref="modelNew" title="this is a test title">
