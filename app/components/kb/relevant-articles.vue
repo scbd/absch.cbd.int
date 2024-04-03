@@ -9,7 +9,7 @@
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
         <ul>
             <li v-for="article in articles" class="mb-1">
-                <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{lstring(article.title, $locale)}}</a>
+                <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{lstring(article.title, locale)}}</a>
             </li>
         </ul>
         <div v-if="articles.length<1 && !loading" class="alert alert-light">
@@ -26,7 +26,7 @@
     import { useRealm } from '../../services/composables/realm.js';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
-    const { t } = useI18n({ messages });
+    const { t, locale } = useI18n({ messages });
     const realm = useRealm();
 
     const props = defineProps({
@@ -46,7 +46,7 @@
     onMounted(async () => {
     let ag = [];
     ag.push({"$match":{"$and":[{"adminTags": { $all : [realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
-        ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(props.tag)}]}});
+        ag.push({"$match":{"$and":[{"adminTags":props.tag}]}});
         ag.push({"$project" : {[`title`]:1}});
         ag.push({"$limit" : 6});
         if(props.sort)
