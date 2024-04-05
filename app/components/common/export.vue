@@ -2,14 +2,14 @@
     <span>
         <a rel="noopener" href="#" class="table-export-button text-decoration-none" @click="openDialog">
             <i class="fa fa-download" aria-hidden="true"></i> 
-            {{$t('exportButton')}}
+            {{t('exportButton')}}
         </a>
         <div class="modal fade" ref="exportModal" data-backdrop="static"  tabindex="-1" aria-hidden="true" id="export-modal">      
             <div class="modal-dialog modal-xl modal-dialog-centered"  role="document">
                 <div class="modal-content">
                     <div class="modal-header color-black">
                         <h5 class="modal-title">
-                            {{$t('dialogTitle')}}
+                            {{t('dialogTitle')}}
                         </h5>
                         <button type="button" class="border-0 close" @click="closeDialog()" aria-label="Close" ><i class="bi bi-x-circle-fill icon-lg"></i></button>
                     </div>
@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="alert alert-info">
-                                    {{$t('exportInformation')}}
+                                    {{t('exportInformation')}}
                                 </div>
                             </div>
                         </div>
@@ -25,17 +25,17 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group color-black">
-                                    {{$t('downloadFormat')}}
+                                    {{t('downloadFormat')}}
                                     <span class="radio" style="display: initial;">
                                         <!-- <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat" />{{$t('xls')}}</label>                    -->
-                                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" /> {{$t('xlsx')}}</label>                   
-                                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" /> {{$t('csv')}}</label>
+                                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" /> {{t('xlsx')}}</label>                   
+                                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" /> {{t('csv')}}</label>
                                     </span>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <span class="float-end" style="padding-top: 20px;">
-                                    {{$t('recordsFound')}}: <strong>{{numFound}}</strong>
+                                    {{t('recordsFound')}}: <strong>{{numFound}}</strong>
                                 </span>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div v-if="loading" class="alert alert-info">
-                                    <i class="fa fa-spin fa-spinner" v-if="loading" ></i> {{$t('processing')}}
+                                    <i class="fa fa-spin fa-spinner" v-if="loading" ></i> {{t('processing')}}
                                 </div>
                             </div>
                         </div>
@@ -54,15 +54,15 @@
                                             <table id="datatable" class="table table-striped table-bordered table-condensed">
                                                 <thead> 
                                                     <tr>
-                                                        <th class="tableexport-string">{{$t('type')}}</th>
-                                                        <th class="tableexport-string">{{$t('uid')}}</th>
-                                                        <th class="tableexport-string">{{$t('government')}}</th>
-                                                        <th class="tableexport-string" style="max-width:30%">{{$t('title')}} </th>
-                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('info1')}} </th>
-                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('info2')}} </th>
-                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('info3')}} </th>
-                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('info4')}} </th>
-                                                        <th style="white-space:nowrap;" class="tableexport-string">{{$t('publishedDate')}}</th>
+                                                        <th class="tableexport-string">{{t('type')}}</th>
+                                                        <th class="tableexport-string">{{t('uid')}}</th>
+                                                        <th class="tableexport-string">{{t('government')}}</th>
+                                                        <th class="tableexport-string" style="max-width:30%">{{t('title')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{t('info1')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{t('info2')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{t('info3')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{t('info4')}} </th>
+                                                        <th style="white-space:nowrap;" class="tableexport-string">{{t('publishedDate')}}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -70,8 +70,8 @@
                                                         
                                                         <td class="tableexport-string">{{row.rec_schema}}</td>
                                                         <td class="tableexport-string">
-                                                            <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
-                                                                {{(row.rec_uniqueIdentifier||'')|capitalize}}
+                                                            <a v-if="row.rec_uniqueIdentifier" rel="noopener" target="_blank" :href="`database/${encodeURIComponent((row.rec_uniqueIdentifier).toUpperCase())}`">
+                                                                {{ (row.rec_uniqueIdentifier).toUpperCase() }}
                                                             </a>
                                                         </td>
                                                         <td class="tableexport-string">{{row.rec_government}}</td>
@@ -111,15 +111,15 @@
                                             </table>
                                         </div>
                                     
-                                    <h3 class="color-red bold" v-if="!loading">{{$t('sampleMessage')}}</h3>
+                                    <h3 class="color-red bold" v-if="!loading">{{t('sampleMessage')}}</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-secondary float-end" aria-label="Close" @click="closeDialog()" :disabled="loading">{{$t('cancel')}}</button>
+                        <button type="button" class="btn btn-secondary float-end" aria-label="Close" @click="closeDialog()" :disabled="loading">{{t('cancel')}}</button>
                         <button type="button" class="btn btn-primary float-start" aria-label="Download" @click="exportRecords(downloadFormat)" :disabled="loading" id="downloadDataFile">
-                            {{$t('download')}}
+                            {{t('download')}}
                         </button>    
                     </div>
                 </div>
@@ -128,12 +128,16 @@
     </span>   
 </template>
 
-<script>
-import i18n from '../../app-text/components/export.json';
-import { Modal } from "bootstrap";
-import '../kb/filters';
-    
-    const fields = [
+<script setup>
+    import { ref, shallowRef, onMounted, inject } from "vue";
+    import { Modal } from "bootstrap";
+    import '../kb/filters';
+    import { useRealm } from '../../services/composables/realm.js';
+    import { useI18n } from 'vue-i18n';
+    import messages from '../../app-text/components/export.json';
+    const { t } = useI18n({ messages });
+    const realm = useRealm();
+    let fields = [
         'rec_schema:schema_EN_s',
         'rec_uniqueIdentifier:uniqueIdentifier_s',
         'rec_government:government_EN_s',
@@ -143,87 +147,85 @@ import '../kb/filters';
         'rec_meta3:meta3_EN_txt',
         'rec_meta4:meta4_EN_txt',
         'rec_date:updatedDate_dt',
-    ]
-	export default {
-        components : { Modal },
-		props:['getDownloadRecords', 'fileName'],
-		data:  () => {
-			return {
-                modal: null,
-				downloadDocs  : [],
-				numFound      : 0,
-				downloadFormat: 'xlsx',
-				loading       : false,
-                isGeneric     : true,
-                schemaFields  : [],
-                schema        : undefined
-			}
-		},
-		created(){
-			// this.articlesApi = new ArticlesApi();
-		},
-		async mounted() {
-            this.modal = new Modal(this.$refs.exportModal);
-        },
-		
-		methods: {
-            async openDialog(){
-                this.modal.show('static');
-                this.loading      = true; 
+    ];
+    const exportModal = shallowRef(null);
+    const downloadDocs =ref([]);
+    const numFound = ref(0);
+    const loading = ref(false);
+    const isGeneric = ref(true);
+    const schemaFields = ref([]);
+    let schema = undefined ;
+    let modal = null;
+    const downloadFormat  = ref('xlsx');
+    const getDownloadRecords = inject('getDownloadRecords');
+
+    onMounted( async ()=>{
+        modal = new Modal(exportModal.value)
+    })
+
+    const props = defineProps({
+        fileName: {type: String},
+    })
+
+    const openDialog = async () => {
+                modal.show('static');
+                loading.value = true; 
                 try{
-                    const {docs, numFound, isGeneric, schemaFields,schema } = await this.getDownloadRecords({fields, listType:'initial', format:'json'});
-                    this.downloadDocs = docs
-                    this.numFound     = numFound;
-                    this.isGeneric    = isGeneric;
-                    this.schemaFields = schemaFields;
-                    this.schema       = schema;                   
+                        const responseData = await getDownloadRecords({fields, listType:'initial', format:'json'});
+                        downloadDocs.value = responseData.docs
+                        numFound.value     = responseData.numFound;
+                        isGeneric.value    = responseData.isGeneric;
+                        schemaFields.value = responseData.schemaFields;
+                        schema             = responseData.schema;             
                 }
                 finally{
-                    this.loading = false;
+                    loading.value = false;
                 }
-            },
-			async exportRecords(){
+    }
+    const exportRecords = async () => {
+                let info = undefined;
                 
-                this.loading      = true; 
-                const fileName    = this.fileName||`${this.$realm.uIdPrefix}-${this.schema}-${new Date().getTime().toString(36)}.${this.downloadFormat}`
+                loading.value      = true; 
+                let fileName    = props.fileName||`${realm.uIdPrefix}-${schema}-${new Date().getTime().toString(36)}.${downloadFormat.value}`
 
                 try{
-                    if(this.isGeneric){
-                                            await import('tableexport');
-                        const info        = await this.getDownloadRecords({fields, listType:'all'});
-                        this.downloadDocs = info.docs;
-                        this.numFound     = info.numFound;
+                    if(isGeneric){
+                        await import('tableexport');
+                        info        = await getDownloadRecords({fields, listType:'all', fileName, format : downloadFormat.value});
+                        downloadDocs.value = info.docs;
+                        numFound.value     = info.numFound;
                         setTimeout(()=>{
                             $('#datatable').tableExport({
                                 formats: ["xlsx", "xls", "csv"],
                                 filename: fileName,
                             });
-                            $(`.${this.downloadFormat}`).click(); 
+                            $(`.${downloadFormat.value}`).click(); 
 
-                            this.downloadDocs = this.downloadDocs.slice(0, 24);
+                            downloadDocs.value = downloadDocs.slice(0, 24);
                         }, 500);
                     }
                     else{
-                        const info = await this.getDownloadRecords({fields, listType:'all', fileName, format : this.downloadFormat});
+                         info = await getDownloadRecords({fields, listType:'all', fileName, format : downloadFormat.value});
                     }
                 }
                 catch(e){
                     console.error(e)
                 }
                 finally{
-                    this.loading = false;
+                    loading.value = false;
                 }
                 
-            },
-            closeDialog(){
-                this.modal.hide();
-                this.downloadDocs   =  [];
-				this.numFound       =  0;
-				this.loading        =  false;
-                this.isGeneric      =  true;
-                this.schemaFields   =  [];
-            },
-            formatString(text){
+            };
+    const closeDialog = () => {
+                modal.hide();
+                downloadDocs.value   =  [];
+				numFound.value       =  0;
+				loading.value        =  false;
+                isGeneric.value      =  true;
+                schemaFields.value   =  [];
+            };
+
+    const formatString = (text) => {
                 if(!text)
                     return;
                     
@@ -239,10 +241,8 @@ import '../kb/filters';
 
                 return text;
             }
-		},
-		i18n: { messages:{ en: i18n }} 
-	}
 </script>
+
 
 <style>
     

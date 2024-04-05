@@ -1,3 +1,4 @@
+import { provide } from 'vue'; // ToDo:  ?
 import template from 'text!./result-view-options.html';
 import app from '~/app';
 import _ from 'lodash';
@@ -5,6 +6,7 @@ import 'ngDialog';
 import tableExport from '~/components/common/export.vue';
 import shareRecord from '~/components/common/share-record.vue';
 import resultViewOptionsT from '~/app-text/views/search/directives/result-view-options.json';
+import { safeDelegate } from '~/services/common'
 
 app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken', '$rootScope', 'translationService',
     function ($location, ngDialog, locale, apiToken, $rootScope, translationService) {
@@ -23,8 +25,17 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
             },
             link: function ($scope, $element, $attr, searchDirectiveCtrl) {
                 translationService.set('resultViewOptionsT', resultViewOptionsT);
+
                 $scope.exportVueComponent = {
-                    components:{tableExport}
+                    components:{tableExport},
+                    setup: componentSetup
+                }
+
+                function componentSetup () {
+                    provide('getDownloadRecords', safeDelegate($scope, (options)=>{
+                        options = options || {}
+                        return $scope.onExport({options})
+                    }));
                 }
 
                 $scope.shareVueComponent = {
@@ -164,13 +175,6 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                     const query = searchDirectiveCtrl.getAllSearchFilters();
                     const type = "chm-search-result"
                     return {type, query}
-                }
-
-                $scope.getDownloadRecords = function(options){                        
-                    // const  { docs, numFound } = $scope.searchResult.data;
-                    // return { docs, numFound };
-                    options = options || {}
-                    return $scope.onExport({options});
                 }
 
                 function showGroupByDialog(){
