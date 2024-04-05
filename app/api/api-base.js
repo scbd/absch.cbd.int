@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { isFunction } from 'lodash'
+import { isFunction, isObject } from 'lodash'
 import {useAuth} from '@scbd/angular-vue/src/index.js';
 
 let sitePrefixUrl = 'https://api.cbd.int';
@@ -10,6 +10,8 @@ if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 
 const cache          = new Map()
 const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000, tokenReader: defaultTokenReader }
+// no need defaultTokenReader: tokenReader passing from the vue file
+// const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
 
 const HttpStatusApiCode = {
   400: "invalidParameter",
@@ -25,7 +27,8 @@ export default class ApiBase
 
     options = options || {};
 
-    if(isFunction(options)) options = { tokenReader : options }
+    // options is an object
+    if(isObject (options) || isFunction(options)) options = { tokenReader : options }
 
     const { tokenReader, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
 
@@ -59,11 +62,20 @@ async function loadAsyncHeaders(baseConfig) {
   const { tokenReader, tokenType, ...config } = baseConfig || {}
 
   const headers = { ...(config.headers || {}) };
-
+  //ToDo: we can remove await tokenReader() part
   if(tokenReader) {
-    const tokenDetails = await tokenReader();
-    if(tokenDetails)
-      headers.Authorization = `${tokenType||'Bearer'} ${tokenDetails.token}`;
+
+    const token = '';
+    if(isFunction(tokenReader)){
+      const tokenDetails = await tokenReader();
+      token = tokenDetails.token ;
+    }
+    else {
+      token = tokenReader.token ;
+    }
+
+    if(token)
+      headers.Authorization = `${tokenType||'Bearer'} ${token}`;
   }
 
   return axios.create({ ...config, headers } );
@@ -128,6 +140,7 @@ export function stringifyUrlParams(params){
   return params;
 }
 
+//ToDo: can we remove this ?
 export async function defaultTokenReader() {
   const auth = useAuth();
   const userToken = await auth.token();
