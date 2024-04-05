@@ -51,34 +51,12 @@
     });
 
     const show = () => {
-        modal = Modal.getInstance(modalRef.value);
         modal.show('static');
     };
 
     const close = () => {
-        modal = Modal.getInstance(modalRef.value);
         modal.hide();
     };
 
     defineExpose({show, close})
 </script>
-
-<!-- How to use:  
- <template>
-    <div>
-      <button @click="showModal">Open Modal</button>
-      <Modal ref="modelNew" title="this is a test title">
-        <template v-slot:default>test  content</template>
-      </Modal>
-    </div>
-  </template> 
-  
-  <script setup>
-  import { ref } from 'vue';
-  import Modal from '~/components/common/modal.vue';
-  const modelNew = ref(null)
-  
-  const showModal = () => {
-    modelNew.value.show();
-  };
-  </script> -->
