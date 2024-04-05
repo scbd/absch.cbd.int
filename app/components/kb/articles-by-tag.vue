@@ -58,7 +58,7 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import relevantArticles from './relevant-articles.vue';
-    import paginate from './pagination.vue';
+    import paginate from '../common/pagination.vue';
     import popularTags from './popular-tags.vue';
     import ArticlesApi from './article-api';
     import { formatDate, lstring } from './filters';
@@ -73,9 +73,9 @@
     const articles = ref({}); 
     const loading = ref(true);
     const tag = ref('');
+    const pageNumber = ref(1);
     let tagDetails =  {};
     let articlesCount = 0;
-    let pageNumber=  1;
     let recordsPerPage = 10;
 
     onMounted(async () => {  
@@ -94,12 +94,12 @@
             return getUrl(lstring(article.title), article._id, tag);
         };
 
-    const onChangePage  = function(pageNumber) {
-            pageNumber = pageNumber;
+    const onChangePage  = function(p) {
+            pageNumber.value = p;
             articles.value = []; // ToDo ?????
             loading.value = true;
             window.scrollTo(0,0);
-            loadArticles(pageNumber, tag.value);
+            loadArticles(p, tag.value);
         };
 
     const loadArticles = async function (pageNumber, tag) {
