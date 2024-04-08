@@ -26,11 +26,11 @@ export const downloadSchemas = {
 	},
 
 	"biosafetyExpert":{
-		"uniqueIdentifier":"biosafetyExpert.uniqueIdentifier",
-		"government":"biosafetyExpert.government",
-		"countries":"biosafetyExpert.countries",
-		"expertise":"biosafetyExpert.expertise",
-		"unLanguages":"biosafetyExpert.unLanguages"
+		"uniqueIdentifier": fieldsT["biosafetyExpert.uniqueIdentifier"],
+		"government": fieldsT["biosafetyExpert.government"],
+		"countries": fieldsT["biosafetyExpert.countries"],
+		"expertise": fieldsT["biosafetyExpert.expertise"],
+		"unLanguages": fieldsT["biosafetyExpert.unLanguages"]
 	}
 }
 
