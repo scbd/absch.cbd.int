@@ -8,8 +8,8 @@ import shareRecord from '~/components/common/share-record.vue';
 import resultViewOptionsT from '~/app-text/views/search/directives/result-view-options.json';
 import { safeDelegate } from '~/services/common'
 
-app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken', '$rootScope', 'translationService',
-    function ($location, ngDialog, locale, apiToken, $rootScope, translationService) {
+app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', '$rootScope', 'translationService',
+    function ($location, ngDialog, locale, $rootScope, translationService) {
         return {
             restrict: 'EA',
             template: template,
@@ -178,8 +178,6 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                 $scope.onMatrixExportClick = function(){
                     $scope.onExport()
                 }
-           
-                $scope.tokenReader = function(){ return apiToken.get()};
 
                 function showGroupByDialog(){
                     var selectedFields = $scope.groupByFields
