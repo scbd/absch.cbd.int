@@ -44,49 +44,35 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                 }
 
                 function shareRecordsFunctions () {
-                    provide('getQuery', ()=>{
-                        return safeApply($scope, ()=>{ // ToDo: will use safeDelegate
-                            const query = searchDirectiveCtrl.getAllSearchFilters();
-                            const type = "chm-search-result"
-                            return {type, query}
-                        });
-                    });
 
-                     provide('userStatus', ()=>{
-                        return safeApply($scope, ()=>{ 
-                            if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-                                var signInEvent = $scope.$on('signIn', function (evt, data) {
-                                    signInEvent();
-                                });
-                                $('#loginDialog').on('hidden.bs.modal', function () {
-                                    signInEvent();
-                                    $('.modal-backdrop').removeClass('multi-modal')
-                                });
-                                $('#loginDialog').on('shown.bs.modal', function () {
-                                    $('.modal-backdrop').addClass('multi-modal')
-                                });
-                                $( '#loginDialog' ).modal( "show" );
-                                return false;
-                            } 
-                            else {
-                                // $scope.isUserSignedIn = true;
-                                return true;
-                            }
-                        });
-                    });
+                    provide('getQuery', safeDelegate($scope, ()=>{
+                        const query = searchDirectiveCtrl.getAllSearchFilters();
+                        const type = "chm-search-result"
+                        return {type, query}
+                    }));
+
+                    provide('userStatus', safeDelegate($scope, ()=>{
+                        if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
+                            var signInEvent = $scope.$on('signIn', function (evt, data) {
+                                signInEvent();
+                            });
+                            $('#loginDialog').on('hidden.bs.modal', function () {
+                                signInEvent();
+                                $('.modal-backdrop').removeClass('multi-modal')
+                            });
+                            $('#loginDialog').on('shown.bs.modal', function () {
+                                $('.modal-backdrop').addClass('multi-modal')
+                            });
+                            $( '#loginDialog' ).modal( "show" );
+                            return false;
+                        } 
+                        else {
+                            // $scope.isUserSignedIn = true;
+                            return true;
+                        }
+                    }));   
                 }
- 
-                    
-            function safeApply ($scope, fn) {
-                                const phase = $scope.$root.$$phase;
-
-                                if (phase === '$apply' || phase === '$digest') {
-                                return fn();
-                                } else {
-                                return $scope.$apply(fn);
-                                }
-                            }
-                 
+                  
 
                 //$scope.isUserSignedIn = false;
             //    if(!$scope.viewType)
@@ -192,37 +178,8 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                 $scope.onMatrixExportClick = function(){
                     $scope.onExport()
                 }
-
-                // $scope.userStatus  = function(){
-                //     if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-                        
-                //         var signInEvent = $scope.$on('signIn', function (evt, data) {
-                //             signInEvent();
-                //             $scope.isUserSignedIn = true
-                //             // $('#shareSearchDomId')[0].click();
-                //         });
-                //         $('#loginDialog').on('hidden.bs.modal', function () {
-                //             signInEvent();
-                //             $('.modal-backdrop').removeClass('multi-modal')
-                //         });
-                //         $('#loginDialog').on('shown.bs.modal', function () {
-                //             $('.modal-backdrop').addClass('multi-modal')
-                //         });
-                //         $( '#loginDialog' ).modal( "show" );
-                //         return false;
-                //     } 
-                //     else {
-                //         $scope.isUserSignedIn = true;
-                //         return true;
-                //     }
-                // }
+           
                 $scope.tokenReader = function(){ return apiToken.get()};
-
-                // $scope.getQuery = function(){
-                //     const query = searchDirectiveCtrl.getAllSearchFilters();
-                //     const type = "chm-search-result"
-                //     return {type, query}
-                // }
 
                 function showGroupByDialog(){
                     var selectedFields = $scope.groupByFields

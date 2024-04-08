@@ -10,8 +10,6 @@ if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 
 const cache          = new Map()
 const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000, tokenReader: defaultTokenReader }
-// no need defaultTokenReader: tokenReader passing from the vue file
-// const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
 
 const HttpStatusApiCode = {
   400: "invalidParameter",
@@ -65,7 +63,7 @@ async function loadAsyncHeaders(baseConfig) {
   //ToDo: we can remove await tokenReader() part
   if(tokenReader) {
 
-    const token = '';
+    let token = '';
     if(isFunction(tokenReader)){
       const tokenDetails = await tokenReader();
       token = tokenDetails.token ;

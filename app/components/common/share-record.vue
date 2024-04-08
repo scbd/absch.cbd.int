@@ -229,13 +229,6 @@
   });
 
   const openModel = async () => { 
-    // if (!auth.token()) // authToken
-    //     authToken = await auth.token();
-    // if (authToken) {
-    //     isUserSignedIn.value = true;
-    //     documentShareApi = new DocumentShareApi(authToken);
-    //     subscriptionsApi = new SubscriptionsApi(authToken);
-    // }
     if (!modal._isShown)
         modal.show('static');
 
