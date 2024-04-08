@@ -23,6 +23,14 @@ export const downloadSchemas = {
 		"detectableLmos"  : fieldsT["laboratoryDetection.detectableLmos"],
 		"detectableGenes" : fieldsT["laboratoryDetection.detectableGenes"],
 		"publishedOn"     : fieldsT["laboratoryDetection.publishedOn"]
+	},
+
+	"biosafetyExpert":{
+		"uniqueIdentifier":"biosafetyExpert.uniqueIdentifier",
+		"government":"biosafetyExpert.government",
+		"countries":"biosafetyExpert.countries",
+		"expertise":"biosafetyExpert.expertise",
+		"unLanguages":"biosafetyExpert.unLanguages"
 	}
 }
 
