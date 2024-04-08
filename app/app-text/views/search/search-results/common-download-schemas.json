@@ -23,6 +23,11 @@
     "organization.contactsEmails"  : "Email of Contact person or Related Organizations",
     "organization.organizationType": "Type of organization",
     "organization.areasOfWork"     : "Areas of work",
-    "organization.publishedOn"     : "Publication Date"
+    "organization.publishedOn"     : "Publication Date",
 
+    "authority.uniqueIdentifier":"UID",
+    "authority.government":"Country",
+    "authority.name":"Name of the Competent National Authority",
+    "authority.functions":"Administrative functions",
+    "authority.cpbOrganismTypes":"Types of organism(s) under its responsibility"
 }
