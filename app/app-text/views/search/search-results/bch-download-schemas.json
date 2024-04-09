@@ -1,5 +1,5 @@
 {
-  "supplementaryAuthority.uniqueIdentifier": "UID",
+  "supplementaryAuthority.uniqueId": "UID",
   "supplementaryAuthority.government": "Country",
   "supplementaryAuthority.name": "Name of the Competent Authority"
 }

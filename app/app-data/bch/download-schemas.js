@@ -5,7 +5,7 @@ export const downloadSchemas = {
 	...commonDownloadSchemas,
 
 	"supplementaryAuthority":{
-		"uniqueIdentifier": fieldsT["supplementaryAuthority.uniqueIdentifier"],
+		"uniqueId": fieldsT["supplementaryAuthority.uniqueId"],
 		"government":fieldsT["supplementaryAuthority.government"],
 		"name":fieldsT["supplementaryAuthority.name"]
 	}
