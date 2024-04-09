@@ -1,4 +1,9 @@
 {
+  "country"           : "Country",
+  "publishedOn"       : "Publication Date",
+  "bchRecordID"       : "BCH record ID",
+  "name"              :  "Name",
+
   "supplementaryAuthority.uniqueId": "UID",
   "supplementaryAuthority.government": "Country",
   "supplementaryAuthority.name": "Name of the Competent Authority",
@@ -20,5 +25,18 @@
   "laboratoryDetection.lmoTypes": "Types of LMOs",
   "laboratoryDetection.detectableLmos": "LMO(s) detectable by the laboratory",
   "laboratoryDetection.detectableGenes": "Genetic element(s) detectable by the laboratory",
-  "laboratoryDetection.publishedOn":"Publication Date"
+  "laboratoryDetection.publishedOn":"Publication Date",
+
+  "biosafetyDecision.authorities"                    :"Competent National Authority(ies) responsible for the decision or communication",
+  "biosafetyDecision.title"                          : "Title / Reference number of the decision or communication",
+  "biosafetyDecision.date"                           : "Date of the decision",
+  "biosafetyDecision.decisionTypes"                  : "Subject of the decision, notification, communication or declaration",
+  "biosafetyDecision.involvesFieldTrial"             : "Does the decision involve field trials?",
+  "biosafetyDecision.involvesCommercialRelease"      : "Does the decision allow commercial release?",
+  "biosafetyDecision.appliesToSubsequentIntroductions": "Will the decision apply to subsequent introductions of the same LMO(s) into the environment?",
+  "biosafetyDecision.uses"                           : "Use(s) of LMO",
+  "biosafetyDecision.decisionTypesDirectUse"         : "Type of Decision",
+  "biosafetyDecision.decisionResult"                 : "Result of the decision",
+  "biosafetyDecision.modifiedOrganisms"              : "LMO identification",
+  "biosafetyDecision.riskAssessments"                : "Risk assessment"
 }
