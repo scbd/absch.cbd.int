@@ -38,5 +38,11 @@
   "biosafetyDecision.decisionTypesDirectUse"         : "Type of Decision",
   "biosafetyDecision.decisionResult"                 : "Result of the decision",
   "biosafetyDecision.modifiedOrganisms"              : "LMO identification",
-  "biosafetyDecision.riskAssessments"                : "Risk assessment"
+  "biosafetyDecision.riskAssessments"                : "Risk assessment",
+  "nationalRiskAssessment.title"                     : "Title of the risk assessment",
+  "nationalRiskAssessment.date"                      : "Date of the risk assessment",
+  "nationalRiskAssessment.modifiedOrganisms"         : "Living modified organism(s)",
+  "nationalRiskAssessment.scopes"                    : "Scope of the risk assessment",
+
+  "independentRiskAssessment.organizations"          : "Institution responsible for the risk assessment"
 }
