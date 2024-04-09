@@ -23,6 +23,84 @@ export const downloadSchemas = {
 		"detectableLmos"  : fieldsT["laboratoryDetection.detectableLmos"],
 		"detectableGenes" : fieldsT["laboratoryDetection.detectableGenes"],
 		"publishedOn"     : fieldsT["laboratoryDetection.publishedOn"]
+	},
+	"biosafetyDecision" : {
+		"uniqueId"                        : fieldsT["bchRecordID"],
+		"government"                      : fieldsT["country"],
+		"authorities"                     : fieldsT["biosafetyDecision.authorities"],
+		"title"                           : fieldsT["biosafetyDecision.title"],
+		"date"                            : fieldsT["biosafetyDecision.date"],
+		"decisionTypes"                   : fieldsT["biosafetyDecision.decisionTypes"],
+		"involvesFieldTrial"              : fieldsT["biosafetyDecision.involvesFieldTrial"],
+		"involvesCommercialRelease"       : fieldsT["biosafetyDecision.involvesCommercialRelease"],
+		"appliesToSubsequentIntroductions": fieldsT["biosafetyDecision.appliesToSubsequentIntroductions"],
+		"uses"                            : fieldsT["biosafetyDecision.uses"],
+		"decisionTypesDirectUse"          : fieldsT["biosafetyDecision.decisionTypesDirectUse"],
+		"decisionResult"                  : fieldsT["biosafetyDecision.decisionResult"],
+		"modifiedOrganisms"               : fieldsT["biosafetyDecision.modifiedOrganisms"],
+		"riskAssessments"                 : fieldsT["biosafetyDecision.riskAssessments"],
+		"publishedOn"                     : fieldsT["publishedOn"]
+	},
+	"nationalRiskAssessment":{
+		"uniqueId"         : fieldsT["bchRecordID"],
+		"government"       : fieldsT["country"],
+		"title"            : fieldsT["nationalRiskAssessment.title"],
+		"date"             : fieldsT["nationalRiskAssessment.date"],
+		"modifiedOrganisms": fieldsT["nationalRiskAssessment.modifiedOrganisms"],
+		"scopes"           : fieldsT["nationalRiskAssessment.scopes"],
+		"publishedOn"      : fieldsT["publishedOn"]
+	},
+	"independentRiskAssessment":{
+		"uniqueId"         : fieldsT["bchRecordID"],
+		"title"            : fieldsT["nationalRiskAssessment.title"],
+		"date"             : fieldsT["nationalRiskAssessment.date"],
+		"organizations"    : fieldsT["independentRiskAssessment.organizations"],
+		"modifiedOrganisms": fieldsT["nationalRiskAssessment.modifiedOrganisms"],
+		"scopes"           : fieldsT["nationalRiskAssessment.scopes"],
+		"publishedOn"      : fieldsT["publishedOn"]
+	},
+	"modifiedOrganism" : {
+		"uniqueId"            : fieldsT["bchRecordID"],
+		"identity"            : fieldsT["name"],
+		"transformationEvent" : fieldsT["modifiedOrganism.transformationEvent"],
+		"uniqueIdentification": fieldsT["modifiedOrganism.uniqueIdentification"],
+		"developers"          : fieldsT["modifiedOrganism.developers"],
+		"recipientOrganisms"  : fieldsT["modifiedOrganism.recipientOrganisms"],
+		"vector"              : fieldsT["modifiedOrganism.vector"],
+		"techniqueUsed"       : fieldsT["modifiedOrganism.techniqueUsed"],
+		"genes"               : fieldsT["modifiedOrganism.genes"],
+		"traits"              : fieldsT["modifiedOrganism.traits"],
+		"commonUses"          : fieldsT["modifiedOrganism.commonUses"],
+		"publishedOn"         : fieldsT["publishedOn"]
+	},
+	"dnaSequence" : {
+		"uniqueId"      : fieldsT["bchRecordID"],
+		"name"          : fieldsT["name"],
+		"synonymNames"  : fieldsT["dnaSequence.synonymNames"],
+		"abbreviation"  : fieldsT["dnaSequence.abbreviation"],
+		"family"        : fieldsT["dnaSequence.family"],
+		"isSynthetic"   : fieldsT["dnaSequence.isSynthetic"],
+		"donorOrganisms": fieldsT["dnaSequence.donorOrganisms"],
+		"traits"        : fieldsT["dnaSequence.traits"],
+		"publishedOn"   : fieldsT["publishedOn"]
+	},
+	"organism" : {
+		"uniqueId"              : fieldsT["bchRecordID"],
+		"scientificName"        : fieldsT["organism.scientificName"],
+		"scientificNameSynonyms": fieldsT["organism.scientificNameSynonyms"],
+		"commonNames"           : fieldsT["organism.commonNames"],
+		"plantCultivar"         : fieldsT["organism.plantCultivar"],
+		"organismType"          : fieldsT["organism.organismType"],
+		"commonUses"            : fieldsT["organism.commonUses"]
+	},
+	"biosafetyLaw" : {
+		"uniqueId"       : fieldsT["bchRecordID"],
+		"government"     : fieldsT["government"],
+		"title"          : fieldsT["title"],
+		"type"           : fieldsT["biosafetyLaw.type"],
+		"jurisdiction"   : fieldsT["biosafetyLaw.jurisdiction"],
+		"cpbSubjectAreas": fieldsT["biosafetyLaw.cpbSubjectAreas"],
+		"entryIntoForce" : fieldsT["biosafetyLaw.entryIntoForce"],
+		"publishedOn"    : fieldsT["publishedOn"]
 	}
 }
-

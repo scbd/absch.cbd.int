@@ -1,4 +1,10 @@
 {
+  "country"           : "Country",
+  "publishedOn"       : "Publication Date",
+  "bchRecordID"       : "BCH record ID",
+  "name"              :  "Name",
+  "title"             : "Title",
+  
   "supplementaryAuthority.uniqueId": "UID",
   "supplementaryAuthority.government": "Country",
   "supplementaryAuthority.name": "Name of the Competent Authority",
@@ -13,5 +19,54 @@
   "laboratoryDetection.lmoTypes": "Types of LMOs",
   "laboratoryDetection.detectableLmos": "LMO(s) detectable by the laboratory",
   "laboratoryDetection.detectableGenes": "Genetic element(s) detectable by the laboratory",
-  "laboratoryDetection.publishedOn":"Publication Date"
+  "laboratoryDetection.publishedOn":"Publication Date",
+
+    "biosafetyDecision.authorities"                    :"Competent National Authority(ies) responsible for the decision or communication",
+    "biosafetyDecision.title"                          : "Title / Reference number of the decision or communication",
+    "biosafetyDecision.date"                           : "Date of the decision",
+    "biosafetyDecision.decisionTypes"                  : "Subject of the decision, notification, communication or declaration",
+    "biosafetyDecision.involvesFieldTrial"             : "Does the decision involve field trials?",
+    "biosafetyDecision.involvesCommercialRelease"      : "Does the decision allow commercial release?",
+    "biosafetyDecision.appliesToSubsequentIntroductions": "Will the decision apply to subsequent introductions of the same LMO(s) into the environment?",
+    "biosafetyDecision.uses"                           : "Use(s) of LMO",
+    "biosafetyDecision.decisionTypesDirectUse"         : "Type of Decision",
+    "biosafetyDecision.decisionResult"                 : "Result of the decision",
+    "biosafetyDecision.modifiedOrganisms"              : "LMO identification",
+    "biosafetyDecision.riskAssessments"                : "Risk assessment",
+
+    "nationalRiskAssessment.title"                     : "Title of the risk assessment",
+    "nationalRiskAssessment.date"                      : "Date of the risk assessment",
+    "nationalRiskAssessment.modifiedOrganisms"         : "Living modified organism(s)",
+    "nationalRiskAssessment.scopes"                    : "Scope of the risk assessment",
+
+    "independentRiskAssessment.organizations"          : "Institution responsible for the risk assessment",
+
+    "modifiedOrganism.transformationEvent"             : "Transformation event",
+    "modifiedOrganism.uniqueIdentification"            : "Unique identifier",
+    "modifiedOrganism.developers"                      : "Developer (Name)",
+    "modifiedOrganism.recipientOrganisms"              : "Recipient Organism or Parental Organisms",
+    "modifiedOrganism.vector"                          : "Vector",
+    "modifiedOrganism.techniqueUsed"                   : "Techniques used for modification",
+    "modifiedOrganism.genes"                           : "Introduced or modified genetic element(s)",
+    "modifiedOrganism.traits"                          : "Modified traits",
+    "modifiedOrganism.commonUses"                      : "Common use(s)",
+
+    "dnaSequence.synonymNames"                         : "Alternative genetic element name(s)",
+    "dnaSequence.abbreviation"                         : "Abbreviation",
+    "dnaSequence.family"                               : "Category",
+    "dnaSequence.isSynthetic"                          : "Is this genetic element a synthetic molecule?",
+    "dnaSequence.donorOrganisms"                       : "Donor organism (scientific name)",
+    "dnaSequence.traits"                               : "Related trait(s) or use(s) in biotechnology",
+
+    "organism.scientificName"                          : "Scientific name",
+    "organism.scientificNameSynonyms"                  : "Alternate scientific name(s) (synonym(s))",
+    "organism.commonNames"                             : "Common name(s)",
+    "organism.plantCultivar"                           : "Additional classification",
+    "organism.organismType"                            : "Type of organism",
+    "organism.commonUses"                              : "Common use(s)",
+
+    "biosafetyLaw.type"                                : "Type of Law / Regulation",
+    "biosafetyLaw.jurisdiction"                        : "Area of jurisdiction",
+    "biosafetyLaw.cpbSubjectAreas"                     : "Subject areas",
+    "biosafetyLaw.entryIntoForce"                      : "Date of entry into force"
 }
