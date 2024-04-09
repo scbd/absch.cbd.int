@@ -25,7 +25,7 @@
     "organization.areasOfWork"     : "Areas of work",
     "organization.publishedOn"     : "Publication Date",
 
-    "authority.uniqueIdentifier":"UID",
+    "authority.uniqueId":"UID",
     "authority.government":"Country",
     "authority.name":"Name of the Competent National Authority",
     "authority.functions":"Administrative functions",

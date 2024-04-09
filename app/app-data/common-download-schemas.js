@@ -32,7 +32,7 @@ export const downloadSchemas = {
     },
 
     "authority":{
-        "uniqueIdentifier": fieldsT["authority.uniqueIdentifier"],
+        "uniqueId": fieldsT["authority.uniqueId"],
         "government": fieldsT["authority.government"],
         "name": fieldsT["authority.name"],
         "functions": fieldsT["authority.functions"],
