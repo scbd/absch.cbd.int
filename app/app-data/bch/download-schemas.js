@@ -26,7 +26,7 @@ export const downloadSchemas = {
 	},
 
 	"biosafetyExpert":{
-		"uniqueIdentifier": fieldsT["biosafetyExpert.uniqueIdentifier"],
+		"uniqueId": fieldsT["biosafetyExpert.uniqueId"],
 		"government": fieldsT["biosafetyExpert.government"],
 		"countries": fieldsT["biosafetyExpert.countries"],
 		"expertise": fieldsT["biosafetyExpert.expertise"],
