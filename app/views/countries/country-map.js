@@ -9,6 +9,7 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 import '~/components/scbd-angularjs-services/main';
 import './directives/homepin-popup-bch';
 import './directives/homepin-popup-abs';
+import './directives/homepin-popup-chm';
 import countryMapTranslation from '~/app-text/views/countries/country-map.json';
 
 
@@ -96,7 +97,10 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
           }
         }
         else if(realm.is('ABS')){
-          $scope.isABS          = true;
+          $scope.isABS          = true;          
+        }
+        else if(realm.is('CHM')){
+          $scope.isCHM          = true;       
         }
 
         $scope.countryMapScope= $scope;
@@ -174,6 +178,10 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
           if($scope.options.isBch){
               $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
               $scope.numParty     = _.filter(countries, {isParty:     true}).length;
+          } 
+          else if($scope.options.isChm){
+              $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
+              $scope.numParty     = _.filter(countries, {isParty:     true}).length;
           }
           else {                
               $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
@@ -187,6 +195,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         $scope.options = {
           isBch       : realm.is('BCH'),
           isAbs       : realm.is('ABS'),
+          isChm       : realm.is('CHM'),
           protocol    : realm.protocol,
           protocolShortName  :realm.protocolShortName,
           chShortName :realm.chShortName,
@@ -324,7 +333,14 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                 var xkMapCountry = getMapObject(territoryCode);
                 xkMapCountry.colorReal = mapColors.party;
                 mapCountry.originalColorReal = xkMapCountry.colorReal
-              }
+              }        
+
+              if (($scope.isCHM && country.isInbetweenParty))
+                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.inBetweenParty;
+              else if (country.isParty)
+                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.party;
+              else
+                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.nonParty;
 
         }
         function changeSelectedColor(code, color) {
