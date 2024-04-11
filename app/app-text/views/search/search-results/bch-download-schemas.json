@@ -11,5 +11,6 @@
   "laboratoryDetection.detectionMethods": "Types of detection/identification method(s) available for use in the laboratory",
   "laboratoryDetection.lmoTypes": "Types of LMOs",
   "laboratoryDetection.detectableLmos": "LMO(s) detectable by the laboratory",
-  "laboratoryDetection.detectableGenes": "Genetic element(s) detectable by the laboratory"
+  "laboratoryDetection.detectableGenes": "Genetic element(s) detectable by the laboratory",
+  "laboratoryDetection.updatedDate":"Publication Date"
 }
