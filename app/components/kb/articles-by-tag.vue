@@ -63,7 +63,7 @@
     import ArticlesApi from './article-api';
     import { formatDate, lstring } from './filters';
     import './filters';
-    import { loadKbCategories, getUrl, getApplicationArticleRealm  } from '../../services/composables/articles.js';
+    import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
     import { useRealm } from '../../services/composables/realm.js';
     import {  useRoute } from "@scbd/angular-vue/src/index.js";
     const { t } = useI18n({ messages });
@@ -108,7 +108,7 @@
             articles.value = [];
             const q = {
                 $and: [{
-                        adminTags: getApplicationArticleRealm(realm)                    
+                        adminTags: realm.is('BCH') ? 'bch' : 'abs'
                     },
                     {
                         adminTags: {
