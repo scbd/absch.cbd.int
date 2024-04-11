@@ -39,7 +39,7 @@
 	import { ref, onMounted } from 'vue';
 	import Paginate from '../common/pagination.vue';
 	import ArticlesApi from './article-api';
-	import { loadKbCategories , getUrl } from '../../services/composables/articles.js'
+	import { loadKbCategories , getUrl , getApplicationArticleRealm } from '../../services/composables/articles.js'
 	import { lstring } from './filters';
 	import { useI18n } from 'vue-i18n';
 	import messages from '../../app-text/components/kb.json';
@@ -73,7 +73,7 @@
 	};
 
 	const getAdminTag = function() {
-		return realm.is('BCH') ? 'bch' : 'absch';
+		return  getApplicationArticleRealm(realm);	
 		
 	};
 
@@ -94,7 +94,7 @@
 
 				faqCount.value = 0;
 				faqs.value = [];
-				const realmTag = realm.is('BCH') ? 'bch' : 'abs';
+				const realmTag = getApplicationArticleRealm(realm);    
 				const q = { 
 					$and : [
 						{ adminTags : { $all : [realmTag, 'faq']}},

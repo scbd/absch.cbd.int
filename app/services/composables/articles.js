@@ -67,7 +67,7 @@ export function shuffleArray (array) {
         .map(({ value }) => value);
 };
 
-export function getApplicationArticleRealm ()  {
+export function getApplicationArticleRealm (realm)  {
         if(realm.is('BCH')) return 'bch';
         if(realm.is('ABS')) return 'absch';
         if(realm.is('CHM')) return 'chm';

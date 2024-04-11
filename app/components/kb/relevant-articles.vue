@@ -26,6 +26,8 @@
     import { useRealm } from '../../services/composables/realm.js';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
+    import { getApplicationArticleRealm } from "../../services/composables/articles.js";
+    
     const { t, locale } = useI18n({ messages });
     const realm = useRealm();
 
@@ -45,7 +47,7 @@
 
     onMounted(async () => {
     let ag = [];
-    ag.push({"$match":{"$and":[{"adminTags": { $all : [realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
+    ag.push({"$match":{"$and":[{"adminTags": { $all : [getApplicationArticleRealm(realm)]}}]}});
         ag.push({"$match":{"$and":[{"adminTags":props.tag}]}});
         ag.push({"$project" : {[`title`]:1}});
         ag.push({"$limit" : 6});
