@@ -50,19 +50,25 @@ export async function loadKbCategories(isBch, locale) {
             }
 };
 
-        export function getUrl(title, id, tag){
-            const urlTitle = title ? title.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-') : undefined;
-            if(title && id){
-                return `kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(id)}`;
-            } else if (title && !id) {
-                return `kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}`;
-            } else if (!title && !id) {
-                return `kb/tags/${encodeURIComponent( tag )}`;
-            }
-        };
+export function getUrl(title, id, tag){
+    const urlTitle = title ? title.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-') : undefined;
+    if(title && id){
+        return `kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(id)}`;
+    } else if (title && !id) {
+        return `kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}`;
+    } else if (!title && !id) {
+        return `kb/tags/${encodeURIComponent( tag )}`;
+    }
+};
 
-    export function shuffleArray (array) {
-        return array.map((value) => ({ value, sort: Math.random() * 100 }))
-            .sort((a, b) => a.sort - b.sort)
-            .map(({ value }) => value);
-    };
+export function shuffleArray (array) {
+    return array.map((value) => ({ value, sort: Math.random() * 100 }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+};
+
+export function getApplicationArticleRealm ()  {
+        if(realm.is('BCH')) return 'bch';
+        if(realm.is('ABS')) return 'absch';
+        if(realm.is('CHM')) return 'chm';
+};

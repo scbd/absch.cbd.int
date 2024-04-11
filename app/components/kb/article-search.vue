@@ -62,6 +62,8 @@
       import ArticlesApi from './article-api';
       import "../kb/filters";
       import { formatDate, lstring } from './filters';
+      import { getApplicationArticleRealm } from "../../services/composables/articles.js";
+
       const route = useRoute();
       const { t, locale } = useI18n({ messages });
       const realm = useRealm();
@@ -80,7 +82,7 @@
           if (route.value?.params?.search) {
               search.value = route.value.params.search.replace(/"/g, "");
           }         
-          realmTag.value =getApplicationArticleRealm(realm.value);
+          realmTag.value =getApplicationArticleRealm;
           await loadArticles(1);
       });
 
@@ -90,16 +92,6 @@
           if (adminTags[0] === realm) return adminTags[1];
           else return adminTags[0];
         } else return realm;
-      };
-
-      const getApplicationArticleRealm = (key) => {
-        const realmObj = {
-          'BCH': "bch",
-          'ABS': "absch",
-          'CHM': "chm",
-          'CHM-DEV': "chm"
-        }; 
-        return realmObj[key];
       };
   
       const tagUrl = (tag) => {
