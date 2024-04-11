@@ -30,7 +30,8 @@ export const downloadSchemas = {
 		"government": fieldsT["biosafetyExpert.government"],
 		"countries": fieldsT["biosafetyExpert.countries"],
 		"expertise": fieldsT["biosafetyExpert.expertise"],
-		"unLanguages": fieldsT["biosafetyExpert.unLanguages"]
+		"unLanguages": fieldsT["biosafetyExpert.unLanguages"],
+		"updatedDate": fieldsT["biosafetyExpert.updatedDate"]
 	}
 }
 
