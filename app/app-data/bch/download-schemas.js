@@ -7,7 +7,8 @@ export const downloadSchemas = {
 	"supplementaryAuthority":{
 		"uniqueId": fieldsT["supplementaryAuthority.uniqueId"],
 		"government":fieldsT["supplementaryAuthority.government"],
-		"name":fieldsT["supplementaryAuthority.name"]
+		"name":fieldsT["supplementaryAuthority.name"],
+		"updatedDate": fieldsT["supplementaryAuthority.updatedDate"]
 	}
 }
 
