@@ -29,5 +29,6 @@
     "authority.government":"Country",
     "authority.name":"Name of the Competent National Authority",
     "authority.functions":"Administrative functions",
-    "authority.cpbOrganismTypes":"Types of organism(s) under its responsibility"
+    "authority.cpbOrganismTypes":"Types of organism(s) under its responsibility",
+    "authority.updatedDate":"Publication Date"
 }

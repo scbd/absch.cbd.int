@@ -36,6 +36,7 @@ export const downloadSchemas = {
         "government": fieldsT["authority.government"],
         "name": fieldsT["authority.name"],
         "functions": fieldsT["authority.functions"],
-        "cpbOrganismTypes": fieldsT["authority.cpbOrganismTypes"]
+        "cpbOrganismTypes": fieldsT["authority.cpbOrganismTypes"],
+        "updatedDate": fieldsT["authority.updatedDate"]
     }
 }
