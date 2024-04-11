@@ -82,7 +82,7 @@
           if (route.value?.params?.search) {
               search.value = route.value.params.search.replace(/"/g, "");
           }         
-          realmTag.value =getApplicationArticleRealm;
+          realmTag.value =getApplicationArticleRealm(realm);
           await loadArticles(1);
       });
 
