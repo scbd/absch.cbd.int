@@ -10,8 +10,6 @@ app.directive('homepinPopupChm', ['translationService', '$routeParams', '$locati
         link: function($scope) {
             translationService.set('homepinPopupChmTranslation', homepinPopupChmTranslation);
             $scope.ToggleCountyList = function (code, currentCountryCode){
-                console.log("code: ",code)
-                console.log("currentCountryCode: ",currentCountryCode)
                 if ($routeParams.code && $("#div" + code).length>0) {
                     $('html, body').animate({
                         scrollTop: $("#div"+code).offset().top

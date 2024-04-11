@@ -1,53 +1,22 @@
 <div>  
-    <div ng-if="currentCountry.code" style="padding:5px;margin-bottom:10px;" ng-class="{
-    'bg-abs': isABS && currentCountry.isParty && !currentCountry.isInbetweenParty,
-    'bg-bch': isBCH && currentCountry.isParty && !currentCountry.isInbetweenParty, 
+    <div ng-if="currentCountry.code" style="padding:5px;margin-bottom:10px;" ng-class="{ 
     'bg-chm': isCHM && currentCountry.isParty && !currentCountry.isInbetweenParty, 
     'bg-darkgrey':!currentCountry.isParty && !currentCountry.isInbetweenParty, 
     'bg-inbetween': currentCountry.isInbetweenParty}">
         <div>
         
             <span class="color-white fw-bold" ng-if="((isCHM && currentCountry.isParty) || (isCHM && currentCountry.isParty)) && !currentCountry.isInbetweenParty">
-                {{::('homepinPopupChmTranslation.partyToNagoyaProtocol'|$translate)}}</span>
+                {{::('homepinPopupChmTranslation.partyToConvention'|$translate)}}</span>
             
                 <span  class="color-white fw-bold" ng-if="(isCHM && currentCountry.isInbetweenParty)">
                     {{::('homepinPopupChmTranslation.ratifiedNotYetParty'|$translate)}}</span>
 
                 <span  class="color-white fw-bold" ng-if="(isCHM && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isCHM && !currentCountry.isParty)">
-                    {{::('homepinPopupChmTranslation.notPartyToNagoyaProtocol'|$translate)}}</span>
+                    {{::('homepinPopupChmTranslation.notPartyToConvention'|$translate)}}</span>
 
         </div>
 
-        <div class="row abs-exception-tooltip"
-        ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
-                countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
-                countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
-            <div class="col-lg-12">
-                <div 
-                ng-if="(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='dk' || countryMapScope.currentCountry.code.toLowerCase()=='dk')" 
-                class="small  color-white"
-                    style="margin-top:5px;white-space: normal;padding:3px;">
-                    {{::('homepinPopupChmTranslation.dkText'|$translate)}}
-                </div>
-                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'" 
-                class="small " style="margin-top:5px;white-space: normal;padding:3px;">
-                {{::('homepinPopupChmTranslation.fkText'|$translate)}}
-                </div>
-                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'"  class="color-white small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
-                    {{::('homepinPopupChmTranslation.ehText'|$translate)}}
-                </div>
-                <div 
-                ng-if="(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb')" 
-                class="color-white small" style="margin-top:5px;white-space: normal;padding:3px;">
-                {{::('homepinPopupChmTranslation.gbText'|$translate)}}
-                    <a rel="noopener" ng-href="#"  class=" color-white gb-territories" 
-                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="{{::('homepinPopupChmTranslation.gbTitle14'|$translate)}}">{{::('homepinPopupChmTranslation.overseasTerritories'|$translate)}}</a>
-                    {{::('homepinPopupChmTranslation.or'|$translate)}}
-                    <a rel="noopener" ng-href="#" class=" color-white gb-territories"  data-container="body" 
-                        data-bs-toggle="tooltip" data-placement="left" title="{{::('homepinPopupChmTranslation.gbTitle3'|$translate)}}">{{::('homepinPopupChmTranslation.crownDependencies'|$translate)}}</a>
-                </div>
-            </div>
-        </div>
+
     </div>
     <div>
 

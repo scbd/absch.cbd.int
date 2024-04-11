@@ -238,6 +238,12 @@
 						<span ng-if="country.isParty" class="color-party fs-small-6 me-2">{{::('countryListTranslation.partyToCartagena'|$translate)}}</span>
 						<span ng-if="isBCH && country.isNKLSParty" class="color-NKLSP fs-small-6 me-2">{{::('countryListTranslation.partyToSuppProtocol'|$translate)}}</span>
 					</div>
+					<div ng-if="isCHM">
+						<span ng-if="!country.isParty" class="color-grey color-non-party fs-small-6 me-2">{{::('countryListTranslation.nonPartyToConvention'|$translate)}}</span>
+						<span ng-if="country.isParty" class="color-party fs-small-6 me-2">{{::('countryListTranslation.partyToConvention'|$translate)}}</span>
+						<span ng-if="country.isInbetweenParty" class="color-inbetween fs-small-6 me-2">{{::('countryListTranslation.ratified'|$translate)}}</span>
+						
+					</div>
 				</div>
 			</div>
 

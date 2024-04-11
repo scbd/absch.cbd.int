@@ -7,34 +7,7 @@
                 {{::('pinPopupChmT.ratified'|$translate)}}</span>
             <span ng-if="(isCHM && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isCHM && !currentCountry.isParty)">
                 {{::('pinPopupChmT.notPartyToNagoya'|$translate)}}</span>
-        </div>
-
-        <div class="row abs-exception-tooltip"
-        ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
-                countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
-                countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
-            <div class="col-lg-12">
-                <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='dk' || countryMapScope.currentCountry.code.toLowerCase()=='dk') ? 'show' : 'hide'}}"
-                    style="margin-top:5px;white-space: normal;padding:3px;">
-                    {{::('pinPopupChmT.dkText'|$translate)}}
-                   
-                </div>
-                <div class="{{countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk' ? 'show' : 'hide'}}   small " style="margin-top:5px;white-space: normal;padding:3px;">
-                    {{::('pinPopupChmT.fkText'|$translate)}}
-                </div>
-                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'"  class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
-                    {{::('pinPopupChmT.ehText'|$translate)}}
-                </div>
-                <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;padding:3px;">
-                    {{::('pinPopupChmT.gbText'|$translate)}}
-                    <a rel="noopener" ng-href="#"  class=" color-litegrey gb-territories" 
-                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="{{::('pinPopupChmT.gbTitle14'|$translate)}}">{{::('pinPopupChmT.overseasTerritories'|$translate)}}</a>
-                    {{::('pinPopupChmT.or'|$translate)}}
-                    <a rel="noopener" ng-href="#" class=" color-litegrey gb-territories"  data-container="body" 
-                        data-bs-toggle="tooltip" data-placement="left" title="{{::('pinPopupChmT.gbTitle3'|$translate)}}">{{::('pinPopupChmT.crownDependencies'|$translate)}}</a>
-                </div>
-            </div>
-        </div>
+        </div>     
     </div>
     <div>    
         <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
