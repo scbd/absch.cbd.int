@@ -12,5 +12,5 @@
   "laboratoryDetection.lmoTypes": "Types of LMOs",
   "laboratoryDetection.detectableLmos": "LMO(s) detectable by the laboratory",
   "laboratoryDetection.detectableGenes": "Genetic element(s) detectable by the laboratory",
-  "laboratoryDetection.updatedDate":"Publication Date"
+  "laboratoryDetection.publishedOn":"Publication Date"
 }

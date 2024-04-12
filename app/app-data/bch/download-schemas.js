@@ -22,7 +22,7 @@ export const downloadSchemas = {
 		"lmoTypes": fieldsT["laboratoryDetection.lmoTypes"],
 		"detectableLmos": fieldsT["laboratoryDetection.detectableLmos"],
 		"detectableGenes": fieldsT["laboratoryDetection.detectableGenes"],
-		"updatedDate": fieldsT["laboratoryDetection.updatedDate"]
+		"publishedOn": fieldsT["laboratoryDetection.publishedOn"]
 	}
 }
 
