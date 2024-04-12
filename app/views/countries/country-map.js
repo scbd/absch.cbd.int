@@ -9,7 +9,8 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 import '~/components/scbd-angularjs-services/main';
 import './directives/homepin-popup-bch';
 import './directives/homepin-popup-abs';
-import './directives/homepin-popup-chm';
+import homePinPopupChm from './directives/home-pin-popup-chm.vue';
+
 import countryMapTranslation from '~/app-text/views/countries/country-map.json';
 
 
@@ -73,6 +74,10 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             }
         };
 
+
+        $scope.vueComponent = {
+          components: { homePinPopupChm }
+        }
 
         if(!$scope.mapHeight)
           $scope.mapHeight = "lg";
