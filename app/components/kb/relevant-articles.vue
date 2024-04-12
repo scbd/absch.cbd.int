@@ -30,7 +30,7 @@
     
     const { t, locale } = useI18n({ messages });
     const realm = useRealm();
-
+    const articleRealm = getApplicationArticleRealm()
     const props = defineProps({
         tag: { type: String, required: false },
         type:{ type: String, required: false },
@@ -47,7 +47,7 @@
 
     onMounted(async () => {
     let ag = [];
-    ag.push({"$match":{"$and":[{"adminTags": { $all : [getApplicationArticleRealm(realm)]}}]}});
+    ag.push({"$match":{"$and":[{"adminTags": { $all : [articleRealm]}}]}});
         ag.push({"$match":{"$and":[{"adminTags":props.tag}]}});
         ag.push({"$project" : {[`title`]:1}});
         ag.push({"$limit" : 6});

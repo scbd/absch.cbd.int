@@ -1,4 +1,6 @@
 import ArticlesApi from '../../components/kb/article-api';
+import { useRealm } from '~/services/composables/realm.js';
+
 const articlesApi = new ArticlesApi();
 
 export async function loadKbCategories(isBch, locale) {
@@ -67,7 +69,10 @@ export function shuffleArray (array) {
         .map(({ value }) => value);
 };
 
-export function getApplicationArticleRealm (realm)  {
+export function getRealmArticleTag ()  {
+    
+        const realm = useRealm();
+
         if(realm.is('BCH')) return 'bch';
         if(realm.is('ABS')) return 'absch';
         if(realm.is('CHM')) return 'chm';
