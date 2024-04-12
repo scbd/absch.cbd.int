@@ -37,6 +37,6 @@ export const downloadSchemas = {
         "name": fieldsT["authority.name"],
         "functions": fieldsT["authority.functions"],
         "cpbOrganismTypes": fieldsT["authority.cpbOrganismTypes"],
-        "updatedDate": fieldsT["authority.updatedDate"]
+        "publishedOn": fieldsT["authority.publishedOn"]
     }
 }
