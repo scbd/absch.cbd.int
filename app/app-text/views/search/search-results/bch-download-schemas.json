@@ -2,5 +2,5 @@
   "supplementaryAuthority.uniqueId": "UID",
   "supplementaryAuthority.government": "Country",
   "supplementaryAuthority.name": "Name of the Competent Authority",
-  "supplementaryAuthority.updatedDate":"Publication Date"
+  "supplementaryAuthority.publishedOn":"Publication Date"
 }
