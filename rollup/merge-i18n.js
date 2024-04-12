@@ -1,5 +1,6 @@
 // rollup.config.js (building more than one bundle)
 import path from 'path'
+import upath from 'upath'
 import fs from 'fs'
 import _ from 'lodash'
 import globToRegExp from 'glob-to-regexp';
@@ -16,8 +17,11 @@ export default function mergeI18n(options = {}) {
     locale
   } = options;
 
-  const basePatternRe      = globToRegExp(path.join(baseDir,      include || '**'));
-  const localizedPatternRe = globToRegExp(path.join(localizedDir, include || '**'));
+  const cwd = process.cwd();
+  const baseDirPath        = path.join(cwd, baseDir);
+  const localizedDirPath   = path.join(cwd, localizedDir);
+  const basePatternRe      = globToRegExp(upath.join(baseDir,      include || '**'));
+  const localizedPatternRe = globToRegExp(upath.join(localizedDir, include || '**'));
 
 
   return {
@@ -27,8 +31,10 @@ export default function mergeI18n(options = {}) {
 
       let relativeFilePath = null;
 
-      if(!relativeFilePath && localizedPatternRe.test(id)) relativeFilePath = path.relative(localizedDir, id);
-      if(!relativeFilePath && basePatternRe     .test(id)) relativeFilePath = path.relative(baseDir, id);
+      const relativeUnixPath = upath.relative(cwd, id);
+
+      if(!relativeFilePath && localizedPatternRe.test(relativeUnixPath)) relativeFilePath = path.relative(localizedDirPath, id);
+      if(!relativeFilePath && basePatternRe     .test(relativeUnixPath)) relativeFilePath = path.relative(baseDirPath, id);
 
       if(!relativeFilePath) return null;
 
@@ -39,7 +45,7 @@ export default function mergeI18n(options = {}) {
       };
 
       if(locale!=defaultLocale) {
-        const baseFilePath = path.join(baseDir, relativeFilePath);
+        const baseFilePath = path.join(baseDirPath, relativeFilePath);
 
         let baseMessages = {};
 
