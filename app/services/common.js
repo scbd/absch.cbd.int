@@ -2,6 +2,7 @@ import app from '~/app';
 import _ from 'lodash';
 import '~/components/scbd-angularjs-services/main';
 import '~/views/report-analyzer/filters/ascii';
+export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
 
     app.factory("htmlUtility", function() {
       return {
@@ -531,3 +532,4 @@ export function stringToHash(text, radix){
 
     return Math.abs(hash).toString(radix||24);
 }
+

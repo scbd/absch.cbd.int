@@ -9,28 +9,8 @@
 
 </template>
 
-
-
-<script>
+<script setup>
 
   import articleDetails from '../../components/kb/article-details.vue';
-  export default {
-    name:'kbArticles',
-    components:{
-      articleDetails
-    },
 
-    props:{
-    },
-    data:  () => {
-      return {
-
-      }
-    },
-    watch: {
-      tokenReader: function(tokenReader) {
-        // if(tokenReader) addApiOptions({ tokenReader })
-      }
-    }
-  }
 </script>

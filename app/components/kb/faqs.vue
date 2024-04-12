@@ -1,12 +1,12 @@
 <template>
     <div>
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@35.0.0/build/content-style.css">
-        <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
+        <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
         <div v-if="!loading">
             <h4 class="fs-4 fw-bold">
-				{{ $t("frequentlyAskedQuestions") }} 
+				{{ t("frequentlyAskedQuestions") }} 
 				<span v-if="faqFilterTag && faqFilterTag!='faq'">
-					{{ $t("for") }} <strong>{{faqFilterTag}}</strong></span> 
+					{{ t("for") }} <strong>{{faqFilterTag}}</strong></span> 
 				<strong>({{faqCount}})</strong>
 				<hr/>
 			</h4>
@@ -35,74 +35,70 @@
 		</div>
     </div>
 </template>
-<script>
-
-	import i18n from '../../app-text/components/kb.json';
-	import Paginate from './pagination.vue';
+<script setup>
+	import { ref, onMounted } from 'vue';
+	import Paginate from '../common/pagination.vue';
 	import ArticlesApi from './article-api';
-    import articlesMaxin from '../maxin/article';
-    import { lstring } from './filters';
+	import { loadKbCategories , getUrl } from '../../services/composables/articles.js'
+	import { lstring } from './filters';
+	import { useI18n } from 'vue-i18n';
+	import messages from '../../app-text/components/kb.json';
+	import { useRealm } from '../../services/composables/realm.js';
+	import {  useRoute } from "@scbd/angular-vue/src/index.js";
 
-	export default {
-		name:'kbFaqsList',
-		components:{
-			Paginate
-		},
-		props:{
-		},
-		created(){
-			this.faqFilterTag = (this.$route.params.tag||'').replace(/"/g, ""); 
-			this.articlesApi = new ArticlesApi();
-		},
-    	mixins: [articlesMaxin],
-		async mounted() {
-        this.categories = await this.loadKbCategories(true);
-		    this.loadFaqs(1);
-		},
-		data:  () => {
-			return {
-				faqFilterTag:'',
-				faqs: [],
-				loading: true,
-        categories: [],
-				faqCount:0,
-				pageNumber:1,
-				recordsPerPage:10
-			}
-		},
-		methods: {
-			lstring, 
-			tagUrl(tag){
-				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
-				const tagTitle 	 = (tagDetails?.title||'');
-                return this.getUrl(tagTitle, undefined, tag);
-			},
+	const realm = useRealm();
+	const { t } = useI18n({ messages });
+	const route = useRoute();
+	const articlesApi = new ArticlesApi();
+	const faqFilterTag = ref('');
+	const faqs = ref([]);
+	const categories = ref([]);
+	const loading = ref(true);
+	const faqCount = ref(0);
+	// let pageNumber = 1;
+	let pageNumber = ref(1);
+	let recordsPerPage = 10;
+	
+	onMounted(async ()=>{
+		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
+		categories.value = await loadKbCategories(true);
+		loadFaqs(1);
+	})
+	
+	const tagUrl = function (tag){ 
+		const tagDetails = categories.value.find(e=>e.adminTags.includes(tag));
+		const tagTitle 	 = (tagDetails?.title||''); 
+		const url = getUrl(tagTitle, undefined, tag);
+		return url;
+	};
 
-			getAdminTag() {
-				return this.$realm.is('BCH') ? 'bch' : 'absch';
-				
-        	},
+	const getAdminTag = function() {
+		return realm.is('BCH') ? 'bch' : 'absch';
+		
+	};
 
-			articleUrl(article, tag) {
-            	return this.getUrl(lstring(article.title), article._id, tag);
-        	},
+	const articleUrl = function (article, tag) {
+        return getUrl(lstring(article.title), article._id, tag);
+    };
 
-			onChangePage(pageNumber) {
-				this.pageNumber = pageNumber;
-				this.article=[];
-				this.loading = true;
-				window.scrollTo(0,0);
-				this.loadFaqs(pageNumber);
-			},
-			async loadFaqs(pageNumber){
+	const onChangePage = function(p) {
+		pageNumber.value = p;
+		// article=[];
+		faqs.value = [];
+		loading.value = true;
+		window.scrollTo(0,0);
+		loadFaqs(p);
+	};
+	
+	const loadFaqs = async function (pageNumber){
 
-				this.faqCount = 0;
-				this.faqs = [];
-				const realmTag = this.$realm.is('BCH') ? 'bch' : 'abs';
+				faqCount.value = 0;
+				faqs.value = [];
+				const realmTag = realm.is('BCH') ? 'bch' : 'abs';
 				const q = { 
 					$and : [
 						{ adminTags : { $all : [realmTag, 'faq']}},
-						{ adminTags : { $all : [ this.faqFilterTag ? this.faqFilterTag : 'faq']} }
+						{ adminTags : { $all : [ faqFilterTag.value ? faqFilterTag.value : 'faq']} }
 					]
 				};
 				const f = { 
@@ -110,17 +106,17 @@
 					[`content`]	: 1,
 					adminTags 					: 1, _id:1
 				} ;
-				const groupTags = JSON.stringify([this.faqFilterTag ? this.faqFilterTag : 'faq']);
-				const groupLimit = this.recordsPerPage;
-				const groupSkip  = (pageNumber-1) * this.recordsPerPage
+				const groupTags = JSON.stringify([faqFilterTag.value ? faqFilterTag.value : 'faq']);
+				const groupLimit = recordsPerPage;
+				const groupSkip  = (pageNumber-1) * recordsPerPage
 				const groupSort  = { "meta.modifiedOn":-1 };
 
 			try {
-            const result = await this.articlesApi.queryArticleGroup('adminTags', {  q, f, groupLimit, groupSort, groupTags, groupSkip });
+            	const result = await articlesApi.queryArticleGroup('adminTags', {  q, f, groupLimit, groupSort, groupTags, groupSkip });
             if (result?.length) {
               result.forEach(element => {
-                this.faqCount = this.faqCount + element.count;
-                this.faqs = [...this.faqs, ...element.articles];
+                faqCount.value += element.count;
+            	faqs.value = [...faqs.value, ...element.articles];
               });
             }
         }
@@ -128,12 +124,10 @@
             console.error(e);
         }
         finally {
-            this.loading = false;
+            loading.value = false;
         }
-			},
-		},
-		i18n: { messages:{ en: i18n }}
-	}
+	};
+		
 </script>
 <style>
 .view-article-link {

@@ -44,33 +44,36 @@
   </div>
 </div>
 </template>
-  
+    
 <script setup>
+  import { ref, onMounted } from 'vue';
   import ArticlesApi  from '../kb/article-api';
   import "../kb/filters";
+  import messages from '../../app-text/components/homepage-records.json';
   import { formatDate } from '~/components/kb/filters';
   import { useI18n } from 'vue-i18n';
-  import messages from '../../app-text/components/homepage-records.json';
   import { useRealm } from '../../services/composables/realm.js';
-  import { ref, onMounted } from 'vue';
   import {  useRouter } from "@scbd/angular-vue/src/index.js";
-  const router = useRouter();
   const { t } = useI18n({ messages });
+
+  const router = useRouter();
   const realm = useRealm();
+
   const recordList = ref([]);
   const loading = ref(true);
   const sort = 'updatedDate_dt desc';
+
   const { type, rows } = defineProps ({
       type: { type: String, required: true },
       rows: { type: Number, required: false },
   })
-  
+
   const articlesApi = new ArticlesApi();
       
   onMounted(() => {
     records();
   });
-  
+
   const records = async () => {
     const query = {
       "fq": [
@@ -86,11 +89,28 @@
       "start": 0,
       "rows": rows
     };
-    recordList.value = await articlesApi.getRecords(query);
+    const responseList = await articlesApi.getRecords(query);
+    if ((responseList?.response?.docs || []).length) {
+            recordList.value = responseList?.response?.docs;
+        }
+    loading.value = false;
+  }
+  const seeMore = () => {
+      if(type == 'reference') 
+          router.push({path: 'search', query: { currentPage: '1', tab: 'referenceRecords' }});
+      else router.push({path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
+  };
+  const recordUrl = (record) => {
+      if(!record.uniqueIdentifier_s)
+        return;
+      const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
+      const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
+      const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
+      return `database/${shortCode}/${uid}`;
   }
 </script>
-  
-  <style scoped>
+    
+<style scoped>
   .loading {
     text-align: center;
     margin: 100px auto;
