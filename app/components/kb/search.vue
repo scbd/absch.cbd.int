@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-    import { ref, defineEmits } from 'vue';
+    import { ref } from 'vue';
     import "../kb/filters";
     import { useRealm } from '../../services/composables/realm.js';
     import {  useRoute, useRouter } from "@scbd/angular-vue/src/index.js";

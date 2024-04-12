@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps, defineEmits } from 'vue';
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import messages from '../../app-text/components/common/pagination.json';
 const { t } = useI18n({ messages });
