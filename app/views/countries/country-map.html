@@ -207,9 +207,9 @@
                     <div ng-if="isBCH && currentCountry">
                         <homepin-popup-bch>
                     </div>                   
-                    <div ng-if="isCHM && currentCountry">        
-                                                   {{vueComponent}}     
-                        <home-pin-popup-chm ng-vue="vueComponent"></home-pin-popup-chm>                              
+                    <div ng-if="isCHM && currentCountry">     
+                        <!-- <home-pin-popup-chm ng-vue="vueComponent" :country="currentCountry" :countryMap="countryMapScope"></home-pin-popup-chm>                                    -->
+                        <home-pin-popup-chm ng-vue="vueComponent" :country="currentCountry"></home-pin-popup-chm>                         
                     </div>
                     <div ng-if="isABS && currentCountry" class="country-item-name">
                         <homepin-popup-abs>
