@@ -23,7 +23,7 @@
            
                 <tr v-for="schema in country.schemas" style="border:none;">            
                     <td>
-                        <span class="rounded badge ms-2 w-100"  :class="{'bg-gray-300' : schema.count==0, 'bg-chm':schema.count>0 }" >{{schema.count}}</span>
+                        <span class="rounded badge ms-2 "  :class="{'bg-gray-300' : schema.count==0, 'bg-chm':schema.count>0 }" >{{schema.count}}</span>
                     </td>
                     <td >                  
                         <a rel="noopener" v-if="country.code"  @click="ToggleCountyList(schema.shortCode,country.code)" class="text-black cursor-pointer" style="color:#fff" >
