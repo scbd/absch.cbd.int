@@ -62,7 +62,7 @@
       import ArticlesApi from './article-api';
       import "../kb/filters";
       import { formatDate, lstring } from './filters';
-      import { getApplicationArticleRealm } from "../../services/composables/articles.js";
+      import { getRealmArticleTag } from "../../services/composables/articles.js";
 
       const route = useRoute();
       const { t, locale } = useI18n({ messages });
@@ -76,13 +76,14 @@
       const categories = ref([]);
       const search = ref('');
       const articlesCount = ref(0);
+      const realmArticleTag = getRealmArticleTag();
   
       onMounted( async() => {
           categories.value = await loadKbCategories(realm.is('BCH'));
           if (route.value?.params?.search) {
               search.value = route.value.params.search.replace(/"/g, "");
           }         
-          realmTag.value =getApplicationArticleRealm(realm);
+          realmTag.value = realmArticleTag;
           await loadArticles(1);
       });
 

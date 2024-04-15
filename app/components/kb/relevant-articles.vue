@@ -26,11 +26,11 @@
     import { useRealm } from '../../services/composables/realm.js';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
-    import { getApplicationArticleRealm } from "../../services/composables/articles.js";
+    import { getRealmArticleTag } from "../../services/composables/articles.js";
     
     const { t, locale } = useI18n({ messages });
     const realm = useRealm();
-    const articleRealm = getApplicationArticleRealm()
+    const articleRealm = getRealmArticleTag();
     const props = defineProps({
         tag: { type: String, required: false },
         type:{ type: String, required: false },
@@ -44,6 +44,7 @@
     const articles = ref([]);
     const loading = ref(true);
     const articlesApi = new ArticlesApi();
+    c
 
     onMounted(async () => {
     let ag = [];

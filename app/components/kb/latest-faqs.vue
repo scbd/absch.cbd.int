@@ -16,7 +16,9 @@
 
 	import i18n from '../../app-text/components/kb.json';
 	import ArticlesApi from './article-api';
-	import { getApplicationArticleRealm } from "../../services/composables/articles.js";
+	import { getRealmArticleTag  } from "../../services/composables/articles.js";
+
+	const realmArticleTag = getRealmArticleTag();
 
 	export default {
 		name:'kbLatestFaqs',
@@ -51,7 +53,7 @@
 
 				const q = { 
 					$and : [
-						{ adminTags : { $all : [getApplicationArticleRealm(realm), 'faq' ]}},
+						{ adminTags : { $all : [ realmArticleTag, 'faq' ]}},
 						{ adminTags : { $all : ['faq']} }
 					]
 				};

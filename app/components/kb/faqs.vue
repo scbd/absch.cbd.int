@@ -39,7 +39,7 @@
 	import { ref, onMounted } from 'vue';
 	import Paginate from '../common/pagination.vue';
 	import ArticlesApi from './article-api';
-	import { loadKbCategories , getUrl , getApplicationArticleRealm } from '../../services/composables/articles.js'
+	import { loadKbCategories , getUrl , getRealmArticleTag  } from '../../services/composables/articles.js'
 	import { lstring } from './filters';
 	import { useI18n } from 'vue-i18n';
 	import messages from '../../app-text/components/kb.json';
@@ -58,6 +58,7 @@
 	// let pageNumber = 1;
 	let pageNumber = ref(1);
 	let recordsPerPage = 10;
+	const realmArticleTag = getRealmArticleTag();
 	
 	onMounted(async ()=>{
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
@@ -73,7 +74,7 @@
 	};
 
 	const getAdminTag = function() {
-		return  getApplicationArticleRealm(realm);	
+		return  realmArticleTag;	
 		
 	};
 
@@ -94,7 +95,7 @@
 
 				faqCount.value = 0;
 				faqs.value = [];
-				const realmTag = getApplicationArticleRealm(realm);    
+				const realmTag = realmArticleTag;    
 				const q = { 
 					$and : [
 						{ adminTags : { $all : [realmTag, 'faq']}},
