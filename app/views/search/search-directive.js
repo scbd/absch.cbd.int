@@ -75,6 +75,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                         var queryCanceler = null;                        
                         var isABS = realm.is('ABS');
                         var isBCH = realm.is('BCH');   
+                        var isCHM = realm.is('CHM');   
                         var leftMenuFilters  = [];
                         $scope.searchAlertError = '';
                         $scope.realm         = realm
