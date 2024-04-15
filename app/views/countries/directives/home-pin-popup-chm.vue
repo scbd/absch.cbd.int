@@ -53,17 +53,17 @@
         country: {type: Object, require:true}     
     })
 
-    const toggleCountyList = (code, currentCountryCode) => {       
-        if ((route?.params?.code) && $("#div" + code).length>0) {
+    const toggleCountyList = (schema, currentCountryCode) => {       
+        if ((route?.params?.code) && $("#div" + schema).length>0) {
             $('html, body').animate({
-                scrollTop: $("#div"+code).offset().top
+                scrollTop: $("#div"+schema).offset().top
             }, 500);
-            if ($("#div" + code).find('i').hasClass("bi-chevron-down")){
-                $("#div" + code).trigger('click');
+            if ($("#div" + schema).find('i').hasClass("bi-chevron-down")){
+                $("#div" + schema).trigger('click');
             }
         }
         else{            
-            router.push({path:`countries/${currentCountryCode}/${code}`});
+            router.push({path:`countries/${currentCountryCode}/${schema}`});
         }
     }
  
