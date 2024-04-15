@@ -44,7 +44,7 @@
     const articles = ref([]);
     const loading = ref(true);
     const articlesApi = new ArticlesApi();
-    c
+    
 
     onMounted(async () => {
     let ag = [];
