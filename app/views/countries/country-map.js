@@ -109,7 +109,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         }
 
         $scope.countryMapScope= $scope;
-
+        
         var exceptionRegionMapping = {
             AI : 'GB', //Anguilla
             AS : 'US', //American Samoa
@@ -192,8 +192,8 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
               $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
               $scope.numParty     = _.filter(countries, {isParty:     true}).length;
           }
-          $scope.numNonParty  = countries.length -  $scope.numParty;
-            
+          $scope.numNonParty  = countries.length -  $scope.numParty;         
+
 
         });
 
