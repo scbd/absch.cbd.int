@@ -77,6 +77,42 @@ export const downloadSchemas = {
 		"jurisdiction"			: fieldsT["biosafetyLaw.jurisdiction"],
 		"cpbSubjectAreas"		: fieldsT["biosafetyLaw.cpbSubjectAreas"],
 		"entryIntoForce"		: fieldsT["biosafetyLaw.entryIntoForce"], 
+	},
+	"modifiedOrganism" : {
+	    "uniqueId"   			: fieldsT["bchRecordID"],
+        "identity"        		: fieldsT["name"],
+		"transformationEvent"	: fieldsT["modifiedOrganism.transformationEvent"],
+		"uniqueIdentification"	: fieldsT["modifiedOrganism.uniqueIdentification"],
+		"developers"			: fieldsT["modifiedOrganism.developers"],
+		"recipientOrganisms"	: fieldsT["modifiedOrganism.recipientOrganisms"],
+		"vector"			    : fieldsT["modifiedOrganism.vector"],
+		"techniqueUsed"		    : fieldsT["modifiedOrganism.techniqueUsed"],
+		"genes"  				:  fieldsT["modifiedOrganism.genes"],
+		"traits"				: fieldsT["modifiedOrganism.traits"],
+		"commonUses"			: fieldsT["modifiedOrganism.commonUses"],
+		"publishedOn"			: fieldsT["publishedOn"]
+	},
+
+	"dnaSequence" : {
+	    "uniqueId"      		: fieldsT["bchRecordID"],
+        "name"        			: fieldsT["name"],
+		"synonymNames"			: fieldsT["dnaSequence.synonymNames"],
+		"abbreviation"		 	: fieldsT["dnaSequence.abbreviation"],
+		"family"				: fieldsT["dnaSequence.family"],
+		"isSynthetic"		  	: fieldsT["dnaSequence.isSynthetic"],
+		"donorOrganisms"		: fieldsT["dnaSequence.donorOrganisms"],
+		"traits"		    	: fieldsT["dnaSequence.traits"],
+		"publishedOn"			: fieldsT["publishedOn"]
+	},
+
+	"organism" : {
+	    "uniqueId"      		: fieldsT["bchRecordID"],
+        "scientificName"        : fieldsT["organism.scientificName"],
+		"scientificNameSynonyms": fieldsT["organism.scientificNameSynonyms"],
+		"commonNames"		 	: fieldsT["organism.commonNames"],
+		"plantCultivar"			: fieldsT["organism.plantCultivar"],
+		"organismType"		  	: fieldsT["organism.organismType"],
+		"commonUses"			: fieldsT["organism.commonUses"],
 		"publishedOn"			: fieldsT["publishedOn"]
 	}
 }
