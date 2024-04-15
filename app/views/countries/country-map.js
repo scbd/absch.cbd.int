@@ -101,11 +101,9 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             inBetweenParty : '#EC971F'
           }
         }
-        else if(realm.is('ABS')){
-          $scope.isABS          = true;          
-        }
-        else if(realm.is('CHM')){
-          $scope.isCHM          = true;       
+        else {
+          $scope.isABS   = realm.is('ABS');          
+          $scope.isCHM   = realm.is('CHM');       
         }
 
         $scope.countryMapScope= $scope;
