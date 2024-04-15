@@ -7,8 +7,7 @@
             <div>
                
                 <span class="color-white fw-bold" v-if="((country.isParty) || (country.isParty)) && !country.isInbetweenParty">
-                    {{t('partyToConvention')}}</span>
-                    {{ country }}
+                    {{t('partyToConvention')}}</span>                   
                 
                     <span  class="color-white fw-bold" v-if="(country.isInbetweenParty)">
                         {{t('ratifiedNotYetParty')}}</span>
@@ -19,19 +18,19 @@
             </div>
         </div>
 
-        <div>   
+        <div>
+            <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >           
            
-            <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >             
-                <tr v-for="schema in country.schemas" style="border:none;">                     
+                <tr v-for="schema in country.schemas" style="border:none;">            
                     <td>
-                        <span class="rounded badge ms-2"  :class="{'bg-gray-300' : schema.count==0, 'bg-chm':schema.count>0 }" >{{schema.count}}</span>
+                        <span class="rounded badge ms-2 w-100"  :class="{'bg-gray-300' : schema.count==0, 'bg-chm':schema.count>0 }" >{{schema.count}}</span>
                     </td>
-                    <td>                  
-                        <a rel="noopener" v-if="country.code"  @click="ToggleCountyList(schema.shortCode,country.code)" class="  text-black cursor-pointer" >
-                            <span>{{lstring(schema.title,locale)}}</span>                        
+                    <td >                  
+                        <a rel="noopener" v-if="country.code"  @click="ToggleCountyList(schema.shortCode,country.code)" class="text-black cursor-pointer" style="color:#fff" >
+                            <span >{{lstring(schema.title,locale)}}</span>                        
                         </a>                
-                        <a rel="noopener" v-if="!country.code" :href="`search?schema=${schema.shortCode}`" class="text-black ">
-                            <span>{{ lstring(schema.title,locale)}}</span>                             
+                        <a rel="noopener" v-if="!country.code" :href="`search?schema=${schema.shortCode}`" class="text-black " style="color:#fff">
+                            <span >{{ lstring(schema.title,locale)}}</span>                             
                         </a>                   
                     </td> 
                 </tr>
