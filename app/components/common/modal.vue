@@ -1,12 +1,12 @@
 
 <template>
-    <div ref="modal" class="modal fade"  aria-hidden="true">
+    <div ref="modalRef" class="modal fade"  aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
         <div class="modal-header">
             <slot name="header">
                 <h5 class="modal-title" id="staticBackdropLabel">
-                    {{ title | lstring }}
+                    {{ lstring(title, locale) }}
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </slot>
@@ -21,7 +21,7 @@
                     <div class="col">
                     </div>
                     <div class="col-auto">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t("closeButton") }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ t("closeButton") }}</button>
                     </div>
                 </div>
             </slot>
@@ -31,40 +31,32 @@
     </div>
 
 </template>
+<script setup>
+    import { shallowRef, onMounted } from "vue";
+    import { Modal } from "bootstrap";
+    import { useI18n } from 'vue-i18n';
+    import messages from '../../app-text/components/common/modal.json';
+    import { lstring } from '../../components/kb/filters';
+    const { t, locale } = useI18n({ messages });
+    const modalRef = shallowRef(null);
+    let modal = null;
     
-<script>
-import bootstrap from 'bootstrap'
-import i18n from "../../app-text/components/common/modal.json";
+    const props = defineProps({
+        title: [String, Object], 
+        required: true,
+    });
 
-export default {
-    name: 'SimpleModal',
-    i18n: { messages: { en: i18n } },
-    emits: ['show', 'close'],
-    props: {
-        title:    { type:  [String, Object] },
-    },
-    computed: {
-    },
-    methods: {
-        close,
-    },
-    async mounted() {
+    onMounted(() => {
+        modal = new Modal(modalRef.value);
+    });
 
-        const el = this.$refs.modal;
-        const modal = bootstrap.Modal.getOrCreateInstance(el);
+    const show = () => {
+        modal.show('static');
+    };
 
-        el.addEventListener('shown.bs.modal',  ()=>this.$emit('show'));
-        el.addEventListener('hidden.bs.modal', ()=>this.$emit('close'));
+    const close = () => {
+        modal.hide();
+    };
 
-        this.modal = modal;
-
-        modal.show();
-    }
-}
-
-function close() {
-    const { modal } = this;
-    modal.hide();
-}
-
+    defineExpose({show, close})
 </script>
