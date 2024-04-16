@@ -9,6 +9,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
     function ($scope, $location, commonjs, $q, $http, realm, translationService) {
         $scope.isABS = realm.is('ABS');
         $scope.isBCH = realm.is('BCH');
+        $scope.isCHM = realm.is('CHM');
         var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
         translationService.set('reportsT', reportsT); 
         $scope.overview = {};

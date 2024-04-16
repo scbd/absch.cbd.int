@@ -23,6 +23,7 @@ app.directive("registerTopMenu", ['roleService', "IWorkflows", '$rootScope', '$l
                 $scope.user = $rootScope.user;
                 $scope.isBCH = realm.is('BCH');
                 $scope.isABS = realm.is('ABS');
+                $scope.isCHM = realm.is('CHM');
                 $scope.path = $location.absUrl();
                 $scope.isPA = false;
                     
