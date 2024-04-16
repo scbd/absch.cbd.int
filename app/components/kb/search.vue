@@ -1,7 +1,7 @@
 <template>
     <div id="innerPage" >
         <title>{{ t("knowledgeBase") }}</title>
-            <div class="mastHead text-center pt-4 mb-4"  v-bind:class="{'bg-abs': realm.is('ABS'),'bg-bch': realm.is('BCH'),'bg-chm': realm.is('CHM')}">>               
+            <div class="mastHead text-center pt-4 mb-4"  v-bind:class="{'bg-abs': realm.is('ABS'),'bg-bch': realm.is('BCH'),'bg-chm': realm.is('CHM')}">              
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col col-md-8">
