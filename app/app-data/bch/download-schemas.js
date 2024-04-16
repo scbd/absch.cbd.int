@@ -13,7 +13,7 @@ export const downloadSchemas = {
 		"publishedOn": fieldsT["supplementaryAuthority.publishedOn"]
 	},
 	"laboratoryDetection":{
-		"uniqueIdentifier": fieldsT["laboratoryDetection.uniqueIdentifier"],
+		"uniqueId": fieldsT["laboratoryDetection.uniqueId"],
 		"organization": fieldsT["laboratoryDetection.organization"],
 		"services": fieldsT["laboratoryDetection.services"],
 		"agreements": fieldsT["laboratoryDetection.agreements"],
