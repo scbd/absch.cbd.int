@@ -1,5 +1,5 @@
-import { provide } from 'vue'; // ToDo:  ?
 import template from 'text!./result-view-options.html';
+import { provide } from 'vue'; 
 import app from '~/app';
 import _ from 'lodash';
 import 'ngDialog';
@@ -8,8 +8,8 @@ import shareRecord from '~/components/common/share-record.vue';
 import resultViewOptionsT from '~/app-text/views/search/directives/result-view-options.json';
 import { safeDelegate } from '~/services/common'
 
-app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken', '$rootScope', 'translationService',
-    function ($location, ngDialog, locale, apiToken, $rootScope, translationService) {
+app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', '$rootScope', 'translationService',
+    function ($location, ngDialog, locale, $rootScope, translationService) {
         return {
             restrict: 'EA',
             template: template,
@@ -39,9 +39,42 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                 }
 
                 $scope.shareVueComponent = {
-                    components:{shareRecord}
+                    components:{shareRecord},
+                     setup:  shareRecordsFunctions
                 }
-                $scope.isUserSignedIn = false;
+
+                function shareRecordsFunctions () {
+
+                    provide('getQuery', safeDelegate($scope, ()=>{
+                        const query = searchDirectiveCtrl.getAllSearchFilters();
+                        const type = "chm-search-result"
+                        return {type, query}
+                    }));
+
+                    provide('userStatus', safeDelegate($scope, ()=>{
+                        if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
+                            var signInEvent = $scope.$on('signIn', function (evt, data) {
+                                signInEvent();
+                            });
+                            $('#loginDialog').on('hidden.bs.modal', function () {
+                                signInEvent();
+                                $('.modal-backdrop').removeClass('multi-modal')
+                            });
+                            $('#loginDialog').on('shown.bs.modal', function () {
+                                $('.modal-backdrop').addClass('multi-modal')
+                            });
+                            $( '#loginDialog' ).modal( "show" );
+                            return false;
+                        } 
+                        else {
+                            // $scope.isUserSignedIn = true;
+                            return true;
+                        }
+                    }));   
+                }
+                  
+
+                //$scope.isUserSignedIn = false;
             //    if(!$scope.viewType)
             //         $scope.viewType = 'list';
 
@@ -144,37 +177,6 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
 
                 $scope.onMatrixExportClick = function(){
                     $scope.onExport()
-                }
-
-                $scope.userStatus  = function(){
-                    if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-                        
-                        var signInEvent = $scope.$on('signIn', function (evt, data) {
-                            signInEvent();
-                            $scope.isUserSignedIn = true
-                            // $('#shareSearchDomId')[0].click();
-                        });
-                        $('#loginDialog').on('hidden.bs.modal', function () {
-                            signInEvent();
-                            $('.modal-backdrop').removeClass('multi-modal')
-                        });
-                        $('#loginDialog').on('shown.bs.modal', function () {
-                            $('.modal-backdrop').addClass('multi-modal')
-                        });
-                        $( '#loginDialog' ).modal( "show" );
-                        return false;
-                    } 
-                    else {
-                        $scope.isUserSignedIn = true;
-                        return true;
-                    }
-                }
-                $scope.tokenReader = function(){ return apiToken.get()};
-
-                $scope.getQuery = function(){
-                    const query = searchDirectiveCtrl.getAllSearchFilters();
-                    const type = "chm-search-result"
-                    return {type, query}
                 }
 
                 function showGroupByDialog(){
