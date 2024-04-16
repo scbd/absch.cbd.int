@@ -33,6 +33,7 @@ import '~/services/main';
 
             $scope.isBCH          = realm.is('BCH');
             $scope.isABS          = realm.is('ABS');  
+            $scope.isCHM          = realm.is('CHM');  
             
             
 

@@ -28,7 +28,8 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
                 var appTreaties = {
                     abs: 'XXVII8b',
-                    bch: 'XXVII8a'
+                    bch: 'XXVII8a',
+                    chm: 'XXVII8',
                 }
                 //==================================================================================
                 this.getReferenceRecordIndex = function(schema, documentId) {

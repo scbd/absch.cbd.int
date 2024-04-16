@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div>    
       <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg"></i> {{ t("loading") }}...</div>
       <div v-if="!loading">
         <div class="article-by-tags" v-if="articles">
           <h4>
-            {{t("searchResults") }} <span><small>({{articlesCount}})</small></span>
+            {{t("searchResults") }} <span><small>({{articlesCount}})</small></span>      
           </h4>
           <hr>
           <div v-for="article in articles">
@@ -13,15 +13,15 @@
                 <div class="p-2 bd-highlight" v-if="article.coverImage">
                   <img class="img-fluid img-thumbnail" style="max-height:140px;"
                     v-bind:src="getSizedImage(article.coverImage.url, '300x300')">
-                </div>
+                </div>              
                 <div class="p-2 bd-highlight w-100">
-                  <div class="card-body">
+                  <div class="card-body">                  
                     <span class="badge bg-secondary position-absolute top-0 end-0">
                       {{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}</span>
-  
+                      
                     <h5 class="card-title"><a class="link-dark"
                         :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{lstring(article.title,
-                        $locale)}}</a>
+                        $locale)}}</a>                      
                     </h5>
                     <p v-if="article.summary" class="card-text h-100">
                       <a class="link-dark" :href="`${articleUrl(article, getTag(article.adminTags) )}`">
@@ -52,7 +52,7 @@
   </template>
   
   <script setup>
-      import { ref, onMounted, defineExpose } from "vue";
+      import { ref, onMounted } from "vue";
       import { useI18n } from 'vue-i18n';
       import messages from '../../app-text/components/kb.json';
       import { useRealm } from '../../services/composables/realm.js';
@@ -62,6 +62,8 @@
       import ArticlesApi from './article-api';
       import "../kb/filters";
       import { formatDate, lstring } from './filters';
+      import { getRealmArticleTag } from "../../services/composables/articles.js";
+
       const route = useRoute();
       const { t, locale } = useI18n({ messages });
       const realm = useRealm();
@@ -74,18 +76,19 @@
       const categories = ref([]);
       const search = ref('');
       const articlesCount = ref(0);
+      const realmArticleTag = getRealmArticleTag();
   
       onMounted( async() => {
           categories.value = await loadKbCategories(realm.is('BCH'));
           if (route.value?.params?.search) {
               search.value = route.value.params.search.replace(/"/g, "");
-          }
-          realmTag.value = realm.is('BCH') ? 'bch' : 'abs';
+          }         
+          realmTag.value = realmArticleTag;
           await loadArticles(1);
       });
 
-      const getTag = (adminTags) => {
-        const realm = realmTag.value === 'BCH' ? 'bch' : 'absch';
+      const getTag = (adminTags) => {       
+        const realm = realmTag.value;
         if (adminTags && adminTags.length >= 2) {
           if (adminTags[0] === realm) return adminTags[1];
           else return adminTags[0];

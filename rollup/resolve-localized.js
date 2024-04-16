@@ -1,8 +1,11 @@
 // rollup.config.js (building more than one bundle)
 import path from 'path'
+import upath from 'upath'
 import fs from 'fs'
 import _ from 'lodash'
 import globToRegExp from 'glob-to-regexp';
+
+
 
 
 export default function resolveLocalized(options = { }) {
@@ -13,7 +16,10 @@ export default function resolveLocalized(options = { }) {
     localizedDir,
   } = options;
 
-  const basePatternRe = globToRegExp(path.join(baseDir, include || '**'));
+  const cwd = process.cwd();
+  const baseDirPath      = path.join(cwd, baseDir);
+  const localizedDirPath = path.join(cwd, localizedDir);
+  const basePatternRe    = globToRegExp(upath.join(baseDir, include || '**'));
 
   return {
     name: 'resolveLocalized',
@@ -25,12 +31,14 @@ export default function resolveLocalized(options = { }) {
       const { external, id: absolutePath }  = resolved;
 
       if(external) return resolved;
-      
-      if (basePatternRe.test(absolutePath)) {
 
-        const relativeFilePath = path.relative(baseDir, absolutePath);
-        const originalFilePath = absolutePath;
-        const localizedFilePath = path.join(localizedDir, relativeFilePath);
+      const relativeUnixPath = upath.relative(cwd, resolved.id);
+      
+      if (basePatternRe.test(relativeUnixPath)) {
+
+        const originalFilePath  = absolutePath;
+        const relativeFilePath  = path.relative(baseDirPath, absolutePath);
+        const localizedFilePath = path.join(localizedDirPath, relativeFilePath);
 
         let shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath);
 

@@ -26,9 +26,11 @@
     import { useRealm } from '../../services/composables/realm.js';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
+    import { getRealmArticleTag } from "../../services/composables/articles.js";
+    
     const { t, locale } = useI18n({ messages });
     const realm = useRealm();
-
+    const articleRealmTag = getRealmArticleTag();
     const props = defineProps({
         tag: { type: String, required: false },
         type:{ type: String, required: false },
@@ -42,10 +44,11 @@
     const articles = ref([]);
     const loading = ref(true);
     const articlesApi = new ArticlesApi();
+    
 
     onMounted(async () => {
     let ag = [];
-    ag.push({"$match":{"$and":[{"adminTags": { $all : [realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
+    ag.push({"$match":{"$and":[{"adminTags": { $all : [articleRealmTag]}}]}});
         ag.push({"$match":{"$and":[{"adminTags":props.tag}]}});
         ag.push({"$project" : {[`title`]:1}});
         ag.push({"$limit" : 6});

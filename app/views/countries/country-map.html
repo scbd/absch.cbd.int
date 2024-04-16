@@ -197,15 +197,18 @@
                         translation-url href="{{translationUrl}}/search?tab=nationalRecords">
                         <span class="mb-2" ng-if="!currentCountry.code"> {{::('countryMapTranslation.nationalRecords'|$translate)}}</span>
                     </a>
-
+                 
                     <a rel="noopener" class="fs-4 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
                         translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}">
                         <i class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i>
-                        <span ng-bind="currentCountry.name|lstring"></span>
+                        <span ng-bind="currentCountry.name|lstring"></span>                        
                     </a>
                 </div>
                     <div ng-if="isBCH && currentCountry">
                         <homepin-popup-bch>
+                    </div>                   
+                    <div ng-if="isCHM && currentCountry">                          
+                        <home-pin-popup-chm ng-vue="vueComponent" :country="currentCountry" ></home-pin-popup-chm>                         
                     </div>
                     <div ng-if="isABS && currentCountry" class="country-item-name">
                         <homepin-popup-abs>

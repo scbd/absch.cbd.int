@@ -9,6 +9,8 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 import '~/components/scbd-angularjs-services/main';
 import './directives/homepin-popup-bch';
 import './directives/homepin-popup-abs';
+import homePinPopupChm from './directives/home-pin-popup-chm.vue';
+
 import countryMapTranslation from '~/app-text/views/countries/country-map.json';
 
 
@@ -73,6 +75,10 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         };
 
 
+        $scope.vueComponent = {
+          components: { homePinPopupChm }
+        }
+
         if(!$scope.mapHeight)
           $scope.mapHeight = "lg";
 
@@ -95,12 +101,13 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             inBetweenParty : '#EC971F'
           }
         }
-        else if(realm.is('ABS')){
-          $scope.isABS          = true;
+        else {
+          $scope.isABS   = realm.is('ABS');          
+          $scope.isCHM   = realm.is('CHM');       
         }
 
         $scope.countryMapScope= $scope;
-
+        
         var exceptionRegionMapping = {
             AI : 'GB', //Anguilla
             AS : 'US', //American Samoa
@@ -174,19 +181,24 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
           if($scope.options.isBch){
               $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
               $scope.numParty     = _.filter(countries, {isParty:     true}).length;
+          } 
+          else if($scope.options.isChm){
+              $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
+              $scope.numParty     = _.filter(countries, {isParty:     true}).length;
           }
           else {                
               $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
               $scope.numParty     = _.filter(countries, {isParty:     true}).length;
           }
-          $scope.numNonParty  = countries.length -  $scope.numParty;
-            
+          $scope.numNonParty  = countries.length -  $scope.numParty;         
+
 
         });
 
         $scope.options = {
           isBch       : realm.is('BCH'),
           isAbs       : realm.is('ABS'),
+          isChm       : realm.is('CHM'),
           protocol    : realm.protocol,
           protocolShortName  :realm.protocolShortName,
           chShortName :realm.chShortName,
@@ -324,7 +336,14 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                 var xkMapCountry = getMapObject(territoryCode);
                 xkMapCountry.colorReal = mapColors.party;
                 mapCountry.originalColorReal = xkMapCountry.colorReal
-              }
+              }        
+
+              if (($scope.isCHM && country.isInbetweenParty))
+                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.inBetweenParty;
+              else if (country.isParty)
+                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.party;
+              else
+                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.nonParty;
 
         }
         function changeSelectedColor(code, color) {

@@ -65,13 +65,13 @@ function bundle(entryPoint, locale, baseDir='app') {
       ]}),
       stripBom(),
       resolveLocalized({ 
-        baseDir:      `${process.cwd()}/${baseDir}`,
-        localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}`,
+        baseDir:      path.join(baseDir),
+        localizedDir: path.join('i18n', locale, baseDir),
       }),
       mergeI18n({ 
         include:      `**/*.json`,
-        baseDir:      `${process.cwd()}/${baseDir}/app-text`,
-        localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}/app-text`,
+        baseDir:      path.join(baseDir, 'app-text'),
+        localizedDir: path.join('i18n', locale, baseDir, 'app-text'),
         defaultLocale: 'en',
         locale
       }),

@@ -96,7 +96,7 @@
     
 <script setup>
     import {useAuth} from '@scbd/angular-vue/src/index.js';
-    import { defineProps, ref ,computed } from 'vue';
+    import { ref ,computed } from 'vue';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/error.json';
     const auth = useAuth();
