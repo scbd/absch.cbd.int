@@ -49,12 +49,12 @@
 }
 /* .party-container, */
 .protocol-map-header-bg{
-    background-color: #00405C!important;
+    background-color: #2B2A2A!important;
 }
 
 #government .color-party,
 .color-party{
-    color:#00405C!important;
+    color:#2B2A2A!important;
 }
 #government .color-non-party,
 .color-non-party{
@@ -62,10 +62,10 @@
 }
 .label-party,
 .bg-party {
-    background-color: #00405C!important;
+    background-color: #2B2A2A!important;
 }
 .label-non-party{
-    background-color: #00405C!important;
+    background-color: #2B2A2A!important;
 }
 .bg-inbetween{
     background-color: #EC971F!important;
@@ -78,10 +78,10 @@
 	grid-template-columns: repeat(14, 1fr);
 }
 .bg-chm{
-    background: #00405C!important;
+    background: #2B2A2A!important;
 }
 .text-chm{
-    color: #00405C!important;
+    color: #2B2A2A!important;
 }
 .home-section-top-chm {
     background-color: hsl(198, 100%, 18%);
@@ -93,7 +93,7 @@
     background-repeat: no-repeat;
 }
 .footer-chm {
-    background-color: #00405C;
+    background-color: #2B2A2A;
     color: #FFF;
 }
 /* registery CSS  */
@@ -138,7 +138,7 @@ embed-footer {
 .side-menu,
 .side-menu .btn-toggle {
     color: #fff;
-    background-color: #00405C;
+    background-color: #2B2A2A;
 }
 
 .side-menu .menu-header {
@@ -156,4 +156,11 @@ embed-footer {
 .side-menu .btn-toggle:focus {
     color: #fff !important;
     background-color: #507395;
+}
+
+#innerPage .mastHead{
+	background-color: #2B2A2A;
+	/* color:white; */
+	padding:10px 20px 40px 20px;
+	margin:0;
 }
