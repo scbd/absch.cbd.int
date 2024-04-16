@@ -18,7 +18,7 @@ app.directive('countryFilter', ['locale', 'translationService', '$filter',  func
                $scope.cf_countries = searchDirectiveCtrl.getSearchFilters("country");
                $scope.cf_countryFilter = null;
                $scope.cf_partyFilter = null;
-               $scope.alphabet = alphabets[locale];
+               $scope.alphabet = alphabets;
                
               //*************************************************************************************************************************************
                $scope.cf_setCountryFilter = function(letter) {

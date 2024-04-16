@@ -1,10 +1,10 @@
-﻿<div id="Search-Filter" style="margin-bottom:30px;">
+<div id="Search-Filter" style="margin-bottom:30px;">
      <div ng-if="cf_filters.length">
         <span class="country-heading">{{::('countryFilterT.countries'|$translate)}}</span>
 
         <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setCountryFilter('All')" style="padding-right:10px;white-space:nowrap;" class="letter color-black" ng-class="{'letter-active':!cf_countryFilter && !cf_partyFilter}" >
             {{::('countryFilterT.all'|$translate)}}</a>
-        <span ng-repeat="letter in alphabet">
+        <span ng-repeat="letter in alphabet[locale]">
             <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setCountryFilter(letter)" class="letter text-decoration-none" ng-class="{'letter-active':cf_countryFilter == letter}" ng-bind="letter"></a>
         </span>
         <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setPartyFilter('party')" style="padding-left:10px;white-space:nowrap;" class="letter color-party" ng-class="{'letter-active':cf_partyFilter == 'party'}"> 
