@@ -201,6 +201,10 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                 $scope.$on('$destroy', function () {
                     evtLoadPreviousReportEvent();
                 });
+                //Remove leading '0' from the previous questions, like Q045 => Q45.
+                $scope.removeLeadingZeros = function (questionKey) {
+                    return questionKey.replace(/(^|\D)0+(\d+)/g, '$1$2');
+                }
                 //==================================
                 //
                 //==================================
