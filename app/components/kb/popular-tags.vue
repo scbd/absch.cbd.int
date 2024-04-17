@@ -34,7 +34,7 @@
   
     onMounted(async () => {
       try {
-        const categories = await loadKbCategories(realm.is('BCH'));
+        const categories = await loadKbCategories();
         popularTags.value = categories;
       } catch (error) {
           console.error("Error loading categories:", error);

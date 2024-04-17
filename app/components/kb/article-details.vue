@@ -69,7 +69,7 @@
     
     onMounted(async () => {  
         tag.value = (route.value?.params?.tag).replace(/"/g, ""); //ToDo: route.params is not available 
-        categories.value = await loadKbCategories(realm.is('BCH'));
+        categories.value = await loadKbCategories();
         if (route.value == undefined) return;
             try {
                 let id = (route.value?.params?.id).replace(/"/g, "");

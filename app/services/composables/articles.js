@@ -3,15 +3,22 @@ import { useRealm } from '~/services/composables/realm.js';
 
 const articlesApi = new ArticlesApi();
 
-export async function loadKbCategories(isBch, locale) {
+export async function loadKbCategories(locale) {
 
             let categories
-            if(!isBch) {
-                categories = (await import('~/app-data/abs/kb-categories.js')).categories;
-            }
-            else {
+
+            const realm = useRealm();
+
+            if(realm.is('BCH')) {
                 categories = (await import('~/app-data/bch/kb-categories.js')).categories;
-            }
+            };
+            if(realm.is('ABS')) {
+                categories = (await import('~/app-data/abs/kb-categories.js')).categories;
+            };
+            if(realm.is('CHM')) {
+                categories = (await import('~/app-data/chm/kb-categories.js')).categories;
+            };
+
             if(categories){
 
                 const articleIds = categories.map(e=>e.articles).map(e=>e.map(i=>i.identifier)).flat()
