@@ -1,4 +1,5 @@
 import app from '~/app';
+import { mergeTranslationKeys as mergeKeys } from './translation-merge';
 
 app.factory('translationService',  ['locale', function(locale) {
 
@@ -54,4 +55,6 @@ app.filter('$translate', ['translationService', function(translationService){
     };
 
 }])
+
+export const mergeTranslationKeys = mergeKeys
 

@@ -1,5 +1,7 @@
-import reportAnalyzerMappingJson from '../app-text/report-analyzer/report-analyzer-mapping.json' assert { type: "json" };
+import reportTranslation from '../app-text/report-analyzer/report-analyzer-mapping.json' assert { type: "json" };
+import { mergeTranslationKeys } from '../services/translation-merge.js';
 
+const reportAnalyzerMappingJson = mergeTranslationKeys(reportTranslation);
 export const analyzerMapping =
 {
     "abs" : [
@@ -26,10 +28,10 @@ export const analyzerMapping =
             "title"        : reportAnalyzerMappingJson.absNR1Title,
             "questionsUrl" : "app-data/abs/report-analyzer/absNationalReport1",
             "mappingsUrl"  : "app-data/abs/report-analyzer/mapping/absNationalReport1.json",
-            "dataUrl"      : "/api/v2017/national-reports-np-1",
+            "dataUrl"      : "/api/v2019/report-analyzer/abs-national-report-1",
             "infoBlockUrl"  : "views/report-analyzer/includes/absNationalReport1.html",
-            "year"          : "2023",
-            "deadline"      : "2023-10-01",
+            "year"          : "2024",
+            "deadline"      : "2026-02-28",
             "offlineFormats": [
                 {"lang": "en", "url":"http://www.cbd.int/abs/en/commonformats/NR1-en.doc"},
                 {"lang": "fr", "url":"http://www.cbd.int/abs/fr/commonformats/NR1-fr.doc"},
@@ -122,10 +124,10 @@ export const analyzerMapping =
             "type"          : "cpbNationalReport5",
             "title"         :  reportAnalyzerMappingJson.bchNR5Title,                               
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport5",
-            "dataUrl"       : "/api/v2019/report-analyzer/national-report-cpb-5",
+            "dataUrl"       : "/api/v2019/report-analyzer/cpb-national-report-5",
             "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport5.html",
-            "year"          : "2023",
-            "deadline"      : "2015-10-01",
+            "year"          : "2024",
+            "deadline"      : "2026-02-28",
             "compare"       : [ 
                                 {"title": "Compare with 4th National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport5-4.json"},
                                 {"title": "Compare with 3rd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-3.json"},

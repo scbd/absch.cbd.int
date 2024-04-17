@@ -7,3 +7,4 @@ export const mergeTranslationKeys = function(translations){
 
     return flattenTranslation;
 }
+
