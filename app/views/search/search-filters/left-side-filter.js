@@ -19,6 +19,7 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                     translationService.set('leftSideFilterT', leftSideFilterT);  
                     $scope.isBCH        = realm.is('BCH');
                     $scope.isABS        = realm.is('ABS');    
+                    $scope.isCHM        = realm.is('CHM');   
                     
                     var freeTextKeys = 0;
                     // $scope.leftMenuFilters = {}
