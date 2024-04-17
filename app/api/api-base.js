@@ -21,12 +21,11 @@ const HttpStatusApiCode = {
 }
 export default class ApiBase
 {
-  constructor(options) {
+  constructor(options) { //{ tokenReader, prefixUrl, timeout, tokenType }
 
     options = options || {};
 
-    // options is an object
-    if(isObject (options) || isFunction(options)) options = { tokenReader : options }
+    if(isFunction(options.tokenReader)) options = { tokenReader : options }
 
     const { tokenReader, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
 

@@ -1,4 +1,5 @@
 import app from '~/app';
+import { mergeTranslationKeys as mergeKeys } from './translation-merge';
 
 app.factory('translationService',  ['locale', function(locale) {
 
@@ -55,12 +56,5 @@ app.filter('$translate', ['translationService', function(translationService){
 
 }])
 
-export const mergeTranslationKeys = function(translations){
-
-    const { en, ...others } = translations;
-
-    const flattenTranslation = Object.assign({}, {...en}, ...Object.values(others));
-
-    return flattenTranslation;
-}
+export const mergeTranslationKeys = mergeKeys
 
