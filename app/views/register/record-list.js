@@ -11,7 +11,7 @@ import 'angular-animate';
 import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
-import { mergeTranslationKeys } from '../../services/translation-service';
+import { mergeTranslationKeys } from '../../services/translation-merge';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
         export { default as template } from './record-list.html';
 

@@ -5,7 +5,7 @@ import { securize, asyncLogError, mapView, currentUser, injectRouteParams } from
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper';
 import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import routesLabelsTranslations from '~/app-text/routes/bch-route-labels.json';
-import { mergeTranslationKeys } from '../services/translation-service';
+import { mergeTranslationKeys } from '../services/translation-merge';
 import * as theBch from '~/views/home/bch';
 const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 const bchRouteUrls = {
