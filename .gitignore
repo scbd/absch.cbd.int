@@ -22,6 +22,5 @@ app/views/mockups
 i18n-build
 TestCases
 package-lock.json
-yarn.lock
 sourceMap
 dist

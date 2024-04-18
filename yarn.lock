@@ -1068,7 +1068,7 @@
 
 "@scbd/angular-vue@https://github.com/scbd/angular-vue.git#ng-vue-3":
   version "5.0.0-alpha.1"
-  resolved "https://github.com/scbd/angular-vue.git#4829f6b81835d76a6591fe8a1cdc6a02eb1b02bd"
+  resolved "https://github.com/scbd/angular-vue.git#38a8edb04edc91241ffdd685e9e14299a95df25c"
 
 "@scbd/common@^0.0.10":
   version "0.0.10"
