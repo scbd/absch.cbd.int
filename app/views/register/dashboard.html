@@ -288,7 +288,7 @@
                                 <tr class="visited-background" ng-repeat-start="schema in nationalSchemas" 
                                     ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                                     <td class="table_width">
-                                        <div class="btn-group bg-white btn-group-sm table_width" role="group">
+                                        <div class="btn-group bg-white btn-group-sm table_width" ng-class="{'disableClick bg-lightblue': isDisableEdit(schema)}" role="group">
                                             <button type="button" class="btn btn-outline-dark p-0"
                                                 title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="showTopRecords($event,schema)">

@@ -304,7 +304,8 @@
                 "AuthorizedUser",
                 "AuthorizedUserForNationalReports",
                 "NFP-CPB"
-            ]
+            ],
+            "disableEdit": "true"
         },
         "cpbNationalReport3": {
             "type": "national",
@@ -436,7 +437,8 @@
                 "AuthorizedUser",
                 "AuthorizedUserForNationalReports",
                 "NFP-CPB"
-            ]
+            ],
+            "disableEdit": "true"
         },
         "biosafetyExpert": {
             "type": "national",

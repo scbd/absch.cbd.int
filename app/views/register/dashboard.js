@@ -345,6 +345,9 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                     
                     return taskQuery;
             }
+            $scope.isDisableEdit = function (schema){
+                return  realm.schemas[schema].disableEdit;
+            }
             
             function checkNationalSchemaRoles(role){
                 for (let i = 0; i < realm.nationalSchemas.filter(e=>e!='contact').length; i++) {
