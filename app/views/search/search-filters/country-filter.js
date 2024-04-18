@@ -2,9 +2,10 @@ import app from '~/app';
 import template from 'text!./country-filter.html';
 import _ from 'lodash';
 import '~/services/main';
-import alphabets from '~/app-text/views/search/alphabets.json';
+import alphabetsT from '~/app-text/views/search/alphabets.json';
+import { mergeTranslationKeys } from '../../../services/translation-merge';
 import countryFilterT from '~/app-text/views/search/search-filters/country-filter.json';
-
+const alphabets = mergeTranslationKeys(alphabetsT);
 app.directive('countryFilter', ['locale', 'translationService', '$filter',  function (locale, translationService, $filter) {
         return {
             restrict: 'EAC',
