@@ -43,7 +43,8 @@ import homeArticlesT from '~/app-text/views/directives/home-articles.json'
 
                             articlesService.getArticles(qs)
                             .then(function(data){
-                                $scope.articles = data.map(e=>{
+
+                                $scope.articles = data?.map(e=>{
                                     const title = $filter('lstring')(e.title, locale)?.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
                                     e.url = `kb/tags/${tag}/${title}/${e._id}`
                                     return e;
