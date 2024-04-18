@@ -288,14 +288,14 @@
                                 <tr class="visited-background" ng-repeat-start="schema in nationalSchemas" 
                                     ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                                     <td class="table_width">
-                                        <div class="btn-group bg-white btn-group-sm table_width" ng-class="{'disableClick bg-lightblue': isDisableEdit(schema)}" role="group">
+                                        <div class="btn-group bg-white btn-group-sm table_width" role="group">
                                             <button type="button" class="btn btn-outline-dark p-0"
                                                 title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="showTopRecords($event,schema)">
                                                 <i class="bi bi-chevron-down cursor-pointer p-1"
                                                     ng-class="{'bi bi-chevron-down':!topRecords[schema], 'bi bi-chevron-up':topRecords[schema]}"
                                                     aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-outline-dark p-0"
+                                            <button ng-disabled="isDisableEdit(schema)" type="button" class="btn btn-outline-dark p-0"
                                                 title="{{::('dashboardT.addRecord'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoNew($event,schema)"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>

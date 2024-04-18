@@ -759,6 +759,9 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                 updateDocumentStatus(identifier, workflowActivity, true);
                         });;
                 }
+                $scope.isDisableEdit = function (schema){
+                    return  realm.schemas[schema].disableEdit;
+                }
 
                 function loadmyTasks(schema){
 

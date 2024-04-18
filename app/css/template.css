@@ -3441,10 +3441,3 @@ embed-footer{
     background-color:#f1f1f1;
     opacity: 50%;
 }
-.disableClick {
-    pointer-events: none;
-    opacity: .65;
-}
-.bg-lightblue {
-    background-color: #eee!important;
-}
