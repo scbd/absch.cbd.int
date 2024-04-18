@@ -63,7 +63,8 @@
               "fr": "Correspondants nationaux de l’APA",
               "ru": "Национальные координационные центры по ДГРСИВ",
               "zh": "获取和惠益分享国家联络点"
-          }
+          },
+          "disableAdd": "true"
       },
       "authority": {
           "type": "national",
@@ -295,6 +296,19 @@
               "zh": "检查站公报"
           }
       },
+      "absNationalReport1" : {
+          "type" : "national",
+          "title" : {
+              "en" : "1st National Reports on the Implementation of the Nagoya Protocol"
+          },
+          "description" : {
+              "en" : "1st national reports on implementation of the Nagoya Protocol on Access and Benefit-sharing"
+          },
+          "shortCode" : "NR1",
+          "titlePlural" : {
+              "en" : "1st National Reports on the Implementation of the Nagoya Protocol"
+          }
+      },
       "absNationalReport": {
           "type": "national",
           "title": {
@@ -321,7 +335,8 @@
               "fr": "Rapport national intérimaire sur la mise en œuvre du Protocole de Nagoya",
               "ru": "Промежуточные национальные доклады об осуществлении Нагойского протокола",
               "zh": "《名古屋议定书》执行情况临时国家报告"
-          }
+          },
+          "disableAdd" : true
       },
       "resource": {
           "type": "reference",
