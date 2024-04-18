@@ -345,8 +345,8 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                     
                     return taskQuery;
             }
-            $scope.isDisableEdit = function (schema){
-                return  realm.schemas[schema].disableEdit;
+            $scope.isAdditionDisabled = function (schema){
+                return  realm.schemas[schema].disableAdd;
             }
             
             function checkNationalSchemaRoles(role){

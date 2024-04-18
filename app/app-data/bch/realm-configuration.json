@@ -66,7 +66,8 @@
                 "fr": "Correspondants nationaux",
                 "es": "Puntos focales nacionales",
                 "ar": "نقاط الاتصال الوطنية"
-            }
+            },
+            "disableAdd": "true"
         },
         "authority": {
             "type": "national",
@@ -305,7 +306,7 @@
                 "AuthorizedUserForNationalReports",
                 "NFP-CPB"
             ],
-            "disableEdit": "true"
+            "disableAdd": "true"
         },
         "cpbNationalReport3": {
             "type": "national",
@@ -338,7 +339,8 @@
                 "AuthorizedUser",
                 "AuthorizedUserForNationalReports",
                 "NFP-CPB"
-            ]
+            ],
+            "disableAdd": "true"
         },
         "cpbNationalReport2": {
             "type": "national",
@@ -371,7 +373,8 @@
                 "AuthorizedUser",
                 "AuthorizedUserForNationalReports",
                 "NFP-CPB"
-            ]
+            ],
+            "disableAdd": "true"
         },
         "cpbNationalReport1": {
             "type": "national",
@@ -404,7 +407,8 @@
                 "AuthorizedUser",
                 "AuthorizedUserForNationalReports",
                 "NFP-CPB"
-            ]
+            ],
+            "disableAdd": "true"
         },
         "cpbNationalReportInterim": {
             "type": "national",
@@ -438,7 +442,7 @@
                 "AuthorizedUserForNationalReports",
                 "NFP-CPB"
             ],
-            "disableEdit": "true"
+            "disableAdd": "true"
         },
         "biosafetyExpert": {
             "type": "national",

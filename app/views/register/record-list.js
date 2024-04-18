@@ -539,6 +539,11 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 $scope.searchRecord = function () {
                     loadRecords(1);
                 }
+
+                $scope.isAdditionDisabled = function (schema){
+                    return  realm.schemas[schema].disableAdd;
+                }
+                
                 function loadRecords(pageNumebr) {
                     $scope.loading = true;
                     $scope.records = [];
