@@ -12,7 +12,7 @@ import '~/views/register/directives/top-records';
 import '~/views/register/directives/top-requests';
 import 'ngDialog';
 import dashboardT from '~/app-text/views/register/dashboard.json';
-import { mergeTranslationKeys } from '../../services/translation-service';
+import { mergeTranslationKeys } from '../../services/translation-merge';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);    
     export { default as template } from './dashboard.html';
 export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",

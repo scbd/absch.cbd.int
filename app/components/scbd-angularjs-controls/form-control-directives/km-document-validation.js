@@ -2,7 +2,7 @@ import app from '~/app';
 import template from 'text!./km-document-validation.html';
 import $ from 'jquery';
 import messagesTranslations from '~/app-text/components/scbd-angularjs-controls/form-control-directives/validation-errors.json';
-import { mergeTranslationKeys } from '../../../services/translation-service';
+import { mergeTranslationKeys } from '../../../services/translation-merge';
 import kmDocumentValidationT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-document-validation.json';
 
     //============================================================

@@ -9,7 +9,7 @@ import '~/views/forms/directives/document-sharing';
 import 'ck-editor-css';
 import toasterMessagesTranslations from '~/app-text/views/directives/toaster-messages.json';
 import workflowButtonsT from '~/app-text/views/directives/workflow-arrow-buttons.json';
-import { mergeTranslationKeys } from '../../services/translation-service';
+import { mergeTranslationKeys } from '../../services/translation-merge';
 const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
