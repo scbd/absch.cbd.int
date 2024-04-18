@@ -29,6 +29,14 @@ export const downloadSchemas = {
         "organizationType": fieldsT["organization.organizationType"],
         "areasOfWork"     : fieldsT["organization.areasOfWork"     ],
         "publishedOn"     : fieldsT["organization.publishedOn"     ],
+    },
+
+    "authority":{
+        "uniqueId": fieldsT["authority.uniqueId"],
+        "government": fieldsT["authority.government"],
+        "name": fieldsT["authority.name"],
+        "functions": fieldsT["authority.functions"],
+        "cpbOrganismTypes": fieldsT["authority.cpbOrganismTypes"],
+        "publishedOn": fieldsT["authority.publishedOn"]
     }
 }
-
