@@ -11,5 +11,5 @@ import './thesaurus-service';
 import './user-profile-service';
 import './filters';
 import './common';
-import './translation-service';
+import './translation-merge';
 export { default as htmlDifference } from './html-difference';

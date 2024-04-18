@@ -8,7 +8,7 @@ import '~/views/register/directives/register-top-menu';
 import '~/components/scbd-angularjs-services/main';
 import userAlertsTTranslations from '~/app-text/views/register/user-preferences/user-alerts.json';
 import frequencies from '~/app-text/views/register/user-preferences/frequency.json'
-import { mergeTranslationKeys } from '../../../services/translation-service';
+import { mergeTranslationKeys } from '../../../services/translation-merge';
 const userAlertsT = mergeTranslationKeys(userAlertsTTranslations);
     app.directive("userAlerts", ['$rootScope', 'ngDialog', '$routeParams', function ($rootScope, ngDialog, $routeParams) {
 

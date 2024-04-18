@@ -3,7 +3,7 @@ import commonRoutes from "./common-routes";
 import { securize, asyncLogError, mapView } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
 import routesLabelsTranslations from '~/app-text/routes/abs-route-labels.json';
-import { mergeTranslationKeys } from '../services/translation-service';
+import { mergeTranslationKeys } from '../services/translation-merge';
 import * as theAbs from '~/views/home/index';
 
 app.value("showHelp", {

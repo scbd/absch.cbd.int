@@ -6,7 +6,7 @@ import * as angularViewWrapper from '~/views/shared/angular-view-wrapper';
 import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import routesLabelsTranslations from '~/app-text/routes/chm-route-labels.json';
 import * as theChm from '~/views/home/chm';
-import { mergeTranslationKeys } from '../services/translation-service';
+import { mergeTranslationKeys } from '../services/translation-merge';
 const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 const chmRouteUrls = {
   theChm,

@@ -1,5 +1,5 @@
 import fpCategoryTitleTranslations from '~/app-text/report-analyzer/bch-focal-point-category.json';
-import { mergeTranslationKeys } from '../../services/translation-service';
+import { mergeTranslationKeys } from '../../services/translation-merge';
 const fpCategoryTitle = mergeTranslationKeys(fpCategoryTitleTranslations);
 
 export const categories = [
