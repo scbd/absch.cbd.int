@@ -5,7 +5,7 @@
   "supplementaryAuthority.publishedOn":"Publication Date",
   "biosafetyExpert.uniqueIdentifier": "UID",
   "biosafetyExpert.government": "Country",
-  "biosafetyExpert.countries": "Country Details",
+  "biosafetyExpert.birthCountry": "Country Details",
   "biosafetyExpert.expertise": "Areas of expertise",
   "biosafetyExpert.unLanguages": "Language proficiency",
   "laboratoryDetection.uniqueId": "UID",
