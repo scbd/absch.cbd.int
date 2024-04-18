@@ -1,3 +1,6 @@
 {
-    
+  "supplementaryAuthority.uniqueId": "UID",
+  "supplementaryAuthority.government": "Country",
+  "supplementaryAuthority.name": "Name of the Competent Authority",
+  "supplementaryAuthority.publishedOn":"Publication Date"
 }
