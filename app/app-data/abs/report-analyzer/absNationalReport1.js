@@ -1,4 +1,4 @@
-import nr1Translation from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json';
+import nr1Translation from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json' assert {type:'json'};
 import { mergeTranslationKeys } from '../../../services/translation-merge.js';
 const nr1T = mergeTranslationKeys(nr1Translation);
 export const absNationalReport1 = [

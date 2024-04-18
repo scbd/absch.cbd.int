@@ -1,4 +1,4 @@
-import nr3Translation from '../../../app-text/report-analyzer/bch-cpbNationalReport3.json';
+import nr3Translation from '../../../app-text/report-analyzer/bch-cpbNationalReport3.json' assert {type:'json'};
 import { mergeTranslationKeys } from '../../../services/translation-merge';
 const nr3Data = mergeTranslationKeys(nr3Translation);
 export const cpbNationalReport3 = [
