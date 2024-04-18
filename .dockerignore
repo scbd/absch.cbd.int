@@ -2,7 +2,6 @@ app/libs
 .DS_Store
 .circleci
 .github
-.git
 .dockerignore
 .gitattributes
 .gitignore
