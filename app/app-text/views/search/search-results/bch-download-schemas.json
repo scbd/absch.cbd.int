@@ -7,6 +7,9 @@
   "biosafetyExpert.government": "Country",
   "biosafetyExpert.birthCountry": "Country Details",
   "biosafetyExpert.expertise": "Areas of expertise",
+  "biosafetyExpert.motherTongue": "Mother tongue",  
+  "biosafetyExpert.languageRating": "Language proficiency",
+  "biosafetyExpert.publishedOn":"Publication Date"
   "biosafetyExpert.unLanguages": "Language proficiency",
   "laboratoryDetection.uniqueId": "UID",
   "laboratoryDetection.organization": "Laboratory name and coordinates",
