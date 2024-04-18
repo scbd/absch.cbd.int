@@ -1,5 +1,6 @@
-import fieldsT from '../app-text/views/search/search-results/common-download-schemas.json';
-
+import fieldsTranslations from '../app-text/views/search/search-results/common-download-schemas.json';
+import { mergeTranslationKeys } from '../../services/translation-service';
+const fieldsT = mergeTranslationKeys(fieldsTranslations);
 export const downloadSchemas = {	
 	"focalPoint" : {
        "uniqueId"         : fieldsT["focalPoint.uniqueIdentifier"],
