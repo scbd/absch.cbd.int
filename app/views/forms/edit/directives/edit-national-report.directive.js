@@ -259,8 +259,6 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                         }
                                     }
                                 }
-                                else
-                                    console.log(mapping)
                             })
 
                             return prevReportAnswers;
