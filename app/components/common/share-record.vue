@@ -219,7 +219,6 @@
       authToken = await auth.token();
       if (authToken) {
           isUserSignedIn.value = true;
-          console.log("authToken authToken",authToken);
           // this authtoken is passed as tokenreader to api-base
           documentShareApi = new DocumentShareApi(authToken);
           subscriptionsApi = new SubscriptionsApi(authToken);
