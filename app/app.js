@@ -5,7 +5,7 @@ import "angular-loggly-logger";
 import "angular-joyride";
 import "ngMeta";
 import { 
-    registerPlugin,
+    VueRegistry,
     createNgVue,
     createAuth,
     createRouter,
@@ -72,19 +72,19 @@ app.directive('ngVue', NgVueDirective);
 
 app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function (realm, locale, $injector, apiToken, authentication) {
 
-  registerPlugin(createService('$realm', realm)); // use  useRealm() | import { useRealm  } from '~/services/composables/realm.js';
-  registerPlugin(createService('$locale', locale));
-  registerPlugin(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
-
   const ngVue   = createNgVue({ $injector, ngApp: app });
   const $i18n   = createI18n({ locale, fallbackLocale: 'en', legacy:false});
   const $route  = createRoute ({ plugins: { ngVue }});
   const $router = createRouter ({ plugins: { ngVue }});
 
-  registerPlugin(ngVue);
-  registerPlugin($i18n);
-  registerPlugin($route);
-  registerPlugin( $router);
+  VueRegistry
+    .use(createService('$realm', realm)) // use  useRealm() | import { useRealm  } from '~/services/composables/realm.js';
+    .use(createService('$locale', locale))
+    .use(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
+    .use(ngVue)
+    .use($i18n)
+    .use($route)
+    .use( $router)
 
   const authPlugin = createAuth ({ 
     fetchUser() { return authentication.getUser(); },
@@ -108,7 +108,7 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
   authentication.onUserChange ((user)  => authPlugin.user(user) );
   apiToken      .onTokenChange((token) => authPlugin.token(undefined, token, token?.expiration) );
 
-  registerPlugin(authPlugin);
+  VueRegistry.use(authPlugin);
   
 }]);
 
