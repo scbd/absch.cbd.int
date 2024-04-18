@@ -9,28 +9,24 @@
                     <div class="col-md-6 col-xs-6 pt-1">
                         <div class="nav flex-column">
                             <a class="nav-link fw-light link-light py-0 pb-1" href="kb">{{::('chmFooterT.aboutCHM'|$translate)}}</a>
-                            <a class="nav-link fw-light link-light py-0 pb-1" href="https://chm.cbd.int/protocol">
-                                {{::('chmFooterT.aboutCartagena'|$translate)}}</a>
-                            <a class="nav-link fw-light link-light py-0 pb-1"
-                                href="https://chm.cbd.int/protocol/supplementary">{{::('chmFooterT.suppProtocol'|$translate)}}</a>
-                            <br><br>
+                            <a class="nav-link fw-light link-light py-0 pb-1" href="https://www.cbd.int/convention">
+                                {{::('chmFooterT.aboutConvention'|$translate)}}</a>
+                            <br>
                             <a rel="noopener" translation-url class="nav-link fw-light link-light py-0 pb-1" ng-if="!user.isAuthenticated"
                                 href="signin">{{::('chmFooterT.signIn'|$translate)}}</a>
-                            <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="search">{{::('chmFooterT.searchRecords'|$translate)}}</a>
-                            <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="register">{{::('chmFooterT.submitRecords'|$translate)}}</a>
+                            <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="kb/tags/chm-announcement/">{{::('chmFooterT.chm'|$translate)}} 
+                                {{::('chmFooterT.announcements'|$translate)}} </a>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 pt-1">
                         <div class="nav flex-column pt-1">
+
+                            <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="search">{{::('chmFooterT.searchRecords'|$translate)}}</a>
+                            <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="register">{{::('chmFooterT.submitRecords'|$translate)}}</a>
+                            <br> 
                             <div class="d-none d-lg-block">                              
-                                    <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="countries">{{::('chmFooterT.countryProfiles'|$translate)}}</a>
-                                </div>
-                            <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="reports">{{::('chmFooterT.nra'|$translate)}}</a>
-                            <br><br>
-                            <a class="nav-link fw-light link-light py-0 pb-1"
-                                href="forums">{{::('chmFooterT.forums'|$translate)}}</a>
-                            <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="kb/tags/chm-announcement/">{{::('chmFooterT.chm'|$translate)}} 
-                                {{::('chmFooterT.announcements'|$translate)}} </a>
+                                <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="countries">{{::('chmFooterT.countryProfiles'|$translate)}}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,10 +37,9 @@
                 <div class="nav flex-column">
                     <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="kb">{{::('chmFooterT.kb'|$translate)}}</a>
                     <a class="nav-link fw-light link-light py-0 pb-1" rel="noopener" translation-url href="kb/faqs">{{::('chmFooterT.faq'|$translate)}}</a>
-                    <a class="nav-link fw-light link-light py-0 pb-1" href="https://chm3-vle.unep.org/">{{::('chmFooterT.trainingMaterials'|$translate)}}</a>
                     <a class="nav-link fw-light link-light py-0 pb-1" href="https://chm-training.cbd.int">{{::('chmFooterT.trainingSite'|$translate)}}</a>
                     <!-- <a class="nav-link fw-light link-light py-0 pb-1" href="#">BCH on BCH Forum</a> -->
-                    <br><br>
+                    
                     <a class="nav-link fw-light link-light py-0 pb-1" href="mailto: chm@cbd.int">{{::('chmFooterT.contactUs'|$translate)}}</a>
                 </div>
             </div>
