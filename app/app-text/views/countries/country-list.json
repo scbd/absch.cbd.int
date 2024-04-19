@@ -22,6 +22,6 @@
     "partyToCartagena": "Party to the Cartagena Protocol",
     "partyToSuppProtocol": "PARTY TO THE SUPPLEMENTARY PROTOCOL",
     "partyToNagoyaProtocol": "Party to the Nagoya Protocol",
-    "nonPartyToConvention":"Party to the Convention",
-    "PartyToConvention":"Non-Party to the Convention"
+    "nonPartyToConvention":"Non-Party to the Convention",
+    "partyToConvention":"Party to the Convention"
 }
