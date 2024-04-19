@@ -2,5 +2,16 @@
   "supplementaryAuthority.uniqueId": "UID",
   "supplementaryAuthority.government": "Country",
   "supplementaryAuthority.name": "Name of the Competent Authority",
-  "supplementaryAuthority.publishedOn":"Publication Date"
+  "supplementaryAuthority.publishedOn":"Publication Date",
+  "laboratoryDetection.uniqueIdentifier": "UID",
+  "laboratoryDetection.uniqueId": "UID",
+  "laboratoryDetection.organization": "Laboratory name and coordinates",
+  "laboratoryDetection.services": "Services and activities performed",
+  "laboratoryDetection.agreements": "Collaborative agreements",
+  "laboratoryDetection.certifications": "Accreditations and certifications of the laboratory",
+  "laboratoryDetection.detectionMethods": "Types of detection/identification method(s) available for use in the laboratory",
+  "laboratoryDetection.lmoTypes": "Types of LMOs",
+  "laboratoryDetection.detectableLmos": "LMO(s) detectable by the laboratory",
+  "laboratoryDetection.detectableGenes": "Genetic element(s) detectable by the laboratory",
+  "laboratoryDetection.publishedOn":"Publication Date"
 }

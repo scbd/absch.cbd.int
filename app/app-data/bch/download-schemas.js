@@ -7,10 +7,22 @@ export const downloadSchemas = {
 	...commonDownloadSchemas,
 
 	"supplementaryAuthority":{
-		"uniqueId": fieldsT["supplementaryAuthority.uniqueId"],
-		"government":fieldsT["supplementaryAuthority.government"],
-		"name":fieldsT["supplementaryAuthority.name"],
+		"uniqueId"   : fieldsT["supplementaryAuthority.uniqueId"],
+		"government" : fieldsT["supplementaryAuthority.government"],
+		"name"       : fieldsT["supplementaryAuthority.name"],
 		"publishedOn": fieldsT["supplementaryAuthority.publishedOn"]
+	},
+	"laboratoryDetection":{
+		"uniqueId"        : fieldsT["laboratoryDetection.uniqueId"],
+		"organization"    : fieldsT["laboratoryDetection.organization"],
+		"services"        : fieldsT["laboratoryDetection.services"],
+		"agreements"      : fieldsT["laboratoryDetection.agreements"],
+		"certifications"  : fieldsT["laboratoryDetection.certifications"],
+		"detectionMethods": fieldsT["laboratoryDetection.detectionMethods"],
+		"lmoTypes"        : fieldsT["laboratoryDetection.lmoTypes"],
+		"detectableLmos"  : fieldsT["laboratoryDetection.detectableLmos"],
+		"detectableGenes" : fieldsT["laboratoryDetection.detectableGenes"],
+		"publishedOn"     : fieldsT["laboratoryDetection.publishedOn"]
 	}
 }
 
