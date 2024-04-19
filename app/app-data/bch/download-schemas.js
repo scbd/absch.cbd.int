@@ -33,6 +33,22 @@ export const downloadSchemas = {
 		"motherTongue": fieldsT["biosafetyExpert.motherTongue"],
 		"languageRating": fieldsT["biosafetyExpert.languageRating"],
 		"publishedOn": fieldsT["biosafetyExpert.publishedOn"]
+	},
+	"biosafetyDecision" : {
+        "uniqueId"      			: fieldsT["bchRecordID"],
+        "government"        				: fieldsT["country"],
+		"authorities"						: fieldsT["biosafetyDecision.authorities"],
+		"title"								: fieldsT["biosafetyDecision.title"],
+		"date"								: fieldsT["biosafetyDecision.date"],
+		"decisionTypes"					    : fieldsT["biosafetyDecision.decisionTypes"],
+		"involvesFieldTrial"			    : fieldsT["biosafetyDecision.involvesFieldTrial"],
+		"involvesCommercialRelease"		    : fieldsT["biosafetyDecision.involvesCommercialRelease"],
+		"appliesToSubsequentIntroductions"  : fieldsT["biosafetyDecision.appliesToSubsequentIntroductions"],
+		"uses"								: fieldsT["biosafetyDecision.uses"],
+		"decisionTypesDirectUse"			: fieldsT["biosafetyDecision.decisionTypesDirectUse"],
+		"decisionResult"					: fieldsT["biosafetyDecision.decisionResult"],
+		"modifiedOrganisms"					: fieldsT["biosafetyDecision.modifiedOrganisms"],
+		"riskAssessments"					: fieldsT["biosafetyDecision.riskAssessments"],
+		"publishedOn"						: fieldsT["publishedOn"]
 	}
 }
-
