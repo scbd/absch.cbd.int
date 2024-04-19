@@ -39,5 +39,20 @@ export const downloadSchemas = {
         "functions": fieldsT["authority.functions"],
         "cpbOrganismTypes": fieldsT["authority.cpbOrganismTypes"],
         "publishedOn": fieldsT["authority.publishedOn"]
+    },
+
+    "resource":{
+        "uniqueId": fieldsT["resource.uniqueId"],
+        "title": fieldsT["resource.title"],
+        "resourceTypes": fieldsT["resource.resourceTypes"],
+        "authors": fieldsT["resource.authors"],
+        "publisher": fieldsT["resource.publisher"],
+        "publicationDate": fieldsT["resource.publicationDate"],
+        "cbdSubjects": fieldsT["resource.cbdSubjects"],
+        "biosafetySubjects": fieldsT["resource.biosafetySubjects"],
+        "biosafetyModifiedOrganisms": fieldsT["resource.biosafetyModifiedOrganisms"],
+        "biosafetyOrganisms": fieldsT["resource.biosafetyOrganisms"],
+        "biosafetyGenes": fieldsT["resource.biosafetyGenes"],
+        "publishedOn": fieldsT["resource.publishedOn"]
     }
 }
