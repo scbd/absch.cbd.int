@@ -3,6 +3,7 @@
   "publishedOn"       : "Publication Date",
   "bchRecordID"       : "BCH record ID",
   "name"              :  "Name",
+  "title"             : "Title",
 
   "supplementaryAuthority.uniqueId": "UID",
   "supplementaryAuthority.government": "Country",
@@ -44,5 +45,10 @@
   "nationalRiskAssessment.modifiedOrganisms"         : "Living modified organism(s)",
   "nationalRiskAssessment.scopes"                    : "Scope of the risk assessment",
 
-  "independentRiskAssessment.organizations"          : "Institution responsible for the risk assessment"
+  "independentRiskAssessment.organizations"          : "Institution responsible for the risk assessment",
+  
+  "biosafetyLaw.type"                                : "Type of Law / Regulation",
+  "biosafetyLaw.jurisdiction"                        : "Area of jurisdiction",
+  "biosafetyLaw.cpbSubjectAreas"                     : "Subject areas",
+  "biosafetyLaw.entryIntoForce"                      : "Date of entry into force"
 }

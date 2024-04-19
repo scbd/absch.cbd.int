@@ -68,5 +68,15 @@ export const downloadSchemas = {
 		"modifiedOrganisms" : fieldsT["nationalRiskAssessment.modifiedOrganisms"],
 		"scopes"			: fieldsT["nationalRiskAssessment.scopes"],
 		"publishedOn"		: fieldsT["publishedOn"]
+	},
+	"biosafetyLaw" : {
+	    "uniqueId"    			: fieldsT["bchRecordID"],
+        "government"        	: fieldsT["country"],
+		"title"			 		: fieldsT["title"],
+		"type"		 			: fieldsT["biosafetyLaw.type"],
+		"jurisdiction"			: fieldsT["biosafetyLaw.jurisdiction"],
+		"cpbSubjectAreas"		: fieldsT["biosafetyLaw.cpbSubjectAreas"],
+		"entryIntoForce"		: fieldsT["biosafetyLaw.entryIntoForce"], 
+		"publishedOn"			: fieldsT["publishedOn"]
 	}
 }
