@@ -108,6 +108,9 @@
                                 <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">{{::('documentSelectorT.myRecords'|$translate)}}</a>
                             </li>
                             <li class="nav-item pe-4">
+                                <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#pendingRequests" ng-click="changeTab('pendingRequests');">{{::('documentSelectorT.myPendingRequests'|$translate)}}<span ng-if="recordCount"></span></a>
+                            </li>
+                            <li class="nav-item pe-4">
                                 <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">{{::('documentSelectorT.selected'|$translate)}} <span ng-if="recordCount"></span></a>
                             </li>
                         </ul>
@@ -199,6 +202,11 @@
                             <div ng-if="!$parent.tempSelectedDocuments.length"> {{::('documentSelectorT.noRecordSelected'|$translate)}}</div>
                         </div>
                     </div>
+                    <div id="pendingRequests" class="tab-pane bg-white">
+                        <div ng-if="activeTab=='pendingRequests'">
+                            <div ng-include="'documentSelectionPendingRequests'"></div>
+                        </div>                        
+                    </div>
                 
                 </div>
                 <div  ng-show="allowNew.editingOn" class="row mw-100">
@@ -212,10 +220,10 @@
                 <div class="row">
                     <div class="col-12">
 
-                       <div class="float-end"> 
+                    <div class="float-end"> 
                         <a rel="noopener" translation-url  type="button" class="btn btn-secondary me-1" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">{{::('documentSelectorT.clearRecords'|$translate)}}</a>
                         <a rel="noopener" translation-url  type="button" class="btn btn-primary me-1" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">{{::('documentSelectorT.select'|$translate)}}</a>
-                       </div>
+                    </div>
                         <div class="dropdown  float-start me-1"  ng-if="allowNew.schemas && allowNew.schemas.length>1 && !allowNew.editingOn" class="ms-1">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <span ng-if="!allowNew.title">{{::('documentSelectorT.create'|$translate)}}</span>
@@ -329,5 +337,38 @@
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
                 max-page-count="4"></div> 
         </div>
+    </script>
+
+    <script type="text/ng-template" trados-translation="true" id="documentSelectionPendingRequests">
+        <div ng-if="!isPendingLoading && rawDocuments.length>0">      
+            <table class="table table-condensed table-striped w-100">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th class="text-nowrap">{{::('documentSelectorT.uId'|$translate)}}</th>
+                        <th class="text-nowrap">{{::('documentSelectorT.type'|$translate)}} </th>
+                        <th class="text-nowrap">{{::('documentSelectorT.title'|$translate)}}</th>
+                        <th class="text-nowrap">{{::('documentSelectorT.summary'|$translate)}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="col-md-12" ng-repeat="doc in rawDocuments" id="rec">
+                        <td class="width-0"><span class="bold" ng-bind="$index+1"></span></td> 
+                        <td class="width-0">                                                
+                            <input type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" />
+                        </td>
+                        <td class="col-md-4"><a rel="noopener" translation-url target="_blank" ng-href="{{doc.url_ss}}">
+                        <!-- ToDo: apply uniqueID filter i.e doc.identifier|uniqueID  -->
+                            <span ng-bind="doc.identifier"></span></a></td>
+                        <td class="col-md-1" ng-bind="doc.type|lstring:locale"></td>
+                        <td class="col-md-2" ng-bind="doc.title|lstring:locale"></td>
+                        <td class="col-md-5" ng-bind-html="doc.summary | lstring:locale|limitTo:200"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+        <div ng-if="isPendingLoading" class="text-center"> <i class="fa fa-spinner fa-spin"></i> {{::('documentSelectorT.loading'|$translate)}}</div>
+        <div ng-if="!isPendingLoading && rawDocuments.length===0" class="text-center"> {{::('documentSelectorT.noRecordFound'|$translate)}}</div>
     </script>
     </div>

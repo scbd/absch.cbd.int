@@ -340,7 +340,40 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 else if($scope.activeTab == 'myGovernmentRecords' && $scope.userGov){
                     var myGovernmentQuery = '_ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase());
                     rawQuery.fieldQueries.push(myGovernmentQuery);
-                }
+                } 
+                else if($scope.activeTab == 'pendingRequests'){
+                    $scope.isPendingLoading = true;
+                    var qAnd = [];
+                    //ToDo: schema ?
+                     qAnd.push("(type eq '" + $attr.allowNewSchema + "')"); 
+                    var qRecords = IStorage.drafts.query(qAnd, {$top:$scope.top||100, $orderby:'updatedOn desc'});
+                    $q.when(qRecords)
+                    .then(function(result){
+                        const draftDocuments = result.data ? result.data.Items: [];
+                        //get only pending requests not draft records
+                        const pendingRequests = draftDocuments.length > 0 ? draftDocuments.filter(draft => draft.isRequest === true) : [];
+                        if(pendingRequests?.length>0){
+                            $scope.rawDocuments = _.map(pendingRequests, function(doc){
+                                doc.identifier_s = doc.identifier;  
+                                doc.schema_s = $attr.allowNewSchema;
+                                doc.rec_title = $filter('lstring')(doc.title, locale); // ToDo: need to verify
+                                doc.rec_summary = $filter('lstring')(doc.summary, locale);
+                                doc.url_ss = `/database/${doc.schema_s}/${doc.identifier}`;
+                                doc.uniqueIdentifier_s = doc.identifier // need for selected records
+                                doc._revision_i =  doc.revision; // required for selected details,  used in line 706, 87.
+                                if(_.find($scope.tempSelectedDocuments, {identifier_s:doc.identifier})){
+                                    doc.__checked = true;
+                                } else {
+                                    doc.__checked= false;
+                                }
+                                return doc;
+                            }); 
+                        }                     
+                    })
+                    .finally(function(){
+                         $scope.isPendingLoading = false;
+                    });
+                }     
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
                     $scope.searchResult.currentPage = rawQuery.currentPage;
@@ -505,7 +538,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 
             $scope.changeTab = function(tab){
                 $scope.activeTab = tab;
-                if(['allRecords', 'myRecords', 'myGovernmentRecords'].includes(tab)){
+                if(['allRecords', 'myRecords', 'myGovernmentRecords', 'pendingRequests'].includes(tab)){
                     showToolTip();
                     $scope.searchFreeText($scope.search.keyword)
                 }
@@ -542,10 +575,19 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     'query'      : queryField + ':("' +_.map(identifiers,solr.escape).join('" "') +'")',
                     'rowsPerPage':  $scope.model?.length  
                 };
-                return searchService.list(queryParameters, null).then(function(result){                    
-                    return $scope.tempSelectedDocuments = _.map(result.data.response.docs, function(doc){
-                        doc.__checked=true;
-                        return doc;
+                return searchService.list(queryParameters, null).then(function(result){    
+                   // in   $scope.tempSelectedDocuments already show only doc.__checked=true;
+                    // return $scope.tempSelectedDocuments = _.map(result.data.response.docs, function(doc){
+                    //     console.log("searchService.list doc",doc);       
+                    //     doc.__checked=true;
+                    //     return doc;
+                    // });                          
+                    const allTabDocs = result.data.response.docs;
+                    allTabDocs.forEach(record => {
+                        const index = $scope.tempSelectedDocuments.findIndex(i => i.id === record.id);
+                        if (index !== -1) {
+                            $scope.tempSelectedDocuments[index]._checked = record._checked;
+                        }
                     });
                 });
             }
