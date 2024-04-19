@@ -50,5 +50,28 @@
   "biosafetyLaw.type"                                : "Type of Law / Regulation",
   "biosafetyLaw.jurisdiction"                        : "Area of jurisdiction",
   "biosafetyLaw.cpbSubjectAreas"                     : "Subject areas",
-  "biosafetyLaw.entryIntoForce"                      : "Date of entry into force"
+  "biosafetyLaw.entryIntoForce"                      : "Date of entry into force",
+  "modifiedOrganism.transformationEvent"             : "Transformation event",
+  "modifiedOrganism.uniqueIdentification"            : "Unique identifier",
+  "modifiedOrganism.developers"                      : "Developer (Name)",
+  "modifiedOrganism.recipientOrganisms"              : "Recipient Organism or Parental Organisms",
+  "modifiedOrganism.vector"                          : "Vector",
+  "modifiedOrganism.techniqueUsed"                   : "Techniques used for modification",
+  "modifiedOrganism.genes"                           : "Introduced or modified genetic element(s)",
+  "modifiedOrganism.traits"                          : "Modified traits",
+  "modifiedOrganism.commonUses"                      : "Common use(s)",
+
+  "dnaSequence.synonymNames"                         : "Alternative genetic element name(s)",
+  "dnaSequence.abbreviation"                         : "Abbreviation",
+  "dnaSequence.family"                               : "Category",
+  "dnaSequence.isSynthetic"                          : "Is this genetic element a synthetic molecule?",
+  "dnaSequence.donorOrganisms"                       : "Donor organism (scientific name)",
+  "dnaSequence.traits"                               : "Related trait(s) or use(s) in biotechnology",
+
+  "organism.scientificName"                          : "Scientific name",
+  "organism.scientificNameSynonyms"                  : "Alternate scientific name(s) (synonym(s))",
+  "organism.commonNames"                             : "Common name(s)",
+  "organism.plantCultivar"                           : "Additional classification",
+  "organism.organismType"                            : "Type of organism",
+  "organism.commonUses"                              : "Common use(s)"
 }
