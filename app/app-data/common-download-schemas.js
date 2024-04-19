@@ -33,10 +33,10 @@ export const downloadSchemas = {
     },
 
     "authority":{
-        "uniqueId": fieldsT["authority.uniqueId"],
-        "government": fieldsT["authority.government"],
-        "name": fieldsT["authority.name"],
-        "functions": fieldsT["authority.functions"],
+        "uniqueId"        : fieldsT["authority.uniqueId"],
+        "government"      : fieldsT["authority.government"],
+        "name"            : fieldsT["authority.name"],
+        "functions"       : fieldsT["authority.functions"],
         "cpbOrganismTypes": fieldsT["authority.cpbOrganismTypes"],
         "publishedOn": fieldsT["authority.publishedOn"]
     },
@@ -54,5 +54,20 @@ export const downloadSchemas = {
         "biosafetyOrganisms": fieldsT["resource.biosafetyOrganisms"],
         "biosafetyGenes": fieldsT["resource.biosafetyGenes"],
         "publishedOn": fieldsT["resource.publishedOn"]
-    }
+    },
+
+    "capacityBuildingInitiative":{
+        "uniqueId"        : fieldsT["capacityBuildingInitiative.uniqueId"],
+        "title"           : fieldsT["capacityBuildingInitiative.title"],
+        "geographicScope" : fieldsT["capacityBuildingInitiative.geographicScope"],
+        "countryRegions"  : fieldsT["capacityBuildingInitiative.countryRegions"],
+        "status"          : fieldsT["capacityBuildingInitiative.status"],
+        "startDate"       : fieldsT["capacityBuildingInitiative.startDate"],
+        "endDate"         : fieldsT["capacityBuildingInitiative.endDate"],
+        "activityScope"   : fieldsT["capacityBuildingInitiative.activityScope"],
+        "categories"      : fieldsT["capacityBuildingInitiative.categories"],
+        "cbdSubjects"     : fieldsT["capacityBuildingInitiative.cbdSubjects"],
+        "cpbThematicAreas": fieldsT["capacityBuildingInitiative.cpbThematicAreas"],
+        "publishedOn"     : fieldsT["capacityBuildingInitiative.publishedOn"]
+	}
 }
