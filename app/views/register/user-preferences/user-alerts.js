@@ -11,7 +11,7 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
 import { mergeTranslationKeys } from '../../../services/translation-merge';
 const userAlertsT = mergeTranslationKeys(userAlertsTTranslations);
     app.directive("userAlerts", ['$rootScope', 'ngDialog', '$routeParams', function ($rootScope, ngDialog, $routeParams) {
-
+        translationService.set('userAlertsT', userAlertsT); 
         return {
             restrict: "EA",
             template: template,
@@ -36,7 +36,6 @@ const userAlertsT = mergeTranslationKeys(userAlertsTTranslations);
                     $scope.isDeleteAllow = false ;
                     $scope.frequencies = frequencies;
                     $scope.userSettings = {};
-                    translationService.set('userAlertsT', userAlertsT); 
                     
                     const systemQueries = {
                         recordsOverview : {
