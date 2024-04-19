@@ -62,7 +62,7 @@
 	
 	onMounted(async ()=>{
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
-		categories.value = await loadKbCategories(true);
+		categories.value = await loadKbCategories();
 		loadFaqs(1);
 	})
 	

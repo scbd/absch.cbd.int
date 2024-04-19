@@ -55,6 +55,3 @@ app.filter('$translate', ['translationService', function(translationService){
     };
 
 }])
-
-export const mergeTranslationKeys = mergeKeys
-

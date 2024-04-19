@@ -539,6 +539,11 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 $scope.searchRecord = function () {
                     loadRecords(1);
                 }
+
+                $scope.isAdditionDisabled = function (schema){
+                    return  realm.schemas[schema].disableAdd;
+                }
+                
                 function loadRecords(pageNumebr) {
                     $scope.loading = true;
                     $scope.records = [];
@@ -758,6 +763,9 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                             if(error.status === 404 && !draft)
                                 updateDocumentStatus(identifier, workflowActivity, true);
                         });;
+                }
+                $scope.isDisableEdit = function (schema){
+                    return  realm.schemas[schema].disableEdit;
                 }
 
                 function loadmyTasks(schema){

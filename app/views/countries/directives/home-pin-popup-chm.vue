@@ -29,7 +29,7 @@
                         <a rel="noopener" v-if="country.code"  @click="toggleCountyList(schema.shortCode,country.code)" class="text-black cursor-pointer" style="color:#fff" >
                             <span >{{lstring(schema.title,locale)}}</span>                        
                         </a>                
-                        <a rel="noopener" v-if="!country.code" :href="`search?schema=${schema.shortCode}`" class="text-black " style="color:#fff">
+                        <a rel="noopener" v-if="!country.code" :href="`search?schema=${schemaKeyByShortCode(schema.shortCode)}`" class="text-black " style="color:#fff">
                             <span >{{ lstring(schema.title,locale)}}</span>                             
                         </a>                   
                     </td> 
@@ -44,10 +44,12 @@
     import { useRoute, useRouter} from "@scbd/angular-vue/src/index.js";      
     import { useI18n } from 'vue-i18n';    
     import { lstring } from '../../../components/kb/filters';
+    import { useSchema } from '~/services/composables/schema.js';
  
     const {value:route} = useRoute();    
     const router = useRouter();    
     const { t,locale } = useI18n({ messages }); 
+    const { schemaKeyByShortCode } = useSchema()
 
     const props = defineProps({
         country: {type: Object, require:true}     

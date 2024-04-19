@@ -2,7 +2,7 @@
 
 export default {
     methods: {
-        async loadKbCategories(isBch){
+        async loadKbCategories(){
             let categories
             if(!isBch) {
                 categories = (await import('~/app-data/abs/kb-categories.js')).categories;

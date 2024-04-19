@@ -1612,9 +1612,13 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                             const {absLeftMenuFilters} = await import('./search-filters/abs-left-menu-filters.js');
                             return { ...absLeftMenuFilters};
                         }
-                        else {
+                        else if(isBCH) {
                             const { bchLeftMenuFilters } = await import('./search-filters/bch-left-menu-filters.js');
                             return { ...bchLeftMenuFilters };
+                        }
+                        else if (isCHM) {
+                            const { chmLeftMenuFilters } = await import('./search-filters/chm-left-menu-filters.js');
+                            return { ...chmLeftMenuFilters };
                         }
                     }
 

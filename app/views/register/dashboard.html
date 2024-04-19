@@ -1,4 +1,4 @@
-﻿<div id="RegisterPage" class="overflow-hidden">
+<div id="RegisterPage" class="overflow-hidden">
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
     <register-top-menu></register-top-menu>
@@ -7,6 +7,8 @@
         <span ng-if="isBch" ng-bind-html="::('dashboardT.bchTrainingSiteMessage'|$translate)">
         </span>
         <span ng-if="isAbs" ng-bind-html="::('dashboardT.absTrainingSiteMessage'|$translate)">
+        </span>
+        <span ng-if="isChm" ng-bind-html="::('dashboardT.chmTrainingSiteMessage'|$translate)">
         </span>
     </div>
     <div class="innerPageContent register-content m-0 p-3">
@@ -44,6 +46,10 @@
                             <span class="comma-space d" ng-if="::(roles.isPublishingAuthority && isBch)">
                                 {{::('dashboardT.bchNationalPoint'|$translate)}}</span>
                             <span class="comma-space " ng-if="::(roles.isNationalFocalPoint && isBch)">Cartagena
+                                {{::('dashboardT.nationalFocalPoint'|$translate)}}</span>                            
+                            <span class="comma-space d" ng-if="::(roles.isPublishingAuthority && ischm)">
+                                {{::('dashboardT.publishingAuthority'|$translate)}}</span>
+                            <span class="comma-space " ng-if="::(roles.isNationalFocalPoint && isChm)">
                                 {{::('dashboardT.nationalFocalPoint'|$translate)}}</span>
                             <span class="comma-space" ng-if="::roles.isNationalAuthorizedUser">
                                 {{::('dashboardT.nationalAuthorizedUser'|$translate)}}</span>
@@ -98,6 +104,12 @@
                                                 data-bs-toggle="tooltip" data-html="true" data-container="body"
                                                 title="{{::('dashboardT.cartagenaInfo'|$translate)}}"></span>
                                         </span>
+                                        <span ng-if="isChm">
+                                            {{::('dashboardT.nationalFocalPoint'|$translate)}} 
+                                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
+                                                data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                                title="{{::('dashboardT.nationalFocalPointInfo'|$translate)}}"></span>
+                                        </span>
                                     </span>
 
                                     <span class="comma" ng-if="::roles.isPublishingAuthority">
@@ -111,14 +123,23 @@
                                                 title="{{::('dashboardT.countryDesignation'|$translate)}}">
                                             </span>
                                         </span>
+                                        <span ng-if="isChm">{{::('dashboardT.isPublishingAuthority'|$translate)}}
+                                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="{{::('dashboardT.isPublishingAuthorityInfo'|$translate)}}"></span>
+                                        </span> 
                                     </span>
 
                                     <span class="comma" ng-if="::roles.isNationalAuthorizedUser">
                                         {{::('dashboardT.NAU'|$translate)}}
                                         <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                             title="{{::('dashboardT.bchNAU'|$translate)}}">
-                                        </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                            title="{{::('dashboardT.absNAU'|$translate)}}"></span></span>
+                                        </span>
+                                        <span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="{{::('dashboardT.absNAU'|$translate)}}">
+                                        </span>
+                                        <span ng-if="isChm" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="{{::('dashboardT.chmNAU'|$translate)}}">
+                                        </span>
                                     </span>
 
                                     <span class="comma" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">
@@ -189,6 +210,11 @@
                                             data-bs-toggle="tooltip" data-html="true" data-container="body"
                                             ng-if="isBch"
                                             title="{{::('dashboardT.nationalRecordsBch'|$translate)}}">
+                                        </span>
+                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
+                                            data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                            ng-if="isChm"
+                                            title="{{::('dashboardT.nationalRecordsChm'|$translate)}}">
                                         </span>
                                     </th>
                                     <th class="table_display_none">
@@ -295,7 +321,7 @@
                                                 <i class="bi bi-chevron-down cursor-pointer p-1"
                                                     ng-class="{'bi bi-chevron-down':!topRecords[schema], 'bi bi-chevron-up':topRecords[schema]}"
                                                     aria-hidden="true"></i></button>
-                                            <button type="button" class="btn btn-outline-dark p-0"
+                                            <button type="button" class="btn btn-outline-dark p-0" ng-disabled="isAdditionDisabled(schema)"
                                                 title="{{::('dashboardT.addRecord'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoNew($event,schema)"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
@@ -373,6 +399,10 @@
                                             data-bs-toggle="tooltip" data-html="true" data-container="body"
                                             ng-if="isBch"
                                             title="{{::('dashboardT.referenceRecordsBch'|$translate)}}"></span>
+                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
+                                            data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                            ng-if="isChm"
+                                            title="{{::('dashboardT.referenceRecordsChm'|$translate)}}"></span>
                                     </span>
                                 </td>
                                 <td class="table_display_none text-end">
