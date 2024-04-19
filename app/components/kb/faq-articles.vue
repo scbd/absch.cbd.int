@@ -25,7 +25,7 @@
     const loading = ref(true);
     
     onMounted(async () => {
-        const categories = await loadKbCategories(realm.is('BCH'));
+        const categories = await loadKbCategories();
         const faqArticles = categories.filter(tag => tag.adminTags[0] === "faq");
         articles.value = faqArticles[0].articles;
         loading.value = false;

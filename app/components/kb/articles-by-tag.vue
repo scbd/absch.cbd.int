@@ -82,7 +82,7 @@
     onMounted(async () => {  
         const paramTag = (route.value?.params?.tag).replace(/"/g, "");
         if (paramTag != undefined && paramTag != null) {
-            const categories = await loadKbCategories(realm.is('BCH'));
+            const categories = await loadKbCategories();
             tagDetails = categories.find(e => e.adminTags.includes(paramTag)) || {
                 title: paramTag
             };

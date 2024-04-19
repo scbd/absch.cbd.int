@@ -79,7 +79,7 @@
       const realmArticleTag = getRealmArticleTag();
   
       onMounted( async() => {
-          categories.value = await loadKbCategories(realm.is('BCH'));
+          categories.value = await loadKbCategories();
           if (route.value?.params?.search) {
               search.value = route.value.params.search.replace(/"/g, "");
           }         
