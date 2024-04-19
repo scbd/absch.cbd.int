@@ -34,7 +34,7 @@
     const KbCategories = ref([]);
 
     onMounted(async ()=>{
-        const categories = await loadKbCategories(realm.is('BCH'));
+        const categories = await loadKbCategories();
         KbCategories.value = categories.filter(tag => tag.adminTags[0] != "faq");
     })
     
