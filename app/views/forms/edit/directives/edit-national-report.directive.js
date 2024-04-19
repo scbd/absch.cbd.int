@@ -234,7 +234,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                                 var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
                                 if (prevQuestion) {
-                                    mapping.previousQuestion = { title: prevQuestion.title };
+                                    mapping.previousQuestion = { title: prevQuestion.title, number: prevQuestion.number };
                                     if (prevReportAnswers) {
                                         var prevAnswer = prevReportAnswers[mapping.prevQuestion];
                                         if (_.isArray(prevAnswer)) {
