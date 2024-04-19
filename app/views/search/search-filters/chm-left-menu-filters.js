@@ -1,5 +1,5 @@
 import chmFiltersTranslations from '~/app-text/views/search/search-filters/chm-left-menu-filters.json';
-import { mergeTranslationKeys } from '../../../services/translation-service';
+import { mergeTranslationKeys } from '../../../services/translation-merge.js';
 
 const chmFilters = mergeTranslationKeys(chmFiltersTranslations);
 
