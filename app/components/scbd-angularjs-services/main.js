@@ -11,4 +11,4 @@ import './services/mime.type.service';
 import './services/locale';
 import './services/extended-route';
 import './services/apiUrl';
-export {default as scbdSchemas} from './filters/schema-name.json'
+export {default as scbdSchemas} from './filters/schema-name.json' assert { type:'json'};
