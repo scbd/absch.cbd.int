@@ -16,6 +16,7 @@ import {
 import {
     createI18n
 } from 'vue-i18n';
+ import { mergeTranslationKeys} from './services/translation-merge';
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
@@ -59,10 +60,11 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
   ngMeta.init();
 
   let joyrideTemplate  = (await import('~/views/directives/joyride-template.html')).default;
-  const joyrideTemplateT = (await import('~/app-text/views/directives/joyride-template.json')).default;
+  const joyrideTemplateT = (await import('~/app-text/views/directives/joyride-template.json')).default;  
+  const joyrideTemplateM = mergeTranslationKeys(joyrideTemplateT);
 
-  for (const key in joyrideTemplateT) {
-    joyrideTemplate = joyrideTemplate.replace(`{{${key}}}`, joyrideTemplateT[key]);    
+  for (const key in joyrideTemplateM) {  
+    joyrideTemplate = joyrideTemplate.replace(`{{${key}}}`, joyrideTemplateM[key]);    
   } 
   $templateCache.put('ngJoyrideDefault.html', joyrideTemplate);
   
