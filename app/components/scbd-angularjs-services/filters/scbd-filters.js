@@ -1,7 +1,7 @@
 import app from '~/app';
 import _ from 'lodash';
 import moment from 'moment';
-import scbdSchemaDetails from './schema-name.json';
+import scbdSchemaDetails from './schema-name.json'  assert { type:'json'};
 import '../services/locale';
 import { setAnchorTarget, escapeHtmlAttributeId } from '~/services/html.js'
     
