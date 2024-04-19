@@ -36,6 +36,7 @@
     "general": "General",
     "country": "Country",
     "notApplicable": "Not applicable (no decisions were taken)",
+    "notApplicableOnly": "Not applicable",
     "availableOnBch": "Information available and in the BCH",
     "availablePartialyOnBch": "Information available but only partially available in the BCH",
     "availableNotOnBch": "Information available but not in the BCH",

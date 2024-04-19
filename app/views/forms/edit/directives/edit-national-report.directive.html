@@ -182,7 +182,7 @@
                             * {{::('editNRT.previousAnswerMapping'|$translate)}}
                         </div>
                         <div>
-                            <strong ng-bind-html="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong>
+                            <strong ng-bind-html="::(previousAnswerMapping[question.key].previousQuestion.number + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong>
                         </div>
                         <div class="card card-sm mt-2" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
                             ng-bind="::((previousAnswerMapping[question.key].previousQuestion.answer.value||previousAnswerMapping[question.key].previousQuestion.answer)|lstring)"></div>
