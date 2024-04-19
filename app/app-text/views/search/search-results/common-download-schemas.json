@@ -43,5 +43,19 @@
     "resource.biosafetyModifiedOrganisms": "LMO(s) identification",
     "resource.biosafetyOrganisms"        : "Organism(s) identification",
     "resource.biosafetyGenes"            : "Genetic element(s) identification",
-    "resource.publishedOn"               : "Publication Date"
+    "resource.publishedOn"               : "Publication Date",
+    
+    "capacityBuildingInitiative.uniqueId"        : "BCH record ID",
+    "capacityBuildingInitiative.title"           : "Title of the initiative",
+    "capacityBuildingInitiative.geographicScope" : "Geographic scope",
+    "capacityBuildingInitiative.countryRegions"  : "Geographical or political/economic group(s) and/or country(ies)",
+    "capacityBuildingInitiative.status"          : "Status",
+    "capacityBuildingInitiative.startDate"       : "Start date",
+    "capacityBuildingInitiative.endDate"         : "End date",
+    "capacityBuildingInitiative.activityScope"   : "Type of capacity development initiative",
+    "capacityBuildingInitiative.categories"      : "Category(ies) of capacity development activities",
+    "capacityBuildingInitiative.cbdSubjects"     : "Related CBD Subject Areas",
+    "capacityBuildingInitiative.cpbThematicAreas": "Biosafety Thematic Areas",
+    "capacityBuildingInitiative.publishedOn"     : "Publication date"
+
 }
