@@ -180,7 +180,7 @@
 </template>
 
 <script setup>
-  import { onMounted, ref, shallowRef, inject } from 'vue';
+  import { onMounted, ref, shallowRef, inject, computed } from 'vue';
   import DocumentShareApi from "~/api/document-share";
   import SubscriptionsApi from "~/api/subscriptions";
   import { Modal, Toast } from "bootstrap";
@@ -206,7 +206,7 @@
     type: "link"
   });
 
-  let isUserSignedIn = ref(false);
+
   let error = ref(null);
   let documentShareApi = null; // ?
   let subscriptionsApi = null; // ?
@@ -214,11 +214,10 @@
   let clipboardToast = shallowRef(null);
   const { t, locale } = useI18n({ messages });
   const realm = useRealm();
-
+  const isUserSignedIn = computed(()=> auth.user()?.isAuthenticated);
   onMounted(async () => {  
       authToken = await auth.token();
       if (authToken) {
-          isUserSignedIn.value = true;
           // this authtoken is passed as tokenreader to api-base
           documentShareApi = new DocumentShareApi(authToken);
           subscriptionsApi = new SubscriptionsApi(authToken);
