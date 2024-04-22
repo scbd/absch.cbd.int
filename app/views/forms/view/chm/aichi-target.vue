@@ -150,15 +150,18 @@
 
 <script setup>
     import { computed } from 'vue';
-    import {km-pre, km-value} '../components/scbd-angularjs-controls/form-control-directives/km-value-ml.js';
+    import { lstring } from '../kb/filters';
+
+
 
     const props= defineProps ({
-      document:  { type: Object, required: true },
-      champions: { type: Object, required: true },
-      resources: { type: Object, required: true }
+      document:     { type: Object, required: true },
+      champions:    { type: Object, required: true },
+      resources:    { type: Object, required: true },
+      organization: { type: Object, required: true }
   })
 
-    const reference = computed(() => {
+    const resources = computed(() => {
 
         resources = document.resources ? JSON.parse(JSON.stringify(document.resources)) : undefined;
         if (resources) {
@@ -166,31 +169,24 @@
                 loadReferences(resources[idx].references, true);
             }
         }
+        return resources;
+    })
 
+    const champions = computed(() => {
         champions = document.champions ? JSON.parse(JSON.stringify(document.champions)) : undefined;
         if (champions) {
             for (var idx = 0; idx < champions.length; idx++) {
                 loadReferences(champions[idx].organizations);
             }
         }
+        return champions;
+    })
 
-        if(document.strategicPlanIndicators){
-            // //$q
-            // $q.when(loadFromIndex(document.strategicPlanIndicators)).then(function(result) {
-            //     strategicPlanIndicators = result;
-            // });
-
-            // //promise
-            // const resolvedPromise = Promise.resolve(loadFromIndex(document.strategicPlanIndicators));
-            // resolvedPromise.then(data => strategicPlanIndicators=data);
-
-            // //await
-            // await loadFromIndex(document.strategicPlanIndicators).then(function(result) {
-            //     strategicPlanIndicators = result;
-            // });
-            strategicPlanIndicators = await loadFromIndex(document.strategicPlanIndicators);
+    const strategicPlanIndicators = computed(() => {
+        if(document.strategicPlanIndicators){            
+            return await loadFromIndex(document.strategicPlanIndicators);
         }
-    }),
+    })
 
     const loadFromIndex = function (references){
         var query = {
