@@ -74,4 +74,16 @@ export const downloadSchemas = {
         "relevantMeasures": fieldsT["absProcedure.relevantMeasures"],
         "keywords": fieldsT["absProcedure.keywords"]
     }
+
+    "absNationalModelContractualClause":{
+        "uniqueId": fieldsT["absNationalModelContractualClause.uniqueId"],
+        "government": fieldsT["absNationalModelContractualClause.government"],
+        "title": fieldsT["absNationalModelContractualClause.title"],
+        "description": fieldsT["absNationalModelContractualClause.description"],
+        "jurisdiction": fieldsT["absNationalModelContractualClause.jurisdiction"],
+        "relevantMeasures": fieldsT["absNationalModelContractualClause.relevantMeasures"],
+        "keywords": fieldsT["absNationalModelContractualClause.keywords"],
+        "thematicAreas": fieldsT["absNationalModelContractualClause.thematicAreas"],
+        "relevantInformation": fieldsT["absNationalModelContractualClause.relevantInformation"]
+    }
 }
