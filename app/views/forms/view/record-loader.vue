@@ -1,5 +1,5 @@
 <template>
-    <div>{{ locale }}
+    <div>
         <Suspense>
             <aichi-target v-if="documentInfo?.type == 'aichiTarget'"  
                  :document-info="documentInfo" :locale="locale"></aichi-target>

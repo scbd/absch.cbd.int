@@ -12,9 +12,10 @@
             <label>Target Number </label>         
             <km-value-ml v-vue-ng  :value="document.number" :locales="locale" html></km-value-ml>
             <div v-if="document.strategicGoal">
-                <label>Strategic Goal</label> 
-                <km-value-ml v-vue-ng  :value="document.strategicGoal.identifier" :locales="locale" html></km-value-ml>
-                <!-- <km-value-ml v-vue-ng  :value="getTargetGoal(document.strategicGoal.identifier)" :locales="locale" html></km-value-ml> -->
+                <label>Strategic Goal</label>
+                <span class="km-value">
+                    <km-term :value="document.strategicGoal" :locale="locale"></km-term>
+                </span>
             </div>
             <div v-if="document.guide">
                 <label>Quick Guide</label>              
@@ -144,16 +145,14 @@
 <script setup>
     import { computed, onMounted } from 'vue';
     import { lstring } from '~/services/filters/lstring.js'; 
-    import '../../../../components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
+    import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import '~/views/forms/view/directives/view-record-reference.directive.js' 
+    import kmTerm from '~/components/km/KmTerm.vue'
+
     const props = defineProps({
         documentInfo: { type: Object, required: true },
         locale      : { type:String}
     })
     const document = computed(()=>props.documentInfo?.body);
-    // const getTargetGoal = (identifier) => {
-    //     return thesaurusService.getDomainTerms('aichiTargetGoals').then(function(o){
-    //         return _.findIndex(o, function(goal) { return goal.name.includes(identifier);});        
-    //     });       
-    // };
+
 </script>

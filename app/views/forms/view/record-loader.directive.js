@@ -136,7 +136,10 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if ($route.current.params.documentNumber)
 							var documentID = $route.current.params.documentNumber;
 
-						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID) || /^chm\-nfp/i.test(documentID))) {
+						if (documentID && (
+							/^bch/i.test(documentID) || 
+							/^abs/i.test(documentID) || 
+							/^chm/i.test(documentID))) {
 							documentID = documentID.replace(/-(dev|trg)/i, '');
 							var docNum = documentID.split('-');
 							if (docNum.length == 5) {
