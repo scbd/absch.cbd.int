@@ -10,8 +10,8 @@ import documentSelectorT from '~/app-text/views/forms/edit/document-selector.jso
 import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
 import {Tooltip} from 'bootstrap';
 
-app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm',
-    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm) {
+app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm','$routeParams',
+    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm, $routeParams) {
 
 	return {
 		restrict   : "EA",
@@ -358,7 +358,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                                 doc.schema_s = $attr.allowNewSchema;
                                 doc.rec_title = $filter('lstring')(doc.title, locale); // ToDo: need to verify
                                 doc.rec_summary = $filter('lstring')(doc.summary, locale);
-                                doc.url_ss = `/database/${doc.schema_s}/${doc.identifier}`;
+                                doc.url_ss = `/register/${doc.schema_s}/${doc.identifier}/view`;
                                 doc.uniqueIdentifier_s = doc.identifier // need for selected records
                                 doc._revision_i =  doc.revision; // required for selected details,  used in line 706, 87.
                                 if(_.find($scope.tempSelectedDocuments, {identifier_s:doc.identifier})){
@@ -576,19 +576,22 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     'rowsPerPage':  $scope.model?.length  
                 };
                 return searchService.list(queryParameters, null).then(function(result){    
-                   // in   $scope.tempSelectedDocuments already show only doc.__checked=true;
-                    // return $scope.tempSelectedDocuments = _.map(result.data.response.docs, function(doc){
-                    //     console.log("searchService.list doc",doc);       
-                    //     doc.__checked=true;
-                    //     return doc;
-                    // });                          
-                    const allTabDocs = result.data.response.docs;
-                    allTabDocs.forEach(record => {
-                        const index = $scope.tempSelectedDocuments.findIndex(i => i.id === record.id);
-                        if (index !== -1) {
-                            $scope.tempSelectedDocuments[index]._checked = record._checked;
-                        }
-                    });
+                    const allTabDocs = result.data.response.docs; //ToDo: need to handle Edit records
+                   if($routeParams.identifier) { 
+                        return $scope.tempSelectedDocuments = _.map(allTabDocs, function(doc){
+                            console.log("searchService.list doc",doc);       
+                            doc.__checked=true;
+                            return doc;
+                        });    
+                    }
+                    else{                      
+                        allTabDocs.forEach(record => {
+                            const index = $scope.tempSelectedDocuments.findIndex(i => i.id === record.id);
+                            if (index !== -1) {
+                                $scope.tempSelectedDocuments[index]._checked = record._checked;
+                            }
+                        });
+                    }
                 });
             }
 

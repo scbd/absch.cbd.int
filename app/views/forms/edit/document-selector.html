@@ -191,7 +191,7 @@
                                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
                                         <td class="title width-min-30"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td>
                                         <!-- <td ng-bind="doc.rec_countryName"></td> -->
-                                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
+                                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc|uniqueID"></a></td>
                                         <td class="summary" ng-bind="doc.rec_summary | limitTo:200"></td>
                                         <td class="meta"> 
                                             <span ng-bind="doc.meta"></span>  
@@ -346,9 +346,9 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th class="text-nowrap">{{::('documentSelectorT.uId'|$translate)}}</th>
                         <th class="text-nowrap">{{::('documentSelectorT.type'|$translate)}} </th>
                         <th class="text-nowrap">{{::('documentSelectorT.title'|$translate)}}</th>
+                        <th class="text-nowrap">{{::('documentSelectorT.uniqueIdentifier'|$translate)}}</th>
                         <th class="text-nowrap">{{::('documentSelectorT.summary'|$translate)}}</th>
                     </tr>
                 </thead>
@@ -358,11 +358,11 @@
                         <td class="width-0">                                                
                             <input type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" />
                         </td>
-                        <td class="col-md-4"><a rel="noopener" translation-url target="_blank" ng-href="{{doc.url_ss}}">
-                        <!-- ToDo: apply uniqueID filter i.e doc.identifier|uniqueID  -->
-                            <span ng-bind="doc.identifier"></span></a></td>
-                        <td class="col-md-1" ng-bind="doc.type|lstring:locale"></td>
-                        <td class="col-md-2" ng-bind="doc.title|lstring:locale"></td>
+                        <td class="col-md-1" ng-bind="doc.schema_s|schemaShortName"></td>
+                        <td class="col-md-4" ng-bind="doc.title|lstring:locale"></td>
+                        <td class="col-md-2"><a rel="noopener" translation-url target="_blank" ng-href="{{doc.url_ss}}">
+                            <span ng-bind="doc|uniqueID"></span></a>
+                        </td>
                         <td class="col-md-5" ng-bind-html="doc.summary | lstring:locale|limitTo:200"></td>
                     </tr>
                 </tbody>
