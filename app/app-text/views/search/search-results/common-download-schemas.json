@@ -64,6 +64,28 @@
     "database.description":"Description",
     "database.websites":"Website address",
     "database.relevantInformation":"Any other relevant information",
-    "database.relevantDocuments":"Any other relevant documents"
+    "database.relevantDocuments":"Any other relevant documents",
+
+    "contact.uniqueId"           : "UID",
+    "contact.type"               : "Contact Type",
+    "contact.organization"       : "Organization",
+    "contact.organizationAcronym": "Acronym",
+    "contact.organizationType"   : "Type of organization",
+    "contact.prefix"             : "Title",
+    "contact.firstName"          : "First name",
+    "contact.middleName"         : "Middle name",
+    "contact.lastName"           : "Last name",
+    "contact.contactOrganization": "Organization",
+    "contact.department"         : "Department / Division / Unit",
+    "contact.designation"        : "Job title",
+    "contact.address"            : "Street address",
+    "contact.city"               : "City",
+    "contact.state"              : "State or Province",
+    "contact.postalCode"         : "Postal Code or Zip",
+    "contact.country"            : "Country of Contact",
+    "contact.phones"             : "Phone number(s)",
+    "contact.faxes"              : "Fax number(s)",
+    "contact.emails"             : "Email(s)",
+    "contact.websites"           : "Website address(es)"
 
 }

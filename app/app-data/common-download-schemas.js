@@ -79,5 +79,29 @@ export const downloadSchemas = {
     "websites": fieldsT["database.websites"],
     "relevantInformation": fieldsT["database.relevantInformation"],
     "relevantDocuments": fieldsT["database.relevantDocuments"]
+  },
+
+  "contact":{
+    "uniqueId"           : fieldsT["contact.uniqueId"],
+    "type"               : fieldsT["contact.type"],
+    "organization"       : fieldsT["contact.organization"],
+    "organizationAcronym": fieldsT["contact.organizationAcronym"],
+    "organizationType"   : fieldsT["contact.organizationType"],
+    "prefix"             : fieldsT["contact.prefix"],
+    "firstName"          : fieldsT["contact.firstName"],
+    "middleName"         : fieldsT["contact.middleName"],
+    "lastName"           : fieldsT["contact.lastName"],
+    "contactOrganization": fieldsT["contact.contactOrganization"],
+    "department"         : fieldsT["contact.department"],
+    "designation"        : fieldsT["contact.designation"],
+    "address"            : fieldsT["contact.address"],
+    "city"               : fieldsT["contact.city"],
+    "state"              : fieldsT["contact.state"],
+    "postalCode"         : fieldsT["contact.postalCode"],
+    "country"            : fieldsT["contact.country"],
+    "phones"             : fieldsT["contact.phones"],
+    "faxes"              : fieldsT["contact.faxes"],
+    "emails"             : fieldsT["contact.emails"],
+    "websites"           : fieldsT["contact.websites"]
   }
 }
