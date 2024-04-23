@@ -109,4 +109,27 @@ export const downloadSchemas = {
         "relevantInformation": fieldsT["modelContractualClause.relevantInformation"],
         "relevantDocuments": fieldsT["modelContractualClause.relevantDocuments"]
     },
+
+    "communityProtocol":{
+        "uniqueId"           : fieldsT["communityProtocol.uniqueId"],
+        "title"              : fieldsT["communityProtocol.title"],
+        "resourceTypes"      : fieldsT["communityProtocol.resourceTypes"],
+        "authors"            : fieldsT["communityProtocol.authors"],
+        "organizations"      : fieldsT["communityProtocol.organizations"],
+        "publisher"          : fieldsT["communityProtocol.publisher"],
+        "publicationDate"    : fieldsT["communityProtocol.publicationDate"],
+        "source"             : fieldsT["communityProtocol.source"],
+        "rights"             : fieldsT["communityProtocol.rights"],
+        "resourceLinks"      : fieldsT["communityProtocol.resourceLinks"],
+        "covers"             : fieldsT["communityProtocol.covers"],
+        "summary"            : fieldsT["communityProtocol.summary"],
+        "countryRegions"     : fieldsT["communityProtocol.countryRegions"],
+        "aichiTargets"       : fieldsT["communityProtocol.aichiTargets"],
+        "cbdSubjects"        : fieldsT["communityProtocol.cbdSubjects"],
+        "nagoyaSubjects"     : fieldsT["communityProtocol.nagoyaSubjects"],
+        "nagoyaKeyAreas"     : fieldsT["communityProtocol.nagoyaKeyAreas"],
+        "relevantInformation": fieldsT["communityProtocol.relevantInformation"],
+        "relevantDocuments"  : fieldsT["communityProtocol.relevantDocuments"]
+    }
+
 }
