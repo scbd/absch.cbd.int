@@ -1,9 +1,9 @@
 
-const _        = require('lodash');
-const path     = require('path');
-const readline = require('readline');
-const finder   = require('fs-finder');
-const fs       = require('fs/promises');
+import _        from 'lodash';
+import path     from 'path';
+import readline from 'readline';
+import finder   from 'fs-finder';
+import fs       from 'fs/promises';
 
 const supportedLanguages = ['ar', 'ru', 'zh', 'fr', 'es'] 
 const destination = process.cwd() + '/i18n'
