@@ -130,6 +130,17 @@ export const downloadSchemas = {
         "nagoyaKeyAreas"     : fieldsT["communityProtocol.nagoyaKeyAreas"],
         "relevantInformation": fieldsT["communityProtocol.relevantInformation"],
         "relevantDocuments"  : fieldsT["communityProtocol.relevantDocuments"]
-    }
+    },
 
+
+    "absCheckpoint":{
+        "uniqueId"            : fieldsT["absCheckpoint.uniqueId"],
+        "government"          : fieldsT["absCheckpoint.government"],
+        "name"                : fieldsT["absCheckpoint.name"],
+        "responsibilities"    : fieldsT["absCheckpoint.responsibilities"],
+        "jurisdiction"        : fieldsT["absCheckpoint.jurisdiction"],
+        "informAllAuthorities": fieldsT["absCheckpoint.informAllAuthorities"],
+        "contactsToInform"    : fieldsT["absCheckpoint.contactsToInform"],
+        "relevantInformation" : fieldsT["absCheckpoint.relevantInformation"]
+    }
 }
