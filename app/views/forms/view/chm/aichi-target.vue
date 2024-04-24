@@ -6,19 +6,19 @@
                     style="height: 45px; width: 45px" /> 
                 {{ lstring(document.shortTitle, locale) }}
             </h2>
-            <label>Full title</label>           
+            <label>{{ t("fullTitle") }}</label>           
             <km-value-ml v-vue-ng  :value="document.title" :locales="locale"></km-value-ml>       
             
-            <label>Target Number </label>         
+            <label>{{ t("targetNumber") }} </label>         
             <km-value-ml v-vue-ng  :value="document.number" :locales="locale" html></km-value-ml>
             <div v-if="document.strategicGoal">
-                <label>Strategic Goal</label>
+                <label>{{ t("strategicGoal") }}</label>
                 <span class="km-value">
                     <km-term :value="document.strategicGoal" :locale="locale"></km-term>
                 </span>
             </div>
             <div v-if="document.guide">
-                <label>Quick Guide</label>              
+                <label>{{ t("quickGuide") }}</label>              
                 <km-value-ml v-vue-ng  :value="document.guide" :locales="locale" html></km-value-ml>
             </div>
             <!-- <div v-if="document.strategicPlanIndicators">
@@ -147,7 +147,11 @@
     import { lstring } from '~/services/filters/lstring.js'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import '~/views/forms/view/directives/view-record-reference.directive.js' 
-    import kmTerm from '~/components/km/KmTerm.vue'
+    import kmTerm from '~/components/km/KmTerm.vue';
+    import messages from '../../app-text/views/reports/chm/aichi-target.json';
+    import { useI18n } from 'vue-i18n';
+
+    const { t } = useI18n({ messages });
 
     const props = defineProps({
         documentInfo: { type: Object, required: true },
