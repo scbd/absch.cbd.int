@@ -33,12 +33,29 @@ export const downloadSchemas = {
     },
 
     "authority":{
-        "uniqueId"        : fieldsT["authority.uniqueId"],
-        "government"      : fieldsT["authority.government"],
-        "name"            : fieldsT["authority.name"],
-        "functions"       : fieldsT["authority.functions"],
-        "cpbOrganismTypes": fieldsT["authority.cpbOrganismTypes"],
-        "publishedOn": fieldsT["authority.publishedOn"]
+        "uniqueId"                   : fieldsT["authority.uniqueId"],
+        "government"                 : fieldsT["authority.government"],
+        "name"                       : fieldsT["authority.name"],
+        "address"                    : fieldsT["authority.address"],
+        "city"                       : fieldsT["authority.city"],
+        "state"                      : fieldsT["authority.state"],
+        "postalCode"                 : fieldsT["authority.postalCode"],
+        "country"                    : fieldsT["authority.country"],
+        "phones"                     : fieldsT["authority.phones"],
+        "faxes"                      : fieldsT["authority.faxes"],
+        "emails"                     : fieldsT["authority.emails"],
+        "websites"                   : fieldsT["authority.websites"],
+        "contacts"                   : fieldsT["authority.contacts"],
+        "policyBasisForCompetencyRef": fieldsT["authority.policyBasisForCompetencyRef"],
+        "responsibleForAll"          : fieldsT["authority.responsibleForAll"],
+        "responsibilities"           : fieldsT["authority.responsibilities"],
+        "absJurisdiction"            : fieldsT["authority.absJurisdiction"],
+        "absGeneticResourceTypes"    : fieldsT["authority.absGeneticResourceTypes"],
+        "relevantInformation"        : fieldsT["authority.relevantInformation"],
+        "relevantDocuments"          : fieldsT["authority.relevantDocuments"],
+        "functions"                  : fieldsT["authority.functions"],
+        "cpbOrganismTypes"           : fieldsT["authority.cpbOrganismTypes"],
+        "publishedOn"                : fieldsT["authority.publishedOn"]
     },
 
     "resource":{
