@@ -51,23 +51,15 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', '$rootSco
                         return {type, query}
                     }));
 
-                    provide('userStatus', safeDelegate($scope, ()=>{
+                    provide('userSignIn', safeDelegate($scope, ()=>{
                         if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-                            var signInEvent = $scope.$on('signIn', function (evt, data) {
-                                signInEvent();
+                            var signIn = $scope.$on('signIn', function (evt, data) {
+                                signIn();
                             });
-                            $('#loginDialog').on('hidden.bs.modal', function () {
-                                signInEvent();
-                                $('.modal-backdrop').removeClass('multi-modal')
-                            });
-                            $('#loginDialog').on('shown.bs.modal', function () {
-                                $('.modal-backdrop').addClass('multi-modal')
-                            });
-                            $( '#loginDialog' ).modal( "show" );
+                            $('#loginDialog').modal("show");
                             return false;
                         } 
                         else {
-                            // $scope.isUserSignedIn = true;
                             return true;
                         }
                     }));   

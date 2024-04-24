@@ -101,16 +101,17 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							return {type, recordKey}
 						}));
 	
-						provide('userStatus', safeDelegate($scope, ()=>{
+						provide('userSignIn', safeDelegate($scope, ()=>{
 							if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
 								var signIn = $scope.$on('signIn', function (evt, data) {
 									signIn();
 								});
 								$('#loginDialog').modal("show");
 								return false;
-								} else {
+							} 
+							else {
 								return true;
-								}
+							}
 						}));   
 					}
 
