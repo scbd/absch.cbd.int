@@ -10,8 +10,8 @@ import documentSelectorT from '~/app-text/views/forms/edit/document-selector.jso
 import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
 import {Tooltip} from 'bootstrap';
 
-app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm','$routeParams',
-    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm, $routeParams) {
+app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm',
+    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm) {
 
 	return {
 		restrict   : "EA",
@@ -305,6 +305,43 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 finally{$scope.isLoadingSelectedRawDocuments = undefined};
                 
             })
+
+            function pendingRecords(draftIdentifiers) {
+                $scope.isPendingLoading = true;
+                var qAnd = [];
+                //ToDo: schema ?
+                    qAnd.push("(type eq '" + $attr.allowNewSchema + "')"); 
+                var qRecords = IStorage.drafts.query(qAnd, {$top:$scope.top||100, $orderby:'updatedOn desc'});
+                return $q.when(qRecords)
+                .then(function(result){
+                    const draftDocuments = result.data ? result.data.Items: [];
+                    //get only pending requests not draft records
+                    const pendingDocoments = draftDocuments.length > 0 ? draftDocuments.filter(draft => draft.isRequest === true) : [];
+                    if(pendingDocoments?.length>0){
+                        const pendingRequests = draftIdentifiers ? pendingDocoments.filter(item => draftIdentifiers.includes(item.identifier)) : pendingDocoments;
+                        $scope.pendingRawRecords = _.map(pendingRequests, function(doc){
+                            doc.identifier_s = doc.identifier;
+                            doc.uniqueIdentifier_s = doc.identifier // need for selected records
+                            doc.schema_s = $attr.allowNewSchema;
+                            doc.rec_title = doc.title;
+                            doc.rec_summary = doc.summary;
+                            doc.url_ss = `/register/${doc.schema_s}/${doc.identifier}/view`;
+                            doc._revision_i =  doc.revision; // required for selected details,  used in line 706, 87.
+                            if(_.find($scope.tempSelectedDocuments, {identifier_s:doc.identifier})){
+                                doc.__checked = true;
+                            } else {
+                                doc.__checked= false;
+                            }
+                            return doc;
+                        }); 
+                        return pendingRequests;
+                    }                     
+                })
+                .finally(function(){
+                        $scope.isPendingLoading = false;
+                }); 
+            }
+
              //==================================
             //
             //==================================
@@ -342,37 +379,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     rawQuery.fieldQueries.push(myGovernmentQuery);
                 } 
                 else if($scope.activeTab == 'pendingRequests'){
-                    $scope.isPendingLoading = true;
-                    var qAnd = [];
-                    //ToDo: schema ?
-                     qAnd.push("(type eq '" + $attr.allowNewSchema + "')"); 
-                    var qRecords = IStorage.drafts.query(qAnd, {$top:$scope.top||100, $orderby:'updatedOn desc'});
-                    $q.when(qRecords)
-                    .then(function(result){
-                        const draftDocuments = result.data ? result.data.Items: [];
-                        //get only pending requests not draft records
-                        const pendingRequests = draftDocuments.length > 0 ? draftDocuments.filter(draft => draft.isRequest === true) : [];
-                        if(pendingRequests?.length>0){
-                            $scope.rawDocuments = _.map(pendingRequests, function(doc){
-                                doc.identifier_s = doc.identifier;  
-                                doc.schema_s = $attr.allowNewSchema;
-                                doc.rec_title = $filter('lstring')(doc.title, locale); // ToDo: need to verify
-                                doc.rec_summary = $filter('lstring')(doc.summary, locale);
-                                doc.url_ss = `/register/${doc.schema_s}/${doc.identifier}/view`;
-                                doc.uniqueIdentifier_s = doc.identifier // need for selected records
-                                doc._revision_i =  doc.revision; // required for selected details,  used in line 706, 87.
-                                if(_.find($scope.tempSelectedDocuments, {identifier_s:doc.identifier})){
-                                    doc.__checked = true;
-                                } else {
-                                    doc.__checked= false;
-                                }
-                                return doc;
-                            }); 
-                        }                     
-                    })
-                    .finally(function(){
-                         $scope.isPendingLoading = false;
-                    });
+                    pendingRecords();
                 }     
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
@@ -555,8 +562,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 getDocs();
             }
 
-            function loadSelectedDocumentDetails(){
-                
+            async function loadSelectedDocumentDetails() {
                 if(!$scope.model || ($scope.type == "checkbox" && !$scope.model.length))
                     return;
 
@@ -575,24 +581,30 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     'query'      : queryField + ':("' +_.map(identifiers,solr.escape).join('" "') +'")',
                     'rowsPerPage':  $scope.model?.length  
                 };
-                return searchService.list(queryParameters, null).then(function(result){    
-                    const allTabDocs = result.data.response.docs; //ToDo: need to handle Edit records
-                   if($routeParams.identifier) { 
-                        return $scope.tempSelectedDocuments = _.map(allTabDocs, function(doc){
-                            console.log("searchService.list doc",doc);       
-                            doc.__checked=true;
-                            return doc;
-                        });    
-                    }
-                    else{                      
-                        allTabDocs.forEach(record => {
-                            const index = $scope.tempSelectedDocuments.findIndex(i => i.id === record.id);
-                            if (index !== -1) {
-                                $scope.tempSelectedDocuments[index]._checked = record._checked;
-                            }
+                try { 
+                    const result = await searchService.list(queryParameters, null);
+                    let allTabDocs = result.data.response.docs;                       
+                    const draftIdentifiers = identifiers.filter(id => !allTabDocs.some(all => all.identifier_s === id)); // get identifiers for draft records
+                    $scope.tempSelectedDocuments = _.map(allTabDocs, doc => {
+                        doc.__checked=true;
+                        return doc;
+                    });
+                    if (draftIdentifiers && draftIdentifiers.length > 0) {
+                        await pendingRecords(draftIdentifiers).then((pendings) => {
+                            const pendingRequestsSelected = _.map(pendings, doc => {
+                                doc.__checked=true;
+                                return doc;
+                            });
+                            return $scope.tempSelectedDocuments = _.concat($scope.tempSelectedDocuments, pendingRequestsSelected);
                         });
+                    } 
+                    else {
+                        return $scope.tempSelectedDocuments;
                     }
-                });
+                } catch (error) {
+                    console.error('Error in loadSelectedDocumentDetails:', error);
+                   $scope.isLoading = false;
+                }
             }
 
             function getSortField(sortFields){
