@@ -191,7 +191,7 @@
   import { useAuth } from '@scbd/angular-vue/src/index.js';
   const auth = useAuth();
   const getQuery = inject('getQuery');
-  const userStatus = inject('userStatus');
+  const userSignIn = inject('userSignIn');
   let modal = null;
   let toast = null;
   let authToken = null; // ToDo ??
@@ -231,7 +231,7 @@
         modal.show('static');
 
     if (sharedData.value.type != 'link' && !authToken)
-        userStatus();
+      userSignIn();
     else
       loadTabData(sharedData.value.type || 'link');
 
@@ -253,7 +253,7 @@ const loadTabData = async (type) => {
 
   if (!authToken && sharedData.value.type != 'link' &&
     (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile")) {
-      userStatus();
+      userSignIn();
     return;
   }
 
@@ -443,7 +443,7 @@ const onEmailChange = () => {
 };
 
 const signIn = () => {
-  userStatus();
+  userSignIn();
 };
 
 const getShareDocumentData = () => {
