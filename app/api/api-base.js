@@ -65,10 +65,10 @@ async function loadAsyncHeaders(baseConfig) {
     let token = '';
     if(isFunction(tokenReader)){
       const tokenDetails = await tokenReader();
-      token = tokenDetails.token ;
+      token = tokenDetails?.token ;
     }
     else {
-      token = tokenReader.token ;
+      token = tokenReader?.token ;
     }
 
     if(token)
