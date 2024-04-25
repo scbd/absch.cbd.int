@@ -1,0 +1,19 @@
+{
+    "generalInformation": "General information",
+    "country": "Country",    
+    "typeOfDocument": "Type of document",
+    "summary":  "Summary",
+    "levelOfApplication":  "Level of application",
+    "status":  "Status",
+    "dateOfCompletionAndAdoption":"Date of completion and adoption",
+    "statusOfApprovedDocument": "Status of approved document",
+    "approvingBody":"Approving body",
+    "timePeriod":"Time period",
+    "from": "From",
+    "to": "To",
+    "relevantDocumentsAndInformation":"Relevant documents and information",
+    "relevantInformation":"Relevant information",
+    "relevantWebsitesLinksAndFiles":"Relevant websites, links, and files",
+    "additionalInformation":  "Additional Information",
+    "otherRelevantWebsiteAddressOrAttachedDocuments":"Other relevant website address or attached documents"
+}
