@@ -28,6 +28,9 @@ export default function resolveLocalized(options = { }) {
 
       const resolved = await this.resolve(importeeId, importer, { skipSelf: true });
 
+      if(!resolved)
+        console.debug(importeeId, importer);
+      
       const { external, id: absolutePath }  = resolved;
 
       if(external) return resolved;

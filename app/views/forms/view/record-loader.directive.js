@@ -44,6 +44,9 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				documentInfo: "=?",
 			},
 			link: function ($scope, $element, $attr) {
+
+				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment'];
+
 				$scope.hideClose = false;
 				if($attr.hideClose){ 
 					$scope.hideClose = true;
@@ -52,7 +55,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				$scope.tokenReader = function(){ return apiToken.get()}
 
 				if (!$scope.linkTarget || $scope.linkTarget == '')
-					$scope.linkTarget = '_new';
+					$scope.linkTarget = '_blank';
 				//debugger;
 				$scope.internalDocument = undefined;
 				$scope.internalDocumentInfo = undefined;
@@ -133,7 +136,10 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if ($route.current.params.documentNumber)
 							var documentID = $route.current.params.documentNumber;
 
-						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID) || /^chm\-nfp/i.test(documentID))) {
+						if (documentID && (
+							/^bch/i.test(documentID) || 
+							/^abs/i.test(documentID) || 
+							/^chm/i.test(documentID))) {
 							documentID = documentID.replace(/-(dev|trg)/i, '');
 							var docNum = documentID.split('-');
 							if (docNum.length == 5) {
@@ -451,11 +457,15 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
 						await fetchEditDirectives(lschema);
 
-						var divSelector = '#schemaView'
-						var name 		= snake_case(lschema);
-						var directiveHtml =
+						let divSelector = '#schemaView';
+
+						let name 		= 'view-' + snake_case(lschema);
+						if(vueComponentSchemas.includes(schema))
+							name = 'record-loader-ng-v';
+
+						let directiveHtml =
 							"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
-								.replace(/DIRECTIVE/g, 'view-' + name);
+								.replace(/DIRECTIVE/g, name);
 						$scope.$apply(function () {
 							if(typeof beforeReplace == 'function'){
 								var dirInfo 	= beforeReplace(directiveHtml)
@@ -484,6 +494,8 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					}
 
 					async function fetchEditDirectives(schema){
+
+						if(vueComponentSchemas.includes(schema)){ return await import('./record-loader-ng-v') };
 
 						if(schema == 'absNationalReport'                ){ return await import('~/views/forms/view/abs/view-abs-national-report.directive') };
 						if(schema == 'absNationalReport1'                ){ return await import('~/views/forms/view/abs/view-national-report-1.directive') };
