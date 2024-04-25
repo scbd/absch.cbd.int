@@ -73,6 +73,7 @@ const commonRouteUrls = {
     submissionsOnNotifications                  : { component: ()=>asyncLogError(import('~/views/reports/submissions')) },
     portal                                      : { component: ()=>asyncLogError(import('~/views/portals/index.vue')) },
     portalId                                    : { component: ()=>asyncLogError(import('~/views/portals/portal-id.vue')) },
+    sampleVueNg                                 : { component: ()=>asyncLogError(import('~/views/sample-vue-ng.vue')) }
   }
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -168,7 +169,11 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}}).
 
   //whenAsync('/portals',                                           { ...mapView(vueViewWrapper),                        "label":routesLabels.portals,       "resolve":{ ...commonRouteUrls.portal, },  "param":"true","resolveController":true}).
-  whenAsync('/portals/:portalId/:subPath*?',                      { ...mapView(vueViewWrapper),                        "label":routesLabels.portalId,                   "resolve":{ ...commonRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false })
+  whenAsync('/portals/:portalId/:subPath*?',                      { ...mapView(vueViewWrapper),                        "label":routesLabels.portalId,                   "resolve":{ ...commonRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false }).
+
+  whenAsync('/sample-vue-ng', { ...mapView(vueViewWrapper),  label:"sampleVueNg",  "resolve":{ ...commonRouteUrls.sampleVueNg,  },"resolveController":true}).
+
+  sampleVueNg
 
 }]);
 
