@@ -8,7 +8,7 @@
                 Loading...
             </template>
         </Suspense>
-        <!-- TODO: put schema view definition element and add v-if for schema name :locale="locale" :link-target="linkTarget"-->
+        <!-- TODO: put schema view definition element and add v-if for schema name -->
     </div>
 </template>
 
