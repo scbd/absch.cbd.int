@@ -155,6 +155,11 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 });
             },200);            
         }
+        $scope.$on('evt:resetChildrenQuestions', function(evt, childrenQuestions) {
+            childrenQuestions.forEach((question) => {
+                $scope.document[question] = undefined;
+            });
+        });
 
         $scope.onGovernmentChange = function (government) {
             if (government && $scope.document) {
