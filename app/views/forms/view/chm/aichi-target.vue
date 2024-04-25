@@ -7,10 +7,11 @@
                 {{ lstring(document.shortTitle, locale) }}
             </h2>
             <label>{{ t("fullTitle") }}</label>           
-            <km-value-ml v-vue-ng  :value="document.title" :locales="locale"></km-value-ml>       
+            <ng v-vue-ng:km-value-ml  :value="document.title" :locales="locale"></ng>   
             
             <label>{{ t("targetNumber") }} </label>         
-            <km-value-ml v-vue-ng  :value="document.number" :locales="locale" html></km-value-ml>
+             <ng v-vue-ng:km-value-ml  :value="document.number" :locales="locale" html></ng>
+
             <div v-if="document.strategicGoal">
                 <label>{{ t("strategicGoal") }}</label>
                 <span class="km-value">
@@ -19,7 +20,7 @@
             </div>
             <div v-if="document.guide">
                 <label>{{ t("quickGuide") }}</label>              
-                <km-value-ml v-vue-ng  :value="document.guide" :locales="locale" html></km-value-ml>
+                <ng v-vue-ng:km-value-ml  :value="document.guide" :locales="locale" html></ng>
             </div>
             <!-- <div v-if="document.strategicPlanIndicators">
                 <label>Most Relevant Indicator(s)</label>
