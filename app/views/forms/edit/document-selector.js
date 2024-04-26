@@ -309,37 +309,50 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             function pendingRecords(draftIdentifiers) {
                 $scope.isPendingLoading = true;
                 var qAnd = [];
-                //ToDo: schema ?
-                    qAnd.push("(type eq '" + $attr.allowNewSchema + "')"); 
-                var qRecords = IStorage.drafts.query(qAnd, {$top:$scope.top||100, $orderby:'updatedOn desc'});
+                // ToDo: schema ?
+                qAnd.push("(type eq '" + $attr.allowNewSchema + "')");
+
+                var qRecords = IStorage.drafts.query(qAnd, { $top: $scope.top || 100, $orderby: 'updatedOn desc' });
+
                 return $q.when(qRecords)
-                .then(function(result){
-                    const draftDocuments = result.data ? result.data.Items: [];
-                    //get only pending requests not draft records
-                    const pendingDocoments = draftDocuments.length > 0 ? draftDocuments.filter(draft => draft.isRequest === true) : [];
-                    if(pendingDocoments?.length>0){
-                        const pendingRequests = draftIdentifiers ? pendingDocoments.filter(item => draftIdentifiers.includes(item.identifier)) : pendingDocoments;
-                        $scope.pendingRawRecords = _.map(pendingRequests, function(doc){
-                            doc.identifier_s = doc.identifier;
-                            doc.uniqueIdentifier_s = doc.identifier // need for selected records
-                            doc.schema_s = $attr.allowNewSchema;
-                            doc.rec_title = doc.title;
-                            doc.rec_summary = doc.summary;
-                            doc.url_ss = `/register/${doc.schema_s}/${doc.identifier}/view`;
-                            doc._revision_i =  doc.revision; // required for selected details,  used in line 706, 87.
-                            if(_.find($scope.tempSelectedDocuments, {identifier_s:doc.identifier})){
-                                doc.__checked = true;
-                            } else {
-                                doc.__checked= false;
-                            }
-                            return doc;
-                        }); 
-                        return pendingRequests;
-                    }                     
-                })
-                .finally(function(){
+                    .then(function (result) {
+                        const draftDocuments = result.data ? result.data.Items : [];
+                        // get only pending requests not draft records
+                        const pendingDocuments = draftDocuments.length > 0 ? draftDocuments.filter(draft => draft.isRequest === true) : [];
+
+                        if (pendingDocuments?.length > 0) {
+                            const pendingRequests = draftIdentifiers ? pendingDocuments.filter(item => draftIdentifiers.includes(item.identifier)) : pendingDocuments;
+                            
+                            $scope.pendingRawRecords = _.map(pendingRequests, function (doc) {                                 
+                                let pending = {};
+                                pending.identifier         = doc.identifier;
+                                pending.identifier_s       = doc.identifier;
+                                pending.uniqueIdentifier_s = doc.identifier; // needed for selected records
+                                pending.schema_s           = $attr.allowNewSchema;
+                                pending.rec_title          = doc.title;
+                                pending.rec_summary        = doc.summary;
+                                pending.url_ss = `/register/${doc.schema_s}/${doc.identifier}/view`;
+                                pending._revision_i        = doc.revision; // required for selected details, used in line 706, 87.
+                                pending.metadata           = doc.metadata;
+                                if (_.find($scope.tempSelectedDocuments, { identifier_s: pending.identifier_s })) {
+                                    pending.__checked = true;
+                                } else {
+                                    pending.__checked = false;
+                                } 
+                                console.log("pending.__checked",pending);
+                                return pending;
+                            });
+                            
+                            return $scope.pendingRawRecords;
+                        }
+                    })
+                    .catch(function (error) {
+                        toastr.error(error);
                         $scope.isPendingLoading = false;
-                }); 
+                    })
+                    .finally(function () {
+                        $scope.isPendingLoading = false;
+                    });
             }
 
              //==================================

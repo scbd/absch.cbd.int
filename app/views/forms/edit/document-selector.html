@@ -191,6 +191,7 @@
                                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
                                         <td class="title width-min-30"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc.rec_title|lstring:locale"></a></td>
                                         <!-- <td ng-bind="doc.rec_countryName"></td> -->
+                                        <!-- ToDo: uniqueID not working -->
                                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc|uniqueID"></a></td>
                                         <td class="summary" ng-bind="doc.rec_summary | limitTo:200"></td>
                                         <td class="meta"> 
@@ -315,7 +316,7 @@
                         </td>
                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
                         <td class="title width-min-30"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title|lstring:locale"></span></a></td>
-                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
+                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc|uniqueID"></a></td>
                         <td class="summary" ng-bind="doc.rec_summary | limitTo:200"></td>
                         <td class="meta"> 
                             <span ng-bind="doc.meta"></span>                            
@@ -359,11 +360,11 @@
                             <input type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" />
                         </td>
                         <td class="col-md-1" ng-bind="doc.schema_s|schemaShortName"></td>
-                        <td class="col-md-4" ng-bind="doc.title|lstring:locale"></td>
-                        <td class="col-md-2"><a rel="noopener" translation-url target="_blank" ng-href="{{doc.url_ss}}">
-                            <span ng-bind="doc|uniqueID"></span></a>
+                        <td class="col-md-4" ng-bind="doc.rec_title|lstring:locale"></td>
+                        <!-- ToDo: uniqueID not working -->
+                        <td class="col-md-2"><a rel="noopener" translation-url target="_blank" ng-href="{{doc.url_ss}}" ng-bind="doc|uniqueID"></a>
                         </td>
-                        <td class="col-md-5" ng-bind-html="doc.summary | lstring:locale|limitTo:200"></td>
+                        <td class="col-md-5" ng-bind-html="doc.rec_summary | lstring:locale|limitTo:200"></td>
                     </tr>
                 </tbody>
             </table>
