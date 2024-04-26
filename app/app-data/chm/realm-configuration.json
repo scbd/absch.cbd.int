@@ -1,10 +1,11 @@
-﻿[
+[
     {
       "_id": "5400a10fb02e1ab8752d2124",
       "hosts": [
         "chm.cbd.int"
       ],
       "realm": "CHM",
+      "protocol" : "Convention on Biological Diversity",
       "uIdPrefix": "CHM",
       "displayName": "Clearing-House Mechanism",
       "email": "chm@cbd.int",
@@ -20,92 +21,95 @@
         "administrator": [
           "ChmAdministrator"
         ],
-        "publishingAuthorities": [
-          "ChmNrNationalFocalPoint"
-        ],
+        "publishingAuthorities": [          
+          "ChmNrNationalFocalPoint" 
+        ],       
         "iac": [],
         "nationalAuthorizedUser": [
-          "ChmNrNationalAuthorizedUser"
+          "ChmNrNationalAuthorizedUser"  
         ],
         "nationalFocalPoint": [
-          "ChmNrNationalFocalPoint"
-        ]
+          "ChmNrNationalFocalPoint"  
+        ] 
       },
       "schemas": {
+        "action" : {
+          "type" : "national",
+          "title" : {
+            "en" : "action"
+          },
+          "shortCode": "ACT"
+        },
         "nationalReport6": {
+          "type": "national",  
           "title": {
             "en": "Sixth National Report"
-          },
-          "type": "national",
-          "publishingAuthorities": [
-            "ChmNrNationalFocalPoint",
-            "NFP-CBD"
-          ]
+          },             
+          "shortCode": "NR6"
         },
         "nationalTarget": {
+          "type": "national",         
           "title": {
-            "en": "National Target"
+            "en" : "National Target"
           },
-          "type": "national",
-          "publishingAuthorities": [
-            "ChmNrNationalFocalPoint",
-            "NFP-CBD"
-          ]
+          "shortCode" : "NT6"          
         },
         "nationalAssessment": {
           "type": "national",
           "title": {
             "en": "Progress Assessment"
           },
-          "publishingAuthorities": [
-            "ChmNrNationalFocalPoint",
-            "NFP-CBD"
-          ]
+          "shortCode" : "NA6"          
         },
         "nationalReport": {
           "type": "national",
           "title": {
             "en": "National Report"
-          },
+            },
           "notify": [
             "ChmNrNationalFocalPoint"
           ],
-          "publishingAuthorities": [
+          "assign-off" : [
             "ChmNrNationalFocalPoint"
-          ]
+          ],
+          "shortCode" : "NR"          
         },
         "nationalIndicator": {
           "type": "national",
           "title": {
             "en": "National Indicator"
-          }
+          },
+          "shortCode" : "NI6"         
         },
         "implementationActivity": {
           "type": "national",
           "title": {
-            "en": "Implementation Activity"
-          }
+          "en": "Implementation Activity"
+          },
+          "shortCode" : "IAT"          
         },
         "nationalSupportTool": {
           "type": "national",
           "title": {
             "en": "Guidance and Support Tools"
-          }
+          },
+          "shortCode" : "NST"          
         },
         "resourceMobilisation": {
           "type": "national",
-          "title": {
-            "en": "Financial Reporting Framework 2015"
-          },
           "publishingAuthorities": [
             "ChmRmFocalPoint"
           ],
           "nationalAuthorizedUsers": [
             "ChmRmNAU"
           ],
-          "notify": [
+          "notify" : [
             "ChmRmFocalPoint"
-          ]
+          ],
+          "assign" : [
+            "ChmRmFocalPoint"
+          ],         
+          "shortCode" : "RM15"          
         },
         "resourceMobilisation2020": {
           "type": "national",
@@ -117,31 +121,35 @@
           ],
           "nationalAuthorizedUsers": [
             "ChmRmNAU"
-          ]
+          ],
+          "shortCode" : "RM20"          
         },
         "aichiTarget": {
           "type": "reference",
           "title": {
             "en": "Aichi Biodiversity Target"
-          }
+          },
+          "shortCode" : "AT"          
         },
-        "resource": {
+        "resource": {    
+          "type": "reference",      
           "title": {
             "en": "Virtual Library Resource"
           },
-          "type": "reference",
           "publishingAuthorities": [
             "ChmDocumentValidationTeamMember"
-          ]
+          ],
+          "shortCode" : "VLR"          
         },
         "lwEvent": {
           "type": "reference",
           "title": {
             "en": "Life Web Event"
-          },
+            },
           "publishingAuthorities": [
             "LifeWebAdmin"
-          ]
+          ],
+          "shortCode": "LWE"
         },
         "lwProject": {
           "type": "reference",
@@ -150,7 +158,8 @@
           },
           "publishingAuthorities": [
             "LifeWebAdmin"
-          ]
+          ],         
+          "shortCode": "LWP"
         },
         "lwDonor": {
           "type": "reference",
@@ -159,16 +168,18 @@
           },
           "publishingAuthorities": [
             "LifeWebAdmin"
-          ]
+          ],                   
+          "shortCode": "LWD"
         },
         "lwCampaign": {
           "type": "reference",
           "title": {
             "en": "Life Web Campain"
-          },
+            },
           "publishingAuthorities": [
             "LifeWebAdmin"
-          ]
+          ],
+          "shortCode": "LWC"
         },
         "undbPartner": {
           "type": "reference",
@@ -177,16 +188,30 @@
           },
           "publishingAuthorities": [
             "undb-administrator"
-          ]
+          ],
+          "notify" : [
+            "undb-administrator"
+          ],
+          "assign" : [
+            "undb-administrator"
+          ],
+          "shortCode": "UNP"
         },
         "undbAction": {
           "type": "reference",
           "title": {
             "en": "UNDB Actions"
-          },
+            },
           "publishingAuthorities": [
             "undb-administrator"
-          ]
+          ],
+          "notify" : [
+            "undb-administrator"
+          ],
+          "assign" : [
+            "undb-administrator"
+          ],          
+          "shortCode": "UNA"
         },
         "undbActor": {
           "type": "reference",
@@ -195,16 +220,28 @@
           },
           "publishingAuthorities": [
             "undb-administrator"
-          ]
+          ],
+          "shortCode": "UNAT"
         },
         "undbParty": {
           "type": "reference",
           "title": {
             "en": "UNDB Party Profile"
-          },
+            },
           "publishingAuthorities": [
             "undb-administrator"
-          ]
+          ],          
+          "shortCode": "UNP"
+        },
+        "undbBizBioPledge" : {
+          "type" : "reference",
+          "title" : {
+            "en" : "undbBizBioPledge"
+          },
+          "publishingAuthorities" : [
+            "undb-administrator"
+          ],          
+          "shortCode": "UNBP"
         },
         "bbiOpportunity": {
           "type": "reference",
@@ -213,16 +250,18 @@
           },
           "publishingAuthorities": [
             "BbiAdministrator"
-          ]
+          ],
+          "shortCode": "BBO"
         },
         "bbiProfile": {
           "type": "reference",
           "title": {
             "en": "BBI Provider Profile"
-          },
+            },
           "publishingAuthorities": [
             "BbiAdministrator"
-          ]
+          ],
+          "shortCode": "BBP"
         },
         "bbiRequest": {
           "type": "reference",
@@ -231,7 +270,8 @@
           },
           "publishingAuthorities": [
             "BbiAdministrator"
-          ]
+          ],
+          "shortCode": "BBR"
         },
         "bbiContact": {
           "type": "reference",
@@ -240,7 +280,8 @@
           },
           "publishingAuthorities": [
             "BbiAdministrator"
-          ]
+          ],
+          "shortCode": "BBC"
         },
         "event": {
           "type": "reference",
@@ -248,19 +289,21 @@
             "en": "Event"
           },
           "publishingAuthorities": [
-            "undb-administrator"
-          ]
+            "BbiAdministrator"
+          ],
+          "shortCode": "BBE"
         },
         "organization": {
           "type": "reference",
+          "title": {
+            "en": "Organization"
+          },
           "publishingAuthorities": [
-            "ChmDocumentValidationTeamMember",
+            "ChmAdministrator",
             "BbiAdministrator",
             "undb-administrator"
           ],
-          "title": {
-            "en": "Organization"
-          }
+          "shortCode" : "ORG"
         },
         "marineEbsa": {
           "type": "scbd",
@@ -269,7 +312,8 @@
           },
           "publishingAuthorities": [
             "ChmAdministrator"
-          ]
+          ],
+          "shortCode": "EBSA"
         },
         "caseStudy": {
           "type": "scbd",
@@ -278,7 +322,8 @@
           },
           "publishingAuthorities": [
             "ChmAdministrator"
-          ]
+          ],
+          "shortCode": "CST"
         },
         "focalPoint": {
           "type": "scbd",
@@ -287,7 +332,8 @@
           },
           "publishingAuthorities": [
             "Administrator"
-          ]
+          ],
+          "shortCode" : "NFP"          
         },
         "strategicPlanIndicator": {
           "type": "scbd",
@@ -296,17 +342,18 @@
           },
           "publishingAuthorities": [
             "ChmAdministrator"
-          ]
+          ],
+          "shortCode": "SPI"
         },
         "capacityBuildingInitiative": {
           "type": "reference",
           "title": {
-            "en": "Capacity-building Initiative"
+            "en": "Capacityelopment Initiative"
           },
           "publishingAuthorities": [
-            "Chm-CBIPublishingAuthority",
-            "ChmAdministrator"
-          ]
+            "Chm-CBIPublishingAuthority-Dev"
+          ],
+          "shortCode" : "CDI"          
         },
         "capacityBuildingResource": {
           "type": "reference",
@@ -314,8 +361,9 @@
             "en": "Capacity-building Resource"
           },
           "publishingAuthorities": [
-            "Chm-CBIPublishingAuthority"
-          ]
+            "Chm-CBIPublishingAuthority-Dev"
+          ],
+          "shortCode" : "CBR"          
         },
         "submission": {
           "type": "reference",
@@ -323,8 +371,9 @@
             "en": "Submissions"
           },
           "publishingAuthorities": [
-            "ChmSubmissionValidationTeamMember"
-          ]
+            "ChmAdministrator"
+          ],
+          "shortCode" : "SUB"          
         },
         "contact": {
           "type": "national",
@@ -338,48 +387,48 @@
             "en": "Contact details of a person or organization"
           },
           "shortCode": "CON"
-        }
+        }  
       },
       "pdf": {
         "documents": {
-          "path": "database/record?documentID=:documentID&print=true&mixLocale=:mixLocale",
-          "fields": [
+          "documents" : {
+            "path": "database/record?documentID=:documentID&print=true",
+            "fields": [
             "documentID",
-            "revision",
-            "mixLocale"
-          ],
-          "fileName": ":documentID-:revision",
-          "s3": {
+            "revision"
+            ],
+            "fileName": ":documentID-:revision",
+            "s3": {
             "bucket": "pdf-cache-prod",
             "folder": "chm"
-          },
-          "usePrincePdf": true,
-          "link": true
-        },
-        "draft-documents": {
-          "path": "database/share/:code?print=true&&mixLocale=:mixLocale",
-          "fields": [
+            },
+            "usePrincePdf": true            
+            },
+          "draft-documents": {
+            "path": "database/share/:code?print=true&mixLocale=:mixLocale",
+            "fields": [
             "code",
             "mixLocale"
-          ],
-          "fileName": "language:documentID-:revision",
-          "usePrincePdf": true,
-          "link": true
-        },
-        "scbd-records": {
-          "path": "database/record?documentID=:documentID&print=true",
-          "fields": [
-            "documentID",
-            "revision",
-            "schema"
-          ],
-          "fileName": ":documentID",
-          "s3": {
-            "bucket": "pdf-cache-prod",
-            "folder": "chm"
-          },
-          "usePrincePdf": false
+            ],
+            "fileName": "language:documentID-:revision",
+            "usePrincePdf": true
+            },            
+          "scbd-records": {
+            "path": "database/record?documentID=:documentID&print=true",
+            "fields": [
+              "documentID",
+              "revision",
+              "schema"
+              ],
+            "fileName": ":documentID",
+            "s3": {
+              "bucket": "pdf-cache-prod",
+              "folder": "chm"
+            }            
+            },
+          "usePrincePdf" : true
         }
-      }
+      }   
+           
     }
   ]
