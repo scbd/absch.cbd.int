@@ -66,10 +66,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }
                     var lQuestion = question;
                     if (question.validations) {
-                        if(question.validations){
-                            const childrenQuestions = question.validations.map(item => item.question);
-                            $scope.$emit('evt:resetChildrenQuestions', childrenQuestions);
-                        }
+
                         var mappings = question.validations || [];
 
                         _.forEach(mappings, function (mapping) {
