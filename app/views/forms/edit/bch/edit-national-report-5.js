@@ -191,8 +191,8 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onQuestionAnswerChange = function (questionAnswers) {
             safeApply(() => {
-                const  {header, government, stakeholders, contact, date, reportPeriodStartDate, reportPeriodEndDate, Q005, Q006 } = $scope.document;
-                $scope.document = { ...{header, government, stakeholders, contact, date, reportPeriodStartDate, reportPeriodEndDate, Q005, Q006 }, ...(questionAnswers || {}) };
+                const  {header, government, stakeholders, contact, date, reportPeriodStartDate, reportPeriodEndDate, Q005, Q006, notes } = $scope.document;
+                $scope.document = { ...{header, government, stakeholders, contact, date, reportPeriodStartDate, reportPeriodEndDate, Q005, Q006, notes }, ...(questionAnswers || {}) };
             })
         }
         //==================================
