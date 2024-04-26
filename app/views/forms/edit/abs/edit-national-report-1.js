@@ -163,7 +163,8 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onQuestionAnswerChange = function (questionAnswers) {
             safeApply(() => {
-                $scope.document = { ...($scope.document), ...(questionAnswers || {}) };
+                const  {header, government,reportPeriodStartDate, reportPeriodEndDate, notes} = $scope.document;
+                $scope.document = { ...{header, government,reportPeriodStartDate, reportPeriodEndDate, notes}, ...(questionAnswers || {}) };
             })
         }
         //==================================
