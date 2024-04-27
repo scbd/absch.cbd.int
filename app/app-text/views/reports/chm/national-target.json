@@ -1,0 +1,12 @@
+{
+    "generalInformation": "General information",
+    "country": "Country",    
+    "levelOfApplication": "Level of application",
+    "jurisdiction": "Jurisdiction",
+    "relevanceOfNationalTargetsToAichiTargets":"Relevance of National Targets to Aichi Targets", 
+    "aichiTargetComponents": "Aichi Target components",
+    "SubAichiTargetsOrTargetComponents": "Sub-Aichi Targets  or Target components",
+    "rationaleForTheNationalTarget" :"Rationale for the National Target",
+    "relevantDocumentsAndInformation":"Relevant documents and information",
+    "otherRelevantWebsiteAddressOrAttachedDocuments":"Other relevant website address or attached documents"
+  }
