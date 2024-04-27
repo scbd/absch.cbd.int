@@ -1,7 +1,7 @@
 <template> 
     <div id="Record" class="record panel panel-default">
         <div class="record-body panel-body bg-white" v-if="document">             
-            <document-data  :document="document"></document-data> 
+            <!-- <document-data  :document="document"></document-data>  -->
 
             <div class="panel panel-info">
                 <div class="panel-heading">                 
@@ -128,8 +128,8 @@
     import { computed } from 'vue';
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
-    import documentMetadata from '~/views/directives/document-metadata.vue'
-    import documentData from '~/views/forms/directives/document-date.vue'
+    // import documentMetadata from '~/views/directives/document-metadata.vue'
+    // import documentData from '~/views/forms/directives/document-date.vue'
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-report.json';
     import { useI18n } from 'vue-i18n';
