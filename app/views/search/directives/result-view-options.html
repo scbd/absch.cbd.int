@@ -20,7 +20,7 @@
         </li>    
         
         <li ng-if="shareVueComponent">
-            <share-record ng-vue="shareVueComponent"></share-record>
+            <share-record ng-vue="shareVueComponent" @authenticate-user="authenticateUser()"></share-record>
         </li>    
       
         <li id="exportRecords" ng-if="viewType=='matrix'">
