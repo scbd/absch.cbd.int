@@ -20,36 +20,23 @@
                     </div> 
                 
                     <div v-if="document.isEasyToCommunicate">
-                        <label>{{ t("isEasyToCommunicate") }} </label> 
-                        <div class="km-value">
-                             <label>{{lstring(document.isEasyToCommunicate,locale)}} </label>  
-                        </div>                    
-                        <!-- <ng v-vue-ng:km-value-ml  :value="document.isEasyToCommunicate" :locales="locale" html></ng> -->
+                        <label>{{ t("isEasyToCommunicate") }} </label>            
+                        <ng v-vue-ng:km-value-bool  :value="document.isEasyToCommunicate" :locales="locale" html></ng>
                     </div>                
 
                     <div v-if="document.isFromGlobalToNationalIndicator">
                         <label>{{ t("isFromGlobalToNationalIndicator") }} </label>                     
-                        <!-- <ng v-vue-ng:km-value-ml  :value="document.isFromGlobalToNationalIndicator" :locales="locale" html></ng>                      -->
-                        <div class="km-value">
-                            <label>{{lstring(document.isFromGlobalToNationalIndicator,locale)}} </label>    
-                        </div>   
+                        <ng v-vue-ng:km-value-bool  :value="document.isFromGlobalToNationalIndicator" :locales="locale" html></ng>                     
                     </div>
                 
                     <div v-if="document.isFromNationalToGlobalIndicator">
                         <label>{{ t("isFromNationalToGlobalIndicator") }} </label>                        
-                        <!-- <ng v-vue-ng:km-value-ml  :value="document.isFromNationalToGlobalIndicator" :locales="locale" html></ng>  -->
-                        <div class="km-value">
-                            <label>{{lstring(document.isFromNationalToGlobalIndicator,locale)}} </label>    
-                        </div>  
+                        <ng v-vue-ng:km-value-bool  :value="document.isFromNationalToGlobalIndicator" :locales="locale" html></ng> 
                     </div>
-
                 
                     <div v-if="document.usedInGbo3OrGbo4">
                         <label>{{ t("usedInGBbo3Gbo4") }} </label>                                         
-                        <!-- <ng v-vue-ng:km-value-ml  :value="document.usedInGbo3OrGbo4" :locales="locale" html></ng>  -->
-                        <div class="km-value">
-                            <label>{{lstring(document.usedInGBbo3Gbo4,locale)}} </label>    
-                        </div> 
+                        <ng v-vue-ng:km-value-bool  :value="document.usedInGbo3OrGbo4" :locales="locale" html></ng> 
                     </div>
 
                     <div v-if="document.source">
@@ -67,11 +54,12 @@
 <script setup>
    import { computed } from 'vue';
    import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
+   import '~/components/scbd-angularjs-controls/form-control-directives/km-value-bool.js'  
    import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'   
    import kmTerm from '~/components/km/KmTerm.vue';
    import messages from '~/app-text/views/reports/chm/strategic-plan-indicator.json';
    import { useI18n } from 'vue-i18n';
-   import { lstring } from '~/components/kb/filters';
+ 
 
    const { t } = useI18n({ messages });
    const props = defineProps({
