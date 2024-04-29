@@ -1,0 +1,18 @@
+{
+    "generalInformation": "General information",
+    "summary": "Summary",
+    "introductionOfTheArea":  "Introduction of the area",
+    "descriptionOfTheLocation":  "Description of the location",
+    "ebsaRegion":"EBSA Region",
+    "descriptionOfLocation":"Description of location",
+    "geoLocation":"Geo-Location",
+    "areaDetails":"Area Details",
+    "featureDescriptionOfTheArea":"Feature description of the area",
+    "featureConditionsAndFutureOutlookOfThArea":"Feature conditions and future outlook of the area",
+    "references":"References",
+    "otherRelevantWebsiteAddressOrAttachedDocuments":"Other relevant website address or attached documents",
+    "statusOfSubmission":"Status of submission",
+    "assessmentOfTheAreaAgainstCbdEbsaCriteria":"Assessment of the area against CBD EBSA criteria",
+    "justification":"Justification",
+    "copDecision":"COP Decision"
+}
