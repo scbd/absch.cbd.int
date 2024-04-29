@@ -100,19 +100,18 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							const type = "chm-document";
 							return {type, recordKey}
 						}));
-	
-						provide('userSignIn', safeDelegate($scope, ()=>{
-							if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-								var signIn = $scope.$on('signIn', function (evt, data) {
-									signIn();
-								});
-								$('#loginDialog').modal("show");
-								return false;
-							} 
-							else {
-								return true;
-							}
-						}));   
+					}
+					$scope.authenticateUser = function () {
+                        if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
+							var signIn = $scope.$on('signIn', function (evt, data) {
+								signIn();
+							});
+							$('#loginDialog').modal("show");
+							return false;
+						} 
+						else {
+							return true;
+						}
 					}
 
 					$scope.getUserCountry = function (id) {
