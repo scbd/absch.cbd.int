@@ -468,11 +468,11 @@ const getShareDocumentData = () => {
 const getSearchQueryData = () => {
   const { filters, subFilters } = sharedData.value[sharedData.value.type].searchQuery || {};
   const data = {
-    filters: Object.keys(filters).length == 0 ? undefined : filters,
+    filters: filters && Object.keys(filters).length > 0 ? filters  : undefined,
     isSharedQuery: true,
     queryTitle: `Share query : ${Math.floor((1 + Math.random()) * 0x10000).toString(16)}`,
     realm: realm.value,
-    subFilters: Object.keys(subFilters).length == 0 ? undefined : subFilters
+    subFilters: subFilters && Object.keys(subFilters).length > 0 ? subFilters : undefined
   };
 
   return data;
