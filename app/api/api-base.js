@@ -26,7 +26,7 @@ export default class ApiBase
     options = options || {};
     // ToDo: weill find a better way to handle tokenReader
     // if(isFunction(options.tokenReader)) options = { tokenReader : options }
-    if(isObject (options) || isFunction(options)) options = { tokenReader : options }
+    if(isFunction(options)) options = { tokenReader : options }
 
     const { tokenReader, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
 
