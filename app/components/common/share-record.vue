@@ -1,7 +1,7 @@
 <template>
   <div id="shareRecord">
     <a id="shareSearchDomId" rel="noopener" href="#" class="share-button" @click="openModel()">
-      <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ $t("share") }} 
+      <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ t("share") }} 
     </a>
     <div class="modal fade" ref="shareModal" data-backdrop="static"  tabindex="-1" aria-hidden="true" id="share-modal">      
       <div class="modal-dialog modal-dialog-centered"  role="document">
@@ -19,21 +19,21 @@
               <div class="row">
                 <div class="col-12">
                   <a href="#" class="icon share-link" v-bind:class="{ selected: sharedData.type == 'link' }" @click="loadTabData('link')" :disabled="loading">
-                    <div class="tooltip">{{ $t("link") }}</div>
+                    <div class="tooltip">{{ t("link") }}</div>
                     <span><i class="bi bi-link"></i></span>
                     <br/>
-                    <span class="button-text">{{ $t("link") }}</span>
+                    <span class="button-text">{{ t("link") }}</span>
                   </a>
                   <a href="#" class="icon embed" v-bind:class="{selected: sharedData.type == 'embed'}" @click="loadTabData('embed')" :disabled="loading">
-                    <div class="tooltip">{{ $t("embed") }}</div>
+                    <div class="tooltip">{{ t("embed") }}</div>
                     <span><i class="bi bi-code-slash"></i></span><br/>
-                    <span class="button-text">{{ $t("embed") }}</span>
+                    <span class="button-text">{{ t("embed") }}</span>
                   </a>
                   <a href="#" class="icon email" v-bind:class="{
                       selected: sharedData.type == 'email'}" @click="loadTabData('email')" :disabled="loading">
-                    <div class="tooltip">{{ $t("email") }}</div>
+                    <div class="tooltip">{{ t("email") }}</div>
                     <span><i class="bi bi-envelope"></i></span><br/>
-                    <span class="button-text">{{ $t("email") }}</span>
+                    <span class="button-text">{{ t("email") }}</span>
                   </a>
                 </div>
               </div>
@@ -58,7 +58,7 @@
                   <div v-if="loading" class="alert alert-info">
                     <div class="text-center">
                         <div class="spinner-border" role="status" aria-hidden="true"></div>
-                        <strong> {{ $t("processing") }}...</strong>
+                        <strong> {{ t("processing") }}...</strong>
                     </div>                   
                   </div>
                   <div v-if="error" class="alert alert-danger d-flex align-items-center" role="alert">
@@ -79,7 +79,7 @@
                         v-model="sharedData[sharedData.type].link" readonly disabled />                            
                     </p>
                     <button class="btn btn-primary float-right" @click="copy('shareLink')"
-                      data-bs-toggle="tooltip" data-bs-placement="top" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')">
+                      data-bs-toggle="tooltip" data-bs-placement="top" :title="t('copyToClipboard')" :data-original-title="t('copyToClipboard')">
                       {{t('Copy')}}
                     </button>
                   </div>
@@ -104,7 +104,7 @@
                        <label for="inputPassword2">{{t('emails')}}</label>
                        <input type="email" class="form-control"
                         multiple @change="onEmailChange"
-                        v-model="sharedData[sharedData.type].emails" :placeholder="$t('emails')"/> 
+                        v-model="sharedData[sharedData.type].emails" :placeholder="t('emails')"/> 
                         <div style="font-size: small;color: black;">{{t('emailInstructions')}}</div>                     
                     </div>
                     <div class="col-12">
@@ -126,7 +126,7 @@
                     <div class="col-12">
                       <label for="inputPassword2">{{t('domain')}}</label>
                       <input v-model="sharedData[sharedData.type].domain"
-                        type="url" :placeholder="$t('urlEg')" class="form-control float-right" @change="onDomainChange" />
+                        type="url" :placeholder="t('urlEg')" class="form-control float-right" @change="onDomainChange" />
                     </div>
                     <div class="col-12">
                       <!-- || !isValidDomain -->
@@ -149,7 +149,7 @@
                         <div class="input-group mb-3">                            
                             <textarea class="form-control highlight embed-code" id="embedCode" aria-label="embed code" v-model="sharedData[sharedData.type].code" readonly disabled>                              
                             </textarea>
-                            <button class="input-group-text" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')" 
+                            <button class="input-group-text" :title="t('copyToClipboard')" :data-original-title="t('copyToClipboard')" 
                             data-bs-toggle="tooltip" data-bs-placement="top"  @click="copy('embedCode')">{{t('Copy')}}</button>                            
                         </div>
                     </div>
