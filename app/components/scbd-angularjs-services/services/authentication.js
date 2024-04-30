@@ -135,11 +135,11 @@ import './apiUrl';
             else
                 pToken = undefined;
 
-            tokenChange(token);
+            tokenChange(pToken||token);
 
             return $q.when(authenticationFrameQ).then(function(authenticationFrame){
 
-                tokenChange(token);
+                tokenChange(pToken||token);
 
                 if (authenticationFrame) {
 

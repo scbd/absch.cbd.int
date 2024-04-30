@@ -194,7 +194,6 @@
   const emit = defineEmits(['authenticateUser']);
   let modal = null;
   let toast = null;
-  let authToken = null; // ToDo ??
   const loading = ref(false);
   let isValidEmail = true; // ToDo ?
   let isValidDomain = true;
@@ -216,12 +215,8 @@
   const realm = useRealm();
   const isUserSignedIn = computed(()=> auth.user()?.isAuthenticated);
   onMounted(async () => {  
-      authToken = await auth.token();
-      if (authToken) {
-          // this authtoken is passed as tokenreader to api-base
-          documentShareApi = new DocumentShareApi(authToken);
-          subscriptionsApi = new SubscriptionsApi(authToken);
-      }
+      documentShareApi = new DocumentShareApi({tokenReader:()=>auth.token()});
+      subscriptionsApi = new SubscriptionsApi({tokenReader:()=>auth.token()});
       modal = new Modal(shareModal.value);
       toast = new Toast(clipboardToast.value);
   });
@@ -230,7 +225,7 @@
     if (!modal._isShown)
         modal.show('static');
 
-    if (sharedData.value.type != 'link' && !authToken)
+    if (sharedData.value.type != 'link' && !isUserSignedIn.value)
       auth.login();
     else
       loadTabData(sharedData.value.type || 'link');
@@ -251,7 +246,7 @@ const loadTabData = async (type) => {
     return sharedData.value[type].link = `${realm.baseURL}/${locale.value}/database/${sharedData.value[type].recordKey}`;
   }
 
-  if (!authToken && sharedData.value.type != 'link' &&
+  if (!isUserSignedIn.value && sharedData.value.type != 'link' &&
     (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile")) {
       auth.login();
     return;
