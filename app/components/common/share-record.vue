@@ -80,7 +80,7 @@
                     </p>
                     <button class="btn btn-primary float-right" @click="copy('shareLink')"
                       data-bs-toggle="tooltip" data-bs-placement="top" :title="t('copyToClipboard')" :data-original-title="t('copyToClipboard')">
-                      {{t('Copy')}}
+                      {{t('copy')}}
                     </button>
                   </div>
                   <button class="btn btn-primary btn-sm float-end" v-if="!sharedData[sharedData.type].link" @click="generateSearchResultLink()" 
@@ -195,7 +195,6 @@
   let modal = null;
   let toast = null;
   const loading = ref(false);
-  let isValidEmail = true; // ToDo ?
   let isValidDomain = true;
   const sharedData = ref({
     link: {},
@@ -207,9 +206,9 @@
 
 
   let error = ref(null);
-  let documentShareApi = null; // ?
-  let subscriptionsApi = null; // ?
-  let shareModal = shallowRef(null); // use shallowRef
+  let documentShareApi = null;
+  let subscriptionsApi = null;
+  let shareModal = shallowRef(null);
   let clipboardToast = shallowRef(null);
   const { t, locale } = useI18n({ messages });
   const realm = useRealm();
