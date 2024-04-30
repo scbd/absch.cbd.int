@@ -12,12 +12,13 @@
                             <km-term :value="document.government" :locale="locale"></km-term>   
                         </div>
                     </div>
-                    <!--TODO: test nationalTarget , now can't get value from backend-->
+
+                 
                     <div v-if="document.nationalTarget">
                         <label>{{ t("targets") }} </label>
-                        <div class="km-value">
-                            <km-term :value="document.nationalTarget" :locale="locale"></km-term>   
-                        </div>
+                        <div class="km-value" compare-val>
+                            <ng v-vue-ng:view-record-reference  v-model:ng-model="document.nationalTarget" :locales="locale" html></ng>                         
+                        </div>        
                     </div>                
                 </div>
 		    </div>
@@ -123,6 +124,7 @@
     import { computed } from 'vue'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
+    import '~/views/forms/view/directives/view-record-reference.directive.js'
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-assessment.json';
     import { useI18n } from 'vue-i18n';
