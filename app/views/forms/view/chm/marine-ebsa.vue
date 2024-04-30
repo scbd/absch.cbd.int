@@ -37,15 +37,15 @@
                         <ng v-vue-ng:km-value-ml  :value="document.location" :locales="locale" html></ng>  
                     </div>
 
-                    <div v-if="document.gisMapCenter">
+                    <div v-if="document.gisFiles">
                         <label>{{ t("geoLocation") }} </label> 
                         <div class="km-value">
                             <div v-if="document.gisMapCenter">                                              
                                 <ng v-vue-ng:km-link-list v-model:ng-model="document.gisFiles"  ></ng> 
                             </div>                           
-                            <!-- <leaflet ng-if="mapConfig" map-config="mapConfig" center="document.gisMapCenter" layers="gisLayer" scroll-wheel-zoom="false" ></leaflet>  -->
-                            <div class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
-					
+                            <div v-if="mapConfig">
+                                <ng v-vue-ng:leaflet :map-config="mapConfig"  :center="document.gisMapCenter" :layers="document.gisMapLayers" :scroll-wheel-zoom="false"></ng>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,13 +123,15 @@
 
         </div>
     </div>
-
 </template>
+
 <script setup>
     import { computed } from 'vue';
     import { lstring } from '~/services/filters/lstring.js'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'  
+    import '~/views/forms/view/directives/angular-leaflet-directive.js'
+
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/marine-ebsa.json';
     import { useI18n } from 'vue-i18n';
@@ -140,22 +142,6 @@
         documentInfo: { type: Object, required: true },
         locale      : { type:String}
     })
-
-    // const gisLayer = computed(()=>{
-    //     var qLinks =  document.gisFiles || [];
-                
-    //     var qGis = _.map(qLinks, function(link) {
-    //         /* global L: true */ // JSHint for leaflet
-    //         return $http.get(link.url).then(function(res) {
-    //             return L.geoJson(res.data);
-    //         });
-    //     });
-
-    //     Promise.all(qGis).then(function (layers) {
-    //         return layers;
-    //     });
-
-    // });
     
     const document = computed(()=>props.documentInfo?.body);
    
