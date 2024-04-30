@@ -184,10 +184,10 @@
   import DocumentShareApi from "~/api/document-share";
   import SubscriptionsApi from "~/api/subscriptions";
   import { Modal, Toast } from "bootstrap";
-  import { useRealm } from '../../services/composables/realm.js';
+  import { useRealm } from '~/services/composables/realm.js';
   import { useI18n } from 'vue-i18n';
-  import messages from '../../app-text/components/common/share-record.json';
-  import { getRecaptchaToken, resetRecaptcha } from '../../services/reCaptcha'
+  import messages from '~/app-text/components/common/share-record.json';
+  import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
   import { useAuth } from '@scbd/angular-vue/src/index.js';
   const auth = useAuth();
   const getQuery = inject('getQuery');
@@ -231,7 +231,7 @@
         modal.show('static');
 
     if (sharedData.value.type != 'link' && !authToken)
-      emit('authenticateUser');
+      auth.login();
     else
       loadTabData(sharedData.value.type || 'link');
 
@@ -253,7 +253,7 @@ const loadTabData = async (type) => {
 
   if (!authToken && sharedData.value.type != 'link' &&
     (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile")) {
-      emit('authenticateUser');
+      auth.login();
     return;
   }
 
@@ -443,7 +443,7 @@ const onEmailChange = () => {
 };
 
 const signIn = () => {
-  emit('authenticateUser');
+  auth.login();
 };
 
 const getShareDocumentData = () => {

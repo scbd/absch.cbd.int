@@ -96,16 +96,8 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
     async login() {
       console.log("$auth: force sign in");
 
-      const appConfigService = $injector.get('appConfigService')
-
-      const { fullPath, query } = $route;
-      let { returnUrl } = query;
-
-      if (!returnUrl) returnUrl = fullPath;
-
-      const path = appConfigService.getSiteMapUrls().user.signIn
-
-      $router.push({ path, query: {...query, returnUrl }, hash: null });
+      $('#loginDialog').modal("show");
+      
     }
   });
 
