@@ -1532,7 +1532,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         if (termFields?.length > 0) {
                             query.push(`usages_ss:(${solr.escape(termFields.join(' '))})`);
                         }  
-                        if (confidentialObject && Object.keys(confidentialObject).length !== 0) {
+                        if (confidentialObject && Object.keys(confidentialObject).length > 0) {
                             query.push('usagesConfidential_b: true');
                         }  
                         if(query.length > 0){ 
