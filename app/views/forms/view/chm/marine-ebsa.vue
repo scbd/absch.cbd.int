@@ -44,7 +44,6 @@
                                 <ng v-vue-ng:km-link-list v-model:ng-model="document.gisFiles"  ></ng> 
                             </div>     
                             <div v-if="mapConfig">  
-                             gisLayer:{{ gisLayer}}
                                 <ng v-vue-ng:leaflet :map-config="mapConfig"  :center="document.gisMapCenter" :layers="gisLayer" :scroll-wheel-zoom="false"></ng> 
                             </div> 
                         </div>
@@ -98,7 +97,7 @@
                     <div v-if="document.status">
                          <label>{{ t( "copDecision") }} </label> 
                         <div class="km-value" > 
-                            <label>{{ lstring( document.approvedByCopDecision.identifier) }} </label>                           
+                            <label>{{ lstring( document?.approvedByCopDecision?.identifier) }} </label>                           
                         </div>
                     </div>                    
                 </div>
@@ -131,7 +130,7 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, watch , ref} from 'vue';
+    import { computed, onMounted, shallowRef } from 'vue';
     import { lstring } from '~/services/filters/lstring.js'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'  
@@ -144,56 +143,40 @@
     import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js';     
     
     const { t } = useI18n({ messages });
-    const gisLayer = ref([]);
+    const gisLayer = shallowRef([]);
 
     const props = defineProps({
         documentInfo    : { type: Object, required: true },
         locale      : { type:String}
     })
 
-
-    const document = computed(()=>props.documentInfo?.body);
-
     const getBgColor = (level)=>{
       if (level ==="high") return "bg_red" ;
       if (level ==="medium") return "bg_orange" ;
     };
 
-   
-
+    const document = computed(()=>props.documentInfo?.body);
+ 
     onMounted(() => {loadShapes(document.value.gisFiles)});
+    //watch(()=>document.value.gisFiles, loadShapes)
 
     async function loadShapes (fileLinks) {
-          console.log("run loadshape")
-          console.log(document.value.gisFiles)
+        console.log('gisFiles', document.value.gisFiles)
 
-          const qLayers = fileLinks.map(async (link) => {
-              const res  = await fetch(link.url);              
-              const data = await res.json();  
-              console.log("L.geoJson(data)")
-              console.log(L.geoJson(data))
-              return await L.geoJson(data);
-            });
+        const qLayers = fileLinks.map(async (link) => {
+            const res  = await fetch(link.url);              
+            const data = await res.json(); 
+            //console.log('geojson', data)
+            return  await L.geoJson(data);
+        });
+
+        const s = await Promise.all(qLayers); 
        
-          console.log("qLayers")
-          console.log(qLayers)
-          gisLayer.value = await Promise.all(qLayers); 
-    
-          console.log("gisLayer.value")
-          console.log(gisLayer.value)
-    
+        //console.log("s", s)
+
+        gisLayer.value = s; 
+
+        //console.log("gisLayer.value", gisLayer.value)    
     };
- 
-    //watch(()=>document.value.gisFiles, loadShapes)
-    // setTimeout(function(){
-    //     document.value = document_data;
-    // }, 1000);
-    
-  
-   
- 
-
-   
-
    
 </script>
