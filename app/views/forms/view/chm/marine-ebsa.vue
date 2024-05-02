@@ -111,12 +111,12 @@
                     <div v-if="document.assessments">                    
                         <div class="km-value">                    
                             <div  v-for="assessment in document.assessments" >  
-                              <div> 
-                                {{ getBgColor(assessment.level) }}
-                                <legend>{{  lstring(assessment.identifier) }}<span :class="getBgColor(assessment.level)"> {{lstring(assessment.level)}}</span></legend> 
-                                
-                              </div>
-                                
+                                <div>                           
+                                    <div v-if="assessment.identifier">  
+                                        <label> {{t(assessment.identifier) }}   <span v-if="assessment.level"   :class="`${getBgColor(assessment.level)} text-white p-1`" > {{t(assessment.level)}}</span> </label>
+                                        <br/>
+                                    </div>                                
+                                </div>                                
                                 <label>{{ t("justification") }} </label>   
                                 <ng v-vue-ng:km-value-ml  :value="assessment.justification" :locales="locale" html ></ng>
                             </div>
@@ -151,8 +151,10 @@
     })
 
     const getBgColor = (level)=>{
-      if (level ==="high") return "bg_red" ;
-      if (level ==="medium") return "bg_orange" ;
+      if (level ==="high") return "bg-danger" ;
+      if (level ==="medium") return "bg-warning" ;
+      if (level === "low") return "bg-info";
+      if (level ==="no information") return "bg-secondary" 
     };
 
     const document = computed(()=>props.documentInfo?.body);

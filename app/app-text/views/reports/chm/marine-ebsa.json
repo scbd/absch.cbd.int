@@ -14,5 +14,16 @@
     "statusOfSubmission":"Status of submission",
     "assessmentOfTheAreaAgainstCbdEbsaCriteria":"Assessment of the area against CBD EBSA criteria",
     "justification":"Justification",
-    "copDecision":"COP Decision"
+    "copDecision":"COP Decision",
+    "criteria1": "C1: Uniqueness or rarity" ,
+    "criteria2": "C2: Special importance for life-history stages of species" ,
+    "criteria3": "C3: Importance for threatened, endangered or declining species and/or habitats" ,
+    "criteria4": "C4: Vulnerability, fragility, sensitivity, or slow recovery" ,
+    "criteria5": "C5: Biological productivity" ,
+    "criteria6": "C6: Biological diversity" ,
+    "criteria7": "C7: Naturalness" ,
+    "high":"High",
+    "medium":"Medium",
+    "low":"Low",
+    "noInformation":"No information"
 }
