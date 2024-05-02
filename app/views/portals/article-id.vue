@@ -1,6 +1,6 @@
 <template>
   <div>
-    <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true">
+    <cbd-article :id="articleId" v-if="articleId">
       <!-- @load="onArticleLoad($event)" :admin-tags="adminTags" -->
       <template #article-empty>&nbsp;</template>
     </cbd-article>
@@ -10,7 +10,7 @@
 <script>
 
 import { mapObjectId, isObjectId } from '~/api/api-base.js';
-import { cbdArticle } from 'scbd-common-articles';
+import  cbdArticle  from './cdd-article.vue';
 
 export default {
   name: 'ArticleId',
@@ -34,8 +34,10 @@ export default {
     var ag = [];
 
     if (isObjectId(articleId))
+    {
+      console.log('articleId:', articleId)
       ag.push({ $match: { _id: mapObjectId(articleId) } });
-
+    }
     this.articleQuery = { ag : JSON.stringify(ag) };
 
   }

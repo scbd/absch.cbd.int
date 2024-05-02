@@ -126,7 +126,7 @@
 import ForumsApi from '~/api/forums';
 import ArticlesApi from '~/api/articles';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
-import { cbdArticle } from 'scbd-common-articles';
+import  cbdArticle  from '../../components/kb/article-details.vue';
 import Post from '~/components/forums/post.vue';
 import EditPost from '~/components/forums/edit-post.vue';
 import pending   from '~/services/pending-call'
