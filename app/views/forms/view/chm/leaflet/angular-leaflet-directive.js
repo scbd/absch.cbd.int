@@ -1,3 +1,4 @@
+import app from '~/app';
 var leafletDirective = angular.module("leaflet-directive", []);
 
 var template = 
