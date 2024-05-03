@@ -42,5 +42,6 @@
     "resourceAccess":"Resource Access",
     "languages"  :"Languages",
     "libraries" :"Libraries",	
-    "gbfTargets":"Gbf Targets"
+    "gbfTargets":"Related Kunming-Montreal Global Biodiversity Framework Target(s)",
+    "nagoya":"Nagoya Protocol"
 }

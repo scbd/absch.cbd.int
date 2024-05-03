@@ -334,14 +334,23 @@
 			 <div ng-show="document.gbfTargets">	
 				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>	
 				<div class="km-value" compare-val>
-				    <view-terms-hierarchy ng-if="document.header.schema=='resource'" ng-model="document.gbfTargets" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy> 
-					<ul class="list" >
+				   	<ul class="list" >
 						<li ng-repeat="item in document.gbfTargets">
 							<span ng-bind="item|term:locale"></span>
 						</li>
 					</ul> 		
 				</div>
 			</div> 
+
+			<div ng-show="document.nagoya">
+				<label>{{::('viewResourceT.nagoya'|$translate)}}</label>			
+				<div ng-show="document.nagoya.subjects">				
+					<div class="km-value" compare-val>
+						<div km-terms ng-model="document.nagoya.subjects"></div>
+					</div>
+				</div>
+			</div>
+
 
 		</section>
 		<!-- If CHM, End -->
@@ -360,7 +369,7 @@
 				<label>{{::('viewResourceT.relevantDocuments'|$translate)}}</label>
 				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
 					<km-link-list  ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
-				</div>
+				</div>			
 			</div>
 		</section>
 
