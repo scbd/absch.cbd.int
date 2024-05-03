@@ -1,46 +1,34 @@
 <template>
   <div>
-    <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true">
+    <cbd-article :query="articleQuery" v-if="articleQuery">
       <!-- @load="onArticleLoad($event)" :admin-tags="adminTags" -->
       <template #article-empty>&nbsp;</template>
     </cbd-article>
   </div>
 </template>
-  
-<script>
 
+<script setup>
 import { mapObjectId, isObjectId } from '~/api/api-base.js';
-import { cbdArticle } from 'scbd-common-articles';
+import cbdArticle from './cbd-article.vue';
+import { ref, computed, onBeforeMount } from 'vue';
 
-export default {
-  name: 'ArticleId',
-  components:{ CbdArticle:cbdArticle },
-  props: {
-    articleId: String,
-  },
-  data() {
-    return {
-      articleQuery: null
-    }
-  },
-  computed: {
-    portalId() { return this.$route.params.portalId; },
-  },
-  async created() {
+const props = defineProps({
+      articleId: [String, Object], 
+      required: true,
+});
+const articleQuery = ref(null);
+const portalId = computed(() => $route.params.portalId);
+// const { portalId, articleId } = this; // Todo ???
 
-    const { portalId, articleId } = this;
+onBeforeMount(async () => {
 
-
-    var ag = [];
-
-    if (isObjectId(articleId))
-      ag.push({ $match: { _id: mapObjectId(articleId) } });
-
-    this.articleQuery = { ag : JSON.stringify(ag) };
-
+  let ag = [];
+console.log('articleId:', props.articleId);
+  if (isObjectId(props.articleId)) { 
+    ag.push({ $match: { _id: mapObjectId(props.articleId) } });
   }
 
-}
-</script>
-  
+  articleQuery.value = { ag: JSON.stringify(ag) };
+});
 
+</script>
