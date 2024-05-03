@@ -20,29 +20,23 @@
   </nav>
 </template>
 
-<script>
+<script setup>
 import SideMenuSub from './side-menu-sub.vue'
 import { lstring } from '../kb/filters';
+import { ref } from 'vue';
+const expandMenu = ref(false)
+const props = defineProps({
+  menu: {
+        type: Object,
+        required: false
+    }
+});
+console.log('menu:', props.menu)
+const toggleMenu = function () {
+  expandMenu.value = !expandMenu.value;
+};
 
 
-export default {
-  name: 'SideMenu',
-  components: { SideMenuSub },
-  data(){
-    return {
-      expandMenu : false
-    }
-  },
-  props: {
-    menu: Object,
-  },
-  methods:{
-    lstring,
-    toggleMenu(){
-      this.expandMenu = !this.expandMenu;
-    }
-  },
-}
 </script>
 
 <style scoped>
@@ -84,6 +78,7 @@ export default {
 .side-menu .menu-header:focus {
   /* to override */
 }
+
 
 
 </style>
