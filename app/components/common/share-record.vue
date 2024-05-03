@@ -150,7 +150,7 @@
                             <textarea class="form-control highlight embed-code" id="embedCode" aria-label="embed code" v-model="sharedData[sharedData.type].code" readonly disabled>                              
                             </textarea>
                             <button class="input-group-text" :title="t('copyToClipboard')" :data-original-title="t('copyToClipboard')" 
-                            data-bs-toggle="tooltip" data-bs-placement="top"  @click="copy('embedCode')">{{t('Copy')}}</button>                            
+                            data-bs-toggle="tooltip" data-bs-placement="top"  @click="copy('embedCode')">{{t('copy')}}</button>                            
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,6 @@
   import { useAuth } from '@scbd/angular-vue/src/index.js';
   const auth = useAuth();
   const getQuery = inject('getQuery');
-  const emit = defineEmits(['authenticateUser']);
   let modal = null;
   let toast = null;
   const loading = ref(false);

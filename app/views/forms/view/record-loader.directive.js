@@ -101,19 +101,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 							return {type, recordKey}
 						}));
 					}
-					$scope.authenticateUser = function () {
-                        if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-							var signIn = $scope.$on('signIn', function (evt, data) {
-								signIn();
-							});
-							$('#loginDialog').modal("show");
-							return false;
-						} 
-						else {
-							return true;
-						}
-					}
-
+					
 					$scope.getUserCountry = function (id) {
                         var term = {};
                         term.identifier = id

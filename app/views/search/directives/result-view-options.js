@@ -50,20 +50,7 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', '$rootSco
                         const type = "chm-search-result"
                         return {type, query}
                     }));
-                }
-                $scope.authenticateUser = function () { //ToDo: we can move to common
-                    if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-                        var signIn = $scope.$on('signIn', function (evt, data) {
-                            signIn();
-                        });
-                        $('#loginDialog').modal("show");
-                        return false;
-                    } 
-                    else {
-                        return true;
-                    }
-                }
-                  
+                }               
 
                 //$scope.isUserSignedIn = false;
             //    if(!$scope.viewType)
