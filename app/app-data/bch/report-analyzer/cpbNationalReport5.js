@@ -5508,9 +5508,7 @@ export const cpbNationalReport5 = [
                "options":[
                   {
                      "value":"true",
-                     "title": nr5T.yes,
-                     "type":"lstring",
-                     "caption": " "
+                     "title": nr5T.yes
                   },
                   {
                      "value":"false",

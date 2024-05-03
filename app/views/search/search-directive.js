@@ -28,6 +28,7 @@ import '~/views/reports/matrix/data-matrix.directive';
 import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge.js';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
+const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
     app.directive('searchDirective', function() {
         return {
             restrict: 'EA',
@@ -985,7 +986,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                             "identifier": "usagesConfidential_b",
                             "name": "usagesConfidential_b",
                             "title": {
-                                "en": searchDirectiveT.confidential
+                                "en": searchDirectiveMergeT.confidential
                             }
                         })
                         return usages    
@@ -1536,7 +1537,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                         if (termFields?.length > 0) {
                             query.push(`usages_ss:(${solr.escape(termFields.join(' '))})`);
                         }  
-                        if (confidentialObject) {
+                        if (confidentialObject && Object.keys(confidentialObject).length > 0) {
                             query.push('usagesConfidential_b: true');
                         }  
                         if(query.length > 0){ 

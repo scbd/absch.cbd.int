@@ -5,7 +5,7 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col col-md-8">
-                            <a href="/kb"><h1 class="text-white">{{$realm.chShortName+ " "}}<span>{{ $t("knowledgeBase") }}</span></h1></a>
+                            <a href="/kb"><h1 class="text-white">{{$realm.chShortName+ " "}}<span>{{ t("knowledgeBase") }}</span></h1></a>
                               <div class="input-group mb-3">
                                 <input v-on:keyup.enter="goToSearchArticles()" class="form-control"  type="text" v-model="search" placeholder="Search the Knowledge Base..." >
                                 <button @click="goToSearchArticles()" class="btn btn-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
