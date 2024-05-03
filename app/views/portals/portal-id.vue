@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <h1>Portal Id Page</h1>
+
     <div class="row row-eq-height">
       <aside class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-3 gx-2 gy-2">
           <side-menu :menu="menu"  class="menu-sticky mt-1"></side-menu>

@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h1>Article  Id Page</h1>
+
     <cbd-article :id="articleId" v-if="articleId">
       <!-- @load="onArticleLoad($event)" :admin-tags="adminTags" -->
       <template #article-empty>&nbsp;</template>
@@ -10,7 +12,7 @@
 <script>
 
 import { mapObjectId, isObjectId } from '~/api/api-base.js';
-import  cbdArticle  from './cdd-article.vue';
+import  cbdArticle  from './cbd-article.vue';
 
 export default {
   name: 'ArticleId',

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Forum Id Page</h1>
 
     <h1 v-if="!article && forum">{{ lstring(forum.title) }}</h1>
 
@@ -126,7 +127,7 @@
 import ForumsApi from '~/api/forums';
 import ArticlesApi from '~/api/articles';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
-import  cbdArticle  from '../../components/kb/article-details.vue';
+import  cbdArticle  from './cbd-article.vue';
 import Post from '~/components/forums/post.vue';
 import EditPost from '~/components/forums/edit-post.vue';
 import pending   from '~/services/pending-call'

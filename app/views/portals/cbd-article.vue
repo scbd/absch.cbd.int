@@ -45,6 +45,7 @@ import { useAuth } from '@scbd/angular-vue/src/index.js';
   const auth = useAuth();
 import ArticlesApi from '../../components/kb/article-api';
 const { t } = useI18n({ messages });
+const loading = ref(false);
 
   const article = ref({})
   const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
@@ -55,8 +56,12 @@ const { t } = useI18n({ messages });
     });
 
     onMounted( async ()=>{
-
-      article.value = await articlesApi.getArticleById(encodeURIComponent(props.id));
+        loading.value = true
+        article.value = await articlesApi.getArticleById(encodeURIComponent(props.id));
+        if (article.value)
+        {
+            loading.value = false
+        }
     })
 
 </script>
