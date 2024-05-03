@@ -16,12 +16,12 @@ import '~/views/forms/directives/nr-yes-no';
 import prevQuestionsMapping from '~/app-data/bch/report-analyzer/mapping/cpbNationalReport5-4.json';
 import { cpbNationalReport5 } from '~/app-data/bch/report-analyzer/cpbNationalReport5';
 import { cpbNationalReport4 } from '~/app-data/bch/report-analyzer/cpbNationalReport4';
-import editNR from '~/app-text/views/forms/edit/directives/edit-national-report.json';
+import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
 import numbers from '~/app-text/common/numbers.json';
 import yesNo from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-yes-no.json';
 import { mergeTranslationKeys } from '../../../../services/translation-merge.js';
 const yesNoT = mergeTranslationKeys(yesNo); 
-const editNRT = mergeTranslationKeys(editNR);
+const editNRTMerge = mergeTranslationKeys(editNRT);
 
 export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout",
     'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm', 'translationService',
@@ -112,7 +112,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
             },
             {
                 "tab": 13,
-                "title": editNRT.notes,  
+                "title": editNRTMerge.notes,  
                 "ngIncludeId": "notes",
                 render: true
             }    
