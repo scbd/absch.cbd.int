@@ -226,7 +226,7 @@
             };
 
     const formatString = (text) => {
-        if(!text || typeof text !== 'string')
+        if(!text)
                     return;
                     
                 if(text.startsWith('http')){
