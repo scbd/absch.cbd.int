@@ -81,13 +81,40 @@ async function copyFolderFiles(sourceRootPath, source, lang, destination){
                 await fs.mkdir(dirName, {recursive:true});
             }
 
-            await fs.copyFile(filepath, destinationFileName);
+            if(path.extname(filepath) == '.json'){
+                let jsonFileKeys = (await import(filepath, { assert: { type: 'json' }})).default;
+                jsonFileKeys = removeEmpty(jsonFileKeys);
+
+                await fs.writeFile(`${destinationFileName}`, JSON.stringify({...jsonFileKeys}, undefined, 2));
+            }
+            else
+                await fs.copyFile(filepath, destinationFileName);
         }
         else if(stats.isDirectory()){
             await copyFolderFiles(sourceRootPath, filepath, lang, destination);
         }
     }
 }
+
+const removeEmpty = (obj)=> {
+
+    return function remove(current) {
+      _.forOwn(current, function (value, key) {
+        if (_.isUndefined(value) || _.isNull(value) || _.isNaN(value) ||
+          (_.isString(value) && _.isEmpty(value)) ||
+          (_.isObject(value) && _.isEmpty(remove(value)))) {
+  
+          delete current[key];
+        }
+      });
+
+      if (_.isArray(current)) _.pull(current, undefined);
+  
+      return current;
+  
+    }(_.cloneDeep(obj));
+}
+
 // const source = '/Users/blaisefonseca/Downloads/Imported';
 // copyFiles(source, '/Users/blaisefonseca/Projects/absch.cbd.int/i18n')
 
