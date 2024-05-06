@@ -244,14 +244,40 @@
 
 
 		<!-- If CHM, Start -->
-		<section ng-if="isCHM"> 
-
-			<div ng-if="document.cbdSubjects">
+		<section ng-if="isCHM"> 		
+		
+			<div ng-if="document.cbdSubjects">				
+				<legend>{{::('viewResourceT.chm'|$translate)}}</legend>	
 				<label>{{::('viewResourceT.cbdSubjects'|$translate)}}</label>				
 				<div class="km-value" compare-val="cbdSubjects">
 					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
 				</div>
 			</div>
+
+			<div ng-if="document.targetGroups">
+				<label>{{::('viewResourceT.targetGroups'|$translate)}}</label>			
+				<div class="km-value" compare-val>
+					<div km-terms ng-model="document.targetGroups">
+						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
+					</div>
+				</div>
+			</div>
+
+			<div ng-if="document.expertiseLevel">
+				<label>{{::('viewResourceT.expertiseLevel'|$translate)}}</label>			
+				<km-value-ml value="document.expertiseLevel" locales="locale"></km-value-ml>
+			</div>
+
+			<div ng-if="document.gbfTargets">	
+				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>	
+				<div class="km-value" compare-val>
+				   	<ul class="list" >
+						<li ng-repeat="item in document.gbfTargets">
+							<span ng-bind="item|term:locale"></span>
+						</li>
+					</ul> 		
+				</div>
+			</div> 
 			
 			<div ng-if="document.purpose">
 				<label>{{::('viewResourceT.purpose'|$translate)}}</label>	
@@ -279,14 +305,6 @@
 				<km-value-ml value="document.formatDetails" locales="locale"></km-value-ml>				
 			</div>
 
-			<div ng-if="document.targetGroups">
-				<label>{{::('viewResourceT.targetGroups'|$translate)}}</label>			
-				<div class="km-value" compare-val>
-					<div km-terms ng-model="document.targetGroups">
-						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
-					</div>
-				</div>
-			</div>
 
 			<div ng-if="document.authorsInfo">
 				<label>{{::('viewResourceT.authorsInfo'|$translate)}}</label>			
@@ -325,16 +343,7 @@
 				</div>			
 			</div>
  
-			 <div ng-if="document.gbfTargets">	
-				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>	
-				<div class="km-value" compare-val>
-				   	<ul class="list" >
-						<li ng-repeat="item in document.gbfTargets">
-							<span ng-bind="item|term:locale"></span>
-						</li>
-					</ul> 		
-				</div>
-			</div> 
+
 		</section>
 		<!-- If CHM, End -->
 
