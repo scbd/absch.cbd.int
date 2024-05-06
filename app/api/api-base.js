@@ -9,7 +9,7 @@ if(/\.cbddev\.xyz$/i.test(window.location.hostname)) sitePrefixUrl= 'https://api
 if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 
 const cache          = new Map()
-const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000, tokenReader: defaultTokenReader }
+const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
 
 const HttpStatusApiCode = {
   400: "invalidParameter",
@@ -136,11 +136,4 @@ export function stringifyUrlParams(params){
   }
 
   return params;
-}
-
-//ToDo: can we remove this ?
-export async function defaultTokenReader() {
-  // const auth = useAuth();
-  // const userToken = await auth.token();
-  // return userToken;
 }
