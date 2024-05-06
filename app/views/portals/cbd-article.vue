@@ -3,7 +3,7 @@
         <i class="fa fa-cog fa-spin fa-lg"></i> 
         {{ t("loading") }}...
     </div>
-    <div v-if="!loading">
+    <div v-if="!loading && article">
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@35.0.0/build/content-style.css">
 
         <div v-if="article?.coverImage">
@@ -28,25 +28,39 @@
     const { t } = useI18n({ messages });
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
 
-    const emit = defineEmits(['load']);
+    const emit = defineEmits(['onArticleLoad']);
 
     const props = defineProps({
-        query: {
-            type: Object,
-            required: false
-        }
+        query           : { type: Object, required: false  },
+        hideCoverImage  : { type: Boolean, required: false, default:false },
+        showEdit        : { type: Boolean, required: false, default:true },
+        adminTags 	    : { type: Array  , required: false, default:[] }
     });
 
-    const loading = ref(true);
-    const article = ref({})
+    const loading = ref(false);
+    const article = ref(null)
 
     onMounted( async ()=>{
-        const articleResult = await articlesApi.queryArticles(props.query);
-        if(articleResult.length > 0){
-            article.value = articleResult[0] ;
-            emit('load', article.value);
+        try{
+            loading.value = true;
+            const articleResult = await articlesApi.queryArticles(props.query);
+            if(articleResult.length > 0){
+                article.value = articleResult[0] ;
+                emit('onArticleLoad', article.value);
+            }
+        } 
+        catch (err) {
+            console.log(err);
+        } 
+        finally {
             loading.value = false;
         }
     })
+    //ToDo: move to common file
+    const getSizedImage = (url, size) => {
+          return url && url
+          .replace(/attachments.cbd.int\//, '$&' + size + '/')
+          .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/');
+      };
 
 </script>
