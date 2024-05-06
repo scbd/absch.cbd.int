@@ -56,6 +56,14 @@
     "capacityBuildingInitiative.categories"      : "Category(ies) of capacity development activities",
     "capacityBuildingInitiative.cbdSubjects"     : "Related CBD Subject Areas",
     "capacityBuildingInitiative.cpbThematicAreas": "Biosafety Thematic Areas",
-    "capacityBuildingInitiative.publishedOn"     : "Publication date"
+    "capacityBuildingInitiative.publishedOn"     : "Publication date",
+
+    "database.uniqueId":"UID",
+    "database.government":"Country",
+    "database.title":"Website or database name",
+    "database.description":"Description",
+    "database.websites":"Website address",
+    "database.relevantInformation":"Any other relevant information",
+    "database.relevantDocuments":"Any other relevant documents"
 
 }
