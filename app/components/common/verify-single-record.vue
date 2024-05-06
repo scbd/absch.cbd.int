@@ -44,11 +44,13 @@
     import KmDocumentApi from "~/api/km-document";
     import { Modal } from "bootstrap";
     import LoadingModal  from '~/components/common/loading-modal.vue';
+    import { useAuth } from '@scbd/angular-vue/src/index.js';
+    const auth = useAuth();
     const { t } = useI18n({ messages });
     const realm = useRealm();
     const route = useRoute().value;
     const router = useRouter();
-    const kmDocumentApi = new KmDocumentApi();
+    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
 
     let modal = null;
     const schemaTitle = ref('');
