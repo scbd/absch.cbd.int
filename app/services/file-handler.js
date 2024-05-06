@@ -456,7 +456,6 @@ export const readSheet = (file) => {
       reader.onload = (e) => {
         const data = e.target.result;
         const workbook = XLSX.read(data, { type: "binary" });
-        console.log(workbook);
         var sheetNames = Object.keys(workbook.Sheets);
         resolve({sheetNames, workbook});
       }

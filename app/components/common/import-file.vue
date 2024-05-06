@@ -87,7 +87,7 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-12 text-center">
-                        <span class="text-danger">{{error}}</span>
+                        <span class="alert alert-danger" v-if="error">{{error}}</span>
                     </div>
                 </div>
                 <div class="row mt-5">
@@ -98,12 +98,12 @@
                             <span class="sr-only">Loading...</span>
                         </div>
                     </div>
-                    <div class="col-4 text-end mt-2">
-                        <button class="btn btn-primary" v-show="parsedFile.length">Confirm</button>
+                    <div class="col-4">                        
                     </div>
                 </div>
                 <div class="row">
                     <div class="col text-end mt-4">
+                        <button class="btn btn-primary me-3" v-show="parsedFile.length">Confirm</button>
                         <button type="button" class="btn btn-secondary" @click.stop="toggleModal">Close</button>
                     </div>
                 </div>
