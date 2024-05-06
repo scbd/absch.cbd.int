@@ -72,5 +72,26 @@
     "absNationalModelContractualClause.relevantMeasures":"Relevant ABS Measure(s):",
     "absNationalModelContractualClause.keywords":"Please select the relevant keywords:",
     "absNationalModelContractualClause.thematicAreas":"Thematic area(s):",
-    "absNationalModelContractualClause.relevantInformation":"Link to the resource(s)"
+    "absNationalModelContractualClause.relevantInformation":"Link to the resource(s)",
+
+    "modelContractualClause.uniqueId":"UID",
+    "modelContractualClause.title":"Title",
+    "modelContractualClause.resourceTypes":"Type of resource",
+    "modelContractualClause.authors":"Author name(s)",
+    "modelContractualClause.organizations":"Reference to the authoring organization(s)",
+    "modelContractualClause.publisher":"Publisher",
+    "modelContractualClause.publicationDate":"Publication Date",
+    "modelContractualClause.source":"Source",
+    "modelContractualClause.rights":"Rights",
+    "modelContractualClause.resourceLinks":"Link to the resource(s)",
+    "modelContractualClause.covers":"Cover image(s)",
+    "modelContractualClause.summary":"Summary",
+    "modelContractualClause.countryRegions":"Country(ies), regional or economic group(s)",
+    "modelContractualClause.aichiTargets":"Aichi Targets",
+    "modelContractualClause.cbdSubjects":"CBD Subject Areas",
+    "modelContractualClause.nagoyaMccKeywords":"relevant keywords for describing the content of the code of conduct, guidelines and best practices and/or standards being submitted",
+    "modelContractualClause.nagoyaSubjects":"ABS Thematic Areas",
+    "modelContractualClause.nagoyaKeyAreas":"Key areas and strategic measures",
+    "modelContractualClause.relevantInformation":"Any other relevant information",
+    "modelContractualClause.relevantDocuments":"Any other relevant documents"
 }
