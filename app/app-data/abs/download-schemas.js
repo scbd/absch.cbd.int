@@ -58,6 +58,20 @@ export const downloadSchemas = {
         "phones"                               : fieldsT["phones"],
         "emails"                               : fieldsT["emails"],
         "websites"                             : fieldsT["websites"]
+    },
+    
+    "absProcedure":{
+        "uniqueId": fieldsT["absProcedure.uniqueId"],
+        "government": fieldsT["absProcedure.government"],
+        "name": fieldsT["absProcedure.name"],
+        "jurisdiction": fieldsT["absProcedure.jurisdiction"],
+        "contacts": fieldsT["absProcedure.contacts"],
+        "requirements": fieldsT["absProcedure.requirements"],
+        "description": fieldsT["absProcedure.description"],
+        "hasApplicationDocuments": fieldsT["absProcedure.hasApplicationDocuments"],
+        "hasApplicationFees": fieldsT["absProcedure.hasApplicationFees"],
+        "duration": fieldsT["absProcedure.duration"],
+        "relevantMeasures": fieldsT["absProcedure.relevantMeasures"],
+        "keywords": fieldsT["absProcedure.keywords"]
     }
 }
-
