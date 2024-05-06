@@ -82,18 +82,35 @@ export const downloadSchemas = {
     },
 
     "capacityBuildingInitiative":{
-        "uniqueId"        : fieldsT["capacityBuildingInitiative.uniqueId"],
-        "title"           : fieldsT["capacityBuildingInitiative.title"],
-        "geographicScope" : fieldsT["capacityBuildingInitiative.geographicScope"],
-        "countryRegions"  : fieldsT["capacityBuildingInitiative.countryRegions"],
-        "status"          : fieldsT["capacityBuildingInitiative.status"],
-        "startDate"       : fieldsT["capacityBuildingInitiative.startDate"],
-        "endDate"         : fieldsT["capacityBuildingInitiative.endDate"],
-        "activityScope"   : fieldsT["capacityBuildingInitiative.activityScope"],
-        "categories"      : fieldsT["capacityBuildingInitiative.categories"],
-        "cbdSubjects"     : fieldsT["capacityBuildingInitiative.cbdSubjects"],
-        "cpbThematicAreas": fieldsT["capacityBuildingInitiative.cpbThematicAreas"],
-        "publishedOn"     : fieldsT["capacityBuildingInitiative.publishedOn"]
+        "uniqueId"           : fieldsT["capacityBuildingInitiative.uniqueId"],
+        "title"              : fieldsT["capacityBuildingInitiative.title"],
+        "projectNumber"      : fieldsT["capacityBuildingInitiative.projectNumber"],
+        "projectDocument"    : fieldsT["capacityBuildingInitiative.projectDocument"],
+        "contacts"           : fieldsT["capacityBuildingInitiative.contacts"],
+        "isProjectProgramme" : fieldsT["capacityBuildingInitiative.isProjectProgramme"],
+        "description"        : fieldsT["capacityBuildingInitiative.description"],
+        "aichiTargets"       : fieldsT["capacityBuildingInitiative.aichiTargets"],
+        "absKeyAreas"        : fieldsT["capacityBuildingInitiative.absKeyAreas"],
+        "fundingSourceTypes" : fieldsT["capacityBuildingInitiative.fundingSourceTypes"],
+        "coreFundingSources" : fieldsT["capacityBuildingInitiative.coreFundingSources"],
+        "coFinancingSources" : fieldsT["capacityBuildingInitiative.coFinancingSources"],
+        "totalBudget"        : fieldsT["capacityBuildingInitiative.totalBudget"],
+        "resultsAchievements": fieldsT["capacityBuildingInitiative.resultsAchievements"],
+        "resultsOutputs"     : fieldsT["capacityBuildingInitiative.resultsOutputs"],
+        "resultsReference"   : fieldsT["capacityBuildingInitiative.resultsReference"],
+        "bestPractices"      : fieldsT["capacityBuildingInitiative.bestPractices"],
+        "relevantInformation": fieldsT["capacityBuildingInitiative.relevantInformation"],
+        "relevantDocuments"  : fieldsT["capacityBuildingInitiative.relevantDocuments"],
+        "geographicScope"    : fieldsT["capacityBuildingInitiative.geographicScope"],
+        "countryRegions"     : fieldsT["capacityBuildingInitiative.countryRegions"],
+        "status"             : fieldsT["capacityBuildingInitiative.status"],
+        "startDate"          : fieldsT["capacityBuildingInitiative.startDate"],
+        "endDate"            : fieldsT["capacityBuildingInitiative.endDate"],
+        "activityScope"      : fieldsT["capacityBuildingInitiative.activityScope"],
+        "categories"         : fieldsT["capacityBuildingInitiative.categories"],
+        "cbdSubjects"        : fieldsT["capacityBuildingInitiative.cbdSubjects"],
+        "cpbThematicAreas"   : fieldsT["capacityBuildingInitiative.cpbThematicAreas"],
+        "publishedOn"        : fieldsT["capacityBuildingInitiative.publishedOn"]
 	},
 
   "database":{
@@ -129,4 +146,5 @@ export const downloadSchemas = {
     "emails"             : fieldsT["contact.emails"],
     "websites"           : fieldsT["contact.websites"]
   }
+        
 }
