@@ -12,9 +12,9 @@
     "timePeriod":"Time period",
     "from": "From",
     "to": "To",
-    "relevantDocumentsAndInformation":"Relevant documents and information",
-    "relevantInformation":"Relevant information",
-    "relevantWebsitesLinksAndFiles":"Relevant websites, links, and files",
-    "additionalInformation":  "Additional Information",
-    "otherRelevantWebsiteAddressOrAttachedDocuments":"Other relevant website address or attached documents"
+    "relevantDocAndInfo":"Relevant documents and information",
+    "relevantInfo":"Relevant information",
+    "relevantWebsites":"Relevant websites, links, and files",
+    "additionalInfo":  "Additional Information",
+    "otherRelevantWebsite":"Other relevant website address or attached documents"
 }

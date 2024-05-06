@@ -91,15 +91,15 @@
          
            <section>
                 <div v-if="document.documentText|| document.documentLinks">
-                    <legend>{{ t("relevantDocumentsAndInformation") }}</legend>
+                    <legend>{{ t("relevantDocAndInfo") }}</legend>
             
                     <div v-if="document.documentText">
-                        <label>{{ t("relevantInformation") }} </label>   
+                        <label>{{ t("relevantInfo") }} </label>   
                         <ng v-vue-ng:km-value-ml  :value="document.documentText" :locales="locale" html ></ng>  
                     </div>
             
                     <div v-if="document.documentLinks">
-                        <label>{{ t("relevantWebsitesLinksAndFiles") }} </label> 
+                        <label>{{ t("relevantWebsites") }} </label> 
                         <div class="km-value" compare-val>                 
                             <ng v-vue-ng:km-link-list v-model:ng-model="document.documentLinks"  ></ng>                    
                         </div>
@@ -108,12 +108,12 @@
                          
                 <div v-if="document.relevantInformation||document.relevantDocuments">
                     <div v-if="document.relevantInformation">
-                        <label>{{ t("additionalInformation") }} </label>   
+                        <label>{{ t("additionalInfo") }} </label>   
                         <ng v-vue-ng:km-value-ml  :value="document.relevantInformation" :locales="locale" html></ng>
                     </div>
 
                     <div v-if="document.relevantDocuments">
-                        <label>{{ t("otherRelevantWebsiteAddressOrAttachedDocuments") }} </label> 
+                        <label>{{ t("otherRelevantWebsite") }} </label> 
                         <div class="km-value" compare-val>                   
                             <ng v-vue-ng:km-link-list v-model:ng-model="document.relevantDocuments" ></ng>                  
                         </div>
