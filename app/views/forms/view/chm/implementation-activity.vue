@@ -30,7 +30,9 @@
                     <legend>{{ t("levelOfImplementation") }} </legend>> 
                    
                     <div v-if="document.jurisdiction">                        
-                        <ng v-vue-ng:km-value-ml  :value="document.jurisdiction" :locales="locale" ></ng>  
+                        <div class="km-value">
+                            <km-term :value="document.jurisdiction" :locale="locale" ></km-term>
+                        </div>
                     </div>
 
 
@@ -51,8 +53,7 @@
                             <div  v-for="indicator in document.nationalIndicators" > 
                                 <i v-if="indicator.document.title">  {{lstring(indicator.document.title,locale)}}</i>
                             </div>
-                        </div> 
-                    
+                        </div>                     
                     </div>
 
 
@@ -82,8 +83,10 @@
 
             <section>
                 <div v-if="document.partners">
-                    <legend>{{ t("partners") }} </legend>                    
-                    <!-- <div view-organization-reference ng-model="partner.document" locale="locale"></div>                     -->
+                    <legend>{{ t("partners") }} </legend>  
+                    <div  v-for="partner in document.partners" > 
+                        <ng v-vue-ng:view-record-reference  :value="partner.document" :locales="locale"></ng>  
+                    </div>
                 </div>
             </section>              
                    
