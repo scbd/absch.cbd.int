@@ -2,8 +2,9 @@
     "organization":"Organization",
     "government":"Government",
     "description":"Description",
-    "descriptionNativeLanguage":"Description Native Language",
+    "descriptionNative":"Description Native Language",
     "websites":"Websites",
     "documents":"Documents",
-    "videos":"Videos"
+    "videos":"Videos",
+    "images":"Images"
 }

@@ -28,7 +28,7 @@
                         </div>                     
 
                         <div v-if="document.descriptionNative">
-                            <label>{{ t("descriptionNativeLanguage") }}</label>
+                            <label>{{ t("descriptionNative") }}</label>
                             <div class="km-value">   
                             {{ document.descriptionNative }}                            
                             </div>   
@@ -54,7 +54,14 @@
                             <div class="km-value">   
                                 <ng v-vue-ng:km-link-list v-model:ng-model="document.documents" ></ng>                              
                             </div>  
-                        </div>                         
+                        </div>      
+                        
+                        <div v-if="document.images">
+                            <label> {{ t("images") }}</label>
+                            <div class="km-value">   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="document.images" ></ng>                              
+                            </div>  
+                        </div>   
                         
                     </div>
                 </div>
