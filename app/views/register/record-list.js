@@ -12,6 +12,7 @@ import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge';
+import importFile from "~/components/common/import-file.vue";
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
@@ -428,7 +429,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     if (status === 'requests' || status === 'request')
                         $scope.statusFilter = $scope.isRequest;
                 }
-
                 //============================================================
                 //
                 //
@@ -778,6 +778,11 @@ const recordListError = mergeTranslationKeys(recordListT);
                 }
                 $scope.isDisableEdit = function (schema){
                     return  realm.schemas[schema].disableEdit;
+                }
+                if($routeParams.document_type === "IRCC" && $rootScope.user?.government){
+                    $scope.exportVueComponent = {
+                        components:{ importFile }
+                    }
                 }
 
                 function loadmyTasks(schema){
