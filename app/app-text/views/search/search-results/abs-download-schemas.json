@@ -93,5 +93,25 @@
     "modelContractualClause.nagoyaSubjects":"ABS Thematic Areas",
     "modelContractualClause.nagoyaKeyAreas":"Key areas and strategic measures",
     "modelContractualClause.relevantInformation":"Any other relevant information",
-    "modelContractualClause.relevantDocuments":"Any other relevant documents"
+    "modelContractualClause.relevantDocuments":"Any other relevant documents",
+    
+    "communityProtocol.uniqueId"           : "UID",
+    "communityProtocol.title"              : "Title",
+    "communityProtocol.resourceTypes"      : "Type of resource",
+    "communityProtocol.authors"            : "Author name(s)",
+    "communityProtocol.organizations"      : "Reference to the authoring organization(s)",
+    "communityProtocol.publisher"          : "Publisher",
+    "communityProtocol.publicationDate"    : "Publication Date",
+    "communityProtocol.source"             : "Source",
+    "communityProtocol.rights"             : "Rights",
+    "communityProtocol.resourceLinks"      : "Link to the resource(s)",
+    "communityProtocol.covers"             : "Cover image(s)",
+    "communityProtocol.summary"            : "Summary",
+    "communityProtocol.countryRegions"     : "Country(ies), regional or economic group(s)",
+    "communityProtocol.aichiTargets"       : "Aichi Targets",
+    "communityProtocol.cbdSubjects"        : "CBD Subject Areas",
+    "communityProtocol.nagoyaSubjects"     : "ABS Thematic Areas",
+    "communityProtocol.nagoyaKeyAreas"     : "Key areas",
+    "communityProtocol.relevantInformation": "Relevant information",
+    "communityProtocol.relevantDocuments"  : "Relevant documents"
 }
