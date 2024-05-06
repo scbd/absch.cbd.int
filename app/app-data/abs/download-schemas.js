@@ -86,4 +86,27 @@ export const downloadSchemas = {
         "thematicAreas": fieldsT["absNationalModelContractualClause.thematicAreas"],
         "relevantInformation": fieldsT["absNationalModelContractualClause.relevantInformation"]
     },
+
+    "modelContractualClause":{
+        "uniqueId"           : fieldsT["modelContractualClause.uniqueId"],
+        "title"              : fieldsT["modelContractualClause.title"],
+        "resourceTypes"      : fieldsT["modelContractualClause.resourceTypes"],
+        "authors"            : fieldsT["modelContractualClause.authors"],
+        "organizations"      : fieldsT["modelContractualClause.organizations"],
+        "publisher"          : fieldsT["modelContractualClause.publisher"],
+        "publicationDate"    : fieldsT["modelContractualClause.publicationDate"],
+        "source"             : fieldsT["modelContractualClause.source"],
+        "rights"             : fieldsT["modelContractualClause.rights"],
+        "resourceLinks"      : fieldsT["modelContractualClause.resourceLinks"],
+        "covers"             : fieldsT["modelContractualClause.covers"],
+        "summary"            : fieldsT["modelContractualClause.summary"],
+        "countryRegions"     : fieldsT["modelContractualClause.countryRegions"],
+        "aichiTargets"       : fieldsT["modelContractualClause.aichiTargets"],
+        "cbdSubjects"        : fieldsT["modelContractualClause.cbdSubjects"],
+        "nagoyaMccKeywords"  : fieldsT["modelContractualClause.nagoyaMccKeywords"],
+        "nagoyaSubjects"     : fieldsT["modelContractualClause.nagoyaSubjects"],
+        "nagoyaKeyAreas"     : fieldsT["modelContractualClause.nagoyaKeyAreas"],
+        "relevantInformation": fieldsT["modelContractualClause.relevantInformation"],
+        "relevantDocuments": fieldsT["modelContractualClause.relevantDocuments"]
+    },
 }
