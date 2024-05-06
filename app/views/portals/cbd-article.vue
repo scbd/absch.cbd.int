@@ -13,6 +13,13 @@
         <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred"
             v-html="lstring(article.content,$locale)">
         </div>
+
+        <div v-if="error" class="alert alert-danger d-flex align-items-center" role="alert">
+            <i class="bi bi-exclamation-triangle m-1"></i>
+            <div class="m-1">
+                {{ error }}
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,7 +32,7 @@
     import ArticlesApi from '../../components/kb/article-api';
 
     const auth = useAuth();
-    const { t } = useI18n({ messages });
+    const { t, locale } = useI18n({ messages });
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
 
     const emit = defineEmits(['onArticleLoad']);
@@ -39,10 +46,11 @@
 
     const loading = ref(false);
     const article = ref(null)
-
+    const error = ref(null);
     onMounted( async ()=>{
         try{
             loading.value = true;
+            error.value = undefined;
             const articleResult = await articlesApi.queryArticles(props.query);
             if(articleResult.length > 0){
                 article.value = articleResult[0] ;
@@ -51,6 +59,7 @@
         } 
         catch (err) {
             console.log(err);
+            error.value =  t("errorLoading"); // ToDo: not working inside script.
         } 
         finally {
             loading.value = false;
