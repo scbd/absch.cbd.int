@@ -28,6 +28,9 @@ export default function resolveLocalized(options = { }) {
 
       const resolved = await this.resolve(importeeId, importer, { skipSelf: true });
 
+      if(!resolved)
+        console.debug(importeeId, importer);
+      
       const { external, id: absolutePath }  = resolved;
 
       if(external) return resolved;
@@ -55,6 +58,7 @@ export default function resolveLocalized(options = { }) {
 
 export function isUseLocalizedVersion(oFilePath, lFilePath) {
 
+
   if (!fs.existsSync(lFilePath)) return false;
   if (!fs.existsSync(oFilePath)) return false;
 
@@ -63,6 +67,10 @@ export function isUseLocalizedVersion(oFilePath, lFilePath) {
 
   if (!lStats.isFile()) return false;
   if (!oStats.isFile()) return false;
+
+  // For all json file return true to resolve based on text hash
+  if(path.extname(oFilePath) == '.json')
+    return true;
 
   return lStats.mtimeMs >= oStats.mtimeMs;
 }

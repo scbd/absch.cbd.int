@@ -66,7 +66,12 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }
                     var lQuestion = question;
                     if (question.validations) {
-
+                        if(question.validations){
+                            const childrenQuestionKeys = question.validations.map(item => item.question);
+                            childrenQuestionKeys.forEach((questionKey) => {
+                                $scope.binding[questionKey] = undefined;
+                            });
+                        }
                         var mappings = question.validations || [];
 
                         _.forEach(mappings, function (mapping) {

@@ -77,6 +77,7 @@ export const downloadSchemas = {
 		"jurisdiction"			: fieldsT["biosafetyLaw.jurisdiction"],
 		"cpbSubjectAreas"		: fieldsT["biosafetyLaw.cpbSubjectAreas"],
 		"entryIntoForce"		: fieldsT["biosafetyLaw.entryIntoForce"], 
+		"publishedOn"			: fieldsT["publishedOn"]
 	},
 	"modifiedOrganism" : {
 	    "uniqueId"   			: fieldsT["bchRecordID"],

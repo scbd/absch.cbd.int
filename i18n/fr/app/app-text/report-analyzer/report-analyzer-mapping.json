@@ -1,8 +1,17 @@
 {
-  "absNR1Title": "APA - Rapport national provisoire sur la mise en œuvre du Protocole de Nagoya",
-  "bchInterimNRTitle": "Protocole de Cartagena - Rapport national provisoire",
-  "bchNR1Title": "Protocole De Cartagena - Premier rapport national",
-  "bchNR2Title": "Protocole de Cartagena - Deuxième rapport national",
-  "bchNR3Title": "Protocole de Cartagena - Troisième rapport national ",
-  "bchNR4Title": "Protocole de Cartagena - Quatrième rapport  national "
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:50.185Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "absNRTitle": "1d540be1d9583f7f34cb5a72117b49f1",
+      "absNR1Title": "b505e6ba58718b520e58ea3a3d065e99",
+      "bchInterimNRTitle": "db1ba738842bc9a4eb466c9e3fd08310",
+      "bchNR1Title": "ad5c6a1552f8992d658fc99eceddc768",
+      "bchNR2Title": "e81a12eae73dfb1cb5562dcdd7c1a592",
+      "bchNR3Title": "2841e9533a65801e1a4db27d56498d2a",
+      "bchNR4Title": "478f8f93c2e92f02c45667e46b39134d",
+      "bchNR5Title": "ef021cdca8402ec8626db207f5557a49"
+    }
+  }
 }

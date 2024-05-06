@@ -24,8 +24,9 @@ export default class ApiBase
   constructor(options) { //{ tokenReader, prefixUrl, timeout, tokenType }
 
     options = options || {};
-
-    if(isFunction(options.tokenReader)) options = { tokenReader : options }
+    // ToDo: weill find a better way to handle tokenReader
+    // if(isFunction(options.tokenReader)) options = { tokenReader : options }
+    if(isFunction(options)) options = { tokenReader : options }
 
     const { tokenReader, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
 
@@ -65,10 +66,10 @@ async function loadAsyncHeaders(baseConfig) {
     let token = '';
     if(isFunction(tokenReader)){
       const tokenDetails = await tokenReader();
-      token = tokenDetails.token ;
+      token = tokenDetails?.token ;
     }
     else {
-      token = tokenReader.token ;
+      token = tokenReader?.token ;
     }
 
     if(token)

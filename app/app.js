@@ -17,6 +17,7 @@ import {
     createI18n
 } from 'vue-i18n';
  import { mergeTranslationKeys} from './services/translation-merge';
+import ngDirectivePlaceholder from "./components/ng-directive-placeholder";
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
@@ -83,6 +84,7 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
     .use(createService('$realm', realm)) // use  useRealm() | import { useRealm  } from '~/services/composables/realm.js';
     .use(createService('$locale', locale))
     .use(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
+    .component('ng', ngDirectivePlaceholder) // simple component used as a placeholder for `v-vue-ng` directive bridge
     .use(ngVue)
     .use($i18n)
     .use($route)
@@ -94,16 +96,8 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
     async login() {
       console.log("$auth: force sign in");
 
-      const appConfigService = $injector.get('appConfigService')
-
-      const { fullPath, query } = $route;
-      let { returnUrl } = query;
-
-      if (!returnUrl) returnUrl = fullPath;
-
-      const path = appConfigService.getSiteMapUrls().user.signIn
-
-      $router.push({ path, query: {...query, returnUrl }, hash: null });
+      $('#loginDialog').modal("show");
+      
     }
   });
 

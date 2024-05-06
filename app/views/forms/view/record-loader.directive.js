@@ -1,5 +1,7 @@
 ﻿import app from '~/app';
 import _ from 'lodash';
+import { provide } from 'vue'; 
+import { safeDelegate } from '~/services/common';
 import template from 'text!./record-loader.directive.html';
 import '~/components/scbd-angularjs-services/main';
 import 'ngSmoothScroll';
@@ -44,6 +46,9 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				documentInfo: "=?",
 			},
 			link: function ($scope, $element, $attr) {
+
+				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment'];
+
 				$scope.hideClose = false;
 				if($attr.hideClose){ 
 					$scope.hideClose = true;
@@ -52,7 +57,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 				$scope.tokenReader = function(){ return apiToken.get()}
 
 				if (!$scope.linkTarget || $scope.linkTarget == '')
-					$scope.linkTarget = '_new';
+					$scope.linkTarget = '_blank';
 				//debugger;
 				$scope.internalDocument = undefined;
 				$scope.internalDocumentInfo = undefined;
@@ -84,27 +89,19 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					}
 
 					$scope.shareVueComponent = {
-						components:{shareRecord}
+						components:{shareRecord},
+						 setup:  shareRecordsFunctions
 					}
-
-					$scope.getQuery = function () {
-						let recordKey = $filter("uniqueID")($scope.internalDocument.info);
-						const type = "chm-document";
-						return {type, recordKey}
+	
+					function shareRecordsFunctions () {
+	
+						provide('getQuery', safeDelegate($scope, ()=>{
+							let recordKey = $filter("uniqueID")($scope.internalDocument.info);
+							const type = "chm-document";
+							return {type, recordKey}
+						}));
 					}
-
-					$scope.userStatus = function () {
-						if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-						var signIn = $scope.$on('signIn', function (evt, data) {
-							signIn();
-						});
-						$('#loginDialog').modal("show");
-						return false;
-						} else {
-						return true;
-						}
-					}
-
+					
 					$scope.getUserCountry = function (id) {
                         var term = {};
                         term.identifier = id
@@ -133,7 +130,10 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if ($route.current.params.documentNumber)
 							var documentID = $route.current.params.documentNumber;
 
-						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID) || /^chm\-nfp/i.test(documentID))) {
+						if (documentID && (
+							/^bch/i.test(documentID) || 
+							/^abs/i.test(documentID) || 
+							/^chm/i.test(documentID))) {
 							documentID = documentID.replace(/-(dev|trg)/i, '');
 							var docNum = documentID.split('-');
 							if (docNum.length == 5) {
@@ -451,11 +451,15 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
 						await fetchEditDirectives(lschema);
 
-						var divSelector = '#schemaView'
-						var name 		= snake_case(lschema);
-						var directiveHtml =
+						let divSelector = '#schemaView';
+
+						let name 		= 'view-' + snake_case(lschema);
+						if(vueComponentSchemas.includes(schema))
+							name = 'record-loader-ng-v';
+
+						let directiveHtml =
 							"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
-								.replace(/DIRECTIVE/g, 'view-' + name);
+								.replace(/DIRECTIVE/g, name);
 						$scope.$apply(function () {
 							if(typeof beforeReplace == 'function'){
 								var dirInfo 	= beforeReplace(directiveHtml)
@@ -484,6 +488,8 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					}
 
 					async function fetchEditDirectives(schema){
+
+						if(vueComponentSchemas.includes(schema)){ return await import('./record-loader-ng-v') };
 
 						if(schema == 'absNationalReport'                ){ return await import('~/views/forms/view/abs/view-abs-national-report.directive') };
 						if(schema == 'absNationalReport1'                ){ return await import('~/views/forms/view/abs/view-national-report-1.directive') };
