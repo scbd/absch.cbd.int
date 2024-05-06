@@ -49,5 +49,18 @@
     "absCheckpointCommunique.evidenceOfPIC"       : "Reference or evidence of prior informed consent (PIC) or Reference number of the permit or its equivalent",
     "absCheckpointCommunique.evidenceOfMAT"       : "Reference or evidence of establishment of mutually agreed terms (MAT)",
     "absCheckpointCommunique.description"         : "Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources",
-    "absCheckpointCommunique.dateOfAccess"        : "Date of access to the genetic resources"
+    "absCheckpointCommunique.dateOfAccess"        : "Date of access to the genetic resources",
+    
+    "absProcedure.uniqueId"                 : "UID",
+    "absProcedure.government"               : "Country",
+    "absProcedure.name"                     : "This is an ABS procedure for",
+    "absProcedure.jurisdiction"             : "Area of jurisdiction:",
+    "absProcedure.contacts"                 : "Where should applications for access be made?",
+    "absProcedure.requirements"             : "What are the conditions or requirements a potential user needs to fulfil to apply for access?",
+    "absProcedure.description"              : "Please provide a step-by step description or a visual representation of the ABS procedure",
+    "absProcedure.hasApplicationDocuments"  : "Does the applicant need to provide any documents?",
+    "absProcedure.hasApplicationFees"       : "Are there application fees?",
+    "absProcedure.duration"                 : "How long does the application process take:",
+    "absProcedure.relevantMeasures"         : "Relevant ABS measure(s):",
+    "absProcedure.keywords"                 : "Keywords"
 }
