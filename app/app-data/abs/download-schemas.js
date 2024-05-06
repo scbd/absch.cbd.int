@@ -73,7 +73,7 @@ export const downloadSchemas = {
         "duration": fieldsT["absProcedure.duration"],
         "relevantMeasures": fieldsT["absProcedure.relevantMeasures"],
         "keywords": fieldsT["absProcedure.keywords"]
-    }
+    },
 
     "absNationalModelContractualClause":{
         "uniqueId": fieldsT["absNationalModelContractualClause.uniqueId"],
@@ -85,5 +85,5 @@ export const downloadSchemas = {
         "keywords": fieldsT["absNationalModelContractualClause.keywords"],
         "thematicAreas": fieldsT["absNationalModelContractualClause.thematicAreas"],
         "relevantInformation": fieldsT["absNationalModelContractualClause.relevantInformation"]
-    }
+    },
 }

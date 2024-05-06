@@ -62,8 +62,7 @@
     "absProcedure.hasApplicationFees"       : "Are there application fees?",
     "absProcedure.duration"                 : "How long does the application process take:",
     "absProcedure.relevantMeasures"         : "Relevant ABS measure(s):",
-    "absProcedure.keywords"                 : "Keywords"
-    "absPermit.relevantInformation"         : "Additional information",
+    "absProcedure.keywords"                 : "Keywords",
     
     "absNationalModelContractualClause.uniqueId":"UID",
     "absNationalModelContractualClause.government":"Country",
