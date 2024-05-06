@@ -69,5 +69,15 @@ export const downloadSchemas = {
         "cbdSubjects"     : fieldsT["capacityBuildingInitiative.cbdSubjects"],
         "cpbThematicAreas": fieldsT["capacityBuildingInitiative.cpbThematicAreas"],
         "publishedOn"     : fieldsT["capacityBuildingInitiative.publishedOn"]
-	}
+	},
+
+  "database":{
+    "uniqueId": fieldsT["database.uniqueId"],
+    "government": fieldsT["database.government"],
+    "title": fieldsT["database.title"],
+    "description": fieldsT["database.description"],
+    "websites": fieldsT["database.websites"],
+    "relevantInformation": fieldsT["database.relevantInformation"],
+    "relevantDocuments": fieldsT["database.relevantDocuments"]
+  }
 }
