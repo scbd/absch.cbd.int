@@ -1,73 +1,64 @@
 <template>
-    <div id="Record" class="record panel panel-default" style="margin-top:20px;">
-        <div id="Record" class="record panel panel-default">
-            <div class="record-body panel-body bg-white" v-if="document">              
-                <div class="panel panel-info">
-                    <div class="panel-heading">                 
-                        <legend>{{ t("organization") }}  </legend> 
-                    </div>
-                    <div class="panel-body">
-                        <div v-if="document.organization">                      
-                            <div class="km-value">                               
-                                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html></ng>   
-                            </div>
-                        </div>                    
+    <div id="Record" class="record " >     
+        <div class="record-body bg-white" v-if="document"> 
+            <legend>{{ t("organization") }}  </legend> 
 
-                        <div v-if="document.governments">
-                            <label>{{ t("government") }} </label>                         
-                            <div class="km-value">                    
-                                <div  v-for="government in document.governments" >                    
-                                    <km-term :value="government" :locale="locale"></km-term>                
-                                </div>
-                            </div>                       
-                        </div>  
-
-                        <div v-if="document.description">                        
-                             <label>{{ t("description") }}</label>                           
-                            <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>    
-                        </div>                     
-
-                        <div v-if="document.descriptionNative">
-                            <label>{{ t("descriptionNative") }}</label>
-                            <div class="km-value">   
-                            {{ document.descriptionNative }}                            
-                            </div>   
-                        </div>  
-
-                        <div v-if="document.websites">
-                            <label>{{ t("websites") }}</label>
-                            <div class="km-value">   
-                                <ng v-vue-ng:km-link-list v-model:ng-model="document.websites" ></ng>                          
-                            </div>   
-                                                 
-                        </div>  
-
-                        <div v-if="document.videos">
-                            <label>{{ t("videos") }}</label>
-                            <div class="km-value">   
-                                <ng v-vue-ng:km-link-list v-model:ng-model="document.videos" ></ng>                           
-                            </div>         
-                        </div>  
-
-                        <div v-if="document.documents">
-                            <label> {{ t("documents") }}</label>
-                            <div class="km-value">   
-                                <ng v-vue-ng:km-link-list v-model:ng-model="document.documents" ></ng>                              
-                            </div>  
-                        </div>      
-                        
-                        <div v-if="document.images">
-                            <label> {{ t("images") }}</label>
-                            <div class="km-value">   
-                                <ng v-vue-ng:km-link-list v-model:ng-model="document.images" ></ng>                              
-                            </div>  
-                        </div>   
-                        
-                    </div>
+            <div v-if="document.organization">                      
+                <div class="km-value">                               
+                    <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html></ng>   
                 </div>
-            </div>   
-        </div>
+            </div>                    
 
+            <div v-if="document.governments">
+                <label>{{ t("government") }} </label>                         
+                <div class="km-value">                    
+                    <div  v-for="government in document.governments" >                    
+                        <km-term :value="government" :locale="locale"></km-term>                
+                    </div>
+                </div>                       
+            </div>  
+
+            <div v-if="document.description">                        
+                    <label>{{ t("description") }}</label>                           
+                <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>    
+            </div>                     
+
+            <div v-if="document.descriptionNative">
+                <label>{{ t("descriptionNative") }}</label>
+                <div class="km-value">   
+                {{ document.descriptionNative }}                            
+                </div>   
+            </div>  
+
+            <div v-if="document.websites">
+                <label>{{ t("websites") }}</label>
+                <div class="km-value">   
+                    <ng v-vue-ng:km-link-list v-model:ng-model="document.websites" ></ng>                          
+                </div>   
+                                        
+            </div>  
+
+            <div v-if="document.videos">
+                <label>{{ t("videos") }}</label>
+                <div class="km-value">   
+                    <ng v-vue-ng:km-link-list v-model:ng-model="document.videos" ></ng>                           
+                </div>         
+            </div>  
+
+            <div v-if="document.documents">
+                <label> {{ t("documents") }}</label>
+                <div class="km-value">   
+                    <ng v-vue-ng:km-link-list v-model:ng-model="document.documents" ></ng>                              
+                </div>  
+            </div>      
+            
+            <div v-if="document.images">
+                <label> {{ t("images") }}</label>
+                <div class="km-value">   
+                    <ng v-vue-ng:km-link-list v-model:ng-model="document.images" ></ng>                              
+                </div>  
+            </div>   
+        </div>  
     </div>
 </template>
 <script setup>
