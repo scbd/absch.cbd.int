@@ -50,29 +50,7 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', '$rootSco
                         const type = "chm-search-result"
                         return {type, query}
                     }));
-
-                    provide('userStatus', safeDelegate($scope, ()=>{
-                        if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-                            var signInEvent = $scope.$on('signIn', function (evt, data) {
-                                signInEvent();
-                            });
-                            $('#loginDialog').on('hidden.bs.modal', function () {
-                                signInEvent();
-                                $('.modal-backdrop').removeClass('multi-modal')
-                            });
-                            $('#loginDialog').on('shown.bs.modal', function () {
-                                $('.modal-backdrop').addClass('multi-modal')
-                            });
-                            $( '#loginDialog' ).modal( "show" );
-                            return false;
-                        } 
-                        else {
-                            // $scope.isUserSignedIn = true;
-                            return true;
-                        }
-                    }));   
-                }
-                  
+                }               
 
                 //$scope.isUserSignedIn = false;
             //    if(!$scope.viewType)

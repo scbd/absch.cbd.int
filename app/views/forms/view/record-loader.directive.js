@@ -1,5 +1,7 @@
 ﻿import app from '~/app';
 import _ from 'lodash';
+import { provide } from 'vue'; 
+import { safeDelegate } from '~/services/common';
 import template from 'text!./record-loader.directive.html';
 import '~/components/scbd-angularjs-services/main';
 import 'ngSmoothScroll';
@@ -87,27 +89,19 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					}
 
 					$scope.shareVueComponent = {
-						components:{shareRecord}
+						components:{shareRecord},
+						 setup:  shareRecordsFunctions
 					}
-
-					$scope.getQuery = function () {
-						let recordKey = $filter("uniqueID")($scope.internalDocument.info);
-						const type = "chm-document";
-						return {type, recordKey}
+	
+					function shareRecordsFunctions () {
+	
+						provide('getQuery', safeDelegate($scope, ()=>{
+							let recordKey = $filter("uniqueID")($scope.internalDocument.info);
+							const type = "chm-document";
+							return {type, recordKey}
+						}));
 					}
-
-					$scope.userStatus = function () {
-						if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-						var signIn = $scope.$on('signIn', function (evt, data) {
-							signIn();
-						});
-						$('#loginDialog').modal("show");
-						return false;
-						} else {
-						return true;
-						}
-					}
-
+					
 					$scope.getUserCountry = function (id) {
                         var term = {};
                         term.identifier = id

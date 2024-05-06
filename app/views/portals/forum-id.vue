@@ -169,7 +169,7 @@ export default {
   },
   computed: {
     portalId() { return this.$route.params.portalId; },
-    loggedIn() { return this.$auth.loggedIn; },
+    loggedIn() { return this.$auth.user()?.isAuthenticated; },
     isOpen()   { return this.forum?.isOpen; },
     hasHelp()  { return !!this.helpArticle; },
     showHelp: { 
@@ -192,9 +192,8 @@ export default {
   },
 
   async created() {
-
-    this.forumsApi = new ForumsApi();
-    this.articleApi = new ArticlesApi();
+    this.forumsApi = new ForumsApi({tokenReader: ()=>this.$auth.token()});
+    this.articleApi = new ArticlesApi({tokenReader: ()=>this.$auth.token()});
 
     await this.load();
 
