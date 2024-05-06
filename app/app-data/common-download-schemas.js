@@ -42,18 +42,26 @@ export const downloadSchemas = {
     },
 
     "resource":{
-        "uniqueId": fieldsT["resource.uniqueId"],
-        "title": fieldsT["resource.title"],
-        "resourceTypes": fieldsT["resource.resourceTypes"],
-        "authors": fieldsT["resource.authors"],
-        "publisher": fieldsT["resource.publisher"],
-        "publicationDate": fieldsT["resource.publicationDate"],
-        "cbdSubjects": fieldsT["resource.cbdSubjects"],
-        "biosafetySubjects": fieldsT["resource.biosafetySubjects"],
+        "uniqueId"                  : fieldsT["resource.uniqueId"],
+        "title"                     : fieldsT["resource.title"],
+        "resourceTypes"             : fieldsT["resource.resourceTypes"],
+        "authors"                   : fieldsT["resource.authors"],
+        "publisher"                 : fieldsT["resource.publisher"],
+        "publicationDate"           : fieldsT["resource.publicationDate"],
+        "source"                    : fieldsT["resource.source"],
+        "rights"                    : fieldsT["resource.rights"],
+        "resourceLinks"             : fieldsT["resource.resourceLinks"],
+        "covers"                    : fieldsT["resource.covers"],
+        "summary"                   : fieldsT["resource.summary"],
+        "countryRegions"            : fieldsT["resource.countryRegions"],
+        "aichiTargets"              : fieldsT["resource.aichiTargets"],
+        "nagoyaKeyAreas"            : fieldsT["resource.nagoyaKeyAreas"],
+        "cbdSubjects"               : fieldsT["resource.cbdSubjects"],
+        "biosafetySubjects"         : fieldsT["resource.biosafetySubjects"],
         "biosafetyModifiedOrganisms": fieldsT["resource.biosafetyModifiedOrganisms"],
-        "biosafetyOrganisms": fieldsT["resource.biosafetyOrganisms"],
-        "biosafetyGenes": fieldsT["resource.biosafetyGenes"],
-        "publishedOn": fieldsT["resource.publishedOn"]
+        "biosafetyOrganisms"        : fieldsT["resource.biosafetyOrganisms"],
+        "biosafetyGenes"            : fieldsT["resource.biosafetyGenes"],
+        "publishedOn"               : fieldsT["resource.publishedOn"]
     },
 
     "capacityBuildingInitiative":{
