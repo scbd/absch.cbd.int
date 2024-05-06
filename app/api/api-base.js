@@ -140,7 +140,7 @@ export function stringifyUrlParams(params){
 
 //ToDo: can we remove this ?
 export async function defaultTokenReader() {
-  const auth = useAuth();
-  const userToken = await auth.token();
-  return userToken;
+  // const auth = useAuth();
+  // const userToken = await auth.token();
+  // return userToken;
 }
