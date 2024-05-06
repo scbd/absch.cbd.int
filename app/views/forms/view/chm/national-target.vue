@@ -43,7 +43,7 @@
 
             <section>
                 <div  v-if="document.aichiTargets || document.otherAichiTargets || document.noOtherAichiTargetsDescription" >              
-                    <legend>{{ t("relevanceOfNationalTargetsToAichiTargets") }} </legend>
+                    <legend>{{ t("relevanceOfToAichiTargets") }} </legend>
                 
                     <div v-if="document.aichiTargets" >  
                         <label v-if="document.isAichiTarget" >{{ t("aichiTarget") }}</label>

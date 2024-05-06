@@ -4,7 +4,7 @@
     "levelOfApplication": "Level of application",
     "jurisdiction": "Jurisdiction",
     "detailsOfLevel":"Details on the level of application",
-    "relevanceOfNationalTargetsToAichiTargets":"Relevance of National Targets to Aichi Targets", 
+    "relevanceOfToAichiTargets":"Relevance of National Targets to Aichi Targets", 
     "aichiTarget": "Aichi Target",
     "aichiTargetComponents": "Aichi Target components",
     "SubAichiTargets": "Sub-Aichi Targets",
