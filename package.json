@@ -22,7 +22,7 @@
     "lodash-es": "^4.17.21",
     "mime": "1.4.1",
     "path-to-regexp": "^6.2.1",
-    "superagent": "5.0.8"
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
@@ -45,7 +45,6 @@
     "rollup-plugin-vue": "6.0.0",
     "simple-git": "^2.44.0",
     "strip-bom": "^5.0.0",
-    "superagent": "5.0.8",
     "touch": "^3.1.0",
     "upath": "^2.0.1",
     "vue": "3.4.19"
