@@ -1,7 +1,7 @@
 <template>
   <div id="shareRecord">
     <a id="shareSearchDomId" rel="noopener" href="#" class="share-button" @click="openModel()">
-      <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ $t("share") }} 
+      <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ t("share") }} 
     </a>
     <div class="modal fade" ref="shareModal" data-backdrop="static"  tabindex="-1" aria-hidden="true" id="share-modal">      
       <div class="modal-dialog modal-dialog-centered"  role="document">
@@ -19,21 +19,21 @@
               <div class="row">
                 <div class="col-12">
                   <a href="#" class="icon share-link" v-bind:class="{ selected: sharedData.type == 'link' }" @click="loadTabData('link')" :disabled="loading">
-                    <div class="tooltip">{{ $t("link") }}</div>
+                    <div class="tooltip">{{ t("link") }}</div>
                     <span><i class="bi bi-link"></i></span>
                     <br/>
-                    <span class="button-text">{{ $t("link") }}</span>
+                    <span class="button-text">{{ t("link") }}</span>
                   </a>
                   <a href="#" class="icon embed" v-bind:class="{selected: sharedData.type == 'embed'}" @click="loadTabData('embed')" :disabled="loading">
-                    <div class="tooltip">{{ $t("embed") }}</div>
+                    <div class="tooltip">{{ t("embed") }}</div>
                     <span><i class="bi bi-code-slash"></i></span><br/>
-                    <span class="button-text">{{ $t("embed") }}</span>
+                    <span class="button-text">{{ t("embed") }}</span>
                   </a>
                   <a href="#" class="icon email" v-bind:class="{
                       selected: sharedData.type == 'email'}" @click="loadTabData('email')" :disabled="loading">
-                    <div class="tooltip">{{ $t("email") }}</div>
+                    <div class="tooltip">{{ t("email") }}</div>
                     <span><i class="bi bi-envelope"></i></span><br/>
-                    <span class="button-text">{{ $t("email") }}</span>
+                    <span class="button-text">{{ t("email") }}</span>
                   </a>
                 </div>
               </div>
@@ -58,7 +58,7 @@
                   <div v-if="loading" class="alert alert-info">
                     <div class="text-center">
                         <div class="spinner-border" role="status" aria-hidden="true"></div>
-                        <strong> {{ $t("processing") }}...</strong>
+                        <strong> {{ t("processing") }}...</strong>
                     </div>                   
                   </div>
                   <div v-if="error" class="alert alert-danger d-flex align-items-center" role="alert">
@@ -79,8 +79,8 @@
                         v-model="sharedData[sharedData.type].link" readonly disabled />                            
                     </p>
                     <button class="btn btn-primary float-right" @click="copy('shareLink')"
-                      data-bs-toggle="tooltip" data-bs-placement="top" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')">
-                      {{t('Copy')}}
+                      data-bs-toggle="tooltip" data-bs-placement="top" :title="t('copyToClipboard')" :data-original-title="t('copyToClipboard')">
+                      {{t('copy')}}
                     </button>
                   </div>
                   <button class="btn btn-primary btn-sm float-end" v-if="!sharedData[sharedData.type].link" @click="generateSearchResultLink()" 
@@ -104,7 +104,7 @@
                        <label for="inputPassword2">{{t('emails')}}</label>
                        <input type="email" class="form-control"
                         multiple @change="onEmailChange"
-                        v-model="sharedData[sharedData.type].emails" :placeholder="$t('emails')"/> 
+                        v-model="sharedData[sharedData.type].emails" :placeholder="t('emails')"/> 
                         <div style="font-size: small;color: black;">{{t('emailInstructions')}}</div>                     
                     </div>
                     <div class="col-12">
@@ -126,7 +126,7 @@
                     <div class="col-12">
                       <label for="inputPassword2">{{t('domain')}}</label>
                       <input v-model="sharedData[sharedData.type].domain"
-                        type="url" :placeholder="$t('urlEg')" class="form-control float-right" @change="onDomainChange" />
+                        type="url" :placeholder="t('urlEg')" class="form-control float-right" @change="onDomainChange" />
                     </div>
                     <div class="col-12">
                       <!-- || !isValidDomain -->
@@ -149,8 +149,8 @@
                         <div class="input-group mb-3">                            
                             <textarea class="form-control highlight embed-code" id="embedCode" aria-label="embed code" v-model="sharedData[sharedData.type].code" readonly disabled>                              
                             </textarea>
-                            <button class="input-group-text" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')" 
-                            data-bs-toggle="tooltip" data-bs-placement="top"  @click="copy('embedCode')">{{t('Copy')}}</button>                            
+                            <button class="input-group-text" :title="t('copyToClipboard')" :data-original-title="t('copyToClipboard')" 
+                            data-bs-toggle="tooltip" data-bs-placement="top"  @click="copy('embedCode')">{{t('copy')}}</button>                            
                         </div>
                     </div>
                 </div>
@@ -180,23 +180,20 @@
 </template>
 
 <script setup>
-  import { onMounted, ref, shallowRef, inject } from 'vue';
+  import { onMounted, ref, shallowRef, inject, computed } from 'vue';
   import DocumentShareApi from "~/api/document-share";
   import SubscriptionsApi from "~/api/subscriptions";
   import { Modal, Toast } from "bootstrap";
-  import { useRealm } from '../../services/composables/realm.js';
+  import { useRealm } from '~/services/composables/realm.js';
   import { useI18n } from 'vue-i18n';
-  import messages from '../../app-text/components/common/share-record.json';
-  import { getRecaptchaToken, resetRecaptcha } from '../../services/reCaptcha'
+  import messages from '~/app-text/components/common/share-record.json';
+  import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
   import { useAuth } from '@scbd/angular-vue/src/index.js';
   const auth = useAuth();
   const getQuery = inject('getQuery');
-  const userStatus = inject('userStatus');
   let modal = null;
   let toast = null;
-  let authToken = null; // ToDo ??
   const loading = ref(false);
-  let isValidEmail = true; // ToDo ?
   let isValidDomain = true;
   const sharedData = ref({
     link: {},
@@ -206,23 +203,18 @@
     type: "link"
   });
 
-  let isUserSignedIn = ref(false);
+
   let error = ref(null);
-  let documentShareApi = null; // ?
-  let subscriptionsApi = null; // ?
-  let shareModal = shallowRef(null); // use shallowRef
+  let documentShareApi = null;
+  let subscriptionsApi = null;
+  let shareModal = shallowRef(null);
   let clipboardToast = shallowRef(null);
   const { t, locale } = useI18n({ messages });
   const realm = useRealm();
-
+  const isUserSignedIn = computed(()=> auth.user()?.isAuthenticated);
   onMounted(async () => {  
-      authToken = await auth.token();
-      if (authToken) {
-          isUserSignedIn.value = true;
-          // this authtoken is passed as tokenreader to api-base
-          documentShareApi = new DocumentShareApi(authToken);
-          subscriptionsApi = new SubscriptionsApi(authToken);
-      }
+      documentShareApi = new DocumentShareApi({tokenReader:()=>auth.token()});
+      subscriptionsApi = new SubscriptionsApi({tokenReader:()=>auth.token()});
       modal = new Modal(shareModal.value);
       toast = new Toast(clipboardToast.value);
   });
@@ -231,8 +223,8 @@
     if (!modal._isShown)
         modal.show('static');
 
-    if (sharedData.value.type != 'link' && !authToken)
-        userStatus();
+    if (sharedData.value.type != 'link' && !isUserSignedIn.value)
+      auth.login();
     else
       loadTabData(sharedData.value.type || 'link');
 
@@ -252,9 +244,9 @@ const loadTabData = async (type) => {
     return sharedData.value[type].link = `${realm.baseURL}/${locale.value}/database/${sharedData.value[type].recordKey}`;
   }
 
-  if (!authToken && sharedData.value.type != 'link' &&
+  if (!isUserSignedIn.value && sharedData.value.type != 'link' &&
     (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile")) {
-      userStatus();
+      auth.login();
     return;
   }
 
@@ -444,7 +436,7 @@ const onEmailChange = () => {
 };
 
 const signIn = () => {
-  userStatus();
+  auth.login();
 };
 
 const getShareDocumentData = () => {
@@ -475,11 +467,11 @@ const getShareDocumentData = () => {
 const getSearchQueryData = () => {
   const { filters, subFilters } = sharedData.value[sharedData.value.type].searchQuery || {};
   const data = {
-    filters: Object.keys(filters).length == 0 ? undefined : filters,
+    filters: filters && Object.keys(filters).length > 0 ? filters  : undefined,
     isSharedQuery: true,
     queryTitle: `Share query : ${Math.floor((1 + Math.random()) * 0x10000).toString(16)}`,
     realm: realm.value,
-    subFilters: Object.keys(subFilters).length == 0 ? undefined : subFilters
+    subFilters: subFilters && Object.keys(subFilters).length > 0 ? subFilters : undefined
   };
 
   return data;
