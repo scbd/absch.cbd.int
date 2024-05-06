@@ -65,9 +65,10 @@
     import './filters';
     import { loadKbCategories, getUrl, getRealmArticleTag  } from '../../services/composables/articles.js';
     import { useRealm } from '../../services/composables/realm.js';
-    import {  useRoute } from "@scbd/angular-vue/src/index.js";
+    import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js"; 
+    const auth = useAuth();
     const { t } = useI18n({ messages });
-    const articlesApi = new ArticlesApi();
+    const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
     const realm = useRealm();
     const route = useRoute();
     const articles = ref({}); 

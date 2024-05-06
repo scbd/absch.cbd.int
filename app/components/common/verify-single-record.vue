@@ -40,11 +40,10 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/common/verify-single-record.json';
     import { useRealm } from '../../services/composables/realm.js';
-    import { useRoute, useRouter } from "@scbd/angular-vue/src/index.js";
+    import { useRoute, useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
     import KmDocumentApi from "~/api/km-document";
     import { Modal } from "bootstrap";
     import LoadingModal  from '~/components/common/loading-modal.vue';
-    import { useAuth } from '@scbd/angular-vue/src/index.js';
     const auth = useAuth();
     const { t } = useI18n({ messages });
     const realm = useRealm();
