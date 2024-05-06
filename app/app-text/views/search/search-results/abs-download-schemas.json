@@ -62,5 +62,15 @@
     "absProcedure.hasApplicationFees"       : "Are there application fees?",
     "absProcedure.duration"                 : "How long does the application process take:",
     "absProcedure.relevantMeasures"         : "Relevant ABS measure(s):",
-    "absProcedure.keywords"                 : "Keywords"
+    "absProcedure.keywords"                 : "Keywords",
+    
+    "absNationalModelContractualClause.uniqueId":"UID",
+    "absNationalModelContractualClause.government":"Country",
+    "absNationalModelContractualClause.title":"Title",
+    "absNationalModelContractualClause.description":"Summary or abstract",
+    "absNationalModelContractualClause.jurisdiction":"Area of jurisdiction:",
+    "absNationalModelContractualClause.relevantMeasures":"Relevant ABS Measure(s):",
+    "absNationalModelContractualClause.keywords":"Please select the relevant keywords:",
+    "absNationalModelContractualClause.thematicAreas":"Thematic area(s):",
+    "absNationalModelContractualClause.relevantInformation":"Link to the resource(s)"
 }
