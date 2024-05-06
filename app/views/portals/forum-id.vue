@@ -4,7 +4,8 @@
     <h1 v-if="!article && forum">{{ lstring(forum.title) }}</h1>
 
     <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true"
-      @load="onArticleLoad($event)" :admin-tags="articleAdminTags">
+      @onArticleLoad="loadArticle($event)" :admin-tags="articleAdminTags">
+      <!-- ToDo: in vue3 will remove $event -->
       <template #article-empty>&nbsp;</template>
     </cbd-article>
 
@@ -183,7 +184,7 @@ export default {
   methods: {
     lstring,
     getThreadUrl,
-    onArticleLoad,
+    loadArticle,
     refresh:            pending(refresh, 'loading'),
     load:               pending(load, 'loading'),
     toggleSubscription: pending(toggleSubscription, 'subscribing'),
@@ -281,7 +282,7 @@ function joinPath(...parts) {
   return parts.map(o=>o.replace(/(^\/+|\/+$)/g, '')).join('/');
 }
 
-function onArticleLoad(article) {
+function loadArticle(article) {
   
   this.article = article;
 
