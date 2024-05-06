@@ -15,8 +15,10 @@
     import { ref, onMounted } from 'vue';
     import thesaurus from '~/api/thesaurus.js'
     import { lstring } from '~/services/filters/lstring.js';
+    import { useAuth } from '@scbd/angular-vue/src/index.js';
+    const auth = useAuth();
 
-    const thesaurusApi = new thesaurus();
+    const thesaurusApi = new thesaurus({tokenReader:()=>auth.token()});
     const term = ref();
     const error= ref()
 
