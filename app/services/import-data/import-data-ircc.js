@@ -1,5 +1,4 @@
 import { ImportDataBase } from "./import-data-base";
-import hash from "object-hash";
 
 export class ImportDataIRCC extends ImportDataBase {
   fields = {
@@ -441,7 +440,6 @@ export class ImportDataIRCC extends ImportDataBase {
   realm;
   workbook;
   authorityIds = [];
-  contacts = [];
 
   constructor( realm, language, government, workbook, auth) {
       super(auth);
@@ -460,7 +458,7 @@ export class ImportDataIRCC extends ImportDataBase {
           sheet = this.workbook.Sheets[sheetNames[selectedSheetIndex]];
           let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
           let irccs = [];
-        //   let contacts = [];
+          let contacts = [];
     
           // CACHE values
           for(let i=4;i<rows;i++){
@@ -496,7 +494,7 @@ export class ImportDataIRCC extends ImportDataBase {
     
             if (provider.type != "confidential") {
               provider.identifiers = await super.findOrCreateContact(
-                this.contacts,
+                contacts,
                 sheet,
                 language,
                 i,
@@ -507,7 +505,7 @@ export class ImportDataIRCC extends ImportDataBase {
     
             if (pic.type != "confidential") {
               pic.identifiers = await super.findOrCreateContact(
-                this.contacts,
+                contacts,
                 sheet,
                 language,
                 i,
@@ -558,77 +556,67 @@ export class ImportDataIRCC extends ImportDataBase {
             const subjectMatter = super.columnVal(sheet, this.fields.subject_matter + i);
             const thirdPartyTransferCondition = super.columnVal(
               sheet,
-              this.fields.usageDescription + i
-            )} </div>`,
-          },
-
-          entitiesToWhomPICGrantedConfidential:
-            pic.type.toLowerCase() == "confidential",
-          entitiesToWhomPICGranted: pic.identifiers,
-        };
-
-        const subjectMatter = super.columnVal(sheet, this.fields.subject_matter + i);
-        const thirdPartyTransferCondition = super.columnVal(
-          sheet,
-          this.fields.conditions_third_party_transfer + i
-        );
-        if ((subjectMatter || "").trim() != "")
-          irccDocument.subjectMatter = {
-            [language]: `<div>${subjectMatter} </div>`,
-          };
-
-        if ((thirdPartyTransferCondition || "").trim() != "")
-          irccDocument.thirdPartyTransferCondition = {
-            [language]: `<div>${thirdPartyTransferCondition} </div>`,
-          };
-
-        let keywords = super.processKeywords(sheet,this.fields, i, this.keywordsMapping);
-        if (keywords && keywords.processedKeywords.length) {
-          irccDocument.keywords = keywords.processedKeywords;
-          if (keywords.otherKeywords.trim() != "")
-            irccDocument.keywordOther = {
-              [language]: keywords.otherKeywords.trim(),
-            };
-        }
-
-        let dateOfIssuance = super.columnVal(sheet, this.fields.date_of_issuance + i, "w");
-        let dateOfExpiry = super.columnVal(sheet, this.fields.dateOfExpiry + i, "w");
-
-        if (dateOfIssuance && dateOfIssuance.trim() != "")
-          irccDocument.dateOfIssuance = moment(dateOfIssuance).format(
-            "YYYY-MM-DD"
-          );
-
-        if (dateOfExpiry && dateOfExpiry.trim() != "")
-          irccDocument.dateOfExpiry = moment(dateOfExpiry).format("YYYY-MM-DD");
-
-        irccDocument.specimens = super.getELinkData(sheet, this.fields.specimens + i);
-        irccDocument.taxonomies = super.getELinkData(sheet, this.fields.taxonomies + i);
-
-        irccs.push(irccDocument);
-        console.log(
-          `Finish reading row ${i}, title : ${irccDocument.title[language]}`
-        );
-      }
-        return irccs
-      } catch (error) {
-        throw error;
-      }  
+              this.fields.conditions_third_party_transfer + i
+            );
+            if ((subjectMatter || "").trim() != "")
+              irccDocument.subjectMatter = {
+                [language]: `<div>${subjectMatter} </div>`,
+              };
+    
+            if ((thirdPartyTransferCondition || "").trim() != "")
+              irccDocument.thirdPartyTransferCondition = {
+                [language]: `<div>${thirdPartyTransferCondition} </div>`,
+              };
+    
+            let keywords = super.processKeywords(sheet,this.fields, i, this.keywordsMapping);
+            if (keywords && keywords.processedKeywords.length) {
+              irccDocument.keywords = keywords.processedKeywords;
+              if (keywords.otherKeywords.trim() != "")
+                irccDocument.keywordOther = {
+                  [language]: keywords.otherKeywords.trim(),
+                };
+            }
+    
+            let dateOfIssuance = super.columnVal(sheet, this.fields.date_of_issuance + i, "w");
+            let dateOfExpiry = super.columnVal(sheet, this.fields.dateOfExpiry + i, "w");
+    
+            if (dateOfIssuance && dateOfIssuance.trim() != "")
+              irccDocument.dateOfIssuance = moment(dateOfIssuance).format(
+                "YYYY-MM-DD"
+              );
+    
+            if (dateOfExpiry && dateOfExpiry.trim() != "")
+              irccDocument.dateOfExpiry = moment(dateOfExpiry).format("YYYY-MM-DD");
+    
+            irccDocument.specimens = super.getELinkData(sheet, this.fields.specimens + i);
+            irccDocument.taxonomies = super.getELinkData(sheet, this.fields.taxonomies + i);
+    
+            irccs.push(irccDocument);
+            console.log(
+              `Finish reading row ${i}, title : ${irccDocument.title[language]}`
+            );
+          }
+          resolve(irccs);
+          } catch (error) {
+            reject(error)
+          }
+      });
   }
 
  async cacheApiCalls() {
     const uniqueAuthorityIds = Array.from(new Set(this.authorityIds.filter(Boolean)));
   
     const apiCalls = uniqueAuthorityIds.map(async (uid) => {
+      //API CALL
       const uniqueId = uid.trim()
         .match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i);
-        console.log("UNIQUEID", uniqueId, uniqueId[4]);
       const document = this.kmDocumentApi.paramDocuments(uniqueId[4]);
       return document;
     });
   
     const results = await Promise.all(apiCalls);
   
+    // Assuming kmDocumentApi.paramDocuments returns an object, you can then update cache.fields.C
     results.forEach((document, index) => {
       const uniqueId = uniqueAuthorityIds[index].trim()
         .match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i);
@@ -637,4 +625,6 @@ export class ImportDataIRCC extends ImportDataBase {
   
     return this.cache;
   }
+  
+
 }
