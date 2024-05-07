@@ -1,5 +1,25 @@
 <template>
     <section>  
+        <div v-if="documentText|| documentLinks">
+            <legend>{{ t("relevantDocAndInfo") }}</legend>
+
+            <div v-if="documentText">
+                <slot name="text">
+                    <label>{{ t("relevantInfo") }} </label>  
+                 </slot> 
+                <ng v-vue-ng:km-value-ml  :value="documentText" :locales="locale" html ></ng>  
+            </div>
+
+            <div v-if="documentLinks">  
+                <slot name="link">
+                    <label>{{ t("relevantWebsites") }} </label> 
+                 </slot> 
+                <div class="km-value" compare-val>                 
+                    <ng v-vue-ng:km-link-list v-model:ng-model="links"  ></ng>                    
+                </div>
+            </div>
+        </div>
+  
         <div v-if="relevantInfos||relevantDocs">
             <div v-if="relevantInfos">
                 <slot name="info">
@@ -32,12 +52,15 @@
 
     const props = defineProps({     
         locale           : {type:String},
-        relevantInfos    : {type:Array},
-        relevantDocs     : {type:Array}
+        documentText     : {type:String, require:false},
+        documentLinks    : {type:Array, require:false},
+        relevantInfos    : {type:Array, require:false},
+        relevantDocs     : {type:Array, require:false}
     })
 
     //props cannot used on v-model，so use computed property for km-link-list
     const docs = computed(()=>props.relevantDocs);
+    const links = computed(()=>props.documentLinks);
    
 </script>
 

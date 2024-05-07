@@ -2,8 +2,6 @@
     <div id="Record" class="record ">
         <div class="record-body bg-white" v-if="document"> 
 
-            <h2>{{ lstring(document.title, locale) }}</h2>
-       
            <section>
                 <legend>{{ t("generalInformation") }} </legend> 
                 <div v-if="document.government">
@@ -11,7 +9,12 @@
                     <div class="km-value">
                         <km-term :value="document.government" :locale="locale"></km-term>   
                     </div>
-                </div>                   
+                </div>   
+                
+                <div v-if="document.title">
+                    <label>{{ t("title") }} </label> 
+                    <ng  v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html></ng>   
+                </div>   
 
                 <div v-if="document.reportType">
                     <label>{{ t("typeOfDocument") }} </label>   
@@ -87,29 +90,13 @@
                     <label>{{ t("to") }} </label>    
                     <ng v-vue-ng:km-value-ml  :value="document.endDate" :locales="locale" html></ng>  
                 </div>
-            </section>
-         
-           <section>
-                <div v-if="document.documentText|| document.documentLinks">
-                    <legend>{{ t("relevantDocAndInfo") }}</legend>
-            
-                    <div v-if="document.documentText">
-                        <label>{{ t("relevantInfo") }} </label>   
-                        <ng v-vue-ng:km-value-ml  :value="document.documentText" :locales="locale" html ></ng>  
-                    </div>
-            
-                    <div v-if="document.documentLinks">
-                        <label>{{ t("relevantWebsites") }} </label> 
-                        <div class="km-value" compare-val>                 
-                            <ng v-vue-ng:km-link-list v-model:ng-model="document.documentLinks"  ></ng>                    
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </section>        
 
-            <view-relevant-information :relevantInfos="document.relevantInformation" :relevantDocs="document.relevantDocuments":locale="locale">
+
+            <view-relevant-information :relevantInfos="document.relevantInformation" :relevantDocs="document.relevantDocuments"
+                                       :documentText="document.documentText" :documentLinks="document.documentLinks"  :locale="locale">
             </view-relevant-information> 
-
+         
         </div>                      
     </div>
 </template>

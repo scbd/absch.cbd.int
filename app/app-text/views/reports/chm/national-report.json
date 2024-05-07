@@ -1,6 +1,7 @@
 {
     "generalInformation": "General information",
     "country": "Country",    
+    "title": "Title", 
     "typeOfDocument": "Type of document",
     "summary":  "Summary",
     "levelOfApplication":  "Level of application",
@@ -11,8 +12,7 @@
     "approvingBody":"Approving body",
     "timePeriod":"Time period",
     "from": "From",
-    "to": "To",
-    "relevantDocAndInfo":"Relevant documents and information",
-    "relevantInfo":"Relevant information",
-    "relevantWebsites":"Relevant websites, links, and files"
+    "to": "To"
+   
+
 }
