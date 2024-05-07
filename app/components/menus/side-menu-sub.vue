@@ -7,13 +7,13 @@
     :target="menu.target"
     @click="toggle($event)" 
     >
-    {{lstring(menu.title)}}
+    {{ lstring(menu.title, $locale) }}
 
     <span v-if="!!menu.target" >
       &nbsp;<i class="fa fa-external-link" aria-hidden="true"></i>
     </span>
   </a>
-    <div v-if="menus.length" ref="subMenu" class="collapse sub-menu">
+    <div v-if="menus.length" ref="subMenuRef" class="collapse sub-menu">
       <ul class="list-unstyled" :class="[`level-${level}`]">
         <side-menu-sub v-for="(subMenu, index) in menus" :key="index" :level="level+1" :menu="subMenu" />
       </ul>
@@ -21,68 +21,54 @@
   </li>
 </template>
 
-<script>
-import bootstrap from 'bootstrap';
+<script setup>
+import { computed, onMounted, ref, watch } from 'vue';
 import { lstring } from '../kb/filters';
+import { useRoute } from "@scbd/angular-vue/src/index.js";
+import bootstrap from 'bootstrap'; // Todo
 
-export default {
-    name: 'SideMenuSub',
-    props: {
-        menu : { type: Object, required: true } ,
-        level : { type: Number, default: 0 },
-    },
-    data() {
-      return { 
-        isExpanded: false
-      }
-    },
-    computed: {
-      hasSubMenu()     { return !!this.menus.length; },
-      selectedBranch() { return this.$route.path.indexOf(`/${this.menu.url}`)===0 },
-      selected()       { return this.$route.path      == `/${this.menu.url}`; },
-      menus()          { return this.menu?.menus || []; },
-    },
-    watch: {
-      isExpanded(on) {
-        const subMenu  = this.$refs.subMenu;
+const route = useRoute().value;
 
-        if(!subMenu) return null;
+const props = defineProps({
+    menu: { type: Object, required: false },
+    level : { type: Number, default: 0 },
+});
 
-        const bsSubMenu = bootstrap.Collapse.getOrCreateInstance(subMenu);
+// const expandMenu = ref(false); // not used
+const isExpanded = ref(false);
+const subMenuRef = ref(null);
 
-        if(on) bsSubMenu.show();
-        else   bsSubMenu.hide();
-      }
-    },
-    methods: {
-      lstring,
-      toggle($event) {
+const menus = computed(() => props.menu?.menus || []);
+const hasSubMenu = computed(() => !!menus.length);
+const selectedBranch = computed(() => route.path.indexOf(`/${props.menu.url}`) === 0);
+const selected = computed(() => route.path === `/${props.menu.url}`); 
 
-        const { hasSubMenu } = this;
+watch(isExpanded, async(on) => { 
+    if (!subMenuRef.value) return; 
+    const bsSubMenu = bootstrap.Collapse.getOrCreateInstance(subMenuRef.value);
+ 
+    if (on) bsSubMenu.show();
+    else bsSubMenu.hide();
+});
+ const toggle = async ($event)   => {  
+    if (!hasSubMenu) return;
 
-        if(!hasSubMenu) return;
+    const { hasContent } = props.menu; // extract the hasContent property from the props.menu
 
-        const { menu, selected } = this;
-        const { hasContent } = menu;
-        let   { isExpanded } = this;
+    isExpanded.value = !isExpanded.value;
 
-        isExpanded = !isExpanded;
+    if (hasContent && !selected)
+        isExpanded.value = true;
 
-        if(hasContent && !selected)
-          isExpanded = true;
-
-        this.isExpanded = isExpanded;
-
-        if(!hasContent)
-          $event.preventDefault();
-      },
-    },
-    mounted() {
-      if(this.selectedBranch) {
-        this.isExpanded = true;
-      }
-    }
+    if (!hasContent)  
+        $event.preventDefault();
 }
+
+onMounted (() => {
+    if (selectedBranch) {
+        isExpanded.value = false;
+    }
+});
 </script>
 
 <style scoped>
