@@ -1,6 +1,8 @@
 <template> 
     <div id="Record" class="record ">
         <div class="record-body bg-white" v-if="document"> 
+
+            <h2>{{ lstring(document.title, locale) }}</h2>
        
            <section>
                 <legend>{{ t("generalInformation") }} </legend> 
@@ -120,6 +122,7 @@
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import messages from '~/app-text/views/reports/chm/national-report.json';
     import { useI18n } from 'vue-i18n';
+    import { lstring } from '~/components/kb/filters';
 
     const { t } = useI18n({ messages });
 
