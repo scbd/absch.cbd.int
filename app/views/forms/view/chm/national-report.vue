@@ -105,22 +105,11 @@
                         </div>
                     </div>
                 </div>
-                         
-                <div v-if="document.relevantInformation||document.relevantDocuments">
-                    <div v-if="document.relevantInformation">
-                        <label>{{ t("additionalInfo") }} </label>   
-                        <ng v-vue-ng:km-value-ml  :value="document.relevantInformation" :locales="locale" html></ng>
-                    </div>
+            </section>
 
-                    <div v-if="document.relevantDocuments">
-                        <label>{{ t("otherRelevantWebsite") }} </label> 
-                        <div class="km-value" compare-val>                   
-                            <ng v-vue-ng:km-link-list v-model:ng-model="document.relevantDocuments" ></ng>                  
-                        </div>
-                    </div> 
-                </div> 
-          
-            </section> 
+            <view-relevant-information :relevantInfos="document.relevantInformation" :relevantDocs="document.relevantDocuments":locale="locale">
+            </view-relevant-information> 
+
         </div>                      
     </div>
 </template>
@@ -130,6 +119,7 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import kmTerm from '~/components/km/KmTerm.vue';
+    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import messages from '~/app-text/views/reports/chm/national-report.json';
     import { useI18n } from 'vue-i18n';
 
