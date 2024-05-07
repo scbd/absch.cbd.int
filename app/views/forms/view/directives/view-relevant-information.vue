@@ -1,6 +1,6 @@
 <template>
     <section>  
-        <div v-if="documentText|| documentLinks">
+        <div v-if="documentText|| documentLinks || relevantInfos || relevantDocs">
             <legend>{{ t("relevantDocAndInfo") }}</legend>
 
             <div v-if="documentText">
@@ -18,9 +18,7 @@
                     <ng v-vue-ng:km-link-list v-model:ng-model="links"  ></ng>                    
                 </div>
             </div>
-        </div>
-  
-        <div v-if="relevantInfos||relevantDocs">
+                   
             <div v-if="relevantInfos">
                 <slot name="info">
                    <label>{{ t("additionalInfo") }} </label>  
