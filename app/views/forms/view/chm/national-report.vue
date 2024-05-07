@@ -29,12 +29,10 @@
                         <km-term :value="document.jurisdiction" :locale="locale" ></km-term>
                     </div>
                 </div>
-
+                
                 <div v-if="document.jurisdictionInfo">
-                    <label>{{ t("additionalInfo") }} </label>
-                    <div class="km-value">
-                        <km-term :value="document.jurisdictionInfo" :locale="locale" ></km-term>
-                    </div>
+                    <label>{{ t("additionalInfo") }} </label>  
+                    <ng  v-vue-ng:km-value-ml  :value="document.jurisdictionInfo" :locales="locale" html></ng> 
                 </div>
             </section> 
            
