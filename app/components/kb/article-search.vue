@@ -56,7 +56,7 @@
       import { useI18n } from 'vue-i18n';
       import messages from '../../app-text/components/kb.json';
       import { useRealm } from '../../services/composables/realm.js';
-      import {  useRoute } from "@scbd/angular-vue/src/index.js";
+      import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js";
       import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
       import paginate from '../common/pagination.vue';
       import ArticlesApi from './article-api';
@@ -67,7 +67,8 @@
       const route = useRoute();
       const { t, locale } = useI18n({ messages });
       const realm = useRealm();
-      const articlesApi = new ArticlesApi();
+      const auth = useAuth();
+      const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
       const articles = ref([]);
       const loading = ref(true);
       const pageNumber = ref(1);

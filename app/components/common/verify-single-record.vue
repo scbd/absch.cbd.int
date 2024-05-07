@@ -40,15 +40,16 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/common/verify-single-record.json';
     import { useRealm } from '../../services/composables/realm.js';
-    import { useRoute, useRouter } from "@scbd/angular-vue/src/index.js";
+    import { useRoute, useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
     import KmDocumentApi from "~/api/km-document";
     import { Modal } from "bootstrap";
     import LoadingModal  from '~/components/common/loading-modal.vue';
+    const auth = useAuth();
     const { t } = useI18n({ messages });
     const realm = useRealm();
     const route = useRoute().value;
     const router = useRouter();
-    const kmDocumentApi = new KmDocumentApi();
+    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
 
     let modal = null;
     const schemaTitle = ref('');
