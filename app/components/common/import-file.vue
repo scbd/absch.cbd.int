@@ -116,7 +116,8 @@
 import { ref, onMounted, shallowRef, computed } from 'vue';
 import { useRealm } from '../../services/composables/realm.js';
 import { useUser, useAuth } from '@scbd/angular-vue/src/index.js';
-import { fileParser, readSheet } from "../../services/file-handler"
+import { ImportDataBase } from "../../services/import-data/import-data-base"
+import { ImportDataIRCC } from "../../services/import-data/import-data-ircc"
 import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
 import kmTerm from '~/components/km/KmTerm.vue';
 import { useI18n } from 'vue-i18n';
@@ -134,6 +135,9 @@ let file = ref(null);
 const xlsxWorkbook = ref(null);
 const user = useUser()
 const auth = useAuth()
+const importDataBase = new ImportDataBase(auth);
+let importDataIRCC;
+
 
 const userGovernment = computed(()=>{
     return {
@@ -155,12 +159,15 @@ const handleFileChange = async (event) => {
     error.value = null
     multipleImportSheets.value = [];
     try{
-        const {sheetNames, workbook} = await readSheet(file.value)
+        // const {sheetNames, workbook} = await readSheet(file.value)
+        const {sheetNames, workbook} = await importDataBase.readSheet(file.value);
         xlsxWorkbook.value = workbook;
+        importDataIRCC = new ImportDataIRCC(realm.value, selectedLanguage.value, user.value.government, workbook, auth);
         if(sheetNames.length > 1){
             multipleImportSheets.value = sheetNames;
         }else{
-            parsedFile.value = await fileParser(realm.value, selectedLanguage, user.value.government, xlsxWorkbook.value,multipleImportSheets.value, 0, auth)
+            parsedFile.value = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
+            // parsedFile.value = await fileParser(realm.value, selectedLanguage, user.value.government, xlsxWorkbook.value,multipleImportSheets.value, 0, auth)
         }
         // parsedFile.value = await fileParser(realm.value, selectedLanguage, user.value.government, file.value, auth)
     }catch(err){
@@ -175,11 +182,13 @@ const handleSelectedSheetChange = async () => {
         if(selectedSheetIndex.value != null){
             isLoading.value = true;
             error.value = null
-            parsedFile.value = await fileParser(realm.value, selectedLanguage, user.value.government,xlsxWorkbook.value,multipleImportSheets.value, selectedSheetIndex.value, auth)
+            parsedFile.value = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
+            // parsedFile.value = await fileParser(realm.value, selectedLanguage, user.value.government,xlsxWorkbook.value,multipleImportSheets.value, selectedSheetIndex.value, auth)
             console.log(parsedFile.value);
         }
     } catch (err) {
         parsedFile.value = [];
+        console.log(err);
         error.value = "ERROR: An error occurred while reading the file."
     }
     isLoading.value = false;
