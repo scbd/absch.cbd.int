@@ -264,8 +264,8 @@
 			</div>
 
 			<div ng-if="document.expertiseLevel">
-				<label>{{::('viewResourceT.expertiseLevel'|$translate)}}</label>			
-				<km-value-ml value="document.expertiseLevel" locales="locale"></km-value-ml>
+				<label>{{::('viewResourceT.expertiseLevel'|$translate)}}</label>
+				<div km-terms ng-model="document.expertiseLevel"></div>			
 			</div>
 
 			<div ng-if="document.gbfTargets">	
@@ -279,7 +279,7 @@
 				</div>
 			</div> 
 			
-			<div ng-if="document.purpose">
+			<!-- <div ng-if="document.purpose">
 				<label>{{::('viewResourceT.purpose'|$translate)}}</label>	
 				<div class="km-value">
 					<div km-terms ng-model="document.purpose">
@@ -341,8 +341,7 @@
 						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
 					</div>	
 				</div>			
-			</div>
- 
+			</div>  -->
 
 		</section>
 		<!-- If CHM, End -->
