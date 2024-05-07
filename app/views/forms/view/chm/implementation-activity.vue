@@ -11,6 +11,14 @@
                     </div>
                 </div>
 
+                <div v-if="document.title">
+                    <label>{{ t("title") }} </label>    
+                    <div class="km-value">
+                       {{ lstring(document.title, locale) }}
+                       <i v-if="document.acronym">{{ lstring(document.acronym , locale) }}</i>
+                    </div>  
+                </div>  
+
                 <div v-if="document.description">
                     <label>{{ t("description") }} </label>
                     <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>                
@@ -19,15 +27,14 @@
 
             <section>
                 <div v-if="document.status">
-                    <legend>{{ t("status") }} </legend>
-                    <ng v-vue-ng:km-value-ml  :value="document.status" :locales="locale" html></ng>                
+                    <legend>{{ t("status") }} </legend>                   
+                    <km-term :value="document.status" :locale="locale"></km-term>                
                 </div> 
             </section>
 
-
             <section>
-                <div v-if="document.jurisdiction||document.jurisdictionInfo">">
-                    <legend>{{ t("levelOfImplementation") }} </legend>> 
+                <div v-if="document.jurisdiction||document.jurisdictionInfo">
+                    <legend>{{ t("levelOfImplementation") }} </legend>
                    
                     <div v-if="document.jurisdiction">                        
                         <div class="km-value">
@@ -35,10 +42,9 @@
                         </div>
                     </div>
 
-
                     <div v-if="document.jurisdictionInfo">     
                         <label>{{ t("detailsOfImplementation") }} </label> 
-                        <ng v-vue-ng:km-value-ml  :value="document.jurisdictionInfo" :locales="locale" ></ng> 
+                        <ng v-vue-ng:km-value-ml  :value="document.jurisdictionInfo" :locales="locale" html></ng> 
                     </div>
                 </div>
             </section>
@@ -50,36 +56,39 @@
                     <div v-if="document.nationalIndicators">  
                         <label>{{ t( "nationalIndicators" ) }} </label>  
                         <div class="km-value">                    
-                            <div  v-for="indicator in document.nationalIndicators" > 
-                                <i v-if="indicator.document.title">  {{lstring(indicator.document.title,locale)}}</i>
-                            </div>
+                            <li  v-for="indicator in document.nationalIndicators" >                                 
+                                <div v-if="indicator.document.title"> 
+                                    {{lstring(indicator.document.title,locale)}}
+                                </div> 
+                            </li>
                         </div>                     
                     </div>
 
 
                     <div v-if="document.nationalTargets"> 
                         <label>{{ t( "nationalTargets" ) }}</label> 
-                        <div class="km-value">                    
-                            <div  v-for="indicator in document.nationalIndicators" >
-                                <i v-if="indicator.document.title">  {{lstring(indicator.document.title,locale)}}</i>
-                            </div>
+                        <div class="km-value">  
+                            <li  v-for="indicator in document.nationalTargets" >                                 
+                                <div v-if="indicator.document.title"> 
+                                    {{lstring(indicator.document.title,locale)}}
+                                </div> 
+                            </li>
                         </div>                     
                     </div>
 
 
                     <div v-if="document.aichiTargets">     
                         <label>{{ t("aichiTargets") }} </label>                       
-                        <div class="km-value">                    
-                            <div  v-for="target in document.aichiTargets" >                               
-                                <i v-if="target.document.title">{{lstring(target.document.title,locale)}}</i>                                
-                            </div>
-                        </div>                     
-                    </div>
-                    
+                        <div class="km-value">  
+                            <li  v-for="indicator in document.aichiTargets" >                                 
+                                <div v-if="target.document.title"> 
+                                    {{lstring(target.document.title,locale)}}
+                                </div> 
+                            </li>
+                        </div>                        
+                    </div>                    
                 </div>
             </section>
-
-
 
             <section>
                 <div v-if="document.partners">
@@ -89,41 +98,10 @@
                     </div>
                 </div>
             </section>              
-                   
-            <section>
-                <div v-if="document.documentText|| document.documentLinks">
-                    <legend>{{ t( "relevantDocAndInfo") }}</legend>
-
-                    <div v-if="document.documentText">
-                        <label>{{ t("relevantInfo") }} </label>   
-                        <ng v-vue-ng:km-value-ml  :value="document.documentText" :locales="locale" html ></ng>  
-                    </div>
-
-                    <div v-if="document.documentLinks">
-                        <label>{{ t("relevantWebLinkFiles") }} </label> 
-                        <div class="km-value" compare-val>                 
-                            <ng v-vue-ng:km-link-list v-model:ng-model="document.documentLinks"  ></ng>                    
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <div v-if="document.relevantInformation||document.relevantDocuments">
-                    <legend>{{ t( "additionalInfo") }}</legend>
-
-                    <div v-if="document.relevantInformation">                      
-                        <ng v-vue-ng:km-value-ml  :value="document.relevantInformation" :locales="locale" html></ng>
-                    </div>
-
-                    <div v-if="document.relevantDocuments">
-                        <label>{{ t("otherWebsites") }} </label> 
-                        <div class="km-value" compare-val>                   
-                            <ng v-vue-ng:km-link-list v-model:ng-model="document.relevantDocuments" ></ng>                  
-                        </div>
-                    </div>  
-                </div>
-            </section> 
+            
+            <view-relevant-information :relevantInfos="document.relevantInformation" :relevantDocs="document.relevantDocuments"
+                :documentText="document.documentText" :documentLinks="document.documentLinks"  :locale="locale">
+            </view-relevant-information>     
        
         </div>
     </div>
@@ -134,7 +112,10 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js' 
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/implementation-activity.json';
+    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
+    import { lstring } from '~/components/kb/filters';
     import { useI18n } from 'vue-i18n';
+
 
     const { t } = useI18n({ messages });
 
