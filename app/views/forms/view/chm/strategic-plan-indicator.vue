@@ -1,15 +1,20 @@
 <template> 
     <div id="Record" class="record ">
        <div class="record-body  bg-white" v-if="document">  
+            <div v-if="document.title">
+                <label>{{ t("title") }} </label> 
+                <ng  v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html></ng>   
+            </div>        
+
            <div v-if="document.aichiTarget">
-                <label>{{ t("aichiBiodiversityTarget") }} </label> 
+                <label>{{ t("aichiTarget") }} </label> 
                 <div class="km-value">
                     <km-term :value="document.aichiTarget" :locale="locale"></km-term>   
                 </div>
             </div>
             
             <div v-if="document.availabilityStatus">
-                <label>{{ t("availabilityOfIndicator") }} </label> 
+                <label>{{ t("availability") }} </label> 
                 <div class="km-value">
                     <km-term :value="document.availabilityStatus" :locale="locale"></km-term>   
                 </div> 
@@ -21,15 +26,15 @@
             </div>                
 
             <div v-if="document.isFromGlobalToNationalIndicator">
-                <label>{{ t("isFromGlobalToNationalIndicator") }} </label>                     
+                <label>{{ t("isFromGlobalToNational") }} </label>                     
                 <ng v-vue-ng:km-value-bool  :value="document.isFromGlobalToNationalIndicator" :locales="locale" html></ng>                     
             </div>
         
             <div v-if="document.isFromNationalToGlobalIndicator">
-                <label>{{ t("isFromNationalToGlobalIndicator") }} </label>                        
+                <label>{{ t("isFromNationalToGlobal") }} </label>                        
                 <ng v-vue-ng:km-value-bool  :value="document.isFromNationalToGlobalIndicator" :locales="locale" html></ng> 
             </div>
-        
+                 
              <div v-if="document.usedInGbo3OrGbo4">
                 <label>{{ t("usedInGBbo3Gbo4") }} </label>                                         
                 <ng v-vue-ng:km-value-bool  :value="document.usedInGbo3OrGbo4" :locales="locale" html></ng> 
@@ -40,7 +45,7 @@
                 <div class="km-value"> 
                     <ng v-vue-ng:km-link-list v-model:ng-model="document.source" ></ng> 
                 </div>
-            </div>            
+            </div>             
        </div>  
    </div>
 </template>
