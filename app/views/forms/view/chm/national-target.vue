@@ -22,7 +22,7 @@
                 </div>                
 
                 <div v-if="document.description">
-                    <label>{{ t("rationaleForTheNationalTarget") }} </label> 
+                    <label>{{ t("rationale") }} </label> 
                     <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>  
                 </div>
             </section>
