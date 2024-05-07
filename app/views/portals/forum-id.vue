@@ -4,7 +4,7 @@
     <h1 v-if="!article && forum">{{ lstring(forum.title) }}</h1>
 
     <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true"
-      @onArticleLoad="loadArticle($event)" :admin-tags="articleAdminTags">
+      @on-article-load="loadArticle($event)" :admin-tags="articleAdminTags">
       <!-- ToDo: in vue3 will remove $event -->
       <template #article-empty>&nbsp;</template>
     </cbd-article>

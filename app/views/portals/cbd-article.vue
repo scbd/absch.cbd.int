@@ -6,8 +6,8 @@
     <div v-if="!loading && article">
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@35.0.0/build/content-style.css">
 
-        <div v-if="article?.coverImage">
-            <img v-bind:src="getSizedImage(article?.coverImage.url, '800x800')">
+        <div v-if="article?.coverImage && !hideCoverImage">
+            <img v-bind:src="coverImage">
         </div>
     
         <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred"
@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import { lstring } from '../../components/kb/filters';
@@ -43,6 +43,14 @@
         showEdit        : { type: Boolean, required: false, default:true },
         adminTags 	    : { type: Array  , required: false, default:[] }
     });
+    
+    const coverImage = computed(()=> { 
+        const url = article.value?.coverImage.url;
+        const size = '800x800';
+        return url && url
+          .replace(/attachments.cbd.int\//, '$&' + size + '/')
+          .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/');
+    })
 
     const loading = ref(false);
     const article = ref(null)
@@ -65,11 +73,7 @@
             loading.value = false;
         }
     })
-    //ToDo: move to common file
-    const getSizedImage = (url, size) => {
-          return url && url
-          .replace(/attachments.cbd.int\//, '$&' + size + '/')
-          .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/');
-      };
+
+
 
 </script>
