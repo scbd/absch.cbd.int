@@ -133,6 +133,11 @@ const multipleImportSheets = ref([]);
 const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
+const user = useUser()
+const auth = useAuth()
+const importDataBase = new ImportDataBase(auth);
+let importDataIRCC;
+
 
 const userGovernment = computed(()=>{
     return {
@@ -168,14 +173,16 @@ const handleFileChange = async (event) => {
     multipleImportSheets.value = [];
     resetFileErrorInParsedFile();
     try{
+        // const {sheetNames, workbook} = await readSheet(file.value)
         const {sheetNames, workbook} = await importDataBase.readSheet(file.value);
         xlsxWorkbook.value = workbook;
-        importDataIRCC = new ImportDataIRCC(realm.value, locale.value, user.value.government, workbook, auth);
+        importDataIRCC = new ImportDataIRCC(realm.value, selectedLanguage.value, user.value.government, workbook, auth);
         if(sheetNames.length > 1){
             multipleImportSheets.value = sheetNames;
             handleSelectedSheetChange();
         }else{
             parsedFile.value = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
+            // parsedFile.value = await fileParser(realm.value, selectedLanguage, user.value.government, xlsxWorkbook.value,multipleImportSheets.value, 0, auth)
         }
     }catch(err){
         parsedFile.value = [];
@@ -214,13 +221,15 @@ const handleSelectedSheetChange = async () => {
     try {
         if(selectedSheetIndex.value != null){
             isLoading.value = true;
-            error.value = null;
-            successMessage.value = null;
+            error.value = null
             parsedFile.value = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
+            // parsedFile.value = await fileParser(realm.value, selectedLanguage, user.value.government,xlsxWorkbook.value,multipleImportSheets.value, selectedSheetIndex.value, auth)
+            console.log(parsedFile.value);
         }
     } catch (err) {
         console.log(err)
         parsedFile.value = [];
+        console.log(err);
         error.value = "ERROR: An error occurred while reading the file."
     }
   } catch (err) {
