@@ -123,7 +123,7 @@
     const country = computed(()=>{
         const term = ref({});
         term.value.identifier=document.value.country;        
-        return term;    
+        return term.value;    
     });
     
     const document = computed(()=>props.documentInfo?.body);   
