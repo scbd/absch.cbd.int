@@ -3,64 +3,72 @@
         <div class="record-body bg-white" v-if="document"> 
             <legend>{{ t("organization") }}  </legend> 
 
-            <div v-if="document.organization">                      
-                <div class="km-value">                               
-                    <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html></ng>   
-                </div>
-            </div>                    
-
-            <div v-if="document.governments">
-                <label>{{ t("government") }} </label>                         
-                <div class="km-value">                    
-                    <div  v-for="government in document.governments" >                    
-                        <km-term :value="government" :locale="locale"></km-term>                
+            <section>
+                <!--TODO:same content as chm project (add image, etc) -->
+                <div v-if="document.organization">                      
+                    <div class="km-value">                               
+                        <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html></ng>   
                     </div>
-                </div>                       
-            </div>  
+                </div> 
+            </section>                   
 
-            <div v-if="document.description">                        
-                    <label>{{ t("description") }}</label>                           
-                <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>    
-            </div>                     
-
-            <div v-if="document.descriptionNative">
-                <label>{{ t("descriptionNative") }}</label>
-                <div class="km-value">   
-                {{ document.descriptionNative }}                            
-                </div>   
-            </div>  
-
-            <div v-if="document.websites">
-                <label>{{ t("websites") }}</label>
-                <div class="km-value">   
-                    <ng v-vue-ng:km-link-list v-model:ng-model="document.websites" ></ng>                          
-                </div>   
-                                        
-            </div>  
-
-            <div v-if="document.videos">
-                <label>{{ t("videos") }}</label>
-                <div class="km-value">   
-                    <ng v-vue-ng:km-link-list v-model:ng-model="document.videos" ></ng>                           
-                </div>         
-            </div>  
-
-            <div v-if="document.documents">
-                <label> {{ t("documents") }}</label>
-                <div class="km-value">   
-                    <ng v-vue-ng:km-link-list v-model:ng-model="document.documents" ></ng>                              
+            <section>
+                <div v-if="document.governments">
+                    <label>{{ t("government") }} </label>                         
+                    <div class="km-value">                    
+                        <div  v-for="government in document.governments" >                    
+                            <km-term :value="government" :locale="locale"></km-term>                
+                        </div>
+                    </div>                       
                 </div>  
-            </div>      
-            
-            <div v-if="document.images">
-                <label> {{ t("images") }}</label>
-                <div class="km-value">   
-                    <ng v-vue-ng:km-link-list v-model:ng-model="document.images" ></ng>                              
+
+                <div v-if="document.description">                        
+                        <label>{{ t("description") }}</label>                           
+                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>    
+                </div>                     
+
+                <div v-if="document.descriptionNative">
+                    <label>{{ t("descriptionNative") }}</label>
+                    <div class="km-value">   
+                    {{ document.descriptionNative }}                            
+                    </div>   
                 </div>  
-            </div>   
+            </section>
+
+            <section>
+                <div v-if="document.websites">
+                    <label>{{ t("websites") }}</label>
+                    <div class="km-value">   
+                        <ng v-vue-ng:km-link-list v-model:ng-model="document.websites" ></ng>                          
+                    </div>   
+                                            
+                </div>  
+
+                <div v-if="document.videos">
+                    <label>{{ t("videos") }}</label>
+                    <div class="km-value">   
+                        <ng v-vue-ng:km-link-list v-model:ng-model="document.videos" ></ng>                           
+                    </div>         
+                </div>  
+
+                <div v-if="document.documents">
+                    <label> {{ t("documents") }}</label>
+                    <div class="km-value">   
+                        <ng v-vue-ng:km-link-list v-model:ng-model="document.documents" ></ng>                              
+                    </div>  
+                </div>      
+                
+                <div v-if="document.images">
+                    <label> {{ t("images") }}</label>
+                    <div class="km-value">   
+                        <ng v-vue-ng:km-link-list v-model:ng-model="document.images" ></ng>                              
+                    </div>  
+                </div>  
+            </section> 
         </div>  
     </div>
 </template>
+
 <script setup>
     import { computed } from 'vue'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
