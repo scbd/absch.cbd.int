@@ -2,7 +2,7 @@
 <div id="Record" class="record panel panel-default">
 
 	<div class="record-body panel-body">
-
+		
 
 		<document-date></document-date> <br>
 		<section>
@@ -91,21 +91,23 @@
 		</section>
 		
 		<section>
-			<legend>{{::('viewResourceT.contentInfo'|$translate)}}</legend>
-			<div ng-if="document.summary">
-				<label>{{::('viewResourceT.summary'|$translate)}}</label>
-				<div compare-val>
-					<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
+			<div ng-if="document.summary || document.countryRegions">
+				<legend>{{::('viewResourceT.contentInfo'|$translate)}}</legend>
+				<div ng-if="document.summary">
+					<label>{{::('viewResourceT.summary'|$translate)}}</label>
+					<div compare-val>
+						<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
+					</div>
 				</div>
-			</div>
-			<div ng-if="document.countryRegions">
-				<label>{{::('viewResourceT.countryRegions'|$translate)}}</label>
-				<div class="km-value" compare-val>
-					<ul class="list">
-						<li ng-repeat="item in document.countryRegions">
-							<span ng-bind="item|term:locale"></span>
-						</li>
-					</ul>
+				<div ng-if="document.countryRegions">
+					<label>{{::('viewResourceT.countryRegions'|$translate)}}</label>
+					<div class="km-value" compare-val>
+						<ul class="list">
+							<li ng-repeat="item in document.countryRegions">
+								<span ng-bind="item|term:locale"></span>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -278,6 +280,71 @@
 					</ul> 		
 				</div>
 			</div> 
+
+			<div ng-if="document.purpose">
+				<label>{{::('viewResourceT.purpose'|$translate)}}</label>	
+				<div class="km-value">
+					<div km-terms ng-model="document.purpose">
+						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
+					</div>
+				</div>			
+			</div>
+
+			<div ng-if="document.fileFormat">
+				<label>{{::('viewResourceT.fileFormat'|$translate)}}</label>			
+				<div class="km-value">
+					<div km-terms ng-model="document.fileFormat"></div>
+				</div>					
+			</div>
+
+			<!--<div ng-if="document.format">
+				<label>{{::('viewResourceT.format'|$translate)}}</label>		          
+				<km-value-ml value="document.format" locales="locale"></km-value-ml>			
+			</div>
+
+			<div ng-if="document.formatDetails">		
+				<label>{{::('viewResourceT.formatDetails'|$translate)}}</label>							
+				<km-value-ml value="document.formatDetails" locales="locale"></km-value-ml>				
+			</div>
+
+
+			<div ng-if="document.authorsInfo">
+				<label>{{::('viewResourceT.authorsInfo'|$translate)}}</label>			
+				<div compare-val>
+					<km-value-ml value="document.authorsInfo" locales="locale"></km-value-ml>
+				</div>
+			</div>             
+		
+			<div ng-if="document.keywords">
+				<label>{{::('viewResourceT.keywords'|$translate)}}</label>					
+				<km-value-ml value="document.keywords" locales="locale"></km-value-ml>				
+			</div>
+
+			<div ng-if="document.resourceAccess">
+				<label>{{::('viewResourceT.resourceAccess'|$translate)}}</label>					
+				<div compare-val>
+					<km-value-ml value="document.resourceAccess" locales="locale"></km-value-ml>
+				</div>
+			</div>	
+
+			<div ng-if="document.languages">
+				<label>{{::('viewResourceT.languages'|$translate)}}</label>					
+				<div class="km-value" compare-val>
+					<div km-terms ng-model="document.languages">
+						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
+					</div>
+				</div>
+			</div>
+
+			<div ng-if="document.libraries">
+				<label>{{::('viewResourceT.libraries'|$translate)}}</label>	
+				<div class="km-value" compare-val>
+					<div km-terms ng-model="document.libraries">
+						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
+					</div>	
+				</div>			
+			</div>  -->
+
 		</section>
 		<!-- If CHM, End -->
 
