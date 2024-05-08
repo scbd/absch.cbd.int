@@ -10,7 +10,7 @@
 <script>
 
 import { mapObjectId, isObjectId } from '~/api/api-base.js';
-import { cbdArticle } from 'scbd-common-articles';
+import  cbdArticle  from './cbd-article.vue';
 
 export default {
   name: 'ArticleId',

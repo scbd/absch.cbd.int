@@ -20,5 +20,6 @@
   "for"             : "for",
   "faqs"            : "FAQs",
   "searchResults"   : "Search Results",
-  "back": "Back"
+  "back": "Back",
+  "errorLoading": "This was an error loading the requested record."
 }
