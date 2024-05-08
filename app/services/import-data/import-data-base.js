@@ -1,13 +1,16 @@
 import * as XLSX from "xlsx";
 import _ from "lodash";
 import KmDocumentApi from "../../api/km-document";
+import axios from "axios";
 
 export class ImportDataBase {
     kmDocumentApi;
     countries;
+    auth;
 
     constructor(auth){
-        this.kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
+      this.auth = auth;
+      this.kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
     }
 
 
@@ -190,4 +193,103 @@ export class ImportDataBase {
   
     return [{ identifier: contact.header.identifier }];
   }
+
+  async validateNationalRecord(document){
+    if(!document)
+        return;
+        try{
+            // let url = `/api/v2013/documents/x/validate`
+
+            // let irccRequest = await request.put(url)
+            //                         .query({schema:document.header.schema})
+            //                         .set(headers)
+            //                         .send(document);
+            let request = await axios.put(`/api/v2013/documents/x/validate`, document, {
+              params:{schema: document.header.schema},
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;Charset=utf-8',
+                'realm': 'ABS-DEV',
+                'Authorization': `Ticket ${this.auth.token()}`
+              }
+            })
+            // let request = await this.kmDocumentApi.validateDocument(document);
+    
+            if(request.status == 200 ){
+
+                var result = request.body
+                if((result.errors||[]).length){
+                    return false;
+                }                
+                return true;                
+            }
+
+            return false;
+                        
+        }
+        catch(err){
+            throw err;
+        }
+    };
+
+    async createNationalRecord(document, isDraft){
+        if(!document)
+            return;
+    
+            try{
+                let url = `/api/v2013/documents/${document.header.identifier}`
+    
+                if(isDraft)
+                    url += '/versions/draft'
+                // let irccRequest = await request.put(url)
+                //                         .query({schema:document.header.schema})
+                //                         .set(headers)
+                //                         .send(document);
+
+                // let irccRequest = await axios.put(url, document, {
+                //   params:{schema: document.header.schema},
+                //   headers: {
+                //     'Accept': 'application/json',
+                //     'Content-Type': 'application/json;Charset=utf-8',
+                //     'realm': 'ABS-DEV',
+                //     'Authorization': `Ticket ${this.auth.token()}`
+                //   }
+                // })
+
+                let irccRequest = await this.kmDocumentApi.createNationalRecord(document.header.identifier,document.header.schema, isDraft)         
+                return irccRequest.body;
+            }
+            catch(err){
+                throw err;
+            }
+    };
+
+    async writeFile(contacts, documents){
+        let errorCount = 0;
+        for (let index = 0; index < contacts.length; index++) {
+            const element = contacts[index];
+            var isValid = await this.validateNationalRecord(element)
+            if(!isValid)
+                errorCount++;
+        }
+        
+        for (let index = 0; index < documents.length; index++) {
+            const element = documents[index];
+            var isValid = await this.validateNationalRecord(element)
+        }
+        if(errorCount > 0){
+            return;
+        }
+        
+        for (let index = 0; index < contacts.length; index++) {
+            const element = contacts[index];
+            await this.createNationalRecord(element, false)
+        }
+        
+        for (let index = 0; index < documents.length; index++) {
+            const element = documents[index];
+            await this.createNationalRecord(element, true)
+        }
+        return errorCount;
+    }
 }

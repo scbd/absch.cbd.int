@@ -440,6 +440,7 @@ export class ImportDataIRCC extends ImportDataBase {
   realm;
   workbook;
   authorityIds = [];
+  contacts = [];
 
   constructor( realm, language, government, workbook, auth) {
       super(auth);
@@ -458,7 +459,7 @@ export class ImportDataIRCC extends ImportDataBase {
           sheet = this.workbook.Sheets[sheetNames[selectedSheetIndex]];
           let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
           let irccs = [];
-          let contacts = [];
+        //   let contacts = [];
     
           // CACHE values
           for(let i=4;i<rows;i++){
@@ -494,7 +495,7 @@ export class ImportDataIRCC extends ImportDataBase {
     
             if (provider.type != "confidential") {
               provider.identifiers = await super.findOrCreateContact(
-                contacts,
+                this.contacts,
                 sheet,
                 language,
                 i,
@@ -505,7 +506,7 @@ export class ImportDataIRCC extends ImportDataBase {
     
             if (pic.type != "confidential") {
               pic.identifiers = await super.findOrCreateContact(
-                contacts,
+                this.contacts,
                 sheet,
                 language,
                 i,
