@@ -1,6 +1,6 @@
 <template>     
-    <div id="Record" class="record panel panel-default">
-        <div class="record-body panel-body bg-white" v-if="document"> 
+    <div id="Record" class="record">
+        <div class="record-body bg-white" v-if="document"> 
             <section>
                 <div v-if="document.title">
                     <label for="subTopic">{{ t("title") }}</label>
