@@ -8,7 +8,6 @@
           class="closeBtn"
           @click="toggleModal"
           aria-label="Close"
-          :disabled="isLoading"
         >
           <i class="bi bi-x-circle-fill icon-lg"></i>
         </button>
@@ -26,7 +25,6 @@
                 type="button"
                 class="btn btn-secondary me-3"
                 @click.stop="toggleModal"
-                :disabled="isLoading ? true : false"
               >
                 Close
               </button>
@@ -34,7 +32,6 @@
                 class="btn btn-primary"
                 v-show="parsedFile.length"
                 @click.stop="handleConfirm"
-                :disabled="isLoading ? true : false"
               >
                 Confirm
               </button>              
@@ -43,38 +40,20 @@
         </div>
       </div>
     </div>
-  </div>
+  </span>
 </template>
 
 <script setup>
 import { defineProps } from 'vue';
-import { useI18n } from 'vue-i18n';
-import messages from "../../app-text/components/common/import-modal.json"
-
-const { t } = useI18n({ messages })
 
 const props = defineProps({
     showModal: Boolean,
     modalTitle: String,
     parsedFile: Array,
     handleConfirm: Function,
-    toggleModal: Function,
-    isLoading: Boolean
+    toggleModal: Function
 })
 
-onMounted(async () => {
-  modal = new Modal(importModal.value);
-});
-
-const closeDialog = () => {
-  modal.hide();
-};
-
-const showDialog = () => {
-  modal.show('static');
-};
-
-defineExpose({ showDialog, closeDialog });
 </script>
 
 <style scoped></style>
