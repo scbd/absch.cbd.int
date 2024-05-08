@@ -40,13 +40,14 @@
     const props = defineProps({
         query           : { type: Object, required: false  },
         hideCoverImage  : { type: Boolean, required: false, default:false },
+        coverImageSize  : { type: String, required: false, default: '800x800' },
         showEdit        : { type: Boolean, required: false, default:true },
         adminTags 	    : { type: Array  , required: false, default:[] }
     });
     
     const coverImage = computed(()=> { 
         const url = article.value?.coverImage.url;
-        const size = '800x800';
+        const size = props.coverImageSize;
         return url && url
           .replace(/attachments.cbd.int\//, '$&' + size + '/')
           .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/');
