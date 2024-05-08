@@ -88,7 +88,9 @@
 
                 <div v-if="document.notes">
                     <label for="subTopic">{{ t("commentsOrAdditionalInfo") }}</label>  
-                    <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html></ng>  
+                    <div class="km-value">
+                        {{document.descriptionNative}}
+                    </div> 
                 </div>
 
                 <div v-if="document.logo">
@@ -119,11 +121,11 @@
     const { t } = useI18n({ messages });    
    
     const country = computed(()=>{
-        const term = {};
-        term.identifier=document.value.country;
+        const term = ref({});
+        term.value.identifier=document.value.country;        
         return term;    
     });
     
-    const document = computed(()=>props.documentInfo?.body);
+    const document = computed(()=>props.documentInfo?.body);   
    
 </script>
