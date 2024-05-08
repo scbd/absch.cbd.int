@@ -442,7 +442,6 @@ export class ImportDataIRCC extends ImportDataBase {
   workbook;
   authorityIds = [];
   contacts = [];
-  hashedValue = {};
 
   constructor( realm, language, government, workbook, auth) {
       super(auth);
@@ -452,99 +451,112 @@ export class ImportDataIRCC extends ImportDataBase {
       this.language = language;
   }
 
-  async fileParser(sheetNames, selectedSheetIndex){
-    try {
-      let sheet;
-      let language;
+  fileParser(sheetNames, selectedSheetIndex){
+    return new Promise(async (resolve, reject) => {
+        try {
+          let sheet;
+          let language;
+        
+          sheet = this.workbook.Sheets[sheetNames[selectedSheetIndex]];
+          let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
+          let irccs = [];
+        //   let contacts = [];
     
-      sheet = this.workbook.Sheets[sheetNames[selectedSheetIndex]];
-      let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
-      let irccs = [];
-    //   let contacts = [];
-
-      // CACHE values
-      for(let i=4;i<rows;i++){
-        this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
-      } 
-      await this.cacheApiCalls();
-
-      for (let i = 4; i < rows; i++) {
-        if (!super.columnVal(sheet, this.fields.language + i)) {
-          console.log(
-            `Language is missing for record on row ${i}, skipping record.`
-          );
-          continue;
-        }
-
-        language =
-          this.languageMappings[super.columnVal(sheet, this.fields.language + i).toLowerCase()]; //||language;
-
-        let picGranted =
-            super.columnVal(sheet, this.fields.pic.consent + i).toLowerCase() == "yes";
-        let matEstablished =
-            super.columnVal(sheet, this.fields.matConset + i).toLowerCase() == "yes";
-
-        if (!picGranted || !matEstablished) {
-          console.log(`Pic or Mat not consented for record on row ${i}.`);
-          // continue;
-        }
-        let authorityId = await super.findByUid(super.columnVal(sheet, this.fields.cna + i),this.cache, this.fields.cna);
-
-        let provider = { type: super.columnVal(sheet, this.fields.provider.type + i) };
-        let pic = { type: super.columnVal(sheet, this.fields.pic.type + i) };
-        let usage = super.columnVal(sheet, this.fields.usage + i);
-
-        if (provider.type != "confidential") {
-          provider.identifiers = await super.findOrCreateContact(
-            this.contacts,
-            sheet,
-            language,
-            i,
-            this.fields.provider,
-            this.government
-          );
-        }
-
-        if (pic.type != "confidential") {
-          pic.identifiers = await super.findOrCreateContact(
-            this.contacts,
-            sheet,
-            language,
-            i,
-            this.fields.pic,
-            this.government
-          );
-        }
-
-        let irccDocument = {
-          header: {
-            identifier: this.guid(),
-            schema: "absPermit",
-            languages: [language],
-          },
-          government: { identifier: this.government },
-          absCNA: { identifier: authorityId },
-          title: {
-            [language]: super.columnVal(sheet, this.fields.permit_equivalent + i),
-          },
-          providersConfidential: provider.type.toLowerCase() == "confidential",
-          providers: provider.identifiers,
-          picGranted: picGranted,
-          matEstablished: matEstablished,
-          usages:
-            usage.toLowerCase() == "confidential"
-              ? undefined
-              : [
-                  {
-                    identifier:
-                      this.usageMapping[
-                        super.columnVal(sheet, this.fields.usage + i).replace("-", "")
-                      ],
-                  },
-                ],
-          usagesConfidential: usage.toLowerCase() == "confidential",
-          usagesDescription: {
-            [language]: `<div>${super.columnVal(
+          // CACHE values
+          for(let i=4;i<rows;i++){
+            this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
+          } 
+          await this.cacheApiCalls();
+    
+          for (let i = 4; i < rows; i++) {
+            if (!super.columnVal(sheet, this.fields.language + i)) {
+              console.log(
+                `Language is missing for record on row ${i}, skipping record.`
+              );
+              continue;
+            }
+    
+            language =
+              this.languageMappings[super.columnVal(sheet, this.fields.language + i).toLowerCase()]; //||language;
+    
+            let picGranted =
+                super.columnVal(sheet, this.fields.pic.consent + i).toLowerCase() == "yes";
+            let matEstablished =
+                super.columnVal(sheet, this.fields.matConset + i).toLowerCase() == "yes";
+    
+            if (!picGranted || !matEstablished) {
+              console.log(`Pic or Mat not consented for record on row ${i}.`);
+              // continue;
+            }
+            let authorityId = await super.findByUid(super.columnVal(sheet, this.fields.cna + i),this.cache, this.fields.cna);
+    
+            let provider = { type: super.columnVal(sheet, this.fields.provider.type + i) };
+            let pic = { type: super.columnVal(sheet, this.fields.pic.type + i) };
+            let usage = super.columnVal(sheet, this.fields.usage + i);
+    
+            if (provider.type != "confidential") {
+              provider.identifiers = await super.findOrCreateContact(
+                this.contacts,
+                sheet,
+                language,
+                i,
+                this.fields.provider,
+                this.government
+              );
+            }
+    
+            if (pic.type != "confidential") {
+              pic.identifiers = await super.findOrCreateContact(
+                this.contacts,
+                sheet,
+                language,
+                i,
+                this.fields.pic,
+                this.government
+              );
+            }
+    
+            let irccDocument = {
+              header: {
+                identifier: this.guid(),
+                schema: "absPermit",
+                languages: [language],
+              },
+              government: { identifier: this.government },
+              absCNA: { identifier: authorityId },
+              title: {
+                [language]: super.columnVal(sheet, this.fields.permit_equivalent + i),
+              },
+              providersConfidential: provider.type.toLowerCase() == "confidential",
+              providers: provider.identifiers,
+              picGranted: picGranted,
+              matEstablished: matEstablished,
+              usages:
+                usage.toLowerCase() == "confidential"
+                  ? undefined
+                  : [
+                      {
+                        identifier:
+                          this.usageMapping[
+                            super.columnVal(sheet, this.fields.usage + i).replace("-", "")
+                          ],
+                      },
+                    ],
+              usagesConfidential: usage.toLowerCase() == "confidential",
+              usagesDescription: {
+                [language]: `<div>${super.columnVal(
+                  sheet,
+                  this.fields.usageDescription + i
+                )} </div>`,
+              },
+    
+              entitiesToWhomPICGrantedConfidential:
+                pic.type.toLowerCase() == "confidential",
+              entitiesToWhomPICGranted: pic.identifiers,
+            };
+    
+            const subjectMatter = super.columnVal(sheet, this.fields.subject_matter + i);
+            const thirdPartyTransferCondition = super.columnVal(
               sheet,
               this.fields.usageDescription + i
             )} </div>`,
