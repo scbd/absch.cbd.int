@@ -34,10 +34,16 @@
     "relevantDocuments": "Other relevant website addresses and/or attached documents",
     "purpose":"Purpose",
     "fileFormat": "File Format",
+    "format":"Format",
     "formatDetails": "Format Details",
-    "targetGroups" :   "Target group(s)/beneficiary(ies)",
+    "targetGroups" :   "Target group(s)/beneficiary(ies)"  ,
+    "authorsInfo"	:"Authors Info",
+    "keywords":"Keywords",
+    "resourceAccess":"Resource Access",
+    "languages"  :"Languages",
+    "libraries" :"Libraries",	
     "gbfTargets":"Kunming-Montreal Global Biodiversity Framework Target(s)" , 
     "chm":"Clearing-House Mechanism (CHM)",
     "expertiseLevel":"Level of the content or level of knowledge/expertise of the audience for which the resource is intended"
+  
 }
-
