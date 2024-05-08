@@ -1,4 +1,4 @@
-﻿import app from '~/app';
+import app from '~/app';
 import _ from 'lodash';
 import { provide } from 'vue'; 
 import { safeDelegate } from '~/services/common';
@@ -49,6 +49,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
 				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment','nationalReport','nationalTarget',"implementationActivity",'strategicPlanIndicator','undbActor'];
 	
+				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment',"undbAction" ];
 				$scope.hideClose = false;
 				if($attr.hideClose){ 
 					$scope.hideClose = true;
