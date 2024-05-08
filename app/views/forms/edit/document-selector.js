@@ -9,9 +9,10 @@ import '~/services/main'; // jshint ignore:line
 import documentSelectorT from '~/app-text/views/forms/edit/document-selector.json';
 import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
 import {Tooltip} from 'bootstrap';
+import KmDocumentApi from "~/api/km-document";
 
-app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm',
-    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm) {
+app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm','apiToken',
+    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm, apiToken) {
 
 	return {
 		restrict   : "EA",
@@ -306,19 +307,30 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 
             })
 
-            function pendingRecords(draftIdentifiers) {
+            async function pendingRecords(draftIdentifiers) {
                 $scope.isPendingLoading = true;
-                var qAnd = [];
-                // ToDo: schema ?
-                qAnd.push("(type eq '" + $attr.allowNewSchema + "')");
+                let query = [];
+                let params = { collection : "myrequest", $top: $scope.top || 100, $orderby: 'updatedOn desc' } // mydraft,  allrequest is not allow in network call
+    
+                //ToDo: what backend accept for multiple schemas 
+                if ($attr.allowNewSchema.includes(',')) {
+                    const schemas = $attr.allowNewSchema.split(',');
+                    schemas.forEach(schema => {
+                        query.push("(type eq '" + schema + "')");
+                    });
+                } 
+                else {
+                    query.push("(type eq '" + $attr.allowNewSchema + "')");
+                }
+                params.$filter = query;
 
-                var qRecords = IStorage.drafts.query(qAnd, { $top: $scope.top || 100, $orderby: 'updatedOn desc' });
+                const kmDocumentApi = new KmDocumentApi({tokenReader:()=>apiToken.get()});
+                const pendingRecords = await kmDocumentApi.queryDocuments(params);
 
-                return $q.when(qRecords)
+                return $q.when(pendingRecords)
                     .then(function (result) {
-                        const draftDocuments = result.data ? result.data.Items : [];
-                        // get only pending requests not draft records
-                        const pendingDocuments = draftDocuments.length > 0 ? draftDocuments.filter(draft => draft.isRequest === true) : [];
+                        const draftDocuments = result? result.Items : [];
+                        const pendingDocuments = draftDocuments.length > 0 ? draftDocuments : [];
 
                         if (pendingDocuments?.length > 0) {
                             const pendingRequests = draftIdentifiers ? pendingDocuments.filter(item => draftIdentifiers.includes(item.identifier)) : pendingDocuments;
@@ -338,11 +350,9 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                                     pending.__checked = true;
                                 } else {
                                     pending.__checked = false;
-                                } 
-                                console.log("pending.__checked",pending);
+                                }  
                                 return pending;
-                            });
-                            
+                            }); 
                             return $scope.pendingRawRecords;
                         }
                     })
