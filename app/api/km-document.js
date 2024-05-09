@@ -19,13 +19,14 @@ export default class KmDocumentApi extends ApiBase
     }
 
     validateDocument(element){
-        return this.http.put(`api/v2013/documents/x/validate`, {schema: element.header.schema, data: element})
+        return this.http.put(`api/v2013/documents/x/validate`,element, { params:{ schema: element.header.schema } })
             .then(res => res.data).catch(tryCastToApiError);
     }
 
-    createNationalRecord(identifier, schema, isDraft){
+    createNationalRecord(document, isDraft){
+        const {identifier, schema} = document.header
         const url = isDraft ? `api/v2013/documents/${identifier}/versions/draft` : `api/v2013/documents/${identifier}`;
-        return this.http.put(url, {schema}).then(res => res.data).catch(tryCastToApiError);;
+        return this.http.put(url, document, {params: { schema }}).then(res => res.data).catch(tryCastToApiError);;
     }
 
 }

@@ -1,16 +1,13 @@
 import * as XLSX from "xlsx";
 import _ from "lodash";
 import KmDocumentApi from "../../api/km-document";
-import axios from "axios";
 
 export class ImportDataBase {
     kmDocumentApi;
     countries;
-    auth;
 
-    constructor(auth){
-      this.auth = auth;
-      this.kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
+    constructor(apiProps){
+      this.kmDocumentApi = new KmDocumentApi(apiProps);
     }
 
 
@@ -52,7 +49,6 @@ export class ImportDataBase {
     let keywords = this.columnVal(sheet, fields.keywords + i)
       .trim()
       .split(",");
-    // console.log(keywords);
   
     _.each(keywords, (keyword) => {
       if (keyword.trim() != "") {
@@ -198,32 +194,11 @@ export class ImportDataBase {
     if(!document)
         return;
         try{
-            // let url = `/api/v2013/documents/x/validate`
+            let request = await this.kmDocumentApi.validateDocument(document);
 
-            // let irccRequest = await request.put(url)
-            //                         .query({schema:document.header.schema})
-            //                         .set(headers)
-            //                         .send(document);
-            let request = await axios.put(`/api/v2013/documents/x/validate`, document, {
-              params:{schema: document.header.schema},
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;Charset=utf-8',
-                'realm': 'ABS-DEV',
-                'Authorization': `Ticket ${this.auth.token()}`
-              }
-            })
-            // let request = await this.kmDocumentApi.validateDocument(document);
-    
-            if(request.status == 200 ){
-
-                var result = request.body
-                if((result.errors||[]).length){
-                    return false;
-                }                
+            if(request.schema){              
                 return true;                
             }
-
             return false;
                         
         }
@@ -241,22 +216,8 @@ export class ImportDataBase {
     
                 if(isDraft)
                     url += '/versions/draft'
-                // let irccRequest = await request.put(url)
-                //                         .query({schema:document.header.schema})
-                //                         .set(headers)
-                //                         .send(document);
 
-                // let irccRequest = await axios.put(url, document, {
-                //   params:{schema: document.header.schema},
-                //   headers: {
-                //     'Accept': 'application/json',
-                //     'Content-Type': 'application/json;Charset=utf-8',
-                //     'realm': 'ABS-DEV',
-                //     'Authorization': `Ticket ${this.auth.token()}`
-                //   }
-                // })
-
-                let irccRequest = await this.kmDocumentApi.createNationalRecord(document.header.identifier,document.header.schema, isDraft)         
+                let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)         
                 return irccRequest.body;
             }
             catch(err){

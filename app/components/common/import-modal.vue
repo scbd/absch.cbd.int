@@ -8,6 +8,7 @@
           class="closeBtn"
           @click="toggleModal"
           aria-label="Close"
+          :disabled="isLoading"
         >
           <i class="bi bi-x-circle-fill icon-lg"></i>
         </button>
@@ -25,6 +26,7 @@
                 type="button"
                 class="btn btn-secondary me-3"
                 @click.stop="toggleModal"
+                :disabled="isLoading ? true : false"
               >
                 Close
               </button>
@@ -32,6 +34,7 @@
                 class="btn btn-primary"
                 v-show="parsedFile.length"
                 @click.stop="handleConfirm"
+                :disabled="isLoading ? true : false"
               >
                 Confirm
               </button>              
@@ -51,7 +54,8 @@ const props = defineProps({
     modalTitle: String,
     parsedFile: Array,
     handleConfirm: Function,
-    toggleModal: Function
+    toggleModal: Function,
+    isLoading: Boolean
 })
 
 </script>
