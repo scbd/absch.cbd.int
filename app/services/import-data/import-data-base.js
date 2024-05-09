@@ -212,21 +212,21 @@ export class ImportDataBase {
     };
 
     async createNationalRecord(document, isDraft){
-      if(!document)
-          return;
-  
-      try{
-          let url = `/api/v2013/documents/${document.header.identifier}`
+        if(!document)
+            return;
+    
+            try{
+                let url = `/api/v2013/documents/${document.header.identifier}`
+    
+                if(isDraft)
+                    url += '/versions/draft'
 
-          if(isDraft)
-              url += '/versions/draft'
-
-          let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
-          return irccRequest;
-      }
-      catch(err){
-          console.log("ERR", err)
-      }
+                let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)         
+                return irccRequest.body;
+            }
+            catch(err){
+                throw err;
+            }
     };
 
     async validateAndCreateNationalRecord(contacts, documents){
