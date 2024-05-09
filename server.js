@@ -13,6 +13,7 @@ import nationalReportsQuestions  from './middlewares/national-reports-questions.
 import robotTxt from './middlewares/robots.js';
 import siteMap from './middlewares/sitemap.js';
 import errorLogs from './middlewares/error-logs.js';
+import rejectBotsPdf from './middlewares/reject-bots-pdf.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,7 +23,6 @@ const proxy = httpProxy.createProxyServer({});
 
 process.env.CLEARINGHOUSE = process.env.CLEARINGHOUSE || 'ABS';
 
-import rejectBotsPdf  from "./middlewares/reject-bots-pdf";
 // Initialize constants
 var appVersion          =  process.env.TAG;
 let apiUrl              =  process.env.API_URL || 'https://api.cbddev.xyz';
