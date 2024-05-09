@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { isFunction } from 'lodash'
 
+import ApiBase, { tryCastToApiError } from '../../api/api-base';
 let sitePrefixUrl = 'https://api.cbd.int';
 
 if(/\.cbd\.int$/i   .test(window.location.hostname)) sitePrefixUrl= 'https://api.cbd.int';
@@ -11,37 +12,10 @@ if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 const cache          = new Map()
 const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
 
-export default class ArticlesApi
+export default class ArticlesApi extends ApiBase
 {
-  constructor(options) {
-
-    options = options || {};
-
-    if(isFunction(options)) options = { tokenReader : options }
-
-    const { tokenReader, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
-
-
-    const baseConfig = {
-      baseURL : prefixUrl,
-      timeout,
-      tokenReader
-    }
-
-    const http = async function (...args) {
-      return (await loadAsyncHeaders(baseConfig))(...args);
-    }
-
-    http.get     = async (...args)=> (await loadAsyncHeaders(baseConfig)).get    (...args);
-    http.head    = async (...args)=> (await loadAsyncHeaders(baseConfig)).head   (...args);
-    http.post    = async (...args)=> (await loadAsyncHeaders(baseConfig)).post   (...args);
-    http.put     = async (...args)=> (await loadAsyncHeaders(baseConfig)).put    (...args);
-    http.patch   = async (...args)=> (await loadAsyncHeaders(baseConfig)).patch  (...args);
-    http.delete  = async (...args)=> (await loadAsyncHeaders(baseConfig)).delete (...args);
-    http.options = async (...args)=> (await loadAsyncHeaders(baseConfig)).options(...args);
-    http.request = async (...args)=> (await loadAsyncHeaders(baseConfig)).request(...args);
-
-    this.http = http;
+   constructor(options) {
+    super(options);
   }
 
   async queryArticleGroup(groupKey, params)  {
@@ -96,16 +70,4 @@ async function loadAsyncHeaders(baseConfig) {
 }
 
 
-//////////////////////////
-// Helpers
-////////////////////////
-
-export function tryCastToApiError(error) {
-
-  if(error && error.response && error.response.data && error.response.data.code) {
-      const apiError = error.response.data
-      throw error.response.data;
-  }
-
-  throw error
-}
+ 

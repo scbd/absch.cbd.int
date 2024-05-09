@@ -53,9 +53,9 @@
   import { formatDate } from '~/components/kb/filters';
   import { useI18n } from 'vue-i18n';
   import { useRealm } from '../../services/composables/realm.js';
-  import {  useRouter } from "@scbd/angular-vue/src/index.js";
-  const { t } = useI18n({ messages });
-
+  import {  useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
+  const { t } = useI18n({ messages }); 
+  const auth = useAuth();
   const router = useRouter();
   const realm = useRealm();
 
@@ -68,7 +68,7 @@
       rows: { type: Number, required: false },
   })
 
-  const articlesApi = new ArticlesApi();
+  const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
       
   onMounted(() => {
     records();

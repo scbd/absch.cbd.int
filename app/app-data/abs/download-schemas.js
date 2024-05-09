@@ -130,6 +130,39 @@ export const downloadSchemas = {
         "nagoyaKeyAreas"     : fieldsT["communityProtocol.nagoyaKeyAreas"],
         "relevantInformation": fieldsT["communityProtocol.relevantInformation"],
         "relevantDocuments"  : fieldsT["communityProtocol.relevantDocuments"]
-    }
+    },
 
+
+    "absCheckpoint":{
+        "uniqueId"            : fieldsT["absCheckpoint.uniqueId"],
+        "government"          : fieldsT["absCheckpoint.government"],
+        "name"                : fieldsT["absCheckpoint.name"],
+        "responsibilities"    : fieldsT["absCheckpoint.responsibilities"],
+        "jurisdiction"        : fieldsT["absCheckpoint.jurisdiction"],
+        "informAllAuthorities": fieldsT["absCheckpoint.informAllAuthorities"],
+        "contactsToInform"    : fieldsT["absCheckpoint.contactsToInform"],
+        "relevantInformation" : fieldsT["absCheckpoint.relevantInformation"]
+    },
+
+    "measure":{
+        "uniqueId"                 : fieldsT["measure.uniqueId"],
+        "isAmendment"              : fieldsT["measure.isAmendment"],
+        "amendedMeasures"          : fieldsT["measure.amendedMeasures"],
+        "amendmentsDescription"    : fieldsT["measure.amendmentsDescription"],
+        "government"               : fieldsT["measure.government"],
+        "title"                    : fieldsT["measure.title"],
+        "status"                   : fieldsT["measure.status"],
+        "type"                     : fieldsT["measure.type"],
+        "jurisdiction"             : fieldsT["measure.jurisdiction"],
+        "description"              : fieldsT["measure.description"],
+        "isModelContractualClause" : fieldsT["measure.isModelContractualClause"],
+        "documents"                : fieldsT["measure.documents"],
+        "documentTranslations"     : fieldsT["measure.documentTranslations"],
+        "linkedMeasures"           : fieldsT["measure.linkedMeasures"],
+        "linkedMeasuresDescription": fieldsT["measure.linkedMeasuresDescription"],
+        "authorities"              : fieldsT["measure.authorities"],
+        "absMesasureNotApplicable" : fieldsT["measure.absMesasureNotApplicable"],
+        "relevantInformation"      : fieldsT["measure.relevantInformation"],
+        "relevantDocuments"        : fieldsT["measure.relevantDocuments"]
+    }
 }

@@ -56,8 +56,9 @@
     import { formatDate, lstring } from './filters';
     import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
     import { useRealm } from '../../services/composables/realm.js';
-    import {  useRoute } from "@scbd/angular-vue/src/index.js";
-    const { t } = useI18n({ messages });
+    import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js";
+    const { t } = useI18n({ messages }); 
+    const auth = useAuth();
     const realm = useRealm();
     const route = useRoute();
     const article = ref({});
@@ -65,7 +66,7 @@
     const loading = ref(true);
     const tag = ref('');
 
-    const articlesApi = new ArticlesApi();
+    const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
     
     onMounted(async () => {  
         tag.value = (route.value?.params?.tag).replace(/"/g, ""); //ToDo: route.params is not available 

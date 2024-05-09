@@ -44,12 +44,12 @@
 	import { useI18n } from 'vue-i18n';
 	import messages from '../../app-text/components/kb.json';
 	import { useRealm } from '../../services/composables/realm.js';
-	import {  useRoute } from "@scbd/angular-vue/src/index.js";
-
+	import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js"; 
+    const auth = useAuth();
 	const realm = useRealm();
 	const { t } = useI18n({ messages });
 	const route = useRoute();
-	const articlesApi = new ArticlesApi();
+	const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
 	const faqFilterTag = ref('');
 	const faqs = ref([]);
 	const categories = ref([]);

@@ -27,7 +27,8 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import { getRealmArticleTag } from "../../services/composables/articles.js";
-    
+    import {  useAuth } from "@scbd/angular-vue/src/index.js"; 
+      const auth = useAuth();
     const { t, locale } = useI18n({ messages });
     const realm = useRealm();
     const articleRealmTag = getRealmArticleTag();
@@ -43,7 +44,7 @@
 
     const articles = ref([]);
     const loading = ref(true);
-    const articlesApi = new ArticlesApi();
+    const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
     
 
     onMounted(async () => {
