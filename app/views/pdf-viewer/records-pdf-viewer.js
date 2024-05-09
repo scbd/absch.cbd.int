@@ -1,6 +1,8 @@
 ﻿import app from '~/app';
 import pdfObject from 'pdf-object';
 import '~/components/scbd-angularjs-services/main';
+import pdfViewerT from '~/app-text/views/pdf-viewer/records-pdf-viewer.json';
+import { languages } from '~/app-data/un-languages.js';
     app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',
@@ -19,9 +21,11 @@ import '~/components/scbd-angularjs-services/main';
      })
     
     export { default as template } from './records-pdf-viewer.html';
-export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
-    function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout) {
-
+export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout', 'translationService', '$element',
+    function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout, translationService, $element) {
+        translationService.set('pdfViewerT', pdfViewerT);
+        $scope.currentTime = new Date().getTime();
+        $scope.languages = languages;
         $scope.pdfLocale = $location.search()?.lang || locale;
         $scope.pdf = {};
         $scope.loading = true;
@@ -36,10 +40,11 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             $scope.loading=false;
         }
 
-        $scope.loadLangPdf = function(lang){
+        $scope.loadLangPdf = function(lang, force ){
+            $scope.pdfLocale = lang;
             $scope.loading = true;
             $scope.unloadPdf = true;
-            $scope.pdf.src = getPdfSrc(lang);
+            $scope.pdf.src = getPdfSrc(lang, force); // getPdfSrc(pdfLocale, force)
             var options = {
                 pdfOpenParams: {
                     navpanes: 1,
@@ -58,6 +63,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             $timeout(function(){
                 $scope.unloadPdf = false;
                 $scope.loading = false;
+                $element.find('.bs-tooltip').tooltip()
             }, 500)
         }
 
