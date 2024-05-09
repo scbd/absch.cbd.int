@@ -1,0 +1,19 @@
+{
+    "name":"Name",  
+    "website":"Website",
+    "country":"country",     
+    "address":"Address", 
+    "googleMapsLink":"Google maps link",    
+    "email":"Email",   
+    "telephone":"Telephone",   
+    "facebook":"Facebook",
+    "twitter":"Twitter",  
+    "youtube":"Youtube",       
+    "shortDescription":"Short description of the Organisation in one of the 6 United Nations languages", 
+    "shortDescriptionInOfficialLanguage":"Short description of your Organization in your official language", 
+    "notes":"Notes",
+    "logo" :"Logo"
+}
+
+
+ 
