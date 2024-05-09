@@ -2,6 +2,7 @@
 import pdfObject from 'pdf-object';
 import '~/components/scbd-angularjs-services/main';
 import pdfViewerT from '~/app-text/views/pdf-viewer/records-pdf-viewer.json';
+import { languages } from '~/app-data/un-languages.js';
     app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',
@@ -24,14 +25,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
     function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout, translationService, $element) {
         translationService.set('pdfViewerT', pdfViewerT);
         $scope.currentTime = new Date().getTime();
-        $scope.languages = {
-            "ar" :"Arabic"  ,
-            "en" :"English" ,
-            "es" :"Spanish" ,
-            "fr" :"French"  ,
-            "ru" :"Russian" ,
-            "zh" :"Chinese" 
-        };
+        $scope.languages = languages;
         $scope.pdfLocale = $location.search()?.lang || locale;
         $scope.pdf = {};
         $scope.loading = true;
