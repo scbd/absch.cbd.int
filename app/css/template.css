@@ -3441,3 +3441,9 @@ embed-footer{
     background-color:#f1f1f1;
     opacity: 50%;
 }
+.record-pdf-viewer .languages .disabled-language{
+    background-color: #f1f1f1;
+    opacity: 50%;
+    pointer-events: none;
+    font-weight: 800;
+}
