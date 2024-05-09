@@ -7,9 +7,8 @@
             :parsedFile="parsedFile"
             :handleConfirm="handleConfirm"
             :toggleModal="toggleModal"
-            :isLoading="isLoading"
-            :handleClearClick="handleClearClick" >
-        <!-- <div class="row">
+            :isLoading="isLoading" >
+        <div class="row">
             <div class="col text-start" v-if="userGovernment">
                 <button class="btn btn-secondary text-uppercase" disabled>{{user.government || 'Government'}}</button>
             </div>
@@ -204,12 +203,12 @@
                 <span class="alert alert-danger" >{{error}}</span>
             </div>
         </div>
-        <div class="row mt-4"  v-if="successMessage && !isLoading">
+        <div class="row mt-5"  v-if="successMessage">
             <div class="col-12 text-center">
                 <div class="alert alert-success">{{successMessage}}</div>
             </div>
         </div>
-        <div class="row mt-3" v-show="isLoading">
+        <div class="row mt-3">
             <div class="col-4">
             </div>
             <div class="col-4 text-center">
@@ -223,7 +222,7 @@
 </template>
 
 <script setup>
-import { ref, shallowRef, computed, defineEmits, reactive } from 'vue';
+import { ref, onMounted, shallowRef, computed, defineEmits, reactive } from 'vue';
 import ImportModal from "./import-modal.vue"
 import { useRealm } from '../../services/composables/realm.js';
 import { useUser, useAuth } from '@scbd/angular-vue/src/index.js';
@@ -236,26 +235,20 @@ import { useI18n } from 'vue-i18n';
 
 const { locale, t } = useI18n({ messages });
 const realm = useRealm();
-const user = useUser();
-const auth = useAuth();
+const user = useUser()
+const auth = useAuth()
 
 const showModal = ref(false);
 const isLoading = ref(false);
 const parsedFile = ref([]);
-const selectedLanguage = ref(locale.value);
+const selectedLanguage = ref(null);
 const error = ref("");
-const errorCreateRecords = ref([]);
 const successMessage = ref("");
 const multipleImportSheets = ref([]);
 const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
-const sText = ref("");
 
-<<<<<<< HEAD
-Object.assign(messages[locale.value], messagesIrcc[locale.value]);
-let modal = null;
-=======
 const importDataBase = new ImportDataBase({tokenReader:()=>auth.token(), realm:realm.value});
 const emit = defineEmits(['refreshRecord']);
 
@@ -266,18 +259,15 @@ const userGovernment = computed(()=>{
 })
 
 let importDataIRCC;
- const importModal = ref(null);
+
 function toggleModal() {
     parsedFile.value = [];
     error.value = null;
-    // errorCreateRecords.value = [];
     successMessage.value = null;
-    // selectedLanguage.value = null;
+    selectedLanguage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
-    resetFileErrorInParsedFile();
     showModal.value = !showModal.value;
-    importModal.value.showDialog();
     if(!showModal.value){
         emit("refreshRecord")
     }
@@ -290,11 +280,9 @@ const progressPercentage = computed(() => {
 
 const handleFileChange = async (event) => {
     isLoading.value = true;
-    file.value = event.target.files[0];
     error.value = null;
-    errorCreateRecords.value = [];
     successMessage.value = null;
-    selectedSheetIndex.value = 0;
+    selectedSheetIndex.value = null;
     multipleImportSheets.value = [];
     resetFileErrorInParsedFile();
     try{
@@ -305,7 +293,7 @@ const handleFileChange = async (event) => {
             multipleImportSheets.value = sheetNames;
             handleSelectedSheetChange();
         }else{
-            parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
+            parsedFile.value = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
         }
     }catch(err){
         parsedFile.value = [];
@@ -345,11 +333,13 @@ const handleSelectedSheetChange = async () => {
         if(selectedSheetIndex.value != null){
             isLoading.value = true;
             error.value = null;
-            errorCreateRecords.value = [];
             successMessage.value = null;
-            parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
+            parsedFile.value = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
         }
-      });
+    } catch (err) {
+        console.log(err)
+        parsedFile.value = [];
+        error.value = "ERROR: An error occurred while reading the file."
     }
   } catch (err) {
     error.value = `Error: ${err.message ||
@@ -363,12 +353,11 @@ const handleConfirm = async () => {
     try {
         isLoading.value = true;
         error.value = null
-        const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
-        const errorCount = await importDataBase.writeFile(importDataIRCC.contacts, result);
+        const errorCount = await importDataBase.writeFile(importDataIRCC.contacts, parsedFile.value);
         if(errorCount === undefined || errorCount === 0){
             successMessage.value = "Successfully created national record.";
         }else{
-            errorCreateRecords.value = errorResponse;
+            throw new Error("Error occurred while creating national record");
         }
 
     } catch (err) {
