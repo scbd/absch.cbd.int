@@ -7,7 +7,7 @@ export default function(req, res, next){
 
         if(req.params.revision)
             url += `-${req.params.revision}`;
-
+        console.log(`redirecting bot (${req.get("user-agent")}) to ${url}`)
         return res.redirect(url);
     }
 
