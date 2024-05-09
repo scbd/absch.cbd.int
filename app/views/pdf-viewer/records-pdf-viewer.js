@@ -20,8 +20,8 @@ import pdfViewerT from '~/app-text/views/pdf-viewer/records-pdf-viewer.json';
      })
     
     export { default as template } from './records-pdf-viewer.html';
-export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout', 'translationService',
-    function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout, translationService) {
+export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout', 'translationService', '$element',
+    function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout, translationService, $element) {
         translationService.set('pdfViewerT', pdfViewerT);
         $scope.currentTime = new Date().getTime();
         $scope.languages = {
@@ -69,6 +69,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             $timeout(function(){
                 $scope.unloadPdf = false;
                 $scope.loading = false;
+                $element.find('.bs-tooltip').tooltip()
             }, 500)
         }
 
