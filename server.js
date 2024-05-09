@@ -22,6 +22,7 @@ const proxy = httpProxy.createProxyServer({});
 
 process.env.CLEARINGHOUSE = process.env.CLEARINGHOUSE || 'ABS';
 
+import rejectBotsPdf  from "./middlewares/reject-bots-pdf";
 // Initialize constants
 var appVersion          =  process.env.TAG;
 let apiUrl              =  process.env.API_URL || 'https://api.cbddev.xyz';
@@ -59,6 +60,7 @@ app.get('/national-report-questions/:report', nationalReportsQuestions);
 app.use('/widgets.js',                               express.static(`${__dirname}/dist/en/app/assets/widgets.js`));
 app.use('/legacy-ajax-plugin.js',                    express.static(`${__dirname}/dist/en/app/assets/legacy-ajax-plugin.js`));
 app.use('/app/assets/widget-example.html',           express.static(`${__dirname}/app/assets/${process.env.CLEARINGHOUSE}-widget-example.html`));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/pdf/:type/:schema/:documentId/:revision?',     rejectBotsPdf);
 
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: setCustomCacheControl }));
 app.use('/ar',                                       express.static(`${__dirname}/dist/ar`, { setHeaders: setCustomCacheControl }));

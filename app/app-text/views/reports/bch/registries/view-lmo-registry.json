@@ -3,6 +3,7 @@
     "geneticElementRegistry": "Genetic Element Registry",
     "lmoTitle": "LMO Registry",
     "organismRegistry": "Organism Registry",
+    "labRegistry": "Laboratory Registry",
     "lmoRegistry": "Living Modified Organism (LMO) Registry",
     "lmoInfo": "The LMO Registry provides summary information on all living modified organisms registered in the BCH, including transformation events, genetic modifications and the",
     "uniqueCode": "unique identification code",

@@ -1523,12 +1523,17 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     }
                     
                     function buildCustomConfidentialQueryFn(filter) {
+                        
                         let query = [];  
-                        let confidentialObject ={};          
+                        let confidentialObject;          
                         let termFields = _.map(filter.selectedItems, 'identifier').filter(e => e !== 'usagesConfidential_b');
+                        
                         if(filter?.selectedItems)
                             confidentialObject = filter?.selectedItems['usagesConfidential_b'];
                         
+                        if(!confidentialObject)
+                            return;
+
                         if (termFields?.length > 0) {
                             query.push(`usages_ss:(${solr.escape(termFields.join(' '))})`);
                         }  

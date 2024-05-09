@@ -46,6 +46,7 @@ const bchRouteUrls = {
   registries_living_modified_organisms : { component: ()=>asyncLogError(import('~/views/reports/bch/registries/view-lmo-registry')) },
   registries_organisms                 : { component: ()=>asyncLogError(import('~/views/reports/bch/registries/view-orga-registry')) },
   registries_genetic_elements          : { component: ()=>asyncLogError(import('~/views/reports/bch/registries/view-gene-registry')) },
+  registries_laboratories              : { component: ()=>asyncLogError(import('~/views/reports/bch/registries/view-lab-registry')) },
   cms_content                          : { component: ()=>asyncLogError(import('~/views/shared/cms-content')) },
   help_forbidden                       : { component: ()=>asyncLogError(import('~/views/shared/403')) },
   help_not_found                       : { component: ()=>asyncLogError(import('~/views/shared/404')) },
@@ -91,6 +92,7 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/registries/living-modified-organisms',              { ...mapView(angularViewWrapper),                    "label":routesLabels.lmoRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_living_modified_organisms}}).
   whenAsync('/registries/organisms',                              { ...mapView(angularViewWrapper),                    "label":routesLabels.organismsRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_organisms}}).
   whenAsync('/registries/genetic-elements',                       { ...mapView(angularViewWrapper),                    "label":routesLabels.geneRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_genetic_elements}}).
+  whenAsync('/registries/laboratories',                             { ...mapView(angularViewWrapper),                  "label":routesLabels.laboratory,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_laboratories}}).
   whenAsync('/about/countryprofile.shtml',                        { redirectTo:  "/countries/:country"}). 
   // whenAsync("/countries/:country",                                { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/countryprofile.shtml?country=:country", controller: ()=>import("views/shared/cms-content") }).
   // whenAsync("/about/:subpath*?",                                  { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/:subpath",                              controller: ()=>import("views/shared/cms-content") }).
