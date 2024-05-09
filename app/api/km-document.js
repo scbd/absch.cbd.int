@@ -18,8 +18,8 @@ export default class KmDocumentApi extends ApiBase
         return this.http.get(`https://accounts.cbd.int/api/v2013/countries`).then(res => res.data).catch(tryCastToApiError);
     }
 
-    validateDocument(element){
-        return this.http.put(`api/v2013/documents/x/validate`,element, { params:{ schema: element.header.schema } })
+    validateDocument(document){
+        return this.http.put(`api/v2013/documents/x/validate`,document, { params:{ schema: document.header.schema } })
             .then(res => res.data).catch(tryCastToApiError);
     }
 
