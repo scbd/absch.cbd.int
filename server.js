@@ -10,7 +10,8 @@ var app          = express();
 var cookieParser = require('cookie-parser');
 var _            = require('lodash');
 var translation  = require('./middlewares/translation');
-let cacheControl = require('./middlewares/cache-control')
+let cacheControl = require('./middlewares/cache-control');
+const { default: rejectBotsPdf } = require("./middlewares/reject-bots-pdf");
 
 // Initialize constants
 var appVersion          =  process.env.TAG;
@@ -50,6 +51,7 @@ app.get('/national-report-questions/:report', require('./middlewares/national-re
 app.use('/widgets.js',                               express.static(`${__dirname}/dist/en/app/assets/widgets.js`));
 app.use('/legacy-ajax-plugin.js',                    express.static(`${__dirname}/dist/en/app/assets/legacy-ajax-plugin.js`));
 app.use('/app/assets/widget-example.html',           express.static(`${__dirname}/app/assets/${process.env.CLEARINGHOUSE}-widget-example.html`));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/pdf/:type/:schema/:documentId/:revision?',     rejectBotsPdf);
 
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/ar',                                       express.static(`${__dirname}/dist/ar`, { setHeaders: cacheControl.setCustomCacheControl }));
