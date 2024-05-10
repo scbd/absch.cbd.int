@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref } from 'vue';
+    import { computed, onMounted, ref, watch } from 'vue';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import { lstring } from '../../components/kb/filters';
@@ -56,11 +56,13 @@
     const loading = ref(false);
     const article = ref(null)
     const error = ref(null);
-    onMounted( async ()=>{
+
+    const getArticle = async function (query){
+
         try{
             loading.value = true;
             error.value = undefined;
-            const articleResult = await articlesApi.queryArticles(props.query);
+            const articleResult = await articlesApi.queryArticles(query);
             if(articleResult.length > 0){
                 article.value = articleResult[0] ;
                 emit('onArticleLoad', article.value);
@@ -73,8 +75,14 @@
         finally {
             loading.value = false;
         }
-    })
+    }
 
+    onMounted( async ()=>{
+        await getArticle(props.query)
+    })
+    watch(() => props.query, async (newQuery) => {
+        await getArticle(newQuery)  
+    });
 
 
 </script>
