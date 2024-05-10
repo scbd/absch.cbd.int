@@ -6,41 +6,36 @@
     </cbd-article>
   </div>
 </template>
-  
-<script>
 
-import { mapObjectId, isObjectId } from '~/api/api-base.js';
-import  cbdArticle  from './cbd-article.vue';
+<script setup>
+  import { mapObjectId, isObjectId } from '~/api/api-base.js';
+  import cbdArticle from './cbd-article.vue';
+  import { computed, onMounted, ref, watch } from 'vue';
 
-export default {
-  name: 'ArticleId',
-  components:{ CbdArticle:cbdArticle },
-  props: {
-    articleId: String,
-  },
-  data() {
-    return {
-      articleQuery: null
+  const props = defineProps({
+        articleId: {
+          type: String,
+          required: true
+        }
+  });
+
+  const articleQuery = ref(null);
+
+  let query = computed(()=>{
+    let ag = [];
+    if (isObjectId(props.articleId)) { 
+      ag.push({ $match: { _id: mapObjectId(props.articleId) } });
     }
-  },
-  computed: {
-    portalId() { return this.$route.params.portalId; },
-  },
-  async created() {
+    return { ag: JSON.stringify(ag) };
+  });
 
-    const { portalId, articleId } = this;
+  onMounted(()=>{
+    articleQuery.value = query.value ;
 
+  });
 
-    var ag = [];
+  watch(query, (newX) => {
+    articleQuery.value = newX;
+  });
 
-    if (isObjectId(articleId))
-      ag.push({ $match: { _id: mapObjectId(articleId) } });
-
-    this.articleQuery = { ag : JSON.stringify(ag) };
-
-  }
-
-}
 </script>
-  
-
