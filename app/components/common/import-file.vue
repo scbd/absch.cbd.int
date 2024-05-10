@@ -3,27 +3,30 @@
 
     <ImportModal 
             :showModal="showModal" 
-            modalTitle="Import File" 
+            modalTitle="Import IRCC Excel" 
             :parsedFile="parsedFile"
             :handleConfirm="handleConfirm"
             :toggleModal="toggleModal"
-            :isLoading="isLoading" >
-        <div class="row">
+            :isLoading="isLoading"
+            :handleClearClick="handleClearClick" >
+        <!-- <div class="row">
             <div class="col text-start" v-if="userGovernment">
                 <button class="btn btn-secondary text-uppercase" disabled>{{user.government || 'Government'}}</button>
             </div>
+            {{locale}}-{{selectedLanguage}}
             <div class="col">
                 <ng v-vue-ng:km-form-languages v-model:ng-model="selectedLanguage"></ng>
             </div>
             <div class="col text-end">
                 <button class="btn btn-secondary" disabled>{{realm.value}}</button>
             </div>
-        </div>
-        <div class="row" v-if="selectedLanguage">
-            <div class="col-md-3 text-start my-3">
-                    <button class="btn btn-primary position-relative" type='button'>
+        </div> -->
+        <div class="row mb-3">
+            <div class="col-md-3 text-start">
+                
+                <button class="btn btn-primary position-relative" type='button' :disabled="isLoading">
                     Browse
-                    <input type="file" name="file" accept=".xlsx, .xls, .csv" @change="handleFileChange"
+                    <input type="file" name="file" accept=".xlsx, .xls" @change="handleFileChange"
                     @click="onFileInputClick"
                     class="position-absolute fs-1 opacity-0 top-0 start-0 w-100 h-100">
                 </button>
@@ -38,7 +41,7 @@
         </div>
         <div class="row table-container" v-if="parsedFile.length">
             <div class="col">
-                <table class="table table-striped table-hover">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -113,7 +116,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, shallowRef, computed, defineEmits, reactive } from 'vue';
+import { ref, shallowRef, computed, defineEmits, reactive } from 'vue';
 import ImportModal from "./import-modal.vue"
 import { useRealm } from '../../services/composables/realm.js';
 import { useUser, useAuth } from '@scbd/angular-vue/src/index.js';
@@ -131,11 +134,11 @@ const auth = useAuth()
 const showModal = ref(false);
 const isLoading = ref(false);
 const parsedFile = ref([]);
-const selectedLanguage = ref(null);
+const selectedLanguage = ref(locale.value);
 const error = ref("");
 const successMessage = ref("");
 const multipleImportSheets = ref([]);
-const selectedSheetIndex = ref(null);
+const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
 
@@ -154,7 +157,7 @@ function toggleModal() {
     parsedFile.value = [];
     error.value = null;
     successMessage.value = null;
-    selectedLanguage.value = null;
+    // selectedLanguage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
     showModal.value = !showModal.value;
@@ -168,14 +171,15 @@ const handleFileChange = async (event) => {
     isLoading.value = true;
     error.value = null;
     successMessage.value = null;
-    selectedSheetIndex.value = null;
+    selectedSheetIndex.value = 0;
     multipleImportSheets.value = [];
     try{
         const {sheetNames, workbook} = await importDataBase.readSheet(file.value);
         xlsxWorkbook.value = workbook;
-        importDataIRCC = new ImportDataIRCC(realm.value, selectedLanguage.value, user.value.government, workbook, auth);
+        importDataIRCC = new ImportDataIRCC(realm.value, locale.value, user.value.government, workbook, auth);
         if(sheetNames.length > 1){
             multipleImportSheets.value = sheetNames;
+            handleSelectedSheetChange();
         }else{
             parsedFile.value = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
         }
@@ -222,6 +226,14 @@ const handleConfirm = async () => {
 
 const onFileInputClick = (event) => {
     event.target.value = "";
+}
+
+const handleClearClick = () => {
+    parsedFile.value = [];
+    error.value = null;
+    successMessage.value = null;
+    multipleImportSheets.value = [];
+    selectedSheetIndex.value = null;
 }
 
 </script>

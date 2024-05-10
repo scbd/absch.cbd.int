@@ -155,6 +155,11 @@
 
 .modal__container{
     padding: 10px 20px;
+    min-height: 200px;
+}
+
+.modal__container th{
+    min-width: 80px;
 }
 
 .modal__footer{
@@ -174,7 +179,7 @@
     left: 50%;
     background: white;
     color: #000000;
-    min-width: 500px;
+    min-width: 1092px;
     border-radius: 5px;
     translate: -50% -50%;
     scale: 1;
@@ -185,4 +190,10 @@
     max-height: 253px;
     overflow: scroll;
     max-width: 1076px;
+}
+
+.modal__header p{
+    font-weight: lighter;
+    color: lightslategray;
+    margin: 0;
 }
