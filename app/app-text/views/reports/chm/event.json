@@ -1,3 +1,30 @@
 {
-    
+    "logo":"Logo",      
+    "title":"Title",                        
+    "details":"Details",
+    "description":"Description", 
+    "descriptionNativeLanguage":"Description Naitve Language",         
+    "symbol":"Symbol",    
+    "type":"Type",                   
+    "durations":"Durations",
+    "startDateAndTime":"Start date and time",
+    "endDateAndTime":"End date and time",   
+    "location":"Location",
+    "address":"Address",          
+    "map":"Map",
+    "socialMedia":"Social Media", 
+    "website":"Website",
+    "facebook":"Facebook",
+    "twitter":"Twitter",                                                   
+    "youtube":"Youtube",                                              
+    "additionalLinks":"Additional Links",                             
+    "images":"Images",                                          
+    "documents":"Documents",                                       
+    "videos":"Videos", 
+    "contactHost":"Contact Host Organization",      
+    "thematicAreas":"Thematic Areas",
+    "aichiTargets":"Related Aichi Biodiversity Target(s)",
+    "cbdSubjectAreas":"Related CBD subject area(s)"
 }
+
+ 
