@@ -4,7 +4,7 @@
       <div class="modal__header">
         <div>
           <h3 class="modal-title">{{ modalTitle }}</h3>
-          <p>{{t("pleaseSelectExcelInfo")}}</p>
+          <p>Please select a excel file to import data.</p>
         </div>
       </div>
       <div class="modal__container">
@@ -20,7 +20,7 @@
                   type="button" 
                   :disabled="isLoading ? true : false"
                   @click="handleClearClick">
-                    {{t("clear")}}
+                    Clear
                 </button>
               </div>
               <div>
@@ -30,7 +30,7 @@
                   @click.stop="toggleModal"
                   :disabled="isLoading ? true : false"
                 >
-                  {{t("close")}}
+                  Close
                 </button>
                 <button
                   class="btn btn-primary ms-3"
@@ -38,7 +38,7 @@
                   @click.stop="handleConfirm"
                   :disabled="isLoading ? true : false"
                 >
-                  {{t("confirm")}}
+                  Confirm
                 </button>  
               </div>            
             </div>
@@ -57,14 +57,14 @@ import messages from "../../app-text/components/common/import-modal.json"
 const { t } = useI18n({ messages })
 
 const props = defineProps({
-  showModal: Boolean,
-  modalTitle: String,
-  parsedFile: Array,
-  handleConfirm: Function,
-  toggleModal: Function,
-  handleClearClick: Function,
-  isLoading: Boolean,
-});
+    showModal: Boolean,
+    modalTitle: String,
+    parsedFile: Array,
+    handleConfirm: Function,
+    toggleModal: Function,
+    handleClearClick: Function,
+    isLoading: Boolean,
+})
 
 onMounted(async () => {
   modal = new Modal(importModal.value);

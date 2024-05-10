@@ -1,18 +1,5 @@
 {
-    "importIrccExcel": "Import IRCC Excel",
-    "importIrcc": "Import IRCC",
-    "browse":  "Browse",
-    "multipleSheetAlert":"Mutiple sheets have been found! Please select the sheet you want to import.",
-    "loading":"Loading",
-    "provider":"Provider",
-    "pic":"Pic",
-    "matConset":"MatConset",
-    "type":"Type",
-    "existing":"Existing",
-    "orgfirstName":"OrgName FirstName",
-    "acronymfirstName":"Acronym FirstName",
-    "address":"Address",
-    "city":"City",
-    "email":"Email",
-    "consent":"Consent"
+    "recentlyPublished": "Recently published",
+    "seeMore": "See more",
+    "loading":  "Loading"
 }

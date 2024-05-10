@@ -3,7 +3,7 @@
 
     <ImportModal ref="importModal"
             :showModal="showModal" 
-            :modalTitle="t('importIrccExcel')" 
+            modalTitle="Import IRCC Excel" 
             :parsedFile="parsedFile"
             :handleConfirm="handleConfirm"
             :toggleModal="toggleModal"
@@ -22,10 +22,10 @@
             </div>
         </div> -->
         <div class="row mb-3">
-            <div class="col-md-4 text-start">
+            <div class="col-md-3 text-start">
                 
                 <button class="btn btn-primary position-relative" type='button' :disabled="isLoading">
-                    {{t("browse")}}
+                    Browse
                     <input type="file" name="file" accept=".xlsx, .xls" @change="handleFileChange"
                     @click="onFileInputClick"
                     class="position-absolute fs-1 opacity-0 top-0 start-0 w-100 h-100"
@@ -83,8 +83,8 @@
             </div>
         </div>
         <div class="row table-container" v-if="parsedFile.length">
-            <!-- <div class="col"> -->
-                <table class="table table-striped table-bordered table-condensed">
+            <div class="col">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col" rowspan="2">#</th>
@@ -223,7 +223,7 @@
 </template>
 
 <script setup>
-import { ref, shallowRef, computed, defineEmits, reactive, watch } from 'vue';
+import { ref, shallowRef, computed, defineEmits, reactive } from 'vue';
 import ImportModal from "./import-modal.vue"
 import { useRealm } from '../../services/composables/realm.js';
 import { useUser, useAuth } from '@scbd/angular-vue/src/index.js';
@@ -272,6 +272,7 @@ function toggleModal() {
     error.value = null;
     // errorCreateRecords.value = [];
     successMessage.value = null;
+    // selectedLanguage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
     resetFileErrorInParsedFile();
@@ -407,128 +408,14 @@ const onFileInputClick = (event) => {
     event.target.value = "";
 }
 
-const getRowsFromParsedFile = (error) => {   
-  const matchingItem = parsedFile.value.find((item) => {
-    if (error.identifier === item.identifier) {
-      return true;
-    }
-    if (error.contact) {
-      if (item.pic.email === error.emails[0] || item.provider.email === error.emails[0]) {
-        return true;
-      }
-    }
-    return false;
-  });
-
-  return matchingItem ? matchingItem.rowId : null;
-};
-
-const onFileInputClick = (event) => {
-  event.target.value = "";
-};
-
 const handleClearClick = () => {
     parsedFile.value = [];
     error.value = null;
     successMessage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
-    errorCreateRecords.value = [];
 }
 
-const onRetryClick = async () => {
-    error.value = null;
-    isLoading.value = true;
-    const errorResponse = [];
-    try {
-        errorCreateRecords.value.forEach(async (record) => {
-            const response = await importDataBase.retryCreateNationalRecord(record.document, record.draft)
-            if(!response){
-                errorResponse.push({
-                    identifier: document.header.identifier,
-                    draft: true,
-                    document
-                })
-            }
-        })        
-    } catch (error) {
-        error.value = "Error: An error occurred while creating national record."
-    }
-    if(errorResponse === undefined || errorResponse.length === 0){
-        successMessage.value = "Successfully created national record.";
-        errorCreateRecords.value = [];
-    }else{
-        errorCreateRecords.value = errorResponse;
-    }
-    isLoading.value = false;
-}
-
-const toggleTextLength = (event) => {
-    event.preventDefault();
-    const span = event.target.parentElement.previousElementSibling;
-    span.classList.toggle("short-text")
-}
-
-const onRetryClick = async () => {
-    error.value = null;
-    isLoading.value = true;
-    const errorResponse = [];
-    resetFileErrorInParsedFile();
-    try {
-        const promises = errorCreateRecords.value.map(async (record) => {
-            const response = await importDataBase.retryCreateNationalRecord(record.document, record.draft)
-            if(response.error){
-                errorResponse.push({
-                    identifier: document.header.identifier,
-                    draft: true,
-                    document,
-                    contact: true,
-                    error: response.error
-                })
-            }
-        })      
-        await Promise.all(promises);
-
-        if(errorResponse.length === 0){
-            successMessage.value = "Successfully created national record.";
-            errorCreateRecords.value = [];
-        }else{
-            errorCreateRecords.value = errorResponse;
-        }
-        isLoading.value = false;
-    } catch (error) {
-        error.value = "Error: An error occurred while creating national record."
-        isLoading.value = false;
-    }       
-}
-
-// const toggleTextLength = (event) => {
-//     event.preventDefault();
-//     const span = event.target.parentElement.previousElementSibling;
-//     span.classList.toggle("short-text")
-// }
-
-const closeDialog = () => {
-  modal.hide();
-};
-
-const getNestedValue = (obj, path) => {
-  return path.split(".").reduce((o, key) => (o ? o[key] : ""), obj);
-}
-
-const isLongText = (text) => {
-  return text && text.length > 45;
-}
-
-watch(progressTracking, (newValue) => {
-  if (newValue < 100) {
-    updatedParsedFileWithSuccess();
-  }
-});
-
-onMounted(async () => {
-  modal = new Modal(importModal.value);
-});
 </script>
 
 <style scoped></style>
