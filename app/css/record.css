@@ -189,15 +189,11 @@
 .table-container{
     max-height: 37vh;
     overflow: scroll;
-    /* max-width: 1076px; */
+    max-width: 1076px;
 }
 
 .modal__header p{
     font-weight: lighter;
     color: lightslategray;
     margin: 0;
-}
-
-.table-container td{
-    min-width: 90px;
 }
