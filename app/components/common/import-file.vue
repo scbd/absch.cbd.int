@@ -46,23 +46,23 @@
                         <tr>
                             <th scope="col" rowspan="2">#</th>
                             <th scope="col" rowspan="2">{{t("languageToPublish")}}</th>
-                            <th scope="col" rowspan="2">Country</th>
-                            <th scope="col" rowspan="2">CNA</th>
-                            <th scope="col" rowspan="2">Permit Equivalent</th>
-                            <th scope="col" rowspan="2">Date of Issuance</th>
-                            <th scope="col" rowspan="2">Date of Expiry</th>
+                            <th scope="col" rowspan="2">{{t("country")}}</th>
+                            <th scope="col" rowspan="2">{{t("CNAResponsible")}}</th>
+                            <th scope="col" rowspan="2">{{t("permit")}}</th>
+                            <th scope="col" rowspan="2">{{t("dateOfIssuance")}}</th>
+                            <th scope="col" rowspan="2">{{t("dateOfExpiry")}}</th>
                             <th scope="col" colspan="8" class="text-center">Provider</th>
                             <th scope="col" colspan="9" class="text-center">Pic</th>
                             <th scope="col" rowspan="2">MatConset</th>
-                            <th scope="col" rowspan="2">Subject Matter</th>
-                            <th scope="col" rowspan="2">Usages Description</th>
-                            <th scope="col" rowspan="2">Keywords</th>
-                            <th scope="col" rowspan="2">Specimens</th>
-                            <th scope="col" rowspan="2">Taxonomies</th>
-                            <th scope="col" rowspan="2">Usage</th>
-                            <th scope="col" rowspan="2">Conditions Third Party Transfer</th>
-                            <th scope="col" rowspan="2">Permit Files</th>
-                            <th scope="col" rowspan="2">Additional Information</th>
+                            <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
+                            <th scope="col" rowspan="2">{{t("usagesDescription")}}</th>
+                            <th scope="col" rowspan="2">{{t("keywords")}}</th>
+                            <th scope="col" rowspan="2">{{t("specimens")}}</th>
+                            <th scope="col" rowspan="2">{{t("taxonomy")}}</th>
+                            <th scope="col" rowspan="2">{{t("usages")}}</th>
+                            <th scope="col" rowspan="2">{{t("thirdPartyTransferCondition")}}</th>
+                            <th scope="col" rowspan="2">{{t("permitFiles")}}</th>
+                            <th scope="col" rowspan="2">{{t("additionalInformation")}}</th>
                         </tr>
                          <tr>
                             <th scope="col">Type</th>
@@ -88,39 +88,39 @@
                     <tbody>
                         <tr v-for="(data,index) in parsedFile" :key="index">
                             <th scope="row">{{index + 1}}</th>
-                            <td>{{data.language}}</td>
-                            <td>{{data.country}}</td>
-                            <td>{{data.cna}}</td>
-                            <td>{{data.permit_equivalent}}</td>
-                            <td>{{data.date_of_issuance}}</td>
-                            <td>{{data.dateOfExpiry}}</td>
-                            <td>{{data.provider.type}}</td>
-                            <td>{{data.provider.existing}}</td>
-                            <td>{{data.provider.orgName_firstName}}</td>
-                            <td>{{data.provider.acronym_lastName}}</td>
-                            <td>{{data.provider.address}}</td>
-                            <td>{{data.provider.city}}</td>
-                            <td>{{data.provider.country}}</td>
-                            <td>{{data.provider.email}}</td>
-                            <td>{{data.pic.consent}}</td>
-                            <td>{{data.pic.type}}</td>
-                            <td>{{data.pic.existing}}</td>
-                            <td>{{data.pic.orgName_firstName}}</td>
-                            <td>{{data.pic.acronym_lastName}}</td>
-                            <td>{{data.pic.address}}</td>
-                            <td>{{data.pic.city}}</td>
-                            <td>{{data.pic.country}}</td>
-                            <td>{{data.pic.email}}</td>
-                            <td>{{data.matConset}}</td>
-                            <td>{{data.subjectMatter}}</td>
-                            <td>{{data.usageDescription}}</td>
-                            <td>{{data.keywords}}</td>
-                            <td>{{data.specimens}}</td>
-                            <td>{{data.taxonomies}}</td>
-                            <td>{{data.usage}}</td>
-                            <td>{{data.conditions_third_party_transfer}}</td>
-                            <td>{{data.permitFiles}}</td>
-                            <td>{{data?.additional_information}}</td>
+                            <td class="p-2">{{data.language}}</td>
+                            <td class="p-2">{{data.country}}</td>
+                            <td class="p-2">{{data.cna}}</td>
+                            <td class="p-2">{{data.permit_equivalent}}</td>
+                            <td class="p-2">{{data.date_of_issuance}}</td>
+                            <td class="p-2">{{data.dateOfExpiry}}</td>
+                            <td class="p-2">{{data.provider.type}}</td>
+                            <td class="p-2">{{data.provider.existing}}</td>
+                            <td class="p-2">{{data.provider.orgName_firstName}}</td>
+                            <td class="p-2">{{data.provider.acronym_lastName}}</td>
+                            <td class="p-2">{{data.provider.address}}</td>
+                            <td class="p-2">{{data.provider.city}}</td>
+                            <td class="p-2">{{data.provider.country}}</td>
+                            <td class="p-2">{{data.provider.email}}</td>
+                            <td class="p-2">{{data.pic.consent}}</td>
+                            <td class="p-2">{{data.pic.type}}</td>
+                            <td class="p-2">{{data.pic.existing}}</td>
+                            <td class="p-2">{{data.pic.orgName_firstName}}</td>
+                            <td class="p-2">{{data.pic.acronym_lastName}}</td>
+                            <td class="p-2">{{data.pic.address}}</td>
+                            <td class="p-2">{{data.pic.city}}</td>
+                            <td class="p-2">{{data.pic.country}}</td>
+                            <td class="p-2">{{data.pic.email}}</td>
+                            <td class="p-2">{{data.matConset}}</td>
+                            <td class="p-2">{{data.subjectMatter}}</td>
+                            <td class="p-2">{{data.usageDescription}}</td>
+                            <td class="p-2">{{data.keywords}}</td>
+                            <td class="p-2">{{data.specimens}}</td>
+                            <td class="p-2">{{data.taxonomies}}</td>
+                            <td class="p-2">{{data.usage}}</td>
+                            <td class="p-2">{{data.conditions_third_party_transfer}}</td>
+                            <td class="p-2">{{data.permitFiles}}</td>
+                            <td class="p-2">{{data?.additional_information}}</td>
                         </tr>
                     </tbody>
                 </table>
