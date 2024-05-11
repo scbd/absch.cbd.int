@@ -1,7 +1,5 @@
 <template>
-  <button class="btn btn-primary btn-sm" type="button" @click="toggleModal">
-    {{ t("importIrcc") }}
-  </button>
+    <button class="btn btn-primary btn-sm" type="button" @click="toggleModal">{{t("importIrcc")}}</button>
 
     <ImportModal ref="importModal"
             :showModal="showModal" 
@@ -73,10 +71,9 @@
               </div>
             </div>
             
-            <div class="col-md-6 text-center d-flex align-items-center" v-if="multipleImportSheets.length">
-                <span class="text-danger me-2" data-toggle="tooltip" data-placement="top" :title="t('multipleSheetAlert')"><i class="bi bi-info-circle"></i></span>
-                <select class="form-select" :disabled="isLoading"
-                v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
+            <div class="col-md-9 text-center d-flex align-items-center" v-if="multipleImportSheets.length">
+                <span class="text-danger me-2">{{t("multipleSheetAlert")}}</span>
+                <select class="form-select" v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
                     <option v-for="(sheet, index) in multipleImportSheets" :key="index" :value="index">{{sheet}}</option>
                 </select>
             </div>
@@ -92,43 +89,43 @@
                         <tr>
                             <th scope="col" rowspan="2">#</th>
                             <th scope="col" rowspan="2">{{t("languageToPublish")}}</th>
-                            <th scope="col" rowspan="2">{{t("country")}}</th>
-                            <th scope="col" rowspan="2">{{t("CNAResponsible")}}</th>
-                            <th scope="col" rowspan="2">{{t("permit")}}</th>
-                            <th scope="col" rowspan="2">{{t("dateOfIssuance")}}</th>
-                            <th scope="col" rowspan="2">{{t("dateOfExpiry")}}</th>
+                            <th scope="col" rowspan="2">Country</th>
+                            <th scope="col" rowspan="2">CNA</th>
+                            <th scope="col" rowspan="2">Permit Equivalent</th>
+                            <th scope="col" rowspan="2">Date of Issuance</th>
+                            <th scope="col" rowspan="2">Date of Expiry</th>
                             <th scope="col" colspan="8" class="text-center">Provider</th>
                             <th scope="col" colspan="9" class="text-center">Pic</th>
                             <th scope="col" rowspan="2">MatConset</th>
-                            <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
-                            <th scope="col" rowspan="2">{{t("usagesDescription")}}</th>
-                            <th scope="col" rowspan="2">{{t("keywords")}}</th>
-                            <th scope="col" rowspan="2">{{t("specimens")}}</th>
-                            <th scope="col" rowspan="2">{{t("taxonomy")}}</th>
-                            <th scope="col" rowspan="2">{{t("usages")}}</th>
-                            <th scope="col" rowspan="2">{{t("thirdPartyTransferCondition")}}</th>
-                            <th scope="col" rowspan="2">{{t("permitFiles")}}</th>
-                            <th scope="col" rowspan="2">{{t("additionalInformation")}}</th>
+                            <th scope="col" rowspan="2">Subject Matter</th>
+                            <th scope="col" rowspan="2">Usages Description</th>
+                            <th scope="col" rowspan="2">Keywords</th>
+                            <th scope="col" rowspan="2">Specimens</th>
+                            <th scope="col" rowspan="2">Taxonomies</th>
+                            <th scope="col" rowspan="2">Usage</th>
+                            <th scope="col" rowspan="2">Conditions Third Party Transfer</th>
+                            <th scope="col" rowspan="2">Permit Files</th>
+                            <th scope="col" rowspan="2">Additional Information</th>
                         </tr>
                          <tr>
-                            <th scope="col">{{t("type")}}</th>
-                            <th scope="col">{{t("existing")}}</th>
-                            <th scope="col">{{t("orgfirstName")}}</th>
-                            <th scope="col">{{t("acronymfirstName")}}</th>
-                            <th scope="col">{{t("address")}}</th>
-                            <th scope="col">{{t("city")}}</th>
-                            <th scope="col">{{t("country")}}</th>
-                            <th scope="col">{{t("email")}}</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Existing</th>
+                            <th scope="col">OrgName FirstName</th>
+                            <th scope="col">Acronym FirstName</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Email</th>
 
-                            <th scope="col">{{t("consent")}}</th>
-                            <th scope="col">{{t("type")}}</th>
-                            <th scope="col">{{t("existing")}}</th>
-                            <th scope="col">{{t("orgfirstName")}}</th>
-                            <th scope="col">{{t("acronymfirstName")}}</th>
-                            <th scope="col">{{t("address")}}</th>
-                            <th scope="col">{{t("city")}}</th>
-                            <th scope="col">{{t("country")}}</th>
-                            <th scope="col">{{t("email")}}</th>
+                            <th scope="col">Consent</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Existing</th>
+                            <th scope="col">OrgName FirstName</th>
+                            <th scope="col">Acronym FirstName</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Email</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -139,39 +136,39 @@
                             }"
                         >
                             <th scope="row">{{index + 1}}</th>
-                            <td class="p-2">{{data.language}}</td>
-                            <td class="p-2">{{data.country}}</td>
-                            <td class="p-2">{{data.cna}}</td>
-                            <td class="p-2">{{data.permit_equivalent}}</td>
-                            <td class="p-2">{{data.date_of_issuance}}</td>
-                            <td class="p-2">{{data.dateOfExpiry}}</td>
-                            <td class="p-2">{{data.provider.type}}</td>
-                            <td class="p-2">{{data.provider.existing}}</td>
-                            <td class="p-2">{{data.provider.orgName_firstName}}</td>
-                            <td class="p-2">{{data.provider.acronym_lastName}}</td>
-                            <td class="p-2">{{data.provider.address}}</td>
-                            <td class="p-2">{{data.provider.city}}</td>
-                            <td class="p-2">{{data.provider.country}}</td>
-                            <td class="p-2">{{data.provider.email}}</td>
-                            <td class="p-2">{{data.pic.consent}}</td>
-                            <td class="p-2">{{data.pic.type}}</td>
-                            <td class="p-2">{{data.pic.existing}}</td>
-                            <td class="p-2">{{data.pic.orgName_firstName}}</td>
-                            <td class="p-2">{{data.pic.acronym_lastName}}</td>
-                            <td class="p-2">{{data.pic.address}}</td>
-                            <td class="p-2">{{data.pic.city}}</td>
-                            <td class="p-2">{{data.pic.country}}</td>
-                            <td class="p-2">{{data.pic.email}}</td>
-                            <td class="p-2">{{data.matConset}}</td>
-                            <td class="p-2">{{data.subjectMatter}}</td>
-                            <td class="p-2">{{data.usageDescription}}</td>
-                            <td class="p-2">{{data.keywords}}</td>
-                            <td class="p-2">{{data.specimens}}</td>
-                            <td class="p-2">{{data.taxonomies}}</td>
-                            <td class="p-2">{{data.usage}}</td>
-                            <td class="p-2">{{data.conditions_third_party_transfer}}</td>
-                            <td class="p-2">{{data.permitFiles}}</td>
-                            <td class="p-2">{{data?.additional_information}}</td>
+                            <td>{{data.language}}</td>
+                            <td>{{data.country}}</td>
+                            <td>{{data.cna}}</td>
+                            <td>{{data.permit_equivalent}}</td>
+                            <td>{{data.date_of_issuance}}</td>
+                            <td>{{data.dateOfExpiry}}</td>
+                            <td>{{data.provider.type}}</td>
+                            <td>{{data.provider.existing}}</td>
+                            <td>{{data.provider.orgName_firstName}}</td>
+                            <td>{{data.provider.acronym_lastName}}</td>
+                            <td>{{data.provider.address}}</td>
+                            <td>{{data.provider.city}}</td>
+                            <td>{{data.provider.country}}</td>
+                            <td>{{data.provider.email}}</td>
+                            <td>{{data.pic.consent}}</td>
+                            <td>{{data.pic.type}}</td>
+                            <td>{{data.pic.existing}}</td>
+                            <td>{{data.pic.orgName_firstName}}</td>
+                            <td>{{data.pic.acronym_lastName}}</td>
+                            <td>{{data.pic.address}}</td>
+                            <td>{{data.pic.city}}</td>
+                            <td>{{data.pic.country}}</td>
+                            <td>{{data.pic.email}}</td>
+                            <td>{{data.matConset}}</td>
+                            <td>{{data.subjectMatter}}</td>
+                            <td>{{data.usageDescription}}</td>
+                            <td>{{data.keywords}}</td>
+                            <td>{{data.specimens}}</td>
+                            <td>{{data.taxonomies}}</td>
+                            <td>{{data.usage}}</td>
+                            <td>{{data.conditions_third_party_transfer}}</td>
+                            <td>{{data.permitFiles}}</td>
+                            <td>{{data?.additional_information}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -234,13 +231,10 @@ import { ImportDataBase } from "../../services/import-data/import-data-base"
 import { ImportDataIRCC } from "../../services/import-data/import-data-ircc"
 import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
 import messages from "../../app-text/views/forms/edit/abs/edit-absPermit.json"
-import messages2 from "../../app-text/components/common/import-file.json";
 import kmTerm from '~/components/km/KmTerm.vue';
 import { useI18n } from 'vue-i18n';
 
-const { locale } = useI18n();
-Object.assign(messages[locale.value], messages2[locale.value]);
-const { t } = useI18n({ messages });
+const { locale, t } = useI18n({ messages });
 const realm = useRealm();
 const user = useUser();
 const auth = useAuth();
@@ -352,10 +346,7 @@ const handleSelectedSheetChange = async () => {
             error.value = null;
             errorCreateRecords.value = [];
             successMessage.value = null;
-            resetFileErrorInParsedFile();
             parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
-            console.log("parsedFile", parsedFile.value, parsedFile.value.length)
->>>>>>> a109512bb (Coded generic table header and body)
         }
       });
     }
@@ -370,13 +361,10 @@ const handleSelectedSheetChange = async () => {
 const handleConfirm = async () => {
     try {
         isLoading.value = true;
-        error.value = null;
-        errorCreateRecords.value = [];
-        successMessage.value = null;
+        error.value = null
         const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
-        const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result);
-        console.log("ERROR RESPONSE", errorResponse);
-        if(errorResponse === undefined || errorResponse.length === 0){
+        const errorCount = await importDataBase.writeFile(importDataIRCC.contacts, result);
+        if(errorCount === undefined || errorCount === 0){
             successMessage.value = "Successfully created national record.";
         }else{
             errorCreateRecords.value = errorResponse;
