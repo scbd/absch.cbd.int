@@ -454,16 +454,11 @@ export class ImportDataIRCC extends ImportDataBase {
 
   readSheetToDisplayOnUI(sheetNames, selectedSheetIndex){
     let sheet =  this.workbook.Sheets[sheetNames[selectedSheetIndex]];
-    // let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
-          const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
-const rowCount = excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length;
-
-console.log('Total rows with data:', rowCount);
+    let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
     const data = []
-    for(let i=4;i<rowCount;i++){
+    for(let i=4;i<rows;i++){
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
-          rowId: i,
           language: super.columnVal(sheet, this.fields.language + i),
           country: super.columnVal(sheet, this.fields.country + i),
           cna: super.columnVal(sheet, this.fields.cna + i),
@@ -500,45 +495,12 @@ console.log('Total rows with data:', rowCount);
           usageDescription: super.columnVal(sheet, this.fields.usageDescription + i),
           conditions_third_party_transfer: super.columnVal(sheet, this.fields.conditions_third_party_transfer + i),
           permitFiles: super.columnVal(sheet, this.fields.permitFiles + i),
-          additional_information: super.columnVal(sheet, this.fields.additional_information + i),
-          fileError: null
+          additional_information: super.columnVal(sheet, this.fields.additional_information + i)
         }
-        const processField = (field, fieldName, isNested = false, parentFieldName = null) =>{
-          if (typeof field === 'object' && !isNested) {
-            value[fieldName] = {};
-            for (const subField in field) {
-              processField(field[subField], subField, true, fieldName);
-            }
-          } else if (isNested) {
-            value[parentFieldName][fieldName] = this.columnVal(sheet, this.fields[parentFieldName][fieldName] + i);
-          } else {
-            value[fieldName] = this.columnVal(sheet, field + i);
-          }
-        };
-
-        for (const fieldName in this.fields) {
-          processField(this.fields[fieldName], fieldName);
->>>>>>> a109512bb (Coded generic table header and body)
-        }
-
         data.push(value);
       }
     }
-
     return data;
-  }
-
-  processField(sheet, field, fieldName, i, value, isNested = false, parentFieldName = null) {
-    if (typeof field === 'object' && !isNested) {
-      value[fieldName] = {};
-      for (const subField in field) {
-        this.processField(sheet, field[subField], subField, i, value, true, fieldName);
-      }
-    } else if (isNested) {
-      value[parentFieldName][fieldName] = this.columnVal(sheet, this.fields[parentFieldName][fieldName] + i);
-    } else {
-      value[fieldName] = this.columnVal(sheet, field + i);
-    }
   }
 
   async fileParser(sheetNames, selectedSheetIndex){
