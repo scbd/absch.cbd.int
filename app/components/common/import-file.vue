@@ -91,23 +91,23 @@
                     <thead>
                         <tr>
                             <th scope="col" rowspan="2">#</th>
-                            <th scope="col" rowspan="2">{{t("language")}}</th>
+                            <th scope="col" rowspan="2">{{t("languageToPublish")}}</th>
                             <th scope="col" rowspan="2">{{t("country")}}</th>
                             <th scope="col" rowspan="2">{{t("CNAResponsible")}}</th>
                             <th scope="col" rowspan="2">{{t("permit")}}</th>
                             <th scope="col" rowspan="2">{{t("dateOfIssuance")}}</th>
                             <th scope="col" rowspan="2">{{t("dateOfExpiry")}}</th>
-                            <th scope="col" colspan="8" class="text-center">{{t("provider")}}</th>
-                            <th scope="col" colspan="9" class="text-center">{{t("pic")}}</th>
-                            <th scope="col" rowspan="2">{{t("matConset")}}</th>
+                            <th scope="col" colspan="8" class="text-center">Provider</th>
+                            <th scope="col" colspan="9" class="text-center">Pic</th>
+                            <th scope="col" rowspan="2">MatConset</th>
                             <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
-                            <th scope="col" rowspan="2">{{t("additionalInformationOnUsage")}}</th>
-                            <th scope="col" rowspan="2">{{t("subjectGenericKeywords")}}</th>
+                            <th scope="col" rowspan="2">{{t("usagesDescription")}}</th>
+                            <th scope="col" rowspan="2">{{t("keywords")}}</th>
                             <th scope="col" rowspan="2">{{t("specimens")}}</th>
                             <th scope="col" rowspan="2">{{t("taxonomy")}}</th>
-                            <th scope="col" rowspan="2">{{t("indicateCommercialUse")}}</th>
+                            <th scope="col" rowspan="2">{{t("usages")}}</th>
                             <th scope="col" rowspan="2">{{t("thirdPartyTransferCondition")}}</th>
-                            <th scope="col" rowspan="2">{{t("copyOfPermit")}}</th>
+                            <th scope="col" rowspan="2">{{t("permitFiles")}}</th>
                             <th scope="col" rowspan="2">{{t("additionalInformation")}}</th>
                         </tr>
                          <tr>
@@ -147,10 +147,7 @@
                             <td class="p-2">{{data.dateOfExpiry}}</td>
                             <td class="p-2">{{data.provider.type}}</td>
                             <td class="p-2">{{data.provider.existing}}</td>
-                            <td class="p-2">
-                                <div :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }">{{data.provider.orgName_firstName}}</div>
-                                <span v-if="data.provider.orgName_firstName.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
-                            </td>
+                            <td class="p-2">{{data.provider.orgName_firstName}}</td>
                             <td class="p-2">{{data.provider.acronym_lastName}}</td>
                             <td class="p-2">{{data.provider.address}}</td>
                             <td class="p-2">{{data.provider.city}}</td>
@@ -159,24 +156,15 @@
                             <td class="p-2">{{data.pic.consent}}</td>
                             <td class="p-2">{{data.pic.type}}</td>
                             <td class="p-2">{{data.pic.existing}}</td>
-                            <td class="p-2">
-                                <div :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }">{{data.pic.orgName_firstName}}</div>
-                                <span v-if="data.pic.orgName_firstName.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
-                            </td>
+                            <td class="p-2">{{data.pic.orgName_firstName}}</td>
                             <td class="p-2">{{data.pic.acronym_lastName}}</td>
                             <td class="p-2">{{data.pic.address}}</td>
                             <td class="p-2">{{data.pic.city}}</td>
                             <td class="p-2">{{data.pic.country}}</td>
                             <td class="p-2">{{data.pic.email}}</td>
                             <td class="p-2">{{data.matConset}}</td>
-                            <td class="p-2">
-                                <div :class="{ 'short-text': data.subjectMatter.length > 45 }">{{data.subjectMatter}}</div>
-                                <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
-                            </td>
-                            <td class="p-2">
-                                <div :class="{ 'short-text': data.usageDescription.length > 45 }">{{data.usageDescription}}</div>
-                                <span v-if="data.usageDescription.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
-                            </td>
+                            <td class="p-2">{{data.subjectMatter}}</td>
+                            <td class="p-2">{{data.usageDescription}}</td>
                             <td class="p-2">{{data.keywords}}</td>
                             <td class="p-2">{{data.specimens}}</td>
                             <td class="p-2">{{data.taxonomies}}</td>
