@@ -4,7 +4,7 @@
       <div class="modal__header">
         <div>
           <h3 class="modal-title">{{ modalTitle }}</h3>
-          <p>Please select a excel file to import data.</p>
+          <p>{{t("pleaseSelectExcelInfo")}}</p>
         </div>
       </div>
       <div class="modal__container">
@@ -20,7 +20,7 @@
                   type="button" 
                   :disabled="isLoading ? true : false"
                   @click="handleClearClick">
-                    Clear
+                    {{t("clear")}}
                 </button>
               </div>
               <div>
@@ -30,7 +30,7 @@
                   @click.stop="toggleModal"
                   :disabled="isLoading ? true : false"
                 >
-                  Close
+                  {{t("close")}}
                 </button>
                 <button
                   class="btn btn-primary ms-3"
@@ -38,7 +38,7 @@
                   @click.stop="handleConfirm"
                   :disabled="isLoading ? true : false"
                 >
-                  Confirm
+                  {{t("confirm")}}
                 </button>  
               </div>            
             </div>
@@ -51,6 +51,10 @@
 
 <script setup>
 import { defineProps } from 'vue';
+import { useI18n } from 'vue-i18n';
+import messages from "../../app-text/components/common/import-modal.json"
+
+const { t } = useI18n({ messages })
 
 const props = defineProps({
     showModal: Boolean,
