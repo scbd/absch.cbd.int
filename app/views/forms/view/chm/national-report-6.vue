@@ -1,7 +1,33 @@
 <template>
     <div id="Record" class="record ">
-        <div class="record-body  bg-white" v-if="document">              
-        {{ document }}       
+        <div class="record-body  bg-white" v-if="document">  
+            <!-- {{ document }} -->
+            <section>
+                <legend> {{ t("sectionI") }} </legend>
+                
+                <div v-if="document.government">                       
+                    <label> {{ t("country") }}</label>
+                    <div class="km-value">                   
+                        <km-term :value="document.government " :locale="locale"></km-term>
+                    </div>                        
+                </div>
+
+                <div v-if="document.notReportingOnNationalTargets">
+                    <label><km-term :value="document.government " :locale="locale"></km-term> {{ t("hasAdpted") }} </label>
+                    <label>{{ t("informationOnWhy") }} <km-term :value="document.government " :locale="locale"></km-term>{{ t("isChoosingTo") }}  </label>
+                    <ng v-vue-ng:km-value-ml  :value="document.notReportingOnNationalTargetsReason" :locales="locale"></ng>   
+                </div>
+
+                <div v-if="document.targetPursued && document.nationalTargets.length">
+                    <label>{{ t("nationalTargets") }}</label>     
+                    <!--TODO: v-for can't use v-model  -->
+                    <div class="km-value" compare-val>
+                        <!-- <div  v-for="nationalTarget in targets" > 
+                            <ng v-vue-ng:view-record-reference  v-model:ng-model="nationalTarget" :locales="locale" html></ng>       
+                        </div>  -->
+                       </div> 
+                </div>
+            </section> 
         </div>   
     </div>
 </template>
@@ -22,5 +48,4 @@
         locale      : { type:String}
     })
     const document = computed(()=>props.documentInfo?.body);
-    
 </script>

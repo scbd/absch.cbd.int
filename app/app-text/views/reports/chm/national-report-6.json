@@ -1,3 +1,10 @@
 {
-    
+    "sectionI":"Section I. Information on the targets being pursued at the national level",
+    "country":"Country",
+    "hasAdpted":"has adopted national biodiversity targets but chooses to report using the Aichi Biodiversity Targets for reference.",
+    "informationOnWhy":"Information on why ",
+    "isChoosingTo":" is choosing to report progress using the Aichi Biodiversity Targets and not its national targets.",              
+    "nationalTargets":"National Targets"     
 }
+
+
