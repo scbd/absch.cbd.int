@@ -25,5 +25,7 @@
     "high":"High",
     "medium":"Medium",
     "low":"Low",
-    "noInformation":"No information"
+    "noInformation":"No information",
+    "relatedCountries":"Related countries",
+    "isMarinesBeyond":"Is this marine areas beyond national jurisdiction?"
 }
