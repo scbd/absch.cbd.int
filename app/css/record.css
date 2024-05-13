@@ -197,3 +197,7 @@
     color: lightslategray;
     margin: 0;
 }
+
+.table-container td{
+    min-width: 90px;
+}

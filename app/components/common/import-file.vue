@@ -51,9 +51,9 @@
                             <th scope="col" rowspan="2">{{t("permit")}}</th>
                             <th scope="col" rowspan="2">{{t("dateOfIssuance")}}</th>
                             <th scope="col" rowspan="2">{{t("dateOfExpiry")}}</th>
-                            <th scope="col" colspan="8" class="text-center">Provider</th>
-                            <th scope="col" colspan="9" class="text-center">Pic</th>
-                            <th scope="col" rowspan="2">MatConset</th>
+                            <th scope="col" colspan="8" class="text-center">{{t("provider")}}</th>
+                            <th scope="col" colspan="9" class="text-center">{{t("pic")}}</th>
+                            <th scope="col" rowspan="2">{{t("matConset")}}</th>
                             <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
                             <th scope="col" rowspan="2">{{t("usagesDescription")}}</th>
                             <th scope="col" rowspan="2">{{t("keywords")}}</th>
@@ -65,24 +65,24 @@
                             <th scope="col" rowspan="2">{{t("additionalInformation")}}</th>
                         </tr>
                          <tr>
-                            <th scope="col">Type</th>
-                            <th scope="col">Existing</th>
-                            <th scope="col">OrgName FirstName</th>
-                            <th scope="col">Acronym FirstName</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">City</th>
-                            <th scope="col">Country</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">{{t("type")}}</th>
+                            <th scope="col">{{t("existing")}}</th>
+                            <th scope="col">{{t("orgfirstName")}}</th>
+                            <th scope="col">{{t("acronymfirstName")}}</th>
+                            <th scope="col">{{t("address")}}</th>
+                            <th scope="col">{{t("city")}}</th>
+                            <th scope="col">{{t("country")}}</th>
+                            <th scope="col">{{t("email")}}</th>
 
-                            <th scope="col">Consent</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Existing</th>
-                            <th scope="col">OrgName FirstName</th>
-                            <th scope="col">Acronym FirstName</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">City</th>
-                            <th scope="col">Country</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">{{t("consent")}}</th>
+                            <th scope="col">{{t("type")}}</th>
+                            <th scope="col">{{t("existing")}}</th>
+                            <th scope="col">{{t("orgfirstName")}}</th>
+                            <th scope="col">{{t("acronymfirstName")}}</th>
+                            <th scope="col">{{t("address")}}</th>
+                            <th scope="col">{{t("city")}}</th>
+                            <th scope="col">{{t("country")}}</th>
+                            <th scope="col">{{t("email")}}</th>
                         </tr>
                     </thead>
                     <tbody>
