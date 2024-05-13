@@ -276,20 +276,11 @@
                     <label>{{t("mechanisms")}}</label>					
                     <ng v-vue-ng:km-value-ml  :value="document.biodiversityCountryProfile.monitoringReviewingMechanisms" :locales="locale" html></ng>
                 </div>
-            </section>		
+            </section>	
+            
+            <view-relevant-information :relevantInfos="document.relevantInformation" :relevantDocs="document.relevantDocuments" :locale="locale">
+            </view-relevant-information> 
 		
-				
-			
-		
-				
-
-				
-		
-	
-		
-		
-
-
         </div>   
     </div>
 </template>
@@ -298,10 +289,10 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import '~/views/forms/view/directives/view-record-reference.directive.js'
+    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-report-6.json';
-    import { useI18n } from 'vue-i18n';
-    import { formatDate } from '~/components/kb/filters';
+    import { useI18n } from 'vue-i18n';    
 
     const { t } = useI18n({ messages });
 
