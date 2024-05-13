@@ -201,16 +201,3 @@
 .table-container td{
     min-width: 90px;
 }
-
-.short-text{
-    max-width: 315px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap !important;
-}
-
-.error__container ul{
-    max-height: 5vh;
-    overflow-y: scroll;
-    width: 90%;
-}

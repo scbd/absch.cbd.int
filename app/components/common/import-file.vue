@@ -93,13 +93,13 @@
                             <th scope="col" rowspan="2">#</th>
                             <th scope="col" rowspan="2">{{t("language")}}</th>
                             <th scope="col" rowspan="2">{{t("country")}}</th>
-                            <th scope="col" rowspan="2">{{t("cnaHeader")}}</th>
-                            <th scope="col" rowspan="2">{{t("linkIrcc")}}</th>
-                            <th scope="col" rowspan="2">{{t("dateOfIssuanceHeader")}}</th>
-                            <th scope="col" rowspan="2">{{t("dateOfExpiryHeader")}}</th>
+                            <th scope="col" rowspan="2">{{t("CNAResponsible")}}</th>
+                            <th scope="col" rowspan="2">{{t("permit")}}</th>
+                            <th scope="col" rowspan="2">{{t("dateOfIssuance")}}</th>
+                            <th scope="col" rowspan="2">{{t("dateOfExpiry")}}</th>
                             <th scope="col" colspan="8" class="text-center">{{t("provider")}}</th>
-                            <th scope="col" colspan="9" class="text-center">{{t("priorInformation")}}</th>
-                            <th scope="col" rowspan="2">{{t("matEstablished")}}</th>
+                            <th scope="col" colspan="9" class="text-center">{{t("pic")}}</th>
+                            <th scope="col" rowspan="2">{{t("matConset")}}</th>
                             <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
                             <th scope="col" rowspan="2">{{t("additionalInformationOnUsage")}}</th>
                             <th scope="col" rowspan="2">{{t("subjectGenericKeywords")}}</th>
