@@ -25,9 +25,15 @@
     "finalcialReportingFramework":"Financial Reporting Framework",
     "otherActivities":"Other activities contributing to the achievement of the Aichi Biodiversity Target at the global level",
     "descriptionDescribe":"Description of country’s contributions to the achievement of the Aichi Biodiversity Targets, please describe how and to what extent these contributions support the implementation of the 2030 Agenda for Sustainable Development and the Sustainable Development Goals:",
-   
-    
-
+    "sectionV":"Section V. Description of the national contribution to the achievement of the targets of the Global Strategy for Plant Conservation",
+    "hasNationalTargets":"has national targets related to the GSPC Targets",
+    "notHaveNationalTargets":"does not have national targets related to the GSPC Targets",
+    "detailsOnTargets":"Details on the specific targets",
+    "informationOnNetworks":"Information on any active networks for plant conservation",
+    "majorMeasures":"Major measures taken by your country for the implementation of the Global Strategy for Plant Conservation",
+    "category":"Category of progress towards the target of the Global Strategy for Plant Conservation at the national level",
+    "explanation":"Explanation on category of progress towards the target of the Global Strategy for Plant Conservation at the national level",
+    "howAndWhat":"Please describe how and to what extent your country has contributed to the achievement of this GSPC Target and summarize the evidence used to support this description",
 }
 
 

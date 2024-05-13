@@ -142,13 +142,13 @@
                             </div>
                             <div v-if="aichiTarget.nationalReportDescription">
                                 <label for="">{{t("additionalRelevantInfo")}}</label>                                      
-                                <ng v-vue-ng:km-value-ml  :value="aichiTarget.nationalReportDescription" :locales="locale"></ng>
+                                <ng v-vue-ng:km-value-ml  :value="aichiTarget.nationalReportDescription" :locales="locale" html></ng>
                             </div>							
                         </div>
 
                         <div v-if="aichiTarget.linkedRecordsDescription">
                             <label for="">{{t("description")}}</label>                               
-                            <ng v-vue-ng:km-value-ml  :value="aichiTarget.linkedRecordsDescription" :locales="locale"></ng>
+                            <ng v-vue-ng:km-value-ml  :value="aichiTarget.linkedRecordsDescription" :locales="locale" html></ng>
                         </div>
 
                         <div v-if="absLinkedRecords">    
@@ -176,18 +176,67 @@
                     </div>
                     <div v-if="aichiTarget.description">
                         <label>{{t("description")}}</label>                         
-                        <ng v-vue-ng:km-value-ml  :value="aichiTarget.description" :locales="locale"></ng>
+                        <ng v-vue-ng:km-value-ml  :value="aichiTarget.description" :locales="locale" html></ng>
                     </div>
                     <div v-if="aichiTarget.achievementActivities">
                         <label for="">{{t("otherActivities")}}</label>                             
-                        <ng v-vue-ng:km-value-ml  :value="aichiTarget.achievementActivities" :locales="locale"></ng>
+                        <ng v-vue-ng:km-value-ml  :value="aichiTarget.achievementActivities" :locales="locale" html></ng>
                     </div>
                 </div>
                 <div v-if="document.nationalContribution.nationalContributionSDGs">                     
                     <label for="">{{ t("descriptionDescribe") }}</label>                         
-                     <ng v-vue-ng:km-value-ml  :value="document.nationalContribution.nationalContributionSDGs" :locales="locale"></ng>            
+                     <ng v-vue-ng:km-value-ml  :value="document.nationalContribution.nationalContributionSDGs" :locales="locale" html></ng>            
                  </div>
             </section>
+
+            <section>
+                <legend>{{t("sectionV")}}</legend>
+                <div>
+                    <div v-if="document.gspcNationalContribution.hasGSPCTargets">                  
+                        <div class="km-value">
+                            <strong><km-term :value="document.government" :locale="locale"></km-term>{{t("hasNationalTargets")}}</strong>
+                        </div>
+                    </div>
+                    <div v-if="!document.gspcNationalContribution.hasGSPCTargets">                
+                        <div class="km-value ">
+                            <strong><km-term :value="document.government" :locale="locale"></km-term>{{t("notHaveNationalTargets")}}</strong>
+                        </div>
+                    </div>
+                    <div v-if="document.gspcNationalContribution.gspcTargetDescription">
+                        <label>{{t("detailsOnTargets")}}</label>                     
+                        <ng v-vue-ng:km-value-ml  :value="document.gspcNationalContribution.gspcTargetDescription" :locales="locale" html></ng> 
+                    </div>
+                    <div v-if="document.gspcNationalContribution.plantConservationNetwork">
+                        <label>{{t("informationOnNetworks")}}</label>                     
+                        <ng v-vue-ng:km-value-ml  :value="document.gspcNationalContribution.plantConservationNetwork" :locales="locale" html></ng> 
+                    </div>
+                    <div v-if="document.gspcNationalContribution.implementationMeasures">
+                        <label>{{t("majorMeasures")}}</label>                  
+                        <ng v-vue-ng:km-value-ml  :value="document.gspcNationalContribution.implementationMeasures" :locales="locale" html></ng> 
+                    </div>                              
+                </div>
+
+                <div v-for="gspcTarget in document.gspcNationalContribution" v-if="gspcTarget.identifier">                                      
+                    <legend>{{lstring(gspcTargets[gspcTarget.identifier].title ,locale)}}</legend>
+
+                    <div v-if="gspcTarget.categoryProgress">
+                        <label>{{t("category")}}</label>
+                        <div class="km-value">
+                            <km-term :value="gspcTarget.categoryProgress" :locale="locale"></km-term>
+                        </div>
+                    </div>
+                    <div v-if="gspcTarget.progressDescription">
+                        <label>{{t("explanation")}}</label>                      
+                        <ng v-vue-ng:km-value-ml  :value="gspcTarget.progressDescription" :locales="locale" html></ng> 
+                    </div>
+                    <div v-if="gspcTarget.description">
+                        <label>{{t("howAndWhat")}}</label>                    
+                        <ng v-vue-ng:km-value-ml  :value="gspcTarget.description" :locales="locale" html></ng> 
+                    </div>
+                </div>
+                <br/>
+            </section>
+
 
         </div>   
     </div>
