@@ -237,6 +237,24 @@
                 <br/>
             </section>
 
+            <section>
+                <legend>{{t("sectionVI")}}</legend>
+		
+                <div v-if="document.iplcContribution">                  
+                    <ng v-vue-ng:km-value-ml  :value="document.iplcContribution" :locales="locale" html></ng>
+                </div>
+                <div v-if="!document.iplcContribution">
+                    <div class="km-value">
+                        {{t("noInformationAvailable")}}
+                    </div>
+                </div>
+            </section>
+				
+					
+			
+		
+		
+
 
         </div>   
     </div>
