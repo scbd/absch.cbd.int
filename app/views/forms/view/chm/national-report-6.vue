@@ -250,8 +250,42 @@
                 </div>
             </section>
 				
-					
+			<section>
+                <legend>{{t("sectionVII")}}</legend>
+                <div v-if="document.biodiversityCountryProfile.statusAndTrends">
+                    <label>{{t("biodiversityFacts")}}</label>						
+                    <ng v-vue-ng:km-value-ml  :value="document.biodiversityCountryProfile.statusAndTrends" :locales="locale" html></ng>
+                </div>
+                <div v-if="document.biodiversityCountryProfile.mainDriversofChange">
+                    <label>{{t("mainPressures")}}</label>						
+                    <ng v-vue-ng:km-value-ml  :value="document.biodiversityCountryProfile.mainDriversofChange"" :locales="locale" html></ng>
+                </div>
+                <div v-if="document.biodiversityCountryProfile.nbsapImplementation">
+                    <label>{{t("implementationNbsap")}}</label>						
+                    <ng v-vue-ng:km-value-ml  :value="document.biodiversityCountryProfile.nbsapImplementation" :locales="locale" html></ng>
+                </div>
+                <div v-if="document.biodiversityCountryProfile.strategicPlanActions">
+                    <label>{{t("overallActions")}}</label>						
+                    <ng v-vue-ng:km-value-ml  :value="document.biodiversityCountryProfile.strategicPlanActions" :locales="locale" html></ng>
+                </div>
+                <div v-if="document.biodiversityCountryProfile.supportMechanisms">
+                    <label>{{t("supportMechanisms")}}</label>						
+                    <ng v-vue-ng:km-value-ml  :value="document.biodiversityCountryProfile.supportMechanisms" :locales="locale" html></ng>
+                </div>
+                <div v-if="document.biodiversityCountryProfile.monitoringReviewingMechanisms">
+                    <label>{{t("mechanisms")}}</label>					
+                    <ng v-vue-ng:km-value-ml  :value="document.biodiversityCountryProfile.monitoringReviewingMechanisms" :locales="locale" html></ng>
+                </div>
+            </section>		
+		
+				
 			
+		
+				
+
+				
+		
+	
 		
 		
 
