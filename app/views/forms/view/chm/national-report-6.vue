@@ -108,12 +108,25 @@
                 </div>
             </section>
 
-
-          
-               
-                    
-                
-        
+            <section>
+                <legend> {{ t("sectionIII") }} </legend>
+                <div v-for="progressAssessment in progressAssessments">
+                    <label>
+                        <!-- Progress Assessment for -->
+                        <span v-if="progressAssessment.aichiTarget"> 
+                            <!-- AICHI target  -->                                    
+                            {{lstring(aichiTargets[progressAssessment.aichiTarget.identifier].title, locale)}}
+                        </span>
+                        <span v-if="progressAssessment.nationalTarget">
+                            <!-- national target  -->         
+                            {{lstring(nationalTargets[progressAssessment.nationalTarget.identifier].title, locale)}}
+                        </span>
+                    </label>
+                    <!-- <view-national-assessment ng-model="progressAssessment" locale="locale" target="{{target}}"></view-national-assessment>	 -->
+                    <ng v-vue-ng:view-national-assessment  :value="progressAssessment" :locales="locale"  target="target"></ng>
+                    <br/>
+                </div>
+            </section>  
 
 
         </div>   
