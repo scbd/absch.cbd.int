@@ -232,8 +232,7 @@
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/event.json';
     import { useI18n } from 'vue-i18n';
-    import { formatDate } from '~/components/kb/filters';
-    import { lstring } from '~/components/kb/filters';
+    import { formatDate, lstring } from '~/components/kb/filters';
 
     const { t } = useI18n({ messages });
 
