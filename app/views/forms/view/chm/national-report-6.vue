@@ -28,6 +28,94 @@
                        </div> 
                 </div>
             </section> 
+
+            <section>
+                <legend> {{ t("sectionII") }} </legend>
+                <div v-if="document.implementationMeasures">
+                    <div v-for="implementationMeasure in document.implementationMeasures" >                                             
+                        <label> {{lstring(implementationMeasure.title,locale)}}</label>
+
+                        <div v-if="implementationMeasure.description">
+                            <label>{{t("measures")}}</label>
+                            <ng v-vue-ng:km-value-ml  :value="implementationMeasure.description" :locales="locale"></ng>  
+                        </div>
+                        <div v-if="implementationMeasure.nationalTargets">
+                            <label>{{t("nationalTargets")}}</label>                           
+                            <div v-for="nationalTarget in implementationMeasure.nationalTargets">
+                                <ng v-vue-ng:km-value-ml  :value="nationalTargets[nationalTarget.identifier].title" :locales="locale"></ng>  
+                            </div>                            
+                        </div>
+                        <div v-if="implementationMeasure.aichiTargets">
+                            <label>{{t( "aichiTargets")}}</label>                           
+                            <div v-for="aichiTarget in implementationMeasure.aichiTargets">                                 
+                                <ng v-vue-ng:km-value-ml  :value="aichiTargets[aichiTarget.identifier].title" :locales="locale"></ng> 
+                            </div>                          
+                        </div>
+                        <div v-if="implementationMeasure.assessment">
+                            <label>{{t("assessment")}}</label>
+                            <div class="km-value" >                   
+                                <km-term :value="implementationMeasure.assessment" :locale="locale"></km-term>
+                            </div>
+                        </div>
+                        <div v-if="implementationMeasure.assessmentDescription">
+                            <label>{{t("toolsOrMethodology")}}</label>
+                            <ng v-vue-ng:km-value-ml  :value="implementationMeasure.assessmentDescription" :locales="locale"></ng> 
+                        </div>                   
+                        <div v-if="implementationMeasure.relevantDocuments">
+                            <label>{{t("relevantWebsites")}}</label>
+                            <div class="km-value">
+                                <div v-for="item in implementationMeasure.relevantDocuments">
+                                    <a translation-url target="target" :href="item.url">
+                                        {{item.name||item.url}}
+                                    </a> 
+                                    <span v-if="item.tag">({{item.tag}})</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-if="implementationMeasure.otherRelevantInformation">
+                            <label>{{t("otherRelevantInfo")}}</label>
+                            <ng v-vue-ng:km-value-ml  :value="implementationMeasure.otherRelevantInformation" :locales="locale"></ng>
+                        </div>
+
+                        <div v-if="implementationMeasure.otherRelevantDocuments">
+                            <label>{{t("otherRelevantWebsite")}}</label>
+                            <div class="km-value">
+                                <div v-for="item in implementationMeasure.otherRelevantDocuments">
+                                    <a translation-url target="target" :href="item.url">
+                                        {{item.name||item.url}}
+                                    </a> <span v-if="item.tag">({{item.tag}})</span>
+                                </div>
+                            </div>
+                        </div> 
+                        <div v-if="implementationMeasure.obstacles">						
+                            <label>{{t("obstacles")}}</label>                       
+                            <ng v-vue-ng:km-value-ml  :value="implementationMeasure.obstacles" :locales="locale"></ng>
+                        </div>
+                        <div v-if="implementationMeasure.obstaclesRelevantDocuments">
+                            <label>{{t("relevantWebsitesAndLinks")}}</label>
+                            <div class="km-value">
+                                <div v-for="item in implementationMeasure.obstaclesRelevantDocuments">
+                                    <a translation-url target="target" :href="item.url">
+                                        {{item.name||item.url}} 
+                                    </a>	
+                                    <span v-if="item.tag">({{item.tag}})</span>									
+                                </div>
+                            </div>
+                        </div>                         
+                        <br/>                      
+                    </div>
+                </div>
+            </section>
+
+
+          
+               
+                    
+                
+        
+
+
         </div>   
     </div>
 </template>

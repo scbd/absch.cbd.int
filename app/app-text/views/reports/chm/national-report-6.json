@@ -4,7 +4,18 @@
     "hasAdpted":"has adopted national biodiversity targets but chooses to report using the Aichi Biodiversity Targets for reference.",
     "informationOnWhy":"Information on why ",
     "isChoosingTo":" is choosing to report progress using the Aichi Biodiversity Targets and not its national targets.",              
-    "nationalTargets":"National Targets"     
+    "nationalTargets":"National Targets",
+    "sectionII":"Section II. Implementation measures, their effectiveness, and associated obstacles and scientific and technical needs to achieve national targets",
+    "measures":"Measures taken to contribute to the implementation of your country’s national biodiversity strategy and action plan",   
+    "nationalTargets":"National Target(s)", 
+    "aichiTargets":"Aichi Biodiversity Target(s)",
+    "assessment":"Assessment of the effectiveness of the implementation measure taken in achieving desired outcomes",
+    "toolsOrMethodology":"tools or methodology used for the assessment of effectiveness above",
+    "relevantWebsites":"Relevant websites, links, and files",
+    "relevantWebsitesAndLinks":"Relevant websites, web links and files",
+    "otherRelevantInfo":"Other relevant information",
+    "otherRelevantWebsite":"Other relevant website address or attached documents",
+    "obstacles":"Obstacles and scientific and technical needs related to the measure taken",
 }
 
 
