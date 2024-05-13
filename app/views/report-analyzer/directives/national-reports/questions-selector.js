@@ -57,8 +57,8 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //
                 //====================================
-                $scope.reportTypeChanged = function() {
-
+                $scope.reportTypeChanged = function(selectedReportType) {
+                    $scope.$emit('onReportTypeChanged', selectedReportType);
                     // Reset selection when user change reportType from UI
 
                     delete $scope.sections;

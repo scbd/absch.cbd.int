@@ -12,7 +12,7 @@
         <tr>
             <th style="width:20%">{{::('questionSelectorT.nationalReport'|$translate)}}</th>
             <td>
-                <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-select form-control">
+                <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged(selectedReportType)"  class="form-select form-control">
                     <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" ng-bind="report.title">
                     </option>
                     

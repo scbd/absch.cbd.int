@@ -31,6 +31,12 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 $location.url(_.trimEnd($location.path(), '/') + '/analyzer');
             };
 
+            $scope.$on('onReportTypeChanged', function(event, reportType) {
+                console.log('Received message from child:', reportType);
+                //ToDo: will update for article
+                var infoBlockUrl    = _.find($scope.reportData, {type:reportType}).infoBlockUrl
+                $scope.infoBlockUrl = baseUrl + infoBlockUrl;
+            });
 
             var DefaultRegions = [
                 "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
@@ -66,7 +72,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                     getReportCount(report.type);
                 })
             });
-            
+            //ToDo: no need if emit is using
             $scope.$watch('selectedReportType', function(newVal){
                 
                 if(newVal){
