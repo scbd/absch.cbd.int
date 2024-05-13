@@ -128,6 +128,66 @@
                 </div>
             </section>  
 
+            <section>
+                <legend> {{ t("sectionIV") }} </legend> 
+                <div v-for="aichiTarget in document.nationalContribution" v-if="aichiTarget.identifier"> 
+                    <legend>{{lstring(aichiTargets[aichiTarget.identifier].title,locale)}}</legend>
+                    <div v-if="aichiTarget.identifier=='AICHI-TARGET-16' && (absNationalReport||absLinkedRecords || aichiTarget.linkedRecordsDescription)">
+                        <div v-if="absNationalReport">
+                            <div>
+                                <label for="">{{t("interimNationalReport")}}</label><br/>
+                                <a translation-url target="_blank" :href="absNationalReport.url_ss[0]">
+                                                    {{absNationalReport.uniqueIdentifier_s|uppercase}}</a> 
+                                {{absNationalReport.title_t}}
+                            </div>
+                            <div v-if="aichiTarget.nationalReportDescription">
+                                <label for="">{{t("additionalRelevantInfo")}}</label>                                      
+                                <ng v-vue-ng:km-value-ml  :value="aichiTarget.nationalReportDescription" :locales="locale"></ng>
+                            </div>							
+                        </div>
+
+                        <div v-if="aichiTarget.linkedRecordsDescription">
+                            <label for="">{{t("description")}}</label>                               
+                            <ng v-vue-ng:km-value-ml  :value="aichiTarget.linkedRecordsDescription" :locales="locale"></ng>
+                        </div>
+
+                        <div v-if="absLinkedRecords">    
+                            <label for="">{{t("absRecords")}}</label>
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr v-for="item in absLinkedRecords">
+                                        <td class="ng-binding">
+                                            <a translation-url target="_blank" :href="item.url_ss[0]">
+                                                {{item.uniqueIdentifier_s|uppercase}}
+                                            </a> 
+                                            {{lstring(item.title_t,locale)}}
+                                        </td>											                                                
+                                    </tr>
+                                </tbody>
+                            </table>                                        
+                        </div>
+                    </div>
+                    <div v-if="aichiTarget.identifier=='AICHI-TARGET-20' && resourceMobilisationReport">
+                        <label for="">{{t("finalcialReportingFramework")}}</label><br/>
+                        <a translation-url target="_blank" :href="resourceMobilisationReport.url_ss[0]">
+                            {{resourceMobilisationReport.url_ss[0]}}
+                        </a> 
+                        {{resourceMobilisationReport.title_t}}
+                    </div>
+                    <div v-if="aichiTarget.description">
+                        <label>{{t("description")}}</label>                         
+                        <ng v-vue-ng:km-value-ml  :value="aichiTarget.description" :locales="locale"></ng>
+                    </div>
+                    <div v-if="aichiTarget.achievementActivities">
+                        <label for="">{{t("otherActivities")}}</label>                             
+                        <ng v-vue-ng:km-value-ml  :value="aichiTarget.achievementActivities" :locales="locale"></ng>
+                    </div>
+                </div>
+                <div v-if="document.nationalContribution.nationalContributionSDGs">                     
+                    <label for="">{{ t("descriptionDescribe") }}</label>                         
+                     <ng v-vue-ng:km-value-ml  :value="document.nationalContribution.nationalContributionSDGs" :locales="locale"></ng>            
+                 </div>
+            </section>
 
         </div>   
     </div>
