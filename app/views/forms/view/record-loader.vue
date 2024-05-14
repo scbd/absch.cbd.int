@@ -4,7 +4,10 @@
             <aichi-target v-if="documentInfo?.type == 'aichiTarget'"  
                  :document-info="documentInfo" :locale="locale"></aichi-target>
             <national-assessment v-if="documentInfo?.type == 'nationalAssessment'"  
-                    :document-info="documentInfo" :locale="locale"></national-assessment>        
+                    :document-info="documentInfo" :locale="locale"></national-assessment>    
+            <capacity-building-resource    v-if="documentInfo?.type == 'capacityBuildingResource'"  
+                    :document-info="documentInfo" :locale="locale"></capacity-building-resource   >    
+                    
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
                 Loading...
@@ -19,6 +22,7 @@
     import { defineAsyncComponent, Suspense } from 'vue';
     import aichiTarget from '~/views/forms/view/chm/aichi-target.vue'
     import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue'
+    import capacityBuildingResource from '~/views/forms/view/chm/capacity-building-resource.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
