@@ -29,7 +29,7 @@
             
             <section>
                 <div v-if="document.jurisdiction || document.jurisdictionInfo"> 
-                    <legend>{{ t("levelOfApplication") }} </legend> 
+                    <legend>{{ t("level") }} </legend> 
                 
                     <div v-if="document.jurisdiction">
                         <label>{{ t("jurisdiction") }} </label> 
@@ -39,7 +39,7 @@
                     </div>  
 
                     <div v-if="document.jurisdictionInfo">
-                        <label>{{ t("detailsOfLevel") }} </label> 
+                        <label>{{ t("details") }} </label> 
                         <ng v-vue-ng:km-value-ml  :value="document.jurisdictionInfo" :locales="locale" html></ng> 
                     </div> 
                 </div>
@@ -47,7 +47,7 @@
 
             <section>
                 <div  v-if="document.aichiTargets || document.otherAichiTargets || document.noOtherAichiTargetsDescription" >              
-                    <legend>{{ t("relevanceOfToAichiTargets") }} </legend>
+                    <legend>{{ t("relevance") }} </legend>
                 
                     <div v-if="document.aichiTargets" >  
                         <label v-if="document.isAichiTarget" >{{ t("aichiTarget") }}</label>
