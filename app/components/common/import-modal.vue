@@ -1,13 +1,11 @@
 <template>
-  <div class="modal fade mt-1" ref="importModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true" id="import-modal">
+  <div class="modal fade" ref="importModal" data-backdrop="static" tabindex="-1" aria-hidden="true" id="import-modal">
     <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width: 80vw;" role="document">
       <div class="modal-content">
         <div class="modal-header color-black">
-          <div class="py-0 px-1">
-            <h5 class="modal-title">{{ modalTitle }}</h5>
-            <p class="m-0">{{ t("pleaseSelectExcelInfo") }}</p>
-          </div>
-          <button type="button" class="border-0 close" @click="closeDialog()" :disabled="isLoading" aria-label="Close">
+          <h5 class="modal-title">{{ modalTitle }}</h5>
+          <p>{{ t("pleaseSelectExcelInfo") }}</p>
+          <button type="button" class="border-0 close" @click="closeDialog()" :disabled="loading" aria-label="Close">
             <i class="bi bi-x-circle-fill icon-lg"></i>
           </button>
         </div>
@@ -38,7 +36,8 @@ const { t } = useI18n({ messages });
 const importModal = shallowRef(null);
 let modal = null;
 
-const props = defineProps({ 
+const props = defineProps({
+  showModal: Boolean,
   modalTitle: String,
   parsedFile: Array,
   handleConfirm: Function,
@@ -56,7 +55,6 @@ const closeDialog = () => {
 };
 
 const showDialog = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
   modal.show('static');
 };
 

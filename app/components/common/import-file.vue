@@ -4,6 +4,7 @@
   </button>
 
     <ImportModal ref="importModal"
+            :showModal="showModal" 
             :modalTitle="t('importIrccExcel')" 
             :parsedFile="parsedFile"
             :handleConfirm="handleConfirm"
@@ -84,7 +85,7 @@
                 <span v-if="parsedFile.length > 0">{{t('totalRecords')}} {{parsedFile.length}}</span>
             </div>
         </div>
-        <div class="row table-container table-responsive" v-if="parsedFile.length">
+        <div class="row table-container" v-if="parsedFile.length">
             <!-- <div class="col"> -->
                 <table class="table table-striped table-bordered table-condensed">
                     <thead>
@@ -211,57 +212,11 @@
         </div>
         <div class="row mt-3" v-show="isLoading">
             <div class="col-12 text-center">
-                <span>{{t("loadingMessage")}}</span>
-                <br>
                 <div class="spinner-border" role="status">
-                  <span class="sr-only">{{ t("loading") }}...</span>
+                    <span class="sr-only">{{t("loading")}}...</span>
                 </div>
               </div>
             </div>
-
-            <div class="progress row" v-if="progressTracking > 0">
-              <div
-                class="progress-bar"
-                role="progressbar"
-                :style="{ width: progressPercentage + '%' }"
-                :aria-valuenow="progressPercentage"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                {{ Math.round(progressPercentage) }}%
-              </div>
-            </div>
-
-          </div>
-          <div class="modal-footer d-block">
-            <button
-              class="btn btn-primary float-start"
-              v-show="parsedFile.length"
-              @click.stop="handleConfirm"
-              :disabled="isLoading ? true : false"
-            >
-              {{ t("confirm") }}
-            </button>
-            <button
-              class="btn btn-secondary float-end"
-              type="button"
-              v-show="parsedFile.length"
-              :disabled="isLoading ? true : false"
-              @click="handleClearClick"
-            >
-              {{ t("clear") }}
-            </button>
-          </div>
-        </div>
-        
-        <div class="progress row" v-if="progressTracking > 0">
-            <div class="progress-bar" role="progressbar" 
-            :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{Math.round(progressPercentage)}}%</div>
-        </div>
-        
-        <div class="progress row" v-if="progressTracking > 0">
-            <div class="progress-bar" role="progressbar" 
-            :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{progressPercentage}}%</div>
         </div>
     </ImportModal>
 </template>
@@ -311,7 +266,7 @@ const userGovernment = computed(()=>{
 })
 
 let importDataIRCC;
-const importModal = ref(null);
+ const importModal = ref(null);
 function toggleModal() {
     parsedFile.value = [];
     error.value = null;
