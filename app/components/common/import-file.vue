@@ -45,15 +45,15 @@
                     <thead>
                         <tr>
                             <th scope="col" rowspan="2">#</th>
-                            <th scope="col" rowspan="2">{{t("languageToPublish")}}</th>
+                            <th scope="col" rowspan="2">{{t("language")}}</th>
                             <th scope="col" rowspan="2">{{t("country")}}</th>
                             <th scope="col" rowspan="2">{{t("CNAResponsible")}}</th>
                             <th scope="col" rowspan="2">{{t("permit")}}</th>
                             <th scope="col" rowspan="2">{{t("dateOfIssuance")}}</th>
                             <th scope="col" rowspan="2">{{t("dateOfExpiry")}}</th>
                             <th scope="col" colspan="8" class="text-center">{{t("provider")}}</th>
-                            <th scope="col" colspan="9" class="text-center">{{t("pic")}}</th>
-                            <th scope="col" rowspan="2">{{t("matConset")}}</th>
+                            <th scope="col" colspan="9" class="text-center">{{t("priorInformation")}}</th>
+                            <th scope="col" rowspan="2">{{t("matEstablished")}}</th>
                             <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
                             <th scope="col" rowspan="2">{{t("usagesDescription")}}</th>
                             <th scope="col" rowspan="2">{{t("keywords")}}</th>
@@ -96,7 +96,10 @@
                             <td class="p-2">{{data.dateOfExpiry}}</td>
                             <td class="p-2">{{data.provider.type}}</td>
                             <td class="p-2">{{data.provider.existing}}</td>
-                            <td class="p-2">{{data.provider.orgName_firstName}}</td>
+                            <td class="p-2">
+                                <div :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }">{{data.provider.orgName_firstName}}</div>
+                                <span v-if="data.provider.orgName_firstName.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
+                            </td>
                             <td class="p-2">{{data.provider.acronym_lastName}}</td>
                             <td class="p-2">{{data.provider.address}}</td>
                             <td class="p-2">{{data.provider.city}}</td>
@@ -105,15 +108,24 @@
                             <td class="p-2">{{data.pic.consent}}</td>
                             <td class="p-2">{{data.pic.type}}</td>
                             <td class="p-2">{{data.pic.existing}}</td>
-                            <td class="p-2">{{data.pic.orgName_firstName}}</td>
+                            <td class="p-2">
+                                <div :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }">{{data.pic.orgName_firstName}}</div>
+                                <span v-if="data.pic.orgName_firstName.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
+                            </td>
                             <td class="p-2">{{data.pic.acronym_lastName}}</td>
                             <td class="p-2">{{data.pic.address}}</td>
                             <td class="p-2">{{data.pic.city}}</td>
                             <td class="p-2">{{data.pic.country}}</td>
                             <td class="p-2">{{data.pic.email}}</td>
                             <td class="p-2">{{data.matConset}}</td>
-                            <td class="p-2">{{data.subjectMatter}}</td>
-                            <td class="p-2">{{data.usageDescription}}</td>
+                            <td class="p-2">
+                                <div :class="{ 'short-text': data.subjectMatter.length > 45 }">{{data.subjectMatter}}</div>
+                                <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
+                            </td>
+                            <td class="p-2">
+                                <div :class="{ 'short-text': data.usageDescription.length > 45 }">{{data.usageDescription}}</div>
+                                <span v-if="data.usageDescription.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
+                            </td>
                             <td class="p-2">{{data.keywords}}</td>
                             <td class="p-2">{{data.specimens}}</td>
                             <td class="p-2">{{data.taxonomies}}</td>
@@ -126,9 +138,19 @@
                 </table>
             </div>
         </div>
-        <div class="row mt-5">
+        
+        <div class="row mt-5 error__container" v-if="errorCreateRecords
+        .length">
+            <div class="col-12 alert alert-danger d-flex justify-content-between align-items-center">
+                <ul class="flex-1">
+                    <li v-for="(value) in errorCreateRecords" :key="value.identifier">Error creating <span v-if="value.draft">draft</span> record of identifier {{value.identifier}}</li>
+                </ul>
+                <button class="btn btn-primary" @click="onRetryClick">Retry</button>
+            </div>
+        </div>
+        <div class="row mt-4" v-else-if="error">
             <div class="col-12 text-center">
-                <span class="alert alert-danger" v-if="error">{{error}}</span>
+                <span class="alert alert-danger" >{{error}}</span>
             </div>
         </div>
         <div class="row mt-5"  v-if="successMessage">
@@ -136,7 +158,7 @@
                 <div class="alert alert-success">{{successMessage}}</div>
             </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3" v-show="isLoading">
             <div class="col-4">
             </div>
             <div class="col-4 text-center">
@@ -172,11 +194,13 @@ const isLoading = ref(false);
 const parsedFile = ref([]);
 const selectedLanguage = ref(locale.value);
 const error = ref("");
+const errorCreateRecords = ref([]);
 const successMessage = ref("");
 const multipleImportSheets = ref([]);
 const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
+const sText = ref("");
 
 const importDataBase = new ImportDataBase({tokenReader:()=>auth.token(), realm:realm.value});
 const emit = defineEmits(['refreshRecord']);
@@ -192,8 +216,8 @@ let importDataIRCC;
 function toggleModal() {
     parsedFile.value = [];
     error.value = null;
+    // errorCreateRecords.value = [];
     successMessage.value = null;
-    // selectedLanguage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
     showModal.value = !showModal.value;
@@ -206,6 +230,7 @@ const handleFileChange = async (event) => {
     file.value = event.target.files[0];
     isLoading.value = true;
     error.value = null;
+    errorCreateRecords.value = [];
     successMessage.value = null;
     selectedSheetIndex.value = 0;
     multipleImportSheets.value = [];
@@ -231,6 +256,7 @@ const handleSelectedSheetChange = async () => {
         if(selectedSheetIndex.value != null){
             isLoading.value = true;
             error.value = null;
+            errorCreateRecords.value = [];
             successMessage.value = null;
             parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
         }
@@ -245,13 +271,16 @@ const handleSelectedSheetChange = async () => {
 const handleConfirm = async () => {
     try {
         isLoading.value = true;
-        error.value = null
+        error.value = null;
+        errorCreateRecords.value = [];
+        successMessage.value = null;
         const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
-        const errorCount = await importDataBase.writeFile(importDataIRCC.contacts, result);
-        if(errorCount === undefined || errorCount === 0){
+        const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result);
+        console.log("ERROR RESPONSE", errorResponse);
+        if(errorResponse === undefined || errorResponse.length === 0){
             successMessage.value = "Successfully created national record.";
         }else{
-            throw new Error("Error occurred while creating national record");
+            errorCreateRecords.value = errorResponse;
         }
 
     } catch (err) {
@@ -271,6 +300,40 @@ const handleClearClick = () => {
     successMessage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
+    errorCreateRecords.value = [];
+}
+
+const onRetryClick = async () => {
+    error.value = null;
+    isLoading.value = true;
+    const errorResponse = [];
+    try {
+        errorCreateRecords.value.forEach(async (record) => {
+            const response = await importDataBase.retryCreateNationalRecord(record.document, record.draft)
+            if(!response){
+                errorResponse.push({
+                    identifier: document.header.identifier,
+                    draft: true,
+                    document
+                })
+            }
+        })        
+    } catch (error) {
+        error.value = "Error: An error occurred while creating national record."
+    }
+    if(errorResponse === undefined || errorResponse.length === 0){
+        successMessage.value = "Successfully created national record.";
+        errorCreateRecords.value = [];
+    }else{
+        errorCreateRecords.value = errorResponse;
+    }
+    isLoading.value = false;
+}
+
+const toggleTextLength = (event) => {
+    event.preventDefault();
+    const span = event.target.parentElement.previousElementSibling;
+    span.classList.toggle("short-text")
 }
 
 </script>

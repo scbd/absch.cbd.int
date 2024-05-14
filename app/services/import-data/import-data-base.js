@@ -208,49 +208,67 @@ export class ImportDataBase {
     };
 
     async createNationalRecord(document, isDraft){
-        if(!document)
-            return;
-    
-            try{
-                let url = `/api/v2013/documents/${document.header.identifier}`
-    
-                if(isDraft)
-                    url += '/versions/draft'
+      if(!document)
+          return;
+  
+      try{
+          let url = `/api/v2013/documents/${document.header.identifier}`
 
-                let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)         
-                return irccRequest.body;
-            }
-            catch(err){
-                throw err;
-            }
+          if(isDraft)
+              url += '/versions/draft'
+
+          let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
+          return irccRequest;
+      }
+      catch(err){
+          console.log("ERR", err)
+      }
     };
 
-    async writeFile(contacts, documents){
+    async validateAndCreateNationalRecord(contacts, documents){
         let errorCount = 0;
+        const errorResponse = []
         for (let index = 0; index < contacts.length; index++) {
-            const element = contacts[index];
-            var isValid = await this.validateNationalRecord(element)
+            const document = contacts[index];
+            var isValid = await this.validateNationalRecord(document)
             if(!isValid)
                 errorCount++;
         }
         
         for (let index = 0; index < documents.length; index++) {
-            const element = documents[index];
-            var isValid = await this.validateNationalRecord(element)
-        }
-        if(errorCount > 0){
-            return;
+            const document = documents[index];
+            var isValid = await this.validateNationalRecord(document)
         }
         
         for (let index = 0; index < contacts.length; index++) {
-            const element = contacts[index];
-            await this.createNationalRecord(element, false)
+            const document = contacts[index];
+            const response = await this.createNationalRecord(document, false)
+            console.log("RESPONSE", response)
+            if(!response){
+              errorResponse.push({
+                identifier: document.header.identifier,
+                draft: false,
+                document
+              })
+            }
         }
         
         for (let index = 0; index < documents.length; index++) {
-            const element = documents[index];
-            await this.createNationalRecord(element, true)
+            const document = documents[index];
+            const response = await this.createNationalRecord(document, true)
+            console.log("RESPONSE WITH DRAFT", response);
+            if(!response){
+              errorResponse.push({
+                identifier: document.header.identifier,
+                draft: true,
+                document
+              })
+            }
         }
-        return errorCount;
+        return errorResponse;
+    }
+
+    async retryCreateNationalRecord(document, draft){
+      return await this.createNationalRecord(document, draft)
     }
 }

@@ -74,23 +74,22 @@
     "relevantDocumentsInfo": "Other relevant website addresses and/or attached documents",
     "notes": "Notes",
     "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.",
-    
+
     "importIrccExcel": "Import IRCC Excel",
     "importIrcc": "Import IRCC",
     "browse":  "Browse",
-    "multipleSheetAlert":"Mutiple sheets have been found! Please select the sheet you want to import.",
+    "multipleSheetAlert":"Multiple sheets have been found! Please select the sheet you want to import.",
     "loading":"Loading",
 
     "provider":"Provider",
     "pic":"Pic",
-    "matConset":"MatConset",
     "type":"Type",
     "existing":"Existing",
-    "orgfirstName":"OrgName FirstName",
-    "acronymfirstName":"Acronym FirstName",
+    "orgfirstName":"Organization name / First name",
+    "acronymfirstName":"Acronym",
     "address":"Address",
     "city":"City",
     "email":"Email",
-    "consent":"Consent"
-
+    "consent":"Consent",
+    "language":"Language"
 }
