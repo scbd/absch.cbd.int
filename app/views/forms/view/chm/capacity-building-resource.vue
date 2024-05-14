@@ -2,7 +2,12 @@
     <div id="Record" class="record" >
         <div class="record-body bg-white" v-if="document"> 
            <legend>{{t("generalInformation")}}</legend>
-           <label>{{lstring(document.title ,locale)}}</label>
+           
+           <div v-if="document.title">
+                <label>{{t("title")}}</label>
+                <ng v-vue-ng:km-value-ml  :value="document.title" :locales="locale" ></ng>
+            </div>
+           
 
            <div v-if="document.resourceTypes">
                 <label>{{t("typeOfResource")}}</label>
@@ -36,11 +41,13 @@
 
             <div v-if="document.targetGroups">
                 <label>{{t("mainTarget")}}</label>
-                <ul class="km-value">
-                    <li v-for="term in document.targetGroups">                      
-                        <km-term :value="term" :locale="locale"></km-term>
-                    </li>
-                </ul>
+                <div class="km-value">
+                    <ul>
+                        <li v-for="term in document.targetGroups">                      
+                            <km-term :value="term" :locale="locale"></km-term>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div v-if="document.expertiseLevel">
@@ -114,7 +121,7 @@
                 <ul class="km-value">
                     <!-- TODO:test order -->
                     <!-- <li v-for="term in document.regions | orderBy:name">   -->
-                    <li v-for="term in ordered document.regions ">             
+                    <li v-for="term in document.regions ">             
                         <km-term :value="term" :locale="locale"></km-term> 
                     </li>
                 </ul>

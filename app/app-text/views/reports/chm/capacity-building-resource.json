@@ -1,5 +1,6 @@
 {
     "generalInformation":"General information", 
+    "title":"Title",
     "typeOfResource":"Type of resource",               
     "format":"Format/File type",              
     "formatDetails":"Format details",  
