@@ -1,15 +1,20 @@
 <template>     
     <div id="Record" class="record">
-        <div class="record-body bg-white" v-if="document"> 
+        <div class="record-body bg-white" v-if="document">            
             <section>
                 <div v-if="document.name">   
                     <label>{{ t("name") }} </label>             
                     <ng v-vue-ng:km-value-ml  :value="document.name" :locales="locale" html></ng> 
                 </div>
 
-                <div v-if="document.Website">               
+                <div v-if="document.website">               
                     <label>{{ t("website") }} </label>                
-                    <div class="km-value"> {{document.Website}}</div>  
+                    <!-- <div class="km-value"> 
+                        {{document.website}}
+                    </div>   -->
+                    <div class="km-value"> 
+                        <a  :href="document.website" target="_blank">{{document.website}}</a>  
+                    </div> 
                 </div>
 
                 <div v-if="document.country">
@@ -18,62 +23,75 @@
                         <km-term :value="country" :locale="locale"></km-term>           
                     </div>            
                 </div> 
+
                 <div v-if="document.address">
-                    <label for="subTopic">{{ t("address") }}</label>   
+                    <label>{{ t("address") }}</label>                       
                     <ng v-vue-ng:km-value-ml  :value="document.address" :locales="locale" html></ng>  
                 </div>
     
                 <div v-if="document.googleMaps">
-                    <label for="subTopic">{{ t("googleMapsLink") }}</label>    
-                    <ng v-vue-ng:km-value-ml  :value="document.googleMaps" :locales="locale" html></ng>  
+                    <label>{{ t("googleMapsLink") }}</label>
+                    <div class="km-value"> 
+                        <a :href="document.googleMaps" target="_blank">{{document.googleMaps}}</a>  
+                    </div>                    
                 </div>
             </section>
 
             <section>
                 <div v-if="document.email">
-                    <label for="subTopic">{{ t("email") }}</label>    
+                    <label>{{ t("email") }}</label>    
                     <div class="km-value">{{document.email}} </div>
                 </div>
+
                 <div v-if="document.phone">
-                    <label for="subTopic">{{ t("telephone") }}</label>
-                    <div class="km-value">{{document.phone}} </div>
+                    <label>{{ t("telephone") }}</label>
+                    <div class="km-value">{{document.phone}} </div>                    
                 </div>
+
                 <div v-if="document.facebook">
-                    <label for="subTopic">{{ t("facebook") }}</label>
-                <div class="km-value">{{document.facebook}}</div>
+                    <label>{{ t("facebook") }}</label>
+                    <div class="km-value"> 
+                        <a  :href="document.facebook" target="_blank">{{document.facebook}}</a>  
+                    </div>               
                 </div>
+
                 <div v-if="document.twitter">
-                    <label for="subTopic">{{ t("twitter") }}</label>
-                    <div class="km-value">{{document.twitter}}</div>
+                    <label>{{ t("twitter") }}</label>
+                    <div class="km-value"> 
+                        <a :href="document.twitter" target="_blank">{{document.twitter}}</a>   
+                    </div>             
                 </div>
+
                 <div v-if="document.youtube">
-                    <label for="subTopic">{{ t("youtube") }}</label>  
-                    <div class="km-value">{{document.youtube}}</div>
+                    <label>{{ t("youtube") }}</label> 
+                    <div class="km-value"> 
+                        <a :href="document.youtube" target="_blank">{{document.youtube}}</a>      
+                    </div>                 
                 </div>
             </section> 
 
             <section>
                 <div v-if="document.description">
-                    <label for="subTopic">{{ t("shortDescription") }}</label>
+                    <label>{{ t("shortDescription") }}</label>
                     <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>  
                 </div>
 
                 <div v-if="document.descriptionNative">
-                    <label for="subTopic">{{ t("shortDescriptionInOfficialLanguage") }}</label> 
+                    <label>{{ t("shortDescriptionInOfficialLanguage") }}</label> 
                     <div class="km-value">
                         {{document.descriptionNative}}
                     </div>    
-               </div>
-
-               <div v-if="document.notes">
-                    <label for="subTopic">{{ t("commentsOrAdditionalInfo") }}</label>  
-                    <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html></ng>  
                 </div>
 
+                <div v-if="document.notes">
+                    <label>{{ t("commentsOrAdditionalInfo") }}</label>  
+                    <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html></ng>  
+                 </div>
+
                 <div v-if="document.logo">
-                    <label for="subTopic">{{ t("logo") }}</label>
-                    <div class="km-value">
-                        <img :src="`${document.logo}/thumbnail`"/>
+                    <label>{{ t("logo") }}</label>
+                    <div class="km-value">                       
+                        <img :src="`${document.logo}`" height="100"/>
                     </div>
                 </div>
             </section>
@@ -97,8 +115,8 @@
 
     const { t } = useI18n({ messages });    
    
-    const country = computed(()=>{
-        const term = ref({});
+    const term = ref({});
+    const country = computed(()=>{       
         term.value.identifier=document.value.country;
         return term.value;    
     });
