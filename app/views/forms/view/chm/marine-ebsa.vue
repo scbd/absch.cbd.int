@@ -1,6 +1,6 @@
 <template>
     <div id="Record" class="record ">   
-       
+       {{ document }}
         <div class="record-body bg-white" v-if="document">           
             <section>    
                 <div v-if="document.summary || document.areaIntroduction || document.title">  
@@ -16,7 +16,7 @@
                     </div>
                 
                     <div v-if="document.areaIntroduction">
-                        <label>{{ t("introductionOfTheArea") }} </label>
+                        <label>{{ t("introduction") }} </label>
                         <ng  v-vue-ng:km-value-ml  :value="document.areaIntroduction" :locales="locale" html></ng> 
                     </div> 
                 </div>               
@@ -24,7 +24,7 @@
 
             <section>
                 <div v-if="document.region || document.location || document.gisFiles">
-                    <legend>{{ t("descriptionOfTheLocation") }} </legend>                            
+                    <legend>{{ t("descriptionLocation") }} </legend>                            
                     <div v-if="document.region">
                         <label>{{ t("ebsaRegion") }} </label> 
                         <div class="km-value">
@@ -33,7 +33,7 @@
                     </div>
 
                     <div v-if="document.location">
-                        <label>{{ t("descriptionOfLocation") }} </label>   
+                        <label>{{ t("description") }} </label>   
                         <ng v-vue-ng:km-value-ml  :value="document.location" :locales="locale" html></ng>  
                     </div>
 
@@ -57,12 +57,12 @@
 
                     <legend>{{ t("areaDetails") }} </legend> 
                     <div v-if="document.areaDescription"> 
-                        <label>{{ t("featureDescriptionOfTheArea") }} </label> 
+                        <label>{{ t("featureDescription") }} </label> 
                         <ng v-vue-ng:km-value-ml  :value="document.areaDescription" :locales="locale" html></ng>                        
                     </div>
 
                     <div v-if="document.areaConditions">
-                        <label>{{ t("featureConditionsAndFutureOutlookOfThArea") }} </label>  
+                        <label>{{ t("featureConditions") }} </label>  
                         <ng v-vue-ng:km-value-ml  :value="document.areaConditions" :locales="locale" html></ng>  
                     </div>   
 
@@ -104,30 +104,17 @@
                     </div>
 
                     <div v-if="document.relation">
-                        <label>{{ t("otherRelevantWebsiteAddressOrAttachedDocuments") }} </label> 
-                        <div class="km-value" compare-val>                 
-                            <!-- <ng v-vue-ng:km-link-list v-model:ng-model="document.relation"  ></ng>     -->
-                            <ul class="km-value" >
-                                <li v-for="item in document.relation">
-                                    <a translation-url :target="target" :href="item.url">{{item.name||item.url}}</a>
-                                    <i v-if="item.name">({{item.url}})</i>
-                                </li>
-                            </ul>                
+                        <label>{{ t("otherRelevantWebsites") }} </label> 
+                        <div class="km-value" compare-val>                
+                           <ng v-vue-ng:km-link-list v-model:ng-model="document.relation"  ></ng> 
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <section>
-                <legend>{{ t("statusOfSubmission") }}</legend>
 
-                <!-- <div v-if="document.status">
-                  
-                    <label>{{ t( "copDecision") }} </label> 
-                    <div class="km-value" > 
-                        <label>{{ lstring( document?.approvedByCopDecision?.identifier) }} </label>                           
-                    </div>
-                </div> -->
+            <section>
+                <legend>{{ t("status") }}</legend>
+                
                 <div v-if="document.status=='approved' || document.approvedByCopDecision || document.approvedByCopDecision || fixDate(document.approvedByGovernmentOn)">
 
                     <div :class=" [(document.status=='approved')? 'panel-success':'']">
@@ -222,9 +209,10 @@
                             <div v-if="document.recommendedToWorkshopByOrganizations">
                                 <label>{{t("organizations")}}</label>  
                                 <ul class="km-value">
-                                    <li v-for="organization in recommendedToWorkshopByOrganizations">
+                                    <li v-for="(organization, i) in recommendedToWorkshopByOrganizations" key="organization">
                                         <!-- TODO: change code here -->
                                          <!-- <div view-organization-reference ng-model="organization" locale="locale"></div>  -->
+                                         <ng v-vue-ng:view-record-reference v-model:ng-model="recommendedToWorkshopByOrganizations[i]" locale="locale"></ng>
                                     </li>
                                 </ul>
                             </div>
@@ -262,11 +250,13 @@
                             <div v-if="document.recommendedToAnyByOrganizations">
                                 <label>{{t("organizations")}}</label>                             
                                 <ul class="km-value">
-                                    <li v-for="organization in recommendedToAnyByOrganizations">
+                                    <li v-for="(organization,i) in recommendedToAnyByOrganizations">
                                         <!-- TODO:change code here -->
-                                        <!-- <div view-organization-reference ng-model="organization" locale="locale"></div> -->
+                                      
+                                        <ng v-vue-ng:view-record-reference v-model:ng-model="recommendedToAnyByOrganizations[i]" locale="locale"></ng>
                                     </li>
-                                </ul>
+                                   
+                                </ul>                           
                             </div>
         
                             <div v-if="document.recommendedToAnyByOthers">
@@ -274,17 +264,15 @@
                                 <div class="km-value">
                                     <ng v-vue-ng:km-value-ml  :value="document.recommendedToAnyByOthers" :locales="locale" html ></ng>
                                 </div>
-                            </div>
-        
-                        </div>
-                
+                            </div>        
+                        </div>                
                 </div>
 
             </section>	
-            
+
             <section>
                 <div v-if="document.assessments">    
-                    <legend>{{ t("assessmentOfTheAreaAgainstCbdEbsaCriteria") }}</legend>                
+                    <legend>{{ t("assessment") }}</legend>                
                     <div class="km-value">                    
                         <div  v-for="assessment in document.assessments" >  
                             <div>                           
@@ -306,17 +294,21 @@
                 </div>
             </section>
 
+            <view-relevant-information :relevantInfos="document.relevantInformation" 
+                                       :relevantDocs="document.relevantDocuments"  :locale="locale">
+            </view-relevant-information> 
 
-            <!-- TODO: use view-relevant-information -->
+            <button @click="refreshMap">refresh</button>
+
         </div>
     </div>
 </template>
 
 <script setup>
-    import { computed, onMounted, shallowRef } from 'vue';
-    import { lstring } from '~/services/filters/lstring.js'; 
+    import { computed, ref, shallowRef, watch } from 'vue';  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'  
+    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/marine-ebsa.json';
     import { useI18n } from 'vue-i18n';
@@ -342,25 +334,30 @@
 
     const document = computed(()=>props.documentInfo?.body);
  
-    onMounted(() => {
-        loadShapes(document.value.gisFiles);   
-    });
-    //watch(()=>document.value.gisFiles, loadShapes)
+    // onMounted(() => {
+    //     loadShapes(document.value.gisFiles);   
+    // });
+
+    //watch(()=>document.value.gisFiles, loadShapes(document.value.gisFiles))
+
+    watch(()=>document.value.gisFiles, (newValue,oldValue)=>{
+        loadShapes(document.value.gisFiles)},
+        {deep:true},
+        {immediate:true}  
+    ) 
 
     async function loadShapes (fileLinks) {
         console.log('gisFiles', document.value.gisFiles)
 
         const qLayers = fileLinks.map(async (link) => {
             const res  = await fetch(link.url);              
-            const data = await res.json(); 
-            //console.log('geojson', data)
+            const data = await res.json();          
             return  await L.geoJson(data);
         });
 
-        const s = await Promise.all(qLayers);        
-        //console.log("s", s)
+        const s = await Promise.all(qLayers);  
         gisLayer.value = s; 
-        //console.log("gisLayer.value", gisLayer.value) 
+      
     };
 
     function fixDate (date) {
@@ -370,4 +367,24 @@
     };
 
    
+    
+
+   
 </script>
+
+<style scope>
+  .panel-success {
+    border-color: #d6e9c6;
+  }
+  .panel-success > .panel-heading {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+  }
+  .panel-success > .panel-heading + .panel-collapse .panel-body {
+    border-top-color: #d6e9c6;
+  }
+  .panel-success > .panel-footer + .panel-collapse .panel-body {
+    border-bottom-color: #d6e9c6;
+  }
+</style>
