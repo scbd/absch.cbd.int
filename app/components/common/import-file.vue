@@ -1,7 +1,7 @@
 <template>
     <button class="btn btn-primary btn-sm" type="button" @click="toggleModal">{{t("importIrcc")}}</button>
 
-    <ImportModal 
+    <ImportModal ref="importModal"
             :showModal="showModal" 
             :modalTitle="t('importIrccExcel')" 
             :parsedFile="parsedFile"
@@ -40,8 +40,8 @@
             </div>
         </div>
         <div class="row table-container" v-if="parsedFile.length">
-            <div class="col">
-                <table class="table table-bordered">
+            <!-- <div class="col"> -->
+                <table class="table table-striped table-bordered table-condensed">
                     <thead>
                         <tr>
                             <th scope="col" rowspan="2">#</th>
@@ -117,7 +117,7 @@
                             <td class="p-2">{{data.pic.city}}</td>
                             <td class="p-2">{{data.pic.country}}</td>
                             <td class="p-2">{{data.pic.email}}</td>
-                            <td class="p-2">{{data.matConset}}</td>
+                            <td class="p-2">{{data.matEstablished}}</td>
                             <td class="p-2">
                                 <div :class="{ 'short-text': data.subjectMatter.length > 45 }">{{data.subjectMatter}}</div>
                                 <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
@@ -136,7 +136,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            <!-- </div> -->
         </div>
         
         <div class="row mt-5 error__container" v-if="errorCreateRecords
@@ -159,14 +159,10 @@
             </div>
         </div>
         <div class="row mt-3" v-show="isLoading">
-            <div class="col-4">
-            </div>
-            <div class="col-4 text-center">
-                <div class="spinner-border" role="status" v-show="isLoading">
+            <div class="col-12 text-center">
+                <div class="spinner-border" role="status">
                     <span class="sr-only">{{t("loading")}}...</span>
                 </div>
-            </div>
-            <div class="col-4">                        
             </div>
         </div>
     </ImportModal>
@@ -215,7 +211,7 @@ const userGovernment = computed(()=>{
 })
 
 let importDataIRCC;
-
+ const importModal = ref(null);
 function toggleModal() {
     parsedFile.value = [];
     error.value = null;
@@ -224,6 +220,7 @@ function toggleModal() {
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
     showModal.value = !showModal.value;
+    importModal.value.showDialog();
     if(!showModal.value){
         emit("refreshRecord")
     }

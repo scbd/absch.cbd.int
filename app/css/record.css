@@ -187,9 +187,9 @@
 }
 
 .table-container{
-    max-height: 37vh;
+    max-height: 60vh;
     overflow: scroll;
-    max-width: 1076px;
+    /* max-width: 1076px; */
 }
 
 .modal__header p{

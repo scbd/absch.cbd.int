@@ -1,71 +1,64 @@
 <template>
-  <span class="modal-container" v-if="showModal">
-    <div class="modal-window">
-      <div class="modal__header">
-        <div>
-          <h3 class="modal-title">{{ modalTitle }}</h3>
-          <p>{{t("pleaseSelectExcelInfo")}}</p>
+  <div class="modal fade" ref="importModal" data-backdrop="static" tabindex="-1" aria-hidden="true" id="import-modal">
+    <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width: 80vw;" role="document">
+      <div class="modal-content">
+        <div class="modal-header color-black">
+          <h5 class="modal-title">{{ modalTitle }}</h5>
+          <p>{{ t("pleaseSelectExcelInfo") }}</p>
+          <button type="button" class="border-0 close" @click="closeDialog()" :disabled="loading" aria-label="Close">
+            <i class="bi bi-x-circle-fill icon-lg"></i>
+          </button>
         </div>
-      </div>
-      <div class="modal__container">
-        <!-- Slot for modal content -->
-        <slot></slot>
-      </div>
-      <div class="modal__footer">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-12 d-flex justify-content-between">
-              <div>
-                <button class="btn btn-primary" 
-                  type="button" 
-                  :disabled="isLoading ? true : false"
-                  @click="handleClearClick">
-                    {{t("clear")}}
-                </button>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  @click.stop="toggleModal"
-                  :disabled="isLoading ? true : false"
-                >
-                  {{t("close")}}
-                </button>
-                <button
-                  class="btn btn-primary ms-3"
-                  v-show="parsedFile.length"
-                  @click.stop="handleConfirm"
-                  :disabled="isLoading ? true : false"
-                >
-                  {{t("confirm")}}
-                </button>  
-              </div>            
-            </div>
-          </div>
+        <div class="modal-body">
+          <!-- Slot for modal content -->
+          <slot></slot>
+        </div>
+        <div class="modal-footer d-block">
+          <button class="btn btn-primary float-start" v-show="parsedFile.length" @click.stop="handleConfirm" :disabled="isLoading ? true : false">
+            {{ t("confirm") }}
+          </button>
+          <button class="btn btn-secondary float-end" type="button" v-show="parsedFile.length" :disabled="isLoading ? true : false" @click="handleClearClick">
+            {{ t("clear") }}
+          </button>
         </div>
       </div>
     </div>
-  </span>
+  </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, onMounted, shallowRef, defineExpose } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { Modal } from "bootstrap";
 import messages from "../../app-text/components/common/import-modal.json"
 
-const { t } = useI18n({ messages })
+const { t } = useI18n({ messages });
+const importModal = shallowRef(null);
+let modal = null;
 
 const props = defineProps({
-    showModal: Boolean,
-    modalTitle: String,
-    parsedFile: Array,
-    handleConfirm: Function,
-    toggleModal: Function,
-    handleClearClick: Function,
-    isLoading: Boolean,
-})
+  showModal: Boolean,
+  modalTitle: String,
+  parsedFile: Array,
+  handleConfirm: Function,
+  toggleModal: Function,
+  handleClearClick: Function,
+  isLoading: Boolean,
+});
 
+onMounted(async () => {
+  modal = new Modal(importModal.value);
+});
+
+const closeDialog = () => {
+  modal.hide();
+};
+
+const showDialog = () => {
+  modal.show('static');
+};
+
+defineExpose({ showDialog, closeDialog });
 </script>
 
 <style scoped></style>
