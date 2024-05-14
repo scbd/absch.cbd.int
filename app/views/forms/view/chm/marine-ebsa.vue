@@ -209,7 +209,7 @@
                             <div v-if="document.recommendedToWorkshopByOrganizations">
                                 <label>{{t("organizations")}}</label>  
                                 <ul class="km-value">
-                                    <li v-for="(organization, i) in recommendedToWorkshopByOrganizations" key="organization">
+                                    <li v-for="(organization, i) in document.recommendedToWorkshopByOrganizations" key="organization">
                                         <!-- TODO: change code here -->
                                          <!-- <div view-organization-reference ng-model="organization" locale="locale"></div>  -->
                                          <ng v-vue-ng:view-record-reference v-model:ng-model="recommendedToWorkshopByOrganizations[i]" locale="locale"></ng>
@@ -250,9 +250,7 @@
                             <div v-if="document.recommendedToAnyByOrganizations">
                                 <label>{{t("organizations")}}</label>                             
                                 <ul class="km-value">
-                                    <li v-for="(organization,i) in recommendedToAnyByOrganizations">
-                                        <!-- TODO:change code here -->
-                                      
+                                    <li v-for="(organization,i) in document.recommendedToAnyByOrganizations">
                                         <ng v-vue-ng:view-record-reference v-model:ng-model="recommendedToAnyByOrganizations[i]" locale="locale"></ng>
                                     </li>
                                    
