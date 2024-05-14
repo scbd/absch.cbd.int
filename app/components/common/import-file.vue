@@ -235,6 +235,7 @@ import kmTerm from '~/components/km/KmTerm.vue';
 import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
+Object.assign(messages[locale.value], messages2[locale.value]);
 const { t } = useI18n({ messages });
 const realm = useRealm();
 const user = useUser();
