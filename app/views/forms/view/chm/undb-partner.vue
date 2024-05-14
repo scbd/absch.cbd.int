@@ -40,7 +40,9 @@
             <section>
                 <div v-if="document.email">
                     <label>{{ t("email") }}</label>    
-                    <div class="km-value">{{document.email}} </div>
+                    <div class="km-value">	
+                        <a :href="`mailto:${document.email}`">{{document.email}} </a>
+                    </div>                    
                 </div>
 
                 <div v-if="document.phone">
@@ -89,9 +91,9 @@
                  </div>
 
                 <div v-if="document.logo">
-                    <label>{{ t("logo") }}</label>
-                    <div class="km-value">                       
-                        <img :src="`${document.logo}`" height="100"/>
+                    <label>{{ t("logo") }}</label>                   
+                    <div class="km-value"> 	
+                        <img :src="thumbnailLogoUrl" height=100 />
                     </div>
                 </div>
             </section>
@@ -122,5 +124,16 @@
     });
     
     const document = computed(()=>props.documentInfo?.body);
+
+    const thumbnailLogoUrl = computed(()=>{	
+        if (!document.value.logo) return "";
+        const url = document.value.logo
+        const index = url.lastIndexOf("/");
+        const imgPath = url.substring(0, index);
+        const imgName = url.substring(index+1);
+        const fullPath = imgPath+"/thumbnail/"+imgName;
+        return fullPath;
+	 });
+
    
 </script>
