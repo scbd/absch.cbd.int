@@ -116,12 +116,10 @@
                 <ng v-vue-ng:km-value-ml  :value="document.summary" :locales="locale" html></ng>           
             </div>
 
-            <div v-if="document.regions">
+            <div v-if="orderedRegions.length>0">
                 <label>{{t("countriesAndGroups")}}</label>
-                <ul class="km-value">
-                    <!-- TODO:test order -->
-                    <!-- <li v-for="term in document.regions | orderBy:name">   -->
-                    <li v-for="term in document.regions ">             
+                <ul class="km-value">               
+                    <li v-for="term in orderedRegions">          
                         <km-term :value="term" :locale="locale"></km-term> 
                     </li>
                 </ul>
@@ -213,5 +211,10 @@
         locale      : { type:String}
     })
     const document = computed(()=>props.documentInfo?.body);
+    const orderedRegions = computed(()=>{
+        if (!document.value.regions) return [];     
+        return  _.orderBy(document.value.regions, 'name');
+    });
+    
     
 </script>
