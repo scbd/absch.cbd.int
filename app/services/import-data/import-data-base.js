@@ -216,53 +216,60 @@ export class ImportDataBase {
           return;
   
       try{
-          let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
+          let url = `/api/v2013/documents/${document.header.identifier}`
 
+          if(isDraft)
+              url += '/versions/draft'
+
+          let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
           return irccRequest;
       }
       catch(err){
           console.log("ERR", err)
-          return {
-            error: err.message || "Internal server error"
-          }
       }
     };
 
     async validateAndCreateNationalRecord(contacts, documents){
-      let errorCount = 0;
-      const errorResponse = []  
-      for (let index = 0; index < contacts.length; index++) {
-        const contact = contacts[index];
-        var isValid = await this.validateNationalRecord(contact)
-        if(!isValid)
-            errorCount++;
-
-        const response = await this.createNationalRecord(contact, false)
-        if(!response){
-          errorResponse.push({
-            identifier: contact.header.identifier,
-            draft: false,
-            document: contact,
-            contact:true
-          })
+        let errorCount = 0;
+        const errorResponse = []
+        for (let index = 0; index < contacts.length; index++) {
+            const document = contacts[index];
+            var isValid = await this.validateNationalRecord(document)
+            if(!isValid)
+                errorCount++;
         }
-      }
-      
-      for (let index = 0; index < documents.length; index++) {
-          const document = documents[index];
-          var isValid = await this.validateNationalRecord(document)
-
-          const response = await this.createNationalRecord(document, true)
-          if(!response){
-            errorResponse.push({
-              identifier: document.header.identifier,
-              draft: true,
-              document,
-              contact:false
-            })
-          }
-      }
-      return errorResponse;
+        
+        for (let index = 0; index < documents.length; index++) {
+            const document = documents[index];
+            var isValid = await this.validateNationalRecord(document)
+        }
+        
+        for (let index = 0; index < contacts.length; index++) {
+            const document = contacts[index];
+            const response = await this.createNationalRecord(document, false)
+            console.log("RESPONSE", response)
+            if(!response){
+              errorResponse.push({
+                identifier: document.header.identifier,
+                draft: false,
+                document
+              })
+            }
+        }
+        
+        for (let index = 0; index < documents.length; index++) {
+            const document = documents[index];
+            const response = await this.createNationalRecord(document, true)
+            console.log("RESPONSE WITH DRAFT", response);
+            if(!response){
+              errorResponse.push({
+                identifier: document.header.identifier,
+                draft: true,
+                document
+              })
+            }
+        }
+        return errorResponse;
     }
 
     async retryCreateNationalRecord(document, draft){

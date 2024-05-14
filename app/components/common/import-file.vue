@@ -99,7 +99,7 @@
                             <th scope="col" rowspan="2">{{t("dateOfExpiryHeader")}}</th>
                             <th scope="col" colspan="8" class="text-center">{{t("provider")}}</th>
                             <th scope="col" colspan="9" class="text-center">{{t("priorInformation")}}</th>
-                            <th scope="col" rowspan="2">{{t("matEstablishedHeader")}}</th>
+                            <th scope="col" rowspan="2">{{t("matEstablished")}}</th>
                             <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
                             <th scope="col" rowspan="2">{{t("additionalInformationOnUsage")}}</th>
                             <th scope="col" rowspan="2">{{t("subjectGenericKeywords")}}</th>
@@ -148,7 +148,8 @@
                             <td class="p-2">{{data.provider.type}}</td>
                             <td class="p-2">{{data.provider.existing}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.provider.orgName_firstName">{{data.provider.orgName_firstName}}</div>
+                                <div :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }">{{data.provider.orgName_firstName}}</div>
+                                <span v-if="data.provider.orgName_firstName.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
                             </td>
                             <td class="p-2">{{data.provider.acronym_lastName}}</td>
                             <td class="p-2">{{data.provider.address}}</td>
@@ -159,21 +160,24 @@
                             <td class="p-2">{{data.pic.type}}</td>
                             <td class="p-2">{{data.pic.existing}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.pic.orgName_firstName">{{data.pic.orgName_firstName}}</div>
+                                <div :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }">{{data.pic.orgName_firstName}}</div>
+                                <span v-if="data.pic.orgName_firstName.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
                             </td>
                             <td class="p-2">{{data.pic.acronym_lastName}}</td>
                             <td class="p-2">{{data.pic.address}}</td>
                             <td class="p-2">{{data.pic.city}}</td>
                             <td class="p-2">{{data.pic.country}}</td>
                             <td class="p-2">{{data.pic.email}}</td>
-                            <td class="p-2">{{data.matEstablished}}</td>
+                            <td class="p-2">{{data.matConset}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.subjectMatter.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.subjectMatter">{{data.subjectMatter}}</div>
-                                <!-- <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span> -->
+                                <div :class="{ 'short-text': data.subjectMatter.length > 45 }">{{data.subjectMatter}}</div>
+                                <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
                             </td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.usageDescription.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.usageDescription">{{data.usageDescription}}</div>
+                                <div :class="{ 'short-text': data.usageDescription.length > 45 }">{{data.usageDescription}}</div>
+                                <span v-if="data.usageDescription.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
                             </td>
+                            <td class="p-2">{{data.keywords}}</td>
                             <td class="p-2">{{data.specimens}}</td>
                             <td class="p-2">{{data.taxonomies}}</td>
                             <td class="p-2">{{data.usage}}</td>
@@ -200,7 +204,17 @@
               </div>
             </div>
         </div>
-        <div class="row mt-4" v-else-if="error && !isLoading">
+        
+        <div class="row mt-5 error__container" v-if="errorCreateRecords
+        .length">
+            <div class="col-12 alert alert-danger d-flex justify-content-between align-items-center">
+                <ul class="flex-1">
+                    <li v-for="(value) in errorCreateRecords" :key="value.identifier">Error creating <span v-if="value.draft">draft</span> record of identifier {{value.identifier}}</li>
+                </ul>
+                <button class="btn btn-primary" @click="onRetryClick">Retry</button>
+            </div>
+        </div>
+        <div class="row mt-4" v-else-if="error">
             <div class="col-12 text-center">
                 <span class="alert alert-danger" >{{error}}</span>
             </div>
@@ -211,8 +225,10 @@
             </div>
         </div>
         <div class="row mt-3" v-show="isLoading">
-            <div class="col-12 text-center">
-                <div class="spinner-border" role="status">
+            <div class="col-4">
+            </div>
+            <div class="col-4 text-center">
+                <div class="spinner-border" role="status" v-show="isLoading">
                     <span class="sr-only">{{t("loading")}}...</span>
                 </div>
               </div>
@@ -247,11 +263,12 @@ const parsedFile = ref([]);
 const selectedLanguage = ref(locale.value);
 const error = ref("");
 const errorCreateRecords = ref([]);
-const successMessage = ref(null);
+const successMessage = ref("");
 const multipleImportSheets = ref([]);
 const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
+const sText = ref("");
 
 <<<<<<< HEAD
 Object.assign(messages[locale.value], messagesIrcc[locale.value]);
@@ -271,7 +288,7 @@ let importDataIRCC;
 function toggleModal() {
     parsedFile.value = [];
     error.value = null;
-    errorCreateRecords.value = [];
+    // errorCreateRecords.value = [];
     successMessage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
@@ -368,29 +385,12 @@ const handleConfirm = async () => {
         error.value = null;
         errorCreateRecords.value = [];
         successMessage.value = null;
-        resetFileErrorInParsedFile();
         const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
-        parsedFile.value = parsedFile.value.map((file,index)=>{
-            return {
-                ...file,
-                identifier: result[index].header.identifier
-            }
-        })
-        console.log("PARSEDFILE", parsedFile.value);
-        console.log("RESULT", result);
-        console.log("CONTACT", importDataIRCC.contacts);
         const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result);
         console.log("ERROR RESPONSE", errorResponse);
-        updateParsedFileWithError(errorResponse);
         if(errorResponse === undefined || errorResponse.length === 0){
             successMessage.value = "Successfully created national record.";
         }else{
-            errorResponse.forEach(error => {
-            const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
-                if (matchingContact) {
-                    error.emails = matchingContact.emails;
-                }
-            });
             errorCreateRecords.value = errorResponse;
         }
 
@@ -458,7 +458,39 @@ const handleClearClick = () => {
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
     errorCreateRecords.value = [];
-    resetFileErrorInParsedFile();
+}
+
+const onRetryClick = async () => {
+    error.value = null;
+    isLoading.value = true;
+    const errorResponse = [];
+    try {
+        errorCreateRecords.value.forEach(async (record) => {
+            const response = await importDataBase.retryCreateNationalRecord(record.document, record.draft)
+            if(!response){
+                errorResponse.push({
+                    identifier: document.header.identifier,
+                    draft: true,
+                    document
+                })
+            }
+        })        
+    } catch (error) {
+        error.value = "Error: An error occurred while creating national record."
+    }
+    if(errorResponse === undefined || errorResponse.length === 0){
+        successMessage.value = "Successfully created national record.";
+        errorCreateRecords.value = [];
+    }else{
+        errorCreateRecords.value = errorResponse;
+    }
+    isLoading.value = false;
+}
+
+const toggleTextLength = (event) => {
+    event.preventDefault();
+    const span = event.target.parentElement.previousElementSibling;
+    span.classList.toggle("short-text")
 }
 
 const onRetryClick = async () => {
