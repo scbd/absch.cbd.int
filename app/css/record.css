@@ -187,7 +187,7 @@
 }
 
 .table-container{
-    max-height: 55vh;
+    max-height: 60vh;
     overflow: scroll;
     /* max-width: 1076px; */
 }
