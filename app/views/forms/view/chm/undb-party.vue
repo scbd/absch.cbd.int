@@ -1,6 +1,6 @@
 <template>
     <div id="Record" class="record">
-        <div class="record-body  bg-white" v-if="document">    
+        <div class="record-body  bg-white" v-if="document">                
             <div v-if="document.government">
                 <legend >{{ t("party") }} </legend>               
                 <div class="km-value">             
@@ -16,52 +16,45 @@
             <div v-if="document.descriptionNative">         
                 <label>{{ t("descriptionNativeLanguage") }} </label>   
                 <div class="km-value">
-                    <span>{{document.descriptionNative}}<br/></span>
+                    <span>{{document.descriptionNative}}</span>
                 </div>
             </div>
       
             <div v-if="document.websites">           
-                <label>{{ t("websites") }} </label>  
+                <label>{{ t("websites") }} </label>
                 <div class="km-value">
-                    <div v-for="item in document.websites">
-                        <a  :href="item.url" target="_blank">{{item.name||item.url}}</a>      
-                    </div>
-                </div>
+                    <ng v-vue-ng:km-link-list v-model:ng-model="document.websites" ></ng>  
+                </div>                
             </div>
       
             <div v-if="document.documents">             
-                <label>{{ t("documents") }} </label>   
+                <label>{{ t("documents") }} </label>
                 <div class="km-value">
-                    <div v-for="item in document.documents">
-                        <a  :href="item.url" target="_blank">{{item.name||item.url}}</a>      
-                    </div>
+                    <ng v-vue-ng:km-link-list v-model:ng-model="document.documents" ></ng>  
                 </div>
             </div>
       
             <div v-if="document.images">             
-                <label>{{ t("images") }} </label>   
+                <label>{{ t("images") }} </label>  
                 <div class="km-value">
-                    <div v-for="item in document.images">
-                        <a  :href="item.url" target="_blank">{{item.name||item.url}}</a>      
-                    </div>
-                </div>
+                    <ng v-vue-ng:km-link-list v-model:ng-model="document.images" ></ng>  
+                </div>                
             </div>
       
             <div v-if="document.videos">             
-                <label>{{ t( "videos") }} </label>   
+                <label>{{ t( "videos") }} </label>
                 <div class="km-value">
-                    <div v-for="item in document.videos">
-                        <a  :href="item.url" target="_blank">{{item.name||item.url}}</a>      
-                    </div>
-                </div>
-            </div>                   
-        </div>   
+                    <ng v-vue-ng:km-link-list v-model:ng-model="document.videos" ></ng>                   
+                </div>                
+            </div>  
+        </div> 
     </div>
 </template>
 
 <script setup>
     import { computed } from 'vue'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
+    import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js' 
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/undb-party.json';
     import { useI18n } from 'vue-i18n';  
