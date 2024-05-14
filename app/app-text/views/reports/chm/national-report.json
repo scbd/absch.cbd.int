@@ -8,7 +8,7 @@
     "additionalInfo":"Additional jurisdiction information",
     "status":  "Status",
     "date":"Date of completion and adoption",
-    "status": "Status of approved document",
+    "statusOfDocument": "Status of approved document",
     "approvingBody":"Approving body",
     "timePeriod":"Time period",
     "from": "From",

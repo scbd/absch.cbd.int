@@ -61,7 +61,7 @@
                     </div>
 
                     <div v-if="document.approvedStatus" >
-                        <label>{{ t("status") }} </label> 
+                        <label>{{ t("statusOfDocument") }} </label> 
                         <div class="km-value">
                             <km-term :value="document.approvedStatus" :locale="locale"></km-term>
                         </div>
