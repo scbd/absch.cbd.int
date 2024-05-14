@@ -125,117 +125,59 @@
                     <legend>{{t("socialMedia")}}</legend> 
                     <div class="row">                   
                         <div class="col-6" v-if="websiteLinks.length>0"  >                                                 
-                            <label>{{t("website")}}</label>                                
-                            <div class="km-value text-break">    
-                                <div  v-for="item in websiteLinks" >    
-                                    <div>
-                                        <a target="_blank" :href="item.url">
-                                            <i class="fa fa-home" aria-hidden="true"></i> {{item.name||item.url}}
-                                        </a>
-                                    </div> 
-                                    <i class="small" >({{item.url}})</i>
-                                </div>
-                            </div>
+                            <label>{{t("website")}}</label> 
+                            <div class="km-value">                   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="websiteLinks" ></ng>    
+                           </div>
                         </div>                         
         
                         <div class="col-6" v-if="facebookLinks.length>0" >                           
-                            <label>{{t("facebook")}}</label>                              
-                            <div class="km-value text-break" > 
-                                <div v-for="item in facebookLinks" >     
-                                    <div>
-                                        <a target="_blank" :href="item.url">
-                                            <i class="fa fa-facebook-square" aria-hidden="true"></i> {{item.name||item.url}}
-                                        </a>
-                                    </div>
-                                    <i class="small">({{item.url}})</i>                                  
-                                </div>  
-                            </div>                            
+                            <label>{{t("facebook")}}</label>
+                            <div class="km-value">                   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="facebookLinks" ></ng>    
+                           </div>
                         </div>                      
 
                         <div class="col-6"  v-if="twitterLinks.length>0" >
-                            <label>{{t("twitter")}}</label>                               
-                            <div class="km-value text-break">
-                                <div v-for="item in twitterLinks" >
-                                    <div>
-                                        <a target="_blank" :href="item.url">
-                                            <i class="fa fa-twitter-square" aria-hidden="true"></i> {{item.name||item.url}}
-                                        </a>
-                                    </div>
-                                    <i class="small" >({{item.url}})</i>                                     
-                                </div>
-                            </div>                                
+                            <label>{{t("twitter")}}</label> 
+                            <div class="km-value">                   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="twitterLinks" ></ng>    
+                           </div>
                         </div>                       
 
                         <div class="col-6" v-if="youtubeLinks.length>0" >                            
-                            <label >{{t("youtube")}}</label>                           
-                            <div class="km-value text-break">
-                                <div v-for="item in youtubeLinks">  
-                                    <div>       
-                                        <a target="_blank" :href="item.url">
-                                            <i class="fa fa-youtube-square" aria-hidden="true"></i> {{item.name||item.url}}
-                                        </a>
-                                    </div>   
-                                    <i class="small" >({{item.url}})</i>
-                                </div>
-                            </div>                                
+                            <label >{{t("youtube")}}</label>
+                            <div class="km-value">                   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="youtubeLinks" ></ng>    
+                           </div>
                         </div>                      
 
                         <div  class="col-6" v-if="otherLinks.length>0">                           
-                            <label>{{t("additionalLinks")}}</label>  
-                            <div class="km-value text-break">
-                                <div v-for="item in otherLinks"> 
-                                    <div>
-                                        <a target="_blank" :href="item.url">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i> {{item.name||item.url}}
-                                        </a>
-                                    </div>
-                                    <i class="small" >({{item.url}})</i>
-                                </div>
-                            </div>                         
+                            <label>{{t("additionalLinks")}}</label> 
+                            <div class="km-value">                   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="otherLinks" ></ng>    
+                            </div>                       
                         </div>                      
 
-                        <div  class="col-6" v-if="document.images">
-                            <div>  
-                                <label>{{t("images")}}</label>
-                                <div class="km-value text-break">
-                                    <div v-for="item in document.images">   
-                                        <div>  
-                                            <a target="_blank" :href="item.url">
-                                                <i class="fa fa-external-link" aria-hidden="true"></i> {{item.name||item.url}}
-                                            </a>
-                                        </div>   
-                                        <i class="small" >({{item.url}})</i>
-                                    </div>
-                                </div>
+                        <div  class="col-6" v-if="document.images">                            
+                            <label>{{t("images")}}</label>                               
+                            <div class="km-value">                   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="document.images" ></ng>    
                             </div>
                         </div>
 
                         <div  class="col-6" v-if="document.documents">                         
-                            <label>{{t("documents")}}</label>
-                            <div class="km-value text-break">
-                                <div v-for="item in document.documents">  
-                                        <div>
-                                        <a target="_blank" :href="item.url">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i> {{item.name||item.url}}
-                                        </a>
-                                    </div>  
-                                    <i class="small" >({{item.url}})</i>
-                                </div>
-                            </div>                          
+                            <label>{{t("documents")}}</label>                            
+                            <div class="km-value">                   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="document.documents" ></ng>    
+                            </div>              
                         </div>
 
                         <div  class="col-6" v-if="document.videos">                           
                             <label>{{t("videos")}}</label>
-                            <div class="km-value text-break">
-                                <div v-for="item in document.videos">   
-                                    <div>    
-                                        <a target="_blank" :href="item.url">
-                                            <i class="fa fa-external-link" aria-hidden="true"></i> {{item.name||item.url}}
-                                        </a>
-                                    </div> 
-                                    <i class="small" v-if="item.name">({{item.url}})</i>
-                                </div>
-                            </div>                            
+                            <div class="km-value">                   
+                                <ng v-vue-ng:km-link-list v-model:ng-model="document.videos" ></ng>    
+                           </div>                           
                         </div>  
                     </div>
                 </div>
