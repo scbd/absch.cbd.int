@@ -73,23 +73,5 @@
     "relevantInformationInfo": "Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.",
     "relevantDocumentsInfo": "Other relevant website addresses and/or attached documents",
     "notes": "Notes",
-    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.",
-
-    "importIrccExcel": "Import IRCC Excel",
-    "importIrcc": "Import IRCC",
-    "browse":  "Browse",
-    "multipleSheetAlert":"Multiple sheets have been found! Please select the sheet you want to import.",
-    "loading":"Loading",
-
-    "provider":"Provider",
-    "pic":"Pic",
-    "type":"Type",
-    "existing":"Existing",
-    "orgfirstName":"Organization name / First name",
-    "acronymfirstName":"Acronym",
-    "address":"Address",
-    "city":"City",
-    "email":"Email",
-    "consent":"Consent",
-    "language":"Language"
+    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information."
 }

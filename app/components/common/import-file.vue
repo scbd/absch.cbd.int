@@ -181,10 +181,13 @@ import { ImportDataBase } from "../../services/import-data/import-data-base"
 import { ImportDataIRCC } from "../../services/import-data/import-data-ircc"
 import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
 import messages from "../../app-text/views/forms/edit/abs/edit-absPermit.json"
+import messages2 from "../../app-text/components/common/import-file.json";
 import kmTerm from '~/components/km/KmTerm.vue';
 import { useI18n } from 'vue-i18n';
 
-const { locale, t } = useI18n({ messages });
+const { locale } = useI18n();
+Object.assign(messages[locale.value], messages2[locale.value]);
+const { t } = useI18n({ messages });
 const realm = useRealm();
 const user = useUser()
 const auth = useAuth()
