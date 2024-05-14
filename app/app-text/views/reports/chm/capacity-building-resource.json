@@ -1,3 +1,35 @@
 {
-    
+    "generalInformation":"General information", 
+    "typeOfResource":"Type of resource",               
+    "format":"Format/File type",              
+    "formatDetails":"Format details",  
+    "pleaseIdentify":"Please identify the main purpose of the resource",
+    "mainTarget":"Main target group(s)/beneficiaries",
+    "level":"Level of the content or level of knowledge/expertise of the audience for which the resource is intended",
+    "authors":"Author(s)",  
+    "organizations":"Organization(s) involved in the publication of this resource",              
+    "publicationYear":"Publication year",           
+    "rights":"Rights",	              
+    "source":"Source",              
+    "link":"Link to the resource(s)",                
+    "coverImages":"Cover image(s)",              
+    "summary":"Summary",	
+    "countriesAndGroups":"Country(ies), Regional or Economic group(s) related to the resource",   
+    "subject":"Subject/Topic/Issue",                 
+    "gbfTarget":"Related Kunming-Montreal Global Biodiversity Framework Target(s)", 
+    "aichiTarget":"Related Aichi Biodiversity Target(s)",
+    "absch":"Access and Benefit Sharing Clearing-House (ABS-CH)",
+    "keyAreas":"Key areas and strategic measures for capacity-building and development",  
+    "cartagenaProtocol":"Cartagena Protocol on Biosafety",        
+    "thematicAreass":"Thematic areas(s)",
+    "subjectAreas":"Subject areas and the Biodiversity Targets covered by the resource",
+    "information":"Information on the content of resource",
+    "access":"Access to the resource"
 }
+
+
+           
+   
+                  
+
+    
