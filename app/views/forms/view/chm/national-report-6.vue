@@ -20,12 +20,10 @@
 
                 <div v-if="document.targetPursued && document.nationalTargets.length">
                     <label>{{ t("nationalTargets") }}</label>     
-                    <!--TODO: fix issue here, should show nationalTarget page -->
-                    <div class="km-value" compare-val>
-                        <div  v-for="target in document.nationalTargets" >                                                 
-                            <!-- <ng v-vue-ng:view-record-reference  v-model:ng-model="nationalTarget" :locales="locale" html></ng>        -->                           
-                        </div> 
-                    </div> 
+                    <!--TODO: use api  get documentInfo[] by document.nationalTargets, show nationalTarget page -->                    
+                    <!-- <div  v-for="documentInfo in nationalTargetDocumentInfos" >
+                        <national-target :document-info="documentInfo" :locale="locale"></national-target>                         
+                    </div>  -->                    
                 </div>
             </section> 
 
@@ -121,9 +119,10 @@
                             <km-term :value="progressAssessment.nationalTarget" :locale="locale"></km-term>     
                         </span>
                     </label>                 
-                     <!-- TODO:fix issue here , show page -->  
-                    <!-- <view-national-assessment ng-model="progressAssessment" locale="locale" target="{{target}}"></view-national-assessment>	 --> 
-                    <!-- <ng v-vue-ng:view-record-reference  v-model:ng-model="document.progressAssessments[0].nationalTarget.identifier" :locales="locale" html></ng>   -->
+                   
+                    <!--TODO: use api get documentInfo by process show progress assessment page --> 
+                   <!-- <national-assessment :document-info="progressAssessmentDocumentInfo" :locale="locale"></national-assessment>   -->
+                   
                     <br/>
                 </div>
             </section>  
@@ -160,7 +159,7 @@
                                     <table class="table table-hover">
                                         <tbody>
                                             <tr v-for="item in absLinkedRecords">
-                                                <td class="ng-binding">
+                                                <td >
                                                     <a translation-url target="_blank" :href="item.url_ss[0]">
                                                         {{item.uniqueIdentifier_s|uppercase}}
                                                     </a> 
@@ -311,4 +310,15 @@
         locale      : { type:String}
     })
     const document = computed(()=>props.documentInfo?.body);
+
+   
+    // TODO:nationalTargetDocumentInfos
+        //for loop on document.natioalTargets
+            // get documentinfo using api
+            // promise.all
+ 
+    // TODO:progressAssessmentDocumentInfo
+       // get documentinfo using api on progressAssessment. 
+
+       
 </script>
