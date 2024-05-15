@@ -14,10 +14,10 @@
 
                     <div v-if="document.title">
                         <label>{{ t("title") }} </label> 
-                        <ng v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html></ng>  
-                        <i v-if="document.acronym">                          
-                            <ng v-vue-ng:km-value-ml  :value="document.acronym" :locales="locale" html></ng> 
-                        </i>
+                        <div class="km-value">
+                             <span>{{lstring(document.title,locale)}}</span>
+					    <i v-if="document.acronym">( {{lstring(document.acronym,locale)}} )</i>
+                        </div>                             
                     </div>                
 
                     <div v-if="document.description">
