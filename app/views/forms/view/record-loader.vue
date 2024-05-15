@@ -22,7 +22,7 @@
             <undb-partner v-if="documentInfo?.type == 'undbPartner'"  
                     :document-info="documentInfo" :locale="locale"></undb-partner>      
             <event v-if="documentInfo?.type == 'event'"  
-                    :document-info="documentInfo" :locale="locale"></event>       
+                    :document-info="documentInfo"></event>       
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 

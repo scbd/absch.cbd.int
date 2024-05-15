@@ -234,11 +234,10 @@
     import { useI18n } from 'vue-i18n';
     import { formatDate, lstring } from '~/components/kb/filters';
 
-    const { t } = useI18n({ messages });
-
+    const { t, locale } = useI18n({ messages });
+    
     const props = defineProps({
-        documentInfo: { type: Object, required: true },
-        locale      : { type:String}
+        documentInfo: { type: Object, required: true }
     })        
             
     const document = computed(()=>props.documentInfo?.body);
