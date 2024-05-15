@@ -13,11 +13,11 @@
                     </div>  
 
                     <div v-if="document.title">
-                        <label>{{ t("title") }} </label>    
-                        <div class="km-value">
-                        {{ lstring(document.title, locale) }}
-                        <i v-if="document.acronym">{{ lstring(document.acronym , locale) }}</i>
-                        </div>  
+                        <label>{{ t("title") }} </label> 
+                        <ng v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html></ng>  
+                        <i v-if="document.acronym">                          
+                            <ng v-vue-ng:km-value-ml  :value="document.acronym" :locales="locale" html></ng> 
+                        </i>
                     </div>                
 
                     <div v-if="document.description">
@@ -91,8 +91,7 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'   
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import kmTerm from '~/components/km/KmTerm.vue';
-    import messages from '~/app-text/views/reports/chm/national-target.json';
-    import { lstring } from '~/components/kb/filters';
+    import messages from '~/app-text/views/reports/chm/national-target.json'; 
     import { useI18n } from 'vue-i18n';
 
     const { t } = useI18n({ messages });
