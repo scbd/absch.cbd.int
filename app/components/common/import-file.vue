@@ -3,24 +3,16 @@
     {{ t("importIrcc") }}
   </button>
 
-    <div
-      class="modal fade mt-1"
-      ref="importModal"
-      data-bs-backdrop="static"
-      tabindex="-1"
-      aria-hidden="true"
-      id="import-modal"
-    >
-      <div
-        class="modal-dialog modal-xl modal-dialog-centered"
-        style="max-width: 80vw;"
-        role="document"
-      >
-        <div class="modal-content">
-          <div class="modal-header color-black">
-            <div class="py-0 px-1">
-              <h5 class="modal-title">{{ t("importIrccExcel") }}</h5>
-              <p class="m-0">{{ t("pleaseSelectExcelInfo") }}</p>
+    <ImportModal ref="importModal"
+            :modalTitle="t('importIrccExcel')" 
+            :parsedFile="parsedFile"
+            :handleConfirm="handleConfirm"
+            :toggleModal="toggleModal"
+            :isLoading="isLoading"
+            :handleClearClick="handleClearClick" >
+        <!-- <div class="row">
+            <div class="col text-start" v-if="userGovernment">
+                <button class="btn btn-secondary text-uppercase" disabled>{{user.government || 'Government'}}</button>
             </div>
             {{locale}}-{{selectedLanguage}}
             <div class="col">
@@ -155,10 +147,7 @@
                             <td class="p-2">{{data.provider.type}}</td>
                             <td class="p-2">{{data.provider.existing}}</td>
                             <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.provider.orgName_firstName"
-                                :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }">
-                                    {{data.provider.orgName_firstName}}
-                                </div>
+                                <div :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.provider.orgName_firstName">{{data.provider.orgName_firstName}}</div>
                             </td>
                             <td class="p-2">{{data.provider.acronym_lastName}}</td>
                             <td class="p-2">{{data.provider.address}}</td>
@@ -169,10 +158,7 @@
                             <td class="p-2">{{data.pic.type}}</td>
                             <td class="p-2">{{data.pic.existing}}</td>
                             <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.pic.orgName_firstName"
-                                :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }">
-                                    {{data.pic.orgName_firstName}}
-                                </div>
+                                <div :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.pic.orgName_firstName">{{data.pic.orgName_firstName}}</div>
                             </td>
                             <td class="p-2">{{data.pic.acronym_lastName}}</td>
                             <td class="p-2">{{data.pic.address}}</td>
@@ -181,21 +167,11 @@
                             <td class="p-2">{{data.pic.email}}</td>
                             <td class="p-2">{{data.matEstablished}}</td>
                             <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.subjectMatter"
-                                :class="{ 'short-text': data.subjectMatter.length > 45 }">
-                                    {{data.subjectMatter}}
-                                </div>
+                                <div :class="{ 'short-text': data.subjectMatter.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.subjectMatter">{{data.subjectMatter}}</div>
+                                <!-- <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span> -->
                             </td>
                             <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.usageDescription"
-                                :class="{ 'short-text': data.usageDescription.length > 45 }">
-                                    {{data.usageDescription}}
-                                </div>
-                            </td>
-                            <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.keywords"
-                                :class="{ 'short-text': data.keywords.length > 45 }"
-                                >{{data.keywords}}</div>
+                                <div :class="{ 'short-text': data.usageDescription.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.usageDescription">{{data.usageDescription}}</div>
                             </td>
                             <td class="p-2">{{data.specimens}}</td>
                             <td class="p-2">{{data.taxonomies}}</td>
@@ -562,9 +538,11 @@ const onRetryClick = async () => {
     }       
 }
 
-const resetFileErrorInParsedFile = () => {
-    parsedFile.value.forEach((file) => file.fileError = null)
-}
+// const toggleTextLength = (event) => {
+//     event.preventDefault();
+//     const span = event.target.parentElement.previousElementSibling;
+//     span.classList.toggle("short-text")
+// }
 
 const closeDialog = () => {
   modal.hide();
