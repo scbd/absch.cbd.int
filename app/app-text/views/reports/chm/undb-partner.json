@@ -9,10 +9,11 @@
     "facebook":"Facebook",
     "twitter":"Twitter",  
     "youtube":"Youtube",       
-    "shortDescription":"Short description of the Organisation in one of the 6 United Nations languages", 
+    "shortDescription":"Short description of the Organization in one of the 6 United Nations languages", 
     "shortDescriptionInOfficialLanguage":"Short description of your Organization in your official language", 
     "notes":"Notes",
     "logo" :"Logo"
+
 }
 
 

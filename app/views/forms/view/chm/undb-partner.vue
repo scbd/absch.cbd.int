@@ -8,10 +8,7 @@
                 </div>
 
                 <div v-if="document.website">               
-                    <label>{{ t("website") }} </label>                
-                    <!-- <div class="km-value"> 
-                        {{document.website}}
-                    </div>   -->
+                    <label>{{ t("website") }} </label> 
                     <div class="km-value"> 
                         <a  :href="document.website" target="_blank">{{document.website}}</a>  
                     </div> 
@@ -123,15 +120,11 @@
     
     const document = computed(()=>props.documentInfo?.body);
 
-    const thumbnailLogoUrl = computed(()=>{	
-        if (!document.value.logo) return "";
-        const url = document.value.logo
-        const index = url.lastIndexOf("/");
-        const imgPath = url.substring(0, index);
-        const imgName = url.substring(index+1);
-        const fullPath = imgPath+"/thumbnail/"+imgName;
-        return fullPath;
-	 });
+    const thumbnailLogoUrl = computed(()=>{
+        if (!document.value.logo) return undefined;       
+        const index = document.value.logo.lastIndexOf("/");
+        return  document.value.logo.substring(0, index) +"/thumbnail/"+ document.value.logo.substring(index+1);       
+    }); 
 
    
 </script>
