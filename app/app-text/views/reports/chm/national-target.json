@@ -8,8 +8,8 @@
     "relevance":"Relevance of National Targets to Aichi Targets", 
     "aichiTarget": "Aichi Target",
     "aichiTargetComponents": "Aichi Target components",
-    "SubAichiTargets": "Sub-Aichi Targets",
-    "OrTargetComponents": " or Target components",
+    "subAichiTargets": "Sub-Aichi Targets",
+    "orTargetComponents": " or Target components",
     "rationale" :"Rationale for the National Target",
     "explanation": "Explanation on national target has no corresponding Aichi Biodiversity Target or relates to other parts of the Strategic Plan for Biodiversity"  
 

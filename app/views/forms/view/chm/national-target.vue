@@ -3,27 +3,27 @@
         <div class="record-body  bg-white" v-if="document">
 
             <section>
-                <div  v-if="document.government">                          
+                <div  v-if="document.government || document.title || document.description">                          
                     <legend>{{ t("generalInformation") }} </legend>               
                     <div v-if="document.government">
                         <label>{{ t("country") }} </label> 
                         <div class="km-value">
                             <km-term :value="document.government" :locale="locale"></km-term>   
                         </div>
-                    </div>              
-                </div>
-
-                <div v-if="document.title">
-                    <label>{{ t("title") }} </label>    
-                    <div class="km-value">
-                       {{ lstring(document.title, locale) }}
-                       <i v-if="document.acronym">{{ lstring(document.acronym , locale) }}</i>
                     </div>  
-                </div>                
 
-                <div v-if="document.description">
-                    <label>{{ t("rationale") }} </label> 
-                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>  
+                    <div v-if="document.title">
+                        <label>{{ t("title") }} </label>    
+                        <div class="km-value">
+                        {{ lstring(document.title, locale) }}
+                        <i v-if="document.acronym">{{ lstring(document.acronym , locale) }}</i>
+                        </div>  
+                    </div>                
+
+                    <div v-if="document.description">
+                        <label>{{ t("rationale") }} </label> 
+                        <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>  
+                    </div>
                 </div>
             </section>
             
