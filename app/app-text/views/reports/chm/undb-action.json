@@ -13,8 +13,8 @@
     "facebook":"Facebook",
     "twitter":"Twitter",  
     "youtube":"Youtube",       
-    "shortDescription":"Short description of the Action in one of the 6 United Nations languages", 
-    "shortDescriptionInOfficialLanguage":"Short description of your Action in your official language",    
-    "commentsOrAdditionalInfo":"Comments or additional information",    
+    "description":"Short description of the Action in one of the 6 United Nations languages", 
+    "descriptionInOfficialLanguage":"Short description of your Action in your official language",    
+    "comments":"Comments or additional information",    
     "logo" :"Logo"
 }

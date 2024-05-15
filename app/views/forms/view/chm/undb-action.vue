@@ -92,19 +92,19 @@
 
             <section>
                 <div v-if="document.description">
-                    <label >{{ t("shortDescription") }}</label>
+                    <label >{{ t("description") }}</label>
                     <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>  
                 </div>
 
                 <div v-if="document.descriptionNative">
-                    <label >{{ t("shortDescriptionInOfficialLanguage") }}</label> 
+                    <label >{{ t("descriptionInOfficialLanguage") }}</label> 
                     <div class="km-value">
                         {{ document.descriptionNative }}
                     </div>
                 </div>
                
                 <div v-if="document.notes">
-                    <label >{{ t("commentsOrAdditionalInfo") }}</label>                      
+                    <label >{{ t("comments") }}</label>                      
                     <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html></ng>  
                 </div>
               
@@ -121,7 +121,7 @@
 </template>
 
 <script setup>
-    import { ref,computed } from 'vue'; 
+    import { computed } from 'vue'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/undb-action.json';
@@ -135,22 +135,16 @@
 
     const { t } = useI18n({ messages });    
    
-    const term = ref({});
-    const country = computed(()=>{   
-        term.value.identifier=document.value.country;        
-        return term.value;    
+    const country = computed(()=>{       
+        return { identifier : document.value.country };
     });
     
     const document = computed(()=>props.documentInfo?.body);   
 
     const thumbnailLogoUrl = computed(()=>{
-        if (!document.value.logo) return "";
-        const url = document.value.logo
-        const index = url.lastIndexOf("/");
-        const imgPath = url.substring(0, index);
-        const imgName = url.substring(index+1);
-        const fullPath =  imgPath+"/thumbnail/"+imgName;
-        return  fullPath;
+        if (!document.value.logo) return undefined;       
+        const index = document.value.logo.lastIndexOf("/");
+        return  document.value.logo.substring(0, index) +"/thumbnail/"+ document.value.logo.substring(index+1);       
     });  
    
 </script>
