@@ -11,12 +11,16 @@
             <section>                
                 <div v-if="document.startDate">
                     <label>{{ t("startDate") }}</label>
-                    <ng v-vue-ng:km-value-ml  :value="formatDate(document.startDate, 'YYYY-MM-DD')" :locales="locale" html></ng>  
+                    <div class="km-value">
+                        {{ formatDate(document.startDate, 'YYYY-MM-DD') }}
+                    </div>
                 </div>
                 
                 <div v-if="document.endDate">
                     <label>{{ t("endDate") }}</label>	
-                    <ng v-vue-ng:km-value-ml  :value="formatDate(document.endDate, 'YYYY-MM-DD')" :locales="locale" html></ng>  
+                    <div class="km-value">
+                        {{ formatDate(document.endDate, 'YYYY-MM-DD') }}
+                    </div>
                 </div>
                 <div v-if="document.startTime">
                     <label>{{ t("fromTime") }}</label>
