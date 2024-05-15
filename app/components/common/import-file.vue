@@ -2,7 +2,6 @@
     <button class="btn btn-primary btn-sm" type="button" @click="toggleModal">{{t("importIrcc")}}</button>
 
     <ImportModal ref="importModal"
-            :showModal="showModal" 
             :modalTitle="t('importIrccExcel')" 
             :parsedFile="parsedFile"
             :handleConfirm="handleConfirm"
@@ -97,8 +96,7 @@
                             <td class="p-2">{{data.provider.type}}</td>
                             <td class="p-2">{{data.provider.existing}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }">{{data.provider.orgName_firstName}}</div>
-                                <span v-if="data.provider.orgName_firstName.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
+                                <div :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.provider.orgName_firstName">{{data.provider.orgName_firstName}}</div>
                             </td>
                             <td class="p-2">{{data.provider.acronym_lastName}}</td>
                             <td class="p-2">{{data.provider.address}}</td>
@@ -109,8 +107,7 @@
                             <td class="p-2">{{data.pic.type}}</td>
                             <td class="p-2">{{data.pic.existing}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }">{{data.pic.orgName_firstName}}</div>
-                                <span v-if="data.pic.orgName_firstName.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
+                                <div :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.pic.orgName_firstName">{{data.pic.orgName_firstName}}</div>
                             </td>
                             <td class="p-2">{{data.pic.acronym_lastName}}</td>
                             <td class="p-2">{{data.pic.address}}</td>
@@ -119,12 +116,11 @@
                             <td class="p-2">{{data.pic.email}}</td>
                             <td class="p-2">{{data.matEstablished}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.subjectMatter.length > 45 }">{{data.subjectMatter}}</div>
-                                <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
+                                <div :class="{ 'short-text': data.subjectMatter.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.subjectMatter">{{data.subjectMatter}}</div>
+                                <!-- <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span> -->
                             </td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.usageDescription.length > 45 }">{{data.usageDescription}}</div>
-                                <span v-if="data.usageDescription.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span>
+                                <div :class="{ 'short-text': data.usageDescription.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.usageDescription">{{data.usageDescription}}</div>
                             </td>
                             <td class="p-2">{{data.keywords}}</td>
                             <td class="p-2">{{data.specimens}}</td>
@@ -194,7 +190,7 @@ const parsedFile = ref([]);
 const selectedLanguage = ref(locale.value);
 const error = ref("");
 const errorCreateRecords = ref([]);
-const successMessage = ref("");
+const successMessage = ref(null);
 const multipleImportSheets = ref([]);
 const selectedSheetIndex = ref(0);
 let file = ref(null);
@@ -330,11 +326,11 @@ const onRetryClick = async () => {
     isLoading.value = false;
 }
 
-const toggleTextLength = (event) => {
-    event.preventDefault();
-    const span = event.target.parentElement.previousElementSibling;
-    span.classList.toggle("short-text")
-}
+// const toggleTextLength = (event) => {
+//     event.preventDefault();
+//     const span = event.target.parentElement.previousElementSibling;
+//     span.classList.toggle("short-text")
+// }
 
 </script>
 

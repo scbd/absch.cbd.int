@@ -36,8 +36,7 @@ const { t } = useI18n({ messages });
 const importModal = shallowRef(null);
 let modal = null;
 
-const props = defineProps({
-  showModal: Boolean,
+const props = defineProps({ 
   modalTitle: String,
   parsedFile: Array,
   handleConfirm: Function,
