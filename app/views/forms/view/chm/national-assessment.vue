@@ -1,4 +1,4 @@
-<template>
+<template>  
     <div id="Record" class="record ">
         <div class="record-body bg-white" v-if="document">   
             <section>  
@@ -69,8 +69,7 @@
             </section>
 
             <section>
-                <div v-if="document.nationalIndicatorsUsed || document.nationalIndicators || document.strategicPlanIndicators || document.implementationActivities">
-                    <legend>{{ t("indicatorsAndActivities") }} </legend>    
+                <div v-if="(document.nationalIndicatorsUsed===false) || (document.nationalIndicatorsUsed && document.nationalIndicators) || document.strategicPlanIndicators || document.implementationActivities">    <legend>{{ t("indicatorsAndActivities") }} </legend>    
     
                     <div v-if="document.nationalIndicatorsUsed===false">                        
                         <div class="km-value" >
