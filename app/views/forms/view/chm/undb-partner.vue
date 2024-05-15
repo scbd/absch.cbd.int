@@ -117,10 +117,8 @@
 
     const { t } = useI18n({ messages });    
    
-    const term = ref({});
     const country = computed(()=>{       
-        term.value.identifier=document.value.country;
-        return term.value;    
+        return { identifier : document.value.country };
     });
     
     const document = computed(()=>props.documentInfo?.body);
