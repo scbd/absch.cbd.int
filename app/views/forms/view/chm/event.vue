@@ -6,7 +6,7 @@
                     <div class="col-2" v-if="document.logo">
                         <label>{{t("logo")}}</label>
                         <div class="km-value text-center bg-white">
-                            <img class="w-100" :src="document.logo"></img>                    
+                            <img class="mw-100" :src="document.logo"></img>                    
                         </div>
                     </div> 
                     <div :class="document.logo? 'col-md-10' : 'col-md-12'"  v-if="document.title">
@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="col-6">
                                         {{formatDate(document.startDate, 'YYYY-MM-DD HH:mm')}} 
-                                        <br><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to</strong><br> 
+                                        <br><strong class="ps-5">to</strong><br> 
                                         {{formatDate(document.endDate, 'YYYY-MM-DD HH:mm')}} 
                                     </div> 
                                     <div v-if="index != Object.keys(document.durations).length-1"><hr></div>                                    
@@ -210,7 +210,7 @@
                             <label>{{ t("aichiTargets") }}</label>
                             <div class="km-value">
                                 <div v-for="term in document.aichiTargets">
-                                    <img style="height: 20px;  width: 20px; margin-bottom:5px; " :src="`https://www.cbd.int/images/aichi/48/abt-${getAichiNumber(term)}-48.png?v=<%=gitVersion%>`"/>
+                                    <img style="height: 20px;  width: 20px;" class="mb-2" :src="`https://www.cbd.int/images/aichi/48/abt-${getAichiNumber(term)}-48.png?v=<%=gitVersion%>`"/>
                                     <a :href="`https://www.cbd.int/aichi-targets/target/${getAichiNumber(term)}`">
                                         <km-term :value="term" :locale="locale"></km-term>
                                     </a>
