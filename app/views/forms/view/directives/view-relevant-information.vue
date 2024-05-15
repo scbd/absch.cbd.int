@@ -1,7 +1,9 @@
 <template>
     <section>  
         <div v-if="documentText|| documentLinks || relevantInfos || relevantDocs">
-            <legend>{{ t("relevantDocAndInfo") }}</legend>
+            <slot name="legend">
+                <legend>{{ t("relevantDocAndInfo") }}</legend>
+             </slot>             
 
             <div v-if="documentText">
                 <slot name="text">
@@ -14,7 +16,7 @@
                 <slot name="link">
                     <label>{{ t("relevantWebsites") }} </label> 
                  </slot> 
-                <div class="km-value" compare-val>                 
+                <div class="km-value" >                 
                     <ng v-vue-ng:km-link-list v-model:ng-model="links"  ></ng>                    
                 </div>
             </div>
@@ -31,13 +33,14 @@
                     <label>{{ t("otherWebsiteOrDoc") }} </label> 
                 </slot>
                
-                <div class="km-value" compare-val="relevantDocs">                   
+                <div class="km-value" >                   
                      <ng v-vue-ng:km-link-list v-model:ng-model="docs" ></ng>    
                 </div>
             </div>
         </div>
     </section>
 </template>
+
 <script setup>
     import { computed } from 'vue';
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
