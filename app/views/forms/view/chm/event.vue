@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-2" v-if="document.logo">
                         <label>{{t("logo")}}</label>
-                        <div class="km-value text-center" style="background-color:#fff;">
-                            <img style="max-width:100%;" :src="document.logo"></img>                    
+                        <div class="km-value text-center bg-white">
+                            <img class="w-100" :src="document.logo"></img>                    
                         </div>
                     </div> 
                     <div :class="document.logo? 'col-md-10' : 'col-md-12'"  v-if="document.title">
@@ -33,13 +33,13 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6" v-if="document.symbol">                                                   
+                        <div :class="[document.type?'col-6':'col-12']" v-if="document.symbol" >                                                   
                             <label>{{t("symbol")}}</label>  
                             <div class="km-value">
                                 {{lstring(document.symbol)}}   
                             </div>   
                         </div>
-                        <div class="col-6" v-if="document.type">                           
+                        <div :class="[document.symbol?'col-6':'col-12']" v-if="document.type">  
                             <label>{{t("type")}}</label>
                             <div class="km-value" >        
                                 <div v-for="term in document.type">                                
@@ -55,14 +55,14 @@
                 <div v-if="document.startDate || document.endDate || document.durations">
                     <legend>{{t("durations")}}</legend>
                     <div class="row">                     
-                        <div class="col-6" v-if="document.startDate">
+                        <div :class="[document.endDate?'col-6':'col-12']" v-if="document.startDate">
                             <label>{{t("startDateAndTime")}}</label>   
                             <div class="km-value">
                                 {{formatDate(document.startDate, 'YYYY-MM-DD HH:mm')}}
                             </div> 
                         </div>
 
-                        <div  class="col-6" v-if="document.endDate">
+                        <div  :class="[document.startDate?'col-6':'col-12']" v-if="document.endDate">
                             <label>{{t("endDateAndTime")}}</label>
                             <div class="km-value">
                                 {{formatDate(document.endDate, 'YYYY-MM-DD HH:mm')}}
@@ -114,7 +114,7 @@
                         <label><i class="fa fa-google" aria-hidden="true"></i>{{t("map")}}</label>
                         <div class="km-value">
                             <iframe :src="`https://www.google.com/maps/embed/v1/place?key=AIzaSyCyD6f0w00dLyl1iU39Pd9MpVVMOtfEuNI&q=place_id:${document.address.googlePlaceId}`"
-                            width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            width="100%" height="200" frameborder="0"  class="border-0" allowfullscreen></iframe>
                         </div>                           
                     </div>           
                 </div>
@@ -197,7 +197,7 @@
                 <div v-if="document.thematicAreas || document.aichiTargets ">
                     <legend>{{ t("thematicAreas") }}</legend>
                     <div class="row">
-                        <div class="col-6" v-if="document.thematicAreas">
+                        <div :class="[document.aichiTargets?'col-6':'col-12']" v-if="document.thematicAreas">
                             <label>{{t("cbdSubjectAreas")}}</label>
                             <div class="km-value">
                                 <div v-for="term in document.thematicAreas">                              
@@ -206,7 +206,7 @@
                             </div>
                         </div>
     
-                        <div class="col-6" v-if="document.aichiTargets">
+                        <div  :class="[document.thematicAreas?'col-6':'col-12']" v-if="document.aichiTargets">
                             <label>{{ t("aichiTargets") }}</label>
                             <div class="km-value">
                                 <div v-for="term in document.aichiTargets">
