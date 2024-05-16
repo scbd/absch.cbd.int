@@ -123,6 +123,7 @@ export class ImportDataBase {
     if (this.columnVal(sheet, fields.existing + i).trim() != "") {
       let contactIds = [];
       let existingContacts = this.columnVal(sheet, fields.existing + i).split(",");
+      console.log("EXISTING CONTACT", existingContacts, existingContacts.length)
       for (let j = 0; j < existingContacts.length; j++) {
         contactIds.push({ identifier: await this.findByUid(existingContacts[j]) });
       }
@@ -215,9 +216,9 @@ export class ImportDataBase {
           return;
   
       try{
-        let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
-        console.log("IRCC REQUEST", irccRequest);
-        return irccRequest;
+          let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
+
+          return irccRequest;
       }
       catch(err){
           console.log("ERR", err)
@@ -227,25 +228,24 @@ export class ImportDataBase {
       }
     };
 
-    async validateAndCreateNationalRecord(contacts, documents, progressTracking){
+    async validateAndCreateNationalRecord(contacts, documents){
       let errorCount = 0;
+      const errorResponse = []  
       for (let index = 0; index < contacts.length; index++) {
         const contact = contacts[index];
         var isValid = await this.validateNationalRecord(contact)
         if(!isValid)
             errorCount++;
 
-        const response = await this.createNationalRecord(contact, true)
+        const response = await this.createNationalRecord(contact, false)
         if(!response){
           errorResponse.push({
             identifier: contact.header.identifier,
-            draft: true,
+            draft: false,
             document: contact,
-            contact:true,
-            error: response.error
+            contact:true
           })
         }
-        progressTracking.value++;
       }
       
       for (let index = 0; index < documents.length; index++) {
@@ -253,17 +253,16 @@ export class ImportDataBase {
           var isValid = await this.validateNationalRecord(document)
 
           const response = await this.createNationalRecord(document, true)
-          if(response.error){
+          if(!response){
             errorResponse.push({
               identifier: document.header.identifier,
               draft: true,
               document,
-              contact:false,
-              error: response.error
+              contact:false
             })
           }
-          progressTracking.value++;
       }
+      return errorResponse;
     }
 
     async retryCreateNationalRecord(document, draft){

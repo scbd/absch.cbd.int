@@ -3,8 +3,10 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width: 80vw;" role="document">
       <div class="modal-content">
         <div class="modal-header color-black">
-          <h5 class="modal-title">{{ modalTitle }}</h5>
-          <p>{{ t("pleaseSelectExcelInfo") }}</p>
+          <div class="py-0 px-1">
+            <h5 class="modal-title">{{ modalTitle }}</h5>
+            <p class="m-0">{{ t("pleaseSelectExcelInfo") }}</p>
+          </div>
           <button type="button" class="border-0 close" @click="closeDialog()" :disabled="isLoading" aria-label="Close">
             <i class="bi bi-x-circle-fill icon-lg"></i>
           </button>
