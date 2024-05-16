@@ -1,7 +1,11 @@
 <template> 
     <div id="Record" class="record ">
         <div class="record-body bg-white" v-if="document"> 
-            <!--TODO: add compare-val   -->
+            <!--TODO: add compare-val for fields  -->
+
+            <!-- TODO: add publish date -->            
+            <!-- <ng v-vue-ng:document-date></ng> -->
+
            <section>
                 <legend>{{ t("generalInformation") }} </legend> 
                 <div v-if="document.government">
@@ -39,8 +43,7 @@
                     <label>{{ t("additionalInfo") }} </label>  
                     <ng  v-vue-ng:km-value-ml  :value="document.jurisdictionInfo" :locales="locale" html></ng> 
                 </div>
-            </section> 
-           
+            </section>            
 
             <section v-if="document.status || document.adoptionDate || document.approvedStatus || document.approvingBody || document.approvingBodyInfo">                
                 <legend>{{ t("status") }} </legend>       
@@ -103,38 +106,38 @@
             <view-relevant-information :information="document.documentText" :documents="document.documentLinks":locale="locale">
                 <template v-slot:legend>
                     <legend>{{ t("relevantDocumentAndInformation") }}</legend>
-                  </template>  
+                </template>  
                 <template v-slot:information>
                     <label>{{ t("relevantInfo") }} </label>   
-                  </template>
-                  <template v-slot:document>
+                </template>
+                <template v-slot:document>
                     <label>{{ t("relevantWebsites") }} </label> 
-                  </template>
+                </template>
             </view-relevant-information> 
 
-            <view-relevant-information :information="document.relevantInformation" :documents="document.relevantDocuments":locale="locale">               
-            </view-relevant-information> 
+            <view-relevant-information :information="document.relevantInformation" :documents="document.relevantDocuments":locale="locale"> 
+           </view-relevant-information> 
            
-            <div>
-                <!-- {{ document.header.identifier }} -->
-                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" :locale="locale"></ng>              
-            </div>
-         
+            <div> 
+                <!-- TODO: test -->
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+            </div>         
         </div>  
-        <!-- <ng v-vue-ng:document-metadata  ></ng>                    -->
+        <!-- TODO: add footer  -->
+        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+
     </div>
 </template>
 
 <script setup>
-    import { computed } from 'vue';
+    import { computed} from 'vue';
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import '~/views/forms/view/directives/view-reference-records.directive.js'    
     import kmTerm from '~/components/km/KmTerm.vue';
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue'; 
     import messages from '~/app-text/views/reports/chm/national-report.json';
-    import { useI18n } from 'vue-i18n';
- 
+    import { useI18n } from 'vue-i18n'; 
 
     const { t } = useI18n({ messages });
 

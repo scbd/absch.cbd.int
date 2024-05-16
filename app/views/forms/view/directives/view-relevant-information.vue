@@ -4,7 +4,7 @@
        
         <slot name="legend">
             <legend>{{ t("additionalInformation") }}</legend>
-            </slot>    
+        </slot>    
 
         <div v-if="props.information">
             <slot name="information">
@@ -19,7 +19,7 @@
             </slot>
             
             <div class="km-value" >                   
-                    <ng v-vue-ng:km-link-list v-model:ng-model="docs" ></ng>    
+                <ng v-vue-ng:km-link-list v-model:ng-model="docs" ></ng>    
             </div>
         </div>
       
@@ -39,7 +39,7 @@
         documents      : {type:Array}
     })
 
-    //props cannot used on v-model，so use computed property for km-link-list
+    //props cannot used on v-model，so define another variable for km-link-list
     const docs = props.documents;
    
 </script>
