@@ -9,5 +9,9 @@
     "nationalIndicators": "National Indicators",
     "nationalTargets":"National Targets",
     "aichiTargets":"Aichi Targets",
-    "partners":"Partners"
+    "partners":"Partners",
+    "relevantDocumentAndInformation":"Relevant documents and information",
+    "relevantInfo": "Relevant information", 
+    "relevantWebsites":"Relevant websites, links, and files",
+    "additionalInformation": "Additional information"
 }
