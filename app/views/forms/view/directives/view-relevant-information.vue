@@ -28,7 +28,7 @@
     const { t } = useI18n({ messages });
 
     const props = defineProps({     
-        locale                 : {type:String},
+        locale                 : {type:String, required:true},
         relevantInformation    : {type:Object},
         relevantDocuments      : {type:Array}
     })
