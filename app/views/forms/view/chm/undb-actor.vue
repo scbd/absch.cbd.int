@@ -1,18 +1,20 @@
 <template>
     <div id="Record" class="record " >     
         <div class="record-body bg-white" v-if="document"> 
-            <legend>{{ t("organization") }}  </legend> 
+            <!--TODO: add compare-val for fields  -->
 
-            <section>
-                <!--TODO:same content as chm project (add image, etc) -->
-                <div v-if="document.organization">                      
-                    <div class="km-value">                               
-                        <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html></ng>   
-                    </div>
-                </div> 
+            <!-- TODO: add publish date -->            
+            <!-- <ng v-vue-ng:document-date></ng> -->
+
+            <legend>{{ t("organization") }}  </legend> 
+            <section v-if="document.organization">
+                <!--TODO:same content as chm project (add image, etc) -->                                
+                <div class="km-value">                               
+                    <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html></ng>   
+                </div>               
             </section>                   
 
-            <section>
+            <section v-if="document.governments || document.description || document.descriptionNative">
                 <div v-if="document.governments">
                     <label>{{ t("government") }} </label>                         
                     <div class="km-value">                    
@@ -23,19 +25,19 @@
                 </div>  
 
                 <div v-if="document.description">                        
-                        <label>{{ t("description") }}</label>                           
+                    <label>{{ t("description") }}</label>                           
                     <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>    
                 </div>                     
 
                 <div v-if="document.descriptionNative">
                     <label>{{ t("descriptionNative") }}</label>
                     <div class="km-value">   
-                    {{ document.descriptionNative }}                            
+                        {{ document.descriptionNative }}                            
                     </div>   
                 </div>  
             </section>
 
-            <section>
+            <section v-if="document.websites || document.videos || document.documents || document.images">
                 <div v-if="document.websites">
                     <label>{{ t("websites") }}</label>
                     <div class="km-value">   
@@ -65,7 +67,15 @@
                     </div>  
                 </div>  
             </section> 
+
+            <div> 
+                <!-- TODO: test -->
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+            </div>         
         </div>  
+
+        <!-- TODO: add footer  -->
+        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
     </div>
 </template>
 
