@@ -1,14 +1,14 @@
 <template>
-    <div v-if="props.relevantInformation|| props.relevantDocuments">  
+    <div v-if="relevantInformation|| relevantDocuments">  
         <!-- TODO: add compare-val  -->
-        <div v-if="props.relevantInformation">
+        <div v-if="relevantInformation">
             <slot name="information">
                 <label>{{ t("additionalInformation") }}</label>
             </slot>                        
             <ng v-vue-ng:km-value-ml  :value="relevantInformation" :locales="locale" html></ng>              
         </div>  
 
-        <div v-if="props.relevantDocuments">                
+        <div v-if="relevantDocuments">                
             <slot name="document">
                 <label>{{ t("otherWebsiteOrDocument") }} </label> 
             </slot>
