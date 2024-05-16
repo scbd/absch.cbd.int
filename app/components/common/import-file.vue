@@ -186,6 +186,11 @@
                 </div>
             </div>
         </div>
+        
+        <div class="progress row" v-if="progressTracking > 0">
+            <div class="progress-bar" role="progressbar" 
+            :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{progressPercentage}}%</div>
+        </div>
     </ImportModal>
 </template>
 
@@ -220,6 +225,7 @@ const multipleImportSheets = ref([]);
 const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
+const progressTracking = ref(null);
 
 const importDataBase = new ImportDataBase({tokenReader:()=>auth.token(), realm:realm.value});
 const emit = defineEmits(['refreshRecord']);
@@ -239,6 +245,7 @@ function toggleModal() {
     successMessage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
+    progressTracking.value = null;
     resetFileErrorInParsedFile();
     showModal.value = !showModal.value;
     importModal.value.showDialog();
@@ -246,6 +253,11 @@ function toggleModal() {
         emit("refreshRecord")
     }
 }
+
+const progressPercentage = computed(() => {
+  const total = parsedFile.value?.length + importDataIRCC?.contacts?.length;
+  return total > 0 ? (progressTracking.value / total) * 100 : 0;
+});
 
 const handleFileChange = async (event) => {
     file.value = event.target.files[0];
@@ -255,6 +267,7 @@ const handleFileChange = async (event) => {
     successMessage.value = null;
     selectedSheetIndex.value = 0;
     multipleImportSheets.value = [];
+    progressTracking.value = null;
     resetFileErrorInParsedFile();
     try{
         const {sheetNames, workbook} = await importDataBase.readSheet(file.value);
@@ -280,6 +293,7 @@ const handleSelectedSheetChange = async () => {
             error.value = null;
             errorCreateRecords.value = [];
             successMessage.value = null;
+            progressTracking.value = null;
             resetFileErrorInParsedFile();
             parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
         }
@@ -297,6 +311,7 @@ const handleConfirm = async () => {
         error.value = null;
         errorCreateRecords.value = [];
         successMessage.value = null;
+        progressTracking.value = null;
         resetFileErrorInParsedFile();
         const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
         parsedFile.value = parsedFile.value.map((file,index)=>{
@@ -305,10 +320,7 @@ const handleConfirm = async () => {
                 identifier: result[index].header.identifier
             }
         })
-        console.log("PARSEDFILE", parsedFile.value);
-        console.log("RESULT", result);
-        console.log("CONTACT", importDataIRCC.contacts);
-        const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result);
+        const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result, progressTracking);
         console.log("ERROR RESPONSE", errorResponse);
         updateParsedFileWithError(errorResponse);
         if(errorResponse === undefined || errorResponse.length === 0){
@@ -322,6 +334,7 @@ const handleConfirm = async () => {
         error.value = "Error: An error occurred while creating national record."
     }
     isLoading.value = false;
+    progressTracking.value = null;
 }
 
 const updateParsedFileWithError = (errorResponse) => {
@@ -344,9 +357,8 @@ const updateParsedFileWithError = (errorResponse) => {
                 }
             }
         })
-    }
-}); 
-    console.log("Updated PARSEDFILE", parsedFile.value);
+        }
+    }); 
 }
 
 const onFileInputClick = (event) => {
@@ -360,6 +372,7 @@ const handleClearClick = () => {
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
     errorCreateRecords.value = [];
+    progressTracking.value = null;
     resetFileErrorInParsedFile();
 }
 
