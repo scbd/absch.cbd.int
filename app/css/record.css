@@ -214,3 +214,11 @@
     overflow-y: scroll;
     width: 90%;
 }
+
+.bg-lightgreen{
+    background-color: lightgreen;
+}
+
+.bg-lightpink{
+    background-color: lightpink;
+}

@@ -454,13 +454,14 @@ export class ImportDataIRCC extends ImportDataBase {
     let sheet =  this.workbook.Sheets[sheetNames[selectedSheetIndex]];
     // let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
           const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
-const rowCount = excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length;
+    const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
-console.log('Total rows with data:', rowCount);
+    console.log('Total rows with data:', rowCount);
     const data = []
-    for(let i=4;i<rowCount;i++){
+    for(let i=4;i<=rowCount;i++){
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
+          rowId: i,
           language: super.columnVal(sheet, this.fields.language + i),
           country: super.columnVal(sheet, this.fields.country + i),
           cna: super.columnVal(sheet, this.fields.cna + i),
@@ -497,7 +498,8 @@ console.log('Total rows with data:', rowCount);
           usageDescription: super.columnVal(sheet, this.fields.usageDescription + i),
           conditions_third_party_transfer: super.columnVal(sheet, this.fields.conditions_third_party_transfer + i),
           permitFiles: super.columnVal(sheet, this.fields.permitFiles + i),
-          additional_information: super.columnVal(sheet, this.fields.additional_information + i)
+          additional_information: super.columnVal(sheet, this.fields.additional_information + i),
+          fileError: null
         }
         data.push(value);
       }
@@ -514,19 +516,19 @@ console.log('Total rows with data:', rowCount);
 
      // let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
       const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });// ToDo: use the  this.workbook.Sheets
-const rowCount = excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length;
+      const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
-console.log('Total rows with data:', rowCount);
+      console.log('Total rows with data:', rowCount);
       let irccs = [];
     //   let contacts = [];
-
+      console.log("SHEET", sheet,excelData);
       // CACHE values
-      for(let i=4;i<rowCount;i++){
+      for(let i=4; i<=rowCount; i++){
         this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
       } 
       await this.cacheApiCalls();
 
-      for (let i = 4; i < rowCount; i++) {
+      for (let i = 4; i <= rowCount; i++) {
         if (!super.columnVal(sheet, this.fields.language + i)) {
           console.log(
             `Language is missing for record on row ${i}, skipping record.`

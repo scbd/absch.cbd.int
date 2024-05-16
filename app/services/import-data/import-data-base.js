@@ -110,7 +110,7 @@ export class ImportDataBase {
     if (this.columnVal(sheet, fields.existing + i).trim() != "") {
       let contactIds = [];
       let existingContacts = this.columnVal(sheet, fields.existing + i).split(",");
-  
+      console.log("EXISTING CONTACT", existingContacts, existingContacts.length)
       for (let j = 0; j < existingContacts.length; j++) {
         contactIds.push({ identifier: await this.findByUid(existingContacts[j]) });
       }
@@ -184,7 +184,6 @@ export class ImportDataBase {
     });
   
     if (exists) return [{ identifier: exists.header.identifier }];
-  
     contacts.push(contact);
   
     return [{ identifier: contact.header.identifier }];
@@ -203,7 +202,7 @@ export class ImportDataBase {
                         
         }
         catch(err){
-            throw err;
+            console.log("ERR", err)
         }
     };
 
@@ -212,12 +211,8 @@ export class ImportDataBase {
           return;
   
       try{
-          let url = `/api/v2013/documents/${document.header.identifier}`
-
-          if(isDraft)
-              url += '/versions/draft'
-
           let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
+
           return irccRequest;
       }
       catch(err){
@@ -226,46 +221,40 @@ export class ImportDataBase {
     };
 
     async validateAndCreateNationalRecord(contacts, documents){
-        let errorCount = 0;
-        const errorResponse = []
-        for (let index = 0; index < contacts.length; index++) {
-            const document = contacts[index];
-            var isValid = await this.validateNationalRecord(document)
-            if(!isValid)
-                errorCount++;
+      let errorCount = 0;
+      const errorResponse = []  
+      for (let index = 0; index < contacts.length; index++) {
+        const contact = contacts[index];
+        var isValid = await this.validateNationalRecord(contact)
+        if(!isValid)
+            errorCount++;
+
+        const response = await this.createNationalRecord(contact, false)
+        if(!response){
+          errorResponse.push({
+            identifier: contact.header.identifier,
+            draft: false,
+            document: contact,
+            contact:true
+          })
         }
-        
-        for (let index = 0; index < documents.length; index++) {
-            const document = documents[index];
-            var isValid = await this.validateNationalRecord(document)
-        }
-        
-        for (let index = 0; index < contacts.length; index++) {
-            const document = contacts[index];
-            const response = await this.createNationalRecord(document, false)
-            console.log("RESPONSE", response)
-            if(!response){
-              errorResponse.push({
-                identifier: document.header.identifier,
-                draft: false,
-                document
-              })
-            }
-        }
-        
-        for (let index = 0; index < documents.length; index++) {
-            const document = documents[index];
-            const response = await this.createNationalRecord(document, true)
-            console.log("RESPONSE WITH DRAFT", response);
-            if(!response){
-              errorResponse.push({
-                identifier: document.header.identifier,
-                draft: true,
-                document
-              })
-            }
-        }
-        return errorResponse;
+      }
+      
+      for (let index = 0; index < documents.length; index++) {
+          const document = documents[index];
+          var isValid = await this.validateNationalRecord(document)
+
+          const response = await this.createNationalRecord(document, true)
+          if(!response){
+            errorResponse.push({
+              identifier: document.header.identifier,
+              draft: true,
+              document,
+              contact:false
+            })
+          }
+      }
+      return errorResponse;
     }
 
     async retryCreateNationalRecord(document, draft){

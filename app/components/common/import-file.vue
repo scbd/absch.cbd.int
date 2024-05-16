@@ -31,14 +31,19 @@
                 </button>
             </div>
             
-            <div class="col-md-9 text-center d-flex align-items-center" v-if="multipleImportSheets.length">
-                <span class="text-danger me-2">{{t("multipleSheetAlert")}}</span>
-                <select class="form-select" v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
+            <div class="col-md-6 text-center d-flex align-items-center" v-if="multipleImportSheets.length">
+                <span class="text-danger me-2" data-toggle="tooltip" data-placement="top" :title="t('multipleSheetAlert')"><i class="bi bi-info-circle"></i></span>
+                <select class="form-select" :disabled="isLoading"
+                v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
                     <option v-for="(sheet, index) in multipleImportSheets" :key="index" :value="index">{{sheet}}</option>
                 </select>
             </div>
+
+            <div class="col-md-3 d-flex align-items-center justify-content-end fw-bold">
+                <span v-if="parsedFile.length > 0">{{t('totalRecords')}} {{parsedFile.length}}</span>
+            </div>
         </div>
-        <div class="row table-container" v-if="parsedFile.length">
+        <div class="row table-container table-responsive" v-if="parsedFile.length">
             <!-- <div class="col"> -->
                 <table class="table table-striped table-bordered table-condensed">
                     <thead>
@@ -46,21 +51,21 @@
                             <th scope="col" rowspan="2">#</th>
                             <th scope="col" rowspan="2">{{t("language")}}</th>
                             <th scope="col" rowspan="2">{{t("country")}}</th>
-                            <th scope="col" rowspan="2">{{t("CNAResponsible")}}</th>
-                            <th scope="col" rowspan="2">{{t("permit")}}</th>
-                            <th scope="col" rowspan="2">{{t("dateOfIssuance")}}</th>
-                            <th scope="col" rowspan="2">{{t("dateOfExpiry")}}</th>
+                            <th scope="col" rowspan="2">{{t("cnaHeader")}}</th>
+                            <th scope="col" rowspan="2">{{t("linkIrcc")}}</th>
+                            <th scope="col" rowspan="2">{{t("dateOfIssuanceHeader")}}</th>
+                            <th scope="col" rowspan="2">{{t("dateOfExpiryHeader")}}</th>
                             <th scope="col" colspan="8" class="text-center">{{t("provider")}}</th>
                             <th scope="col" colspan="9" class="text-center">{{t("priorInformation")}}</th>
-                            <th scope="col" rowspan="2">{{t("matEstablished")}}</th>
+                            <th scope="col" rowspan="2">{{t("matEstablishedHeader")}}</th>
                             <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
-                            <th scope="col" rowspan="2">{{t("usagesDescription")}}</th>
-                            <th scope="col" rowspan="2">{{t("keywords")}}</th>
+                            <th scope="col" rowspan="2">{{t("additionalInformationOnUsage")}}</th>
+                            <th scope="col" rowspan="2">{{t("subjectGenericKeywords")}}</th>
                             <th scope="col" rowspan="2">{{t("specimens")}}</th>
                             <th scope="col" rowspan="2">{{t("taxonomy")}}</th>
-                            <th scope="col" rowspan="2">{{t("usages")}}</th>
+                            <th scope="col" rowspan="2">{{t("indicateCommercialUse")}}</th>
                             <th scope="col" rowspan="2">{{t("thirdPartyTransferCondition")}}</th>
-                            <th scope="col" rowspan="2">{{t("permitFiles")}}</th>
+                            <th scope="col" rowspan="2">{{t("copyOfPermit")}}</th>
                             <th scope="col" rowspan="2">{{t("additionalInformation")}}</th>
                         </tr>
                          <tr>
@@ -85,7 +90,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(data,index) in parsedFile" :key="index">
+                        <tr v-for="(data,index) in parsedFile" :key="index"
+                        :class="{
+                                'bg-lightpink': data.fileError === true,
+                                'bg-lightgreen': data.fileError === false
+                            }"
+                        >
                             <th scope="row">{{index + 1}}</th>
                             <td class="p-2">{{data.language}}</td>
                             <td class="p-2">{{data.country}}</td>
@@ -96,7 +106,10 @@
                             <td class="p-2">{{data.provider.type}}</td>
                             <td class="p-2">{{data.provider.existing}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.provider.orgName_firstName">{{data.provider.orgName_firstName}}</div>
+                                <div data-toggle="tooltip" data-placement="top" :title="data.provider.orgName_firstName"
+                                :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }">
+                                    {{data.provider.orgName_firstName}}
+                                </div>
                             </td>
                             <td class="p-2">{{data.provider.acronym_lastName}}</td>
                             <td class="p-2">{{data.provider.address}}</td>
@@ -107,7 +120,10 @@
                             <td class="p-2">{{data.pic.type}}</td>
                             <td class="p-2">{{data.pic.existing}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.pic.orgName_firstName">{{data.pic.orgName_firstName}}</div>
+                                <div data-toggle="tooltip" data-placement="top" :title="data.pic.orgName_firstName"
+                                :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }">
+                                    {{data.pic.orgName_firstName}}
+                                </div>
                             </td>
                             <td class="p-2">{{data.pic.acronym_lastName}}</td>
                             <td class="p-2">{{data.pic.address}}</td>
@@ -116,13 +132,22 @@
                             <td class="p-2">{{data.pic.email}}</td>
                             <td class="p-2">{{data.matEstablished}}</td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.subjectMatter.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.subjectMatter">{{data.subjectMatter}}</div>
-                                <!-- <span v-if="data.subjectMatter.length > 45"><a class="text-decoration-underline text-primary" @click="toggleTextLength">(show more/less)</a></span> -->
+                                <div data-toggle="tooltip" data-placement="top" :title="data.subjectMatter"
+                                :class="{ 'short-text': data.subjectMatter.length > 45 }">
+                                    {{data.subjectMatter}}
+                                </div>
                             </td>
                             <td class="p-2">
-                                <div :class="{ 'short-text': data.usageDescription.length > 45 }" data-bs-toggle="tooltip" data-bs-placement="top" :title="data.usageDescription">{{data.usageDescription}}</div>
+                                <div data-toggle="tooltip" data-placement="top" :title="data.usageDescription"
+                                :class="{ 'short-text': data.usageDescription.length > 45 }">
+                                    {{data.usageDescription}}
+                                </div>
                             </td>
-                            <td class="p-2">{{data.keywords}}</td>
+                            <td class="p-2">
+                                <div data-toggle="tooltip" data-placement="top" :title="data.keywords"
+                                :class="{ 'short-text': data.keywords.length > 45 }"
+                                >{{data.keywords}}</div>
+                            </td>
                             <td class="p-2">{{data.specimens}}</td>
                             <td class="p-2">{{data.taxonomies}}</td>
                             <td class="p-2">{{data.usage}}</td>
@@ -144,12 +169,12 @@
                 <button class="btn btn-primary" @click="onRetryClick">Retry</button>
             </div>
         </div>
-        <div class="row mt-4" v-else-if="error">
+        <div class="row mt-4" v-else-if="error && !isLoading">
             <div class="col-12 text-center">
                 <span class="alert alert-danger" >{{error}}</span>
             </div>
         </div>
-        <div class="row mt-5"  v-if="successMessage">
+        <div class="row mt-4"  v-if="successMessage && !isLoading">
             <div class="col-12 text-center">
                 <div class="alert alert-success">{{successMessage}}</div>
             </div>
@@ -195,7 +220,6 @@ const multipleImportSheets = ref([]);
 const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
-const sText = ref("");
 
 const importDataBase = new ImportDataBase({tokenReader:()=>auth.token(), realm:realm.value});
 const emit = defineEmits(['refreshRecord']);
@@ -207,14 +231,15 @@ const userGovernment = computed(()=>{
 })
 
 let importDataIRCC;
- const importModal = ref(null);
+const importModal = ref(null);
 function toggleModal() {
     parsedFile.value = [];
     error.value = null;
-    // errorCreateRecords.value = [];
+    errorCreateRecords.value = [];
     successMessage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
+    resetFileErrorInParsedFile();
     showModal.value = !showModal.value;
     importModal.value.showDialog();
     if(!showModal.value){
@@ -230,6 +255,7 @@ const handleFileChange = async (event) => {
     successMessage.value = null;
     selectedSheetIndex.value = 0;
     multipleImportSheets.value = [];
+    resetFileErrorInParsedFile();
     try{
         const {sheetNames, workbook} = await importDataBase.readSheet(file.value);
         xlsxWorkbook.value = workbook;
@@ -254,6 +280,7 @@ const handleSelectedSheetChange = async () => {
             error.value = null;
             errorCreateRecords.value = [];
             successMessage.value = null;
+            resetFileErrorInParsedFile();
             parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
         }
     } catch (err) {
@@ -270,9 +297,20 @@ const handleConfirm = async () => {
         error.value = null;
         errorCreateRecords.value = [];
         successMessage.value = null;
+        resetFileErrorInParsedFile();
         const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
+        parsedFile.value = parsedFile.value.map((file,index)=>{
+            return {
+                ...file,
+                identifier: result[index].header.identifier
+            }
+        })
+        console.log("PARSEDFILE", parsedFile.value);
+        console.log("RESULT", result);
+        console.log("CONTACT", importDataIRCC.contacts);
         const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result);
         console.log("ERROR RESPONSE", errorResponse);
+        updateParsedFileWithError(errorResponse);
         if(errorResponse === undefined || errorResponse.length === 0){
             successMessage.value = "Successfully created national record.";
         }else{
@@ -286,6 +324,31 @@ const handleConfirm = async () => {
     isLoading.value = false;
 }
 
+const updateParsedFileWithError = (errorResponse) => {
+    errorResponse.forEach(error => {
+    const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
+        if (matchingContact) {
+            error.emails = matchingContact.emails;
+        }
+    });
+    parsedFile.value.forEach(item => {
+        item.fileError = false;
+        const matchingError = errorResponse.find(error => error.identifier === item.identifier);
+        if(matchingError){
+            item.fileError = true;
+        }else{
+            errorResponse.forEach((error) => {
+            if(error.contact){
+                if(item.pic.email === error.emails[0] || item.provider.email === error.emails[0]){
+                    item.fileError = true;
+                }
+            }
+        })
+    }
+}); 
+    console.log("Updated PARSEDFILE", parsedFile.value);
+}
+
 const onFileInputClick = (event) => {
     event.target.value = "";
 }
@@ -297,14 +360,16 @@ const handleClearClick = () => {
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
     errorCreateRecords.value = [];
+    resetFileErrorInParsedFile();
 }
 
 const onRetryClick = async () => {
     error.value = null;
     isLoading.value = true;
     const errorResponse = [];
+    resetFileErrorInParsedFile();
     try {
-        errorCreateRecords.value.forEach(async (record) => {
+        const promises = errorCreateRecords.value.map(async (record) => {
             const response = await importDataBase.retryCreateNationalRecord(record.document, record.draft)
             if(!response){
                 errorResponse.push({
@@ -313,24 +378,25 @@ const onRetryClick = async () => {
                     document
                 })
             }
-        })        
+        })      
+        await Promise.all(promises);
+
+        if(errorResponse.length === 0){
+            successMessage.value = "Successfully created national record.";
+            errorCreateRecords.value = [];
+        }else{
+            errorCreateRecords.value = errorResponse;
+        }
+        isLoading.value = false;
     } catch (error) {
         error.value = "Error: An error occurred while creating national record."
-    }
-    if(errorResponse === undefined || errorResponse.length === 0){
-        successMessage.value = "Successfully created national record.";
-        errorCreateRecords.value = [];
-    }else{
-        errorCreateRecords.value = errorResponse;
-    }
-    isLoading.value = false;
+        isLoading.value = false;
+    }       
 }
 
-// const toggleTextLength = (event) => {
-//     event.preventDefault();
-//     const span = event.target.parentElement.previousElementSibling;
-//     span.classList.toggle("short-text")
-// }
+const resetFileErrorInParsedFile = () => {
+    parsedFile.value.forEach((file) => file.fileError = null)
+}
 
 </script>
 
