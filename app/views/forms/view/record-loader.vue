@@ -5,6 +5,8 @@
                  :document-info="documentInfo" :locale="locale"></aichi-target>
             <national-assessment v-if="documentInfo?.type == 'nationalAssessment'"  
                     :document-info="documentInfo" :locale="locale"></national-assessment>        
+            <national-report v-if="documentInfo?.type == 'nationalReport'"  
+                    :document-info="documentInfo" :locale="locale"></national-report>
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
                 Loading...
@@ -19,6 +21,7 @@
     import { defineAsyncComponent, Suspense } from 'vue';
     import aichiTarget from '~/views/forms/view/chm/aichi-target.vue'
     import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue'
+    import nationalReport from '~/views/forms/view/chm/national-report.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},

@@ -1,0 +1,20 @@
+{
+    "generalInformation": "General information",
+    "country": "Country",    
+    "title": "Title", 
+    "typeOfDocument": "Type of document",
+    "summary":  "Summary",
+    "level":  "Level of application",
+    "additionalInfo":"Additional jurisdiction information",
+    "status":  "Status",
+    "date":"Date of completion and adoption",
+    "statusOfDocument": "Status of approved document",
+    "approvingBody":"Approving body",
+    "timePeriod":"Time period",
+    "from": "From",
+    "to": "To", 
+    "relevantDocumentAndInformation":"Relevant documents and information",
+    "relevantInfo": "Relevant information", 
+    "relevantWebsites":"Relevant websites, links, and files",
+    "additionalInformation": "Additional information"
+}
