@@ -12,7 +12,8 @@
     "approvingBody":"Approving body",
     "timePeriod":"Time period",
     "from": "From",
-    "to": "To"
-   
-
+    "to": "To", 
+    "relevantDocumentAndInformation":"Relevant documents and information",
+    "relevantInfo": "Relevant information", 
+    "relevantWebsites":"Relevant websites, links, and files"
 }

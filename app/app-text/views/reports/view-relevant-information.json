@@ -1,7 +1,4 @@
 {
-    "relevantDocAndInfo":"Relevant documents and information",
-    "relevantInfo":"Relevant information",
-    "relevantWebsites":"Relevant websites, links, and files",
-    "additionalInfo":  "Additional Information",
-    "otherWebsiteOrDoc":"Other relevant website address or attached documents"
+    "additionalInformation":  "Additional Information",
+    "otherWebsiteOrDocument":"Other relevant website address or attached documents"
 }
