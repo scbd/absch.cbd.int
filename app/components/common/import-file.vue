@@ -156,6 +156,8 @@
         </div>
         <div class="row mt-3" v-show="isLoading">
             <div class="col-12 text-center">
+                <span>{{t("loadingMessage")}}</span>
+                <br>
                 <div class="spinner-border" role="status">
                     <span class="sr-only">{{t("loading")}}...</span>
                 </div>

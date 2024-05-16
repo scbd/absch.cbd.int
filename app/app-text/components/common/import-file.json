@@ -14,5 +14,6 @@
     "address":"Address",
     "city":"City",
     "email":"Email",
-    "consent":"Consent"
+    "consent":"Consent",
+    "loadingMessage": "Please wait, this importing process may take some time."
 }

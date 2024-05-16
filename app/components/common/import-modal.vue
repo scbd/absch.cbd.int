@@ -5,7 +5,7 @@
         <div class="modal-header color-black">
           <h5 class="modal-title">{{ modalTitle }}</h5>
           <p>{{ t("pleaseSelectExcelInfo") }}</p>
-          <button type="button" class="border-0 close" @click="closeDialog()" :disabled="loading" aria-label="Close">
+          <button type="button" class="border-0 close" @click="closeDialog()" :disabled="isLoading" aria-label="Close">
             <i class="bi bi-x-circle-fill icon-lg"></i>
           </button>
         </div>
