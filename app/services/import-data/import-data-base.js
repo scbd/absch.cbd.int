@@ -227,7 +227,7 @@ export class ImportDataBase {
       }
     };
 
-    async validateAndCreateNationalRecord(contacts, documents, progressTracking, errorCreateRecords,completedRecords){
+    async validateAndCreateNationalRecord(contacts, documents, progressTracking){
       let errorCount = 0;
       for (let index = 0; index < contacts.length; index++) {
         const contact = contacts[index];
