@@ -1,0 +1,23 @@
+{
+  "generalInfo": "Общая информация",
+  "country": "Страна",
+  "timePeriod": "Период времени, охваченный настоящим докладом",
+  "from": "С",
+  "to": "По",
+  "seconds": "секунд.",
+  "redirectNow": "Перенаправить сейчас",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.615Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "timePeriod": "1b19bf0afa2ff17ece7cd92f3303e0e1",
+      "from": "5da618e8e4b89c66fe86e32cdafde142",
+      "to": "e12167aa0a7698e6ebc92b4ce3909b53",
+      "seconds": "d90d8347e139d0cfc3fad11757b651ff",
+      "redirectNow": "036dce881e1aac61d65dfd345fa4cd79"
+    }
+  }
+}
