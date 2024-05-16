@@ -10,5 +10,24 @@
   "partyStatusReport": "* Статус Стороны по состоянию на дату крайнего срока представления доклада",
   "nationalReportAnalyzer": "Анализатор национальных докладов",
   "nationalReportAnalyzerInfo": "Данный инструмент позволяет выбрать конкретные разделы доклада или рассматриваемые в нем вопросы и отобразить результаты в разбивке по странам/регионам.",
-  "analyze": "Анализировать"
+  "analyze": "Анализировать",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.68Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "overview": "3b878279a04dc47d60932cb294d96259",
+      "report": "4b1b4dc8cf38b3c64b1d657da8f5ac8c",
+      "deadline": "159f7d51b9a4ff702c9b5543b8f7980f",
+      "numberOfParties": "61f2e55226e1eb05a9267ed3d17a6273",
+      "atTheDeadline": "ca8d650e9e0834236e0b801a7d24ad79",
+      "byParties": "18e53cc36eab2addc377f9bb43c9db28",
+      "byNonParties": "ecf405d458112ce8feb3e9cf6f23a4d6",
+      "total": "96b0141273eabab320119c467cdcaf17",
+      "partyStatusReport": "801be4bf1f71ca24d6f4e86556540512",
+      "nationalReportAnalyzer": "87bc5be251f4aa15d3216bfca8d2dbc9",
+      "nationalReportAnalyzerInfo": "982ac1f3a7e3508ae5208252cf8b6aca",
+      "analyze": "2252e15a30dd1a78e0a44ba8e49cd381"
+    }
+  }
 }

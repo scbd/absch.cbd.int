@@ -2,11 +2,32 @@
   "generalInfo": "Общая информация",
   "contactPerson": "Контактное лицо, представляющее доклад",
   "country": "Страна",
-  "organizationsStakeholders": "Организации/субъекты деятельности, с которыми проводились консультации или которые участвовали в подготовке настоящего доклада",
-  "timePeriod": "",
+  "organizationsStakeholders": "Организации/субъекты деятельности, принимавшие участие в консультациях или подготовке настоящего доклада",
+  "timePeriod": "Период времени, охваченный настоящим докладом",
+  "submissionDate": "Дата представления",
   "from": "С",
   "to": "По",
-  "additionalInformation": "Дополнительная информация",
+  "q005_title": "Если ваша страна не является Стороной Картахенского протокола по биобезопасности (КПБ), существует ли какой-либо национальный процесс, ведущий к тому, чтобы она стала Стороной Протокола?",
+  "q006_title": "Здесь можно привести дополнительные сведения:",
   "seconds": "секунд.",
-  "redirectNow": "Перенаправить сейчас"
+  "redirectNow": "Перенаправить сейчас",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.636Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "contactPerson": "3971dd67c05c0133044cc07e65be6fa0",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "organizationsStakeholders": "6da0614bfa023d5c2898c0ea94929ebe",
+      "timePeriod": "1b19bf0afa2ff17ece7cd92f3303e0e1",
+      "submissionDate": "f067c6ab98b204e2e48836e7082d03b7",
+      "from": "5da618e8e4b89c66fe86e32cdafde142",
+      "to": "e12167aa0a7698e6ebc92b4ce3909b53",
+      "q005_title": "d2267888484f409c9bebce3ffc862bdd",
+      "q006_title": "2ff0ec0ff0689284e6473f92366d474c",
+      "seconds": "d90d8347e139d0cfc3fad11757b651ff",
+      "redirectNow": "036dce881e1aac61d65dfd345fa4cd79"
+    }
+  }
 }

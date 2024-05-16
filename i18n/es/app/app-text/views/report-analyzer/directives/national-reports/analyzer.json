@@ -18,5 +18,32 @@
   "subSection": "Subsección",
   "country": "País",
   "export": "exportar",
-  "print": "Imprimir"
+  "print": "Imprimir",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.678Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "countResponses": "27cdb1728361700e32c7dc44cf13e1ba",
+      "percentageRow": "4b87d6f3cbff56c4deb77261895bd134",
+      "percentageColumn": "4f2865dcccbbbb20dca9e76379e963af",
+      "percentageOverall": "82d5d795e3707f6073ac4b6a43048211",
+      "toggleDropdown": "90406afefae30826692e7f7480f7467c",
+      "backToSettings": "816522bd62975efe484ff1e5d800a530",
+      "currentAnalysis": "907f3cfef4a102b80486e4f76e984628",
+      "removeFilter": "5e56e943f895de593f00cbad9172c252",
+      "question": "a97ea56b0e00b2379736ae60869ff66a",
+      "follows": "e017edb2ab86685f18b054a61fc8851d",
+      "changeNumber": "c2fe35499598077a59261750b30fa962",
+      "sum": "64c2d0e35153eae3ab54172b1b70f9ca",
+      "percentRow": "29c5099e6bb39df9eaa8735b6095de67",
+      "percentColumn": "e465f08d52d6a5c82ff22e950c41a837",
+      "percentGlobal": "fc0b04b218e7ebb04b431cb441f13462",
+      "close": "d3d2e617335f08df83599665eef8a418",
+      "subSection": "656c5d1a16acfc0501a64426eac92ea7",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "print": "13dba24862cf9128167a59100e154c8d"
+    }
+  }
 }
