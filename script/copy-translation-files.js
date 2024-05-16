@@ -82,7 +82,7 @@ async function copyFolderFiles(sourceRootPath, source, lang, destination){
             }
 
             if(path.extname(filepath) == '.json'){
-                let jsonFileKeys = (await import(filepath, { assert: { type: 'json' }})).default;
+                let jsonFileKeys = (await import(filepath, { with: { type: 'json' }})).default;
                 jsonFileKeys = removeEmpty(jsonFileKeys);
 
                 await fs.writeFile(`${destinationFileName}`, JSON.stringify({...jsonFileKeys}, undefined, 2));
