@@ -8,6 +8,7 @@
 
         <div v-if="props.information">
             <slot name="information">
+                <label>{{ t("additionalInformation") }}</label>
             </slot>                        
             <ng v-vue-ng:km-value-ml  :value="information" :locales="locale" html></ng>              
         </div>  
