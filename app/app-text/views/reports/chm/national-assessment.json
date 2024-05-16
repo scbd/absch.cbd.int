@@ -15,7 +15,11 @@
     "monitoringSystem":"Monitoring system for the target",
     "noIndicators":"The country has not used indicators to assess progress towards this national target.",
     "linkToIndicator":"Link to Indicator(s) used in this assessment",
-    "linkToActivity":"Link to National Activity(ies) related to this assessment"
+    "linkToActivity":"Link to National Activity(ies) related to this assessment",
+    "relevantDocumentAndInformation":"Relevant documents and information",
+    "relevantInfo": "Relevant information", 
+    "relevantWebsites":"Relevant websites, links, and files",
+    "additionalInformation": "Additional information"
 }
 
 
