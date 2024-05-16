@@ -1,6 +1,11 @@
 <template>
     <div id="Record" class="record">
-        <div class="record-body  bg-white" v-if="document">                
+        <div class="record-body  bg-white" v-if="document">  
+            <!--TODO: add compare-val for fields  -->
+
+            <!-- TODO: add publish date -->            
+            <!-- <ng v-vue-ng:document-date></ng> -->
+
             <div v-if="document.government">
                 <legend >{{ t("party") }} </legend>               
                 <div class="km-value">             
@@ -47,7 +52,15 @@
                     <ng v-vue-ng:km-link-list v-model:ng-model="document.videos" ></ng>                   
                 </div>                
             </div>  
-        </div> 
+
+            <div> 
+                <!-- TODO: test -->
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+            </div>         
+        </div>  
+        
+        <!-- TODO: add footer  -->
+        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
     </div>
 </template>
 
@@ -62,8 +75,8 @@
     const { t } = useI18n({ messages });
 
     const props = defineProps({
-        documentInfo: { type: Object, required: true },
-        locale      : { type:String}
+        documentInfo: { type:Object, required:true },
+        locale      : { type:String, required:true }
     })
     
     const document = computed(()=>props.documentInfo?.body);
