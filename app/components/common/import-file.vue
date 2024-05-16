@@ -284,6 +284,11 @@
             <div class="progress-bar" role="progressbar" 
             :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{Math.round(progressPercentage)}}%</div>
         </div>
+        
+        <div class="progress row" v-if="progressTracking > 0">
+            <div class="progress-bar" role="progressbar" 
+            :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{progressPercentage}}%</div>
+        </div>
     </ImportModal>
 </template>
 
@@ -318,7 +323,6 @@ const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
 const progressTracking = ref(null);
-const completedRecords = ref([]);
 
 <<<<<<< HEAD
 Object.assign(messages[locale.value], messagesIrcc[locale.value]);
@@ -352,31 +356,10 @@ function toggleModal() {
     }
 }
 
-watch(errorCreateRecords, (newError, oldError) => {
-    console.log("WORKING")
-})
-
 const progressPercentage = computed(() => {
   const total = parsedFile.value?.length + importDataIRCC?.contacts?.length;
   return total > 0 ? (progressTracking.value / total) * 100 : 0;
 });
-
-const toggleModal = () => {
-  parsedFile.value = [];
-  error.value = null;
-  errorCreateRecords.value = [];
-  successMessage.value = null;
-  multipleImportSheets.value = [];
-  selectedSheetIndex.value = null;
-  progressTracking.value = null;
-  resetFileErrorInParsedFile();
-  showModal.value = !showModal.value;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  modal.show('static');
-  if (!showModal.value) {
-    emit("refreshRecord");
-  }
-}
 
 const handleFileChange = async (event) => {
     isLoading.value = true;
@@ -384,6 +367,8 @@ const handleFileChange = async (event) => {
     error.value = null;
     errorCreateRecords.value = [];
     successMessage.value = null;
+    selectedSheetIndex.value = 0;
+    multipleImportSheets.value = [];
     progressTracking.value = null;
     resetFileErrorInParsedFile();
     const result = await importDataIRCC.fileParser(
@@ -465,8 +450,6 @@ const handleConfirm = async () => {
                 identifier: result[index].header.identifier
             }
         })
-        console.log("parsedFile WORKING", parsedFile.value);
-        console.log("contacts WORKING",importDataIRCC.contacts);
         const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result, progressTracking);
         console.log("ERROR RESPONSE", errorResponse);
         updateParsedFileWithError(errorResponse);
@@ -511,17 +494,7 @@ const updateParsedFileWithError = (errorCreateRecords) => {
             }
         })
         }
-    })
-    
-    parsedFile.value.sort((a, b) => {
-        if (a.fileError && !b.fileError) {
-            return -1;
-        }
-        if (!a.fileError && b.fileError) {
-            return 1;
-        }
-        return 0;
-    });; 
+    }); 
 }
 
 const getRowsFromParsedFile = (error) => {   
@@ -545,15 +518,15 @@ const onFileInputClick = (event) => {
 };
 
 const handleClearClick = () => {
-  parsedFile.value = [];
-  error.value = null;
-  successMessage.value = null;
-  multipleImportSheets.value = [];
-  selectedSheetIndex.value = null;
-  errorCreateRecords.value = [];
-  progressTracking.value = null;
-  resetFileErrorInParsedFile();
-};
+    parsedFile.value = [];
+    error.value = null;
+    successMessage.value = null;
+    multipleImportSheets.value = [];
+    selectedSheetIndex.value = null;
+    errorCreateRecords.value = [];
+    progressTracking.value = null;
+    resetFileErrorInParsedFile();
+}
 
 const onRetryClick = async () => {
     error.value = null;
