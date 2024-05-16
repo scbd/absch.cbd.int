@@ -1,6 +1,11 @@
 <template> 
     <div id="Record" class="record ">
        <div class="record-body  bg-white" v-if="document">  
+            <!--TODO: add compare-val for fields  -->
+
+            <!-- TODO: add publish date -->            
+            <!-- <ng v-vue-ng:document-date></ng> -->
+
             <div v-if="document.title">
                 <label>{{ t("title") }} </label> 
                 <ng  v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html></ng>   
@@ -45,9 +50,17 @@
                 <div class="km-value"> 
                     <ng v-vue-ng:km-link-list v-model:ng-model="document.source" ></ng> 
                 </div>
-            </div>             
-       </div>  
-   </div>
+            </div>     
+
+            <div> 
+                <!-- TODO: test -->
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+            </div>         
+        </div>  
+
+        <!-- TODO: add footer  -->
+        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+    </div> 
 </template>
 
 <script setup>
@@ -57,15 +70,14 @@
    import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'   
    import kmTerm from '~/components/km/KmTerm.vue';
    import messages from '~/app-text/views/reports/chm/strategic-plan-indicator.json';
-   import { useI18n } from 'vue-i18n';
- 
+   import { useI18n } from 'vue-i18n'; 
 
    const { t } = useI18n({ messages });
+
    const props = defineProps({
        documentInfo: { type: Object, required: true },
        locale      : { type:String}
    })
     const document = computed(()=>props.documentInfo?.body);
-
  </script>
 
