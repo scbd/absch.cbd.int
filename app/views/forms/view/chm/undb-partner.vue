@@ -1,6 +1,11 @@
 <template>     
     <div id="Record" class="record">
-        <div class="record-body bg-white" v-if="document">            
+        <div class="record-body bg-white" v-if="document">     
+            <!--TODO: add compare-val for fields  -->
+
+            <!-- TODO: add publish date -->            
+            <!-- <ng v-vue-ng:document-date></ng> -->
+
             <section>
                 <div v-if="document.name">   
                     <label>{{ t("name") }} </label>             
@@ -34,7 +39,7 @@
                 </div>
             </section>
 
-            <section>
+            <section v-if="document.email || document.phone || document.facebook || document.twitter || document.youtube ">
                 <div v-if="document.email">
                     <label>{{ t("email") }}</label>    
                     <div class="km-value">	
@@ -69,7 +74,7 @@
                 </div>
             </section> 
 
-            <section>
+            <section v-if="document.description || document.descriptionNative || document.notes || document.logo">
                 <div v-if="document.description">
                     <label>{{ t("shortDescription") }}</label>
                     <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>  
@@ -94,9 +99,15 @@
                     </div>
                 </div>
             </section>
-        </div>
-    </div>
 
+            <div> 
+                <!-- TODO: test -->
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+            </div>         
+        </div>  
+        <!-- TODO: add footer  -->
+        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+    </div>
 </template>
 
 <script setup>
@@ -108,8 +119,8 @@
   
 
     const props = defineProps({
-        documentInfo: { type: Object, required: true },
-        locale      : { type:String}
+        documentInfo: { type:Object, required:true },
+        locale      : { type:String, required:true }
     })
 
     const { t } = useI18n({ messages });    
@@ -120,11 +131,17 @@
     
     const document = computed(()=>props.documentInfo?.body);
 
-    const thumbnailLogoUrl = computed(()=>{
-        if (!document.value.logo) return undefined;       
-        const index = document.value.logo.lastIndexOf("/");
-        return  document.value.logo.substring(0, index) +"/thumbnail/"+ document.value.logo.substring(index+1);       
-    }); 
+    const thumbnailLogoUrl = computed(() => {
+        if (!document.value.logo) return undefined;
 
+        const pattern = /^(https:\/\/[^.]+\.cbd\.int\/|api\/v20)/; // Define the regex
+        if (pattern.test(document.value.logo)) {
+            const index = document.value.logo.lastIndexOf("/");
+            return document.value.logo.substring(0, index) + "/thumbnail/" + document.value.logo.substring(index + 1);
+        }
+        else{
+            return document.value.logo ;
+        }
+});
    
 </script>
