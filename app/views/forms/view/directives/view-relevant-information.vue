@@ -1,29 +1,23 @@
 <template>
-    <section v-if="props.information|| props.documents">  
+    <div v-if="props.relevantInformation|| props.relevantDocuments">  
         <!-- TODO: add compare-val  -->
-       
-        <slot name="legend">
-            <legend>{{ t("additionalInformation") }}</legend>
-        </slot>    
-
-        <div v-if="props.information">
+        <div v-if="props.relevantInformation">
             <slot name="information">
                 <label>{{ t("additionalInformation") }}</label>
             </slot>                        
-            <ng v-vue-ng:km-value-ml  :value="information" :locales="locale" html></ng>              
+            <ng v-vue-ng:km-value-ml  :value="relevantInformation" :locales="locale" html></ng>              
         </div>  
 
-        <div v-if="props.documents">                
+        <div v-if="props.relevantDocuments">                
             <slot name="document">
                 <label>{{ t("otherWebsiteOrDocument") }} </label> 
             </slot>
             
             <div class="km-value" >                   
-                <ng v-vue-ng:km-link-list v-model:ng-model="docs" ></ng>    
+                <ng v-vue-ng:km-link-list v-model:ng-model="documents" ></ng>    
             </div>
-        </div>
-      
-    </section>
+        </div>      
+    </div>
 </template>
 <script setup>
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
@@ -34,12 +28,12 @@
     const { t } = useI18n({ messages });
 
     const props = defineProps({     
-        locale         : {type:String},
-        information    : {type:Object},
-        documents      : {type:Array}
+        locale                 : {type:String},
+        relevantInformation    : {type:Object},
+        relevantDocuments      : {type:Array}
     })
 
     //props cannot used on v-model，so define another variable for km-link-list
-    const docs = props.documents;
+    const documents = props.relevantDocuments;
    
 </script>

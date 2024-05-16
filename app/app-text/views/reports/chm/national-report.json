@@ -15,5 +15,6 @@
     "to": "To", 
     "relevantDocumentAndInformation":"Relevant documents and information",
     "relevantInfo": "Relevant information", 
-    "relevantWebsites":"Relevant websites, links, and files"
+    "relevantWebsites":"Relevant websites, links, and files",
+    "additionalInformation": "Additional information"
 }
