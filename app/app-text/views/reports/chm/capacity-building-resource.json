@@ -25,7 +25,8 @@
     "thematicAreass":"Thematic areas(s)",
     "subjectAreas":"Subject areas and the Biodiversity Targets covered by the resource",
     "information":"Information on the content of resource",
-    "access":"Access to the resource"
+    "access":"Access to the resource",
+    "additionalInformation": "Additional information"
 }
 
 
