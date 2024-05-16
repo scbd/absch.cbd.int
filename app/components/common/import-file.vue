@@ -79,20 +79,17 @@
                 </span>
               </div>
             </div>
-             <div class="col-md-4 d-flex align-items-center justify-content-center fw-bold">
-                <span v-if="parsedFile.length > 0">{{t('totalRecords')}} {{parsedFile.length}}</span>
+            
+            <div class="col-md-6 text-center d-flex align-items-center" v-if="multipleImportSheets.length">
+                <span class="text-danger me-2" data-toggle="tooltip" data-placement="top" :title="t('multipleSheetAlert')"><i class="bi bi-info-circle"></i></span>
+                <select class="form-select" :disabled="isLoading"
+                v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
+                    <option v-for="(sheet, index) in multipleImportSheets" :key="index" :value="index">{{sheet}}</option>
+                </select>
             </div>
-            <div class="col-md-4 d-flex justify-content-end" v-if="multipleImportSheets.length">
-                <span class="min-w-50">
-                    <select class="form-select" :disabled="isLoading"
-                        v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
-                        <option v-for="(sheet, index) in multipleImportSheets" :key="index" :value="index">{{sheet}}</option>
-                    </select>
-                </span>
-                <span href="#" class="mt-2 ms-2 fa-lg fa fa-info-circle color-litegrey"
-                    data-bs-toggle="tooltip" data-html="true" data-container="body" data-placement="top"
-                    :title="t('multipleSheetAlert')">
-                </span>
+
+            <div class="col-md-3 d-flex align-items-center justify-content-end fw-bold">
+                <span v-if="parsedFile.length > 0">{{t('totalRecords')}} {{parsedFile.length}}</span>
             </div>
         </div>
         <div class="row table-container table-responsive" v-if="parsedFile.length">
@@ -148,7 +145,7 @@
                                 'bg-lightgreen': data.fileError === false
                             }"
                         >
-                            <th scope="row">{{data.rowId}}</th>
+                            <th scope="row">{{index + 1}}</th>
                             <td class="p-2">{{data.language}}</td>
                             <td class="p-2">{{data.country}}</td>
                             <td class="p-2">{{data.cna}}</td>
@@ -225,15 +222,15 @@
                 </button>
               </div>
             </div>
-            <div class="row mt-4" v-else-if="error && !isLoading">
-              <div class="col-12 text-center">
-                <span class="alert alert-danger">{{ error }}</span>
-              </div>
+        </div>
+        <div class="row mt-4" v-else-if="error && !isLoading">
+            <div class="col-12 text-center">
+                <span class="alert alert-danger" >{{error}}</span>
             </div>
-            <div class="row mt-4" v-if="successMessage && !isLoading">
-              <div class="col-12 text-center">
-                <div class="alert alert-success">{{ successMessage }}</div>
-              </div>
+        </div>
+        <div class="row mt-4"  v-if="successMessage && !isLoading">
+            <div class="col-12 text-center">
+                <div class="alert alert-success">{{successMessage}}</div>
             </div>
         </div>
         <div class="row mt-3" v-show="isLoading">
@@ -323,7 +320,6 @@ const multipleImportSheets = ref([]);
 const selectedSheetIndex = ref(0);
 let file = ref(null);
 const xlsxWorkbook = ref(null);
-const progressTracking = ref(null);
 
 <<<<<<< HEAD
 Object.assign(messages[locale.value], messagesIrcc[locale.value]);
@@ -340,7 +336,6 @@ const userGovernment = computed(()=>{
 
 let importDataIRCC;
 const importModal = ref(null);
-
 function toggleModal() {
     parsedFile.value = [];
     error.value = null;
@@ -348,7 +343,6 @@ function toggleModal() {
     successMessage.value = null;
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
-    progressTracking.value = null;
     resetFileErrorInParsedFile();
     showModal.value = !showModal.value;
     importModal.value.showDialog();
@@ -370,14 +364,20 @@ const handleFileChange = async (event) => {
     successMessage.value = null;
     selectedSheetIndex.value = 0;
     multipleImportSheets.value = [];
-    progressTracking.value = null;
     resetFileErrorInParsedFile();
-    const result = await importDataIRCC.fileParser(
-      multipleImportSheets.value,
-      selectedSheetIndex.value
-    );
-    if (result?.duplicate) {
-      throw new Error("Record already exists");
+    try{
+        const {sheetNames, workbook} = await importDataBase.readSheet(file.value);
+        xlsxWorkbook.value = workbook;
+        importDataIRCC = new ImportDataIRCC(realm.value, locale.value, user.value.government, workbook, auth);
+        if(sheetNames.length > 1){
+            multipleImportSheets.value = sheetNames;
+            handleSelectedSheetChange();
+        }else{
+            parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
+        }
+    }catch(err){
+        parsedFile.value = [];
+        error.value = "ERROR: An error occurred while reading the file."
     }
 
 <<<<<<< HEAD
@@ -415,7 +415,6 @@ const handleSelectedSheetChange = async () => {
             error.value = null;
             errorCreateRecords.value = [];
             successMessage.value = null;
-            progressTracking.value = null;
             resetFileErrorInParsedFile();
             parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
             console.log("parsedFile", parsedFile.value, parsedFile.value.length)
@@ -437,21 +436,18 @@ const handleConfirm = async () => {
         error.value = null;
         errorCreateRecords.value = [];
         successMessage.value = null;
-        progressTracking.value = null;
         resetFileErrorInParsedFile();
         const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
-        console.log("result", result);
-        if(result?.duplicate){
-            throw new Error("Record already exists");
-        }
-        
         parsedFile.value = parsedFile.value.map((file,index)=>{
             return {
                 ...file,
                 identifier: result[index].header.identifier
             }
         })
-        const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result, progressTracking);
+        console.log("PARSEDFILE", parsedFile.value);
+        console.log("RESULT", result);
+        console.log("CONTACT", importDataIRCC.contacts);
+        const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result);
         console.log("ERROR RESPONSE", errorResponse);
         updateParsedFileWithError(errorResponse);
         if(errorResponse === undefined || errorResponse.length === 0){
@@ -474,8 +470,8 @@ const handleConfirm = async () => {
     progressTracking.value = null;
 }
 
-const updateParsedFileWithError = (errorCreateRecords) => {
-    errorCreateRecords.value.forEach(error => {
+const updateParsedFileWithError = (errorResponse) => {
+    errorResponse.forEach(error => {
     const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
         if (matchingContact) {
             error.emails = matchingContact.emails;
@@ -483,19 +479,24 @@ const updateParsedFileWithError = (errorCreateRecords) => {
     });
     parsedFile.value.forEach(item => {
         item.fileError = false;
-        const matchingError = errorCreateRecords.value.find(error => error.identifier === item.identifier);
+        const matchingError = errorResponse.find(error => error.identifier === item.identifier);
         if(matchingError){
             item.fileError = true;
         }else{
-            errorCreateRecords.value.forEach((error) => {
+            errorResponse.forEach((error) => {
             if(error.contact){
                 if(item.pic.email === error.emails[0] || item.provider.email === error.emails[0]){
                     item.fileError = true;
                 }
             }
         })
-        }
-    }); 
+    }
+}); 
+    console.log("Updated PARSEDFILE", parsedFile.value);
+}
+
+const onFileInputClick = (event) => {
+    event.target.value = "";
 }
 
 const getRowsFromParsedFile = (error) => {   
@@ -525,7 +526,6 @@ const handleClearClick = () => {
     multipleImportSheets.value = [];
     selectedSheetIndex.value = null;
     errorCreateRecords.value = [];
-    progressTracking.value = null;
     resetFileErrorInParsedFile();
 }
 
@@ -553,9 +553,8 @@ const onRetryClick = async () => {
             successMessage.value = "Successfully created national record.";
             errorCreateRecords.value = [];
         }else{
-            errorCreateRecords.value = errorResponse;            
+            errorCreateRecords.value = errorResponse;
         }
-        updateParsedFileWithError(errorResponse);
         isLoading.value = false;
     } catch (error) {
         error.value = "Error: An error occurred while creating national record."
@@ -564,8 +563,8 @@ const onRetryClick = async () => {
 }
 
 const resetFileErrorInParsedFile = () => {
-  parsedFile.value.forEach((file) => (file.fileError = null));
-};
+    parsedFile.value.forEach((file) => file.fileError = null)
+}
 
 const closeDialog = () => {
   modal.hide();

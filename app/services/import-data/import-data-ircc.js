@@ -455,19 +455,15 @@ export class ImportDataIRCC extends ImportDataBase {
   readSheetToDisplayOnUI(sheetNames, selectedSheetIndex){
     let sheet =  this.workbook.Sheets[sheetNames[selectedSheetIndex]];
     // let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
-    const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
+          const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
     const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
+    console.log('Total rows with data:', rowCount);
     const data = []
-    const skip = 3; // skip headers
-    let limit = 10; // number of rows to load
-    // if rowCount is less tha
-    const TotalCount = rowCount > limit ? limit + 2 : rowCount + 2;
-    console.log('TotalCount to load:',TotalCount);
-    for(let i=3;i<=TotalCount;i++){
+    for(let i=4;i<=rowCount;i++){
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
-          rowId: i - 3,
+          rowId: i,
           language: super.columnVal(sheet, this.fields.language + i),
           country: super.columnVal(sheet, this.fields.country + i),
           cna: super.columnVal(sheet, this.fields.cna + i),
@@ -566,19 +562,17 @@ export class ImportDataIRCC extends ImportDataBase {
       const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });// ToDo: use the  this.workbook.Sheets
       const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
+      console.log('Total rows with data:', rowCount);
       let irccs = [];
     //   let contacts = [];
       console.log("SHEET", sheet,excelData);
-      let limit = 10; // number of rows to load
-      const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
-      // TODO: revert back to TotalCount
-      for(let i=4; i<=TotalCount; i++){
+      // CACHE values
+      for(let i=4; i<=rowCount; i++){
         this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
       } 
       await this.cacheApiCalls();
 
-      // TODO: revert back to TotalCount
-      for(let i=4;i<=TotalCount;i++){
+      for (let i = 4; i <= rowCount; i++) {
         if (!super.columnVal(sheet, this.fields.language + i)) {
           console.log(
             `Language is missing for record on row ${i}, skipping record.`

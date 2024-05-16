@@ -15,5 +15,14 @@
     "city":"City",
     "email":"Email",
     "consent":"Consent",
-    "loadingMessage": "Please wait, this importing process may take some time."
+    "cnaHeader":"Competent national authority (CNA)",
+    "linkIrcc":"Links to other IRCC",
+    "dateOfIssuanceHeader":"Date of issuance",
+    "dateOfExpiryHeader":"Date of expiry",
+    "matEstablishedHeader":"MAT established",
+    "additionalInformationOnUsage":"Additional information on usage",
+    "subjectGenericKeywords":"Subject matter/generic resource keywords",
+    "indicateCommercialUse":"Usage",
+    "copyOfPermit":"Copy of the permit",
+    "totalRecords":"Total records:"
 }
