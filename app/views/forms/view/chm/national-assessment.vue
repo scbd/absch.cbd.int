@@ -131,7 +131,7 @@
 
             <section v-if="document.documentText || document.documentLinks">
                 <legend>{{ t("relevantDocumentAndInformation") }}</legend>
-                <view-relevant-information :relevantInformation="document.documentText" :relevantDocuments="document.documentLinks" :locale="locale">                 
+                <view-relevant-information :relevant-information="document.documentText" :relevant-documents="document.documentLinks" :locale="locale">                 
                     <template v-slot:information>
                         <label>{{ t("relevantInfo") }} </label>   
                     </template>
@@ -143,7 +143,7 @@
 
             <section v-if="document.relevantInformation || document.relevantDocuments">
                 <legend>{{ t("additionalInformation") }}</legend>
-                <view-relevant-information :relevantInformation="document.relevantInformation" :relevantDocuments="document.relevantDocuments" :locale="locale"> 
+                <view-relevant-information :relevant-information="document.relevantInformation" :relevant-documents="document.relevantDocuments" :locale="locale"> 
                 </view-relevant-information> 
             </section>           
 
@@ -172,8 +172,8 @@
     const { t } = useI18n({ messages });
 
     const props = defineProps({
-        documentInfo: { type: Object, required: true },
-        locale      : { type:String}
+        documentInfo: { type:Object, required:true },
+        locale      : { type:String, required:true}
     })
     const document = computed(()=>props.documentInfo?.body);  
     
