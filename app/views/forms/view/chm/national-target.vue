@@ -88,7 +88,13 @@
             </view-relevant-information> 
 
             <view-relevant-information :information="document.relevantInformation" :documents="document.relevantDocuments":locale="locale"> 
-           </view-relevant-information>            
+                <template v-slot:legend>
+                    <legend>{{ t("relevantDocumentAndInformation") }}</legend>
+                </template>  
+                <template v-slot:information>
+                    <label>{{ t("relevantInfo") }} </label>   
+                </template>
+            </view-relevant-information>            
 
             <div> 
                 <!-- TODO: test -->
@@ -97,7 +103,7 @@
         </div>  
         <!-- TODO: add footer  -->
         <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->   
-           
+
     </div>
 </template>
 
