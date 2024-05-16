@@ -73,28 +73,25 @@
                     <label>{{ t("explanation") }} </label>    
                     <ng v-vue-ng:km-value-ml  :value="document.noOtherAichiTargetsDescription" :locales="locale" html></ng>  
                 </div>            
-            </section>               
-            
-            <view-relevant-information :information="document.documentText" :documents="document.documentLinks":locale="locale">
-                <template v-slot:legend>
-                    <legend>{{ t("relevantDocumentAndInformation") }}</legend>
-                </template>  
-                <template v-slot:information>
-                    <label>{{ t("relevantInfo") }} </label>   
-                </template>
-                <template v-slot:document>
-                    <label>{{ t("relevantWebsites") }} </label> 
-                </template>
-            </view-relevant-information> 
+            </section> 
 
-            <view-relevant-information :information="document.relevantInformation" :documents="document.relevantDocuments":locale="locale"> 
-                <template v-slot:legend>
-                    <legend>{{ t("relevantDocumentAndInformation") }}</legend>
-                </template>  
-                <template v-slot:information>
-                    <label>{{ t("relevantInfo") }} </label>   
-                </template>
-            </view-relevant-information>            
+            <section v-if="document.documentText || document.documentLinks">
+                <legend>{{ t("relevantDocumentAndInformation") }}</legend>
+                <view-relevant-information :relevantInformation="document.documentText" :relevantDocuments="document.documentLinks" :locale="locale">                 
+                    <template v-slot:information>
+                        <label>{{ t("relevantInfo") }} </label>   
+                    </template>
+                    <template v-slot:document>
+                        <label>{{ t("relevantWebsites") }} </label> 
+                    </template>
+                </view-relevant-information> 
+            </section>
+            
+            <section v-if="document.relevantInformation || document.relevantDocuments">
+                <legend>{{ t("additionalInformation") }}</legend>
+                <view-relevant-information :relevantInformation="document.relevantInformation" :relevantDocuments="document.relevantDocuments" :locale="locale">          
+                </view-relevant-information> 
+            </section> 
 
             <div> 
                 <!-- TODO: test -->
