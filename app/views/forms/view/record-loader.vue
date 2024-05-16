@@ -7,8 +7,11 @@
                     :document-info="documentInfo" :locale="locale"></national-assessment>        
             <national-report v-if="documentInfo?.type == 'nationalReport'"  
                     :document-info="documentInfo" :locale="locale"></national-report>
+            <national-target v-if="documentInfo?.type == 'nationalTarget'"  
+                    :document-info="documentInfo" :locale="locale"></national-target>
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
+
                 Loading...
             </template> -->
         <!-- </Suspense> -->
@@ -22,6 +25,7 @@
     import aichiTarget from '~/views/forms/view/chm/aichi-target.vue'
     import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue'
     import nationalReport from '~/views/forms/view/chm/national-report.vue'
+    import nationalTarget from '~/views/forms/view/chm/national-target.vue'  
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
