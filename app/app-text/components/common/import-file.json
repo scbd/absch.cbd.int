@@ -24,6 +24,6 @@
     "subjectGenericKeywords":"Subject matter/generic resource keywords",
     "indicateCommercialUse":"Usage",
     "copyOfPermit":"Copy of the permit",
-    "totalRecords":"Total records:"
+    "totalRecords":"Total records:",
     "loadingMessage": "Please wait, this importing process may take some time."
 }
