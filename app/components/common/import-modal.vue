@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" ref="importModal" data-backdrop="static" tabindex="-1" aria-hidden="true" id="import-modal">
+  <div class="modal fade mt-1" ref="importModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true" id="import-modal">
     <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width: 80vw;" role="document">
       <div class="modal-content">
         <div class="modal-header color-black">
@@ -56,6 +56,7 @@ const closeDialog = () => {
 };
 
 const showDialog = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   modal.show('static');
 };
 
