@@ -48,5 +48,6 @@
     "ongoingOfficialProcess":"Ongoing official national process (within national jurisdiction only)",
     "preparedByCbd":"Prepared by CBD regional workshops",
     "preparedByCompetent":"Prepared by Competent Organizations through regional processes",
-    "recommendedBy":"Recommended by"
+    "recommendedBy":"Recommended by",
+    "additionalInformation": "Additional information"
 }
