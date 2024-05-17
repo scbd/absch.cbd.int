@@ -274,17 +274,17 @@
 </template>
 
 <script setup>
-import { ref, shallowRef, computed, defineEmits, reactive, watch, onMounted } from "vue";
-import { useRealm } from "../../services/composables/realm.js";
-import { Modal } from "bootstrap";
-import { useUser, useAuth } from "@scbd/angular-vue/src/index.js";
-import { ImportDataBase } from "../../services/import-data/import-data-base";
-import { ImportDataIRCC } from "../../services/import-data/import-data-ircc";
-import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js";
-import messages from "../../app-text/components/common/import-file.json";
-import messagesIrcc from "../../app-text/components/common/import-file-ircc.json";
-import kmTerm from "~/components/km/KmTerm.vue";
-import { useI18n } from "vue-i18n";
+import { ref, shallowRef, computed, defineEmits, reactive, watch } from 'vue';
+import ImportModal from "./import-modal.vue"
+import { useRealm } from '../../services/composables/realm.js';
+import { useUser, useAuth } from '@scbd/angular-vue/src/index.js';
+import { ImportDataBase } from "../../services/import-data/import-data-base"
+import { ImportDataIRCC } from "../../services/import-data/import-data-ircc"
+import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
+import messages from "../../app-text/views/forms/edit/abs/edit-absPermit.json"
+import messages2 from "../../app-text/components/common/import-file.json";
+import kmTerm from '~/components/km/KmTerm.vue';
+import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
 const { t } = useI18n({ messages });
@@ -338,98 +338,9 @@ function toggleModal() {
     }
 }
 
-watch(progressTracking, (newValue) => {
-    if(newValue < 100){
-        updatedParsedFileWithSuccess();
-    }
+watch(errorCreateRecords, (newError, oldError) => {
+    console.log("WORKING")
 })
-
-const mainHeaders = computed(() => {
-    const flattenHeaders = (obj) => {
-        const headers = [];
-        for (const key in obj) {
-          if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
-            headers.push({ label: key, colspan: Object.keys(obj[key]).length });
-          } else {
-            headers.push({ label: key, rowspan: 2 });
-          }
-        }
-        return headers;
-      };
-      return flattenHeaders(importDataIRCC?.fields);
-})
-
-const subHeaders = computed(() => {
-    const flattenSubHeaders = (obj) => {
-        const headers = [];
-        for (const key in obj) {
-            if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
-                for (const subKey in obj[key]) {
-                    headers.push({ label: subKey });
-                }
-            }
-        }
-        return headers;
-    };
-    return flattenSubHeaders(importDataIRCC?.fields);
-})
-
->>>>>>> a109512bb (Coded generic table header and body)
-let importDataIRCC;
-const importDataBase = new ImportDataBase({
-  tokenReader: () => auth.token(),
-  realm: realm.value,
-});
-
-const emit = defineEmits(["refreshRecord"]);
-
-const userGovernment = computed(() => {
-  return {
-    identifier: user?.government,
-  };
-});
-
-const flattenedFields = computed(() => {
-  const flatten = (obj, path = []) =>
-    Object.entries(obj).reduce(
-      (acc, [key, value]) =>
-        typeof value === "object" && !Array.isArray(value)
-          ? [...acc, ...flatten(value, path.concat(key))]
-          : [...acc, path.concat(key).join(".")],
-      []
-    );
-  return flatten(importDataIRCC?.fields);
-});
-
-const mainHeaders = computed(() => {
-  const flattenHeaders = (obj) => {
-    const headers = [];
-    for (const key in obj) {
-      if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
-        headers.push({ label: key, colspan: Object.keys(obj[key]).length });
-      } else {
-        headers.push({ label: key, rowspan: 2 });
-      }
-    }
-    return headers;
-  };
-  return flattenHeaders(importDataIRCC?.fields);
-});
-
-const subHeaders = computed(() => {
-  const flattenSubHeaders = (obj) => {
-    const headers = [];
-    for (const key in obj) {
-      if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
-        for (const subKey in obj[key]) {
-          headers.push({ label: subKey });
-        }
-      }
-    }
-    return headers;
-  };
-  return flattenSubHeaders(importDataIRCC?.fields);
-});
 
 const progressPercentage = computed(() => {
   const total = parsedFile.value?.length + importDataIRCC?.contacts?.length;
@@ -717,27 +628,24 @@ const handleClearClick = () => {
 };
 
 const onRetryClick = async () => {
-  error.value = null;
-  isLoading.value = true;
-  const errorResponse = [];
-  resetFileErrorInParsedFile();
-  try {
-    const promises = errorCreateRecords.value.map(async (record) => {
-      const response = await importDataBase.retryCreateNationalRecord(
-        record.document,
-        record.draft
-      );
-      if (response.error) {
-        errorResponse.push({
-          identifier: document.header.identifier,
-          draft: true,
-          document,
-          contact: true,
-          error: response.error,
-        });
-      }
-    });
-    await Promise.all(promises);
+    error.value = null;
+    isLoading.value = true;
+    const errorResponse = [];
+    resetFileErrorInParsedFile();
+    try {
+        const promises = errorCreateRecords.value.map(async (record) => {
+            const response = await importDataBase.retryCreateNationalRecord(record.document, record.draft)
+            if(response.error){
+                errorResponse.push({
+                    identifier: document.header.identifier,
+                    draft: true,
+                    document,
+                    contact: true,
+                    error: response.error
+                })
+            }
+        })      
+        await Promise.all(promises);
 
         if(errorResponse.length === 0){
             successMessage.value = "Successfully created national record.";
@@ -745,7 +653,7 @@ const onRetryClick = async () => {
         }else{
             errorCreateRecords.value = errorResponse;            
         }
-        updateParsedFileWithError(errorCreateRecords);
+        updateParsedFileWithError(errorResponse);
         isLoading.value = false;
     } catch (error) {
         error.value = "Error: An error occurred while creating national record."
