@@ -456,6 +456,7 @@ export class ImportDataIRCC extends ImportDataBase {
     let sheet =  this.workbook.Sheets[sheetNames[selectedSheetIndex]];
     const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
     const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
+
     const data = []
     const skip = 3; // skip headers
     let limit = 10; // number of rows to load
@@ -465,6 +466,43 @@ export class ImportDataIRCC extends ImportDataBase {
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
           rowId: i - 3,
+          language: super.columnVal(sheet, this.fields.language + i),
+          country: super.columnVal(sheet, this.fields.country + i),
+          cna: super.columnVal(sheet, this.fields.cna + i),
+          permit_equivalent: super.columnVal(sheet, this.fields.permit_equivalent + i),
+          date_of_issuance: super.columnVal(sheet, this.fields.date_of_issuance + i, "w"),
+          dateOfExpiry: super.columnVal(sheet, this.fields.dateOfExpiry + i, "w"),
+          provider: {
+            type: super.columnVal(sheet, this.fields.provider.type + i),
+            existing: super.columnVal(sheet, this.fields.provider.existing + i),
+            orgName_firstName: super.columnVal(sheet, this.fields.provider.orgName_firstName + i),
+            acronym_lastName: super.columnVal(sheet, this.fields.provider.acronym_lastName + i),
+            address: super.columnVal(sheet, this.fields.provider.address + i),
+            city: super.columnVal(sheet, this.fields.provider.city + i),
+            country: super.columnVal(sheet, this.fields.provider.country + i),
+            email: super.columnVal(sheet, this.fields.provider.email + i)
+          },
+          pic:{
+            consent: super.columnVal(sheet, this.fields.pic.consent + i),
+            type: super.columnVal(sheet, this.fields.pic.type + i),
+            existing: super.columnVal(sheet, this.fields.pic.existing + i),
+            orgName_firstName: super.columnVal(sheet, this.fields.pic.orgName_firstName + i),
+            acronym_lastName: super.columnVal(sheet, this.fields.pic.acronym_lastName + i),
+            address: super.columnVal(sheet, this.fields.pic.address + i),
+            city: super.columnVal(sheet, this.fields.pic.city + i),
+            country: super.columnVal(sheet, this.fields.pic.country + i),
+            email: super.columnVal(sheet, this.fields.pic.email + i)
+          },
+          matConset: super.columnVal(sheet, this.fields.matConset + i),
+          subjectMatter: super.columnVal(sheet, this.fields.subject_matter + i),
+          keywords: super.columnVal(sheet, this.fields.keywords + i),
+          specimens: super.columnVal(sheet, this.fields.specimens + i),
+          taxonomies: super.columnVal(sheet, this.fields.taxonomies + i),
+          usage: super.columnVal(sheet, this.fields.usage + i),
+          usageDescription: super.columnVal(sheet, this.fields.usageDescription + i),
+          conditions_third_party_transfer: super.columnVal(sheet, this.fields.conditions_third_party_transfer + i),
+          permitFiles: super.columnVal(sheet, this.fields.permitFiles + i),
+          additional_information: super.columnVal(sheet, this.fields.additional_information + i),
           fileError: null
         }
         const processField = (field, fieldName, isNested = false, parentFieldName = null) =>{

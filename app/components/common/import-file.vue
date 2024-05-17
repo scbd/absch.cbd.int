@@ -157,43 +157,120 @@
 =======
         </div>
         <div class="row table-container table-responsive" v-if="parsedFile.length">
-            <table class="table table-striped table-bordered table-condensed">
-                <thead>
-                    <tr>
-                        <th scope="col" rowspan="2">#</th>
-                        <th v-for="header in mainHeaders" :key="header.label" :colspan="header.colspan" :rowspan="header.rowspan" class="text-center">
-                            {{ t(header.label) }}
-                        </th>
-                    </tr>
-                    <tr>
-                        <th v-for="header in subHeaders" :key="header.label">{{ t(header.label) }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(data,index) in parsedFile" :key="index"
-                    :class="{
-                            'bg-lightpink': data.fileError === true,
-                            'bg-lightgreen': data.fileError === false
-                        }"
-                    >
-                        <th scope="row">{{data.rowId}}</th>
-                        <td v-for="field in flattenedFields" :key="field" class="p-2">
-                            <div
-                                v-if="isLongText(getNestedValue(data, field))"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                :title="getNestedValue(data, field)"
-                                class="short-text"
-                            >
-                                {{ getNestedValue(data, field) }}
-                            </div>
-                            <span v-else>
-                                {{ getNestedValue(data, field) }}
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- <div class="col"> -->
+                <table class="table table-striped table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            <th scope="col" rowspan="2">#</th>
+                            <th scope="col" rowspan="2">{{t("language")}}</th>
+                            <th scope="col" rowspan="2">{{t("country")}}</th>
+                            <th scope="col" rowspan="2">{{t("cnaHeader")}}</th>
+                            <th scope="col" rowspan="2">{{t("linkIrcc")}}</th>
+                            <th scope="col" rowspan="2">{{t("dateOfIssuanceHeader")}}</th>
+                            <th scope="col" rowspan="2">{{t("dateOfExpiryHeader")}}</th>
+                            <th scope="col" colspan="8" class="text-center">{{t("provider")}}</th>
+                            <th scope="col" colspan="9" class="text-center">{{t("priorInformation")}}</th>
+                            <th scope="col" rowspan="2">{{t("matEstablishedHeader")}}</th>
+                            <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
+                            <th scope="col" rowspan="2">{{t("additionalInformationOnUsage")}}</th>
+                            <th scope="col" rowspan="2">{{t("subjectGenericKeywords")}}</th>
+                            <th scope="col" rowspan="2">{{t("specimens")}}</th>
+                            <th scope="col" rowspan="2">{{t("taxonomy")}}</th>
+                            <th scope="col" rowspan="2">{{t("indicateCommercialUse")}}</th>
+                            <th scope="col" rowspan="2">{{t("thirdPartyTransferCondition")}}</th>
+                            <th scope="col" rowspan="2">{{t("copyOfPermit")}}</th>
+                            <th scope="col" rowspan="2">{{t("additionalInformation")}}</th>
+                        </tr>
+                         <tr>
+                            <th scope="col">{{t("type")}}</th>
+                            <th scope="col">{{t("existing")}}</th>
+                            <th scope="col">{{t("orgfirstName")}}</th>
+                            <th scope="col">{{t("acronymfirstName")}}</th>
+                            <th scope="col">{{t("address")}}</th>
+                            <th scope="col">{{t("city")}}</th>
+                            <th scope="col">{{t("country")}}</th>
+                            <th scope="col">{{t("email")}}</th>
+
+                            <th scope="col">{{t("consent")}}</th>
+                            <th scope="col">{{t("type")}}</th>
+                            <th scope="col">{{t("existing")}}</th>
+                            <th scope="col">{{t("orgfirstName")}}</th>
+                            <th scope="col">{{t("acronymfirstName")}}</th>
+                            <th scope="col">{{t("address")}}</th>
+                            <th scope="col">{{t("city")}}</th>
+                            <th scope="col">{{t("country")}}</th>
+                            <th scope="col">{{t("email")}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(data,index) in parsedFile" :key="index"
+                        :class="{
+                                'bg-lightpink': data.fileError === true,
+                                'bg-lightgreen': data.fileError === false
+                            }"
+                        >
+                            <th scope="row">{{data.rowId}}</th>
+                            <td class="p-2">{{data.language}}</td>
+                            <td class="p-2">{{data.country}}</td>
+                            <td class="p-2">{{data.cna}}</td>
+                            <td class="p-2">{{data.permit_equivalent}}</td>
+                            <td class="p-2">{{data.date_of_issuance}}</td>
+                            <td class="p-2">{{data.dateOfExpiry}}</td>
+                            <td class="p-2">{{data.provider.type}}</td>
+                            <td class="p-2">{{data.provider.existing}}</td>
+                            <td class="p-2">
+                                <div data-toggle="tooltip" data-placement="top" :title="data.provider.orgName_firstName"
+                                :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }">
+                                    {{data.provider.orgName_firstName}}
+                                </div>
+                            </td>
+                            <td class="p-2">{{data.provider.acronym_lastName}}</td>
+                            <td class="p-2">{{data.provider.address}}</td>
+                            <td class="p-2">{{data.provider.city}}</td>
+                            <td class="p-2">{{data.provider.country}}</td>
+                            <td class="p-2">{{data.provider.email}}</td>
+                            <td class="p-2">{{data.pic.consent}}</td>
+                            <td class="p-2">{{data.pic.type}}</td>
+                            <td class="p-2">{{data.pic.existing}}</td>
+                            <td class="p-2">
+                                <div data-toggle="tooltip" data-placement="top" :title="data.pic.orgName_firstName"
+                                :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }">
+                                    {{data.pic.orgName_firstName}}
+                                </div>
+                            </td>
+                            <td class="p-2">{{data.pic.acronym_lastName}}</td>
+                            <td class="p-2">{{data.pic.address}}</td>
+                            <td class="p-2">{{data.pic.city}}</td>
+                            <td class="p-2">{{data.pic.country}}</td>
+                            <td class="p-2">{{data.pic.email}}</td>
+                            <td class="p-2">{{data.matEstablished}}</td>
+                            <td class="p-2">
+                                <div data-toggle="tooltip" data-placement="top" :title="data.subjectMatter"
+                                :class="{ 'short-text': data.subjectMatter.length > 45 }">
+                                    {{data.subjectMatter}}
+                                </div>
+                            </td>
+                            <td class="p-2">
+                                <div data-toggle="tooltip" data-placement="top" :title="data.usageDescription"
+                                :class="{ 'short-text': data.usageDescription.length > 45 }">
+                                    {{data.usageDescription}}
+                                </div>
+                            </td>
+                            <td class="p-2">
+                                <div data-toggle="tooltip" data-placement="top" :title="data.keywords"
+                                :class="{ 'short-text': data.keywords.length > 45 }"
+                                >{{data.keywords}}</div>
+                            </td>
+                            <td class="p-2">{{data.specimens}}</td>
+                            <td class="p-2">{{data.taxonomies}}</td>
+                            <td class="p-2">{{data.usage}}</td>
+                            <td class="p-2">{{data.conditions_third_party_transfer}}</td>
+                            <td class="p-2">{{data.permitFiles}}</td>
+                            <td class="p-2">{{data?.additional_information}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            <!-- </div> -->
         </div>
         
         <div class="row mt-5 error__container" v-if="errorCreateRecords
@@ -201,14 +278,8 @@
             <div class="col-12 alert alert-danger d-flex justify-content-between align-items-center">
 >>>>>>> a109512bb (Coded generic table header and body)
                 <ul class="flex-1">
-                  <li
-                    v-for="value in errorCreateRecords"
-                    :key="value.identifier"
-                  >
-                    Error creating <span v-if="value.draft">draft</span> record
-                    on row {{ getRowsFromParsedFile(value) }} -
-                    {{ value.error }}
-                  </li>
+                    <li v-for="(value) in errorCreateRecords" :key="value.identifier">Error creating 
+                        <span v-if="value.draft">draft</span> record on row {{getRowsFromParsedFile(value)}} - {{value.error}}</li>
                 </ul>
                 <button class="btn btn-primary" @click="onRetryClick">
                   Retry
@@ -269,8 +340,12 @@
             </button>
           </div>
         </div>
-      </div>
-    </div>
+        
+        <div class="progress row" v-if="progressTracking > 0">
+            <div class="progress-bar" role="progressbar" 
+            :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{Math.round(progressPercentage)}}%</div>
+        </div>
+    </ImportModal>
 </template>
 
 <script setup>
@@ -451,19 +526,21 @@ const handleConfirm = async () => {
                 identifier: result[index].header.identifier
             }
         })
-        await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result, progressTracking, errorCreateRecords,completedRecords);
-        console.log("ERROR RESPONSE", errorCreateRecords.value);
-        updateParsedFileWithError(errorCreateRecords);
-        if(errorCreateRecords.value === undefined || errorCreateRecords.value.length === 0){
+        console.log("parsedFile WORKING", parsedFile.value);
+        console.log("contacts WORKING",importDataIRCC.contacts);
+        const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result, progressTracking);
+        console.log("ERROR RESPONSE", errorResponse);
+        updateParsedFileWithError(errorResponse);
+        if(errorResponse === undefined || errorResponse.length === 0){
             successMessage.value = "Successfully created national record.";
         }else{
-            errorCreateRecords.value.forEach(error => {
+            errorResponse.forEach(error => {
             const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
                 if (matchingContact) {
                     error.emails = matchingContact.emails;
                 }
             });
-            // errorCreateRecords.value = errorResponse;
+            errorCreateRecords.value = errorResponse;
         }
 
     } catch (err) {
@@ -495,57 +572,8 @@ const updateParsedFileWithError = (errorCreateRecords) => {
             }
         })
         }
-      });
-    }
-  });
-
-  parsedFile.value.sort((a, b) => {
-    if (a.fileError && !b.fileError) {
-      return -1;
-    }
-    if (!a.fileError && b.fileError) {
-      return 1;
-    }
-    return 0;
-  });
-};
-
-const updatedParsedFileWithSuccess = () => {
-  completedRecords.value.forEach((record) => {
-    const matchingContact = importDataIRCC.contacts.find(
-      (contact) => contact.header.identifier === record.identifier
-    );
-    if (matchingContact) {
-      record.emails = matchingContact.emails;
-    }
-  });
-
-  parsedFile.value.forEach((item) => {
-    const matchingError = completedRecords.value.find(
-      (record) => record.identifier === item.identifier
-    );
-    if (matchingError) {
-      item.fileError = false;
-    } else {
-      completedRecords.value.forEach((record) => {
-        if (record.contact) {
-          if (
-            item.pic.email === record.emails[0] ||
-            item.provider.email === record.emails[0]
-          ) {
-            item.fileError = false;
-          }
-        }
-<<<<<<< HEAD
-      });
-    }
-  });
-};
-
-const getRowsFromParsedFile = (error) => {
-=======
     })
-
+    
     parsedFile.value.sort((a, b) => {
         if (a.fileError && !b.fileError) {
             return -1;
@@ -555,54 +583,15 @@ const getRowsFromParsedFile = (error) => {
         }
         return 0;
     });; 
-}   
-
-const updatedParsedFileWithSuccess = () => {
-    completedRecords.value.forEach(record => {
-    const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === record.identifier);
-        if (matchingContact) {
-            record.emails = matchingContact.emails;
-        }
-    }); 
-
-    parsedFile.value.forEach(item => {
-        // item.fileError = false;
-        const matchingError = completedRecords.value.find(record => record.identifier === item.identifier);
-        if(matchingError){
-            item.fileError = false;
-        }else{
-            completedRecords.value.forEach((record) => {
-            if(record.contact){
-                if(item.pic.email === record.emails[0] || item.provider.email === record.emails[0]){
-                    item.fileError = false;
-                }
-            }
-        })
-        }
-    })
-
-    // parsedFile.value.sort((a, b) => {
-    //     if (a.fileError && !b.fileError) {
-    //         return -1;
-    //     }
-    //     if (!a.fileError && b.fileError) {
-    //         return 1;
-    //     }
-    //     return 0;
-    // });; 
 }
 
 const getRowsFromParsedFile = (error) => {   
->>>>>>> a109512bb (Coded generic table header and body)
   const matchingItem = parsedFile.value.find((item) => {
     if (error.identifier === item.identifier) {
       return true;
     }
     if (error.contact) {
-      if (
-        item.pic.email === error.emails[0] ||
-        item.provider.email === error.emails[0]
-      ) {
+      if (item.pic.email === error.emails[0] || item.provider.email === error.emails[0]) {
         return true;
       }
     }
