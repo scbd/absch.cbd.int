@@ -21,7 +21,7 @@
             </div>
         </div> -->
         <div class="row mb-3">
-            <div class="col-md-3 text-start">
+            <div class="col-md-4 text-start">
                 
                 <button class="btn btn-primary position-relative" type='button' :disabled="isLoading">
                     {{t("browse")}}
@@ -30,17 +30,20 @@
                     class="position-absolute fs-1 opacity-0 top-0 start-0 w-100 h-100">
                 </button>
             </div>
-            
-            <div class="col-md-6 text-center d-flex align-items-center" v-if="multipleImportSheets.length">
-                <span class="text-danger me-2" data-toggle="tooltip" data-placement="top" :title="t('multipleSheetAlert')"><i class="bi bi-info-circle"></i></span>
-                <select class="form-select" :disabled="isLoading"
-                v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
-                    <option v-for="(sheet, index) in multipleImportSheets" :key="index" :value="index">{{sheet}}</option>
-                </select>
-            </div>
-
-            <div class="col-md-3 d-flex align-items-center justify-content-end fw-bold">
+             <div class="col-md-4 d-flex align-items-center justify-content-center fw-bold">
                 <span v-if="parsedFile.length > 0">{{t('totalRecords')}} {{parsedFile.length}}</span>
+            </div>
+            <div class="col-md-4 d-flex justify-content-end" v-if="multipleImportSheets.length">
+                <span class="min-w-50">
+                    <select class="form-select" :disabled="isLoading"
+                        v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
+                        <option v-for="(sheet, index) in multipleImportSheets" :key="index" :value="index">{{sheet}}</option>
+                    </select>
+                </span>
+                <span href="#" class="mt-2 ms-2 fa-lg fa fa-info-circle color-litegrey"
+                    data-bs-toggle="tooltip" data-html="true" data-container="body" data-placement="top"
+                    :title="t('multipleSheetAlert')">
+                </span>
             </div>
         </div>
         <div class="row table-container table-responsive" v-if="parsedFile.length">

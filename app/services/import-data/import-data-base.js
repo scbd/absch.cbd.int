@@ -236,7 +236,7 @@ export class ImportDataBase {
         if(response.error){
           errorResponse.push({
             identifier: contact.header.identifier,
-            draft: false,
+            draft: true,
             document: contact,
             contact:true,
             error: response.error
