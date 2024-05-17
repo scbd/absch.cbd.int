@@ -216,6 +216,7 @@ export class ImportDataBase {
   
       try{
         let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
+        console.log("IRCC REQUEST", irccRequest);
         return irccRequest;
       }
       catch(err){
@@ -236,20 +237,12 @@ export class ImportDataBase {
 
         const response = await this.createNationalRecord(contact, false)
         if(response.error){
-          errorCreateRecords.value.push({
+          errorResponse.push({
             identifier: contact.header.identifier,
             draft: true,
             document: contact,
             contact:true,
             error: response.error
-          })
-        }else{
-          completedRecords.value.push({
-            identifier: contact.header.identifier,
-            draft: true,
-            document: contact,
-            contact:true,
-            error: null
           })
         }
         progressTracking.value++;
@@ -261,21 +254,12 @@ export class ImportDataBase {
 
           const response = await this.createNationalRecord(document, true)
           if(response.error){
-            errorCreateRecords.value.push({
+            errorResponse.push({
               identifier: document.header.identifier,
               draft: true,
               document,
               contact:false,
               error: response.error
-            })
-          }
-          {
-            completedRecords.value.push({
-              identifier: document.header.identifier,
-              draft: true,
-              document,
-              contact:false,
-              error: null
             })
           }
           progressTracking.value++;
