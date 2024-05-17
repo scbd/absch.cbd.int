@@ -456,12 +456,11 @@ export class ImportDataIRCC extends ImportDataBase {
           const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
     const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
-    console.log('Total rows with data:', rowCount);
     const data = []
     for(let i=4;i<=rowCount;i++){
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
-          rowId: i,
+          rowId: i - 3,
           language: super.columnVal(sheet, this.fields.language + i),
           country: super.columnVal(sheet, this.fields.country + i),
           cna: super.columnVal(sheet, this.fields.cna + i),

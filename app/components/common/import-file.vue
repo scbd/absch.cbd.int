@@ -96,7 +96,7 @@
                                 'bg-lightgreen': data.fileError === false
                             }"
                         >
-                            <th scope="row">{{index + 1}}</th>
+                            <th scope="row">{{data.rowId}}</th>
                             <td class="p-2">{{data.language}}</td>
                             <td class="p-2">{{data.country}}</td>
                             <td class="p-2">{{data.cna}}</td>
@@ -164,7 +164,8 @@
         .length">
             <div class="col-12 alert alert-danger d-flex justify-content-between align-items-center">
                 <ul class="flex-1">
-                    <li v-for="(value) in errorCreateRecords" :key="value.identifier">Error creating <span v-if="value.draft">draft</span> record of identifier {{value.identifier}}</li>
+                    <li v-for="(value) in errorCreateRecords" :key="value.identifier">Error creating 
+                        <span v-if="value.draft">draft</span> record on row {{getRowsFromParsedFile(value)}} - {{value.error}}</li>
                 </ul>
                 <button class="btn btn-primary" @click="onRetryClick">Retry</button>
             </div>
@@ -191,7 +192,7 @@
         
         <div class="progress row" v-if="progressTracking > 0">
             <div class="progress-bar" role="progressbar" 
-            :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{progressPercentage}}%</div>
+            :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{Math.round(progressPercentage)}}%</div>
         </div>
     </ImportModal>
 </template>
@@ -322,12 +323,20 @@ const handleConfirm = async () => {
                 identifier: result[index].header.identifier
             }
         })
+        console.log("parsedFile WORKING", parsedFile.value);
+        console.log("contacts WORKING",importDataIRCC.contacts);
         const errorResponse = await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result, progressTracking);
         console.log("ERROR RESPONSE", errorResponse);
         updateParsedFileWithError(errorResponse);
         if(errorResponse === undefined || errorResponse.length === 0){
             successMessage.value = "Successfully created national record.";
         }else{
+            errorResponse.forEach(error => {
+            const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
+                if (matchingContact) {
+                    error.emails = matchingContact.emails;
+                }
+            });
             errorCreateRecords.value = errorResponse;
         }
 
@@ -360,8 +369,34 @@ const updateParsedFileWithError = (errorResponse) => {
             }
         })
         }
-    }); 
+    })
+    
+    parsedFile.value.sort((a, b) => {
+        if (a.fileError && !b.fileError) {
+            return -1;
+        }
+        if (!a.fileError && b.fileError) {
+            return 1;
+        }
+        return 0;
+    });; 
 }
+
+const getRowsFromParsedFile = (error) => {   
+  const matchingItem = parsedFile.value.find((item) => {
+    if (error.identifier === item.identifier) {
+      return true;
+    }
+    if (error.contact) {
+      if (item.pic.email === error.emails[0] || item.provider.email === error.emails[0]) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  return matchingItem ? matchingItem.rowId : null;
+};
 
 const onFileInputClick = (event) => {
     event.target.value = "";

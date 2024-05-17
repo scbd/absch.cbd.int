@@ -211,12 +211,15 @@ export class ImportDataBase {
           return;
   
       try{
-          let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
-
-          return irccRequest;
+        let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
+        console.log("IRCC REQUEST", irccRequest);
+        return irccRequest;
       }
       catch(err){
           console.log("ERR", err)
+          return {
+            error: err.message || "Internal server error"
+          }
       }
     };
 
@@ -230,12 +233,13 @@ export class ImportDataBase {
             errorCount++;
 
         const response = await this.createNationalRecord(contact, false)
-        if(!response){
+        if(response.error){
           errorResponse.push({
             identifier: contact.header.identifier,
             draft: false,
             document: contact,
-            contact:true
+            contact:true,
+            error: response.error
           })
         }
         progressTracking.value++;
@@ -246,12 +250,13 @@ export class ImportDataBase {
           var isValid = await this.validateNationalRecord(document)
 
           const response = await this.createNationalRecord(document, true)
-          if(!response){
+          if(response.error){
             errorResponse.push({
               identifier: document.header.identifier,
               draft: true,
               document,
-              contact:false
+              contact:false,
+              error: response.error
             })
           }
           progressTracking.value++;
