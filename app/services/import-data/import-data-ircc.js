@@ -457,9 +457,11 @@ export class ImportDataIRCC extends ImportDataBase {
     const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
     const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
     const data = []
-    let limit = 10; 
+    const skip = 3; // skip headers
+    let limit = 10; // number of rows to load
+    // if rowCount is less tha
     const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
-    for(let i = 4; i <= TotalCount; i++){
+    for(let i=4;i<=TotalCount;i++){
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
           rowId: i - 3,
@@ -526,13 +528,16 @@ export class ImportDataIRCC extends ImportDataBase {
 
       let irccs = [];
     //   let contacts = [];
+      console.log("SHEET", sheet,excelData);
       let limit = 10; // number of rows to load
       const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
+      // TODO: revert back to TotalCount
       for(let i=4; i<=TotalCount; i++){
         this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
       } 
       await this.cacheApiCalls();
 
+      // TODO: revert back to TotalCount
       for(let i=4;i<=TotalCount;i++){
         if (!super.columnVal(sheet, this.fields.language + i)) {
           console.log(
