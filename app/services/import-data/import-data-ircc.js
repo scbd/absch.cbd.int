@@ -460,9 +460,8 @@ export class ImportDataIRCC extends ImportDataBase {
     const skip = 3; // skip headers
     let limit = 10; // number of rows to load
     // if rowCount is less tha
-    const TotalCount = rowCount > limit ? limit + 2 : rowCount + 2;
-    console.log('TotalCount to load:',TotalCount);
-    for(let i=3;i<=TotalCount;i++){
+    const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
+    for(let i=4;i<=TotalCount;i++){
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
           rowId: i - 3,
@@ -526,13 +525,16 @@ export class ImportDataIRCC extends ImportDataBase {
       let irccs = [];
     //   let contacts = [];
       console.log("SHEET", sheet,excelData);
-      // CACHE values
-      for(let i=4; i<=rowCount; i++){
+      let limit = 10; // number of rows to load
+      const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
+      // TODO: revert back to TotalCount
+      for(let i=4; i<=TotalCount; i++){
         this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
       } 
       await this.cacheApiCalls();
 
-      for (let i = 4; i <= rowCount; i++) {
+      // TODO: revert back to TotalCount
+      for(let i=4;i<=TotalCount;i++){
         if (!super.columnVal(sheet, this.fields.language + i)) {
           console.log(
             `Language is missing for record on row ${i}, skipping record.`

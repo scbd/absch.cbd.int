@@ -212,7 +212,6 @@ export class ImportDataBase {
   
       try{
         let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
-        console.log("IRCC REQUEST", irccRequest);
         return irccRequest;
       }
       catch(err){

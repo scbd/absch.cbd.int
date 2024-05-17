@@ -201,7 +201,7 @@
 </template>
 
 <script setup>
-import { ref, shallowRef, computed, defineEmits, reactive } from 'vue';
+import { ref, shallowRef, computed, defineEmits, reactive, watch } from 'vue';
 import ImportModal from "./import-modal.vue"
 import { useRealm } from '../../services/composables/realm.js';
 import { useUser, useAuth } from '@scbd/angular-vue/src/index.js';
@@ -244,6 +244,7 @@ const userGovernment = computed(()=>{
 
 let importDataIRCC;
 const importModal = ref(null);
+
 function toggleModal() {
     parsedFile.value = [];
     error.value = null;
@@ -260,14 +261,18 @@ function toggleModal() {
     }
 }
 
+watch(errorCreateRecords, (newError, oldError) => {
+    console.log("WORKING")
+})
+
 const progressPercentage = computed(() => {
   const total = parsedFile.value?.length + importDataIRCC?.contacts?.length;
   return total > 0 ? (progressTracking.value / total) * 100 : 0;
 });
 
 const handleFileChange = async (event) => {
-    file.value = event.target.files[0];
     isLoading.value = true;
+    file.value = event.target.files[0];
     error.value = null;
     errorCreateRecords.value = [];
     successMessage.value = null;
@@ -424,11 +429,13 @@ const onRetryClick = async () => {
     try {
         const promises = errorCreateRecords.value.map(async (record) => {
             const response = await importDataBase.retryCreateNationalRecord(record.document, record.draft)
-            if(!response){
+            if(response.error){
                 errorResponse.push({
                     identifier: document.header.identifier,
                     draft: true,
-                    document
+                    document,
+                    contact: true,
+                    error: response.error
                 })
             }
         })      
@@ -438,8 +445,9 @@ const onRetryClick = async () => {
             successMessage.value = "Successfully created national record.";
             errorCreateRecords.value = [];
         }else{
-            errorCreateRecords.value = errorResponse;
+            errorCreateRecords.value = errorResponse;            
         }
+        updateParsedFileWithError(errorResponse);
         isLoading.value = false;
     } catch (error) {
         error.value = "Error: An error occurred while creating national record."
