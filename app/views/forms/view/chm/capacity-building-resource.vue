@@ -1,11 +1,11 @@
 <template>
     <div id="Record" class="record" >
         <div class="record-body bg-white" v-if="document"> 
-            <!--TODO: add compare-val for fields  -->
+        <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
-            <section>
+        <!-- TODO: add publish date -->            
+        <!-- <ng v-vue-ng:document-date></ng> -->
+        <section>
             <legend>{{t("generalInformation")}}</legend>           
             <div v-if="document.title">
                     <label>{{t("title")}}</label>
@@ -14,11 +14,11 @@
 
             <div v-if="document.resourceTypes">
                     <label>{{t("typeOfResource")}}</label>
-                    <ul class="km-value">
+                    <div class="km-value">
                         <li v-for="resourceType in document.resourceTypes">                   
                             <km-term :value="resourceType" :locale="locale"></km-term>
                         </li>
-                    </ul>
+                    </div>
                 </div>
 
                 <div v-if="document.fileFormat">
@@ -35,11 +35,11 @@
 
                 <div v-if="document.purpose">
                     <label>{{t("pleaseIdentify")}}</label>
-                    <ul class="km-value">
+                    <div class="km-value">
                         <li v-for="term in document.purpose">                       
                             <km-term :value="term" :locale="locale"></km-term>
                         </li>
-                    </ul>
+                    </div>
                 </div>
 
                 <div v-if="document.targetGroups">
@@ -71,8 +71,8 @@
                                 ({{string(org.acronym,locale)}})
                             </i>
                         </strong>
-                    </div>  
-                    <km-term :value="org.organizationType" :locale="locale"></km-term> 
+                        <km-term :value="org.organizationType" :locale="locale"></km-term> 
+                    </div> 
                 </div>
 
                 <div v-if="document.publicationYear">
@@ -96,9 +96,13 @@
 
                 <div v-if="document.resourceLinks">
                     <label>{{t("link")}}</label>
-                    <div class="km-value" v-for="item in document.resourceLinks">
-                        <a translation-url target="target" :href="item.url">{{item.name||item.url}}</a>
-                        <i v-if="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+                    <div class="km-value" >
+                        <div v-for="item in document.resourceLinks">
+                            <a translation-url target="target" :href="item.url">{{item.name||item.url}}</a>
+                            <i v-if="item.name && item.url.indexOf('/api/v2013/documents/')<0">
+                                ({{item.url}})
+                            </i>
+                        </div>                        
                     </div>
                 </div>
             
@@ -142,10 +146,12 @@
         
                 <div v-if="document.gbfTargets">
                     <div v-if="document.gbfTargets">
-                        <label>{{t("gbfTarget")}}</label>                        
-                        <div class="km-value">                           
-                            <ng v-vue-ng:view-terms-hierarchy  v-model:ng-model="document.gbfTargets" locale="locale"  term-domain="gbfTargets"></ng>                                               
-                        </div>
+                        <label>{{t("gbfTarget")}}</label>  
+                        <div class="km-value">                       
+                            <li v-for="term in document.gbfTargets">                      
+                                <km-term :value="term" :locale="locale"></km-term>
+                            </li>         
+                        </div> 
                     </div>
                 </div>
         
@@ -170,10 +176,12 @@
             <section v-if="document.bchSubjects">
                 <legend>{{t("cartagenaProtocol")}}</legend>        
                 <div v-if="document.bchSubjects">
-                    <label>{{t("thematicAreass")}}</label>                    
-                    <div class="km-value">                           
-                        <ng v-vue-ng:view-terms-hierarchy  v-model:ng-model="document.bchSubjects" locale="locale"  term-domain="bchSubjects"></ng>                                 
-                    </div>
+                    <label>{{t("thematicAreass")}}</label> 
+                    <div class="km-value">                       
+                        <li v-for="term in document.bchSubjects">                      
+                            <km-term :value="term" :locale="locale"></km-term>
+                        </li>                        
+                    </div> 
                 </div>
             </section>
             
