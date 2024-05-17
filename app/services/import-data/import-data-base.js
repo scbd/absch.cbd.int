@@ -229,11 +229,11 @@ export class ImportDataBase {
         if(!isValid)
             errorCount++;
 
-        const response = await this.createNationalRecord(contact, false)
+        const response = await this.createNationalRecord(contact, true)
         if(!response){
           errorResponse.push({
             identifier: contact.header.identifier,
-            draft: false,
+            draft: true,
             document: contact,
             contact:true
           })
