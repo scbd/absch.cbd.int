@@ -22,30 +22,20 @@
               <h5 class="modal-title">{{ t("importIrccExcel") }}</h5>
               <p class="m-0">{{ t("pleaseSelectExcelInfo") }}</p>
             </div>
-            <button
-              type="button"
-              class="border-0 close"
-              @click="closeDialog()"
-              :disabled="isLoading"
-              aria-label="Close"
-            >
-              <i class="bi bi-x-circle-fill icon-lg"></i>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row mb-3">
-              <div class="col-md-4 text-start">
-                <button
-                  class="btn btn-primary position-relative"
-                  type="button"
-                  :disabled="isLoading"
-                >
-                  {{ t("browse") }}
-                  <input
-                    type="file"
-                    name="file"
-                    accept=".xlsx, .xls"
-                    @change="handleFileChange"
+            {{locale}}-{{selectedLanguage}}
+            <div class="col">
+                <ng v-vue-ng:km-form-languages v-model:ng-model="selectedLanguage"></ng>
+            </div>
+            <div class="col text-end">
+                <button class="btn btn-secondary" disabled>{{realm.value}}</button>
+            </div>
+        </div> -->
+        <div class="row mb-3">
+            <div class="col-md-4 text-start">
+                
+                <button class="btn btn-primary position-relative" type='button' :disabled="isLoading">
+                    {{t("browse")}}
+                    <input type="file" name="file" accept=".xlsx, .xls" @change="handleFileChange"
                     @click="onFileInputClick"
                     class="position-absolute fs-1 opacity-0 top-0 start-0 w-100 h-100"
                   />
@@ -89,72 +79,21 @@
                 </span>
               </div>
             </div>
-            <div
-              class="row table-container table-responsive"
-              v-if="parsedFile.length"
-            >
-              <table class="table table-striped table-bordered table-condensed">
-                <thead>
-                  <tr>
-                    <th scope="col" rowspan="2">#</th>
-                    <th
-                      v-for="header in mainHeaders"
-                      :key="header.label"
-                      :colspan="header.colspan"
-                      :rowspan="header.rowspan"
-                      class="text-center"
-                    >
-                      {{ t(header.label) }}
-                    </th>
-                  </tr>
-                  <tr>
-                    <th v-for="header in subHeaders" :key="header.label">
-                      {{ t(header.label) }}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(data, index) in parsedFile"
-                    :key="index"
-                    :class="{
-                      'bg-lightpink': data.fileError === true,
-                      'bg-lightgreen': data.fileError === false,
-                    }"
-                  >
-                    <th scope="row">{{ data.rowId }}</th>
-                    <td
-                      v-for="field in flattenedFields"
-                      :key="field"
-                      class="p-2"
-                    >
-                      <div
-                        v-if="isLongText(getNestedValue(data, field))"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        :title="getNestedValue(data, field)"
-                        class="short-text"
-                      >
-                        {{ getNestedValue(data, field) }}
-                      </div>
-                      <span v-else>
-                        {{ getNestedValue(data, field) }}
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+             <div class="col-md-4 d-flex align-items-center justify-content-center fw-bold">
+                <span v-if="parsedFile.length > 0">{{t('totalRecords')}} {{parsedFile.length}}</span>
             </div>
-<<<<<<< HEAD
-
-            <div
-              class="row mt-5 error__container"
-              v-if="errorCreateRecords.length"
-            >
-              <div
-                class="col-12 alert alert-danger d-flex justify-content-between align-items-center"
-              >
-=======
+            <div class="col-md-4 d-flex justify-content-end" v-if="multipleImportSheets.length">
+                <span class="min-w-50">
+                    <select class="form-select" :disabled="isLoading"
+                        v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
+                        <option v-for="(sheet, index) in multipleImportSheets" :key="index" :value="index">{{sheet}}</option>
+                    </select>
+                </span>
+                <span href="#" class="mt-2 ms-2 fa-lg fa fa-info-circle color-litegrey"
+                    data-bs-toggle="tooltip" data-html="true" data-container="body" data-placement="top"
+                    :title="t('multipleSheetAlert')">
+                </span>
+            </div>
         </div>
         <div class="row table-container table-responsive" v-if="parsedFile.length">
             <!-- <div class="col"> -->
