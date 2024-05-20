@@ -266,8 +266,8 @@ const progressPercentage = computed(() => {
 });
 
 const handleFileChange = async (event) => {
-    file.value = event.target.files[0];
     isLoading.value = true;
+    file.value = event.target.files[0];
     error.value = null;
     errorCreateRecords.value = [];
     successMessage.value = null;
