@@ -454,65 +454,8 @@ const toggleModal = () => {
 }
 
 const handleFileChange = async (event) => {
-  isLoading.value = true;
-  file.value = event.target.files[0];
-  error.value = null;
-  errorCreateRecords.value = [];
-  successMessage.value = null;
-  selectedSheetIndex.value = 0;
-  multipleImportSheets.value = [];
-  progressTracking.value = null;
-  resetFileErrorInParsedFile();
-  try {
-    const { sheetNames, workbook } = await importDataBase.readSheet(file.value);
-    xlsxWorkbook.value = workbook;
-    importDataIRCC = new ImportDataIRCC(
-      realm.value,
-      locale.value,
-      user.value.government,
-      workbook,
-      auth
-    );
-    if (sheetNames.length > 1) {
-      multipleImportSheets.value = sheetNames;
-      handleSelectedSheetChange();
-    } else {
-      parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(
-        multipleImportSheets.value,
-        selectedSheetIndex.value
-      );
-    }
-  } catch (err) {
-    parsedFile.value = [];
-    error.value = "ERROR: An error occurred while reading the file.";
-  }
-  isLoading.value = false;
-};
-
-const handleSelectedSheetChange = async () => {
-  try {
-    if (selectedSheetIndex.value != null) {
-      isLoading.value = true;
-      error.value = null;
-      errorCreateRecords.value = [];
-      successMessage.value = null;
-      progressTracking.value = null;
-      resetFileErrorInParsedFile();
-      parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(
-        multipleImportSheets.value,
-        selectedSheetIndex.value
-      );
-    }
-  } catch (err) {
-    parsedFile.value = [];
-    error.value = "ERROR: An error occurred while reading the file.";
-  }
-  isLoading.value = false;
-};
-
-const handleConfirm = async () => {
-  try {
     isLoading.value = true;
+    file.value = event.target.files[0];
     error.value = null;
     errorCreateRecords.value = [];
     successMessage.value = null;
