@@ -443,7 +443,6 @@ export class ImportDataIRCC extends ImportDataBase {
   authorityIds = [];
   contacts = [];
   hashedValue = {};
-  static ROW_LIMIT=10
 
   constructor( realm, language, government, workbook, auth) {
       super(auth);
@@ -519,11 +518,14 @@ export class ImportDataIRCC extends ImportDataBase {
       }
       
       this.hashedValue[sheetNames[selectedSheetIndex]] = hashed;
+      console.log("HASHED", this.hashedValue);
       
+     // let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
       const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });// ToDo: use the  this.workbook.Sheets
       const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
       let irccs = [];
+    //   let contacts = [];
       let limit = 10; // number of rows to load
       const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
       for(let i=4; i<=TotalCount; i++){
