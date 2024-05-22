@@ -305,7 +305,6 @@ let file = ref(null);
 const xlsxWorkbook = ref(null);
 const progressTracking = ref(null);
 const completedRecords = ref([]);
-const importModal = shallowRef(null);
 
 <<<<<<< HEAD
 Object.assign(messages[locale.value], messagesIrcc[locale.value]);
@@ -320,16 +319,29 @@ const userGovernment = computed(()=>{
     }
 })
 
-const flattenedFields = computed(() => {
-    const flatten = (obj, path = []) =>
-    Object.entries(obj).reduce(
-        (acc, [key, value]) =>
-        typeof value === "object" && !Array.isArray(value)
-            ? [...acc, ...flatten(value, path.concat(key))]
-            : [...acc, path.concat(key).join(".")],
-        []
-    );
-    return flatten(importDataIRCC?.fields);
+let importDataIRCC;
+const importModal = ref(null);
+
+function toggleModal() {
+    parsedFile.value = [];
+    error.value = null;
+    errorCreateRecords.value = [];
+    successMessage.value = null;
+    multipleImportSheets.value = [];
+    selectedSheetIndex.value = null;
+    progressTracking.value = null;
+    resetFileErrorInParsedFile();
+    showModal.value = !showModal.value;
+    importModal.value.showDialog();
+    if(!showModal.value){
+        emit("refreshRecord")
+    }
+}
+
+watch(progressTracking, (newValue) => {
+    if(newValue < 100){
+        updatedParsedFileWithSuccess();
+    }
 })
 
 const mainHeaders = computed(() => {
@@ -565,31 +577,69 @@ const handleSelectedSheetChange = async () => {
   progressTracking.value = null;
 };
 
-const updateParsedFileWithError = (errorCreateRecords) => {
-  errorCreateRecords.value.forEach((error) => {
-    const matchingContact = importDataIRCC.contacts.find(
-      (contact) => contact.header.identifier === error.identifier
-    );
-    if (matchingContact) {
-      error.emails = matchingContact.emails;
+const handleConfirm = async () => {
+    try {
+        isLoading.value = true;
+        error.value = null;
+        errorCreateRecords.value = [];
+        successMessage.value = null;
+        progressTracking.value = null;
+        resetFileErrorInParsedFile();
+        const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
+        console.log("result", result);
+        if(result?.duplicate){
+            throw new Error("Record already exists");
+        }
+        
+        parsedFile.value = parsedFile.value.map((file,index)=>{
+            return {
+                ...file,
+                identifier: result[index].header.identifier
+            }
+        })
+        await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result, progressTracking, errorCreateRecords,completedRecords);
+        console.log("ERROR RESPONSE", errorCreateRecords.value);
+        updateParsedFileWithError(errorCreateRecords);
+        if(errorCreateRecords.value === undefined || errorCreateRecords.value.length === 0){
+            successMessage.value = "Successfully created national record.";
+        }else{
+            errorCreateRecords.value.forEach(error => {
+            const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
+                if (matchingContact) {
+                    error.emails = matchingContact.emails;
+                }
+            });
+            // errorCreateRecords.value = errorResponse;
+        }
+
+    } catch (err) {
+        console.log(err);
+        error.value = `Error: ${err.message || 'An error occurred while creating national record.'}`
     }
-  });
-  parsedFile.value.forEach((item) => {
-    item.fileError = false;
-    const matchingError = errorCreateRecords.value.find(
-      (error) => error.identifier === item.identifier
-    );
-    if (matchingError) {
-      item.fileError = true;
-    } else {
-      errorCreateRecords.value.forEach((error) => {
-        if (error.contact) {
-          if (
-            item.pic.email === error.emails[0] ||
-            item.provider.email === error.emails[0]
-          ) {
+    isLoading.value = false;
+    progressTracking.value = null;
+}
+
+const updateParsedFileWithError = (errorCreateRecords) => {
+    errorCreateRecords.value.forEach(error => {
+    const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
+        if (matchingContact) {
+            error.emails = matchingContact.emails;
+        }
+    });
+    parsedFile.value.forEach(item => {
+        item.fileError = false;
+        const matchingError = errorCreateRecords.value.find(error => error.identifier === item.identifier);
+        if(matchingError){
             item.fileError = true;
-          }
+        }else{
+            errorCreateRecords.value.forEach((error) => {
+            if(error.contact){
+                if(item.pic.email === error.emails[0] || item.provider.email === error.emails[0]){
+                    item.fileError = true;
+                }
+            }
+        })
         }
       });
     }
@@ -641,6 +691,51 @@ const updatedParsedFileWithSuccess = () => {
 const getRowsFromParsedFile = (error) => {
 =======
     })
+
+    parsedFile.value.sort((a, b) => {
+        if (a.fileError && !b.fileError) {
+            return -1;
+        }
+        if (!a.fileError && b.fileError) {
+            return 1;
+        }
+        return 0;
+    });; 
+}   
+
+const updatedParsedFileWithSuccess = () => {
+    completedRecords.value.forEach(record => {
+    const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === record.identifier);
+        if (matchingContact) {
+            record.emails = matchingContact.emails;
+        }
+    }); 
+
+    parsedFile.value.forEach(item => {
+        // item.fileError = false;
+        const matchingError = completedRecords.value.find(record => record.identifier === item.identifier);
+        if(matchingError){
+            item.fileError = false;
+        }else{
+            completedRecords.value.forEach((record) => {
+            if(record.contact){
+                if(item.pic.email === record.emails[0] || item.provider.email === record.emails[0]){
+                    item.fileError = false;
+                }
+            }
+        })
+        }
+    })
+
+    // parsedFile.value.sort((a, b) => {
+    //     if (a.fileError && !b.fileError) {
+    //         return -1;
+    //     }
+    //     if (!a.fileError && b.fileError) {
+    //         return 1;
+    //     }
+    //     return 0;
+    // });; 
 }
 
 const getRowsFromParsedFile = (error) => {   
@@ -701,19 +796,19 @@ const onRetryClick = async () => {
     });
     await Promise.all(promises);
 
-    if (errorResponse.length === 0) {
-      successMessage.value = "Successfully created national record.";
-      errorCreateRecords.value = [];
-    } else {
-      errorCreateRecords.value = errorResponse;
-    }
-    updateParsedFileWithError(errorCreateRecords);
-    isLoading.value = false;
-  } catch (error) {
-    error.value = "Error: An error occurred while creating national record.";
-    isLoading.value = false;
-  }
-};
+        if(errorResponse.length === 0){
+            successMessage.value = "Successfully created national record.";
+            errorCreateRecords.value = [];
+        }else{
+            errorCreateRecords.value = errorResponse;            
+        }
+        updateParsedFileWithError(errorCreateRecords);
+        isLoading.value = false;
+    } catch (error) {
+        error.value = "Error: An error occurred while creating national record."
+        isLoading.value = false;
+    }       
+}
 
 const resetFileErrorInParsedFile = () => {
   parsedFile.value.forEach((file) => (file.fileError = null));
