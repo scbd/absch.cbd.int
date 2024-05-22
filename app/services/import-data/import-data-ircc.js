@@ -1,4 +1,5 @@
 import { ImportDataBase } from "./import-data-base";
+import hash from "object-hash";
 
 export class ImportDataIRCC extends ImportDataBase {
   fields = {
@@ -441,6 +442,7 @@ export class ImportDataIRCC extends ImportDataBase {
   workbook;
   authorityIds = [];
   contacts = [];
+  hashedValue = {};
 
   constructor( realm, language, government, workbook, auth) {
       super(auth);
@@ -514,17 +516,25 @@ export class ImportDataIRCC extends ImportDataBase {
     try {
       let sheet;
       let language;
-    
+      
       sheet = this.workbook.Sheets[sheetNames[selectedSheetIndex]];
-
+      const hashed = hash(sheet);
+      
+      if(this.hashedValue[sheetNames[selectedSheetIndex]] === hashed){
+        return {
+          duplicate: true
+        }
+      }
+      
+      this.hashedValue[sheetNames[selectedSheetIndex]] = hashed;
+      console.log("HASHED", this.hashedValue);
+      
      // let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
       const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });// ToDo: use the  this.workbook.Sheets
       const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
-      console.log('Total rows with data:', rowCount);
       let irccs = [];
     //   let contacts = [];
-      console.log("SHEET", sheet,excelData);
       let limit = 10; // number of rows to load
       const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
       // TODO: revert back to TotalCount

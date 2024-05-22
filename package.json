@@ -22,6 +22,7 @@
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "mime": "1.4.1",
+    "object-hash": "^3.0.0",
     "path-to-regexp": "^6.2.1",
     "xlsx": "^0.18.5"
   },

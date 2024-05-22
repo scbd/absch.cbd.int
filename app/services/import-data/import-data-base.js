@@ -222,9 +222,8 @@ export class ImportDataBase {
       }
     };
 
-    async validateAndCreateNationalRecord(contacts, documents, progressTracking){
+    async validateAndCreateNationalRecord(contacts, documents, progressTracking, errorCreateRecords,completedRecords){
       let errorCount = 0;
-      const errorResponse = []  
       for (let index = 0; index < contacts.length; index++) {
         const contact = contacts[index];
         var isValid = await this.validateNationalRecord(contact)
@@ -233,12 +232,20 @@ export class ImportDataBase {
 
         const response = await this.createNationalRecord(contact, false)
         if(response.error){
-          errorResponse.push({
+          errorCreateRecords.value.push({
             identifier: contact.header.identifier,
             draft: true,
             document: contact,
             contact:true,
             error: response.error
+          })
+        }else{
+          completedRecords.value.push({
+            identifier: contact.header.identifier,
+            draft: true,
+            document: contact,
+            contact:true,
+            error: null
           })
         }
         progressTracking.value++;
@@ -250,7 +257,7 @@ export class ImportDataBase {
 
           const response = await this.createNationalRecord(document, true)
           if(response.error){
-            errorResponse.push({
+            errorCreateRecords.value.push({
               identifier: document.header.identifier,
               draft: true,
               document,
@@ -258,9 +265,17 @@ export class ImportDataBase {
               error: response.error
             })
           }
+          {
+            completedRecords.value.push({
+              identifier: document.header.identifier,
+              draft: true,
+              document,
+              contact:false,
+              error: null
+            })
+          }
           progressTracking.value++;
       }
-      return errorResponse;
     }
 
     async retryCreateNationalRecord(document, draft){
