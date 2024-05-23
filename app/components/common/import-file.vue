@@ -47,120 +47,43 @@
             </div>
         </div>
         <div class="row table-container table-responsive" v-if="parsedFile.length">
-            <!-- <div class="col"> -->
-                <table class="table table-striped table-bordered table-condensed">
-                    <thead>
-                        <tr>
-                            <th scope="col" rowspan="2">#</th>
-                            <th scope="col" rowspan="2">{{t("language")}}</th>
-                            <th scope="col" rowspan="2">{{t("country")}}</th>
-                            <th scope="col" rowspan="2">{{t("cnaHeader")}}</th>
-                            <th scope="col" rowspan="2">{{t("linkIrcc")}}</th>
-                            <th scope="col" rowspan="2">{{t("dateOfIssuanceHeader")}}</th>
-                            <th scope="col" rowspan="2">{{t("dateOfExpiryHeader")}}</th>
-                            <th scope="col" colspan="8" class="text-center">{{t("provider")}}</th>
-                            <th scope="col" colspan="9" class="text-center">{{t("priorInformation")}}</th>
-                            <th scope="col" rowspan="2">{{t("matEstablishedHeader")}}</th>
-                            <th scope="col" rowspan="2">{{t("subjectMatter")}}</th>
-                            <th scope="col" rowspan="2">{{t("additionalInformationOnUsage")}}</th>
-                            <th scope="col" rowspan="2">{{t("subjectGenericKeywords")}}</th>
-                            <th scope="col" rowspan="2">{{t("specimens")}}</th>
-                            <th scope="col" rowspan="2">{{t("taxonomy")}}</th>
-                            <th scope="col" rowspan="2">{{t("indicateCommercialUse")}}</th>
-                            <th scope="col" rowspan="2">{{t("thirdPartyTransferCondition")}}</th>
-                            <th scope="col" rowspan="2">{{t("copyOfPermit")}}</th>
-                            <th scope="col" rowspan="2">{{t("additionalInformation")}}</th>
-                        </tr>
-                         <tr>
-                            <th scope="col">{{t("type")}}</th>
-                            <th scope="col">{{t("existing")}}</th>
-                            <th scope="col">{{t("orgfirstName")}}</th>
-                            <th scope="col">{{t("acronymfirstName")}}</th>
-                            <th scope="col">{{t("address")}}</th>
-                            <th scope="col">{{t("city")}}</th>
-                            <th scope="col">{{t("country")}}</th>
-                            <th scope="col">{{t("email")}}</th>
-
-                            <th scope="col">{{t("consent")}}</th>
-                            <th scope="col">{{t("type")}}</th>
-                            <th scope="col">{{t("existing")}}</th>
-                            <th scope="col">{{t("orgfirstName")}}</th>
-                            <th scope="col">{{t("acronymfirstName")}}</th>
-                            <th scope="col">{{t("address")}}</th>
-                            <th scope="col">{{t("city")}}</th>
-                            <th scope="col">{{t("country")}}</th>
-                            <th scope="col">{{t("email")}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(data,index) in parsedFile" :key="index"
-                        :class="{
-                                'bg-lightpink': data.fileError === true,
-                                'bg-lightgreen': data.fileError === false
-                            }"
-                        >
-                            <th scope="row">{{data.rowId}}</th>
-                            <td class="p-2">{{data.language}}</td>
-                            <td class="p-2">{{data.country}}</td>
-                            <td class="p-2">{{data.cna}}</td>
-                            <td class="p-2">{{data.permit_equivalent}}</td>
-                            <td class="p-2">{{data.date_of_issuance}}</td>
-                            <td class="p-2">{{data.dateOfExpiry}}</td>
-                            <td class="p-2">{{data.provider.type}}</td>
-                            <td class="p-2">{{data.provider.existing}}</td>
-                            <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.provider.orgName_firstName"
-                                :class="{ 'short-text': data.provider.orgName_firstName.length > 45 }">
-                                    {{data.provider.orgName_firstName}}
-                                </div>
-                            </td>
-                            <td class="p-2">{{data.provider.acronym_lastName}}</td>
-                            <td class="p-2">{{data.provider.address}}</td>
-                            <td class="p-2">{{data.provider.city}}</td>
-                            <td class="p-2">{{data.provider.country}}</td>
-                            <td class="p-2">{{data.provider.email}}</td>
-                            <td class="p-2">{{data.pic.consent}}</td>
-                            <td class="p-2">{{data.pic.type}}</td>
-                            <td class="p-2">{{data.pic.existing}}</td>
-                            <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.pic.orgName_firstName"
-                                :class="{ 'short-text': data.pic.orgName_firstName.length > 45 }">
-                                    {{data.pic.orgName_firstName}}
-                                </div>
-                            </td>
-                            <td class="p-2">{{data.pic.acronym_lastName}}</td>
-                            <td class="p-2">{{data.pic.address}}</td>
-                            <td class="p-2">{{data.pic.city}}</td>
-                            <td class="p-2">{{data.pic.country}}</td>
-                            <td class="p-2">{{data.pic.email}}</td>
-                            <td class="p-2">{{data.matEstablished}}</td>
-                            <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.subjectMatter"
-                                :class="{ 'short-text': data.subjectMatter.length > 45 }">
-                                    {{data.subjectMatter}}
-                                </div>
-                            </td>
-                            <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.usageDescription"
-                                :class="{ 'short-text': data.usageDescription.length > 45 }">
-                                    {{data.usageDescription}}
-                                </div>
-                            </td>
-                            <td class="p-2">
-                                <div data-toggle="tooltip" data-placement="top" :title="data.keywords"
-                                :class="{ 'short-text': data.keywords.length > 45 }"
-                                >{{data.keywords}}</div>
-                            </td>
-                            <td class="p-2">{{data.specimens}}</td>
-                            <td class="p-2">{{data.taxonomies}}</td>
-                            <td class="p-2">{{data.usage}}</td>
-                            <td class="p-2">{{data.conditions_third_party_transfer}}</td>
-                            <td class="p-2">{{data.permitFiles}}</td>
-                            <td class="p-2">{{data?.additional_information}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            <!-- </div> -->
+            <table class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th scope="col" rowspan="2">#</th>
+                        <th v-for="header in mainHeaders" :key="header.label" :colspan="header.colspan" :rowspan="header.rowspan" class="text-center">
+                            {{ t(header.label) }}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th v-for="header in subHeaders" :key="header.label">{{ t(header.label) }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(data,index) in parsedFile" :key="index"
+                    :class="{
+                            'bg-lightpink': data.fileError === true,
+                            'bg-lightgreen': data.fileError === false
+                        }"
+                    >
+                        <th scope="row">{{data.rowId}}</th>
+                        <td v-for="field in flattenedFields" :key="field" class="p-2">
+                            <div
+                                v-if="isLongText(getNestedValue(data, field))"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                :title="getNestedValue(data, field)"
+                                class="short-text"
+                            >
+                                {{ getNestedValue(data, field) }}
+                            </div>
+                            <span v-else>
+                                {{ getNestedValue(data, field) }}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         
         <div class="row mt-5 error__container" v-if="errorCreateRecords
@@ -243,6 +166,48 @@ const userGovernment = computed(()=>{
     }
 })
 
+const flattenedFields = computed(() => {
+    const flatten = (obj, path = []) =>
+    Object.entries(obj).reduce(
+        (acc, [key, value]) =>
+        typeof value === "object" && !Array.isArray(value)
+            ? [...acc, ...flatten(value, path.concat(key))]
+            : [...acc, path.concat(key).join(".")],
+        []
+    );
+    return flatten(importDataIRCC?.fields);
+})
+
+const mainHeaders = computed(() => {
+    const flattenHeaders = (obj) => {
+        const headers = [];
+        for (const key in obj) {
+          if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+            headers.push({ label: key, colspan: Object.keys(obj[key]).length });
+          } else {
+            headers.push({ label: key, rowspan: 2 });
+          }
+        }
+        return headers;
+      };
+      return flattenHeaders(importDataIRCC?.fields);
+})
+
+const subHeaders = computed(() => {
+    const flattenSubHeaders = (obj) => {
+        const headers = [];
+        for (const key in obj) {
+            if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+                for (const subKey in obj[key]) {
+                    headers.push({ label: subKey });
+                }
+            }
+        }
+        return headers;
+    };
+    return flattenSubHeaders(importDataIRCC?.fields);
+})
+
 let importDataIRCC;
 const importModal = ref(null);
 
@@ -310,6 +275,7 @@ const handleSelectedSheetChange = async () => {
             progressTracking.value = null;
             resetFileErrorInParsedFile();
             parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
+            console.log("parsedFile", parsedFile.value, parsedFile.value.length)
         }
     } catch (err) {
         console.log(err)
@@ -419,16 +385,6 @@ const updatedParsedFileWithSuccess = () => {
         })
         }
     })
-
-    // parsedFile.value.sort((a, b) => {
-    //     if (a.fileError && !b.fileError) {
-    //         return -1;
-    //     }
-    //     if (!a.fileError && b.fileError) {
-    //         return 1;
-    //     }
-    //     return 0;
-    // });; 
 }
 
 const getRowsFromParsedFile = (error) => {   
@@ -498,6 +454,14 @@ const onRetryClick = async () => {
 
 const resetFileErrorInParsedFile = () => {
     parsedFile.value.forEach((file) => file.fileError = null)
+}
+
+function getNestedValue(obj, path) {
+    return path.split(".").reduce((o, key) => (o ? o[key] : ""), obj);
+}
+
+function isLongText(text) {
+    return text && text.length > 45;
 }
 
 </script>

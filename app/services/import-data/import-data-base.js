@@ -29,7 +29,7 @@ export class ImportDataBase {
   }
 
   columnVal(sheet, column, t) {
-    return ((sheet[column] || {})[t || "v"] || "").trim();
+    return ((sheet[column] || {})[t || "w"] || "").trim();
   }
 
   getELinkData(sheet, column) {
@@ -68,6 +68,19 @@ export class ImportDataBase {
   
     return { processedKeywords, otherKeywords };
   }
+
+  processField(fields, field, fieldName, isNested = false, parentFieldName = null){
+    if (typeof field === 'object' && !isNested) {
+      value[fieldName] = {};
+      for (const subField in field) {
+        this.processField(fields, field[subField], subField, true, fieldName);
+      }
+    } else if (isNested) {
+      value[parentFieldName][fieldName] = this.columnVal(sheet, fields[parentFieldName][fieldName] + i);
+    } else {
+      value[fieldName] = this.columnVal(sheet, field + i);
+    }
+  };
 
   async findByUid(uniqueId, cache, field = "") {
     let uid = uniqueId
