@@ -6,13 +6,16 @@
   <div class="d-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(0,4)">
       <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
+        <img class="cover-image" v-if="type == 'reference'" src="https://attachments.cbd.int/160x100/af3621c3e45b32127c8ed37f79f8ef6f/_5-6 December 2022 workshop-1.png" > 
         <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
         <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
-        <p class="record-summary-text"><span v-if="record.rec_summary">{{record.rec_summary}}</span></p>
-        <div style="bottom:5px;" class="w-100 position-absolute">
+        <p :class="record.rec_countryName?.length < 21 ? 'record-summary-text' : 'record-summary-text-single-line'">
+          <span v-if="record.rec_summary">{{ record.rec_summary }}</span>
+        </p>
+        <div style="bottom:5px;" class="w-100 position-absolute" :class="type == 'reference' ? 'settle-ref-sub-options' : ''">
           <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
           <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
-          <span class="badge text-uppercase record-text-national-country">{{record.rec_countryName}}</span></a>
+          <span class="badge text-uppercase record-text-national-country ps-0">{{record.rec_countryName}}</span></a>
           <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
         </div>
       </div>
@@ -20,17 +23,22 @@
   </div>  
 
 
-   <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
+  <!-- v-if="type == 'reference'" will be changed to v-if="type == 'reference' && rec_coverImage" -->
+
+    <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(4,8)">
       <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
+        <img class="cover-image" v-if="type == 'reference'" src="https://attachments.cbd.int/160x100/af3621c3e45b32127c8ed37f79f8ef6f/_5-6 December 2022 workshop-1.png">
         <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
         <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
-        <p class="record-summary-text"><span v-if="record.rec_summary">{{record.rec_summary}}</span></p>
+        <p :class="record.rec_countryName?.length < 21 ? 'record-summary-text' : 'record-summary-text-single-line'">
+          <span v-if="record.rec_summary">{{ record.rec_summary }}</span>
+        </p>
         
-        <div class="country-records-sub-options">
+        <div class="country-records-sub-options" :class="type == 'reference' ? 'settle-ref-sub-options' : ''">
           <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
           <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
-          <span class="badge text-uppercase record-text-national-country">{{record.rec_countryName}}</span></a>
+          <span class="badge text-uppercase record-text-national-country  ps-0">{{record.rec_countryName}}</span></a>
           <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
         </div>
       </div>
@@ -84,7 +92,7 @@
       ],
       "q": "''",
       "sort": sort,
-      "fl": "id, schema_EN_t, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t",
+      "fl": "id, schema_EN_t, rec_image:coverImage, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t",
       "wt": "json",
       "start": 0,
       "rows": rows
@@ -119,4 +127,24 @@
     text-decoration: dotted;
     background: #eee;
   }
+  @media(min-width:992px) {
+  .cover-image {
+    margin-right: 3%;
+    width: 15%;
+    height: 100%;
+    float: left;
+    min-height: 95px;
+  }
+  .settle-ref-sub-options {
+    margin-left: 17%;
+  }
+}
+@media(max-width: 991px) {
+  .cover-image{
+    display: none;
+  }
+  .settle-ref-sub-options {
+    margin-left:0;
+  }
+}
 </style>
