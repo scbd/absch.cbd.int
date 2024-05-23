@@ -458,16 +458,30 @@ export class ImportDataIRCC extends ImportDataBase {
     const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
     const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
     const data = []
-    const TotalCount = rowCount > this.constructor.ROW_LIMIT ? this.constructor.ROW_LIMIT + 3 : rowCount + 3;
+    let limit = 10; 
+    const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
     for(let i = 4; i <= TotalCount; i++){
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
           rowId: i - 3,
           fileError: null
         }
+        const processField = (field, fieldName, isNested = false, parentFieldName = null) =>{
+          if (typeof field === 'object' && !isNested) {
+            value[fieldName] = {};
+            for (const subField in field) {
+              processField(field[subField], subField, true, fieldName);
+            }
+          } else if (isNested) {
+            value[parentFieldName][fieldName] = this.columnVal(sheet, this.fields[parentFieldName][fieldName] + i);
+          } else {
+            value[fieldName] = this.columnVal(sheet, field + i);
+          }
+        };
 
         for (const fieldName in this.fields) {
-          this.processField(sheet, this.fields[fieldName], fieldName, i, value);
+          processField(this.fields[fieldName], fieldName);
+>>>>>>> a109512bb (Coded generic table header and body)
         }
 
         data.push(value);
