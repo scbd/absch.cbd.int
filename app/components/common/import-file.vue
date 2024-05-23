@@ -145,6 +145,7 @@
                 </tbody>
               </table>
             </div>
+<<<<<<< HEAD
 
             <div
               class="row mt-5 error__container"
@@ -153,6 +154,52 @@
               <div
                 class="col-12 alert alert-danger d-flex justify-content-between align-items-center"
               >
+=======
+        </div>
+        <div class="row table-container table-responsive" v-if="parsedFile.length">
+            <table class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th scope="col" rowspan="2">#</th>
+                        <th v-for="header in mainHeaders" :key="header.label" :colspan="header.colspan" :rowspan="header.rowspan" class="text-center">
+                            {{ t(header.label) }}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th v-for="header in subHeaders" :key="header.label">{{ t(header.label) }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(data,index) in parsedFile" :key="index"
+                    :class="{
+                            'bg-lightpink': data.fileError === true,
+                            'bg-lightgreen': data.fileError === false
+                        }"
+                    >
+                        <th scope="row">{{data.rowId}}</th>
+                        <td v-for="field in flattenedFields" :key="field" class="p-2">
+                            <div
+                                v-if="isLongText(getNestedValue(data, field))"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                :title="getNestedValue(data, field)"
+                                class="short-text"
+                            >
+                                {{ getNestedValue(data, field) }}
+                            </div>
+                            <span v-else>
+                                {{ getNestedValue(data, field) }}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="row mt-5 error__container" v-if="errorCreateRecords
+        .length">
+            <div class="col-12 alert alert-danger d-flex justify-content-between align-items-center">
+>>>>>>> a109512bb (Coded generic table header and body)
                 <ul class="flex-1">
                   <li
                     v-for="value in errorCreateRecords"
@@ -260,8 +307,62 @@ const progressTracking = ref(null);
 const completedRecords = ref([]);
 const importModal = shallowRef(null);
 
+<<<<<<< HEAD
 Object.assign(messages[locale.value], messagesIrcc[locale.value]);
 let modal = null;
+=======
+const importDataBase = new ImportDataBase({tokenReader:()=>auth.token(), realm:realm.value});
+const emit = defineEmits(['refreshRecord']);
+
+const userGovernment = computed(()=>{
+    return {
+        identifier: user?.government
+    }
+})
+
+const flattenedFields = computed(() => {
+    const flatten = (obj, path = []) =>
+    Object.entries(obj).reduce(
+        (acc, [key, value]) =>
+        typeof value === "object" && !Array.isArray(value)
+            ? [...acc, ...flatten(value, path.concat(key))]
+            : [...acc, path.concat(key).join(".")],
+        []
+    );
+    return flatten(importDataIRCC?.fields);
+})
+
+const mainHeaders = computed(() => {
+    const flattenHeaders = (obj) => {
+        const headers = [];
+        for (const key in obj) {
+          if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+            headers.push({ label: key, colspan: Object.keys(obj[key]).length });
+          } else {
+            headers.push({ label: key, rowspan: 2 });
+          }
+        }
+        return headers;
+      };
+      return flattenHeaders(importDataIRCC?.fields);
+})
+
+const subHeaders = computed(() => {
+    const flattenSubHeaders = (obj) => {
+        const headers = [];
+        for (const key in obj) {
+            if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+                for (const subKey in obj[key]) {
+                    headers.push({ label: subKey });
+                }
+            }
+        }
+        return headers;
+    };
+    return flattenSubHeaders(importDataIRCC?.fields);
+})
+
+>>>>>>> a109512bb (Coded generic table header and body)
 let importDataIRCC;
 const importDataBase = new ImportDataBase({
   tokenReader: () => auth.token(),
@@ -413,6 +514,7 @@ const handleConfirm = async () => {
       throw new Error("Record already exists");
     }
 
+<<<<<<< HEAD
     parsedFile.value = parsedFile.value.map((file, index) => {
       return {
         ...file,
@@ -439,6 +541,19 @@ const handleConfirm = async () => {
         );
         if (matchingContact) {
           error.emails = matchingContact.emails;
+=======
+const handleSelectedSheetChange = async () => {
+    try {
+        if(selectedSheetIndex.value != null){
+            isLoading.value = true;
+            error.value = null;
+            errorCreateRecords.value = [];
+            successMessage.value = null;
+            progressTracking.value = null;
+            resetFileErrorInParsedFile();
+            parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
+            console.log("parsedFile", parsedFile.value, parsedFile.value.length)
+>>>>>>> a109512bb (Coded generic table header and body)
         }
       });
     }
@@ -517,12 +632,19 @@ const updatedParsedFileWithSuccess = () => {
             item.fileError = false;
           }
         }
+<<<<<<< HEAD
       });
     }
   });
 };
 
 const getRowsFromParsedFile = (error) => {
+=======
+    })
+}
+
+const getRowsFromParsedFile = (error) => {   
+>>>>>>> a109512bb (Coded generic table header and body)
   const matchingItem = parsedFile.value.find((item) => {
     if (error.identifier === item.identifier) {
       return true;
