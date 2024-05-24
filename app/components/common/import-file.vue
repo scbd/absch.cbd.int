@@ -335,6 +335,9 @@ const toggleModal = () => {
   showModal.value = !showModal.value;
   window.scrollTo({ top: 0, behavior: 'smooth' });
   modal.show('static');
+  if (!showModal.value) {
+    emit("refreshRecord");
+  }
 }
 
 const handleFileChange = async (event) => {
@@ -388,7 +391,6 @@ const handleSelectedSheetChange = async () => {
       );
     }
   } catch (err) {
-    console.log("ERR", err);
     parsedFile.value = [];
     error.value = "ERROR: An error occurred while reading the file.";
   }
@@ -597,7 +599,6 @@ const resetFileErrorInParsedFile = () => {
 
 const closeDialog = () => {
   modal.hide();
-  emit("refreshRecord");
 };
 
 const getNestedValue = (obj, path) => {
