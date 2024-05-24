@@ -55,14 +55,7 @@
                     </tbody>
                 </table>
                 
-                <div v-if="hasValue(document.domesticExpendituresData.govCentralDirectlyRelated)  || hasValue(document.domesticExpendituresData.govCentralIndirectlyRelated) ||
-                            hasValue(document.domesticExpendituresData.provincialDirectlyRelated) || hasValue(document.domesticExpendituresData.provincialIndirectlyRelated) ||
-                            hasValue(document.domesticExpendituresData.municipalDirectlyRelated)  || hasValue(document.domesticExpendituresData.municipalIndirectlyRelated)  ||
-                            hasValue(document.domesticExpendituresData.extraDirectlyRelated)      || hasValue(document.domesticExpendituresData.extraIndirectlyRelated)      ||
-                            hasValue(document.domesticExpendituresData.privateDirectlyRelated)    || hasValue(document.domesticExpendituresData.privateIndirectlyRelated)    ||
-                            hasValue(document.domesticExpendituresData.otherDirectlyRelated)      || hasValue(document.domesticExpendituresData.otherIndirectlyRelated)      ||
-                            hasValue(document.domesticExpendituresData.ilcDirectlyRelated)        || hasValue(document.domesticExpendituresData.ilcIndirectlyRelated) ||
-                            document.domesticExpendituresData.sourcesAdditionalComments">
+                <div v-if=" hasValueForDomesticExpendituresData ||document.domesticExpendituresData.sourcesAdditionalComments">
                     <label>{{t("informationOnSourcesAndCategories")}}</label>
 
                     <table class="table table-hover table-condensed">
@@ -166,8 +159,7 @@
                     </div>
                     
                     <div v-if="document.domesticExpendituresData.domesticCollectiveAction!=='notnecessary' && document.domesticExpendituresData.domesticCollectiveAction!=='notyet'">
-                        <div v-if="document.domesticExpendituresData.measurementUnit || document.domesticExpendituresData.contributions ||
-                                    document.domesticExpendituresData.domesticCollectiveActionMethodology || document.domesticExpendituresData.domesticCollectiveActionMethodologyComments">
+                        <div v-if="hasDomesticExpendituresData">
                             <label>{{t("informationOnRole")}}</label>
                         
                             <div v-if="document.domesticExpendituresData.measurementUnit" >
@@ -439,20 +431,46 @@
     })
     const document = computed(()=>props.documentInfo?.body);
 
+
+    const hasValueForDomesticExpendituresData = computed(()=>{
+        return  hasValue(document.value.domesticExpendituresData.govCentralDirectlyRelated) || hasValue(document.value.domesticExpendituresData.govCentralIndirectlyRelated) ||
+                hasValue(document.value.domesticExpendituresData.provincialDirectlyRelated) || hasValue(document.value.domesticExpendituresData.provincialIndirectlyRelated) ||
+                hasValue(document.value.domesticExpendituresData.municipalDirectlyRelated)  || hasValue(document.value.domesticExpendituresData.municipalIndirectlyRelated)  ||
+                hasValue(document.value.domesticExpendituresData.extraDirectlyRelated)      || hasValue(document.value.domesticExpendituresData.extraIndirectlyRelated)      ||
+                hasValue(document.value.domesticExpendituresData.privateDirectlyRelated)    || hasValue(document.value.domesticExpendituresData.privateIndirectlyRelated)    ||
+                hasValue(document.value.domesticExpendituresData.otherDirectlyRelated)      || hasValue(document.value.domesticExpendituresData.otherIndirectlyRelated)      ||
+                hasValue(document.value.domesticExpendituresData.ilcDirectlyRelated)        || hasValue(document.value.domesticExpendituresData.ilcIndirectlyRelated)       
+    });
+
+    const hasDomesticExpendituresData = computed(()=>{
+        return  document.value.domesticExpendituresData.measurementUnit || 
+                document.value.domesticExpendituresData.contributions ||
+                document.value.domesticExpendituresData.domesticCollectiveActionMethodology || 
+                document.value.domesticExpendituresData.domesticCollectiveActionMethodologyComments;        
+    });
+
+
     const options  = {
-        multipliers : 		[{identifier:'units',	      title: {en:'in units'}},   		   {identifier:'thousands', title: {en:'in thousands'}}, 		{identifier:'millions', title: {en:'in millions'}}],
-        methodology : 		[{identifier:'oecd_dac',      title: {en:'OECD DAC Rio markers'}}, {identifier:'other', 	title: {en:'Other'       }}],
-        measures    : 		[{identifier:'no', 	          title: {en:'No' }}, 		  	       {identifier:'some', 		title: {en:'Some measures taken'}}, {identifier:'comprehensive', title: {en:'Comprehensive measures taken'}}],
-        inclusions  : 		[{identifier:'notyet', 	      title: {en:'Not yet stared'}},
-                                {identifier:'some', 	      title: {en:'Some inclusion achieved'}},
-                                {identifier:'comprehensive', title: {en:'Comprehensive inclusion'}}],
-        assessments : 		[{identifier:'notnecessary',  title: {en:'No such assessment necessary'}},
-                                {identifier:'notyet', 	      title: {en:'Not yet started'}},
-                                {identifier:'some', 		  title: {en:'Some assessments undertaken'}},
-                                {identifier:'comprehensive', title: {en:'Comprehensive assessments undertaken'}}],
-        domesticMethodology:[{identifier:'cmfeccabc',     title: {en:'Conceptual and Methodological Framework for Evaluating the Contribution of Collective Action to Biodiversity Conservation'}},
-                                {identifier:'other', 	      title: {en:'Other'}}],
-        yesNo : 			[{identifier:false,  		  title: {en:'No' }    },{identifier:true, 	title: {en:'Yes'}}]
+        multipliers : 		[{identifier:'units',	      title: {en:`${t("units")}`}},  
+                             {identifier:'thousands',     title: {en:`${t("in thousands")}`}}, 
+                             {identifier:'millions',      title: {en:`${t("millions")}`}}],
+        methodology : 		[{identifier:'oecd_dac',      title: {en:`${t("oecd_dac")}`}}, 
+                             {identifier:'other', 	      title: {en:`${t("other")}` }}],
+        measures    : 		[{identifier:'no', 	          title: {en:`${t("no")}`}},  
+                             {identifier:'some',          title: {en:`${t("some")}`}},    
+                             {identifier:'comprehensive', title: {en:`${t("comprehensive")}`}}], 
+        inclusions  : 		[{identifier:'notyet', 	      title: {en:`${t("notYet")}`}},
+                             {identifier:'some', 	      title: {en:`${t("someInclusion")}`}},
+                             {identifier:'comprehensive', title: {en:`${t("comprehensiveInclusion")}`}}],                          
+        assessments : 		[{identifier:'notnecessary',  title: {en:`${t("notNecessary")}`}},                    
+                             {identifier:'notyet', 	      title: {en:`${t("notYet")}`}},
+                             {identifier:'some', 		  title: {en:`${t("someAssessment")}`}},
+                             {identifier:'comprehensive', title: {en:`${t("comprehensiveAssessment")}`}}],
+        domesticMethodology:[{identifier:'cmfeccabc',     title: {en:`${t("cmfeccabc")}`}},
+                             {identifier:'other', 	      title: {en:`${t("other")}`}}],
+        yesNo : 			[{identifier:false,  		  title: {en:`${t("no")}`}},
+                             {identifier:true,            title: {en:`${t("yes")}`}}]
+     
     };
 
     const  filterInclusions = function(id){       
@@ -645,4 +663,7 @@
 
         return parseInt(odaAverage)+parseInt(oofAverage)+parseInt(otherAverage);
     };
+
+
+    
 </script>
