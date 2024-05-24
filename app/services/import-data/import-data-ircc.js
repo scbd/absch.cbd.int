@@ -466,21 +466,9 @@ export class ImportDataIRCC extends ImportDataBase {
           rowId: i - 3,
           fileError: null
         }
-        const processField = (field, fieldName, isNested = false, parentFieldName = null) =>{
-          if (typeof field === 'object' && !isNested) {
-            value[fieldName] = {};
-            for (const subField in field) {
-              processField(field[subField], subField, true, fieldName);
-            }
-          } else if (isNested) {
-            value[parentFieldName][fieldName] = this.columnVal(sheet, this.fields[parentFieldName][fieldName] + i);
-          } else {
-            value[fieldName] = this.columnVal(sheet, field + i);
-          }
-        };
 
         for (const fieldName in this.fields) {
-          processField(this.fields[fieldName], fieldName);
+          this.processField(sheet, this.fields[fieldName], fieldName, i, value);
         }
 
         data.push(value);
@@ -488,6 +476,19 @@ export class ImportDataIRCC extends ImportDataBase {
     }
 
     return data;
+  }
+
+  processField(sheet, field, fieldName, i, value, isNested = false, parentFieldName = null) {
+    if (typeof field === 'object' && !isNested) {
+      value[fieldName] = {};
+      for (const subField in field) {
+        this.processField(sheet, field[subField], subField, i, value, true, fieldName);
+      }
+    } else if (isNested) {
+      value[parentFieldName][fieldName] = this.columnVal(sheet, this.fields[parentFieldName][fieldName] + i);
+    } else {
+      value[fieldName] = this.columnVal(sheet, field + i);
+    }
   }
 
   async fileParser(sheetNames, selectedSheetIndex){
@@ -681,6 +682,8 @@ export class ImportDataIRCC extends ImportDataBase {
   
     return this.cache;
   }
+
+  
   
 
 }
