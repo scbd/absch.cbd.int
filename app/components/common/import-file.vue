@@ -1,147 +1,249 @@
 <template>
-    <button class="btn btn-primary btn-sm" type="button" @click="toggleModal">{{t("importIrcc")}}</button>
+  <button class="btn btn-primary btn-sm" type="button" @click="toggleModal">
+    {{ t("importIrcc") }}
+  </button>
 
-    <ImportModal ref="importModal"
-            :modalTitle="t('importIrccExcel')" 
-            :parsedFile="parsedFile"
-            :handleConfirm="handleConfirm"
-            :toggleModal="toggleModal"
-            :isLoading="isLoading"
-            :handleClearClick="handleClearClick" >
-        <!-- <div class="row">
-            <div class="col text-start" v-if="userGovernment">
-                <button class="btn btn-secondary text-uppercase" disabled>{{user.government || 'Government'}}</button>
+    <div
+      class="modal fade mt-1"
+      ref="importModal"
+      data-bs-backdrop="static"
+      tabindex="-1"
+      aria-hidden="true"
+      id="import-modal"
+    >
+      <div
+        class="modal-dialog modal-xl modal-dialog-centered"
+        style="max-width: 80vw;"
+        role="document"
+      >
+        <div class="modal-content">
+          <div class="modal-header color-black">
+            <div class="py-0 px-1">
+              <h5 class="modal-title">{{ t("importIrccExcel") }}</h5>
+              <p class="m-0">{{ t("pleaseSelectExcelInfo") }}</p>
             </div>
-            {{locale}}-{{selectedLanguage}}
-            <div class="col">
-                <ng v-vue-ng:km-form-languages v-model:ng-model="selectedLanguage"></ng>
-            </div>
-            <div class="col text-end">
-                <button class="btn btn-secondary" disabled>{{realm.value}}</button>
-            </div>
-        </div> -->
-        <div class="row mb-3">
-            <div class="col-md-4 text-start">
-                
-                <button class="btn btn-primary position-relative" type='button' :disabled="isLoading">
-                    {{t("browse")}}
-                    <input type="file" name="file" accept=".xlsx, .xls" @change="handleFileChange"
+            <button
+              type="button"
+              class="border-0 close"
+              @click="closeDialog()"
+              :disabled="isLoading"
+              aria-label="Close"
+            >
+              <i class="bi bi-x-circle-fill icon-lg"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-3">
+              <div class="col-md-4 text-start">
+                <button
+                  class="btn btn-primary position-relative"
+                  type="button"
+                  :disabled="isLoading"
+                >
+                  {{ t("browse") }}
+                  <input
+                    type="file"
+                    name="file"
+                    accept=".xlsx, .xls"
+                    @change="handleFileChange"
                     @click="onFileInputClick"
-                    class="position-absolute fs-1 opacity-0 top-0 start-0 w-100 h-100">
+                    class="position-absolute fs-1 opacity-0 top-0 start-0 w-100 h-100"
+                  />
                 </button>
-            </div>
-             <div class="col-md-4 d-flex align-items-center justify-content-center fw-bold">
-                <span v-if="parsedFile.length > 0">{{t('totalRecords')}} {{parsedFile.length}}</span>
-            </div>
-            <div class="col-md-4 d-flex justify-content-end" v-if="multipleImportSheets.length">
+              </div>
+              <div
+                class="col-md-4 d-flex align-items-center justify-content-center fw-bold"
+              >
+                <span v-if="parsedFile.length > 0"
+                  >{{ t("totalRecords") }} {{ parsedFile.length }}</span
+                >
+              </div>
+              <div
+                class="col-md-4 d-flex justify-content-end"
+                v-if="multipleImportSheets.length"
+              >
                 <span class="min-w-50">
-                    <select class="form-select" :disabled="isLoading"
-                        v-model="selectedSheetIndex" @change="handleSelectedSheetChange">
-                        <option v-for="(sheet, index) in multipleImportSheets" :key="index" :value="index">{{sheet}}</option>
-                    </select>
+                  <select
+                    class="form-select"
+                    :disabled="isLoading"
+                    v-model="selectedSheetIndex"
+                    @change="handleSelectedSheetChange"
+                  >
+                    <option
+                      v-for="(sheet, index) in multipleImportSheets"
+                      :key="index"
+                      :value="index"
+                      >{{ sheet }}</option
+                    >
+                  </select>
                 </span>
-                <span href="#" class="mt-2 ms-2 fa-lg fa fa-info-circle color-litegrey"
-                    data-bs-toggle="tooltip" data-html="true" data-container="body" data-placement="top"
-                    :title="t('multipleSheetAlert')">
+                <span
+                  href="#"
+                  class="mt-2 ms-2 fa-lg fa fa-info-circle color-litegrey"
+                  data-bs-toggle="tooltip"
+                  data-html="true"
+                  data-container="body"
+                  data-placement="top"
+                  :title="t('multipleSheetAlert')"
+                >
                 </span>
+              </div>
             </div>
-        </div>
-        <div class="row table-container table-responsive" v-if="parsedFile.length">
-            <table class="table table-striped table-bordered table-condensed">
+            <div
+              class="row table-container table-responsive"
+              v-if="parsedFile.length"
+            >
+              <table class="table table-striped table-bordered table-condensed">
                 <thead>
-                    <tr>
-                        <th scope="col" rowspan="2">#</th>
-                        <th v-for="header in mainHeaders" :key="header.label" :colspan="header.colspan" :rowspan="header.rowspan" class="text-center">
-                            {{ t(header.label) }}
-                        </th>
-                    </tr>
-                    <tr>
-                        <th v-for="header in subHeaders" :key="header.label">{{ t(header.label) }}</th>
-                    </tr>
+                  <tr>
+                    <th scope="col" rowspan="2">#</th>
+                    <th
+                      v-for="header in mainHeaders"
+                      :key="header.label"
+                      :colspan="header.colspan"
+                      :rowspan="header.rowspan"
+                      class="text-center"
+                    >
+                      {{ t(header.label) }}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th v-for="header in subHeaders" :key="header.label">
+                      {{ t(header.label) }}
+                    </th>
+                  </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(data,index) in parsedFile" :key="index"
+                  <tr
+                    v-for="(data, index) in parsedFile"
+                    :key="index"
                     :class="{
-                            'bg-lightpink': data.fileError === true,
-                            'bg-lightgreen': data.fileError === false
-                        }"
+                      'bg-lightpink': data.fileError === true,
+                      'bg-lightgreen': data.fileError === false,
+                    }"
+                  >
+                    <th scope="row">{{ data.rowId }}</th>
+                    <td
+                      v-for="field in flattenedFields"
+                      :key="field"
+                      class="p-2"
                     >
-                        <th scope="row">{{data.rowId}}</th>
-                        <td v-for="field in flattenedFields" :key="field" class="p-2">
-                            <div
-                                v-if="isLongText(getNestedValue(data, field))"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                :title="getNestedValue(data, field)"
-                                class="short-text"
-                            >
-                                {{ getNestedValue(data, field) }}
-                            </div>
-                            <span v-else>
-                                {{ getNestedValue(data, field) }}
-                            </span>
-                        </td>
-                    </tr>
+                      <div
+                        v-if="isLongText(getNestedValue(data, field))"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        :title="getNestedValue(data, field)"
+                        class="short-text"
+                      >
+                        {{ getNestedValue(data, field) }}
+                      </div>
+                      <span v-else>
+                        {{ getNestedValue(data, field) }}
+                      </span>
+                    </td>
+                  </tr>
                 </tbody>
-            </table>
-        </div>
-        
-        <div class="row mt-5 error__container" v-if="errorCreateRecords
-        .length">
-            <div class="col-12 alert alert-danger d-flex justify-content-between align-items-center">
+              </table>
+            </div>
+
+            <div
+              class="row mt-5 error__container"
+              v-if="errorCreateRecords.length"
+            >
+              <div
+                class="col-12 alert alert-danger d-flex justify-content-between align-items-center"
+              >
                 <ul class="flex-1">
-                    <li v-for="(value) in errorCreateRecords" :key="value.identifier">Error creating 
-                        <span v-if="value.draft">draft</span> record on row {{getRowsFromParsedFile(value)}} - {{value.error}}</li>
+                  <li
+                    v-for="value in errorCreateRecords"
+                    :key="value.identifier"
+                  >
+                    Error creating <span v-if="value.draft">draft</span> record
+                    on row {{ getRowsFromParsedFile(value) }} -
+                    {{ value.error }}
+                  </li>
                 </ul>
-                <button class="btn btn-primary" @click="onRetryClick">Retry</button>
+                <button class="btn btn-primary" @click="onRetryClick">
+                  Retry
+                </button>
+              </div>
             </div>
-        </div>
-        <div class="row mt-4" v-else-if="error && !isLoading">
-            <div class="col-12 text-center">
-                <span class="alert alert-danger" >{{error}}</span>
+            <div class="row mt-4" v-else-if="error && !isLoading">
+              <div class="col-12 text-center">
+                <span class="alert alert-danger">{{ error }}</span>
+              </div>
             </div>
-        </div>
-        <div class="row mt-4"  v-if="successMessage && !isLoading">
-            <div class="col-12 text-center">
-                <div class="alert alert-success">{{successMessage}}</div>
+            <div class="row mt-4" v-if="successMessage && !isLoading">
+              <div class="col-12 text-center">
+                <div class="alert alert-success">{{ successMessage }}</div>
+              </div>
             </div>
-        </div>
-        <div class="row mt-3" v-show="isLoading">
-            <div class="col-12 text-center">
-                <span>{{t("loadingMessage")}}</span>
-                <br>
+            <div class="row mt-3" v-show="isLoading">
+              <div class="col-12 text-center">
+                <span>{{ t("loadingMessage") }}</span>
+                <br />
                 <div class="spinner-border" role="status">
-                    <span class="sr-only">{{t("loading")}}...</span>
+                  <span class="sr-only">{{ t("loading") }}...</span>
                 </div>
+              </div>
             </div>
+
+            <div class="progress row" v-if="progressTracking > 0">
+              <div
+                class="progress-bar"
+                role="progressbar"
+                :style="{ width: progressPercentage + '%' }"
+                :aria-valuenow="progressPercentage"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                {{ Math.round(progressPercentage) }}%
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer d-block">
+            <button
+              class="btn btn-primary float-start"
+              v-show="parsedFile.length"
+              @click.stop="handleConfirm"
+              :disabled="isLoading ? true : false"
+            >
+              {{ t("confirm") }}
+            </button>
+            <button
+              class="btn btn-secondary float-end"
+              type="button"
+              v-show="parsedFile.length"
+              :disabled="isLoading ? true : false"
+              @click="handleClearClick"
+            >
+              {{ t("clear") }}
+            </button>
+          </div>
         </div>
-        
-        <div class="progress row" v-if="progressTracking > 0">
-            <div class="progress-bar" role="progressbar" 
-            :style="{ width: progressPercentage + '%' }" :aria-valuenow="progressPercentage" aria-valuemin="0" aria-valuemax="100">{{Math.round(progressPercentage)}}%</div>
-        </div>
-    </ImportModal>
+      </div>
+    </div>
 </template>
 
 <script setup>
-import { ref, shallowRef, computed, defineEmits, reactive, watch } from 'vue';
-import ImportModal from "./import-modal.vue"
-import { useRealm } from '../../services/composables/realm.js';
-import { useUser, useAuth } from '@scbd/angular-vue/src/index.js';
-import { ImportDataBase } from "../../services/import-data/import-data-base"
-import { ImportDataIRCC } from "../../services/import-data/import-data-ircc"
-import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
-import messages from "../../app-text/views/forms/edit/abs/edit-absPermit.json"
-import messages2 from "../../app-text/components/common/import-file.json";
-import kmTerm from '~/components/km/KmTerm.vue';
-import { useI18n } from 'vue-i18n';
+import { ref, shallowRef, computed, defineEmits, reactive, watch, onMounted } from "vue";
+import { useRealm } from "../../services/composables/realm.js";
+import { Modal } from "bootstrap";
+import { useUser, useAuth } from "@scbd/angular-vue/src/index.js";
+import { ImportDataBase } from "../../services/import-data/import-data-base";
+import { ImportDataIRCC } from "../../services/import-data/import-data-ircc";
+import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js";
+import messages from "../../app-text/components/common/import-file.json";
+import messagesIrcc from "../../app-text/components/common/import-file-ircc.json";
+import kmTerm from "~/components/km/KmTerm.vue";
+import { useI18n } from "vue-i18n";
 
 const { locale } = useI18n();
-Object.assign(messages[locale.value], messages2[locale.value]);
 const { t } = useI18n({ messages });
 const realm = useRealm();
-const user = useUser()
-const auth = useAuth()
+const user = useUser();
+const auth = useAuth();
 
 const showModal = ref(false);
 const isLoading = ref(false);
@@ -156,244 +258,280 @@ let file = ref(null);
 const xlsxWorkbook = ref(null);
 const progressTracking = ref(null);
 const completedRecords = ref([]);
+const importModal = shallowRef(null);
 
-const importDataBase = new ImportDataBase({tokenReader:()=>auth.token(), realm:realm.value});
-const emit = defineEmits(['refreshRecord']);
+Object.assign(messages[locale.value], messagesIrcc[locale.value]);
+let modal = null;
+let importDataIRCC;
+const importDataBase = new ImportDataBase({
+  tokenReader: () => auth.token(),
+  realm: realm.value,
+});
 
-const userGovernment = computed(()=>{
-    return {
-        identifier: user?.government
-    }
-})
+const emit = defineEmits(["refreshRecord"]);
+
+const userGovernment = computed(() => {
+  return {
+    identifier: user?.government,
+  };
+});
 
 const flattenedFields = computed(() => {
-    const flatten = (obj, path = []) =>
+  const flatten = (obj, path = []) =>
     Object.entries(obj).reduce(
-        (acc, [key, value]) =>
+      (acc, [key, value]) =>
         typeof value === "object" && !Array.isArray(value)
-            ? [...acc, ...flatten(value, path.concat(key))]
-            : [...acc, path.concat(key).join(".")],
-        []
+          ? [...acc, ...flatten(value, path.concat(key))]
+          : [...acc, path.concat(key).join(".")],
+      []
     );
-    return flatten(importDataIRCC?.fields);
-})
+  return flatten(importDataIRCC?.fields);
+});
 
 const mainHeaders = computed(() => {
-    const flattenHeaders = (obj) => {
-        const headers = [];
-        for (const key in obj) {
-          if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
-            headers.push({ label: key, colspan: Object.keys(obj[key]).length });
-          } else {
-            headers.push({ label: key, rowspan: 2 });
-          }
-        }
-        return headers;
-      };
-      return flattenHeaders(importDataIRCC?.fields);
-})
+  const flattenHeaders = (obj) => {
+    const headers = [];
+    for (const key in obj) {
+      if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+        headers.push({ label: key, colspan: Object.keys(obj[key]).length });
+      } else {
+        headers.push({ label: key, rowspan: 2 });
+      }
+    }
+    return headers;
+  };
+  return flattenHeaders(importDataIRCC?.fields);
+});
 
 const subHeaders = computed(() => {
-    const flattenSubHeaders = (obj) => {
-        const headers = [];
-        for (const key in obj) {
-            if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
-                for (const subKey in obj[key]) {
-                    headers.push({ label: subKey });
-                }
-            }
+  const flattenSubHeaders = (obj) => {
+    const headers = [];
+    for (const key in obj) {
+      if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+        for (const subKey in obj[key]) {
+          headers.push({ label: subKey });
         }
-        return headers;
-    };
-    return flattenSubHeaders(importDataIRCC?.fields);
-})
-
-let importDataIRCC;
-const importModal = ref(null);
-
-function toggleModal() {
-    parsedFile.value = [];
-    error.value = null;
-    errorCreateRecords.value = [];
-    successMessage.value = null;
-    multipleImportSheets.value = [];
-    selectedSheetIndex.value = null;
-    progressTracking.value = null;
-    resetFileErrorInParsedFile();
-    showModal.value = !showModal.value;
-    importModal.value.showDialog();
-    if(!showModal.value){
-        emit("refreshRecord")
+      }
     }
-}
-
-watch(progressTracking, (newValue) => {
-    if(newValue < 100){
-        updatedParsedFileWithSuccess();
-    }
-})
+    return headers;
+  };
+  return flattenSubHeaders(importDataIRCC?.fields);
+});
 
 const progressPercentage = computed(() => {
   const total = parsedFile.value?.length + importDataIRCC?.contacts?.length;
   return total > 0 ? (progressTracking.value / total) * 100 : 0;
 });
 
+const toggleModal = () => {
+  parsedFile.value = [];
+  error.value = null;
+  errorCreateRecords.value = [];
+  successMessage.value = null;
+  multipleImportSheets.value = [];
+  selectedSheetIndex.value = null;
+  progressTracking.value = null;
+  resetFileErrorInParsedFile();
+  showModal.value = !showModal.value;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  modal.show('static');
+  if (!showModal.value) {
+    emit("refreshRecord");
+  }
+}
+
 const handleFileChange = async (event) => {
+  isLoading.value = true;
+  file.value = event.target.files[0];
+  error.value = null;
+  errorCreateRecords.value = [];
+  successMessage.value = null;
+  selectedSheetIndex.value = 0;
+  multipleImportSheets.value = [];
+  progressTracking.value = null;
+  resetFileErrorInParsedFile();
+  try {
+    const { sheetNames, workbook } = await importDataBase.readSheet(file.value);
+    xlsxWorkbook.value = workbook;
+    importDataIRCC = new ImportDataIRCC(
+      realm.value,
+      locale.value,
+      user.value.government,
+      workbook,
+      auth
+    );
+    if (sheetNames.length > 1) {
+      multipleImportSheets.value = sheetNames;
+      handleSelectedSheetChange();
+    } else {
+      parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(
+        multipleImportSheets.value,
+        selectedSheetIndex.value
+      );
+    }
+  } catch (err) {
+    parsedFile.value = [];
+    error.value = "ERROR: An error occurred while reading the file.";
+  }
+  isLoading.value = false;
+};
+
+const handleSelectedSheetChange = async () => {
+  try {
+    if (selectedSheetIndex.value != null) {
+      isLoading.value = true;
+      error.value = null;
+      errorCreateRecords.value = [];
+      successMessage.value = null;
+      progressTracking.value = null;
+      resetFileErrorInParsedFile();
+      parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(
+        multipleImportSheets.value,
+        selectedSheetIndex.value
+      );
+    }
+  } catch (err) {
+    parsedFile.value = [];
+    error.value = "ERROR: An error occurred while reading the file.";
+  }
+  isLoading.value = false;
+};
+
+const handleConfirm = async () => {
+  try {
     isLoading.value = true;
-    file.value = event.target.files[0];
     error.value = null;
     errorCreateRecords.value = [];
     successMessage.value = null;
-    selectedSheetIndex.value = 0;
-    multipleImportSheets.value = [];
     progressTracking.value = null;
     resetFileErrorInParsedFile();
-    try{
-        const {sheetNames, workbook} = await importDataBase.readSheet(file.value);
-        xlsxWorkbook.value = workbook;
-        importDataIRCC = new ImportDataIRCC(realm.value, locale.value, user.value.government, workbook, auth);
-        if(sheetNames.length > 1){
-            multipleImportSheets.value = sheetNames;
-            handleSelectedSheetChange();
-        }else{
-            parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
-        }
-    }catch(err){
-        parsedFile.value = [];
-        error.value = "ERROR: An error occurred while reading the file."
+    const result = await importDataIRCC.fileParser(
+      multipleImportSheets.value,
+      selectedSheetIndex.value
+    );
+    if (result?.duplicate) {
+      throw new Error("Record already exists");
     }
-    isLoading.value = false;
-}
 
-const handleSelectedSheetChange = async () => {
-    try {
-        if(selectedSheetIndex.value != null){
-            isLoading.value = true;
-            error.value = null;
-            errorCreateRecords.value = [];
-            successMessage.value = null;
-            progressTracking.value = null;
-            resetFileErrorInParsedFile();
-            parsedFile.value = importDataIRCC.readSheetToDisplayOnUI(multipleImportSheets.value, selectedSheetIndex.value)
-            console.log("parsedFile", parsedFile.value, parsedFile.value.length)
+    parsedFile.value = parsedFile.value.map((file, index) => {
+      return {
+        ...file,
+        identifier: result[index].header.identifier,
+      };
+    });
+    await importDataBase.validateAndCreateNationalRecord(
+      importDataIRCC.contacts,
+      result,
+      progressTracking,
+      errorCreateRecords,
+      completedRecords
+    );
+    updateParsedFileWithError(errorCreateRecords);
+    if (
+      errorCreateRecords.value === undefined ||
+      errorCreateRecords.value.length === 0
+    ) {
+      successMessage.value = "Successfully created national record.";
+    } else {
+      errorCreateRecords.value.forEach((error) => {
+        const matchingContact = importDataIRCC.contacts.find(
+          (contact) => contact.header.identifier === error.identifier
+        );
+        if (matchingContact) {
+          error.emails = matchingContact.emails;
         }
-    } catch (err) {
-        console.log(err)
-        parsedFile.value = [];
-        error.value = "ERROR: An error occurred while reading the file."
+      });
     }
-    isLoading.value = false;
-}
-
-const handleConfirm = async () => {
-    try {
-        isLoading.value = true;
-        error.value = null;
-        errorCreateRecords.value = [];
-        successMessage.value = null;
-        progressTracking.value = null;
-        resetFileErrorInParsedFile();
-        const result = await importDataIRCC.fileParser(multipleImportSheets.value, selectedSheetIndex.value);
-        console.log("result", result);
-        if(result?.duplicate){
-            throw new Error("Record already exists");
-        }
-        
-        parsedFile.value = parsedFile.value.map((file,index)=>{
-            return {
-                ...file,
-                identifier: result[index].header.identifier
-            }
-        })
-        await importDataBase.validateAndCreateNationalRecord(importDataIRCC.contacts, result, progressTracking, errorCreateRecords,completedRecords);
-        console.log("ERROR RESPONSE", errorCreateRecords.value);
-        updateParsedFileWithError(errorCreateRecords);
-        if(errorCreateRecords.value === undefined || errorCreateRecords.value.length === 0){
-            successMessage.value = "Successfully created national record.";
-        }else{
-            errorCreateRecords.value.forEach(error => {
-            const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
-                if (matchingContact) {
-                    error.emails = matchingContact.emails;
-                }
-            });
-            // errorCreateRecords.value = errorResponse;
-        }
-
-    } catch (err) {
-        console.log(err);
-        error.value = `Error: ${err.message || 'An error occurred while creating national record.'}`
-    }
-    isLoading.value = false;
-    progressTracking.value = null;
-}
+  } catch (err) {
+    error.value = `Error: ${err.message ||
+      "An error occurred while creating national record."}`;
+  }
+  isLoading.value = false;
+  progressTracking.value = null;
+};
 
 const updateParsedFileWithError = (errorCreateRecords) => {
-    errorCreateRecords.value.forEach(error => {
-    const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === error.identifier);
-        if (matchingContact) {
-            error.emails = matchingContact.emails;
-        }
-    });
-    parsedFile.value.forEach(item => {
-        item.fileError = false;
-        const matchingError = errorCreateRecords.value.find(error => error.identifier === item.identifier);
-        if(matchingError){
+  errorCreateRecords.value.forEach((error) => {
+    const matchingContact = importDataIRCC.contacts.find(
+      (contact) => contact.header.identifier === error.identifier
+    );
+    if (matchingContact) {
+      error.emails = matchingContact.emails;
+    }
+  });
+  parsedFile.value.forEach((item) => {
+    item.fileError = false;
+    const matchingError = errorCreateRecords.value.find(
+      (error) => error.identifier === item.identifier
+    );
+    if (matchingError) {
+      item.fileError = true;
+    } else {
+      errorCreateRecords.value.forEach((error) => {
+        if (error.contact) {
+          if (
+            item.pic.email === error.emails[0] ||
+            item.provider.email === error.emails[0]
+          ) {
             item.fileError = true;
-        }else{
-            errorCreateRecords.value.forEach((error) => {
-            if(error.contact){
-                if(item.pic.email === error.emails[0] || item.provider.email === error.emails[0]){
-                    item.fileError = true;
-                }
-            }
-        })
+          }
         }
-    })
+      });
+    }
+  });
 
-    parsedFile.value.sort((a, b) => {
-        if (a.fileError && !b.fileError) {
-            return -1;
-        }
-        if (!a.fileError && b.fileError) {
-            return 1;
-        }
-        return 0;
-    });; 
-}   
+  parsedFile.value.sort((a, b) => {
+    if (a.fileError && !b.fileError) {
+      return -1;
+    }
+    if (!a.fileError && b.fileError) {
+      return 1;
+    }
+    return 0;
+  });
+};
 
 const updatedParsedFileWithSuccess = () => {
-    completedRecords.value.forEach(record => {
-    const matchingContact = importDataIRCC.contacts.find(contact => contact.header.identifier === record.identifier);
-        if (matchingContact) {
-            record.emails = matchingContact.emails;
-        }
-    }); 
+  completedRecords.value.forEach((record) => {
+    const matchingContact = importDataIRCC.contacts.find(
+      (contact) => contact.header.identifier === record.identifier
+    );
+    if (matchingContact) {
+      record.emails = matchingContact.emails;
+    }
+  });
 
-    parsedFile.value.forEach(item => {
-        // item.fileError = false;
-        const matchingError = completedRecords.value.find(record => record.identifier === item.identifier);
-        if(matchingError){
+  parsedFile.value.forEach((item) => {
+    const matchingError = completedRecords.value.find(
+      (record) => record.identifier === item.identifier
+    );
+    if (matchingError) {
+      item.fileError = false;
+    } else {
+      completedRecords.value.forEach((record) => {
+        if (record.contact) {
+          if (
+            item.pic.email === record.emails[0] ||
+            item.provider.email === record.emails[0]
+          ) {
             item.fileError = false;
-        }else{
-            completedRecords.value.forEach((record) => {
-            if(record.contact){
-                if(item.pic.email === record.emails[0] || item.provider.email === record.emails[0]){
-                    item.fileError = false;
-                }
-            }
-        })
+          }
         }
-    })
-}
+      });
+    }
+  });
+};
 
-const getRowsFromParsedFile = (error) => {   
+const getRowsFromParsedFile = (error) => {
   const matchingItem = parsedFile.value.find((item) => {
     if (error.identifier === item.identifier) {
       return true;
     }
     if (error.contact) {
-      if (item.pic.email === error.emails[0] || item.provider.email === error.emails[0]) {
+      if (
+        item.pic.email === error.emails[0] ||
+        item.provider.email === error.emails[0]
+      ) {
         return true;
       }
     }
@@ -404,67 +542,82 @@ const getRowsFromParsedFile = (error) => {
 };
 
 const onFileInputClick = (event) => {
-    event.target.value = "";
-}
+  event.target.value = "";
+};
 
 const handleClearClick = () => {
-    parsedFile.value = [];
-    error.value = null;
-    successMessage.value = null;
-    multipleImportSheets.value = [];
-    selectedSheetIndex.value = null;
-    errorCreateRecords.value = [];
-    progressTracking.value = null;
-    resetFileErrorInParsedFile();
-}
+  parsedFile.value = [];
+  error.value = null;
+  successMessage.value = null;
+  multipleImportSheets.value = [];
+  selectedSheetIndex.value = null;
+  errorCreateRecords.value = [];
+  progressTracking.value = null;
+  resetFileErrorInParsedFile();
+};
 
 const onRetryClick = async () => {
-    error.value = null;
-    isLoading.value = true;
-    const errorResponse = [];
-    resetFileErrorInParsedFile();
-    try {
-        const promises = errorCreateRecords.value.map(async (record) => {
-            const response = await importDataBase.retryCreateNationalRecord(record.document, record.draft)
-            if(response.error){
-                errorResponse.push({
-                    identifier: document.header.identifier,
-                    draft: true,
-                    document,
-                    contact: true,
-                    error: response.error
-                })
-            }
-        })      
-        await Promise.all(promises);
+  error.value = null;
+  isLoading.value = true;
+  const errorResponse = [];
+  resetFileErrorInParsedFile();
+  try {
+    const promises = errorCreateRecords.value.map(async (record) => {
+      const response = await importDataBase.retryCreateNationalRecord(
+        record.document,
+        record.draft
+      );
+      if (response.error) {
+        errorResponse.push({
+          identifier: document.header.identifier,
+          draft: true,
+          document,
+          contact: true,
+          error: response.error,
+        });
+      }
+    });
+    await Promise.all(promises);
 
-        if(errorResponse.length === 0){
-            successMessage.value = "Successfully created national record.";
-            errorCreateRecords.value = [];
-        }else{
-            errorCreateRecords.value = errorResponse;            
-        }
-        updateParsedFileWithError(errorCreateRecords);
-        isLoading.value = false;
-    } catch (error) {
-        error.value = "Error: An error occurred while creating national record."
-        isLoading.value = false;
-    }       
-}
+    if (errorResponse.length === 0) {
+      successMessage.value = "Successfully created national record.";
+      errorCreateRecords.value = [];
+    } else {
+      errorCreateRecords.value = errorResponse;
+    }
+    updateParsedFileWithError(errorCreateRecords);
+    isLoading.value = false;
+  } catch (error) {
+    error.value = "Error: An error occurred while creating national record.";
+    isLoading.value = false;
+  }
+};
 
 const resetFileErrorInParsedFile = () => {
-    parsedFile.value.forEach((file) => file.fileError = null)
+  parsedFile.value.forEach((file) => (file.fileError = null));
+};
+
+const closeDialog = () => {
+  modal.hide();
+};
+
+const getNestedValue = (obj, path) => {
+  return path.split(".").reduce((o, key) => (o ? o[key] : ""), obj);
 }
 
-function getNestedValue(obj, path) {
-    return path.split(".").reduce((o, key) => (o ? o[key] : ""), obj);
+const isLongText = (text) => {
+  return text && text.length > 45;
 }
 
-function isLongText(text) {
-    return text && text.length > 45;
-}
+watch(progressTracking, (newValue) => {
+  if (newValue < 100) {
+    updatedParsedFileWithSuccess();
+  }
+});
 
+onMounted(async () => {
+  modal = new Modal(importModal.value);
+});
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

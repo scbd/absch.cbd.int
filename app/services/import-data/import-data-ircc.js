@@ -454,7 +454,6 @@ export class ImportDataIRCC extends ImportDataBase {
 
   readSheetToDisplayOnUI(sheetNames, selectedSheetIndex){
     let sheet =  this.workbook.Sheets[sheetNames[selectedSheetIndex]];
-    // let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
     const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
     const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
     const data = []
@@ -506,23 +505,18 @@ export class ImportDataIRCC extends ImportDataBase {
       }
       
       this.hashedValue[sheetNames[selectedSheetIndex]] = hashed;
-      console.log("HASHED", this.hashedValue);
       
-     // let rows = Number(sheet["!ref"].split(":")[1].replace(/[a-z]+/i, ""));
       const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 });// ToDo: use the  this.workbook.Sheets
       const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
       let irccs = [];
-    //   let contacts = [];
       let limit = 10; // number of rows to load
       const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
-      // TODO: revert back to TotalCount
       for(let i=4; i<=TotalCount; i++){
         this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
       } 
       await this.cacheApiCalls();
 
-      // TODO: revert back to TotalCount
       for(let i=4;i<=TotalCount;i++){
         if (!super.columnVal(sheet, this.fields.language + i)) {
           console.log(
@@ -541,7 +535,6 @@ export class ImportDataIRCC extends ImportDataBase {
 
         if (!picGranted || !matEstablished) {
           console.log(`Pic or Mat not consented for record on row ${i}.`);
-          // continue;
         }
         let authorityId = await super.findByUid(super.columnVal(sheet, this.fields.cna + i),this.cache, this.fields.cna);
 
@@ -663,17 +656,14 @@ export class ImportDataIRCC extends ImportDataBase {
     const uniqueAuthorityIds = Array.from(new Set(this.authorityIds.filter(Boolean)));
   
     const apiCalls = uniqueAuthorityIds.map(async (uid) => {
-      //API CALL
       const uniqueId = uid.trim()
         .match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i);
-        console.log("UNIQUEID", uniqueId, uniqueId[4]);
       const document = this.kmDocumentApi.paramDocuments(uniqueId[4]);
       return document;
     });
   
     const results = await Promise.all(apiCalls);
   
-    // Assuming kmDocumentApi.paramDocuments returns an object, you can then update cache.fields.C
     results.forEach((document, index) => {
       const uniqueId = uniqueAuthorityIds[index].trim()
         .match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i);

@@ -123,7 +123,6 @@ export class ImportDataBase {
     if (this.columnVal(sheet, fields.existing + i).trim() != "") {
       let contactIds = [];
       let existingContacts = this.columnVal(sheet, fields.existing + i).split(",");
-      console.log("EXISTING CONTACT", existingContacts, existingContacts.length)
       for (let j = 0; j < existingContacts.length; j++) {
         contactIds.push({ identifier: await this.findByUid(existingContacts[j]) });
       }
@@ -144,7 +143,6 @@ export class ImportDataBase {
   
       if (type.toLowerCase() == "organization") {
         if (this.columnVal(sheet, fields.orgName_firstName + i).trim() != "")
-          //org name
           name = this.columnVal(sheet, fields.orgName_firstName + i).trim();
   
         contact.type = "organization";
@@ -153,21 +151,15 @@ export class ImportDataBase {
           [language]: this.columnVal(sheet, fields.acronym_lastName + i).trim(),
         };
       } else {
-        // if(columnVal(sheet, fields.salutation+i).trim()!='') //salutation
-        //     name = columnVal(sheet, fields.salutation+i).trim();
-  
         if (this.columnVal(sheet, fields.orgName_firstName + i).trim() != "")
-          //firstname
           name =
             name + " " + this.columnVal(sheet, fields.orgName_firstName + i).trim();
   
         if (this.columnVal(sheet, fields.acronym_lastName + i).trim() != "")
-          //lastname
           name =
             name + " " + this.columnVal(sheet, fields.acronym_lastName + i).trim();
   
         contact.type = "person";
-        // contact.prefix      = { [language] : columnVal(sheet, fields.csalutation+i).trim() };
         contact.firstName = this.columnVal(sheet, fields.orgName_firstName + i).trim();
         contact.lastName = this.columnVal(sheet, fields.acronym_lastName + i).trim();
       }
@@ -184,7 +176,6 @@ export class ImportDataBase {
       };
     }
   
-    // contact.prefix    == con.prefix   &&
     let exists = _.find(contacts, function(con) {
       return (
         (con.type.toLowerCase() == "organization" &&
