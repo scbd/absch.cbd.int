@@ -4,328 +4,11 @@
             <!--TODO: add compare-val for fields  -->
 
             <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->           
-          
-            <!-- section basic information begin -->
-            <section v-if="document.government || document.ownerBehalf ||   document.respondentName || document.respondentDesignation ||
-                document.respondentOrganization || document.respondentDepartment ||  document.respondentPhones || document.respondentEmails" >
-        
-                <legend>{{t("identificationOfRespondent")}}</legend>
-                
-                <div v-if="document.government">
-                    <label> {{t("country")}}</label>
-                    <div class="km-value">
-                        <km-term :value="document.government" :locale="locale"></km-term>   
-                    </div>
-                </div>
-                
-                <div v-if="document.ownerBehalf">
-                    <label>{{t("ownerBehalf")}}</label>
-                    <div class="km-value">                       
-                        <km-term :value="document.ownerBehalf" :locale="locale"></km-term>   
-                    </div>
-                </div>
-
-                <div v-if="document.respondentName || document.respondentDesignation || document.respondentOrganization || document.respondentDepartment ||
-                    document.respondentPhones || document.respondentEmails" >
-                    <legend>{{t("contactDetails")}}</legend>
-
-                    <div v-if="document.respondentName">
-                        <label>{{t("name")}}</label>
-                        <div class="km-value">{{document.respondentName}}</div>
-                    </div>
-                  
-                    <div v-if="document.respondentDesignation">
-                        <label>{{t("title")}}</label>                      
-                        <ng v-vue-ng:km-value-ml :value="document.respondentDesignation" :locales="locale" html></ng>   
-                    </div>
-
-                    <div v-if="document.respondentOrganization">
-                        <label>{{t("organization")}}</label>                      
-                        <ng v-vue-ng:km-value-ml :value="document.respondentOrganization" :locales="locale" html></ng>   
-                    </div>
-                
-                    <div v-if="document.respondentDepartment">
-                        <label>{{t("department")}}</label>                    
-                        <ng v-vue-ng:km-value-ml :value="document.respondentDepartment" :locales="locale" html></ng> 
-                    </div>
-
-                    <div v-if="document.respondentPhones">
-                        <label>{{t("phoneNumbers")}}</label>
-                        <div class="km-value">
-                            <span v-for="item in document.respondentPhones">{{item}}</span>
-                        </div>
-                    </div>
-                    
-                    <div v-if="document.respondentEmails">
-                        <label>{{t("emails")}}</label>
-                        <div class="km-value">
-                            <span v-for="item in document.respondentEmails">
-                                <a translation-url :href="`mailto:${item}`">{{item}}</a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div v-if="document.completedDate">
-                    <label>{{t("date")}}</label>
-                    <div class="km-value">{{document.completedDate}}</div>
-                </div>
-            </section>
-            <!-- section basic information end -->
-
-            <!-- section 1 begin -->
-            <section v-if="document.internationalResources">
-                <legend>{{t("section1")}}</legend>
-                <div v-if="document.internationalResources.baselineData">                
-                    <label>{{t("amountOfResources")}} <u>{{t("providedByCountry")}}</u> {{t( "inSupportOfBiodiversity")}} </label><br/> 
-                    <label class="help-block">{{t("nominalAmount")}}</label><br/>              
-                    <label> 1.1.1	{{t("baselineInformation")}}</label>
-        
-                                   
-                    <div v-if="document.internationalResources.currency && !isEmpty(document.internationalResources.currency)" >                      
-                        <label>{{t("currency")}}</label>
-                        <span class="km-value">                         
-                            <km-term :value="document.internationalResources.currency " :locale="locale"></km-term> 
-                        </span>
-                    </div>
-        
-                    
-                    <div v-if="document.internationalResources.multiplier" >
-                        <label>{{t("allValues")}}</label>
-                        <div class="km-value">
-                            <div  v-for="term in filteredMultipliers(document.internationalResources.multiplier)">                           
-                                {{lstring(term.title,locale)}} 
-                            </div>
-                        </div>
-                    </div>
-        
-                   
-                    <div v-if="document.internationalResources.baselineData.baselineFlows" class="table-responsive">
-                        <table class="table table-hover table-bordered table-condensed">
-                            <thead>
-                                <tr class="active">
-                                    <th>{{t("year")}}</th>
-                                    <th>{{t("oda")}}</th>
-                                    <th>{{t("oof")}}</th>
-                                    <th>{{t("otherFlows")}}</th>
-                                    <th>{{t("total")}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="flow in orderedBaselineFlows" >
-                                    <td>{{flow.year}}</td>
-                                    <td>{{flow.odaAmount | "number:0"}}</td>
-                                    <td>{{flow.oofAmount | "number:0"}}</td>
-                                    <td>{{flow.otherAmount | "number:0"}}</td>
-                                    <td>{{flow.odaAmount + flow.oofAmount + flow.otherAmount  | "number:0"}}</td>
-                                </tr>
-                                <tr class="active">
-                                    <td><strong>{{t("averageBaseline")}}</strong></td>
-                                    <td><strong>{{typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'odaAmount')  | "number:0"}}</strong></td>
-                                    <td><strong>{{typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'oofAmount')  | "number:0"}}</strong></td>
-                                    <td><strong>{{typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'otherAmount')  | "number:0"}}</strong></td>
-                                    <td><strong>{{totalAverageAmount() | "number:0"}}</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div v-if="document.internationalResources.baselineData.odaCategories || document.internationalResources.baselineData.odaOofType ||
-                                  document.internationalResources.baselineData.odaoofActions || document.internationalResources.baselineData.otherActions ||
-                                  document.internationalResources.baselineData.methodologyUsed || document.internationalResources.baselineData.coefficient ||
-                                  document.internationalResources.baselineData.odaConfidenceLevel || document.internationalResources.baselineData.oofConfidenceLevel ||
-                                  document.internationalResources.baselineData.otherConfidenceLevel || document.internationalResources.baselineData.methodologicalComments">
-                        <label> {{t("methodologicalInformation")}}</label>                   
-                             
-                        <div v-if="document.internationalResources.baselineData.odaCategories">
-                            <label>{{t("odaIncludes")}}</label>
-                            <div class="km-value">
-                                <li v-for="term in document.internationalResources.baselineData.odaCategories">                             
-                                    <km-term :value="term" :locale="locale"></km-term>  
-                                </li>
-                            </div>
-                        </div>        
-                     
-                        <div v-if="document.internationalResources.baselineData.odaOofType">
-                            <label> {{t("odaOofIncludes")}}</label>
-                            <div class="km-value">
-                                <km-term :value="document.internationalResources.baselineData.odaOofType" :locale="locale"></km-term>  
-                            </div>
-                        </div>            
-                     
-                        <div v-if="document.internationalResources.baselineData.odaoofActions">
-                            <label> {{t("odaOofIncludes")}}</label>
-                            <div class="km-value">
-                                <li v-for="term in document.internationalResources.baselineData.odaoofActions">                              
-                                    <km-term :value="term" :locale="locale"></km-term>  
-                                </li>
-                            </div>
-                        </div>        
-                     
-                        <div v-if="document.internationalResources.baselineData.otherActions">
-                            <label>{{t("otherFlowsInclude")}}</label>
-                            <div class="km-value">
-                                <li v-for="term in document.internationalResources.baselineData.otherActions">                              
-                                    <km-term :value="term" :locale="locale"></km-term>                       
-                                </li>
-                            </div>
-                        </div>            
-                       
-                        <div v-if="document.internationalResources.baselineData.methodologyUsed">
-                            <label> {{t("methodology")}}</label>
-                            <div v-if="document.internationalResources.baselineData.methodologyUsed!='other'">                                
-                                <div class="km-value" v-for="term in filteredMethodology(document.internationalResources.baselineData.methodologyUsed)">
-                                    {{lstring(term.title,locale)}}  
-                                </div>
-                            </div>
-
-                            <div v-if="document.internationalResources.baselineData.methodologyUsedComments" >                           
-                                <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.baselineData.methodologyUsedComments" :locales="locale" html></ng> 
-                            </div>
-                        </div>
-                    
-                        <div v-if="document.internationalResources.baselineData.coefficient" >
-                            <label>{{t("coefficient")}}</label>
-                            <div class="km-value ">
-                                {{document.internationalResources.baselineData.coefficient}}%
-                            </div>
-                        </div>        
-                       
-                        <div v-if="document.internationalResources.baselineData.odaConfidenceLevel || document.internationalResources.baselineData.oofConfidenceLevel || document.internationalResources.baselineData.otherConfidenceLevel">
-                            <label>{{t("averageConfidenceLevels")}}</label>
-                        </div>
-                    
-                        <div v-if="document.internationalResources.baselineData.odaConfidenceLevel" >
-                            <label>{{t("oda")}}:</label>
-                            <div class="km-value">                           
-                                <km-term :value="document.internationalResources.baselineData.odaConfidenceLevel" :locale="locale"></km-term>
-                            </div>
-                        </div>
-                     
-                        <div v-if="document.internationalResources.baselineData.oofConfidenceLevel" >
-                            <label>{{t("oof")}}</label>
-                            <div class="km-value">
-                                <km-term :value="document.internationalResources.baselineData.oofConfidenceLevel" :locale="locale"></km-term>
-                            </div>
-                        </div>
-
-                        <div v-if="document.internationalResources.baselineData.otherConfidenceLevel" >
-                            <label>{{t("otherFlows")}}:</label>
-                            <span class="km-value">
-                                <km-term :value="document.internationalResources.baselineData.otherConfidenceLevel" :locale="locale"></km-term>
-                            </span>
-                        </div>
-        
-                        <div v-if="document.internationalResources.baselineData.methodologicalComments">
-                            <label>{{t( "otherMethodologicalObservations")}}</label>
-                            <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.baselineData.methodologicalComments " :locales="locale" html></ng>
-                        </div>
-                    </div>
-                </div>        
-             
-                <div v-if="document.internationalResources.progressData && (document.internationalResources.progressData.progressFlows || document.internationalResources.progressData.odaConfidenceLevel ||
-                              document.internationalResources.progressData.oofConfidenceLevel || document.internationalResources.progressData.otherConfidenceLevel ||
-                              document.internationalResources.hasPrivateSectorMeasures)">
-                    <label>{{t("monitoringProgress")}}</label>
-                    <div v-if="document.internationalResources.progressData.progressFlows" class="table-responsive">
-                        <table class="table table-hover table-bordered table-condensed">
-                            <thead>
-                                <tr>
-                                    <th>{{t("year")}}</th>
-                                    <th>{{t("oda")}}</th>
-                                    <th>{{t("oof")}}</th>
-                                    <th>{{t("otherFlows")}}</th>
-                                    <th>{{t("total")}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="flow in orderedProgressFlows" >
-                                    <td>{{flow.year}}</td>
-                                    <td>{{flow.odaAmount   | "number:0"}}</td>
-                                    <td>{{flow.oofAmount   | "number:0"}}</td>
-                                    <td>{{flow.otherAmount | "number:0"}}</td>
-                                    <td>{{flow.odaAmount + flow.oofAmount + flow.otherAmount | "number:0"}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>        
-                 
-                    <div v-if="document.internationalResources.progressData.odaConfidenceLevel || document.internationalResources.progressData.oofConfidenceLevel || document.internationalResources.progressData.otherConfidenceLevel">
-                        <div><strong>{{t("methodologicalInformation")}}</strong></div>
-                        <label>{{t("averageConfidenceLevels")}}</label>
-                        <div v-if="document.internationalResources.progressData.odaConfidenceLevel" >
-                            <label>{{t("oda")}}</label>
-                            <span class="km-value">
-                                <km-term :value="document.internationalResources.progressData.odaConfidenceLevel" :locale="locale"></km-term>
-                            </span>
-                        </div>
-                        <div v-if="document.internationalResources.progressData.oofConfidenceLevel" >
-                            <label>{{t("oof")}}</label>
-                            <span class="km-value">
-                                <km-term :value="document.internationalResources.progressData.oofConfidenceLevel" :locale="locale"></km-term>
-                            </span>
-                        </div>
-                        <div v-if="document.internationalResources.progressData.otherConfidenceLevel" >
-                            <label>{{t("otherFlows")}}</label>
-                            <span class="km-value">
-                                <km-term :value="document.internationalResources.progressData.otherConfidenceLevel" :locale="locale"></km-term>   
-                            </span>
-                        </div>
-                    </div>
-                           
-                    <div v-if="document.internationalResources.hasPrivateSectorMeasures">
-                        <label>{{t("measuresPrivateSector")}}</label>
-                        
-                        <div class="km-value" style="list-style-type: none;">
-                            <li v-for="term in filteredMeasures(document.internationalResources.hasPrivateSectorMeasures)">
-                                {{lstring(term.title,locale)}}
-                            </li>
-                        </div>
-                       
-                        <div v-if="document.internationalResources.hasPrivateSectorMeasuresComments">
-                            <label>{{t("provideAdditionalInformation")}}</label>                            
-                            <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.hasPrivateSectorMeasuresComments" :locales="locale" html></ng> 
-                      </div>
-                    </div>        
-                </div>
-            </section>
-            <!-- section 1 end -->
-           
-           <!-- section 2 begin -->
-            <section v-if="document.hasNationalBiodiversityInclusion">
-                <legend>{{t("inclusion")}}</legend>               
-                <label>{{t("includeBiodiversity")}}</label>                
-                              
-                <div class="km-value" >
-                   <span v-for="term in  filterInclusions(document.hasNationalBiodiversityInclusion) ">
-                    {{lstring(term.title, locale)}} 
-                    </span>                 
-                </div>
-                
-                <div v-if="document.hasNationalBiodiversityInclusionComments">
-                    <label>{{t("provideAdditionalInformation")}}</label>                 
-                    <ng  v-vue-ng:km-value-ml  :value="document.hasNationalBiodiversityInclusionComments" :locales="locale" html></ng> 
-                </div>
-            </section>
-            <!-- section 2 end -->
-      
-            <!-- section 3 begin -->
-            <section v-if="document.hasBiodiversityAssessment">
-                <legend>{{t("assessmentAndEvaluation")}}</legend>
-                <label>{{t("assessOrEvaluate")}}</label>
-                
-                <div class="km-value" >
-                    <span v-for="term in  filteredAssessments(document.hasBiodiversityAssessment)">
-                        {{lstring(term.title ,locale)}}                       
-                    </span>
-                </div>
-                <div v-if="document.hasBiodiversityAssessmentComments">
-                    <label>{{t("provideAdditionalInformation")}}</label>                                         
-                    <ng v-vue-ng:km-value-ml :value="document.hasBiodiversityAssessmentComments" :locales="locale" html></ng>  
-                </div>
-            </section>
-            <!-- section 3 end -->
+            <!-- <ng v-vue-ng:document-date></ng> -->    
+            
+            <!-- section basic information and section 1-3 -->
+            <view-financial-report :document="document" :locale="locale"> 
+            </view-financial-report>  
 
             <!-- section 4 begin -->
             <section v-if="document.domesticExpendituresData">
@@ -606,8 +289,8 @@
                     <span class="km-value" v-for="term in filteredMultipliers(document.fundingNeedsData.multiplier)">
                         {{lstring(term.title,locale)}} 
                     </span>
-                </div>
-          
+                </div>          
+            
                 <table v-if="document.fundingNeedsData.annualEstimates" class="table table-hover table-condensed">
                     <thead>
                         <tr>
@@ -739,11 +422,10 @@
 <script setup>
     import { computed } from 'vue'; 
     import { lstring } from '~/services/filters/lstring.js'; 
-    import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
-    import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
-    import '~/views/forms/view/directives/view-record-reference.directive.js'
+    import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'   
     import '~/views/forms/view/directives/view-reference-records.directive.js'
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
+    import viewFinancialReport from '~/views/forms/view/directives/view-financial-report.vue';
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/financial-report-2015.json';
     import { useI18n } from 'vue-i18n';  
@@ -801,46 +483,40 @@
         return options.methodology.filter((option) => option.identifier===id );
     }; 
 
-
     const orderedExpenditures = computed(()=>{
-        if (!document.value.domesticExpendituresData.expenditures) return [];     
+        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];     
         return  _.orderBy(document.value.domesticExpendituresData.expenditures, 'year');
     });
 
     const orderedContributions = computed(()=>{
-        if (!document.value.domesticExpendituresData.contributions) return [];     
+        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.contributions)) return [];     
         return  _.orderBy(document.value.domesticExpendituresData.contributions, 'year');
     });
 
     const orderedAnnualEstimates = computed(()=>{       
-        if (!document.value.fundingNeedsData.annualEstimates) return [];  
+        if (!(document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates)) return [];  
        return  _.orderBy(document.value.fundingNeedsData.annualEstimates, 'year');
     });   
 
     const orderedDomesticSources = computed(()=>{
-        if (!document.value.nationalPlansData.domesticSources) return [];     
+        if (!(document.value.nationalPlansData && document.value.nationalPlansData.domesticSources)) return [];     
         return  _.orderBy(document.value.nationalPlansData.domesticSources, 'name');
     });
 
     const orderedInternationalSources = computed(()=>{
-        if (!document.value.nationalPlansData.internationalSources) return [];     
+        if (!(document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];     
         return  _.orderBy(document.value.nationalPlansData.internationalSources, 'name');
     });
 
     const orderedBaselineFlows = computed(()=>{
-        if (!document.value.internationalResources.baselineData.baselineFlows) return [];     
+        if (!(document.value.internationalResources && document.value.internationalResources.baselineData && document.value.internationalResources.baselineData.baselineFlows)) return [];     
         return  _.orderBy(document.value.internationalResources.baselineData.baselineFlows, 'year');
     });
 
     const orderedProgressFlows = computed(()=>{
-        if (! document.value.internationalResources.progressData.progressFlows) return [];     
+        if (! (document.value.internationalResources && document.value.internationalResources.progressData && document.value.internationalResources.progressData.progressFlows)) return [];     
         return  _.orderBy(document.value.internationalResources.progressData.progressFlows, 'year');
-    });
-
-   
-
-  
-                           
+    });                   
 
     const typeAverageAmount = function(flows, type){
         if(!flows) return 0;
@@ -890,8 +566,11 @@
 
     const annualEstimatesHasYear = function (year) {
         if(!year) return false;
-        if(document && document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates){
-            const estimate =document.value.fundingNeedsData.annualEstimates.find((item) => item.year = year);
+        if(document.value && document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates){
+            const estimate =document.value.fundingNeedsData.annualEstimates.find((item) => { 
+                item.year == year;
+            });
+          
             if(estimate)
                 return true;
         }
@@ -903,7 +582,9 @@
         if(!year) return 0;
 
         if(document.value && document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates){
-            const estimate = document.value.fundingNeedsData.annualEstimates.find((item) => item.year = year);  
+            const estimate = document.value.fundingNeedsData.annualEstimates.find((item) => {
+                item.year == year
+            });  
             if(estimate && estimate.fundingGapAmount)
                 return estimate.fundingGapAmount;  
         }
@@ -913,7 +594,7 @@
     const getNationalPlansSourcesTotal = function(member, year){
         if(!year || !member) return 0;
 
-        if(document && document.value.nationalPlansData && document.value.nationalPlansData[member]){
+        if(document.value && document.value.nationalPlansData && document.value.nationalPlansData[member]){
 
             var prop = "amount"+year;
             var items;
@@ -922,7 +603,7 @@
             var sources = document.value.nationalPlansData[member];//jshint ignore:line
           
             
-                if(_.isEmpty(_.last(sources)))
+            if(_.isEmpty(_.last(sources)))
                 items = _.initial(sources);
             console.log("items",items);
 
@@ -943,7 +624,6 @@
                         
     const getNationalPlansRemainingGapByYear = function(year){
         if(!year) return 0;
-
         return getFundingGapYear(year) - (getNationalPlansSourcesTotal('domesticSources', year)  + getNationalPlansSourcesTotal('internationalSources', year)) ;
     };
 
