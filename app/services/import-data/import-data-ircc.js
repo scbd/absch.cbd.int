@@ -510,7 +510,8 @@ export class ImportDataIRCC extends ImportDataBase {
       const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
       let irccs = [];
-      const TotalCount = rowCount > this.constructor.ROW_LIMIT ? this.constructor.ROW_LIMIT + 3 : rowCount + 3;
+      let limit = 10; // number of rows to load
+      const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
       for(let i=4; i<=TotalCount; i++){
         this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
       } 
@@ -671,8 +672,4 @@ export class ImportDataIRCC extends ImportDataBase {
   
     return this.cache;
   }
-
-  
-  
-
 }
