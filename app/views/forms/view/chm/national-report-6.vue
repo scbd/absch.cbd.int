@@ -10,30 +10,27 @@
             <!-- section I begin -->
             <section v-if="document.government || document.notReportingOnNationalTargets || (document.targetPursued && document.nationalTargets.length)"   >
                 <legend> {{ t("sectionI") }} </legend>
-                
-                <!-- tested -->
+               
                 <div v-if="document.government">                       
                     <label> {{ t("country") }}</label>
                     <div class="km-value">                   
                         <km-term :value="document.government" :locale="locale"></km-term>                       
                     </div>                        
                 </div>
-
-                <!-- tested -->
+           
                 <div v-if="document.notReportingOnNationalTargets">
                     <label><km-term :value="document.government" :locale="locale"></km-term> {{ t("hasAdopted") }} </label>
                     <label>{{ t("informationOnWhy") }} <km-term :value="document.government " :locale="locale"></km-term>{{ t("isChoosingTo") }}  </label>
                     <ng v-vue-ng:km-value-ml  :value="document.notReportingOnNationalTargetsReason" :locales="locale" html></ng>   
                 </div>
 
-                <!-- TODO: confirm test result: no return -->
                 <div v-if="document.targetPursued && document.nationalTargets.length">
-                    <label>{{ t("nationalTargets") }}</label>  
-                        <!-- {{ document.nationalTargets }} -->
-                    <div v-for="target in document.nationalTargets">     
-                        <!-- {{ target.identifier }}   -->
-                        <ng v-vue-ng:view-referenced-records  v-model:ng-model="target.identifier" ></ng>         
-                    </div>                                
+                    <label>{{ t("nationalTargets") }}</label> 
+                    <div v-for="documentInfo in nationalTargetDocumentInfos">   
+                        <div class="km-value">
+                            <national-target :document-info="documentInfo" :locale="locale"></national-target>
+                        </div>
+                    </div>                                      
                 </div>
             </section> 
             <!-- section I end -->
@@ -48,29 +45,18 @@
                         <label>{{t("measures")}}</label>
                         <ng v-vue-ng:km-value-ml  :value="implementationMeasure.description" :locales="locale" html></ng>  
                     </div>
-
-                    <!-- TODO: test issue: don't get result by use km-term -->                    
-                    <div v-if="implementationMeasure.nationalTargets">                      
-                        <label>{{t("nationalTargets")}}</label>  
-                        <!-- {{ implementationMeasure.nationalTargets}}       -->
-                     
+                 
+                    <div v-if="implementationMeasure.nationalTargets"> 
+                        <label>{{t("nationalTargets")}}</label> 
                         <div class="km-value">
-                            <div v-for="nationalTarget in implementationMeasure.nationalTargets" >                               
-                                <km-term :value="nationalTarget" :locale="locale"></km-term>                            
+                            <div v-for="nationalTarget in implementationMeasure.nationalTargets" >                             
+                                {{lstring(nationalTargetTitles[nationalTarget.identifier],locale)}}
                             </div> 
                         </div> 
-                        <!-- <div class="km-value">
-                            <ng v-vue-ng:view-terms-hierarchy  v-model:ng-model="implementationMeasure.nationalTargets" locale="locale"  term-domain="nationalTargets"></ng>
-                         </div>                             -->
                     </div>
                                    
                     <div v-if="implementationMeasure.aichiTargets">
-                        <label>{{t( "aichiTargets")}}</label>     
-                        <!-- <div class="km-value">
-                            <div v-for="aichiTarget in implementationMeasure.aichiTargets" > 
-                                <km-term :value="aichiTarget" :locale="locale"></km-term> 
-                            </div>  
-                        </div>    -->                     
+                        <label>{{t( "aichiTargets")}}</label>
                         <div class="km-value">
                             <ng v-vue-ng:view-terms-hierarchy  v-model:ng-model="implementationMeasure.aichiTargets" locale="locale"  term-domain="aichiTargets"></ng>
                          </div>               
@@ -79,7 +65,7 @@
                     
                     <div v-if="implementationMeasure.assessment">
                         <label>{{t("assessment")}}</label>                       
-                        <div class="km-value" >                   
+                        <div class="km-value" > 
                             <km-term :value="implementationMeasure.assessment" :locale="locale"></km-term>
                         </div>
                     </div>
@@ -127,28 +113,24 @@
             <!-- section II end -->
 
             <!-- section III begin -->
-            <section v-if="document.progressAssessments">              
+            <section v-if="document.progressAssessments"> 
                 <legend> {{ t("sectionIII") }} </legend>
-                <div v-for="progressAssessment in document.progressAssessments">
-                    {{ progressAssessment }}
+                <div v-for="progressAssessment in document.progressAssessments">                   
                     <label>
-                        <!-- Progress Assessment for -->
-                        
+                        <!-- Progress Assessment for -->                        
                         <span v-if="progressAssessment.aichiTarget"> 
                             <!-- AICHI target  --> 
                             <km-term :value="progressAssessment.aichiTarget" :locale="locale"></km-term>                        
                         </span>
-                        <!-- TODO: can't get result through km-term -->
-                        <span v-if="progressAssessment.nationalTarget">
-                            <!-- national target  -->
-                            <km-term :value="progressAssessment.nationalTarget" :locale="locale"></km-term>     
-                        </span>
+                       
+                        <div v-if="progressAssessment.nationalTarget">
+                            <!-- national target  -->                                                      
+                             <ng v-vue-ng:km-value-ml  :value="nationalTargetTitles[progressAssessment.nationalTarget.identifier]" :locales="locale" html></ng>
+                       </div>
                     </label>                 
                     
-                    <!--TODO: can't get result.use api get documentInfo by process show progress assessment page --> 
-                    <!-- <national-assessment :document-info="progressAssessmentDocumentInfo" :locale="locale"></national-assessment>   -->
-                    <div v-if="progressAssessment.assessment &&progressAssessment.assessment.identifier">
-                        <ng v-vue-ng:view-referenced-records  v-model:ng-model="progressAssessment.assessment.identifier" ></ng>  
+                    <div v-if="progressAssessment.assessment && progressAssessment.assessment.identifier">
+                       <national-assessment :document-info="progressAssessmentDocumentInfos[progressAssessment.assessment.identifier] " :locale="locale"></national-assessment>
                     </div>     
                     <br/>
                 </div>
@@ -161,13 +143,13 @@
                 <div v-for="aichiTarget in document.nationalContribution" > 
                     <div v-if="aichiTarget.identifier">                                                
                         <km-term :value="aichiTarget" :locale="locale"></km-term> 
-                        <!-- TODO: get nationalReport data -->                        
+                                            
                         <div v-if="aichiTarget.identifier=='AICHI-TARGET-16' ">
                             <!-- {{ aichiTarget }} -->
                             <div>
-                                <label >{{t('interimNationalReport')}}</label>
-                                <div v-if="aichiTarget.nationalReport && aichiTarget.nationalReport.identifier ">
-                                    <ng v-vue-ng:view-referenced-records  v-model:ng-model="aichiTarget.nationalReport.identifier" ></ng>  
+                                <label >{{t("interimNationalReport")}}</label>
+                                <div v-if="aichiTarget.nationalReport && aichiTarget.nationalReport.identifier">
+                                   <ng v-vue-ng:view-record-reference  v-model:ng-model="aichiTarget.nationalReport.identifier" :locales="locale" html></ng> 
                                 </div>
                             </div>
                             <div v-if="aichiTarget.nationalReportDescription">
@@ -178,15 +160,13 @@
                                 <label>{{t("description")}}</label>                               
                                 <ng v-vue-ng:km-value-ml  :value="aichiTarget.linkedRecordsDescription" :locales="locale" html></ng>
                             </div>
-                        </div>
-
+                        </div>                
                       
-                        <!-- TODO: get resourceMobilisationReport data--> 
                         <div v-if="aichiTarget.identifier=='AICHI-TARGET-20' ">
                             <!-- {{ aichiTarget }} -->
                             <label>{{t("finalcialReportingFramework")}}</label><br/>
-                            <div v-if="aichiTarget.resourceMobilisationReport && aichiTarget.resourceMobilisationReport.identifier">
-                                <ng v-vue-ng:view-referenced-records  v-model:ng-model="aichiTarget.resourceMobilisationReport.identifier" ></ng>  
+                            <div v-if="aichiTarget.resourceMobilisationReport && aichiTarget.resourceMobilisationReport.identifier">                                 
+                                <ng v-vue-ng:view-record-reference  v-model:ng-model="aichiTarget.resourceMobilisationReport.identifier" :locales="locale" html></ng>                        
                             </div>
                         </div> 
                         
@@ -314,7 +294,7 @@
                     <ng v-vue-ng:km-value-ml  :value="document.biodiversityCountryProfile.monitoringReviewingMechanisms" :locales="locale" html></ng>
                 </div>               
             </section>	
-            <!-- section VII end -->    
+            <!-- section VII end -->   
 
         
             <section v-if="document.relevantInformation || document.relevantDocuments">
@@ -324,8 +304,7 @@
             </section>           
         
             <div> 
-                <!-- TODO: test -->
-                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" :locales="locale" html></ng>                        
             </div>         
         </div>  
         <!-- TODO: add footer  -->
@@ -334,25 +313,64 @@
     </div>
 </template>
 <script setup>
-    import { computed} from 'vue'; 
+    import { computed, onMounted,ref} from 'vue'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
-    import '~/views/forms/view/directives/view-record-reference.directive.js'
-    import '~/views/forms/view/directives/view-reference-records.directive.js' 
+    import '~/views/forms/view/directives/view-record-reference.directive.js'  
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-report-6.json';
     import { useI18n } from 'vue-i18n';    
     import { lstring } from '~/components/kb/filters';
     import '~/views/forms/directives/view-terms-hierarchy.js'   
- 
+    import KmDocumentApi from "~/api/km-document";
+    import { useAuth } from "@scbd/angular-vue/src/index.js";
+    import nationalTarget from '~/views/forms/view/chm/national-target.vue' 
+    import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue' 
+
+    const auth = useAuth();
+    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});    
 
     const { t } = useI18n({ messages });
 
     const props = defineProps({
-        documentInfo: { type: Object, required: true },
-        locale      : { type:String}
+        documentInfo: { type:Object, required: true },
+        locale      : { type:String, required: true },
     })
     const document = computed(()=>props.documentInfo?.body);
-       
+
+
+    const getSingleDocument= function(identifier) { 
+        return new Promise(async function (resolve, reject) {
+            const res = await kmDocumentApi.getDocument(identifier);       
+            resolve(res);
+        }) 
+    }
+
+    const nationalTargetDocumentInfos = ref([]);
+    const nationalTargetTitles = ref({});
+    const  getNationalTargetDocuments = async function() {
+        const promiseArray = document.value.nationalTargets.map(async (item) => {
+            const res = getSingleDocument(item.identifier).then((result) => {                              
+                nationalTargetDocumentInfos.value.push({body:result});
+                nationalTargetTitles.value[item.identifier]=result.title;
+            });              
+        }) 
+    }
+
+    const progressAssessmentDocumentInfos = ref({});
+    const  getProgressAssessmentDocuments = async function() {    
+        const promiseArray = document.value.progressAssessments.map(async (item) => {
+            const res = getSingleDocument(item.assessment.identifier).then((result) => {    
+                //console.log("progress-prodata", item.assessment.identifier, {body:result}); 
+                progressAssessmentDocumentInfos.value[item.assessment.identifier]={body:result};
+            });              
+        })   
+    }
+
+    onMounted(() => {      
+        getNationalTargetDocuments();    
+        getProgressAssessmentDocuments();   
+   })
+
 </script>
