@@ -14,12 +14,14 @@
            <section v-if="document.domesticExpendituresData">
                 <legend>{{t("role")}}</legend>
                 <div><label>{{t("hasYourCountry")}}</label></div>
-                <div class="km-value"  style="list-style-type: none;">                  
-                    <li v-for="term in filteredAssessments(document.domesticExpendituresData.domesticCollectiveAction)">                     
-                        {{lstring(term.title,locale)}}
-                    </li>
+                <div v-if="document.domesticExpendituresData.domesticCollectiveAction">
+                    <div  class="km-value"  style="list-style-type: none;" >                  
+                        <li v-for="term in filteredAssessments(document.domesticExpendituresData.domesticCollectiveAction)">                     
+                            {{lstring(term.title,locale)}}
+                        </li>
+                    </div>
                 </div>
-        
+
                 <div><label>{{t("additionalInformationOnAssessment")}}</label></div>
         
                 <div v-if="document.domesticExpendituresData.currency" >
@@ -229,7 +231,7 @@
    import { useI18n } from 'vue-i18n';
    import { lstring } from '~/services/filters/lstring.js'; 
    import KmDocumentApi from "~/api/km-document";
-   import {  useAuth } from "@scbd/angular-vue/src/index.js";
+   import { useAuth } from "@scbd/angular-vue/src/index.js";
    const auth = useAuth();
 
    const { t } = useI18n({ messages });
@@ -238,26 +240,54 @@
        documentInfo: { type:Object, required:true},
        locale      : { type:String, required:true}
    })
+
    const document = computed(()=>props.documentInfo?.body);
 
-   onMounted(() => {
-       loadBaselineDocuments();
-   })
+   const orderedBaselineFlows = computed(()=>{
+        if (!(document.value.internationalResources && document.value.internationalResources.baselineData && document.value.internationalResources.baselineData.baselineFlows)) return [];     
+        return  _.orderBy(document.value.internationalResources.baselineData.baselineFlows, 'year');
+    });
 
-   const options  = {
-        multipliers : 		[{identifier:'units',	      title: {en:'in units'}},   		   {identifier:'thousands', title: {en:'in thousands'}}, 		{identifier:'millions', title: {en:'in millions'}}],
-        methodology : 		[{identifier:'oecd_dac',      title: {en:'OECD DAC Rio markers'}}, {identifier:'other', 	title: {en:'Other'       }}],
-        measures    : 		[{identifier:'no', 	          title: {en:'No' }}, 		  	       {identifier:'some', 		title: {en:'Some measures taken'}}, {identifier:'comprehensive', title: {en:'Comprehensive measures taken'}}],
-        inclusions  : 		[{identifier:'notyet', 	      title: {en:'Not yet stared'}},
-                             {identifier:'some', 	      title: {en:'Some inclusion achieved'}},
-                             {identifier:'comprehensive', title: {en:'Comprehensive inclusion'}}],
-        assessments : 		[{identifier:'notnecessary',  title: {en:'No such assessment necessary'}},
-                             {identifier:'notyet', 	      title: {en:'Not yet started'}},
-                             {identifier:'some', 		  title: {en:'Some assessments undertaken'}},
-                             {identifier:'comprehensive', title: {en:'Comprehensive assessments undertaken'}}],
-        domesticMethodology:[{identifier:'cmfeccabc',     title: {en:'Conceptual and Methodological Framework for Evaluating the Contribution of Collective Action to Biodiversity Conservation'}},
-                             {identifier:'other', 	      title: {en:'Other'}}],
-        yesNo : 			[{identifier:false,  		  title: {en:'No' }    },{identifier:true, 	title: {en:'Yes'}}]
+    const orderedProgressFlows = computed(()=>{
+        if (! (document.value.internationalResources && document.value.internationalResources.progressData && document.value.internationalResources.progressData.progressFlows)) return [];     
+        return  _.orderBy(document.value.internationalResources.progressData.progressFlows, 'year');
+    });  
+
+    const orderedExpenditures = computed(()=>{
+        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];     
+        return  _.orderBy(document.value.domesticExpendituresData.expenditures, 'year');
+    });
+
+    const orderedContributions = computed(()=>{
+        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.contributions)) return [];     
+        return  _.orderBy(document.value.domesticExpendituresData.contributions, 'year');
+    });
+
+    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
+    const hasBaselineDocument = ref(false);
+    const baselineDocuments = ref([]);
+    const baselineDocument = ref({});  
+
+    const options  = {
+        multipliers :       [{identifier:'units',         title: {en:`${t("units")}`}},  
+                             {identifier:'thousands',     title: {en:`${t("thousands")}`}}, 
+                             {identifier:'millions',      title: {en:`${t("millions")}`}}],
+        methodology :       [{identifier:'oecd_dac',      title: {en:`${t("oecd_dac")}`}}, 
+                             {identifier:'other',         title: {en:`${t("other")}` }}],
+        measures    :       [{identifier:'no',            title: {en:`${t("no")}`}},  
+                             {identifier:'some',          title: {en:`${t("some")}`}},    
+                             {identifier:'comprehensive', title: {en:`${t("comprehensive")}`}}], 
+        inclusions  :       [{identifier:'notyet',        title: {en:`${t("notYet")}`}},
+                             {identifier:'some',          title: {en:`${t("someInclusion")}`}},
+                             {identifier:'comprehensive', title: {en:`${t("comprehensiveInclusion")}`}}],  
+        assessments :       [{identifier:'notnecessary',  title: {en:`${t("notNecessary")}`}},                    
+                             {identifier:'notyet',        title: {en:`${t("notYet")}`}},
+                             {identifier:'some',          title: {en:`${t("someAssessment")}`}},
+                             {identifier:'comprehensive', title: {en:`${t("comprehensiveAssessment")}`}}],
+        domesticMethodology:[{identifier:'cmfeccabc',     title: {en:`${t("cmfeccabc")}`}},
+                             {identifier:'other',         title: {en:`${t("other")}`}}],
+        yesNo :             [{identifier:false,           title: {en:`${t("no")}`}},
+                             {identifier:true,            title: {en:`${t("yes")}`}}]
     };
 
    const  filteredAssessments = function(id){       
@@ -278,31 +308,9 @@
 
     const  filteredMethodology = function(id){       
         return options.methodology.filter((option) => option.identifier===id );
-    }; 
-        
-    const orderedBaselineFlows = computed(()=>{
-        if (!(document.value.internationalResources && document.value.internationalResources.baselineData && document.value.internationalResources.baselineData.baselineFlows)) return [];     
-        return  _.orderBy(document.value.internationalResources.baselineData.baselineFlows, 'year');
-    });
-
-    const orderedProgressFlows = computed(()=>{
-        if (! (document.value.internationalResources && document.value.internationalResources.progressData && document.value.internationalResources.progressData.progressFlows)) return [];     
-        return  _.orderBy(document.value.internationalResources.progressData.progressFlows, 'year');
-    });
-  
-
-    const orderedExpenditures = computed(()=>{
-        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];     
-        return  _.orderBy(document.value.domesticExpendituresData.expenditures, 'year');
-    });
-
-    const orderedContributions = computed(()=>{
-        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.contributions)) return [];     
-        return  _.orderBy(document.value.domesticExpendituresData.contributions, 'year');
-    });
-
-
-    // TODO: test
+    };         
+    
+    // TODO:test
     const orderedAnnualEstimates  = computed(()=>{
         if (!(baselineDocument.value.fundingNeedsData && baselineDocument.value.fundingNeedsData.annualEstimates)) return [];     
         return  _.orderBy(baselineDocument.value.fundingNeedsData.annualEstimates, 'year');
@@ -317,7 +325,6 @@
         if (! (document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];     
         return  _.orderBy( document.value.nationalPlansData.internationalSources, 'name');
     });
-
 
     const totalAverageAmount = function(){
         var odaAverage   = 0;
@@ -424,9 +431,7 @@
         if(!year) return 0;
         return getFundingGapYear(year) - (getNationalPlansSourcesTotal('domesticSources', year)  + getNationalPlansSourcesTotal('internationalSources', year)) ;
     };
-
-    //2020
-   
+     
     const getBaselineFundingGapYear = function(year){
         if(!year) return 0;
         if(baselineDocument.value && baselineDocument.value.fundingNeedsData && baselineDocument.value.fundingNeedsData.annualEstimates){
@@ -439,8 +444,7 @@
         }
         return 0;
     };			
-
-    //2020
+    
 	const annualEstimatesHasYear = function (year) {
         if(!year) return false;
         if(baselineDocument.value && baselineDocument.value.fundingNeedsData && baselineDocument.value.fundingNeedsData.annualEstimates){
@@ -452,65 +456,35 @@
         return false;
     };
 
-    // 2020
-    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
-    const hasBaselineDocument = ref(false);
-    const baselineDocuments = ref([]);
-    const baselineDocument = ref({});
-   
-
 	const loadBaselineDocuments = function(){
-
-        // var sQuery = "type eq '" + encodeURI('resourceMobilisation') + "'";
-        // var qDocs   = storage.documents.query(sQuery, null, { cache: true });
-        // var qDrafts = storage.drafts   .query(sQuery, null, { cache: true });
-        // return Promise.all([qDocs, qDrafts]).then(function(results) {
-
-
         const query = {
-                $filter : `(type eq '${encodeURI('resourceMobilisation')}')`,  
-                $top: 10,
-                collection: 'my'
+            $filter : `(type eq '${encodeURI('resourceMobilisation')}')`, 
         }
-        
-        let queryDraft = {
-                $filter : `(type eq '${encodeURI('resourceMobilisation')}')`,
-                $top: 10,
-                collection: 'mydraft'
-        };
-        console.log("query",query);
-        console.log("queryDraft",queryDraft);
-
-         return Promise.all([kmDocumentApi.queryDocuments(query),kmDocumentApi.queryDocuments(queryDraft)]).then(function(results) {
-
-            console.log("results",results);
-            var oDocs      = results[0].data.Items;
-            var oDrafts    = results[1].data.Items;  
-            var oDraftUIDs = _.map(oDrafts, "identifier");
-
-            oDocs = _.filter(oDocs, function(o) { return !_.contains(oDraftUIDs, o.identifier);});
-
-            baselineDocuments = oDocs; //_.union(oDocs, oDrafts);
-
+        //console.log("query",query);
+        const records =  Promise.all([kmDocumentApi.queryDocuments(query)]).then(function(results) {     
+            //console.log('records are loaded :', records);                      
+            var oDocs      = results[0].Items; 
+          
+            baselineDocuments.value = oDocs; //_.union(oDocs, oDrafts);
+            //console.log('baselineDocuments.value',baselineDocuments.value);   
+          
             // test
-            if(baselineDocuments){
-                const baselineDocumentId      = baselineDocuments[0].documentID;
-                var baselineDocumentIdentifier = baselineDocuments[0].identifier;
-            }
-    
-            getBaselineDocument(baselineDocumentIdentifier).then(function(o){
-                baselineDocument.value = o.body;
-            });
-         });
-     }			
+            if(baselineDocuments.value){
+                const baselineDocumentId      = baselineDocuments.value[0].documentID;
+                var baselineDocumentIdentifier = baselineDocuments.value[0].identifier;
 
-    //2020 
+                getBaselineDocument(baselineDocumentIdentifier).then(function(o){
+                    baselineDocument.value = o.body;
+                });
+            }
+        });
+     }		
+
     const getBaselineDocument = function(identifier) {				
         if (identifier) { //lookup single record
         
             return new Promise(function(resolve, reject) {
-                kmDocumentApi.queryDocument(identifier).then(function(r) {
-                     
+                kmDocumentApi.getDocument(identifier).then(function(r) {                     
                         hasBaselineDocument.value = true;
                         resolve(r.data);
                     }, function(e) {
@@ -525,5 +499,9 @@
             });
         }
     } 
+
+    onMounted(() => {
+       loadBaselineDocuments();
+   })
 
 </script>

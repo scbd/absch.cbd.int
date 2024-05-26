@@ -23,7 +23,23 @@
     "additionalMethodologicalObservations":"Additional methodological observations/comments, including sources of data:",
     "measuresPrivateSectorDomesticSupport":"5.2. Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide domestic support for the implementation of the Strategic Plan for Biodiversity 2011-2020?",
     "provideAdditionalInformation":"Please provide additional information below:",
-    "additionalInformation": "Additional information"
+    "additionalInformation": "Additional information",
+    "units":"in units",
+    "thousands": "in thousands",    
+    "millions": "in millions",
+    "oecd_dac": "OECD DAC Rio markers",
+    "other":"Other" ,
+    "no":"No", 
+    "some":"Some measures taken",
+    "comprehensive":"Comprehensive measures taken",
+    "notYet":"Not yet stared",
+    "someInclusion":"Some inclusion achieved",
+    "comprehensiveInclusion":"Comprehensive inclusion",
+    "notNecessary":"No such assessment necessary",
+    "someAssessment":"Some assessments undertaken",
+    "comprehensiveAssessment":"Comprehensive assessments undertaken",
+    "cmfeccabc":"Conceptual and Methodological Framework for Evaluating the Contribution of Collective Action to Biodiversity Conservation",
+    "yes":"Yes"
 }
 
 
