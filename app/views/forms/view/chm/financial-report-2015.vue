@@ -449,10 +449,45 @@
                 document.value.domesticExpendituresData.domesticCollectiveActionMethodologyComments;        
     });
 
+    const orderedExpenditures = computed(()=>{
+        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];     
+        return  _.orderBy(document.value.domesticExpendituresData.expenditures, 'year');
+    });
+
+    const orderedContributions = computed(()=>{
+        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.contributions)) return [];     
+        return  _.orderBy(document.value.domesticExpendituresData.contributions, 'year');
+    });
+
+    const orderedAnnualEstimates = computed(()=>{       
+        if (!(document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates)) return [];  
+       return  _.orderBy(document.value.fundingNeedsData.annualEstimates, 'year');
+    });   
+
+    const orderedDomesticSources = computed(()=>{
+        if (!(document.value.nationalPlansData && document.value.nationalPlansData.domesticSources)) return [];     
+        return  _.orderBy(document.value.nationalPlansData.domesticSources, 'name');
+    });
+
+    const orderedInternationalSources = computed(()=>{
+        if (!(document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];     
+        return  _.orderBy(document.value.nationalPlansData.internationalSources, 'name');
+    });
+
+    const orderedBaselineFlows = computed(()=>{
+        if (!(document.value.internationalResources && document.value.internationalResources.baselineData && document.value.internationalResources.baselineData.baselineFlows)) return [];     
+        return  _.orderBy(document.value.internationalResources.baselineData.baselineFlows, 'year');
+    });
+
+    const orderedProgressFlows = computed(()=>{
+        if (! (document.value.internationalResources && document.value.internationalResources.progressData && document.value.internationalResources.progressData.progressFlows)) return [];     
+        return  _.orderBy(document.value.internationalResources.progressData.progressFlows, 'year');
+    });        
+
 
     const options  = {
         multipliers : 		[{identifier:'units',	      title: {en:`${t("units")}`}},  
-                             {identifier:'thousands',     title: {en:`${t("in thousands")}`}}, 
+                             {identifier:'thousands',     title: {en:`${t("thousands")}`}}, 
                              {identifier:'millions',      title: {en:`${t("millions")}`}}],
         methodology : 		[{identifier:'oecd_dac',      title: {en:`${t("oecd_dac")}`}}, 
                              {identifier:'other', 	      title: {en:`${t("other")}` }}],
@@ -499,42 +534,7 @@
 
     const  filteredMethodology = function(id){       
         return options.methodology.filter((option) => option.identifier===id );
-    }; 
-
-    const orderedExpenditures = computed(()=>{
-        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];     
-        return  _.orderBy(document.value.domesticExpendituresData.expenditures, 'year');
-    });
-
-    const orderedContributions = computed(()=>{
-        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.contributions)) return [];     
-        return  _.orderBy(document.value.domesticExpendituresData.contributions, 'year');
-    });
-
-    const orderedAnnualEstimates = computed(()=>{       
-        if (!(document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates)) return [];  
-       return  _.orderBy(document.value.fundingNeedsData.annualEstimates, 'year');
-    });   
-
-    const orderedDomesticSources = computed(()=>{
-        if (!(document.value.nationalPlansData && document.value.nationalPlansData.domesticSources)) return [];     
-        return  _.orderBy(document.value.nationalPlansData.domesticSources, 'name');
-    });
-
-    const orderedInternationalSources = computed(()=>{
-        if (!(document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];     
-        return  _.orderBy(document.value.nationalPlansData.internationalSources, 'name');
-    });
-
-    const orderedBaselineFlows = computed(()=>{
-        if (!(document.value.internationalResources && document.value.internationalResources.baselineData && document.value.internationalResources.baselineData.baselineFlows)) return [];     
-        return  _.orderBy(document.value.internationalResources.baselineData.baselineFlows, 'year');
-    });
-
-    const orderedProgressFlows = computed(()=>{
-        if (! (document.value.internationalResources && document.value.internationalResources.progressData && document.value.internationalResources.progressData.progressFlows)) return [];     
-        return  _.orderBy(document.value.internationalResources.progressData.progressFlows, 'year');
-    });                   
+    };                
 
     const typeAverageAmount = function(flows, type){
         if(!flows) return 0;
@@ -594,7 +594,6 @@
         }
         return false;
     };
-
 
     const getFundingGapYear = function(year){   
         if(!year) return 0;
@@ -663,7 +662,4 @@
 
         return parseInt(odaAverage)+parseInt(oofAverage)+parseInt(otherAverage);
     };
-
-
-    
 </script>
