@@ -263,7 +263,7 @@
         return  _.orderBy(document.value.domesticExpendituresData.contributions, 'year');
     });
 
-    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
+    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});    
     const hasBaselineDocument = ref(false);
     const baselineDocuments = ref([]);
     const baselineDocument = ref({});  
@@ -458,18 +458,18 @@
 
 	const loadBaselineDocuments = function(){
         const query = {
-            $filter : `(type eq '${encodeURI('resourceMobilisation')}')`, 
+            $filter : `(type eq '${encodeURI('resourceMobilisation')}')` 
         }
         //console.log("query",query);
-        const records =  Promise.all([kmDocumentApi.queryDocuments(query)]).then(function(results) {     
-            //console.log('records are loaded :', records);                      
+        const records =  Promise.all([kmDocumentApi.queryDocuments(query)]).then(function(results) { 
+            // console.log('records are loaded :', records);
+            // console.log('results :', results);                          
             var oDocs      = results[0].Items; 
-          
-            baselineDocuments.value = oDocs; //_.union(oDocs, oDrafts);
-            //console.log('baselineDocuments.value',baselineDocuments.value);   
-          
-            // test
-            if(baselineDocuments.value){
+            // console.log('oDocs :', oDocs);  
+        
+            if(oDocs.length>0){
+                baselineDocuments.value = oDocs; //_.union(oDocs, oDrafts);
+                //console.log('baselineDocuments.value',baselineDocuments.value);   
                 const baselineDocumentId      = baselineDocuments.value[0].documentID;
                 var baselineDocumentIdentifier = baselineDocuments.value[0].identifier;
 
