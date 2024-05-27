@@ -47,7 +47,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 			},
 			link: function ($scope, $element, $attr) {
 
-				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment','nationalReport','nationalTarget'];
+				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment','nationalReport','nationalTarget',"implementationActivity"];
 
 				$scope.hideClose = false;
 				if($attr.hideClose){ 
