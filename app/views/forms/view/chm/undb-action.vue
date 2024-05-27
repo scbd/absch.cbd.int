@@ -120,8 +120,7 @@
             </section>
 
             <div> 
-                <!-- TODO: test -->
-                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
             </div>         
         </div> 
 
@@ -133,7 +132,7 @@
 <script setup>
     import { computed } from 'vue'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
-    import '~/views/forms/view/directives/view-reference-records.directive.js'   
+    import '~/views/forms/view/directives/view-record-reference.directive.js'   
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/undb-action.json';
     import { useI18n } from 'vue-i18n';
