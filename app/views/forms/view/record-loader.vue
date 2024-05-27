@@ -9,6 +9,8 @@
                     :document-info="documentInfo" :locale="locale"></national-report>
             <national-target v-if="documentInfo?.type == 'nationalTarget'"  
                     :document-info="documentInfo" :locale="locale"></national-target>
+            <implementation-activity v-if="documentInfo?.type == 'implementationActivity'"  
+                    :document-info="documentInfo" :locale="locale"></implementation-activity>          
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 
@@ -21,11 +23,11 @@
 
 <script setup>
 
-    import { defineAsyncComponent, Suspense } from 'vue';
     import aichiTarget from '~/views/forms/view/chm/aichi-target.vue'
     import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue'
     import nationalReport from '~/views/forms/view/chm/national-report.vue'
     import nationalTarget from '~/views/forms/view/chm/national-target.vue'  
+    import implementationActivity from '~/views/forms/view/chm/implementation-activity.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},

@@ -1,0 +1,17 @@
+{
+    "generalInformation": "General information",
+    "country": "Country",    
+    "description": "Description",
+    "status":"Status",
+    "levelOfImplementation":"Level of implementation",
+    "detailsOfImplementation": "Details on the level of implementation",
+    "targetsAndIndicators": "Targets and Indicators",
+    "nationalIndicators": "National Indicators",
+    "nationalTargets":"National Targets",
+    "aichiTargets":"Aichi Targets",
+    "partners":"Partners",
+    "relevantDocumentAndInformation":"Relevant documents and information",
+    "relevantInfo": "Relevant information", 
+    "relevantWebsites":"Relevant websites, links, and files",
+    "additionalInformation": "Additional information"
+}
