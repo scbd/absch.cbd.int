@@ -7,7 +7,7 @@
     "date":  "Date the assessment was done",
     "summary":"Summary of the assessment of progresses toward the implementation of the selected target",
     "indicatorsAndActivities": "Indicators and Activities",
-    "indicators":"Indicator(s)used in this assessment",    
+    "indicators":"Indicator(s) used in this assessment",    
     "anyOtherTools":"Any other tools or means used for assessing progress", 
     "levelOfConfidence":"Level of confidence",
     "levelOfAboveAssessment": "Level of confidence of the above assessment",
