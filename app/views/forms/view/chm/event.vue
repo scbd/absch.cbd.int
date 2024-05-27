@@ -217,8 +217,7 @@
             </section>
 
             <div> 
-                <!-- TODO: test -->
-                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
             </div>         
         </div>  
 
