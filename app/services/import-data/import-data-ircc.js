@@ -443,6 +443,7 @@ export class ImportDataIRCC extends ImportDataBase {
   authorityIds = [];
   contacts = [];
   hashedValue = {};
+  static ROW_LIMIT=10
 
   constructor( realm, language, government, workbook, auth) {
       super(auth);
@@ -457,8 +458,7 @@ export class ImportDataIRCC extends ImportDataBase {
     const excelData = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // ToDo: use the  this.workbook.Sheets
     const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
     const data = []
-    let limit = 10; 
-    const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
+    const TotalCount = rowCount > this.constructor.ROW_LIMIT ? this.constructor.ROW_LIMIT + 3 : rowCount + 3;
     for(let i = 4; i <= TotalCount; i++){
       if(super.columnVal(sheet, this.fields.language + i)){
         const value = {
@@ -510,8 +510,7 @@ export class ImportDataIRCC extends ImportDataBase {
       const rowCount = ((excelData.filter(row => row.some(cell => cell !== undefined && cell !== null && cell !== '')).length) - 2) + 3;
 
       let irccs = [];
-      let limit = 10; // number of rows to load
-      const TotalCount = rowCount > limit ? limit + 3 : rowCount + 3;
+      const TotalCount = rowCount > this.constructor.ROW_LIMIT ? this.constructor.ROW_LIMIT + 3 : rowCount + 3;
       for(let i=4; i<=TotalCount; i++){
         this.authorityIds.push(super.columnVal(sheet, this.fields.cna + i))
       } 
