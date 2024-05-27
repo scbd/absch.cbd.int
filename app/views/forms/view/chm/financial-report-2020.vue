@@ -210,9 +210,8 @@
             </section>   
             <!-- section relevant information end -->  
 
-           <div> 
-               <!-- TODO: test -->
-               <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+           <div>               
+                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
            </div>         
        </div>  
        <!-- TODO: add footer  -->
@@ -224,6 +223,7 @@
 <script setup>
    import { computed, ref, onMounted} from 'vue';
    import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
+   import '~/views/forms/view/directives/view-record-reference.directive.js'
    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
    import viewFinancialReport from '~/views/forms/view/directives/view-financial-report.vue';
    import kmTerm from '~/components/km/KmTerm.vue';
@@ -264,6 +264,7 @@
     });
 
     const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});    
+    //const kmDocumentApi = new KmDocumentApi({});   
     const hasBaselineDocument = ref(false);
     const baselineDocuments = ref([]);
     const baselineDocument = ref({});  
@@ -346,11 +347,9 @@
 
         var items;
 
-        if(_.isEmpty(_.last(flows)) || !_.last(flows))
-            // items = _.initial(_.pluck(flows, type));
+        if(_.isEmpty(_.last(flows)) || !_.last(flows))           
             items = _.initial(_.map(flows, type));
-        else
-            // items = _.pluck(flows, type);
+        else         
             items = _.map(flows, type);
 
         if(items.length===0)
@@ -410,11 +409,10 @@
             var sources = document.value.nationalPlansData[member];//jshint ignore:line
           
             
-                if(_.isEmpty(_.last(sources)))
+            if(_.isEmpty(_.last(sources)))
                 items = _.initial(sources);
             console.log("items",items);
 
-            // items = _.pluck(sources, prop);
             items = _.map(sources, prop);          
 
             var sum = 0;
@@ -455,17 +453,16 @@
         }
         return false;
     };
-
-	const loadBaselineDocuments = function(){
+  
+    const loadBaselineDocuments = async function(){
         const query = {
             $filter : `(type eq '${encodeURI('resourceMobilisation')}')` 
         }
-        //console.log("query",query);
-        const records =  Promise.all([kmDocumentApi.queryDocuments(query)]).then(function(results) { 
-            // console.log('records are loaded :', records);
-            // console.log('results :', results);                          
-            var oDocs      = results[0].Items; 
-            // console.log('oDocs :', oDocs);  
+
+        const records =  new Promise(function(resolve, reject) {
+            kmDocumentApi.queryDocuments(query).then(function(results) {                  
+                      
+            var oDocs  = results.Items; 
         
             if(oDocs.length>0){
                 baselineDocuments.value = oDocs; //_.union(oDocs, oDrafts);
@@ -477,15 +474,24 @@
                     baselineDocument.value = o.body;
                 });
             }
+            resolve(results.data);
+            }, function(e) {
+                if (e.status == 404) {
+                    hasBaselineDocument.value = false;
+                    throw e;
+                }
+                else {
+                    reject (e);
+                }
+            });
         });
-     }		
+    }	
 
-    const getBaselineDocument = function(identifier) {				
-        if (identifier) { //lookup single record
-        
+    const getBaselineDocument = function(identifier) {
+        if (identifier) { //lookup single record        
             return new Promise(function(resolve, reject) {
                 kmDocumentApi.getDocument(identifier).then(function(r) {                     
-                        hasBaselineDocument.value = true;
+                        hasBaselineDocument.value = true;                        
                         resolve(r.data);
                     }, function(e) {
                         if (e.status == 404) {
