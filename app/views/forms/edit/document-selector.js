@@ -308,67 +308,65 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             })
 
             async function pendingRecords(draftIdentifiers) {
-                $scope.isPendingLoading = true;
-                let query = [];
-                let params = { collection : "myrequest", $top: $scope.top || 100, $orderby: 'updatedOn desc' } // mydraft,  allrequest is not allow in network call
-    
-                //ToDo: what backend accept for multiple schemas 
-                if ($attr.allowNewSchema.includes(',')) {
-                    const schemas = $attr.allowNewSchema.split(',');
+                try {
+                    $scope.isPendingLoading = true;
+                    const query = [];
+                    const params = { 
+                        collection: "myrequest", 
+                        $top: $scope.top || 100, 
+                        $orderby: 'updatedOn desc' 
+                    };
+                   //ToDo: what backend accept for multiple schemas
+                    const schemas = $attr.allowNewSchema.includes(',') ? 
+                        $attr.allowNewSchema.split(',') : 
+                        [$attr.allowNewSchema];
+                    
                     schemas.forEach(schema => {
-                        query.push("(type eq '" + schema + "')");
+                        query.push(`(type eq '${schema}')`);
                     });
-                } 
-                else {
-                    query.push("(type eq '" + $attr.allowNewSchema + "')");
+            
+                    // params.$filter = query.join(' or ');
+                    params.$filter = query;
+
+            
+                    const kmDocumentApi = new KmDocumentApi({ tokenReader: () => apiToken.get() });
+                    const result = await kmDocumentApi.queryDocuments(params);
+                    
+                    const pendingDocuments = result?.Items?.length ? result.Items : [];
+            
+                    if (pendingDocuments.length > 0) {
+                        const pendingRequests = draftIdentifiers ? 
+                            pendingDocuments.filter(item => draftIdentifiers.includes(item.identifier)) : 
+                            pendingDocuments;
+            
+                        $scope.pendingRawRecords = pendingRequests.map(doc => {
+                            const pending = {
+                                identifier: doc.identifier,
+                                identifier_s: doc.identifier,
+                                uniqueIdentifier_s: doc.identifier, // needed for selected records
+                                schema_s: $attr.allowNewSchema,
+                                rec_title: doc.title,
+                                rec_summary: doc.summary,
+                                url_ss: `/register/${doc.schema_s}/${doc.identifier}/view`,
+                                _revision_i: doc.revision, // required for selected details, used in line 706, 87.
+                                metadata: doc.metadata,
+                                __checked: !!_.find($scope.tempSelectedDocuments, { identifier_s: doc.identifier })
+                            };
+                            return pending;
+                        });
+                        return $scope.pendingRawRecords;
+                    }
+                } catch (error) {
+                    toastr.error(error);
+                } finally {
+                    $scope.isPendingLoading = false;
                 }
-                params.$filter = query;
-
-                const kmDocumentApi = new KmDocumentApi({tokenReader:()=>apiToken.get()});
-                const pendingRecords = await kmDocumentApi.queryDocuments(params);
-
-                return $q.when(pendingRecords)
-                    .then(function (result) {
-                        const draftDocuments = result? result.Items : [];
-                        const pendingDocuments = draftDocuments.length > 0 ? draftDocuments : [];
-
-                        if (pendingDocuments?.length > 0) {
-                            const pendingRequests = draftIdentifiers ? pendingDocuments.filter(item => draftIdentifiers.includes(item.identifier)) : pendingDocuments;
-                            
-                            $scope.pendingRawRecords = _.map(pendingRequests, function (doc) {                                 
-                                let pending = {};
-                                pending.identifier         = doc.identifier;
-                                pending.identifier_s       = doc.identifier;
-                                pending.uniqueIdentifier_s = doc.identifier; // needed for selected records
-                                pending.schema_s           = $attr.allowNewSchema;
-                                pending.rec_title          = doc.title;
-                                pending.rec_summary        = doc.summary;
-                                pending.url_ss = `/register/${doc.schema_s}/${doc.identifier}/view`;
-                                pending._revision_i        = doc.revision; // required for selected details, used in line 706, 87.
-                                pending.metadata           = doc.metadata;
-                                if (_.find($scope.tempSelectedDocuments, { identifier_s: pending.identifier_s })) {
-                                    pending.__checked = true;
-                                } else {
-                                    pending.__checked = false;
-                                }  
-                                return pending;
-                            }); 
-                            return $scope.pendingRawRecords;
-                        }
-                    })
-                    .catch(function (error) {
-                        toastr.error(error);
-                        $scope.isPendingLoading = false;
-                    })
-                    .finally(function () {
-                        $scope.isPendingLoading = false;
-                    });
             }
-
+            
              //==================================
             //
             //==================================
-            function getDocs (options) {
+            async function getDocs (options) {
                 options = options||{};
 
                 var searchOperation;
@@ -402,7 +400,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     rawQuery.fieldQueries.push(myGovernmentQuery);
                 } 
                 else if($scope.activeTab == 'pendingRequests'){
-                    pendingRecords();
+                    await pendingRecords();
                 }     
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
