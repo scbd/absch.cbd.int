@@ -70,9 +70,8 @@
     <!-- section 1 begin -->
     <section v-if="document.internationalResources">
         <legend>{{t("financialResource")}}</legend>
-                  
-        <label>{{t("amountOfResources")}} <u>{{t("providedByCountry")}}</u> {{t( "inSupportOfBiodiversity")}} </label><br/> 
-        <label class="help-block">{{t("nominalAmount")}}</label><br/>              
+        <label><strong> {{t("amountOfResources")}} <u>{{t("providedByCountry")}}</u> {{t( "inSupportOfBiodiversity")}}</strong></label><br/>  
+        <label >{{t("nominalAmount")}}</label><br/>      
         <label> 1.1.1	{{t("baselineInformation")}}</label>
              
         <div v-if="document.internationalResources.currency && !isEmpty(document.internationalResources.currency)" >                      
@@ -85,7 +84,7 @@
         <div v-if="document.internationalResources.multiplier" >
             <label>{{t("allValues")}}</label>
             <div class="km-value">
-                <div  v-for="term in filteredMultipliers(document.internationalResources.multiplier)">                           
+                <div  v-for="term in filter(options.multipliers,document.internationalResources.multiplier)">                           
                     {{lstring(term.title,locale)}} 
                 </div>
             </div>
@@ -106,18 +105,18 @@
                     </thead>
                     <tbody>
                         <tr v-for="flow in orderedBaselineFlows" >
-                            <td>{{flow.year}}</td>
-                            <td>{{flow.odaAmount | "number:0"}}</td>
-                            <td>{{flow.oofAmount | "number:0"}}</td>
-                            <td>{{flow.otherAmount | "number:0"}}</td>
-                            <td>{{getTotal(flow) | "number:0"}}</td>
+                            <td>{{flow.year}}</td>                          
+                            <td>{{currencyString(flow.odaAmount)}}</td>
+                            <td>{{currencyString(flow.oofAmount)}}</td>
+                            <td>{{currencyString(flow.otherAmount)}}</td>
+                            <td>{{currencyString(getTotal(flow)) }}</td>
                         </tr>
                         <tr class="active">
                             <td><strong>{{t("averageBaseline")}}</strong></td>
-                            <td><strong>{{typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'odaAmount')  | "number:0"}}</strong></td>
-                            <td><strong>{{typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'oofAmount')  | "number:0"}}</strong></td>
-                            <td><strong>{{typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'otherAmount')  | "number:0"}}</strong></td>
-                            <td><strong>{{totalAverageAmount() | "number:0"}}</strong></td>
+                            <td><strong>{{currencyString(typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'odaAmount'))}}</strong></td>
+                            <td><strong>{{currencyString(typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'oofAmount'))}}</strong></td>
+                            <td><strong>{{currencyString(typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'otherAmount'))}}</strong></td>
+                            <td><strong>{{currencyString(totalAverageAmount())}}</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -163,7 +162,7 @@
                 <div v-if="document.internationalResources.baselineData.methodologyUsed">
                     <label> {{t("methodology")}}</label>
                     <div v-if="document.internationalResources.baselineData.methodologyUsed!='other'">                                
-                        <div class="km-value" v-for="term in filteredMethodology(document.internationalResources.baselineData.methodologyUsed)">
+                        <div class="km-value" v-for="term in filter(options.methodology,document.internationalResources.baselineData.methodologyUsed)">
                             {{lstring(term.title,locale)}}  
                         </div>
                     </div>
@@ -227,11 +226,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="flow in orderedProgressFlows" >
-                            <td>{{flow.year}}</td>
-                            <td>{{flow.odaAmount   | "number:0"}}</td>
-                            <td>{{flow.oofAmount   | "number:0"}}</td>
-                            <td>{{flow.otherAmount | "number:0"}}</td>
-                            <td>{{getTotal(flow)| "number:0"}}</td>
+                            <td>{{flow.year}}</td>                        
+                            <td>{{currencyString(flow.odaAmount)}}</td>
+                            <td>{{currencyString(flow.oofAmount)}}</td>
+                            <td>{{currencyString(flow.otherAmount)}}</td>
+                            <td>{{currencyString(getTotal(flow))}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -266,7 +265,7 @@
             <label>{{t("measuresPrivateSector")}}</label>            
             
             <div class="km-value" style="list-style-type: none;">
-                <li v-for="term in filteredMeasures(document.internationalResources.hasPrivateSectorMeasures)">
+                <li v-for="term in filter(options.measures,document.internationalResources.hasPrivateSectorMeasures)">
                     {{lstring(term.title,locale)}}
                 </li>
             </div>
@@ -286,7 +285,7 @@
         <label>{{t("includeBiodiversity")}}</label>                
                         
         <div class="km-value" >
-            <span v-for="term in  filterInclusions(document.hasNationalBiodiversityInclusion) ">
+            <span v-for="term in  filter(options.inclusions,document.hasNationalBiodiversityInclusion) ">
             {{lstring(term.title, locale)}} 
             </span>                 
         </div>
@@ -304,7 +303,7 @@
         <label>{{t("assessOrEvaluate")}}</label>
         
         <div class="km-value" >
-            <span v-for="term in  filteredAssessments(document.hasBiodiversityAssessment)">
+            <span v-for="term in  filter(options.assessments,document.hasBiodiversityAssessment)">
                 {{lstring(term.title ,locale)}}                       
             </span>
         </div>
@@ -319,6 +318,7 @@
 <script setup>
     import { computed } from 'vue'; 
     import { lstring } from '~/services/filters/lstring.js'; 
+    import { currencyString, filter }  from '~/components/kb/filters.js';
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/view-financial-report.json';
@@ -370,27 +370,6 @@
                             {identifier:'other', 	      title: {en:'Other'}}],
         yesNo : 			[{identifier:false,  		  title: {en:'No' }    },{identifier:true, 	title: {en:'Yes'}}]
     };
-
-    const  filterInclusions = function(id){       
-        return options.inclusions.filter((option) => option.identifier===id );
-    };       
-    
-    const  filteredAssessments = function(id){       
-        return options.assessments.filter((option) => option.identifier===id );
-    };  
-   
-    const  filteredMultipliers = function(id){       
-        return options.multipliers.filter((option) => option.identifier===id);
-    };      
-
-    const  filteredMeasures = function(id){       
-        return options.measures.filter((option) => option.identifier===id );
-    }; 
-
-    const  filteredMethodology = function(id){       
-        return options.methodology.filter((option) => option.identifier===id );
-    }; 
-
     const orderedBaselineFlows = computed(()=>{
         if (!(props.document.internationalResources && props.document.internationalResources.baselineData && props.document.internationalResources.baselineData.baselineFlows)) return [];     
         return  _.orderBy(props.document.internationalResources.baselineData.baselineFlows, 'year');
@@ -406,59 +385,20 @@
 
         var items;
 
-        if(_.isEmpty(_.last(flows)) || !_.last(flows))
-            // items = _.initial(_.pluck(flows, type));
+        if(_.isEmpty(_.last(flows)) || !_.last(flows))         
             items = _.initial(_.map(flows, type));
-        else
-            // items = _.pluck(flows, type);
+        else       
             items = _.map(flows, type);
 
-        if(items.length===0)
+        if(items.length===0){
             return 0;
-
-        var sum   = _.reduce(_.compact(items), function(memo, num){ return memo + parseInt(num || 0); }, 0);
-
-        return Math.round(sum/items.length);
+        }
+        else {
+            var sum   = _.reduce(_.compact(items), function(memo, num){ return memo + parseInt(num || 0); }, 0);
+            return Math.round(sum/items.length);
+        }
+            
     };
-
-    // const confidenceAverage = function (resources) {
-    //     var values = _.compact(_.map(resources, function (resource) {
-    //         if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "D8BC6348-D1F9-4DA4-A8C0-7AE149939ABE") return 3; //high
-    //         if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "42526EE6-68F3-4E8A-BC2B-3BE60DA2EB32") return 2; //medium
-    //         if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "6FBEDE59-88DB-45FB-AACB-13C68406BD67") return 1; //low
-    //         return 0;
-    //     }));
-
-    //     var value = 0;
-    //     if(values.length) {
-    //         value = Math.round(_.reduce(values, function(memo, value) { return memo + value; }) / values.length);
-    //     }
-
-    //     if ( value == 3) return "High";
-    //     if ( value == 2) return "Medium";
-    //     if ( value == 1) return "Low";
-
-    //     return "No value selected";
-    // };
-
-    // const hasValue = function(val){
-    //     if(val === false || val === true)
-    //         return true;
-    //     return false;
-    // };
-
-    // const annualEstimatesHasYear = function (year) {
-    //     if(!year) return false;
-    //     if(props.document && props.document.fundingNeedsData && props.document.fundingNeedsData.annualEstimates){
-    //         const estimate =props.document.fundingNeedsData.annualEstimates.find((item) => {
-    //             item.year == year
-    //         });
-    //         if(estimate)
-    //             return true;
-    //     }
-    //     return false;
-    // };
-
 
     const getFundingGapYear = function(year){   
         if(!year) return 0;
@@ -481,34 +421,23 @@
             var prop = "amount"+year;
             var items;
 
-            // var sources = angular.fromJson($scope.props.document.nationalPlansData[member]);//jshint ignore:line
             var sources = props.document.nationalPlansData[member];//jshint ignore:line
           
             
                 if(_.isEmpty(_.last(sources)))
                 items = _.initial(sources);
-            console.log("items",items);
-
-            // items = _.pluck(sources, prop);
+      
             items = _.map(sources, prop);
             console.log("items",items);
 
             var sum = 0;
             _.map(_.compact(items), function(num){
                 sum = sum + parseInt(num)||0;
-            });
-            console.log("sum",sum);
-
+            }); 
             return sum;
         }
         return 0;
-    };
-                        
-    // const getNationalPlansRemainingGapByYear = function(year){
-    //     if(!year) return 0;
-
-    //     return getFundingGapYear(year) - (getNationalPlansSourcesTotal('domesticSources', year)  + getNationalPlansSourcesTotal('internationalSources', year)) ;
-    // };
+    };                        
 
     const isEmpty = function (item) {
         return _.isEmpty(item);
@@ -532,5 +461,4 @@
     const getTotal= function(flow){ 
         return (flow.odaAmount?flow.odaAmount:0) + (flow.oofAmount?flow.oofAmount:0) + (flow.otherAmount?flow.otherAmount:0);
     }
-
 </script>
