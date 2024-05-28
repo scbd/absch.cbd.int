@@ -1,5 +1,6 @@
-import nr5Translation from '../../../app-text/views/forms/edit/bch/edit-national-report-5.json';
-import { mergeTranslationKeys } from '~/services/translation-merge';
+import nr5Translation from '../../../app-text/views/forms/edit/bch/edit-national-report-5.json' assert {type:'json'};
+import { mergeTranslationKeys } from '../../../services/translation-merge.js';
+
 const nr5T = mergeTranslationKeys(nr5Translation);
 export const cpbNationalReport5 = [
    {
