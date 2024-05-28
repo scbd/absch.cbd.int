@@ -66,7 +66,7 @@
         </div>
     </section>
     <!-- section basic information end -->
-
+ 
     <!-- section 1 begin -->
     <section v-if="document.internationalResources">
         <legend>{{t("financialResource")}}</legend>
@@ -74,16 +74,14 @@
         <label>{{t("amountOfResources")}} <u>{{t("providedByCountry")}}</u> {{t( "inSupportOfBiodiversity")}} </label><br/> 
         <label class="help-block">{{t("nominalAmount")}}</label><br/>              
         <label> 1.1.1	{{t("baselineInformation")}}</label>
-
-                        
+             
         <div v-if="document.internationalResources.currency && !isEmpty(document.internationalResources.currency)" >                      
             <label>{{t("currency")}}</label>
             <span class="km-value">                         
                 <km-term :value="document.internationalResources.currency " :locale="locale"></km-term> 
             </span>
         </div>
-
-        
+  
         <div v-if="document.internationalResources.multiplier" >
             <label>{{t("allValues")}}</label>
             <div class="km-value">
@@ -93,6 +91,7 @@
             </div>
         </div>
 
+      
         <div v-if="document.internationalResources.baselineData">       
             <div v-if="document.internationalResources.baselineData.baselineFlows" class="table-responsive">
                 <table class="table table-hover table-bordered table-condensed">
@@ -111,7 +110,7 @@
                             <td>{{flow.odaAmount | "number:0"}}</td>
                             <td>{{flow.oofAmount | "number:0"}}</td>
                             <td>{{flow.otherAmount | "number:0"}}</td>
-                            <td>{{flow.odaAmount + flow.oofAmount + flow.otherAmount  | "number:0"}}</td>
+                            <td>{{getTotal(flow) | "number:0"}}</td>
                         </tr>
                         <tr class="active">
                             <td><strong>{{t("averageBaseline")}}</strong></td>
@@ -124,11 +123,7 @@
                 </table>
             </div>
 
-            <div v-if="document.internationalResources.baselineData.odaCategories || document.internationalResources.baselineData.odaOofType ||
-                            document.internationalResources.baselineData.odaoofActions || document.internationalResources.baselineData.otherActions ||
-                            document.internationalResources.baselineData.methodologyUsed || document.internationalResources.baselineData.coefficient ||
-                            document.internationalResources.baselineData.odaConfidenceLevel || document.internationalResources.baselineData.oofConfidenceLevel ||
-                            document.internationalResources.baselineData.otherConfidenceLevel || document.internationalResources.baselineData.methodologicalComments">
+            <div v-if="isMethodologicalInformationDisplay">
                 <label> {{t("methodologicalInformation")}}</label>                   
                         
                 <div v-if="document.internationalResources.baselineData.odaCategories">
@@ -215,11 +210,9 @@
                     <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.baselineData.methodologicalComments " :locales="locale" html></ng>
                 </div>
             </div>
-        </div>        
-        
-        <div v-if="document.internationalResources.progressData && (document.internationalResources.progressData.progressFlows || document.internationalResources.progressData.odaConfidenceLevel ||
-                        document.internationalResources.progressData.oofConfidenceLevel || document.internationalResources.progressData.otherConfidenceLevel ||
-                        document.internationalResources.hasPrivateSectorMeasures)">
+        </div>  
+      
+        <div v-if="isMonitoringProgressDisplay">
             <label>{{t("monitoringProgress")}}</label>
             <div v-if="document.internationalResources.progressData.progressFlows" class="table-responsive">
                 <table class="table table-hover table-bordered table-condensed">
@@ -238,50 +231,52 @@
                             <td>{{flow.odaAmount   | "number:0"}}</td>
                             <td>{{flow.oofAmount   | "number:0"}}</td>
                             <td>{{flow.otherAmount | "number:0"}}</td>
-                            <td>{{flow.odaAmount + flow.oofAmount + flow.otherAmount | "number:0"}}</td>
+                            <td>{{getTotal(flow)| "number:0"}}</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>        
-            
-            <div v-if="document.internationalResources.progressData.odaConfidenceLevel || document.internationalResources.progressData.oofConfidenceLevel || document.internationalResources.progressData.otherConfidenceLevel">
-                <div><strong>{{t("methodologicalInformation")}}</strong></div>
-                <label>{{t("averageConfidenceLevels")}}</label>
-                <div v-if="document.internationalResources.progressData.odaConfidenceLevel" >
-                    <label>{{t("oda")}}</label>
-                    <span class="km-value">
-                        <km-term :value="document.internationalResources.progressData.odaConfidenceLevel" :locale="locale"></km-term>
-                    </span>
-                </div>
-                <div v-if="document.internationalResources.progressData.oofConfidenceLevel" >
-                    <label>{{t("oof")}}</label>
-                    <span class="km-value">
-                        <km-term :value="document.internationalResources.progressData.oofConfidenceLevel" :locale="locale"></km-term>
-                    </span>
-                </div>
-                <div v-if="document.internationalResources.progressData.otherConfidenceLevel" >
-                    <label>{{t("otherFlows")}}</label>
-                    <span class="km-value">
-                        <km-term :value="document.internationalResources.progressData.otherConfidenceLevel" :locale="locale"></km-term>   
-                    </span>
-                </div>
+            </div> 
+        </div>       
+         
+     
+        <div v-if="document.internationalResources.progressData && (document.internationalResources.progressData.odaConfidenceLevel || document.internationalResources.progressData.oofConfidenceLevel || document.internationalResources.progressData.otherConfidenceLevel)">
+            <div><strong>{{t("methodologicalInformation")}}</strong></div>
+            <label>{{t("averageConfidenceLevels")}}</label>
+            <div v-if="document.internationalResources.progressData.odaConfidenceLevel" >
+                <label>{{t("oda")}}</label>
+                <span class="km-value">
+                    <km-term :value="document.internationalResources.progressData.odaConfidenceLevel" :locale="locale"></km-term>
+                </span>
             </div>
-                    
-            <div v-if="document.internationalResources.hasPrivateSectorMeasures">
-                <label>{{t("measuresPrivateSector")}}</label>
-                
-                <div class="km-value" style="list-style-type: none;">
-                    <li v-for="term in filteredMeasures(document.internationalResources.hasPrivateSectorMeasures)">
-                        {{lstring(term.title,locale)}}
-                    </li>
-                </div>
-                
-                <div v-if="document.internationalResources.hasPrivateSectorMeasuresComments">
-                    <label>{{t("provideAdditionalInformation")}}</label>                            
-                    <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.hasPrivateSectorMeasuresComments" :locales="locale" html></ng> 
-                </div>
-            </div>        
+            <div v-if="document.internationalResources.progressData.oofConfidenceLevel" >
+                <label>{{t("oof")}}</label>
+                <span class="km-value">
+                    <km-term :value="document.internationalResources.progressData.oofConfidenceLevel" :locale="locale"></km-term>
+                </span>
+            </div>
+            <div v-if="document.internationalResources.progressData.otherConfidenceLevel" >
+                <label>{{t("otherFlows")}}</label>
+                <span class="km-value">
+                    <km-term :value="document.internationalResources.progressData.otherConfidenceLevel" :locale="locale"></km-term>   
+                </span>
+            </div>
         </div>
+      
+        <div v-if="document.internationalResources.hasPrivateSectorMeasures">
+            <label>{{t("measuresPrivateSector")}}</label>            
+            
+            <div class="km-value" style="list-style-type: none;">
+                <li v-for="term in filteredMeasures(document.internationalResources.hasPrivateSectorMeasures)">
+                    {{lstring(term.title,locale)}}
+                </li>
+            </div>
+            
+            <div v-if="document.internationalResources.hasPrivateSectorMeasuresComments">
+                <label>{{t("provideAdditionalInformation")}}</label>                            
+                <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.hasPrivateSectorMeasuresComments" :locales="locale" html></ng> 
+            </div>
+        </div>        
+      
     </section>
     <!-- section 1 end -->
     
@@ -336,6 +331,29 @@
         document: { type:Object, required: true },
         locale  : { type:String, required: true },
     })  
+    
+    const isMethodologicalInformationDisplay = computed(()=>{
+        return  props.document.internationalResources.baselineData.odaCategories || 
+                props.document.internationalResources.baselineData.odaOofType ||
+                props.document.internationalResources.baselineData.odaoofActions || 
+                props.document.internationalResources.baselineData.otherActions ||
+                props.document.internationalResources.baselineData.methodologyUsed || 
+                props.document.internationalResources.baselineData.coefficient ||
+                props.document.internationalResources.baselineData.odaConfidenceLevel || 
+                props.document.internationalResources.baselineData.oofConfidenceLevel ||
+                props.document.internationalResources.baselineData.otherConfidenceLevel || 
+                props.document.internationalResources.baselineData.methodologicalComments      
+    });
+
+    const isMonitoringProgressDisplay = computed(()=>{
+        return props.document.internationalResources.progressData && 
+              (props.document.internationalResources.progressData.progressFlows || 
+               props.document.internationalResources.progressData.odaConfidenceLevel ||
+               props.document.internationalResources.progressData.oofConfidenceLevel || 
+               props.document.internationalResources.progressData.otherConfidenceLevel ||
+               props.document.internationalResources.hasPrivateSectorMeasures )     
+    });
+
 
     const options  = {
         multipliers : 		[{identifier:'units',	      title: {en:'in units'}},   		   {identifier:'thousands', title: {en:'in thousands'}}, 		{identifier:'millions', title: {en:'in millions'}}],
@@ -383,11 +401,6 @@
         return  _.orderBy(props.document.internationalResources.progressData.progressFlows, 'year');
     });
 
-   
-
-  
-                           
-
     const typeAverageAmount = function(flows, type){
         if(!flows) return 0;
 
@@ -408,43 +421,43 @@
         return Math.round(sum/items.length);
     };
 
-    const confidenceAverage = function (resources) {
-        var values = _.compact(_.map(resources, function (resource) {
-            if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "D8BC6348-D1F9-4DA4-A8C0-7AE149939ABE") return 3; //high
-            if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "42526EE6-68F3-4E8A-BC2B-3BE60DA2EB32") return 2; //medium
-            if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "6FBEDE59-88DB-45FB-AACB-13C68406BD67") return 1; //low
-            return 0;
-        }));
+    // const confidenceAverage = function (resources) {
+    //     var values = _.compact(_.map(resources, function (resource) {
+    //         if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "D8BC6348-D1F9-4DA4-A8C0-7AE149939ABE") return 3; //high
+    //         if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "42526EE6-68F3-4E8A-BC2B-3BE60DA2EB32") return 2; //medium
+    //         if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "6FBEDE59-88DB-45FB-AACB-13C68406BD67") return 1; //low
+    //         return 0;
+    //     }));
 
-        var value = 0;
-        if(values.length) {
-            value = Math.round(_.reduce(values, function(memo, value) { return memo + value; }) / values.length);
-        }
+    //     var value = 0;
+    //     if(values.length) {
+    //         value = Math.round(_.reduce(values, function(memo, value) { return memo + value; }) / values.length);
+    //     }
 
-        if ( value == 3) return "High";
-        if ( value == 2) return "Medium";
-        if ( value == 1) return "Low";
+    //     if ( value == 3) return "High";
+    //     if ( value == 2) return "Medium";
+    //     if ( value == 1) return "Low";
 
-        return "No value selected";
-    };
+    //     return "No value selected";
+    // };
 
-    const hasValue = function(val){
-        if(val === false || val === true)
-            return true;
-        return false;
-    };
+    // const hasValue = function(val){
+    //     if(val === false || val === true)
+    //         return true;
+    //     return false;
+    // };
 
-    const annualEstimatesHasYear = function (year) {
-        if(!year) return false;
-        if(props.document && props.document.fundingNeedsData && props.document.fundingNeedsData.annualEstimates){
-            const estimate =props.document.fundingNeedsData.annualEstimates.find((item) => {
-                item.year == year
-            });
-            if(estimate)
-                return true;
-        }
-        return false;
-    };
+    // const annualEstimatesHasYear = function (year) {
+    //     if(!year) return false;
+    //     if(props.document && props.document.fundingNeedsData && props.document.fundingNeedsData.annualEstimates){
+    //         const estimate =props.document.fundingNeedsData.annualEstimates.find((item) => {
+    //             item.year == year
+    //         });
+    //         if(estimate)
+    //             return true;
+    //     }
+    //     return false;
+    // };
 
 
     const getFundingGapYear = function(year){   
@@ -491,11 +504,11 @@
         return 0;
     };
                         
-    const getNationalPlansRemainingGapByYear = function(year){
-        if(!year) return 0;
+    // const getNationalPlansRemainingGapByYear = function(year){
+    //     if(!year) return 0;
 
-        return getFundingGapYear(year) - (getNationalPlansSourcesTotal('domesticSources', year)  + getNationalPlansSourcesTotal('internationalSources', year)) ;
-    };
+    //     return getFundingGapYear(year) - (getNationalPlansSourcesTotal('domesticSources', year)  + getNationalPlansSourcesTotal('internationalSources', year)) ;
+    // };
 
     const isEmpty = function (item) {
         return _.isEmpty(item);
@@ -515,4 +528,9 @@
 
         return parseInt(odaAverage)+parseInt(oofAverage)+parseInt(otherAverage);
     };
+
+    const getTotal= function(flow){ 
+        return (flow.odaAmount?flow.odaAmount:0) + (flow.oofAmount?flow.oofAmount:0) + (flow.otherAmount?flow.otherAmount:0);
+    }
+
 </script>

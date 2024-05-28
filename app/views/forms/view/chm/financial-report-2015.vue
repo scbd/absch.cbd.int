@@ -14,7 +14,6 @@
             <section v-if="document.domesticExpendituresData">
                 <legend>{{t("reportCurrentDomesticExpenditure")}}</legend>
                 <div><label>{{t("annualFinancialSupport")}}</label></div>
-
                
                 <div v-if="document.domesticExpendituresData.currency" >
                     <label>{{t( "currency")}}</label>
@@ -31,7 +30,6 @@
                          </span>
                       </div>
                 </div>
-
               
                 <table v-if="document.domesticExpendituresData.expenditures" class="table table-hover table-condensed">
                     <thead>
@@ -42,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="expenditure in  orderedExpenditures ">  
+                        <tr v-for="expenditure in orderedExpenditures ">  
                             <td>{{expenditure.year}}</td>
                             <td>{{expenditure.amount | "number:0"}}</td>
                             <td><km-term :value="expenditure.confidenceLevel" :locale="locale"></km-term></td>
@@ -149,7 +147,7 @@
                 </div>
 
                 <div v-if="document.domesticExpendituresData.domesticCollectiveAction">
-                    <label>{{t("roleOfCollective")}}</label>
+                    <div><label>{{t("roleOfCollective")}}</label></div>
                     <label>{{t("assessedRoleOfCollectiveAction")}}</label>
 
                     <div class="km-value">
@@ -164,7 +162,9 @@
                         
                             <div v-if="document.domesticExpendituresData.measurementUnit" >
                                 <label>{{t("measurementUnit")}}</label>
-                                <div class="km-value km-pre">{{document.domesticExpendituresData.measurementUnit}}</div>
+                                <div class="km-value">
+                                    {{document.domesticExpendituresData.measurementUnit}}
+                                </div>
                             </div>                        
 
                             <table v-if="document.domesticExpendituresData.contributions" class="table table-hover table-condensed">
@@ -195,9 +195,9 @@
 
                                 <div v-if="document.domesticExpendituresData.domesticCollectiveActionMethodology!='other'">
                                     <div class="km-value">
-                                        <li v-for="term in filteredDomesticMethodology(document.domesticExpendituresData.domesticCollectiveActionMethodology)">                                        
+                                      <div v-for="term in filteredDomesticMethodology(document.domesticExpendituresData.domesticCollectiveActionMethodology)">                                        
                                             {{lstring(term.title,locale)}}
-                                        </li>
+                                        </div>
                                     </div>
                                 </div>                            
                                 
@@ -294,13 +294,13 @@
                     </thead>
                     <tbody>
                         <tr class="active">
-                            <td><strong>{{t("expectedFundingGap")}}</strong></td>
-                            <td v-for="estimate in orderedAnnualEstimates" v-if="!($last && document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center">
+                            <td><strong>{{t("expectedFundingGap")}}</strong></td>                             
+                            <td v-for="estimate in orderedAnnualEstimates" v-if="!(document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center">
                                 <strong>{{getFundingGapYear(estimate.year) |"number:0"}}</strong></td>
                         </tr>
                         <tr class="active">
-                            <td><strong>{{t("domesticSources")}}</strong></td>
-                            <td v-for="estimate in orderedAnnualEstimates" v-if="!($last && document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center">
+                            <td><strong>{{t("domesticSources")}}</strong></td>                           
+                            <td v-for="estimate in orderedAnnualEstimates" v-if="!( document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center">
                                 <strong>{{getNationalPlansSourcesTotal('domesticSources', estimate.year)| "number:0"}}</strong></td>
                         </tr>
                        
@@ -315,8 +315,8 @@
                             <td v-if="annualEstimatesHasYear(2020)" class="text-center">{{source.amount2020 | "number:0"}}</td>
                         </tr>
                         <tr class="active">
-                            <td><strong>{{t("internationalSources")}}</strong></td>
-                            <td v-for="estimate in orderedAnnualEstimates" v-if="!($last && document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center">
+                            <td><strong>{{t("internationalSources")}}</strong></td>                            
+                            <td v-for="estimate in orderedAnnualEstimates" v-if="!(document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center">
                                 <strong>{{getNationalPlansSourcesTotal('internationalSources', estimate.year) | "number:0"}}</strong></td>
                         </tr>
                         <tr v-for="source in  orderedInternationalSources">
@@ -330,8 +330,8 @@
                             <td v-if="annualEstimatesHasYear(2020)" class="text-center">{{source.amount2020 | "number:0"}}</td>
                         </tr>
                         <tr class="active">
-                            <td><strong>{{t("remainingGap")}}</strong></td>
-                            <td v-for="estimate in  orderedAnnualEstimates" v-if="!($last && document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center">
+                            <td><strong>{{t("remainingGap")}}</strong></td>                           
+                            <td v-for="estimate in  orderedAnnualEstimates" v-if="!(document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center">
                                 <strong>{{getNationalPlansRemainingGapByYear(estimate.year)| "number:0"}}</strong></td>
                         </tr>
                     </tbody>
@@ -520,7 +520,7 @@
     };    
    
     const  filteredDomesticMethodology = function (id){       
-        return options.domesticMethodology.filter((option) => option.identifier===id );
+        return options.domesticMethodology.filter((option) => option.identifier===id );            
     };
 
     const  filteredYesNo = function(id){       
@@ -584,9 +584,7 @@
     const annualEstimatesHasYear = function (year) {
         if(!year) return false;
         if(document.value && document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates){
-            const estimate =document.value.fundingNeedsData.annualEstimates.find((item) => { 
-                item.year == year;
-            });
+            const estimate =document.value.fundingNeedsData.annualEstimates.find(item => item.year == year);
           
             if(estimate)
                 return true;
@@ -595,12 +593,11 @@
     };
 
     const getFundingGapYear = function(year){   
-        if(!year) return 0;
+        if(!year) return 0;   
 
         if(document.value && document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates){
-            const estimate = document.value.fundingNeedsData.annualEstimates.find((item) => {
-                item.year == year
-            });  
+            const estimate = document.value.fundingNeedsData.annualEstimates.find(item => item.year == year);  
+          
             if(estimate && estimate.fundingGapAmount)
                 return estimate.fundingGapAmount;  
         }
@@ -617,21 +614,19 @@
 
             // var sources = angular.fromJson($scope.document.nationalPlansData[member]);//jshint ignore:line
             var sources = document.value.nationalPlansData[member];//jshint ignore:line
-          
-            
+                      
             if(_.isEmpty(_.last(sources)))
                 items = _.initial(sources);
-            console.log("items",items);
+            //console.log("items",items);
 
-            // items = _.pluck(sources, prop);
             items = _.map(sources, prop);
-            console.log("items",items);
+            //console.log("items",items);
 
             var sum = 0;
             _.map(_.compact(items), function(num){
                 sum = sum + parseInt(num)||0;
             });
-            console.log("sum",sum);
+            //console.log("sum",sum);
 
             return sum;
         }
@@ -652,11 +647,11 @@
         var oofAverage   = 0;
         var otherAverage = 0;
 
-        if(document && document.internationalResources && document.internationalResources.baselineData && document.internationalResources.baselineData.baselineFlows)
+        if(document.value && document.value.internationalResources && document.value.internationalResources.baselineData && document.value.internationalResources.baselineData.baselineFlows)
         {
-            odaAverage   = typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'odaAmount');
-            oofAverage   = typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'oofAmount');
-            otherAverage = typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'otherAmount');
+            odaAverage   = typeAverageAmount(document.value.internationalResources.baselineData.baselineFlows,'odaAmount');
+            oofAverage   = typeAverageAmount(document.value.internationalResources.baselineData.baselineFlows,'oofAmount');
+            otherAverage = typeAverageAmount(document.value.internationalResources.baselineData.baselineFlows,'otherAmount');
         }
 
         return parseInt(odaAverage)+parseInt(oofAverage)+parseInt(otherAverage);
