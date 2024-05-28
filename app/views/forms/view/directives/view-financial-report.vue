@@ -1,7 +1,6 @@
 <template>
     <!-- section basic information begin -->
-    <section v-if="document.government || document.ownerBehalf ||   document.respondentName || document.respondentDesignation ||
-        document.respondentOrganization || document.respondentDepartment ||  document.respondentPhones || document.respondentEmails" >
+    <section v-if="hasBasicInformationData" >
 
         <legend>{{t("identificationOfRespondent")}}</legend>
         
@@ -19,8 +18,7 @@
             </div>
         </div>
 
-        <div v-if="document.respondentName || document.respondentDesignation || document.respondentOrganization || document.respondentDepartment ||
-            document.respondentPhones || document.respondentEmails" >
+        <div v-if="hasContactDetailsData" >
             <legend>{{t("contactDetails")}}</legend>
 
             <div v-if="document.respondentName">
@@ -179,7 +177,7 @@
                     </div>
                 </div>        
                 
-                <div v-if="document.internationalResources.baselineData.odaConfidenceLevel || document.internationalResources.baselineData.oofConfidenceLevel || document.internationalResources.baselineData.otherConfidenceLevel">
+                <div v-if="hasAverageConfidenceLevelsData">
                     <label>{{t("averageConfidenceLevels")}}</label>
                 </div>
             
@@ -238,7 +236,7 @@
         </div>       
          
      
-        <div v-if="document.internationalResources.progressData && (document.internationalResources.progressData.odaConfidenceLevel || document.internationalResources.progressData.oofConfidenceLevel || document.internationalResources.progressData.otherConfidenceLevel)">
+        <div v-if="hasMethodologicalInformationData">
             <div><strong>{{t("methodologicalInformation")}}</strong></div>
             <label>{{t("averageConfidenceLevels")}}</label>
             <div v-if="document.internationalResources.progressData.odaConfidenceLevel" >
@@ -354,6 +352,34 @@
                props.document.internationalResources.hasPrivateSectorMeasures )     
     });
 
+    const hasBasicInformationData = computed(()=>{
+        return  props.document.government             || props.document.ownerBehalf ||   
+                props.document.respondentName         || props.document.respondentDesignation ||
+                props.document.respondentOrganization || props.document.respondentDepartment ||  
+                props.document.respondentPhones       || props.document.respondentEmails
+    });
+
+    const hasContactDetailsData = computed(()=>{
+        return  props.document.respondentName         || props.document.respondentDesignation || 
+                props.document.respondentOrganization || props.document.respondentDepartment ||
+                props.document.respondentPhones       || props.document.respondentEmails
+    });
+
+    
+    const hasAverageConfidenceLevelsData = computed(()=>{
+        return  props.document.internationalResources.baselineData.odaConfidenceLevel || 
+                props.document.internationalResources.baselineData.oofConfidenceLevel || 
+                props.document.internationalResources.baselineData.otherConfidenceLevel
+    });
+
+    const hasMethodologicalInformationData = computed(()=>{
+        return  props.document.internationalResources.progressData && 
+                (props.document.internationalResources.progressData.odaConfidenceLevel || 
+                props.document.internationalResources.progressData.oofConfidenceLevel  || 
+                props.document.internationalResources.progressData.otherConfidenceLevel)
+    });
+
+
 
     const options  = {
         multipliers : 		[{identifier:'units',	      title: {en:'in units'}},   		   {identifier:'thousands', title: {en:'in thousands'}}, 		{identifier:'millions', title: {en:'in millions'}}],
@@ -421,8 +447,7 @@
             var prop = "amount"+year;
             var items;
 
-            var sources = props.document.nationalPlansData[member];//jshint ignore:line
-          
+            var sources = props.document.nationalPlansData[member];//jshint ignore:line          
             
                 if(_.isEmpty(_.last(sources)))
                 items = _.initial(sources);
@@ -461,4 +486,6 @@
     const getTotal= function(flow){ 
         return (flow.odaAmount?flow.odaAmount:0) + (flow.oofAmount?flow.oofAmount:0) + (flow.otherAmount?flow.otherAmount:0);
     }
+
+
 </script>
