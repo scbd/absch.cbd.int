@@ -7,7 +7,7 @@
             <!-- <ng v-vue-ng:document-date></ng> -->    
             
             <!-- section basic information and section 1-3 -->
-            <view-financial-report :document="document" :locale="locale"> 
+            <view-financial-report :document="document" :locale="locale" type="2015"> 
             </view-financial-report>  
 
             <!-- section 4 begin -->

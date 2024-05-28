@@ -87,128 +87,126 @@
                 </div>
             </div>
         </div>
+    
+        <div v-if="hasFlowData" class="table-responsive">
+            <table class="table table-hover table-bordered table-condensed">
+                <thead>
+                    <tr class="active">
+                        <th>{{t("year")}}</th>
+                        <th>{{t("oda")}}</th>
+                        <th>{{t("oof")}}</th>
+                        <th>{{t("otherFlows")}}</th>
+                        <th>{{t("total")}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="flow in orderedFlows" >
+                        <td>{{flow.year}}</td>                          
+                        <td>{{currencyString(flow.odaAmount)}}</td>
+                        <td>{{currencyString(flow.oofAmount)}}</td>
+                        <td>{{currencyString(flow.otherAmount)}}</td>
+                        <td>{{currencyString(getTotal(flow)) }}</td>
+                    </tr>
+                    <tr class="active">
+                        <td v-if="type=='2015'"><strong>{{t("averageBaseline")}}</strong></td>
+                        <td v-if="type=='2020'"><strong>{{t("average")}}</strong></td>
+                        <td><strong>{{currencyString(typeAverageAmount(flowData,'odaAmount'))}}</strong></td>
+                        <td><strong>{{currencyString(typeAverageAmount(flowData,'oofAmount'))}}</strong></td>
+                        <td><strong>{{currencyString(typeAverageAmount(flowData,'otherAmount'))}}</strong></td>
+                        <td><strong>{{currencyString(totalAverageAmount())}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
 
-      
-        <div v-if="document.internationalResources.baselineData">       
-            <div v-if="document.internationalResources.baselineData.baselineFlows" class="table-responsive">
-                <table class="table table-hover table-bordered table-condensed">
-                    <thead>
-                        <tr class="active">
-                            <th>{{t("year")}}</th>
-                            <th>{{t("oda")}}</th>
-                            <th>{{t("oof")}}</th>
-                            <th>{{t("otherFlows")}}</th>
-                            <th>{{t("total")}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="flow in orderedBaselineFlows" >
-                            <td>{{flow.year}}</td>                          
-                            <td>{{currencyString(flow.odaAmount)}}</td>
-                            <td>{{currencyString(flow.oofAmount)}}</td>
-                            <td>{{currencyString(flow.otherAmount)}}</td>
-                            <td>{{currencyString(getTotal(flow)) }}</td>
-                        </tr>
-                        <tr class="active">
-                            <td><strong>{{t("averageBaseline")}}</strong></td>
-                            <td><strong>{{currencyString(typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'odaAmount'))}}</strong></td>
-                            <td><strong>{{currencyString(typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'oofAmount'))}}</strong></td>
-                            <td><strong>{{currencyString(typeAverageAmount(document.internationalResources.baselineData.baselineFlows,'otherAmount'))}}</strong></td>
-                            <td><strong>{{currencyString(totalAverageAmount())}}</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div v-if="isMethodologicalInformationDisplay">
-                <label> {{t("methodologicalInformation")}}</label>                   
-                        
-                <div v-if="document.internationalResources.baselineData.odaCategories">
-                    <label>{{t("odaIncludes")}}</label>
-                    <div class="km-value">
-                        <li v-for="term in document.internationalResources.baselineData.odaCategories">                             
-                            <km-term :value="term" :locale="locale"></km-term>  
-                        </li>
-                    </div>
-                </div>        
-                
-                <div v-if="document.internationalResources.baselineData.odaOofType">
-                    <label> {{t("odaOofIncludes")}}</label>
-                    <div class="km-value">
-                        <km-term :value="document.internationalResources.baselineData.odaOofType" :locale="locale"></km-term>  
-                    </div>
-                </div>            
-                
-                <div v-if="document.internationalResources.baselineData.odaoofActions">
-                    <label> {{t("odaOofIncludes")}}</label>
-                    <div class="km-value">
-                        <li v-for="term in document.internationalResources.baselineData.odaoofActions">                              
-                            <km-term :value="term" :locale="locale"></km-term>  
-                        </li>
-                    </div>
-                </div>        
-                
-                <div v-if="document.internationalResources.baselineData.otherActions">
-                    <label>{{t("otherFlowsInclude")}}</label>
-                    <div class="km-value">
-                        <li v-for="term in document.internationalResources.baselineData.otherActions">                              
-                            <km-term :value="term" :locale="locale"></km-term>                       
-                        </li>
-                    </div>
-                </div>            
-                
-                <div v-if="document.internationalResources.baselineData.methodologyUsed">
-                    <label> {{t("methodology")}}</label>
-                    <div v-if="document.internationalResources.baselineData.methodologyUsed!='other'">                                
-                        <div class="km-value" v-for="term in filter(options.methodology,document.internationalResources.baselineData.methodologyUsed)">
-                            {{lstring(term.title,locale)}}  
-                        </div>
-                    </div>
-
-                    <div v-if="document.internationalResources.baselineData.methodologyUsedComments" >                           
-                        <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.baselineData.methodologyUsedComments" :locales="locale" html></ng> 
-                    </div>
+        <div v-if="isMethodologicalInformationDisplay">
+            <label> {{t("methodologicalInformation")}}</label>                   
+         
+            <div v-if="baselineData && baselineData.odaCategories">
+                <label>{{t("odaIncludes")}}</label>
+                <div class="km-value">
+                    <li v-for="term in baselineData.odaCategories">                             
+                        <km-term :value="term" :locale="locale"></km-term>  
+                    </li>
                 </div>
-            
-                <div v-if="document.internationalResources.baselineData.coefficient" >
-                    <label>{{t("coefficient")}}</label>
-                    <div class="km-value ">
-                        {{document.internationalResources.baselineData.coefficient}}%
-                    </div>
-                </div>        
-                
-                <div v-if="hasAverageConfidenceLevelsData">
-                    <label>{{t("averageConfidenceLevels")}}</label>
+            </div>        
+        
+            <div v-if="baselineData.odaOofType">
+                <label> {{t("odaOofIncludes")}}</label>
+                <div class="km-value">
+                    <km-term :value="baselineData.odaOofType" :locale="locale"></km-term>  
                 </div>
-            
-                <div v-if="document.internationalResources.baselineData.odaConfidenceLevel" >
-                    <label>{{t("oda")}}:</label>
-                    <div class="km-value">                           
-                        <km-term :value="document.internationalResources.baselineData.odaConfidenceLevel" :locale="locale"></km-term>
-                    </div>
+            </div> 
+           
+            <div v-if="baselineData.odaoofActions">
+                <label> {{t("odaOofIncludes")}}</label>
+                <div class="km-value">
+                    <li v-for="term in baselineData.odaoofActions">                              
+                        <km-term :value="term" :locale="locale"></km-term>  
+                    </li>
                 </div>
-                
-                <div v-if="document.internationalResources.baselineData.oofConfidenceLevel" >
-                    <label>{{t("oof")}}</label>
-                    <div class="km-value">
-                        <km-term :value="document.internationalResources.baselineData.oofConfidenceLevel" :locale="locale"></km-term>
+            </div>        
+        
+            <div v-if="baselineData.otherActions">
+                <label>{{t("otherFlowsInclude")}}</label>
+                <div class="km-value">
+                    <li v-for="term in baselineData.otherActions">                              
+                        <km-term :value="term" :locale="locale"></km-term>                       
+                    </li>
+                </div>
+            </div> 
+          
+            <div v-if="baselineData.methodologyUsed">
+                <label> {{t("methodology")}}</label>
+                <div v-if="baselineData.methodologyUsed!='other'">                                
+                    <div class="km-value" v-for="term in filter(options.methodology,baselineData.methodologyUsed)">
+                        {{lstring(term.title,locale)}}  
                     </div>
                 </div>
 
-                <div v-if="document.internationalResources.baselineData.otherConfidenceLevel" >
-                    <label>{{t("otherFlows")}}:</label>
-                    <span class="km-value">
-                        <km-term :value="document.internationalResources.baselineData.otherConfidenceLevel" :locale="locale"></km-term>
-                    </span>
-                </div>
-
-                <div v-if="document.internationalResources.baselineData.methodologicalComments">
-                    <label>{{t("otherMethodologicalObservations")}}</label>
-                    <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.baselineData.methodologicalComments " :locales="locale" html></ng>
+                <div v-if="baselineData.methodologyUsedComments" >                           
+                    <ng  v-vue-ng:km-value-ml  :value="baselineData.methodologyUsedComments" :locales="locale" html></ng> 
                 </div>
             </div>
-        </div>  
-      
+        
+            <div v-if="baselineData.coefficient" >
+                <label>{{t("coefficient")}}</label>
+                <div class="km-value ">
+                    {{baselineData.coefficient}}%
+                </div>
+            </div>        
+        
+            <div v-if="hasAverageConfidenceLevelsData">
+                <label>{{t("averageConfidenceLevels")}}</label>
+            </div>
+        
+            <div v-if="baselineData.odaConfidenceLevel" >
+                <label>{{t("oda")}}:</label>
+                <div class="km-value">                           
+                    <km-term :value="baselineData.odaConfidenceLevel" :locale="locale"></km-term>
+                </div>
+            </div>
+            
+            <div v-if="baselineData.oofConfidenceLevel" >
+                <label>{{t("oof")}}</label>
+                <div class="km-value">
+                    <km-term :value="baselineData.oofConfidenceLevel" :locale="locale"></km-term>
+                </div>
+            </div>
+
+            <div v-if="baselineData.otherConfidenceLevel" >
+                <label>{{t("otherFlows")}}:</label>
+                <span class="km-value">
+                    <km-term :value="baselineData.otherConfidenceLevel" :locale="locale"></km-term>
+                </span>
+            </div>
+
+            <div v-if="baselineData.methodologicalComments">
+                <label>{{t("otherMethodologicalObservations")}}</label>
+                <ng  v-vue-ng:km-value-ml  :value="baselineData.methodologicalComments " :locales="locale" html></ng>
+            </div>
+        </div>
+
         <div v-if="isMonitoringProgressDisplay">
             <label>{{t("monitoringProgress")}}</label>
             <div v-if="document.internationalResources.progressData.progressFlows" class="table-responsive">
@@ -235,7 +233,7 @@
             </div> 
         </div>       
          
-     
+    
         <div v-if="hasMethodologicalInformationData">
             <div><strong>{{t("methodologicalInformation")}}</strong></div>
             <label>{{t("averageConfidenceLevels")}}</label>
@@ -258,6 +256,8 @@
                 </span>
             </div>
         </div>
+
+       
       
         <div v-if="document.internationalResources.hasPrivateSectorMeasures">
             <label>{{t("measuresPrivateSector")}}</label>            
@@ -328,19 +328,42 @@
     const props = defineProps({
         document: { type:Object, required: true },
         locale  : { type:String, required: true },
+        type    : { type:String, default:"2015" }
     })  
     
-    const isMethodologicalInformationDisplay = computed(()=>{
-        return  props.document.internationalResources.baselineData.odaCategories || 
-                props.document.internationalResources.baselineData.odaOofType ||
-                props.document.internationalResources.baselineData.odaoofActions || 
-                props.document.internationalResources.baselineData.otherActions ||
-                props.document.internationalResources.baselineData.methodologyUsed || 
-                props.document.internationalResources.baselineData.coefficient ||
-                props.document.internationalResources.baselineData.odaConfidenceLevel || 
-                props.document.internationalResources.baselineData.oofConfidenceLevel ||
-                props.document.internationalResources.baselineData.otherConfidenceLevel || 
-                props.document.internationalResources.baselineData.methodologicalComments      
+
+    const baselineData = computed(()=>{
+        if (props.type=='2015'){
+            return  props.document.internationalResources.baselineData;
+        }
+        else if (props.type =='2020'){
+            return  props.document.internationalResources;
+        }      
+    });
+
+    const flowData = computed(()=>{    
+        if (props.type=='2015'){
+            return   props.document.internationalResources.baselineData.baselineFlows;
+        }
+        else if (props.type =='2020'){           
+            return  props.document.internationalResources.financialFlows;  
+        }           
+    });
+
+    const isMethodologicalInformationDisplay = computed(()=>{  
+        if (baselineData.value)     
+            return  baselineData.value.odaCategories        || 
+                    baselineData.value.odaOofType           ||
+                    baselineData.value.odaoofActions        || 
+                    baselineData.value.otherActions         ||
+                    baselineData.value.methodologyUsed      || 
+                    baselineData.value.coefficient          ||
+                    baselineData.value.odaConfidenceLevel   || 
+                    baselineData.value.oofConfidenceLevel   ||
+                    baselineData.value.otherConfidenceLevel || 
+                    baselineData.value.methodologicalComments;
+        return false;
+     
     });
 
     const isMonitoringProgressDisplay = computed(()=>{
@@ -367,9 +390,9 @@
 
     
     const hasAverageConfidenceLevelsData = computed(()=>{
-        return  props.document.internationalResources.baselineData.odaConfidenceLevel || 
-                props.document.internationalResources.baselineData.oofConfidenceLevel || 
-                props.document.internationalResources.baselineData.otherConfidenceLevel
+        return  baselineData.odaConfidenceLevel || 
+                baselineData.oofConfidenceLevel || 
+                baselineData.otherConfidenceLevel
     });
 
     const hasMethodologicalInformationData = computed(()=>{
@@ -379,32 +402,61 @@
                 props.document.internationalResources.progressData.otherConfidenceLevel)
     });
 
+    const hasFlowData = computed(()=>{    
+        if (props.type=='2015'){
+            return   props.document.internationalResources.baselineData && props.document.internationalResources.baselineData.baselineFlows;
+        }
+        else if (props.type =='2020'){           
+            return  props.document.internationalResources.financialFlows;  
+        }           
+    });
 
-
-    const options  = {
-        multipliers : 		[{identifier:'units',	      title: {en:'in units'}},   		   {identifier:'thousands', title: {en:'in thousands'}}, 		{identifier:'millions', title: {en:'in millions'}}],
-        methodology : 		[{identifier:'oecd_dac',      title: {en:'OECD DAC Rio markers'}}, {identifier:'other', 	title: {en:'Other'       }}],
-        measures    : 		[{identifier:'no', 	          title: {en:'No' }}, 		  	       {identifier:'some', 		title: {en:'Some measures taken'}}, {identifier:'comprehensive', title: {en:'Comprehensive measures taken'}}],
-        inclusions  : 		[{identifier:'notyet', 	      title: {en:'Not yet stared'}},
-                            {identifier:'some', 	      title: {en:'Some inclusion achieved'}},
-                            {identifier:'comprehensive', title: {en:'Comprehensive inclusion'}}],
-        assessments : 		[{identifier:'notnecessary',  title: {en:'No such assessment necessary'}},
-                            {identifier:'notyet', 	      title: {en:'Not yet started'}},
-                            {identifier:'some', 		  title: {en:'Some assessments undertaken'}},
-                            {identifier:'comprehensive', title: {en:'Comprehensive assessments undertaken'}}],
-        domesticMethodology:[{identifier:'cmfeccabc',     title: {en:'Conceptual and Methodological Framework for Evaluating the Contribution of Collective Action to Biodiversity Conservation'}},
-                            {identifier:'other', 	      title: {en:'Other'}}],
-        yesNo : 			[{identifier:false,  		  title: {en:'No' }    },{identifier:true, 	title: {en:'Yes'}}]
-    };
-    const orderedBaselineFlows = computed(()=>{
-        if (!(props.document.internationalResources && props.document.internationalResources.baselineData && props.document.internationalResources.baselineData.baselineFlows)) return [];     
-        return  _.orderBy(props.document.internationalResources.baselineData.baselineFlows, 'year');
+ 
+   
+    const orderedFlows = computed(()=>{    
+        if (props.type=='2015'){
+            if (!(props.document.internationalResources && props.document.internationalResources.baselineData && props.document.internationalResources.baselineData.baselineFlows)) return [];    
+            //remove {} from array
+            var newArray = props.document.internationalResources.baselineData.baselineFlows.filter(value => Object.keys(value).length !== 0);  
+            return  _.orderBy(newArray, 'year'); 
+        }
+        else if (props.type =='2020'){
+            if (!(props.document.internationalResources && props.document.internationalResources.financialFlows)) return [];     
+            //remove {} from array
+            var newArray = props.document.internationalResources.financialFlows.filter(value => Object.keys(value).length !== 0); 
+            return  _.orderBy(newArray, 'year');   
+        }           
     });
 
     const orderedProgressFlows = computed(()=>{
-        if (! (props.document.internationalResources && props.document.internationalResources.progressData && props.document.internationalResources.progressData.progressFlows)) return [];     
-        return  _.orderBy(props.document.internationalResources.progressData.progressFlows, 'year');
+        if (! (props.document.internationalResources && props.document.internationalResources.progressData && props.document.internationalResources.progressData.progressFlows)) return [];   
+        //remove {} from array
+        var newArray = props.document.internationalResources.progressData.progressFlows.filter(value => Object.keys(value).length !== 0);   
+        return  _.orderBy(newArray, 'year');
     });
+
+    const options  = {
+        multipliers : 		[{identifier:'units',	      title: {en:'in units'}},   		   
+                             {identifier:'thousands',     title: {en:'in thousands'}}, 		
+                             {identifier:'millions',      title: {en:'in millions'}}],
+        methodology : 		[{identifier:'oecd_dac',      title: {en:'OECD DAC Rio markers'}}, 
+                             {identifier:'other', 	      title: {en:'Other'       }}],
+        measures    : 		[{identifier:'no', 	          title: {en:'No' }}, 		  	       
+                             {identifier:'some', 	  	  title: {en:'Some measures taken'}}, 
+                             {identifier:'comprehensive', title: {en:'Comprehensive measures taken'}}],
+        inclusions  : 		[{identifier:'notyet', 	      title: {en:'Not yet stared'}},
+                             {identifier:'some', 	      title: {en:'Some inclusion achieved'}},
+                             {identifier:'comprehensive', title: {en:'Comprehensive inclusion'}}],
+        assessments : 		[{identifier:'notnecessary',  title: {en:'No such assessment necessary'}},
+                             {identifier:'notyet', 	      title: {en:'Not yet started'}},
+                             {identifier:'some', 		  title: {en:'Some assessments undertaken'}},
+                             {identifier:'comprehensive', title: {en:'Comprehensive assessments undertaken'}}],
+        domesticMethodology:[{identifier:'cmfeccabc',     title: {en:'Conceptual and Methodological Framework for Evaluating the Contribution of Collective Action to Biodiversity Conservation'}},
+                             {identifier:'other', 	      title: {en:'Other'}}],
+        yesNo : 			[{identifier:false,  		  title: {en:'No'}},
+                             {identifier:true, 	          title: {en:'Yes'}}]
+    };
+
 
     const typeAverageAmount = function(flows, type){
         if(!flows) return 0;
@@ -473,11 +525,13 @@
         var oofAverage   = 0;
         var otherAverage = 0;
 
-        if(props.document && props.document.internationalResources && props.document.internationalResources.baselineData && props.document.internationalResources.baselineData.baselineFlows)
+        if(hasFlowData.value)
         {
-            odaAverage   = typeAverageAmount(props.document.internationalResources.baselineData.baselineFlows,'odaAmount');
-            oofAverage   = typeAverageAmount(props.document.internationalResources.baselineData.baselineFlows,'oofAmount');
-            otherAverage = typeAverageAmount(props.document.internationalResources.baselineData.baselineFlows,'otherAmount');
+          
+            odaAverage   = typeAverageAmount(flowData.value,'odaAmount');
+            oofAverage   = typeAverageAmount(flowData.value,'oofAmount');
+            otherAverage = typeAverageAmount(flowData.value,'otherAmount');
+        
         }
 
         return parseInt(odaAverage)+parseInt(oofAverage)+parseInt(otherAverage);
