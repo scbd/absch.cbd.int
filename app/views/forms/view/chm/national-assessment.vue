@@ -68,7 +68,7 @@
                 </div> 
             </section>
 
-            <section v-if="(document.nationalIndicatorsUsed===false) || (document.nationalIndicatorsUsed && document.nationalIndicators) || document.strategicPlanIndicators || document.implementationActivities">  
+            <section v-if="hasIndicatorsAndActivitiesData">  
                 <legend>{{ t("indicatorsAndActivities") }} </legend>    
     
                 <div v-if="document.nationalIndicatorsUsed===false">                        
@@ -85,7 +85,7 @@
                 <div v-if="document.strategicPlanIndicators">
                     <label>{{ t("linkToIndicator") }}</label>
                     <div class="km-value">
-                        <div v-for="item in strategicPlanIndicators" >
+                        <div v-for="item in document.strategicPlanIndicators" >
                             {{lstring(item.title ,locale) }}
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                 </div>                
             </section>
 
-            <section v-if="document.confidence || document.confidenceInfo || document.adequacy||document.adequacyDescription" >
+            <section v-if="hasLevelOfConfidenceData" >
                 <legend>{{t("levelOfConfidence") }}</legend>
 
                 <div v-if="document.confidence">
@@ -176,4 +176,17 @@
     })
     const document = computed(()=>props.documentInfo?.body);  
     
+    
+    const hasIndicatorsAndActivitiesData = computed(()=>{
+        return  (document.value.nationalIndicatorsUsed===false) || 
+                (document.value.nationalIndicatorsUsed && document.value.nationalIndicators) || 
+                document.value.strategicPlanIndicators || document.value.implementationActivities;
+             
+    });
+
+    const hasLevelOfConfidenceData = computed(()=>{       
+       return document.value.confidence || document.value.confidenceInfo || document.value.adequacy||document.value.adequacyDescription;                     
+    });
+
+
 </script>
