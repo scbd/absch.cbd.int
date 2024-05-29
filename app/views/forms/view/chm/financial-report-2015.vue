@@ -193,10 +193,10 @@
                                 <div><strong>{{t("methodologicalInformation")}}</strong></div>
                                 <label>{{t("methodologyUsed")}}</label>
                                 <div v-if="document.domesticExpendituresData.domesticCollectiveActionMethodology!='other'">                                     
-                                    <div class="km-value">
-                                      <div v-for="term in filter(options.domesticMethodology,document.domesticExpendituresData.domesticCollectiveActionMethodology)">                                                                                                                   
+                                    <div class="km-value">                                        
+                                        <span v-for="term in filter(options.domesticMethodology,document.domesticExpendituresData.domesticCollectiveActionMethodology)">                                                                                                                   
                                             {{lstring(term.title,locale)}}
-                                        </div>
+                                        </span>                           
                                     </div>
                                 </div>                            
                                 
@@ -294,17 +294,15 @@
                     <tbody>
                         <tr class="active">
                             <td><strong>{{t("expectedFundingGap")}}</strong></td>     
-                            <td v-for="estimate in orderedAnnualEstimates"  class="col-sm-1 text-center">
-                                                    
-                            <!-- <td v-for="estimate in orderedAnnualEstimates" v-if="!(document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center"> -->
-                                <strong>{{currencyString(getFundingGapYear(estimate.year))}}</strong></td>
+                            <td v-for="estimate in orderedAnnualEstimates"  class="col-sm-1 text-center">                                                    
+                                <strong>{{currencyString(getFundingGapYear(estimate.year))}}</strong>
+                            </td>
                         </tr>
                         <tr class="active">
                             <td><strong>{{t("domesticSources")}}</strong></td>    
                             <td v-for="estimate in orderedAnnualEstimates"  class="col-sm-1 text-center">
-                                                    
-                            <!-- <td v-for="estimate in orderedAnnualEstimates" v-if="!( document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center"> -->
-                                <strong>{{currencyString(getNationalPlansSourcesTotal('domesticSources', estimate.year))}}</strong></td>
+                                <strong>{{currencyString(getNationalPlansSourcesTotal('domesticSources', estimate.year))}}</strong>
+                            </td>
                         </tr>
                        
                         <tr v-for="source in orderedDomesticSources ">
@@ -319,10 +317,9 @@
                         </tr>
                         <tr class="active">
                             <td><strong>{{t("internationalSources")}}</strong></td>   
-                            <td v-for="estimate in orderedAnnualEstimates"  class="col-sm-1 text-center">
-                                                     
-                            <!-- <td v-for="estimate in orderedAnnualEstimates" v-if="!(document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center"> -->
-                                <strong>{{currencyString(getNationalPlansSourcesTotal('internationalSources', estimate.year))}}</strong></td>
+                            <td v-for="estimate in orderedAnnualEstimates"  class="col-sm-1 text-center">                                                     
+                                <strong>{{currencyString(getNationalPlansSourcesTotal('internationalSources', estimate.year))}}</strong>
+                            </td>
                         </tr>
                         <tr v-for="source in  orderedInternationalSources">
                             <td>{{lstring(source.name,locale)}}</td>
@@ -335,11 +332,10 @@
                             <td v-if="annualEstimatesHasYear(2020)" class="text-center">{{currencyString(source.amount2020)}}</td>
                         </tr>
                         <tr class="active">
-                            <td><strong>{{t("remainingGap")}}</strong></td>      
-                            <!-- <td v-for="estimate in  orderedAnnualEstimates" v-if="!(document.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center"> -->
-                                                  
+                            <td><strong>{{t("remainingGap")}}</strong></td>
                             <td v-for="estimate in  orderedAnnualEstimates" class="col-sm-1 text-center">
-                                <strong>{{currencyString(getNationalPlansRemainingGapByYear(estimate.year))}}</strong></td>
+                                <strong>{{currencyString(getNationalPlansRemainingGapByYear(estimate.year))}}</strong>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -458,28 +454,40 @@
     });
 
     const orderedExpenditures = computed(()=>{
-        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];     
-        return  _.orderBy(document.value.domesticExpendituresData.expenditures, 'year');
+        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];   
+        //remove {} from array
+        var newArray = document.value.domesticExpendituresData.expenditures.filter(value => Object.keys(value).length !== 0);   
+        return  _.orderBy(newArray, 'year');
     });
+
+ 
 
     const orderedContributions = computed(()=>{
         if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.contributions)) return [];     
-        return  _.orderBy(document.value.domesticExpendituresData.contributions, 'year');
+         //remove {} from array
+         var newArray = document.value.domesticExpendituresData.contributions.filter(value => Object.keys(value).length !== 0);  
+        return  _.orderBy(newArray, 'year');
     });
 
     const orderedAnnualEstimates = computed(()=>{       
         if (!(document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates)) return [];  
-       return  _.orderBy(document.value.fundingNeedsData.annualEstimates, 'year');
+        //remove {} from array
+        var newArray = document.value.fundingNeedsData.annualEstimates.filter(value => Object.keys(value).length !== 0);  
+       return  _.orderBy(newArray, 'year');
     });   
 
     const orderedDomesticSources = computed(()=>{
-        if (!(document.value.nationalPlansData && document.value.nationalPlansData.domesticSources)) return [];     
-        return  _.orderBy(document.value.nationalPlansData.domesticSources, 'name');
+        if (!(document.value.nationalPlansData && document.value.nationalPlansData.domesticSources)) return [];  
+        //remove {} from array
+        var newArray = document.value.nationalPlansData.domesticSources.filter(value => Object.keys(value).length !== 0);     
+        return  _.orderBy(newArray, 'name');
     });
 
     const orderedInternationalSources = computed(()=>{
-        if (!(document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];     
-        return  _.orderBy(document.value.nationalPlansData.internationalSources, 'name');
+        if (!(document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];    
+        //remove {} from array
+        var newArray = document.value.nationalPlansData.internationalSources.filter(value => Object.keys(value).length !== 0);      
+        return  _.orderBy( newArray, 'name');
     });
 
 

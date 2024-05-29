@@ -476,45 +476,7 @@
             return Math.round(sum/items.length);
         }
             
-    };
-
-    const getFundingGapYear = function(year){   
-        if(!year) return 0;
-
-        if(props.document && props.document.fundingNeedsData && props.document.fundingNeedsData.annualEstimates){
-            const estimate = props.document.fundingNeedsData.annualEstimates.find((item) => {
-                item.year == year
-        });  
-            if(estimate && estimate.fundingGapAmount)
-                return estimate.fundingGapAmount;  
-        }
-        return 0;
-    };
-
-    const getNationalPlansSourcesTotal = function(member, year){
-        if(!year || !member) return 0;
-
-        if(props.document && props.document.nationalPlansData && props.document.nationalPlansData[member]){
-
-            var prop = "amount"+year;
-            var items;
-
-            var sources = props.document.nationalPlansData[member];//jshint ignore:line          
-            
-                if(_.isEmpty(_.last(sources)))
-                items = _.initial(sources);
-      
-            items = _.map(sources, prop);
-            console.log("items",items);
-
-            var sum = 0;
-            _.map(_.compact(items), function(num){
-                sum = sum + parseInt(num)||0;
-            }); 
-            return sum;
-        }
-        return 0;
-    };                        
+    };     
 
     const isEmpty = function (item) {
         return _.isEmpty(item);
@@ -540,6 +502,4 @@
     const getTotal= function(flow){ 
         return (flow.odaAmount?flow.odaAmount:0) + (flow.oofAmount?flow.oofAmount:0) + (flow.otherAmount?flow.otherAmount:0);
     }
-
-
 </script>
