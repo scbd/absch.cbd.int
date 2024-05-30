@@ -15,7 +15,7 @@
                 <legend>{{t("role")}}</legend>
                 <div><label>{{t("hasYourCountry")}}</label></div>
                 <div v-if="document.domesticExpendituresData.domesticCollectiveAction">
-                    <div  class="km-value"  style="list-style-type: none;" >                  
+                    <div  class="km-value km-pre"  style="list-style-type: none;" >                  
                         <li v-for="term in filter(options.assessments,document.domesticExpendituresData.domesticCollectiveAction)">                     
                             {{lstring(term.title,locale)}}
                         </li>
@@ -26,22 +26,22 @@
         
                 <div v-if="document.domesticExpendituresData.currency" >
                     <label>{{t("currency")}}</label>
-                    <span class="km-value">                    
-                        <km-term :value="document.domesticExpendituresData.currency " :locale="locale"></km-term>   
+                    <span class="km-value">
+                       <km-term :value="document.domesticExpendituresData.currency" :locale="locale"></km-term>   
                     </span>
                 </div>
                 <div v-if="document.domesticExpendituresData.multiplier" >
                     <label>{{t("allValues")}}</label>
-                    <span class="km-value" v-for="term in filter(options.multipliers,document.domesticExpendituresData.multiplier)">
-                        {{lstring(term.title,locale)}} 
-                    </span>
+                    <div class="km-value">
+                        <span v-for="term in filter(options.multipliers,document.domesticExpendituresData.multiplier)">
+                            {{lstring(term.title,locale)}} 
+                        </span>
+                    </div>                    
                 </div>       
                
                 <div v-if="document.domesticExpendituresData.measurementUnit" >
-                    <label>{{t("measurementUnit")}}</label>
-                    <div class="km-value">
-                        {{document.domesticExpendituresData.measurementUnit}}
-                    </div>
+                    <label>{{t("measurementUnit")}}</label>                                   
+                    <ng v-vue-ng:km-value-ml  :value="document.domesticExpendituresData.measurementUnit" :locales="locale" html km-pre></ng>
                 </div>
                 
                 <table v-if="document.domesticExpendituresData.contributions" class="table table-hover table-condensed">
@@ -72,17 +72,17 @@
                
                 <div v-if="document.domesticExpendituresData.domesticCollectiveActionMethodology" >
                     <label>{{t("methodology")}}</label>
-                    <div v-if="!document.domesticExpendituresData.domesticCollectiveActionMethodologyOther" >
-                        <ng v-vue-ng:km-value-ml :value="document.domesticExpendituresData.domesticCollectiveActionMethodology" :locales="locale" html></ng>              
+                    <div  v-if="!document.domesticExpendituresData.domesticCollectiveActionMethodologyOther" >                    
+                        <ng v-vue-ng:km-value-ml  :value="document.domesticExpendituresData.domesticCollectiveActionMethodology" :locales="locale" html km-pre></ng>              
                     </div>
-                    <div v-if="document.domesticExpendituresData.domesticCollectiveActionMethodologyOther" >
-                        <ng v-vue-ng:km-value-ml :value="document.domesticExpendituresData.domesticCollectiveActionMethodologyOther" :locales="locale" html></ng>              
+                    <div  v-if="document.domesticExpendituresData.domesticCollectiveActionMethodologyOther" >                       
+                        <ng v-vue-ng:km-value-ml  :value="document.domesticExpendituresData.domesticCollectiveActionMethodologyOther" :locales="locale" html km-pre></ng>            
                     </div>
                 </div>        
               
                 <div v-if="document.domesticExpendituresData.domesticCollectiveActionMethodologyComments" >
-                    <label>{{t("otherMethodological")}}</label>                   
-                    <ng v-vue-ng:km-value-ml :value="document.domesticExpendituresData.domesticCollectiveActionMethodologyComments" :locales="locale" html></ng>
+                    <label>{{t("otherMethodological")}}</label> 
+                    <ng v-vue-ng:km-value-ml  :value="document.domesticExpendituresData.domesticCollectiveActionMethodologyComments" :locales="locale" html km-pre></ng>  
                 </div>
             </section> 
             <!-- section 4 end -->
@@ -93,16 +93,18 @@
                 <label>{{t("achievedResourceMobilization")}}</label>
                 <div v-if="document.nationalPlansData.currency" >
                     <label>{{t("currency")}}</label>
-                    <span class="km-value">                     
+                    <span class="km-value"> 
                         <km-term :value="document.nationalPlansData.currency" :locale="locale"></km-term>   
                     </span>
                 </div>
         
                 <div v-if="document.nationalPlansData.multiplier" >
                     <label>{{t("allValues")}}</label>
-                    <span class="km-value" v-for="term in filter(options.multipliers,document.nationalPlansData.multiplier)">
-                        {{lstring(term.title,locale)}} 
-                    </span>
+                    <div class="km-value">
+                        <span v-for="term in filter(options.multipliers,document.nationalPlansData.multiplier)">
+                            {{lstring(term.title,locale)}} 
+                        </span>
+                    </div>                  
                 </div>
         
                 <!-- TODO:test -->
@@ -118,15 +120,12 @@
                     <tbody>
                         <tr class="active">
                             <td><strong>{{t("fundingGap")}}</strong></td>
-                            <!-- <td v-for="estimate in orderedAnnualEstimates" v-if="!($last && baselineDocument.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center"> -->
                             <td v-for="estimate in orderedAnnualEstimates" class="col-sm-1 text-center">
                                     <strong>{{currencyString(getBaselineFundingGapYear(estimate.year))}}</strong>                                    
                             </td>
                         </tr>
                         <tr class="active">
-                            <td><strong>{{t("domesticSources")}}</strong></td>
-                            <!-- <td v-for="estimate in orderedAnnualEstimates" v-if="!($last && baselineDocument.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center"> -->
-                              
+                            <td><strong>{{t("domesticSources")}}</strong></td>                              
                             <td v-for="estimate in orderedAnnualEstimates" class="col-sm-1 text-center">
                                 <strong>{{currencyString(getNationalPlansSourcesTotal('domesticSources', estimate.year))}}</strong>                        
                             </td>
@@ -144,7 +143,6 @@
                         </tr>
                         <tr class="active">
                             <td><strong>{{t("internationalSources")}}</strong></td>
-                            <!-- <td v-for="estimate in orderedAnnualEstimates" v-if="!($last && baselineDocument.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center"> -->
                             <td v-for="estimate in orderedAnnualEstimates" class="col-sm-1 text-center">                           
                                 <strong>{{currencyString(getNationalPlansSourcesTotal('internationalSources', estimate.year))}}</strong>
                             </td>
@@ -161,7 +159,6 @@
                         </tr>
                         <tr class="active">
                             <td><strong>{{t("remainingGap")}}</strong></td>
-                            <!-- <td v-for="estimate in orderedAnnualEstimates" v-if="!($last && baselineDocument.fundingNeedsData.annualEstimates.length < options.fundingNeedsYears.length)" class="col-sm-1 text-center"> -->
                             <td v-for="estimate in orderedAnnualEstimates"  class="col-sm-1 text-center">
                                 <strong>{{currencyString(getNationalPlansRemainingGapByYear(estimate.year))}}</strong>
                             </td>
@@ -177,31 +174,29 @@
                         <tr class="active">
                             <td><strong>{{t("gapReducedOverall")}}</strong></td>
                             <td  colspan="{{baselineDocument.fundingNeedsData.annualEstimates.length || 1}}" class="text-center">
-                                <span class="km-value km-pre">
-                                    {{lstring(document.nationalPlansData.hasReduceGapOverall|term),locale}}
+                                <span class="km-pre">
+                                    {{lstring(document.nationalPlansData.hasReduceGapOverall|term,locales)}}  
                                 </span>
                             </td>
                         </tr>								
                     </tbody>
                 </table>
 
-
                 <div v-if="document.nationalPlansData.additionalComments">
-                    <label>{{t("additionalMethodologicalObservations")}}</label>                                      
-                    <ng  v-vue-ng:km-value-ml  :value="document.nationalPlansData.additionalComments " :locales="locale" html></ng>                     
+                    <label>{{t("additionalMethodologicalObservations")}}</label> 
+                    <ng v-vue-ng:km-value-ml  :value="document.nationalPlansData.additionalComments" :locales="locale" html km-pre></ng> 
                 </div>            
         
                 <div v-if="document.nationalPlansData.hasDomesticPrivateSectorMeasures">
                     <div><label>{{t("measuresPrivateSectorDomesticSupport")}}</label></div>
-                    <ul class="km-value" style="list-style-type: none;">
+                    <div class="km-value" style="list-style-type: none;">
                         <li v-for="term in filter(options.measures,document.nationalPlansData.hasDomesticPrivateSectorMeasures)">
                             {{lstring(term.title,locale)}}
                         </li>
-                    </ul>
+                    </div>
                     <div v-if="document.nationalPlansData.hasDomesticPrivateSectorMeasuresComments">
-                        <label>{{t("provideAdditionalInformation")}}</label>                        
-                        <ng  v-vue-ng:km-value-ml  :value="document.nationalPlansData.hasDomesticPrivateSectorMeasuresComments" :locales="locale" html></ng> 
-                       
+                        <label>{{t("provideAdditionalInformation")}}</label>  
+                        <ng v-vue-ng:km-value-ml  :value="document.nationalPlansData.hasDomesticPrivateSectorMeasuresComments" :locales="locale" html km-pre></ng>                       
                     </div>
                 </div>   
             </section>
@@ -249,33 +244,28 @@
 
    const document = computed(()=>props.documentInfo?.body);
 
-   const orderedBaselineFlows = computed(()=>{
-        if (!(document.value.internationalResources && document.value.internationalResources.baselineData && document.value.internationalResources.baselineData.baselineFlows)) return [];     
-       //remove {} from array
-       var newArray = document.value.internationalResources.baselineData.baselineFlows.filter(value => Object.keys(value).length !== 0); 
-        return  _.orderBy(newArray , 'year');
-    });
-
-    const orderedProgressFlows = computed(()=>{
-        if (! (document.value.internationalResources && document.value.internationalResources.progressData && document.value.internationalResources.progressData.progressFlows)) return [];     
-        //remove {} from array
-        var newArray = document.value.internationalResources.progressData.progressFlows.filter(value => Object.keys(value).length !== 0); 
-        return  _.orderBy(newArray, 'year');
-    });  
-
-    const orderedExpenditures = computed(()=>{
-        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];     
-        //remove {} from array
-        var newArray = document.value.domesticExpendituresData.expenditures.filter(value => Object.keys(value).length !== 0); 
-        return  _.orderBy(newArray, 'year');
-    });
-
     const orderedContributions = computed(()=>{       
         if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.contributions)) return [];   
         //remove {} from array
         var newArray = document.value.domesticExpendituresData.contributions.filter(value => Object.keys(value).length !== 0);    
         return  _.orderBy(newArray , 'year');
     });
+
+    const orderedAnnualEstimates  = computed(()=>{
+        if (!(baselineDocument.value.fundingNeedsData && baselineDocument.value.fundingNeedsData.annualEstimates)) return [];     
+        return  _.orderBy(baselineDocument.value.fundingNeedsData.annualEstimates, 'year');
+    });
+
+    const orderedDomesticSources = computed(()=>{
+        if (!(document.value.nationalPlansData && document.value.nationalPlansData.domesticSources)) return [];     
+        return  _.orderBy(document.value.nationalPlansData.domesticSources, 'name');
+    });
+
+    const orderedInternationalSources = computed(()=>{
+        if (! (document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];     
+        return  _.orderBy( document.value.nationalPlansData.internationalSources, 'name');
+    });
+
 
     const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});    
     const hasBaselineDocument = ref(false);
@@ -302,58 +292,7 @@
                              {identifier:'other',         title: {en:`${t("other")}`}}],
         yesNo :             [{identifier:false,           title: {en:`${t("no")}`}},
                              {identifier:true,            title: {en:`${t("yes")}`}}]
-    };
-
-//    const  filteredAssessments = function(id){       
-//         return options.assessments.filter((option) => option.identifier===id );
-//     };  
-
-//     const  filteredInclusions = function(id){       
-//         return options.inclusions.filter((option) => option.identifier===id );
-//     }; 
-     
-//     const  filteredMultipliers = function(id){       
-//         return options.multipliers.filter((option) => option.identifier===id);
-//     }; 
-   
-//     const  filteredMeasures = function(id){       
-//         return options.measures.filter((option) => option.identifier===id );
-//     }; 
-
-//     const  filteredMethodology = function(id){       
-//         return options.methodology.filter((option) => option.identifier===id );
-//     };         
-    
-    // TODO:test
-    const orderedAnnualEstimates  = computed(()=>{
-        if (!(baselineDocument.value.fundingNeedsData && baselineDocument.value.fundingNeedsData.annualEstimates)) return [];     
-        return  _.orderBy(baselineDocument.value.fundingNeedsData.annualEstimates, 'year');
-    });
-
-    const orderedDomesticSources = computed(()=>{
-        if (!(document.value.nationalPlansData && document.value.nationalPlansData.domesticSources)) return [];     
-        return  _.orderBy(document.value.nationalPlansData.domesticSources, 'name');
-    });
-
-    const orderedInternationalSources = computed(()=>{
-        if (! (document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];     
-        return  _.orderBy( document.value.nationalPlansData.internationalSources, 'name');
-    });
-
-    const totalAverageAmount = function(){
-        var odaAverage   = 0;
-        var oofAverage   = 0;
-        var otherAverage = 0;
-
-        if(document.value && document.value.internationalResources && document.value.internationalResources.baselineData && document.value.internationalResources.baselineData.baselineFlows)
-        {
-            odaAverage   = typeAverageAmount(document.value.internationalResources.baselineData.baselineFlows,'odaAmount');
-            oofAverage   = typeAverageAmount(document.value.internationalResources.baselineData.baselineFlows,'oofAmount');
-            otherAverage = typeAverageAmount(document.value.internationalResources.baselineData.baselineFlows,'otherAmount');
-        }
-
-        return parseInt(odaAverage)+parseInt(oofAverage)+parseInt(otherAverage);
-    };
+    };       
 
     const typeAverageAmount = function(flows, type){
         if(!flows) return 0;
@@ -416,11 +355,8 @@
         if(document.value && document.value.nationalPlansData && document.value.nationalPlansData[member]){
 
             var prop = "amount"+year;
-            var items;
-
-            // var sources = angular.fromJson($scope.document.nationalPlansData[member]);//jshint ignore:line
-            var sources = document.value.nationalPlansData[member];//jshint ignore:line
-          
+            var items;      
+            var sources = document.value.nationalPlansData[member];          
             
             if(_.isEmpty(_.last(sources)))
                 items = _.initial(sources);
