@@ -3,7 +3,7 @@
     <section v-if="hasBasicInformationData" >
 
         <legend>{{t("identificationOfRespondent")}}</legend>
-        
+
         <div v-if="document.government">
             <label> {{t("country")}}</label>
             <div class="km-value">
@@ -27,33 +27,35 @@
             </div>
             
             <div v-if="document.respondentDesignation">
-                <label>{{t("title")}}</label>                      
-                <ng v-vue-ng:km-value-ml :value="document.respondentDesignation" :locales="locale" html></ng>   
+                <label>{{t("title")}}</label> 
+                <ng v-vue-ng:km-value-ml  :value="document.respondentDesignation" :locales="locale" html km-pre></ng> 
             </div>
 
             <div v-if="document.respondentOrganization">
-                <label>{{t("organization")}}</label>                      
-                <ng v-vue-ng:km-value-ml :value="document.respondentOrganization" :locales="locale" html></ng>   
+                <label>{{t("organization")}}</label>
+                <ng v-vue-ng:km-value-ml  :value="document.respondentOrganization" :locales="locale" html km-pre></ng>
             </div>
         
             <div v-if="document.respondentDepartment">
-                <label>{{t("department")}}</label>                    
-                <ng v-vue-ng:km-value-ml :value="document.respondentDepartment" :locales="locale" html></ng> 
+                <label>{{t("department")}}</label>
+                <ng v-vue-ng:km-value-ml  :value="document.respondentDepartment" :locales="locale" html km-pre></ng>
             </div>
 
             <div v-if="document.respondentPhones">
                 <label>{{t("phoneNumbers")}}</label>
                 <div class="km-value">
-                    <span v-for="item in document.respondentPhones">{{item}}</span>
+                    <li v-for="item in document.respondentPhones">
+                        {{item}}
+                    </li>
                 </div>
             </div>
             
             <div v-if="document.respondentEmails">
                 <label>{{t("emails")}}</label>
                 <div class="km-value">
-                    <span v-for="item in document.respondentEmails">
+                    <li v-for="item in document.respondentEmails">
                         <a translation-url :href="`mailto:${item}`">{{item}}</a>
-                    </span>
+                    </li>
                 </div>
             </div>
         </div>
@@ -82,9 +84,9 @@
         <div v-if="document.internationalResources.multiplier" >
             <label>{{t("allValues")}}</label>
             <div class="km-value">
-                <div  v-for="term in filter(options.multipliers,document.internationalResources.multiplier)">                           
+                <span  v-for="term in filter(options.multipliers,document.internationalResources.multiplier)">                           
                     {{lstring(term.title,locale)}} 
-                </div>
+                </span>
             </div>
         </div>
     
@@ -158,14 +160,16 @@
           
             <div v-if="baselineData.methodologyUsed">
                 <label> {{t("methodology")}}</label>
-                <div v-if="baselineData.methodologyUsed!='other'">                                
-                    <div class="km-value" v-for="term in filter(options.methodology,baselineData.methodologyUsed)">
-                        {{lstring(term.title,locale)}}  
-                    </div>
+                <div v-if="baselineData.methodologyUsed!='other'">  
+                    <div class="km-value">
+                        <span v-for="term in filter(options.methodology,baselineData.methodologyUsed)">
+                            {{lstring(term.title,locale)}}  
+                        </span>
+                    </div>  
                 </div>
 
-                <div v-if="baselineData.methodologyUsedComments" >                           
-                    <ng  v-vue-ng:km-value-ml  :value="baselineData.methodologyUsedComments" :locales="locale" html></ng> 
+                <div v-if="baselineData.methodologyUsedComments">
+                    <ng v-vue-ng:km-value-ml  :value="baselineData.methodologyUsedComments" :locales="locale" html km-pre></ng> 
                 </div>
             </div>
         
@@ -203,13 +207,14 @@
 
             <div v-if="baselineData.methodologicalComments">
                 <label>{{t("otherMethodologicalObservations")}}</label>
-                <ng  v-vue-ng:km-value-ml  :value="baselineData.methodologicalComments " :locales="locale" html></ng>
+                <ng v-vue-ng:km-value-ml  :value="baselineData.methodologicalComments" :locales="locale" html km-pre></ng> 
             </div>
         </div>
 
-        <div v-if="isMonitoringProgressDisplay">
+        <div v-if="isMonitoringProgressDisplay && document.internationalResources.progressData.progressFlows">
             <label>{{t("monitoringProgress")}}</label>
-            <div v-if="document.internationalResources.progressData.progressFlows" class="table-responsive">
+            <!-- <div v-if="document.internationalResources.progressData.progressFlows" class="table-responsive"> -->
+            <div  class="table-responsive">
                 <table class="table table-hover table-bordered table-condensed">
                     <thead>
                         <tr>
@@ -269,8 +274,8 @@
             </div>
             
             <div v-if="document.internationalResources.hasPrivateSectorMeasuresComments">
-                <label>{{t("provideAdditionalInformation")}}</label>                            
-                <ng  v-vue-ng:km-value-ml  :value="document.internationalResources.hasPrivateSectorMeasuresComments" :locales="locale" html></ng> 
+                <label>{{t("provideAdditionalInformation")}}</label>
+                <ng v-vue-ng:km-value-ml  :value="document.internationalResources.hasPrivateSectorMeasuresComments" :locales="locale" html km-pre></ng> 
             </div>
         </div>        
       
@@ -284,14 +289,14 @@
                         
         <div class="km-value" >
             <span v-for="term in  filter(options.inclusions,document.hasNationalBiodiversityInclusion) ">
-            {{lstring(term.title, locale)}} 
+                {{lstring(term.title, locale)}} 
             </span>                 
         </div>
         
         <div v-if="document.hasNationalBiodiversityInclusionComments">
-            <label>{{t("provideAdditionalInformation")}}</label>                 
-            <ng  v-vue-ng:km-value-ml  :value="document.hasNationalBiodiversityInclusionComments" :locales="locale" html></ng> 
-        </div>
+            <label>{{t("provideAdditionalInformation")}}</label> 
+                <ng v-vue-ng:km-value-ml  :value="document.hasNationalBiodiversityInclusionComments" :locales="locale" html km-pre></ng>  
+          </div>
     </section>
     <!-- section 2 end -->
 
@@ -306,8 +311,8 @@
             </span>
         </div>
         <div v-if="document.hasBiodiversityAssessmentComments">
-            <label>{{t("provideAdditionalInformation")}}</label>                                         
-            <ng v-vue-ng:km-value-ml :value="document.hasBiodiversityAssessmentComments" :locales="locale" html></ng>  
+            <label>{{t("provideAdditionalInformation")}}</label> 
+            <ng v-vue-ng:km-value-ml  :value="document.hasBiodiversityAssessmentComments" :locales="locale" html km-pre></ng>
         </div>
     </section>
     <!-- section 3 end -->
@@ -389,10 +394,10 @@
     });
 
     
-    const hasAverageConfidenceLevelsData = computed(()=>{
-        return  baselineData.odaConfidenceLevel || 
-                baselineData.oofConfidenceLevel || 
-                baselineData.otherConfidenceLevel
+    const hasAverageConfidenceLevelsData = computed(()=>{      
+        return  baselineData.value.odaConfidenceLevel || 
+                baselineData.value.oofConfidenceLevel || 
+                baselineData.value.otherConfidenceLevel
     });
 
     const hasMethodologicalInformationData = computed(()=>{

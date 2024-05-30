@@ -190,13 +190,15 @@
                             </table>                        
 
                             <div v-if="document.domesticExpendituresData.domesticCollectiveActionMethodology || document.domesticExpendituresData.domesticCollectiveActionMethodologyComments">
-                                <div><strong>{{t("methodologicalInformation")}}</strong></div>
-                                <label>{{t("methodologyUsed")}}</label>
-                                <div v-if="document.domesticExpendituresData.domesticCollectiveActionMethodology!='other'">                                     
-                                    <div class="km-value">                                        
-                                        <span v-for="term in filter(options.domesticMethodology,document.domesticExpendituresData.domesticCollectiveActionMethodology)">                                                                                                                   
-                                            {{lstring(term.title,locale)}}
-                                        </span>                           
+                                <div><strong>{{t("methodologicalInformation")}}</strong></div>                               
+                                <div v-if="document.domesticExpendituresData.domesticCollectiveActionMethodology!='other'">  
+                                    <div v-if="filter(options.domesticMethodology,document.domesticExpendituresData.domesticCollectiveActionMethodology).length>0">
+                                        <label>{{t("methodologyUsed")}}</label>
+                                        <div class="km-value">                                          
+                                            <span v-for="term in filter(options.domesticMethodology,document.domesticExpendituresData.domesticCollectiveActionMethodology)">                                                                                                                   
+                                                {{lstring(term.title,locale)}}
+                                            </span>  
+                                        </div>                                        
                                     </div>
                                 </div>                            
                                 
