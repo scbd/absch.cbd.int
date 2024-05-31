@@ -24,6 +24,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
       $scope.type           = $attr.documentType;
       $scope.isABS          = realm.is('ABS');
       $scope.isBCH          = realm.is('BCH');
+      $scope.isCHM          = realm.is('CHM');
       $scope.path           = $location.path();
       $scope.countryRegions = {};
       $scope.timing = [{ "value": 'Days', "text": "Days" }, { "value": "Months", "text": "Months" }, { "value": "Years", "text": "Years" }]; // Values for durationText
@@ -37,6 +38,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
               targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience', {other:true, otherType:'lstring'});},
               geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},
               aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
+              gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets');},
               absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');},
               status          : function() {return thesaurusService.getDomainTerms('cbiStatus');},
               absCategories   : function() {return thesaurusService.getDomainTerms('cbiCats', {other:true, otherType:'lstring'});},
