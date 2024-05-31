@@ -166,7 +166,7 @@
 							<section>
 								<div class="no-shadow bg-white">
 									<legend>{{::('editVLRT.feywordsFacilitating'|$translate)}}</legend>
-									<div class="row" ng-if="isABS">
+									<div class="row" ng-if="isABS || isCHM">
 										<div class="col-md-12">
 											<div class="km-control-group" name="aichiTargets" caption="{{::('editVLRT.aichiTargets'|$translate)}}">
 												<div km-term-check name="aichiTargets" ng-model="document.aichiTargets" terms="options.aichiTargets()"
@@ -184,11 +184,21 @@
                                    		</div>
 									</div>
 
+									<div class="row" ng-if="isCHM">
+										<div class="col-xs-12">
+											<div class="km-control-group tabular-term-check"  name="gbfTargets" caption="{{::('editVLRT.gbfTargets'|$translate)}}">
+													
+												<div km-term-check name="gbfTargets" ng-model="document.gbfTargets" terms="options.gbfTargets()"
+												binding-type="term[]"></div>											
+											</div>
+                                   		</div>
+									</div>
+
 								</div>
 							</section>
 						<!-- Till now all fields are common for all CHs  -->
-						<!-- IF BCH START -->
-						<section ng-if="isBCH">
+						<!-- IF BCH START -->						
+						<section ng-if="isBCH || isCHM">
 							<div class="no-shadow bg-white">
 								<legend>{{::('editVLRT.keywordsRelatedBiosafety'|$translate)}}</legend>
 								<div class="row">
@@ -295,7 +305,7 @@
 						</section>
 						<!-- IF BCH END -->
 						<!-- IF ABS START -->
-						<section ng-if="isABS">
+						<section ng-if="isABS || isCHM">
 							<div class="no-shadow bg-white">
 								<a rel="noopener" translation-url name="#AdditionalInformation"></a>
 								<legend>{{::('editVLRT.keywordsRelatedAccess'|$translate)}}</legend>
