@@ -25,6 +25,7 @@ app.directive("viewCapacityBuildingInitiative", ["translationService", function 
 			translationService.set('viewCdiT', viewCdiT);
 			$scope.isABS = realm.is('ABS');
 			$scope.isBCH = realm.is('BCH');
+			$scope.isCHM = realm.is('CHM');
 			$scope.onThematicAreasTerms = function(terms){
 			if(($scope.document||{}).cpbThematicAreas){
 				_.forEach(terms, function(item){
