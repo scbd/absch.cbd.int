@@ -270,16 +270,12 @@
 				<div km-terms ng-model="document.expertiseLevel"></div>			
 			</div>
 
-			<div ng-if="document.gbfTargets">	
-				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>	
-				<div class="km-value" compare-val>
-				   	<ul class="list" >
-						<li ng-repeat="item in document.gbfTargets">
-							<span ng-bind="item|term:locale"></span>
-						</li>
-					</ul> 		
-				</div>
-			</div> 
+			<div ng-if="document.gbfTargets">   
+                <label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>
+                <div class="km-value">                  
+                    <view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy>
+                </div>
+            </div> 
 
 			<div ng-if="document.purpose">
 				<label>{{::('viewResourceT.purpose'|$translate)}}</label>	
