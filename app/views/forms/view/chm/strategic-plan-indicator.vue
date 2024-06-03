@@ -25,22 +25,22 @@
                 </div> 
             </div> 
         
-            <div v-if="document.isEasyToCommunicate">
+            <div v-if="document.isEasyToCommunicate !== undefined">
                 <label>{{ t("isEasyToCommunicate") }} </label>            
                 <ng v-vue-ng:km-value-bool  :value="document.isEasyToCommunicate" :locales="locale" html></ng>
             </div>                
 
-            <div v-if="document.isFromGlobalToNationalIndicator">
+            <div v-if="document.isFromGlobalToNationalIndicator  !== undefined">
                 <label>{{ t("isFromGlobalToNational") }} </label>                     
                 <ng v-vue-ng:km-value-bool  :value="document.isFromGlobalToNationalIndicator" :locales="locale" html></ng>                     
             </div>
         
-            <div v-if="document.isFromNationalToGlobalIndicator">
+            <div v-if="document.isFromNationalToGlobalIndicator  !== undefined">
                 <label>{{ t("isFromNationalToGlobal") }} </label>                        
                 <ng v-vue-ng:km-value-bool  :value="document.isFromNationalToGlobalIndicator" :locales="locale" html></ng> 
             </div>
                  
-             <div v-if="document.usedInGbo3OrGbo4">
+             <div v-if="document.usedInGbo3OrGbo4  !== undefined">
                 <label>{{ t("usedInGBbo3Gbo4") }} </label>                                         
                 <ng v-vue-ng:km-value-bool  :value="document.usedInGbo3OrGbo4" :locales="locale" html></ng> 
             </div>
