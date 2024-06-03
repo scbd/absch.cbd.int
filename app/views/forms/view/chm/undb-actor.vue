@@ -5,7 +5,7 @@
 
             <!-- TODO: add publish date -->            
             <!-- <ng v-vue-ng:document-date></ng> -->
-
+        
             <legend>{{ t("organization") }}  </legend> 
             <section v-if="document.organization">
                 <!--TODO:same content as chm project (add image, etc) -->                                
@@ -14,16 +14,7 @@
                 </div>               
             </section>                   
 
-            <section v-if="document.governments || document.description || document.descriptionNative">
-                <div v-if="document.governments">
-                    <label>{{ t("government") }} </label>                         
-                    <div class="km-value">                    
-                        <div  v-for="government in document.governments" >                    
-                            <km-term :value="government" :locale="locale"></km-term>                
-                        </div>
-                    </div>                       
-                </div>  
-
+            <section v-if="document.description || document.descriptionNative">
                 <div v-if="document.description">                        
                     <label>{{ t("description") }}</label>                           
                     <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>    
@@ -42,8 +33,7 @@
                     <label>{{ t("websites") }}</label>
                     <div class="km-value">   
                         <ng v-vue-ng:km-link-list v-model:ng-model="document.websites" ></ng>                          
-                    </div>   
-                                            
+                    </div>                
                 </div>  
 
                 <div v-if="document.videos">
