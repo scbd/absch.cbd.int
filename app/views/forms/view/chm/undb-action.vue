@@ -8,7 +8,7 @@
 
             <section v-if="document.title">                
                 <label>{{ t("title") }}</label>
-                <ng v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html></ng> 
+                <ng v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html km-pre></ng> 
             </section>
 
             <section v-if="document.startDate || document.endDate || document.startTime || document.endTime">             
@@ -46,7 +46,7 @@
 
                 <div v-if="document.address">
                     <label>{{ t("address") }}</label>   
-                    <ng v-vue-ng:km-value-ml  :value="document.address" :locales="locale" html></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.address" :locales="locale" html km-pre></ng>  
                 </div>
 
                 <div v-if="document.onlineEvent">
@@ -96,19 +96,19 @@
             <section v-if="document.description || document.descriptionNative || document.notes || document.logo">
                 <div v-if="document.description">
                     <label >{{ t("description") }}</label>
-                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html km-pre></ng>  
                 </div>
 
                 <div v-if="document.descriptionNative">
                     <label >{{ t("descriptionInOfficialLanguage") }}</label> 
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         {{ document.descriptionNative }}
                     </div>
                 </div>
                
                 <div v-if="document.notes">
                     <label >{{ t("comments") }}</label>                      
-                    <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html km-pre></ng>  
                 </div>
               
                 <div v-if="document.logo">
