@@ -82,6 +82,22 @@
                     <ng v-vue-ng:km-value-ml  :value="document.nationalIndicators" :locales="locale" html></ng>                                        
                 </div>
 
+                <div v-if="document.documentText">
+					<label>{{ t("anyOtherTools") }} </label>
+					<ng v-vue-ng:km-value-ml :value="document.documentText" locales="locale" km-pre html></ng>
+				</div>              
+
+                <div v-if="document.documentLinks">
+                    <view-relevant-information  :relevant-documents="document.documentLinks" :locale="locale">                 
+                        <template v-slot:information>
+                            <label> </label>   
+                        </template>
+                        <template v-slot:document>
+                            <label>{{ t("relevantWebsites") }} </label> 
+                        </template>
+                    </view-relevant-information>    
+                </div>
+
                 <div v-if="document.strategicPlanIndicators">
                     <label>{{ t("linkToIndicator") }}</label>
                     <div class="km-value">
@@ -129,18 +145,6 @@
                 </div> 
             </section> 
 
-            <section v-if="document.documentText || document.documentLinks">
-                <legend>{{ t("relevantDocumentAndInformation") }}</legend>
-                <view-relevant-information :relevant-information="document.documentText" :relevant-documents="document.documentLinks" :locale="locale">                 
-                    <template v-slot:information>
-                        <label>{{ t("relevantInfo") }} </label>   
-                    </template>
-                    <template v-slot:document>
-                        <label>{{ t("relevantWebsites") }} </label> 
-                    </template>
-                </view-relevant-information> 
-            </section>
-
             <section v-if="document.relevantInformation || document.relevantDocuments">
                 <legend>{{ t("additionalInformation") }}</legend>
                 <view-relevant-information :relevant-information="document.relevantInformation" :relevant-documents="document.relevantDocuments" :locale="locale"> 
@@ -180,7 +184,8 @@
     const hasIndicatorsAndActivitiesData = computed(()=>{
         return  (document.value.nationalIndicatorsUsed===false) || 
                 (document.value.nationalIndicatorsUsed && document.value.nationalIndicators) || 
-                document.value.strategicPlanIndicators || document.value.implementationActivities;
+                document.value.strategicPlanIndicators || document.value.implementationActivities ||
+                document.value.documentText || document.value.documentLinks;
              
     });
 
