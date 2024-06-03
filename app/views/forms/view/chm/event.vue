@@ -28,24 +28,26 @@
 
                 <div v-if="document.description">
                     <label>{{t("description")}}</label>                       
-                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>
+                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html km-pre></ng>
                 </div>
 
                 <div v-if="document.descriptionNative">
                     <label>{{t("descriptionNativeLanguage")}}</label>
-                    <div class="km-value">  {{document.descriptionNative}} </div>                          
+                    <div class="km-value km-pre">  
+                        {{document.descriptionNative}} 
+                    </div>                          
                 </div>
 
                 <div class="row">
                     <div :class="[document.type?'col-6':'col-12']" v-if="document.symbol" >                                                   
                         <label>{{t("symbol")}}</label>  
-                        <div class="km-value">
+                        <div class="km-value km-pre">
                             {{lstring(document.symbol)}}   
                         </div>   
                     </div>
                     <div :class="[document.symbol?'col-6':'col-12']" v-if="document.type">  
                         <label>{{t("type")}}</label>
-                        <div class="km-value" >        
+                        <div class="km-value km-pre" >        
                             <div v-for="term in document.type">                                
                                 <km-term :value="term" :locale="locale"></km-term>
                             </div>
@@ -74,7 +76,7 @@
                 
                 <div  v-if="document.durations">
                     <label>{{t("durations")}}</label><br>
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         <div  v-for="(duration,index) in document.durations" >
                             <div class="row  vertical-align">
                                 <div class="col-6">
@@ -97,7 +99,7 @@
                     <legend>{{t("location")}}</legend> 
                     
                     <label>{{t("address")}}</label>   
-                    <div class="km-value">                                
+                    <div class="km-value km-pre">                                
                         <span v-if="document.address.address"> {{lstring(document.address.address,locale)}}</span> 
                         <br/>
                         <span v-if="document.address.city">{{lstring(document.address.city,locale)}}, </span> 
