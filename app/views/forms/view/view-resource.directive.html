@@ -90,8 +90,8 @@
 			</div>
 		</section>
 		
-		<section>
-			<div ng-if="document.summary || document.countryRegions">
+		<section ng-if="document.summary || document.countryRegions">
+			<div>
 				<legend>{{::('viewResourceT.contentInfo'|$translate)}}</legend>
 				<div ng-if="document.summary">
 					<label>{{::('viewResourceT.summary'|$translate)}}</label>
@@ -112,9 +112,9 @@
 			</div>
 		</section>
 
-		<section>
+		<section ng-if="document.aichiTargets && !isBCH">
 			<legend>{{::('viewResourceT.legendKeywords'|$translate)}}</legend>
-			<div ng-if="document.aichiTargets && !isBCH">
+			<div>
 				<label>{{::('viewResourceT.aichiTargets'|$translate)}}</label>
 				<div class="km-value" compare-val="aichiTargets">
 					<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
