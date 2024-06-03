@@ -23,14 +23,14 @@
                 
                 <div v-if="document.government">
                     <label>{{ t("country") }} </label> 
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         <km-term :value="document.government" :locale="locale"></km-term>   
                     </div>
                 </div>
 
                 <div v-if="document.description" >                   
                     <label>{{ t("description") }} </label> 
-                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>                
+                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html km-pre></ng>                
                 </div>
             </section>
 
@@ -52,19 +52,19 @@
             
                 <div v-if="document.progress">
                     <label>{{ t("rate") }} </label> 
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         <km-term :value="document.progress" :locale="locale" ></km-term>
                     </div>
                 </div>
     
                 <div v-if="document.date">
                     <label>{{ t("date") }} </label>   
-                    <ng v-vue-ng:km-value-ml  :value="formatDate(document.date, 'DD MMM YYYY')" :locales="locale" html></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="formatDate(document.date, 'DD MMM YYYY')" :locales="locale"></ng>  
                 </div>
                 
                 <div v-if="document.assessmentText">
                     <label>{{ t("summary") }} </label>                        
-                    <ng v-vue-ng:km-value-ml  :value="document.assessmentText" :locales="locale" html></ng> 
+                    <ng v-vue-ng:km-value-ml  :value="document.assessmentText" :locales="locale" html km-pre></ng> 
                 </div> 
             </section>
 
@@ -72,14 +72,14 @@
                 <legend>{{ t("indicatorsAndActivities") }} </legend>    
     
                 <div v-if="document.nationalIndicatorsUsed===false">                        
-                    <div class="km-value" >
+                    <div class="km-value km-pre" >
                         {{ t("noIndicators") }} 
                     </div>
                 </div>
 
                 <div v-if="document.nationalIndicatorsUsed && document.nationalIndicators"> 
                     <label>{{ t("indicators") }} </label>                        
-                    <ng v-vue-ng:km-value-ml  :value="document.nationalIndicators" :locales="locale" html></ng>                                        
+                    <ng v-vue-ng:km-value-ml  :value="document.nationalIndicators" :locales="locale" html km-pre></ng>                                        
                 </div>
 
                 <div v-if="document.documentText">
@@ -100,7 +100,7 @@
 
                 <div v-if="document.strategicPlanIndicators">
                     <label>{{ t("linkToIndicator") }}</label>
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         <div v-for="item in document.strategicPlanIndicators" >
                             {{lstring(item.title ,locale) }}
                         </div>
@@ -109,7 +109,7 @@
 
                 <div v-if="document.implementationActivities">
                     <label>{{ t("linkToActivity") }}</label>
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         <div v-for="item in document.implementationActivities" >
                             {{lstring(item.title ,locale) }}
                         </div>
@@ -122,26 +122,26 @@
 
                 <div v-if="document.confidence">
                     <label>{{ t("levelOfConfidence") }} </label>   
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         <km-term :value="document.confidence" :locale="locale"></km-term>
                     </div> 
                 </div>
 
                 <div v-if="document.confidenceInfo">
                     <label>{{ t("levelOfAboveAssessment") }} </label>   
-                    <ng v-vue-ng:km-value-ml  :value="document.confidenceInfo" :locales="locale" html ></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.confidenceInfo" :locales="locale" html km-pre></ng>  
                 </div>
 
                 <div v-if="document.adequacy">
                     <label>{{ t("adequacy") }} </label>                         
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         <km-term :value="document.adequacy" :locale="locale"></km-term>
                     </div> 
                 </div>
 
                 <div v-if="document.adequacyDescription">
                     <label>{{ t("monitoringSystem") }} </label>   
-                    <ng v-vue-ng:km-value-ml  :value="document.adequacyDescription" :locales="locale" html></ng>
+                    <ng v-vue-ng:km-value-ml  :value="document.adequacyDescription" :locales="locale" html km-pre></ng>
                 </div> 
             </section> 
 
