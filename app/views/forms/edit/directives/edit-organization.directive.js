@@ -29,12 +29,14 @@ app.directive("editOrganization", ["$controller", "Thesaurus", "$q", 'guid', 'ed
             $scope.type 		= $attr.documentType;
             $scope.isBch        = realm.is('BCH');
             $scope.isAbs        = realm.is('ABS');
+            $scope.isChm        = realm.is('CHM');
             $controller('editController', { $scope: $scope });
 
             _.extend($scope.options, {            
                 organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes', {other:true})
                     .then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); }) },
                 cpbThematicAreas   : function() { return thesaurusService.getDomainTerms('cbdSubjects') },
+                gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets');},
                 geographicRegions  : function() { return thesaurusService.getDomainTerms('regions').then(thesaurus.buildTree) }
             });
 

@@ -12,6 +12,7 @@
                 <form name="editForm" class="editForm" style="margin-top:10px">
                     <div class="no-shadow bg-white">
                         <legend>{{::('editOrganizationT.generalInfo'|$translate)}}</legend>
+
                         <div class="row">
                             <div class="col-xs-12" >
                                 <div class="km-control-group" name="header.languages" required caption="{{::('editOrganizationT.languageToPublish'|$translate)}}">
@@ -80,7 +81,6 @@
                         </div>
 
                         <div class="row">
-
                             <div class="col-md-6 col-xs-12">
                                 <div class="km-control-group" name="postalCode" caption="{{::('editOrganizationT.postalZip'|$translate)}}">
                                     <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages"
@@ -130,6 +130,8 @@
                             </div>
                         </div>
                     </div>
+
+                               
 
                     <div class="no-shadow bg-white">
                         <legend>{{::('editOrganizationT.detailedInformation'|$translate)}}</legend>
@@ -215,6 +217,33 @@
                         <legend>{{::('editOrganizationT.timeframeConfirmation'|$translate)}}</legend>
                         <div class="help-info">
                             {{::('editOrganizationT.categoryOfInformation'|$translate)}}
+                        </div>
+                    </div>
+
+
+                    <!-- chm -thematic areas -->
+                    <div class="no-shadow bg-white">
+                        <legend>{{::('editOrganizationT.thematicAreas'|$translate)}}</legend>	
+                        					
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group tabular-term-check" name="cbdSubjects"
+                                            caption="{{::('editOrganizationT.cbdSubjects'|$translate)}}">
+                                        <div km-term-check name="cbdSubjects" ng-model="document.cbdSubjects"
+                                                terms="cbdSubjects()" binding-type="term[]" tabular-shape="true">
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" required name="gbfTargets" 
+                                caption="{{::('editOrganizationT.gbfTargets'|$translate)}}">
+                                    <div km-term-check name="gbfTargets" required ng-model="document.gbfTargets"
+                                            terms="options.gbfTargets()" binding-type="term[]"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
