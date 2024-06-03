@@ -114,7 +114,7 @@
                 <div v-if="document.logo">
                     <label >{{ t("logo") }}</label>                  
                     <div class="km-value">                    
-                        <img :src="thumbnailLogoUrl" height=100  />
+                        <img :src="thumbnailLogoUrl" height="200"  />
                     </div>
                 </div>
             </section>
