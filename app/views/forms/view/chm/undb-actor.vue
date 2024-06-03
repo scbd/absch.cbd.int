@@ -10,19 +10,19 @@
             <section v-if="document.organization">
                 <!--TODO:same content as chm project (add image, etc) -->                                
                 <div class="km-value">                               
-                    <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html></ng>   
+                    <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html km-pre></ng>   
                 </div>               
             </section>                   
 
             <section v-if="document.description || document.descriptionNative">
                 <div v-if="document.description">                        
                     <label>{{ t("description") }}</label>                           
-                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>    
+                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html km-pre></ng>    
                 </div>                     
 
                 <div v-if="document.descriptionNative">
                     <label>{{ t("descriptionNative") }}</label>
-                    <div class="km-value">   
+                    <div class="km-value km-pre">   
                         {{ document.descriptionNative }}                            
                     </div>   
                 </div>  
