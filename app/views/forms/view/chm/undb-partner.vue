@@ -77,25 +77,25 @@
             <section v-if="document.description || document.descriptionNative || document.notes || document.logo">
                 <div v-if="document.description">
                     <label>{{ t("shortDescription") }}</label>
-                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.description" :locales="locale" html km-pre></ng>  
                 </div>
 
                 <div v-if="document.descriptionNative">
                     <label>{{ t("shortDescriptionInOfficialLanguage") }}</label> 
-                    <div class="km-value">
+                    <div class="km-value km-pre">
                         {{document.descriptionNative}}
                     </div>    
                 </div>
 
                 <div v-if="document.notes">
                     <label>{{ t("commentsOrAdditionalInfo") }}</label>  
-                    <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html km-pre></ng>  
                  </div>
 
                 <div v-if="document.logo">
                     <label>{{ t("logo") }}</label>                   
                     <div class="km-value"> 	
-                        <img :src="thumbnailLogoUrl" height=100 />
+                        <img :src="thumbnailLogoUrl" height="200" />
                     </div>
                 </div>
             </section>
