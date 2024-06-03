@@ -8,41 +8,41 @@
 
             <div v-if="document.title">
                 <label>{{ t("title") }} </label> 
-                <ng  v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html></ng>   
+                <ng  v-vue-ng:km-value-ml  :value="document.title" :locales="locale" html km-pre></ng>   
             </div>        
 
            <div v-if="document.aichiTarget">
                 <label>{{ t("aichiTarget") }} </label> 
-                <div class="km-value">
+                <div class="km-value km-pre">
                     <km-term :value="document.aichiTarget" :locale="locale"></km-term>   
                 </div>
             </div>
             
             <div v-if="document.availabilityStatus">
                 <label>{{ t("availability") }} </label> 
-                <div class="km-value">
+                <div class="km-value km-pre">
                     <km-term :value="document.availabilityStatus" :locale="locale"></km-term>   
                 </div> 
             </div> 
         
             <div v-if="document.isEasyToCommunicate !== undefined">
                 <label>{{ t("isEasyToCommunicate") }} </label>            
-                <ng v-vue-ng:km-value-bool  :value="document.isEasyToCommunicate" :locales="locale" html></ng>
+                <ng v-vue-ng:km-value-bool  :value="document.isEasyToCommunicate" :locales="locale"></ng>
             </div>                
 
             <div v-if="document.isFromGlobalToNationalIndicator  !== undefined">
                 <label>{{ t("isFromGlobalToNational") }} </label>                     
-                <ng v-vue-ng:km-value-bool  :value="document.isFromGlobalToNationalIndicator" :locales="locale" html></ng>                     
+                <ng v-vue-ng:km-value-bool  :value="document.isFromGlobalToNationalIndicator" :locales="locale" ></ng>                     
             </div>
         
             <div v-if="document.isFromNationalToGlobalIndicator  !== undefined">
                 <label>{{ t("isFromNationalToGlobal") }} </label>                        
-                <ng v-vue-ng:km-value-bool  :value="document.isFromNationalToGlobalIndicator" :locales="locale" html></ng> 
+                <ng v-vue-ng:km-value-bool  :value="document.isFromNationalToGlobalIndicator" :locales="locale" ></ng> 
             </div>
                  
              <div v-if="document.usedInGbo3OrGbo4  !== undefined">
                 <label>{{ t("usedInGBbo3Gbo4") }} </label>                                         
-                <ng v-vue-ng:km-value-bool  :value="document.usedInGbo3OrGbo4" :locales="locale" html></ng> 
+                <ng v-vue-ng:km-value-bool  :value="document.usedInGbo3OrGbo4" :locales="locale" ></ng> 
             </div>
 
             <div v-if="document.source">
