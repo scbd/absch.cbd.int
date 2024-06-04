@@ -12,8 +12,7 @@
             <implementation-activity v-if="documentInfo?.type == 'implementationActivity'"  
                     :document-info="documentInfo" :locale="locale"></implementation-activity>          
             <strategic-plan-indicator v-if="documentInfo?.type == 'strategicPlanIndicator'"  
-                 :document-info="documentInfo" :locale="locale"></strategic-plan-indicator>
-                    :document-info="documentInfo" :locale="locale"></national-assessment>     
+                 :document-info="documentInfo" :locale="locale"></strategic-plan-indicator>                
             <undb-actor v-if="documentInfo?.type == 'undbActor'"  
                     :document-info="documentInfo" :locale="locale"></undb-actor>       
             <!-- loading state via #fallback slot -->
