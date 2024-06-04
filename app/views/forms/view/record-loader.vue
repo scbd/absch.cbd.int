@@ -11,6 +11,8 @@
                     :document-info="documentInfo" :locale="locale"></national-target>
             <implementation-activity v-if="documentInfo?.type == 'implementationActivity'"  
                     :document-info="documentInfo" :locale="locale"></implementation-activity>          
+            <strategic-plan-indicator v-if="documentInfo?.type == 'strategicPlanIndicator'"  
+                 :document-info="documentInfo" :locale="locale"></strategic-plan-indicator>
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 
@@ -28,6 +30,7 @@
     import nationalReport from '~/views/forms/view/chm/national-report.vue'
     import nationalTarget from '~/views/forms/view/chm/national-target.vue'  
     import implementationActivity from '~/views/forms/view/chm/implementation-activity.vue'
+    import strategicPlanIndicator from '~/views/forms/view/chm/strategic-plan-indicator.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
