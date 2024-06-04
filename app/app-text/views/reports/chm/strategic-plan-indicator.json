@@ -1,0 +1,12 @@
+{
+    "title":"Title",
+    "aichiTarget": "Aichi Biodiversity Target",
+    "availability": "Availability of Indicator",
+    "isEasyToCommunicate":  "Is easy to communicate?",
+    "isFromGlobalToNational": "Global indicator can be disaggregated to create national indicator or is aggregated from national data?",   
+    "isFromNationalToGlobal":"National data are aggregated to form global indicator?", 
+    "usedInGBbo3Gbo4":"Used in GBO3/ GBO4?",
+    "Source":"Source"
+}
+
+
