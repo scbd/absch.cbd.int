@@ -47,5 +47,8 @@
     "relevantDocuments": "Any other relevant documents",
     "relevantDocumentsInfo": "Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download",
     "notes": "Notes",
-    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information."
+    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.",
+    "thematicAreas":"Thematic Areas",
+    "cbdSubjects":"Related CBD Subject area(s)",
+    "gbfTargets":"Related Kunming-Montreal Global Biodiversity Framework Target(s)"
 }
