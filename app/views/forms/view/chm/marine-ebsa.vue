@@ -17,9 +17,9 @@
                     <ng  v-vue-ng:km-value-ml  :value="document.summary" :locales="locale" html></ng> 
                 </div>
             
-                <div v-if="document.areaIntroduction">
+                <div v-if="document.areaIntroducion">
                     <label>{{ t("introduction") }} </label>
-                    <ng  v-vue-ng:km-value-ml  :value="document.areaIntroduction" :locales="locale" html></ng> 
+                    <ng  v-vue-ng:km-value-ml  :value="document.areaIntroducion" :locales="locale" html></ng> 
                 </div> 
             </section>
 
@@ -239,20 +239,20 @@
              <section v-if="document.assessments"> 
                 <legend>{{ t("assessment") }}</legend>                
                 <div class="km-value">                    
-                    <div  v-for="assessment in document.assessments" >
-                        <div v-if="assessment.identifier">  
+                    <div  v-for="assessment in document.assessments"class="km-value" >
+                        <div v-if="assessment.identifier" >
                             <label> {{t(assessment.identifier) }}   
                                 <span v-if="assessment.level"  :class="`${getBgColor(assessment.level)} text-white p-1`" > 
                                 {{t(assessment.level)}}</span> 
-                            </label>
+                            </label>            
                             <br/>
                         </div>
                         
-                        <div v-if="assessment.justification">
+                        <div v-if="assessment.justification" >
                             <label>{{ t("justification") }} </label>   
                             <ng v-vue-ng:km-value-ml  :value="assessment.justification" :locales="locale" html ></ng>
                         </div>
-                    </div>
+                    </div>                 
                 </div>              
             </section>
 
@@ -262,9 +262,8 @@
                 </view-relevant-information> 
             </section>          
             <div> 
-                <!-- TODO: test -->
-                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>         
+                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
+            </div>          
         </div>  
         <!-- TODO: add footer  -->
         <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
@@ -273,8 +272,7 @@
 <script setup>
     import { computed, shallowRef, onMounted } from 'vue';  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
-    import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'  
-    import '~/views/forms/view/directives/view-reference-records.directive.js'  
+    import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import '~/views/forms/view/directives/view-record-reference.directive.js'  
     import '~/views/forms/view/chm/leaflet/angular-leaflet-directive.js'
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
@@ -295,7 +293,7 @@
       if (level ==="high") return "bg-danger" ;
       if (level ==="medium") return "bg-warning" ;
       if (level === "low") return "bg-info";
-      if (level ==="no information") return "bg-secondary" 
+      if (level ==="noInformation") return "bg-secondary"     
     };
     const document = computed(()=>props.documentInfo?.body);
  

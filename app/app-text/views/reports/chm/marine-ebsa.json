@@ -1,5 +1,6 @@
 {
     "generalInformation": "General information",
+    "title": "Title",
     "summary": "Summary",
     "introduction":  "Introduction of the area",
     "descriptionLocation":  "Description of the location",
@@ -7,6 +8,7 @@
     "description":"Description of location",
     "geoLocation":"Geo-Location",
     "areaDetails":"Area Details",
+    "areaDescription":"Feature description of the area",
     "featureDescription":"Feature description of the area",
     "featureConditions":"Feature conditions and future outlook of the area",
     "references":"References",
