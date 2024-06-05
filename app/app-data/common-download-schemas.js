@@ -3,22 +3,22 @@ import { mergeTranslationKeys } from '../services/translation-merge';
 const fieldsT = mergeTranslationKeys(fieldsTranslations);
 export const downloadSchemas = {	
 	"focalPoint" : {
-       "uniqueId"         : fieldsT["focalPoint.uniqueIdentifier"],
-       "government"       : fieldsT["focalPoint.country"         ],
+       "uniqueId"         : fieldsT["uniqueId"],
+       "government"       : fieldsT["country"         ],
        "name"             : fieldsT["focalPoint.name"            ],
        "type"             : fieldsT["focalPoint.type"            ],
        "function"         : fieldsT["focalPoint.function"        ],
        "department"       : fieldsT["focalPoint.department"      ],
-       "organization"     : fieldsT["focalPoint.organization"    ],
+       "organization"     : fieldsT["organization"    ],
        "address"          : fieldsT["focalPoint.address"         ],
        "telephone"        : fieldsT["focalPoint.telephone"       ],
        "fax"              : fieldsT["focalPoint.fax"             ],
        "emails"           : fieldsT["focalPoint.email"           ],
-       "publishedOn"      : fieldsT["focalPoint.publishedOn"     ],        
+       "publishedOn"      : fieldsT["publishedOn"     ],        
     },
 
     "organization" : {
-        "uniqueId"        : fieldsT["organization.uniqueId"        ],
+        "uniqueId"        : fieldsT["uniqueId"        ],
         "name"            : fieldsT["organization.name"            ],
         "address"         : fieldsT["organization.address"         ],
         "phones"          : fieldsT["organization.phones"          ],
@@ -29,12 +29,12 @@ export const downloadSchemas = {
         "contactsEmails"  : fieldsT["organization.contactsEmails"  ],
         "organizationType": fieldsT["organization.organizationType"],
         "areasOfWork"     : fieldsT["organization.areasOfWork"     ],
-        "publishedOn"     : fieldsT["organization.publishedOn"     ],
+        "publishedOn"     : fieldsT["publishedOn"     ],
     },
 
     "authority":{
-        "uniqueId"                   : fieldsT["authority.uniqueId"],
-        "government"                 : fieldsT["authority.government"],
+        "uniqueId"                   : fieldsT["uniqueId"],
+        "government"                 : fieldsT["country"],
         "name"                       : fieldsT["authority.name"],
         "address"                    : fieldsT["authority.address"],
         "city"                       : fieldsT["authority.city"],
@@ -55,16 +55,16 @@ export const downloadSchemas = {
         "relevantDocuments"          : fieldsT["authority.relevantDocuments"],
         "functions"                  : fieldsT["authority.functions"],
         "cpbOrganismTypes"           : fieldsT["authority.cpbOrganismTypes"],
-        "publishedOn"                : fieldsT["authority.publishedOn"]
+        "publishedOn"                : fieldsT["publishedOn"]
     },
 
     "resource":{
         "uniqueId"                  : fieldsT["resource.uniqueId"],
-        "title"                     : fieldsT["resource.title"],
+        "title"                     : fieldsT["title"],
         "resourceTypes"             : fieldsT["resource.resourceTypes"],
         "authors"                   : fieldsT["resource.authors"],
         "publisher"                 : fieldsT["resource.publisher"],
-        "publicationDate"           : fieldsT["resource.publicationDate"],
+        "publicationDate"           : fieldsT["publishedOn"],
         "source"                    : fieldsT["resource.source"],
         "rights"                    : fieldsT["resource.rights"],
         "resourceLinks"             : fieldsT["resource.resourceLinks"],
@@ -78,7 +78,7 @@ export const downloadSchemas = {
         "biosafetyModifiedOrganisms": fieldsT["resource.biosafetyModifiedOrganisms"],
         "biosafetyOrganisms"        : fieldsT["resource.biosafetyOrganisms"],
         "biosafetyGenes"            : fieldsT["resource.biosafetyGenes"],
-        "publishedOn"               : fieldsT["resource.publishedOn"]
+        "publishedOn"               : fieldsT["publishedOn"]
     },
 
     "capacityBuildingInitiative":{
@@ -110,12 +110,12 @@ export const downloadSchemas = {
         "categories"         : fieldsT["capacityBuildingInitiative.categories"],
         "cbdSubjects"        : fieldsT["capacityBuildingInitiative.cbdSubjects"],
         "cpbThematicAreas"   : fieldsT["capacityBuildingInitiative.cpbThematicAreas"],
-        "publishedOn"        : fieldsT["capacityBuildingInitiative.publishedOn"]
+        "publishedOn"        : fieldsT["publishedOn"]
 	},
 
   "database":{
-    "uniqueId": fieldsT["database.uniqueId"],
-    "government": fieldsT["database.government"],
+    "uniqueId": fieldsT["uniqueId"],
+    "government": fieldsT["country"],
     "title": fieldsT["database.title"],
     "description": fieldsT["database.description"],
     "websites": fieldsT["database.websites"],
@@ -124,16 +124,16 @@ export const downloadSchemas = {
   },
 
   "contact":{
-    "uniqueId"           : fieldsT["contact.uniqueId"],
+    "uniqueId"           : fieldsT["uniqueId"],
     "type"               : fieldsT["contact.type"],
-    "organization"       : fieldsT["contact.organization"],
+    "organization"       : fieldsT["organization"],
     "organizationAcronym": fieldsT["contact.organizationAcronym"],
     "organizationType"   : fieldsT["contact.organizationType"],
     "prefix"             : fieldsT["contact.prefix"],
     "firstName"          : fieldsT["contact.firstName"],
     "middleName"         : fieldsT["contact.middleName"],
     "lastName"           : fieldsT["contact.lastName"],
-    "contactOrganization": fieldsT["contact.contactOrganization"],
+    "contactOrganization": fieldsT["organization"],
     "department"         : fieldsT["contact.department"],
     "designation"        : fieldsT["contact.designation"],
     "address"            : fieldsT["contact.address"],
