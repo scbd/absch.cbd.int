@@ -306,6 +306,18 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 finally{$scope.isLoadingSelectedRawDocuments = undefined};
                 
             })
+            $scope.safeApply = function(fn)
+            {
+                var phase = this.$root.$$phase;
+
+                if (phase == '$apply' || phase == '$digest') {
+                    if (fn && (typeof (fn) === 'function')) {
+                        fn();
+                    }
+                } else {
+                    this.$apply(fn);
+                }
+            };
 
             async function pendingRecords(draftIdentifiers) {
                 try {
@@ -316,16 +328,10 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                         $top: $scope.top || 100, 
                         $orderby: 'updatedOn desc' 
                     };
-                   //ToDo: what backend accept for multiple schemas
-                    const schemas = $attr.allowNewSchema.includes(',') ? 
-                        $attr.allowNewSchema.split(',') : 
-                        [$attr.allowNewSchema];
+
+                    const schemas =  $attr.allowNewSchema.split(',') 
+                    query.push(`(type eq '${schemas.join("' OR type eq '")}')`)
                     
-                    schemas.forEach(schema => {
-                        query.push(`(type eq '${schema}')`);
-                    });
-            
-                    // params.$filter = query.join(' or ');
                     params.$filter = query;
 
             
@@ -339,7 +345,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                             pendingDocuments.filter(item => draftIdentifiers.includes(item.identifier)) : 
                             pendingDocuments;
             
-                        $scope.pendingRawRecords = pendingRequests.map(doc => {
+                       const pendingRawRecords = pendingRequests.map(doc => {
                             const pending = {
                                 identifier: doc.identifier,
                                 identifier_s: doc.identifier,
@@ -354,7 +360,10 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                             };
                             return pending;
                         });
-                        return $scope.pendingRawRecords;
+                        $scope.safeApply(function() {
+                            $scope.pendingRawRecords = pendingRawRecords
+                        })
+                        return pendingRawRecords ;
                     }
                 } catch (error) {
                     toastr.error(error);
@@ -401,6 +410,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 } 
                 else if($scope.activeTab == 'pendingRequests'){
                     await pendingRecords();
+                    return
                 }     
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
