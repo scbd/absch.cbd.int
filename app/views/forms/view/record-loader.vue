@@ -17,6 +17,8 @@
                     :document-info="documentInfo" :locale="locale"></undb-actor>       
             <undb-action v-if="documentInfo?.type == 'undbAction'"  
                     :document-info="documentInfo" :locale="locale"></undb-action>   
+            <undb-party v-if="documentInfo?.type == 'undbParty'"  
+                    :document-info="documentInfo" :locale="locale"></undb-party>       
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 
@@ -37,6 +39,7 @@
     import strategicPlanIndicator from '~/views/forms/view/chm/strategic-plan-indicator.vue'
     import undbActor from '~/views/forms/view/chm/undb-actor.vue'
     import undbAction from '~/views/forms/view/chm/undb-action.vue'
+    import undbParty from '~/views/forms/view/chm/undb-party.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
