@@ -1,0 +1,288 @@
+import * as XLSX from "xlsx";
+import _ from "lodash";
+import KmDocumentApi from "../../api/km-document";
+
+export class ImportDataBase {
+    kmDocumentApi;
+    countries;
+
+    constructor(apiProps){
+      this.kmDocumentApi = new KmDocumentApi(apiProps);
+    }
+
+
+  readSheet(file) {
+    return new Promise((resolve, reject) => {
+      try {
+        const reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onload = (e) => {
+          const data = e.target.result;
+          const workbook = XLSX.read(data, { type: "binary" });
+          var sheetNames = Object.keys(workbook.Sheets);
+          resolve({ sheetNames, workbook });
+        };
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  columnVal(sheet, column, t) {
+    return ((sheet[column] || {})[t || "w"] || "").trim();
+  }
+
+  getELinkData(sheet, column) {
+    let val = this.columnVal(sheet, column).trim();
+  
+    if (val != "") {
+      var links = val.split(",");
+      return _.map(links, (l) => {
+        return { url: l };
+      });
+    }
+  }
+
+  processKeywords(sheet, fields, i, keywordsMapping) {
+    let processedKeywords = [];
+    let otherKeywords = "";
+    let keywords = this.columnVal(sheet, fields.keywords + i)
+      .trim()
+      .split(",");
+  
+    _.each(keywords, (keyword) => {
+      if (keyword.trim() != "") {
+        var mapping = _.find(keywordsMapping, (map) => {
+          return map.name.toLowerCase() == keyword.toLowerCase().trim();
+        });
+        if (mapping) {
+          processedKeywords.push({ identifier: mapping.identifier });
+        } else {
+          processedKeywords.push({
+            identifier: "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+          });
+          otherKeywords += ` ${keyword}`;
+        }
+      }
+    });
+  
+    return { processedKeywords, otherKeywords };
+  }
+
+  processField(fields, field, fieldName, isNested = false, parentFieldName = null){
+    if (typeof field === 'object' && !isNested) {
+      value[fieldName] = {};
+      for (const subField in field) {
+        this.processField(fields, field[subField], subField, true, fieldName);
+      }
+    } else if (isNested) {
+      value[parentFieldName][fieldName] = this.columnVal(sheet, fields[parentFieldName][fieldName] + i);
+    } else {
+      value[fieldName] = this.columnVal(sheet, field + i);
+    }
+  };
+
+  async findByUid(uniqueId, cache, field = "") {
+    let uid = uniqueId
+                    .trim()
+                    .match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i);
+    let document = null;
+    if(cache.fields[field][uid[4]]){
+      document = cache.fields[field][uid[4]]
+    }else{
+      document = await this.kmDocumentApi.paramDocuments(uniqueId[4])
+    }
+  
+    if (document) return document.header.identifier + "@" + uid[5];
+  }
+
+  async getCountryIso(country, language) {
+    if (!this.countries)
+      this.countries = await this.kmDocumentApi.queryCountries();
+  
+    if (this.countries) {
+      let mCountry = _.find(this.countries, (c) => {
+        return c.name[language].toLowerCase() == country;
+      });
+      if (mCountry) return mCountry.code;
+    }
+  }
+
+  guid() {
+    function S4() {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    }
+    return (
+      "SIMP-" + S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4()
+    ).toUpperCase();
+  }
+
+  async findOrCreateContact(contacts, sheet, language, i, fields, government) {
+    let contact;
+  
+    if (this.columnVal(sheet, fields.existing + i).trim() != "") {
+      let contactIds = [];
+      let existingContacts = this.columnVal(sheet, fields.existing + i).split(",");
+      for (let j = 0; j < existingContacts.length; j++) {
+        contactIds.push({ identifier: await this.findByUid(existingContacts[j]) });
+      }
+      return contactIds;
+    } else {
+      contact = {
+        header: {
+          identifier: this.guid(),
+          schema: "contact",
+          languages: [language],
+        },
+        government: { identifier: government },
+        emails: (this.columnVal(sheet, fields.email + i) || "").split(","),
+      };
+  
+      let type = this.columnVal(sheet, fields.type + i);
+      let name = "";
+  
+      if (type.toLowerCase() == "organization") {
+        if (this.columnVal(sheet, fields.orgName_firstName + i).trim() != "")
+          name = this.columnVal(sheet, fields.orgName_firstName + i).trim();
+  
+        contact.type = "organization";
+        contact.organization = { [language]: name.trim() };
+        contact.organizationAcronym = {
+          [language]: this.columnVal(sheet, fields.acronym_lastName + i).trim(),
+        };
+      } else {
+        if (this.columnVal(sheet, fields.orgName_firstName + i).trim() != "")
+          name =
+            name + " " + this.columnVal(sheet, fields.orgName_firstName + i).trim();
+  
+        if (this.columnVal(sheet, fields.acronym_lastName + i).trim() != "")
+          name =
+            name + " " + this.columnVal(sheet, fields.acronym_lastName + i).trim();
+  
+        contact.type = "person";
+        contact.firstName = this.columnVal(sheet, fields.orgName_firstName + i).trim();
+        contact.lastName = this.columnVal(sheet, fields.acronym_lastName + i).trim();
+      }
+  
+      var mCountry = await this.getCountryIso(
+        this.columnVal(sheet, fields.country + i)
+          .trim()
+          .toLowerCase(),
+        language
+      );
+      if (mCountry) contact.country = { identifier: mCountry.toLowerCase() };
+      contact.address = {
+        [language]: this.columnVal(sheet, fields.address + i).trim(),
+      };
+    }
+  
+    let exists = _.find(contacts, function(con) {
+      return (
+        (con.type.toLowerCase() == "organization" &&
+          (contact.organization || {})[language] ==
+            (con.organization || {})[language]) ||
+        (con.type.toLowerCase() == "person" &&
+          contact.firstName == con.firstName &&
+          contact.lastName == con.lastName)
+      );
+    });
+  
+    if (exists) return [{ identifier: exists.header.identifier }];
+    contacts.push(contact);
+  
+    return [{ identifier: contact.header.identifier }];
+  }
+
+  async validateNationalRecord(document){
+    if(!document)
+        return;
+        try{
+            let request = await this.kmDocumentApi.validateDocument(document);
+
+            if(request.schema){              
+                return true;                
+            }
+            return false;
+                        
+        }
+        catch(err){
+            console.log("ERR", err)
+        }
+    };
+
+    async createNationalRecord(document, isDraft){
+      if(!document)
+          return;
+  
+      try{
+        let irccRequest = await this.kmDocumentApi.createNationalRecord(document, isDraft)        
+        return irccRequest;
+      }
+      catch(err){
+          console.log("ERR", err)
+          return {
+            error: err.message || "Internal server error"
+          }
+      }
+    };
+
+    async validateAndCreateNationalRecord(contacts, documents, progressTracking, errorCreateRecords,completedRecords){
+      let errorCount = 0;
+      for (let index = 0; index < contacts.length; index++) {
+        const contact = contacts[index];
+        var isValid = await this.validateNationalRecord(contact)
+        if(!isValid)
+            errorCount++;
+
+        const response = await this.createNationalRecord(contact, false)
+        if(response.error){
+          errorCreateRecords.value.push({
+            identifier: contact.header.identifier,
+            draft: true,
+            document: contact,
+            contact:true,
+            error: response.error
+          })
+        }else{
+          completedRecords.value.push({
+            identifier: contact.header.identifier,
+            draft: true,
+            document: contact,
+            contact:true,
+            error: null
+          })
+        }
+        progressTracking.value++;
+      }
+      
+      for (let index = 0; index < documents.length; index++) {
+          const document = documents[index];
+          var isValid = await this.validateNationalRecord(document)
+
+          const response = await this.createNationalRecord(document, true)
+          if(response.error){
+            errorCreateRecords.value.push({
+              identifier: document.header.identifier,
+              draft: true,
+              document,
+              contact:false,
+              error: response.error
+            })
+          }
+          {
+            completedRecords.value.push({
+              identifier: document.header.identifier,
+              draft: true,
+              document,
+              contact:false,
+              error: null
+            })
+          }
+          progressTracking.value++;
+      }
+    }
+
+    async retryCreateNationalRecord(document, draft){
+      return await this.createNationalRecord(document, draft)
+    }
+}

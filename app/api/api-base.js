@@ -22,20 +22,20 @@ const HttpStatusApiCode = {
 export default class ApiBase
 {
   constructor(options) { //{ tokenReader, prefixUrl, timeout, tokenType }
-
     options = options || {};
     // ToDo: weill find a better way to handle tokenReader
     // if(isFunction(options.tokenReader)) options = { tokenReader : options }
     if(isFunction(options)) options = { tokenReader : options }
 
-    const { tokenReader, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
+    const { tokenReader, realm, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
 
 
     const baseConfig = {
       baseURL : prefixUrl,
       timeout,
       tokenType,
-      tokenReader
+      tokenReader,
+      realm
     }
 
     const http = async function (...args) {
@@ -57,7 +57,7 @@ export default class ApiBase
 
 async function loadAsyncHeaders(baseConfig) {
 
-  const { tokenReader, tokenType, ...config } = baseConfig || {}
+  const { tokenReader, realm, tokenType, ...config } = baseConfig || {}
 
   const headers = { ...(config.headers || {}) };
   //ToDo: we can remove await tokenReader() part
@@ -74,6 +74,9 @@ async function loadAsyncHeaders(baseConfig) {
 
     if(token)
       headers.Authorization = `${tokenType||'Bearer'} ${token}`;
+  }
+  if(realm){
+    headers.realm = realm;
   }
 
   return axios.create({ ...config, headers } );
