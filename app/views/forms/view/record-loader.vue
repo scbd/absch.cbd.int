@@ -21,6 +21,8 @@
                     :document-info="documentInfo" :locale="locale"></undb-party>       
             <undb-partner v-if="documentInfo?.type == 'undbPartner'"  
                     :document-info="documentInfo" :locale="locale"></undb-partner>      
+            <event v-if="documentInfo?.type == 'event'"  
+                    :document-info="documentInfo" :locale="locale"></event>       
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 
@@ -43,6 +45,7 @@
     import undbAction from '~/views/forms/view/chm/undb-action.vue'
     import undbParty from '~/views/forms/view/chm/undb-party.vue'
     import undbPartner from '~/views/forms/view/chm/undb-partner.vue'
+    import event from '~/views/forms/view/chm/event.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
