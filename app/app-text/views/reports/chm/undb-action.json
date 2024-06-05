@@ -1,0 +1,20 @@
+{
+    "title":"Title",  
+    "startDate":"Start Date",      
+    "endDate":"End Date",  
+    "fromTime":"From Time",     
+    "toTime":"To Time",     
+    "country":"country",     
+    "address":"Address",    
+    "eventIsOnline":"Event is Online",    
+    "googleMapsLink":"Google maps link",    
+    "email":"Email",   
+    "telephone":"Telephone",   
+    "facebook":"Facebook",
+    "twitter":"Twitter",  
+    "youtube":"Youtube",       
+    "description":"Short description of the Action in one of the 6 United Nations languages", 
+    "descriptionInOfficialLanguage":"Short description of your Action in your official language",    
+    "comments":"Comments or additional information",    
+    "logo" :"Logo"
+}
