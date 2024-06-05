@@ -1,0 +1,9 @@
+{
+    "party":"Party",           
+    "description" :"Description" ,   
+    "descriptionNativeLanguage":"Description Native Language",              
+    "websites":"Websites",                
+    "documents":"Documents",                
+    "images":"Images",              
+    "videos":"Videos"              
+}
