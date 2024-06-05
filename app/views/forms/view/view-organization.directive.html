@@ -1,187 +1,173 @@
 ﻿<div id="Record" class="record panel panel-default">
+    <div class="record-body panel-body">
+        <document-date></document-date><br>
+        <legend>
+            <span ng-bind="document.name | lstring:locale"></span>
+            <span ng-show="document.acronym">(<span ng-bind="document.acronym | lstring:locale"></span>)</span>
+        </legend>
+        </br>
+        <div ng-show="document.name">
+            <label>{{::('viewOrganizationT.nameOfTheOrganization'|$translate)}} </label>
+            <div compare-val>
+                <km-value-ml value="document.name" locales="locale"></km-value-ml>
+            </div>
+        </div>      
+        
+        <div ng-show="document.acronym">
+            <label>{{::('viewOrganizationT.acronym'|$translate)}}   </label>
+            <div compare-val>
+                <km-value-ml value="document.acronym" locales="locale"></km-value-ml>
+            </div>
+        </div>
+        <div ng-if="document.contacts">
+            <label>{{::('viewOrganizationT.contactPerson'|$translate)}} </label>
+            <div class="km-value" compare-val>
+                <ul class="list">
+                    <li ng-repeat="item in document.contacts" >
+                        <div view-record-reference ng-model="item" locale="locale"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
+            <label>{{::('viewOrganizationT.address'|$translate)}}   </label>
+            <div compare-val>
+                <address class="km-value">
+                    <div class="km-pre" ng-bind-html="document.address | lstring:locale"></div>
+                    <span ng-bind="document.city | lstring:locale"></span><span ng-show="document.city">, </span>
+                    <span ng-bind="document.state | lstring:locale"></span><br ng-show="document.city || document.state" />
+                    <span ng-bind="document.postalCode | lstring:locale"></span><span ng-show="document.postalCode">, </span>
+                    <b ng-bind="document.country|term"></b>
+                </address>
+            </div>
+        </div>
 
-	<div class="record-body panel-body">
+        <div ng-show="document.phones">
+            <label>{{::('viewOrganizationT.phoneNumber'|$translate)}}   </label>
+            <div  class="km-value" compare-val>
+                <ul class="list">
+                    <li ng-repeat="item in document.phones" ng-bind="item"></li>
+                </ul>
+            </div>
+        </div>
+        <div ng-show="document.faxes">
+            <label>{{::('viewOrganizationT.faxNumber'|$translate)}}</label>
+            <div  class="km-value" compare-val>
+                <ul class="list">
+                    <li ng-repeat="item in document.faxes" ng-bind="item"></li>
+                </ul>
+            </div>
+        </div>
+        <div ng-show="document.emails">
+            <label>{{::('viewOrganizationT.emails'|$translate)}}</label>
+            <div  class="km-value" compare-val>
+                <ul class="list">
+                    <li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">
+                        <span ng-bind="item"></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div ng-show="document.websites">
+            <label>{{::('viewOrganizationT.webAddress'|$translate)}}</label>
+            <div compare-val>
+                <div class="km-value" ng-repeat="item in document.websites">
+                    <a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><span ng-bind="item.name||item.url"></span></a>
+                </div>
+            </div>
+        </div>
 
-		<document-date></document-date><br>
-		<legend>
-			<span ng-bind="document.name | lstring:locale"></span>
-			<span ng-show="document.acronym">(<span ng-bind="document.acronym | lstring:locale"></span>)</span>
-		</legend>
-		</br>
-		<div ng-show="document.name">
-			<label>{{::('viewOrganizationT.nameOfTheOrganization'|$translate)}}	</label>
-			<div compare-val>
-				<km-value-ml value="document.name" locales="locale"></km-value-ml>
-			</div>
-		</div>		
-		
-		<div ng-show="document.acronym">
-			<label>{{::('viewOrganizationT.acronym'|$translate)}}	</label>
-			<div compare-val>
-				<km-value-ml value="document.acronym" locales="locale"></km-value-ml>
-			</div>
-		</div>
+        <div ng-if="document.organizationType || document.areasOfWork || document.cpbThematicAreas || document.operationalRegions || document.profile || document.profileLink">
+            <legend>{{::('viewOrganizationT.detailedInformation'|$translate)}}</legend>
+            <div ng-show="document.organizationType">
+                <label>{{::('viewOrganizationT.typeOfOrganization'|$translate)}}</label>
+                <div compare-val>
+                    <div class="km-value" ng-bind="document.organizationType | term"></div>
+                </div>
+            </div>
+            <div ng-show="document.areasOfWork">
+                <label>{{::('viewOrganizationT.areaOfWork'|$translate)}}</label>
+                <div class="km-value" compare-val>
+                    <ul class="list">
+                        <li ng-repeat="areaOfWork in document.areasOfWork" style="margin-bottom: 5px;">
+                            <km-value-ml value="areaOfWork" html pre locales="locale"></km-value-ml>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-		<div ng-if="document.contacts">
-			<label>{{::('viewOrganizationT.contactPerson'|$translate)}}	</label>
-			<div class="km-value" compare-val>
-				<ul class="list">
-					<li ng-repeat="item in document.contacts" >
-						<div view-record-reference ng-model="item" locale="locale"></div>
-					</li>
-				</ul>
-			</div>
-		</div>
+            <div ng-if="document.cpbThematicAreas">
+                <label>{{::('viewOrganizationT.bioSafetyThematicAreas'|$translate)}}</label>
+                <div  class="km-value" compare-val>
+                    <ul class="list">
+                        <li ng-repeat="term in document.cpbThematicAreas" ng-bind="term|lstring:locale"></li>
+                    </ul>
+                </div>
+            </div>          
+            <div ng-show="document.operationalRegions">
+                <label>{{::('viewOrganizationT.regionalAreas'|$translate)}}</label>
+                <div class="km-value" compare-val>
+                    <ul class="list">
+                        <li ng-repeat="term in document.operationalRegions" ng-bind="term|term|lstring:locale"></li>
+                    </ul>
+                </div>
+            </div>
+            <div ng-if="document.profile || document.profileLink">
+                <label>{{::('viewOrganizationT.organizationsProfile'|$translate)}}</label>
+                <div compare-val ng-if="document.profile">
+                    <km-value-ml value="document.profile" html locales="locale"></km-value-ml>
+                </div>
+                <div compare-val>
+                    <div class="km-value" ng-if="document.profileLink" km-link-list ng-model="document.profileLink" style="margin-top: 5px;"></div>
+                </div>
+            </div>
+        </div>
 
-		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
-			<label>{{::('viewOrganizationT.address'|$translate)}}	</label>
-			<div compare-val>
-				<address class="km-value">
-					<div class="km-pre" ng-bind-html="document.address | lstring:locale"></div>
-					<span ng-bind="document.city | lstring:locale"></span><span ng-show="document.city">, </span>
-					<span ng-bind="document.state | lstring:locale"></span><br ng-show="document.city || document.state" />
-					<span ng-bind="document.postalCode | lstring:locale"></span><span ng-show="document.postalCode">, </span>
-					<b ng-bind="document.country|term"></b>
-				</address>
-			</div>
-		</div>
-
-
-		<div ng-show="document.phones">
-			<label>{{::('viewOrganizationT.phoneNumber'|$translate)}}	</label>
-			<div  class="km-value" compare-val>
-				<ul class="list">
-					<li ng-repeat="item in document.phones" ng-bind="item"></li>
-				</ul>
-			</div>
-		</div>
-
-		<div ng-show="document.faxes">
-			<label>{{::('viewOrganizationT.faxNumber'|$translate)}}</label>
-			<div  class="km-value" compare-val>
-				<ul class="list">
-					<li ng-repeat="item in document.faxes" ng-bind="item"></li>
-				</ul>
-			</div>
-		</div>
-
-		<div ng-show="document.emails">
-			<label>{{::('viewOrganizationT.emails'|$translate)}}</label>
-			<div  class="km-value" compare-val>
-				<ul class="list">
-					<li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">
-						<span ng-bind="item"></span></a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div ng-show="document.websites">
-			<label>{{::('viewOrganizationT.webAddress'|$translate)}}</label>
-			<div compare-val>
-				<div class="km-value" ng-repeat="item in document.websites">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><span ng-bind="item.name||item.url"></span></a>
-				</div>
-			</div>
-		</div>
-
-		<div>
-			<legend>{{::('viewOrganizationT.detailedInformation'|$translate)}}</legend>
-
-			<div ng-show="document.organizationType">
-				<label>{{::('viewOrganizationT.typeOfOrganization'|$translate)}}</label>
-				<div compare-val>
-					<div class="km-value" ng-bind="document.organizationType | term"></div>
-				</div>
-			</div>
-			<div ng-show="document.areasOfWork">
-				<label>{{::('viewOrganizationT.areaOfWork'|$translate)}}</label>
-				<div class="km-value" compare-val>
-					<ul class="list">
-						<li ng-repeat="areaOfWork in document.areasOfWork" style="margin-bottom: 5px;">
-							<km-value-ml value="areaOfWork" html pre locales="locale"></km-value-ml>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div ng-if = "isChm">
-				<div ng-show="document.thematicAreas" >
-					<label>{{::('viewOrganizationT.cbdThematicAreas'|$translate)}}</label>
-					<div  class="km-value" compare-val>
-						<ul class="list">
-							<li ng-repeat="term in document.thematicAreas"><span ng-bind="term|term|lstring:locale"></span></li>
-						</ul>
-					</div>
-				</div>
-	
-				<div ng-show="document.gbfTargets">
-					<label>{{::('viewOrganizationT.gbfTargets'|$translate)}}</label>
-						<div  class="km-value" compare-val>
-						<ul class="list">
-							<li ng-repeat="term in document.gbfTargets"><span ng-bind="term|term|lstring:locale"></span></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div ng-if="document.cpbThematicAreas">
-				<label>{{::('viewOrganizationT.bioSafetyThematicAreas'|$translate)}}</label>
+		<div ng-if = "isChm && (document.thematicAreas || document.gbfTargets)">
+			<legend>{{::('viewOrganizationT.thematicAreas'|$translate)}}</legend>
+			<div ng-show="document.thematicAreas" >
+				<label>{{::('viewOrganizationT.cbdThematicAreas'|$translate)}}</label>
 				<div  class="km-value" compare-val>
 					<ul class="list">
-						<li ng-repeat="term in document.cpbThematicAreas" ng-bind="term|lstring:locale"></li>
+						<li ng-repeat="term in document.thematicAreas"><span ng-bind="term|term|lstring:locale"></span></li>
 					</ul>
 				</div>
-			</div>			
+			</div>
 
-			<div ng-show="document.operationalRegions">
-				<label>{{::('viewOrganizationT.regionalAreas'|$translate)}}</label>
-				<div class="km-value" compare-val>
+			<div ng-show="document.gbfTargets">
+				<label>{{::('viewOrganizationT.gbfTargets'|$translate)}}</label>
+					<div  class="km-value" compare-val>
 					<ul class="list">
-						<li ng-repeat="term in document.operationalRegions" ng-bind="term|term|lstring:locale"></li>
+						<li ng-repeat="term in document.gbfTargets"><span ng-bind="term|term|lstring:locale"></span></li>
 					</ul>
 				</div>
 			</div>
+	    </div>
 
-			<div ng-if="document.profile || document.profileLink">
-				<label>{{::('viewOrganizationT.organizationsProfile'|$translate)}}</label>
-				<div compare-val ng-if="document.profile">
-					<km-value-ml value="document.profile" html locales="locale"></km-value-ml>
-				</div>
-				<div compare-val>
-					<div class="km-value" ng-if="document.profileLink" km-link-list ng-model="document.profileLink" style="margin-top: 5px;"></div>
-				</div>
-			</div>
-		</div>
-
-		<div ng-show="document.linkedOrganizations">
-			<legend>{{::('viewOrganizationT.linkedOrganizations'|$translate)}}</legend>
-			<div class="km-value" compare-val>
-				<ul class="list">
-					<li ng-repeat="item in document.linkedOrganizations" >
-						<div view-record-reference ng-model="item" locale="locale"></div>
-					</li>
-				</ul>
-			</div>
-		</div>
-
-		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>{{::('viewOrganizationT.additionalInformation'|$translate)}}</legend>
-
-			<div compare-val ng-show="document.relevantInformation">
-				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
-			</div>
-
-		<div ng-show="document.relevantDocuments">
-			<label>{{::('viewOrganizationT.otherRelevantWebsite'|$translate)}}</label>
-			<div class="km-value" compare-val="relevantDocuments">
-				<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
-			</div>
-		</div>
-		</div>
-		<div>
-			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
-		</div>
-
-	</div>
-	<div document-metadata class="panel-footer" ></div>
+        <div ng-show="document.linkedOrganizations">
+            <legend>{{::('viewOrganizationT.linkedOrganizations'|$translate)}}</legend>
+            <div class="km-value" compare-val>
+                <ul class="list">
+                    <li ng-repeat="item in document.linkedOrganizations" >
+                        <div view-record-reference ng-model="item" locale="locale"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div ng-show="document.relevantInformation||document.relevantDocuments">
+            <legend>{{::('viewOrganizationT.additionalInformation'|$translate)}}</legend>
+            <div compare-val ng-show="document.relevantInformation">
+                <km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+            </div>
+        <div ng-show="document.relevantDocuments">
+            <label>{{::('viewOrganizationT.otherRelevantWebsite'|$translate)}}</label>
+            <div class="km-value" compare-val="relevantDocuments">
+                <km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+            </div>
+        </div>
+        </div>
+        <div>
+            <view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+        </div>
+    </div>
+    <div document-metadata class="panel-footer" ></div>
 </div>
