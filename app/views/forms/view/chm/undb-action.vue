@@ -106,10 +106,6 @@
                     </div>
                 </div>
                
-                <div v-if="document.notes">
-                    <label >{{ t("comments") }}</label>                      
-                    <ng v-vue-ng:km-value-ml  :value="document.notes" :locales="locale" html km-pre></ng>  
-                </div>
               
                 <div v-if="document.logo">
                     <label >{{ t("logo") }}</label>                  
