@@ -58,6 +58,10 @@
                                 <span ng-if="::!$last">|</span>
                             </span>
                         </div>
+                        <!-- Import records from excel file -->
+                        <span type="button" ng-if="importVueComponent">
+                            <import-file ng-vue="importVueComponent" @refresh-record="refreshList(schema)"></import-file>
+                        </span>
                         
                         <a type="button" class="btn btn-outline-secondary btn-sm px-1" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="bi bi-arrow-repeat float-start"></i> <span class="fs-small-8 d-none d-md-block ps-1 float-end">{{::('recordListT.refresh'|$translate)}}</span>
