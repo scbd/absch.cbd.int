@@ -350,7 +350,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                                 identifier: doc.identifier,
                                 identifier_s: doc.identifier,
                                 uniqueIdentifier_s: doc.identifier, // needed for selected records
-                                schema_s: $attr.allowNewSchema,
+                                schema_s: doc.type,
                                 rec_title: doc.title,
                                 rec_summary: doc.summary,
                                 url_ss: `/register/${doc.schema_s}/${doc.identifier}/view`,
@@ -409,7 +409,9 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     rawQuery.fieldQueries.push(myGovernmentQuery);
                 } 
                 else if($scope.activeTab == 'pendingRequests'){
+                    $scope.isLoading = false;
                     await pendingRecords();
+                    return;
                 }     
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)

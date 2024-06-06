@@ -193,7 +193,7 @@
                                         <!-- <td ng-bind="doc.rec_countryName"></td> -->
                                         <!-- ToDo: uniqueID not working -->
                                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url||doc.url_ss}}" target="_blank" ng-bind="doc|uniqueID"></a></td>
-                                        <td class="summary" ng-bind="doc.rec_summary | limitTo:200"></td>
+                                        <td class="summary" ng-bind="doc.rec_summary |lstring:locale | limitTo:200"></td>
                                         <td class="meta"> 
                                             <span ng-bind="doc.meta"></span>  
                                         </td>
