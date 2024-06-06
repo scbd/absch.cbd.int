@@ -124,9 +124,9 @@
 		</section>
 
 		<!-- If BCH, Start -->
-		<section ng-if="isBCH || isCHM">
+		<section ng-if="isBCH">
 			<!-- <legend>Keywords related to Biosafety</legend> -->
-			<div ng-if="document.biosafety.subjects">
+			<div ng-if="document.biosafety.subjects  && isCHM">
 				<label>{{::('viewResourceT.subjects'|$translate)}}</label>
 				<div class="km-value" compare-val="bchSubjects">
 					<view-terms-hierarchy ng-model="document.biosafety.subjects" locale="locale" term-domain="cpbThematicAreas"></view-terms-hierarchy>
@@ -214,9 +214,9 @@
 		<!-- If BCH, End -->
 
 		<!-- If ABS, Start -->
-		<section ng-if="isABS || isCHM">
+		<section ng-if="isABS">
 			<!-- <legend>Keywords related to Access and Benefit-Sharing</legend> -->
-			<div ng-if="document.nagoya.subjects">				
+			<div ng-if="document.nagoya.subjects && isCHM">				
 				<label>{{::('viewResourceT.absThematicAreas'|$translate)}}</label>
 				<div class="km-value" compare-val="absSubjects">
 					<view-terms-hierarchy ng-model="document.nagoya.subjects" locale="locale" term-domain="absSubjects"></view-terms-hierarchy>
@@ -246,100 +246,22 @@
 
 
 		<!-- If CHM, Start -->
-		<section ng-if="isCHM"> 		
+		<section ng-if="isCHM"> 	
 		
 			<div ng-if="document.cbdSubjects">				
-				<legend>{{::('viewResourceT.chm'|$translate)}}</legend>	
+			
 				<label>{{::('viewResourceT.cbdSubjects'|$translate)}}</label>				
 				<div class="km-value" compare-val="cbdSubjects">
 					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
 				</div>
 			</div>
 
-			<div ng-if="document.targetGroups">
-				<label>{{::('viewResourceT.targetGroups'|$translate)}}</label>			
-				<div class="km-value" compare-val>
-					<div km-terms ng-model="document.targetGroups">
-						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
-					</div>
-				</div>
-			</div>
-
-			<div ng-if="document.expertiseLevel">
-				<label>{{::('viewResourceT.expertiseLevel'|$translate)}}</label>
-				<div km-terms ng-model="document.expertiseLevel"></div>			
-			</div>
-
 			<div ng-if="document.gbfTargets">   
-                <label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>
-                <div class="km-value">                  
-                    <view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy>
-                </div>
-            </div> 
-
-			<div ng-if="document.purpose">
-				<label>{{::('viewResourceT.purpose'|$translate)}}</label>	
-				<div class="km-value">
-					<div km-terms ng-model="document.purpose">
-						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
-					</div>
-				</div>			
-			</div>
-
-			<div ng-if="document.fileFormat">
-				<label>{{::('viewResourceT.fileFormat'|$translate)}}</label>			
-				<div class="km-value">
-					<div km-terms ng-model="document.fileFormat"></div>
-				</div>					
-			</div>
-
-			<div ng-if="document.format">
-				<label>{{::('viewResourceT.format'|$translate)}}</label>		          
-				<km-value-ml value="document.format" locales="locale"></km-value-ml>			
-			</div>
-
-			<div ng-if="document.formatDetails">		
-				<label>{{::('viewResourceT.formatDetails'|$translate)}}</label>							
-				<km-value-ml value="document.formatDetails" locales="locale"></km-value-ml>				
-			</div>
-
-
-			<div ng-if="document.authorsInfo">
-				<label>{{::('viewResourceT.authorsInfo'|$translate)}}</label>			
-				<div compare-val>
-					<km-value-ml value="document.authorsInfo" locales="locale"></km-value-ml>
+				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>
+				<div class="km-value">                  
+					<view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy>
 				</div>
-			</div>             
-		
-			<div ng-if="document.keywords">
-				<label>{{::('viewResourceT.keywords'|$translate)}}</label>					
-				<km-value-ml value="document.keywords" locales="locale"></km-value-ml>				
-			</div>
-
-			<div ng-if="document.resourceAccess">
-				<label>{{::('viewResourceT.resourceAccess'|$translate)}}</label>					
-				<div compare-val>
-					<km-value-ml value="document.resourceAccess" locales="locale"></km-value-ml>
-				</div>
-			</div>	
-
-			<div ng-if="document.languages">
-				<label>{{::('viewResourceT.languages'|$translate)}}</label>					
-				<div class="km-value" compare-val>
-					<div km-terms ng-model="document.languages">
-						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
-					</div>
-				</div>
-			</div>
-
-			<div ng-if="document.libraries">
-				<label>{{::('viewResourceT.libraries'|$translate)}}</label>	
-				<div class="km-value" compare-val>
-					<div km-terms ng-model="document.libraries">
-						<span ng-repeat="term in terms"><span ng-bind="term"></span></span>
-					</div>	
-				</div>			
-			</div> 
+			</div> 		
 
 		</section>
 		<!-- If CHM, End -->
