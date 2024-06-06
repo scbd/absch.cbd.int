@@ -330,7 +330,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     };
 
                     const schemas =  $attr.allowNewSchema.split(',') 
-                    query.push(`(type eq '${schemas.join("' OR type eq '")}')`)
+                    query.push(`(type eq '${schemas.join("' or type eq '")}')`)
                     
                     params.$filter = query;
 
@@ -360,7 +360,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                             };
                             return pending;
                         });
-                        $scope.safeApply(function() {
+                        $scope.safeApply(async function() {
                             $scope.pendingRawRecords = pendingRawRecords
                         })
                         return pendingRawRecords ;
@@ -410,7 +410,6 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 } 
                 else if($scope.activeTab == 'pendingRequests'){
                     await pendingRecords();
-                    return
                 }     
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
