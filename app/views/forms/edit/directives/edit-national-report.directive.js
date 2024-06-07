@@ -66,13 +66,6 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }
                     var lQuestion = question;
                     if (question.validations) {
-                        if(question.validations){
-                            const childrenQuestionKeys = question.validations.map(item => item.question);
-                            childrenQuestionKeys.forEach((questionKey) => {
-                                $scope.binding[questionKey] = undefined;
-                                $scope.multiTermModel[questionKey] = undefined;
-                            });
-                        }
                         var mappings = question.validations || [];
 
                         _.forEach(mappings, function (mapping) {
@@ -127,6 +120,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                 }
                                 else {
                                     $scope.binding[mapQuestion.key] = undefined;
+                                    $scope.multiTermModel[mapQuestion.key] = undefined;
                                     mapQuestion[mapping.trigger] = false
                                     if (baseQuestion && mapping.trigger != 'visible')
                                         baseQuestion[mapping.trigger] = false;
