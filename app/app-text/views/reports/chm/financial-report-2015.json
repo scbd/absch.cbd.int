@@ -64,6 +64,10 @@
     "someAssessment":"Some assessments undertaken",
     "comprehensiveAssessment":"Comprehensive assessments undertaken",
     "cmfeccabc":"Conceptual and Methodological Framework for Evaluating the Contribution of Collective Action to Biodiversity Conservation",
-    "yes":"Yes"
+    "yes":"Yes",
+    "high":"High",
+    "medium":"Medium",
+    "low":"Low",
+    "noValueSelected":"No value selected"
 }
 

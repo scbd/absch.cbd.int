@@ -339,19 +339,19 @@
 
     const baselineData = computed(()=>{
         if (props.type=='2015'){
-            return  props.document.internationalResources.baselineData;
+            return  props.document?.internationalResources?.baselineData;
         }
         else if (props.type =='2020'){
-            return  props.document.internationalResources;
+            return  props.document?.internationalResources;
         }      
     });
 
     const flowData = computed(()=>{    
         if (props.type=='2015'){
-            return   props.document.internationalResources.baselineData.baselineFlows;
+            return   props.document?.internationalResources?.baselineData?.baselineFlows;
         }
         else if (props.type =='2020'){           
-            return  props.document.internationalResources.financialFlows;  
+            return  props.document?.internationalResources?.financialFlows;  
         }           
     });
 
@@ -372,44 +372,42 @@
     });
 
     const isMonitoringProgressDisplay = computed(()=>{
-        return props.document.internationalResources.progressData && 
-              (props.document.internationalResources.progressData.progressFlows || 
-               props.document.internationalResources.progressData.odaConfidenceLevel ||
-               props.document.internationalResources.progressData.oofConfidenceLevel || 
-               props.document.internationalResources.progressData.otherConfidenceLevel ||
-               props.document.internationalResources.hasPrivateSectorMeasures )     
+        return props.document?.internationalResources?.progressData?.progressFlows || 
+               props.document?.internationalResources?.progressData?.odaConfidenceLevel ||
+               props.document?.internationalResources?.progressData?.oofConfidenceLevel || 
+               props.document?.internationalResources?.progressData?.otherConfidenceLevel ||
+               props.document?.internationalResources?.hasPrivateSectorMeasures    
     });
 
     const hasBasicInformationData = computed(()=>{
-        return  props.document.government             || props.document.ownerBehalf ||   
-                props.document.respondentName         || props.document.respondentDesignation ||
-                props.document.respondentOrganization || props.document.respondentDepartment ||  
-                props.document.respondentPhones       || props.document.respondentEmails
+        return  props.document?.government             || props.document?.ownerBehalf ||   
+                props.document?.respondentName         || props.document?.respondentDesignation ||
+                props.document?.respondentOrganization || props.document?.respondentDepartment ||  
+                props.document?.respondentPhones       || props.document?.respondentEmails
     });
 
     const hasContactDetailsData = computed(()=>{
-        return  props.document.respondentName         || props.document.respondentDesignation || 
-                props.document.respondentOrganization || props.document.respondentDepartment ||
-                props.document.respondentPhones       || props.document.respondentEmails
+        return  props.document?.respondentName         || props.document?.respondentDesignation || 
+                props.document?.respondentOrganization || props.document?.respondentDepartment ||
+                props.document?.respondentPhones       || props.document?.respondentEmails
     });
 
     
     const hasAverageConfidenceLevelsData = computed(()=>{      
-        return  baselineData.value.odaConfidenceLevel || 
-                baselineData.value.oofConfidenceLevel || 
-                baselineData.value.otherConfidenceLevel
+        return  baselineData?.value?.odaConfidenceLevel || 
+                baselineData?.value?.oofConfidenceLevel || 
+                baselineData?.value?.otherConfidenceLevel
     });
 
     const hasMethodologicalInformationData = computed(()=>{
-        return  props.document.internationalResources.progressData && 
-                (props.document.internationalResources.progressData.odaConfidenceLevel || 
-                props.document.internationalResources.progressData.oofConfidenceLevel  || 
-                props.document.internationalResources.progressData.otherConfidenceLevel)
+        return  props.document?.internationalResources?.progressData?.odaConfidenceLevel || 
+                props.document?.internationalResources?.progressData?.oofConfidenceLevel  || 
+                props.document?.internationalResources?.progressData?.otherConfidenceLevel
     });
 
     const hasFlowData = computed(()=>{    
         if (props.type=='2015'){
-            return   props.document.internationalResources.baselineData && props.document.internationalResources.baselineData.baselineFlows;
+            return   props.document?.internationalResources?.baselineData?.baselineFlows;
         }
         else if (props.type =='2020'){           
             return  props.document.internationalResources.financialFlows;  
@@ -420,13 +418,13 @@
    
     const orderedFlows = computed(()=>{    
         if (props.type=='2015'){
-            if (!(props.document.internationalResources && props.document.internationalResources.baselineData && props.document.internationalResources.baselineData.baselineFlows)) return [];    
+            if (!(props.document?.internationalResources?.baselineData?.baselineFlows)) return [];    
             //remove {} from array
             var newArray = props.document.internationalResources.baselineData.baselineFlows.filter(value => Object.keys(value).length !== 0);  
             return  _.orderBy(newArray, 'year'); 
         }
         else if (props.type =='2020'){
-            if (!(props.document.internationalResources && props.document.internationalResources.financialFlows)) return [];     
+            if (!(props.document?.internationalResources?.financialFlows)) return [];     
             //remove {} from array
             var newArray = props.document.internationalResources.financialFlows.filter(value => Object.keys(value).length !== 0); 
             return  _.orderBy(newArray, 'year');   
@@ -434,33 +432,33 @@
     });
 
     const orderedProgressFlows = computed(()=>{
-        if (! (props.document.internationalResources && props.document.internationalResources.progressData && props.document.internationalResources.progressData.progressFlows)) return [];   
+        if (! (props.document?.internationalResources?.progressData.progressFlows)) return [];   
         //remove {} from array
         var newArray = props.document.internationalResources.progressData.progressFlows.filter(value => Object.keys(value).length !== 0);   
         return  _.orderBy(newArray, 'year');
     });
-
+      
     const options  = {
-        multipliers : 		[{identifier:'units',	      title: {en:'in units'}},   		   
-                             {identifier:'thousands',     title: {en:'in thousands'}}, 		
-                             {identifier:'millions',      title: {en:'in millions'}}],
-        methodology : 		[{identifier:'oecd_dac',      title: {en:'OECD DAC Rio markers'}}, 
-                             {identifier:'other', 	      title: {en:'Other'       }}],
-        measures    : 		[{identifier:'no', 	          title: {en:'No' }}, 		  	       
-                             {identifier:'some', 	  	  title: {en:'Some measures taken'}}, 
-                             {identifier:'comprehensive', title: {en:'Comprehensive measures taken'}}],
-        inclusions  : 		[{identifier:'notyet', 	      title: {en:'Not yet stared'}},
-                             {identifier:'some', 	      title: {en:'Some inclusion achieved'}},
-                             {identifier:'comprehensive', title: {en:'Comprehensive inclusion'}}],
-        assessments : 		[{identifier:'notnecessary',  title: {en:'No such assessment necessary'}},
-                             {identifier:'notyet', 	      title: {en:'Not yet started'}},
-                             {identifier:'some', 		  title: {en:'Some assessments undertaken'}},
-                             {identifier:'comprehensive', title: {en:'Comprehensive assessments undertaken'}}],
-        domesticMethodology:[{identifier:'cmfeccabc',     title: {en:'Conceptual and Methodological Framework for Evaluating the Contribution of Collective Action to Biodiversity Conservation'}},
-                             {identifier:'other', 	      title: {en:'Other'}}],
-        yesNo : 			[{identifier:false,  		  title: {en:'No'}},
-                             {identifier:true, 	          title: {en:'Yes'}}]
-    };
+        multipliers : 		[{identifier:'units',	      title: {en:`${t("units")}`}},  
+                             {identifier:'thousands',     title: {en:`${t("thousands")}`}}, 
+                             {identifier:'millions',      title: {en:`${t("millions")}`}}],
+        methodology : 		[{identifier:'oecd_dac',      title: {en:`${t("oecd_dac")}`}}, 
+                             {identifier:'other', 	      title: {en:`${t("other")}` }}],
+        measures    : 		[{identifier:'no', 	          title: {en:`${t("no")}`}},  
+                             {identifier:'some',          title: {en:`${t("some")}`}},    
+                             {identifier:'comprehensive', title: {en:`${t("comprehensive")}`}}], 
+        inclusions  : 		[{identifier:'notyet', 	      title: {en:`${t("notYet")}`}},
+                             {identifier:'some', 	      title: {en:`${t("someInclusion")}`}},
+                             {identifier:'comprehensive', title: {en:`${t("comprehensiveInclusion")}`}}],                          
+        assessments : 		[{identifier:'notnecessary',  title: {en:`${t("notNecessary")}`}},                    
+                             {identifier:'notyet', 	      title: {en:`${t("notYet")}`}},
+                             {identifier:'some', 		  title: {en:`${t("someAssessment")}`}},
+                             {identifier:'comprehensive', title: {en:`${t("comprehensiveAssessment")}`}}],
+        domesticMethodology:[{identifier:'cmfeccabc',     title: {en:`${t("cmfeccabc")}`}},
+                             {identifier:'other', 	      title: {en:`${t("other")}`}}],
+        yesNo : 			[{identifier:false,  		  title: {en:`${t("no")}`}},
+                             {identifier:true,            title: {en:`${t("yes")}`}}]     
+    };   
 
 
     const typeAverageAmount = function(flows, type){

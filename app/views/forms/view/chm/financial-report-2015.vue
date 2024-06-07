@@ -439,24 +439,24 @@
 
 
     const hasValueForDomesticExpendituresData = computed(()=>{
-        return  hasValue(document.value.domesticExpendituresData.govCentralDirectlyRelated) || hasValue(document.value.domesticExpendituresData.govCentralIndirectlyRelated) ||
-                hasValue(document.value.domesticExpendituresData.provincialDirectlyRelated) || hasValue(document.value.domesticExpendituresData.provincialIndirectlyRelated) ||
-                hasValue(document.value.domesticExpendituresData.municipalDirectlyRelated)  || hasValue(document.value.domesticExpendituresData.municipalIndirectlyRelated)  ||
-                hasValue(document.value.domesticExpendituresData.extraDirectlyRelated)      || hasValue(document.value.domesticExpendituresData.extraIndirectlyRelated)      ||
-                hasValue(document.value.domesticExpendituresData.privateDirectlyRelated)    || hasValue(document.value.domesticExpendituresData.privateIndirectlyRelated)    ||
-                hasValue(document.value.domesticExpendituresData.otherDirectlyRelated)      || hasValue(document.value.domesticExpendituresData.otherIndirectlyRelated)      ||
-                hasValue(document.value.domesticExpendituresData.ilcDirectlyRelated)        || hasValue(document.value.domesticExpendituresData.ilcIndirectlyRelated)       
+        return  hasValue(document?.value?.domesticExpendituresData?.govCentralDirectlyRelated) || hasValue(document?.value?.domesticExpendituresData?.govCentralIndirectlyRelated) ||
+                hasValue(document?.value?.domesticExpendituresData?.provincialDirectlyRelated) || hasValue(document?.value?.domesticExpendituresData?.provincialIndirectlyRelated) ||
+                hasValue(document?.value?.domesticExpendituresData?.municipalDirectlyRelated)  || hasValue(document?.value?.domesticExpendituresData?.municipalIndirectlyRelated)  ||
+                hasValue(document?.value?.domesticExpendituresData?.extraDirectlyRelated)      || hasValue(document?.value?.domesticExpendituresData?.extraIndirectlyRelated)      ||
+                hasValue(document?.value?.domesticExpendituresData?.privateDirectlyRelated)    || hasValue(document?.value?.domesticExpendituresData?.privateIndirectlyRelated)    ||
+                hasValue(document?.value?.domesticExpendituresData?.otherDirectlyRelated)      || hasValue(document?.value?.domesticExpendituresData?.otherIndirectlyRelated)      ||
+                hasValue(document?.value?.domesticExpendituresData?.ilcDirectlyRelated)        || hasValue(document?.value?.domesticExpendituresData?.ilcIndirectlyRelated)       
     });
 
     const hasDomesticExpendituresData = computed(()=>{
-        return  document.value.domesticExpendituresData.measurementUnit || 
-                document.value.domesticExpendituresData.contributions ||
-                document.value.domesticExpendituresData.domesticCollectiveActionMethodology || 
-                document.value.domesticExpendituresData.domesticCollectiveActionMethodologyComments;        
+        return  document?.value?.domesticExpendituresData.measurementUnit || 
+                document?.value?.domesticExpendituresData.contributions ||
+                document?.value?.domesticExpendituresData.domesticCollectiveActionMethodology || 
+                document?.value?.domesticExpendituresData.domesticCollectiveActionMethodologyComments;        
     });
 
     const orderedExpenditures = computed(()=>{
-        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.expenditures)) return [];   
+        if (!(document?.value?.domesticExpendituresData?.expenditures)) return [];   
         //remove {} from array
         var newArray = document.value.domesticExpendituresData.expenditures.filter(value => Object.keys(value).length !== 0);   
         return  _.orderBy(newArray, 'year');
@@ -465,28 +465,28 @@
  
 
     const orderedContributions = computed(()=>{
-        if (!(document.value.domesticExpendituresData && document.value.domesticExpendituresData.contributions)) return [];     
+        if (!(document?.value?.domesticExpendituresData?.contributions)) return [];     
          //remove {} from array
          var newArray = document.value.domesticExpendituresData.contributions.filter(value => Object.keys(value).length !== 0);  
         return  _.orderBy(newArray, 'year');
     });
 
     const orderedAnnualEstimates = computed(()=>{       
-        if (!(document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates)) return [];  
+        if (!(document?.value?.fundingNeedsData?.annualEstimates)) return [];  
         //remove {} from array
         var newArray = document.value.fundingNeedsData.annualEstimates.filter(value => Object.keys(value).length !== 0);  
        return  _.orderBy(newArray, 'year');
     });   
 
     const orderedDomesticSources = computed(()=>{
-        if (!(document.value.nationalPlansData && document.value.nationalPlansData.domesticSources)) return [];  
+        if (!(document?.value?.nationalPlansData?.domesticSources)) return [];  
         //remove {} from array
         var newArray = document.value.nationalPlansData.domesticSources.filter(value => Object.keys(value).length !== 0);     
         return  _.orderBy(newArray, 'name');
     });
 
     const orderedInternationalSources = computed(()=>{
-        if (!(document.value.nationalPlansData && document.value.nationalPlansData.internationalSources)) return [];    
+        if (!(document?.value?.nationalPlansData?.internationalSources)) return [];    
         //remove {} from array
         var newArray = document.value.nationalPlansData.internationalSources.filter(value => Object.keys(value).length !== 0);      
         return  _.orderBy( newArray, 'name');
@@ -537,9 +537,9 @@
 
     const confidenceAverage = function (resources) {
         var values = _.compact(_.map(resources, function (resource) {
-            if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "D8BC6348-D1F9-4DA4-A8C0-7AE149939ABE") return 3; //high
-            if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "42526EE6-68F3-4E8A-BC2B-3BE60DA2EB32") return 2; //medium
-            if (resource && resource.confidenceLevel && resource.confidenceLevel.identifier == "6FBEDE59-88DB-45FB-AACB-13C68406BD67") return 1; //low
+            if (resource?.confidenceLevel?.identifier == "D8BC6348-D1F9-4DA4-A8C0-7AE149939ABE") return 3; //high
+            if (resource?.confidenceLevel?.identifier == "42526EE6-68F3-4E8A-BC2B-3BE60DA2EB32") return 2; //medium
+            if (resource?.confidenceLevel?.identifier == "6FBEDE59-88DB-45FB-AACB-13C68406BD67") return 1; //low
             return 0;
         }));
 
@@ -548,11 +548,11 @@
             value = Math.round(_.reduce(values, function(memo, value) { return memo + value; }) / values.length);
         }
 
-        if ( value == 3) return "High";
-        if ( value == 2) return "Medium";
-        if ( value == 1) return "Low";
+        if ( value == 3) return t("high");
+        if ( value == 2) return t("medium");
+        if ( value == 1) return t("low");
 
-        return "No value selected";
+        return t("noValueSelected"); 
     };
 
     const hasValue = function(val){
@@ -563,7 +563,7 @@
 
     const annualEstimatesHasYear = function (year) {
         if(!year) return false;
-        if(document.value && document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates){
+        if(document?.value?.fundingNeedsData?.annualEstimates){
             const estimate =document.value.fundingNeedsData.annualEstimates.find(item => item.year == year);
           
             if(estimate)
@@ -573,9 +573,8 @@
     };
 
     const getFundingGapYear = function(year){   
-        if(!year) return 0;   
-
-        if(document.value && document.value.fundingNeedsData && document.value.fundingNeedsData.annualEstimates){
+        if(!year) return 0;  
+        if (document?.value?.fundingNeedsData?.annualEstimates){     
             const estimate = document.value.fundingNeedsData.annualEstimates.find(item => item.year == year);  
           
             if(estimate && estimate.fundingGapAmount)
@@ -587,7 +586,7 @@
     const getNationalPlansSourcesTotal = function(member, year){
         if(!year || !member) return 0;
 
-        if(document.value && document.value.nationalPlansData && document.value.nationalPlansData[member]){
+        if(document.value?.nationalPlansData && document.value?.nationalPlansData[member]){
 
             var prop = "amount"+year;
             var items;
