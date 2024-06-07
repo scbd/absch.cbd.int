@@ -70,6 +70,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                             const childrenQuestionKeys = question.validations.map(item => item.question);
                             childrenQuestionKeys.forEach((questionKey) => {
                                 $scope.binding[questionKey] = undefined;
+                                $scope.multiTermModel[questionKey] = undefined;
                             });
                         }
                         var mappings = question.validations || [];
