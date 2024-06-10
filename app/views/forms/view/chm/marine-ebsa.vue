@@ -106,9 +106,9 @@
                         {{t("areasEbsa")}}
                     </div> 
                     <div v-if="document.approvedByCopDecision" >
-                        <div v-if="fixDate(document.approvedByCopDecision.identifier)" >
+                        <div v-if="approvedByCopDecisionDate != undefined" >
                             <label>{{t("copDecision")}}</label> 
-                            <div class="km-value">{{fixDate(document.approvedByCopDecision.identifier)}}</div> 
+                            <div class="km-value">{{approvedByCopDecisionDate}}</div> 
                         </div>
                     </div>
                     <div class="row" >    
@@ -118,13 +118,13 @@
                                 <km-term :value="document.approvedByGovernment" :locale="locale"></km-term>
                             </span>
                         </div>
-                        <div class="col-4" v-if="fixDate(document.approvedByGovernmentOn)">
+                        <div class="col-4" v-if="approvedByGovernmentOnDate != undefined">
                             <label>{{t("date")}}</label>
-                            <div class="km-value">{{fixDate(document.approvedByGovernmentOn)}}</div>
+                            <div class="km-value">{{approvedByGovernmentOnDate}}</div>
                         </div>    
                     </div>                  
                 </div>   
-                <div v-if="document.status=='recommendedToCop' || document.recommendedToCopByGovernment || document.recommendedToCopByGovernment || fixDate(document.recommendedToCopByGovernmentOn)" class="km-value">
+                <div v-if="document.status=='recommendedToCop' || document.recommendedToCopByGovernment || document.recommendedToCopByGovernment || (recommendedToCopByGovernmentOnDate != undefined)" class="km-value">
                     <div :class="[(document.status=='recommendedToCop')? 'bg-success text-white':'']">
                         {{t("areasCop")}}
                     </div> 
@@ -136,9 +136,9 @@
                                 <km-term :value="document.recommendedToCopByGovernment" :locale="locale"></km-term>
                             </span>
                         </div>
-                        <div class="col-4" v-if="fixDate(document.recommendedToCopByGovernmentOn)">
+                        <div class="col-4" v-if="recommendedToCopByGovernmentOnDate">
                             <label>{{t("date")}}</label>
-                            <div class="km-value">{{fixDate(document.recommendedToCopByGovernmentOn)}}</div>
+                            <div class="km-value">{{recommendedToCopByGovernmentOnDate}}</div>
                         </div>    
                     </div> 
                 </div>
@@ -296,7 +296,30 @@
       if (level ==="noInformation") return "bg-secondary"     
     };
     const document = computed(()=>props.documentInfo?.body);
- 
+    
+    const approvedByCopDecisionDate = computed(()=>{        
+        if(document?.value?.approvedByCopDecision?.identifier?.indexOf('0001')===0)           
+            return undefined;
+        else
+            return document?.value?.approvedByCopDecision?.identifier;
+  
+    });
+
+    const approvedByGovernmentOnDate = computed(()=>{
+        if(document?.value?.approvedByGovernmentOn?.identifier?.indexOf('0001')===0)           
+            return undefined;
+        else
+            return document?.value?.approvedByGovernmentOn?.identifier;     
+    });
+
+    const recommendedToCopByGovernmentOnDate = computed(()=>{
+        if(document?.value?.recommendedToCopByGovernmentOn?.identifier?.indexOf('0001')===0)           
+            return undefined;
+        else
+            return document?.value?.recommendedToCopByGovernmentOn?.identifier;        
+    });
+   
+
     onMounted(() => {
         loadShapes(document.value.gisFiles);   
     });
@@ -309,10 +332,5 @@
         const s = await Promise.all(qLayers);  
         gisLayer.value = s;       
     };
-    function fixDate (date) {
-        if(date && date.indexOf('0001')===0) 
-            date = undefined;
-        return date;
-    };
-   
+
 </script>
