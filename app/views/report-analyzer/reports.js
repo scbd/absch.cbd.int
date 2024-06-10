@@ -3,6 +3,7 @@ import moment from 'moment';
 import '~/views/report-analyzer/directives/national-reports/questions-selector';
 import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import reportsT from '~/app-text/views/report-analyzer/reports.json';
+import  cbdArticle  from '../portals/cbd-article.vue';
 
     export { default as template } from './reports.html'
 export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService',
@@ -17,6 +18,26 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
             //
             //
             //========================================
+            $scope.$on('onReportTypeChanged', function(event, reportType) {
+                const adminTag    = _.find($scope.reportData, {type:reportType}).adminTag
+                buildArticleQuery(adminTag);
+            });
+
+            $scope.cbdArticleComponent = {
+                components:{cbdArticle} 
+            }
+
+            function buildArticleQuery (adminTag) {
+                let ag   = [];
+                let match = {}		 
+                match.adminTags = { $all: [adminTag]}; 
+
+                ag.push({"$match"   : match });
+                ag.push({"$project" : { title:1, content:1, coverImage:1}});
+                ag.push({"$limit"   : 1 });
+                $scope.articleQuery = { ag : JSON.stringify(ag) };
+            } 
+
             $scope.analyze = function () {
 
                 var data = {
@@ -30,14 +51,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
 
                 $location.url(_.trimEnd($location.path(), '/') + '/analyzer');
             };
-
-            $scope.$on('onReportTypeChanged', function(event, reportType) {
-                console.log('Received message from child:', reportType);
-                //ToDo: will update for article
-                var infoBlockUrl    = _.find($scope.reportData, {type:reportType}).infoBlockUrl
-                $scope.infoBlockUrl = baseUrl + infoBlockUrl;
-            });
-
+           
             var DefaultRegions = [
                 "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
                 "5E5B7AA4-2420-4147-825B-0820F7EC5A4B", // CBD Regional Groups - Asia and the Pacific
@@ -72,15 +86,8 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                     getReportCount(report.type);
                 })
             });
-            //ToDo: no need if emit is using
-            $scope.$watch('selectedReportType', function(newVal){
-                
-                if(newVal){
-                    var infoBlockUrl    = _.find($scope.reportData, {type:newVal}).infoBlockUrl
-                    $scope.infoBlockUrl = baseUrl + infoBlockUrl;
-                }
-            });
-            function getReportCount(reportType){
+          
+            function getReportCount(reportType){                       
                 var query  = { 'government_REL' : { $in: DefaultRegions} };
                 var fields = '{"government":1}'
         

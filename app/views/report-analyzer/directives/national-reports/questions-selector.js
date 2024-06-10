@@ -73,7 +73,7 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
 
                     if(!reportType || !$scope.reportData)
                         return;
-                    
+                    $scope.$emit('onReportTypeChanged', reportType);
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
 
                     const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/(\w+)$/i;
