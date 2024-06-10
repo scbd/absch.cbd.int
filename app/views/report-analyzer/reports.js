@@ -3,7 +3,7 @@ import moment from 'moment';
 import '~/views/report-analyzer/directives/national-reports/questions-selector';
 import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import reportsT from '~/app-text/views/report-analyzer/reports.json';
-import  cbdArticle  from '../portals/cbd-article.vue';
+import  cbdArticle  from '../../components/common/cbd-article.vue';
 
     export { default as template } from './reports.html'
 export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService',
