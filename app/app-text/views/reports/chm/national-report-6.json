@@ -8,6 +8,7 @@
     "sectionII":"Section II. Implementation measures, their effectiveness, and associated obstacles and scientific and technical needs to achieve national targets",
     "measures":"Measures taken to contribute to the implementation of your country’s national biodiversity strategy and action plan", 
     "aichiTargets":"Aichi Biodiversity Target(s)",
+    "aichiTargetDescription":"Description of how and to what extent your country has contributed to the achievement of this Aichi Biodiversity Target",
     "assessment":"Assessment of the effectiveness of the implementation measure taken in achieving desired outcomes",
     "toolsOrMethodology":"tools or methodology used for the assessment of effectiveness above",
     "relevantWebsites":"Relevant websites, links, and files",
@@ -21,7 +22,7 @@
     "additionalRelevantInfo":"Additional relevant information that has not been included in the interim national report",
     "description":"Description of how and to what extent your country has contributed to the achievement of this Aichi Biodiversity Target",
     "absRecords":"ABS Clearing-House records",
-    "finalcialReportingFramework":"Financial Reporting Framework",
+    "financialReportingFramework":"Financial Reporting Framework",
     "otherActivities":"Other activities contributing to the achievement of the Aichi Biodiversity Target at the global level",
     "descriptionDescribe":"Description of country’s contributions to the achievement of the Aichi Biodiversity Targets, please describe how and to what extent these contributions support the implementation of the 2030 Agenda for Sustainable Development and the Sustainable Development Goals:",
     "sectionV":"Section V. Description of the national contribution to the achievement of the targets of the Global Strategy for Plant Conservation",
@@ -44,7 +45,3 @@
     "mechanisms":"Mechanisms for monitoring and reviewing implementation",
     "additionalInformation": "Additional information"
 }
-
-
-
-
