@@ -7,13 +7,13 @@ export const downloadSchemas = {
 	...commonDownloadSchemas,
 
 	"supplementaryAuthority":{
-		"uniqueId"   : fieldsT["supplementaryAuthority.uniqueId"],
-		"government" : fieldsT["supplementaryAuthority.government"],
+		"uniqueId"   : fieldsT["uniqueId"],
+		"government" : fieldsT["country"],
 		"name"       : fieldsT["supplementaryAuthority.name"],
-		"publishedOn": fieldsT["supplementaryAuthority.publishedOn"]
+		"publishedOn": fieldsT["publishedOn"]
 	},
 	"laboratoryDetection":{
-		"uniqueId"        : fieldsT["laboratoryDetection.uniqueId"],
+		"uniqueId"        : fieldsT["uniqueId"],
 		"organization"    : fieldsT["laboratoryDetection.organization"],
 		"services"        : fieldsT["laboratoryDetection.services"],
 		"agreements"      : fieldsT["laboratoryDetection.agreements"],
@@ -22,20 +22,20 @@ export const downloadSchemas = {
 		"lmoTypes"        : fieldsT["laboratoryDetection.lmoTypes"],
 		"detectableLmos"  : fieldsT["laboratoryDetection.detectableLmos"],
 		"detectableGenes" : fieldsT["laboratoryDetection.detectableGenes"],
-		"publishedOn"     : fieldsT["laboratoryDetection.publishedOn"]
+		"publishedOn"     : fieldsT["publishedOn"]
 	},
 
 	"biosafetyExpert":{
-		"uniqueId": fieldsT["biosafetyExpert.uniqueId"],
-		"government": fieldsT["biosafetyExpert.government"],
+		"uniqueId": fieldsT["uniqueId"],
+		"government": fieldsT["country"],
 		"birthCountry": fieldsT["biosafetyExpert.birthCountry"],
 		"expertise": fieldsT["biosafetyExpert.expertise"],
 		"motherTongue": fieldsT["biosafetyExpert.motherTongue"],
 		"languageRating": fieldsT["biosafetyExpert.languageRating"],
-		"publishedOn": fieldsT["biosafetyExpert.publishedOn"]
+		"publishedOn": fieldsT["publishedOn"]
 	},
 	"biosafetyDecision" : {
-        "uniqueId"      			: fieldsT["bchRecordID"],
+        "uniqueId"      					: fieldsT["bchRecordID"],
         "government"        				: fieldsT["country"],
 		"authorities"						: fieldsT["biosafetyDecision.authorities"],
 		"title"								: fieldsT["biosafetyDecision.title"],

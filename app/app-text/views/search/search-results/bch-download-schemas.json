@@ -4,20 +4,15 @@
   "bchRecordID"       : "BCH record ID",
   "name"              :  "Name",
   "title"             : "Title",
+  "uniqueId"          : "UID",
 
-  "supplementaryAuthority.uniqueId": "UID",
-  "supplementaryAuthority.government": "Country",
   "supplementaryAuthority.name": "Name of the Competent Authority",
-  "supplementaryAuthority.publishedOn":"Publication Date",
-  "biosafetyExpert.uniqueIdentifier": "UID",
-  "biosafetyExpert.government": "Country",
+
   "biosafetyExpert.birthCountry": "Country Details",
   "biosafetyExpert.expertise": "Areas of expertise",
   "biosafetyExpert.motherTongue": "Mother tongue",  
   "biosafetyExpert.languageRating": "Language proficiency",
-  "biosafetyExpert.publishedOn":"Publication Date",
-  "biosafetyExpert.unLanguages": "Language proficiency",
-  "laboratoryDetection.uniqueId": "UID",
+
   "laboratoryDetection.organization": "Laboratory name and coordinates",
   "laboratoryDetection.services": "Services and activities performed",
   "laboratoryDetection.agreements": "Collaborative agreements",
@@ -26,7 +21,6 @@
   "laboratoryDetection.lmoTypes": "Types of LMOs",
   "laboratoryDetection.detectableLmos": "LMO(s) detectable by the laboratory",
   "laboratoryDetection.detectableGenes": "Genetic element(s) detectable by the laboratory",
-  "laboratoryDetection.publishedOn":"Publication Date",
 
   "biosafetyDecision.authorities"                    :"Competent National Authority(ies) responsible for the decision or communication",
   "biosafetyDecision.title"                          : "Title / Reference number of the decision or communication",

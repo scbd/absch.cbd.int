@@ -1478,7 +1478,33 @@ export const cpbNationalReport5 = [
                      "trigger":"enable"
                   },
                   {
-                     "question":"Q059",
+                     "baseQuestion":"Q059",
+                     "question":"Q059_a",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"enable"
+                  },
+                  {
+                     "baseQuestion":"Q059",
+                     "question":"Q059_b",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"enable"
+                  },
+                  {
+                     "question":"Q059_a",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"enable"
+                  },
+                  {
+                     "question":"Q059_b",
                      "values":[
                         "true"
                      ],
