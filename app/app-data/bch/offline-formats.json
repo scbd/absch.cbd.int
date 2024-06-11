@@ -103,6 +103,14 @@
         "ru": "https://bch.cbd.int/resources/common-formats/ru/nationalrecord_4th_nationalreportcartagenaprotocol_ru.docx",
         "zh": "https://bch.cbd.int/resources/common-formats/zh/nationalrecord_4th_nationalreportcartagenaprotocol_zh.docx"
     },
+    "cpbNationalReport5": {
+        "ar": "https://bch.cbd.int/resources/common-formats/ar/nationalrecord_5th_nationalreportcartagenaprotocol_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/en/nationalrecord_5th_nationalreportcartagenaprotocol_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/es/nationalrecord_5th_nationalreportcartagenaprotocol_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/fr/nationalrecord_5th_nationalreportcartagenaprotocol_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/ru/nationalrecord_5th_nationalreportcartagenaprotocol_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/zh/nationalrecord_5th_nationalreportcartagenaprotocol_zh.docx"
+    },
     "contact": {
         "ar": "https://bch.cbd.int/resources/common-formats/ar/nationalreferencerecord_contact_final_ar.docx",
         "en": "https://bch.cbd.int/resources/common-formats/en/nationalreferencerecord_contact_final_en.docx",

@@ -1,4 +1,13 @@
 {
   "clear": "مسح",
-  "loading": ""
+  "loading": "قيد التحميل ...",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.679Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "clear": "dc30bc0c7914db5918da4263fce93ad2",
+      "loading": "8524de963f07201e5c086830d370797f"
+    }
+  }
 }

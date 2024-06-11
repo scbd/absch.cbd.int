@@ -24,5 +24,38 @@
   "redirectNow": "Перенаправить сейчас",
   "websiteName": "URL-адрес и название веб-сайта",
   "notes": "Примечания",
-  "notes_footnote": "Поле «Примечания» предназначено для индивидуального пользования и появляется только при редактировании записи."
+  "notes_footnote": "Поле «Примечания» предназначено для индивидуального пользования и появляется только при редактировании записи.",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.589Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "preparationAndSubmission": "5e0e33ba3cefa7c23230dbe9133fe2e0",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "selectOption": "61f250d4a9d8c24ee92aaaf174ef11b1",
+      "question": "a97ea56b0e00b2379736ae60869ff66a",
+      "showPrevious": "426dc89bebe4bd7047b1556458ccb437",
+      "hidePrevious": "bea1288e09cea42016ec0f44f5fc427f",
+      "contactPerson": "3971dd67c05c0133044cc07e65be6fa0",
+      "organizationsStakeholders": "6da0614bfa023d5c2898c0ea94929ebe",
+      "dateOfSubmission": "f067c6ab98b204e2e48836e7082d03b7",
+      "ifNotPartyToCP": "d2267888484f409c9bebce3ffc862bdd",
+      "provideDetails": "2ff0ec0ff0689284e6473f92366d474c",
+      "timePeriod": "1b19bf0afa2ff17ece7cd92f3303e0e1",
+      "reportPeriodStartDate": "2741528faf829c5c6d83a953cee2cf8f",
+      "reportPeriodEndDate": "9607ad3625020bbf6815aef7a704ada1",
+      "part_I_question2_footnote_2": "30b8b7e8d3dfd57b1bbd8fdab81ab087",
+      "to": "01b6e20344b68835c5ed1ddedf20d531",
+      "fourthNationalReport": "c51d31338cd3f3c4e9911e92e832ce00",
+      "previousAnswerMapping": "a2800aed0060828c261277a69e3e7670",
+      "NR4Info": "c7dea97538f7fd7ac1e2765ee136a482",
+      "seconds": "d90d8347e139d0cfc3fad11757b651ff",
+      "redirectNow": "036dce881e1aac61d65dfd345fa4cd79",
+      "websiteName": "446708f61603cb2f644cbd11c017f9be",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notes_footnote": "a1acd59f8d90a8067eb384a11d61588a"
+    }
+  }
 }
