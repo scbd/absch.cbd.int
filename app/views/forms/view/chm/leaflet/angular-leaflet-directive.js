@@ -1,5 +1,4 @@
 import app from '~/app';
-var leafletDirective = angular.module("leaflet-directive", []);
 
 var template = 
 '<div>'+
@@ -7,7 +6,7 @@ var template =
 ' <div ref="disclaimer" class="small"></div>'+
 '</div>';
 
-leafletDirective.directive("leaflet", ["$http", "$log", "$q", "$timeout", function ($http, $log, $q, $timeout) {
+app.directive("leaflet", ["$http", "$log", "$q", "$timeout", function ($http, $log, $q, $timeout) {
     return {
         restrict: "E",
         replace: true,
@@ -80,7 +79,6 @@ leafletDirective.directive("leaflet", ["$http", "$log", "$q", "$timeout", functi
                     });
                 });
             }
-
             // Manage map center events
             if (attrs.center) {
 
@@ -281,6 +279,9 @@ leafletDirective.directive("leaflet", ["$http", "$log", "$q", "$timeout", functi
 
                 invalidate();
             });
+
+            //BF. trick leaflet to resize to render the map
+            window.dispatchEvent(new Event('resize'));
 
         } // end of link function
     };
