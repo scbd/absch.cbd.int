@@ -1494,6 +1494,22 @@ export const cpbNationalReport5 = [
                      ],
                      "type":"@hasValues",
                      "trigger":"enable"
+                  },
+                  {
+                     "question":"Q059_a",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"enable"
+                  },
+                  {
+                     "question":"Q059_b",
+                     "values":[
+                        "true"
+                     ],
+                     "type":"@hasValues",
+                     "trigger":"enable"
                   }
                ]
             },
