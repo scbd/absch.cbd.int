@@ -65,19 +65,7 @@ export function capitalize(val) {
   return val.toUpperCase();
 }
 
-export function currencyString(number) {
-  if (number) {
-    var formatter = new Intl.NumberFormat( { style: 'currency' });
-    return  formatter.format(number); 
-  }
-  else {
-    return "0";
-  }
-}
 
-export function filter(array, id) {     
-    return array.filter((option) => option.identifier===id );
-};  
 
 
  
