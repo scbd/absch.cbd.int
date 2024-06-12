@@ -146,6 +146,11 @@ export default function bootApp(window, require, defineX) {
             'luxon'                     : `${cdnHost}luxon@1.25.0/build/amd/luxon`,
             'scbd-common-articles'      : `${cdnHost}@scbd/common@0.1.1/dist/components/articles/index.umd`,
             'rangy'                     : `${cdnHost}rangy@1.3.1/lib/rangy-core.min`,
+            'leaflet'                   : `${cdnHost}leaflet@1.9.3/dist/leaflet`,
+            'proj4leaflet'              : `${cdnHost}proj4leaflet@1.0.2/src/proj4leaflet`,
+            'proj4'                     : `${cdnHost}proj4@2.9.2/dist/proj4`,
+            'leaflet-directive'         : 'views/forms/view/chm/leaflet/leaflet.js',
+            
             
         },
         'shim': {
@@ -170,7 +175,11 @@ export default function bootApp(window, require, defineX) {
             'angucomplete-alt'              : { 'deps': ['angular', 'externalCss']},
 
             'pivottable'                    : { 'deps': ['jquery', 'jquery-ui', 'angular', 'externalCss']},
-            'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']}
+            'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']},
+            'leaflet-directive'             : { 'deps': ['angular', 'leaflet']},  
+            'leaflet'                       : { 'deps': ['css!https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css'], exports : 'L' },
+            'proj4leaflet'                  : { 'deps': ['leaflet', 'proj4'], exports : 'L' }
+            
             
         },
         urlArgs: function(id, url) {
