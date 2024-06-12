@@ -149,7 +149,7 @@ export default function bootApp(window, require, defineX) {
             'leaflet'                   : `${cdnHost}leaflet@1.9.3/dist/leaflet`,
             'proj4leaflet'              : `${cdnHost}proj4leaflet@1.0.2/src/proj4leaflet`,
             'proj4'                     : `${cdnHost}proj4@2.9.2/dist/proj4`,
-            'leaflet-directive'         : 'views/forms/view/chm/leaflet/angular-leaflet-directive.js',
+            'leaflet-directive'         : 'views/forms/view/chm/leaflet/leaflet.js',
             
             
         },
