@@ -5,8 +5,7 @@ _defaults: &defaults
   #   - image: docker:17.05.0-ce
   machine:
     enabled: true
-    # Use Ubuntu 20.04
-    image: ubuntu-2004:202201-02
+    image: ubuntu-2204:edge
   working_directory: ~/scbd/absch.cbd.int
   parallelism: 1
 
