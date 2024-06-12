@@ -47,7 +47,6 @@
                     <div v-if="mapConfig"> 
                         <label>{{ t("geoLocation") }} </label>  
                         <div class="km-value">  
-                         <!-- TODO: fix map delay display issue -->
                         <ng v-vue-ng:leaflet :map-config="mapConfig"  :center="document.gisMapCenter" :layers="gisLayer" :scroll-wheel-zoom="false"></ng> 
                         </div> 
                     </div>
@@ -107,67 +106,60 @@
 
                 <legend>{{ t("status") }}</legend>
            
-                <div v-if="document.status=='approved' || document.approvedByCopDecision || document.approvedByCopDecision" >
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item" :class="[(document.status=='approved')? 'bg-success text-white ':'']">
-                                 {{t("areasEbsa")}}                           
-                          </li>
-                          <li class="list-group-item">
-                                <div v-if="document.approvedByCopDecision" >
-                                    <div v-if="approvedByCopDecisionDate != undefined" >
-                                        <label>{{t("copDecision")}}</label> 
-                                        <div class="km-value">{{approvedByCopDecisionDate}}</div> 
-                                    </div>
+                <div class="card" v-if="document.status=='approved' || document.approvedByCopDecision || document.approvedByCopDecision" >                   
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" :class="[(document.status=='approved')? 'bg-success text-white ':'']">
+                                {{t("areasEbsa")}}                           
+                        </li>
+                        <li class="list-group-item">
+                            <div v-if="document.approvedByCopDecision" >
+                                <div v-if="approvedByCopDecisionDate != undefined" >
+                                    <label>{{t("copDecision")}}</label> 
+                                    <div class="km-value">{{approvedByCopDecisionDate}}</div> 
                                 </div>
-                                <div class="row" >    
-                                    <div class="col-8" v-if="document.approvedByGovernment">                            
-                                        <label>{{t("approvedByAParty")}}</label>
-                                        <span class="km-value">
-                                            <km-term :value="document.approvedByGovernment" :locale="locale"></km-term>
-                                        </span>
-                                    </div>
-                                    <div class="col-4" v-if="approvedByGovernmentOnDate != undefined">
-                                        <label>{{t("date")}}</label>
-                                        <div class="km-value">{{approvedByGovernmentOnDate}}</div>
-                                    </div>    
+                            </div>
+                            <div class="row" >    
+                                <div class="col-8" v-if="document.approvedByGovernment">                            
+                                    <label>{{t("approvedByAParty")}}</label>
+                                    <span class="km-value">
+                                        <km-term :value="document.approvedByGovernment" :locale="locale"></km-term>
+                                    </span>
+                                </div>
+                                <div class="col-4" v-if="approvedByGovernmentOnDate != undefined">
+                                    <label>{{t("date")}}</label>
+                                    <div class="km-value">{{approvedByGovernmentOnDate}}</div>
                                 </div>    
-                            </li>                          
-                        </ul>
-                    </div>
-                   
+                            </div>    
+                        </li>                          
+                    </ul>
                 </div>   
-                <div v-if="document.status=='recommendedToCop' || document.recommendedToCopByGovernment || document.recommendedToCopByGovernment || (recommendedToCopByGovernmentOnDate != undefined)" >
-                    
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item" :class="[(document.status=='recommendedToCop')? 'bg-success text-white':'']">
-                                {{t("areasCop")}}                         
-                          </li>
-                          <li class="list-group-item">                                
-                                <div class="row">    
-                                    <div class="col-8" v-if="document.recommendedToCopByGovernment">
-                                        <label>{{t("ongoingOfficialProcess")}}</label>
-                                        <span class="km-value">
-                                            <km-term :value="document.recommendedToCopByGovernment" :locale="locale"></km-term>
-                                        </span>
-                                    </div>
-                                    <div class="col-4" v-if="recommendedToCopByGovernmentOnDate">
-                                        <label>{{t("date")}}</label>
-                                        <div class="km-value">{{recommendedToCopByGovernmentOnDate}}</div>
-                                    </div>    
-                                </div>   
-                            </li>                          
-                        </ul>
-                    </div>
+                <div class="card" v-if="document.status=='recommendedToCop' || document.recommendedToCopByGovernment || document.recommendedToCopByGovernment || (recommendedToCopByGovernmentOnDate != undefined)" >
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" :class="[(document.status=='recommendedToCop')? 'bg-success text-white':'']">
+                            {{t("areasCop")}}                         
+                        </li>
+                        <li class="list-group-item">                                
+                            <div class="row">    
+                                <div class="col-8" v-if="document.recommendedToCopByGovernment">
+                                    <label>{{t("ongoingOfficialProcess")}}</label>
+                                    <span class="km-value">
+                                        <km-term :value="document.recommendedToCopByGovernment" :locale="locale"></km-term>
+                                    </span>
+                                </div>
+                                <div class="col-4" v-if="recommendedToCopByGovernmentOnDate">
+                                    <label>{{t("date")}}</label>
+                                    <div class="km-value">{{recommendedToCopByGovernmentOnDate}}</div>
+                                </div>    
+                            </div>   
+                        </li>                          
+                    </ul>                    
                 </div>
-                <div v-if="document.status=='recommendedToSbstta' || document.recommendedToSbsttaBy || document.recommendedToSbsttaByWorkshop" class="border">
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item" :class="[(document.status=='recommendedToSbstta')? 'bg-success text-white':'']">
+                <div class="card" v-if="document.status=='recommendedToSbstta' || document.recommendedToSbsttaBy || document.recommendedToSbsttaByWorkshop" >
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" :class="[(document.status=='recommendedToSbstta')? 'bg-success text-white':'']">
                             {{t("areasCriteriaSBSTTA")}}                       
-                          </li>
-                          <li class="list-group-item">
+                        </li>
+                        <li class="list-group-item">
                             <div v-if="document.recommendedToSbsttaBy" >
                                 <label>{{t("preparation")}}</label>
                                 <div class="km-value"  >
@@ -181,57 +173,53 @@
                                     <km-term :value="document.recommendedToSbsttaByWorkshop" :locale="locale"></km-term>
                                 </span>
                             </div>                                   
-                          </li>                          
-                        </ul>
-                    </div>
+                        </li>                          
+                    </ul>                    
                 </div>
                 
-                <div v-if="document.status=='recommendedToWorkshop' || document.recommendedToWorkshopBy || document.recommendedToWorkshopByGovernments || document.recommendedToWorkshopByOthers" >
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item" :class="[(document.status=='recommendedToWorkshop')? 'bg-success text-white':'']">
+                <div  class="card" v-if="document.status=='recommendedToWorkshop' || document.recommendedToWorkshopBy || document.recommendedToWorkshopByGovernments || document.recommendedToWorkshopByOthers" >
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" :class="[(document.status=='recommendedToWorkshop')? 'bg-success text-white':'']">
                             {{ t("areasCriteriaCBD")}}                     
-                          </li>
-                          <li class="list-group-item">
-                            <div v-if="document.recommendedToWorkshopBy" >                            
-                                <label>{{t("recommendedToWorkshopBy")}} </label>                                  
-                                <ul class="km-value">
-                                    <li v-if="document.recommendedToSbsttaBy==='GOV'"> {{t("governments")}}</li>
-                                    <li v-if="document.recommendedToSbsttaBy==='ORG'"> {{t("organizations")}}</li>
-                                    <li v-if="document.recommendedToSbsttaBy==='OTHER'"> {{t("others")}}</li>
-                                    <li v-else>{{document.recommendedToAnyBy}}</li>
-                                </ul>
+                        </li>
+                        <li class="list-group-item">
+                        <div v-if="document.recommendedToWorkshopBy" >                            
+                            <label>{{t("recommendedToWorkshopBy")}} </label>                                  
+                            <ul class="km-value">
+                                <li v-if="document.recommendedToSbsttaBy==='GOV'"> {{t("governments")}}</li>
+                                <li v-if="document.recommendedToSbsttaBy==='ORG'"> {{t("organizations")}}</li>
+                                <li v-if="document.recommendedToSbsttaBy==='OTHER'"> {{t("others")}}</li>
+                                <li v-else>{{document.recommendedToAnyBy}}</li>
+                            </ul>
+                        </div>
+            
+                        <div v-if="document.recommendedToWorkshopByGovernments" >    
+                            <label>{{t("governments")}} </label>   
+                            <div class="km-value">
+                                <li v-for="term in document.recommendedToWorkshopByGovernments">
+                                    <km-term :value="term" :locale="locale"></km-term>
+                                </li>
                             </div>
-                
-                            <div v-if="document.recommendedToWorkshopByGovernments" >    
-                                <label>{{t("governments")}} </label>   
-                                <div class="km-value">
-                                    <li v-for="term in document.recommendedToWorkshopByGovernments">
-                                        <km-term :value="term" :locale="locale"></km-term>
-                                    </li>
-                                </div>
+                        </div>
+                        <div v-if="document.recommendedToWorkshopByOrganizations" >  
+                            <label>{{t("organizations")}}</label>  
+                            <div class="km-value">
+                                <li v-for="(organization, i) in document.recommendedToWorkshopByOrganizations" key="organization">
+                                    <!-- TODO: need test  -->
+                                    <ng v-vue-ng:view-record-reference v-model:ng-model="document.recommendedToWorkshopByOrganizations[i]" locale="locale"></ng>
+                                </li>
                             </div>
-                           <div v-if="document.recommendedToWorkshopByOrganizations" >  
-                                <label>{{t("organizations")}}</label>  
-                                <div class="km-value">
-                                    <li v-for="(organization, i) in document.recommendedToWorkshopByOrganizations" key="organization">
-                                     <!-- TODO: need test  -->
-                                        <ng v-vue-ng:view-record-reference v-model:ng-model="document.recommendedToWorkshopByOrganizations[i]" locale="locale"></ng>
-                                    </li>
-                                </div>
-                            </div>
-                            <div v-if="document.recommendedToWorkshopByOthers" >  
-                                <label>{{t("details")}}</label>
-                                <ng v-vue-ng:km-value-ml  :value="document.recommendedToWorkshopByOthers" :locales="locale" html ></ng>
-                            </div>                                
-                          </li>                          
-                        </ul>
-                    </div>
+                        </div>
+                        <div v-if="document.recommendedToWorkshopByOthers" >  
+                            <label>{{t("details")}}</label>
+                            <ng v-vue-ng:km-value-ml  :value="document.recommendedToWorkshopByOthers" :locales="locale" html ></ng>
+                        </div>                                
+                        </li>                          
+                    </ul>                    
                 </div> 
         
-                <div v-if="document.status=='recommendedToAny' || document.recommendedToAnyBy || document.recommendedToAnyByGovernments || document.recommendedToAnyByOrganizations || document.recommendedToAnyByOthers" >
-                    <div class="card">
-                        <ul class="list-group list-group-flush">
+                <div class="card" v-if="document.status=='recommendedToAny' || document.recommendedToAnyBy || document.recommendedToAnyByGovernments || document.recommendedToAnyByOrganizations || document.recommendedToAnyByOthers" >
+                    <ul class="list-group list-group-flush">
                           <li class="list-group-item" :class="[(document.status=='recommendedToAny')? 'bg-success text-white':'']">
                               {{t("otherAreas")}}                   
                           </li>
@@ -266,9 +254,8 @@
                                 <label>{{t("details")}}</label>                               
                                 <ng v-vue-ng:km-value-ml  :value="document.recommendedToAnyByOthers" :locales="locale" html ></ng>
                             </div>                
-                          </li>                          
-                        </ul>
-                    </div>                    
+                        </li>                          
+                    </ul>                                        
                 </div> 
             </section>  
 
