@@ -18,25 +18,31 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
             //
             //
             //========================================
+            function getRealmArticleTag() { 
+                if(realm.is('BCH')) return 'bch';
+                if(realm.is('ABS')) return 'absch';
+                if(realm.is('CHM')) return 'chm';
+            };
+
             $scope.$on('onReportTypeChanged', function(event, reportType) {
-                const adminTag    = _.find($scope.reportData, {type:reportType}).adminTag
-                buildArticleQuery(adminTag);
+                const adminTags    = _.find($scope.reportData, {type:reportType}).adminTags
+                let ag   = [];
+                let match = {};
+                const realmArticleTag = getRealmArticleTag();
+                if (!adminTags.includes(realmArticleTag)) {
+                    adminTags.push(realmArticleTag);
+                } 
+                match.adminTags = { $all: adminTags}; 
+                ag.push({"$match"   : match });
+                ag.push({"$project" : { title:1, content:1}});
+                ag.push({"$limit"   : 1 });
+                $scope.articleQuery = { ag : JSON.stringify(ag) };
             });
 
             $scope.cbdArticleComponent = {
                 components:{cbdArticle} 
             }
 
-            function buildArticleQuery (adminTag) {
-                let ag   = [];
-                let match = {}		 
-                match.adminTags = { $all: [adminTag]}; 
-
-                ag.push({"$match"   : match });
-                ag.push({"$project" : { title:1, content:1, coverImage:1}});
-                ag.push({"$limit"   : 1 });
-                $scope.articleQuery = { ag : JSON.stringify(ag) };
-            } 
 
             $scope.analyze = function () {
 
