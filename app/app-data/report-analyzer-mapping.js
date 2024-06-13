@@ -11,7 +11,6 @@ export const analyzerMapping =
             "questionsUrl" : "app-data/abs/report-analyzer/npInterimNationalReport1",
             "mappingsUrl"  : "app-data/abs/report-analyzer/mapping/npInterimNationalReport1.json",
             "dataUrl"      : "/api/v2017/national-reports-np",
-            "adminTags"     :  ["introduction", "report-analyzer", "npInterimNationalReport1"],
             "year"          : "2017",
             "deadline"      : "2017-11-01",
             "offlineFormats": [
@@ -29,7 +28,6 @@ export const analyzerMapping =
             "questionsUrl" : "app-data/abs/report-analyzer/absNationalReport1",
             "mappingsUrl"  : "app-data/abs/report-analyzer/mapping/absNationalReport1.json",
             "dataUrl"      : "/api/v2019/report-analyzer/abs-national-report-1",
-            "adminTags"     :  ["introduction", "report-analyzer", "absNationalReport1"],
             "year"          : "2024",
             "deadline"      : "2026-02-28",
             "offlineFormats": [
@@ -84,7 +82,6 @@ export const analyzerMapping =
             "title"         :  reportAnalyzerMappingJson.bchNR2Title,
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport2",
             "dataUrl"       : "/api/v2015/national-reports-cpb-2",
-            "adminTags"     :  ["introduction", "report-analyzer", "cpbNationalReport2"],
             "year"          : "2011",
             "deadline"      : "2011-09-30",
             "compare"       : [{"title": "", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport2.json"}]
@@ -93,7 +90,6 @@ export const analyzerMapping =
             "type"          : "cpbNationalReport3",
             "title"         :  reportAnalyzerMappingJson.bchNR3Title,
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport3",
-            "adminTags"     :  ["introduction", "report-analyzer", "cpbNationalReport3"],
             "year"          : "2015",
             "deadline"      : "2015-10-31",
             "compare"       : [{"title": "Compare with 2nd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport3-2.json"}]
@@ -103,7 +99,6 @@ export const analyzerMapping =
             "title"         :  reportAnalyzerMappingJson.bchNR4Title,
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport4",
             "dataUrl"       : "/api/v2019/report-analyzer/national-report-cpb-4",
-            "adminTags"     :  ["introduction", "report-analyzer", "cpbNationalReport4"],
             "year"          : "2019",
             "deadline"      : "2019-10-01",
             "compare"       : [ 
@@ -124,7 +119,6 @@ export const analyzerMapping =
             "title"         :  reportAnalyzerMappingJson.bchNR5Title,                               
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport5",
             "dataUrl"       : "/api/v2019/report-analyzer/cpb-national-report-5",
-            "adminTags"     :  ["introduction", "report-analyzer", "cpbNationalReport5"],
             "year"          : "2024",
             "deadline"      : "2026-02-28",
             "compare"       : [ 

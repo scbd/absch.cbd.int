@@ -25,13 +25,10 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
             };
 
             $scope.$on('onReportTypeChanged', function(event, reportType) {
-                const adminTags    = _.find($scope.reportData, {type:reportType}).adminTags
                 let ag   = [];
                 let match = {};
                 const realmArticleTag = getRealmArticleTag();
-                if (!adminTags.includes(realmArticleTag)) {
-                    adminTags.push(realmArticleTag);
-                } 
+                const adminTags    =  ["introduction", "report-analyzer", reportType, realmArticleTag]; 
                 match.adminTags = { $all: adminTags}; 
                 ag.push({"$match"   : match });
                 ag.push({"$project" : { title:1, content:1}});
