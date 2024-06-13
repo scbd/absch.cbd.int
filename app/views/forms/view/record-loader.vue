@@ -25,6 +25,9 @@
                     :document-info="documentInfo" :locale="locale"></event>       
             <marine-ebsa v-if="documentInfo?.type == 'marineEbsa'"  
                  :document-info="documentInfo" :locale="locale"></marine-ebsa>
+            <financial-report-2015 v-if="documentInfo?.type == 'resourceMobilisation'"  
+                    :document-info="documentInfo" :locale="locale"></financial-report-2015 >
+                    
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 
@@ -49,6 +52,7 @@
     import undbPartner from '~/views/forms/view/chm/undb-partner.vue'
     import event from '~/views/forms/view/chm/event.vue'
     import marineEbsa from '~/views/forms/view/chm/marine-ebsa.vue'
+    import financialReport2015 from '~/views/forms/view/chm/financial-report-2015.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
