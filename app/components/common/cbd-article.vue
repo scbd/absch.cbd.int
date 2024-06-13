@@ -21,6 +21,11 @@
             </div>
         </div>
     </div>
+    <div v-if="!loading">
+        <cbd-add-new-view-article  v-if="hasEditRights"
+            :admin-tags="adminTags" :id="article?._id" class="btn btn-secondary float-end">
+        </cbd-add-new-view-article>
+    </div>
 </template>
 
 <script setup>
@@ -30,10 +35,17 @@
     import { lstring } from '../../components/kb/filters';
     import { useAuth } from '@scbd/angular-vue/src/index.js';
     import ArticlesApi from '../../components/kb/article-api';
+    import  cbdAddNewViewArticle  from '../../components/common/cbd-add-new-view-article.vue';
 
     const auth = useAuth();
     const { t, locale } = useI18n({ messages });
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
+
+    const loading = ref(false);
+    const article = ref(null)
+    const error = ref(null);
+    const hasEditRights = ref(false);
+    // const hasEditRights.value = computed(()=> auth.user()?.hasEditRights); // ToDo: need to find ['oasisArticleEditor', 'Administrator']
 
     const emit = defineEmits(['onArticleLoad']);
 
@@ -53,9 +65,6 @@
           .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/');
     })
 
-    const loading = ref(false);
-    const article = ref(null)
-    const error = ref(null);
 
     const getArticle = async function (query){
 

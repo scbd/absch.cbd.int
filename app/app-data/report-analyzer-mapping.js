@@ -90,6 +90,7 @@ export const analyzerMapping =
             "type"          : "cpbNationalReport3",
             "title"         :  reportAnalyzerMappingJson.bchNR3Title,
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport3",
+            "dataUrl"       : "/api/v2015/national-reports-cpb-3",
             "year"          : "2015",
             "deadline"      : "2015-10-31",
             "compare"       : [{"title": "Compare with 2nd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport3-2.json"}]
