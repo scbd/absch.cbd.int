@@ -143,6 +143,7 @@ import _ from 'lodash';
                 regions                : "regions",
                 languages              : "ISO639-2",
                 aichiTargets           : 'AICHI-TARGETS',
+                gbfTargets             : 'GBF-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
                 bchRaAuthorAffiliation :   'Organization Types',
                 transboundaryMovementTypes : 'TransboundaryMovementTypes',
