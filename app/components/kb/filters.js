@@ -64,3 +64,9 @@ function normalizeText(text) {
 export function capitalize(val) {
   return val.toUpperCase();
 }
+
+
+
+
+ 
+
