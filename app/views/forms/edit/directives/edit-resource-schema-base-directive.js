@@ -161,8 +161,9 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					if ( !document )
 						return undefined;
 
-					if($scope.isBCH ) {
-						document.nagoya = undefined;
+					if($scope.isBCH || $scope.isCHM) {
+						if ($scope.isBCH)
+							document.nagoya = undefined;
 						if(document.biosafety){
 							$scope.onLmoCategoriesChange( document.biosafety.addressLmoCategories );
 							$scope.onRaRecommendChange( document.biosafety.raRecommend );
@@ -176,16 +177,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 						document.biosafety = undefined;
 						//$scope.onResourceTypesChange( document.resourceTypes );
 					}
-					if($scope.isCHM) {	
-						if(document.biosafety){
-							$scope.onLmoCategoriesChange( document.biosafety.addressLmoCategories );
-							$scope.onRaRecommendChange( document.biosafety.raRecommend );
-							$scope.onThematicAreaChange(document.biosafety.subjects);
-							$scope.onAddressModifiedOrganismsChange(document.biosafety.addressModifiedOrganisms);
-							$scope.onAddressOrganismsChange(document.biosafety.addressOrganisms);
-							$scope.onAddressGenesChange(document.biosafety.addressGenes);
-						}
-					}
+					
 
 					var countryRegions = []
 					if($scope.countryRegions){
