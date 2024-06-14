@@ -37,17 +37,17 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="customizedFieldsModalLabel">Select customized fields</h5>
+                                                <h5 class="modal-title" id="customizedFieldsModalLabel"> {{t('selectCustomizedFields')}} </h5>
                                                 <button type="button" data-bs-dismiss="modal" class="border-0 close" @click="closeModal()"
                                                     aria-label="Close"><i class="bi bi-x-circle-fill icon-lg"></i></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="d-flex align-items-center float-end mb-3">
                                                     <label class="text-sm">
-                                                        <input type="checkbox" @click="selectAll" v-model="selectAllCheckbox"> Select All
+                                                        <input type="checkbox" @click="selectAll" v-model="selectAllCheckbox"> {{t('selectAll')}} 
                                                     </label>
                                                     <a @click="clearAll" class="btn btn-link btn-sm">
-                                                        <i class="bi bi-x"></i> Clear All
+                                                        <i class="bi bi-x"></i>{{t('clearAll')}}
                                                     </a>
                                                 </div>
                                                 <div v-for="(value, key) in optionFields" :key="key" class="form-check">
@@ -101,9 +101,8 @@
                                                         
                                                         <td class="tableexport-string">{{row.rec_schema}}</td>
                                                         <td class="tableexport-string">
-                                                            <!-- <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`"> -->
                                                             <a rel="noopener" target="_blank" :href="`database/row.rec_uniqueIdentifier||''`">
-                                                                {{(row.rec_uniqueIdentifier||'')|capitalize}}
+                                                                {{(row.rec_uniqueIdentifier||'')}}
                                                             </a>
                                                         </td>
                                                         <td class="tableexport-string">{{row.rec_government}}</td>
@@ -150,7 +149,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <div class="float-start">
-                            <button v-if="!isGeneric" @click="openModal" class="btn btn-primary">Customize fields</button>
+                            <button v-if="!isGeneric" @click="openModal" class="btn btn-primary">{{t('customizeFields')}}</button>
                         </div> 
                         <div class="float-end">
                             <button type="button" class="btn btn-secondary" aria-label="Close" @click="closeDialog()" :disabled="loading">{{t('cancel')}}</button>
@@ -174,7 +173,7 @@
     import messages from '../../app-text/components/export.json';
     const { t } = useI18n({ messages });
     const realm = useRealm();
-    const exportModal = ref(null);
+    const exportModal = shallowRef(null);
      const optionsModal = ref(null);
     const downloadDocs =ref([]);
     const numFound = ref(0);
