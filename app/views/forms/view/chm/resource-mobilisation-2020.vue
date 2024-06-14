@@ -13,16 +13,16 @@
            <!-- section 4 begin -->
            <section v-if="document?.domesticExpendituresData">
                 <legend>{{t("role")}}</legend>
-                <div><label>{{t("hasYourCountry")}}</label></div>
+                <label>{{t("hasYourCountry")}}</label>
                 <div v-if="document?.domesticExpendituresData?.domesticCollectiveAction">
-                    <div  class="km-value km-pre"  style="list-style-type: none;" >                  
+                    <div class="km-value km-pre"  style="list-style-type: none;" >                  
                         <li v-for="term in filter(options.assessments,document?.domesticExpendituresData?.domesticCollectiveAction)">                     
                             {{lstring(term.title,locale)}}
                         </li>
                     </div>
                 </div>
 
-                <div><label>{{t("additionalInformationOnAssessment")}}</label></div>
+                <label>{{t("additionalInformationOnAssessment")}}</label>
         
                 <div v-if="document?.domesticExpendituresData?.currency" >
                     <label>{{t("currency")}}</label>
@@ -30,6 +30,7 @@
                        <km-term :value="document?.domesticExpendituresData?.currency" :locale="locale"></km-term>   
                     </span>
                 </div>
+
                 <div v-if="document?.domesticExpendituresData?.multiplier" >
                     <label>{{t("allValues")}}</label>
                     <div class="km-value">
@@ -106,8 +107,7 @@
                         </span>
                     </div>                  
                 </div>
-        
-               
+
                 <table v-if="baselineDocument?.fundingNeedsData?.annualEstimates" class="table table-hover table-condensed">
                     <thead>
                         <tr>
@@ -165,17 +165,17 @@
                         </tr>
                         <tr class="active">
                             <td><strong>{{t("gapReduced")}}</strong></td>
-                            <td v-for="(estimate,index) in orderedAnnualEstimates" class="col-sm-1 text-center">
-                                <span class="km-value km-pre" v-if="document?.nationalPlansData?.gapReductions[index].hasReduced">
-                                    {{document?.nationalPlansData?.gapReductions[index].hasReduced}}
+                            <td v-for="(estimate) in orderedAnnualEstimates" class="col-sm-1 text-center">                                
+                                <span class="km-pre" v-if="document?.nationalPlansData?.gapReductions">                                   
+                                    {{lstring(getHasReducedByYear(estimate.year),locale)}}
                                 </span>
                             </td>
                         </tr>
                         <tr class="active">
                             <td><strong>{{t("gapReducedOverall")}}</strong></td>
                             <td  colspan="{{baselineDocument.fundingNeedsData.annualEstimates.length || 1}}" class="text-center">
-                                <span class="km-pre">
-                                    {{lstring(document?.nationalPlansData?.hasReduceGapOverall|term,locales)}}  
+                                <span class="km-pre">                             
+                                    <km-term :value="document?.nationalPlansData?.hasReduceGapOverall" :locale="locale"></km-term>   
                                 </span>
                             </td>
                         </tr>								
@@ -201,6 +201,7 @@
                 </div>   
             </section>
             <!-- section 5 end -->
+       
    
             <!-- section relevant information begin -->  
             <section v-if="document?.relevantInformation || document?.relevantDocuments">
@@ -227,14 +228,17 @@
    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
    import viewFinancialReport from '~/views/forms/view/directives/view-financial-report.vue';
    import kmTerm from '~/components/km/KmTerm.vue';
-   import messages from '~/app-text/views/reports/chm/financial-report-2020.json'; 
+   import messages from '~/app-text/views/reports/chm/resource-mobilisation-2020.json'; 
    import { useI18n } from 'vue-i18n';
    import { lstring } from '~/services/filters/lstring.js'; 
-//    import { currencyString, filter }  from '~/components/kb/filters.js';
-   import KmDocumentApi from "~/api/km-document";
+   import KmDocumentApi from "~/api/km-document.js";
+   import SolrApi from "~/api/solr.js";
    import { useAuth } from "@scbd/angular-vue/src/index.js";
+   import _ from 'lodash';
+   import { useRealm } from '~/services/composables/realm.js';
+ 
+   const realm = useRealm();
    const auth = useAuth();
-
    const { t } = useI18n({ messages });
 
    const props = defineProps({
@@ -244,7 +248,7 @@
 
    const document = computed(()=>props.documentInfo?.body);
 
-    const orderedContributions = computed(()=>{       
+   const orderedContributions = computed(()=>{       
         if (!(document?.value?.domesticExpendituresData?.contributions)) return [];   
         //remove {} from array
         var newArray = document?.value?.domesticExpendituresData?.contributions.filter(value => Object.keys(value).length !== 0);    
@@ -266,12 +270,11 @@
         return  _.orderBy( document?.value?.nationalPlansData?.internationalSources, 'name');
     });
 
-
-    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});    
-    const hasBaselineDocument = ref(false);
-    const baselineDocuments = ref([]);
-    const baselineDocument = ref({});  
-
+   const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});    
+   const solrAPI = new SolrApi({tokenReader:()=>auth.token()});  
+   const hasBaselineDocument = ref(false);
+   const baselineDocument = ref({});  
+   
     const options  = {
         multipliers :       [{identifier:'units',         title: {en:`${t("units")}`}},  
                              {identifier:'thousands',     title: {en:`${t("thousands")}`}}, 
@@ -331,18 +334,7 @@
         return t("noValueSelected"); 
     };
 
-    const getFundingGapYear = function(year){   
-        if(!year) return 0;
 
-        if(document?.value?.fundingNeedsData?.annualEstimates){
-            const estimate = document.value.fundingNeedsData.annualEstimates.find((item) => {
-                item.year == year
-            });  
-            if(estimate?.fundingGapAmount)
-                return estimate.fundingGapAmount;  
-        }
-        return 0;
-    };
 
     const isEmpty = function (item) {
         return _.isEmpty(item);
@@ -350,7 +342,7 @@
 
     const getNationalPlansSourcesTotal = function(member, year){
         if(!year || !member) return 0;
-
+   
         if(document?.value?.nationalPlansData[member]){
 
             var prop = "amount"+year;
@@ -359,7 +351,6 @@
             
             if(_.isEmpty(_.last(sources)))
                 items = _.initial(sources);
-            console.log("items",items);
 
             items = _.map(sources, prop);          
 
@@ -374,102 +365,71 @@
     };
 
     const getNationalPlansRemainingGapByYear = function(year){
-        if(!year) return 0;
-        return getFundingGapYear(year) - (getNationalPlansSourcesTotal('domesticSources', year)  + getNationalPlansSourcesTotal('internationalSources', year)) ;
-    };
+        if(!year) return 0; 
+        return getBaselineFundingGapYear(year) - (getNationalPlansSourcesTotal('domesticSources', year)  + getNationalPlansSourcesTotal('internationalSources', year)) ;
+      };
      
     const getBaselineFundingGapYear = function(year){
         if(!year) return 0;
         if(baselineDocument?.value?.fundingNeedsData?.annualEstimates){
 
             var estimates = baselineDocument.value.fundingNeedsData.annualEstimates;
-            var estimate = _.findWhere(estimates, {year:year});
+            var estimate = _.find(estimates, {year:year});
 
             if(estimate?.fundingGapAmount)
                 return estimate.fundingGapAmount;
         }
         return 0;
-    };			
+    };	 
+
+    const getHasReducedByYear = function(year){
+        if(!year) return ""; 
+        const item = document?.value?.nationalPlansData?.gapReductions.find((item) => item.year===year );     
+        const result = options.yesNo.find((option) => option.identifier===item.hasReduced );  
+        return  result.title ;
+    };                              
     
 	const annualEstimatesHasYear = function (year) {
         if(!year) return false;
         if(baselineDocument?.value?.fundingNeedsData?.annualEstimates){
             var estimates = baselineDocument.value.fundingNeedsData.annualEstimates;
-            var estimate = _.findWhere(estimates, {year:year});
+            var estimate = _.find(estimates, {year:year});
             if(estimate)
                 return true;
         }
         return false;
     };
-  
-    const loadBaselineDocuments = async function(){
-        const query = {
-            $filter : `(type eq '${encodeURI('resourceMobilisation')}')` 
-        }
 
-        const records =  new Promise(function(resolve, reject) {
-            kmDocumentApi.queryDocuments(query).then(function(results) {                  
-                      
-            var oDocs  = results.Items; 
+    const  loadBaselineDocuments = async function() {         
+        const governmentId = document.value.government.identifier;
+        const schema = "resourceMobilisation";  //get financial framework 2015 report as baseline
+
+        const result = await solrAPI.query(
+            {query:`schema_s:${schema} AND government_s:${governmentId} AND realm_ss:${realm.realm} AND _state_s: public`}
+        );   
         
-            if(oDocs.length>0){
-                baselineDocuments.value = oDocs; //_.union(oDocs, oDrafts);
-                //console.log('baselineDocuments.value',baselineDocuments.value);   
-                const baselineDocumentId      = baselineDocuments.value[0].documentID;
-                var baselineDocumentIdentifier = baselineDocuments.value[0].identifier;
-
-                getBaselineDocument(baselineDocumentIdentifier).then(function(o){
-                    baselineDocument.value = o.body;
-                });
-            }
-            resolve(results.data);
-            }, function(e) {
-                if (e.status == 404) {
-                    hasBaselineDocument.value = false;
-                    throw e;
-                }
-                else {
-                    reject (e);
-                }
-            });
-        });
-    }	
-
-    const getBaselineDocument = function(identifier) {
-        if (identifier) { //lookup single record        
-            return new Promise(function(resolve, reject) {
-                kmDocumentApi.getDocument(identifier).then(function(r) {                     
-                        hasBaselineDocument.value = true;                        
-                        resolve(r.data);
-                    }, function(e) {
-                        if (e.status == 404) {
-                            hasBaselineDocument.value = false;
-                            throw e;
-                        }
-                        else {
-                            reject (e);
-                        }
-                    });
-            });
-        }
-    } 
+        // use identifier to get the relevant financial framework 2015 view report document
+        var baselineDocumentIdentifier = result?.response?.docs[0].identifier_s;        
+        baselineDocument.value = await kmDocumentApi.getDocument(baselineDocumentIdentifier);                     
+ 
+    }
 
     onMounted(() => {
        loadBaselineDocuments();
    })
 
-const currencyString=function (number) {
-  if (number) {
-    var formatter = new Intl.NumberFormat( { style: 'currency' });
-    return  formatter.format(number); 
-  }
-  else {
-    return "0";
-  }
-}
+    const currencyString=function (number) {
+    if (number) {
+        var formatter = new Intl.NumberFormat( { style: 'currency' });
+        return  formatter.format(number); 
+    }
+    else {
+        return "0";
+    }
+    }
 
-const  filter=function(array, id) {     
-    return array.filter((option) => option.identifier===id );
-};  
+    const  filter=function(array, id) {     
+        return array.filter((option) => option.identifier===id );
+    };  
 
 </script>

@@ -30,6 +30,8 @@
                     
             <financial-report-2020 v-if="documentInfo?.type == 'resourceMobilisation2020'"  
                     :document-info="documentInfo" :locale="locale"></financial-report-2020 >
+            <resource-mobilisation-2020 v-if="documentInfo?.type == 'resourceMobilisation2020'"  
+                    :document-info="documentInfo" :locale="locale"></resource-mobilisation-2020 >
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 
@@ -56,7 +58,7 @@
     import marineEbsa from '~/views/forms/view/chm/marine-ebsa.vue'
     import financialReport2015 from '~/views/forms/view/chm/financial-report-2015.vue'
     import nationalTarget from '~/views/forms/view/chm/national-target.vue' 
-    import financialReport2020 from '~/views/forms/view/chm/financial-report-2020.vue' 
+    import resourceMobilisation2020 from '~/views/forms/view/chm/resource-mobilisation-2020.vue' 
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
