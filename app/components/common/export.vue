@@ -102,7 +102,7 @@
                                                         <td class="tableexport-string">{{row.rec_schema}}</td>
                                                         <td class="tableexport-string">
                                                             <a rel="noopener" target="_blank" :href="`database/row.rec_uniqueIdentifier||''`">
-                                                                {{(row.rec_uniqueIdentifier||'')}}
+                                                                {{capitalize(row.rec_uniqueIdentifier)}}
                                                             </a>
                                                         </td>
                                                         <td class="tableexport-string">{{row.rec_government}}</td>
@@ -111,7 +111,7 @@
                                                         <td class="tableexport-string">{{(row.rec_meta2||[]).join(', ')}}</td>
                                                         <td class="tableexport-string">{{(row.rec_meta3||[]).join(', ')}}</td>
                                                         <td class="tableexport-string">{{(row.rec_meta4||[]).join(', ')}}</td>  
-                                                        <td class="tableexport-string">{{row.rec_date|formatDate}}</td>                          
+                                                        <td class="tableexport-string">{{formatDate(row.rec_date, 'DD MMM YYYY')}}</td>                          
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -167,14 +167,14 @@
 <script setup>
     import { ref, shallowRef, onMounted, inject } from "vue";
     import { Modal } from "bootstrap";
-    import '../kb/filters';
+    import  { formatDate, capitalize } from '../kb/filters';
     import { useRealm } from '../../services/composables/realm.js';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/export.json';
     const { t } = useI18n({ messages });
     const realm = useRealm();
     const exportModal = shallowRef(null);
-     const optionsModal = ref(null);
+     const optionsModal = shallowRef(null);
     const downloadDocs =ref([]);
     const numFound = ref(0);
     const loading = ref(false);
@@ -205,30 +205,30 @@
         'rec_date:updatedDate_dt',
     ];
 
-    onMounted( async ()=>{
+    onMounted(()=>{
         modal = new Modal(exportModal.value);
     })
 
-    const openModal = async () =>  
+    const openModal =() =>  
     { 
         checkModal = new Modal(optionsModal.value);
         checkModal.show();
     };
-    const closeModal = async () => {  
+    const closeModal =() => {  
         checkModal.hide();
     };
    
-    const selectAll = async () => {   
+    const selectAll =() => {   
         if (!selectAllCheckbox.value) {
             selectedFields.value = Object.keys(optionFields.value);
             selectAllCheckbox.value = true;
         }
     };
-    const clearAll = async () => {  
+    const clearAll =() => {  
         selectedFields.value = [];
         selectAllCheckbox.value = false;
     };
-    const updateFields = async () => { 
+    const updateFields =() => { 
         if(selectedFields.value && selectedFields.value.length>0) { 
             let uiFields = {};
             selectedFields.value.forEach((field) => {
@@ -340,6 +340,10 @@
     }
     #datatable .tableexport-caption{
         display: none!important;
-    } 
+    }
+    /* replace template.css property */
+    #government {
+        float: left;
+    }
         
 </style>
