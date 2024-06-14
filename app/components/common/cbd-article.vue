@@ -45,8 +45,7 @@
     const article = ref(null)
     const error = ref(null);
     const hasEditRights = ref(false);
-    // const hasEditRights.value = computed(()=> auth.user()?.hasEditRights); // ToDo: need to find ['oasisArticleEditor', 'Administrator']
-
+    
     const emit = defineEmits(['onArticleLoad']);
 
     const props = defineProps({
@@ -56,6 +55,8 @@
         showEdit        : { type: Boolean, required: false, default:true },
         adminTags 	    : { type: Array  , required: false, default:[] }
     });
+
+    hasEditRights.value = computed(()=> auth?.check(['oasisArticleEditor', 'Administrator'])); //ToDo: need to check in plugin
     
     const coverImage = computed(()=> { 
         const url = article.value?.coverImage.url;
