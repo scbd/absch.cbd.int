@@ -7,13 +7,13 @@
 		<document-date></document-date> <br>
 		<section>
 			<legend>{{::('viewResourceT.generalInformation'|$translate)}}</legend>
-			<div ng-show="document.title">
+			<div ng-if="document.title">
 				<label>{{::('viewResourceT.title'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.title" locales="locale"></km-value-ml>
 				</div>
 			</div>
-			<div ng-show="document.resourceTypes">
+			<div ng-if="document.resourceTypes">
 				<label>{{::('viewResourceT.resourceTypes'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<view-terms-hierarchy ng-if="document.header.schema=='resource'" ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
@@ -24,13 +24,13 @@
 					</ul>
 				</div>
 			</div>
-			<div ng-show="document.authors">
+			<div ng-if="document.authors">
 				<label>{{::('viewResourceT.authors'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml km-pre value="document.authors" locales="locale"></km-value-ml>
 				</div>
 			</div>
-			<div ng-show="document.organizations">
+			<div ng-if="document.organizations">
 				<label>{{::('viewResourceT.organizations'|$translate)}}</label>
 				<div class="km-value" compare-val="organizations">
 					<div class="col-sm-12" ng-repeat="organization in document.organizations">
@@ -39,27 +39,27 @@
 				</div>
 			</div>
 
-			<div ng-show="document.publisher">
+			<div ng-if="document.publisher">
 				<label>{{::('viewResourceT.publisher'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml km-pre value="document.publisher" locales="locale"></km-value-ml>
 				</div>
 			</div>
 
-			<div ng-show="document.publicationDate">
+			<div ng-if="document.publicationDate">
 				<label>{{::('viewResourceT.publicationDate'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.publicationDate" locales="locale"></km-value-ml>
 				</div>
 			</div>
-			<div ng-show="document.source">
+			<div ng-if="document.source">
 				<label>{{::('viewResourceT.source'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.source" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 
-			<div ng-show="document.rights">
+			<div ng-if="document.rights">
 				<label>{{::('viewResourceT.rights'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.rights" locales="locale"></km-value-ml>
@@ -69,13 +69,13 @@
 
 		<section>
 			<legend>{{::('viewResourceT.accessResource'|$translate)}}</legend>
-			<div ng-show="document.resourceLinks">
+			<div ng-if="document.resourceLinks">
 				<label>{{::('viewResourceT.resourceLinks'|$translate)}}</label>
 				<div class="km-value" compare-val="Link to the resource(s)">
 				<km-link-list  ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
 				</div>
 			</div>
-			<div ng-show="document.covers">
+			<div ng-if="document.covers">
 				<label>{{::('viewResourceT.covers'|$translate)}}</label>
 				<div class="km-value" compare-val="covers">
 					<ul class="list">
@@ -90,68 +90,65 @@
 			</div>
 		</section>
 		
-		<section>
-			<legend>{{::('viewResourceT.contentInfo'|$translate)}}</legend>
-			<div ng-show="document.summary">
-				<label>{{::('viewResourceT.summary'|$translate)}}</label>
-				<div compare-val>
-					<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
+		<section ng-if="document.summary || document.countryRegions">
+			<div>
+				<legend>{{::('viewResourceT.contentInfo'|$translate)}}</legend>
+				<div ng-if="document.summary">
+					<label>{{::('viewResourceT.summary'|$translate)}}</label>
+					<div compare-val>
+						<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
+					</div>
 				</div>
-			</div>
-			<div ng-show="document.countryRegions">
-				<label>{{::('viewResourceT.countryRegions'|$translate)}}</label>
-				<div class="km-value" compare-val>
-					<ul class="list">
-						<li ng-repeat="item in document.countryRegions">
-							<span ng-bind="item|term:locale"></span>
-						</li>
-					</ul>
+				<div ng-if="document.countryRegions">
+					<label>{{::('viewResourceT.countryRegions'|$translate)}}</label>
+					<div class="km-value" compare-val>
+						<ul class="list">
+							<li ng-repeat="item in document.countryRegions">
+								<span ng-bind="item|term:locale"></span>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</section>
 
-		<section>
+		<section ng-if="document.aichiTargets && !isBCH">
 			<legend>{{::('viewResourceT.legendKeywords'|$translate)}}</legend>
-			<div ng-show="document.aichiTargets && !isBCH">
+			<div>
 				<label>{{::('viewResourceT.aichiTargets'|$translate)}}</label>
 				<div class="km-value" compare-val="aichiTargets">
 					<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
 				</div>
 			</div>
 
-			<div ng-show="document.cbdSubjects">
-				<label>{{::('viewResourceT.cbdSubjects'|$translate)}}</label>
-				<div class="km-value" compare-val="cbdSubjects">
-					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
-				</div>
-			</div>
 		</section>
 
 		<!-- If BCH, Start -->
 		<section ng-if="isBCH">
 			<!-- <legend>Keywords related to Biosafety</legend> -->
-			<div ng-show="document.biosafety.subjects">
+			<div ng-if="document.biosafety.subjects">
 				<label>{{::('viewResourceT.subjects'|$translate)}}</label>
 				<div class="km-value" compare-val="bchSubjects">
 					<view-terms-hierarchy ng-model="document.biosafety.subjects" locale="locale" term-domain="cpbThematicAreas"></view-terms-hierarchy>
 				</div>
 			</div>	
 
-			<div ng-show="document.biosafety.raRecommend != undefined">
+
+			<div ng-if="document.biosafety.raRecommend != undefined">
 				<label>{{::('viewResourceT.raRecommend'|$translate)}}</label>
 				<p><a class="Record" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml">https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml</a></p>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.raRecommend" locales="locale"></km-value-bool>
 				</div>
 
-				<div ng-show="document.biosafety.raAuthorAffiliation && document.biosafety.raRecommend">
+				<div ng-if="document.biosafety.raAuthorAffiliation && document.biosafety.raRecommend ">
 					<label>{{::('viewResourceT.raAuthorAffiliation'|$translate)}}</label>
 					<div class="km-value" compare-val="raAuthorAffiliation">
 						<view-terms-hierarchy ng-model="document.biosafety.raAuthorAffiliation" locale="locale" term-domain="bchRaAuthorAffiliation"></view-terms-hierarchy>
 					</div>
 				</div>
 
-				<div ng-show="document.biosafety.raSubjects && document.biosafety.raRecommend">
+				<div ng-if="document.biosafety.raSubjects && document.biosafety.raRecommend">
 					<label>{{::('viewResourceT.raSubjects'|$translate)}}</label>
 					<div class="km-value" compare-val="raSubjects">
 						<view-terms-hierarchy ng-model="document.biosafety.raSubjects" locale="locale" term-domain="bchRaSubjects"></view-terms-hierarchy>
@@ -161,13 +158,13 @@
 			</div>
 
 
-			<div ng-show="document.biosafety.addressModifiedOrganisms != undefined">
+			<div ng-if="document.biosafety.addressModifiedOrganisms != undefined">
 				<label>{{::('viewResourceT.addressModifiedOrganisms'|$translate)}}</label>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.addressModifiedOrganisms" locales="locale"></km-value-bool>
 				</div>
 
-				<div ng-show="document.biosafety.modifiedOrganisms && document.biosafety.addressModifiedOrganisms">
+				<div ng-if="document.biosafety.modifiedOrganisms && document.biosafety.addressModifiedOrganisms">
 					<label>{{::('viewResourceT.modifiedOrganisms'|$translate)}}</label>
 					<div class="km-value" compare-val="modifiedOrganisms">
 						<ul class="list">
@@ -179,13 +176,13 @@
 				</div>		
 			</div>
 
-			<div ng-show="document.biosafety.addressOrganisms != undefined">
+			<div ng-if="document.biosafety.addressOrganisms != undefined">
 				<label>{{::('viewResourceT.addressOrganisms'|$translate)}}</label>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.addressOrganisms" locales="locale"></km-value-bool>
 				</div>
 
-				<div ng-show="document.biosafety.organisms && document.biosafety.addressOrganisms">
+				<div ng-if="document.biosafety.organisms && document.biosafety.addressOrganisms">
 					<label>{{::('viewResourceT.organisms'|$translate)}}</label>
 					<div class="km-value" compare-val="organisms">
 						<ul class="list">
@@ -197,13 +194,13 @@
 				</div>
 			</div>
 
-			<div ng-show="document.biosafety.addressGenes != undefined">
+			<div ng-if="document.biosafety.addressGenes != undefined">
 				<label>{{::('viewResourceT.addressGenes'|$translate)}}</label>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.addressGenes" locales="locale"></km-value-bool>
 				</div>
 
-				<div ng-show="document.biosafety.genes && document.biosafety.addressGenes">
+				<div ng-if="document.biosafety.genes && document.biosafety.addressGenes">
 					<label>{{::('viewResourceT.genes'|$translate)}}</label>
 					<div class="km-value" compare-val="genes">
 						<ul class="list">
@@ -218,23 +215,23 @@
 		<!-- If BCH, End -->
 
 		<!-- If ABS, Start -->
-		<section ng-if="isABS">
+		<section ng-if="isABS ">
 			<!-- <legend>Keywords related to Access and Benefit-Sharing</legend> -->
-			<div ng-show="document.nagoya.subjects">				
+			<div ng-if="document.nagoya.subjects">				
 				<label>{{::('viewResourceT.absThematicAreas'|$translate)}}</label>
 				<div class="km-value" compare-val="absSubjects">
 					<view-terms-hierarchy ng-model="document.nagoya.subjects" locale="locale" term-domain="absSubjects"></view-terms-hierarchy>
 				</div>
 			</div>
 
-			<div ng-show="document.nagoya.keyAreas">
+			<div ng-if="document.nagoya.keyAreas">
 				<label>{{::('viewResourceT.keyAreas'|$translate)}}</label>
 				<div class="km-value" compare-val="keyAreas">
 					<view-terms-hierarchy ng-model="document.nagoya.keyAreas" locale="locale" term-domain="keyAreas"></view-terms-hierarchy>
 				</div>
 			</div>
 
-			<div ng-show="document.nagoya.mccKeywords">
+			<div ng-if="document.nagoya.mccKeywords ">
 				<label>{{::('viewResourceT.mccKeywords'|$translate)}}</label>
 				<div class="km-value" compare-val="mccKeywords">
 					<ul class="list">
@@ -244,24 +241,67 @@
 					</ul>
 				</div>
 			</div>
+
 		</section>
 		<!-- If ABS, End -->
+
+
+		<!-- If CHM, Start -->
+		<section ng-if="isCHM"> 
+		
+			<div ng-if="document.cbdSubjects">
+				<label>{{::('viewResourceT.cbdSubjects'|$translate)}}</label>				
+				<div class="km-value" compare-val="cbdSubjects">
+					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
+				</div>
+			</div>
+
+			<div ng-if="document.gbfTargets">   
+				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>
+				<div class="km-value">                  
+					<view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy>
+				</div>
+			</div> 	
+			
+			<div ng-if="document.biosafety.subjects">
+				<label>{{::('viewResourceT.subjects'|$translate)}}</label>
+				<div class="km-value" compare-val="bchSubjects">
+					<view-terms-hierarchy ng-model="document.biosafety.subjects" locale="locale" term-domain="cpbThematicAreas"></view-terms-hierarchy>
+				</div>
+			</div>	
+
+			<div ng-if="document.nagoya.subjects">				
+				<label>{{::('viewResourceT.absThematicAreas'|$translate)}}</label>
+				<div class="km-value" compare-val="absSubjects">
+					<view-terms-hierarchy ng-model="document.nagoya.subjects" locale="locale" term-domain="absSubjects"></view-terms-hierarchy>
+				</div>
+			</div>
+
+			<div ng-if="document.nagoya.keyAreas">
+				<label>{{::('viewResourceT.keyAreas'|$translate)}}</label>
+				<div class="km-value" compare-val="keyAreas">
+					<view-terms-hierarchy ng-model="document.nagoya.keyAreas" locale="locale" term-domain="keyAreas"></view-terms-hierarchy>
+				</div>
+			</div>
+
+		</section>
+		<!-- If CHM, End -->
 
 
 		<section ng-if="document.relevantInformation||document.relevantDocuments">
 			<legend>{{::('viewResourceT.additionalInformation'|$translate)}}</legend>
 
-			<div ng-show="document.relevantInformation">
+			<div ng-if="document.relevantInformation">
 				<div compare-val="relevantInformation">
 				<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml>
 				</div>
 			</div>
 
-			<div ng-show="document.relevantDocuments">
+			<div ng-if="document.relevantDocuments">
 				<label>{{::('viewResourceT.relevantDocuments'|$translate)}}</label>
 				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
 					<km-link-list  ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
-				</div>
+				</div>			
 			</div>
 		</section>
 
