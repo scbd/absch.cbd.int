@@ -1,0 +1,9 @@
+{
+    "fileName": "File Name",
+    "download": "Download",
+    "regeneratePdf": "Regenerate PDF",
+    "viewIn":  "View in",
+    "loadingPdf":  "loading pdf",
+    "error":    "Error!",
+    "toolTipMessage": "Use this option to regenerate PDF file. This process will generate a fresh PDF document, which may resolve any formatting issues or errors present in the existing one."
+}
