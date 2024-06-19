@@ -22,8 +22,8 @@
         </div>
     </div>
     <div v-if="!loading">
-        <cbd-add-new-view-article  v-if="hasEditRights"
-            :admin-tags="adminTags" :id="article?._id" class="btn btn-secondary float-end">
+        <cbd-add-new-view-article v-if="hasEditRights"
+            :admin-tags="adminTags" :id="article?._id" class="btn btn-secondary float-end btn-sm" target="_self">
         </cbd-add-new-view-article>
     </div>
 </template>
@@ -44,7 +44,6 @@
     const loading = ref(false);
     const article = ref(null)
     const error = ref(null);
-    const hasEditRights = ref(false);
     
     const emit = defineEmits(['onArticleLoad']);
 
@@ -56,7 +55,7 @@
         adminTags 	    : { type: Array  , required: false, default:[] }
     });
 
-    hasEditRights.value = computed(()=> auth?.check(['oasisArticleEditor', 'Administrator'])); //ToDo: need to check in plugin
+    const hasEditRights = computed(()=> auth?.check(['oasisArticleEditor', 'Administrator']));
     
     const coverImage = computed(()=> { 
         const url = article.value?.coverImage.url;
@@ -90,9 +89,5 @@
     onMounted( async ()=>{
         await getArticle(props.query)
     })
-    watch(() => props.query, async (newQuery) => {
-        await getArticle(newQuery)  
-    });
-
 
 </script>

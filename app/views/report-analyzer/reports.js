@@ -6,8 +6,8 @@ import reportsT from '~/app-text/views/report-analyzer/reports.json';
 import  cbdArticle  from '../../components/common/cbd-article.vue';
 
     export { default as template } from './reports.html'
-export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService',
-    function ($scope, $location, commonjs, $q, $http, realm, translationService) {
+export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService','$timeout',
+    function ($scope, $location, commonjs, $q, $http, realm, translationService, $timeout) {
         $scope.isABS = realm.is('ABS');
         $scope.isBCH = realm.is('BCH');
         $scope.isCHM = realm.is('CHM');
@@ -24,21 +24,27 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 if(realm.is('CHM')) return 'chm';
             };
 
-            $scope.$on('onReportTypeChanged', function(event, reportType) {
-                let ag   = [];
-                let match = {};
-                const realmArticleTag = getRealmArticleTag();
-                const adminTags    =  ["introduction", "report-analyzer", reportType, realmArticleTag]; 
-                match.adminTags = { $all: adminTags}; 
-                ag.push({"$match"   : match });
-                ag.push({"$project" : { title:1, content:1}});
-                ag.push({"$limit"   : 1 });
-                $scope.articleQuery = { ag : JSON.stringify(ag) };
-            });
-
             $scope.cbdArticleComponent = {
                 components:{cbdArticle} 
             }
+            $scope.$on('onReportTypeChanged', function(event, reportType) {
+               
+                $scope.adminTags    = undefined;
+                $scope.articleQuery = undefined;
+                $timeout(()=>{ 
+                    let ag   = [];
+                    let match = {};
+                    const realmArticleTag = getRealmArticleTag();
+                    $scope.adminTags    =  ["introduction", "report-analyzer", reportType, realmArticleTag]; 
+                    match.adminTags = { $all: $scope.adminTags}; 
+                    ag.push({"$match"   : match });
+                    ag.push({"$project" : { title:1, content:1}});
+                    ag.push({"$limit"   : 1 });
+                    $scope.articleQuery = { ag : JSON.stringify(ag) };
+
+                }, 10)
+            });
+
 
 
             $scope.analyze = function () {
