@@ -26,10 +26,7 @@
             <marine-ebsa v-if="documentInfo?.type == 'marineEbsa'"  
                  :document-info="documentInfo" :locale="locale"></marine-ebsa>
             <financial-report-2015 v-if="documentInfo?.type == 'resourceMobilisation'"  
-                    :document-info="documentInfo" :locale="locale"></financial-report-2015 >
-                    
-            <financial-report-2020 v-if="documentInfo?.type == 'resourceMobilisation2020'"  
-                    :document-info="documentInfo" :locale="locale"></financial-report-2020 >
+                    :document-info="documentInfo" :locale="locale"></financial-report-2015 >           
             <resource-mobilisation-2020 v-if="documentInfo?.type == 'resourceMobilisation2020'"  
                     :document-info="documentInfo" :locale="locale"></resource-mobilisation-2020 >
             <!-- loading state via #fallback slot -->
@@ -57,7 +54,6 @@
     import event from '~/views/forms/view/chm/event.vue'
     import marineEbsa from '~/views/forms/view/chm/marine-ebsa.vue'
     import financialReport2015 from '~/views/forms/view/chm/financial-report-2015.vue'
-    import nationalTarget from '~/views/forms/view/chm/national-target.vue' 
     import resourceMobilisation2020 from '~/views/forms/view/chm/resource-mobilisation-2020.vue' 
 
     const props = defineProps({
