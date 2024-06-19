@@ -1,6 +1,10 @@
 ﻿<div id="innerPage">
     <div class="mastHead" ng-class="{'bg-abs':isABS,'bg-bch':isBCH,'bg-chm':isCHM }">
-        <div class="text-white" ng-if="infoBlockUrl" ng-include="infoBlockUrl"></div>
+         <div class="text-white" ng-if="cbdArticleComponent && articleQuery">
+            <cbd-article ng-vue="cbdArticleComponent" :query="articleQuery"
+             :hide-cover-image="true" :show-edit="true" :admin-tags="adminTags">
+            </cbd-article>
+        </div>   
     </div>
 
     <div class="innerPageContent">
