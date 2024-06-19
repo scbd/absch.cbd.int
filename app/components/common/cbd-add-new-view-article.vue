@@ -20,7 +20,7 @@ const props = defineProps({
 
 const newArticleUrl = computed(() => {
   const domain = window.location.hostname.replace(/[^\.]+\./, '');
-  console.log("domain name", domain);
+  
   let baseUrl = 'https://oasis.cbd.int';
   if (domain == 'localhost' || domain == 'cbddev.xyz') {
     baseUrl = 'https://oasis.cbddev.xyz';
