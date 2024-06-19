@@ -3,10 +3,11 @@ import moment from 'moment';
 import '~/views/report-analyzer/directives/national-reports/questions-selector';
 import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import reportsT from '~/app-text/views/report-analyzer/reports.json';
+import  cbdArticle  from '../../components/common/cbd-article.vue';
 
     export { default as template } from './reports.html'
-export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService',
-    function ($scope, $location, commonjs, $q, $http, realm, translationService) {
+export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService','$timeout',
+    function ($scope, $location, commonjs, $q, $http, realm, translationService, $timeout) {
         $scope.isABS = realm.is('ABS');
         $scope.isBCH = realm.is('BCH');
         $scope.isCHM = realm.is('CHM');
@@ -17,6 +18,35 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
             //
             //
             //========================================
+            function getRealmArticleTag() { 
+                if(realm.is('BCH')) return 'bch';
+                if(realm.is('ABS')) return 'absch';
+                if(realm.is('CHM')) return 'chm';
+            };
+
+            $scope.cbdArticleComponent = {
+                components:{cbdArticle} 
+            }
+            $scope.$on('onReportTypeChanged', function(event, reportType) {
+               
+                $scope.adminTags    = undefined;
+                $scope.articleQuery = undefined;
+                $timeout(()=>{ 
+                    let ag   = [];
+                    let match = {};
+                    const realmArticleTag = getRealmArticleTag();
+                    $scope.adminTags    =  ["introduction", "report-analyzer", reportType, realmArticleTag]; 
+                    match.adminTags = { $all: $scope.adminTags}; 
+                    ag.push({"$match"   : match });
+                    ag.push({"$project" : { title:1, content:1}});
+                    ag.push({"$limit"   : 1 });
+                    $scope.articleQuery = { ag : JSON.stringify(ag) };
+
+                }, 10)
+            });
+
+
+
             $scope.analyze = function () {
 
                 var data = {
@@ -30,8 +60,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
 
                 $location.url(_.trimEnd($location.path(), '/') + '/analyzer');
             };
-
-
+           
             var DefaultRegions = [
                 "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
                 "5E5B7AA4-2420-4147-825B-0820F7EC5A4B", // CBD Regional Groups - Asia and the Pacific
@@ -66,15 +95,8 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                     getReportCount(report.type);
                 })
             });
-            
-            $scope.$watch('selectedReportType', function(newVal){
-                
-                if(newVal){
-                    var infoBlockUrl    = _.find($scope.reportData, {type:newVal}).infoBlockUrl
-                    $scope.infoBlockUrl = baseUrl + infoBlockUrl;
-                }
-            });
-            function getReportCount(reportType){
+          
+            function getReportCount(reportType){                       
                 var query  = { 'government_REL' : { $in: DefaultRegions} };
                 var fields = '{"government":1}'
         

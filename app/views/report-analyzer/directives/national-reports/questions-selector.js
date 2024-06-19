@@ -57,8 +57,8 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //
                 //====================================
-                $scope.reportTypeChanged = function() {
-
+                $scope.reportTypeChanged = function(selectedReportType) {
+                    $scope.$emit('onReportTypeChanged', selectedReportType);
                     // Reset selection when user change reportType from UI
 
                     delete $scope.sections;
@@ -73,7 +73,7 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
 
                     if(!reportType || !$scope.reportData)
                         return;
-                    
+                    $scope.$emit('onReportTypeChanged', reportType);
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
 
                     const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/(\w+)$/i;
