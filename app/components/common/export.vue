@@ -44,7 +44,7 @@
                                             <div class="modal-body">
                                                 <div class="d-flex align-items-center float-end mb-3">
                                                     <label class="text-sm">
-                                                        <input type="checkbox" @click="selectAll" v-model="selectAllCheckbox"> {{t('selectAll')}} 
+                                                        <input type="checkbox" @click="selectAll" v-model="selectAllCheckboxes"> {{t('selectAll')}} 
                                                     </label>
                                                     <a @click="clearAll" class="btn btn-link btn-sm">
                                                         <i class="bi bi-x"></i>{{t('clearAll')}}
@@ -71,10 +71,10 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" v-if="loading">
                             <div class="col-12">
-                                <div v-if="loading" class="alert alert-info">
-                                    <i class="fa fa-spin fa-spinner" v-if="loading" ></i> {{t('processing')}}
+                                <div class="alert alert-info">
+                                    <i class="fa fa-spin fa-spinner"></i> {{t('processing')}}
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
     const loading = ref(false);
     const isGeneric = ref(true);
     const schemaFields = ref([]);
-    const selectAllCheckbox = ref(false);
+    const selectAllCheckboxes = ref(false);
     const optionFields = ref({});
     const selectedFields = ref([]);
     const downloadFormat  = ref('xlsx');
@@ -219,14 +219,16 @@
     };
    
     const selectAll =() => {   
-        if (!selectAllCheckbox.value) {
+        if (!selectAllCheckboxes.value) {
             selectedFields.value = Object.keys(optionFields.value);
-            selectAllCheckbox.value = true;
+            selectAllCheckboxes.value = true;
+        } else {
+            clearAll();
         }
     };
     const clearAll =() => {  
         selectedFields.value = [];
-        selectAllCheckbox.value = false;
+        selectAllCheckboxes.value = false;
     };
     const updateFields =() => { 
         if(selectedFields.value && selectedFields.value.length>0) { 
@@ -245,7 +247,7 @@
         loading.value = true;
         try{
             selectedFields.value = [];
-            selectAllCheckbox.value = false;
+            selectAllCheckboxes.value = false;
             schemaFields.value = [];
             const responseData = await getDownloadRecords({fields, listType:'initial', format:'json'});
             downloadDocs.value = responseData.docs
@@ -266,13 +268,12 @@
     }
     const exportRecords = async () => {
         loading.value   = true; 
-        let info        = undefined;
         let fileName    = props.fileName||`${realm.uIdPrefix}-${schema}-${new Date().getTime().toString(36)}.${downloadFormat.value}`
         try
         {
             if(isGeneric.value){
                 await import('tableexport');
-                info        = await getDownloadRecords({fields, listType:'all', fileName, format : downloadFormat.value});
+                const info        = await getDownloadRecords({fields, listType:'all', fileName, format : downloadFormat.value});
                 if(info){
                     downloadDocs.value = info.docs;
                     numFound.value     = info.numFound;
@@ -288,7 +289,7 @@
                 }
             }
             else{
-                info = await getDownloadRecords({fields:schemaFields.value, listType:'all', fileName, format : downloadFormat.value});
+                await getDownloadRecords({fields:schemaFields.value, listType:'all', fileName, format : downloadFormat.value});
             }
         }
         catch(e){
