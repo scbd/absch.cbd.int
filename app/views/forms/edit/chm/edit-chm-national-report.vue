@@ -2,10 +2,7 @@
 
     <section>
         <br>   
-        genericFilter: {{genericFilter}}
-        <!-- genericMapping: {{genericMapping}} -->
-
-
+        {{document}}
         <div class="row">
             <div class="col-xs-12">
                 <label>Please select in which language(s) you wish to submit this record:</label>
@@ -22,8 +19,7 @@
                 <label>Country</label>
                 <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" 
                         :source="options.countries"  :placeholder="t('selectOption')" :selectbox="true"   
-                        :filter="genericFilter" 
-                        :mapping="genericMapping" ></ng>
+                        :filter="genericFilter" :mapping="genericMapping" ></ng>
                  
                 <!-- <ng v-vue-ng:km-select name="government" required v-model:ng-model="document.government" 
                         id="government" :placeholder="t('selectOption')" 
@@ -45,7 +41,7 @@
             <div class="col-xs-12">
                 <label>Type of the document</label>  
                 <ng v-vue-ng:afc-autocomplete name="reportType" v-model:ng-model="document.reportType" 
-                :source="options.reportTypes"></ng>  
+                :source="options.reportTypes" ></ng>  
             </div>
         </div>
 

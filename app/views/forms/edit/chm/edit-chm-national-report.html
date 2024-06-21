@@ -22,12 +22,9 @@
                     <form name="editForm" class="editForm">
                         <div class="editForm">                          
                             document in parent page: {{document}}
-                            genericFilter: {{genericFilter}}
-                            genericMapping: {{genericMapping}}
                             <div ng-if="shareVueComponent">
                                 <edit-chm-national-report-edit-form ng-vue="shareVueComponent" v-model="document"   
                                     :document="document" :options="options" >
-                                    <!-- :generic-filter ="genericFilter" > -->
                                 </edit-chm-national-report-edit-form>
                             </div>  
 
