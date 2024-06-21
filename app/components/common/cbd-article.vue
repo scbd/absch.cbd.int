@@ -89,5 +89,8 @@
     onMounted( async ()=>{
         await getArticle(props.query)
     })
+    watch(() => props.query, async (newQuery) => {
+        await getArticle(newQuery)  
+    });
 
 </script>
