@@ -314,28 +314,32 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                         return;
 
                     var on  = 0, off = 0, int = 0;
+                    safeApply(() => {
+                        $scope.sections.forEach(function(section){
+                            section.selected = getIntermediateState(section.questions);
 
-                    $scope.sections.forEach(function(section){
-                        section.selected = getIntermediateState(section.questions);
-
-                        if(section.selected===null ) ++int;
-                        if(section.selected===true ) ++on;
-                        if(section.selected===false) ++off;
-                    });
-
-                    if((on && off) || int) $scope.allSelected = null;
-                    else                   $scope.allSelected = !!on;
-
-                    $scope.selectedQuestions = [];
-
-                    $scope.sections.forEach(function(section){
-                        section.questions.forEach(function(question){
-                            if(question.selected)
-                            $scope.selectedQuestions.push(question.key);
+                            if(section.selected===null ) ++int;
+                            if(section.selected===true ) ++on;
+                            if(section.selected===false) ++off;
                         });
-                    });
-                }
 
+                        if((on && off) || int) $scope.allSelected = null;
+                        else                   $scope.allSelected = !!on;
+
+                        $scope.selectedQuestions = [];
+
+                        $scope.sections.forEach(function(section){
+                            section.questions.forEach(function(question){
+                                if(question.selected)
+                                $scope.selectedQuestions.push(question.key);
+                            });
+                        });
+                    })
+                }
+                
+                function safeApply(fn) {
+                    ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
+                }
                 //====================================
                 //
                 //
