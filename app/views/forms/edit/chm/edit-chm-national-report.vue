@@ -44,17 +44,14 @@
             <div class="col-xs-12">
                 <label>{{t("type")}}</label>  
                 <ng v-vue-ng:afc-autocomplete name="reportType" v-model:ng-model="document.reportType" 
-                :source="options.reportTypes"
-                :selectbox="true"   
-                :filter="genericFilter" 
-                :mapping="genericMapping" ></ng>  
+                :source="options.reportTypes" :selectbox="true" :filter="genericFilter" :mapping="genericMapping" ></ng>  
             </div>
         </div>
 
         <div class="row">
             <div class="col-xs-12">
                 <label>{{t("summary")}}</label>               
-                <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.summary" rows="5" placeholder="" :locales="document.header.languages" ></ng>                
+                <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.summary" rows="3" placeholder="" :locales="document.header.languages" ></ng>                
             </div>
         </div>
 

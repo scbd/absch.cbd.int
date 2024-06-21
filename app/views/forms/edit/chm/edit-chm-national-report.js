@@ -14,10 +14,8 @@ export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$c
        
         $scope.shareVueComponent = {
             components:{editChmNationalReportEditForm, nationalReport}        
-        }
-        $scope.vueReviewDocumentInfo = {
-            body : $scope.review.document
-        }
+        }       
+
         translationService.set('editChmNationalReportT', editChmNationalReportT);
         $scope.path = $location.path();
 
