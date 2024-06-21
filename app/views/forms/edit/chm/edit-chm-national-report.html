@@ -20,27 +20,28 @@
                 <!-- <intro-form></intro-form> -->
                 <edit-form>
                     <form name="editForm" class="editForm">
-                        <div class="editForm">
-
+                        <div class="editForm">                          
+                            document in parent page: {{document}}
+                            genericFilter: {{genericFilter}}
+                            genericMapping: {{genericMapping}}
                             <div ng-if="shareVueComponent">
-                                <edit-chm-national-report-edit-form ng-vue="shareVueComponent"   :document :options></edit-chm-national-report-edit-form>
+                                <edit-chm-national-report-edit-form ng-vue="shareVueComponent" v-model="document"   
+                                    :document="document" :options="options" >
+                                    <!-- :generic-filter ="genericFilter" > -->
+                                </edit-chm-national-report-edit-form>
                             </div>  
+
+                            <div afc-autocomplete required name="government" ng-disabled="userGovernment()" 
+                                ng-model="document.government" source="options.countries"
+                                filter="genericFilter" mapping="genericMapping" selectbox="true" 
+                                placeholder="{{::('editChmNationalReportT.selectOption'|$translate)}}">
+                            </div>
+                   
 
 
                             <!-- <section>
-                                    <br>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="km-control-group" name="header.languages" required caption="{{::('editChmNationalReportT.languageToPublish'|$translate)}}">
-                                            <div class="indent">
-                                                <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <legend>{{::('editChmNationalReportT.generalInfo'|$translate)}}</legend>
-
+                                  :genericFilter ="genericFilter" 
+                                    :genericMapping ="genericMapping" 
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="government" required caption="{{::('editChmNationalReportT.country'|$translate)}}">

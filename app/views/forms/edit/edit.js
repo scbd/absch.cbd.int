@@ -11,6 +11,8 @@ import '~/views/register/directives/register-top-menu';
 import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/workflow-arrow-buttons';
 import './edit-header';
+import { genericMapping, genericFilter } from '~/services/filters/arrays';
+
 
 app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
@@ -73,16 +75,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
       regions	: function() {return thesaurusService.getDomainTerms('regions').then(Thesaurus.buildTree);}
     };
 
-    $scope.genericFilter = function($query, items) {
-      if(!items)
-        return;
-      var matchedOptions = [];
-      for(var i=0; i!=items.length; ++i)
-        if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
-          matchedOptions.push(items[i]);
-
-      return matchedOptions;
-    };
+    $scope.genericFilter = genericFilter;
 
     $scope.startsWithFilter = function($query, items) {
       var matchedOptions = [];
@@ -93,9 +86,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
       return matchedOptions;
     };
     
-    $scope.genericMapping = function(item) {
-      return {identifier: item.identifier};
-    };
+    $scope.genericMapping = genericMapping;
     //==================================
     //
     //==================================

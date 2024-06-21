@@ -1,7 +1,6 @@
 import app from '~/app';
 import _ from 'lodash';
 import '~/views/forms/edit/edit';
-// import '~/views/forms/view/abs/view-abs-national-model-contractual-clause.directive';
 import editChmNationalReportT from '~/app-text/views/forms/edit/chm/edit-chm-national-report.json'; 
 import editChmNationalReportEditForm from  './edit-chm-national-report.vue';
 export { default as template } from './edit-chm-national-report.html';
@@ -13,100 +12,50 @@ export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$c
         });
        
         $scope.shareVueComponent = {
-            components:{editChmNationalReportEditForm}
+            components:{editChmNationalReportEditForm}        
         }
 
         translationService.set('editChmNationalReportT', editChmNationalReportT);
         $scope.path = $location.path();
 
-        _.extend($scope.options, {
-            jurisdictions: function() {
-                return $q.all([
-                    $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", {
-                        cache: true
-                    }),
-                    $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", {
-                        cache: true
-                    })
-                ]).then(function(o) {
-                    var jurisdictions = o[0].data;
-                    jurisdictions.push(o[1].data);
-
-                    _.forEach(jurisdictions, function(element) {
-                        element.__value = element.name;
-                    });
-
-                    return jurisdictions;
-                });
-            },
-            thematicAreas : function() {
-                return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){return o.data;});
-            },
-            keywords : function() {
-                return $http.get("/api/v2013/thesaurus/domains/ABS-A1920-Keywords/terms", { cache: true }).then(function(o){return o.data;});
-            }
-        });
-
-        $scope.ac_jurisdictions = function() {
-            return $scope.options.jurisdictions().then(function(jurisdictions) {
-                _.forEach(jurisdictions, function(element) {
-                    element.__value = element.name;
-                });
-                return jurisdictions;
-            });
-        };
-
-        $scope.onBuildQuery = function(searchText){
+        _.extend($scope.options, {           
+            countries:		$http.get("/api/v2013/thesaurus/domains/countries/terms",								{ cache: true }).then(function (o) { return $filter('orderBy')(o.data, 'name'); }),
+            jurisdictions:	$http.get("/api/v2013/thesaurus/domains/50AC1489-92B8-4D99-965A-AAE97A80F38E/terms",	{ cache: true }).then(function (o) { return o.data; }),
+            approvedStatus:	$http.get("/api/v2013/thesaurus/domains/E27760AB-4F87-4FBB-A8EA-927BDE375B48/terms",	{ cache: true }).then(function (o) { return o.data; }),
+            approvingBody:	$http.get("/api/v2013/thesaurus/domains/F1A5BFF1-F555-40D1-A24C-BBE1BE8E82BF/terms",	{ cache: true }).then(function (o) { return o.data; }),
+            reportStatus:	$http.get("/api/v2013/thesaurus/domains/7F0D898A-6BF1-4CE6-AA77-7FEAED3429C6/terms",	{ cache: true }).then(function (o) { 
+                return o.data;
+            }), 
+            reportTypes:	$http.get("/api/v2013/thesaurus/domains/2FD0C77B-D30B-42BC-8049-8C62D898A193/terms",	{ cache: true }).then(function (o) { 
+                    var rtypes = [];
+                    var data = [];
+                    data = o.data;
+                    
+                    // if(keepTypeOptions){	
+                    //     for(var i=0; i < data.length; i++)
+                    //     {
+                    //         if(keepTypeOptions.indexOf(data[i].identifier) >= 0 )
+                    //             rtypes.push(data[i]);
+                    //     }
+                    // }
+                    // else if(rmTypeOptions){
+                    //     for(var i=0; i < data.length; i++)
+                    //     {
+                    //         if(rmTypeOptions.indexOf(data[i].identifier) < 0)
+                    //             rtypes.push(data[i]);
+                    //     }
+                    // }
+                    // else 
+                    //     rtypes = o.data;
+                    
+                    // return thesaurus.buildTree(rtypes); 
+                    return data
+                    
+                })
            
-            var queryOptions = {
-                schemas	  : ['measure'],
-                realm     : realm.value,
-                searchText: searchText
-            }
-            if ($scope.document && $scope.document.government)
-            queryOptions.government = $scope.document.government.identifier;
+        })
 
-
-            return $scope.onBuildDocumentSelectorQuery(queryOptions);
-        }
-
-        //==================================
-        //
-        //==================================
-        $scope.isSubNational = function(document) {
-
-            document = document || $scope.document;
-
-            return document &&
-                document.jurisdiction &&
-                document.jurisdiction.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E";
-        };
-
-        //==================================
-        //
-        //==================================
-        $scope.isCommunity = function(document) {
-
-            document = document || $scope.document;
-
-            return document &&
-                document.jurisdiction &&
-                document.jurisdiction.identifier == "9627DF2B-FFAC-4F85-B075-AF783FF2A0B5";
-        };
-        //==================================
-        //
-        //==================================
-        $scope.isOthers = function(document) {
-
-            document = document || $scope.document;
-
-            return document &&
-                document.jurisdiction &&
-                document.jurisdiction.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
-        };
-        //==================================
-        //
-        //==================================
+        
         $scope.getCleanDocument = function(document) {
 
             document = document || $scope.document;
