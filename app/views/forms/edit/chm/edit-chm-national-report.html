@@ -28,11 +28,6 @@
                                 </edit-chm-national-report-edit-form>
                             </div>  
 
-                            <div afc-autocomplete required name="government" ng-disabled="userGovernment()" 
-                                ng-model="document.government" source="options.countries"
-                                filter="genericFilter" mapping="genericMapping" selectbox="true" 
-                                placeholder="{{::('editChmNationalReportT.selectOption'|$translate)}}">
-                            </div>
                    
 
 
@@ -155,7 +150,8 @@
                     </form>
                 </edit-form>
                 <review-form>
-                        <view-abs-national-model-contractual-clause ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-national-model-contractual-clause>
+                    {{vueReviewDocumentInfo}}
+                        <national-report ng-vue="shareVueComponent" :document-info="vueReviewDocumentInfo" :locale="review.locale" allow-drafts="true"></national-report>
                 </review-form>
                 <!-- <publish-form></publish-form> -->
             </workflow-arrow-buttons>

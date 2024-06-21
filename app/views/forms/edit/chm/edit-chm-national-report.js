@@ -3,6 +3,7 @@ import _ from 'lodash';
 import '~/views/forms/edit/edit';
 import editChmNationalReportT from '~/app-text/views/forms/edit/chm/edit-chm-national-report.json'; 
 import editChmNationalReportEditForm from  './edit-chm-national-report.vue';
+import nationalReport from '~/views/forms/view/chm/national-report.vue';
 export { default as template } from './edit-chm-national-report.html';
 
 export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", "translationService", 
@@ -12,9 +13,11 @@ export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$c
         });
        
         $scope.shareVueComponent = {
-            components:{editChmNationalReportEditForm}        
+            components:{editChmNationalReportEditForm, nationalReport}        
         }
-
+        $scope.vueReviewDocumentInfo = {
+            body : $scope.review.document
+        }
         translationService.set('editChmNationalReportT', editChmNationalReportT);
         $scope.path = $location.path();
 
