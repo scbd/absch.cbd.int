@@ -157,7 +157,7 @@
 </template>
 
 <script setup>
-    import { computed, ref, onMounted, defineExpose} from 'vue';
+    import { computed, ref, onMounted, defineExpose, inject} from 'vue';
     import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
     import messages from '~/app-text/views/forms/edit/chm/edit-chm-national-report.json';
     import { useI18n } from 'vue-i18n';  
@@ -170,12 +170,21 @@
   
    
    
-    const document = defineModel();
+    const document                = defineModel();
+    const angularGetCleanDocument = inject('getCleanDocument')
+    const { t }                   = useI18n({ messages });
+    const auth                    = useAuth();
+    const thesaurusApi            = new ThesaurusApi({tokenReader:()=>auth.token()});
 
-    const thesaurusApi = new ThesaurusApi({tokenReader:()=>auth.token()});   
-    const options = ref({});
-    const { t } = useI18n({ messages });
-    const auth = useAuth();
+    const options = {
+        countries     : thesaurusApi.getDomainTerms(THESAURUS.COUNTRIES),
+        jurisdictions : thesaurusApi.getDomainTerms(THESAURUS.JURISDICTIONS),
+        approvedStatus: thesaurusApi.getDomainTerms(THESAURUS.APPROVED_STATUS),
+        approvingBody : thesaurusApi.getDomainTerms(THESAURUS.APPROVING_BODY),
+        reportStatus  : thesaurusApi.getDomainTerms(THESAURUS.REPORT_STATUS),
+        reportTypes   : thesaurusApi.getDomainTerms( THESAURUS.REPORT_TYPES),
+    };
+
 
     const hasAdoptionDate = computed(()=> {
            return  !!document?.value?.status && (
@@ -193,67 +202,26 @@
             document?.value?.approvingBody.identifier == THESAURUS.APPROVING_BODY_MINISTER  ||
             document?.value?.approvingBody.identifier == THESAURUS.APPROVING_BODY_NATIONAL_COMMITTEE);
 	});
-
-     const  loadCountries = async function() {   
-        const result = await thesaurusApi.getDomainTerms(THESAURUS.COUNTRIES);  
-        options.value.countries = result;
-    }
-
-    const  loadJurisdictions = async function() {   
-        const result = await thesaurusApi.getDomainTerms(THESAURUS.JURISDICTIONS);  
-        console.log("jur",result);
-        options.value.jurisdictions = result;
-    }
-
-    const  loadApprovedStatus = async function() {   
-        const result = await thesaurusApi.getDomainTerms(THESAURUS.APPROVED_STATUS );  
-        console.log("approvedStatus",result);
-        options.value.approvedStatus = result;
-    }
-
-    const  loadApprovingBody = async function() {   
-        const result = await thesaurusApi.getDomainTerms(THESAURUS.APPROVING_BODY  );  
-        console.log("approvingBody",result);
-        options.value.approvingBody = result;
-    }
-    
-    const  loadReportStatus = async function() {   
-        const result = await thesaurusApi.getDomainTerms(THESAURUS.REPORT_STATUS );  
-        console.log("reportStatus",result);
-        options.value.reportStatus = result;
-    }
-
-    const  loadReportTypes = async function() {   
-        const result = await thesaurusApi.getDomainTerms( THESAURUS.REPORT_TYPES);  
-        console.log("reportTypes",result);
-        options.value.reportTypes  = result;
-    }
-
-
-
-
-    onMounted(() => {
-        loadCountries();   
-        loadJurisdictions(); 
-        loadApprovedStatus();  
-        loadApprovingBody();
-        loadReportStatus(); 
-        loadReportTypes();
-    })
    
-    const getCleanDocument = (document) =>{      
-        if (!document)
+    const getCleanDocument = (doc) =>{  
+        const lDocument = doc || document.value
+        if (!lDocument)
                 return undefined
     
-        if (/^\s*$/g.test(document.notes))
-            document.notes = undefined
+        if (/^\s*$/g.test(lDocument.notes))
+            lDocument.notes = undefined
     
-        return sanitizeDocument(document);
+        return sanitizeDocument(lDocument);
     };
 
-    defineExpose({
-        getCleanDocument   
-    })
+
+    angularGetCleanDocument({
+         getCleanDocument
+    });
+
+    // defineExpose({
+    //     getCleanDocument   
+    // })
 
 
 
