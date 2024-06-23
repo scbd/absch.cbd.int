@@ -18,24 +18,20 @@
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
                 <!-- <intro-form></intro-form> -->
                 <edit-form>
-                    <form name="editForm" class="editForm">
-                        <div class="editForm">                      
-                            <div ng-if="shareVueComponent">
-                                <edit-chm-national-report-edit-form ng-vue="shareVueComponent" v-model="document"   
-                                    :document="document" :options="options" ref="editForm" >
-                                </edit-chm-national-report-edit-form>
-                            </div>  
-                        </div>
-                    </form>
+                    {{document}}
+                    <div ng-if="shareVueComponent">
+                        <edit-chm-national-report-edit-form ng-vue="shareVueComponent" v-model="document" ref="editForm"></edit-chm-national-report-edit-form>
+                    </div> 
                 </edit-form>
+
                 <review-form>
                     <div ng-if="shareVueComponent">
                         <national-report  ng-vue="shareVueComponent" :document-info="{ body : review.document }" :locale="review.locale" allow-drafts="true"></national-report>
                     </div>
                 </review-form>
+                
                 <!-- <publish-form></publish-form> -->
             </workflow-arrow-buttons>
-
         </div>
     </div>
 </div>

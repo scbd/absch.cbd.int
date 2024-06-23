@@ -12,6 +12,7 @@ import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/workflow-arrow-buttons';
 import './edit-header';
 import { genericMapping, genericFilter } from '~/services/filters/arrays';
+import { sanitizeDocument } from '~/services/filters/common';
 
 
 app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
@@ -397,46 +398,9 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
         $scope.onPostSubmitFn({ data: documentInfo });
     };
 
-    $scope.sanitizeDocument = function(document){
+    $scope.sanitizeDocument =  sanitizeDocument; 
 
-      if(!document) return;
 
-      document = sanitize(document);
-      return document;
-
-      function sanitize(doc){
-        _.forEach(doc, function(fieldValue, key){
-          
-          if(_.isString(fieldValue) && _.trim(fieldValue||'') == ''){
-            fieldValue = undefined;
-          }
-          else if(_.isArray(fieldValue)){
-            fieldValue = sanitize(fieldValue);
-            fieldValue = _.compact(fieldValue);
-            
-            if(_.isEmpty(fieldValue))
-              fieldValue = undefined;
-          }
-          else if(_.isPlainObject(fieldValue)){
-            fieldValue = sanitize(fieldValue);
-            fieldValue = _.omit(fieldValue, isNullOrUndefinedOrEmpty);
-          }
-
-          doc[key] = fieldValue;
-
-        });
-        
-        if(_.isArray(doc))
-          doc = _.compact(doc)
-        else if(_.isPlainObject(doc))
-          doc = _.omit(doc, isNullOrUndefinedOrEmpty);
-        
-        return doc;
-      }
-      function isNullOrUndefinedOrEmpty(v){
-        return v === undefined || v === null || (_.isObject(v) && _.isEmpty(v));
-      }
-    }
     //to handle console errors
     $scope.isGovernmentRequired = function(value){
       return (value != undefined && value.government != undefined && value.government.identifier != undefined);
