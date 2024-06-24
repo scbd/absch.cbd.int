@@ -250,9 +250,10 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
     //==================================
     //
     //==================================
-    $scope.userGovernment = function() {
-      return $scope.$root.user.government;
-    };
+    $scope.userGovernment = function(){      
+        return $scope.$root.user.government;
+      };
+     
 
     //==================================
     //

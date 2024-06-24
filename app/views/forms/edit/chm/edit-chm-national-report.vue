@@ -11,9 +11,9 @@
 
         <legend>{{t("generalInfo")}}</legend>
         <div class="row">           
-            <div class="col-xs-12">
-                <label>{{t("country")}}</label>
-                <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" :source="options.countries" 
+            <div class="col-xs-12">               
+                <label>{{t("country")}}</label>                 
+                <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" :source="options.countries" :disabled="userGovernment" 
                     :placeholder="t('selectCountryOption')" :selectbox="true" :filter="genericFilter"  :mapping="genericMapping" >
                 </ng>               
             </div>
@@ -157,7 +157,7 @@
 </template>
 
 <script setup>
-    import { computed, ref, onMounted, defineExpose, inject} from 'vue';
+    import { computed, inject} from 'vue';
     import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
     import messages from '~/app-text/views/forms/edit/chm/edit-chm-national-report.json';
     import { useI18n } from 'vue-i18n';  
@@ -166,15 +166,21 @@
     import { sanitizeDocument } from '~/services/filters/common';
     import { useAuth } from "@scbd/angular-vue/src/index.js";
     import ThesaurusApi  from "~/api/thesaurus.js";
-
-  
-   
+ 
+    
    
     const document                = defineModel();
     const angularGetCleanDocument = inject('getCleanDocument')
     const { t }                   = useI18n({ messages });
     const auth                    = useAuth();
     const thesaurusApi            = new ThesaurusApi({tokenReader:()=>auth.token()});
+
+    const STATUS_DRAFT  ="9D17F3A2-EC92-4D31-81EF-A12521873D7F";
+    const STATUS_FINAL  ="1C37E358-5295-46EB-816C-0A7EF2437EC9" ;
+    const STATUS_APPROVED  ="851B10ED-AE62-4F28-B178-6D40389CC8DB";
+    const APPROVING_BODY_NATIONAL_COMMITTEE ="905C1F7F-C2F4-4DCE-A94E-BE6D6CE6E78F";
+    const APPROVING_BODY_MINISTER ="E7398F2B-FA36-4F42-85C2-5D0044440476";
+    const APPROVING_BODY_INTER_MINISTERIAL_COMMITTEE ="D3A4624E-21D9-4E49-953F-529734538E56";
 
     const options = {
         countries     : thesaurusApi.getDomainTerms(THESAURUS.COUNTRIES),
@@ -184,23 +190,23 @@
         reportStatus  : thesaurusApi.getDomainTerms(THESAURUS.REPORT_STATUS),
         reportTypes   : thesaurusApi.getDomainTerms( THESAURUS.REPORT_TYPES),
     };
-
+    const userGoverment = computed(()=> auth.user()?.government);
 
     const hasAdoptionDate = computed(()=> {
            return  !!document?.value?.status && (
-            document?.value?.status.identifier == THESAURUS.STATUS_FINAL  ||
-            document?.value?.status.identifier == THESAURUS.STATUS_APPROVED  )
+            document?.value?.status.identifier == STATUS_FINAL  ||
+            document?.value?.status.identifier == STATUS_APPROVED  )
     });   
 
     const hasApprovedStatus = computed(()=> {
-        return !!document?.value?.status  && document?.value?.status.identifier == THESAURUS.STATUS_APPROVED;	
+        return !!document?.value?.status  && document?.value?.status.identifier == STATUS_APPROVED;	
     }); 
    
     const hasApprovedStatusInfo = computed(()=> {
         return  !!document?.value?.approvingBody && (
-            document?.value?.approvingBody.identifier == THESAURUS.APPROVING_BODY_INTER_MINISTERIAL_COMMITTEE  ||
-            document?.value?.approvingBody.identifier == THESAURUS.APPROVING_BODY_MINISTER  ||
-            document?.value?.approvingBody.identifier == THESAURUS.APPROVING_BODY_NATIONAL_COMMITTEE);
+            document?.value?.approvingBody.identifier == APPROVING_BODY_INTER_MINISTERIAL_COMMITTEE  ||
+            document?.value?.approvingBody.identifier == APPROVING_BODY_MINISTER  ||
+            document?.value?.approvingBody.identifier == APPROVING_BODY_NATIONAL_COMMITTEE);
 	});
    
     const getCleanDocument = (doc) =>{  

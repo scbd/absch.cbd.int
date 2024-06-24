@@ -17,8 +17,7 @@
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
                 <!-- <intro-form></intro-form> -->
-                <edit-form>
-                    {{document}}
+                <edit-form>                
                     <div ng-if="shareVueComponent">
                         <edit-chm-national-report-edit-form ng-vue="shareVueComponent" v-model="document" ref="editForm"></edit-chm-national-report-edit-form>
                     </div> 

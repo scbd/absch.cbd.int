@@ -27,16 +27,11 @@ export default ["$scope", "$http", "$filter",  "$controller", "$location",
             setup:  setupFunctions    
         }   
      
-        $scope.path = $location.path();    
-    
-
-        $scope.getCleanDocument = function(document) {
-           
+        $scope.getCleanDocument = function(document) {           
             if(vueCleanDocument)     
                 return vueCleanDocument?.getCleanDocument(document);
         };
    
-        $scope.setDocument();
-         
+        $scope.setDocument();         
     }];
 
