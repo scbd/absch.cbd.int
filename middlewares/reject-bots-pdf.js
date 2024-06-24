@@ -1,15 +1,21 @@
 import { isbot } from "isbot";
 
 export default function(req, res, next){
-    console.log(req.get("user-agent"));
+  
+    const isPrerender = req.header['x-is-prerender'] == true;
+    if((!isPrerender && req.query['skip-check']||false) != 'true'){
 
-    if(isbot(req.get("user-agent")) || req.header['x-prerender']!= undefined){
-        let url = `${req.protocol}://${req.get('host')}/${req.params.lang||'en'}/database/${req.params.documentId}`;
+        const isReqABot = isbot(req.get("user-agent")) || isbot(req.get("x-origin-user-agent"))
+        if(isReqABot || req.header['x-is-crawler'] == true){
+            let url = `/${req.params.lang||'en'}/database/${req.params.documentId}`;
 
-        if(req.params.revision)
-            url += `-${req.params.revision}`;
+            if(req.params.revision)
+                url += `-${req.params.revision}`;
 
-        // return res.redirect(url);
+            // console.info(`Redirecting bot request to bew url ${url}`);
+
+            // return res.redirect(url);
+        }
     }
 
     next()

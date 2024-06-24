@@ -124,8 +124,17 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                 $timeout(()=>$scope.loadLangPdf(language), 100);    
             }
         }
+        
+        if(window.scbdApp.isCrawler){
+            let url = `/database/${$route.current.params.documentId}`;
+            if($route.current.params.revision)
+                url += `-${$route.current.params.revision}`;
 
-        loadPdfDocumentDetails($route.current.params.documentId)
+            $location.path(url)
+        }
+        else{
+            loadPdfDocumentDetails($route.current.params.documentId);
+        }
     }];
 
 
