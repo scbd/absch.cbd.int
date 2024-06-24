@@ -27,7 +27,7 @@ const { bundleUrls } = require('../app/boot.js');
         return res.redirect('/'+preferredLang + (req.originalUrl||''));
 
     const locale =  urlPreferredLang || preferredLang || 'en';
- 
+    
     let options = { 
                     baseUrl            : ('/' + (urlPreferredLang || preferredLang || '') + '/').replace("//", '/'),
                     appVersion         : global.app.version,
@@ -37,7 +37,9 @@ const { bundleUrls } = require('../app/boot.js');
                     cdnUrl             : global.app.cdnUrl,
                     angularBundle      : bundleUrls.angularBundle,
                     initialCss         : bundleUrls.initialCss,
-                    captchaV2BadgeKey  : process.env.CAPTCHA_V2Badge_KEY
+                    captchaV2BadgeKey  : process.env.CAPTCHA_V2Badge_KEY,
+                    isPrerender        : req.headers['x-is-prerender'],
+                    isCrawler          : req.headers['x-is-crawler']
                 };
 
     return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`, options);
