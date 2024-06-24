@@ -11,13 +11,22 @@
 
         <legend>{{t("generalInfo")}}</legend>
         <div class="row">           
-            <div class="col-xs-12">               
-                <label>{{t("country")}}</label>                 
-                <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" :source="options.countries" :disabled="userGovernment" 
+            <div class="col-xs-12"> 
+                <!-- <ng v-vue-ng:km-control-group" name="government" required> 
+                   test
+                    <div v-pre>
+                        <label>{{t("country")}}</label> 
+                        <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
+                        filter="genericFilter" mapping="genericMapping" selectbox="true" ></div>
+                    </div>  
+                </ng>  -->
+                <label>{{t("country")}}</label> 
+                <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" :source="options.countries" :ng-disabled="()=>{return userGovernment}" 
                     :placeholder="t('selectCountryOption')" :selectbox="true" :filter="genericFilter"  :mapping="genericMapping" >
-                </ng>               
+                </ng> 
             </div>
-        </div>
+        </div> 
+                
 
         <div class="row">
             <div class="col-xs-12">
@@ -55,7 +64,7 @@
         <div class="row">
             <div class="col-md-12">
                 <label>{{t("additionalInformation")}}</label> 
-                <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.additionalInformation" rows="3" :placeholder="t('additionalInformation')" :locales="document.header.languages" ></ng>                
+                <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.jurisdictionInfo" rows="3" :placeholder="t('additionalInformation')" :locales="document.header.languages" ></ng>                
             </div>
         </div>
     </section>
@@ -175,12 +184,12 @@
     const auth                    = useAuth();
     const thesaurusApi            = new ThesaurusApi({tokenReader:()=>auth.token()});
 
-    const STATUS_DRAFT  ="9D17F3A2-EC92-4D31-81EF-A12521873D7F";
-    const STATUS_FINAL  ="1C37E358-5295-46EB-816C-0A7EF2437EC9" ;
-    const STATUS_APPROVED  ="851B10ED-AE62-4F28-B178-6D40389CC8DB";
-    const APPROVING_BODY_NATIONAL_COMMITTEE ="905C1F7F-C2F4-4DCE-A94E-BE6D6CE6E78F";
-    const APPROVING_BODY_MINISTER ="E7398F2B-FA36-4F42-85C2-5D0044440476";
-    const APPROVING_BODY_INTER_MINISTERIAL_COMMITTEE ="D3A4624E-21D9-4E49-953F-529734538E56";
+    const STATUS_DRAFT                               = "9D17F3A2-EC92-4D31-81EF-A12521873D7F";
+    const STATUS_FINAL                               = "1C37E358-5295-46EB-816C-0A7EF2437EC9" ;
+    const STATUS_APPROVED                            = "851B10ED-AE62-4F28-B178-6D40389CC8DB";
+    const APPROVING_BODY_NATIONAL_COMMITTEE          = "905C1F7F-C2F4-4DCE-A94E-BE6D6CE6E78F";
+    const APPROVING_BODY_MINISTER                    = "E7398F2B-FA36-4F42-85C2-5D0044440476";
+    const APPROVING_BODY_INTER_MINISTERIAL_COMMITTEE = "D3A4624E-21D9-4E49-953F-529734538E56";
 
     const options = {
         countries     : thesaurusApi.getDomainTerms(THESAURUS.COUNTRIES),
@@ -190,7 +199,7 @@
         reportStatus  : thesaurusApi.getDomainTerms(THESAURUS.REPORT_STATUS),
         reportTypes   : thesaurusApi.getDomainTerms( THESAURUS.REPORT_TYPES),
     };
-    const userGoverment = computed(()=> auth.user()?.government);
+    const userGovernment = computed(()=> auth.user()?.government);
 
     const hasAdoptionDate = computed(()=> {
            return  !!document?.value?.status && (
