@@ -23,6 +23,7 @@ export default ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
 		var params = {};
 		params.identifier = $routeParams.documentId;
 		if (params.identifier && /^absch/.test(params.identifier.toLowerCase())){
+			params.identifier = params.identifier.replace(/-(dev|trg)/i, '');
 			var docNum = params.identifier.split('-');
 			if (docNum.length == 5) {
 				params.identifier = docNum[3]+'@'+docNum[4]

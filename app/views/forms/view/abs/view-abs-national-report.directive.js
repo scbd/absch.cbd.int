@@ -112,7 +112,7 @@ app.directive("viewAbsNationalReport", [function () {
 				
 				if(!UID || typeof UID != 'string')
 					return;
-
+				UID = UID.replace(/-(dev|trg)/i, '');
 				var schema = UID.split('-')[1];
 
 				return  "/database/" + schema + '/' + UID + (revsionNumber ? ('/' + revsionNumber) : '');
