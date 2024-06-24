@@ -9,7 +9,7 @@ export default ['$scope','$routeParams','$location','$filter',
 		function($scope,$routeParams,$location, $filter) {
 		
 		var documentId = $routeParams.documentId;
-		
+		documentId = documentId.replace(/-(dev|trg)/i, '');
 		if (documentId && /^absch/.test(documentId.toLowerCase())) {
 			var docNum = documentId.split('-');
 			if (docNum.length == 5) {

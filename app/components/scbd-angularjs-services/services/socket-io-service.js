@@ -21,6 +21,10 @@ import './utilities';
             var socket;
 
             this.connect = function(authToken){
+
+                if(window.scbdApp.isPrerender)
+                    return;
+
                 var query = 'arguments=' + JSON.stringify({realm: realm.value||realm});
 
                 socket = io(apiServer, { 
@@ -36,6 +40,9 @@ import './utilities';
             };
 
             this.disconnect = function(isLogoff){
+                if(window.scbdApp.isPrerender)
+                    return;
+                
                 if(isLogoff)
                     socket.emit('logoff');
                 socket.disconnect();
