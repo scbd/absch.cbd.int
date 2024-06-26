@@ -9,27 +9,31 @@
 </template>
 
 <script setup>
-   const props = defineProps({
-      coverImage: { type: Object, required: true },
-      coverImageSize : { type : String, default:'1280x720'}
-   });
-  
-   const coverImageUrl = computed(()=>{
-       return getSizedImage(props.coverImage?.url, props.coverImageSize);
-   });
+  import { cssEscape } from "../../services/css.escape";
 
-   const cssEscapeUrl = function(url) {
-       return cssEscape(url);
-   }
+  const props = defineProps({
+    coverImage: { type: Object, required: true },
+    coverImageSize: { type: String, default: "1280x720" },
+  });
 
+  const coverImageUrl = computed(() => {
+    return getSizedImage(props.coverImage?.url, props.coverImageSize);
+  });
 
-   const getSizedImage = function (url, size){
-       return url && url
-       .replace(/attachments.cbd.int\//, '$&'+size+'/')
-       .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&'+size+'/')
-   };
+  const cssEscapeUrl = function (url) {
+    return cssEscape(url);
+  };
 
+  const getSizedImage = function (url, size) {
+    return (
+      url &&
+      url
+        .replace(/attachments.cbd.int\//, "$&" + size + "/")
+        .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, "$&" + size + "/")
+    );
+  };
 </script>
+
 <style scoped>
 .image-credit-wrapper img {
   width: 100% !important;
@@ -41,7 +45,7 @@
   /* margin-left: -15px;
   margin-right: -15px; */
   max-height: 375px;
-  width: 100%
+  width: 100%;
 }
 
 .image-credit-wrapper .image-credit {
@@ -51,7 +55,7 @@
 }
 
 .image-credit {
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0, 0, 0, 0.7);
   color: #ccc;
   display: inline-block;
   font-size: 11px;
@@ -63,7 +67,7 @@
   right: 0;
 }
 
-.cover-image{
+.cover-image {
   width: 100%;
   background-repeat: no-repeat;
   position: absolute;
@@ -71,54 +75,53 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
-
 }
 
-.cover-image-position-left{
+.cover-image-position-left {
   background-position: left;
-}                                    
-.cover-image-position-right{
+}
+.cover-image-position-right {
   background-position: right;
-} 
-.cover-image-position-top{
+}
+.cover-image-position-top {
   background-position: top;
-}                                    
-.cover-image-position-center{
+}
+.cover-image-position-center {
   background-position: center;
-}                                            
-.cover-image-position-bottom{
+}
+.cover-image-position-bottom {
   background-position: bottom;
 }
 
-.cover-image-size-cover{
+.cover-image-size-cover {
   background-size: cover;
 }
-.cover-image-size-contain{
+.cover-image-size-contain {
   background-size: contain;
 }
 @media (max-width: 767px) {
   /*For all phone sizes*/
-  .image-credit-wrapper{
-      height: 120px;
+  .image-credit-wrapper {
+    height: 120px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   /* For IPads*/
-  .image-credit-wrapper{
-      height: 250px;
+  .image-credit-wrapper {
+    height: 250px;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   /* For IPad pro*/
-  .image-credit-wrapper{
-      height: 300px;
+  .image-credit-wrapper {
+    height: 300px;
   }
 }
 @media (min-width: 1200px) {
   /* For big screens*/
-  .image-credit-wrapper{
-      height: 350px;
+  .image-credit-wrapper {
+    height: 350px;
   }
 }
 </style>
