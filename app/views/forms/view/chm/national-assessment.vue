@@ -151,7 +151,7 @@
                 </view-relevant-information> 
             </section>           
 
-            <div>             
+            <div v-if="$attrs.hideRecordReference">            
                 <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
             </div>         
         </div>  
@@ -175,8 +175,8 @@
     const { t } = useI18n({ messages });
 
     const props = defineProps({
-        documentInfo: { type:Object, required:true },
-        locale      : { type:String, required:true}
+        documentInfo       : { type:Object, required:true },
+        locale             : { type:String, required:true}   
     })
     const document = computed(()=>props.documentInfo?.body);  
     
