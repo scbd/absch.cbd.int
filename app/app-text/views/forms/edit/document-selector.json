@@ -26,5 +26,7 @@
     "showExisting": "Show Existing",
     "cancel": "Cancel",
     "noRecordFound": "no records found.",
-    "revisionUpdated": "The reference to this record has been updated to its latest revision"
+    "revisionUpdated": "The reference to this record has been updated to its latest revision",
+    "myPendingRequests": "My pending requests",
+    "uId": "UID"
 }
