@@ -360,7 +360,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                             };
                             return pending;
                         });
-                        $scope.safeApply(async function() {
+                        $scope.safeApply(function() {
                             $scope.pendingRawRecords = pendingRawRecords
                         })
                         return pendingRawRecords ;
@@ -411,7 +411,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 else if($scope.activeTab == 'pendingRequests'){
                     $scope.isLoading = false;
                     await pendingRecords();
-                    return;
+                    return; // loading MyDraft issue, need to remove
                 }     
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
