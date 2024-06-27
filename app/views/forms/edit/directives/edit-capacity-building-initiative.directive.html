@@ -315,7 +315,7 @@
 									</div>
 								</div>
 
-								<div class="row" ng-if="isABS">
+								<div class="row" ng-if="isABS || isCHM">
 									<div class="col-md-12">
 										<div class="km-control-group" name="aichiTargets"
 												caption="Aichi targets:">
@@ -325,7 +325,7 @@
 									</div>
 								</div>
 
-								<div class="row" ng-if="isABS">
+								<div class="row" ng-if="isABS || isCHM">
 									<div class="col-md-12">
 										<div class="km-control-group" name="absKeyAreas"
 												caption="{{::('editCBIT.keyAreasAndStrategic'|$translate)}}">
@@ -335,7 +335,18 @@
 										</div>
 									</div>
 								</div>
-								<div class="row" ng-if="isBCH">
+
+								<div class="row" ng-if="isCHM">
+									<div class="col-md-12">
+										<div class="km-control-group" required name="gbfTargets"
+										caption="{{::('editCBIT.gbfTargets'|$translate)}}">
+											<div km-term-check name="gbfTargets" required ng-model="document.gbfTargets"
+													terms="options.gbfTargets()" binding-type="term[]"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row" ng-if="isBCH || isCHM">
 									<div class="col-md-12">
 										<div class="km-control-group tabular-term-check fourth-column" required name="cpbThematicAreas"
 												caption="{{::('editCBIT.biosafetyThematicAreas'|$translate)}}">

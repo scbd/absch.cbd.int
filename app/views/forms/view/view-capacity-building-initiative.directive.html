@@ -177,7 +177,7 @@
 				</div>
 			</div>
 		</div>
-		<div ng-show="document.cbdSubjects || document.aichiTargets">
+		<div ng-show="document.cbdSubjects || document.aichiTargets || document.gbfTargets">
 
 			<legend>{{::('viewCdiT.informationOnThematic'|$translate)}}</legend>
 
@@ -189,11 +189,20 @@
 				</div>
 			</div>
 
-			<div ng-show="document.aichiTargets && isABS">
+			<div ng-show="document.aichiTargets && (isABS || isCHM)">
 				<label>{{::('viewCdiT.aichiTargets'|$translate)}}</label>
 				<div class="km-value" compare-val="Aichi target(s)">
 					<ul class="list">
 						<li ng-repeat="val in document.aichiTargets" ng-bind="val | term:locale"></li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-show="document.gbfTargets && isCHM">
+				<label>{{::('viewCdiT.gbfTargets'|$translate)}}</label>
+				<div class="km-value" compare-val="Gbf target(s)">
+					<ul class="list">
+						<li ng-repeat="val in document.gbfTargets" ng-bind="val | term:locale"></li>
 					</ul>
 				</div>
 			</div>
