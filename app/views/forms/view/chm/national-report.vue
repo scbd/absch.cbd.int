@@ -146,7 +146,8 @@
 
     const props = defineProps({
         documentInfo: { type:Object, required:true },
-        locale      : { type:String, required:true }
+        locale      : { type:String, required:true },
+        
     })
     const document = computed(()=>props.documentInfo?.body);
 </script>
