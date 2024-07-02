@@ -9,7 +9,7 @@
             <div v-if="!hideCoverImage && viewArticle?.coverImage?.url">
                 <cbd-article-cover-image :cover-image="viewArticle.coverImage" :cover-image-size="coverImageSize"></cbd-article-cover-image>
             </div> 
-            <div v-html="lstring(viewArticle.content, $locale)" class="ck-content"></div>          
+            <div v-html="lstring(viewArticle.content)" class="ck-content"></div>          
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@
 <script setup>
     import { computed, onMounted, ref, nextTick } from 'vue';
     import { useI18n } from 'vue-i18n';
-    // import DOMPurify from 'dompurify';
+    import dompurify from 'dompurify';
     import messages from '../../app-text/components/kb.json';
     import { lstring } from '../../components/kb/filters';
     import cbdArticleCoverImage from '../../components/common/cbd-article-cover-image.vue';
@@ -25,14 +25,27 @@
     const { t, locale } = useI18n({ messages });
     const loading = ref(false);
 
+    const config = { //domPurify config
+        SAFE_FOR_TEMPLATES: true, // Ensure safe sanitization for templates
+        FORBID_TAGS: ['script'], // Disallow script tags
+        FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover', 'onfocus', 'onchange'] // Disallow event handler attributes
+    };
     const props = defineProps({
         hideCoverImage: { type: Boolean, required: false, default: false },
         article: { type: Object, required: false, default: undefined },
         coverImageSize: { type: String, required: false, default: '800x800' }
     });
 
-    // const viewArticle = computed(() => DOMPurify.sanitize(props.article));
-    const viewArticle = computed(() => props.article);
+    const viewArticle = computed(() => {
+        if (props.article) {
+            const sanitizedArticle = {
+                ...props.article,
+                content: dompurify.sanitize(props.article.content[locale.value], config) // Sanitize the article content
+            };
+            return sanitizedArticle;
+        }
+        return '';
+    });
 
     const preProcessOEmbed = async () => {
         nextTick(async () => {

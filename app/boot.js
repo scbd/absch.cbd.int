@@ -140,7 +140,7 @@ export default function bootApp(window, require, defineX) {
 
             'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min',
             'shim'                      :           'libs/require-shim/src/shim',
-            
+            'dompurify'                 : `${cdnHost}dompurify@3.1.5/dist/purify.min.js`,
             'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
 
             'luxon'                     : `${cdnHost}luxon@1.25.0/build/amd/luxon`,
