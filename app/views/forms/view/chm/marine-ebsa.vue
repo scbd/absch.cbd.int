@@ -230,7 +230,7 @@
                     </div>
                 </div> 
         
-                <div v-if="document.status=='recommendedToAny' && (document.recommendedToAnyBy || document.recommendedToAnyByGovernments || document.recommendedToAnyByOrganizations || document.recommendedToAnyByOthers)" >
+                <div v-if="document.status=='recommendedToAny' && (document.recommendedToAnyBy || document.recommendedToAnyByGovernment || document.recommendedToAnyByOrganizations || document.recommendedToAnyByOthers)" >
                     <div class="card">
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item" :class="[(document.status=='recommendedToAny')? 'bg-success text-white':'']">
@@ -245,10 +245,10 @@
                                     <li v-if="document.recommendedToAnyBy==='OTHER'">{{t("others")}}</li>
                                 </div>
                             </div>                           
-                            <div v-if=" document.recommendedToAnyBy==='GOV' && document.recommendedToAnyByGovernments" >
+                            <div v-if=" document.recommendedToAnyBy==='GOV' && document.recommendedToAnyByGovernment" >
                                 <label>{{t("governments")}} </label>
                                 <div class="km-value">
-                                    <li v-for="term in document.recommendedToAnyByGovernments">
+                                    <li v-for="term in document.recommendedToAnyByGovernment">
                                         <km-term :value="term" :locale="locale"></km-term>
                                     </li>
                                 </div>

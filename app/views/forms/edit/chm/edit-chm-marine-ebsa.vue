@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <label>{{t("languageToPublish")}}</label>                                 
-                <ng v-vue-ng:km-form-languages multiple required v-model:ng-model="document.header.languages"  html></ng> 
+                <ng v-vue-ng:km-form-languages multiple required v-model:ng-model="document.header.languages" html></ng> 
             </div>
         </div>
 
@@ -16,7 +16,7 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <label>{{t("Title / Name of the area")}}<span class="pl-2 text-danger">*</span></label>               
-                    <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.title" :placeholder="t('title')" :locales="document.header.languages" ></ng>                
+                    <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.title" :placeholder="t('title')" :locales="document.header.languages"></ng>                
                 </div> 
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <label>{{t("summary")}}<span class="pl-2 text-danger">*</span></label>               
-                    <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.summary" rows="3" :placeholder="t('summaryInfo')" :locales="document.header.languages" ></ng>                
+                    <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.summary" rows="3" :placeholder="t('summaryInfo')" :locales="document.header.languages"></ng>                
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <label>{{t("IntroductionOfTheArea")}}</label>               
-                    <ng v-vue-ng:km-rich-textbox  name="areaIntroducion" v-model:ng-model="document.areaIntroducion" rows="3"  :locales="document.header.languages" ></ng>                
+                    <ng v-vue-ng:km-rich-textbox name="areaIntroducion" v-model:ng-model="document.areaIntroducion" rows="3" :locales="document.header.languages"></ng>                
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <label>{{t("ebsaRegion")}}<span class="pl-2 text-danger">*</span></label> 
                     <br/>
-                    <ng v-vue-ng:km-select name="region"  required v-model:ng-model="document.region"   placeholder="Please select the EBSA region..."  @items="()=>options.ebsaRegions"></ng>
+                    <ng v-vue-ng:km-select name="region" required v-model:ng-model="document.region" :placeholder="t('ebsaRegionInfo')" @items="()=>options.ebsaRegions"></ng>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <label>{{t("location")}}<span class="pl-2 text-danger">*</span></label>               
-                    <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.location" rows="3"  :locales="document.header.languages" ></ng>                
+                    <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.location" rows="3" :locales="document.header.languages" ></ng>                
                 </div>
             </div>
         </div>
@@ -68,12 +68,16 @@
                     <label>{{t("geoLocation")}}<span class="pl-2 text-danger">*</span></label>                     
                     <div class="help-info">{{t("geoLocationInfo")}} 
                         <ng v-vue-ng:km-link name="geoJsonFile" v-model:ng-model="document.gisFiles" 
-                            :allow-link="false" :allow-file="true"   :identifier="document.header.identifier">
+                            :allow-link="false" :allow-file="true" :identifier="document.header.identifier">
                         </ng>
                     </div>
                 </div>
             </div>
         </div>
+        document.gisFiles{{ document.gisFiles }}
+        gisLayer {{ gisLayer }}
+        mapConfig {{ mapConfig }}
+        isReady {{ isReady }}
 
         <div class="row">
             <div class="col-md-12">
@@ -171,218 +175,214 @@
 
     <section>      
         <legend>{{t("statusOfSubmission")}}</legend>   
-
-        <div class="form-check">
-            <div class="form-group">
-                <input type="radio" name="status" v-model="document.status" value="approved" style="margin-left: -18px"/>
-                <label><b>a)</b>{{t("areasApprovedForInclusionInTheEbsa")}}</label>            
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>{{t("copDecision")}}</label>     
-                        <br/>
-                        <ng v-vue-ng:document-selector  :ng-disabled="document.status!='approved'" @on-build-query="onBuildOnDecisionQuery(searchText)"
-                            v-model:ng-model="document.approvedByCopDecision" question="approvedByCopDecision" filter="true" type="checkbox">
-                        </ng>                               
+        <div class="row">
+            <div class="col-md-12">
+                <input type="radio" name="status" v-model="document.status" value="approved"  />
+                <label> {{t("areasApprovedForInclusionInTheEbsa")}}</label>            
+               
+                <div class="row ms-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{t("copDecision")}}</label>     
+                            <br/>
+                            <ng v-vue-ng:document-selector :ng-disabled="document.status!='approved'" @on-build-query="onBuildOnDecisionQuery(searchText)"
+                                v-model:ng-model="document.approvedByCopDecision" question="approvedByCopDecision" filter="true" type="checkbox">
+                            </ng>                               
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
+                <div class="row ms-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{t("approvedByAPartyOrGovernment")}}</label>
+                                <ng v-vue-ng:km-select name="approvedByGovernment" v-model:ng-model="document.approvedByGovernment" @ng-disabled="document.status!='approved'" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"></ng>
+                            </div>
+                        </div>
+
+                    <div class="col-md-3">
+                            <div class="form-group">
+                                <label>{{t("date")}}</label>                        
+                                <ng v-vue-ng:km-date  name="approvedByGovernmentOn"  v-model:ng-model="document.approvedByGovernmentOn" @ng-disabled="document.status!='approved'"></ng>                            
+                            </div>                  
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="radio" name="status" v-model="document.status" value="recommendedToCop"  />
+                <label>{{ t("areasThroughNationalProcess")}}</label>
+       
+
+                <!-- hide temporarily because not getting options.sbsttsRecommendations -->
+                <!-- <div class="row ms-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{t( "recommendedBySBSTTA")}}</label><br/>
+                            <ng v-vue-ng:km-select name="recommendedToCopBySbstta" v-model:ng-model="document.recommendedToCopBySbstta" @ng-disabled="document.status!='recommendedToCop'"   @items="()=>options.sbsttsRecommendations"></ng>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="row ms-3">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>{{t("approvedByAPartyOrGovernment")}}</label>
-                            <ng v-vue-ng:km-select name="approvedByGovernment" v-model:ng-model="document.approvedByGovernment" @ng-disabled="document.status!='approved'" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"></ng>
+                            <label>{{t("OngoingOfficialNationalProcess")}}</label>
+                            <br/>
+                            <ng v-vue-ng:km-select name="countries" v-model:ng-model="document.recommendedToCopByGovernment" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"  @ng-disabled="document.status!='recommendedToCop'"></ng>
                         </div>
                     </div>
 
-                <div class="col-md-3">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label>{{t("date")}}</label>                        
-                            <ng v-vue-ng:km-date  name="approvedByGovernmentOn"  v-model:ng-model="document.approvedByGovernmentOn" @ng-disabled="document.status!='approved'"></ng>                            
-                        </div>                  
-                </div> 
-            </div>
-        </div>
-
-        <div class="form-check">
-            <div class="form-group">
-                <input type="radio" name="status" v-model="document.status" value="recommendedToCop" style="margin-left: -18px" />
-                <label><b>b)</b>{{ t("areasThroughNationalProcess") }}</label>
-            </div>
-
-            <!-- TODO: hide temporarily because not getting options.sbsttsRecommendations -->
-            <!-- <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>{{t( "recommendedBySBSTTA")}}</label><br/>
-                        <ng v-vue-ng:km-select name="recommendedToCopBySbstta" v-model:ng-model="document.recommendedToCopBySbstta" @ng-disabled="document.status!='recommendedToCop'"   @items="()=>options.sbsttsRecommendations"></ng>
-                    </div>
-                </div>
-            </div> -->
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>{{t("OngoingOfficialNationalProcess")}}</label>
-                        <br/>
-                        <ng v-vue-ng:km-select name="countries" v-model:ng-model="document.recommendedToCopByGovernment" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"  @ng-disabled="document.status!='recommendedToCop'"></ng>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>{{t("date")}}</label>
-                        <ng v-vue-ng:km-date  name="recommendedToCopByGovernmentOn" v-model:ng-model="document.recommendedToCopByGovernmentOn" @ng-disabled="document.status!='recommendedToCop'"></ng>                            
+                            <label>{{t("date")}}</label>
+                            <ng v-vue-ng:km-date  name="recommendedToCopByGovernmentOn" v-model:ng-model="document.recommendedToCopByGovernmentOn" @ng-disabled="document.status!='recommendedToCop'"></ng>                            
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="form-check">
-            <div  class="form-group">
-                <input type="radio" name="status" v-model="document.status" value="recommendedToSbstta" style="margin-left: -22px" />
-                <label><b>c)</b>{{t("areasForConsiderationBySBSTTA")}}</label>
-            </div>
+        <div class="row">
+            <div class="col-md-12"> 
+                <input type="radio" name="status" v-model="document.status" value="recommendedToSbstta"  />
+                <label>{{t("areasForConsiderationBySBSTTA")}}</label>
+         
 
-            <div class="row">
-                <div class="col-md-12">                       
-                    <div class="form-check form-group">
-                        <label class="control-label" for="preparedBySCBD">
-                            <input type="radio" value="SCBD" id="preparedBySCBD" name="recommendedToSbsttaBy" v-model="document.recommendedToSbsttaBy" :disabled="document.status!='recommendedToSbstta'" />
-                            {{t("preparedByCBDWorkshops")}}
-                        </label><br/>
-                    </div>
-                    <div class="form-check form-group">
-                        <label class="control-label" for="preparedByORG">
-                            <input type="radio" value="ORG" id="preparedByORG" name="recommendedToSbsttaBy" v-model="document.recommendedToSbsttaBy" :disabled="document.status!='recommendedToSbstta'" />
-                            {{t("preparedByCompetentOrganizations")}}
-                        </label>
+                <div class="row ms-3">
+                    <div class="col-md-12">                       
+                        <div class="form-check">                         
+                            <input  class="form-check-input" type="radio" value="SCBD" id="preparedBySCBD" name="recommendedToSbsttaBy" v-model="document.recommendedToSbsttaBy" :disabled="document.status!='recommendedToSbstta'" />
+                            <label class="form-check-label">{{t("preparedByCBDWorkshops")}}</label>
+                        </div>
+                        <div class="form-check ">                          
+                            <input  class="form-check-input" type="radio" value="ORG" id="preparedByORG" name="recommendedToSbsttaBy" v-model="document.recommendedToSbsttaBy" :disabled="document.status!='recommendedToSbstta'" />
+                            <label class="form-check-label">{{t("preparedByCompetentOrganizations")}}</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!--TODO: hide temporarily because not getting options.meetings -->
-            <!-- <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label >{{t("cbdWorkshop")}}</label><br/>
-                        <ng v-vue-ng:km-select name="recommendedToSbsttaByWorkshop" v-model:ng-model="document.recommendedToSbsttaByWorkshop" @ng-disabled="document.status!='recommendedToSbstta'" watch-items @items="()=>options.meetings"></ng>
+                <!-- hide temporarily because not getting options.meetings -->
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >{{t("cbdWorkshop")}}</label><br/>
+                            <ng v-vue-ng:km-select name="recommendedToSbsttaByWorkshop" v-model:ng-model="document.recommendedToSbsttaByWorkshop" @ng-disabled="document.status!='recommendedToSbstta'" watch-items @items="()=>options.meetings"></ng>
+                        </div>
                     </div>
-                </div>
-            </div> -->
+                </div> -->
+            </div>
         </div>  
 
-        <div class="form-check">            
-            <div class="form-group">  
-                <input type="radio" name="status" v-model="document.status" value="recommendedToWorkshop" style="margin-left: -18px" />
-                <label><b>d)</b>{{t("areasForConsiderationByWorkshop")}}</label>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">  
-                    <div class="form-group">                    
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="GOV" id="recommendedToWorkshopByGov"    v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
-                            <label class="form-check-label">{{t("government")}}</label>
-                        </div>    
-                        <div class="form-check">                      
-                            <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="ORG" id="recommendedToWorkshopByOrg"    v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
-                            <label class="form-check-label">{{t("competentOrganization")}}</label>                       
-                        </div> 
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="OTHER" id="recommendedToWorkshopByOthers"  v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
-                            <label class="form-check-label">{{t("other")}}</label>                        
+        <div class="row">
+            <div class="col-md-12"> 
+                <input type="radio" name="status" v-model="document.status" value="recommendedToWorkshop"  />
+                <label>{{t("areasForConsiderationByWorkshop")}}</label>
+     
+                <div class="row ms-3">
+                    <div class="col-md-12"> 
+                        <div class="form-group">                    
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="GOV" id="recommendedToWorkshopByGov" v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
+                                <label class="form-check-label">{{t("government")}}</label>
+                            </div>    
+                            <div class="form-check">                      
+                                <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="ORG" id="recommendedToWorkshopByOrg" v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
+                                <label class="form-check-label">{{t("competentOrganization")}}</label>                       
+                            </div> 
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="OTHER" id="recommendedToWorkshopByOthers" v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
+                                <label class="form-check-label">{{t("other")}}</label>                        
+                            </div>
                         </div>
                     </div> 
                 </div> 
-            </div>
-            
 
-            <div class="row" v-if="document.recommendedToWorkshopBy=='GOV'">
-                <div class="col-md-12">
-                    <div class="form-group">   
-                        <label>{{t("selectCountries")}}</label>  
-                        <br/>  
-                        <ng v-vue-ng:km-select name="recommendedToWorkshopByGovernments" multiple v-model:ng-model="document.recommendedToWorkshopByGovernments" @ng-disabled="document.status!='recommendedToWorkshop'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng> 
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" v-if="document.recommendedToWorkshopBy=='ORG'">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>{{t("selectOrganizations")}}</label>                 
-                        <ng v-vue-ng:document-selector  @on-build-query="onBuildOrganizationQuery(searchText)"
-                            v-model:ng-model="document.recommendedToWorkshopByOrganizations" question="organizations" filter="true" type="checkbox" allow-new-schema="organizations">
-                        </ng>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" v-if="document.recommendedToWorkshopBy=='OTHER'">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="control-label" for="recommendedToWorkshopByOthers">{{t('details')}}</label>
-                        <ng v-vue-ng:km-textbox-ml name="recommendedToWorkshopByOthers" rows="4" v-model:ng-model="document.recommendedToWorkshopByOthers" @ng-disabled="document.status!='recommendedToWorkshop'" :locales="document.header.languages"></ng>
-                    </div>
-                </div>
-            </div>
-        </div>       
-        
-        <div class="form-check">
-            <div class="form-group">   
-                <input type="radio" name="status" v-model="document.status" value="recommendedToAny" style="margin-left: -18px" />
-                <label><b>e)</b>{{t("otherRelevantAreas")}}</label>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">   
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="GOV" id="recommendedToAnyByGov" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
-                            <label class="form-check-label">{{t("government")}} </label>
-                        </div>    
-                        <div class="form-check">                      
-                            <input class="form-check-input" type="radio" value="ORG" id="recommendedToAnyByOrg" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
-                            <label class="form-check-label">{{t("competentOrganization")}}</label>                       
-                        </div> 
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="OTHER" id="recommendedToAnyByOthers" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
-                            <label class="form-check-label">{{t("other")}}</label>                        
+                <div class="row ms-3" v-if="document.recommendedToWorkshopBy=='GOV'">
+                    <div class="col-md-12">
+                        <div class="form-group">   
+                            <label>{{t("selectCountries")}}</label>  
+                            <br/>  
+                            <ng v-vue-ng:km-select name="recommendedToWorkshopByGovernments" multiple v-model:ng-model="document.recommendedToWorkshopByGovernments" @ng-disabled="document.status!='recommendedToWorkshop'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng> 
                         </div>
                     </div>
                 </div>
-            </div>            
 
-            <div class="row" v-if="document.recommendedToAnyBy=='GOV'">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>{{t("selectCountries")}}</label>
-                        <br/>                     
-                        <ng v-vue-ng:km-select name="recommendedToAnyByGovernments" multiple v-model:ng-model="document.recommendedToAnyByGovernments" @ng-disabled="document.status!='recommendedToAny'"  :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>  
+                <div class="row ms-3" v-if="document.recommendedToWorkshopBy=='ORG'">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{t("selectOrganizations")}}</label>                 
+                            <ng v-vue-ng:document-selector  @on-build-query="onBuildOrganizationQuery(searchText)"
+                                v-model:ng-model="document.recommendedToWorkshopByOrganizations" question="organizations" filter="true" type="checkbox" allow-new-schema="organizations">
+                            </ng>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row" v-if="document.recommendedToAnyBy=='ORG' ">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>{{t("selectOrganizations")}}</label>
-                        <ng v-vue-ng:document-selector  @on-build-query="onBuildOrganizationQuery(searchText)"
-                            v-model:ng-model="document.recommendedToAnyByOrganizations" question="organizations" filter="true" type="checkbox" allow-new-schema="organizations">
-                        </ng>
+                <div class="row ms-3" v-if="document.recommendedToWorkshopBy=='OTHER'">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label" for="recommendedToWorkshopByOthers">{{t('details')}}</label>
+                            <ng v-vue-ng:km-textbox-ml name="recommendedToWorkshopByOthers" rows="4" v-model:ng-model="document.recommendedToWorkshopByOthers" @ng-disabled="document.status!='recommendedToWorkshop'" :locales="document.header.languages"></ng>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>  
+        </div>     
+        
+        <div class="row">
+            <div class="col-md-12">     
+                <input type="radio" name="status" v-model="document.status" value="recommendedToAny" />
+                <label>{{t("otherRelevantAreas")}}</label>       
 
-            <div class="row" v-if="document.recommendedToAnyBy=='OTHER'">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>{{t("details")}}</label>
-                        <ng v-vue-ng:km-textbox-ml  name="recommendedToAnyByOthers"  rows="3" v-model:ng-model="document.recommendedToAnyByOthers"  @ng-disabled="document.status!='recommendedToAny'" :locales="document.header.languages" ></ng>                
+                <div class="row ms-3">
+                    <div class="col-md-12">
+                        <div class="form-group">   
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="GOV" id="recommendedToAnyByGov" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
+                                <label class="form-check-label">{{t("government")}} </label>
+                            </div>    
+                            <div class="form-check">                      
+                                <input class="form-check-input" type="radio" value="ORG" id="recommendedToAnyByOrg" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
+                                <label class="form-check-label">{{t("competentOrganization")}}</label>                       
+                            </div> 
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="OTHER" id="recommendedToAnyByOthers" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
+                                <label class="form-check-label">{{t("other")}}</label>                        
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+
+                <div class="row ms-3" v-if="document.recommendedToAnyBy=='GOV'">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{t("selectCountries")}}</label>
+                            <br/>                     
+                            <ng v-vue-ng:km-select name="recommendedToAnyByGovernment" multiple v-model:ng-model="document.recommendedToAnyByGovernment" @ng-disabled="document.status!='recommendedToAny'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>  
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ms-3" v-if="document.recommendedToAnyBy=='ORG' ">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{t("selectOrganizations")}}</label>
+                            <ng v-vue-ng:document-selector  @on-build-query="onBuildOrganizationQuery(searchText)"
+                                v-model:ng-model="document.recommendedToAnyByOrganizations" question="organizations" filter="true" type="checkbox" allow-new-schema="organizations">
+                            </ng>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ms-3" v-if="document.recommendedToAnyBy=='OTHER'">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>{{t("details")}}</label>
+                            <ng v-vue-ng:km-textbox-ml  name="recommendedToAnyByOthers"  rows="3" v-model:ng-model="document.recommendedToAnyByOthers"  @ng-disabled="document.status!='recommendedToAny'" :locales="document.header.languages" ></ng>                
+                        </div>
                     </div>
                 </div>
             </div>
@@ -398,10 +398,10 @@
                 <br/>
             
                 <div class="btn-group" bs-buttons-radio  >
-                    <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='high',          'active':assessment.level=='high'}"          @click="assessment.level='high'">High</button>
-                    <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='medium',        'active':assessment.level=='medium'}"        @click="assessment.level='medium'">Medium</button>
-                    <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='low',           'active':assessment.level=='low'}"           @click="assessment.level='low'">Low</button>
-                    <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='noInformation', 'active':assessment.level=='noInformation'}" @click="assessment.level='noInformation'">No information</button>
+                    <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='high',          'active':assessment.level=='high'}"          @click="assessment.level='high'">{{t("high")}}</button>
+                    <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='medium',        'active':assessment.level=='medium'}"        @click="assessment.level='medium'">{{t("medium")}}</button>
+                    <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='low',           'active':assessment.level=='low'}"           @click="assessment.level='low'">{{t("low")}}</button>
+                    <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='noInformation', 'active':assessment.level=='noInformation'}" @click="assessment.level='noInformation'">{{t("noInformation")}}</button>
                 </div>
             
                 <ng v-vue-ng:km-rich-textbox @ng-disabled="!assessment.selected" v-model:ng-model="assessment.justification" rows="8" :locales="document.header.languages"
@@ -443,8 +443,7 @@
 </template>
 <script setup>
     import { computed, inject, watch, shallowRef, onMounted, ref} from 'vue';
-    import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
-    import { genericMapping, genericFilter } from '~/services/filters/arrays';   
+    import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"  
     import { sanitizeDocument } from '~/services/filters/common';
     import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js'; 
     import { THESAURUS } from '~/services/filters/constant';
@@ -456,12 +455,8 @@
     import SolrApi       from "~/api/thesaurus.js";
     import { useRealm } from  '~/services/composables/realm.js';
     import { onBuildDocumentSelectorQuery } from '~/services/solr/queries.js';
-
  
     const realm = useRealm();
-
-   
-   
     const document                = defineModel();
     const angularGetCleanDocument = inject('getCleanDocument')
     const { t }                   = useI18n({ messages });
@@ -503,7 +498,7 @@
     }); 
 
     onMounted(() => {
-        //  document.value.gisFiles=[];  
+        document.value.gisFiles=  document.value.gisFiles || [];  
         loadShapes ().then(()=>{
             setTimeout(()=>isReady.value = true, 3500); 
         });
@@ -513,29 +508,34 @@
 
     const initAssessments=()=> {
         document.value.assessments=[
-                { selected: false, identifier: "criteria1", title: "C1: Uniqueness or rarity" },
-				{ selected: false, identifier: "criteria2", title: "C2: Special importance for life-history stages of species" },
-				{ selected: false, identifier: "criteria3", title: "C3: Importance for threatened, endangered or declining species and/or habitats" },
-				{ selected: false, identifier: "criteria4", title: "C4: Vulnerability, fragility, sensitivity, or slow recovery" },
-				{ selected: false, identifier: "criteria5", title: "C5: Biological productivity" },
-				{ selected: false, identifier: "criteria6", title: "C6: Biological diversity" },
-				{ selected: false, identifier: "criteria7", title: "C7: Naturalness" }
+                { selected: false, identifier: "criteria1", title: t("c1") },
+				{ selected: false, identifier: "criteria2", title: t("c2") },
+				{ selected: false, identifier: "criteria3", title: t("c3") },
+				{ selected: false, identifier: "criteria4", title: t("c4") },
+				{ selected: false, identifier: "criteria5", title: t("c5") },
+				{ selected: false, identifier: "criteria6", title: t("c6") },
+				{ selected: false, identifier: "criteria7", title: t("c7") }
         ]
     }
 
     watch(document.value.gisFiles, ()=> { 
-        loadShapes();  
+        console.log("watch");
+        isReady.value = false;
+        loadShapes ().then(()=>{
+            setTimeout(()=>isReady.value = true, 3500); 
+        }); 
     });
 
-    async function loadShapes () {
-        
+    async function loadShapes () {        
         const fileLinks =document.value?.gisFiles || []
         const qLayers = fileLinks.map(async (link) => {
             const res  = await fetch(link.url);              
             const data = await res.json();          
             return  await L.geoJson(data);
         });
+        console.log("qlayers",qLayers);
         const s = await Promise.all(qLayers);  
+        console.log("s",s);
         gisLayer.value = s;   
     };    
     
@@ -557,9 +557,6 @@
         return onBuildDocumentSelectorQuery(queryOptions);
     }
 
-
-    
-
     const onBuildOnDecisionQuery=(searchText)=>{
         var queryOptions = {
                 schemas   : ['decision'],            
@@ -568,48 +565,5 @@
             }
         return onBuildDocumentSelectorQuery(queryOptions);
     }
-    
-    // const isApprovedStatus = ()=>{
-    //     console.log(document.value)
-    //     return document.value?.status!='approved'
-    // }
-
-
-
-
-    // const loadRecords =(identifier, schema)=> {
-    //     if (identifier) //lookup single record
-    //         return await kmDocumentApi.getDocument(identifier);                              
-
-    //     // Load all record of specified schema;
-    //     return await kmDocumentApi.queryDocuments("type eq '" + encodeURI(schema) + "'")
-    //         .then(function(res) {
-    //             return res.data.Items;
-    //         });  
-    // } 
-
-
-    // const onEditorFileUpload = (data) =>{
-    //     if(!document.value.relevantDocuments)
-    //         document.value.relevantDocuments = [];
-    //     var editorImage = {
-    //         url: data.url,
-    //         name: data.filename,
-    //         tag : 'editorImage'
-    //     };
-    //     document.value.relevantDocuments.push(editorImage);
-    // }
-
-    // const onEditorPaste = (html)=>{
-    //     if(html){
-    //         var localeHtml = $('<div>'+html+'</div>')
-    //         $(localeHtml).find('table').addClass('table');
-    //         return localeHtml.html();
-
-    //     }
-    //     return html;
-    // }
-
-
     
 </script>
