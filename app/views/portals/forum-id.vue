@@ -179,7 +179,7 @@ export default {
     }, 
   },
   watch: {
-    loggedIn: load
+    forumId: load
   },
   methods: {
     lstring,
