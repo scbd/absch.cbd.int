@@ -315,15 +315,25 @@
 									</div>
 								</div>
 
-								<div class="row" ng-if="isABS || isCHM">
+								<!-- only display aichiTargets when there already has value for document.aichiTargets -->
+								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">
+									<div class="col-md-12">																			                   
+											<div class="km-value">
+												<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
+											</div>	
+									</div>
+								</div>
+
+								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="aichiTargets"
-												caption="Aichi targets:">
-											<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets"
-													terms="options.aichiTargets()" binding-type="term[]"></div>
+										<div class="km-control-group" required name="gbfTargets"
+										caption="{{::('editCBIT.gbfTargets'|$translate)}}">
+											<div km-term-check name="gbfTargets" required ng-model="document.gbfTargets"
+													terms="options.gbfTargets()" binding-type="term[]"></div>
 										</div>
 									</div>
 								</div>
+
 
 								<div class="row" ng-if="isABS || isCHM">
 									<div class="col-md-12">
@@ -336,15 +346,6 @@
 									</div>
 								</div>
 
-								<div class="row" ng-if="isCHM">
-									<div class="col-md-12">
-										<div class="km-control-group" required name="gbfTargets"
-										caption="{{::('editCBIT.gbfTargets'|$translate)}}">
-											<div km-term-check name="gbfTargets" required ng-model="document.gbfTargets"
-													terms="options.gbfTargets()" binding-type="term[]"></div>
-										</div>
-									</div>
-								</div>
 
 								<div class="row" ng-if="isBCH || isCHM">
 									<div class="col-md-12">
@@ -355,7 +356,6 @@
 										</div>
 									</div>
 								</div>
-
 							</div>
 						</section>
 

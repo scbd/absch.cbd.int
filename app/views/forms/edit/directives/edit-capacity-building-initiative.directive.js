@@ -193,6 +193,17 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
           if(!document.isCollaboratededByPartners || document.isCollaboratededByPartners == undefined)
             document.collaboratingPartners = undefined;
 
+          if(document.gbfTargets){
+            if($scope.isABS) {
+              document.gbfTargets   =  [{"identifier":"GBF-TARGET-13"}]
+              //$scope.onResourceTypesChange( document.resourceTypes );
+            }
+            if($scope.isBCH) {
+              document.gbfTargets   =  [{"identifier":"GBF-TARGET-17"}]
+              //$scope.onResourceTypesChange( document.resourceTypes );
+            }
+          }
+
           
         var countryRegions = []
         if($scope.countryRegions){
