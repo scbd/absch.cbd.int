@@ -174,7 +174,7 @@
 
         <div class="form-check">
             <div class="form-group">
-                <input type="radio" name="status" v-model="document.status" value="approved" style="margin-left: -18px" />
+                <input type="radio" name="status" v-model="document.status" value="approved" style="margin-left: -18px"/>
                 <label><b>a)</b>{{t("areasApprovedForInclusionInTheEbsa")}}</label>            
             </div>
 
@@ -183,7 +183,7 @@
                     <div class="form-group">
                         <label>{{t("copDecision")}}</label>     
                         <br/>
-                        <ng v-vue-ng:document-selector  @ng-disabled="document.status!='approved'" @on-build-query="onBuildOnDecisionQuery(searchText)"
+                        <ng v-vue-ng:document-selector  :ng-disabled="document.status!='approved'" @on-build-query="onBuildOnDecisionQuery(searchText)"
                             v-model:ng-model="document.approvedByCopDecision" question="approvedByCopDecision" filter="true" type="checkbox">
                         </ng>                               
                     </div>
