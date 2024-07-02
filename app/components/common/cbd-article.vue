@@ -49,7 +49,7 @@
     const hasEditRights = computed(()=> auth?.check(['oasisArticleEditor', 'Administrator']));
     const viewArticle   = computed(() => props.article || remoteArticle.value);
     
-    const getArticle = async (query) => {
+    const loadArticle = async (query) => {
         try{
             loading.value = true;
             const articleResult = await articlesApi.queryArticles(query);
@@ -78,11 +78,11 @@
 
     onMounted( async ()=>{
         if(!viewArticle.value && props.query)
-            await getArticle(props.query);
+            await loadArticle(props.query);
     })
 
     defineExpose({
-        getArticle
+        loadArticle
     });
 
 </script>

@@ -1,10 +1,6 @@
 <template>
     <div class="border-0 mt-1">
-        <div v-if="loading" class="loading">
-            <i class="fa fa-cog fa-spin fa-lg"></i> 
-            {{ t("loading") }}...
-        </div>
-        <div v-if="!loading && viewArticle">
+        <div v-if="viewArticle">
             <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@35.0.0/build/content-style.css">
             <div v-if="!hideCoverImage && viewArticle?.coverImage?.url">
                 <cbd-article-cover-image :cover-image="viewArticle.coverImage" :cover-image-size="coverImageSize"></cbd-article-cover-image>
@@ -15,21 +11,14 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref, nextTick } from 'vue';
+    import { computed, onMounted, nextTick } from 'vue';
     import { useI18n } from 'vue-i18n';
-    import dompurify from 'dompurify';
     import messages from '../../app-text/components/kb.json';
     import { lstring } from '../../components/kb/filters';
     import cbdArticleCoverImage from '../../components/common/cbd-article-cover-image.vue';
-
+    import { domPurify } from "../../services/dompurify";
     const { t, locale } = useI18n({ messages });
-    const loading = ref(false);
-
-    const config = { //domPurify config
-        SAFE_FOR_TEMPLATES: true, // Ensure safe sanitization for templates
-        FORBID_TAGS: ['script'], // Disallow script tags
-        FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover', 'onfocus', 'onchange'] // Disallow event handler attributes
-    };
+    
     const props = defineProps({
         hideCoverImage: { type: Boolean, required: false, default: false },
         article: { type: Object, required: false, default: undefined },
@@ -40,7 +29,7 @@
         if (props.article) {
             const sanitizedArticle = {
                 ...props.article,
-                content: dompurify.sanitize(props.article.content[locale.value], config) // Sanitize the article content
+                content: domPurify(props.article.content[locale.value]) // Sanitize the article content
             };
             return sanitizedArticle;
         }
@@ -74,7 +63,6 @@
            setTimeout(() => {
                preProcessOEmbed();
            }, 1000);
-            loading.value = false;
         }
     });
 </script>

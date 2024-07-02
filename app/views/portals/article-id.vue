@@ -29,7 +29,7 @@
   const fetchArticle = async () => {
     if (refCbdArticle.value && articleQuery.value) {
       try {
-        await refCbdArticle.value.getArticle(articleQuery.value);
+        await refCbdArticle.value.loadArticle(articleQuery.value);
       } catch (error) {
         console.error('Failed to fetch article:', error);
       }
