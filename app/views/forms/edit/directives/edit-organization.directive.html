@@ -218,6 +218,32 @@
                         </div>
                     </div>
 
+                         <!-- chm -thematic areas -->
+                         <div class="no-shadow bg-white" ng-if="isChm">
+                            <legend>{{::('editOrganizationT.thematicAreas'|$translate)}}</legend>	
+                                                
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group tabular-term-check"  name="cbdSubjects"
+                                                caption="{{::('editOrganizationT.cbdSubjects'|$translate)}}">
+                                            <div km-term-check name="cbdSubjects" ng-model="document.thematicAreas"
+                                                    terms="cbdSubjects()" binding-type="term[]" tabular-shape="true">
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group" name="gbfTargets" 
+                                    caption="{{::('editOrganizationT.gbfTargets'|$translate)}}">
+                                        <div km-term-check name="gbfTargets" required ng-model="document.gbfTargets"
+                                                terms="options.gbfTargets()" binding-type="term[]"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     <div class="no-shadow bg-white">
                         <legend>{{::('editOrganizationT.additionalInformation'|$translate)}}</legend>
                         <div class="row">
