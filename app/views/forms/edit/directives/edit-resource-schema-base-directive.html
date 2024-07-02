@@ -165,16 +165,15 @@
 							</section>
 							<section>
 								<div class="no-shadow bg-white">
-									<!-- remove for chm/abs/bch , change to only using gbfTarget -->
-									<!-- <legend>{{::('editVLRT.keywordsFacilitating'|$translate)}}</legend>
+									<legend>{{::('editVLRT.keywordsFacilitating'|$translate)}}</legend>
 									<div class="row" ng-if="isABS || isCHM">
 										<div class="col-md-12">
-											<div class="km-control-group" name="aichiTargets" caption="{{::('editVLRT.aichiTargets'|$translate)}}">
-												<div km-term-check name="aichiTargets" ng-model="document.aichiTargets" terms="options.aichiTargets()"
-												 binding-type="term[]"></div>
-											</div>
+											<div class="km-value">
+                                                <view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
+                                            </div>  
 										</div>
-									</div> -->
+                                    </div>
+                                
 
 									<div class="row" >
 										<div class="col-xs-12"  >
