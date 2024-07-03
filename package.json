@@ -13,6 +13,7 @@
     "cheerio": "1.0.0-rc.3",
     "compression": "1.7.4",
     "cookie-parser": "1.4.3",
+    "dompurify": "^3.1.5",
     "ejs": "2.5.5",
     "express": "4.16.3",
     "html-to-text": "^9.0.5",
