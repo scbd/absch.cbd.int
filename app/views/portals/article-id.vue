@@ -1,7 +1,6 @@
 <template>
   <div>
-    <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true">
-      <!-- @load="onArticleLoad($event)" :admin-tags="adminTags" -->
+    <cbd-article ref="refCbdArticle" :query="articleQuery" v-if="articleQuery" :show-cover-image="false" :show-edit="true">
       <template #article-empty>&nbsp;</template>
     </cbd-article>
   </div>
@@ -11,7 +10,7 @@
   import { mapObjectId, isObjectId } from '~/api/api-base.js';
   import cbdArticle from '../../components/common/cbd-article.vue';
   import { computed, onMounted, ref, watch } from 'vue';
-
+  const refCbdArticle = ref(null);
   const props = defineProps({
         articleId: {
           type: String,
@@ -19,9 +18,7 @@
         }
   });
 
-  const articleQuery = ref(null);
-
-  let query = computed(()=>{
+  const articleQuery = computed(()=>{
     let ag = [];
     if (isObjectId(props.articleId)) { 
       ag.push({ $match: { _id: mapObjectId(props.articleId) } });
@@ -29,13 +26,21 @@
     return { ag: JSON.stringify(ag) };
   });
 
-  onMounted(()=>{
-    articleQuery.value = query.value ;
+  const fetchArticle = async () => {
+    if (refCbdArticle.value && articleQuery.value) {
+      try {
+        await refCbdArticle.value.loadArticle(articleQuery.value);
+      } catch (error) {
+        console.error('Failed to fetch article:', error);
+      }
+    }
+  };
 
+  watch(() => props.articleId, () => {
+    fetchArticle();
   });
 
-  watch(query, (newX) => {
-    articleQuery.value = newX;
+  onMounted(() => {
+    fetchArticle();
   });
-
 </script>
