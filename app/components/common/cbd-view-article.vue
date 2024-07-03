@@ -5,7 +5,7 @@
             <div v-if="!hideCoverImage && viewArticle?.coverImage?.url">
                 <cbd-article-cover-image :cover-image="viewArticle.coverImage" :cover-image-size="coverImageSize"></cbd-article-cover-image>
             </div> 
-            <div v-html="lstring(viewArticle.content)" class="ck-content"></div>          
+            <div v-html="viewArticle.content" class="ck-content"></div>          
         </div>
     </div>
 </template>
@@ -29,7 +29,7 @@
         if (props.article) {
             const sanitizedArticle = {
                 ...props.article,
-                content: domPurify(props.article.content[locale.value]) // Sanitize the article content
+                content: domPurify(lstring(props.article.content)) // Sanitize the article content
             };
             return sanitizedArticle;
         }
