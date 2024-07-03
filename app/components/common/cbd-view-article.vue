@@ -12,12 +12,9 @@
 
 <script setup>
     import { computed, onMounted, nextTick } from 'vue';
-    import { useI18n } from 'vue-i18n';
-    import messages from '../../app-text/components/kb.json';
     import { lstring } from '../../components/kb/filters';
     import cbdArticleCoverImage from '../../components/common/cbd-article-cover-image.vue';
     import { domPurify } from "../../services/dompurify";
-    const { t, locale } = useI18n({ messages });
     
     const props = defineProps({
         hideCoverImage: { type: Boolean, required: false, default: false },

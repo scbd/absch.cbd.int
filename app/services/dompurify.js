@@ -1,4 +1,4 @@
-import dompurify from 'dompurify'; // ToDo: here its not working
+import dompurify from 'dompurify';
 
 const config = { //domPurify config
     SAFE_FOR_TEMPLATES: true, // Ensure safe sanitization for templates
