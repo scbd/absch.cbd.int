@@ -23,6 +23,14 @@
                     :document-info="documentInfo" :locale="locale"></undb-partner>      
             <event v-if="documentInfo?.type == 'event'"  
                     :document-info="documentInfo" :locale="locale"></event>       
+            <marine-ebsa v-if="documentInfo?.type == 'marineEbsa'"  
+                 :document-info="documentInfo" :locale="locale"></marine-ebsa>
+            <financial-report-2015 v-if="documentInfo?.type == 'resourceMobilisation'"  
+                    :document-info="documentInfo" :locale="locale"></financial-report-2015 >           
+            <resource-mobilisation-2020 v-if="documentInfo?.type == 'resourceMobilisation2020'"  
+                    :document-info="documentInfo" :locale="locale"></resource-mobilisation-2020 >
+            <national-report-6 v-if="documentInfo?.type == 'nationalReport6'"  
+                    :document-info="documentInfo" :locale="locale"></national-report-6>  
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 
@@ -46,6 +54,10 @@
     import undbParty from '~/views/forms/view/chm/undb-party.vue'
     import undbPartner from '~/views/forms/view/chm/undb-partner.vue'
     import event from '~/views/forms/view/chm/event.vue'
+    import marineEbsa from '~/views/forms/view/chm/marine-ebsa.vue'
+    import financialReport2015 from '~/views/forms/view/chm/financial-report-2015.vue'
+    import resourceMobilisation2020 from '~/views/forms/view/chm/resource-mobilisation-2020.vue' 
+    import nationalReport6 from '~/views/forms/view/chm/national-report-6.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},

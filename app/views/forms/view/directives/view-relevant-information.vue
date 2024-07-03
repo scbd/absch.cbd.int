@@ -4,8 +4,8 @@
         <div v-if="relevantInformation">
             <slot name="information">
                 <label>{{ t("additionalInformation") }}</label>
-            </slot>                        
-            <ng v-vue-ng:km-value-ml  :value="relevantInformation" :locales="locale" html></ng>              
+            </slot> 
+            <ng v-vue-ng:km-value-ml  :value="relevantInformation" :locales="locale" html km-pre></ng>
         </div>  
 
         <div v-if="relevantDocuments">                

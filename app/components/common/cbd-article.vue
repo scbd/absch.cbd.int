@@ -21,6 +21,11 @@
             </div>
         </div>
     </div>
+    <div v-if="!loading">
+        <cbd-add-new-view-article v-if="hasEditRights"
+            :admin-tags="adminTags" :id="article?._id" class="btn btn-secondary float-end btn-sm" target="_self">
+        </cbd-add-new-view-article>
+    </div>
 </template>
 
 <script setup>
@@ -30,11 +35,16 @@
     import { lstring } from '../../components/kb/filters';
     import { useAuth } from '@scbd/angular-vue/src/index.js';
     import ArticlesApi from '../../components/kb/article-api';
+    import  cbdAddNewViewArticle  from '../../components/common/cbd-add-new-view-article.vue';
 
     const auth = useAuth();
     const { t, locale } = useI18n({ messages });
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
 
+    const loading = ref(false);
+    const article = ref(null)
+    const error = ref(null);
+    
     const emit = defineEmits(['onArticleLoad']);
 
     const props = defineProps({
@@ -44,6 +54,8 @@
         showEdit        : { type: Boolean, required: false, default:true },
         adminTags 	    : { type: Array  , required: false, default:[] }
     });
+
+    const hasEditRights = computed(()=> auth?.check(['oasisArticleEditor', 'Administrator'])); //ToDo: need to check in plugin
     
     const coverImage = computed(()=> { 
         const url = article.value?.coverImage.url;
@@ -53,9 +65,6 @@
           .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/');
     })
 
-    const loading = ref(false);
-    const article = ref(null)
-    const error = ref(null);
 
     const getArticle = async function (query){
 
@@ -80,9 +89,5 @@
     onMounted( async ()=>{
         await getArticle(props.query)
     })
-    watch(() => props.query, async (newQuery) => {
-        await getArticle(newQuery)  
-    });
-
 
 </script>

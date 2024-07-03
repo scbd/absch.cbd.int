@@ -6,7 +6,13 @@
             <!-- TODO: add publish date -->            
             <!-- <ng v-vue-ng:document-date></ng> -->
 
-            <section v-if="document.government || document.title || document.description">                                      
+            <h2 v-if="document.title" class="mt-2" >
+                <span>{{lstring(document.title,locale)}}</span>
+                <i v-if="document.acronym">({{lstring(document.acronym,locale)}})</i>            
+			</h2>
+            <hr/>
+
+            <section v-if="document.government || document.description">                                      
                 <legend>{{ t("generalInformation") }} </legend>               
                 <div v-if="document.government">
                     <label>{{ t("country") }} </label> 
@@ -14,14 +20,6 @@
                         <km-term :value="document.government" :locale="locale"></km-term>   
                     </div>
                 </div>  
-
-                <div v-if="document.title">
-                    <label>{{ t("title") }} </label> 
-                    <div class="km-value">
-                            <span>{{lstring(document.title,locale)}}</span>
-                    <i v-if="document.acronym">( {{lstring(document.acronym,locale)}} )</i>
-                    </div>                             
-                </div>                
 
                 <div v-if="document.description">
                     <label>{{ t("rationale") }} </label> 
@@ -74,7 +72,7 @@
                     <ng v-vue-ng:km-value-ml  :value="document.noOtherAichiTargetsDescription" :locales="locale" html></ng>  
                 </div>            
             </section> 
-
+           
             <section v-if="document.documentText || document.documentLinks">
                 <legend>{{ t("relevantDocumentAndInformation") }}</legend>
                 <view-relevant-information :relevant-information="document.documentText" :relevant-documents="document.documentLinks" :locale="locale">                 
@@ -86,21 +84,26 @@
                     </template>
                 </view-relevant-information> 
             </section>
-            
+                      
             <section v-if="document.relevantInformation || document.relevantDocuments">
-                <legend>{{ t("additionalInformation") }}</legend>
+                <!-- <legend>{{ t("additionalInformation") }}</legend> -->
+                <legend>{{ t("relevantDocumentAndInformation") }}</legend>
                 <view-relevant-information :relevant-information="document.relevantInformation" :relevant-documents="document.relevantDocuments" :locale="locale">          
+                    <template v-slot:information>    
+                        <label></label>                  
+                    </template>               
                 </view-relevant-information> 
             </section> 
 
-            <div> 
+            <div v-if="$attrs.hideRecordReference"> 
                 <!-- TODO: test -->
-                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>         
+                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
+            </div>    
+            
         </div>  
         <!-- TODO: add footer  -->
         <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->   
-
+        <!-- <div v-if="!hideRecordReference">  -->
     </div>
 </template>
 
@@ -109,6 +112,7 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'   
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
+    import '~/views/forms/view/directives/view-record-reference.directive.js'    
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-target.json'; 
     import { useI18n } from 'vue-i18n';
@@ -117,8 +121,8 @@
     const { t } = useI18n({ messages });
 
     const props = defineProps({
-        documentInfo: { type:Object, required:true},
-        locale      : { type:String, required:true}
+        documentInfo       : { type:Object, required:true},
+        locale             : { type:String, required:true}
     })
     const document = computed(()=>props.documentInfo?.body);
 </script>

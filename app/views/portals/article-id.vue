@@ -9,7 +9,7 @@
 
 <script setup>
   import { mapObjectId, isObjectId } from '~/api/api-base.js';
-  import cbdArticle from './cbd-article.vue';
+  import cbdArticle from '../../components/common/cbd-article.vue';
   import { computed, onMounted, ref, watch } from 'vue';
 
   const props = defineProps({

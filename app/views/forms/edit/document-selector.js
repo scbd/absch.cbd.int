@@ -9,9 +9,10 @@ import '~/services/main'; // jshint ignore:line
 import documentSelectorT from '~/app-text/views/forms/edit/document-selector.json';
 import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
 import {Tooltip} from 'bootstrap';
+import KmDocumentApi from "~/api/km-document";
 
-app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm',
-    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm) {
+app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm','apiToken',
+    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm, apiToken) {
 
 	return {
 		restrict   : "EA",
@@ -305,10 +306,76 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 finally{$scope.isLoadingSelectedRawDocuments = undefined};
                 
             })
+            $scope.safeApply = function(fn)
+            {
+                var phase = this.$root.$$phase;
+
+                if (phase == '$apply' || phase == '$digest') {
+                    if (fn && (typeof (fn) === 'function')) {
+                        fn();
+                    }
+                } else {
+                    this.$apply(fn);
+                }
+            };
+
+            async function pendingRecords(draftIdentifiers) {
+                try {
+                    $scope.isPendingLoading = true;
+                    const query = [];
+                    const params = { 
+                        collection: "myrequest", 
+                        $top: $scope.top || 100, 
+                        $orderby: 'updatedOn desc' 
+                    };
+
+                    const schemas =  $attr.allowNewSchema.split(',') 
+                    query.push(`(type eq '${schemas.join("' or type eq '")}')`)
+                    
+                    params.$filter = query;
+
+            
+                    const kmDocumentApi = new KmDocumentApi({ tokenReader: () => apiToken.get() });
+                    const result = await kmDocumentApi.queryDocuments(params);
+                    
+                    const pendingDocuments = result?.Items?.length ? result.Items : [];
+            
+                    if (pendingDocuments.length > 0) {
+                        const pendingRequests = draftIdentifiers ? 
+                            pendingDocuments.filter(item => draftIdentifiers.includes(item.identifier)) : 
+                            pendingDocuments;
+            
+                       const pendingRawRecords = pendingRequests.map(doc => {
+                            const pending = {
+                                identifier: doc.identifier,
+                                identifier_s: doc.identifier,
+                                uniqueIdentifier_s: doc.identifier, // needed for selected records
+                                schema_s: doc.type,
+                                rec_title: doc.title,
+                                rec_summary: doc.summary,
+                                url_ss: `/register/${doc.schema_s}/${doc.identifier}/view`,
+                                _revision_i: doc.revision, // required for selected details, used in line 706, 87.
+                                metadata: doc.metadata,
+                                __checked: !!_.find($scope.tempSelectedDocuments, { identifier_s: doc.identifier })
+                            };
+                            return pending;
+                        });
+                        $scope.safeApply(function() {
+                            $scope.pendingRawRecords = pendingRawRecords
+                        })
+                        return pendingRawRecords ;
+                    }
+                } catch (error) {
+                    toastr.error(error);
+                } finally {
+                    $scope.isPendingLoading = false;
+                }
+            }
+            
              //==================================
             //
             //==================================
-            function getDocs (options) {
+            async function getDocs (options) {
                 options = options||{};
 
                 var searchOperation;
@@ -340,7 +407,12 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 else if($scope.activeTab == 'myGovernmentRecords' && $scope.userGov){
                     var myGovernmentQuery = '_ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase());
                     rawQuery.fieldQueries.push(myGovernmentQuery);
-                }
+                } 
+                else if($scope.activeTab == 'pendingRequests'){
+                    $scope.isLoading = false;
+                    await pendingRecords();
+                    return; // loading MyDraft issue, need to remove
+                }     
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
                     $scope.searchResult.currentPage = rawQuery.currentPage;
@@ -505,7 +577,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 
             $scope.changeTab = function(tab){
                 $scope.activeTab = tab;
-                if(['allRecords', 'myRecords', 'myGovernmentRecords'].includes(tab)){
+                if(['allRecords', 'myRecords', 'myGovernmentRecords', 'pendingRequests'].includes(tab)){
                     showToolTip();
                     $scope.searchFreeText($scope.search.keyword)
                 }
@@ -522,8 +594,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 getDocs();
             }
 
-            function loadSelectedDocumentDetails(){
-                
+            async function loadSelectedDocumentDetails() {
                 if(!$scope.model || ($scope.type == "checkbox" && !$scope.model.length))
                     return;
 
@@ -542,12 +613,30 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     'query'      : queryField + ':("' +_.map(identifiers,solr.escape).join('" "') +'")',
                     'rowsPerPage':  $scope.model?.length  
                 };
-                return searchService.list(queryParameters, null).then(function(result){                    
-                    return $scope.tempSelectedDocuments = _.map(result.data.response.docs, function(doc){
+                try { 
+                    const result = await searchService.list(queryParameters, null);
+                    let allTabDocs = result.data.response.docs;                       
+                    const draftIdentifiers = identifiers.filter(id => !allTabDocs.some(all => all.identifier_s === id)); // get identifiers for draft records
+                    $scope.tempSelectedDocuments = _.map(allTabDocs, doc => {
                         doc.__checked=true;
                         return doc;
                     });
-                });
+                    if (draftIdentifiers && draftIdentifiers.length > 0) {
+                        await pendingRecords(draftIdentifiers).then((pendings) => {
+                            const pendingRequestsSelected = _.map(pendings, doc => {
+                                doc.__checked=true;
+                                return doc;
+                            });
+                            return $scope.tempSelectedDocuments = _.concat($scope.tempSelectedDocuments, pendingRequestsSelected);
+                        });
+                    } 
+                    else {
+                        return $scope.tempSelectedDocuments;
+                    }
+                } catch (error) {
+                    console.error('Error in loadSelectedDocumentDetails:', error);
+                   $scope.isLoading = false;
+                }
             }
 
             function getSortField(sortFields){
