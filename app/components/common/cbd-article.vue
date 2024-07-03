@@ -5,7 +5,7 @@
             {{ t("loading") }}...
         </div>
         <div v-if="!loading && viewArticle">
-            <cbd-view-article :article="viewArticle" :hide-cover-image="hideCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
+            <cbd-view-article :article="viewArticle" :show-cover-image="showCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
             <cbd-add-new-view-article v-if="showEdit && hasEditRights" 
                 :tags="tags" :admin-tags="adminTags" :custom-tags="customTags" :id="(viewArticle||{})._id" :target="target"
                 class="btn btn-secondary float-end">
@@ -35,7 +35,7 @@
     const emit = defineEmits(['onArticleLoad']);
 
     const props = defineProps({
-        hideCoverImage  : { type: Boolean, required: false, default:false        },
+        showCoverImage  : { type: Boolean, required: false, default:true         },
         showEdit        : { type: Boolean, required: false, default:false        },
         article         : { type: Object,  required: false, default:undefined    },
         query           : { type: Object,  required: true                        },
@@ -43,7 +43,7 @@
         customTags 	    : { type: Array  , required: false, default:[]           }, // [] of customTag id's
         adminTags 	    : { type: Array  , required: false, default:[]           }, // [] of adminTag text
         target          : { type: String , required: false, default: '_self'     },
-        coverImageSize   : { type: String, required: false, default: '800x800'   }
+        coverImageSize  : { type: String, required: false, default: '800x800'    }
     });
 
     const hasEditRights = computed(()=> auth?.check(['oasisArticleEditor', 'Administrator']));

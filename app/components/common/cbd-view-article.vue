@@ -1,11 +1,11 @@
 <template>
     <div class="border-0 mt-1">
-        <div v-if="viewArticle">
+        <div v-if="article">
             <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@35.0.0/build/content-style.css">
-            <div v-if="!hideCoverImage && viewArticle?.coverImage?.url">
-                <cbd-article-cover-image :cover-image="viewArticle.coverImage" :cover-image-size="coverImageSize"></cbd-article-cover-image>
+            <div v-if="showCoverImage && article?.coverImage?.url">
+                <cbd-article-cover-image :cover-image="article.coverImage" :cover-image-size="coverImageSize"></cbd-article-cover-image>
             </div> 
-            <div v-html="viewArticle.content" class="ck-content"></div>          
+            <div v-html="articleContent" class="ck-content"></div>          
         </div>
     </div>
 </template>
@@ -14,23 +14,19 @@
     import { computed, onMounted, nextTick } from 'vue';
     import { lstring } from '../../components/kb/filters';
     import cbdArticleCoverImage from '../../components/common/cbd-article-cover-image.vue';
-    import { domPurify } from "../../services/dompurify";
+    import { sanitizeHtml } from "../../services/html.sanitize";
     
     const props = defineProps({
-        hideCoverImage: { type: Boolean, required: false, default: false },
+        showCoverImage: { type: Boolean, required: false, default: true },
         article: { type: Object, required: false, default: undefined },
         coverImageSize: { type: String, required: false, default: '800x800' }
     });
 
-    const viewArticle = computed(() => {
-        if (props.article) {
-            const sanitizedArticle = {
-                ...props.article,
-                content: domPurify(lstring(props.article.content)) // Sanitize the article content
-            };
-            return sanitizedArticle;
-        }
-        return '';
+    const articleContent = computed(() => {
+        const unsafeHtml = lstring(props.article?.content || '');
+        const safeHtml = sanitizeHtml(unsafeHtml);
+
+        return safeHtml;
     });
 
     const preProcessOEmbed = async () => {
@@ -56,7 +52,7 @@
     };
 
     onMounted(() => {
-        if (viewArticle.value) {
+        if (props.article) {
            setTimeout(() => {
                preProcessOEmbed();
            }, 1000);

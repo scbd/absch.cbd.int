@@ -1,6 +1,6 @@
 <template>
   <div>
-    <cbd-article ref="refCbdArticle" :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true">
+    <cbd-article ref="refCbdArticle" :query="articleQuery" v-if="articleQuery" :show-cover-image="false" :show-edit="true">
       <template #article-empty>&nbsp;</template>
     </cbd-article>
   </div>

@@ -3,7 +3,7 @@
 
     <h1 v-if="!article && forum">{{ lstring(forum.title) }}</h1>
 
-    <cbd-article :query="articleQuery" v-if="articleQuery" :hide-cover-image="true" :show-edit="true"
+    <cbd-article :query="articleQuery" v-if="articleQuery" :show-cover-image="false" :show-edit="true"
       @on-article-load="loadArticle($event)" :admin-tags="articleAdminTags">
       <!-- ToDo: in vue3 will remove $event -->
       <template #article-empty>&nbsp;</template>
@@ -113,7 +113,7 @@
       <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; refresh($event)"></edit-post>
 
       <simple-modal v-if="showHelp" @close="showHelp = false" :title="lstring(helpArticle.title)">
-        <cbd-article :article="helpArticle" :hide-cover-image="false" :show-edit="false"  />
+        <cbd-article :article="helpArticle" :show-cover-image="true" :show-edit="false"  />
       </simple-modal>
 
     </div>
@@ -179,7 +179,7 @@ export default {
     }, 
   },
   watch: {
-    forumId: load
+    loggedIn: load
   },
   methods: {
     lstring,
