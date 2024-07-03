@@ -5,7 +5,7 @@
 
 
 		<document-date></document-date> <br>
-		<section>
+		<section ng-if="document.title || document.resourceTypes || document.authors || document.organizations || document.publisher || document.publicationDate || document.source || document.right">
 			<legend>{{::('viewResourceT.generalInformation'|$translate)}}</legend>
 			<div ng-if="document.title">
 				<label>{{::('viewResourceT.title'|$translate)}}</label>
@@ -67,7 +67,7 @@
 			</div>
 		</section>
 
-		<section>
+		<section ng-if="document.resourceLinks || document.covers">
 			<legend>{{::('viewResourceT.accessResource'|$translate)}}</legend>
 			<div ng-if="document.resourceLinks">
 				<label>{{::('viewResourceT.resourceLinks'|$translate)}}</label>
@@ -112,17 +112,23 @@
 			</div>
 		</section>
 
-		<section ng-if="document.aichiTargets && !isBCH">
+		<section ng-if=" document.gbfTargets || document.cbdSubjects || (!isBCH && document.aichiTargets)">
 			<legend>{{::('viewResourceT.legendKeywords'|$translate)}}</legend>
-			<div>
+			<div ng-if="!isBCH && document.aichiTargets">
 				<label>{{::('viewResourceT.aichiTargets'|$translate)}}</label>
 				<div class="km-value" compare-val="aichiTargets">
 					<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
 				</div>
 			</div>
 
-			<div ng-if="document.cbdSubjects">				
-			
+			<div ng-if="document.gbfTargets">   
+				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>
+				<div class="km-value">                  
+					<view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy>
+				</div>
+			</div> 		
+
+			<div ng-if="document.cbdSubjects">	
 				<label>{{::('viewResourceT.cbdSubjects'|$translate)}}</label>				
 				<div class="km-value" compare-val="cbdSubjects">
 					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
@@ -131,18 +137,21 @@
 
 		</section>
 
-	
 
-		<!-- If BCH, Start -->
-		<section ng-if="isBCH">
+		<!-- If BCH or CHM, Start -->
+		<section ng-if="isBCH || isCHM">
 			<!-- <legend>Keywords related to Biosafety</legend> -->
 			<div ng-if="document.biosafety.subjects">
 				<label>{{::('viewResourceT.subjects'|$translate)}}</label>
 				<div class="km-value" compare-val="bchSubjects">
 					<view-terms-hierarchy ng-model="document.biosafety.subjects" locale="locale" term-domain="cpbThematicAreas"></view-terms-hierarchy>
 				</div>
-			</div>	
+			</div>
+		</section>
+	
 
+		<!-- If BCH, Start -->
+		<section ng-if="isBCH">
 			<div ng-if="document.biosafety.raRecommend != undefined">
 				<label>{{::('viewResourceT.raRecommend'|$translate)}}</label>
 				<p><a class="Record" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml">https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml</a></p>
@@ -223,8 +232,8 @@
 		</section>
 		<!-- If BCH, End -->
 
-		<!-- If ABS, Start -->
-		<section ng-if="isABS">
+		<!-- If ABS or CHM, Start -->
+		<section ng-if="isABS || isCHM">
 			<!-- <legend>Keywords related to Access and Benefit-Sharing</legend> -->
 			<div ng-if="document.nagoya.subjects ">				
 				<label>{{::('viewResourceT.absThematicAreas'|$translate)}}</label>
@@ -232,6 +241,10 @@
 					<view-terms-hierarchy ng-model="document.nagoya.subjects" locale="locale" term-domain="absSubjects"></view-terms-hierarchy>
 				</div>
 			</div>
+		</section>
+
+		<!-- If ABS, Start -->
+		<section ng-if="isABS">			
 
 			<div ng-if="document.nagoya.keyAreas">
 				<label>{{::('viewResourceT.keyAreas'|$translate)}}</label>
@@ -253,33 +266,6 @@
 
 		</section>
 		<!-- If ABS, End -->
-
-
-		<!-- If CHM, Start -->
-		<section ng-if="isCHM"> 
-			<div ng-if="document.gbfTargets">   
-				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>
-				<div class="km-value">                  
-					<view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy>
-				</div>
-			</div> 	
-
-			<div ng-if="document.nagoya.subjects ">				
-				<label>{{::('viewResourceT.absThematicAreas'|$translate)}}</label>
-				<div class="km-value" compare-val="absSubjects">
-					<view-terms-hierarchy ng-model="document.nagoya.subjects" locale="locale" term-domain="absSubjects"></view-terms-hierarchy>
-				</div>
-			</div>
-			
-			<div ng-if="document.biosafety.subjects">
-				<label>{{::('viewResourceT.subjects'|$translate)}}</label>
-				<div class="km-value" compare-val="bchSubjects">
-					<view-terms-hierarchy ng-model="document.biosafety.subjects" locale="locale" term-domain="cpbThematicAreas"></view-terms-hierarchy>
-				</div>
-			</div>	
-
-		</section>
-		<!-- If CHM, End -->
 
 
 		<section ng-if="document.relevantInformation||document.relevantDocuments">

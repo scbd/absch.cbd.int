@@ -164,7 +164,6 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					if($scope.isBCH || $scope.isCHM) {
 						if ($scope.isBCH){
 							document.nagoya = undefined;
-							document.gbfTargets   =  [{"identifier":"GBF-TARGET-17"}]
 						}
 							
 						if(document.biosafety){
@@ -178,8 +177,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					}
 					if($scope.isABS) {
 						document.biosafety = undefined;
-						//$scope.onResourceTypesChange( document.resourceTypes );					
-						document.gbfTargets   =  [{"identifier":"GBF-TARGET-13"}]
+						//$scope.onResourceTypesChange( document.resourceTypes );	
 					}
 					
 

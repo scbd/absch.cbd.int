@@ -1,4 +1,4 @@
-﻿<div>
+<div>
 	<div class="registerpage-content edit-resource-base-directive">
 		<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" 
 			hide-timer="false" tab="tab"
@@ -166,7 +166,7 @@
 							<section>
 								<div class="no-shadow bg-white">
 									<legend>{{::('editVLRT.keywordsFacilitating'|$translate)}}</legend>
-									<div class="row" ng-if="isABS || isCHM">
+									<div class="row" ng-if="(isABS || isCHM ) && document.aichiTargets">
 										<div class="col-md-12">
 											<div class="km-value">
                                                 <view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
@@ -186,7 +186,7 @@
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group tabular-term-check"  name="cbdSubjects" required  caption="{{::('editVLRT.cbdSubjects'|$translate)}}">
+											<div class="km-control-group tabular-term-check"  name="cbdSubjects" ng-required="{{isCHM}}"  caption="{{::('editVLRT.cbdSubjects'|$translate)}}">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
 												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
@@ -195,25 +195,7 @@
 								</div>
 							</section>
 						<!-- Till now all fields are common for all CHs  -->
-
-						<!-- IF CHM START -->	
-						<section ng-if="isCHM">
-							<div class="no-shadow bg-white">
-								
-
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="km-control-group" required name="nagoya.subjects" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
-											<div km-term-check name="nagoya.subjects" required  ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
-											 binding-type="term[]" tabular-shape="false"></div>
-										</div>
-									</div>
-								</div>
-
-								
-							</div>
-						</section>
-						<!-- IF CHM END -->	
+				
 
 						<!-- IF CHM || BCH START -->	
 						<section ng-if="isCHM || isBCH">
@@ -221,8 +203,8 @@
 								<legend>{{::('editVLRT.keywordsRelatedBiosafety'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="{{::('editVLRT.biosafetyThematicAreas'|$translate)}}">
-											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
+										<div class="km-control-group tabular-term-check" ng-required="{{isBCH}}" name="biosafety.subjects" caption="{{::('editVLRT.biosafetyThematicAreas'|$translate)}}">
+											<div km-term-check name="biosafety.subjects" ng-required="{{isBCH}}" ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
 											binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -234,7 +216,7 @@
 						<!-- IF BCH START -->						
 						<section ng-if="isBCH">
 							<div class="no-shadow bg-white">
-								<legend>{{::('editVLRT.keywordsRelatedBiosafety'|$translate)}}</legend>
+								<!-- <legend>{{::('editVLRT.keywordsRelatedBiosafety'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="{{::('editVLRT.biosafetyThematicAreas'|$translate)}}">
@@ -242,7 +224,7 @@
 											 binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<!-- TODO: need to apply a condition -->
 						        <div >
 									<div class="row" ng-if="hasRiskAssessmentSubject">
@@ -339,20 +321,7 @@
 						</section>
 						<!-- IF BCH END -->
 
-						<!-- IF CHM || ABS START -->	
-						<section ng-if="isCHM || isABS">
-							<div class="no-shadow bg-white">
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="km-control-group" required name="nagoya.subjects" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
-											<div km-term-check name="nagoya.subjects" required  ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
-											 binding-type="term[]" tabular-shape="false"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-						<!-- IF CHM || ABS END -->	
+					
 
 						<!-- IF ABS START -->
 						<section ng-if="isABS ">
@@ -361,20 +330,13 @@
 								<legend>{{::('editVLRT.keywordsRelatedAccess'|$translate)}}</legend>
 								<div class="row" ng-if="isMcc">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="nagoya.mccKeywords" required caption="{{::('editVLRT.mccKeywords'|$translate)}}">
+										<div class="km-control-group" name="nagoya.mccKeywords" required  caption="{{::('editVLRT.mccKeywords'|$translate)}}">
 											<div km-term-check name="nagoya.mccKeywords" required ng-model="document.nagoya.mccKeywords" terms="options.mccKeywords()"
 											 binding-type="term[]"></div>
 										</div>
 									</div>
 								</div>
-								<!-- <div class="row">
-									<div class="col-xs-12">
-										<div class="km-control-group" name="nagoya.subjects" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
-											<div km-term-check name="nagoya.subjects" ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
-											 binding-type="term[]" tabular-shape="false"></div>
-										</div>
-									</div>
-								</div> -->
+								
 
 								<div class="row">
 									<div class="col-xs-12">
@@ -387,6 +349,22 @@
 								</div>
 							</div>
 						</section>
+
+						<!-- IF CHM || ABS START -->	
+						<section ng-if="isCHM || isABS">							
+							<div class="no-shadow bg-white">
+								<legend ng-if="isCHM">{{::('editVLRT.keywordsRelatedAccess'|$translate)}}</legend>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="nagoya.subjects" ng-required="{{isABS}}" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
+											<div km-term-check name="nagoya.subjects"  ng-required="{{isABS}}"  ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
+												binding-type="term[]" tabular-shape="false"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<!-- IF CHM || ABS END -->	
 						<!-- IF ABS END -->
 						<section>
 							<div class="no-shadow bg-white">
