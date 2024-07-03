@@ -37,7 +37,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
               activityScope   : function() {return thesaurusService.getDomainTerms('cbiCpbTypes');},
               targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience', {other:true, otherType:'lstring'});},
               geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},
-              aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
+              aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},         
               gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets');},
               absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');},
               status          : function() {return thesaurusService.getDomainTerms('cbiStatus');},
@@ -192,18 +192,6 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
             document.executingAgencies = undefined;
           if(!document.isCollaboratededByPartners || document.isCollaboratededByPartners == undefined)
             document.collaboratingPartners = undefined;
-
-          if(document.gbfTargets){
-            if($scope.isABS) {
-              document.gbfTargets   =  [{"identifier":"GBF-TARGET-13"}]
-              //$scope.onResourceTypesChange( document.resourceTypes );
-            }
-            if($scope.isBCH) {
-              document.gbfTargets   =  [{"identifier":"GBF-TARGET-17"}]
-              //$scope.onResourceTypesChange( document.resourceTypes );
-            }
-          }
-
           
         var countryRegions = []
         if($scope.countryRegions){
@@ -221,8 +209,11 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
 
         $scope.setDocument({}, true)
         .then(function (doc) {
-          if($scope.realm.is('ABS'))
-            $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
+          if($scope.isABS )
+            $scope.setDocument({gbfTargets:[{"identifier":"GBF-TARGET-13"}]}, true);
+          if($scope.isBCH ) {
+            $scope.setDocument({gbfTargets:[{"identifier":"GBF-TARGET-17"}]}, true);
+          }
           if(doc.countryRegions){
             $q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
                 $scope.countryRegions.countries = _.filter(doc.countryRegions, function(country){
