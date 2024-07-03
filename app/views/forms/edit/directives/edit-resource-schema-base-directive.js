@@ -161,7 +161,10 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					if ( !document )
 						return undefined;
 
-					if($scope.isBCH || $scope.isCHM) {							
+					if($scope.isBCH || $scope.isCHM) {	
+						if ($scope.isBCH && !$scope.hasGBF('GBF-TARGET-13')){
+							document.nagoya= undefined;
+						}						
 						if(document.biosafety){
 							$scope.onLmoCategoriesChange( document.biosafety.addressLmoCategories );
 							$scope.onRaRecommendChange( document.biosafety.raRecommend );
@@ -171,10 +174,11 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 							$scope.onAddressGenesChange(document.biosafety.addressGenes);
 						}					
 					}
-					if($scope.isABS) {
+					if($scope.isABS && !$scope.hasGBF('GBF-TARGET-17')) {
 						document.biosafety = undefined;
 						//$scope.onResourceTypesChange( document.resourceTypes );	
 					}
+				
 					
 
 					var countryRegions = []
@@ -222,12 +226,13 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 
 				}
 
-				$scope.hasGBF13 = function(){								
-					if ($scope.document?.gbfTargets?.find((obj) => obj.identifier === "GBF-TARGET-13"))
+				$scope.hasGBF = function(id){								
+					if ($scope.document?.gbfTargets?.find((obj) => obj.identifier === id))
 						return true;
 					else
 						return false;
-				}
+				}		
+				
 
 				//==================================
 				//

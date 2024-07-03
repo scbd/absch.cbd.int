@@ -129,7 +129,6 @@
 					<div km-terms ng-model="document.gbfTargets">
 						<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
 					</div>             
-					<!-- <view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy> -->
 				</div>
 			</div> 		
 
@@ -139,12 +138,11 @@
 					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
 				</div>
 			</div>
-
 		</section>
 
 
-		<!-- If BCH or CHM, Start -->
-		<section ng-if="isBCH || isCHM">
+		<!-- If BCH or choose GBF17 in ABS and  CHM, Start -->
+		<section>
 			<!-- <legend>Keywords related to Biosafety</legend> -->
 			<div ng-if="document.biosafety.subjects">
 				<label>{{::('viewResourceT.subjects'|$translate)}}</label>
@@ -153,7 +151,7 @@
 				</div>
 			</div>
 		</section>
-	
+
 
 		<!-- If BCH, Start -->
 		<section ng-if="isBCH">
@@ -237,7 +235,7 @@
 		</section>
 		<!-- If BCH, End -->
 
-		<!-- If ABS or in some condition of BCH and  CHM , Start -->	
+		<!-- If ABS or in choose GBF13 in  BCH and CHM , Start -->	
 		<section>
 			<!-- <legend>Keywords related to Access and Benefit-Sharing</legend> -->
 			<div ng-if="document.nagoya.subjects ">				
