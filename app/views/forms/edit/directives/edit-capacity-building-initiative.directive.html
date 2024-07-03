@@ -305,6 +305,16 @@
 						<section>
 							<div class="no-shadow bg-white">
 								<legend>{{::('editCBIT.informationOnThematic'|$translate)}}</legend>
+
+								<!-- only display aichiTargets when there already has value for document.aichiTargets -->							
+								
+								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">
+									<label>{{::('editCBIT.aichiTargets'|$translate)}}</label>
+									<div class="col-md-12">	
+										<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
+									</div>
+								</div>
+
 								<div class="row">
 									<div class="col-md-12">
 										<div class="km-control-group tabular-term-check" name="cbdSubjects"
@@ -315,16 +325,16 @@
 									</div>
 								</div>
 
-								<!-- only display aichiTargets when there already has value for document.aichiTargets -->
-								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">
-									<div class="col-md-12">																			                   
-											<div class="km-value">
-												<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
-											</div>	
-									</div>
-								</div>
-
-								<div class="row">
+								<!-- <div class="row">
+									<div class="col-md-12">
+										<div class="km-control-group" required name="gbfTargets" caption="{{::('editCBIT.gbfTargets'|$translate)}}">
+											<div km-term-check name="gbfTargets" required ng-model="document.gbfTargets"
+												terms="options.gbfTargets()" binding-type="term[]"></div>
+										</div>
+									</div>									
+								</div> -->
+								
+								<div class="row" >
 									<div class="col-md-12">
 										<div class="km-control-group" required name="gbfTargets"
 										caption="{{::('editCBIT.gbfTargets'|$translate)}}">
@@ -332,8 +342,7 @@
 													terms="options.gbfTargets()" binding-type="term[]"></div>
 										</div>
 									</div>
-								</div>
-
+								</div>	
 
 								<div class="row" ng-if="isABS || isCHM">
 									<div class="col-md-12">
@@ -349,7 +358,7 @@
 
 								<div class="row" ng-if="isBCH || isCHM">
 									<div class="col-md-12">
-										<div class="km-control-group tabular-term-check fourth-column" required name="cpbThematicAreas"
+										<div class="km-control-group tabular-term-check fourth-column"  name="cpbThematicAreas"
 												caption="{{::('editCBIT.biosafetyThematicAreas'|$translate)}}">
 												<div km-term-check required name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
 												terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true" tabular-shape="true"></div>
