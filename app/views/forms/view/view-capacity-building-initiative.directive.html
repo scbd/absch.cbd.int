@@ -182,18 +182,20 @@
 			<legend>{{::('viewCdiT.informationOnThematic'|$translate)}}</legend>
 
 			<div ng-show="document.aichiTargets && (isABS || isCHM)">
-				<label>{{::('viewCdiT.aichiTargets'|$translate)}}</label>
-				<div class="km-value" compare-val="Aichi target(s)">
-					<ul class="list">
-						<li ng-repeat="val in document.aichiTargets" ng-bind="val | term:locale"></li>
-					</ul>
+				<label>{{::('viewCdiT.aichiTargets'|$translate)}}</label>			
+				<div class="km-value" compare-val="aichiTargets">
+					<div km-terms ng-model="document.aichiTargets">
+						<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+					</div>
 				</div>
 			</div>
 
 			<div ng-show="document.gbfTargets">
-				<label>{{::('viewCdiT.gbfTargets'|$translate)}}</label>				
+				<label>{{::('viewCdiT.gbfTargets'|$translate)}}</label>	
 				<div class="km-value" compare-val="Gbf target(s)">
-					<view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy>
+					<div km-terms ng-model="document.gbfTargets">
+						<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+					</div>
 				</div>
 			</div>
 			

@@ -311,7 +311,9 @@
 								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">
 									<label>{{::('editCBIT.aichiTargets'|$translate)}}</label>
 									<div class="col-md-12">	
-										<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
+										<div km-terms ng-model="document.aichiTargets">
+											<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+										</div>
 									</div>
 								</div>
 
@@ -325,14 +327,6 @@
 									</div>
 								</div>
 
-								<!-- <div class="row">
-									<div class="col-md-12">
-										<div class="km-control-group" required name="gbfTargets" caption="{{::('editCBIT.gbfTargets'|$translate)}}">
-											<div km-term-check name="gbfTargets" required ng-model="document.gbfTargets"
-												terms="options.gbfTargets()" binding-type="term[]"></div>
-										</div>
-									</div>									
-								</div> -->
 								
 								<div class="row" >
 									<div class="col-md-12">
