@@ -753,7 +753,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     function setExternalFilters(filters){
                         if (filters?.filters ) {
                             filters.filters.forEach( e => {
-                                $scope.saveFilter( e );
+                                if(e.type == 'raw-query')
+                                    saveRawQueryFilter(e.query, e.id, e.name);
+                                else
+                                    $scope.saveFilter( e );
                             } );
                         }
 
@@ -824,11 +827,12 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         return leftMenuFilters
                     }
 
-                    function saveRawQueryFilter(query){
-                        $scope.setFilters['rawQuery'] = {
+                    function saveRawQueryFilter(query, id, name){
+                        $scope.setFilters[id || 'rawQuery'] = {
                             type     : 'rawQuery',
-                            name     : 'Custom query',
-                            id       : query
+                            name     : name || 'Custom query',
+                            query,
+                            id
                         };
                     }
 
@@ -1575,12 +1579,11 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     }
 
                     function buildRawQuery(){
-                        // console.log($scope.setFilters['rawQuery']||{});
-                        const query = ($scope.setFilters['rawQuery']||{}).id;
+                        const queries = getSelectedFilters('rawQuery')
                         // const parseQuery = query.split(':').map(e=>)
                         // return solr.escape(();
 
-                        return query;
+                        return queries.map(e=>e.query||e.id).join(' AND ');
                     }
 
                     function getCountryList(id, list){
