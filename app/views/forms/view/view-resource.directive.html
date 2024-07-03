@@ -117,14 +117,19 @@
 			<div ng-if="!isBCH && document.aichiTargets">
 				<label>{{::('viewResourceT.aichiTargets'|$translate)}}</label>
 				<div class="km-value" compare-val="aichiTargets">
-					<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
+					<div km-terms ng-model="document.aichiTargets">
+						<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+					</div>
 				</div>
 			</div>
 
 			<div ng-if="document.gbfTargets">   
 				<label>{{::('viewResourceT.gbfTargets'|$translate)}}</label>
-				<div class="km-value">                  
-					<view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy>
+				<div class="km-value">     
+					<div km-terms ng-model="document.gbfTargets">
+						<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+					</div>             
+					<!-- <view-terms-hierarchy ng-model="document.gbfTargets" locale="locale" term-domain="gbfTargets"></view-terms-hierarchy> -->
 				</div>
 			</div> 		
 
@@ -232,8 +237,8 @@
 		</section>
 		<!-- If BCH, End -->
 
-		<!-- If ABS or CHM, Start -->
-		<section ng-if="isABS || isCHM">
+		<!-- If ABS or in some condition of BCH and  CHM , Start -->	
+		<section>
 			<!-- <legend>Keywords related to Access and Benefit-Sharing</legend> -->
 			<div ng-if="document.nagoya.subjects ">				
 				<label>{{::('viewResourceT.absThematicAreas'|$translate)}}</label>
@@ -244,8 +249,7 @@
 		</section>
 
 		<!-- If ABS, Start -->
-		<section ng-if="isABS">			
-
+		<section ng-if="isABS">	
 			<div ng-if="document.nagoya.keyAreas">
 				<label>{{::('viewResourceT.keyAreas'|$translate)}}</label>
 				<div class="km-value" compare-val="keyAreas">

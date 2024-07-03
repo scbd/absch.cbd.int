@@ -161,11 +161,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					if ( !document )
 						return undefined;
 
-					if($scope.isBCH || $scope.isCHM) {
-						if ($scope.isBCH){
-							document.nagoya = undefined;
-						}
-							
+					if($scope.isBCH || $scope.isCHM) {							
 						if(document.biosafety){
 							$scope.onLmoCategoriesChange( document.biosafety.addressLmoCategories );
 							$scope.onRaRecommendChange( document.biosafety.raRecommend );
@@ -224,6 +220,13 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 						$scope.document.biosafety.raSubjects = undefined;
 					}
 
+				}
+
+				$scope.hasGBF13 = function(){								
+					if ($scope.document?.gbfTargets?.find((obj) => obj.identifier === "GBF-TARGET-13"))
+						return true;
+					else
+						return false;
 				}
 
 				//==================================
