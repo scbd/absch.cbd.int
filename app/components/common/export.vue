@@ -37,14 +37,14 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="customizedFieldsModalLabel"> {{t('customizeFields')}} </h5>
+                                                <h5 class="modal-title" id="customizedFieldsModalLabel"> {{t('customFields')}} </h5>
                                                 <button type="button" data-bs-dismiss="modal" class="border-0 close" @click="closeModal()"
                                                     aria-label="Close"><i class="bi bi-x-circle-fill icon-lg"></i></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="d-flex align-items-center float-end mb-3">
                                                     <label class="text-sm">
-                                                        <input type="checkbox" @click="selectAll" v-model="selectAllCheckboxes"> {{t('selectAll')}} 
+                                                        <input type="checkbox" @click="selectAll" v-model="selectAllCheckboxes"> {{t('selectAll')}} >
                                                     </label>
                                                     <a @click="clearAll" class="btn btn-link btn-sm">
                                                         <i class="bi bi-x"></i>{{t('clearAll')}}
@@ -149,7 +149,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <div class="float-start">
-                            <button v-if="!isGeneric" @click="openModal" class="btn btn-primary">{{t('customizeFields')}}</button>
+                            <button v-if="!isGeneric" @click="openModal" class="btn btn-primary">{{t('customFields')}}</button>
                         </div> 
                         <div class="float-end">
                             <button type="button" class="btn btn-secondary" aria-label="Close" @click="closeDialog()" :disabled="loading">{{t('cancel')}}</button>
@@ -181,7 +181,7 @@
     const isGeneric = ref(true);
     const selectAllCheckboxes = ref(false);
     const schemaFields = ref([]); // get updated and pass the updated fields to api call.
-    const optionFields = ref({}); // need to show the list of fields in the dialog.
+    const optionFields = ref([]); // to show the list of fields in the dialog.
     const selectedFields = ref([]); // v-modal values for selected optionsFields.
     const downloadFormat  = ref('xlsx');
     const getDownloadRecords = inject('getDownloadRecords');
@@ -219,7 +219,7 @@
     };
     //select all checkbox
     watch(selectedFields, (newVal) => {
-        if (newVal.length > 0 && newVal.length === Object.keys(optionFields.value).length) {
+          if (newVal.length > 0 && newVal.length === Object.keys(optionFields.value).length) {
             selectAllCheckboxes.value = true;
         } else {
             selectAllCheckboxes.value = false;
@@ -256,16 +256,13 @@
         try{
             selectedFields.value = [];
             selectAllCheckboxes.value = false;
-            schemaFields.value = [];
             const responseData = await getDownloadRecords({fields, listType:'initial', format:'json'});
             downloadDocs.value = responseData.docs
             numFound.value     = responseData.numFound;
             isGeneric.value    = responseData.isGeneric;
-            schemaFields.value = responseData.schemaFields;
-            optionFields.value = responseData.schemaFields?Object.fromEntries(
-                Object.entries(responseData.schemaFields).filter(([key, value]) => value !== undefined)
-            ): {}; 
-            schema             = responseData.schema;             
+            schemaFields.value = optionFields.value = responseData.schemaFields ? responseData.schemaFields:[];
+            schema             = responseData.schema;   
+            selectAll(); // select all optionsFields
         }
         catch(e){
                 console.error(e)
