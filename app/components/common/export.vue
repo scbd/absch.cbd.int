@@ -37,7 +37,7 @@
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="customizedFieldsModalLabel"> {{t('selectCustomizedFields')}} </h5>
+                                                <h5 class="modal-title" id="customizedFieldsModalLabel"> {{t('customizeFields')}} </h5>
                                                 <button type="button" data-bs-dismiss="modal" class="border-0 close" @click="closeModal()"
                                                     aria-label="Close"><i class="bi bi-x-circle-fill icon-lg"></i></button>
                                             </div>
@@ -165,7 +165,7 @@
 </template>
 
 <script setup>
-    import { ref, shallowRef, onMounted, inject } from "vue";
+    import { ref, shallowRef, onMounted, inject, watch } from "vue";
     import { Modal } from "bootstrap";
     import  { formatDate, capitalize } from '../kb/filters';
     import { useRealm } from '../../services/composables/realm.js';
@@ -174,15 +174,15 @@
     const { t } = useI18n({ messages });
     const realm = useRealm();
     const exportModal = shallowRef(null);
-     const optionsModal = shallowRef(null);
+    const optionsModal = shallowRef(null);
     const downloadDocs =ref([]);
     const numFound = ref(0);
     const loading = ref(false);
     const isGeneric = ref(true);
-    const schemaFields = ref([]);
     const selectAllCheckboxes = ref(false);
-    const optionFields = ref({});
-    const selectedFields = ref([]);
+    const schemaFields = ref([]); // get updated and pass the updated fields to api call.
+    const optionFields = ref({}); // need to show the list of fields in the dialog.
+    const selectedFields = ref([]); // v-modal values for selected optionsFields.
     const downloadFormat  = ref('xlsx');
     const getDownloadRecords = inject('getDownloadRecords');
 
@@ -192,7 +192,7 @@
 
     let schema = undefined ;
     let modal = null;
-    let checkModal = null;
+    let customizeFieldsModal = null;
     let fields = [
         'rec_schema:schema_EN_s',
         'rec_uniqueIdentifier:uniqueIdentifier_s',
@@ -211,12 +211,20 @@
 
     const openModal =() =>  
     { 
-        checkModal = new Modal(optionsModal.value);
-        checkModal.show();
+        customizeFieldsModal = new Modal(optionsModal.value);
+        customizeFieldsModal.show();
     };
     const closeModal =() => {  
-        checkModal.hide();
+        customizeFieldsModal.hide();
     };
+    //select all checkbox
+    watch(selectedFields, (newVal) => {
+        if (newVal.length > 0 && newVal.length === Object.keys(optionFields.value).length) {
+            selectAllCheckboxes.value = true;
+        } else {
+            selectAllCheckboxes.value = false;
+        }
+    });
    
     const selectAll =() => {   
         if (!selectAllCheckboxes.value) {

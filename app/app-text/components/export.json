@@ -20,10 +20,10 @@
     "cancel":"Cancel",
     "download":"Download",
     "exportInformation" : "To export all available fields, please select one \"Record type\" global filter at a time.",
-    "customizeFields": "Customize fields",
+    "customizeFields": "Customize field(s)",
     "clearAll" : "Clear all",
     "selectAll" : "Select all",
-    "selectCustomizedFields": "Select customized fields"
+    "apply": "Apply"
     
     
 }
