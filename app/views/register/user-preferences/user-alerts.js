@@ -10,8 +10,11 @@ import userAlertsTTranslations from '~/app-text/views/register/user-preferences/
 import frequencies from '~/app-text/views/register/user-preferences/frequency.json'
 import { mergeTranslationKeys } from '../../../services/translation-merge';
 const userAlertsT = mergeTranslationKeys(userAlertsTTranslations);
-    app.directive("userAlerts", ['$rootScope', 'ngDialog', '$routeParams', function ($rootScope, ngDialog, $routeParams) {
-        translationService.set('userAlertsT', userAlertsT); 
+
+    app.directive("userAlerts", ['$rootScope', 'ngDialog', '$routeParams', 'translationService',
+         function ($rootScope, ngDialog, $routeParams, translationService) {
+
+        translationService.set('userAlertsT', userAlertsTTranslations); 
         return {
             restrict: "EA",
             template: template,
