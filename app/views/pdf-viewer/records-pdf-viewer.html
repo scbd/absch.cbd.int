@@ -1,4 +1,4 @@
-<div class="record-pdf-viewer" style="margin-left:10%;margin-right:10%">
+<div style="margin-left:10%;margin-right:10%">
 
     <style>
         pdfviewer canvas {
@@ -8,11 +8,8 @@
         }
 
         .title-bar {
-            min-height: 50px;
             background: #fff;
-            border-bottom: 1px solid #ddd;
-            text-align: center;
-            padding-top: 10px;
+            border-bottom: 1px solid #ddd;            
         }
         /* #viewPdf{
             position: inherit!important;
@@ -20,23 +17,27 @@
         } */
 
     </style>
-    <div class="row">
-        <div class="col-4 mt-3 mb-3">       
+    <div class="row title-bar">
+        <div class="col-4 mt-1 mb-1">       
             <span class="me-2">{{::('pdfViewerT.viewIn'|$translate)}}
                 <div class="btn-group ms-2 languages">
-                    <a ng-repeat="(key, value) in languages" rel="noopener" ng-href="#" ng-click="loadLangPdf(key)" ng-bind="key" data-bs-toggle="tooltip" data-bs-placement="top" title="{{value}}" ng-class="{'active': key == pdfLocale}" class="btn btn-primary px-3"></a>
+                    <a ng-repeat="(key, value) in languages" rel="noopener" ng-href="#" ng-click="loadLangPdf(key)"
+                     ng-bind="key|uppercase" data-bs-toggle="tooltip" data-bs-placement="top" 
+                     title="{{value}}" ng-class="{'active': key == pdfLocale, 'disabled':loading}" class="btn btn-primary px-3 bs-tooltip"></a>
                 </div>
             </span>
         </div>
         <div class="col-4 pt-4 text-center mb-3">  
-            <span class="py-2">{{::('pdfViewerT.fileName'|$translate)}} : <span ng-bind="pdf.fileName|uppercase"></span></span>
+            <span class="py-2">{{::('pdfViewerT.fileName'|$translate)}} : <strong ng-bind="pdf.fileName|uppercase"></strong></span>
         </div>
-        <div class="col-4 mt-3 mb-3">
+        <div class="col-4 mt-1 mb-1">
             <div class="btn-group float-end" role="group">
-                <a rel="noopener" ng-href="{{pdf.src}}" download="{{pdf.fileName|encodeURIComponent}}" class="btn btn-primary px-1 me-2 rounded" target="_blank">
+                <a rel="noopener" ng-href="{{pdf.src}}" download="{{pdf.fileName|encodeURIComponent}}"
+                 class="btn btn-primary px-1 me-2 rounded" target="_blank" ng-class="{'disabled':loading}">
                     <i class="fa fa-download"></i> {{::('pdfViewerT.download'|$translate)}}
                 </a>
-                <a rel="noopener" ng-click="loadLangPdf(pdfLocale, true)" ng-class="{'active': lang == pdfLocale}" class="btn btn-primary px-1 rounded" data-bs-toggle="tooltip" data-bs-placement="top" title="{{::('pdfViewerT.toolTipMessage'|$translate)}}">
+                <a rel="noopener" ng-click="loadLangPdf(pdfLocale, true)" ng-class="{'active': lang == pdfLocale, 'disabled':loading}" 
+                    class="btn btn-primary px-1 rounded bs-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="{{('pdfViewerT.toolTipMessage'|$translate)}}">
                     <i class="fa fa-refresh"></i> {{::('pdfViewerT.regeneratePdf'|$translate)}} ({{pdfLocale|uppercase}})
                 </a>
             </div>

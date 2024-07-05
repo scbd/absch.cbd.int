@@ -21,36 +21,17 @@ app.directive("editResource", ["$controller", "$location", function ($controller
 
             $controller('editController', {$scope: $scope});
 
-            $scope.setOptions();
-            //============================================================
-            //
-            //============================================================
-            $scope.setTarget16 = function (document) {
-
-                document = document || $scope.document;
-
-                if (!document)
-                    return undefined;
-
-                if(document.aichiTargets){
-                    var hasTarget16 = _.find(document.aichiTargets, { "identifier": "AICHI-TARGET-16"});
-
-                    if(!hasTarget16)
-                        document.aichiTargets.push({identifier: "AICHI-TARGET-16"});
-
-                        $scope.document.aichiTargets = document.aichiTargets;
-                }
-                else {
-                    $scope.document.aichiTargets = [{identifier: "AICHI-TARGET-16"}];
-                }
-            };
+            $scope.setOptions();           
 
             //============================================================
             //
             //============================================================
             var newDocument = {};
             if($scope.isABS)
-                newDocument = {aichiTargets: [{identifier: "AICHI-TARGET-16"}]}
+                newDocument = {gbfTargets: [{"identifier":"GBF-TARGET-13"}]}
+        
+            if($scope.isBCH)
+                newDocument = {gbfTargets: [{"identifier":"GBF-TARGET-17"}]}
 
             $scope.setDocument(newDocument, true)
             .then(function(doc){

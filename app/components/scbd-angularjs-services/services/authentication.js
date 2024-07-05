@@ -26,7 +26,7 @@ import './apiUrl';
         var pToken;
         var authenticationFrameQ = $q(function(resolve, reject){
             var search = $location.search();
-            if(search.embed){
+            if(search.embed || window.scbdApp.isPrerender){
                 resolve();
                 console.warn('accounts is not available app loaded for embed purpose.')
                 return;

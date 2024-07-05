@@ -1,4 +1,4 @@
-﻿import request from 'superagent'
+
 export default function(req, res){
     let sitemapName = process.env.CLEARINGHOUSE.toLowerCase();
     if(req.params.num)

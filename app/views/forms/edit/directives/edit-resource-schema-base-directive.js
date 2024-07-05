@@ -32,6 +32,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 				 translationService.set('editVLRT', editVLRT);
 				$scope.isABS = realm.is('ABS');
 				$scope.isBCH = realm.is('BCH');
+				$scope.isCHM = realm.is('CHM');
 				$scope.user = $rootScope.user;
 				$scope.countryRegions		= {};
 				// TODO: where this code is using
@@ -73,6 +74,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 								return terms;
 							})
 						},
+						gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets');},
 						aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
 						bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
 						bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
@@ -159,8 +161,10 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					if ( !document )
 						return undefined;
 
-					if($scope.isBCH) {
-						document.nagoya = undefined;
+					if($scope.isBCH || $scope.isCHM) {	
+						if ($scope.isBCH && !$scope.hasGBF('GBF-TARGET-13')){
+							document.nagoya= undefined;
+						}						
 						if(document.biosafety){
 							$scope.onLmoCategoriesChange( document.biosafety.addressLmoCategories );
 							$scope.onRaRecommendChange( document.biosafety.raRecommend );
@@ -168,12 +172,14 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 							$scope.onAddressModifiedOrganismsChange(document.biosafety.addressModifiedOrganisms);
 							$scope.onAddressOrganismsChange(document.biosafety.addressOrganisms);
 							$scope.onAddressGenesChange(document.biosafety.addressGenes);
-						}
+						}					
 					}
-					if($scope.isABS) {
+					if($scope.isABS && !$scope.hasGBF('GBF-TARGET-17')) {
 						document.biosafety = undefined;
-						//$scope.onResourceTypesChange( document.resourceTypes );
+						//$scope.onResourceTypesChange( document.resourceTypes );	
 					}
+				
+					
 
 					var countryRegions = []
 					if($scope.countryRegions){
@@ -219,6 +225,14 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					}
 
 				}
+
+				$scope.hasGBF = function(id){								
+					if ($scope.document?.gbfTargets?.find((obj) => obj.identifier === id))
+						return true;
+					else
+						return false;
+				}		
+				
 
 				//==================================
 				//

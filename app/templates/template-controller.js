@@ -146,7 +146,7 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
                 return;
             var queryString = $location.search();
             
-            if(!queryString.print && !queryString.embed){
+            if(!queryString.print && !queryString.embed && !window.scbdApp.isPrerender){
                 
                 require(["slaask"], function (_slaask) {
 

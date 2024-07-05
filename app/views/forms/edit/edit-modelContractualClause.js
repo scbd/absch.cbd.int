@@ -6,11 +6,14 @@ import '~/views/forms/view/view-resource.directive';
 
   export { default as template } from './edit-modelContractualClause.html';
 
-  export default ["$scope", "thesaurusService", "$controller", "$location",
-                function ($scope, thesaurusService, $controller, $location) {
+  export default ["$scope", "thesaurusService", "$controller", "$location","realm",
+                function ($scope, thesaurusService, $controller, $location,realm) {
 
 
     $scope.path=$location.path();
+    $scope.isABS = realm.is('ABS');
+    $scope.isBCH = realm.is('BCH');
+    $scope.isCHM = realm.is('CHM');
 
     //$scope.organizationsRef = [];
     $controller('editController', {$scope: $scope});
@@ -23,7 +26,15 @@ import '~/views/forms/view/view-resource.directive';
     //============================================================
     //
     //============================================================
-    $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true)
+
+    var newDocument = {};
+    if($scope.isABS)
+        newDocument = {gbfTargets: [{"identifier":"GBF-TARGET-13"}]}
+
+    if($scope.isBCH)
+        newDocument = {gbfTargets: [{"identifier":"GBF-TARGET-17"}]}  
+
+    $scope.setDocument(newDocument, true)
     .then(function(doc){
         $scope.isMcc = true
         if(doc.countryRegions){

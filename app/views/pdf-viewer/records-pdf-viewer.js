@@ -1,7 +1,8 @@
-﻿import app from '~/app';
+import app from '~/app';
 import pdfObject from 'pdf-object';
 import '~/components/scbd-angularjs-services/main';
 import pdfViewerT from '~/app-text/views/pdf-viewer/records-pdf-viewer.json';
+import { languages } from '~/app-data/un-languages.js';
     app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',
@@ -20,18 +21,11 @@ import pdfViewerT from '~/app-text/views/pdf-viewer/records-pdf-viewer.json';
      })
     
     export { default as template } from './records-pdf-viewer.html';
-export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout', 'translationService',
-    function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout, translationService) {
+export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout', 'translationService', '$element',
+    function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout, translationService, $element) {
         translationService.set('pdfViewerT', pdfViewerT);
         $scope.currentTime = new Date().getTime();
-        $scope.languages = {
-            "ar" :"Arabic"  ,
-            "en" :"English" ,
-            "es" :"Spanish" ,
-            "fr" :"French"  ,
-            "ru" :"Russian" ,
-            "zh" :"Chinese" 
-        };
+        $scope.languages = languages;
         $scope.pdfLocale = $location.search()?.lang || locale;
         $scope.pdf = {};
         $scope.loading = true;
@@ -69,6 +63,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             $timeout(function(){
                 $scope.unloadPdf = false;
                 $scope.loading = false;
+                $element.find('.bs-tooltip').tooltip()
             }, 500)
         }
 
@@ -129,8 +124,17 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                 $timeout(()=>$scope.loadLangPdf(language), 100);    
             }
         }
+        
+        if(window.scbdApp.isCrawler){
+            let url = `/database/${$route.current.params.documentId}`;
+            if($route.current.params.revision)
+                url += `-${$route.current.params.revision}`;
 
-        loadPdfDocumentDetails($route.current.params.documentId)
+            $location.path(url)
+        }
+        else{
+            loadPdfDocumentDetails($route.current.params.documentId);
+        }
     }];
 
 
