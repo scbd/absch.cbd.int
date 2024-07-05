@@ -222,7 +222,7 @@
 		<div ng-show="document.cpbThematicAreas">
 			<label>{{::('viewCdiT.cpbThematicAreas'|$translate)}}</label>
 			<div class="km-value" compare-val="Biosafety thematic areas">
-				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale"	term-domain="cpbThematicAreas" ></view-terms-hierarchy>
+				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale"  term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
 			</div>
 		</div>
 		
