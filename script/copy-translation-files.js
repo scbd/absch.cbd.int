@@ -1,9 +1,9 @@
 
-const _        = require('lodash');
-const path     = require('path');
-const readline = require('readline');
-const finder   = require('fs-finder');
-const fs       = require('fs/promises');
+import _        from 'lodash';
+import path     from 'path';
+import readline from 'readline';
+import finder   from 'fs-finder';
+import fs       from 'fs/promises';
 
 const supportedLanguages = ['ar', 'ru', 'zh', 'fr', 'es'] 
 const destination = process.cwd() + '/i18n'
@@ -49,7 +49,6 @@ async function copyFiles(source, destination){
             const directory = directories[i];
             
             var lang = directory.split('-');
-            console.log(lang)
             if(lang && lang.length > 1){
                 if(supportedLanguages.includes(lang[0])){
                     var language = lang[0];
@@ -73,7 +72,7 @@ async function copyFolderFiles(sourceRootPath, source, lang, destination){
         const stats = await fs.stat(filepath)
             
         if(stats.isFile()){
-            const destinationFileName = `${destination}/${lang}${filepath.replace(sourceRootPath, '')}`
+            const destinationFileName = `${destination}/${lang}${filepath.replace(sourceRootPath, '').replace('/absch.cbd.int', '')}`
             console.log(destinationFileName)
 
             const dirName = path.dirname(destinationFileName);
@@ -82,13 +81,40 @@ async function copyFolderFiles(sourceRootPath, source, lang, destination){
                 await fs.mkdir(dirName, {recursive:true});
             }
 
-            await fs.copyFile(filepath, destinationFileName);
+            if(path.extname(filepath) == '.json'){
+                let jsonFileKeys = (await import(filepath, { with: { type: 'json' }})).default;
+                jsonFileKeys = removeEmpty(jsonFileKeys);
+
+                await fs.writeFile(`${destinationFileName}`, JSON.stringify({...jsonFileKeys}, undefined, 2));
+            }
+            else
+                await fs.copyFile(filepath, destinationFileName);
         }
         else if(stats.isDirectory()){
             await copyFolderFiles(sourceRootPath, filepath, lang, destination);
         }
     }
 }
+
+const removeEmpty = (obj)=> {
+
+    return function remove(current) {
+      _.forOwn(current, function (value, key) {
+        if (_.isUndefined(value) || _.isNull(value) || _.isNaN(value) ||
+          (_.isString(value) && _.isEmpty(value)) ||
+          (_.isObject(value) && _.isEmpty(remove(value)))) {
+  
+          delete current[key];
+        }
+      });
+
+      if (_.isArray(current)) _.pull(current, undefined);
+  
+      return current;
+  
+    }(_.cloneDeep(obj));
+}
+
 // const source = '/Users/blaisefonseca/Downloads/Imported';
 // copyFiles(source, '/Users/blaisefonseca/Projects/absch.cbd.int/i18n')
 

@@ -1,6 +1,10 @@
 ﻿<div id="innerPage">
-    <div class="mastHead" ng-class="{'bg-abs':isABS}">
-        <div class="text-white" ng-if="infoBlockUrl" ng-include="infoBlockUrl"></div>
+    <div class="mastHead" ng-class="{'bg-abs':isABS,'bg-bch':isBCH,'bg-chm':isCHM }">
+         <div class="text-white" ng-if="cbdArticleComponent && articleQuery">
+            <cbd-article ng-vue="cbdArticleComponent" :query="articleQuery"
+             :show-cover-image="false" :show-edit="true" :admin-tags="adminTags">
+            </cbd-article>
+        </div>   
     </div>
 
     <div class="innerPageContent">
@@ -69,7 +73,7 @@
         </div>
         <br>
 
-        <div class="register-content-content" style="padding:5px;">
+        <div ng-if="!isCHM" class="register-content-content" style="padding:5px;">
             <div class="panel panel-default">
 
                 <div class="panel-heading">
@@ -95,7 +99,7 @@
 
                 <div class="panel-footer text-right">
                     <button type="button" class="btn btn-primary" ng-click="analyze()">{{::('reportsT.analyze'|$translate)}} »</button>
-                </div>
+                </div>            
 
             </div>
         </div>

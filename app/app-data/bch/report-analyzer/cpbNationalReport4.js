@@ -1,5 +1,6 @@
-import nr4Data from '../../../app-text/report-analyzer/bch-cpbNationalReport4.json';
-
+import nr4Translation from '../../../app-text/report-analyzer/bch-cpbNationalReport4.json' assert {type:'json'};
+import { mergeTranslationKeys } from '../../../services/translation-merge.js';
+const nr4Data = mergeTranslationKeys(nr4Translation);
 export const cpbNationalReport4 = [
    {
       "key":"General",

@@ -4,9 +4,10 @@ import "angular-route";
 import { securize, asyncLogError, mapView, currentUser, injectRouteParams } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper';
 import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
-import routesLabels from '~/app-text/routes/bch-route-labels.json';
+import routesLabelsTranslations from '~/app-text/routes/bch-route-labels.json';
+import { mergeTranslationKeys } from '../services/translation-merge';
 import * as theBch from '~/views/home/bch';
-
+const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 const bchRouteUrls = {
   theBch,
   submit                               : { component: ()=>asyncLogError(import('~/views/register/record-types')) },

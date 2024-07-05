@@ -1,0 +1,25 @@
+{
+    "generalInformation": "General information",
+    "country": "Country",    
+    "targets": "Targets",
+    "category":  "Category of progress towards the implementation of the selected target",
+    "rate":  "Rate of progresses toward the implementation of the selected target",
+    "date":  "Date the assessment was done",
+    "summary":"Summary of the assessment of progresses toward the implementation of the selected target",
+    "indicatorsAndActivities": "Indicators and Activities",
+    "indicators":"Indicator(s) used in this assessment",    
+    "anyOtherTools":"Any other tools or means used for assessing progress", 
+    "levelOfConfidence":"Level of confidence",
+    "levelOfAboveAssessment": "Level of confidence of the above assessment",
+    "adequacy": "Adequacy of monitoring information to support assessment",
+    "monitoringSystem":"Monitoring system for the target",
+    "noIndicators":"The country has not used indicators to assess progress towards this national target.",
+    "linkToIndicator":"Link to Indicator(s) used in this assessment",
+    "linkToActivity":"Link to National Activity(ies) related to this assessment",
+    "relevantDocumentAndInformation":"Relevant documents and information",
+    "relevantInfo": "Relevant information", 
+    "relevantWebsites":"Relevant websites, links, and files",
+    "additionalInformation": "Additional information"
+}
+
+

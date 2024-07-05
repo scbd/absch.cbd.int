@@ -1,5 +1,15 @@
 {
   "cpNfp": "Correspondant national du Protocole de Cartagena sur la prévention des risques biotechnologiques",
-  "bchNfp": "Correspondant national du Centre d'échange pour la prévention des risques biotechnologiques",
-  "emCp": "Point de contact des mesures d'urgence (article 17)"
+  "bchNfp": "Correspondants nationaux pour le Centre d’échange pour la prévention des risques biotechnologiques (CEPRB)",
+  "emCp": "Point de contact des mesures d'urgence (article 17)",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:50.184Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "cpNfp": "3ee8da14e57c11e0dea646aff1dc3509",
+      "bchNfp": "09a38ef757ac6d986466995f216f48c8",
+      "emCp": "bbfaa6dad281e132b5bfeabf2a9896e2"
+    }
+  }
 }

@@ -1,4 +1,6 @@
-import fpCategoryTitle from '~/app-text/report-analyzer/abs-focal-point-category.json';
+import fpCategoryTitleTranslations from '~/app-text/report-analyzer/abs-focal-point-category.json';
+import { mergeTranslationKeys } from '../../services/translation-merge';
+const fpCategoryTitle = mergeTranslationKeys(fpCategoryTitleTranslations);
 
 export const categories = [
     { 

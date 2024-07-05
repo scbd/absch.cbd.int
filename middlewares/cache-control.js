@@ -2,7 +2,7 @@
 //
 //
 //============================================================
-function setCustomCacheControl(res, path) {
+export default function setCustomCacheControl(res, path) {
 
     let exceptionFiles = ['assets/widgets.js']
     let oneYear              = 365*24*60*60;
@@ -30,9 +30,4 @@ function setCustomCacheControl(res, path) {
 		return res.setHeader('Cache-Control', 'public, max-age=0');
 
     return res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-}
-
-
-module.exports = {
-    setCustomCacheControl:setCustomCacheControl
 }

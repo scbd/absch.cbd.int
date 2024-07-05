@@ -16,7 +16,7 @@ import { npInterimNationalReport1 } from '~/app-data/abs/report-analyzer/npInter
 import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1';
 import prevQuestionsMapping from '~/app-data/abs/report-analyzer/mapping/npNationalReoprtInterim-1.json';
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
 export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout",
     'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm', 'translationService',
     function ($scope, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
@@ -163,7 +163,8 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
 
         $scope.onQuestionAnswerChange = function (questionAnswers) {
             safeApply(() => {
-                $scope.document = { ...($scope.document), ...(questionAnswers || {}) };
+                const  {header, government,reportPeriodStartDate, reportPeriodEndDate, notes} = $scope.document;
+                $scope.document = { ...{header, government,reportPeriodStartDate, reportPeriodEndDate, notes}, ...(questionAnswers || {}) };
             })
         }
         //==================================

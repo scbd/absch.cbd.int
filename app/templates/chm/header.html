@@ -21,8 +21,7 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/countries" >{{::('chmHeaderT.countryProfiles'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >{{::('chmHeaderT.help'|$translate)}}</a></li>
 <!--                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/reports" >National reports</a></li>-->
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/forums">{{::('chmHeaderT.forums'|$translate)}}</a></li>
-                </ul>
+                   </ul>
               </div>
           </nav>
     </header>
@@ -57,7 +56,6 @@
                     <ul class="dropdown-menu p-0" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton1" >
                         <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="search">{{::('chmHeaderT.records'|$translate)}}</a></li>
                         <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/submissions-to-notifications">{{::('chmHeaderT.submissionsOnNotifications'|$translate)}}</a></li>
-                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/reports">{{::('chmHeaderT.nra'|$translate)}}</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a rel="noopener" translation-url href="/register"
@@ -101,40 +99,16 @@
                     <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
                         <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb">{{::('chmHeaderT.kb'|$translate)}}</a></li>
                         <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/faqs">{{::('chmHeaderT.faq'|$translate)}}</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://chm3-vle.unep.org/" target="_blank">{{::('chmHeaderT.trainingMaterials'|$translate)}}</a></li>
                         <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://chm-training.cbd.int">{{::('chmHeaderT.trainingSite'|$translate)}}</a></li>
                         <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/articles/619c55580c1ff000011c1c46/Contact-us/chm">{{::('chmHeaderT.contactUs'|$translate)}}</a></li>
                     </ul>
                 </li>
              
-                <li hover-effect=".dropdown-menu" class="nav-item dropdown">
-                    <a href="#" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
-                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">{{::('chmHeaderT.forums'|$translate)}}</a>
-                    <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/chm-on-chm">{{::('chmHeaderT.chmForum'|$translate)}}</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/risk-assessment/forum">{{::('chmHeaderT.portalsRiskAssessment'|$translate)}}</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/detection">{{::('chmHeaderT.networkLabsForum'|$translate)}}</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/chm-iac">{{::('chmHeaderT.chmIac'|$translate)}}</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/regional-advisors">{{::('chmHeaderT.unepForum'|$translate)}}</a></li>
-                    </ul>
-                </li>
-    
+     
                 <li ng-if="isTRG" class="nav-item"><a href="https://chm.cbd.int/"
                     style="color: black !important;"    class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('chmHeaderT.leaveTrainingSite'|$translate)}}</a></li>
             </ul>
-            <ul class="nav">
-                <li hover-effect=".dropdown-menu" class="nav-item dropdown protocol-options">
-                    <a href="#"  class="fw-bold menu-navigation-link nav-link link-dark p-0 dropdown-toggle" type="button"
-                        id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span> {{::('chmHeaderT.protocol'|$translate)}} </span> 
-                    </a>
-
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://chm.cbd.int/protocol">{{::('chmHeaderT.cartagenaProtocol'|$translate)}}</a></li>
-                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://chm.cbd.int/protocol/supplementary/">{{::('chmHeaderT.suppProtocol'|$translate)}}</a></li>
-                    </ul>
-                </li>
-            </ul>
+ 
         </div>
     </nav>
 

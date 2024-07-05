@@ -1,6 +1,7 @@
-import fieldsT from '~/app-text/views/search/search-results/abs-download-schemas.json';
+import fieldsTranslations from '~/app-text/views/search/search-results/abs-download-schemas.json';
+import { mergeTranslationKeys } from '../../services/translation-merge';
 import { downloadSchemas as commonDownloadSchemas } from '~/app-data/common-download-schemas';
-
+const fieldsT = mergeTranslationKeys(fieldsTranslations);
 export const downloadSchemas = {	
 	...commonDownloadSchemas,
 	
@@ -22,13 +23,146 @@ export const downloadSchemas = {
         "subjectMatter"               : fieldsT["absPermit.subjectMatter"              ],
         "keywords"                    : fieldsT["absPermit.keywords"                   ],
         "specimens"                   : fieldsT["absPermit.specimens"                  ],
-        "taxonomies"                  : fieldsT["absPermit.taxonomies"                 ],
-        "usages"                      : fieldsT["absPermit.usages"                     ],
-        "usagesDescription"           : fieldsT["absPermit.usagesDescription"          ],
-        "thirdPartyTransferCondition" : fieldsT["absPermit.thirdPartyTransferCondition"],
-        "permitFiles"                 : fieldsT["absPermit.permitFiles"                ],
-        "permitDescription"           : fieldsT["absPermit.permitDescription"          ],
-        "relevantInformation"         : fieldsT["absPermit.relevantInformation"        ],
+        "taxonomies"                 : fieldsT["absPermit.taxonomies"                 ],
+        "usages"                     : fieldsT["absPermit.usages"                     ],
+        "usagesDescription"          : fieldsT["absPermit.usagesDescription"          ],
+        "thirdPartyTransferCondition": fieldsT["absPermit.thirdPartyTransferCondition"],
+        "permitFiles"                : fieldsT["absPermit.permitFiles"                ],
+        "permitDescription"          : fieldsT["absPermit.permitDescription"          ],
+        "relevantInformation"        : fieldsT["absPermit.relevantInformation"        ],
     },
-}
 
+    "absCheckpointCommunique":{
+        "uniqueId"                             : fieldsT["absCheckpointCommunique.uniqueId"],
+        "government"                           : fieldsT["absCheckpointCommunique.government"],
+        "publishedOn"                          : fieldsT["absCheckpointCommunique.publishedOn"],
+        "title"                                : fieldsT["absCheckpointCommunique.title"],
+        "absCheckpoints"                       : fieldsT["absCheckpointCommunique.absCheckpoints"],
+        "absCheckpointCommunique.dateCollected": fieldsT["dateCollected"],
+        "absIRCCsNotAvailable"                 : fieldsT["absCheckpointCommunique.absIRCCsNotAvailable"],
+        "absIRCCs"                             : fieldsT["absCheckpointCommunique.absIRCCs"],
+        "sourceCountries"                      : fieldsT["absCheckpointCommunique.sourceCountries"],
+        "subjectMatter"                        : fieldsT["absCheckpointCommunique.subjectMatter"],
+        "entityWhoGrantedPIC"                  : fieldsT["absCheckpointCommunique.entityWhoGrantedPIC"],
+        "evidenceOfPIC"                        : fieldsT["absCheckpointCommunique.evidenceOfPIC"],
+        "evidenceOfMAT"                        : fieldsT["absCheckpointCommunique.evidenceOfMAT"],
+        "description"                          : fieldsT["absCheckpointCommunique.description"],
+        "dateOfAccess"                         : fieldsT["absCheckpointCommunique.dateOfAccess"],
+        "type"                                 : fieldsT["type"],
+        "name"                                 : fieldsT["name"],
+        "address"                              : fieldsT["address"],
+        "postalCode"                           : fieldsT["postalCode"],
+        "city"                                 : fieldsT["city"],
+        "state"                                : fieldsT["state"],
+        "country"                              : fieldsT["country"],
+        "phones"                               : fieldsT["phones"],
+        "emails"                               : fieldsT["emails"],
+        "websites"                             : fieldsT["websites"]
+    },
+    
+    "absProcedure":{
+        "uniqueId": fieldsT["absProcedure.uniqueId"],
+        "government": fieldsT["absProcedure.government"],
+        "name": fieldsT["absProcedure.name"],
+        "jurisdiction": fieldsT["absProcedure.jurisdiction"],
+        "contacts": fieldsT["absProcedure.contacts"],
+        "requirements": fieldsT["absProcedure.requirements"],
+        "description": fieldsT["absProcedure.description"],
+        "hasApplicationDocuments": fieldsT["absProcedure.hasApplicationDocuments"],
+        "hasApplicationFees": fieldsT["absProcedure.hasApplicationFees"],
+        "duration": fieldsT["absProcedure.duration"],
+        "relevantMeasures": fieldsT["absProcedure.relevantMeasures"],
+        "keywords": fieldsT["absProcedure.keywords"]
+    },
+
+    "absNationalModelContractualClause":{
+        "uniqueId": fieldsT["absNationalModelContractualClause.uniqueId"],
+        "government": fieldsT["absNationalModelContractualClause.government"],
+        "title": fieldsT["absNationalModelContractualClause.title"],
+        "description": fieldsT["absNationalModelContractualClause.description"],
+        "jurisdiction": fieldsT["absNationalModelContractualClause.jurisdiction"],
+        "relevantMeasures": fieldsT["absNationalModelContractualClause.relevantMeasures"],
+        "keywords": fieldsT["absNationalModelContractualClause.keywords"],
+        "thematicAreas": fieldsT["absNationalModelContractualClause.thematicAreas"],
+        "relevantInformation": fieldsT["absNationalModelContractualClause.relevantInformation"]
+    },
+
+    "modelContractualClause":{
+        "uniqueId"           : fieldsT["modelContractualClause.uniqueId"],
+        "title"              : fieldsT["modelContractualClause.title"],
+        "resourceTypes"      : fieldsT["modelContractualClause.resourceTypes"],
+        "authors"            : fieldsT["modelContractualClause.authors"],
+        "organizations"      : fieldsT["modelContractualClause.organizations"],
+        "publisher"          : fieldsT["modelContractualClause.publisher"],
+        "publicationDate"    : fieldsT["modelContractualClause.publicationDate"],
+        "source"             : fieldsT["modelContractualClause.source"],
+        "rights"             : fieldsT["modelContractualClause.rights"],
+        "resourceLinks"      : fieldsT["modelContractualClause.resourceLinks"],
+        "covers"             : fieldsT["modelContractualClause.covers"],
+        "summary"            : fieldsT["modelContractualClause.summary"],
+        "countryRegions"     : fieldsT["modelContractualClause.countryRegions"],
+        "aichiTargets"       : fieldsT["modelContractualClause.aichiTargets"],
+        "cbdSubjects"        : fieldsT["modelContractualClause.cbdSubjects"],
+        "nagoyaMccKeywords"  : fieldsT["modelContractualClause.nagoyaMccKeywords"],
+        "nagoyaSubjects"     : fieldsT["modelContractualClause.nagoyaSubjects"],
+        "nagoyaKeyAreas"     : fieldsT["modelContractualClause.nagoyaKeyAreas"],
+        "relevantInformation": fieldsT["modelContractualClause.relevantInformation"],
+        "relevantDocuments": fieldsT["modelContractualClause.relevantDocuments"]
+    },
+
+    "communityProtocol":{
+        "uniqueId"           : fieldsT["communityProtocol.uniqueId"],
+        "title"              : fieldsT["communityProtocol.title"],
+        "resourceTypes"      : fieldsT["communityProtocol.resourceTypes"],
+        "authors"            : fieldsT["communityProtocol.authors"],
+        "organizations"      : fieldsT["communityProtocol.organizations"],
+        "publisher"          : fieldsT["communityProtocol.publisher"],
+        "publicationDate"    : fieldsT["communityProtocol.publicationDate"],
+        "source"             : fieldsT["communityProtocol.source"],
+        "rights"             : fieldsT["communityProtocol.rights"],
+        "resourceLinks"      : fieldsT["communityProtocol.resourceLinks"],
+        "covers"             : fieldsT["communityProtocol.covers"],
+        "summary"            : fieldsT["communityProtocol.summary"],
+        "countryRegions"     : fieldsT["communityProtocol.countryRegions"],
+        "aichiTargets"       : fieldsT["communityProtocol.aichiTargets"],
+        "cbdSubjects"        : fieldsT["communityProtocol.cbdSubjects"],
+        "nagoyaSubjects"     : fieldsT["communityProtocol.nagoyaSubjects"],
+        "nagoyaKeyAreas"     : fieldsT["communityProtocol.nagoyaKeyAreas"],
+        "relevantInformation": fieldsT["communityProtocol.relevantInformation"],
+        "relevantDocuments"  : fieldsT["communityProtocol.relevantDocuments"]
+    },
+
+
+    "absCheckpoint":{
+        "uniqueId"            : fieldsT["absCheckpoint.uniqueId"],
+        "government"          : fieldsT["absCheckpoint.government"],
+        "name"                : fieldsT["absCheckpoint.name"],
+        "responsibilities"    : fieldsT["absCheckpoint.responsibilities"],
+        "jurisdiction"        : fieldsT["absCheckpoint.jurisdiction"],
+        "informAllAuthorities": fieldsT["absCheckpoint.informAllAuthorities"],
+        "contactsToInform"    : fieldsT["absCheckpoint.contactsToInform"],
+        "relevantInformation" : fieldsT["absCheckpoint.relevantInformation"]
+    },
+
+    "measure":{
+        "uniqueId"                 : fieldsT["measure.uniqueId"],
+        "isAmendment"              : fieldsT["measure.isAmendment"],
+        "amendedMeasures"          : fieldsT["measure.amendedMeasures"],
+        "amendmentsDescription"    : fieldsT["measure.amendmentsDescription"],
+        "government"               : fieldsT["measure.government"],
+        "title"                    : fieldsT["measure.title"],
+        "status"                   : fieldsT["measure.status"],
+        "type"                     : fieldsT["measure.type"],
+        "jurisdiction"             : fieldsT["measure.jurisdiction"],
+        "description"              : fieldsT["measure.description"],
+        "isModelContractualClause" : fieldsT["measure.isModelContractualClause"],
+        "documents"                : fieldsT["measure.documents"],
+        "documentTranslations"     : fieldsT["measure.documentTranslations"],
+        "linkedMeasures"           : fieldsT["measure.linkedMeasures"],
+        "linkedMeasuresDescription": fieldsT["measure.linkedMeasuresDescription"],
+        "authorities"              : fieldsT["measure.authorities"],
+        "absMesasureNotApplicable" : fieldsT["measure.absMesasureNotApplicable"],
+        "relevantInformation"      : fieldsT["measure.relevantInformation"],
+        "relevantDocuments"        : fieldsT["measure.relevantDocuments"]
+    }
+}

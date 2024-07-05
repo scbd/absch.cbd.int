@@ -6,11 +6,15 @@ import 'ngDialog';
 import '~/services/main';
 import '~/views/register/directives/register-top-menu';
 import '~/components/scbd-angularjs-services/main';
-import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.json';
+import userAlertsTTranslations from '~/app-text/views/register/user-preferences/user-alerts.json';
 import frequencies from '~/app-text/views/register/user-preferences/frequency.json'
+import { mergeTranslationKeys } from '../../../services/translation-merge';
+const userAlertsT = mergeTranslationKeys(userAlertsTTranslations);
 
-    app.directive("userAlerts", ['$rootScope', 'ngDialog', '$routeParams', function ($rootScope, ngDialog, $routeParams) {
+    app.directive("userAlerts", ['$rootScope', 'ngDialog', '$routeParams', 'translationService',
+         function ($rootScope, ngDialog, $routeParams, translationService) {
 
+        translationService.set('userAlertsT', userAlertsTTranslations); 
         return {
             restrict: "EA",
             template: template,
@@ -35,7 +39,6 @@ import frequencies from '~/app-text/views/register/user-preferences/frequency.js
                     $scope.isDeleteAllow = false ;
                     $scope.frequencies = frequencies;
                     $scope.userSettings = {};
-                    translationService.set('userAlertsT', userAlertsT); 
                     
                     const systemQueries = {
                         recordsOverview : {

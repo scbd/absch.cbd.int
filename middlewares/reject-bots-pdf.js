@@ -1,6 +1,6 @@
 import { isbot } from "isbot";
 
-export default function(req, res, next){
+export function rejectBotsPdf(req, res, next){
   
     const isPrerender = req.header['x-is-prerender'] == true;
     if((!isPrerender && req.query['skip-check']||false) != 'true'){

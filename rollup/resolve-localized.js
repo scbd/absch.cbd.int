@@ -1,88 +1,76 @@
 // rollup.config.js (building more than one bundle)
 import path from 'path'
-import fs   from 'fs'
-import _    from 'lodash'
+import upath from 'upath'
+import fs from 'fs'
+import _ from 'lodash'
+import globToRegExp from 'glob-to-regexp';
 
-const mappings = {};
 
-export default function resolveLocalized(options = {}) {
 
-  const { 
+
+export default function resolveLocalized(options = { }) {
+
+  const {
+    include,
     baseDir,
-    localizedDir 
+    localizedDir,
   } = options;
-  
+
+  const cwd = process.cwd();
+  const baseDirPath      = path.join(cwd, baseDir);
+  const localizedDirPath = path.join(cwd, localizedDir);
+  const basePatternRe    = globToRegExp(upath.join(baseDir, include || '**'));
+
   return {
-    name: 'loadLocalized',
+    name: 'resolveLocalized',
 
-    resolveId(importeeId, importer) {
+    async resolveId(importeeId, importer) {
 
-      if(importeeId.indexOf(baseDir)==0) {
+      const resolved = await this.resolve(importeeId, importer, { skipSelf: true });
 
-        const relativeFilePath = path.relative(baseDir, importeeId);
-        const originalFilePath  = importeeId;
-        const localizedFilePath = path.join(localizedDir, relativeFilePath);
+      if(!resolved)
+        console.debug(importeeId, importer);
+      
+      const { external, id: absolutePath }  = resolved;
 
-        const shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath);
-        
-        if(path.extname(originalFilePath) == '.json' && fs.existsSync(originalFilePath))
-          mappings[localizedFilePath] = originalFilePath;
-       
-       if(shouldUse) {
-         return this.resolve(localizedFilePath, importer, { skipSelf: true });
-       }
-     }
+      if(external) return resolved;
 
-     return null;
-    },
-    transform(code, id) {
+      const relativeUnixPath = upath.relative(cwd, resolved.id);
+      
+      if (basePatternRe.test(relativeUnixPath)) {
 
-      if(mappings[id]) {
-        
-        const enFileData   = fs.readFileSync(mappings[id], {encoding:"utf8"});
+        const originalFilePath  = absolutePath;
+        const relativeFilePath  = path.relative(baseDirPath, absolutePath);
+        const localizedFilePath = path.join(localizedDirPath, relativeFilePath);
 
-        let enJson       = JSON.parse(enFileData.trim());
-        let languageJson = JSON.parse(code.trim());
+        let shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath);
 
-        languageJson = copyProps(languageJson, enJson);
-        
-        code = JSON.stringify(languageJson);
+        if (shouldUse) {
+          return this.resolve(localizedFilePath, importer, { skipSelf: true });
+        }
       }
 
-      return { code, map: this.getCombinedSourcemap() };
-
-    }
+      return null;
+    },
   };
 
 }
 
-function isUseLocalizedVersion(oFilePath, lFilePath) {
+export function isUseLocalizedVersion(oFilePath, lFilePath) {
 
-  if(!fs.existsSync(lFilePath)) return false;
-  if(!fs.existsSync(oFilePath)) return false;
+
+  if (!fs.existsSync(lFilePath)) return false;
+  if (!fs.existsSync(oFilePath)) return false;
 
   const lStats = fs.statSync(lFilePath);
   const oStats = fs.statSync(oFilePath);
 
-  if(!lStats.isFile()) return false;
-  if(!oStats.isFile()) return false;
+  if (!lStats.isFile()) return false;
+  if (!oStats.isFile()) return false;
+
+  // For all json file return true to resolve based on text hash
+  if(path.extname(oFilePath) == '.json')
+    return true;
 
   return lStats.mtimeMs >= oStats.mtimeMs;
-}
-
-function copyProps(languageProps, enProps){
-
-  for (const languageProp in languageProps) {
-      if (Object.hasOwnProperty.call(languageProps, languageProp)) {
-          const languageVal = languageProps[languageProp];
-          const enVal       = enProps[languageProp];
-          
-          if(languageVal == "")
-              languageProps[languageProp] = enVal;
-          else if(_.isArray(languageVal) || _.isObject(enVal))
-              languageProps[languageProp] = copyProps(languageVal, enVal);
-      }
-  }
-
-  return languageProps;
 }

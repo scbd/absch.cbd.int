@@ -3,5 +3,17 @@
   "cbdNfp": "Correspondant national primaire de la Convention sur la diversité biologique",
   "cbdSfp": "Correspondant national secondaire de la Convention sur la diversité biologique",
   "pNfp": "Correspondant national pour les aires protégées",
-  "gNfp": "CN GTI"
+  "gNfp": "Correspondant national pour l’initiative taxonomique mondiale",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:50.164Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "absNfp": "544412a31ef4792a2d8e839643965e7a",
+      "cbdNfp": "5380fb109671a6fb8b0a7ae6704917b1",
+      "cbdSfp": "f0ec2365900736f05b77a3b179654c98",
+      "pNfp": "2734959a947ccdc533b55c84590008fb",
+      "gNfp": "968b6404075180f74228a5e58d9f8bfc"
+    }
+  }
 }

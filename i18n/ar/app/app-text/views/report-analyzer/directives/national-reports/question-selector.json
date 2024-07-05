@@ -12,5 +12,26 @@
   "surveyQuestion": "سؤال الاستطلاع",
   "question": "السؤال",
   "countries": "البلدان",
-  "regions": "الأقاليم"
+  "regions": "الأقاليم",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.678Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "nationalReport": "5963e678c8d982c51057b3714e9c5092",
+      "filter": "3730fee394067a6ed6c5d1e2ce76e8fe",
+      "breakdownRegions": "97db69a9fea64836588935108f87c974",
+      "selectCountries": "bc878e0316f10916dcdea04c1ddebfad",
+      "selectRegions": "63fccbb8b34f7a7cdd2c8552fbe49cc5",
+      "protocolParties": "5109d4effe48949adea437dee5c5556f",
+      "protocolNonParties": "232dcf2c315d9f5e0f3dca166bde9187",
+      "nklsParty": "65758a38149882980ed964a3b224a8a3",
+      "selectMessage": "7a37150ec12ab446a8c414b0151b56b9",
+      "allQuestions": "427e7728a870fc4e8f7327c1a78b5c15",
+      "surveyQuestion": "09cd2963a2c34ed7cd9f5531c7c53b15",
+      "question": "a97ea56b0e00b2379736ae60869ff66a",
+      "countries": "790d59ef178acbc75d233bf4211763c6",
+      "regions": "5948f3347ebc02ebc690227c059661e1"
+    }
+  }
 }

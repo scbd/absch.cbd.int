@@ -1,4 +1,7 @@
-import absFilters from '~/app-text/views/search/search-filters/abs-left-menu-filters.json';
+import absFiltersTranslations from '~/app-text/views/search/search-filters/abs-left-menu-filters.json';
+import { mergeTranslationKeys } from '../../../services/translation-merge';
+
+const absFilters = mergeTranslationKeys(absFiltersTranslations);
 
 export const absLeftMenuFilters = {
 	"contact" : [{

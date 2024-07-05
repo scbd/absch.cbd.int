@@ -6,7 +6,7 @@ import '~/views/forms/view/view-national-report.directive';
 import '~/views/directives/record-options';
 import '~/views/forms/view/directives/view-record-reference.directive';
 import viewNr5T from '~/app-text/views/forms/view/bch/view-national-report.json';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
 
 	app.directive("viewCpbNationalReport5", ['translationService', function (translationService) {
 		return {
@@ -25,7 +25,7 @@ import numbers from '~/app-text/numbers.json';
 				translationService.set('numbers', numbers);
 				$scope.nr5Data = cpbNationalReport5;	
 				$scope.$watch('document', function(){
-					$scope.isParty = $scope.document.Q005.value=='true'?true:false;
+					$scope.isParty = $scope.document?.Q005.value=='true'?true:false;
 				})
 			}
 		};

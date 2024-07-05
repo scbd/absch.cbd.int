@@ -3,7 +3,7 @@ import _ from 'lodash';
 import ng from 'angular';
 import 'angular-animate';
 import 'angular-joyride';
-import joyRideText from '~/app-text/views/register/dashboard-joyride-tour.json';
+import joyRideTextTranslations from '~/app-text/views/register/dashboard-joyride-tour.json';
 import '~/services/main';
 import '~/views/register/directives/register-top-menu';
 import 'toastr';
@@ -12,7 +12,8 @@ import '~/views/register/directives/top-records';
 import '~/views/register/directives/top-requests';
 import 'ngDialog';
 import dashboardT from '~/app-text/views/register/dashboard.json';
-    
+import { mergeTranslationKeys } from '../../services/translation-merge';
+const joyRideText = mergeTranslationKeys(joyRideTextTranslations);    
     export { default as template } from './dashboard.html';
 export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
                     "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr',
@@ -343,6 +344,9 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                     })
                     
                     return taskQuery;
+            }
+            $scope.isAdditionDisabled = function (schema){
+                return  realm.schemas[schema].disableAdd;
             }
             
             function checkNationalSchemaRoles(role){

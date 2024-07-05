@@ -5,7 +5,7 @@ import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import 'toastr';
-import joyRideText      from '~/app-text/views/search/search-joyride-tour.json';
+import joyRideTextTranslations from '~/app-text/views/search/search-joyride-tour.json';
 import  { scbdSchemas } from '~/components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
 import {getLimitedTerms} from '~/services/common';
@@ -25,9 +25,10 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
-import 'angular-vue'
-import searchDirectiveT from '~/app-text/views/search/search-directive.json';
-
+import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
+import { mergeTranslationKeys } from '../../services/translation-merge.js';
+const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
+const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
     app.directive('searchDirective', function() {
         return {
             restrict: 'EA',
@@ -75,6 +76,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         var queryCanceler = null;                        
                         var isABS = realm.is('ABS');
                         var isBCH = realm.is('BCH');   
+                        var isCHM = realm.is('CHM');   
                         var leftMenuFilters  = [];
                         $scope.searchAlertError = '';
                         $scope.realm         = realm
@@ -751,7 +753,10 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     function setExternalFilters(filters){
                         if (filters?.filters ) {
                             filters.filters.forEach( e => {
-                                $scope.saveFilter( e );
+                                if(e.type == 'raw-query')
+                                    saveRawQueryFilter(e.query, e.id, e.name);
+                                else
+                                    $scope.saveFilter( e );
                             } );
                         }
 
@@ -822,11 +827,12 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         return leftMenuFilters
                     }
 
-                    function saveRawQueryFilter(query){
-                        $scope.setFilters['rawQuery'] = {
+                    function saveRawQueryFilter(query, id, name){
+                        $scope.setFilters[id || 'rawQuery'] = {
                             type     : 'rawQuery',
-                            name     : 'Custom query',
-                            id       : query
+                            name     : name || 'Custom query',
+                            query,
+                            id
                         };
                     }
 
@@ -984,7 +990,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             "identifier": "usagesConfidential_b",
                             "name": "usagesConfidential_b",
                             "title": {
-                                "en": searchDirectiveT.confidential
+                                "en": searchDirectiveMergeT.confidential
                             }
                         })
                         return usages    
@@ -1535,7 +1541,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         if (termFields?.length > 0) {
                             query.push(`usages_ss:(${solr.escape(termFields.join(' '))})`);
                         }  
-                        if (confidentialObject) {
+                        if (confidentialObject && Object.keys(confidentialObject).length > 0) {
                             query.push('usagesConfidential_b: true');
                         }  
                         if(query.length > 0){ 
@@ -1573,12 +1579,11 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     }
 
                     function buildRawQuery(){
-                        // console.log($scope.setFilters['rawQuery']||{});
-                        const query = ($scope.setFilters['rawQuery']||{}).id;
+                        const queries = getSelectedFilters('rawQuery')
                         // const parseQuery = query.split(':').map(e=>)
                         // return solr.escape(();
 
-                        return query;
+                        return queries.map(e=>e.query||e.id).join(' AND ');
                     }
 
                     function getCountryList(id, list){
@@ -1616,9 +1621,13 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             const {absLeftMenuFilters} = await import('./search-filters/abs-left-menu-filters.js');
                             return { ...absLeftMenuFilters};
                         }
-                        else {
+                        else if(isBCH) {
                             const { bchLeftMenuFilters } = await import('./search-filters/bch-left-menu-filters.js');
                             return { ...bchLeftMenuFilters };
+                        }
+                        else if (isCHM) {
+                            const { chmLeftMenuFilters } = await import('./search-filters/chm-left-menu-filters.js');
+                            return { ...chmLeftMenuFilters };
                         }
                     }
 

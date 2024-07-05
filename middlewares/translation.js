@@ -1,12 +1,8 @@
 ﻿import { stat } from 'fs/promises';
-let _       = require('lodash');
-let url     = require('url');
+import _       from 'lodash';
+import { bundleUrls } from '../app/boot.js';
 
-let cacheControl = require('./cache-control')
-
-const { bundleUrls } = require('../app/boot.js');
-
- async function renderApplicationTemplate(req, res){
+ export async function renderApplicationTemplate(req, res){
 
     let urlPreferredLang;
     let preferredLang = getPreferredLanguage(req);
@@ -45,7 +41,7 @@ const { bundleUrls } = require('../app/boot.js');
     return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`, options);
  }
  
- function getPreferredLanguage(req){
+ export function getPreferredLanguage(req){
           
      if(req.params.lang)
          return req.params.lang;
@@ -63,8 +59,3 @@ const { bundleUrls } = require('../app/boot.js');
      return 'en'
  }
 
-
- module.exports = {
-    getPreferredLanguage,
-    renderApplicationTemplate
- }

@@ -108,8 +108,8 @@
             {{::('recordLoaderT.comparisonRecordNotFound'|$translate)}}
         </div>
 
-        <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="::getHeaderColor(internalDocumentInfo.type)"
-            style="padding-top: 8px; padding-left: 2px;" ng-if="!loading && internalDocumentInfo">
+        <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="getHeaderColor(internalDocumentInfo.type)"
+            style="padding-top: 8px; padding-left: 2px;" ng-show="!loading && internalDocumentInfo">
                 <span class="floa-start color-white text-uppercase p-2">
                     <span ng-bind="::internalDocumentInfo.type|schemaName"></span>
                     <span>(<span ng-bind="::(internalDocumentInfo.type|schemaShortName)"></span>)</span>
@@ -118,7 +118,7 @@
                     <div record-options></div>
                     <div id="sendRecords" ng-if="shareVueComponent && internalDocumentInfo" class="full-text-display ps-2 pe-1 float-end compare-buttons">
                         <span class="color-white">|&nbsp;</span>
-                        <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
+                        <share-record ng-vue="shareVueComponent"></share-record>
                     </div>
                     <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">
                         <div>

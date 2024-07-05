@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { isFunction } from 'lodash'
+import { isFunction, isObject } from 'lodash'
+import {useAuth} from '@scbd/angular-vue/src/index.js';
 
 let sitePrefixUrl = 'https://api.cbd.int';
 
@@ -8,7 +9,7 @@ if(/\.cbddev\.xyz$/i.test(window.location.hostname)) sitePrefixUrl= 'https://api
 if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 
 const cache          = new Map()
-const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000, tokenReader: defaultTokenReader }
+const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
 
 const HttpStatusApiCode = {
   400: "invalidParameter",
@@ -20,10 +21,11 @@ const HttpStatusApiCode = {
 }
 export default class ApiBase
 {
-  constructor(options) {
+  constructor(options) { //{ tokenReader, prefixUrl, timeout, tokenType }
 
     options = options || {};
-
+    // ToDo: weill find a better way to handle tokenReader
+    // if(isFunction(options.tokenReader)) options = { tokenReader : options }
     if(isFunction(options)) options = { tokenReader : options }
 
     const { tokenReader, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
@@ -58,11 +60,20 @@ async function loadAsyncHeaders(baseConfig) {
   const { tokenReader, tokenType, ...config } = baseConfig || {}
 
   const headers = { ...(config.headers || {}) };
-
+  //ToDo: we can remove await tokenReader() part
   if(tokenReader) {
-    const tokenDetails = await tokenReader();
-    if(tokenDetails)
-      headers.Authorization = `${tokenType||'Bearer'} ${tokenDetails.token}`;
+
+    let token = '';
+    if(isFunction(tokenReader)){
+      const tokenDetails = await tokenReader();
+      token = tokenDetails?.token ;
+    }
+    else {
+      token = tokenReader?.token ;
+    }
+
+    if(token)
+      headers.Authorization = `${tokenType||'Bearer'} ${token}`;
   }
 
   return axios.create({ ...config, headers } );
@@ -125,9 +136,4 @@ export function stringifyUrlParams(params){
   }
 
   return params;
-}
-
-export function defaultTokenReader() {
-  const token = window?.Vue?.prototype?.$auth?.strategy?.token?.get();
-  return token;
 }

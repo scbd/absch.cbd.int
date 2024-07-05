@@ -10,19 +10,19 @@
                     </div>
 
                     <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg"></i> 
-                    {{ $t("loading") }}...</div>
+                    {{ t("loading") }}...</div>
 
                     <div class="card-body" v-if="!loading">
                        
-                        <h2 class="card-title">{{article.title|lstring($locale)}}</h2>
+                        <h2 class="card-title">{{lstring(article.title, $locale)}}</h2>
                        
-                        <div class="p-1 mb-3 text-white bg-darkgrey bold">
+                        <div v-if="article.meta" class="p-1 mb-3 text-white bg-darkgrey bold">
                             <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;
-                            {{article.meta.createdOn|formatDate('DD MMM YYYY')}}
+                            {{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}
                         </div>
 
                         <div v-if="article.content" class="card-text full-details ck ck-content ck-rounded-corners ck-blurred"
-                            v-html="$options.filters.lstring(article.content,$locale)">
+                            v-html="lstring(article.content,$locale)">
                         </div>
                     </div>
                     <div v-if="article.adminTags" class="card-footer">
@@ -32,7 +32,7 @@
                         </a>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-sm float-end" @click="back()">{{ $t("back") }}</button>
+                <button class="btn btn-primary btn-sm float-end" @click="back()">{{ t("back") }}</button>
             </div>
             <div class="col-lg-4">
                 <div v-if="tag">
@@ -46,70 +46,60 @@
     </div>
 </template>
 
-<script>
-import i18n from '../../app-text/components/kb.json';
-import relevantArticles from "./relevant-articles.vue";
-import ArticlesApi from './article-api';
-import './filters';
-import popularTags from './popular-tags.vue';
-import articlesMaxin from '../maxin/article';
-export default {
-    name: 'KbArticleDetails',
-    components: {
-        relevantArticles,
-        popularTags
-    },
-    props: {
-    },
-    data: () => {
-        return {
-            article: [],
-            categories: [],
-            loading: true
-        }
-    },
-    created() {
-        this.tag = (this.$route.params.tag).replace(/"/g, "");
-        this.articlesApi = new ArticlesApi();
-    },
-    mixins: [articlesMaxin],
-    async mounted() {
-        this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
-        if (this.$route.params == undefined) return;
-        try {
-            let id = (this.$route.params.id).replace(/"/g, "");
-            let article = await this.articlesApi.getArticleById(encodeURIComponent(id));
-            article = article || { meta: {} }
-            if (article?.content != undefined) {
-                this.article = article;
-            }
-        }
-        catch (e) {
-            console.error(e);
-        }
-        finally {
-            this.loading = false;
+<script setup>
+    import { ref, onMounted } from "vue";
+    import { useI18n } from 'vue-i18n';
+    import messages from '../../app-text/components/kb.json';
+    import relevantArticles from './relevant-articles.vue';
+    import popularTags from './popular-tags.vue';
+    import ArticlesApi from './article-api';
+    import { formatDate, lstring } from './filters';
+    import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
+    import { useRealm } from '../../services/composables/realm.js';
+    import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js";
+    const { t } = useI18n({ messages }); 
+    const auth = useAuth();
+    const realm = useRealm();
+    const route = useRoute();
+    const article = ref({});
+    const categories = ref([]);
+    const loading = ref(true);
+    const tag = ref('');
 
-        }
-    },
-    methods: {
-        back() {
+    const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
+    
+    onMounted(async () => {  
+        tag.value = (route.value?.params?.tag).replace(/"/g, ""); //ToDo: route.params is not available 
+        categories.value = await loadKbCategories();
+        if (route.value == undefined) return;
+            try {
+                let id = (route.value?.params?.id).replace(/"/g, "");
+                let articleData = await articlesApi.getArticleById(encodeURIComponent(id));
+                articleData = articleData || { meta: {} };
+                if (articleData?.content) {
+                    article.value = articleData;
+                }
+            }
+            catch (e) {
+                console.error(e);
+            }
+            finally {
+                loading.value = false;
+            }
+    })
+
+    const back = function () {
             window.history.back();
-        },
-        tagUrl(tag) {
-            const tagDetails = this.categories.find(e => e.adminTags.includes(tag))
+        };
+    const tagUrl = function (tag) { 
+            const tagDetails = categories.value.find(e => e.adminTags.includes(tag))
             const tagTitle = (tagDetails?.title || '');
-            return this.getUrl(tagTitle, undefined, tag);
-        },
-        articleUrl(article, tag) {
-            return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
-        },
-        getSizedImage(url, size) {
+            return getUrl(tagTitle, undefined, tag);
+        };
+
+    const getSizedImage = function (url, size) {
             return url && url
                 .replace(/attachments.cbd.int\//, '$&' + size + '/')
                 .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&' + size + '/')
         }
-    },
-    i18n: { messages: { en: i18n } }
-}
 </script>

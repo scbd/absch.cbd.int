@@ -283,7 +283,7 @@ ul.km-value {
 }
 .record-callout-national {
     border-left-color: #428BCA !important;
-    min-height:7.5rem;
+    height:7.8rem;
 }
 .record-callout-reference {
     border-left-color: #fa6938 !important;
@@ -383,6 +383,15 @@ body.modal-open .modal-backdrop.fade.show{
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.record-summary-text-single-line {
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
 .record-callout span a {
     max-width: 90%;
 }

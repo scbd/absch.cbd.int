@@ -9,9 +9,10 @@ import '~/views/forms/edit/editFormUtility';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
-import joyRideText from '~/app-text/views/register/submit-summary-joyride-tour.json';
-import recordListT from '~/app-text/views/register/record-list.json';
-
+import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
+import recordListT from '~/app-text/views/register/record-list.json'; 
+import { mergeTranslationKeys } from '../../services/translation-merge';
+const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
         export { default as template } from './record-list.html';
 
         export default ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
@@ -538,6 +539,11 @@ import recordListT from '~/app-text/views/register/record-list.json';
                 $scope.searchRecord = function () {
                     loadRecords(1);
                 }
+
+                $scope.isAdditionDisabled = function (schema){
+                    return  realm.schemas[schema].disableAdd;
+                }
+                
                 function loadRecords(pageNumebr) {
                     $scope.loading = true;
                     $scope.records = [];
@@ -757,6 +763,9 @@ import recordListT from '~/app-text/views/register/record-list.json';
                             if(error.status === 404 && !draft)
                                 updateDocumentStatus(identifier, workflowActivity, true);
                         });;
+                }
+                $scope.isDisableEdit = function (schema){
+                    return  realm.schemas[schema].disableEdit;
                 }
 
                 function loadmyTasks(schema){

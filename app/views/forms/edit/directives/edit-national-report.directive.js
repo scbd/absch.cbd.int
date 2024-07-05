@@ -6,7 +6,7 @@ import '~/views/forms/directives/nr-yes-no';
 import template from "text!./edit-national-report.directive.html";
 import editNRT from '~/app-text/views/forms/edit/directives/edit-national-report.json';
 import { analyzerMapping } from '~/app-data/report-analyzer-mapping';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
 
 app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$routeParams', "$timeout", "$q", 'guid', 'ngDialog', 'realm', 'translationService',
     function ($controller, $http, storage, $routeParams, $timeout, $q, guid, ngDialog, realm, translationService) {
@@ -66,7 +66,6 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                     }
                     var lQuestion = question;
                     if (question.validations) {
-
                         var mappings = question.validations || [];
 
                         _.forEach(mappings, function (mapping) {
@@ -121,6 +120,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                 }
                                 else {
                                     $scope.binding[mapQuestion.key] = undefined;
+                                    $scope.multiTermModel[mapQuestion.key] = undefined;
                                     mapQuestion[mapping.trigger] = false
                                     if (baseQuestion && mapping.trigger != 'visible')
                                         baseQuestion[mapping.trigger] = false;
@@ -234,7 +234,7 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
 
                                 var prevQuestion = _.find(prevReportQuestions, { key: mapping.prevQuestion })
                                 if (prevQuestion) {
-                                    mapping.previousQuestion = { title: prevQuestion.title };
+                                    mapping.previousQuestion = { title: prevQuestion.title, number: prevQuestion.number };
                                     if (prevReportAnswers) {
                                         var prevAnswer = prevReportAnswers[mapping.prevQuestion];
                                         if (_.isArray(prevAnswer)) {
@@ -259,8 +259,6 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                                         }
                                     }
                                 }
-                                else
-                                    console.log(mapping)
                             })
 
                             return prevReportAnswers;

@@ -6,6 +6,7 @@
     "nationalFocal": "ABS National Focal",
     "absNationalFocalPoint": "ABS National Focal Point",
     "bchNationalPoint": "BCH National Focal Point",
+    "chmNationalPoint": "CHM National Focal Point",
     "focalPoint": "Focal Point",
     "nationalFocalPoint": "National Focal Point",
     "nationalFocalPointInfo": "The National Focal Point is responsible for liaison with the Secretariat as well as for designating themselves or another user as a Publishing Authority.",
@@ -22,6 +23,7 @@
     "NAU": "National Authorized User (NAU)",
     "bchNAU": "National Authorized User (NAU) can create draft national records and submit them to the BCH focal point to verify and publish.",
     "absNAU": "National Authorized User (NAUs) can create draft national records and submit them to the Publishing Authority to verify and publish.",
+    "chmNAU": "National Authorized User (NAU) can create draft national records and submit them to the CHM focal point to verify and publish.",
     "registeredUser": "Registered User",
     "admin": "Admin",
     "allRoles": "show all my roles",
@@ -31,6 +33,7 @@
     "nationalRecords": "National records",
     "nationalRecordsAbs": "National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as well as other national information relevant for the implementation of the Protocol.",
     "nationalRecordsBch": "National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as well as other national information relevant to the implementation of the Protocol.",
+    "nationalRecordsChm": "National records are published by governments and include information Parties are obliged to provide in accordance with the Convention as well as other national information relevant to the implementation of the Convention.",
     "offlineFormats": "Offline formats",
     "drafts": "Drafts",
     "requests": "Requests",
@@ -50,5 +53,6 @@
     "addUpdatePA": "Add/update PA",
     "referenceRecordsAbs": "Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication.",
     "bchTrainingSiteMessage": "By default, registered users can only publish 'Reference records'. 'National records' are published by Governments and include national information relevant for implementation as well as information Parties are obliged to provide in accordance with the Protocol. If the section on 'National records' does not appear below, please contact us at <a href='mailto:bch@cbd.int'> bch@cbd.int</a> and the Secretariat will assign you a national role which will be applicable to the Training Site only. Alternatively, you may use pre-existing accounts to practice publishing information. To view these roles and associated passwords, click <a href='https://bch.cbd.int/en/kb/tags/getting-help/Training-Site-User-Roles/628e3a4464c53e000142d9b0'>here</a>.",
-    "absTrainingSiteMessage": "By default, registered users can only publish 'Reference records'. 'National records' are published by Governments and include national information relevant for implementation as well as information Parties are obliged to provide in accordance with the Protocol. If the section on 'National records' does not appear below, please contact us at <a href='mailto:absch@cbd.int'> absch@cbd.int</a> and the Secretariat will assign you a national role which will be applicable to the Training Site only."
+    "absTrainingSiteMessage": "By default, registered users can only publish 'Reference records'. 'National records' are published by Governments and include national information relevant for implementation as well as information Parties are obliged to provide in accordance with the Protocol. If the section on 'National records' does not appear below, please contact us at <a href='mailto:absch@cbd.int'> absch@cbd.int</a> and the Secretariat will assign you a national role which will be applicable to the Training Site only.",
+    "chmTrainingSiteMessage": "By default, registered users can only publish 'Reference records'. 'National records' are published by Governments and include national information relevant for implementation as well as information Parties are obliged to provide in accordance with the Convention. If the section on 'National records' does not appear below, please contact us at <a href='mailto:chm@cbd.int'> chm@cbd.int</a> and the Secretariat will assign you a national role which will be applicable to the Training Site only."
 }

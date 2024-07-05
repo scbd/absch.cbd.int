@@ -3,11 +3,12 @@ import _ from "lodash";
 import "angular-route";
 import "~/services/main";
 import "~/components/scbd-angularjs-services/main";
-import routesLabels from '~/app-text/routes/common-routes-labels.json';
+import routesLabelsTranslations from '~/app-text/routes/common-routes-labels.json';
 import { securize, asyncLogError, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
-
+import { mergeTranslationKeys } from '../services/translation-merge';
+const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 var baseUrl = require.toUrl("").replace(/\?v=.*$/, "");
 var lang = window.scbdApp.lang;
 

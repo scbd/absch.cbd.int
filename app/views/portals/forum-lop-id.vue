@@ -1,28 +1,25 @@
 <template>
   <div>
-    <h1>{{ $t("title") }}</h1>
+    <h1>{{ t("title") }}</h1>
     <forum-participants :forumId="forumId" ></forum-participants>
   </div>
 </template>
 
-<script>
+<script setup>
+
 import ForumParticipants from '~/components/forums/list-of-participants.vue';
-import i18n from '../../app-text/views/portals/forum-lop-id.json';
+import { useI18n } from 'vue-i18n';
+import messages from '../../app-text/views/portals/forum-lop-id.json';
+
+  const props = defineProps({ forumId: Number });
+
+  const { t } = useI18n({ messages });
+
+</script>
+
+<script>
 
 export default {
   name:'forumLop',
-  components:{ ForumParticipants  },
-  props: { 
-    forumId: Number,
-  },
-  data() {
-    return {
-    }
-  },
-  i18n: {
-      messages: {
-          en: i18n
-      }
-  }
 }
 </script>

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import template from "text!./view-abs-national-report.directive.html";
 import '~/views/directives/record-options';
 import viewAbsNRT from '~/app-text/views/forms/view/abs/view-abs-national-report.json';
-import numbers from '~/app-text/numbers.json';
+import numbers from '~/app-text/common/numbers.json';
 
 app.directive("viewAbsNationalReport", [function () {
 	return {

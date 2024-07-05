@@ -57,8 +57,8 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //
                 //====================================
-                $scope.reportTypeChanged = function() {
-
+                $scope.reportTypeChanged = function(selectedReportType) {
+                    $scope.$emit('onReportTypeChanged', selectedReportType);
                     // Reset selection when user change reportType from UI
 
                     delete $scope.sections;
@@ -73,7 +73,7 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
 
                     if(!reportType || !$scope.reportData)
                         return;
-                    
+                    $scope.$emit('onReportTypeChanged', reportType);
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
 
                     const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/(\w+)$/i;
@@ -314,28 +314,32 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                         return;
 
                     var on  = 0, off = 0, int = 0;
+                    safeApply(() => {
+                        $scope.sections.forEach(function(section){
+                            section.selected = getIntermediateState(section.questions);
 
-                    $scope.sections.forEach(function(section){
-                        section.selected = getIntermediateState(section.questions);
-
-                        if(section.selected===null ) ++int;
-                        if(section.selected===true ) ++on;
-                        if(section.selected===false) ++off;
-                    });
-
-                    if((on && off) || int) $scope.allSelected = null;
-                    else                   $scope.allSelected = !!on;
-
-                    $scope.selectedQuestions = [];
-
-                    $scope.sections.forEach(function(section){
-                        section.questions.forEach(function(question){
-                            if(question.selected)
-                            $scope.selectedQuestions.push(question.key);
+                            if(section.selected===null ) ++int;
+                            if(section.selected===true ) ++on;
+                            if(section.selected===false) ++off;
                         });
-                    });
-                }
 
+                        if((on && off) || int) $scope.allSelected = null;
+                        else                   $scope.allSelected = !!on;
+
+                        $scope.selectedQuestions = [];
+
+                        $scope.sections.forEach(function(section){
+                            section.questions.forEach(function(question){
+                                if(question.selected)
+                                $scope.selectedQuestions.push(question.key);
+                            });
+                        });
+                    })
+                }
+                
+                function safeApply(fn) {
+                    ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
+                }
                 //====================================
                 //
                 //

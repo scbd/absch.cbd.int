@@ -1,0 +1,15 @@
+{
+  "generalInfo": "معلومات عامة",
+  "additionalInformation": "معلومات إضافية",
+  "websiteName": "رابط موقع الويب واسم الموقع",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.651Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392",
+      "websiteName": "446708f61603cb2f644cbd11c017f9be"
+    }
+  }
+}

@@ -20,6 +20,7 @@ app.directive("viewResource", ['translationService', function (translationServic
 			translationService.set('viewResourceT', viewResourceT);
 			$scope.isABS = realm.is('ABS');
 			$scope.isBCH = realm.is('BCH');
+			$scope.isCHM = realm.is('CHM');
 			
 			
 			//====================

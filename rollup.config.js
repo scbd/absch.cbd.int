@@ -5,15 +5,16 @@ import alias                    from '@rollup/plugin-alias';
 import nodeResolve              from '@rollup/plugin-node-resolve'
 import json                     from '@rollup/plugin-json';
 import commonjs                 from '@rollup/plugin-commonjs';
-import dynamicImportVariables   from 'rollup-plugin-dynamic-import-variables';
-import vue                      from 'rollup-plugin-vue'
-import copy                     from 'rollup-plugin-copy'
+import dynamicImportVariables   from '@rollup/plugin-dynamic-import-vars';
+import vue                      from 'rollup-plugin-vue';
+import copy                     from 'rollup-plugin-copy';
 import { string }               from "rollup-plugin-string";
-import { terser }               from 'rollup-plugin-terser';
+import terser                   from '@rollup/plugin-terser';
 import bootWebApp, { cdnUrl }   from './app/boot.js';
-import injectCssToDom           from './rollup/inject-css-to-dom';
-import resolveLocalized         from './rollup/resolve-localized';
-import stripBom                 from './rollup/strip-bom';
+import injectCssToDom           from './rollup/inject-css-to-dom.js';
+import resolveLocalized         from './rollup/resolve-localized.js';
+import stripBom                 from './rollup/strip-bom.js';
+import mergeI18n                from './rollup/merge-i18n.js'
 
 const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
@@ -64,8 +65,15 @@ function bundle(entryPoint, locale, baseDir='app') {
       ]}),
       stripBom(),
       resolveLocalized({ 
-        baseDir:      `${process.cwd()}/${baseDir}`,
-        localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}`
+        baseDir:      path.join(baseDir),
+        localizedDir: path.join('i18n', locale, baseDir),
+      }),
+      mergeI18n({ 
+        include:      `**/*.json`,
+        baseDir:      path.join(baseDir, 'app-text'),
+        localizedDir: path.join('i18n', locale, baseDir, 'app-text'),
+        defaultLocale: 'en',
+        locale
       }),
       copy({
         verbose: true,
@@ -85,13 +93,13 @@ function bundle(entryPoint, locale, baseDir='app') {
       }),
       string({ include: "**/*.html" }),
       json({ namedExports: true }),
-      injectCssToDom(),
       vue(),
-      dynamicImportVariables({ }),
+      injectCssToDom(),
+      dynamicImportVariables({ include:`${baseDir}/**/*.js` }),
       commonjs({ include: 'node_modules/**/*.js'}),
       nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
       isWatchOn ? null : getBabelOutputPlugin({
-        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"} ], { plugins: ['@babel/plugin-transform-private-methods'] }],
         plugins: ['@babel/plugin-proposal-class-properties'],
         allowAllFormats: true
       }),

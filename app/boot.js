@@ -39,7 +39,7 @@ export const bundleUrls = {
 export default function bootApp(window, require, defineX) {
 
     const cdnHost = cdnUrl+'npm/';
-    const templateName = window.scbdApp.template;
+    const templateName = window?.scbdApp?.template;
     
     //SB    var nameToUrl = require.s.contexts._.nameToUrl;
 
@@ -91,7 +91,7 @@ export default function bootApp(window, require, defineX) {
         //     return url;
 
         if(/^\//.test(url))            
-            return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
+            return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window?.scbdApp?.version;
             
         return url;
     }
@@ -103,7 +103,6 @@ export default function bootApp(window, require, defineX) {
             'text'                      : cdnHost + 'requirejs-text@2.0.15/text',
             'json'                      : cdnHost + 'requirejs-plugins@1.0.2/src/json',
             'async'                     : cdnHost + 'requirejs-text@1.0.2/lib/async',
-            'domReady'                  : cdnHost + 'requirejs-domready@2.0.1/domReady',
 
             'bootstrap-datepicker'      : cdnHost + 'bootstrap-datepicker@1.8.0/js/bootstrap-datepicker',
             'datepicker-range'          : cdnHost + 'daterangepicker@3.0.5/daterangepicker',
@@ -119,7 +118,6 @@ export default function bootApp(window, require, defineX) {
             'file-saverjs'              : cdnHost + 'file-saverjs@1.3.6/FileSaver.min',
             'xlsx'                      : cdnHost + 'xlsx@0.14.0/dist/xlsx',
             'jszip'                     : cdnHost + 'xlsx@0.14.0/dist/jszip',
-
 
             'chart-js'                  : cdnHost + 'chart.js@1.1.1/Chart.min',
             'printThis'                 : cdnHost + 'print-this@1.9.0/printThis',
@@ -138,20 +136,21 @@ export default function bootApp(window, require, defineX) {
             'plotly-renderers'          : cdnHost + 'pivottable@2.23.0/dist/plotly_renderers',
 
 
-            'angular-vue'               : cdnHost + '@scbd/angular-vue@4.0.0/dist/index.min',
             'ky'                        :           'libs/globals/ky',
 
             'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min',
             'shim'                      :           'libs/require-shim/src/shim',
             
-            'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
             'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
-            'vue-pagination-2'          : `${cdnHost}vue-pagination-2@3.0.91/dist/vue-pagination-2.min`,
-
 
             'luxon'                     : `${cdnHost}luxon@1.25.0/build/amd/luxon`,
             'scbd-common-articles'      : `${cdnHost}@scbd/common@0.1.1/dist/components/articles/index.umd`,
             'rangy'                     : `${cdnHost}rangy@1.3.1/lib/rangy-core.min`,
+            'leaflet'                   : `${cdnHost}leaflet@1.9.3/dist/leaflet`,
+            'proj4leaflet'              : `${cdnHost}proj4leaflet@1.0.2/src/proj4leaflet`,
+            'proj4'                     : `${cdnHost}proj4@2.9.2/dist/proj4`,
+            'leaflet-directive'         : 'views/forms/view/chm/leaflet/leaflet.js',
+            
             
         },
         'shim': {
@@ -169,6 +168,7 @@ export default function bootApp(window, require, defineX) {
             'pdfjs-dist/build/pdf'          : { 'deps': ['angular']}, 
             'pdf-object'                    : { 'deps': ['angular']}  ,
             'diacritics'                    : { 'deps': ['angular']},
+            [cdnHost +'vue-i18n@9.9.1']     : { 'deps': ['vue'], exports: 'VueI18n'},
 
             'ngMeta'                        : { 'deps': ['angular']},
             'drag-and-drop'                 : { 'deps': ['angular']},
@@ -176,9 +176,10 @@ export default function bootApp(window, require, defineX) {
 
             'pivottable'                    : { 'deps': ['jquery', 'jquery-ui', 'angular', 'externalCss']},
             'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']},
-
-            'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
-            'vue-pagination-2'              : { 'deps': ['angular-vue'] }
+            'leaflet-directive'             : { 'deps': ['angular', 'leaflet']},  
+            'leaflet'                       : { 'deps': ['css!https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css'], exports : 'L' },
+            'proj4leaflet'                  : { 'deps': ['leaflet', 'proj4'], exports : 'L' }
+            
             
         },
         urlArgs: function(id, url) {
@@ -191,7 +192,7 @@ export default function bootApp(window, require, defineX) {
             if(hasHash(id))   return '';
         
             const sep = url.indexOf('?') === -1 ? '?' : '&';
-            return `${sep}v=${encodeURIComponent(window.scbdApp.version)}`;
+            return `${sep}v=${encodeURIComponent(window?.scbdApp?.version)}`;
         }
     });
 
@@ -209,20 +210,16 @@ export default function bootApp(window, require, defineX) {
         return Plotly;
     });
 
-    defineX('vue', ['Vue'], function(Vue){
-        Vue.config.devtools = true;
-        return Vue; 
+    defineX('vue',      ['Vue'], function(Vue){ return Vue; });    
+    defineX('vue-i18n', [cdnHost +'vue-i18n@9.9.1'], function(VueI18n) { 
+        return VueI18n; 
     });    
-    defineX('Vue', [cdnHost +'vue@2.7.10/dist/vue.min.js', 'vue-i18n'], function(Vue, i18n){
-        window.Vue = Vue;
-        window.VueI18n = i18n;
-
-        window.Vue.use(window.VueI18n);
-
-        return Vue;
+    
+    defineX('Vue', [cdnHost +'vue@3.4.15'], function(){
+        return window.Vue;
     })
 
-    defineX('realmConf', [`json!/api/v2018/realm-configurations/${(window.scbdApp.host||'')}`], function(realmConf){
+    defineX('realmConf', [`json!/api/v2018/realm-configurations/${(window?.scbdApp?.host||'')}`], function(realmConf){
         return realmConf;
     })
 

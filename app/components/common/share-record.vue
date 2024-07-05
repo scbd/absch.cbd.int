@@ -1,16 +1,16 @@
 <template>
   <div id="shareRecord">
     <a id="shareSearchDomId" rel="noopener" href="#" class="share-button" @click="openModel()">
-      <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ $t("share") }} 
+      <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ t("share") }} 
     </a>
     <div class="modal fade" ref="shareModal" data-backdrop="static"  tabindex="-1" aria-hidden="true" id="share-modal">      
       <div class="modal-dialog modal-dialog-centered"  role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">
-              <span v-if="sharedData.type=='link'" >{{$t('modalTitleLink')}}</span>
-              <span v-if="sharedData.type=='embed'">{{$t('modalTitleEmbed')}}</span>
-              <span v-if="sharedData.type=='email'">{{$t('modalTitleEmail')}}</span>
+              <span v-if="sharedData.type=='link'" >{{t('modalTitleLink')}}</span>
+              <span v-if="sharedData.type=='embed'">{{t('modalTitleEmbed')}}</span>
+              <span v-if="sharedData.type=='email'">{{t('modalTitleEmail')}}</span>
             </h5>
             <button type="button" class="border-0 close" @click="closeDialog()" aria-label="Close" ><i class="bi bi-x-circle-fill icon-lg"></i></button>
           </div>
@@ -19,21 +19,21 @@
               <div class="row">
                 <div class="col-12">
                   <a href="#" class="icon share-link" v-bind:class="{ selected: sharedData.type == 'link' }" @click="loadTabData('link')" :disabled="loading">
-                    <div class="tooltip">{{ $t("link") }}</div>
+                    <div class="tooltip">{{ t("link") }}</div>
                     <span><i class="bi bi-link"></i></span>
                     <br/>
-                    <span class="button-text">{{ $t("link") }}</span>
+                    <span class="button-text">{{ t("link") }}</span>
                   </a>
                   <a href="#" class="icon embed" v-bind:class="{selected: sharedData.type == 'embed'}" @click="loadTabData('embed')" :disabled="loading">
-                    <div class="tooltip">{{ $t("embed") }}</div>
+                    <div class="tooltip">{{ t("embed") }}</div>
                     <span><i class="bi bi-code-slash"></i></span><br/>
-                    <span class="button-text">{{ $t("embed") }}</span>
+                    <span class="button-text">{{ t("embed") }}</span>
                   </a>
                   <a href="#" class="icon email" v-bind:class="{
                       selected: sharedData.type == 'email'}" @click="loadTabData('email')" :disabled="loading">
-                    <div class="tooltip">{{ $t("email") }}</div>
+                    <div class="tooltip">{{ t("email") }}</div>
                     <span><i class="bi bi-envelope"></i></span><br/>
-                    <span class="button-text">{{ $t("email") }}</span>
+                    <span class="button-text">{{ t("email") }}</span>
                   </a>
                 </div>
               </div>
@@ -41,7 +41,7 @@
               <div class="row" v-if="!sharedData.type">
                 <div class="col-12">
                   <div class="alert alert-info">
-                    {{$t('selectOneOption')}}
+                    {{t('selectOneOption')}}
                   </div>
                 </div>
               </div>
@@ -49,7 +49,7 @@
                 <div class="col-md-12">
                   <div v-if="!loading && sharedData[sharedData.type].success" class="alert alert-success">
                     <span v-if="sharedData.type=='email'">
-                      {{$t('emailSent')}}
+                      {{t('emailSent')}}
                       <ul v-if="sharedData[sharedData.type].emailsSentTo && sharedData[sharedData.type].emailsSentTo.length>0">
                         <li v-for="(email, index) in sharedData[sharedData.type].emailsSentTo" :key="index">{{email}}</li>
                       </ul>
@@ -58,7 +58,7 @@
                   <div v-if="loading" class="alert alert-info">
                     <div class="text-center">
                         <div class="spinner-border" role="status" aria-hidden="true"></div>
-                        <strong> {{ $t("processing") }}...</strong>
+                        <strong> {{ t("processing") }}...</strong>
                     </div>                   
                   </div>
                   <div v-if="error" class="alert alert-danger d-flex align-items-center" role="alert">
@@ -79,37 +79,37 @@
                         v-model="sharedData[sharedData.type].link" readonly disabled />                            
                     </p>
                     <button class="btn btn-primary float-right" @click="copy('shareLink')"
-                      data-bs-toggle="tooltip" data-bs-placement="top" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')">
-                      {{$t('Copy')}}
+                      data-bs-toggle="tooltip" data-bs-placement="top" :title="t('copyToClipboard')" :data-original-title="t('copyToClipboard')">
+                      {{t('copy')}}
                     </button>
                   </div>
                   <button class="btn btn-primary btn-sm float-end" v-if="!sharedData[sharedData.type].link" @click="generateSearchResultLink()" 
                     :disabled="loading" v-bind:class="{ disabled: loading }">
                       <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      <span v-if="loading" class="visually-hidden">{{$t('loading')}}...</span>
-                      {{$t('generateLink')}}
+                      <span v-if="loading" class="visually-hidden">{{t('loading')}}...</span>
+                      {{t('generateLink')}}
                   </button>
                 </div>
               </div>
               <div class="row" v-if="sharedData.type == 'email' && isUserSignedIn">
                 <div class="col-md-12 ">
                   <div class="alert alert-info">
-                    {{$t('emailInfo')}}
+                    {{t('emailInfo')}}
 
                   </div>
                 </div>
                 <div class="col-md-12 ">
                    <form class="row g-3">
                     <div class="col-12">
-                       <label for="inputPassword2">{{$t('emails')}}</label>
+                       <label for="inputPassword2">{{t('emails')}}</label>
                        <input type="email" class="form-control"
                         multiple @change="onEmailChange"
-                        v-model="sharedData[sharedData.type].emails" :placeholder="$t('emails')"/> 
-                        <div style="font-size: small;color: black;">{{$t('emailInstructions')}}</div>                     
+                        v-model="sharedData[sharedData.type].emails" :placeholder="t('emails')"/> 
+                        <div style="font-size: small;color: black;">{{t('emailInstructions')}}</div>                     
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary float-end" @click.prevent="shareLinkMail()" :disabled="loading || !sharedData[sharedData.type].emails || sharedData[sharedData.type]._id" >
-                        {{$t('send')}}
+                        {{t('send')}}
                       </button>
                     </div>
                   </form>
@@ -118,15 +118,15 @@
               <div class="row" v-if="sharedData.type == 'embed' && isUserSignedIn">
                 <div class="col-md-12 ">
                   <div class="alert alert-info">
-                    {{$t('domainInfo')}}
+                    {{t('domainInfo')}}
                   </div>
                 </div>
                 <div class="col-md-12 ">
                   <form class="row g-3">
                     <div class="col-12">
-                      <label for="inputPassword2">{{$t('domain')}}</label>
+                      <label for="inputPassword2">{{t('domain')}}</label>
                       <input v-model="sharedData[sharedData.type].domain"
-                        type="url" :placeholder="$t('urlEg')" class="form-control float-right" @change="onDomainChange" />
+                        type="url" :placeholder="t('urlEg')" class="form-control float-right" @change="onDomainChange" />
                     </div>
                     <div class="col-12">
                       <!-- || !isValidDomain -->
@@ -139,7 +139,7 @@
                             loading || !sharedData[sharedData.type].domain || !isValidDomain,
                         }"
                       >
-                        {{$t('generateCode')}}
+                        {{t('generateCode')}}
                       </button>
                     </div>
                   </form>
@@ -149,17 +149,17 @@
                         <div class="input-group mb-3">                            
                             <textarea class="form-control highlight embed-code" id="embedCode" aria-label="embed code" v-model="sharedData[sharedData.type].code" readonly disabled>                              
                             </textarea>
-                            <button class="input-group-text" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')" 
-                            data-bs-toggle="tooltip" data-bs-placement="top"  @click="copy('embedCode')">{{$t('Copy')}}</button>                            
+                            <button class="input-group-text" :title="t('copyToClipboard')" :data-original-title="t('copyToClipboard')" 
+                            data-bs-toggle="tooltip" data-bs-placement="top"  @click="copy('embedCode')">{{t('copy')}}</button>                            
                         </div>
                     </div>
                 </div>
               </div>
               <div class="row" v-if="(sharedData.type == 'embed' || sharedData.type == 'email') && !isUserSignedIn">
                  <div class="alert alert-info">
-                    {{$t('requireLogin')}} 
+                    {{t('requireLogin')}} 
                     <div class="align-items-center">
-                      <button class="btn btn-primary btn-sm" @click="signIn()">{{$t('signIn')}}</button>
+                      <button class="btn btn-primary btn-sm" @click="signIn()">{{t('signIn')}}</button>
                     </div>
                   </div>
               </div>
@@ -171,7 +171,7 @@
     <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 11">
       <div ref="clipboardToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-          <strong class="me-auto">{{$t('clipboardSuccess')}}</strong>
+          <strong class="me-auto">{{t('clipboardSuccess')}}</strong>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
       </div>
@@ -179,329 +179,312 @@
   </div>
 </template>
 
-<script>
-import DocumentShareApi from "~/api/document-share";
-import SubscriptionsApi from "~/api/subscriptions";
-import { Modal, Toast } from "bootstrap";
-import i18n from "../../app-text/components/common/share-record.json";
-import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
+<script setup>
+  import { onMounted, ref, shallowRef, inject, computed } from 'vue';
+  import DocumentShareApi from "~/api/document-share";
+  import SubscriptionsApi from "~/api/subscriptions";
+  import { Modal, Toast } from "bootstrap";
+  import { useRealm } from '~/services/composables/realm.js';
+  import { useI18n } from 'vue-i18n';
+  import messages from '~/app-text/components/common/share-record.json';
+  import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
+  import { useAuth } from '@scbd/angular-vue/src/index.js';
+  const auth = useAuth();
+  const getQuery = inject('getQuery');
+  let modal = null;
+  let toast = null;
+  const loading = ref(false);
+  let isValidDomain = true;
+  const sharedData = ref({
+    link: {},
+    embed: {},
+    email: {},
+    storageType: "",
+    type: "link"
+  });
 
 
+  let error = ref(null);
+  let documentShareApi = null;
+  let subscriptionsApi = null;
+  let shareModal = shallowRef(null);
+  let clipboardToast = shallowRef(null);
+  const { t, locale } = useI18n({ messages });
+  const realm = useRealm();
+  const isUserSignedIn = computed(()=> auth.user()?.isAuthenticated);
+  onMounted(async () => {  
+      documentShareApi = new DocumentShareApi({tokenReader:()=>auth.token()});
+      subscriptionsApi = new SubscriptionsApi({tokenReader:()=>auth.token()});
+      modal = new Modal(shareModal.value);
+      toast = new Toast(clipboardToast.value);
+  });
 
-export default {
-  components: {  },
-  props: ["getQuery", "tokenReader", "userStatus", "generateLink", "isUserSignedIn"],
-  data: () => {
-    return {
-      modal: null,
-      toast:null,
-      loading: false,
-      isValidEmail: true,
-      isValidDomain: true,
-      userToken:null,
-      sharedData: {
-        link       : {},
-        embed      : {},
-        email      : {},
-        storageType: '',
-        type       : 'link'
-      },
-      error : null
-    };
-  },
-  watch:{
-    isUserSignedIn(isSignedIn){
-      if(isSignedIn){
-        this.openModel();
-      }
-    }
-  },
-  created() {
-    this.documentShareApi = new DocumentShareApi(this.tokenReader);
-    this.subscriptionsApi = new SubscriptionsApi(this.tokenReader);
-  },
-  async mounted() {
-    this.modal = new Modal(this.$refs.shareModal);
-    this.toast = new Toast(this.$refs.clipboardToast);
-  },
-  methods: {
-    async openModel() {
-      if(!this.userToken)
-        this.userToken = await this.tokenReader();
+  const openModel = async () => { 
+    if (!modal._isShown)
+        modal.show('static');
 
-      if(this.userToken && !this.isUserSignedIn)
-        this.isUserSignedIn = true;
-      // if(this.userToken){
+    if (sharedData.value.type != 'link' && !isUserSignedIn.value)
+      auth.login();
+    else
+      loadTabData(sharedData.value.type || 'link');
 
-        if(!this.modal._isShown)
-          this.modal.show('static');
+    $(`#${shareModal.value.id}`).on('hidden.bs.modal', closeDialog);
+  };
 
-        if(this.sharedData.type != 'link' && !this.userToken)
-          this.userStatus();
-        else
-          this.loadTabData(this.sharedData.type || 'link');
+const loadTabData = async (type) => {
+  error.value = undefined;
+  const { recordKey, type: storageType, query } = getQuery(); 
+  sharedData.value.type = type;
+   if(recordKey) {
+    sharedData.value[type].recordKey = recordKey;
+   }
+  sharedData.value.storageType = storageType;
 
-        $(`#${this.$refs.shareModal.id}`).on('hidden.bs.modal', this.closeDialog);
-    },
-    async loadTabData(type) {
+  if (sharedData.value.storageType == "chm-document") {
+    return sharedData.value[type].link = `${realm.baseURL}/${locale.value}/database/${sharedData.value[type].recordKey}`;
+  }
 
-      this.error = undefined;
-      const { recordKey, type:storageType, query } = this.getQuery(); //TODO: change, GetQuery is getting details about what type of share it is (id and type search-relesult/document)
+  if (!isUserSignedIn.value && sharedData.value.type != 'link' &&
+    (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile")) {
+      auth.login();
+    return;
+  }
 
-      this.sharedData.type            = type;
-      this.sharedData[type].recordKey = recordKey;
-      this.sharedData.storageType     = storageType;
+  if (sharedData.value.storageType == "chm-search-result") {
+    sharedData.value[type].searchQuery = query;
+  }
+  if (sharedData.value.storageType == "chm-country-profile") {
+    sharedData.value[type].link = `${realm.baseURL}/${locale.value}/countries/${sharedData.value[type].recordKey}`;
+  }
+  refreshSharedData();
+}
 
-      if (this.sharedData.storageType == "chm-document") {
-        return this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/database/${this.sharedData[type].recordKey}`;
-      }
-
-      if (!this.userToken && this.sharedData.type != 'link'&& 
-          (this.sharedData.storageType == "chm-search-result" || this.sharedData.storageType == "chm-country-profile")){
-          await this.userStatus();
-          return;
-      }
-
-      if (this.sharedData.storageType == "chm-search-result") {
-        this.sharedData[type].searchQuery = query;
-      }
-      if (this.sharedData.storageType == "chm-country-profile") {
-        this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/countries/${this.sharedData[type].recordKey}`;
-      }
-      this.refreshSharedData();
-      
-    },
-    closeDialog() {
-      this.sharedData = {
-        link       : {},
-        embed      : {},
-        email      : {},
-        storageType: '',
-        type       : 'link'
-      };
-      this.loading = false;
-      resetRecaptcha();
-      this.modal.hide();
-    },
-    async copy(id) {
-      const copyText = document.getElementById(id);
-      copyText.focus();     
-      copyText.setSelectionRange(0, copyText.value.length);
-      await navigator.clipboard.writeText(copyText.value);
-      this.toast.show();
-    },
-    async shareLinkMail() {
-      this.error = undefined;
-      const emailsRegex = /^([a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])[;,\s]?)+$/i;
-      const emails = this.sharedData[this.sharedData.type].emails;
-      if (!emails || !emailsRegex.test(emails.replace(/\s/g, ''))) {
-        this.isValidEmail = false;
-        return;
-      }
-      if(emails.split(/,|;| /g).length > 10){
-        this.error = i18n.excessEmailError;
-        this.isValidEmail = true;
-        return;
-      }
-      this.isValidEmail = true;
-      try {
-        this.loading = true;
-        this.sharedData[this.sharedData.type].emails = [...(new Set(emails.replace(/(,|;|\s)$/, '').split(/,|;| /g)))].filter(e=>e).join(',')
-
-        const captchaToken   = await getRecaptchaToken();
-
-         if (!this.sharedData[this.sharedData.type]._id) {          
-          if (this.sharedData.storageType == "chm-search-result") {
-            await this.saveSearchQuery();            
-          }
-          await this.saveShareDocument(undefined, captchaToken);
-        }
-
-        this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].urlHash}`;
-
-        this.sharedData[this.sharedData.type].success      = true;
-        this.sharedData[this.sharedData.type].emailsSentTo = [...(this.sharedData[this.sharedData.type].emailsSentTo||[]), 
-                                                              ...this.sharedData[this.sharedData.type].emails.replace(/\s/g, '').split(/,|;| /g)];
-        this.sharedData[this.sharedData.type].emails       = undefined;
-        this.refreshSharedData();
-
-      } catch (err) {
-        console.log(err);
-        this.error = i18n.emailError;
-      } finally {
-        this.loading = false;
-      }
-    },
-    async generateEmbedCode() {
-      this.error = undefined;
-      this.onDomainChange();
-      if (!this.isValidDomain) return;
-
-      this.loading = true;
-     
-      try {
-        const captchaToken   = await getRecaptchaToken();
-
-        if (!this.sharedData.embed._id) {
-          if (this.sharedData.storageType == "chm-search-result") {
-            await this.saveSearchQuery();            
-          }
-          if(!this.sharedData.embed.urlHash)
-            await this.saveShareDocument(undefined, captchaToken);
-        }
-
-        if (this.sharedData.embed._id) {
-            this.sharedData.embed.code = `<script src='${this.$realm.baseURL}/widgets.js'><\/script>`;
-            
-            if (this.sharedData.storageType == "chm-document") {
-              this.sharedData.embed.code += `<div class="scbd-chm-embed" data-type="chm-document" data-access-key="${this.sharedData.embed.urlHash}" width="100%"></div>`;
-            } 
-            else if (this.sharedData.storageType == "chm-search-result") {
-              this.sharedData.embed.code += `<div class="scbd-chm-embed" data-type="chm-search-result" data-access-key="${this.sharedData.embed.urlHash}" width="100%"></div>`;
-            } 
-            else if (this.sharedData.embed.storageType == "chm-country-profile") {
-              this.sharedData.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${this.sharedData.embed.urlHash}" width="100%"></div>`;
-            }
-        }
-        this.refreshSharedData();
-        
-      } catch (err) {
-        console.log(err)
-        this.error = i18n.embedCodeError;
-      } finally {
-        this.loading = false;
-      }
-
-    },
-    async saveShareDocument(data, captchaToken) {
-      
-      data = data || this.getShareDocumentData();
-      let shareDetails;
-
-      let existingSharedDocument;
-      if(this.sharedData[this.sharedData.type].recordKey){
-        data.sharedData.recordKey = this.sharedData[this.sharedData.type].recordKey;
-        shareDetails  = await this.documentShareApi.shareDocument(data, captchaToken);
-        existingSharedDocument  = await this.documentShareApi.getSharedDocument(shareDetails.id);
-      }
-      else{
-        shareDetails  = await this.documentShareApi.anonShareDocument(data, captchaToken);
-        existingSharedDocument  = shareDetails;
-        existingSharedDocument.id = existingSharedDocument._id;
-      }
-      
-
-      this.sharedData[this.sharedData.type] = {
-        ...this.sharedData[this.sharedData.type], 
-        ...existingSharedDocument
-      };      
-      this.refreshSharedData();
-
-    },
-    async saveSearchQuery(){
-
-      const data = this.getSearchQueryData();
-      const searchQueryId = (await this.subscriptionsApi.addSubscription(data)).id;
-
-      this.sharedData[this.sharedData.type].recordKey = searchQueryId;
-      this.refreshSharedData();
-
-    },
-    async generateSearchResultLink(){
-
-      this.error = undefined;
-      this.loading = true;
-      try{
-        if (!this.sharedData[this.sharedData.type]._id) { 
-
-        const captchaToken   = await getRecaptchaToken();
-
-          const data = {}
-          if (this.sharedData.storageType == "chm-search-result") {
-            data.searchQuery = this.getSearchQueryData()
-          }
-
-          data.share = this.getShareDocumentData();
-          await this.saveShareDocument(data, captchaToken);
-        }
-
-        this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].urlHash}`;
-        this.refreshSharedData();
-      }
-      catch(err){
-        console.error(err);
-        if(err?.code == "INVALID_CAPTCHA_SCORE")
-          this.error = err.message;
-        else
-          this.error = i18n.searchResultLinkError;
-      } 
-      finally{
-        this.loading = false;
-      }
-    },
-    onDomainChange() {
-      const regexp =
-        /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
-      if (!regexp.test(this.sharedData[this.sharedData.type].domain)) {
-        this.isValidDomain = false;
-        return;
-      }
-      this.isValidDomain = true;
-      
-    },
-    onEmailChange(){
-      this.sharedData[this.sharedData.type]._id = undefined;
-      this.refreshSharedData();
-    },
-    signIn(){
-      this.userStatus();
-    },
-    getShareDocumentData(){
-      const data = {
-        expiry      : new Date(new Date().getTime()+12*12*30*24*60*60*1000), // 12 years long expiry
-        storageType: this.sharedData.storageType,
-        shareType: this.sharedData.type,        
-        sharedData: {
-          realm     : this.$realm.value,
-        },
-        sharedWith : {}
-      };
-
-      if(['embed', 'link'].includes(this.sharedData.type)){
-        data.sharedWith = {
-          link: true,
-        }
-        if(this.sharedData.type == 'embed')
-          data.sharedData.domain    = this.sharedData[this.sharedData.type].domain;
-      }
-      else if(this.sharedData.type == 'email'){
-        data.sharedWith.emails = this.sharedData[this.sharedData.type].emails;
-      }
-
-      return data;
-    },
-    getSearchQueryData() {
-        const { filters, subFilters }=this.sharedData[this.sharedData.type].searchQuery||{};
-        const data={
-          filters: Object.keys(filters).length == 0 ? undefined : filters,
-          isSharedQuery: true,
-          queryTitle: `Share query : ${Math.floor((1+Math.random())*0x10000).toString(16)}`,
-          realm: this.$realm.value,
-          subFilters: Object.keys(subFilters).length == 0 ? undefined : subFilters
-        };
-        return data;
-    },
-    refreshSharedData(){
-      this.sharedData = Object.assign({}, this.sharedData);
-    }
-  },
-  i18n: {
-    messages: {
-      en: i18n,
-    },
-  },
+const closeDialog = () => {
+  sharedData.value = {
+    link: {},
+    embed: {},
+    email: {},
+    storageType: '',
+    type: 'link'
+  };
+  loading.value = false;
+  resetRecaptcha;
+  modal.hide();
 };
+
+const copy = async (id) => {
+  const copyText = document.getElementById(id);
+  copyText.focus();
+  copyText.setSelectionRange(0, copyText.value.length);
+  await navigator.clipboard.writeText(copyText.value);
+  toast.show();
+};
+
+const shareLinkMail = async () => {
+  error.value = undefined;
+  const emailsRegex = /^([a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])[;,\s]?)+$/i;
+  const emails = sharedData.value[sharedData.value.type].emails;
+  if (!emails || !emailsRegex.test(emails.replace(/\s/g, ''))) {
+    return;
+  }
+  if (emails.split(/,|;| /g).length > 10) {
+    error.value = t("excessEmailError");
+    return;
+  }
+  try {
+    loading.value = true;
+    sharedData.value[sharedData.value.type].emails = [...(new Set(emails.replace(/(,|;|\s)$/, '').split(/,|;| /g)))].filter(e => e).join(',');
+    const captchaToken = await getRecaptchaToken();
+    if (!sharedData.value[sharedData.value.type]._id) {
+      if (sharedData.value.storageType == "chm-search-result") {
+        await saveSearchQuery();
+      }
+      await saveShareDocument(undefined, captchaToken);
+    } 
+    if(sharedData.value[sharedData.type]) {
+      sharedData.value[sharedData.type].link = `${realm.baseURL}/${locale.value}/share/link/${sharedData.value.storageType}/${sharedData.value[sharedData.value.type].urlHash}`;
+    }
+    sharedData.value[sharedData.value.type].success = true;
+    sharedData.value[sharedData.value.type].emailsSentTo = [...(sharedData.value[sharedData.value.type].emailsSentTo || []),
+    ...sharedData.value[sharedData.value.type].emails.replace(/\s/g, '').split(/,|;| /g)];
+    sharedData.value[sharedData.value.type].emails = undefined;
+    refreshSharedData();
+
+  } catch (err) {
+    console.log(err);
+    error.value = t("emailError");
+  } finally {
+    loading.value = false;
+  }
+};
+
+const generateEmbedCode = async () => {
+  error.value = undefined;
+  onDomainChange();
+  if (!isValidDomain) return;
+  loading.value = true;
+
+  try {
+    const captchaToken   = await getRecaptchaToken();
+
+    if (!sharedData.value.embed._id) {
+      if (sharedData.value.storageType == "chm-search-result") {
+        await saveSearchQuery();
+      }
+      if (!sharedData.value.embed.urlHash)
+        await saveShareDocument(undefined, captchaToken);
+    }
+    if (sharedData.value.embed._id) {
+      sharedData.value.embed.code = `<script src='${realm.baseURL}/widgets.js'><\/script>`;
+
+      if (sharedData.value.storageType == "chm-document") {
+        sharedData.value.embed.code += `<div class="scbd-chm-embed" data-type="chm-document" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
+      }
+      else if (sharedData.value.storageType == "chm-search-result") {
+        sharedData.value.embed.code += `<div class="scbd-chm-embed" data-type="chm-search-result" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
+      }
+      else if (sharedData.embed.storageType == "chm-country-profile") {
+        sharedData.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
+      }
+    }
+    refreshSharedData();
+
+  } catch (err) {
+    console.log(err)
+    error.value = t("embedCodeError");
+  } finally {
+    loading.value = false;
+  }
+
+};
+
+const saveShareDocument = async (data, captchaToken) => {
+  data = data || getShareDocumentData();
+  let shareDetails;
+
+  let existingSharedDocument;
+    if (sharedData.value[sharedData.value.type].recordKey) {
+    if(data?.sharedData){
+          data.sharedData.recordKey = sharedData.value[sharedData.value.type].recordKey;
+        }
+    shareDetails = await documentShareApi.shareDocument(data, captchaToken);
+    existingSharedDocument = await documentShareApi.getSharedDocument(shareDetails.id);
+  }
+  else {
+    shareDetails = await documentShareApi.anonShareDocument(data, captchaToken);
+    existingSharedDocument = shareDetails;
+    existingSharedDocument.id = existingSharedDocument._id;
+  }
+sharedData.value[sharedData.value.type] = {
+    ...sharedData.value[sharedData.value.type],
+    ...existingSharedDocument
+  };
+  refreshSharedData();
+};
+
+const saveSearchQuery = async () => {
+  const data = getSearchQueryData();
+  const searchQueryId = (await subscriptionsApi.addSubscription(data)).id;
+
+  sharedData.value[sharedData.value.type].recordKey = searchQueryId;
+  refreshSharedData();
+};
+
+const generateSearchResultLink = async () => {
+
+  error.value = undefined;
+  loading.value = true;
+  try {
+    if (!sharedData.value[sharedData.value.type]._id) {
+      const captchaToken = await getRecaptchaToken();
+      const data = {}
+      if (sharedData.value.storageType == "chm-search-result") {
+        data.searchQuery = getSearchQueryData()
+      }
+
+      data.share = getShareDocumentData();
+      await saveShareDocument(data, captchaToken);
+    }
+    sharedData.value[sharedData.value.type].link = `${realm.baseURL}/${locale.value}/share/link/${sharedData.value.storageType}/${sharedData.value[sharedData.value.type].urlHash}`;
+    refreshSharedData();
+  }
+  catch (err) {
+    console.error(err);
+    if (err?.code == "INVALID_CAPTCHA_SCORE")
+    error.value = err.message;
+    else
+    error.value = t("searchResultLinkError");
+  }
+  finally {
+    loading.value = false;
+  }
+};
+
+const onDomainChange = () => {
+  const regexp =
+    /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+  if (!regexp.test(sharedData.value[sharedData.value.type].domain)) {
+    isValidDomain = false;
+    return;
+  }
+  isValidDomain = true;
+};
+
+const onEmailChange = () => {
+  sharedData.value[sharedData.value.type]._id = undefined;
+  refreshSharedData();
+};
+
+const signIn = () => {
+  auth.login();
+};
+
+const getShareDocumentData = () => {
+  const data = {
+    expiry: new Date(new Date().getTime() + 12 * 12 * 30 * 24 * 60 * 60 * 1000), // 12 years long expiry
+    storageType: sharedData.value.storageType,
+    shareType: sharedData.value.type,
+    sharedData: {
+      realm: realm.value, 
+    },
+    sharedWith: {}
+  };
+  if (['embed', 'link'].includes(sharedData.value.type)) {
+    data.sharedWith = {
+      link: true,
+    }
+    if (sharedData.value.type == 'embed'){
+       data.sharedData.domain = sharedData.value[sharedData.value.type].domain;
+    }
+  }
+  else if (sharedData.value.type == 'email') {
+    data.sharedWith.emails = sharedData.value[sharedData.value.type].emails;
+  }
+
+  return data;
+};
+
+const getSearchQueryData = () => {
+  const { filters, subFilters } = sharedData.value[sharedData.value.type].searchQuery || {};
+  const data = {
+    filters: filters && Object.keys(filters).length > 0 ? filters  : undefined,
+    isSharedQuery: true,
+    queryTitle: `Share query : ${Math.floor((1 + Math.random()) * 0x10000).toString(16)}`,
+    realm: realm.value,
+    subFilters: subFilters && Object.keys(subFilters).length > 0 ? subFilters : undefined
+  };
+
+  return data;
+};
+
+const refreshSharedData = () => {
+  sharedData.value = { ...sharedData.value };
+};
+
+
 </script>
+
+
 
 <style >
     #shareRecord{

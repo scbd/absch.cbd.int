@@ -4,17 +4,22 @@ import "angular-sanitize";
 import "angular-loggly-logger";
 import "angular-joyride";
 import "ngMeta";
-
 import { 
-  CreateAngularVuePlainPlugin,  
-  AngularVueRouterPlugin, 
-  AngularVueRoutePlugin, 
-  AngularVuePlugin,
-  AngularVueDirective,
-  AngularVueAuthPlugin
-} from 'angular-vue';
+    VueRegistry,
+    createNgVue,
+    createAuth,
+    createRouter,
+    createRoute,
+    createService,
+    NgVueDirective 
+}     from '@scbd/angular-vue/src/index.js' 
+import {
+    createI18n
+} from 'vue-i18n';
+ import { mergeTranslationKeys} from './services/translation-merge';
+import ngDirectivePlaceholder from "./components/ng-directive-placeholder";
 
-var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache"]));
+var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", 'leaflet-directive']));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
   var logToConsole = true;
   LogglyLoggerProvider.includeUrl(true).includeUserAgent(true).includeTimestamp(true).sendConsoleErrors(true).logToConsole(logToConsole).ignoreMessageRegex(/\bDocument not found in the specified realm\b/).endpoint("/error-logs");
@@ -56,54 +61,51 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
   ngMeta.init();
 
   let joyrideTemplate  = (await import('~/views/directives/joyride-template.html')).default;
-  const joyrideTemplateT = (await import('~/app-text/views/directives/joyride-template.json')).default;
+  const joyrideTemplateT = (await import('~/app-text/views/directives/joyride-template.json')).default;  
+  const joyrideTemplateM = mergeTranslationKeys(joyrideTemplateT);
 
-  for (const key in joyrideTemplateT) {
-    joyrideTemplate = joyrideTemplate.replace(`{{${key}}}`, joyrideTemplateT[key]);    
+  for (const key in joyrideTemplateM) {  
+    joyrideTemplate = joyrideTemplate.replace(`{{${key}}}`, joyrideTemplateM[key]);    
   } 
   $templateCache.put('ngJoyrideDefault.html', joyrideTemplate);
   
 }]);
 
-app.directive('ngVue', AngularVueDirective);
-app.run(["realm", "locale", '$injector', 'authentication', function (realm, locale, $injector,authentication) {
+app.directive('ngVue', NgVueDirective);
 
-  registerVuePlugin('$realm', realm);
-  registerVuePlugin('$locale', locale);
-  registerVuePlugin('$accountsBaseUrl', authentication.accountsBaseUrl())
-  registerVuePlugin('$ngApp', app);
-  registerVuePlugin('$ngInjector', $injector);
+app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function (realm, locale, $injector, apiToken, authentication) {
 
-  const vueRootApp = new Vue({});
+  const ngVue   = createNgVue({ $injector, ngApp: app });
+  const $i18n   = createI18n({ locale, fallbackLocale: 'en', legacy:false});
+  const $route  = createRoute ({ plugins: { ngVue }});
+  const $router = createRouter ({ plugins: { ngVue }});
 
-  window.Vue.use(new AngularVuePlugin({ $injector, ngApp: app, vueApp: vueRootApp }));
-  window.Vue.use(new AngularVueRoutePlugin());
-  window.Vue.use(new AngularVueRouterPlugin());
-  window.Vue.use(new AngularVueAuthPlugin({
+  VueRegistry
+    .use(createService('$realm', realm)) // use  useRealm() | import { useRealm  } from '~/services/composables/realm.js';
+    .use(createService('$locale', locale))
+    .use(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
+    .component('ng', ngDirectivePlaceholder) // simple component used as a placeholder for `v-vue-ng` directive bridge
+    .use(ngVue)
+    .use($i18n)
+    .use($route)
+    .use( $router)
+
+  const authPlugin = createAuth ({ 
     fetchUser() { return authentication.getUser(); },
     logout() { authentication.signOut(); },
     async login() {
       console.log("$auth: force sign in");
 
-      const { $route, $router, $ngVue } = Vue.prototype;
-      const appConfigService = $ngVue.$injector.get('appConfigService')
-
-      const { fullPath, query } = $route;
-      let { returnUrl } = query;
-
-      if (!returnUrl) returnUrl = fullPath;
-
-      const path = appConfigService.getSiteMapUrls().user.signIn
-
-      $router.push({ path, query: {...query, returnUrl }, hash: null });
+      $('#loginDialog').modal("show");
+      
     }
-  }));
+  });
+
+  authentication.onUserChange ((user)  => authPlugin.user(user) );
+  apiToken      .onTokenChange((token) => authPlugin.token(undefined, token, token?.expiration) );
+
+  VueRegistry.use(authPlugin);
   
 }]);
-
-function registerVuePlugin(name, service){
-  const newPlugin = new CreateAngularVuePlainPlugin(name, service)
-  window.Vue.use(newPlugin);
-}
 
 export default app;

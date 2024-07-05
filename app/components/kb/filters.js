@@ -1,5 +1,5 @@
 import moment from 'moment';
-import Vue from 'Vue';
+import Vue from 'vue';
 
 export function formatDate(datetime, format) {
     if (format === undefined)
@@ -61,9 +61,12 @@ function normalizeText(text) {
   return entry;
 }
 
-Vue.filter('formatDate'         , formatDate);
-Vue.filter('capitalize'         , val=>val.toUpperCase());
-Vue.filter('encodeURIComponent' , encodeURIComponent);
-Vue.filter('encodeURI'          , encodeURI);
-Vue.filter('lstring'            , lstring)
+export function capitalize(val) {
+  return val.toUpperCase();
+}
+
+
+
+
+ 
 

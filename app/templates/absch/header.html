@@ -124,9 +124,12 @@
                     class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">{{::('abschHeaderT.leaveTrainingSite'|$translate)}}</a></li>
             </ul>
             <ul class="nav">
-                <li class="nav-item"><a rel="noopener" translation-url href="https://www.cbd.int/abs" target="new_"
-                        class="fw-bold menu-navigation-link nav-link p-0 link-dark px-2 "><span
-                            class="hiddex-xs hidden-sm">{{::('abschHeaderT.nagoya'|$translate)}}</span> {{::('abschHeaderT.protocol'|$translate)}} </a></li>
+                <li class="nav-item">
+                    <a rel="noopener" translation-url href="https://www.cbd.int/abs" target="new_" class="fw-bold menu-navigation-link nav-link p-0 link-dark px-2 ">
+                        <span class="d-lg-none d-md-block">{{::('abschHeaderT.protocol'|$translate)}}</span>
+                        <span class="d-none d-lg-block">{{::('abschHeaderT.nagoyaProtocol'|$translate)}}</span>
+                    </a>
+                </li>
                 </li>
             </ul>
         </div>

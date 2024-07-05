@@ -4,9 +4,26 @@
   "breakdownCbdRegions": "Ventilation par régions de la CBD",
   "selectCountries": "Sélectionnez un/des pays",
   "selectRegions": "Sélectionnez une/des région",
-  "breakdownProtocolParties": "",
+  "breakdownProtocolParties": "Répartition par Parties au Protocole",
   "breakdownProtocolNonParties": "Répartition par Non- Parties au Protocole",
   "nationalReportAnalyzer": "Analyseur des rapports nationaux",
   "nationalReportAnalyzerInfo": "Cet outil en ligne permet de sélectionner des sections ou questions spécifiques du rapport et de montrer les résultats relatifs par pays ou par région.",
-  "analyze": ""
+  "analyze": "Analyser »",
+  "#meta": {
+    "hashedOn": "2024-05-05T18:52:52.676Z",
+    "algorithm": "md5",
+    "branch": "2024.13.3",
+    "hashes": {
+      "report": "73754ac01026f63adb0510af0557e38c",
+      "analysis": "c036ce00a53ed7b7232f3f7faac2216f",
+      "breakdownCbdRegions": "97db69a9fea64836588935108f87c974",
+      "selectCountries": "bc878e0316f10916dcdea04c1ddebfad",
+      "selectRegions": "63fccbb8b34f7a7cdd2c8552fbe49cc5",
+      "breakdownProtocolParties": "b094c1fabc3c61af59456777b33d9665",
+      "breakdownProtocolNonParties": "471fd58a47590820f2d6e4bab6a3fb07",
+      "nationalReportAnalyzer": "87bc5be251f4aa15d3216bfca8d2dbc9",
+      "nationalReportAnalyzerInfo": "982ac1f3a7e3508ae5208252cf8b6aca",
+      "analyze": "2252e15a30dd1a78e0a44ba8e49cd381"
+    }
+  }
 }
