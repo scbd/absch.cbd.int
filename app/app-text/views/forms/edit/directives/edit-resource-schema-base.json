@@ -1,5 +1,5 @@
 {
-    "generalInfo": "General Information",
+    "generalInfo": "General information",
     "languageToPublish": "Please select in which language(s) you wish to submit this record:",
     "title": "Title",
     "titleInfo": "This will appear as the title of the record",
@@ -10,7 +10,7 @@
     "authorInfo": "Name of the person or organization who has authored the publication or information resource.",
     "organizations": "Reference to the authoring organization(s)",
     "publisher": "Publisher",
-    "publicationDate": "Publication Date",
+    "publicationDate": "Publication date",
     "helpVLR": "Help: VLR",
     "source": "Source",
     "sourceInfo": "A reference to a resource from which the present resource is derived, e.g. the name of a journal for an article published in a journal.",
@@ -27,7 +27,7 @@
     "countryRegions": "Geographical or political/economic group(s)",
     "andOr": "and/or",
     "countryName": "Country name(s)",
-    "feywordsFacilitating": "Keywords for facilitating searching for information in the clearing-houses",
+    "keywordsFacilitating": "Keywords for facilitating searching for information in the clearing-houses",
     "aichiTargets": "Aichi Targets",
     "cbdSubjects": "CBD Subject Areas",
     "keywordsRelatedBiosafety": "Keywords related to Biosafety",
@@ -46,12 +46,13 @@
     "mccKeywords": "Please select the relevant keywords for describing the content of  the code of conduct, guidelines and best practices and/or standards being submitted",
     "absThematicAreas": "ABS Thematic Areas",
     "keyAreas": "Key areas and strategic measures for capacity-building and development addressed by the resource",
-    "keyAreasInfo": "If this is resource is related to capacity-building for the Nagoya Protocol, please provide appliable option(s) from.",
+    "keyAreasInfo": "If this is resource is related to capacity-building for the Nagoya Protocol, please provide applicable option(s) from.",
     "additionalInformation": "Additional Information",
     "otherRelevantInformation": "Any other relevant information",
     "relevantInformationInfo": "Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.",
     "relevantDocuments": "Any other relevant documents",
     "relevantDocumentsInfo": "Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download",
     "notes": "Notes",
-    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information."
+    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.",
+    "gbfTargets":"Kunming-Montreal Global Biodiversity Framework Target(s)" 
 }
