@@ -161,7 +161,27 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					if ( !document )
 						return undefined;
 
+
+					if (document.gbfTargets == null || document.gbfTargets==undefined){
+						//bch
+						if ($scope.hasAichi('AICHI-TARGET-13')){
+							document.gbfTargets = [{"identifier":"GBF-TARGET-17"}];
+							document.aichiTargets = document.aichiTargets.filter(item => item.identifier !== 'AICHI-TARGET-13');
+						}		
+						//abs			
+						if ($scope.hasAichi('AICHI-TARGET-16')){
+							if (document.gbfTargets == null || document.gbfTargets==undefined){
+								document.gbfTargets = [{"identifier":"GBF-TARGET-13"}];	
+							}
+							else {
+								document.gbfTargets= [...document.gbfTargets, {"identifier":"GBF-TARGET-13"}];
+							}
+							document.aichiTargets = document.aichiTargets.filter(item => item.identifier !== 'AICHI-TARGET-16');
+						}					
+					} 
+
 					if($scope.isBCH || $scope.isCHM) {	
+						
 						if ($scope.isBCH && !$scope.hasGBF('GBF-TARGET-13')){
 							document.nagoya= undefined;
 						}						
@@ -174,11 +194,13 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 							$scope.onAddressGenesChange(document.biosafety.addressGenes);
 						}					
 					}
-					if($scope.isABS && !$scope.hasGBF('GBF-TARGET-17')) {
-						document.biosafety = undefined;
-						//$scope.onResourceTypesChange( document.resourceTypes );	
-					}
-				
+					if($scope.isABS){						
+						
+						if(!$scope.hasGBF('GBF-TARGET-17')) {
+							document.biosafety = undefined;
+							//$scope.onResourceTypesChange( document.resourceTypes );	
+						}
+					}				
 					
 
 					var countryRegions = []
@@ -231,7 +253,13 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 						return true;
 					else
 						return false;
-				}		
+				}	
+				$scope.hasAichi = function(id){								
+					if ($scope.document?.aichiTargets?.find((obj) => obj.identifier === id))
+						return true;
+					else
+						return false;
+				}
 				
 
 				//==================================
