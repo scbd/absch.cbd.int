@@ -168,15 +168,14 @@
 									<legend>{{::('editVLRT.keywordsFacilitating'|$translate)}}</legend>
 									
 									<div class="row" ng-if="(isABS || isCHM ) && document.aichiTargets">
-										<label>{{::('editVLRT.aichiTargets'|$translate)}}</label>
 										<div class="col-xs-12">	
-											<div km-terms ng-model="document.aichiTargets">
-												<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
-											</div>
+											<div class="km-control-group"  name="aichiTargets"  caption="{{::('editVLRT.aichiTargets'|$translate)}}">													
+												<div km-terms ng-model="document.aichiTargets">
+													<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+												</div>								
+											</div>											
 										</div>
-                                    </div>
-                                
-
+									</div>
 									<div class="row" >
 										<div class="col-xs-12"  >
 											<div class="km-control-group tabular-term-check"  name="gbfTargets" required  caption="{{::('editVLRT.gbfTargets'|$translate)}}">													
