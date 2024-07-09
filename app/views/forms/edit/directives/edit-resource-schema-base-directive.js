@@ -162,6 +162,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 						return undefined;
 
 					if($scope.isBCH || $scope.isCHM) {	
+						
 						if ($scope.isBCH && !$scope.hasGBF('GBF-TARGET-13')){
 							document.nagoya= undefined;
 						}						
@@ -174,11 +175,13 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 							$scope.onAddressGenesChange(document.biosafety.addressGenes);
 						}					
 					}
-					if($scope.isABS && !$scope.hasGBF('GBF-TARGET-17')) {
-						document.biosafety = undefined;
-						//$scope.onResourceTypesChange( document.resourceTypes );	
-					}
-				
+					if($scope.isABS){						
+						
+						if(!$scope.hasGBF('GBF-TARGET-17')) {
+							document.biosafety = undefined;
+							//$scope.onResourceTypesChange( document.resourceTypes );	
+						}
+					}				
 					
 
 					var countryRegions = []
@@ -231,8 +234,8 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 						return true;
 					else
 						return false;
-				}		
-				
+				}	
+	
 
 				//==================================
 				//

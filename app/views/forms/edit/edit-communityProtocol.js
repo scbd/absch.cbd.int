@@ -36,7 +36,15 @@ import '~/views/forms/view/view-resource.directive';
         $scope.isCpp = true
         if(doc.countryRegions){
             $scope.setCountryRegions (doc.countryRegions)
-        }
+        };
+
+        // move aichi target -> gbf target
+        if (!doc.gbfTargets?.length){  
+            if (doc?.aichiTargets?.find((obj) => obj.identifier === 'AICHI-TARGET-16')){                      
+                doc.gbfTargets = [{"identifier":"GBF-TARGET-13"}];	                
+                // doc.aichiTargets = doc.aichiTargets.filter(item => item.identifier !== 'AICHI-TARGET-16');                      
+            }	              	
+        } 
     });
 
 

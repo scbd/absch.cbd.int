@@ -1,4 +1,4 @@
-<div>
+﻿<div>
 	<div class="registerpage-content edit-resource-base-directive">
 		<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" 
 			hide-timer="false" tab="tab"
@@ -166,17 +166,18 @@
 							<section>
 								<div class="no-shadow bg-white">
 									<legend>{{::('editVLRT.keywordsFacilitating'|$translate)}}</legend>
+									
 									<div class="row" ng-if="(isABS || isCHM ) && document.aichiTargets">
-										<div class="col-md-12">											
-											<div class="km-value" >
-												<div km-terms ng-model="document.aichiTargets">
-													<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
-												</div>
-											</div>
+										<div class="col-xs-12">	
+											<div class="km-control-group"  name="aichiTargets"  caption="{{::('editVLRT.aichiTargets'|$translate)}}">		
+												<div class="km-value">
+													<div km-terms ng-model="document.aichiTargets">
+														<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+													</div>	
+												</div>					
+											</div>											
 										</div>
-                                    </div>
-                                
-
+									</div>
 									<div class="row" >
 										<div class="col-xs-12"  >
 											<div class="km-control-group tabular-term-check"  name="gbfTargets" required  caption="{{::('editVLRT.gbfTargets'|$translate)}}">													
