@@ -109,6 +109,15 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
           return false;
       }
 
+      $scope.hasGBF = function(id){								
+        if ($scope.document?.gbfTargets?.find((obj) => obj.identifier === id))
+          return true;
+        else
+          return false;
+      }	
+
+
+
       //============================================================
       //
       //============================================================
@@ -162,6 +171,15 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
           if (!document)
             return undefined;
 
+          if($scope.isBCH || $scope.isCHM) {
+						if ($scope.isBCH && !$scope.hasGBF('GBF-TARGET-13')){
+							document.absKeyAreas= undefined;
+						}	
+					}
+					if($scope.isABS && !$scope.hasGBF('GBF-TARGET-17')){
+							document.cpbThematicAreas = undefined;
+					}	
+
           if (/^\s*$/g.test(document.notes))
             document.notes = undefined;
 
@@ -209,11 +227,25 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
 
         $scope.setDocument({}, true)
         .then(function (doc) {
+
+          console.log("aichitargets", $scope.document.aichiTargets);
+          console.log("gbftargets", $scope.document.gbfTargets);  
+          if (!$scope.document.gbfTargets?.length){ 
+            if ($scope.document?.aichiTargets?.find((obj) => obj.identifier === 'AICHI-TARGET-16')){ 
+                $scope.document.gbfTargets = [{"identifier":"GBF-TARGET-13"}];	                   
+                // $scope.document.aichiTargets =  doc.aichiTargets.filter(item => item.identifier !== 'AICHI-TARGET-16');  
+            }	   
+            console.log("aichitargets", $scope.document.aichiTargets);
+            console.log("gbftargets", $scope.document.gbfTargets);           	
+          } 
+
+
           if($scope.isABS )
             $scope.setDocument({gbfTargets:[{"identifier":"GBF-TARGET-13"}]}, true);
           if($scope.isBCH ) {
             $scope.setDocument({gbfTargets:[{"identifier":"GBF-TARGET-17"}]}, true);
           }
+       
           if(doc.countryRegions){
             $q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
                 $scope.countryRegions.countries = _.filter(doc.countryRegions, function(country){
@@ -224,6 +256,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
               });
             });
           }
+
           $scope.isSelfFunding();
         })
     }

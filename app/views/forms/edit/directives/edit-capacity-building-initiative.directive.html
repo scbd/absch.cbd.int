@@ -308,11 +308,13 @@
 
 								<!-- only display aichiTargets when there already has value for document.aichiTargets -->							
 								
-								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">
-									<label>{{::('editCBIT.aichiTargets'|$translate)}}</label>
+								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">	
 									<div class="col-md-12">	
-										<div km-terms ng-model="document.aichiTargets">
-											<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+										<div class="km-control-group tabular-term-check" name="aichiTargets" caption="{{::('editCBIT.aichiTargets'|$translate)}}"></div>
+										<div class="km-value">
+											<div km-terms ng-model="document.aichiTargets">
+												<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -326,8 +328,7 @@
 										</div>
 									</div>
 								</div>
-
-								
+							
 								<div class="row" >
 									<div class="col-md-12">
 										<div class="km-control-group" required name="gbfTargets"
@@ -338,23 +339,23 @@
 									</div>
 								</div>	
 
-								<div class="row" ng-if="isABS || isCHM">
+								<!-- IF CHM || ABS  || choose gbfTarget 13 in  BCH START -->		
+								<div class="row" ng-if="isABS || isCHM  || (isBCH && hasGBF('GBF-TARGET-13'))">
 									<div class="col-md-12">
-										<div class="km-control-group" name="absKeyAreas"
-												caption="{{::('editCBIT.keyAreasAndStrategic'|$translate)}}">
+										<div class="km-control-group" name="absKeyAreas"  ng-required="isABS|| ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))"  caption="{{::('editCBIT.keyAreasAndStrategic'|$translate)}}">
 											<div class="help-info">{{::('editCBIT.keyAreasAndStrategicInfo'|$translate)}}</div>
-											<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
+											<div km-term-check name="absKeyAreas"   ng-required="isABS|| ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))"  ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
 													binding-type="term[]"></div>
 										</div>
 									</div>
 								</div>
 
 
-								<div class="row" ng-if="isBCH || isCHM">
+								<!-- IF CHM || BCH || select gbfTarget 17 in  ABS  START -->	
+								<div class="row" ng-if="isBCH || isCHM || (isABS && hasGBF('GBF-TARGET-17'))">
 									<div class="col-md-12">
-										<div class="km-control-group tabular-term-check fourth-column"  name="cpbThematicAreas"
-												caption="{{::('editCBIT.biosafetyThematicAreas'|$translate)}}">
-												<div km-term-check required name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
+										<div class="km-control-group tabular-term-check fourth-column" ng-required="isBCH|| ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))"  name="cpbThematicAreas" caption="{{::('editCBIT.biosafetyThematicAreas'|$translate)}}">
+												<div km-term-check ng-required="isBCH|| ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))" name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
 												terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true" tabular-shape="true"></div>
 										</div>
 									</div>
