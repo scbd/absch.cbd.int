@@ -169,10 +169,12 @@
 									
 									<div class="row" ng-if="(isABS || isCHM ) && document.aichiTargets">
 										<div class="col-xs-12">	
-											<div class="km-control-group"  name="aichiTargets"  caption="{{::('editVLRT.aichiTargets'|$translate)}}">													
-												<div km-terms ng-model="document.aichiTargets">
-													<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
-												</div>								
+											<div class="km-control-group"  name="aichiTargets"  caption="{{::('editVLRT.aichiTargets'|$translate)}}">		
+												<div class="km-value">
+													<div km-terms ng-model="document.aichiTargets">
+														<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+													</div>	
+												</div>					
 											</div>											
 										</div>
 									</div>
