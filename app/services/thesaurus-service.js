@@ -21,6 +21,8 @@ import _ from 'lodash';
             };
 
             this.getTerms = function(term, params){
+                if(!term)
+                    return;
                 return $http.get('/api/v2013/thesaurus/terms/' + encodeURIComponent((terms[term]||term)) , {params:params, cache:termsCacheFactory})
                 .then(function(termData){
                     return termData.data;
