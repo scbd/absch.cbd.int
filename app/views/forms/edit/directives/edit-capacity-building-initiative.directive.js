@@ -24,6 +24,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
       $scope.type           = $attr.documentType;
       $scope.isABS          = realm.is('ABS');
       $scope.isBCH          = realm.is('BCH');
+      $scope.isCHM          = realm.is('CHM');
       $scope.path           = $location.path();
       $scope.countryRegions = {};
       $scope.timing = [{ "value": 'Days', "text": "Days" }, { "value": "Months", "text": "Months" }, { "value": "Years", "text": "Years" }]; // Values for durationText
@@ -36,7 +37,8 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
               activityScope   : function() {return thesaurusService.getDomainTerms('cbiCpbTypes');},
               targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience', {other:true, otherType:'lstring'});},
               geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},
-              aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
+              aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},         
+              gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets');},
               absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');},
               status          : function() {return thesaurusService.getDomainTerms('cbiStatus');},
               absCategories   : function() {return thesaurusService.getDomainTerms('cbiCats', {other:true, otherType:'lstring'});},
@@ -107,6 +109,12 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
           return false;
       }
 
+      $scope.hasGBF = function(id){								
+        return $scope.document?.gbfTargets?.find((obj) => obj.identifier === id);
+      }	
+
+
+
       //============================================================
       //
       //============================================================
@@ -160,6 +168,15 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
           if (!document)
             return undefined;
 
+          if($scope.isBCH || $scope.isCHM) {
+						if ($scope.isBCH && !$scope.hasGBF('GBF-TARGET-13')){
+							document.absKeyAreas= undefined;
+						}	
+					}
+					if($scope.isABS && !$scope.hasGBF('GBF-TARGET-17')){
+							document.cpbThematicAreas = undefined;
+					}	
+
           if (/^\s*$/g.test(document.notes))
             document.notes = undefined;
 
@@ -190,7 +207,6 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
             document.executingAgencies = undefined;
           if(!document.isCollaboratededByPartners || document.isCollaboratededByPartners == undefined)
             document.collaboratingPartners = undefined;
-
           
         var countryRegions = []
         if($scope.countryRegions){
@@ -206,10 +222,25 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
           return $scope.sanitizeDocument(document);
         };
 
-        $scope.setDocument({}, true)
+
+        const newDocument = {};
+        if($scope.isABS )
+          newDocument.gbfTargets = [{"identifier":"GBF-TARGET-13"}];
+        
+        if($scope.isBCH ) {
+          newDocument.gbfTargets = [{"identifier":"GBF-TARGET-17"}];
+        }
+     
+        $scope.setDocument(newDocument, true)
         .then(function (doc) {
-          if($scope.realm.is('ABS'))
-            $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
+
+          if (!$scope.document.gbfTargets?.length){ 
+            if ($scope.document?.aichiTargets?.find((obj) => obj.identifier === 'AICHI-TARGET-16')){ 
+                $scope.document.gbfTargets = [{"identifier":"GBF-TARGET-13"}];	                   
+                // $scope.document.aichiTargets =  doc.aichiTargets.filter(item => item.identifier !== 'AICHI-TARGET-16');  
+            }	           	
+          } 
+
           if(doc.countryRegions){
             $q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
                 $scope.countryRegions.countries = _.filter(doc.countryRegions, function(country){
@@ -220,6 +251,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
               });
             });
           }
+
           $scope.isSelfFunding();
         })
     }

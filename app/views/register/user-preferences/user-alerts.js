@@ -7,7 +7,7 @@ import '~/services/main';
 import '~/views/register/directives/register-top-menu';
 import '~/components/scbd-angularjs-services/main';
 import userAlertsTTranslations from '~/app-text/views/register/user-preferences/user-alerts.json';
-import frequencies from '~/app-text/views/register/user-preferences/frequency.json'
+import { frequencies } from '~/app-data/frequencies.js';
 import { mergeTranslationKeys } from '../../../services/translation-merge';
 const userAlertsT = mergeTranslationKeys(userAlertsTTranslations);
 
