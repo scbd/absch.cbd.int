@@ -1,4 +1,4 @@
-﻿<div class="innerPageEditForm capacity-building-initiative">
+<div class="innerPageEditForm capacity-building-initiative">
 
 	<span block-region activate="isLoading()" ng-if="isLoading()"></span>
 	<div class="registerpage-content">
@@ -310,10 +310,11 @@
 								
 								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">	
 									<div class="col-md-12">	
-										<div class="km-control-group tabular-term-check" name="aichiTargets" caption="{{::('editCBIT.aichiTargets'|$translate)}}"></div>
-										<div class="km-value">
-											<div km-terms ng-model="document.aichiTargets">
-												<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+										<div class="km-control-group tabular-term-check" name="aichiTargets" caption="{{::('editCBIT.aichiTargets'|$translate)}}">
+											<div class="km-value">
+												<div km-terms ng-model="document.aichiTargets">
+													<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+												</div>
 											</div>
 										</div>
 									</div>

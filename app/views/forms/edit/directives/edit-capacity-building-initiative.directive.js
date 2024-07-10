@@ -110,10 +110,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
       }
 
       $scope.hasGBF = function(id){								
-        if ($scope.document?.gbfTargets?.find((obj) => obj.identifier === id))
-          return true;
-        else
-          return false;
+        return $scope.document?.gbfTargets?.find((obj) => obj.identifier === id);
       }	
 
 
@@ -225,27 +222,25 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
           return $scope.sanitizeDocument(document);
         };
 
-        $scope.setDocument({}, true)
+
+        const newDocument = {};
+        if($scope.isABS )
+          newDocument.gbfTargets = [{"identifier":"GBF-TARGET-13"}];
+        
+        if($scope.isBCH ) {
+          newDocument.gbfTargets = [{"identifier":"GBF-TARGET-17"}];
+        }
+     
+        $scope.setDocument(newDocument, true)
         .then(function (doc) {
 
-          console.log("aichitargets", $scope.document.aichiTargets);
-          console.log("gbftargets", $scope.document.gbfTargets);  
           if (!$scope.document.gbfTargets?.length){ 
             if ($scope.document?.aichiTargets?.find((obj) => obj.identifier === 'AICHI-TARGET-16')){ 
                 $scope.document.gbfTargets = [{"identifier":"GBF-TARGET-13"}];	                   
                 // $scope.document.aichiTargets =  doc.aichiTargets.filter(item => item.identifier !== 'AICHI-TARGET-16');  
-            }	   
-            console.log("aichitargets", $scope.document.aichiTargets);
-            console.log("gbftargets", $scope.document.gbfTargets);           	
+            }	           	
           } 
 
-
-          if($scope.isABS )
-            $scope.setDocument({gbfTargets:[{"identifier":"GBF-TARGET-13"}]}, true);
-          if($scope.isBCH ) {
-            $scope.setDocument({gbfTargets:[{"identifier":"GBF-TARGET-17"}]}, true);
-          }
-       
           if(doc.countryRegions){
             $q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
                 $scope.countryRegions.countries = _.filter(doc.countryRegions, function(country){
