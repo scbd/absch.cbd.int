@@ -9,8 +9,7 @@
 					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">
 						<span ng-bind-html="::('viewAbsPermitT.revokeCertificate'|$translate)"></span>
 					</h1>
-					
-					<h1 ng-if="document.info.revision !== document.info.latestRevision">
+					<h1 ng-if="!document.info.isRequest && document.info.revision !== document.info.latestRevision">
 						<span ng-bind-html="::('viewAbsPermitT.updatedCertificate'|$translate)"></span>
 					</h1>
 					<p>
