@@ -1,0 +1,22 @@
+{
+    "nameOfTheOrganization": "Name of the organization",
+    "acronym": "Acronym",
+    "contactPerson": "Contact person in the organization",
+    "address":"Address of the organization",
+    "phoneNumber": "Phone number(s)",
+    "faxNumber": "Fax number(s)",
+    "emails": "Email(s)",
+    "webAddress": "Website address(es)",
+    "detailedInformation": "Detailed information",
+    "typeOfOrganization": "Type of organization",
+    "areasOfWork": "Areas of work",   
+    "thematicAreas":"Thematic Areas",          
+    "cbdThematicAreas":"CBD Thematic Areas",        
+    "gbfTargets":"Related Kunming-Montreal Global Biodiversity Framework Target(s)",
+    "biosafetyThematicAreas":"Biosafety Thematic areas",
+    "regionalAreas":"Regional area(s) of operations or political/economic group(s)",   
+    "organizationsProfile":"Organization’s profile",   
+    "linkedOrganizations": "Linked organizations",      
+    "additionalInformation": "Additional Information",
+    "otherRelevantWebsite": "Other relevant website addresses and/or attached documents"
+}
