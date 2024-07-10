@@ -177,26 +177,35 @@
 				</div>
 			</div>
 		</div>
-		<div ng-show="document.cbdSubjects || document.aichiTargets">
+		<div ng-show="document.cbdSubjects || document.aichiTargets || document.gbfTargets">
 
 			<legend>{{::('viewCdiT.informationOnThematic'|$translate)}}</legend>
 
-			<div ng-show="document.cbdSubjects">
-				<label>{{::('viewCdiT.relatedCbdSubject'|$translate)}}</label>
-				<div class="km-value" compare-val="Related CBD subject areas">
-					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"
-						on-terms-loaded="onCbdSubjectsTerms(terms)"></view-terms-hierarchy>
+			<div ng-show="document.aichiTargets && (isABS || isCHM)">
+				<label>{{::('viewCdiT.aichiTargets'|$translate)}}</label>			
+				<div class="km-value" compare-val="aichiTargets">
+					<div km-terms ng-model="document.aichiTargets">
+						<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+					</div>
 				</div>
 			</div>
 
-			<div ng-show="document.aichiTargets && isABS">
-				<label>{{::('viewCdiT.aichiTargets'|$translate)}}</label>
-				<div class="km-value" compare-val="Aichi target(s)">
-					<ul class="list">
-						<li ng-repeat="val in document.aichiTargets" ng-bind="val | term:locale"></li>
-					</ul>
+			<div ng-show="document.gbfTargets">
+				<label>{{::('viewCdiT.gbfTargets'|$translate)}}</label>	
+				<div class="km-value" compare-val="Gbf target(s)">
+					<div km-terms ng-model="document.gbfTargets">
+						<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+					</div>
 				</div>
 			</div>
+			
+			<div ng-if="document.cbdSubjects">
+				<label>{{::('viewCdiT.relatedCbdSubject'|$translate)}}</label>
+				<div class="km-value" compare-val="Related CBD subject areas">
+					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
+				</div>
+			</div>
+
 		</div>
 
 		<div ng-show="document.absKeyAreas">
@@ -213,11 +222,10 @@
 		<div ng-show="document.cpbThematicAreas">
 			<label>{{::('viewCdiT.cpbThematicAreas'|$translate)}}</label>
 			<div class="km-value" compare-val="Biosafety thematic areas">
-				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale"
-					term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
+				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale"  term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
 			</div>
 		</div>
-
+		
 
 		<div
 			ng-show="document.fundingSourceTypes || document.coreFundingSources || document.coFinancingSources || document.totalBudget">

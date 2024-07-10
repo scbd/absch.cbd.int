@@ -1,4 +1,4 @@
-﻿<div class="innerPageEditForm capacity-building-initiative">
+<div class="innerPageEditForm capacity-building-initiative">
 
 	<span block-region activate="isLoading()" ng-if="isLoading()"></span>
 	<div class="registerpage-content">
@@ -305,6 +305,21 @@
 						<section>
 							<div class="no-shadow bg-white">
 								<legend>{{::('editCBIT.informationOnThematic'|$translate)}}</legend>
+
+								<!-- only display aichiTargets when there already has value for document.aichiTargets -->							
+								
+								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">	
+									<div class="col-md-12">	
+										<div class="km-control-group tabular-term-check" name="aichiTargets" caption="{{::('editCBIT.aichiTargets'|$translate)}}">
+											<div class="km-value">
+												<div km-terms ng-model="document.aichiTargets">
+													<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<div class="row">
 									<div class="col-md-12">
 										<div class="km-control-group tabular-term-check" name="cbdSubjects"
@@ -314,37 +329,38 @@
 										</div>
 									</div>
 								</div>
-
-								<div class="row" ng-if="isABS">
+							
+								<div class="row" >
 									<div class="col-md-12">
-										<div class="km-control-group" name="aichiTargets"
-												caption="Aichi targets:">
-											<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets"
-													terms="options.aichiTargets()" binding-type="term[]"></div>
+										<div class="km-control-group" required name="gbfTargets"
+										caption="{{::('editCBIT.gbfTargets'|$translate)}}">
+											<div km-term-check name="gbfTargets" required ng-model="document.gbfTargets"
+													terms="options.gbfTargets()" binding-type="term[]"></div>
 										</div>
 									</div>
-								</div>
+								</div>	
 
-								<div class="row" ng-if="isABS">
+								<!-- IF CHM || ABS  || choose gbfTarget 13 in  BCH START -->		
+								<div class="row" ng-if="isABS || isCHM  || (isBCH && hasGBF('GBF-TARGET-13'))">
 									<div class="col-md-12">
-										<div class="km-control-group" name="absKeyAreas"
-												caption="{{::('editCBIT.keyAreasAndStrategic'|$translate)}}">
+										<div class="km-control-group" name="absKeyAreas"  ng-required="isABS|| ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))"  caption="{{::('editCBIT.keyAreasAndStrategic'|$translate)}}">
 											<div class="help-info">{{::('editCBIT.keyAreasAndStrategicInfo'|$translate)}}</div>
-											<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
+											<div km-term-check name="absKeyAreas"   ng-required="isABS|| ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))"  ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
 													binding-type="term[]"></div>
 										</div>
 									</div>
 								</div>
-								<div class="row" ng-if="isBCH">
+
+
+								<!-- IF CHM || BCH || select gbfTarget 17 in  ABS  START -->	
+								<div class="row" ng-if="isBCH || isCHM || (isABS && hasGBF('GBF-TARGET-17'))">
 									<div class="col-md-12">
-										<div class="km-control-group tabular-term-check fourth-column" required name="cpbThematicAreas"
-												caption="{{::('editCBIT.biosafetyThematicAreas'|$translate)}}">
-												<div km-term-check required name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
+										<div class="km-control-group tabular-term-check fourth-column" ng-required="isBCH|| ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))"  name="cpbThematicAreas" caption="{{::('editCBIT.biosafetyThematicAreas'|$translate)}}">
+												<div km-term-check ng-required="isBCH|| ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))" name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
 												terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true" tabular-shape="true"></div>
 										</div>
 									</div>
 								</div>
-
 							</div>
 						</section>
 
