@@ -27,10 +27,10 @@
                     <div class="btn-group">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" ng-disabled="updating">
                             <span ng-if="!userSettings.alertFrequency">{{::('userAlertsT.frequencyDropdown'|$translate)}}</span>
-                            <span>{{frequencies[locale][userSettings.alertFrequency]}}</span>
+                            <span>{{(frequencies | lstring)[userSettings.alertFrequency]}}</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li ng-repeat="(key, frequency) in frequencies[locale]">
+                            <li ng-repeat="(key, frequency) in frequencies | lstring">
                                 <a class="dropdown-item" ng-class="{'active': userSettings.alertFrequency == key}" ng-click="updateFrequency(key)" href="#">{{frequency}}</a>
                             </li>
                         </ul>

@@ -29,7 +29,6 @@ const userAlertsT = mergeTranslationKeys(userAlertsTTranslations);
             controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', 'searchService', 'roleService', '$route', '$element', 'localStorageService', 'solr', 'locale', 'translationService',
                 function ($rootScope, $scope, $http, IGenericService, realm, $timeout, searchService, roleService, $route, $element, localStorageService, solr, locale, translationService) {
                     $scope.realm = realm;
-                    $scope.locale = locale;
                     $scope.user = $rootScope.user;
                     $scope.skipKeywordsFilter = false;
                     $scope.skipKeywordsFilter = true; // ToDo: remove one skipKeywordsFilter
