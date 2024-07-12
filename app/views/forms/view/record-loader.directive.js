@@ -8,6 +8,7 @@ import 'ngSmoothScroll';
 import '~/views/forms/view/view-history-directive';
 import '~/services/main';
 import '~/views/directives/document-metadata-directive';
+import '~/views/directives/view-linked-records';
 import '~/views/directives/party-status';
 import '~/views/forms/view/directives/view-record-reference.directive';
 import '~/views/directives/block-region-directive';

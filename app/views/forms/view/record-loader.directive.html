@@ -107,6 +107,8 @@
         <div class="alert alert-danger comapre-message" role="alert" ng-if="comparisonRecordNotFound">
             {{::('recordLoaderT.comparisonRecordNotFound'|$translate)}}
         </div>
+----internalDocumentInfo----{{internalDocumentInfo}}
+<view-linked-records internal-document-info="internalDocumentInfo"></view-linked-records>
 
         <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="getHeaderColor(internalDocumentInfo.type)"
             style="padding-top: 8px; padding-left: 2px;" ng-show="!loading && internalDocumentInfo">
