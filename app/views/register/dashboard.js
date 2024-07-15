@@ -32,7 +32,12 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             $scope.showRecords      = true;
             $scope.isBch            = realm.is('BCH');
             $scope.isAbs            = realm.is('ABS');
-            $scope.isTrg = realm.value.includes("TRG");
+            $scope.isChm            = realm.is('CHM');
+            $scope.isTrg            = realm.value.includes("TRG");
+
+            //with CHM there are lot of obsolete schema which do not have edit forms.
+            $scope.nationalSchemas  = $scope.nationalSchemas .filter(e=>!canShowInSubmit(e));
+            $scope.referenceSchemas = $scope.referenceSchemas.filter(e=>!canShowInSubmit(e));            
 
             translationService.set('dashboardT', dashboardT);
             var schemaFacets = {};
@@ -356,6 +361,11 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         return true; 
                 }
                 return false;
+            }
+
+            function canShowInSubmit(schema){
+                return $scope.schemas[schema].hideInSubmit
+
             }
 
             init();

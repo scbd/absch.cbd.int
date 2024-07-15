@@ -650,7 +650,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
           }
 
           const query = {
-            query : `(countryRegions_REL_ss:${solr.escape(code)} AND schema_s:(biosafetyLaw biosafetyDecision))`,
+            query : `(NOT government_s:${solr.escape(code)} AND countryRegions_REL_ss:${solr.escape(code)} AND schema_s:(biosafetyLaw biosafetyDecision))`,
             fields: 'government_s,schema_s'
           }
           return searchService.facetsPivot(query).then(res=>res[0])
