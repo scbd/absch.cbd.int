@@ -388,10 +388,11 @@
     const loadProgressAssessments = async function() {
         isLoadingAssessments.value = true;   
         await Promise.all(document.value.progressAssessments?.map(async (item) => {
-            const result = await kmDocumentApi.getDocument((item.assessment.identifier)); 
-            result.government=undefined;       
-                  
-            progressAssessments.value[item.assessment.identifier]={body:result};      
+            if (item?.assessment?.identifier){
+                const result = await kmDocumentApi.getDocument((item.assessment.identifier)); 
+                result.government=undefined;                           
+                progressAssessments.value[item.assessment.identifier]={body:result};   
+            }
         }));  
         isLoadingAssessments.value = false;   
     }
@@ -399,6 +400,12 @@
     onMounted(() => {
         loadNationalTargets();  
         loadProgressAssessments();    
+        console.log("nationalTarget",nationalTargets.value);
+        console.log("nationalTarget.length",nationalTargets.value.length);
+        console.log("nationalTarget[14]",nationalTargets.value[14]);
+        console.log("progressAssessments",progressAssessments.value);
+        console.log("progressAssessments.length",progressAssessments.value.length);
+        console.log("progressAssessments[14]",progressAssessments.value[14]);
    })
  
 </script>
