@@ -9,8 +9,9 @@ import * as theChm from '~/views/home/chm';
 import { mergeTranslationKeys } from '../services/translation-merge';
 const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 const chmRouteUrls = {
-  theChm,  
-  register_NR_edit        :{ component: ()=>asyncLogError(import('~/views/forms/edit/chm/edit-chm-national-report')) },
+  theChm,
+  register_NR_edit                    : { component: ()=>asyncLogError(import('~/views/forms/edit/chm/edit-chm-national-report')) },
+  register_marineEbsa_edit                  : { component: ()=>asyncLogError(import('~/views/forms/edit/chm/edit-chm-marine-ebsa')) }
 };
 
 
