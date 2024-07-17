@@ -1073,9 +1073,9 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.12.0.tgz#9ffdf9ed133a7464f4ae187eb9e1294413fab235"
   integrity sha512-ZYmr5mS2wd4Dew/JjT0Fqi2NPB/ZhZ2VvPp7SmvPZb4Y1CG/LRcS6tcRo2cYU7zLK5A7cdbhWnnWmUjoI4qapg==
 
-"@scbd/angular-vue@https://github.com/scbd/angular-vue.git#ng-vue-3":
+"@scbd/angular-vue@https://github.com/scbd/angular-vue.git#transclude":
   version "5.0.0-alpha.1"
-  resolved "https://github.com/scbd/angular-vue.git#2e0185b8b553e596f60f26b2c40d3020388e78dc"
+  resolved "https://github.com/scbd/angular-vue.git#c638a5d6884eba0ae69554b8070d27d150dddb3f"
 
 "@scbd/common@^0.0.10":
   version "0.0.10"
@@ -2190,11 +2190,6 @@ is-reference@1.2.1:
   integrity sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==
   dependencies:
     "@types/estree" "*"
-
-isbot@^5.1.6:
-  version "5.1.11"
-  resolved "https://registry.yarnpkg.com/isbot/-/isbot-5.1.11.tgz#55e91e887c806a5f07d18ce04c2efe194215ba36"
-  integrity sha512-Asuou7OsKVbATgXlrlqdeSRw4fYnD6CNcc0IXy1f5m1AImL2S6IP0xRcRRzjGjoARbegvnBnju9kk5z/Itf70Q==
 
 js-tokens@^4.0.0:
   version "4.0.0"
