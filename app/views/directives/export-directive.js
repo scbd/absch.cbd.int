@@ -44,8 +44,7 @@ import 'ngDialog';
                         
                                     $scope.isAdministrator = roleService.isAdministrator();
                                     $scope.forTour = forTour;
-                                    $scope.downloadFormat = 'xlsx';
-                                    $scope.downloadFormat = downloadFormat = 'xlsx';
+                                    $scope.downloadFormat = 'xlsx';                              
                                     $scope.downloadData =  function(){
 
                                         var dowloadButton = $element.find('.' + $scope.downloadFormat)
@@ -56,7 +55,7 @@ import 'ngDialog';
                                                 require(['tableexport'], function(){
                                                     $element.find('#datatable').tableExport({
                                                         formats: ["xlsx", "xls", "csv"],
-                                                        filename: "ABSCH-data",
+                                                        filename: "CHM-data",
                                                     });
                                                     $element.find('.' + $scope.downloadFormat).click();
                                                 });     
@@ -154,7 +153,7 @@ import 'ngDialog';
                                                     $scope.done = function(){
                                                         customFields = _.map(_.filter($scope.fields, function(field){return field.selected}), 'field');
                                                         $scope.closeDialog();
-                                                        $element.find('.'+downloadFormat).remove();
+                                                        $element.find('.'+$scope.downloadFormat).remove();
                                                         
                                                     }
                                                     
