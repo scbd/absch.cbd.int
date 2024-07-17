@@ -287,12 +287,11 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#nrCount-NFP",
+                                    selector    : "#nrCount-NR6",
                                     title       : joyRideText.sortingRecordsNFP.title,
                                     content     : joyRideText.sortingRecordsNFP.content,
-                                    placement   : 'top',
-                                    beforeStep  : closeTab
-                                },
+                                    placement   : 'top',                                                                
+                                },                              
                                 {
                                     appendToBody:  true,
                                     type        : 'element',
