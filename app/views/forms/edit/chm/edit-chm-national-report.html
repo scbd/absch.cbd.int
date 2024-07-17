@@ -1,9 +1,4 @@
-<div >
-    <style>
-        .indent {
-            padding: 0 1rem 0 1rem;
-        }
-    </style>
+<div>    
 
     <edit-header></edit-header>
 
@@ -16,28 +11,19 @@
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
-                <!-- <intro-form></intro-form> -->
                 <edit-form>  
-                    <div class="km-control-group" name="government" required caption="country">
-                        <div class="indent">
-                            <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-                                filter="genericFilter" mapping="genericMapping" selectbox="true">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div ng-if="shareVueComponent">
-                        <edit-chm-national-report-edit-form ng-vue="shareVueComponent" v-model="document" ref="editForm"></edit-chm-national-report-edit-form>
-                    </div> 
+					<form name="editForm" class="editForm mt-2">
+                        <div ng-if="shareVueComponent">
+                            <edit-chm-national-report-edit-form ng-vue="shareVueComponent" v-model="document" ref="editForm"></edit-chm-national-report-edit-form>
+                        </div> 
+                    </form>
                 </edit-form>
 
                 <review-form>
                     <div ng-if="shareVueComponent">
                         <national-report  ng-vue="shareVueComponent" :document-info="{ body : review.document }" :locale="review.locale" allow-drafts="true"></national-report>
                     </div>
-                </review-form>
-                
-                <!-- <publish-form></publish-form> -->
+                </review-form>                
             </workflow-arrow-buttons>
         </div>
     </div>

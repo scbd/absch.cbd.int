@@ -1,32 +1,24 @@
 <template>
 
     <section>
-        <br> 
+        <legend>{{t("generalInfo")}}</legend>
+
         <div class="row">
             <div class="col-xs-12">
-                <label>{{t("languageToPublish")}}</label>                                 
-                <ng v-vue-ng:km-form-languages multiple required v-model:ng-model="document.header.languages"  html></ng> 
+                <ng v-vue-ng:km-control-group name="languages" required :caption="t('languageToPublish')">
+                    <ng v-vue-ng:km-form-languages multiple required v-model:ng-model="document.header.languages"  html></ng> 
+                </ng>
             </div>
         </div>
-
-        <legend>{{t("generalInfo")}}</legend>
         <div class="row">           
-            <div class="col-xs-12"> 
-                <!-- <ng v-vue-ng:km-control-group" name="government" required> 
-                   test
-                    <div v-pre>
-                        <label>{{t("country")}}</label> 
-                        <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-                        filter="genericFilter" mapping="genericMapping" selectbox="true" ></div>
-                    </div>  
-                </ng>  -->
-                <label>{{t("country")}}</label> 
-                <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" :source="options.countries" :ng-disabled="()=>{return userGovernment}" 
-                    :placeholder="t('selectCountryOption')" :selectbox="true" :filter="genericFilter"  :mapping="genericMapping" >
+            <div class="col-xs-12">
+                <ng v-vue-ng:km-control-group name="government" required :caption="t('country')"> 
+                    <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" :source="options.countries" :ng-disabled="()=>{return userGovernment}" 
+                        :placeholder="t('selectCountryOption')" :selectbox="true" :filter="genericFilter"  :mapping="genericMapping" >
+                    </ng>
                 </ng> 
             </div>
-        </div> 
-                
+        </div>
 
         <div class="row">
             <div class="col-xs-12">
@@ -36,8 +28,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xs-12">
+        <div class="row" v-if="route?.params?.documentType != 'NBSAP'">
+            <div class="col-xs-6">
                 <label>{{t("type")}}</label>  
                 <ng v-vue-ng:afc-autocomplete name="reportType" v-model:ng-model="document.reportType" 
                     :source="options.reportTypes" :selectbox="true" :filter="genericFilter" :mapping="genericMapping" >
@@ -53,7 +45,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label>{{t("jurisdiction")}}</label> 
                 <ng v-vue-ng:afc-autocomplete name="jurisdiction" v-model:ng-model="document.jurisdiction" :source="options.jurisdictions"  
                     :selectbox="true" :filter="genericFilter" :mapping="genericMapping">
@@ -88,7 +80,7 @@
     <section>
         <legend>{{t("status")}}</legend>     
         <div class="row">          
-            <div class="col-xs-12">               
+            <div class="col-xs-6">               
                 <label>{{t("statusOfTheDocument")}}</label>
                 <ng v-vue-ng:afc-autocomplete name="status" v-model:ng-model="document.status" :source="options.reportStatus" :selectbox="true"   
                     :filter="genericFilter"  :mapping="genericMapping">
@@ -98,7 +90,7 @@
 
 
         <div class="row" v-if="hasAdoptionDate">
-            <div class="col-md-12" >
+            <div class="col-md-6" >
                 <label>{{t("adoptionDate")}}</label>                     
                 <div class="help-info">{{t("adoptionYear")}} </div> 
                 <input class="form-control" type="text" name="adoptionDate" v-model="document.adoptionDate"></input>
@@ -106,7 +98,7 @@
         </div>
         
         <div class="row bottom-spacing" v-if="hasApprovedStatus">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label>{{t("statusOfApprovedDocument")}}</label>
                 <ng v-vue-ng:afc-autocomplete name="approvingStatus" v-model:ng-model="document.approvedStatus" :placeholder="t('approvingBodyInfo')" 
                     :source="options.approvedStatus" :selectbox="true" :filter="genericFilter" :mapping="genericMapping">
@@ -115,7 +107,7 @@
         </div>
 
         <div class="row bottom-spacing" v-if="hasApprovedStatus">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label>{{t("approvingBody")}}</label>
                 <ng v-vue-ng:afc-autocomplete name="approvingBody"  v-model:ng-model="document.approvingBody"  :placeholder="t('approvingBodyInfo')" :source="options.approvingBody"
                     :selectbox="true"  :filter="genericFilter"  :mapping="genericMapping" >
@@ -124,7 +116,7 @@
         </div>
 
         <div class="row bottom-spacing" v-if="hasApprovedStatusInfo">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label>{{t("approvingBodyInformation")}}</label>
                 <ng v-vue-ng:km-textbox-ml name="approvingBodyInfo"  rows="3" v-model:ng-model="document.approvingBodyInfo" :locales="document.header.languages"></ng>                
             </div>
@@ -173,7 +165,7 @@
     import { genericMapping, genericFilter } from '~/services/filters/arrays';
     import  { THESAURUS } from '~/services/filters/constant';
     import { sanitizeDocument } from '~/services/filters/common';
-    import { useAuth } from "@scbd/angular-vue/src/index.js";
+    import { useAuth, useRoute } from "@scbd/angular-vue/src/index.js";
     import ThesaurusApi  from "~/api/thesaurus.js";
  
     
@@ -182,7 +174,9 @@
     const angularGetCleanDocument = inject('getCleanDocument')
     const { t }                   = useI18n({ messages });
     const auth                    = useAuth();
+    const route                   = useRoute();
     const thesaurusApi            = new ThesaurusApi({tokenReader:()=>auth.token()});
+
 
     const STATUS_DRAFT                               = "9D17F3A2-EC92-4D31-81EF-A12521873D7F";
     const STATUS_FINAL                               = "1C37E358-5295-46EB-816C-0A7EF2437EC9" ;
