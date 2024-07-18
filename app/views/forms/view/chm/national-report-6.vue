@@ -400,12 +400,7 @@
     onMounted(() => {
         loadNationalTargets();  
         loadProgressAssessments();    
-        console.log("nationalTarget",nationalTargets.value);
-        console.log("nationalTarget.length",nationalTargets.value.length);
-        console.log("nationalTarget[14]",nationalTargets.value[14]);
-        console.log("progressAssessments",progressAssessments.value);
-        console.log("progressAssessments.length",progressAssessments.value.length);
-        console.log("progressAssessments[14]",progressAssessments.value[14]);
+
    })
  
 </script>
