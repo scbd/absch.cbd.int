@@ -22,41 +22,50 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <label>{{t("title")}}</label><br/>
-                <div class="help-info">{{t("titleInfo")}} </div> 
-                <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.title" :placeholder="t('title')" :locales="document.header.languages" ></ng>                
+                <ng v-vue-ng:km-control-group name="title" required :caption="t('title')"> 
+                    <div>
+                        <div class="help-info">{{t("titleInfo")}} </div>
+                        <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.title" :placeholder="t('title')" :locales="document.header.languages" ></ng> 
+                    </div>
+                </ng> 
             </div>
         </div>
 
+       
+
         <div class="row" v-if="route?.params?.documentType != 'NBSAP'">
             <div class="col-xs-6">
-                <label>{{t("type")}}</label>  
-                <ng v-vue-ng:afc-autocomplete name="reportType" v-model:ng-model="document.reportType" 
-                    :source="options.reportTypes" :selectbox="true" :filter="genericFilter" :mapping="genericMapping" >
-                </ng>  
+                <ng v-vue-ng:km-control-group name="type" required :caption="t('type')"> 
+                    <ng v-vue-ng:afc-autocomplete name="reportType" v-model:ng-model="document.reportType" 
+                        :source="options.reportTypes" :selectbox="true" :filter="genericFilter" :mapping="genericMapping" >
+                    </ng>
+                </ng> 
             </div>
         </div>
 
         <div class="row">
             <div class="col-xs-12">
-                <label>{{t("summary")}}</label>               
-                <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.summary" rows="3" :placeholder="t('summary')" :locales="document.header.languages" ></ng>                
+                <ng v-vue-ng:km-control-group name="summary" :caption="t('summary')">
+                    <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.summary" rows="3" :placeholder="t('summary')" :locales="document.header.languages" ></ng> 
+                </ng>            
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <label>{{t("jurisdiction")}}</label> 
-                <ng v-vue-ng:afc-autocomplete name="jurisdiction" v-model:ng-model="document.jurisdiction" :source="options.jurisdictions"  
-                    :selectbox="true" :filter="genericFilter" :mapping="genericMapping">
-                </ng>  
+            <div class="col-md-6">            
+                <ng v-vue-ng:km-control-group name="jurisdiction"  :caption="t('jurisdiction')">
+                    <ng v-vue-ng:afc-autocomplete name="jurisdiction" v-model:ng-model="document.jurisdiction" :source="options.jurisdictions"  
+                        :selectbox="true" :filter="genericFilter" :mapping="genericMapping">
+                    </ng> 
+                </ng>                
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <label>{{t("additionalInformation")}}</label> 
-                <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.jurisdictionInfo" rows="3" :placeholder="t('additionalInformation')" :locales="document.header.languages" ></ng>                
+                <ng v-vue-ng:km-control-group name="additionalInformation" :caption="t('additionalInformation')">
+                    <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.jurisdictionInfo" rows="3" :placeholder="t('additionalInformation')" :locales="document.header.languages" ></ng>
+                </ng>               
             </div>
         </div>
     </section>
@@ -66,92 +75,111 @@
 
         <div class="row">
             <div class="col-md-6">
-                <label>{{t("from")}}</label>            
-                <ng v-vue-ng:km-date required name="startDate" v-model:ng-model="document.startDate"></ng>              
+                <ng v-vue-ng:km-control-group name="from" required :caption="t('from')">
+                    <ng v-vue-ng:km-date required name="startDate" v-model:ng-model="document.startDate"></ng>    
+                </ng>  
             </div>
 
             <div class="col-md-6">
-                <label>{{t("to")}}</label>           
-                <ng v-vue-ng:km-date  required name="endDate" v-model:ng-model="document.endDate"></ng>              
+                <ng v-vue-ng:km-control-group name="to"  :caption="t('to')">
+                    <ng v-vue-ng:km-date  required name="endDate" v-model:ng-model="document.endDate"></ng>  
+                </ng>   
             </div>
         </div>
     </section>
 
-    <section>
+   <section>
         <legend>{{t("status")}}</legend>     
         <div class="row">          
-            <div class="col-xs-6">               
-                <label>{{t("statusOfTheDocument")}}</label>
-                <ng v-vue-ng:afc-autocomplete name="status" v-model:ng-model="document.status" :source="options.reportStatus" :selectbox="true"   
-                    :filter="genericFilter"  :mapping="genericMapping">
-                </ng> 
+            <div class="col-xs-6">     
+                <ng v-vue-ng:km-control-group name="statusOfTheDocument"  :caption="t('statusOfTheDocument')"> 
+                    <ng v-vue-ng:afc-autocomplete name="status" v-model:ng-model="document.status" :source="options.reportStatus" :selectbox="true"   
+                        :filter="genericFilter"  :mapping="genericMapping">
+                    </ng> 
+                </ng>
             </div>
         </div>
 
 
         <div class="row" v-if="hasAdoptionDate">
             <div class="col-md-6" >
-                <label>{{t("adoptionDate")}}</label>                     
-                <div class="help-info">{{t("adoptionYear")}} </div> 
-                <input class="form-control" type="text" name="adoptionDate" v-model="document.adoptionDate"></input>
+                <ng v-vue-ng:km-control-group name="adoptionDate"  :caption="t('adoptionDate')"> 
+                    <div>
+                        <div class="help-info">{{t("adoptionYear")}} </div> 
+                        <input class="form-control" type="text" name="adoptionDate" v-model="document.adoptionDate"></input>                  
+                    </div>
+                </ng>                
             </div>
         </div>
         
         <div class="row bottom-spacing" v-if="hasApprovedStatus">
             <div class="col-md-6">
-                <label>{{t("statusOfApprovedDocument")}}</label>
-                <ng v-vue-ng:afc-autocomplete name="approvingStatus" v-model:ng-model="document.approvedStatus" :placeholder="t('approvingBodyInfo')" 
+                <ng v-vue-ng:km-control-group name="statusOfApprovedDocument" :caption="t('statusOfApprovedDocument')"> 
+                    <ng v-vue-ng:afc-autocomplete name="approvingStatus" v-model:ng-model="document.approvedStatus" :placeholder="t('approvingBodyInfo')" 
                     :source="options.approvedStatus" :selectbox="true" :filter="genericFilter" :mapping="genericMapping">
-                </ng>                  
+                    </ng> 
+                </ng>          
             </div>
         </div>
 
         <div class="row bottom-spacing" v-if="hasApprovedStatus">
             <div class="col-md-6">
-                <label>{{t("approvingBody")}}</label>
-                <ng v-vue-ng:afc-autocomplete name="approvingBody"  v-model:ng-model="document.approvingBody"  :placeholder="t('approvingBodyInfo')" :source="options.approvingBody"
-                    :selectbox="true"  :filter="genericFilter"  :mapping="genericMapping" >
-                </ng>                  
+                <ng v-vue-ng:km-control-group name="approvingBody"  :caption="t('approvingBody')"> 
+                    <ng v-vue-ng:afc-autocomplete name="approvingBody"  v-model:ng-model="document.approvingBody"  :placeholder="t('approvingBodyInfo')" :source="options.approvingBody"
+                        :selectbox="true"  :filter="genericFilter"  :mapping="genericMapping" >
+                    </ng>
+                </ng>          
             </div>
         </div>
 
         <div class="row bottom-spacing" v-if="hasApprovedStatusInfo">
             <div class="col-md-6">
-                <label>{{t("approvingBodyInformation")}}</label>
-                <ng v-vue-ng:km-textbox-ml name="approvingBodyInfo"  rows="3" v-model:ng-model="document.approvingBodyInfo" :locales="document.header.languages"></ng>                
+                <ng v-vue-ng:km-control-group name="approvingBodyInformation"  :caption="t('approvingBodyInformation')">
+                    <ng v-vue-ng:km-textbox-ml name="approvingBodyInfo"  rows="3" v-model:ng-model="document.approvingBodyInfo" :locales="document.header.languages"></ng>               
+                </ng> 
             </div>
         </div>
     </section>
 
     <section>
         <legend>{{t("mainRelevantDocuments")}}</legend>
-        <label>{{t("relevantInformation")}}</label>
-        <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.documentText" rows="3" :placeholder="t('relevantInformation')" :locales="document.header.languages" ></ng>                
-        <label>{{t("relevantLinks")}}</label> 
-        <ng v-vue-ng:km-link name="documentLinks" v-model:ng-model="document.documentLinks" :allow-link="true" 
-            :allow-file="true"  :identifier="document.header.identifier">
+      
+        <ng v-vue-ng:km-control-group name="relevantInformation" :caption="t('relevantInformation')">
+            <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.documentText" rows="3" :placeholder="t('relevantInformation')" :locales="document.header.languages" ></ng>                
         </ng>
+        
+        <ng v-vue-ng:km-control-group name="relevantLinks" :caption="t('relevantLinks')">
+            <ng v-vue-ng:km-link name="documentLinks" v-model:ng-model="document.documentLinks" :allow-link="true" 
+                :allow-file="true"  :identifier="document.header.identifier">
+            </ng>
+        </ng>       
     </section>
 
     
     <section>
         <legend>{{t("otherRelevantInformation")}}</legend>
         <label>{{t("additionalInformation")}}</label>
-        <label>{{t("otherRelevantInformationInfo")}}</label>
-        <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.relevantInformation" rows="3" :placeholder="t('otherRelevantInformationInfo')" :locales="document.header.languages" ></ng>                
-        <label>{{t("otherRelevantWebsite")}}</label>
-        <ng v-vue-ng:km-link name="relevantDocuments" v-model:ng-model="document.relevantDocuments" 
-            :allow-link="true" :allow-file="true"   :identifier="document.header.identifier">
-        </ng>
+        <ng v-vue-ng:km-control-group name="otherRelevantInformationInfo"  :caption="t('otherRelevantInformationInfo')">
+            <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.relevantInformation" rows="3" :placeholder="t('otherRelevantInformationInfo')" :locales="document.header.languages" ></ng>                
+        </ng>  
+
+        <ng v-vue-ng:km-control-group name="otherRelevantWebsite"  :caption="t('otherRelevantWebsite')">
+            <ng v-vue-ng:km-link name="relevantDocuments" v-model:ng-model="document.relevantDocuments" 
+                :allow-link="true" :allow-file="true"   :identifier="document.header.identifier">
+            </ng>
+        </ng> 
     </section>
 
     <section>
         <legend>{{t("notes")}}</legend>
         <div class="row">
             <div class="col-xs-12">
-                <label>{{t("notes")}}</label>
-                <div class="help-info"> {{t("notesInfos")}}</div>    
-                <ng v-vue-ng:km-notes name="notes" v-model:ng-model="document.notes"></ng>										             
+                <ng v-vue-ng:km-control-group name="notes" :caption="t('notes')">
+                    <div>
+                        <div class="help-info"> {{t("notesInfos")}}</div>    
+                        <ng v-vue-ng:km-notes name="notes" v-model:ng-model="document.notes"></ng>	
+                    </div>
+                </ng> 								             
             </div>
         </div>
     </section>
