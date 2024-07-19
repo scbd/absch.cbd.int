@@ -2,9 +2,10 @@ import app from '~/app';
 import _ from 'lodash';
 import template from "text!./bbi-contact.html";
 import '~/components/scbd-angularjs-controls/main';
+import bbiContact from '~/app-text/views/reports/chm/bbi-contact.json';
 
-app.directive('viewBbiContact', ['$http', "$rootScope", "$filter", "$q", "$location", 'IStorage', '$route', '$timeout', 'locale',
-	function($http, $rootScope, $filter, $q, $location, storage, $route, $timeout, locale) {
+app.directive('viewBbiContact', ['$http', "$rootScope", "$filter", "$q", "$location", 'IStorage', '$route', '$timeout', 'locale','translationService',
+	function($http, $rootScope, $filter, $q, $location, storage, $route, $timeout, locale,translationService) {
 	return {
 		restrict: 'E',
 		template: template,
@@ -18,6 +19,7 @@ app.directive('viewBbiContact', ['$http', "$rootScope", "$filter", "$q", "$locat
 			header: "=?"
 		},
 		link: function($scope) {
+			translationService.set('bbiContact', bbiContact);
 			if (typeof $scope.header === 'undefined') $scope.header = true;
 			//====================
 			//
