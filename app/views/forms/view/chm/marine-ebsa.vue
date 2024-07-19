@@ -108,13 +108,13 @@
 
                 <legend>{{ t("status") }}</legend>
            
-                <div v-if="document.status=='approved' && ( document.approvedByCopDecision || document.approvedByCopDecision)" >
+                <div v-if="document.status=='approved' " >
                     <div class="card">
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item" :class="[(document.status=='approved')? 'bg-success text-white ':'']">
                                  {{t("areasEbsa")}}                           
                           </li>
-                          <li class="list-group-item">
+                          <li class="list-group-item" >
                                 <div v-if="document.approvedByCopDecision" >
                                     <div v-if="approvedByCopDecision != undefined" >
                                         <label>{{t("copDecision")}}</label> 
@@ -139,13 +139,13 @@
                     </div>
                    
                 </div>   
-                <div v-if="document.status=='recommendedToCop' && ( document.recommendedToCopByGovernment || document.recommendedToCopByGovernment || recommendedToCopByGovernmentOn )" >
+                <div v-if="document.status=='recommendedToCop' " >
                     <div class="card">
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item" :class="[(document.status=='recommendedToCop')? 'bg-success text-white':'']">
                                 {{t("areasCop")}}                         
                           </li>
-                          <li class="list-group-item">                                
+                          <li class="list-group-item" >                                
                                 <div class="row">    
                                     <div class="col-8" v-if="document.recommendedToCopByGovernment">
                                         <label>{{t("ongoingOfficialProcess")}}</label>
@@ -164,13 +164,13 @@
                 </div>
 
 
-                <div v-if="document.status=='recommendedToSbstta' && ( document.recommendedToSbsttaBy || document.recommendedToSbsttaByWorkshop)" class="border">
+                <div v-if="document.status=='recommendedToSbstta' " class="border">
                     <div class="card">
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item" :class="[(document.status=='recommendedToSbstta')? 'bg-success text-white':'']">
                             {{t("areasCriteriaSBSTTA")}}                       
                           </li>
-                          <li class="list-group-item">
+                          <li class="list-group-item" v-if="( document.recommendedToSbsttaBy || document.recommendedToSbsttaByWorkshop)">
                             <div v-if="document.recommendedToSbsttaBy" >
                                 <label>{{t("preparation")}}</label>
                                 <div class="km-value"  >
@@ -189,13 +189,13 @@
                     </div>
                 </div>
                 
-                <div v-if="document.status=='recommendedToWorkshop' && (document.recommendedToWorkshopBy || document.recommendedToWorkshopByGovernments || document.recommendedToWorkshopByOthers)" >
+                <div v-if="document.status=='recommendedToWorkshop' " >
                     <div class="card">
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item" :class="[(document.status=='recommendedToWorkshop')? 'bg-success text-white':'']">
                             {{ t("areasCriteriaCBD")}}                     
                           </li>                      
-                          <li class="list-group-item">
+                          <li class="list-group-item" v-if="(document.recommendedToWorkshopBy || document.recommendedToWorkshopByGovernments || document.recommendedToWorkshopByOthers)">
                             <div v-if="document.recommendedToWorkshopBy" >                            
                                 <label>{{t("recommendedToWorkshopBy")}} </label>                                  
                                 <ul class="km-value">
@@ -230,13 +230,13 @@
                     </div>
                 </div> 
         
-                <div v-if="document.status=='recommendedToAny' && (document.recommendedToAnyBy || document.recommendedToAnyByGovernment || document.recommendedToAnyByOrganizations || document.recommendedToAnyByOthers)" >
+                <div v-if="document.status=='recommendedToAny'"  >
                     <div class="card">
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item" :class="[(document.status=='recommendedToAny')? 'bg-success text-white':'']">
                               {{t("otherAreas")}}                   
                           </li>
-                          <li class="list-group-item">
+                          <li class="list-group-item" v-if="(document.recommendedToAnyBy || document.recommendedToAnyByGovernment || document.recommendedToAnyByOrganizations || document.recommendedToAnyByOthers)">
                             <div v-if="document.recommendedToAnyBy" >
                                 <label v-if="document.recommendedToAnyBy">{{t("recommendedBy")}}</label>
                                 <div class="km-value">
@@ -271,7 +271,7 @@
                 </div> 
             </section>  
 
-             <section v-if="document.assessments"> 
+             <section v-if="hasAssessmentData"> 
                 <legend>{{t("assessment")}}</legend> 
                 <div  v-for="assessment in document.assessments" >      
                     <div class="card mb-2" v-if="assessment.selected" >
@@ -344,6 +344,14 @@
             return document?.value?.approvedByCopDecision?.identifier;
   
      });
+
+     const hasAssessmentData = computed(()=>{
+        var result= false;  
+        document.value.assessments.forEach((assessment) => {  
+            result = result ||assessment.selected; 
+        });      
+        return result;
+    });
 
     // const approvedByGovernmentOnDate = computed(()=>{
     //     if(document?.value?.approvedByGovernmentOn?.identifier?.indexOf('0001')===0)           
