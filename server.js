@@ -26,10 +26,13 @@ process.env.CLEARINGHOUSE = process.env.CLEARINGHOUSE || 'ABS';
 // Initialize constants
 var appVersion          =  process.env.TAG;
 let apiUrl              =  process.env.API_URL || 'https://api.cbddev.xyz';
+let accountsUrl         =  process.env.ACCOUNTS_URL || 'https://accounts.cbddev.xyz';
 let cdnUrl              = (process.env.CDN_URL || 'https://cdn.jsdelivr.net/').replace(/\/+$/, '')+'/';
     global.app          = _.extend((global.app||{}), {});
     global.app.rootPath = __dirname; //to use in subfolders
     global.app.cdnUrl   = cdnUrl;
+    global.app.apiUrl = apiUrl;
+    global.app.accountsUrl = accountsUrl;
 
 const iframeAllowedUrls = [/^\/((ar|en|es|fr|ru|zh)\/)?share\/embed/]
 
