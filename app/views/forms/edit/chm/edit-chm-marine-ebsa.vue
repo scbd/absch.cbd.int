@@ -1,45 +1,38 @@
 
 <template>
     <div  v-if="document.header">
-        <section>        
+        <section>  
+            <legend>{{t("generalInfo")}}</legend>
+
             <div class="row">
                 <div class="col-xs-12">
-                    <ng v-vue-ng:km-control-group name="languages" required :caption="t('languageToPublish')">
+                    <ng v-vue-ng:km-control-group name="languages" :required="true" :caption="t('languageToPublish')">
                         <ng v-vue-ng:km-form-languages multiple required v-model:ng-model="document.header.languages"  html></ng> 
                     </ng>
                 </div>
             </div>
-
-
-            <legend>{{t("generalInfo")}}</legend>
                         
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <ng v-vue-ng:km-control-group name="title" required :caption="t('title')">
-                            <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.title" :placeholder="t('title')" :locales="document.header.languages"></ng>                
-                        </ng>
-                    </div> 
+                <div class="col-xs-12">                    
+                    <ng v-vue-ng:km-control-group name="title" required :caption="t('title')">
+                        <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.title" :placeholder="t('title')" :locales="document.header.languages"></ng>                
+                    </ng>                
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">                   
-                        <ng v-vue-ng:km-control-group name="summary" required :caption="t('summary')">           
-                            <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.summary" rows="3" :placeholder="t('summaryInfo')" :locales="document.header.languages"></ng>                
-                        </ng>
-                    </div>
+                <div class="col-xs-12">                                     
+                    <ng v-vue-ng:km-control-group name="summary" required :caption="t('summary')">           
+                        <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.summary" rows="3" :placeholder="t('summaryInfo')" :locales="document.header.languages"></ng>                
+                    </ng>               
                 </div>
             </div>
             
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">                     
-                        <ng v-vue-ng:km-control-group name="IntroductionOfTheArea"  :caption="t('IntroductionOfTheArea')">             
-                            <ng v-vue-ng:km-rich-textbox name="areaIntroducion" v-model:ng-model="document.areaIntroducion" rows="3" :locales="document.header.languages"></ng>                
-                        </ng>
-                    </div>
+                <div class="col-xs-12">                               
+                    <ng v-vue-ng:km-control-group name="IntroductionOfTheArea"  :caption="t('IntroductionOfTheArea')">             
+                        <ng v-vue-ng:km-rich-textbox name="areaIntroducion" v-model:ng-model="document.areaIntroducion" rows="3" :locales="document.header.languages"></ng>                
+                    </ng>                
                 </div>
             </div>
         </section>
@@ -48,26 +41,23 @@
         <section>
             <legend>{{t("location")}}</legend>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <ng v-vue-ng:km-control-group name="ebsaRegion" required :caption="t('ebsaRegion')">                         
+                <div class="col-md-12">                  
+                    <ng v-vue-ng:km-control-group name="ebsaRegion" required :caption="t('ebsaRegion')">   
+                        <div>
                             <ng v-vue-ng:km-select name="region" required v-model:ng-model="document.region" :placeholder="t('ebsaRegionInfo')" @items="()=>options.ebsaRegions"></ng>
-                        </ng>
-                    </div>
+                        </div>                      
+                    </ng>                  
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <ng v-vue-ng:km-control-group name="location" required :caption="t('location')"> 
-                            <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.location" rows="3" :locales="document.header.languages" ></ng>                
-                        </ng>
-                    </div>
+                <div class="col-xs-12">                    
+                    <ng v-vue-ng:km-control-group name="location" required :caption="t('location')"> 
+                        <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.location" rows="3" :locales="document.header.languages" ></ng>                
+                    </ng>                 
                 </div>
             </div>
-
-            <!-- TODO: test file -->
+          
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
@@ -103,12 +93,10 @@
             <legend>{{t("areaDetails")}}</legend>
 
             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <ng v-vue-ng:km-control-group name="featureDescription"  :caption="t('featureDescription')">
-                            <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.areaDescription" rows="3"  :locales="document.header.languages" ></ng> 
-                        </ng>                                
-                    </div>
+                <div class="col-md-12">                 
+                    <ng v-vue-ng:km-control-group name="featureDescription"  :caption="t('featureDescription')">
+                        <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.areaDescription" rows="3"  :locales="document.header.languages" ></ng> 
+                    </ng>
                 </div>
             </div>
 
@@ -136,7 +124,9 @@
                 <div class="col-xs-12">  
                     <div class="form-group">       
                         <ng v-vue-ng:km-control-group name="relatedCountries" required :caption="t('relatedCountries')">  
-                            <ng v-vue-ng:km-select name="countries" multiple required v-model:ng-model="document.countries" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>
+                            <div>
+                                <ng v-vue-ng:km-select name="countries" multiple required v-model:ng-model="document.countries" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>
+                            </div>
                         </ng> 
                     </div>
                 </div>
@@ -190,10 +180,12 @@
             <legend>{{t("statusOfSubmission")}}</legend>   
             <div class="row">
                 <div class="col-md-12">
-                    <input type="radio" name="status" v-model="document.status" value="approved"  />
-                    <label> {{t("areasApprovedForInclusionInTheEbsa")}}</label>            
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="status" v-model="document.status" value="approved" id="optionA"  @change="handleSubmissionStatusChange"/>
+                        <label class="form-check-label"  for="optionA"> {{t("areasApprovedForInclusionInTheEbsa")}}</label>  
+                    </div>                                      
                 
-                    <div class="row ms-3">
+                    <div class="row ms-3 mb-2">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <ng v-vue-ng:km-control-group name="copDecision" required :caption="t('copDecision')"> 
@@ -209,7 +201,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <ng v-vue-ng:km-control-group name="approvedByAPartyOrGovernment" required :caption="t('approvedByAPartyOrGovernment')"> 
-                                        <ng v-vue-ng:km-select name="approvedByGovernment" v-model:ng-model="document.approvedByGovernment" @ng-disabled="document.status!='approved'" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"></ng>
+                                        <div>
+                                            <ng v-vue-ng:km-select name="approvedByGovernment" v-model:ng-model="document.approvedByGovernment" @ng-disabled="document.status!='approved'" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"></ng>
+                                        </div>  
                                     </ng>                                      
                                 </div>
                             </div>
@@ -227,9 +221,10 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <input type="radio" name="status" v-model="document.status" value="recommendedToCop"  />
-                    <label>{{ t("areasThroughNationalProcess")}}</label>
-        
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="status" v-model="document.status" value="recommendedToCop"  id="optionB"  @change="handleSubmissionStatusChange"/>
+                        <label class="form-check-label"  for="optionB">{{ t("areasThroughNationalProcess")}}</label>
+                    </div> 
 
                     <!-- hide temporarily because not getting options.sbsttsRecommendations -->
                     <!-- <div class="row ms-3">
@@ -245,8 +240,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <ng v-vue-ng:km-control-group name="OngoingOfficialNationalProcess" required :caption="t('OngoingOfficialNationalProcess')"> 
-                                    <ng v-vue-ng:km-select name="countries" v-model:ng-model="document.recommendedToCopByGovernment" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"  @ng-disabled="document.status!='recommendedToCop'"></ng>
-                               </ng>
+                                    <div>
+                                        <ng v-vue-ng:km-select name="countries" v-model:ng-model="document.recommendedToCopByGovernment" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"  @ng-disabled="document.status!='recommendedToCop'"></ng>
+                                    </div> 
+                                </ng>
                             </div>
                         </div>
 
@@ -263,19 +260,21 @@
 
             <div class="row">
                 <div class="col-md-12"> 
-                    <input type="radio" name="status" v-model="document.status" value="recommendedToSbstta"  />
-                    <label>{{t("areasForConsiderationBySBSTTA")}}</label>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="status" v-model="document.status" value="recommendedToSbstta"  id="optionC"  @change="handleSubmissionStatusChange"/>
+                        <label class="form-check-label"  for="optionC">{{t("areasForConsiderationBySBSTTA")}}</label>
+                    </div> 
             
 
-                    <div class="row ms-3">
+                    <div class="row ms-3 mb-3">
                         <div class="col-md-12">                       
                             <div class="form-check">                         
-                                <input  class="form-check-input" type="radio" value="SCBD" id="preparedBySCBD" name="recommendedToSbsttaBy" v-model="document.recommendedToSbsttaBy" :disabled="document.status!='recommendedToSbstta'" />
-                                <label class="form-check-label">{{t("preparedByCBDWorkshops")}}</label>
+                                <input class="form-check-input" type="radio" value="SCBD" id="preparedBySCBD" name="recommendedToSbsttaBy" v-model="document.recommendedToSbsttaBy" :disabled="document.status!='recommendedToSbstta'" />
+                                <label class="form-check-label" for="preparedBySCBD">{{t("preparedByCBDWorkshops")}}</label>
                             </div>
                             <div class="form-check ">                          
-                                <input  class="form-check-input" type="radio" value="ORG" id="preparedByORG" name="recommendedToSbsttaBy" v-model="document.recommendedToSbsttaBy" :disabled="document.status!='recommendedToSbstta'" />
-                                <label class="form-check-label">{{t("preparedByCompetentOrganizations")}}</label>
+                                <input  class="form-check-input" type="radio" value="ORG" id="preparedByORG" name="recommendedToORGBy" v-model="document.recommendedToSbsttaBy" :disabled="document.status!='recommendedToSbstta'"  />
+                                <label class="form-check-label" for="preparedByORG">{{t("preparedByCompetentOrganizations")}}</label>
                             </div>
                         </div>
                     </div>
@@ -293,24 +292,26 @@
             </div>  
 
             <div class="row">
-                <div class="col-md-12"> 
-                    <input type="radio" name="status" v-model="document.status" value="recommendedToWorkshop"  />
-                    <label>{{t("areasForConsiderationByWorkshop")}}</label>
-        
+                <div class="col-md-12">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="status" v-model="document.status" value="recommendedToWorkshop"  id="optionD"   @change="handleSubmissionStatusChange"/>
+                        <label class="form-check-label"  for="optionD" >{{t("areasForConsiderationByWorkshop")}}</label>
+                    </div> 
+
                     <div class="row ms-3">
                         <div class="col-md-12"> 
                             <div class="form-group">                    
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="GOV" id="recommendedToWorkshopByGov" v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
-                                    <label class="form-check-label">{{t("government")}}</label>
+                                    <label class="form-check-label" for="recommendedToWorkshopByGov" >{{t("government")}}</label>
                                 </div>    
                                 <div class="form-check">                      
                                     <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="ORG" id="recommendedToWorkshopByOrg" v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
-                                    <label class="form-check-label">{{t("competentOrganization")}}</label>                       
+                                    <label class="form-check-label" for="recommendedToWorkshopByOrg">{{t("competentOrganization")}}</label>                       
                                 </div> 
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="recommendedToWorkshopBy" value="OTHER" id="recommendedToWorkshopByOthers" v-model="document.recommendedToWorkshopBy" :disabled="document.status!='recommendedToWorkshop'" />
-                                    <label class="form-check-label">{{t("other")}}</label>                        
+                                    <label class="form-check-label" for="recommendedToWorkshopByOthers">{{t("other")}}</label>                        
                                 </div>
                             </div>
                         </div> 
@@ -320,7 +321,9 @@
                         <div class="col-md-12">
                             <div class="form-group">   
                                 <ng v-vue-ng:km-control-group name="selectCountries" required :caption="t('selectCountries')">
-                                    <ng v-vue-ng:km-select name="recommendedToWorkshopByGovernments" multiple v-model:ng-model="document.recommendedToWorkshopByGovernments" @ng-disabled="document.status!='recommendedToWorkshop'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng> 
+                                    <div>
+                                        <ng v-vue-ng:km-select name="recommendedToWorkshopByGovernments" multiple v-model:ng-model="document.recommendedToWorkshopByGovernments" @ng-disabled="document.status!='recommendedToWorkshop'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng> 
+                                    </div> 
                                 </ng>
                             </div>
                         </div>
@@ -352,23 +355,25 @@
             
             <div class="row">
                 <div class="col-md-12">     
-                    <input type="radio" name="status" v-model="document.status" value="recommendedToAny" />
-                    <label>{{t("otherRelevantAreas")}}</label>       
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="status" v-model="document.status" value="recommendedToAny"  id="optionE"  @change="handleSubmissionStatusChange"/>
+                        <label class="form-check-label"  for="optionE">{{t("otherRelevantAreas")}}</label>     
+                   </div>   
 
                     <div class="row ms-3">
                         <div class="col-md-12">
                             <div class="form-group">   
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="GOV" id="recommendedToAnyByGov" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
-                                    <label class="form-check-label">{{t("government")}} </label>
+                                    <label class="form-check-label" for="recommendedToAnyByGov">{{t("government")}} </label>
                                 </div>    
                                 <div class="form-check">                      
                                     <input class="form-check-input" type="radio" value="ORG" id="recommendedToAnyByOrg" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
-                                    <label class="form-check-label">{{t("competentOrganization")}}</label>                       
+                                    <label class="form-check-label" for="recommendedToAnyByOrg">{{t("competentOrganization")}}</label>                       
                                 </div> 
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="OTHER" id="recommendedToAnyByOthers" name="recommendedToAnyBy" v-model="document.recommendedToAnyBy" :disabled="document.status!='recommendedToAny'" />
-                                    <label class="form-check-label">{{t("other")}}</label>                        
+                                    <label class="form-check-label" for="recommendedToAnyByOthers">{{t("other")}}</label>                        
                                 </div>
                             </div>
                         </div>
@@ -378,7 +383,9 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <ng v-vue-ng:km-control-group name="selectCountries" required :caption="t('selectCountries')">
-                                    <ng v-vue-ng:km-select name="recommendedToAnyByGovernment" multiple v-model:ng-model="document.recommendedToAnyByGovernment" @ng-disabled="document.status!='recommendedToAny'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>  
+                                    <div>
+                                        <ng v-vue-ng:km-select name="recommendedToAnyByGovernment" multiple v-model:ng-model="document.recommendedToAnyByGovernment" @ng-disabled="document.status!='recommendedToAny'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>  
+                                    </div>
                                 </ng> 
                             </div>
                         </div>
@@ -413,11 +420,11 @@
             <legend>{{t("assessmentOfArea")}}</legend>
             <div class="form-check" v-for="assessment in document.assessments" :key="assessment">  
                 <div class="form-group">   
-                    <input class="form-check-input" type="checkbox" v-model="assessment.selected" >
-                    <label><b>{{assessment.title}}</b></label>
-                    <br/>
-                
-                    <div class="btn-group" bs-buttons-radio  >
+                    <div class="mb-2">
+                        <input class="form-check-input" type="checkbox" v-model="assessment.selected" :id="assessment.title"  @change="handleAssessmentCheckboxChange">
+                        <label class="form-check-label" :for="assessment.title"><b>{{assessment.title}}</b></label>
+                    </div>
+                    <div class="btn-group  mb-2 bs-buttons-radio"  >
                         <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='high',          'active':assessment.level=='high'}"          @click="assessment.level='high'">{{t("high")}}</button>
                         <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='medium',        'active':assessment.level=='medium'}"        @click="assessment.level='medium'">{{t("medium")}}</button>
                         <button type="button" class="btn btn-default" :disabled="!assessment.selected" :class="{ 'btn-info':assessment.level=='low',           'active':assessment.level=='low'}"           @click="assessment.level='low'">{{t("low")}}</button>
@@ -606,5 +613,42 @@
             }
         return onBuildDocumentSelectorQuery(queryOptions);
     }
-    
+
+
+    const handleAssessmentCheckboxChange=()=>{
+        document.value.assessments.forEach((assessment) => {            
+            if (!assessment.selected){
+                assessment.justification = undefined;
+                assessment.level = undefined;
+            }
+        });
+    }
+
+
+    const handleSubmissionStatusChange=()=>{
+        if (document.value.status!='approved'){
+            document.value.approvedByCopDecision  = undefined;
+            document.value.approvedByGovernment   = undefined;      
+            document.value.approvedByGovernmentOn = undefined;
+        };
+        if (document.value.status!='recommendedToCop'){
+            document.value.recommendedToCopByGovernment   = undefined;       
+            document.value.recommendedToCopByGovernmentOn = undefined;
+        };
+        if (document.value.status!='recommendedToSbstta'){
+            document.value.recommendedToSbsttaBy   = undefined;         
+        };
+        if (document.value.status!='recommendedToWorkshop'){       
+            document.value.recommendedToWorkshopBy              = undefined;          
+            document.value.recommendedToWorkshopByGovernments   = undefined;
+            document.value.recommendedToWorkshopByOrganizations = undefined;
+            document.value.recommendedToWorkshopByOthers        = undefined;
+        };
+        if (document.value.status!='recommendedToAny'){
+            document.value.recommendedToAnyBy              = undefined;
+            document.value.recommendedToAnyByGovernment    = undefined;
+            document.value.recommendedToAnyByOrganizations = undefined;
+            document.value.recommendedToAnyByOthers        = undefined;          
+        }; 
+    }
 </script>

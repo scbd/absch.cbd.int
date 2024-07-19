@@ -214,11 +214,11 @@
                                 </div>
                             </div>
                            <div v-if="document.recommendedToWorkshopBy==='ORG' && document.recommendedToWorkshopByOrganizations" >  
-                                <label>{{t("organizations")}}</label>  
-                                <div class="km-value">
-                                    <li v-for="(organization, i) in document.recommendedToWorkshopByOrganizations" key="organization" class="mb-2">                                  
+                                <label>{{t("organizations")}}</label> 
+                                <div v-for="(organization, i) in document.recommendedToWorkshopByOrganizations" key="organization" class="mb-2">  
+                                    <div class="km-value">
                                         <ng v-vue-ng:view-record-reference v-model:ng-model="document.recommendedToWorkshopByOrganizations[i]" locale="locale"></ng>
-                                    </li>
+                                    </div>
                                 </div>
                             </div>
                             <div v-if=" document.recommendedToWorkshopBy==='OTHER' && document.recommendedToWorkshopByOthers" >  
@@ -254,12 +254,12 @@
                                 </div>
                             </div>
                             <div v-if="document.recommendedToAnyBy==='ORG' && document.recommendedToAnyByOrganizations" >
-                                <label>{{t("organizations")}}</label>                             
-                                <div class="km-value">
-                                    <li v-for="(organization,i) in document.recommendedToAnyByOrganizations" class="mb-2">
-                                       <ng v-vue-ng:view-record-reference v-model:ng-model="document.recommendedToAnyByOrganizations[i]" locale="locale"></ng>
-                                    </li>                                   
-                                </div>                           
+                                <label>{{t("organizations")}}</label> 
+                                <div v-for="(organization,i) in document.recommendedToAnyByOrganizations" class="mb-2" >
+                                    <div class="km-value">
+                                        <ng v-vue-ng:view-record-reference v-model:ng-model="document.recommendedToAnyByOrganizations[i]" locale="locale"></ng>
+                                    </div>                                                                   
+                                </div>                
                             </div>
                             <div v-if="document.recommendedToAnyBy==='OTHER' && document.recommendedToAnyByOthers" >
                                 <label>{{t("details")}}</label>                               
@@ -274,8 +274,9 @@
              <section v-if="document.assessments"> 
                 <legend>{{t("assessment")}}</legend> 
                 <div  v-for="assessment in document.assessments" >      
-                    <div class="card" v-if="assessment.selected || assessment.level || assessment.justification" >
-                        <ul class="list-group list-group-flush">
+                    <div class="card mb-2" v-if="assessment.selected" >
+                    <!-- <div class="card mb-2" v-if="assessment.selected || assessment.level || assessment.justification" > -->
+                        <ul class="list-group list-group-flush" v-if="assessment.selected" >
                             <li class="list-group-item bg-light" v-if="assessment.identifier" >                                                                    
                                 <label> {{t(assessment.identifier) }}   
                                     <span v-if="assessment.level"  :class="`${getBgColor(assessment.level)}  badge`" > 
@@ -288,7 +289,6 @@
                             </li>                          
                         </ul>
                     </div>                  
-                    <br/>                 
                 </div>        
             </section>
 
