@@ -19,7 +19,8 @@ app.config(["$routeProvider", function ($routeProvider) {
     whenAsync('/',                 { ...mapView(chmRouteUrls.theChm),    "label":routesLabels.theChm}).
     whenAsync('/register/NR/new',   { ...mapView(angularViewWrapper),   "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NR","resolve":{ ...chmRouteUrls.register_NR_edit,   "securized":securize(null,true,true)}}).
     whenAsync('/register/NBSAP/new',{ ...mapView(angularViewWrapper),   "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NBSAP","resolve":{ ...chmRouteUrls.register_NR_edit,"securized":securize(null,true,true), "routePrams":injectRouteParams({ "documentType":"NBSAP"})}}).
-
+    whenAsync('/register/NR/:identifier/edit',       { ...mapView(angularViewWrapper),   "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NR","resolve":{ ...chmRouteUrls.register_NR_edit,   "securized":securize(null,true,true)}}).
+    whenAsync('/register/NBSAP/:identifier/edit',    { ...mapView(angularViewWrapper),   "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NBSAP","resolve":{ ...chmRouteUrls.register_NR_edit,"securized":securize(null,true,true), "routePrams":injectRouteParams({ "documentType":"NBSAP"})}}).
     otherwise({
       templateUrl: commonRoutes.baseUrl + "views/shared/404.html",
       label: routesLabels.pageNotFound
