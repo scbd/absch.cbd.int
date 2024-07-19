@@ -532,6 +532,8 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if(schema == 'countryProfile'                   ){ return await import('~/views/forms/view/bch/view-country-profile.directive') };
 						if(schema == 'submission'                       ){ return await import('~/views/forms/view/view-submission.directive') };
 
+						if(schema == 'bbiContact'                       ){ return await import('~/views/forms/view/chm/legacy/bbi-contact') };
+
 					}
 
 					async function hasChmRealm(identifier){
