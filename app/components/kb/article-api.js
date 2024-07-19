@@ -3,14 +3,9 @@ import axios from 'axios'
 import { isFunction } from 'lodash'
 
 import ApiBase, { tryCastToApiError } from '../../api/api-base';
-let sitePrefixUrl = 'https://api.cbd.int';
-
-if(/\.cbd\.int$/i   .test(window.location.hostname)) sitePrefixUrl= 'https://api.cbd.int';
-if(/\.cbddev\.xyz$/i.test(window.location.hostname)) sitePrefixUrl= 'https://api.cbddev.xyz';
-if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 
 const cache          = new Map()
-const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
+const defaultOptions = { prefixUrl: window.scbdApp.apiUrl, timeout  : 30 * 1000 }
 
 export default class ArticlesApi extends ApiBase
 {

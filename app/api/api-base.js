@@ -2,14 +2,11 @@ import axios from 'axios'
 import { isFunction, isObject } from 'lodash'
 import {useAuth} from '@scbd/angular-vue/src/index.js';
 
-let sitePrefixUrl = 'https://api.cbd.int';
 
-if(/\.cbd\.int$/i   .test(window.location.hostname)) sitePrefixUrl= 'https://api.cbd.int';
-if(/\.cbddev\.xyz$/i.test(window.location.hostname)) sitePrefixUrl= 'https://api.cbddev.xyz';
-if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
+
 
 const cache          = new Map()
-const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
+const defaultOptions = { prefixUrl: window.scbdApp.apiUrl, timeout  : 30 * 1000 }
 
 const HttpStatusApiCode = {
   400: "invalidParameter",
