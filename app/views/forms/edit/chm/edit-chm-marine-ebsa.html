@@ -1,10 +1,5 @@
 
 <div >
-    <style>
-        .indent {
-            padding: 0 1rem 0 1rem;
-        }
-    </style>
     <edit-header></edit-header>
     <div class="innerPageEditForm" >
         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
@@ -14,8 +9,7 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
-                <!-- <intro-form></intro-form> -->
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">           
                 <edit-form>                
                     <div ng-if="shareVueComponent && document">
                         <edit-chm-marine-ebsa-edit-form ng-vue="shareVueComponent" v-model="document" ref="editForm"></edit-chm-marine-ebsa-edit-form>
@@ -25,9 +19,7 @@
                     <div ng-if="shareVueComponent && tab == 'review'">
                         <marine-ebsa  ng-vue="shareVueComponent" :document-info="{ body : review.document }" :locale="review.locale" allow-drafts="true"></marine-ebsa>
                     </div>
-                </review-form>
-                
-                <!-- <publish-form></publish-form> -->
+                </review-form>                
             </workflow-arrow-buttons>
         </div>
     </div>

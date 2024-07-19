@@ -2,53 +2,57 @@
 <template>
     <div  v-if="document.header">
         <section>        
-            <br> 
-
             <div class="row">
                 <div class="col-xs-12">
-                    <label>{{t("languageToPublish")}}</label>                                 
-                    <ng v-vue-ng:km-form-languages multiple required v-model:ng-model="document.header.languages" html></ng> 
+                    <ng v-vue-ng:km-control-group name="languages" required :caption="t('languageToPublish')">
+                        <ng v-vue-ng:km-form-languages multiple required v-model:ng-model="document.header.languages"  html></ng> 
+                    </ng>
                 </div>
             </div>
+
 
             <legend>{{t("generalInfo")}}</legend>
                         
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label>{{t("Title / Name of the area")}}<span class="pl-2 text-danger">*</span></label>               
-                        <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.title" :placeholder="t('title')" :locales="document.header.languages"></ng>                
+                        <ng v-vue-ng:km-control-group name="title" required :caption="t('title')">
+                            <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.title" :placeholder="t('title')" :locales="document.header.languages"></ng>                
+                        </ng>
                     </div> 
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="form-group">
-                        <label>{{t("summary")}}<span class="pl-2 text-danger">*</span></label>               
-                        <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.summary" rows="3" :placeholder="t('summaryInfo')" :locales="document.header.languages"></ng>                
+                    <div class="form-group">                   
+                        <ng v-vue-ng:km-control-group name="summary" required :caption="t('summary')">           
+                            <ng v-vue-ng:km-textbox-ml v-model:ng-model="document.summary" rows="3" :placeholder="t('summaryInfo')" :locales="document.header.languages"></ng>                
+                        </ng>
                     </div>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="form-group">
-                        <label>{{t("IntroductionOfTheArea")}}</label>               
-                        <ng v-vue-ng:km-rich-textbox name="areaIntroducion" v-model:ng-model="document.areaIntroducion" rows="3" :locales="document.header.languages"></ng>                
+                    <div class="form-group">                     
+                        <ng v-vue-ng:km-control-group name="IntroductionOfTheArea"  :caption="t('IntroductionOfTheArea')">             
+                            <ng v-vue-ng:km-rich-textbox name="areaIntroducion" v-model:ng-model="document.areaIntroducion" rows="3" :locales="document.header.languages"></ng>                
+                        </ng>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <section>
             <legend>{{t("location")}}</legend>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>{{t("ebsaRegion")}}<span class="pl-2 text-danger">*</span></label> 
-                        <br/>
-                        <ng v-vue-ng:km-select name="region" required v-model:ng-model="document.region" :placeholder="t('ebsaRegionInfo')" @items="()=>options.ebsaRegions"></ng>
+                        <ng v-vue-ng:km-control-group name="ebsaRegion" required :caption="t('ebsaRegion')">                         
+                            <ng v-vue-ng:km-select name="region" required v-model:ng-model="document.region" :placeholder="t('ebsaRegionInfo')" @items="()=>options.ebsaRegions"></ng>
+                        </ng>
                     </div>
                 </div>
             </div>
@@ -56,8 +60,9 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label>{{t("location")}}<span class="pl-2 text-danger">*</span></label>               
-                        <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.location" rows="3" :locales="document.header.languages" ></ng>                
+                        <ng v-vue-ng:km-control-group name="location" required :caption="t('location')"> 
+                            <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.location" rows="3" :locales="document.header.languages" ></ng>                
+                        </ng>
                     </div>
                 </div>
             </div>
@@ -66,12 +71,13 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>{{t("geoLocation")}}<span class="pl-2 text-danger">*</span></label>                     
-                        <div class="help-info">{{t("geoLocationInfo")}} 
-                            <ng v-vue-ng:km-link name="geoJsonFile" v-model:ng-model="document.gisFiles" 
-                                :allow-link="false" :allow-file="true" :identifier="document.header.identifier">
-                            </ng>
-                        </div>
+                        <ng v-vue-ng:km-control-group name="geoLocation" required :caption="t('geoLocation')">
+                            <div class="help-info">{{t("geoLocationInfo")}} 
+                                <ng v-vue-ng:km-link name="geoJsonFile" required v-model:ng-model="document.gisFiles" 
+                                    :allow-link="false" :allow-file="true" :identifier="document.header.identifier">
+                                </ng>
+                            </div>
+                        </ng>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -99,45 +105,49 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>{{t("featureDescription")}}</label>            
-                        <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.areaDescription" rows="3"  :locales="document.header.languages" ></ng>                
+                        <ng v-vue-ng:km-control-group name="featureDescription"  :caption="t('featureDescription')">
+                            <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.areaDescription" rows="3"  :locales="document.header.languages" ></ng> 
+                        </ng>                                
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <label>{{t("featureConditions")}}</label>            
-                        <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.areaConditions" rows="3"  :locales="document.header.languages" ></ng>                
+                    <div class="form-group">                        
+                        <ng v-vue-ng:km-control-group name="featureConditions"  :caption="t('featureConditions')">   
+                            <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.areaConditions" rows="3"  :locales="document.header.languages" ></ng>                
+                        </ng>     
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group">
-                        <label>{{t("featureDescription")}}</label>            
-                        <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.areaFeatures" rows="3"  :locales="document.header.languages" ></ng>                
+                    <div class="form-group">                       
+                        <ng v-vue-ng:km-control-group name="featureDescription"  :caption="t('featureDescription')">    
+                            <ng v-vue-ng:km-rich-textbox  name="location" v-model:ng-model="document.areaFeatures" rows="3"  :locales="document.header.languages" ></ng>                
+                        </ng>    
                     </div>
                 </div>
             </div>
 
             <div class="row">           
                 <div class="col-xs-12">  
-                    <div class="form-group">             
-                        <label>{{t("relatedCountries")}}<span class="pl-2 text-danger">*</span></label> 
-                        <br/>
-                        <ng v-vue-ng:km-select name="countries" multiple required v-model:ng-model="document.countries" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>
+                    <div class="form-group">       
+                        <ng v-vue-ng:km-control-group name="relatedCountries" required :caption="t('relatedCountries')">  
+                            <ng v-vue-ng:km-select name="countries" multiple required v-model:ng-model="document.countries" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>
+                        </ng> 
                     </div>
                 </div>
             </div> 
 
             <div class="row">           
                 <div class="col-xs-12">  
-                    <div class="form-group">             
-                        <label>{{t("jurisdiction")}}</label> 
-                        <ng v-vue-ng:km-yes-no name="beyondNationalJurisdiction" v-model:ng-model="document.beyondNationalJurisdiction" ></ng> 
+                    <div class="form-group">
+                        <ng v-vue-ng:km-control-group name="jurisdiction" required :caption="t('jurisdiction')">  
+                            <ng v-vue-ng:km-yes-no name="beyondNationalJurisdiction" v-model:ng-model="document.beyondNationalJurisdiction" ></ng>
+                        </ng>
                     </div>
                 </div>
             </div> 
@@ -147,28 +157,31 @@
             <legend>{{t("references")}}</legend>     
             <div class="row">          
                 <div class="col-xs-12">  
-                    <div class="form-group">                
-                        <label>{{t("references")}}</label>
-                        <ng v-vue-ng:km-rich-textbox  name="reference" v-model:ng-model="document.referenceText" rows="3"  :locales="document.header.languages" ></ng>                
+                    <div class="form-group">
+                        <ng v-vue-ng:km-control-group name="references" required :caption="t('references')">  
+                            <ng v-vue-ng:km-rich-textbox  name="reference" v-model:ng-model="document.referenceText" rows="3"  :locales="document.header.languages" ></ng>                
+                       </ng>
                     </div>
                 </div>
             </div>
 
             <div class="row">          
                 <div class="col-xs-12">  
-                    <div class="form-group">                
-                        <label>{{t("cbdResources")}}</label>
-                        <ng v-vue-ng:document-selector @ng-disabled="!document.government.identifier" @on-build-query="onBuildQuery(searchText)"
-                            v-model:ng-model="document.resources" question="resources" filter="true" type="checkbox" allow-new-schema="resource">
-                        </ng>
+                    <div class="form-group"> 
+                        <ng v-vue-ng:km-control-group name="cbdResources" required :caption="t('cbdResources')">  
+                            <ng v-vue-ng:document-selector @ng-disabled="!document.government.identifier" @on-build-query="onBuildQuery(searchText)"
+                                v-model:ng-model="document.resources" question="resources" filter="true" type="checkbox" allow-new-schema="resource">
+                            </ng>
+                        </ng>                       
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">   
-                <label>{{t("otherRelevantDocument")}}</label>
-                <ng v-vue-ng:km-link name="referenceDocuments" v-model:ng-model="document.relation" 
-                    :allow-link="true" :allow-file="true"   :identifier="document.header.identifier">
+            <div class="form-group"> 
+                <ng v-vue-ng:km-control-group name="otherRelevantDocument" required :caption="t('otherRelevantDocument')">  
+                    <ng v-vue-ng:km-link name="referenceDocuments" v-model:ng-model="document.relation" 
+                        :allow-link="true" :allow-file="true"   :identifier="document.header.identifier">
+                    </ng>
                 </ng>
             </div>
         </section>
@@ -183,11 +196,11 @@
                     <div class="row ms-3">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>{{t("copDecision")}}</label>     
-                                <br/>
-                                <ng v-vue-ng:document-selector :ng-disabled="document.status!='approved'" @on-build-query="onBuildOnDecisionQuery(searchText)"
-                                    v-model:ng-model="document.approvedByCopDecision" question="approvedByCopDecision" filter="true" type="checkbox">
-                                </ng>                               
+                                <ng v-vue-ng:km-control-group name="copDecision" required :caption="t('copDecision')"> 
+                                    <ng v-vue-ng:document-selector :ng-disabled="document.status!='approved'" @on-build-query="onBuildOnDecisionQuery(searchText)"
+                                        v-model:ng-model="document.approvedByCopDecision" question="approvedByCopDecision" filter="true" type="checkbox">
+                                    </ng> 
+                                </ng>                      
                             </div>
                         </div>
                     </div>
@@ -195,16 +208,18 @@
                     <div class="row ms-3">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>{{t("approvedByAPartyOrGovernment")}}</label>
-                                    <ng v-vue-ng:km-select name="approvedByGovernment" v-model:ng-model="document.approvedByGovernment" @ng-disabled="document.status!='approved'" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"></ng>
+                                    <ng v-vue-ng:km-control-group name="approvedByAPartyOrGovernment" required :caption="t('approvedByAPartyOrGovernment')"> 
+                                        <ng v-vue-ng:km-select name="approvedByGovernment" v-model:ng-model="document.approvedByGovernment" @ng-disabled="document.status!='approved'" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"></ng>
+                                    </ng>                                      
                                 </div>
                             </div>
 
                         <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>{{t("date")}}</label>                        
+                            <div class="form-group">
+                                <ng v-vue-ng:km-control-group name="date" required :caption="t('date')"> 
                                     <ng v-vue-ng:km-date  name="approvedByGovernmentOn"  v-model:ng-model="document.approvedByGovernmentOn" @ng-disabled="document.status!='approved'"></ng>                            
-                                </div>                  
+                                </ng>                 
+                            </div>                  
                         </div> 
                     </div>
                 </div>
@@ -229,16 +244,17 @@
                     <div class="row ms-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>{{t("OngoingOfficialNationalProcess")}}</label>
-                                <br/>
-                                <ng v-vue-ng:km-select name="countries" v-model:ng-model="document.recommendedToCopByGovernment" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"  @ng-disabled="document.status!='recommendedToCop'"></ng>
+                                <ng v-vue-ng:km-control-group name="OngoingOfficialNationalProcess" required :caption="t('OngoingOfficialNationalProcess')"> 
+                                    <ng v-vue-ng:km-select name="countries" v-model:ng-model="document.recommendedToCopByGovernment" :placeholder="t('selectACountryOption')" watch-items @items="()=>options.countries"  @ng-disabled="document.status!='recommendedToCop'"></ng>
+                               </ng>
                             </div>
                         </div>
 
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label>{{t("date")}}</label>
-                                <ng v-vue-ng:km-date  name="recommendedToCopByGovernmentOn" v-model:ng-model="document.recommendedToCopByGovernmentOn" @ng-disabled="document.status!='recommendedToCop'"></ng>                            
+                            <div class="form-group">                            
+                                <ng v-vue-ng:km-control-group name="date" required :caption="t('date')"> 
+                                    <ng v-vue-ng:km-date  name="recommendedToCopByGovernmentOn" v-model:ng-model="document.recommendedToCopByGovernmentOn" @ng-disabled="document.status!='recommendedToCop'"></ng>                            
+                                </ng>                                
                             </div>
                         </div>
                     </div>
@@ -303,9 +319,9 @@
                     <div class="row ms-3" v-if="document.recommendedToWorkshopBy=='GOV'">
                         <div class="col-md-12">
                             <div class="form-group">   
-                                <label>{{t("selectCountries")}}</label>  
-                                <br/>  
-                                <ng v-vue-ng:km-select name="recommendedToWorkshopByGovernments" multiple v-model:ng-model="document.recommendedToWorkshopByGovernments" @ng-disabled="document.status!='recommendedToWorkshop'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng> 
+                                <ng v-vue-ng:km-control-group name="selectCountries" required :caption="t('selectCountries')">
+                                    <ng v-vue-ng:km-select name="recommendedToWorkshopByGovernments" multiple v-model:ng-model="document.recommendedToWorkshopByGovernments" @ng-disabled="document.status!='recommendedToWorkshop'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng> 
+                                </ng>
                             </div>
                         </div>
                     </div>
@@ -313,9 +329,10 @@
                     <div class="row ms-3" v-if="document.recommendedToWorkshopBy=='ORG'">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>{{t("selectOrganizations")}}</label>                 
-                                <ng v-vue-ng:document-selector  @on-build-query="onBuildOrganizationQuery(searchText)"
-                                    v-model:ng-model="document.recommendedToWorkshopByOrganizations" question="organizations" filter="true" type="checkbox" allow-new-schema="organizations">
+                                <ng v-vue-ng:km-control-group name="selectOrganizations" required :caption="t('selectOrganizations')">
+                                    <ng v-vue-ng:document-selector  @on-build-query="onBuildOrganizationQuery(searchText)"
+                                        v-model:ng-model="document.recommendedToWorkshopByOrganizations" question="organizations" filter="true" type="checkbox" allow-new-schema="organizations">
+                                    </ng>   
                                 </ng>
                             </div>
                         </div>
@@ -324,8 +341,9 @@
                     <div class="row ms-3" v-if="document.recommendedToWorkshopBy=='OTHER'">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="control-label" for="recommendedToWorkshopByOthers">{{t('details')}}</label>
-                                <ng v-vue-ng:km-textbox-ml name="recommendedToWorkshopByOthers" rows="4" v-model:ng-model="document.recommendedToWorkshopByOthers" @ng-disabled="document.status!='recommendedToWorkshop'" :locales="document.header.languages"></ng>
+                                <ng v-vue-ng:km-control-group name="details" required :caption="t('details')">
+                                    <ng v-vue-ng:km-textbox-ml name="recommendedToWorkshopByOthers" rows="4" v-model:ng-model="document.recommendedToWorkshopByOthers" @ng-disabled="document.status!='recommendedToWorkshop'" :locales="document.header.languages"></ng>
+                                </ng>
                             </div>
                         </div>
                     </div>
@@ -359,9 +377,9 @@
                     <div class="row ms-3" v-if="document.recommendedToAnyBy=='GOV'">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>{{t("selectCountries")}}</label>
-                                <br/>                     
-                                <ng v-vue-ng:km-select name="recommendedToAnyByGovernment" multiple v-model:ng-model="document.recommendedToAnyByGovernment" @ng-disabled="document.status!='recommendedToAny'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>  
+                                <ng v-vue-ng:km-control-group name="selectCountries" required :caption="t('selectCountries')">
+                                    <ng v-vue-ng:km-select name="recommendedToAnyByGovernment" multiple v-model:ng-model="document.recommendedToAnyByGovernment" @ng-disabled="document.status!='recommendedToAny'" :placeholder="t('selectCountryOption')" watch-items @items="()=>options.countries"></ng>  
+                                </ng> 
                             </div>
                         </div>
                     </div>
@@ -369,10 +387,11 @@
                     <div class="row ms-3" v-if="document.recommendedToAnyBy=='ORG' ">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>{{t("selectOrganizations")}}</label>
-                                <ng v-vue-ng:document-selector  @on-build-query="onBuildOrganizationQuery(searchText)"
-                                    v-model:ng-model="document.recommendedToAnyByOrganizations" question="organizations" filter="true" type="checkbox" allow-new-schema="organizations">
-                                </ng>
+                                <ng v-vue-ng:km-control-group name="selectOrganizations" required :caption="t('selectOrganizations')">
+                                    <ng v-vue-ng:document-selector  @on-build-query="onBuildOrganizationQuery(searchText)"
+                                        v-model:ng-model="document.recommendedToAnyByOrganizations" question="organizations" filter="true" type="checkbox" allow-new-schema="organizations">
+                                    </ng>
+                                </ng> 
                             </div>
                         </div>
                     </div>
@@ -380,8 +399,9 @@
                     <div class="row ms-3" v-if="document.recommendedToAnyBy=='OTHER'">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>{{t("details")}}</label>
-                                <ng v-vue-ng:km-textbox-ml  name="recommendedToAnyByOthers"  rows="3" v-model:ng-model="document.recommendedToAnyByOthers"  @ng-disabled="document.status!='recommendedToAny'" :locales="document.header.languages" ></ng>                
+                                <ng v-vue-ng:km-control-group name="details" required :caption="t('details')">
+                                    <ng v-vue-ng:km-textbox-ml  name="recommendedToAnyByOthers"  rows="3" v-model:ng-model="document.recommendedToAnyByOthers"  @ng-disabled="document.status!='recommendedToAny'" :locales="document.header.languages" ></ng>
+                                </ng>       
                             </div>
                         </div>
                     </div>
@@ -415,12 +435,14 @@
         <section>
             <legend>{{t("additionalInformation")}}</legend>
             <div class="form-group">           
-                <label>{{t("additionalInformation")}}</label><br/>
-                <label>{{t("otherRelevantInformationInfo")}}</label>
-                <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.relevantInformation" rows="3" :placeholder="t('otherRelevantInformationInfo')" :locales="document.header.languages" ></ng>                
-                <label>{{t("otherRelevantDocument")}}</label>
-                <ng v-vue-ng:km-link name="relevantDocuments" v-model:ng-model="document.relevantDocuments" 
-                    :allow-link="true" :allow-file="true"   :identifier="document.header.identifier">
+                <label>{{t("additionalInformation")}}</label><br/>               
+                <ng v-vue-ng:km-control-group name="otherRelevantInformationInfo" required :caption="t('otherRelevantInformationInfo')">
+                    <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.relevantInformation" rows="3" :placeholder="t('otherRelevantInformationInfo')" :locales="document.header.languages" ></ng>                
+                </ng>
+                <ng v-vue-ng:km-control-group name="otherRelevantDocument" required :caption="t('otherRelevantDocument')">
+                    <ng v-vue-ng:km-link name="relevantDocuments" v-model:ng-model="document.relevantDocuments" 
+                        :allow-link="true" :allow-file="true"   :identifier="document.header.identifier">
+                    </ng>
                 </ng>
             </div>       
         </section>
@@ -430,9 +452,12 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label>{{t("notes")}}</label>
-                        <div class="help-info"> {{t("notesInfos")}}</div>    
-                        <ng v-vue-ng:km-notes name="notes" v-model:ng-model="document.notes"></ng>       
+                        <ng v-vue-ng:km-control-group name="notes" required :caption="t('notes')">
+                            <div>
+                                <div class="help-info"> {{t("notesInfos")}}</div>    
+                                <ng v-vue-ng:km-notes name="notes" v-model:ng-model="document.notes"></ng>  
+                            </div>
+                        </ng>
                     </div>                                            
                 </div>
             </div>
