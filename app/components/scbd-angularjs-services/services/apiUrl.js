@@ -30,7 +30,7 @@ import app from '~/app';
                     /^https:\/\/\w+.cbddev.xyz\//i, //everything under cbddev.xyz
                 ];
 
-                var url = window.scbdApp.apiUrl;
+                var url = $location.$$absUrl;
 
                 for (var i = 0; i < knownDevUrls.length; i++) {
                     if (url.match(knownDevUrls[i])) {
