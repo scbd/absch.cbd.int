@@ -1,0 +1,102 @@
+﻿<div id="Record" class="record panel panel-default">
+
+	<div class="record-body panel-body bg-white">
+   
+		<document-date></document-date>
+
+		<h2>{{document.title | lstring:locale}}</h2>
+
+		<legend>{{::('nationalSupportTool.country'|$translate)}}</legend>
+
+		<div ng-show="document.government">
+			<div class="km-value">
+				{{document.government | term:locale}}
+			</div>
+		</div>
+
+		<div ng-show="document.description">
+			<label>{{::('nationalSupportTool.description'|$translate)}}</label>
+			<div class="km-value km-pre" ng-bind="document.description | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.status">
+			<label>{{::('nationalSupportTool.status'|$translate)}}</label>
+			<div class="km-value">
+				{{document.status | term:locale}}
+			</div>
+		</div>
+
+		<div ng-show="document.jurisdiction">
+			<label>{{::('nationalSupportTool.level'|$translate)}}</label>
+			<div class="km-value">
+				{{document.jurisdiction | term:locale}}
+			</div>
+		</div>
+
+		<div ng-show="document.jurisdictionInfo">
+			<label>{{::('nationalSupportTool.additionalDetails'|$translate)}}</label>
+			<div class="km-value km-pre" ng-bind="document.jurisdictionInfo | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.nationalTargets">
+			<label>{{::('nationalSupportTool.nationalTargets'|$translate)}}</label>
+			<div class="km-value" ng-repeat="item in nationalTargets">{{item.title|lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.aichiTargets">
+			<label>{{::('nationalSupportTool.aichiTargets'|$translate)}}</label>
+			<div class="km-value" ng-repeat="item in aichiTargets">{{item.title|lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.otherAichiTargets">
+			<label>{{::('nationalSupportTool.otherAichiTargets'|$translate)}}</label>
+			<div class="km-value" ng-repeat="item in otherAichiTargets">{{item.title|lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.thematicAreas">
+			<label>{{::('nationalSupportTool.cbdThematicAreas'|$translate)}}</label>
+			<div class="km-value">
+				<div ng-repeat="term in document.thematicAreas">{{term | term:locale}} </div>
+			</div>
+		</div>
+
+		<div ng-show="document.supportTools">
+			<label>{{::('nationalSupportTool.cbdSupportTools'|$translate)}}</label>
+			<div class="km-value">
+				<div ng-repeat="term in document.supportTools">{{term | term:locale}} </div>
+			</div>
+		</div>
+
+
+		<div ng-show="document.documentText">
+			<label>{{::('nationalSupportTool.documents'|$translate)}}</label>
+			<div class="km-value km-pre">{{document.documentText|lstring:locale}}</div>
+		</div>
+
+		<div ng-show="document.documentLinks">
+			<label>{{::('nationalSupportTool.websites'|$translate)}}</label>
+			<div class="km-value" ng-repeat="item in document.documentLinks">
+				<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+			</div>
+		</div>
+
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>{{::('nationalSupportTool.additionalInformation'|$translate)}}</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale | markdown"></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>{{::('nationalSupportTool.otherRelevantWebsite'|$translate)}}</label>
+				<div class="km-value" ng-repeat="item in document.relevantDocuments">
+					<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+    <div document-metadata class="panel-footer"></div>
+</div>

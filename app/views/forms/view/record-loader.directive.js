@@ -538,6 +538,8 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if(schema == 'bbiRequest'                       ){ return await import('~/views/forms/view/chm/legacy/bbi-request') };
 						if(schema == 'capacityBuildingResource'         ){ return await import('~/views/forms/view/chm/legacy/capacity-building-resource') };
 						if(schema == 'nationalIndicator'                ){ return await import('~/views/forms/view/chm/legacy/national-indicator') };
+						if(schema == 'nationalSupportTool'              ){ return await import('~/views/forms/view/chm/legacy/national-support-tool') };
+				
 					}
 
 					async function hasChmRealm(identifier){
