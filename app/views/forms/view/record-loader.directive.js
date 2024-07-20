@@ -534,6 +534,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
 						if(schema == 'bbiContact'                       ){ return await import('~/views/forms/view/chm/legacy/bbi-contact') };
 						if(schema == 'bbiOpportunity'                   ){ return await import('~/views/forms/view/chm/legacy/bbi-opportunity') };
+						if(schema == 'bbiProfile'                       ){ return await import('~/views/forms/view/chm/legacy/bbi-profile') };
 
 					}
 
