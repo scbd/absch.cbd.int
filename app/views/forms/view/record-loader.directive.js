@@ -533,6 +533,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if(schema == 'submission'                       ){ return await import('~/views/forms/view/view-submission.directive') };
 
 						if(schema == 'bbiContact'                       ){ return await import('~/views/forms/view/chm/legacy/bbi-contact') };
+						if(schema == 'bbiOpportunity'                   ){ return await import('~/views/forms/view/chm/legacy/bbi-opportunity') };
 
 					}
 
