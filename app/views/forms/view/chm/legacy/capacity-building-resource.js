@@ -3,7 +3,7 @@ import template from "text!./capacity-building-resource.html";
 import '~/components/scbd-angularjs-controls/main';
 import capacityBuildingResource from '~/app-text/views/reports/chm/capacity-building-resource.json';
 
-app.directive('viewCapacityBuildingResource','translationService', ["IStorage", "$q",function (storage, $q, translationService) {
+app.directive('viewCapacityBuildingResource', ["IStorage", "$q",'translationService',function (storage, $q, translationService) {
 	return {
 		restrict   : 'E',
 		template   : template,
