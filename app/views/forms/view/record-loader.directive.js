@@ -537,6 +537,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 						if(schema == 'bbiProfile'                       ){ return await import('~/views/forms/view/chm/legacy/bbi-profile') };
 						if(schema == 'bbiRequest'                       ){ return await import('~/views/forms/view/chm/legacy/bbi-request') };
 						if(schema == 'capacityBuildingResource'         ){ return await import('~/views/forms/view/chm/legacy/capacity-building-resource') };
+						if(schema == 'nationalIndicator'                ){ return await import('~/views/forms/view/chm/legacy/national-indicator') };
 					}
 
 					async function hasChmRealm(identifier){
