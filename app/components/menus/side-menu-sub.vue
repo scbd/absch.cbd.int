@@ -44,13 +44,13 @@
   const toggle = async ($event)   => {  
     if (!hasSubMenu) return;
 
-    const { hasContent } = props.menu;
+    const { hasContent, target  } = props.menu;
     isExpanded.value = !isExpanded.value;
 
     if (hasContent && !selected)
       isExpanded.value = true;
 
-    if (!hasContent)  
+    if (!hasContent && target!='_blank')  
       $event.preventDefault();
   }
 
