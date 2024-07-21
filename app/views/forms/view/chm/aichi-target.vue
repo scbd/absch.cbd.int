@@ -1,6 +1,9 @@
 <template>
     <div id="Record" class="record panel panel-default">
-        <div class="record-body panel-body bg-white" v-if="document">         
+        <div class="record-body panel-body bg-white" v-if="document">    
+            
+            <document-date :document-info="documentInfo"></document-date>
+
             <h2>
                 <img v-if="document.icons" class="img-polaroid" :src="document.icons[0].url"
                     style="height: 45px; width: 45px" /> 
@@ -140,15 +143,22 @@
                     </ul>
                 </div>
             </div> -->
-        </div>
+       
+            <div> 
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier"></ng> 
+            </div>         
+        </div> 
+        <ng v-vue-ng:document-metadata  :document="document"></ng> 
     </div>
 </template>
 <script setup>
     import { computed } from 'vue';
     import { lstring } from '~/services/filters/lstring.js'; 
+    import '~/views/forms/view/directives/view-reference-records.directive.js' 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/aichi-target.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import { useI18n } from 'vue-i18n';
 
     const { t } = useI18n({ messages });

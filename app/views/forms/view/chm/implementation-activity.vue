@@ -3,8 +3,7 @@
         <div class="record-body bg-white" v-if="document">  
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <section>
                 <legend>{{ t("generalInformation") }} </legend> 
@@ -113,11 +112,10 @@
             </section>           
 
             <div> 
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier"></ng> 
             </div>         
-        </div>  
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+        </div> 
+        <ng v-vue-ng:document-metadata  :document="document"></ng> 
     </div> 
 </template>
 <script setup>
@@ -125,8 +123,10 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js' ;   
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js' ;   
     import '~/views/forms/view/directives/view-record-reference.directive.js';  
+    import '~/views/forms/view/directives/view-reference-records.directive.js' 
     import kmTerm from '~/components/km/KmTerm.vue';  
     import messages from '~/app-text/views/reports/chm/implementation-activity.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import { lstring } from '~/components/kb/filters';
     import { useI18n } from 'vue-i18n';

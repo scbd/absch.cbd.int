@@ -2,9 +2,7 @@
      <div id="Record" class="record ">
         <div class="record-body  bg-white" v-if="document">
             <!--TODO: add compare-val for fields  -->
-
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <h2 v-if="document.title" class="mt-2" >
                 <span>{{lstring(document.title,locale)}}</span>
@@ -94,15 +92,13 @@
                     </template>               
                 </view-relevant-information> 
             </section> 
-
-            <div v-if="$attrs.hideRecordReference"> 
-                <!-- TODO: test -->
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>    
-            
-        </div>  
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->   
+       
+            <div  v-if="$attrs.hideRecordReference"> 
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier"></ng> 
+            </div>         
+        </div> 
+        <ng v-vue-ng:document-metadata  :document="document"></ng>  
+      
         <!-- <div v-if="!hideRecordReference">  -->
     </div>
 </template>
@@ -112,9 +108,10 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'   
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
-    import '~/views/forms/view/directives/view-record-reference.directive.js'    
+    import '~/views/forms/view/directives/view-reference-records.directive.js'   
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-target.json'; 
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import { useI18n } from 'vue-i18n';
     import { lstring } from '~/services/filters/lstring.js'; 
 

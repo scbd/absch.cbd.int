@@ -3,8 +3,8 @@
     <div id="Record" class="record "> 
         <div class="record-body bg-white" v-if="document">  
             <!--TODO: add  for fields  -->
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->             
+            <document-date :document-info="documentInfo"></document-date>
+                     
            <section v-if="document.summary || document.areaIntroduction || document.title">  
                 <legend>{{ t("generalInformation") }} </legend> 
                 <div v-if="document.title">
@@ -297,14 +297,13 @@
                 <legend>{{ t("additionalInformation") }}</legend>
                 <view-relevant-information :relevant-information="document.relevantInformation" :relevant-documents="document.relevantDocuments" :locale="locale"> 
                 </view-relevant-information> 
-            </section>          
-            <div> 
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>          
-        </div>  
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+            </section>  
 
+            <div> 
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier"></ng> 
+            </div>         
+        </div> 
+        <ng v-vue-ng:document-metadata  :document="document"></ng> 
     </div>
 </template>
 <script setup>
@@ -312,10 +311,12 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import '~/views/forms/view/directives/view-record-reference.directive.js'  
+    import '~/views/forms/view/directives/view-reference-records.directive.js' 
     import '~/views/forms/view/chm/leaflet/leaflet.js'
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/marine-ebsa.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js'; 
     import { useI18n } from 'vue-i18n';
     import _  from 'lodash';

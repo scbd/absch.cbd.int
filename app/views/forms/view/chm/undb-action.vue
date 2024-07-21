@@ -3,8 +3,7 @@
         <div class="record-body bg-white" v-if="document"> 
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <section v-if="document.title">                
                 <label>{{ t("title") }}</label>
@@ -116,21 +115,20 @@
             </section>
 
             <div> 
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier"></ng> 
             </div>         
         </div> 
-
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+        <ng v-vue-ng:document-metadata  :document="document"></ng> 
     </div>
 </template>
 
 <script setup>
     import { computed } from 'vue'; 
-    import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
-    import '~/views/forms/view/directives/view-record-reference.directive.js'   
+    import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'     
+    import '~/views/forms/view/directives/view-reference-records.directive.js' 
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/undb-action.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import { useI18n } from 'vue-i18n';
     import { formatDate } from '~/components/kb/filters';
 

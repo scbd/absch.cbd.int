@@ -3,9 +3,8 @@
     <div id="Record" class="record">
         <div class="record-body  bg-white" v-if="document">  
             <!--TODO: add compare-val for fields  -->
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> --> 
-
+            
+            <document-date :document-info="documentInfo"></document-date>
 
             <div class="d-flex justify-content-center" v-if="isLoadingTargets||isLoadingAssessments">
                 <div class="spinner-border" role="status">
@@ -330,11 +329,10 @@
             </section>           
         
             <div> 
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" :locales="locale" html></ng>                        
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier"></ng> 
             </div>         
-        </div>  
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+        </div> 
+        <ng v-vue-ng:document-metadata  :document="document"></ng> 
         
     </div>
 </template>
@@ -343,6 +341,7 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import '~/views/forms/view/directives/view-record-reference.directive.js'  
+    import '~/views/forms/view/directives/view-reference-records.directive.js' 
     import '~/views/forms/directives/view-terms-hierarchy.js'  
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue' 
@@ -350,6 +349,7 @@
     import KmDocumentApi from "~/api/km-document";
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-report-6.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import { useI18n } from 'vue-i18n';    
     import { lstring } from '~/components/kb/filters';  
     import { useAuth } from "@scbd/angular-vue/src/index.js"; 
