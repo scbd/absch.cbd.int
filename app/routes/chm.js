@@ -10,13 +10,16 @@ import { mergeTranslationKeys } from '../services/translation-merge';
 const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 const chmRouteUrls = {
   theChm,  
+  online_Reporting  : { component: ()=>asyncLogError(import('~/views/reports/chm/legacy/online-reporting')) },
 };
 
 
 app.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.
     whenAsync('/',                         { ...mapView(chmRouteUrls.theChm),    "label":routesLabels.theChm}).
+    whenAsync('/search/reporting-map',     { ...mapView(angularViewWrapper),   "label":routesLabels.onlineReporting,"resolve":{ ...chmRouteUrls.online_Reporting,       },"param":"true","resolveController":true,"reloadOnSearch":false}).
     
+ 
   otherwise({
     templateUrl: commonRoutes.baseUrl + "views/shared/404.html",
     label: routesLabels.pageNotFound
