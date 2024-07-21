@@ -3,8 +3,7 @@
 
     <h1 v-if="!article && forum">{{ lstring(forum.title) }}</h1>
 
-    <cbd-article :query="articleQuery" v-if="articleQuery" :show-cover-image="false" :show-edit="true"
-      @on-article-load="loadArticle" :admin-tags="articleAdminTags">
+    <cbd-article ref="refCbdArticle" :query="articleQuery" v-if="articleQuery" :show-cover-image="false" :show-edit="true" :admin-tags="articleAdminTags">
       <template #article-empty>&nbsp;</template>
     </cbd-article>
 
@@ -43,7 +42,7 @@
 
             <button v-if="subscription" :disabled="subscribing" class="btn btn-sm"
               :class="{ 'btn-outline-dark': !subscription.watching, 'btn-dark': subscription.watching }" type="button"
-              @click="toggleSubscription">
+              @click="pending(toggleSubscription, 'subscribing')">
               <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> {{ t('buttonUnsubscribe') }} </span>
               <span v-else><i class="fa fa-envelope-o"></i> {{ t('buttonSubscribe') }} </span>
               <loading v-if="subscribing" />
@@ -71,7 +70,7 @@
           </h5>
 
           <div class="card-body">
-            <post :post="thread" @refresh="refresh" :highlight-on-hash="false">
+            <post :post="thread" @refresh="pending(refresh, 'loading')" :highlight-on-hash="false">
               <template v-slot:showReplies="{ replies }">
 
                 <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`"> {{ t('buttonReadPost') }}</a>
@@ -109,7 +108,7 @@
 
       </div>
 
-      <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; refresh"></edit-post>
+      <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; pending(refresh, 'loading')"></edit-post>
 
       <simple-modal v-if="showHelp" @close="showHelp = false" :title="lstring(helpArticle.title)">
         <cbd-article :article="helpArticle" :show-cover-image="true" :show-edit="false"  />
@@ -132,6 +131,7 @@ import CbdArticle from '../../components/common/cbd-article.vue';
 import Post from '~/components/forums/post.vue';
 import EditPost from '~/components/forums/edit-post.vue';
 import Loading from '~/components/common/loading.vue';
+import pending   from '~/services/pending-call'
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
 import ErrorPane from '~/components/common/error.vue';
 import SimpleModal from '~/components/common/modal.vue';
@@ -159,6 +159,7 @@ const loading = ref(false);
 const error = ref(null);
 const helpArticle = ref(null);
 const edit = ref(null);
+const refCbdArticle = ref(null);
 
 
 // not using
@@ -188,7 +189,7 @@ const props = defineProps({
   });
 
 onMounted(async () => {
- await load();
+ await pending(load(), 'loading');
  nextTick(() => {
       jumpToAnchor();
     });
@@ -196,22 +197,31 @@ onMounted(async () => {
 
 
 //  watch(loggedIn, load);
-     watch(props.forumId, async () => {
-       await load();
-    });
+watch(() => props.forumId,
+  async (newVal, oldVal) => {
+    console.log(`forumId changed from ${oldVal} to ${newVal}`);
+    await pending(load(), 'loading');
+  }
+);
 const browserUrl = () => { 
   return window.location.href;
 }
 
-const loadArticle = (articleData) => { 
-  console.log(" articleData articleData",articleData)
-  article.value = articleData;
-  if (!article && !auth.hasScope(['oasisArticleEditor', 'Administrator'])) {
-    articleQuery.value = undefined;
-    return;
-  }
-}
- 
+const loadArticle = async () => {
+    if (refCbdArticle.value && articleQuery.value) {
+      try {
+        await refCbdArticle.value.loadArticle(articleQuery.value);
+        //ToDo: do we need this condition ?
+        // if (!article && !auth.hasScope(['oasisArticleEditor', 'Administrator'])) {
+        //   articleQuery.value = undefined;
+        //   return;
+        // }
+      } catch (error) {
+        console.error('Failed to fetch article:', error);
+      }
+    }
+  };
+
 const load = async () => { 
   error.value = null;
   try {
@@ -227,6 +237,7 @@ const load = async () => {
     threads.value = await qThreads;
     subscription.value = await qWatch;
     helpArticle.value = await articlesApi.queryArticles({ q: { adminTags: { $all: ['forums', 'getting-help'] } }, fo: 1 });
+    await loadArticle();
   } catch (err) {
     error.value = err;
   }
