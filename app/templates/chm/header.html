@@ -15,7 +15,8 @@
               <div ng-if="showNav" class="navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url href=".">{{::('chmHeaderT.home'|$translate)}}</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >{{::('chmHeaderT.about'|$translate)}}</a></li>
+                    <!--temporally remove -->
+                    <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb/" >{{::('chmHeaderT.about'|$translate)}}</a></li> -->
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/search" >{{::('chmHeaderT.search'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/register" >{{::('chmHeaderT.submit'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/countries" >{{::('chmHeaderT.countryProfiles'|$translate)}}</a></li>
@@ -48,14 +49,17 @@
                         <span>{{::('chmHeaderT.home'|$translate)}}</span> 
                     </a>
                 </li>
-                <li class="nav-item"><a rel="noopener" translation-url href="/kb"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('chmHeaderT.about'|$translate)}}</a></li>
+                <!--temporally remove -->
+                <!-- <li class="nav-item"><a rel="noopener" translation-url href="/kb"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('chmHeaderT.about'|$translate)}}</a></li> -->
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
                     <a rel="noopener" translation-url href="/search" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
                         id="dropdownMenuButton1" aria-expanded="false">{{::('chmHeaderT.search'|$translate)}}</a>
                     <ul class="dropdown-menu p-0" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton1" >
                         <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="search">{{::('chmHeaderT.records'|$translate)}}</a></li>
                         <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/submissions-to-notifications">{{::('chmHeaderT.submissionsOnNotifications'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/search/report-map">{{::('chmHeaderT.onlineReporting'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/search/financial-analyzer">{{::('chmHeaderT.financialAnalyzer'|$translate)}}</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a rel="noopener" translation-url href="/register"
