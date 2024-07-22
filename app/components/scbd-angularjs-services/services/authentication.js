@@ -1,10 +1,6 @@
 import app from '~/app';
 import './apiUrl';
-    var ACCOUNTS_URL = (function(){
-        
-        return window.scbdApp.accountsUrl;
-
-    })()
+    var ACCOUNTS_URL = window.scbdApp.accountsUrl;
 
     app.factory('apiToken', ["$q", "$rootScope", "$window", "$document", "$timeout", "$location",
      function($q, $rootScope, $window, $document, $timeout, $location) {
