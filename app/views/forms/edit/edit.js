@@ -12,6 +12,7 @@ import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/workflow-arrow-buttons';
 import './edit-header';
 import { genericMapping, genericFilter } from '~/services/filters/arrays';
+import { onBuildDocumentSelectorQuery } from '~/services/solr/queries.js';
 import { sanitizeDocument } from '~/services/filters/common';
 
 
@@ -407,39 +408,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
       return (value != undefined && value.government != undefined && value.government.identifier != undefined);
     }
 
-    $scope.onBuildDocumentSelectorQuery = function(options){
-      var queries = {
-          fieldQueries    : options.fieldQueries||[],
-          query           : options.query || '*:*',
-          sort            : options.sort,
-          fields          : options.fields
-      }
-      if(options.schemas)
-        queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(' ') + ')')
-      else if(options.schema)
-        queries.fieldQueries.push('schema_ss:'+solr.escape(options.schema))
-
-      if(options.realm)
-          queries.fieldQueries.push('realm_ss:'+solr.escape(options.realm))
-
-      if(options.identifier)
-        queries.fieldQueries.push("NOT identifier_s:" + solr.escape(options.identifier));
-
-      if(options.government)
-        queries.fieldQueries.push('government_s:'+solr.escape(options.government));
-
-      if((options.searchText||'')!=''){
-        var queryText
-          queryText = '(' + solr.escape(options.searchText) + ')';
-              
-          if(options.query!='' && options.query != undefined)
-            queries.query   += ' AND ('+(options.searchField||'text_EN_txt:') + queryText + ')'
-          else 
-            queries.query   = (options.searchField||'text_EN_txt:') + queryText;
-      }
-      return queries;
-
-    } 
+    $scope.onBuildDocumentSelectorQuery =  onBuildDocumentSelectorQuery;
 
     function setMetaTags(){
       ngMeta.resetMeta();   
@@ -453,4 +422,3 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
     setMetaTags();
 
 }]);
-

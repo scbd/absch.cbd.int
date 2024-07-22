@@ -422,7 +422,7 @@ import _ from 'lodash';
                 "application/json","application/ogg","application/pdf","application/xml","application/zip",
                 "application/x-zip","application/x-zip-compressed","audio/mpeg","audio/x-ms-wma","audio/x-wav",
                 "image/gif","image/jpeg", "image/png","image/bmp",
-                "image/tiff",
+                "image/tiff", "application/geo+json",
                 "text/csv","text/html","text/plain","text/xml","video/mpeg","video/mp4","video/quicktime",
                 "video/x-ms-wmv","video/x-msvideo","video/x-flv","application/vnd.oasis.opendocument.text",
                 "application/vnd.oasis.opendocument.spreadsheet","application/vnd.oasis.opendocument.presentation","application/vnd.oasis.opendocument.graphics",
@@ -509,7 +509,7 @@ import _ from 'lodash';
         var getMimeTypes = function(filename, defaultMimeType) {
             var sMimeType = defaultMimeType || "application/octet-stream";
 
-            if (filename && sMimeType == "application/octet-stream") {
+            if (filename && ["application/octet-stream", "application/geo+json"].includes(sMimeType)) {
                 var sExt = "";
                 var iIndex = filename.lastIndexOf(".");
 
