@@ -39,6 +39,8 @@ import './solr';
                         fieldQueries.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     }
 
+                    fieldQueries.push('_state_s:public')
+
                     var queryListParameters = {
                         df    : this.localizeFields(searchQuery.df||'text_EN_txt'),
                         fq    : _(fieldQueries).flatten().compact().uniq().value(),
@@ -85,10 +87,14 @@ import './solr';
                     if(searchQuery.additionalFields)
                         searchQuery.fields += ',' + searchQuery.additionalFields;
                         
+                    var fieldQueries = _.flatten([searchQuery.fieldQuery]);
+                    fieldQueries.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
+                    fieldQueries.push('_state_s:public');
+
                     // searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryGroupParameters = {
                         df    : this.localizeFields(searchQuery.df||'text_EN_txt'),
-                        fq    : _(['realm_ss:' + appConfigService.currentRealm.toLowerCase()]).union(searchQuery.fieldQuery).flatten().compact().uniq().value(),
+                        fq    : _(fieldQueries).flatten().compact().uniq().value(),
                         'q': searchQuery.query,
                         'sort': this.localizeFields(searchQuery.sort),
                         'fl'  : this.localizeFields(searchQuery.fields),
@@ -135,9 +141,13 @@ import './solr';
                     }
                     _.defaults(facetQuery, searchDefaults);
 
+                    var fieldQueries = _.flatten([facetQuery.fieldQuery]);
+                    fieldQueries.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
+                    fieldQueries.push('_state_s:public');
+
                     if (facetQuery) {
                         var queryFacetsParameters = {
-                            fq    : _(['realm_ss:' + appConfigService.currentRealm.toLowerCase()]).union(facetQuery.fieldQuery).flatten().compact().uniq().value(),
+                            fq    : _(fieldQueries).flatten().compact().uniq().value(),
                             'q': facetQuery.query,
                             'wt': 'json',
                             'rows': 0,
@@ -176,10 +186,14 @@ import './solr';
                     }
                     _.defaults(facetQuery, searchDefaults);
 
+                    var fieldQueries = _.flatten([facetQuery.fieldQuery]);
+                    fieldQueries.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
+                    fieldQueries.push('_state_s:public');
+
                     if (facetQuery) {
 
                         var queryFacetsParameters = {
-                            fq    : _(['realm_ss:' + appConfigService.currentRealm.toLowerCase()]).union(facetQuery.fieldQuery).flatten().compact().uniq().value(),
+                            fq    : _(fieldQueries).flatten().compact().uniq().value(),
                             'q': facetQuery.query,
                             'fl': '',
                             'wt': 'json',
