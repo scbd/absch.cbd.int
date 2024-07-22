@@ -1,20 +1,8 @@
 import app from '~/app';
 import './apiUrl';
     var ACCOUNTS_URL = (function(){
-
-        var domainRegex = /(?:.*\.)?([a-z]+\.[a-z]+)/;
-        var domain = document.location.hostname
-        if(domain=='localhost') 
-            domain = 'cbddev.xyz'
-        else if(/staging\.cbd\.int/.test(document.location.hostname))//if domain is on staging
-            domain = 'staging.cbd.int';
-        else{
-            var match = domain.match(domainRegex);
-            if(match && match.length == 2)
-                domain = match[1];
-        }
         
-        return 'https://accounts.'+domain;
+        return window.scbdApp.accountsUrl;
 
     })()
 
@@ -445,14 +433,6 @@ import './apiUrl';
             return {
                 request: function(config) {
 
-                    var isProdutionApi = /^https:\/\/api.cbd.int\//i.test(config.url)
-
-                    if(isProdutionApi && apiUrl.isAppDevelopment()){
-
-                        var devUrl = apiUrl.devApiUrl(config.url);
-                        if(devUrl)
-                            config.url =  devUrl + config.url;
-                    }
 
                     //Special case for url that are in ng-include need to burst the cache for version change.
                     if ((/^\/app/).test(config.url) && (config.url.indexOf(".html") > 0 || config.url.indexOf(".json") > 0)) {
@@ -511,9 +491,7 @@ import './apiUrl';
                               /^[a-z\-]+\.cbd\.int/i.test($location.host());
 
                 if(rewrite)
-                    config.url = 'https://api.cbd.int' + config.url;
-                // else if( /localhost[:\/]/i.test(location.host))
-                //     config.url = 'https://api.cbddev.xyz' + config.url;
+                    config.url = window.scbdApp.apiUrl + config.url;
 
                 const isCbdApiRequest = /\/api\/v20\d{2}/i.test(config.url.toLowerCase())      &&
                                         (
