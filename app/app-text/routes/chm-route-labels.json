@@ -6,5 +6,7 @@
     "registries":"Registries",
     "forbidden":"Forbidden",
     "notFound":"Not found",
-    "pageNotFound":"Page not found"
+    "pageNotFound":"Page not found",
+    "onlineReporting":"Online Reporting Search",  
+    "financialAnalyzer":"Financial Report Analyzer"
 }

@@ -11,7 +11,11 @@ const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 const chmRouteUrls = {
   theChm,
   register_NR_edit                    : { component: ()=>asyncLogError(import('~/views/forms/edit/chm/edit-chm-national-report')) },
-  register_marineEbsa_edit            : { component: ()=>asyncLogError(import('~/views/forms/edit/chm/edit-chm-marine-ebsa')) }
+  register_marineEbsa_edit            : { component: ()=>asyncLogError(import('~/views/forms/edit/chm/edit-chm-marine-ebsa')) },
+  onlineReporting                     : { component: ()=>asyncLogError(import('~/views/forms/edit/chm/edit-chm-marine-ebsa')) },
+  financialAnalyzer                   : { component: ()=>asyncLogError(import('~/views/forms/edit/chm/edit-chm-marine-ebsa')) }
+
+
 };
 
 
@@ -26,6 +30,9 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/register/EBSA/:identifier/edit',   { ...mapView(angularViewWrapper),   "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"EBSA","resolve":{ ...chmRouteUrls.register_marineEbsa_edit,   "securized":securize(null,true,true)}}).
   whenAsync('/register/NBSAP/:identifier/edit',    { ...mapView(angularViewWrapper),   "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NBSAP","resolve":{ ...chmRouteUrls.register_NR_edit,"securized":securize(null,true,true), "routePrams":injectRouteParams({ "documentType":"NBSAP"})}}).
 
+  whenAsync('/reports/national-reports',       { ...mapView(angularViewWrapper),   "label":routesLabels.onlineReporting,  "resolve":{ ...chmRouteUrls.online_Reporting,       },"param":"true","resolveController":true,"reloadOnSearch":false}).
+  whenAsync('/reports/financial-analyzer',     { ...mapView(angularViewWrapper),   "label":routesLabels.financialAnalyzer,"resolve":{ ...chmRouteUrls.financial_Analyzer,     },"param":"true","resolveController":true,"reloadOnSearch":false}).
+  
   otherwise({
     templateUrl: commonRoutes.baseUrl + "views/shared/404.html",
     label: routesLabels.pageNotFound

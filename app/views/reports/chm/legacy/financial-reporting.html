@@ -1,0 +1,61 @@
+<div id="submit">
+
+    <style>
+    .jqvmap-zoomin, .jqvmap-zoomout {
+        background:none!important;
+        position: absolute;
+        left: 10px;
+        border-radius: 3px;
+        padding: 3px;
+        color: #111!important;
+        cursor: pointer;
+        line-height: 10px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px!important;
+    }
+    </style>
+    
+    
+        <link href="/app/libs/jqvmap/jqvmap/jqvmap.css" rel="stylesheet">
+    
+    
+                <div class="container" style="margin-top:20px;">
+    
+    
+                    <div class="row">
+                        <div class="col-sm-12 well">
+                            <h3><i class="fa fa-search"></i> Financial Resource Mobilization Reporting Framework <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h3>
+                            <h4 style="margin-bottom:30px;" class="color-litegrey">
+                                The financial reporting framework, adopted by decision XII/3, is intended for use by Parties for providing baseline information and reporting on their contribution to reach the global financial targets, under Aichi Biodiversity Target 20, as adopted by the Conference of the Parties to the Convention at its twelfth meeting, in accordance with Article 20.
+                            </h4>
+    
+                            <div id="vmap" style="width: 100%; min-height:400px;background-color:#EEE!important;"></div>
+                            <br>
+                            <strong><span class="bg-blue badge">{{records.length}}</span></strong> Countries have submitted their Financial Resource Mobilization Reporting Framework
+                        </div>
+                    </div>
+                </div>
+    
+    
+    
+    
+        <div ng-repeat="group in records" style="margin-top:30px;">
+            <div>
+                <h3 class="container color-medgrey" style="border-top:1px solid #DDD;padding-top:0;margin-top:3px;"><i class="fa fa-chevron-circle-down"></i> {{group.doclist.docs[0].government_EN_t}} </h3>
+                <div class="container">
+                    <div class="row" >
+    
+                        <div ng-repeat="doc in group.doclist.docs | filter:{'schema_s':'resourceMobilisation'} | orderBy:'startDate_s':'asc'">
+                            <h4 ng-show="$index===0" class="bg-litegrey" style="padding:3px;margin-top:10px;" >Financial Resource Mobilization Reporting Framework</h4>
+                            <i class="fa fa-file-o"></i>  <a translation-url href="{{doc.url_ss[0]}}" target="_new">{{doc.title_t}}</a>
+                        </div>
+    
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    
+    
+    </div>

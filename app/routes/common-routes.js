@@ -91,6 +91,8 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/search/countries/:countryCode/:documentType',       {"redirectTo":"/countries/:countryCode/:documentType","label":routesLabels.search,"resolve":{}}). 
   whenAsync('/search/:id',                                { ...mapView(angularViewWrapper),                    "label":routesLabels.search,"resolve":{ ...commonRouteUrls.search,                                           },"resolveController":true,"reloadOnSearch":false}). 
   whenAsync('/search',                                            { ...mapView(angularViewWrapper),                    "label":routesLabels.search,"resolve":{ ...commonRouteUrls.search,                                                      },"resolveController":true,"reloadOnSearch":false}). 
+  whenAsync('/search/reporting-map',                              {"redirectTo":"/reports/national-reports","label":routesLabels.online_Reporting,"resolve":{}}). 
+  whenAsync('/search/financial-analyzer',                         {"redirectTo":"/reports/financial-analyzer","label":routesLabels.financial_Analyzer,"resolve":{}}). 
   whenAsync('/search/national-records/:documentSchema?',          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}}). 
   whenAsync('/search/reference-records/:documentSchema?',         {"redirectTo":"/search","label":routesLabels.search,"resolve":{}}). 
   whenAsync('/countries',                                         { ...mapView(angularViewWrapper),                    "label":routesLabels.countryProfiles,"resolve":{ ...commonRouteUrls.countries,                                                   },"resolveController":true,"resolveUser":true}). 
