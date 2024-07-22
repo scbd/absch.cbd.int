@@ -33,7 +33,6 @@ import template from 'text!./km-terms.html';
 	                    else if ($scope.binding && angular.isString($scope.binding)) oBinding = [$scope.binding];
 
 	                    $scope.termsX = oBinding;
-	                    console.log('oBinding: ', $scope.terms);
 	                    return;
 
 
