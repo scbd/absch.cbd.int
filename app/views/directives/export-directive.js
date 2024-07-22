@@ -23,8 +23,8 @@ import 'ngDialog';
                         $scope.closeDialog();
                 })
             },
-            controller: ["$scope", 'solr', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element', 'locale', 'roleService',
-                function ($scope, solr, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element, locale, roleService) {
+            controller: ["$scope", 'solr', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element', 'locale', 'roleService','realm',
+                function ($scope, solr, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element, locale, roleService,realm) {
                     
                     var language = (locale || 'en').toUpperCase();
 
@@ -44,6 +44,7 @@ import 'ngDialog';
                         
                                     $scope.isAdministrator = roleService.isAdministrator();
                                     $scope.forTour = forTour;
+                                    let downloadFormat = "xlsx";
                                     $scope.downloadFormat = 'xlsx';                              
                                     $scope.downloadData =  function(){
 
@@ -55,9 +56,9 @@ import 'ngDialog';
                                                 require(['tableexport'], function(){
                                                     $element.find('#datatable').tableExport({
                                                         formats: ["xlsx", "xls", "csv"],
-                                                        filename: "CHM-data",
+                                                        filename: realm.realm + "-data",
                                                     });
-                                                    $element.find('.' + $scope.downloadFormat).click();
+                                                    $element.find('.' + downloadFormat).click();
                                                 });     
                                             })
                                             .finally(function(){
