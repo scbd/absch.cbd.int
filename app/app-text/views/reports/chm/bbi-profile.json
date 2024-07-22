@@ -1,0 +1,13 @@
+{    
+    "title": "Title",
+    "profile":  "Profile",
+    "geographicCoverage":  "Geographic coverage",
+    "types":"Type(s) of assistance",
+    "relevantDocuments":"Any other relevant documents",
+    "suggestedExpertise":"Suggested expertise",
+    "potentialAreas":"Potential areas of collaboration",
+    "additionalInformation":"Additional information",
+    "socialMedia":"Expertise Related Social Media",
+    "contact":"Contact",
+    "organization":"Organization"
+}
