@@ -11,6 +11,9 @@ import '~/views/register/directives/register-top-menu';
 import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/workflow-arrow-buttons';
 import './edit-header';
+import { genericMapping, genericFilter } from '~/services/filters/arrays';
+import { sanitizeDocument } from '~/services/filters/common';
+
 
 app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
@@ -73,16 +76,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
       regions	: function() {return thesaurusService.getDomainTerms('regions').then(Thesaurus.buildTree);}
     };
 
-    $scope.genericFilter = function($query, items) {
-      if(!items)
-        return;
-      var matchedOptions = [];
-      for(var i=0; i!=items.length; ++i)
-        if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
-          matchedOptions.push(items[i]);
-
-      return matchedOptions;
-    };
+    $scope.genericFilter = genericFilter;
 
     $scope.startsWithFilter = function($query, items) {
       var matchedOptions = [];
@@ -93,9 +87,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
       return matchedOptions;
     };
     
-    $scope.genericMapping = function(item) {
-      return {identifier: item.identifier};
-    };
+    $scope.genericMapping = genericMapping;
     //==================================
     //
     //==================================
@@ -258,9 +250,10 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
     //==================================
     //
     //==================================
-    $scope.userGovernment = function() {
-      return $scope.$root.user.government;
-    };
+    $scope.userGovernment = function(){      
+        return $scope.$root.user.government;
+      };
+     
 
     //==================================
     //
@@ -406,46 +399,9 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
         $scope.onPostSubmitFn({ data: documentInfo });
     };
 
-    $scope.sanitizeDocument = function(document){
+    $scope.sanitizeDocument =  sanitizeDocument; 
 
-      if(!document) return;
 
-      document = sanitize(document);
-      return document;
-
-      function sanitize(doc){
-        _.forEach(doc, function(fieldValue, key){
-          
-          if(_.isString(fieldValue) && _.trim(fieldValue||'') == ''){
-            fieldValue = undefined;
-          }
-          else if(_.isArray(fieldValue)){
-            fieldValue = sanitize(fieldValue);
-            fieldValue = _.compact(fieldValue);
-            
-            if(_.isEmpty(fieldValue))
-              fieldValue = undefined;
-          }
-          else if(_.isPlainObject(fieldValue)){
-            fieldValue = sanitize(fieldValue);
-            fieldValue = _.omit(fieldValue, isNullOrUndefinedOrEmpty);
-          }
-
-          doc[key] = fieldValue;
-
-        });
-        
-        if(_.isArray(doc))
-          doc = _.compact(doc)
-        else if(_.isPlainObject(doc))
-          doc = _.omit(doc, isNullOrUndefinedOrEmpty);
-        
-        return doc;
-      }
-      function isNullOrUndefinedOrEmpty(v){
-        return v === undefined || v === null || (_.isObject(v) && _.isEmpty(v));
-      }
-    }
     //to handle console errors
     $scope.isGovernmentRequired = function(value){
       return (value != undefined && value.government != undefined && value.government.identifier != undefined);
