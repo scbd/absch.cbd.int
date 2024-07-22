@@ -70,7 +70,7 @@
           </h5>
 
           <div class="card-body">
-            <post :post="thread" @refresh="pending(refresh, 'loading')" :highlight-on-hash="false">
+            <post :post="thread" @refresh="pending(refresh($event), 'loading')" :highlight-on-hash="false">
               <template v-slot:showReplies="{ replies }">
 
                 <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`"> {{ t('buttonReadPost') }}</a>
@@ -108,7 +108,7 @@
 
       </div>
 
-      <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; pending(refresh, 'loading')"></edit-post>
+      <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; pending(refresh($event), 'loading')"></edit-post>
 
       <simple-modal v-if="showHelp" @close="showHelp = false" :title="lstring(helpArticle.title)">
         <cbd-article :article="helpArticle" :show-cover-image="true" :show-edit="false"  />
@@ -131,7 +131,7 @@ import CbdArticle from '../../components/common/cbd-article.vue';
 import Post from '~/components/forums/post.vue';
 import EditPost from '~/components/forums/edit-post.vue';
 import Loading from '~/components/common/loading.vue';
-import pending   from '~/services/pending-call'
+import pending from '~/services/pending-call';
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
 import ErrorPane from '~/components/common/error.vue';
 import SimpleModal from '~/components/common/modal.vue';
@@ -139,14 +139,13 @@ import messages from "~/app-text/views/portals/forums.json";
 import { lstring } from '../../components/kb/filters';
 import { useI18n } from 'vue-i18n';
 
-const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
-const forumsApi = new ForumsApi({tokenReader:()=>auth.token()});
-const router = useRouter(); 
-
 const auth = useAuth();
 const { t } = useI18n({ messages });
 const route = useRoute().value;
+const router = useRouter();
 
+const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() });
+const forumsApi = new ForumsApi({ tokenReader: () => auth.token() });
 
 const article = ref(null);
 const articleQuery = ref(null);
@@ -161,10 +160,6 @@ const helpArticle = ref(null);
 const edit = ref(null);
 const refCbdArticle = ref(null);
 
-
-// not using
-const portalId = computed(() => route.params.portalId);
-
 const loggedIn = computed(() => auth.user()?.isAuthenticated);
 const isOpen = computed(() => forum.value?.isOpen);
 const hasHelp = computed(() => !!helpArticle.value);
@@ -172,21 +167,12 @@ const showHelp =computed({
   get()      { return !!helpArticle?.value?.visible;} , 
   set(value) { if(helpArticle.value) helpArticle.value.visible = value }
 })
-// const showHelp = computed(() => {
-//   // Access helpArticle.value directly within the getter
-//   return helpArticle?.value?.visible ?? false;
-// });
-
-//    refresh:            pending(refresh, 'loading'),
-//     load:               pending(load, 'loading'),
-//     toggleSubscription: pending(toggleSubscription, 'subscribing'),
-
 
 const props = defineProps({
-        forumId: {
-          type: Number
-        }
-  });
+  forumId: {
+    type: Number
+  }
+});
 
 onMounted(async () => {
  await pending(load(), 'loading');
@@ -196,10 +182,11 @@ onMounted(async () => {
 });
 
 
-//  watch(loggedIn, load);
-watch(() => props.forumId,
-  async (newVal, oldVal) => {
-    console.log(`forumId changed from ${oldVal} to ${newVal}`);
+watch(() => loggedIn, async () => {
+   await load();
+  }
+);
+watch(() => props.forumId, async () => {
     await pending(load(), 'loading');
   }
 );
@@ -233,17 +220,17 @@ const load = async () => {
     const qThreads = await forumsApi.getThreads(props.forumId);
     const qWatch = loggedIn.value ? await forumsApi.getForumSubscription(props.forumId) : null;
 
-    forum.value = await qForum;
-    threads.value = await qThreads;
-    subscription.value = await qWatch;
+    forum.value = qForum;
+    threads.value = qThreads;
+    subscription.value = qWatch;
     helpArticle.value = await articlesApi.queryArticles({ q: { adminTags: { $all: ['forums', 'getting-help'] } }, fo: 1 });
+
     await loadArticle();
   } catch (err) {
     error.value = err;
   }
-}
+};
 
- 
 const refresh = async (threadId, postId) => { 
   if (threadId != postId) {
     const path =getThreadUrl(threadId);
@@ -257,16 +244,14 @@ const refresh = async (threadId, postId) => {
       jumpToAnchor();
     });
   }
-}
- 
-const toggleSubscription = async () => { 
+};
+
+const toggleSubscription = async () => {
   const { watching } = subscription.value || { watching: false };
-  const qWatch = watching
+  subscription.value = watching
     ? await forumsApi.deleteForumSubscription(props.forumId)
     : await forumsApi.addForumSubscription(props.forumId);
-  subscription.value = await qWatch;
-}
- 
+};
 const highlightPostClasses = (postId) => { 
   return route.hash === `#${postId}` ? ['bg-info', 'bg-opacity-25'] : [];
 }
@@ -275,7 +260,7 @@ const getThreadUrl = (threadId) => {
   return joinPath(route.path, `thread/${encodeURIComponent(threadId)}`);
 }
  
- const joinPath = (...parts) => { 
+const joinPath = (...parts) => { 
   return parts.map(o => o.replace(/(^\/+|\/+$)/g, '')).join('/');
 }
 
