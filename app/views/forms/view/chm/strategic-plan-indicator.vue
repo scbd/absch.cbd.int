@@ -55,16 +55,16 @@
                 <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier"></ng> 
             </div>         
         </div> 
-        <ng v-vue-ng:document-metadata  :document="document"></ng> 
+        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
     </div> 
 </template>
 
 <script setup>
    import { computed } from 'vue';
-   import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
-   import '~/components/scbd-angularjs-controls/form-control-directives/km-value-bool.js'  
-   import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js' 
-   import '~/views/forms/view/directives/view-reference-records.directive.js' 
+   import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js';  
+   import '~/components/scbd-angularjs-controls/form-control-directives/km-value-bool.js'; 
+   import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'; 
+   import '~/views/forms/view/directives/view-reference-records.directive.js'; 
    import kmTerm from '~/components/km/KmTerm.vue';
    import messages from '~/app-text/views/reports/chm/strategic-plan-indicator.json';
    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
@@ -78,4 +78,4 @@
    })
     const document = computed(()=>props.documentInfo?.body);
  </script>
-
+documentDatedocumentDatedocumentkmTermkmTerm
