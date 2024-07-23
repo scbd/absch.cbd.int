@@ -43,6 +43,7 @@
     const auth = useAuth();    
     const router = useRouter();
     const props = defineProps({
+        documentInfo: { type:Object, required: true },
         document: { type:Object, required: true },
         locale  : { type:String, required: true }  
     }) 
@@ -56,8 +57,8 @@
         // 	uid = $filter("uniqueIDWithoutRevision")(document.info);
         // else
 
-        uid = uniqueID(props.document.header.identifier);
-        // uid = uniqueID(props.document);
+        // uid = uniqueID(props.document.header.identifier);
+        uid = uniqueID(props.document);
 
         if(!uid)
             return "[new draft]";
@@ -146,38 +147,39 @@
             if(cacheMap[term.identifier])
                 return cacheMap[term.identifier] ;
             //'include-deleted':true,           
+            // document = storage.documents.get(term.identifier, { info:""});
             document =  await kmDocumentApi.getDocument(term.identifier);     
           
         }
-        // else if(term && ( typeof term === 'object' && term !== null)){
+        else if(term && ( typeof term === 'object' && term !== null)){
 
-        //     document = term.info && term.info.metadata ? term.info : term;
+            document = term && term.metadata ? term : term;
 
-        //     var revision = ''
-        //     if(document.revision)
-        //         revision = '-' + document.revision;
-        //     var identifier = '';
-        //     if(term.identifier)
-        //         identifier = term.identifier;
-        //     else if(document.identifier)
-        //         identifier = document.identifier;
-        //     else if(document.data && document.data.identifier)
-        //         identifier = document.data.identifier;
-        //     else if(document.id)
-        //         identifier = document.id;
+            var revision = ''
+            if(document.revision)
+                revision = '-' + document.revision;
+            var identifier = '';
+            if(term.identifier)
+                identifier = term.identifier;
+            else if(document.identifier)
+                identifier = document.identifier;
+            else if(document.data && document.data.identifier)
+                identifier = document.data.identifier;
+            else if(document.id)
+                identifier = document.id;
 
-        //     if(identifier == '')
-        //         return;
+            if(identifier == '')
+                return;
             
-        //     if( document.documentID === undefined && !document.id)
-        //         revision = "DRAFT";
+            if( document.documentID === undefined && !document.id)
+                revision = "DRAFT";
 
-        //     term = { identifier : identifier + revision};
+            term = { identifier : identifier + revision};
 
-        //     if(cacheMap[term.identifier]){
-        //             return cacheMap[term.identifier] ;
-        //     }
-        // }
+            if(cacheMap[term.identifier]){
+                    return cacheMap[term.identifier] ;
+            }
+        }
 
         if(!document)
             return;

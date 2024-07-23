@@ -224,7 +224,7 @@
         </div>  
 
         <!-- TODO: add footer  -->
-        <document-metadata  :document="document"  :locale="locale"></document-metadata> 
+        <document-metadata  :document-info="documentInfo" :document="document" :locale="locale"></document-metadata> 
               
     </div>
 </template>
