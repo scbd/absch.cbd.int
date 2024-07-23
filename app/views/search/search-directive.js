@@ -874,15 +874,20 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     'description': $filter('lstring')((schema.description || {})), otherType:schema.type });
                         })
                         if(isBCH){
-                            addFilter('partyToProtocol' , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Cartagena Protocol on Biosafety'             , 'id': 'partyToProtocol' , 'description': '' });
-                            addFilter('NKLSParty'       , { 'sort': 2, 'type': 'partyStatus', 'name': 'Party to the Supplementary Protocol'                      , 'id': 'NKLSParty'       , 'description': '' });
-                            addFilter('inbetween'       , { 'sort': 3, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Cartagena Protocol on Biosafety'  , 'id': 'inbetween'       , 'description': '' });
-                            addFilter('nonParty'        , { 'sort': 4, 'type': 'partyStatus', 'name': 'Not a Party to the Cartagena Protocol on Biosafety '      , 'id': 'nonParty'        , 'description': '' });
+                            addFilter('partyToProtocol' , { 'sort': 1, 'type': 'partyStatus', 'name': searchDirectiveMergeT.partyToCp  , 'id': 'partyToProtocol' , 'description': '' });
+                            addFilter('NKLSParty'       , { 'sort': 2, 'type': 'partyStatus', 'name': searchDirectiveMergeT.partyToNkls  , 'id': 'NKLSParty'       , 'description': '' });
+                            addFilter('inbetween'       , { 'sort': 3, 'type': 'partyStatus', 'name': searchDirectiveMergeT.inBetweenToCp  , 'id': 'inbetween'       , 'description': '' });
+                            addFilter('nonParty'        , { 'sort': 4, 'type': 'partyStatus', 'name': searchDirectiveMergeT.nonPartyToCp  , 'id': 'nonParty'        , 'description': '' });
                         }
-                        if(isABS){
-                            addFilter('partyToProtocol' , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol' , 'description': '' });
-                            addFilter('inbetween'       , { 'sort': 2, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Protocol' , 'id': 'inbetween'       , 'description': '' });
-                            addFilter('nonParty'        , { 'sort': 3, 'type': 'partyStatus', 'name': 'Not a Party to the Protocol '            , 'id': 'nonParty'        , 'description': '' });
+                        else if(isABS){
+                            addFilter('partyToProtocol' , { 'sort': 1, 'type': 'partyStatus', 'name': searchDirectiveMergeT.partyToNp   , 'id': 'partyToProtocol' , 'description': '' });
+                            addFilter('inbetween'       , { 'sort': 2, 'type': 'partyStatus', 'name': searchDirectiveMergeT.inBetweenToNp , 'id': 'inbetween'       , 'description': '' });
+                            addFilter('nonParty'        , { 'sort': 3, 'type': 'partyStatus', 'name': searchDirectiveMergeT.nonPartyToNp  , 'id': 'nonParty'        , 'description': '' });
+                        }
+                        else if(isCHM){
+                            addFilter('partyToConvention' , { 'sort': 1, 'type': 'partyStatus', 'name': searchDirectiveMergeT.partyToConvention     , 'id': 'partyToProtocol' , 'description': '' });
+                            addFilter('inbetween'         , { 'sort': 2, 'type': 'partyStatus', 'name': searchDirectiveMergeT.inBetweenToConvention , 'id': 'inbetween'       , 'description': '' });
+                            addFilter('nonParty'          , { 'sort': 3, 'type': 'partyStatus', 'name': searchDirectiveMergeT.nonPartyToConvention  , 'id': 'nonParty'        , 'description': '' });
                         }
 
                         //SCBD
