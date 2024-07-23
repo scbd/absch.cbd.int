@@ -42,5 +42,15 @@
     "obsoleteSchemaMessage" : "The following formats are no longer supported on the Biosafety Clearing-House. For more information, please visit bch.cbd.int or contact bch@cbd.int :",
     "loading": "loading",
     "confidential": "Confidential",
-    "clear": "Clear"
+    "clear": "Clear",
+    "partyToCp"            : "Party to the Cartagena Protocol on Biosafety",
+    "partyToNkls"          : "Party to the Supplementary Protocol",
+    "inBetweenToCp"        : "Ratified, not yet Party to the Cartagena Protocol on Biosafety",
+    "nonPartyToCp"         : "Not a Party to the Cartagena Protocol on Biosafety",
+    "partyToNp"            : "Party to the Protocol",
+    "inBetweenToNp"        : "Ratified, not yet Party to the Protocol",
+    "nonPartyToNp"         : "Not a Party to the Protocol",
+    "partyToConvention"    : "Party to the Convention",
+    "inBetweenToConvention": "Ratified, not yet Party to the Convention",
+    "nonPartyToConvention" : "Not a Party to the Convention"
 }
