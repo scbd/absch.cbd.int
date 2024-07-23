@@ -272,7 +272,12 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                     title       : joyRideText.listOfRecords.title,
                                     content     : joyRideText.listOfRecords.content,
                                     placement   : 'top',          
-                                    beforeStep  : closeTab
+                                    beforeStep  : (joyride)=>{
+                                        closeTab(joyride),
+                                        $('html, body').animate({
+                                            scrollTop: $('#listOfRecords').offset().top-350
+                                        }, 50);
+                                    }
                                 },
                                 {
                                     appendToBody: true,
@@ -291,15 +296,18 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                     title       : joyRideText.sortingRecordsNFP.title,
                                     content     : joyRideText.sortingRecordsNFP.content,
                                     placement   : 'top',
-                                    beforeStep  : closeTab
-                                },
+                                    beforeStep  : (joyride)=>{
+                                        closeTab(joyride);
+                                        $element.find('#dropdownMenu1').click();
+                                    }                                                             
+                                },                              
                                 {
                                     appendToBody:  true,
                                     type        : 'element',
                                     selector    : "#sortingRecordsCountries",
                                     title       : joyRideText.sortingRecordsCountries.title,
                                     content     : joyRideText.sortingRecordsCountries.content,
-                                    placement   : 'top'
+                                    placement   : 'top'   
                                 },
                                 {
                                     appendToBody: true,
