@@ -26,6 +26,10 @@
                 </a>
                 <div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none"></div> 
             </div>
+            <div class="alert alert-info" ng-if="!kfilters.length && showFilters=='keywordsFilter'">
+                {{::('keywordFilterT.noKeywords'|$translate)}}
+            </div>
+            
         </div>
     </div>
 
