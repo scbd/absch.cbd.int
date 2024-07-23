@@ -71,7 +71,7 @@
 						<th>{{::('countryListTranslation.country'|$translate)}}</th>
 						<th>{{::('countryListTranslation.status'|$translate)}}</th>
 						<th ng-if="regions.length>0">{{::('countryListTranslation.regions'|$translate)}}</th>
-						<th ng-repeat="header in headerCount">
+						<th ng-repeat="header in headerCount" class="tableexport-string">
 							<span ng-bind="header.title|lstring"></span>
 							(<span ng-bind="header.shortCode"></span>)
 						</th>

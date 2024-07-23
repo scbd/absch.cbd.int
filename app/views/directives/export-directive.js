@@ -44,12 +44,11 @@ import 'ngDialog';
                         
                                     $scope.isAdministrator = roleService.isAdministrator();
                                     $scope.forTour = forTour;
-                                    let downloadFormat = "xlsx";
-                                    $scope.downloadFormat = 'xlsx';                              
+                                    let downloadFormat = $scope.downloadFormat = 'xlsx';                              
                                     $scope.downloadData =  function(){
 
-                                        var dowloadButton = $element.find('.' + $scope.downloadFormat)
-                                        if(dowloadButton && dowloadButton.length==0){
+                                        var downloadButton = $element.find('.' + $scope.downloadFormat)
+                                        if(downloadButton && downloadButton.length==0){
                                             $scope.loading = true;
                                             $q.when(loadData(5000))
                                             .then(function(){
@@ -66,7 +65,7 @@ import 'ngDialog';
                                             });                
                                         }
                                         else
-                                            dowloadButton.click();                        
+                                            downloadButton.click();                        
                                     };
 
                                     $scope.closeDialog = function(){
@@ -154,7 +153,7 @@ import 'ngDialog';
                                                     $scope.done = function(){
                                                         customFields = _.map(_.filter($scope.fields, function(field){return field.selected}), 'field');
                                                         $scope.closeDialog();
-                                                        $element.find('.'+$scope.downloadFormat).remove();
+                                                        $element.find('.'+downloadFormat).remove();
                                                         
                                                     }
                                                     
