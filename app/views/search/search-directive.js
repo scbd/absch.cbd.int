@@ -796,6 +796,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                 chKeywordsFilter = loadABSKeywordFilters();
                             else if (isBCH)
                                 chKeywordsFilter = loadBCHKeywordFilters();
+                            else if (isCHM)
+                                chKeywordsFilter = loadCHMKeywordFilters();
 
                             return $q.all([loadSchemaFilters(), loadCountryFilters(), loadRegionsFilters(), loadDateFilters(), chKeywordsFilter])
                             // .then(function(){
@@ -981,6 +983,58 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                                                         
                         return $q.all(promises);
                     
+                    }
+
+                    function loadCHMKeywordFilters() {
+                        var promises = [];
+                        
+                        promises.push(cbdSubjectsCustomFn().then(function( keywords){loopKeywords( keywords);}));
+                        promises.push(vlrResourceCustomFn().then(function( keywords){loopKeywords( keywords);}));     
+                        promises.push(thesaurusService.getDomainTerms('aichiTartgetResourceTypes'    ).then(function( keywords){loopKeywords( keywords, 'aichiTartgetResourceTypes'  )}));             
+                        promises.push(thesaurusService.getDomainTerms('aichiTargetGoals'             ).then(function( keywords){loopKeywords( keywords, 'aichiTargetGoals'           )}));
+                        promises.push(thesaurusService.getDomainTerms('aichiTargets'                ).then(function( keywords){loopKeywords( keywords,  'aichiTargets'              )}));                  
+                        promises.push(thesaurusService.getDomainTerms('gbfTargets'                  ).then(function( keywords){loopKeywords( keywords,  'gbfTargets'                )})); 
+                        promises.push(thesaurusService.getDomainTerms('cbdSubjects'                 ).then(function( keywords){loopKeywords( keywords,  'cbdSubjects'               )}));                  
+                        promises.push(thesaurusService.getDomainTerms('organizationTypes'           ).then(function( keywords){loopKeywords( keywords, 'organizationTypes'         )}));   
+                        promises.push(thesaurusService.getDomainTerms('aichiTargetsComponents'     ).then(function( keywords){loopKeywords( keywords, 'aichiTargetsComponents'   )})); 
+                        promises.push(thesaurusService.getDomainTerms( 'adequacyMonitoring'    ).then(function( keywords){loopKeywords( keywords, 'adequacyMonitoring'   )}));  
+                        promises.push(thesaurusService.getDomainTerms( 'geographicScope'       ).then(function( keywords){loopKeywords( keywords, 'geographicScope'      )}));
+                        promises.push(thesaurusService.getDomainTerms( 'absKeyAreas'           ).then(function( keywords){loopKeywords( keywords, 'absKeyAreas'          )}));                                          
+                        promises.push(thesaurusService.getDomainTerms( 'cbiTypes'              ).then(function( keywords){loopKeywords( keywords, 'cbiTypes'             )}));
+                        promises.push(thesaurusService.getDomainTerms( 'activityScope'         ).then(function( keywords){loopKeywords( keywords, 'activityScope'        )}));               
+                        promises.push(thesaurusService.getDomainTerms( 'scales'                ).then(function( keywords){loopKeywords( keywords, 'scales'               )})); 
+                        promises.push(thesaurusService.getDomainTerms( 'gspcCategoryProgress'  ).then(function( keywords){loopKeywords( keywords, 'gspcCategoryProgress' )}));
+                        promises.push(thesaurusService.getDomainTerms( 'confidence'            ).then(function( keywords){loopKeywords( keywords, 'confidence'           )}));                 
+                        promises.push(thesaurusService.getDomainTerms( 'categoryProgress'      ).then(function( keywords){loopKeywords( keywords, 'categoryProgress'     )}));                    
+                        promises.push(thesaurusService.getDomainTerms( 'assessment'            ).then(function( keywords){loopKeywords( keywords, 'assessment'           )}));                        
+                        promises.push(thesaurusService.getDomainTerms( 'gspcTargets'           ).then(function( keywords){loopKeywords( keywords, 'gspcTargets'          )}));  
+                        promises.push(thesaurusService.getDomainTerms( 'reportTypes'           ).then(function( keywords){loopKeywords( keywords, 'reportTypes'          )}));                      
+                        promises.push(thesaurusService.getDomainTerms( 'reportStatus'          ).then(function( keywords){loopKeywords( keywords, 'reportStatus'         )}));                       
+                        promises.push(thesaurusService.getDomainTerms( 'approvedBody'          ).then(function( keywords){loopKeywords( keywords, 'approvedBody'         )}));                         
+                        promises.push(thesaurusService.getDomainTerms( 'approvedStatus'        ).then(function( keywords){loopKeywords( keywords, 'approvedStatus'       )}));                       
+                        promises.push(thesaurusService.getDomainTerms( 'status'                ).then(function( keywords){loopKeywords( keywords, 'status'               )}));
+                        promises.push(thesaurusService.getDomainTerms( 'statusCapacity'        ).then(function( keywords){loopKeywords( keywords, 'statusCapacity'      )}));  
+                        promises.push(thesaurusService.getDomainTerms( 'jurisdictions'         ).then(function( keywords){loopKeywords( keywords, 'jurisdictions'        )}));  
+                        promises.push(thesaurusService.getDomainTerms( 'actions'               ).then(function( keywords){loopKeywords( keywords, 'actions'              )}));                     
+                        promises.push(thesaurusService.getDomainTerms( 'types'                 ).then(function( keywords){loopKeywords( keywords, 'types'                )}));                    
+                        promises.push(thesaurusService.getDomainTerms( 'categories'            ).then(function( keywords){loopKeywords( keywords, 'categories'           )}));
+                        promises.push(thesaurusService.getDomainTerms( 'supportTools'          ).then(function( keywords){loopKeywords( keywords, 'supportTools'         )}));     
+                        promises.push(thesaurusService.getDomainTerms( 'categoriesCapacity'    ).then(function( keywords){loopKeywords( keywords, 'categoriesCapacity'  )}));  
+                        promises.push(thesaurusService.getDomainTerms( 'ownerBehalf'           ).then(function( keywords){loopKeywords( keywords, 'ownerBehalf'          )}));                      
+                        promises.push(thesaurusService.getDomainTerms( 'confidence'            ).then(function( keywords){loopKeywords( keywords, 'confidence'           )}));                       
+                        promises.push(thesaurusService.getDomainTerms( 'expertiseLevels'       ).then(function( keywords){loopKeywords( keywords, 'expertiseLevels'      )}));                       
+                        promises.push(thesaurusService.getDomainTerms( 'targetGroups'          ).then(function( keywords){loopKeywords( keywords, 'targetGroups'         )}));                       
+                        promises.push(thesaurusService.getDomainTerms( 'purposes'              ).then(function( keywords){loopKeywords( keywords, 'purposes'             )}));                     
+                        promises.push(thesaurusService.getDomainTerms( 'resourceTypes'          ).then(function( keywords){loopKeywords( keywords, 'resourceTypes'         )}));
+                        promises.push(thesaurusService.getDomainTerms( 'resourceTypesCapacity' ).then(function( keywords){loopKeywords( keywords, 'resourceTypesCapacity')}));                           
+                        promises.push(thesaurusService.getDomainTerms( 'bchRaSubjects'          ).then(function( keywords){loopKeywords( keywords, 'bchRaSubjects'         )}));                 
+                        promises.push(thesaurusService.getDomainTerms( 'bchSubject'            ).then(function( keywords){loopKeywords( keywords, 'bchSubject'           )}));                     
+                        promises.push(thesaurusService.getDomainTerms( 'absSubject'            ).then(function( keywords){loopKeywords( keywords, 'absSubject'           )}));                       
+                        promises.push(thesaurusService.getDomainTerms( 'availability'          ).then(function( keywords){loopKeywords( keywords, 'availability'         )}));                     
+                        promises.push(thesaurusService.getDomainTerms('capacityBuildingProjectFundingTypes').then(function( keywords){loopKeywords( keywords, 'capacityBuildingProjectFundingTypes' )}));  
+                        promises.push(thesaurusService.getDomainTerms('capacityBuildingProjectStatus'       ).then(function( keywords){loopKeywords( keywords, 'capacityBuildingProjectStatus'        )}));  
+                                            
+                        return $q.all(promises);              
                     }
 
                     async function usagesCustomFn(){
