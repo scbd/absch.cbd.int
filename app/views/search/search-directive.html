@@ -84,9 +84,16 @@
                     <form ng-submit="saveFreeTextFilter(searchKeyword, $event)" class="input-group">
                         <input type="text" ng-model="searchKeyword" class="form-control fw-bold"
                             placeholder="{{::('searchDirectiveT.searchTheCH'|$translate)}}">
-                        <span type="submit" ng-click="saveFreeTextFilter(searchKeyword)"
+                        <span type="submit" ng-click="saveFreeTextFilter(searchKeyword)" ng-class="{'disabled':!searchKeyword}"
                             class="input-group-text cursor-pointer" id="basic-addon2"><i
-                                class="fa fa-search"></i></span>
+                                class="fa fa-search"></i>
+                                {{::('searchDirectiveT.search'|$translate)}}
+                        </span>
+                        <span type="submit" ng-click="searchKeyword=undefined" ng-show="searchKeyword"
+                            class="input-group-text cursor-pointer" id="basic-addon2">
+                            <i class="fa fa-eraser"></i> 
+                            {{::('searchDirectiveT.clear'|$translate)}}
+                        </span>
                     </form>
                 </div>
                

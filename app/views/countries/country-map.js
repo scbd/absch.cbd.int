@@ -117,10 +117,9 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             inBetweenParty : '#EC971F'  
           }     
           mapOptions.areasSettings.selectedColor='#069554';
-         
-            
-        }       
-        
+
+
+        }  
 
         $scope.countryMapScope= $scope;
         

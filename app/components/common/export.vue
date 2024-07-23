@@ -100,7 +100,7 @@
                                                             </span>
                                                             <span v-if="Array.isArray(row[key])">
                                                                 <ul class="p-0 list-inline">
-                                                                    <li v-for="item in row[key]">
+                                                                    <li v-for="item in row[key]" :key="item">
                                                                         <span v-html="formatString(item)"></span>
                                                                     </li>
                                                                 </ul>
@@ -186,7 +186,7 @@
                 let info = undefined;
                 
                 loading.value      = true; 
-                let fileName    = props.fileName||`${realm.uIdPrefix}-${schema}-${new Date().getTime().toString(36)}.${downloadFormat.value}`
+                let fileName    = props.fileName||`${realm.uIdPrefix}-${schema?schema:'all'}-${new Date().getTime().toString(36)}.${downloadFormat.value}`
 
                 try{
                     if(isGeneric){

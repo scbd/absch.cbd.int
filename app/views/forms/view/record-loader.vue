@@ -6,6 +6,8 @@
             <national-assessment v-if="documentInfo?.type == 'nationalAssessment'"  
                     :document-info="documentInfo" :locale="locale"></national-assessment>        
             <national-report v-if="documentInfo?.type == 'nationalReport'"  
+                    :document-info="documentInfo" :locale="locale"></national-report>   
+            <national-report v-if="documentInfo?.type == 'nbsap'"  
                     :document-info="documentInfo" :locale="locale"></national-report>
             <national-target v-if="documentInfo?.type == 'nationalTarget'"  
                     :document-info="documentInfo" :locale="locale"></national-target>

@@ -62,7 +62,7 @@
 
 
 
-	<div class="countries-list overflow-hidden min-vh-100" block-region activate="loading"
+	<div class="countries-list overflow-hidden min-vh-100 ps-3 pe-3" block-region activate="loading"
 		block-text=" Loading country details">
 		<div ng-if="readyForExport" style="display: none">
 			<div class="table-responsive">
@@ -71,7 +71,7 @@
 						<th>{{::('countryListTranslation.country'|$translate)}}</th>
 						<th>{{::('countryListTranslation.status'|$translate)}}</th>
 						<th ng-if="regions.length>0">{{::('countryListTranslation.regions'|$translate)}}</th>
-						<th ng-repeat="header in headerCount">
+						<th ng-repeat="header in headerCount" class="tableexport-string">
 							<span ng-bind="header.title|lstring"></span>
 							(<span ng-bind="header.shortCode"></span>)
 						</th>

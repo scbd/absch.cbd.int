@@ -23,8 +23,8 @@ import 'ngDialog';
                         $scope.closeDialog();
                 })
             },
-            controller: ["$scope", 'solr', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element', 'locale', 'roleService',
-                function ($scope, solr, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element, locale, roleService) {
+            controller: ["$scope", 'solr', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element', 'locale', 'roleService','realm',
+                function ($scope, solr, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element, locale, roleService,realm) {
                     
                     var language = (locale || 'en').toUpperCase();
 
@@ -44,21 +44,20 @@ import 'ngDialog';
                         
                                     $scope.isAdministrator = roleService.isAdministrator();
                                     $scope.forTour = forTour;
-                                    $scope.downloadFormat = 'xlsx';
-                                    $scope.downloadFormat = downloadFormat = 'xlsx';
+                                    let downloadFormat = $scope.downloadFormat = 'xlsx';                              
                                     $scope.downloadData =  function(){
 
-                                        var dowloadButton = $element.find('.' + $scope.downloadFormat)
-                                        if(dowloadButton && dowloadButton.length==0){
+                                        var downloadButton = $element.find('.' + $scope.downloadFormat)
+                                        if(downloadButton && downloadButton.length==0){
                                             $scope.loading = true;
                                             $q.when(loadData(5000))
                                             .then(function(){
                                                 require(['tableexport'], function(){
                                                     $element.find('#datatable').tableExport({
                                                         formats: ["xlsx", "xls", "csv"],
-                                                        filename: "ABSCH-data",
+                                                        filename: realm.realm + "-data",
                                                     });
-                                                    $element.find('.' + $scope.downloadFormat).click();
+                                                    $element.find('.' + downloadFormat).click();
                                                 });     
                                             })
                                             .finally(function(){
@@ -66,7 +65,7 @@ import 'ngDialog';
                                             });                
                                         }
                                         else
-                                            dowloadButton.click();                        
+                                            downloadButton.click();                        
                                     };
 
                                     $scope.closeDialog = function(){
