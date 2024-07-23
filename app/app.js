@@ -11,13 +11,13 @@ import {
     createRouter,
     createRoute,
     createService,
-    NgVueDirective 
+    NgVueDirective, 
+    VueNgComponent
 }     from '@scbd/angular-vue/src/index.js' 
 import {
     createI18n
 } from 'vue-i18n';
  import { mergeTranslationKeys} from './services/translation-merge';
-import ngDirectivePlaceholder from "./components/ng-directive-placeholder";
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", 'leaflet-directive']));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
@@ -84,7 +84,7 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
     .use(createService('$realm', realm)) // use  useRealm() | import { useRealm  } from '~/services/composables/realm.js';
     .use(createService('$locale', locale))
     .use(createService('$accountsBaseUrl', authentication.accountsBaseUrl()))
-    .component('ng', ngDirectivePlaceholder) // simple component used as a placeholder for `v-vue-ng` directive bridge
+    .component('ng', VueNgComponent) // simple component used as a placeholder for `v-vue-ng` directive bridge
     .use(ngVue)
     .use($i18n)
     .use($route)

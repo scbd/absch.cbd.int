@@ -14,13 +14,11 @@ import app from '~/app';
 
                 //validate on basis of the url location
                 if (isAppDevelopment())
-                    return 'https://api.cbddev.xyz';
+                    return window.scbdApp.apiUrl;
             }
 
             function devAccountsUrl() {
-                // return;
-                if (isAppDevelopment())
-                    return 'https://accounts.cbddev.xyz';
+                    return window.scbdApp.accountsUrl;
             }
 
 
@@ -30,7 +28,6 @@ import app from '~/app';
             function isAppDevelopment() {
                 var knownDevUrls = [
                     /^https:\/\/\w+.cbddev.xyz\//i, //everything under cbddev.xyz
-                    /^http:\/\/localhost[:\/]/i
                 ];
 
                 var url = $location.$$absUrl;

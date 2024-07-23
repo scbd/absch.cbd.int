@@ -4,7 +4,7 @@
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
   <div class="row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
   <div class="d-block row-cols-1 row-cols-md-1 p-0">
-    <div class="col" v-for="record in recordList.slice(0,4)">
+    <div class="col" v-for="record in recordList.slice(0,4)" :key="record">
       <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
         <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
         <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
@@ -22,8 +22,8 @@
   </div>  
 
 
-    <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
-    <div class="col" v-for="record in recordList.slice(4,8)">
+   <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
+    <div class="col" v-for="record in recordList.slice(4,8)" :key="record">
       <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
         <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
         <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>

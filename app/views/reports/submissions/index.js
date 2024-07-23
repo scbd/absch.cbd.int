@@ -2,8 +2,7 @@ import app from '~/app';
 import _ from 'lodash';
 import '~/services/main'; ;
 import submissionsOnNotificationsT from '~/app-text/views/reports/submissions/submissions-to-notifications.json';
-import { cbdArticle } from 'scbd-common-articles'
-import Vue from 'Vue';
+import cbdArticle from '~/components/common/cbd-article.vue';
 import '~/views/search/search-directive';
 import '~/css/search.css';
 
@@ -13,8 +12,10 @@ export default ['$scope', '$location', '$timeout', 'searchService', 'solr', 'tra
 
 	let activeNotification;
 	translationService.set('submissionsOnNotificationsT', submissionsOnNotificationsT);   
-
-	Vue.component('CbdArticle', cbdArticle);
+	
+	$scope.cbdArticleComponent = {
+		components:{cbdArticle} 
+	}
 	
 	function loadNotification(){
 		if(activeNotification){

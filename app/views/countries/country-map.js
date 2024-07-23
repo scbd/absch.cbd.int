@@ -101,10 +101,26 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             inBetweenParty : '#EC971F'
           }
         }
-        else {
-          $scope.isABS   = realm.is('ABS');          
-          $scope.isCHM   = realm.is('CHM');       
+        if(realm.is('ABS')){
+          $scope.isABS   = realm.is('ABS'); 
+          mapColors = {
+            party          : '#069554',
+            nonParty       : '#636363',
+            inBetweenParty : '#EC971F'
+          }
         }
+        if(realm.is('CHM')){                        
+          $scope.isCHM   = realm.is('CHM');  
+          mapColors = {
+            party          : '#2B2A2A',
+            nonParty       : '#636363',
+            inBetweenParty : '#EC971F'  
+          }     
+          mapOptions.areasSettings.selectedColor='#069554';
+         
+            
+        }       
+        
 
         $scope.countryMapScope= $scope;
         

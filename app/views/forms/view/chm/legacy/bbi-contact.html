@@ -1,0 +1,171 @@
+﻿<div id="Record" class="record panel panel-default">
+
+    <div class="record-body panel-body bg-white">
+
+        <document-date></document-date>
+        
+        <div  ng-if="document.prefix || document.firstName || document.middleName || document.lastName">
+            <label class="view"> {{::('bbiContact.name'|$translate)}}</label>
+            <div class="km-value">
+                {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}}
+                {{document.lastName}}
+        </div>
+
+        <div ng-show="document.designation">
+            <label class="view"> {{::('bbiContact.jobTitle'|$translate)}}</label>
+            <div class="km-value">
+                {{document.designation| lstring:locale}}
+            </div>
+        </div>
+       
+          
+        <div ng-show="document.department">
+            <label class="view"> {{::('bbiContact.department'|$translate)}}</label>
+            <div class="km-value">
+                {{document.department| lstring:locale}}
+            </div>
+        </div>
+          
+      
+        <div ng-show="document.phones || document.faxes || document.emails || document.websites">
+            <legend class="view"> {{::('bbiContact.contactInformation'|$translate)}}</legend>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div ng-show="document.phones">
+                        <label class="view">{{::('bbiContact.phoneNumbers'|$translate)}}</label>
+                        <div class="km-value">
+                            <div ng-repeat="item in document.phones">{{item}}</div>
+                        </div>
+                    </div>
+                </div>
+         
+                <div class="col-md-6">
+                    <div ng-show="document.emails">
+                        <label class="view">{{::('bbiContact.emails'|$translate)}}</label>
+                        <div class="km-value">
+                            <div ng-repeat="item in document.emails">
+                                <a translation-url translation-url ng-href="mailto:{{item}}">{{item}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div ng-show="document.faxes">
+                        <label class="view">{{::('bbiContact.faxNumbers'|$translate)}}</label>
+                        <div class="km-value">
+                            <div ng-repeat="item in document.faxes">{{item}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div ng-show="document.websites">
+                        <label class="view">{{::('bbiContact.websites'|$translate)}}</label>
+                        <div class="km-value">
+                            <div ng-repeat="item in document.websites">
+                                <a translation-url target="_blank" ng-href="{{item.url}}" ng-switch="item.name">
+                                    <i ng-switch-when="youtube" class="fa fa-youtube-square" aria-hidden="true"></i>
+                                    <i ng-switch-when="twitter" class="fa fa-twitter-square" aria-hidden="true"></i>
+                                    <i ng-switch-when="facebook" class="fa fa-facebook-square" aria-hidden="true"></i>
+                                    <i ng-switch-when="Google Maps" class="fa fa-google" aria-hidden="true"></i>
+                                    <i ng-switch-when="website" class="fa fa-home" aria-hidden="true"></i>
+                                    <i ng-switch-default class="fa fa-external-link" aria-hidden="true"></i>
+                                    {{item.name.toUpperCase()}}
+                                </a>
+                                <br><span class="small">{{item.url}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <legend class="view" ng-if="contactOrganization">{{::('bbiContact.organization'|$translate)}}</legend>
+        <div class="km-value" ng-if="contactOrganization">           
+            <div class="col-xs-2" ng-show="getLogo()">
+                <div style="position:relative;">
+                    <img style="max-width:200px;" ng-src="{{getLogo().url}}?v=<%=gitVersion%>"></img>
+                </div>
+            </div>
+            <div ng-class="{'col-xs-10':getLogo(),'col-xs-12':!getLogo()}">
+                <div>
+                    <strong>{{contactOrganization.name | lstring:locale}} </strong><i
+                        ng-show="contactOrganization.acronym">({{contactOrganization.acronym |
+                        lstring:locale}})</i>
+                    <span style="position:absolute;right:1px;top:1px;"> <a
+                            ng-href="database/record/{{contactOrganization.identifier}}" target="_blank"><i
+                                class="fa fa-external-link" aria-hidden="true"></i></a>
+                        <a ng-href="submit/organization/{{contactOrganization.identifier}}" target="_blank"><i
+                                class="fa fa-edit" aria-hidden="true"></i></a></span>
+                    <address>
+                        <div class="km-pre">{{contactOrganization.address | lstring:locale}}</div>
+                        {{contactOrganization.city | lstring:locale}}<span
+                            ng-show="contactOrganization.city && organization.city.en!=' '">, </span>
+                        {{contactOrganization.state | lstring:locale}}<br
+                            ng-show="(organization.city  && organization.city.en!=' ') || document.state" />
+                        {{contactOrganization.postalCode | lstring:locale}}<span
+                            ng-show="contactOrganization.postalCode">, </span>
+                        <b>{{contactOrganization.country | term:locale}}</b>
+                        <image style="height:15px;;"
+                            ng-src="https://www.cbd.int/images/flags/96/flag-{{contactOrganization.country.identifier}}-96.png?v=<%=gitVersion%>">
+                        </image>
+                        <br>
+                        <span ng-if="contactOrganization.emails"><br> </span>
+                        <span ng-repeat="item in contactOrganization.emails">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>:
+                            <a target="_blank" ng-href="mailto:{{item}}">
+                                {{item}}
+                            </a>
+                            <span ng-if="!$last">|</span>
+                        </span>
+                        <span ng-if="contactOrganization.phones"> <br>
+                            <span ng-repeat="item in contactOrganization.phones"><i class="fa fa-phone-square"
+                                    aria-hidden="true"></i>: {{item}}
+                                <span ng-show="!$last">|</span>
+                            </span>
+                        </span>
+
+                        <span ng-if="contactOrganization.faxes"> <br>
+                            <span ng-repeat="item in contactOrganization.faxes"><i class="fa fa-fax"
+                                    aria-hidden="true"></i>: {{item}}
+                                <span ng-show="!$last">|</span>
+                            </span>
+                        </span>
+
+                        <span ng-if="contactOrganization.websites"><br><br></span>
+                        <span class="small" ng-repeat="item in contactOrganization.websites">
+                            <a target="_blank" ng-href="{{item.url}}" ng-switch="item.name">
+                                <i ng-switch-when="youtube" class="fa fa-youtube-square" aria-hidden="true"></i>
+                                <i ng-switch-when="twitter" class="fa fa-twitter-square" aria-hidden="true"></i>
+                                <i ng-switch-when="facebook" class="fa fa-facebook-square"
+                                    aria-hidden="true"></i>
+                                <i ng-switch-when="Google Maps" class="fa fa-google" aria-hidden="true"></i>
+                                <i ng-switch-when="website" class="fa fa-home" aria-hidden="true"></i>
+                                <i ng-switch-default class="fa fa-external-link" aria-hidden="true"></i>
+                                {{item.name.toUpperCase()||item.url}}
+                            </a>
+                            <span ng-if="!$last">|</span>
+                        </span>
+                        <span ng-if="contactOrganization.operationalLanguages"><br></span>
+                        <span class="small" ng-if="contactOrganization.operationalLanguages">
+                            <span class="label label-info" style="margin:0 5px 0 0;"
+                                ng-repeat="lang in contactOrganization.operationalLanguages">{{ lang |
+                                term:locale | uppercase}}</span>
+                        </span>
+
+                        <span ng-if="contactOrganization.organizationType"><br></span>
+                        <span class="small" ng-if="contactOrganization.organizationType">
+                            <span class="label label-default"
+                                style="margin:0 5px 0 0;">{{contactOrganization.organizationType | term:locale |
+                                uppercase}}<span>
+                                </span>
+                    </address>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+    <div document-metadata class="panel-footer"></div>
+</div>
