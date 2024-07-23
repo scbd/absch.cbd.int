@@ -219,12 +219,13 @@
             </section>
 
             <div> 
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>         
+                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
+            </div>  
         </div>  
 
         <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+        <document-metadata  :document="document"  :locale="locale"></document-metadata> 
+              
     </div>
 </template>
 <script setup>
@@ -234,6 +235,7 @@
     import '~/views/forms/view/directives/view-record-reference.directive.js'
     import '~/views/forms/view/directives/view-reference-records.directive.js'   
     import kmTerm from '~/components/km/KmTerm.vue';
+    import documentMetadata from '~/views/forms/view/directives/document-metadata.vue';
     import messages from '~/app-text/views/reports/chm/event.json';
     import { useI18n } from 'vue-i18n';
     import { formatDate, lstring } from '~/components/kb/filters';
