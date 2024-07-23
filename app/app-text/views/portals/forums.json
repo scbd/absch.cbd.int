@@ -17,5 +17,6 @@
    "LastReplyOn" : "Last reply {datetime}",
    "LastReplyBy" : "by {name}",
    "loading" : "Loading...",
-   "refreshing" : "Refreshing..."
+   "refreshing" : "Refreshing...",
+   "backToForum" : "Back to forum"
 }
