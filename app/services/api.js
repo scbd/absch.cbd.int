@@ -3,7 +3,7 @@ import ky from 'ky'
 //
 
 const globals = { http: undefined }
-const defaultOptions = { prefixUrl: 'https://api.cbd.int', timeout  : 30 * 1000 } //https://api.cbd.int 'https://api.cbddev.xyz' 'http://localhost:8000'
+const defaultOptions = { prefixUrl: window.scbdApp.apiUrl, timeout  : 30 * 1000 } //https://api.cbd.int 'https://api.cbddev.xyz' 'http://localhost:8000'
 export const addApiOptions = (options = {}) => {
   const { tokenReader, prefixUrl, timeout } = { ...defaultOptions, ...options }
   const   hooks                             = tokenReader? { beforeRequest: [ async (request) => { request.headers.set('Authorization', `Token ${await tokenReader()}`); }, ], } : ''

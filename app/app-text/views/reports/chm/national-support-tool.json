@@ -1,0 +1,16 @@
+{
+    "country":"Country",
+    "description":"Description of the support tool",
+    "status":"Status",
+    "level":"Level of implementation",
+    "additionalDetails":"Please provide additional details on the specific level of implementation",
+    "nationalTargets":"Link to relevant National Targets",
+    "aichiTargets":"Link to most relevant Aichi Targets",
+    "otherAichiTargets":"Link to other relevant Aichi Targets",
+    "cbdThematicAreas":"Link to CBD thematic areas",
+    "cbdSupportTools":"Link to CBD support tools",
+    "documents":"Main relevant document(s)",
+    "websites":"Main relevant website address or attached documents",
+    "additionalInformation":"Additional information",
+    "otherRelevantWebsite":"Other relevant website address or attached documents"
+}

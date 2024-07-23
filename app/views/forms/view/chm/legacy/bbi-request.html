@@ -1,0 +1,336 @@
+﻿<div id="Record" class="record panel panel-default">
+    <div class="record-body panel-body bg-white">
+        <document-date></document-date>
+
+        <div ng-show="document.title">
+            <label class="view">{{::('bbiRequest.title'|$translate)}}</label>
+            <div class="km-value">
+                {{document.title |lstring}}
+            </div>
+        </div>
+
+        <div ng-show="document.problem">
+            <label class="view">{{::('bbiRequest.problem'|$translate)}}</label>
+            <div class="km-value">
+                {{document.problem |lstring}}
+            </div>
+        </div>
+
+        <div ng-show="document.country">
+            <label class="view">{{::('bbiRequest.relatedGovernment'|$translate)}} </label>
+            <div class="km-value">
+                <span>{{document.country| term:locale}}</span>
+            </div>
+        </div>
+
+        <legend ng-if="contact">{{::('bbiRequest.contact'|$translate)}}</legend>
+        <div ng-if="contact">        
+            <div class=" km-value">
+                <span style="position:absolute;right:1px;top:1px;">  <a ng-href="database/record/{{contact.header.identifier}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                <a ng-href="submit/bbi-contact/{{contact.header.identifier}}" target="_blank"><i class="fa fa-edit" aria-hidden="true"></i></a></span>
+                <strong><b>{{contact.prefix| lstring:locale}}
+                        {{contact.firstName | lstring:locale}}
+                        {{contact.middleName | lstring:locale}}
+                        {{contact.lastName | lstring:locale}} </b>
+                </strong>
+                <span class="small" ng-show="contact.designation || contact.department">
+                            <br>
+                        <span ng-show="contact.designation">{{contact.designation | lstring:locale}}</span><span ng-show="contact.designation && contact.department">,</span>
+                        <span ng-show="contact.department">{{contact.department | lstring:locale}}</span>
+                </span>
+                <span ng-show="organization.name"><br><br><strong>{{organization.name | lstring:locale}}</strong></span>
+                
+                <address>
+                    <div class="km-pre">{{contact.address | lstring:locale}}</div>
+                    {{contact.city | lstring:locale}}<span ng-show="contact.city">, </span>
+                    {{contact.state | lstring:locale}}<br ng-show="contact.city || document.state" />
+                    {{contact.postalCode | lstring:locale}}<span ng-show="contact.postalCode">, </span>
+                    <b>{{contact.country | term:locale}}</b> <image style="height:15px;;" ng-src="https://www.cbd.int/images/flags/96/flag-{{contact.country.identifier}}-96.png"></image>
+                    <br>
+                    <span ng-if="contact.emails"><br> </span>
+                    <span ng-repeat="item in contact.emails">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>:
+                        <a translation-url target="_blank" ng-href="mailto:{{item}}" >{{item}}</a>
+                        <span ng-if="!$last">|</span>
+                    </span>
+
+                    <span ng-if="contact.phones"> <br>
+                        <span ng-repeat="item in contact.phones"><i class="fa fa-phone-square" aria-hidden="true"></i>: {{item}}
+                            <span ng-show="!$last">|</span>
+                        </span>
+                    </span>
+
+                    <span ng-if="contact.faxes"> <br>
+                        <span ng-repeat="item in contact.faxes"><i class="fa fa-fax" aria-hidden="true"></i>: {{item}}
+                                <span ng-show="!$last">|</span>
+                        </span>
+                    </span>
+
+                    <span ng-if="contact.websites"><br><br></span>
+                    <span class="small" ng-repeat="item in contact.websites">
+                        <a translation-url target="_blank" ng-href="{{item.url}}" ng-switch="item.name">
+                            <i ng-switch-when="youtube" class="fa fa-youtube-square" aria-hidden="true"></i>
+                            <i ng-switch-when="twitter" class="fa fa-twitter-square" aria-hidden="true"></i>
+                            <i ng-switch-when="facebook" class="fa fa-facebook-square" aria-hidden="true"></i>
+                            <i ng-switch-when="Google Maps" class="fa fa-google" aria-hidden="true"></i>
+                            <i ng-switch-when="website" class="fa fa-home" aria-hidden="true"></i>
+                            <i ng-switch-default class="fa fa-external-link" aria-hidden="true"></i>
+                            {{item.name.toUpperCase()||item.url}}
+                        </a>
+                        <span ng-if="!$last">|</span>
+                    </span>
+                </address>
+            </div>  
+        </div>
+
+        <legend  ng-if="organization">{{::('bbiRequest.organization'|$translate)}}</legend>
+        <div ng-if="organization">
+        <div class="row" >
+            <div class="km-value">
+                <div class="col-xs-2" ng-show="organization.logo">
+                    <div style="position:relative;">
+                        <img   style="max-width:100%;" ng-src="{{organization.logo.url}}?v=<%=gitVersion%>"></img>
+                    </div>
+                </div>
+                <div ng-class="{'col-xs-10':organization.logo,'col-xs-12':!organization.logo}">
+                    <div>
+                        <strong>{{organization.name | lstring:locale}} </strong><i ng-show="organization.acronym">({{organization.acronym | lstring:locale}})</i>
+                        <span style="position:absolute;right:1px;top:1px;">  <a ng-href="database/record/{{organization.identifier}}" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        <a ng-href="submit/organization/{{organization.identifier}}" target="_blank"><i class="fa fa-edit" aria-hidden="true"></i></a></span>
+                        <address>
+                            <div class="km-pre">{{organization.address | lstring:locale}}</div>
+                            {{organization.city | lstring:locale}}<span ng-show="organization.city && organization.city.en!=' '">, </span>
+                            {{organization.state | lstring:locale}}<br ng-show="(organization.city  && organization.city.en!=' ') || organizatoin.state" />
+                            {{organization.postalCode | lstring:locale}}<span ng-show="organization.postalCode">, </span>
+                            <b>{{organization.country | term:locale}}</b> <image style="height:15px;;" ng-src="https://www.cbd.int/images/flags/96/flag-{{organization.country.identifier}}-96.png?v=<%=gitVersion%>"></image>
+                            <br>
+                            <span ng-if="organization.emails"><br> </span>
+                            <span ng-repeat="item in organization.emails">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>:
+                                <a target="_blank" ng-href="mailto:{{item}}" >
+                                    {{item}}
+                                </a>
+                                <span ng-if="!$last">|</span>
+                            </span>
+                            <span ng-if="organization.phones"> <br>
+                                <span ng-repeat="item in organization.phones"><i class="fa fa-phone-square" aria-hidden="true"></i>: {{item}}
+                                    <span ng-show="!$last">|</span>
+                                </span>
+                            </span>
+
+                            <span ng-if="organization.faxes"> <br>
+                                <span ng-repeat="item in organization.faxes"><i class="fa fa-fax" aria-hidden="true"></i>: {{item}}
+                                <span ng-show="!$last">|</span>
+                                </span>
+                            </span>
+
+                            <span ng-if="organization.websites"><br><br></span>
+                            <span class="small" ng-repeat="item in organization.websites">
+                                <a target="_blank" ng-href="{{item.url}}" ng-switch="item.name">
+                                    <i ng-switch-when="youtube" class="fa fa-youtube-square" aria-hidden="true"></i>
+                                    <i ng-switch-when="twitter" class="fa fa-twitter-square" aria-hidden="true"></i>
+                                    <i ng-switch-when="facebook" class="fa fa-facebook-square" aria-hidden="true"></i>
+                                    <i ng-switch-when="Google Maps" class="fa fa-google" aria-hidden="true"></i>
+                                    <i ng-switch-when="website" class="fa fa-home" aria-hidden="true"></i>
+                                    <i ng-switch-default class="fa fa-external-link" aria-hidden="true"></i>
+                                    {{item.name.toUpperCase()||item.url}}
+                                </a>
+                                <span ng-if="!$last">|</span>
+                            </span>
+                            <span ng-if="organization.operationalLanguages"><br></span>
+                            <span class="small" ng-if="organization.operationalLanguages">
+                                    <span class="label label-info" style="margin:0 5px 0 0;" ng-repeat="lang in organization.operationalLanguages">{{ lang | term:locale | uppercase}}</span>
+                            </span>
+
+                            <span ng-if="organization.organizationType"><br></span>
+                            <span class="small" ng-if="organization.organizationType">
+                                    <span class="label label-default" style="margin:0 5px 0 0;" >{{organization.organizationType | term:locale | uppercase}}<span>
+                            </span>
+                        </address>
+                    </div>
+                </div>           
+            </div>
+        </div>
+
+        <!-- details -->
+        <div ng-if="document.addressedPriorities || document.assistanceTypes || document.problem || document.title ||document.coverage">
+            <legend class="view">{{::('bbiRequest.generalInformation'|$translate)}}</legend>
+
+            <div ng-show="document.coverage">
+                <label class="view">{{::('bbiRequest.geographicTargets'|$translate)}}</label>
+                <div class="km-value">
+                    <span ng-repeat="item in document.coverage">
+                        {{item| term:locale}}<br/>
+                    </span>
+                </div>
+            </div>
+
+            <div ng-show="document.title">
+                <label class="view">{{::('bbiRequest.title'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.title |lstring}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.problem">
+                <label class="view">{{::('bbiRequest.problem'|$translate)}}</label>
+                <div class="km-value">
+                    {{document.problem |lstring}}
+                </div>
+            </div>
+
+            <div ng-show="document.assistanceTypes">
+                <label class="view">{{::('bbiRequest.type'|$translate)}}</label>
+                <div class="km-value">
+                    <span ng-repeat="item in document.assistanceTypes">
+                        {{item| term:locale}}<br/>
+                    </span>
+                </div>
+            </div>
+
+            <div ng-show="document.assistanceTypes" ng-repeat="type in document.assistanceTypes">
+                <label>{{type |term:locale}}</label>
+                <span>{{::('bbiRequest.describeHow'|$translate)}} {{type |term:locale}}{{::('bbiRequest.facilitate'|$translate)}}</span>
+                <div class="km-value">
+                    {{document.addressedPriorities| lstring:locale}}
+                </div>
+            </div>
+
+            <div ng-show="document.addressedPriorities">
+                <label class="view">{{::('bbiRequest.addressedGovernmentalPriorities'|$translate)}}</label>
+                <div class="km-value">
+                    {{document.addressedPriorities| lstring:locale}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Linkages to CBD Inititives -->
+        <div ng-show="document.cbdSubjects || document.aichiTargets">
+            <legend class="view">{{::('bbiRequest.linkages'|$translate)}}</legend>
+
+            <div ng-if="document.cbdSubjects">
+                <label>{{::('bbiRequest.cbdSubjectAreas'|$translate)}}</label>
+                <div class="km-value">
+                    <div ng-repeat="term in document.cbdSubjects">{{term | term:locale}}</div>
+                </div>
+            </div>
+
+            <div ng-if="document.aichiTargets">
+                <label class="view">{{::('bbiRequest.aichiTargets'|$translate)}}</label>
+                <div class="km-value">
+                    <div ng-repeat="term in document.aichiTargets">
+                        <!-- <img style="height: 20px;  width: 20px; margin-bottom:5px; " ng-src="https://www.cbd.int/images/aichi/48/abt-04-48.png" src="https://www.cbd.int/images/aichi/48/abt-04-48.png"> -->
+                        {{term | term:locale}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Information -->
+        <div ng-if="document.addressedPrioritiesOther || document.coFinancing || document.potentialOOI ||
+                        document.objectives || document.sameRequests || document.existingInitiatives  ||
+                        document.websites || document.other || document.endDate || document.startDate ||
+                        contact.beneficiaryTypes  ||  document.jurisdiction || document.jurisdiction || document.otherGovernments">
+            <legend class="view">{{::('bbiRequest.detailedInformation'|$translate)}}</legend>
+            <div ng-show="document.otherGovernments">
+                <label class="view">{{::('bbiRequest.governmentalInvolvement'|$translate)}}</label>
+                <div class="km-value">
+                    <span ng-repeat="item in document.otherGovernments">
+                        {{item| term:locale}}<br/>
+                    </span>
+                </div>
+            </div>
+
+            <div ng-show="document.jurisdiction">
+                <label class="view">{{::('bbiRequest.levelOfApplication'|$translate)}}</label>
+                <div class="km-value">
+                    <span ng-repeat="item in document.jurisdiction">
+                        {{item| term:locale}}<br/>
+                    </span>
+                </div>
+            </div>
+
+            <div ng-show="contact.beneficiaryTypes">
+                <label class="view">{{::('bbiRequest.beneficiaryTypes'|$translate)}}</label>
+                <div class="km-value">
+                    {{contact.beneficiaryTypes | term:locale}}
+                </div>
+            </div>
+
+            <div ng-show="document.startDate">
+                <label class="view">{{::('bbiRequest.startDate'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.startDate}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.startEnd">
+                <label class="view">{{::('bbiRequest.endDate'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.endDate}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.other">
+                <label class="view">{{::('bbiRequest.relevantInformation'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.other | lstring:locale}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.websites">
+                <label class="view">{{::('bbiRequest.relevantLinks'|$translate)}}</label>
+                <ul class="km-value">
+                <li ng-repeat="item in document.websites">
+                    <a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                    <i ng-show="item.name">({{item.url}})</i>
+                </li>
+                </ul>
+            </div>
+
+            <div ng-show="document.existingInitiatives">
+                <label class="view">{{::('bbiRequest.existingInitiatives'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.existingInitiatives | lstring:locale}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.sameRequests">
+                <label class="view">{{::('bbiRequest.sameRequest'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.sameRequests | lstring:locale}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.objectives">
+                <label class="view">{{::('bbiRequest.objectives'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.objectives | lstring:locale}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.potentialOOI">
+                <label class="view">{{::('bbiRequest.outputs'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.potentialOOI | lstring:locale}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.coFinancing">
+                <label class="view">{{::('bbiRequest.support'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.coFinancing | lstring:locale}}<br/></span>
+                </div>
+            </div>
+
+            <div ng-show="document.addressedPrioritiesOther">
+                <label class="view">{{::('bbiRequest.otherPriorities'|$translate)}}</label>
+                <div class="km-value">
+                    <span>{{document.addressedPrioritiesOther | lstring:locale}}<br/></span>
+                </div>
+            </div>
+        </div>   
+
+    <view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+    <div document-metadata class="panel-footer"></div>
+</div>

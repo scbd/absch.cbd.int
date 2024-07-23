@@ -18,6 +18,15 @@
     "cbiCats":"Category(ies) of capacity development activities",
     "cbiAudience":"Main target group(s)/beneficiary(ies)",
     "cbiTAkeyAreas":"Thematic Areas",
-    "cbiFundingSrc":"Type(s) of funding source(s)"   
+    "cbiFundingSrc":"Type(s) of funding source(s)",
+    "resourcePublicationDate": "Publication Date",
+    "resourceNotifications": "Notification(s)",
+    "resourceOrganizations": "Organization(s)",
+    "resourceDate": "Submission Date",
+    "submissionCountries": "Countries(s)",
+    "submissionByType"  : "Submission by",
+    "submissionByTypeParty" : "Party",
+    "submissionByTypeNonParty"  : "Non-Party",
+    "submissionByTypeOrganization"  : "Organization"  
   }
   
