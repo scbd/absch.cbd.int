@@ -219,12 +219,11 @@
             </section>
 
             <div> 
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>         
-        </div>  
+                <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
+            </div>  
+        </div>
 
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+        <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
     </div>
 </template>
 <script setup>
@@ -237,6 +236,7 @@
     import messages from '~/app-text/views/reports/chm/event.json';
     import { useI18n } from 'vue-i18n';
     import { formatDate, lstring } from '~/components/kb/filters';
+    import '~/views/directives/document-metadata-vue-directive'
 
     const { t, locale } = useI18n({ messages });    
      
