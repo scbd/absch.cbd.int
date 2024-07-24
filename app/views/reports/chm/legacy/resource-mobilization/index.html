@@ -1,0 +1,1515 @@
+﻿<style>
+    .chartLink {
+        position: relative;
+        z-index: 0
+    }
+    .chartLink:hover {
+        background-color: transparent;
+        z-index: 50
+    }
+    .chartLink span {
+        position: absolute;
+        top: 10px;
+        background-color: rgb(250,250,250);
+        padding: 5px;
+        border: 2px solid #a5a5a5;;
+        display: none;
+        color: #000;
+        text-decoration: none
+    }
+    .chartLink span linechart {
+        border-width: 0;
+        padding: 2px
+    }
+    .chartLink:hover span#chartContainer {
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 55%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+</style>
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-md-10 text-center">
+            <h3><i class="fa fa-search"></i> {{title}} <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h3>
+            <br />
+        </div>
+    </div>
+    <!-- Search -->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="well well-lg">
+                <form class="form-horizontal">
+                    <!-- <div class="form-group">
+                        <label for="selectedTypes" class="col-sm-2 control-label">Type</label>
+                        <div class="col-sm-10">
+                            <select  class="form-control col-sm-5" name="selectedTypes" id="selectedTypes" ng-model="criteria.selectedTypes" ng-init="criteria.selectedTypes='frf2015'">
+                                <option ng-repeat="option in options.docTypes" value="{{option.identifier}}">{{option.title}}</option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="selectedRegions" class="col-sm-2 control-label">{{::('indexT.region'|$translate)}}</label>
+                        <div class="col-sm-10">
+                            <select  class="form-control col-sm-5" name="selectedRegions" id="selectedRegions" ng-model="criteria.selectedRegions">
+                                <option value="">&lt;{{::('indexT.all'|$translate)}}&gt;</option>
+                                <option ng-repeat="option in cbdRegions" value="{{option.identifier}}">{{option.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                  <div class="form-group">
+                    <label for="selectedCountries" class="col-sm-2 control-label">{{::('indexT.country'|$translate)}}</label>
+                    <div class="col-sm-10">
+                        <select name="selectedCountries" id="selectedCountries" ng-model="criteria.selectedCountries" class="form-control">
+                            <option value="">&lt;{{::('indexT.all'|$translate)}}&gt;</option>
+                            <option ng-repeat="option in reportCountries" value="{{option.identifier}}">{{option.name}}</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="selectedElement" class="col-sm-2 control-label">{{::('indexT.element'|$translate)}}</label>
+                    <div class="col-sm-10">
+                        <select name="selectedElement" id="selectedElement" ng-model="criteria.selectedElements" class="form-control">
+                            <option value="" >&lt;{{::('indexT.all'|$translate)}}&gt;</option>
+                            <option ng-repeat="option in options.elements" value="{{option.identifier}}" ng-bind-html="indent(option.name)"></option>
+                        </select>
+                    </div>
+                  </div>
+                </form>
+                <span class="col-sm-offset-2"><strong>{{::('indexT.note'|$translate)}}</strong>{{::('indexT.figuresInUSDollars'|$translate)}}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 1.1.1 -->
+    <div class="row" ng-if="isElementVisible('1.1') || isElementVisible('1')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"> {{::('indexT.amount'|$translate)}}</div>
+
+                <table class="table table-condensed table-striped table-bordered" ng-if="getCountKey('Q1', 'baselineFlows')==0">
+                    <thead><tr><td><strong>{{::('indexT.noResponse'|$translate)}}</strong></td></tr></thead>
+                </table>
+
+                <table class="table table-condensed table-striped table-bordered" ng-if="getCountKey('Q1', 'baselineFlows')>0">
+                    <thead>
+                        <tr>
+                            <td colspan="2">
+                                <a translation-url ng-show='records.length > 1' ng-click="isElemCollapsed('baselineRows')" aria-label="Left Align" data-toggle="collapse" data-target="#baselineRows" aria-expanded="false" aria-controls="baselineRows">
+                                    <span ng-show="baselineRows_show" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" rm-popover2="Display government(s)"></span>
+                                    <span ng-hide="baselineRows_show" class="glyphicon glyphicon-triangle-top"    aria-hidden="true" rm-popover2="Hide government(s)"></span>
+                                </a>
+                                <span ng-show="baselineRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q1', 'baselineFlows')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                                <span ng-hide="baselineRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q1', 'baselineFlows')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                            </td>
+                            <td class="text-center" ng-repeat="year in options.baselineYears"><strong>{{year}}</strong></td>
+                            <td class="text-center"><strong> {{::('indexT.average'|$translate)}}</strong></td>
+                            <td class="text-center"><strong>{{::('indexT.trend'|$translate)}}</strong></td>
+                        </tr>
+                    </thead>
+                    <div>
+                    <tbody id="baselineRows" ng-class="{collapse: isTotalVisible()}">
+                        <tr ng-repeat="rec in records |  orderBy:'government_EN_s'" ng-if="rec.Q1.baselineFlows">
+                            <td colspan="2"><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a></td>
+                            <td class="text-center" ng-repeat="year in options.baselineYears">{{(rec.Q1.baselineFlows[year] |number:0) ||'&mdash;'}}</td>
+                            <td class="text-center">{{ rec.Q1.baselineFlows_average | number:0}}</td>
+                            <td class="text-center">
+                                <a translation-url class="chartLink"  href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart($event, 'Q1', 'baselineFlows', rec.government_s)">
+                                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                    <!--  chart insertion point -->
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr ng-if='isTotalVisible()'>
+                            <td colspan="2"><strong> {{::('indexT.total'|$translate)}}</strong></td>
+                            <td class="text-center" ng-repeat="year in options.baselineYears"><strong>{{getTotal('Q1', 'baselineFlows', year) | number:0}}</strong></td>
+                            <td class="text-center">
+                                &mdash; <!-- <strong>{{getAverageTotal('Q1','baselineFlows_average')|number:0}}</strong> -->
+                            </td>
+                            <td class="text-center">
+                                <a translation-url class="chartLink"  href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart($event, 'Q1', 'baselineFlows', rec.government_s, true)">
+                                    <i class="fa fa-bar-chart" style="color:red;" aria-hidden="true"></i>
+                                    <!--  chart insertion point -->
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" ng-if="isElementVisible('1.1.1') || isElementVisible('1.1') || isElementVisible('1')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"> {{::('indexT.methodologicalInformation'|$translate)}}
+                    <modal name= "Q1_methodologicalComments" comments="comments_Q1_methodologicalComments"
+                            modal-header="Methodological observations/comments">
+                    </modal>
+                    <a translation-url href="#Q1_methodologicalComments" ng-if='comments_Q1_methodologicalComments.length > 0' rm-popover count="{{comments_Q1_methodologicalComments.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                </div>
+
+                <table class="table table-condensed table-striped table-bordered" ng-if="getCountryCount('Q1', 'baselineFlows')==0">
+                    <thead><tr><td><strong>{{::('indexT.noResponse'|$translate)}}</strong></td></tr></thead>
+                </table>
+
+                <table class="table table-condensed table-striped table-bordered" ng-if="getCountryCount('Q1', 'baselineFlows')>0">
+                    <thead>
+                        <tr>
+                            <td><strong>{{::('indexT.numberOfGovernmentsResponded'|$translate)}}{{getCountryCount('Q1', 'baselineFlows')}}</strong></td>
+                            <td>&nbsp;</td>
+                            <td><strong>{{::('indexT.count'|$translate)}}</strong></td>
+                            <td>&nbsp;</td>
+                            <td><strong>{{::('indexT.count'|$translate)}}</strong></td>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>  {{::('indexT.odaIncludes'|$translate)}}</td>
+                            <td>   {{::('indexT.bilateral'|$translate)}}</td>
+                            <td class="text-center">{{getCount('Q1', 'odaCategory_bilateral', true)}}</td>
+                            <td>  {{::('indexT.multilateral'|$translate)}} </td>
+                            <td class="text-center">{{getCount('Q1', 'odaCategory_multilateral', true)}}</td>
+                        </tr>
+                        <tr>
+                            <td>  {{::('indexT.odaOof'|$translate)}}</td>
+                            <td>  {{::('indexT.commitments'|$translate)}}</td>
+                            <td class="text-center">{{getCount('Q1', 'odaOofType_Commitments', true)}}</td>
+                            <td>Disbursements: </td>
+                            <td class="text-center">{{getCount('Q1', 'odaOofType_Disbursements', true)}}</td>
+                        </tr>
+                        <tr>
+                            <td>ODA/OOF includes:</td>
+                            <td>Directly related:   </td>
+                            <td class="text-center">{{getCount('Q1', 'odaoofAction_isDirect', true)}}</td>
+                            <td>Indirectly related: </td>
+                            <td class="text-center">{{getCount('Q1', 'odaoofAction_isIndirect', true)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Other flows include:</td>
+                            <td>Directly related:   </td>
+                            <td class="text-center">{{getCount('Q1', 'otherAction_isDirect', true)}}</td>
+                            <td>Indirectly related: </td>
+                            <td class="text-center">{{getCount('Q1', 'otherAction_isIndirect', true)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Methodology used to identify official resource flows:</td>
+                            <td>OECD DAC Rio markers: </td>
+                            <td class="text-center">{{getCount('Q1', 'methodologyUsed', 'oecd_dac')}}</td>
+                            <td>Other: </td>
+                            <td class="text-center">{{getCount('Q1', 'methodologyUsed', 'other')}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row" ng-if="isElementVisible('1.1.2') || isElementVisible('1.1') || isElementVisible('1')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">1.1.2 Monitoring progress in mobilizing international financial flows</div>
+
+                <table class="table table-condensed table-striped table-bordered" ng-if="getCountKey('Q1', 'progressFlows')==0">
+                    <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                </table>
+
+                <table class="table table-bordered table-striped table-condensed" ng-if="getCountKey('Q1', 'progressFlows')>0">
+                    <thead>
+                        <tr>
+                            <td colspan="6">
+                                <div class="radio-inline"><label>Display:</label></div>
+                                <div class="radio-inline" ng-init="progressDisplay='amount'">
+                                  <label><input type="radio" ng-model="progressDisplay" value="amount">amount</label>
+                                </div>
+                                <div class="radio-inline">
+                                  <label><input type="radio" ng-model="progressDisplay" value="coefficient">coefficient</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a translation-url ng-show='records.length > 1' ng-click="isElemCollapsed('progressRows')" aria-label="Left Align" data-toggle="collapse" data-target="#progressRows" aria-expanded="false" aria-controls="progressRows">
+                                    <span ng-show="progressRows_show" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" rm-popover2="Display government(s)"></span>
+                                    <span ng-hide="progressRows_show" class="glyphicon glyphicon-triangle-top"    aria-hidden="true" rm-popover2="Hide government(s)"></span>
+                                </a>
+                                <span ng-show="progressRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q1', 'progressFlows')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                                <span ng-hide="progressRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q1', 'progressFlows')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                            </td>
+                            <td class="text-center" ng-repeat="year in options.progressYearsUpTo2020"><strong>{{year}}</strong></td>
+                            <td class="text-center"><strong>Trend</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody id="progressRows" ng-class="{collapse: isTotalVisible()}">
+
+                        <tr ng-repeat="rec in records | orderBy:'government_EN_s' " ng-if="rec.Q1.progressFlows">
+                            <td><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a></td>
+                            <td class="text-center" ng-if="progressDisplay=='amount'" ng-repeat="year in options.progressYears ">{{(rec.Q1.progressFlows[year] | number:0) ||'&mdash;'}}</td>
+                            <td class="text-center" ng-if="progressDisplay=='coefficient'" ng-repeat="year in options.progressYears ">{{(rec.Q1.progressIndicators[year] | number:1) ||'&mdash;'}}</td>
+                           
+                            <td class="text-center" ng-if="progressDisplay=='amount'"      ng-repeat="year in options.progressYears2020 ">{{(get2020FinancialFlows('Q1', 'financialFlows', rec.government_s, year) | number:0) ||'&mdash;'}}</td>
+                            <td class="text-center" ng-if="progressDisplay=='coefficient'" ng-repeat="year in options.progressYears2020 ">{{(get2020FinancialFlows('Q1', 'progressIndicators', rec.government_s, year) | number:0) ||'&mdash;'}}</td>
+
+                            <!-- 2020 financialFlows holder -->
+
+                            <td class="text-center" ng-if="progressDisplay=='amount'">
+                                <a translation-url class="chartLink"  href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart2020($event, 'Q1', ['progressFlows', 'financialFlows'], rec.government_s)">
+                                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                           
+                            <td class="text-center" ng-if="progressDisplay=='coefficient'">
+                                <a translation-url class="chartLink"  href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart2020($event, 'Q1', ['progressIndicators', 'progressIndicators'], rec.government_s)">
+                                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if='isTotalVisible()'>
+                        <tr>
+                            <td ng-if="progressDisplay=='amount'"><strong>Total</strong></td>
+                            <td ng-if="progressDisplay=='Xcoefficient'"><strong>Total Aggregate</strong></td>
+                            <!-- 2015 -->
+                            <td class="text-center" ng-if="progressDisplay=='amount'" ng-repeat="year in options.progressYears"><strong>{{getTotal('Q1', 'progressFlows', year) | number}}</strong></td>
+                            <td class="text-center" ng-if="progressDisplay=='Xcoefficient'" ng-repeat="year in options.progressYears"><strong>{{getAggregateTotalCoefficient('Q1', 'progressFlows', year) | number:1}}</strong></td>
+
+                            <!-- 2020-->
+                            <td class="text-center" ng-if="progressDisplay=='amount'" ng-repeat="year in options.progressYears2020"><strong>{{getTotal('Q1', 'financialFlows', year, 2020) | number}}</strong></td>
+                            <td class="text-center" ng-if="progressDisplay=='Xcoefficient'" ng-repeat="year in options.progressYears2020"><strong>{{getAggregateTotalCoefficient('Q1', 'financialFlows', year, 2020) | number:1}}</strong></td>
+
+                            <td class="text-center" ng-if="progressDisplay=='amount'">
+                                <a translation-url class="chartLink" href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart2020($event, 'Q1', ['progressFlows', 'financialFlows'], rec.government_s, true)">
+                                    <i class="fa fa-bar-chart" style="color:red;" aria-hidden="true"></i>
+                                </a>
+                                
+                            </td>                            
+                            <td class="text-center" ng-if="progressDisplay=='Xcoefficient'">
+                                <a translation-url class="chartLink" href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart($event, 'Q1', 'progressIndicators', rec.government_s, true)">
+                                    <i class="fa fa-bar-chart" style="color:red;" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="isElementVisible('1.1.2')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Methodological information towards 2020
+                    <modal name= "2020_Q1_methodologicalComments" comments="comments2020_Q1_methodologicalComments"
+                            modal-header="Methodological observations/comments">
+                    </modal>
+                    <a translation-url href="#2020_Q1_methodologicalComments" ng-if='comments2020_Q1_methodologicalComments.length > 0' rm-popover count="{{comments2020_Q1_methodologicalComments.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                </div>
+
+                <table class="table table-condensed table-striped table-bordered" ng-if="getCountryCount('Q1', 'baselineFlows')==0">
+                    <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                </table>
+
+                <table class="table table-condensed table-striped table-bordered" ng-if="getCountryCount('Q1', 'baselineFlows')>0">
+                    <thead>
+                        <tr>
+                            <td><strong>Number of governments responded: {{getCountryCount('Q1', 'financialFlows', 2020)}}</strong></td>
+                            <td>&nbsp;</td>
+                            <td><strong>Count</strong></td>
+                            <td>&nbsp;</td>
+                            <td><strong>Count</strong></td>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ODA includes:</td>
+                            <td>Bilateral: </td>
+                            <td class="text-center">{{getCount('Q1', 'odaCategory_bilateral', true, 2020)}}</td>
+                            <td>Multilateral: </td>
+                            <td class="text-center">{{getCount('Q1', 'odaCategory_multilateral', true, 2020)}}</td>
+                        </tr>
+                        <tr>
+                            <td>ODA/OOF:</td>
+                            <td>Commitments:   </td>
+                            <td class="text-center">{{getCount('Q1', 'odaOofType_Commitments', true, 2020)}}</td>
+                            <td>Disbursements: </td>
+                            <td class="text-center">{{getCount('Q1', 'odaOofType_Disbursements', true, 2020)}}</td>
+                        </tr>
+                        <tr>
+                            <td>ODA/OOF includes:</td>
+                            <td>Directly related:   </td>
+                            <td class="text-center">{{getCount('Q1', 'odaoofAction_isDirect', true, 2020)}}</td>
+                            <td>Indirectly related: </td>
+                            <td class="text-center">{{getCount('Q1', 'odaoofAction_isIndirect', true, 2020)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Other flows include:</td>
+                            <td>Directly related:   </td>
+                            <td class="text-center">{{getCount('Q1', 'otherAction_isDirect', true, 2020)}}</td>
+                            <td>Indirectly related: </td>
+                            <td class="text-center">{{getCount('Q1', 'otherAction_isIndirect', true, 2020)}}</td>
+                        </tr>
+                        <tr>
+                            <td>Methodology used to identify official resource flows:</td>
+                            <td>OECD DAC Rio markers: </td>
+                            <td class="text-center">{{getCount('Q1', 'methodologyUsed', 'oecd_dac', 2020)}}</td>
+                            <td>Other: </td>
+                            <td class="text-center">{{getCount('Q1', 'methodologyUsed', 'other', 2020)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+
+    <div class="row" ng-if="isElementVisible('1.2') || isElementVisible('1')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Measures taken by countries to encourage the private sector and CSO to provide international support for the implementation of the Strategic Plan for Biodiversity 2011-2020</strong> </div>
+
+                <div class="panel-body">
+
+                    <div class="col-xs-8">
+                        <table class="table table-condensed table-striped table-bordered" ng-if="getCountM('Q1', 'hasPrivateSectorMeasures', ['comprehensive', 'some','notyet'])>0">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">&nbsp;</td>
+                                    <td colspan="3" class="text-center"><strong>2015</strong></td>
+                                    <td colspan="3" class="text-center"><strong>2020</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align:middle">Comprehensive</td>
+                                    <!-- 2015 --> 
+                                    <td class="text-center">
+                                        <modal  name= "Q1_2c" comments="comments_Q1_2_comprehensive"
+                                                modal-header="1.2 Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide international support for the implementation of the Strategic Plan for Biodiversity 2011-2020?">
+                                        </modal>
+                                        <a translation-url href="#Q1_2c" ng-if='comments_Q1_2_comprehensive.length > 0' rm-popover count="{{comments_Q1_2_comprehensive.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>
+                                    <td class="text-center">{{getCount('Q1', 'hasPrivateSectorMeasures' ,'comprehensive')}}</td> 
+                                    <td class="text-center">{{((getCount('Q1', 'hasPrivateSectorMeasures', 'comprehensive')/getCountM('Q1', 'hasPrivateSectorMeasures', ['comprehensive', 'some','notyet']))*100) | number:2}}%</td>
+
+                                    <!-- 2020 --> 
+                                    <td class="text-center">
+                                        <modal  name= "Q1_2c_2020" comments="comments2020_Q1_2_comprehensive"
+                                                modal-header="1.2 Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide international support for the implementation of the Strategic Plan for Biodiversity 2011-2020?">
+                                        </modal>
+                                        <a translation-url href="#Q1_2c_2020" ng-if='comments2020_Q1_2_comprehensive.length > 0' rm-popover count="{{comments2020_Q1_2_comprehensive.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>                                        
+                                    </td>
+                                    <td class="text-center">{{getCount('Q1', 'hasPrivateSectorMeasures' ,'comprehensive', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q1', 'hasPrivateSectorMeasures', 'comprehensive', 2020)/getCountM('Q1', 'hasPrivateSectorMeasures', ['comprehensive', 'some','notyet'], 2020))*100) | number:2}}%</td>
+                                </tr>
+
+                                <tr>
+                                    <td style="vertical-align:middle">Some</td>
+                                    <!-- 2015 --> 
+                                    <td class="text-center">
+                                        <modal name= "Q1_2s" comments="comments_Q1_2_some"
+                                                modal-header="1.2 Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide international support for the implementation of the Strategic Plan for Biodiversity 2011-2020?">
+                                        </modal>
+                                        <a translation-url href="#Q1_2s" ng-if='comments_Q1_2_some.length > 0' rm-popover count='{{comments_Q1_2_some.length}}' role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>
+                                    <td class="text-center">{{getCount('Q1', 'hasPrivateSectorMeasures' ,'some')}}</td>
+                                    <td class="text-center">{{((getCount('Q1', 'hasPrivateSectorMeasures', 'some')/getCountM('Q1', 'hasPrivateSectorMeasures', ['comprehensive', 'some','notyet']))*100) | number:2}}%</td>
+
+                                    <!-- 2020 --> 
+                                    <td class="text-center">
+                                        <modal name= "Q1_2s_2020" comments="comments2020_Q1_2_some"
+                                                modal-header="1.2 Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide international support for the implementation of the Strategic Plan for Biodiversity 2011-2020?">
+                                        </modal>
+                                        <a translation-url href="#Q1_2s_2020" ng-if='comments2020_Q1_2_some.length > 0' rm-popover count='{{comments2020_Q1_2_some.length}}' role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>                                    
+                                    <td class="text-center">{{getCount('Q1', 'hasPrivateSectorMeasures' ,'some', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q1', 'hasPrivateSectorMeasures', 'some', 2020)/getCountM('Q1', 'hasPrivateSectorMeasures', ['comprehensive', 'some','notyet'], 2020))*100) | number:2}}%</td>
+                                </tr>   
+                                
+                                <tr>
+                                    <td style="vertical-align:middle">Not yet started</td>
+                                    <!-- 2015 -->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q1', 'hasPrivateSectorMeasures' ,'notyet')}}</td>
+                                    <td class="text-center">{{((getCount('Q1', 'hasPrivateSectorMeasures', 'notyet')/getCountM('Q1', 'hasPrivateSectorMeasures', ['comprehensive', 'some','notyet']))*100) | number:2}}%</td>
+
+                                    <!-- 2020 --> 
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q1', 'hasPrivateSectorMeasures' ,'notyet', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q1', 'hasPrivateSectorMeasures', 'notyet', 2020)/getCountM('Q1', 'hasPrivateSectorMeasures', ['comprehensive', 'some','notyet'],2020))*100) | number:2}}%</td>
+                                </tr>
+                                    
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <!-- 2015 -->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center"><strong>{{getCountM('Q1', 'hasPrivateSectorMeasures' ,['comprehensive', 'some','notyet'])}}</strong></td>
+                                    <td class="text-center"><strong>100.00%</strong></td>                                    
+
+                                    <!-- 2020 --> 
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center"><strong>{{getCountM('Q1', 'hasPrivateSectorMeasures' ,['comprehensive', 'some','notyet'], 2020)}}</strong></td>
+                                    <td class="text-center"><strong>100.00%</strong></td>
+                                </tr>                                    
+                            </tbody>
+
+                        </table>
+                        <table class="table table-condensed table-striped table-bordered" ng-if="getCountM('Q1', 'hasPrivateSectorMeasures', ['comprehensive', 'some','notyet'], 2020)==0">
+                            <thead>
+                                <tr>
+                                    <td><strong>No response found.</strong></td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="isElementVisible('2')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Inclusion of biodiversity in priorities and plans</strong> </div>
+                <div class="panel-body">
+                    <div class="col-xs-8">
+                        <table class="table table-bordered  table-striped table-condensed" ng-if="getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet'])>0">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">&nbsp;</td>
+                                    <td colspan="3" class="text-center"><strong>2015</strong></td>
+                                    <td colspan="3" class="text-center"><strong>2020</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                </tr>                             
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align:middle">Comprehensive</td>
+                                    <!-- 2015-->
+                                    <td class="text-center">
+                                        <modal name= "Q2s" comments="comments_Q2_some"
+                                            modal-header="2. Has your country included biodiversity in national priorities or development plans?">
+                                        </modal>
+                                        <a translation-url href="#Q2c" ng-if='comments_Q2_comprehensive.length > 0'          rm-popover count="{{comments_Q2_comprehensive.length}}"          role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>                                        
+                                    </td>
+                                    <td class="text-center">{{getCount('Q2', 'hasNationalBiodiversityInclusion' ,'comprehensive')}}</td>
+                                    <td class="text-center">{{((getCount('Q2', 'hasNationalBiodiversityInclusion' ,'comprehensive')/getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet']))*100)|number:2}}%</td>                                    
+
+                                    <!-- 2020 --> 
+                                    <td class="text-center">
+                                        <modal name= "Q2c_2020" comments="comments2020_Q2_comprehensive"
+                                               modal-header="2. Has your country included biodiversity in national priorities or development plans?">
+                                        </modal>
+                                        <a translation-url href="#Q2c_2020" ng-if='comments2020_Q2_comprehensive.length > 0' rm-popover count="{{comments2020_Q2_comprehensive.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>
+                                    <td class="text-center">{{getCount('Q2', 'hasNationalBiodiversityInclusion' ,'comprehensive', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q2', 'hasNationalBiodiversityInclusion' ,'comprehensive', 2020)/getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align:middle">Some</td>
+                                    <!-- 2015-->
+                                    <td class="text-center">
+                                        <modal name= "Q2s" comments="comments_Q2_some"
+                                                modal-header="2. Has your country included biodiversity in national priorities or development plans?">
+                                        </modal>
+                                        <a translation-url href="#Q2s" ng-if='comments_Q2_some.length > 0' rm-popover count="{{comments_Q2_some.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>
+                                    <td class="text-center">{{getCount('Q2', 'hasNationalBiodiversityInclusion' ,'some')}}</td>
+                                    <td class="text-center">{{((getCount('Q2', 'hasNationalBiodiversityInclusion' ,'some')/getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet']))*100)|number:2}}%</td>                                    
+
+                                    <!-- 2020 --> 
+                                    <td class="text-center">
+                                        <modal name= "Q2s_2020" comments="comments2020_Q2_some"
+                                                modal-header="2. Has your country included biodiversity in national priorities or development plans?">
+                                        </modal>
+                                        <a translation-url href="#Q2s_2020" ng-if='comments2020_Q2_some.length > 0' rm-popover count="{{comments2020_Q2_some.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>                                    
+                                    <td class="text-center">{{getCount('Q2', 'hasNationalBiodiversityInclusion' ,'some', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q2', 'hasNationalBiodiversityInclusion' ,'some', 2020)/getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align:middle">Not yet started</td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q2', 'hasNationalBiodiversityInclusion' ,'notyet')}}</td>
+                                    <td class="text-center">{{((getCount('Q2', 'hasNationalBiodiversityInclusion' ,'notyet')/getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet']))*100)|number:2}}%</td>                                    
+
+                                    <!-- 2020 --> 
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q2', 'hasNationalBiodiversityInclusion' ,'notyet', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q2', 'hasNationalBiodiversityInclusion' ,'notyet', 2020)/getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center"><strong>{{getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet'])}}</strong></td>
+                                    <td class="text-center"><strong>100.00%</strong></t∂d>
+
+                                    <!-- 2020 --> 
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>                                    
+                                    <td class="text-center"><strong>{{getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet'], 2020)}}</strong></td>
+                                    <td class="text-center"><strong>100.00%</strong></td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered  table-striped table-condensed" ng-if="getCountM('Q2', 'hasNationalBiodiversityInclusion', ['comprehensive','some','notyet'], 2020)==0">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="isElementVisible('3')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Assessment and/or evaluation of values</strong></div>
+                <div class="panel-body">
+                    <div class="col-xs-8">
+                        <table class="table table-bordered  table-striped table-condensed" ng-if="getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no'])>0">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">&nbsp;</td>
+                                    <td colspan="3" class="text-center"><strong>2015</strong></td>
+                                    <td colspan="3" class="text-center"><strong>2020</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                </tr>                                   
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align:middle">Comprehensive</td>
+                                    <!-- 2015-->
+                                    <td class="text-center">
+                                        <modal name= "Q3c" comments="comments_Q3_comprehensive"
+                                               modal-header="3. Assessment and/or evaluation of values">
+                                        </modal>
+                                        <a translation-url href="#Q3c" ng-if='comments_Q3_comprehensive.length > 0' rm-popover count="{{comments_Q3_comprehensive.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>
+                                    <td class="text-center">{{getCount('Q3', 'hasBiodiversityAssessment' ,'comprehensive')}}</td>
+                                    <td class="text-center">{{((getCount('Q3', 'hasBiodiversityAssessment' ,'comprehensive')/getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no']))*100)|number:2}}%</td>
+
+                                    <!-- 2020 --> 
+                                    <td class="text-center">
+                                        <modal name= "Q3c_2020" comments="comments2020_Q3_comprehensive"
+                                                modal-header="3. Assessment and/or evaluation of values">
+                                        </modal>
+                                        <a translation-url href="#Q3c_2020" ng-if='comments2020_Q3_comprehensive.length > 0' rm-popover count="{{comments2020_Q3_comprehensive.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>                                    
+                                    <td class="text-center">{{getCount('Q3', 'hasBiodiversityAssessment' ,'comprehensive', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q3', 'hasBiodiversityAssessment' ,'comprehensive', 2020)/getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td style="vertical-align:middle">Some</td>
+                                    <!-- 2015-->
+                                    <td class="text-center">
+                                        <modal name= "Q3s" comments="comments_Q3_some"
+                                               modal-header="3. Assessment and/or evaluation of values">
+                                        </modal>
+                                        <a translation-url href="#Q3s" ng-if='comments_Q3_some.length > 0' rm-popover count="{{comments_Q3_some.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>
+                                    <td class="text-center">{{getCount('Q3', 'hasBiodiversityAssessment' ,'some')}}</td>
+                                    <td class="text-center">{{((getCount('Q3', 'hasBiodiversityAssessment' ,'some')/getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no']))*100)|number:2}}%</td>
+                                    
+                                    <!-- 2020 --> 
+                                    <td class="text-center">
+                                        <modal name= "Q3s_2020" comments="comments2020_Q3_some"
+                                               modal-header="3. Assessment and/or evaluation of values">
+                                        </modal>
+                                        <a translation-url href="#Q3s_2020" ng-if='comments2020_Q3_some.length > 0' rm-popover count="{{comments2020_Q3_some.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>                                    
+                                    <td class="text-center">{{getCount('Q3', 'hasBiodiversityAssessment' ,'some', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q3', 'hasBiodiversityAssessment' ,'some', 2020)/getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                 
+                                <tr>
+                                    <td style="vertical-align:middle">Not yet started</td>
+                                    <!-- 2015 -->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q3', 'hasBiodiversityAssessment' ,'notyet')}}</td>
+                                    <td class="text-center">{{((getCount('Q3', 'hasBiodiversityAssessment' ,'notyet')/getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no']))*100)|number:2}}%</td>
+
+                                    <!-- 2020 --> 
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q3', 'hasBiodiversityAssessment' ,'notyet', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q3', 'hasBiodiversityAssessment' ,'notyet', 2020)/getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align:middle">No</td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q3', 'hasBiodiversityAssessment' ,'no')}}</td>
+                                    <td class="text-center">{{((getCount('Q3', 'hasBiodiversityAssessment' ,'no')/getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no']))*100)|number:2}}%</td>
+
+                                    <!-- 2020 --> 
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>                                    
+                                    <td class="text-center">{{getCount('Q3', 'hasBiodiversityAssessment' ,'no', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q3', 'hasBiodiversityAssessment' ,'no', 2020)/getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center"><strong>{{getCountM('Q3', 'hasBiodiversityAssessment',['comprehensive','some','notyet','no'])}}</strong></td>
+                                    <td class="text-center"><strong>100.00%</strong></td>
+                                   
+                                    <!-- 2020 --> 
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>                                      
+                                    <td class="text-center"><strong>{{getCountM('Q3', 'hasBiodiversityAssessment',['comprehensive','some','notyet','no'], 2020)}}</strong></td>
+                                    <td class="text-center"><strong>100.00%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered  table-striped table-condensed" ng-if="getCountM('Q3', 'hasBiodiversityAssessment', ['comprehensive','some','notyet', 'no'], 2020)==0">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row" ng-if="isElementVisible('4.1') || isElementVisible('4')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">4.1 Annual financial support provided to domestic biodiversity-related activities</div>
+                <div class="table-responsive">
+
+                    <table class="table table-condensed table-striped table-bordered" ng-if="getCountKey('Q4', 'expenditures')==0">
+                        <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                    </table>
+
+                    <table class="table table-bordered table-striped table-condensed" ng-if="getCountKey('Q4', 'expenditures')>0">
+                        <thead>
+                            <tr>
+                                <td class="col-xs-4">
+                                    <a translation-url ng-show='records.length > 1' ng-click="isElemCollapsed('domesticActivityRows')" aria-label="Left Align" data-toggle="collapse" data-target="#domesticActivityRows" aria-expanded="false" aria-controls="domesticActivityRows">
+                                        <span ng-show="domesticActivityRows_show" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" rm-popover2="Display government(s)"></span>
+                                        <span ng-hide="domesticActivityRows_show" class="glyphicon glyphicon-triangle-top"    aria-hidden="true" rm-popover2="Hide government(s)"></span>
+                                    </a>
+                                    <span ng-show="domesticActivityRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q4', 'expenditures')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                                    <span ng-hide="domesticActivityRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q4', 'expenditures')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+
+                                </td>
+                                <td class="text-center" ng-repeat="year in options.domesticYears"><strong>{{year}}</strong></td>
+                                <td class="text-center"><strong>Average</strong></td>
+                                <td class="text-center"><strong>Trend</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody id="domesticActivityRows" ng-class="{collapse: isTotalVisible()}">
+                            <tr ng-repeat="rec in records | orderBy:'government_EN_s'" ng-if="rec.Q4.expenditures">
+                                <td class="col-xs-4"><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a></td>
+                                <td class="text-center" ng-repeat="year in options.domesticYears ">{{(rec.Q4.expenditures[year] | number) ||'&mdash;'}}</td>
+                                <td class="text-center">{{ rec.Q4.expenditures_average||0 | number:0}}</td>
+                                <td class="text-center">
+                                    <a translation-url class="chartLink"  href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart($event, 'Q4', 'expenditures', rec.government_s)">
+                                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody ng-if='isTotalVisible()'>
+                            <tr>
+                                <td class="col-xs-4"><strong>Total</strong></td>
+                                <td class="text-center" ng-repeat="year in options.domesticYears"><strong>{{getTotal('Q4', 'expenditures', year) | number}}</strong></td>
+                                <td class="text-center">&mdash;</td>
+                                <td class="text-center">&mdash;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="isElementVisible('4.2') || isElementVisible('4')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">4.2 Information on sources and categories
+                    <modal name= "Q4_sourcesAdditionalComments" comments="comments_Q4_sourcesAdditionalComments"
+                            modal-header="Methodological observations/comments">
+                    </modal>
+                    <a translation-url href="#Q4_sourcesAdditionalComments" ng-if='comments_Q4_sourcesAdditionalComments.length > 0' rm-popover count="{{comments_Q4_sourcesAdditionalComments.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                </div>
+                <div class="panel-body">
+                    <div class="col-xs-8">
+                        <table class="table table-bordered  table-striped table-condensed"
+                        ng-if=" getCount('Q4', 'govCentralDirectlyRelated',   true)==0 && getCount('Q4', 'govCentralIndirectlyRelated', true)==0 &&
+                                getCount('Q4', 'provincialDirectlyRelated',   true)==0 && getCount('Q4', 'provincialIndirectlyRelated', true)==0 &&
+                                getCount('Q4', 'municipalDirectlyRelated',    true)==0 && getCount('Q4', 'municipalIndirectlyRelated',  true)==0 &&
+                                getCount('Q4', 'extraDirectlyRelated',        true)==0 && getCount('Q4', 'extraIndirectlyRelated',      true)==0 &&
+                                getCount('Q4', 'privateDirectlyRelated',      true)==0 && getCount('Q4', 'privateIndirectlyRelated',    true)==0 &&
+                                getCount('Q4', 'otherDirectlyRelated',        true)==0 && getCount('Q4', 'otherIndirectlyRelated',      true)==0 &&
+                                getCount('Q4', 'ilcDirectlyRelated',          true)==0 && getCount('Q4', 'ilcIndirectlyRelated',        true)==0">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+
+                        <table class="table table-bordered  table-striped table-condensed"
+                            ng-if=" getCount('Q4', 'govCentralDirectlyRelated',   true) || getCount('Q4', 'govCentralIndirectlyRelated', true) ||
+                                    getCount('Q4', 'provincialDirectlyRelated',   true) || getCount('Q4', 'provincialIndirectlyRelated', true) ||
+                                    getCount('Q4', 'municipalDirectlyRelated',    true) || getCount('Q4', 'municipalIndirectlyRelated',  true) ||
+                                    getCount('Q4', 'extraDirectlyRelated',        true) || getCount('Q4', 'extraIndirectlyRelated',      true) ||
+                                    getCount('Q4', 'privateDirectlyRelated',      true) || getCount('Q4', 'privateIndirectlyRelated',    true) ||
+                                    getCount('Q4', 'otherDirectlyRelated',        true) || getCount('Q4', 'otherIndirectlyRelated',      true) ||
+                                    getCount('Q4', 'ilcDirectlyRelated',          true) || getCount('Q4', 'ilcIndirectlyRelated',        true)">
+                            <thead>
+                                <tr><td colspan="3"><strong>Number of countries: {{records.length||0}}</strong></td></tr>
+                                <tr>
+                                    <td class="col-sm-4"><strong>Numbers provided cover</strong></td>
+                                    <td class="col-sm-2 text-center"><strong>Expenditures directly related to biodiversity</strong></td>
+                                    <td class="col-sm-2 text-center"><strong>Expenditures indirectly related to biodiversity</strong></td>
+                                </tr>
+                            </thead>
+                                <tr>
+                                    <td>Governments budget - central</td>
+                                    <td class="text-center">{{getCount('Q4', 'govCentralDirectlyRelated',   true)}}</td>
+                                    <td class="text-center">{{getCount('Q4', 'govCentralIndirectlyRelated', true)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Governments budget - state/provincial</td>
+                                    <td class="text-center">{{getCount('Q4', 'provincialDirectlyRelated',   true)}}</td>
+                                    <td class="text-center">{{getCount('Q4', 'provincialIndirectlyRelated', true)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Governments budget - local/municipal</td>
+                                    <td class="text-center">{{getCount('Q4', 'municipalDirectlyRelated',   true)}}</td>
+                                    <td class="text-center">{{getCount('Q4', 'municipalIndirectlyRelated', true)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Extra-budgetary</td>
+                                    <td class="text-center">{{getCount('Q4', 'extraDirectlyRelated',   true)}}</td>
+                                    <td class="text-center">{{getCount('Q4', 'extraIndirectlyRelated', true)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Private/market</td>
+                                    <td class="text-center">{{getCount('Q4', 'privateDirectlyRelated',   true)}}</td>
+                                    <td class="text-center">{{getCount('Q4', 'privateIndirectlyRelated', true)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Other (NGO, foundations, academia)</td>
+                                    <td class="text-center">{{getCount('Q4', 'otherDirectlyRelated',   true)}}</td>
+                                    <td class="text-center">{{getCount('Q4', 'otherIndirectlyRelated', true)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Collective action of indigenous and local communities</td>
+                                    <td class="text-center">{{getCount('Q4', 'ilcDirectlyRelated',   true)}}</td>
+                                    <td class="text-center">{{getCount('Q4', 'ilcIndirectlyRelated', true)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" ng-if="(isElementVisible('4.3') || isElementVisible('4.3.1') || isElementVisible('4'))">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Has your country assessed the role of collective action, including by indigenous and local communities, and non-market approaches for mobilizing resources for achieving the objectives of the Convention?</strong></div>
+                <div class="panel-body">
+                    <div class="col-xs-8">
+                        <table class="table table-bordered  table-striped table-condensed" ng-if="getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no'])>0">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">&nbsp;</td>
+                                    <td colspan="3" class="text-center"><strong>2015</strong></td>
+                                    <td colspan="3" class="text-center"><strong>2020</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                </tr>                                   
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align:middle">Comprehensive</td>
+                                    <!-- 2015-->
+                                    <td class="text-center">
+                                        <modal name= "Q4c" comments="comments_Q4_comprehensive"
+                                                modal-header="4. Role of collective action and non-market approaches">
+                                         </modal>
+                                        <a translation-url href="#Q4c" ng-if='comments_Q4_comprehensive.length > 0' rm-popover count="{{comments_Q4_comprehensive.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>  
+                                    <td class="text-center">{{getCount('Q4', 'domesticCollectiveAction' ,'comprehensive')}}</td>
+                                    <td class="text-center">{{((getCount('Q4', 'domesticCollectiveAction' ,'comprehensive')/getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no']))*100)|number:2}}%</td>                                    
+
+                                    <!-- 2020 -->
+                                    <td class="text-center">
+                                        <modal name= "Q4c_2020" comments="comments2020_Q4_comprehensive"
+                                                modal-header="4. Role of collective action and non-market approaches">
+                                        </modal>
+                                        <a translation-url href="#Q4c_2020" ng-if='comments2020_Q4_comprehensive.length > 0' rm-popover count="{{comments2020_Q4_comprehensive.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td> 
+                                    <td class="text-center">{{getCount('Q4', 'domesticCollectiveAction' ,'comprehensive', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q4', 'domesticCollectiveAction' ,'comprehensive', 2020)/getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Some</td>
+                                    <!-- 2015-->
+                                    <td class="text-center">
+                                        <modal name= "Q4s" comments="comments_Q4_some"
+                                                modal-header="4. Role of collective action and non-market approaches">
+                                            </modal>
+                                        <a translation-url href="#Q4s" ng-if='comments_Q4_some.length > 0' rm-popover count="{{comments_Q4_some.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>  
+                                    <td class="text-center">{{getCount('Q4', 'domesticCollectiveAction' ,     'some')}}</td>
+                                    <td class="text-center">{{((getCount('Q4', 'domesticCollectiveAction' ,'some')/getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no']))*100)|number:2}}%</td>
+
+                                    <!-- 2020 -->
+                                    <td class="text-center">
+                                        <modal name= "Q4s_2020" comments="comments2020_Q4_some"
+                                                modal-header="4. Role of collective action and non-market approaches">
+                                        </modal>
+                                        <a translation-url href="#Q4s_2020" ng-if='comments2020_Q4_some.length > 0' rm-popover count="{{comments2020_Q4_some.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td> 
+                                    <td class="text-center">{{getCount('Q4', 'domesticCollectiveAction' ,     'some', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q4', 'domesticCollectiveAction' ,'some', 2020)/getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Not yet started</td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q4', 'domesticCollectiveAction' ,     'notyet')}}</td>
+                                    <td class="text-center">{{((getCount('Q4', 'domesticCollectiveAction' ,'notyet')/getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no']))*100)|number:2}}%</td>
+
+                                    <!-- 2020 -->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>      
+                                    <td class="text-center">{{getCount('Q4', 'domesticCollectiveAction' ,     'notyet', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q4', 'domesticCollectiveAction' ,'notyet', 2020)/getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">No</td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q4', 'domesticCollectiveAction' ,     'no')}}</td>
+                                    <td class="text-center">{{((getCount('Q4', 'domesticCollectiveAction' ,'no')/getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no']))*100)|number:2}}%</td>
+
+                                    <!-- 2020 -->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>      
+                                    <td class="text-center">{{getCount('Q4', 'domesticCollectiveAction' ,     'no', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q4', 'domesticCollectiveAction' ,'no', 2020)/getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><strong>Total</strong></td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center"><strong>{{getCount('Q4', 'domesticCollectiveAction' ,'comprehensive') +
+                                        getCount('Q4', 'domesticCollectiveAction' ,'some') +
+                                        getCount('Q4', 'domesticCollectiveAction' ,'notyet') +
+                                        getCount('Q4', 'domesticCollectiveAction' ,'no')}}</strong>
+                                    </td>
+                                    <td class="text-center">100.00%</td>                                                
+
+                                     <!-- 2020 -->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>                                      
+                                    <td class="text-center"><strong>{{getCount('Q4', 'domesticCollectiveAction' ,'comprehensive') +
+                                                getCount('Q4', 'domesticCollectiveAction' ,'some', 2020) +
+                                                getCount('Q4', 'domesticCollectiveAction' ,'notyet', 2020) +
+                                                getCount('Q4', 'domesticCollectiveAction' ,'no', 2020)}}</strong></td>
+                                    <td class="text-center">100.00%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered  table-striped table-condensed" ng-if="getCountM('Q4', 'domesticCollectiveAction', ['comprehensive','some','notyet','no'])==0">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="isElementVisible('4.3') || isElementVisible('4.3.2') || isElementVisible('4')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">4.3.2a Additional information on your assessment of the role of collective action undertaken - 2015
+                    <modal name= "Q4_domesticCollectiveActionMethodologyComments" comments="comments_Q4_domesticCollectiveActionMethodologyComments"
+                            modal-header="Methodological observations/comments">
+                    </modal>
+                    <a translation-url href="#Q4_domesticCollectiveActionMethodologyComments" ng-if='comments_Q4_domesticCollectiveActionMethodologyComments.length > 0' rm-popover count="{{comments_Q4_domesticCollectiveActionMethodologyComments.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                </div>
+
+                <div class="panel-body" ng-if="getCountKey('Q4', 'contributions')==0">
+                    <div class="col-xs-8">
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-striped table-condensed" ng-if="getCountKey('Q4', 'contributions')>0">
+                    <thead>
+                        <tr>
+                            <td>
+                                <a translation-url ng-show='records.length > 1' ng-click="isElemCollapsed('contributionsRows')" aria-label="Left Align" data-toggle="collapse" data-target="#contributionsRows" aria-expanded="false" aria-controls="contributionsRows">
+                                    <span ng-show="contributionsRows_show" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" rm-popover2="Display government(s)"></span>
+                                    <span ng-hide="contributionsRows_show" class="glyphicon glyphicon-triangle-top"    aria-hidden="true" rm-popover2="Hide government(s)"></span>
+                                </a>
+                                <span ng-show="contributionsRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q4', 'contributions')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                                <span ng-hide="contributionsRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q4', 'contributions')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                            </td>
+                            <td class="text-center" ng-repeat="year in options.domesticYears"><strong>{{year}}</strong></td>
+                            <td class="text-center"><strong>Average</strong></td>
+                            <td class="text-center"><strong>Trend</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody id="contributionsRows" ng-class="{collapse: isTotalVisible()}">
+                        <tr ng-repeat="rec in records | orderBy:'government_EN_s'" ng-if="rec.Q4.contributions">
+                            <td><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a></td>
+                            <td class="text-center" ng-repeat="year in options.domesticYears ">{{(rec.Q4.contributions[year] | number) ||'&mdash;'}}</td>
+                            <td class="text-center">{{ rec.Q4.contributions_average||0 | number}}</td>
+                            <td class="text-center">
+                                <a translation-url class="chartLink"  href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart($event, 'Q4', 'contributions', rec.government_s)">
+                                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if='isTotalVisible()'>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td class="text-center" ng-repeat="year in options.domesticYears"><strong>{{getTotal('Q4', 'contributions', year) | number}}</strong></td>
+                            <td class="text-center">&mdash;</td>
+                            <td class="text-center">&mdash;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="isElementVisible('4.3') || isElementVisible('4.3.2') || isElementVisible('4')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">4.3.2b Additional information on your assessment of the role of collective action undertaken - 2020
+                    <modal name= "comments2020_Q4_domesticCollectiveActionMethodologyComments" comments="comments2020_Q4_domesticCollectiveActionMethodologyComments"
+                            modal-header="Methodological observations/comments">
+                    </modal>
+                    <a translation-url href="#comments2020_Q4_domesticCollectiveActionMethodologyComments" ng-if='comments2020_Q4_domesticCollectiveActionMethodologyComments.length > 0' rm-popover count="{{comments2020_Q4_domesticCollectiveActionMethodologyComments.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                </div>
+
+                <div class="panel-body" ng-if="getCountKey('Q4', 'contributions', 2020)==0">
+                    <div class="col-xs-8">
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+  
+                <table class="table table-bordered table-striped table-condensed" ng-if="getCountKey('Q4', 'contributions', 2020)>0">
+                    <thead>
+                        <tr>
+                            <td>
+                                <a translation-url ng-show='records2020.length > 1' ng-click="isElemCollapsed('contributions2020Rows')" aria-label="Left Align" data-toggle="collapse" data-target="#contributions2020Rows" aria-expanded="false" aria-controls="contributions2020Rows">
+                                    <span ng-show="contributions2020Rows_show" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" rm-popover2="Display government(s)"></span>
+                                    <span ng-hide="contributions2020Rows_show" class="glyphicon glyphicon-triangle-top"    aria-hidden="true" rm-popover2="Hide government(s)"></span>
+                                </a>
+                                <span ng-show="contributions2020Rows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q4', 'contributions', 2020)" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                                <span ng-hide="contributions2020Rows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q4', 'contributions', 2020)" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                            </td>
+                            <td class="text-center" ng-repeat="year in options.collectiveActionYears2020"><strong>{{year}}</strong></td>
+                            <td class="text-center"><strong>Average</strong></td>
+                            <td class="text-center"><strong>Trend</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody id="contributions2020Rows" ng-class="{collapse: isTotalVisible()}">
+                        <tr ng-repeat="rec in getRecordsWithKey('Q4', 'contributions', 2020) | orderBy:'government_EN_s'" ng-if="rec.Q4.contributions">
+                            <td><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a></td>
+                            <td class="text-center" ng-repeat="year in options.collectiveActionYears2020">{{(rec.Q4.contributions[year] | number) ||'&mdash;'}}</td>
+                            <td class="text-center">{{ rec.Q4.financialFlows_average||0 | number}}</td>
+                            <td class="text-center">
+                                <a translation-url class="chartLink"  href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart2020($event, 'Q4', ['contributions'], rec.government_s)">
+                                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if='isTotalVisible()'>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td class="text-center" ng-repeat="year in options.collectiveActionYears2020"><strong>{{getTotal('Q4', 'contributions', year, 2020) | number}}</strong></td>
+                            <td class="text-center">&mdash;</td>
+                            <td class="text-center">&mdash;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+
+    <div class="row" ng-if="isElementVisible('5')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">5. Reporting funding needs, gaps, and priorities
+                    <modal name= "Q5_fundingNeedsDataAdditionalComments" comments="comments_Q5_fundingNeedsDataAdditionalComments"
+                            modal-header="Methodological observations/comments">
+                    </modal>
+                    <a translation-url href="#Q5_fundingNeedsDataAdditionalComments" ng-if='comments_Q5_fundingNeedsDataAdditionalComments.length > 0' rm-popover count="{{comments_Q5_fundingNeedsDataAdditionalComments.length}}" role="button" class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                </div>
+
+                <div class="panel-body" ng-if="getCountKey('Q5', 'estimates')==0">
+                    <div class="col-xs-8">
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-striped table-condensed" ng-if="getCountKey('Q5', 'estimates')>0">
+                    <thead>
+                        <tr>
+                            <td colspan="8">
+                                <div class="radio-inline"><label>Display:</label></div>
+                                <div class="radio-inline" ng-init="availableNeedGapOption='need'">
+                                  <label><input type="radio" ng-model="availableNeedGapOption" value="need">needs</label>
+                                </div>
+                                <div class="radio-inline">
+                                  <label><input type="radio" ng-model="availableNeedGapOption" value="gap">gaps</label>
+                                </div>
+                                <div class="radio-inline">
+                                  <label><input type="radio" ng-model="availableNeedGapOption" value="available">available resources</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a translation-url ng-show='records.length > 1' ng-click="isElemCollapsed('estimateRows')" aria-label="Left Align" data-toggle="collapse" data-target="#estimateRows" aria-expanded="false" aria-controls="estimateRows">
+                                    <span ng-show="estimateRows_show" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" rm-popover2="Display government(s)"></span>
+                                    <span ng-hide="estimateRows_show" class="glyphicon glyphicon-triangle-top"    aria-hidden="true" rm-popover2="Hide government(s)"></span>
+                                </a>
+                                <span ng-show="estimateRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q5', 'estimates')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                                <span ng-hide="estimateRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q5', 'estimates')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                            </td>
+                            <td class="text-center" ng-repeat="year in options.fundingNeedsYears"><strong>{{year}}</strong></td>
+                            <td class="text-center"><strong>Trend</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody id="estimateRows" ng-class="{collapse: isTotalVisible()}">
+                        <tr ng-repeat="rec in records | orderBy:'government_EN_s'" ng-if="rec.Q5.estimates">
+                            <td><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a></td>
+                            <td class="text-center" ng-repeat="year in options.fundingNeedsYears">
+                                <a translation-url href="#" rm-tooltip="<p>Need:{{(rec.Q5.estimates[year]['need'] | number:0) ||'&mdash;'}} <br />
+                                                        Available:{{(rec.Q5.estimates[year]['available'] | number:0) ||'&mdash;'}} <br />
+                                                        Gap:{{(rec.Q5.estimates[year]['gap'] | number:0) ||'&mdash;'}}</p>" >
+                                    {{(rec.Q5.estimates[year][availableNeedGapOption] | number:0) ||'&mdash;'}}
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a translation-url class="chartLink"  href="#" ng-mouseleave="unloadChart()" ng-mouseover="loadChart2($event, 'Q5', 'estimates', availableNeedGapOption, rec.government_s)">
+                                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if='isTotalVisible()' class="hidden">
+                        <tr ng-repeat="type in ['need','available','gap']">
+                            <td><strong>Total - {{type}}</strong></td>
+                            <td class="text-center" ng-repeat="year in options.fundingNeedsYears"><strong>{{getTotal2('Q5', 'estimates', year, type) | number}}</strong></td>
+                            <td class="text-center">&mdash;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" ng-if="isElementVisible('6')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">6a. National finance plans - towards 2015</div>
+
+                <div class="panel-body" ng-if="getCountKey('Q6', 'plans')==0">
+                    <div class="col-xs-8">
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-striped table-condensed" ng-if="getCountKey('Q6', 'plans')>0">
+                    <thead>
+                        <tr>
+                            <td colspan="8">
+                                <div class="radio-inline"><label>Display:</label></div>
+                                <div class="radio-inline" ng-init="plansOption='expectedGap'">
+                                  <label><input type="radio" ng-model="plansOption" value="expectedGap">expected funding gap</label>
+                                </div>
+                                <div class="radio-inline">
+                                  <label><input type="radio" ng-model="plansOption" value="domesticTotal">domestic sources</label>
+                                </div>
+                                <div class="radio-inline">
+                                  <label><input type="radio" ng-model="plansOption" value="internationalTotal">international sources</label>
+                                </div>
+                                <div class="radio-inline">
+                                  <label><input type="radio" ng-model="plansOption" value="remainingGap">remaining gap</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a translation-url ng-show='records.length > 1' ng-click="isElemCollapsed('planRows')" aria-label="Left Align" data-toggle="collapse" data-target="#planRows" aria-expanded="false" aria-controls="planRows">
+                                    <span ng-show="planRows_show" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" rm-popover2="Display government(s)"></span>
+                                    <span ng-hide="planRows_show" class="glyphicon glyphicon-triangle-top"    aria-hidden="true" rm-popover2="Hide government(s)"></span>
+                                </a>
+                                <span ng-show="planRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q6', 'plans')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                                <span ng-hide="planRows_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q6', 'plans')" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                            </td>
+                            <td class="text-center" ng-repeat="year in options.fundingNeedsYears"><strong>{{year}}</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody id="planRows" ng-class="{collapse: isTotalVisible()}">
+                        <tr ng-repeat="rec in records | orderBy:'government_EN_s'" ng-if="rec.Q6.plans">
+                            <td><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a></td>
+                            <td  class="text-center" ng-repeat="year in options.fundingNeedsYears">
+
+                                <a translation-url rm-tooltip="Expected gap:{{(rec.Q6.plans[year]['expectedGap']|number:0) ||'&mdash;'}}<br />
+                                               Domestic total:{{(rec.Q6.plans[year]['domesticTotal']|number:0) ||'&mdash;'}}<br />
+                                               International total:{{(rec.Q6.plans[year]['internationalTotal']|number:0) ||'&mdash;'}} <br />
+                                               Remaining gap:{{(rec.Q6.plans[year]['remainingGap']|number:0) ||'&mdash;'}}">
+
+                                               {{(rec.Q6.plans[year][plansOption] | number:0) ||'&mdash;'}}
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody ng-if='isTotalVisible()' class="hidden">
+                        <tr ng-repeat="type in ['expectedGap','domesticTotal','internationalTotal', 'remainingGap']">
+                            <td><strong>Total - {{getFinanacialPlanTitle(type)}}</strong></td>
+                            <td class="text-center" ng-repeat="year in options.fundingNeedsYears"><strong>{{getTotal2('Q6', 'plans', year, type) | number:0}}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="isElementVisible('6')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">6b. National finance plans - towards 2020</div>
+
+                <div class="panel-body" ng-if="getCountKey('Q5', 'domesticSources', 2020)==0 && getCountKey('Q5', 'internationalSources', 2020)==0 ">
+                    <div class="col-xs-8">  
+                        <table class="table table-condensed table-striped table-bordered">
+                            <thead><tr><td><strong>No response found.</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-striped table-condensed" ng-if="getCountKey('Q5', 'domesticSources', 2020)>0 || getCountKey('Q5', 'internationalSources', 2020)>0">
+                    <thead>
+                        <tr>
+                            <td colspan="8">
+                                <div class="radio-inline"><label>Display:</label></div>
+                                <div class="radio-inline" ng-init="plansOption2020='domesticTotal'">
+                                  <label><input type="radio" ng-model="plansOption2020" value="domesticTotal">domestic sources</label> 
+                                </div>
+                                <div class="radio-inline">
+                                  <label><input type="radio" ng-model="plansOption2020" value="internationalTotal">international sources</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a translation-url ng-show='records2020.length > 1' ng-click="isElemCollapsed('planRows2020')" aria-label="Left Align" data-toggle="collapse" data-target="#planRows2020" aria-expanded="false" aria-controls="planRows2020">
+                                    <span ng-show="planRows2020_show" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" rm-popover2="Display government(s)"></span>
+                                    <span ng-hide="planRows2020_show" class="glyphicon glyphicon-triangle-top"    aria-hidden="true" rm-popover2="Hide government(s)"></span>
+                                </a>
+                                <span ng-show="planRows2020_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q5', 'domesticSources', 2020)" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                                <span ng-hide="planRows2020_show" class="text-center"> <strong><ng-pluralize count="getCountryCount('Q5', 'domesticSources', 2020)" when="{'one': 'Government', 'other': '{} Governments'}"></ng-pluralize></strong></span>
+                            </td>
+                            <td class="text-center" ng-repeat="year in options.fundingNeedsYears"><strong>{{year}}</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody id="planRows2020" ng-class="{collapse: isTotalVisible()}">
+                        <tr ng-repeat="rec in records2020 | orderBy:'government_EN_s'" ng-if="rec.Q5.domesticSources && plansOption2020=='domesticTotal'">
+                            <td><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a> </td>
+                            <td  class="text-center" ng-repeat="year in options.fundingNeedsYears">
+                                {{ getPlans2020KeyAmount(rec.Q5.domesticSources, year) ||'&mdash;' }} 
+                                <span ng-show='getPlans2020KeyTrend(rec.Q5.gapReductions, year) == true' class="glyphicon glyphicon-arrow-down" rm-popover2="Gap has been reduced for {{year}}"></span>
+                                <span ng-show='getPlans2020KeyTrend(rec.Q5.gapReductions, year) == false' class="glyphicon glyphicon-arrow-up" rm-popover2="Gap has not been reduced for {{year}}"></span>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="rec in records2020 | orderBy:'government_EN_s'" ng-if="rec.Q5.internationalSources && plansOption2020=='internationalTotal'">
+                            <td><a translation-url ng-href="{{rec.url_ss[0]}}" target="_blank">{{rec.government_EN_s}}</a></td>
+                            <td  class="text-center" ng-repeat="year in options.fundingNeedsYears">
+                                {{ getPlans2020KeyAmount(rec.Q5.internationalSources, year) ||'&mdash;' }}
+                                <span ng-show='getPlans2020KeyTrend(rec.Q5.gapReductions, year) == true' class="glyphicon glyphicon-arrow-down" rm-popover2="Gap has been reduced for {{year}}"></span>
+                                <span ng-show='getPlans2020KeyTrend(rec.Q5.gapReductions, year) == false' class="glyphicon glyphicon-arrow-up" rm-popover2="Gap has not been reduced for {{year}}"></span>                                
+                            </td>
+                        </tr>                        
+                    </tbody>
+                    <!-- <tbody ng-if='isTotalVisible()'>
+                        <tr ng-repeat="type in ['expectedGap','domesticTotal','internationalTotal', 'remainingGap']">
+                            <td><strong>Total - {{getFinanacialPlanTitle(type)}}</strong></td>
+                            <td class="text-center" ng-repeat="year in options.fundingNeedsYears"><strong>{{getTotal2('Q6', 'plans', year, type) | number:0}}</strong></td>
+                        </tr>
+                    </tbody> -->
+                </table>
+            </div>
+        </div>
+    </div>    
+
+    <div class="row" ng-if="isElementVisible('7')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">7. Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide domestic support for the implementation of the Strategic Plan for Biodiversity 2011-2020?</div>
+                <div class="panel-body">
+                    <div class="col-xs-8">
+                        <table class="table table-bordered  table-striped table-condensed" ng-if="getCountM('Q7', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no'])>0">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">&nbsp;</td>
+                                    <td colspan="3" class="text-center"><strong>2015</strong></td>
+                                    <td colspan="3" class="text-center"><strong>2020</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                    <td class="text-center"><strong>Response</strong></td>
+                                    <td class="text-center"><strong>Count</strong></td>
+                                    <td class="text-center"><strong>Percentage</strong></td>
+                                </tr>                                  
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Comprehensive</td>
+                                    <td class="text-center">
+                                        <modal name= "Q7c" comments="comments_Q7_comprehensive"
+                                               modal-header="7. Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide domestic support for the implementation of the Strategic Plan for Biodiversity 2011-2020?">
+                                        </modal>
+                                        <a translation-url href="#Q7c" ng-if='comments_Q7_comprehensive.length > 0' rm-popover count="{{comments_Q7_comprehensive.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>
+                                    <td class="text-center">{{getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,     'comprehensive')}}</td>
+                                    <td class="text-center">{{((getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,'comprehensive')/getCountM('Q7', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no']))*100)|number:2}}%</td>
+
+                                    <!-- 2020 -->
+                                    <td class="text-center">
+                                        <modal name= "Q5c_2020" comments="comments2020_Q5_comprehensive"
+                                                modal-header="7. Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide domestic support for the implementation of the Strategic Plan for Biodiversity 2011-2020?">
+                                        </modal>
+                                        <a translation-url href="#Q5c_2020" ng-if='comments2020_Q5_comprehensive.length > 0' rm-popover count="{{comments2020_Q5_comprehensive.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+                                    </td>
+                                    <td class="text-center">{{getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,     'comprehensive', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,'comprehensive', 2020)/getCountM('Q7', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no'], 2020))*100)|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td>Some</td>
+                                    <!-- 2015-->
+                                    <td class="text-center">
+                                        <modal name= "Q7s" comments="comments_Q7_some"
+                                               modal-header="7. Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide domestic support for the implementation of the Strategic Plan for Biodiversity 2011-2020?">
+                                        </modal>
+                                        <a translation-url href="#Q7s" ng-if='comments_Q7_some.length > 0' rm-popover count="{{comments_Q7_some.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+
+                                    </td>
+                                    <td class="text-center">{{getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,     'some')}}</td>
+                                    <td class="text-center">{{((getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,'some')/getCountM('Q7', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no']))*100)|number:2}}%</td>
+
+                                    <!-- 2020 -->
+                                    <td class="text-center">
+                                        <modal name= "Q5s_2020" comments="comments2020_Q7_some"
+                                                modal-header="7. Has your country taken measures to encourage the private sector as well as non-governmental organizations, foundations and academia to provide domestic support for the implementation of the Strategic Plan for Biodiversity 2011-2020?">
+                                        </modal>
+                                        <a translation-url href="#Q5s_2020" ng-if='comments2020_Q5_some.length > 0' rm-popover count="{{comments2020_Q5_some.length}}" role="button"  class="btn btn-sm" data-toggle="modal"><img src='app/images/documents.png'></a>
+
+                                    </td>
+                                    <td class="text-center">{{getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,     'some', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,'some', 2020)/getCountM('Q5', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no'], 2020))*100)|number:2}}%</td>
+
+                                </tr>
+                                <tr>
+                                    <td>No</td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,     'no')}}</td>
+                                    <td class="text-center">{{((getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,'no')/getCountM('Q7', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no']))*100)|number:2}}%</td>                                    
+
+                                    <!-- 2020 -->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>   
+                                    <td class="text-center">{{getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,     'no', 2020)}}</td>
+                                    <td class="text-center">{{((getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,'no')/getCountM('Q5', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no'], 2020))*100)|number:2}}%</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <!-- 2015-->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td>
+                                    <td class="text-center">{{getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,'comprehensive') +
+                                        getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,'some') +
+                                        getCount('Q7', 'hasDomesticPrivateSectorMeasures' ,'no')}}
+                                    </td>
+                                    <td class="text-center">100%</td>                                        
+
+                                    <!-- 2020 -->
+                                    <td style="vertical-align:middle" class="text-center">&mdash;</td> 
+                                    <td class="text-center">{{getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,'comprehensive', 2020) +
+                                        getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,'some', 2020) +
+                                        getCount('Q5', 'hasDomesticPrivateSectorMeasures' ,'no', 2020)}}</td>
+                                    <td class="text-center">100%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table lass="table table-bordered  table-striped table-condensed" ng-if="getCountM('Q7', 'hasDomesticPrivateSectorMeasures',['comprehensive','some','no'])==0 && getCountM('Q5', 'hasDomesticPrivateSectorMeasures',['comprehensive','some','no'], 2020)==0 " >
+                            <thead><tr><td><strong>No response found. {{getCountM('Q7', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no'])}} {{getCountM('Q5', 'hasDomesticPrivateSectorMeasures', ['comprehensive','some','no'], 2020)}}</strong></td></tr></thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row" ng-if="isElementVisible('8')">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">8. Availability of financial resources for achieving targets</div>
+                <div class="panel-body">
+                    <div class="col-xs-4">
+                        <table class="table table-bordered  table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <td class="text-center" rowspan="2" style="vertical-align: middle"><strong>Response</strong></th>
+                                    <td class="text-center" colspan="2"><strong>Domestic expenditures</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Count</td>
+                                    <td class="text-center">Overall response</td>
+                                </tr>
+                            </thead>
+                            <tbody ng-if="getCountM('Q8', 'reportDomesticExpenditures',[true, false])>0">
+                                <tr>
+                                    <td class="text-center">yes</td>
+                                    <td class="text-center">{{getCount('Q8', 'reportDomesticExpenditures', true)}}</td>
+                                    <td class="text-center">{{getCount('Q8', 'reportDomesticExpenditures', true)/getCountM('Q8', 'reportDomesticExpenditures',[true, false])*100|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">no</td>
+                                    <td class="text-center">{{getCount('Q8', 'reportDomesticExpenditures', false)}}</td>
+                                    <td class="text-center">{{getCount('Q8', 'reportDomesticExpenditures', false)/getCountM('Q8', 'reportDomesticExpenditures',[true, false])*100|number:2}}%</td>
+
+                                </tr>
+                            </tbody>
+                            <tbody ng-if="getCountM('Q8', 'reportDomesticExpenditures',[true, false])==0">
+                                <tr><td colspan="3">No response found.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <table class="table table-bordered  table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <td class="text-center" rowspan="2" style="vertical-align: middle"><strong>Response</strong></th>
+                                    <td class="text-center" colspan="2"><strong>Funding needs, gaps and priorities</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Count</td>
+                                    <td class="text-center">Percentage</td>
+                                </tr>
+                            </thead>
+                            <tbody ng-if="getCountM('Q8', 'reportFundingNeeds',[true, false])>0">
+                                <tr>
+                                    <td class="text-center">yes</td>
+                                    <td class="text-center">{{getCount('Q8', 'reportFundingNeeds', true)}}</td>
+                                    <td class="text-center">{{getCount('Q8', 'reportFundingNeeds', true)/getCountM('Q8', 'reportFundingNeeds',[true, false])*100|number:2}}%</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">no</td>
+                                    <td class="text-center">{{getCount('Q8', 'reportFundingNeeds', false)}}</td>
+                                    <td class="text-center">{{getCount('Q8', 'reportFundingNeeds', false)/getCountM('Q8', 'reportFundingNeeds',[true, false])*100|number:2}}%</td>
+
+                                </tr>
+                            </tbody>
+                            <tbody ng-if="getCountM('Q8', 'reportFundingNeeds',[true, false])==0">
+                                <tr><td colspan="3">No response found.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <table class="table table-bordered  table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <td class="text-center" rowspan="2" style="vertical-align: middle"><strong>Response</strong></th>
+                                    <td class="text-center" colspan="2"><strong>National finance plans for biodiversity</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Count</td>
+                                    <td class="text-center">Percentage</td>
+                                </tr>
+                            </thead>
+                            <tbody ng-if="getCountM('Q8', 'prepareFinancePlans',[true, false])>0">
+                                <tr>
+                                    <td class="text-center">yes</td>
+                                    <td class="text-center">{{getCount('Q8', 'prepareFinancePlans', true)}}</td>
+                                    <td class="text-center">{{getCount('Q8', 'prepareFinancePlans', true)/getCountM('Q8', 'prepareFinancePlans',[true, false])*100|number:2}}%</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">no</td>
+                                    <td class="text-center">{{getCount('Q8', 'prepareFinancePlans', false)}}</td>
+                                    <td class="text-center">{{getCount('Q8', 'prepareFinancePlans', false)/getCountM('Q8', 'prepareFinancePlans',[true, false])*100|number:2|number:2}}%</td>
+                                </tr>
+                            </tbody>
+                            <tbody ng-if="getCountM('Q8', 'prepareFinancePlans',[true, false])==0">
+                                <tr><td colspan="3">No response found.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  chart container -->
+    <div id="hiddenChart" class="hidden">
+        <span id="chartContainer" style="min-width:400px;">
+            <linechart chart-data='chartData' chart-options='chartOptions'></linechart>
+        </span>
+    </div>
+</div>

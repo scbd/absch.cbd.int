@@ -1,0 +1,28 @@
+﻿<div class="panel panel-default" style="margin-right: 0px; margin-bottom: 5px; padding-right:1px;">
+	<a translation-url class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" ng-href="#aichi">
+		<div class="panel-heading">
+			<h4 class="panel-title" style="font-size: 13px;margin:0; white-space: nowrap; width:100%;">
+				{{title}} <i class="fa fa-info-circle" style="float:right;"> </i>
+			</h4>
+
+		</div>
+	</a>
+	<div id="aichi" ng-class="[classPanelCollapse, classCollapse]">
+		<div class="panel-body" style="padding-top: 0px;">
+			<div class="row" style="padding-left:18px;padding-right:10px;">
+
+				<div class="checkbox" style="margin-top:0px"><label><input type="checkbox" ng-model="includeSubAichiTargets" ng-change="loadAssements(target.identifier_s, includeSubAichiTargets);">Include Sub-Aichi targets / components</label></div>
+				<div class="col-xs-3" ng-repeat="target in aichiTargets track by $index" style="padding-left:0; " ng-click="loadAssements(target.identifier_s,includeSubAichiTargets );toggleTarget(aichiTargets,target);">
+					<script>
+						$(document).ready(function() {
+							$('[data-toggle="{{target.identifier_s}}"]').popover({
+								container: 'body'
+							});
+						});
+					</script>
+					<input type="image" ng-src="{{target.selectedIcon}}" style="width:24px;hieght:24px;" data-toggle="{{target.identifier_s}}" data-trigger="hover" data-content="{{target.description_EN_t}}" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

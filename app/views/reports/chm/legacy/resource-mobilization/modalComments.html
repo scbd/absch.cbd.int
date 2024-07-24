@@ -1,0 +1,29 @@
+﻿<style>
+    .modal-body{
+    max-height: calc(80vh - 200px);
+    overflow-y: auto;
+    }
+</style>
+<div id="{{name}}" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{header}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <div ng-repeat="comment in comments | orderBy:'country'">
+                    <h5>{{comment.country}}</h5>
+                    <pre style="white-space:pre-line">{{comment.comment | lstring}}
+                    </pre>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <h4 class="text-warning">{{footer}}</h4>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary" data-ng-click="callbackbuttonright(); $event.stopPropagation()">Launch Alert</button> -->
+            </div>
+        </div>
+    </div>
+</div>

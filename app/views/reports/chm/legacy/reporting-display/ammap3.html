@@ -1,0 +1,95 @@
+﻿<div class="col-md-7">
+  <style>
+    .square {
+      width: 18px;
+      height: 18px;
+      margin: 0 auto;
+    }
+
+    .leggendItem {
+      text-align: center;
+      font-size: 10px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .disclaimer {
+      position: absolute;
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+      font-family: Verdana;
+      font-size: 11px;
+      opacity: 0.7;
+      display: block;
+      right: 290px;
+      top: 382px;
+      cursor: pointer;
+    }
+  </style>
+<link  type="text/css" href="/app/libs/ammap3/ammap/plugins/export/export.css" rel="stylesheet">
+  <div id="mapdiv" style="maxwidth: 900px; height: 400px;  "></div>
+  <div class="disclaimer tooltip" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
+  <!-- <select id="langselect" onchange="setLanguage(this.options[this.selectedIndex].value);">
+    <option value="en" selected="selected">English (default)</option>
+    <option value="ar" >Arabic</option>
+    <option value="ja">Japanese</option>
+    <option value="fr">French</option>
+    <option value="es">Spanish</option>
+    <option value="ru">Russion</option>
+</select> -->
+
+  <div class="panel panel-default">
+    <div class="row" style="padding-top:3px; ">
+
+      <!-- Legend tittle       -->
+      <div class="col-md-12" style="text-align:center; margin-top:0; margin-bottom:0;" ng-if="items">
+        <h4 style="text-align:center; margin-top:0; margin-bottom:0; padding-bottom:0px;">{{legendTitle}}</h4>
+        <h7 style="text-align:center; font-style: italic; margin-top:0; margin-bottom:0; padding-bottom:0px;">(Interactive Legend)</h7>
+      </div>
+
+      <!-- Aichi Target Legend       -->
+      <div class="">
+        <div class="col-md-1 leggendItem" ng-repeat="item in leggends.aichiTarget" ng-click="legendHide(item);" ng-if="(schema.indexOf('AICHI-TARGET-') > -1)" style="margin-top:5px;margin-left:2%;margin-right:2%;">
+            <i class="fa fa-times fa-2x" ng-if="!item.visible" style="margin: 0 auto; display: block;"></i>
+            <div class="square" ng-style="{'background-color':item.color}" ng-if="item.visible"></div> {{item.title}}
+        </div>
+        <div class="col-xs-12" style="padding:20px" ng-if="(schema.indexOf('AICHI-TARGET-') ==0)">
+          <div class=" alert alert-info">
+              <h4 class="alert-heading"><i class="fa fa-info"></i> Info!</h4>
+              <hr>
+              The color displayed on the map indicates how the country has assessed progress towards their national targets associated with the Aichi Biodiversity Targets.  Where a country has more than one national target associated with an Aichi Biodiversity Target, the average of these assessments is used to generate the overall level of progress achieved towards the Aichi Biodiversity Target. This average value considers mapping to the “Main related Aichi Biodiversity Target” only. For the complete details on how a country has assessed progress towards its national targets, please see the sixth national report of the country.
+          </div>
+        </div>
+      </div>
+
+      <!-- NationalReport Legend       -->
+      <div class="col-md-4 leggendItem" ng-if="!(schema.indexOf('AICHI-TARGET-') > -1) && schema">
+      </div>
+      <div class="col-md-4 leggendItem" ng-if="!(schema.indexOf('AICHI-TARGET-') > -1) && schema">
+        <div class="col-md-6 leggendItem" ng-repeat="item in leggends.nationalReport" ng-click="legendHide(item);" ng-if="!(schema.indexOf('AICHI-TARGET-') > -1) && schema">
+          <i class="fa fa-times fa-2x" ng-if="!item.visible" style="margin: 0 auto; display: block;"></i>
+          <div class="square" ng-style="{'background-color':item.color}" ng-if="item.visible"></div> {{item.title}}
+        </div>
+      </div>
+      <div class="col-md-4 leggendItem" ng-if="schema=='nationalReport'">
+      </div>
+    </div>
+  </div>
+  <div id="dialogDisclaimer" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title">Disclaimer</h2>
+        </div>
+        <div class="modal-body">
+          The designations employed and the presentation of material in this map do not imply the expression of any opinion whatsoever on the part of the Secretariat concerning the legal status of any country, territory, city or area or of its authorities, or concerning
+          the delimitation of its frontiers or boundaries.Upon its Approval of the Nagoya Protocol on Access and Benefit Sharing, the Government of Denmark notified the Secretary-General that the Protocol shall not apply in respect of Greenland and the Faroe Islands.
+        </div>
+        <div class="modal-footer" style="text-align:left;">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

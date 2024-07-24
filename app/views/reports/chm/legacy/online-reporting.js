@@ -3,8 +3,8 @@ import app from '~/app';
 import _ from 'lodash';
 export { default as template } from './online-reporting.html';
 
-export default ["$scope", "$http", "$q", "$location", '$timeout', "$filter", "Thesaurus", "realm", 
-    function($scope, $http, $q, $location, $timeout, $filter, thesaurus, realm) {
+export default ["$scope", "$http", "$q", "$location", '$timeout', "$filter", "Thesaurus", "realm", 'translationService',
+    function($scope, $http, $q, $location, $timeout, $filter, thesaurus, realm,translationService) {
         $scope.countries=[];
         $scope.colors={};
 

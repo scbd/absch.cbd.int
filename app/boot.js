@@ -150,7 +150,21 @@ export default function bootApp(window, require, defineX) {
             'proj4leaflet'              : `${cdnHost}proj4leaflet@1.0.2/src/proj4leaflet`,
             'proj4'                     : `${cdnHost}proj4@2.9.2/dist/proj4`,
             'leaflet-directive'         : 'views/forms/view/chm/leaflet/leaflet.js',
-            
+            'jquery'                    : `${cdnHost}jquery@2.1.4/dist/jquery.min.js`,
+            'ammap3'                    : `${cdnUrl}gh/amcharts/ammap3@3.17.3/ammap/ammap.js`, 
+            //'amchart3       can't find
+            //amchart3-serial can't find        
+            //ammap3WorldHigh   can't find
+            //ammap-theme can't find
+            //ammap-export cna't find
+            //ammap-ex-fabric  can't find
+            //ammap-ex-filesaver
+            //ammap-ex-pdfmake
+            //ammap-ex-vfs-fonts
+            //ammap-ex-jszip
+            //ammap-ex-xlsx
+            //amchart3-theme-light'
+         
             
         },
         'shim': {
