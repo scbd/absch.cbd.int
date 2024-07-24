@@ -47,7 +47,7 @@
 	import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js"; 
     const auth = useAuth();
 	const realm = useRealm();
-	const { t } = useI18n({ messages });
+	const { t, locale } = useI18n({ messages });
 	const route = useRoute();
 	const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
 	const faqFilterTag = ref('');
@@ -62,7 +62,7 @@
 	
 	onMounted(async ()=>{
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
-		categories.value = await loadKbCategories();
+		categories.value = await loadKbCategories(locale.value);
 		loadFaqs(1);
 	})
 	

@@ -23,50 +23,22 @@
 </template>
 
 <script setup>
-    import { ref, onMounted } from "vue";
     import relevantArticles from './relevant-articles.vue';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import { useRealm } from '../../services/composables/realm.js';
-    import { loadKbCategories, getUrl, getRealmArticleTag } from '../../services/composables/articles.js';
+    import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
     import { lstring } from "./filters";
-    import ArticlesApi from "./article-api";
-    import {  useAuth } from "@scbd/angular-vue/src/index.js";
-    const realmArticleTag = getRealmArticleTag();
-    const auth = useAuth();
+    import { ref, onMounted } from "vue";
     const { t, locale } = useI18n({ messages });
     const realm = useRealm();
     const KbCategories = ref([]);
-    const realmTag = ref('');
-
-    const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
 
     onMounted(async ()=>{
-        realmTag.value = realmArticleTag;
-        const categories = await loadKbCategories();
-        let articleCategories  = categories.filter(tag => tag.adminTags[0] != "faq");
-        const articles = await articlesApi.queryArticles({ q: { adminTags : { $all: [realmTag.value] } }}); // ToDo: need to verify the query.
-
-        const result = articleCategories.map(category => {
-            const newCategory = { ...category, articles: [] };
-            category.articles.forEach(catArticle => {
-                const matchingArticle = articles.find(article => article._id === catArticle.identifier);
-                    if (matchingArticle) {
-                        newCategory.articles.push({
-                            identifier: catArticle.identifier,
-                            title: matchingArticle.title
-                        });
-                    } 
-                    else {
-                        newCategory.articles.push(catArticle);
-                    }
-                });
-
-                return newCategory;
-        });
-        KbCategories.value = result;
+        const categories = await loadKbCategories(locale.value);
+        KbCategories.value = categories.filter(tag => tag.adminTags[0] != "faq");
     })
-
+    
     const tagUrl = function (category) {
             return getUrl(category.title, undefined, category.adminTags[0]);
     }

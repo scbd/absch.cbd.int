@@ -67,7 +67,7 @@
     import { useRealm } from '../../services/composables/realm.js';
     import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js"; 
     const auth = useAuth();
-    const { t } = useI18n({ messages });
+    const { t, locale } = useI18n({ messages });
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
     const realm = useRealm();
     const route = useRoute();
@@ -83,7 +83,7 @@
     onMounted(async () => {  
         const paramTag = (route.value?.params?.tag).replace(/"/g, "");
         if (paramTag != undefined && paramTag != null) {
-            const categories = await loadKbCategories();
+            const categories = await loadKbCategories(locale.value);
             tagDetails = categories.find(e => e.adminTags.includes(paramTag)) || {
                 title: paramTag
             };
