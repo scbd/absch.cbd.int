@@ -2,9 +2,9 @@
 <template>
     <div id="Record" class="record "> 
         <div class="record-body bg-white" v-if="document">  
-            <!--TODO: add  for fields  -->
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->             
+            
+            <document-date :document-info="documentInfo"></document-date>            
+            
            <section v-if="document.summary || document.areaIntroduction || document.title">  
                 <legend>{{ t("generalInformation") }} </legend> 
                 <div v-if="document.title">
@@ -315,6 +315,7 @@
     import '~/views/forms/view/directives/view-reference-records.directive.js';
     import '~/views/forms/view/chm/leaflet/leaflet.js';
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/marine-ebsa.json';
     import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js'; 

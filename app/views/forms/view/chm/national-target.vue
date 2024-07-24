@@ -3,8 +3,7 @@
         <div class="record-body  bg-white" v-if="document">
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <h2 v-if="document.title" class="mt-2" >
                 <span>{{lstring(document.title,locale)}}</span>
@@ -112,6 +111,7 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'   
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import '~/views/forms/view/directives/view-record-reference.directive.js'    
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-target.json'; 

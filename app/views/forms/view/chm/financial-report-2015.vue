@@ -3,8 +3,7 @@
         <div class="record-body  bg-white" v-if="document">  
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->    
+            <document-date :document-info="documentInfo"></document-date>  
             
             <!-- section basic information and section 1-3 -->
             <view-financial-report :document="document" :locale="locale" type="2015"> 
@@ -423,6 +422,7 @@
     import '~/views/forms/view/directives/view-record-reference.directive.js'
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import viewFinancialReport from '~/views/forms/view/directives/view-financial-report.vue';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/financial-report-2015.json';
     import { useI18n } from 'vue-i18n';  

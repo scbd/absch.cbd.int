@@ -2,9 +2,8 @@
     <div id="Record" class="record ">
        <div class="record-body  bg-white" v-if="document">
            <!--TODO: add compare-val for fields  -->
-
-           <!-- TODO: add publish date -->            
-           <!-- <ng v-vue-ng:document-date></ng> -->
+           
+           <document-date :document-info="documentInfo"></document-date>
 
            <!-- section basic information and section 1-3 -->
            <view-financial-report :document="document" :locale="locale" type="2020"> 
@@ -229,6 +228,7 @@
    import viewFinancialReport from '~/views/forms/view/directives/view-financial-report.vue';
    import kmTerm from '~/components/km/KmTerm.vue';
    import messages from '~/app-text/views/reports/chm/resource-mobilisation-2020.json'; 
+   import documentDate from '~/views/forms/view/directives/document-date.vue'; 
    import { useI18n } from 'vue-i18n';
    import { lstring } from '~/services/filters/lstring.js'; 
    import KmDocumentApi from "~/api/km-document.js";

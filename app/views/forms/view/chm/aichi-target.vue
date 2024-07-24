@@ -1,6 +1,9 @@
 <template>
     <div id="Record" class="record panel panel-default">
-        <div class="record-body panel-body bg-white" v-if="document">         
+        <div class="record-body panel-body bg-white" v-if="document">  
+
+            <document-date :document-info="documentInfo"></document-date>
+
             <h2>
                 <img v-if="document.icons" class="img-polaroid" :src="document.icons[0].url"
                     style="height: 45px; width: 45px" /> 
@@ -148,6 +151,7 @@
     import { lstring } from '~/services/filters/lstring.js'; 
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
     import kmTerm from '~/components/km/KmTerm.vue';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import messages from '~/app-text/views/reports/chm/aichi-target.json';
     import { useI18n } from 'vue-i18n';
 

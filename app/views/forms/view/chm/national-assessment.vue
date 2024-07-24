@@ -3,8 +3,7 @@
         <div class="record-body bg-white" v-if="document"> 
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <section>  
                 <div class="row">
@@ -167,6 +166,7 @@
     import '~/views/forms/view/directives/view-record-reference.directive.js'
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-assessment.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import { lstring    } from '~/services/filters/lstring.js'; 
     import { formatDate } from '~/components/kb/filters';

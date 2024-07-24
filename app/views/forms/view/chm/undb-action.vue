@@ -2,9 +2,8 @@
     <div id="Record" class="record">
         <div class="record-body bg-white" v-if="document"> 
             <!--TODO: add compare-val for fields  -->
-
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            
+            <document-date :document-info="documentInfo"></document-date>
 
             <section v-if="document.title">                
                 <label>{{ t("title") }}</label>
@@ -131,6 +130,7 @@
     import '~/views/forms/view/directives/view-record-reference.directive.js'   
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/undb-action.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import { useI18n } from 'vue-i18n';
     import { formatDate } from '~/components/kb/filters';
 
