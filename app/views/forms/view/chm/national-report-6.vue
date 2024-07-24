@@ -330,11 +330,11 @@
             </section>           
         
             <div> 
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" :locales="locale" html></ng>                        
-            </div>         
-        </div>  
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+                <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
+            </div>  
+        </div>
+
+        <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
         
     </div>
 </template>
@@ -343,6 +343,7 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import '~/views/forms/view/directives/view-record-reference.directive.js'  
+    import '~/views/forms/view/directives/view-reference-records.directive.js';
     import '~/views/forms/directives/view-terms-hierarchy.js'  
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue' 

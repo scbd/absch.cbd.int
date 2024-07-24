@@ -220,11 +220,10 @@
 
             <div> 
                 <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
-            </div>         
-        </div>  
+            </div>  
+        </div>
 
-        <!-- TODO: add footer  -->
-        <ng v-vue-ng:document-metadata-vue  :document-info="documentInfo"></ng> 
+        <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
     </div>
 </template>
 <script setup>

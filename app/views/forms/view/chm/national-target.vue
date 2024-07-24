@@ -95,15 +95,15 @@
                 </view-relevant-information> 
             </section> 
 
-            <div v-if="$attrs.hideRecordReference"> 
-                <!-- TODO: test -->
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>    
             
-        </div>  
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->   
-        <!-- <div v-if="!hideRecordReference">  -->
+            <div v-if="!$attrs['hide-record-reference']"> 
+                <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
+            </div>  
+        </div>
+
+        <div v-if="!$attrs['hide-record-reference']"> 
+            <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
+        </div>
     </div>
 </template>
 
@@ -111,8 +111,8 @@
     import { computed } from 'vue';
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'   
-    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
-    import '~/views/forms/view/directives/view-record-reference.directive.js'    
+    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';    
+    import '~/views/forms/view/directives/view-reference-records.directive.js';    
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-target.json'; 
     import { useI18n } from 'vue-i18n';
