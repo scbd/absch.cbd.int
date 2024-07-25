@@ -20,12 +20,11 @@
                       {{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}</span>
                       
                     <h5 class="card-title"><a class="link-dark"
-                        :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{lstring(article.title,
-                        $locale)}}</a>                      
+                        :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{lstring(article.title, locale)}}</a>                      
                     </h5>
                     <p v-if="article.summary" class="card-text h-100">
                       <a class="link-dark" :href="`${articleUrl(article, getTag(article.adminTags) )}`">
-                        {{lstring(article.summary, $locale)}}
+                        {{lstring(article.summary, locale)}}
                       </a>
                     </p>
   

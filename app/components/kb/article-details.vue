@@ -14,7 +14,7 @@
 
                     <div class="card-body" v-if="!loading">
                        
-                        <h2 class="card-title">{{lstring(article.title, $locale)}}</h2>
+                        <h2 class="card-title">{{lstring(article.title, locale)}}</h2>
                        
                         <div v-if="article.meta" class="p-1 mb-3 text-white bg-darkgrey bold">
                             <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;
@@ -22,7 +22,7 @@
                         </div>
 
                         <div v-if="article.content" class="card-text full-details ck ck-content ck-rounded-corners ck-blurred"
-                            v-html="lstring(article.content,$locale)">
+                            v-html="lstring(article.content,locale)">
                         </div>
                     </div>
                     <div v-if="article.adminTags" class="card-footer">

@@ -17,9 +17,9 @@
 						:href="`${articleUrl(article, getAdminTag() )}`">
 						<i class="fa fa-external-link"></i>
 					</a>
-					<span class="card-title">{{lstring(article.title, $locale)}}</span>
+					<span class="card-title">{{lstring(article.title, locale)}}</span>
 					</summary>
-                    <div class="p-2 faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="lstring(article.content,$locale)">
+                    <div class="p-2 faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="lstring(article.content,locale)">
 					</div>   
 					<div v-if="article.adminTags" class="card-footer">
                         <a v-for="tag in article.adminTags" type="button"

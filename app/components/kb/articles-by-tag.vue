@@ -22,8 +22,8 @@
                                 <div class="card-body">
                                     <span class="badge bg-secondary position-absolute top-0 end-0">{{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}</span>
 
-                                    <h5 class="card-title"><a class="link-dark stretched-link" :href="`${articleUrl(article, tag)}`">{{lstring(article.title, $locale)}}</a></h5>
-                                    <p  v-if="article.summary" class="card-text h-100">{{lstring(article.summary, $locale)}}</p>
+                                    <h5 class="card-title"><a class="link-dark stretched-link" :href="`${articleUrl(article, tag)}`">{{lstring(article.title, locale)}}</a></h5>
+                                    <p  v-if="article.summary" class="card-text h-100">{{lstring(article.summary, locale)}}</p>
 
                                   
                                 </div>
