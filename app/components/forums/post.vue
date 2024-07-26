@@ -143,7 +143,7 @@ import messages from "~/app-text/components/forums/post.json";
 import { useI18n } from 'vue-i18n';
 
 const router = useRouter();
-const route = useRoute().value;
+const route = useRoute();
 const auth = useAuth();
 const { t } = useI18n({ messages });
 
