@@ -193,9 +193,9 @@
 			<div ng-show="document.gbfTargets">
 				<label>{{::('viewCdiT.gbfTargets'|$translate)}}</label>	
 				<div class="km-value" compare-val="Gbf target(s)">
-					<div km-terms ng-model="document.gbfTargets">
-						<span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
-					</div>
+					<div ng-repeat="term in document.gbfTargets">
+						<span ng-bind="term|term:locale:'shortTitle'"></span>
+					</div> 
 				</div>
 			</div>
 			

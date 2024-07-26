@@ -256,7 +256,7 @@ import { setAnchorTarget, escapeHtmlAttributeId } from '~/services/html.js'
     var cacheMap = {};
     var termsCacheFactory = cacheService.getCacheFactory({name:'terms', storageMode:'localStorage', maxAge:24*60*60*1000})//one day cache for terms
 
-    return function (term, locale) {
+    return function (term, locale, field = 'title') {
 
       if (!term)
         return "";
@@ -271,7 +271,7 @@ import { setAnchorTarget, escapeHtmlAttributeId } from '~/services/html.js'
       locale = locale || websiteLocale || "en";
 
       if (cacheMap[term.identifier])
-        return $filter("lstring")(cacheMap[term.identifier].title, locale) + 
+        return $filter("lstring")(cacheMap[term.identifier][field], locale) + 
           (term.customValue ? (' ('+$filter("lstring")(term.customValue, locale) + ')') : '');
 
       cacheMap[term.identifier] = $http.get("/api/v2013/thesaurus/terms?termCode=" + encodeURIComponent(term.identifier), {

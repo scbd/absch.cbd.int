@@ -137,8 +137,9 @@
 				<label>{{::('viewOrganizationT.gbfTargets'|$translate)}}</label>
 					<div  class="km-value" compare-val>
 					<ul class="list">
-						<li ng-repeat="term in document.gbfTargets"><span ng-bind="term|term|lstring:locale"></span></li>
-					</ul>
+						<!-- <li ng-repeat="term in document.gbfTargets"><span ng-bind="term|term|lstring:locale"></span></li> -->
+                        <li ng-repeat="term in document.gbfTargets"><span ng-bind="term|term:locale:'shortTitle'"></span>
+                    </ul>
 				</div>
 			</div>
 	    </div>
