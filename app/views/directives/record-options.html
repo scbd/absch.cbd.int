@@ -13,10 +13,11 @@
         </div>
         <div class="float-end d-none d-md-block">
             <span>
-                <a class="text-decoration-none text-white" rel="noopener" translation-url ng-href="/database/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocumentInfo|uniqueID|encodeURIComponent}}" 
+                <a ng-if="internalDocumentInfo.latestRevision>0" class="text-decoration-none text-white" rel="noopener"  translation-url ng-href="/database/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocumentInfo|uniqueID|encodeURIComponent}}" 
 				    target="_blank">
                     <i class="bi bi-box-arrow-up-right"></i> <span ng-bind="internalDocumentInfo|uniqueID"></span> 
                 </a>
+                <span  ng-if="internalDocumentInfo.latestRevision==0" ng-bind="internalDocumentInfo|uniqueID"></span>
             </span>            
             <span class="hide-on-print"ng-if="!hidePdf">
                 &nbsp; | &nbsp; 
