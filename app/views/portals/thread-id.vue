@@ -20,7 +20,7 @@
           <div class="col-auto align-self-center">
             <button v-if="isOpen && subscription" :disabled="subscribing"
               class="btn btn-sm" :class="{ 'btn-outline-dark': !subscription.watching, 'btn-dark': subscription.watching }" type="button"
-              @click="toggleSubscription">
+              @click="toggleSubscription()">
               <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> {{ t('buttonUnsubscribe') }} </span>
               <span v-else><i class="fa fa-envelope-o"></i> {{ t('buttonSubscribe') }} </span>
               <i v-if="subscribing" class="fa fa-cog fa-spin"></i>
@@ -33,9 +33,9 @@
         <template v-slot:showReplies="{ replies }">
           <em>
             <a class="anchor-margin" name="replies"></a>
-            <span v-if="replies == 0"> {{ tc('linkNoReplies', { count: replies }) }}</span>
-            <span v-if="replies == 1"><i class="fa fa-comment"></i> {{ tc('linkOneReply', { count: replies }) }} </span>
-            <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ tc('linkXReplies', { count: replies }) }} </span>
+            <span v-if="replies == 0">{{ tc('linkXReplies', { count: replies }) }}</span>
+            <span v-if="replies == 1"><i class="fa fa-comment"></i> {{ tc('linkXReplies', { count: replies }) }}</span>
+            <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ tc('linkXReplies', { count: replies }) }}</span>
           </em>
         </template>
       </post>
