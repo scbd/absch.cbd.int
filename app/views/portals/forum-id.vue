@@ -42,7 +42,7 @@
 
             <button v-if="subscription" :disabled="subscribing" class="btn btn-sm"
               :class="{ 'btn-outline-dark': !subscription.watching, 'btn-dark': subscription.watching }" type="button"
-              @click="pending(toggleSubscription, 'subscribing')">
+              @click="pending(toggleSubscription(), 'subscribing')">
               <span v-if="subscription.watching"><i class="fa fa-envelope-o"></i> {{ t('buttonUnsubscribe') }} </span>
               <span v-else><i class="fa fa-envelope-o"></i> {{ t('buttonSubscribe') }} </span>
               <loading v-if="subscribing" />
@@ -70,7 +70,7 @@
           </h5>
 
           <div class="card-body">
-            <post :post="thread" @refresh="pending(refresh($event), 'loading')" :highlight-on-hash="false">
+            <post :post="thread" @refresh="pending(refresh, 'loading')" :highlight-on-hash="false">
               <template v-slot:showReplies="{ replies }">
 
                 <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`"> {{ t('buttonReadPost') }}</a>
@@ -108,7 +108,7 @@
 
       </div>
 
-      <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; pending(refresh($event), 'loading')"></edit-post>
+      <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; pending(refresh, 'loading')"></edit-post>
 
       <simple-modal v-if="showHelp" @close="showHelp = false" :title="lstring(helpArticle.title)">
         <cbd-article :article="helpArticle" :show-cover-image="true" :show-edit="false"  />
