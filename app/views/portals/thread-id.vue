@@ -29,18 +29,18 @@
         </div>
       </div>
       <h1>{{ lstring(thread.subject) }}</h1>
-      <post :post="thread" class="mb-2" @refresh="load">
+      <post :post="thread" class="mb-2" @refresh="load()">
         <template v-slot:showReplies="{ replies }">
           <em>
             <a class="anchor-margin" name="replies"></a>
-            <span v-if="replies == 0"> {{ t('linkNoReplies', { count: replies }) }}</span>
-            <span v-if="replies == 1"><i class="fa fa-comment"></i> {{ t('linkOneReply', { count: replies }) }} </span>
-            <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ t('linkXReplies', { count: replies }) }} </span>
+            <span v-if="replies == 0"> {{ tc('linkNoReplies', { count: replies }) }}</span>
+            <span v-if="replies == 1"><i class="fa fa-comment"></i> {{ tc('linkOneReply', { count: replies }) }} </span>
+            <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ tc('linkXReplies', { count: replies }) }} </span>
           </em>
         </template>
       </post>
       <div v-if="posts">
-        <post class="mb-2 border-top" v-for="reply in posts" :key="reply.postId" :post="reply" @refresh="load" />
+        <post class="mb-2 border-top" v-for="reply in posts" :key="reply.postId" :post="reply" @refresh="load()" />
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@ import { lstring } from '../../components/kb/filters';
 import { useI18n } from 'vue-i18n';
 
 const auth = useAuth();
-const { t } = useI18n({ messages });
+const { t, tc } = useI18n({ messages });
 const route = useRoute().value;
 const forumsApi = new ForumsApi({ tokenReader: () => auth.token() });
 
