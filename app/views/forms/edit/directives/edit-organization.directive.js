@@ -36,7 +36,12 @@ app.directive("editOrganization", ["$controller", "Thesaurus", "$q", 'guid', 'ed
                 organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes', {other:true})
                     .then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); }) },
                 cpbThematicAreas   : function() { return thesaurusService.getDomainTerms('cbdSubjects') },
-                gbfTargets         : function() { return thesaurusService.getDomainTerms('gbfTargets') },
+                gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets').then(function(data){
+                                    return data?.map((term)=>{
+                                    term.title = term.shortTitle;
+                                    return term;
+                                    })
+                                });},
                 geographicRegions  : function() { return thesaurusService.getDomainTerms('regions').then(thesaurus.buildTree) }
             });
 

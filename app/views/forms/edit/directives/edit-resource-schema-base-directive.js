@@ -74,7 +74,12 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 								return terms;
 							})
 						},
-						gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets');},
+						gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets').then(function(data){
+											return data?.map((term)=>{
+												term.title = term.shortTitle;
+												return term;
+											})
+										});},
 						aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
 						bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
 						bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
