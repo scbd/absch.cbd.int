@@ -20,7 +20,7 @@
                             <i class="fa fa-edit"></i>
                             <relative-datetime class="date" :title="`| by ${post.updatedBy}`" :date="post.updatedOn"></relative-datetime>
                         </span>
-                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor" :title="t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
+                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
                         <!-- <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a> -->
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="col align-self-center">
 
                     <slot name="showReplies" v-bind:replies="post.replies" v-bind:posts="posts">
-                        <button class="btn btn-light btn-sm" @click.prevent="toggleReplies" v-if="post.replies">
+                        <button class="btn btn-light btn-sm" @click.prevent="toggleReplies()" v-if="post.replies">
                             {{ $tc('replies', post.replies, { count: post.replies}) }}
                             <i class="fa" :class="{ 'fa-caret-up' : !!posts, 'fa-caret-down' : !posts }"></i>
                         </button>
@@ -51,21 +51,21 @@
                 </div>
                 <div class="col-auto align-self-center">
                     <div v-if="canEdit" class="btn-group">
-                        <button type="button" class="btn btn-light btn-sm" @click.prevent="edit">
+                        <button type="button" class="btn btn-light btn-sm" @click.prevent="edit()">
                             <i class="fa fa-edit"></i> {{ t('buttonEdit') }}
                         </button>
                         <button type="button" class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" @click.prevent="edit">
+                            <li><a class="dropdown-item" href="#" @click.prevent="edit()">
                                 <i class="fa fa-edit"></i> {{ t('buttonEdit') }} </a>
                             </li>
 
                             <li v-if="canPin || canClose"><hr class="dropdown-divider"></li>
 
                             <li v-if="canPin">
-                                <a class="dropdown-item" href="#" @click.prevent="togglePin">
+                                <a class="dropdown-item" href="#" @click.prevent="togglePin()">
                                     <i class="fa fa-thumb-tack"></i> 
                                     <span v-if="post.isPinned">{{ t('buttonUnpinThread') }}</span>
                                     <span v-else>{{ t('buttonPinThread') }}</span>
@@ -73,7 +73,7 @@
                             </li>
 
                             <li v-if="canClose">
-                                <a class="dropdown-item" href="#" @click.prevent="toggleClose">
+                                <a class="dropdown-item" href="#" @click.prevent="toggleClose()">
                                     <i class="fa fa-comments"></i>
                                     <span v-if="post.isClosed">{{ t('buttonOpenThread') }}</span>
                                     <span v-else>{{ t('buttonCloseThread') }}</span>
@@ -82,7 +82,7 @@
                             
                             <li v-if="canDelete && !post.replies"><hr class="dropdown-divider"></li>
 
-                            <li v-if="canDelete && !post.replies"><a class="dropdown-item text-danger" href="#" @click.prevent="deletePost">
+                            <li v-if="canDelete && !post.replies"><a class="dropdown-item text-danger" href="#" @click.prevent="deletePost()">
                                 <i class="fa fa-times"></i> {{ t('buttonDeletePost') }}</a>
                             </li>
                         </ul>
