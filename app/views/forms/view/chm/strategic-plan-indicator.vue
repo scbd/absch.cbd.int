@@ -3,8 +3,7 @@
        <div class="record-body  bg-white" v-if="document">  
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <div v-if="document.title">
                 <label>{{ t("title") }} </label> 
@@ -69,6 +68,7 @@
    import '~/views/forms/view/directives/view-reference-records.directive.js';     
    import kmTerm from '~/components/km/KmTerm.vue';
    import messages from '~/app-text/views/reports/chm/strategic-plan-indicator.json';
+   import documentDate from '~/views/forms/view/directives/document-date.vue'; 
    import { useI18n } from 'vue-i18n'; 
 
    const { t } = useI18n({ messages });

@@ -3,8 +3,7 @@
         <div class="record-body  bg-white" v-if="document">  
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <div v-if="document.government">
                 <legend >{{ t("party") }} </legend>               
@@ -68,6 +67,7 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'; 
     import '~/views/forms/view/directives/view-reference-records.directive.js';   
     import kmTerm from '~/components/km/KmTerm.vue';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import messages from '~/app-text/views/reports/chm/undb-party.json';
     import { useI18n } from 'vue-i18n';  
 

@@ -3,9 +3,8 @@
     <div id="Record" class="record">
         <div class="record-body  bg-white" v-if="document">  
             <!--TODO: add compare-val for fields  -->
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> --> 
 
+            <document-date :document-info="documentInfo"></document-date>
 
             <div class="d-flex justify-content-center" v-if="isLoadingTargets||isLoadingAssessments">
                 <div class="spinner-border" role="status">
@@ -348,6 +347,7 @@
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue' 
     import nationalTarget from '~/views/forms/view/chm/national-target.vue' 
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import KmDocumentApi from "~/api/km-document";
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-report-6.json';
