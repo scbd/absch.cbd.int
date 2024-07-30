@@ -20,10 +20,7 @@
                             <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;
                             {{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}
                         </div>
-
-                        <div v-if="article.content" class="card-text full-details ck ck-content ck-rounded-corners ck-blurred"
-                            v-html="lstring(article.content,$locale)">
-                        </div>
+                        <cbd-article :article="article" :show-edit="true" :show-cover-image="false" :admin-tags="article.adminTags"></cbd-article>
                     </div>
                     <div v-if="article.adminTags" class="card-footer">
                         <a v-for="tag in article.adminTags" type="button"
@@ -51,6 +48,7 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import relevantArticles from './relevant-articles.vue';
+    import cbdArticle from "../common/cbd-article.vue";
     import popularTags from './popular-tags.vue';
     import ArticlesApi from './article-api';
     import { formatDate, lstring } from './filters';
