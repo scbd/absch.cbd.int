@@ -8,8 +8,6 @@
    "buttonReadPost": "Read the post »",
    "buttonReadReply": "Read the reply »",
    "buttonReadReplies": "Read the {count} replies »",
-   "linkNoReplies": "No replies",
-   "linkOneReply": "One reply",
    "linkXReplies": "No replies | One reply |  {count} replies" ,
    "forumIsClosedForComments" : "This forum is closed for comments.",
    "threadIsClosedForComments" : "This thread is closed for comments.",
