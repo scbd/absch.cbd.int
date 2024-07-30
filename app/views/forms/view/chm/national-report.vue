@@ -135,6 +135,7 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import '~/views/forms/view/directives/view-reference-records.directive.js';    
+    import '~/views/directives/document-metadata-vue-directive.js'
     import kmTerm from '~/components/km/KmTerm.vue';
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue'; 
     import documentDate from '~/views/forms/view/directives/document-date.vue'; 
