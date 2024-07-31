@@ -2,9 +2,9 @@
 <template>
     <div id="Record" class="record "> 
         <div class="record-body bg-white" v-if="document">  
-            <!--TODO: add  for fields  -->
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->             
+            
+            <document-date :document-info="documentInfo"></document-date>            
+            
            <section v-if="document.summary || document.areaIntroduction || document.title">  
                 <legend>{{ t("generalInformation") }} </legend> 
                 <div v-if="document.title">
@@ -298,12 +298,11 @@
                 </view-relevant-information> 
             </section>          
             <div> 
-                <!-- <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>   -->
-                <ng v-vue-ng:view-referenced-records  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>          
-        </div>  
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+                <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
+            </div>  
+        </div>
+
+        <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
 
     </div>
 </template>
@@ -315,6 +314,7 @@
     import '~/views/forms/view/directives/view-reference-records.directive.js';
     import '~/views/forms/view/chm/leaflet/leaflet.js';
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/marine-ebsa.json';
     import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js'; 

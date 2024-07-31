@@ -6,7 +6,10 @@
                 <div class="article-by-tags" v-if="articles">
                     <h4>
 						{{tagDetails.title}} <span><small>({{articlesCount}})</small></span>
-					</h4>
+                        <cbd-add-new-view-article v-if="hasEditRights" 
+                            :admin-tags="adminTags" target="_self" class="btn btn-secondary float-end">
+                        </cbd-add-new-view-article>
+					</h4>   
 					<hr>
 
                     <div class="kb-listing w-100">
@@ -54,10 +57,11 @@
     </div>
 </template>
 <script setup>
-    import { ref, onMounted } from "vue";
+    import { ref, onMounted, computed } from "vue";
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import relevantArticles from './relevant-articles.vue';
+    import cbdAddNewViewArticle from '~/components/common/cbd-add-new-view-article.vue';
     import paginate from '../common/pagination.vue';
     import popularTags from './popular-tags.vue';
     import ArticlesApi from './article-api';
@@ -66,6 +70,8 @@
     import { loadKbCategories, getUrl, getRealmArticleTag  } from '../../services/composables/articles.js';
     import { useRealm } from '../../services/composables/realm.js';
     import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js"; 
+    import { OASIS_ARTICLE_EDITOR_ROLES } from '~/constants/roles.js';
+
     const auth = useAuth();
     const { t } = useI18n({ messages });
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
@@ -80,6 +86,9 @@
     let recordsPerPage = 10;
     const realmArticleTag = getRealmArticleTag();
 
+    const hasEditRights = computed(()=> auth?.check(OASIS_ARTICLE_EDITOR_ROLES));
+    const adminTags = computed(()=>[realmArticleTag, tag.value]);
+
     onMounted(async () => {  
         const paramTag = (route.value?.params?.tag).replace(/"/g, "");
         if (paramTag != undefined && paramTag != null) {
@@ -88,7 +97,7 @@
                 title: paramTag
             };
             tag.value = paramTag;
-            loadArticles(1, paramTag);
+            loadArticles(1, adminTags);
         }
     })
 
@@ -101,23 +110,17 @@
             articles.value = []; // ToDo ?????
             loading.value = true;
             window.scrollTo(0,0);
-            loadArticles(p, tag.value);
+            loadArticles(p, adminTags);
         };
 
-    const loadArticles = async function (pageNumber, tag) {
+    const loadArticles = async function (pageNumber, adminTags) {
 
             articlesCount = 0;
             articles.value = [];
             const q = {
-                $and: [{
-                        adminTags: realmArticleTag                  
-                    },
-                    {
-                        adminTags: {
-                            $all: [encodeURIComponent(tag)]
-                        }
-                    }
-                ]
+                adminTags: {
+                    $all: adminTags.value?.map(encodeURIComponent)
+                }
             };
             const f = {
                 [`title`]: 1,
@@ -127,7 +130,7 @@
                 "meta": 1,
                 _id: 1
             };
-            const groupTags = JSON.stringify([encodeURIComponent(tag)]);
+            const groupTags = JSON.stringify([encodeURIComponent(tag.value)]);
             const groupLimit = recordsPerPage;
             const groupSkip = (pageNumber - 1) * recordsPerPage
             const groupSort = {

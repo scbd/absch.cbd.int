@@ -3,8 +3,7 @@
         <div class="record-body  bg-white" v-if="document">
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <h2 v-if="document.title" class="mt-2" >
                 <span>{{lstring(document.title,locale)}}</span>
@@ -95,15 +94,15 @@
                 </view-relevant-information> 
             </section> 
 
-            <div v-if="$attrs.hideRecordReference"> 
-                <!-- TODO: test -->
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>    
             
-        </div>  
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->   
-        <!-- <div v-if="!hideRecordReference">  -->
+            <div v-if="!$attrs['hide-record-reference']"> 
+                <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
+            </div>  
+        </div>
+
+        <div v-if="!$attrs['hide-record-reference']"> 
+            <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
+        </div>
     </div>
 </template>
 
@@ -112,7 +111,8 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'   
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
-    import '~/views/forms/view/directives/view-record-reference.directive.js'    
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
+    import '~/views/forms/view/directives/view-record-reference.directive.js'  
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-target.json'; 
     import { useI18n } from 'vue-i18n';

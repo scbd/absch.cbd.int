@@ -2,9 +2,8 @@
     <div id="Record" class="record ">
        <div class="record-body  bg-white" v-if="document">
            <!--TODO: add compare-val for fields  -->
-
-           <!-- TODO: add publish date -->            
-           <!-- <ng v-vue-ng:document-date></ng> -->
+           
+           <document-date :document-info="documentInfo"></document-date>
 
            <!-- section basic information and section 1-3 -->
            <view-financial-report :document="document" :locale="locale" type="2020"> 
@@ -211,24 +210,25 @@
             </section>   
             <!-- section relevant information end -->  
 
-           <div>               
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-           </div>         
-       </div>  
-       <!-- TODO: add footer  -->
-       <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->   
+            <div> 
+                <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
+            </div>  
+        </div>
+
+        <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
 
    </div>
 </template>
 
 <script setup>
    import { computed, ref, onMounted} from 'vue';
-   import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
-   import '~/views/forms/view/directives/view-record-reference.directive.js'
+   import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js';
+   import '~/views/forms/view/directives/view-reference-records.directive.js';
    import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
    import viewFinancialReport from '~/views/forms/view/directives/view-financial-report.vue';
    import kmTerm from '~/components/km/KmTerm.vue';
    import messages from '~/app-text/views/reports/chm/resource-mobilisation-2020.json'; 
+   import documentDate from '~/views/forms/view/directives/document-date.vue'; 
    import { useI18n } from 'vue-i18n';
    import { lstring } from '~/services/filters/lstring.js'; 
    import KmDocumentApi from "~/api/km-document.js";

@@ -20,7 +20,7 @@
                             <i class="fa fa-edit"></i>
                             <relative-datetime class="date" :title="`| by ${post.updatedBy}`" :date="post.updatedOn"></relative-datetime>
                         </span>
-                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="$t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
+                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
                         <!-- <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a> -->
                     </div>
                 </div>
@@ -30,7 +30,7 @@
         <div ref="body" class="body mb-2" v-html="post.htmlMessage"></div>
 
         <div class="attachments" v-if="post.attachmentCount">
-            <h6 class="card-subtitle mb-2 text-muted">{{ $t('titleAttachments') }}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ t('titleAttachments') }}</h6>
             <ul class="list-unstyled">
                 <li v-for="attachment in post.attachments" :key="attachment.attachmentId">
                     <attachment :attachment="attachment"/>
@@ -52,14 +52,14 @@
                 <div class="col-auto align-self-center">
                     <div v-if="canEdit" class="btn-group">
                         <button type="button" class="btn btn-light btn-sm" @click.prevent="edit()">
-                            <i class="fa fa-edit"></i> {{ $t('buttonEdit') }}
+                            <i class="fa fa-edit"></i> {{ t('buttonEdit') }}
                         </button>
                         <button type="button" class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#" @click.prevent="edit()">
-                                <i class="fa fa-edit"></i> {{ $t('buttonEdit') }} </a>
+                                <i class="fa fa-edit"></i> {{ t('buttonEdit') }} </a>
                             </li>
 
                             <li v-if="canPin || canClose"><hr class="dropdown-divider"></li>
@@ -67,23 +67,23 @@
                             <li v-if="canPin">
                                 <a class="dropdown-item" href="#" @click.prevent="togglePin()">
                                     <i class="fa fa-thumb-tack"></i> 
-                                    <span v-if="post.isPinned">{{ $t('buttonUnpinThread') }}</span>
-                                    <span v-else>{{ $t('buttonPinThread') }}</span>
+                                    <span v-if="post.isPinned">{{ t('buttonUnpinThread') }}</span>
+                                    <span v-else>{{ t('buttonPinThread') }}</span>
                                 </a>
                             </li>
 
                             <li v-if="canClose">
                                 <a class="dropdown-item" href="#" @click.prevent="toggleClose()">
                                     <i class="fa fa-comments"></i>
-                                    <span v-if="post.isClosed">{{ $t('buttonOpenThread') }}</span>
-                                    <span v-else>{{ $t('buttonCloseThread') }}</span>
+                                    <span v-if="post.isClosed">{{ t('buttonOpenThread') }}</span>
+                                    <span v-else>{{ t('buttonCloseThread') }}</span>
                                 </a>
                             </li>
                             
                             <li v-if="canDelete && !post.replies"><hr class="dropdown-divider"></li>
 
                             <li v-if="canDelete && !post.replies"><a class="dropdown-item text-danger" href="#" @click.prevent="deletePost()">
-                                <i class="fa fa-times"></i> {{ $t('buttonDeletePost') }}</a>
+                                <i class="fa fa-times"></i> {{ t('buttonDeletePost') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -92,26 +92,26 @@
 
                         <button v-if="!loggedIn" class="btn btn-outline-success btn-sm" type="button" 
                             @click="loginToReply(post.postId)">
-                            <i class="fa fa-reply" aria-hidden="true"></i> {{ $t('buttonSignInToReply') }}
+                            <i class="fa fa-reply" aria-hidden="true"></i> {{ t('buttonSignInToReply') }}
                         </button>
 
                         <button v-else-if="canPost && post.postId == post.threadId" class="btn btn-primary btn-sm" :disabled="!canPost" type="button" 
                             @click="reply(post.threadId, getSelection())">
-                            <i class="fa fa-reply"></i> {{ $t('buttonReplyToPost') }}
+                            <i class="fa fa-reply"></i> {{ t('buttonReplyToPost') }}
                         </button>
 
                         <div  v-else-if="canPost" class="dropdown d-inline-block" >
                             <button class="btn btn-outline-primary btn-sm dropdown-toggle" :disabled="!canPost" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-reply"></i> 
-                                {{ $t('buttonReplyToPost') }}
+                                {{ t('buttonReplyToPost') }}
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.threadId)"> <i class="fa fa-reply"></i> {{ $t('buttonReplyToMainThread') }} </a></li>
-                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> {{ $t('buttonReplyToPerson', {name: post.createdBy }) }}</a></li>
+                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.threadId)"> <i class="fa fa-reply"></i> {{ t('buttonReplyToMainThread') }} </a></li>
+                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> {{ t('buttonReplyToPerson', {name: post.createdBy }) }}</a></li>
                             </ul>
                         </div>
                         <div v-else>
-                            <i class="text-muted"> {{ $t('notAllowedToPost') }}</i>
+                            <i class="text-muted"> {{ t('notAllowedToPost') }}</i>
                         </div>   
                     </div>       
                 </div>              
@@ -129,7 +129,8 @@
     </div>
 </template>
     
-<script>
+<script setup>
+import { computed, defineEmits, nextTick, onMounted, ref } from 'vue';
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import EditPost from './edit-post.vue';
@@ -137,61 +138,68 @@ import rangy from 'rangy';
 import { convert as htmlToText } from 'html-to-text';
 import Attachment from './attachment.vue';
 import RelativeDatetime from '~/components/common/relative-datetime.vue';
-import i18n from '../../app-text/components/forums/post.json';
+import { useRoute, useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
+import messages from "~/app-text/components/forums/post.json";
+import { useI18n } from 'vue-i18n';
 
+const router = useRouter();
+const route = useRoute();
+const auth = useAuth();
+const { t } = useI18n({ messages });
 
-export default {
-    name: 'Post',
-    i18n: { messages: { en: i18n } },
-    components: { EditPost, Attachment, RelativeDatetime },
-    props: {
-        post: Object,
-        highlightOnHash: { type: Boolean, default: true }
+const forumsApi = new ForumsApi({tokenReader:()=>auth.token()});
+
+const props = defineProps({
+    post: {
+        type:Object
     },
-    emits: ['refresh'],
-    data() {
-        return {
-            posts: this?.post?.posts || null,
-            editing: null
-        }
-    },
-    computed: {
-        showLinkToParent() {
-            const { parentId : postParentId } = this.post;
-            const { postId   : parentPostId } = this.$parent.post || this.$parent.thread || {};
+    highlightOnHash: {
+        type: Boolean,
+        default: true
+    }
+});
 
-            return parentPostId && parentPostId != postParentId;
-        },
-        showLinkToSelf() {
-            const { parentId : postParentId } = this.post;
-            const { postId   : parentPostId } = this.$parent.post || {};
+const emit = defineEmits(['refresh']);
+const posts = ref(null);
+const editing = ref(null);
+const body = ref(null);
 
-            return parentPostId && parentPostId == postParentId;
-        },
-        loggedIn()   { return !!this.$auth.loggedIn; },
-        isOpen()     { return !!this?.post?.isOpen },
-        canPost()    { return !!this?.post?.security?.canPost },
-        canEdit()    { return !!this?.post?.security?.canEdit },
-        canDelete()  { return !!this?.post?.security?.canDelete },
-        canApprove() { return !!this?.post?.security?.canApprove },
-        canClose()   { return !!this?.post?.security?.canClose },
-        canPin()     { return !!this?.post?.security?.canPin },
-    },
-    methods: {
-        toggleReplies,
-        jumpToAnchor() { this.$nextTick(jumpToAnchor)},
-        loginToReply,
-        refresh,
-        edit,
-        reply,
-        deletePost,
-        togglePin,
-        toggleClose,
-        highlightPostClasses,
-        getSelection() { 
+const showLinkToParent = computed(() => {
+    //ToDo: not clear on the $parent.post
+            // const { parentId : postParentId } = this.post;
+            // const { postId   : parentPostId } = this.$parent.post || this.$parent.thread || {};
+
+            // return parentPostId && parentPostId != postParentId;
+        return true // for testing only, need to remove
+});
+
+const showLinkToSelf = computed(() => {
+    //ToDo: not clear on the $parent.post
+            // const { parentId : postParentId } = this.post;
+            // const { postId   : parentPostId } = this.$parent.post || {};
+
+            // return parentPostId && parentPostId == postParentId;
+            return true // for testing only, need to remove
+
+});
+
+const loggedIn = computed(() => auth.user()?.isAuthenticated);
+const isOpen = computed(() => !!props.post?.isOpen);
+const canPost = computed(() => !!props.post?.security?.canPost);
+const canEdit = computed(() => !!props.post?.security?.canEdit);
+const canDelete = computed(() => !!props.post?.security?.canDelete);
+const canApprove = computed(() => !!props.post?.security?.canApprove); // not using
+const canClose = computed(() => !!props.post?.security?.canClose);
+const canPin = computed(() => !!props.post?.security?.canPin);
+
+nextTick(() => { //ToDo:
+      jumpToAnchor();
+});
+
+    const    getSelection = ()=> { 
 
             // get the selection
-            var sel = rangy.getSelection();
+            let sel = rangy.getSelection();
             
             if (!sel.toString())
                 return "";
@@ -201,7 +209,7 @@ export default {
             // create range for element, where selection is allowed
 
             const cutRange = rangy.createRange();  
-            cutRange.selectNode(this.$refs.body);
+            cutRange.selectNode(body.value);
 
             // make an array of intersections of current selection ranges and the cutRange
             const goodRanges = [];
@@ -216,81 +224,67 @@ export default {
             const text = htmlToText(html);
 
             return text;
-        },
-    },
-    mounted() {
+        };
 
-        const { loggedIn, $router }  = this;        
+        onMounted(()=>{
+            const { postId } = props.post;
+            const { hash } = route;
 
-        const { postId } = this.post;
-        const { hash } = this.$route;
-
-        if(hash == `#${postId}-reply`) {
-            $router.replace({ hash: `#${postId}` });
-            this.reply(postId);
+            if(hash == `#${postId}-reply`) {
+            router.replace({ hash: `#${postId}` });
+            reply(postId);
         }
-    }
+
+        });
+
+
+const edit = ()=> {
+
+    if (!loggedIn.value) return;
+    if (!canEdit.value) return;
+
+    editing.value = { postId: props.post.postId }
 }
 
-function edit() {
+const reply = (parentId, quote) => {
 
-    const { loggedIn, canEdit, post } = this;
 
-    if (!loggedIn) return;
-    if (!canEdit) return;
+    if (!loggedIn.value) return;
+    if (!canPost.value)  return;
 
-    this.editing = { postId: post.postId }
+    editing.value = { parentId: parentId, quote }
 }
 
-function reply(parentId, quote) {
+const deletePost = async()=> {
 
-    const { loggedIn, canPost, post } = this;
+    const { postId, createdBy } = props.post;
 
-    if (!loggedIn) return;
-    if (!canPost)  return;
-
-    this.editing = { parentId: parentId, quote }
-}
-
-async function deletePost() {
-
-    const { post } = this;
-    const { postId, createdBy } = post;
-
-    const msg = `You are about to delete message #${postId} from ${createdBy}.\n\nAre you sure you want to continue?`;
+    const msg = `You are about to delete message #${postId} from ${createdBy}.\n\nAre you sure you want to continue?`; // ToDo: need translation
 
     if(!confirm(msg)) return;
 
-    const forumsApi = new ForumsApi();
-
     await forumsApi.deletePost(postId);
 
-    this.refresh(post);
+    refresh(props.post);
 }
 
-async function togglePin() {
+ const togglePin = async ()=> {
 
-    const { post } = this;
-    const { postId, isPinned } = post;
-
-    const forumsApi = new ForumsApi();
+    const { postId, isPinned } = props.post;
 
     const pendingCall =  isPinned 
                       ? forumsApi.unpinThread(postId)
                       : forumsApi.pinThread(postId);
 
-    await forumsApi.pinThread(postId, isPinned);
+    await forumsApi.pinThread(postId, isPinned); // ToDo: await pendingCall;
 
-    this.refresh(post);
+    refresh(props.post);
 
 }
 
-async function toggleClose() {
+const toggleClose = async()  => {
 
-    const { post } = this;
-    const { postId, isClosed } = post;
-
-    const forumsApi = new ForumsApi();
+    const { postId, isClosed } = props.post;
 
     const pendingCall = isClosed 
                       ? forumsApi. openThread(postId)
@@ -298,52 +292,47 @@ async function toggleClose() {
 
     await pendingCall;
 
-    this.refresh(post);
+    refresh(props.post);
 }
 
-async function toggleReplies() {
+const toggleReplies = async () => {
 
-    if(this.posts) {
-        this.posts = null;
+    if(posts.value) {
+        posts.value = null;
         return;
     }
 
-    const { post } = this;
-    const { postId } = post;
-    const forumsApi = new ForumsApi();
 
-    const posts = await forumsApi.getPosts(postId);
+    const { postId } = props.post;
 
-    this.posts = posts;
+    const postsResponse = await forumsApi.getPosts(postId);
+
+    posts.value = postsResponse;
 }
 
-function highlightPostClasses(postId) {
+const highlightPostClasses = (postId)=> {
 
-    const { highlightOnHash, $route } = this;
-
-    if (highlightOnHash && $route.hash == `#${postId}`)
+    if (props.highlightOnHash && route.hash == `#${postId}`)
         return ['bg-info', 'bg-opacity-25', 'p-2'];
 
     return [];
 }
 
-function refresh($event) {
+const refresh = ($event)=> {
 
-    if(this.posts) {
-        this.toggleReplies();
-        this.toggleReplies();
+    if(posts.value) {
+        toggleReplies();
+        toggleReplies();
     }
 
-    this.$emit('refresh', $event);
+    emit('refresh', $event);
 }
 
-function loginToReply(replyToId) {
+const loginToReply = (replyToId)=> {
 
-    const { $router, $auth } = this;
+    router.push({ hash: `#${replyToId}-reply`});
 
-    $router.push({ hash: `#${replyToId}-reply`});
-
-    $auth.login();
+    auth.login();
 
 }
 </script>

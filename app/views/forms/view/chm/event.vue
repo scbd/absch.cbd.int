@@ -3,8 +3,7 @@
         <div class="record-body  bg-white" v-if="document"> 
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <section>
                 <div class="row">
@@ -219,12 +218,11 @@
             </section>
 
             <div> 
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>         
-        </div>  
+                <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
+            </div>  
+        </div>
 
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
+        <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
     </div>
 </template>
 <script setup>
@@ -235,8 +233,10 @@
     import '~/views/forms/view/directives/view-reference-records.directive.js'   
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/event.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import { useI18n } from 'vue-i18n';
     import { formatDate, lstring } from '~/components/kb/filters';
+    import '~/views/directives/document-metadata-vue-directive'
 
     const { t, locale } = useI18n({ messages });    
      

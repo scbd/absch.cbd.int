@@ -3,8 +3,7 @@
         <div class="record-body bg-white" v-if="document"> 
             <!--TODO: add compare-val for fields  -->
 
-            <!-- TODO: add publish date -->            
-            <!-- <ng v-vue-ng:document-date></ng> -->
+            <document-date :document-info="documentInfo"></document-date>
 
             <section>  
                 <div class="row">
@@ -150,14 +149,15 @@
                 <view-relevant-information :relevant-information="document.relevantInformation" :relevant-documents="document.relevantDocuments" :locale="locale"> 
                 </view-relevant-information> 
             </section>           
+ 
+            <div v-if="!$attrs['hide-record-reference']"> 
+                <ng v-vue-ng:view-referenced-records v-model:ng-model="document.header.identifier" ></ng> 
+            </div>  
+        </div>
 
-            <div v-if="$attrs.hideRecordReference">            
-                <ng v-vue-ng:view-record-reference  v-model:ng-model="document.header.identifier" ></ng>  
-            </div>         
+        <div v-if="!$attrs['hide-record-reference']"> 
+            <ng v-vue-ng:document-metadata-vue :document-info="documentInfo"></ng>
         </div>  
-
-        <!-- TODO: add footer  -->
-        <!-- <ng v-vue-ng:document-metadata  :document="document"></ng>  -->
     </div>
 </template>
 <script setup>
@@ -165,8 +165,10 @@
     import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'  
     import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list.js'
     import '~/views/forms/view/directives/view-record-reference.directive.js'
+    import '~/views/forms/view/directives/view-reference-records.directive.js';
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/national-assessment.json';
+    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
     import viewRelevantInformation from '~/views/forms/view/directives/view-relevant-information.vue';
     import { lstring    } from '~/services/filters/lstring.js'; 
     import { formatDate } from '~/components/kb/filters';

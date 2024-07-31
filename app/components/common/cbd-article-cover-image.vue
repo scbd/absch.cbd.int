@@ -9,6 +9,7 @@
 </template>
 
 <script setup>
+  import {computed} from 'vue'
   import { cssEscape } from "../../services/css.escape";
 
   const props = defineProps({
