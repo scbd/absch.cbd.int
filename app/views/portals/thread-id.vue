@@ -33,9 +33,9 @@
         <template v-slot:showReplies="{ replies }">
           <em>
             <a class="anchor-margin" name="replies"></a>
-            <span v-if="replies == 0">{{ tc('linkXReplies', { count: replies }) }}</span>
-            <span v-if="replies == 1"><i class="fa fa-comment"></i> {{ tc('linkXReplies', { count: replies }) }}</span>
-            <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ tc('linkXReplies', { count: replies }) }}</span>
+            <span v-if="replies == 0">{{ t('linkXReplies', { count: replies }) }}</span>
+            <span v-if="replies == 1"><i class="fa fa-comment"></i> {{ t('linkXReplies', { count: replies }) }}</span>
+            <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ t('linkXReplies', { count: replies }) }}</span>
           </em>
         </template>
       </post>
@@ -59,7 +59,7 @@ import { lstring } from '../../components/kb/filters';
 import { useI18n } from 'vue-i18n';
 
 const auth = useAuth();
-const { t, tc } = useI18n({ messages });
+const { t } = useI18n({ messages });
 const route = useRoute().value;
 const forumsApi = new ForumsApi({ tokenReader: () => auth.token() });
 
