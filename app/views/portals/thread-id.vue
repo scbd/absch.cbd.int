@@ -33,9 +33,10 @@
         <template v-slot:showReplies="{ replies }">
           <em>
             <a class="anchor-margin" name="replies"></a>
-            <span v-if="replies == 0">{{ t('linkXReplies', { count: replies }) }}</span>
-            <span v-if="replies == 1"><i class="fa fa-comment"></i> {{ t('linkXReplies', { count: replies }) }}</span>
-            <span v-if="replies  > 1"><i class="fa fa-comments"></i> {{ t('linkXReplies', { count: replies }) }}</span>
+            <span>
+                <i v-if="replies>0" class="fa" :class="{ 'fa-comment':replies==1, 'fa-comments':replies>1 }"></i>
+                {{ t('linkXReplies', { count: replies }) }}
+            </span>
           </em>
         </template>
       </post>
