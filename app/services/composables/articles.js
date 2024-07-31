@@ -1,5 +1,6 @@
 import ArticlesApi from '../../components/kb/article-api';
 import { useRealm } from '~/services/composables/realm.js';
+import { lstring } from '../filters/lstring';
 
 const articlesApi = new ArticlesApi();
 
@@ -47,7 +48,7 @@ export async function loadKbCategories(locale) {
                         category.articles.forEach(article => {
                             const matchingArticle = articleTitles.find(at => at._id == article.identifier);
                             if (matchingArticle) {
-                                article.title = matchingArticle.title[locale] || matchingArticle.title['en'];
+                                article.title = lstring(matchingArticle.title, locale) || matchingArticle.title['en'];
                             }
                         });
                     }
