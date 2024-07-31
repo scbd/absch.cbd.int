@@ -12,8 +12,8 @@
         </div>
         <div class="row">           
             <div class="col-xs-12">
-                <ng v-vue-ng:km-control-group name="government" required :caption="t('country')"> 
-                    <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" :source="options.countries" :ng-disabled="()=>{return userGovernment}" 
+                <ng v-vue-ng:km-control-group name="government" required :caption="t('country')">
+                    <ng v-vue-ng:afc-autocomplete name="government" v-model:ng-model="document.government" :source="options.countries" @ng-disabled="()=>{return userGovernment}" 
                         :placeholder="t('selectCountryOption')" :selectbox="true" :filter="genericFilter"  :mapping="genericMapping" >
                     </ng>
                 </ng> 
@@ -59,12 +59,9 @@
                     </ng> 
                 </ng>                
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <ng v-vue-ng:km-control-group name="additionalInformation" :caption="t('additionalInformation')">
-                    <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.jurisdictionInfo" rows="3" :placeholder="t('additionalInformation')" :locales="document.header.languages" ></ng>
+            <div class="col-md-6">
+                <ng v-vue-ng:km-control-group name="jurisdictionInfo" :caption="t('additionalInformation')">
+                    <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.jurisdictionInfo" rows="1" :placeholder="t('additionalInformation')" :locales="document.header.languages" ></ng>
                 </ng>               
             </div>
         </div>
@@ -75,13 +72,13 @@
 
         <div class="row">
             <div class="col-md-6">
-                <ng v-vue-ng:km-control-group name="from" required :caption="t('from')">
+                <ng v-vue-ng:km-control-group name="startDate" required :caption="t('from')">
                     <ng v-vue-ng:km-date required name="startDate" v-model:ng-model="document.startDate"></ng>    
                 </ng>  
             </div>
 
             <div class="col-md-6">
-                <ng v-vue-ng:km-control-group name="to"  :caption="t('to')">
+                <ng v-vue-ng:km-control-group name="endDate"  :caption="t('to')">
                     <ng v-vue-ng:km-date  required name="endDate" v-model:ng-model="document.endDate"></ng>  
                 </ng>   
             </div>
@@ -92,7 +89,7 @@
         <legend>{{t("status")}}</legend>     
         <div class="row">          
             <div class="col-xs-6">     
-                <ng v-vue-ng:km-control-group name="statusOfTheDocument"  :caption="t('statusOfTheDocument')"> 
+                <ng v-vue-ng:km-control-group name="status"  :caption="t('statusOfTheDocument')"> 
                     <ng v-vue-ng:afc-autocomplete name="status" v-model:ng-model="document.status" :source="options.reportStatus" :selectbox="true"   
                         :filter="genericFilter"  :mapping="genericMapping">
                     </ng> 
@@ -114,7 +111,7 @@
         
         <div class="row bottom-spacing" v-if="hasApprovedStatus">
             <div class="col-md-6">
-                <ng v-vue-ng:km-control-group name="statusOfApprovedDocument" :caption="t('statusOfApprovedDocument')"> 
+                <ng v-vue-ng:km-control-group name="approvedStatus" :caption="t('statusOfApprovedDocument')"> 
                     <ng v-vue-ng:afc-autocomplete name="approvingStatus" v-model:ng-model="document.approvedStatus" :placeholder="t('approvingBodyInfo')" 
                     :source="options.approvedStatus" :selectbox="true" :filter="genericFilter" :mapping="genericMapping">
                     </ng> 
@@ -134,7 +131,7 @@
 
         <div class="row bottom-spacing" v-if="hasApprovedStatusInfo">
             <div class="col-md-6">
-                <ng v-vue-ng:km-control-group name="approvingBodyInformation"  :caption="t('approvingBodyInformation')">
+                <ng v-vue-ng:km-control-group name="approvingBodyInfo"  :caption="t('approvingBodyInformation')">
                     <ng v-vue-ng:km-textbox-ml name="approvingBodyInfo"  rows="3" v-model:ng-model="document.approvingBodyInfo" :locales="document.header.languages"></ng>               
                 </ng> 
             </div>
@@ -144,11 +141,11 @@
     <section>
         <legend>{{t("mainRelevantDocuments")}}</legend>
       
-        <ng v-vue-ng:km-control-group name="relevantInformation" :caption="t('relevantInformation')">
+        <ng v-vue-ng:km-control-group name="documentText" :caption="t('relevantInformation')">
             <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.documentText" rows="3" :placeholder="t('relevantInformation')" :locales="document.header.languages" ></ng>                
         </ng>
         
-        <ng v-vue-ng:km-control-group name="relevantLinks" :caption="t('relevantLinks')">
+        <ng v-vue-ng:km-control-group name="documentLinks" :caption="t('relevantLinks')">
             <ng v-vue-ng:km-link name="documentLinks" v-model:ng-model="document.documentLinks" :allow-link="true" 
                 :allow-file="true"  :identifier="document.header.identifier">
             </ng>
@@ -159,11 +156,11 @@
     <section>
         <legend>{{t("otherRelevantInformation")}}</legend>
         <label>{{t("additionalInformation")}}</label>
-        <ng v-vue-ng:km-control-group name="otherRelevantInformationInfo"  :caption="t('otherRelevantInformationInfo')">
+        <ng v-vue-ng:km-control-group name="relevantInformation"  :caption="t('otherRelevantInformationInfo')">
             <ng v-vue-ng:km-textbox-ml  v-model:ng-model="document.relevantInformation" rows="3" :placeholder="t('otherRelevantInformationInfo')" :locales="document.header.languages" ></ng>                
         </ng>  
 
-        <ng v-vue-ng:km-control-group name="otherRelevantWebsite"  :caption="t('otherRelevantWebsite')">
+        <ng v-vue-ng:km-control-group name="relevantDocuments"  :caption="t('otherRelevantWebsite')">
             <ng v-vue-ng:km-link name="relevantDocuments" v-model:ng-model="document.relevantDocuments" 
                 :allow-link="true" :allow-file="true"   :identifier="document.header.identifier">
             </ng>
