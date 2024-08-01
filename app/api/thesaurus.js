@@ -1,6 +1,8 @@
 
 import ApiBase, { tryCastToApiError } from './api-base';
 
+const cacheKey = 'thesaurus'
+const cache    = initStorage(cacheKey);
 export default class ThesaurusApi extends ApiBase
 {
   
@@ -16,17 +18,48 @@ export default class ThesaurusApi extends ApiBase
   }
 
   async getDomainTerms(termIdentifier, params)  {
-    const data  =  await this.http.get(`/api/v2013/thesaurus/domains/${encodeURIComponent(termIdentifier)}/terms`,  { method:'get', params }) .then(res => res.data)
-    .catch(tryCastToApiError);
-                  
-    return data;
+
+    if(cache[termIdentifier])
+        return cache[termIdentifier];
+
+    cache[termIdentifier]  = this.http.get(`/api/v2013/thesaurus/domains/${encodeURIComponent(termIdentifier)}/terms`,  { method:'get', params }) 
+                                    .then(res =>{
+                                      cache[termIdentifier] = res.data;
+                                      addToStorage(cacheKey, cache)
+                                      return cache[termIdentifier];
+                                    })
+                                    .catch(tryCastToApiError);
+    
+    // await cache[termIdentifier];
+
+    return cache[termIdentifier];
   }
 
   async getTerm(termIdentifier, params)  {
-    const data  =  await this.http.get(`/api/v2013/thesaurus/terms/${encodeURIComponent(termIdentifier)}`,  { method:'get', params })
-          .then(res => res.data)
-          .catch(tryCastToApiError);
-                  
-    return data;
+
+    if(cache[termIdentifier])
+      return cache[termIdentifier];
+
+    cache[termIdentifier]  = this.http.get(`/api/v2013/thesaurus/terms/${encodeURIComponent(termIdentifier)}`,  { method:'get', params }) 
+                                  .then(res =>{
+                                    cache[termIdentifier] = res.data;
+                                    addToStorage(cacheKey, cache)
+                                    return cache[termIdentifier];
+                                  })
+                                  .catch(tryCastToApiError);
+
+    return cache[termIdentifier];
   }
+
+}
+
+function initStorage(key){
+  if (typeof(Storage) !== "undefined") {
+    return JSON.parse(localStorage.getItem(key) || "{}")     
+  }
+
+  return {}
+}
+function addToStorage(key, cache){    
+  localStorage.setItem(key, JSON.stringify(cache));
 }

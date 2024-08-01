@@ -88,18 +88,14 @@
    <section>
         <legend>{{t("status")}}</legend>     
         <div class="row">          
-            <div class="col-xs-6">     
-                <ng v-vue-ng:km-control-group name="status"  :caption="t('statusOfTheDocument')"> 
+            <div class="col-md-6">     
+                <ng v-vue-ng:km-control-group name="statusOfTheDocument"  :caption="t('statusOfTheDocument')"> 
                     <ng v-vue-ng:afc-autocomplete name="status" v-model:ng-model="document.status" :source="options.reportStatus" :selectbox="true"   
                         :filter="genericFilter"  :mapping="genericMapping">
                     </ng> 
                 </ng>
             </div>
-        </div>
-
-
-        <div class="row" v-if="hasAdoptionDate">
-            <div class="col-md-6" >
+            <div class="col-md-6" v-if="hasAdoptionDate">
                 <ng v-vue-ng:km-control-group name="adoptionDate"  :caption="t('adoptionDate')"> 
                     <div>
                         <div class="help-info">{{t("adoptionYear")}} </div> 
@@ -117,9 +113,6 @@
                     </ng> 
                 </ng>          
             </div>
-        </div>
-
-        <div class="row bottom-spacing" v-if="hasApprovedStatus">
             <div class="col-md-6">
                 <ng v-vue-ng:km-control-group name="approvingBody"  :caption="t('approvingBody')"> 
                     <ng v-vue-ng:afc-autocomplete name="approvingBody"  v-model:ng-model="document.approvingBody"  :placeholder="t('approvingBodyInfo')" :source="options.approvingBody"
@@ -130,8 +123,8 @@
         </div>
 
         <div class="row bottom-spacing" v-if="hasApprovedStatusInfo">
-            <div class="col-md-6">
-                <ng v-vue-ng:km-control-group name="approvingBodyInfo"  :caption="t('approvingBodyInformation')">
+            <div class="col-md-12">
+                <ng v-vue-ng:km-control-group name="approvingBodyInformation"  :caption="t('approvingBodyInformation')">
                     <ng v-vue-ng:km-textbox-ml name="approvingBodyInfo"  rows="3" v-model:ng-model="document.approvingBodyInfo" :locales="document.header.languages"></ng>               
                 </ng> 
             </div>
@@ -192,6 +185,7 @@
     import { sanitizeDocument } from '~/services/filters/common';
     import { useAuth, useRoute } from "@scbd/angular-vue/src/index.js";
     import ThesaurusApi  from "~/api/thesaurus.js";
+    import { THESAURUS_TERMS } from '~/constants/thesaurus.js'
  
     
    
@@ -216,7 +210,7 @@
         approvedStatus: thesaurusApi.getDomainTerms(THESAURUS.APPROVED_STATUS),
         approvingBody : thesaurusApi.getDomainTerms(THESAURUS.APPROVING_BODY),
         reportStatus  : thesaurusApi.getDomainTerms(THESAURUS.REPORT_STATUS),
-        reportTypes   : thesaurusApi.getDomainTerms( THESAURUS.REPORT_TYPES),
+        reportTypes   : thesaurusApi.getDomainTerms( THESAURUS.REPORT_TYPES).then(reports=>reports.filter(e=>e.identifier!=THESAURUS_TERMS.NBSAP)),
     };
     const userGovernment = computed(()=> auth.user()?.government);
 
