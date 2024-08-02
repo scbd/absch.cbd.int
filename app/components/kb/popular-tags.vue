@@ -18,7 +18,7 @@
     import messages from '../../app-text/components/kb.json';
     import { loadKbCategories } from '../../services/composables/articles.js';
     import {  useRouter } from "@scbd/angular-vue/src/index.js";
-    const { t } = useI18n({ messages });
+    const { t, locale } = useI18n({ messages });
     const realm = useRealm();
     const router = useRouter();
     const popularTags = ref([]);
@@ -34,7 +34,7 @@
   
     onMounted(async () => {
       try {
-        const categories = await loadKbCategories();
+        const categories = await loadKbCategories(locale.value);
         popularTags.value = categories;
       } catch (error) {
           console.error("Error loading categories:", error);

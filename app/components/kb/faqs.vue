@@ -17,9 +17,9 @@
 						:href="`${articleUrl(article, getAdminTag() )}`">
 						<i class="fa fa-external-link"></i>
 					</a>
-					<span class="card-title">{{lstring(article.title, $locale)}}</span>
+					<span class="card-title">{{lstring(article.title, locale)}}</span>
 					</summary>
-                    <div class="p-2 faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="lstring(article.content,$locale)">
+                    <div class="p-2 faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="lstring(article.content,locale)">
 					</div>   
 					<div v-if="article.adminTags" class="card-footer">
                         <a v-for="tag in article.adminTags" type="button"
@@ -47,7 +47,7 @@
 	import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js"; 
     const auth = useAuth();
 	const realm = useRealm();
-	const { t } = useI18n({ messages });
+	const { t, locale } = useI18n({ messages });
 	const route = useRoute();
 	const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
 	const faqFilterTag = ref('');
@@ -62,7 +62,7 @@
 	
 	onMounted(async ()=>{
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
-		categories.value = await loadKbCategories();
+		categories.value = await loadKbCategories(locale.value);
 		loadFaqs(1);
 	})
 	

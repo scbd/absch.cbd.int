@@ -1,12 +1,17 @@
+import categoryTitleTranslations from '~/app-text/components/abs-kb-categories.json';
+import { mergeTranslationKeys } from '../../services/translation-merge';
+const categoryTitle = mergeTranslationKeys(categoryTitleTranslations);
+
 export const categories = [
   {
-    "title": "Announcements",
+    "title": categoryTitle.announcements,
     "adminTags": [
       "absch-announcement"
     ],
     "articles": []
-  },{
-    "title": "About the ABS Clearing-House",
+  },
+  {
+    "title": categoryTitle.aboutAbsch,
     "adminTags": [
       "about"
     ],
@@ -29,7 +34,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Getting started",
+    "title": categoryTitle.gettingStarted,
     "adminTags": [
       "getting-started"
     ],
@@ -44,7 +49,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Finding information",
+    "title": categoryTitle.findingInformation,
     "adminTags": [
       "finding-information"
     ],
@@ -67,7 +72,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Submitting information",
+    "title": categoryTitle.submittingInformation,
     "adminTags": [
       "submitting-information"
     ],
@@ -90,7 +95,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Monitoring utilization",
+    "title": categoryTitle.monitoringUtilization,
     "adminTags": [
       "monitoring"
     ],
@@ -109,7 +114,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Need help",
+    "title": categoryTitle.needHelp,
     "adminTags": [
       "getting-help"
     ],
@@ -128,105 +133,105 @@ export const categories = [
     ]
   },
   {
-    "title": "E-Learning",
+    "title": categoryTitle.eLearning,
     "adminTags": [
       "elearning"
     ],
     "articles": []
   },
   {
-    "title": "Informal Advisory Committee (IAC)",
+    "title": categoryTitle.informalAdvisoryCommittee,
     "adminTags": [
       "meetings",
       "iac"
     ],
     "articles": [{
-        "title": "Dec 2019 - 4th IAC Meeting",
+        "urlTitle": categoryTitle.fourthIACMeeting,
         "url": "https://www.cbd.int/meetings/NP-ABSCH-IAC-2019-01"
       },
       {
-        "title": "Nov 2017 - 3rd IAC Meeting",
+        "urlTitle": categoryTitle.thirdIACMeeting,
         "url": "https://www.cbd.int/meetings/ABSCHIAC-2017-01"
       },
       {
-        "title": "Jun 2016 - 2nd IAC Meeting",
+        "urlTitle": categoryTitle.secondIACMeeting,
         "url": "https://www.cbd.int/meetings/ABSCHIAC-2016-01"
       },
       {
-        "title": "Oct 2015 - 1st IAC Meeting",
+        "urlTitle": categoryTitle.firstIACMeeting,
         "url": "https://www.cbd.int/meetings/ABSCH-IAC-01"
       },
       {
-        "title": "Pilot phase IAC Meeting",
+        "urlTitle": categoryTitle.pilotIACMeeting,
         "url": "https://www.cbd.int/meetings/ABS-IAC-CH-01"
       }
     ]
   },
   {
-    "title": "Governments",
+    "title": categoryTitle.governments,
     "adminTags": [
       "governments"
     ],
     "articles": []
   },
   {
-    "title": "Parties",
+    "title": categoryTitle.parties,
     "adminTags": [
       "parties"
     ],
     "articles": []
   },
   {
-    "title": "Non-Parties",
+    "title": categoryTitle.nonParties,
     "adminTags": [
       "non-parties"
     ],
     "articles": []
   },
   {
-    "title": "Users of genetic resources",
+    "title": categoryTitle.usersGeneticResources,
     "adminTags": [
       "users"
     ],
     "articles": []
   },
   {
-    "title": "Business/Private sector",
+    "title": categoryTitle.businessPrivateSector,
     "adminTags": [
       "business"
     ],
     "articles": []
   },
   {
-    "title": "Research/Academia",
+    "title": categoryTitle.researchAcademia,
     "adminTags": [
       "research"
     ],
     "articles": []
   },
   {
-    "title": "Indigenous Peoples",
+    "title": categoryTitle.indigenousPeoples,
     "adminTags": [
       "iplc"
     ],
     "articles": []
   },
   {
-    "title": "Local communities",
+    "title": categoryTitle.localCommunities,
     "adminTags": [
       "iplc"
     ],
     "articles": []
   },
   {
-    "title": "Capacity-building Partners",
+    "title": categoryTitle.capacityBuildingPartners,
     "adminTags": [
       "partner"
     ],
     "articles": []
   },
   {
-    "title": "Donors",
+    "title": categoryTitle.donors,
     "adminTags": [
       "donors"
     ],
