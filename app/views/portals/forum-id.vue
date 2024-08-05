@@ -74,8 +74,8 @@
               <template v-slot:showReplies="{ replies }">
 
                 <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`"> {{ t('buttonReadPost') }}</a>
-                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comment"></i> {{ tc('buttonReadReply', { count: replies }) }}</a>
-                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comments"></i> {{ tc('buttonReadReplies', { count: replies }) }}</a>
+                <a v-if="replies == 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comment"></i> {{ t('buttonReadReply', { count: replies }) }}</a>
+                <a v-if="replies  > 1" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}#replies`"><i class="fa fa-comments"></i> {{ t('buttonReadReplies', { count: replies }) }}</a>
 
 
               </template>
@@ -85,9 +85,8 @@
           <div class="card-footer">
             <div class="row">
               <div class="col align-self-center">
-                <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">{{ t('linkNoReplies') }}</a>
-                <a v-if="thread.replies == 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ t('linkOneReply') }}</a>
-                <a v-if="thread.replies > 1" :href="`${getThreadUrl(thread.threadId)}#replies`">{{ tc('linkXReplies', { replies: thread.replies }) }}</a>
+                <a v-if="thread.replies == 0" :href="`${getThreadUrl(thread.threadId)}`">{{ t('linkXReplies', { count: thread.replies }) }}</a>
+                <a v-if="thread.replies > 0"  :href="`${getThreadUrl(thread.threadId)}#replies`">{{ t('linkXReplies', { count: thread.replies }) }}</a>
                 <span v-if="thread.isClosed || forum.isClosed">
                   |
                   <em v-if="forum.isClosed">{{ t('forumIsClosedForComments') }}</em>
@@ -98,8 +97,8 @@
               <div class="col-auto align-self-center">
                 <span v-if="thread.lastPostId && thread.lastPostId!=thread.threadId">
                   <a :href="`${getThreadUrl(thread.threadId)}#${thread.lastPostId}`">
-                    {{ tc('LastReplyOn', {datetime: ""}) }} <relative-datetime class="date" :date="thread.lastPostOn" />
-                    {{ tc('LastReplyBy', {name: thread.lastPostBy }) }}                   </a>
+                    {{ t('LastReplyOn', {datetime: ""}) }} <relative-datetime class="date" :date="thread.lastPostOn" />
+                    {{ t('LastReplyBy', {name: thread.lastPostBy }) }}                   </a>
                 </span>
               </div>
             </div>
@@ -140,7 +139,7 @@ import { lstring } from '../../components/kb/filters';
 import { useI18n } from 'vue-i18n';
 
 const auth = useAuth();
-const { t, tc } = useI18n({ messages });
+const { t } = useI18n({ messages });
 const route = useRoute().value;
 const router = useRouter();
 

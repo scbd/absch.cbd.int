@@ -43,7 +43,7 @@
 
                     <slot name="showReplies" v-bind:replies="post.replies" v-bind:posts="posts">
                         <button class="btn btn-light btn-sm" @click.prevent="toggleReplies()" v-if="post.replies">
-                            {{ $tc('replies', post.replies, { count: post.replies}) }}
+                            {{ t('replies', post.replies, { count: post.replies}) }}
                             <i class="fa" :class="{ 'fa-caret-up' : !!posts, 'fa-caret-down' : !posts }"></i>
                         </button>
                     </slot>
