@@ -4,7 +4,7 @@
             <i class="fa fa-upload"></i>
             {{ t('buttonUploadDocuments') }}
         </button>
-        <input v-if="!disabled" ref="refFiles" type="file" multiple @change="pending(uploadFile())" style="display:none">
+        <input v-if="!disabled" ref="refFiles" type="file" multiple @change="pending(uploadFile($event))" style="display:none">
     </span>
 </template>
     
