@@ -4,7 +4,7 @@ import template from "text!./view-record-reference.directive.html";
 import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', function (storage, $timeout, translationService) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService','$http','realm', function (storage, $timeout, translationService, $http, realm) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -41,7 +41,17 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 		        }
 		    });
 
-			$scope.refreshRecord = function(identifier){
+			$scope.refreshRecord = async function(existingIdentifier) {
+				
+				let identifier = existingIdentifier;
+				const isBch = realm.is('BCH');
+
+				if(isBch) {
+					const latestRevision = await getDocumentLatestVersion(identifier);
+					if(latestRevision)
+						identifier =    existingIdentifier.replace(/@\d+$/, `@${latestRevision}`);
+				}
+				
 				$scope.loading = true;
 				loadReferenceDocument(identifier)
 				.then(function(data) {
@@ -69,6 +79,13 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 					}
 				})
 				.finally(function(){$scope.loading = false;});
+			}
+			//Todo: will move to common
+			async function getDocumentLatestVersion(identifier) {
+				const result = await $http.get(`/api/v2013/documents/${identifier}/?info=true`);
+				if(result) {
+					return result.data.latestRevision;
+				}
 			}
 
 			function loadReferenceDocument(identifier){
