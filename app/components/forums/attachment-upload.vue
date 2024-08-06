@@ -4,7 +4,7 @@
             <i class="fa fa-upload"></i>
             {{ t('buttonUploadDocuments') }}
         </button>
-        <input v-if="!disabled" ref="refFiles" type="file" multiple @change="pending(uploadFile())" style="display:none">
+        <input v-if="!disabled" ref="refFiles" type="file" multiple @change="pending(uploadFile($event))" style="display:none">
     </span>
 </template>
     
@@ -37,7 +37,7 @@
         const files = [ ...target.files ]; //convert to array;
 
         var qUploads = files.map(async(file)=>{
-            const resFile = await forumsApi.uploadAttachment(forumId.value, file);
+            const resFile = await forumsApi.uploadAttachment(props.forumId, file);
             emit('file', resFile);
         });
 
