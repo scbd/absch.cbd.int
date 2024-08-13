@@ -14,13 +14,16 @@
 
                     <div class="card-body" v-if="!loading">
                        
-                        <h2 class="card-title">{{lstring(article.title, $locale)}}</h2>
+                        <h2 class="card-title">{{lstring(article.title, locale)}}</h2>
                        
                         <div v-if="article.meta" class="p-1 mb-3 text-white bg-darkgrey bold">
                             <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;
                             {{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}
                         </div>
-                        <cbd-article :article="article" :show-edit="true" :show-cover-image="false" :admin-tags="article.adminTags"></cbd-article>
+
+                        <div v-if="article.content" class="card-text full-details ck ck-content ck-rounded-corners ck-blurred"
+                            v-html="lstring(article.content,locale)">
+                        </div>
                     </div>
                     <div v-if="article.adminTags" class="card-footer">
                         <a v-for="tag in article.adminTags" :key="tag" 
@@ -55,7 +58,7 @@
     import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
     import { useRealm } from '../../services/composables/realm.js';
     import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js";
-    const { t } = useI18n({ messages }); 
+    const { t, locale } = useI18n({ messages }); 
     const auth = useAuth();
     const realm = useRealm();
     const route = useRoute();
@@ -68,7 +71,7 @@
     
     onMounted(async () => {  
         tag.value = (route.value?.params?.tag).replace(/"/g, ""); //ToDo: route.params is not available 
-        categories.value = await loadKbCategories();
+        categories.value = await loadKbCategories(locale.value);
         if (route.value == undefined) return;
             try {
                 let id = (route.value?.params?.id).replace(/"/g, "");

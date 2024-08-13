@@ -1,13 +1,18 @@
+import categoryTitleTranslations from '~/app-text/components/bch-kb-categories.json';
+import { mergeTranslationKeys } from '../../services/translation-merge';
+const categoryTitle = mergeTranslationKeys(categoryTitleTranslations);
+
+
 export const categories = [
   {
-    "title": "Announcements",
+    "title": categoryTitle.announcements,
     "adminTags": [
       "bch-announcement"
     ],
     "articles": []
   },
   {
-    "title": "About",
+    "title": categoryTitle.about,
     "adminTags": [
       "about"
     ],
@@ -38,7 +43,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Getting started",
+    "title": categoryTitle.gettingStarted,
     "adminTags": [
       "getting-started"
     ],
@@ -69,7 +74,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Submitting information",
+    "title": categoryTitle.submittingInformation,
     "adminTags": [
       "submitting-information"
     ],
@@ -100,7 +105,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Finding information",
+    "title": categoryTitle.findingInformation,
     "adminTags": [
       "finding-information"
     ],
@@ -131,7 +136,7 @@ export const categories = [
     ]
   },
   {
-    "title": "LMOs/Genetic elements/Organisms",
+    "title": categoryTitle.lmoGeneticElementsOrganisms,
     "adminTags": [
       "lmo-gene-orga"
     ],
@@ -162,7 +167,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Interoperability",
+    "title": categoryTitle.interoperability,
     "adminTags": [
       "interoperability"
     ],
@@ -177,7 +182,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Informal Advisory Committee (IAC)",
+    "title": categoryTitle.informalAdvisoryCommittee,
     "adminTags": [
       "meetings",
       "iac"
@@ -193,7 +198,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Getting help",
+    "title": categoryTitle.gettingHelp,
     "adminTags": [
       "getting-help"
     ],
@@ -212,7 +217,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Frequently Asked Questions (FAQs)",
+    "title": categoryTitle.FAQs,
     "adminTags": [
       "faq"
     ],
