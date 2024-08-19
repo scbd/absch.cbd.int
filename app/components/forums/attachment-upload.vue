@@ -1,55 +1,47 @@
 <template>
     <span>
-        <button :disabled="disabled" class="btn btn-light" @click="$refs.files.click()">
+        <button :disabled="disabled" class="btn btn-light" @click="refFiles.click()">
             <i class="fa fa-upload"></i>
-            {{ $t('buttonUploadDocuments') }}
+            {{ t('buttonUploadDocuments') }}
         </button>
-        <input v-if="!disabled" ref="files" type="file" multiple @change="uploadFile($event)" style="display:none">
+        <input v-if="!disabled" ref="refFiles" type="file" multiple @change="pending(uploadFile($event))" style="display:none">
     </span>
 </template>
     
-<script>
-import ForumsApi from '~/api/forums';
-import pending   from '~/services/pending-call'
-import i18n from '../../app-text/components/forums/edit-post.json';
+<script setup>
+    import { defineEmits, ref } from 'vue';
+    import ForumsApi from '~/api/forums';
+    import pending   from '~/services/pending-call';
+    import { useAuth } from "@scbd/angular-vue/src/index.js";
+    import messages from '~/app-text/components/forums/edit-post.json';
+    import { useI18n } from 'vue-i18n';
 
-
-export default {
-    name: 'AttachmentUpload',
-    i18n: { messages: { en: i18n } },
-    components: {  },
-    props: {
-        forumId : { type:Number, required: true },
-    },
-    emits: ['file'],
-    data() {
-        return {
-            disabled : false
+    const props = defineProps({
+        forumId: {
+            type:Number,
+            required: true
         }
-    },
-    computed: {
-    },
-    methods: {
-        uploadFile: pending(uploadFile, function(on) { this.disabled = on })
-    }
-}
-
-async function uploadFile({ target }) {
-
-    const forumsApi = new ForumsApi();
-    const files = [ ...target.files ]; //convert to array;
-    const { forumId } = this;
-
-    var qUploads = files.map(async(file)=>{
-        const resFile = await forumsApi.uploadAttachment(forumId, file);
-        this.$emit('file', resFile);
     });
 
-    await Promise.all(qUploads);
-}
+    const emit = defineEmits(['file']);
+
+    const { t } = useI18n({ messages });
+    const auth = useAuth();
+
+    const disabled = ref(false);
+    const refFiles = ref(null);
+
+    const forumsApi = new ForumsApi({tokenReader:()=>auth.token()});
+
+    const uploadFile = async ({ target }) => {
+        const files = [ ...target.files ]; //convert to array;
+
+        var qUploads = files.map(async(file)=>{
+            const resFile = await forumsApi.uploadAttachment(props.forumId, file);
+            emit('file', resFile);
+        });
+
+        await Promise.all(qUploads);
+    }
 
 </script>
-
-<style scoped>
-
-</style>
