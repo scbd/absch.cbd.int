@@ -829,7 +829,6 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 
                 //============================================================
                 async function loadArticle(schema){
-                    $timeout(()=>{
                         schema = schema || $scope.documentType;
 
                         if($scope.article)
@@ -857,7 +856,6 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                             $scope.loading = false;
                             $scope.blockText        = undefined;
                         });
-                    }, 300);
                 }
 
                 function updateDocumentViewLanguage(){
