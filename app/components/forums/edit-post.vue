@@ -1,32 +1,32 @@
 <template>
-    <div ref="modal" class="modal fade" style="display: block;" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div ref="refModal" class="modal fade" style="display: block;" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">
-                <span v-if="postId">{{ $t('titleEditPost') }}</span>
-                <span v-else-if="parentId">{{ $t('titlePostReply') }}</span>
-                <span v-else-if="forumId">{{ $t('titleCreateThread') }}</span>
+                <span v-if="postId">{{ t('titleEditPost') }}</span>
+                <span v-else-if="parentId">{{ t('titlePostReply') }}</span>
+                <span v-else-if="forumId">{{ t('titleCreateThread') }}</span>
                 <i v-if="loading" class="fa fa-cog fa-spin"></i> 
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div v-if="post">
+          <div v-if="post">
 
-                <input v-if="forumId || postId" type="text" class="form-control mb-2"  v-model="subject" :placeholder="$t('placeholderSubject')">
+                <input v-if="forumId || postId" type="text" class="form-control mb-2"  v-model="subject" :placeholder="t('placeholderSubject')">
                 <h3 v-else>{{subject}}</h3>
                 <div v-if="parent && parent.postId!=post.postId" class="mb-2">
                     <div v-if="parent.postId==parent.threadId">
-                        <a href="#parentBody" data-bs-toggle="collapse"> {{ $t('inReplyToMainThread') }}</a>
+                        <a href="#parentBody" data-bs-toggle="collapse"> {{ t('inReplyToMainThread') }}</a>
                     </div>
                     <div v-else>
-                        <a href="#parentBody" data-bs-toggle="collapse"> {{ $t('inReplyToPost', { name: parent.createdBy, postId: parent.postId }) }}</a>
+                        <a href="#parentBody" data-bs-toggle="collapse"> {{ t('inReplyToPost', { name: parent.createdBy, postId: parent.postId }) }}</a>
                     </div>
-                    <blockquote class="border-start border-4 p-2 collapse mt-2" id="parentBody" ref="parentBody" v-html="parent.htmlMessage"></blockquote>
+                    <blockquote class="border-start border-4 p-2 collapse mt-2" id="parentBody" ref="refParentBody" v-html="parent.htmlMessage"></blockquote>
                 </div>
 
-                <textarea ref="body" class="form-control mb-2" rows="10" v-model="message" :placeholder="$t('placeholderMessage')"></textarea> 
+                <textarea ref="body" class="form-control mb-2" rows="10" v-model="message" :placeholder="t('placeholderMessage')"></textarea> 
 
 <!--                     
                 <div ref="body" class="body p-2 border" 
@@ -35,8 +35,8 @@
                     @blur="post.htmlMessage = $event.target.innerHTML"></div> -->
                 
 
-                <div class="attachments" v-if="forum.allowAttachments || attachments.length">
-                    <h6 class="card-subtitle text-muted">{{ $t('attachments') }}</h6>
+                <div class="attachments" v-if="forum?.allowAttachments || attachments?.length">
+                    <h6 class="card-subtitle text-muted">{{ t('attachments') }}</h6>
 
                     <div class="container">
                         <div class="row g-1">
@@ -46,7 +46,7 @@
                                     <button class="btn btn-sm "  type="button"
                                     :class="{ 'btn-outline-danger' : !attachment.deletedBy, 'btn-outline-dark': attachment.deletedBy }"  
                                     @click="toggleDeleted(attachment.attachmentId)" 
-                                    :title="attachment.deletedBy ? $t('buttonUndeleteAttachement') : $t('buttonDeleteAttachement')"
+                                    :title="attachment.deletedBy ? t('buttonUndeleteAttachement') : t('buttonDeleteAttachement')"
                                     >
                                         <i class="fa" :class="{ 'fa-times' : !attachment.deletedBy, 'fa-undo': attachment.deletedBy }"></i>
                                     </button>
@@ -69,9 +69,9 @@
                 <div class="col">
                 </div>
                 <div class="col-auto">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('buttonClose') }}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ t('buttonClose') }}</button>
                     <button type="button" :disabled="saving" class="btn btn-primary" @click="save()">
-                        {{ $t('buttonSave') }} <i v-if="saving" class="fa fa-cog fa-spin"></i> 
+                        {{ t('buttonSave') }} <i v-if="saving" class="fa fa-cog fa-spin"></i> 
                     </button>
                 </div>
             </div>
@@ -82,181 +82,157 @@
 
 </template>
     
-<script>
-import bootstrap from 'bootstrap'
-import ForumsApi from '~/api/forums';
-import pending   from '~/services/pending-call'
-import Attachment from './attachment.vue';
-import AttachmentUpload from './attachment-upload.vue';
-import i18n from '../../app-text/components/forums/edit-post.json';
+<script setup>
+  import { ref, onMounted, computed, nextTick } from 'vue';
+  import { useI18n } from 'vue-i18n';
+  import { Modal, Collapse } from "bootstrap";
+  import { useAuth } from "@scbd/angular-vue/src/index.js";
+  import ForumsApi from '~/api/forums';
+  import pending from '~/services/pending-call';
+  import Attachment from './attachment.vue';
+  import AttachmentUpload from './attachment-upload.vue';
+  import messages from '../../app-text/components/forums/edit-post.json';
 
-export default {
-    name: 'EditPost',
-    i18n: { messages: { en: i18n } },
-    components: { AttachmentUpload, Attachment},
-    emits: ['show', 'close'],
-    props: {
-        postId:   { type:  Number },
-        parentId: { type:  Number },
-        forumId:  { type:  Number },
-        quote:    { type:  String },
-    },
-    data() {
-        return {
-            forum: null,
-            parent: null,
-            post: null,
-            loading: false,
-            saving: false
-        }
-    },
-    computed: {
-        subject: { get() { return this?.post?.subject }, set(value) { return this.post.subject = value } },
-        message: { get() { return this?.post?.message }, set(value) { return this.post.message = value } },
-        attachments: { get() { return this?.post?.attachments }, set(value) { return this.post.attachments = value } }
-    },
-    methods: {
-        load: pending(load, function(on) { this.loading = on }),
-        save: pending(save, function(on) { this.saving  = on }),
-        close,
-        fileUploaded,
-        toggleDeleted,
-        sizeText,
-    },
-    created() { this.ready = this.load() },
-    async mounted() {
+  const props = defineProps({
+    postId: Number,
+    parentId: Number,
+    forumId: Number,
+    quote: String,
+  });
 
-        const { postId, parentId } = this;
-        const el = this.$refs.modal;
-        const modal = bootstrap.Modal.getOrCreateInstance(el);
+  const emit = defineEmits(['show', 'close']);
+  const { t } = useI18n({ messages });
+  const auth = useAuth();
+  const forumsApi = new ForumsApi({ tokenReader: () => auth.token() });
 
-        el.addEventListener('shown.bs.modal',  ()=>this.$emit('show'));
-        el.addEventListener('hidden.bs.modal', ()=>this.$emit('close', this.post));
+  const forum = ref(null);
+  const parent = ref(null);
+  const post = ref({});
+  const loading = ref(false);
+  const saving = ref(false);
+  const refModal = ref();
+  const refParentBody = ref();
+  const modal = ref(null);
 
-        modal.show();
+const subject = computed({
+  get() { return post.value?.subject ?? ''; },
+  set(value) {
+    if (post.value) post.value.subject = value;
+  }
+});
 
-        this.modal = modal;
+const message = computed({
+  get() { return post.value?.message ?? ''; },
+  set(value) {
+    if (post.value) post.value.message = value;
+  }
+});
+  const attachments = computed({
+    get() { return post.value?.attachments ?? []; },
+    set(value) { post.value.attachments = value; },
+  });
 
-        await this.ready;
+  onMounted(async () => {
+    const el = refModal.value;
+    modal.value = Modal.getOrCreateInstance(el);
 
-        if(!postId && parentId) { // Preview parent post
-            this.$nextTick(()=>{
-                const { parentBody } = this.$refs;
-                const parentPostBodyPreview = bootstrap.Collapse.getOrCreateInstance(parentBody);
-                parentPostBodyPreview.show();
-            })
-        }
+    el.addEventListener('shown.bs.modal', () => emit('show'));
+    el.addEventListener('hidden.bs.modal', () => emit('close', post.value));
+
+    modal.value.show();
+
+    // await pending(load, function(on) { loading.value = on });
+    await load();
+
+    if (!props.postId && props.parentId) {
+      nextTick(() => {
+        const parentPostBodyPreview = Collapse.getOrCreateInstance(refParentBody.value);
+        parentPostBodyPreview.show();
+      });
     }
-}
+  });
 
-async function load() {
-
-    const { postId, parentId, forumId, quote } = this;
-
-    const forumsApi = new ForumsApi();
-    this.forumsApi = forumsApi;
-
-    if(postId) { 
-        const post   = await forumsApi.getPost(postId);
-        const parent = await forumsApi.getPost(post.parentId);
-        const forum  = await forumsApi.getForum(post.forumId);
-
-        this.forum  = forum;
-        this.parent = parent;
-        this.post   = post;
+  const load = async () => {
+    if (props.postId) { 
+      post.value = await forumsApi.getPost(props.postId);
+      parent.value = await forumsApi.getPost(post.value.parentId);
+      forum.value = await forumsApi.getForum(post.value.forumId);
+    } else if (props.parentId) { 
+      parent.value = await forumsApi.getPost(props.parentId);
+      forum.value = await forumsApi.getForum(parent.value.forumId);
+      post.value = { 
+        postId: null, 
+        parentId: parent.value.postId,
+        forumId: parent.value.forumId,
+        subject: parent.value.subject,
+        message: props.quote ? `> ${props.quote}`.replace(/\n/g, '\n> ') : '',
+        attachments: []
+      };
+    } else if (props.forumId) { 
+      forum.value = await forumsApi.getForum(props.forumId);
+      post.value = { 
+        postId: null, 
+        parentId: null,
+        forumId: forum.value.forumId,
+        subject: '',
+        message: '',
+        attachments: []
+      };
+    } else { 
+      throw new Error('Unsupported control path'); 
     }
-    else if(parentId) { 
-        const parent = await forumsApi.getPost(parentId);
-        const forum  = await forumsApi.getForum(parent.forumId);
+  };
 
-        this.forum  = forum;
-        this.parent = parent;
-        this.post   = { 
-            postId: null, 
-            parentId : parent.postId,
-            forumId  : parent.forumId,
-            subject  : parent.subject,
-            message  : quote ? `> ${quote}`.replace(/\n/g, '\n> ') : '',
-            attachments: []
-        };
-    }
-    else if(forumId) { 
-        const forum = await forumsApi.getForum(forumId);
-
-        this.forum  = forum;
-        this.parent = null;
-        this.post   = { 
-            postId: null, 
-            parentId : null,
-            forumId  : forum.forumId,
-            subject  : '',
-            message  : '',
-            attachments: []
-        };
-    }
-    else throw new Error("Unsupported control path");
-}
-
-async function save() {
-
-    const { forumsApi, postId, parentId, forumId, subject, message, attachments } = this;
-
+  const save = async () => {
+    saving.value = true;
+  
     const data = {
-        subject, 
-        message,
-        attachments
+      subject: subject.value,
+      message: message.value,
+      attachments: attachments.value,
+    };
+  
+    if (props.postId) {
+      post.value = await forumsApi.updatePost(props.postId, data);
+    } else if (props.parentId) {
+      post.value = await forumsApi.createPost(props.parentId, data);
+    } else if (props.forumId) {
+      post.value = await forumsApi.createThread(props.forumId, data);
+    } else {
+      throw new Error('Unsupported control path');
+    }
+  
+    close(true);
+    saving.value = false;
+  };
+
+  const toggleDeleted = (attachmentId) => {
+    const index = attachments.value.findIndex(a => a.attachmentId == attachmentId);
+    if (index < 0) return;
+
+    attachments.value[index] = {
+      ...attachments.value[index],
+      deletedBy: attachments.value[index].deletedBy ? null : auth.user.name || 'me'
     };
 
-    if(postId) { 
-        this.post = await forumsApi.updatePost(postId, data);
+    attachments.value = [...attachments.value]; // Force refresh
+  };
+
+  const sizeText = (size) => {
+    if (size < 1024) return `${size} B`;
+    if (size / 1024 < 1024) return `${(size / 1024).toFixed(1)} kB`;
+    return `${(size / 1024 / 1024).toFixed(1)} MB`;
+  }
+
+  function fileUploaded(attachmentInfo) {
+    attachments.value.push(attachmentInfo);
+  }
+
+  function close() {
+    if (modal.value) {
+      modal.value.hide();
     }
-    else if(parentId) { 
-        this.post = await forumsApi.createPost(parentId, data);
-    }
-    else if(forumId) { 
-        this.post = await forumsApi.createThread(forumId, data);
-    }
-    else throw new Error("Unsupported control path");
-
-    this.close(true);
-}
-
-function toggleDeleted(attachmentId) {
-
-    const { attachments, $auth }  = this;
-    const index = attachments.findIndex(a=>a.attachmentId == attachmentId);
-
-    if(index<0) return;
-
-    var attachment = attachments[index];
-
-    if(attachment.deletedBy) attachment = { ...attachment, deletedBy : null };
-    else                     attachment = { ...attachment, deletedBy : $auth.user.name || 'me' };
-
-    attachments[index] = attachment;
-
-    this.attachments = [...attachments]; //Force refresh
-}
-
-function sizeText(size) {
-
-    if(size<1024)       return `${size} B` 
-    if(size/1024 <1024) return `${(size/1024).toFixed(1)} kB` 
-    
-    return `${(size/1024/1024).toFixed(1)} MB` 
-}
-
-function fileUploaded(attachmentInfo) {
-    this.attachments.push(attachmentInfo);
-}
-
-function close() {
-    const { modal } = this;
-    modal.hide();
-}
-
-
-
+  }
 </script>
 
 <style scoped>
