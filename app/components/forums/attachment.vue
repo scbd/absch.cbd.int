@@ -8,152 +8,133 @@
         - {{sizeText}}
     </span>
 </template>
-    
-<script>
-import ForumsApi from '~/api/forums';
-import pending   from '~/services/pending-call'
-import Loading   from '~/components/common/loading.vue'
-import bootstrap from  'bootstrap';
-import i18n from '../../app-text/components/forums/edit-post.json';
-import { encode as encodeHtml } from '~/services/html.js'
 
-export default {
-    name: 'Attachment',
-    i18n: { messages: { en: i18n } },
-    components: {
-        Loading
-    },
-    props: {
-        attachment:  { type:  Object, required: true },
-        autoUnlock:  { type:  Boolean, default: false },
-    },
-    data() { 
-        return { 
-            loading: false,
-            directUrl: null,
-            expiresOn: null
+<script setup>
+    import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
+    import ForumsApi from '~/api/forums';
+    import pending from '~/services/pending-call';
+    import Loading from '~/components/common/loading.vue';
+    import { Tooltip } from 'bootstrap';
+    import messages from '../../app-text/components/forums/edit-post.json';
+    import { encode as encodeHtml } from '~/services/html.js';
+    import { useAuth } from "@scbd/angular-vue/src/index.js";
+    import { useI18n } from 'vue-i18n';
+
+    const props = defineProps({
+        attachment: { type: Object, required: true },
+        autoUnlock: { type: Boolean, default: false },
+    });
+
+    const { t } = useI18n({ messages });
+    const auth = useAuth();
+
+    const loading = ref(false);
+    const directUrl = ref(null);
+    const expiresOn = ref(null);
+    const tooltip = ref(null);
+    let timer = null;
+
+    const forumsApi = new ForumsApi({ tokenReader: () => auth.token() });
+
+    const sizeText = computed(() => {
+        const size = props.attachment.size;
+
+        if (size < 1024) return t('sizeB', { size: size });
+        if (size / 1024 < 1024) return t('sizeKB', { size: (size / 1024).toFixed(1) });
+
+        return t('sizeMB', { size: (size / 1024 / 1024).toFixed(1) });
+    });
+
+    const tooltipMessageHtml = computed(() => {
+        if (isPublic.value) return '';
+        if (loading.value) return `<i class="fa fa-cog fa-spin"></i>${encodeTextToHtml(t('attachmentUnlocking'))}`;
+        if (locked.value) return `<i class="fa fa-lock"></i>${encodeTextToHtml(t('attachmentLocked'))}`;
+
+        return `<i class="fa fa-check"></i>${encodeTextToHtml(t('attachmentUnlocked'))}`;
+    });
+
+    const deleted = computed(() => !!props.attachment.deletedBy);
+
+    const isPublic = computed(() => props.attachment.isPublic);
+
+    const locked = computed(() => !isPublic.value && !directUrl.value);
+
+    const url = computed(() => {
+        const { attachmentId } = props.attachment;
+        return directUrl.value || `/api/v2014/discussions/attachments/${encodeURIComponent(attachmentId)}?stream`;
+    });
+
+    watch(tooltipMessageHtml, (msg) => {
+        if (!tooltip.value) return;
+
+        const tooltipInstance = Tooltip.getInstance(tooltip.value);
+        if (tooltipInstance?._popper) {
+            tooltipInstance.setContent({ '.tooltip-inner': tooltipMessageHtml.value });
+            tooltipInstance.show();
         }
-    },
-    computed: {
-        sizeText,
-        tooltipMessageHtml,
-        deleted() { 
-            return !!this.attachment.deletedBy 
-        },
-        isPublic() {
-            const { attachment } = this;
-            const { isPublic } = attachment;
-            return isPublic;
-        },
-        locked() {
-            const { isPublic, directUrl } = this;
-            return !isPublic && !directUrl;
-        },
-        url() { 
-            const { attachment, directUrl } = this;
-            const { attachmentId } = attachment;
-            return directUrl || `/api/v2014/discussions/attachments/${encodeURIComponent(attachmentId)}?stream`;
-        },
-    },
-    watch: {
-        tooltipMessageHtml(msg) {
-            if(!this.$refs.tooltip) return;
+    });
 
-            if(this?.tooltip?._popper) // if tooltip visible
-                this.tooltip.show();   // refresh display
-        }
-    },
-    methods: {
-        unlock,
-        resetLock
-    },
-    beforeDestroy : resetLock,
-    mounted() {
+    const unlock = async ($event) => {
+        if (!locked.value) return;
+        if ($event) $event.preventDefault();
+        if (loading.value) return;
 
-        const { locked, autoUnlock } = this;
+        resetLock();
 
-        if(locked && autoUnlock)
-            this.unlock();
+        const delegate = pending(async () => {
+            const { url, expire } = await forumsApi.getAttachmentDirectUrl(props.attachment.attachmentId);
 
-        this.tooltip = new bootstrap.Tooltip(this.$refs.tooltip, {
-            html:true,
-            title: ()=>{ return this.tooltipMessageHtml; }
-        });
+            directUrl.value = url;
+            expiresOn.value = expire;
 
-    },
-}
+            if (expire) {
+                const expiresOnDate = new Date(expire);
+                const expiresMs = Math.max(expiresOnDate.getTime() - Date.now(), 0);
 
-async function unlock($event) {
+                if (expiresMs) {
+                    timer = setTimeout(() => resetLock(), expiresMs);
+                }
+            }
+        }, 'loading');
 
-    let { attachment, locked, loading } = this;
-    let { attachmentId } = attachment;
+        delegate.call({ loading }); //todo need to verify
+    };
 
-    if(!locked) return;
-    if($event) $event.preventDefault();
-    if(loading) return;
+    const resetLock = () => {
+        if (timer) clearTimeout(timer);
 
-    this.resetLock();
+        timer = null;
+        directUrl.value = null;
+    };
 
-    const delegate = pending(async ()=>{
-        const forumsApi = new ForumsApi();
-        const { url, expire } = await forumsApi.getAttachmentDirectUrl(attachmentId);
+    const encodeTextToHtml = (text) => {
+        return encodeHtml(text).replace(/\n/g, "<br>\n");
+    };
 
-        this.directUrl = url;
-        this.expiresOn = expire;
-
-        if(expire) {
-            const expiresOn = new Date(expire);
-            const expiresMs = Math.max(expiresOn.getTime() - Date.now(), 0); // total ms
-            
-            if(expiresMs)
-                this.timer = setTimeout(() => this.resetLock(), expiresMs);
+    onMounted(() => {
+        if (locked.value && props.autoUnlock) {
+            unlock();
         }
 
-    }, 'loading');
-
-    delegate.call(this);
-}
-
-function resetLock() {
-
-    const { timer } = this;
-
-    if(timer) clearTimeout(timer);
-
-    this.timer = null;
-    this.directUrl = null;
-}
-
-function sizeText() {
-
-    const { size } = this.attachment;
-
-    if(size<1024)       return this.$t('sizeB',  {size : size }); 
-    if(size/1024 <1024) return this.$t('sizeKB', {size : (size/1024).toFixed(1)}); 
-
-    return this.$t('sizeMB', {size : (size/1024/1024).toFixed(1)});
-}
-function tooltipMessageHtml() {
-
-    const { isPublic, locked, loading } = this;
-
-    if(isPublic) return '';
-    if(loading)  return `<i class="fa fa-cog fa-spin"></i>${ encodeTextToHtml(this.$t('attachmentUnlocking')) }`;
-    if(locked)   return `<i class="fa fa-lock"></i>${ encodeTextToHtml(this.$t('attachmentLocked')) }`;
-
-    return `<i class="fa fa-check"></i>${ encodeTextToHtml(this.$t('attachmentUnlocked')) }`;
-}
-
-function encodeTextToHtml(text) {
-    return encodeHtml(text).replace('/\n/g', "<br>\n");
-}
-
+        if (tooltip.value) {
+            new Tooltip(tooltip.value, {
+                html: true,
+                title: () => tooltipMessageHtml.value
+            });
+        }
+    });
+    // beforeDestroy : resetLock,
+    onBeforeUnmount(() => {
+        resetLock();
+        const tooltipInstance = Tooltip.getInstance(tooltip.value);
+        if (tooltipInstance) {
+            tooltipInstance.dispose();
+        }
+    });
 </script>
 
 <style scoped>
-
 .deleted {
     text-decoration: line-through;
 }
-
 </style>
