@@ -14,7 +14,8 @@ app.directive("viewLmoReference", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "IStorage", "$filter", '$q', function ($scope, storage, $filter, $q) {
+		controller: ["$scope", "IStorage", "$filter", '$q', '$rootScope',
+			 function ($scope, storage, $filter, $q, $rootScope) {
 
 
 			// $scope.document = $scope.model;
@@ -54,6 +55,15 @@ app.directive("viewLmoReference", [function () {
 						});
 			}
 
+
+			$rootScope.$on('evt:updateLinkedRecordRevision', function(evt, ids){
+				
+				const currentId = ids.find(e=>e.identifier == $scope.document?.identifier)
+				if(currentId?.latestRevision > currentId?.currentRevision){
+					loadReferenceDocument(`${currentId.identifier}@${currentId.latestRevision}`);
+				}
+				
+			});
 		 }] //controller
 	};
 }]);
