@@ -3,8 +3,10 @@ import _ from 'lodash';
 import template from "text!./view-record-reference.directive.html";
 import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
+import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', function (storage, $timeout, translationService) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope',
+	 function (storage, $timeout, translationService, $rootScope) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -41,9 +43,9 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 		        }
 		    });
 
-			$scope.refreshRecord = function(identifier){
+			$scope.refreshRecord = function(identifier, cacheBuster){
 				$scope.loading = true;
-				loadReferenceDocument(identifier)
+				return loadReferenceDocument(identifier, cacheBuster)
 				.then(function(data) {
 					$scope.document = data;
 					
@@ -71,7 +73,10 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				.finally(function(){$scope.loading = false;});
 			}
 
-			function loadReferenceDocument(identifier){
+			function loadReferenceDocument(identifier, cacheBuster){
+				
+				//cacheBuster used only to bust cache for contactOrganization reference.
+
 				let headers = {};
 				var focalPointRegex = /^52000000cbd022/;
 				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
@@ -81,7 +86,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 						.then(function(result){
 							//TODO: throw error if the documentType != 'focalPoint'
 							if(result?.data?.body?.contactOrganization){
-								return storage.documents.get(result.data.body.contactOrganization.identifier, { info : true})
+								return storage.documents.get(result.data.body.contactOrganization.identifier, { info : true, cacheBuster})
 								.then(function(organizationDetails){
 									result.data.body.contactOrganizationDetail = { ...organizationDetails.data.body, info:organizationDetails.data,  deletedOn:organizationDetails.data.deletedOn};
 									return result.data;
@@ -138,6 +143,20 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				return false;
 			};
 
+			// if the parent directive finds that there is a latest version of the linked record fetch the latest one
+			// since http calls are cached.
+			$rootScope.$on('evt:updateLinkedRecordRevision', async function(evt, ids){
+				
+				const identifier = documentIdWithoutRevision($scope.model?.identifier);
+				const currentId = ids.find(e=>e.identifier == identifier)
+				
+				if(currentId?.latestRevision > currentId?.currentRevision){					
+					$scope.revisionLoading = true;			
+					await $scope.refreshRecord(`${currentId.identifier}@${currentId.latestRevision}`, new Date().getTime());
+					$scope.revisionLoading = false;
+				}
+				
+			});
 		 }
 	};
 }]);
