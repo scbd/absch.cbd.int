@@ -404,18 +404,24 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 									: storage.drafts.security.canCreate(identifier, schema); // has no draft
 
 								qCanEdit.then(function (isAllowed) {
-
-									$scope.internalCanEdit = isAllowed || false;
-
-								}).then(null, function (error) {
-
-									$scope.internalCanEdit = false;
+									//If the view is rendered before $scope.internalCanEdit is updated, the ng-if directive won’t reflect the new value until the digest cycle runs again.
+									$scope.$applyAsync(function () {
+										$scope.internalCanEdit = isAllowed || false;
+									});
+								}).catch(function (error) {
+									$scope.$applyAsync(function () {
+										$scope.internalCanEdit = false;
+									});
 								});
 							}
 
 							return $scope.internalCanEdit === true;
 						})
-					};
+						.catch(function (error) {
+								console.error("Error fetching user:", error);
+								return false;
+						});
+					}
 
 					async function compareWithPrev(){
 						//timeout so that the directive is rendered.
@@ -470,7 +476,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 								directiveHtml 	= dirInfo.directiveHtml || directiveHtml;
 							}
 							$element.find(divSelector).empty().append($compile(directiveHtml)($scope));
-							$timeout(function(){canEdit()}, 1000) //verify if user can edit to show edit button
+							canEdit();
 						});
 
 					}
