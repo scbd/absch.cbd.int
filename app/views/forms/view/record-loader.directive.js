@@ -20,6 +20,7 @@ import printHeaderTemplate from 'text!./print-header.html';
 import printFooterTemplate from 'text!./print-footer.html';
 import shareRecord from '~/components/common/share-record.vue';
 import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
+import '~/views/forms/view/directives/validate-referenced-record-version';
 
 const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 	app.run(function($templateCache){
