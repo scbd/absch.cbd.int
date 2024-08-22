@@ -10,6 +10,8 @@ import 'ck-editor-css';
 import toasterMessagesTranslations from '~/app-text/views/directives/toaster-messages.json';
 import workflowButtonsT from '~/app-text/views/directives/workflow-arrow-buttons.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
+import cbdAddNewViewArticle from '~/components/common/cbd-add-new-view-article.vue'
+
 const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
@@ -60,6 +62,11 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
 				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
+                
+
+                $scope.vueComponent = {
+                    components: { cbdAddNewViewArticle }
+                }
                 
                 $scope.isDialog                    = $attr.isDialog||false;
                 $scope.documentType                = $filter("mapSchema")($attr.documentType||$route.current.$$route.documentType);
@@ -836,16 +843,14 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 
                         $scope.loading = true;
                         $scope.blockText        = 'loading Information about the form';
+                        $scope.articleAdminTags = ['edit-form', realm.value.replace(/(\-[a-zA-Z]{1,5})/, ''), $filter("urlSchemaShortName")(schema)];
 
                         var ag = [];
-                        ag.push({"$match":{"adminTags": { "$all" :
-                            [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value.replace(/(\-[a-zA-Z]{1,5})/, '')),
-                                encodeURIComponent($filter("urlSchemaShortName")(schema))]}}
-                        });
+                        ag.push({"$match":{"adminTags": { "$all" : $scope.articleAdminTags.map(encodeURIComponent) }}});
                         ag.push({"$project" : {"title":1, "content":1, "_id":1}});
                         
                         var qs = {
-                        "ag" : JSON.stringify(ag)
+                            "ag" : JSON.stringify(ag)
                         };
 
                         articlesService.getArticles(qs, true).then(function(data){

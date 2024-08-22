@@ -5,11 +5,13 @@
             {{ t("loading") }}...
         </div>
         <div v-if="!loading && viewArticle">
-            <cbd-view-article :article="viewArticle" :show-cover-image="showCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
             <cbd-add-new-view-article v-if="showEdit && hasEditRights" 
                 :tags="tags" :admin-tags="adminTags" :custom-tags="customTags" :id="(viewArticle||{})._id" :target="target"
                 class="btn btn-secondary float-end">
             </cbd-add-new-view-article>         
+            
+            <cbd-view-article :article="viewArticle" :show-cover-image="showCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
+            
             <div v-if="!viewArticle" class="article-not-found-section">
                 <slot name="missingArticle">
                 </slot>

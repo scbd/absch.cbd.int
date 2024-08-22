@@ -8,6 +8,9 @@
 				<span v-if="faqFilterTag && faqFilterTag!='faq'">
 					{{ t("for") }} <strong>{{faqFilterTag}}</strong></span> 
 				<strong>({{faqCount}})</strong>
+				<cbd-add-new-view-article v-if="hasEditRights" 
+						:admin-tags="adminTags" target="_self" class="btn btn-secondary float-end">
+					</cbd-add-new-view-article>
 				<hr/>
 			</h4>
             <main class="mb-4">
@@ -36,15 +39,17 @@
     </div>
 </template>
 <script setup>
-	import { ref, onMounted } from 'vue';
+	import { ref, onMounted, computed } from 'vue';
 	import Paginate from '../common/pagination.vue';
+    import cbdAddNewViewArticle from '~/components/common/cbd-add-new-view-article.vue';
 	import ArticlesApi from './article-api';
 	import { loadKbCategories , getUrl , getRealmArticleTag  } from '../../services/composables/articles.js'
 	import { lstring } from './filters';
 	import { useI18n } from 'vue-i18n';
 	import messages from '../../app-text/components/kb.json';
 	import { useRealm } from '../../services/composables/realm.js';
-	import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js"; 
+	import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js";
+    import { OASIS_ARTICLE_EDITOR_ROLES } from '~/constants/roles.js'; 
     const auth = useAuth();
 	const realm = useRealm();
 	const { t, locale } = useI18n({ messages });
@@ -58,7 +63,10 @@
 	// let pageNumber = 1;
 	let pageNumber = ref(1);
 	let recordsPerPage = 10;
+
 	const realmArticleTag = getRealmArticleTag();
+    const hasEditRights = computed(()=> auth?.check(OASIS_ARTICLE_EDITOR_ROLES));
+    const adminTags = computed(()=>[realmArticleTag, 'faq', faqFilterTag.value??'faq']);
 	
 	onMounted(async ()=>{
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
@@ -98,8 +106,7 @@
 				const realmTag = realmArticleTag;    
 				const q = { 
 					$and : [
-						{ adminTags : { $all : [realmTag, 'faq']}},
-						{ adminTags : { $all : [ faqFilterTag.value ? faqFilterTag.value : 'faq']} }
+						{ adminTags : { $all : adminTags.value?.map(encodeURIComponent)}}
 					]
 				};
 				const f = { 
