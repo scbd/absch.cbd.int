@@ -98,8 +98,8 @@
                                                         
                                                         <td class="tableexport-string">{{row.rec_schema}}</td>
                                                         <td class="tableexport-string">
-                                                            <a rel="noopener" target="_blank" :href="`database/row.rec_uniqueIdentifier||''`">
-                                                                {{capitalize(row.rec_uniqueIdentifier)}}
+                                                            <a rel="noopener" target="_blank" :href="`database/${encodeURIComponent(row.rec_uniqueIdentifier || row.identifier)}`">
+                                                                {{ (row.rec_uniqueIdentifier).toUpperCase()}}
                                                             </a>
                                                         </td>
                                                         <td class="tableexport-string">{{row.rec_government}}</td>
