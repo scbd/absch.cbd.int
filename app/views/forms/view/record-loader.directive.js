@@ -391,26 +391,31 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
 							if (!$scope.internalDocumentInfo)
 								return false;
+
 							if ($scope.internalCanEdit === undefined) {
 
 								$scope.internalCanEdit = null; // avoid recall => null !== undefined
 
-								var hasDraft = !!$scope.internalDocumentInfo.workingDocumentCreatedOn;
 								var identifier = $scope.internalDocumentInfo.identifier;
 								var schema = $scope.internalDocumentInfo.type;
 
-								var qCanEdit = hasDraft
-									? storage.drafts.security.canUpdate(identifier, schema)  // has draft
-									: storage.drafts.security.canCreate(identifier, schema); // has no draft
+								//verify draft exists to run the security check
+								storage.drafts.exists(identifier).then(exists=>{
+									
+									var qCanEdit = exists
+										? storage.drafts.security.canUpdate(identifier, schema)  // has draft
+										: storage.drafts.security.canCreate(identifier, schema); // has no draft
 
-								qCanEdit.then(function (isAllowed) {
+									qCanEdit.then(function (isAllowed) {
 
-									$scope.internalCanEdit = isAllowed || false;
+										$scope.internalCanEdit = isAllowed || false;
 
-								}).then(null, function (error) {
+									}).then(null, function (error) {
 
-									$scope.internalCanEdit = false;
-								});
+										$scope.internalCanEdit = false;
+									});
+								})
+								.catch(e=>$scope.internalCanEdit = false);
 							}
 
 							return $scope.internalCanEdit === true;
