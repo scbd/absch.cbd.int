@@ -40,12 +40,12 @@
         showCoverImage  : { type: Boolean, required: false, default:true         },
         showEdit        : { type: Boolean, required: false, default:false        },
         article         : { type: Object,  required: false, default:undefined    },
-        query           : { type: Object,  required: true                        },
+        query           : { type: Object,  required: false                       },
         tags 		    : { type: Array  , required: false, default:[]           }, // [] of tag id's
         customTags 	    : { type: Array  , required: false, default:[]           }, // [] of customTag id's
         adminTags 	    : { type: Array  , required: false, default:[]           }, // [] of adminTag text
         target          : { type: String , required: false, default: '_self'     },
-        coverImageSize  : { type: String, required: false, default: '800x800'    }
+        coverImageSize  : { type: String , required: false, default: '800x800'   }
     });
 
     const hasEditRights = computed(()=> auth?.check(['oasisArticleEditor', 'Administrator']));
