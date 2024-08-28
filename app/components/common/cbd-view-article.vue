@@ -15,6 +15,8 @@
     import { lstring } from '../../components/kb/filters';
     import cbdArticleCoverImage from '../../components/common/cbd-article-cover-image.vue';
     import { sanitizeHtml } from "../../services/html.sanitize";
+    import { useI18n } from 'vue-i18n';
+    const  { locale } = useI18n();
     
     const props = defineProps({
         showCoverImage: { type: Boolean, required: false, default: true },
@@ -23,7 +25,7 @@
     });
 
     const articleContent = computed(() => {
-        const unsafeHtml = lstring(props.article?.content || '');
+        const unsafeHtml = lstring(props.article?.content || '', locale.value);
         const safeHtml = sanitizeHtml(unsafeHtml);
 
         return safeHtml;
