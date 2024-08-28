@@ -65,7 +65,7 @@ const route = useRoute().value;
 const forumsApi = new ForumsApi({ tokenReader: () => auth.token() });
 
 const props = defineProps({
-  threadId: Number,
+  threadId: [Number, String],
 });
 
 const forum = ref(null);
