@@ -5,8 +5,8 @@ import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope',
-	 function (storage, $timeout, translationService, $rootScope) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr',
+	 function (storage, $timeout, translationService, $rootScope, searchService, solr) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -73,6 +73,29 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				.finally(function(){$scope.loading = false;});
 			}
 
+			async function getLatestVersion(identifier) {
+				let latestRevisionIdentifier = identifier;
+				const identifierWithoutRevision = documentIdWithoutRevision(identifier);
+				const queryParameters = {
+					query: `identifier_s:${solr.escape(identifierWithoutRevision)}`,
+					rowsPerPage: 1,
+					fields: 'identifier_s,_revision_i,uniqueIdentifier_s',
+				};
+			
+				try {
+					const searchServiceResult = await searchService.list(queryParameters, null);
+			
+					if (searchServiceResult.data.response.docs.length) {
+						const { _revision_i: latestRevision, uniqueIdentifier_s: uniqueIdentifier } = searchServiceResult.data.response.docs[0];
+						latestRevisionIdentifier = `${identifierWithoutRevision}@${latestRevision}`;
+					}
+				} catch (error) {
+					console.error('Error fetching latest version:', error);
+				}
+			
+				return latestRevisionIdentifier;
+			}
+
 			function loadReferenceDocument(identifier, cacheBuster){
 				
 				//cacheBuster used only to bust cache for contactOrganization reference.
@@ -86,11 +109,26 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 						.then(function(result){
 							//TODO: throw error if the documentType != 'focalPoint'
 							if(result?.data?.body?.contactOrganization){
-								return storage.documents.get(result.data.body.contactOrganization.identifier, { info : true, cacheBuster})
-								.then(function(organizationDetails){
-									result.data.body.contactOrganizationDetail = { ...organizationDetails.data.body, info:organizationDetails.data,  deletedOn:organizationDetails.data.deletedOn};
-									return result.data;
-								})
+								console.log('old contactOrganization identifier : ',result.data.body.contactOrganization.identifier)
+								// Get the latest version of contactOrganization
+								let contactOrganizationIdentifier = result.data.body.contactOrganization.identifier;
+
+								getLatestVersion(result.data.body.contactOrganization.identifier)
+								.then(function(contactOrganizationResult) {
+									contactOrganizationIdentifier = contactOrganizationResult; 
+									console.log('updated contactOrganization identifier : ',contactOrganizationIdentifier);
+								
+									return storage.documents.get(contactOrganizationIdentifier, { info : true, cacheBuster})
+									.then(function(organizationDetails){
+										result.data.body.contactOrganizationDetail = { ...organizationDetails.data.body, info:organizationDetails.data,  deletedOn:organizationDetails.data.deletedOn};
+										return result.data;
+									})
+								
+								}).catch(function(error) {
+									console.error('Error:', error);
+								});
+
+								
 							}
 							return result.data;
 						})
