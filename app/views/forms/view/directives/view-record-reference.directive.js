@@ -109,14 +109,12 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 						.then(function(result){
 							//TODO: throw error if the documentType != 'focalPoint'
 							if(result?.data?.body?.contactOrganization){
-								console.log('old contactOrganization identifier : ',result.data.body.contactOrganization.identifier)
 								// Get the latest version of contactOrganization
 								let contactOrganizationIdentifier = result.data.body.contactOrganization.identifier;
 
-								getLatestVersion(result.data.body.contactOrganization.identifier)
+return getLatestVersion(result.data.body.contactOrganization.identifier)
 								.then(function(contactOrganizationResult) {
 									contactOrganizationIdentifier = contactOrganizationResult; 
-									console.log('updated contactOrganization identifier : ',contactOrganizationIdentifier);
 								
 									return storage.documents.get(contactOrganizationIdentifier, { info : true, cacheBuster})
 									.then(function(organizationDetails){
