@@ -47,10 +47,10 @@
 
     const tooltipMessageHtml = computed(() => {
         if (isPublic.value) return '';
-        if (loading.value) return `<i class="fa fa-cog fa-spin"></i>${encodeTextToHtml(t('attachmentUnlocking'))}`;
-        if (locked.value) return `<i class="fa fa-lock"></i>${encodeTextToHtml(t('attachmentLocked'))}`;
+        if (loading.value) return `<i class="fa fa-cog fa-spin"></i>${t('attachmentUnlocking')}`;
+        if (locked.value) return `<i class="fa fa-lock"></i>${t('attachmentLocked')}`;
 
-        return `<i class="fa fa-check"></i>${encodeTextToHtml(t('attachmentUnlocked'))}`;
+        return `<i class="fa fa-check"></i>${t('attachmentUnlocked')}`;
     });
 
     const deleted = computed(() => !!props.attachment.deletedBy);
@@ -106,7 +106,7 @@
         timer = null;
         directUrl.value = null;
     };
-
+    //Not using, This function is useful when you need to display user-generated text (such as comments or posts)
     const encodeTextToHtml = (text) => {
         return encodeHtml(text).replace(/\n/g, "<br>\n");
     };
