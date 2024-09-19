@@ -1310,13 +1310,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         tagQueries.government  =  countryQuery;
                         tagQueries.region      =  regionQuery;
 
-                        //special query for Contact as only records which have reference contact are searchable.
-                        tagQueries.contact     =  '(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))';
-                        const excludeSchemas = $attrs.excludeSchemas?.split(',')||[];
-                        if(excludeSchemas.length){
-                            tagQueries.excludeSchemas =  `(*:* NOT schema_s : (${excludeSchemas.join(' ')}))`
-                        }
-                       // end special query 
+                        buildSpecialQueries(tagQueries);
+
                         if(schemaSubQuery.freeTextQuery){ //append subfilters query to general query to benefit highlighting and relevance
                             query = solr.andOr(_.compact([query, tagQueries.schemaSub]), 'AND')
                         }
@@ -1638,6 +1633,31 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         // return solr.escape(();
 
                         return queries.map(e=>e.query||e.id).join(' AND ');
+                    }
+
+                    function buildSpecialQueries(tagQueries){
+                        /////// Special query /////////
+                        var filters = getSelectedFilters('schema')
+                        //special query for Contact as only contact records which have been referenced are searchable.
+                        if(!filters?.length || $scope.setFilters['contact']){
+                            tagQueries.contact     =  '(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))';                            
+                        }
+
+                        // Mainly done for Submission. 
+                        let excludeSchemas = $attrs.excludeSchemas?.split(',')||[];
+                        if(excludeSchemas?.length){
+                            // if exclude schemas are provide but the url also has search query id
+                            // it means there is explicit query, so ignore the schema (if already selected) 
+                            // in exclude query                            
+                            excludeSchemas = excludeSchemas.filter(e=>{
+                                // searchShareQueryId means saved query, only exclude schemas that are not in filters
+                                return !($location.search()?.searchShareQueryId && $scope.setFilters[e])
+                            })
+                            if(excludeSchemas.length){
+                                tagQueries.excludeSchemas =  `(*:* NOT schema_s : (${excludeSchemas.join(' ')}))`
+                            }
+                        }                        
+                        /////// end special query ////////
                     }
 
                     function getCountryList(id, list){
