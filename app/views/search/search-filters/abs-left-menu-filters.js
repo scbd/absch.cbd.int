@@ -281,6 +281,12 @@ export const absLeftMenuFilters = {
 			"term": "cnaJurisdictions",
 			"title": absFilters.jurisdiction,
 			"field": "jurisdiction_s"
+		},
+		{
+			"type": "yesNo",
+			"title": absFilters.absCheckpointReferencedByCPC,
+			"field": "referencedByCPC_ss",
+			"fieldfn": "buildReferencedByCPCQuery"
 		}
 		// ,{
 		// 	"type": "thesaurus",
