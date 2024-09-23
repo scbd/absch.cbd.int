@@ -195,7 +195,7 @@
 					<span class="d-none d-md-inline">{{::('countryListTranslation.export'|$translate)}}</span>
 				</button>
 			</div>
-			<div class="col-md-7 evenly-spaced center-text d-none d-lg-grid justify-content-between">
+			<div class="col-md-7 evenly-spaced text-center d-none d-lg-flex justify-content-between">
 				<div ng-repeat="header in headerCount" class="text-center">
 					<span class="cursor-pointer" ng-click="sortTable(header.schema)" data-bs-toggle="tooltip"
 						title="{{header.title|lstring:locale}}" data-container="body">
@@ -247,7 +247,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-7 evenly-spaced justify-content-between center-text d-none d-md-grid text-nowrap mt-1">
+			<div class="col-md-7 evenly-spaced justify-content-between text-center d-none d-lg-flex text-nowrap mt-1">
 				<span class="color-litegrey text-center" ng-repeat="schema in country.schemas"
 					ng-click="gotoCountryProfile(country.code, schema, $event)">
 					<span ng-bind="schema.shortCode"></span> <br class="hidden-sm">
