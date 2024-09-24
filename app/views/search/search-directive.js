@@ -45,7 +45,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
                             buildContactsUserCountryfn : buildContactsUserCountryfn,
                             buildCustomConfidentialQueryFn : buildCustomConfidentialQueryFn,
-                            buildReferencedByCPCQuery: buildReferencedByCPCQuery
+                            buildReferencedByQuery: buildReferencedByQuery
                         }
                         translationService.set('searchDirectiveT', searchDirectiveT);
                         var leftMenuSchemaFieldMapping;
@@ -1561,12 +1561,12 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                 ')'
                     }
 
-                    function buildReferencedByCPCQuery(filter){
-                        if(filter.filterValue == true){
-                            return 'referencedByCPC_ss:*'
+                    function buildReferencedByQuery(filter){
+                        if(filter.filterValue == true && filter.field!= undefined){
+                            return filter.field+':*'
                         }
-                        else if(filter.filterValue == false)
-                            return '-referencedByCPC_ss:[* TO *]'
+                        else if(filter.filterValue == false && filter.field!= undefined)
+                            return '-'+filter.field+':[* TO *]'
                         
                     }
                     function buildExpiredPermitQuery(filter){

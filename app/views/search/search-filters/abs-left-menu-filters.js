@@ -242,7 +242,8 @@ export const absLeftMenuFilters = {
 		{
 			"type": "yesNo",
 			"title": absFilters.absPermitReferencedByCPC,
-			"field": "referencedByCPC_ss"
+			"field": "referencedByCPC_ss",
+			"fieldfn": "buildReferencedByQuery"
 		}
 		,
 		{
@@ -286,7 +287,7 @@ export const absLeftMenuFilters = {
 			"type": "yesNo",
 			"title": absFilters.absCheckpointReferencedByCPC,
 			"field": "referencedByCPC_ss",
-			"fieldfn": "buildReferencedByCPCQuery"
+			"fieldfn": "buildReferencedByQuery"
 		}
 		// ,{
 		// 	"type": "thesaurus",
