@@ -542,7 +542,8 @@ export const bchLeftMenuFilters = {
             "query": {
                 "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
-                "searchFields":["scientificName_s"]
+                "searchFields":["scientificName_s"],
+                "s":"scientificName_s asc"
             },
             "title": bchFilters.ParentalOrganismScientificName,
             "field": "lmoIdentifiers_ss"
