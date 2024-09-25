@@ -101,16 +101,13 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:commonNames_EN_ss,url_ss",
-                "fq": [ "schema_s:organism AND commonNames_EN_ss:*"],
-                "searchFields":["commonNames_EN_txt"],
-                "s":"commonNames_EN_ss asc"
+                "fl": "identifier_s,rec_title:commonNames_EN_txt,url_ss",
+                "fq": [ "schema_s:organism AND commonNames_EN_txt:*"],
+                "searchFields":["commonNames_EN_txt"]
             },
             "title": bchFilters.ParentalOrganismCommonName,
             "field": "lmoIdentifiers_ss",
-            "customResultFn":"organismNamesResult",
-            "customQueryFn":"organismNamesQuery"
-
+            "customResultFn":"convertArrayTitleResult"
         },
         {
             "type": "solrRecords",
@@ -545,7 +542,8 @@ export const bchLeftMenuFilters = {
             "query": {
                 "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
-                "searchFields":["scientificName_s"]
+                "searchFields":["scientificName_s"],
+                "s":"scientificName_s asc"
             },
             "title": bchFilters.ParentalOrganismScientificName,
             "field": "lmoIdentifiers_ss"
