@@ -100,7 +100,7 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					function shareRecordsFunctions () {
 	
 						provide('getQuery', safeDelegate($scope, ()=>{
-							let recordKey = $filter("uniqueID")($scope.internalDocument.info);
+							let recordKey = $filter("uniqueID")($scope.internalDocument);
 							const type = "chm-document";
 							return {type, recordKey}
 						}));

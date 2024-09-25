@@ -262,10 +262,10 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                     }
 
                     $scope.customQueries = {
-                        organismNamesQuery
+                        organismNamesQuery // ToDo: Not in use, needs to be removed.
                     }
                     $scope.customResult = {
-                        organismNamesResult,
+                        organismNamesResult, // ToDo: Not in use, needs to be removed.
                         convertArrayTitleResult
                     }
 
@@ -277,7 +277,7 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                         }, 200)
                     });
 
-
+                    // ToDo: Not in use, needs to be removed.
                     function organismNamesQuery(filter, query){
                         query = query || {};
 
@@ -285,6 +285,7 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
 
                         return query;
                     }
+                    // ToDo: Not in use, needs to be removed.
                     function organismNamesResult(filter, data, query){
                         const newResult = [];
 
