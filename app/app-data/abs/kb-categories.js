@@ -4,6 +4,13 @@ const categoryTitle = mergeTranslationKeys(categoryTitleTranslations);
 
 export const categories = [
   {
+    "title": categoryTitle.nr1,
+    "adminTags": [
+      "nr1"
+    ],
+    "articles": []
+  },
+  {
     "title": categoryTitle.announcements,
     "adminTags": [
       "absch-announcement"
@@ -234,13 +241,6 @@ export const categories = [
     "title": categoryTitle.donors,
     "adminTags": [
       "donors"
-    ],
-    "articles": []
-  },
-  {
-    "title": categoryTitle.nr1,
-    "adminTags": [
-      "nr1"
     ],
     "articles": []
   }
