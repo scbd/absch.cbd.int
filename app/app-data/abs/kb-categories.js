@@ -236,6 +236,13 @@ export const categories = [
       "donors"
     ],
     "articles": []
+  },
+  {
+    "title": categoryTitle.nr1,
+    "adminTags": [
+      "nr1"
+    ],
+    "articles": []
   }
 
 ]
