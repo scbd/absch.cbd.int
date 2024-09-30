@@ -243,7 +243,7 @@ export default ["$scope", "$rootScope", "locale", "$q", "$controller", "$timeout
                 getPartyStatus(document.government);
                 $scope.questionAnswers = {};
                 if (document && document.header.identifier) {
-                    if($routeParams?.identifier && $scope.document.government?.identifier){
+                    if($scope.document.government?.identifier){
                         loadPreviousReport($scope.document.government.identifier);
                     }
                     _.forEach(document, function (element, key) {
