@@ -14,6 +14,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
         var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
         translationService.set('reportsT', reportsT); 
         $scope.overview = {};
+        $scope.self = $scope ; 
             //========================================
             //
             //
