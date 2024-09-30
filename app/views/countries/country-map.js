@@ -353,12 +353,14 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                 mapCountry.originalColorReal = xkMapCountry.colorReal
               }        
 
-              if (($scope.isCHM && country.isInbetweenParty))
-                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.inBetweenParty;
-              else if (country.isParty)
-                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.party;
-              else
-                  mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.nonParty;
+              if($scope.isCHM){
+                  if (country.isInbetweenParty)
+                      mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.inBetweenParty;
+                  else if (country.isParty)
+                      mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.party;
+                  else
+                      mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.nonParty;
+              }
 
         }
         function changeSelectedColor(code, color) {
