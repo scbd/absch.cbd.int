@@ -120,7 +120,7 @@
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.amendedMeasures">
-							<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+							<div view-record-reference ng-model="item" locale="locale"></div>
 						</li>
 					</ul>
 				</div>
@@ -147,7 +147,8 @@
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.measureAmendedBy">
-						<div view-record-reference ng-model="item.identifier_s" locale="locale"></div>
+						<!-- Todo: not sure identifier_s -->
+						<div view-record-reference ng-model="item" locale="locale"></div> 
 					</li>
 				</ul>
 			</div>
@@ -159,7 +160,7 @@
 				<label>{{::('viewMeasureT.relatedTo'|$translate)}}</label>
 				<ul class="list">
 					<li ng-repeat="item in document.linkedMeasures">
-						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+						<div view-record-reference ng-model="item" locale="locale"></div>
 					</li>
 				</ul>
 			</div>
