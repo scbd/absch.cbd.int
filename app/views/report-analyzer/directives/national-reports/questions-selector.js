@@ -41,7 +41,7 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 translationService.set('questionSelectorT', questionSelectorT);
                 $scope.isBch        = realm.is('BCH');
                 $scope.selectedReportType = $scope.selectedReportType || _.last($scope.reportData, function(r){return r.dataUrl}).type;
-                
+                 const latestReportType = $scope.selectedReportType;
                 $scope.selectedRegions    = $scope.selectedRegions    || DefaultRegions.concat();
                 $scope.allSelected = true;
                 $scope.regionsMap = {};
@@ -69,11 +69,18 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //
                 //====================================
-                $scope.$watch('selectedReportType', async function (reportType) {
-
+                $scope.$watch('selectedReportType', async function (reportType) { 
+                    if(!$scope.selectedReportType){
+                       $scope.selectedReportType = latestReportType; 
+                       $scope.allSelected = true;
+                       $scope.allSectionsClicked();
+                    } 
                     if(!reportType || !$scope.reportData)
                         return;
-                    $scope.$emit('onReportTypeChanged', reportType);
+
+                    if (reportType) {
+                        $scope.$emit('onReportTypeChanged', reportType);
+                    }  
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
 
                     const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/(\w+)$/i;
