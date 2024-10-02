@@ -709,7 +709,6 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 }
 			};
 					
-            // ToDo: Not in use, needs to be removed.
 			$scope.isMeasure = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
 						return (doc.identifier_s||doc.header.identifier)==removeRevisionNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "measure"
