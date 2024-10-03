@@ -41,7 +41,8 @@ app.directive("viewMeasure", ['translationService', function (translationService
                             var listQuery = {
                                 query: 'realm_ss:' + solr.escape(appConfigService.currentRealm.toLowerCase()) +
 								 ' AND schema_s:measure AND NOT virtual_b:* AND amendedMeasures_ss:' + 
-								 solr.escape($scope.document.header.identifier)+'*'
+								 solr.escape($scope.document.header.identifier)+'*',
+								 additionalFields : 'identifier:identifier_s'
                             };
                             queries.push(searchService.list(listQuery));
                         }

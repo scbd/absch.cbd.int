@@ -17,7 +17,7 @@
 				<div class="km-value" compare-val="amendedRecords">
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">
-							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
+							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
 						</li>
 					</ul>						
 				</div>
@@ -382,7 +382,7 @@
 			<div  class="km-value" compare-val="pointOfContact">
 				<ul class="list">
 					<li ng-repeat="item in document.pointOfContact">
-						<view-record-reference ng-model="item.identifier"></view-record-reference>
+						<view-record-reference ng-model="item"></view-record-reference>
 					</li>
 				</ul>
 			</div>
@@ -438,7 +438,7 @@
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.modifiedOrganisms">
-						<view-record-reference ng-model="item.identifier"></view-record-reference>
+						<view-record-reference ng-model="item"></view-record-reference>
 					</li>
 				</ul>
 			</div>
@@ -449,7 +449,7 @@
 			<div  class="km-value" compare-val="riskAssessments">
 				<ul class="list">
 					<li ng-repeat="item in document.riskAssessments">
-						<view-record-reference ng-model="item.identifier"></view-record-reference>
+						<view-record-reference ng-model="item"></view-record-reference>
 					</li>
 				</ul>
 			</div>
