@@ -54,10 +54,7 @@
                                 {{::('documentSelectorT.revisionUpdated'|$translate)}}, 
                                 {{upgradedReferencedIdentifiers[doc.identifier].oldRevision}} <i class="bi bi-shuffle"></i> {{upgradedReferencedIdentifiers[doc.identifier].newRevision}}
                             </small>
-                            <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-record-reference ng-model="doc" 
-                                locale="locale" class="km-value" wait-for-workflow="{{runningWorkflows[doc.identifier] ? 'true':'false'}}"></div>
-                            <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-record-reference ng-model="doc.identifier" 
-                                locale="locale" wait-for-workflow="{{runningWorkflows[doc.identifier] ? 'true':'false'}}"></div>
+                            <div view-record-reference ng-model="doc" locale="locale" class="km-value" wait-for-workflow="{{runningWorkflows[doc.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
                     <tr ng-if="type=='radio' && model">
@@ -70,10 +67,7 @@
                                 {{::('documentSelectorT.revisionUpdated'|$translate)}}, 
                                 {{upgradedReferencedIdentifiers[doc.identifier].oldRevision}} <i class="bi bi-shuffle"></i> {{upgradedReferencedIdentifiers[doc.identifier].newRevision}}
                             </small>
-                            <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-record-reference ng-model="model" 
-                                locale="locale" class="km-value"  wait-for-workflow="{{runningWorkflows[model.identifier] ? 'true':'false'}}"></div>
-                            <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-record-reference ng-model="model.identifier" 
-                                locale="locale"  wait-for-workflow="{{runningWorkflows[model.identifier] ? 'true':'false'}}"></div>
+                            <div view-record-reference ng-model="model" locale="locale" class="km-value" wait-for-workflow="{{runningWorkflows[model.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
                 </table>
