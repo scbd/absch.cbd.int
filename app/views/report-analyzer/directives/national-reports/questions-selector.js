@@ -23,8 +23,8 @@ import questionSelectorT from '~/app-text/views/report-analyzer/directives/natio
     //
     //
     //==============================================
-app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm', 'reportAnalyzerService', 'translationService',
-        function ($http, locale, commonjs, $q, $timeout, realm, reportAnalyzerService, translationService) {
+app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm', 'reportAnalyzerService', 'translationService', '$route',
+        function ($http, locale, commonjs, $q, $timeout, realm, reportAnalyzerService, translationService, $route) {
         return {
             restrict : 'E',
             replace : true,
@@ -70,11 +70,16 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //====================================
                 $scope.$watch('selectedReportType', async function (reportType) { 
-                    if(!$scope.selectedReportType){
-                       $scope.selectedReportType = latestReportType; 
-                       $scope.allSelected = true;
-                       $scope.allSectionsClicked();
-                    } 
+                    if (!$scope.selectedReportType) {
+                        // If reportType param exists, use it, otherwise use latestReportType
+                        if ($route.current.params.reportType) {
+                            $scope.selectedReportType = $route.current.params.reportType;
+                        } else {
+                            $scope.selectedReportType = latestReportType;
+                        }
+                        $scope.allSelected = true;
+                        $scope.allSectionsClicked();
+                    }
                     if(!reportType || !$scope.reportData)
                         return;
 

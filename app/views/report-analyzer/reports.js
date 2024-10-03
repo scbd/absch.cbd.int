@@ -59,6 +59,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 };
                 sessionStorage.setItem('nrAnalyzerData', JSON.stringify(data));
 
+                // $location.url(_.trimEnd($location.path(), '/') + '/analyzer/' + JSON.stringify(data));
                 $location.url(_.trimEnd($location.path(), '/') + '/analyzer/' + $scope.reportType);
             };
            
