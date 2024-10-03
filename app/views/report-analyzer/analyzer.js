@@ -101,8 +101,9 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
 
             $scope.showAnalyzer = showAnalyser;
             // update param after analyzer submit
-            if($scope.selectedReportType !== $route.current.params) {
+            if($scope.selectedReportType !== $route.current.params.reportType) {
                 $route.updateParams({ reportType: $scope.selectedReportType });
+                // $location.search('reportQueryString', JSON.stringify(analyzerUpdatedData)).replace();
             }
         }
 
@@ -110,10 +111,6 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
         //
         //
         //========================================
-        //ToDo: will use this event to change queryString
-        // $scope.$on('onReportTypeChanged', function(event, reportType) {
-        //     $route.updateParams({ reportType: reportType });
-        //  });
         $scope.$on('nr.analyzer.settings', function(){
             analyze(false);            
         });
