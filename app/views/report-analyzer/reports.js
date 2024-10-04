@@ -59,8 +59,10 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 };
                 sessionStorage.setItem('nrAnalyzerData', JSON.stringify(data));
 
-                // $location.url(_.trimEnd($location.path(), '/') + '/analyzer/' + JSON.stringify(data));
-                $location.url(_.trimEnd($location.path(), '/') + '/analyzer/' + $scope.reportType);
+                const path = _.trimEnd($location.path(), '/') + '/analyzer/' + $scope.reportType;
+                const queryString = 'reportQueryString=' + encodeURIComponent(JSON.stringify(data));
+                $location.url(path + '?' + queryString).replace();
+
             };
            
             var DefaultRegions = [
