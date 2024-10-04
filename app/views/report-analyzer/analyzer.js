@@ -27,7 +27,8 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
             //========================================
             try {
 
-                var data = $location.search();
+                var queryString = $location.search();
+                const data = JSON.parse(decodeURIComponent(queryString.reportQueryString));
 
                 if(data.date) {
                     $scope.maxDate = new Date(data.date);
@@ -68,13 +69,14 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
         //
         //========================================
         function saveSettings() {
-            sessionStorage.setItem('nrAnalyzerData', JSON.stringify({
+            $scope.analyzerUpdatedData = {
                 type: $scope.selectedReportType,
                 regions: $scope.selectedRegions,
                 questions: $scope.selectedQuestions,
                 regionsPreset: $scope.selectedRegionsPreset,
                 regionsPresetFilter: $scope.selectedRegionsPresetFilter
-            }));
+            }
+            sessionStorage.setItem('nrAnalyzerData', JSON.stringify($scope.analyzerUpdatedData));
         }
         //========================================
         //
@@ -102,8 +104,9 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
             $scope.showAnalyzer = showAnalyser;
             // update param after analyzer submit
             if($scope.selectedReportType !== $route.current.params.reportType) {
-                $route.updateParams({ reportType: $scope.selectedReportType });
-                // $location.search('reportQueryString', JSON.stringify(analyzerUpdatedData)).replace();
+                const queryString = encodeURIComponent(JSON.stringify($scope.analyzerUpdatedData));
+                $route.updateParams({ reportType: $scope.selectedReportType }); 
+                $location.search('reportQueryString', queryString).replace();   
             }
         }
 
