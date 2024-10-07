@@ -58,12 +58,20 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                     regionsPresetFilter: $scope.selectedRegionsPresetFilter
                 };
                 sessionStorage.setItem('nrAnalyzerData', JSON.stringify(data));
-
+            
                 const path = _.trimEnd($location.path(), '/') + '/analyzer/' + $scope.reportType;
-                const queryString = 'reportQueryString=' + encodeURIComponent(JSON.stringify(data));
-                $location.url(path + '?' + queryString).replace();
+                $location.url(path);
+                // Pass all query string parameters at once
+                $location.search({
+                    type: $scope.selectedReportType,
+                    regions: $scope.selectedRegions,
+                    questions: $scope.selectedQuestions,
+                    regionsPreset: $scope.selectedRegionsPreset,
+                    regionsPresetFilter: $scope.selectedRegionsPresetFilter
+                });
 
             };
+            
            
             var DefaultRegions = [
                 "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
