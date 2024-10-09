@@ -19,7 +19,7 @@
                     <div class="km-value" compare-val>
                         <ul class="list">
                             <li ng-repeat="item in document.organizations" >
-                                <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+                                <div view-record-reference ng-model="item" locale="locale"></div>
                                 <hr ng-if="document.organizations.length > 1 && !$last">
                             </li>
                         </ul>                        
@@ -60,7 +60,7 @@
                 <div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.records" >
-							<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+							<div view-record-reference ng-model="item" locale="locale"></div>
 						</li>
 					</ul>
 				</div>

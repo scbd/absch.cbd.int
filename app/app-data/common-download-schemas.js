@@ -24,7 +24,7 @@ export const downloadSchemas = {
         "phones"          : fieldsT["organization.phones"          ],
         "faxes"           : fieldsT["organization.faxes"           ],
         "emails"          : fieldsT["organization.emails"          ],
-        "websites.url"        : fieldsT["organization.websites"        ],
+        "websites"        : fieldsT["organization.websites"        ],
         "contacts"        : fieldsT["organization.contacts"        ],
         "contactsEmails"  : fieldsT["organization.contactsEmails"  ],
         "organizationType": fieldsT["organization.organizationType"],

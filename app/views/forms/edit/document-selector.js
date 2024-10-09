@@ -708,24 +708,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     $(`#${dialogId} .modal-body .tab-content`).css('max-height', height + 'px');  
                 }
 			};
-
-
-
-			$scope.isContact = function(document){
-				return document && _.some($scope.selectedDocuments, function(doc){
-						return (doc.identifier_s||doc.header.identifier)==removeRevisionNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "contact"
-				});
-			}
-			$scope.isAuthority = function(document){
-				return document && _.some($scope.selectedDocuments, function(doc){
-						return (doc.identifier_s||doc.header.identifier)==removeRevisionNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "authority"
-				});
-			}
-
-			$scope.isFocalPoint = function(document){
-				return document && focalPointRegex.test(document.identifier)
-			}
-
+					
 			$scope.isMeasure = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
 						return (doc.identifier_s||doc.header.identifier)==removeRevisionNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "measure"

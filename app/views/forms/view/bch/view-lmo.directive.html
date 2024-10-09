@@ -75,7 +75,7 @@
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.recipientOrganisms" >						
-						<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
 					</li>
 				</ul>
 			</div>
@@ -127,7 +127,7 @@
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.genes" >						
-						<view-record-reference ng-model='item.identifier' locale="locale" hide-schema='true'></view-record-reference>
+						<view-record-reference ng-model='item' locale="locale" hide-schema='true'></view-record-reference>
 					</li>
 				</ul>
 			</div>
@@ -152,7 +152,7 @@
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.affectedGenes" >						
-						<view-record-reference ng-model='item.identifier' locale="locale" hide-schema='true'></view-record-reference>
+						<view-record-reference ng-model='item' locale="locale" hide-schema='true'></view-record-reference>
 					</li>
 				</ul>
 			</div>
