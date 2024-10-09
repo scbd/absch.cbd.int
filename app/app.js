@@ -18,7 +18,6 @@ import {
     createI18n
 } from 'vue-i18n';
  import { mergeTranslationKeys} from './services/translation-merge';
-
  import { ApiOptions } from '@scbd/common'; 
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", 'leaflet-directive']));
@@ -81,7 +80,7 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
   const $i18n   = createI18n({ locale, fallbackLocale: 'en', legacy:false});
   const $route  = createRoute ({ plugins: { ngVue }});
   const $router = createRouter ({ plugins: { ngVue }});
-  const ApiOptions = ApiOptions ({ sitePrefixUrl: 'this is passed from main project'});
+
   
 
   VueRegistry
@@ -93,7 +92,6 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
     .use($i18n)
     .use($route)
     .use( $router)
-    .use(ApiOptions)
 
   const authPlugin = createAuth ({ 
     fetchUser() { return authentication.getUser(); },
@@ -110,6 +108,13 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
   apiToken      .onTokenChange((token) => authPlugin.token(undefined, token, token?.expiration) );
 
   VueRegistry.use(authPlugin);
+ //ToDo:  apiToken.get() will pass as function or value 
+  VueRegistry.use(ApiOptions,  {
+    sitePrefixUrl: window.scbdApp.apiUrl,
+    timeout: 30 * 1000,
+    token: apiToken.get(),
+    tokenType: 'Bearer'
+  })
   
 }]);
 
