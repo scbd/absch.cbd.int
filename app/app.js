@@ -19,6 +19,8 @@ import {
 } from 'vue-i18n';
  import { mergeTranslationKeys} from './services/translation-merge';
 
+ import { ApiOptions } from '@scbd/common'; 
+
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", 'leaflet-directive']));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
   var logToConsole = true;
@@ -79,6 +81,8 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
   const $i18n   = createI18n({ locale, fallbackLocale: 'en', legacy:false});
   const $route  = createRoute ({ plugins: { ngVue }});
   const $router = createRouter ({ plugins: { ngVue }});
+  const ApiOptions = ApiOptions ({ sitePrefixUrl: 'this is passed from main project'});
+  
 
   VueRegistry
     .use(createService('$realm', realm)) // use  useRealm() | import { useRealm  } from '~/services/composables/realm.js';
@@ -89,6 +93,7 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
     .use($i18n)
     .use($route)
     .use( $router)
+    .use(ApiOptions)
 
   const authPlugin = createAuth ({ 
     fetchUser() { return authentication.getUser(); },

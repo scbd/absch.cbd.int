@@ -1,5 +1,7 @@
 <template>
 <div class="home-page-records">
+  radio from lib: <radio/><br>
+  Test from lib: <test/><br>
   <h6 class="card-title ps-1">{{ t("recentlyPublished") }}</h6>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
   <div class="row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
@@ -58,6 +60,7 @@
   import { useI18n } from 'vue-i18n';
   import { useRealm } from '../../services/composables/realm.js';
   import {  useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
+  import { radio, test } from '@scbd/common';
   const { t } = useI18n({ messages }); 
   const auth = useAuth();
   const router = useRouter();
