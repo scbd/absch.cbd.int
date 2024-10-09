@@ -1043,9 +1043,9 @@
   version "5.0.0-alpha.1"
   resolved "https://github.com/scbd/angular-vue.git#f147661e406f69ae55a168d417d268c25aa7d839"
 
-"@scbd/common@https://github.com/scbd/scbd-common.git#useaxios":
+"@scbd/common@https://github.com/scbd/scbd-common.git#typescript":
   version "0.1.1"
-  resolved "https://github.com/scbd/scbd-common.git#fc4c6640c6f6382633d4cdf79c55e0120127c172"
+  resolved "https://github.com/scbd/scbd-common.git#f8e94e505ff22cec678ddf649c6829a75105f535"
   dependencies:
     vue "3.4.19"
 
@@ -1642,9 +1642,9 @@ ejs@2.5.5:
   integrity sha512-SVMZ8TKYCxHL6gb7f9QVpvnMPxZpdrT65IH6awbFex+bVAWtEYW0LoRbiViOJn6t1v/J0tVrl9fx6XOuJ5fjTA==
 
 electron-to-chromium@^1.5.28:
-  version "1.5.33"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.33.tgz#8f64698661240e70fdbc4b032e6085e391f05e09"
-  integrity sha512-+cYTcFB1QqD4j4LegwLfpCNxifb6dDFUAwk6RsLusCwIaZI6or2f+q8rs5tTB2YC53HhOlIbEaqHMAAC8IOIwA==
+  version "1.5.34"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.34.tgz#59f6eef987d2301d96d46b1bc4da913fe784baeb"
+  integrity sha512-/TZAiChbAflBNjCg+VvstbcwAtIL/VdMFO3NgRFIzBjpvPzWOTIbbO8kNb6RwU4bt9TP7K+3KqBKw/lOU+Y+GA==
 
 encodeurl@~1.0.2:
   version "1.0.2"
