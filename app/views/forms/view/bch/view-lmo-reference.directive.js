@@ -56,11 +56,12 @@ app.directive("viewLmoReference", [function () {
 			}
 
 
-			$rootScope.$on('evt:updateLinkedRecordRevision', function(evt, ids){
+			$rootScope.$on('evt:updateLinkedRecordRevision', async function(evt, ids){
 				
 				const currentId = ids.find(e=>e.identifier == $scope.document?.identifier)
 				if(currentId?.latestRevision > currentId?.currentRevision){
-					loadReferenceDocument(`${currentId.identifier}@${currentId.latestRevision}`);
+					const records = await loadReferenceDocument(`${currentId.identifier}@${currentId.latestRevision}`);
+					$scope.document = records;
 				}
 				
 			});
