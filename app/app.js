@@ -18,7 +18,7 @@ import {
     createI18n
 } from 'vue-i18n';
  import { mergeTranslationKeys} from './services/translation-merge';
- import { ApiOptions } from '@scbd/common'; 
+//  import { ApiOptions } from '@scbd/common'; 
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", 'leaflet-directive']));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
@@ -109,12 +109,12 @@ app.run(["realm", "locale", '$injector', 'apiToken', 'authentication', function 
 
   VueRegistry.use(authPlugin);
  //ToDo:  apiToken.get() will pass as function or value 
-  VueRegistry.use(ApiOptions,  {
-    sitePrefixUrl: window.scbdApp.apiUrl,
-    timeout: 30 * 1000,
-    token: apiToken.get(),
-    tokenType: 'Bearer'
-  })
+  // VueRegistry.use(ApiOptions,  {
+  //   sitePrefixUrl: window.scbdApp.apiUrl,
+  //   timeout: 30 * 1000,
+  //   token: apiToken.get(),
+  //   tokenType: 'Bearer'
+  // })
   
 }]);
 

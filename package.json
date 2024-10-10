@@ -9,7 +9,7 @@
     "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11",
     "@bower_components/require-shim": "zetlen/require-shim#95b5aaea4530fb2861cc475497c7b4c62204628d",
     "@scbd/angular-vue": "https://github.com/scbd/angular-vue.git#transclude",
-    "@scbd/common": "https://github.com/scbd/scbd-common.git#typescript",
+    "@scbd/common": "https://github.com/scbd/scbd-common.git#typescript-build",
     "cheerio": "1.0.0-rc.3",
     "compression": "1.7.4",
     "cookie-parser": "1.4.3",

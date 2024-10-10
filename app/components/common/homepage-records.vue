@@ -1,6 +1,32 @@
 <template>
 <div class="home-page-records">
-  Test from lib: <test/><br>
+  <!-- radio <radio v-model="radioValue1" value ="true" :inline="false"> <template #label> Yes </template> </radio> <radio v-model="radioValue1" value="false" :inline="false"> <template #label> No </template> </radio> <radio v-model="radioValue2" value ="true" :inline="true"> <template #label> Yes </template> </radio> <radio v-model="radioValue2" value="false" :inline="true"> <template #label> No </template> </radio>
+  <br>
+  ck-editor <ck-editor v-model="ckText" :config="allPluginsConfig" ></ck-editor>
+  <br>
+  Test checkbox: <checkbox v-model="isChecked"> <template #label> This is the label slot </template> </checkbox> <br>
+  
+  <br>
+  files :
+
+  <select-file-button multiple @on-file-selected="receiveFile"> <slot name="file-button-label">+ Add Multiple File</slot></select-file-button> <select-file-button @on-file-selected="receiveFile"> <slot name="file-button-label">+ Add Single File</slot></select-file-button> <select-file-button @on-file-selected="receiveFile" :accept="mimeTypeWhitelist"> <slot name="file-button-label">+ set accept file type</slot></select-file-button>
+
+    -->
+                              
+                                <select-file-button  multiple @on-file-selected="receiveFile"> <slot name="file-button-label">+ Add Multiple Files</slot></select-file-button> 
+                                <br/>   
+                                <br/>  
+                                <select-file-button  @on-file-selected="receiveFile"> <slot name="file-button-label">+ Add Single File</slot></select-file-button>     
+                                <br/>   
+                                <br/>                         
+                                <select-file-button  @on-file-selected="receiveFile" :accept="mimeTypeWhitelist"> <slot name="file-button-label">+ set accept file type</slot></select-file-button>                              
+                                <br/>   
+                                <br/>  
+                                <div v-for="(item, index) in files" :key="index">
+                                    File name: {{item.name}}     
+                                </div>   
+
+  Test checkbox: <checkbox v-model="isChecked"> <template #label> This is the label slot </template> </checkbox> <br>
   <h6 class="card-title ps-1">{{ t("recentlyPublished") }}</h6>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
   <div class="row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
@@ -59,12 +85,12 @@
   import { useI18n } from 'vue-i18n';
   import { useRealm } from '../../services/composables/realm.js';
   import {  useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
-  import { test } from '@scbd/common';
+    import { checkbox, selectFileButton } from '@scbd/common';
   const { t } = useI18n({ messages }); 
   const auth = useAuth();
   const router = useRouter();
   const realm = useRealm();
-
+  const isChecked = ref(true)
   const recordList = ref([]);
   const loading = ref(true);
   const sort = 'updatedDate_dt desc';
@@ -79,6 +105,20 @@
   onMounted(() => {
     records();
   });
+
+
+
+  // For select-file-button example
+let files = ref([]);
+
+const receiveFile = (receiveFiles) => {
+  if (Array.isArray(receiveFiles)) {
+    files.value = receiveFiles;
+  } else if (typeof receiveFiles === 'object') {
+    files.value = [receiveFiles];
+  }
+};
+
 
   const records = async () => {
     const query = {
