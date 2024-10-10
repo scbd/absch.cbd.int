@@ -112,7 +112,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 								// Get the latest version of contactOrganization
 								let contactOrganizationIdentifier = result.data.body.contactOrganization.identifier;
 
-return getLatestVersion(result.data.body.contactOrganization.identifier)
+								return getLatestVersion(result.data.body.contactOrganization.identifier)
 								.then(function(contactOrganizationResult) {
 									contactOrganizationIdentifier = contactOrganizationResult; 
 								
