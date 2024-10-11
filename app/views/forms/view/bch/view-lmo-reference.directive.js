@@ -60,8 +60,7 @@ app.directive("viewLmoReference", [function () {
 				
 				const currentId = ids.find(e=>e.identifier == $scope.document?.identifier)
 				if(currentId?.latestRevision > currentId?.currentRevision){
-					const records = await loadReferenceDocument(`${currentId.identifier}@${currentId.latestRevision}`);
-					$scope.document = records;
+					$scope.document = await loadReferenceDocument(`${currentId.identifier}@${currentId.latestRevision}`);
 				}
 				
 			});
