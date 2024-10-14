@@ -36,7 +36,7 @@
 
             <loading v-if="loading" :caption="t('refreshing')" />
 
-            <a v-if="hasHelp" class="btn btn-sm" @click="showHelp = true">
+            <a v-if="hasHelp" class="btn btn-sm" @click="openHelpModal">
               <i class="fa fa-question-circle" aria-hidden="true"></i> {{ t('buttonHelp') }}
             </a>
 
@@ -109,7 +109,7 @@
 
       <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; pending(refresh, 'loading')"></edit-post>
 
-      <simple-modal v-if="showHelp" @close="showHelp = false" :title="lstring(helpArticle.title)">
+      <simple-modal v-if="hasHelp" ref="refHelpModal" :title="lstring(helpArticle?.title)">
         <cbd-article :article="helpArticle" :show-cover-image="true" :show-edit="false"  />
       </simple-modal>
 
@@ -137,7 +137,9 @@ import SimpleModal from '~/components/common/modal.vue';
 import messages from "~/app-text/views/portals/forums.json";
 import { lstring } from '../../components/kb/filters';
 import { useI18n } from 'vue-i18n';
+import { getRealmArticleTag } from "../../services/composables/articles.js";
 
+const articleRealmTag = getRealmArticleTag();
 const auth = useAuth();
 const { t } = useI18n({ messages });
 const route = useRoute().value;
@@ -158,14 +160,11 @@ const error = ref(null);
 const helpArticle = ref(null);
 const edit = ref(null);
 const refCbdArticle = ref(null);
+const refHelpModal = ref(null);
 
 const loggedIn = computed(() => auth.user()?.isAuthenticated);
 const isOpen = computed(() => forum.value?.isOpen);
 const hasHelp = computed(() => !!helpArticle.value);
-const showHelp =computed({
-  get()      { return !!helpArticle?.value?.visible;} , 
-  set(value) { if(helpArticle.value) helpArticle.value.visible = value }
-})
 
 const props = defineProps({
   forumId: {
@@ -222,12 +221,15 @@ const load = async () => {
     forum.value = qForum;
     threads.value = qThreads;
     subscription.value = qWatch;
-    helpArticle.value = await articlesApi.queryArticles({ q: { adminTags: { $all: ['forums', 'getting-help'] } }, fo: 1 });
+    helpArticle.value = await articlesApi.queryArticles({ q: { adminTags: { $all: [articleRealmTag, 'forums', 'getting-help'] } }, fo: 1 });
 
     await loadArticle();
   } catch (err) {
     error.value = err;
   }
+};
+const openHelpModal = () => {
+  refHelpModal.value.show();
 };
 
 const refresh = async (threadId, postId) => { 
