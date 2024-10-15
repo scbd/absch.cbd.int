@@ -80,7 +80,9 @@ app.directive("validateReferencedRecordVersion", ["$rootScope", 'searchService',
 			
 			//only show latest revision for BCH only
 			if(realm.is('BCH'))
-				validateLinkedRecords($scope.document)
+				setTimeout(()=>{
+					validateLinkedRecords($scope.document)
+				},300);
 
 		 }
 	};

@@ -60,7 +60,10 @@ app.directive("viewLmoReference", [function () {
 				
 				const currentId = ids.find(e=>e.identifier == $scope.document?.identifier)
 				if(currentId?.latestRevision > currentId?.currentRevision){
-					loadReferenceDocument(`${currentId.identifier}@${currentId.latestRevision}`);
+					loadReferenceDocument(`${currentId.identifier}@${currentId.latestRevision}`)
+					.then((latestDocument)=>{
+						$scope.$applyAsync(()=>$scope.document = latestDocument);
+					});
 				}
 				
 			});
