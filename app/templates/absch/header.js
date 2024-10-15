@@ -40,8 +40,8 @@ import abschHeaderT from '~/app-text/templates/absch/header.json';
                     $event.stopPropagation()
                 }
 
-                $scope.startsWith = function(item){
-                   return !$scope.countrySearchQuery || _.startsWith(item.name[locale].toLowerCase(), $scope.countrySearchQuery.toLowerCase());
+                $scope.matchesQuery = function(item){
+                    return !$scope.countrySearchQuery || item.name[locale].toLowerCase().includes($scope.countrySearchQuery.toLowerCase());
                 }
             }
         };

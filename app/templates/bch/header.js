@@ -39,8 +39,8 @@ app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q
                 $event.stopPropagation()
             }
 
-            $scope.startsWith = function(item){
-                return !$scope.countrySearchQuery || _.startsWith(item.name[locale].toLowerCase(), $scope.countrySearchQuery.toLowerCase());
+            $scope.matchesQuery = function(item){
+                return !$scope.countrySearchQuery || item.name[locale].toLowerCase().includes($scope.countrySearchQuery.toLowerCase());
             }
         }
     };

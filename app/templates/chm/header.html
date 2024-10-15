@@ -80,7 +80,7 @@
                         </li>
                     <li>
                         <ul class="nav-link-country-profiles bg-white">
-                            <li ng-repeat="c in countries | filter:startsWith track by c.code">
+                            <li ng-repeat="c in countries | filter:matchesQuery track by c.code">
                                 <a rel="noopener" translation-url class="dropdown-item  fw-bold fs-small-8"
                                     ng-href="countries/{{::c.code|encodeURIComponent}}">
                                     <span ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
