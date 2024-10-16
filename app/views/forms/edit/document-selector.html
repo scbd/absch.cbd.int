@@ -86,7 +86,7 @@
                     <div class="d-block">
                         <div class="responsive-search">                                
                             <form ng-submit="searchFreeText(search.keyword)" class="input-group">
-                                <input type="textbox" ng-model="search.keyword" placeholder="{{::('documentSelectorT.filterRecords'|$translate)}}"
+                                <input type="textbox" ng-change="searchFreeText(search.keyword)" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" ng-model="search.keyword" placeholder="{{::('documentSelectorT.filterRecords'|$translate)}}"
                                    class="float-end form-control">
                                 <span type="submit" ng-click="searchFreeText(search.keyword)" class="input-group-text d-block cursor-pointer" id="basic-addon2">
                                    <i class="fa fa-search"></i> {{::('documentSelectorT.search'|$translate)}}</span>
