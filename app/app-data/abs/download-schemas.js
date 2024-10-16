@@ -5,6 +5,31 @@ const fieldsT = mergeTranslationKeys(fieldsTranslations);
 export const downloadSchemas = {	
 	...commonDownloadSchemas,
 	
+    "authority":{
+        "uniqueId"                   : fieldsT["uniqueId"],
+        "government"                 : fieldsT["country"],
+        "name"                       : fieldsT["authority.name"],
+        "address"                    : fieldsT["authority.address"],
+        "city"                       : fieldsT["authority.city"],
+        "state"                      : fieldsT["authority.state"],
+        "postalCode"                 : fieldsT["authority.postalCode"],
+        "country"                    : fieldsT["authority.country"],
+        "phones"                     : fieldsT["authority.phones"],
+        "faxes"                      : fieldsT["authority.faxes"],
+        "emails"                     : fieldsT["authority.emails"],
+        "websites.url"               : fieldsT["authority.websites"],
+        "contacts"                   : fieldsT["authority.contacts"],
+        "policyBasisForCompetencyRef": fieldsT["authority.policyBasisForCompetencyRef"],
+        "responsibleForAll"          : fieldsT["authority.responsibleForAll"],
+        "responsibilities"           : fieldsT["authority.responsibilities"],
+        "absJurisdiction"            : fieldsT["authority.absJurisdiction"],
+        "absGeneticResourceTypes"    : fieldsT["authority.absGeneticResourceTypes"],
+        "relevantInformation"        : fieldsT["authority.relevantInformation"],
+        "relevantDocuments.url"      : fieldsT["authority.relevantDocuments"],
+        "functions"                  : fieldsT["authority.functions"],
+        "publishedOn"                : fieldsT["publishedOn"]
+    },
+
     "absPermit" : {
         "uniqueId"                    : fieldsT["absPermit.uniqueId"                   ],
         "government"                  : fieldsT["absPermit.government"                 ],
@@ -164,5 +189,35 @@ export const downloadSchemas = {
         "absMesasureNotApplicable" : fieldsT["measure.absMesasureNotApplicable"],
         "relevantInformation"      : fieldsT["measure.relevantInformation"],
         "relevantDocuments"        : fieldsT["measure.relevantDocuments"]
-    }
+    },
+    "capacityBuildingInitiative":{
+        "uniqueId"           : fieldsT["capacityBuildingInitiative.uniqueId"],
+        "title"              : fieldsT["capacityBuildingInitiative.title"],
+        "projectNumber"      : fieldsT["capacityBuildingInitiative.projectNumber"],
+        "projectDocument.url"    : fieldsT["capacityBuildingInitiative.projectDocument"],
+        "contacts"           : fieldsT["capacityBuildingInitiative.contacts"],
+        "isProjectProgramme" : fieldsT["capacityBuildingInitiative.isProjectProgramme"],
+        "description"        : fieldsT["capacityBuildingInitiative.description"],
+        "aichiTargets"       : fieldsT["capacityBuildingInitiative.aichiTargets"],
+        "absKeyAreas"        : fieldsT["capacityBuildingInitiative.absKeyAreas"],
+        "fundingSourceTypes" : fieldsT["capacityBuildingInitiative.fundingSourceTypes"],
+        "coreFundingSources" : fieldsT["capacityBuildingInitiative.coreFundingSources"],
+        "coFinancingSources" : fieldsT["capacityBuildingInitiative.coFinancingSources"],
+        "totalBudget"        : fieldsT["capacityBuildingInitiative.totalBudget"],
+        "resultsAchievements": fieldsT["capacityBuildingInitiative.resultsAchievements"],
+        "resultsOutputs"     : fieldsT["capacityBuildingInitiative.resultsOutputs"],
+        "resultsReference"   : fieldsT["capacityBuildingInitiative.resultsReference"],
+        "bestPractices"      : fieldsT["capacityBuildingInitiative.bestPractices"],
+        "geographicScope"    : fieldsT["capacityBuildingInitiative.geographicScope"],
+        "countryRegions"     : fieldsT["capacityBuildingInitiative.countryRegions"],
+        "status"             : fieldsT["capacityBuildingInitiative.status"],
+        "startDate"          : fieldsT["capacityBuildingInitiative.startDate"],
+        "endDate"            : fieldsT["capacityBuildingInitiative.endDate"],
+        "activityScope"      : fieldsT["capacityBuildingInitiative.activityScope"],
+        "categories"         : fieldsT["capacityBuildingInitiative.categories"],
+        "cbdSubjects"        : fieldsT["capacityBuildingInitiative.cbdSubjects"],
+        "relevantInformation": fieldsT["capacityBuildingInitiative.relevantInformation"],
+        "relevantDocuments.url"  : fieldsT["capacityBuildingInitiative.relevantDocuments"],
+        "publishedOn"        : fieldsT["publishedOn"]
+	},
 }

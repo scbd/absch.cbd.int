@@ -96,18 +96,21 @@
                                                     <tr v-for="(row, index) in downloadDocs" :key="index">                                                
                                                         <td v-for="(field, key) in schemaFields" :key="key">
                                                             <span v-if="typeof row[key] == 'string'">
-                                                                <span v-html="formatString(row[key])"></span>
+                                                                <span v-if="key == 'uniqueId'">
+                                                                    <a target="_blank" :href="`/database/${row[key]}`">{{ row[key] }}</a>
+                                                                </span>
+                                                                <span v-else v-html="formatString(row[key])"></span>
                                                             </span>
                                                             <span v-if="typeof row[key] == 'object'">
                                                                 <!-- url field -->
-                                                                {{ formatString(row[key].url) }}
+                                                                {{ formatString(row[key]?.url) }}
                                                             </span>
                                                             <span v-if="Array.isArray(row[key])">
                                                                 <ul class="p-0 list-inline">
                                                                     <li v-for="item in row[key]" :key="item">                                                                    
                                                                         <!-- url field -->
                                                                         <span v-if="typeof item == 'object'">
-                                                                            <span v-html="formatString(item.url||item)"></span>
+                                                                            <span v-html="formatString(item?.url||item)"></span>
                                                                         </span>
                                                                         <span  v-if="typeof item == 'string'" v-html="formatString(item)"></span>
                                                                     </li>
