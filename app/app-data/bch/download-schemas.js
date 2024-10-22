@@ -24,8 +24,6 @@ export const downloadSchemas = {
         "emails"                     : commonFieldsT["authority.emails"],
         "websites.url"               : commonFieldsT["authority.websites"],
         "contacts"                   : commonFieldsT["authority.contacts"],
-        "responsibleForAll"          : commonFieldsT["authority.responsibleForAll"],
-        "responsibilities"           : commonFieldsT["authority.responsibilities"],
         "relevantInformation"        : commonFieldsT["authority.relevantInformation"],
         "relevantDocuments.url"      : commonFieldsT["authority.relevantDocuments"],
         "functions"                  : commonFieldsT["authority.functions"],
