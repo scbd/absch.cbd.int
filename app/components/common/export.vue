@@ -32,33 +32,6 @@
                                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" /> {{t('csv')}}</label>
                                     </span>
                                 </div> 
-                                <div v-if="!isGeneric">
-                                <div class="modal fade" ref="optionsModal" tabindex="-1" aria-labelledby="customizedFieldsModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="customizedFieldsModalLabel"> {{t('customFields')}} </h5>
-                                                <button type="button" data-bs-dismiss="modal" class="border-0 close" @click="closeModal()"
-                                                    aria-label="Close"><i class="bi bi-x-circle-fill icon-lg"></i></button>
-                                            </div>
-                                            <div class="modal-body custom-fields-modal-body">
-                                                <div class="d-flex align-items-center float-end mb-3">
-                                                    <button type="button" class="btn btn-primary" @click="selectAll" >{{t('selectAll')}}</button>
-                                                    <button type="button" class="btn btn-secondary ms-1" @click="clearAll" >{{t('clearAll')}}</button>
-                                                </div>
-                                                <div v-for="(value, key) in optionFields" :key="key" class="form-check">
-                                                    <input type="checkbox" :id="key" :value="key" v-model="selectedFields" class="form-check-input">
-                                                    <label :for="key" style="font-weight: normal !important;">{{ value }}</label>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeModal()" aria-label="Close"> {{t('cancel')}}</button>
-                                                <button type="button" class="btn btn-primary" @click="updateFields">{{t('apply')}}</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
                             </div>
                            
                             <div class="col-3">
@@ -79,7 +52,7 @@
                             <div class="col-12">
                                 <div id="divTable"  style="max-height:300px;overflow:scroll; " v-if="!loading" >                               
                                         <div v-if="isGeneric">
-                                            <table id="datatable" class="table table-striped table-bordered table-condensed">
+                                            <table id="dataTable" class="table table-striped table-bordered table-condensed">
                                                 <thead> 
                                                     <tr>
                                                         <th class="tableexport-string">{{t('type')}}</th>
@@ -99,7 +72,7 @@
                                                         <td class="tableexport-string">{{row.rec_schema}}</td>
                                                         <td class="tableexport-string">
                                                             <a rel="noopener" target="_blank" :href="`database/${encodeURIComponent(row.rec_uniqueIdentifier || row.identifier)}`">
-                                                                {{ (row.rec_uniqueIdentifier).toUpperCase()}}
+                                                                {{ (row.rec_uniqueIdentifier)?.toUpperCase()}}
                                                             </a>
                                                         </td>
                                                         <td class="tableexport-string">{{row.rec_government}}</td>
@@ -114,15 +87,15 @@
                                             </table>
                                         </div>
                                         <div v-if="!isGeneric">
-                                            <table id="datatable" class="table table-striped table-bordered table-condensed">
+                                            <table id="dataTable" class="table table-striped table-bordered table-condensed">
                                                 <thead> 
                                                     <tr>
-                                                        <th v-for="field in schemaFields" :key="index">{{field}}</th>
+                                                        <th v-for="(value, key) in selectedFields" :key="key">{{value}}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr v-for="(row, index) in downloadDocs" :key="index">                                                
-                                                        <td v-for="(field, key) in schemaFields" :key="key">
+                                                        <td v-for="(value, key) in selectedFields" :key="key">
                                                             <span v-if="typeof row[key] == 'string'">
                                                                 <span v-if="key == 'uniqueId'">
                                                                     <a target="_blank" :href="`/database/${row[key]}`">{{ row[key] }}</a>
@@ -157,7 +130,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <div class="float-start">
-                            <button v-if="!isGeneric" @click="openModal" class="btn btn-primary">{{t('customFields')}}</button>
+                            <button v-if="!isGeneric" @click="showCustomFieldModal" class="btn btn-primary">{{t('customFields')}}</button>
                         </div> 
                         <div class="float-end">
                             <button type="button" class="btn btn-secondary" aria-label="Close" @click="closeDialog()" :disabled="loading">{{t('cancel')}}</button>
@@ -169,11 +142,42 @@
                 </div>
             </div>
         </div>
+
+        <div v-if="!isGeneric">
+            <div class="modal fade" ref="optionsModal" data-backdrop="static" tabindex="-1" aria-labelledby="customizedFieldsModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="customizedFieldsModalLabel"> {{t('customFields')}} </h5>
+                            <button type="button" data-bs-dismiss="modal" class="border-0 close" @click="closeModal()"
+                                aria-label="Close"><i class="bi bi-x-circle-fill icon-lg"></i></button>
+                        </div>
+                        <div class="modal-body custom-fields-modal-body">    
+                            <table class="table table-striped table-bordered table-condensed">                                
+                                <tbody>
+                                    <tr v-for="field in schemaFields" :key="field" >
+                                        <td>
+                                            <div class="form-check">
+                                                <input type="checkbox" :id="field.key" :value="true" v-model="field.selected" class="form-check-input">
+                                                <label :for="field.key" class="form-check-label">{{ field.value }}</label>
+                                            </div> 
+                                        </td>                   
+                                    </tr>
+                                </tbody>
+                            </table>   
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeModal()" aria-label="Close"> {{t('close')}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </span>   
 </template>
 
 <script setup>
-    import { ref, shallowRef, onMounted, inject, watch } from "vue";
+    import { ref, shallowRef, onMounted, inject, computed } from "vue";
     import { Modal } from "bootstrap";
     import  { formatDate, capitalize } from '../kb/filters';
     import { useRealm } from '../../services/composables/realm.js';
@@ -188,8 +192,6 @@
     const loading = ref(false);
     const isGeneric = ref(true);
     const schemaFields = ref([]); // get updated and pass the updated fields to api call.
-    const optionFields = ref([]); // to show the list of fields in the dialog. { "uniqueId": "UID", "government": "Country",  ...
-    const selectedFields = ref([]); // v-modal values for selected optionsFields.  [ "government", "uniqueId" ....
     const downloadFormat  = ref('xlsx');
     const getDownloadRecords = inject('getDownloadRecords');
 
@@ -197,10 +199,21 @@
         fileName: {type: String},
     })
 
+    const selectedFields = computed(()=>{
+        if(!schemaFields.value?.length)
+            return [];
+        return  schemaFields.value
+                       .filter(field =>field.selected)
+                       .reduce((newObj, field)=>{
+                            newObj[field.key] = field.value
+                            return newObj
+                        }, {});
+    })
+
     let schema = undefined ;
     let modal = null;
     let customizeFieldsModal = null;
-    let fields = [
+    let genericFields = [
         'rec_schema:schema_EN_s',
         'rec_uniqueIdentifier:uniqueIdentifier_s',
         'rec_government:government_EN_s',
@@ -216,46 +229,29 @@
         modal = new Modal(exportModal.value);
     })
 
-    const openModal =() =>  
+    const showCustomFieldModal =() =>  
     { 
         customizeFieldsModal = new Modal(optionsModal.value);
         customizeFieldsModal.show();
-        selectAll(); // select all optionsFields
     };
     const closeModal =() => {  
         customizeFieldsModal.hide();
-    };
-   
-    const selectAll =() => {
-        console.log('i am called select all')
-        selectedFields.value = Object.keys(optionFields.value);
-    };
-    const clearAll =() => {  
-        selectedFields.value = [];
-    };
-    const updateFields =() => { 
-        if(selectedFields.value && selectedFields.value.length>0) { 
-            let uiFields = {};
-            selectedFields.value.forEach((field) => {
-            if (optionFields.value[field] !== undefined)
-                uiFields[field] = optionFields.value[field];
-            });
-            schemaFields.value = uiFields; 
-            closeModal();
-        }
     };
 
     const openDialog = async () => {
         modal.show('static');
         loading.value = true;
         try{
-            selectedFields.value = [];
-            const responseData = await getDownloadRecords({fields, listType:'initial', format:'json'});
+            const responseData = await getDownloadRecords({fields:genericFields, listType:'initial', format:'json'});
             downloadDocs.value = responseData.docs
             numFound.value     = responseData.numFound;
             isGeneric.value    = responseData.isGeneric;
-            schemaFields.value = optionFields.value = responseData.schemaFields ? responseData.schemaFields:[];
             schema             = responseData.schema;
+            if(!responseData.isGeneric){
+                schemaFields.value = Object.entries(responseData.schemaFields).map(([key, value])=>{
+                    return { selected : true, key, value } 
+                })
+            }
         }
         catch(e){
                 console.error(e)
@@ -271,12 +267,12 @@
         {
             if(isGeneric.value){
                 await import('tableexport');
-                const info        = await getDownloadRecords({fields, listType:'all', fileName, format : downloadFormat.value});
+                const info        = await getDownloadRecords({fields:genericFields, listType:'all', fileName, format : downloadFormat.value});
                 if(info){
                     downloadDocs.value = info.docs;
                     numFound.value     = info.numFound;
                     setTimeout(()=>{
-                        $('#datatable').tableExport({
+                        $('#dataTable').tableExport({
                             formats: ["xlsx", "xls", "csv"],
                             filename: fileName,
                         });
@@ -287,7 +283,7 @@
                 }
             }
             else{
-                await getDownloadRecords({fields:schemaFields.value, listType:'all', fileName, format : downloadFormat.value});
+               await getDownloadRecords({fields:selectedFields.value, listType:'all', fileName, format : downloadFormat.value});
             }
         }
         catch(e){
@@ -337,7 +333,7 @@
     .modal-body {
       background: #fff;
     }
-    #datatable .tableexport-caption{
+    #dataTable .tableexport-caption{
         display: none!important;
     }
     /* replace template.css property */

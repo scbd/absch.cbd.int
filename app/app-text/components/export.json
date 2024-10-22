@@ -23,7 +23,8 @@
     "customFields": "Custom field(s)",
     "clearAll" : "Clear all",
     "selectAll" : "Select all",
-    "apply": "Apply"
+    "apply": "Apply",
+    "close":"Close"
     
     
 }
