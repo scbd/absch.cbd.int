@@ -14,6 +14,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
         var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
         translationService.set('reportsT', reportsT); 
         $scope.overview = {};
+        $scope.self = $scope ; 
             //========================================
             //
             //
@@ -28,7 +29,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 components:{cbdArticle} 
             }
             $scope.$on('onReportTypeChanged', function(event, reportType) {
-               
+               $scope.reportType = reportType;
                 $scope.adminTags    = undefined;
                 $scope.articleQuery = undefined;
                 $timeout(()=>{ 
@@ -57,9 +58,20 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                     regionsPresetFilter: $scope.selectedRegionsPresetFilter
                 };
                 sessionStorage.setItem('nrAnalyzerData', JSON.stringify(data));
+            
+                const path = _.trimEnd($location.path(), '/') + '/analyzer/' + $scope.reportType;
+                $location.url(path);
+                // Pass all query string parameters at once
+                $location.search({
+                    type: $scope.selectedReportType,
+                    regions: $scope.selectedRegions,
+                    questions: $scope.selectedQuestions,
+                    regionsPreset: $scope.selectedRegionsPreset,
+                    regionsPresetFilter: $scope.selectedRegionsPresetFilter
+                });
 
-                $location.url(_.trimEnd($location.path(), '/') + '/analyzer');
             };
+            
            
             var DefaultRegions = [
                 "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
