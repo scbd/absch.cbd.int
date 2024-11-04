@@ -14,6 +14,9 @@
         }
     </style>
     <div id="recordContent" class="mb-5">
+        <div ng-if="!printMode && debugInfoComponent">
+            <document-debug-info ng-vue="debugInfoComponent" :document-info="internalDocumentInfo"></document-debug-info>
+        </div>
         <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
         <div block-region activate="loading||isComparing"></div>
 
@@ -179,6 +182,7 @@
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> {{::('recordLoaderT.loading'|$translate)}}</span>
         <div id="schemaView" ng-show="internalDocument"></div>
         <validate-referenced-record-version ng-if="isBCH && !loading && internalDocument" document="internalDocument"></validate-referenced-record-version>
+                
     </div>
     <div id="printContentFooter" ng-if="printMode" ng-include="'view-print-footer.html'"></div>
     
