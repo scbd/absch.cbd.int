@@ -13,7 +13,9 @@
                         <th>Identifier</th>
                         <td>
                             <div v-if="documentInfo?.identifier">
-                                <span id="documentIdentifier">{{ documentInfo?.identifier }}</span> 
+                                <a target="_blank" :href="`${oasisUrl()}/clearing-house/records/history/${documentInfo.identifier}`">
+                                    <span id="documentIdentifier">{{ documentInfo?.identifier }}</span> 
+                                </a>
                                 <copy-to-clipboard class="ms-1" clipboard-id="documentIdentifier"></copy-to-clipboard>
                             </div>
                         </td>
@@ -45,6 +47,7 @@
     import { ref, computed } from 'vue';
     import { useAuth } from '@scbd/angular-vue/src/index.js';
     import copyToClipboard from '~/components/common/copy-to-clipboard.vue';
+    import { oasisUrl } from '~/services/composables/utils.js';
     
     const props = defineProps({
         documentInfo : { type:Object, required:true}
@@ -52,6 +55,7 @@
     
     const auth = useAuth();
     const isAdministrator = computed(()=> auth.check(['Administrator']));
+
     const showDebugInfo = ref(false);
 </script>
 
