@@ -1,12 +1,15 @@
 <template>
-    <i class="bi bi-clipboard" @click="copy(clipboardId)" style="cursor: pointer;" v-if="clipboardId"></i>
+    <i class="bi bi-clipboard" @click="copy(source)" style="cursor: pointer;" v-if="source"></i>
 
     <div class="position-fixed bottom-0 top-0 end-0 p-3" style="z-index: 100000">
-      <div ref="clipboardToast" class="toast hide align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-          <strong class="me-auto">{{t('clipboardSuccess')}}</strong>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      <div ref="clipboardToast" class="toast hide align-items-center text-white bg-success  border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header float-end bg-success">
+            <button type="button" class="btn-close float-end bg-success" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
+        <div class="toast-body">
+            <strong class="me-auto">{{t('clipboardSuccess')}}</strong>
+        </div>
+        
       </div>
     </div>
 </template>
@@ -20,22 +23,33 @@
 
 
     const props = defineProps({
-        clipboardId : {type:String, required:true}
+        source : {type:String, required:true}
     })
 
     let toast = null;
     let clipboardToast = shallowRef(null);
 
     const { t } = useI18n({ messages });
-    const { toClipboard } = useClipboard()
+    const { toClipboard } = useClipboard();
 
 
-    const copy = async (id) => {
-        const element = document.getElementById(id);
-        if(element.innerText?.trim()!=''){
-            await toClipboard(element.innerText)
-            toast.show();
+    const copy = async (source) => {
+        let element = null;
+        if(source instanceof HTMLElement)
+            element = source;
+        else
+            element = document.getElementById(source);
+
+        //if element is not found, just copy the source to clipboard
+        if(element != null){
+            if(element.innerText?.trim()!=''){
+                await toClipboard(element.innerText);                
+            }
         }
+        else
+            await toClipboard(source?.toString());
+
+        toast.show();
     };
 
     onMounted(()=>{

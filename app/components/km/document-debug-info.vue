@@ -16,14 +16,14 @@
                                 <a target="_blank" :href="`${oasisUrl()}/clearing-house/records/history/${documentInfo.identifier}`">
                                     <span id="documentIdentifier">{{ documentInfo?.identifier }}</span> 
                                 </a>
-                                <copy-to-clipboard class="ms-1" clipboard-id="documentIdentifier"></copy-to-clipboard>
+                                <copy-to-clipboard class="ms-1" source="documentIdentifier"></copy-to-clipboard>
                             </div>
                         </td>
                         <th>Document Id</th>
                         <td>
                             <div v-if="documentInfo?.documentID">
-                                <span id="documentId">{{ documentInfo?.documentID }}</span> 
-                                <copy-to-clipboard clipboard-id="documentId"></copy-to-clipboard>
+                                <span id="documentId">{{ documentInfo.documentID }}</span> 
+                                <copy-to-clipboard :source="documentInfo.documentID"></copy-to-clipboard>
                             </div>
                         </td>
                     </tr>
