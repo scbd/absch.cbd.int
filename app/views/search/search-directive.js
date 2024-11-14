@@ -1508,12 +1508,12 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         var query = '';
                         //for freetext use boosting
                         var boostFields = {
-                            uniqueIdentifier_t   : 6,
-                            government_EN_t      : 5.5,
-                            countryRegions_EN_txt: 5,
-                            title_EN_t           : 4,
-                            summary_EN_t         : 3,
-                            schema_EN_t          : 2,
+                            uniqueIdentifier_t   : 60,
+                            government_EN_t      : 50,
+                            countryRegions_EN_txt: 40,
+                            title_EN_t           : 30,
+                            summary_EN_t         : 20,
+                            schema_EN_t          : 10,
                             text_EN_txt          : 1,
                         };
 
