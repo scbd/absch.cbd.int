@@ -25,9 +25,9 @@ export function onBuildDocumentSelectorQuery (options){
         queryText = '(' + escape(options.searchText) + ')';
             
         if(options.query!='' && options.query != undefined)
-          queries.query   += ' AND ('+(options.searchField||'text_EN_txt:') + queryText + ')'
+          queries.query   += ' AND ('+(options.searchField||'text_EN_txt:*') + queryText + '*)'
         else 
-          queries.query   = (options.searchField||'text_EN_txt:') + queryText;
+          queries.query   = (options.searchField||'text_EN_txt:*') + queryText+'*';
     }
     return queries;
   } 
