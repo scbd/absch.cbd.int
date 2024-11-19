@@ -630,8 +630,10 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                         $scope.updateStep(tab);
                     
                     if(tab == "intro"){
-                        loadArticle();
-                        $scope.disablePreviousBtn = true;
+                        $timeout(function() {
+                            loadArticle();
+                            $scope.disablePreviousBtn = true;
+                        },0);
                     }
 
                     if(tab == "review" || tab == "publish"){
