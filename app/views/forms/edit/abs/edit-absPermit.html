@@ -334,8 +334,7 @@
                                                     <span class="help-info">{{::('editAbsPermitT.geographicCoordinatesInfo'|$translate)}} (<a rel="noopener" target="_blank" href="http://www.geojson.org/">http://www.geojson.org/</a>)</span>
                                                     <div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
                                                 </div>
-            
-                                                <div ng-if="document.gisFiles">
+                                                <div ng-if="document.gisFiles && gisLayer">
                                                     <div class="input-prepend input-append">
                                                         <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}" />
                                                         <span class="add-on">{{::('editAbsPermitT.lat'|$translate)}}</span>
@@ -349,7 +348,7 @@
                                                         <span class="add-on">{{::('editAbsPermitT.zoom'|$translate)}}</span>
                                                     </div>
             
-                                                    <div class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
+                                                    <leaflet :scroll-wheel-zoom="false" map-config="mapConfig" center="document.gisMapCenter" layers="gisLayer"></leaflet>
                                                 </div>
             
                                             </div>
