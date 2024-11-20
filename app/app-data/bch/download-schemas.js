@@ -1,10 +1,35 @@
 import fieldsTranslations from '../../app-text/views/search/search-results/bch-download-schemas.json';
+import commonFieldsTranslations from '../app-text/views/search/search-results/common-download-schemas.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
-const fieldsT = mergeTranslationKeys(fieldsTranslations);
 import { downloadSchemas as commonDownloadSchemas } from '../common-download-schemas.js';
+
+const fieldsT 		= mergeTranslationKeys(fieldsTranslations);
+const commonFieldsT = mergeTranslationKeys(commonFieldsTranslations);
+
 
 export const downloadSchemas = {	
 	...commonDownloadSchemas,
+
+    "authority":{
+        "uniqueId"                   : commonFieldsT["uniqueId"],
+        "government"                 : commonFieldsT["country"],
+        "name"                       : commonFieldsT["authority.name"],
+        "address"                    : commonFieldsT["authority.address"],
+        "city"                       : commonFieldsT["authority.city"],
+        "state"                      : commonFieldsT["authority.state"],
+        "postalCode"                 : commonFieldsT["authority.postalCode"],
+        "country"                    : commonFieldsT["authority.country"],
+        "phones"                     : commonFieldsT["authority.phones"],
+        "faxes"                      : commonFieldsT["authority.faxes"],
+        "emails"                     : commonFieldsT["authority.emails"],
+        "websites.url"               : commonFieldsT["authority.websites"],
+        "contacts"                   : commonFieldsT["authority.contacts"],
+        "relevantInformation"        : commonFieldsT["authority.relevantInformation"],
+        "relevantDocuments.url"      : commonFieldsT["authority.relevantDocuments"],
+        "functions"                  : commonFieldsT["authority.functions"],
+        "cpbOrganismTypes"           : commonFieldsT["authority.cpbOrganismTypes"],
+        "publishedOn"                : commonFieldsT["publishedOn"]
+    },
 
 	"supplementaryAuthority":{
 		"uniqueId"   : fieldsT["uniqueId"],
@@ -115,5 +140,34 @@ export const downloadSchemas = {
 		"organismType"		  	: fieldsT["organism.organismType"],
 		"commonUses"			: fieldsT["organism.commonUses"],
 		"publishedOn"			: fieldsT["publishedOn"]
-	}
+	},
+    "capacityBuildingInitiative":{
+        "uniqueId"           : commonFieldsT["capacityBuildingInitiative.uniqueId"],
+        "title"              : commonFieldsT["capacityBuildingInitiative.title"],
+        "projectNumber"      : commonFieldsT["capacityBuildingInitiative.projectNumber"],
+        "projectDocument.url": commonFieldsT["capacityBuildingInitiative.projectDocument"],
+        "contacts"           : commonFieldsT["capacityBuildingInitiative.contacts"],
+        "isProjectProgramme" : commonFieldsT["capacityBuildingInitiative.isProjectProgramme"],
+        "description"        : commonFieldsT["capacityBuildingInitiative.description"],
+        "fundingSourceTypes" : commonFieldsT["capacityBuildingInitiative.fundingSourceTypes"],
+        "coreFundingSources" : commonFieldsT["capacityBuildingInitiative.coreFundingSources"],
+        "coFinancingSources" : commonFieldsT["capacityBuildingInitiative.coFinancingSources"],
+        "totalBudget"        : commonFieldsT["capacityBuildingInitiative.totalBudget"],
+        "resultsAchievements": commonFieldsT["capacityBuildingInitiative.resultsAchievements"],
+        "resultsOutputs"     : commonFieldsT["capacityBuildingInitiative.resultsOutputs"],
+        "resultsReference"   : commonFieldsT["capacityBuildingInitiative.resultsReference"],
+        "bestPractices"      : commonFieldsT["capacityBuildingInitiative.bestPractices"],
+        "geographicScope"    : commonFieldsT["capacityBuildingInitiative.geographicScope"],
+        "countryRegions"     : commonFieldsT["capacityBuildingInitiative.countryRegions"],
+        "status"             : commonFieldsT["capacityBuildingInitiative.status"],
+        "startDate"          : commonFieldsT["capacityBuildingInitiative.startDate"],
+        "endDate"            : commonFieldsT["capacityBuildingInitiative.endDate"],
+        "activityScope"      : commonFieldsT["capacityBuildingInitiative.activityScope"],
+        "categories"         : commonFieldsT["capacityBuildingInitiative.categories"],
+        "cbdSubjects"        : commonFieldsT["capacityBuildingInitiative.cbdSubjects"],
+        "cpbThematicAreas"   : commonFieldsT["capacityBuildingInitiative.cpbThematicAreas"],
+        "relevantInformation": commonFieldsT["capacityBuildingInitiative.relevantInformation"],
+      "relevantDocuments.url": commonFieldsT["capacityBuildingInitiative.relevantDocuments"],
+        "publishedOn"        : commonFieldsT["publishedOn"]
+	},
 }

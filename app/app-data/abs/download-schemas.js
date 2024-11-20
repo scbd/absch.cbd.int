@@ -1,10 +1,39 @@
 import fieldsTranslations from '~/app-text/views/search/search-results/abs-download-schemas.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
 import { downloadSchemas as commonDownloadSchemas } from '~/app-data/common-download-schemas';
+import commonFieldsTranslations from '../app-text/views/search/search-results/common-download-schemas.json';
+
 const fieldsT = mergeTranslationKeys(fieldsTranslations);
+const commonFieldsT = mergeTranslationKeys(commonFieldsTranslations);
+
 export const downloadSchemas = {	
 	...commonDownloadSchemas,
 	
+    "authority":{
+        "uniqueId"                   : commonFieldsT["uniqueId"],
+        "government"                 : commonFieldsT["country"],
+        "name"                       : commonFieldsT["authority.name"],
+        "address"                    : commonFieldsT["authority.address"],
+        "city"                       : commonFieldsT["authority.city"],
+        "state"                      : commonFieldsT["authority.state"],
+        "postalCode"                 : commonFieldsT["authority.postalCode"],
+        "country"                    : commonFieldsT["authority.country"],
+        "phones"                     : commonFieldsT["authority.phones"],
+        "faxes"                      : commonFieldsT["authority.faxes"],
+        "emails"                     : commonFieldsT["authority.emails"],
+        "websites.url"               : commonFieldsT["authority.websites"],
+        "contacts"                   : commonFieldsT["authority.contacts"],
+        "policyBasisForCompetencyRef": commonFieldsT["authority.policyBasisForCompetencyRef"],
+        "responsibleForAll"          : commonFieldsT["authority.responsibleForAll"],
+        "responsibilities"           : commonFieldsT["authority.responsibilities"],
+        "absJurisdiction"            : commonFieldsT["authority.absJurisdiction"],
+        "absGeneticResourceTypes"    : commonFieldsT["authority.absGeneticResourceTypes"],
+        "relevantInformation"        : commonFieldsT["authority.relevantInformation"],
+        "relevantDocuments.url"      : commonFieldsT["authority.relevantDocuments"],
+        "functions"                  : commonFieldsT["authority.functions"],
+        "publishedOn"                : commonFieldsT["publishedOn"]
+    },
+
     "absPermit" : {
         "uniqueId"                    : fieldsT["absPermit.uniqueId"                   ],
         "government"                  : fieldsT["absPermit.government"                 ],
@@ -164,5 +193,35 @@ export const downloadSchemas = {
         "absMesasureNotApplicable" : fieldsT["measure.absMesasureNotApplicable"],
         "relevantInformation"      : fieldsT["measure.relevantInformation"],
         "relevantDocuments"        : fieldsT["measure.relevantDocuments"]
-    }
+    },
+    "capacityBuildingInitiative":{
+        "uniqueId"           : commonFieldsT["capacityBuildingInitiative.uniqueId"],
+        "title"              : commonFieldsT["capacityBuildingInitiative.title"],
+        "projectNumber"      : commonFieldsT["capacityBuildingInitiative.projectNumber"],
+        "projectDocument.url": commonFieldsT["capacityBuildingInitiative.projectDocument"],
+        "contacts"           : commonFieldsT["capacityBuildingInitiative.contacts"],
+        "isProjectProgramme" : commonFieldsT["capacityBuildingInitiative.isProjectProgramme"],
+        "description"        : commonFieldsT["capacityBuildingInitiative.description"],
+        "aichiTargets"       : commonFieldsT["capacityBuildingInitiative.aichiTargets"],
+        "absKeyAreas"        : commonFieldsT["capacityBuildingInitiative.absKeyAreas"],
+        "fundingSourceTypes" : commonFieldsT["capacityBuildingInitiative.fundingSourceTypes"],
+        "coreFundingSources" : commonFieldsT["capacityBuildingInitiative.coreFundingSources"],
+        "coFinancingSources" : commonFieldsT["capacityBuildingInitiative.coFinancingSources"],
+        "totalBudget"        : commonFieldsT["capacityBuildingInitiative.totalBudget"],
+        "resultsAchievements": commonFieldsT["capacityBuildingInitiative.resultsAchievements"],
+        "resultsOutputs"     : commonFieldsT["capacityBuildingInitiative.resultsOutputs"],
+        "resultsReference"   : commonFieldsT["capacityBuildingInitiative.resultsReference"],
+        "bestPractices"      : commonFieldsT["capacityBuildingInitiative.bestPractices"],
+        "geographicScope"    : commonFieldsT["capacityBuildingInitiative.geographicScope"],
+        "countryRegions"     : commonFieldsT["capacityBuildingInitiative.countryRegions"],
+        "status"             : commonFieldsT["capacityBuildingInitiative.status"],
+        "startDate"          : commonFieldsT["capacityBuildingInitiative.startDate"],
+        "endDate"            : commonFieldsT["capacityBuildingInitiative.endDate"],
+        "activityScope"      : commonFieldsT["capacityBuildingInitiative.activityScope"],
+        "categories"         : commonFieldsT["capacityBuildingInitiative.categories"],
+        "cbdSubjects"        : commonFieldsT["capacityBuildingInitiative.cbdSubjects"],
+        "relevantInformation": commonFieldsT["capacityBuildingInitiative.relevantInformation"],
+    "relevantDocuments.url"  : commonFieldsT["capacityBuildingInitiative.relevantDocuments"],
+        "publishedOn"        : commonFieldsT["publishedOn"]
+	},
 }

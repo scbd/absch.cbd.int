@@ -21,35 +21,7 @@
 
         <div class="register-content-header bg-darkgrey text-white">
             <div class="p-2">
-                <h3>{{::('nationalUserListT.userManagement'|$translate)}}
-                    <span class="helpinfoInline">
-                        <i class="bi bi-info-circle-fill helpicon float-end" ng-click="showInfo = !showInfo"></i>
-                    </span>
-                </h3>
-
-                <!--help info---------------------------->
-                <div ng-if="showInfo" class="p-3 card well-help">
-                    <strong>{{::('nationalUserListT.userManagementUsers'|$translate)}}</strong>
-                    <p>
-                        {{::('nationalUserListT.keepUpToDate'|$translate)}}
-                    </p>
-                    <strong>{{::('nationalUserListT.functionsPA'|$translate)}}</strong>
-                    <p>
-                        {{::('nationalUserListT.responsible'|$translate)}}
-                    <ul>
-                        <li>{{::('nationalUserListT.functionsAuth'|$translate)}}
-                        </li>
-                        <li>{{::('nationalUserListT.functionsDelete'|$translate)}}</li>
-                        <li>{{::('nationalUserListT.functionsEnsure'|$translate)}}</li>
-                        <li>{{::('nationalUserListT.functionsEnsureConfidential'|$translate)}}</li>
-                    </ul>
-                    </p>
-                    <strong>{{::('nationalUserListT.NAU'|$translate)}}</strong>
-                    <p>
-                        {{::('nationalUserListT.NAUInfo'|$translate)}}
-                    </p>
-
-                </div>
+                <h3>{{::('nationalUserListT.userManagement'|$translate)}}</h3>
             </div>
         </div>
 

@@ -92,10 +92,9 @@
                 </div>
               </div>
               <div class="row" v-if="sharedData.type == 'email' && isUserSignedIn">
-                <div class="col-md-12 ">
+                <div class="col-md-12 text-wrap">
                   <div class="alert alert-info">
                     {{t('emailInfo')}}
-
                   </div>
                 </div>
                 <div class="col-md-12 ">
@@ -105,7 +104,7 @@
                        <input type="email" class="form-control"
                         multiple @change="onEmailChange"
                         v-model="sharedData[sharedData.type].emails" :placeholder="t('emails')"/> 
-                        <div style="font-size: small;color: black;">{{t('emailInstructions')}}</div>                     
+                        <div class="text-wrap" style="font-size: small;color: black;">{{t('emailInstructions')}}</div>                     
                     </div>
                     <div class="col-12">
                       <button class="btn btn-primary float-end" @click.prevent="shareLinkMail()" :disabled="loading || !sharedData[sharedData.type].emails || sharedData[sharedData.type]._id" >

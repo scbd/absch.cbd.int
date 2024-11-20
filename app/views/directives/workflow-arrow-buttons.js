@@ -11,6 +11,7 @@ import toasterMessagesTranslations from '~/app-text/views/directives/toaster-mes
 import workflowButtonsT from '~/app-text/views/directives/workflow-arrow-buttons.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
 import cbdAddNewViewArticle from '~/components/common/cbd-add-new-view-article.vue'
+import documentDebugInfo from '~/components/km/document-debug-info.vue';
 
 const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
@@ -66,6 +67,9 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 
                 $scope.vueComponent = {
                     components: { cbdAddNewViewArticle }
+                }
+                $scope.debugInfoComponent = {
+                    components:{documentDebugInfo}
                 }
                 
                 $scope.isDialog                    = $attr.isDialog||false;

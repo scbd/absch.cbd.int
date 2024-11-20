@@ -21,8 +21,10 @@ import printFooterTemplate from 'text!./print-footer.html';
 import shareRecord from '~/components/common/share-record.vue';
 import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 import '~/views/forms/view/directives/validate-referenced-record-version';
+import documentDebugInfo from '~/components/km/document-debug-info.vue';
 
-const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
+	const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
+
 	app.run(function($templateCache){
 		$templateCache.put('view-print-header.html', printHeaderTemplate)
 		$templateCache.put('view-print-footer.html', printFooterTemplate)
@@ -95,6 +97,9 @@ const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 					$scope.shareVueComponent = {
 						components:{shareRecord},
 						 setup:  shareRecordsFunctions
+					}
+					$scope.debugInfoComponent = {
+						components:{documentDebugInfo}
 					}
 	
 					function shareRecordsFunctions () {

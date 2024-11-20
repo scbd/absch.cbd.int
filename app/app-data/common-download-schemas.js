@@ -24,40 +24,13 @@ export const downloadSchemas = {
         "phones"          : fieldsT["organization.phones"          ],
         "faxes"           : fieldsT["organization.faxes"           ],
         "emails"          : fieldsT["organization.emails"          ],
-        "websites"        : fieldsT["organization.websites"        ],
+        "websites.url"        : fieldsT["organization.websites"        ],
         "contacts"        : fieldsT["organization.contacts"        ],
         "contactsEmails"  : fieldsT["organization.contactsEmails"  ],
         "organizationType": fieldsT["organization.organizationType"],
         "areasOfWork"     : fieldsT["organization.areasOfWork"     ],
         "publishedOn"     : fieldsT["publishedOn"     ],
     },
-
-    "authority":{
-        "uniqueId"                   : fieldsT["uniqueId"],
-        "government"                 : fieldsT["country"],
-        "name"                       : fieldsT["authority.name"],
-        "address"                    : fieldsT["authority.address"],
-        "city"                       : fieldsT["authority.city"],
-        "state"                      : fieldsT["authority.state"],
-        "postalCode"                 : fieldsT["authority.postalCode"],
-        "country"                    : fieldsT["authority.country"],
-        "phones"                     : fieldsT["authority.phones"],
-        "faxes"                      : fieldsT["authority.faxes"],
-        "emails"                     : fieldsT["authority.emails"],
-        "websites.url"               : fieldsT["authority.websites"],
-        "contacts"                   : fieldsT["authority.contacts"],
-        "policyBasisForCompetencyRef": fieldsT["authority.policyBasisForCompetencyRef"],
-        "responsibleForAll"          : fieldsT["authority.responsibleForAll"],
-        "responsibilities"           : fieldsT["authority.responsibilities"],
-        "absJurisdiction"            : fieldsT["authority.absJurisdiction"],
-        "absGeneticResourceTypes"    : fieldsT["authority.absGeneticResourceTypes"],
-        "relevantInformation"        : fieldsT["authority.relevantInformation"],
-        "relevantDocuments.url"      : fieldsT["authority.relevantDocuments"],
-        "functions"                  : fieldsT["authority.functions"],
-        "cpbOrganismTypes"           : fieldsT["authority.cpbOrganismTypes"],
-        "publishedOn"                : fieldsT["publishedOn"]
-    },
-
     "resource":{
         "uniqueId"                  : fieldsT["resource.uniqueId"],
         "title"                     : fieldsT["title"],
@@ -81,46 +54,14 @@ export const downloadSchemas = {
         "publishedOn"               : fieldsT["publishedOn"]
     },
 
-    "capacityBuildingInitiative":{
-        "uniqueId"           : fieldsT["capacityBuildingInitiative.uniqueId"],
-        "title"              : fieldsT["capacityBuildingInitiative.title"],
-        "projectNumber"      : fieldsT["capacityBuildingInitiative.projectNumber"],
-        "projectDocument"    : fieldsT["capacityBuildingInitiative.projectDocument"],
-        "contacts"           : fieldsT["capacityBuildingInitiative.contacts"],
-        "isProjectProgramme" : fieldsT["capacityBuildingInitiative.isProjectProgramme"],
-        "description"        : fieldsT["capacityBuildingInitiative.description"],
-        "aichiTargets"       : fieldsT["capacityBuildingInitiative.aichiTargets"],
-        "absKeyAreas"        : fieldsT["capacityBuildingInitiative.absKeyAreas"],
-        "fundingSourceTypes" : fieldsT["capacityBuildingInitiative.fundingSourceTypes"],
-        "coreFundingSources" : fieldsT["capacityBuildingInitiative.coreFundingSources"],
-        "coFinancingSources" : fieldsT["capacityBuildingInitiative.coFinancingSources"],
-        "totalBudget"        : fieldsT["capacityBuildingInitiative.totalBudget"],
-        "resultsAchievements": fieldsT["capacityBuildingInitiative.resultsAchievements"],
-        "resultsOutputs"     : fieldsT["capacityBuildingInitiative.resultsOutputs"],
-        "resultsReference"   : fieldsT["capacityBuildingInitiative.resultsReference"],
-        "bestPractices"      : fieldsT["capacityBuildingInitiative.bestPractices"],
-        "relevantInformation": fieldsT["capacityBuildingInitiative.relevantInformation"],
-        "relevantDocuments"  : fieldsT["capacityBuildingInitiative.relevantDocuments"],
-        "geographicScope"    : fieldsT["capacityBuildingInitiative.geographicScope"],
-        "countryRegions"     : fieldsT["capacityBuildingInitiative.countryRegions"],
-        "status"             : fieldsT["capacityBuildingInitiative.status"],
-        "startDate"          : fieldsT["capacityBuildingInitiative.startDate"],
-        "endDate"            : fieldsT["capacityBuildingInitiative.endDate"],
-        "activityScope"      : fieldsT["capacityBuildingInitiative.activityScope"],
-        "categories"         : fieldsT["capacityBuildingInitiative.categories"],
-        "cbdSubjects"        : fieldsT["capacityBuildingInitiative.cbdSubjects"],
-        "cpbThematicAreas"   : fieldsT["capacityBuildingInitiative.cpbThematicAreas"],
-        "publishedOn"        : fieldsT["publishedOn"]
-	},
-
   "database":{
     "uniqueId": fieldsT["uniqueId"],
     "government": fieldsT["country"],
     "title": fieldsT["database.title"],
     "description": fieldsT["database.description"],
-    "websites": fieldsT["database.websites"],
+    "websites.url": fieldsT["database.websites"],
     "relevantInformation": fieldsT["database.relevantInformation"],
-    "relevantDocuments": fieldsT["database.relevantDocuments"]
+    "relevantDocuments.url": fieldsT["database.relevantDocuments"]
   },
 
   "contact":{
@@ -144,7 +85,7 @@ export const downloadSchemas = {
     "phones"             : fieldsT["contact.phones"],
     "faxes"              : fieldsT["contact.faxes"],
     "emails"             : fieldsT["contact.emails"],
-    "websites"           : fieldsT["contact.websites"]
+    "websites.url"           : fieldsT["contact.websites"]
   }
         
 }
