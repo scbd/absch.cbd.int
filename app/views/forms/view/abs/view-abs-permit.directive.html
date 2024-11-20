@@ -222,7 +222,7 @@
 							<km-link-list ng-model="document.gisFiles"></km-link-list>
 						</div>
 
-						<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
+						<leaflet :scroll-wheel-zoom="false" map-config="mapConfig" center="document.gisMapCenter" layers="gisMapLayers"></leaflet>
 						<br />
 						<br />
 					</div>
