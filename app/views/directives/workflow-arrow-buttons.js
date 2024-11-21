@@ -630,10 +630,12 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                         $scope.updateStep(tab);
                     
                     if(tab == "intro"){
-                        $timeout(function() {
-                            loadArticle();
-                            $scope.disablePreviousBtn = true;
-                        },0);
+                        $scope.$watch('documentType', function(newVal) {
+                            if (newVal) {
+                                loadArticle();
+                            }
+                        });
+                        $scope.disablePreviousBtn = true;
                     }
 
                     if(tab == "review" || tab == "publish"){
