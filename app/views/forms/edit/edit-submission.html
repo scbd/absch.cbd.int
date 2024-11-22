@@ -81,7 +81,7 @@
                                 <div class="no-shadow bg-white">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notifications" caption="{{::('editsubmissionT.notifications'|$translate)}}">
+                                           <div class="km-control-group" name="notifications" ng-required="isCHM" caption="{{::('editsubmissionT.notifications'|$translate)}}">
                                                 <div document-selector ng-disabled="!document.organizations && !document.government.identifier"
                                                     identifier-without-revision="true"
                                                     question="notifications" type="checkbox"
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="records"caption="{{::('editsubmissionT.records'|$translate)}}">
+                                            <div class="km-control-group" name="records" ng-required="isCHM" caption="{{::('editsubmissionT.records'|$translate)}}">
                                                 <div document-selector ng-model="document.records" question="records" filter="true"
                                                      on-build-query="onRecordsQuery(searchText)"></div>
                                             </div>
