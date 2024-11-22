@@ -12,6 +12,7 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
     translationService.set('editsubmissionT', editsubmissionT);
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
+    $scope.isCHM = realm.is('CHM');
     $scope.notificationQuery = {
         q   : "schema_s:notification",
         fl  : "identifier_s:symbol_s,rec_title:title_s,reference_s,symbol_s,rec_date:updatedDate_dt,schema_s"
