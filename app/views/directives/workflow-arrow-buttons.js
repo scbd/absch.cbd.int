@@ -630,7 +630,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                         $scope.updateStep(tab);
                     
                     if(tab == "intro"){
-                        $scope.$watch('documentType', function(newVal) {
+                        $scope.$watch('::documentType', function(newVal) {
                             if (newVal) {
                                 loadArticle();
                             }
