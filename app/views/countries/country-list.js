@@ -23,6 +23,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             $scope.sortTerm     = "name."+locale;
             $scope.loading      = true;
             $scope.locale       = locale;
+            $scope.queryString = {};
 
             translationService.set('countryListTranslation', countryListTranslation);
             $scope.options = {
