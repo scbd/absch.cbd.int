@@ -630,7 +630,11 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                         $scope.updateStep(tab);
                     
                     if(tab == "intro"){
-                        loadArticle();
+                        $scope.$watch('::documentType', function(newVal) {
+                            if (newVal) {
+                                loadArticle();
+                            }
+                        });
                         $scope.disablePreviousBtn = true;
                     }
 
