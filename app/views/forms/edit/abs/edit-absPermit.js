@@ -3,6 +3,8 @@ import _ from 'lodash';
 import '~/views/forms/edit/edit';
 import '~/services/main';
 import '~/views/forms/view/abs/view-abs-permit.directive';
+import '~/views/forms/view/chm/leaflet/leaflet.js';
+import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js'; 
 import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json';
 
   export { default as template } from './edit-absPermit.html';
@@ -13,6 +15,7 @@ import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
     $controller('editController', {$scope: $scope});
     translationService.set('editAbsPermitT', editAbsPermitT);
     $scope.path= $location.path();
+    $scope.mapConfig = mapConfig;
 
     _.extend($scope.options, {
       usages		: function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms",	{ cache: true }).then(function (o) { return o.data; }); },
