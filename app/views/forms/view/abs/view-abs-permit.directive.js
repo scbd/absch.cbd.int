@@ -3,6 +3,8 @@ import _ from 'lodash';
 import template from "text!./view-abs-permit.directive.html";
 import '~/views/directives/record-options';
 import '~/views/forms/view/directives/view-reference-records.directive';
+import '~/views/forms/view/chm/leaflet/leaflet.js';
+import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js'; 
 import viewAbsPermitT from '~/app-text/views/forms/view/abs/view-abs-permit.json';
 //,'views/forms/view/view-releated-checkpoint-communique-directive.html'
 app.directive("viewAbsPermit", ['translationService', function (translationService) {
@@ -31,6 +33,7 @@ app.directive("viewAbsPermit", ['translationService', function (translationServi
 
 			$scope.gisMapLayers = null;
 			$scope.gisMapCenter = null;
+			$scope.mapConfig = mapConfig;
 
 			
 			
