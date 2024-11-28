@@ -2,6 +2,8 @@ import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-abs-checkpoint-communique.directive.html";
 import '~/views/directives/record-options';
+import '~/views/forms/view/chm/leaflet/leaflet.js';
+import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js'; 
 import viewCPCT from '~/app-text/views/forms/view/abs/view-abs-checkpoint-communique.json';
 
 app.directive("viewAbsCheckpointCommunique", ['translationService', function (translationService) {
@@ -28,6 +30,7 @@ app.directive("viewAbsCheckpointCommunique", ['translationService', function (tr
 			$scope.contacts = undefined;
 			$scope.gisMapLayers = null;
 			$scope.gisMapCenter = null;
+			$scope.mapConfig = mapConfig;
 
 			
 			

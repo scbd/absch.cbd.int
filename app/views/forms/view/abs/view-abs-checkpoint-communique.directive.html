@@ -119,7 +119,7 @@
 							<div class="km-value" compare-val="gisFiles">
 								<km-link-list ng-model="document.gisFiles"></km-link-list>
 							</div>
-							<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
+							<leaflet :scroll-wheel-zoom="false" map-config="mapConfig" center="gisMapCenter" layers="gisMapLayers"></leaflet>
 						</div>
 						<div ng-show="document.keywords">
 							<label>{{::('viewCPCT.subjectMatterKeywords'|$translate)}}</label>

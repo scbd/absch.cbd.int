@@ -4,6 +4,8 @@ import '~/views/forms/edit/edit';
 import '~/views/forms/view/abs/view-abs-checkpoint-communique.directive';
 import '~/views/forms/edit/permit-selection-directive';
 import '~/services/main';
+import '~/views/forms/view/chm/leaflet/leaflet.js';
+import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js';
 import editAbsCheckpointCT from '~/app-text/views/forms/edit/abs/edit-absCheckpointCommunique.json';
 
     export { default as template } from './edit-absCheckpointCommunique.html';
@@ -17,7 +19,7 @@ import editAbsCheckpointCT from '~/app-text/views/forms/edit/abs/edit-absCheckpo
 
             translationService.set('editAbsCheckpointCT', editAbsCheckpointCT);
             $scope.path = $location.path();
-
+            $scope.mapConfig = mapConfig;
             $scope.checkpointList = [];
             _.extend($scope.options, {
                 absIRCCs: function() {
