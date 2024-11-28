@@ -163,6 +163,7 @@
                                                                 mime-types="application/json"></div>
                                                         </div>
                                                     </div>
+                                                    <leaflet ng-if="document.gisFiles" :scroll-wheel-zoom="false" map-config="mapConfig" center="document.gisMapCenter" layers="gisLayer"></leaflet>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12">
@@ -183,21 +184,8 @@
                                                 </div>
             
                                             </div>
-                                            <div ng-show="document.gisFiles">
-                                                <div class="input-prepend input-append">
-                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}" />
-                                                    <span class="add-on">{{::('editAbsCheckpointCT.lat'|$translate)}}</span>
-                                                </div>
-                                                <div class="input-prepend input-append">
-                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}" />
-                                                    <span class="add-on">{{::('editAbsCheckpointCT.long'|$translate)}}</span>
-                                                </div>
-                                                <div class="input-prepend input-append">
-                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}" />
-                                                    <span class="add-on">{{::('editAbsCheckpointCT.zoom'|$translate)}}</span>
-                                                </div>
-                                            </div>
-                                            <div ng-show="document.gisFiles" class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
+                     
+                                            
             
                                             <legend>{{::('editAbsCheckpointCT.evidence'|$translate)}}</legend>
             
