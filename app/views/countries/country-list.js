@@ -37,7 +37,10 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 }
             }
 
-            $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
+            const qCountries = commonjs.getCountries();
+            const qRegions  = commonjs.getRegions();
+
+            $q.all([qCountries, searchService.governmentSchemaFacets(), qRegions])
                 .then(function (results) {
 
                     var headerCount = [];
@@ -76,6 +79,9 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                     var url   = realm.baseURL + '/' + locale  + '/countries'
                     // ngMeta.setTag('description', summary || window.scbdApp.title);
                     ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
+
+                }).then(()=>{
+                    initializeFromUrlQueryString()
                 });
 
            //*************************************************************************************************************************************
@@ -192,7 +198,6 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                         identifier: code.toUpperCase(),
                     }));
                     if (countriesParams.length > 0) {
-                        $scope.countryFilter = countriesParams;
                     }
                 }
             
