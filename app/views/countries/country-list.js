@@ -23,7 +23,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             $scope.sortTerm     = "name."+locale;
             $scope.loading      = true;
             $scope.locale       = locale;
-
+            const queryParams = $location.search();
             translationService.set('countryListTranslation', countryListTranslation);
             $scope.options = {
                 regions  : commonjs.getRegions,
@@ -37,10 +37,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 }
             }
 
-            const qCountries = commonjs.getCountries();
-            const qRegions  = commonjs.getRegions();
-
-            $q.all([qCountries, searchService.governmentSchemaFacets(), qRegions])
+            $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
                 .then(function (results) {
 
                     var headerCount = [];
@@ -79,21 +76,9 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                     var url   = realm.baseURL + '/' + locale  + '/countries'
                     // ngMeta.setTag('description', summary || window.scbdApp.title);
                     ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
-
-                }).then(()=>{
-                    initializeFromUrlQueryString()
                 });
 
            //*************************************************************************************************************************************
-           $scope.$watch('countryFilter', function (newVal) {
-                if (newVal?.length>0) {
-                    // $location.replace();
-                    $location.search('countries', `${newVal.map(item => item.identifier.toLowerCase()).join(',')}`);
-                }
-                else{
-                    $location.search('countries', null);
-                }
-            }); 
             $scope.filterRegion = function (termID) {
                 
                 $scope.loading = true;
@@ -122,15 +107,15 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 $scope.loading = false;
             };
             
-            
+            $scope.$watch('countryFilter', function (newVal) {
+                setParams('countries', newVal);
+            });
+
             $scope.$watch('regions', function(newVal, oldVal){
+                setParams('regions', newVal)
                 if(newVal){
-                    $location.search('regions', `${newVal.map(item => item.identifier).join(',')}`);
                     var diff = _.difference(_.map(newVal, "identifier"), _.map(oldVal, "identifier"));
                     _.forEach(diff, $scope.filterRegion)
-                }
-                if (!newVal || newVal.length === 0) {
-                    $location.search('regions', null);
                 }
             })   
            
@@ -187,38 +172,6 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 $scope.setPartyFilter('All');
 
             //*************************************************************************************************************************************
-              // load saved search records, based on URL query string
-              function initializeFromUrlQueryString() {
-                $scope.countryFilter = undefined;
-                $scope.regions = undefined;
-                const queryParams = $location.search();
-            
-                if (queryParams.countries) {
-                    const countriesParams = queryParams.countries.split(",").map((code) => ({
-                        identifier: code.toUpperCase(),
-                    }));
-                    if (countriesParams.length > 0) {
-                    }
-                }
-            
-                if (queryParams.regions) {
-                    const regionsParams = queryParams.regions.split(",").map((code) => ({
-                        identifier: code,
-                    }));
-                    if (regionsParams.length > 0) {
-                        setTimeout(()=>{
-                            $scope.regions = regionsParams;
-                        },500)
-                    }
-                }
-            
-                if (queryParams.status) {
-                    $scope.setPartyFilter(queryParams.status);
-                }
-            }
-
-            initializeFromUrlQueryString();
-            
             $scope.$watch('list', function () {
                     
                     if(!$scope.list || !($scope.headerCount||{}).length)
@@ -239,6 +192,38 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 
              }, true)
 
+            //***************************************************************************************************** */
+            function setParams(name, values) {
+                if (!values || values.length === 0) {
+                    $location.search(name, null);
+                } else {
+                    $location.search(name, values.map((item) => item.identifier).join(','));
+                }
+            }
+
+            function getParams(name) {
+                if (queryParams[name]) {
+                    return queryParams[name].split(",").map((code) => ({
+                        identifier: code,
+                    }));
+                }
+                return [];
+            }
+
+            async function loadFromUrlQueryString() {
+            
+                if (getParams('countries').length > 0) {
+                    $scope.countryFilter = await getParams('countries');
+                }
+                if (getParams('regions').length > 0) {
+                        $scope.regions = await getParams('regions');
+                }
+                if (queryParams.status) {
+                    $scope.setPartyFilter(queryParams.status);
+                }
+            }
+            
+            loadFromUrlQueryString();
             //*************************************************************************************************************************************
             $scope.hasStatus = function (item) {
 
