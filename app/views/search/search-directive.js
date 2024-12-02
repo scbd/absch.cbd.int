@@ -414,7 +414,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
                         let name = ''
-                        let dateQuery = dateVal.value.start.format(dateFormat) + ' - ' + dateVal.value.end.format(dateFormat);
+                        let dateQuery = dateVal.value.start + ' - ' + dateVal.value.end
                             
                         if(dateVal.field=='updatedDate_dt') 
                         {
@@ -734,8 +734,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                 const dateFilter = {
                                     field: 'updatedDate_dt',
                                     value: {
-                                        start: moment(dates[0], dateFormat),
-                                        end: moment(dates[1], dateFormat)
+                                        start: dates[0],
+                                        end: dates[1]
                                     }
                                 };
                                 $scope.saveDateFilter(dateFilter.field, undefined, dateFilter);
@@ -846,6 +846,11 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                     function removeGlobalFilter(schema){
                         $scope.removeFilter({id:schema})
+                    }
+
+                    function closeDateTabFilter(schema){
+                        $scope.showFilters = false;
+                        $scope.searchKeyword = "";
                     }
 
                     function getSearchFilters(type, fn) {
@@ -1466,8 +1471,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     function buildDateFieldQuery({ field, filterValue:date }) {
                         
                         if(date.start || date.end) {
-                            const start   = date.start ? solr.escape(date.start.locale('en').format(dateFormat)   + 'T00:00:00.000Z')  : '*';
-                            const end     = date.end   ? solr.escape(date.end.locale('en').format(dateFormat)     + 'T23:59:59.999Z') : '*';
+                            const start   = date.start ? solr.escape(moment.utc(date.start, dateFormat).startOf('day').toISOString())  : '*';
+                            const end     = date.end   ? solr.escape(moment.utc(date.end, dateFormat).endOf('day').toISOString()) : '*';
     
                             return field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 
@@ -1839,6 +1844,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     this.getSearchFilters         = getSearchFilters        ;
                     this.addFilter                = addFilter               ;
                     this.removeGlobalFilter       = removeGlobalFilter      ;
+                    this.closeDateTabFilter       = closeDateTabFilter      ;
                     this.getFilter                = getFilter               ;
                     this.getSchemaFieldMapping    = getSchemaFieldMapping   ;
                     this.onLeftFilterUpdate       = onLeftFilterUpdate      ;

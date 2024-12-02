@@ -1,10 +1,8 @@
 <template>
-    <div class="container my-4">
       <div class="row g-3 align-items-center">
-        <!-- Start Date -->
-        <div class="col-12 col-md d-flex align-items-center gap-2">
+        <div class="col-12 col-md d-flex flex-column align-items-start gap-1">
           <label for="startDate" class="form-label mb-0">
-            <strong>From:</strong>
+            <strong>From</strong>
           </label>
           <input
             id="startDate"
@@ -14,10 +12,10 @@
             @change="validateDateRange"
           />
         </div>
-        <!-- End Date -->
-        <div class="col-12 col-md d-flex align-items-center gap-2">
+      
+        <div class="col-12 col-md d-flex flex-column align-items-start gap-1">
           <label for="endDate" class="form-label mb-0">
-            <strong>To:</strong>
+            <strong>To</strong>
           </label>
           <input
             id="endDate"
@@ -29,15 +27,16 @@
           />
         </div>
   
-        <div class="col-12 col-md-auto">
+        <div class="col-12 col-md-auto pt-4 d-flex justify-content-center align-items-center">
           <button class="btn btn-primary w-100 w-md-auto" @click="applyRange" :disabled="!!errorMessage">
             Apply
           </button>
         </div>
       </div>
+
   
       <p v-if="errorMessage" class="text-danger mt-2">{{ errorMessage }}</p>
-  
+
       <div class="mt-4">
         <ul class="list-unstyled row g-2 row-cols-1 row-cols-md-3">
           <li v-for="(range, label) in customRanges" :key="label" class="col d-flex">
@@ -50,14 +49,14 @@
             </button>
           </li>
         </ul>
-      </div>
     </div>
 </template>
- 
 
+ 
 <script setup>
     import { ref, onMounted, computed, inject } from "vue";
     import moment from "moment";
+    const dateFormate = "YYYY-MM-DD";
     
     const props = defineProps({
         modelValue: { type: Object, required: false, default: () => ({ startDate: "", endDate: "" }) },
@@ -80,12 +79,11 @@
     const onFilterDateChange = inject("onFilterDateChange");
 
     const isRangeValid = computed(() => {
-        const start = moment(dateRange.value.startDate, "YYYY-MM-DD");
-        const end = moment(dateRange.value.endDate, "YYYY-MM-DD");
+        const start = moment(dateRange.value.startDate, dateFormate);
+        const end = moment(dateRange.value.endDate, dateFormate);
         return start.isValid() && end.isValid() && !end.isBefore(start);
     });
-
-  // Methods
+ 
     const validateDateRange = () => {
         if (!isRangeValid.value) {
             errorMessage.value = "The end date cannot be earlier than the start date.";
@@ -105,13 +103,13 @@
     const setCustomRange = (label) => {
         selectedRange.value = label;
         const [start, end] = customRanges[label];
-        dateRange.value.startDate = start.format("YYYY-MM-DD");
-        dateRange.value.endDate = end.format("YYYY-MM-DD");
+        dateRange.value.startDate = start.format(dateFormate);
+        dateRange.value.endDate = end.format(dateFormate);
         applyRange();
     };
   
     onMounted(() => {
-        const today = moment().format("YYYY-MM-DD");
+        const today = moment().format(dateFormate);
         dateRange.value.startDate = props.modelValue.startDate || today;
         dateRange.value.endDate = props.modelValue.endDate || today;
     });
