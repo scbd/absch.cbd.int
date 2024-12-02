@@ -1,22 +1,20 @@
 ﻿<div id="Search-Filter"  style="margin-bottom:30px;" >
      <div>
-         <span class="country-heading">{{::('dateFilterT.date'|$translate)}}</span>
+         <span class="country-heading">{{::('dateFilterT.publishedOn'|$translate)}}</span>
         <hr class="heading" />
          <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> {{::('dateFilterT.search'|$translate)}}</p>
         
     </div>
     <div style="max-height:400px;">
-            <div class="filter col-lg-4">
-                
-                <div class="row" style="margin-top:6px">
-                    <div class="col-md-3 text-sm-start text-md-end">
-                        <label class="mx-0 float-start">{{::('dateFilterT.publishedOn'|$translate)}}</label>
-                    </div>
-                    <div class="col-md-7">
-                        <div km-date-range ng-model="dateFilter.value" ng-change="onChange()"></div>
-                    </div>
+        <div class="filter row" style="margin-top:6px">
+            <div class="col-8">
+                <div ng-if="exportVueComponent"> 
+                    <km-date-picker-range ng-vue="exportVueComponent" 
+                    :model-value="dateFilter.value"
+                    datesLabel="Published on"
+                    ></km-date-picker-range>
                 </div>
-               
             </div>
+        </div>
     </div>
 </div>
