@@ -150,3 +150,13 @@
 #searchResult .btn-close-record{
     padding-top: 15px;
 }
+.date-range-filter .tip {
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    margin-top: 39px;
+}
+.date-range-filter .date-range {
+    z-index: 10000002; 
+    min-width: max-content;
+} 
