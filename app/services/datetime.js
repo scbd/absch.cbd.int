@@ -3,11 +3,11 @@ import moment from 'moment';
 const dateFormat = 'DD MMM YYYY';
 
 export function formatDate(date) {
-  return moment.utc(date).format(dateFormat);
+  return moment.utc(date).format(dateFormat); //  "19 Jan 2024";
 }
 
 export function formatDateApi(date) {
-  return moment(date, dateFormat).format("YYYY-MM-DD");
+  return moment(date, dateFormat).format("YYYY-MM-DD"); // 2024-11-28
 }
 
 export function formatDateTime(datetime) {

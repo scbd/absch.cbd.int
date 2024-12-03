@@ -99,11 +99,7 @@
           const startDate = moment(start.value, dateFormat, true);
           const endDate = moment(end.value, dateFormat, true);
 
-          if (!startDate.isValid() && !endDate.isValid()) {
-              errorMessage.value = t("selectBothDates");
-              selectedRange.value = "";
-              return false;
-          }
+         
           if (!startDate.isValid()) {
               errorMessage.value = t("selectValidStartDate");
               selectedRange.value = "";
@@ -114,7 +110,11 @@
               selectedRange.value = "";
               return false;
           }
-
+          if (!startDate.isValid() && !endDate.isValid()) {
+              errorMessage.value = t("selectBothDates");
+              selectedRange.value = "";
+              return false;
+          }
           if (endDate.isBefore(startDate)) {
               errorMessage.value = t("earlierThanStartDate");
               selectedRange.value = "";
