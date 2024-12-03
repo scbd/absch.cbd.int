@@ -10,9 +10,13 @@ export const absLeftMenuFilters = {
 			"field": "text_EN_txt"
 		},
 		{
-			"type": "yesNo",
+			"type": "radioList",
 			"title": absFilters.contactType,
-			"field": "type_s"
+			"field": "type_s",
+            "values" : [
+                { label : 'Organization', value : 'organization'},
+                { label : 'Person'      , value : 'person'}
+            ]
 		},
 		{
 			"type": "thesaurus",
