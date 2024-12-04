@@ -11,7 +11,8 @@
                 <div ng-if="exportVueComponent"> 
                     <km-date-picker-range ng-vue="exportVueComponent" 
                     v-model="dateFilter.value"
-                    date-format="YYYY-MM-DD"
+                    v-model:start="dateFilter.value.start"
+                    v-model:end="dateFilter.value.end"
                     ></km-date-picker-range>
                 </div>
             </div>

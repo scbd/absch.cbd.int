@@ -8,8 +8,8 @@
             id="startDate"
             type="date"
             class="form-control"
-            v-model="dateRange.startDate"
-            :max="dateRange.endDate"
+            v-model="start"
+            :max="end"
             @change="errorMessage = ''"
           />
         </div>
@@ -22,8 +22,8 @@
             id="endDate"
             type="date"
             class="form-control"
-            v-model="dateRange.endDate"
-            :min="dateRange.startDate"
+            v-model="end"
+            :min="start"
             @change="errorMessage = ''"
           />
         </div>
@@ -62,33 +62,30 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/km/km-date-picker-range.json';
     const { t } = useI18n({ messages });
-    // const dateFormat = "YYYY-MM-DD";
+    const dateFormat = "YYYY-MM-DD";
     
-    const props = defineProps({
-        dateFormat: { type: String, required: false, default: "YYYY-MM-DD" },
-    });
-
-    const modelValue = defineModel({
-      type: Object,
+    const start = defineModel('start', {
+      type: String,
       required: false,
+      // validate: {
+      //   validator: function (value) {
+      //     const regex = /^\d{4}-\d{2}-\d{2}$/;
+      //     return regex.test(value);
+      //   },
+      //   message: 'Start date must be in the format YYYY-MM-DD',
+      // },
     });
-
-    const dateRange = computed({
-      get: () => modelValue || { startDate: "", endDate: "" },
-      set: (newValue) => {
-        if (newValue) {
-          modelValue.startDate = newValue.startDate || "";
-          modelValue.endDate = newValue.endDate || "";
-        }
-      },
-    });
+    const end = defineModel('end',{ 
+      type: String,
+      required: false,
+    })
 
     const errorMessage = ref("");
     const selectedRange = ref("");
 
     const customRanges = computed(() => ({
-      [t("last7Days")]: [moment().subtract(7, "days").startOf("day"), moment().startOf("day")],
-      [t("last30Days")]: [moment().subtract(30, "days").startOf("day"), moment().startOf("day")],
+      [t("last7Days")]: [moment().subtract(7, "days"), moment()],
+      [t("last30Days")]: [moment().subtract(30, "days"), moment()],
       [t("last6Month")]: [moment().subtract(6, "months").startOf("month"), moment()],
       [t("last12Month")]: [moment().subtract(12, "months").startOf("month"), moment()],
       [t("last2Years")]: [moment().subtract(2, "years").startOf("month"), moment()],
@@ -99,26 +96,26 @@
 
 
     const validateDateRange = () => {
-          const start = moment(dateRange.value?.startDate, props.dateFormat, true);
-          const end = moment(dateRange.value?.endDate, props.dateFormat, true);
+          const startDate = moment(start.value, dateFormat, true);
+          const endDate = moment(end.value, dateFormat, true);
 
-          if (!start.isValid() && !end.isValid()) {
+          if (!startDate.isValid() && !endDate.isValid()) {
               errorMessage.value = t("selectBothDates");
               selectedRange.value = "";
               return false;
           }
-          if (!start.isValid()) {
+          if (!startDate.isValid()) {
               errorMessage.value = t("selectValidStartDate");
               selectedRange.value = "";
               return false;
           }
-          if (!end.isValid()) {
+          if (!endDate.isValid()) {
               errorMessage.value = t("selectValidEndDate");
               selectedRange.value = "";
               return false;
           }
 
-          if (end.isBefore(start)) {
+          if (endDate.isBefore(startDate)) {
               errorMessage.value = t("earlierThanStartDate");
               selectedRange.value = "";
               return false;
@@ -129,15 +126,15 @@
 
     const applyRange = () => {
         if (validateDateRange()) {
-            onFilterDateChange?.(dateRange.value);
+            onFilterDateChange?.({start:start,end:end});
         }
     };
   
     const setCustomRange = (label) => {
         selectedRange.value = label;
-        const [start, end] = customRanges.value[label];
-        dateRange.value.startDate = start.format(props.dateFormat);
-        dateRange.value.endDate = end.format(props.dateFormat);
-        applyRange();
+        const [startRange, endRange] = customRanges.value[label];
+        start.value = startRange.format(dateFormat);
+        end.value = endRange.format(dateFormat);
+        onFilterDateChange?.({start:start.value,end:end.value});
     };
 </script>
