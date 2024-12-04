@@ -10,8 +10,8 @@
             <div class="col-8">
                 <div ng-if="exportVueComponent"> 
                     <km-date-picker-range ng-vue="exportVueComponent" 
-                    :model-value="dateFilter.value"
-                    datesLabel="Published on"
+                    v-model="dateFilter.value"
+                    date-format="YYYY-MM-DD"
                     ></km-date-picker-range>
                 </div>
             </div>
