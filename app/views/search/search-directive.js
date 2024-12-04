@@ -25,6 +25,7 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
+import {formatDate} from '~/services/datetime';
 import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge.js';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
@@ -414,8 +415,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
                         let name = ''
-                        const startDateText = moment(dateVal.value.start, dateFormat).format("DD MMM YYYY");
-                        const endDateText = moment(dateVal.value.end, dateFormat).format("DD MMM YYYY");    
+                        const startDateText = formatDate(dateVal.value.start);
+                        const endDateText = formatDate(dateVal.value.end);    
                         let dateQuery = startDateText + ' - ' + endDateText
                         if(dateVal.field=='updatedDate_dt') 
                         {
