@@ -62,14 +62,27 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/km/km-date-picker-range.json';
     const { t } = useI18n({ messages });
-    const dateFormat = "YYYY-MM-DD";
+    // const dateFormat = "YYYY-MM-DD";
     
     const props = defineProps({
-        modelValue: { type: Object, required: false},
-        datesLabel: { type: String, required: false, default: "Date Range" },
+        dateFormat: { type: String, required: false, default: "YYYY-MM-DD" },
     });
 
-    const dateRange = ref({ ...props.modelValue });
+    const modelValue = defineModel({
+      type: Object,
+      required: false,
+    });
+
+    const dateRange = computed({
+      get: () => modelValue || { startDate: "", endDate: "" },
+      set: (newValue) => {
+        if (newValue) {
+          modelValue.startDate = newValue.startDate || "";
+          modelValue.endDate = newValue.endDate || "";
+        }
+      },
+    });
+
     const errorMessage = ref("");
     const selectedRange = ref("");
 
@@ -86,8 +99,8 @@
 
 
     const validateDateRange = () => {
-          const start = moment(dateRange.value?.startDate, dateFormat, true);
-          const end = moment(dateRange.value?.endDate, dateFormat, true);
+          const start = moment(dateRange.value?.startDate, props.dateFormat, true);
+          const end = moment(dateRange.value?.endDate, props.dateFormat, true);
 
           if (!start.isValid() && !end.isValid()) {
               errorMessage.value = t("selectBothDates");
@@ -123,8 +136,8 @@
     const setCustomRange = (label) => {
         selectedRange.value = label;
         const [start, end] = customRanges.value[label];
-        dateRange.value.startDate = start.format(dateFormat);
-        dateRange.value.endDate = end.format(dateFormat);
+        dateRange.value.startDate = start.format(props.dateFormat);
+        dateRange.value.endDate = end.format(props.dateFormat);
         applyRange();
     };
 </script>
