@@ -32,9 +32,8 @@ app.directive('dateFilter', ['solr', 'translationService', function (solr, trans
                 }
 
                 function componentSetup () {
-                    provide('onFilterDateChange', safeDelegate($scope, (filterDates)=>{
-                        $scope.dateFilter.value.start = filterDates.startDate; 
-                        $scope.dateFilter.value.end = filterDates.endDate;
+                    provide('onFilterDateChange', safeDelegate($scope, ()=>{
+
                         searchDirectiveCtrl.closeDateTabFilter();
                         $scope.saveDateFilter($scope.dateFilter.field, undefined, $scope.dateFilter);
                     }));
