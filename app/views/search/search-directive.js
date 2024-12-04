@@ -414,8 +414,9 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
                         let name = ''
-                        let dateQuery = dateVal.value.start + ' - ' + dateVal.value.end
-                            
+                        const startDateText = moment(dateVal.value.start, dateFormat).format("DD MMM YYYY");
+                        const endDateText = moment(dateVal.value.end, dateFormat).format("DD MMM YYYY");    
+                        let dateQuery = startDateText + ' - ' + endDateText
                         if(dateVal.field=='updatedDate_dt') 
                         {
                             name = 'Date published ('+dateQuery+ ')' ;
@@ -731,11 +732,14 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                             function applyQSDateFilter(qsDateFilter) {
                                 var dates = qsDateFilter.split(' - ');
+                                //  convert date back to YYYY-MM-DD for API compatibility
+                                const startDate = moment(dates[0], "DD MMM YYYY").format("YYYY-MM-DD");
+                                const endDate = moment(dates[1], "DD MMM YYYY").format("YYYY-MM-DD");
                                 const dateFilter = {
                                     field: 'updatedDate_dt',
                                     value: {
-                                        start: dates[0],
-                                        end: dates[1]
+                                        start: startDate,
+                                        end: endDate
                                     }
                                 };
                                 $scope.saveDateFilter(dateFilter.field, undefined, dateFilter);
