@@ -1,12 +1,16 @@
 import moment from 'moment';
 
+const dateFormat = 'DD MMM YYYY';
+
 export function formatDate(date) {
-  const format = 'DD MMM YYYY';
-  return moment.utc(date).format(format);
+  return moment.utc(date).format(dateFormat);
+}
+
+export function formatDateApi(date) {
+  return moment(date, dateFormat).format("YYYY-MM-DD");
 }
 
 export function formatDateTime(datetime) {
-    const format = 'DD MMM YYYY HH:mm';
-    return moment(datetime).format(format);
+    return moment(datetime).format('DD MMM YYYY HH:mm');
 }
 
