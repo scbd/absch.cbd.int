@@ -225,6 +225,12 @@ ul.km-value {
     }
 }
 
+@media (max-width: 650px) {
+    .realm-base-acronym .ch-name {
+        font-size: 14px;
+    }
+}
+
 .breadcrumbs {background-color:#00405C;}
 .breadcrumbs { font-size: 12px; color:#eee; text-decoration: none;}
 .breadcrumbs a { font-size: 12px; color:#999; text-decoration: none;}
