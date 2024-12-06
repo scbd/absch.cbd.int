@@ -23,6 +23,7 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                 binding: '=ngModel',
                 bindingType: '@',
                 termsFn: '&terms',
+                facetsFn: '&facets',
                 required: "@",
                 layout: "@",
                 locales: '=?',
@@ -271,6 +272,17 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                     });
                     return has != undefined;
                 }
+                 //==============================
+                //===============================
+                function updateTermCounts(terms, facets) {
+                    terms.forEach(term => {
+                        term.count = facets[term.identifier] || 0;
+                
+                        if (Array.isArray(term.narrowerTerms)) {
+                            updateTermCounts(term.narrowerTerms, facets);
+                        }
+                    });
+                }
                 //==============================
                 //
                 //==============================
@@ -284,6 +296,10 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                         else
                             $scope.rootTerms = Enumerable.from(refTerms).select("o=>{identifier : o.identifier, name : o.name, title : o.title, type:o.type, multiple:o.multiple}").toArray();
                         
+                        const facets = $scope.facetsFn();
+                        if (facets) {
+                            updateTermCounts($scope.rootTerms, facets);
+                        }
                         buildSearchList($scope.rootTerms)
                     }
 
