@@ -23,7 +23,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             $scope.sortTerm     = "name."+locale;
             $scope.loading      = true;
             $scope.locale       = locale;
-
+            const queryParams = $location.search();
             translationService.set('countryListTranslation', countryListTranslation);
             $scope.options = {
                 regions  : commonjs.getRegions,
@@ -107,8 +107,12 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 $scope.loading = false;
             };
             
-            
+            $scope.$watch('countryFilter', function (newVal) {
+                setParams('countries', newVal);
+            });
+
             $scope.$watch('regions', function(newVal, oldVal){
+                setParams('regions', newVal)
                 if(newVal){
                     var diff = _.difference(_.map(newVal, "identifier"), _.map(oldVal, "identifier"));
                     _.forEach(diff, $scope.filterRegion)
@@ -154,6 +158,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             }
             //*************************************************************************************************************************************
             $scope.setPartyFilter = function (pfilter) {
+                $location.search('status', pfilter);
                 $scope.partyFilter = pfilter;
                  $scope.filterCountries;
             };
@@ -187,6 +192,38 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 
              }, true)
 
+            //***************************************************************************************************** */
+            function setParams(name, values) {
+                if (!values || values.length === 0) {
+                    $location.search(name, null);
+                } else {
+                    $location.search(name, values.map((item) => item.identifier).join(','));
+                }
+            }
+
+            function getParams(name) {
+                if (queryParams[name]) {
+                    return queryParams[name].split(",").map((code) => ({
+                        identifier: code,
+                    }));
+                }
+                return [];
+            }
+
+            async function loadFromUrlQueryString() {
+            
+                if (getParams('countries').length > 0) {
+                    $scope.countryFilter = await getParams('countries');
+                }
+                if (getParams('regions').length > 0) {
+                        $scope.regions = await getParams('regions');
+                }
+                if (queryParams.status) {
+                    $scope.setPartyFilter(queryParams.status);
+                }
+            }
+            
+            loadFromUrlQueryString();
             //*************************************************************************************************************************************
             $scope.hasStatus = function (item) {
 
