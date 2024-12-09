@@ -5,8 +5,8 @@ import template from './docked-side-bar.html';
 import 'ck-editor-css';
 import dockedSideBarT from '~/app-text/views/directives/docked-side-bar.json';
 
-app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 'articlesService', '$q', 'translationService',
-    function (realm, $rootScope, $route, $location, articlesService, $q, translationService) {
+app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 'articlesService', '$q', 'translationService', 'locale',
+    function (realm, $rootScope, $route, $location, articlesService, $q, translationService, locale) {
     return {
         restrict: 'AE',
         replace: true,
@@ -76,9 +76,15 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 'a
                     if(tags.length)
                         ag.push({"$match":{"$and":tags}});
 
-                    if((searchText||'').trim()!=''){
-                        ag.push({"$match" : {"$or" : [{"title.en": { "$$contains" : encodeURIComponent(searchText)}}, 
-                                                    {"content.en": { "$$contains" : encodeURIComponent(searchText)}}]}});
+                    if ((searchText || '').trim() != '') {
+                        ag.push({
+                            "$match": {
+                                "$or": [
+                                    { [`title.${locale}`]: { "$$contains": searchText } },
+                                    { [`content.${locale}`]: { "$$contains": searchText } }
+                                ]
+                            }
+                        });
                     }
 
                     ag.push({"$project" : {"title":1, "coverImage":1, "meta":1, "content":1, "summary":1, "adminTags":1}});
