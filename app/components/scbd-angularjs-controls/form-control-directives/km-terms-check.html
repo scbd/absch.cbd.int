@@ -62,7 +62,7 @@
 				<label>
 					<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
 						ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier|escapeHtmlAttributeId}}"/>
-						<span ng-bind-html="term.title||term.name | lstring:locale"></span> <span ng-if="term.count" class=text-muted>({{term.count}})</span>
+						<span ng-bind-html="term.title||term.name | lstring:locale"></span> <span ng-if="term.count !==undefined" class=text-muted>({{term.count}})</span>
 				</label>
 				<div ng-if="(otherTermIdentifier==term.identifier ||term.type) && !term.multiple && selectedItems[term.identifier].selected">
 					<div style="padding-left:15px;"> 
