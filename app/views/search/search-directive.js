@@ -1605,6 +1605,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                 );
                     
                                 lmoObject.disabled = !isDecisionKeyFound;
+                                if(lmoObject.disabled) 
+                                    lmoObject.selectedItems = undefined;
                             }
                         }
                     }
