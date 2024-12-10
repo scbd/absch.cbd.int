@@ -156,7 +156,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='yesNo'" block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
+                            <!-- ToDo: Do we need loading while disable? if yes then add activate="filter.disabled" -->
+                            <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='yesNo'" block-region skip-loading-icon="true" style="position: relative;">
                                 <div ng-class="{'exclude-filter':filter.excludeResult}">
                                     <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">{{::('leftSideFilterT.not'|$translate)}}</span>
                                     <span class="label label-info float-end" ng-if="filter.searchRelated && hasItems(filter.selectedItems)">{{::('leftSideFilterT.searchRelation'|$translate)}}</span>

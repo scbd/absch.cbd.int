@@ -34,6 +34,7 @@
 }
 .strikeout{
     text-decoration: line-through;
+    pointer-events: none;
 }
 #Search-Filter .bring-to-front{
     z-index: 1000000;

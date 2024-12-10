@@ -42,7 +42,8 @@ export const bchLeftMenuFilters = {
                     "title":{"en":bchFilters.biosafetyDecisionAnyOther}
                 }
             ],
-            "relatedField":"decisionTypes_REL_ss"
+            "relatedField":"decisionTypes_REL_ss",
+            "fieldfn": "disableUsesOfLmoFn"
         },
         {
             "type": "thesaurus",
