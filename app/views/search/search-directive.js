@@ -45,6 +45,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
                             buildContactsUserCountryfn : buildContactsUserCountryfn,
                             buildCustomConfidentialQueryFn : buildCustomConfidentialQueryFn,
+                            disableUsesOfLmoFn : disableUsesOfLmoFn,
                             buildReferencedByQuery: buildReferencedByQuery
                         }
                         translationService.set('searchDirectiveT', searchDirectiveT);
@@ -1584,9 +1585,32 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                             return 'country_s:(' + solr.escape(countries.join(' ')) + ') AND referencedPermits_ss:*';
                         }
                     }
+
+                    function disableUsesOfLmoFn() {
+                        const decisionKeys = [
+                            "BE64016A-C3BD-4C61-9620-C3FEF96B2A24", 
+                            "0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3", 
+                            "C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507"
+                        ];
                     
+                        if (Array.isArray($scope.leftMenuFilters["biosafetyDecision"])) {
+                            const items = $scope.leftMenuFilters["biosafetyDecision"];
+                            const lmoObject = items.find(o => o.term === "decisionLMOFFPSubject");
+                    
+                            if (lmoObject) {
+                                const isDecisionKeyFound = items.some(obj => 
+                                    obj.term === "decisionTypes" && 
+                                    obj.selectedItems && 
+                                    decisionKeys.some(key => key in obj.selectedItems)
+                                );
+                    
+                                lmoObject.disabled = !isDecisionKeyFound;
+                            }
+                        }
+                    }
+                    
+
                     function buildCustomConfidentialQueryFn(filter) {
-                        
                         let query = [];  
                         let confidentialObject;          
                         let termFields = _.map(filter.selectedItems, 'identifier').filter(e => e !== 'usagesConfidential_b');
