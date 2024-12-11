@@ -107,15 +107,23 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 $scope.loading = false;
             };
             
-            $scope.$watch('countryFilter', function (newVal) {
-                setParams('countries', newVal);
+            $scope.$watch('countryFilter', function (newVal, oldVal) {
+                if(newVal){
+                        setParams('countries', newVal);
+                }
+                else{
+                    $location.search('countries', oldVal.value);
+                }
             });
 
             $scope.$watch('regions', function(newVal, oldVal){
-                setParams('regions', newVal)
                 if(newVal){
+                    setParams('regions', newVal)
                     var diff = _.difference(_.map(newVal, "identifier"), _.map(oldVal, "identifier"));
                     _.forEach(diff, $scope.filterRegion)
+                }
+                else{
+                    $location.search('regions', oldVal.value);
                 }
             })   
            
@@ -212,10 +220,10 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 
             async function loadFromUrlQueryString() {
             
-                if (getParams('countries').length > 0) {
+                if (queryParams.countries) {
                     $scope.countryFilter = await getParams('countries');
                 }
-                if (getParams('regions').length > 0) {
+                if (queryParams.regions) {
                         $scope.regions = await getParams('regions');
                 }
                 if (queryParams.status) {
