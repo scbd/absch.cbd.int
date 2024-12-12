@@ -1,0 +1,15 @@
+{
+    "from": "From",
+    "to": "To",
+    "apply": "Apply",
+    "last7Days": "Last 7 Days",
+    "last30Days": "Last 30 Days",
+    "last6Month": "Last 6 Months",
+    "last12Month": "Last 12 Months",
+    "last2Years": "Last 2 Years",
+    "last5Years": "Last 5 Years",
+    "selectBothDates": "Please select both a start date and an end date.",
+    "selectValidStartDate": "Please select a valid start date.",
+    "selectValidEndDate": "Please select a valid end date.",
+    "earlierThanStartDate": "The end date cannot be earlier than the start date."
+}
