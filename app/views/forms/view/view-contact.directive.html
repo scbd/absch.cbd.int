@@ -1,21 +1,32 @@
 ﻿<div id="Record" class="record panel panel-default">
 
 	<div class="record-body panel-body bg-white">
-		<document-date></document-date>
-		<div ng-show="document.type">
-			<label>{{::('viewContactT.type'|$translate)}}</label>
-			<div class="km-value" compare-val>				
-				<span class="capitalize-first-letter" ng-bind="document.type | lstring:locale"></span>
-			</div>
+		<div>
+			<document-date></document-date>			
 		</div>
-		<div ng-show="document.type=='organization'">
-			
-			<div ng-show="document.government">
-				<label>{{::('viewContactT.country'|$translate)}}</label>
-				<div class="km-value" compare-val>
-					<span ng-bind="document.government | term:locale"></span>
+		<div class="container-fluid mt-4" ng-if="document.type && document.government">
+			<div class="row">
+				<div class="col" ng-if="document.type">
+					<div>
+						<label>{{::('viewContactT.type'|$translate)}}</label>
+						<div class="km-value" compare-val>				
+							<span class="capitalize-first-letter" ng-bind="document.type | lstring:locale"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col" ng-if="document.government">
+					<div>
+						<label>{{::('viewContactT.government'|$translate)}}</label>
+						<div class="km-value" compare-val>
+							<span ng-bind="document.government | term:locale"></span>
+						</div>
+					</div>
 				</div>
 			</div>
+		</div>
+		
+		
+		<div ng-show="document.type=='organization'">
 			<div ng-show="document.organization || document.organizationAcronym">
                 <label>{{::('viewContactT.name'|$translate)}}</label>
 				<div class="km-value" compare-val>
@@ -33,13 +44,6 @@
 
 
 		<div ng-show="document.type=='person'">
-			 <div ng-show="document.government">
-  			   <label>{{::('viewContactT.country'|$translate)}}</label>
-  			   <div class="km-value" compare-val>
-  				   <span ng-bind="document.government | term:locale"></span>
-  			   </div>
-  		   </div>
-
             <div ng-show="document.firstName || document.middleName || document.lastName">
 				<label>{{::('viewContactT.name'|$translate)}}</label>
 				<div class="km-value" compare-val>
