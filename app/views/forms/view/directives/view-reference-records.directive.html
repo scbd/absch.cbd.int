@@ -33,7 +33,7 @@
                             </td>
                             <td width="43%"> {{record.schema}}</td>
                             <td max-width="40%" class="truncate-record" 
-                            ng-bind="getFieldName(record.schemaCode, field.fieldTitle, record.realm)" ng-click="toggleTitle($event)"></td>
+                            ng-bind="getFieldName(record.realm, record.schemaCode, field.fieldTitle)" ng-click="toggleTitle($event)"></td>
                             <td width="7%" ng-bind="field.count"></td>
                         </tr>
                         <tr ng-if="field.showRecords">

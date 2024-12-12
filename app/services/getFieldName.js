@@ -2,23 +2,16 @@ import { downloadSchemas as absDownloadSchemas } from "../app-data/abs/download-
 import { downloadSchemas as bchDownloadSchema } from "../app-data/bch/download-schemas";
 import { downloadSchemas as chmDownloadSchema } from "../app-data/chm/download-schemas";
 
-export function getFieldName(schema, fieldName, realm) {
+export function getFieldName(realm, schema, fieldName) {
   let schemaObject = null;
-  switch (realm) {
-    case "ABS":
-      schemaObject = absDownloadSchemas[schema];
-      break;
-    case "BCH":
-      schemaObject = bchDownloadSchema[schema];
-    case "CHM":
-      schemaObject = chmDownloadSchema[schema];
-  }
+
+  if(/^ABS\b/i.test(realm)) schemaObject = absDownloadSchemas[schema];
+  if(/^BCH\b/i.test(realm)) schemaObject = bchDownloadSchema[schema];
+  if(/^CHM\b/i.test(realm)) schemaObject = chmDownloadSchema[schema];
 
   if(!schemaObject){
-      return null;
+     schemaObject = absDownloadSchemas[schema] || bchDownloadSchema[schema] || chmDownloadSchema[schema];
   }
-
-  schemaObject = absDownloadSchemas[schema];
 
   return (
     schemaObject?.[fieldName] || schemaObject?.[`${fieldName}Link`] || fieldName

@@ -6,7 +6,7 @@ import '~/services/main';
 import '~/views/forms/view/bch/icons';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import viewReferenceRecordsT from '~/app-text/views/forms/view/directives/view-reference-records.json';
-import { getFieldName } from '../../../../services/getFieldName';
+import { getFieldName } from '~/services/getFieldName';
 
 app.directive("viewReferencedRecords", [function () {
 	return {
@@ -30,8 +30,8 @@ app.directive("viewReferencedRecords", [function () {
 			// //==================================
 			// //
 			// //==================================
-			$scope.getFieldName = function(schema, fieldName, realm){
-				return getFieldName(schema, fieldName, realm);
+			$scope.getFieldName = function(realm, schema, fieldName){
+				return getFieldName(realm, schema, fieldName, );
 			};
 			$scope.$watch('model', async function(newValue, oldValue){
 				if(newValue && !$scope.referenceRecords && !$scope.loading){
