@@ -25,6 +25,7 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
+import {formatDate, formatDateISO} from '~/services/datetime';
 import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge.js';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
@@ -414,8 +415,9 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
                         let name = ''
-                        let dateQuery = dateVal.value.start.format(dateFormat) + ' - ' + dateVal.value.end.format(dateFormat);
-                            
+                        const startDateText = formatDate(dateVal.value.start);
+                        const endDateText = formatDate(dateVal.value.end);    
+                        let dateQuery = startDateText + ' - ' + endDateText
                         if(dateVal.field=='updatedDate_dt') 
                         {
                             name = 'Date published ('+dateQuery+ ')' ;
@@ -731,11 +733,12 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                             function applyQSDateFilter(qsDateFilter) {
                                 var dates = qsDateFilter.split(' - ');
+                                
                                 const dateFilter = {
                                     field: 'updatedDate_dt',
                                     value: {
-                                        start: moment(dates[0], dateFormat),
-                                        end: moment(dates[1], dateFormat)
+                                        start   : formatDateISO(dates[0]),
+                                        end     : formatDateISO(dates[1])
                                     }
                                 };
                                 $scope.saveDateFilter(dateFilter.field, undefined, dateFilter);
@@ -846,6 +849,11 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                     function removeGlobalFilter(schema){
                         $scope.removeFilter({id:schema})
+                    }
+
+                    function closeDateTabFilter(schema){
+                        $scope.showFilters = false;
+                        $scope.searchKeyword = "";
                     }
 
                     function getSearchFilters(type, fn) {
@@ -1466,8 +1474,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     function buildDateFieldQuery({ field, filterValue:date }) {
                         
                         if(date.start || date.end) {
-                            const start   = date.start ? solr.escape(date.start.locale('en').format(dateFormat)   + 'T00:00:00.000Z')  : '*';
-                            const end     = date.end   ? solr.escape(date.end.locale('en').format(dateFormat)     + 'T23:59:59.999Z') : '*';
+                            const start   = date.start ? solr.escape(moment.utc(date.start, dateFormat).startOf('day').toISOString())  : '*';
+                            const end     = date.end   ? solr.escape(moment.utc(date.end, dateFormat).endOf('day').toISOString()) : '*';
     
                             return field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 
@@ -1839,6 +1847,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     this.getSearchFilters         = getSearchFilters        ;
                     this.addFilter                = addFilter               ;
                     this.removeGlobalFilter       = removeGlobalFilter      ;
+                    this.closeDateTabFilter       = closeDateTabFilter      ;
                     this.getFilter                = getFilter               ;
                     this.getSchemaFieldMapping    = getSchemaFieldMapping   ;
                     this.onLeftFilterUpdate       = onLeftFilterUpdate      ;
