@@ -23,7 +23,6 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             $scope.sortTerm     = "name."+locale;
             $scope.loading      = true;
             $scope.locale       = locale;
-            const queryParams = $location.search();
             translationService.set('countryListTranslation', countryListTranslation);
             $scope.options = {
                 regions  : commonjs.getRegions,
@@ -36,6 +35,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                     });
                 }
             }
+            const queryParams = angular.copy($location.search());
 
             $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
                 .then(function (results) {
@@ -108,24 +108,23 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             };
             
             $scope.$watch('countryFilter', function (newVal, oldVal) {
-                if(newVal){
-                        setParams('countries', newVal);
-                }
-                else{
-                    $location.search('countries', oldVal.value);
+                if (newVal) {
+                    setParams('countries', newVal);
+                } else if (oldVal) {
+                    setParams('countries', []);
                 }
             });
 
-            $scope.$watch('regions', function(newVal, oldVal){
+            $scope.$watch('regions', function (newVal, oldVal) {
                 if(newVal){
                     setParams('regions', newVal)
                     var diff = _.difference(_.map(newVal, "identifier"), _.map(oldVal, "identifier"));
                     _.forEach(diff, $scope.filterRegion)
                 }
-                else{
-                    $location.search('regions', oldVal.value);
+                 else if (oldVal) {
+                    setParams('regions', []);
                 }
-            })   
+            });   
            
             $scope.hasRegions = function(country){
                 if(country && $scope.regions){
@@ -219,18 +218,16 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             }
 
             async function loadFromUrlQueryString() {
-            
                 if (queryParams.countries) {
                     $scope.countryFilter = await getParams('countries');
                 }
                 if (queryParams.regions) {
-                        $scope.regions = await getParams('regions');
+                    $scope.regions = await getParams('regions');
                 }
                 if (queryParams.status) {
                     $scope.setPartyFilter(queryParams.status);
                 }
             }
-            
             loadFromUrlQueryString();
             //*************************************************************************************************************************************
             $scope.hasStatus = function (item) {
