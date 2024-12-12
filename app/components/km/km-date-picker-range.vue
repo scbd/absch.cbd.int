@@ -55,34 +55,37 @@
     </div>
 </template>
 
- 
 <script setup>
-    import { ref, computed, inject } from "vue";
+    import { ref, computed, nextTick } from "vue";
     import moment from "moment";
-    import { useI18n } from 'vue-i18n';
-    import messages from '../../app-text/components/km/km-date-picker-range.json';
+    import { useI18n } from "vue-i18n";
+    import messages from "../../app-text/components/km/km-date-picker-range.json";
     const { t } = useI18n({ messages });
     const dateFormat = "YYYY-MM-DD";
     
     const start = defineModel('start', {
       type: String,
       required: false,
-        validate: {
-          validator: function (value) {
-            if (value === null) return true;
-            const regex = /^\d{4}-\d{2}-\d{2}$/;
-            return regex.test(value);
-          },
-          message: 'Start date must be in the format YYYY-MM-DD or null',
-        },
+      validator: function (value) {
+        if (value === null) return true;
+        const dateRegex = /^[0-9]{4}-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])$/;
+        return dateRegex.test(value);
+      },
     });
     const end = defineModel('end',{ 
       type: String,
       required: false,
+      validator: function (value) {
+        if (value === null) return true;
+        const dateRegex = /^[0-9]{4}-([0][1-9]|[1][0-2])-([0][1-9]|[1-2][0-9]|[3][0-1])$/;
+        return dateRegex.test(value);
+      },
     })
 
     const errorMessage = ref("");
     const selectedRange = ref("");
+    
+    const emit = defineEmits(['change']);
 
     const customRanges = computed(() => ({
       [t("last7Days")]: [moment().subtract(7, "days"), moment()],
@@ -92,15 +95,11 @@
       [t("last2Years")]: [moment().subtract(2, "years").startOf("month"), moment()],
       [t("last5Years")]: [moment().subtract(5, "years").startOf("month"), moment()],
     }));
-  
-    const onFilterDateChange = inject("onFilterDateChange");
-
 
     const validateDateRange = () => {
           const startDate = moment(start.value, dateFormat, true);
           const endDate = moment(end.value, dateFormat, true);
-
-         
+          
           if (!startDate.isValid()) {
               errorMessage.value = t("selectValidStartDate");
               selectedRange.value = "";
@@ -126,15 +125,17 @@
       };
 
     const applyRange = () => {
-        if (validateDateRange()) {
-            onFilterDateChange?.({start:start,end:end});
-        }
+      if (validateDateRange()) {
+        emit("change", { start: start.value, end: end.value });
+      }
     };
   
     const setCustomRange = (range) => {
-        const [startRange, endRange] = range;
-        start.value = startRange.format(dateFormat);
-        end.value = endRange.format(dateFormat);
-        onFilterDateChange?.({start:start.value,end:end.value});
+      const [startRange, endRange] = range;
+      start.value = startRange.format(dateFormat);
+      end.value = endRange.format(dateFormat);
+      nextTick(() => {
+        emit("change", { start: start.value, end: end.value });
+      });
     };
 </script>
