@@ -25,7 +25,7 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
-import {formatDate, formatDateApi} from '~/services/datetime';
+import {formatDate, formatDateISO} from '~/services/datetime';
 import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge.js';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
@@ -736,8 +736,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                 const dateFilter = {
                                     field: 'updatedDate_dt',
                                     value: {
-                                        start   : formatDateApi(dates[0]), //  convert date back to YYYY-MM-DD for API compatibility
-                                        end     : formatDateApi(dates[1])
+                                        start   : formatDateISO(dates[0]),
+                                        end     : formatDateISO(dates[1])
                                     }
                                 };
                                 $scope.saveDateFilter(dateFilter.field, undefined, dateFilter);

@@ -46,7 +46,7 @@
             <button
               class="btn w-100"
               :class="selectedRange === label ? 'bg-primary text-white' : 'btn-outline-secondary'"
-              @click="setCustomRange(label)"
+              @click="setCustomRange(range)"
             >
               {{ label }}
             </button>
@@ -67,13 +67,14 @@
     const start = defineModel('start', {
       type: String,
       required: false,
-      // validate: {
-      //   validator: function (value) {
-      //     const regex = /^\d{4}-\d{2}-\d{2}$/;
-      //     return regex.test(value);
-      //   },
-      //   message: 'Start date must be in the format YYYY-MM-DD',
-      // },
+        validate: {
+          validator: function (value) {
+            if (value === null) return true;
+            const regex = /^\d{4}-\d{2}-\d{2}$/;
+            return regex.test(value);
+          },
+          message: 'Start date must be in the format YYYY-MM-DD or null',
+        },
     });
     const end = defineModel('end',{ 
       type: String,
@@ -130,9 +131,8 @@
         }
     };
   
-    const setCustomRange = (label) => {
-        selectedRange.value = label;
-        const [startRange, endRange] = customRanges.value[label];
+    const setCustomRange = (range) => {
+        const [startRange, endRange] = range;
         start.value = startRange.format(dateFormat);
         end.value = endRange.format(dateFormat);
         onFilterDateChange?.({start:start.value,end:end.value});
