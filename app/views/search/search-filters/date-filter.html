@@ -9,10 +9,11 @@
         <div class="filter row" style="margin-top:6px">
             <div class="col-8">
                 <div ng-if="exportVueComponent"> 
-                    <km-date-picker-range ng-vue="exportVueComponent" 
-                    v-model:start="dateFilter.value.start"
-                    v-model:end="dateFilter.value.end"
-                    ></km-date-picker-range>
+                    <km-date-picker-range ng-vue="exportVueComponent"
+                        v-model:start="dateFilter.value.start"
+                        v-model:end="dateFilter.value.end"
+                        @change="handleApplyDates($event)">
+                    </km-date-picker-range>
                 </div>
             </div>
         </div>

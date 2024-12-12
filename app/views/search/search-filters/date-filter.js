@@ -28,16 +28,11 @@ app.directive('dateFilter', ['solr', 'translationService', function (solr, trans
                 
                 $scope.exportVueComponent = {
                     components: { kmDatePickerRange },
-                    setup: componentSetup
                 }
-
-                function componentSetup () {
-                    provide('onFilterDateChange', safeDelegate($scope, ()=>{
-
-                        searchDirectiveCtrl.closeDateTabFilter();
-                        $scope.saveDateFilter($scope.dateFilter.field, undefined, $scope.dateFilter);
-                    }));
-                }
+                $scope.handleApplyDates = () => {
+                    searchDirectiveCtrl.closeDateTabFilter();
+                    $scope.saveDateFilter($scope.dateFilter.field, undefined, $scope.dateFilter);
+                };
 
             }
         };

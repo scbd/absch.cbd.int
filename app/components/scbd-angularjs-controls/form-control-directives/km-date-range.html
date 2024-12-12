@@ -14,11 +14,11 @@
     </div>
 
     <div ng-if="exportVueComponent"> 
-      <km-date-picker-range ng-vue="exportVueComponent" 
-        v-model:start="filterDates.start"
-        v-model:end="filterDates.end"
-        >
-      </km-date-picker-range>
+        <km-date-picker-range ng-vue="exportVueComponent"
+            v-model:start="filterDates.start"
+            v-model:end="filterDates.end"
+            @change="handleApplyDates($event)">
+        </km-date-picker-range>
     </div>
   </div>
 </div>

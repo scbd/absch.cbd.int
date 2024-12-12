@@ -33,25 +33,17 @@ import {formatDate} from '~/services/datetime';
         };
         $scope.exportVueComponent = {
             components: { kmDatePickerRange },
-            setup: componentSetup
         }
         
-        function componentSetup () {
-            provide('onFilterDateChange', safeDelegate($scope, ()=>{
-
-                $scope.binding = {
-                  
-                  start : $scope.filterDates.start, 
-                  end   : $scope.filterDates.end
-
-                }
-
-                $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - ${formatDate($scope.filterDates.end)}`;
-                ngModelController.$setViewValue($scope.binding);
-                $scope.isPopupVisible = false;
-               }));
-
-        }
+        $scope.handleApplyDates = () => {
+          $scope.binding = {
+            start : $scope.filterDates.start, 
+            end   : $scope.filterDates.end
+          }
+          $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - ${formatDate($scope.filterDates.end)}`;
+          ngModelController.$setViewValue($scope.binding);
+          $scope.isPopupVisible = false;
+        };
         
         $scope.$watch('binding', function(newVal, old) {
           if(!newVal)
