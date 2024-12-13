@@ -289,13 +289,24 @@ import './solr';
                 this.localizeFields = function localizeFields(fields){
                     if(!fields)
                         return;
-                        
-                    if(locale && locale!='en'){
-                        return fields.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
-                    }
 
+                    if (locale && locale !== 'en') {
+                        if (typeof fields === 'string') {
+                            return fields.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
+                        }
+                
+                        if (Array.isArray(fields)) {
+                            return fields.map(field => 
+                                typeof field === 'string' 
+                                    ? field.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
+                                    : field
+                            );
+                        }
+                    }
+                
                     return fields;
-                }
+                };
+
                 this.readFacets     = readFacets2;
 
             }
