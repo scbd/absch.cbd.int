@@ -4,7 +4,7 @@
 		<div>
 			<document-date></document-date>			
 		</div>
-		<div class="container-fluid mt-4" ng-if="document.type && document.government">
+		<div class="container-fluid mt-4" ng-if="document.type || document.government">
 			<div class="row">
 				<div class="col" ng-if="document.type">
 					<div>
