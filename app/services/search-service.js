@@ -291,17 +291,14 @@ import './solr';
                         return;
 
                     if (locale && locale !== 'en') {
-                        if (typeof fields === 'string') {
-                            return fields.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
-                        }
-                
+                        const fieldLocale = (locale||'en').toUpperCase();
+                        const localize = (f) => typeof fields !== 'string' ? f.replace(/_EN_/g, `_${ fieldLocale }_`) : f;
+
                         if (Array.isArray(fields)) {
-                            return fields.map(field => 
-                                typeof field === 'string' 
-                                    ? field.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
-                                    : field
-                            );
+                            return fields.map(localize);
                         }
+
+                        return localize(fields);
                     }
                 
                     return fields;
