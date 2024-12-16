@@ -306,16 +306,17 @@
     const formatString = (text) => {
         if(!text)
             return;
-            
-        if(text?.startsWith('http')){
-            if(text.length > 35)
-                return `<a target="_blank" href="${text}">${text.substr(0, 35)}...</a>`
-            
-            return `<a target="_blank" href="${text}">${text}...</a>`
-        }
+        if(typeof text === 'string'){    
+            if(text?.startsWith('http')){
+                if(text.length > 35)
+                    return `<a target="_blank" href="${text}">${text.substr(0, 35)}...</a>`
+                
+                return `<a target="_blank" href="${text}">${text}...</a>`
+            }
 
-        if(text?.length > 50 && !text?.startsWith('<a'))
-            return text.substr(0, 50)+'...';
+            if(text?.length > 50 && !text?.startsWith('<a'))
+                return text.substr(0, 50)+'...';
+        }
 
         return text;
     }
