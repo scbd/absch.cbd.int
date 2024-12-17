@@ -23,6 +23,14 @@ app.directive('dateFilter', ['solr', 'translationService', function (solr, trans
                     value:{start : null, end : null}
                 };
                 
+                const selectedFilters = searchDirectiveCtrl.getSelectedFilters('date');
+                const selectedDateFilter = selectedFilters.find(filter => filter.type === "date");
+
+                if (selectedDateFilter?.query) {
+                    const { start, end } = selectedDateFilter.query;
+                    $scope.dateFilter.value = { start, end };
+                }
+
                 $scope.exportVueComponent = {
                     components: { kmDatePickerRange },
                 }
