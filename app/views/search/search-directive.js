@@ -502,6 +502,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         leftMenuFilters = [];
                         $scope.RemoveLeftMenuFilters()
                         updateQueryResult();
+                        closeDateTabFilter();
                     };
 
                     $scope.onExportClick = function({listType, fields, format, fileName}){
