@@ -1819,6 +1819,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     
                     this.getAllSearchFilters      = getAllSearchFilters     ;
                     this.getSearchFilters         = getSearchFilters        ;
+                    this.getSelectedFilters       = getSelectedFilters      ; // TODO: Check for potential side effects.
                     this.addFilter                = addFilter               ;
                     this.removeGlobalFilter       = removeGlobalFilter      ;
                     this.closeDateTabFilter       = closeDateTabFilter      ;
