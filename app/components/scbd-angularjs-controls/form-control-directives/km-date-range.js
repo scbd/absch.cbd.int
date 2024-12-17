@@ -1,7 +1,5 @@
 import app from '~/app';
 import kmDatePickerRange from '../../km/km-date-picker-range.vue';
-import { provide } from 'vue'; 
-import { safeDelegate } from '~/services/common'
 import template from 'text!./km-date-range.html';
 import {formatDate} from '~/services/datetime';
 
@@ -46,8 +44,11 @@ import {formatDate} from '~/services/datetime';
         };
         
         $scope.$watch('binding', function(newVal, old) {
-          if(!newVal)
+          if(!newVal){
             $scope.dateRangeText = '';
+            $scope.filterDates.start = ''; 
+            $scope.filterDates.end = '';
+          }
         });
       }
     };
