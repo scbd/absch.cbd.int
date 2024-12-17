@@ -9,7 +9,7 @@
             type="date"
             class="form-control"
             v-model="start"
-            :max="end"
+            :max="end || moment().format('YYYY-MM-DD')"
             @change="errorMessage = ''"
           />
         </div>
@@ -99,23 +99,13 @@
     const validateDateRange = () => {
           const startDate = moment(start.value, dateFormat, true);
           const endDate = moment(end.value, dateFormat, true);
-          
-          if (!startDate.isValid()) {
-              errorMessage.value = t("selectValidStartDate");
-              selectedRange.value = "";
-              return false;
-          }
-          if (!endDate.isValid()) {
-              errorMessage.value = t("selectValidEndDate");
-              selectedRange.value = "";
-              return false;
-          }
+
           if (!startDate.isValid() && !endDate.isValid()) {
               errorMessage.value = t("selectBothDates");
               selectedRange.value = "";
               return false;
           }
-          if (endDate.isBefore(startDate)) {
+          if (start.value && end.value && endDate.isBefore(startDate)) {
               errorMessage.value = t("earlierThanStartDate");
               selectedRange.value = "";
               return false;
@@ -126,6 +116,8 @@
 
     const applyRange = () => {
       if (validateDateRange()) {
+        start.value = start.value || "2000-01-01"; //  The Cartagena Protocol adopted on 29 January 2000 while the Nagoya Protocol on ABS was adopted on 29 October 2010
+        end.value = end.value || moment().format(dateFormat);
         emit("change", { start: start.value, end: end.value });
       }
     };
