@@ -1,9 +1,6 @@
 import app from '~/app';
 import template from 'text!./date-filter.html';
 import _ from 'lodash';
-import moment from 'moment';
-import { provide } from 'vue'; 
-import { safeDelegate } from '~/services/common'
 import '~/services/main';
 import '~/components/scbd-angularjs-controls/main';
 import 'bootstrap-datepicker';

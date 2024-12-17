@@ -88,12 +88,12 @@
     const emit = defineEmits(['change']);
 
     const customRanges = computed(() => ({
-      [t("last7Days")]: [moment().subtract(7, "days"), moment()],
-      [t("last30Days")]: [moment().subtract(30, "days"), moment()],
-      [t("last6Month")]: [moment().subtract(6, "months").startOf("month"), moment()],
-      [t("last12Month")]: [moment().subtract(12, "months").startOf("month"), moment()],
-      [t("last2Years")]: [moment().subtract(2, "years").startOf("month"), moment()],
-      [t("last5Years")]: [moment().subtract(5, "years").startOf("month"), moment()],
+      [t("last7Days")]: [moment().subtract(7, "days").startOf("day"), moment().endOf("day")],
+      [t("last30Days")]: [moment().subtract(30, "days").startOf("day"), moment().endOf("day")],
+      [t("last6Month")]: [moment().subtract(6, "months"), moment()],
+      [t("last12Month")]: [moment().subtract(12, "months"), moment()],
+      [t("last2Years")]: [moment().subtract(2, "years"), moment()],
+      [t("last5Years")]: [moment().subtract(5, "years"), moment()],
     }));
 
     const validateDateRange = () => {
