@@ -520,7 +520,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         leftMenuFilters = [];
                         $scope.RemoveLeftMenuFilters()
                         updateQueryResult();
-                        closeDateTabFilter();
+                        closeFilterTab(); // ToDo: close the current tab when user click on clear-filter
                     };
 
                     $scope.onExportClick = function({listType, fields, format, fileName}){
@@ -868,9 +868,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         $scope.removeFilter({id:schema})
                     }
 
-                    function closeDateTabFilter(schema){
+                    function closeFilterTab(){
                         $scope.showFilters = false;
-                        $scope.searchKeyword = "";
                     }
 
                     function getSearchFilters(type, fn) {
@@ -1840,7 +1839,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     this.getSelectedFilters       = getSelectedFilters      ; // TODO: Check for potential side effects.
                     this.addFilter                = addFilter               ;
                     this.removeGlobalFilter       = removeGlobalFilter      ;
-                    this.closeDateTabFilter       = closeDateTabFilter      ;
+                    this.closeFilterTab           = closeFilterTab          ;
                     this.getFilter                = getFilter               ;
                     this.getSchemaFieldMapping    = getSchemaFieldMapping   ;
                     this.onLeftFilterUpdate       = onLeftFilterUpdate      ;
