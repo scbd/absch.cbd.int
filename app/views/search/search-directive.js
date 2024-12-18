@@ -419,23 +419,23 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         const startDate = moment(dateVal.value.start, dateFormat, true);
                         const endDate = moment(dateVal.value.end, dateFormat, true);
                         
-                        const startDateText = startDate.isValid() ? formatDate(dateVal.value.start) : 'From the start';
-                        const endDateText = endDate.isValid() ? formatDate(dateVal.value.end) : 'Till now';
+                        const startDateText = startDate.isValid() ? formatDate(dateVal.value.start) : 'Before';
+                        const endDateText = endDate.isValid() ? formatDate(dateVal.value.end) : 'After';
                     
                         if (startDate.isValid() && endDate.isValid()) {
 
-                            name = `Date published (${startDateText} - ${endDateText})`;
+                            name = `Date published ( ${startDateText} - ${endDateText} )`;
                             dateQuery = `${dateVal.value.start} - ${dateVal.value.end}`;
 
                         } else if (!startDate.isValid()) {
                             
-                            name = `Date published (From the start - ${endDateText})`;
+                            name = `Date published ( Before ${endDateText} )`;
                             dateQuery = ` - ${dateVal.value.end || ''}`;
                             dateVal.value.start = null;
 
                         } else if (!endDate.isValid()) {
 
-                            name = `Date published (${startDateText} - Till now)`;
+                            name = `Date published ( After ${startDateText} )`;
                             dateQuery = `${dateVal.value.start || ''} - `;
                             dateVal.value.end = null;
                             
