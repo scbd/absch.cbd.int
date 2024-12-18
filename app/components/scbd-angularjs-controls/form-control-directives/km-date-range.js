@@ -39,6 +39,13 @@ import {formatDate} from '~/services/datetime';
             end   : $scope.filterDates.end
           }
           $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - ${formatDate($scope.filterDates.end)}`;
+          if(!$scope.filterDates.start){
+            $scope.dateRangeText = `From the start - ${formatDate($scope.filterDates.end)}`;
+          }
+          if(!$scope.filterDates.end){
+            $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - Till now `;
+          }
+         
           ngModelController.$setViewValue($scope.binding);
           $scope.isPopupVisible = false;
         };

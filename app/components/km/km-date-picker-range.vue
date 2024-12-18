@@ -9,7 +9,7 @@
             type="date"
             class="form-control"
             v-model="start"
-            :max="end || moment().format('YYYY-MM-DD')"
+            :max="end"
             @change="errorMessage = ''"
           />
         </div>
@@ -116,8 +116,6 @@
 
     const applyRange = () => {
       if (validateDateRange()) {
-        start.value = start.value || "2000-01-01"; //  The Cartagena Protocol adopted on 29 January 2000 while the Nagoya Protocol on ABS was adopted on 29 October 2010
-        end.value = end.value || moment().format(dateFormat);
         emit("change", { start: start.value, end: end.value });
       }
     };
