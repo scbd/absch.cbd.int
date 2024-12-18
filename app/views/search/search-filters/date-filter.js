@@ -35,7 +35,7 @@ app.directive('dateFilter', ['solr', 'translationService', function (solr, trans
                     components: { kmDatePickerRange },
                 }
                 $scope.handleApplyDates = () => {
-                    searchDirectiveCtrl.closeDateTabFilter();
+                    searchDirectiveCtrl.closeFilterTab();
                     $scope.saveDateFilter($scope.dateFilter.field, undefined, $scope.dateFilter);
                 };
 
