@@ -40,10 +40,10 @@ import {formatDate} from '~/services/datetime';
           }
           $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - ${formatDate($scope.filterDates.end)}`;
           if(!$scope.filterDates.start){
-            $scope.dateRangeText = `From the start - ${formatDate($scope.filterDates.end)}`;
+            $scope.dateRangeText = `Before ${formatDate($scope.filterDates.end)}`;
           }
           if(!$scope.filterDates.end){
-            $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - Till now `;
+            $scope.dateRangeText = `After ${formatDate($scope.filterDates.start)}`; // if only start: After xxx
           }
          
           ngModelController.$setViewValue($scope.binding);
