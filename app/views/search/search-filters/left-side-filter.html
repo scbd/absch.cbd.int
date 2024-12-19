@@ -197,7 +197,7 @@
                         <label class="float-end" ng-if="filter.relatedField">
                             <input type="checkbox" ng-model="searchRelated"> {{::('leftSideFilterT.searchRelated'|$translate)}}
                         </label>
-                        <km-term-check ng-model="treeViewSelected" terms="treeOptions()" binding-type="term[]" 
+                        <km-term-check ng-model="treeViewSelected" facets="facets" terms="treeOptions()" binding-type="term[]" 
                             enable-search="false" before-search="onBeforeSearch(keyword)" tabular-shape="false">
                         </km-term-check>                        
                     </div>
