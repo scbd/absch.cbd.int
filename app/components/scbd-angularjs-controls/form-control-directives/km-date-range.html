@@ -1,6 +1,24 @@
-﻿<div class="date">
-  <div ng-transclude class="input-group">
-      <input type="text" ng-model="formattedDate" placeholder="{{placeholder}}" ng-disabled="true" class="form-control bg-white" />
-      <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+﻿<div class="input-group position-relative date-range-filter">
+  <input type="text" ng-model="dateRangeText" class="form-control" />
+
+  <span class="input-group-text" ng-click="togglePopup()">
+    <i class="fa fa-calendar"></i>
+  </span>
+
+  <div ng-if="isPopupVisible" class="position-absolute top-0 end-0 me-2 translate-middle-x tip"></div>
+  <div 
+    ng-if="isPopupVisible" 
+    class="position-absolute top-100 start-0 bg-white border rounded shadow mt-2 p-3 date-range">
+    <div class="text-end">
+      <i class="btn-close cursor-pointer" ng-click="togglePopup()"></i>
+    </div>
+
+    <div ng-if="exportVueComponent"> 
+        <km-date-picker-range ng-vue="exportVueComponent"
+            v-model:start="filterDates.start"
+            v-model:end="filterDates.end"
+            @change="handleApplyDates($event)">
+        </km-date-picker-range>
+    </div>
   </div>
 </div>

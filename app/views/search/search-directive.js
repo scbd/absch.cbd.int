@@ -25,6 +25,7 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
+import {formatDate, formatDateISO} from '~/services/datetime';
 import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge.js';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
@@ -413,14 +414,33 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     };
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
-                        let name = ''
-                        let dateQuery = dateVal.value.start.format(dateFormat) + ' - ' + dateVal.value.end.format(dateFormat);
-                            
-                        if(dateVal.field=='updatedDate_dt') 
-                        {
-                            name = 'Date published ('+dateQuery+ ')' ;
-                        }
+                        let name = '';
+                        let dateQuery = '';
 
+                        const startDate = moment(dateVal.value.start, dateFormat, true);
+                        const endDate = moment(dateVal.value.end, dateFormat, true);
+                        
+                        const startDateText = startDate.isValid() ? formatDate(dateVal.value.start) : 'Before';
+                        const endDateText = endDate.isValid() ? formatDate(dateVal.value.end) : 'After';
+                    
+                        if (startDate.isValid() && endDate.isValid()) {
+
+                            name = `Date published ( ${startDateText} - ${endDateText} )`;
+                            dateQuery = `${dateVal.value.start} - ${dateVal.value.end}`;
+
+                        } else if (!startDate.isValid()) {
+                            
+                            name = `Date published ( Before ${endDateText} )`;
+                            dateQuery = ` - ${dateVal.value.end || ''}`;
+                            dateVal.value.start = null;
+
+                        } else if (!endDate.isValid()) {
+
+                            name = `Date published ( After ${startDateText} )`;
+                            dateQuery = `${dateVal.value.start || ''} - `;
+                            dateVal.value.end = null;
+                            
+                        }
                         $scope.setFilters[filterID] = {
                             type: $scope.searchFilters[filterID].type,
                             query: dateVal.value,
@@ -438,6 +458,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         if(filter.type == 'rawQuery'){
                             filterID='rawQuery';
                             updateQueryString('raw-query',undefined);
+                        }
+
+                        if(filter.type == 'date'){
+                            updateQueryString('dateFilter',undefined);
                         }
 
                         var id = $scope.setFilters[filterID].filterID
@@ -501,6 +525,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         leftMenuFilters = [];
                         $scope.RemoveLeftMenuFilters()
                         updateQueryResult();
+                        closeFilterTab(); // ToDo: close the current tab when user click on clear-filter
                     };
 
                     $scope.onExportClick = function({listType, fields, format, fileName}){
@@ -734,8 +759,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                 const dateFilter = {
                                     field: 'updatedDate_dt',
                                     value: {
-                                        start: moment(dates[0], dateFormat),
-                                        end: moment(dates[1], dateFormat)
+                                        start   : dates[0] ? formatDateISO(dates[0]) : "*",
+                                        end     : dates[1] ? formatDateISO(dates[1]) : "*"
                                     }
                                 };
                                 $scope.saveDateFilter(dateFilter.field, undefined, dateFilter);
@@ -846,6 +871,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                     function removeGlobalFilter(schema){
                         $scope.removeFilter({id:schema})
+                    }
+
+                    function closeFilterTab(){
+                        $scope.showFilters = false;
                     }
 
                     function getSearchFilters(type, fn) {
@@ -1466,8 +1495,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     function buildDateFieldQuery({ field, filterValue:date }) {
                         
                         if(date.start || date.end) {
-                            const start   = date.start ? solr.escape(date.start.locale('en').format(dateFormat)   + 'T00:00:00.000Z')  : '*';
-                            const end     = date.end   ? solr.escape(date.end.locale('en').format(dateFormat)     + 'T23:59:59.999Z') : '*';
+                            const start   = date.start ? solr.escape(moment.utc(date.start, dateFormat).startOf('day').toISOString())  : '*';
+                            const end     = date.end   ? solr.escape(moment.utc(date.end, dateFormat).endOf('day').toISOString()) : '*';
     
                             return field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 
@@ -1837,8 +1866,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     
                     this.getAllSearchFilters      = getAllSearchFilters     ;
                     this.getSearchFilters         = getSearchFilters        ;
+                    this.getSelectedFilters       = getSelectedFilters      ; // TODO: Check for potential side effects.
                     this.addFilter                = addFilter               ;
                     this.removeGlobalFilter       = removeGlobalFilter      ;
+                    this.closeFilterTab           = closeFilterTab          ;
                     this.getFilter                = getFilter               ;
                     this.getSchemaFieldMapping    = getSchemaFieldMapping   ;
                     this.onLeftFilterUpdate       = onLeftFilterUpdate      ;

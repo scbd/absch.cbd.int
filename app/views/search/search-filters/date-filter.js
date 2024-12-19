@@ -1,10 +1,10 @@
 import app from '~/app';
 import template from 'text!./date-filter.html';
 import _ from 'lodash';
-import moment from 'moment';
 import '~/services/main';
 import '~/components/scbd-angularjs-controls/main';
 import 'bootstrap-datepicker';
+import kmDatePickerRange from '~/components/km/km-date-picker-range.vue';
 import dateFilterT from '~/app-text/views/search/search-filters/date-filter.json';
 
 app.directive('dateFilter', ['solr', 'translationService', function (solr, translationService) {
@@ -22,10 +22,22 @@ app.directive('dateFilter', ['solr', 'translationService', function (solr, trans
                     field:'updatedDate_dt',
                     value:{start : null, end : null}
                 };
+                
+                const selectedFilters = searchDirectiveCtrl.getSelectedFilters('date');
+                const selectedDateFilter = selectedFilters.find(filter => filter.type === "date");
 
-                $scope.onChange = function(){                    
-                    $scope.saveDateFilter($scope.dateFilter.field, undefined, $scope.dateFilter);
+                if (selectedDateFilter?.query) {
+                    const { start, end } = selectedDateFilter.query;
+                    $scope.dateFilter.value = { start, end };
                 }
+
+                $scope.exportVueComponent = {
+                    components: { kmDatePickerRange },
+                }
+                $scope.handleApplyDates = () => {
+                    searchDirectiveCtrl.closeFilterTab();
+                    $scope.saveDateFilter($scope.dateFilter.field, undefined, $scope.dateFilter);
+                };
 
             }
         };
