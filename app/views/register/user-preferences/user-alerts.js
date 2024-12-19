@@ -113,15 +113,12 @@ const userAlertsT = mergeTranslationKeys(userAlertsTTranslations);
                     {
                         if(id)
                         {
-                            if(!$scope.runQueryInPage){
-                                window.open(
-                                '/search/'+id,
-                                '_blank'
-                                ); 
-                            }
-                            else
-                            {
-                                window.location.href =  '/search/'+id;
+                            const searchUrl = `/${locale}/search/${id}`;
+                            if (!$scope.runQueryInPage) {
+                                window.open(searchUrl, '_blank');
+                            } 
+                            else {                                
+                                window.location.href = searchUrl;
                             }
                         }
                     };
