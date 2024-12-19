@@ -2811,7 +2811,7 @@ padding-right: 23%;
     cursor: pointer;
 }
 #reference-records-table .truncate-record {
-    display: -webkit-box;
+    /* display: -webkit-box; */
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
