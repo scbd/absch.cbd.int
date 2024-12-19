@@ -460,6 +460,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                             updateQueryString('raw-query',undefined);
                         }
 
+                        if(filter.type == 'date'){
+                            updateQueryString('dateFilter',undefined);
+                        }
+
                         var id = $scope.setFilters[filterID].filterID
                         delete $scope.setFilters[filterID];
 
