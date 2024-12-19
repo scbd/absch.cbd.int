@@ -17,7 +17,11 @@
     import { sanitizeHtml } from "../../services/html.sanitize";
     import { useI18n } from 'vue-i18n';
     const  { locale } = useI18n();
-    
+    import { useAuth } from '@scbd/angular-vue/src/index.js';
+    import ArticlesApi from '../../api/articles';
+ 
+    const auth = useAuth();
+    const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
     const props = defineProps({
         showCoverImage: { type: Boolean, required: false, default: true },
         article: { type: Object, required: false, default: undefined },
@@ -42,8 +46,7 @@
                 }
 
                 try {
-                    const response = await useAPIFetch('/api/v2020/oembed', { method: 'GET', query: params });
-                    console.log("useAPIFetch response", response);
+                    const response = await articlesApi.replaceOembed(params);
                     const embedHtml = `<div class="ck-media__wrapper" style="width:100%">${response.html}</div>`;
                     element.insertAdjacentHTML("afterend", embedHtml);
                 } catch (error) {
@@ -55,9 +58,9 @@
 
     onMounted(() => {
         if (props.article) {
-           setTimeout(() => {
+            nextTick(async () => {
                preProcessOEmbed();
-           }, 1000);
+           });
         }
     });
 </script>

@@ -22,6 +22,12 @@ export default class ArticlesApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
+   async replaceOembed(params)  {
+    return this.http.get(`api/v2020/oembed`, { params })
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
   async getArticleById(id)  {
 
     return this.http.get(`api/v2017/articles/${id}`)
