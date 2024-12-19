@@ -1,19 +1,14 @@
-<div class="breadcrumbs" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS,'bg-chm':isCHM}" ng-hide="breadcrumbs.get().length == 1">
-    <div class="p-3 py-2">
-        <a rel="noopener" translation-url href="https://www.cbd.int" class="margin-right-xs">CBD</a>
-        <span ng-repeat="breadcrumb in getBreadcrumbs()">
-              /  
-            <span ng-if="!breadcrumb.param">
-                <a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
-                    ng-bind="breadcrumb.label" class="margin-right-xs"></a>
-                <span ng-if="$last" ng-bind="breadcrumb.label"></span>
-            </span>
-            <span ng-if="breadcrumb.param">
-                <a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
-                    ng-bind="breadcrumb.label" class="margin-right-xs"></a>
-                    <span ng-if="$last" ng-bind="breadcrumb.label"></span>
-            </span>
-        </span>
-    </div>
+<div class="breadcrumbs px-3" 
+     ng-class="{'bg-bch': isBCH, 'bg-abs': isABS, 'bg-chm': isCHM}" 
+     ng-hide="breadcrumbs.get().length == 1">
+     <p rel="noopener" translation-url href="https://www.cbd.int">CBD /</p>&nbsp;
+    <ul class="py-2 d-flex unstyled">
+        <li ng-repeat="breadcrumb in getBreadcrumbs()">
+            <a rel="noopener" translation-url 
+               ng-if="!$last" 
+               ng-href="{{ breadcrumb.path }}" 
+               ng-bind="breadcrumb.label" dir="ltr"></a>
+            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+        </li>
+    </ul>
 </div>
-

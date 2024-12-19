@@ -240,9 +240,24 @@ ul.km-value {
     }
 }
 
-.breadcrumbs {background-color:#00405C;}
+.breadcrumbs {
+    background-color:#00405C;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
 .breadcrumbs { font-size: 12px; color:#eee; text-decoration: none;}
 .breadcrumbs a { font-size: 12px; color:#999; text-decoration: none;}
+.breadcrumbs ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.breadcrumbs li:not(:first-child)::before {
+    content: "/";
+    margin-right: 0.2rem;
+    margin-left: 0.2rem;
+}
 
 
 .search-nav-menu-list {  list-style-type:disc;}
