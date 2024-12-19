@@ -1,5 +1,5 @@
 <div ng-class="{'bg-black': isTRG, 'bg-white':!isTRG}">
-    <header class="px-3 d-sm-inline-block d-lg-none">
+    <header class="px-3 d-sm-block d-lg-none">
         <nav class="navbar navbar-expand-xl navbar-light bg-light rounded">
             <div ng-click="showNav = !showNav" style="cursor: pointer;">
 
@@ -39,7 +39,7 @@
             </div>
         </nav>
     </header>
-    <header class="pt-2 d-none d-lg-inline-block">
+    <header class="pt-2 d-none d-lg-block">
         <div class="">
             <a href="." class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3"> <span
                     class="fw-normal">{{::('abschHeaderT.absch'|$translate)}}</span>
