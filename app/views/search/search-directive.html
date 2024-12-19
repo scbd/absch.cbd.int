@@ -267,13 +267,13 @@
                         <!-- Different view for list/group -->
                         <div class="col-sm-12 m-0" id="searchResult"
                             ng-class="{'col-md-9 col-xs-12':(leftMenuFilters && leftMenuFilters.length != 0 && !hideSubFilters), 'd-none' : isAlertSearch}">
-                            <div class="col-sm-12 p-0 m-0 search-tabs">
+                            <div class="col-sm-12 p-0 m-0">
                                 <ul class="nav nav-tabs search-tab-title">
                                     <li id="allRecordsTab" class="nav-item"
                                         ng-class="{'active':searchResult.currentTab==='allRecords'}">
                                         <a rel="noopener" class="nav-link color-darkgrey" translation-url href="#"
                                             ng-click="switchTab('allRecords')">
-                                            {{::('searchDirectiveT.all'|$translate)}} <span class="d-none d-sm-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span>
+                                            {{::('searchDirectiveT.all'|$translate)}} <span class="d-none d-lg-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span>
                                             <span class="badge rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.all?searchResult.data.facets.schemaTypes.all:0"></span>
                                         </a>
@@ -282,7 +282,7 @@
                                         ng-class="{'active':searchResult.currentTab==='nationalRecords'}">
                                         <a rel="noopener" translation-url href="#" class="nav-link text-primary"
                                             ng-click="switchTab('nationalRecords')">
-                                            {{::('searchDirectiveT.national'|$translate)}} <span class="d-none d-sm-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span> <span
+                                            {{::('searchDirectiveT.national'|$translate)}} <span class="d-none d-lg-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span> <span
                                                 class="badge rounded-pill bg-primary"
                                                 ng-bind="searchResult.data.facets.schemaTypes.national?searchResult.data.facets.schemaTypes.national:0"></span></a>
                                     </li>
@@ -290,7 +290,7 @@
                                         ng-class="{'active':searchResult.currentTab==='referenceRecords'}"><a
                                             translation-url href="#" class="nav-link color-orange"
                                             ng-click="switchTab('referenceRecords')">{{::('searchDirectiveT.reference'|$translate)}} <span
-                                                class="d-none d-sm-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span> <span
+                                                class="d-none d-lg-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span> <span
                                                 class=" badge rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.reference?searchResult.data.facets.schemaTypes.reference:0"></span></a>
                                     </li>
@@ -298,7 +298,7 @@
                                         ng-class="{'active':searchResult.currentTab==='scbdRecords'}">
                                         <a rel="noopener" translation-url href="#" class="nav-link color-darkgrey"
                                             ng-click="switchTab('scbdRecords')">
-                                            SCBD <span class="d-none d-sm-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span>
+                                            SCBD <span class="d-none d-lg-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span>
                                             <span class="badge rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.scbd?searchResult.data.facets.schemaTypes.scbd:0"></span>
                                         </a>
