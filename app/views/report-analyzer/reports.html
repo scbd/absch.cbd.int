@@ -90,10 +90,10 @@
                     </table>
                 </div>
                 <div class="panel-body" ng-if="reportData">
-                    <national-report-questions-selector report-type="$parent.selectedReportType"
-                        questions="$parent.selectedQuestions" regions="$parent.selectedRegions"
-                        regions-preset="$parent.selectedRegionsPreset"
-                        regions-preset-filter="$parent.selectedRegionsPresetFilter" report-data="reportData">
+                    <national-report-questions-selector report-type="self.$parent.selectedReportType"
+                        questions="self.$parent.selectedQuestions" regions="self.$parent.selectedRegions"
+                        regions-preset="self.$parent.selectedRegionsPreset"
+                        regions-preset-filter="self.$parent.selectedRegionsPresetFilter" report-data="self.reportData">
                     </national-report-questions-selector>
                 </div>
 
