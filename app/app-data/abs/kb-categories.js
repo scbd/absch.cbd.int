@@ -217,14 +217,7 @@ export const categories = [
     "articles": []
   },
   {
-    "title": categoryTitle.indigenousPeoples,
-    "adminTags": [
-      "iplc"
-    ],
-    "articles": []
-  },
-  {
-    "title": categoryTitle.localCommunities,
+    "title": categoryTitle.indigenousPeoplesAndLocalCommunities,
     "adminTags": [
       "iplc"
     ],
