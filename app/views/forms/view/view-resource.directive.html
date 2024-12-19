@@ -81,7 +81,7 @@
 					<ul class="list">
 						<li class="mt-1" ng-repeat="link in document.covers">
 							<a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
-								<img class="rounded-1 border border-dark " ng-src="{{link.url+'?thumbnail=true'|encodeURI}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
+								<img class="rounded-1 border border-dark "  ng-src="{{ constructThumbnailUrl(link.url) |encodeURI}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
 							</a>
 						</li>
 					</ul>
