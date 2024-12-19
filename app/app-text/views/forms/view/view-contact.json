@@ -1,6 +1,7 @@
 {
     "type": "Type",
     "country": "Country",
+    "government": "Published by Government",
     "name": "Name",
     "typeOfOrganization": "Type of organization",
     "jobTitle": "Job title",
