@@ -1,9 +1,6 @@
 import app from '~/app';
 import template from 'text!./date-filter.html';
 import _ from 'lodash';
-import moment from 'moment';
-import { provide } from 'vue'; 
-import { safeDelegate } from '~/services/common'
 import '~/services/main';
 import '~/components/scbd-angularjs-controls/main';
 import 'bootstrap-datepicker';
@@ -26,11 +23,19 @@ app.directive('dateFilter', ['solr', 'translationService', function (solr, trans
                     value:{start : null, end : null}
                 };
                 
+                const selectedFilters = searchDirectiveCtrl.getSelectedFilters('date');
+                const selectedDateFilter = selectedFilters.find(filter => filter.type === "date");
+
+                if (selectedDateFilter?.query) {
+                    const { start, end } = selectedDateFilter.query;
+                    $scope.dateFilter.value = { start, end };
+                }
+
                 $scope.exportVueComponent = {
                     components: { kmDatePickerRange },
                 }
                 $scope.handleApplyDates = () => {
-                    searchDirectiveCtrl.closeDateTabFilter();
+                    searchDirectiveCtrl.closeFilterTab();
                     $scope.saveDateFilter($scope.dateFilter.field, undefined, $scope.dateFilter);
                 };
 

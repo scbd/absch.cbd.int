@@ -1,7 +1,5 @@
 import app from '~/app';
 import kmDatePickerRange from '../../km/km-date-picker-range.vue';
-import { provide } from 'vue'; 
-import { safeDelegate } from '~/services/common'
 import template from 'text!./km-date-range.html';
 import {formatDate} from '~/services/datetime';
 
@@ -41,13 +39,23 @@ import {formatDate} from '~/services/datetime';
             end   : $scope.filterDates.end
           }
           $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - ${formatDate($scope.filterDates.end)}`;
+          if(!$scope.filterDates.start){
+            $scope.dateRangeText = `Before ${formatDate($scope.filterDates.end)}`;
+          }
+          if(!$scope.filterDates.end){
+            $scope.dateRangeText = `After ${formatDate($scope.filterDates.start)}`; // if only start: After xxx
+          }
+         
           ngModelController.$setViewValue($scope.binding);
           $scope.isPopupVisible = false;
         };
         
         $scope.$watch('binding', function(newVal, old) {
-          if(!newVal)
+          if(!newVal){
             $scope.dateRangeText = '';
+            $scope.filterDates.start = ''; 
+            $scope.filterDates.end = '';
+          }
         });
       }
     };

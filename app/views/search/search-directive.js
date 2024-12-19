@@ -414,15 +414,33 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     };
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
-                        let name = ''
-                        const startDateText = formatDate(dateVal.value.start);
-                        const endDateText = formatDate(dateVal.value.end);    
-                        let dateQuery = startDateText + ' - ' + endDateText
-                        if(dateVal.field=='updatedDate_dt') 
-                        {
-                            name = 'Date published ('+dateQuery+ ')' ;
-                        }
+                        let name = '';
+                        let dateQuery = '';
 
+                        const startDate = moment(dateVal.value.start, dateFormat, true);
+                        const endDate = moment(dateVal.value.end, dateFormat, true);
+                        
+                        const startDateText = startDate.isValid() ? formatDate(dateVal.value.start) : 'Before';
+                        const endDateText = endDate.isValid() ? formatDate(dateVal.value.end) : 'After';
+                    
+                        if (startDate.isValid() && endDate.isValid()) {
+
+                            name = `Date published ( ${startDateText} - ${endDateText} )`;
+                            dateQuery = `${dateVal.value.start} - ${dateVal.value.end}`;
+
+                        } else if (!startDate.isValid()) {
+                            
+                            name = `Date published ( Before ${endDateText} )`;
+                            dateQuery = ` - ${dateVal.value.end || ''}`;
+                            dateVal.value.start = null;
+
+                        } else if (!endDate.isValid()) {
+
+                            name = `Date published ( After ${startDateText} )`;
+                            dateQuery = `${dateVal.value.start || ''} - `;
+                            dateVal.value.end = null;
+                            
+                        }
                         $scope.setFilters[filterID] = {
                             type: $scope.searchFilters[filterID].type,
                             query: dateVal.value,
@@ -503,6 +521,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         leftMenuFilters = [];
                         $scope.RemoveLeftMenuFilters()
                         updateQueryResult();
+                        closeFilterTab(); // ToDo: close the current tab when user click on clear-filter
                     };
 
                     $scope.onExportClick = function({listType, fields, format, fileName}){
@@ -733,12 +752,11 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
 
                             function applyQSDateFilter(qsDateFilter) {
                                 var dates = qsDateFilter.split(' - ');
-                                
                                 const dateFilter = {
                                     field: 'updatedDate_dt',
                                     value: {
-                                        start   : formatDateISO(dates[0]),
-                                        end     : formatDateISO(dates[1])
+                                        start   : dates[0] ? formatDateISO(dates[0]) : "*",
+                                        end     : dates[1] ? formatDateISO(dates[1]) : "*"
                                     }
                                 };
                                 $scope.saveDateFilter(dateFilter.field, undefined, dateFilter);
@@ -851,9 +869,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         $scope.removeFilter({id:schema})
                     }
 
-                    function closeDateTabFilter(schema){
+                    function closeFilterTab(){
                         $scope.showFilters = false;
-                        $scope.searchKeyword = "";
                     }
 
                     function getSearchFilters(type, fn) {
@@ -1845,9 +1862,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     
                     this.getAllSearchFilters      = getAllSearchFilters     ;
                     this.getSearchFilters         = getSearchFilters        ;
+                    this.getSelectedFilters       = getSelectedFilters      ; // TODO: Check for potential side effects.
                     this.addFilter                = addFilter               ;
                     this.removeGlobalFilter       = removeGlobalFilter      ;
-                    this.closeDateTabFilter       = closeDateTabFilter      ;
+                    this.closeFilterTab           = closeFilterTab          ;
                     this.getFilter                = getFilter               ;
                     this.getSchemaFieldMapping    = getSchemaFieldMapping   ;
                     this.onLeftFilterUpdate       = onLeftFilterUpdate      ;

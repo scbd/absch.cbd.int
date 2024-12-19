@@ -88,34 +88,24 @@
     const emit = defineEmits(['change']);
 
     const customRanges = computed(() => ({
-      [t("last7Days")]: [moment().subtract(7, "days"), moment()],
-      [t("last30Days")]: [moment().subtract(30, "days"), moment()],
-      [t("last6Month")]: [moment().subtract(6, "months").startOf("month"), moment()],
-      [t("last12Month")]: [moment().subtract(12, "months").startOf("month"), moment()],
-      [t("last2Years")]: [moment().subtract(2, "years").startOf("month"), moment()],
-      [t("last5Years")]: [moment().subtract(5, "years").startOf("month"), moment()],
+      [t("last7Days")]: [moment().subtract(7, "days").startOf("day"), moment().endOf("day")],
+      [t("last30Days")]: [moment().subtract(30, "days").startOf("day"), moment().endOf("day")],
+      [t("last6Month")]: [moment().subtract(6, "months"), moment()],
+      [t("last12Month")]: [moment().subtract(12, "months"), moment()],
+      [t("last2Years")]: [moment().subtract(2, "years"), moment()],
+      [t("last5Years")]: [moment().subtract(5, "years"), moment()],
     }));
 
     const validateDateRange = () => {
           const startDate = moment(start.value, dateFormat, true);
           const endDate = moment(end.value, dateFormat, true);
-          
-          if (!startDate.isValid()) {
-              errorMessage.value = t("selectValidStartDate");
-              selectedRange.value = "";
-              return false;
-          }
-          if (!endDate.isValid()) {
-              errorMessage.value = t("selectValidEndDate");
-              selectedRange.value = "";
-              return false;
-          }
+
           if (!startDate.isValid() && !endDate.isValid()) {
               errorMessage.value = t("selectBothDates");
               selectedRange.value = "";
               return false;
           }
-          if (endDate.isBefore(startDate)) {
+          if (start.value && end.value && endDate.isBefore(startDate)) {
               errorMessage.value = t("earlierThanStartDate");
               selectedRange.value = "";
               return false;
