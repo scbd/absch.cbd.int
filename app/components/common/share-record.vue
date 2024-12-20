@@ -249,12 +249,12 @@ const loadTabData = async (type) => {
     return;
   }
 
-  if (sharedData.value.storageType == "chm-search-result") {
+  if (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile") {
     sharedData.value[type].searchQuery = query;
   }
-  if (sharedData.value.storageType == "chm-country-profile") {
-    sharedData.value[type].link = `${realm.baseURL}/${locale.value}/countries/${sharedData.value[type].recordKey}`;
-  }
+  // if (sharedData.value.storageType == "chm-country-profile") {
+  //   sharedData.value[type].link = `${realm.baseURL}/${locale.value}/countries?${sharedData.value[type].recordKey}`;
+  // }
   refreshSharedData();
 }
 
@@ -295,7 +295,7 @@ const shareLinkMail = async () => {
     sharedData.value[sharedData.value.type].emails = [...(new Set(emails.replace(/(,|;|\s)$/, '').split(/,|;| /g)))].filter(e => e).join(',');
     const captchaToken = await getRecaptchaToken();
     if (!sharedData.value[sharedData.value.type]._id) {
-      if (sharedData.value.storageType == "chm-search-result") {
+      if (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile") {
         await saveSearchQuery();
       }
       await saveShareDocument(undefined, captchaToken);
@@ -327,7 +327,7 @@ const generateEmbedCode = async () => {
     const captchaToken   = await getRecaptchaToken();
 
     if (!sharedData.value.embed._id) {
-      if (sharedData.value.storageType == "chm-search-result") {
+      if (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile") {
         await saveSearchQuery();
       }
       if (!sharedData.value.embed.urlHash)
@@ -342,8 +342,8 @@ const generateEmbedCode = async () => {
       else if (sharedData.value.storageType == "chm-search-result") {
         sharedData.value.embed.code += `<div class="scbd-chm-embed" data-type="chm-search-result" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
       }
-      else if (sharedData.embed.storageType == "chm-country-profile") {
-        sharedData.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
+      else if (sharedData.value.storageType == "chm-country-profile") {
+        sharedData.value.embed.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
       }
     }
     refreshSharedData();
@@ -397,7 +397,7 @@ const generateSearchResultLink = async () => {
     if (!sharedData.value[sharedData.value.type]._id) {
       const captchaToken = await getRecaptchaToken();
       const data = {}
-      if (sharedData.value.storageType == "chm-search-result") {
+      if (sharedData.value.storageType == "chm-search-result" || sharedData.value.storageType == "chm-country-profile") {
         data.searchQuery = getSearchQueryData()
       }
 

@@ -9,6 +9,9 @@ import joyRideTextTranslations from '~/app-text/views/countries/country-profile-
 import countryListTranslation from '~/app-text/views/countries/country-list.json';
 import '~/views/report-analyzer/filters/ascii';
 import { mergeTranslationKeys } from '../../services/translation-merge';
+import { provide } from 'vue'; 
+import shareRecord from '~/components/common/share-record.vue';
+import { safeDelegate } from '~/services/common'
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
     export { default as template } from './country-list.html';
 
@@ -36,6 +39,38 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 }
             }
             const queryParams = angular.copy($location.search());
+            console.log("queryParams:", queryParams)
+
+            $scope.shareVueComponent = {
+                components:{shareRecord},
+                setup:  shareRecordsFunctions
+            }
+
+            function shareRecordsFunctions () {
+
+                //ToDo: share Component requires this provide inject
+                provide('getQuery', safeDelegate($scope, ()=>{ 
+                    const query = getParamsFromQuery(queryParams);
+                    const type = "chm-country-profile"
+                    return {type, query}
+                }));
+            }
+
+            function getParamsFromQuery() {
+                const queryParams = angular.copy($location.search()); // Clone the query parameters
+                console.log("queryParams inside:", queryParams);
+            
+                // Convert query parameters into an array of filters, named 'filters' inside searchQuery
+                return {
+                    searchQuery: {
+                        filters: Object.entries(queryParams).map(([key, value]) => ({
+                            type: key,
+                            id: value
+                        })),
+                        subFilters: {} // Keep subFilters if you still plan to use it in the API
+                    }
+                };
+            }
 
             $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
                 .then(function (results) {

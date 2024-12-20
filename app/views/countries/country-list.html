@@ -93,6 +93,9 @@
 		</div>
 		<div class="row mt-2">
 			<div class="col-12">
+                <span class="float-start" ng-if="shareVueComponent">
+					<share-record ng-vue="shareVueComponent"></share-record>
+				</span>  
 				<span class="btn-group float-end dashboard-tour">
 					<a class="text-decoration-none text-dark me-md-1" rel="noopener" ng-href="#"
 						class="help-tour link2 text-decoration-none" ng-click="tour()">

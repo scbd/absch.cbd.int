@@ -76,6 +76,7 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                 }
                 else{
                     data = (await $http.get(`/api/v2018/document-sharing/${$routeParams.accessKey}`)).data;
+                    console.log("date at embed page :", data)
                 }
                 
                 if(data.sharedData.realm != realm.value){
@@ -98,6 +99,18 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
 
                         $location.path(`/search`);
                         $location.search('searchShareQueryId', data.sharedData.searchQuery._id);
+                    })
+                }
+                else if(data.storageType == 'chm-country-profile'){
+                    localStorageService.set(data.sharedData.searchQuery._id, data.sharedData?.searchQuery); // not sure
+                    safeapply(()=>{
+
+                        if($routeParams.accessKey == 'legacy-widget'){
+                            $location.search('schema', undefined);
+                        }
+
+                        $location.path(`/countries`);
+                        $location.search('searchShareQueryId', data._id);
                     })
                 }
                 

@@ -161,6 +161,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/kb/articles/:id/:title/:tag',                       { ...mapView(vueViewWrapper),                        "label":"Articles",                    "resolve":{ ...commonRouteUrls.kbArticles,                                   },"param":"true","resolveController":true}).
 
   whenAsync('/share/embed/:type/:accessKey',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
+  //here we are passing accessKey
   whenAsync('/share/link/:type/:accessKey',                       { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
   whenAsync('/share/email/:type/:accessKey',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
 

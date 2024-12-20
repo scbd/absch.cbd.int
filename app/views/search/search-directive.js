@@ -1823,7 +1823,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                         document.realm = realm.value;
                                         document.solrQuery = buildSolrQuery();
                                         
-                                        operation = IGenericService.create('v2016', 'me/subscriptions', document);
+                                        operation = IGenericService.create('v2016', 'me/subscriptions', document); // need this
 
                                         operation.then(function (data) {
                                             $scope.closeDialog();
@@ -1853,7 +1853,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                             fl    : 'identifier_s',
                                         }
         
-                                        return solrQuery;
+                                        return solrQuery; // need this
                                     }
 
                                 }]
