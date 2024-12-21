@@ -21,13 +21,15 @@ export function onBuildDocumentSelectorQuery (options){
       queries.fieldQueries.push('government_s:'+escape(options.government));
 
     if((options.searchText||'')!=''){
-      var queryText
-        queryText = '(' + escape(options.searchText) + ')';
-            
+        const queryText = escape(options.searchText); // Unsure if `escape` is suitable for handling translations
+        const searchField = options.searchField || 'text_EN_txt';
+        const formattedQuery = `(${searchField}:(${queryText}*) OR ${searchField}:(${queryText}))&fl=${searchField}`;
+                              //(text_EN_txt   :(james*)        OR   text_EN_txt :(james))       &fl=text_EN_txt
+
         if(options.query!='' && options.query != undefined)
-          queries.query   += ' AND ('+(options.searchField||'text_EN_txt:*') + queryText + '*)'
+          queries.query += ` AND ${formattedQuery}`;
         else 
-          queries.query   = (options.searchField||'text_EN_txt:*') + queryText+'*';
+          queries.query = formattedQuery;
     }
     return queries;
   } 
