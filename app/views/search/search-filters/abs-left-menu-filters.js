@@ -69,7 +69,8 @@ export const absLeftMenuFilters = {
 		{
 			"type": "yesNo",
 			"title": absFilters.authorityIsResponsibleForAll,
-			"field": "isResponsibleForAll_b"
+			"field": "referencedByIrccOrCpc_ss",
+			"fieldfn": "buildReferencedByQuery"
 		}
 	],
 	"measure" : [{
