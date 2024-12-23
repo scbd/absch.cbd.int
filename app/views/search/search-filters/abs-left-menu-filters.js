@@ -66,10 +66,12 @@ export const absLeftMenuFilters = {
 			"title": absFilters.showCNAsindicatedAsTheOnlyCNAIntheCountry,
 			"field": "isResponsibleForAll_b"
 		},
+		// ToDo: Add 'referencedByIrccOrCpc_ss' for 'authority' to the index, similar to how 'referencedByCPC_ss' was managed in 'absPermit'.
 		{
 			"type": "yesNo",
 			"title": absFilters.authorityIsResponsibleForAll,
-			"field": "isResponsibleForAll_b"
+			"field": "referencedByIrccOrCpc_ss",
+			"fieldfn": "buildReferencedByQuery"
 		}
 	],
 	"measure" : [{
