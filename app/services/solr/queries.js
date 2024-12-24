@@ -21,12 +21,12 @@ export function onBuildDocumentSelectorQuery (options){
       queries.fieldQueries.push('government_s:'+escape(options.government));
 
     if((options.searchText||'')!=''){
-        const queryText = escape(options.searchText); // Unsure if `escape` is suitable for handling translations
         const searchField = options.searchField || 'text_EN_txt';
-    
+
         // Split the queryText into words and construct the Solr query for each word
-        const words = queryText.split(' ');
-        const wordQueries = words.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
+        const words = options.searchText.split(' ').filter(o=>o);
+        const escWords = words.map(escape); // solr encode
+        const wordQueries = escWords.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
         const formattedQuery = `(${wordQueries.join(' AND ')})&fl=${searchField}`; // adjust to OR if that's more appropriate
     
         if (options.query && options.query !== '') {
