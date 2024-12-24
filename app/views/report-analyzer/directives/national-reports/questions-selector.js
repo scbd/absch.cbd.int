@@ -40,8 +40,7 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
             link: function ($scope) {
                 translationService.set('questionSelectorT', questionSelectorT);
                 $scope.isBch        = realm.is('BCH');
-                $scope.selectedReportType = $scope.selectedReportType || _.last($scope.reportData, function(r){return r.dataUrl}).type;
-                 const latestReportType = $scope.selectedReportType;
+                $scope.selectedReportType = $scope.selectedReportType || getLatestReportType();
                 $scope.selectedRegions    = $scope.selectedRegions    || DefaultRegions.concat();
                 $scope.allSelected = true;
                 $scope.regionsMap = {};
@@ -73,9 +72,10 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                     if (!$scope.selectedReportType) {
                         // If reportType param exists, use it, otherwise use latestReportType
                         if ($route.current.params.reportType) {
+                            // sessionStorage.removeItem('nrAnalyzerData');
                             $scope.selectedReportType = $route.current.params.reportType;
                         } else {
-                            $scope.selectedReportType = latestReportType;
+                            $scope.selectedReportType = getLatestReportType();
                         }
                         $scope.allSelected = true;
                         $scope.allSectionsClicked();
@@ -205,6 +205,11 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //
                 //====================================
+
+                function getLatestReportType() {
+                    return _.last($scope.reportData, function(r){return r.dataUrl}).type;
+                }
+
                 function fixEUR(term) {
                     if(term.identifier=="eu")
                         term.identifier = 'eur';
