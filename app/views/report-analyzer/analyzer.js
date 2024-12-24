@@ -27,8 +27,7 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
             //========================================
             try {
 
-                var queryString = $location.search();
-                const data = JSON.parse(decodeURIComponent(queryString.reportQueryString));
+                var data = $location.search();
 
                 if(data.date) {
                     $scope.maxDate = new Date(data.date);
@@ -69,14 +68,13 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
         //
         //========================================
         function saveSettings() {
-            $scope.analyzerUpdatedData = {
+            sessionStorage.setItem('nrAnalyzerData', JSON.stringify({
                 type: $scope.selectedReportType,
                 regions: $scope.selectedRegions,
                 questions: $scope.selectedQuestions,
                 regionsPreset: $scope.selectedRegionsPreset,
                 regionsPresetFilter: $scope.selectedRegionsPresetFilter
-            }
-            sessionStorage.setItem('nrAnalyzerData', JSON.stringify($scope.analyzerUpdatedData));
+            }));
         }
         //========================================
         //
@@ -102,12 +100,16 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
             showAnalyser = true;
 
             $scope.showAnalyzer = showAnalyser;
-            // update param after analyzer submit
-            if($scope.selectedReportType !== $route.current.params.reportType) {
-                const queryString = encodeURIComponent(JSON.stringify($scope.analyzerUpdatedData));
-                $route.updateParams({ reportType: $scope.selectedReportType }); 
-                $location.search('reportQueryString', queryString).replace();   
-            }
+
+                $route.updateParams({ reportType: $scope.selectedReportType });
+                //Pass query string
+                $location.search({
+                    type: $scope.selectedReportType,
+                    regions: $scope.selectedRegions,
+                    questions: $scope.selectedQuestions,
+                    regionsPreset: $scope.selectedRegionsPreset,
+                    regionsPresetFilter: $scope.selectedRegionsPresetFilter
+                });
         }
 
         //========================================
