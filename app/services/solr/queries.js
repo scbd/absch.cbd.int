@@ -23,13 +23,17 @@ export function onBuildDocumentSelectorQuery (options){
     if((options.searchText||'')!=''){
         const queryText = escape(options.searchText); // Unsure if `escape` is suitable for handling translations
         const searchField = options.searchField || 'text_EN_txt';
-        const formattedQuery = `(${searchField}:(${queryText}*) OR ${searchField}:(${queryText}))&fl=${searchField}`;
-                              //(text_EN_txt   :(james*)        OR   text_EN_txt :(james))       &fl=text_EN_txt
-
-        if(options.query!='' && options.query != undefined)
-          queries.query += ` AND ${formattedQuery}`;
-        else 
-          queries.query = formattedQuery;
+    
+        // Split the queryText into words and construct the Solr query for each word
+        const words = queryText.split(' ');
+        const wordQueries = words.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
+        const formattedQuery = `(${wordQueries.join(' AND ')})&fl=${searchField}`; // adjust to OR if that's more appropriate
+    
+        if (options.query && options.query !== '') {
+            queries.query += ` AND ${formattedQuery}`;
+        } else {
+            queries.query = formattedQuery;
+        }
     }
     return queries;
   } 
