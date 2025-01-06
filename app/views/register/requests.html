@@ -92,7 +92,7 @@
                                             <span ng-if="task.workflow.type.name=='deleteRecord'" class="text-danger">
                                                 {{::('requestsT.delete'|$translate)}} </span>
                                             <span ng-class="{'color-orange' : task.workflow.type.name == 'publishReferenceRecord', 'color-blue' : task.workflow.type.name != 'publishReferenceRecord'}">
-                                                <span ng-bind="' - '+task.workflow.data.metadata.schema|schemaName"></span>
+                                                <span ng-bind="' - ' + (task.workflow.data.metadata.schema | schemaName)"></span>
                                             </span>
                                         </span>
                                         <br>
