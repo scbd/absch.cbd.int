@@ -82,7 +82,7 @@
                                     <!-- TITLE -->
                                     <a rel="noopener" translation-url href="#" class="text-secondary text-bold" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">
                                         <i ng-class="{'bi bi-plus-sign': !tasksDisplay, 'bi bi-minus-sign': tasksDisplay}"></i>
-                                        <span class="text-uppercase fw-bold ps-2 fs-small-8">
+                                        <span class="text-uppercase fw-bold fs-small-8">
                                             <span ng-if="task.workflow.type.name =='publishReferenceRecord'" class="text-secondary">
                                                 {{::('requestsT.publish'|$translate)}}
                                             </span>
@@ -92,11 +92,11 @@
                                             <span ng-if="task.workflow.type.name=='deleteRecord'" class="text-danger">
                                                 {{::('requestsT.delete'|$translate)}} </span>
                                             <span ng-class="{'color-orange' : task.workflow.type.name == 'publishReferenceRecord', 'color-blue' : task.workflow.type.name != 'publishReferenceRecord'}">
-                                                <span ng-bind="' - ' + (task.workflow.data.metadata.schema | schemaName)"></span>
+                                                <span ng-bind="' - ' + (task.workflow.data.metadata.schema | schemaShortName)"></span>
                                             </span>
                                         </span>
                                         <br>
-                                        <span class="text-bold ps-4 fs-6" ng-bind="task.workflow.data.title | lstring"></span>
+                                        <span class="text-bold fs-6" ng-bind="task.workflow.data.title | lstring"></span>
                                     </a>
                                 </div>
 
