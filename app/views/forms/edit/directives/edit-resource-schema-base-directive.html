@@ -342,15 +342,15 @@
 							</div>
 						</section>
 
-						<!-- IF CHM || ABS  || condition BCH START -->	
+						<!-- IF ABS  || GBF-TARGET-13 is selected in BCH or CHM START -->	
 					
-						<section ng-if="isCHM || isABS || (isBCH && hasGBF('GBF-TARGET-13'))">							
+						<section ng-if="isABS || ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))">							
 							<div class="no-shadow bg-white">
 								<legend ng-if="isCHM">{{::('editVLRT.keywordsRelatedAccess'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="nagoya.subjects" ng-required="isABS|| ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
-											<div km-term-check name="nagoya.subjects"  ng-required="isABS|| ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))"   ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
+										<div class="km-control-group" name="nagoya.subjects" ng-required="isABS || ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
+											<div km-term-check name="nagoya.subjects"  ng-required="isABS || ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))"   ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
 												binding-type="term[]" tabular-shape="false"></div>
 										</div>
 									</div>
