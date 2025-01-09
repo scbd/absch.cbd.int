@@ -21,13 +21,19 @@ export function onBuildDocumentSelectorQuery (options){
       queries.fieldQueries.push('government_s:'+escape(options.government));
 
     if((options.searchText||'')!=''){
-      var queryText
-        queryText = '(' + escape(options.searchText) + ')';
-            
-        if(options.query!='' && options.query != undefined)
-          queries.query   += ' AND ('+(options.searchField||'text_EN_txt:*') + queryText + '*)'
-        else 
-          queries.query   = (options.searchField||'text_EN_txt:*') + queryText+'*';
+        const searchField = options.searchField || 'text_EN_txt';
+
+        // Split the queryText into words and construct the Solr query for each word
+        const words = options.searchText.split(' ').filter(o=>o);
+        const escWords = words.map(escape); // solr encode
+        const wordQueries = escWords.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
+        const formattedQuery = `(${wordQueries.join(' AND ')})&fl=${searchField}`; // adjust to OR if that's more appropriate
+    
+        if (options.query && options.query !== '') {
+            queries.query += ` AND ${formattedQuery}`;
+        } else {
+            queries.query = formattedQuery;
+        }
     }
     return queries;
   } 
