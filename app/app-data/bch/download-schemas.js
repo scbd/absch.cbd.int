@@ -47,7 +47,7 @@ export const downloadSchemas = {
 		"lmoTypes"        : fieldsT["laboratoryDetection.lmoTypes"],
 		"detectableLmos"  : fieldsT["laboratoryDetection.detectableLmos"],
 		"detectableGenes" : fieldsT["laboratoryDetection.detectableGenes"],
-		"publishedOn"     : fieldsT["publishedOn"]
+		"publishedOn"     : fieldsT["publishedOn"],
 	},
 
 	"biosafetyExpert":{
@@ -74,7 +74,7 @@ export const downloadSchemas = {
 		"decisionResult"					: fieldsT["biosafetyDecision.decisionResult"],
 		"modifiedOrganisms"					: fieldsT["biosafetyDecision.modifiedOrganisms"],
 		"riskAssessments"					: fieldsT["biosafetyDecision.riskAssessments"],
-		"publishedOn"						: fieldsT["publishedOn"]
+		"publishedOn"						: fieldsT["publishedOn"],
 	},
 	"nationalRiskAssessment":{
 		"uniqueId"			: fieldsT["bchRecordID"],
@@ -83,7 +83,8 @@ export const downloadSchemas = {
 		"date"				: fieldsT["nationalRiskAssessment.date"],
 		"modifiedOrganisms" : fieldsT["nationalRiskAssessment.modifiedOrganisms"],
 		"scopes"			: fieldsT["nationalRiskAssessment.scopes"],
-		"publishedOn"		: fieldsT["publishedOn"]
+		"publishedOn"		: fieldsT["publishedOn"],
+		"authorities"		: fieldsT["nationalRiskAssessment.authorities"],
 	},
 	"independentRiskAssessment":{
 		"uniqueId"			: fieldsT["bchRecordID"],
@@ -102,21 +103,26 @@ export const downloadSchemas = {
 		"jurisdiction"			: fieldsT["biosafetyLaw.jurisdiction"],
 		"cpbSubjectAreas"		: fieldsT["biosafetyLaw.cpbSubjectAreas"],
 		"entryIntoForce"		: fieldsT["biosafetyLaw.entryIntoForce"], 
-		"publishedOn"			: fieldsT["publishedOn"]
+		"publishedOn"			: fieldsT["publishedOn"],
+		"authorities"			: fieldsT["biosafetyLaw.authorities"],
+		"amendedRecords"		: fieldsT["biosafetyLaw.amendedRecords"],
+		"relatedRecords"		: fieldsT["biosafetyLaw.relatedRecords"],
 	},
 	"modifiedOrganism" : {
-	    "uniqueId"   			: fieldsT["bchRecordID"],
-        "identity"        		: fieldsT["name"],
-		"transformationEvent"	: fieldsT["modifiedOrganism.transformationEvent"],
-		"uniqueIdentification"	: fieldsT["modifiedOrganism.uniqueIdentification"],
-		"developers"			: fieldsT["modifiedOrganism.developers"],
-		"recipientOrganisms"	: fieldsT["modifiedOrganism.recipientOrganisms"],
-		"vector"			    : fieldsT["modifiedOrganism.vector"],
-		"techniqueUsed"		    : fieldsT["modifiedOrganism.techniqueUsed"],
-		"genes"  				:  fieldsT["modifiedOrganism.genes"],
-		"traits"				: fieldsT["modifiedOrganism.traits"],
-		"commonUses"			: fieldsT["modifiedOrganism.commonUses"],
-		"publishedOn"			: fieldsT["publishedOn"]
+	    "uniqueId"   			 : fieldsT["bchRecordID"],
+        "identity"        		 : fieldsT["name"],
+		"transformationEvent"	 : fieldsT["modifiedOrganism.transformationEvent"],
+		"uniqueIdentification"	 : fieldsT["modifiedOrganism.uniqueIdentification"],
+		"developers"			 : fieldsT["modifiedOrganism.developers"],
+		"recipientOrganisms"	 : fieldsT["modifiedOrganism.recipientOrganisms"],
+		"vector"			     : fieldsT["modifiedOrganism.vector"],
+		"techniqueUsed"		     : fieldsT["modifiedOrganism.techniqueUsed"],
+		"genes"  				 :  fieldsT["modifiedOrganism.genes"],
+		"traits"				 : fieldsT["modifiedOrganism.traits"],
+		"commonUses"			 : fieldsT["modifiedOrganism.commonUses"],
+		"publishedOn"			 : fieldsT["publishedOn"],
+		"geneConstructs"		 : fieldsT["modifiedOrganism.geneConstructs"],
+		"linkedModifiedOrganisms": fieldsT["modifiedOrganism.linkedModifiedOrganisms"]
 	},
 
 	"dnaSequence" : {
@@ -139,7 +145,8 @@ export const downloadSchemas = {
 		"plantCultivar"			: fieldsT["organism.plantCultivar"],
 		"organismType"		  	: fieldsT["organism.organismType"],
 		"commonUses"			: fieldsT["organism.commonUses"],
-		"publishedOn"			: fieldsT["publishedOn"]
+		"publishedOn"			: fieldsT["publishedOn"],
+		"compatibleSpecies"		: fieldsT["organism.compatibleSpecies"]
 	},
     "capacityBuildingInitiative":{
         "uniqueId"           : commonFieldsT["capacityBuildingInitiative.uniqueId"],
@@ -167,7 +174,8 @@ export const downloadSchemas = {
         "cbdSubjects"        : commonFieldsT["capacityBuildingInitiative.cbdSubjects"],
         "cpbThematicAreas"   : commonFieldsT["capacityBuildingInitiative.cpbThematicAreas"],
         "relevantInformation": commonFieldsT["capacityBuildingInitiative.relevantInformation"],
-      "relevantDocuments.url": commonFieldsT["capacityBuildingInitiative.relevantDocuments"],
-        "publishedOn"        : commonFieldsT["publishedOn"]
+        "relevantDocuments.url": commonFieldsT["capacityBuildingInitiative.relevantDocuments"],
+        "publishedOn"        : commonFieldsT["publishedOn"],
+		"executingAgencies"  : commonFieldsT["capacityBuildingInitiative.executingAgencies"]
 	},
 }
