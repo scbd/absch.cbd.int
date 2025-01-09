@@ -14,6 +14,6 @@ export function getFieldName(realm, schema, fieldName) {
   }
 
   return (
-    schemaObject?.[fieldName] || schemaObject?.[`${fieldName}Link`] || fieldName
+    schemaObject?.[fieldName] || schemaObject?.[`${fieldName}Link`] || fieldName.toUpperCase()
   );
 }

@@ -38,6 +38,7 @@
   "nationalRiskAssessment.date"                      : "Date of the risk assessment",
   "nationalRiskAssessment.modifiedOrganisms"         : "Living modified organism(s)",
   "nationalRiskAssessment.scopes"                    : "Scope of the risk assessment",
+  "nationalRiskAssessment.authorities"               : "Competent National Authority(ies) responsible for the risk assessment",
 
   "independentRiskAssessment.organizations"          : "Institution responsible for the risk assessment",
   
@@ -45,6 +46,9 @@
   "biosafetyLaw.jurisdiction"                        : "Area of jurisdiction",
   "biosafetyLaw.cpbSubjectAreas"                     : "Subject areas",
   "biosafetyLaw.entryIntoForce"                      : "Date of entry into force",
+  "biosafetyLaw.authorities"                         : "Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)",
+  "biosafetyLaw.amendedRecords"                      : "Law(s)/regulation(s) amended",
+  "biosafetyLaw.relatedRecords"                      : "Record(s) containing the related measure(s)",
   "modifiedOrganism.transformationEvent"             : "Transformation event",
   "modifiedOrganism.uniqueIdentification"            : "Unique identifier",
   "modifiedOrganism.developers"                      : "Developer (Name)",
@@ -54,6 +58,8 @@
   "modifiedOrganism.genes"                           : "Introduced or modified genetic element(s)",
   "modifiedOrganism.traits"                          : "Modified traits",
   "modifiedOrganism.commonUses"                      : "Common use(s)",
+  "modifiedOrganism.geneConstructs"                  : "Genetic elements construct",
+  "modifiedOrganism.linkedModifiedOrganisms"         : "Related LMO(s)",
 
   "dnaSequence.synonymNames"                         : "Alternative genetic element name(s)",
   "dnaSequence.abbreviation"                         : "Abbreviation",
@@ -67,5 +73,6 @@
   "organism.commonNames"                             : "Common name(s)",
   "organism.plantCultivar"                           : "Additional classification",
   "organism.organismType"                            : "Type of organism",
-  "organism.commonUses"                              : "Common use(s)"
+  "organism.commonUses"                              : "Common use(s)",
+  "organism.compatibleSpecies"                       : "Cross-compatible species"
 }
