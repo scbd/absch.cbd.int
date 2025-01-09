@@ -31,7 +31,7 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"additionalInfo",
-                   "title" : nr1Data.General_questions0_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -61,12 +61,12 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"additionalInfo",
-                   "title" : nr1Data.General_questions1_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.General_questions1_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -96,12 +96,12 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.General_questions2_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.General_questions2_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -131,12 +131,12 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.General_questions3_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.General_questions3_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -159,7 +159,7 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "value":"false.notApplicable",
-                   "title" : nr1Data.General_questions4_options2_title
+                   "title" : nr1Data.notApplicable
                 }
              ],
              "additionalInfo":[
@@ -170,12 +170,12 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.General_questions4_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.General_questions4_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -198,18 +198,18 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "value":"false.notApplicable",
-                   "title" : nr1Data.General_questions5_options2_title
+                   "title" : nr1Data.notApplicable
                 }
              ],
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.General_questions5_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.General_questions5_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -239,12 +239,12 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.General_questions6_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.General_questions6_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -255,18 +255,18 @@ export const npInterimNationalReport1 = [
              "number":"10",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.General_questions7_title,
-             "subTitle" : nr1Data.General_questions7_subTitle,
+             "title" : nr1Data.additionalInformation,
+             "subTitle" : nr1Data.summaryAndChallenges,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.General_questions7_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.General_questions7_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -302,12 +302,12 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Access_questions0_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions0_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -332,12 +332,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Access_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions1_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -362,12 +362,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Access_questions2_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions2_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -392,12 +392,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Access_questions3_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions3_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -422,12 +422,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Access_questions4_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions4_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -442,12 +442,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Access_questions5_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions5_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -472,12 +472,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Access_questions6_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions6_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -496,11 +496,11 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "value":"geneticResources.monetary",
-                   "title" : nr1Data.Access_questions7_options1_title
+                   "title" : nr1Data.monetaryBenefits
                 },
                 {
                    "value":"geneticResources.nonMonetary",
-                   "title" : nr1Data.Access_questions7_options2_title
+                   "title" : nr1Data.nonMonetaryBenefits
                 },
                 {
                    "value":"tk",
@@ -508,22 +508,22 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "value":"tk.monetary",
-                   "title" : nr1Data.Access_questions7_options4_title
+                   "title" : nr1Data.monetaryBenefits
                 },
                 {
                    "value":"tk.nonMonetary",
-                   "title" : nr1Data.Access_questions7_options5_title
+                   "title" : nr1Data.nonMonetaryBenefits
                 }
              ],
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Access_questions7_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions7_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -534,18 +534,18 @@ export const npInterimNationalReport1 = [
              "number":"19",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.Access_questions8_title,
-             "subTitle" : nr1Data.Access_questions8_subTitle,
+             "title" : nr1Data.additionalInformation,
+             "subTitle" : nr1Data.summaryAndChallenges,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Access_questions8_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.Access_questions8_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -576,12 +576,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Benefit_Sharing_questions0_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Benefit_Sharing_questions0_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -606,12 +606,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Benefit_Sharing_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Benefit_Sharing_questions1_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -636,12 +636,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Benefit_Sharing_questions2_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Benefit_Sharing_questions2_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -652,18 +652,18 @@ export const npInterimNationalReport1 = [
              "number":"23",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.Benefit_Sharing_questions3_title,
+             "title" : nr1Data.additionalInformation,
              "subTitle" : nr1Data.Benefit_Sharing_questions3_subTitle,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Benefit_Sharing_questions3_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.Benefit_Sharing_questions3_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -694,12 +694,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Compliance_questions0_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Compliance_questions0_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -754,7 +754,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Compliance_questions2_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -779,12 +779,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Compliance_questions3_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Compliance_questions3_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -827,7 +827,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Compliance_questions5_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -852,12 +852,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Compliance_questions6_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Compliance_questions6_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -882,7 +882,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"additionalInfo",
-                   "title" : nr1Data.Compliance_questions7_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -907,7 +907,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"challengesInfo",
-                   "title" : nr1Data.Compliance_questions8_additionalInfo0_title,
+                   "title" : nr1Data.summaryAndChallenges,
                    "type":"string"
                 },
                 {
@@ -917,7 +917,7 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Compliance_questions8_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"fileLinks"
                 }
              ]
@@ -946,7 +946,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Compliance_questions9_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -971,12 +971,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Compliance_questions10_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Compliance_questions10_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1006,12 +1006,12 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Compliance_questions11_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Compliance_questions11_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1022,18 +1022,18 @@ export const npInterimNationalReport1 = [
              "number":"30",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.Compliance_questions12_title,
-             "subTitle" : nr1Data.Compliance_questions12_subTitle,
+             "title" : nr1Data.additionalInformation,
+             "subTitle" : nr1Data.provideFurtherInformation,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Compliance_questions12_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.Compliance_questions12_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -1068,12 +1068,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.ComplianceMat_questions0_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.ComplianceMat_questions0_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1098,12 +1098,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.ComplianceMat_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.ComplianceMat_questions1_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1136,7 +1136,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.ComplianceMat_questions3_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -1161,7 +1161,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.ComplianceMat_questions4_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -1172,18 +1172,18 @@ export const npInterimNationalReport1 = [
              "number":"34",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.ComplianceMat_questions5_title,
-             "subTitle" : nr1Data.ComplianceMat_questions5_subTitle,
+             "title" : nr1Data.additionalInformation,
+             "subTitle" : nr1Data.provideFurtherInformation,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.ComplianceMat_questions5_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.ComplianceMat_questions5_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -1222,12 +1222,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.specialConsiderations_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.specialConsiderations_questions1_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1252,12 +1252,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.specialConsiderations_questions2_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.specialConsiderations_questions2_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1282,12 +1282,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.specialConsiderations_questions3_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.specialConsiderations_questions3_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1312,12 +1312,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.specialConsiderations_questions4_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.specialConsiderations_questions4_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1328,18 +1328,18 @@ export const npInterimNationalReport1 = [
              "number":"36",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.specialConsiderations_questions5_title,
+             "title" : nr1Data.additionalInformation,
              "subTitle" : nr1Data.specialConsiderations_questions5_subTitle,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.specialConsiderations_questions5_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.specialConsiderations_questions5_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -1370,12 +1370,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.indigenousProvisions_questions0_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.indigenousProvisions_questions0_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1400,12 +1400,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.indigenousProvisions_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.indigenousProvisions_questions1_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1422,7 +1422,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.indigenousProvisions_questions2_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1447,7 +1447,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.indigenousProvisions_questions3_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -1472,7 +1472,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.indigenousProvisions_questions4_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 }
              ]
@@ -1497,12 +1497,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.indigenousProvisions_questions5_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.indigenousProvisions_questions5_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1527,12 +1527,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.indigenousProvisions_questions6_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.indigenousProvisions_questions6_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1557,12 +1557,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.indigenousProvisions_questions7_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.indigenousProvisions_questions7_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1609,12 +1609,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.indigenousProvisions_questions9_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.indigenousProvisions_questions9_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1625,18 +1625,18 @@ export const npInterimNationalReport1 = [
              "number":"44",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.indigenousProvisions_questions10_title,
+             "title" : nr1Data.additionalInformation,
              "subTitle" : nr1Data.indigenousProvisions_questions10_subTitle,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.indigenousProvisions_questions10_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.indigenousProvisions_questions10_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -1667,12 +1667,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.conservationSustainable_questions0_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.conservationSustainable_questions0_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1683,13 +1683,13 @@ export const npInterimNationalReport1 = [
              "number":"46",
              "type":"text",
              "field":"furtherInfo",
-             "subTitle" : nr1Data.conservationSustainable_questions1_subTitle,
+             "subTitle" : nr1Data.provideFurtherInformation,
              "title" : nr1Data.conservationSustainable_questions1_title,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.conservationSustainable_questions1_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1700,18 +1700,18 @@ export const npInterimNationalReport1 = [
              "number":"47",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.conservationSustainable_questions2_title,
-             "subTitle" : nr1Data.conservationSustainable_questions2_subTitle,
+             "title" : nr1Data.additionalInformation,
+             "subTitle" : nr1Data.summaryAndChallenges,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.conservationSustainable_questions2_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.conservationSustainable_questions2_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -1747,12 +1747,12 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.transboundary_questions0_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.transboundary_questions0_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1781,12 +1781,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.transboundary_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.transboundary_questions1_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1797,18 +1797,18 @@ export const npInterimNationalReport1 = [
              "number":"50",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.transboundary_questions2_title,
-             "subTitle" : nr1Data.transboundary_questions2_subTitle,
+             "title" : nr1Data.additionalInformation,
+             "subTitle" : nr1Data.summaryAndChallenges,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.transboundary_questions2_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.transboundary_questions2_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -1839,12 +1839,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.modelContractualClause_questions0_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.modelContractualClause_questions0_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1869,12 +1869,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.modelContractualClause_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.modelContractualClause_questions1_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1885,18 +1885,18 @@ export const npInterimNationalReport1 = [
              "number":"53",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.modelContractualClause_questions2_title,
-             "subTitle" : nr1Data.modelContractualClause_questions2_subTitle,
+             "title" : nr1Data.additionalInformation,
+             "subTitle" : nr1Data.summaryAndChallenges,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.modelContractualClause_questions2_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.modelContractualClause_questions2_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -1927,12 +1927,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.awarenessRaising_questions0_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.awarenessRaising_questions0_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1957,12 +1957,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.awarenessRaising_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.awarenessRaising_questions1_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -1987,12 +1987,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.awarenessRaising_questions2_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.awarenessRaising_questions2_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2017,12 +2017,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.awarenessRaising_questions3_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.awarenessRaising_questions3_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2047,12 +2047,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.awarenessRaising_questions4_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.awarenessRaising_questions4_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2077,12 +2077,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.awarenessRaising_questions5_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.awarenessRaising_questions5_additionalInfo1_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2093,18 +2093,18 @@ export const npInterimNationalReport1 = [
              "number":"58",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.awarenessRaising_questions6_title,
-             "subTitle" : nr1Data.awarenessRaising_questions6_subTitle,
+             "title" : nr1Data.additionalInformation,
+             "subTitle" : nr1Data.summaryAndChallenges,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.awarenessRaising_questions6_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.awarenessRaising_questions6_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
@@ -2145,7 +2145,7 @@ export const npInterimNationalReport1 = [
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.technology_questions0_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2167,7 +2167,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.optional_questions0_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2192,17 +2192,17 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"additionalInfo",
-                   "title" : nr1Data.optional_questions1_additionalInfo0_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"challengesInfo",
-                   "title" : nr1Data.optional_questions1_additionalInfo1_title,
+                   "title" : nr1Data.summaryAndChallengesEncountered,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.optional_questions1_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2251,7 +2251,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.optional_questions2_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2268,7 +2268,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.optional_questions3_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2285,7 +2285,7 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.optional_questions4_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2311,17 +2311,17 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"challengesInfo",
-                   "title" : nr1Data.optional_questions5_additionalInfo0_title,
+                   "title" : nr1Data.summaryAndChallengesEncountered,
                    "type":"string"
                 },
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.optional_questions5_additionalInfo1_title,
+                   "title" : nr1Data.provideFurtherInformation,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.optional_questions5_additionalInfo2_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 }
              ]
@@ -2364,12 +2364,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.optional_questions7_additionalInfo0_title,
+                   "title" : nr1Data.relevantAbschRecords,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.optional_questions7_additionalInfo1_title,
+                   "title" : nr1Data.anyOtherRelevantDocuments,
                    "type":"fileLinks"
                 }
              ]
