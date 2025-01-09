@@ -50,6 +50,7 @@
     "absCheckpointCommunique.evidenceOfMAT"       : "Reference or evidence of establishment of mutually agreed terms (MAT)",
     "absCheckpointCommunique.description"         : "Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources",
     "absCheckpointCommunique.dateOfAccess"        : "Date of access to the genetic resources",
+    "absCheckpointCommunique.personsAtCheckpoint" : "Person or entity making information available to the checkpoint on the utilization of the genetic resource",
     
     "absProcedure.uniqueId"                 : "UID",
     "absProcedure.government"               : "Country",
@@ -63,6 +64,7 @@
     "absProcedure.duration"                 : "How long does the application process take:",
     "absProcedure.relevantMeasures"         : "Relevant ABS measure(s):",
     "absProcedure.keywords"                 : "Keywords",
+    "absProcedure.applicationContacts"      : "Information on whom the application should be sent to",
     
     "absNationalModelContractualClause.uniqueId":"UID",
     "absNationalModelContractualClause.government":"Country",
