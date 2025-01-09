@@ -1537,15 +1537,25 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         }
                         var query = '';
                         //for freetext use boosting
-                        var boostFields = {
-                            uniqueIdentifier_t   : 60,
-                            government_EN_t      : 50,
-                            countryRegions_EN_txt: 40,
-                            title_EN_t           : 30,
-                            summary_EN_t         : 20,
-                            schema_EN_t          : 10,
-                            text_EN_txt          : 1,
-                        };
+                        function generateBoostFields(language = 'EN') {
+                            if (typeof language !== 'string') {
+                                throw new Error('Language must be a string');
+                            }
+                        
+                            const languageFields = {
+                                uniqueIdentifier_t: 60,
+                                [`government_${language}_t`]: 50,
+                                [`countryRegions_${language}_txt`]: 40,
+                                [`title_${language}_t`]: 30,
+                                [`summary_${language}_t`]: 20,
+                                [`schema_${language}_t`]: 10,
+                                [`text_${language}_txt`]: 1,
+                            };
+                        
+                            return languageFields;
+                        }
+                        
+                        const boostFields = generateBoostFields((locale || 'EN').toUpperCase());                        
 
                         if(!boostFields[field])
                             boostFields[field] = 1;
