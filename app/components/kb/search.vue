@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { ref , onMounted } from 'vue';
     import "../kb/filters";
     import { useRealm } from '../../services/composables/realm.js';
     import {  useRoute, useRouter } from "@scbd/angular-vue/src/index.js";
@@ -38,9 +38,15 @@
                         emit('changeSearch', search.value);
                     } else {
                         router.push({
-                            path: `/kb/kbSearch/${encodeURIComponent( search.value )}`
+                            path: `/kb/kbSearch/${search.value}`
                         });
                     }
                 }
             }
+
+        onMounted( async() => {
+          if (route.value?.params?.search) {
+              search.value = route.value.params.search.replace(/"/g, "");
+          }
+        });
 </script>
