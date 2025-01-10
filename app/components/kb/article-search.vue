@@ -81,7 +81,7 @@
       onMounted( async() => {
           categories.value = await loadKbCategories(locale.value);
           if (route.value?.params?.search) {
-              search.value = route.value.params.search.replace(/"/g, "");
+              search.value = decodeURIComponent(route.value.params.search.replace(/"/g, ""));
           }         
           realmTag.value = realmArticleTag;
           await loadArticles(1);
