@@ -50,5 +50,7 @@
     "locked": "Locked for edit",
     "delete": "Delete",
     "edit": "Edit",
-    "note": "Note: Any pending draft will also be deleted"
+    "note": "Note: Any pending draft will also be deleted",
+    "sampleRecord": "Sample record for",
+    "bySystem": "By system"
 }

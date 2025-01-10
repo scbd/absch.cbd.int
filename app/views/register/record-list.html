@@ -95,6 +95,37 @@
                 <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
                     <td class="ps-1 text-center p-4" colspan="6"> <strong>{{::('recordListT.noRecordsFound'|$translate)}}</strong></td>
                 </tr>
+                <tr ng-show="tourOn">
+                    <td class="ps-1 py-3 fs-small-8 w-25">
+                        {{::('recordListT.sampleRecord'|$translate)}} <strong>{{schema|urlSchemaShortName}}</strong>
+                    </td> 
+                    <td class="ps-1 py-3 fs-small-8 align-middle">
+                        <a class="text-decoration-none">
+                            <strong>{{::('recordListT.bySystem'|$translate)}}</strong>
+                        </a>
+                    </td>
+                    <td class="ps-1 py-3 fs-small-8 align-middle">
+                        <a class="text-decoration-none">
+                            <strong>{{::('recordListT.bySystem'|$translate)}}</strong>
+                        </a>
+                    </td>
+                    <td class="ps-1 py-3 fs-small-8 align-middle">
+                        <div class="color-published-green bold">{{::('recordListT.published'|$translate)}} </div>
+                    </td>
+                    <td class="px-1 fs-small-8 text-end th_width align-middle">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="..." >
+                            <button class="btn btn-outline-secondary" id="duplicateRecord">
+                                <i class="bi bi-clipboard"></i>
+                            </button>
+                            <a class=" btn btn-outline-secondary text-decoration-none" id="editRecord" rel="noopener" title="{{::('recordListT.edit'|$translate)}}" type="button">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <button class="btn btn-outline-secondary" id="deleteRecord" title="{{::('recordListT.delete'|$translate)}}"  type="button">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
 
 <!--                <tbody ng-repeat="record in  records">-->
                 <tbody class="border-0" ng-repeat="record in (filteredRecords = (records | filter:statusFilter | orderBy:orderBy))">
