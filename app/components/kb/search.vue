@@ -26,7 +26,7 @@
     import messages from '../../app-text/components/kb.json';
     const { t } = useI18n({ messages });
     const realm = useRealm();
-    const route = useRoute();
+    const route = useRoute().value;
     const router = useRouter();
     const search = ref('');
 
@@ -34,19 +34,18 @@
 
     const  goToSearchArticles = function() {
                 if (search.value) {
-                    if (route.value?.params?.search) {
-                        emit('changeSearch', search.value);
-                    } else {
+                    // if (route.query?.search) {
+                    //     emit('changeSearch', route.query.search);
+                    // } else {
                         router.push({
-                            path: `/kb/kbSearch/${search.value}`
+                            path: '/kb/kbSearch',
+                            query: { search: search.value }
                         });
-                    }
+                    // }
                 }
             }
 
         onMounted( async() => {
-          if (route.value?.params?.search) {
-              search.value = route.value.params.search.replace(/"/g, "");
-          }
+            search.value = route.query?.search || "";
         });
 </script>
