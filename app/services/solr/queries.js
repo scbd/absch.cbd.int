@@ -20,23 +20,20 @@ export function onBuildDocumentSelectorQuery (options){
     if(options.government)
       queries.fieldQueries.push('government_s:'+escape(options.government));
 
-    if((options.searchText||'')!=''){
-        const searchField = options.searchField || 'text_EN_txt';
-
-        // Split the queryText into words and construct the Solr query for each word
-        const words = options.searchText.split(' ').filter(o=>o);
-        const escWords = words.map(escape); // solr encode
-        const wordQueries = escWords.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
-        const formattedQuery = `(${wordQueries.join(' AND ')})&fl=${searchField}`; // adjust to OR if that's more appropriate
+    if((options.searchText || '') !== '') {
+        const operator = options.operator || 'AND'; // Default to 'AND' if no operator is specified
+        const formattedQuery = constructSolrFreeTextQuery(options.searchText, options.searchField, operator);
     
-        if (options.query && options.query !== '') {
-            queries.query += ` AND ${formattedQuery}`;
-        } else {
-            queries.query = formattedQuery;
+    if (formattedQuery) {
+            if (options.query && options.query !== '') {
+                queries.query += ` AND ${formattedQuery}`;
+            } else {
+                queries.query = formattedQuery;
+            }
         }
     }
     return queries;
-  } 
+} 
 
 
 export function escape(value) {
@@ -98,3 +95,15 @@ export function andOr(query, sep) {
 export function localizeFields (field, locale){
     return field.replace(/_EN_/ig, `_${locale.toUpperCase()}_`);
 }
+
+export function constructSolrFreeTextQuery(searchText, searchField = 'text_EN_txt', operator = 'AND') {
+    if (!searchText) return ''; // Return an empty string if searchText is empty
+
+    // Split the queryText into words and construct the Solr query for each word
+    const words = searchText.split(' ').filter(o => o);
+    const escWords = words.map(escape); // Solr encode
+    const wordQueries = escWords.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
+
+    // Join queries with the specified operator
+    return `(${wordQueries.join(` ${operator} `)})&fl=${searchField}`;
+} 
