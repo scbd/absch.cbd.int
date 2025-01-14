@@ -79,7 +79,7 @@ export const absLeftMenuFilters = {
 		},
 		{
 			"type": "thesaurus",
-			"term": "status",
+			"term": "msrStatus",
 			"title": absFilters.measureLegalStatus,
 			"field": "status_s",
 			"otherTerm":false
