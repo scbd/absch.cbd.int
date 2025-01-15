@@ -86,7 +86,7 @@ import _ from 'lodash';
                 absSubjects            : "CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924",
                 keyAreas               : '2B2A5166-F949-4B1E-888F-A7976E76320B', 
                 aBSkeyareas            : '2B2A5166-F949-4B1E-888F-A7976E76320B',
-                status                 : "ED7CDBD8-7762-4A84-82DD-30C01458A799", 
+                status                 : "ED7CDBD8-7762-4A84-82DD-30C01458A799", // ToDo: having conflict with B91693BB-648B-4601-9C4E-5B6ABE160D35
                 msrStatus              : 'ED7CDBD8-7762-4A84-82DD-30C01458A799', // was mSR_status, used in abs-left-filters.jason replaced with status
                 typeOfDocuments        : "144CF550-7629-43F3-817E-CACDED34837E", 
                 msrTypes               : '144CF550-7629-43F3-817E-CACDED34837E', // was mSR_types, not used, duplicate of typeOfDocuments
@@ -208,7 +208,7 @@ import _ from 'lodash';
                 reportStatus                       : '7F0D898A-6BF1-4CE6-AA77-7FEAED3429C6',
                 approvedBody                       : 'F1A5BFF1-F555-40D1-A24C-BBE1BE8E82BF',
                 approvedStatus                     : 'E27760AB-4F87-4FBB-A8EA-927BDE375B48',
-                status                             : 'B91693BB-648B-4601-9C4E-5B6ABE160D35',
+                status                             : 'B91693BB-648B-4601-9C4E-5B6ABE160D35', // ToDo: having conflict with  ED7CDBD8-7762-4A84-82DD-30C01458A799
                 statusCapacity                     : '4E7731C7-791E-46E9-A579-7272AF261FED',
                 supportTools                       : 'B63B9640-1CB8-4868-89DA-3D0571638870',
                 jurisdictions                      : '50AC1489-92B8-4D99-965A-AAE97A80F38E',
