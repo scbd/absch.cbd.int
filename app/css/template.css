@@ -1260,8 +1260,12 @@ div.recordDefault:hover {
 .card-3 {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
-
-
+.ngdialog.ngdialog-theme-default .ngdialog-content .default-result-page .card-3 {
+    box-shadow: none;
+}
+.ngdialog.ngdialog-theme-default .ngdialog-content #schemaView .record.panel.panel-default {
+    margin-left: 56px !important;
+}
 /************************************************************************/
 #Search-Filter .check {
     color: #333;
