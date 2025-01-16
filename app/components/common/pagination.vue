@@ -95,15 +95,13 @@ const visiblePageNumbers = computed(() => {
 
 const previousPage = () => {
   if (internalCurrentPage.value > 1) {
-    internalCurrentPage.value--;
-    setPage(internalCurrentPage.value);
+    setPage(internalCurrentPage.value - 1);
   }
 };
 
 const nextPage = () => {
   if (internalCurrentPage.value < pageCount.value) {
-    internalCurrentPage.value++;
-    setPage(internalCurrentPage.value);
+    setPage(internalCurrentPage.value + 1);
   }
 };
 </script>
