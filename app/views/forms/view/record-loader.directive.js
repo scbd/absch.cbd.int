@@ -556,6 +556,10 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 				
 					}
 
+					$scope.isDocumentSelectionModal = function () {
+						return document.querySelector('.document-selection-modal') !== null;
+					};
+
 					async function hasChmRealm(identifier){
 						let query = `identifier_s:${solr.escape(identifier)}`
 						if(!isNaN(identifier))
