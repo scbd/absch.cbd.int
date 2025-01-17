@@ -123,30 +123,53 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         return docs;
     }
 
-    $scope.setDocument({}, true).then(function(doc){
+    $scope.setDocument({}, true).then(async function (doc) {
+        let preselectedNotifications = [];
+        // Example: register/SUB/new?notifications=2024-093,2024-092
+        const notificationsParam = $location.search().notifications;
+        let notificationNumbers;
+    
+        // Handle notificationsParam as an array or a string, register/SUB/new?notifications=2024-093&notifications=2024-092
+        if (Array.isArray(notificationsParam)) {
+            notificationNumbers = notificationsParam.map((number) => number?.trim());
+        } else if (typeof notificationsParam === 'string' && notificationsParam.trim() !== "") {
+            notificationNumbers = notificationsParam.split(',').map((number) => number?.trim());
+        }
+    
+        if (notificationNumbers) {
+
+            preselectedNotifications = await Promise.all(
+                notificationNumbers.map(async (number) => {
+                    const isValid = await isValidNotificationNumber(number);
+                    return isValid ? { identifier: number } : null; // Return an object with identifier if valid
+                })
+            ).then((result) => result.filter(Boolean)); // Filter out null values after validation
+        }
+    
         if (preselectedNotifications.length > 0) {
             $scope.document.notifications = preselectedNotifications;
         }
         $scope.onNotificationSelected();
     });
-
-    let preselectedNotifications = [];
-    // Example: register/SUB/new?notifications=2024-093,2024-092
-    const notificationsParam = $location.search().notifications;
-
-    if (typeof notificationsParam === 'string' && notificationsParam.trim() !== "") {
-        preselectedNotifications = notificationsParam
-                                  .split(',')
-                                  .map(number => number.trim())
-                                  .filter(isValidNotificationNumber)
-                                  .map(validNumber => ({ identifier: validNumber }));
+    
+    // Check if the notification number matches the pattern and exists in the database
+    async function isValidNotificationNumber(number) {
+        if (!number || !/^\d{4}-\d{3}$/.test(number.trim())) {
+            return false;
+        }
+    
+        const query = `schema_s:notification AND symbol_s:${number}`;
+        try {
+            const result = await searchService.list({
+                query: query,
+                fields: $scope.notificationQuery.fl,
+            });
+            return result.data.response.docs.length > 0;
+        } catch (error) {
+            console.error(`Error fetching notifications for ${number}:`, error);
+            return false;
+        }
     }
-
-    function isValidNotificationNumber(number) {
-      // Check if it matches the pattern "YYYY-XXX" (e.g., 2024-093)
-      const regex = /^\d{4}-\d{3}$/;
-      return regex.test(number.trim());
-      //ToDo: call api to check if this notification is available.
-    }
+    
   }];
 
