@@ -12,12 +12,6 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
     translationService.set('editsubmissionT', editsubmissionT);
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
-    let preselectedNotifications = [];
-    const notificationsParam = $location.search().notifications; // register/SUB/new?notifications=2024-093,2024-092
-
-    if (typeof notificationsParam === 'string' && notificationsParam.trim() !== "") {
-        preselectedNotifications = notificationsParam.split(',').map(id => ({ identifier: id.trim() }));
-    }
 
     $scope.notificationQuery = {
         q   : "schema_s:notification",
@@ -136,5 +130,23 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         $scope.onNotificationSelected();
     });
 
+    let preselectedNotifications = [];
+    // Example: register/SUB/new?notifications=2024-093,2024-092
+    const notificationsParam = $location.search().notifications;
+
+    if (typeof notificationsParam === 'string' && notificationsParam.trim() !== "") {
+        preselectedNotifications = notificationsParam
+                                  .split(',')
+                                  .map(number => number.trim())
+                                  .filter(isValidNotificationNumber)
+                                  .map(validNumber => ({ identifier: validNumber }));
+    }
+
+    function isValidNotificationNumber(number) {
+      // Check if it matches the pattern "YYYY-XXX" (e.g., 2024-093)
+      const regex = /^\d{4}-\d{3}$/;
+      return regex.test(number.trim());
+      //ToDo: call api to check if this notification is available.
+    }
   }];
 
