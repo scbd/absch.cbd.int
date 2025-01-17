@@ -15,8 +15,8 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
     let preselectedNotifications = [];
     const notificationsParam = $location.search().notifications; // register/SUB/new?notifications=2024-093,2024-092
 
-    if (notificationsParam) {
-        preselectedNotifications = notificationsParam.split(',').map(id => ({ identifier: id })); // map to the required format ie. [{"identifier":"2024-093"}]
+    if (typeof notificationsParam === 'string' && notificationsParam.trim() !== "") {
+        preselectedNotifications = notificationsParam.split(',').map(id => ({ identifier: id.trim() }));
     }
 
     $scope.notificationQuery = {
