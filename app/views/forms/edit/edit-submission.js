@@ -7,11 +7,18 @@ import editsubmissionT from '~/app-text/views/forms/edit/edit-submission.json';
 
   export { default as template } from './edit-submission.html';
 
-export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService', 'translationService',
-  function ($scope, $http, $controller, realm, searchService, solr, thesaurusService, translationService) {
+export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService', 'translationService', '$location',
+  function ($scope, $http, $controller, realm, searchService, solr, thesaurusService, translationService, $location) {
     translationService.set('editsubmissionT', editsubmissionT);
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
+    let preselectedNotifications = [];
+    const notificationsParam = $location.search().notifications; // register/SUB/new?notifications=2024-093,2024-092
+
+    if (notificationsParam) {
+        preselectedNotifications = notificationsParam.split(',').map(id => ({ identifier: id })); // map to the required format ie. [{"identifier":"2024-093"}]
+    }
+
     $scope.notificationQuery = {
         q   : "schema_s:notification",
         fl  : "identifier_s:symbol_s,rec_title:title_s,reference_s,symbol_s,rec_date:updatedDate_dt,schema_s"
@@ -123,6 +130,9 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
     }
 
     $scope.setDocument({}, true).then(function(doc){
+        if (preselectedNotifications.length > 0) {
+            $scope.document.notifications = preselectedNotifications;
+        }
         $scope.onNotificationSelected();
     });
 
