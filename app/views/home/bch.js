@@ -3,6 +3,7 @@ import '~/services/main';
 import '~/views/directives/map/home-map';
 import '~/views/directives/home-articles';
 import homepageRecords from '~/components/common/homepage-records.vue';
+import manageCookies from '~/components/common/manage-cookies.vue';
 export { default as template } from './bch.html';
 import bchHomeT from '~/app-text/views/home/bch.json';
 
@@ -15,7 +16,7 @@ export default ['$scope', 'articlesService', '$rootScope', 'translationService',
         }
 
         $scope.exportVueComponent = {
-          components: { homepageRecords }
+          components: { homepageRecords, manageCookies }
         }
       $scope.scrollTo = function (anchor){
         $('html, body').animate({
