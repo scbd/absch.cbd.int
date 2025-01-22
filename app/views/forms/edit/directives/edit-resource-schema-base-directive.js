@@ -151,6 +151,30 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					}
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
+
+				$scope.onCbdSubjectChange = function (value) {
+				
+					const gbfTargets = [];
+					const hasAbsSubjects = _.some(value || [], { identifier: "CBD-SUBJECT-ABS" });
+					const hasBchSubjects = _.some(value || [], { identifier: "CBD-SUBJECT-BTB" });
+				
+					if (hasAbsSubjects)
+						gbfTargets.push({ identifier: "GBF-TARGET-13" });
+					if (hasBchSubjects)
+						gbfTargets.push({ identifier: "GBF-TARGET-17" });
+				
+					const existingTargets = $scope.document.gbfTargets || [];
+					const mergedTargets = [...existingTargets, ...gbfTargets].reduce((acc, target) => {
+						if (!acc.some(t => t.identifier === target.identifier)) {
+							acc.push(target);
+						}
+						return acc;
+					}, []);
+				
+					$scope.document.gbfTargets = mergedTargets;
+				};
+				
+				
 				//==================================
 				//
 				//==================================
