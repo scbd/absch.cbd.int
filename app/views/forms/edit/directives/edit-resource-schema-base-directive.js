@@ -187,7 +187,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 
 					if($scope.isBCH || $scope.isCHM) {	
 						
-						if ($scope.isBCH && !$scope.hasGBF('GBF-TARGET-13')){
+						if (($scope.isBCH || $scope.isCHM) && !$scope.hasGBF('GBF-TARGET-13')){
 							document.nagoya= undefined;
 						}						
 						if(document.biosafety){
@@ -199,7 +199,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 							$scope.onAddressGenesChange(document.biosafety.addressGenes);
 						}					
 					}
-					if($scope.isABS){						
+					if($scope.isABS || $scope.isCHM){						
 						
 						if(!$scope.hasGBF('GBF-TARGET-17')) {
 							document.biosafety = undefined;
