@@ -3,6 +3,9 @@ import '~/views/countries/country-profile-directive';
 import '~/views/directives/block-region-directive';
 import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
+import { provide } from 'vue'; 
+import shareRecord from '~/components/common/share-record.vue';
+import { safeDelegate } from '~/services/common'
 import 'ng-breadcrumbs';
 import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 import countryProfileT from '~/app-text/views/countries/country-profile.json';
@@ -68,6 +71,17 @@ import countryProfileT from '~/app-text/views/countries/country-profile.json';
         })();
       }
 
+      $scope.shareVueComponent = {
+          components:{shareRecord},
+          setup:  shareRecordsFunctions
+      }
+      function shareRecordsFunctions () {
+          provide('getQuery', safeDelegate($scope, ()=>{
+              const type = "chm-country-profile"
+              const recordKey = $scope.code
+              return {recordKey, type}
+          }));
+      } 
     }
   ];
 

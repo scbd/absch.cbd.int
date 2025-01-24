@@ -342,8 +342,8 @@ const generateEmbedCode = async () => {
       else if (sharedData.value.storageType == "chm-search-result") {
         sharedData.value.embed.code += `<div class="scbd-chm-embed" data-type="chm-search-result" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
       }
-      else if (sharedData.embed.storageType == "chm-country-profile") {
-        sharedData.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
+      else if (sharedData.value.storageType == "chm-country-profile") {
+        sharedData.value.embed.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
       }
     }
     refreshSharedData();
