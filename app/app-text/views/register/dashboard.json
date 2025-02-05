@@ -54,5 +54,17 @@
     "referenceRecordsAbs": "Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication.",
     "bchTrainingSiteMessage": "By default, registered users can only publish 'Reference records'. 'National records' are published by Governments and include national information relevant for implementation as well as information Parties are obliged to provide in accordance with the Protocol. If the section on 'National records' does not appear below, please contact us at <a href='mailto:bch@cbd.int'> bch@cbd.int</a> and the Secretariat will assign you a national role which will be applicable to the Training Site only. Alternatively, you may use pre-existing accounts to practice publishing information. To view these roles and associated passwords, click <a href='https://bch.cbd.int/en/kb/tags/getting-help/Training-Site-User-Roles/628e3a4464c53e000142d9b0'>here</a>.",
     "absTrainingSiteMessage": "By default, registered users can only publish 'Reference records'. 'National records' are published by Governments and include national information relevant for implementation as well as information Parties are obliged to provide in accordance with the Protocol. If the section on 'National records' does not appear below, please contact us at <a href='mailto:absch@cbd.int'> absch@cbd.int</a> and the Secretariat will assign you a national role which will be applicable to the Training Site only.",
-    "chmTrainingSiteMessage": "By default, registered users can only publish 'Reference records'. 'National records' are published by Governments and include national information relevant for implementation as well as information Parties are obliged to provide in accordance with the Convention. If the section on 'National records' does not appear below, please contact us at <a href='mailto:chm@cbd.int'> chm@cbd.int</a> and the Secretariat will assign you a national role which will be applicable to the Training Site only."
+    "chmTrainingSiteMessage": "By default, registered users can only publish 'Reference records'. 'National records' are published by Governments and include national information relevant for implementation as well as information Parties are obliged to provide in accordance with the Convention. If the section on 'National records' does not appear below, please contact us at <a href='mailto:chm@cbd.int'> chm@cbd.int</a> and the Secretariat will assign you a national role which will be applicable to the Training Site only.",
+    "bch": "BCH Clearing-House",
+    "bchBrief": "The Biosafety Clearing-House (BCH) is a mechanism set up by the Cartagena Protocol on Biosafety to facilitate the exchange of information on Living Modified Organisms (LMOs) and assist the Parties to better comply with their obligations under the Protocol.",
+    "goToBch": "Go to the bch.cbd.int",
+    "abs": "ABS Clearing-House",
+    "absBrief": "The Access and Benefit-sharing Clearing-House (ABSCH) is a platform for exchanging information on access and benefit-sharing under the Nagoya Protocol.",
+    "goToAbs": "Go to the absch.cbd.int",
+    "bbi": "BBI dashboard (BBI-Dashboard)",
+    "bbiBrief": "The Bio-Bridge Web Platform's dashboard handles the submission, editing and listing of your Bio-Bridge records.",
+    "goToBbi": "Go to the BBI Dashboard",
+    "ort": "CBD Online Reporting Tool",
+    "ortBrief": "The CBD online reporting tool enables Parties to enter, review and, when appropriate, submit information requested in the guidelines for national reports.",
+    "goToOrt": "Go to the ort.cbd.int"
 }
