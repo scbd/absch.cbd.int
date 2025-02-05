@@ -71,9 +71,9 @@ import Enumerable from 'linqjs';
             var developmentRealms = {
                 urls: ['https://absch.cbddev.xyz', 
                        'https://bch.cbddev.xyz',
-                       'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 
+                       'https://chm.cbddev.xyz', 
                        'https://accounts.cbddev.xyz',
-                       'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'
+                       'http://localhost:2010', 'http://localhost:2012', 'http://localhost:8000'
                    ],
                 realms: ['ABS-DEV', 'BCH-DEV', 'CHM-DEV']
             };
