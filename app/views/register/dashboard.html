@@ -564,6 +564,57 @@
                         </div> -->
                     </div>
                 </div>
+
+                <!-- chm boxes start -->
+                <div ng-if="isChm" class="m-0 mt-2 mb-3 ">
+                    <div class="row g-4">
+                        <div class="col-md-3">
+                            <div class="card h-100 shadow">
+                                <div class="card-body pb-0">
+                                    <h5 class="card-title">{{::('dashboardT.bch'|$translate)}}</h5>
+                                    <p class="text-muted mb-0">{{::('dashboardT.bchBrief'|$translate)}}</p>
+                                </div>
+                                <div class="card-footer bg-white border-0">
+                                    <a href="https://bch.cbd.int" class="btn btn-primary w-100 text-uppercase">{{::('dashboardT.goToBch'|$translate)}} »</a>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-md-3">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{::('dashboardT.abs'|$translate)}}</h5>
+                                    <p class="text-muted">{{::('dashboardT.absBrief'|$translate)}}</p>
+                                </div>
+                                <div class="card-footer bg-white border-0">
+                                    <a href="https://absch.cbd.int" class="btn btn-primary w-100 text-uppercase">{{::('dashboardT.goToAbs'|$translate)}} »</a>
+                                </div>
+                            </div>
+                        </div>           
+                        <div class="col-md-3">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{::('dashboardT.bbi'|$translate)}}</h5>
+                                    <p class="text-muted">{{::('dashboardT.bbiBrief'|$translate)}}</p>
+                                </div>
+                                <div class="card-footer bg-white border-0">
+                                    <a href="https://www.cbd.int/biobridge/platform/dashboard" class="btn btn-primary w-100 text-uppercase">{{::('dashboardT.goToBbi'|$translate)}} »</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{::('dashboardT.ort'|$translate)}}</h5>
+                                    <p class="text-muted">{{::('dashboardT.ortBrief'|$translate)}}</p>
+                                </div>
+                                <div class="card-footer bg-white border-0">
+                                    <a href="https://ort.cbd.int" class="btn btn-primary w-100 text-uppercase">{{::('dashboardT.goToOrt'|$translate)}} »</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- chm boxes end -->
             </div>
         </div>
     </div>
