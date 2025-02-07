@@ -28,10 +28,11 @@ app.directive('xuserNotificationsPanel', ["translationService", function (transl
             },
             controller: ['$scope', '$rootScope', 'IUserNotifications',
                         '$timeout', '$filter','authentication','cfgUserNotification','$location', '$window', 'realm',
-                function($scope, $rootScope, userNotifications, $timeout, $filter,
+                async function($scope, $rootScope, userNotifications, $timeout, $filter,
                         authentication, cfgUserNotification, $location, $window, realm) {
 
-                    var realmsForQuery = cfgUserNotification.realmsForQuery();
+                    const realmsAndUrls = await cfgUserNotification.realmsForQuery();
+                    const realmsForQuery = realmsAndUrls.realms ;
                     $scope.isABS = realm.is('ABS');
                     $scope.isBCH = realm.is('BCH');
 
@@ -60,17 +61,22 @@ app.directive('xuserNotificationsPanel', ["translationService", function (transl
                                 $scope.updateStatus(notification);
                                 waitTime = 300;
                             }
-                            $timeout(function () {
-                                var url = ''
-                                if (notification.data && notification.data.documentInfo) {
-                                    url = cfgUserNotification.notificationUrl(notification);
-                                }
-                                else {
-                                    url = cfgUserNotification.getURL(notification);
-                                }
+                         $timeout(function () {
+                            (async function () {
+                                try {
+                                    var url = '';
+                                    if (notification.data && notification.data.documentInfo) {
+                                        url = await cfgUserNotification.notificationUrl(notification);
+                                    } else {
+                                        url = await cfgUserNotification.getURL(notification);
+                                    }
 
-                                $location.url(url);
-                            }, waitTime);
+                                    $location.url(url);
+                                } catch (error) {
+                                    console.error("Error while fetching URL:", error);
+                                }
+                            })();
+                        }, waitTime);
                         };
 
 
