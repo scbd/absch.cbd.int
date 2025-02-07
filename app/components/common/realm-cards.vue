@@ -36,7 +36,7 @@
     });
 
     onMounted(async () => {
-        const apiRealms = await realmApi.fetchRealmConfigurations();
+        const apiRealms = await realmApi.getRealmConfigurations();
 
         realmConfigurations.value =
           props.hideRealms.length > 0 ? apiRealms.filter((item) => !props.hideRealms.includes(item.realm)) : apiRealms;
