@@ -26,7 +26,7 @@ import './xuser-notification-config-service';
                 },
                 controller: ['$scope', '$rootScope', 'IUserNotifications',
                     '$timeout', '$filter', 'authentication', 'cfgUserNotification', '$location',
-                    function ($scope, $rootScope, userNotifications, $timeout, $filter,
+                    async function ($scope, $rootScope, userNotifications, $timeout, $filter,
                         authentication, cfgUserNotification, $location) {
                             
                         $scope.deviceSize = $rootScope.deviceSize;
@@ -34,7 +34,8 @@ import './xuser-notification-config-service';
                         var pageNumber = 0;
                         var pageLength = 30;
 
-                        var realmsForQuery = cfgUserNotification.realmsForQuery();
+                        const realmsAndUrls = await cfgUserNotification.realmsForQuery();
+                        const realmsForQuery = realmsAndUrls.realms ;
 
                         $scope.showInView = function () {
                             userNotifications.viewAll = !userNotifications.viewAll;
@@ -51,15 +52,20 @@ import './xuser-notification-config-service';
                                 waitTime = 300;
                             }
                             $timeout(function () {
-                                var url = ''
-                                if (notification.data && notification.data.documentInfo) {
-                                    url = cfgUserNotification.notificationUrl(notification);
-                                }
-                                else {
-                                    url = cfgUserNotification.getURL(notification);
-                                }
+                            (async function () {
+                                try {
+                                    var url = '';
+                                    if (notification.data && notification.data.documentInfo) {
+                                        url = await cfgUserNotification.notificationUrl(notification);
+                                    } else {
+                                        url = await cfgUserNotification.getURL(notification);
+                                    }
 
-                                $location.url(url);
+                                    $location.url(url);
+                                } catch (error) {
+                                    console.error("Error while fetching URL:", error);
+                                }
+                                })();
                             }, waitTime);
                         };
 
