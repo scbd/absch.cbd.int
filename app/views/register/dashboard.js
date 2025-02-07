@@ -13,6 +13,7 @@ import '~/views/register/directives/top-requests';
 import 'ngDialog';
 import dashboardT from '~/app-text/views/register/dashboard.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
+import realmCards from '~/components/common/realm-cards.vue';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);    
     export { default as template } from './dashboard.html';
 export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
@@ -42,6 +43,10 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             translationService.set('dashboardT', dashboardT);
             var schemaFacets = {};
             $scope.showRecordsSection=true;
+
+            $scope.exportVueComponent = {
+                components: { realmCards }
+            }
             //====================================================================================
             $scope.isFilter = function(filter) {
                 return $scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
