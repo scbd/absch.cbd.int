@@ -4,83 +4,80 @@ import _ from 'lodash';
 
         app.service("cfgUserNotification", ['$location', '$window', '$filter', function ($location, $window, $filter) {
 
-            var notificationUrls = {
-                documentAlertUrl        : '/database/record?documentID=',
+            const notificationUrls = {
+                documentAlertUrl: '/database/record?documentID=',
                 documentNotificationUrl: '/register/requests/',
                 viewAllNotificationUrl: '/register/requests',
                 documentMessageUrl: '/mailbox/'
             };
-            
-            async function getRealms() {
-                const realmApi = new RealmApi({}); 
-                const result = await realmApi.fetchRealmConfigurations();
-                return result;
-            }
-            
-            let apiRealms;
-            const queryRealms = {
-                urls: [],
-                realms:[]
-            };
+            let apiRealms = [];
+            const queryRealms = { urls: [], realms: [] };
 
+            // Fetch and store realm configurations
             async function realmsForQuery() {
-               
-                apiRealms = await getRealms();
-                apiRealms.forEach(item => {
-                    const {baseURL, realm} = item; 
+                const realmApi = new RealmApi({});
+                apiRealms = await realmApi.getRealmConfigurations();
+
+                apiRealms.forEach(({ baseURL, realm }) => {
                     queryRealms.urls.push(baseURL);
-                    queryRealms.realms.push(realm);
+                    queryRealms.realms.push(realm.toUpperCase()); // Ensure case consistency
                 });
 
                 return queryRealms;
             } 
 
             function notificationUrl(notification) {
-                const realm = notification.data.documentInfo.realm.toUpperCase();
-                const url = apiRealms.find(data => data.realm === realm).baseURL;
-
-                let path;
-                if(url) {
-                    if ($location.absUrl().indexOf(url) >= 0)
-                        url = '';
-                    
-                    if (_.includes(queryRealms.realms, realm)) {
-                        if(notification.type == 'documentNotification')
-                            path = "/register/" + $filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
-                        else
-                            path = '/database/' + $filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier;
-                    }
-                    else {
-                        path = getURL(notification);
-                    }
-    
-
-                    $window.location.href = url + path;
+                if (!apiRealms.length) {
+                    console.error("Realms data is not loaded yet. Ensure `realmsForQuery()` is called before using `notificationUrl`.");
+                    return;
                 }
-                else {
-                    return path;
+
+                const realm = notification.data.documentInfo.realm.toUpperCase();
+                const realmData = apiRealms.find(data => data.realm === realm);
+
+                // if (!realmData) {
+                //     console.warn(`Realm "${realm}" not found. Falling back to default URL.`);
+                //     return getURL(notification);
+                // }
+
+                const { baseURL } = realmData;
+                let path;
+
+                if (_.includes(queryRealms.realms, realm)) {
+                    path = notification.type === 'documentNotification'
+                        ? `/register/${$filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema)}/${notification.data.documentInfo.identifier}/view`
+                        : `/database/${$filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema)}/${notification.data.documentInfo.identifier}`;
+                } else {
+                    path = getURL(notification);
+                }
+
+                // Prevent navigation if already on the same domain
+                if ($location.absUrl().includes(baseURL)) {
+                    $window.location.href = path;
+                } else {
+                    $window.location.href = baseURL + path;
                 }
             }
 
             function getURL(notification) {
-                
-                if (notificationUrls && !notificationUrls.documentNotificationUrl)
-                    throw "Invalid User Notification Configuration, documentNotificationUrl is missing.";
+                if (!notificationUrls.documentNotificationUrl) {
+                    throw new Error("Invalid User Notification Configuration: documentNotificationUrl is missing.");
+                }
 
-                if (notification.type == 'documentNotification')
-                    return notificationUrls.documentNotificationUrl + notification.data.workflowId;
-                else  if (notification.type == 'subscriptionNotification')
-                    return notificationUrls.documentAlertUrl + notification.data.documentInfo.identifier;
-                else
-                    return notificationUrls.documentMessageUrl + notification.id;
+                switch (notification.type) {
+                    case 'documentNotification':
+                        return notificationUrls.documentNotificationUrl + notification.data.workflowId;
+                    case 'subscriptionNotification':
+                        return notificationUrls.documentAlertUrl + notification.data.documentInfo.identifier;
+                    default:
+                        return notificationUrls.documentMessageUrl + notification.id;
+                }
             }
 
             return {
-                notificationUrls: notificationUrls,
-                realmsForQuery  : realmsForQuery,
-                notificationUrl : notificationUrl,
-                getURL          : getURL
+                notificationUrls,
+                realmsForQuery,
+                notificationUrl,
+                getURL
             };
         }]);
-
-    
