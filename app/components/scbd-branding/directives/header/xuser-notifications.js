@@ -34,8 +34,7 @@ import './xuser-notification-config-service';
                         var pageNumber = 0;
                         var pageLength = 30;
 
-                        const realmsAndUrls = await cfgUserNotification.realmsForQuery();
-                        const realmsForQuery = realmsAndUrls.realms ;
+                        const realmsForQuery = await cfgUserNotification.realmsForQuery();
 
                         $scope.showInView = function () {
                             userNotifications.viewAll = !userNotifications.viewAll;
