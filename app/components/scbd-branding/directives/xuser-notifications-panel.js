@@ -31,8 +31,7 @@ app.directive('xuserNotificationsPanel', ["translationService", function (transl
                 async function($scope, $rootScope, userNotifications, $timeout, $filter,
                         authentication, cfgUserNotification, $location, $window, realm) {
 
-                    const realmsAndUrls = await cfgUserNotification.realmsForQuery();
-                    const realmsForQuery = realmsAndUrls.realms ;
+                    const realmsForQuery = await cfgUserNotification.realmsForQuery();
                     $scope.isABS = realm.is('ABS');
                     $scope.isBCH = realm.is('BCH');
 

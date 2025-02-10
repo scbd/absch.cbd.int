@@ -11,20 +11,11 @@ import _ from 'lodash';
                 documentMessageUrl: '/mailbox/'
             };
             let apiRealms = [];
-            const queryRealms = { urls: [], realms: [] };
-
-            // Fetch and store realm configurations
             async function realmsForQuery() {
                 const realmApi = new RealmApi({});
                 apiRealms = await realmApi.getRealmConfigurations();
-
-                apiRealms.forEach(({ baseURL, realm }) => {
-                    queryRealms.urls.push(baseURL);
-                    queryRealms.realms.push(realm.toUpperCase()); // Ensure case consistency
-                });
-
-                return queryRealms;
-            } 
+                return apiRealms.map(({ realm }) => realm);
+            }
 
             function notificationUrl(notification) {
                 if (!apiRealms.length) {
@@ -35,10 +26,10 @@ import _ from 'lodash';
                 const realm = notification.data.documentInfo.realm.toUpperCase();
                 const realmData = apiRealms.find(data => data.realm === realm);
 
-                // if (!realmData) {
-                //     console.warn(`Realm "${realm}" not found. Falling back to default URL.`);
-                //     return getURL(notification);
-                // }
+                if (!realmData) {
+                    console.warn(`Realm "${realm}" not found. Falling back to default URL.`);
+                    return getURL(notification);
+                }
 
                 const { baseURL } = realmData;
                 let path;
