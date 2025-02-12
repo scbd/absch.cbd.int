@@ -22,15 +22,25 @@ export default class KmDocumentApi extends ApiBase
     async saveTags(params)  {
         return this.http.post(`api/v2025/tagging/km-documents/`, params)
                 .then(res => res.data).catch(tryCastToApiError);
+
+        /*
+        GET     /path/to/documents/:id/tags // list of tags
+        PUT     /path/to/documents/:id/tags/:tagName //ADD
+        DELETE  /path/to/documents/:id/tags/:tagName //remove
+        
+        */
     }
-    async getDocumentTagsById(id, params)  {
+    async getDocumentTags(UID)  { 
         const adminTags = ["finding-information", "submitting-information", "monitoring"];
         return adminTags ;
-        // return this.http.get(`api/v2025/tagging/km-documents/`, {params}).then(res => res.data).catch(tryCastToApiError);
+        // return this.http.get(`api/v2025/tagging/km-documents/UID`, {params}).then(res => res.data).catch(tryCastToApiError);
     }
-    async getDocumentTags(params)  {
-        const adminTags = ["about","getting-started", "finding-information", "submitting-information", "monitoring"];
-        return adminTags ;
-        // return this.http.get(`api/v2025/tagging/km-documents/`, {params}).then(res => res.data).catch(tryCastToApiError);
+
+    async getAdminTags(params)  { // getAdminTags, 
+        // f: {"title":1}
+        // l: 100
+        // q: {"title":{"$$startsWith":"a"}}
+        // sk: 0
+        return this.http.get(`api/v2021/article-admin-tags`, {params}).then(res => res.data).catch(tryCastToApiError);
     }
 }

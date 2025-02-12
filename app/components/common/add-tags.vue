@@ -9,7 +9,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title text-black">
-                Admin Tags
+                {{documentTitle}} - Admin Tags
             </h5>
             <button type="button" class="border-0 close" @click="closeDialog()" aria-label="Close">
               <i class="bi bi-x-circle-fill icon-lg"></i>
@@ -77,7 +77,8 @@ const taggingOptions = ref([]);
 const errorMessage = ref("");
 
 const props = defineProps({
-  documentId: { type: String, required: true }
+  documentId: { type: String, required: true },
+  documentTitle: { type: String, required: false }
 });
 
 const addTag = (newTag) => {
