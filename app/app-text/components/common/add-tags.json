@@ -1,0 +1,9 @@
+{
+    "adminTags": "Admin Tags",
+    "addTags": " Add Tags",
+    "typeHere": "Type here to search a tag",
+    "cancel": "Cancel",
+    "save": "Save",
+    "pleaseSelectOne": "Please select at least one tag before saving.",
+    "failedToSave": "Failed to save tags."
+}
