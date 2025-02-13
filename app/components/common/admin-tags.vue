@@ -41,7 +41,7 @@
                   </div>
                 </td>
                 <td class="text-center align-middle">
-                  <add-tags :document-title="record.title" :document-id="record.identifier"></add-tags>
+                  <add-tags :document-title="record.title" :document-id="record.identifier"> Update Tags</add-tags>
                 </td>
               </tr>
             </template>
