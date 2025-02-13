@@ -1,5 +1,15 @@
 {
-  "print": "",
+  "print": "Печать",
   "languagesAvailable": "доступные языки:",
-  "pdf": "PDF"
+  "pdf": "PDF",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.566Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "print": "13dba24862cf9128167a59100e154c8d",
+      "languagesAvailable": "75448ba7627cc65f84515f898c6f229c",
+      "pdf": "bcd1b68617759b1dfcff0403a6b5a8d1"
+    }
+  }
 }

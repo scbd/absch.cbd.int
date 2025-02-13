@@ -1,17 +1,41 @@
 {
   "registries": "السجلات",
-  "geneticElementRegistry": "",
+  "geneticElementRegistry": "سجل العناصر الجينية",
   "lmoTitle": "سجل الكائنات الحية المُحوّرة",
   "organismRegistry": "سجل الكائنات الحية",
-  "geneInfo": "يحتوي سجل العناصر الجينية على معلومات موجزة عن العناصر الجينية المرتبطة بالكائنات الحية المحورة المسجلة في غرفة تبادل معلومات السلامة الأحيائية، تتضمن معلومات عن الكائن المتبرع والسمات الممنوحة والوظيفة البيولوجية.  كما يحتوي الجزء الأدنى من كل سجل على أسماء الكائنات الحية المحورة التي تحتوي على عناصر جينية معينة.",
-  "clickHere": "",
-  "loading": "",
-  "error": "",
+  "labRegistry": "سجل المعمل",
+  "geneInfo": "يحتوي سجل العناصر الجينية على معلومات موجزة عن العناصر الجينية المرتبطة بالكائنات الحية المحورة المسجلة في غرفة تبادل معلومات السلامة الأحيائية، تتضمن معلومات عن الكائن المتبرع والسمات الممنوحة والوظيفة البيولوجية. يحتوي السجل على روابط لصفحة كل عنصر جيني حيث المزيد من التفاصيل. كما يحتوي الجزء الأدنى من كل سجل على أسماء الكائنات الحية المحورة التي تحتوي على عناصر جينية معينة.",
+  "clickHere": "اضغط على <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=dnaSequence' > هنا </a> لإجراء بحث تفصيلي وشامل في كل سجلات الكائن المتاحة في هذا السجل.",
+  "loading": "قيد التحميل ...",
+  "error": "خطأ في تحميل مدونات التسجيل، يُرجى تكرار المحاولة.",
   "totalRecords": "إجمالي عدد السجلات:",
   "export": "تصدير",
   "recordID": "معرف السجل",
   "name": "الاسم",
   "traits": "السمات الجينية",
   "donorOrganism": "الكائن المانح",
-  "function": "الوظيفة"
+  "function": "الوظيفة",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.003Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "lmoTitle": "5529599d2157303129ae7e2a96215c73",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "labRegistry": "4099e15a8e9456cd759f605dc491c26f",
+      "geneInfo": "381f477d21ef30063ce6433141c76fc7",
+      "clickHere": "3e4aba67160b64d6724d346937caf23a",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "error": "6d8272f491e2dd46fc83518aa0e1d186",
+      "totalRecords": "bdce1a99aaf929539a09d564a830f4ad",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "recordID": "5bcbee8ee48fbbebb61b02d453ad5d72",
+      "name": "49ee3087348e8d44e1feda1917443987",
+      "traits": "6f9282005e0fceed2c0f05567ab936e9",
+      "donorOrganism": "259149bacd72688d8a4dc1f7d289d3ac",
+      "function": "86408593c34af77fdd90df932f8b5261"
+    }
+  }
 }

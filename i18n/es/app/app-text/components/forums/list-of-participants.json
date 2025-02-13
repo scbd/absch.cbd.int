@@ -1,0 +1,29 @@
+{
+  "parties": "Partes",
+  "name": "Nombre",
+  "government": "Gobierno",
+  "non-parties": "No Partes",
+  "observers": "Observadores",
+  "organization": "Organización",
+  "organizations": "Organizaciones",
+  "listIsEmpty": "La lista está vacía",
+  "loading": "Cargando...",
+  "government_organization": "Gobierno / Organización",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.384Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "parties": "c6f1eb7875926d8d5f1d88466e39c6eb",
+      "name": "49ee3087348e8d44e1feda1917443987",
+      "government": "18450de39aceed82b26abe218d377740",
+      "non-parties": "ae95195b2e4dd9f6e61ad425bbf58a15",
+      "observers": "1b3b22fe46ee3a448828dea57f838bd7",
+      "organization": "d6b258792ff06f82933c74eeb8aef591",
+      "organizations": "fe8d31f91681817b4b1438c2933b8b75",
+      "listIsEmpty": "adea41c25491eafc43e626a0c94eeb67",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "government_organization": "7c52dcbe01f2221f4b7c27d27934f610"
+    }
+  }
+}

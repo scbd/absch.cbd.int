@@ -1,3 +1,11 @@
 {
-  "unauthorizedAccess": "Несанкционированный доступ."
+  "unauthorizedAccess": "Несанкционированный доступ.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.18Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "unauthorizedAccess": "e831386e03dbd7b9a732cc903ea52167"
+    }
+  }
 }

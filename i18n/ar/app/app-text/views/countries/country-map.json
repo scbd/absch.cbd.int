@@ -6,5 +6,20 @@
   "nationalRecords": "السجلات الوطنية",
   "ratifiedTitle": "يقصد بذلك البلاد التي أودعت صكوكها للتصديق، لكنها لم تكمل بعد فترة انتظار مدتها 90 يومًا قبل سريان البروتوكول في هذه البلدان.",
   "ratified": "صدقت على البروتوكول لكنها ليست طرفًا بعد.",
-  "nonParties": "غير أطراف"
+  "nonParties": "غير أطراف",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.542Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "partiesToThe": "1c8d8314880e9bb63ee61fa4bd6a7e64",
+      "disclaimer": "ad0a802ec8134e9210a5625933db50a7",
+      "disclaimerText": "a6d899f8a892f459a1e7a23a38ea271c",
+      "close": "d3d2e617335f08df83599665eef8a418",
+      "nationalRecords": "4c66bf8297960be19af41b99680647d2",
+      "ratifiedTitle": "0ccccbf2ea5ec946dec0fbed1c0d7922",
+      "ratified": "7ec144f6a65ca33b42871db347084e5a",
+      "nonParties": "ae95195b2e4dd9f6e61ad425bbf58a15"
+    }
+  }
 }

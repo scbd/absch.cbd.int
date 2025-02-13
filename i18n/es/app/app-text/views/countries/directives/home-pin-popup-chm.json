@@ -1,0 +1,15 @@
+{
+  "partyToConvention": "Parte en el Convenio",
+  "notPartyToConvention": "No Parte en el Convenio",
+  "ratifiedNotYetParty": "Ratificado, pero todavía no es Parte",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.551Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "partyToConvention": "78b0876dc320c9efdf18bbaf95803055",
+      "notPartyToConvention": "36048a9144edf839685fdba280081f76",
+      "ratifiedNotYetParty": "7ec144f6a65ca33b42871db347084e5a"
+    }
+  }
+}

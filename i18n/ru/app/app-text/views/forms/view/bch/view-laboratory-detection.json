@@ -8,7 +8,26 @@
   "detectionMethods": "Тип метода(-ов) определения/идентификации, доступного (доступных) для использования в лаборатории",
   "lmoTypes": "Типы ЖИО",
   "detectableLmos": "ЖИО, обнаруживаемый(-е) лабораторией",
-  "detectableGenes": "",
+  "detectableGenes": "Генетический(-ие) элемент(ы), обнаруживаемый(-ые) лабораторией",
   "additionalInformation": "Дополнительная информация",
-  "relevantDocuments": "Адреса других соответствующих веб-сайтов/или прилагаемые документы"
+  "relevantDocuments": "Адреса других соответствующих веб-сайтов и/или прилагаемые документы",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.795Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "organization": "58149bf94c1e3a8e596d8992403f9e46",
+      "relatedOrganization": "796a0be5fefbbb059d5176144c06c3af",
+      "services": "a3c64dcae988db696990892f991e3bfe",
+      "collaborativeAgreements": "ad3e6364e60cd7bba8b43136984193df",
+      "certifications": "b9db86204b66bc88f5f2ab0cf7b5dc0e",
+      "detectionMethods": "3081813de8a09ae44473a4140e91960e",
+      "lmoTypes": "752886a221607b70daf4e9be969e76d2",
+      "detectableLmos": "738e73de937d03042477cb88f4e16fec",
+      "detectableGenes": "f3c9142b1378718bfc0259749d5bcd9c",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392",
+      "relevantDocuments": "aedb646b5a6c26b6299c97a9893e5409"
+    }
+  }
 }

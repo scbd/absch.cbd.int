@@ -1,11 +1,27 @@
 {
   "sessionExpired": "Срок действия сеанса истек.",
   "sessionHasExpired": "Срок действия сеанса истек. Выполните вход для продолжения.",
-  "loginFailed": "Ошибка входа.",
+  "loginFailed": "Выполнить вход не удалось.",
   "incorrectMsg": "Введен неверный адрес электронной почты или пароль.",
   "operationFailed": "Сбой операции.",
   "serviceNotAvailable": "Служба недоступна. Повторите попытку позже.",
   "signInAccount": "Войдите в свою учетную запись",
   "forgotPassword": "Забыли пароль?",
-  "createAccount": "Создать учетную запись"
+  "createAccount": "Создать учетную запись",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.442Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "sessionExpired": "30215754d02c995b725ae89e126a1e32",
+      "sessionHasExpired": "6beaa731ee66fffeb4f5281513afe925",
+      "loginFailed": "92b78d0fdac8517ad171a457faf0905c",
+      "incorrectMsg": "435a62387132f58b3c7d9088ed305d8d",
+      "operationFailed": "7b00c63945c0097143118878aab78bbe",
+      "serviceNotAvailable": "adab65f682cf61f91142a03ba4c672e0",
+      "signInAccount": "41c7f398db6c57ffeb4cc154f814e897",
+      "forgotPassword": "8458bad978f4fd6d6c7f8ec2ec0824b4",
+      "createAccount": "2fdfd506efea08144c0794c32ca8250a"
+    }
+  }
 }

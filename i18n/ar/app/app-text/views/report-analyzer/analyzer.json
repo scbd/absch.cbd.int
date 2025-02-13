@@ -1,5 +1,5 @@
 {
-  "report": "تقرير:",
+  "report": "التقرير:",
   "analysis": "التحليل:",
   "breakdownCbdRegions": "تصنيف حسب مناطق اتفاقية التنوع البيولوجي",
   "selectCountries": "تحديد البلدان",
@@ -8,11 +8,11 @@
   "breakdownProtocolNonParties": "تصنيف حسب غير الأطراف في البروتوكول",
   "nationalReportAnalyzer": "أداة تحليل التقرير الوطني",
   "nationalReportAnalyzerInfo": "تتيح لك هذه الأداة تحديد أقسام أو أسئلة مُحدّدة من التقرير وعرض النتائج حسب البلد/المنطقة.",
-  "analyze": "تحليل »",
+  "analyze": "تحليل",
   "#meta": {
-    "hashedOn": "2024-05-05T18:52:52.676Z",
+    "hashedOn": "2024-11-22T14:18:26.982Z",
     "algorithm": "md5",
-    "branch": "2024.13.3",
+    "branch": "2024.46.0",
     "hashes": {
       "report": "73754ac01026f63adb0510af0557e38c",
       "analysis": "c036ce00a53ed7b7232f3f7faac2216f",

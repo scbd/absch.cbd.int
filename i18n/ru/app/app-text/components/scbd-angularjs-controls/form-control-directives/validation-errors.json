@@ -3,8 +3,23 @@
   "mandatory": "Обязательное поле",
   "mandatoryAnyOf": "Одно из полей является обязательным",
   "invalidValue": "Указанное значение недопустимо",
-  "invalidProperty": "Это значение не может быть определено",
+  "invalidProperty": "Это значение не может быть указано",
   "unspecifiedLocale": "Язык используется, но не указан в вашем документе",
   "unexpectedTerm": "Указанный термин нельзя использовать",
-  "invalidType": "Неверный тип полей"
+  "invalidType": "Недопустимый тип полей",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.432Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "unknown": "aee9784c03b80d38d3271cde2b252b8d",
+      "mandatory": "7f6c29842152c67b71b49d97ef59b277",
+      "mandatoryAnyOf": "233e8ca45b42458811acb568b588cdc5",
+      "invalidValue": "e0df5f4232f754d8f33ab6303b6f31fb",
+      "invalidProperty": "fbdbc14aab4574ed647075ad1a442478",
+      "unspecifiedLocale": "57dbcd31cf8060796d7c8afbda4cb9ba",
+      "unexpectedTerm": "0875927afc577c8c6b87989cd7f3ea77",
+      "invalidType": "9bee33b4bc96dd8a26b4b04b97f8aa9a"
+    }
+  }
 }

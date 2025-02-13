@@ -1,10 +1,25 @@
 {
   "loading": "Загрузка данных матрицы",
   "filter": "Фильтр изменен, перезапуск получения данных",
-  "exportResult": "Экспорт результатов",
-  "format": "Формат загрузки :",
+  "exportResult": "Экспортировать результат",
+  "format": "Формат загрузки:",
   "csv": "значения с разделителями-запятыми",
   "name": "Имя файла:",
   "close": "Закрыть",
-  "download": "Загрузить"
+  "download": "Загрузить",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.128Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "loading": "e6364f3f9cbfd7032fe86511b5d0d00a",
+      "filter": "00f670b235796c6ad1f6537ffcfcb54e",
+      "exportResult": "90d12cbdd7bc9bce6041faddb4ae430b",
+      "format": "54fbee97df6a20f2480a44d6fc974d6f",
+      "csv": "32b225e519e13615192fb671d116c205",
+      "name": "2c5a005db9fe4bbf85500002d6c20584",
+      "close": "d3d2e617335f08df83599665eef8a418",
+      "download": "801ab24683a4a8c433c6eb40c48bcd9d"
+    }
+  }
 }

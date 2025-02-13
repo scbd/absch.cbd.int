@@ -1,34 +1,73 @@
 {
   "welcome": {
     "title": "Vous êtes invité(e) à ajouter un nouveau fichier",
-    "content": "<p>    Publier</p>"
+    "content": "<p>Sur cette page, vous pouvez ajouter (créer) un nouveau fichier.<br>L’ajout d’un nouveau fichier est divisé en 4 étapes principales :<br>Étape 1 : Introduction<br>Étape 2 : Formulaire de soumission<br>Étape 3 : Révision<br>Étape 4 : Publier</p>"
   },
   "introduction": {
     "title": "Ajouter un nouveau fichier : Introduction",
-    "content": "<p></p>"
+    "content": "<p>L’« Introduction » contient un bref résumé du type de dossier sélectionné et de brèves instructions sur la manière de soumettre les informations.</p>"
   },
   "submissionForm": {
     "title": "Ajouter un nouveau fichier : Formulaire de soumission",
-    "content": "</u>  Certains champs ont un texte descriptif pour vous aider à remplir le formulaire."
+    "content": "Complétez les champs dans le « Formulaire de soumission ».<br><u>Remarque :</u> Les champs marqués d'un astérisque <span style='color: red;'>rouge</span> (<span style='color: red;'>*</span>) sont obligatoires. Certains champs ont un texte descriptif pour vous aider à remplir le formulaire."
   },
   "saveDraft": {
     "title": "Enregistrer le brouillon",
-    "content": " Une fois que votre brouillon est sauvegardé, vous pourrez le partager par courriel ou l'exporter en PDF."
+    "content": "Il est recommandé de sauvegarder votre fichier périodiquement pendant le processus de soumission.<br>Vous pouvez également sauvegarder le dossier en tant que brouillon et continuer votre soumission à une date ultérieure.<br><u>Remarque</u> : Une fois que votre brouillon est sauvegardé, vous pourrez le partager par courriel ou l'exporter en PDF."
   },
   "review": {
     "title": "Ajouter un nouveau fichier : Examen",
-    "content": " Assurez-vous de les compléter afin de procéder à la publication de votre dossier."
+    "content": "Une fois que vous avez rempli le « formulaire de soumission », cliquez ici pour le réviser.<br>Si les champs obligatoires n’ont pas été remplis, la « révision » les mettra en évidence. Assurez-vous de les compléter afin de procéder à la publication de votre dossier."
   },
   "publish": {
     "title": "Publier",
     "content": "Cliquez sur « Publier » pour terminer le processus."
   },
   "needHelp": {
-    "title": "Besoin d'aide?",
-    "content": "<p></p>"
+    "title": "Besoin d'aide ?",
+    "content": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur le processus de soumission.</p>"
   },
   "needMoreHelp": {
-    "title": "Encore besoin d’aide?",
-    "content": "<p></p>"
+    "title": "Encore besoin d’aide ?",
+    "content": "<p>Utilisez la fonction de chat pour nous envoyer un message et obtenir plus d’aide.</p>"
+  },
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.76Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "welcome": {
+        "title": "68924e45fcd401b475fbe38dcf1bae09",
+        "content": "d42eb6b70bd1527f25f990a6f59733b7"
+      },
+      "introduction": {
+        "title": "6d7f6abb4be946bcf3e5c9d012372258",
+        "content": "1204533be63ea211ac72717a6e8dda8d"
+      },
+      "submissionForm": {
+        "title": "24c151f3d05c596a5ea809ffe9acd7e4",
+        "content": "a412cde89d4147decc2aad272bca41a0"
+      },
+      "saveDraft": {
+        "title": "40bdf9ef6a0572942d98d674a31afe74",
+        "content": "57e06a08906c86fc026d02f08ce4cd67"
+      },
+      "review": {
+        "title": "8663dfd1a3e9d3f5ead738c28de528df",
+        "content": "0b0119d73bb224aba797612b65eee4ee"
+      },
+      "publish": {
+        "title": "110a4b01beabd53b661a47d4b44bd7a8",
+        "content": "50dac95d9da6d819518a47cebb2de32d"
+      },
+      "needHelp": {
+        "title": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+        "content": "2218e8053dc06e1bf934b8ae5049c7ad"
+      },
+      "needMoreHelp": {
+        "title": "21019d5221b8a27734792493c892bbe2",
+        "content": "6edaa4629440bf7eab61e6f4fe316b60"
+      }
+    }
   }
 }

@@ -6,5 +6,20 @@
   "nagoyaProtocol": "Protocole de Nagoya",
   "programmes": "Programmes",
   "information": "Information",
-  "secretariat": "Secrétariat"
+  "secretariat": "Secrétariat",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.44Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "theConvention": "db2f2c7409917958fd7d716768ab2112",
+      "cartagenaProtocol": "944bececffb37b5f87ec44f1d1cbcf11",
+      "conventionBiologicalDiversity": "d9a5c4d443e3b9ec83c746c51603ada8",
+      "cbd": "1f66e3428984ad4afc38ebddaf041f1e",
+      "nagoyaProtocol": "a0508082199be9c7ada3a54c065b233c",
+      "programmes": "b9ad95edffd6e8e9549337e28fba4435",
+      "information": "a82be0f551b8708bc08eb33cd9ded0cf",
+      "secretariat": "6c00b7eedad61745798233b81fcb36d5"
+    }
+  }
 }

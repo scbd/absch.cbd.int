@@ -1,0 +1,17 @@
+{
+  "message": "Solo se permite un registro para cada gobierno; el registro ya existe para su gobierno, usted será redirigido al registro en",
+  "seconds": "segundos.",
+  "redirectNow": "Redirigir ahora",
+  "validatingRecord": "Validando si existe un registro del gobierno...",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.371Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "message": "1e0e300cc8222fc93970672121ea9705",
+      "seconds": "d90d8347e139d0cfc3fad11757b651ff",
+      "redirectNow": "036dce881e1aac61d65dfd345fa4cd79",
+      "validatingRecord": "898a9f3246b311f0b82460ea57900680"
+    }
+  }
+}

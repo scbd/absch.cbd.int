@@ -2,5 +2,16 @@
   "daily": "Diariamente",
   "weekly": "Semanalmente",
   "monthly": "Mensualmente",
-  "never": "Nunca"
+  "never": "Nunca",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.976Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "daily": "c512b685438f41daa7386329a3b8f8d3",
+      "weekly": "6c25e6a6da95b3d583c6ec4c3f82ed4d",
+      "monthly": "9030e39f00132d583da4122532e509e9",
+      "never": "6e7b34fa59e1bd229b207892956dc41c"
+    }
+  }
 }

@@ -1,74 +1,153 @@
 {
   "welcome": {
     "title": "Bienvenue sur la page Recherche",
-    "content": "<p> </p>"
+    "content": "<p>La page de recherche vous permet de demander toutes les informations publiées dans le Centre d’échange. Les dossiers peuvent être trouvés en tapant un mot dans le champ de recherche de texte libre et/ou en utilisant une combinaison de filtres pour affiner votre recherche.</p>"
   },
   "globalSearch": {
-    "title": "Filtres globaux",
-    "content": "<p></p>"
+    "title": "Filtres généraux",
+    "content": "<p>Les filtres généraux vous permettent de rechercher dans toute la base de données dans toutes les catégories de fichiers en sélectionnant une ou plusieurs options dans les filtres <b> types de fichiers, mots-clés, pays, régions</b> et <b>date</b>.</p>"
   },
   "freeText": {
     "title": "Recherche de texte libre",
-    "content": "<p></u> </p>"
+    "content": "<p>Ce champ de recherche vous permet de consulter l’ensemble de la base de données en tapant le(s) mot(s) de votre choix.<br><br><u>Conseil :</u> Changez la langue du site Web (coin droit en haut) avant d’écrire dans cette langue.</p>"
   },
   "recordTypesFilterTab": {
     "title": "Filtres par types de fichier",
-    "content": "<p> </p>"
+    "content": "<p>Sélectionnez un ou plusieurs types de fichiers pour rechercher par catégorie(s) de fichiers spécifiques : National, de référence ou SCDB.</p>"
   },
   "keywordsFilterTab": {
     "title": "Chercher par mot clé",
-    "content": "<p></p>"
+    "content": "<p>Sélectionnez un ou plusieurs mots-clés dans la liste.<br>Si vous avez déjà filtré par type de fichier, les filtres de mots-clés affichés s’appliqueront spécifiquement à ce type de fichier.</p>"
   },
   "countryFilterTab": {
     "title": "Chercher par pays",
-    "content": "<p></u>  </p>"
+    "content": "<p>Sélectionnez un ou plusieurs pays dans la liste.<br><br><u>Conseil :</u> Cliquez sur une lettre pour voir tous les pays commençant par cette lettre. Vous pouvez également filtrer par pays « Parties », « Non-parties » et « Ratifié, pas encore partie ».</p>"
   },
   "regionFilterTab": {
     "title": "Chercher par région",
-    "content": "<p></p>"
+    "content": "<p>Sélectionnez dans la liste prédéfinie de régions et/ou de groupes régionaux.</p>"
   },
   "dateFilterTab": {
     "title": "Chercher par date",
-    "content": "<p> </p>"
+    "content": "<p>Le filtre <b>date</b> vous permet de rechercher des dossiers publiés dans (i) une plage de dates prédéterminée (par exemple, « 7 derniers jours »); ou (ii) une plage de dates que vous pouvez spécifier (« Plage personnalisée » ); ou (iii) un jour spécifique de n’importe quelle année. </p>"
   },
   "closeFilterTab": {
     "title": "Résultats de la recherche",
-    "content": "<p></p>"
+    "content": "<p>Pour afficher les résultats de la recherche, faites défiler vers le bas ou cliquez sur le bouton <b>(x)</b> dans le coin supérieur droit.</p>"
   },
   "searchResult": {
-    "title": "Résultats de la recherche : onglets",
-    "content": "<p> </u> </p>"
+    "title": "Résultats de la recherche : Onglets",
+    "content": "<p>Les résultats de la recherche sont présentés dans des tableaux séparés et organisés par catégorie de fichier. Cliquez sur le tableau afin de visualiser les fichiers associés avec cette catégorie.<br><br><u>Conseil :</u> Le cercle noir indique le nombre total de dossiers dans chaque catégorie et changera automatiquement en fonction de vos sélections de recherche.</p>"
   },
   "subFilters": {
-    "title": "sous-filtres",
-    "content": "<p></p>"
+    "title": "Sous-filtres",
+    "content": "<p>Les sous-filtres apparaissent lorsque vous sélectionnez un ou plusieurs types de fichier dans le filtre global <b>Types de fichier</b>.<br>Ils apparaissent sur le côté gauche et sont associés à chaque type de fichier sélectionné.<br>Vous pouvez utiliser des sous-filtres en combinaison avec des filtres globaux pour affiner davantage votre recherche.</p>"
   },
   "recordView": {
     "title": "Résultats de la recherche : Voir les fichiers",
-    "content": "<p></p>"
+    "content": "<p>Une fois que vous avez localisé le fichier qui vous intéresse, cliquez dessus pour afficher tous les détails.</p>"
   },
   "viewType": {
     "title": "Résultats de la recherche : Voir le type",
-    "content": "<p></p>"
+    "content": "<p>Vous pouvez modifier l’affichage des dossiers en sélectionnant l’option préférée dans la liste déroulante.</p>"
   },
   "sortBy": {
-    "title": "Résultats de la recherche : Trier",
-    "content": "<p></p>"
+    "title": "Résultats de la recherche : Trier",
+    "content": "<p>Triez les résultats de votre recherche en sélectionnant un ou plusieurs champs.</p>"
   },
   "sendRecords": {
     "title": "Résultats de la recherche : Partager",
-    "content": "<p></p>"
+    "content": "<p>Cliquez ici pour partager vos résultats de recherche.</p>"
   },
   "exportRecords": {
-    "title": "Résultats de la recherche : Exporter",
-    "content": "<p>cliquez ici pour exporter les informations en format tableau.</p>"
+    "title": "Résultats de la recherche : Exporter",
+    "content": "<p>Cliquez ici pour exporter les informations en format tableau.</p>"
   },
   "needHelp": {
-    "title": "Besoin d'aide?",
-    "content": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur le tableau de bord.</p>"
+    "title": "Besoin d’aide ?",
+    "content": "Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur la page de recherche.."
   },
   "needMoreHelp": {
-    "title": "Encore besoin d’aide?",
-    "content": "<p>Utilisez la fonction de clavardage pour nous envoyer un message et obtenir plus d’aide.</p>"
+    "title": "Encore besoin d’aide ?",
+    "content": "Utilisez la fonction de chat pour nous envoyer un message et obtenir plus d’aide."
+  },
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.166Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "welcome": {
+        "title": "5975b68654d95975933bac4ac0722c7a",
+        "content": "a660955da396dd2709d7a46caa8bd67a"
+      },
+      "globalSearch": {
+        "title": "5a27b4652ad998cf853414ceb33e5146",
+        "content": "3e43d212db92d991ab00ecc19d5f3502"
+      },
+      "freeText": {
+        "title": "35ecc02593b7e13e6ec5ebbb64026d00",
+        "content": "d6072a3cab0a3ceff1a59cdee0f62c2f"
+      },
+      "recordTypesFilterTab": {
+        "title": "befca9eab1166cf5eb456bf5da487307",
+        "content": "8c3f5d47f9c7426f1facf412163d34c3"
+      },
+      "keywordsFilterTab": {
+        "title": "320eade14f1a12178387101bd29d8609",
+        "content": "803133e76d9ef4bda434b56787cbe433"
+      },
+      "countryFilterTab": {
+        "title": "d074391d7df863f46ac12e495d6e8b2e",
+        "content": "31fba7fa515c502cc2cc4495cb4a4380"
+      },
+      "regionFilterTab": {
+        "title": "f33baf2efd445de0567db3210d46dbbd",
+        "content": "1ba0caced1af15e15b70e5f2d4cfbe08"
+      },
+      "dateFilterTab": {
+        "title": "da18240f0f75256fad8539f8d2215f06",
+        "content": "f0cb97021b926f2e4710ee4f73be98dd"
+      },
+      "closeFilterTab": {
+        "title": "32df01b9cf0491a879250b58ba2744ba",
+        "content": "08c789dfa0a4d3db4769dcb796de1c46"
+      },
+      "searchResult": {
+        "title": "45baf9a41f90a87e83aa3674513f506b",
+        "content": "835ac5d88125496510db24dee941cbdf"
+      },
+      "subFilters": {
+        "title": "3f1919fd422d6db3a25aa277d9748eb5",
+        "content": "21ef690ab7bd9f2a6a9712900396e8ca"
+      },
+      "recordView": {
+        "title": "92e18bb509172b52b1ff410eb18b7d62",
+        "content": "fa274b015dcd5da63b058cab376d8b65"
+      },
+      "viewType": {
+        "title": "7d6338759cc3e5fa0ae99f1ff934a975",
+        "content": "7e840567bc7935f1decb91525b04726b"
+      },
+      "sortBy": {
+        "title": "c85d40ad9566d89a2f787652e26cd7d8",
+        "content": "cf7163bb8702b4bccfe92e06024033d1"
+      },
+      "sendRecords": {
+        "title": "84091d017fde06671b82f34726d81d6e",
+        "content": "0971e41ccff0bd180170677fd465729e"
+      },
+      "exportRecords": {
+        "title": "6b96a62cf27b9e4845c09a46f4d12d75",
+        "content": "d00964d609ad1db110e3289aec93aa75"
+      },
+      "needHelp": {
+        "title": "14221b2ce674afde7f85cfb60662a5b7",
+        "content": "b834fcc317c613542aa4f21c0accda8e"
+      },
+      "needMoreHelp": {
+        "title": "21019d5221b8a27734792493c892bbe2",
+        "content": "2ce45ff8371ac151f115e42e76c70a78"
+      }
+    }
   }
 }

@@ -5,7 +5,7 @@
   },
   "listOfRecords": {
     "title": "记录列表",
-    "content": "在本页上，您可以看到所有国家记录的概览。黑圈中的数字代表每个记录类型下已发布记录的总数。 <br><br> <u>提示：</u>将光标放在一个缩写词（例如：国家联络点（NFP））上来查看该国家记录类型的全称。"
+    "content": "在本页上，您可以看到所有国家记录的概览。黑圈中的数字代表每个记录类型下已发布记录的总数。在<span style='color:#1FA65D;'>绿色方块</span>中显示的数字表明，在一个特定的国家有多少条该类型的记录。<br><br><u>提示：</u>将光标放在一个缩写词（例如：国家联络点（NFP））上来查看该国家记录类型的全称。"
   },
   "sortingRecords": {
     "title": "记录排序",
@@ -17,7 +17,7 @@
   },
   "sortingRecordsCountries": {
     "title": "记录排序：国家/地区",
-    "content": "</u> 单击国家/地区名称或<span style='color:#1FA65D;'>绿色方块</span>，直接前往该国家的概况页面。"
+    "content": "单击此处，以选择一个或多个所选国家。<br><br><u>提示：</u>单击国家/地区名称或<span style='color:#1FA65D;'>绿色方块</span>，直接前往该国家的概况页面。"
   },
   "sortingRecordsPartyStatus": {
     "title": "记录排序：缔约方身份",
@@ -25,7 +25,7 @@
   },
   "sortingRecordsRegions": {
     "title": "记录排序：区域",
-    "content": "单击此处，以按地区筛选。 </u> 如要按联合国5个区域集团进行搜索，在搜索框中输入“生物多样性公约（CBD）”，然后选择感兴趣的区域。"
+    "content": "单击此处，以按地区筛选。您可以选择多个区域或次区域。<br><br><u>提示：</u>如要按联合国5个区域集团进行搜索，在搜索框中输入“生物多样性公约（CBD）”，然后选择感兴趣的区域。"
   },
   "exportingRecords": {
     "title": "导出记录",
@@ -38,5 +38,52 @@
   "needMoreHelp": {
     "title": "需要更多帮助吗？",
     "content": "使用聊天功能给我们发消息以获得更多支持。"
+  },
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.547Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "countryProfiles": {
+        "title": "5a4d9fc55baf2bb0539773744fa36fa7",
+        "content": "0e008c43b534d6fc9d26be8b2d87e8b2"
+      },
+      "listOfRecords": {
+        "title": "651e0755f8eee522d6d5377306c1d6de",
+        "content": "d5cbb377ca55df75257383c2c3bd4df9"
+      },
+      "sortingRecords": {
+        "title": "12687c35209124978e064c9d775e5e4e",
+        "content": "2584a7f94a3a63176bcabec7be648ec2"
+      },
+      "sortingRecordsNFP": {
+        "title": "12687c35209124978e064c9d775e5e4e",
+        "content": "8763f91b969e0148ab0033c0fbf365f8"
+      },
+      "sortingRecordsCountries": {
+        "title": "7fc024dedb24a5756fc318a656eb1c82",
+        "content": "c3d1188898200963c4058655eb1ab756"
+      },
+      "sortingRecordsPartyStatus": {
+        "title": "a97c4b1876a592c8c679d572548faa74",
+        "content": "582ce55c08c21ce974f0ec0c37561778"
+      },
+      "sortingRecordsRegions": {
+        "title": "3d1e53e1aa5c64b88196f2c38c5213e0",
+        "content": "a28f8afff6e4e260ee9e8b6205dd0f8e"
+      },
+      "exportingRecords": {
+        "title": "bdebfeb1d8179275df23b2b4dfb91291",
+        "content": "2b3801ac971e52c1b36d0010c1185676"
+      },
+      "needHelp": {
+        "title": "14221b2ce674afde7f85cfb60662a5b7",
+        "content": "0fc851b30fdf81f0d27ddd2c684c6395"
+      },
+      "needMoreHelp": {
+        "title": "21019d5221b8a27734792493c892bbe2",
+        "content": "2ce45ff8371ac151f115e42e76c70a78"
+      }
+    }
   }
 }

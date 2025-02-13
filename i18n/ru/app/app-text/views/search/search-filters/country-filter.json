@@ -3,5 +3,17 @@
   "all": "Все",
   "parties": "Стороны",
   "nonParties": "Государства, не являющиеся Сторонами",
-  "ratified": "Ратифицировавшее, но еще не являющееся Стороной государство"
+  "ratified": "Ратифицировавшее, но еще не являющееся Стороной государство",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.151Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "countries": "790d59ef178acbc75d233bf4211763c6",
+      "all": "b1c94ca2fbc3e78fc30069c8d0f01680",
+      "parties": "c6f1eb7875926d8d5f1d88466e39c6eb",
+      "nonParties": "ae95195b2e4dd9f6e61ad425bbf58a15",
+      "ratified": "7ec144f6a65ca33b42871db347084e5a"
+    }
+  }
 }

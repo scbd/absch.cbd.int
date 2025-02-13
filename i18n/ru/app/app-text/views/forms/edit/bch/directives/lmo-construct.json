@@ -10,5 +10,24 @@
   "transcriptionStop": "окончание транскрипции",
   "transcriptionElement": "транскрипционный элемент",
   "selectGene": "выбрать ген",
-  "kb": "КБ"
+  "kb": "БЗ",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.699Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "addConstruct": "497a9d853796c8bf45ed9208792c6f0c",
+      "geneConstruct": "15df345278f754de832f9a15df8c3b48",
+      "geneConstructInfo": "4757884ce9fe51dcc3b5d9569121e6c7",
+      "dragConstruct": "1b4f18fc1cfcf363bf2773e1c6ff567e",
+      "dropLocation": "fc6d42dd66078be2177c754c8fbe8592",
+      "cancel": "ea4788705e6873b424c65e91c2846b19",
+      "save": "c9cc8cce247e49bae79f15173ce97354",
+      "transcriptionStart": "7b8321d43e357c48dc951de782c94f10",
+      "transcriptionStop": "2bac79e4b515f5df73b508f2db825d10",
+      "transcriptionElement": "e11b1e0afff039d20481e3ed8460127b",
+      "selectGene": "17bdd886451deb7512235894bc6db770",
+      "kb": "ab57fd0432e25d5b3013133a1c910d56"
+    }
+  }
 }

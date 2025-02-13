@@ -1,7 +1,7 @@
 {
   "generalInfo": "Información general",
   "country": "País",
-  "title": "Título",
+  "title": "Denominación",
   "summary": "Resumen",
   "jurisdiction": "Zona de jurisdicción:",
   "relevantMeasures": "Medida(s) pertinentes en materia de APB:",
@@ -9,5 +9,23 @@
   "thematicArea": "Área(s) temática(s):",
   "attachments": "Archivos, documentos o recursos adjuntos",
   "addInfo": "Información adicional",
-  "links": "Enlaces o archivos o documentos adjuntos"
+  "links": "Enlaces o archivos o documentos adjuntos",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.767Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "title": "b78a3223503896721cca1303f776159b",
+      "summary": "e9c059eabe6967a7edf03c6640097d01",
+      "jurisdiction": "09d7af8102720ef08435e605640675fb",
+      "relevantMeasures": "41a340ed88e1e11c15e66d4e78823a79",
+      "keywords": "867343577fa1f33caa632a19543bd252",
+      "thematicArea": "305def95036a7570b570fe5dd9d08f64",
+      "attachments": "dbe647d19ffe482a910623b0f0d98991",
+      "addInfo": "0f68b904e33d9ac04605aecc958bcf52",
+      "links": "bee3753d4768fb5e7da9cc866cd8af3a"
+    }
+  }
 }

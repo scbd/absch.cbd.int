@@ -24,5 +24,38 @@
   "relevantDocuments": "Otros documentos pertinentes",
   "relevantDocumentsInfo": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes",
   "notes": "Notas",
-  "notesInfos": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial."
+  "notesInfos": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.622Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "jurisdiction": "09d7af8102720ef08435e605640675fb",
+      "selectOption": "61f250d4a9d8c24ee92aaaf174ef11b1",
+      "jurisdictionInfo": "a19defee8bb6aaa0e7be798a2f24f37d",
+      "nameSubJurisdiction": "7a3c6023d9f4e202bbfb266ab726cd70",
+      "checkpointName": "0d63dd4c1d08b0cf379a2ec5b2750bf4",
+      "checkpointNameInfo": "7051b9019f8e0544f6339f27b3a28c08",
+      "responsibilities": "460874c7c996eb6762b8a5b10ff2d76f",
+      "responsibilitiesDescription": "a2fc18e13386ab80bee1430f73b8f626",
+      "responsibilitiesDescriptionInfo": "3846f27fefd54708d7096ae176eedb6b",
+      "communityName": "b327758226ae6b497e9124dd1656c151",
+      "jurisdictionName": "967b63029577912f1cefe1809f20bf32",
+      "nationalAuthorities": "4b31767d8e68d838a57889f16df943ee",
+      "nationalAuthoritiesInfoOne": "beef978ad03e8d7ca09891c2859437b5",
+      "nationalAuthoritiesInfoTwo": "a7f00c130250bee12d6398dea10e6de5",
+      "informAllAuthorities": "c346c4fcd5619f90112b9950d11f665e",
+      "contactsToInform": "54201fcef6d4db755c5083fd5f3cdae8",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392",
+      "otherRelevantInformation": "d53a40e7430a9a1e5e2c5310d504dd23",
+      "relevantInformationInfo": "4359b18f52b3bfbe91c593915b228136",
+      "relevantDocuments": "96e85465551cf42c1f0f95c082b3cb72",
+      "relevantDocumentsInfo": "aedb646b5a6c26b6299c97a9893e5409",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notesInfos": "f2563113602fac78e819342c05316863"
+    }
+  }
 }

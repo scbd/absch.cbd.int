@@ -1,0 +1,23 @@
+{
+  "party": "طرف",
+  "description": "الوصف",
+  "descriptionNativeLanguage": "وصف اللغة الأصلية",
+  "websites": "مواقع الويب",
+  "documents": "الوثائق والمستندات",
+  "images": "الصور",
+  "videos": "مقاطع الفيديو",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.116Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "party": "094a173d3b32f44f5b5c996e8710ae28",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39",
+      "descriptionNativeLanguage": "a45914ec50d43b3240c866965e4bdf4d",
+      "websites": "334428b76e6101d20c91eb9cde2fccf8",
+      "documents": "f28128b38efbc6134dc40751ee21fd29",
+      "images": "fff0d600f8a0b5e19e88bfb821dd1157",
+      "videos": "554cfab3938e21d9270bd6b75931f96f"
+    }
+  }
+}

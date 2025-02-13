@@ -1,15 +1,6 @@
 {
   "theAbs": "获取和惠益分享信息交换所",
   "idlo": "国际发展法律组织",
-  "forums": "论坛",
-  "complianceCommittee3": "履约委员会 3",
-  "threadSubject": "讨论主题",
-  "iac4": "非正式咨询委员会第 4 次会议",
-  "iac": "非正式咨询委员会",
-  "ahtegOnDsi": "数字序列信息特设技术专家组",
-  "vlr": "虚拟图书馆",
-  "caribbean": "加勒比地区",
-  "art10Groups": "第10条小组",
   "irccCounts": "国际公认合规证书计数",
   "new": "新",
   "edit": "编辑",
@@ -18,5 +9,23 @@
   "aboutCode": "关于代码",
   "absContact": "获取和惠益分享信息交换所联系人",
   "checkpointCommnunique": "检查站公报",
-  "ircc": "国际公认合规证书"
+  "ircc": "国际公认合规证书",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.498Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "theAbs": "f0bbbaa4859846b40d104014f08ea98e",
+      "idlo": "b38b21aa5e243a16fcaa9a0621c2bce3",
+      "irccCounts": "fe69eb69375b185d44f8e78f6658e92e",
+      "new": "03c2e7e41ffc181a4e84080b4710e81e",
+      "edit": "7dce122004969d56ae2e0245cb754d35",
+      "absVideos": "8451def36f0f8c3fd15f17e178e2a4a4",
+      "aboutTheAbs": "58df37bd9b798fc6c09a359f14fd9f55",
+      "aboutCode": "144ff1966f9320966352ab07bf29d473",
+      "absContact": "461c69a576e4a9a2619629f246b200b4",
+      "checkpointCommnunique": "c63fda3a267df877f963a3a114e7091a",
+      "ircc": "91b5626f1f59af68ee4d3036685e811b"
+    }
+  }
 }

@@ -1,0 +1,17 @@
+{
+  "fullTitle": "Titre complet",
+  "targetNumber": "Numéro de l’objectif ",
+  "strategicGoal": "But stratégique",
+  "quickGuide": "Guide rapide",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.02Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "fullTitle": "b9bf8fbc619fbcfc070cbb7ad54d25c7",
+      "targetNumber": "c7929e1de98d0bc5d8b53ba1ed21557f",
+      "strategicGoal": "90dcf7603d28304a2ab90797eef3695d",
+      "quickGuide": "efdf2ee1dbca6a1354a6d31da443d084"
+    }
+  }
+}

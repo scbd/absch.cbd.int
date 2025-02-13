@@ -3,6 +3,7 @@
   "geneticElementRegistry": "基因片段登记簿",
   "lmoTitle": "改性活生物体登记薄",
   "organismRegistry": "生物体登记薄",
+  "labRegistry": "实验室登记薄",
   "organismInfo": "生物体登记簿包括在生物安全信息交换所登记为亲体、受体或供体的生物体的概要信息。登记簿包括指向每个生物体记录的链接，可在其中找到有关生物特征的进一步信息，包括分类学分类、通用名称、起源、起源中心和遗传多样性中心的信息。提及生物体的记录的链接位于每个单个记录的最下方。",
   "clickHere": "单击<a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=organism'>这里</a>，以对此登记簿中可用的所有生物体记录进行深入搜索。",
   "loading": "正在加载...",
@@ -13,5 +14,28 @@
   "recordID": "记录 ID",
   "scientificName": "学名",
   "commonName": "常用名",
-  "description": "描述"
+  "description": "描述",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.009Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "lmoTitle": "5529599d2157303129ae7e2a96215c73",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "labRegistry": "4099e15a8e9456cd759f605dc491c26f",
+      "organismInfo": "9a15649ce50e735c4f11eb713fd8d753",
+      "clickHere": "ec687d4a5bf05cddc62c5d2c0c47c57a",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "error": "6d8272f491e2dd46fc83518aa0e1d186",
+      "totalRecords": "bdce1a99aaf929539a09d564a830f4ad",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "click": "316853cc3718335f11c048e33b9be98a",
+      "recordID": "5bcbee8ee48fbbebb61b02d453ad5d72",
+      "scientificName": "ea72c7b6e71d7fb9e24950f308d47f5a",
+      "commonName": "b5113599226faa4522c21c00cd24ef78",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39"
+    }
+  }
 }

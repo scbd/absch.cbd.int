@@ -1,5 +1,15 @@
 {
   "title": "Presentaciones a partir de notificaciones",
   "info1": "En ciertas notificaciones publicadas por la Secretaría se incluye una invitación a las Partes, otros Gobiernos e interesados directos pertinentes a presentar información sobre un tema en particular.",
-  "info2": "Seleccione una notificación del filtro subordinado \"Notificaciones\" que se encuentra a continuación para ver todas las presentaciones que se recibieron como respuesta a esa notificación."
+  "info2": "Seleccione una notificación del filtro subordinado \"Notificaciones\" que se encuentra a continuación para ver todas las presentaciones que se recibieron como respuesta a esa notificación.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.13Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "title": "10540fd00fc62add8a6c9ed4272ca2f4",
+      "info1": "91aa06cae76e757bd52cad6c93129196",
+      "info2": "8c4bd7dc67fa3f9f56772a3cf99d3097"
+    }
+  }
 }

@@ -10,11 +10,11 @@
   "partyStatusReport": "حالة الطرف في تاريخ الموعد النهائي لتقديم التقرير",
   "nationalReportAnalyzer": "أداة تحليل التقرير الوطني",
   "nationalReportAnalyzerInfo": "تتيح لك هذه الأداة تحديد أقسام أو أسئلة مُحدّدة من التقرير وعرض النتائج حسب البلد/المنطقة.",
-  "analyze": "تحليل »",
+  "analyze": "تحليل",
   "#meta": {
-    "hashedOn": "2024-05-05T18:52:52.68Z",
+    "hashedOn": "2024-11-22T14:18:26.994Z",
     "algorithm": "md5",
-    "branch": "2024.13.3",
+    "branch": "2024.46.0",
     "hashes": {
       "overview": "3b878279a04dc47d60932cb294d96259",
       "report": "4b1b4dc8cf38b3c64b1d657da8f5ac8c",

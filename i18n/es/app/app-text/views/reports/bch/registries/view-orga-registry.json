@@ -3,7 +3,8 @@
   "geneticElementRegistry": "Directorio de elementos genéticos",
   "lmoTitle": "Directorio de OVM",
   "organismRegistry": "Directorio de organismos",
-  "organismInfo": "En el Directorio de organismos se incluye información resumida sobre aquellos organismos que se han registrado en el CIISB como organismos parentales, receptores o donantes. El Directorio incluye enlaces a los registros de cada organismo en los que puede encontrarse información adicional sobre características biológicas pertinentes, incluidos datos como la clasificación taxonómica, el nombre común, el origen, el centro de origen y el centro de diversidad genética. Al pie de cada registro individual, se proporcionan enlaces a los registros de OMV pertinentes.",
+  "labRegistry": "Directorio de laboratorios",
+  "organismInfo": "El Directorio de organismos incluye información resumida sobre aquellos organismos que se han registrado en el CIISB como organismos parentales, receptores o donantes. El Directorio incluye enlaces a los registros de cada organismo en los que puede encontrarse información adicional sobre características biológicas pertinentes, incluidos datos como la clasificación taxonómica, el nombre común, el origen, el centro de origen y el centro de diversidad genética. Al pie de cada registro individual, se proporcionan enlaces a los registros de OMV pertinentes.",
   "clickHere": "Haga clic <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=organism'></a>  aquí para realizar una búsqueda a fondo de todos los registros de OVM disponibles en este Directorio.",
   "loading": "Cargando...",
   "error": "Error al cargar los registros del Directorio, intente nuevamente.",
@@ -13,5 +14,28 @@
   "recordID": "Identificación del registro",
   "scientificName": "Nombre científico",
   "commonName": "Nombre común",
-  "description": "Descripción"
+  "description": "Descripción",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.009Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "lmoTitle": "5529599d2157303129ae7e2a96215c73",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "labRegistry": "4099e15a8e9456cd759f605dc491c26f",
+      "organismInfo": "9a15649ce50e735c4f11eb713fd8d753",
+      "clickHere": "ec687d4a5bf05cddc62c5d2c0c47c57a",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "error": "6d8272f491e2dd46fc83518aa0e1d186",
+      "totalRecords": "bdce1a99aaf929539a09d564a830f4ad",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "click": "316853cc3718335f11c048e33b9be98a",
+      "recordID": "5bcbee8ee48fbbebb61b02d453ad5d72",
+      "scientificName": "ea72c7b6e71d7fb9e24950f308d47f5a",
+      "commonName": "b5113599226faa4522c21c00cd24ef78",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39"
+    }
+  }
 }

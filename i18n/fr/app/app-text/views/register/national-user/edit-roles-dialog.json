@@ -1,8 +1,21 @@
 {
-  "accessPermission": "",
-  "selectFunction": "Veuillez choisir quelels fonctions vous voulez assigner à l’usager",
-  "granted": "Rôle (s) à assigner :",
-  "revoked": "Rôle (s) à révoquer :",
+  "accessPermission": "Rôles d’attribution / révocation",
+  "selectFunction": "Veuillez choisir quelles fonctions vous voulez assigner à l’usager",
+  "granted": "rôle(s) sera(ont) assigné(s)",
+  "revoked": "rôle(s) sera(ont) révoqué(s)",
   "cancel": "Annuler",
-  "next": "Suivant"
+  "next": "Suivant",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.899Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "accessPermission": "8b2d1debecae9295515957e553a47d77",
+      "selectFunction": "7ce8fca95856f0f3caf2cbe0eba10601",
+      "granted": "c1c0712256374767b12947d48a944e04",
+      "revoked": "7d394d4a114e016206419a3cb982b59a",
+      "cancel": "10aec35353f9c4096a71c38654c3d402",
+      "next": "10ac3d04253ef7e1ddc73e6091c0cd55"
+    }
+  }
 }

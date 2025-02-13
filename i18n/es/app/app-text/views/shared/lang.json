@@ -1,7 +1,19 @@
 {
   "languageSwitch": "Cambio de idioma",
   "pleaseWait": "Por favor, espere mientras lo redirigimos al",
-  "ch": "sitio",
-  "site": "del Centro de Intercambio de Información.",
-  "technicalSupport": "Para apoyo técnico, sírvase ponerse en contacto con nuestra mesa de ayuda en:"
+  "ch": "Centro de Intercambio de Información",
+  "site": "sitio",
+  "technicalSupport": "Para apoyo técnico, sírvase ponerse en contacto con nuestra mesa de ayuda en:",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.182Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "languageSwitch": "eada8516388d0a52e40d312c89080825",
+      "pleaseWait": "bc5ca2d10d620b164484e9c49123be97",
+      "ch": "13a101e234e7fb83285c65099254872b",
+      "site": "98defd6ee70dfb1dea416cecdf391f58",
+      "technicalSupport": "40c8b6b304f973e89f5390ad4cfa3251"
+    }
+  }
 }

@@ -1,13 +1,18 @@
 {
-  "compareWithSurvey": "Comparer avec l'Enquête sur les indicateurs du Plan stratégique (2014) Question",
+  "compareWithPrevious": "Comparer avec les précédents rapports",
+  "compareWithSurvey": "Comparer avec l’enquête sur les indicateurs du Plan stratégique (2014) Question",
   "surveyQuestion": "Question de sondage",
   "question": "Question",
   "total": "TOTAL",
+  "firstNR": "1er NR",
+  "secondNR": "2e NR",
+  "thirdNR": "3e NR",
+  "forthNR": "4e NR",
   "note": "<b>Note :</b> L’outil de comparaison ne comprend que les pays qui ont répondu à cette question dans deux de leurs rapports nationaux. Ainsi, le total du décompte et des pourcentages peut changer en appliquant l’outil de comparaison.",
   "#meta": {
-    "hashedOn": "2024-05-05T18:52:52.677Z",
+    "hashedOn": "2024-11-22T14:18:26.985Z",
     "algorithm": "md5",
-    "branch": "2024.13.3",
+    "branch": "2024.46.0",
     "hashes": {
       "compareWithPrevious": "ba3e8f3a055db3d35c18ece3ace61ab1",
       "compareWithSurvey": "a739ff4b0e85810ac0c4d90ab5ef88e6",

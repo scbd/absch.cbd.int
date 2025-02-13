@@ -4,5 +4,18 @@
   "publishRequestedSCBD": "保存已保存。已向您的生物多样性公约秘书处发送了一个发布请求。",
   "publishRequestedABS": "保存已保存。已向您的发布机构发出了发布请求。",
   "publishRequestedBCH": "保存已保存。已向您的生物安全信息交换所国家联络点发送了一个发布请求。",
-  "recordPublished": "记录已发布。该记录现可在信息交换所公开访问。"
+  "recordPublished": "记录已发布。该记录现可在信息交换所公开访问。",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.57Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "draftSaveMessage": "69d3ca573bdca44606d24806654d77c4",
+      "closeWithoutSaving": "a7c6698cae2e3826b0a893bb69396838",
+      "publishRequestedSCBD": "33427ff274f7f3721b842a52db7b70c4",
+      "publishRequestedABS": "052f0a066640de7dc4001ab0e81ca145",
+      "publishRequestedBCH": "8eae823a3d1a091a0ba4b7482c5dfc4e",
+      "recordPublished": "f673dd17095afa18d7805370c05efe2c"
+    }
+  }
 }

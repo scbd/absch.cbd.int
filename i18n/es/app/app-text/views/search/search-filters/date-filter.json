@@ -1,5 +1,15 @@
 {
   "date": "Fecha",
   "search": "Buscar registro(s) publicado(s) dentro de un intervalo de fechas.",
-  "publishedOn": "Publicado el"
+  "publishedOn": "Publicado el",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.153Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "date": "44749712dbec183e983dcd78a7736c41",
+      "search": "f75860fc29271f6f931cfca59e81db1e",
+      "publishedOn": "ddbc197c69b2e4a35afeeb269ed25808"
+    }
+  }
 }

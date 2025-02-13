@@ -10,5 +10,24 @@
   "overseasTerritories": "14 إقليمًا من أقاليم ما وراء البحار",
   "or": "أو",
   "gbTitle3": "بيلويك جيرسي، وﺑﻳﻠﻭيك ﺟﻳﺭﻧﺯﻱ، وجزيرة مان",
-  "crownDependencies": "3 أقاليم ملحقة بالتاج البريطاني"
+  "crownDependencies": "3 أقاليم ملحقة بالتاج البريطاني",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.553Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "partyToNagoyaProtocol": "e4b1ae438863536d68b1c98eba15f144",
+      "notPartyToNagoyaProtocol": "629de43a51631eb8316da79668ed1b63",
+      "ratifiedNotYetParty": "7ec144f6a65ca33b42871db347084e5a",
+      "dkText": "8108c8afe249a5fd891f923a87aaa40e",
+      "fkText": "c404f76abbc9da62089f79911735ae01",
+      "ehText": "be274bcf4249530249260d658a78e9a8",
+      "gbText": "adc755740a6a6190456a4351e1181535",
+      "gbTitle14": "0e03d539da8bfa8721e0af8bd6c1564d",
+      "overseasTerritories": "1496768a086724ae52b9897659d3440f",
+      "or": "e81c4e4f2b7b93b481e13a8553c2ae1b",
+      "gbTitle3": "a66225b58e60dd964b843efe519b8183",
+      "crownDependencies": "0451b0687bece557742a519c40274359"
+    }
+  }
 }

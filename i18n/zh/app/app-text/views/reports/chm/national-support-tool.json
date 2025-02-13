@@ -1,0 +1,37 @@
+{
+  "country": "国家",
+  "description": "支持工具描述",
+  "status": "状态",
+  "level": "实施水平",
+  "additionalDetails": "请提供关于具体实施水平的更多详情",
+  "nationalTargets": "指向相关国家目标的链接",
+  "aichiTargets": "指向最相关爱知目标的链接",
+  "otherAichiTargets": "指向其他相关爱知目标的链接",
+  "cbdThematicAreas": "指向生物多样性公约专题领域的链接",
+  "cbdSupportTools": "指向生物多样性公约支持工具的链接",
+  "documents": "主要相关文档",
+  "websites": "其他相关网址或附加文档",
+  "additionalInformation": "额外信息",
+  "otherRelevantWebsite": "其他相关网址或附加文档",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.088Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "description": "02b765874ccca5e72403c553ed6ed75f",
+      "status": "ec53a8c4f07baed5d8825072c89799be",
+      "level": "9970a53266fcb0bcb30803f431e62f88",
+      "additionalDetails": "74e5cc25112390eba198e9cff52129ed",
+      "nationalTargets": "8d49964495906f7c633693d8ef5fcff2",
+      "aichiTargets": "c757eb9cd3ae36b4c0267de5c9e6f975",
+      "otherAichiTargets": "5e577fdc26b16d2b6b27138b7f0bc637",
+      "cbdThematicAreas": "20550a86f523d285c6a1cc026ab21dc6",
+      "cbdSupportTools": "9d1e58f2731af4e3da8a59a9d177272b",
+      "documents": "0a40302ccc732954b71322b72a10ea32",
+      "websites": "d33541b234831c937d45345729f66e65",
+      "additionalInformation": "0f68b904e33d9ac04605aecc958bcf52",
+      "otherRelevantWebsite": "1037e75c08408348261a22aa2eec2a59"
+    }
+  }
+}

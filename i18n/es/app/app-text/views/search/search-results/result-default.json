@@ -5,5 +5,19 @@
   "collaboration": "con la colaboración de",
   "author": "Autor(es):",
   "organizations": "Organizaciones",
-  "source": "FUENTE:"
+  "source": "FUENTE:",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.177Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "close": "d3d2e617335f08df83599665eef8a418",
+      "implementedBy": "ca4551f157b367687f16e4d3bb7e941b",
+      "executedBy": "9659f158fa01fe651b37b4ee95a4a938",
+      "collaboration": "b78e1324823454b3d2822a58f9a35351",
+      "author": "bbdaf37145b9bdd7bba9aa4a85b6f297",
+      "organizations": "fe8d31f91681817b4b1438c2933b8b75",
+      "source": "868fc21bab8ea8226fa539930309cc8d"
+    }
+  }
 }

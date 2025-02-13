@@ -6,10 +6,30 @@
   "lmoDecisions": "改性活生物体决定",
   "registries": "登记簿",
   "lmoRegistry": "改性活生物体登记薄",
+  "laboratory": "实验室",
   "organismsRegistry": "生物体登记库",
   "geneRegistry": "基因登记薄",
   "forbidden": "已禁止",
   "notFound": "未找到",
   "pageNotFound": "页面未找到",
-  "RiskAssessmentPortal": "风险评估"
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.5Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "theBch": "43f2b0dd09b2b91146fe726dcc47381b",
+      "submit": "a4d3b161ce1309df1c4e25df28694b7b",
+      "new": "03c2e7e41ffc181a4e84080b4710e81e",
+      "edit": "7dce122004969d56ae2e0245cb754d35",
+      "lmoDecisions": "aaf2d3359639e659738c76a048d1dc9a",
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "lmoRegistry": "c57085efcad7dffca3d074ec188d403a",
+      "laboratory": "e684d8eeee72ed2583865b78e8d3f57a",
+      "organismsRegistry": "5359a2678704732af920cec94728482d",
+      "geneRegistry": "5b07f1ab8f26a69dc5494389339ad5d8",
+      "forbidden": "722969577a96ca3953e84e3d949dee81",
+      "notFound": "9e076f5885f5cc16a4b5aeb8de4adff5",
+      "pageNotFound": "d0fbda9855d118740f1105334305c126"
+    }
+  }
 }

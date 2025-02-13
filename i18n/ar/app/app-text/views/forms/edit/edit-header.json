@@ -1,3 +1,11 @@
 {
-  "tour": ""
+  "tour": "القيام بجولة",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.756Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "tour": "35903b376bf7a3a0d9e72fc2e5595dc2"
+    }
+  }
 }

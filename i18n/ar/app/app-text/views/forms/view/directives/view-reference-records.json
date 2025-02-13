@@ -10,5 +10,24 @@
   "title": "العنوان",
   "updatedOn": "تاريخ التحديث",
   "noRecords": "لا توجد إشارات مرجعية لهذا السجل في سجلات أخرى",
-  "showInSubmissions": "إظهار في الوثائق المرسلة"
+  "showInSubmissions": "إظهار في الوثائق المرسلة",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.818Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "recordsReferencing": "293112c56648f88997ffb1d3634fe7f6",
+      "showInSearch": "d61b575773809d162fe013b336bef018",
+      "recordType": "e3ceba76ed8ceac08631ebe7c9bc3f98",
+      "field": "6f16a5f8ff5d75ab84c018adacdfcbb7",
+      "records": "af3261fb1ebed1399ad235de12081e76",
+      "hide": "62a5e490880a92eef74f167d9dc6dca0",
+      "show": "498f79c4c5bbde77f1bceb6c86fd0f6d",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "title": "b78a3223503896721cca1303f776159b",
+      "updatedOn": "b7aabb29ffd777e217ebdaae32a03a2b",
+      "noRecords": "22b01afe3ab08358614948fa2b5a8cf8",
+      "showInSubmissions": "622381d74e04397ff8e0e05cbf447cd2"
+    }
+  }
 }

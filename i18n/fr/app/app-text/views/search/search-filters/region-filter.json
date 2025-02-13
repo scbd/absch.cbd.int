@@ -1,4 +1,13 @@
 {
   "cbdRegions": "Régions de la CDB",
-  "allCountryGroupings": "Groupes de pays"
+  "allCountryGroupings": "Groupes de pays",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.163Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "cbdRegions": "693c111d8707d2400a0f52750ab47192",
+      "allCountryGroupings": "32a7b3bb0a3ed8019f2a658ef6871cba"
+    }
+  }
 }

@@ -22,5 +22,36 @@
   "ShortDescriptionResponsibilities": "Descripción breve de las responsabilidades de la autoridad competente.",
   "additionalInformation": "Información adicional",
   "otherRelevantWebsite": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes",
-  "administrativeFunctions": "Funciones administrativas"
+  "administrativeFunctions": "Funciones administrativas",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.833Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "nameCNA": "99727917b6e4a1af0f1ec94a45649a86",
+      "nameCA": "d3862edc43726d6026724466e1f43c0a",
+      "additionalContactInfo": "a261250e4178e0e3cb67628c082ef017",
+      "policyBasisForCompetencyRefCNA": "60e23810feb76e238e43dd72194c12bb",
+      "policyBasisForCompetencyRefCA": "62d34660702e0865d88f03b9ec888491",
+      "linksRelevantLegislative": "a8b89dfac74deff0942fd523136e0194",
+      "additionalInfoOnLegal": "f85372dd75c4e721763017caa3a22e12",
+      "summaryAbsResponsibilities": "4647149b20b4f87871a0890c37fb843c",
+      "responsibleGeneticResources": "80d67c834b29b36b064d2c17485df506",
+      "functions": "e93acb146e114b5dfa6ce2d12dcb96e4",
+      "jurisdictionByCNA": "94ea0b018ac523c75f46cd29fe6d7d9d",
+      "keywordsToHelp": "70cc0fcb96199cc8f3777bb726af67f3",
+      "responsibilities": "460874c7c996eb6762b8a5b10ff2d76f",
+      "typesOfOrganism": "548d0d96df7aceb6774bb034b2cce081",
+      "designatedCA": "cb5d5a4a68ba18b0949b9b87575f13e8",
+      "yes": "93cba07454f06a4a960172bbd6e2a435",
+      "no": "bafd7322c6e97d25b6299b5d6fe8920b",
+      "shortDescriptionRegulatory": "5979729b170b8397bc425dc659373c01",
+      "ShortDescriptionResponsibilities": "5f79dd0fecdcc6351ea437a5d83f1a46",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392",
+      "otherRelevantWebsite": "aedb646b5a6c26b6299c97a9893e5409",
+      "administrativeFunctions": "f072cf3ab3ed55230eafdf48f2e937ed"
+    }
+  }
 }

@@ -1,7 +1,7 @@
 {
   "generalInfo": "معلومات عامة",
   "languageToPublish": "يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:",
-  "country": "",
+  "country": "البلد",
   "title": "عنوان السجل",
   "selectOption": "يُرجى تحديد البلد...",
   "links": "الرابط/الروابط ذات الصلة",
@@ -13,7 +13,31 @@
   "otherRelevantInformation": "أي معلومات أخرى ذات صلة",
   "relevantInformationInfo": "يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.",
   "anyrelevantDocuments": "أي وثائق أخرى ذات صلة",
-  "anyrelevantDocumentsInfo": "",
-  "notes": "",
-  "notesInfos": "خانة \"الملاحظات\" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. "
+  "anyrelevantDocumentsInfo": "يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى مطلوبة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.",
+  "notes": "الملاحظات",
+  "notesInfos": "خانة \"الملاحظات\" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. فلا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية أو حفظها.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.663Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "title": "f0cec9b9d859f182d064e49287f10fe6",
+      "selectOption": "61f250d4a9d8c24ee92aaaf174ef11b1",
+      "links": "f93604fd239d1b61cc6966c7f967aa6c",
+      "linksInfo": "d61d32b243d6160ac03642faceefe23a",
+      "abstract": "e353dbe42c8654f33588d4da0b517469",
+      "abstractInfo": "d43f067f1653128e0bc9985fef2deb8b",
+      "newsText": "c533deb81310b774ba36531820057164",
+      "newsTextInfo": "926e8c00749d6a57c057d9798862b666",
+      "otherRelevantInformation": "d53a40e7430a9a1e5e2c5310d504dd23",
+      "relevantInformationInfo": "4359b18f52b3bfbe91c593915b228136",
+      "anyrelevantDocuments": "96e85465551cf42c1f0f95c082b3cb72",
+      "anyrelevantDocumentsInfo": "7d3e0883513c964a849169bc0fc5269c",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notesInfos": "f2563113602fac78e819342c05316863"
+    }
+  }
 }

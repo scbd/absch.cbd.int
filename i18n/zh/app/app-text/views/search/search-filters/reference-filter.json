@@ -1,5 +1,15 @@
 {
   "referenceRecords": "参考记录",
   "absPublication": "参考记录包括一些与获取和惠益分享有关的资源和信息，任何注册用户均可以提交，但在发布前需经秘书处验证。",
-  "bchPublication": "参考记录包括一些与生物安全有关的资源和信息，任何注册用户均可以提交，但在发布前需经秘书处验证。"
+  "bchPublication": "参考记录包括一些与生物安全有关的资源和信息，任何注册用户均可以提交，但在发布前需经秘书处验证。",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.161Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "referenceRecords": "4d3729c30f626ddba3742bb182ea133d",
+      "absPublication": "2ec320ea9dbf12ebde82659c01c3a8cc",
+      "bchPublication": "e617dca3a26bcdd63b948f5b0140b32a"
+    }
+  }
 }

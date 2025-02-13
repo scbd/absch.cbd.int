@@ -1,0 +1,31 @@
+{
+  "title": "Título",
+  "profile": "Perfil",
+  "geographicCoverage": "Cobertura geográfica",
+  "types": "Tipo(s) de asistencia",
+  "relevantDocuments": "Otros documentos pertinentes",
+  "suggestedExpertise": "Conocimientos especializados sugeridos",
+  "potentialAreas": "Esferas posibles para la colaboración",
+  "additionalInformation": "Información adicional",
+  "socialMedia": "Conocimientos especializados relacionados con las redes sociales",
+  "contact": "Contacto",
+  "organization": "Organización",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.03Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "title": "b78a3223503896721cca1303f776159b",
+      "profile": "cce99c598cfdb9773ab041d54c3d973a",
+      "geographicCoverage": "1c71108dfb8c2b98aa3000d960512dac",
+      "types": "d141039d4d24388ddc602fa90f17a2fd",
+      "relevantDocuments": "96e85465551cf42c1f0f95c082b3cb72",
+      "suggestedExpertise": "a932a77b909bf09911994a17ccf1652f",
+      "potentialAreas": "11b5cd919d76d9b7457db5f689672bd2",
+      "additionalInformation": "0f68b904e33d9ac04605aecc958bcf52",
+      "socialMedia": "9325f3ca144162855a948088e674eb1e",
+      "contact": "bbaff12800505b22a853e8b7f4eb6a22",
+      "organization": "d6b258792ff06f82933c74eeb8aef591"
+    }
+  }
+}
