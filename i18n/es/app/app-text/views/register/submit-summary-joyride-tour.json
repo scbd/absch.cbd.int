@@ -1,81 +1,45 @@
 {
-  "welcome": {
-    "title": "Resumen de registros",
-    "content": "<p>En esta página, es posible ver una lista de todos los registros  según el tipo de registro que haya seleccionado, así como su estado. <br><br>Es posible filtrar los registros existentes y crear nuevos, así como duplicar, editar o borrar un registro.</p>"
-  },
-  "filters": {
-    "title": "Filtros",
-    "content": "<p>Usar estos filtros para ver una lista de todos los registros, publicados, borradores o registros pendientes de aprobación.</p>"
-  },
-  "Keyword": {
-    "title": "Palabra clave",
-    "content": "<p>Buscar en la lista escribiendo una palabra.</p>"
-  },
-  "adding": {
-    "title": "Agregar un registro nuevo",
-    "content": "<p>Haga clic en el botón <b>“Agregar nuevo\"</b> para empezar a crear un registro nuevo.</p>"
-  },
-  "duplicate": {
-    "title": "Duplicar un registro",
-    "content": "<p>Haga clic aquí para crear un duplicado del registro existente.</p>"
-  },
-  "edit": {
-    "title": "Editar un registro",
-    "content": "<p>Haga clic aquí para editar un registro existente.</p>"
-  },
-  "delete": {
-    "title": "Borrar un registro",
-    "content": "<p>Haga clic aquí para borrar un registro.</p>"
-  },
-  "needHelp": {
-    "title": "¿Necesita ayuda?",
-    "content": "<p>Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con esta página.</p>"
-  },
-  "needMoreHelp": {
-    "title": "¿Necesita más ayuda?",
-    "content": "<p>Use la función de Chat para enviarnos un mensaje si necesita más ayuda.</p>"
-  },
+  "welcomeTitle": "Resumen de registros",
+  "welcomeContent": "<p>En esta página, es posible ver una lista de todos los registros  según el tipo de registro que haya seleccionado, así como su estado. <br><br>Es posible filtrar los registros existentes y crear nuevos, así como duplicar, editar o borrar un registro.</p>",
+  "filtersTitle": "Filtros",
+  "filtersContent": "<p>Usar estos filtros para ver una lista de todos los registros, publicados, borradores o registros pendientes de aprobación.</p>",
+  "KeywordTitle": "Palabra clave",
+  "KeywordContent": "<p>Buscar en la lista escribiendo una palabra.</p>",
+  "addingTitle": "Agregar un registro nuevo",
+  "addingContent": "<p>Haga clic en el botón <b>“Agregar nuevo\"</b> para empezar a crear un registro nuevo.</p>",
+  "duplicateTitle": "Duplicar un registro",
+  "duplicateContent": "<p>Haga clic aquí para crear un duplicado del registro existente.</p>",
+  "editTitle": "Editar un registro",
+  "editContent": "<p>Haga clic aquí para editar un registro existente.</p>",
+  "deleteTitle": "Borrar un registro",
+  "deleteContent": "<p>Haga clic aquí para borrar un registro.</p>",
+  "needHelpTitle": "¿Necesita ayuda?",
+  "needHelpContent": "<p>Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con esta página.</p>",
+  "needMoreHelpTitle": "¿Necesita más ayuda?",
+  "needMoreHelpContent": "<p>Use la función de Chat para enviarnos un mensaje si necesita más ayuda.</p>",
   "#meta": {
     "hashedOn": "2024-11-22T14:18:26.963Z",
     "algorithm": "md5",
     "branch": "2024.46.0",
     "hashes": {
-      "welcome": {
-        "title": "c8434516a3bc1dd752e1fd713a1cdccf",
-        "content": "73313ac5034b0c3fb72902b9c80cf8ce"
-      },
-      "filters": {
-        "title": "f3f43e30c8c7d78c6ac0173515e57a00",
-        "content": "b28b35d1f4d60cb37b49ee1ac89b7c53"
-      },
-      "Keyword": {
-        "title": "220f3d3750583b9db48568a0b5b9a5f1",
-        "content": "7d0538b25671a2a8342566838d82e0c7"
-      },
-      "adding": {
-        "title": "7b46b5587c02be3d3cb2f3ed887f3bc1",
-        "content": "abe0dfe07180c5f39738933ecadae7f5"
-      },
-      "duplicate": {
-        "title": "8f734a6d992a3014189136619d0c7308",
-        "content": "00ddd216fdcdf0bc6e1f3ca25554c038"
-      },
-      "edit": {
-        "title": "92aaf32a80d0d8be13f8fecebdbebab0",
-        "content": "e2d677548f047cb9f657f978d09fb153"
-      },
-      "delete": {
-        "title": "b2e72ac4ced56b0854ad46e5c17335ff",
-        "content": "910acf135dbee8df06969cad1e0e24f6"
-      },
-      "needHelp": {
-        "title": "4bd9ef088a14b5f6fd9ef86e6f33037f",
-        "content": "8d80f1b119eadb136042beb399770ea5"
-      },
-      "needMoreHelp": {
-        "title": "21019d5221b8a27734792493c892bbe2",
-        "content": "6edaa4629440bf7eab61e6f4fe316b60"
-      }
+      "welcomeTitle": "c8434516a3bc1dd752e1fd713a1cdccf",
+      "welcomeContent": "73313ac5034b0c3fb72902b9c80cf8ce",
+      "filtersTitle": "f3f43e30c8c7d78c6ac0173515e57a00",
+      "filtersContent": "b28b35d1f4d60cb37b49ee1ac89b7c53",
+      "KeywordTitle": "220f3d3750583b9db48568a0b5b9a5f1",
+      "KeywordContent": "7d0538b25671a2a8342566838d82e0c7",
+      "addingTitle": "7b46b5587c02be3d3cb2f3ed887f3bc1",
+      "addingContent": "abe0dfe07180c5f39738933ecadae7f5",
+      "duplicateTitle": "8f734a6d992a3014189136619d0c7308",
+      "duplicateContent": "00ddd216fdcdf0bc6e1f3ca25554c038",
+      "editTitle": "92aaf32a80d0d8be13f8fecebdbebab0",
+      "editContent": "e2d677548f047cb9f657f978d09fb153",
+      "deleteTitle": "b2e72ac4ced56b0854ad46e5c17335ff",
+      "deleteContent": "910acf135dbee8df06969cad1e0e24f6",
+      "needHelpTitle": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+      "needHelpContent": "8d80f1b119eadb136042beb399770ea5",
+      "needMoreHelpTitle": "21019d5221b8a27734792493c892bbe2",
+      "needMoreHelpContent": "6edaa4629440bf7eab61e6f4fe316b60"
     }
   }
 }
