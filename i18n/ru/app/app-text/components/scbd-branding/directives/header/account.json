@@ -3,6 +3,19 @@
   "profile": "Профиль",
   "password": "Пароль",
   "emailAlerts": "Оповещения по электронной почте",
-  "savedSearches": "Сохраненные условия поиска",
-  "signOut": "Выйти"
+  "savedSearches": "Сохраненные поиски",
+  "signOut": "Выйти",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.436Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "signIn": "c4746a9668ead60bc5b8a045e5ef7e50",
+      "profile": "cce99c598cfdb9773ab041d54c3d973a",
+      "password": "dc647eb65e6711e155375218212b3964",
+      "emailAlerts": "d6e74a08a9a2c720429944cbd0a80f6c",
+      "savedSearches": "e804ac99d8e193e9d3e3437979ce7bdf",
+      "signOut": "15d591e35aad74f573aa26d48757956a"
+    }
+  }
 }

@@ -1,0 +1,29 @@
+{
+  "announcements": "Объявления",
+  "about": "О МПБ",
+  "gettingStarted": "Начало работы",
+  "submittingInformation": "Представление информации",
+  "findingInformation": "Поиск информации",
+  "lmoGeneticElementsOrganisms": "ЖИО/генетические элементы/организмы",
+  "interoperability": "Операционная совместимость",
+  "informalAdvisoryCommittee": "Неофициальный консультативный комитет (НКК)",
+  "gettingHelp": "Получение помощи",
+  "FAQs": "Часто задаваемые вопросы (ЧЗВ)",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.348Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "announcements": "2b59bbfc9d431d23f4564d01b0182808",
+      "about": "8f7f4c1ce7a4f933663d10543562b096",
+      "gettingStarted": "cb59b87e00d11222bfd9159d0d23836f",
+      "submittingInformation": "9d945d25363823497d5518556dcbfaac",
+      "findingInformation": "1e07fecc73eaa93c21a3c1aa3e53272c",
+      "lmoGeneticElementsOrganisms": "80f62a38ec8e312cc241eb6a8ca98dd3",
+      "interoperability": "67a915151759ecc737f698391f7cfd08",
+      "informalAdvisoryCommittee": "e619f172759e7378a8d8efa71f5ce18a",
+      "gettingHelp": "20c404f3ca0633629eee9b1b4ccd6737",
+      "FAQs": "ecb9cf6fba4c7813330c6bf373d2719c"
+    }
+  }
+}

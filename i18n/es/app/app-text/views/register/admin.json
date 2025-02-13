@@ -18,5 +18,32 @@
   "errorLogs": "Registros de errores",
   "validateTranslation": "Validar traducción",
   "enable": "Activar",
-  "disable": "Desactivar"
+  "disable": "Desactivar",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.879Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "admin": "e3afed0047b08059d0fada10f400c1e5",
+      "viewList": "e9059e369fba09805997745c47f97293",
+      "manageReportedRecords": "cce6dd75d429fffb313780711e7a4757",
+      "commonIssues": "b34551a00d39152d67273fc8e1fc4a52",
+      "commonAbschIssues": "58dd3abcc71679f092b578653d9234c4",
+      "manageWorkflowRecords": "c126cb9407dceafec60d0ed63fa30ccd",
+      "viewStatus": "430f0c3290a3b18636705efbd4dbccee",
+      "multipleFilters": "f41446adea431a75c138bf901199d217",
+      "reportCounts": "9109b6a0342426c8cd0bb3f4615232bf",
+      "viewIrrcCount": "4643f77abfd844255ed84d0feec51f74",
+      "irrcCounts": "fe69eb69375b185d44f8e78f6658e92e",
+      "viewCountries": "d9cd82d28710702ba42cfa814fb66b9b",
+      "userRoleReport": "2a8e5c9b8a4ac1b1b4d81922f6b7e0ac",
+      "viewEmailList": "871330084710614c1a43a84eb700a613",
+      "subscriptions": "4ca2c509994c2776d0880357b4e8e5be",
+      "viewClientError": "d78e801a39eb7a0940efcf86c742a777",
+      "errorLogs": "39e0bf0df5c6b288dab8e1780b107e2a",
+      "validateTranslation": "6d3668571774ffdca5ccd1a4780a91f4",
+      "enable": "2faec1f9f8cc7f8f40d521c4dd574f49",
+      "disable": "bcfaccebf745acfd5e75351095a5394a"
+    }
+  }
 }

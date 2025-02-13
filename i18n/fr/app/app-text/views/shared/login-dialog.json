@@ -1,13 +1,31 @@
 {
   "pleaseSignIn": "Veuillez vous connecter pour publier de l’information au",
-  "howRegister": "Comment m’inscrire pour obtenir un compte CDB?",
-  "anyPersonSignUp": " ",
-  "makeSure": "Assure-vous d’entrer toutes les informations requises, tel qu’indiqué dans le formulaire. Vous recevrez automatique un courriel avec un hyperlien sur lequel vous devrez cliquer pour confirmer votre compte.",
+  "howRegister": "Comment m’inscrire pour obtenir un compte CDB ?",
+  "anyPersonSignUp": "Toute personne peut avoir un compte CBD qui lui permettra d'enregistrer des informations dans toutes les centres d’échange d’information de la CDB, y compris le Centre d'échange pour la prévention des risques biotechnologiques, le Centre d'échange sur l'accès et le partage des avantages et le Centre d'échange en vertu de la Convention. Vous pouvez vous inscrire pour créer un compte CDB à l’adresse",
+  "makeSure": "Assurez-vous d’entrer toutes les informations requises, tel qu’indiqué dans le formulaire. Vous recevrez automatique un e-mail avec un lien sur lequel vous devrez cliquer pour confirmer votre compte.",
   "forgotPassword": "Vous avez oublié votre mot de passe ?",
   "clickHere": "Cliquez ici",
-  "resetPassword": " On vous demandera votre adresse électronique et, si vous êtes un utilisateur inscrit, un courriel vous sera immédiatement envoyé à votre compte de messagerie électronique inscrit avec les instructions à suivre pour créer un nouveau mot de passe.",
-  "displayProblems": "Avez-vous des problèmes avec l'affichage du Centre d’échange?",
-  "recentVersions": "",
-  "technicalSupport": "Pour du soutien technique, contactez notre service d’aide au :",
-  "seeFaq": ""
+  "resetPassword": "pour réinitialiser votre mot de passe. On vous demandera votre adresse électronique et, si vous êtes un utilisateur inscrit, un e-mail vous sera immédiatement envoyé à votre compte de messagerie électronique inscrit avec les instructions à suivre pour créer un nouveau mot de passe.",
+  "displayProblems": "Avez-vous des problèmes avec l'affichage du Centre d’échange ?",
+  "recentVersions": "Il fonctionne mieux avec les versions récentes des navigateurs Internet récents (Firefox, Chrome or Internet Explorer 9+)",
+  "technicalSupport": "Pour du soutien technique, contactez notre service d’aide au :",
+  "seeFaq": "Consultez les FAQ",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.183Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "pleaseSignIn": "6689a90003ebb1cd58c2bc841567fe4d",
+      "howRegister": "bec153c0007e58306be0d724cf8c2381",
+      "anyPersonSignUp": "3e079ee8fba939d3cc49bcde80275f04",
+      "makeSure": "96e3acc2eabfa33df83fe264315209d8",
+      "forgotPassword": "01a569ddc6cf67ddec2a683f0a5f5956",
+      "clickHere": "936ccdb97115e9f35a11d35e3d5b5cad",
+      "resetPassword": "d7903ec01f2bbcfa6161a14a405e69b0",
+      "displayProblems": "4dab050b0d39836c9137b554f622f5b0",
+      "recentVersions": "9ae6df13d546ff96e3d71838179af95b",
+      "technicalSupport": "40c8b6b304f973e89f5390ad4cfa3251",
+      "seeFaq": "0fbc17e798f4eb1300570549a67e416c"
+    }
+  }
 }

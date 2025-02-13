@@ -5,5 +5,19 @@
   "clearSelection": "Снять выделение",
   "loading": "Загрузка ....",
   "pleaseSpecify": "Укажите",
-  "otherElement": "другой элемент"
+  "otherElement": "другой элемент",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.403Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "keywords": "95a252c445a43cf69284f28ded2b0733",
+      "search": "ab1321a00854a05946d9144578259d54",
+      "keywordNotFound": "24d4ec011a74ed0caa58fa070973fe62",
+      "clearSelection": "80ffff123555bd5173345bc8f144edeb",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "pleaseSpecify": "842ca52528c3e82669a8379e27d10522",
+      "otherElement": "2fc381c1a4a3b57a997d8bac32a81906"
+    }
+  }
 }

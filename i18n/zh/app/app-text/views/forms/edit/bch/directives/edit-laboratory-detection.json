@@ -23,5 +23,37 @@
   "relevantInformation": "其它相关信息",
   "relevantDocumentsInfo": "请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档",
   "notes": "注",
-  "notesInfo": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
+  "notesInfo": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.679Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "organization": "58149bf94c1e3a8e596d8992403f9e46",
+      "relatedOrganization": "796a0be5fefbbb059d5176144c06c3af",
+      "relatedOrganizationInfo": "128682a39c294a08065b38e4ad309dcd",
+      "laboratoryDetails": "0e111e77d6936ca6d97049c89122296a",
+      "services": "a3c64dcae988db696990892f991e3bfe",
+      "collaborativeAgreements": "ad3e6364e60cd7bba8b43136984193df",
+      "agreements": "451d7140c9eb65242828bce97d917e7f",
+      "agreementsInfo": "23d246ed11b6b85b2beee7a69d9d4095",
+      "certifications": "b9db86204b66bc88f5f2ab0cf7b5dc0e",
+      "certificationsInfo": "4194cd71ccdf2ad77464c8a89635e151",
+      "detectionMethods": "3081813de8a09ae44473a4140e91960e",
+      "lmoTypes": "752886a221607b70daf4e9be969e76d2",
+      "detectableLmos": "738e73de937d03042477cb88f4e16fec",
+      "detectableGenes": "f3c9142b1378718bfc0259749d5bcd9c",
+      "timeFrame": "00adb6c18bfb4cdfc94854169787189c",
+      "timeFrameInfo": "7b8f2e1ca03310cfb7cf50d3588c52a4",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392",
+      "relevantInformationInfo": "4359b18f52b3bfbe91c593915b228136",
+      "relevantDocuments": "96e85465551cf42c1f0f95c082b3cb72",
+      "relevantInformation": "d53a40e7430a9a1e5e2c5310d504dd23",
+      "relevantDocumentsInfo": "827ec9763b88a691ae0c558061a9bd90",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notesInfo": "f2563113602fac78e819342c05316863"
+    }
+  }
 }

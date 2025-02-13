@@ -1,7 +1,7 @@
 {
   "generalInfo": "Información general",
   "country": "País",
-  "title": "Título",
+  "title": "Denominación",
   "description": "Breve descripción",
   "jurisdiction": "Jurisdicción(es)",
   "jurisdictionRegions": "Nombre del país y/o grupo(s) geográfico o político/económico",
@@ -26,5 +26,40 @@
   "elements": "Elementos de la medida",
   "elementsText": "Elementos que no corresponden a esta medida.",
   "addInfo": "Información adicional",
-  "relevantDocuments": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes"
+  "relevantDocuments": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.777Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "997c785cce775d7c1014ffbd6e446d50",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "title": "b78a3223503896721cca1303f776159b",
+      "description": "f65f2b3a7e9f9700fe85ee407eb0f551",
+      "jurisdiction": "a8db129143e198c86cec70e546070a93",
+      "jurisdictionRegions": "1437a8a652b292969de5eb645f0c8999",
+      "status": "29c5fe1dee14880089f0d2ec55d3dcc7",
+      "adoption": "e31d4c8118fa6367ec249be27ed5c8e5",
+      "entryIntoForce": "b442d0812591453e1a5c57482f8eb6c1",
+      "retired": "678632a98fd6769f9f5d1d4441fb3f4e",
+      "limitedApplication": "5a37ff1a30d97ca5e93c718e1b2930b0",
+      "type": "07695854c8def41aa133c24ba1c7686b",
+      "isModelContractualClause": "c1d971ea3f12dd78cdf2a5143b89274f",
+      "documentDetails": "5711857ca93b8e0d97c7c384ce1f22dc",
+      "documentText": "ea9ca51ac4704f1fe3adb293bcea0ab8",
+      "translation": "6dd08874f83507e9c7b23f1a46b7fa7c",
+      "amendments": "d1a510ba0ab5095d61b1836521e845dc",
+      "amendedMeasures": "725f65080fc56885ebd2ca50924299ff",
+      "summaryAmendments": "3863598b808d242c0a2b61a3c5f0ef82",
+      "authorities": "f238b154f3b797323f9c26c66b6dec79",
+      "measureAmendedBy": "97aefd8b25302f74a2dba1d4b30608a8",
+      "relationships": "ea96be9e75d8d3d690aedae5040edf2f",
+      "relatedTo": "1b5d7c6398ea1d7aa96dabf93da47d01",
+      "relationshipsDescription": "955efb1be0feb2c589d3a8d1eafb7e69",
+      "elements": "2d89f53fa561eeb73d630b11365c5c8a",
+      "elementsText": "dc21746147ee6341def3510fd8f46519",
+      "addInfo": "092bf78f9c97ba171b8232ddff585392",
+      "relevantDocuments": "aedb646b5a6c26b6299c97a9893e5409"
+    }
+  }
 }

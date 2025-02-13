@@ -1,6 +1,6 @@
 {
-  "generalInfo": "",
-  "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
+  "generalInfo": "Informations générales",
+  "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
   "country": "Pays",
   "selectOption": "Veuillez choisir un pays...",
   "additionalInformation": "Informations supplémentaires pour le profil du pays",
@@ -8,7 +8,26 @@
   "notes": "Notes",
   "notesInfo": "Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.",
   "countryProfile": "Profil des pays pour le Centre d'échange sur la prévention des risques biotechnologiques.",
-  "countryProfileInfo": "Un seul enregistrement de profil de pays est autorisé dans le Centre d'échange pour la prévention des risques biotechnologiques pour chaque gouvernement. Le profil de pays de votre gouvernement existe déjà dans le Centre d'échange pour la prévention des risques biotechnologiques. ",
-  "seconds": "",
-  "redirectNow": "Rediriger maintenant"
+  "countryProfileInfo": "Un seul enregistrement de profil de pays est autorisé dans le Centre d'échange pour la prévention des risques biotechnologiques pour chaque gouvernement. Le profil de pays de votre gouvernement existe déjà dans le Centre d'échange pour la prévention des risques biotechnologiques. Vous serez redirigé pour ce fichier dans quelques",
+  "seconds": "secondes.",
+  "redirectNow": "Rediriger maintenant",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.666Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "selectOption": "61f250d4a9d8c24ee92aaaf174ef11b1",
+      "additionalInformation": "517d785b9c5d3a76ff17a6cf89b55676",
+      "relevantInformationInfo": "a25ecc1ae1ea3d12e8dd18200c44f251",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notesInfo": "f2563113602fac78e819342c05316863",
+      "countryProfile": "67c06a6a679473305674384f12154ebe",
+      "countryProfileInfo": "e2267e9aeb55af0ebb39c749cfcb9fa8",
+      "seconds": "d90d8347e139d0cfc3fad11757b651ff",
+      "redirectNow": "036dce881e1aac61d65dfd345fa4cd79"
+    }
+  }
 }

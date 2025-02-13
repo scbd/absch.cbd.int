@@ -2,6 +2,18 @@
   "analyzingDocument": "Analyse de votre document ...",
   "savingDocument": "Sauvegarde de votre document...",
   "valid": "Votre document est valide.",
-  "contains": "",
-  "errors": ""
+  "contains": "Votre document contient des erreurs.",
+  "errors": "erreurs",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.396Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "analyzingDocument": "c659d56f36dd744fd326f51086eb1e6d",
+      "savingDocument": "6ecd89ce3dbad5e62652a0735d1c2317",
+      "valid": "e014d6c206d4b1f638505fc4fa254e54",
+      "contains": "496596ff00cec6d3dcf3a0d78888564b",
+      "errors": "e97e7522af98a45836832043a76320e0"
+    }
+  }
 }

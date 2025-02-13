@@ -1,38 +1,45 @@
 {
-  "welcome": {
-    "title": "ملخص السجلات",
-    "content": "<p>تتيح لك هذه الصفحة عرض قائمة بكل السجلات تحت نوع السجل الذي حددته، وحالة كل سجل منها. <br><br>وتستطيع في هذه الصفحة فلترة وتصفية السجلات الحالية وإنشاء سجلات جديدة، بالإضافة إلى نسخ كل سجل أو تعديله أو حذفه.</p>"
-  },
-  "filters": {
-    "title": "فلاتر التصفية",
-    "content": "<p>استخدم هذه الفلاتر لعرض قائمة بجميع السجلات المنشورة أو المسودات أو السجلات قيد الموافقة.</p>"
-  },
-  "Keyword": {
-    "title": "كلمة رئيسية",
-    "content": "<p>ابحث في القائمة بكتابة أي كلمة بحث تريدها.</p>"
-  },
-  "adding": {
-    "title": "إنشاء سجل جديد",
-    "content": "<p>اضغط على زر <b> Add New (إنشاء سجل جديد)</b> لإنشاء سجل جديد.</p>"
-  },
-  "duplicate": {
-    "title": "نسخ سجل موجود",
-    "content": "<p>اضغط هنا لإنشاء نسخة من السجل الحالي.</p>"
-  },
-  "edit": {
-    "title": "تعديل السجل",
-    "content": "<p>اضغط هنا لتعديل سجل موجود.</p>"
-  },
-  "delete": {
-    "title": "حذف السجل",
-    "content": "<p>اضغط هنا لحذف السجل.</p>"
-  },
-  "needHelp": {
-    "title": "هل تحتاج إلى المساعدة؟",
-    "content": "<p>اضغط هنا للحصول على المساعدة حسب سياق الاستخدام حيث تستطيع العثور على المزيد من المعلومات المتعلقة بهذه الصفحة.</p>"
-  },
-  "needMoreHelp": {
-    "title": "هل تحتاج إلى مساعدة أخرى؟",
-    "content": "<p></p>"
+  "welcomeTitle": "ملخص السجلات",
+  "welcomeContent": "<p>تتيح لك هذه الصفحة عرض قائمة بكل السجلات تحت نوع السجل الذي حددته، وحالة كل سجل منها. <br><br>وتستطيع في هذه الصفحة فلترة وتصفية السجلات الحالية وإنشاء سجلات جديدة، بالإضافة إلى نسخ كل سجل أو تعديله أو حذفه.</p>",
+  "filtersTitle": "فلاتر التصفية",
+  "filtersContent": "<p>استخدم هذه الفلاتر لعرض قائمة بجميع السجلات المنشورة أو المسودات أو السجلات قيد الموافقة.</p>",
+  "KeywordTitle": "كلمة رئيسية",
+  "KeywordContent": "<p>ابحث في القائمة بكتابة أي كلمة بحث تريدها.</p>",
+  "addingTitle": "إنشاء سجل جديد",
+  "addingContent": "<p>اضغط على زر <b> Add New (إنشاء سجل جديد)</b> لإنشاء سجل جديد.</p>",
+  "duplicateTitle": "نسخ سجل موجود",
+  "duplicateContent": "<p>اضغط هنا لإنشاء نسخة من السجل الحالي.</p>",
+  "editTitle": "تعديل السجل",
+  "editContent": "<p>اضغط هنا لتعديل سجل موجود.</p>",
+  "deleteTitle": "حذف السجل",
+  "deleteContent": "<p>اضغط هنا لحذف السجل.</p>",
+  "needHelpTitle": "هل تحتاج إلى المساعدة؟",
+  "needHelpContent": "<p>اضغط هنا للحصول على المساعدة حسب سياق الاستخدام حيث تستطيع العثور على المزيد من المعلومات المتعلقة بهذه الصفحة.</p>",
+  "needMoreHelpTitle": "هل تحتاج إلى مساعدة أخرى؟",
+  "needMoreHelpContent": "<p>استخدم خاصية المحادثة في التواصل معنا لطلب المزيد من الدعم والمساعدة.</p>",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.963Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "welcomeTitle": "c8434516a3bc1dd752e1fd713a1cdccf",
+      "welcomeContent": "73313ac5034b0c3fb72902b9c80cf8ce",
+      "filtersTitle": "f3f43e30c8c7d78c6ac0173515e57a00",
+      "filtersContent": "b28b35d1f4d60cb37b49ee1ac89b7c53",
+      "KeywordTitle": "220f3d3750583b9db48568a0b5b9a5f1",
+      "KeywordContent": "7d0538b25671a2a8342566838d82e0c7",
+      "addingTitle": "7b46b5587c02be3d3cb2f3ed887f3bc1",
+      "addingContent": "abe0dfe07180c5f39738933ecadae7f5",
+      "duplicateTitle": "8f734a6d992a3014189136619d0c7308",
+      "duplicateContent": "00ddd216fdcdf0bc6e1f3ca25554c038",
+      "editTitle": "92aaf32a80d0d8be13f8fecebdbebab0",
+      "editContent": "e2d677548f047cb9f657f978d09fb153",
+      "deleteTitle": "b2e72ac4ced56b0854ad46e5c17335ff",
+      "deleteContent": "910acf135dbee8df06969cad1e0e24f6",
+      "needHelpTitle": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+      "needHelpContent": "8d80f1b119eadb136042beb399770ea5",
+      "needMoreHelpTitle": "21019d5221b8a27734792493c892bbe2",
+      "needMoreHelpContent": "6edaa4629440bf7eab61e6f4fe316b60"
+    }
   }
 }

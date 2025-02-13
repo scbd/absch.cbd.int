@@ -15,5 +15,29 @@
   "email": "Адрес электронной почты",
   "continue": "Продолжить с",
   "cancel": "удалить",
-  "next": "Далее"
+  "next": "Далее",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.92Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "searchNominee": "6b615ead241ee634da09fa88492620d8",
+      "searchNomineeInfo": "89c7a48d4e957816a02ee15f61713ecb",
+      "emailAddress": "f2dda40fe1a54f8c14c157dac9bd3679",
+      "mandatory": "865a50c0043547d5f748065125605500",
+      "emailIncomplete": "30649361dae7e781da756f362b60f562",
+      "oups": "29213e36fbce7551afc96c6614cf0075",
+      "oops": "46903e55572cfc881e8ec5b4894298ea",
+      "userNotFound": "d5410d4828251ddd3101fd14fa1821de",
+      "userInfo": "48111025c4643306a1496e760a42eae5",
+      "nominateEmailAddress": "9ca98c73e4c3e1cc5c6b8218d8e9df3f",
+      "firstName": "20db0bfeecd8fe60533206a2b5e9891a",
+      "lastName": "8d3f5eff9c40ee315d452392bed5309b",
+      "organization": "d6b258792ff06f82933c74eeb8aef591",
+      "email": "ce8ae9da5b7cd6c3df2929543a9af92d",
+      "continue": "8a2c894dbe6fd02d77414579f95f8cff",
+      "cancel": "10aec35353f9c4096a71c38654c3d402",
+      "next": "10ac3d04253ef7e1ddc73e6091c0cd55"
+    }
+  }
 }

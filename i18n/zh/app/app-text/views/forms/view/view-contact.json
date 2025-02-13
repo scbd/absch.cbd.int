@@ -11,6 +11,27 @@
   "faxNumber": "传真号码",
   "emails": "电子邮件",
   "webAddress": "网站地址",
-  "additionalInfo": "",
-  "otherRelevant": "其他相关网站地址和/或附加文件"
+  "additionalInfo": "额外信息",
+  "otherRelevant": "其他相关网站地址和/或附加文件",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.842Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "type": "a1fa27779242b4902f7ae3bdd5c6d508",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "name": "49ee3087348e8d44e1feda1917443987",
+      "typeOfOrganization": "be9304654f12758a9c7932b1566427a7",
+      "jobTitle": "f4a73825484d63d2d63282d17cafebdc",
+      "department": "1a75531de3e6bbbfa95da56818ab5677",
+      "organization": "d6b258792ff06f82933c74eeb8aef591",
+      "addressContact": "3cc9d4c3eb62f5ac68a0dd38269dddfb",
+      "phoneNumber": "e174c1b711f254d538c689a90c5842a5",
+      "faxNumber": "77845759cc0d48b3f17f2b099907bbf7",
+      "emails": "38adf26368035ecce0e1fc46c375c822",
+      "webAddress": "06f27600c167aa12f0ddcca11aff2cd0",
+      "additionalInfo": "092bf78f9c97ba171b8232ddff585392",
+      "otherRelevant": "aedb646b5a6c26b6299c97a9893e5409"
+    }
+  }
 }

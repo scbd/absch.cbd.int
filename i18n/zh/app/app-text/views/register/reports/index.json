@@ -1,6 +1,17 @@
 {
   "reports": "报告",
   "view": "查看",
-  "noReportsAvailable": "",
-  "loading": "正在加载..."
+  "noReportsAvailable": "目前无可用报告。",
+  "loading": "正在加载...",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.957Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "reports": "c91c7b93c28cd18741b71f727ee81ee3",
+      "view": "4351cfebe4b61d8aa5efa1d020710005",
+      "noReportsAvailable": "07a135048bebf54ffe2ae97a0acfe429",
+      "loading": "8524de963f07201e5c086830d370797f"
+    }
+  }
 }

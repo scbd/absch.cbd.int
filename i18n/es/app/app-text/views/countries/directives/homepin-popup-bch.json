@@ -7,9 +7,29 @@
   "fkText": "Existe una disputa entre el Gobierno de la Argentina y el del Reino Unido de Gran Bretaña e Irlanda del Norte en relación con la soberanía de las Islas Falklands (Islas Malvinas).",
   "ehText": "Territorio no autónomo.",
   "gbText": "La ratificación del Protocolo de Cartagena por parte del Reino Unido no incluye:",
-  "gbTitle13": "",
+  "gbTitle13": "Anguila; Bases bajo soberanía británica de Acrotiri y Dhekelia; Bermuda; Islas Falkland; Islas Caimán; Islas Georgias del Sur y Sándwich del Sur; Islas Pitcairn; Islas Turcas y Caicos; Islas Vírgenes Británicas; Montserrat; Santa Elena, Ascensión y Tristán de Acuña; Territorio Británico Antártico y Territorio Británico del Océano Índico",
   "overseasTerritories": "13 territorios de ultramar",
   "or": "o",
   "gbTitle3": "Bailía de Jersey; Isla de Guernesey e Isla de Man",
-  "crownDependencies": "3 Dependencias de la Corona"
+  "crownDependencies": "3 Dependencias de la Corona",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.555Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "partyToCartagenaProtocol": "f0e6ff18773962060d821eae1725c8ad",
+      "notPartyToCartagenaProtocol": "0ef604ec904fa3b64d4046f3aa6b7133",
+      "ratifiedNotYetParty": "7ec144f6a65ca33b42871db347084e5a",
+      "partyToSuppProtocol": "2d99e4c006b8955010d85a73e25d1d76",
+      "dkText": "830100ff998618fcc63631d7d3d6219f",
+      "fkText": "c404f76abbc9da62089f79911735ae01",
+      "ehText": "be274bcf4249530249260d658a78e9a8",
+      "gbText": "625d5fa9c481513c53c3cf9dc8263308",
+      "gbTitle13": "ef17b9fbe0577f18cd0badd5c946c5cc",
+      "overseasTerritories": "7186c59c5ef7aebec2bf9d646e080112",
+      "or": "e81c4e4f2b7b93b481e13a8553c2ae1b",
+      "gbTitle3": "a66225b58e60dd964b843efe519b8183",
+      "crownDependencies": "0451b0687bece557742a519c40274359"
+    }
+  }
 }

@@ -1,0 +1,23 @@
+{
+  "fileName": "文件名",
+  "download": "下载",
+  "regeneratePdf": "重新生成 PDF",
+  "viewIn": "查看环境：",
+  "loadingPdf": "正在加载 PDF",
+  "error": "错误！",
+  "toolTipMessage": "使用此选项可重新生成 PDF 文件。此过程将生成一个全新的 PDF 文档，可解决现有文档中存在的任何格式问题或错误。",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.869Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "fileName": "76348cf9ddb92acc65440418b185db2d",
+      "download": "801ab24683a4a8c433c6eb40c48bcd9d",
+      "regeneratePdf": "fdfc783b6ce98bd5fae41b27846bd967",
+      "viewIn": "a134fccfed4f03c0cf0c2a2b3277f3be",
+      "loadingPdf": "05f743747a2f659565fe4b67a9505319",
+      "error": "ef7bd68a02b6b5656554f7a27d1c7bdf",
+      "toolTipMessage": "6c139aa1dd56b5525bd99967df1c2511"
+    }
+  }
+}

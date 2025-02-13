@@ -18,10 +18,11 @@
   "subSection": "Подраздел",
   "country": "Страна",
   "export": "Экспортировать",
+  "print": "Печать",
   "#meta": {
-    "hashedOn": "2024-05-05T18:52:52.678Z",
+    "hashedOn": "2024-11-22T14:18:26.988Z",
     "algorithm": "md5",
-    "branch": "2024.13.3",
+    "branch": "2024.46.0",
     "hashes": {
       "countResponses": "27cdb1728361700e32c7dc44cf13e1ba",
       "percentageRow": "4b87d6f3cbff56c4deb77261895bd134",

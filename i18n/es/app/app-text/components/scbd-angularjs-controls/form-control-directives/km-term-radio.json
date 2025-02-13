@@ -1,4 +1,13 @@
 {
   "clearSelection": "Eliminar selección",
-  "loading": "Cargando..."
+  "loading": "Cargando...",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.406Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "clearSelection": "80ffff123555bd5173345bc8f144edeb",
+      "loading": "8524de963f07201e5c086830d370797f"
+    }
+  }
 }

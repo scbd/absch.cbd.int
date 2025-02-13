@@ -1,0 +1,37 @@
+{
+  "name": "名称",
+  "website": "网站",
+  "country": "国家/地区",
+  "address": "地址",
+  "googleMapsLink": "谷歌地图链接",
+  "email": "电子邮件",
+  "telephone": "电话",
+  "facebook": "Facebook",
+  "twitter": "Twitter",
+  "youtube": "YouTube",
+  "shortDescription": "用联合国六种语文之一简要介绍该组织",
+  "shortDescriptionInOfficialLanguage": "用官方语言简要介绍贵组织",
+  "notes": "注",
+  "logo": "标识",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.114Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "name": "49ee3087348e8d44e1feda1917443987",
+      "website": "15bbb9d0bbf25e8d2978de1168c749dc",
+      "country": "e909c2d7067ea37437cf97fe11d91bd0",
+      "address": "dd7bf230fde8d4836917806aff6a6b27",
+      "googleMapsLink": "2af6c1d39802ae6c850a07826ee4bc29",
+      "email": "ce8ae9da5b7cd6c3df2929543a9af92d",
+      "telephone": "b2a1e8c4e743228e0a3719e3abc4cc1e",
+      "facebook": "d85544fce402c7a2a96a48078edaf203",
+      "twitter": "2491bc9c7d8731e1ae33124093bc7026",
+      "youtube": "970cfba66b8380fb97b742e4571356c6",
+      "shortDescription": "671a5e4d532e7ef25db2b04713705289",
+      "shortDescriptionInOfficialLanguage": "b5c0db8bc7d9bd7fc3a622e562e82198",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "logo": "8c2857a9ad1d8f31659e35e904e20fa6"
+    }
+  }
+}

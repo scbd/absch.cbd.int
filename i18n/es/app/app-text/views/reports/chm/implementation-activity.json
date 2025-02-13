@@ -1,0 +1,39 @@
+{
+  "generalInformation": "Información general",
+  "country": "País",
+  "description": "Descripción",
+  "status": "Situación",
+  "levelOfImplementation": "Nivel de la aplicación",
+  "detailsOfImplementation": "Información detallada sobre el nivel de la aplicación",
+  "targetsAndIndicators": "Metas e indicadores",
+  "nationalIndicators": "Indicadores nacionales",
+  "nationalTargets": "Metas nacionales",
+  "aichiTargets": "Metas de Aichi para la Diversidad Biológica",
+  "partners": "Asociados",
+  "relevantDocumentAndInformation": "Documentos y enlaces útiles",
+  "relevantInfo": "Información pertinente",
+  "relevantWebsites": "Sitios web, enlaces web y archivos pertinentes",
+  "additionalInformation": "Información adicional",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.059Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInformation": "997c785cce775d7c1014ffbd6e446d50",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39",
+      "status": "ec53a8c4f07baed5d8825072c89799be",
+      "levelOfImplementation": "9970a53266fcb0bcb30803f431e62f88",
+      "detailsOfImplementation": "75f2d49661f0d00b6fe4a97160178cc2",
+      "targetsAndIndicators": "26e57eb32a2150fd1268cd901b12230b",
+      "nationalIndicators": "06cf21209adfad4c155bab10f3a3db15",
+      "nationalTargets": "0a4aed0e778cd5ae82ec7544b518bedb",
+      "aichiTargets": "72eacca1b4ea271b4869ab95c13ca340",
+      "partners": "fd6df34ee4e7642c02ced6012028f6b8",
+      "relevantDocumentAndInformation": "9c2eabf5ef42dea5c2439a7ff88b6df5",
+      "relevantInfo": "fa19ef1f47050b2f56887d2f6472a8a8",
+      "relevantWebsites": "90b9efb4e235b39c0bb216630ab4f3d8",
+      "additionalInformation": "0f68b904e33d9ac04605aecc958bcf52"
+    }
+  }
+}

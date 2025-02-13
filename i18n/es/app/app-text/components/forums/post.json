@@ -1,0 +1,37 @@
+{
+  "buttonEdit": "Editar",
+  "buttonPinThread": "Anclar",
+  "buttonUnpinThread": "Desanclar",
+  "buttonOpenThread": "Abrir",
+  "buttonCloseThread": "Cerrar",
+  "buttonDeletePost": "Borrar",
+  "buttonReplyToPost": "Responder",
+  "buttonReplyToMainThread": "Responder al tema principal",
+  "buttonReplyToPerson": "Responder a {name}",
+  "buttonSignInToReply": "Iniciar sesión para responder",
+  "replyToId": "Esta es una respuesta a # {postld}",
+  "titleAttachments": "Adjunto(s)",
+  "replies": "1 respuesta | {count} respuestas",
+  "notAllowedToPost": "Lo lamentamos, pero usted no cuenta con el permiso para publicar en este foro.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.386Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "buttonEdit": "7dce122004969d56ae2e0245cb754d35",
+      "buttonPinThread": "e78e14c5f18f793bdcd4726766f0fa44",
+      "buttonUnpinThread": "bb792693e2df302e35ff0a093e2fddf5",
+      "buttonOpenThread": "c3bf447eabe632720a3aa1a7ce401274",
+      "buttonCloseThread": "d3d2e617335f08df83599665eef8a418",
+      "buttonDeletePost": "f2a6c498fb90ee345d997f888fce3b18",
+      "buttonReplyToPost": "25d8df6e580905091a0d5ef5b9e05bf0",
+      "buttonReplyToMainThread": "aab1f9b8ca08a31970b7178911be40c0",
+      "buttonReplyToPerson": "5ba2e40958bd008142c19dc47dc9a037",
+      "buttonSignInToReply": "0f83c4be1f3199de40e00bfa25669aa5",
+      "replyToId": "9e9751746a6301c34b9181aaf9abad19",
+      "titleAttachments": "67d8b0a336b3667a13841642250a8f09",
+      "replies": "d9aa2150de1a220b6b820f8f2865ca48",
+      "notAllowedToPost": "3d837d051dbaa50706f8d95cf21dba2e"
+    }
+  }
+}

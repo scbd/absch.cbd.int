@@ -1,74 +1,49 @@
 {
-  "welcome": {
-    "title": "Bienvenue sur la page Soumettre : Tableau de bord",
-    "content": "<p> </p>"
-  },
-  "personalInformation": {
-    "title": "Vos informations personnelles",
-    "content": "<p> </p>"
-  },
-  "recordOverview": {
-    "title": "Aperçu du fichier",
-    "content": "<p> </p>"
-  },
-  "yourRecordsStatus": {
-    "title": "Vos fichiers : statut",
-    "content": "<p> </p>"
-  },
-  "yourRecordsOffline": {
-    "title": "Vos fichiers : formats hors ligne",
-    "content": "<p> </p>"
-  },
-  "quickView": {
-    "title": "Aperçu rapide",
-    "content": "<p></p>"
-  },
-  "addNewRecord": {
-    "title": "Ajouter un nouveau fichier<p>",
-    "content": "<p></p>"
-  },
-  "viewAllRecords": {
-    "title": "Voir tous les fichiers",
-    "content": "<p> </u>  </p>"
-  },
-  "closeFilterTab": {
-    "title": "Résultats de la recherche",
-    "content": "<p>Pour afficher les résultats de la recherche, faites défiler vers le bas ou cliquez sur le bouton <b>(x)</b> dans le coin supérieur droit.</p></p>"
-  },
-  "searchResult": {
-    "title": "Résultats de la recherche : onglets",
-    "content": "<p>Les résultats de la recherche sont présentés dans des tableaux séparés et organisés par catégorie de fichier. Cliquez sur le tableau afin de visualiser les fichiers associés avec cette catégorie. <br><br><u>Note </u> Le cercle noir indique le nombre total d'enregistrements dans chaque catégorie et changera automatiquement en fonction de vos sélections de recherche.</p>"
-  },
-  "subFilters": {
-    "title": "sous-filtres",
-    "content": "<p>Les sous-filtres apparaissent lorsque vous sélectionnez un ou plusieurs types de fichier dans le filtre global <b>Types de fichier</b>. <br>Ils apparaissent sur le côté gauche et sont associés à chaque type de fichier sélectionné.<br>Vous pouvez utiliser des sous-filtres en combinaison avec des filtres globaux pour affiner davantage votre recherche.</p>"
-  },
-  "recordView": {
-    "title": "Résultats de la recherche : Voir les fichiers",
-    "content": "<p>Une fois que vous avez localisé le fichier qui vous intéresse, cliquez dessus pour afficher tous les détails.</p>"
-  },
-  "viewType": {
-    "title": "Résultats de la recherche : Voir le type",
-    "content": "<p>Vous pouvez modifier l'affichage des fichiers en sélectionnant l'option préférée dans la liste déroulante.</p>"
-  },
-  "sortBy": {
-    "title": "Résultats de la recherche : Trier",
-    "content": "<p>Trier les résultats de votre recherche en sélectionnant un ou plusieurs champs.</p>"
-  },
-  "sendRecords": {
-    "title": "Résultats de la recherche : Partager",
-    "content": "<p>Cliquez ici pour partager vos résultats de recherche.</p>"
-  },
-  "exportRecords": {
-    "title": "Résultats de la recherche : Exporter",
-    "content": "<p>Cliquez ici pour exporter les informations en format tableau.</p>"
-  },
-  "needHelp": {
-    "title": "Besoin d'aide?",
-    "content": "<p></p>"
-  },
-  "needMoreHelp": {
-    "title": "Encore besoin d’aide?",
-    "content": "<p></p>"
+  "welcomeTitle": "Bienvenue sur la page Soumettre : Tableau de bord",
+  "welcomeContent": "<p>Le tableau de bord est votre espace de travail personnel. Ici, vous pouvez voir, soumettre, réviser et modifier les fichiers, en fonction de votre rôle d'utilisateur, ainsi que mettre à jour les informations de votre profil.</p>",
+  "personalInformationTitle": "Vos informations personnelles",
+  "personalInformationContent": "<p>La section « Bienvenue » s'ouvre lorsque vous cliquez sur la « flèche vers le bas ». Ici, vous pouvez voir et mettre à jour les informations de votre profil.</p>",
+  "recordOverviewTitle": "Aperçu du fichier",
+  "recordOverviewContent": "<p>Cette section classe les fichiers en <i>fichiers nationaux</i> et <i>fichiers de référence</i> et les présentations en fonction de votre rôle d'utilisateur. Elle vous montre aussi le statut de divers fichiers.</p>",
+  "yourRecordsStatusTitle": "Vos fichiers : statut",
+  "yourRecordsStatusContent": "<p>Les trois dernières colonnes indiquent le statut des fichiers pour chaque type de fichier. Les chiffres dans chaque colonne indiquent le nombre de fichiers publiés, les fichiers qui sont des brouillons et les fichiers en attente d'approbation.<br><br><u>Conseil :</u> cliquez sur n'importe quel chiffre pour voir la liste récapitulative des tous les fichiers et leur statut pour le type de fichiers sélectionné.</p>",
+  "yourRecordsOfflineTitle": "Vos fichiers : formats hors ligne",
+  "yourRecordsOfflineContent": "<p>Dans cette colonne, vous pouvez afficher et télécharger des formats hors ligne dans la langue de votre choix.<br>Les formats hors ligne sont des fichiers Word qui contiennent les mêmes informations que le « formulaire de soumission » en ligne. Leur objectif principal est de vous aider à recueillir des informations avant de les soumettre en ligne.</p>",
+  "quickViewTitle": "Aperçu rapide",
+  "quickViewContent": "<p>Cliquez sur la « flèche vers le bas » pour afficher les 10 derniers fichiers publiés.</p>",
+  "addNewRecordTitle": "Ajouter un nouveau fichier",
+  "addNewRecordContent": "<p>Cliquez sur l'icône « + » pour créer un nouveau fichier.</p>",
+  "viewAllRecordsTitle": "Voir tous les fichiers",
+  "viewAllRecordsContent": "<p>Cliquez sur l'icône « liste » pour afficher un résumé de tous les fichiers pour le type de fichier correspondant. Sur la page qui s'ouvre, vous pourrez filtrer les fichiers existants et en créer de nouveaux, ainsi que dupliquer, modifier ou supprimer un fichier.<br><br><u>Conseil :</u>  Vous pouvez également cliquer sur le titre du type d'enregistrement (par exemple, cliquez sur « Contact (CON) »).</p>",
+  "needHelpTitle": "Besoin d'aide?",
+  "needHelpContent": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur le tableau de bord.</p>",
+  "needMoreHelpTitle": "Encore besoin d’aide?",
+  "needMoreHelpContent": "<p>Utilisez la fonction de chat pour nous envoyer un message et obtenir plus d’aide.</p>",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.881Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "welcomeTitle": "4960270312fe93f8f70a281c0487e3e9",
+      "welcomeContent": "89db0c88ac18123ccc240db3b17a99f8",
+      "personalInformationTitle": "6335a00a08fde0fbb8f6d6630cdadd92",
+      "personalInformationContent": "f333d8824de3be430ab9cbe28d813785",
+      "recordOverviewTitle": "4456c418cb94aa7a9dd3caf3365c3458",
+      "recordOverviewContent": "18dd3faf56feadbd306f79489ad7d01d",
+      "yourRecordsStatusTitle": "799e70e3afbd62ef3c1b011b70d25e8e",
+      "yourRecordsStatusContent": "ee0914216cdfe6e837518f3842f59048",
+      "yourRecordsOfflineTitle": "a052a0ecd7109454b473b360e20763b7",
+      "yourRecordsOfflineContent": "de332662b7e8d18d166980897b3dcc9e",
+      "quickViewTitle": "c91e4ee170226d66e90f99ba917e4c20",
+      "quickViewContent": "04e0407198ff52c9d26f315525c48478",
+      "addNewRecordTitle": "d9b718cad121430960a45708020bd80a",
+      "addNewRecordContent": "c10f39427968447c22651af72a1cd732",
+      "viewAllRecordsTitle": "f3165b9437c6f212c093fe9ab641752a",
+      "viewAllRecordsContent": "d6e28e3215da79f1f08aed32120daf89",
+      "needHelpTitle": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+      "needHelpContent": "07c4dffadead8425dd86d463d50e0086",
+      "needMoreHelpTitle": "21019d5221b8a27734792493c892bbe2",
+      "needMoreHelpContent": "6edaa4629440bf7eab61e6f4fe316b60"
+    }
   }
 }

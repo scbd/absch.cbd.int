@@ -9,5 +9,23 @@
   "displayProblems": "信息交换所显示有问题？",
   "recentVersions": "搭配最新的互联网浏览器版本（Firefox、Chrome 或 Internet Explorer 9+）效果最佳。",
   "technicalSupport": "如需技术支持，请联系我们的帮助中心：",
-  "seeFaq": "查看更多常见问题"
+  "seeFaq": "查看更多常见问题",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.183Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "pleaseSignIn": "6689a90003ebb1cd58c2bc841567fe4d",
+      "howRegister": "bec153c0007e58306be0d724cf8c2381",
+      "anyPersonSignUp": "3e079ee8fba939d3cc49bcde80275f04",
+      "makeSure": "96e3acc2eabfa33df83fe264315209d8",
+      "forgotPassword": "01a569ddc6cf67ddec2a683f0a5f5956",
+      "clickHere": "936ccdb97115e9f35a11d35e3d5b5cad",
+      "resetPassword": "d7903ec01f2bbcfa6161a14a405e69b0",
+      "displayProblems": "4dab050b0d39836c9137b554f622f5b0",
+      "recentVersions": "9ae6df13d546ff96e3d71838179af95b",
+      "technicalSupport": "40c8b6b304f973e89f5390ad4cfa3251",
+      "seeFaq": "0fbc17e798f4eb1300570549a67e416c"
+    }
+  }
 }

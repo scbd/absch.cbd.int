@@ -3,11 +3,12 @@
   "geneticElementRegistry": "Реестр генетических элементов",
   "lmoTitle": "Реестр ЖИО",
   "organismRegistry": "Реестр организмов",
-  "lmoRegistry": "Реестр живых измененных организмов (ЖИО)",
+  "labRegistry": "Реестр лабораторий",
+  "lmoRegistry": "Реестр живых измененных организмов (LMO)",
   "lmoInfo": "В реестре ЖИО представлена краткая информация о всех зарегистрированных в МПБ живых измененных организмах, в том числе о событиях трансформации и генетических модификациях, с указанием",
   "uniqueCode": "уникального идентификационного кода",
   "lmoLink": "(если имеется) для каждой записи. В реестре имеются ссылки на все решения и отчеты об оценках рисков, которые имеют отношение к этим организмам.",
-  "clickHere": "Щелкните <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=modifiedOrganism'>здесь,</a> чтобы выполнить углубленный поиск всех записей категории «ЖИО», имеющихся в данном Реестре.",
+  "clickHere": "Щелкните <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=modifiedOrganism'>здесь,</a> чтобы выполнить углубленный поиск всех записей о ЖИО, имеющихся в данном реестре.",
   "loading": "Загрузка...",
   "error": "При загрузке записей реестра произошла ошибка, попробуйте еще раз.",
   "totalRecords": "Всего записей:",
@@ -16,5 +17,31 @@
   "name": "Уникальный идентификатор",
   "identity": "Идентификатор и событие трансформации",
   "organism": "Организм",
-  "description": "Описание"
+  "description": "Описание",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.007Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "lmoTitle": "5529599d2157303129ae7e2a96215c73",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "labRegistry": "4099e15a8e9456cd759f605dc491c26f",
+      "lmoRegistry": "9d9de25abe0a91ed6af99f90736f0cad",
+      "lmoInfo": "6515b74e052af34560f64df5fdf471c5",
+      "uniqueCode": "c98ddce4dd1b492eba7a68713c95a622",
+      "lmoLink": "00a2eea39670ee6eb7a3f5c3ccf6e027",
+      "clickHere": "59f6aac251b78808f4f2383248db527a",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "error": "6d8272f491e2dd46fc83518aa0e1d186",
+      "totalRecords": "bdce1a99aaf929539a09d564a830f4ad",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "recordID": "5bcbee8ee48fbbebb61b02d453ad5d72",
+      "name": "11eee7cd5bbd7e438db11c131b53c1f8",
+      "identity": "798626f0847b0a685f2e503ef8dad57e",
+      "organism": "e69d4633f5da1f14c7f5b368b04035d6",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39"
+    }
+  }
 }

@@ -1,17 +1,41 @@
 {
   "registries": "Registres",
-  "geneticElementRegistry": "Registre d'éléments génétiques",
+  "geneticElementRegistry": "Registre d’éléments génétiques",
   "lmoTitle": "Registre d’OVM",
   "organismRegistry": "Registre des organismes",
+  "labRegistry": "Registre des laboratoires",
   "organismInfo": "Le registre des organismes comprend les organismes qui ont été enregistrés au CEPRB comme des organismes parents, récepteurs ou donneurs. Chaque registre fournit des liens vers des fichiers sur chaque organisme et des informations sur les caractéristiques biologiques, notamment sur la classification taxonomique, le nom commun, l’origine, le centre d’origine et le centre de diversité génétique. Des liens vers les fichiers pertinents en référence à l’organisme sont fournis dans la partie inférieure de chaque enregistrement individuel.",
   "clickHere": "Cliquez <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=organism'>here</a> effectuer une recherche approfondie de tous les fichiers d'organismes disponibles dans ce registre.",
   "loading": "Chargement en cours...",
   "error": "Erreur dans le chargement des fichiers, veuillez essayer de nouveau.",
-  "totalRecords": "Nombre total de fichiers :",
+  "totalRecords": "Nombre total de fichiers :",
   "export": "Exporter",
   "click": "Cliquez",
-  "recordID": "Numéro d'identification du dossier",
+  "recordID": "Numéro d’identification du dossier",
   "scientificName": "Nom scientifique",
   "commonName": "Nom commun",
-  "description": "Description"
+  "description": "Description",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.009Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "lmoTitle": "5529599d2157303129ae7e2a96215c73",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "labRegistry": "4099e15a8e9456cd759f605dc491c26f",
+      "organismInfo": "9a15649ce50e735c4f11eb713fd8d753",
+      "clickHere": "ec687d4a5bf05cddc62c5d2c0c47c57a",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "error": "6d8272f491e2dd46fc83518aa0e1d186",
+      "totalRecords": "bdce1a99aaf929539a09d564a830f4ad",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "click": "316853cc3718335f11c048e33b9be98a",
+      "recordID": "5bcbee8ee48fbbebb61b02d453ad5d72",
+      "scientificName": "ea72c7b6e71d7fb9e24950f308d47f5a",
+      "commonName": "b5113599226faa4522c21c00cd24ef78",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39"
+    }
+  }
 }

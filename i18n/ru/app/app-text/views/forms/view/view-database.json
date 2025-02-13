@@ -4,6 +4,20 @@
   "description": "Описание",
   "url": "URL-адрес веб-сайта",
   "addInfo": "Дополнительная информация",
-  "relevantDocuments": "Адреса других соответствующих веб-сайтов/или прилагаемые документы",
-  "country": "Страна"
+  "relevantDocuments": "Адреса других соответствующих веб-сайтов и/или прилагаемые документы",
+  "country": "Страна",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.844Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "title": "891553538df689370c4528a6891b8e2b",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39",
+      "url": "23303b9b2f9c14df68b9667f1b05e980",
+      "addInfo": "092bf78f9c97ba171b8232ddff585392",
+      "relevantDocuments": "aedb646b5a6c26b6299c97a9893e5409",
+      "country": "59716c97497eb9694541f7c3d37b1a4d"
+    }
+  }
 }

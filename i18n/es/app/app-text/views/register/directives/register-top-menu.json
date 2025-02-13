@@ -7,5 +7,21 @@
   "admin": "Admin",
   "menu": "Menú",
   "reports": "Informes",
-  "mySharing": "Mi participación"
+  "mySharing": "Mi participación",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.889Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "dashboard": "2938c7f7e560ed972f8a4f68e80ff834",
+      "requests": "b134a801a1a3888498968fc4ea760cf7",
+      "notifications": "a274f4d4670213a9045ce258c6c56b80",
+      "userManagement": "92726ab5faeb2cb9208eaac9af0346bd",
+      "preferences": "d6e74a08a9a2c720429944cbd0a80f6c",
+      "admin": "e3afed0047b08059d0fada10f400c1e5",
+      "menu": "b61541208db7fa7dba42c85224405911",
+      "reports": "c91c7b93c28cd18741b71f727ee81ee3",
+      "mySharing": "cf9d573f2fc51e15e39a8688fe93ae19"
+    }
+  }
 }

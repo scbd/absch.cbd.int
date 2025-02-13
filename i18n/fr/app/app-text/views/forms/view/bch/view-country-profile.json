@@ -1,5 +1,15 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "country": "Pays",
-  "additionalInformation": "Informations supplémentaires pour le profil du pays"
+  "additionalInformation": "Informations supplémentaires pour le profil du pays",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.792Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "additionalInformation": "517d785b9c5d3a76ff17a6cf89b55676"
+    }
+  }
 }

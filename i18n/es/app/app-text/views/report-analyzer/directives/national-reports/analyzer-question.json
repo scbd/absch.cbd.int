@@ -8,11 +8,11 @@
   "secondNR": "Segundo informe nacional",
   "thirdNR": "Tercer informe nacional",
   "forthNR": "Cuarto informe nacional",
-  "note": "<b>Nota:</b> La herramienta comparativa solo comprende a aquellos países que han respondido las preguntas en ambos informes nacionales. En este sentido, los recuentos y porcentajes totales pueden cambiar cuando se aplica la herramienta comparativa.",
+  "note": "<b>Nota:</b> la herramienta comparativa solo comprende a aquellos países que han respondido las preguntas en ambos informes nacionales. En este sentido, los recuentos y porcentajes totales pueden cambiar cuando se aplica la herramienta comparativa.",
   "#meta": {
-    "hashedOn": "2024-05-05T18:52:52.677Z",
+    "hashedOn": "2024-11-22T14:18:26.985Z",
     "algorithm": "md5",
-    "branch": "2024.13.3",
+    "branch": "2024.46.0",
     "hashes": {
       "compareWithPrevious": "ba3e8f3a055db3d35c18ece3ace61ab1",
       "compareWithSurvey": "a739ff4b0e85810ac0c4d90ab5ef88e6",

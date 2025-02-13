@@ -1,3 +1,11 @@
 {
-  "description": "Description"
+  "description": "Description",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.012Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39"
+    }
+  }
 }

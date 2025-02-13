@@ -13,5 +13,27 @@
   "email": "Адрес эл. почты:",
   "website": "Веб-сайт:",
   "pendingApproval": "ЗАПИСЬ НА УТВЕРЖДЕНИИ",
-  "viewRequest": "Просмотреть запрос"
+  "viewRequest": "Просмотреть запрос",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.815Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "loadingRecord": "ae892da24c9d8bd99a9e2874c5b0cf91",
+      "invalidReference": "987f9b8a6e5782253464898ea152da0d",
+      "errorLoading": "5f66a97ca949169be4c8472d8006fedb",
+      "cna": "55e5d59418f2c3d134ed2e6b66697979",
+      "nfp": "83b388bd0fbe7407ca81c390c3053248",
+      "person": "2cb8e801cad897d5b6f143005d76cace",
+      "organization": "720355ce51239e71691e4dd1d4c8807b",
+      "relatedOrganization": "796a0be5fefbbb059d5176144c06c3af",
+      "deleted": "711eeb6a9d44cef3404588af141548fe",
+      "phone": "673ae02fffb72f0fe68a66f096a01347",
+      "fax": "0e2fb5b02182fd28b9b96e86ed27838f",
+      "email": "6a1e265f92087bb6dd18194833fe946b",
+      "website": "e5cb8489f57db7c15eed3258e48cd5f3",
+      "pendingApproval": "2642809ff2b2a0bc0f06f7dd5bdf980f",
+      "viewRequest": "eb4111d5e2da22c6dcd33573e7557c17"
+    }
+  }
 }

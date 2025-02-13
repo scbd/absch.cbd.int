@@ -1,3 +1,11 @@
 {
-  "error": "请至少选择一种联合国语言方可继续。"
+  "error": "请至少选择一种联合国语言方可继续。",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.399Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "error": "d3010fb3adc484cc78efbba466e452ef"
+    }
+  }
 }

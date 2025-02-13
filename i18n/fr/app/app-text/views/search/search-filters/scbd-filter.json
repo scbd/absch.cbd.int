@@ -1,4 +1,13 @@
 {
-  "scbdRecords": "Fichiers de la SCBD",
-  "scbdFilterInfo": "Informations publiées par le Secrétariat de la CDB Cela inclut les réunions, nouvelles et actualités, notifications et déclarations."
+  "scbdRecords": "Fichiers du Secrétariat de la CBD",
+  "scbdFilterInfo": "Informations publiées par le Secrétariat de la CDB Cela inclut les réunions, nouvelles et actualités, notifications et déclarations.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.164Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "scbdRecords": "bf07ae9c31a6b0b41191b643b84e289a",
+      "scbdFilterInfo": "af1d9fb387bfb4c1446ca91187263b57"
+    }
+  }
 }

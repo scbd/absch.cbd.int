@@ -19,5 +19,33 @@
   "relevantDocuments": "Otros documentos pertinentes",
   "relevantDocumentsInfo": "Por favor, utilice este campo para proporcionar otras direcciones web pertinentes y/o uno o más documentos pertinentes que se almacenarán en la base de datos para que los usuarios los descarguen.",
   "notes": "Notas",
-  "notesInfos": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial."
+  "notesInfos": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.754Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "websiteDatabaseDetails": "4d3f900b8eb601603b0ffbf25be163aa",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "website": "891553538df689370c4528a6891b8e2b",
+      "selectOption": "61f250d4a9d8c24ee92aaaf174ef11b1",
+      "exampleTitle": "c9de217dd3d4339fa2c361bc1a0c32d3",
+      "exampleDescription": "b7a117126017a807a3120ca57207546d",
+      "websiteInfo": "74423bd13e1fbcf65370b636cc78bc47",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39",
+      "descriptionInfo": "753e39bfbb1795798eca87f31c1569d0",
+      "websiteAddress": "5caf05c618b5a48878a7dc8c38cd5df3",
+      "websiteAddressInfo": "cfc8d1f0466a0c23ff781736c1319fbb",
+      "timeframeInformation": "00adb6c18bfb4cdfc94854169787189c",
+      "categoryInformation": "bfb5ea7a9fb5755d72c01202e6b615a5",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392",
+      "relevantinformation": "d53a40e7430a9a1e5e2c5310d504dd23",
+      "relevantInformationInfo": "4359b18f52b3bfbe91c593915b228136",
+      "relevantDocuments": "96e85465551cf42c1f0f95c082b3cb72",
+      "relevantDocumentsInfo": "7d3e0883513c964a849169bc0fc5269c",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notesInfos": "f2563113602fac78e819342c05316863"
+    }
+  }
 }

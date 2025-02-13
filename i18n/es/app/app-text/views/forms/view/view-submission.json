@@ -9,5 +9,23 @@
   "records": "Registro(s) relacionado(s)",
   "thematicAreas": "Áreas temáticas",
   "documents": "Documentos",
-  "otherRelevantInformation": "Cualquier otra información pertinente"
+  "otherRelevantInformation": "Cualquier otra información pertinente",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.856Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "organization": "a7c82b23c912089916ea06a96a7c90aa",
+      "submissionInformation": "014775b71e16f2d9ff4a879b9b7796de",
+      "titleSubmission": "3a4e07c57fefe5f7e038b7e43f743d4d",
+      "dateSubmission": "f067c6ab98b204e2e48836e7082d03b7",
+      "notifications": "9b223fd4f17a81be90f8ae4510319da4",
+      "records": "fc8124528e05438806b21fe01fb0cab0",
+      "thematicAreas": "b5b4fe9749eeb44445cbb4a27f24fe80",
+      "documents": "f28128b38efbc6134dc40751ee21fd29",
+      "otherRelevantInformation": "d53a40e7430a9a1e5e2c5310d504dd23"
+    }
+  }
 }

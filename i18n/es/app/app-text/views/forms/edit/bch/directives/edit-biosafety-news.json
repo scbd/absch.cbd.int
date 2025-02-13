@@ -8,12 +8,36 @@
   "linksInfo": "Por favor, indique la dirección URL del sitio web (por ejemplo http://www.cbd.int) y el nombre del sitio web (por ejemplo, “Convenio sobre la Diversidad Biológica”).",
   "abstract": "Resumen",
   "abstractInfo": "(máx. 80 palabras)",
-  "newsText": "Texto de Noticias",
+  "newsText": "Texto de las noticias",
   "newsTextInfo": "(máx. 300 palabras)",
   "otherRelevantInformation": "Cualquier otra información pertinente",
   "relevantInformationInfo": "Por favor, utilice este campo para proporcionar cualquier otra información pertinente que no se haya podido incluir en otro lugar del registro.",
   "anyrelevantDocuments": "Otros documentos pertinentes",
   "anyrelevantDocumentsInfo": "Por favor, utilice este campo para proporcionar otras direcciones web pertinentes y/o uno o más documentos pertinentes que se almacenarán en la base de datos para que los usuarios los descarguen.",
   "notes": "Notas",
-  "notesInfos": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial."
+  "notesInfos": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.663Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "title": "f0cec9b9d859f182d064e49287f10fe6",
+      "selectOption": "61f250d4a9d8c24ee92aaaf174ef11b1",
+      "links": "f93604fd239d1b61cc6966c7f967aa6c",
+      "linksInfo": "d61d32b243d6160ac03642faceefe23a",
+      "abstract": "e353dbe42c8654f33588d4da0b517469",
+      "abstractInfo": "d43f067f1653128e0bc9985fef2deb8b",
+      "newsText": "c533deb81310b774ba36531820057164",
+      "newsTextInfo": "926e8c00749d6a57c057d9798862b666",
+      "otherRelevantInformation": "d53a40e7430a9a1e5e2c5310d504dd23",
+      "relevantInformationInfo": "4359b18f52b3bfbe91c593915b228136",
+      "anyrelevantDocuments": "96e85465551cf42c1f0f95c082b3cb72",
+      "anyrelevantDocumentsInfo": "7d3e0883513c964a849169bc0fc5269c",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notesInfos": "f2563113602fac78e819342c05316863"
+    }
+  }
 }

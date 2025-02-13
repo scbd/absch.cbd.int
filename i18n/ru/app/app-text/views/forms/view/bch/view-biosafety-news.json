@@ -6,5 +6,20 @@
   "abstract": "Аннотация",
   "newsText": "Текст новости",
   "addInfo": "Дополнительная информация",
-  "relevantDocuments": "Адреса других соответствующих веб-сайтов/или прилагаемые документы"
+  "relevantDocuments": "Адреса других соответствующих веб-сайтов и/или прилагаемые документы",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.79Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "title": "b78a3223503896721cca1303f776159b",
+      "links": "f93604fd239d1b61cc6966c7f967aa6c",
+      "abstract": "e353dbe42c8654f33588d4da0b517469",
+      "newsText": "c533deb81310b774ba36531820057164",
+      "addInfo": "0f68b904e33d9ac04605aecc958bcf52",
+      "relevantDocuments": "aedb646b5a6c26b6299c97a9893e5409"
+    }
+  }
 }

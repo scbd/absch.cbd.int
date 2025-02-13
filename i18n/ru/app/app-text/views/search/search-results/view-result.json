@@ -1,9 +1,23 @@
 {
-  "loading": "",
+  "loading": "загрузка...",
   "noRecordsFound": "записей не найдено",
   "referenceRecords": "Справочные записи",
   "scbdRecords": "Записи СКБР",
   "showNext": "Показать следующие 10 записей",
   "showRemaining": "показать оставшиеся",
-  "records": "записи(-ей)"
+  "records": "записи(-ей)",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.179Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "loading": "13d494fd35f9f5b14309b84466cbddf2",
+      "noRecordsFound": "9a435fce14443bcc347ea6e1d569149a",
+      "referenceRecords": "a4075f5ac35d959ca3a0f9837384712e",
+      "scbdRecords": "7a648f2f1f3da2fc6fde7eeeaed017a4",
+      "showNext": "d2f6022f992b697d3a6e7128ad20e5d9",
+      "showRemaining": "25a1b394e861e2056041e9d9c2663498",
+      "records": "6e52c40bb8fc91ff39ee5c79b4211f67"
+    }
+  }
 }

@@ -1,11 +1,31 @@
 {
   "lmoTitle": "Directorio de organismos vivos modificados (OVM)",
-  "lmoInfo": "",
+  "lmoInfo": "El Directorio de OVM proporciona información resumida acerca de todos los organismos vivos modificados registrados en el CIISB, incluidos los eventos de transformación, las modificaciones genéticas",
   "uniqueCode": "y el código único de identificación",
   "lmoLink": "(si está disponible) para cada registro. En el Directorio es posible acceder a los enlaces a todas las decisiones e informes de evaluaciones del riesgo relativos a estos organismos.",
   "viewRegistry": "Ver el Directorio",
   "organismRegistry": "Directorio de organismos",
-  "organismInfo": "En el Directorio de organismos se incluye información resumida sobre aquellos organismos que se han registrado en el CIISB como organismos parentales, receptores o donantes. El Directorio incluye enlaces a los registros de cada organismo en los que puede encontrarse información adicional sobre características biológicas pertinentes, incluidos datos como la clasificación taxonómica, el nombre común, el origen, el centro de origen y el centro de diversidad genética. Al pie de cada registro individual, se proporcionan enlaces a los registros de OMV pertinentes.",
+  "organismInfo": "El Directorio de organismos incluye información resumida sobre aquellos organismos que se han registrado en el CIISB como organismos parentales, receptores o donantes. El Directorio incluye enlaces a los registros de cada organismo en los que puede encontrarse información adicional sobre características biológicas pertinentes, incluidos datos como la clasificación taxonómica, el nombre común, el origen, el centro de origen y el centro de diversidad genética. Al pie de cada registro individual, se proporcionan enlaces a los registros de OMV pertinentes.",
   "geneticElementRegistry": "Directorio de elementos genéticos",
-  "geneInfo": "El Directorio de elementos genéticos proporciona información resumida sobre los elementos genéticos asociados a los OVM registrados en el CIISB, incluida información sobre el organismo donante, rasgos transferidos y función biológica. El Directorio incluye enlaces a los registros de cada elemento genético, en el que puede encontrarse más información. Se hace referencia a los OVM que contienen el elemento genético en particular al pie del registro individual."
+  "geneInfo": "El Directorio de elementos genéticos proporciona información resumida sobre los elementos genéticos asociados a los OVM registrados en el CIISB, incluida información sobre el organismo donante, rasgos transferidos y función biológica. El Directorio incluye enlaces a los registros de cada elemento genético, en el que puede encontrarse más información. Se hace referencia a los OVM que contienen el elemento genético en particular al pie del registro individual.",
+  "laboratoryRegistry": "Directorio de laboratorios (LAB)",
+  "labInfo": "El Directorio de LAB proporciona información resumida sobre todos los laboratorios registrados en el CIISB que participan en la detección e identificación de organismos vivos modificados (OVM).",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.001Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "lmoTitle": "9d9de25abe0a91ed6af99f90736f0cad",
+      "lmoInfo": "6515b74e052af34560f64df5fdf471c5",
+      "uniqueCode": "c98ddce4dd1b492eba7a68713c95a622",
+      "lmoLink": "00a2eea39670ee6eb7a3f5c3ccf6e027",
+      "viewRegistry": "6786875c8505b88d24ca2ac07c310561",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "organismInfo": "9a15649ce50e735c4f11eb713fd8d753",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "geneInfo": "381f477d21ef30063ce6433141c76fc7",
+      "laboratoryRegistry": "93ab5c00a83b012f0d454c849826b6c8",
+      "labInfo": "9eb4b3e1cfbb4bedb2345862f057f203"
+    }
+  }
 }

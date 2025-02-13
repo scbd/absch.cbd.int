@@ -3,8 +3,9 @@
   "geneticElementRegistry": "基因片段登记簿",
   "lmoTitle": "改性活生物体登记薄",
   "organismRegistry": "生物体登记薄",
+  "labRegistry": "实验室登记薄",
   "geneInfo": "基因片段登记簿汇总了与在生物安全信息交换所登记的改性活生物体有关的基因片段的信息，包括供体生物体、赋予性状和生物功能等信息。该登记簿包括每个基因片段的记录链接，可通过此类链接找到更多详细信息。含有特定基因片段的改性活生物体在单个记录的最下方提及。",
-  "clickHere": "",
+  "clickHere": "单击<a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=dnaSequence' >这里</a>，以对此登记簿中可用的所有基因片段记录进行深入搜索。",
   "loading": "正在加载...",
   "error": "载入登记簿记录时出错，请重试。",
   "totalRecords": "总记录数量：",
@@ -13,5 +14,28 @@
   "name": "名称",
   "traits": "性状",
   "donorOrganism": "供体生物体",
-  "function": "职能"
+  "function": "职能",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.003Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "lmoTitle": "5529599d2157303129ae7e2a96215c73",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "labRegistry": "4099e15a8e9456cd759f605dc491c26f",
+      "geneInfo": "381f477d21ef30063ce6433141c76fc7",
+      "clickHere": "3e4aba67160b64d6724d346937caf23a",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "error": "6d8272f491e2dd46fc83518aa0e1d186",
+      "totalRecords": "bdce1a99aaf929539a09d564a830f4ad",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "recordID": "5bcbee8ee48fbbebb61b02d453ad5d72",
+      "name": "49ee3087348e8d44e1feda1917443987",
+      "traits": "6f9282005e0fceed2c0f05567ab936e9",
+      "donorOrganism": "259149bacd72688d8a4dc1f7d289d3ac",
+      "function": "86408593c34af77fdd90df932f8b5261"
+    }
+  }
 }

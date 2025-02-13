@@ -1,15 +1,6 @@
 {
   "theAbs": "CE-APA",
   "idlo": "OIDD",
-  "forums": "Forums",
-  "complianceCommittee3": "Comité chargé du respect des obligations 3",
-  "threadSubject": "thread_subject",
-  "iac4": "CAI 4",
-  "iac": "CAI",
-  "ahtegOnDsi": "GSET sur SNI",
-  "vlr": "",
-  "caribbean": "Caraïbes",
-  "art10Groups": "Groupes Art 10",
   "irccCounts": "Comptages des CCRI",
   "new": "Nouveau !",
   "edit": "Modifier",
@@ -18,5 +9,23 @@
   "aboutCode": "à_propos_du_code",
   "absContact": "Contact pour le CE-APA",
   "checkpointCommnunique": "Communiqués du point de contrôle",
-  "ircc": "CCRI"
+  "ircc": "CCRI",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.498Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "theAbs": "f0bbbaa4859846b40d104014f08ea98e",
+      "idlo": "b38b21aa5e243a16fcaa9a0621c2bce3",
+      "irccCounts": "fe69eb69375b185d44f8e78f6658e92e",
+      "new": "03c2e7e41ffc181a4e84080b4710e81e",
+      "edit": "7dce122004969d56ae2e0245cb754d35",
+      "absVideos": "8451def36f0f8c3fd15f17e178e2a4a4",
+      "aboutTheAbs": "58df37bd9b798fc6c09a359f14fd9f55",
+      "aboutCode": "144ff1966f9320966352ab07bf29d473",
+      "absContact": "461c69a576e4a9a2619629f246b200b4",
+      "checkpointCommnunique": "c63fda3a267df877f963a3a114e7091a",
+      "ircc": "91b5626f1f59af68ee4d3036685e811b"
+    }
+  }
 }

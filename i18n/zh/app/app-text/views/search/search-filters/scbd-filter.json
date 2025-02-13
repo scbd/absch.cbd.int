@@ -1,4 +1,13 @@
 {
   "scbdRecords": "生物多样性公约秘书处记录",
-  "scbdFilterInfo": "由生物多样性公约秘书处发布的信息。这包括会议、新闻报道、通知和声明。"
+  "scbdFilterInfo": "由生物多样性公约秘书处发布的信息。这包括会议、新闻报道、通知和声明。",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.164Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "scbdRecords": "bf07ae9c31a6b0b41191b643b84e289a",
+      "scbdFilterInfo": "af1d9fb387bfb4c1446ca91187263b57"
+    }
+  }
 }

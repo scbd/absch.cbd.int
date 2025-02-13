@@ -8,5 +8,22 @@
   "nonParty": "غير طرف",
   "filterByRecordTypes": "فلترة الدول بأنواع السجلات",
   "countries": "البلدان",
-  "records": "السجلات"
+  "records": "السجلات",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.537Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "countryInformation": "a9133900f9b6a57149b50fdf1253a863",
+      "map": "46f3ea056caa3126b91f3f70beea068c",
+      "selectCountry": "5fe7ca009ef1c0aa5c0d782a8be37e0e",
+      "filterByStatus": "3fcbe8f34c708790acff63df234c5ca5",
+      "all": "b1c94ca2fbc3e78fc30069c8d0f01680",
+      "party": "094a173d3b32f44f5b5c996e8710ae28",
+      "nonParty": "f2d080b45ad3573468d78da57e9d64da",
+      "filterByRecordTypes": "0d4ba2c4ff0f2d4b9e36d916071c575c",
+      "countries": "790d59ef178acbc75d233bf4211763c6",
+      "records": "db231ec39f2ce4d5ad1de0abfc8970d9"
+    }
+  }
 }

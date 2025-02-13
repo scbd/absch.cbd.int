@@ -15,5 +15,29 @@
   "interoperability": "互操作性",
   "offlineFormats": "使用常用格式",
   "contactUs": "联系我们",
-  "clearingHouse": "信息交换所"
+  "clearingHouse": "信息交换所",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.508Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "quickLinks": "7298e4abc5483d6bfd7a0ec46ba8bdd6",
+      "aboutAbs": "0d08687233e0f650e8abba89be02a3f3",
+      "aboutNagoya": "3f0164932906eeb2b74cba3002fd3974",
+      "searchRecords": "6c6cefdf083a50d6adc0a2e27e7d5323",
+      "submitRecords": "0060261e00649331b74f470b6a76a583",
+      "countryProfiles": "ae9de9008bd90b16e53c4216b62689a0",
+      "nra": "87bc5be251f4aa15d3216bfca8d2dbc9",
+      "abs": "7d8a220d2262f9d6c658d549ee12cf2c",
+      "help": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+      "introduction": "3bc6c3ab5f46628739ce0b96d53b0773",
+      "howMonitoring": "93772fe403a21f57635115203bfc7d66",
+      "gettingStarted": "cb59b87e00d11222bfd9159d0d23836f",
+      "InfoSharingObligations": "168cd93550d2dd747876aadcc7183bd3",
+      "interoperability": "67a915151759ecc737f698391f7cfd08",
+      "offlineFormats": "fe7de59dcad35becf4ac6cf57a5212a2",
+      "contactUs": "02d4482d332e1aef3437cd61c9bcc624",
+      "clearingHouse": "13a101e234e7fb83285c65099254872b"
+    }
+  }
 }

@@ -4,8 +4,24 @@
   "title": "العنوان",
   "updatedBy": "قام بالتحديث",
   "published": "منشور",
-  "draft": "",
+  "draft": "مسودة",
   "request": "مطلوب",
   "on": "في",
-  "seeMore": "انظر المزيد"
+  "seeMore": "انظر المزيد",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.891Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "latestTenRecords": "5fd5d2857a5537f613a4be4d2d0bdf0d",
+      "status": "ec53a8c4f07baed5d8825072c89799be",
+      "title": "b78a3223503896721cca1303f776159b",
+      "updatedBy": "d5dbeca85f817aab434e926952fca211",
+      "published": "9b9d8a976b42e0bd66381797644943d5",
+      "draft": "f03ab16cd58372c77ba45a3d9a5a1cb9",
+      "request": "15c2d85f1fae22a3c3a0594510a1f611",
+      "on": "ed2b5c0139cec8ad2873829dc1117d50",
+      "seeMore": "891ad007e2e9f2d55be6669cd9abc7a0"
+    }
+  }
 }

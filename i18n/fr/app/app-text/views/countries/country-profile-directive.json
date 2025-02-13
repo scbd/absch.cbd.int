@@ -1,14 +1,33 @@
 {
-  "lastUpdated": "Dernière mise à jour le :",
+  "lastUpdated": "Dernière mise à jour le :",
   "loading": "Chargement en cours...",
   "show10": "Montrer les 10 fichiers suivants",
   "showRemaining": "Montrer le reste",
   "records": "Fichiers",
   "selectMeasures": "Sélectionnez les fichiers devant être montrés dans l'aperçu",
-  "entry": "Entrée en vigueur :",
-  "adoption": "Adoption:",
+  "entry": "Entrée en vigueur :",
+  "adoption": "Adoption :",
   "until": "jusqu’au",
-  "retired": "Retiré",
+  "retired": "Retiré le :",
   "jurisdiction": "Filtres de fichiers par juridiction",
-  "selectAll": "Tout sélectionner"
+  "selectAll": "Tout sélectionner",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.544Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "lastUpdated": "22ee96727ae5e46dcd5d7a13c7bd05d7",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "show10": "dcfce487f4d368a47fa972fc1d985328",
+      "showRemaining": "25a1b394e861e2056041e9d9c2663498",
+      "records": "6e52c40bb8fc91ff39ee5c79b4211f67",
+      "selectMeasures": "7bbbb7300bdbdbb2f78f312fe9e57ff5",
+      "entry": "8020d0541a848956c8ca0b768a48100b",
+      "adoption": "fd4b91e61a9af379962814fe7a7204e5",
+      "until": "3103a7d8f63cb184287c558ca51c6160",
+      "retired": "4bbfc58f1c9d61c73cf915c422723780",
+      "jurisdiction": "b134dbfc059c29024d2949498335506f",
+      "selectAll": "4c41e0bd957698b58100a5c687d757d9"
+    }
+  }
 }

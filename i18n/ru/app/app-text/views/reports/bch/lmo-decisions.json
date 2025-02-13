@@ -1,11 +1,11 @@
 {
   "display": "Показать перекрестные ссылки на внешнюю(-ии) базу(-ы) данных:",
-  "none": "Нет",
+  "none": "Отсутствуют",
   "databaseInfo": "Чтобы получить дополнительную информацию о внешней базе данных, щелкните название базы данных ниже; чтобы перейти на страницу оригинальной базы данных, содержащую информацию об этом ЖИО, щелкните",
   "databaseLink": "значок возле названия базы данных",
   "country": "Страна",
   "decisions": "Решения",
-  "approved": "",
+  "approved": "Разрешено на определенных условиях",
   "requestInformation": "Запрос информации",
   "directUseFood": "Непосредственное использование в качестве продовольствия",
   "directUseFeed": "Непосредственное использование в качестве корма",
@@ -20,5 +20,34 @@
   "environmentalImport": "Экологическое разрешение/Импорт",
   "environmentalCultivation": "Экологическое разрешение/Культивирование",
   "safetyCertificate": "Сертификат безопасности",
-  "referToIndividualEventStatus": "Относится к статусу отдельного события"
+  "referToIndividualEventStatus": "Относится к статусу отдельного события",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.998Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "display": "07819864917af965ee23a44dbc4b5a64",
+      "none": "6adf97f83acf6453d4a6a4b1070f3754",
+      "databaseInfo": "e5f0a4951413e249fed431c00a6fa898",
+      "databaseLink": "3d037daf20c852c79a44f998fa0909f9",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "decisions": "327adee661fe1b4f1e455eca4ef3b8a7",
+      "approved": "d203b9cc8c36c25c5055fcaa9c9ccb47",
+      "requestInformation": "324feb47762f31e01def206c955c941d",
+      "directUseFood": "dad7b32fcd4d0af29b8ff5a9a24844c4",
+      "directUseFeed": "0fdf79ae269c9b800d72eb0af2d0b7fc",
+      "processing": "643562a9ae7099c8aabfdc93478db117",
+      "intentional": "476ee79c95dfc03e0ebe44c41ef000eb",
+      "containedUse": "8877f4c9c59330fbcb23d0a1b7bbbac1",
+      "pharmaceutical": "ee9436435d296c6bfb0c0349402a82b6",
+      "transit": "687e0cc072d40a2f72f5802da3abf05a",
+      "other": "6311ae17c1ee52b36e68aaf4ad066387",
+      "food": "0a38e7286ebbb560354992b3ce62be67",
+      "feed": "a80425472d94ae02c836da5b6f205b7b",
+      "environmentalImport": "705d673249cdc8d552be92211d191ca7",
+      "environmentalCultivation": "bc6b3211c69d07e6988a62d98b4c6158",
+      "safetyCertificate": "a03e5762e76e273770824f93c397266f",
+      "referToIndividualEventStatus": "a7050012b5fd4b64835b2075dd14889a"
+    }
+  }
 }

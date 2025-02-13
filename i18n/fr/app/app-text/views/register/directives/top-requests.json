@@ -1,12 +1,29 @@
 {
   "pendingRequests": "Demandes en attente",
   "loading...": "chargement en cours...",
-  "publish": "",
-  "delete": "",
-  "SCBDReview": "",
-  "pending": "",
-  "your": "",
-  "approval": "",
+  "publish": "PUBLIER",
+  "delete": "EFFACER",
+  "SCBDReview": "EN ATTENTE DE RÉVISION PAR LE SCBD",
+  "pending": "EN ATTENTE",
+  "your": "DE VOTRE",
+  "approval": "APPROBATION",
   "expiresOn": "Expire le",
-  "seeMore": ""
+  "seeMore": "Voir plus",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.893Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "pendingRequests": "c8f2970b6f3e436a8d5f98ce93a88f4e",
+      "loading...": "13d494fd35f9f5b14309b84466cbddf2",
+      "publish": "155fe93b6325d234ef591bc6a7915a32",
+      "delete": "32f68a60cef40faedbc6af20298c1a1e",
+      "SCBDReview": "9d9b24c888c49ed07b323bdd45ede9f2",
+      "pending": "c69f06e1a9b016d133907b4e5f5864d2",
+      "your": "bf5c1d5c27ebae23954367aff15bf344",
+      "approval": "c2357fb0309253f04249c081ca736bd6",
+      "expiresOn": "b08d59db90e5d7db15560f50372690b6",
+      "seeMore": "891ad007e2e9f2d55be6669cd9abc7a0"
+    }
+  }
 }

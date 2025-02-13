@@ -1,0 +1,23 @@
+{
+  "fileName": "Nom du fichier",
+  "download": "Télécharger",
+  "regeneratePdf": "Régénérer le PDF",
+  "viewIn": "Voir en",
+  "loadingPdf": "chargement pdf",
+  "error": "Erreur !",
+  "toolTipMessage": "Utilisez cette option pour régénérer le fichier PDF. Ce processus génère un nouveau document PDF, qui peut résoudre les problèmes de formatage ou les erreurs présentes dans le document existant.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.869Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "fileName": "76348cf9ddb92acc65440418b185db2d",
+      "download": "801ab24683a4a8c433c6eb40c48bcd9d",
+      "regeneratePdf": "fdfc783b6ce98bd5fae41b27846bd967",
+      "viewIn": "a134fccfed4f03c0cf0c2a2b3277f3be",
+      "loadingPdf": "05f743747a2f659565fe4b67a9505319",
+      "error": "ef7bd68a02b6b5656554f7a27d1c7bdf",
+      "toolTipMessage": "6c139aa1dd56b5525bd99967df1c2511"
+    }
+  }
+}
