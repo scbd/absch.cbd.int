@@ -302,8 +302,8 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#countryProfile",
-                                    title       : joyRideText.countryProfiles.title,
-                                    content     : joyRideText.countryProfiles.content,
+                                    title       : joyRideText.countryProfilesTitle,
+                                    content     : joyRideText.countryProfilesContent,
                                     placement   : 'left',                    
                                     beforeStep  : openCountryDropdown
                                 },
@@ -311,8 +311,8 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#listOfRecords",
-                                    title       : joyRideText.listOfRecords.title,
-                                    content     : joyRideText.listOfRecords.content,
+                                    title       : joyRideText.listOfRecordsTitle,
+                                    content     : joyRideText.listOfRecordsContent,
                                     placement   : 'top',          
                                     beforeStep  : (joyride)=>{
                                         closeTab(joyride),
@@ -325,8 +325,8 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#sortingRecords",
-                                    title       : joyRideText.sortingRecords.title,
-                                    content     : joyRideText.sortingRecords.content,
+                                    title       : joyRideText.sortingRecordsTitle,
+                                    content     : joyRideText.sortingRecordsContent,
                                     placement   : 'top',
                                     customClass: "country-sorting-records-jr",
                                     beforeStep  : openSortingRecords
@@ -335,8 +335,8 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#nrCount-NFP",
-                                    title       : joyRideText.sortingRecordsNFP.title,
-                                    content     : joyRideText.sortingRecordsNFP.content,
+                                    title       : joyRideText.sortingRecordsNFPTitle,
+                                    content     : joyRideText.sortingRecordsNFPContent,
                                     placement   : 'top',
                                     beforeStep  : (joyride)=>{
                                         closeTab(joyride);
@@ -347,40 +347,40 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                     appendToBody:  true,
                                     type        : 'element',
                                     selector    : "#sortingRecordsCountries",
-                                    title       : joyRideText.sortingRecordsCountries.title,
-                                    content     : joyRideText.sortingRecordsCountries.content,
+                                    title       : joyRideText.sortingRecordsCountriesTitle,
+                                    content     : joyRideText.sortingRecordsCountriesContent,
                                     placement   : 'top'   
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#sortingRecordsPartyStatus",
-                                    title       : joyRideText.sortingRecordsPartyStatus.title,
-                                    content     : joyRideText.sortingRecordsPartyStatus.content,
+                                    title       : joyRideText.sortingRecordsPartyStatusTitle,
+                                    content     : joyRideText.sortingRecordsPartyStatusContent,
                                     placement   : 'top'
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#sortingRecordsRegions",
-                                    title       : joyRideText.sortingRecordsRegions.title,
-                                    content     : joyRideText.sortingRecordsRegions.content,
+                                    title       : joyRideText.sortingRecordsRegionsTitle,
+                                    content     : joyRideText.sortingRecordsRegionsContent,
                                     placement   : 'top'
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#exportingRecords",
-                                    title       : joyRideText.exportingRecords.title,
-                                    content     : joyRideText.exportingRecords.content,
+                                    title       : joyRideText.exportingRecordsTitle,
+                                    content     : joyRideText.exportingRecordsContent,
                                     placement   : 'top'
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#needHelp",
-                                    title       : joyRideText.needHelp.title,
-                                    content     : joyRideText.needHelp.content,
+                                    title       : joyRideText.needHelpTitle,
+                                    content     : joyRideText.needHelpContent,
                                     placement   : 'bottom',
                                     customClass : "need-help-jr",
                                     beforeStep  : gotoSectionHelp
@@ -390,8 +390,8 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#slaask-button-cross",
-                                    title       : joyRideText.needMoreHelp.title,
-                                    content     : joyRideText.needMoreHelp.content,
+                                    title       : joyRideText.needMoreHelpTitle,
+                                    content     : joyRideText.needMoreHelpContent,
                                     placement   : 'top',
                                     customClass : "need-more-help-jr"
                                 }
