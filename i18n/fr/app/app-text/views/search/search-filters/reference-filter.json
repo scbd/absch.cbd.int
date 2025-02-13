@@ -1,5 +1,15 @@
 {
   "referenceRecords": "Fichiers de référence",
   "absPublication": "Les fichiers de référence inclut un nombre de ressources et d’informations pertinentes pour l’APA et peuvent être soumises par tout utilisateur inscrit et seront validées par le Secrétariat avant leur publication.",
-  "bchPublication": "Les fichiers de référence inclut un nombre de ressources et d’informations pertinentes pour l’APA et peuvent être soumises par tout utilisateur inscrit et seront validées par le Secrétariat avant leur publication."
+  "bchPublication": "Les fichiers de référence inclut un nombre de ressources et d’informations pertinentes pour l’APA et peuvent être soumises par tout utilisateur inscrit et seront validées par le Secrétariat avant leur publication.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.161Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "referenceRecords": "4d3729c30f626ddba3742bb182ea133d",
+      "absPublication": "2ec320ea9dbf12ebde82659c01c3a8cc",
+      "bchPublication": "e617dca3a26bcdd63b948f5b0140b32a"
+    }
+  }
 }

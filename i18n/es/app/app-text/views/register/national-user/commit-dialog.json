@@ -8,5 +8,22 @@
   "granted": "Función(es) a otorgar:",
   "revoked": "Función(es) a revocar:",
   "cancel": "Cancelar",
-  "proceed": "Proceder"
+  "proceed": "Proceder",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.896Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "actions": "06df33001c1d7187fdd81ea1f5b277aa",
+      "oups": "e1478dd0ed13c5a56b772845ad209ca2",
+      "oops": "7a1948ae5a04ee32ecbd77659b6fde30",
+      "userToBeCreated": "a267f8f24575703209000d44d2b3ef5e",
+      "governmentAffiliationGranted": "553ef86fe24c217e4620bc72379df9a3",
+      "governmentAffiliationRevoked": "ab45c221de3ed851e8fd7f509bc6e1bd",
+      "granted": "4f430c699c71d300ad916ff394a15000",
+      "revoked": "f57a4b2c23549237c741c0da09bfefc7",
+      "cancel": "ea4788705e6873b424c65e91c2846b19",
+      "proceed": "f262fae0a2f17e8c1eb4e9eddb0160e4"
+    }
+  }
 }

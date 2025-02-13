@@ -1,5 +1,5 @@
 {
-  "generalInfo": "",
+  "generalInfo": "Informations générales",
   "country": "Pays",
   "checkpointName": "Nom du point de contrôle",
   "cpResponsibilities": "Responsabilités des points de contrôle",
@@ -7,9 +7,29 @@
   "jurisdiction": "Domaine de juridiction",
   "authority": "Autorité(s) devant recevoir les copies de courtoisie des communiqués des points de contrôle",
   "authorityInfo": "Toutes les autorités nationales et tous les contacts indiqués ci-dessous recevront par courrier électronique des communiqués des points de contrôle contenant les informations collectées ou reçues et publiées par ce point de contrôle.",
-  "allCnaOne": "",
-  "allCnaTow": "",
+  "allCnaOne": "Toutes les autorités nationales compétentes désignées",
+  "allCnaTow": "ont été sélectionnées pour recevoir automatiquement les communiqués par courrier électronique publiés par ce point de contrôle.",
   "noAddAuthorities": "Aucune autorité supplémentaire n'a été sélectionnée pour recevoir les copies automatiques par courrier électronique des communiqués publiés par ce point de contrôle.",
   "additionalInformation": "Informations complémentaires",
-  "relevantLinks": "Autres sites Internet ou fichiers en pièces jointes"
+  "relevantLinks": "Autres sites Internet ou fichiers en pièces jointes",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.764Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "checkpointName": "0d63dd4c1d08b0cf379a2ec5b2750bf4",
+      "cpResponsibilities": "13ed3ba3ff8636bf5063b6b97790eca2",
+      "stage": "2722cd2cbe764925317764d22abfab47",
+      "jurisdiction": "219239591f3c3fd970aab9e6efa0e26b",
+      "authority": "a490400139af40b1108abb336ccf2256",
+      "authorityInfo": "a2afde42e78c7816ad1a2203e4163c85",
+      "allCnaOne": "a6c5f6781bcec027d29915d845e53c73",
+      "allCnaTow": "acc728948fed39e9fa3f598bd35ee303",
+      "noAddAuthorities": "e69420046373e965e302304b57b02aa2",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392",
+      "relevantLinks": "42031cf50c2182c8525cce27eb11ec0e"
+    }
+  }
 }

@@ -1,3 +1,13 @@
 {
-  "allKeywords": "Tous les mots clés"
+  "allKeywords": "Tous les mots clés",
+  "noKeywords": "Les filtres sélectionnés ne correspondent à aucun mot-clé.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.155Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "allKeywords": "d570dbef67776fb573ab91479c99e6b4",
+      "noKeywords": "16ee5d3ff5c700ebf513c6cce6728d3f"
+    }
+  }
 }

@@ -3,11 +3,12 @@
   "geneticElementRegistry": "基因片段登记簿",
   "lmoTitle": "改性活生物体登记薄",
   "organismRegistry": "生物体登记薄",
+  "labRegistry": "实验室登记薄",
   "lmoRegistry": "改性活生物体（LMO）登记薄",
   "lmoInfo": "改性活生物体注册信息提供了在生物安全信息交换所注册的所有改性活生物体的概要信息，包括转化事件，基因修改，以及每条记录的",
   "uniqueCode": "唯一标识代码",
   "lmoLink": "（如适用）。可通过登记薄记录访问所有提及这些生物体之决定和风险评估报告的链接。",
-  "clickHere": "",
+  "clickHere": "单击<a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=modifiedOrganism'>这里</a>，以对此登记簿中可用的所有改性活生物体记录进行深入搜索。",
   "loading": "正在加载...",
   "error": "载入登记簿记录时出错，请重试。",
   "totalRecords": "总记录数量：",
@@ -16,5 +17,31 @@
   "name": "唯一标识",
   "identity": "身份和转化事件",
   "organism": "生物体",
-  "description": "描述"
+  "description": "描述",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.007Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "lmoTitle": "5529599d2157303129ae7e2a96215c73",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "labRegistry": "4099e15a8e9456cd759f605dc491c26f",
+      "lmoRegistry": "9d9de25abe0a91ed6af99f90736f0cad",
+      "lmoInfo": "6515b74e052af34560f64df5fdf471c5",
+      "uniqueCode": "c98ddce4dd1b492eba7a68713c95a622",
+      "lmoLink": "00a2eea39670ee6eb7a3f5c3ccf6e027",
+      "clickHere": "59f6aac251b78808f4f2383248db527a",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "error": "6d8272f491e2dd46fc83518aa0e1d186",
+      "totalRecords": "bdce1a99aaf929539a09d564a830f4ad",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "recordID": "5bcbee8ee48fbbebb61b02d453ad5d72",
+      "name": "11eee7cd5bbd7e438db11c131b53c1f8",
+      "identity": "798626f0847b0a685f2e503ef8dad57e",
+      "organism": "e69d4633f5da1f14c7f5b368b04035d6",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39"
+    }
+  }
 }

@@ -1,0 +1,25 @@
+{
+  "organization": "Organisation",
+  "government": "Gouvernements",
+  "description": "Description",
+  "descriptionNative": "Langue d’origine de la description",
+  "websites": "Sites Web",
+  "documents": "Documents",
+  "videos": "Vidéos",
+  "images": "Images",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.108Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "organization": "d6b258792ff06f82933c74eeb8aef591",
+      "government": "18450de39aceed82b26abe218d377740",
+      "description": "b5a7adde1af5c87d7fd797b6245c2a39",
+      "descriptionNative": "a45914ec50d43b3240c866965e4bdf4d",
+      "websites": "334428b76e6101d20c91eb9cde2fccf8",
+      "documents": "f28128b38efbc6134dc40751ee21fd29",
+      "videos": "554cfab3938e21d9270bd6b75931f96f",
+      "images": "fff0d600f8a0b5e19e88bfb821dd1157"
+    }
+  }
+}

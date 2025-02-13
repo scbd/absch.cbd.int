@@ -1,9 +1,23 @@
 {
   "page": "Page",
-  "of": "de",
+  "of": "sur",
   "next": "Suivant",
   "first": "Premier",
-  "last": "",
-  "prev": "« Antérieur",
-  "itemsPerPage": "Items par page"
+  "last": "Dernier",
+  "prev": "Précédent",
+  "itemsPerPage": "Items par page",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.414Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "page": "193cfc9be3b995831c6af2fea6650e60",
+      "of": "8bf8854bebe108183caeb845c7676ae4",
+      "next": "10ac3d04253ef7e1ddc73e6091c0cd55",
+      "first": "7fb55ed0b7a30342ba6da306428cae04",
+      "last": "d55b30607c2a9a2616347d6edb789f6b",
+      "prev": "14230d11143a03f4330c6433d5032a9d",
+      "itemsPerPage": "aaaa3c0a0086a0eedaf3350d3cfe92c1"
+    }
+  }
 }

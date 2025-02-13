@@ -9,7 +9,7 @@
   },
   "submissionForm": {
     "title": "添加新记录：提交信息表",
-    "content": "</u> 标有<span style='color: red;'>红色</span>星号（<span style='color: red;'>*</span>）的字段为必填字段。部分字段具有描述性文字，可协助您填写表格。"
+    "content": "填写“提交表格”的字段。<br><u>注：</u>标有<span style='color: red;'>红色</span>星号（<span style='color: red;'>*</span>）的字段为必填字段。部分字段具有描述性文字，可协助您填写表格。"
   },
   "saveDraft": {
     "title": "保存草稿",
@@ -30,5 +30,44 @@
   "needMoreHelp": {
     "title": "需要更多帮助吗？",
     "content": "<p>使用聊天功能给我们发消息以获得更多支持。</p>"
+  },
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.76Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "welcome": {
+        "title": "68924e45fcd401b475fbe38dcf1bae09",
+        "content": "d42eb6b70bd1527f25f990a6f59733b7"
+      },
+      "introduction": {
+        "title": "6d7f6abb4be946bcf3e5c9d012372258",
+        "content": "1204533be63ea211ac72717a6e8dda8d"
+      },
+      "submissionForm": {
+        "title": "24c151f3d05c596a5ea809ffe9acd7e4",
+        "content": "a412cde89d4147decc2aad272bca41a0"
+      },
+      "saveDraft": {
+        "title": "40bdf9ef6a0572942d98d674a31afe74",
+        "content": "57e06a08906c86fc026d02f08ce4cd67"
+      },
+      "review": {
+        "title": "8663dfd1a3e9d3f5ead738c28de528df",
+        "content": "0b0119d73bb224aba797612b65eee4ee"
+      },
+      "publish": {
+        "title": "110a4b01beabd53b661a47d4b44bd7a8",
+        "content": "50dac95d9da6d819518a47cebb2de32d"
+      },
+      "needHelp": {
+        "title": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+        "content": "2218e8053dc06e1bf934b8ae5049c7ad"
+      },
+      "needMoreHelp": {
+        "title": "21019d5221b8a27734792493c892bbe2",
+        "content": "6edaa4629440bf7eab61e6f4fe316b60"
+      }
+    }
   }
 }

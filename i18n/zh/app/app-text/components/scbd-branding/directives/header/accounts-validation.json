@@ -1,4 +1,13 @@
 {
-  "pleaseClick": "",
-  "click": ""
+  "pleaseClick": "请单击以下日期发送的电子邮件中的验证链接：",
+  "click": "单击",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.438Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "pleaseClick": "b05d6a777cfefcfe1003c6270bc02579",
+      "click": "316853cc3718335f11c048e33b9be98a"
+    }
+  }
 }

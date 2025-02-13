@@ -4,10 +4,28 @@
   "nominee": "يُرجى تعبئة تفاصيل الاتصال الأساسية التالية للمرشح",
   "firstName": "الاسم الأول",
   "lastName": "الاسم الأخير",
-  "organization": "",
+  "organization": "المنظمة/المؤسسة",
   "email": "البريد الإلكتروني",
   "mandatory": "هذه الخانة إلزامية",
   "emailIncomplete": "البريد الإلكتروني غير صالح أو غير مكتمل",
   "cancel": "إلغاء",
-  "next": "التالي"
+  "next": "التالي",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.907Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "newUser": "5a598edac7133a65ae8f38fdabe1d8ae",
+      "contactDetails": "18c4f22255b17ec11ebd5790f5553156",
+      "nominee": "c472691ad34c55f49d9de5ef7842acdf",
+      "firstName": "20db0bfeecd8fe60533206a2b5e9891a",
+      "lastName": "8d3f5eff9c40ee315d452392bed5309b",
+      "organization": "d6b258792ff06f82933c74eeb8aef591",
+      "email": "ce8ae9da5b7cd6c3df2929543a9af92d",
+      "mandatory": "865a50c0043547d5f748065125605500",
+      "emailIncomplete": "30649361dae7e781da756f362b60f562",
+      "cancel": "10aec35353f9c4096a71c38654c3d402",
+      "next": "10ac3d04253ef7e1ddc73e6091c0cd55"
+    }
+  }
 }

@@ -21,5 +21,35 @@
   "contactUs": "联系我们：    bch@cbd.int",
   "BiosafetyClearingHouse": "生物安全信息交换所",
   "subscribeEmail": "订阅电子邮件通知",
-  "subscribeNews": "订阅我们的新闻通讯"
+  "subscribeNews": "订阅我们的新闻通讯",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.515Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "quickLinks": "7298e4abc5483d6bfd7a0ec46ba8bdd6",
+      "aboutBCH": "a73151de8b50d0b303d2290d471f1ce2",
+      "aboutCartagena": "a4f9cfc7a8596b41df042198bc4063ec",
+      "suppProtocol": "d1115e2d84aa42f0fbd343d49c5b813c",
+      "signIn": "b6d4223e60986fa4c9af77ee5f7149c5",
+      "searchRecords": "6c6cefdf083a50d6adc0a2e27e7d5323",
+      "submitRecords": "0060261e00649331b74f470b6a76a583",
+      "registries": "ffefbfce0670feecff47b345bfa16fdd",
+      "LmoOrganismGene": "94a3280fc8f2f4099e654c84bcaa049a",
+      "countryProfiles": "5a4d9fc55baf2bb0539773744fa36fa7",
+      "nra": "437295c7937165d8ac07c7526301cacf",
+      "forums": "6bb6d58b728200b4db7d63055275a07d",
+      "bch": "43f2b0dd09b2b91146fe726dcc47381b",
+      "announcements": "2b59bbfc9d431d23f4564d01b0182808",
+      "help": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+      "kb": "083065d6760791eb1195154619e5813c",
+      "faq": "483a5da192f46e3cfe8391d3ef234fc4",
+      "trainingSite": "80fd8c5e8707f7eca0ef32bf07f601d3",
+      "trainingMaterials": "140f8f3c748c4f2027d0a200ace4f2a8",
+      "contactUs": "28758bcaf557f988df8f756341634130",
+      "BiosafetyClearingHouse": "7d8f77ce2a85d5f291d3b9cd54798ad3",
+      "subscribeEmail": "416c3f5a82083273bc5883dae81ed774",
+      "subscribeNews": "9b3911a6705bcd3a70c80e00fe1bde68"
+    }
+  }
 }

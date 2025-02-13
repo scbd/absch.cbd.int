@@ -5,5 +5,19 @@
   "contactUs": "Свяжитесь с нами",
   "linkagesPolicy": "Политика связывания",
   "disclaimer": "Отказ от ответственности",
-  "search": "Поиск"
+  "search": "Поиск",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.557Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "back": "0557fa923dcee4d0f86b1409f5c2167f",
+      "loading": "16bfbf9c462762cf1cba4134ec53c504",
+      "noHelp": "106e508d2a54e905a8105f068172bfe5",
+      "contactUs": "02d4482d332e1aef3437cd61c9bcc624",
+      "linkagesPolicy": "7ff24d5a9da2208dde7603e34129fb40",
+      "disclaimer": "ad0a802ec8134e9210a5625933db50a7",
+      "search": "13348442cc6a27032d2b4aa28b75a5d3"
+    }
+  }
 }

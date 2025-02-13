@@ -17,5 +17,31 @@
   "biologicalFunction": "Función biológica de la proteína",
   "traits": "Rasgo(s) o uso(s) relacionado(s) en la biotecnología",
   "additionalInformation": "Información adicional",
-  "anyOtherInformation": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes"
+  "anyOtherInformation": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.794Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "997c785cce775d7c1014ffbd6e446d50",
+      "title": "b78a3223503896721cca1303f776159b",
+      "name": "dbc533e63c35a7ba234b368a2cd71984",
+      "synonymNames": "44a919a05cab7e887616f188699e5664",
+      "abbreviation": "b54d58d7e43c404563f91e38d3efbcac",
+      "category": "3adbdb3ac060038aa0e6e6c138ef9873",
+      "isSynthetic": "9ff607ff7dcf4d29f24c0833ad776509",
+      "yes": "93cba07454f06a4a960172bbd6e2a435",
+      "no": "bafd7322c6e97d25b6299b5d6fe8920b",
+      "donorOrganism": "259149bacd72688d8a4dc1f7d289d3ac",
+      "donorOrganisms": "b8f04042789a687962369db256df1682",
+      "donorOrganismCollectionPoint": "8f8731220131a5d183ec758dead0be87",
+      "geographicCoordinates": "e145314dd4d443c3a4bdf4fb02a2888e",
+      "characteristicsSequence": "9cc2acfb74e758c0e4834448620c30c1",
+      "proteinName": "806eb899a8a40c710ac536dd28d1adfe",
+      "biologicalFunction": "9dde56aea561c0960208046d6aede94f",
+      "traits": "5efc045e093f08f585112beaca6b7468",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392",
+      "anyOtherInformation": "aedb646b5a6c26b6299c97a9893e5409"
+    }
+  }
 }

@@ -1,0 +1,43 @@
+{
+  "generalInformation": "معلومات عامة",
+  "country": "البلد",
+  "title": "العنوان",
+  "level": "مستوى التطبيق",
+  "jurisdiction": "منطقة الاختصاص",
+  "details": "تفاصيل حول مستوى التطبيق",
+  "relevance": "صلة الأهداف الوطنية بأهداف أيتشي",
+  "aichiTarget": "هدف أيتشي",
+  "aichiTargetComponents": "مكونات أهداف أيتشي",
+  "subAichiTargets": "تدعم أهداف أيتشي",
+  "orTargetComponents": " أو مكونات الهدف",
+  "rationale": "عرض أسباب الهدف الوطني",
+  "explanation": "لا يتضمن تفسير الهدف الوطني أي هدف من أهداف أيتشي للتنوع البيولوجي أو يتصل بأجزاء أخرى من الخطة الاستراتيجية للتنوع البيولوجي",
+  "relevantDocumentAndInformation": "الوثائق والمعلومات ذات الصلة",
+  "relevantInfo": "معلومات ذات صلة",
+  "relevantWebsites": "المواقع والروابط والملفات ذات الصلة",
+  "additionalInformation": "معلومات إضافية",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.09Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInformation": "997c785cce775d7c1014ffbd6e446d50",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "title": "b78a3223503896721cca1303f776159b",
+      "level": "f9cf165b09e27b552a470fe3f1fe41c8",
+      "jurisdiction": "a15182062e43a95f745c1c4e74dd0952",
+      "details": "1a44280975a73a343f636f9b30de5686",
+      "relevance": "d319e5ff746950586b4aa3c2f03c9b42",
+      "aichiTarget": "54cfd860c086846d110878783d3f838d",
+      "aichiTargetComponents": "8b8c6b3a7d618e0899932a8d0835141b",
+      "subAichiTargets": "beaa4d14cfa86d4d527b0d5eb3665fef",
+      "orTargetComponents": "21b949ac827d90cebb3279596801e5c1",
+      "rationale": "89dcfdab747b5e3350266ed8ea35d446",
+      "explanation": "7210a841c6e8585ddedaa3aa70cf5b33",
+      "relevantDocumentAndInformation": "9c2eabf5ef42dea5c2439a7ff88b6df5",
+      "relevantInfo": "fa19ef1f47050b2f56887d2f6472a8a8",
+      "relevantWebsites": "90b9efb4e235b39c0bb216630ab4f3d8",
+      "additionalInformation": "0f68b904e33d9ac04605aecc958bcf52"
+    }
+  }
+}

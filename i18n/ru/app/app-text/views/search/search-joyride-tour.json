@@ -70,5 +70,84 @@
   "needMoreHelp": {
     "title": "Нужна дополнительная помощь?",
     "content": "Используйте функцию «Чат», чтобы направить нам сообщение с просьбой о предоставлении дополнительной поддержки."
+  },
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.166Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "welcome": {
+        "title": "5975b68654d95975933bac4ac0722c7a",
+        "content": "a660955da396dd2709d7a46caa8bd67a"
+      },
+      "globalSearch": {
+        "title": "5a27b4652ad998cf853414ceb33e5146",
+        "content": "3e43d212db92d991ab00ecc19d5f3502"
+      },
+      "freeText": {
+        "title": "35ecc02593b7e13e6ec5ebbb64026d00",
+        "content": "d6072a3cab0a3ceff1a59cdee0f62c2f"
+      },
+      "recordTypesFilterTab": {
+        "title": "befca9eab1166cf5eb456bf5da487307",
+        "content": "8c3f5d47f9c7426f1facf412163d34c3"
+      },
+      "keywordsFilterTab": {
+        "title": "320eade14f1a12178387101bd29d8609",
+        "content": "803133e76d9ef4bda434b56787cbe433"
+      },
+      "countryFilterTab": {
+        "title": "d074391d7df863f46ac12e495d6e8b2e",
+        "content": "31fba7fa515c502cc2cc4495cb4a4380"
+      },
+      "regionFilterTab": {
+        "title": "f33baf2efd445de0567db3210d46dbbd",
+        "content": "1ba0caced1af15e15b70e5f2d4cfbe08"
+      },
+      "dateFilterTab": {
+        "title": "da18240f0f75256fad8539f8d2215f06",
+        "content": "f0cb97021b926f2e4710ee4f73be98dd"
+      },
+      "closeFilterTab": {
+        "title": "32df01b9cf0491a879250b58ba2744ba",
+        "content": "08c789dfa0a4d3db4769dcb796de1c46"
+      },
+      "searchResult": {
+        "title": "45baf9a41f90a87e83aa3674513f506b",
+        "content": "835ac5d88125496510db24dee941cbdf"
+      },
+      "subFilters": {
+        "title": "3f1919fd422d6db3a25aa277d9748eb5",
+        "content": "21ef690ab7bd9f2a6a9712900396e8ca"
+      },
+      "recordView": {
+        "title": "92e18bb509172b52b1ff410eb18b7d62",
+        "content": "fa274b015dcd5da63b058cab376d8b65"
+      },
+      "viewType": {
+        "title": "7d6338759cc3e5fa0ae99f1ff934a975",
+        "content": "7e840567bc7935f1decb91525b04726b"
+      },
+      "sortBy": {
+        "title": "c85d40ad9566d89a2f787652e26cd7d8",
+        "content": "cf7163bb8702b4bccfe92e06024033d1"
+      },
+      "sendRecords": {
+        "title": "84091d017fde06671b82f34726d81d6e",
+        "content": "0971e41ccff0bd180170677fd465729e"
+      },
+      "exportRecords": {
+        "title": "6b96a62cf27b9e4845c09a46f4d12d75",
+        "content": "d00964d609ad1db110e3289aec93aa75"
+      },
+      "needHelp": {
+        "title": "14221b2ce674afde7f85cfb60662a5b7",
+        "content": "b834fcc317c613542aa4f21c0accda8e"
+      },
+      "needMoreHelp": {
+        "title": "21019d5221b8a27734792493c892bbe2",
+        "content": "2ce45ff8371ac151f115e42e76c70a78"
+      }
+    }
   }
 }

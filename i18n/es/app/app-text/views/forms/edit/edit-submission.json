@@ -18,5 +18,32 @@
   "relevantInformationInfo": "Por favor, utilice este campo para proporcionar cualquier otra información pertinente que no se haya podido incluir en otro lugar del registro.",
   "notes": "Notas",
   "notesInfos": "El campo ”Notas” es para uso personal. Solo puede verse cuando se edita el registro, pero no permanece visible cuando se lo publica. Este campo no está destinado a ser usado para información confidencial.",
-  "selectOne": "Por favor, seleccione una de las siguientes opciones:"
+  "selectOne": "Por favor, seleccione una de las siguientes opciones:",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.758Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "jurisdiction": "09d7af8102720ef08435e605640675fb",
+      "selectOption": "61f250d4a9d8c24ee92aaaf174ef11b1",
+      "or": "1d00e7dce692e8dc3f6877f035e3a616",
+      "submissionInformation": "014775b71e16f2d9ff4a879b9b7796de",
+      "titleSubmission": "3a4e07c57fefe5f7e038b7e43f743d4d",
+      "organization": "a7c82b23c912089916ea06a96a7c90aa",
+      "helpTitle": "e551a94e38a9d80f68f0184cead6332b",
+      "dateSubmission": "f067c6ab98b204e2e48836e7082d03b7",
+      "notifications": "9b223fd4f17a81be90f8ae4510319da4",
+      "records": "fc8124528e05438806b21fe01fb0cab0",
+      "thematicAreas": "b5b4fe9749eeb44445cbb4a27f24fe80",
+      "documents": "f28128b38efbc6134dc40751ee21fd29",
+      "otherRelevantInformation": "d53a40e7430a9a1e5e2c5310d504dd23",
+      "relevantInformationInfo": "4359b18f52b3bfbe91c593915b228136",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notesInfos": "541a7902324e210814bb138107bf897f",
+      "selectOne": "c651c3a98c6aff44cb9a2c9c1a5d5b06"
+    }
+  }
 }

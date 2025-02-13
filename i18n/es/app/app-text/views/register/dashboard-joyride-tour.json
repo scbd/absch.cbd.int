@@ -38,5 +38,52 @@
   "needMoreHelp": {
     "title": "¿Necesita más ayuda?",
     "content": "<p>Use la función de Chat para enviarnos un mensaje si necesita más ayuda.</p>"
+  },
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.881Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "welcome": {
+        "title": "4960270312fe93f8f70a281c0487e3e9",
+        "content": "89db0c88ac18123ccc240db3b17a99f8"
+      },
+      "personalInformation": {
+        "title": "6335a00a08fde0fbb8f6d6630cdadd92",
+        "content": "f333d8824de3be430ab9cbe28d813785"
+      },
+      "recordOverview": {
+        "title": "4456c418cb94aa7a9dd3caf3365c3458",
+        "content": "18dd3faf56feadbd306f79489ad7d01d"
+      },
+      "yourRecordsStatus": {
+        "title": "799e70e3afbd62ef3c1b011b70d25e8e",
+        "content": "ee0914216cdfe6e837518f3842f59048"
+      },
+      "yourRecordsOffline": {
+        "title": "a052a0ecd7109454b473b360e20763b7",
+        "content": "de332662b7e8d18d166980897b3dcc9e"
+      },
+      "quickView": {
+        "title": "c91e4ee170226d66e90f99ba917e4c20",
+        "content": "04e0407198ff52c9d26f315525c48478"
+      },
+      "addNewRecord": {
+        "title": "d9b718cad121430960a45708020bd80a",
+        "content": "c10f39427968447c22651af72a1cd732"
+      },
+      "viewAllRecords": {
+        "title": "f3165b9437c6f212c093fe9ab641752a",
+        "content": "d6e28e3215da79f1f08aed32120daf89"
+      },
+      "needHelp": {
+        "title": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+        "content": "07c4dffadead8425dd86d463d50e0086"
+      },
+      "needMoreHelp": {
+        "title": "21019d5221b8a27734792493c892bbe2",
+        "content": "6edaa4629440bf7eab61e6f4fe316b60"
+      }
+    }
   }
 }

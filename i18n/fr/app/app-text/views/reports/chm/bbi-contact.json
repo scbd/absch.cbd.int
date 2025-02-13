@@ -1,0 +1,27 @@
+{
+  "name": "Nom",
+  "jobTitle": "Titre du poste",
+  "department": "Section / division / unité",
+  "contactInformation": "Coordonnées",
+  "phoneNumbers": "Numéros de téléphone",
+  "faxNumbers": "Numéros de télécopieurs",
+  "emails": "Courriels",
+  "websites": "Liens vers les sites Web et médias sociaux",
+  "organization": "Organisation",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.023Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "name": "49ee3087348e8d44e1feda1917443987",
+      "jobTitle": "f4a73825484d63d2d63282d17cafebdc",
+      "department": "085d11b6c98d0e56a78a8fc697810009",
+      "contactInformation": "5e3d6d040d8a81befd75127d526646bc",
+      "phoneNumbers": "054c93063db5b62b23b48ef801f27aa0",
+      "faxNumbers": "40037296febe1f0f59cf22a2b115efe4",
+      "emails": "9790b70b0772c3b35108155cf340f315",
+      "websites": "d343c2468cb2aa7c684e318ac272b216",
+      "organization": "d6b258792ff06f82933c74eeb8aef591"
+    }
+  }
+}

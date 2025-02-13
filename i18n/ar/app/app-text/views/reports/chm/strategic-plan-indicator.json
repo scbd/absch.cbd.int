@@ -1,0 +1,25 @@
+{
+  "title": "العنوان",
+  "aichiTarget": "أهداف أيتشي للتنوع البيولوجي",
+  "availability": "إتاحة المؤشر",
+  "isEasyToCommunicate": "هل من السهل توصيله؟",
+  "isFromGlobalToNational": "هل يتم تفصيل المؤشر العالمي لإنشاء مؤشر وطني أم يتم تجميعه من البيانات الوطنية؟",
+  "isFromNationalToGlobal": "هل يتم تجميع البيانات الوطنية لتكوين المؤشر العالمي؟",
+  "usedInGBbo3Gbo4": "هل يُستخدم في الإصدار الثالث أو الرابع من تقرير التوقعات العالمية للتنوع البيولوجي؟",
+  "Source": "المصدر",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.1Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "title": "b78a3223503896721cca1303f776159b",
+      "aichiTarget": "64e80a2eb15aef38260bf360be569e98",
+      "availability": "ea3855b8b72fa814a731d1f408159a9f",
+      "isEasyToCommunicate": "3b38b98261f05775f5937ef6e2a80382",
+      "isFromGlobalToNational": "09bf88aaa7353b78f3ee9a05719f3af9",
+      "isFromNationalToGlobal": "1702faf92ddbbe55e1dd0edf66599b53",
+      "usedInGBbo3Gbo4": "82b037d60c5fd27be4e13346a3bfea31",
+      "Source": "f31bbdd1b3e85bccd652680e16935819"
+    }
+  }
+}

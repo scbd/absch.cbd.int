@@ -1,5 +1,15 @@
 {
-  "recentlyPublished": "",
-  "seeMore": "",
-  "loading": ""
+  "recentlyPublished": "近期发布",
+  "seeMore": "查看更多",
+  "loading": "正在加载",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.388Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "recentlyPublished": "1e3067004b2ded1727bfa69bc13059c6",
+      "seeMore": "891ad007e2e9f2d55be6669cd9abc7a0",
+      "loading": "16bfbf9c462762cf1cba4134ec53c504"
+    }
+  }
 }

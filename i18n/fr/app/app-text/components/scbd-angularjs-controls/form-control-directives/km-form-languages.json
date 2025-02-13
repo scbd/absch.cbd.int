@@ -1,3 +1,11 @@
 {
-  "error": "Veuillez sélectionner au moins une des langues des Nations Unies pour continuer."
+  "error": "Veuillez sélectionner au moins une des langues des Nations Unies pour continuer.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.399Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "error": "d3010fb3adc484cc78efbba466e452ef"
+    }
+  }
 }

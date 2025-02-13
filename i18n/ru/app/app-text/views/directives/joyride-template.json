@@ -2,5 +2,16 @@
   "close": "Закрыть",
   "prev": "Пред.",
   "finish": "Готово",
-  "next": "Следующая"
+  "next": "Следующая",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.562Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "close": "d3d2e617335f08df83599665eef8a418",
+      "prev": "14230d11143a03f4330c6433d5032a9d",
+      "finish": "a20ddccbb6f808ec42cd66323e6c6061",
+      "next": "10ac3d04253ef7e1ddc73e6091c0cd55"
+    }
+  }
 }

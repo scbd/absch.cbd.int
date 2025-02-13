@@ -11,7 +11,7 @@
   "loading": "قيد التحميل ...",
   "isAuthenticated": "ليس لديك أي عمليات بحث/تنبيهات محفوظة.",
   "isNotAuthenticated": "يرجى تسجيل الدخول لعرض التنبيهات المحفوظة.",
-  "searchFilter": "إنشاء أو تعديل فلتر محفوظ لنتائج البحث",
+  "searchFilter": "إنشاء أو تعديل فلتر تصفية محفوظ لنتائج البحث",
   "filterTitle": "عنوان لاستعلام البحث المحفوظ",
   "selectFilters": "تحديد فلاتر البحث:",
   "sendEmail": "أرسل لي رسالة بالبريد الإلكتروني عند إضافة سجلات مرتبطة بهذا البحث أو تحديثها.",
@@ -20,5 +20,34 @@
   "searchTitle": "عنوان استعلام البحث",
   "frequencyHeader": "معدل إرسال إخطارات البريد الإلكتروني",
   "frequencyDescription": "حدد معدل إرسال تنبيهات البريد الإلكتروني التي ترغب في استقبالها من غرفة تبادل معلومات السلامة الأحيائية",
-  "frequencyDropdown": "تحديد معدل الإرسال"
+  "frequencyDropdown": "تحديد معدل الإرسال",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.98Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "myAlertsHeading": "b77fe6c31775b9ef712ce9488111d60a",
+      "systemAlertHeading": "c955d7baf4db8d505244714b539de955",
+      "systemOverviewFilterTitle": "12b6fd056d85937543b43872e3a97136",
+      "systemOverviewQueryName": "0a8816d16871df93070d151ee0df32fc",
+      "emailMe": "52418f8e130617a2927e357f840ff94a",
+      "search": "13348442cc6a27032d2b4aa28b75a5d3",
+      "edit": "7dce122004969d56ae2e0245cb754d35",
+      "delete": "f2a6c498fb90ee345d997f888fce3b18",
+      "addNew": "ef61fb324d729c341ea8ab9901e23566",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "isAuthenticated": "d608db57fd18ee10f285c89e34be5087",
+      "isNotAuthenticated": "c8f74f55a898d27c6dd90605c9813fad",
+      "searchFilter": "5955089200f8ef13193e6b974ec65743",
+      "filterTitle": "8c2aa914fc4facfefe8e8aac6d254cc4",
+      "selectFilters": "c314de335e41d6dc3cb95f48f9a88220",
+      "sendEmail": "039ee065870fa1655e80c508015f0276",
+      "cancel": "ea4788705e6873b424c65e91c2846b19",
+      "save": "c9cc8cce247e49bae79f15173ce97354",
+      "searchTitle": "56f4f381440d5f70e90d58ef1d709317",
+      "frequencyHeader": "7c5c04f0972c81d80ed25bfdcb3462d4",
+      "frequencyDescription": "095060c5cf6af4439c84f5ef5a5854f5",
+      "frequencyDropdown": "8c7cfecdf2a928eee3514e8d2e9a62d6"
+    }
+  }
 }

@@ -1,14 +1,33 @@
 {
-  "partyToNagoyaProtocol": "",
-  "notPartyToNagoyaProtocol": "",
-  "ratifiedNotYetParty": "Ayant ratifié, mais n’étant pas encore Partie au Protocole",
+  "partyToNagoyaProtocol": "Partie au Protocole Nagoya",
+  "notPartyToNagoyaProtocol": "N’est pas partie au Protocole de Nagoya",
+  "ratifiedNotYetParty": "Ayant ratifié, mais n’étant pas encore Partie",
   "dkText": "La ratification par le Danemark du Protocole de ne s’applique pas au Groenland et aux îles Féroé.",
   "fkText": "Un différend existe entre les gouvernements de l'Argentine et du Royaume-Uni de Grande-Bretagne et d'Irlande du Nord concernant la souveraineté sur les îles Falkland (Malvinas).",
   "ehText": "Territoire non autonome",
-  "gbText": "",
-  "gbTitle14": "Anguilla; Les Bermudes; Territoire antarctique britannique; Territoire britannique de l'Océan Indien; Îles Vierges britanniques; Îles Caïmans; Les îles Falkland; Gibraltar; Montserrat; Îles Pitcairn; Sainte-Hélène, Ascension et Tristan da Cunha; Géorgie du Sud et îles Sandwich du Sud; Zones de souveraineté d'Akrotiri et de Dhekelia; îles Turques-et-Caïques",
-  "overseasTerritories": "",
-  "or": "ou",
-  "gbTitle3": "Bailliage de Jersey, le bailliage de Guernesey et l'île de Man",
-  "crownDependencies": ""
+  "gbText": "La ratification du Protocole de Nagoya par le Royaume-Uni ne s’étend pas aux 13 territoires d’outre-mer :",
+  "gbTitle14": "Anguilla, Les Bermudes, Territoire antarctique britannique, Territoire britannique de l'Océan Indien, Îles Vierges britanniques, Îles Caïmans, Les îles Falkland, Gibraltar, Montserrat, Îles Pitcairn, Sainte-Hélène, Ascension et Tristan da Cunha, Géorgie du Sud et îles Sandwich du Sud, Zones de souveraineté d'Akrotiri et de Dhekelia, îles Turques-et-Caïques",
+  "overseasTerritories": ",",
+  "or": "ni aux 3 dépendances de la Couronne :",
+  "gbTitle3": "le bailliage de Jersey, le bailliage de Guernesey et l'île de Man",
+  "crownDependencies": ".",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.553Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "partyToNagoyaProtocol": "e4b1ae438863536d68b1c98eba15f144",
+      "notPartyToNagoyaProtocol": "629de43a51631eb8316da79668ed1b63",
+      "ratifiedNotYetParty": "7ec144f6a65ca33b42871db347084e5a",
+      "dkText": "8108c8afe249a5fd891f923a87aaa40e",
+      "fkText": "c404f76abbc9da62089f79911735ae01",
+      "ehText": "be274bcf4249530249260d658a78e9a8",
+      "gbText": "adc755740a6a6190456a4351e1181535",
+      "gbTitle14": "0e03d539da8bfa8721e0af8bd6c1564d",
+      "overseasTerritories": "1496768a086724ae52b9897659d3440f",
+      "or": "e81c4e4f2b7b93b481e13a8553c2ae1b",
+      "gbTitle3": "a66225b58e60dd964b843efe519b8183",
+      "crownDependencies": "0451b0687bece557742a519c40274359"
+    }
+  }
 }

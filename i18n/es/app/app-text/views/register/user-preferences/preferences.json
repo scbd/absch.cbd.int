@@ -1,3 +1,11 @@
 {
-  "alertsTab": "Alertas de correos electrónicos"
+  "alertsTab": "Alertas de correos electrónicos",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.978Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "alertsTab": "d6e74a08a9a2c720429944cbd0a80f6c"
+    }
+  }
 }

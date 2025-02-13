@@ -1,0 +1,37 @@
+{
+  "country": "البلد",
+  "description": "وصف أداة الدعم",
+  "status": "الحالة",
+  "level": "مستوى التنفيذ",
+  "additionalDetails": "يُرجى تقديم تفاصيل إضافية عن مستوى التنفيذ المحدد",
+  "nationalTargets": "رابط للأهداف الوطنية ذات الصلة",
+  "aichiTargets": "رابط لأغلب أهداف أيتشي ذات الصلة",
+  "otherAichiTargets": "رابط لأهداف أيتشي الأخرى ذات الصلة",
+  "cbdThematicAreas": "رابط لمحاور وموضوعات اتفاقية التنوع البيولوجي",
+  "cbdSupportTools": "رابط لأدوات دعم اتفاقية التنوع البيولوجي",
+  "documents": "الوثائق الرئيسية ذات الصلة",
+  "websites": "مواد رئيسية ذات صلة كعنوان لموقع إلكتروني أو وثائق مرفقة",
+  "additionalInformation": "معلومات إضافية",
+  "otherRelevantWebsite": "مواد أخرى ذات صلة كعنوان لموقع إلكتروني أو وثائق مرفقة",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.088Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "description": "02b765874ccca5e72403c553ed6ed75f",
+      "status": "ec53a8c4f07baed5d8825072c89799be",
+      "level": "9970a53266fcb0bcb30803f431e62f88",
+      "additionalDetails": "74e5cc25112390eba198e9cff52129ed",
+      "nationalTargets": "8d49964495906f7c633693d8ef5fcff2",
+      "aichiTargets": "c757eb9cd3ae36b4c0267de5c9e6f975",
+      "otherAichiTargets": "5e577fdc26b16d2b6b27138b7f0bc637",
+      "cbdThematicAreas": "20550a86f523d285c6a1cc026ab21dc6",
+      "cbdSupportTools": "9d1e58f2731af4e3da8a59a9d177272b",
+      "documents": "0a40302ccc732954b71322b72a10ea32",
+      "websites": "d33541b234831c937d45345729f66e65",
+      "additionalInformation": "0f68b904e33d9ac04605aecc958bcf52",
+      "otherRelevantWebsite": "1037e75c08408348261a22aa2eec2a59"
+    }
+  }
+}

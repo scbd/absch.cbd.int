@@ -1,0 +1,43 @@
+{
+  "registries": "登记簿",
+  "geneticElementRegistry": "基因片段登记簿",
+  "labTitle": "实验室（LAB）登记簿",
+  "lmoTitle": "改性活生物体登记薄",
+  "organismRegistry": "生物体登记薄",
+  "labRegistry": "实验室登记薄",
+  "labInfo": "实验室登记簿（LAB Registry）汇总了所有在生物安全信息交换所（BCH）登记且参与了改性活生物体检测和识别的实验室的信息。有关改性活生物体取样、检测和识别的更多信息，请参阅<a class='text-decoration-underline' rel='noopener' translation-url target='_blank' href='https://bch.cbd.int/en/portals/detection'>专用门户网站</a>。",
+  "clickHere": "单击<a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=laboratoryDetection'>这里</a>，以对此登记簿中可用的所有实验室记录进行深入搜索。",
+  "loading": "正在加载...",
+  "error": "载入登记簿记录时出错，请重试。",
+  "totalRecords": "总记录数量：",
+  "export": "导出",
+  "click": "单击",
+  "recordID": "记录 ID",
+  "laboratoryName": "实验室名称",
+  "servicesAndActivities": "所开展的服务和活动",
+  "typesOfDetection": "可供实验室使用之探测/查明方法的类型",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.005Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "registries": "c7dd09cfcb7f6cadacf870c4cb6a9ae5",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "labTitle": "93ab5c00a83b012f0d454c849826b6c8",
+      "lmoTitle": "5529599d2157303129ae7e2a96215c73",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "labRegistry": "4099e15a8e9456cd759f605dc491c26f",
+      "labInfo": "3c7edbc9aeea65851b45dfc47e1aa56e",
+      "clickHere": "e064cae79c7fd476d8899100bd690364",
+      "loading": "8524de963f07201e5c086830d370797f",
+      "error": "6d8272f491e2dd46fc83518aa0e1d186",
+      "totalRecords": "bdce1a99aaf929539a09d564a830f4ad",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "click": "316853cc3718335f11c048e33b9be98a",
+      "recordID": "5bcbee8ee48fbbebb61b02d453ad5d72",
+      "laboratoryName": "24b9ffb1c9b11bd6bf6bfa3aaaa728f1",
+      "servicesAndActivities": "a3c64dcae988db696990892f991e3bfe",
+      "typesOfDetection": "3081813de8a09ae44473a4140e91960e"
+    }
+  }
+}

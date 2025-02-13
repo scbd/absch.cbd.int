@@ -1,14 +1,33 @@
 {
   "generalInfo": "معلومات عامة",
   "languageToPublish": "يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:",
-  "country": "",
+  "country": "البلد",
   "selectOption": "يُرجى تحديد البلد...",
   "additionalInformation": "معلومات إضافية للنشر في صفحة معلومات البلد",
   "relevantInformationInfo": "يرجى استخدام هذه الخانة لإضافة أي معلومات أخرى مرتبطة بالبلد ستظهر ضمن صفحة معلومات البلد.",
   "notes": "الملاحظات",
-  "notesInfo": "خانة \"الملاحظات\" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ",
+  "notesInfo": "خانة \"الملاحظات\" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. فلا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية أو حفظها.",
   "countryProfile": "معلومات البلد في غرفة تبادل معلومات السلامة الأحيائية",
   "countryProfileInfo": "يُسمح بسجل واحد فقط لكل حكومة في صفحة معلومات البلد في غرفة تبادل معلومات السلامة الأحيائية. معلومات البلد لحكومتك مسجلة بالفعل في غرفة تبادل معلومات السلامة الأحيائية. سيتم توجيهك الآن إلى هذا السجل في غضون",
   "seconds": "ثانية",
-  "redirectNow": "إعادة التوجيه الآن"
+  "redirectNow": "إعادة التوجيه الآن",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.666Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
+      "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "selectOption": "61f250d4a9d8c24ee92aaaf174ef11b1",
+      "additionalInformation": "517d785b9c5d3a76ff17a6cf89b55676",
+      "relevantInformationInfo": "a25ecc1ae1ea3d12e8dd18200c44f251",
+      "notes": "f4c6f851b00d5518bf888815de279aba",
+      "notesInfo": "f2563113602fac78e819342c05316863",
+      "countryProfile": "67c06a6a679473305674384f12154ebe",
+      "countryProfileInfo": "e2267e9aeb55af0ebb39c749cfcb9fa8",
+      "seconds": "d90d8347e139d0cfc3fad11757b651ff",
+      "redirectNow": "036dce881e1aac61d65dfd345fa4cd79"
+    }
+  }
 }

@@ -27,5 +27,41 @@
   "expiresOn": "到期日期：",
   "by": "人员：",
   "processing": "正在处理...",
-  "no": "否"
+  "no": "否",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.96Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "requests": "b134a801a1a3888498968fc4ea760cf7",
+      "error": "3d9f514d46849760ef1b1412e314fd99",
+      "pendingApproval": "017e8b29849843b6daa2501aad99f7c1",
+      "approved": "6f8063417ab31f38d864c28302f3de2f",
+      "approvedUpper": "21e5b3f076cbce27a9926a00c82a6c55",
+      "rejected": "d37b1f6c0512e2118cee17fea015b699",
+      "rejectedUpper": "9cc8ad3d99798c6726d4af0bd14e49d2",
+      "canceled": "0e22fe7d45f8e5632a4abf369b24e29c",
+      "canceledUpper": "9f935beb31030ad0d4d26126c0f39bf2",
+      "expired": "24fe48030f7d3097d5882535b04c3fa8",
+      "expiredUpper": "38afd7ae34bd5e3e6fc170d8b09178a3",
+      "all": "5fb1f955b45e38e31789286a1790398d",
+      "recordType": "af7f7ca9a0f0bd801f9f8a91425b4152",
+      "requestsFound": "8b27f1117fc608809b260d7a61f384b8",
+      "loading...": "13d494fd35f9f5b14309b84466cbddf2",
+      "title": "b78a3223503896721cca1303f776159b",
+      "type": "a1fa27779242b4902f7ae3bdd5c6d508",
+      "requested": "fcdf8a82eba24e303b63b2e49a507ecb",
+      "status": "ec53a8c4f07baed5d8825072c89799be",
+      "publish": "155fe93b6325d234ef591bc6a7915a32",
+      "delete": "32f68a60cef40faedbc6af20298c1a1e",
+      "scbdReview": "9d9b24c888c49ed07b323bdd45ede9f2",
+      "pending": "c69f06e1a9b016d133907b4e5f5864d2",
+      "your": "bf5c1d5c27ebae23954367aff15bf344",
+      "approval": "c2357fb0309253f04249c081ca736bd6",
+      "expiresOn": "b08d59db90e5d7db15560f50372690b6",
+      "by": "df3f079de6961496f0460dcfdbf9bca3",
+      "processing": "21d104a54fc71a19a325c7305327f1d2",
+      "no": "bafd7322c6e97d25b6299b5d6fe8920b"
+    }
+  }
 }

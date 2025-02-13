@@ -1,5 +1,15 @@
 {
   "recentlyPublished": "Publicado recientemente",
   "seeMore": "Más información",
-  "loading": "Cargando..."
+  "loading": "Cargando",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.356Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "recentlyPublished": "1e3067004b2ded1727bfa69bc13059c6",
+      "seeMore": "891ad007e2e9f2d55be6669cd9abc7a0",
+      "loading": "16bfbf9c462762cf1cba4134ec53c504"
+    }
+  }
 }

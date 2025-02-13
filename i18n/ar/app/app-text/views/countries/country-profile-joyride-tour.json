@@ -1,6 +1,6 @@
 {
   "countryProfiles": {
-    "title": "",
+    "title": "معلومات البلدان",
     "content": "من خلال القائمة المنسدلة \"معلومات البلدان\" المُتاحة في شريط التنقل العلوي تستطيع تحديد البلد المُراد عرض صفحة معلوماته. <br><br> وتستطيع أيضًا إلقاء نظرة عامة على السجلات الوطنية لجميع البلدان. لنستكشف معًا \"نبذة عامة - عرض كل البلدان\"."
   },
   "listOfRecords": {
@@ -24,8 +24,8 @@
     "content": "اضغط هنا للفلترة حسب حالة العضوية."
   },
   "sortingRecordsRegions": {
-    "title": "ترتيب السجلات: المناطق",
-    "content": " يمكنك تحديد عدة أقاليم أو عدة أقاليم فرعية. <br><br><u>معلومة:</u> للبحث حسب المجموعات الإقليمية الخمس للأمم المتحدة، اكتب \"CBD\" في مربع البحث ثم حدد المنطقة أو المناطق المطلوبة."
+    "title": "ترتيب السجلات: الأقاليم",
+    "content": "اضغط هنا للفلترة حسب الإقليم أو المنطقة. يمكنك تحديد عدة أقاليم أو عدة أقاليم فرعية. <br><br><u>معلومة:</u> للبحث حسب المجموعات الإقليمية الخمس للأمم المتحدة، اكتب \"CBD\" في مربع البحث ثم حدد المنطقة أو المناطق المطلوبة."
   },
   "exportingRecords": {
     "title": "تصدير السجلات",
@@ -37,6 +37,53 @@
   },
   "needMoreHelp": {
     "title": "هل تحتاج لمساعدة أخرى؟",
-    "content": ""
+    "content": "استخدم خاصية المحادثة لمراسلتنا لطلب أي دعم إضافي."
+  },
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.547Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "countryProfiles": {
+        "title": "5a4d9fc55baf2bb0539773744fa36fa7",
+        "content": "0e008c43b534d6fc9d26be8b2d87e8b2"
+      },
+      "listOfRecords": {
+        "title": "651e0755f8eee522d6d5377306c1d6de",
+        "content": "d5cbb377ca55df75257383c2c3bd4df9"
+      },
+      "sortingRecords": {
+        "title": "12687c35209124978e064c9d775e5e4e",
+        "content": "2584a7f94a3a63176bcabec7be648ec2"
+      },
+      "sortingRecordsNFP": {
+        "title": "12687c35209124978e064c9d775e5e4e",
+        "content": "8763f91b969e0148ab0033c0fbf365f8"
+      },
+      "sortingRecordsCountries": {
+        "title": "7fc024dedb24a5756fc318a656eb1c82",
+        "content": "c3d1188898200963c4058655eb1ab756"
+      },
+      "sortingRecordsPartyStatus": {
+        "title": "a97c4b1876a592c8c679d572548faa74",
+        "content": "582ce55c08c21ce974f0ec0c37561778"
+      },
+      "sortingRecordsRegions": {
+        "title": "3d1e53e1aa5c64b88196f2c38c5213e0",
+        "content": "a28f8afff6e4e260ee9e8b6205dd0f8e"
+      },
+      "exportingRecords": {
+        "title": "bdebfeb1d8179275df23b2b4dfb91291",
+        "content": "2b3801ac971e52c1b36d0010c1185676"
+      },
+      "needHelp": {
+        "title": "14221b2ce674afde7f85cfb60662a5b7",
+        "content": "0fc851b30fdf81f0d27ddd2c684c6395"
+      },
+      "needMoreHelp": {
+        "title": "21019d5221b8a27734792493c892bbe2",
+        "content": "2ce45ff8371ac151f115e42e76c70a78"
+      }
+    }
   }
 }

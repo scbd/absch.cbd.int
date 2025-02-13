@@ -1,5 +1,15 @@
 {
   "referenceRecords": "Registros de referencia",
   "absPublication": "Los registros de referencia comprenden varios recursos e información relacionados con el acceso y la participación en los beneficios y puede ser presentados por cualquier usuario registrado; con antelación a su publicación deben ser validados por la Secretaría.",
-  "bchPublication": "Los registros de referencia comprenden varios recursos e información relacionados con la seguridad de la biotecnología y pueden ser presentados por cualquier usuario registrado; con antelación a su publicación deben ser validados por la Secretaría."
+  "bchPublication": "Los registros de referencia comprenden varios recursos e información relacionados con la seguridad de la biotecnología y pueden ser presentados por cualquier usuario registrado; con antelación a su publicación deben ser validados por la Secretaría.",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.161Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "referenceRecords": "4d3729c30f626ddba3742bb182ea133d",
+      "absPublication": "2ec320ea9dbf12ebde82659c01c3a8cc",
+      "bchPublication": "e617dca3a26bcdd63b948f5b0140b32a"
+    }
+  }
 }

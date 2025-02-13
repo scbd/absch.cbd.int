@@ -1,7 +1,19 @@
 {
   "searchLMO": "Recherche d’OVM",
-  "searchLMOs": "",
+  "searchLMOs": "Recherche d’OVM",
   "lmoInformation": "Informations sur les OVM",
   "decisions": "Décisions sur l’OVM",
-  "riskAssessments": "Évaluations des risques"
+  "riskAssessments": "Évaluations des risques",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.997Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "searchLMO": "bfc7ef1b502dab2154fe0b4539724693",
+      "searchLMOs": "8d1b6815957069ae7d81f301370abc4c",
+      "lmoInformation": "f385fd9aa32654acc28fb85f27eccfe0",
+      "decisions": "cea293511394412064e6076322a59eaa",
+      "riskAssessments": "0f9d603fa33e625837dd8c9014241d07"
+    }
+  }
 }

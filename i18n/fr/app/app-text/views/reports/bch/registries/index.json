@@ -1,11 +1,31 @@
 {
   "lmoTitle": "Registre des Organismes Vivants Modifiés (OVM)",
-  "lmoInfo": "",
-  "uniqueCode": "",
-  "lmoLink": " Liens vers toutes les décisions et évaluations des risques qui font allusion à ces organismes est possible à travers le registre.",
+  "lmoInfo": "Le registre des OVM fournit des informations sommaires sur tous les organismes vivants modifiés (OVM) enregistrés au CEPRB, y compris les événements de transformation, les modifications génétiques et le",
+  "uniqueCode": "code d’identification unique",
+  "lmoLink": "(si disponible) pour chaque dossier. Liens vers toutes les décisions et évaluations des risques qui font allusion à ces organismes est possible à travers le registre.",
   "viewRegistry": "Voir le registre",
   "organismRegistry": "Registre des organismes",
   "organismInfo": "Le registre des organismes comprend les organismes qui ont été enregistrés au CEPRB comme des organismes parents, récepteurs ou donneurs. Chaque registre fournit des liens vers des fichiers sur chaque organisme et des informations sur les caractéristiques biologiques, notamment sur la classification taxonomique, le nom commun, l’origine, le centre d’origine et le centre de diversité génétique. Des liens vers les fichiers pertinents en référence à l’organisme sont fournis dans la partie inférieure de chaque enregistrement individuel.",
   "geneticElementRegistry": "Registre d'éléments génétiques",
-  "geneInfo": "Le registre des éléments génétiques fournit un résumé des informations sur les éléments génétiques associés aux OVM enregistrés dans le CEPRB, y compris des informations sur l'organisme donneur, les traits conférés et la fonction biologique. Le registre comprend des liens vers les enregistrements sur chaque élément génétique où plus de détails peuvent être trouvés. Les OVM contenant l'élément génétique particulier sont référencés au bas du fichier individuelle."
+  "geneInfo": "Le registre des éléments génétiques fournit un résumé des informations sur les éléments génétiques associés aux OVM enregistrés dans le CEPRB, y compris des informations sur l'organisme donneur, les traits conférés et la fonction biologique. Le registre comprend des liens vers les enregistrements sur chaque élément génétique où plus de détails peuvent être trouvés. Les OVM contenant l'élément génétique particulier sont référencés au bas du fichier individuelle.",
+  "laboratoryRegistry": "Registre des laboratoires (LAB)",
+  "labInfo": "Le registre LAB fournit un résumé des informations sur tous les laboratoires enregistrés au CEPRB qui sont impliqués dans la détection et l’identification d’organismes vivants modifiés (OVM).",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.001Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "lmoTitle": "9d9de25abe0a91ed6af99f90736f0cad",
+      "lmoInfo": "6515b74e052af34560f64df5fdf471c5",
+      "uniqueCode": "c98ddce4dd1b492eba7a68713c95a622",
+      "lmoLink": "00a2eea39670ee6eb7a3f5c3ccf6e027",
+      "viewRegistry": "6786875c8505b88d24ca2ac07c310561",
+      "organismRegistry": "269f4782b00bdc09c8fb8c503e60f0be",
+      "organismInfo": "9a15649ce50e735c4f11eb713fd8d753",
+      "geneticElementRegistry": "0c9515c24455b0e71d4c635552c459e3",
+      "geneInfo": "381f477d21ef30063ce6433141c76fc7",
+      "laboratoryRegistry": "93ab5c00a83b012f0d454c849826b6c8",
+      "labInfo": "9eb4b3e1cfbb4bedb2345862f057f203"
+    }
+  }
 }

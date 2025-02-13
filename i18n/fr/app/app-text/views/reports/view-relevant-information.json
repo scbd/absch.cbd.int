@@ -1,0 +1,13 @@
+{
+  "additionalInformation": "Information supplémentaire",
+  "otherWebsiteOrDocument": "Autres sites Web pertinents ou documents en pièce jointe",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.133Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "additionalInformation": "0f68b904e33d9ac04605aecc958bcf52",
+      "otherWebsiteOrDocument": "1037e75c08408348261a22aa2eec2a59"
+    }
+  }
+}

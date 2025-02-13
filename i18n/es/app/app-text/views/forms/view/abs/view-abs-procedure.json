@@ -2,7 +2,7 @@
   "generalInfo": "Información general",
   "country": "País",
   "description": "Descripción del procedimiento en materia de APB",
-  "title": "Título",
+  "title": "Denominación",
   "jurisdiction": "Zona de jurisdicción",
   "contactsLinks": "Lugar para realizar las presentaciones para el acceso",
   "requirements": "Condiciones o requisitos que necesita cumplir un usuario potencial para solicitar el acceso",
@@ -17,5 +17,31 @@
   "relevantMeasures": "Medida(s) pertinentes en materia de APB",
   "keywords": "Palabras clave",
   "addInfo": "Información adicional",
-  "relevantDocuments": "Otros enlaces o documentos adjuntos pertinentes"
+  "relevantDocuments": "Otros enlaces o documentos adjuntos pertinentes",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.774Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "generalInfo": "997c785cce775d7c1014ffbd6e446d50",
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "description": "88175e1223ef3f58eca6e1e209ab68b3",
+      "title": "b78a3223503896721cca1303f776159b",
+      "jurisdiction": "6c02962ede3e2f446b2bd47131f947c5",
+      "contactsLinks": "6fd204c1247d555fa1e61f09c21bf9f0",
+      "requirements": "caf1b6f5d19fb497aa8d0716e5540307",
+      "descriptionLinks": "0d795ace4d66c6f4efbe131da3d26e00",
+      "hasApplicationDocuments": "6e531150eb65415c956ffca73598d415",
+      "applicationInformation": "87328e4fab51a1e7321628f0dbba1aea",
+      "applicationLinks": "413d8e595a6b29d698b832143a8b1e7a",
+      "applicationContacts": "3f909011e21ecdc6bb07e4200059204c",
+      "hasApplicationFees": "58ab84556e4a530ff83a5078cd4f3cfc",
+      "applicationFeesInformation": "9b475de8e07ebe7e6e42dea8f853f38c",
+      "duration": "01ffdda4e4019a4dcb3df2cbb5ae59d5",
+      "relevantMeasures": "7ba19bfeafdaeb05bf150580a7212223",
+      "keywords": "867343577fa1f33caa632a19543bd252",
+      "addInfo": "092bf78f9c97ba171b8232ddff585392",
+      "relevantDocuments": "42031cf50c2182c8525cce27eb11ec0e"
+    }
+  }
 }

@@ -7,5 +7,21 @@
   "changesInQualityContent": "التغييرات في الجودة والمحتوى الأيضي",
   "productionOfMedical": "إنتاج المركبات الطبية أو العقاقير (للبشر أو الحيوانات)",
   "useInIndustrialApplications": "الاستخدام في التطبيقات الصناعية",
-  "engineeredApplication": "تطبيق محرك الجينات المُصمَّم هندسيًا"
+  "engineeredApplication": "تطبيق محرك الجينات المُصمَّم هندسيًا",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.593Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "resistanceDiseasesAndPests": "6b61d2a217c36cded4e01999ba647950",
+      "resistanceToHerbicides": "03513b4da5afca923cbb79dfc7214193",
+      "resistanceToAtibiotics": "26548089d9276375c0a20b94767b0b62",
+      "toleranceToAbioticStress": "adae0e6f082c31f02d5acc53fa0219f7",
+      "changesInPhysiology": "4dfc37af7f892b0c415858fbfca29b3e",
+      "changesInQualityContent": "d726ced86788a93edaeb7fea8bdf1ea0",
+      "productionOfMedical": "ebd3c8e33db2253484c0531f10959677",
+      "useInIndustrialApplications": "607829d334c555c35ffaa5ea94476ecf",
+      "engineeredApplication": "ea1672e3004da9c228498f2809a44325"
+    }
+  }
 }

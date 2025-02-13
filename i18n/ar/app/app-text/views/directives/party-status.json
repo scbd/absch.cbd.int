@@ -6,7 +6,24 @@
   "cartagenaProtocol": "بروتوكول قرطاجنة للسلامة الأحيائية",
   "ratified": "صدقت على البروتوكول لكنها ليست طرفًا بعد",
   "signatory": "الطرف المُوقع",
-  "entersIntoForce": "",
+  "entersIntoForce": "تاريخ بدء السريان:",
   "suppProtocol": "البروتوكول التكميلي",
-  "nagoyaProtocol": "بروتوكول ناغويا"
+  "nagoyaProtocol": "بروتوكول ناغويا",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.565Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "since": "50324905c471f3d4d61f7d3f723f3644",
+      "partyToThe": "77b3897dc55c0b7a8ef0a8b29d70f10a",
+      "nonParty": "f2d080b45ad3573468d78da57e9d64da",
+      "nonPartyToCartagena": "986733bd277415d364b98d2bfc18db21",
+      "cartagenaProtocol": "778a30d7016f64f53deb2d796234af71",
+      "ratified": "7ec144f6a65ca33b42871db347084e5a",
+      "signatory": "d7ffd70901f22840111aa6ba55986698",
+      "entersIntoForce": "a2189ff8a061b0902696b8104a3b73da",
+      "suppProtocol": "d1115e2d84aa42f0fbd343d49c5b813c",
+      "nagoyaProtocol": "a0508082199be9c7ada3a54c065b233c"
+    }
+  }
 }

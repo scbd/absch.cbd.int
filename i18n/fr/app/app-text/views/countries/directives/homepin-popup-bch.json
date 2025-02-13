@@ -1,15 +1,35 @@
 {
-  "partyToCartagenaProtocol": "",
-  "notPartyToCartagenaProtocol": "",
-  "ratifiedNotYetParty": "Ayant ratifié, mais n’étant pas encore Partie au Protocole",
-  "partyToSuppProtocol": "",
-  "dkText": "La ratification par le Danemark du Protocole de Nagoya ne s’applique pas au Groenland et aux îles Féroé.",
+  "partyToCartagenaProtocol": "Partie au Protocole de Cartagena",
+  "notPartyToCartagenaProtocol": "N’est pas partie au Protocole de Cartagena",
+  "ratifiedNotYetParty": "Ayant ratifié, mais n’étant pas encore Partie",
+  "partyToSuppProtocol": "Partie au Protocole Additionnel",
+  "dkText": "La ratification par le Danemark du Protocole de Cartagena ne s’applique pas au Groenland et aux îles Féroé.",
   "fkText": "Un différend existe entre les gouvernements de l'Argentine et du Royaume-Uni de Grande-Bretagne et d'Irlande du Nord concernant la souveraineté sur les îles Falkland (Malvinas).",
   "ehText": "Territoire non autonome",
-  "gbText": "",
-  "gbTitle13": "Anguilla; Les Bermudes; Territoire antarctique britannique; Territoire britannique de l'Océan Indien; Îles Vierges britanniques; Îles Caïmans; Les îles Falkland; Gibraltar; Montserrat; Îles Pitcairn; Sainte-Hélène, Ascension et Tristan da Cunha; Géorgie du Sud et îles Sandwich du Sud; Zones de souveraineté d'Akrotiri et de Dhekelia; îles Turques-et-Caïques",
-  "overseasTerritories": "",
-  "or": "ou",
-  "gbTitle3": "Bailliage de Jersey, le bailliage de Guernesey et l'île de Man",
-  "crownDependencies": ""
+  "gbText": "La ratification du Protocole de Cartagena par le Royaume-Uni ne s’étend pas aux 13 territoires d’outre-mer :",
+  "gbTitle13": "Anguilla, Les Bermudes, Territoire antarctique britannique, Territoire britannique de l'Océan Indien, Îles Vierges britanniques, Îles Caïmans, Les îles Falkland, Gibraltar, Montserrat, Îles Pitcairn, Sainte-Hélène, Ascension et Tristan da Cunha, Géorgie du Sud et îles Sandwich du Sud, Zones de souveraineté d'Akrotiri et de Dhekelia, îles Turques-et-Caïques",
+  "overseasTerritories": ",",
+  "or": "ni aux 3 dépendances de la Couronne :",
+  "gbTitle3": "le bailliage de Jersey, le bailliage de Guernesey et l'île de Man",
+  "crownDependencies": ".",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.555Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "partyToCartagenaProtocol": "f0e6ff18773962060d821eae1725c8ad",
+      "notPartyToCartagenaProtocol": "0ef604ec904fa3b64d4046f3aa6b7133",
+      "ratifiedNotYetParty": "7ec144f6a65ca33b42871db347084e5a",
+      "partyToSuppProtocol": "2d99e4c006b8955010d85a73e25d1d76",
+      "dkText": "830100ff998618fcc63631d7d3d6219f",
+      "fkText": "c404f76abbc9da62089f79911735ae01",
+      "ehText": "be274bcf4249530249260d658a78e9a8",
+      "gbText": "625d5fa9c481513c53c3cf9dc8263308",
+      "gbTitle13": "ef17b9fbe0577f18cd0badd5c946c5cc",
+      "overseasTerritories": "7186c59c5ef7aebec2bf9d646e080112",
+      "or": "e81c4e4f2b7b93b481e13a8553c2ae1b",
+      "gbTitle3": "a66225b58e60dd964b843efe519b8183",
+      "crownDependencies": "0451b0687bece557742a519c40274359"
+    }
+  }
 }

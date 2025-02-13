@@ -445,8 +445,8 @@
   "optional_questions5_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
   "optional_questions6_title": "请说明此等工作人员的数量",
   "optional_questions6_options0_title": "1",
-  "optional_questions6_options1_title": "不到5",
-  "optional_questions6_options2_title": "不到 10 人",
+  "optional_questions6_options1_title": "不到5人",
+  "optional_questions6_options2_title": "不到10",
   "optional_questions6_options3_title": "至少10人",
   "optional_questions7_title": "任何其它相关信息",
   "optional_questions7additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
@@ -457,9 +457,9 @@
   "comments_title": "对报告格式的评论",
   "comments_questions0_title": "请提供您对本报告格式的任何意见和建议",
   "#meta": {
-    "hashedOn": "2024-05-05T18:52:50.167Z",
+    "hashedOn": "2024-11-22T14:18:26.456Z",
     "algorithm": "md5",
-    "branch": "2024.13.3",
+    "branch": "2024.46.0",
     "hashes": {
       "Yes": "93cba07454f06a4a960172bbd6e2a435",
       "No": "bafd7322c6e97d25b6299b5d6fe8920b",

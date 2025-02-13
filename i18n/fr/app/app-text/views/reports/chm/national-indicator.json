@@ -1,0 +1,21 @@
+{
+  "country": "Pays",
+  "description": "Description de l’indicateur national",
+  "strategicPlanIndicators": "Indicateurs pertinents du plan stratégique",
+  "documents": "Documents et autres informations pertinents",
+  "websiteAddress": "Autres sites Web ou documents pertinents",
+  "additionalInformation": "Informations supplémentaires",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.075Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "description": "c76816fa3fc83395826d6275c3717af5",
+      "strategicPlanIndicators": "e9e9df01d24fdac3e13f07b8d7697c88",
+      "documents": "ba69d40b41640302abd11e1cbbba7f86",
+      "websiteAddress": "dbd1a56976bb9613444879c01b887be2",
+      "additionalInformation": "092bf78f9c97ba171b8232ddff585392"
+    }
+  }
+}

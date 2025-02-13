@@ -1,0 +1,19 @@
+{
+  "first": "Primera",
+  "last": "Última",
+  "prev": "Anterior",
+  "next": "Siguiente",
+  "pagination": "Paginación",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.361Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "first": "7fb55ed0b7a30342ba6da306428cae04",
+      "last": "d55b30607c2a9a2616347d6edb789f6b",
+      "prev": "14230d11143a03f4330c6433d5032a9d",
+      "next": "10ac3d04253ef7e1ddc73e6091c0cd55",
+      "pagination": "cbb81506a7fe3ef03f7a89c76c52131a"
+    }
+  }
+}

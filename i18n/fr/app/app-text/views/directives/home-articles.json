@@ -1,3 +1,11 @@
 {
-  "loading": "Chargement en cours..."
+  "loading": "Chargement en cours...",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:26.559Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "loading": "16bfbf9c462762cf1cba4134ec53c504"
+    }
+  }
 }

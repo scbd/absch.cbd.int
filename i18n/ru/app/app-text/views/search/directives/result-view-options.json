@@ -16,5 +16,30 @@
   "groupByField": "Группировать по полям (выберите одно или несколько)",
   "groupBy": "Группировать по",
   "government": "Правительство",
-  "recordType": "Тип записи"
+  "recordType": "Тип записи",
+  "#meta": {
+    "hashedOn": "2024-11-22T14:18:27.141Z",
+    "algorithm": "md5",
+    "branch": "2024.46.0",
+    "hashes": {
+      "defaultView": "b8868db0ffdee75dd6d4c91fae1d533e",
+      "list": "298cb25408234de02baf2085803a464a",
+      "group": "720909a4b948fc9e33633b61960d6b3c",
+      "matrix": "38ef5fe49a654647519ee8c498c49664",
+      "sort": "6b46ae48421828d9973deec5fa9aa0c3",
+      "export": "0095a9fa74d1713e43e370a7d7846224",
+      "sortByField": "27dcffcfbf12e0162d2b0a90f1a38253",
+      "sortBy": "059a1aa256b770eca2d69c096f759ad0",
+      "thenBy": "e87f1a5e2f843d66e637646dc690b51a",
+      "relevance": "3e8ee90e2d281b122323f45e2fcde6dd",
+      "relevanceInfo": "cfad7fc76e53d96c0c8bfa533b308319",
+      "relevanceLink": "316956d5a7e573b3733a9a71286e2965",
+      "cancel": "ea4788705e6873b424c65e91c2846b19",
+      "apply": "9639e32cab248434a17ab32237cb3b71",
+      "groupByField": "37f9bc5248d88355dda358dc547774c2",
+      "groupBy": "be87d8c3de2675bbc53f9442af9d8feb",
+      "government": "18450de39aceed82b26abe218d377740",
+      "recordType": "af7f7ca9a0f0bd801f9f8a91425b4152"
+    }
+  }
 }
