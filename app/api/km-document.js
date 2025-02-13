@@ -38,4 +38,14 @@ export default class KmDocumentApi extends ApiBase
     async getAdminTags(params){
         return await this.http.get(`api/v2021/article-admin-tags`, { params }).then(res => res.data).catch(tryCastToApiError);
     }
+
+    async getDocumentsWithTags(params){
+        return [
+            { "identifier": "xyz-abc-123", "title": "Sample Title 1", "schema":"Capacity Development Initiatives (CDI)",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "Sample Title 2", "schema":"Capacity Development Initiatives (CDI)", "adminTags": ["Info", "Intro"] },
+            { "identifier": "xyz-abc-123", "title": "Sample Title 3", "schema":"Capacity Development Initiatives (CDI)", "adminTags": ["BCH", "CHM"] }
+          ]        
+        // return await this.http.get(`api/v2021/article-admin-tags`, { params }).then(res => res.data).catch(tryCastToApiError);
+    }
+
 }
