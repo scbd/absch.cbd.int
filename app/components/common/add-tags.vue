@@ -3,7 +3,7 @@
 
     <a rel="noopener" href="#" class="plain-text"  @click="openModal">
       <i class="fa fa-tag" aria-hidden="true"></i>
-      {{ t("addTags") }}
+      <slot>{{ t("addTags") }}</slot>
     </a>
 
     <div class="modal fade" ref="multiSelectModal" data-backdrop="static" tabindex="-1" aria-hidden="true" id="share-modal">
@@ -19,6 +19,7 @@
           </div>
 
           <div class="modal-body">
+            <b>{{ t("adminTags") }}</b>
             <VueMultiselect
               v-model="taggingSelected"
               :options="taggingOptions"
