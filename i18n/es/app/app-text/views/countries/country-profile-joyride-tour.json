@@ -1,89 +1,49 @@
 {
-  "countryProfiles": {
-    "title": "Perfiles de los países",
-    "content": "La lista desplegable de los \"Perfiles de los países\" que se encuentra en la barra de navegación superior permite seleccionar un país para ver la página de su perfil.<br><br> Es posible acceder a un panorama general de los registros nacionales de todos los países.<br><br> Exploremos el rubro \"Panorama general - Lista de todos los países\"."
-  },
-  "listOfRecords": {
-    "title": "Lista de registros",
-    "content": "En esta página, se accede a un panorama de todos los registros nacionales. Los números que se muestran en círculos negros representan la cantidad total de registros publicados en cada tipo de registro. Los números que aparecen en <span style='color:#1FA65D;'>recuadros grises</span> indican la cantidad de registros de este tipo para un país determinado.<br><br> <u>Consejo:</u> coloque el cursor en una sigla (por ejemplo, PFN) para ver el título completo del tipo de registro nacional."
-  },
-  "sortingRecords": {
-    "title": "Organización de los registros",
-    "content": "Puede ordenar los registros en orden alfabético ascendente/descendente, así como por tipo de registro."
-  },
-  "sortingRecordsNFP": {
-    "title": "Organización de los registros",
-    "content": "Haga clic en la sigla o en el número del círculo negro del tipo de registro que le interese para ordenar por el número de registros más publicados de ese tipo. Vuelva a hacer clic para invertir el modo de organización."
-  },
-  "sortingRecordsCountries": {
-    "title": "Organización de los registros: Países",
-    "content": "Haga clic para seleccionar uno o múltiples países.<br><br><u> Consejo:</u> haga clic en el nombre de un país en el <span style='color:#1FA65D;'>recuadro gris</span> para ir directamente a la página del perfil del país."
-  },
-  "sortingRecordsPartyStatus": {
-    "title": "Organización de los registros: Situación de la Parte",
-    "content": "Haga clic aquí para filtrar por la situación de la Parte."
-  },
-  "sortingRecordsRegions": {
-    "title": "Organización de los registros: Regiones",
-    "content": "Haga clic aquí para filtrar por región. Se pueden seleccionar múltiples regiones o subregiones.<br><br><u> Consejo:</u> para buscar por los cinco grupos regionales de las Naciones Unidas, escriba 'CDB' en el recuadro de búsqueda y luego seleccione la región o regiones de su interés."
-  },
-  "exportingRecords": {
-    "title": "Exportar registros",
-    "content": "Haga clic aquí para exportar la lista del panorama general en un archivo Excel. Si utilizó filtros, los datos se exportarán según sus selecciones."
-  },
-  "needHelp": {
-    "title": "¿Necesita ayuda?",
-    "content": "Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con la página de los Perfiles de los países."
-  },
-  "needMoreHelp": {
-    "title": "¿Necesita más ayuda?",
-    "content": "Use la función de Chat para enviarnos un mensaje si necesita más ayuda."
-  },
+  "countryProfilesTitle": "Perfiles de los países",
+  "countryProfilesContent": "La lista desplegable de los \"Perfiles de los países\" que se encuentra en la barra de navegación superior permite seleccionar un país para ver la página de su perfil.<br><br> Es posible acceder a un panorama general de los registros nacionales de todos los países.<br><br> Exploremos el rubro \"Panorama general - Lista de todos los países\".",
+  "listOfRecordsTitle": "Lista de registros",
+  "listOfRecordsContent": "En esta página, se accede a un panorama de todos los registros nacionales. Los números que se muestran en círculos negros representan la cantidad total de registros publicados en cada tipo de registro. Los números que aparecen en <span style='color:#1FA65D;'>recuadros grises</span> indican la cantidad de registros de este tipo para un país determinado.<br><br> <u>Consejo:</u> coloque el cursor en una sigla (por ejemplo, PFN) para ver el título completo del tipo de registro nacional.",
+  "sortingRecordsTitle": "Organización de los registros",
+  "sortingRecordsContent": "Puede ordenar los registros en orden alfabético ascendente/descendente, así como por tipo de registro.",
+  "sortingRecordsNFPTitle": "Organización de los registros",
+  "sortingRecordsNFPContent": "Haga clic en la sigla o en el número del círculo negro del tipo de registro que le interese para ordenar por el número de registros más publicados de ese tipo. Vuelva a hacer clic para invertir el modo de organización.",
+  "sortingRecordsCountriesTitle": "Organización de los registros: Países",
+  "sortingRecordsCountriesContent": "Haga clic para seleccionar uno o múltiples países.<br><br><u> Consejo:</u> haga clic en el nombre de un país en el <span style='color:#1FA65D;'>recuadro gris</span> para ir directamente a la página del perfil del país.",
+  "sortingRecordsPartyStatusTitle": "Organización de los registros: Situación de la Parte",
+  "sortingRecordsPartyStatusContent": "Haga clic aquí para filtrar por la situación de la Parte.",
+  "sortingRecordsRegionsTitle": "Organización de los registros: Regiones",
+  "sortingRecordsRegionsContent": "Haga clic aquí para filtrar por región. Se pueden seleccionar múltiples regiones o subregiones.<br><br><u> Consejo:</u> para buscar por los cinco grupos regionales de las Naciones Unidas, escriba 'CDB' en el recuadro de búsqueda y luego seleccione la región o regiones de su interés.",
+  "exportingRecordsTitle": "Exportar registros",
+  "exportingRecordsContent": "Haga clic aquí para exportar la lista del panorama general en un archivo Excel. Si utilizó filtros, los datos se exportarán según sus selecciones.",
+  "needHelpTitle": "¿Necesita ayuda?",
+  "needHelpContent": "Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con la página de los Perfiles de los países.",
+  "needMoreHelpTitle": "¿Necesita más ayuda?",
+  "needMoreHelpContent": "Use la función de Chat para enviarnos un mensaje si necesita más ayuda.",
   "#meta": {
     "hashedOn": "2024-11-22T14:18:26.547Z",
     "algorithm": "md5",
     "branch": "2024.46.0",
     "hashes": {
-      "countryProfiles": {
-        "title": "5a4d9fc55baf2bb0539773744fa36fa7",
-        "content": "0e008c43b534d6fc9d26be8b2d87e8b2"
-      },
-      "listOfRecords": {
-        "title": "651e0755f8eee522d6d5377306c1d6de",
-        "content": "d5cbb377ca55df75257383c2c3bd4df9"
-      },
-      "sortingRecords": {
-        "title": "12687c35209124978e064c9d775e5e4e",
-        "content": "2584a7f94a3a63176bcabec7be648ec2"
-      },
-      "sortingRecordsNFP": {
-        "title": "12687c35209124978e064c9d775e5e4e",
-        "content": "8763f91b969e0148ab0033c0fbf365f8"
-      },
-      "sortingRecordsCountries": {
-        "title": "7fc024dedb24a5756fc318a656eb1c82",
-        "content": "c3d1188898200963c4058655eb1ab756"
-      },
-      "sortingRecordsPartyStatus": {
-        "title": "a97c4b1876a592c8c679d572548faa74",
-        "content": "582ce55c08c21ce974f0ec0c37561778"
-      },
-      "sortingRecordsRegions": {
-        "title": "3d1e53e1aa5c64b88196f2c38c5213e0",
-        "content": "a28f8afff6e4e260ee9e8b6205dd0f8e"
-      },
-      "exportingRecords": {
-        "title": "bdebfeb1d8179275df23b2b4dfb91291",
-        "content": "2b3801ac971e52c1b36d0010c1185676"
-      },
-      "needHelp": {
-        "title": "14221b2ce674afde7f85cfb60662a5b7",
-        "content": "0fc851b30fdf81f0d27ddd2c684c6395"
-      },
-      "needMoreHelp": {
-        "title": "21019d5221b8a27734792493c892bbe2",
-        "content": "2ce45ff8371ac151f115e42e76c70a78"
-      }
+      "countryProfilesTitle": "5a4d9fc55baf2bb0539773744fa36fa7",
+      "countryProfilesContent": "0e008c43b534d6fc9d26be8b2d87e8b2",
+      "listOfRecordsTitle": "651e0755f8eee522d6d5377306c1d6de",
+      "listOfRecordsContent": "d5cbb377ca55df75257383c2c3bd4df9",
+      "sortingRecordsTitle": "12687c35209124978e064c9d775e5e4e",
+      "sortingRecordsContent": "2584a7f94a3a63176bcabec7be648ec2",
+      "sortingRecordsNFPTitle": "12687c35209124978e064c9d775e5e4e",
+      "sortingRecordsNFPContent": "8763f91b969e0148ab0033c0fbf365f8",
+      "sortingRecordsCountriesTitle": "7fc024dedb24a5756fc318a656eb1c82",
+      "sortingRecordsCountriesContent": "c3d1188898200963c4058655eb1ab756",
+      "sortingRecordsPartyStatusTitle": "a97c4b1876a592c8c679d572548faa74",
+      "sortingRecordsPartyStatusContent": "582ce55c08c21ce974f0ec0c37561778",
+      "sortingRecordsRegionsTitle": "3d1e53e1aa5c64b88196f2c38c5213e0",
+      "sortingRecordsRegionsContent": "a28f8afff6e4e260ee9e8b6205dd0f8e",
+      "exportingRecordsTitle": "bdebfeb1d8179275df23b2b4dfb91291",
+      "exportingRecordsContent": "2b3801ac971e52c1b36d0010c1185676",
+      "needHelpTitle": "14221b2ce674afde7f85cfb60662a5b7",
+      "needHelpContent": "0fc851b30fdf81f0d27ddd2c684c6395",
+      "needMoreHelpTitle": "21019d5221b8a27734792493c892bbe2",
+      "needMoreHelpContent": "2ce45ff8371ac151f115e42e76c70a78"
     }
   }
 }
