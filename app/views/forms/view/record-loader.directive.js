@@ -19,6 +19,7 @@ import '~/views/forms/directives/compare-val';
 import printHeaderTemplate from 'text!./print-header.html';
 import printFooterTemplate from 'text!./print-footer.html';
 import shareRecord from '~/components/common/share-record.vue';
+import addTags from '~/components/common/add-tags.vue';
 import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 import '~/views/forms/view/directives/validate-referenced-record-version';
 import documentDebugInfo from '~/components/km/document-debug-info.vue';
@@ -30,9 +31,9 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 		$templateCache.put('view-print-footer.html', printFooterTemplate)
 	});
 	
-	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
+	app.directive('recordLoader', ["$route", 'IStorage', "roleService", "authentication", "$q", "$location", "commonjs", "$timeout",
 		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', '$rootScope', 'apiToken', 'translationService', '$http',
-	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
+	function ($route, storage, roleService, authentication, $q, $location, commonjs, $timeout, $filter,
 		realm, $compile, searchService, IWorkflows, appLocale, solr, $rootScope, apiToken, translationService, $http) {
 		return {
 			restrict: 'EAC',
@@ -49,7 +50,8 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 				documentInfo: "=?",
 			},
 			link: function ($scope, $element, $attr) {
-
+				
+				$scope.isAdministrator = roleService.isAdministrator();
 				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment','nationalReport',
 					'nationalTarget',"implementationActivity",'strategicPlanIndicator',
 					'undbActor','undbParty','undbAction','undbPartner','event','marineEbsa',
@@ -95,7 +97,7 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 					}
 
 					$scope.shareVueComponent = {
-						components:{shareRecord},
+						components:{shareRecord, addTags},
 						 setup:  shareRecordsFunctions
 					}
 					$scope.debugInfoComponent = {
