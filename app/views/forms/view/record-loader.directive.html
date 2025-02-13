@@ -123,10 +123,10 @@
                         <span class="color-white">|&nbsp;</span>
                         <share-record ng-vue="shareVueComponent"></share-record>
                     </div>
-                    <!-- ToDo: add isAdministrator after testing , This button will be available on published records only, apply |$translate -->
-                    <div ng-if="shareVueComponent && internalDocument"  class="color-white full-text-display ps-2 pe-1 float-end compare-buttons">
+                    
+                    <div ng-if="shareVueComponent && (internalDocumentInfo && internalDocumentInfo.documentID) && isAdministrator" class="add-document-tag color-white full-text-display ps-2 pe-1 float-end">
                         <span class="color-white">|&nbsp;</span>
-                        <add-tags ng-vue="shareVueComponent" :document-title="internalDocument.title.en" :document-id="internalDocument.header.identifier"></add-tags>
+                        <add-tags ng-vue="shareVueComponent" :document-title="internalDocumentInfo.title | lstring:locale" :document-id="internalDocumentInfo.identifier"></add-tags>
                     </div>
                     <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">
                         <div>
