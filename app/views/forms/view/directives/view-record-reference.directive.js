@@ -187,9 +187,15 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				const currentId = ids.find(e=>e.identifier == identifier)
 				
 				if(currentId?.latestRevision > currentId?.currentRevision){					
-					$scope.revisionLoading = true;			
-					await $scope.refreshRecord(`${currentId.identifier}@${currentId.latestRevision}`, new Date().getTime());
-					$scope.revisionLoading = false;
+					$scope.revisionLoading = true;
+					try {
+						await $scope.refreshRecord(`${currentId.identifier}@${currentId.latestRevision}`, new Date().getTime());
+					} finally {
+						$scope.revisionLoading = false;
+						$timeout(function() {
+                        	$scope.$apply();
+                   		}, 300);
+					}
 				}
 				
 			});
