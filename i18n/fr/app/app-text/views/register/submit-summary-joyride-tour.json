@@ -1,81 +1,45 @@
 {
-  "welcome": {
-    "title": "Résumé des fichiers",
-    "content": "<p>Sur cette page, vous pouvez afficher une liste de tous les fichiers sous le type de fichiers que vous avez sélectionné, ainsi que leur statut. <br><br>Vous pouvez filtrer les fichiers existants et en créer de nouveaux, ainsi que dupliquer, modifier ou supprimer un fichier.</p>"
-  },
-  "filters": {
-    "title": "Filtres",
-    "content": "<p>Utilisez ces filtres pour afficher une liste de tous les fichiers, publiés, brouillons ou en attente d’approbation.</p>"
-  },
-  "Keyword": {
-    "title": "Mot clé",
-    "content": "<p>Recherchez dans la liste en tapant un mot de votre choix.</p>"
-  },
-  "adding": {
-    "title": "Ajouter un nouveau fichier",
-    "content": "<p>Cliquez sur le bouton <b>« Ajouter un nouveau »</b> pour commencer à créer un nouveau fichier.</p>"
-  },
-  "duplicate": {
-    "title": "Dupliquer le fichier",
-    "content": "<p>Cliquez ici pour créer un duplicata du fichier existant.</p>"
-  },
-  "edit": {
-    "title": "Éditer un fichier",
-    "content": "<p>Cliquez ici pour modifier un fichier existant.</p>"
-  },
-  "delete": {
-    "title": "Supprimer un fichier",
-    "content": "<p>Cliquez ici pour supprimer un fichier.</p>"
-  },
-  "needHelp": {
-    "title": "Besoin d'aide?",
-    "content": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur cette page.</p>"
-  },
-  "needMoreHelp": {
-    "title": "Encore besoin d’aide?",
-    "content": "<p>Utilisez la fonction de chat pour nous envoyer un message et obtenir plus d’aide.</p>"
-  },
+  "welcomeTitle": "Résumé des fichiers",
+  "welcomeContent": "<p>Sur cette page, vous pouvez afficher une liste de tous les fichiers sous le type de fichiers que vous avez sélectionné, ainsi que leur statut. <br><br>Vous pouvez filtrer les fichiers existants et en créer de nouveaux, ainsi que dupliquer, modifier ou supprimer un fichier.</p>",
+  "filtersTitle": "Filtres",
+  "filtersContent": "<p>Utilisez ces filtres pour afficher une liste de tous les fichiers, publiés, brouillons ou en attente d’approbation.</p>",
+  "KeywordTitle": "Mot clé",
+  "KeywordContent": "<p>Recherchez dans la liste en tapant un mot de votre choix.</p>",
+  "addingTitle": "Ajouter un nouveau fichier",
+  "addingContent": "<p>Cliquez sur le bouton <b>« Ajouter un nouveau »</b> pour commencer à créer un nouveau fichier.</p>",
+  "duplicateTitle": "Dupliquer le fichier",
+  "duplicateContent": "<p>Cliquez ici pour créer un duplicata du fichier existant.</p>",
+  "editTitle": "Éditer un fichier",
+  "editContent": "<p>Cliquez ici pour modifier un fichier existant.</p>",
+  "deleteTitle": "Supprimer un fichier",
+  "deleteContent": "<p>Cliquez ici pour supprimer un fichier.</p>",
+  "needHelpTitle": "Besoin d'aide?",
+  "needHelpContent": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur cette page.</p>",
+  "needMoreHelpTitle": "Encore besoin d’aide?",
+  "needMoreHelpContent": "<p>Utilisez la fonction de chat pour nous envoyer un message et obtenir plus d’aide.</p>",
   "#meta": {
     "hashedOn": "2024-11-22T14:18:26.963Z",
     "algorithm": "md5",
     "branch": "2024.46.0",
     "hashes": {
-      "welcome": {
-        "title": "c8434516a3bc1dd752e1fd713a1cdccf",
-        "content": "73313ac5034b0c3fb72902b9c80cf8ce"
-      },
-      "filters": {
-        "title": "f3f43e30c8c7d78c6ac0173515e57a00",
-        "content": "b28b35d1f4d60cb37b49ee1ac89b7c53"
-      },
-      "Keyword": {
-        "title": "220f3d3750583b9db48568a0b5b9a5f1",
-        "content": "7d0538b25671a2a8342566838d82e0c7"
-      },
-      "adding": {
-        "title": "7b46b5587c02be3d3cb2f3ed887f3bc1",
-        "content": "abe0dfe07180c5f39738933ecadae7f5"
-      },
-      "duplicate": {
-        "title": "8f734a6d992a3014189136619d0c7308",
-        "content": "00ddd216fdcdf0bc6e1f3ca25554c038"
-      },
-      "edit": {
-        "title": "92aaf32a80d0d8be13f8fecebdbebab0",
-        "content": "e2d677548f047cb9f657f978d09fb153"
-      },
-      "delete": {
-        "title": "b2e72ac4ced56b0854ad46e5c17335ff",
-        "content": "910acf135dbee8df06969cad1e0e24f6"
-      },
-      "needHelp": {
-        "title": "4bd9ef088a14b5f6fd9ef86e6f33037f",
-        "content": "8d80f1b119eadb136042beb399770ea5"
-      },
-      "needMoreHelp": {
-        "title": "21019d5221b8a27734792493c892bbe2",
-        "content": "6edaa4629440bf7eab61e6f4fe316b60"
-      }
+      "welcomeTitle": "c8434516a3bc1dd752e1fd713a1cdccf",
+      "welcomeContent": "73313ac5034b0c3fb72902b9c80cf8ce",
+      "filtersTitle": "f3f43e30c8c7d78c6ac0173515e57a00",
+      "filtersContent": "b28b35d1f4d60cb37b49ee1ac89b7c53",
+      "KeywordTitle": "220f3d3750583b9db48568a0b5b9a5f1",
+      "KeywordContent": "7d0538b25671a2a8342566838d82e0c7",
+      "addingTitle": "7b46b5587c02be3d3cb2f3ed887f3bc1",
+      "addingContent": "abe0dfe07180c5f39738933ecadae7f5",
+      "duplicateTitle": "8f734a6d992a3014189136619d0c7308",
+      "duplicateContent": "00ddd216fdcdf0bc6e1f3ca25554c038",
+      "editTitle": "92aaf32a80d0d8be13f8fecebdbebab0",
+      "editContent": "e2d677548f047cb9f657f978d09fb153",
+      "deleteTitle": "b2e72ac4ced56b0854ad46e5c17335ff",
+      "deleteContent": "910acf135dbee8df06969cad1e0e24f6",
+      "needHelpTitle": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+      "needHelpContent": "8d80f1b119eadb136042beb399770ea5",
+      "needMoreHelpTitle": "21019d5221b8a27734792493c892bbe2",
+      "needMoreHelpContent": "6edaa4629440bf7eab61e6f4fe316b60"
     }
   }
 }

@@ -1,81 +1,45 @@
 {
-  "welcome": {
-    "title": "记录汇总",
-    "content": "<p>在本页面上，您可以查看您所选记录类型下的所有记录的列表以及各记录的状态。<br><br>您可以筛选现有记录和创建新记录，也可以复制、编辑或删除记录。</p>"
-  },
-  "filters": {
-    "title": "筛选条件",
-    "content": "<p>使用这些筛选条件，可以列出所有记录、已发布记录、草稿或待批准记录。</p>"
-  },
-  "Keyword": {
-    "title": "关键词",
-    "content": "<p>通过输入自己所选的词来搜索列表。</p>"
-  },
-  "adding": {
-    "title": "添加新记录",
-    "content": "<p>单击<b>“新添”</b>按钮，开始创建一格新记录。</p>"
-  },
-  "duplicate": {
-    "title": "复制记录",
-    "content": "<p>单击此处，以复制现有记录。</p>"
-  },
-  "edit": {
-    "title": "编辑记录",
-    "content": "<p>单击此处，以编辑一条现有记录。</p>"
-  },
-  "delete": {
-    "title": "删除记录",
-    "content": "<p>单击此处，以删除一条记录。</p>"
-  },
-  "needHelp": {
-    "title": "需要帮助吗？",
-    "content": "<p>单击这里，以访问上下文帮助，在这里您可以找到更多与本页有关的信息。</p>"
-  },
-  "needMoreHelp": {
-    "title": "需要更多帮助吗？",
-    "content": "<p>使用聊天功能给我们发消息以获得更多支持。</p>"
-  },
+  "welcomeTitle": "记录汇总",
+  "welcomeContent": "<p>在本页面上，您可以查看您所选记录类型下的所有记录的列表以及各记录的状态。<br><br>您可以筛选现有记录和创建新记录，也可以复制、编辑或删除记录。</p>",
+  "filtersTitle": "筛选条件",
+  "filtersContent": "<p>使用这些筛选条件，可以列出所有记录、已发布记录、草稿或待批准记录。</p>",
+  "KeywordTitle": "关键词",
+  "KeywordContent": "<p>通过输入自己所选的词来搜索列表。</p>",
+  "addingTitle": "添加新记录",
+  "addingContent": "<p>单击<b>“新添”</b>按钮，开始创建一格新记录。</p>",
+  "duplicateTitle": "复制记录",
+  "duplicateContent": "<p>单击此处，以复制现有记录。</p>",
+  "editTitle": "编辑记录",
+  "editContent": "<p>单击此处，以编辑一条现有记录。</p>",
+  "deleteTitle": "删除记录",
+  "deleteContent": "<p>单击此处，以删除一条记录。</p>",
+  "needHelpTitle": "需要帮助吗？",
+  "needHelpContent": "<p>单击这里，以访问上下文帮助，在这里您可以找到更多与本页有关的信息。</p>",
+  "needMoreHelpTitle": "需要更多帮助吗？",
+  "needMoreHelpContent": "<p>使用聊天功能给我们发消息以获得更多支持。</p>",
   "#meta": {
     "hashedOn": "2024-11-22T14:18:26.963Z",
     "algorithm": "md5",
     "branch": "2024.46.0",
     "hashes": {
-      "welcome": {
-        "title": "c8434516a3bc1dd752e1fd713a1cdccf",
-        "content": "73313ac5034b0c3fb72902b9c80cf8ce"
-      },
-      "filters": {
-        "title": "f3f43e30c8c7d78c6ac0173515e57a00",
-        "content": "b28b35d1f4d60cb37b49ee1ac89b7c53"
-      },
-      "Keyword": {
-        "title": "220f3d3750583b9db48568a0b5b9a5f1",
-        "content": "7d0538b25671a2a8342566838d82e0c7"
-      },
-      "adding": {
-        "title": "7b46b5587c02be3d3cb2f3ed887f3bc1",
-        "content": "abe0dfe07180c5f39738933ecadae7f5"
-      },
-      "duplicate": {
-        "title": "8f734a6d992a3014189136619d0c7308",
-        "content": "00ddd216fdcdf0bc6e1f3ca25554c038"
-      },
-      "edit": {
-        "title": "92aaf32a80d0d8be13f8fecebdbebab0",
-        "content": "e2d677548f047cb9f657f978d09fb153"
-      },
-      "delete": {
-        "title": "b2e72ac4ced56b0854ad46e5c17335ff",
-        "content": "910acf135dbee8df06969cad1e0e24f6"
-      },
-      "needHelp": {
-        "title": "4bd9ef088a14b5f6fd9ef86e6f33037f",
-        "content": "8d80f1b119eadb136042beb399770ea5"
-      },
-      "needMoreHelp": {
-        "title": "21019d5221b8a27734792493c892bbe2",
-        "content": "6edaa4629440bf7eab61e6f4fe316b60"
-      }
+      "welcomeTitle": "c8434516a3bc1dd752e1fd713a1cdccf",
+      "welcomeContent": "73313ac5034b0c3fb72902b9c80cf8ce",
+      "filtersTitle": "f3f43e30c8c7d78c6ac0173515e57a00",
+      "filtersContent": "b28b35d1f4d60cb37b49ee1ac89b7c53",
+      "KeywordTitle": "220f3d3750583b9db48568a0b5b9a5f1",
+      "KeywordContent": "7d0538b25671a2a8342566838d82e0c7",
+      "addingTitle": "7b46b5587c02be3d3cb2f3ed887f3bc1",
+      "addingContent": "abe0dfe07180c5f39738933ecadae7f5",
+      "duplicateTitle": "8f734a6d992a3014189136619d0c7308",
+      "duplicateContent": "00ddd216fdcdf0bc6e1f3ca25554c038",
+      "editTitle": "92aaf32a80d0d8be13f8fecebdbebab0",
+      "editContent": "e2d677548f047cb9f657f978d09fb153",
+      "deleteTitle": "b2e72ac4ced56b0854ad46e5c17335ff",
+      "deleteContent": "910acf135dbee8df06969cad1e0e24f6",
+      "needHelpTitle": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+      "needHelpContent": "8d80f1b119eadb136042beb399770ea5",
+      "needMoreHelpTitle": "21019d5221b8a27734792493c892bbe2",
+      "needMoreHelpContent": "6edaa4629440bf7eab61e6f4fe316b60"
     }
   }
 }

@@ -129,23 +129,23 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                             steps : [
                                 {
                                     appendToBody: true,
-                                    title       : joyRideText.welcome.title,
-                                    content     : joyRideText.welcome.content
+                                    title       : joyRideText.welcomeTitle,
+                                    content     : joyRideText.welcomeContent
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#freeText",
-                                    title       : joyRideText.freeText.title,
-                                    content     : joyRideText.freeText.content,
+                                    title       : joyRideText.freeTextTitle,
+                                    content     : joyRideText.freeTextContent,
                                     placement   : 'bottom'
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#globalSearch",
-                                    title       : joyRideText.globalSearch.title,
-                                    content     : joyRideText.globalSearch.content,
+                                    title       : joyRideText.globalSearchTitle,
+                                    content     : joyRideText.globalSearchContent,
                                     placement   : 'top',
                                     customClass : "search-global-search-jr"
                                 },
@@ -153,8 +153,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#recordTypesFilterTabJR",
-                                    title       : joyRideText.recordTypesFilterTab.title,
-                                    content     : joyRideText.recordTypesFilterTab.content,
+                                    title       : joyRideText.recordTypesFilterTabTitle,
+                                    content     : joyRideText.recordTypesFilterTabContent,
                                     placement   : 'top',
                                     beforeStep  : openFilterTab
                                 },
@@ -162,8 +162,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#keywordsFilterTabJR",
-                                    title       : joyRideText.keywordsFilterTab.title,
-                                    content     : joyRideText.keywordsFilterTab.content,
+                                    title       : joyRideText.keywordsFilterTabTitle,
+                                    content     : joyRideText.keywordsFilterTabContent,
                                     placement   : 'top',
                                     beforeStep  : openFilterTab
                                 },
@@ -171,8 +171,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#countryFilterTabJR",
-                                    title       : joyRideText.countryFilterTab.title,
-                                    content     : joyRideText.countryFilterTab.content,
+                                    title       : joyRideText.countryFilterTabTitle,
+                                    content     : joyRideText.countryFilterTabContent,
                                     placement   : 'top',
                                     beforeStep  : openFilterTab
                                 },
@@ -180,8 +180,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#regionFilterTabJR",
-                                    title       : joyRideText.regionFilterTab.title,
-                                    content     : joyRideText.regionFilterTab.content,
+                                    title       : joyRideText.regionFilterTabTitle,
+                                    content     : joyRideText.regionFilterTabContent,
                                     placement   : 'top',
                                     beforeStep  : openFilterTab
                                 },
@@ -189,8 +189,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#dateFilterTabJR",
-                                    title       : joyRideText.dateFilterTab.title,
-                                    content     : joyRideText.dateFilterTab.content,
+                                    title       : joyRideText.dateFilterTabTitle,
+                                    content     : joyRideText.dateFilterTabContent,
                                     placement   : 'top',
                                     beforeStep  : openFilterTab
                                 },
@@ -198,8 +198,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#closeFilterTab",
-                                    title       : joyRideText.closeFilterTab.title,
-                                    content     : joyRideText.closeFilterTab.content,
+                                    title       : joyRideText.closeFilterTabTitle,
+                                    content     : joyRideText.closeFilterTabContent,
                                     placement   : 'left',
                                     beforeStep  : openFilterTab
                                 },
@@ -207,8 +207,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#referenceRecordsTab",
-                                    title       : joyRideText.searchResult.title,
-                                    content     : joyRideText.searchResult.content,
+                                    title       : joyRideText.searchResultTitle,
+                                    content     : joyRideText.searchResultContent,
                                     placement   : 'top',
                                     beforeStep  : closeFilterTab
                                 },
@@ -216,8 +216,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#Search-Filter",
-                                    title       : joyRideText.subFilters.title,
-                                    content     : joyRideText.subFilters.content,
+                                    title       : joyRideText.subFiltersTitle,
+                                    content     : joyRideText.subFiltersContent,
                                     placement   : 'top',
                                     beforeStep  : openSubFilters
                                 },
@@ -225,8 +225,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#record1",
-                                    title       : joyRideText.recordView.title,
-                                    content     : joyRideText.recordView.content,
+                                    title       : joyRideText.recordViewTitle,
+                                    content     : joyRideText.recordViewContent,
                                     placement   : 'top',
                                     beforeStep  : closeSubFilters
                                 },
@@ -234,8 +234,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#viewType",
-                                    title       : joyRideText.viewType.title,
-                                    content     : joyRideText.viewType.content,
+                                    title       : joyRideText.viewTypeTitle,
+                                    content     : joyRideText.viewTypeContent,
                                     placement   : 'top',
                                     customClass : "search-view-type-records-jr"
                                 },
@@ -243,8 +243,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#sortBy",
-                                    title       : joyRideText.sortBy.title,
-                                    content     : joyRideText.sortBy.content,
+                                    title       : joyRideText.sortByTitle,
+                                    content     : joyRideText.sortByContent,
                                     placement   : 'bottom',
                                     customClass : "search-sort-by-records-jr"
                                 },
@@ -252,8 +252,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#shareRecord",
-                                    title       : joyRideText.sendRecords.title,
-                                    content     : joyRideText.sendRecords.content,
+                                    title       : joyRideText.sendRecordsTitle,
+                                    content     : joyRideText.sendRecordsContent,
                                     placement   : 'top',
                                     customClass : "search-send-records-jr"
                                 },
@@ -261,8 +261,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#exportRecords",
-                                    title       : joyRideText.exportRecords.title,
-                                    content     : joyRideText.exportRecords.content,
+                                    title       : joyRideText.exportRecordsTitle,
+                                    content     : joyRideText.exportRecordsContent,
                                     placement   : 'left',
                                     customClass : "search-export-records-jr"
                                 },
@@ -270,8 +270,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#needHelp",
-                                    title       : joyRideText.needHelp.title,
-                                    content     : joyRideText.needHelp.content,
+                                    title       : joyRideText.needHelpTitle,
+                                    content     : joyRideText.needHelpContent,
                                     placement   : 'bottom',
                                     beforeStep  : gotoSectionHelp,
                                     customClass : "need-help-jr"
@@ -280,8 +280,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     appendToBody: true,
                                     type        : 'element',
                                     selector    : "#slaask-button-cross",
-                                    title       : joyRideText.needMoreHelp.title,
-                                    content     : joyRideText.needMoreHelp.content,
+                                    title       : joyRideText.needMoreHelpTitle,
+                                    content     : joyRideText.needMoreHelpContent,
                                     placement   : 'top',
                                     customClass : "need-more-help-jr"
                                 }

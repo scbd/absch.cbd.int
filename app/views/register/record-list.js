@@ -65,15 +65,15 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                         steps : [
                             {
                                 appendToBody: true,
-                                title       : joyRideText.welcome.title,
-                                content     : joyRideText.welcome.content
+                                title       : joyRideText.welcomeTitle,
+                                content     : joyRideText.welcomeContent
                             },
                             {
                                 appendToBody: true,
                                 type        : 'element',
                                 selector    : "#publishedRecords",
-                                title       : joyRideText.filters.title,
-                                content     : joyRideText.filters.content,
+                                title       : joyRideText.filtersTitle,
+                                content     : joyRideText.filtersContent,
                                 placement   : 'top',
 
                             },
@@ -81,24 +81,24 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                 appendToBody: true,
                                 type        : 'element',
                                 selector    : "#searchKeyword",
-                                title       : joyRideText.Keyword.title,
-                                content     : joyRideText.Keyword.content,
+                                title       : joyRideText.KeywordTitle,
+                                content     : joyRideText.KeywordContent,
                                 placement   : 'top',
                             },
                             {
                                 appendToBody: true,
                                 type        : 'element',
                                 selector    : "#add-new-btn",
-                                title       : joyRideText.adding.title,
-                                content     : joyRideText.adding.content,
+                                title       : joyRideText.addingTitle,
+                                content     : joyRideText.addingContent,
                                 placement   : 'left'
                             },
                             {
                                 appendToBody: true,
                                 type        : 'element',
                                 selector    : "#duplicateRecord",
-                                title       : joyRideText.duplicate.title,
-                                content     : joyRideText.duplicate.content,
+                                title       : joyRideText.duplicateTitle,
+                                content     : joyRideText.duplicateContent,
                                 placement   : 'left'
 
                             },
@@ -106,24 +106,24 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                 appendToBody: true,
                                 type        : 'element',
                                 selector    : "#editRecord",
-                                title       : joyRideText.edit.title,
-                                content     : joyRideText.edit.content,
+                                title       : joyRideText.editTitle,
+                                content     : joyRideText.editContent,
                                 placement   : 'left'
                             },
                             {
                                 appendToBody: true,
                                 type        : 'element',
                                 selector    : "#deleteRecord",
-                                title       : joyRideText.delete.title,
-                                content     : joyRideText.delete.content,
+                                title       : joyRideText.deleteTitle,
+                                content     : joyRideText.deleteContent,
                                 placement   : 'left'
                             },
                             {
                                 appendToBody:true,
                                 type        : 'element',
                                 selector    : "#needHelp",
-                                title       : joyRideText.needHelp.title,
-                                content     : joyRideText.needHelp.content,
+                                title       : joyRideText.needHelpTitle,
+                                content     : joyRideText.needHelpContent,
                                 placement   : 'bottom',
                                 beforeStep  : gotoSectionHelp,
                                 customClass : "need-help-jr"
@@ -133,8 +133,8 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                 appendToBody:true,
                                 type        : 'element',
                                 selector    : "#slaask-button-cross",
-                                title       : joyRideText.needMoreHelp.title,
-                                content     : joyRideText.needMoreHelp.content,
+                                title       : joyRideText.needMoreHelpTitle,
+                                content     : joyRideText.needMoreHelpContent,
                                 placement   : 'top',
                                 customClass : "need-more-help-jr"
                             }

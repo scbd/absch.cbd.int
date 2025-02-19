@@ -88,15 +88,15 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                     steps : [
                         {
                             appendToBody: true,
-                            title       : joyRideText.welcome.title,
-                            content     : joyRideText.welcome.content
+                            title       : joyRideText.welcomeTitle,
+                            content     : joyRideText.welcomeContent
                         },
                         {
                             appendToBody: true,
                             type        : 'element',
                             selector    : "#showProfileInfo",
-                            title       : joyRideText.personalInformation.title,
-                            content     : joyRideText.personalInformation.content,
+                            title       : joyRideText.personalInformationTitle,
+                            content     : joyRideText.personalInformationContent,
                             placement   : 'top',
                             beforeStep  : showProfileInfo
                         },
@@ -104,16 +104,16 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             appendToBody: true,
                             type        : 'element',
                             selector    : "#recordOverview",
-                            title       : joyRideText.recordOverview.title,
-                            content     : joyRideText.recordOverview.content,
+                            title       : joyRideText.recordOverviewTitle,
+                            content     : joyRideText.recordOverviewContent,
                             placement   : 'top'
                         },
                         {
                             appendToBody: true,
                             type        : 'element',
                             selector    : "#publishFormat",
-                            title       : joyRideText.yourRecordsStatus.title,
-                            content     : joyRideText.yourRecordsStatus.content,
+                            title       : joyRideText.yourRecordsStatusTitle,
+                            content     : joyRideText.yourRecordsStatusContent,
                             placement   : 'top',
                             beforeStep  : hideProfileInfo
                         },
@@ -121,16 +121,16 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             appendToBody: true,
                             type        : 'element',
                             selector    : "#offlineFormat",
-                            title       : joyRideText.yourRecordsOffline.title,
-                            content     : joyRideText.yourRecordsOffline.content,
+                            title       : joyRideText.yourRecordsOfflineTitle,
+                            content     : joyRideText.yourRecordsOfflineContent,
                             placement   : 'top'
                         },
                         {
                             appendToBody: true,
                             type        : 'element',
                             selector    : "#quickViewcontact",
-                            title       : joyRideText.quickView.title,
-                            content     : joyRideText.quickView.content,
+                            title       : joyRideText.quickViewTitle,
+                            content     : joyRideText.quickViewContent,
                             placement   : 'right',
                             beforeStep  : showTopRecord
 
@@ -139,8 +139,8 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             appendToBody: true,
                             type        : 'element',
                             selector    : "#addNewRecordcontact",
-                            title       : joyRideText.addNewRecord.title,
-                            content     : joyRideText.addNewRecord.content,
+                            title       : joyRideText.addNewRecordTitle,
+                            content     : joyRideText.addNewRecordContent,
                             placement   : 'right',
                             beforeStep  : showTopRecord
                         },
@@ -148,16 +148,16 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             appendToBody: true,
                             type        : 'element',
                             selector    : "#viewListcontact",
-                            title       : joyRideText.viewAllRecords.title,
-                            content     : joyRideText.viewAllRecords.content,
+                            title       : joyRideText.viewAllRecordsTitle,
+                            content     : joyRideText.viewAllRecordsContent,
                             placement   : 'right'
                         },
                         {
                             appendToBody:true,
                             type        : 'element',
                             selector    : "#needHelp",
-                            title       : joyRideText.needHelp.title,
-                            content     : joyRideText.needHelp.content,
+                            title       : joyRideText.needHelpTitle,
+                            content     : joyRideText.needHelpContent,
                             placement   : 'bottom',
                             customClass : "need-help-jr",
                             beforeStep  : gotoSectionHelp
@@ -166,8 +166,8 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             appendToBody:true,
                             type        : 'element',
                             selector    : "#slaask-button-cross",
-                            title       : joyRideText.needMoreHelp.title,
-                            content     : joyRideText.needMoreHelp.content,
+                            title       : joyRideText.needMoreHelpTitle,
+                            content     : joyRideText.needMoreHelpContent,
                             placement   : 'top',
                             customClass : "need-more-help-jr"
                         }

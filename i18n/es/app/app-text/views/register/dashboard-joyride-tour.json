@@ -1,89 +1,47 @@
 {
-  "welcome": {
-    "title": "Bienvenidos a la página Presentar: Tablero de control",
-    "content": "<p>El Tablero de control es su espacio de trabajo personal. Aquí puede ver, presentar, examinar y editar registros, según cuál sea su función como usuario, así como actualizar la información de su perfil.</p>"
-  },
-  "personalInformation": {
-    "title": "Su información personal",
-    "content": "<p>La sección \"Bienvenidos\" se abre al hacer clic en la \"flecha hacia abajo\". Aquí es posible ver y actualizar la información de su perfil.</p>"
-  },
-  "recordOverview": {
-    "title": "Panorama general de los registros",
-    "content": "<p>En esta sección se categorizan los registros como <i>Registros nacionales</i> y <i>Registros de referencia</i> y se muestra cada uno de ellos según cuál sea su función como usuario. También se muestra el estado de diferentes registros.</p>"
-  },
-  "yourRecordsStatus": {
-    "title": "Sus registros: situación",
-    "content": "<p>Las últimas tres columnas indican el estado de los registros para cada tipo de registro. Los números que figuran en cada columna indican el número de registros publicados, los registros que son borradores y los registros aún pendientes de aprobación. <br><br><u>Consejo:</u> haga clic en cualquier número para ver la lista de todos los registros y su situación en relación con el tipo de registro seleccionado.</p>"
-  },
-  "yourRecordsOffline": {
-    "title": "Sus registros: formatos fuera de línea",
-    "content": "<p>En esta columna puede ver y descargar los formatos fuera de línea en el idioma que usted elija. <br>Los formatos fuera de línea son archivos Word que contienen la misma información que el \"Formulario de presentación\" en línea. Su objetivo principal es servir de ayuda para recopilar la información antes de presentarla en línea.</p>"
-  },
-  "quickView": {
-    "title": "Vista rápida",
-    "content": "<p>Haga clic en la \"flecha hacia abajo\" para ver los últimos 10 registros.</p>"
-  },
-  "addNewRecord": {
-    "title": "Agregar un registro nuevo",
-    "content": "<p>Haga clic en el símbolo “+” para crear un registro nuevo.</p>"
-  },
-  "viewAllRecords": {
-    "title": "Ver todos los registros",
-    "content": "<p>Haga clic en el símbolo “Lista” para ver un resumen de todos los registros relacionados con el tipo de registro correspondiente. En la página que se abre podrá filtrar los registros existentes y crear nuevos, así como duplicar, editar o borrar un registro.<br><br><u> Consejo:</u>  también puede hacer clic en el título del tipo de registro (por ejemplo, haga clic en \"Contacto (CON)\").</p>"
-  },
-  "needHelp": {
-    "title": "¿Necesita ayuda?",
-    "content": "<p>Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con el Tablero de control.</p>"
-  },
-  "needMoreHelp": {
-    "title": "¿Necesita más ayuda?",
-    "content": "<p>Use la función de Chat para enviarnos un mensaje si necesita más ayuda.</p>"
-  },
-  "#meta": {
+  "welcomeTitle": "Bienvenidos a la página Presentar: Tablero de control",
+  "welcomeContent": "<p>El Tablero de control es su espacio de trabajo personal. Aquí puede ver, presentar, examinar y editar registros, según cuál sea su función como usuario, así como actualizar la información de su perfil.</p>",
+  "personalInformationTitle": "Su información personal",
+  "personalInformationContent": "<p>La sección \"Bienvenidos\" se abre al hacer clic en la \"flecha hacia abajo\". Aquí es posible ver y actualizar la información de su perfil.</p>",
+  "recordOverviewTitle": "Panorama general de los registros",
+  "recordOverviewContent": "<p>En esta sección se categorizan los registros como <i>Registros nacionales</i> y <i>Registros de referencia</i> y se muestra cada uno de ellos según cuál sea su función como usuario. También se muestra el estado de diferentes registros.</p>",
+  "yourRecordsStatusTitle": "Sus registros: situación",
+  "yourRecordsStatusContent": "<p>Las últimas tres columnas indican el estado de los registros para cada tipo de registro. Los números que figuran en cada columna indican el número de registros publicados, los registros que son borradores y los registros aún pendientes de aprobación. <br><br><u>Consejo:</u> haga clic en cualquier número para ver la lista de todos los registros y su situación en relación con el tipo de registro seleccionado.</p>",
+  "yourRecordsOfflineTitle": "Sus registros: formatos fuera de línea",
+  "yourRecordsOfflineContent": "<p>En esta columna puede ver y descargar los formatos fuera de línea en el idioma que usted elija. <br>Los formatos fuera de línea son archivos Word que contienen la misma información que el \"Formulario de presentación\" en línea. Su objetivo principal es servir de ayuda para recopilar la información antes de presentarla en línea.</p>",
+  "quickViewTitle": "Vista rápida",
+  "quickViewContent": "<p>Haga clic en la \"flecha hacia abajo\" para ver los últimos 10 registros.</p>",
+  "addNewRecordTitle": "Agregar un registro nuevo",
+  "addNewRecordContent": "<p>Haga clic en el símbolo “+” para crear un registro nuevo.</p>",
+  "viewAllRecordsTitle": "Ver todos los registros",
+  "viewAllRecordsContent": "<p>Haga clic en el símbolo “Lista” para ver un resumen de todos los registros relacionados con el tipo de registro correspondiente. En la página que se abre podrá filtrar los registros existentes y crear nuevos, así como duplicar, editar o borrar un registro.<br><br><u> Consejo:</u>  también puede hacer clic en el título del tipo de registro (por ejemplo, haga clic en \"Contacto (CON)\").</p>",
+  "needHelpTitle": "¿Necesita ayuda?",
+  "needHelpContent": "<p>Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con el Tablero de control.</p>",
+  "needMoreHelpTitle": "¿Necesita más ayuda?",
+  "needMoreHelpContent": "<p>Use la función de Chat para enviarnos un mensaje si necesita más ayuda.</p>",
+  "#meta":{
     "hashedOn": "2024-11-22T14:18:26.881Z",
     "algorithm": "md5",
     "branch": "2024.46.0",
-    "hashes": {
-      "welcome": {
-        "title": "4960270312fe93f8f70a281c0487e3e9",
-        "content": "89db0c88ac18123ccc240db3b17a99f8"
-      },
-      "personalInformation": {
-        "title": "6335a00a08fde0fbb8f6d6630cdadd92",
-        "content": "f333d8824de3be430ab9cbe28d813785"
-      },
-      "recordOverview": {
-        "title": "4456c418cb94aa7a9dd3caf3365c3458",
-        "content": "18dd3faf56feadbd306f79489ad7d01d"
-      },
-      "yourRecordsStatus": {
-        "title": "799e70e3afbd62ef3c1b011b70d25e8e",
-        "content": "ee0914216cdfe6e837518f3842f59048"
-      },
-      "yourRecordsOffline": {
-        "title": "a052a0ecd7109454b473b360e20763b7",
-        "content": "de332662b7e8d18d166980897b3dcc9e"
-      },
-      "quickView": {
-        "title": "c91e4ee170226d66e90f99ba917e4c20",
-        "content": "04e0407198ff52c9d26f315525c48478"
-      },
-      "addNewRecord": {
-        "title": "d9b718cad121430960a45708020bd80a",
-        "content": "c10f39427968447c22651af72a1cd732"
-      },
-      "viewAllRecords": {
-        "title": "f3165b9437c6f212c093fe9ab641752a",
-        "content": "d6e28e3215da79f1f08aed32120daf89"
-      },
-      "needHelp": {
-        "title": "4bd9ef088a14b5f6fd9ef86e6f33037f",
-        "content": "07c4dffadead8425dd86d463d50e0086"
-      },
-      "needMoreHelp": {
-        "title": "21019d5221b8a27734792493c892bbe2",
-        "content": "6edaa4629440bf7eab61e6f4fe316b60"
-      }
-    }
+    "hashesWelcomeTitle": "4960270312fe93f8f70a281c0487e3e9",
+    "hashesWelcomeContent": "89db0c88ac18123ccc240db3b17a99f8",
+    "hashesPersonalInformationTitle": "6335a00a08fde0fbb8f6d6630cdadd92",
+    "hashesPersonalInformationContent": "f333d8824de3be430ab9cbe28d813785",
+    "hashesRecordOverviewTitle": "4456c418cb94aa7a9dd3caf3365c3458",
+    "hashesRecordOverviewContent": "18dd3faf56feadbd306f79489ad7d01d",
+    "hashesYourRecordsStatusTitle": "799e70e3afbd62ef3c1b011b70d25e8e",
+    "hashesYourRecordsStatusContent": "ee0914216cdfe6e837518f3842f59048",
+    "hashesYourRecordsOfflineTitle": "a052a0ecd7109454b473b360e20763b7",
+    "hashesYourRecordsOfflineContent": "de332662b7e8d18d166980897b3dcc9e",
+    "hashesQuickViewTitle": "c91e4ee170226d66e90f99ba917e4c20",
+    "hashesQuickViewContent": "04e0407198ff52c9d26f315525c48478",
+    "hashesAddNewRecordTitle": "d9b718cad121430960a45708020bd80a",
+    "hashesAddNewRecordContent": "c10f39427968447c22651af72a1cd732",
+    "hashesViewAllRecordsTitle": "f3165b9437c6f212c093fe9ab641752a",
+    "hashesViewAllRecordsContent": "d6e28e3215da79f1f08aed32120daf89",
+    "hashesNeedHelpTitle": "4bd9ef088a14b5f6fd9ef86e6f33037f",
+    "hashesNeedHelpContent": "07c4dffadead8425dd86d463d50e0086",
+    "hashesNeedMoreHelpTitle": "21019d5221b8a27734792493c892bbe2",
+    "hashesNeedMoreHelpContent": "6edaa4629440bf7eab61e6f4fe316b60"
   }
 }
