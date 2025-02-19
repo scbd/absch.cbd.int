@@ -36,7 +36,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
             
               activityScope   : function() {return thesaurusService.getDomainTerms('cbiCpbTypes');},
               targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience', {other:true, otherType:'lstring'});},
-              geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},
+              geographicScope : function() {return thesaurusService.getDomainTerms('geographicScope');},
               aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},         
               gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets');},
               absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');},
