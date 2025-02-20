@@ -13,19 +13,6 @@
                 }          
         </style>
 
-    <div class="mt-2 alert alert-danger alert-dismissible fade show rounded p-2" role="alert" ng-if="deletedRecordTitles.length > 0">
-        <h4 class="mb-2">{{::('documentSelectorT.deletedRecordsMsg'|$translate)}}</h4>
-        <div ng-repeat="record in deletedRecordTitles">
-            <div class="alert alert-light border rounded p-1 d-flex justify-content-between align-items-center me-5">
-                <a rel="noopener" translation-url target="_blank" 
-                    ng-href="/database/{{record.documentID | uppercase | encodeURIComponent}}">
-                    {{record.title | lstring:locale}} 
-                </a>  
-            </div>
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
     <!-- existing documents display -->
     <div ng-transclude="selectRecords">   
         <div class="row">
@@ -37,6 +24,19 @@
                     <span ng-if="!caption && type=='radio'">{{::('documentSelectorT.addRecord'|$translate)}}</span>
                     <span ng-if="!caption && type!=='radio'">{{::('documentSelectorT.addRecords'|$translate)}}</span>
                 </button>
+
+                <div class="mt-2 alert alert-danger alert-dismissible fade show rounded p-2" role="alert" ng-if="deletedRecordTitles.length > 0">
+                    <h4 class="mb-2">{{::('documentSelectorT.deletedRecordsMsg'|$translate)}}</h4>
+                    <div ng-repeat="record in deletedRecordTitles">
+                        <div class="alert alert-light border rounded p-1 d-flex justify-content-between align-items-center me-5">
+                            <a rel="noopener" translation-url target="_blank" 
+                                ng-href="/database/{{record.documentID | uppercase | encodeURIComponent}}">
+                                {{record.title | lstring:locale}} 
+                            </a>  
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div> 
 
                 <span ng-show="model.length==0 || !model"> <i class="color-blue"> {{::('documentSelectorT.noRecords'|$translate)}} </i> </span>
 

@@ -117,6 +117,32 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 });
             }
 
+            async function getDeletedRecordTitles(deletedRecordIdentifier) {
+                if ($scope.deletedRecordTitles.some(record => record.identifier === deletedRecordIdentifier)) {
+                    return;
+                }
+            
+                try {
+                    const results = await IStorage.documents.get(deletedRecordIdentifier, { info: true, 'include-deleted': true });
+            
+                    if (results?.data?.documentID) {
+                        const newRecord = {
+                            title: results.data.title,
+                            documentID: results.data.documentID,
+                            identifier: deletedRecordIdentifier
+                        };
+            
+                        if (!$scope.deletedRecordTitles.some(record => record.documentID === newRecord.documentID)) {
+                            $scope.deletedRecordTitles.push(newRecord);
+                        }
+            
+                        $scope.$applyAsync(); //testing
+                    }
+                } catch (error) {
+                    console.error("Error fetching deleted record:", error);
+                }
+            }
+            
              //==================================
             //
             //==================================
@@ -133,42 +159,35 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 						docs.push(IStorage.documents.get($scope.model.identifier, {info:true}, config));
 					}
 					else{
-	                    _.forEach($scope.model, function (mod) {
+	                    _.forEach($scope.model, async function (mod) {
 							if(mod.identifier){
                                 var config;
                                 if(focalPointRegex.test(mod.identifier))
 									config = {headers  : {realm:undefined}};
-								docs.push(IStorage.documents.get(mod.identifier,{info:true, 'include-deleted':true}, config));
+                                try {
+                                    const value = await IStorage.documents.get(mod.identifier, { info: true }, config);
+                                    docs.push(value);
+                                } catch (error) {  
+                                    if (error.data?.statusCode === 404) {
+                                        // Remove the deleted identifier from the model
+                                        $scope.model = $scope.model.filter(item => item.identifier !== mod.identifier);
+                                        await getDeletedRecordTitles(mod.identifier);
+                                    } else {
+                                        console.error("Error fetching document:", error);
+                                    }
+                                }
                             }
-	                    });
+                        });
 					}
 
 					$q.all(docs)
 					.then(function(results){
 							$scope.selectedDocuments = _.map(results, function(result){ return result.data?.body||{}; });
 
-                            results.forEach(result => { 
-
-                                if (result.data?.deletedOn) {
-    
-                                    $scope.model = $scope.model.filter(item => {
-                                        const itemIdentifier = item.identifier.split('@')[0];
-                                        return itemIdentifier !== result.data.identifier;
-                                    });
-                                    // Ensure the record is only added once
-                                    const isAlreadyAdded = $scope.deletedRecordTitles.some(
-                                        record => record.documentID === result.data.documentID
-                                    );
-                                    if (!isAlreadyAdded) {
-                                        $scope.deletedRecordTitles.push({
-                                            title: result.data.title, 
-                                            documentID: result.data.documentID
-                                        });
-                                    }
-                                }
-                                // update model reference with latest revision
-                                verifyAndUpdateRevision(result, result.identifier);
-                            });
+                            // update model reference with latest revision
+                            results.forEach(({data})=>{
+                                verifyAndUpdateRevision(data, data.identifier);
+                            })
 
                             var selectedDocuments    = _.map($scope.model, function(d){return removeRevisionNumber(d.identifier)});
                             var selectedRawDocuments = _.filter($scope.rawDocuments.docs, function(doc){
