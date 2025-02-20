@@ -37,9 +37,7 @@ import { bundleUrls } from '../app/boot.js';
                     isPrerender        : req.headers['x-is-prerender'],
                     isCrawler          : req.headers['x-is-crawler'],
                     apiUrl             : global.app.apiUrl,
-                    accountsUrl        : global.app.accountsUrl,
-                    environment        : process.env.ENVIRONMENT,
-
+                    accountsUrl        : global.app.accountsUrl       
                 };
 
     return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`, options);
