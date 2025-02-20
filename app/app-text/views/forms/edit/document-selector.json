@@ -28,5 +28,6 @@
     "noRecordFound": "no records found.",
     "revisionUpdated": "The reference to this record has been updated to its latest revision",
     "myPendingRequests": "My pending requests",
-    "uId": "UID"
+    "uId": "UID",
+    "deletedRecordsMsg": "References to the deleted records will automatically be removed from this record."
 }
