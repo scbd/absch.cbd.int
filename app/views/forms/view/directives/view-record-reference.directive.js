@@ -192,9 +192,6 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 						await $scope.refreshRecord(`${currentId.identifier}@${currentId.latestRevision}`, new Date().getTime());
 					} finally {
 						$scope.revisionLoading = false;
-						$timeout(function() {
-                        	$scope.$apply();
-                   		}, 300);
 					}
 				}
 				
