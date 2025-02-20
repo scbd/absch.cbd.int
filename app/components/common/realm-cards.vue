@@ -24,7 +24,9 @@
     import RealmApi from '~/api/realms';
     import { lstring } from '~/components/kb/filters';
     import { useAuth } from '@scbd/angular-vue/src/index.js';
+    import { useRealm } from '~/services/composables/realm.js';
 
+    const realm = useRealm();
     const { t, locale } = useI18n();
     const auth = useAuth();
     const realmApi = new RealmApi({ tokenReader: () => auth.token() });
@@ -36,7 +38,7 @@
     });
 
     onMounted(async () => {
-        const apiRealms = await realmApi.getRealmConfigurations();
+        const apiRealms = await realmApi.getRealmConfigurations(realm.environment);
 
         realmConfigurations.value =
           props.hideRealms.length > 0 ? apiRealms.filter((item) => !props.hideRealms.includes(item.realm)) : apiRealms;
