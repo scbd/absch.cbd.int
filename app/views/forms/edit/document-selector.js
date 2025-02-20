@@ -45,6 +45,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             $scope.rawDocuments = [];
             $scope.selectedDocuments=[];
             $scope.tempSelectedDocuments=[];
+            $scope.deletedRecordTitles = [];
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user?.government;
             $scope.showAddButton = false;
@@ -137,7 +138,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                                 var config;
                                 if(focalPointRegex.test(mod.identifier))
 									config = {headers  : {realm:undefined}};
-								docs.push(IStorage.documents.get(mod.identifier,{info:true}, config));
+								docs.push(IStorage.documents.get(mod.identifier,{info:true, 'include-deleted':true}, config));
                             }
 	                    });
 					}
@@ -146,10 +147,28 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 					.then(function(results){
 							$scope.selectedDocuments = _.map(results, function(result){ return result.data?.body||{}; });
 
-                            // update model reference with latest revision
-                            results.forEach(({data})=>{
-                                verifyAndUpdateRevision(data, data.identifier);
-                            })
+                            results.forEach(result => { 
+
+                                if (result.data?.deletedOn) {
+    
+                                    $scope.model = $scope.model.filter(item => {
+                                        const itemIdentifier = item.identifier.split('@')[0];
+                                        return itemIdentifier !== result.data.identifier;
+                                    });
+                                    // Ensure the record is only added once
+                                    const isAlreadyAdded = $scope.deletedRecordTitles.some(
+                                        record => record.documentID === result.data.documentID
+                                    );
+                                    if (!isAlreadyAdded) {
+                                        $scope.deletedRecordTitles.push({
+                                            title: result.data.title, 
+                                            documentID: result.data.documentID
+                                        });
+                                    }
+                                }
+                                // update model reference with latest revision
+                                verifyAndUpdateRevision(result, result.identifier);
+                            });
 
                             var selectedDocuments    = _.map($scope.model, function(d){return removeRevisionNumber(d.identifier)});
                             var selectedRawDocuments = _.filter($scope.rawDocuments.docs, function(doc){
