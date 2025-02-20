@@ -80,23 +80,30 @@
 								</div>
 								<div class="row" ng-if="document.geographicScope && (isGlobalOrRegional() || isNational())">
 									<div class="col-md-12">
-										<div class="km-control-group"  required style="padding:10px;">
-											<div class="row">
-												<div class="col-md-3" ng-show="!isNational()">
+										<div class="km-control-group"  required >
+											<div class="row g-0">
 
-													<div class="km-control-group" required name="geographicScope" caption="">
-															<label name="countryRegions" class="control-label" for="geographicScope">{{::('editCBIT.geographicalGroup'|$translate)}}</label>
+												<label style="height: 0px;width: 0px;display: inline;"  ng-if="isGlobalOrRegional()" name="countryRegions" 
+													class="control-label" for="countryRegions">
+													<span style="display:none">{{::('editCBIT.geographicalGroup'|$translate)}} {{::('editCBIT.andOr'|$translate)}} {{::('editCBIT.countries'|$translate)}}</span>
+												</label>
+
+												<div class="col-md-3" ng-if="!isNational()">
+
+													<div class="km-control-group" required name="countryRegionsRegion" caption="">
+															<label name="countryRegionsRegion" required="true" class="control-label" for="countryRegions">{{::('editCBIT.geographicalGroup'|$translate)}}</label>
 														<div km-select multiple required name="regions"
 																ng-model="countryRegions.regions" placeholder="{{::('editCBIT.selectOptions'|$translate)}}"
 																items="options.regions()"></div>
 													</div>
 												</div>
-												<div class="col-md-1" ng-hide="!isGlobalOrRegional()">
+												<div class="col-md-1" ng-if="isGlobalOrRegional()">
 													{{::('editCBIT.andOr'|$translate)}}
 												</div>
 												<div class="col-md-3">
-													<div class="km-control-group countries-dropdown" style="text-align: left;"  caption="">
-														<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">
+
+													<div class="km-control-group countries-dropdown" required name="countryRegions"  caption="">
+														<label name="countryRegions" required="true" class="control-label d-block" for="countryRegions">
 															{{::('editCBIT.countries'|$translate)}}
 														</label>
 														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selectOptions'|$translate)}}" items="options.countries()"></div>
