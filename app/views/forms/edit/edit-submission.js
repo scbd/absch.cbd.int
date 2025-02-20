@@ -99,8 +99,17 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
                   fields: $scope.notificationQuery.fl
               })
               .then(function(result){                
-                  $scope.notifications = formatRecords(result.data.response.docs);
-              });
+                
+                    $scope.notifications = formatRecords(result.data.response.docs);
+                    // Remove notifications that were not found (404)
+                    let foundIdentifiers = result.data.response.docs.map(doc => doc.identifier_s);
+                    $scope.document.notifications = $scope.document.notifications.filter(notif => foundIdentifiers.includes(notif.identifier));
+
+                })
+                .catch(function(error) {
+                    console.error("Error fetching notifications:", error);
+                    $scope.notifications = [];
+                });
             }
             else{
               $scope.notifications = [];
@@ -123,53 +132,23 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         return docs;
     }
 
-    $scope.setDocument({}, true).then(async function (doc) {
+    $scope.setDocument({}, true).then(function(doc) {
+        let notificationsParam = $location.search().notification;
         let preselectedNotifications = [];
-        // Example: register/SUB/new?notifications=2024-093,2024-092
-        const notificationsParam = $location.search().notifications;
-        let notificationNumbers;
     
-        // Handle notificationsParam as an array or a string, register/SUB/new?notifications=2024-093&notifications=2024-092
-        if (Array.isArray(notificationsParam)) {
-            notificationNumbers = notificationsParam.map((number) => number?.trim());
-        } else if (typeof notificationsParam === 'string' && notificationsParam.trim() !== "") {
-            notificationNumbers = notificationsParam.split(',').map((number) => number?.trim());
+        if (!Array.isArray(notificationsParam)) {
+            notificationsParam = notificationsParam ? [notificationsParam] : [];
         }
-    
-        if (notificationNumbers) {
-
-            preselectedNotifications = await Promise.all(
-                notificationNumbers.map(async (number) => {
-                    const isValid = await isValidNotificationNumber(number);
-                    return isValid ? { identifier: number } : null; // Return an object with identifier if valid
-                })
-            ).then((result) => result.filter(Boolean)); // Filter out null values after validation
-        }
+        // Convert notifications into required object format
+        preselectedNotifications = notificationsParam.map((number) => ({
+            identifier: number.trim()
+        }));
     
         if (preselectedNotifications.length > 0) {
             $scope.document.notifications = preselectedNotifications;
         }
         $scope.onNotificationSelected();
     });
-    
-    // Check if the notification number matches the pattern and exists in the database
-    async function isValidNotificationNumber(number) {
-        if (!number || !/^\d{4}-\d{3}$/.test(number.trim())) {
-            return false;
-        }
-    
-        const query = `schema_s:notification AND symbol_s:${number}`;
-        try {
-            const result = await searchService.list({
-                query: query,
-                fields: $scope.notificationQuery.fl,
-            });
-            return result.data.response.docs.length > 0;
-        } catch (error) {
-            console.error(`Error fetching notifications for ${number}:`, error);
-            return false;
-        }
-    }
     
   }];
 
