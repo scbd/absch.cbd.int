@@ -7,8 +7,8 @@
 
   <div class="innerPageContent register-content card card-1-notrans m-0 p-3">
     <div class="register-content-header bg-pink color-white">
-      <div class="px-2">
-        <h3>ABSCH {{::('registerAdminT.admin'|$translate)}} </h3>
+      <div class="p-2">
+        <h3>{{::realm.displayName}} {{::('registerAdminT.admin'|$translate)}} </h3>
       </div>
     </div>
     <div class="register-content-content" ng-if="roles.isAdministrator">
@@ -22,52 +22,44 @@
                   <tbody>
 
                     <tr>
-                      <td>{{::('registerAdminT.viewList'|$translate)}} </td>
+                      
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/reported-records">{{::('registerAdminT.manageReportedRecords'|$translate)}}</a></td>
+                        <a rel="noopener" translation-url class="btn btn-link" ng-href="/register/admin/reported-records">{{::('registerAdminT.viewList'|$translate)}}</a></td>
                     </tr>
-                    <tr>
-                        <td>{{::('registerAdminT.commonAbschIssues'|$translate)}}</td>
+                    <tr ng-if="isABS">
                         <td>
-                          <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/common-issues">{{::('registerAdminT.commonIssues'|$translate)}}</a></td>
-                      </tr>
-                    <tr>
-                      <td>{{::('registerAdminT.viewStatus'|$translate)}}</td>
-                      <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/requests">{{::('registerAdminT.manageWorkflowRecords'|$translate)}}</a></td>
+                          <a rel="noopener" translation-url class="btn btn-link" ng-href="/register/admin/common-issues">{{::('registerAdminT.commonAbschIssues'|$translate)}}</a></td>
                     </tr>
-                    <tr>
-                      <td>{{::('registerAdminT.multipleFilters'|$translate)}}</td>
+                    <tr ng-if="isABS">
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/report-counts">{{::('registerAdminT.reportCounts'|$translate)}}</a></td>
+                        <a rel="noopener" translation-url class="btn btn-link" ng-href="/register/admin/requests">{{::('registerAdminT.viewStatus'|$translate)}}</a></td>
+                    </tr>
+                    <tr ng-if="isABS">
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-link" ng-href="/register/admin/report-counts">{{::('registerAdminT.multipleFilters'|$translate)}}</a></td>
 
                     </tr>
-                    <tr>
-                      <td>{{::('registerAdminT.viewIrrcCount'|$translate)}}</td>
+                    <tr ng-if="isABS">
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/ircc-counts">{{::('registerAdminT.irrcCounts'|$translate)}}</a></td>
+                        <a rel="noopener" translation-url class="btn btn-link" ng-href="/register/admin/ircc-counts">{{::('registerAdminT.viewIrrcCount'|$translate)}}</a></td>
 
                     </tr>
-                    <tr>
-                      <td>{{::('registerAdminT.viewCountries'|$translate)}}</td>
+                    <tr ng-if="isABS">
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/user-role-report">{{::('registerAdminT.userRoleReport'|$translate)}}</a></td>
-                    </tr>
-                    <tr>
-                      <td>{{::('registerAdminT.viewEmailList'|$translate)}}</td>
-                      <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/subscriptions">{{::('registerAdminT.subscriptions'|$translate)}}</a></td>
-                    </tr>
-                    <tr>
-                      <td>{{::('registerAdminT.viewClientError'|$translate)}}</td>
-                      <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/error-logs">{{::('registerAdminT.errorLogs'|$translate)}}</a></td>
+                        <a rel="noopener" translation-url class="btn btn-link" ng-href="/register/admin/user-role-report">{{::('registerAdminT.viewCountries'|$translate)}}</a></td>
                     </tr>
                     <tr>
                       <td>
-                        {{::('registerAdminT.validateTranslation'|$translate)}}
-                      </td>
+                        <a rel="noopener" translation-url class="btn btn-link" ng-href="/register/admin/subscriptions">{{::('registerAdminT.viewEmailList'|$translate)}}</a></td>
+                    </tr>
+                    <tr>
                       <td>
+                        <a rel="noopener" translation-url class="btn btn-link" ng-href="/register/admin/error-logs">{{::('registerAdminT.viewClientError'|$translate)}}</a></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="btn btn-default pe-none" style="cursor: default;">{{::('registerAdminT.validateTranslation'|$translate)}}</span>
+                     
                         <button type="button" class="btn btn-primary" ng-click="validateTranslation(!isValidatingTranslation)">
                           <span ng-if="!isValidatingTranslation">{{::('registerAdminT.enable'|$translate)}}</span><span ng-if="isValidatingTranslation">{{::('registerAdminT.disable'|$translate)}}</span>
                         </button>
