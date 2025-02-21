@@ -3371,6 +3371,9 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
 #recordContent .share-single-document .table-export-button{
     color: #fff;
 }
+#recordContent .add-document-tag #multiSelect a{
+    color: #fff;
+}
 #search-new  .input-option label.heading {
     font-weight: normal !important;
     margin-top: 15px;
