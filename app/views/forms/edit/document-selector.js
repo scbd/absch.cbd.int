@@ -45,6 +45,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             $scope.rawDocuments = [];
             $scope.selectedDocuments=[];
             $scope.tempSelectedDocuments=[];
+            $scope.deletedRecordTitles = [];
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user?.government;
             $scope.showAddButton = false;
@@ -116,6 +117,32 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 });
             }
 
+            async function getDeletedRecordTitles(deletedRecordIdentifier) {
+                if ($scope.deletedRecordTitles.some(record => record.identifier === deletedRecordIdentifier)) {
+                    return;
+                }
+            
+                try {
+                    const results = await IStorage.documents.get(deletedRecordIdentifier, { info: true, 'include-deleted': true });
+            
+                    if (results?.data?.documentID) {
+                        const newRecord = {
+                            title: results.data.title,
+                            documentID: results.data.documentID,
+                            identifier: deletedRecordIdentifier
+                        };
+            
+                        if (!$scope.deletedRecordTitles.some(record => record.documentID === newRecord.documentID)) {
+                            $scope.deletedRecordTitles.push(newRecord);
+                        }
+            
+                        $scope.$applyAsync(); //testing
+                    }
+                } catch (error) {
+                    console.error("Error fetching deleted record:", error);
+                }
+            }
+            
              //==================================
             //
             //==================================
@@ -132,14 +159,25 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
 						docs.push(IStorage.documents.get($scope.model.identifier, {info:true}, config));
 					}
 					else{
-	                    _.forEach($scope.model, function (mod) {
+	                    _.forEach($scope.model, async function (mod) {
 							if(mod.identifier){
                                 var config;
                                 if(focalPointRegex.test(mod.identifier))
 									config = {headers  : {realm:undefined}};
-								docs.push(IStorage.documents.get(mod.identifier,{info:true}, config));
+                                try {
+                                    const value = await IStorage.documents.get(mod.identifier, { info: true }, config);
+                                    docs.push(value);
+                                } catch (error) {  
+                                    if (error.data?.statusCode === 404) {
+                                        // Remove the deleted identifier from the model
+                                        $scope.model = $scope.model.filter(item => item.identifier !== mod.identifier);
+                                        await getDeletedRecordTitles(mod.identifier);
+                                    } else {
+                                        console.error("Error fetching document:", error);
+                                    }
+                                }
                             }
-	                    });
+                        });
 					}
 
 					$q.all(docs)
