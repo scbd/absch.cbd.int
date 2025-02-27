@@ -12,7 +12,7 @@
       &nbsp;<i class="fa fa-external-link" aria-hidden="true"></i>
     </span>
   </a>
-    <div v-if="hasSubMenu" ref="subMenuRef" class="collapse sub-menu">
+    <div v-show="hasSubMenu" ref="subMenuRef" class="collapse sub-menu">
       <ul class="list-unstyled" :class="[`level-${level}`]">
         <side-menu-sub v-for="(subMenu, index) in menus" :key="index" :level="level+1" :menu="subMenu" />
       </ul>
@@ -21,10 +21,10 @@
 </template>
 
 <script setup>
-  import { computed, ref, onMounted, watch } from 'vue';
+  import { computed, ref, onMounted, watch, watchEffect } from 'vue';
   import { lstring } from '../kb/filters';
   import { useRoute } from "@scbd/angular-vue/src/index.js";
-  import { Collapse } from 'bootstrap'; // Todo
+  import { Collapse } from 'bootstrap'; 
 
   const route = useRoute();
 
@@ -37,7 +37,7 @@
   const hasSubMenu = computed(() => !!props.menu.menus?.length);
   const isSelected = computed(() => route.value.path === `/${props.menu.url}`);
 
-  const isExpanded = ref(route.value.path.startsWith(`/${props.menu.url}`));
+  const isExpanded = ref(false);
   const subMenuRef = ref(null);
 
   let bsCollapse = null; // Collapse instance for Bootstrap
@@ -46,11 +46,23 @@
 
     if (!hasSubMenu.value) return;
     isExpanded.value = !isExpanded.value;
+    // handle double click 
+    if (bsCollapse) {
+      if (!isExpanded.value) {
+        bsCollapse.show();
+      } else {
+        bsCollapse.hide();
+      }
+    }
 
-    if(!props.menu.hasContent && props.menu.target !== '_blank') {
+    if (!props.menu.hasContent && props.menu.target !== '_blank') {
       $event.preventDefault();
     }
   };
+    //automatically tracks dependencies—No need to explicitly specify route.value.path
+    watchEffect(() => {
+      isExpanded.value = route.value.path.startsWith(`/${props.menu.url}`);
+    });
 
     // Watch for changes in isExpanded to trigger collapse behavior
     watch(isExpanded, (newVal) => {
@@ -148,9 +160,7 @@
 .btn-toggle-nav a:focus {
   background-color: #324252;
 }
-
-
-
+ 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
 
