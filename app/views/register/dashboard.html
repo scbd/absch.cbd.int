@@ -564,6 +564,9 @@
                         </div> -->
                     </div>
                 </div>
+                 <div ng-if="isChm && exportVueComponent">
+                    <realm-cards hide-realms="['CHM','CHM-TRG','CHM-DEV']" ng-vue="exportVueComponent"></realm-cards>
+                 </div>
             </div>
         </div>
     </div>
