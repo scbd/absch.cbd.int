@@ -63,7 +63,7 @@
       import { formatDate, lstring } from './filters';
       import { getRealmArticleTag } from "../../services/composables/articles.js";
 
-      const route = useRoute();
+      const route = useRoute().value;
       const { t, locale } = useI18n({ messages });
       const realm = useRealm();
       const auth = useAuth();
@@ -80,9 +80,7 @@
   
       onMounted( async() => {
           categories.value = await loadKbCategories(locale.value);
-          if (route.value?.params?.search) {
-              search.value = route.value.params.search.replace(/"/g, "");
-          }         
+          search.value = route.query?.search || "";         
           realmTag.value = realmArticleTag;
           await loadArticles(1);
       });
