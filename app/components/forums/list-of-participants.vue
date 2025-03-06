@@ -60,7 +60,7 @@
             <tr v-for="(participant, index) in organizations" :key="index">
               <td scope="row">{{parties.length + nonParties.length + index + 1}}</td>
               <td>{{participant.title}} {{ participant.firstName }} {{ participant.lastName }}</td>
-              <td>{{ lstring(participant.organization | locale) }} </td>
+              <td>{{ lstring(participant.organization, locale) }} </td>
             </tr>
           </tbody>
         </table>
