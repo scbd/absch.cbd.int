@@ -64,6 +64,13 @@
                         <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/error-logs">{{::('registerAdminT.errorLogs'|$translate)}}</a></td>
                     </tr>
                     <tr>
+                      <!-- ToDo: need to move  once the PR approved , ng-if="roles.isAdministrator"-->
+                      <td>Admin Tags</td>
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-default" translation-url href="/register/admin-tags">{{::('registerTopMenuT.adminTags'|$translate)}}</a>
+                      </td>
+                    </tr>
+                    <tr>
                       <td>
                         {{::('registerAdminT.validateTranslation'|$translate)}}
                       </td>
