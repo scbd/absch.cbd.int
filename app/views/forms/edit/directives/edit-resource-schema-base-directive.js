@@ -60,7 +60,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 							return thesaurusService.getDomainTerms('resourceTypesVlr')
 							.then((resourceTypesVlr)=>{
 								let AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
-								let terms = getLimitedTerms(resourceTypesVlr, $scope.isBCH ? AbsRelated : [] );
+								let terms = getLimitedTerms(resourceTypesVlr, ($scope.isBCH || $scope.isCHM) ? AbsRelated : [] );
 								$timeout(()=>{
 									terms.forEach(term=>{
 										if(!(term.broaderTerms||[]).length){
@@ -151,6 +151,30 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 					}
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
+
+				$scope.onCbdSubjectChange = function (value) {
+				
+					const gbfTargets = [];
+					const hasAbsSubjects = _.some(value || [], { identifier: "CBD-SUBJECT-ABS" });
+					const hasBchSubjects = _.some(value || [], { identifier: "CBD-SUBJECT-BTB" });
+				
+					if (hasAbsSubjects)
+						gbfTargets.push({ identifier: "GBF-TARGET-13" });
+					if (hasBchSubjects)
+						gbfTargets.push({ identifier: "GBF-TARGET-17" });
+				
+					const existingTargets = $scope.document.gbfTargets || [];
+					const mergedTargets = [...existingTargets, ...gbfTargets].reduce((acc, target) => {
+						if (!acc.some(t => t.identifier === target.identifier)) {
+							acc.push(target);
+						}
+						return acc;
+					}, []);
+				
+					$scope.document.gbfTargets = mergedTargets;
+				};
+				
+				
 				//==================================
 				//
 				//==================================
@@ -163,7 +187,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 
 					if($scope.isBCH || $scope.isCHM) {	
 						
-						if ($scope.isBCH && !$scope.hasGBF('GBF-TARGET-13')){
+						if (($scope.isBCH || $scope.isCHM) && !$scope.hasGBF('GBF-TARGET-13')){
 							document.nagoya= undefined;
 						}						
 						if(document.biosafety){
@@ -175,7 +199,7 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 							$scope.onAddressGenesChange(document.biosafety.addressGenes);
 						}					
 					}
-					if($scope.isABS){						
+					if($scope.isABS || $scope.isCHM){						
 						
 						if(!$scope.hasGBF('GBF-TARGET-17')) {
 							document.biosafety = undefined;
