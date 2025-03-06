@@ -4,6 +4,7 @@ import template from "text!./view-record-reference.directive.html";
 import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
+import { sleep } from '~/services/composables/utils.js';
 
 app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr',
 	 function (storage, $timeout, translationService, $rootScope, searchService, solr) {
@@ -191,9 +192,14 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				const currentId = ids.find(e=>e.identifier == identifier)
 				
 				if(currentId?.latestRevision > currentId?.currentRevision){					
-					$scope.revisionLoading = true;			
-					await $scope.refreshRecord(`${currentId.identifier}@${currentId.latestRevision}`, new Date().getTime());
-					$scope.revisionLoading = false;
+					if($scope.loading) //TODO: use canceler instead of this.
+						await sleep(500);
+					$scope.revisionLoading = true;
+					try {
+						await $scope.refreshRecord(`${currentId.identifier}@${currentId.latestRevision}`, new Date().getTime());
+					} finally {
+						$scope.revisionLoading = false;
+					}
 				}
 				
 			});

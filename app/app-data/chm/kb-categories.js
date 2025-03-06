@@ -1,12 +1,16 @@
+import categoryTitleTranslations from '~/app-text/components/chm-kb-categories.json';
+import { mergeTranslationKeys } from '../../services/translation-merge';
+const categoryTitle = mergeTranslationKeys(categoryTitleTranslations);
+
 export const categories = [
   {
-    "title": "Announcements",
+    "title": categoryTitle.announcements,
     "adminTags": [
       "chm-announcement"
     ],
     "articles": []
   },{
-    "title": "About the CHM Clearing-House",
+    "title": categoryTitle.about,
     "adminTags": [
       "about"
     ],
@@ -14,7 +18,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Getting started",
+    "title": categoryTitle.gettingStarted,
     "adminTags": [
       "getting-started"
     ],
@@ -22,7 +26,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Finding information",
+    "title": categoryTitle.findingInformation,
     "adminTags": [
       "finding-information"
     ],
@@ -30,7 +34,7 @@ export const categories = [
     ]
   },
   {
-    "title": "Submitting information",
+    "title":categoryTitle.submittingInformation,
     "adminTags": [
       "submitting-information"
     ],
@@ -38,15 +42,15 @@ export const categories = [
     ]
   },
   {
-    "title": "Monitoring utilization",
+    "title": categoryTitle.nationalChm,
     "adminTags": [
-      "monitoring"
+      "national-chm"
     ],
     "articles": [
     ]
   },
   {
-    "title": "Need help",
+    "title": categoryTitle.gettingHelp,
     "adminTags": [
       "getting-help"
     ],
@@ -58,90 +62,32 @@ export const categories = [
     ]
   },
   {
-    "title": "E-Learning",
+    "title":categoryTitle.eLearning,
     "adminTags": [
       "elearning"
     ],
     "articles": []
   },
   {
-    "title": "Informal Advisory Committee (IAC)",
+    "title": categoryTitle.bioland,
     "adminTags": [
-      "meetings",
-      "iac"
+      "bioland"
     ],
     "articles": [
     ]
   },
   {
-    "title": "Governments",
+    "title": categoryTitle.chmAwards,
     "adminTags": [
-      "governments"
+      "chm-awards"
     ],
     "articles": []
   },
   {
-    "title": "Parties",
+    "title":categoryTitle.chmRelatedArticles,
     "adminTags": [
-      "parties"
-    ],
-    "articles": []
-  },
-  {
-    "title": "Non-Parties",
-    "adminTags": [
-      "non-parties"
-    ],
-    "articles": []
-  },
-  {
-    "title": "Users of genetic resources",
-    "adminTags": [
-      "users"
-    ],
-    "articles": []
-  },
-  {
-    "title": "Business/Private sector",
-    "adminTags": [
-      "business"
-    ],
-    "articles": []
-  },
-  {
-    "title": "Research/Academia",
-    "adminTags": [
-      "research"
-    ],
-    "articles": []
-  },
-  {
-    "title": "Indigenous Peoples",
-    "adminTags": [
-      "iplc"
-    ],
-    "articles": []
-  },
-  {
-    "title": "Local communities",
-    "adminTags": [
-      "iplc"
-    ],
-    "articles": []
-  },
-  {
-    "title": "Capacity-building Partners",
-    "adminTags": [
-      "partner"
-    ],
-    "articles": []
-  },
-  {
-    "title": "Donors",
-    "adminTags": [
-      "donors"
+      "chm-related-articles"
     ],
     "articles": []
   }
-
 ]
