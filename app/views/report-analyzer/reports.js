@@ -29,7 +29,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 components:{cbdArticle} 
             }
             $scope.$on('onReportTypeChanged', function(event, reportType) {
-               
+               $scope.reportType = reportType;
                 $scope.adminTags    = undefined;
                 $scope.articleQuery = undefined;
                 $timeout(()=>{ 
@@ -59,7 +59,17 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 };
                 sessionStorage.setItem('nrAnalyzerData', JSON.stringify(data));
 
-                $location.url(_.trimEnd($location.path(), '/') + '/analyzer');
+                const path = _.trimEnd($location.path(), '/') + '/analyzer/' + $scope.reportType;
+                $location.url(path);
+                // Pass all query string parameters at once
+                $location.search({
+                    type: $scope.selectedReportType, // no need if already passed in url,
+                    regions: $scope.selectedRegions,
+                    questions: $scope.selectedQuestions,
+                    regionsPreset: $scope.selectedRegionsPreset,
+                    regionsPresetFilter: $scope.selectedRegionsPresetFilter
+                });
+
             };
            
             var DefaultRegions = [
