@@ -127,8 +127,10 @@
                         <div>
                             <span class="color-white">|&nbsp;</span>
                             <a rel="noopener" translation-url title="{{::('recordLoaderT.edit'|$translate)}}" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
-                                class="btn btn-sm text-black action-button p-0 px-1 color-white" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocument.header.identifier|encodeURIComponent}}/edit">
-                                <i class="bi bi-pencil-square color-white"></i> <span class="d-none d-sm-inline-block color-white">{{::('recordLoaderT.edit'|$translate)}}</span>
+                                class="btn btn-sm text-black action-button p-0 px-1 color-white" target="{{ isDocumentSelectionModal ? '_blank' : '_self' }}" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocument.header.identifier|encodeURIComponent}}/edit">
+                                <i ng-class="isDocumentSelectionModal ? 'fa fa-external-link' : 'bi bi-pencil-square'" class="color-white"></i>
+                                <span class="d-none d-sm-inline-block color-white">{{::('recordLoaderT.edit'|$translate)}}</span>
+                                
                             </a>
                             <button title="{{::('recordLoaderT.delete'|$translate)}}" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button"
                                 class="btn btn-default" ng-click="askDelete(record)">
