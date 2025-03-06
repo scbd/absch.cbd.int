@@ -33,6 +33,10 @@ app.directive("viewResource", ['translationService', function (translationServic
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			};
 
+			$scope.constructThumbnailUrl = function(url) {
+				if (!url) return '';
+				return url.includes('?') ? url + '&thumbnail=true' : url + '?thumbnail=true';
+			};
 			
 		}]
 	};
