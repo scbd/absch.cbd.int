@@ -228,8 +228,8 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 						}
 						else {
 							//'include-deleted':false
-							qDocument = storage.documents.get(identifier + '@' + version, {}, config).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier + '@' + version, {info: true }, config).then(function (result) { return result.data || result });
+							qDocument = storage.documents.get(identifier + '@' + version, {'include-deleted':true}, config).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier + '@' + version, {info: true, 'include-deleted':true }, config).then(function (result) { return result.data || result });
 
 						}
 						$scope.loading = true;
