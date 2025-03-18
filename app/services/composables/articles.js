@@ -81,6 +81,6 @@ export function getRealmArticleTag ()  {
         const realm = useRealm();
 
         if(realm.is('BCH')) return 'bch';
-        if(realm.is('ABS')) return 'absch';
+        if(realm.is('ABS')) return 'abs';
         if(realm.is('CHM')) return 'chm';
 };

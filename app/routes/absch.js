@@ -5,6 +5,7 @@ import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
 import routesLabelsTranslations from '~/app-text/routes/abs-route-labels.json';
 import { mergeTranslationKeys } from '../services/translation-merge';
 import * as theAbs from '~/views/home/index';
+import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper';
 
 app.value("showHelp", {
   value: false
@@ -33,6 +34,7 @@ const abschRouteUrls = {
    pdf_templates_contacts_schema                  : { component: ()=>asyncLogError(import('~/views/pdf-templates/abs-contacts-pdf')) },
    pdf_templates_checkpoint_communique_documentId : { component: ()=>asyncLogError(import('~/views/pdf-templates/checkpoint-communique')) },
    pdf_templates_ircc_documentId                  : { component: ()=>asyncLogError(import('~/views/pdf-templates/ircc')) },
+   doingAbs                                       : { component: ()=>asyncLogError(import('~/views/kb/abs/doing-abs.vue')) }
 };
 
 app.config(["$routeProvider", function ($routeProvider) {
@@ -99,13 +101,14 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/about/commonformats',                               {"redirectTo":"/about/offline"}). 
   whenAsync('/about/common-formats',                              {"redirectTo":"/about/offline"}). 
   whenAsync('/help/videos/:videoId?',                             { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.absVideos,"resolve":{ ...abschRouteUrls.help_videos_videoId,                                         }}).
-  // whenAsync('/help/common-formats/:commonFormat?',                { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":true,"label":"Common formats","resolve":{ ...abschRouteUrls.help_common_formats_commonFormat,                            }}). 
+  // whenAsync('/help/common-formats/:commonFormat?',                { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":true,"label":"Common formats","resolve":{ ...abschRouteUrls.help_common_formats_commonFormat,                            }}).   
   whenAsync('/about/',                                            { ...mapView(angularViewWrapper),                    "label":routesLabels.aboutTheAbs,"resolveController":true,"resolveUser":false,"resolve":{ ...abschRouteUrls.about,                                                      }}).
   whenAsync('/about/:id',                                         { ...mapView(angularViewWrapper),                    "label":routesLabels.aboutCode,"param":"true","resolveController":true,"resolveUser":false,"resolve":{ ...abschRouteUrls.about,                                                    }}).
   whenAsync('/about/:id/:type',                                   { ...mapView(angularViewWrapper),                    "param":"true","resolveController":true,"resolveUser":false,"resolve":{ ...abschRouteUrls.about,                                               }}). 
   whenAsync('/pdf-templates/contacts/:schema',                    { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.absContact,"resolve":{ ...abschRouteUrls.pdf_templates_contacts_schema,                               }}).
   whenAsync('/pdf-templates/checkpoint-communique/:documentId',   { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.checkpointCommnunique,"resolve":{ ...abschRouteUrls.pdf_templates_checkpoint_communique_documentId,              }}).
   whenAsync('/pdf-templates/ircc/:documentId',                    { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.ircc,"resolve":{ ...abschRouteUrls.pdf_templates_ircc_documentId,                               }}).
+  whenAsync('/help/doing-abs/:tag?',                               { ...mapView(vueViewWrapper),                        "label":routesLabels.doingAbs,                    "resolve":{ ...abschRouteUrls.doingAbs,                                   },"param":"true","resolveController":true}).
   otherwise({ templateUrl: commonRoutes.baseUrl + "views/shared/404.html", label: "404 Error" });
 
 }]);

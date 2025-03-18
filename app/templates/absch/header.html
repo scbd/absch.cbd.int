@@ -6,8 +6,8 @@
                 <button class="navbar-toggler collapsed px-2" type="button" >
                     <span class="navbar-toggler-icon"></span>
                 </button>  
-                <span class="realm-base-acronym fw-bold color-green"> {{::('abschHeaderT.abs'|$translate)}} </span>
-                <span class="realm-base-acronym text-uppercase color-green fw-bold">{{::('abschHeaderT.clearingHouse'|$translate)}}</span>
+                <span class="realm-base-acronym color-green"> {{::('abschHeaderT.abs'|$translate)}} </span>
+                <span class="realm-base-acronym color-green ">{{::('abschHeaderT.clearingHouse'|$translate)}}</span>
                 </span>
 
                 <span ng-if="isDEV" class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
@@ -115,6 +115,8 @@
                             href="kb/faqs">{{::('abschHeaderT.faq'|$translate)}}</a></li>
                     <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
                             href="https://training-absch.cbd.int">{{::('abschHeaderT.trainingSite'|$translate)}}</a></li>
+                    <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
+                                href="/help/doing-abs">{{::('abschHeaderT.doingAbs'|$translate)}}</a></li>
                     <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
                             href="kb/articles/5cf0296f3bb8b3000197273a/Contact-us/abs">{{::('abschHeaderT.contactUs'|$translate)}}</a></li>
                 </ul>

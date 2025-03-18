@@ -6,8 +6,8 @@
             <h4 class="fs-4 fw-bold">
 				{{ t("frequentlyAskedQuestions") }} 
 				<span v-if="faqFilterTag && faqFilterTag!='faq'">
-					{{ t("for") }} <strong>{{faqFilterTag}}</strong></span> 
-				<strong>({{faqCount}})</strong>
+					{{ t("for") }} <strong><i class="text-info">{{faqFilterTag}}</i></strong></span> 
+				<strong> ({{faqCount}}) </strong>
 				<cbd-add-new-view-article v-if="hasEditRights" 
 						:admin-tags="adminTags" target="_self" class="btn btn-secondary float-end">
 					</cbd-add-new-view-article>
