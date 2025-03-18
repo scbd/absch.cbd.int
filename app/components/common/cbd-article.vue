@@ -10,7 +10,7 @@
                 class="btn btn-secondary float-end">
             </cbd-add-new-view-article>         
             
-            <cbd-view-article :article="viewArticle" :show-cover-image="showCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
+            <cbd-view-article :article="viewArticle" :show-title="showTitle" :show-cover-image="showCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
             
             <div v-if="!viewArticle" class="article-not-found-section">
                 <slot name="missingArticle">
@@ -37,6 +37,7 @@
     const emit = defineEmits(['onArticleLoad']);
 
     const props = defineProps({
+        showTitle       : { type: Boolean, required: false, default:false         },
         showCoverImage  : { type: Boolean, required: false, default:true         },
         showEdit        : { type: Boolean, required: false, default:false        },
         article         : { type: Object,  required: false, default:undefined    },
@@ -44,6 +45,7 @@
         tags 		    : { type: Array  , required: false, default:[]           }, // [] of tag id's
         customTags 	    : { type: Array  , required: false, default:[]           }, // [] of customTag id's
         adminTags 	    : { type: Array  , required: false, default:[]           }, // [] of adminTag text
+        id 	            : { type: String , required: false, default:false       }, // article id
         target          : { type: String , required: false, default: '_self'     },
         coverImageSize  : { type: String , required: false, default: '800x800'   }
     });
@@ -78,7 +80,35 @@
         }
     }
 
+    const loadArticleByID = async (id) => {
+        
+            try {
+                let articleData = await articlesApi.getArticleById(encodeURIComponent(id.replace(/"/g, "")));
+                if(articleData.coverImage?.url){
+                        //sometime the file name has space/special chars, use new URL's href prop which encodes the special chars
+                        const url = new URL(articleData.coverImage.url)
+                        articleData.coverImage.url = url.href;
+                        articleData.coverImage.url_1200  = articleData.coverImage.url.replace(/attachments\.cbd\.int\//, '$&1200x600/')
+                    }
+                remoteArticle.value = articleData;
+                emit('onArticleLoad', articleData.adminTags);
+            }
+            catch (e) {
+                emit('onArticleLoad');
+                console.error(e);
+            }
+            finally {
+                loading.value = false;
+            }
+    }
+
+
     onMounted( async ()=>{
+        if(props.id){
+            await loadArticleByID(props.id); 
+            return;
+        }
+               
         if(!viewArticle.value && props.query)
             await loadArticle(props.query);
     })

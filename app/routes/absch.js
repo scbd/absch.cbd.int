@@ -109,6 +109,8 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/pdf-templates/checkpoint-communique/:documentId',   { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.checkpointCommnunique,"resolve":{ ...abschRouteUrls.pdf_templates_checkpoint_communique_documentId,              }}).
   whenAsync('/pdf-templates/ircc/:documentId',                    { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.ircc,"resolve":{ ...abschRouteUrls.pdf_templates_ircc_documentId,                               }}).
   whenAsync('/help/doing-abs/:tag?',                               { ...mapView(vueViewWrapper),                        "label":routesLabels.doingAbs,                    "resolve":{ ...abschRouteUrls.doingAbs,                                   },"param":"true","resolveController":true}).
+  whenAsync('/help/doing-abs/:tag/:title/:id',                               { ...mapView(vueViewWrapper),                        "label":routesLabels.doingAbs,                    "resolve":{ ...abschRouteUrls.doingAbs,                                   },"param":"true","resolveController":true}).
+
   otherwise({ templateUrl: commonRoutes.baseUrl + "views/shared/404.html", label: "404 Error" });
 
 }]);

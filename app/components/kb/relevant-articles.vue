@@ -2,8 +2,8 @@
     <div>
         <slot name="title">
             <h4>
-            {{ t("relevantArticles") }}
-                <hr/>
+            {{ (props.title) ? props.title : t("relevantArticles") }}
+             <hr/>
             </h4>
         </slot>
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
@@ -33,15 +33,14 @@
     const realm = useRealm();
     const articleRealmTag = getRealmArticleTag();
     const props = defineProps({
-        tag: { type: String, required: false },
-        type:{ type: String, required: false },
-        sort: {
-                type: Boolean,
-                required: false,
-                default: false
-            }
+        title:  { type: String, required: false, default: false},
+        baseURL:{ type: String, required: false, default: false},
+        tag:    { type: String, required: false },
+        type:   { type: String, required: false },
+        sort:   { type: Boolean,required: false, default: false},
+        limit:  { type: String, required: false, default: "6"}
     });
-
+ 
     const articles = ref([]);
     const loading = ref(true);
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
@@ -52,7 +51,7 @@
     ag.push({"$match":{"$and":[{"adminTags": { $all : [articleRealmTag]}}]}});
         ag.push({"$match":{"$and":[{"adminTags":props.tag}]}});
         ag.push({"$project" : {[`title`]:1}});
-        ag.push({"$limit" : 6});
+        ag.push({"$limit" : props.limit});
         if(props.sort)
             ag.push({"$sort" : {"meta.modifiedOn":-1}});
 
@@ -73,7 +72,7 @@
     });
 
     const articleUrl = (article) => {
-        return getUrl(lstring(article.title), article._id, props.tag);
+        return getUrl(lstring(article.title), article._id, props.tag, props.baseURL);
     };
  
 </script>

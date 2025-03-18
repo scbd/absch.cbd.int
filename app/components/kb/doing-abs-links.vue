@@ -1,6 +1,12 @@
 <template>
-    <span v-html="lstring(article.content, locale)" ></span>
+     <h1 class="pb-3"><a href="/help/doing-abs">Actions to implement the Protocol</a> </h1>
+     <relevant-articles class="pb-3" tag="doing-abs-prerequisites" title="Prerequisites" sort="true" baseURL="/help/doing-abs/"></relevant-articles>
+     <relevant-articles class="pb-3" tag="doing-abs-access"  title="Access and Benefit-sharing" sort="true"  baseURL="/help/doing-abs/"></relevant-articles>
+     <relevant-articles class="pb-3" tag="doing-abs-compliance" title="Compliance" sort="true"  baseURL="/help/doing-abs/"></relevant-articles>
+
+
 </template>
+
 <script setup>
     import { ref, onMounted } from "vue";
     import { useI18n } from 'vue-i18n';
@@ -9,6 +15,9 @@
     import { lstring } from './filters';
     import './filters';
     import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js"; 
+    import relevantArticles from './relevant-articles.vue';
+    import CbdArticle from '../../components/common/cbd-article.vue';
+
    
     const auth = useAuth();
     const { t, locale } = useI18n({ messages });

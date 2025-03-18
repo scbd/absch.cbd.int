@@ -64,15 +64,20 @@
 	let pageNumber = ref(1);
 	let recordsPerPage = 10;
 
+	const props = defineProps({
+        tags 	    : { type: Array  , required: false, default:[]}
+    });
+
 	const realmArticleTag = getRealmArticleTag();
     const hasEditRights = computed(()=> auth?.check(OASIS_ARTICLE_EDITOR_ROLES));
     const adminTags = computed(()=>[realmArticleTag, 'faq', faqFilterTag.value??'faq']);
 	
 	onMounted(async ()=>{
+		
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
 		categories.value = await loadKbCategories(locale.value);
 		loadFaqs(1);
-	})
+	});
 	
 	const tagUrl = function (tag){ 
 		const tagDetails = categories.value.find(e=>e.adminTags.includes(tag));
@@ -107,8 +112,13 @@
 				const q = { 
 					$and : [
 						{ adminTags : { $all : adminTags.value?.map(encodeURIComponent)}}
+					],
+					$and : [
+						{ adminTags : { $all : props.tags}}
 					]
 				};
+				
+		
 				const f = { 
 					[`title`]	: 1,
 					[`content`]	: 1,

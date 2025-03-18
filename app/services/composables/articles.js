@@ -59,14 +59,15 @@ export async function loadKbCategories(locale) {
             }
 };
 
-export function getUrl(title, id, tag){
+export function getUrl(title, id, tag, baseURL){
+    if(!baseURL) baseURL="kb/tags/";
     const urlTitle = title ? title.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-') : undefined;
     if(title && id){
-        return `kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(id)}`;
+        return baseURL + `${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(id)}`;
     } else if (title && !id) {
-        return `kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}`;
+        return baseURL + `${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}`;
     } else if (!title && !id) {
-        return `kb/tags/${encodeURIComponent( tag )}`;
+        return baseURL + `${encodeURIComponent( tag )}`;
     }
 };
 

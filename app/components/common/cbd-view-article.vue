@@ -5,6 +5,7 @@
             <div v-if="showCoverImage && article?.coverImage?.url">
                 <cbd-article-cover-image :cover-image="article.coverImage" :cover-image-size="coverImageSize"></cbd-article-cover-image>
             </div> 
+            <h1 v-if="showTitle && article?.title">{{lstring(article.title, locale)}} <hr></h1>
             <div v-html="articleContent" class="ck-content"></div>          
         </div>
     </div>
@@ -23,6 +24,7 @@
     const auth = useAuth();
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
     const props = defineProps({
+        showTitle: { type: Boolean, required: false, default: false },
         showCoverImage: { type: Boolean, required: false, default: true },
         article: { type: Object, required: false, default: undefined },
         coverImageSize: { type: String, required: false, default: '800x800' }
