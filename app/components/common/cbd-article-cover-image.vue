@@ -5,6 +5,7 @@
       </div>    
       <span class="image-credit" v-if="coverImage.credits">{{coverImage.credits}}</span>
       <slot></slot>
+      <slot name="after"></slot>
   </div>
 </template>
 

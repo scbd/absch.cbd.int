@@ -24,4 +24,8 @@ TestCases
 package-lock.json
 sourceMap
 dist
+<<<<<<< HEAD
 yarn.lock
+=======
+*.lock
+>>>>>>> fbb430199 (new doing ABS article pages)

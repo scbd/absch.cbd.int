@@ -3,7 +3,14 @@
         <div v-if="article">
             <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@35.0.0/build/content-style.css">
             <div v-if="showCoverImage && article?.coverImage?.url">
-                <cbd-article-cover-image :cover-image="article.coverImage" :cover-image-size="coverImageSize"></cbd-article-cover-image>
+                <cbd-article-cover-image :cover-image="article.coverImage" :cover-image-size="coverImageSize">
+                    <template #default>
+                        <!-- Default slot content if needed -->
+                    </template>
+                    <template #after>
+                        <!-- Content to be placed after the cover image -->
+                    </template>
+                </cbd-article-cover-image>
             </div> 
             <slot name="title"></slot>
             <div v-html="articleContent" class="ck-content"></div>          
