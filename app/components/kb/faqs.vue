@@ -79,6 +79,7 @@
 	[realmArticleTag, faqFilterTag.value ?? 'faq'].includes('faq') ? [realmArticleTag, faqFilterTag.value ?? 'faq'] : [realmArticleTag, 'faq', faqFilterTag.value ?? 'faq'] );
 
 	onMounted(async ()=>{
+		
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
 		categories.value = await loadKbCategories(locale.value);
 		loadFaqs(1);

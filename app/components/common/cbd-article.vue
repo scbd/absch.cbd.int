@@ -42,6 +42,7 @@
     const emit = defineEmits(['onArticleLoad']);
 
     const props = defineProps({
+        showTitle       : { type: Boolean, required: false, default:false         },
         showCoverImage  : { type: Boolean, required: false, default:true         },
         showEdit        : { type: Boolean, required: false, default:false        },
         article         : { type: Object,  required: false, default:undefined    },
@@ -49,6 +50,7 @@
         tags 		    : { type: Array  , required: false, default:[]           }, // [] of tag id's
         customTags 	    : { type: Array  , required: false, default:[]           }, // [] of customTag id's
         adminTags 	    : { type: Array  , required: false, default:[]           }, // [] of adminTag text
+        id 	            : { type: String , required: false, default:false       }, // article id
         target          : { type: String , required: false, default: '_self'     },
         coverImageSize  : { type: String , required: false, default: '800x800'   }
     });

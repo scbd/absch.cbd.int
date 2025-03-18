@@ -31,6 +31,7 @@
     const auth = useAuth();
     const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
     const props = defineProps({
+        showTitle: { type: Boolean, required: false, default: false },
         showCoverImage: { type: Boolean, required: false, default: true },
         article: { type: Object, required: false, default: undefined },
         coverImageSize: { type: String, required: false, default: '800x800' }
