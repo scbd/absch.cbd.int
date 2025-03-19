@@ -64,8 +64,6 @@
 	let pageNumber = ref(1);
 	let recordsPerPage = 10;
 
-	const ts = ref([]);
-
 	const props = defineProps({
         tags 	    : { type: Array  , required: false, default:[]},
 		tagTitle 	: { type: Boolean  , required: false, default:true},
