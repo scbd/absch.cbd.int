@@ -5,7 +5,7 @@
         <div v-if="!loading">
             <h4 class="fs-4 fw-bold">
 				{{ t("frequentlyAskedQuestions") }} 
-				<span v-if="faqFilterTag && faqFilterTag!='faq'">
+				<span v-if="faqFilterTag && faqFilterTag!='faq' && tagTitle">
 					{{ t("for") }} <strong><i class="text-info">{{faqFilterTag}}</i></strong></span> 
 				<strong> ({{faqCount}}) </strong>
 				<cbd-add-new-view-article v-if="hasEditRights" 
@@ -16,7 +16,7 @@
             <main class="mb-4">
                 <details v-for="article in faqs" class="card mb-3">
                     <summary class="fs-5 p-2">
-						<a class="ps-2 bold small text-secondary view-article-link" target="_new"
+						<a class="ps-2 bold small text-secondary view-article-link" target="_new" 
 						:href="`${articleUrl(article, getAdminTag() )}`">
 						<i class="fa fa-external-link"></i>
 					</a>
@@ -64,16 +64,20 @@
 	let pageNumber = ref(1);
 	let recordsPerPage = 10;
 
+	const ts = ref([]);
+
 	const props = defineProps({
-        tags 	    : { type: Array  , required: false, default:[]}
+        tags 	    : { type: Array  , required: false, default:[]},
+		tagTitle 	: { type: Boolean  , required: false, default:true},
+		useExactTags: { type: Boolean  , required: false, default:false}
     });
 
 	const realmArticleTag = getRealmArticleTag();
     const hasEditRights = computed(()=> auth?.check(OASIS_ARTICLE_EDITOR_ROLES));
-    const adminTags = computed(()=>[realmArticleTag, 'faq', faqFilterTag.value??'faq']);
-	
+    const adminTags = computed(()=>props.tags && props.tags.length > 0 ? [...props.tags, 'faq'] : 
+	[realmArticleTag, faqFilterTag.value ?? 'faq'].includes('faq') ? [realmArticleTag, faqFilterTag.value ?? 'faq'] : [realmArticleTag, 'faq', faqFilterTag.value ?? 'faq'] );
+
 	onMounted(async ()=>{
-		
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
 		categories.value = await loadKbCategories(locale.value);
 		loadFaqs(1);
@@ -109,16 +113,11 @@
 				faqCount.value = 0;
 				faqs.value = [];
 				const realmTag = realmArticleTag;    
-				const q = { 
-					$and : [
-						{ adminTags : { $all : adminTags.value?.map(encodeURIComponent)}}
-					],
-					$and : [
-						{ adminTags : { $all : props.tags}}
-					]
-				};
-				
-		
+				let q = { $and : [{ adminTags : { $all : adminTags.value?.map(encodeURIComponent)}}], };
+				if(props.useExactTags){
+					q = { $and : [{ adminTags : { $eq : adminTags.value?.map(encodeURIComponent)}}], };
+				}
+					
 				const f = { 
 					[`title`]	: 1,
 					[`content`]	: 1,
