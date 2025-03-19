@@ -58,8 +58,6 @@
 
     onMounted(async () => {
     let ag = [];
-       //ag.push({"$match": {"adminTags": articleRealmTag}});
-        //ag.push({"$match": {"adminTags": props.tag}});
         ag.push({"$match": {"$and": [{"adminTags": { $all: adminTags.value?.map(encodeURIComponent) }}]}}); 
         if(props.hideAdminTag) 
             ag.push({"$match": {"$and": [{"adminTags": { $ne: props.hideAdminTag }}]}}); 
