@@ -24,9 +24,9 @@ import moment from 'moment';
             var developmentRealms = {
                 urls: ['https://absch.cbddev.xyz', 
                        'https://bch.cbddev.xyz',
-                       'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 
+                       'https://chm.cbddev.xyz', 
                        'https://accounts.cbddev.xyz',
-                       'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'
+                       'http://localhost:2010', 'http://localhost:2012', 'http://localhost:8000'
                    ],
                 realms: ['ABS-DEV', 'BCH-DEV', 'CHM-DEV']
             };
@@ -74,9 +74,9 @@ import moment from 'moment';
                         url = 'https://chm.cbd.int'; break;
                     case 'CHM-DEV': {
                         if ($location.absUrl().indexOf('http://localhost:') >= 0)
-                            url = 'http://localhost:2000'
+                            url = 'http://localhost:2012'
                         else
-                            url = 'https://chm-dev.cbd.int'; break;
+                            url = 'https://chm.cbddev.xyz'; break;
                     }
                     case 'BCH':
                         url = 'https://bch.cbd.int'; break;
