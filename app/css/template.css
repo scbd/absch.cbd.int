@@ -193,9 +193,8 @@ ul.km-value {
     background-color: #eee !important;
 }
 .realm-base-acronym {
-    font-weight: 600;
     text-decoration: none !important;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 .realm-base-acronym .ch-name {
     font-size: 17px;

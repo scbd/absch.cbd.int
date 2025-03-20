@@ -5,9 +5,9 @@
         <div v-if="!loading">
             <h4 class="fs-4 fw-bold">
 				{{ t("frequentlyAskedQuestions") }} 
-				<span v-if="faqFilterTag && faqFilterTag!='faq'">
-					{{ t("for") }} <strong>{{faqFilterTag}}</strong></span> 
-				<strong>({{faqCount}})</strong>
+				<span v-if="faqFilterTag && faqFilterTag!='faq' && tagTitle">
+					{{ t("for") }} <strong><i class="text-info">{{faqFilterTag}}</i></strong></span> 
+				<strong> ({{faqCount}}) </strong>
 				<cbd-add-new-view-article v-if="hasEditRights" 
 						:admin-tags="adminTags" target="_self" class="btn btn-secondary float-end">
 					</cbd-add-new-view-article>
@@ -16,12 +16,16 @@
             <main class="mb-4">
                 <details v-for="article in faqs" class="card mb-3">
                     <summary class="fs-5 p-2">
-						<a class="ps-2 bold small text-secondary view-article-link" target="_new"
+						<a class="ps-2 bold small text-secondary view-article-link" target="_new" 
 						:href="`${articleUrl(article, getAdminTag() )}`">
 						<i class="fa fa-external-link"></i>
 					</a>
 					<span class="card-title">{{lstring(article.title, locale)}}</span>
 					</summary>
+					<cbd-add-new-view-article v-if="hasEditRights" 
+						:id="article._id" target="_self" class="btn btn-secondary float-end">
+					</cbd-add-new-view-article>
+
                     <div class="p-2 faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="lstring(article.content,locale)">
 					</div>   
 					<div v-if="article.adminTags" class="card-footer">
@@ -64,15 +68,22 @@
 	let pageNumber = ref(1);
 	let recordsPerPage = 10;
 
+	const props = defineProps({
+        tags 	    : { type: Array  , required: false, default:[]},
+		tagTitle 	: { type: Boolean  , required: false, default:true},
+		useExactTags: { type: Boolean  , required: false, default:false}
+    });
+
 	const realmArticleTag = getRealmArticleTag();
     const hasEditRights = computed(()=> auth?.check(OASIS_ARTICLE_EDITOR_ROLES));
-    const adminTags = computed(()=>[realmArticleTag, 'faq', faqFilterTag.value??'faq']);
-	
+    const adminTags = computed(()=>props.tags && props.tags.length > 0 ? [...props.tags, 'faq'] : 
+	[realmArticleTag, faqFilterTag.value ?? 'faq'].includes('faq') ? [realmArticleTag, faqFilterTag.value ?? 'faq'] : [realmArticleTag, 'faq', faqFilterTag.value ?? 'faq'] );
+
 	onMounted(async ()=>{
 		faqFilterTag.value = route.value?.params?.tag?.replace(/"/g, ""); 
 		categories.value = await loadKbCategories(locale.value);
 		loadFaqs(1);
-	})
+	});
 	
 	const tagUrl = function (tag){ 
 		const tagDetails = categories.value.find(e=>e.adminTags.includes(tag));
@@ -104,11 +115,11 @@
 				faqCount.value = 0;
 				faqs.value = [];
 				const realmTag = realmArticleTag;    
-				const q = { 
-					$and : [
-						{ adminTags : { $all : adminTags.value?.map(encodeURIComponent)}}
-					]
-				};
+				let q = { $and : [{ adminTags : { $all : adminTags.value?.map(encodeURIComponent)}}], };
+				if(props.useExactTags){
+					q = { $and : [{ adminTags : { $eq : adminTags.value?.map(encodeURIComponent)}}], };
+				}
+					
 				const f = { 
 					[`title`]	: 1,
 					[`content`]	: 1,
