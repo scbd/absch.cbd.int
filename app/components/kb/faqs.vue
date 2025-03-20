@@ -22,6 +22,10 @@
 					</a>
 					<span class="card-title">{{lstring(article.title, locale)}}</span>
 					</summary>
+					<cbd-add-new-view-article v-if="hasEditRights" 
+						:id="article._id" target="_self" class="btn btn-secondary float-end">
+					</cbd-add-new-view-article>
+
                     <div class="p-2 faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="lstring(article.content,locale)">
 					</div>   
 					<div v-if="article.adminTags" class="card-footer">
