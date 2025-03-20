@@ -99,7 +99,17 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                         $location.path(`/search`);
                         $location.search('searchShareQueryId', data.sharedData.searchQuery._id);
                     })
-                }
+                    } else if(data.storageType == 'chm-country-profile'){
+                        safeapply(()=>{ 
+                          
+                            // if no code go to countries
+                           const path = data?.sharedData?.recordKey 
+                                ? `/countries/${data.sharedData.recordKey}` 
+                                : `/countries/`;
+
+                            $location.path(path);
+                         })
+                    }
                 
             }
         }
