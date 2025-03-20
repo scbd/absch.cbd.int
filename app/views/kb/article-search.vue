@@ -20,7 +20,8 @@
   const onChangeSearch = (text) => {
     if (articleSearchRef.value) {
       router.push({
-        path: `/kb/kbSearch/${encodeURIComponent( text )}`
+          path: '/kb/kbSearch',
+          query: { search: text }
       });
       articleSearchRef.value.loadArticles(1, text);
     }
