@@ -730,7 +730,9 @@ a:active {
 .color-black {
     color: #111;
 }
-
+.color-chm-grey {
+    color: #2b2a2a;
+}
 .color-white,
 .copyright a,
 .copyright a:hover,
