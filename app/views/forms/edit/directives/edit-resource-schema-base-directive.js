@@ -153,25 +153,20 @@ import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schem
 				}
 
 				$scope.onCbdSubjectChange = function (value) {
-				
 					const gbfTargets = [];
-					const hasAbsSubjects = _.some(value || [], { identifier: "CBD-SUBJECT-ABS" });
-					const hasBchSubjects = _.some(value || [], { identifier: "CBD-SUBJECT-BTB" });
-				
-					if (hasAbsSubjects)
+					const identifiers = (value || []).map(v => v.identifier);
+					if (identifiers.includes("CBD-SUBJECT-ABS")) 
 						gbfTargets.push({ identifier: "GBF-TARGET-13" });
-					if (hasBchSubjects)
+				
+					if (identifiers.includes("CBD-SUBJECT-BTB")) 
 						gbfTargets.push({ identifier: "GBF-TARGET-17" });
 				
-					const existingTargets = $scope.document.gbfTargets || [];
-					const mergedTargets = [...existingTargets, ...gbfTargets].reduce((acc, target) => {
-						if (!acc.some(t => t.identifier === target.identifier)) {
-							acc.push(target);
-						}
-						return acc;
-					}, []);
-				
-					$scope.document.gbfTargets = mergedTargets;
+					$scope.document.gbfTargets = [
+						...$scope.document.gbfTargets || [],
+						...gbfTargets
+					].filter((target, index, self) => 
+						self.findIndex(t => t.identifier === target.identifier) === index //  ensures only the first occurrence remains.
+					);
 				};
 				
 				
