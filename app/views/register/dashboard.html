@@ -565,7 +565,8 @@
                     </div>
                 </div>
                  <div ng-if="isChm && exportVueComponent">
-                    <realm-cards hide-realms="['CHM','CHM-TRG','CHM-DEV']" ng-vue="exportVueComponent"></realm-cards>
+                    <div class="mb-1 border-bottom bold color-darkgrey">{{::('dashboardT.otherSystems'|$translate)}}</div>                     
+                    <other-clearing-house-links  ng-vue="exportVueComponent"></other-clearing-house-links>
                  </div>
             </div>
         </div>
