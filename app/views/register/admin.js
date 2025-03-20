@@ -5,8 +5,10 @@ import registerAdminT from '~/app-text/views/register/admin.json';
  
     export { default as template } from './admin.html';
 
-export default ["$rootScope", "$scope", "roleService", 'localStorageService', 'translationService',
-    function ($rootScope, $scope, roleService, localStorageService, translationService) {
+export default ["$rootScope", "$scope", "roleService", 'localStorageService', 'translationService', 'realm',
+    function ($rootScope, $scope, roleService, localStorageService, translationService, realm) {
+            $scope.isABS = realm.is('ABS');
+            $scope.realm = realm ;
             translationService.set('registerAdminT', registerAdminT);
             if ($rootScope.user.isAuthenticated) {
                 $scope.roles = {

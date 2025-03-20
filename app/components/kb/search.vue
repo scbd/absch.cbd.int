@@ -34,14 +34,10 @@
 
     const  goToSearchArticles = function() {
                 if (search.value) {
-                    // if (route.query?.search) {
-                    //     emit('changeSearch', route.query.search);
-                    // } else {
                         router.push({
                             path: '/kb/kbSearch',
                             query: { search: search.value }
                         });
-                    // }
                 }
             }
 

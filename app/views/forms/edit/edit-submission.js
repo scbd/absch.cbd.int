@@ -7,12 +7,12 @@ import editsubmissionT from '~/app-text/views/forms/edit/edit-submission.json';
 
   export { default as template } from './edit-submission.html';
 
-export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService', 'translationService',
-  function ($scope, $http, $controller, realm, searchService, solr, thesaurusService, translationService) {
+export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService', 'translationService', '$location',
+  function ($scope, $http, $controller, realm, searchService, solr, thesaurusService, translationService, $location) {
     translationService.set('editsubmissionT', editsubmissionT);
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
-    $scope.isCHM = realm.is('CHM');
+
     $scope.notificationQuery = {
         q   : "schema_s:notification",
         fl  : "identifier_s:symbol_s,rec_title:title_s,reference_s,symbol_s,rec_date:updatedDate_dt,schema_s"
@@ -99,8 +99,17 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
                   fields: $scope.notificationQuery.fl
               })
               .then(function(result){                
-                  $scope.notifications = formatRecords(result.data.response.docs);
-              });
+                
+                    $scope.notifications = formatRecords(result.data.response.docs);
+                    // Remove notifications that were not found (404)
+                    let foundIdentifiers = result.data.response.docs.map(doc => doc.identifier_s);
+                    $scope.document.notifications = $scope.document.notifications.filter(notif => foundIdentifiers.includes(notif.identifier));
+
+                })
+                .catch(function(error) {
+                    console.error("Error fetching notifications:", error);
+                    $scope.notifications = [];
+                });
             }
             else{
               $scope.notifications = [];
@@ -118,14 +127,25 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
     function formatRecords(docs){
         _.forEach(docs, function(row){
             row.rec_summary  = row.rec_title;
-			row.rec_title 	 = (row.reference_s||'') + ' (' + (row.symbol_s||'') + ')';
+			      row.rec_title 	 = (row.reference_s||'') + ' (' + (row.symbol_s||'') + ')';
         });
         return docs;
     }
 
-    $scope.setDocument({}, true).then(function(doc){
-        $scope.onNotificationSelected();
-    });
+    $scope.setDocument({}, true).then(function(doc) {
+      
+     let notificationNumbers = $location.search().notification;        
 
+      if (!$scope.document?.notifications && notificationNumbers) {
+
+        if (!Array.isArray(notificationNumbers)) {
+          notificationNumbers = [notificationNumbers];
+        }
+        
+        $scope.document.notifications = notificationNumbers.map((number) => ({ identifier: number.trim() }));        
+      }
+      $scope.onNotificationSelected();
+    });
+    
   }];
 
