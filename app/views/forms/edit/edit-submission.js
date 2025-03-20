@@ -127,27 +127,24 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
     function formatRecords(docs){
         _.forEach(docs, function(row){
             row.rec_summary  = row.rec_title;
-			row.rec_title 	 = (row.reference_s||'') + ' (' + (row.symbol_s||'') + ')';
+			      row.rec_title 	 = (row.reference_s||'') + ' (' + (row.symbol_s||'') + ')';
         });
         return docs;
     }
 
     $scope.setDocument({}, true).then(function(doc) {
-        let notificationsParam = $location.search().notification;
-        let preselectedNotifications = [];
-    
-        if (!Array.isArray(notificationsParam)) {
-            notificationsParam = notificationsParam ? [notificationsParam] : [];
+      
+     let notificationNumbers = $location.search().notification;        
+
+      if (!$scope.document?.notifications && notificationNumbers) {
+
+        if (!Array.isArray(notificationNumbers)) {
+          notificationNumbers = [notificationNumbers];
         }
-        // Convert notifications into required object format
-        preselectedNotifications = notificationsParam.map((number) => ({
-            identifier: number.trim()
-        }));
-    
-        if (preselectedNotifications.length > 0) {
-            $scope.document.notifications = preselectedNotifications;
-        }
-        $scope.onNotificationSelected();
+        
+        $scope.document.notifications = notificationNumbers.map((number) => ({ identifier: number.trim() }));        
+      }
+      $scope.onNotificationSelected();
     });
     
   }];
