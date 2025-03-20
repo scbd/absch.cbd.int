@@ -16,9 +16,14 @@ function GenerateRecords(_type, _country, _locale)
 		var code = "<div class='scbd-chm-embed' data-type='chm-search-result'"
 		if(_type)
 			code += ` data-legacy-schema='${_type}'`;
-		if(_country && _country!= '*')
-			code += ` data-legacy-countries='${_country}'`
-		
+		if(_country && _country!= '*'){
+			//since legacy bch is only has countries configured, if more then 3 means its a region and not iso country code
+			if(_country?.length > 3)			
+				code += ` data-legacy-regions='${_country}'`
+			else
+				code += ` data-legacy-countries='${_country}'`
+		}
+
 		code += ` data-locale='${_locale}' "width='100%' ></div>`;
 		
 		iframePlaceholder.innerHTML = code;
