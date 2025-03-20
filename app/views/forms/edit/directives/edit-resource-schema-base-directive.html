@@ -190,7 +190,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group tabular-term-check"  name="cbdSubjects" ng-required="isCHM"  caption="{{::('editVLRT.cbdSubjects'|$translate)}}">
-												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
+												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects"   ng-change="onCbdSubjectChange(document.cbdSubjects)"
 												terms="options.cbdSubjects()" tabular-shape="false" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
                                    		</div>
@@ -200,14 +200,14 @@
 						<!-- Till now all fields are common for all CHs  -->
 				
 
-						<!-- IF CHM || BCH || condition ABS  START -->						
-						<section ng-if="isCHM || isBCH || (isABS && hasGBF('GBF-TARGET-17'))">	
+						<!-- IF BCH || GBF-TARGET-17 is selected in ABS or CHM  START -->						
+						<section ng-if="isBCH || ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))">	
 							<div class="no-shadow bg-white">
 								<legend>{{::('editVLRT.keywordsRelatedBiosafety'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group tabular-term-check" ng-required="isBCH|| ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))" name="biosafety.subjects" caption="{{::('editVLRT.biosafetyThematicAreas'|$translate)}}">
-											<div km-term-check name="biosafety.subjects" ng-required="isBCH|| ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))" ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
+										<div class="km-control-group tabular-term-check" ng-required="isBCH || ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))" name="biosafety.subjects" caption="{{::('editVLRT.biosafetyThematicAreas'|$translate)}}">
+											<div km-term-check name="biosafety.subjects" ng-required="isBCH || ((isCHM || isABS) && hasGBF('GBF-TARGET-17'))" ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
 											binding-type="term[]" tabular-shape="isVlr ? true : false" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -342,15 +342,15 @@
 							</div>
 						</section>
 
-						<!-- IF CHM || ABS  || condition BCH START -->	
+						<!-- IF ABS  || GBF-TARGET-13 is selected in BCH or CHM START -->	
 					
-						<section ng-if="isCHM || isABS || (isBCH && hasGBF('GBF-TARGET-13'))">							
+						<section ng-if="isABS || ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))">							
 							<div class="no-shadow bg-white">
 								<legend ng-if="isCHM">{{::('editVLRT.keywordsRelatedAccess'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="nagoya.subjects" ng-required="isABS|| ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
-											<div km-term-check name="nagoya.subjects"  ng-required="isABS|| ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))"   ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
+										<div class="km-control-group" name="nagoya.subjects" ng-required="isABS || ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
+											<div km-term-check name="nagoya.subjects"  ng-required="isABS || ((isCHM || isBCH) && hasGBF('GBF-TARGET-13'))"   ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
 												binding-type="term[]" tabular-shape="false"></div>
 										</div>
 									</div>
