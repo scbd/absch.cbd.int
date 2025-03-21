@@ -2,7 +2,7 @@ import app from '~/app';
 import RealmApi from '~/api/realms';
 import _ from 'lodash';
 
-        app.service("cfgUserNotification", ['$location', '$window', '$filter', function ($location, $window, $filter) {
+        app.service("cfgUserNotification", ['$location', '$window', '$filter', 'realm', function ($location, $window, $filter, realm) {
 
             const notificationUrls = {
                 documentAlertUrl: '/database/record?documentID=',
@@ -13,7 +13,7 @@ import _ from 'lodash';
             let apiRealms = [];
             async function realmsForQuery() {
                 const realmApi = new RealmApi({});
-                apiRealms = await realmApi.getRealmConfigurations();
+                apiRealms = await realmApi.getRealmConfigurations(realm.environment);
                 return apiRealms.map(({ realm }) => realm);
             }
 
