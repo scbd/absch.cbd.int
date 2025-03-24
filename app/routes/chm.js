@@ -26,7 +26,6 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/register/EBSA/:identifier/edit',   { ...mapView(angularViewWrapper),   "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"EBSA","resolve":{ ...chmRouteUrls.register_marineEbsa_edit,   "securized":securize(null,true,true)}}).
   whenAsync('/register/NBSAP/:identifier/edit',    { ...mapView(angularViewWrapper),   "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NBSAP","resolve":{ ...chmRouteUrls.register_NR_edit,"securized":securize(null,true,true), "routePrams":injectRouteParams({ "documentType":"NBSAP"})}}).
 
-
   whenAsync('/submit/marineEbsa/new',                    {"redirectTo":"/register/EBSA/new","resolve":{}}). 
   whenAsync('/submit/marineEbsa/:uid',                   {"redirectTo":"/register/EBSA/:uid/edit","resolve":{}}). 
   whenAsync('/submit/organization/new',                  {"redirectTo":"/register/ORG/new","resolve":{}}). 
@@ -44,6 +43,8 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/submit/submission/new' ,              {"redirectTo":"/register/SUB/new","resolve":{}}). 
   whenAsync('/submit/submission/:uid',              {"redirectTo":"/register/SUB/:uid/edit","resolve":{}}).  
   
+  whenAsync('/submit',                                   {"redirectTo":"/register","resolve":{}}). 
+
   whenAsync('/management/requests',                      {"redirectTo":"/register/requests","resolve":{}}). 
   whenAsync('/management/requests/:id',                  {"redirectTo":"/register/requests","resolve":{}}). 
   whenAsync('/management/requests/:id/:activity',        {"redirectTo":"/register/requests","resolve":{}}). 
@@ -53,8 +54,6 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/submit/undbAction/:uid',  { redirectTo: redirectUndbActions } ).
   whenAsync('/submit/undbPartner/:uid', { redirectTo: redirectUndbPartner } ).
   
-
-
   otherwise({
     templateUrl: commonRoutes.baseUrl + "views/shared/404.html",
     label: routesLabels.pageNotFound
