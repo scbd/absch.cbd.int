@@ -3,7 +3,7 @@ import template from 'text!./km-rich-textbox.html';
 import angular from 'angular';
 import 'angular-trix';
 import '~/components/scbd-angularjs-controls/form-control-directives/km-control.css';
-
+import { isRTL } from '~/services/filters/lstring';
 	app.directive('kmRichTextbox', ['$filter', '$timeout', function($filter, $timeout) {
 			return {
 					restrict: 'EAC',
@@ -28,7 +28,7 @@ import '~/components/scbd-angularjs-controls/form-control-directives/km-control.
 
 							$scope.$watch('locales', watchLocales);
 							$scope.$watch('binding', watchBinding);
-							
+							$scope.isRTL = isRTL;
 							//==============================
 							//Remove value of not selected languages/empty languages
 							//==============================

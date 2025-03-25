@@ -46,3 +46,18 @@ function normalizeText(text) {
   if(!entry.zh) entry.zh = entry.en;
   return entry;
 }
+
+export function isRTL(locale){
+  const rtlLanguages = [
+    'ar', // Arabic
+    'fa', // Persian (Farsi)
+    'ur', // Urdu
+    'ps', // Pashto
+    'he', // Hebrew
+    'dv', // Dhivehi
+    'ku', // Kurdish (Sorani)
+    'ug', // Uyghur
+    'yi', // Yiddish
+  ]; // add more if any..
+  return rtlLanguages.includes(locale);
+}
