@@ -5,7 +5,8 @@ import '~/views/register/user-preferences/user-alerts';
 import '~/views/search/search-directive';
 import '~/css/search.css';
     
-    export { default as template } from './search-page.html';
+export { default as template } from './search-page.html';
+
 export default ["$scope", '$sce', 'ngMeta', 'realm', 'locale',
      function($scope, $sce, ngMeta, realm, locale) {
             
@@ -15,6 +16,11 @@ export default ["$scope", '$sce', 'ngMeta', 'realm', 'locale',
             var url   = realm.baseURL + '/' + locale + '/search'
             ngMeta.setTitle('Search')
             ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
+
+            $scope.excludeSchemas = '';
+
+            if(realm.is('BCH') || realm.is('ABS'))
+                $scope.excludeSchemas = 'submission';
         }
     ];
 
