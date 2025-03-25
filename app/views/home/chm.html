@@ -127,7 +127,7 @@
                         <ul>
                             <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener"
                                     translation-url href="signin">{{::('chmHomeT.signIn'|$translate)}}</a></li>
-                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
+                            <li ng-if="user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener" translation-url
                                     href="register?openTour">{{::('chmHomeT.takeTour'|$translate)}}</a></li>
                             <li><a class="link-dark text-decoration-none" rel="noopener" translation-url
                                     href="kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-CHM/619c554858029700017ff45f">{{::('chmHomeT.helpRecords'|$translate)}}</a>
