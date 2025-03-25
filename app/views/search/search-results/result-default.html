@@ -5,14 +5,14 @@
     </div>
     <div id="record1" class="recordDefault card border-0 border-start-0" class="p-0 m-0">
 
-        <div ng-show="!showDoc" ng-click="showDoc=!showDoc" class="p-0 m-0">
+        <div ng-show="!showDoc" ng-click="showRecord()" class="p-0 m-0">            
             <div class="{{::type}} m-0 p-1" >
 
        
                 <div class="title bold truncate-mobile-title" style="font-size:108%;">
                     <span ng-bind="doc.rec_title"></span>
-                    <a rel="noopener" ng-if="showExternalLink && !showDoc" translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName|encodeURIComponent}}/{{doc.uniqueIdentifier_s|uppercase|encodeURIComponent}}" 
-                        class="float-end link" ng-show="!doc.showDoc" title="open in new tab">
+                    <a rel="noopener" ng-if="showExternalLink && !showDoc" translation-url target="_blank" 
+                    ng-href="{{::recordUrl(doc)}}" class="float-end link" ng-show="!doc.showDoc" title="open in new tab">
                         <i class="fa fa-external-link"></i>
                     </a>
                 </div>
