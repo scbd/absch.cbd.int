@@ -22,7 +22,6 @@ export default class RealmsApi extends ApiBase
 
     return this.http.get(`api/v2018/realm-configurations`, { params })
                .then(res => {
-                console.log(res.data)
                 return res.data?.length ? res.data[0] : null
               })  
                .catch(tryCastToApiError);
