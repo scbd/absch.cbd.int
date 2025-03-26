@@ -47,9 +47,6 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 			$scope.refreshRecord = function(identifier, cacheBuster){
 				$scope.loading = true;
 
-					// Always lastest version on BCH 
-					if (realm.is('BCH')) identifier = documentIdWithoutRevision(identifier)
-
 				return loadReferenceDocument(identifier, cacheBuster)
 				.then(function(data) {
 					$scope.document = data;
