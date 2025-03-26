@@ -748,7 +748,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     if(!skipToast)
                         toastr.info(toasterMessages.closeWithoutSaving);
 
-                    var environmentRealmHosts = environmentRealms.map(({ baseURL }) => baseURL);
+                    var environmentRealmHosts = environmentRealms.map(({ baseURL }) => baseURL+'/');
                     environmentRealmHosts.push('http://localhost:2010/');
                    $timeout(function() {
                        if($route.current.params.workflow){
