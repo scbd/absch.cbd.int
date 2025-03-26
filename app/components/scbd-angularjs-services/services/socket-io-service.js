@@ -56,7 +56,6 @@ import RealmApi from '~/api/realms';
 
 
             function onConnect() {
-                console.log(environmentRealms)
                 subscribe('push-notification', function(msg){
                     if(isJSON(msg)){
                         var message = JSON.parse(msg);
