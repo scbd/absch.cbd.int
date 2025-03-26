@@ -4,12 +4,17 @@ import _ from 'lodash';
 import './authentication';
 import './apiUrl';
 import './utilities';
+import RealmApi from '~/api/realms';
 
-    app.factory('socketioService', ['$rootScope', '$http', '$q', 'realm', "authentication", "apiUrl", 'realmService',
-    function ($rootScope, $http, $q, realm, authentication, apiUrl, realmService) {
+    app.factory('socketioService', ['$rootScope', '$http', '$q', 'realm', "authentication", "apiUrl",
+    function ($rootScope, $http, $q, realm, authentication, apiUrl) {
+
+        
         return new function () {
             var apiServer = 'https://api-direct.cbd.int/';
-
+            const realmApi          = new RealmApi({ tokenReader: () => undefined});
+            let environmentRealms = [];
+            
             if(apiUrl.isAppDevelopment()){
                 
                 var url = apiUrl.devApiUrl();
@@ -51,7 +56,6 @@ import './utilities';
 
 
             function onConnect() {
-                
                 subscribe('push-notification', function(msg){
                     if(isJSON(msg)){
                         var message = JSON.parse(msg);
@@ -65,7 +69,7 @@ import './utilities';
                                 realms = message.data.realm;
                             else 
                                 realms = [message.data.realm];
-                            if(_.intersection(_.map(realms, _.toUpper), realmService.envRealms()).length == 0)
+                            if(_.intersection(_.map(realms, _.toUpper), environmentRealms.map(({ realm }) => realm)).length == 0)
                                 return;
                         }
                         $rootScope.$broadcast('event:server-pushNotification', message);
@@ -92,6 +96,9 @@ import './utilities';
                     return false;
                 }
             }
+
+            (async ()=>environmentRealms = await realmApi.getRealmConfigurations(realm.environment))();
+
         }
     }]);
 
