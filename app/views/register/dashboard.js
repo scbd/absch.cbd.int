@@ -14,6 +14,8 @@ import 'ngDialog';
 import dashboardT from '~/app-text/views/register/dashboard.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
 import otherClearingHouseLinks from '~/components/common/other-clearing-house-links.vue';
+import ortRecordTypes from '~/components/register/ort-record-types.vue';
+
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);    
     export { default as template } from './dashboard.html';
 export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
@@ -44,8 +46,16 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             var schemaFacets = {};
             $scope.showRecordsSection=true;
 
-            $scope.exportVueComponent = {
-                components: { otherClearingHouseLinks }
+            $scope.vueComponent = {
+                components: { 
+                    otherClearingHouseLinks,
+                    ortRecordTypes 
+                }
+            }
+            $scope.vueOrtComponent = {
+                components: { 
+                    ortRecordTypes 
+                }
             }
             //====================================================================================
             $scope.isFilter = function(filter) {
