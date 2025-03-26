@@ -55,58 +55,6 @@ import Enumerable from 'linqjs';
         }
     });
 
-    app.factory('realmService', ['$location', function($location){
-       
-            var productionRealms = {
-                urls: [
-                    'https://absch.cbd.int', 
-                    'https://bch.cbd.int', 
-                    'https://bch.cbd.int', 
-                    'https://chm.cbd.int', 
-                    'https://accounts.cbd.int'
-                ],
-                realms: ['ABS', 'BCH', 'CHM']
-            };
-
-            var developmentRealms = {
-                urls: ['https://absch.cbddev.xyz', 
-                       'https://bch.cbddev.xyz',
-                       'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 
-                       'https://accounts.cbddev.xyz',
-                       'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'
-                   ],
-                realms: ['ABS-DEV', 'BCH-DEV', 'CHM-DEV']
-            };
-
-            var trainingRealms = {
-                urls: [
-                    'https://training-absch.cbd.int', 
-                    'https://bch-training.cbd.int'
-                ],
-                realms: ['ABS-TRG', 'BCH-TRG']
-            };
-
-            function envRealms() {
-                if (_.some(productionRealms.urls, function (url) {
-                    return $location.absUrl().indexOf(url) >= 0;
-                }))
-                    return productionRealms.realms;
-
-                if (_.some(developmentRealms.urls, function (url) {
-                    return $location.absUrl().indexOf(url) >= 0;
-                }))
-                    return developmentRealms.realms;
-
-                if (_.some(trainingRealms.urls, function (url) {
-                    return $location.absUrl().indexOf(url) >= 0;
-                }))
-                    return trainingRealms.realms;
-            }
-            return {
-                envRealms : envRealms
-            }
-    }])
-
 export function S4() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 }

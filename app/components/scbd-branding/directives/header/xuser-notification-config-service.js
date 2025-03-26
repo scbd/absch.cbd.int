@@ -1,114 +1,52 @@
 import app from '~/app';
+import RealmApi from '~/api/realms';
 import _ from 'lodash';
-import moment from 'moment';
 
-        app.service("cfgUserNotification", ['$location', '$window', '$filter', function ($location, $window, $filter) {
+        app.service("cfgUserNotification", ['$location', '$window', '$filter', 'realm','apiToken', function ($location, $window, $filter, realm, apiToken) {
 
-            var notificationUrls = {
-                documentAlertUrl        : '/database/record?documentID=',
+            const realmApi         = new RealmApi({ tokenReader: () => apiToken.get() });
+            const notificationUrls = {
+                documentAlertUrl: '/database/record?documentID=',
                 documentNotificationUrl: '/register/requests/',
                 viewAllNotificationUrl: '/register/requests',
                 documentMessageUrl: '/mailbox/'
             };
-            var productionRealms = {
-                urls: [
-                    'https://absch.cbd.int', 
-                    'https://bch.cbd.int', 
-                    'https://bch.cbd.int', 
-                    'https://chm.cbd.int', 
-                    'https://accounts.cbd.int'
-                ],
-                realms: ['ABS', 'BCH', 'CHM']
-            };
+            let environmentRealms = [];
 
-            var developmentRealms = {
-                urls: ['https://absch.cbddev.xyz', 
-                       'https://bch.cbddev.xyz',
-                       'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 
-                       'https://accounts.cbddev.xyz',
-                       'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'
-                   ],
-                realms: ['ABS-DEV', 'BCH-DEV', 'CHM-DEV']
-            };
+            async function realmsForQuery() {
 
-            var trainingRealms = {
-                urls: [
-                    'https://training-absch.cbd.int', 
-                    'https://training-bch.cbd.int' , 
-                    'https://bch-training.cbd.int'
-                ],
-                realms: ['ABS-TRG', 'BCH-TRG']
-            };
-
-            function realmsForQuery() {
-                if (_.some(productionRealms.urls, function (url) {
-                    return $location.absUrl().indexOf(url) >= 0;
-                }))
-                    return productionRealms.realms;
-
-                if (_.some(developmentRealms.urls, function (url) {
-                    return $location.absUrl().indexOf(url) >= 0;
-                }))
-                    return developmentRealms.realms;
-
-                if (_.some(trainingRealms.urls, function (url) {
-                    return $location.absUrl().indexOf(url) >= 0;
-                }))
-                    return trainingRealms.realms;
+                environmentRealms = await realmApi.getRealmConfigurations(realm.environment);
+                return environmentRealms.map(({ realm }) => realm);
             }
 
             function notificationUrl(notification) {
-                var url = '';
-                switch (notification.data.documentInfo.realm.toUpperCase()) {
-                    case 'ABS':
-                        url = 'https://absch.cbd.int'; break;
-                    case 'ABS-DEV': {
-                        if ($location.absUrl().indexOf('http://localhost:') >= 0)
-                            url = 'http://localhost:2010'
-                        else
-                            url = 'https://absch.cbddev.xyz'; break;
-                    }
-                    case 'ABS-TRG':
-                        url = 'https://training-absch.cbd.int'; break;
-                    case 'CHM':
-                        url = 'https://chm.cbd.int'; break;
-                    case 'CHM-DEV': {
-                        if ($location.absUrl().indexOf('http://localhost:') >= 0)
-                            url = 'http://localhost:2000'
-                        else
-                            url = 'https://chm-dev.cbd.int'; break;
-                    }
-                    case 'BCH':
-                        url = 'https://bch.cbd.int'; break;
-                    case 'BCH-TRG':
-                        url = 'https://bch-training.cbd.int'; break;
-                    case 'BCH-DEV': {
-                        if ($location.absUrl().indexOf('http://localhost:') >= 0)
-                            url = 'http://localhost:2010'
-                        else
-                            url = 'https://bch.cbddev.xyz'; break;
-                    }
+
+                if (!environmentRealms.length) {
+                    return
+                }
+                
+                const documentRealm       = notification.data.documentInfo.realm.toUpperCase();
+                const documentRealmConfig = environmentRealms.find(data => data.realm === documentRealm);
+
+                if (!documentRealmConfig) {
+                    console.warn(`Realm "${documentRealm}" not found. Falling back to default URL.`);
+                    return getURL(notification);
                 }
 
-                //if same realm url avoid using window redirect
-                if ($location.absUrl().indexOf(url) >= 0)
-                    url = '';
-
-                var path;
-                if (_.includes(['ABS', 'ABS-DEV', 'ABS-TRG', 'BCH-TRG', 'BCH-DEV', 'BCH'], notification.data.documentInfo.realm.toUpperCase())) {
-                    if(notification.type == 'documentNotification')
-                        path = "/register/" + $filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
-                    else
-                        path = '/database/' + $filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier;
-                }
-                else {
+                const { baseURL } = documentRealmConfig;
+                let path;
+                
+                if (environmentRealms.find(({ realm }) => realm==documentRealm)) {
+                    path = `/register/${$filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema)}/${notification.data.documentInfo.identifier}/view`;                 
+                        
+                } else {
                     path = getURL(notification);
                 }
 
-                if (url != '') {
-                    $window.location.href = url + path;
-                }
-                else {
+                // Prevent navigation if already on the same domain
+                if (!$location.absUrl().indexOf(baseURL) >= 0) {
+                    $window.location.href = baseURL + path;
+                } else {
                     return path;
                 }
             }
@@ -124,14 +62,15 @@ import moment from 'moment';
                     return notificationUrls.documentAlertUrl + notification.data.documentInfo.identifier;
                 else
                     return notificationUrls.documentMessageUrl + notification.id;
+
             }
+            
+            realmsForQuery();
 
             return {
-                notificationUrls: notificationUrls,
-                realmsForQuery  : realmsForQuery,
-                notificationUrl : notificationUrl,
-                getURL          : getURL
+                notificationUrls,
+                realmsForQuery,
+                notificationUrl,
+                getURL
             };
         }]);
-
-    
