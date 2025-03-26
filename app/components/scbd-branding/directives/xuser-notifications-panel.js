@@ -28,10 +28,10 @@ app.directive('xuserNotificationsPanel', ["translationService", function (transl
             },
             controller: ['$scope', '$rootScope', 'IUserNotifications',
                         '$timeout', '$filter','authentication','cfgUserNotification','$location', '$window', 'realm',
-                function($scope, $rootScope, userNotifications, $timeout, $filter,
+                async function($scope, $rootScope, userNotifications, $timeout, $filter,
                         authentication, cfgUserNotification, $location, $window, realm) {
 
-                    var realmsForQuery = cfgUserNotification.realmsForQuery();
+                    const realmsForQuery = await cfgUserNotification.realmsForQuery();
                     $scope.isABS = realm.is('ABS');
                     $scope.isBCH = realm.is('BCH');
 
@@ -60,18 +60,18 @@ app.directive('xuserNotificationsPanel', ["translationService", function (transl
                                 $scope.updateStatus(notification);
                                 waitTime = 300;
                             }
-                            $timeout(function () {
-                                var url = ''
-                                if (notification.data && notification.data.documentInfo) {
-                                    url = cfgUserNotification.notificationUrl(notification);
-                                }
-                                else {
-                                    url = cfgUserNotification.getURL(notification);
-                                }
+                         $timeout(function () {
+                            
+                            let url;
+                            if (notification.data && notification.data.documentInfo) {
+                                url = cfgUserNotification.notificationUrl(notification);
+                            } else {
+                                url = cfgUserNotification.getURL(notification);
+                            }
+                            $location.url(url);
 
-                                $location.url(url);
-                            }, waitTime);
-                        };
+                        }, waitTime);
+                    };
 
 
                      //*************************************************************************************************************************************

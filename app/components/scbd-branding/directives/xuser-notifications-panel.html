@@ -101,6 +101,7 @@
                             <span class="d-none d-sm-inline-block">: {{::('xuserNotificationsPanelT.draftFolder'|$translate)}}</span>
                         </span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
@@ -138,6 +139,7 @@
                         <span class="notification-title" ng-if="notification.data.action==='request'">{{::('xuserNotificationsPanelT.publishingRequest'|$translate)}}</span>
                         <span class="notification-title" ng-if="notification.data.action==='delete-request'">{{::('xuserNotificationsPanelT.deleteRequest'|$translate)}}</span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
@@ -176,6 +178,7 @@
                         <span class="notification-title" ng-if="notification.data.action==='request'">{{::('xuserNotificationsPanelT.reminderPendingApproval'|$translate)}} </span>
                         <span class="notification-title" ng-if="notification.data.action==='delete-request'">{{::('xuserNotificationsPanelT.reminderDeleteApproval'|$translate)}} </span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
@@ -215,6 +218,7 @@
                             <span class="d-none d-sm-inline-block">: {{::('xuserNotificationsPanelT.cancelled'|$translate)}}</span>
                         </span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
@@ -252,7 +256,7 @@
                         <i class="hidden-sm hidden-md hidden-lg icon-lg bi bi-x-circle-fill"> </i>
                         <span class="notification-title">{{::('xuserNotificationsPanelT.requestRejected'|$translate)}}
                             <span class="d-none d-sm-inline-block">: 
-                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">{{::('xuserNotificationsPanelT.publishingAuthority'|$translate)}}</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && !isBCH">{{::('xuserNotificationsPanelT.publishingAuthority'|$translate)}}</span>
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">{{::('xuserNotificationsPanelT.bchNationalFocalPoint'|$translate)}}</span>
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span>
                                 {{::('xuserNotificationsPanelT.hasRejectedForPublishing'|$translate)}}</span>
@@ -306,7 +310,9 @@
                                 {{::('xuserNotificationsPanelT.hasApproved'|$translate)}}</span>
                         </span>
                         <div class="notification-spacing5">
-                            <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
+                            <span class="notification-label">
+                                [{{notification.data.documentInfo.realm}}]
+                                {{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
                         <div class="d-none d-sm-inline-block notification-spacing5">
@@ -379,6 +385,7 @@
                             {{notification.data.message||('xuserNotificationsPanelT.newRecordPublished'|$translate)}}
                         </div>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </DIV>

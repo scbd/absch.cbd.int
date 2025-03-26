@@ -50,6 +50,7 @@
                         <span class="notification-title">
                             <i class="fa fa-lg fa-clock-o"> </i> Publishing request expired </span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label" ng-bind="notification.data.documentInfo.metadata.schema | schemaName">: </span>
                             <span ng-bind="notification.data.documentInfo.title | lstring:locale"> </span>
                         </div>
@@ -73,6 +74,7 @@
                         <span class="notification-title" ng-if="notification.data.action==='request'">Publishing request</span>
                         <span class="notification-title" ng-if="notification.data.action==='delete-request'">Delete request</span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label" ng-bind="notification.data.documentInfo.metadata.schema | schemaName">: </span>
                             <span ng-bind="notification.data.documentInfo.title | lstring:locale"> </span>
                         </div>
@@ -97,6 +99,7 @@
                         <span class="notification-title" ng-if="notification.data.action==='request'">Reminder: Publishing request pending approval. </span>
                         <span class="notification-title" ng-if="notification.data.action==='delete-request'">Reminder: Delete request pending approval. </span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label" ng-bind="notification.data.documentInfo.metadata.schema | schemaName">: </span>
                             <span ng-bind="notification.data.documentInfo.title | lstring:locale">  </span>
                         </div>
@@ -120,6 +123,7 @@
                         <i class="fa fa-lg fa-rotate-left"> </i>
                         <span class="notification-title">Request Recalled </span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label" ng-bind="notification.data.documentInfo.metadata.schema | schemaName">: </span>
                             <span ng-bind="notification.data.documentInfo.title | lstring:locale"> </span>
                         </div>
@@ -143,6 +147,7 @@
                         <i class="bi bi-x-circle-fill icon-lg"> </i>
                         <span class="notification-title">Request Rejected </span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label" ng-bind="notification.data.documentInfo.metadata.schema | schemaName">: </span>
                             <span ng-bind="notification.data.documentInfo.title | lstring:locale"> </span>
                         </div>
@@ -170,6 +175,7 @@
                         <i class="fa fa-lg fa-check-circle"> </i>
                         <span class="notification-title">Request Approved</span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label" ng-bind="notification.data.documentInfo.metadata.schema | schemaName">: </span>
                             <span ng-bind="notification.data.documentInfo.title | lstring:locale"> </span>
                         </div>
@@ -213,6 +219,7 @@
                             {{notification.data.message || 'A new record has been published'}}
                         </span>
                         <div class="notification-spacing5">
+                            [{{notification.data.documentInfo.realm}}]
                             <span class="notification-label" ng-bind="notification.data.documentInfo.metadata.schema | schemaName">: </span>
                             <span ng-bind="notification.data.documentInfo.title | lstring:locale"> </span>
                         </div>
