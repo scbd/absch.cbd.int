@@ -2,6 +2,9 @@
 import _       from 'lodash';
 import { bundleUrls } from '../app/boot.js';
 
+const siteAlert      = process.env.SITE_ALERT || '';
+const siteAlertLevel = process.env.SITE_ALERT_LEVEL || 'danger';
+
  export async function renderApplicationTemplate(req, res){
 
     let urlPreferredLang;
@@ -37,7 +40,9 @@ import { bundleUrls } from '../app/boot.js';
                     isPrerender        : req.headers['x-is-prerender'],
                     isCrawler          : req.headers['x-is-crawler'],
                     apiUrl             : global.app.apiUrl,
-                    accountsUrl        : global.app.accountsUrl       
+                    accountsUrl        : global.app.accountsUrl,
+                    siteAlert,
+                    siteAlertLevel
                 };
 
     return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`, options);

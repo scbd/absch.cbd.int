@@ -37,6 +37,7 @@
 
 </head>
 <body ng-controller="ChmTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
+    <div style="display:<%=siteAlert ? 'block' : 'none'%>" class="alert alert-<%=siteAlertLevel%> mb-0"><%=siteAlert%></div>
     <div id="g-recaptcha"></div>
     <span style='display:none' id="appTitle">Clearing-House Mechanism</span>
     <span style='display:none' id="appDescription">The Clearing-House Mechanism</span>
