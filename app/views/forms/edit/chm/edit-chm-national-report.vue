@@ -35,7 +35,7 @@
 
         <div class="row" v-if="route?.params?.documentType != 'NBSAP'">
             <div class="col-xs-6">
-                <ng v-vue-ng:km-control-group name="type" required :caption="t('type')"> 
+                <ng v-vue-ng:km-control-group name="reportType" required :caption="t('type')"> 
                     <ng v-vue-ng:afc-autocomplete name="reportType" v-model:ng-model="document.reportType" 
                         :source="options.reportTypes" :selectbox="true" :filter="genericFilter" :mapping="genericMapping" >
                     </ng>

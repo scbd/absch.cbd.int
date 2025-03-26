@@ -2,6 +2,9 @@
 import _ from 'lodash';
 import { scbdSchemas } from '~/components/scbd-angularjs-services/main';
 import './common';
+import RealmApi from '~/api/realms';
+
+const realmApi = new RealmApi({ tokenReader: () => undefined });
 
 
 	//============================================================
@@ -31,7 +34,7 @@ import './common';
     app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', 'realm', 'appConfigService',
 	 						function(storage, $filter, $q, commonjs, realm, appConfigService) {
 		var cacheMap = {};
-
+		const otherRealms = {};
 		return function(term) {
 
 			if(!term)
@@ -81,7 +84,8 @@ import './common';
             if(!document)
                 return;
 
-			cacheMap[term.identifier] = $q.when(document).then(function(document) {
+			cacheMap[term.identifier] = $q.when(document)
+			.then(async function(document) {
 				var isDeletedRecord = document.deletedOn!=null;
 				
                 if(document.data)
@@ -92,6 +96,13 @@ import './common';
                 let government = '';
 				let uIdPrefix	= realm.uIdPrefix;
 				let documentId;
+
+				if(document.realm && realm.uIdPrefix!=document.realm){
+					//when showing other CH records in CHM, show other CHm realm prefix in uid
+					if(!otherRealms[document.realm])
+						otherRealms[document.realm] = await realmApi.getRealmConfiguration(document.realm);
+					uIdPrefix = otherRealms[document.realm].uIdPrefix;
+				}
 
 				if(document.documentID)
 					documentId = document.documentID;

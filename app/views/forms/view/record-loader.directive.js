@@ -481,7 +481,10 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 								directiveHtml 	= dirInfo.directiveHtml || directiveHtml;
 							}
 							$element.find(divSelector).empty().append($compile(directiveHtml)($scope));
-							$timeout(function(){canEdit()}, 1000) //verify if user can edit to show edit button
+							
+							 //verify if user can edit to show edit button, ignore if showInEdit is true.
+							if(!realm.schemas[schema].hideInSubmit)
+								$timeout(function(){canEdit()}, 1000)
 						});
 
 					}
