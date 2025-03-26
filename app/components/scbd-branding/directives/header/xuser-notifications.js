@@ -51,20 +51,16 @@ import './xuser-notification-config-service';
                                 waitTime = 300;
                             }
                             $timeout(function () {
-                            (async function () {
-                                try {
-                                    var url = '';
-                                    if (notification.data && notification.data.documentInfo) {
-                                        url = await cfgUserNotification.notificationUrl(notification);
-                                    } else {
-                                        url = cfgUserNotification.getURL(notification);
-                                    }
-
-                                    $location.url(url);
-                                } catch (error) {
-                                    console.error("Error while getting notification URL:", error);
+                            
+                                let url;
+                                if (notification.data && notification.data.documentInfo) {
+                                    url = cfgUserNotification.notificationUrl(notification);
+                                } else {
+                                    url = cfgUserNotification.getURL(notification);
                                 }
-                                })();
+
+                                $location.url(url);
+                                
                             }, waitTime);
                         };
 
@@ -74,6 +70,7 @@ import './xuser-notification-config-service';
                         //============================================================                      
 
                         var getNotification = function (count, type) {
+                            
                             if ($rootScope.user && $rootScope.user.isAuthenticated) {
                                 var queryMyNotifications;
                                 queryMyNotifications = {
@@ -151,9 +148,9 @@ import './xuser-notification-config-service';
                             return notification && notification.state == 'unread';
                         };
 
-                        $rootScope.$watch('user', function (newVla, oldVal) {
-                            // console.log(newVla,oldVal)
-                            if (newVla && !angular.equals(newVla, oldVal)) { // ToDo: why do we have this condition ?
+                        $rootScope.$watch('user', function (newVla, oldVal) {                            
+                            if (newVla && (!angular.equals(newVla, oldVal) || 
+                                          (!$scope.notificationCount && newVla.isAuthenticated) && !$scope.loading)) {
                                 if (newVla.isAuthenticated) {
                                     getNotification(1, 'unread');//notification count;
                                     getNotification(null, 'unread');

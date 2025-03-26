@@ -34,7 +34,6 @@ app.directive('xuserNotificationsPanel', ["translationService", function (transl
                     const realmsForQuery = await cfgUserNotification.realmsForQuery();
                     $scope.isABS = realm.is('ABS');
                     $scope.isBCH = realm.is('BCH');
-                    //ToDo: check for CHM
 
                     $scope.loading = false;
                     var pageNumber = 0;
@@ -62,22 +61,17 @@ app.directive('xuserNotificationsPanel', ["translationService", function (transl
                                 waitTime = 300;
                             }
                          $timeout(function () {
-                            (async function () {
-                                try {
-                                    var url = '';
-                                    if (notification.data && notification.data.documentInfo) {
-                                        url = await cfgUserNotification.notificationUrl(notification);
-                                    } else {
-                                        url = cfgUserNotification.getURL(notification);
-                                    }
+                            
+                            let url;
+                            if (notification.data && notification.data.documentInfo) {
+                                url = cfgUserNotification.notificationUrl(notification);
+                            } else {
+                                url = cfgUserNotification.getURL(notification);
+                            }
+                            $location.url(url);
 
-                                    $location.url(url);
-                                } catch (error) {
-                                    console.error("Error while getting notification URL:", error);
-                                }
-                            })();
                         }, waitTime);
-                        };
+                    };
 
 
                      //*************************************************************************************************************************************
