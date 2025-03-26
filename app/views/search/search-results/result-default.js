@@ -53,7 +53,7 @@ app.directive('resultDefault', ["$timeout", "translationService", 'realm', "$fil
                     }
 
                     const shortCode = $filter("schemaShortName")(doc.schema_s);
-                    return `/database/${encodeURIComponent(shortCode)}}/${encodeURIComponent(doc.uniqueIdentifier_s.toUpperCase())}`
+                    return `/database/${encodeURIComponent(shortCode)}}/${encodeURIComponent(doc.uniqueIdentifier_s?.toUpperCase())}`
                 }
 
                 function canShowInline(doc){
