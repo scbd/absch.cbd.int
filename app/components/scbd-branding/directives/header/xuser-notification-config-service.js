@@ -4,40 +4,41 @@ import _ from 'lodash';
 
         app.service("cfgUserNotification", ['$location', '$window', '$filter', 'realm','apiToken', function ($location, $window, $filter, realm, apiToken) {
 
+            const realmApi         = new RealmApi({ tokenReader: () => apiToken.get() });
             const notificationUrls = {
                 documentAlertUrl: '/database/record?documentID=',
                 documentNotificationUrl: '/register/requests/',
                 viewAllNotificationUrl: '/register/requests',
                 documentMessageUrl: '/mailbox/'
             };
-            let apiRealms = [];
+            let environmentRealms = [];
+
             async function realmsForQuery() {
-                const realmApi = new RealmApi({ tokenReader: () => apiToken.get() });
-                apiRealms = await realmApi.getRealmConfigurations(realm.environment);
-                return apiRealms.map(({ realm }) => realm);
+
+                environmentRealms = await realmApi.getRealmConfigurations(realm.environment);
+                return environmentRealms.map(({ realm }) => realm);
             }
 
-            async function notificationUrl(notification) {
-                if (!apiRealms.length) {
-                    console.error("Realms data is not loaded yet. Ensure `realmsForQuery()` is called before using `notificationUrl`.");
-                    return;
+            function notificationUrl(notification) {
+
+                if (!environmentRealms.length) {
+                    return
                 }
+                
+                const documentRealm       = notification.data.documentInfo.realm.toUpperCase();
+                const documentRealmConfig = environmentRealms.find(data => data.realm === documentRealm);
 
-                const realm = notification.data.documentInfo.realm.toUpperCase();
-                const realmData = apiRealms.find(data => data.realm === realm);
-
-                if (!realmData) {
-                    console.warn(`Realm "${realm}" not found. Falling back to default URL.`);
+                if (!documentRealmConfig) {
+                    console.warn(`Realm "${documentRealm}" not found. Falling back to default URL.`);
                     return getURL(notification);
                 }
 
-                const { baseURL } = realmData;
+                const { baseURL } = documentRealmConfig;
                 let path;
-
-                if (_.includes(await realmsForQuery(), realm)) {
-                    path = notification.type === 'documentNotification'
-                        ? `/register/${$filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema)}/${notification.data.documentInfo.identifier}/view`
-                        : `/database/${$filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema)}/${notification.data.documentInfo.identifier}`;
+                
+                if (environmentRealms.find(({ realm }) => realm==documentRealm)) {
+                    path = `/register/${$filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema)}/${notification.data.documentInfo.identifier}/view`;                 
+                        
                 } else {
                     path = getURL(notification);
                 }
@@ -62,8 +63,9 @@ import _ from 'lodash';
                 else
                     return notificationUrls.documentMessageUrl + notification.id;
 
-
             }
+            
+            realmsForQuery();
 
             return {
                 notificationUrls,
