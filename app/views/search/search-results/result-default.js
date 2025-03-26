@@ -61,7 +61,7 @@ app.directive('resultDefault', ["$timeout", "translationService", 'realm', "$fil
                     if(doc.schema_s == 'decision')
                         return false;
 
-                    return doc.realm_ss && !doc.uniqueIdentifier_s?.toUpperCase()?.startsWith(realm.realm)
+                    return doc.realm_ss && doc.uniqueIdentifier_s?.toUpperCase()?.startsWith(realm.uIdPrefix);
                 }   
                 
             },
