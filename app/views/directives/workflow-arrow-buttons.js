@@ -12,6 +12,7 @@ import workflowButtonsT from '~/app-text/views/directives/workflow-arrow-buttons
 import { mergeTranslationKeys } from '../../services/translation-merge';
 import cbdAddNewViewArticle from '~/components/common/cbd-add-new-view-article.vue'
 import documentDebugInfo from '~/components/km/document-debug-info.vue';
+import RealmApi from '~/api/realms';
 
 const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
@@ -51,7 +52,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 				onReviewLanguageChangeFn  : "&onReviewLanguageChange",
 				onPreSaveDraftVersionFn	  : "&onPreSaveDraftVersion"
     		},
-            link : function($scope, $element, $attr){
+            link : async function($scope, $element, $attr){
                 translationService.set('workflowButtonsT', workflowButtonsT);
                 let documentLoadError = false;
                 var originalDocument;
@@ -63,7 +64,8 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
 				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
-                
+                const realmApi            = new RealmApi({ tokenReader: () => undefined});
+                const environmentRealms   = await realmApi.getRealmConfigurations(realm.environment);
 
                 $scope.vueComponent = {
                     components: { cbdAddNewViewArticle }
@@ -746,11 +748,8 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     if(!skipToast)
                         toastr.info(toasterMessages.closeWithoutSaving);
 
-                    var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
-                       'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
-                       'https://bch.cbddev.xyz/', 'https://bch-training.cbd.int/' , 
-                       'https://bch.cbd.int/' , 
-                   ]
+                    var environmentRealmHosts = environmentRealms.map(({ baseURL }) => baseURL);
+                    environmentRealmHosts.push('http://localhost:2010/');
                    $timeout(function() {
                        if($route.current.params.workflow){
                            $timeout(function() {
@@ -760,7 +759,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                        else if ($rootScope.next_url) {
                            var url = $rootScope.next_url.replace($location.$$protocol + '://' +
                                $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '');
-                           _.forEach(absHosts, function(host) {
+                           _.forEach(environmentRealmHosts, function(host) {
                                url = url.replace(host, '');
                            });
                            url = url.replace(/^(en|ar|fr|es|ru|zh)\//, '/');
