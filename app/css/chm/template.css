@@ -173,4 +173,8 @@ embed-footer {
 }
 .breadcrumbs   { color:#595959; }
 .breadcrumbs a { color:#595959; }
-.breadcrumbs a:hover { color: #000; }
+.breadcrumbs a:hover, .footer-chm a:hover { color: #fff !important; }
+
+.chm-color-yellow {
+    color: #FFD801 !important;
+}
