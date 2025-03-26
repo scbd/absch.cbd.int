@@ -24,3 +24,4 @@ TestCases
 package-lock.json
 sourceMap
 dist
+yarn.lock
