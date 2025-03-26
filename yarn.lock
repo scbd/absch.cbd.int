@@ -1073,9 +1073,9 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.12.0.tgz#9ffdf9ed133a7464f4ae187eb9e1294413fab235"
   integrity sha512-ZYmr5mS2wd4Dew/JjT0Fqi2NPB/ZhZ2VvPp7SmvPZb4Y1CG/LRcS6tcRo2cYU7zLK5A7cdbhWnnWmUjoI4qapg==
 
-"@scbd/angular-vue@https://github.com/scbd/angular-vue.git#transclude":
+"@scbd/angular-vue@https://github.com/scbd/angular-vue.git#ng-vue-3":
   version "5.0.0-alpha.1"
-  resolved "https://github.com/scbd/angular-vue.git#f147661e406f69ae55a168d417d268c25aa7d839"
+  resolved "https://github.com/scbd/angular-vue.git#392df7c6fe52fb5d54550beca9c37176eba97612"
 
 "@scbd/common@^0.0.10":
   version "0.0.10"
