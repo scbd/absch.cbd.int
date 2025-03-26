@@ -112,7 +112,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         if(realm.is('CHM')){                        
           $scope.isCHM   = realm.is('CHM');  
           mapColors = {
-            party          : '#2B2A2A',
+            party          : '#7C92E4',
             nonParty       : '#636363',
             inBetweenParty : '#EC971F'  
           }     
