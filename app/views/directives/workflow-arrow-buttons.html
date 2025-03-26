@@ -171,9 +171,11 @@
         <div ng-transclude="introForm" class="bg-white">
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
             <div class="border p-3 mb-5">
-                <cbd-add-new-view-article ng-vue="vueComponent" v-if="isAdmin && articleAdminTags" target="_self"
-                    :admin-tags="articleAdminTags" :id="(article||{})._id" class="btn btn-secondary float-end btn-sm">
-                </cbd-add-new-view-article>      
+                <div ng-if="vueComponent && isAdmin && articleAdminTags">
+                    <cbd-add-new-view-article ng-vue="vueComponent"  target="_self"
+                        :admin-tags="articleAdminTags" :id="(article||{})._id" class="btn btn-secondary float-end btn-sm">
+                    </cbd-add-new-view-article>      
+                </div>
                 <h2 ng-bind="article.title|lstring:locale"></h2>
                 <br>
                 <!-- use cbd-article -->
