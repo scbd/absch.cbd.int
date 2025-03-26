@@ -46,8 +46,8 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/submit',                                   {"redirectTo":"/register","resolve":{}}). 
 
   whenAsync('/management/requests',                      {"redirectTo":"/register/requests","resolve":{}}). 
-  whenAsync('/management/requests/:id',                  {"redirectTo":"/register/requests","resolve":{}}). 
-  whenAsync('/management/requests/:id/:activity',        {"redirectTo":"/register/requests","resolve":{}}). 
+  whenAsync('/management/requests/:id',                  {"redirectTo":"/register/requests/:id","resolve":{}}). 
+  whenAsync('/management/requests/:id/:activity',        {"redirectTo":"/register/requests/:id","resolve":{}}). 
   whenAsync('/management/user-preferences',              {"redirectTo":"/register/user-preferences","resolve":{}}). 
   whenAsync('/management/national-users',                {"redirectTo":"/register/national-users","resolve":{}}). 
   
