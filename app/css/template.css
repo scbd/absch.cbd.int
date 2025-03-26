@@ -729,7 +729,9 @@ a:active {
 .color-black {
     color: #111;
 }
-
+.color-chm-grey {
+    color: #595959;
+}
 .color-white,
 .copyright a,
 .copyright a:hover,

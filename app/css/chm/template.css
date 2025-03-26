@@ -49,12 +49,12 @@
 }
 /* .party-container, */
 .protocol-map-header-bg{
-    background-color: #2B2A2A!important;
+    background-color: #7C92E4!important;
 }
 
 #government .color-party,
 .color-party{
-    color:#2B2A2A!important;
+    color:#7C92E4!important;
 }
 #government .color-non-party,
 .color-non-party{
@@ -62,7 +62,7 @@
 }
 .label-party,
 .bg-party {
-    background-color: #2B2A2A!important;
+    background-color: #7C92E4!important;
 }
 .label-non-party{
     background-color: #2B2A2A!important;
@@ -78,23 +78,26 @@
 	grid-template-columns: repeat(14, 1fr);
 }
 .bg-chm{
-    background: #2B2A2A!important;
+    background: #7C92E4!important;
 }
 .text-chm{
-    color: #2B2A2A!important;
+    color: #7C92E4!important;
 }
 .home-section-top-chm {
     background-color: hsl(198, 100%, 18%);
 }
 .home-section-top-chm {
-    background-image:url('/app/img/new-home/bch-homebg-min.jpeg');
+    background-image:url('/app/img/chm/chm-homebg-min.webp');
     background-position: center; 
     background-size: cover; 
     background-repeat: no-repeat;
 }
 .footer-chm {
-    background-color: #2B2A2A;
-    color: #FFF;
+    background-color: #7C92E4;
+}
+.footer-chm, .fw-light { 
+    color: #595959 !important;
+    font-weight: 400 !important;
 }
 /* registery CSS  */
 .registry-sections .card-box{
@@ -138,7 +141,7 @@ embed-footer {
 .side-menu,
 .side-menu .btn-toggle {
     color: #fff;
-    background-color: #2B2A2A;
+    background-color: #7C92E4;
 }
 
 .side-menu .menu-header {
@@ -159,8 +162,19 @@ embed-footer {
 }
 
 #innerPage .mastHead{
-	background-color: #2B2A2A;
+	background-color: #7C92E4;
 	/* color:white; */
 	padding:10px 20px 40px 20px;
 	margin:0;
+}
+
+.breadcrumbs {
+    background-color:#00405C;
+}
+.breadcrumbs   { color:#595959; }
+.breadcrumbs a { color:#595959; }
+.breadcrumbs a:hover, .footer-chm a:hover { color: #fff !important; }
+
+.chm-color-yellow {
+    color: #FFD801 !important;
 }
