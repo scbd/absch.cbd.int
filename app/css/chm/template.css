@@ -94,7 +94,10 @@
 }
 .footer-chm {
     background-color: #7C92E4;
-    color: #FFF;
+}
+.footer-chm, .fw-light { 
+    color: #595959 !important;
+    font-weight: 400 !important;
 }
 /* registery CSS  */
 .registry-sections .card-box{
@@ -164,3 +167,10 @@ embed-footer {
 	padding:10px 20px 40px 20px;
 	margin:0;
 }
+
+.breadcrumbs {
+    background-color:#00405C;
+}
+.breadcrumbs   { color:#595959; }
+.breadcrumbs a { color:#595959; }
+.breadcrumbs a:hover { color: #000; }
