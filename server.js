@@ -63,6 +63,7 @@ app.get('/national-report-questions/:report', nationalReportsQuestions);
 app.use('/widgets.js',                               express.static(`${__dirname}/dist/en/app/assets/widgets.js`));
 app.use('/legacy-ajax-plugin.js',                    express.static(`${__dirname}/dist/en/app/assets/legacy-ajax-plugin.js`));
 app.use('/app/assets/widget-example.html',           express.static(`${__dirname}/app/assets/${process.env.CLEARINGHOUSE}-widget-example.html`));
+app.use('/app/img/cbd-logo-en.svg',                  express.static(`${__dirname}/app/img/cbd-logo-green-en.svg`));
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/pdf/:type/:schema/:documentId/:revision?',     rejectBotsPdf);
 
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: setCustomCacheControl }));
