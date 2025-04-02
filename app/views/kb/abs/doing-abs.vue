@@ -9,8 +9,7 @@
                 </div>
                 <div class="col-1"></div>
                 <div class="col-8"> 
-             
-                    <cbd-article class="pb-3" :id="hasID" :show-cover-image="true" :show-title="true" :show-edit="true" @onArticleLoad="getArticle" :query="articleQuery"   />
+                    <cbd-article class="pb-3" :show-cover-image="true" :show-title="true" :show-edit="true" :query="articleQuery" @onArticleLoad="getArticle" />
                     <faqs class="pt-3" :key="tags && tags.length" v-if="hasTag" :tags="tags" :tag-title="false" :use-exact-tags="true" ></faqs>
                 </div>
             </div>
@@ -25,17 +24,23 @@ import { useRoute } from "@scbd/angular-vue/src/index.js";
 import { computed, ref } from 'vue'; 
 const route = useRoute();
 const hasTag = computed(() => route.value?.params?.tag ? true : false);
-const hasID = computed(() => route.value?.params?.id ? route.value.params.id  : false);
+import { mapObjectId } from '~/api/api-base.js';
 
 const articleQuery = computed(()=>{
     let ag = [];
-    ag.push({ $match: { "adminTags":  { "$all": ["abs", "doing-abs", "doing-abs-intro"] }}});
+    if (route.value?.params?.id){
+        ag.push({ $match: {_id: mapObjectId(route.value.params.id) } });
+    }
+    else{
+        ag.push({ $match: { "adminTags":  { "$all": ["abs", "doing-abs", "doing-abs-intro"] }}});
+    }
     ag.push({"$limit" : 1});
+
     return { ag: JSON.stringify(ag) };
   });
 const limit = 100;
 const tags =  ref([]);
-const getArticle = (results) => {tags.value = results;}
+const getArticle = (results) => {tags.value = results.adminTags;}
 
 
 </script>

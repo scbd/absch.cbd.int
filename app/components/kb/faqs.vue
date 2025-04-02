@@ -116,9 +116,6 @@
 				faqs.value = [];
 				const realmTag = realmArticleTag;    
 				let q = { $and : [{ adminTags : { $all : adminTags.value?.map(encodeURIComponent)}}], };
-				if(props.useExactTags){
-					q = { $and : [{ adminTags : { $eq : adminTags.value?.map(encodeURIComponent)}}], };
-				}
 					
 				const f = { 
 					[`title`]	: 1,
