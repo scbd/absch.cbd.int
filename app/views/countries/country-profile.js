@@ -4,7 +4,7 @@ import '~/views/directives/block-region-directive';
 import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';
-import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
+import 'css!https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
 import countryProfileT from '~/app-text/views/countries/country-profile.json';
 
   export { default as template } from './country-profile.html';
@@ -22,7 +22,6 @@ import countryProfileT from '~/app-text/views/countries/country-profile.json';
           $scope.country = country;
           $scope.country.code = $scope.country.code.toLowerCase();
           $scope.country.name = $scope.country.name[locale];
-          $scope.country.cssClass='flag-icon-'+$scope.country.code;
           breadcrumbs.options = { 'country_name': $scope.country.name };
 
           ngMeta.resetMeta();  
