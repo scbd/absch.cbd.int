@@ -42,7 +42,6 @@
     const emit = defineEmits(['onArticleLoad']);
 
     const props = defineProps({
-        showTitle       : { type: Boolean, required: false, default:false         },
         showCoverImage  : { type: Boolean, required: false, default:true         },
         showEdit        : { type: Boolean, required: false, default:false        },
         article         : { type: Object,  required: false, default:undefined    },
