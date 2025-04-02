@@ -10,7 +10,7 @@
                 <div class="col-1"></div>
                 <div class="col-8"> 
                     <cbd-article class="pb-3" :show-cover-image="true" :show-title="true" :show-edit="true" :query="articleQuery" @onArticleLoad="getArticle" />
-                    <faqs class="pt-3" :key="tags && tags.length" v-if="hasTag" :tags="tags" :tag-title="false" :use-exact-tags="true" ></faqs>
+                    <faqs class="pt-3" :key="tags && tags.length" v-if="hasTag" :tags="tags" :tag-title="false" ></faqs>
                 </div>
             </div>
         </div>

@@ -71,7 +71,6 @@
 	const props = defineProps({
         tags 	    : { type: Array  , required: false, default:[]},
 		tagTitle 	: { type: Boolean  , required: false, default:true},
-		useExactTags: { type: Boolean  , required: false, default:false}
     });
 
 	const realmArticleTag = getRealmArticleTag();
