@@ -61,3 +61,7 @@ export function isRTL(locale){
   ]; // add more if any..
   return rtlLanguages.includes(locale);
 }
+
+export function getLocaleDirection(locale) {
+  return isRTL(locale) ? 'rtl' : 'ltr';
+}

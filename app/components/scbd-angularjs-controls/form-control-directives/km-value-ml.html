@@ -2,12 +2,12 @@
 		<div ng-repeat="locale in self.localesToDisplay" class="input-group" ng-class="{ 'multiple-languages' : self.localesToDisplay.length>1 && !last }"
 				ng-if="self.localesToDisplay.length ==1 || (self.localesToDisplay.length>1 && self.value[locale])">
 	
-			<div ng-if="!html" class="form-control km-value km-value-ml-div"  dir="{{ isRTL(locale) ? 'rtl' : 'ltr' }}"
+			<div ng-if="!html" class="form-control km-value km-value-ml-div"  dir="{{ getLocaleDirection(self.value|lstringLocale:locale) }}"
 				ng-class="{'markdown':self.markdown, 'km-pre':self.kmPre }" ng-bind="self.value|lstring:locale" aria-describedby="basic-addon1">
 			</div>
 			<div ng-if="html" anchor-target="_blank" anchor-target-selector="a[href^='https://'], a[href^='http://']" ng-bind-html="self.value|lstring:locale|addclear|toTrusted"
 				class="form-control km-value km-value-ml-div km-value-ml-html"
-				dir="{{ isRTL(locale) ? 'rtl' : 'ltr' }}" 
+				dir="{{ getLocaleDirection(self.value|lstringLocale:locale) }}" 
 				ng-class="{'markdown':self.markdown, 'km-pre':self.kmPre }" aria-describedby="basic-addon1">
 			</div>
 		<span class="input-group-text" id="basic-addon1" style="cursor:default" ng-bind="self.value|lstringLocale:locale | uppercase"></span>
