@@ -292,7 +292,7 @@ import './solr';
 
                     if (locale && locale !== 'en') {
                         const fieldLocale = (locale||'en').toUpperCase();
-                        const localize = (f) => typeof fields !== 'string' ? f.replace(/_EN_/g, `_${ fieldLocale }_`) : f;
+                        const localize = (f) => typeof f === 'string' ? f.replace(/_EN_/g, `_${ fieldLocale }_`) : f;
 
                         if (Array.isArray(fields)) {
                             return fields.map(localize);
