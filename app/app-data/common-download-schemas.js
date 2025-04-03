@@ -51,7 +51,8 @@ export const downloadSchemas = {
         "biosafetyModifiedOrganisms": fieldsT["resource.biosafetyModifiedOrganisms"],
         "biosafetyOrganisms"        : fieldsT["resource.biosafetyOrganisms"],
         "biosafetyGenes"            : fieldsT["resource.biosafetyGenes"],
-        "publishedOn"               : fieldsT["publishedOn"]
+        "publishedOn"               : fieldsT["publishedOn"],
+        "organizations"             : fieldsT["resource.organizations"]
     },
 
   "database":{
