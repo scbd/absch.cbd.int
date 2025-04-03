@@ -1,7 +1,7 @@
 import app from '~/app';
 import template from 'text!./km-inputtext-ml.html';
 import angular from 'angular';
-import { isRTL } from '~/services/filters/lstring';
+import { getLocaleDirection } from '~/services/filters/lstring';
   //============================================================
   //
   //
@@ -26,7 +26,7 @@ import { isRTL } from '~/services/filters/lstring';
         $scope.$watch('locales', watchLocales);
         $scope.$watch('binding', watchBinding);
 
-        $scope.isRTL = isRTL;
+        $scope.getLocaleDirection = getLocaleDirection;
         //==============================
         //Remove value of not selected languages/empty languages
         //==============================

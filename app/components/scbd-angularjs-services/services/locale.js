@@ -1,5 +1,6 @@
 import app from '~/app';
-import 'angular-cookies'; ;
+import 'angular-cookies';
+import { getLocaleDirection } from '~/services/filters/lstring';
 
     var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)(\/|$)/;
     app.provider('locale', [function() {
@@ -31,7 +32,7 @@ import 'angular-cookies'; ;
                 return false;
         };
     }]);
-
+    //ToDo: Duplicate code , already available in scbd-filters
     app.filter("locale", ['locale', function(defaultLocale) {
     	return function(ltext, locale) {
 
@@ -60,7 +61,7 @@ import 'angular-cookies'; ;
     		return locale;
     	};
     }]);
-
+    //ToDo: Duplicate code , already available in scbd-filters
     app.filter("direction", ['$filter', function($filter) {
     	return function(text, locale) {
 
@@ -69,10 +70,10 @@ import 'angular-cookies'; ;
             return $filter('localeDirection')(locale);
     	};
     }]);
-
+    //ToDo: Duplicate code , already available in scbd-filters
     app.filter("localeDirection", ['locale', function(defaultLocale) {
     	return function(locale) {
-            return (locale||defaultLocale) == 'ar' ? 'rtl' : 'ltr';
+            return getLocaleDirection(locale || defaultLocale);
         };
     }]);
 
