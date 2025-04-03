@@ -3,6 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import scbdSchemaDetails from './schema-name.json'  assert { type:'json'};
 import '../services/locale';
+import { getLocaleDirection } from '~/services/filters/lstring';
 import { setAnchorTarget, escapeHtmlAttributeId } from '~/services/html.js'
     
   app.directive("translationUrl", ['$browser', function($browser){
@@ -456,7 +457,7 @@ import { setAnchorTarget, escapeHtmlAttributeId } from '~/services/html.js'
 
   app.filter("localeDirection", ['locale', function(defaultLocale) {
     return function(locale) {
-          return (locale||defaultLocale) == 'ar' ? 'rtl' : 'ltr';
+          return getLocaleDirection(locale || defaultLocale);
       };
   }]);
 
