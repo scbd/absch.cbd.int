@@ -39,7 +39,7 @@
  body.print i[class*="bi-"], body.print  i[class*="fa-"],
 .slaask-alert-overlay, .slaask-alert,.lang-alert,
 .bch-header, #reference-records-table, .animated-container,
-scbd-header, bch-header, bch-footer, absch-header, absch-footer, scbd-footer  {
+scbd-header, bch-header, bch-footer, absch-header, absch-footer, scbd-footer, chm-header, chm-footer  {
     display: none!important
 }
 .training-bg {

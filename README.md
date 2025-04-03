@@ -37,7 +37,8 @@ The project requires two command to run the project
 |TAG / VERSION              |  (Branch/commit)                  | |
 |PORT                       |  2010                             | |
 |GOOGLE_ANALYTICS_CODE      |  ****                             | |
-|                           |                                   | |
+|SITE_ALERT                 |  (Optional)                       |  Message to display on the top bar. if empty/not set the Alert Bar will no show |
+|SITE_ALERT_LEVEL           |  (Optional)                       |  Color level: `primary`, `secondary`, `info`, `success`, `warning`, `danger`. Default: danger |
 
 # Run in vscode
 Use below vscode launch.json configuration to run the project. using the compounds configuration both commands can be run together.

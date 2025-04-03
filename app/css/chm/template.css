@@ -87,7 +87,7 @@
     background-color: hsl(198, 100%, 18%);
 }
 .home-section-top-chm {
-    background-image:url('https://www.cbd.int/chm%20files/chm-homebg-min.webp');
+    background-image:url('/app/img/chm/chm-homebg-min.webp');
     background-position: center; 
     background-size: cover; 
     background-repeat: no-repeat;
