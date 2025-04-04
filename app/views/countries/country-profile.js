@@ -4,7 +4,7 @@ import '~/views/directives/block-region-directive';
 import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';
-import 'css!https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
+import 'flag-icons-css';
 import countryProfileT from '~/app-text/views/countries/country-profile.json';
 
   export { default as template } from './country-profile.html';
