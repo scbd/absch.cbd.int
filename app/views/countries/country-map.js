@@ -5,7 +5,7 @@ import 'libs/ammap3/ammap/ammap';
 import '~/views/countries/worldEUHigh';
 import 'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]';
 import '~/services/main';
-import 'css!https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css';
+import 'flag-icons-css';
 import '~/components/scbd-angularjs-services/main';
 import './directives/homepin-popup-bch';
 import './directives/homepin-popup-abs';
