@@ -23,6 +23,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 translationService.set('recordListT', recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
+                $scope.canDeletePublished = true;
 
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
@@ -177,7 +178,10 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 //
                 //============================================================
                 $scope.askDelete = function (record) {
-
+                    $scope.canDeletePublished = true;
+                    if($scope.isPublished(record) && $scope.isDraft(record)){
+                        $scope.canDeletePublished = false;
+                    }
                     if (record.type == 'absPermit' && $scope.isPublished(record)) {
                         $scope.loading = true;                        
                         $scope.isIRCC = true;
@@ -209,12 +213,19 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                     $scope.loading = true;
 
                     return $q.when(storage.drafts.delete(record.identifier))
-                    .then(function () {
-
-                        recordDeleted(record, true);
-                        $scope.recordToDelete = null;
-                        $scope.security = undefined;
-                        $scope.closeDialog();
+                    .then(function (response) {
+                        if(response?.status === 200){
+                            recordDeleted(record, true);
+                            if($scope.isPublished(record)){
+                                $scope.canDeletePublished = true;
+                            } else{
+                                $scope.recordToDelete = null;
+                                $scope.security = undefined;
+                                $scope.closeDialog();
+                            }
+                        } else {
+                          toastr.error('There was an error in deleting draft record.');  
+                        }
                     }).finally(function () {
                         delete $scope.loading
                     });
