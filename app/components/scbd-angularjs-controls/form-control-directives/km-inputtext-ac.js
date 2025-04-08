@@ -3,6 +3,7 @@ import template from 'text!./km-inputtext-ac.html';
 import angular from 'angular';
 import 'angucomplete-alt';
 import '~/components/scbd-angularjs-controls/form-control-directives/km-control.css';
+import { getLocaleDirection } from '~/services/filters/lstring';
   //============================================================
   //
   //
@@ -36,7 +37,7 @@ import '~/components/scbd-angularjs-controls/form-control-directives/km-control.
         $scope.termLocales={};
         $scope.$watch('locales', watchLocales);
         $scope.$watch('binding', watchBinding);
-        
+        $scope.getLocaleDirection = getLocaleDirection;
         //==============================
         //Remove value of not selected languages/empty languages
         //==============================
