@@ -1414,6 +1414,9 @@ div.recordDefault:hover {
     background-color: #333!important;
     color: white;
 }
+#search-new .ircc-expired {
+    background-color: #ffc107 !important;
+}
 #search-new .section-title {
     color: #999;
     font-weight: bold;

@@ -328,6 +328,19 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 						}					
 					}
 
+					$scope.isIrccExpired = function () {
+						const { schema } = $scope.internalDocument?.header || {};
+						const { dateOfExpiry } = $scope.internalDocument || {};
+					  
+						if (schema === 'absPermit' && dateOfExpiry) {
+						  const expiryDate = new Date(dateOfExpiry);
+						  const today = new Date();
+						  return expiryDate < today;
+						}
+					  
+						return false;
+					  };
+					  
 					$scope.loadRecordRevisions = function(){
 						if(!$scope.recordRevisions){
 							$scope.loadingRevisions = true;
