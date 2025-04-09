@@ -39,5 +39,6 @@
     "addInfo": "Additional Information",
     "relevantDocuments": "Other relevant website addresses and/or attached documents",
     "amendmentHistory": "Amendment history",
-    "infoUtilization": "Information on the utilization of the genetic resource(s)"
+    "infoUtilization": "Information on the utilization of the genetic resource(s)",
+    "expired": "Expired"
 }
