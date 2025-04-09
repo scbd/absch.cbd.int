@@ -97,7 +97,10 @@
     			<div ng-show="document.dateOfExpiry">
     				<label>{{::('viewAbsPermitT.dateOfExpiry'|$translate)}}</label>
 					<div compare-val>
-    				<div class="km-value"><span ng-bind="document.dateOfExpiry | formatDate"></span></div>
+    				<div class="km-value">
+						<span ng-bind="document.dateOfExpiry | formatDate"></span>
+						<span ng-if="isExpired(document.dateOfExpiry)" class="badge rounded-pill bg-warning text-dark float-end ircc-expired">{{::('viewAbsPermitT.expired'|$translate)}}</span>
+					</div>
 					</div>
     			</div>
 
