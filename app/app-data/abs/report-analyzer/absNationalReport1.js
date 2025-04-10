@@ -2605,7 +2605,7 @@ export const absNationalReport1 = [
             "type": "link",
             "title": nr1T.provideInformationOnLessons,
             "multiple": false,
-            "mandatory": true
+            "mandatory": false
          } 
       ]
    },
