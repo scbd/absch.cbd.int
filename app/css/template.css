@@ -1414,12 +1414,9 @@ div.recordDefault:hover {
 #searchResult {
     padding: 0;
 }
-#search-new .badge {
+#search-new .bg-darkgrey {
     background-color: #333!important;
     color: white;
-}
-#search-new .ircc-expired {
-    background-color: #ffc107 !important;
 }
 #search-new .section-title {
     color: #999;
