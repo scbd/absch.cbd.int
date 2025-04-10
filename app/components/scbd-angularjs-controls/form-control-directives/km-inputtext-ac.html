@@ -1,8 +1,8 @@
 ﻿<div class="km-inputtext-ac">
-	<div ng-repeat="locale in locales" class="input-group input-lang-{{locale}}" 
+	<div ng-repeat="locale in locales" class="input-group" 
 		ng-class="{ 'multiple-languages' : isShowLocale() && !last }" style="white-space:nowrap">
 		<!-- ng-disabled="ngDisabledFn()" -->
-		<angucomplete-alt id="ac_{{locale}}" placeholder="{{autocompleteOptions.placeholder}}" 
+		<angucomplete-alt dir="{{ getLocaleDirection(locale)}}" id="ac_{{locale}}" placeholder="{{autocompleteOptions.placeholder}}" 
 			pause="{{autocompleteOptions.pause}}" input-changed="onInputChange"
 			selected-object="onObjectSelected" remote-api-handler="remoteApiHandler" 
 			data-field="{{autocompleteOptions.dataField}}" title-field="{{autocompleteOptions.titleField}}" 
