@@ -24,7 +24,8 @@ import taskIdT from '~/app-text/views/directives/task-id.json';
 				"$filter", 'toastr', 'ngDialog', 'localStorageService', "$location", 'roleService', 'translationService',
 				function ($rootScope, $scope,  $route, IStorage, IWorkflows,
 					$filter, toastr, ngDialog, localStorageService, $location, roleService, translationService) {
-					translationService.set('taskIdT', taskIdT);    
+					translationService.set('taskIdT', taskIdT);   
+					$scope.showDeleteConfirmedMessage = false; 
 					//==================================================
 					//
 					//
@@ -91,7 +92,9 @@ import taskIdT from '~/app-text/views/directives/task-id.json';
 									operationType = 'reject'
 								}
 								localStorageService.set('workflow-activity-status', { identifier: $scope.document.header.identifier, type: operationType });
-								$scope.closeDialog();
+								if(resultData.action !== 'approve') { // and deleted
+									$scope.closeDialog();
+								}
 
 					var evtServerPushNotification = $rootScope.$on('event:server-pushNotification', function (evt, data) {
 									
@@ -118,7 +121,9 @@ import taskIdT from '~/app-text/views/directives/task-id.json';
 
 							}).catch(function (error) {
 								toastr.error('There was an error processing your request, please try again.');
-								$scope.isUpdating = false;								
+																
+							}).finally(function () {
+								$scope.isUpdating = false;
 							});
 					};
 					$scope.user = function () {
@@ -229,11 +234,10 @@ import taskIdT from '~/app-text/views/directives/task-id.json';
 
 								$scope.updateActivity = function () {
 									updateActivity({ action: 'approve' }, true);
-									$scope.closeConfirmation();
+									//ToDo: Stay on the same page, display  confirmation message if they want to see the deleted record.
+									$scope.showDeleteConfirmedMessage = true;
 								}
-								$scope.closeConfirmation = function () {
-									ngDialog.close();
-								}
+								 
 							}]
 						});
 					}

@@ -133,13 +133,18 @@
                 </h3>
         </div>
         <div class="modal-body bg-white">
-           <h2 class="color-red"> {{::('taskIdT.isDeleteRecord'|$translate)}}</h2>
+           <h2 ng-if="!showDeleteConfirmedMessage" class="color-red"> {{::('taskIdT.isDeleteRecord'|$translate)}}</h2>
+           <h2 ng-if="showDeleteConfirmedMessage" class="alert alert-danger mt-3">
+                Record has been deleted. <br>
+                <a rel="noopener" translation-url ng-href="/database/{{showDocumentHistory}}"
+                    target="new">click here to see the deleted record</a>
+            </h2>
             <span ng-bind="document"></span>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger px-3 float-end" ng-click="updateActivity()" ng-disabled="isUpdating">
-                            <span class="hidden-xs">{{::('taskIdT.deleteRecord'|$translate)}}</span>
-                        </button>
+            <button ng-if="!showDeleteConfirmedMessage" type="button" class="btn btn-danger px-3 float-end" ng-click="updateActivity()" ng-disabled="isUpdating">
+                <span class="hidden-xs">{{::('taskIdT.deleteRecord'|$translate)}}</span>
+            </button>
         </div>
         <!--</div> -->
     </script>
