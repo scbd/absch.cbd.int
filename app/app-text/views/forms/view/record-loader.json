@@ -33,6 +33,5 @@
     "loading": "Loading...",
     "edit": "Edit",
     "delete": "Delete",
-    "comparisonRecordNotFound" : "The version of the record to compare was not found.",
-    "expiredMessage": "This permit or its equivalent has expired"
+    "comparisonRecordNotFound" : "The version of the record to compare was not found."
 }
