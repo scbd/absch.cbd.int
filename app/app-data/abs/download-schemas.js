@@ -86,7 +86,8 @@ export const downloadSchemas = {
         "country"                              : fieldsT["country"],
         "phones"                               : fieldsT["phones"],
         "emails"                               : fieldsT["emails"],
-        "websites"                             : fieldsT["websites"]
+        "websites"                             : fieldsT["websites"],
+        "personsAtCheckpoint"                  : fieldsT["absCheckpointCommunique.personsAtCheckpoint"],
     },
     
     "absProcedure":{
@@ -101,7 +102,8 @@ export const downloadSchemas = {
         "hasApplicationFees": fieldsT["absProcedure.hasApplicationFees"],
         "duration": fieldsT["absProcedure.duration"],
         "relevantMeasures": fieldsT["absProcedure.relevantMeasures"],
-        "keywords": fieldsT["absProcedure.keywords"]
+        "keywords": fieldsT["absProcedure.keywords"],
+        "applicationContacts": fieldsT["absProcedure.applicationContacts"]
     },
 
     "absNationalModelContractualClause":{
@@ -136,7 +138,7 @@ export const downloadSchemas = {
         "nagoyaSubjects"     : fieldsT["modelContractualClause.nagoyaSubjects"],
         "nagoyaKeyAreas"     : fieldsT["modelContractualClause.nagoyaKeyAreas"],
         "relevantInformation": fieldsT["modelContractualClause.relevantInformation"],
-        "relevantDocuments": fieldsT["modelContractualClause.relevantDocuments"]
+        "relevantDocuments": fieldsT["modelContractualClause.relevantDocuments"],
     },
 
     "communityProtocol":{
@@ -222,6 +224,9 @@ export const downloadSchemas = {
         "cbdSubjects"        : commonFieldsT["capacityBuildingInitiative.cbdSubjects"],
         "relevantInformation": commonFieldsT["capacityBuildingInitiative.relevantInformation"],
     "relevantDocuments.url"  : commonFieldsT["capacityBuildingInitiative.relevantDocuments"],
-        "publishedOn"        : commonFieldsT["publishedOn"]
+        "publishedOn"        : commonFieldsT["publishedOn"],
+        "collaboratingPartners": commonFieldsT["capacityBuildingInitiative.collaboratingPartners"],
+        "implementingAgencies" : commonFieldsT["capacityBuildingInitiative.implementingAgencies"],
+        "executingAgencies"  : commonFieldsT["capacityBuildingInitiative.executingAgencies"]
 	},
 }
