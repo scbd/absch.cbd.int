@@ -48,6 +48,11 @@ app.directive("viewAbsPermit", ['translationService', function (translationServi
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
 
+			$scope.isExpired = function (dateOfExpiry) {
+				const expiryDate = new Date(dateOfExpiry);
+				const today = new Date();
+				return expiryDate < today;
+			}
 			//==================================
 			//
 			//==================================

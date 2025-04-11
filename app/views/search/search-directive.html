@@ -274,7 +274,7 @@
                                         <a rel="noopener" class="nav-link color-darkgrey" translation-url href="#"
                                             ng-click="switchTab('allRecords')">
                                             {{::('searchDirectiveT.all'|$translate)}} <span class="d-none d-lg-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span>
-                                            <span class="badge rounded-pill"
+                                            <span class="badge bg-darkgrey rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.all?searchResult.data.facets.schemaTypes.all:0"></span>
                                         </a>
                                     </li>
@@ -283,7 +283,7 @@
                                         <a rel="noopener" translation-url href="#" class="nav-link text-primary"
                                             ng-click="switchTab('nationalRecords')">
                                             {{::('searchDirectiveT.national'|$translate)}} <span class="d-none d-lg-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span> <span
-                                                class="badge rounded-pill bg-primary"
+                                                class="badge rounded-pill bg-darkgrey"
                                                 ng-bind="searchResult.data.facets.schemaTypes.national?searchResult.data.facets.schemaTypes.national:0"></span></a>
                                     </li>
                                     <li id="referenceRecordsTab" class="nav-item"
@@ -291,7 +291,7 @@
                                             translation-url href="#" class="nav-link color-orange"
                                             ng-click="switchTab('referenceRecords')">{{::('searchDirectiveT.reference'|$translate)}} <span
                                                 class="d-none d-lg-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span> <span
-                                                class=" badge rounded-pill"
+                                                class=" badge bg-darkgrey rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.reference?searchResult.data.facets.schemaTypes.reference:0"></span></a>
                                     </li>
                                     <li id="scbdRecordsTab" class="nav-item"
@@ -299,7 +299,7 @@
                                         <a rel="noopener" translation-url href="#" class="nav-link color-darkgrey"
                                             ng-click="switchTab('scbdRecords')">
                                             SCBD <span class="d-none d-lg-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span>
-                                            <span class="badge rounded-pill"
+                                            <span class="badge bg-darkgrey rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.scbd?searchResult.data.facets.schemaTypes.scbd:0"></span>
                                         </a>
                                     </li>
