@@ -17,6 +17,9 @@
 					</p>
 				</div>
 			</div>
+			<div ng-if="isExpired(document.dateOfExpiry)" class="alert alert-warning" role="alert">
+				<h3>{{::('viewAbsPermitT.expiredMessage'|$translate)}}</h3>
+			</div>
 			
 		<document-date></document-date>		
 
