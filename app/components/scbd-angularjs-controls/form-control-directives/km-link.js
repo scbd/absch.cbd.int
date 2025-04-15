@@ -322,7 +322,7 @@ app.directive('kmLink', ['IStorage', 'translationService', function (storage, tr
 							language: ''
 						};
 
-						$scope.safeApply(function() {
+						$scope.safeApply(async function() {
 							if (onStartCallback)
 								onStartCallback();
 
@@ -347,19 +347,19 @@ app.directive('kmLink', ['IStorage', 'translationService', function (storage, tr
 								percent:100,
 								size: file.size
 							};
+						try {
+							const result = await storage.attachments.put($scope.identifier, file);
+							link.url = result?.url || null;
 
-							storage.attachments.put($scope.identifier, file).then(
-								function(result) { //success
-									link.url = result.url;
-									$scope.editor.onUploadSuccess(link, result.data);
-								},
-								function(result) { //error
-									link.url = result.data.url;
-									$scope.editor.onUploadError(link, result.data);
-								},
-								function(progress) { //progress
-									$scope.editor.onUploadProgress(link, progress);
-								});
+							$scope.safeApply(() => {
+								$scope.editor.onUploadSuccess(link, result);
+							});
+						} catch (error) {
+							link.url = error?.url || null; 
+							$scope.safeApply(() => { 
+								$scope.editor.onUploadError(link, error); 
+							});
+						}
 						});
 					});
 
