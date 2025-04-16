@@ -6,7 +6,7 @@
       </aside>
       <main class="col-12 col-sm-6 col-md-7  col-lg-8  col-xl-8 col-xxl-9 gx-2 gy-2" >
         <div class="bg-white p-4" ref="view">
-            <component :is="viewComponent" v-if="viewComponent" ref="viewInstance" v-bind="viewProps"/>
+            <component :is="viewComponent" v-if="viewComponent" ref="viewInstance" v-bind="viewProps" :key="cacheBuster" />
         </div>
       </main>
     </div>
@@ -45,8 +45,9 @@ export default {
   data() { 
     return {
       portalMenu: null,
-      viewComponent: shallowRef(null),
+      viewComponent: null,
       viewProps : null,
+      cacheBuster: null,
     };
   },
   computed : {
@@ -114,6 +115,7 @@ function onRouteChange() {
     const matchParams    = match?.params;
     const subRouteParams = match?.route?.params;
 
+    this.cacheBuster   = new Date().getTime();
     this.viewProps     = { ...(routeParams||{}), ...(matchParams||{}), ...(subRouteParams||{}) };
     this.viewComponent = defineComponent(component);
 
