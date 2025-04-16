@@ -67,7 +67,8 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 				//debugger;
 				$scope.internalDocument = undefined;
 				$scope.internalDocumentInfo = undefined;
-			
+				$scope.isDocumentSelectionModal = document.querySelector('.document-selection-modal') !== null;
+				
 					var htmlDiff;
 					$scope.realm = realm;
 					$scope.isABS = realm.is('ABS');
