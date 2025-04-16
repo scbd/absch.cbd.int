@@ -1,8 +1,7 @@
 ﻿<div class="km-rtl">
-	<!-- ToDo: km-rtl is already used here  -->
 	<div ng-repeat="locale in locales" class="trix-content input-group input-rich-text" ng-class="{ 'multiple-languages' : isShowLocale() && !last }"
 	    ng-switch="rows">
-		<trix-editor dir="{{ getLocaleDirection(locale) }}" angular-trix ng-switch-default ng-required="isRequired()" ng-model="text[locale]"
+		<trix-editor dir="{{locale|localeDirection}}" angular-trix ng-switch-default ng-required="isRequired()" ng-model="text[locale]"
 			ng-change="onchange()" ng-disabled="ngDisabledFn()" placeholder="{{placeholder}}" rows="{{rows}}"
 			trix-initialize="trixInitialize(e, ed)">
 		</trix-editor>

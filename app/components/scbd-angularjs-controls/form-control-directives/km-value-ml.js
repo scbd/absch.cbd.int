@@ -2,8 +2,7 @@ import app from '~/app';
 import ng from 'angular';
 import $ from 'jquery';
 import _ from 'lodash';
-import template from 'text!./km-value-ml.html';
-import { getLocaleDirection } from '~/services/filters/lstring';
+import template from 'text!./km-value-ml.html'; ;
 
 	app.directive('kmValueMl', [function ()
 	{
@@ -20,8 +19,7 @@ import { getLocaleDirection } from '~/services/filters/lstring';
 				$scope.markdown = attrs.hasOwnProperty("markdown");
 				$scope.kmPre	= attrs.hasOwnProperty("kmPre");
 				$scope.html		= attrs.hasOwnProperty("html");
-				$scope.getLocaleDirection = getLocaleDirection;
-				
+
 				$scope.$watch('locales', function(text) {
 					if(_.isString($scope.locales)){
 						$scope.localesToDisplay = [$scope.locales]
