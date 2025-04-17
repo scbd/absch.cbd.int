@@ -57,6 +57,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                 "autoZoom": true,
                 "selectedColor": '#007C3A',
                 "rollOverColor": '#007C3A',
+                "nonPartySelected": '#333',
                 "selectable": true,
                 "color": '#636363',
                 "outlineColor": '#FFF',
@@ -100,6 +101,9 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             nonParty       : '#636363',
             inBetweenParty : '#EC971F'
           }
+          mapOptions.areasSettings.selectedColor='#000435';
+          mapOptions.areasSettings.rollOverColor='#000435';
+          mapOptions.areasSettings.nonPartySelected='#333';
         }
         if(realm.is('ABS')){
           $scope.isABS   = realm.is('ABS'); 
@@ -116,9 +120,6 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             nonParty       : '#636363',
             inBetweenParty : '#EC971F'  
           }     
-          // mapOptions.areasSettings.selectedColor='#009B48'; // if a custom color is required for CHM
-
-
         }  
 
         $scope.countryMapScope= $scope;
@@ -257,21 +258,65 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                     showCountryDetails({mapObject: {}});
                   }
                 })
-                map.addListener("clickMapObject", function(evt){
-
-                  if($scope.zoomTo){
-                    var url = '/countries/'+(exceptionRegionMapping[evt.mapObject.id]||evt.mapObject.id);
-                    $scope.$apply(function(){$location.url(url)});
+                map.addListener("clickMapObject", function(evt) {
+                  const mapCode = evt.mapObject.id;
+                  const countryCode = exceptionRegionMapping[mapCode] || mapCode;
+                  const country = countries[countryCode];
+                
+                  // Reset color for all countries (optional: if you want only one selected at a time)
+                  _.each(map.dataProvider.areas, function(area) {
+                    const code = area.id;
+                    const c = countries[code];
+                    if (!c) return;
+                  
+                    area.colorReal = c.isParty ? mapColors.party : mapColors.nonParty;
+                    map.returnInitialColor(area); // This applies the change visually
+                  });
+                
+                  // Manually apply selected color
+                  if (country?.isParty) {
+                    evt.mapObject.colorReal = mapOptions.areasSettings.selectedColor;
+                  } else {
+                    evt.mapObject.colorReal = mapOptions.areasSettings.nonPartySelected ;
                   }
-                  else
-                    showCountryDetails(evt)
+                
+                  map.returnInitialColor(evt.mapObject); // Apply the new color visually
+                
+                  // Continue with navigation or showing details
+                  if ($scope.zoomTo) {
+                    const url = '/countries/' + countryCode;
+                    $scope.$apply(() => $location.url(url));
+                  } else {
+                    showCountryDetails(evt);
+                  }
                 });
+                
+                
                 // map.addListener("click", closePopovers);
-                map.addListener( "rollOverMapObject", function(evt){
-                  dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver')
+                map.addListener("rollOverMapObject", function(evt) {
+                  const mapCode = evt.mapObject.id;
+                  const countryCode = exceptionRegionMapping[mapCode] || mapCode;
+                  const country = countries[countryCode];
+                
+                  if (country?.isParty) {
+                    evt.mapObject.rollOverColorReal = mapOptions.areasSettings.rollOverColor
+                  } else {
+                    evt.mapObject.rollOverColorReal = mapOptions.areasSettings.nonPartySelected
+                  }
+                
+                  // dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver');
                 });
+                
                 map.addListener( "rollOutMapObject", function(evt){
-                  dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver')
+                  const mapCode = evt.mapObject.id;
+                  const countryCode = exceptionRegionMapping[mapCode] || mapCode;
+                  const country = countries[countryCode];
+
+                  if (!country) return;
+
+                  evt.mapObject.colorReal = country.isParty ? mapColors.party : mapColors.nonParty;
+                  map.returnInitialColor(evt.mapObject);
+                  // dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver')
                 } );
                 if($routeParams.code){
                   showCountryDetails({mapObject: { id: $routeParams.code}});
@@ -375,6 +420,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         }
 
         function getMapObject(id) {
+          //todo can move all logic here 
           return _.find(map.dataProvider.areas, {id: id.toUpperCase()});
         }
         function showCountryDetails(event) {
