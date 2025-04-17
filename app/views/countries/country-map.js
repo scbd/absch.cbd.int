@@ -55,8 +55,8 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             "areasSettings": {
                "alpha": 1,
                 "autoZoom": true,
-                "selectedColor": '#111111',
-                "rollOverColor": '#000000',
+                "selectedColor": '#007C3A',
+                "rollOverColor": '#007C3A',
                 "selectable": true,
                 "color": '#636363',
                 "outlineColor": '#FFF',
@@ -116,7 +116,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             nonParty       : '#636363',
             inBetweenParty : '#EC971F'  
           }     
-          mapOptions.areasSettings.selectedColor='#069554';
+          // mapOptions.areasSettings.selectedColor='#009B48'; // if a custom color is required for CHM
 
 
         }  
