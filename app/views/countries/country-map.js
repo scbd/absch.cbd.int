@@ -55,9 +55,9 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             "areasSettings": {
                "alpha": 1,
                 "autoZoom": true,
-                "selectedColor": '#007C3A',
-                "rollOverColor": '#007C3A',
-                "nonPartySelected": '#333',
+                "selectedColor": '#006400',
+                "rollOverColor": '#000000',
+                "nonPartySelected": '#333333',
                 "selectable": true,
                 "color": '#636363',
                 "outlineColor": '#FFF',
@@ -102,8 +102,6 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             inBetweenParty : '#EC971F'
           }
           mapOptions.areasSettings.selectedColor='#000435';
-          mapOptions.areasSettings.rollOverColor='#000435';
-          mapOptions.areasSettings.nonPartySelected='#333';
         }
         if(realm.is('ABS')){
           $scope.isABS   = realm.is('ABS'); 
@@ -119,7 +117,8 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             party          : '#009B48',
             nonParty       : '#636363',
             inBetweenParty : '#EC971F'  
-          }     
+          }
+          mapOptions.areasSettings.selectedColor='#007C3A';
         }  
 
         $scope.countryMapScope= $scope;
@@ -263,7 +262,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                   const countryCode = exceptionRegionMapping[mapCode] || mapCode;
                   const country = countries[countryCode];
                 
-                  // Reset color for all countries (optional: if you want only one selected at a time)
+                  // Reset color for all countries
                   _.each(map.dataProvider.areas, function(area) {
                     const code = area.id;
                     const c = countries[code];
@@ -290,33 +289,12 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                     showCountryDetails(evt);
                   }
                 });
-                
-                
                 // map.addListener("click", closePopovers);
-                map.addListener("rollOverMapObject", function(evt) {
-                  const mapCode = evt.mapObject.id;
-                  const countryCode = exceptionRegionMapping[mapCode] || mapCode;
-                  const country = countries[countryCode];
-                
-                  if (country?.isParty) {
-                    evt.mapObject.rollOverColorReal = mapOptions.areasSettings.rollOverColor
-                  } else {
-                    evt.mapObject.rollOverColorReal = mapOptions.areasSettings.nonPartySelected
-                  }
-                
-                  // dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver');
+                map.addListener( "rollOverMapObject", function(evt){
+                  dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver')
                 });
-                
                 map.addListener( "rollOutMapObject", function(evt){
-                  const mapCode = evt.mapObject.id;
-                  const countryCode = exceptionRegionMapping[mapCode] || mapCode;
-                  const country = countries[countryCode];
-
-                  if (!country) return;
-
-                  evt.mapObject.colorReal = country.isParty ? mapColors.party : mapColors.nonParty;
-                  map.returnInitialColor(evt.mapObject);
-                  // dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver')
+                  dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver')
                 } );
                 if($routeParams.code){
                   showCountryDetails({mapObject: { id: $routeParams.code}});
@@ -420,7 +398,6 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         }
 
         function getMapObject(id) {
-          //todo can move all logic here 
           return _.find(map.dataProvider.areas, {id: id.toUpperCase()});
         }
         function showCountryDetails(event) {
