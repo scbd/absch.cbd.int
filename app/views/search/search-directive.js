@@ -1625,7 +1625,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         }
                     }
 
-                    function disableUsesOfLmoFn() {
+                    function disableUsesOfLmoFn(filter) {
                         const decisionKeys = [
                             "BE64016A-C3BD-4C61-9620-C3FEF96B2A24", 
                             "0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3", 
@@ -1648,6 +1648,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     lmoObject.selectedItems = undefined;
                             }
                         }
+
+                        let termFields = _.map(filter.selectedItems, 'identifier');
+                        if (termFields?.length > 0)
+                            return 'decisionTypes_ss:(' + solr.escape(termFields.join(' ')) + ')';
                     }
                     
 
