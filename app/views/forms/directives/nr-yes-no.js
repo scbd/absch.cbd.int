@@ -42,6 +42,12 @@ import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
 
                 }
 
+                $scope.getNumberedCaption = function () {
+                    const caption = $scope.hasAdditionalInformation?.caption || translationService.get('nrYesNoT.pleaseSpecify');
+                    const questionNumber =  $scope.question.number;
+                    return `<span class="visually-hidden">${questionNumber}. </span>${caption}`;
+                }; 
+
                 $scope.$watch('binding', function(newVal, oldVal){
                     if($scope.binding!== undefined){
                         $scope.answer.value          = _.indexOf($scope.question.options, _.find($scope.question.options, { value: $scope.binding.value}));
