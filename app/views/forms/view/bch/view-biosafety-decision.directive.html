@@ -14,7 +14,7 @@
 			</div>
 			<div ng-if="document.amendedRecords">
 				<label>{{::('viewDecT.decisionAamended'|$translate)}}</label>
-				<div class="km-value" compare-val="amendedRecords">
+				<div  compare-val="amendedRecords">
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">
 							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -30,7 +30,7 @@
 			</div>
 			<div ng-if="amendedByRecords">
 				<label>{{::('viewDecT.decisionCommunication'|$translate)}}</label>
-				<div class="km-value" compare-val="amendedByRecords">
+				<div  compare-val="amendedByRecords">
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
 					</div>
@@ -48,7 +48,7 @@
 
 		<div ng-if="document.authorities">
 			<label>{{::('viewDecT.authorities'|$translate)}}</label>
-			<div class="km-value" compare-val="authorities">
+			<div  compare-val="authorities">
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -151,7 +151,7 @@
 
 		<div ng-if="document.exporters">
 			<label>{{::('viewDecT.exporters'|$translate)}}</label>
-			<div class="km-value" compare-val="exporters">
+			<div compare-val="exporters">
 				<ul class="list">
 					<li ng-repeat="item in document.exporters">
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -161,7 +161,7 @@
 		</div>
 		<div ng-if="document.importers && document.addressesTransboundaryMovement">
 			<label>{{::('viewDecT.importers'|$translate)}}</label>
-			<div class="km-value" compare-val="importers">
+			<div compare-val="importers">
 				<ul class="list">
 					<li ng-repeat="item in document.importers">
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -178,7 +178,7 @@
 		</div>
 		<div ng-if="document.importers && !document.addressesTransboundaryMovement">
 			<label>{{::('viewDecT.applicantDetails'|$translate)}}</label>
-			<div class="km-value" compare-val="importers">
+			<div c compare-val="importers">
 				<ul class="list">
 					<li ng-repeat="item in document.importers">
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -251,7 +251,7 @@
 			<div ng-if="document.importers && (isDecisionOnLmoDomesticUse || isDecisionOnLmoImport)">
 				<label ng-if="isDecisionOnLmoImport">{{::('viewDecT.importerApplicant'|$translate)}}</label>
 				<label ng-if="isDecisionOnLmoDomesticUse">{{::('viewDecT.applicantDetails'|$translate)}}</label>
-				<div class="km-value" compare-val="importers">
+				<div compare-val="importers">
 					<ul class="list">
 						<li ng-repeat="item in document.importers">
 							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -379,7 +379,7 @@
 
 		<div ng-if="document.pointOfContact">
 			<label>{{::('viewDecT.pointOfContact'|$translate)}}</label>
-			<div  class="km-value" compare-val="pointOfContact">
+			<div  compare-val="pointOfContact">
 				<ul class="list">
 					<li ng-repeat="item in document.pointOfContact">
 						<view-record-reference ng-model="item"></view-record-reference>
@@ -435,7 +435,7 @@
 		<legend>{{::('viewDecT.LMOIdentification'|$translate)}}</legend>
 		<div ng-if="document.modifiedOrganisms">
 			<label>{{::('viewDecT.modifiedOrganisms'|$translate)}}</label>
-			<div  class="km-value" compare-val>
+			<div  compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.modifiedOrganisms">
 						<view-record-reference ng-model="item"></view-record-reference>
@@ -446,7 +446,7 @@
 
 		<div ng-if="document.riskAssessments">
 			<label>{{::('viewDecT.riskAssessments'|$translate)}}</label>
-			<div  class="km-value" compare-val="riskAssessments">
+			<div   compare-val="riskAssessments">
 				<ul class="list">
 					<li ng-repeat="item in document.riskAssessments">
 						<view-record-reference ng-model="item"></view-record-reference>

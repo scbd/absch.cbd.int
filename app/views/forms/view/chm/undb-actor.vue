@@ -8,7 +8,7 @@
             <legend>{{ t("organization") }}  </legend> 
             <section v-if="document.organization">
                 <!--TODO:same content as chm project (add image, etc) -->                                
-                <div class="km-value">                               
+                <div >                               
                     <ng v-vue-ng:view-record-reference  v-model:ng-model="document.organization" :locales="locale" html km-pre></ng>   
                 </div>               
             </section>                   

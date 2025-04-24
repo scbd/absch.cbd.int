@@ -186,7 +186,7 @@
             <section v-if="document.contactOrganization"> 
                 <!-- TODO: change component to show same style as old project -->               
                 <legend>{{ t("contactHost") }}</legend>                         
-                <div class="km-value">                               
+                <div >                               
                     <ng v-vue-ng:view-record-reference  v-model:ng-model="document.contactOrganization" :locales="locale" html></ng>   
                 </div>                 
             </section> 

@@ -36,7 +36,7 @@
             <section v-if="document.aichiTarget || document.nationalTarget" >                
                 <div v-if="document.nationalTarget">
                     <label>{{ t("targets") }} </label>
-                    <div class="km-value" compare-val>
+                    <div  compare-val>
                         <ng v-vue-ng:view-record-reference  v-model:ng-model="document.nationalTarget" :locales="locale" html></ng>                         
                     </div>        
                 </div> 
