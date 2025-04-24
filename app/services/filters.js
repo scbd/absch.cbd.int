@@ -141,8 +141,8 @@ const realmApi = new RealmApi({ tokenReader: () => undefined });
                 if( document.revision)
 					unique = unique + '-' + document.revision;
 
-				if(isDeletedRecord)
-					unique = '[DELETED] ' + unique;
+				//if(isDeletedRecord)
+				//	unique = '[DELETED] ' + unique;
 					
 				cacheMap[term.identifier] = unique;
 
