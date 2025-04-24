@@ -1,6 +1,6 @@
 ﻿import app from '~/app';
 import _ from 'lodash';
-import KmDocumentApi from '~/api/km-document';
+import KmDocumentAttachment from '~/api/km-document-attachment';
     ;
 
     app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', 'apiToken', function($http, $q, authentication, defaultRealm, cacheService, apiToken) {
@@ -387,9 +387,9 @@ import KmDocumentApi from '~/api/km-document';
             //===========================
             "put": async function(documentId, file) {
                 try {
-                    const kmDocumentApiAuth = new KmDocumentApi({ tokenReader: () => apiToken.get() });
+                    const kmDocumentApiAuth = new KmDocumentAttachment({ tokenReader: () => apiToken.get() });
                     // uploadToTempSlot requires no auth
-                    const kmDocumentApi = new KmDocumentApi();
+                    const kmDocumentApi = new KmDocumentAttachment();
                     
                     if (!documentId) {
                         throw new Error("Missing document identifier."); // ToDo: move to translation
@@ -403,7 +403,7 @@ import KmDocumentApi from '~/api/km-document';
                     const mimeType = getMimeTypes(fileName, file.type || "application/octet-stream");
 
                     // Step 1: Request temporary upload slot
-                    const tempSlotResponse = await kmDocumentApiAuth.createTempAttachmentSlot({filename: fileName,contentType: mimeType});
+                    const tempSlotResponse = await kmDocumentApiAuth.createTempAttachmentSlot(fileName,mimeType);
 
                     if (!tempSlotResponse?.url || !tempSlotResponse?.uid || !tempSlotResponse?.contentType) {
                         throw new Error("Temporary upload slot response is invalid.");
