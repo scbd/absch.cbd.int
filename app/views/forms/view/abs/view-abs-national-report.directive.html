@@ -25,7 +25,7 @@
 				</div>
 				<div>
 					<label>{{::('numbers.two'|$translate)}}. {{::('viewAbsNRT.q2'|$translate)}}</label>
-					<div class="km-value" compare-val>
+					<div  compare-val>
 						<div view-record-reference ng-model="document.contact" locale="locale"  ng-if="document.contact"></div>
 					</div>
 					<div  class="km-value" ng-if="!document.contact">{{::('viewAbsNRT.noContactProvided'|$translate)}}</div>

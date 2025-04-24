@@ -6,13 +6,13 @@
 		<legend>{{::('viewLabDetectionT.generalInfo'|$translate)}}</legend>
 		<div ng-if="document.organization">
 			<legend>{{::('viewLabDetectionT.organization'|$translate)}}</legend>
-			<div class="km-value" compare-val>
+			<div  compare-val>
 				<div view-record-reference ng-model="document.organization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.relatedOrganization">
 			<legend>{{::('viewLabDetectionT.relatedOrganization'|$translate)}}</legend>
-			<div class="km-value" compare-val>
+			<div  compare-val>
 				<div view-record-reference ng-model="document.relatedOrganization" locale="locale"></div>
 			</div>
 		</div>
@@ -75,7 +75,7 @@
 
 		<div ng-if="document.detectableGenes">
 			<label>{{::('viewLabDetectionT.detectableGenes'|$translate)}}</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableGenes">
 						<td>

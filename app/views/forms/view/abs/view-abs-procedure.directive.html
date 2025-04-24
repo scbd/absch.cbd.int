@@ -32,7 +32,7 @@
 		<div ng-show="document.contacts || document.links">
 			<label>{{::('viewAbsProcedureT.contactsLinks'|$translate)}}</label>
 			<div compare-val>
-				<div class="km-value" ng-repeat="contact in document.contacts"  ng-show="document.contacts">
+				<div  ng-repeat="contact in document.contacts"  ng-show="document.contacts">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 		<div ng-show="document.applicationContacts">
 			<label>{{::('viewAbsProcedureT.applicationContacts'|$translate)}}</label>
 			<div compare-val>
-				<div class="km-value" ng-repeat="contact in document.applicationContacts">
+				<div  ng-repeat="contact in document.applicationContacts">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
@@ -116,7 +116,7 @@
 		<div ng-show="document.relevantMeasures">
 			<label>{{::('viewAbsProcedureT.relevantMeasures'|$translate)}}</label>
 			<div compare-val>
-			<div class="km-value" ng-repeat="measure in document.relevantMeasures">
+			<div ng-repeat="measure in document.relevantMeasures">
 				<div view-record-reference ng-model="measure" locale="locale"></div>
 			</div></div>
 		</div>

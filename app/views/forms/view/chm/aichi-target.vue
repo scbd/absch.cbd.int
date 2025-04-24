@@ -27,7 +27,7 @@
             </div>
             <!-- <div v-if="document.strategicPlanIndicators">
                 <label>Most Relevant Indicator(s)</label>
-                <ul class="km-value">
+                <ul >
                     <li v-for="doc in document.strategicPlanIndicators">
                         <view-record-reference v-vue-ng v-model:ng-model='doc.identifier' :locale="locale"></view-record-reference>
                     </li>
@@ -35,7 +35,7 @@
             </div> -->
             <!-- <div v-if="document.otherStrategicPlanIndicators">
                 <label>Other Relevant Indicator(s)</label>
-                <ul class="km-value">
+                <ul >
                     <li v-for="doc in document.otherStrategicPlanIndicators">                     
                         <view-record-reference v-vue-ng v-model:ng-model='doc.identifier' :locale="locale"></view-record-reference>
                     </li>
