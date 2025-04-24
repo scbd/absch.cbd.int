@@ -27,7 +27,7 @@
     </div>     
 
     <script type="text/ng-template" id="referenced-organization-view" trados-translation="true">
-        <div >	            
+        <div>	            
             <div class="selected-reference-uid">
                 <b>
                     <span ng-bind="document.body.name | lstring:locale"></span>
@@ -167,7 +167,7 @@
                     {{::('viewRecordReferenceT.relatedOrganization'|$translate)}}
                 </div>
                 <span ng-if="document.body.contactOrganizationDetail.deletedOn">
-                   <span class="label label-danger">{{::('viewRecordReferenceT.deleted'|$translate)}}</span>
+                <span class="label label-danger">{{::('viewRecordReferenceT.deleted'|$translate)}}</span>
                 </span>
                 <div ng-if="document.body.contactOrganizationDetail">            
                     <b><span ng-bind="document.body.contactOrganizationDetail.organization | lstring:locale"></span></b>
