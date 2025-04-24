@@ -387,9 +387,7 @@ import KmDocumentAttachment from '~/api/km-document-attachment';
             //===========================
             "put": async function(documentId, file) {
                 try {
-                    const kmDocumentApiAuth = new KmDocumentAttachment({ tokenReader: () => apiToken.get() });
-                    // uploadToTempSlot requires no auth
-                    const kmDocumentApi = new KmDocumentAttachment();
+                    const kmDocumentApi = new KmDocumentAttachment({ tokenReader: () => apiToken.get() });
                     
                     if (!documentId) {
                         throw new Error("Missing document identifier."); // ToDo: move to translation
@@ -403,7 +401,7 @@ import KmDocumentAttachment from '~/api/km-document-attachment';
                     const mimeType = getMimeTypes(fileName, file.type || "application/octet-stream");
 
                     // Step 1: Request temporary upload slot
-                    const tempSlotResponse = await kmDocumentApiAuth.createTempAttachmentSlot(fileName,mimeType);
+                    const tempSlotResponse = await kmDocumentApi.createTempAttachmentSlot(fileName,mimeType);
 
                     if (!tempSlotResponse?.url || !tempSlotResponse?.uid || !tempSlotResponse?.contentType) {
                         throw new Error("Temporary upload slot response is invalid.");
@@ -412,7 +410,7 @@ import KmDocumentAttachment from '~/api/km-document-attachment';
                     await kmDocumentApi.uploadToTempSlot(tempSlotResponse.url, file, tempSlotResponse.contentType);
 
                     // Step 3: Persist the uploaded file
-                    const persistResponse = await kmDocumentApiAuth.persistTemporaryAttachment(documentId, tempSlotResponse.uid, fileName );
+                    const persistResponse = await kmDocumentApi.persistTemporaryAttachment(documentId, tempSlotResponse.uid, fileName );
 
                     if (!persistResponse?.url) {
                         throw new Error("Persisted attachment response is invalid.");
