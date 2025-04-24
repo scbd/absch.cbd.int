@@ -123,7 +123,7 @@
 
         <slot name="replies">
             <div v-if="posts" class="replies mt-2 border-start border-bottom">
-                <post v-for="reply in posts" class="border-top ps-3 mb-2" :key="reply.postId" :post="reply" @refresh="refresh($event)" />
+                <inner-post v-for="reply in posts" class="border-top ps-3 mb-2" :key="reply.postId" :post="reply" @refresh="refresh($event)"></inner-post>
             </div>
         </slot>
     </div>
@@ -141,7 +141,9 @@ import RelativeDatetime from '~/components/common/relative-datetime.vue';
 import { useRoute, useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
 import messages from "~/app-text/components/forums/post.json";
 import { useI18n } from 'vue-i18n';
-
+import innerPost from './post.vue'
+// since post is using inside post, Vue doesn’t recognize the recursive component call.
+defineOptions({ name: 'innerPost' })
 const router = useRouter();
 const route = useRoute();
 const auth = useAuth();
