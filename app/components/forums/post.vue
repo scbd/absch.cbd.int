@@ -8,7 +8,7 @@
                     <div class="user">
                         <span class="username">{{ post.createdBy }} </span>
                         <span class="organization">{{ post.createdByOrganization }} </span>
-                        <span class="text-muted" >#{{post.postId}}</span> 
+                        <span class="text-muted" :id="post.postId">#{{post.postId}}</span> 
                     </div>
                 </div>
                 <div class="col-auto align-self-center">
@@ -20,7 +20,7 @@
                             <i class="fa fa-edit"></i>
                             <relative-datetime class="date" :title="`| by ${post.updatedBy}`" :date="post.updatedOn"></relative-datetime>
                         </span>
-                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
+                    <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchorHash(post.parentId)" :title="t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
                         <!-- <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a> -->
                     </div>
                 </div>
@@ -170,19 +170,13 @@ const showLinkToParent = computed(() => {
     //ToDo: not clear on the $parent.post
             // const { parentId : postParentId } = this.post;
             // const { postId   : parentPostId } = this.$parent.post || this.$parent.thread || {};
-
-            // return parentPostId && parentPostId != postParentId;
-        return true // for testing only, need to remove
+    const {postId, parentId, threadId} = props.post;
+    return postId && postId != parentId;
 });
 
 const showLinkToSelf = computed(() => {
-    //ToDo: not clear on the $parent.post
-            // const { parentId : postParentId } = this.post;
-            // const { postId   : parentPostId } = this.$parent.post || {};
-
-            // return parentPostId && parentPostId == postParentId;
-            return true // for testing only, need to remove
-
+    const {postId, parentId} = props.post || {};
+    return postId && postId == parentId;
 });
 
 const loggedIn = computed(() => auth.user()?.isAuthenticated);
@@ -194,9 +188,15 @@ const canApprove = computed(() => !!props.post?.security?.canApprove); // not us
 const canClose = computed(() => !!props.post?.security?.canClose);
 const canPin = computed(() => !!props.post?.security?.canPin);
 
-nextTick(() => { //ToDo:
-      jumpToAnchor();
-});
+const jumpToAnchorHash = (anchor) => {  
+    // if click on the same arrow again it is not moving to that hash bcs already hash is in url
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    requestAnimationFrame(() => { // ensures DOM is ready before jumping
+        jumpToAnchor(anchor);
+        history.replaceState(null, '', window.location.pathname + window.location.search + '#'+anchor); // Optional: restore hash if needed
+    });
+};
+
 
     const    getSelection = ()=> { 
 
