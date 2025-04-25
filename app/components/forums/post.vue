@@ -190,6 +190,7 @@ const canPin = computed(() => !!props.post?.security?.canPin);
 
 const jumpToAnchorHash = (anchor) => {  
     // if click on the same arrow again it is not moving to that hash bcs already hash is in url
+    //ToDo: router.replace({ path: route.path, query: route.query, hash: '' });
     history.replaceState(null, '', window.location.pathname + window.location.search);
     requestAnimationFrame(() => { // ensures DOM is ready before jumping
         jumpToAnchor(anchor);
