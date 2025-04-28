@@ -1441,16 +1441,13 @@ div.recordDefault:hover {
 .helpinfoInline {
     cursor: pointer;
 }
-.comma-space:not(:last-of-type):after {
-    content: ", ";
-}
 .comma:not(:last-of-type):after {
     content: ",";
 }
-.comma:nth-last-of-type(2):before,.comma-space:not(:last-of-type):before {
+.comma:nth-last-of-type(2):before {
     content: none;
 }
-.comma:nth-last-of-type(2):after,.comma-space:nth-last-of-type(2):after {
+.comma:nth-last-of-type(2):after {
     content: " and ";
 }
 #RegisterPage dt {
