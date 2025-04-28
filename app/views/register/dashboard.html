@@ -34,24 +34,24 @@
                     <span id="showProfileInfo" class="color-black">
                         <span class="table_display_none">{{::('dashboardT.welcome'|$translate)}} </span>
                         <span class="fw-bold" ng-bind="::user.name"></span>
-                        <a class="badge bg-secondary align-bottom link-light" ng-click="showUserRoles()">
-                            <span ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">
+                        <a class="align-bottom link-light" ng-click="showUserRoles()">
+                            <span class="badge bg-secondary" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">
                                 {{::('dashboardT.registeredUser'|$translate)}}
                             </span>
-                            <span ng-if="::(roles.isPublishingAuthority && isAbs)">
+                            <span class="badge bg-secondary" ng-if="::(roles.isPublishingAuthority && isAbs)">
                                 {{::('dashboardT.publishingAuthority'|$translate)}}
                             </span>
-                            <span class="comma-space" ng-if="::(roles.isNationalFocalPoint && isAbs)">
+                            <span class="badge bg-secondary" ng-if="::(roles.isNationalFocalPoint && isAbs)">
                                 {{::('dashboardT.absNationalFocalPoint'|$translate)}}</span>
-                            <span class="comma-space d" ng-if="::(roles.isPublishingAuthority && isBch)">
+                            <span class="badge bg-secondary" ng-if="::(roles.isPublishingAuthority && isBch)">
                                 {{::('dashboardT.bchNationalPoint'|$translate)}}</span>
-                            <span class="comma-space " ng-if="::(roles.isNationalFocalPoint && isBch)">Cartagena
+                            <span class="badge bg-secondary" ng-if="::(roles.isNationalFocalPoint && isBch)">Cartagena
                                 {{::('dashboardT.nationalFocalPoint'|$translate)}}</span>                            
-                            <span class="comma-space d" ng-if="::(roles.isPublishingAuthority && ischm)">
+                            <span class="badge bg-secondary" ng-if="::(roles.isPublishingAuthority && isChm)">
                                 {{::('dashboardT.publishingAuthority'|$translate)}}</span>
-                            <span class="comma-space " ng-if="::(roles.isNationalFocalPoint && isChm)">
+                            <span class="badge bg-secondary" ng-if="::(roles.isNationalFocalPoint && isChm)">
                                 {{::('dashboardT.nationalFocalPoint'|$translate)}}</span>
-                            <span class="comma-space" ng-if="::roles.isNationalAuthorizedUser">
+                            <span class="badge bg-secondary" ng-if="::roles.isNationalAuthorizedUser">
                                 {{::('dashboardT.nationalAuthorizedUser'|$translate)}}</span>
                         </a>
                     </span>
