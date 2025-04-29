@@ -4,7 +4,7 @@
 	<div ng-if="!errorCode">					
         <div class="selected-reference-uid">
             <a rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="{{target||'_blank'}}">
-                <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
+                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> {{document | uniqueID}}
             </a>
         </div>
         <div class="selected-reference-title" ng-if="document.title">{{document.title | lstring:locale}} </div>
