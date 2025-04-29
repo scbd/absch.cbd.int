@@ -1162,8 +1162,8 @@
 					<label>{{::('numbers.thirtyEight'|$translate)}}. {{::('viewAbsNRT.q38'|$translate)}}</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question37.answer,document.question38.answer)}}</div>
-						<div style="margin: 0 0 0 20px;" ng-show="document.question38.answer">
-							<div style="margin: 0 0 0 20px;" >
+						<div ng-show="document.question38.answer">
+							<div>
 								<div>
 									<div ng-show="document.question38.law.furtherInfo">
 										<label>{{::('viewAbsNRT.indigenousProvisionsQ2Title'|$translate)}}</label>
@@ -1691,8 +1691,8 @@
 					<label>{{::('numbers.fiftyFour'|$translate)}}. {{::('viewAbsNRT.q54'|$translate)}}</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question54.answer)}}</div>
-						<div style="margin: 0 0 0 20px;" ng-show="document.question54.answer">
-							<div style="margin: 0 0 0 20px;" >
+						<div ng-show="document.question54.answer">
+							<div>
 								<label>{{::('viewAbsNRT.awarenessRaisingQ1Title'|$translate)}}</label>
 								<div class="km-value km-pre" compare-val>{{document.question54.measures.answer | yesno}}</div>
 								<div ng-show="document.question54.measures.furtherInfo">
@@ -1736,8 +1736,8 @@
 					<label>{{::('numbers.fiftyFive'|$translate)}}. {{::('viewAbsNRT.q55'|$translate)}}</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question55.answer)}}</div>
-						<div style="margin: 0 0 10px 20px;" ng-show="document.question55.answer">
-							<div style="margin: 0 0 0 20px;" >
+						<div ng-show="document.question55.answer">
+							<div>
 								<label>{{::('viewAbsNRT.awarenessRaisingQ3Title'|$translate)}} </label>
 								<div class="km-value km-pre" compare-val>{{document.question55.measures.answer | yesno}}</div>
 								<div ng-show="document.question55.measures.furtherInfo">

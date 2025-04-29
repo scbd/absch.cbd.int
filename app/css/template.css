@@ -1617,6 +1617,9 @@ div.recordDefault:hover {
     padding: 10px;
     background-color: #ffffff;
 }
+#Record .panel-body ul{
+    padding: 0;
+}
 #Record .km-value {
     margin-bottom: 5px;
 }
