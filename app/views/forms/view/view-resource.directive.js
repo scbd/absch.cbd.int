@@ -33,6 +33,17 @@ app.directive("viewResource", ['translationService', function (translationServic
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			};
 
+			$scope.thumbnailUrl = function(url) {
+				if (!url) return '';
+
+				const parsedUrl = new URL(url, window.location.origin);
+				const params = new URLSearchParams(parsedUrl.search);
+				params.set('width', '150');
+				params.set('height', '150');
+				parsedUrl.search = params.toString();
+				console.log(parsedUrl.toString());
+				return parsedUrl.toString();
+			};
 			
 		}]
 	};

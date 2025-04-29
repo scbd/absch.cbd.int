@@ -79,10 +79,9 @@
 				<label>{{::('viewResourceT.covers'|$translate)}}</label>
 				<div class="km-value" compare-val="covers">
 					<ul class="list">
-						<li ng-repeat="link in document.covers">
+						<li class="mt-1" ng-repeat="link in document.covers">
 							<a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
-								<!-- ToDo : add encodeURIComponent  -->
-								<img class="img-polaroid" ng-src="{{link.url.replace('attachments/','attachments/thumbnail/')}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
+								<img class="rounded-1 border border-dark "  ng-src="{{ ::thumbnailUrl(link.url) | encodeURI}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
 							</a>
 						</li>
 					</ul>
