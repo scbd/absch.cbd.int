@@ -97,7 +97,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				return latestRevisionIdentifier;
 			}
 
-			function loadReferenceDocument(identifier, cacheBuster){
+			function loadReferenceDocument(identifier, cacheBuster, otherRealm, retried = false) {
 				
 				//cacheBuster used only to bust cache for contactOrganization reference.
 
@@ -105,6 +105,8 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				var focalPointRegex = /^52000000cbd022/;
 				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
 					headers = { realm:undefined }
+				if(otherRealm)
+					headers = { realm:otherRealm }
 					
 				return storage.documents.get(identifier, { info : true, 'include-deleted':true}, {headers})
 						.then(function(result){
@@ -131,11 +133,37 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 							}
 							return result.data;
 						})
-						.catch(function(error, code){
-							if (error.status == 404) {
+						.catch(async function(error, code){
+							if (error.status == 404 && !retried) {
+								const recordRealm =  await getRecordRealm(identifier);
+								if(recordRealm){
+									return loadReferenceDocument(identifier, cacheBuster, recordRealm, true);
+								}
+
 								return loadDraftDocument(identifier);
 							};
 						});
+			}
+			async function getRecordRealm(identifier) {
+				try {
+				  const identifierWithoutRevision = documentIdWithoutRevision(identifier);
+			  
+				  const queryParameters = {
+                    query : `identifier_s:${solr.escape(identifierWithoutRevision)}`,
+                    fields : 'realm_ss,ownerRealm_s',
+					fieldQuery: ['realm_ss:*']
+                	};
+			  
+				  const response = await searchService.list(queryParameters, null);
+				  const doc = response?.data?.response?.docs?.[0];
+
+				  if (doc?.ownerRealm_s) {
+					return doc.ownerRealm_s;
+				  }
+				  
+				} catch (error) {
+				  console.error('Error fetching realm record:', error);
+				}
 			}
 
 			function loadDraftDocument(identifier, count){
