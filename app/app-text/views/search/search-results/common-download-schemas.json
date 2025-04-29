@@ -64,6 +64,7 @@
     "resource.biosafetyModifiedOrganisms": "LMO(s) identification",
     "resource.biosafetyOrganisms"        : "Organism(s) identification",
     "resource.biosafetyGenes"            : "Genetic element(s) identification",
+    "resource.organizations"             : "Reference to the authoring organization(s)",
     
     "capacityBuildingInitiative.uniqueId"           : "BCH record ID",
     "capacityBuildingInitiative.title"              : "Title of the initiative",
@@ -93,6 +94,9 @@
     "capacityBuildingInitiative.categories"         : "Category(ies) of capacity development activities",
     "capacityBuildingInitiative.cbdSubjects"        : "Related CBD Subject Areas",
     "capacityBuildingInitiative.cpbThematicAreas"   : "Biosafety Thematic Areas",
+    "capacityBuildingInitiative.executingAgencies"  : "Executing agency(ies) or organization(s)",
+    "capacityBuildingInitiative.collaboratingPartners": "Collaborating partner(s)",
+    "capacityBuildingInitiative.implementingAgencies" : "Implementing agency(ies) or organization(s)",
 
     "database.title":"Website or database name",
     "database.description":"Description",
