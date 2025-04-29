@@ -3260,10 +3260,6 @@ div legend {
 .btn-check:focus+.btn, .btn:focus {
     box-shadow: none !important;
 }
-.flag-icon-eur,
-.flag-icon-eu {
-    background-image: url('/app/img/EUFlag.png');
-}
 #globalSearch{
     cursor: default;
     font-size: 1rem;
