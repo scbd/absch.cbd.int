@@ -41,8 +41,8 @@ export default class ApiBase
 
     http.get     = async (...args)=> (await loadAsyncHeaders(baseConfig)).get    (...args);
     http.head    = async (...args)=> (await loadAsyncHeaders(baseConfig)).head   (...args);
-    http.post    = async (...args)=> {return (await loadAsyncHeaders(baseConfig, args[0])).post    (...args);}
-    http.put     = async (...args)=> {return (await loadAsyncHeaders(baseConfig, args[0])).put    (...args);}
+    http.post    = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).post    (...args);
+    http.put     = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).put    (...args);
     http.patch   = async (...args)=> (await loadAsyncHeaders(baseConfig)).patch  (...args);
     http.delete  = async (...args)=> (await loadAsyncHeaders(baseConfig)).delete (...args);
     http.options = async (...args)=> (await loadAsyncHeaders(baseConfig)).options(...args);
