@@ -13,6 +13,7 @@ import joyRideTextTranslations from '~/app-text/views/register/submit-summary-jo
 import recordListT from '~/app-text/views/register/record-list.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
+const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
 
         export default ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
@@ -224,7 +225,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                                 $scope.closeDialog();
                             }
                         } else {
-                          toastr.error('There was an error in deleting draft record.');  
+                          toastr.error(recordListError.errorDeletingDraft);  
                         }
                     }).finally(function () {
                         delete $scope.loading
