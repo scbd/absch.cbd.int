@@ -1,7 +1,9 @@
 ﻿import app from '~/app';
 import _ from 'lodash';
-import KmDocumentAttachment from '~/api/km-document-attachment';
-    ;
+import KmDocumentAttachmentApi from '~/api/km-document-attachment';
+import storageTranslations from '~/app-text/components/scbd-angularjs-services.json';
+import { mergeTranslationKeys } from '~/services/translation-merge';
+const storageT = mergeTranslationKeys(storageTranslations);
 
     app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', 'apiToken', function($http, $q, authentication, defaultRealm, cacheService, apiToken) {
         //		return new function()
@@ -387,14 +389,14 @@ import KmDocumentAttachment from '~/api/km-document-attachment';
             //===========================
             "put": async function(documentId, file) {
                 try {
-                    const kmDocumentApi = new KmDocumentAttachment({ tokenReader: () => apiToken.get() });
+                    const kmDocumentApi = new KmDocumentAttachmentApi({ tokenReader: () => apiToken.get() });
                     
                     if (!documentId) {
-                        throw new Error("Missing document identifier."); // ToDo: move to translation
+                        throw new Error(storageT.storageMissingIdentifier);
                     }
 
                     if (!file?.name) {
-                        throw new Error("Invalid or missing file.");
+                        throw new Error(storageT.storageInvalid);
                     }
 
                     const fileName = file.name;
@@ -404,7 +406,7 @@ import KmDocumentAttachment from '~/api/km-document-attachment';
                     const tempSlotResponse = await kmDocumentApi.createTempAttachmentSlot(fileName,mimeType);
 
                     if (!tempSlotResponse?.url || !tempSlotResponse?.uid || !tempSlotResponse?.contentType) {
-                        throw new Error("Temporary upload slot response is invalid.");
+                        throw new Error(storageT.storageTemporary);
                     }
                     // Step 2: Upload file to temporary slot
                     await kmDocumentApi.uploadToTempSlot(tempSlotResponse.url, file, tempSlotResponse.contentType);
@@ -413,7 +415,7 @@ import KmDocumentAttachment from '~/api/km-document-attachment';
                     const persistResponse = await kmDocumentApi.persistTemporaryAttachment(documentId, tempSlotResponse.uid, fileName );
 
                     if (!persistResponse?.url) {
-                        throw new Error("Persisted attachment response is invalid.");
+                        throw new Error(storageT.storagePersisted);
                     }
 
                     return {
@@ -421,9 +423,8 @@ import KmDocumentAttachment from '~/api/km-document-attachment';
                         url: `${window.location.origin}${persistResponse.url}`
                     };
 
-                } catch (error) {
-                    console.error("uploadAndPersist failed:", error);
-                    throw error;
+                }  catch (error) {
+                    throw new Error(error.message);
                 }
             },
 
