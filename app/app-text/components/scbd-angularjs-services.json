@@ -1,0 +1,6 @@
+{
+    "storageMissingIdentifier": "Missing document identifier.",
+    "storageInvalid": "Invalid or missing file.",
+    "storageTemporary": "Temporary upload slot response is invalid.",
+    "storagePersisted": "Persisted attachment response is invalid."
+}
