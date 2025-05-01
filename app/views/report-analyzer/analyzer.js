@@ -38,8 +38,13 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
                     data = JSON.parse(sessionStorage.getItem('nrAnalyzerData') || '{}');
 
                 $scope.selectedReportType = mapReportType(data.type);
-                $scope.selectedQuestions  = data.questions;
-                $scope.selectedRegions    = data.regions;
+                
+                if (data.questions)
+                    $scope.selectedQuestions = data.questions.split(',');
+    
+                if (data.regions)
+                    $scope.selectedRegions = data.regions.split(',');
+
                 $scope.selectedRegionsPreset    = data.regionsPreset;
                 $scope.selectedRegionsPresetFilter    = data.regionsPresetFilter;
                 $scope.activeReport = _.find($scope.reportData, {type:$scope.selectedReportType});
@@ -105,8 +110,8 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
                 //Pass query string
                 $location.search({
                     type: $scope.selectedReportType,
-                    regions: $scope.selectedRegions,
-                    questions: $scope.selectedQuestions,
+                    regions: $scope.selectedRegions.join(','),
+                    questions: $scope.selectedQuestions.join(','),
                     regionsPreset: $scope.selectedRegionsPreset,
                     regionsPresetFilter: $scope.selectedRegionsPresetFilter
                 });
