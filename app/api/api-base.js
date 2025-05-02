@@ -39,14 +39,14 @@ export default class ApiBase
       return (await loadAsyncHeaders(baseConfig))(...args);
     }
 
-    http.get     = async (...args)=> (await loadAsyncHeaders(baseConfig)).get    (...args);
-    http.head    = async (...args)=> (await loadAsyncHeaders(baseConfig)).head   (...args);
+    http.get     = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).get    (...args);
+    http.head    = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).head   (...args);
     http.post    = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).post    (...args);
     http.put     = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).put    (...args);
-    http.patch   = async (...args)=> (await loadAsyncHeaders(baseConfig)).patch  (...args);
-    http.delete  = async (...args)=> (await loadAsyncHeaders(baseConfig)).delete (...args);
-    http.options = async (...args)=> (await loadAsyncHeaders(baseConfig)).options(...args);
-    http.request = async (...args)=> (await loadAsyncHeaders(baseConfig)).request(...args);
+    http.patch   = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).patch  (...args);
+    http.delete  = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).delete (...args);
+    http.options = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).options(...args);
+    http.request = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).request(...args);
 
     this.http = http;
   }
