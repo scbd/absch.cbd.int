@@ -5,10 +5,14 @@
     </div>
     <div id="record1" class="recordDefault card border-0 border-start-0" class="p-0 m-0">
 
-        <div ng-show="!showDoc" ng-click="showRecord()" class="p-0 m-0">            
-            <div class="{{::type}} m-0 p-1" >
-
-       
+    <div ng-show="!showDoc" ng-click="showRecord()" class="p-0 m-0">            
+        <div class="{{::type}} m-0 p-1 d-flex ">
+            <div ng-if="doc.schema_s == 'resource' && doc.covers_ss" class="me-3 flex-shrink-0">
+                <div ng-if="attachmentPreviewComponent"> 
+                    <km-attachment-preview ng-vue="attachmentPreviewComponent" :url="doc.covers_ss[0]" :width="80" :height="96" />
+                </div>
+            </div>
+            <div class="flex-grow-1">
                 <div class="title bold truncate-mobile-title" style="font-size:108%;">
                     <span ng-bind="doc.rec_title"></span>
                     <a rel="noopener" ng-if="showExternalLink && !showDoc" translation-url target="_blank" 
@@ -106,7 +110,9 @@
                 </ul>
             </div>
         </div>
-
     </div>
+</div>
+
+</div>
 
 </div>
