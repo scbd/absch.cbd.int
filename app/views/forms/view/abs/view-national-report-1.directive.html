@@ -1,7 +1,7 @@
 ﻿<div id="Record" class="record panel panel-default">
 
 	<div class="record-body panel-body bg-white">
-
+		<div class="py-3 pb-4"><document-date></document-date></div> 
 		<div class="section-pane panel panel-default" style="margin-bottom:3px!important">
 
 			<div class="panel-heading">{{::('viewNr1T.generalInfo'|$translate)}}</div>
@@ -39,9 +39,6 @@
 				</div>
 			</div>
 		</div>
-
-		<document-date></document-date>
-
 		<div view-national-report document="document" report-questions="nr1Data" locale="locale"></div>
 
 	</div>
