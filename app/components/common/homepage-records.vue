@@ -6,7 +6,7 @@
   <div class="d-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(0,4)" :key="record">
       <div class="d-flex position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
-        <div v-if="record?.schema_s == 'resource' && record.covers_ss" class="me-2 flex-shrink-0">
+        <div v-if="record.covers_ss" class="me-2 flex-shrink-0">
           <km-attachment-preview :url="record.covers_ss[0]" :width="80" :height="96"/>
         </div> 
         <div class="flex-grow-1"> 
@@ -28,7 +28,7 @@
   <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(4,8)" :key="record">
       <div class="d-flex position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
-        <div v-if="record?.schema_s == 'resource' && record.covers_ss" class="me-2 flex-shrink-0">
+        <div v-if="record.covers_ss" class="me-2 flex-shrink-0">
           <km-attachment-preview :url="record.covers_ss[0]" :width="80" :height="96"/>
         </div>
         <div class="flex-grow-1">
