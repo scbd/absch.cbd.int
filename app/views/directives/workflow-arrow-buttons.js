@@ -513,39 +513,45 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     $scope.loading = true;
                     $scope.blockText        = 'Saving draft document'
                    $scope.errorMessage              = null;
-					return $q.when($scope.getDocumentFn()).then(function(document)
+					return $q.when($scope.getDocumentFn()).then(async function(document)
 					{
 						if(!document)
 							throw "Invalid document";
-                        if($route.current.params.workflow){
+                        let workflow ;
+                        if ($route?.current?.params?.workflow)
+                                workflow = await workflowsApi.getWorkflow($route.current.params.workflow);
 
-                            $element.find('#continueWorkflowDraftRequest').bind('click', function(){
-                                $scope.closeWorkflowDraftDialog(true);
-                                $scope.loading = true;
-                                storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, {})
-                                        .then(function(edit){
-                                           return storage.drafts.locks.get(document.header.identifier,{lockID:''})
-                                        })
-                                        .then(function(lockInfo){
-                                           return storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
-                                        })
-                                        .then(function(){
-                                           return storage.drafts.put(document.header.identifier, document);
-                                        })
-                                        .then(function(draftInfo){
-                                            $location.search('workflow', null);
+                        if(workflow?.data.identifier === document.header.identifier) {
+                            var metadata = {};
+                            $scope.blockText        = 'reseting workflow...';
+                            
+                            return storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
+                            .then(function(edit){
+                                return storage.drafts.locks.get(document.header.identifier,{lockID:''})
+                            })
+                            .then(function(lockInfo){
+                                const lockID = lockInfo.data[0].lockID;
+                                const docId = document.header.identifier;
 
-							                showShareDocument(draftInfo)
-                                            return afterDraftSaved(draftInfo);
-                                        }).catch(function(error){
-                                            showError(null,  { action: "saveDraft", error: error })
-                                        }).finally(function(){
-                                            $scope.loading = false;
-                                        });
-
+                                return storage.drafts.locks.delete(docId, lockID)
+                                    .then(function() {
+                                        return storage.drafts.put(docId, document);
+                                    })
+                                    .then(function(draftInfo) {
+                                        $scope.blockText = 'saving draft document';
+                                        // Put the lock back here
+                                        return storage.drafts.locks.put(docId, { lockID: lockID })
+                                            .then(function() {
+                                                showShareDocument(draftInfo); // not sure if this is needed here.
+                                                return afterDraftSaved(draftInfo);
+                                            });
+                                    });
+                            })
+                            .catch(function(error){
+                                showError(null,  { action: "saveDraft", error: error })
+                            }).finally(function(){
+                                $scope.loading = false;
                             });
-
-                            return 	$scope.showWorkflowDraftDialog(true);
                         }
                         else{
                             return editFormUtility.saveDraft(document)
