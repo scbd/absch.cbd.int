@@ -517,43 +517,34 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 					{
 						if(!document)
 							throw "Invalid document";
-                        if($route.current.params.workflow){
-
-                            $element.find('#continueWorkflowDraftRequest').bind('click', function(){
-                                $scope.closeWorkflowDraftDialog(true);
-                                $scope.loading = true;
-                                storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, {})
-                                        .then(function(edit){
-                                           return storage.drafts.locks.get(document.header.identifier,{lockID:''})
+                        let processRequest; 
+                        if($route.current.params.workflow) {
+                            // Workflow-aware saving — same approach as in publish
+                            const metadata = {};
+                
+                            processRequest = storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
+                                .then(() => storage.drafts.locks.get(document.header.identifier, { lockID: '' }))
+                                .then(lockInfo =>
+                                    storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
+                                        .then(() => storage.drafts.put(document.header.identifier, document))
+                                        .then(draftInfo => {
+                                            return storage.drafts.locks.put(document.header.identifier, { lockID: lockInfo.data[0].lockID })
+                                                .then(() => draftInfo);
                                         })
-                                        .then(function(lockInfo){
-                                           return storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
-                                        })
-                                        .then(function(){
-                                           return storage.drafts.put(document.header.identifier, document);
-                                        })
-                                        .then(function(draftInfo){
-                                            $location.search('workflow', null);
-
-							                showShareDocument(draftInfo)
-                                            return afterDraftSaved(draftInfo);
-                                        }).catch(function(error){
-                                            showError(null,  { action: "saveDraft", error: error })
-                                        }).finally(function(){
-                                            $scope.loading = false;
-                                        });
-
-                            });
-
-                            return 	$scope.showWorkflowDraftDialog(true);
+                                );
+                        } 
+                        else {
+                            // Non-workflow path
+                            // showShareDocument(draftInfo) // ToDo: not sure
+                            processRequest = editFormUtility.saveDraft(document);
                         }
-                        else{
-                            return editFormUtility.saveDraft(document)
-                                    .then(function(draftInfo){
-                                        return afterDraftSaved(draftInfo);
-                                    });
-                        }                            
-
+                
+                        return $q.when(processRequest).then(function(draftInfo) {
+                            return afterDraftSaved(draftInfo);
+                        });
+                
+                        
+                        
                         function afterDraftSaved(draftInfo){
                             toastr.info(toasterMessages.draftSaveMessage);
 
