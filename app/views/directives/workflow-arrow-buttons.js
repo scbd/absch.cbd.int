@@ -380,7 +380,9 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 
 					        $scope.validationReport = {isSaving:true};
                             var processRequest;
-                            if($route.current.params.workflow){
+                            console.log('Modal is open:');
+                            const isModalOpen = $('.document-selection-modal').length > 0 && $('.document-selection-modal').is(':visible'); 
+                            if($route.current.params.workflow && !isModalOpen){
                                 var metadata = {};
                                 $scope.blockText        = 'reseting workflow...'
                                 processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
@@ -528,6 +530,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                         } 
                         else {
                             // Non-workflow path
+                            // showShareDocument(draftInfo) // ToDo: not sure
                             processRequest = editFormUtility.saveDraft(document);
                         }
                 
@@ -598,7 +601,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                         $scope.blockText        = undefined;
                     });
                 };
-                //ToDo: remove after testing
+
                 $scope.closeWorkflowDraftDialog = function(changeLoading)
                 {
                     return $q.all([$scope.showWorkflowDraftDialog(false)]).finally(function(){
