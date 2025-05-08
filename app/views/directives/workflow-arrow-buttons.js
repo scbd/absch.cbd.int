@@ -380,7 +380,9 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 
 					        $scope.validationReport = {isSaving:true};
                             var processRequest;
-                            if($route.current.params.workflow){
+                            // What is the workflow for records that are created inline?,  $route.current.params.workflow is the parent record workflow
+                            const isModalOpen = $('.document-selection-modal').length > 0 && $('.document-selection-modal').is(':visible'); 
+                            if($route.current.params.workflow && !isModalOpen){
                                 var metadata = {};
                                 $scope.blockText        = 'reseting workflow...'
                                 processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
