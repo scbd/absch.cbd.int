@@ -4,6 +4,7 @@ import _ from 'lodash';
 import '~/services/main';
 import '~/views/forms/view/record-loader.directive';
 import '~/views/forms/view/bch/icons';
+import kmAttachmentPreview from '~/components/common/km-attachment-preview.vue';
 import resultDefaultT from '~/app-text/views/search/search-results/result-default.json';
 
 app.directive('resultDefault', ["$timeout", "translationService", 'realm', "$filter",
@@ -27,6 +28,9 @@ app.directive('resultDefault', ["$timeout", "translationService", 'realm', "$fil
                         }, 10);
                     } 
                 });
+                $scope.attachmentPreviewComponent = {
+                    components:{kmAttachmentPreview},
+                }
 
                 $scope.canShowIcons = function(schema){
                     return _.includes(['modifiedOrganism', 'nationalRiskAssessment', 'independentRiskAssessment', 'biosafetyDecision', 'biosafetyLaw', 'authority'], schema);
