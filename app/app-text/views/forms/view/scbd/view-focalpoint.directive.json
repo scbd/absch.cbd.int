@@ -1,0 +1,13 @@
+{
+    "country": "Country",
+    "name": "Name",
+    "type": "Type of Focal Point",
+    "address": "Address",
+    "function": "Function",
+    "department": "Department",
+    "organization": "Organization",
+    "email": "Email",
+    "telephone": "Telephone",
+    "fax": "Fax",
+    "treaties": "Treaties"
+}
