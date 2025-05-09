@@ -1,5 +1,5 @@
 {
     "date": "Date",
-    "search": "Search for record(s) published within a date range.",
+    "search": "Search record(s) by the date they were most recently published.",
     "publishedOn": "Published on"
 }
