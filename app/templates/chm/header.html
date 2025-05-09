@@ -5,8 +5,8 @@
                 <button class="navbar-toggler collapsed px-2" type="button" >
                     <span class="navbar-toggler-icon"></span>
                 </button>   
-                <span class="realm-base-acronym fw-bold color-orange"> {{::('chmHeaderT.chm'|$translate)}}  </span> 
-                <span class="fw-bold fs-md-4 text-uppercase color-orange ">{{::('chmHeaderT.clearingHouseMechanism'|$translate)}}</span>
+                <span class="realm-base-acronym fw-bold color-chm-green"> {{::('chmHeaderT.chm'|$translate)}}  </span> 
+                <span class="fw-bold fs-md-4 text-uppercase color-chm-green ">{{::('chmHeaderT.clearingHouseMechanism'|$translate)}}</span>
                 <span ng-if="isDEV" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">
                     {{::('chmHeaderT.development'|$translate)}}</span>
                 <span ng-if="isTRG" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">
@@ -29,10 +29,10 @@
 
     <header class="pt-2 nav-lg-header">
         <div class="">
-            <ul href="." class="realm-base-acronym color-chm-grey mx-3 px-lg-4 list-unstyled d-flex align-items-baseline justify-content-start p-0">
+            <ul href="." class="realm-base-acronym color-chm-green mx-3 px-lg-4 list-unstyled d-flex align-items-baseline justify-content-start p-0">
                 <li class="me-3">{{::('chmHeaderT.chm'|$translate)}}</li>
                 <li class="fw-bold ch-name">{{::('chmHeaderT.clearingHouseMechanism'|$translate)}}</li>
-                <li ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
+                <li ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark ms-2">
                     {{::('chmHeaderT.development'|$translate)}}</li>
                 <li ng-if="isTRG" class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
                         {{::('chmHeaderT.training'|$translate)}}</li>
@@ -72,7 +72,7 @@
                         {{::('chmHeaderT.countries'|$translate)}} </span>
                     </a>
 
-                    <ul class="dropdown-menu bg-darkgrey">
+                    <ul class="dropdown-menu bg-chm">
                     
                         <li class="ps-2 pe-2 pb-2">
                             <input type="text" class="form-control" placeholder="Search countries" ng-click="countrySearch($event)"
