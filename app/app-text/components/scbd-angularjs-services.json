@@ -1,6 +1,6 @@
 {
-    "storageMissingIdentifier": "Missing document identifier.",
-    "storageInvalid": "Invalid or missing file.",
-    "storageTemporary": "Temporary upload slot response is invalid.",
-    "storagePersisted": "Persisted attachment response is invalid."
+    "storageMissingIdentifier": "Document ID is missing. Cannot proceed with the upload.",
+    "storageInvalid": "File is missing or does not have a valid name. Please select a valid file.",
+    "storageTemporary": "Failed to create a temporary storage slot. Please try again later.",
+    "storagePersisted": "File uploaded but failed to persist it to storage. Please contact support."
 }
