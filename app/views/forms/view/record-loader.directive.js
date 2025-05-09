@@ -65,6 +65,7 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 				if (!$scope.linkTarget || $scope.linkTarget == '')
 					$scope.linkTarget = '_blank';
 				//debugger;
+				$scope.showRecord = true;
 				$scope.internalDocument = undefined;
 				$scope.internalDocumentInfo = undefined;
 				$scope.isDocumentSelectionModal = document.querySelector('.document-selection-modal') !== null;
@@ -224,16 +225,17 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 						}
 						else if (version == undefined) {		
 							//'include-deleted':true
-							qDocument = storage.documents.get(identifier, {}, config).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier, { info: true}, config).then(function (result) { return result.data || result });
+							qDocument = storage.documents.get(identifier, {'include-deleted':true}, config).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier, { info: true, 'include-deleted':true}, config).then(function (result) { return result.data || result });
 						}
 						else {
 							//'include-deleted':false
-							qDocument = storage.documents.get(identifier + '@' + version, {}, config).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier + '@' + version, {info: true }, config).then(function (result) { return result.data || result });
+							qDocument = storage.documents.get(identifier + '@' + version, {'include-deleted':true}, config).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier + '@' + version, {info: true, 'include-deleted':true }, config).then(function (result) { return result.data || result });
 
 						}
 						$scope.loading = true;
+						
 						$q.all([qDocument, qDocumentInfo]).then(function (results) {
 
 							$scope.internalDocument = results[0];
@@ -259,6 +261,7 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 						})
 						.finally(function () {
 							$scope.loading = false;
+							$scope.showRecord = $scope.internalDocumentInfo.deletedOn ? false : true;
 						})
 
 					};
