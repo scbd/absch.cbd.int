@@ -1723,7 +1723,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         }
 
                         // Mainly done for Submission. 
-                        let excludeSchemas = $attrs.excludeSchemas?.split(',')||[];
+                        let excludeSchemas = ($attrs.excludeSchemas?.trim()?.split(',')||[]).filter(e=>e);
                         if(excludeSchemas?.length){
                             // if exclude schemas are provide but the url also has search query id
                             // it means there is explicit query, so ignore the schema (if already selected) 
