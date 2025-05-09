@@ -55,7 +55,7 @@
 
 		<div ng-show="document.donorOrganisms">
 			<label>{{::('viewDnaSequenceT.donorOrganisms'|$translate)}}</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.donorOrganisms">
 						<view-record-reference ng-model="item" locale="locale" target="target"></view-record-reference>

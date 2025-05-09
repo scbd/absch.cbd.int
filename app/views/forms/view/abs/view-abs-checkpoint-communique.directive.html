@@ -25,7 +25,7 @@
 		 	</div>
 			<div ng-show="document.absCheckpoints">
 				<legend>{{::('viewCPCT.checkpoints'|$translate)}}</legend>
-					<div class="km-value" compare-val>
+					<div  compare-val>
 						<ul class="list">
 							<li ng-repeat="item in document.absCheckpoints">
 								<div view-record-reference ng-model="item" locale="locale"></div>
@@ -47,7 +47,7 @@
 						<div compare-val>
 		                <div ng-repeat="contact in emailList track by $index" class="">
 		                    <div class="col-xs-12">
-		                        <div class="km-value">
+		                        <div >
 		                            <div view-record-reference ng-model="contact" locale="locale"></div>
 		                        </div>
 		                    </div>
@@ -65,7 +65,7 @@
 				<legend>{{::('viewCPCT.informationCollected'|$translate)}}</legend>
 				<div ng-show="document.absIRCCs">
 					<label>{{::('viewCPCT.referenceNumbers'|$translate)}}</label>
-					<div class="km-value" compare-val>
+					<div  compare-val>
 						<ul class="list">
 							<li  ng-repeat="item in document.absIRCCs">
 								 <div view-record-reference ng-model="item" locale="locale"></div>
@@ -90,7 +90,7 @@
 					</div>
 					<div ng-show="document.entityWhoGrantedPIC">
 						<label>{{::('viewCPCT.entityWhoGrantedPIC'|$translate)}}</label>
-						<div class="km-value" compare-val>
+						<div  compare-val>
 							<div view-record-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
 						</div>
 					</div>
@@ -141,7 +141,7 @@
 
 					<div ng-show="document.entityToWhomGrantedPIC">
 						<label>{{::('viewCPCT.entityToWhomGrantedPIC'|$translate)}}</label>
-						<div class="km-value" compare-val>
+						<div  compare-val>
 							<div view-record-reference ng-model="document.entityToWhomGrantedPIC" locale="locale"></div>
 						</div>
 					</div>
@@ -173,7 +173,7 @@
 				<div ng-show="document.personsAtCheckpoint">
 					<label>{{::('viewCPCT.personsAtCheckpoint'|$translate)}}</label>
 					<div compare-val>
-					<div class="km-value" ng-repeat="user in document.personsAtCheckpoint">
+					<div  ng-repeat="user in document.personsAtCheckpoint">
 						<div view-record-reference ng-model="user" locale="locale"></div>
 					</div>
 					</div>

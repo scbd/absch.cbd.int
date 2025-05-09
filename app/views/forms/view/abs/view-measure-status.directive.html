@@ -70,7 +70,7 @@
 		<div ng-show="document.picMeasures && document.picMeasures.length>0">
 			<label>Please select the relevant ABS measure/s from the following list regulating access to genetic resources</label>
 			<div compare-val="picMeasures">
-				<div class="km-value"  ng-repeat="picMsr in document.picMeasures" >
+				<div   ng-repeat="picMsr in document.picMeasures" >
 					<span view-record-reference ng-model="picMsr" locale="locale"></span>
 				</div>
 			</div>
@@ -117,7 +117,7 @@
 		<div ng-show="document.iplcMeasures && document.iplcMeasures.length>0">
 			<label>Please select the relevant ABS measure/s from the following list concerning access to genetic resources hold by indigenous peoples and local communities</label>
 			<div compare-val="iplcMeasures">
-				<div class="km-value"  ng-repeat="ipicMsr in document.iplcMeasures" >
+				<div  ng-repeat="ipicMsr in document.iplcMeasures" >
 					<span view-record-reference ng-model="ipicMsr" locale="locale"></span>
 				</div>
 			</div>
@@ -126,7 +126,7 @@
 		<div ng-show="document.otherIplcRelatedRecords && document.otherIplcRelatedRecords.length>0">
 			<label>Please select other relevant applicable information related to ABS procedures, national websites or databases, community protocols and procedures and customary law and/or competent national authorities from the following list</label>
 			<div compare-val="otherIplcRelatedRecords">
-				<div class="km-value"  ng-repeat="oplRecord in document.otherIplcRelatedRecords" >
+				<div   ng-repeat="oplRecord in document.otherIplcRelatedRecords" >
 					<span view-record-reference ng-model="oplRecord" locale="locale"></span>
 				</div>
 			</div>
@@ -159,7 +159,7 @@
 		<div ng-show="document.iplcApprovalMeasures  && document.iplcApprovalMeasures.length>0">
 			<label>Iplc approval measures</label>
 			<div compare-val="iplcApprovalMeasures">
-				<div class="km-value"  ng-repeat="iplcAm in document.iplcApprovalMeasures" >
+				<div   ng-repeat="iplcAm in document.iplcApprovalMeasures" >
 					<span view-record-reference ng-model="iplcAm" locale="locale"></span>
 				</div>
 			</div>
@@ -168,7 +168,7 @@
 		<div ng-show="document.otherIplcApprovalRecords  && document.otherIplcApprovalRecords.length>0">
 			<label>Other iplc approval records</label>
 			<div compare-val="otherIplcApprovalRecords">
-				<div class="km-value"  ng-repeat="oplAr in document.otherIplcApprovalRecords" >
+				<div   ng-repeat="oplAr in document.otherIplcApprovalRecords" >
 					<span view-record-reference ng-model="oplAr" locale="locale"></span>
 				</div>
 			</div>

@@ -53,7 +53,7 @@
 		</div>
 		<div ng-show="document.developers">
 			<label>{{::('viewLmoT.developer'|$translate)}}	</label>
-			<div class="km-value" compare-val>
+			<div  compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.developers" >						
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -72,7 +72,7 @@
 			<label>{{::('viewLmoT.recipientOrganisms'|$translate)}}</label>
 			<div class="help-info fs-small-6">{{::('viewLmoT.recipientOrganismsInfo'|$translate)}}
 			</div>
-			<div class="km-value" compare-val>
+			<div  compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.recipientOrganisms" >						
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -149,7 +149,7 @@
 		</div>
 		<div ng-show="document.affectedGenes">
 			<label>{{::('viewLmoT.affectedGenes'|$translate)}}</label>			
-			<div class="km-value" compare-val>
+			<div  compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.affectedGenes" >						
 						<view-record-reference ng-model='item' locale="locale" hide-schema='true'></view-record-reference>

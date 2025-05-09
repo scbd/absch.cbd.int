@@ -90,7 +90,7 @@
                 </div> 
                 <div v-if="document.resources">
                     <label>{{ t("cbdResources") }}</label>
-                    <div class="km-value" >                 
+                    <div >                 
                         <div v-for="(resource,i) in document.resources" :key="resource">
                             <ng v-vue-ng:view-record-reference  v-model:ng-model="document.resources[i]" ></ng>  
                         </div>                                 
@@ -216,7 +216,7 @@
                            <div v-if="document.recommendedToWorkshopBy==='ORG' && document.recommendedToWorkshopByOrganizations" >  
                                 <label>{{t("organizations")}}</label> 
                                 <div v-for="(organization, i) in document.recommendedToWorkshopByOrganizations" key="organization" class="mb-2">  
-                                    <div class="km-value">
+                                    <div >
                                         <ng v-vue-ng:view-record-reference v-model:ng-model="document.recommendedToWorkshopByOrganizations[i]" locale="locale"></ng>
                                     </div>
                                 </div>
@@ -256,7 +256,7 @@
                             <div v-if="document.recommendedToAnyBy==='ORG' && document.recommendedToAnyByOrganizations" >
                                 <label>{{t("organizations")}}</label> 
                                 <div v-for="(organization,i) in document.recommendedToAnyByOrganizations" class="mb-2" >
-                                    <div class="km-value">
+                                    <div >
                                         <ng v-vue-ng:view-record-reference v-model:ng-model="document.recommendedToAnyByOrganizations[i]" locale="locale"></ng>
                                     </div>                                                                   
                                 </div>                
