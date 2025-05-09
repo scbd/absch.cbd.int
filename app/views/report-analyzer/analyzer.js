@@ -4,8 +4,8 @@ import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import reportAnalyzerT from '~/app-text/views/report-analyzer/analyzer.json';
 
     export { default as template } from './analyzer.html';
-export default ['$scope', '$location', 'realm', '$timeout', 'translationService',
-    function ($scope, $location, realm, $timeout, translationService) {
+export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translationService',
+    function ($scope, $location, realm, $timeout, $route, translationService) {
         var appName         = realm.value.replace(/-.*/,'').toLowerCase();
         $scope.showAnalyzer = false;
         $scope.self         = $scope;
@@ -38,8 +38,13 @@ export default ['$scope', '$location', 'realm', '$timeout', 'translationService'
                     data = JSON.parse(sessionStorage.getItem('nrAnalyzerData') || '{}');
 
                 $scope.selectedReportType = mapReportType(data.type);
-                $scope.selectedQuestions  = data.questions;
-                $scope.selectedRegions    = data.regions;
+                
+                if (data.questions)
+                    $scope.selectedQuestions = data.questions.split(',');
+    
+                if (data.regions)
+                    $scope.selectedRegions = data.regions.split(',');
+
                 $scope.selectedRegionsPreset    = data.regionsPreset;
                 $scope.selectedRegionsPresetFilter    = data.regionsPresetFilter;
                 $scope.activeReport = _.find($scope.reportData, {type:$scope.selectedReportType});
@@ -61,7 +66,6 @@ export default ['$scope', '$location', 'realm', '$timeout', 'translationService'
             $scope.$watchCollection('selectedRegions',   saveSettings);
             $scope.$watchCollection('selectedRegionsPreset',   saveSettings);
             $scope.$watchCollection('selectedRegionsPresetFilter',   saveSettings);
-
         }, 100)
 
         //========================================
@@ -101,6 +105,16 @@ export default ['$scope', '$location', 'realm', '$timeout', 'translationService'
             showAnalyser = true;
 
             $scope.showAnalyzer = showAnalyser;
+
+                $route.updateParams({ reportType: $scope.selectedReportType });
+                //Pass query string
+                $location.search({
+                    type: $scope.selectedReportType,
+                    regions: $scope.selectedRegions.join(','),
+                    questions: $scope.selectedQuestions.join(','),
+                    regionsPreset: $scope.selectedRegionsPreset,
+                    regionsPresetFilter: $scope.selectedRegionsPresetFilter
+                });
         }
 
         //========================================
