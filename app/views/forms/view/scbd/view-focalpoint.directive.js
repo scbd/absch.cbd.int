@@ -1,8 +1,9 @@
 import app from '~/app';
 import template from 'text!./view-focalpoint.directive.html';
 import '~/views/directives/record-options';
+import viewFocalPointT from '~/app-text/views/forms/view/scbd/view-focalpoint.directive.json';
 
-app.directive('viewFocalPoint', ['realm', function(realm) {
+app.directive('viewFocalPoint', ['realm', 'translationService', function(realm, translationService) {
 	return {
 		restrict: 'EAC',
 		template: template ,
@@ -11,6 +12,9 @@ app.directive('viewFocalPoint', ['realm', function(realm) {
 			document: "=ngModel",
 			locale: "=",
 			target: "@linkTarget"
+		},
+		link: function($scope, element, attrs, controller) {
+			translationService.set('viewFocalPointT', viewFocalPointT);
 		},
 		controller: ['$scope','commonjs', '$q', async function ($scope, commonjs, $q) {
 
