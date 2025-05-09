@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<div ng-if="document.documentsSummary">
-					<div compare-val>
+					<div compare-val="documentsSummary">
 						<km-value-ml  html value="document.documentsSummary" locales="locale"></km-value-ml>
 					</div>
 				</div>
@@ -181,7 +181,7 @@
 			<legend>{{::('viewRiskAssesmentT.additionalInformation'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
-				<div compare-val>
+				<div compare-val="relevantInformation">
 				<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml>
 				</div>
 			</div>
