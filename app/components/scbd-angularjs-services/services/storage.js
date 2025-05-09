@@ -5,7 +5,7 @@ import storageTranslations from '~/app-text/components/scbd-angularjs-services.j
 import { mergeTranslationKeys } from '~/services/translation-merge';
 const storageT = mergeTranslationKeys(storageTranslations);
 
-    app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', 'apiToken', function($http, $q, authentication, defaultRealm, cacheService, apiToken) {
+    app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', 'apiToken',  function($http, $q, authentication, defaultRealm, cacheService, apiToken) {
         //		return new function()
         //		{
         var serviceUrls = { // Add Https if not .local
@@ -418,13 +418,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
                         throw new Error(storageT.storagePersisted);
                     }
 
-                    return {
-                        ...persistResponse,
-                        url: `${window.location.origin}${persistResponse.url}`
-                    };
+                    return persistResponse
 
                 }  catch (error) {
-                    throw new Error(error.message);
+                    throw new Error(`Upload failed: ${error.message}`);
                 }
             },
 
