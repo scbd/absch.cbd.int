@@ -289,13 +289,21 @@ import './solr';
                 this.localizeFields = function localizeFields(fields){
                     if(!fields)
                         return;
-                        
-                    if(locale && locale!='en'){
-                        return fields.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
-                    }
 
+                    if (locale && locale !== 'en') {
+                        const fieldLocale = (locale||'en').toUpperCase();
+                        const localize = (f) => typeof f === 'string' ? f.replace(/_EN_/g, `_${ fieldLocale }_`) : f;
+
+                        if (Array.isArray(fields)) {
+                            return fields.map(localize);
+                        }
+
+                        return localize(fields);
+                    }
+                
                     return fields;
-                }
+                };
+
                 this.readFacets     = readFacets2;
 
             }
