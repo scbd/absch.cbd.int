@@ -1,7 +1,7 @@
 ﻿<div>
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="page-item d-none d-lg-inline-block disabled pagination-page-count">
+        <li class="page-item d-none d-lg-inline-block page-item-responsive disabled pagination-page-count">
             <a rel="noopener" class="page-link" disabled>
                 <strong>{{::('paginationT.page'|$translate)}} <span ng-bind="currentPage"></span> {{::('paginationT.of'|$translate)}} <span ng-bind="pageCount"></span></strong>
             </a>
@@ -27,7 +27,7 @@
             <a rel="noopener" class="page-link" ng-disabled="currentPage-1 >= pageCount - 1"
                 translation-url href ng-click="currentPage-1 < pageCount - 1 && actionSetPage(pageCount)">{{::('paginationT.last'|$translate)}} »</a>
         </li>
-        <li class="page-item d-none d-lg-inline-block disabled pagination-record-count">
+        <li class="page-item d-none d-lg-inline-block page-item-responsive disabled pagination-record-count">
             <a rel="noopener" class="page-link" disabled>
                 <strong> 
                     <span ng-bind="((currentPage-1)*pageSize)+1 + ' - ' + (currentPage*pageSize>numFound ? numFound:currentPage*pageSize)"></span> {{::('paginationT.of'|$translate)}}
@@ -37,7 +37,7 @@
         </li>
         <li class="page-item d-none d-md-inline-block pagination-items-per-page">
                 <a rel="noopener" class="page-link" disabled data-title="Items per page" data-bs-toggle="tooltip">
-                <span class="d-none d-lg-inline-block">{{::('paginationT.itemsPerPage'|$translate)}}</span>
+                <span class="d-none d-lg-inline-block page-item-responsive">{{::('paginationT.itemsPerPage'|$translate)}}</span>
                 <select style="color: #0d6efd;" ng-model="pageSize" ng-change="onPageSizeChanged({size:pageSize});">
                     <option ng-value="25">{{::('numbers.twentyFive'|$translate)}}</option>
                     <option ng-value="50">{{::('numbers.fifty'|$translate)}}</option>
