@@ -39,38 +39,43 @@ export default class ApiBase
       return (await loadAsyncHeaders(baseConfig))(...args);
     }
 
-    http.get     = async (...args)=> (await loadAsyncHeaders(baseConfig)).get    (...args);
-    http.head    = async (...args)=> (await loadAsyncHeaders(baseConfig)).head   (...args);
-    http.post    = async (...args)=> (await loadAsyncHeaders(baseConfig)).post   (...args);
-    http.put     = async (...args)=> (await loadAsyncHeaders(baseConfig)).put    (...args);
-    http.patch   = async (...args)=> (await loadAsyncHeaders(baseConfig)).patch  (...args);
-    http.delete  = async (...args)=> (await loadAsyncHeaders(baseConfig)).delete (...args);
-    http.options = async (...args)=> (await loadAsyncHeaders(baseConfig)).options(...args);
-    http.request = async (...args)=> (await loadAsyncHeaders(baseConfig)).request(...args);
+    http.get     = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).get    (...args);
+    http.head    = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).head   (...args);
+    http.post    = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).post    (...args);
+    http.put     = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).put    (...args);
+    http.patch   = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).patch  (...args);
+    http.delete  = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).delete (...args);
+    http.options = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).options(...args);
+    http.request = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).request(...args);
 
     this.http = http;
   }
 }
 
-async function loadAsyncHeaders(baseConfig) {
+async function loadAsyncHeaders(baseConfig, path) {
 
   const { tokenReader, tokenType, ...config } = baseConfig || {}
 
   const headers = { ...(config.headers || {}) };
-  //ToDo: we can remove await tokenReader() part
-  if(tokenReader) {
 
-    let token = '';
-    if(isFunction(tokenReader)){
-      const tokenDetails = await tokenReader();
-      token = tokenDetails?.token ;
-    }
-    else {
-      token = tokenReader?.token ;
-    }
+  const trusted = /^https:\/\/.*.(cbd.int|cbddev.xyz)(\/)?/i.test(config.baseURL) ||
+                  /^http:\/\/localhost[:\/]/i.test(config.baseUR);
 
-    if(token)
-      headers.Authorization = `${tokenType||'Bearer'} ${token}`;
+  if(/^(\/)?api\/v20\d{2}\/*/.test(path) ){
+    if( trusted && tokenReader) {
+
+      let token = '';
+      if(isFunction(tokenReader)){
+        const tokenDetails = await tokenReader();
+        token = tokenDetails?.token ;
+      }
+      else {
+        token = tokenReader?.token ;
+      }
+
+      if(token)
+        headers.Authorization = `${tokenType||'Bearer'} ${token}`;
+    }
   }
 
   return axios.create({ ...config, headers } );
