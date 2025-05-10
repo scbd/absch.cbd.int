@@ -13,14 +13,15 @@ import { mergeTranslationKeys } from '../../services/translation-merge';
 import cbdAddNewViewArticle from '~/components/common/cbd-add-new-view-article.vue'
 import documentDebugInfo from '~/components/km/document-debug-info.vue';
 import RealmApi from '~/api/realms';
+import WorkflowsApi from '~/api/workflows';
 
 const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
-    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog', '$window', 'translationService',
+    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog', '$window', 'translationService','apiToken',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
             $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, 
-            articlesService, roleService, locale, commonjs, ngDialog, $window, translationService,  joyrideService){
+            articlesService, roleService, locale, commonjs, ngDialog, $window, translationService, apiToken){
 
     	return{
     		restrict: 'EA',
@@ -65,6 +66,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
 				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
                 const realmApi            = new RealmApi({ tokenReader: () => undefined});
+                const workflowsApi        = new WorkflowsApi({ tokenReader: () => apiToken.get() });
                 const environmentRealms   = await realmApi.getRealmConfigurations(realm.environment);
 
                 $scope.vueComponent = {
@@ -363,7 +365,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 					var qDocument               = $scope.getDocumentFn();
 					var qReport                 = validate(qDocument);
 
-					return $q.all([qDocument, qReport]).then(function(results) {
+					return $q.all([qDocument, qReport]).then( async function(results) {
 
 						var document         = results[0];
 						var validationReport = results[1];
@@ -380,7 +382,12 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 
 					        $scope.validationReport = {isSaving:true};
                             var processRequest;
-                            if($route.current.params.workflow){
+                            let workflow ;
+                            // In case of edit publish-request $route.current.params.workflow is the parent record workflow
+                            if ($route?.current?.params?.workflow) {
+                                workflow = await workflowsApi.getWorkflow($route.current.params.workflow);
+                            }
+                            if(workflow?.data.identifier === document.header.identifier) {
                                 var metadata = {};
                                 $scope.blockText        = 'reseting workflow...'
                                 processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
