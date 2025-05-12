@@ -38,6 +38,14 @@ app.directive("topRequests", ['$q', "IWorkflows", "realm", '$rootScope', 'roleSe
                         isUser                      : roleService.isUser()
                     };
                 }
+               function isSCBDReviewType (requestType, schema) {
+                    if (!requestType || !schema) return false;
+
+                    const schemaType = realm.schemas?.[schema]?.type;
+
+                    return schemaType == 'reference' && ['publishReferenceRecord', 'deleteRecord'].includes(requestType);
+                };
+
 
                 //==================================
                 function load(query) {
@@ -54,8 +62,10 @@ app.directive("topRequests", ['$q', "IWorkflows", "realm", '$rootScope', 'roleSe
                                     var activity = _.last(_.sortBy(workflow.activities, ['createdOn']));
                                     if(activity && (!activity.timedOutOn || !activity.closedOn)){
                                         tasks.push({
-                                            workflow: workflow, activity: activity,
-                                            identifier: workflow.data.identifier
+                                            workflow: workflow, 
+                                            activity: activity,
+                                            identifier: workflow.data.identifier,
+                                            isSCBDReviewType: isSCBDReviewType(workflow.type.name, workflow.data.metadata.schema)
                                         });
                                     }
                                 }
