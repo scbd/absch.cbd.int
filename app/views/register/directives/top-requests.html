@@ -44,9 +44,10 @@
             </div>
             <div class="col-sm-3  hidden-xs">
                 <div style="font-size: 12px;" ng-if="task.workflow.workflowExpiryDate >= today" class='bold'>
-                    <span ng-if="task.workflow.type.name == 'publishReferenceRecord'" class="color-orange"> 
-                        {{::('topRequestsT.SCBDReview'|$translate)}} </span>
-                    <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isPublishingAuthority }"> 
+                    <span ng-if="task.isSCBDReviewType" class="color-orange"> 
+                        {{::('topRequestsT.SCBDReview'|$translate)}} 
+                    </span>
+                    <span ng-if="!task.isSCBDReviewType" ng-class="{'color-red': roles.isPublishingAuthority }"> 
                             <i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> {{::('topRequestsT.pending'|$translate)}}
                         <span ng-if="roles.isPublishingAuthority"> {{::('topRequestsT.your'|$translate)}} </span>
                         <span ng-if="!roles.isPublishingAuthority && isBch"> BCH-NFP </span>
