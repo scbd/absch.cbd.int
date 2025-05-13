@@ -5,20 +5,20 @@
 		<document-date></document-date><br>
 
 		<div ng-if="document.government">
-			<label>Country</label>
+			<label>{{::('viewFocalPointT.country'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
 			</span>
 		</div>
 
 		<div ng-if="document.firstName||document.lastName">
-			<label>Name</label>
+			<label>{{::('viewFocalPointT.name'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				{{document.title | lstring:locale}} {{document.firstName | lstring:locale}} {{document.lastName | lstring:locale}}
 			</span>
 		</div>
 		<div ng-if="document.categories">
-			<label>Type of Focal Point</label>
+			<label>{{::('viewFocalPointT.type'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="category in focalPointDetails.categoryIdentifiers" ng-bind="category|term"></li>
@@ -26,7 +26,7 @@
 			</span>
 		</div>
 		<div ng-if="focalPointDetails.address_EN_t">
-			<label>Address</label>
+			<label>{{::('viewFocalPointT.address'|$translate)}}</label>
 			<span compare-val>
 			  <span class="km-value" ng-bind-html="focalPointDetails.address_EN_t">
 			  </span>
@@ -34,14 +34,14 @@
 		</div>
 
 		<div ng-if="document.designation">
-			<label>Function</label>
+			<label>{{::('viewFocalPointT.function'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				{{document.designation|lstring:locale}}
 			</span>
 		</div>
 
 		<div ng-if="document.department">
-			<label>Department</label>
+			<label>{{::('viewFocalPointT.department'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				{{document.department|lstring:locale}}
 			</span>
@@ -49,14 +49,14 @@
 
 
 		<div ng-if="document.organization">
-			<label>Organization</label>
+			<label>{{::('viewFocalPointT.organization'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				{{document.organization|lstring:locale}}
 			</span>
 		</div>
 
 		<div ng-if="document.emails">
-			<label>Email</label>
+			<label>{{::('viewFocalPointT.email'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.emails">
@@ -67,7 +67,7 @@
 		</div>
 
 		<div ng-if="document.phones||document.mobiles">
-			<label>Telephone</label>
+			<label>{{::('viewFocalPointT.telephone'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.phones" ng-if="document.phones">
@@ -83,7 +83,7 @@
 
 
 		<div ng-if="document.faxes">
-			<label>Fax</label>
+			<label>{{::('viewFocalPointT.fax'|$translate)}}</label>
 			<span class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.faxes">
@@ -94,19 +94,13 @@
 		</div>
 
 		<div ng-if="focalPointDetails.treaty_CEN_ss">
-				<label>Treaties</label>
+				<label>{{::('viewFocalPointT.treaties'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in focalPointDetails.treaty_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
 					</ul>
 				</div>
 			</div>
-		<div ng-if="focalPointDetails.url_ss">
-			<label>Link to the information on the CBD website</label>
-			<span class="km-value" compare-val>
-				<a rel="noopener" translation-url  ng-href="{{focalPointDetails.url_ss[0]}}" target="_blank">{{focalPointDetails.url_ss[0]}}</a>
-			</span>
-		</div>
 	</div>
 	
         <div document-metadata  class="panel-footer"></div>
