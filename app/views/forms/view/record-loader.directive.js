@@ -255,6 +255,11 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
 								$scope.load(identifier, 'draft', otherRealm);
+								
+								if($route?.current?.params?.documentSchema === "NFP"){
+									const docId = $route.current.params.documentID;
+									$scope.NFPCountryCode = docId?.split("-")[2];
+								} 
 								$scope.error = error;
 							}								
 						})

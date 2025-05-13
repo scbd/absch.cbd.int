@@ -22,10 +22,23 @@
         <div block-region activate="loading||isComparing"></div>
 
         <div class="alert alert-danger text-center" ng-if="error && !loading">
-            <strong>{{::('recordLoaderT.error'|$translate)}}</strong>
-            {{::('recordLoaderT.requestedRecord'|$translate)}}
-            <p ng-if="error.status == 404">{{::('recordLoaderT.recordNotFound'|$translate)}}</p>
-            <p ng-if="error.status != 404" ng-bind="error.message||error"></p>
+             <strong>{{::('recordLoaderT.error'|$translate)}}</strong>
+            <span ng-if="!NFPCountryCode">
+                {{::('recordLoaderT.requestedRecord'|$translate)}}
+                <p ng-if="error.status == 404">{{::('recordLoaderT.recordNotFound'|$translate)}}</p>
+                <p ng-if="error.status != 404" ng-bind="error.message||error"></p>
+            </span>
+            <span ng-if="NFPCountryCode">
+                <h3 class="fs-6 fw-bold d-inline-block">{{::('recordLoaderT.viewing'|$translate)}}</h3>
+                <p>
+                    {{::('recordLoaderT.referencePurposesOnly'|$translate)}}
+                    {{::('recordLoaderT.click'|$translate)}} 
+                    <a ng-href="countries/{{NFPCountryCode}}/NFP">
+                        {{::('recordLoaderT.hereClick'|$translate)}}
+                    </a>
+                    {{::('recordLoaderT.toShowRecord'|$translate)}} 
+                </p>
+            </span>
         </div>
         <div class="jumbotron bg-white" role="alert" ng-if="documentSuccess">
             <h2>{{::('recordLoaderT.thankForDownloading'|$translate)}} <span ng-bind="documentUID"></span>.</h2>
