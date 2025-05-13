@@ -1,8 +1,11 @@
 ﻿import app from '~/app';
 import _ from 'lodash';
-    ;
+import KmDocumentAttachmentApi from '~/api/km-document-attachment';
+import storageTranslations from '~/app-text/components/scbd-angularjs-services.json';
+import { mergeTranslationKeys } from '~/services/translation-merge';
+const storageT = mergeTranslationKeys(storageTranslations);
 
-    app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', function($http, $q, authentication, defaultRealm, cacheService) {
+    app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', 'apiToken',  function($http, $q, authentication, defaultRealm, cacheService, apiToken) {
         //		return new function()
         //		{
         var serviceUrls = { // Add Https if not .local
@@ -384,34 +387,42 @@ import _ from 'lodash';
             // Not tested
             //
             //===========================
-            "put": function(identifier, file, params) {
-                params = params || {};
-                params.identifier = identifier;
-                params.filename = file.name;
+            "put": async function(documentId, file) {
+                try {
+                    const kmDocumentApi = new KmDocumentAttachmentApi({ tokenReader: () => apiToken.get() });
+                    
+                    if (!documentId) {
+                        throw new Error(storageT.storageMissingIdentifier);
+                    }
 
-                var contentType = params.contentType || getMimeTypes(file.name, file.type || "application/octet-stream");
+                    if (!file?.name) {
+                        throw new Error(storageT.storageInvalid);
+                    }
 
-                params.contentType = undefined;
+                    const fileName = file.name;
+                    const mimeType = getMimeTypes(fileName, file.type || "application/octet-stream");
 
-                var oTrans = transformPath(serviceUrls.attachmentUrl(), params);
+                    // Step 1: Request temporary upload slot
+                    const tempSlotResponse = await kmDocumentApi.createTempAttachmentSlot(fileName,mimeType);
 
-                return $http.put(oTrans.url, file, {
-                    "headers": {
-                        "Content-Type": contentType
-                    },
-                    "params": oTrans.params
-                }).then(
-                    function(success) {
-                        return _.defaults(success.data || {}, {
-                            "url": oTrans.url
-                        });
-                    },
-                    function(error) {
-                        error.data = _.defaults(error.data || {}, {
-                            "url": oTrans.url
-                        });
-                        throw error;
-                    });
+                    if (!tempSlotResponse?.url || !tempSlotResponse?.uid || !tempSlotResponse?.contentType) {
+                        throw new Error(storageT.storageTemporary);
+                    }
+                    // Step 2: Upload file to temporary slot
+                    await kmDocumentApi.uploadToTempSlot(tempSlotResponse.url, file, tempSlotResponse.contentType);
+
+                    // Step 3: Persist the uploaded file
+                    const persistResponse = await kmDocumentApi.persistTemporaryAttachment(documentId, tempSlotResponse.uid, fileName );
+
+                    if (!persistResponse?.url) {
+                        throw new Error(storageT.storagePersisted);
+                    }
+
+                    return persistResponse
+
+                }  catch (error) {
+                    throw new Error(`Upload failed: ${error.message}`);
+                }
             },
 
             "getMimeType": function(file) {
