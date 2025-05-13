@@ -21,6 +21,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 import shareRecord from '~/components/common/share-record.vue';
 import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 import documentDebugInfo from '~/components/km/document-debug-info.vue';
+import KmDocumentApi from "~/api/km-document";
 
 	const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
@@ -252,14 +253,23 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 
 							loadViewDirective($scope.internalDocument.header.schema);
 							$scope.error = undefined;
-						}).catch(function (error) {
+						}).catch( async function (error) {
 							if (error.status == 404 && version != 'draft') {
+								//Only for NFP records
+								if ($route?.current?.params?.documentSchema === "NFP") {
+									const kmDocumentApi = new KmDocumentApi({ tokenReader: () => apiToken.get() });
+									const docId = $route?.current?.params.documentID;
+
+									// Try to extract country code from ID like "CHM-NFP-GB-218377"
+									const match = docId.match(/^CHM-NFP-([A-Z]{2})-\d+$/);
+									if (match) {
+										$scope.NFPCountryCode = match[1] // e.g., 'GB'
+									} else {
+										const result = await kmDocumentApi.getDeletedRecord(docId);
+										$scope.NFPCountryCode = result.country.identifier.toUpperCase();
+									}
+								}
 								$scope.load(identifier, 'draft', otherRealm);
-								
-								if($route?.current?.params?.documentSchema === "NFP"){
-									const docId = $route.current.params.documentID;
-									$scope.NFPCountryCode = docId?.split("-")[2];
-								} 
 								$scope.error = error;
 							}								
 						})
