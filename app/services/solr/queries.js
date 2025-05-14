@@ -99,11 +99,11 @@ export function localizeFields (field, locale){
 export function constructSolrFreeTextQuery(searchText, searchField = 'text_EN_txt', operator = 'AND') {
     if (!searchText) return ''; // Return an empty string if searchText is empty
 
-    // Split the queryText into words and construct the Solr query for each word
-    const words = searchText.split(' ').filter(o => o);
-    const escWords = words.map(escape); // Solr encode
+    // Split the searchText into words and construct the Solr query for each word
+    const words = searchText.split(' ').filter(Boolean);
+    const escWords = words.map(escape); // Proper escaping for Solr
     const wordQueries = escWords.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
 
     // Join queries with the specified operator
-    return `(${wordQueries.join(` ${operator} `)})&fl=${searchField}`;
+    return `(${wordQueries.join(` ${operator} `)})`; // &fl=${searchField}`;
 } 
