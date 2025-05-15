@@ -255,8 +255,9 @@ import KmDocumentApi from "~/api/km-document";
 							$scope.error = undefined;
 						}).catch( async function (error) {
 							if (error.status == 404 && version != 'draft') {
+								
 								//Only for NFP records
-								if ($route?.current?.params?.documentSchema === "NFP") {
+								if ($route?.current?.params?.documentSchema === "NFP" || $route?.current?.params?.schema === "focalPoint") {
 									const kmDocumentApi = new KmDocumentApi({ tokenReader: () => apiToken.get() });
 									const docId = $route?.current?.params.documentID;
 
