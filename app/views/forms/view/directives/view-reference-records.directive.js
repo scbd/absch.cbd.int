@@ -149,6 +149,43 @@ app.directive("viewReferencedRecords", [function () {
 				event.target.classList.toggle("truncate-record");
 			}
 
+			$scope.sortFieldsData = function (key, fieldKey, sortField) {
+				//key : nationalRiskAssessment, fieldKey : modifiedOrganisms, sortField: government
+				const field = $scope.referenceRecords[key].fields[fieldKey]; // field is fieldData.
+				
+				field.sortField = field.sortField || '';
+				field.reverse = field.reverse || false;
+			
+				if (field.sortField === sortField) {
+					field.reverse = !field.reverse;
+				} else {
+					field.reverse = false;
+					field.sortField = sortField;
+				}
+			
+				field.docs.sort((a, b) => {
+					let valA = a[sortField] || '';
+					let valB = b[sortField] || '';
+			
+					valA = typeof valA === 'string' ? valA.toLowerCase() : valA;
+					valB = typeof valB === 'string' ? valB.toLowerCase() : valB;
+			
+					if (valA < valB) return field.reverse ? 1 : -1;
+					if (valA > valB) return field.reverse ? -1 : 1;
+					return 0;
+				});
+			 
+				const pageSize = field.pageSize || 25;
+				const currentPage = field.currentPage || 1;
+				const start = (currentPage - 1) * pageSize;
+				const end = start + pageSize;
+			
+				field.pagedDocs = field.docs.slice(start, end); 
+				$scope.referenceRecords[key].fields[fieldKey] = field;
+			
+			};
+			
+
 		}] //controller
 	};
 }]);
