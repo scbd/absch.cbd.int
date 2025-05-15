@@ -293,11 +293,10 @@
 
             <script type="text/ng-template" trados-translation="true" id="deleteRecordModal">              
                 
-                    <div class="modal-header">
-                        <h4 class="modal-title" >{{::('recordListT.confirmDelete'|$translate)}} <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    <div class="modal-header bg-danger text-white">
+                       <h4 class="modal-title" >{{::('recordListT.confirmDelete'|$translate)}} <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
                     </div>
                     <div class="modal-body bg-white" >
-                        
                         <div ng-show="isDraft(recordToDelete)" class="card">
                             <div class="card-header">{{::('recordListT.draftRecord'|$translate)}} </div>
                             <div class="row ps-3 mt-2">     
@@ -314,7 +313,7 @@
                             </div>
                         </div>
 
-                        <div ng-show="isPublished(recordToDelete)" class="card">
+                        <div ng-show="isPublished(recordToDelete)" class="card mt-2">
                             <div class="card-header">{{::('recordListT.publishedRecord'|$translate)}}</div>
                              <div class="row mb-2  mt-2"  ng-show="isIRCC">     
                                  <div class="col-12 bold">
@@ -346,11 +345,13 @@
                                     </div>
                              </div>
 
-                            <div class="row mt-2" ng-show="!isIRCC"> 
-                                <div class="col-12">  <button ng-show="security" type="button" class="btn btn-danger float-end m-2" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="{{::('recordListT.note'|$translate)}}">
-                                <span ng-if="!security.canDelete">{{::('recordListT.requestDeletion'|$translate)}} </span> 
-                                 <span ng-if="security.canDelete"> {{::('recordListT.deleteRecord'|$translate)}} </span>
-                                </button> 
+                            <div class="row mt-2" ng-show="!isIRCC">
+                                <div class="col-12 px-4">  
+                                    <div ng-show="!canDeletePublished" class="alert alert-warning" role="alert">{{::('recordListT.deleteDraftRecord'|$translate)}}</div> 
+                                    <button ng-show="security" type="button" class="btn btn-danger float-end m-2" ng-disabled="loading || !canDeletePublished" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="{{::('recordListT.note'|$translate)}}">
+                                        <span ng-if="!security.canDelete">{{::('recordListT.requestDeletion'|$translate)}} </span> 
+                                        <span ng-if="security.canDelete"> {{::('recordListT.deleteRecord'|$translate)}} </span>
+                                    </button> 
                                 </div>
                             </div>
                         </div>
