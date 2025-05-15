@@ -25,6 +25,7 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import '~/views/reports/matrix/data-matrix.directive';
+import { localizeFields, constructSolrFreeTextQuery } from '~/services/solr/queries.js';
 import {formatDate, formatDateISO} from '~/services/datetime';
 import searchDirectiveT from '~/app-text/views/search/search-directive.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge.js';
@@ -1596,7 +1597,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                         if(~val.indexOf('-'))//not sure if its good idea
                                             return `(${boostField}:("${val}")^${boost})`;
 
-                                        return `(${boostField}:(${val})^${boost})`;
+                                        return `(${constructSolrFreeTextQuery(val, boostField, 'OR')}^${boost})`;
                                     }).value().join(' OR ') +
                                 ')'
                     }

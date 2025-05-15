@@ -4,7 +4,8 @@ import _ from 'lodash';
 import 'ngDialog';
 import '~/components/scbd-angularjs-services/main';
 import '~/services/main';
-import '~/views/forms/edit/document-selector'
+import '~/views/forms/edit/document-selector';
+import { localizeFields, constructSolrFreeTextQuery } from '~/services/solr/queries.js';
 import leftSideFilterT from '~/app-text/views/search/search-filters/left-side-filter.json';
 
 app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeout', 'translationService',
@@ -237,9 +238,8 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                             var searchFields = filter.query.searchFields||['text_EN_txt'];
 
                             queryText = '(' + solr.escape(searchText) + ')';
-                              
                             var freeTextQuery   = _.map(searchFields, function(field, i){
-                                                    return field + ':' + queryText + '^' + ((searchFields.length-i)+1);
+                                                    return constructSolrFreeTextQuery(searchText, localizeFields(field,locale), 'AND');
                                                 }).join(' OR ');
 
                             lQueries.push(freeTextQuery);
