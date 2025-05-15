@@ -219,7 +219,7 @@
 
     <script id="workflow-status-section" type="text/ng-template" trados-translation="true">
         <span ng-if="document.deletedOn">
-            <span class="label label-danger">{{::('viewRecordReferenceT.deleted'|$translate)}}</span>
+            <span class="label text-danger">{{::('viewRecordReferenceT.deleted'|$translate)}}</span>
         </span>
         <span ng-if="document.workingDocumentLock">
             | <span class="label text-danger">{{::('viewRecordReferenceT.pendingApproval'|$translate)}}</span> | 
