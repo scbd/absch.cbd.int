@@ -5,9 +5,10 @@ import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
 import { sleep } from '~/services/composables/utils.js';
+import RealmApi from '~/api/realms';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm',
-	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm', 'apiToken',
+	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm, apiToken) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -23,6 +24,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 			onDocumentLoadFn: '&onDocumentLoad'
 		},
 		link:function($scope, $element, $attr){
+			const realmApi         = new RealmApi({ tokenReader: () => apiToken.get() });
 			translationService.set('viewRecordReferenceT', viewRecordReferenceT);
 
 			$scope.self = $scope;
@@ -138,8 +140,9 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 								
 								// Execute the logic when this error is raised
 								if (error.data?.message === "Document not found in the specified realm") {
-									const ownerRealm = await getOwnerRealm(identifier);
-									const ownerEnvironment = getEnvironment(ownerRealm);
+									const identifierWithoutRevision = documentIdWithoutRevision(identifier);
+									const ownerRealm = await realmApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
+									const ownerEnvironment = await realmApi.getRealmEnvironment(ownerRealm);
 
 									// Verify if the owner realm has different name and same environment
 									if (ownerRealm && ownerRealm !== realm.realm &&	ownerEnvironment === realm.environment) {
@@ -150,38 +153,6 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 								return loadDraftDocument(identifier);
 							}
 						});
-			}
-			async function getOwnerRealm(identifier) {
-				try {
-				  const identifierWithoutRevision = documentIdWithoutRevision(identifier);
-			  
-				  const queryParameters = {
-                    query : `identifier_s:${solr.escape(identifierWithoutRevision)}`,
-                    fields : 'realm_ss,ownerRealm_s',
-					fieldQuery: ['realm_ss:*']
-                	};
-			  
-				  const response = await searchService.list(queryParameters, null);
-				  const doc = response?.data?.response?.docs?.[0];
-
-				  if (doc?.ownerRealm_s) {
-					return doc.ownerRealm_s;
-				  }
-				  
-				} catch (error) {
-				  console.error('Error fetching realm record:', error);
-				}
-			}
-
-			function getEnvironment(realm) {
-				if (typeof realm !== 'string') return null;
-
-				if (/-dev$/i.test(realm)) {
-					return 'development';
-				}
-
-				// ToDo: Add detection for training environment if needed
-				return 'production';
 			}
 
 
