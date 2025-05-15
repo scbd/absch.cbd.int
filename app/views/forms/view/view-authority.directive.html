@@ -52,7 +52,7 @@
 		<div ng-show="document.contacts">
 			<legend ng-if="document.contacts">{{::('viewAuthorityT.additionalContactInfo'|$translate)}}</legend>
 			<div compare-val="{{::('viewAuthorityT.additionalContactInfo'|$translate)}}">
-			<view-record-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-record-reference>
+			<view-record-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" ></view-record-reference>
 			</div>
 		</div>
 
@@ -70,7 +70,7 @@
 			<legend>{{::('viewAuthorityT.policyBasisForCompetencyRefCNA'|$translate)}}</legend>
 			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
 				<label>{{::('viewAuthorityT.linksRelevantLegislative'|$translate)}} </label>
-				<div class="km-value" compare-val>
+				<div compare-val>
 					<ul class="list">
 						<li ng-repeat="item in (document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef)" >
 							<div view-record-reference ng-model="item" locale="locale"></div>

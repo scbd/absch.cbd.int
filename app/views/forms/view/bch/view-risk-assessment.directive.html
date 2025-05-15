@@ -28,7 +28,7 @@
 		</div>
 		<div ng-show="document.authorities" ng-if="document.header.schema=='nationalRiskAssessment'">
 			<label>{{::('viewRiskAssesmentT.competentNationalAuthorities'|$translate)}}</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -38,7 +38,7 @@
 		</div>
 		<div ng-show="document.organizations" ng-if="document.header.schema=='independentRiskAssessment'">
 			<label>{{::('viewRiskAssesmentT.institution'|$translate)}}</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.organizations" >
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -48,7 +48,7 @@
 		</div>
 		<div ng-show="document.contacts">
 			<label>{{::('viewRiskAssesmentT.contactDetails'|$translate)}}</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.contacts" >						
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
