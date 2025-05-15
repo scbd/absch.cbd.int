@@ -55,8 +55,9 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             "areasSettings": {
                "alpha": 1,
                 "autoZoom": true,
-                "selectedColor": '#111111',
+                "selectedColor": '#006400',
                 "rollOverColor": '#000000',
+                "nonPartySelected": '#333333',
                 "selectable": true,
                 "color": '#636363',
                 "outlineColor": '#FFF',
@@ -100,6 +101,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
             nonParty       : '#636363',
             inBetweenParty : '#EC971F'
           }
+          mapOptions.areasSettings.selectedColor='#000435';
         }
         if(realm.is('ABS')){
           $scope.isABS   = realm.is('ABS'); 
@@ -112,13 +114,11 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         if(realm.is('CHM')){                        
           $scope.isCHM   = realm.is('CHM');  
           mapColors = {
-            party          : '#7C92E4',
+            party          : '#009B48',
             nonParty       : '#636363',
             inBetweenParty : '#EC971F'  
-          }     
-          mapOptions.areasSettings.selectedColor='#069554';
-
-
+          }
+          mapOptions.areasSettings.selectedColor='#007C3A';
         }  
 
         $scope.countryMapScope= $scope;
@@ -257,14 +257,37 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
                     showCountryDetails({mapObject: {}});
                   }
                 })
-                map.addListener("clickMapObject", function(evt){
-
-                  if($scope.zoomTo){
-                    var url = '/countries/'+(exceptionRegionMapping[evt.mapObject.id]||evt.mapObject.id);
-                    $scope.$apply(function(){$location.url(url)});
+                map.addListener("clickMapObject", function(evt) {
+                  const mapCode = evt.mapObject.id;
+                  const countryCode = exceptionRegionMapping[mapCode] || mapCode;
+                  const country = countries[countryCode];
+                
+                  // Reset color for all countries
+                  _.each(map.dataProvider.areas, function(area) {
+                    const code = area.id;
+                    const c = countries[code];
+                    if (!c) return;
+                  
+                    area.colorReal = c.isParty ? mapColors.party : mapColors.nonParty;
+                    map.returnInitialColor(area); // This applies the change visually
+                  });
+                
+                  // Manually apply selected color
+                  if (country?.isParty) {
+                    evt.mapObject.colorReal = mapOptions.areasSettings.selectedColor;
+                  } else {
+                    evt.mapObject.colorReal = mapOptions.areasSettings.nonPartySelected ;
                   }
-                  else
-                    showCountryDetails(evt)
+                
+                  map.returnInitialColor(evt.mapObject); // Apply the new color visually
+                
+                  // Continue with navigation or showing details
+                  if ($scope.zoomTo) {
+                    const url = '/countries/' + countryCode;
+                    $scope.$apply(() => $location.url(url));
+                  } else {
+                    showCountryDetails(evt);
+                  }
                 });
                 // map.addListener("click", closePopovers);
                 map.addListener( "rollOverMapObject", function(evt){

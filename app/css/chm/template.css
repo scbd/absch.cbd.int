@@ -45,7 +45,7 @@
 }
 
 #CBD-Branding .footer-cbd{
-    background-color: #00483A!important;
+    background-color: #009B48!important;
 }
 /* .party-container, */
 .protocol-map-header-bg{
@@ -54,7 +54,7 @@
 
 #government .color-party,
 .color-party{
-    color:#7C92E4!important;
+    color:#009B48!important;
 }
 #government .color-non-party,
 .color-non-party{
@@ -62,7 +62,7 @@
 }
 .label-party,
 .bg-party {
-    background-color: #7C92E4!important;
+    background-color: #009B48!important;
 }
 .label-non-party{
     background-color: #2B2A2A!important;
@@ -78,11 +78,12 @@
 	grid-template-columns: repeat(14, 1fr);
 }
 .bg-chm{
-    background: #7C92E4!important;
+    background: #009B48!important;
 }
-.text-chm{
-    color: #7C92E4!important;
+.bg-chm:hover{
+    background: #007C3A!important;
 }
+
 .home-section-top-chm {
     background-color: hsl(198, 100%, 18%);
 }
@@ -93,10 +94,11 @@
     background-repeat: no-repeat;
 }
 .footer-chm {
-    background-color: #7C92E4;
+    background-color: #009B48;
+    color: #FFF;
 }
 .footer-chm, .fw-light { 
-    color: #595959 !important;
+    /* color: #595959 !important; */
     font-weight: 400 !important;
 }
 /* registery CSS  */
@@ -162,18 +164,21 @@ embed-footer {
 }
 
 #innerPage .mastHead{
-	background-color: #7C92E4;
+	background-color: #00405c !important;
 	/* color:white; */
 	padding:10px 20px 40px 20px;
 	margin:0;
 }
+.bg-chm-inner {
+    background-color:#00405c;
+} 
 
-.breadcrumbs {
+/* .breadcrumbs {
     background-color:#00405C;
-}
+} 
 .breadcrumbs   { color:#595959; }
 .breadcrumbs a { color:#595959; }
-.breadcrumbs a:hover, .footer-chm a:hover { color: #fff !important; }
+.breadcrumbs a:hover, .footer-chm a:hover { color: #fff !important; }*/
 
 .chm-color-yellow {
     color: #FFD801 !important;
