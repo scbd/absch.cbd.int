@@ -6,8 +6,8 @@ import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-re
 import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
 import { sleep } from '~/services/composables/utils.js';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr',
-	 function (storage, $timeout, translationService, $rootScope, searchService, solr) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm',
+	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -106,7 +106,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
 					headers = { realm:undefined }
 				if(otherRealm)
-					headers = { realm:otherRealm }
+					headers = { realm:otherRealm } // why not pass * ?
 					
 				return storage.documents.get(identifier, { info : true, 'include-deleted':true}, {headers})
 						.then(function(result){
@@ -134,17 +134,24 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 							return result.data;
 						})
 						.catch(async function(error, code){
-							if (error.status == 404 && !retried) {
-								const recordRealm =  await getRecordRealm(identifier);
-								if(recordRealm){
-									return loadReferenceDocument(identifier, cacheBuster, recordRealm, true);
+							if (error.status === 404 && !retried) {
+								
+								// Execute the logic when this error is raised
+								if (error.data?.message === "Document not found in the specified realm") {
+									const ownerRealm = await getOwnerRealm(identifier);
+									const ownerEnvironment = getEnvironment(ownerRealm);
+
+									// Verify if the owner realm has different name and same environment
+									if (ownerRealm && ownerRealm !== realm.realm &&	ownerEnvironment === realm.environment) {
+										return loadReferenceDocument(identifier, cacheBuster, ownerRealm, true);
+									}
 								}
 
 								return loadDraftDocument(identifier);
-							};
+							}
 						});
 			}
-			async function getRecordRealm(identifier) {
+			async function getOwnerRealm(identifier) {
 				try {
 				  const identifierWithoutRevision = documentIdWithoutRevision(identifier);
 			  
@@ -165,6 +172,18 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				  console.error('Error fetching realm record:', error);
 				}
 			}
+
+			function getEnvironment(realm) {
+				if (typeof realm !== 'string') return null;
+
+				if (/-dev$/i.test(realm)) {
+					return 'development';
+				}
+
+				// ToDo: Add detection for training environment if needed
+				return 'production';
+			}
+
 
 			function loadDraftDocument(identifier, count){
 				return storage.drafts.get(identifier, { info : true, body:true})
