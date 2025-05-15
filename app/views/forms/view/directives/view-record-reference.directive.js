@@ -5,9 +5,10 @@ import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
 import { sleep } from '~/services/composables/utils.js';
+import RealmApi from '~/api/realms';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr',
-	 function (storage, $timeout, translationService, $rootScope, searchService, solr) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm', 'apiToken',
+	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm, apiToken) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -23,6 +24,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 			onDocumentLoadFn: '&onDocumentLoad'
 		},
 		link:function($scope, $element, $attr){
+			const realmApi         = new RealmApi({ tokenReader: () => apiToken.get() });
 			translationService.set('viewRecordReferenceT', viewRecordReferenceT);
 
 			$scope.self = $scope;
@@ -97,7 +99,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				return latestRevisionIdentifier;
 			}
 
-			function loadReferenceDocument(identifier, cacheBuster){
+			function loadReferenceDocument(identifier, cacheBuster, otherRealm, retried = false) {
 				
 				//cacheBuster used only to bust cache for contactOrganization reference.
 
@@ -105,6 +107,8 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				var focalPointRegex = /^52000000cbd022/;
 				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
 					headers = { realm:undefined }
+				if(otherRealm)
+					headers = { realm:otherRealm } // why not pass * ?
 					
 				return storage.documents.get(identifier, { info : true}, {headers})
 						.then(function(result){
@@ -131,12 +135,26 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 							}
 							return result.data;
 						})
-						.catch(function(error, code){
-							if (error.status == 404) {
+						.catch(async function(error, code){
+							if (error.status === 404 && !retried) {
+								
+								// Execute the logic when this error is raised
+								if (error.data?.message === "Document not found in the specified realm") {
+									const identifierWithoutRevision = documentIdWithoutRevision(identifier);
+									const ownerRealm = await realmApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
+									const ownerEnvironment = await realmApi.getRealmEnvironment(ownerRealm);
+
+									// Verify if the owner realm has different name and same environment
+									if (ownerRealm && ownerRealm !== realm.realm &&	ownerEnvironment === realm.environment) {
+										return loadReferenceDocument(identifier, cacheBuster, ownerRealm, true);
+									}
+								}
+
 								return loadDraftDocument(identifier);
-							};
+							}
 						});
 			}
+
 
 			function loadDraftDocument(identifier, count){
 				return storage.drafts.get(identifier, { info : true, body:true})
