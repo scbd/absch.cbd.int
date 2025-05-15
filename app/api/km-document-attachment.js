@@ -1,6 +1,6 @@
 import ApiBase, { tryCastToApiError } from './api-base';
 
-export default class KmDocumentApi extends ApiBase
+export default class KmDocumentAttachmentApi extends ApiBase
 {
     constructor(options) {
         super(options);

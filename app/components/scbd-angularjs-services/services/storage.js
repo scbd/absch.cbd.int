@@ -389,7 +389,7 @@ const storageT = mergeTranslationKeys(storageTranslations);
             //===========================
             "put": async function(documentId, file) {
                 try {
-                    const kmDocumentApi = new KmDocumentAttachmentApi({ tokenReader: () => apiToken.get() });
+                    const kmDocumentAttApi  = new KmDocumentAttachmentApi({ tokenReader: () => apiToken.get() });
                     
                     if (!documentId) {
                         throw new Error(storageT.storageMissingIdentifier);
@@ -403,16 +403,16 @@ const storageT = mergeTranslationKeys(storageTranslations);
                     const mimeType = getMimeTypes(fileName, file.type || "application/octet-stream");
 
                     // Step 1: Request temporary upload slot
-                    const tempSlotResponse = await kmDocumentApi.createTempAttachmentSlot(fileName,mimeType);
+                    const tempSlotResponse = await kmDocumentAttApi .createTempAttachmentSlot(fileName,mimeType);
 
                     if (!tempSlotResponse?.url || !tempSlotResponse?.uid || !tempSlotResponse?.contentType) {
                         throw new Error(storageT.storageTemporary);
                     }
                     // Step 2: Upload file to temporary slot
-                    await kmDocumentApi.uploadToTempSlot(tempSlotResponse.url, file, tempSlotResponse.contentType);
+                    await kmDocumentAttApi .uploadToTempSlot(tempSlotResponse.url, file, tempSlotResponse.contentType);
 
                     // Step 3: Persist the uploaded file
-                    const persistResponse = await kmDocumentApi.persistTemporaryAttachment(documentId, tempSlotResponse.uid, fileName );
+                    const persistResponse = await kmDocumentAttApi .persistTemporaryAttachment(documentId, tempSlotResponse.uid, fileName );
 
                     if (!persistResponse?.url) {
                         throw new Error(storageT.storagePersisted);
