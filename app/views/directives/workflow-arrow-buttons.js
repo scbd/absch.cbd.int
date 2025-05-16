@@ -513,38 +513,47 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     $scope.loading = true;
                     $scope.blockText        = 'Saving draft document'
                    $scope.errorMessage              = null;
-					return $q.when($scope.getDocumentFn()).then(function(document)
+					return $q.when($scope.getDocumentFn()).then(async function(document)
 					{
 						if(!document)
 							throw "Invalid document";
-                        let processRequest; 
-                        if($route.current.params.workflow) {
-                            // Workflow-aware saving — same approach as in publish
-                            const metadata = {};
-                
-                            processRequest = storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
-                                .then(() => storage.drafts.locks.get(document.header.identifier, { lockID: '' }))
-                                .then(lockInfo =>
-                                    storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
-                                        .then(() => storage.drafts.put(document.header.identifier, document))
-                                        .then(draftInfo => {
-                                            return storage.drafts.locks.put(document.header.identifier, { lockID: lockInfo.data[0].lockID })
-                                                .then(() => draftInfo);
-                                        })
-                                );
-                        } 
-                        else {
-                            // Non-workflow path
-                            // showShareDocument(draftInfo) // ToDo: not sure
-                            processRequest = editFormUtility.saveDraft(document);
+                        let workflow ;
+                        if ($route?.current?.params?.workflow)
+                                workflow = await workflowsApi.getWorkflow($route.current.params.workflow);
+
+                        if(workflow?.data.identifier === document.header.identifier) {
+                                var metadata = {};
+                                $scope.blockText        = 'reseting workflow...'
+                                processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
+                                                    .then(function(edit){
+                                                        return storage.drafts.locks.get(document.header.identifier,{lockID:''})
+                                                    })
+                                                    .then(function(lockInfo){
+                                                        return storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
+                                                                .then(function(){
+                                                                    return storage.drafts.put(document.header.identifier, document);
+                                                                })
+                                                                .then(function(draftInfo){
+                                                                    return storage.drafts.locks.put(document.header.identifier, {lockID:lockInfo.data[0].lockID});
+                                                                })
+                                                    })
+                                                    .then(function(draftInfo){
+                                                        $scope.blockText        = 'saving draft document'
+                                                        // ToDo: fix the action titles
+                                                        return IWorkflows.updateActivity($route.current.params.workflow, 'SaveDraft', { action : 'saveDraft' }) 
+                                                        .then(()=>{
+                                                            showShareDocument(draftInfo)
+                                                            return afterDraftSaved(draftInfo);
+                                                        })
+                                                    });
                         }
-                
-                        return $q.when(processRequest).then(function(draftInfo) {
-                            return afterDraftSaved(draftInfo);
-                        });
-                
-                        
-                        
+                        else{
+                            return editFormUtility.saveDraft(document)
+                                    .then(function(draftInfo){
+                                        return afterDraftSaved(draftInfo);
+                                    });
+                        }                            
+
                         function afterDraftSaved(draftInfo){
                             toastr.info(toasterMessages.draftSaveMessage);
 
