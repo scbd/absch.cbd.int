@@ -111,6 +111,7 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
                 $location.search({
                     type: $scope.selectedReportType,
                     regions: $scope.selectedRegions.join(','),
+                    // regions: $scope.selectedRegions.map(id => id.split('-')[0]).join(','), // Extract first part before dash,
                     questions: $scope.selectedQuestions.join(','),
                     regionsPreset: $scope.selectedRegionsPreset,
                     regionsPresetFilter: $scope.selectedRegionsPresetFilter
