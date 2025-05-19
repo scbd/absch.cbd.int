@@ -101,9 +101,6 @@ trix-toolbar .trix-button--icon-underline{
     text-decoration: underline;
 }
 
-.input-lang-ar input, .input-lang-ar textarea{
-    direction: rtl;
-}
 
 
 .webui-popover-content {
