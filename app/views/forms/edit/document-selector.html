@@ -54,7 +54,7 @@
                                 {{::('documentSelectorT.revisionUpdated'|$translate)}}, 
                                 {{upgradedReferencedIdentifiers[doc.identifier].oldRevision}} <i class="bi bi-shuffle"></i> {{upgradedReferencedIdentifiers[doc.identifier].newRevision}}
                             </small>
-                            <div view-record-reference ng-model="doc" locale="locale" class="km-value" wait-for-workflow="{{runningWorkflows[doc.identifier] ? 'true':'false'}}"></div>
+                            <div view-record-reference ng-model="doc" locale="locale"  wait-for-workflow="{{runningWorkflows[doc.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
                     <tr ng-if="type=='radio' && model">
@@ -67,7 +67,7 @@
                                 {{::('documentSelectorT.revisionUpdated'|$translate)}}, 
                                 {{upgradedReferencedIdentifiers[doc.identifier].oldRevision}} <i class="bi bi-shuffle"></i> {{upgradedReferencedIdentifiers[doc.identifier].newRevision}}
                             </small>
-                            <div view-record-reference ng-model="model" locale="locale" class="km-value" wait-for-workflow="{{runningWorkflows[model.identifier] ? 'true':'false'}}"></div>
+                            <div view-record-reference ng-model="model" locale="locale"  wait-for-workflow="{{runningWorkflows[model.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
                 </table>

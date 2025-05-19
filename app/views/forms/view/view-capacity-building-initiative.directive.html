@@ -28,7 +28,7 @@
 
 		<div ng-if="document.contacts">
 			<label>{{::('viewCdiT.contactPerson'|$translate)}}</label>
-			<div class="km-value" compare-val="Contact person">
+			<div compare-val="Contact person">
 				<div ng-repeat="contact in document.contacts">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -116,7 +116,7 @@
 		</div>
 		<div ng-show="document.broaderProjects">
 			<label>{{::('viewCdiT.broaderProjects'|$translate)}}</label>
-			<div class="km-value" compare-val="Clearing-house record">
+			<div compare-val="Clearing-house record">
 				<div ng-repeat="broaderProject in document.broaderProjects">
 					<div view-record-reference ng-model="broaderProject" locale="locale"></div>
 				</div>
@@ -127,7 +127,7 @@
 
 			<div ng-show="document.isImplementedByAgencies && document.implementingAgencies">
 				<label>{{::('viewCdiT.implementingAgenciesOrOrg'|$translate)}}</label>
-				<div class="km-value" compare-val="Implementing agency(ies)">
+				<div  compare-val="Implementing agency(ies)">
 					<div ng-repeat="contact in document.implementingAgencies">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
 					</div>
@@ -136,7 +136,7 @@
 
 			<div ng-show="document.isExecutededByAgencies && document.executingAgencies">
 				<label>{{::('viewCdiT.executingAgencyOrganization'|$translate)}}</label>
-				<div class="km-value" compare-val="Executing agency(ies)">
+				<div  compare-val="Executing agency(ies)">
 					<div ng-repeat="contact in document.executingAgencies">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
 					</div>
@@ -145,7 +145,7 @@
 
 			<div ng-show="document.isCollaboratededByPartners && document.collaboratingPartners">
 				<label>{{::('viewCdiT.isCollaboratedByPartners'|$translate)}}</label>
-				<div class="km-value" compare-val="Collaborating partner(s)">
+				<div  compare-val="Collaborating partner(s)">
 					<div ng-repeat="contact in document.collaboratingPartners">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
 					</div>
@@ -241,7 +241,7 @@
 			</div>
 			<div ng-show="document.coreFundingSources">
 				<label>{{::('viewCdiT.primaryFunding'|$translate)}}</label>
-				<div class="km-value" compare-val="Primary funding source(s)">
+				<div  compare-val="Primary funding source(s)">
 					<div ng-repeat="contact in document.coreFundingSources">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
 					</div>
@@ -250,7 +250,7 @@
 
 			<div ng-show="document.coFinancingSources">
 				<label>{{::('viewCdiT.coFinancingSources'|$translate)}}</label>
-				<div class="km-value" compare-val="Co-financing source(s)">
+				<div compare-val="Co-financing source(s)">
 					<div ng-repeat="contact in document.coFinancingSources">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
 					</div>
@@ -284,7 +284,7 @@
 			</div>
 			<div ng-show="document.resultsReference">
 				<label>{{::('viewCdiT.VirtualLibraryNumber'|$translate)}}</label>
-				<div class="km-value" compare-val="Virtual library record number">
+				<div  compare-val="Virtual library record number">
 					<div ng-repeat="contact in document.resultsReference">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
 					</div>

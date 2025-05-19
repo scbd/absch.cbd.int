@@ -21,7 +21,7 @@
         </div>
         <div ng-if="document.contacts">
             <label>{{::('viewOrganizationT.contactPerson'|$translate)}} </label>
-            <div class="km-value" compare-val>
+            <div  compare-val>
                 <ul class="list">
                     <li ng-repeat="item in document.contacts" >
                         <div view-record-reference ng-model="item" locale="locale"></div>
@@ -145,7 +145,7 @@
 
         <div ng-show="document.linkedOrganizations">
             <legend>{{::('viewOrganizationT.linkedOrganizations'|$translate)}}</legend>
-            <div class="km-value" compare-val>
+            <div  compare-val>
                 <ul class="list">
                     <li ng-repeat="item in document.linkedOrganizations" >
                         <div view-record-reference ng-model="item" locale="locale"></div>
