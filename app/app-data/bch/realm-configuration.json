@@ -24,6 +24,9 @@
           "Administrator",
           "BchAdministrator"
         ],
+        "reportedRecordAdministrators": [
+          "BchAdministrator"
+        ],
         "publishingAuthorities": [
           "NationalFocalPoint"
         ],
