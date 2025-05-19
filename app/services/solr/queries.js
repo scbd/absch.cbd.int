@@ -105,5 +105,5 @@ export function constructSolrFreeTextQuery(searchText, searchField = 'text_EN_tx
     const wordQueries = escWords.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
 
     // Join queries with the specified operator
-    return `(${wordQueries.join(` ${operator} `)})`; // &fl=${searchField}`;
+    return andOr(wordQueries, operator);
 } 
