@@ -17,7 +17,7 @@
 			</div>
 			<div ng-if="document.amendedRecords">
 				<label>{{::('viewBiosafetyLawT.amendedRecords'|$translate)}}</label>
-				<div class="km-value" compare-val>
+				<div compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">
 							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -33,7 +33,7 @@
 			</div>
 			<div ng-if="amendedByRecords">
 				<label>{{::('viewBiosafetyLawT.amendedByRecords'|$translate)}}</label>
-				<div class="km-value" compare-val>
+				<div compare-val>
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
 					</div>
@@ -136,7 +136,7 @@
 			<legend>{{::('viewBiosafetyLawT.relatedRecords'|$translate)}}</legend>
 			<div ng-if="document.relatedRecords">
 				<label>{{::('viewBiosafetyLawT.relatedMeasure'|$translate)}}</label>
-				<div class="km-value" compare-val>
+				<div compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.relatedRecords">
 							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -156,7 +156,7 @@
 		<div ng-if="document.authorities">
 			<legend>{{::('viewBiosafetyLawT.regulatoryInformation'|$translate)}}</legend>
 			<label>{{::('viewBiosafetyLawT.authorities'|$translate)}}</label>
-			<div class="km-value" compare-val>
+			<div  compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>

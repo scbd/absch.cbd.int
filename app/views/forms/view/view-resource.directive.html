@@ -32,7 +32,7 @@
 			</div>
 			<div ng-if="document.organizations">
 				<label>{{::('viewResourceT.organizations'|$translate)}}</label>
-				<div class="km-value" compare-val="organizations">
+				<div  compare-val="organizations">
 					<div class="col-sm-12" ng-repeat="organization in document.organizations">
 							<div view-record-reference ng-model="organization" locale="locale"></div>
 					</div>
@@ -188,7 +188,7 @@
 
 				<div ng-if="document.biosafety.modifiedOrganisms && document.biosafety.addressModifiedOrganisms">
 					<label>{{::('viewResourceT.modifiedOrganisms'|$translate)}}</label>
-					<div class="km-value" compare-val="modifiedOrganisms">
+					<div  compare-val="modifiedOrganisms">
 						<ul class="list">
 							<li ng-repeat="item in document.biosafety.modifiedOrganisms" >
 								<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -206,7 +206,7 @@
 
 				<div ng-if="document.biosafety.organisms && document.biosafety.addressOrganisms">
 					<label>{{::('viewResourceT.organisms'|$translate)}}</label>
-					<div class="km-value" compare-val="organisms">
+					<div compare-val="organisms">
 						<ul class="list">
 							<li ng-repeat="item in document.biosafety.organisms" >
 								<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -224,7 +224,7 @@
 
 				<div ng-if="document.biosafety.genes && document.biosafety.addressGenes">
 					<label>{{::('viewResourceT.genes'|$translate)}}</label>
-					<div class="km-value" compare-val="genes">
+					<div  compare-val="genes">
 						<ul class="list">
 							<li ng-repeat="item in document.biosafety.genes" >
 								<view-record-reference ng-model='item' locale="locale"></view-record-reference>
