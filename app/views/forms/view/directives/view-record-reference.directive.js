@@ -107,7 +107,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
 					headers = { realm:undefined }
 					
-				return storage.documents.get(identifier, { info : true}, {headers})
+				return storage.documents.get(identifier, { info : true, 'include-deleted':true}, {headers})
 						.then(function(result){
 							//TODO: throw error if the documentType != 'focalPoint'
 							if(result?.data?.body?.contactOrganization){
