@@ -42,4 +42,17 @@ export default class RealmsApi extends ApiBase
                 })  
                 .catch(tryCastToApiError);
   }
+
+  async  validateRealmEnvironment(ownerRealmName, currentRealmName, environment) {
+    if (ownerRealmName && currentRealmName && environment) {
+        // Get the owner realm configuration
+        const ownerRealmConfig = await this.getRealmConfiguration(ownerRealmName);
+        const ownerEnvironment = ownerRealmConfig.environment;
+        // Verify if the owner realm has different name and same environment
+        if (ownerRealmName && ownerRealmName !== currentRealmName &&	ownerEnvironment === environment) {
+          return true
+        }
+      }
+      return false
+  }
 }
