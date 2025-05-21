@@ -25,7 +25,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 			onDocumentLoadFn: '&onDocumentLoad'
 		},
 		link:function($scope, $element, $attr){
-			const realmApi         = new RealmApi();
+			
 			translationService.set('viewRecordReferenceT', viewRecordReferenceT);
 
 			$scope.self = $scope;
@@ -142,12 +142,10 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 								// Execute the logic when this error is raised
 								if (error.data?.message === ERRORS.NOT_FOUND_IN_REALM) {
 									const identifierWithoutRevision = documentIdWithoutRevision(identifier);
+									const realmApi   = new RealmApi();
 									const ownerRealm = await realmApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
-									const ownerEnvironmentObj = await realmApi.getRealmConfiguration(ownerRealm.toUpperCase());
-									const ownerEnvironment = ownerEnvironmentObj.environment;
-
-									// Verify if the owner realm has different name and same environment
-									if (ownerRealm && ownerRealm !== realm.realm &&	ownerEnvironment === realm.environment) {
+									const isSameEnvironment = await realmApi.validateRealmEnvironment(ownerRealm, realm.realm, realm.environment);
+									if(isSameEnvironment){
 										return loadReferenceDocument(identifier, cacheBuster, ownerRealm, true);
 									}
 								}
