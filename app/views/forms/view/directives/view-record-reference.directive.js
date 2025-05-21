@@ -5,10 +5,11 @@ import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
 import { sleep } from '~/services/composables/utils.js';
+import { ERRORS } from '~/constants/km-document.js';
 import RealmApi from '~/api/realms';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm', 'apiToken',
-	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm, apiToken) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm',
+	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm,) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -24,7 +25,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 			onDocumentLoadFn: '&onDocumentLoad'
 		},
 		link:function($scope, $element, $attr){
-			const realmApi         = new RealmApi({ tokenReader: () => apiToken.get() });
+			const realmApi         = new RealmApi();
 			translationService.set('viewRecordReferenceT', viewRecordReferenceT);
 
 			$scope.self = $scope;
@@ -139,7 +140,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 							if (error.status === 404 && !retried) {
 								
 								// Execute the logic when this error is raised
-								if (error.data?.message === "Document not found in the specified realm") {
+								if (error.data?.message === ERRORS.NOT_FOUND_IN_REALM) {
 									const identifierWithoutRevision = documentIdWithoutRevision(identifier);
 									const ownerRealm = await realmApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
 									const ownerEnvironmentObj = await realmApi.getRealmConfiguration(ownerRealm.toUpperCase());
