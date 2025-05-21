@@ -14,14 +14,13 @@ export default class KmDocumentApi extends ApiBase
         return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
     }
     // ToDo: move relevant file,
-     async getDeletedRecord(identifier, params) {
+    async getDeletedRecord(identifier) {
+        const params = {
+            'include-deleted': true
+        };
         return this.http.get(`api/v2013/documents/${identifier}`, {
-            params: {
-            'include-deleted': true,
-            'realm':'*',
-            ...params
-            }
-        }).then(res => res.data).catch(tryCastToApiError);
+            params})
+            .then(res => res.data).catch(tryCastToApiError);
     }
 
 }
