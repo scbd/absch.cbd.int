@@ -85,10 +85,10 @@
         </div>
         <!-- ToDo: internalDocumentInfo.deletedOn is not available, need to add ng-if="!internalDocumentInfo && !loading && !internalDocument" -->
         <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.deletedOn">
-            <h3>
+            <h6>
                 {{::('recordLoaderT.viewing'|$translate)}}
-            </h3>
-            <a ng-click="showRecord=true" class="btn btn-primary btn-lg">{{::('recordLoaderT.recordInformationDisplayed'|$translate)}}</a>
+            </h6>
+            <a ng-click="showRecord=true" class="btn btn-primary">{{::('recordLoaderT.recordInformationDisplayed'|$translate)}}</a>
         </div>
 
         <div class="alert alert-danger" role="alert" ng-show="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > internalDocumentInfo.revision && revisionNo != 'draft'">
