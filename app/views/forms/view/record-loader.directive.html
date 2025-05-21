@@ -23,17 +23,17 @@
 
         <div class="alert alert-danger text-center" ng-if="error && !loading">
              <strong>{{::('recordLoaderT.error'|$translate)}}</strong>
-            <span ng-if="!NFPCountryCode">
+            <span ng-if="!nfpCountryCode">
                 {{::('recordLoaderT.requestedRecord'|$translate)}}
                 <p ng-if="error.status == 404">{{::('recordLoaderT.recordNotFound'|$translate)}}</p>
                 <p ng-if="error.status != 404" ng-bind="error.message||error"></p>
             </span>
-            <span ng-if="NFPCountryCode">
+            <span ng-if="nfpCountryCode">
                 <h3 class="fs-6 fw-bold d-inline-block">{{::('recordLoaderT.viewing'|$translate)}}</h3>
                 <p>
                     {{::('recordLoaderT.referencePurposesOnly'|$translate)}}
                     {{::('recordLoaderT.click'|$translate)}} 
-                    <a ng-href="countries/{{NFPCountryCode}}/NFP">
+                    <a ng-href="countries/{{nfpCountryCode}}">
                         {{::('recordLoaderT.hereClick'|$translate)}}
                     </a>
                     {{::('recordLoaderT.toShowRecord'|$translate)}} 
