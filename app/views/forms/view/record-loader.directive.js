@@ -31,9 +31,9 @@ import KmDocumentApi from "~/api/km-document";
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', '$rootScope', 'apiToken', 'translationService', '$http',
+		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', 'translationService', '$http',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		realm, $compile, searchService, IWorkflows, appLocale, solr, $rootScope, apiToken, translationService, $http) {
+		realm, $compile, searchService, IWorkflows, appLocale, solr, translationService, $http) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -60,7 +60,6 @@ import KmDocumentApi from "~/api/km-document";
 					$scope.hideClose = true;
 				}				
 				translationService.set('recordLoaderT', recordLoaderT);
-				$scope.tokenReader = function(){ return apiToken.get()}
 
 				if (!$scope.linkTarget || $scope.linkTarget == '')
 					$scope.linkTarget = '_blank';
@@ -256,19 +255,14 @@ import KmDocumentApi from "~/api/km-document";
 						}).catch( async function (error) {
 							if (error.status == 404 && version != 'draft') {
 								
-								//Only for NFP records
-								if ($route?.current?.params?.documentSchema === "NFP" || $route?.current?.params?.schema === "focalPoint") {
-									const kmDocumentApi = new KmDocumentApi({ tokenReader: () => apiToken.get() });
-									const docId = $route?.current?.params.documentID;
+							
+								const kmDocumentApi = new KmDocumentApi();
+								const result = await kmDocumentApi.getDeletedRecord(identifier);
+								const isNationalSchema = _.includes(realm.nationalSchemas, result.header.schema);
 
-									// Try to extract country code from ID like "CHM-NFP-GB-218377"
-									const match = docId.match(/^CHM-NFP-([A-Z]{2})-\d+$/);
-									if (match) {
-										$scope.NFPCountryCode = match[1] // e.g., 'GB'
-									} else {
-										const result = await kmDocumentApi.getDeletedRecord(docId);
-										$scope.NFPCountryCode = result.country.identifier.toUpperCase();
-									}
+								if(result?.header.schema && isNationalSchema) {
+									const schemaShortCode = $filter('schemaShortName')(result.header.schema);
+									$scope.nfpCountryCode = result.country.identifier.toUpperCase()+"/"+schemaShortCode;
 								}
 								$scope.load(identifier, 'draft', otherRealm);
 								$scope.error = error;
