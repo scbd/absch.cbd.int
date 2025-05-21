@@ -4,17 +4,19 @@
 
 		
 
-			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage || document.info.revision !== document.info.latestRevision)">
+			<div class="alert alert-danger" ng-if="!loading && document && (document.amendmentIntent==1 || showRevokedMessage || (!document.info.isRequest && document.info.revision !== document.info.latestRevision))">
 				<div class="text-center">
 					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">
 						<span ng-bind-html="::('viewAbsPermitT.revokeCertificate'|$translate)"></span>
 					</h1>
-					<h1 ng-if="!document.info.isRequest && document.info.revision !== document.info.latestRevision">
-						<span ng-bind-html="::('viewAbsPermitT.updatedCertificate'|$translate)"></span>
-					</h1>
-					<p>
-						{{::('viewAbsPermitT.SeeAmendmentHistory'|$translate)}}
-					</p>
+					<div ng-if="!document.info.isRequest && document.info.revision !== document.info.latestRevision">
+						<h1>
+							<span ng-bind-html="::('viewAbsPermitT.updatedCertificate'|$translate)"></span>
+						</h1>
+						<p>
+							{{::('viewAbsPermitT.SeeAmendmentHistory'|$translate)}}
+						</p>
+					</div>
 				</div>
 			</div>
 			<div ng-if="isExpired(document.dateOfExpiry)" class="alert alert-warning" role="alert">
