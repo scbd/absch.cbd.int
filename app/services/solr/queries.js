@@ -20,17 +20,20 @@ export function onBuildDocumentSelectorQuery (options){
     if(options.government)
       queries.fieldQueries.push('government_s:'+escape(options.government));
 
-    if((options.searchText||'')!=''){
-      var queryText
-        queryText = '(' + escape(options.searchText) + ')';
-            
-        if(options.query!='' && options.query != undefined)
-          queries.query   += ' AND ('+(options.searchField||'text_EN_txt:*') + queryText + '*)'
-        else 
-          queries.query   = (options.searchField||'text_EN_txt:*') + queryText+'*';
+    if((options.searchText || '') !== '') {
+        const operator = options.operator || 'AND'; // Default to 'AND' if no operator is specified
+        const formattedQuery = constructSolrFreeTextQuery(options.searchText, options.searchField, operator);
+    
+    if (formattedQuery) {
+            if (options.query && options.query !== '') {
+                queries.query += ` AND ${formattedQuery}`;
+            } else {
+                queries.query = formattedQuery;
+            }
+        }
     }
     return queries;
-  } 
+} 
 
 
 export function escape(value) {
@@ -92,3 +95,15 @@ export function andOr(query, sep) {
 export function localizeFields (field, locale){
     return field.replace(/_EN_/ig, `_${locale.toUpperCase()}_`);
 }
+
+export function constructSolrFreeTextQuery(searchText, searchField = 'text_EN_txt', operator = 'AND') {
+    if (!searchText) return ''; // Return an empty string if searchText is empty
+
+    // Split the searchText into words and construct the Solr query for each word
+    const words = searchText.split(' ').filter(Boolean);
+    const escWords = words.map(escape); // Proper escaping for Solr
+    const wordQueries = escWords.map(word => `(${searchField}:(${word}*) OR ${searchField}:(${word}))`);
+
+    // Join queries with the specified operator
+    return andOr(wordQueries, operator);
+} 
