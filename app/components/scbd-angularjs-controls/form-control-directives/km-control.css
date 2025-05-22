@@ -1,4 +1,4 @@
-﻿.multiple-languages {
+.multiple-languages {
     margin-bottom: 3px;
 }
 
@@ -101,16 +101,6 @@ trix-toolbar .trix-button--icon-underline{
     text-decoration: underline;
 }
 
-/* input-lang-ar will use direction: rtl because the specific .input-lang-ar rule overrides the general [class*="input-lang-"] rule */
-[class*="input-lang-"] input,
-[class*="input-lang-"] textarea,
-[class*="input-lang-"] trix-editor {
-    direction: ltr;
-}
-
-.input-lang-ar input, .input-lang-ar textarea{
-    direction: rtl;
-}
 
 
 .webui-popover-content {
