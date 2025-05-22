@@ -52,5 +52,7 @@
     "edit": "Edit",
     "note": "Note: Any pending draft will also be deleted",
     "sampleRecord": "Sample record for",
-    "bySystem": "By system"
+    "bySystem": "By system",
+    "deleteDraftRecord": "The draft record must be deleted before the published record can be removed.",
+    "errorDeletingDraft": "There was an error in deleting draft record."
 }
