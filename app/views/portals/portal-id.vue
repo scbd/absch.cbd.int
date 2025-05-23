@@ -14,9 +14,7 @@
 </template>
 
 <script>
-import { defineComponent, shallowRef } from 'vue';
-import ArticlesApi from '~/api/articles';
-import ForumsApi from '~/api/forums';
+import { defineComponent } from 'vue';
 import MenusApi from '~/api/portals';
 import SideMenu from '~/components/menus/side-menu.vue';
 import Article from './article-id.vue'
@@ -27,6 +25,7 @@ import SubRouter from "../../services/router.js";
 import { compile }  from "path-to-regexp";
 import PageNotFound from '~/views/shared/404.vue';
 import { useRealm  } from '~/services/composables/realm.js';
+import { useAuth, useUser } from "@scbd/angular-vue/src/index.js";
 
 let subRouter = new SubRouter([]);
 
@@ -36,8 +35,12 @@ export default {
     SideMenu
   },
   setup() {
+    const auth = useAuth();
+    const user = useUser();
     const realm = useRealm();
-    return { realm };
+    const menusApi = new MenusApi({ tokenReader: ()=> auth.token() });
+   
+    return { realm, user, menusApi };
   },
   props:{
     basePath: String
@@ -71,7 +74,8 @@ export default {
     initializePortal,
   },
   watch: {
-    portalId: initializePortal
+    portalId: initializePortal,
+    user: initializePortal
   },
   async created() {
     await this.initializePortal();
@@ -84,10 +88,6 @@ async function initializePortal() {
     const { realm } = this;
 
     if(unwatchPath) unwatchPath();
-
-    this.menusApi    = new MenusApi();
-    this.articlesApi = new ArticlesApi();
-    this.forumsApi   = new ForumsApi();
 
     const portalMenu = await this.menusApi.getPortalByCode(realm.value, portalId);
 
