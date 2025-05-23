@@ -5,6 +5,7 @@
         ins {
                 text-decoration: none;
                 background-color: #d4fcbc;
+                color:#111!important;
         }
 
         del {
@@ -84,10 +85,10 @@
         </div>
         <!-- ToDo: internalDocumentInfo.deletedOn is not available, need to add ng-if="!internalDocumentInfo && !loading && !internalDocument" -->
         <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.deletedOn">
-            <h3>
+            <h6>
                 {{::('recordLoaderT.viewing'|$translate)}}
-            </h3>
-            <p>{{::('recordLoaderT.recordInformationDisplayed'|$translate)}}</p>
+            </h6>
+            <a ng-click="showRecord=true" class="btn btn-primary">{{::('recordLoaderT.recordInformationDisplayed'|$translate)}}</a>
         </div>
 
         <div class="alert alert-danger" role="alert" ng-show="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > internalDocumentInfo.revision && revisionNo != 'draft'">
@@ -110,10 +111,11 @@
         <div class="alert alert-danger comapre-message" role="alert" ng-if="comparisonRecordNotFound">
             {{::('recordLoaderT.comparisonRecordNotFound'|$translate)}}
         </div>
+        <div ng-show="showRecord">
 
         <div class="panel-heading d-flow-root" class="panel-heading d-flow-root" ng-class="getHeaderColor(internalDocumentInfo.type)"
             style="padding-top: 8px; padding-left: 2px;" ng-show="!loading && internalDocumentInfo">
-                <span class="floa-start color-white text-uppercase p-2">
+                <span class="float-start color-white text-uppercase p-2">
                     <span ng-bind="::internalDocumentInfo.type|schemaName"></span>
                     <span>(<span ng-bind="::(internalDocumentInfo.type|schemaShortName)"></span>)</span>
                 </span>  
@@ -184,7 +186,7 @@
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> {{::('recordLoaderT.loading'|$translate)}}</span>
         <div id="schemaView" ng-show="internalDocument"></div>
         <validate-referenced-record-version ng-if="isBCH && !loading && internalDocument" document="internalDocument"></validate-referenced-record-version>
-                
+        </div>   
     </div>
     <div id="printContentFooter" ng-if="printMode" ng-include="'view-print-footer.html'"></div>
     
