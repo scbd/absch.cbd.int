@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { defineComponent, shallowRef } from 'vue';
+import { markRaw } from 'vue';
 import ArticlesApi from '~/api/articles';
 import ForumsApi from '~/api/forums';
 import MenusApi from '~/api/portals';
@@ -117,7 +117,7 @@ function onRouteChange() {
 
     this.cacheBuster   = new Date().getTime();
     this.viewProps     = { ...(routeParams||{}), ...(matchParams||{}), ...(subRouteParams||{}) };
-    this.viewComponent = defineComponent(component);
+    this.viewComponent =  markRaw(component);
 
     if(document.documentElement.scrollTop > this.$refs.view.offsetTop)
         this.$refs.view.scrollIntoView();
