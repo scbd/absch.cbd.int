@@ -25,16 +25,16 @@ export default class ApiBase
     // if(isFunction(options.tokenReader)) options = { tokenReader : options }
     if(isFunction(options)) options = { tokenReader : options }
 
-    const { tokenReader, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
-
+    const { tokenReader, prefixUrl, timeout, tokenType, realm } = { ...defaultOptions, ...options }
 
     const baseConfig = {
       baseURL : prefixUrl,
       timeout,
       tokenType,
-      tokenReader
+      tokenReader,
+      realm
     }
-
+    
     const http = async function (...args) {
       return (await loadAsyncHeaders(baseConfig))(...args);
     }
@@ -54,7 +54,7 @@ export default class ApiBase
 
 async function loadAsyncHeaders(baseConfig, path) {
 
-  const { tokenReader, tokenType, ...config } = baseConfig || {}
+  const { tokenReader, tokenType, realm, ...config } = baseConfig || {}
 
   const headers = { ...(config.headers || {}) };
 
@@ -75,6 +75,10 @@ async function loadAsyncHeaders(baseConfig, path) {
 
       if(token)
         headers.Authorization = `${tokenType||'Bearer'} ${token}`;
+      
+      if(realm && !headers.realm){
+        headers.realm = realm;
+      }
     }
   }
 
