@@ -389,7 +389,7 @@ const storageT = mergeTranslationKeys(storageTranslations);
             //===========================
             "put": async function(documentId, file) {
                 try {
-                    const kmDocumentAttApi  = new KmDocumentAttachmentApi({ tokenReader: () => apiToken.get() });
+                    const kmDocumentAttApi  = new KmDocumentAttachmentApi({ tokenReader: () => apiToken.get(), realm: defaultRealm.value });
                     
                     if (!documentId) {
                         throw new Error(storageT.storageMissingIdentifier);
