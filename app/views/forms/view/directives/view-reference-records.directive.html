@@ -38,29 +38,20 @@
                 <tr ng-if="field.showRecords">
                     <td width="15%" colspan="4" class="p-0">
                     <div style="max-height:500px;overflow:scroll">
-                        <table class="table table-bordered table-condensed w-100 mb-0" >
-                            <tr>
-                                <td colspan="4">
-                                    <div class="d-flex justify-content-center">
-                                        <pagination  class="text-center top-pagination" current-page="field.currentPage" ng-if="field.docs.length > 25"
-                                            page-count="field.pageCount" on-page-change="onPageChange(page, field)" page-size="field.pageSize"
-                                            num-found="field.docs.length" on-page-size-changed="onPageSizeChanged(size, field)"></pagination> 
-                                    </div>
-                                </td>
-                            </tr>
+                       <table class="table table-bordered table-condensed w-100 mb-0" >
                             <tr class="border-bottom">
                             <td  ng-show="record.schemaType=='national'" ng-class="{'bold':sortField=='government'}">
                                 {{::('viewReferenceRecordsT.country'|$translate)}}
-                                  <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}" ng-click="sortFieldsData(key, fieldKey, 'government')"></i>
+                                <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='government'; reverse=!reverse"></i>
                                 </td> 
                             <td ng-class="{'bold':sortField=='title'}">{{::('viewReferenceRecordsT.title'|$translate)}}
-                                <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}" ng-click="sortFieldsData(key, fieldKey, 'title')"></i>
+                                    <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='title'; reverse=!reverse"></i>
                                 </td> 
                             <td ng-class="{'bold':sortField=='uniqueId'}">UId
-                                    <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}" ng-click="sortFieldsData(key, fieldKey, 'uniqueId')"></i>
+                                    <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='uniqueId'; reverse=!reverse"></i>
                                 </td> 
                             <td  ng-class="{'bold':sortField=='updatedOn'}" class="hidden-xs">{{::('viewReferenceRecordsT.updatedOn'|$translate)}}
-                                    <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}" ng-click="sortFieldsData(key, fieldKey, 'updatedOn')"></i>
+                                    <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='updatedOn'; reverse=!reverse"></i>
                                 </td> 
                             </tr>
                             <tr ng-repeat="doc in field.pagedDocs | orderBy:sortField:reverse" class="border-bottom">
@@ -68,7 +59,7 @@
                                     <a rel="noopener" target="_blank" ng-href="/countries/{{doc.government_s|encodeURIComponent}}" ng-bind="doc.government" ></a>
                                 </td>
                                 <td width="50%">
-                                <span ng-bind="doc.title"></span>                                        
+                                    <span ng-bind="doc.title"></span>                                        
                                 </td>
                                 <td  width="20%">
                                     <a rel="noopener" target="_blank" ng-href="/database/{{doc.uniqueId|uppercase|encodeURIComponent}}" ng-bind="doc.uniqueId|uppercase" ></a>
