@@ -1,7 +1,7 @@
 <template>
     <span ref="tooltip" :class="{ deleted: deleted }" data-bs-toggle="tooltip" data-bs-placement="top">
         <loading v-if="loading" />
-        <i v-if="!loading && !isPublic" class="fa" :class="{ 'fa-lock' : locked, 'fa-unlock': !locked }" aria-hidden="true"></i>
+        <i v-if="!loading && !isPublic" class="fa fa-fw" :class="{ 'fa-lock' : locked, 'fa-unlock': !locked }" aria-hidden="true"></i>
         <a :href="url" :class="{ disabled: loading }" target="_blank" class="card-link" @click="unlock($event)">
             {{ attachment.filename }}
         </a>
@@ -10,9 +10,8 @@
 </template>
 
 <script setup>
-    import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
+    import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
     import ForumsApi from '~/api/forums';
-    import pending from '~/services/pending-call';
     import Loading from '~/components/common/loading.vue';
     import { Tooltip } from 'bootstrap';
     import messages from '../../app-text/components/forums/edit-post.json';
@@ -69,7 +68,6 @@
 
         const tooltipInstance = Tooltip.getInstance(tooltip.value);
         if (tooltipInstance?._popper) {
-            tooltipInstance.setContent({ '.tooltip-inner': tooltipMessageHtml.value });
             tooltipInstance.show();
         }
     });
@@ -79,9 +77,9 @@
         if ($event) $event.preventDefault();
         if (loading.value) return;
 
-        resetLock();
+        try {
+            resetLock();
 
-        const delegate = pending(async () => {
             const { url, expire } = await forumsApi.getAttachmentDirectUrl(props.attachment.attachmentId);
 
             directUrl.value = url;
@@ -95,9 +93,10 @@
                     timer = setTimeout(() => resetLock(), expiresMs);
                 }
             }
-        }, 'loading');
-
-        delegate.call({ loading }); //todo need to verify
+        }
+        finally {
+            loading.value = false;
+        }
     };
 
     const resetLock = () => {
