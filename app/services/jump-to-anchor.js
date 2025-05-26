@@ -18,8 +18,11 @@ export default function jumpTo(anchor) {
 
     if(typeof(anchor)=='string') {
         const anchorName = anchor.replace(/^#+/, '');
-        target = $(`a[name=${anchorName}]:first`)[0];
+        target = target || $(`a[id=${anchorName}]:first`)[0];
+        target = target || $(`a[name=${anchorName}]:first`)[0]; // legacy support
     }
+
+    console.log('jumpTo', anchor, target);
 
     if(target) target.scrollIntoView({ behavior:'smooth'});
 }

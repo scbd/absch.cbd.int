@@ -29,10 +29,10 @@
         </div>
       </div>
       <h1>{{ lstring(thread.subject) }}</h1>
-      <post :post="thread" class="mb-2" @refresh="load()">
+      <post :post="thread" class="mb-2" @refresh="load()" :showLinkToParent="false">
         <template v-slot:showReplies="{ replies }">
           <em>
-            <a class="anchor-margin" name="replies"></a>
+            <a class="anchor-margin" id="replies" name=""></a>
             <span>
                 <i v-if="replies>0" class="fa" :class="{ 'fa-comment':replies==1, 'fa-comments':replies>1 }"></i>
                 {{ t('linkXReplies', { count: replies }) }}
@@ -84,7 +84,7 @@ const forumUrl = computed(() => {
 
   if (!threadPathPart.test(path)) return null;
 
-  return `${path.replace(threadPathPart, '')}#${encodeURIComponent(props.threadId)}`;
+  return `${path.replace(threadPathPart, '')}#post${encodeURIComponent(props.threadId)}`;
 });
 
 onMounted(async () => {
