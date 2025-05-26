@@ -1,6 +1,6 @@
 <template>
     <div class="forum-post" :class="highlightPostClasses(post.postId)">
-        <a v-if="!showLinkToSelf" class="anchor-margin"  :name="`${post.postId}`"></a>
+        <a v-if="showLinkToSelf" class="anchor-margin"  :id="`post${post.postId}`" :name="`${post.postId}`"></a>
 
         <div class="header mt-2 mb-2">
             <div class="row">
@@ -20,7 +20,7 @@
                             <i class="fa fa-edit"></i>
                             <relative-datetime class="date" :title="`| by ${post.updatedBy}`" :date="post.updatedOn"></relative-datetime>
                         </span>
-                        <a v-if="showLinkToParent" :href="`#${post.parentId}`" @click="jumpToAnchor()" :title="t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
+                        <a v-if="showLinkToParent" :href="`#post${post.parentId}`" @click="jumpToAnchor()" :title="t('replyToId', { postId:post.parentId })"><i class="fa fa-arrow-up"></i></a>
                         <!-- <a v-if="showLinkToSelf" :href="`#${post.postId}`" @click="jumpToAnchor()"><i class="fa fa-arrow-down"></i></a> -->
                     </div>
                 </div>
@@ -123,14 +123,20 @@
 
         <slot name="replies">
             <div v-if="posts" class="replies mt-2 border-start border-bottom">
-                <post v-for="reply in posts" class="border-top ps-3 mb-2" :key="reply.postId" :post="reply" @refresh="refresh($event)" />
+                <post-entry v-for="reply in posts" class="border-top ps-3 mb-2" :key="reply.postId" :post="reply" :show-link-to-self="false" @refresh="refresh($event)" />
             </div>
         </slot>
     </div>
 </template>
-    
+
+<script>
+  export default {
+    name: 'PostEntry',
+  }
+</script>
+
 <script setup>
-import { computed, defineEmits, nextTick, onMounted, ref } from 'vue';
+import { computed, defineEmits, nextTick, onMounted, ref, name } from 'vue';
 import ForumsApi from '~/api/forums';
 import jumpToAnchor from '~/services/jump-to-anchor.js';
 import EditPost from './edit-post.vue';
@@ -153,6 +159,14 @@ const props = defineProps({
     post: {
         type:Object
     },
+    autoScroll: {
+        type:Boolean,
+        default: true    
+    },
+    showLinkToSelf: {
+        type:Boolean,
+        default: true    
+    },
     highlightOnHash: {
         type: Boolean,
         default: true
@@ -165,22 +179,8 @@ const editing = ref(null);
 const body = ref(null);
 
 const showLinkToParent = computed(() => {
-    //ToDo: not clear on the $parent.post
-            // const { parentId : postParentId } = this.post;
-            // const { postId   : parentPostId } = this.$parent.post || this.$parent.thread || {};
-
-            // return parentPostId && parentPostId != postParentId;
-        return true // for testing only, need to remove
-});
-
-const showLinkToSelf = computed(() => {
-    //ToDo: not clear on the $parent.post
-            // const { parentId : postParentId } = this.post;
-            // const { postId   : parentPostId } = this.$parent.post || {};
-
-            // return parentPostId && parentPostId == postParentId;
-            return true // for testing only, need to remove
-
+    const {postId, parentId} = props.post
+    return postId && postId != parentId;
 });
 
 const loggedIn = computed(() => auth.user()?.isAuthenticated);
@@ -191,10 +191,6 @@ const canDelete = computed(() => !!props.post?.security?.canDelete);
 const canApprove = computed(() => !!props.post?.security?.canApprove); // not using
 const canClose = computed(() => !!props.post?.security?.canClose);
 const canPin = computed(() => !!props.post?.security?.canPin);
-
-nextTick(() => { //ToDo:
-      jumpToAnchor();
-});
 
     const    getSelection = ()=> { 
 
@@ -305,7 +301,11 @@ const toggleReplies = async () => {
 
     const { postId } = props.post;
 
+    console.log('toggleReplies', postId);
+
+
     const postsResponse = await forumsApi.getPosts(postId);
+    console.log('postsResponse', postsResponse);
 
     posts.value = postsResponse;
 }
