@@ -34,6 +34,7 @@ const commonRouteUrls = {
     shared_urls                                 : { component: ()=>asyncLogError(import('~/views/register/shared-urls/shared-urls')) },
     register_admin                              : { component: ()=>asyncLogError(import('~/views/register/admin')) },
     register_notifications                      : { component: ()=>asyncLogError(import('~/views/register/notifications')) },
+    notifications                               : { component: ()=>asyncLogError(import('~/views/notifications/notifications')) },
     register_stats                              : { component: ()=>asyncLogError(import('~/views/register/manage/stats')) },
     register_reports                            : { component: ()=>asyncLogError(import('~/views/register/reports/index')) },
     register_reports_report                     : { component: ()=>asyncLogError(import('~/views/register/reports/report')) },
@@ -122,6 +123,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/register/shared-urls',                              { ...mapView(angularViewWrapper),                    "label":routesLabels.mySharing, "resolve": { ...commonRouteUrls.shared_urls, "securized": securize() }, "param": "true", "resolveController": true }).
   whenAsync('/register/admin',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.admin,"resolve":{ ...commonRouteUrls.register_admin,                                              "securized":securize(['Administrator'])},"param":"true","resolveController":true}).
   whenAsync('/register/notifications',                            { ...mapView(angularViewWrapper),                    "label":routesLabels.registerNotifications,"resolve":{ ...commonRouteUrls.register_notifications,                                      "securized":securize()},"param":"true","resolveController":true}). 
+  whenAsync('/notifications/:id',                                 { ...mapView(angularViewWrapper),                    "label":routesLabels.registerNotifications,"resolve":{ ...commonRouteUrls.notifications,                                      "securized":securize()},"param":"true","resolveController":true}).  
   whenAsync('/register/stats',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.registerStats,"resolve":{ ...commonRouteUrls.register_stats,                                              "securized":securize()},"param":"true","resolveController":true}). 
   whenAsync('/register/reports',                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.reports,"resolve":{ ...commonRouteUrls.register_reports,                                            "securized":securize()},"resolveController":true}). 
   whenAsync('/register/reports/:report',                          { ...mapView(angularViewWrapper),                    "label":routesLabels.report,"resolve":{ ...commonRouteUrls.register_reports_report,                                     "securized":securize()},"resolveController":true}). 
@@ -167,7 +169,6 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/share/email/:type/:accessKey',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
 
   whenAsync('/submissions-to-notifications',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.submissionsOnNotifications, "resolve":{ ...commonRouteUrls.submissionsOnNotifications,         },"param":"true","resolveController":true,"reloadOnSearch":false}).
- whenAsync('/notifications/:notificationId',                      {"redirectTo": function(routeParams) { return `/submissions-to-notifications?notification=${routeParams.notificationId}`; }, label: routesLabels.submissionsOnNotifications, "resolve":{}  }).
   whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}}).
 
   //whenAsync('/portals',                                           { ...mapView(vueViewWrapper),                        "label":routesLabels.portals,       "resolve":{ ...commonRouteUrls.portal, },  "param":"true","resolveController":true}).
