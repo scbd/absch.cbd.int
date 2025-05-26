@@ -15,7 +15,7 @@
         <h3>{{ t("tableOfContents") }}</h3>
         <ul>
           <li v-for="thread in threads" :key="thread.threadId">
-            <a :href="`#${thread.threadId}`">{{
+            <a :href="`#post${thread.threadId}`">{{
               lstring(thread.subject) }}</a>
           </li>
         </ul>
@@ -57,7 +57,7 @@
       </div>
 
       <div v-for="thread in threads" :key="thread.threadId">
-        <a class="anchor-margin" :name="`${thread.threadId}`"></a>
+        <a class="anchor-margin" :id="`post${thread.threadId}`" :name="`${thread.threadId}`"></a>
         <div class="card mb-3" :class="highlightPostClasses(thread.threadId)">
           <h5 class="card-header">
 
@@ -70,7 +70,7 @@
           </h5>
 
           <div class="card-body">
-            <post :post="thread" @refresh="pending(refresh, 'loading')" :highlight-on-hash="false">
+            <post :post="thread" @refresh="refresh($event.threadId, $event.postId)" :highlight-on-hash="false">
               <template v-slot:showReplies="{ replies }">
 
                 <a v-if="replies == 0" class="btn btn-outline-primary btn-sm" :href="`${getThreadUrl(thread.threadId)}`"> {{ t('buttonReadPost') }}</a>
@@ -107,7 +107,7 @@
 
       </div>
 
-      <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; pending(refresh, 'loading')"></edit-post>
+      <edit-post v-if="edit" class="p-2" v-bind="edit" @close="edit = null; refresh($event.threadId, $event.postId)"></edit-post>
 
       <simple-modal v-if="hasHelp" ref="refHelpModal" :title="lstring(helpArticle?.title)">
         <cbd-article :article="helpArticle" :show-cover-image="true" :show-edit="false"  />
@@ -173,21 +173,13 @@ const props = defineProps({
 });
 
 onMounted(async () => {
- await pending(load(), 'loading');
- nextTick(() => {
-      jumpToAnchor();
-    });
+ await load()
+ nextTick(() => jumpToAnchor());
 });
 
+watch(() => loggedIn,      async () => await load());
+watch(() => props.forumId, async () => await load());
 
-watch(() => loggedIn, async () => {
-   await load();
-  }
-);
-watch(() => props.forumId, async () => {
-    await pending(load(), 'loading');
-  }
-);
 const browserUrl = () => { 
   return window.location.href;
 }
@@ -224,6 +216,7 @@ const load = async () => {
     helpArticle.value = await articlesApi.queryArticles({ q: { adminTags: { $all: [articleRealmTag, 'forums', 'getting-help'] } }, fo: 1 });
 
     await loadArticle();
+    console.log('Forum loaded:', forum.value);
   } catch (err) {
     error.value = err;
   }
@@ -235,11 +228,11 @@ const openHelpModal = () => {
 const refresh = async (threadId, postId) => { 
   if (threadId != postId) {
     const path =getThreadUrl(threadId);
-    const hash = `${postId}`;
+    const hash = `post${postId}`;
     router.push({ path, hash });
   }else if(threadId) {
     threads.value = await forumsApi.getThreads(props.forumId); 
-    const hash = `${threadId}`;
+    const hash = `post${threadId}`;
     router.push({ hash });
     nextTick(() => {
       jumpToAnchor();
@@ -254,7 +247,7 @@ const toggleSubscription = async () => {
     : await forumsApi.addForumSubscription(props.forumId);
 };
 const highlightPostClasses = (postId) => { 
-  return route.hash === `#${postId}` ? ['bg-info', 'bg-opacity-25'] : [];
+  return [`#${postId}`, `#post${postId}`].includes(route.hash) ? ['bg-info', 'bg-opacity-25'] : [];
 }
 
 const getThreadUrl = (threadId) => { 
