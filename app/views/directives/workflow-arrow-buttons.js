@@ -64,7 +64,6 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                 //BOOTSTRAP Dialog handling
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
-				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
                 const realmApi            = new RealmApi({ tokenReader: () => undefined});
                 const workflowsApi        = new WorkflowsApi({ tokenReader: () => apiToken.get() });
                 const environmentRealms   = await realmApi.getRealmConfigurations(realm.environment);
@@ -214,31 +213,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     });
                 });
 
-                $scope.showWorkflowDraftDialog = function(visible) {
-                    var isVisible = qWorkflowDraftDialog.css("display")!='none';
-                    if(visible == isVisible)
-                        return $q.when(isVisible);
-                    var defered = $q.defer();
-                    $scope.WorkflowDraftDialogDefered.push(defered)
-                    qWorkflowDraftDialog.modal(visible ? "show" : "hide");
-                    return defered.promise;
-                }
 
-                qWorkflowDraftDialog.on('shown.bs.modal' ,function() {
-                    $timeout(function(){
-                        var promise = null;
-                        while((promise=$scope.WorkflowDraftDialogDefered.pop()))
-                            promise.resolve(true);
-                    });
-                });
-
-                qWorkflowDraftDialog.on('hidden.bs.modal' ,function() {
-                    $timeout(function(){
-                        var promise = null;
-                        while((promise=$scope.WorkflowDraftDialogDefered.pop()))
-                            promise.resolve(false);
-                    });
-                });
 
 
                 //////////////////////////////
@@ -617,14 +592,6 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                 $scope.closeAddInfoDialog = function(changeLoading)
                 {
                     return $q.all([$scope.showAdditionalInfoDialog(false)]).finally(function(){
-                        $scope.loading = changeLoading;
-                        $scope.blockText        = undefined;
-                    });
-                };
-
-                $scope.closeWorkflowDraftDialog = function(changeLoading)
-                {
-                    return $q.all([$scope.showWorkflowDraftDialog(false)]).finally(function(){
                         $scope.loading = changeLoading;
                         $scope.blockText        = undefined;
                     });
