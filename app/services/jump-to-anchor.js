@@ -22,7 +22,6 @@ export default function jumpTo(anchor) {
         target = target || $(`a[name=${anchorName}]:first`)[0]; // legacy support
     }
 
-    console.log('jumpTo', anchor, target);
 
     if(target) target.scrollIntoView({ behavior:'smooth'});
 }

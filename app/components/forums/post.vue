@@ -301,7 +301,6 @@ const toggleReplies = async () => {
 
     const { postId } = props.post;
 
-    console.log('toggleReplies', postId);
 
 
     const postsResponse = await forumsApi.getPosts(postId);
