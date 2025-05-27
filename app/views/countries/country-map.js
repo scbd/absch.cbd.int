@@ -180,7 +180,10 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
         var exceptionRegionColorMapping = {
           HK : 'CN', //Hong Kong
           TW : 'CN', //Taiwan
-      };
+        };
+        if(realm.is('CHM')){ 
+          exceptionRegionColorMapping.GL= 'DK';
+        }
         $scope.options = {lmo:'all'};
         $scope.self = $scope;
         $scope.showTitle = true; 
