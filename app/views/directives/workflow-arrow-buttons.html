@@ -420,24 +420,6 @@
         </div>
     </div>
 
-    <div id="divWorkflowDraft" class="modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-red color-white">
-                    <h2>{{::('workflowButtonsT.editPublishingRequest'|$translate)}}</h2>
-                </div>
-                <div class="modal-body">
-                    <p ng-bind-html="::('workflowButtonsT.editingAndSaving'|$translate)"></p>
-                </div>
-                <div class="modal-footer mt-0">
-                    <button type="button" class="btn btn-default" ng-click="closeWorkflowDraftDialog(false)">{{::('workflowButtonsT.no'|$translate)}}</button>
-                    <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary float-start"
-                        ng-disabled="loading">{{::('workflowButtonsT.yes'|$translate)}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script id="dialogUnauthorise" type="text/ng-template" trados-translation="true">
 
         <div class="modal-header bg-red">
