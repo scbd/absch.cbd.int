@@ -97,7 +97,7 @@ const realmApi = new RealmApi({ tokenReader: () => undefined });
 				let uIdPrefix	= realm.uIdPrefix;
 				let documentId;
 
-				if(document.realm && realm.uIdPrefix!=document.realm){
+				if(document.realm && realm.realm!=document.realm){
 					//when showing other CH records in CHM, show other CHm realm prefix in uid
 					if(!otherRealms[document.realm])
 						otherRealms[document.realm] = await realmApi.getRealmConfiguration(document.realm);
