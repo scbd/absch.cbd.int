@@ -1664,8 +1664,6 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         if(filter?.selectedItems)
                             confidentialObject = filter?.selectedItems['usagesConfidential_b'];
                         
-                        if(!confidentialObject)
-                            return;
 
                         if (termFields?.length > 0) {
                             query.push(`usages_ss:(${solr.escape(termFields.join(' '))})`);
