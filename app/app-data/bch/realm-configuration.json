@@ -305,8 +305,7 @@
                 "AuthorizedUser",
                 "AuthorizedUserForNationalReports",
                 "NFP-CPB"
-            ],
-            "disableAdd": "true"
+            ]
         },
         "cpbNationalReport3": {
             "type": "national",

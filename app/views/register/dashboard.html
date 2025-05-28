@@ -315,7 +315,7 @@
                                     ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                                     <td class="table_width">
                                         <div class="btn-group bg-white btn-group-sm table_width" role="group">
-                                            <button type="button" class="btn btn-outline-dark p-0"
+                                            <button type="button" class="btn btn-outline-dark p-0" ng-disabled="isAdditionDisabled(schema) && isBch"
                                                 title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="showTopRecords($event,schema)">
                                                 <i class="bi bi-chevron-down cursor-pointer p-1"
@@ -325,15 +325,16 @@
                                                 title="{{::('dashboardT.addRecord'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoNew($event,schema)"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
-                                            <button type="button" class="btn btn-outline-dark p-0"
+                                            <button type="button" class="btn btn-outline-dark p-0" ng-disabled="isAdditionDisabled(schema) && isBch"
                                                 title="{{::('dashboardT.viewAllRecords'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoList($event,schema)"><i
                                                     class="bi bi-list fs-5 fw-bold d-inline-flex"></i></button>
                                         </div>
                                     </td>
                                     <td class="table-min-width">
-                                        <a rel="noopener" translation-url href="#" ng-click="gotoList($event,schema)"
-                                            class="color-darkgrey ps-2 text-decoration-none">
+                                        <a rel="noopener" translation-url href="#" ng-click="(!isBch || !isAdditionDisabled(schema)) && gotoList($event, schema)"
+                                            ng-class="{'text-muted cursor-default pe-none': isBch && isAdditionDisabled(schema), 'color-darkgrey': !isBch || !isAdditionDisabled(schema)}"
+                                            class="ps-2 text-decoration-none">
                                             <span ng-bind="schema|schemaNamePlural"></span> (<span
                                                 ng-bind="schema|urlSchemaShortName"></span>)</a>
                                         <span ng-if="schemas[schema].description" href="#"
