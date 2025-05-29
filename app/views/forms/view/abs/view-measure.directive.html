@@ -86,6 +86,7 @@
 
 		<div ng-show="document.isModelContractualClause">
 			<label>{{::('viewMeasureT.isModelContractualClause'|$translate)}}</label>
+			<km-value-bool value="document.isModelContractualClause" locales="locale"></km-value-bool>
 			<div class="km-value" compare-val ng-if="document.modelContractualClauseDescription">
 				<span ng-bind="document.modelContractualClauseDescription|lstring:locale"></span>
 			</div>
