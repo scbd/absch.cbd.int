@@ -28,8 +28,6 @@
     "wouldYouLike": "Would you like to add additional information for the publishing request?",
     "cancel": "Cancel",
     "sendRequest": "Send request",
-    "editPublishingRequest": "Edit Publishing Request",
-    "editingAndSaving": "Editing and saving as draft a publishing request will cancel the publishing request and send it back to draft mode.<br />Are you sure you want to continue?",
     "no": "No",
     "yes": "Yes",
     "unauthorizedAccess": "Unauthorized Access",
