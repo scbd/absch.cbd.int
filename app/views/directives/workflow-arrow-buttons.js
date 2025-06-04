@@ -364,20 +364,8 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                             }
                             if(workflow?.data.identifier === document.header.identifier) {
                                 var metadata = {};
-                                $scope.blockText        = 'reseting workflow...'
-                                processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
-                                                    .then(function(edit){
-                                                        return storage.drafts.locks.get(document.header.identifier,{lockID:''})
-                                                    })
-                                                    .then(function(lockInfo){
-                                                        return storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
-                                                                .then(function(){
-                                                                    return storage.drafts.put(document.header.identifier, document);
-                                                                })
-                                                                .then(function(draftInfo){
-                                                                    return storage.drafts.locks.put(document.header.identifier, {lockID:lockInfo.data[0].lockID});
-                                                                })
-                                                    })
+                                $scope.blockText = 'unlocking workflow';
+                                processRequest   =  unlockAndSaveDraft(document, metadata)
                                                     .then(function(data){
                                                         $scope.blockText        = 'Publishing document'
                                                         return IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
@@ -498,29 +486,12 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 
                         if(workflow?.data.identifier === document.header.identifier) {
                             var metadata = {};
-                            $scope.blockText        = 'reseting workflow...';
+                            $scope.blockText        = 'unlocking workflow';
                             
-                            return storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
-                            .then(function(edit){
-                                return storage.drafts.locks.get(document.header.identifier,{lockID:''})
-                            })
-                            .then(function(lockInfo){
-                                const lockID = lockInfo.data[0].lockID;
-                                const docId = document.header.identifier;
-
-                                return storage.drafts.locks.delete(docId, lockID)
-                                    .then(function() {
-                                        return storage.drafts.put(docId, document);
-                                    })
-                                    .then(function(draftInfo) {
-                                        $scope.blockText = 'saving draft document';
-                                        // Put the lock back here
-                                        return storage.drafts.locks.put(docId, { lockID: lockID })
-                                            .then(function() {
-                                                showShareDocument(draftInfo); // not sure if this is needed here.
-                                                return afterDraftSaved(draftInfo);
-                                            });
-                                    });
+                            return unlockAndSaveDraft(document, metadata)
+                            .then(function(draftInfo) {
+                                showShareDocument(draftInfo); // not sure if this is needed here.
+                                return afterDraftSaved(draftInfo);
                             })
                             .catch(function(error){
                                 showError(null,  { action: "saveDraft", error: error })
@@ -929,6 +900,29 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 						}
 					}
 				}
+
+                async function unlockAndSaveDraft(document, metadata) {
+
+                    $scope.blockText        = 'validating your permissions';
+                    const canEdit = await storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata);
+                    if(!canEdit)
+                        throw new Error("You are not authorized to edit this document");
+
+                    $scope.blockText        = 'getting lock information';
+                    const lockInfo = await storage.drafts.locks.get(document.header.identifier,{lockID:''});
+                    
+                    $scope.blockText        = 'unlocking draft';
+                    await storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID);
+
+                    $scope.blockText        = 'saving draft document';
+                    const draftInfo = await storage.drafts.put(document.header.identifier, document);
+
+                    $scope.blockText        = 'locking working document';
+                    await storage.drafts.locks.put(document.header.identifier, {lockID:lockInfo.data[0].lockID});
+
+                    return draftInfo;
+                }
+
                 //============================================================
                 $scope.loadSecurity();
                 loadOfflineFormatDetails();
