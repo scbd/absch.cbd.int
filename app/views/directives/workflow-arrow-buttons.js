@@ -64,7 +64,6 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                 //BOOTSTRAP Dialog handling
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
-				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
                 const realmApi            = new RealmApi({ tokenReader: () => undefined});
                 const workflowsApi        = new WorkflowsApi({ tokenReader: () => apiToken.get() });
                 const environmentRealms   = await realmApi.getRealmConfigurations(realm.environment);
@@ -214,31 +213,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     });
                 });
 
-                $scope.showWorkflowDraftDialog = function(visible) {
-                    var isVisible = qWorkflowDraftDialog.css("display")!='none';
-                    if(visible == isVisible)
-                        return $q.when(isVisible);
-                    var defered = $q.defer();
-                    $scope.WorkflowDraftDialogDefered.push(defered)
-                    qWorkflowDraftDialog.modal(visible ? "show" : "hide");
-                    return defered.promise;
-                }
 
-                qWorkflowDraftDialog.on('shown.bs.modal' ,function() {
-                    $timeout(function(){
-                        var promise = null;
-                        while((promise=$scope.WorkflowDraftDialogDefered.pop()))
-                            promise.resolve(true);
-                    });
-                });
-
-                qWorkflowDraftDialog.on('hidden.bs.modal' ,function() {
-                    $timeout(function(){
-                        var promise = null;
-                        while((promise=$scope.WorkflowDraftDialogDefered.pop()))
-                            promise.resolve(false);
-                    });
-                });
 
 
                 //////////////////////////////
@@ -389,20 +364,8 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                             }
                             if(workflow?.data.identifier === document.header.identifier) {
                                 var metadata = {};
-                                $scope.blockText        = 'reseting workflow...'
-                                processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
-                                                    .then(function(edit){
-                                                        return storage.drafts.locks.get(document.header.identifier,{lockID:''})
-                                                    })
-                                                    .then(function(lockInfo){
-                                                        return storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
-                                                                .then(function(){
-                                                                    return storage.drafts.put(document.header.identifier, document);
-                                                                })
-                                                                .then(function(draftInfo){
-                                                                    return storage.drafts.locks.put(document.header.identifier, {lockID:lockInfo.data[0].lockID});
-                                                                })
-                                                    })
+                                $scope.blockText = 'unlocking workflow';
+                                processRequest   =  unlockAndSaveDraft(document, metadata)
                                                     .then(function(data){
                                                         $scope.blockText        = 'Publishing document'
                                                         return IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
@@ -513,39 +476,28 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     $scope.loading = true;
                     $scope.blockText        = 'Saving draft document'
                    $scope.errorMessage              = null;
-					return $q.when($scope.getDocumentFn()).then(function(document)
+					return $q.when($scope.getDocumentFn()).then(async function(document)
 					{
 						if(!document)
 							throw "Invalid document";
-                        if($route.current.params.workflow){
+                        let workflow ;
+                        if ($route?.current?.params?.workflow)
+                                workflow = await workflowsApi.getWorkflow($route.current.params.workflow);
 
-                            $element.find('#continueWorkflowDraftRequest').bind('click', function(){
-                                $scope.closeWorkflowDraftDialog(true);
-                                $scope.loading = true;
-                                storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, {})
-                                        .then(function(edit){
-                                           return storage.drafts.locks.get(document.header.identifier,{lockID:''})
-                                        })
-                                        .then(function(lockInfo){
-                                           return storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
-                                        })
-                                        .then(function(){
-                                           return storage.drafts.put(document.header.identifier, document);
-                                        })
-                                        .then(function(draftInfo){
-                                            $location.search('workflow', null);
-
-							                showShareDocument(draftInfo)
-                                            return afterDraftSaved(draftInfo);
-                                        }).catch(function(error){
-                                            showError(null,  { action: "saveDraft", error: error })
-                                        }).finally(function(){
-                                            $scope.loading = false;
-                                        });
-
+                        if(workflow?.data.identifier === document.header.identifier) {
+                            var metadata = {};
+                            $scope.blockText        = 'unlocking workflow';
+                            
+                            return unlockAndSaveDraft(document, metadata)
+                            .then(function(draftInfo) {
+                                showShareDocument(draftInfo); // not sure if this is needed here.
+                                return afterDraftSaved(draftInfo);
+                            })
+                            .catch(function(error){
+                                showError(null,  { action: "saveDraft", error: error })
+                            }).finally(function(){
+                                $scope.loading = false;
                             });
-
-                            return 	$scope.showWorkflowDraftDialog(true);
                         }
                         else{
                             return editFormUtility.saveDraft(document)
@@ -611,14 +563,6 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                 $scope.closeAddInfoDialog = function(changeLoading)
                 {
                     return $q.all([$scope.showAdditionalInfoDialog(false)]).finally(function(){
-                        $scope.loading = changeLoading;
-                        $scope.blockText        = undefined;
-                    });
-                };
-
-                $scope.closeWorkflowDraftDialog = function(changeLoading)
-                {
-                    return $q.all([$scope.showWorkflowDraftDialog(false)]).finally(function(){
                         $scope.loading = changeLoading;
                         $scope.blockText        = undefined;
                     });
@@ -956,6 +900,29 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 						}
 					}
 				}
+
+                async function unlockAndSaveDraft(document, metadata) {
+
+                    $scope.blockText        = 'validating your permissions';
+                    const canEdit = await storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata);
+                    if(!canEdit)
+                        throw new Error("You are not authorized to edit this document");
+
+                    $scope.blockText        = 'getting lock information';
+                    const lockInfo = await storage.drafts.locks.get(document.header.identifier,{lockID:''});
+                    
+                    $scope.blockText        = 'unlocking draft';
+                    await storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID);
+
+                    $scope.blockText        = 'saving draft document';
+                    const draftInfo = await storage.drafts.put(document.header.identifier, document);
+
+                    $scope.blockText        = 'locking working document';
+                    await storage.drafts.locks.put(document.header.identifier, {lockID:lockInfo.data[0].lockID});
+
+                    return draftInfo;
+                }
+
                 //============================================================
                 $scope.loadSecurity();
                 loadOfflineFormatDetails();
