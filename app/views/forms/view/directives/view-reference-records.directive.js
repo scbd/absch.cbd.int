@@ -149,6 +149,28 @@ app.directive("viewReferencedRecords", [function () {
 				event.target.classList.toggle("truncate-record");
 			}
 
+			$scope.sortFieldsData = function (key, fieldKey, sortField) {
+				const field = $scope.referenceRecords[key].fields[fieldKey];
+
+				// Toggle reverse
+				field.reverse = !field.reverse ?? false;
+				field.docs = _.orderBy(
+					field.docs,
+					doc => {
+						let val = doc[sortField] || '';
+						return typeof val === 'string' ? val.toLowerCase() : val;
+					},
+					field.reverse ? 'desc' : 'asc'
+				);
+
+				field.pagedDocs = field.docs;
+				$scope.referenceRecords[key].fields[fieldKey] = field;
+				$scope.onPageChange(1, field);
+			};
+
+
+			
+
 		}] //controller
 	};
 }]);
