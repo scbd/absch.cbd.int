@@ -4,7 +4,7 @@ export default ['$scope', '$filter', '$location', 'searchService', 'solr', '$rou
     const redirectToNotification = async () => {
       const query = {
         query: `symbol_s:(${solr.escape($routeParams.id)})`,
-        fields: "id,identifier_s,title_s,acronym_s,reference_s, symbol_s, uniqueIdentifier_s,schema:schema_s"
+        fields: "id,identifier_s, uniqueIdentifier_s"
       };
 
       try {
@@ -13,7 +13,11 @@ export default ['$scope', '$filter', '$location', 'searchService', 'solr', '$rou
 
         if (notification) {
           const uniqueID = await $filter("uniqueID")(notification);
-          $location.path(`/database/NT/${uniqueID}`);
+          if(uniqueID) {
+              $location.path(`/database/NT/${uniqueID}`);
+          } else {
+              $location.path(`/notification/${uniqueID}`);
+          }
         }
       } catch (error) {
         console.error("Error loading notification:", error);
