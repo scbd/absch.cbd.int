@@ -1022,13 +1022,9 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         
                         promises.push(cbdSubjectsCustomFn().then(function( keywords){loopKeywords( keywords);}));
                         promises.push(vlrResourceCustomFn().then(function( keywords){loopKeywords( keywords);}));     
-                        promises.push(thesaurusService.getDomainTerms('aichiTartgetResourceTypes'    ).then(function( keywords){loopKeywords( keywords, 'aichiTartgetResourceTypes'  )}));             
-                        promises.push(thesaurusService.getDomainTerms('aichiTargetGoals'             ).then(function( keywords){loopKeywords( keywords, 'aichiTargetGoals'           )}));
-                        promises.push(thesaurusService.getDomainTerms('aichiTargets'                ).then(function( keywords){loopKeywords( keywords,  'aichiTargets'              )}));                  
                         promises.push(thesaurusService.getDomainTerms('gbfTargets'                  ).then(function( keywords){loopKeywords( keywords,  'gbfTargets'                )})); 
                         promises.push(thesaurusService.getDomainTerms('cbdSubjects'                 ).then(function( keywords){loopKeywords( keywords,  'cbdSubjects'               )}));                  
                         promises.push(thesaurusService.getDomainTerms('organizationTypes'           ).then(function( keywords){loopKeywords( keywords, 'organizationTypes'         )}));   
-                        promises.push(thesaurusService.getDomainTerms('aichiTargetsComponents'     ).then(function( keywords){loopKeywords( keywords, 'aichiTargetsComponents'   )})); 
                         promises.push(thesaurusService.getDomainTerms( 'adequacyMonitoring'    ).then(function( keywords){loopKeywords( keywords, 'adequacyMonitoring'   )}));  
                         promises.push(thesaurusService.getDomainTerms( 'geographicScope'       ).then(function( keywords){loopKeywords( keywords, 'geographicScope'      )}));
                         promises.push(thesaurusService.getDomainTerms( 'absKeyAreas'           ).then(function( keywords){loopKeywords( keywords, 'absKeyAreas'          )}));                                          
