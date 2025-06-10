@@ -182,7 +182,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
           TW : 'CN', //Taiwan
         };
         if(realm.is('CHM')){ 
-          exceptionRegionColorMapping = { GL: 'DK', ...exceptionRegionColorMapping };
+          exceptionRegionColorMapping.GL= 'DK';
         }
         $scope.options = {lmo:'all'};
         $scope.self = $scope;

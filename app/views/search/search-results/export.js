@@ -12,6 +12,9 @@ export const exportRecords = async(options, realm, searchService, searchResult, 
         else if(realm.is('BCH')){
             downloadSchemas = (await import('~/app-data/bch/download-schemas')).downloadSchemas;
         }
+        else if(realm.is('CHM')){
+            downloadSchemas = (await import('~/app-data/chm/download-schemas')).downloadSchemas;
+        }
     }
 
     if(options.listType == 'initial'){

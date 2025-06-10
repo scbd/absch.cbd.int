@@ -165,6 +165,7 @@ app.directive("viewReferencedRecords", [function () {
 
 				field.pagedDocs = field.docs;
 				$scope.referenceRecords[key].fields[fieldKey] = field;
+				$scope.onPageChange(1, field);
 			};
 
 
