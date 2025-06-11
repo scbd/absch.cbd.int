@@ -48,8 +48,8 @@ app.directive('resultDefault', ["$timeout", "translationService", 'realm', "$fil
 
                 $scope.recordUrl = function(doc){
 
-                    if(!canShowInline($scope.doc)){
-                        return doc.url_ss[0];
+                    if(!canShowInline(doc) && doc.url_ss?.length){
+                        return doc?.url_ss?.[0];
                     }
 
                     const shortCode = $filter("schemaShortName")(doc.schema_s);
@@ -58,6 +58,8 @@ app.directive('resultDefault', ["$timeout", "translationService", 'realm', "$fil
 
                 function canShowInline(doc){
 
+                    if(!doc?.url_ss?.length)
+                        return true;
                     //TODO need logic when there will be multiple urls
                     const url = doc.url_ss[0];
 

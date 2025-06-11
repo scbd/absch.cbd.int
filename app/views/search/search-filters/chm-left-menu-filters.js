@@ -70,12 +70,6 @@ export const chmLeftMenuFilters = {
 			"field": "resourceLinksLanguage_ss"
 		},
 		{
-			"type": "thesaurus",
-			"term": "aichiTargets",
-			"title": chmFilters.aichiTargets,
-			"field": "aichiTargets_ss"
-		},
-		{
 			"type": "customListFn",
 			"fn": "cbdSubjectsCustomFn",
 			"title": chmFilters.cbdSubjectAreas,
