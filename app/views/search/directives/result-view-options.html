@@ -108,8 +108,8 @@
                     </div>
                     <div ng-if="selectedFields.length">  
                         <div>{{::('resultViewOptionsT.groupBy'|$translate)}} </div>
-                        <ul class="pagination">                         
-                            <li ng-repeat-start="selected in selectedFields track by $index">                                                             
+                        <ul class="pagination">
+                                <li ng-repeat-start="selected in selectedFields track by selected.field">                                                          
                                 <span ng-include="'groupByFields'" onload="field=selected.field"></span>
                             </li>
                             <li ng-repeat-end>
