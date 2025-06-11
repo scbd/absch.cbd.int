@@ -33,5 +33,9 @@
     "loading": "Loading...",
     "edit": "Edit",
     "delete": "Delete",
-    "comparisonRecordNotFound" : "The version of the record to compare was not found."
+    "comparisonRecordNotFound" : "The version of the record to compare was not found.",
+    "referencePurposesOnly": "Information displayed is for reference purposes only.",
+    "click": "Click",
+    "hereClick": "here",
+    "toShowRecord": "to show the record."
 }
