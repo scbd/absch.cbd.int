@@ -7,7 +7,7 @@
     <div class="col" v-for="record in recordList.slice(0,4)" :key="record">
       <div class="d-flex position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
         <div v-if="record.covers_ss" class="me-2 flex-shrink-0">
-          <km-attachment-preview :url="record.covers_ss[0]" :width="80" :height="96"/>
+          <km-attachment-preview :url="record.covers_ss[0]" :width="68" :height="96"/>
         </div> 
         <div class="flex-grow-1"> 
           <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
@@ -29,7 +29,7 @@
     <div class="col" v-for="record in recordList.slice(4,8)" :key="record">
       <div class="d-flex position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
         <div v-if="record.covers_ss" class="me-2 flex-shrink-0">
-          <km-attachment-preview :url="record.covers_ss[0]" :width="80" :height="96"/>
+          <km-attachment-preview :url="record.covers_ss[0]" :width="68" :height="96"/>
         </div>
         <div class="flex-grow-1">
           <span class="badge position-absolute top-0 end-0 date-badge">{{ formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
