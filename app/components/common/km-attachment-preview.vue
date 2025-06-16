@@ -7,8 +7,8 @@
 
   const props = defineProps({
     url: { type: String, required: true },
-    width: { type: [Number, String], default: 80 },
-    height: { type: [Number, String], default: 90 },
+    width: { type: [Number, String], default: 68 },
+    height: { type: [Number, String], default: 96 },
     altText: { type: String, default: '' }
   });
 
