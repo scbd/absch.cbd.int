@@ -54,5 +54,6 @@
     "relevantDocumentsInfo": "Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download",
     "notes": "Notes",
     "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.",
-    "gbfTargets":"Kunming-Montreal Global Biodiversity Framework Target(s)" 
+    "gbfTargets":"Kunming-Montreal Global Biodiversity Framework Target(s)",
+    "aspectRatioHelp": "For best results and to avoid distortion of cover images in search results, please upload an image with an aspect ratio of approximately to 8.5:11 (standard Letter or A4 proportions)"
 }
