@@ -27,8 +27,9 @@
     try {
       const parsedUrl = new URL(props.url, window.location.origin);
       const params = new URLSearchParams(parsedUrl.search);
-      params.set('width', props.width);
-      params.set('height', props.height);
+      // not sure, why these params are not now working.
+      // params.set('width', props.width);
+      // params.set('height', props.height);
       parsedUrl.search = params.toString();
       return encodeURI(parsedUrl.toString());
     } catch (error) {
