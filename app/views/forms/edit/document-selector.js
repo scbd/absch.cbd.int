@@ -10,6 +10,7 @@ import documentSelectorT from '~/app-text/views/forms/edit/document-selector.jso
 import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
 import {Tooltip} from 'bootstrap';
 import KmDocumentApi from "~/api/km-document";
+const DOCUMENT_SIZE_KEY = 'storedDocumentPageSize';
 
 app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm','apiToken',
     function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm, apiToken) {
@@ -416,8 +417,14 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
                     $scope.searchResult.currentPage = rawQuery.currentPage;
-                if(rawQuery.rowsPerPage)
-                    $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+
+                const cachedPageSizeOption = localStorage.getItem(DOCUMENT_SIZE_KEY);
+                if (cachedPageSizeOption) { 
+                $scope.searchResult.rowsPerPage = parseInt(cachedPageSizeOption, 10);
+                } else if (rawQuery.rowsPerPage) { 
+                $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+                localStorage.setItem(DOCUMENT_SIZE_KEY, rawQuery.rowsPerPage);
+                } 
 
                 var queryParameters = {
                     fields        : rawQuery.fields,
@@ -545,6 +552,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             $scope.onPageSizeChanged = function(size){
                 $scope.searchResult.rowsPerPage = size;
                 $scope.searchResult.currentPage = 1;
+                localStorage.setItem(DOCUMENT_SIZE_KEY, size);
                 getDocs();
             }
 
