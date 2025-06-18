@@ -42,8 +42,9 @@
                     <option ng-value="25">{{::('numbers.twentyFive'|$translate)}}</option>
                     <option ng-value="50">{{::('numbers.fifty'|$translate)}}</option>
                     <option ng-value="100">{{::('numbers.oneHundred'|$translate)}}</option>
-                    <option ng-value="200">{{::('numbers.towHundred'|$translate)}}</option>
-                    <option ng-value="300">{{::('numbers.threeHundred'|$translate)}}</option>
+                    <option ng-if="!allRecordsKey" ng-value="200">{{::('numbers.towHundred'|$translate)}}</option>
+                    <option ng-if="!allRecordsKey" ng-value="300">{{::('numbers.threeHundred'|$translate)}}</option>
+                    <option ng-if="allRecordsKey" ng-value="10000">{{::('paginationT.all'|$translate)}}</option>
                 </select>
             </a>
         </li>
