@@ -30,7 +30,12 @@
         <div class="d-flex justify-content-center">
             <pagination  class="text-center mt-3" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
-                num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
+                num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)" allowed-options="[
+                { value: 25, label: '25' },
+                { value: 50, label: '50' },
+                { value: 100, label: '100' },
+                { value: 200, label: '200' },
+                { value: 300, label: '300' }]"></pagination> 
         </div>            
         <div ng-if="loading" class="w-100 ">
             <i class="fa fa-spin fa-spinner m-auto"></i> {{::('viewResultT.loading'|$translate)}}
@@ -43,7 +48,12 @@
         <div class="d-flex justify-content-center">
             <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
-                num-found="searchResult.numFound"></pagination> 
+                num-found="searchResult.numFound" allowed-options="[
+                { value: 25, label: '25' },
+                { value: 50, label: '50' },
+                { value: 100, label: '100' },
+                { value: 200, label: '200' },
+                { value: 300, label: '300' }]"></pagination> 
         </div>        
     </div>
 

@@ -14,20 +14,12 @@ app.directive('pagination', ['$location', 'translationService',
                 onPageChange: '&',
                 pageSize    : '=',
                 numFound    : '=',
-                onPageSizeChanged: '&?'
+                onPageSizeChanged: '&?',
+                allowedOptions: '=?'
             },
             link: function ($scope, $element, $attr) {
                 translationService.set('paginationT', paginationT);
                 translationService.set('numbers', numbers);
-                $scope.allRecordsKey = $attr.storageKey || '';
-                // get from localStorage
-                const allRecordsValue = localStorage.getItem($scope.allRecordsKey);
-                if (allRecordsValue) { // means all
-                    $scope.pageSize = parseInt(allRecordsValue, 10); 
-                    if ($scope.onPageSizeChanged) {
-                        $scope.onPageSizeChanged({ size: $scope.pageSize });
-                    }
-                }
                 $scope.range = function (start, end) {
                     if(end<1)
                         return
@@ -63,20 +55,9 @@ app.directive('pagination', ['$location', 'translationService',
                         return;
                     $scope.onPageChange({
                         page: n
-                     });                   
-                };
-                // move to the all parent's onPageSizeChanged if watch is not required.
-                $scope.$watch('pageSize', function (newVal) {
-                    if (newVal && $scope.allRecordsKey) {
-                        if (newVal===10000)  // 10000 means all records.
-                            localStorage.setItem($scope.allRecordsKey, newVal);
-                          else 
-                          localStorage.setItem($scope.allRecordsKey, '');
-                    } 
-                });
+                    });                   
+                }
+
             }
-            
         }
     }])
-
-

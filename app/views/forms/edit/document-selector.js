@@ -10,6 +10,7 @@ import documentSelectorT from '~/app-text/views/forms/edit/document-selector.jso
 import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
 import {Tooltip} from 'bootstrap';
 import KmDocumentApi from "~/api/km-document";
+const DOCUMNET_SIZE_KEY = 'showAllDocumentRecordsKey';
 
 app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm','apiToken',
     function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm, apiToken) {
@@ -416,8 +417,15 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
                     $scope.searchResult.currentPage = rawQuery.currentPage;
-                if(rawQuery.rowsPerPage)
-                    $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+                // if(rawQuery.rowsPerPage)
+                //     $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+                const storedValue = localStorage.getItem(DOCUMNET_SIZE_KEY);
+                if (storedValue) { 
+                $scope.searchResult.rowsPerPage = parseInt(storedValue, 10);
+                } else if (rawQuery.rowsPerPage) { 
+                $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+                localStorage.setItem(DOCUMNET_SIZE_KEY, rawQuery.rowsPerPage); // Optional: cache it
+                } 
 
                 var queryParameters = {
                     fields        : rawQuery.fields,
@@ -545,6 +553,8 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             $scope.onPageSizeChanged = function(size){
                 $scope.searchResult.rowsPerPage = size;
                 $scope.searchResult.currentPage = 1;
+                console.log("document selector size", size); 
+                localStorage.setItem('showAllDocumentRecordsKey', size);
                 getDocs();
             }
 
