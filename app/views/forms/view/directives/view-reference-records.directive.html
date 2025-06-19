@@ -44,7 +44,12 @@
                                     <div class="d-flex justify-content-center">
                                         <pagination  class="text-center top-pagination" current-page="field.currentPage" ng-if="field.docs.length > 25"
                                             page-count="field.pageCount" on-page-change="onPageChange(page, field)" page-size="field.pageSize"
-                                            num-found="field.docs.length" on-page-size-changed="onPageSizeChanged(size, field)"></pagination> 
+                                            num-found="field.docs.length" on-page-size-changed="onPageSizeChanged(size, field)"
+                                            allowed-options="[{ value: 25, label: '25' },
+                                                        { value: 50, label: '50' },
+                                                        { value: 100, label: '100' },
+                                                        { value: 10000, label: 'All' }]">
+                                        </pagination> 
                                     </div>
                                 </td>
                             </tr>

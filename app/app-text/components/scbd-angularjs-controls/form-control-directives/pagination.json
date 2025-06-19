@@ -5,5 +5,6 @@
     "first": "First",
     "last": "Last",
     "prev": "Prev",
-    "itemsPerPage": "Items per page"
+    "itemsPerPage": "Items per page",
+    "all": "All"
 }

@@ -46,7 +46,13 @@
     </div>  
     <div class="d-flex aligns-items-center text-center justify-content-center" >
         <pagination ng-if="itemCount > itemsPerPage" num-found="itemCount" 
-            page-size="itemsPerPage" current-page="currentPage" page-count="pageCount" on-page-change="onPageChange(page)" on-page-size-changed="onPageSizeChanged(itemsPerPage)">
+            page-size="itemsPerPage" current-page="currentPage" page-count="pageCount" on-page-change="onPageChange(page)" on-page-size-changed="onPageSizeChanged(itemsPerPage)"
+            allowed-options="[
+                { value: 25, label: '25' },
+                { value: 50, label: '50' },
+                { value: 100, label: '100' },
+                { value: 200, label: '200' },
+                { value: 300, label: '300' }]">
         </pagination> 
     </div>
         <div class="row"  ng-if="articles">

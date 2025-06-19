@@ -14,7 +14,8 @@ app.directive('pagination', ['$location', 'translationService',
                 onPageChange: '&',
                 pageSize    : '=',
                 numFound    : '=',
-                onPageSizeChanged: '&?'
+                onPageSizeChanged: '&?',
+                allowedOptions: '=?'
             },
             link: function ($scope, $element, $attr) {
                 translationService.set('paginationT', paginationT);
@@ -60,5 +61,3 @@ app.directive('pagination', ['$location', 'translationService',
             }
         }
     }])
-
-
