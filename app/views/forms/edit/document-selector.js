@@ -424,7 +424,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 $scope.searchResult.rowsPerPage = parseInt(storedValue, 10);
                 } else if (rawQuery.rowsPerPage) { 
                 $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
-                localStorage.setItem(DOCUMNET_SIZE_KEY, rawQuery.rowsPerPage); // Optional: cache it
+                localStorage.setItem(DOCUMNET_SIZE_KEY, rawQuery.rowsPerPage);
                 } 
 
                 var queryParameters = {
@@ -553,7 +553,6 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             $scope.onPageSizeChanged = function(size){
                 $scope.searchResult.rowsPerPage = size;
                 $scope.searchResult.currentPage = 1;
-                console.log("document selector size", size); 
                 localStorage.setItem('showAllDocumentRecordsKey', size);
                 getDocs();
             }
