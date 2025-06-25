@@ -126,14 +126,21 @@ app.directive("viewReferencedRecords", [function () {
 				field.currentPage = pageNumber
 				field.pagedDocs = field.docs.filter((e,i)=>i >= field.pageSize * (pageNumber-1) && i< field.pageSize * pageNumber);
 			}
-			$scope.onPageSizeChanged = function(size, field){
-				field.currentPage = 1;
-				field.pageSize = size;
-				console.log("showAllReferenceRecordsKey selector size", size);
-  				localStorage.setItem(REFERENCE_RECORD_KEY, size);
-				field.pageCount = Math.ceil(field.docs.length / size);
-				field.pagedDocs = field.docs.filter((e,i)=>i<size);
-			}
+			$scope.onPageSizeChanged = function(size) {
+				
+				localStorage.setItem(REFERENCE_RECORD_KEY, size);
+			
+				// Apply to all show and hide all records
+				angular.forEach($scope.referenceRecords, (record) => {
+					angular.forEach(record.fields, (field) => {
+						field.pageSize = size;
+						field.currentPage = 1;
+						field.pageCount = Math.ceil(field.docs.length / size);
+						field.pagedDocs = field.docs.slice(0, size);
+					});
+				});
+			};
+			
 			// --------------------------------------------------------------
 			// -----------------------------------------------------------------
 			$scope.encode = function(query){
