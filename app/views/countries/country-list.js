@@ -164,10 +164,17 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 return '';
             }
             //*************************************************************************************************************************************
-            $scope.setPartyFilter = function (pfilter) {
-                $location.search('status', pfilter);
+            $scope.setPartyFilter = function(pfilter) {
+                let currentPath = $location.path(); // e.g countries/status/party
+                const statusRegex = /\/countries(\/status\/[^\/]*)?/;
+                // Replace or insert /status/{pfilter}
+                const newPath = currentPath.match(statusRegex)
+                    ? currentPath.replace(/(\/countries)(\/status\/[^\/]*)?/, `$1/status/${pfilter}`)
+                    : currentPath + `/status/${pfilter}`;
+
+                $location.path(newPath);
                 $scope.partyFilter = pfilter;
-                 $scope.filterCountries;
+                $scope.filterCountries;
             };
 
             if ($routeParams.status) {
