@@ -20,7 +20,7 @@
   "authorityIsResponsibleForAll":"CNAs that have issued at least one permit, or its equivalent, referenced in an IRCC or CPC record",
   "measureLegalStatus":"Legal status",
   "typeOfDocuments":"Type of document/measure",
-  "measureEntryIntoForce":"Date of the decision",
+  "measureEntryIntoForce":"Date of entry into force",
   "measureDateOfAdoption":"Date of adoption",
   "ScopeOfMeasure": "Scope of application of the measure",
   "measureDateOfRetired":"Date measure no longer applicable",
