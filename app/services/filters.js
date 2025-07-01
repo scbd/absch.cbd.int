@@ -48,7 +48,7 @@ const realmApi = new RealmApi({ tokenReader: () => undefined });
     		    if(cacheMap[term.identifier])
     			     return cacheMap[term.identifier] ;
 			
-                document = storage.documents.get(term.identifier, { info:"", 'include-deleted':true});
+                document = storage.documents.get(term.identifier, { info:true, 'include-deleted':true});
 
             }
             else if(term && angular.isObject(term)){
