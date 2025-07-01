@@ -61,22 +61,23 @@ app.directive('resultDefault', ["$timeout", "translationService", 'realm', "$fil
                     if(!doc?.url_ss?.length)
                         return true;
                     //TODO need logic when there will be multiple urls
-                    const url = doc.url_ss[0];
+                    if(doc?.url_ss) {
+                        const url = doc.url_ss[0];
 
-                    if(url.startsWith('http')){
-                        if(doc.schema_s == 'decision')
-                            return false;
+                        if(url.startsWith('http')){
+                            if(doc.schema_s == 'decision')
+                                return false;
 
-                        // ALL SCBD records should open inline
-                        const realmSchema = realm.schemas[doc.schema_s];
-                        if(realmSchema?.type == 'scbd')
-                            return true;
+                            // ALL SCBD records should open inline
+                            const realmSchema = realm.schemas[doc.schema_s];
+                            if(realmSchema?.type == 'scbd')
+                                return true;
 
-                        //this logic currently only applies to reference records. BCH/ABS records are displayed in CHM search.
-                        if(realmSchema?.type == 'reference')
-                            return doc.realm_ss && doc.uniqueIdentifier_s?.toUpperCase()?.startsWith(realm.uIdPrefix);
+                            //this logic currently only applies to reference records. BCH/ABS records are displayed in CHM search.
+                            if(realmSchema?.type == 'reference')
+                                return doc.realm_ss && doc.uniqueIdentifier_s?.toUpperCase()?.startsWith(realm.uIdPrefix);
+                        }
                     }
-                    
                     return true;
 
                 }   
