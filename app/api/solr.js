@@ -5,6 +5,7 @@ export default class SolrApi extends ApiBase
     constructor(options) {
         super(options);
     }
+    //ToDo: rename to postQuery as we can't use two methods with the same name
     async query(params){
   
       const tags = await this.http.post(`api/v2013/index/select`, params)
@@ -43,6 +44,21 @@ export default class SolrApi extends ApiBase
       }
   
       return fields;
+    }
+
+    async getOwnerRealm(identifier){
+
+        var queryListParameters = {
+            fq    : ["_state_s:public", "realm_ss:*"],
+            q     : `identifier_s:${identifier}`,
+            fl    : 'ownerRealm_s'
+        };
+
+        return this.http.post(`api/v2013/index/select`, queryListParameters)
+               .then(response => {
+                  return response?.data?.response?.docs?.[0]?.ownerRealm_s;
+                })  
+                .catch(tryCastToApiError);
     }
   
 }

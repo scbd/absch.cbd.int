@@ -7,6 +7,7 @@ import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/se
 import { sleep } from '~/services/composables/utils.js';
 import { ERRORS } from '~/constants/km-document.js';
 import RealmApi from '~/api/realms';
+import SolrApi from "~/api/solr.js";
 
 app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm',
 	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm,) {
@@ -143,7 +144,8 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 								if (error.data?.message === ERRORS.NOT_FOUND_IN_REALM) {
 									const identifierWithoutRevision = documentIdWithoutRevision(identifier);
 									const realmApi   = new RealmApi();
-									const ownerRealm = await realmApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
+									const solrApi   = new SolrApi();
+									const ownerRealm = await solrApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
 									const isSameEnvironment = await realmApi.validateRealmEnvironment(ownerRealm, realm.realm, realm.environment);
 									if(isSameEnvironment){
 										return loadReferenceDocument(identifier, cacheBuster, ownerRealm, true);
