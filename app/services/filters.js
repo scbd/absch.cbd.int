@@ -47,8 +47,8 @@ const realmApi = new RealmApi({ tokenReader: () => undefined });
                 term = { identifier : term };
     		    if(cacheMap[term.identifier])
     			     return cacheMap[term.identifier] ;
-				//'include-deleted':true,
-                document = storage.documents.get(term.identifier, { info:""});
+			
+                document = storage.documents.get(term.identifier, { info:true, 'include-deleted':true});
 
             }
             else if(term && angular.isObject(term)){
@@ -141,8 +141,8 @@ const realmApi = new RealmApi({ tokenReader: () => undefined });
                 if( document.revision)
 					unique = unique + '-' + document.revision;
 
-				if(isDeletedRecord)
-					unique = '[DELETED] ' + unique;
+				//if(isDeletedRecord)
+				//	unique = '[DELETED] ' + unique;
 					
 				cacheMap[term.identifier] = unique;
 
