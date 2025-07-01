@@ -41,7 +41,7 @@
 
         	     <div ng-show="document.relatedIRCCs">
 					<label>{{::('viewAbsPermitT.referenceNumber'|$translate)}}</label>
-					<div class="km-value" compare-val>
+					<div compare-val>
 						<ul class="list">
 							<li ng-repeat="item in document.relatedIRCCs">
                             <div view-record-reference ng-model="item" locale="locale"></div>
@@ -60,7 +60,7 @@
 
 			<div ng-show="document.absCNA">
 				<label>{{::('viewAbsPermitT.issuingAuthorityResponsible'|$translate)}}</label>
-				<div class="km-value" compare-val>
+				<div compare-val>
 					<div view-record-reference ng-model="document.absCNA" locale="locale"></div>
 				</div>
 			</div>
@@ -117,7 +117,7 @@
 					<label>{{::('viewAbsPermitT.theProviderInfo'|$translate)}}</span>
 					</label>
 				<div compare-val>
-					<div class="km-value" ng-show="!document.providersConfidential" ng-repeat="provider in document.providers">
+					<div ng-show="!document.providersConfidential" ng-repeat="provider in document.providers">
 						<div view-record-reference ng-model="provider" locale="locale"></div>
 					</div>
 				</div>
@@ -131,7 +131,7 @@
 				<div ng-show="document.entitiesToWhomPICGranted || document.entitiesToWhomPICGrantedConfidential">
 					<label>{{::('viewAbsPermitT.personEntity'|$translate)}}</label>
 					<div compare-val="entitiesToWhomPICGranted">
-						<div class="km-value" ng-repeat="consent in document.entitiesToWhomPICGranted" ng-show="!document.entitiesToWhomPICGrantedConfidential">
+						<div ng-repeat="consent in document.entitiesToWhomPICGranted" ng-show="!document.entitiesToWhomPICGrantedConfidential">
 			                 <div view-record-reference ng-model="consent" locale="locale"></div>
 						</div>
 					</div>
