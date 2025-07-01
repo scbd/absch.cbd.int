@@ -13,9 +13,9 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
     export { default as template } from './country-list.html';
 
   export default ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
-    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService', 'translationService', '$filter',
+    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService', 'translationService', '$filter','$route',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $sce, $routeParams, $compile, 
-            $timeout, locale, realm, ngMeta, joyrideService, translationService, $filter) {
+            $timeout, locale, realm, ngMeta, joyrideService, translationService, $filter,$route) {
             var regionRelations = {};            
             $scope.isBCH        = realm.is('BCH');
             $scope.isABS        = realm.is('ABS');
@@ -165,14 +165,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             }
             //*************************************************************************************************************************************
             $scope.setPartyFilter = function(pfilter) {
-                let currentPath = $location.path(); // e.g countries/status/party
-                const statusRegex = /\/countries(\/status\/[^\/]*)?/;
-                // Replace or insert /status/{pfilter}
-                const newPath = currentPath.match(statusRegex)
-                    ? currentPath.replace(/(\/countries)(\/status\/[^\/]*)?/, `$1/status/${pfilter}`)
-                    : currentPath + `/status/${pfilter}`;
-
-                $location.path(newPath);
+                $route.updateParams({status:pfilter})
                 $scope.partyFilter = pfilter;
                 $scope.filterCountries;
             };
