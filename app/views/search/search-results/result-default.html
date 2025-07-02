@@ -93,8 +93,7 @@
                         <span ng-bind="doc.rec_meta5[0]"></span>
                     </li>
                     <li ng-if="::doc.schema_s !=='meeting'">
-                        <span class="last-span" ng-if="::type!='scbd'" ng-bind="::doc.rec_date | formatDate"></span>
-                        <span class="last-span" ng-if="::type=='scbd'" ng-bind="::doc.rec_creationDate | formatDate"></span>
+                        <span class="last-span" ng-bind="::doc.rec_date | formatDate"></span>
                     </li>
                      <li ng-if="::doc.schema_s =='meeting'">
                         <span class="last-span">
