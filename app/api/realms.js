@@ -1,8 +1,10 @@
 import ApiBase, { tryCastToApiError, stringifyUrlParams } from './api-base';
+import SolrApi from './solr';
 export default class RealmsApi extends ApiBase
 {
   constructor(options) {
     super(options);
+    this.solrApi = new SolrApi({});
   }
 
   async getRealmConfigurations(realmEnvironment)  {
@@ -26,6 +28,18 @@ export default class RealmsApi extends ApiBase
                     return res.data[0]
                 })  
                .catch(tryCastToApiError);
+  }
+
+  async getOwnerRealm(identifier){
+
+    var solrQuery = {
+      fieldQueries: ["_state_s:public", "realm_ss:*"],
+      query       : `identifier_s:${identifier}`,
+      fields      : 'ownerRealm_s'
+    };
+
+    const data = await this.solrApi.query(solrQuery);
+    return data?.response.docs?.[0]?.ownerRealm_s;
   }
 
 }

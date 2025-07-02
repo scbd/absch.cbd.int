@@ -5,9 +5,11 @@ import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
 import { sleep } from '~/services/composables/utils.js';
+import { API_ERRORS } from '~/constants/km-document.js';
+import RealmsApi from '~/api/realms';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr',
-	 function (storage, $timeout, translationService, $rootScope, searchService, solr) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm',
+	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm,) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -23,7 +25,10 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 			onDocumentLoadFn: '&onDocumentLoad'
 		},
 		link:function($scope, $element, $attr){
+			
 			translationService.set('viewRecordReferenceT', viewRecordReferenceT);
+
+			const realmsApi   = new RealmsApi();
 
 			$scope.self = $scope;
 			$scope.hideSchema = $attr.hideSchema=='true'
@@ -97,7 +102,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				return latestRevisionIdentifier;
 			}
 
-			function loadReferenceDocument(identifier, cacheBuster){
+			function loadReferenceDocument(identifier, cacheBuster, otherRealm) {
 				
 				//cacheBuster used only to bust cache for contactOrganization reference.
 
@@ -105,6 +110,8 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				var focalPointRegex = /^52000000cbd022/;
 				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
 					headers = { realm:undefined }
+				if(otherRealm)
+					headers = { realm:otherRealm }
 					
 				return storage.documents.get(identifier, { info : true, 'include-deleted':true}, {headers})
 						.then(function(result){
@@ -131,12 +138,25 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 							}
 							return result.data;
 						})
-						.catch(function(error, code){
-							if (error.status == 404) {
+						.catch(async function(error, code){
+							if (error.status === 404 && !otherRealm) {
+								
+								// Execute the logic when this error is raised
+								if (error.data?.message === API_ERRORS.NOT_FOUND_IN_REALM) {
+									console.log(error)
+									const identifierWithoutRevision = documentIdWithoutRevision(identifier);
+									const ownerRealm                = await realmsApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
+									const isSameEnvironment         = await compareRealmEnvironment(ownerRealm, realm.realm, realm.environment);
+									if(isSameEnvironment){
+										return loadReferenceDocument(identifier, cacheBuster, ownerRealm);
+									}
+								}
+
 								return loadDraftDocument(identifier);
-							};
+							}
 						});
 			}
+
 
 			function loadDraftDocument(identifier, count){
 				return storage.drafts.get(identifier, { info : true, body:true})
@@ -180,6 +200,17 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				return false;
 			};
 
+			async function compareRealmEnvironment(ownerRealm, currentRealm, currentEnvironment) {
+				if (ownerRealm && currentRealm && currentEnvironment) {
+					// Get the owner realm configuration
+					const ownerRealmConfig = await realmsApi.getRealmConfiguration(ownerRealm);
+					const ownerEnvironment = ownerRealmConfig.environment;
+					// Verify if the owner realm has different name and same environment
+					return ownerRealm.toUpperCase() !== currentRealm.toUpperCase() && ownerEnvironment === currentEnvironment;
+				}
+				return false;
+			}
+			
 			// if the parent directive finds that there is a latest version of the linked record fetch the latest one
 			// since http calls are cached.
 			$rootScope.$on('evt:updateLinkedRecordRevision', async function(evt, ids){
