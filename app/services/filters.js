@@ -1,4 +1,4 @@
-﻿import app from '~/app';
+import app from '~/app';
 import _ from 'lodash';
 import { scbdSchemas } from '~/components/scbd-angularjs-services/main';
 import './common';
@@ -48,7 +48,7 @@ const realmApi = new RealmApi({ tokenReader: () => undefined });
     		    if(cacheMap[term.identifier])
     			     return cacheMap[term.identifier] ;
 			
-                document = storage.documents.get(term.identifier, { info:"", 'include-deleted':true});
+                document = storage.documents.get(term.identifier, { info:true, 'include-deleted':true});
 
             }
             else if(term && angular.isObject(term)){

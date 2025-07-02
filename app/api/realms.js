@@ -1,8 +1,10 @@
 import ApiBase, { tryCastToApiError, stringifyUrlParams } from './api-base';
+import SolrApi from './solr';
 export default class RealmsApi extends ApiBase
 {
   constructor(options) {
     super(options);
+    this.solrApi = new SolrApi({});
   }
 
   async getRealmConfigurations(realmEnvironment)  {
@@ -30,29 +32,14 @@ export default class RealmsApi extends ApiBase
 
   async getOwnerRealm(identifier){
 
-        var queryListParameters = {
-            fq    : ["_state_s:public", "realm_ss:*"],
-            q     : `identifier_s:${identifier}`,
-            fl    : 'ownerRealm_s'
-        };
+    var solrQuery = {
+      fieldQueries: ["_state_s:public", "realm_ss:*"],
+      query       : `identifier_s:${identifier}`,
+      fields      : 'ownerRealm_s'
+    };
 
-        return this.http.post(`api/v2013/index/select`, queryListParameters)
-               .then(response => {
-                  return response?.data?.response?.docs?.[0].ownerRealm_s;
-                })  
-                .catch(tryCastToApiError);
+    const data = await this.solrApi.query(solrQuery);
+    return data?.response.docs?.[0]?.ownerRealm_s;
   }
 
-  async  validateRealmEnvironment(ownerRealmName, currentRealmName, environment) {
-    if (ownerRealmName && currentRealmName && environment) {
-        // Get the owner realm configuration
-        const ownerRealmConfig = await this.getRealmConfiguration(ownerRealmName);
-        const ownerEnvironment = ownerRealmConfig.environment;
-        // Verify if the owner realm has different name and same environment
-        if (ownerRealmName && ownerRealmName !== currentRealmName &&	ownerEnvironment === environment) {
-          return true
-        }
-      }
-      return false
-  }
 }
