@@ -261,7 +261,7 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 						})
 						.finally(function () {
 							$scope.loading = false;
-							$scope.showRecord = $scope.internalDocumentInfo.deletedOn ? false : true;
+							$scope.showRecord = $scope.internalDocumentInfo?.deletedOn ? false : true;
 						})
 
 					};
