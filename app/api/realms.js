@@ -1,10 +1,10 @@
 import ApiBase, { tryCastToApiError, stringifyUrlParams } from './api-base';
-import solrApi from './solr';
+import SolrApi from './solr';
 export default class RealmsApi extends ApiBase
 {
   constructor(options) {
     super(options);
-    this.solrApi = new solrApi({});
+    this.solrApi = new SolrApi({});
   }
 
   async getRealmConfigurations(realmEnvironment)  {
