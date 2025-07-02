@@ -4,14 +4,15 @@ import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import reportAnalyzerT from '~/app-text/views/report-analyzer/analyzer.json';
 
     export { default as template } from './analyzer.html';
-export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translationService',
-    function ($scope, $location, realm, $timeout, $route, translationService) {
+export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translationService', 'thesaurusService',
+    function ($scope, $location, realm, $timeout, $route, translationService, thesaurusService) {
         var appName         = realm.value.replace(/-.*/,'').toLowerCase();
         $scope.showAnalyzer = false;
         $scope.self         = $scope;
         $scope.reportData   = analyzerMapping[appName];
         translationService.set('reportAnalyzerT', reportAnalyzerT);
-        $timeout(function(){
+
+        $timeout(async function(){
 
             delete $scope.selectedReportType;
             delete $scope.selectedQuestions;
@@ -26,7 +27,8 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
             //
             //========================================
             try {
-
+                 console.log('regions')
+                const regions = await thesaurusService.getDomainTerms('regions');
                 var data = $location.search();
 
                 if(data.date) {
@@ -43,7 +45,7 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
                     $scope.selectedQuestions = data.questions.split(',');
     
                 if (data.regions)
-                    $scope.selectedRegions = data.regions.split(',');
+                    $scope.selectedRegions = data.regions.split(',').map(e=>regions.find(r=>r.identifier.startsWith(e))?.identifier);
 
                 $scope.selectedRegionsPreset    = data.regionsPreset;
                 $scope.selectedRegionsPresetFilter    = data.regionsPresetFilter;
@@ -110,14 +112,13 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
                 //Pass query string
                 $location.search({
                     type: $scope.selectedReportType,
-                    regions: $scope.selectedRegions.join(','),
-                    // regions: $scope.selectedRegions.map(id => id.split('-')[0]).join(','), // Extract first part before dash,
-                    questions: $scope.selectedQuestions.join(','),
+                    // regions: $scope.selectedRegions.join(','),
+                    regions: $scope.selectedRegions?.map(id => id.split('-')[0])?.join(','), // Extract first part before dash,
+                    questions: $scope.selectedQuestions?.join(','),
                     regionsPreset: $scope.selectedRegionsPreset,
                     regionsPresetFilter: $scope.selectedRegionsPresetFilter
                 });
         }
-
         //========================================
         //
         //
