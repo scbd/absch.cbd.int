@@ -88,6 +88,12 @@
 
         </div>
 
+        <div class="alert alert-danger" ng-if="workflow.closedOn && workflow.closedOn">
+            {{::('taskIdT.unknownError'|$translate)}}
+            <div ng-if="isAdmin">
+                <a target="_blank" ng-href="{{oasisUrl + '/clearing-house/records/history/'+ workflow.data.identifier}}">Manage this record on oasis</a>
+            </div>
+        </div>
     </div>
 
     <div class="col-xs-12">

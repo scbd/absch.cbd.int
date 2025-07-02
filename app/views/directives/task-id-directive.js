@@ -8,6 +8,7 @@ import '~/views/directives/document-reference-history';
 import '~/services/main';
 import '~/views/directives/block-region-directive';
 import taskIdT from '~/app-text/views/directives/task-id.json';
+import { oasisUrl } from '../../services/composables/utils';
 
 	app.directive('taskId', function () {
         return {
@@ -24,7 +25,8 @@ import taskIdT from '~/app-text/views/directives/task-id.json';
 				"$filter", 'toastr', 'ngDialog', 'localStorageService', "$location", 'roleService', 'translationService',
 				function ($rootScope, $scope,  $route, IStorage, IWorkflows,
 					$filter, toastr, ngDialog, localStorageService, $location, roleService, translationService) {
-					translationService.set('taskIdT', taskIdT);    
+					translationService.set('taskIdT', taskIdT); 
+					$scope.oasisUrl = oasisUrl();   
 					//==================================================
 					//
 					//
