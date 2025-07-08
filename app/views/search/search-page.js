@@ -1,5 +1,4 @@
 import '~/app';
-
 import '~/components/scbd-angularjs-services/main';
 import '~/views/register/user-preferences/user-alerts';
 import '~/views/search/search-directive';
@@ -16,11 +15,8 @@ export default ["$scope", '$sce', 'ngMeta', 'realm', 'locale',
             var url   = realm.baseURL + '/' + locale + '/search'
             ngMeta.setTitle('Search')
             ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
-
-            $scope.excludeSchemas = '';
-
-            if(realm.is('BCH') || realm.is('ABS'))
-                $scope.excludeSchemas = 'submission';
+            
+            $scope.excludeSchemas = 'submission';
         }
     ];
 
