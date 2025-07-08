@@ -7,7 +7,7 @@ import '~/views/forms/view/bch/icons';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import viewReferenceRecordsT from '~/app-text/views/forms/view/directives/view-reference-records.json';
 import { getFieldName } from '~/services/getFieldName';
-
+const REFERENCE_RECORD_KEY  = 'storedReferencePageSize';
 app.directive("viewReferencedRecords", [function () {
 	return {
 		restrict: "EA",
@@ -66,13 +66,17 @@ app.directive("viewReferencedRecords", [function () {
 									let fieldInfo = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
 									fieldInfo.docs.push(record);
 
+									const cachedPageSizeOption = localStorage.getItem(REFERENCE_RECORD_KEY);
+ 
+									const effectiveRowsPerPage = cachedPageSizeOption
+									? parseInt(cachedPageSizeOption, 10) : 25;
 									fieldInfo = {
 										...fieldInfo,
 										count : fieldInfo.count+1,
-										pageSize : 25,
+										pageSize    : effectiveRowsPerPage,
 										currentPage : 1,
-										pageCount : Math.ceil(fieldInfo.docs.length / 25),
-										pagedDocs : fieldInfo.docs.filter((e,i)=>i<25)
+										pageCount : Math.ceil(fieldInfo.docs.length / effectiveRowsPerPage),
+										pagedDocs : fieldInfo.docs.filter((e, i) => i < effectiveRowsPerPage)
 									}
 
 									$scope.referenceRecords[record.schemaCode].fields[info.field] = fieldInfo;
@@ -122,12 +126,21 @@ app.directive("viewReferencedRecords", [function () {
 				field.currentPage = pageNumber
 				field.pagedDocs = field.docs.filter((e,i)=>i >= field.pageSize * (pageNumber-1) && i< field.pageSize * pageNumber);
 			}
-			$scope.onPageSizeChanged = function(size, field){
-				field.currentPage = 1;
-				field.pageSize = size;
-				field.pageCount = Math.ceil(field.docs.length / size);
-				field.pagedDocs = field.docs.filter((e,i)=>i<size);
-			}
+			$scope.onPageSizeChanged = function(size) {
+				
+				localStorage.setItem(REFERENCE_RECORD_KEY, size);
+			
+				// Apply to all show and hide all records
+				angular.forEach($scope.referenceRecords, (record) => {
+					angular.forEach(record.fields, (field) => {
+						field.pageSize = size;
+						field.currentPage = 1;
+						field.pageCount = Math.ceil(field.docs.length / size);
+						field.pagedDocs = field.docs.slice(0, size);
+					});
+				});
+			};
+			
 			// --------------------------------------------------------------
 			// -----------------------------------------------------------------
 			$scope.encode = function(query){
