@@ -274,9 +274,9 @@
              <section v-if="hasAssessmentData"> 
                 <legend>{{t("assessment")}}</legend> 
                 <div  v-for="assessment in document.assessments" >      
-                    <div class="card mb-2" v-if="assessment.selected" >
+                    <div class="card mb-2"  >
                     <!-- <div class="card mb-2" v-if="assessment.selected || assessment.level || assessment.justification" > -->
-                        <ul class="list-group list-group-flush" v-if="assessment.selected" >
+                        <ul class="list-group list-group-flush" >
                             <li class="list-group-item bg-light" v-if="assessment.identifier" >                                                                    
                                 <label> {{t(assessment.identifier) }}   
                                     <span v-if="assessment.level"  :class="`${getBgColor(assessment.level)}  badge`" > 
@@ -284,7 +284,7 @@
                                 </label>                           
                             </li>
                             <li class="list-group-item" v-if="assessment.justification">                                                                                
-                                <label>{{ t("justification") }} </label>   
+                                <strong>{{ t("justification") }} </strong>   
                                 <ng v-vue-ng:km-value-ml  :value="assessment.justification" :locales="locale" html ></ng>                        
                             </li>                          
                         </ul>
@@ -345,12 +345,8 @@
   
      });
 
-     const hasAssessmentData = computed(()=>{
-        var result= false;  
-        document.value.assessments.forEach((assessment) => {  
-            result = result ||assessment.selected; 
-        });      
-        return result;
+     const hasAssessmentData = computed(() => {
+            return Array.isArray(document?.value?.assessments) && document?.value?.assessments?.length > 0;
     });
 
     // const approvedByGovernmentOnDate = computed(()=>{
