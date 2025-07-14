@@ -132,6 +132,12 @@ app.directive("editNationalReport", ["$controller", "$http", 'IStorage', '$route
                             }
                         })
                     }
+                    // remove error from list once question is answered
+                   if($scope.validationReport?.errors?.length>0) { 
+                        $scope.validationReport.errors = $scope.validationReport.errors.filter(
+                        (error) =>  error.property !== question.key
+                        );
+                   }
                     ngModelController.$setViewValue(_.pickBy($scope.binding, _.identity), 'change'); //ToDo
                 }
                 $scope.onOptionSelected = function ($element, value, question){
