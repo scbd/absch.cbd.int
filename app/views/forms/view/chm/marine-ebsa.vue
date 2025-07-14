@@ -346,7 +346,7 @@
      });
 
      const hasAssessmentData = computed(() => {
-            return Array.isArray(document?.value?.assessments) && document?.value?.assessments?.length > 0;
+            return document.value?.assessments?.length
     });
 
     // const approvedByGovernmentOnDate = computed(()=>{
