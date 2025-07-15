@@ -45,7 +45,7 @@
                                         <pagination  class="text-center top-pagination" current-page="field.currentPage" ng-if="field.docs.length > 25"
                                             page-count="field.pageCount" on-page-change="onPageChange(page, field)" page-size="field.pageSize"
                                             num-found="field.docs.length" on-page-size-changed="onPageSizeChanged(size, field)"
-                                            included-all="true">
+                                            pagination-options="paginationOptions">
                                         </pagination> 
                                     </div>
                                 </td>

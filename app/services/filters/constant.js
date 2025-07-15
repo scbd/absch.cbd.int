@@ -10,10 +10,14 @@ export const THESAURUS = {
     REPORT_TYPES                      : "2FD0C77B-D30B-42BC-8049-8C62D898A193"  
 }
 
-export const PAGINATION_OPTIONS = [
+export const PAGINATION_OPTIONS_WITH_ALL = [
     { value: 25, label: numbersText.twentyFive },
     { value: 50, label: numbersText.fifty },
-    { value: 100, label: numbersText.oneHundred }];
+    { value: 100, label: numbersText.oneHundred },
+    { value: 10000, label: numbersText.allNumbers }];
 
-export const PAGINATION_OPTIONS_WITH_ALL = [...PAGINATION_OPTIONS, { value: 10000, label: numbersText.allNumbers }];
-export const PAGINATION_OPTIONS_DEFAULT = [...PAGINATION_OPTIONS, { value: 300, label: numbersText.threeHundred }];
+export const PAGINATION_OPTIONS_DEFAULT = [
+    { value: 25, label: numbersText.twentyFive },
+    { value: 50, label: numbersText.fifty },
+    { value: 100, label: numbersText.oneHundred },
+    { value: 300, label: numbersText.threeHundred }];
