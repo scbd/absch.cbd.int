@@ -5,11 +5,11 @@
 		
 
 		<div ng-if="!loading && document && (document.amendmentIntent==1 || showRevokedMessage)" class="alert alert-danger text-center" >
-			<h1>{{::('viewAbsPermitT.revokeCertificate'|$translate)}}</h1>
+			<h1 ng-bind-html="::('viewAbsPermitT.revokeCertificate'|$translate)"></h1>
 		</div>
 
 		<div ng-if="!loading && document && !document.info.isRequest && document.info.revision !== document.info.latestRevision" class="alert alert-danger text-center">
-			<h1>{{::('viewAbsPermitT.updatedCertificate'|$translate)}}</h1>
+			<h1 ng-bind-html="::('viewAbsPermitT.updatedCertificate'|$translate)"></h1>
 			<p> {{::('viewAbsPermitT.SeeAmendmentHistory'|$translate)}}</p>
 		</div>
 
