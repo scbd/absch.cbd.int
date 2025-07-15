@@ -13,9 +13,9 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
     export { default as template } from './country-list.html';
 
   export default ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
-    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService', 'translationService', '$filter',
+    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService', 'translationService', '$filter','$route',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $sce, $routeParams, $compile, 
-            $timeout, locale, realm, ngMeta, joyrideService, translationService, $filter) {
+            $timeout, locale, realm, ngMeta, joyrideService, translationService, $filter,$route) {
             var regionRelations = {};            
             $scope.isBCH        = realm.is('BCH');
             $scope.isABS        = realm.is('ABS');
@@ -164,10 +164,10 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 return '';
             }
             //*************************************************************************************************************************************
-            $scope.setPartyFilter = function (pfilter) {
-                $location.search('status', pfilter);
+            $scope.setPartyFilter = function(pfilter) {
+                $route.updateParams({status:pfilter})
                 $scope.partyFilter = pfilter;
-                 $scope.filterCountries;
+                $scope.filterCountries;
             };
 
             if ($routeParams.status) {
