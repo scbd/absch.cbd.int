@@ -7,7 +7,8 @@ import '~/views/forms/view/bch/icons';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import viewReferenceRecordsT from '~/app-text/views/forms/view/directives/view-reference-records.json';
 import { getFieldName } from '~/services/getFieldName';
-const REFERENCE_RECORD_KEY  = 'storedReferencePageSize';
+import { PAGINATION_OPTIONS_WITH_ALL } from '~/services/filters/constant.js';
+const CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE = 'storedReferencePageSize';
 app.directive("viewReferencedRecords", [function () {
 	return {
 		restrict: "EA",
@@ -24,6 +25,7 @@ app.directive("viewReferencedRecords", [function () {
 		},
 		controller: ["$scope", "solr", '$q', 'searchService', 'realm', 'commonjs', 'translationService', function ($scope, solr, $q, searchService, realm, commonjs, translationService) {
 			translationService.set('viewReferenceRecordsT', viewReferenceRecordsT);
+			$scope.paginationOptions = PAGINATION_OPTIONS_WITH_ALL;
 			$scope.sortField='updatedDate_dt';
 			$scope.sortSequence='desc';
 			$scope.searchResult = {};
@@ -66,7 +68,7 @@ app.directive("viewReferencedRecords", [function () {
 									let fieldInfo = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
 									fieldInfo.docs.push(record);
 
-									const cachedPageSizeOption = localStorage.getItem(REFERENCE_RECORD_KEY);
+									const cachedPageSizeOption = localStorage.getItem(CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE);
  
 									const effectiveRowsPerPage = cachedPageSizeOption
 									? parseInt(cachedPageSizeOption, 10) : 25;
@@ -122,13 +124,12 @@ app.directive("viewReferencedRecords", [function () {
 			}
 
 			$scope.onPageChange = (pageNumber, field)=>{
-				console.log(field.docs)
 				field.currentPage = pageNumber
 				field.pagedDocs = field.docs.filter((e,i)=>i >= field.pageSize * (pageNumber-1) && i< field.pageSize * pageNumber);
 			}
 			$scope.onPageSizeChanged = function(size) {
 				
-				localStorage.setItem(REFERENCE_RECORD_KEY, size);
+				localStorage.setItem(CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE, size);
 			
 				// Apply to all show and hide all records
 				angular.forEach($scope.referenceRecords, (record) => {

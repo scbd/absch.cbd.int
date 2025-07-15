@@ -256,7 +256,7 @@
         <div pagination class="text-center ms-5" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage"
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
-                max-page-count="4" included-all="true">
+                max-page-count="4" pagination-options="paginationOptions">
             </div> 
         </div>
         <div ng-show="!isLoading" class="p-1 mt-3 mb-0 ms-4 pe-0">
@@ -331,7 +331,7 @@
             <div pagination class="text-center ms-5" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage"
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
-                max-page-count="4" included-all="true">
+                max-page-count="4" pagination-options="paginationOptions">
             </div> 
         </div>
     </script>
