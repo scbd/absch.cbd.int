@@ -89,6 +89,14 @@ export const chmLeftMenuFilters = {
 			"title": chmFilters.chmKeyAreas,
 			"field": "chmKeyAreas_ss",
 			"relatedField": "chmKeyAreas_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "gbfTargets",
+			"title": chmFilters.gbfTargets,
+			"field": "gbfTargets_ss",
+			"otherTerm":false, // in edit we don't show other option for gbfTargets
+			"relatedField": "gbfTargets_REL_ss"
 		}
 	],
 	"organization": [{
