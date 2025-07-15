@@ -193,6 +193,7 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                     }
 
                     $scope.saveSchemaFreeText = function (filter, text) {
+                        if(!text) return;
                         if (!filter.selectedItems)
                             filter.selectedItems = {};
                         freeTextKeys++;
