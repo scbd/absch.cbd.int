@@ -12,7 +12,7 @@
           <span v-if="record.rec_summary">{{ record.rec_summary }}</span>
         </p>
         <div style="bottom:5px;" class="w-100 position-absolute">
-          <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
+          <a class="meta-links" :href="searchUrl(record.schema_s)"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
           <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
           <span class="badge text-uppercase record-text-national-country ps-0">{{record.rec_countryName}}</span></a>
           <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
@@ -32,7 +32,7 @@
         </p>
         
         <div class="country-records-sub-options">
-          <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
+          <a class="meta-links" :href="searchUrl(record.schema_s)"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
           <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
           <span class="badge text-uppercase record-text-national-country  ps-0">{{record.rec_countryName}}</span></a>
           <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
@@ -111,7 +111,12 @@
       const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
       const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
       return `database/${shortCode}/${uid}`;
-  }
+  };
+  const searchUrl = (schema) => {
+      return schema === 'submission'
+        ? 'submissions-to-notifications?schema=submission&currentPage=1'
+        : `search?currentPage=1&schema=${encodeURIComponent(schema)}`;
+  };
 </script>
     
 <style scoped>
