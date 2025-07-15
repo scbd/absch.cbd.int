@@ -95,7 +95,7 @@ export const chmLeftMenuFilters = {
 			"term": "gbfTargets",
 			"title": chmFilters.gbfTargets,
 			"field": "gbfTargets_ss",
-			"otherTerm":false, // in edit we don't show other option for gbfTargets
+			"otherTerm":false,
 			"relatedField": "gbfTargets_REL_ss"
 		}
 	],
