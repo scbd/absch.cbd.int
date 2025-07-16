@@ -348,7 +348,12 @@
      const hasAssessmentData = computed(() => {
             return document.value?.assessments?.length
     });
+    const transformedReferenceText = computed(() => {
+        const text = document?.value?.referenceText?.[props.locale]
+        if (!text) return null
 
+        return { [props.locale]: text.replace(/\n/g, '<br>') }
+    })
     // const approvedByGovernmentOnDate = computed(()=>{
     //     if(document?.value?.approvedByGovernmentOn?.identifier?.indexOf('0001')===0)           
     //         return undefined;
