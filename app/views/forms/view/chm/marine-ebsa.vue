@@ -318,6 +318,7 @@
     import kmTerm from '~/components/km/KmTerm.vue';
     import messages from '~/app-text/views/reports/chm/marine-ebsa.json';
     import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js'; 
+    import { lstring } from '~/components/kb/filters';
     import { useI18n } from 'vue-i18n';
     import _  from 'lodash';
     import L from 'leaflet';
@@ -348,12 +349,7 @@
      const hasAssessmentData = computed(() => {
             return document.value?.assessments?.length
     });
-    const transformedReferenceText = computed(() => {
-        const text = document?.value?.referenceText?.[props.locale]
-        if (!text) return null
 
-        return { [props.locale]: text.replace(/\n/g, '<br>') }
-    })
     // const approvedByGovernmentOnDate = computed(()=>{
     //     if(document?.value?.approvedByGovernmentOn?.identifier?.indexOf('0001')===0)           
     //         return undefined;
@@ -367,12 +363,35 @@
     //     else
     //         return document?.value?.recommendedToCopByGovernment?.identifier;        
     // });
-   
+
+    const  transformText = (field) => {
+        if (!field) return null;
+
+        const unsafeHtml = lstring(field || '', props.locale);
+
+        const cleaned = unsafeHtml
+            .replace(/\n\s*<br>/g, '<br>')     // normalize \n<br> to <br>
+            .replace(/<br>\s*\n/g, '<br>')     // normalize <br>\n to <br>
+            .replace(/\n{2,}/g, '\n')          // collapse multiple \n
+            .replace(/\n/g, '<br>');           // final \n → <br>
+
+        return cleaned;
+    }
 
     onMounted(() => {
         if (document?.value?.gisFiles){
             loadShapes(document.value.gisFiles);   
-        }        
+        }      
+        // fix for the issue with '\n' in the text fields
+        const fieldsToTransform = ['referenceText', 'areaConditions', 'areaDescription', 
+                                    'areaIntroducion',  'location', 'referenceText', 'summary', 
+                                    'areaFeatures',  'recommendedToWorkshopByOthers', 'recommendedToAnyByOthers'];
+
+        fieldsToTransform.forEach(field => {
+            if (document.value?.[field]) {
+                document.value[field] = transformText(document.value[field]);
+            }
+        });
     });
     async function loadShapes (fileLinks) {
         const qLayers = fileLinks.map(async (link) => {
