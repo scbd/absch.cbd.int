@@ -535,9 +535,34 @@
         //     }, 1500); 
         // });
 
+        // fix for the issue with '\n' in the text fields
+        const fieldsToTransform = ['referenceText', 'areaConditions', 'areaDescription', 
+                                    'areaIntroducion',  'location', 'summary', 
+                                    'areaFeatures',  'recommendedToWorkshopByOthers', 'recommendedToAnyByOthers'];
+
+        fieldsToTransform.forEach(field => {
+            if (document.value?.[field]) {
+                document.value[field] = transformText(document.value[field]);
+            }
+        });
+
 
         initAssessments();
     });
+    
+    const  transformText = (field) => {
+        if (!field) return null;
+
+        const unsafeHtml = lstring(field || '', props.locale);
+
+        const cleaned = unsafeHtml
+            .replace(/\n\s*<br>/g, '<br>')     // normalize \n<br> to <br>
+            .replace(/<br>\s*\n/g, '<br>')     // normalize <br>\n to <br>
+            .replace(/\n{2,}/g, '\n')          // collapse multiple \n
+            .replace(/\n/g, '<br>');           // final \n → <br>
+
+        return cleaned;
+    }
 
     const initAssessments=()=> {
         document.value.assessments=[
