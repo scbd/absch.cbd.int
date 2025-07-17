@@ -384,7 +384,7 @@
         }      
         // fix for the issue with '\n' in the text fields
         const fieldsToTransform = ['referenceText', 'areaConditions', 'areaDescription', 
-                                    'areaIntroducion',  'location', 'referenceText', 'summary', 
+                                    'areaIntroducion',  'location', 'summary', 
                                     'areaFeatures',  'recommendedToWorkshopByOthers', 'recommendedToAnyByOthers'];
 
         fieldsToTransform.forEach(field => {
