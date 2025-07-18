@@ -16,9 +16,8 @@
 
   const isValid = computed(() => {
     if (!props.url || typeof props.url !== 'string') return false;
-    const cleanUrl = props.url.split('?')[0].split('#')[0];
-    const extension = cleanUrl.split('.').pop()?.toLowerCase();
-    return validImageExtensions.includes(extension);
+    const cleanUrl = props.url.split('?')[0].split('#')[0].toLowerCase();
+    return validImageExtensions.some(ext => cleanUrl.endsWith(ext));
   });
 
   const computedUrl = computed(() => {
@@ -27,9 +26,8 @@
     try {
       const parsedUrl = new URL(props.url, window.location.origin);
       const params = new URLSearchParams(parsedUrl.search);
-      // not sure, why these params are not now working.
-      // params.set('width', props.width);
-      // params.set('height', props.height);
+      params.set('width', props.width);
+      params.set('height', props.height);
       parsedUrl.search = params.toString();
       return encodeURI(parsedUrl.toString());
     } catch (error) {
