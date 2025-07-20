@@ -364,19 +364,25 @@
     //         return document?.value?.recommendedToCopByGovernment?.identifier;        
     // });
 
-    const  transformText = (field) => {
-        if (!field) return null;
+    const transformText = (field) => {
+        if (!field || typeof field !== 'object') return field;
 
-        const unsafeHtml = lstring(field || '', props.locale);
+        const transformed = {};
 
-        const cleaned = unsafeHtml
-            .replace(/\n\s*<br>/g, '<br>')     // normalize \n<br> to <br>
-            .replace(/<br>\s*\n/g, '<br>')     // normalize <br>\n to <br>
-            .replace(/\n{2,}/g, '\n')          // collapse multiple \n
-            .replace(/\n/g, '<br>');           // final \n → <br>
+        for (const [lang, value] of Object.entries(field)) {
+            if (typeof value === 'string') {
+                transformed[lang] = value
+                    .replace(/\n\s*<br>/g, '<br>')     // normalize \n<br> to <br>
+                    .replace(/<br>\s*\n/g, '<br>')     // normalize <br>\n to <br>
+                    .replace(/\n{2,}/g, '\n')          // collapse multiple \n
+                    .replace(/\n/g, '<br>');           // final \n → <br>
+            } else {
+                transformed[lang] = value;
+            }
+        }
 
-        return cleaned;
-    }
+        return transformed;
+    };
 
     onMounted(() => {
         if (document?.value?.gisFiles){
