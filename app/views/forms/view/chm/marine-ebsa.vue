@@ -86,7 +86,7 @@
                 <legend>{{ t("references") }}</legend>                 
                 <div v-if="document.referenceText">
                     <label>{{ t("references") }} </label>   
-                    <ng v-vue-ng:km-value-ml  :value="document.referenceText" :locales="locale" html ></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.referenceText" :locales="locale" html km-pre ></ng>  
                 </div> 
                 <div v-if="document.resources">
                     <label>{{ t("cbdResources") }}</label>
