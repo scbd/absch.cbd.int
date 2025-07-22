@@ -232,15 +232,15 @@
 			</div>
 
 		<legend ng-if="document.usages || document.usagesDescription || document.usagesConfidential || document.thirdPartyTransferCondition">{{::('viewAbsPermitT.infoUtilization'|$translate)}} </legend>
-			<div ng-if="document.usages">
-				<label>{{::('viewAbsPermitT.usages'|$translate)}}</label>
-			<div compare-val>
-				<div class="km-value" ng-if="document.usages && !document.usagesConfidential">
-					<ul class="list">
-						<li ng-repeat="term in document.usages"><span ng-bind="term|term"></span></li>
-					</ul>
+			<div ng-if="document.usages && !document.usagesConfidential">
+					<label>{{::('viewAbsPermitT.usages'|$translate)}}</label>
+				<div compare-val>
+					<div class="km-value" ng-if="document.usages && !document.usagesConfidential">
+						<ul class="list">
+							<li ng-repeat="term in document.usages"><span ng-bind="term|term"></span></li>
+						</ul>
+					</div>
 				</div>
-			</div>
             </div>
             <div ng-if="document.usagesConfidential">
                 <label>{{::('viewAbsPermitT.usagesConfidential'|$translate)}}</label>
