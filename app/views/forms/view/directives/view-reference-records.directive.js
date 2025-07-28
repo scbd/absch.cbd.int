@@ -7,8 +7,8 @@ import '~/views/forms/view/bch/icons';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import viewReferenceRecordsT from '~/app-text/views/forms/view/directives/view-reference-records.json';
 import { getFieldName } from '~/services/getFieldName';
-import { PAGINATION_OPTIONS_WITH_ALL } from '~/services/filters/constant.js';
-const CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE = 'storedReferencePageSize';
+import { PAGINATION_OPTIONS_WITH_ALL, CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE } from '~/services/filters/constant.js';
+
 app.directive("viewReferencedRecords", [function () {
 	return {
 		restrict: "EA",
