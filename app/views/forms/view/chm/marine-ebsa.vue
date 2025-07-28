@@ -14,12 +14,12 @@
             
                 <div v-if="document.summary">
                     <label>{{ t("summary") }} </label> 
-                    <ng  v-vue-ng:km-value-ml  :value="document.summary" :locales="locale" html></ng> 
+                    <ng  v-vue-ng:km-value-ml  :value="document.summary" :locales="locale" html km-pre></ng> 
                 </div>
             
                 <div v-if="document.areaIntroducion">
                     <label>{{ t("introduction") }} </label>
-                    <ng  v-vue-ng:km-value-ml  :value="document.areaIntroducion" :locales="locale" html></ng> 
+                    <ng  v-vue-ng:km-value-ml  :value="document.areaIntroducion" :locales="locale" html km-pre></ng> 
                 </div> 
             </section>
 
@@ -33,7 +33,7 @@
                 </div>
                 <div v-if="document.location">
                     <label>{{ t("description") }} </label>   
-                    <ng v-vue-ng:km-value-ml  :value="document.location" :locales="locale" html></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.location" :locales="locale" html km-pre></ng>  
                 </div>
                 <div v-if="document.gisFiles">                    
                     <div v-if="document.gisMapCenter">   
@@ -56,15 +56,15 @@
                 <legend>{{ t("areaDetails") }} </legend> 
                 <div v-if="document.areaDescription"> 
                     <label>{{ t("areaDescription") }} </label> 
-                    <ng v-vue-ng:km-value-ml  :value="document.areaDescription" :locales="locale" html></ng>                        
+                    <ng v-vue-ng:km-value-ml  :value="document.areaDescription" :locales="locale" html km-pre></ng>                        
                 </div>
                 <div v-if="document.areaConditions">
                     <label>{{ t("featureConditions") }} </label>  
-                    <ng v-vue-ng:km-value-ml  :value="document.areaConditions" :locales="locale" html></ng>  
+                    <ng v-vue-ng:km-value-ml  :value="document.areaConditions" :locales="locale" html km-pre></ng>  
                 </div>   
                 <div v-if="document.areaFeatures">
                     <label>{{ t("featureDescription") }} </label>           
-                    <ng v-vue-ng:km-value-ml  :value="document.areaFeatures" :locales="locale" html></ng>
+                    <ng v-vue-ng:km-value-ml  :value="document.areaFeatures" :locales="locale" html km-pre></ng>
                 </div>
                 <div v-if="document.countries">
                     <label>{{ t("relatedCountries") }}</label>
@@ -223,7 +223,7 @@
                             </div>
                             <div v-if=" document.recommendedToWorkshopBy==='OTHER' && document.recommendedToWorkshopByOthers" >  
                                 <label>{{t("details")}}</label>
-                                <ng v-vue-ng:km-value-ml  :value="document.recommendedToWorkshopByOthers" :locales="locale" html ></ng>
+                                <ng v-vue-ng:km-value-ml  :value="document.recommendedToWorkshopByOthers" :locales="locale" html km-pre></ng>
                             </div>                                
                           </li>                          
                         </ul>
@@ -263,7 +263,7 @@
                             </div>
                             <div v-if="document.recommendedToAnyBy==='OTHER' && document.recommendedToAnyByOthers" >
                                 <label>{{t("details")}}</label>                               
-                                <ng v-vue-ng:km-value-ml  :value="document.recommendedToAnyByOthers" :locales="locale" html ></ng>
+                                <ng v-vue-ng:km-value-ml  :value="document.recommendedToAnyByOthers" :locales="locale" html km-pre></ng>
                             </div>                
                           </li>                          
                         </ul>
@@ -285,7 +285,7 @@
                             </li>
                             <li class="list-group-item" v-if="assessment.justification">                                                                                
                                 <strong>{{ t("justification") }} </strong>   
-                                <ng v-vue-ng:km-value-ml  :value="assessment.justification" :locales="locale" html ></ng>                        
+                                <ng v-vue-ng:km-value-ml  :value="assessment.justification" :locales="locale" html km-pre></ng>                        
                             </li>                          
                         </ul>
                     </div>                  
