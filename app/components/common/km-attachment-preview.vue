@@ -7,8 +7,8 @@
 
   const props = defineProps({
     url: { type: String, required: true },
-    width: { type: [Number, String], default: 80 },
-    height: { type: [Number, String], default: 90 },
+    width: { type: [Number, String], default: 68 },
+    height: { type: [Number, String], default: 96 },
     altText: { type: String, default: '' }
   });
 
@@ -16,9 +16,8 @@
 
   const isValid = computed(() => {
     if (!props.url || typeof props.url !== 'string') return false;
-    const cleanUrl = props.url.split('?')[0].split('#')[0];
-    const extension = cleanUrl.split('.').pop()?.toLowerCase();
-    return validImageExtensions.includes(extension);
+    const cleanUrl = props.url.split('?')[0].split('#')[0].toLowerCase();
+    return validImageExtensions.some(ext => cleanUrl.endsWith(ext));
   });
 
   const computedUrl = computed(() => {

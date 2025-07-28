@@ -5,35 +5,44 @@
   <div class="row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
   <div class="d-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(0,4)" :key="record">
-      <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
-        <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
-        <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
-        <p :class="record.rec_countryName?.length < 21 ? 'record-summary-text' : 'record-summary-text-single-line'">
-          <span v-if="record.rec_summary">{{ record.rec_summary }}</span>
-        </p>
-        <div style="bottom:5px;" class="w-100 position-absolute">
-          <a class="meta-links" :href="searchUrl(record.schema_s)"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
-          <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
-          <span class="badge text-uppercase record-text-national-country ps-0">{{record.rec_countryName}}</span></a>
-          <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
+      <div class="d-flex position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
+        <div v-if="record.covers_ss" class="me-2 flex-shrink-0">
+          <km-attachment-preview :url="record.covers_ss[0]" :width="68" :height="96"/>
+        </div> 
+        <div class="flex-grow-1"> 
+          <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
+          <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
+          <p :class="record.rec_countryName?.length < 21 ? 'record-summary-text' : 'record-summary-text-single-line'">
+            <span v-if="record.rec_summary">{{ record.rec_summary }}</span>
+          </p>
+          <div style="bottom:5px;" class="w-sm-100 position-absolute">
+            <a class="meta-links" :href="searchUrl(record.schema_s)"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
+            <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
+            <span class="badge text-uppercase record-text-national-country ps-0">{{record.rec_countryName}}</span></a>
+            <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(4,8)" :key="record">
-      <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
-        <span class="badge position-absolute top-0 end-0 date-badge">{{formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
-        <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
-        <p :class="record.rec_countryName?.length < 21 ? 'record-summary-text' : 'record-summary-text-single-line'">
-          <span v-if="record.rec_summary">{{ record.rec_summary }}</span>
-        </p>
-        
-        <div class="country-records-sub-options">
-          <a class="meta-links" :href="searchUrl(record.schema_s)"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
-          <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
-          <span class="badge text-uppercase record-text-national-country  ps-0">{{record.rec_countryName}}</span></a>
-          <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
+      <div class="d-flex position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
+        <div v-if="record.covers_ss" class="me-2 flex-shrink-0">
+          <km-attachment-preview :url="record.covers_ss[0]" :width="68" :height="96"/>
+        </div>
+        <div class="flex-grow-1">
+          <span class="badge position-absolute top-0 end-0 date-badge">{{ formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
+          <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
+          <p :class="record.rec_countryName?.length < 21 ? 'record-summary-text' : 'record-summary-text-single-line'">
+            <span v-if="record.rec_summary">{{ record.rec_summary }}</span>
+          </p>
+          <div class="country-records-sub-options">
+            <a class="meta-links" :href="searchUrl(record.schema_s)"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
+            <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
+            <span class="badge text-uppercase record-text-national-country  ps-0">{{record.rec_countryName}}</span></a>
+            <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
+          </div>
         </div>
         <div class="flex-grow-1">
           <span class="badge position-absolute top-0 end-0 date-badge">{{ formatDate(record.rec_date, 'DD MMM YYYY')}}</span>

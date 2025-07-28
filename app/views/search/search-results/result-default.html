@@ -7,9 +7,9 @@
 
     <div ng-show="!showDoc" ng-click="showRecord()" class="p-0 m-0">            
         <div class="{{::type}} m-0 p-1 d-flex ">
-            <div ng-if="doc.covers_ss" class="me-3 flex-shrink-0">
+            <div ng-if="doc.covers_ss" class="me-2 flex-shrink-0">
                 <div ng-if="attachmentPreviewComponent"> 
-                    <km-attachment-preview ng-vue="attachmentPreviewComponent" :url="doc.covers_ss[0]" :width="80" :height="96" />
+                    <km-attachment-preview ng-vue="attachmentPreviewComponent" :url="doc.covers_ss[0]" :width="68" :height="96" />
                 </div>
             </div>
            <div class="flex-grow-1 d-flex flex-column justify-content-between"  ng-class="{'has-cover': doc.covers_ss}">
