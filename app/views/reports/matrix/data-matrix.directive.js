@@ -119,7 +119,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     var message = '';
                     if(result.numFound>0)
                         message = query.start + " of " + result.numFound;
-                    $scope.matrixProgress += '<br/>' + message;
+                    $scope.matrixProgress = '<br/>' + message;
                          
                     query.start = result.pageNumber * pageSize;
                     
