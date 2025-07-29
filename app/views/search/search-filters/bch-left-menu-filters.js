@@ -683,6 +683,14 @@ export const bchLeftMenuFilters = {
             "field": "bchSubjects_ss",
             "relatedField":"bchSubjects_REL_ss"
         },
+		{
+			"type": "thesaurus",
+			"term": "gbfTargets",
+			"title": bchFilters.gbfTargets,
+			"field": "gbfTargets_ss",
+			"otherTerm":false,
+			"relatedField": "gbfTargets_REL_ss"
+		},
         {
             "type": "customListFn",
             "fn"  : "cbdSubjectsCustomFn",

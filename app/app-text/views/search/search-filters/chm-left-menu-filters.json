@@ -27,6 +27,7 @@
     "submissionByType"  : "Submission by",
     "submissionByTypeParty" : "Party",
     "submissionByTypeNonParty"  : "Non-Party",
-    "submissionByTypeOrganization"  : "Organization"  
+    "submissionByTypeOrganization"  : "Organization",
+    "gbfTargets": "GBF Targets"
   }
   
