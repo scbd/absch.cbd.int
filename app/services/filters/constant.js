@@ -24,3 +24,4 @@ export const PAGINATION_OPTIONS_DEFAULT = [
 
 export const CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE = 'storedDocumentPageSize';
 export const CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE = 'storedReferencePageSize';
+export const CACHE_PAGINATION_SEARCH_PAGE_SIZE = 'storedSearchPageSize';
