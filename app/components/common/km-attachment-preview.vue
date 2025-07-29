@@ -16,8 +16,13 @@
 
   const isValid = computed(() => {
     if (!props.url || typeof props.url !== 'string') return false;
-    const cleanUrl = props.url.split('?')[0].split('#')[0].toLowerCase();
-    return validImageExtensions.some(ext => cleanUrl.endsWith(ext));
+    try {
+      const parsedUrl = new URL(props.url, window.location.origin);
+      const pathname = parsedUrl.pathname.toLowerCase(); 
+      return validImageExtensions.some(ext => pathname.endsWith(ext));
+    } catch (e) {
+      return false;
+    }
   });
 
   const computedUrl = computed(() => {
