@@ -512,12 +512,11 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                             $('form').filter('.dirty').removeClass('dirty');
                             originalDocument = angular.copy($scope.getDocumentFn());
                             documentDraftSaved(draftInfo);
-                            if(!$scope.isDialog)
-                            $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit'))
-                            .search({ 
-                                softReload: 'true', 
-                                ...( $location.search().workflow ? { workflow: $location.search().workflow } : {} )
-                            });
+                            if(!$scope.isDialog){
+                                $location
+                                    .path($location.path().replace(/\/new/, '/' + draftInfo.identifier + '/edit'))
+                                    .search({...$location.search(), softReload: 'true' });
+                            }
                             return draftInfo;
                         }
 
