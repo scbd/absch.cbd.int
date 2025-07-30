@@ -7,7 +7,7 @@
             {{t("searchResults") }} <span><small>({{articlesCount}})</small></span>      
           </h4>
           <hr>
-          <div v-for="article in articles" :key="article._id">
+          <div v-for="article in articles" :key="article.id">
             <div class="card mb-3">
               <div class="d-flex flex-row bd-highlight ">
                 <div class="p-2 bd-highlight" v-if="article.coverImage">
@@ -17,14 +17,14 @@
                 <div class="p-2 bd-highlight w-100">
                   <div class="card-body">                  
                     <span class="badge bg-secondary position-absolute top-0 end-0">
-                      {{formatDate(article?.meta?.createdOn, 'DD MMM YYYY')}}</span>
+                      {{formatDate(article?.createdDate, 'DD MMM YYYY')}}</span>
                       
                     <h5 class="card-title"><a class="link-dark"
-                        :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{lstring(article.title, locale)}}</a>                      
+                        :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{article.title}}</a>                      
                     </h5>
                     <p v-if="article.summary" class="card-text h-100">
                       <a class="link-dark" :href="`${articleUrl(article, getTag(article.adminTags) )}`">
-                        {{lstring(article.summary, locale)}}
+                        {{article.summary}}
                       </a>
                     </p>
   
@@ -60,7 +60,7 @@
       import paginate from '../common/pagination.vue';
       import SolrApi from "~/api/solr.js";
       import "../kb/filters";
-      import { formatDate, lstring } from './filters';
+      import { formatDate } from './filters';
 
       const route = useRoute().value;
       const { t, locale } = useI18n({ messages });
@@ -101,7 +101,7 @@
       };
   
       const articleUrl = (article, tag) => {
-        return getUrl(lstring(article.title), article._id, tag);
+        return getUrl(article.title, article.id, tag);
       };
   
       const loadArticles = async (page) => {
@@ -111,37 +111,29 @@
           loading.value = true;
           const searchText = search.value;
           const realm = realmTag.value;
-          const localeKey = locale.value; 
+          const localeKey = locale.value.toUpperCase(); 
           const start = (page - 1) * recordsPerPage.value;
           const rowsPerPage = recordsPerPage.value;
-
+          const realmName = "oasis"; // `adminTags:${realm}`=== bch;
           const query = searchText
-            ? `(title_${localeKey}:*${searchText}* OR text_${localeKey}_txt:*${searchText}* OR summary_${localeKey}:*${searchText}* OR content_${localeKey}:*${searchText}*)`
-            : '*:*';
-
-          const fieldQueries = [`adminTags:${realm}`];
-
-          const fields = [
-            `title_${localeKey}`,
-            `summary_${localeKey}`,
-            'coverImage',
-            'adminTags',
-            'meta',
-            '_id'
-          ];
+            ? `realm_ss: ${realmName} AND title_${localeKey}_s:*${searchText}* OR text_${localeKey}_txt:*${searchText}* OR summary_${localeKey}_s:*${searchText}* OR content_${localeKey}_s:*${searchText}*`
+            : '*:*'; 
 
           try {
-            // const result = await solrAPI.query(
-            //   query,
-            //   fieldQueries,
-            //   fields,
-            //   start,
-            //   rowsPerPage
-            // );
-
-            const result = await solrAPI.query(
-                {query:`realm_ss:oasis AND text_${localeKey.toUpperCase()}_txt:*${searchText}*`}
-            );
+            const result = await solrAPI.query({
+              query, 
+              fields: [
+                `title:title_${localeKey}_s`,
+                `summary:summary_${localeKey}_s`,
+                'coverImage', // need to confirm 
+                `coverImage: coverImage_ss`,  // or this
+                'adminTags: adminTags_ss',
+                'createdDate: createdDate_s',  
+                'id'
+              ].join(','),
+              start,
+              rowsPerPage
+            });
 
             const docs = result?.response?.docs || [];
             const totalCount = result?.response?.numFound || 0;
@@ -149,8 +141,6 @@
               articles.value = docs;
               articlesCount.value = totalCount;
             }
-            console.log("docs", docs);
-            console.log("total count", totalCount);
 
           } catch (e) {
             console.error('Solr query error:', e);
