@@ -3,7 +3,7 @@
     <ul class="pagination">
         <li class="page-item d-none d-lg-inline-block pagination-page-count">
             <a rel="noopener" class="page-link" disabled>
-                <strong>{{::('paginationT.page'|$translate)}} <span ng-bind="currentPage"></span> {{::('paginationT.of'|$translate)}} <span ng-bind="pageCount"></span></strong>
+                <span>{{::('paginationT.page'|$translate)}} <span ng-bind="currentPage"></span> {{::('paginationT.of'|$translate)}} <span ng-bind="pageCount"></span></span>
             </a>
         </li>
         <li ng-class="{'disabled': currentPage-1 == 0}" class="page-item d-none d-sm-inline-block pagination-btn-first">
@@ -29,10 +29,10 @@
         </li>
         <li class="page-item d-none d-lg-inline-block pagination-record-count">
             <a rel="noopener" class="page-link" disabled>
-                <strong> 
+                <span> 
                     <span ng-bind="((currentPage-1)*pageSize)+1 + ' - ' + (currentPage*pageSize>numFound ? numFound:currentPage*pageSize)"></span> {{::('paginationT.of'|$translate)}}
                     <span ng-bind="(pageCount*pageSize)>numFound ? numFound:pageCount*pageSize"></span>
-                </strong>
+                </span>
             </a>
         </li>
         <li class="page-item d-none d-md-inline-block pagination-items-per-page">
