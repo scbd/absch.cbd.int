@@ -513,9 +513,9 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                             originalDocument = angular.copy($scope.getDocumentFn());
                             documentDraftSaved(draftInfo);
                             if(!$scope.isDialog){
-                                $location
-                                    .path($location.path().replace(/\/new/, '/' + draftInfo.identifier + '/edit'))
-                                    .search({...$location.search(), softReload: 'true' });
+                                if (!$route?.current?.params?.identifier) {
+                                    $location.path($location.path().replace(/\/new/, '/' + draftInfo.identifier + '/edit'));
+                                }
                             }
                             return draftInfo;
                         }
