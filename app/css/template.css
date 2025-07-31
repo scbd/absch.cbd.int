@@ -579,6 +579,12 @@ body.modal-open .modal-backdrop.fade.show{
     border-color: #428bca !important;
     padding: 6px 19px !important;
 }
+.pagination .pagination-page-count .page-link,
+.pagination .pagination-record-count .page-link,
+.pagination .pagination-items-per-page .page-link {
+    color: #111111;
+    background-color: transparent;
+}
 /* ============================ */
 /* new CSS Ends  */
 /* ============================ */
