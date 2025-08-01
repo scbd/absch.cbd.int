@@ -37,7 +37,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
               activityScope   : function() {return thesaurusService.getDomainTerms('cbiCpbTypes');},
               targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience', {other:true, otherType:'lstring'});},
               geographicScope : function() {return thesaurusService.getDomainTerms('geographicScope');},
-              aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},         
+              aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},       // To be removed  
               gbfTargets      : function() {return thesaurusService.getDomainTerms('gbfTargets');},
               absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');},
               status          : function() {return thesaurusService.getDomainTerms('cbiStatus');},
@@ -233,7 +233,7 @@ app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$rou
      
         $scope.setDocument(newDocument, true)
         .then(function (doc) {
-
+          // do we need to set aichiTargets to gbfTargets?
           if (!$scope.document.gbfTargets?.length){ 
             if ($scope.document?.aichiTargets?.find((obj) => obj.identifier === 'AICHI-TARGET-16')){ 
                 $scope.document.gbfTargets = [{"identifier":"GBF-TARGET-13"}];	                   

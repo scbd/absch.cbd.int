@@ -40,7 +40,7 @@ import '~/views/forms/view/view-resource.directive';
         if(doc.countryRegions){
             $scope.setCountryRegions (doc.countryRegions)
         };
-
+        // do we need to set aichiTargets to gbfTargets?
         // move aichi target -> gbf target
         if (!doc.gbfTargets?.length){  
           if (doc?.aichiTargets?.find((obj) => obj.identifier === 'AICHI-TARGET-16')){                      

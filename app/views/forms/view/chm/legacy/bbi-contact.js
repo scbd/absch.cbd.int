@@ -44,7 +44,7 @@ app.directive('viewBbiContact', ['$http', "$rootScope", "$filter", "$q", "$locat
 						delete(data[0].organizationTypes);
 						delete(data[0].relevantDocuments);
 						delete(data[0].absThematicAreas);
-						delete(data[0].aichiTargets);
+						delete(data[0].aichiTargets); // not sure if this is needed
 						delete(data[0].bchSubjects);
 						delete(data[0].operationalLanguages);
 						delete(data[0].thematicAreas);

@@ -418,7 +418,7 @@ export const absLeftMenuFilters = {
 		{
 			"type": "thesaurus",
 			"term": "aichiTargets",
-			"title": absFilters.aichiTargets,
+			"title": absFilters.aichiTargets, // already removed in one active PR
 			"field": "aichiTargets_ss"
 		},
 		{
@@ -530,7 +530,7 @@ export const absLeftMenuFilters = {
 		{
 			"type": "thesaurus",
 			"term": "aichiTargets",
-			"title": absFilters.aichiTargets,
+			"title": absFilters.aichiTargets, // to be removed
 			"field": "bchSubjects_ss",
 			"relatedField":"bchSubjects_REL_ss"
 		},

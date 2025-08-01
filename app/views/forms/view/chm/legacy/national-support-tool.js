@@ -23,6 +23,7 @@ app.directive('viewNationalSupportTool', ["$q", "IStorage",'translationService',
 			//===============
 			//
 			//===============
+			//do we need this section?
 			$scope.$watch("document.aichiTargets", function (refs) {
 				if(refs){
 					$q.when(loadReferences(refs, { info : true })).then(function(result){

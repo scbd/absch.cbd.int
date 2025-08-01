@@ -144,7 +144,7 @@ import _ from 'lodash';
                 countries              : "countries",
                 regions                : "regions",
                 languages              : "ISO639-2",
-                aichiTargets           : 'AICHI-TARGETS',
+                aichiTargets           : 'AICHI-TARGETS', // keep for backward compatibility
                 gbfTargets             : 'GBF-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
                 bchRaAuthorAffiliation :   'Organization Types',

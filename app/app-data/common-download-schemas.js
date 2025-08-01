@@ -44,7 +44,7 @@ export const downloadSchemas = {
         "covers"                    : fieldsT["resource.covers"],
         "summary"                   : fieldsT["resource.summary"],
         "countryRegions"            : fieldsT["resource.countryRegions"],
-        "aichiTargets"              : fieldsT["resource.aichiTargets"],
+        "aichiTargets"              : fieldsT["resource.aichiTargets"], // Should be replaced with gbfTargets
         "nagoyaKeyAreas"            : fieldsT["resource.nagoyaKeyAreas"],
         "cbdSubjects"               : fieldsT["resource.cbdSubjects"],
         "biosafetySubjects"         : fieldsT["resource.biosafetySubjects"],

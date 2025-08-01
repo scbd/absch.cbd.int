@@ -132,7 +132,7 @@ export const downloadSchemas = {
         "covers"             : fieldsT["modelContractualClause.covers"],
         "summary"            : fieldsT["modelContractualClause.summary"],
         "countryRegions"     : fieldsT["modelContractualClause.countryRegions"],
-        "aichiTargets"       : fieldsT["modelContractualClause.aichiTargets"],
+        "aichiTargets"       : fieldsT["modelContractualClause.aichiTargets"], // Should it be removed ?
         "cbdSubjects"        : fieldsT["modelContractualClause.cbdSubjects"],
         "nagoyaMccKeywords"  : fieldsT["modelContractualClause.nagoyaMccKeywords"],
         "nagoyaSubjects"     : fieldsT["modelContractualClause.nagoyaSubjects"],
@@ -155,7 +155,7 @@ export const downloadSchemas = {
         "covers"             : fieldsT["communityProtocol.covers"],
         "summary"            : fieldsT["communityProtocol.summary"],
         "countryRegions"     : fieldsT["communityProtocol.countryRegions"],
-        "aichiTargets"       : fieldsT["communityProtocol.aichiTargets"],
+        "aichiTargets"       : fieldsT["communityProtocol.aichiTargets"], // Should be removed ?
         "cbdSubjects"        : fieldsT["communityProtocol.cbdSubjects"],
         "nagoyaSubjects"     : fieldsT["communityProtocol.nagoyaSubjects"],
         "nagoyaKeyAreas"     : fieldsT["communityProtocol.nagoyaKeyAreas"],
@@ -204,7 +204,7 @@ export const downloadSchemas = {
         "contacts"           : commonFieldsT["capacityBuildingInitiative.contacts"],
         "isProjectProgramme" : commonFieldsT["capacityBuildingInitiative.isProjectProgramme"],
         "description"        : commonFieldsT["capacityBuildingInitiative.description"],
-        "aichiTargets"       : commonFieldsT["capacityBuildingInitiative.aichiTargets"],
+        "aichiTargets"       : commonFieldsT["capacityBuildingInitiative.aichiTargets"],  // Should be replaced with gbfTargets
         "absKeyAreas"        : commonFieldsT["capacityBuildingInitiative.absKeyAreas"],
         "fundingSourceTypes" : commonFieldsT["capacityBuildingInitiative.fundingSourceTypes"],
         "coreFundingSources" : commonFieldsT["capacityBuildingInitiative.coreFundingSources"],
