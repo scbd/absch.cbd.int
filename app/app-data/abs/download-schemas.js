@@ -67,7 +67,7 @@ export const downloadSchemas = {
         "publishedOn"                          : fieldsT["absCheckpointCommunique.publishedOn"],
         "title"                                : fieldsT["absCheckpointCommunique.title"],
         "absCheckpoints"                       : fieldsT["absCheckpointCommunique.absCheckpoints"],
-        "absCheckpointCommunique.dateCollected": fieldsT["dateCollected"],
+        "dateCollected"                        : fieldsT["absCheckpointCommunique.dateCollected"],
         "absIRCCsNotAvailable"                 : fieldsT["absCheckpointCommunique.absIRCCsNotAvailable"],
         "absIRCCs"                             : fieldsT["absCheckpointCommunique.absIRCCs"],
         "sourceCountries"                      : fieldsT["absCheckpointCommunique.sourceCountries"],
