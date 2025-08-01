@@ -44,7 +44,7 @@
 
             <section v-if="document.aichiTargets || document.otherAichiTargets || document.noOtherAichiTargetsDescription" >             
                 <legend>{{ t("relevance") }} </legend>
-            
+                <!--  Should it be replaced with gbfTargets ? -->
                 <div v-if="document.aichiTargets" >  
                     <label v-if="document.isAichiTarget" >{{ t("aichiTarget") }}</label>
                     <label v-if="!document.isAichiTarget" >{{ t("aichiTargetComponents") }} </label>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div> 
-    
+                <!--  not clear on this -->
                 <div v-if="document.otherAichiTargets">     
                     <label>{{ t("subAichiTargets") }} </label>      
                     <label v-if="!document.isAichiTarget">{{ t("orTargetComponents") }} </label>  

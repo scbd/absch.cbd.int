@@ -202,7 +202,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <!-- Not clear on this  Should it be replaced with gbfTargets, what will be the link ? -->
                     <div  :class="[document.thematicAreas?'col-6':'col-12']" v-if="document.aichiTargets">
                         <label>{{ t("aichiTargets") }}</label>
                         <div class="km-value">

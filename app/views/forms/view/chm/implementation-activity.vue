@@ -73,7 +73,7 @@
                         </li>
                     </div>                     
                 </div>
-
+                <!--  Should it be replaced with gbfTargets ? -->
                 <div v-if="document.aichiTargets">     
                     <label>{{ t("aichiTargets") }} </label>                       
                     <div class="km-value">  
