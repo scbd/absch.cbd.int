@@ -313,7 +313,8 @@
 							<div class="no-shadow bg-white">
 								<legend>{{::('editCBIT.informationOnThematic'|$translate)}}</legend>
 
-								<!-- only display aichiTargets when there already has value for document.aichiTargets -->							
+								<!-- only display aichiTargets when there already has value for document.aichiTargets -->	
+								 <!--  Should it be removed as we already have gbfTargets below ? -->
 								
 								<div class="row" ng-if="(isABS || isCHM) && document.aichiTargets">	
 									<div class="col-md-12">	

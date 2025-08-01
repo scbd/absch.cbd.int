@@ -180,7 +180,7 @@
 		<div ng-show="document.cbdSubjects || document.aichiTargets || document.gbfTargets">
 
 			<legend>{{::('viewCdiT.informationOnThematic'|$translate)}}</legend>
-
+			<!--  Should it be removed as we already have gbfTargets below ? -->
 			<div ng-show="document.aichiTargets && (isABS || isCHM)">
 				<label>{{::('viewCdiT.aichiTargets'|$translate)}}</label>			
 				<div class="km-value" compare-val="aichiTargets">

@@ -113,6 +113,7 @@
 
 		<section ng-if=" document.gbfTargets || document.cbdSubjects || (!isBCH && document.aichiTargets)">
 			<legend>{{::('viewResourceT.legendKeywords'|$translate)}}</legend>
+			<!--  Should it be removed as we already have gbfTargets below ? -->
 			<div ng-if="!isBCH && document.aichiTargets">
 				<label>{{::('viewResourceT.aichiTargets'|$translate)}}</label>
 				<div class="km-value" compare-val="aichiTargets">

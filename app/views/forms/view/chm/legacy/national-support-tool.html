@@ -42,7 +42,7 @@
 			<label>{{::('nationalSupportTool.nationalTargets'|$translate)}}</label>
 			<div class="km-value" ng-repeat="item in nationalTargets">{{item.title|lstring:locale}}</div>
 		</div>
-
+		<!-- Not, clear on this,  Should it be replaced with gbfTargets? -->
 		<div ng-show="document.aichiTargets">
 			<label>{{::('nationalSupportTool.aichiTargets'|$translate)}}</label>
 			<div class="km-value" ng-repeat="item in aichiTargets">{{item.title|lstring:locale}}</div>
