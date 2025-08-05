@@ -19,6 +19,12 @@
                             <span ng-if="country.isParty" class="color-party bold">{{::('countryProfileT.partyToNagoya'|$translate)}}</span>
                             <span ng-if="country.isInbetweenParty" class="color-inbetween bold">{{::('countryProfileT.ratified'|$translate)}}</span>
                         </div>
+                        <div class="mb-1 fs-6" ng-if="isCHM">
+                            <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">{{::('countryProfileT.notPartyOfConvention'|$translate)}}</span>
+                            <span ng-if="country.isParty" class="color-party bold">{{::('countryProfileT.partyOfConvention'|$translate)}}</span>
+                            <span ng-if="country.isInbetweenParty" class="color-inbetween bold">{{::('countryProfileT.ratified'|$translate)}}</span>
+                        </div>
+
                         <div class="mb-1 fs-6" ng-if="isBCH">
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">{{::('countryProfileT.notPartyToCartagena'|$translate)}}</span>
                             <span ng-if="country.isParty" class="color-party bold">{{::('countryProfileT.partyToCartagena'|$translate)}}</span>
