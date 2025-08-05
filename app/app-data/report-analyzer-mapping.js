@@ -14,12 +14,12 @@ export const analyzerMapping =
             "year"          : "2017",
             "deadline"      : "2017-11-01",
             "offlineFormats": [
-                {"lang": "en", "url":"http://www.cbd.int/abs/en/commonformats/NR-en.doc"},
-                {"lang": "fr", "url":"http://www.cbd.int/abs/fr/commonformats/NR-fr.doc"},
-                {"lang": "es", "url":"http://www.cbd.int/abs/es/commonformats/NR-es.doc"},
-                {"lang": "ru", "url":"http://www.cbd.int/abs/ru/commonformats/NR-ru.doc"},
-                {"lang": "ar", "url":"http://www.cbd.int/abs/ar/commonformats/NR-ar.doc"},
-                {"lang": "zh", "url":"http://www.cbd.int/abs/zh/commonformats/NR-zh.doc"}
+                {"lang": "en", "url":"https://www.cbd.int/abs/en/commonformats/NR-en.doc"},
+                {"lang": "fr", "url":"https://www.cbd.int/abs/fr/commonformats/NR-fr.doc"},
+                {"lang": "es", "url":"https://www.cbd.int/abs/es/commonformats/NR-es.doc"},
+                {"lang": "ru", "url":"https://www.cbd.int/abs/ru/commonformats/NR-ru.doc"},
+                {"lang": "ar", "url":"https://www.cbd.int/abs/ar/commonformats/NR-ar.doc"},
+                {"lang": "zh", "url":"https://www.cbd.int/abs/zh/commonformats/NR-zh.doc"}
             ]
         },
         {
@@ -31,12 +31,12 @@ export const analyzerMapping =
             "year"          : "2024",
             "deadline"      : "2026-02-28",
             "offlineFormats": [
-                {"lang": "en", "url":"http://www.cbd.int/abs/en/commonformats/NR1-en.doc"},
-                {"lang": "fr", "url":"http://www.cbd.int/abs/fr/commonformats/NR1-fr.doc"},
-                {"lang": "es", "url":"http://www.cbd.int/abs/es/commonformats/NR1-es.doc"},
-                {"lang": "ru", "url":"http://www.cbd.int/abs/ru/commonformats/NR1-ru.doc"},
-                {"lang": "ar", "url":"http://www.cbd.int/abs/ar/commonformats/NR1-ar.doc"},
-                {"lang": "zh", "url":"http://www.cbd.int/abs/zh/commonformats/NR1-zh.doc"}
+                {"lang": "en", "url":"https://www.cbd.int/abs/en/commonformats/NR1-en.doc"},
+                {"lang": "fr", "url":"https://www.cbd.int/abs/fr/commonformats/NR1-fr.doc"},
+                {"lang": "es", "url":"https://www.cbd.int/abs/es/commonformats/NR1-es.doc"},s
+                {"lang": "ru", "url":"https://www.cbd.int/abs/ru/commonformats/NR1-ru.doc"},
+                {"lang": "ar", "url":"https://www.cbd.int/abs/ar/commonformats/NR1-ar.doc"},
+                {"lang": "zh", "url":"https://www.cbd.int/abs/zh/commonformats/NR1-zh.doc"}
             ]
         }
     ],
