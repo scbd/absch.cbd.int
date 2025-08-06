@@ -110,6 +110,11 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         $scope.hideSubFilters = false;
                         $scope.isInternalEmbed = $attrs.internalEmbed == 'true';
                         const includeSchemas   = $attrs.includeSchemas?.split(',')
+                        $scope.tabOrder = {
+                            allRecords      : ['updatedDate_dt desc'],
+                            nationalRecords : ['government_EN_s asc', 'updatedDate_dt desc'],
+                            referenceRecords: ['updatedDate_dt desc'],  
+                        }
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
@@ -509,12 +514,13 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     };
 
                     $scope.switchTab = function(tab){
-                        if($scope.searchResult.currentTab == tab)
+                        const previousTab = $scope.searchResult.currentTab;
+                        if(previousTab == tab)
                             return;
                         $scope.searchResult.currentTab = tab;
-                        if(tab != 'nationalRecords'){
-                            $scope.searchResult.sortFields = ['updatedDate_dt desc'];
-                            $location.search('group', null);
+
+                        if(previousTab === 'nationalRecords') {
+                            $scope.searchResult.sortFields = $scope.tabOrder[tab] || ['updatedDate_dt desc'];
                         }
                         updateQueryString('tab',tab);
                         updateQueryResult();
