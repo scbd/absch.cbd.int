@@ -512,6 +512,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         if($scope.searchResult.currentTab == tab)
                             return;
                         $scope.searchResult.currentTab = tab;
+                        if(tab != 'nationalRecords'){
+                            $scope.searchResult.sortFields = ['updatedDate_dt desc'];
+                            $location.search('group', null);
+                        }
                         updateQueryString('tab',tab);
                         updateQueryResult();
                     }
