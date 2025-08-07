@@ -44,19 +44,6 @@
             <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
           </div>
         </div>
-        <div class="flex-grow-1">
-          <span class="badge position-absolute top-0 end-0 date-badge">{{ formatDate(record.rec_date, 'DD MMM YYYY')}}</span>
-          <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
-          <p :class="record.rec_countryName?.length < 21 ? 'record-summary-text' : 'record-summary-text-single-line'">
-            <span v-if="record.rec_summary">{{ record.rec_summary }}</span>
-          </p>
-          <div class="country-records-sub-options">
-            <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="badge text-uppercase float-start record-text-national">{{record.schema_EN_t}}</span></a>
-            <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
-            <span class="badge text-uppercase record-text-national-country  ps-0">{{record.rec_countryName}}</span></a>
-            <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
