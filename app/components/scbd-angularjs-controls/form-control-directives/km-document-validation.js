@@ -136,6 +136,7 @@ import kmDocumentValidationT from '~/app-text/components/scbd-angularjs-controls
                     if (code == "Error.UnspecifiedLocale"   ) return messages.unspecifiedLocale
                     if (code == "Error.UnexpectedTerm"      ) return messages.unexpectedTerm
                     if (code == "Error.InvalidType"         ) return messages.invalidType
+                    if (code == "Error.InvalidLinkedRecord" ) return messages.invalidLinkedRecord
                     return code;
                 };
 
