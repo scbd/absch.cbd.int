@@ -6,5 +6,6 @@
 "invalidProperty"   : "This value cannot be specified" ,
 "unspecifiedLocale" : "A language is used but not specified in your document" ,
 "unexpectedTerm"    : "A specified term cannot be used" ,
-"invalidType"       : "The fields type is invalid"    
+"invalidType"       : "The fields type is invalid",
+"invalidLinkedRecord": "The linked record was deleted. Please choose another record and remove the link to the deleted one."    
 }
