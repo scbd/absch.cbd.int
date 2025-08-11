@@ -1,11 +1,9 @@
-import ArticlesApi from '../../components/kb/article-api';
 import { useRealm } from '~/services/composables/realm.js';
-import { lstring } from '../filters/lstring';
-
-const articlesApi = new ArticlesApi();
+import { ARTICLES_REALM } from '~/services/filters/constant';
+import SolrApi from "~/api/solr.js"; 
 
 export async function loadKbCategories(locale) {
-
+            const localeKey = locale.toUpperCase(); 
             let categories
 
             const realm = useRealm();
@@ -22,33 +20,30 @@ export async function loadKbCategories(locale) {
 
             if(categories){
 
-                const articleIds = categories.map(e=>e.articles).map(e=>e.map(i=>i.identifier)).flat()
-                                    .filter(e=>e).map(e=>{return {$oid:e}})
-                
-               const query = [
-                    {
-                        "$match": {
-                            _id :{
-                                $in: articleIds
-                            }
-                        }
-                    },
-                    {
-                        "$project": {
-                            [`title`]: 1,
-                            [`summary`]: 1
-                        }
-                    },
-                    { "$limit": articleIds.length }
-                ];
-                const articleTitles = await articlesApi.queryArticles({ag : JSON.stringify(query)}, {cache:true})
+                const articleIds = categories
+                        .flatMap(category => category.articles || [])
+                        .map(article => article?.identifier)
+                        .filter(Boolean);
+
+                const solrAPI = new SolrApi(); 
+                const query = `${ARTICLES_REALM} AND id:(${articleIds.map(id => `"${id}"`).join(' ')})`;
+                const result = await solrAPI.query({
+                        query, 
+                        fields: [
+                            `title:title_${localeKey}_s`,
+                            `summary:summary_${localeKey}_s`,  
+                            'id'
+                        ].join(','),
+                        rowsPerPage: articleIds.length
+                    });
+                const articleTitles = result?.response?.docs || [];
                 
                 categories.forEach(category => {
                     if (category.articles) {
                         category.articles.forEach(article => {
-                            const matchingArticle = articleTitles.find(at => at._id == article.identifier);
+                            const matchingArticle = articleTitles.find(at => at.id == article?.identifier);
                             if (matchingArticle) {
-                                article.title = lstring(matchingArticle.title, locale) || matchingArticle.title['en'];
+                                article.title = matchingArticle.title
                             }
                         });
                     }
