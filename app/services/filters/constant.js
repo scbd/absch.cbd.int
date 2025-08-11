@@ -8,3 +8,4 @@ export const THESAURUS = {
     REPORT_STATUS                     : "7F0D898A-6BF1-4CE6-AA77-7FEAED3429C6",  
     REPORT_TYPES                      : "2FD0C77B-D30B-42BC-8049-8C62D898A193"  
 }
+export const ARTICLES_REALM = "oasis";
