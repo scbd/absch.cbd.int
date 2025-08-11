@@ -9,7 +9,7 @@
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
         <ul>
             <li v-for="article in articles" class="mb-1">
-                <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{lstring(article.title, locale)}}</a>
+                <a class="link-dark fs-6" :href="`${articleUrl(article)}`">{{article.title}}</a>
             </li>
         </ul>
         <div v-if="articles.length<1 && !loading" class="alert alert-light">
@@ -20,18 +20,19 @@
   
 <script setup>
     import { ref, onMounted } from "vue";
-    import ArticlesApi from "./article-api";
     import { getUrl, shuffleArray } from '../../services/composables/articles.js';
-    import { lstring } from "./filters";
-    import { useRealm } from '../../services/composables/realm.js';
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import { getRealmArticleTag } from "../../services/composables/articles.js";
     import {  useAuth } from "@scbd/angular-vue/src/index.js"; 
-      const auth = useAuth();
+    import SolrApi from "~/api/solr.js";
+    import { ARTICLES_REALM } from '~/services/filters/constant';
+    
+    const auth = useAuth();
     const { t, locale } = useI18n({ messages });
-    const realm = useRealm();
     const articleRealmTag = getRealmArticleTag();
+    const solrAPI = new SolrApi({ tokenReader: () => auth.token() }); 
+
     const props = defineProps({
         tag: { type: String, required: false },
         type:{ type: String, required: false },
@@ -44,23 +45,24 @@
 
     const articles = ref([]);
     const loading = ref(true);
-    const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
     
 
-    onMounted(async () => {
-    let ag = [];
-    ag.push({"$match":{"$and":[{"adminTags": { $all : [articleRealmTag]}}]}});
-        ag.push({"$match":{"$and":[{"adminTags":props.tag}]}});
-        ag.push({"$project" : {[`title`]:1}});
-        ag.push({"$limit" : 6});
-        if(props.sort)
-            ag.push({"$sort" : {"meta.modifiedOn":-1}});
-
-        const query = {
-            "ag" : JSON.stringify(ag)
-        };
+    onMounted( async () => {
+        const localeKey = locale.value.toUpperCase();
+        const query = `realm_ss:${ARTICLES_REALM} AND adminTags_ss:${props.tag} AND adminTags_ss:${articleRealmTag}`;
     try {
-        const articlesList = await articlesApi.queryArticles(query);
+        const result = await solrAPI.query({
+              query, 
+              fields: [
+                `title:title_${localeKey}_s`, 
+                'id'
+              ].join(','),
+              rowsPerPage:6,
+              ...(props.sort && { sort: 'createdDate_dt desc' }),
+              start: 0,
+            });
+
+        const articlesList = result?.response?.docs || [];
         if ((articlesList || []).length) {
         if (props.sort) articles.value = articlesList;
         else articles.value = shuffleArray(articlesList);
@@ -73,7 +75,7 @@
     });
 
     const articleUrl = (article) => {
-        return getUrl(lstring(article.title), article._id, props.tag);
+        return getUrl(article.title, article.id, props.tag);
     };
  
 </script>

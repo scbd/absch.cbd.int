@@ -33,7 +33,7 @@
             </div>
             <div class="col-lg-4">
                 <div v-if="tag">
-                    <relevant-articles :tag="tag"></relevant-articles>
+                    <relevant-articles :tag="tag" :sort="true"></relevant-articles>
                 </div>
                 <div>
                     <popular-tags></popular-tags>
