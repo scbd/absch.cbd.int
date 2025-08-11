@@ -8,10 +8,9 @@ import 'ngDialog';
 import '~/services/main'; // jshint ignore:line
 import documentSelectorT from '~/app-text/views/forms/edit/document-selector.json';
 import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
-import { PAGINATION_OPTIONS_WITH_ALL } from '~/services/filters/constant.js';
+import { PAGINATION_OPTIONS_WITH_ALL, CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE } from '~/services/filters/constant.js';
 import {Tooltip} from 'bootstrap';
 import KmDocumentApi from "~/api/km-document";
-const CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE = 'storedDocumentPageSize';
 
 app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService', 'realm','apiToken',
     function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService, realm, apiToken) {
