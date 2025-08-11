@@ -22,6 +22,6 @@ export const PAGINATION_OPTIONS_DEFAULT = [
     { value: 100, label: numbersText.oneHundred },
     { value: 300, label: numbersText.threeHundred }];
 
-export const CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE = 'storedDocumentPageSize';
-export const CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE = 'storedReferencePageSize';
-export const CACHE_PAGINATION_SEARCH_PAGE_SIZE = 'storedSearchPageSize';
+export const CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE = 'userPreferenceDocumentSelectorPageSize';
+export const CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE = 'userPreferenceReferenceRecordsPageSize';
+export const CACHE_PAGINATION_SEARCH_PAGE_SIZE = 'userPreferenceSearchResultPageSize';
