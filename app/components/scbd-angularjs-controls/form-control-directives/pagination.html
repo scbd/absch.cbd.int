@@ -3,7 +3,7 @@
     <ul class="pagination">
         <li class="page-item d-none d-lg-inline-block pagination-page-count">
             <a rel="noopener" class="page-link" disabled>
-                <span>{{::('paginationT.page'|$translate)}} <span ng-bind="currentPage"></span> {{::('paginationT.of'|$translate)}} <span ng-bind="pageCount"></span></span>
+                {{::('paginationT.page'|$translate)}} <span ng-bind="currentPage"></span> {{::('paginationT.of'|$translate)}} <span ng-bind="pageCount"></span>
             </a>
         </li>
         <li ng-class="{'disabled': currentPage-1 == 0}" class="page-item d-none d-sm-inline-block pagination-btn-first">
