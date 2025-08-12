@@ -5,6 +5,7 @@ import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';
 import 'flag-icons-css';
+import countryPartyStatus from '../../components/common/country-party-status.vue'
 import countryProfileT from '~/app-text/views/countries/country-profile.json';
 
   export { default as template } from './country-profile.html';
@@ -16,6 +17,10 @@ import countryProfileT from '~/app-text/views/countries/country-profile.json';
       $scope.isBCH     = realm.is('BCH');
       $scope.isABS     = realm.is('ABS');
       $scope.locale    = locale;
+
+      $scope.exportVueComponent = {
+          components: { countryPartyStatus },
+      }
 
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){ 
