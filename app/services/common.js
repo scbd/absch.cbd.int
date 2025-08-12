@@ -349,10 +349,19 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                     country.instrument  = countryDetails.treaties[appTreaties[appName]].instrument;
                     country.dateSigned  = countryDetails.treaties[appTreaties[appName]].signature;
                     country.treaties    = countryDetails.treaties;
-                    if(isBch){
-                        country.isNKLSParty = isPartyToNKLSP(countryDetails);
-                        country.partyToNKLSPDate = countryDetails.treaties.XXVII8c.party || null;
-                    }
+                    
+                    country.isChmParty = isParty(countryDetails, 'chm') || country.code == 'EU'; // ToDo: change name, or remove if this is isCBDParty
+                    country.partyToChmDate = countryDetails.treaties.XXVII8.party || null;
+
+                    country.isCartagenaParty = isParty(countryDetails, 'bch') || country.code == 'EU';
+                    country.partyToCartagenaDate = countryDetails.treaties.XXVII8a.party || null;
+
+                    country.isNagoyaParty    = isParty(countryDetails, 'abs') || country.code == 'EU';
+                    country.partyToNagoyaDate = countryDetails.treaties.XXVII8b.party || null;
+
+                    country.isNKLSParty = isPartyToNKLSP(countryDetails);
+                    country.partyToNKLSPDate = countryDetails.treaties.XXVII8c.party || null;
+
                     if (country.isInbetweenParty)
                         country.entryIntoForce = moment.utc(treaties[appTreaties[appName]].deposit).add(90, 'day');
                     else
@@ -362,7 +371,8 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                 }                
 
                 //==================================================================================
-                function isParty(entity) {
+                function isParty(entity, realm) {
+                    realm = realm || appName;
 
                     if (entity && entity.isParty != undefined)
                         return entity.isParty;
@@ -372,15 +382,15 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
 
                     return entity &&                         
                         (   
-                            moment.utc().diff(moment.utc(entity.treaties[appTreaties[appName]].deposit), 'days') >= 90 || 
-                            moment.utc(entity.treaties[appTreaties[appName]].party) <= moment.utc()
+                            moment.utc().diff(moment.utc(entity.treaties[appTreaties[realm]].deposit), 'days') >= 90 || 
+                            moment.utc(entity.treaties[appTreaties[realm]].party) <= moment.utc()
                         ) && 
                         (
-                            entity.treaties[appTreaties[appName]].instrument == "ratification"  ||
-                            entity.treaties[appTreaties[appName]].instrument == "accession"     ||
-                            entity.treaties[appTreaties[appName]].instrument == "acceptance"    || 
-                            entity.treaties[appTreaties[appName]].instrument == "approval"      ||
-                            entity.treaties[appTreaties[appName]].instrument == "succession"
+                            entity.treaties[appTreaties[realm]].instrument == "ratification"  ||
+                            entity.treaties[appTreaties[realm]].instrument == "accession"     ||
+                            entity.treaties[appTreaties[realm]].instrument == "acceptance"    || 
+                            entity.treaties[appTreaties[realm]].instrument == "approval"      ||
+                            entity.treaties[appTreaties[realm]].instrument == "succession"
                         );
                 }
                 //==================================================================================
