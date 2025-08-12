@@ -27,7 +27,7 @@
     "CbdCountryProfile": "CBD Country Profile:",
     "addIno": "Additional information for the country profile",
     "lastUpdated": "Last updated",
-    "partyOfConvention":"Party of the convention",
-    "notPartyOfConvention":"Not a party of the convention"
+    "partyToConvention":"Party to the convention",
+    "notPartyToConvention":"Not a party to the convention"
 
 }

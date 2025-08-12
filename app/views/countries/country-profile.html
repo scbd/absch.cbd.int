@@ -14,22 +14,21 @@
                 <h1 class="fs-1 my-2"><i class="fi fi-{{country.code.toLowerCase()}}"></i> <strong> <span ng-bind="country.name"></span> </strong>
                 </h1>
                 <div class="p-3 bg-white">
+
+                        <div ng-if="isCHM && exportVueComponent"> 
+                            <country-party-status ng-vue="exportVueComponent" :country="country">  </country-party-status>
+                        </div>
+
                         <div class="mb-1 fs-6" ng-if="isABS">
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">{{::('countryProfileT.notPartyToNagoya'|$translate)}}</span>
                             <span ng-if="country.isParty" class="color-party bold">{{::('countryProfileT.partyToNagoya'|$translate)}}</span>
                             <span ng-if="country.isInbetweenParty" class="color-inbetween bold">{{::('countryProfileT.ratified'|$translate)}}</span>
                         </div>
-                        <div class="mb-1 fs-6" ng-if="isCHM">
-                            <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">{{::('countryProfileT.notPartyOfConvention'|$translate)}}</span>
-                            <span ng-if="country.isParty" class="color-party bold">{{::('countryProfileT.partyOfConvention'|$translate)}}</span>
-                            <span ng-if="country.isInbetweenParty" class="color-inbetween bold">{{::('countryProfileT.ratified'|$translate)}}</span>
-                        </div>
-
                         <div class="mb-1 fs-6" ng-if="isBCH">
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">{{::('countryProfileT.notPartyToCartagena'|$translate)}}</span>
                             <span ng-if="country.isParty" class="color-party bold">{{::('countryProfileT.partyToCartagena'|$translate)}}</span>
                         </div>
-                        <div ng-if="country.isParty || country.isInbetweenParty" class="mt-1 mb-2" >
+                        <div ng-if="!isCHM && (country.isParty || country.isInbetweenParty)" class="mt-1 mb-2" >
                             <span class="bold" ng-class="{' color-party': country.isParty, ' color-non-party':!country.isParty && !country.isInbetweenParty, ' color-inbetween': country.isInbetweenParty}">
                                 (<span ng-if="country.isInbetweenParty">{{::('countryProfileT.entry'|$translate)}}</span><span ng-if="country.isParty && !country.isInbetweenParty">{{::('countryProfileT.since'|$translate)}}</span> 
                                 <span ng-bind="country.entryIntoForce|formatDate"></span>)
