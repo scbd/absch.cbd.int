@@ -3489,6 +3489,16 @@ embed-footer{
 }
 .has-cover {
     min-height: 96px;
+.text-chm{
+    color: #7C92E4;
+}
+
+.text-bch{
+    color: #00405C;
+}
+.text-abs{
+    color: #009B48;
+
 }
 @media (min-width: 1281px) {
     .responsive-search {
