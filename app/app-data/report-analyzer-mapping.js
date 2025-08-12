@@ -1,5 +1,7 @@
 import reportTranslation from '../app-text/report-analyzer/report-analyzer-mapping.json' assert { type: "json" };
 import { mergeTranslationKeys } from '../services/translation-merge.js';
+import absOfflineFormats from '../app-data/abs/offline-formats.json' assert { type: 'json' };
+import bchOfflineFormats from '../app-data/bch/offline-formats.json' assert { type: 'json' };
 
 const reportAnalyzerMappingJson = mergeTranslationKeys(reportTranslation);
 export const analyzerMapping =
@@ -13,14 +15,7 @@ export const analyzerMapping =
             "dataUrl"      : "/api/v2017/national-reports-np",
             "year"          : "2017",
             "deadline"      : "2017-11-01",
-            "offlineFormats": [
-                {"lang": "en", "url":"https://www.cbd.int/abs/en/commonformats/NR-en.doc"},
-                {"lang": "fr", "url":"https://www.cbd.int/abs/fr/commonformats/NR-fr.doc"},
-                {"lang": "es", "url":"https://www.cbd.int/abs/es/commonformats/NR-es.doc"},
-                {"lang": "ru", "url":"https://www.cbd.int/abs/ru/commonformats/NR-ru.doc"},
-                {"lang": "ar", "url":"https://www.cbd.int/abs/ar/commonformats/NR-ar.doc"},
-                {"lang": "zh", "url":"https://www.cbd.int/abs/zh/commonformats/NR-zh.doc"}
-            ]
+            "offlineFormats": absOfflineFormats.npInterimNationalReport1,
         },
         {
             "type"         : "absNationalReport1",
@@ -30,14 +25,7 @@ export const analyzerMapping =
             "dataUrl"      : "/api/v2019/report-analyzer/abs-national-report-1",
             "year"          : "2024",
             "deadline"      : "2026-02-28",
-            "offlineFormats": [
-                {"lang": "en", "url":"https://www.cbd.int/abs/en/commonformats/NR1-en.doc"},
-                {"lang": "fr", "url":"https://www.cbd.int/abs/fr/commonformats/NR1-fr.doc"},
-                {"lang": "es", "url":"https://www.cbd.int/abs/es/commonformats/NR1-es.doc"},s
-                {"lang": "ru", "url":"https://www.cbd.int/abs/ru/commonformats/NR1-ru.doc"},
-                {"lang": "ar", "url":"https://www.cbd.int/abs/ar/commonformats/NR1-ar.doc"},
-                {"lang": "zh", "url":"https://www.cbd.int/abs/zh/commonformats/NR1-zh.doc"}
-            ]
+            "offlineFormats": absOfflineFormats.absNationalReport1,
         }
     ],
     "bch" : [
@@ -106,14 +94,7 @@ export const analyzerMapping =
                                 {"title": "Compare with 3rd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-3.json"},
                                 {"title": "Compare with 2nd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-2.json"}
                               ],
-            "offlineFormats": [
-                                  {"lang": "ar", "url":"https://bch.cbd.int/resources/common-formats/ar/nationalrecord_4th_nationalreportcartagenaprotocol_ar.docx"},
-                                  {"lang": "en", "url":"https://bch.cbd.int/resources/common-formats/en/nationalrecord_4th_nationalreportcartagenaprotocol_en.docx"},
-                                  {"lang": "es", "url":"https://bch.cbd.int/resources/common-formats/es/nationalrecord_4th_nationalreportcartagenaprotocol_es.docx"},
-                                  {"lang": "fr", "url":"https://bch.cbd.int/resources/common-formats/fr/nationalrecord_4th_nationalreportcartagenaprotocol_fr.docx"},
-                                  {"lang": "ru", "url":"https://bch.cbd.int/resources/common-formats/ru/nationalrecord_4th_nationalreportcartagenaprotocol_ru.docx"},
-                                  {"lang": "zh", "url":"https://bch.cbd.int/resources/common-formats/zh/nationalrecord_4th_nationalreportcartagenaprotocol_zh.docx"}
-                              ]	
+            "offlineFormats": bchOfflineFormats.cpbNationalReport4,	
         },
         {   
             "type"          : "cpbNationalReport5",
@@ -127,14 +108,7 @@ export const analyzerMapping =
                                 {"title": "Compare with 3rd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-3.json"},
                                 {"title": "Compare with 2nd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-2.json"}
                               ],
-            "offlineFormats": [
-                                  {"lang": "ar", "url":"https://bch.cbd.int/resources/common-formats/ar/nationalrecord_5th_nationalreportcartagenaprotocol_ar.docx"},
-                                  {"lang": "en", "url":"https://bch.cbd.int/resources/common-formats/en/nationalrecord_5th_nationalreportcartagenaprotocol_en.docx"},
-                                  {"lang": "es", "url":"https://bch.cbd.int/resources/common-formats/es/nationalrecord_5th_nationalreportcartagenaprotocol_es.docx"},
-                                  {"lang": "fr", "url":"https://bch.cbd.int/resources/common-formats/fr/nationalrecord_5th_nationalreportcartagenaprotocol_fr.docx"},
-                                  {"lang": "ru", "url":"https://bch.cbd.int/resources/common-formats/ru/nationalrecord_5th_nationalreportcartagenaprotocol_ru.docx"},
-                                  {"lang": "zh", "url":"https://bch.cbd.int/resources/common-formats/zh/nationalrecord_5th_nationalreportcartagenaprotocol_zh.docx"}
-                              ]	
+            "offlineFormats": bchOfflineFormats.cpbNationalReport5,		
         }
     ]
 }
