@@ -24,14 +24,12 @@
     import { useI18n } from 'vue-i18n';
     import messages from '../../app-text/components/kb.json';
     import { getRealmArticleTag } from "../../services/composables/articles.js";
-    import {  useAuth } from "@scbd/angular-vue/src/index.js"; 
     import SolrApi from "~/api/solr.js";
     import { ARTICLES_REALM } from '~/services/filters/constant';
     
-    const auth = useAuth();
     const { t, locale } = useI18n({ messages });
     const articleRealmTag = getRealmArticleTag();
-    const solrAPI = new SolrApi({ tokenReader: () => auth.token() }); 
+    const solrAPI = new SolrApi(); 
 
     const props = defineProps({
         tag: { type: String, required: false },

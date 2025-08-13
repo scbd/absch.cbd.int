@@ -8,8 +8,8 @@ import dockedSideBarT from '~/app-text/views/directives/docked-side-bar.json';
 import { ARTICLES_REALM } from '~/services/filters/constant';
 import ArticlesApi from '~/components/kb/article-api';
 
-app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 'translationService', 'apiToken','locale',
-    function (realm, $rootScope, $route, $location, translationService, apiToken, locale) {
+app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 'translationService', 'locale',
+    function (realm, $rootScope, $route, $location, translationService, locale) {
     return {
         restrict: 'AE',
         replace: true,
@@ -83,7 +83,7 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 't
                         query.push(`(title_${localeKey}_txt:${escapedSearchText} OR text_${localeKey}_txt:${escapedSearchText} OR summary_${localeKey}_txt:${escapedSearchText} OR content_${localeKey}_txt:${escapedSearchText})`); 
                     }
                     
-                    const solrAPI = new SolrApi({ tokenReader: () => apiToken.get() }); // Do we need to pass tokenReader here?
+                    const solrAPI = new SolrApi();
                     try {
                         const result = await solrAPI.query({
                         query: query.join(' AND '),

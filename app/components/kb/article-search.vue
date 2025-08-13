@@ -55,7 +55,7 @@
       import { useI18n } from 'vue-i18n';
       import messages from '../../app-text/components/kb.json';
       import { useRealm } from '../../services/composables/realm.js';
-      import { useRoute, useAuth } from "@scbd/angular-vue/src/index.js";
+      import { useRoute } from "@scbd/angular-vue/src/index.js";
       import { loadKbCategories, getUrl, getRealmArticleTag } from '../../services/composables/articles.js';
       import paginate from '../common/pagination.vue';
       import SolrApi from "~/api/solr.js";
@@ -66,8 +66,7 @@
       const route = useRoute().value;
       const { t, locale } = useI18n({ messages });
       const realm = useRealm();
-      const auth = useAuth();
-      const solrAPI = new SolrApi({ tokenReader: () => auth.token() }); 
+      const solrAPI = new SolrApi(); 
       const articles = ref([]);
       const loading = ref(true);
       const pageNumber = ref(1);
