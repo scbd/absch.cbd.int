@@ -34,7 +34,16 @@ import homeArticlesT from '~/app-text/views/directives/home-articles.json'
                             const tag = $scope.tags;
                             const pinnedAnnouncementReq = [];
                             const allAnnouncementReq = [];
-                            allAnnouncementReq.push({"$match":{"$and":[{"adminTags":encodeURIComponent(tag)}]}});
+                            allAnnouncementReq.push({"$match":{
+                                    "$and":[
+                                        {"adminTags":encodeURIComponent(tag)},
+                                        {
+                                            $or: [
+                                                {'customProperties.pinned':false},
+                                                {'customProperties.pinned':{$exists:false}}
+                                            ]
+                                        }
+                                    ]}});
                             allAnnouncementReq.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
                             allAnnouncementReq.push({"$sort": { 'meta.createdOn': -1 }})
                             allAnnouncementReq.push({ "$limit": parseInt($scope.counts)});
@@ -43,7 +52,7 @@ import homeArticlesT from '~/app-text/views/directives/home-articles.json'
                                     "$and":[
                                         {
                                             "adminTags":encodeURIComponent(tag),
-                                            'customProperties.pinned':'true'
+                                            'customProperties.pinned':true
                                         }
                                     ]
                                 }});
@@ -64,7 +73,7 @@ import homeArticlesT from '~/app-text/views/directives/home-articles.json'
                                 $scope.articles = data?.map(e=>{
                                     const title = $filter('lstring')(e.title, locale)?.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
                                     e.url = `kb/tags/${tag}/${title}/${e._id}`
-                                    e.isPinned = e.customProperties?.pinned || e.customProperties?.pinned == 'true'
+                                    e.isPinned = e.customProperties?.pinned
                                     return e;
                                 });
                             }
