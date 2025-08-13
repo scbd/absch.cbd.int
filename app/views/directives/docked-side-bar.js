@@ -2,10 +2,11 @@ import app from '~/app';
 import _ from 'lodash';
 import '~/services/main';
 import template from './docked-side-bar.html';
- import SolrApi from "~/api/solr.js";
+import SolrApi from "~/api/solr.js";
 import 'ck-editor-css';
 import dockedSideBarT from '~/app-text/views/directives/docked-side-bar.json';
 import { ARTICLES_REALM } from '~/services/filters/constant';
+import ArticlesApi from '~/components/kb/article-api';
 
 app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 'translationService', 'apiToken','locale',
     function (realm, $rootScope, $route, $location, translationService, apiToken, locale) {
@@ -140,11 +141,24 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 't
                     $(window).off('scroll', scrollHandlerfn)
                 });
 
-                $scope.details =function(article)
-                {
-                    $scope.showArticle = true;
-                    $scope.articleData = article;
+                $scope.details = async function(article) {
+                    try {
+                        $scope.loading = true;
+                        $scope.showArticle = true;
+                        const articlesApi = new ArticlesApi();
+                        const articleData = await articlesApi.getArticleById(article.id);
+                        $scope.$applyAsync(() => {
+                            $scope.articleData = articleData;
+                        });
+                    } catch (err) {
+                        console.error("Error loading article", err);
+                    } finally {
+                        $scope.$applyAsync(() => {
+                            $scope.loading = false;
+                        });
+                    }
                 }
+
                 $scope.back =function()
                 {
                     $scope.showArticle = false;
