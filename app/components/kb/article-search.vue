@@ -54,7 +54,6 @@
       import { ref, onMounted } from "vue";
       import { useI18n } from 'vue-i18n';
       import messages from '../../app-text/components/kb.json';
-      import { useRealm } from '../../services/composables/realm.js';
       import { useRoute } from "@scbd/angular-vue/src/index.js";
       import { loadKbCategories, getUrl, getRealmArticleTag } from '../../services/composables/articles.js';
       import paginate from '../common/pagination.vue';
@@ -65,7 +64,6 @@
 
       const route = useRoute().value;
       const { t, locale } = useI18n({ messages });
-      const realm = useRealm();
       const solrAPI = new SolrApi(); 
       const articles = ref([]);
       const loading = ref(true);
@@ -76,7 +74,7 @@
       const search = ref('');
       const articlesCount = ref(0);
       const realmArticleTag = getRealmArticleTag();
-  
+
       onMounted( async() => {
           categories.value = await loadKbCategories(locale.value);
           search.value = route.query?.search || "";         
@@ -110,14 +108,13 @@
           articles.value = [];
           loading.value = true;
           const searchText = search.value;
-          const realm = realmTag.value; // ToDo: confirm if this is needed as we are using ARTICLES_REALM in the query
           const localeKey = locale.value.toUpperCase(); 
           const start = (page - 1) * recordsPerPage.value;
           const rowsPerPage = recordsPerPage.value;
 
           const escapedSearchText = `"${searchText.replace(/"/g, '\\"')}"`;
           const query = searchText
-            ? `realm_ss:${ARTICLES_REALM} AND (title_${localeKey}_txt:${escapedSearchText} OR text_${localeKey}_txt:${escapedSearchText} OR summary_${localeKey}_txt:${escapedSearchText} OR content_${localeKey}_txt:${escapedSearchText})`
+            ? `realm_ss:${ARTICLES_REALM} AND adminTags_ss:${realmTag.value} AND (title_${localeKey}_txt:${escapedSearchText} OR text_${localeKey}_txt:${escapedSearchText} OR summary_${localeKey}_txt:${escapedSearchText} OR content_${localeKey}_txt:${escapedSearchText})`
             : '*:*';
 
           try {
