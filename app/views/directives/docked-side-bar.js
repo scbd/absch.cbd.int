@@ -41,11 +41,11 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 't
                     
                     if(queryTags)
                         tags = _(queryTags.split(',')).compact().map(function(tag){
-                                    return encodeURIComponent(_.trim(tag))
+                                    return _.trim(tag)
                                 }).value();
                     else{
                         if($scope.type == 'announcements')
-                            tags =  [encodeURIComponent("announcement")];
+                            tags =  ["announcement"];
                         else{
                             let paths = $route.current.originalPath.split('/')
                             if($location.path() == '/')
@@ -67,13 +67,13 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 't
 
                             if(paths){
                                 tags =  _(paths).compact().map(function(path){
-                                    return encodeURIComponent(path.trim())
+                                    return path.trim()
                                 }).value();
                             }
                         }
                     }
 
-                    tags.push(encodeURIComponent(realm.value.toLowerCase().replace(/-.*/,''))); 
+                    tags.push(realm.value.toLowerCase().replace(/-.*/,'')); 
 
                     if(tags.length)
                         query.push(`(${tags.map(t => `adminTags_ss:${t}`).join(' AND ')})`);
