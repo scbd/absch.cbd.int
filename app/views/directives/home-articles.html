@@ -6,12 +6,14 @@
                 <span >{{::('homeArticlesT.loading'|$translate)}}...&nbsp;</span>
                 <div class="spinner-border" role="status"></div>
               </div>
-            <div class="col" ng-repeat="article in articles | orderBy:'meta.createdOn':true" ng-if="!loading && articles.length">
+            <div class="col" ng-repeat="article in articles" ng-if="!loading && articles.length">
                 <div style="height:280px"
                     class="card my-2 position-relative shadow bg-white visited-background cursor-pointer">
                     <a class="stretched-link text-dark text-decoration-none card-title" style="display: contents" ng-href="{{article.url}}"></a>
-                    <span class="badge bg-secondary position-absolute top-0 end-0"><span
-                            ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
+                    <span class=" position-absolute top-0 end-0">
+                        <span class="badge bg-secondary" ng-bind="article.meta.createdOn | formatDateWithUtc"></span>
+                        <i class="bi bi-pin-fill ms-1" ng-if="article.isPinned"></i>
+                    </span>
 
                     <div
                         style="width:100%;height:180px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url, imageSize._400)}}');">
