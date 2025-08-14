@@ -34,7 +34,7 @@
       params.set('width', props.width);
       params.set('height', props.height);
       parsedUrl.search = params.toString();
-      return encodeURI(parsedUrl.toString());
+      return parsedUrl.toString();
     } catch (error) {
       console.error('Invalid thumbnail URL:', props.url, error); 
       return props.url;
