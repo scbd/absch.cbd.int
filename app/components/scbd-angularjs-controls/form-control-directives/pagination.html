@@ -36,8 +36,8 @@
             </a>
         </li>
         <li class="page-item d-none d-md-inline-block pagination-items-per-page">
-                <a rel="noopener" class="page-link" data-title="Items per page" data-bs-toggle="tooltip">
-                <span class="d-none d-lg-inline-block">{{::('paginationT.itemsPerPage'|$translate)}}</span>
+                <a rel="noopener" class="page-link" disabled data-title="Items per page" data-bs-toggle="tooltip">
+                <span class="d-none d-lg-inline-block text-black-50">{{::('paginationT.itemsPerPage'|$translate)}}</span>
                 <select style="color: #0d6efd;" ng-model="pageSize" ng-change="onPageSizeChanged({size:pageSize});">
                     <option ng-value="25">{{::('numbers.twentyFive'|$translate)}}</option>
                     <option ng-value="50">{{::('numbers.fifty'|$translate)}}</option>
