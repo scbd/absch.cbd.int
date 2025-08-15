@@ -512,8 +512,11 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                             $('form').filter('.dirty').removeClass('dirty');
                             originalDocument = angular.copy($scope.getDocumentFn());
                             documentDraftSaved(draftInfo);
-                            if(!$scope.isDialog)
-                                $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit')).search({softReload:'true'});
+                            if(!$scope.isDialog){
+                                if (!$route?.current?.params?.identifier) {
+                                    $location.path($location.path().replace(/\/new/, '/' + draftInfo.identifier + '/edit')).search({softReload:'true'});;
+                                }
+                            }
                             return draftInfo;
                         }
 
