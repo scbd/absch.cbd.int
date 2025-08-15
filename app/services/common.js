@@ -340,6 +340,7 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                     country.name = countryDetails.name;
                     country.code = countryDetails.code;
                     country.isCBDParty = isPartyToCBD(countryDetails) || country.code == 'EU';
+                    country.partyToCBDDate = countryDetails.treaties.XXVII8.party || null;
                     country.isParty = isParty(countryDetails) || country.code == 'EU';
                     country.isSignatory = isSignatory(countryDetails) || country.code == 'EU';
                     country.isRatified = isRatified(countryDetails) || country.code == 'EU';
@@ -349,9 +350,6 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                     country.instrument  = countryDetails.treaties[appTreaties[appName]].instrument;
                     country.dateSigned  = countryDetails.treaties[appTreaties[appName]].signature;
                     country.treaties    = countryDetails.treaties;
-                    
-                    country.isChmParty = isParty(countryDetails, 'chm') || country.code == 'EU'; // ToDo: change name, or remove if this is isCBDParty
-                    country.partyToChmDate = countryDetails.treaties.XXVII8.party || null;
 
                     country.isCartagenaParty = isParty(countryDetails, 'bch') || country.code == 'EU';
                     country.partyToCartagenaDate = countryDetails.treaties.XXVII8a.party || null;
