@@ -54,6 +54,10 @@
                         </span>
                     </li>
                 </ul>
+                <!-- ToDo: move to translation -->
+                <h3 ng-if="isMaxRegionsSelected" class="color-red"> 
+                    Note: You have selected {{selectedRegions.length}} regions. Only 10 regions can be selected at a time for URL sharing
+                </h3>
             </td>
     </table>
     <table class="table table-hover bg-white">
