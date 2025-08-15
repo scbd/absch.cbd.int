@@ -25,20 +25,26 @@ import messages from '../../app-text/views/countries/country-profile.json';
     country: {
       type: Object,
       required: true
+    },
+    visiblePartyRealms: {
+      type: Array,
+      default: () => []
     }
   })
 
   // Define party statuses with their properties
   const partyStatuses = [
     {
-      key: 'isChmParty',
+      key: 'isCBDParty',
+      realm: 'chm',
       label: t("partyToConvention"),
       notLabel: t("notPartyToConvention"),
-      date: props.country.partyToChmDate,
+      date: props.country.partyToCBDDate,
       class: 'text-chm'
     },
     {
       key: 'isNagoyaParty',
+      realm: 'abs',
       label: t("partyToNagoya"),
       notLabel: t("notPartyToNagoya"),
       date: props.country.partyToNagoyaDate,
@@ -46,6 +52,7 @@ import messages from '../../app-text/views/countries/country-profile.json';
     },
     {
       key: 'isCartagenaParty',
+      realm: 'bch',
       label: t("partyToCartagena"),
       notLabel: t("notPartyToCartagena"),
       date: props.country.partyToCartagenaDate,
@@ -53,14 +60,21 @@ import messages from '../../app-text/views/countries/country-profile.json';
     },
     {
       key: 'isNKLSParty',
+      realm: 'bch',
       label: t("partyToSuppProtocol"),
       notLabel: t("notPartyToSuppProtocol"),
       date: props.country.partyToNKLSPDate,
       class: 'color-NKLSP'
     }
-  ];
+  ].filter(party => {
+    // Filter parties based on the visiblePartyRealms prop, visible-party-realms="['chm']" for chm only
+    if (props.visiblePartyRealms.length > 0) {
+      return props.visiblePartyRealms.includes(party.realm);
+    }
+    // If no filter is applied, include all parties
+    return true;
+  });
 
-  // Sort by date (new first, nulls last)
   partyStatuses.sort((a, b) => {
     if (!a.date) return 1;
     if (!b.date) return -1;
