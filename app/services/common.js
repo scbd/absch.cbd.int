@@ -351,11 +351,32 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                     country.dateSigned  = countryDetails.treaties[appTreaties[appName]].signature;
                     country.treaties    = countryDetails.treaties;
 
-                    country.isCartagenaParty = isParty(countryDetails, 'bch') || country.code == 'EU';
-                    country.partyToCartagenaDate = countryDetails.treaties.XXVII8a.party || null;
-
-                    country.isNagoyaParty    = isParty(countryDetails, 'abs') || country.code == 'EU';
-                    country.partyToNagoyaDate = countryDetails.treaties.XXVII8b.party || null;
+                    country.chm = {
+                        isParty: isParty(countryDetails, 'chm'),
+                        partyToDate : countryDetails.treaties.XXVII8.party || null,
+                        isSignatory: isSignatory(countryDetails, 'chm'),
+                        dateSigned: countryDetails.treaties.XXVII8.signature,
+                        isInbetweenParty : moment.utc().diff(moment.utc(treaties[appTreaties['chm']].deposit), 'days') < 90,
+                        entryIntoForce : moment.utc(treaties[appTreaties['chm']].deposit).add(90, 'day') || null
+                    };
+                    country.abs = {
+                        isParty: isParty(countryDetails, 'abs'),
+                        partyToDate : countryDetails.treaties.XXVII8b.party || null,
+                        isSignatory: isSignatory(countryDetails, 'abs'),
+                        dateSigned: countryDetails.treaties.XXVII8b.signature,
+                        isInbetweenParty : moment.utc().diff(moment.utc(treaties[appTreaties['abs']].deposit), 'days') < 90,
+                        entryIntoForce : moment.utc(treaties[appTreaties['abs']].deposit).add(90, 'day') || null
+                    };
+                    country.bch = {
+                        isParty: isParty(countryDetails, 'bch'),
+                        partyToDate : countryDetails.treaties.XXVII8a.party || null,
+                        isSignatory: isSignatory(countryDetails, 'bch'),
+                        dateSigned: countryDetails.treaties.XXVII8a.signature,
+                        isInbetweenParty : moment.utc().diff(moment.utc(treaties[appTreaties['bch']].deposit), 'days') < 90,
+                        entryIntoForce : moment.utc(treaties[appTreaties['bch']].deposit).add(90, 'day') || null,
+                        isNKLSParty : isPartyToNKLSP(countryDetails),
+                        partyToNKLSPDate : countryDetails.treaties.XXVII8c.party || null
+                    };
 
                     country.isNKLSParty = isPartyToNKLSP(countryDetails);
                     country.partyToNKLSPDate = countryDetails.treaties.XXVII8c.party || null;
