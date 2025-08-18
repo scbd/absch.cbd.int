@@ -7,7 +7,7 @@
             {{t("searchResults") }} <span><small>({{articlesCount}})</small></span>      
           </h4>
           <hr>
-          <div v-for="article in articles">
+          <div v-for="article in articles" :key="article.id">
             <div class="card mb-3">
               <div class="d-flex flex-row bd-highlight ">
                 <div class="p-2 bd-highlight" v-if="article.coverImage">
@@ -17,20 +17,20 @@
                 <div class="p-2 bd-highlight w-100">
                   <div class="card-body">                  
                     <span class="badge bg-secondary position-absolute top-0 end-0">
-                      {{formatDate(article.meta.createdOn, 'DD MMM YYYY')}}</span>
+                      {{formatDate(article?.createdDate, 'DD MMM YYYY')}}</span>
                       
                     <h5 class="card-title"><a class="link-dark"
-                        :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{lstring(article.title, locale)}}</a>                      
+                        :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{article.title}}</a>                      
                     </h5>
                     <p v-if="article.summary" class="card-text h-100">
                       <a class="link-dark" :href="`${articleUrl(article, getTag(article.adminTags) )}`">
-                        {{lstring(article.summary, locale)}}
+                        {{article.summary}}
                       </a>
                     </p>
   
                     <div class="inner-area">
                       <i class="fa fa-tag" aria-hidden="true"></i>
-                      <a class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
+                      <a class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags" :key="tag">{{tag}}</a>
                     </div>
                   </div>
                 </div>
@@ -41,6 +41,9 @@
           <div v-if="articlesCount<1" class="alert alert-light">
             <strong>{{ t("noResultFound") }}</strong>
           </div>
+        </div>
+        <div v-if="error" class="alert alert-danger">
+          {{ t("errorLoading") }}
         </div>
       </div>
       <div class="d-inline-block" v-if="articlesCount>10">
@@ -54,20 +57,18 @@
       import { ref, onMounted } from "vue";
       import { useI18n } from 'vue-i18n';
       import messages from '../../app-text/components/kb.json';
-      import { useRealm } from '../../services/composables/realm.js';
-      import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js";
-      import { loadKbCategories, getUrl } from '../../services/composables/articles.js';
+      import { useRoute } from "@scbd/angular-vue/src/index.js";
+      import { loadKbCategories, getUrl, getRealmArticleTag } from '../../services/composables/articles.js';
       import paginate from '../common/pagination.vue';
-      import ArticlesApi from './article-api';
+      import SolrApi from "~/api/solr.js";
       import "../kb/filters";
-      import { formatDate, lstring } from './filters';
-      import { getRealmArticleTag } from "../../services/composables/articles.js";
+      import  {escape, andOr, localizeFields } from './solr/queries.js'
+      import { formatDate } from './filters';
+      import { OASIS_REALM } from '~/services/filters/constant';
 
       const route = useRoute().value;
       const { t, locale } = useI18n({ messages });
-      const realm = useRealm();
-      const auth = useAuth();
-      const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
+      const solrAPI = new SolrApi(); 
       const articles = ref([]);
       const loading = ref(true);
       const pageNumber = ref(1);
@@ -76,8 +77,9 @@
       const categories = ref([]);
       const search = ref('');
       const articlesCount = ref(0);
+      const error = ref(false);
       const realmArticleTag = getRealmArticleTag();
-  
+
       onMounted( async() => {
           categories.value = await loadKbCategories(locale.value);
           search.value = route.query?.search || "";         
@@ -94,7 +96,7 @@
       };
   
       const tagUrl = (tag) => {
-        if(categories){
+        if (categories.value && tag) {
           const tagDetails = categories.value.find((e) => e.adminTags.includes(tag));
           const tagTitle = tagDetails?.title || '';
           return getUrl(tagTitle, undefined, tag);
@@ -102,85 +104,47 @@
       };
   
       const articleUrl = (article, tag) => {
-        return getUrl(lstring(article.title), article._id, tag);
+        return getUrl(article.title, article.id, tag);
       };
   
       const loadArticles = async (page) => {
-                pageNumber.value = page;
-                articlesCount.value = 0;
-                articles.value = [];
-                loading.value = true;
-                const countAg = [];
-                const searchAg = [];
-                if (search.value !== undefined) {
-                    const match = {
-                    "$match": {
-                        "$and": [
-                        {
-                            "$or": [
-                            { [`title.${locale.value}`]: { "$$contains": (search.value) } },
-                            { [`summary.${locale.value}`]: { "$$contains": (search.value) } },
-                            { [`content.${locale.value}`]: { "$$contains": (search.value) } }
-                            ]
-                        },
-                        { "adminTags": { $all: [realmTag.value] } }
-                        ]
-                    }
-                    };
-                    searchAg.push(match);
-                    countAg.push(match);
-                } else {
-                    const matchTag = {
-                    "$match": {
-                        "$and": [
-                        { "adminTags": { $all: [realmTag.value] } }
-                        ]
-                    }
-                    };
-                    searchAg.push(matchTag);
-                    countAg.push(matchTag);
-                }
-                countAg.push({
-                    "$match": {
-                    "$and": [
-                        { "adminTags": { $all: [realmTag.value] } }
-                    ]
-                    }
-                });
-                searchAg.push({
-                    "$project":
-                    {
-                    [`title`]: 1,
-                    [`summary`]: 1,
-                    [`coverImage`]: 1,
-                    adminTags: 1,
-                    "meta": 1,
-                    _id: 1
-                    }
-                });
-                searchAg.push({
-                    "$limit": pageNumber.value * recordsPerPage.value
-                });
-                searchAg.push({
-                    "$skip": (pageNumber.value - 1) * recordsPerPage.value
-                });
-                countAg.push({
-                    "$count": "count"
-                });
-                const countQuery = { "ag": JSON.stringify(countAg) };
-                const searchQuery = { "ag": JSON.stringify(searchAg) };
-                try {
-                    const [count, articlesList] = await Promise.all([articlesApi.queryArticles(countQuery), articlesApi.queryArticles(searchQuery)]);
-                    if ((articlesList || []).length) {
-                    articles.value = articlesList;
-                    articlesCount.value = count[0].count;
-                    }
-                } catch (e) {
-                    console.error(e);
-                } finally {
-                    loading.value = false;
-                }
-            };
+          pageNumber.value = page;
+          articlesCount.value = 0;
+          articles.value = [];
+          loading.value = true;
+          const searchText = search.value;
+          const localeKey = locale.value.toUpperCase(); 
+          const start = (page - 1) * recordsPerPage.value;
+          const rowsPerPage = recordsPerPage.value;
+
+          const escapedSearchText = `"${searchText.replace(/"/g, '\\"')}"`;
+          const query = searchText
+            ? `realm_ss:${OASIS_REALM} AND adminTags_ss:${realmTag.value} AND (title_${localeKey}_txt:${escapedSearchText} OR text_${localeKey}_txt:${escapedSearchText} OR summary_${localeKey}_txt:${escapedSearchText} OR content_${localeKey}_txt:${escapedSearchText})`
+            : '*:*';
+
+          try {
+            const result = await solrAPI.query({
+              query, 
+              fields: `title:title_${localeKey}_s,summary:summary_${localeKey}_s,coverImage:coverImage_ss,adminTags:adminTags_ss,createdDate:createdDate_dt,id`,
+              start,
+              rowsPerPage
+            });
+
+            const docs = result?.response?.docs || [];
+
+            const totalCount = result?.response?.numFound || 0;
+            if (docs.length > 0) {
+              articles.value = docs;
+              articlesCount.value = totalCount;
+            }
+
+          } catch (e) {
+            console.error('Solr query error:', e);
+            error.value = true;
+          } finally {
+            loading.value = false;
+          }
+      };
       const onChangePage = async (newPage) => {
         articles.value = [];
         loading.value = true;
