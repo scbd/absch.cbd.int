@@ -14,11 +14,13 @@ import countryProfileT from '~/app-text/views/countries/country-profile.json';
     function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService, translationService) {
       translationService.set('countryProfileT', countryProfileT);
       $scope.code      = $route.current.params.code;
+      $scope.realm     = realm;
       $scope.isBCH     = realm.is('BCH');
       $scope.isABS     = realm.is('ABS');
+      $scope.isCHM     = realm.is('CHM');
       $scope.locale    = locale;
 
-      $scope.exportVueComponent = {
+      $scope.vueComponent = {
           components: { countryPartyStatus },
       }
 

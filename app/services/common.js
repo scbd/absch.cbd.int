@@ -351,7 +351,7 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                     country.dateSigned  = countryDetails.treaties[appTreaties[appName]].signature;
                     country.treaties    = countryDetails.treaties;
 
-                    country.chm = {
+                    country.CHM = {
                         isParty: isParty(countryDetails, 'chm'),
                         partyToDate : countryDetails.treaties.XXVII8.party || null,
                         isSignatory: isSignatory(countryDetails, 'chm'),
@@ -359,7 +359,7 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                         isInbetweenParty : moment.utc().diff(moment.utc(treaties[appTreaties['chm']].deposit), 'days') < 90,
                         entryIntoForce : moment.utc(treaties[appTreaties['chm']].deposit).add(90, 'day') || null
                     };
-                    country.abs = {
+                    country.ABS = {
                         isParty: isParty(countryDetails, 'abs'),
                         partyToDate : countryDetails.treaties.XXVII8b.party || null,
                         isSignatory: isSignatory(countryDetails, 'abs'),
@@ -367,7 +367,7 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                         isInbetweenParty : moment.utc().diff(moment.utc(treaties[appTreaties['abs']].deposit), 'days') < 90,
                         entryIntoForce : moment.utc(treaties[appTreaties['abs']].deposit).add(90, 'day') || null
                     };
-                    country.bch = {
+                    country.BCH = {
                         isParty: isParty(countryDetails, 'bch'),
                         partyToDate : countryDetails.treaties.XXVII8a.party || null,
                         isSignatory: isSignatory(countryDetails, 'bch'),
