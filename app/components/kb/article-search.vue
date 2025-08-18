@@ -62,7 +62,7 @@
       import paginate from '../common/pagination.vue';
       import SolrApi from "~/api/solr.js";
       import "../kb/filters";
-      import  {escape, andOr, localizeFields } from './solr/queries.js'
+      import { escape } from '../../services/solr/queries.js';
       import { formatDate } from './filters';
       import { OASIS_REALM } from '~/services/filters/constant';
 
@@ -117,7 +117,7 @@
           const start = (page - 1) * recordsPerPage.value;
           const rowsPerPage = recordsPerPage.value;
 
-          const escapedSearchText = `"${searchText.replace(/"/g, '\\"')}"`;
+          const escapedSearchText = escape(searchText);
           const query = searchText
             ? `realm_ss:${OASIS_REALM} AND adminTags_ss:${realmTag.value} AND (title_${localeKey}_txt:${escapedSearchText} OR text_${localeKey}_txt:${escapedSearchText} OR summary_${localeKey}_txt:${escapedSearchText} OR content_${localeKey}_txt:${escapedSearchText})`
             : '*:*';
