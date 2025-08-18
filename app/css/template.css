@@ -3487,6 +3487,17 @@ embed-footer{
     background-color:#f1f1f1;
     opacity: 50%;
 }
+.text-chm{
+    color: #7C92E4;
+}
+
+.text-bch{
+    color: #00405C;
+}
+.text-abs{
+    color: #009B48;
+
+}
 @media (min-width: 1281px) {
     .responsive-search {
         float: right;
