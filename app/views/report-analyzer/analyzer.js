@@ -56,7 +56,7 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
             } finally {
                 //sessionStorage.removeItem('nrAnalyzerData');
             }
-            
+            $scope.$applyAsync();
             analyze($scope.activeReport ? true : false);
             
 
@@ -118,6 +118,7 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
                     regionsPreset: $scope.selectedRegionsPreset,
                     regionsPresetFilter: $scope.selectedRegionsPresetFilter
                 });
+                $scope.$applyAsync();
         }
         //========================================
         //
