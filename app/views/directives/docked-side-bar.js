@@ -5,7 +5,7 @@ import template from './docked-side-bar.html';
 import SolrApi from "~/api/solr.js";
 import 'ck-editor-css';
 import dockedSideBarT from '~/app-text/views/directives/docked-side-bar.json';
-import { escape } from '../../services/solr/queries.js';
+import { escape, andOr, localizeFields } from '../../services/solr/queries.js';
 import { OASIS_REALM } from '~/services/filters/constant';
 import ArticlesApi from '~/components/kb/article-api';
 
@@ -25,6 +25,7 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 't
                 const articlesApi = new ArticlesApi();
                 $scope.articles = [];
                 translationService.set('dockedSideBarT', dockedSideBarT);
+                
                 $scope.search = async (text)=>{ 
                     await loadArticles({queryTags:$scope.type == 'announcements' ? 'announcement' : 'context-help', searchText:text, skipRefetch:true});
                 }
@@ -79,40 +80,44 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 't
                     tags.push(realm.value.toLowerCase().replace(/-.*/,'')); 
 
                     if(tags.length)
-                        query.push(`(${tags.map(t => `adminTags_ss:${t}`).join(' AND ')})`);
+                        query.push(andOr(tags.map(t => `adminTags_ss:${t}`), 'AND'));
 
-                    if ((searchText || '').trim() != '') {
-                        const escapedSearchText = escape(searchText);
-                        query.push(`(title_${localeKey}_txt:${escapedSearchText} OR text_${localeKey}_txt:${escapedSearchText} OR summary_${localeKey}_txt:${escapedSearchText} OR content_${localeKey}_txt:${escapedSearchText})`); 
+                    const searchTextTrimmed = (searchText || '').trim();
+                    if(searchTextTrimmed) {
+                        const escapedSearchText = escape(searchTextTrimmed);    
+                        const fields = ['text_EN_txt', 'title_EN_txt', 'summary_EN_txt', 'content_EN_txt'];
+                        const queryFields = fields.map(f => `${localizeFields(f, localeKey)}:${escapedSearchText}`);
+                        query.push(andOr(queryFields, 'OR'));
                     }
-                    
+
+                    const solrQuery = query.length ? andOr(query, 'AND') : '*:*';
+
                     const solrAPI = new SolrApi();
                     try {
                         const result = await solrAPI.query({
-                        query: query.join(' AND '),
-                        fields: `title:title_${localeKey}_s,summary:summary_${localeKey}_s, content:content_${localeKey}_s, coverImage:coverImage_ss,adminTags:adminTags_ss,createdDate:createdDate_dt,id`,
-                        rowsPerPage: 20
-                    }); 
- 
-
-                    if(result?.response?.docs.length>0){
-                            $scope.$applyAsync(() => {
-                            $scope.articles = result.response.docs;
+                            query: solrQuery,
+                            fields: `title:${localizeFields('title_EN_s', localeKey)},summary:${localizeFields('summary_EN_s', localeKey)},coverImage:coverImage_ss,adminTags:adminTags_ss,createdDate:createdDate_dt,id`,
+                            rowsPerPage: 20
                         }); 
-                    }
-                    else if(!skipRefetch){ 
-                        return await loadArticles({queryTags:'context-help', skipRefetch:true});
-                    }
+ 
+                        if(result?.response?.docs.length>0){
+                            $scope.$applyAsync(() => {
+                                $scope.articles = result.response.docs;
+                            }); 
+                        }
+                        else if(!skipRefetch){ 
+                            return await loadArticles({queryTags:'context-help', skipRefetch:true});
+                        }
 
                     } catch (e) {
-                            console.error("error in load article",e);
-                            $scope.error = true;
-                        }
-                        finally {
-                            $scope.$applyAsync(() => {
-                                $scope.loading = false;
-                            });
-                        };
+                        console.error("error in load article",e);
+                        $scope.error = true;
+                    }
+                    finally {
+                        $scope.$applyAsync(() => {
+                            $scope.loading = false;
+                        });
+                    };
                 } 
 
                 var evtRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', async function (evt, current) {
@@ -141,6 +146,7 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 't
                     try {
                         $scope.loading = true;
                         $scope.showArticle = true;
+                        $scope.error = false;
                         
                         const articleData = await articlesApi.getArticleById(article.id);
                         $scope.$applyAsync(() => {
