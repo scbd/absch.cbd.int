@@ -1,8 +1,11 @@
 <template>
     <div>    
       <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg"></i> {{ t("loading") }}...</div>
-      <div v-if="!loading">
-        <div class="article-by-tags" v-if="articles">
+      <div v-if="error" class="alert alert-danger">
+        {{ t("errorLoading") }}
+      </div>
+      <div v-else>
+        <div class="article-by-tags" v-if="articles && articles.length">
           <h4>
             {{t("searchResults") }} <span><small>({{articlesCount}})</small></span>      
           </h4>
@@ -12,25 +15,25 @@
               <div class="d-flex flex-row bd-highlight ">
                 <div class="p-2 bd-highlight" v-if="article.coverImage">
                   <img class="img-fluid img-thumbnail" style="max-height:140px;"
-                    v-bind:src="getSizedImage(article.coverImage.url, '300x300')">
+                    :src="getSizedImage(article.coverImage.url, '300x300')">
                 </div>              
                 <div class="p-2 bd-highlight w-100">
                   <div class="card-body">                  
                     <span class="badge bg-secondary position-absolute top-0 end-0">
                       {{formatDate(article?.createdDate, 'DD MMM YYYY')}}</span>
                       
-                    <h5 class="card-title"><a class="link-dark"
-                        :href="`${articleUrl(article, getTag(article.adminTags) )}`">{{article.title}}</a>                      
+                    <h5 class="card-title">
+                      <a class="link-dark" :href="articleUrl(article, getTag(article.adminTags))">{{article.title}}</a>                      
                     </h5>
                     <p v-if="article.summary" class="card-text h-100">
-                      <a class="link-dark" :href="`${articleUrl(article, getTag(article.adminTags) )}`">
+                      <a class="link-dark" :href="articleUrl(article, getTag(article.adminTags))">
                         {{article.summary}}
                       </a>
                     </p>
   
                     <div class="inner-area">
                       <i class="fa fa-tag" aria-hidden="true"></i>
-                      <a class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags" :key="tag">{{tag}}</a>
+                      <a class="btn btn-mini" :href="tagUrl(tag)" v-for="tag in article.adminTags" :key="tag">{{tag}}</a>
                     </div>
                   </div>
                 </div>
@@ -41,9 +44,6 @@
           <div v-if="articlesCount<1" class="alert alert-light">
             <strong>{{ t("noResultFound") }}</strong>
           </div>
-        </div>
-        <div v-if="error" class="alert alert-danger">
-          {{ t("errorLoading") }}
         </div>
       </div>
       <div class="d-inline-block" v-if="articlesCount>10">
@@ -62,7 +62,7 @@
       import paginate from '../common/pagination.vue';
       import SolrApi from "~/api/solr.js";
       import "../kb/filters";
-      import { escape } from '../../services/solr/queries.js';
+      import { escape, andOr, localizeFields } from '../../services/solr/queries.js';
       import { formatDate } from './filters';
       import { OASIS_REALM } from '~/services/filters/constant';
 
@@ -87,20 +87,18 @@
           await loadArticles(1);
       });
 
-      const getTag = (adminTags) => {       
+      const getTag = (adminTags=[]) => {       
         const realm = realmTag.value;
-        if (adminTags && adminTags.length >= 2) {
-          if (adminTags[0] === realm) return adminTags[1];
-          else return adminTags[0];
-        } else return realm;
+        if (adminTags.length >= 2) {
+          return adminTags[0] === realm ? adminTags[1] : adminTags[0];
+        }
+        return realm;
       };
   
       const tagUrl = (tag) => {
-        if (categories.value && tag) {
-          const tagDetails = categories.value.find((e) => e.adminTags.includes(tag));
-          const tagTitle = tagDetails?.title || '';
-          return getUrl(tagTitle, undefined, tag);
-        }
+        if (!tag || !categories.value) return;
+        const tagDetails = categories.value.find((e) => e.adminTags.includes(tag));
+        return getUrl(tagDetails?.title || '', undefined, tag);
       };
   
       const articleUrl = (article, tag) => {
@@ -108,6 +106,7 @@
       };
   
       const loadArticles = async (page) => {
+          error.value = false;
           pageNumber.value = page;
           articlesCount.value = 0;
           articles.value = [];
@@ -118,21 +117,24 @@
           const rowsPerPage = recordsPerPage.value;
 
           const escapedSearchText = escape(searchText);
+          const fields = ['text_EN_txt', 'title_EN_txt', 'summary_EN_txt', 'content_EN_txt'];
+          const queryFields = fields.map(f => `${localizeFields(f, localeKey)}:${escapedSearchText}`);
+
           const query = searchText
-            ? `realm_ss:${OASIS_REALM} AND adminTags_ss:${realmTag.value} AND (title_${localeKey}_txt:${escapedSearchText} OR text_${localeKey}_txt:${escapedSearchText} OR summary_${localeKey}_txt:${escapedSearchText} OR content_${localeKey}_txt:${escapedSearchText})`
+            ? `realm_ss:${OASIS_REALM} AND adminTags_ss:${realmTag.value} AND ${andOr(queryFields, 'OR')}`
             : '*:*';
 
           try {
             const result = await solrAPI.query({
               query, 
-              fields: `title:title_${localeKey}_s,summary:summary_${localeKey}_s,coverImage:coverImage_ss,adminTags:adminTags_ss,createdDate:createdDate_dt,id`,
+              fields: `title:${localizeFields('title_EN_s', localeKey)},summary:${localizeFields('summary_EN_s', localeKey)},coverImage:coverImage_ss,adminTags:adminTags_ss,createdDate:createdDate_dt,id`,
               start,
               rowsPerPage
             });
 
             const docs = result?.response?.docs || [];
-
             const totalCount = result?.response?.numFound || 0;
+
             if (docs.length > 0) {
               articles.value = docs;
               articlesCount.value = totalCount;
