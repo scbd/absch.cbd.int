@@ -6,6 +6,10 @@ import '~/components/scbd-angularjs-controls/main';
 import '~/views/register/directives/register-top-menu';
 import '~/views/directives/block-region-directive';
 import '~/views/forms/edit/editFormUtility';
+import recordLists from './record-list.vue';
+import { provide } from 'vue'; 
+import { safeDelegate } from '~/services/common';
+
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
@@ -25,7 +29,33 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
+                $scope.recordsUpdated = false;
+                 $scope.recordListsVueComponent = {
+                    components: { recordLists },
+                    setup: componentSetup
+                }
 
+                function getUniqueId(record){
+                    return $filter("uniqueID")(record);
+                }
+                function componentSetup () {
+                    provide('askDelete', safeDelegate($scope, (record)=>{
+                        record = record || {}
+                        return $scope.askDelete(record)
+                    }));
+
+                    provide('askDuplicate', safeDelegate($scope, (record)=>{
+                        record = record || {}
+                        return $scope.askDuplicate(record)
+                    }));
+
+                    provide('getUniqueId', safeDelegate($scope, (record)=>{
+                        record = record || {}
+                        return getUniqueId(record);
+                    }));
+                }
+
+                $scope.schemaName = $filter("mapSchema")($routeParams.document_type);
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
@@ -165,9 +195,9 @@ const recordListError = mergeTranslationKeys(recordListT);
                 else
                 $scope.schemaType = 'referenceRecords';
 
-                $scope.onPageChange = function(pageNumber){
-                     loadRecords(pageNumber);
-                }
+                // $scope.onPageChange = function(pageNumber){
+                //      loadRecords(pageNumber);
+                // }
 
                 $scope.onPageSizeChanged = function(size){
                    $scope.listResult.rowsPerPage = size;
@@ -179,6 +209,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 //
                 //============================================================
                 $scope.askDelete = function (record) {
+                    console.log("askDelete", record)
                     $scope.canDeletePublished = true;
                     if($scope.isPublished(record) && $scope.isDraft(record)){
                         $scope.canDeletePublished = false;
@@ -320,13 +351,18 @@ const recordListError = mergeTranslationKeys(recordListT);
                         return editFormUtility.saveDraft(document);
 
                     }).then(function (draftInfo) {
-                        $scope.records.push(draftInfo);
-                        $timeout(function () {
-                            highlight("#record" + draftInfo.identifier); //.effect( "shake" );
-                        }, 500)
-
+                        // if come here then refresh that function
                         $scope.closeDialog();
-                        return draftInfo;
+                        $scope.recordsUpdated = true;
+
+                        //remove this code
+                        // $scope.records.push(draftInfo);
+                        // $timeout(function () {
+                        //     highlight("#record" + draftInfo.identifier); //.effect( "shake" );
+                        // }, 500)
+
+                        // $scope.closeDialog();
+                        // return draftInfo;
 
                     }).catch(function (error) {
                         $scope.closeDialog();
@@ -555,7 +591,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.isAdditionDisabled = function (schema){
                     return  realm.schemas[schema].disableAdd;
                 }
-                
+                // no need , need to remove
                 function loadRecords(pageNumebr) {
                     $scope.loading = true;
                     $scope.records = [];
@@ -681,11 +717,12 @@ const recordListError = mergeTranslationKeys(recordListT);
                         updateDocumentStatus(doc.identifier, 'draftDeleted')
                     }
                     else{
-                        for (var i = 0; i <= $scope.records.length; ++i) {
-                            if ($scope.records[i] == doc) {
-                                $scope.records.splice(i, 1);
-                            }
-                        }
+                        $scope.recordsUpdated = true;
+                        // for (var i = 0; i <= $scope.records.length; ++i) {
+                        //     if ($scope.records[i] == doc) {
+                        //         $scope.records.splice(i, 1);
+                        //     }
+                        // }
                     }
                     toastr.info('Record deleted.', {
                         allowHtml: true
@@ -710,11 +747,12 @@ const recordListError = mergeTranslationKeys(recordListT);
                         'rowsPerPage': 100,
                         fields: 'identifier_s'
                     };
+                    // use solr service to get revoked documents
                     return searchService.list(queryParameters, null);
                 }
 
                 function verifyWorkflowStatus(workflowId, document){
-
+                    // use get method  of api/workflows.js 
                     IWorkflows.get(workflowId)
                     .then(function(workflow){
                         var activity = _.head(workflow.activities)
@@ -788,7 +826,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                         defer.resolve([]);
                         return defer.promise;
                     }
-
+                   //here we are getting my tasks
                     var myUserID = $scope.$root.user.userID;
                         var query    = {
                             $and : [

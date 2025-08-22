@@ -17,5 +17,9 @@ export default class KmDocumentApi extends ApiBase
     async getDocument(identifier)  {
         return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
     }
+    //Todo: 
+    async deleteDocument(identifier)  {
+        return this.http.delete(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
+    }
 
 }

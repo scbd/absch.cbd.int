@@ -18,280 +18,11 @@
                 </h3>
             </div>
         </div>
-        
-        <div class="register-content-content">
-            <div ng-show="msg" class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
-                <strong ng-bind="msg"></strong>
-            </div>
-            <div class="row">
-                <div class="col-md-7 col-12">
-                    <div class="btn-group-sm cf-xs-btn">
-                    <button type="button" ng-click="changeFilter('')" class="btn btn-primary btn-sm fw-bold">
-                        <i  class="bi bi-check-square" ng-class="{'bi-square':recordFilter}"></i>
-                        <strong>{{::('recordListT.all'|$translate)}}</strong> <span class="badge badge-default" ng-bind="::listCount.all"></span>
-                    </button>
-                    <button type="button" ng-click="changeFilter('isRequest')"  class="btn btn-danger btn-sm fw-bold">
-                        <i class="bi bi-check-square" ng-class="{'bi-square':recordFilter!='isRequest'}"></i>
-                        {{::('recordListT.requests'|$translate)}}
-                        <span class="badge badge-default" ng-bind="listCount.request"></span>
-                    </button>
-                    <button id="publishedRecords" type="button" ng-click="changeFilter('isPublished')" class="btn btn-success btn-sm fw-bold">
-                        <i  class="bi bi-check-square" ng-class="{'bi-square':recordFilter!='isPublished'}"></i> {{::('recordListT.published'|$translate)}}
-                        <span class="badge badge-default" ng-bind="listCount.publish"></span>
-                    </button>
-                    <button type="button" ng-click="changeFilter('isDraft')" class="btn btn-secondary btn-sm fw-bold">
-                        <i class="bi bi-check-square" ng-class="{'bi-square':recordFilter!='isDraft'}"></i> {{::('recordListT.drafts'|$translate)}}
-                        <span class="badge badge-default" ng-bind="listCount.draft"></span>
-                    </button>
-                        <input id="searchKeyword" type="text" ng-model="keywords" ng-change="searchRecord()"
-                        ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0, '*': 1000 } }"
-                        placeholder=" {{::('recordListT.keyword'|$translate)}} " class="form-control keyword input-group">
-                    </div>
-                </div>
-                <div class="col-md-5 col-12">
-                    <div class="btn-group-sm float-md-end">
-                        <div class="btn border fs-small-8" ng-if="offlineFormats">{{::('recordListT.offlineFormat'|$translate)}}
-                            <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
-                                ng-show="::offlineFormats[schema][code]" class="padding-left-right-2">
-                                <a class="text-decoration-none" rel="noopener" target="_blank" ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a>
-                                <span ng-if="::!$last">|</span>
-                            </span>
-                        </div>
-                        
-                        <a type="button" class="btn btn-outline-secondary btn-sm px-1" ng-click="refreshList(schema);" ng-if="showAddButton()">
-                            <i class="bi bi-arrow-repeat float-start"></i> <span class="fs-small-8 d-none d-md-block ps-1 float-end">{{::('recordListT.refresh'|$translate)}}</span>
-                        </a>
-                        <a type="button" class="btn btn-primary btn-sm px-1" ng-if="!isAdditionDisabled(schema) || tourOn" id="add-new-btn" rel="noopener" translation-url 
-                            ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new">
-                            <i class="bi bi-plus float-start"></i>
-                            <span class="d-none d-md-block ps-1 float-end">{{::('recordListT.addNew'|$translate)}}</span>
-                        </a>
-                        <a type="button" class="btn btn-secondary btn-sm px-1" rel="noopener" translation-url  ng-href="/register" id="close_button">
-                            <i class="bi bi-x-circle-fill float-start d-block d-md-none"></i>
-                            <span class="d-none d-md-block float-end px-2">{{::('recordListT.close'|$translate)}}</span>
-                        </a>
+          <div ng-if="recordListsVueComponent">
+             <record-lists ng-vue="recordListsVueComponent" :languages="languages" :schema-name="schemaName" :user="user"  :refresh-key="recordsUpdated"></record-lists>
+          </div>
 
-                    </div>
-                </div>
-            </div>
-
-            <table class="table table-hover overflow-hidden w-100 mt-3">
-                <thead>
-                    <tr class="text-secondary">
-                        <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">{{::('recordListT.title'|$translate)}}</th>
-                        <!-- ToDo: need to pass correct field -->
-                        <!-- <th ng-click="onSort('title.en', 'asc')" id="titleHeader">Title</th> -->
-                        <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">{{::('recordListT.type'|$translate)}}</th>
-                        <th ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">{{::('recordListT.lastPublished'|$translate)}}</th>
-                        <th class="d-none d-md-block" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">{{::('recordListT.lastUpdated'|$translate)}}</th>
-                        <th ng-click="toggleOrderBy('status')" id="statusHeader">{{::('recordListT.status'|$translate)}}</th>
-                        <th class="text-end th_width" ng-bind="filteredRecords.length+' Record(s)'"></th>
-                    </tr>
-                </thead>
-                <tr ng-cloak ng-show="loading">
-                    <td class="ps-1 text-center p-4" colspan="6"><i class="fa fa-spin fa-cog" ></i> {{::('recordListT.loading'|$translate)}}</td>
-                </tr>
-                <tr ng-if="tourOn">
-                    <td class="ps-1 py-3 fs-small-8 w-25">
-                        {{::('recordListT.sampleRecord'|$translate)}} <strong>{{schema|urlSchemaShortName}}</strong>
-                    </td> 
-                    <td class="ps-1 py-3 fs-small-8 align-middle">
-                        <a class="text-decoration-none">
-                            <strong>{{::('recordListT.bySystem'|$translate)}}</strong>
-                        </a>
-                    </td>
-                    <td class="ps-1 py-3 fs-small-8 align-middle">
-                        <a class="text-decoration-none">
-                            <strong>{{::('recordListT.bySystem'|$translate)}}</strong>
-                        </a>
-                    </td>
-                    <td class="ps-1 py-3 fs-small-8 align-middle">
-                        <div class="color-published-green bold">{{::('recordListT.published'|$translate)}} </div>
-                    </td>
-                    <td class="px-1 fs-small-8 text-end th_width align-middle">
-                        <div class="btn-group btn-group-sm" role="group" aria-label="..." >
-                            <button class="btn btn-outline-secondary" id="duplicateRecord">
-                                <i class="bi bi-clipboard"></i>
-                            </button>
-                            <a class=" btn btn-outline-secondary text-decoration-none" id="editRecord" rel="noopener" title="{{::('recordListT.edit'|$translate)}}" type="button">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <button class="btn btn-outline-secondary" id="deleteRecord" title="{{::('recordListT.delete'|$translate)}}"  type="button">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
-                    <td class="ps-1 text-center p-4" colspan="6"> <strong>{{::('recordListT.noRecordsFound'|$translate)}}</strong></td>
-                </tr>
-
-<!--                <tbody ng-repeat="record in  records">-->
-                <tbody class="border-0" ng-repeat="record in (filteredRecords = (records | filter:statusFilter | orderBy:orderBy))">
-                    <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
-
-                        <td class="ps-1 fs-small-8 w-25">
-                            <span ng-show="isPublished(record) && !isDraft(record) && !isRequest(record)">
-                            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view" ng-show="record.documentID">
-                               <span ng-bind="(record.workingDocumentTitle||record.title)|lstring"></span>
-                            </a>
-                        </span>
-                            <span ng-show="isRequest(record)">
-                            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
-                               <span ng-bind="(record.workingDocumentTitle||record.title)|lstring"></span>
-                            </a>
-                        </span>
-
-                            <span ng-show="isDraft(record)  && !isRequest(record)">
-                            <a class="text-decoration-none" rel="noopener" translation-url  href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/edit">
-                                <span ng-bind="(record.workingDocumentTitle||record.title)|lstring"></span>
-                            </a>
-                        </span>
-                            <div ng-if="isPublished(record)">
-                                <span ng-bind="record | uniqueID"></span> <span ng-show="isDraft(record) || (isPublished(record) && isDraft(record))" class="badge bg-secondary text-uppercase">draft</span>
-                            </div>
-                        </td>
-                        <td class="ps-1 fs-small-8 align-middle text-capitalize" ng-if="schema=='contact'">
-                            <span ng-bind="record.body.type"></span>
-                        </td>
-                        <td class="ps-1 fs-small-8 align-middle">
-                            <div ng-if="record.updatedBy && isPublished(record)">
-                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
-                                    <strong ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></strong>
-                                </a>
-                                </br>
-                                <span class="fs-small-6" ng-bind="record.updatedOn | formatDateWithTime"></span>
-                            </div>
-                            <div ng-if="record.createdBy && !record.updatedBy && isPublished(record)">
-                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
-                                    <strong ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></strong>
-                                </a>
-                                </br>
-                                <span ng-bind="record.createdOn | formatDateWithTime"></span>
-                            </div>
-                        </td>
-                        <td class=" d-none d-md-table-cell fs-small-8 align-middle">
-                            <div ng-if="record.workingDocumentUpdatedBy">
-                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
-                                    <strong ng-bind="record.workingDocumentUpdatedBy.firstName+' '+record.workingDocumentUpdatedBy.lastName"></strong>
-                                </a>
-                                </br>
-                                <span ng-bind="record.workingDocumentUpdatedOn | formatDateWithTime"></span>
-                            </div>
-                            <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
-                                    <strong ng-bind="record.workingDocumentCreatedBy.firstName+' '+record.workingDocumentCreatedBy.lastName"></strong>
-                                </a>
-                                </br>
-                                <span ng-bind="record.workingDocumentCreatedBy | formatDateWithTime"></span>
-                            </div>
-                            <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                                <div ng-show="record.updatedBy">
-                                    <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
-                                        <strong ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></strong>
-                                    </a>
-                                    </br>
-                                    <span class="fs-small-6" ng-bind="record.updatedOn | formatDateWithTime"></span>
-                                </div>
-                                <div class="pt-3" ng-show="record.createdBy && !record.updatedBy">
-                                    <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
-                                        <strong ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></strong>
-                                    </a>
-                                    </br>
-                                    <span ng-bind="record.createdOn | formatDateWithTime"></span>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="ps-1 fs-small-8 align-middle align-middle">
-                            <span ng-if="record.workflowActivityStatus == 'pending'" >
-                                <div class="btn btn-primary color-white" >
-                                     <i class="fa fa-spin fa-spinner"></i> {{::('recordListT.processing'|$translate)}}
-                                </div>
-                            </span>
-                            <div ng-show="record.workflowActivityStatus!='pending'">
-
-                                <div ng-show="!record.revoked && isPublished(record) && !isRequest(record)" class="color-published-green bold"> {{::('recordListT.published'|$translate)}} </div>
-                                <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold">  {{::('recordListT.draft'|$translate)}} </div>
-                                <span class="color-red bold" ng-show="record.revoked">{{::('recordListT.revoked'|$translate)}}</span>
-                                <a class="text-decoration-none color-orange" rel="noopener" translation-url  class="btn btn-danger btn-sm color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
-                                    {{::('recordListT.pendingApproval'|$translate)}}
-                                </a>
-                                <div class="color-red bold" ng-show="!record.revoked && isRequest(record) && record.isUpdating">
-                                    {{::('recordListT.pendingApproval'|$translate)}}
-                                </div>
-                                <div ng-show="!record.revoked && isRequest(record) && record.isUpdating">
-                                    <div ng-show="isRequest(record) && record.isUpdating">
-                                        <a class="text-decoration-none text-secondary" rel="noopener" translation-url  class="btn btn-info p-1" type="button" ng-click="return">
-                                            <strong><i class="fa fa-spin fa-cog"></i> {{::('recordListT.processing'|$translate)}} </strong>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-1 fs-small-8 text-end th_width align-middle">
-                            <div class="btn-group btn-group-sm" role="group" aria-label="..." ng-show="record.workflowActivityStatus!='pending'">
-                                <button class="btn btn-outline-secondary" id="duplicateRecord" ng-show="showAddButton()" title="Duplicate" type="button" ng-click="askDuplicate(record)">
-                                    <i class="bi bi-clipboard"></i>
-                                </button>
-                                <button class="btn btn-outline-secondary" title="{{::('recordListT.locked'|$translate)}}" ng-show="!record.revoked && isRequest(record) && showAddButton()" type="button">
-                                    <i class="bi bi-file-lock2"></i>
-                                </button>
-                                <button class="btn btn-outline-secondary" title="{{::('recordListT.cancelRequest'|$translate)}}" ng-show="!record.revoked && isRequest(record) && showAddButton() && isMyRecord(record)" type="button" ng-click="askRecallWorkflowRequest(record)">
-                                    <i class="bi bi-arrow-counterclockwise"></i>
-                                </button>
-                                <a class=" btn btn-outline-secondary text-decoration-none" id="editRecord" rel="noopener" translation-url title="{{::('recordListT.edit'|$translate)}}" ng-show="!record.revoked && !isRequest(record) && showAddButton()" type="button" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <button class="btn btn-outline-secondary" id="deleteRecord" title="{{::('recordListT.delete'|$translate)}}" ng-show="!record.revoked && !isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" ng-click="askDelete(record)">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                           
-
-                            </div>
-                            <div class="btn-group document_buttons btn-group-sm">
-                             
-                            </div>
-                        </td>
-                    </tr>
-                    <tr ng-if="displayReference && record.body && record.body.badRevisions && record.body.badRevisions.length > 0" class="border-0" ng-class="{'bg-grey': displayReference}">
-                        <td class="ps-1 fs-small-8 border-0" colspan="6" >
-
-                            <div ng-show="displayReference" block-region activate=" loading">
-
-                                <div class="btn-group-sm float-end">
-                                    <a class="text-decoration-none text-secondary" rel="noopener" translation-url  ng-href="#" class="btn btn-sm btn-primary" ng-click="loading = !loading">
-                                        <span class="bi bi-random"></span> {{::('recordListT.update'|$translate)}}</a>
-                                </div>
-                                <table class="table table-striped w-100">
-                                    <thead>
-                                        <tr>
-                                            <td class="ps-1 fs-small-8"> {{::('recordListT.field'|$translate)}} </td>
-                                            <td class="ps-1 fs-small-8">{{::('recordListT.fieldCurrentRevision'|$translate)}}</td>
-                                            <td class="ps-1 fs-small-8">{{::('recordListT.referenceRecordRevision'|$translate)}}</td>
-                                            <td class="ps-1 fs-small-8"></td>
-                                        </tr>
-                                    </thead>
-                                    <tr ng-repeat="badRevision in record.body.badRevisions">
-                                        <td class="ps-1 fs-small-8" ng-bind="badRevision.field"></td>
-                                        <td class="ps-1 fs-small-8" ng-bind="badRevision.fieldRevision"></td>
-                                        <td class="ps-1 fs-small-8" ng-bind="badRevision.currentRevision"></td>
-                                        <td class="ps-1 fs-small-8">
-                                            <a class="text-decoration-none text-secondary" rel="noopener" translation-url  ng-href="#" class="btn btn-sm btn-primary" ng-click="updateReference(record,badRevision.field);">
-                                                <span class="bi bi-random"></span> {{::('recordListT.update'|$translate)}} <span ng-bind="badRevision.field"></span></a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <pagination class="d-flex mt-3 justify-content-center" ng-if="listResult.recordsFound>25 && !isDraftRecord" current-page="listResult.currentPage"
-                page-count="listResult.pageCount" on-page-change="onPageChange(page)" page-size="listResult.rowsPerPage"
-                num-found="listResult.recordsFound" on-page-size-changed="onPageSizeChanged(size)"></pagination>
-
-            <script type="text/ng-template" trados-translation="true" id="deleteRecordModal">              
+        <script type="text/ng-template" trados-translation="true" id="deleteRecordModal">              
                 
                     <div class="modal-header bg-danger text-white">
                        <h4 class="modal-title" >{{::('recordListT.confirmDelete'|$translate)}} <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
@@ -360,44 +91,43 @@
                    <!-- <div class="modal-footer" >
                          <button type="button" class="btn btn-default" ng-click="closeDialog()">{{::('recordListT.cancel'|$translate)}}</button> 
                     </div>-->
-            </script>
+        </script>
 
-            <script type="text/ng-template" trados-translation="true" id="duplicateRecordModal">
-                    <div class="modal-header">
-                        <h4>{{::('recordListT.duplicateRecord'|$translate)}}<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>{{::('recordListT.confirm'|$translate)}}</p>
-                    </div>
-                    <div class="modal-footer mt-0">
-                        <button ng-disabled="loading" type="button" class="btn btn-secondary" ng-click="closeDialog('duplicateRecordModal')">{{::('recordListT.cancel'|$translate)}}</button>
-                        <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary">{{::('recordListT.duplicate'|$translate)}}</button>
-                    </div>
-            </script>
-
-            <script type="text/ng-template" trados-translation="true" id="recallWorkflowRequestModal">
-                    <div class="modal-header">
-                        <h4>{{::('recordListT.cancelPublishingRequest'|$translate)}}<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
-                    </div>
-                    <div class="modal-body">
-                        <h2>{{::('recordListT.permission'|$translate)}}</h2>
-                    </div>
-                    <div class="modal-footer mt-0">
-                        <button type="button" class="btn btn-secondary" ng-click="closeDialog()">{{::('recordListT.doNotCancel'|$translate)}}</button>
-                        <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary float-start">{{::('recordListT.cancelRequest'|$translate)}}</button>
-
-                    </div>
-            </script>
-            <script type="text/ng-template" trados-translation="true" id="errorModal">
+        <script type="text/ng-template" trados-translation="true" id="duplicateRecordModal">
                 <div class="modal-header">
-                   <h4>{{::('recordListT.error'|$translate)}}</h4>
+                    <h4>{{::('recordListT.duplicateRecord'|$translate)}}<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
                 </div>
-                <p class="m-3" ng-bind="errorMessage"></p>
-                <div class="modal-footer" >
-                    <button type="button" class="btn btn-default" ng-click="closeDialog()">{{::('recordListT.ok'|$translate)}}</button>
+                <div class="modal-body">
+                    <p>{{::('recordListT.confirm'|$translate)}}</p>
                 </div>
-            </script>
+                <div class="modal-footer mt-0">
+                    <button ng-disabled="loading" type="button" class="btn btn-secondary" ng-click="closeDialog('duplicateRecordModal')">{{::('recordListT.cancel'|$translate)}}</button>
+                    <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary">{{::('recordListT.duplicate'|$translate)}}</button>
+                </div>
+        </script>
+
+        <script type="text/ng-template" trados-translation="true" id="recallWorkflowRequestModal">
+                <div class="modal-header">
+                    <h4>{{::('recordListT.cancelPublishingRequest'|$translate)}}<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                </div>
+                <div class="modal-body">
+                    <h2>{{::('recordListT.permission'|$translate)}}</h2>
+                </div>
+                <div class="modal-footer mt-0">
+                    <button type="button" class="btn btn-secondary" ng-click="closeDialog()">{{::('recordListT.doNotCancel'|$translate)}}</button>
+                    <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary float-start">{{::('recordListT.cancelRequest'|$translate)}}</button>
+
+                </div>
+        </script>
+        <script type="text/ng-template" trados-translation="true" id="errorModal">
+            <div class="modal-header">
+                <h4>{{::('recordListT.error'|$translate)}}</h4>
             </div>
+            <p class="m-3" ng-bind="errorMessage"></p>
+            <div class="modal-footer" >
+                <button type="button" class="btn btn-default" ng-click="closeDialog()">{{::('recordListT.ok'|$translate)}}</button>
+            </div>
+        </script>
         </div>
     </div>
     <joyride ng-if="tourOn"></joyride>
