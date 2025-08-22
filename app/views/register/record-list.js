@@ -179,31 +179,15 @@ const recordListError = mergeTranslationKeys(recordListT);
                     }
 
                 }
-                $scope.toggleOrderBy = function (key) {
-                    if (key == $scope.orderBy[0].substr(1))
-                        $scope.orderBy = (($scope.orderBy[0].substr(0, 1) == '+') ? '-' : '+') + key;
-                    else
-                        $scope.orderBy = ['-' + key];
 
-                    $('.ordericon').remove();
-                    var direction = (($scope.orderBy[0].substr(0, 1) == '-') ? 'down' : 'up');
-                    $('#' + key.split('|')[0] + 'Header').append(' <span class="ordericon bi bi-chevron-' + direction + ' text-primary"></span>');
-                };
 
                 if(_.includes(realm.nationalSchemas, $filter('mapSchema')($scope.schema)))
                 $scope.schemaType = 'nationalRecords';
                 else
                 $scope.schemaType = 'referenceRecords';
 
-                // $scope.onPageChange = function(pageNumber){
-                //      loadRecords(pageNumber);
-                // }
 
-                $scope.onPageSizeChanged = function(size){
-                   $scope.listResult.rowsPerPage = size;
-                   $scope.listResult.currentPage = 1; //reset to page 1
-                   $scope.onPageChange($scope.listResult.currentPage);
-                }
+
                 //============================================================
                 //
                 //
@@ -389,6 +373,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 //
                 //
                 //============================================================
+                // toDo: 
                 $scope.askRecallWorkflowRequest = function (record) {
                     $scope.recordForDeleteWorkflowRequest = record;
                     ngDialog.open({template: 'recallWorkflowRequestModal', scope : $scope});
@@ -413,15 +398,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 //
                 //
                 //============================================================
-                $scope.schemaFilter = function (entity) {
 
-                    var ok = !!entity;
-
-                    if ($scope.schema)
-                        ok = ok && entity.type == $scope.schema;
-
-                    return ok;
-                };
 
                 //============================================================
                 //
@@ -535,10 +512,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     evtServerPushNotification();
                 })
 
-                $scope.refreshList = function (schema) {
-                    loadRecords(1);
-                };
-
                 $scope.closeDialog = function(){
                     ngDialog.close();
                 }
@@ -557,160 +530,13 @@ const recordListError = mergeTranslationKeys(recordListT);
 
 
                 }
-                $scope.changeFilter = function (type ) {
-                    if($scope.loading) return;
-                    $scope.recordFilter = type;
-                    $scope.isDraftRecord = false;
-                    if(type==''){
-                        $scope.statusType = 'allRecords';
-                        loadRecords(1);
-                    } else if(type=='isPublished'){
-                        $scope.statusType = 'my';
-                        loadRecords(1);
-                    }
-                    else if(type=='isDraft'){
-                        $scope.statusType = 'mydraft';
-                        $scope.records = $scope.drafts;
-                        $scope.isDraftRecord = true;
-                    }
-                    else if(type=='isRequest'){
-                        $scope.statusType = 'mydraft';
-                        $scope.records = $scope.requestsList;
-                        $scope.isDraftRecord = true;
-                    }
-                }
-                $scope.onSort = function(sortField, sortSequence){
-                    $scope.listResult.sequence  = sortSequence == ' desc' ? ' asc' : ' desc';
-                    $scope.listResult.sort          = sortField;
-                    loadRecords(1);
-                }
-                $scope.searchRecord = function () {
-                    loadRecords(1);
-                }
+
+
 
                 $scope.isAdditionDisabled = function (schema){
                     return  realm.schemas[schema].disableAdd;
                 }
                 // no need , need to remove
-                function loadRecords(pageNumebr) {
-                    $scope.loading = true;
-                    $scope.records = [];
-                    var schema = $filter("mapSchema")($routeParams.document_type);
-
-                    if (schema === null || schema == undefined)
-                        return;
-
-                    $("a[role*='button']").toggleClass('ui-disabled');
-                    if (!$rootScope.user.isAuthenticated)
-                        return $scope.records = null;
-
-                    var qAnd = [];
-
-                    qAnd.push("(type eq '" + schema + "')");
-                    
-                    var publishedParams = {
-                        cache: false,
-                        $top: $scope.listResult.rowsPerPage,
-                        $skip: $scope.listResult.rowsPerPage*(pageNumebr-1),
-                        $orderby: $scope.listResult.sort||'updatedOn desc'
-                        //$sortSequence: $scope.listResult.sequence
-                    };
-                    if($scope.keywords){
-                        publishedParams.text_EN_txt = $scope.keywords;
-                    }
-
-                    if (schema == "contact")
-                        publishedParams.body = true;
-                        
-                    var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined ,undefined, publishedParams);
-
-                    var draftParams = {
-                        cache: false,
-                        $orderby: $scope.listResult.sort||'updatedOn desc'
-                    };
-                    if (schema == "contact")
-                        draftParams.body = true;
-
-                    let qDrafts = undefined;
-                    if(pageNumebr==1 && ($scope.statusType == 'mydraft' || $scope.statusType == 'allRecords')) {
-                        qDrafts = storage.drafts.query( qAnd.join( " and " ) || undefined, draftParams );
-                    }
-
-                    $q.all([qDocuments, qDrafts, getRevokedDocuments(schema), loadmyTasks(schema)])
-                      .then(function (results) {
-                        var documents = results[0].data.Items;
-                        if(pageNumebr == 1 && results[1]?.data?.Items && ($scope.statusType == 'mydraft' || $scope.statusType == 'allRecords')) {
-                            $scope.drafts = results[1].data.Items;
-                            $scope.listCount.draft = results[1].data.Count;
-                            $scope.requestsList = [];
-                            _.forEach($scope.drafts, function(item){
-                                if(item.workingDocumentLock) {
-                                    $scope.requestsList.push(item)
-                                }
-                            });
-                             $scope.listCount.request = $scope.requestsList.length;
-                        }
-
-                        var wokflowActive = localStorageService.get('workflow-activity-status');
-                        var revoked = schema!='absPermit' ? [] : results[2].data.response.docs;
-                        $scope.listResult.recordsFound = results[0].data.Count;
-                        // TODO: count will go from here
-                        $scope.listCount.all = $scope.listResult.recordsFound + $scope.listCount.draft;
-                        $scope.listCount.publish = $scope.listResult.recordsFound;
-                        $scope.listResult.pageCount   = Math.ceil(results[0].data.Count / $scope.listResult.rowsPerPage);
-                        $scope.listResult.currentPage = pageNumebr;
-                        var myTasks = results[3];
-
-
-                        var map = {};
-                        if($scope.statusType == 'allRecords' && pageNumebr == 1){
-                            _.map($scope.drafts, function (o) {
-                                map[o.identifier] = o;
-                            });
-                        }
-                        _.map(documents, function (o) {
-                            map[o.identifier] = o;
-                        });
-                        let recordList = [];
-                        _.values(map).forEach(function (row) {
-                           //waiting for workflow status from socketIO
-                            if(wokflowActive && wokflowActive.identifier == row.identifier){
-                                if(!row.workingDocumentLock){
-                                    row.workflowActivityStatus =  'pending';
-                                    verifyWorkflowStatus(wokflowActive.workflowId, row);
-                                }else{
-                                    localStorageService.remove('workflow-activity-status');
-                                }
-                            }
-                            if(_.some(revoked, function(doc){ return doc.identifier_s == row.identifier})){
-                                row.revoked = true;
-                            }
-
-                            recordList.push(row);
-                        })
-                        $("a[role*='button']").toggleClass('ui-disabled');
-
-                        myTasks.forEach(function(workflow) { //tweaks
-
-                            if (workflow.data && !_.find(recordList, {identifier: workflow.data.identifier})){
-                                recordList.push({
-                                    identifier  : workflow.data.identifier,
-                                    title       : workflow.data.title,
-                                    metadata    : workflow.data.metadata,
-                                    type        : workflow.data.metadata.schema
-                                });
-                            }
-                            updateDocumentStatus(workflow.data.identifier, 'status', true)
-
-                        });
-                          if (recordList)
-                            $scope.records = recordList;
-                        return $scope.records;
-                    })
-                    .finally(function () {
-                        $scope.loading = false;
-                    });
-                }
                 
                 function recordDeleted(doc, isDraft) {
                     if (isDraft && $scope.isPublished(doc)){
@@ -817,7 +643,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.isDisableEdit = function (schema){
                     return  realm.schemas[schema].disableEdit;
                 }
-
+                // toDo: need to remove
                 function loadmyTasks(schema){
 
                     if(!_.includes(realm.referenceSchemas, schema)){
@@ -840,7 +666,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return IWorkflows.query(query);
 
                 }
-
+                //Todo: ove to vue component
                 async function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
                         const data = await import('~/app-data/bch/offline-formats.json');                        
@@ -853,7 +679,5 @@ const recordListError = mergeTranslationKeys(recordListT);
                         
                     }
                 }
-                loadRecords(1);
-                loadOfflineFormatDetails();
 
             }];
