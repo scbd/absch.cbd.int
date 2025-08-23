@@ -9,6 +9,7 @@ import '~/views/forms/edit/editFormUtility';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
+import innerContainer from './record-list/inner-container.vue';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge';
@@ -25,7 +26,9 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
-
+                $scope.vueComponent = {
+                        components: { innerContainer }
+                }
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
