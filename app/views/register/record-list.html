@@ -1,31 +1,14 @@
 <div id="SubmitPage" >
 
     <span register-top-menu></span>
-    <inner-container headerClass="bg-blue">
-  <template v-slot:header-actions>
-    <span class="btn-group float-end dashboard-tour pt-1">
-      <a
-        class="text-decoration-none text-secondary d-inline-flex text-white help-tour link2"
-      >
-        <i class="bi bi-question-circle"></i>
-        <span class="d-none d-sm-block ps-1">Tour</span>
-      </a>
-    </span>
-  </template>
-
-  <template v-slot:header-title>
-    <h3 class="p-0 px-1 m-0 fw-normal">
-      <a class="text-decoration-none text-white" href="/register">
-        Records (REC)
-      </a>
-    </h3>
-  </template>
-
-  <!-- Main content slot -->
-  <div>
-    <p>Your inner content goes here...</p>
-  </div>
-</inner-container>
-
-
+    <div ng-if="vueComponent">
+        <inner-container
+            ng-vue="vueComponent"
+            header-class="bg-primary text-white"
+            header-actions='<span class="btn-group float-end dashboard-tour pt-1"><a class="text-decoration-none text-white"><i class="bi bi-question-circle"></i> Tour</a></span>'
+            header-title='<h3 class="p-0 px-1 m-0 fw-normal"><a class="text-decoration-none text-white" href="/register">Records (REC)</a></h3>'
+            >
+            <div>Angular content passed down</div>
+        </inner-container>
+    </div>
 </div>
