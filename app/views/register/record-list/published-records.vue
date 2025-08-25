@@ -1,0 +1,62 @@
+<template>
+  <div>
+    <button 
+      id="publishedRecords" 
+      type="button" 
+      class="btn btn-success btn-sm fw-bold"
+      @click="emitRecords"
+      :disabled="isLoading"
+    >
+      <i class="bi bi-check-square"></i> Published
+      <span class="badge bg-light text-dark">{{ recordsCount }}</span>
+    </button>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useAuth, useRoute } from '@scbd/angular-vue/src/index.js'
+import KmDocumentApi from '~/api/km-document'
+
+const emit = defineEmits(['updateRecords'])
+
+const auth = useAuth()
+const route = useRoute().value
+const schemaShortCode = ref(route.params.document_type)
+const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token() })
+
+const recordsCount = ref(0)
+const filteredRecords = ref([])
+const isLoading = ref(false)
+
+onMounted(() => {
+  loadRecords()
+})
+
+const loadRecords = async () => {
+  filteredRecords.value = []
+  if (!auth.token() || !schemaShortCode.value) return
+  isLoading.value = true
+
+  try {
+    const query = {
+      $filter: `(type eq 'authority')`, // test filter
+      collection: 'my'
+    }
+
+    const res = await kmDocumentApi.queryDocuments(query)
+    filteredRecords.value = res?.Items || []
+    recordsCount.value = res?.Count || 0
+  } catch (err) {
+    console.error('Failed to load records:', err)
+    filteredRecords.value = []
+    recordsCount.value = 0
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const emitRecords = () => {
+  emit('updateRecords', filteredRecords.value)
+}
+</script>
