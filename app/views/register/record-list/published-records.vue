@@ -14,13 +14,14 @@
 <script setup>
   import { ref, onMounted } from 'vue'
   import { useAuth, useRoute } from '@scbd/angular-vue/src/index.js'
-  import KmDocumentApi from '~/api/km-document'
+  import KmDocumentApi from '~/api/km-document';
+  import { useRealm } from '../../../services/composables/realm';
   import { useI18n } from 'vue-i18n'
   import messages from '../../../app-text/views/register/record-list.json'
-
+  import { mapSchema } from '../../../components/kb/filters';
   const { t } = useI18n({ messages })
   const emit = defineEmits(['updateRecords'])
-
+  const realm = useRealm();
   // --- Composables ---
   const auth = useAuth()
   const route = useRoute().value
@@ -39,13 +40,14 @@
 
   const loadRecords = async () => {
     filteredRecords.value = [];
-    // const schemaName = computed(() =>schemaShortCode.value &&  mapSchema(schemaShortCode.value)); //  Todo: apply filter to get schema name from shortcode
+    const schemaName = mapSchema(realm, schemaShortCode.value);
+    console.log("schemaName" , schemaName);
     if (!schemaShortCode.value) return
     isLoading.value = true
 
     try {
       const query = {
-        $filter: `(type eq 'authority')`, // pass schemaName.value
+        $filter: `(type eq '${schemaName}')`, // pass schemaName.value
         collection: 'my'
       }
 
