@@ -16,25 +16,25 @@
     import { useRealm } from "../../services/composables/realm";
     import { useI18n } from 'vue-i18n';
 
-  const props = defineProps({
-    schema: { type: String, required: true }
-  });
+    const props = defineProps({
+        schema: { type: String, required: true }
+    });
 
-  const { t } = useI18n({ messages });
+    const { t } = useI18n({ messages });
 
-  const realm = useRealm();
-  const offlineFormats = ref({});
+    const realm = useRealm();
+    const offlineFormats = ref({});
 
-  onMounted(async () => {
-      try {
-          const appName = realm.uIdPrefix.toLowerCase(); // 'bch' | 'abs' | 'chm'
-          offlineFormats.value = await import(
-            `../../app-data/${appName}/offline-formats.json`
-          ).then(m => m.default || m);
-      } catch (e) {
-          console.error("No offline formats found for realm:", realm.uIdPrefix, e);
-      }
-  });
+    onMounted(async () => {
+        try {
+            const appName = realm.value.replace(/-.*/,'').toLowerCase(); // 'bch' | 'abs' | 'chm'
+            offlineFormats.value = await import(
+                `../../app-data/${appName}/offline-formats.json`
+            ).then(m => m.default || m);
+        } catch (e) {
+            console.error("No offline formats found for realm:", realm, e);
+        }
+    });
 
-  const offlineDocuments = computed(() => offlineFormats.value?.[props.schema]);
+    const offlineDocuments = computed(() => offlineFormats.value?.[props.schema]);
 </script>
