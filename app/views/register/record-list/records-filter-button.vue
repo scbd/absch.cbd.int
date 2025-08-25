@@ -1,17 +1,14 @@
 <template>
-  <div>
     <button 
       id="publishedRecords" 
       type="button" 
       class="btn btn-sm fw-bold"
       @click="emitRecords"
       :disabled="isLoading"
-      v-bind="$attrs"
     >
       <i class="bi bi-check-square"></i> {{ title }}
       <span class="badge bg-light text-dark">{{ recordsCount }}</span>
     </button>
-  </div>
 </template>
 
 <script setup>
@@ -19,8 +16,6 @@ import { ref, onMounted } from 'vue'
 import { useAuth, useRoute } from '@scbd/angular-vue/src/index.js'
 import KmDocumentApi from '~/api/km-document'
 
-// --- Component options ---
-defineOptions({ inheritAttrs: false })
 const emit = defineEmits(['updateRecords'])
 const props = defineProps({
   collection: { type: String, required: true },

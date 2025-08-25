@@ -10,9 +10,10 @@ import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import innerContainer from './record-list/inner-container.vue';
+import recordList from './record-list/record-list.vue';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
-import offlineFormats from './record-list/offline-formats.vue';
+// import offlineFormats from './record-list/offline-formats.vue';
 import { mergeTranslationKeys } from '../../services/translation-merge';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
@@ -28,8 +29,19 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
                 $scope.vueComponent = {
-                        components: { innerContainer, offlineFormats }
+                        components: { innerContainer, recordList }
                 }
+
+                 
+                $scope.schemaShortName = $filter("schemaName")($routeParams.document_type);
+                $scope.schemaTitle = $filter("mapSchema")($routeParams.document_type);
+                $scope.schemaFullTitle = $filter("schemaNamePlural")( $filter("mapSchema")($routeParams.document_type));
+                $scope.headerHtml = '<a class="text-decoration-none text-white" rel="noopener" href="/register">'
+                                    + $scope.schemaFullTitle + ' (' + $scope.schemaShortName + ')</a>'
+
+                console.log('schemaShortName', $scope.schemaShortName);
+                console.log('Schema Title', $scope.schemaTitle);
+                console.log('schema Full Title', $scope.schemaFullTitle);
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });

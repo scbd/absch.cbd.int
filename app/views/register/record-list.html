@@ -1,14 +1,34 @@
 <div id="SubmitPage" >
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
 
     <span register-top-menu></span>
+    
     <div ng-if="vueComponent">
-        <inner-container
-            ng-vue="vueComponent"
-            header-class="bg-primary text-white"
-            header-actions='<span class="btn-group float-end dashboard-tour pt-1"><a class="text-decoration-none text-white"><i class="bi bi-question-circle"></i> Tour</a></span>'
-            header-title='<offline-formats  schema="focalPoint"></offline-formats>'
-            >
-            <div><offline-formats  schema="focalPoint"></offline-formats></div>
+        <inner-container ng-vue="vueComponent" header-class="bg-primary text-white">
+            <template v-slot:header-title>
+                <!-- ToDo: Angular scope not working here -->
+                <h3 class="p-0 px-1 m-0 fw-normal">
+                    <a class="text-decoration-none text-white" rel="noopener" href="/register" > Competent National Authorities ( CNA )  </a>                                
+                </h3>
+
+                <!-- <h3 class="p-0 px-1 m-0 fw-normal">
+                    <a class="text-decoration-none text-white" rel="noopener" href="/register" >{{schemaFullTitle}} ( {{schemaShortName}} )  </a>                                
+                </h3> -->
+                <!-- <h3 class="p-0 px-1 m-0 fw-normal" v-bind-html="headerHtml"></h3> -->
+            </template>
+
+            <template v-slot:right-buttons>
+                <span class="btn-group float-end dashboard-tour pt-1">
+                    <a class="text-decoration-none text-secondary d-inline-flex text-white help-tour link2">
+                        <i class="bi bi-question-circle"></i>
+                        <span class="d-none d-sm-block ps-1">Take tour</span>
+                    </a>
+                </span>
+            </template>
+            <template v-slot:content>
+                <record-list></record-list>
+            </template>
         </inner-container>
     </div>
 </div>

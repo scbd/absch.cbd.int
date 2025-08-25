@@ -11,10 +11,10 @@
 </template>
 
 <script setup>
-  import { computed, ref, onMounted } from "vue";
-  import messages from '../../../app-text/views/register/record-list.json';
-  import { useRealm } from "../../../services/composables/realm";
-  import { useI18n } from 'vue-i18n';
+    import { computed, ref, onMounted } from "vue";
+    import messages from '../../app-text/views/register/record-list.json';
+    import { useRealm } from "../../services/composables/realm";
+    import { useI18n } from 'vue-i18n';
 
   const props = defineProps({
     schema: { type: String, required: true }
@@ -29,7 +29,7 @@
       try {
           const appName = realm.uIdPrefix.toLowerCase(); // 'bch' | 'abs' | 'chm'
           offlineFormats.value = await import(
-            `../../../app-data/${appName}/offline-formats.json`
+            `../../app-data/${appName}/offline-formats.json`
           ).then(m => m.default || m);
       } catch (e) {
           console.error("No offline formats found for realm:", realm.uIdPrefix, e);
