@@ -65,6 +65,14 @@ export function capitalize(val) {
   return val.toUpperCase();
 }
 
+export function mapSchema(realm, schema) {
+  if (!schema) return schema;
+
+  return Object.keys(realm.schemas).find(
+    key => realm.schemas[key].shortCode === schema.toUpperCase()
+  );
+}
+
 
 
 
