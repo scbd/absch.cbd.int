@@ -12,8 +12,9 @@
 
 <script setup>
     import { computed, ref, onMounted } from "vue";
-    import messages from '../../app-text/views/register/record-list.json';
-    import { useRealm } from "../../services/composables/realm";
+    import messages from '~/app-text/views/register/record-list.json';
+    import { getAppName } from "~/services/common";
+    import { useRealm } from "~/services/composables/realm";
     import { useI18n } from 'vue-i18n';
 
     const props = defineProps({
@@ -27,7 +28,7 @@
 
     onMounted(async () => {
         try {
-            const appName = realm.value.replace(/-.*/,'').toLowerCase(); // 'bch' | 'abs' | 'chm'
+            const appName = getAppName(realm.value) // 'bch' | 'abs' | 'chm'
             offlineFormats.value = await import(
                 `../../app-data/${appName}/offline-formats.json`
             ).then(m => m.default || m);
