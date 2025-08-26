@@ -9,7 +9,7 @@ import '~/views/forms/edit/editFormUtility';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
-import innerContainer from './record-list/inner-container.vue';
+import innerContainer from '../../components/layout/inner-container.vue';
 import recordList from './record-list/record-list.vue';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
