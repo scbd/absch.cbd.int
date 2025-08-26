@@ -81,7 +81,9 @@
 					<ul class="list">
 						<li class="mt-1" ng-repeat="link in document.covers">
 							<a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
-								<img class="rounded-1 border border-dark "  ng-src="{{ ::thumbnailUrl(link.url) | encodeURI}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
+								<div  ng-if="attachmentPreviewComponent"  class="rounded-1 border border-dark d-inline-block p-1"> 
+									<km-attachment-preview ng-vue="attachmentPreviewComponent" :url="link.url" :alt="link.name" :width="150" :height="212" />
+								</div>
 							</a>
 						</li>
 					</ul>
