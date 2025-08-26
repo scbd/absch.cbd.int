@@ -3,10 +3,11 @@
         id="publishedRecords" 
         type="button" 
         class="btn btn-sm btn-success fw-bold"
-        @click="emitRecords"
+        @click="toggleRecords"
         :disabled="isLoading"
       >
-        <i class="bi bi-check-square"></i> {{ t('published') }}
+        <i :class="isChecked ? 'bi bi-check-square-fill' : 'bi bi-square'"></i> 
+        {{ t('published') }}
         <span class="badge bg-light text-dark">{{ recordsCount }}</span>
       </button>
 </template>
@@ -15,50 +16,61 @@
   import { ref, onMounted } from 'vue'
   import { useAuth, useRoute } from '@scbd/angular-vue/src/index.js'
   import KmDocumentApi from '~/api/km-document';
-  import { useRealm } from '../../../services/composables/realm';
+  import { useRealm } from '~/services/composables/realm';
   import { useI18n } from 'vue-i18n'
-  import messages from '../../../app-text/views/register/record-list.json'
-  import { mapSchema } from '../../../components/kb/filters';
-  const { t } = useI18n({ messages })
-  const emit = defineEmits(['updateRecords'])
-  const realm = useRealm();
+  import { mapSchema } from '~/components/kb/filters';
+  import messages from '~/app-text/views/register/record-list.json'
+
+
+
   // --- Composables ---
+  const { t } = useI18n({ messages })
   const auth = useAuth()
   const route = useRoute().value
-  const schemaShortCode = ref(route.params.document_type)
+  const emit = defineEmits(['updateRecords'])
+  const realm = useRealm();
+
   const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token() })
 
   // --- State ---
   const recordsCount = ref(0)
-  const filteredRecords = ref([])
+  const publishedRecords = ref([])
   const isLoading = ref(false)
+  const isChecked = ref(false) // toggle state
+  const schemaShortCode = ref(route.params.document_type)
 
   // --- Methods ---
-  const emitRecords = () => {
-    emit('updateRecords', filteredRecords.value)
+  const toggleRecords = () => {
+      isChecked.value = !isChecked.value
+      
+      if (isChecked.value) {
+          emit('updateRecords', publishedRecords.value)
+      } else {
+        emit('updateRecords', [])
+      }
   }
 
   const loadRecords = async () => {
-    filteredRecords.value = [];
-    const schemaName = mapSchema(realm, schemaShortCode.value);
-    console.log("schemaName" , schemaName);
-    if (!schemaShortCode.value) return
+    publishedRecords.value = []
+    const schemaName = mapSchema(realm, schemaShortCode.value)
+    if (!schemaShortCode.value && !schemaName) return
     isLoading.value = true
 
     try {
       const query = {
-        $filter: `(type eq '${schemaName}')`, // pass schemaName.value
+        $filter: `(type eq '${schemaName}')`,
+        $top: 25,
+        $orderby: 'updatedOn desc',
         collection: 'my'
       }
 
       const res = await kmDocumentApi.queryDocuments(query)
-      filteredRecords.value = res?.Items || []
+      publishedRecords.value = res?.Items || []
       recordsCount.value = res?.Count || 0
     } catch (err) {
       console.error('Failed to load records:', err)
-      filteredRecords.value = []
+      publishedRecords.value = []
       recordsCount.value = 0
-      
     } finally {
       isLoading.value = false
     }

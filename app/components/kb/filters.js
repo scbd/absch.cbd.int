@@ -73,6 +73,21 @@ export function mapSchema(realm, schema) {
   );
 }
 
+export function schemaNamePlural(realm, locale, schemaName) {
+  if (!schemaName) return schemaName;
+
+  let schema = realm.schemas[schemaName] || scbdSchemas[schemaName] || {};
+  let pluralTitle = schema.titlePlural || schema.title;
+
+  let result = lstring(pluralTitle, locale);
+
+  if (!result || result === "") {
+    result = schemaName;
+  }
+
+  return result;
+}
+
 
 
 
