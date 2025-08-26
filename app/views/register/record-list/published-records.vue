@@ -8,7 +8,7 @@
       >
         <i :class="isChecked ? 'bi bi-check-square-fill' : 'bi bi-square'"></i> 
         {{ t('published') }}
-        <span class="badge bg-light text-dark">{{ recordsCount }}</span>
+        <span class="badge bg-light text-dark">{{ totalCount }}</span>
       </button>
 </template>
 
@@ -27,57 +27,80 @@
   const { t } = useI18n({ messages })
   const auth = useAuth()
   const route = useRoute().value
-  const emit = defineEmits(['updateRecords'])
-  const realm = useRealm();
+  const realm = useRealm()
+
+  const emit = defineEmits(['updateRecords', 'updateTotal'])
 
   const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token() })
 
-  // --- State ---
-  const recordsCount = ref(0)
+  const totalCount = ref(0)
   const publishedRecords = ref([])
   const isLoading = ref(false)
   const isChecked = ref(false) // toggle state
+
   const schemaShortCode = ref(route.params.document_type)
+  const pageNumber = ref(1)
+  const pageSize = 25
 
-  // --- Methods ---
-  const toggleRecords = () => {
-      isChecked.value = !isChecked.value
-      
-      if (isChecked.value) {
-          emit('updateRecords', publishedRecords.value)
-      } else {
-        emit('updateRecords', [])
-      }
-  }
-
-  const loadRecords = async () => {
-    publishedRecords.value = []
+  const loadRecords = async (page = 1) => {
     const schemaName = mapSchema(realm, schemaShortCode.value)
-    if (!schemaShortCode.value && !schemaName) return
-    isLoading.value = true
+    if (!schemaShortCode.value || !schemaName) return
 
+    isLoading.value = true
     try {
+      const skip = (page - 1) * pageSize
       const query = {
         $filter: `(type eq '${schemaName}')`,
-        $top: 25,
+        $top: pageSize,
+        $skip: skip,
         $orderby: 'updatedOn desc',
         collection: 'my'
       }
 
       const res = await kmDocumentApi.queryDocuments(query)
       publishedRecords.value = res?.Items || []
-      recordsCount.value = res?.Count || 0
-    } catch (err) {
-      console.error('Failed to load records:', err)
+      totalCount.value = res?.Count || 0
+
+      // Only push to parent when toggle is ON
+      if (isChecked.value) {
+        emit('updateRecords', publishedRecords.value)
+        emit('updateTotal', totalCount.value)
+      }
+    } catch (e) {
+      console.error('Failed to load records:', e)
       publishedRecords.value = []
-      recordsCount.value = 0
+      totalCount.value = 0
+      if (isChecked.value) { // todo test
+        emit('updateRecords', [])
+        emit('updateTotal', 0)
+      }
     } finally {
       isLoading.value = false
     }
   }
 
-  // --- Lifecycle ---
+  const toggleRecords = async () => {
+    isChecked.value = !isChecked.value
+    if (isChecked.value) {
+      await loadRecords(pageNumber.value) // fetch & emit current page
+    } else {
+      emit('updateRecords', [])
+      emit('updateTotal', 0)
+    }
+  }
+
+  // Allow parent to request another page (called from records-list)
+  const changePage = async (newPage) => {
+    pageNumber.value = newPage
+    if (isChecked.value) {
+      await loadRecords(newPage)
+    }
+  }
+
+  defineExpose({ changePage })
+
+  // Preload first page to populate the badge count; don't emit until toggled ON
   onMounted(() => {
-    loadRecords()
+    loadRecords(1)
   })
 </script>
