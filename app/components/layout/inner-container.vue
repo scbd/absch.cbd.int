@@ -1,5 +1,5 @@
 <template>
-    <div id="innerPage"class="card card-1-notrans bg-white mx-1 mx-lg-3 mt-3 mb-5">
+    <div id="innerPage" class="card card-1-notrans bg-white mx-1 mx-lg-3 mt-3 mb-5">
         <!-- Header -->
         <div class="p-0 mb-1" :class="headerClass">
             <div class="d-flex align-items-center justify-content-between p-1 w-100">
@@ -11,9 +11,7 @@
             </div>
         </div>
         <!-- Content -->
-        <div class="register-content-content">
-            <slot name="content"></slot>
-        </div>
+        <slot name="content"></slot>
     </div>
 </template>
 
