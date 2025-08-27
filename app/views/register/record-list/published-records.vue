@@ -18,7 +18,7 @@
   import KmDocumentApi from '~/api/km-document';
   import { useRealm } from '~/services/composables/realm';
   import { useI18n } from 'vue-i18n'
-  import { mapSchema } from '~/components/kb/filters';
+  import { useSchema } from "~/services/composables/schema.js"
   import messages from '~/app-text/views/register/record-list.json'
 
 
@@ -28,6 +28,7 @@
   const auth = useAuth()
   const route = useRoute().value
   const realm = useRealm()
+  const { schemaKeyByShortCode } = useSchema()
 
   const emit = defineEmits(['updateRecords', 'updateTotal'])
 
@@ -43,7 +44,7 @@
   const pageSize = 25
 
   const loadRecords = async (page = 1) => {
-    const schemaName = mapSchema(realm, schemaShortCode.value)
+    const schemaName = schemaKeyByShortCode(schemaShortCode.value);
     if (!schemaShortCode.value || !schemaName) return
 
     isLoading.value = true

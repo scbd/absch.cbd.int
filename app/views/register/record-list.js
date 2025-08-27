@@ -39,9 +39,9 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.headerHtml = '<a class="text-decoration-none text-white" rel="noopener" href="/register">'
                                     + $scope.schemaFullTitle + ' (' + $scope.schemaShortName + ')</a>'
 
-                console.log('schemaShortName', $scope.schemaShortName);
-                console.log('Schema Title', $scope.schemaTitle);
-                console.log('schema Full Title', $scope.schemaFullTitle);
+                // console.log('schemaShortName', $scope.schemaShortName);
+                // console.log('Schema Title', $scope.schemaTitle);
+                // console.log('schema Full Title', $scope.schemaFullTitle);
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });

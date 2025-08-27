@@ -30,7 +30,12 @@
           </td>
 
           <td class="px-1 fs-small-8 text-end th_width align-middle">
-            View action
+            <!-- v-if="record.canEdit" -->
+            <edit-record
+              :identifier="record.identifier"
+              :schema-code="schemaShortCode"
+            >
+            </edit-record>
           </td>
         </tr>
       </tbody>
@@ -53,6 +58,7 @@ import messages from '~/app-text/views/register/record-list.json'
 import paginate from '~/components/common/pagination.vue'
 import { lstring } from '~/components/kb/filters'
 import { useRoute } from '@scbd/angular-vue/src/index.js'
+import editRecord from '~/components/register/edit-record.vue'
 
 const { t } = useI18n({ messages })
 
