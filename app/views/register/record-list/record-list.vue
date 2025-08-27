@@ -4,7 +4,7 @@
         <div class="col-md-7 col-12">
           <div class="btn-group-sm cf-xs-btn">
             <slot name="filter">
-              <!-- hold a ref so we can call changePage(page) on the child -->
+              <!-- hold a ref so we can call changePage(page) on the child, in published-records we have defineExpose({ changePage }) -->
               <published-records
                 ref="publishedRef"
                 @updateRecords="handleUpdate"
@@ -24,6 +24,7 @@
 
       <div>
         <slot name="list-table">
+           <!-- // @changePage="handlePageChange" ask published-records to fetch the selected page -->
           <list-table
             :records="recordsList"
             :total-count="totalRecords"
@@ -60,6 +61,6 @@
   const handlePageChange = (page) => {
     currentPage.value = page
     // ask published-records to fetch the selected page
-    publishedRef.value?.changePage(page)
+    publishedRef.value?.changePage(page) // parent to be able to call a child method.
   }
   </script>
