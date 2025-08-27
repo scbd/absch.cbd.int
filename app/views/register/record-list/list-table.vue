@@ -29,6 +29,18 @@
             <div><span>{{ record.uniqueId }}</span></div>
           </td>
 
+          <td class="ps-1 fs-small-8 w-25">
+                <!-- Case 1: Working Doc Updated -->
+                <user-info v-if="record.workingDocumentUpdatedBy" :user="record.workingDocumentUpdatedBy" />
+                <!-- Case 2: Working Doc Created (and no update) -->
+                <user-info v-else-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy" :user="record.workingDocumentCreatedBy"/>
+                <!-- Case 3: No WD created/updated -->
+                <template v-else>
+                  <user-info v-if="record.updatedBy" :user="record.updatedBy" />
+                  <user-info v-else-if="record.createdBy && !record.updatedBy" :user="record.createdBy" />
+                </template>
+          </td>
+
           <td class="px-1 fs-small-8 text-end th_width align-middle">
             <!-- v-if="record.canEdit" -->
             <edit-record
@@ -59,6 +71,7 @@ import paginate from '~/components/common/pagination.vue'
 import { lstring } from '~/components/kb/filters'
 import { useRoute } from '@scbd/angular-vue/src/index.js'
 import editRecord from '~/components/register/edit-record.vue'
+import userInfo from '~/components/register/user-info.vue'
 
 const { t } = useI18n({ messages })
 
