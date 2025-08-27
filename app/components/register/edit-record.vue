@@ -3,7 +3,7 @@
       id="editRecord"
       class="btn btn-outline-secondary text-decoration-none"
       :title="t('edit')"
-      :href="`/en/register/${schemaCode}/${identifier}/edit`"
+      :href="`/register/${schemaCode}/${identifier}/edit`"
     >
       <i class="bi bi-pencil-square"></i>
     </a>
