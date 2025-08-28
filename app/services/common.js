@@ -534,3 +534,10 @@ export function stringToHash(text, radix){
     return Math.abs(hash).toString(radix||24);
 }
 
+export function getAppName(realm) {
+    
+    if (!realm) return "";
+    const [name] = realm.split("-");
+    return name.toLowerCase();
+}
+
