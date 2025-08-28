@@ -7,6 +7,7 @@ import '~/views/forms/view/bch/icons';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import viewReferenceRecordsT from '~/app-text/views/forms/view/directives/view-reference-records.json';
 import { getFieldName } from '~/services/getFieldName';
+import { PAGINATION_OPTIONS_WITH_ALL, CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE } from '~/services/filters/constant.js';
 
 app.directive("viewReferencedRecords", [function () {
 	return {
@@ -24,6 +25,7 @@ app.directive("viewReferencedRecords", [function () {
 		},
 		controller: ["$scope", "solr", '$q', 'searchService', 'realm', 'commonjs', 'translationService', function ($scope, solr, $q, searchService, realm, commonjs, translationService) {
 			translationService.set('viewReferenceRecordsT', viewReferenceRecordsT);
+			$scope.paginationOptions = PAGINATION_OPTIONS_WITH_ALL;
 			$scope.sortField='updatedDate_dt';
 			$scope.sortSequence='desc';
 			$scope.searchResult = {};
@@ -66,13 +68,17 @@ app.directive("viewReferencedRecords", [function () {
 									let fieldInfo = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
 									fieldInfo.docs.push(record);
 
+									const cachedPageSizeOption = localStorage.getItem(CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE);
+ 
+									const effectiveRowsPerPage = cachedPageSizeOption
+									? parseInt(cachedPageSizeOption, 10) : 25;
 									fieldInfo = {
 										...fieldInfo,
 										count : fieldInfo.count+1,
-										pageSize : 25,
+										pageSize    : effectiveRowsPerPage,
 										currentPage : 1,
-										pageCount : Math.ceil(fieldInfo.docs.length / 25),
-										pagedDocs : fieldInfo.docs.filter((e,i)=>i<25)
+										pageCount : Math.ceil(fieldInfo.docs.length / effectiveRowsPerPage),
+										pagedDocs : fieldInfo.docs.filter((e, i) => i < effectiveRowsPerPage)
 									}
 
 									$scope.referenceRecords[record.schemaCode].fields[info.field] = fieldInfo;
@@ -118,16 +124,24 @@ app.directive("viewReferencedRecords", [function () {
 			}
 
 			$scope.onPageChange = (pageNumber, field)=>{
-				console.log(field.docs)
 				field.currentPage = pageNumber
 				field.pagedDocs = field.docs.filter((e,i)=>i >= field.pageSize * (pageNumber-1) && i< field.pageSize * pageNumber);
 			}
-			$scope.onPageSizeChanged = function(size, field){
-				field.currentPage = 1;
-				field.pageSize = size;
-				field.pageCount = Math.ceil(field.docs.length / size);
-				field.pagedDocs = field.docs.filter((e,i)=>i<size);
-			}
+			$scope.onPageSizeChanged = function(size) {
+				
+				localStorage.setItem(CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE, size);
+			
+				// Apply to all show and hide all records
+				angular.forEach($scope.referenceRecords, (record) => {
+					angular.forEach(record.fields, (field) => {
+						field.pageSize = size;
+						field.currentPage = 1;
+						field.pageCount = Math.ceil(field.docs.length / size);
+						field.pagedDocs = field.docs.slice(0, size);
+					});
+				});
+			};
+			
 			// --------------------------------------------------------------
 			// -----------------------------------------------------------------
 			$scope.encode = function(query){

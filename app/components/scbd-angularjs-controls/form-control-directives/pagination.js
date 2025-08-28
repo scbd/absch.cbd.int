@@ -1,7 +1,7 @@
 import template from 'text!./pagination.html';
 import app from '~/app';
 import paginationT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/pagination.json';
-import numbers from '~/app-text/common/numbers.json';
+import { PAGINATION_OPTIONS_DEFAULT } from '~/services/filters/constant.js';
 
 app.directive('pagination', ['$location', 'translationService', 
     function ($location, translationService) {
@@ -14,11 +14,14 @@ app.directive('pagination', ['$location', 'translationService',
                 onPageChange: '&',
                 pageSize    : '=',
                 numFound    : '=',
-                onPageSizeChanged: '&?'
+                onPageSizeChanged: '&?',
+                paginationOptions: '=?'
             },
             link: function ($scope, $element, $attr) {
                 translationService.set('paginationT', paginationT);
-                translationService.set('numbers', numbers);
+                $scope.paginationViewOptions = $scope.paginationOptions
+                    ? $scope.paginationOptions
+                    : PAGINATION_OPTIONS_DEFAULT;
                 $scope.range = function (start, end) {
                     if(end<1)
                         return
@@ -60,5 +63,3 @@ app.directive('pagination', ['$location', 'translationService',
             }
         }
     }])
-
-
