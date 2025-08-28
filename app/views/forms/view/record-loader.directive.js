@@ -22,6 +22,7 @@ import shareRecord from '~/components/common/share-record.vue';
 import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 import '~/views/forms/view/directives/validate-referenced-record-version';
 import documentDebugInfo from '~/components/km/document-debug-info.vue';
+import KmDocumentApi from "~/api/km-document";
 
 	const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
@@ -31,9 +32,9 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', '$rootScope', 'apiToken', 'translationService', '$http',
+		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'solr', 'translationService', '$http',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		realm, $compile, searchService, IWorkflows, appLocale, solr, $rootScope, apiToken, translationService, $http) {
+		realm, $compile, searchService, IWorkflows, appLocale, solr, translationService, $http) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -60,7 +61,6 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 					$scope.hideClose = true;
 				}				
 				translationService.set('recordLoaderT', recordLoaderT);
-				$scope.tokenReader = function(){ return apiToken.get()}
 
 				if (!$scope.linkTarget || $scope.linkTarget == '')
 					$scope.linkTarget = '_blank';
@@ -253,8 +253,18 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 
 							loadViewDirective($scope.internalDocument.header.schema);
 							$scope.error = undefined;
-						}).catch(function (error) {
+						}).catch( async function (error) {
 							if (error.status == 404 && version != 'draft') {
+								
+							
+								const kmDocumentApi = new KmDocumentApi();
+								const result = await kmDocumentApi.getDeletedRecord(identifier);
+								const isNationalSchema = _.includes(realm.nationalSchemas, result.header.schema);
+
+								if(result?.header.schema && isNationalSchema) {
+									const schemaShortCode = $filter('schemaShortName')(result.header.schema);
+									$scope.nfpCountryCode = result.country.identifier.toUpperCase()+"/"+schemaShortCode;
+								}
 								$scope.load(identifier, 'draft', otherRealm);
 								$scope.error = error;
 							}								
