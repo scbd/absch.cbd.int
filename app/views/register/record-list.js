@@ -13,6 +13,8 @@ import innerContainer from '../../components/layout/inner-container.vue';
 import recordList from './record-list/record-list.vue';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
+import { provide } from 'vue'; 
+import { safeDelegate } from '~/services/common';
 // import offlineFormats from './record-list/offline-formats.vue';
 import { mergeTranslationKeys } from '../../services/translation-merge';
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
@@ -29,9 +31,26 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
                 $scope.vueComponent = {
-                        components: { innerContainer, recordList }
+                    components: { innerContainer, recordList },
+                    setup: componentSetup
                 }
 
+                 function componentSetup () {
+                    provide('askDelete', safeDelegate($scope, (record)=>{
+                        record = record || {}
+                        return $scope.askDelete(record)
+                    }));
+
+                    provide('askDuplicate', safeDelegate($scope, (record)=>{
+                        record = record || {}
+                        return $scope.askDuplicate(record)
+                    }));
+
+                    provide('getUniqueId', safeDelegate($scope, (record)=>{
+                        record = record || {}
+                        return getUniqueId(record);
+                    }));
+                } 
                  
                 $scope.schemaShortName = $filter("schemaName")($routeParams.document_type);
                 $scope.schemaTitle = $filter("mapSchema")($routeParams.document_type);
