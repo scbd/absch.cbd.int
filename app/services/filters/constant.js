@@ -26,3 +26,4 @@ export const CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE = 'userPreferenceDocum
 export const CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE = 'userPreferenceReferenceRecordsPageSize';
 export const CACHE_PAGINATION_SEARCH_PAGE_SIZE = 'userPreferenceSearchResultPageSize';
 export const OASIS_REALM = "oasis";
+export const OASIS_REALM = "oasis";
