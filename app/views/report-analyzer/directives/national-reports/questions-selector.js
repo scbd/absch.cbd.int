@@ -23,8 +23,8 @@ import questionSelectorT from '~/app-text/views/report-analyzer/directives/natio
     //
     //
     //==============================================
-app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm', 'reportAnalyzerService', 'translationService',
-        function ($http, locale, commonjs, $q, $timeout, realm, reportAnalyzerService, translationService) {
+app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm', 'reportAnalyzerService', 'translationService', '$route',
+        function ($http, locale, commonjs, $q, $timeout, realm, reportAnalyzerService, translationService, $route) {
         return {
             restrict : 'E',
             replace : true,
@@ -40,7 +40,7 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
             link: function ($scope) {
                 translationService.set('questionSelectorT', questionSelectorT);
                 $scope.isBch        = realm.is('BCH');
-                $scope.selectedReportType = $scope.selectedReportType || _.last($scope.reportData, function(r){return r.dataUrl}).type;
+                $scope.selectedReportType = $scope.selectedReportType || getLatestReportType();
                 
                 $scope.selectedRegions    = $scope.selectedRegions    || DefaultRegions.concat();
                 $scope.allSelected = true;
@@ -69,11 +69,23 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //
                 //====================================
-                $scope.$watch('selectedReportType', async function (reportType) {
-
+                $scope.$watch('selectedReportType', async function (reportType) { 
+                    if (!$scope.selectedReportType) {
+                        // If reportType param exists, use it, otherwise use latestReportType
+                        if ($route.current.params.reportType) {
+                            $scope.selectedReportType = $route.current.params.reportType;
+                        } else {
+                            $scope.selectedReportType = getLatestReportType();
+                        }
+                        $scope.allSelected = true;
+                        $scope.allSectionsClicked();
+                    }
                     if(!reportType || !$scope.reportData)
                         return;
-                    $scope.$emit('onReportTypeChanged', reportType);
+
+                    if (reportType) {
+                        $scope.$emit('onReportTypeChanged', reportType);
+                    }  
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
 
                     const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/(\w+)$/i;
@@ -108,6 +120,7 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //====================================
                 $scope.$watchCollection('selectedRegions', function() {
+                    
                     if(_.includes(['protocolParties', 'protocolNonParties','NKLSParty'], $scope.selectedRegionsPreset))
                         return;
 
@@ -193,6 +206,11 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //
                 //====================================
+
+                function getLatestReportType() {
+                    return _.last($scope.reportData, function(r){return r.dataUrl}).type;
+                }
+
                 function fixEUR(term) {
                     if(term.identifier=="eu")
                         term.identifier = 'eur';
