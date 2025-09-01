@@ -1,115 +1,198 @@
 <template>
-  <nav v-if="props.recordCount" aria-label="{{ t('pagination') }}" class="pagination d-flex justify-content-center text-center">
-    <ul class="pagination">
+  <div>
+    <nav :aria-label="t('pagination')" v-if="pageCount > 0">
+      <ul class="pagination d-flex justify-content-center text-center">
+        <!-- Page count -->
+        <li class="page-item d-none d-lg-inline-block disabled pagination-page-count">
+          <span class="page-link">
+            <strong>{{ t('page') }} {{ currentPage }} {{ t('of') }} {{ pageCount }}</strong>
+          </span>
+        </li>
 
-      <li v-if="props.firstLastButton" @click="setPage(1)" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
-        <a class="page-link">{{ props.firstButtonText }}</a>
-      </li>
-      
-      <li @click="previousPage" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
-        <a class="page-link">{{ props.prevText }}</a>
-      </li>
-      
-      <li v-if="visiblePageNumbers[0] > 1" class="page-item">
-        <a class="page-link">...</a>
-      </li>
+        <!-- First -->
+        <li :class="{ disabled: currentPage === 1 }" class="page-item d-none d-sm-inline-block pagination-btn-first">
+          <a
+            class="page-link"
+            :tabindex="currentPage === 1 ? -1 : 0"
+            :aria-disabled="currentPage === 1"
+            @click="currentPage !== 1 && setPage(1)"
+          >
+            « {{ t('first') }}
+          </a>
+        </li>
 
-      <li v-for="pageNumber in visiblePageNumbers" :key="pageNumber" @click="setPage(pageNumber)" :class="{ 'active': internalCurrentPage === pageNumber }" class="page-item">
-        <a class="page-link">{{ pageNumber }}</a>
-      </li>
+        <!-- Prev -->
+        <li :class="{ disabled: currentPage === 1 }" class="page-item pagination-btn-prev">
+          <a
+            class="page-link"
+            :tabindex="currentPage === 1 ? -1 : 0"
+            :aria-disabled="currentPage === 1"
+            @click="currentPage !== 1 && previousPage()"
+          >
+            ‹ <span class="d-none d-sm-inline-block">{{ t('prev') }}</span>
+          </a>
+        </li>
 
-      <li v-if="visiblePageNumbers[visiblePageNumbers.length - 1] < pageCount" class="page-item">
-        <a class="page-link">...</a>
-      </li>
+        <!-- Page numbers -->
+        <li
+          v-for="page in visiblePageNumbers"
+          :key="page"
+          :class="{ active: page === currentPage }"
+          class="page-item pagination-btn-page-number"
+        >
+          <a
+            class="page-link"
+            :aria-current="page === currentPage ? 'page' : null"
+            @click="setPage(page)"
+          >
+            {{ page }}
+          </a>
+        </li>
 
-      <li @click="nextPage" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
-        <a class="page-link">{{ props.nextText }}</a>
-      </li>
+        <!-- Next -->
+        <li :class="{ disabled: currentPage === pageCount }" class="page-item pagination-btn-next">
+          <a
+            class="page-link"
+            :tabindex="currentPage === pageCount ? -1 : 0"
+            :aria-disabled="currentPage === pageCount"
+            @click="currentPage !== pageCount && nextPage()"
+          >
+            <span class="d-none d-sm-inline-block">{{ t('next') }}</span> ›
+          </a>
+        </li>
 
-      <li v-if="props.lastButtonText" @click="setPage(pageCount)" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
-        <a class="page-link">{{ props.lastButtonText }}</a>
-      </li>
+        <!-- Last -->
+        <li :class="{ disabled: currentPage === pageCount }" class="page-item d-none d-sm-inline-block pagination-btn-last">
+          <a
+            class="page-link"
+            :tabindex="currentPage === pageCount ? -1 : 0"
+            :aria-disabled="currentPage === pageCount"
+            @click="currentPage !== pageCount && setPage(pageCount)"
+          >
+            {{ t('last') }} »
+          </a>
+        </li>
 
-    </ul>
-  </nav>
+        <!-- Record count -->
+        <li class="page-item d-none d-lg-inline-block disabled pagination-record-count">
+          <span class="page-link">
+            <strong>{{ startRecord }} - {{ endRecord }} {{ t('of') }} {{ recordCount }}</strong>
+          </span>
+        </li>
 
+        <!-- Items per page -->
+        <li class="page-item d-none d-md-inline-block pagination-items-per-page">
+          <label class="page-link mb-0">
+            <span class="d-none d-lg-inline-block text-black-50 me-1">{{ t('itemsPerPage') }}</span>
+            <select
+              style="color:#0d6efd;"
+              v-model.number="recordsPerPageSize"
+              @change="updatePageSize"
+            >
+              <option
+                v-for="opt in pageSizeOptions"
+                :key="opt.value"
+                :value="opt.value"
+              >
+                {{ opt.label }}
+              </option>
+            </select>
+          </label>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- For Search crawlers create hidden href -->
+    <div style="display:none">
+      <a
+        v-for="page in pageCount"
+        :key="page"
+        :href="`/search?currentPage=${encodeURIComponent(page)}`"
+      >
+        {{ page }}
+      </a>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-import messages from '../../app-text/components/common/pagination.json';
-const { t } = useI18n({ messages });
+import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { PAGINATION_OPTIONS_DEFAULT } from '~/services/filters/constant'
+import messages from '~/app-text/components/common/pagination.json'
+
+const { t } = useI18n({ messages })
 
 const props = defineProps({
   recordCount: { type: Number, required: true },
-  recordsPerPage: { type: Number, required: true },
+  recordsPerPage: { type: Number, default: 25 },
   currentPage: { type: Number, required: true },
-  firstLastButton: { type: Boolean, default: true },
-  firstButtonText: { type: String, default: 'First' },
-  lastButtonText: { type: String, default: 'Last' },
-  prevText: { type: String, default: 'Prev' },
-  nextText: { type: String, default: 'Next' }
-});
-
-const emit = defineEmits(['changePage']);
-
-const internalCurrentPage = computed({
-  get() {
-    return props.currentPage;
-  },
-  set(page) {
-    emit('changePage', page);
+  pageSizeOptions: {
+    type: Array,
+    default: () => PAGINATION_OPTIONS_DEFAULT
   }
-});
+})
+const emit = defineEmits(['changePage', 'pageSizeChanged'])
 
-const setPage = (page) => {
-  internalCurrentPage.value = page;
-};
+const recordsPerPageSize = ref(props.recordsPerPage)
 
-const pageCount = computed(() => Math.ceil(props.recordCount / props.recordsPerPage));
 
+// responsive: track window width
+const windowWidth = ref(window.innerWidth)
+const resizeHandler = () => (windowWidth.value = window.innerWidth)
+onMounted(() => window.addEventListener('resize', resizeHandler))
+onUnmounted(() => window.removeEventListener('resize', resizeHandler))
+
+// total pages
+const pageCount = computed(() =>
+  Math.ceil(props.recordCount / recordsPerPageSize.value)
+)
+
+// visible page numbers
 const visiblePageNumbers = computed(() => {
-  const totalPages = pageCount.value;
-  const currentPage = internalCurrentPage.value;
-  const pageRange = 2;
-  const visiblePages = [];
+  const total = pageCount.value;
+  const showPages = windowWidth.value <= 768 ? 3 : 6
+  
+  const current = props.currentPage
+  const middle = Math.floor(showPages / 2)
+  let start = 1
+  let end = total
 
-  let startPage = Math.max(1, currentPage - pageRange);
-  let endPage = Math.min(totalPages, currentPage + pageRange);
-
-  if (currentPage - pageRange <= 0) {
-    endPage = Math.min(pageRange * 2 + 1, totalPages);
+  if (total > showPages) {
+    if (current > middle) start = current - middle
+    end = Math.min(total, start + showPages - 1)
+    start = Math.max(1, end - showPages + 1)
   }
 
-  if (currentPage + pageRange >= totalPages) {
-    startPage = Math.max(totalPages - pageRange * 2, 1);
-  }
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i)
+})
 
-  for (let i = startPage; i <= endPage; i++) {
-    visiblePages.push(i);
+// actions
+const setPage = (page) => {
+  if (page >= 1 && page <= pageCount.value) {
+    emit('changePage', page)
   }
+}
+const previousPage = () => setPage(props.currentPage - 1)
+const nextPage = () => setPage(props.currentPage + 1)
 
-  return visiblePages;
-});
+const updatePageSize = () => {
+  emit('pageSizeChanged', recordsPerPageSize.value)
+  emit('changePage', 1) // reset to first page when size changes
+}
 
-const previousPage = () => {
-  if (internalCurrentPage.value > 1) {
-    setPage(internalCurrentPage.value - 1);
-  }
-};
-
-const nextPage = () => {
-  if (internalCurrentPage.value < pageCount.value) {
-    setPage(internalCurrentPage.value + 1);
-  }
-};
+// record range
+const startRecord = computed(
+  () => (props.currentPage - 1) * recordsPerPageSize.value + 1
+)
+const endRecord = computed(() =>
+  Math.min(props.currentPage * recordsPerPageSize.value, props.recordCount)
+)
 </script>
 
 <style scoped>
-.pagination{
-  /* ToDo: change the style  */
-  font-size: 20px;
+.pagination {
+  font-size: 14px;
   cursor: pointer;
 }
 .disabled {
