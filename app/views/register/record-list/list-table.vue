@@ -30,7 +30,7 @@
             </a>
             <div><span>{{ record.identifier }}</span></div>
           </td>
-          <td v-if="schemaShortCode=='CON'" class="ps-1 fs-small-8 align-middle text-capitalize" >
+          <td v-if="schemaShortCode=='CON'" class="ps-1 fs-small-8 w-25 align-middle text-capitalize" >
               {{record.type}}
           </td>
 
@@ -64,6 +64,7 @@
       :record-count="totalCount"
       :current-page="currentPage"
       @changePage="handleChangePage"
+      @pageSizeChanged="handlePageSizeChanged"
     />
 </template>
 
@@ -81,7 +82,7 @@
   import paginate from '~/components/common/pagination.vue'
 
 
-  const emit = defineEmits(["changePage"])
+  const emit = defineEmits(["changePage", "pageSizeChanged"])
   const { t } = useI18n({ messages });
 
   const route = useRoute().value;
@@ -90,7 +91,7 @@
   defineProps({
     records: { type: Array, default: () => [] },
     totalCount: { type: Number, default: 0 },
-    pageSize: { type: Number, default: 25 },
+    pageSize: { type: Number, default: 5 },
     currentPage: { type: Number, default: 1 }
   });
 
@@ -98,6 +99,10 @@
     console.log("page", page);
     emit("changePage", page);
   };
+
+  const handlePageSizeChanged = (size) => {
+    emit("pageSizeChanged", size);
+  }
 </script>
 
 <style scoped>

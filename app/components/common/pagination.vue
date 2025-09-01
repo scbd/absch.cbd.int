@@ -1,118 +1,139 @@
 <template>
-  <nav v-if="props.recordCount" aria-label="{{ t('pagination') }}" class="pagination d-flex justify-content-center text-center">
-    <ul class="pagination">
+  <div>
+    <nav aria-label="Page navigation" v-if="pageCount > 0">
+      <ul class="pagination d-flex justify-content-center text-center">
 
-      <li v-if="props.firstLastButton" @click="setPage(1)" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
-        <a class="page-link">{{ props.firstButtonText }}</a>
-      </li>
-      
-      <li @click="previousPage" :class="{ 'disabled': internalCurrentPage === 1 }" class="page-item">
-        <a class="page-link">{{ props.prevText }}</a>
-      </li>
-      
-      <li v-if="visiblePageNumbers[0] > 1" class="page-item">
-        <a class="page-link">...</a>
-      </li>
+        <!-- Page Count -->
+        <li class="page-item d-none d-lg-inline-block disabled pagination-page-count">
+          <a class="page-link" disabled>
+            <strong>{{ t('page') }} {{ currentPage }} {{ t('of') }} {{ pageCount }}</strong>
+          </a>
+        </li>
 
-      <li v-for="pageNumber in visiblePageNumbers" :key="pageNumber" @click="setPage(pageNumber)" :class="{ 'active': internalCurrentPage === pageNumber }" class="page-item">
-        <a class="page-link">{{ pageNumber }}</a>
-      </li>
+        <!-- First -->
+        <li :class="{ disabled: currentPage === 1 }" class="page-item d-none d-sm-inline-block pagination-btn-first">
+          <a class="page-link" @click="setPage(1)" :disabled="currentPage === 1">« {{ t('first') }}</a>
+        </li>
 
-      <li v-if="visiblePageNumbers[visiblePageNumbers.length - 1] < pageCount" class="page-item">
-        <a class="page-link">...</a>
-      </li>
+        <!-- Prev -->
+        <li :class="{ disabled: currentPage === 1 }" class="page-item pagination-btn-prev">
+          <a class="page-link" @click="previousPage" :disabled="currentPage === 1">‹ <span class="d-none d-sm-inline-block">{{ t('prev') }}</span></a>
+        </li>
 
-      <li @click="nextPage" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
-        <a class="page-link">{{ props.nextText }}</a>
-      </li>
+        <!-- Page Numbers -->
+        <li v-for="page in visiblePageNumbers" :key="page"
+            :class="{ active: page === currentPage }"
+            class="page-item pagination-btn-page-number">
+          <a class="page-link" @click="setPage(page)">{{ page }}</a>
+        </li>
 
-      <li v-if="props.lastButtonText" @click="setPage(pageCount)" :class="{ 'disabled': internalCurrentPage === pageCount }" class="page-item">
-        <a class="page-link">{{ props.lastButtonText }}</a>
-      </li>
+        <!-- Next -->
+        <li :class="{ disabled: currentPage === pageCount }" class="page-item pagination-btn-next">
+          <a class="page-link" @click="nextPage" :disabled="currentPage === pageCount"><span class="d-none d-sm-inline-block">{{ t('next') }}</span> ›</a>
+        </li>
 
-    </ul>
-  </nav>
+        <!-- Last -->
+        <li :class="{ disabled: currentPage === pageCount }" class="page-item d-none d-sm-inline-block pagination-btn-last">
+          <a class="page-link" @click="setPage(pageCount)" :disabled="currentPage === pageCount">{{ t('last') }} »</a>
+        </li>
 
+        <!-- Record Count -->
+        <li class="page-item d-none d-lg-inline-block disabled pagination-record-count">
+          <a class="page-link" disabled>
+            <strong>
+              {{ startRecord }} - {{ endRecord }} {{ t('of') }} {{ recordCount }}
+            </strong>
+          </a>
+        </li>
+
+        <!-- Items per page -->
+        <li class="page-item d-none d-md-inline-block pagination-items-per-page">
+          <a class="page-link" disabled>
+            <span class="d-none d-lg-inline-block">{{ t('itemsPerPage') }}</span>
+            <select style="color:#0d6efd;" v-model.number="recordsPerPageSize" @change="updatePageSize">
+              <option v-for="size in pageSizeOptions" :key="size" :value="size">{{ size }}</option>
+            </select>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <!-- we need to keep it for search, copied nd chnage from angular pagnation -->
+    <!-- For Search crawlers create hidden href -->
+    <div style="display:none">
+      <a v-for="page in pageCount" :key="page" :href="`/search?currentPage=${encodeURIComponent(page)}`">{{ page }}</a>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import messages from '../../app-text/components/common/pagination.json';
 const { t } = useI18n({ messages });
 
 const props = defineProps({
   recordCount: { type: Number, required: true },
-  recordsPerPage: { type: Number, required: true },
+  recordsPerPage: { type: Number, default: 5 },
   currentPage: { type: Number, required: true },
-  firstLastButton: { type: Boolean, default: true },
-  firstButtonText: { type: String, default: 'First' },
-  lastButtonText: { type: String, default: 'Last' },
-  prevText: { type: String, default: 'Prev' },
-  nextText: { type: String, default: 'Next' }
+  pageSizeOptions: { type: Array, default: () => [5, 25, 50, 100, 200, 300] } // ToDo : this will be get from constant  
 });
+const emit = defineEmits(['changePage', 'pageSizeChanged']);
 
-const emit = defineEmits(['changePage']);
+// model and props mixing so assign to new variable
+const recordsPerPageSize = ref(props.recordsPerPage);
+//or
+// reactive recordsPerPage with setter
+// const recordsPerPageSize = computed({
+//   get: () => props.recordsPerPage,
+//   set: (val) => emit('pageSizeChanged', val)
+// });
 
-const internalCurrentPage = computed({
-  get() {
-    return props.currentPage;
-  },
-  set(page) {
-    emit('changePage', page);
+
+const pageCount = computed(() => Math.ceil(props.recordCount / recordsPerPageSize.value));
+
+const visiblePageNumbers = computed(() => {
+  const showPages = window.innerWidth <= 768 ? 3 : 6;
+  const total = pageCount.value;
+  const current = props.currentPage;
+  const middle = Math.floor(showPages / 2);
+  let start = 1;
+  let end = total;
+
+  if (total > showPages) {
+    if (current > middle) start = current - middle;
+    end = Math.min(total, start + showPages - 1);
+    start = Math.max(1, end - showPages + 1);
   }
+
+  const range = [];
+  for (let i = start; i <= end; i++) range.push(i);
+  return range;
 });
 
 const setPage = (page) => {
-  internalCurrentPage.value = page;
-};
-
-const pageCount = computed(() => Math.ceil(props.recordCount / props.recordsPerPage));
-
-const visiblePageNumbers = computed(() => {
-  const totalPages = pageCount.value;
-  const currentPage = internalCurrentPage.value;
-  const pageRange = 2;
-  const visiblePages = [];
-
-  let startPage = Math.max(1, currentPage - pageRange);
-  let endPage = Math.min(totalPages, currentPage + pageRange);
-
-  if (currentPage - pageRange <= 0) {
-    endPage = Math.min(pageRange * 2 + 1, totalPages);
-  }
-
-  if (currentPage + pageRange >= totalPages) {
-    startPage = Math.max(totalPages - pageRange * 2, 1);
-  }
-
-  for (let i = startPage; i <= endPage; i++) {
-    visiblePages.push(i);
-  }
-
-  return visiblePages;
-});
-
-const previousPage = () => {
-  if (internalCurrentPage.value > 1) {
-    setPage(internalCurrentPage.value - 1);
+  if (page >= 1 && page <= pageCount.value) {
+    emit('changePage', page);
   }
 };
+const previousPage = () => setPage(props.currentPage - 1);
+const nextPage = () => setPage(props.currentPage + 1);
 
-const nextPage = () => {
-  if (internalCurrentPage.value < pageCount.value) {
-    setPage(internalCurrentPage.value + 1);
-  }
+const updatePageSize = () => {
+  emit('pageSizeChanged', recordsPerPageSize.value);
 };
+
+const startRecord = computed(() => ((props.currentPage - 1) * recordsPerPageSize.value) + 1);
+const endRecord = computed(() => Math.min(props.currentPage * recordsPerPageSize.value, props.recordCount));
 </script>
 
 <style scoped>
-.pagination{
-  /* ToDo: change the style  */
-  font-size: 20px;
+.pagination {
+  font-size: 14px;
   cursor: pointer;
 }
 .disabled {
-  cursor:default !important;
+  cursor: default !important;
 }
 </style>

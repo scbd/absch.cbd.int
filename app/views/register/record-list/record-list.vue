@@ -44,6 +44,7 @@
             :page-size="pageSize"
             :current-page="currentPage"
             @changePage="handlePageChange"
+            @pageSizeChanged="handlePageSizeChanged"
           />
         </slot>
       </div>
@@ -66,7 +67,7 @@
   const recordsList = ref([])
   const totalRecords = ref(0)
   const currentPage = ref(1)
-  const pageSize = 25
+  const pageSize = 5
 
   const publishedRef = ref(null)
 
@@ -81,6 +82,11 @@
   const handlePageChange = (page) => {
     currentPage.value = page
     // ask published-records to fetch the selected page
-    publishedRef.value?.changePage(page) // parent to be able to call a child method.
+    publishedRef.value?.changePage(page);
+  }
+
+  const handlePageSizeChanged = (size) => {
+    currentPage.value = 1;
+    publishedRef.value?.pageSizeChanged(size);
   }
   </script>

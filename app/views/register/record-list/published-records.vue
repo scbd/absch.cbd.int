@@ -41,7 +41,7 @@
 
   const schemaShortCode = ref(route.params.document_type)
   const pageNumber = ref(1)
-  const pageSize = 25
+  const pageSize = ref(25);
 
   const loadRecords = async (page = 1) => {
     const schemaName = schemaKeyByShortCode(schemaShortCode.value);
@@ -49,10 +49,10 @@
 
     isLoading.value = true
     try {
-      const skip = (page - 1) * pageSize
+      const skip = (page - 1) * pageSize.value
       const query = {
         $filter: `(type eq '${schemaName}')`,
-        $top: pageSize,
+        $top: pageSize.value,
         $skip: skip,
         $orderby: 'updatedOn desc',
         collection: 'my'
@@ -98,7 +98,15 @@
     }
   }
 
-  defineExpose({ changePage })
+  const pageSizeChanged = async (size) => {
+    pageSize.value = size;
+    pageNumber.value = 1
+    if (isChecked.value) {
+      await loadRecords(1)
+    }
+  }
+
+  defineExpose({ changePage, pageSizeChanged })
 
   // Preload first page to populate the badge count; don't emit until toggled ON
   onMounted(() => {
