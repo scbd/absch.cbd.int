@@ -41,8 +41,14 @@
                 </div>
             </div>
 
-            <div v-if="articlesCount>10">
-				<paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>
+    <div v-if="articlesCount>25">
+				<paginate 
+                    :records-per-page="recordsPerPage"
+                    :record-count="articlesCount"
+                    :current-page="pageNumber"
+                    @changePage="onChangePage"
+                    @pageSizeChanged="handlePageSizeChanged"
+                ></paginate>
             </div>
 
         </div>
@@ -83,7 +89,7 @@
     const pageNumber = ref(1);
     let tagDetails =  {};
     let articlesCount = 0;
-    let recordsPerPage = 10;
+    const recordsPerPage = ref(25);
     const realmArticleTag = getRealmArticleTag();
 
     const hasEditRights = computed(()=> auth?.check(OASIS_ARTICLE_EDITOR_ROLES));
@@ -106,15 +112,19 @@
         };
 
     const onChangePage  = function(p) {
-            pageNumber.value = p;
-            articles.value = []; // ToDo ?????
-            loading.value = true;
             window.scrollTo(0,0);
             loadArticles(p, adminTags);
         };
 
-    const loadArticles = async function (pageNumber, adminTags) {
+        const handlePageSizeChanged = async (size) => {
+        recordsPerPage.value = size;
+        window.scrollTo(0, 0);
+        await loadArticles(1, adminTags);
+      }
 
+    const loadArticles = async function (page, adminTags) {
+
+            pageNumber.value = page;
             articlesCount = 0;
             articles.value = [];
             const q = {
@@ -131,8 +141,8 @@
                 _id: 1
             };
             const groupTags = JSON.stringify([encodeURIComponent(tag.value)]);
-            const groupLimit = recordsPerPage;
-            const groupSkip = (pageNumber - 1) * recordsPerPage
+            const groupLimit = recordsPerPage.value;
+            const groupSkip = (page - 1) * recordsPerPage.value
             const groupSort = {
                 "meta.createdOn": -1
             };

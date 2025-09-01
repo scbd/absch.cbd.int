@@ -68,9 +68,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { PAGINATION_OPTIONS_DEFAULT } from '../../services/filters/constant';
+import { PAGINATION_OPTIONS_DEFAULT, CACHE_GENERIC_PAGE_SIZE } from '../../services/filters/constant';
 import messages from '../../app-text/components/common/pagination.json';
 const { t } = useI18n({ messages });
 
@@ -81,12 +81,21 @@ const props = defineProps({
   pageSizeOptions: {
     type: Array,
     default: () => PAGINATION_OPTIONS_DEFAULT
-  } 
+  }
 });
 const emit = defineEmits(['changePage', 'pageSizeChanged']);
 
-// model and props mixing so assign to new variable
 const recordsPerPageSize = ref(props.recordsPerPage);
+
+
+onMounted(() => {
+  const cached = localStorage.getItem(CACHE_GENERIC_PAGE_SIZE);
+  if (cached) {
+    recordsPerPageSize.value = parseInt(cached, 10);
+    } else {
+    localStorage.setItem(CACHE_GENERIC_PAGE_SIZE, props.recordsPerPage);
+  }
+});
 
 const pageCount = computed(() => Math.ceil(props.recordCount / recordsPerPageSize.value));
 
@@ -117,7 +126,9 @@ const setPage = (page) => {
 const previousPage = () => setPage(props.currentPage - 1);
 const nextPage = () => setPage(props.currentPage + 1);
 
+// 🔹 when user changes size, persist + emit
 const updatePageSize = () => {
+  localStorage.setItem(CACHE_GENERIC_PAGE_SIZE, recordsPerPageSize.value);
   emit('pageSizeChanged', recordsPerPageSize.value);
 };
 

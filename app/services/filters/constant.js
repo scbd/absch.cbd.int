@@ -17,7 +17,6 @@ export const PAGINATION_OPTIONS_WITH_ALL = [
     { value: 10000, label: numbersText.allNumbers }];
 
 export const PAGINATION_OPTIONS_DEFAULT = [
-    { value: 10, label: numbersText.ten },
     { value: 25, label: numbersText.twentyFive },
     { value: 50, label: numbersText.fifty },
     { value: 100, label: numbersText.oneHundred },
@@ -26,3 +25,4 @@ export const PAGINATION_OPTIONS_DEFAULT = [
 export const CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE = 'userPreferenceDocumentSelectorPageSize';
 export const CACHE_PAGINATION_REFERENCED_RECORDS_PAGE_SIZE = 'userPreferenceReferenceRecordsPageSize';
 export const CACHE_PAGINATION_SEARCH_PAGE_SIZE = 'userPreferenceSearchResultPageSize';
+export const CACHE_GENERIC_PAGE_SIZE = 'userGenericPageSize';

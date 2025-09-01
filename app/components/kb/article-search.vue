@@ -43,9 +43,14 @@
           </div>
         </div>
       </div>
-      <div class="d-inline-block" v-if="articlesCount>10">
-        <paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage"
-          :current-page="pageNumber"></paginate>
+      <div class="d-inline-block" v-if="articlesCount>25">
+      <paginate 
+        :records-per-page="recordsPerPage" 
+        :record-count="articlesCount"
+        :current-page="pageNumber"
+        @changePage="onChangePage"
+        @pageSizeChanged="handlePageSizeChanged">
+      </paginate>
       </div>
     </div>
   </template>
@@ -71,7 +76,7 @@
       const articles = ref([]);
       const loading = ref(true);
       const pageNumber = ref(1);
-      const recordsPerPage = ref(10);
+      const recordsPerPage = ref(25);
       const realmTag = ref('');
       const categories = ref([]);
       const search = ref('');
@@ -182,12 +187,15 @@
                 }
             };
       const onChangePage = async (newPage) => {
-        articles.value = [];
-        loading.value = true;
         window.scrollTo(0, 0);
         await loadArticles(newPage);
       };
   
+      const handlePageSizeChanged = async (size) => {
+        recordsPerPage.value = size;
+        window.scrollTo(0, 0);
+        await loadArticles(1);
+      }
   
       const getSizedImage = (url, size) => {
           return url && url

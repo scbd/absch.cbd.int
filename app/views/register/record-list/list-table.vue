@@ -58,14 +58,14 @@
     </table>
 
     <!-- Pagination -->
-    <paginate
-      v-if="totalCount > pageSize"
-      :records-per-page="pageSize"
-      :record-count="totalCount"
-      :current-page="currentPage"
-      @changePage="handleChangePage"
-      @pageSizeChanged="handlePageSizeChanged"
-    />
+      <!-- it should be 25 not pageSize -->
+    <pagination v-if="totalCount > 25"
+        :records-per-page="pageSize" 
+        :record-count="totalCount"
+        :current-page="currentPage"
+        @changePage="handleChangePage"
+        @pageSizeChanged="handlePageSizeChanged">
+      </pagination>
 </template>
 
 <script setup>
@@ -79,7 +79,7 @@
   import deleteRecord from '~/components/register/delete-record.vue';
   import duplicateRecord from '~/components/register/duplcate-record.vue';
   import userInfo from '~/components/register/user-info.vue'
-  import paginate from '~/components/common/pagination.vue'
+  import pagination from '~/components/common/pagination.vue'
 
 
   const emit = defineEmits(["changePage", "pageSizeChanged"])

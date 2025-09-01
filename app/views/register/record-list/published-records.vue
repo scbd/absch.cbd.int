@@ -46,7 +46,7 @@
   const loadRecords = async (page = 1) => {
     const schemaName = schemaKeyByShortCode(schemaShortCode.value);
     if (!schemaShortCode.value || !schemaName) return
-
+    publishedRecords.value = []
     isLoading.value = true
     try {
       const skip = (page - 1) * pageSize.value
@@ -69,7 +69,6 @@
       }
     } catch (e) {
       console.error('Failed to load records:', e)
-      publishedRecords.value = []
       totalCount.value = 0
       if (isChecked.value) { // todo test
         emit('updateRecords', [])
