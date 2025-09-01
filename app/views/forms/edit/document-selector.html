@@ -253,10 +253,26 @@
                 <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" data-bs-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
                 <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" data-bs-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
-        <div pagination class="text-center ms-5" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage"
+         <!-- <div pagination class="text-center ms-5" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage"
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
-                max-page-count="4"></div> 
+                max-page-count="4" pagination-options="paginationOptions">
+            </div>   -->
+
+        <div ng-if="rawDocuments.pageCount > 0 && vueComponent" class="text-center ms-5">
+            
+            <!-- these two are not calling back from vue, we can use delegate
+             @page-change="onPageChange" 
+             @page-size-change="onPageSizeChanged" -->
+            <paginations ng-vue="vueComponent" 
+                :record-count="rawDocuments.numFound"
+                :records-per-page="searchResult.rowsPerPage"
+                :current-page="searchResult.currentPage"
+                :page-size-options="paginationOptions"
+                @page-change="onPageChange" 
+                @page-size-change="onPageSizeChanged"
+            ></paginations>
+        </div>    
         </div>
         <div ng-show="!isLoading" class="p-1 mt-3 mb-0 ms-4 pe-0">
             <div ng-if="isDialogOpen && !allowNew.editingOn && !listView">
@@ -330,7 +346,8 @@
             <div pagination class="text-center ms-5" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage"
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
-                max-page-count="4"></div> 
+                max-page-count="4" pagination-options="paginationOptions">
+            </div> 
         </div>
     </script>
 

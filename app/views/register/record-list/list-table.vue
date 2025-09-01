@@ -91,7 +91,7 @@
   defineProps({
     records: { type: Array, default: () => [] },
     totalCount: { type: Number, default: 0 },
-    pageSize: { type: Number, default: 5 },
+    pageSize: { type: Number, default: 25 },
     currentPage: { type: Number, default: 1 }
   });
 

@@ -67,7 +67,7 @@
   const recordsList = ref([])
   const totalRecords = ref(0)
   const currentPage = ref(1)
-  const pageSize = 5
+  const pageSize = 25
 
   const publishedRef = ref(null)
 

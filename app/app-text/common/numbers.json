@@ -102,5 +102,6 @@
   "towHundred":   "200",
   "threeHundred":   "300",
   "fourHundred":   "400",
-  "fiveHundred":   "500"
+  "fiveHundred":   "500",
+  "allNumbers":   "All"
 }

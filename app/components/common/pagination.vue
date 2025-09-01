@@ -2,42 +2,32 @@
   <div>
     <nav aria-label="Page navigation" v-if="pageCount > 0">
       <ul class="pagination d-flex justify-content-center text-center">
-
-        <!-- Page Count -->
         <li class="page-item d-none d-lg-inline-block disabled pagination-page-count">
           <a class="page-link" disabled>
             <strong>{{ t('page') }} {{ currentPage }} {{ t('of') }} {{ pageCount }}</strong>
           </a>
         </li>
-
-        <!-- First -->
         <li :class="{ disabled: currentPage === 1 }" class="page-item d-none d-sm-inline-block pagination-btn-first">
           <a class="page-link" @click="setPage(1)" :disabled="currentPage === 1">« {{ t('first') }}</a>
         </li>
-
-        <!-- Prev -->
         <li :class="{ disabled: currentPage === 1 }" class="page-item pagination-btn-prev">
           <a class="page-link" @click="previousPage" :disabled="currentPage === 1">‹ <span class="d-none d-sm-inline-block">{{ t('prev') }}</span></a>
         </li>
 
-        <!-- Page Numbers -->
         <li v-for="page in visiblePageNumbers" :key="page"
             :class="{ active: page === currentPage }"
             class="page-item pagination-btn-page-number">
           <a class="page-link" @click="setPage(page)">{{ page }}</a>
         </li>
 
-        <!-- Next -->
         <li :class="{ disabled: currentPage === pageCount }" class="page-item pagination-btn-next">
           <a class="page-link" @click="nextPage" :disabled="currentPage === pageCount"><span class="d-none d-sm-inline-block">{{ t('next') }}</span> ›</a>
         </li>
 
-        <!-- Last -->
         <li :class="{ disabled: currentPage === pageCount }" class="page-item d-none d-sm-inline-block pagination-btn-last">
           <a class="page-link" @click="setPage(pageCount)" :disabled="currentPage === pageCount">{{ t('last') }} »</a>
         </li>
 
-        <!-- Record Count -->
         <li class="page-item d-none d-lg-inline-block disabled pagination-record-count">
           <a class="page-link" disabled>
             <strong>
@@ -50,8 +40,18 @@
         <li class="page-item d-none d-md-inline-block pagination-items-per-page">
           <a class="page-link" disabled>
             <span class="d-none d-lg-inline-block">{{ t('itemsPerPage') }}</span>
-            <select style="color:#0d6efd;" v-model.number="recordsPerPageSize" @change="updatePageSize">
-              <option v-for="size in pageSizeOptions" :key="size" :value="size">{{ size }}</option>
+            <select
+              style="color:#0d6efd;"
+              v-model.number="recordsPerPageSize"
+              @change="updatePageSize"
+            >
+              <option
+                v-for="opt in pageSizeOptions"
+                :key="opt.value"
+                :value="opt.value"
+              >
+                {{ opt.label }}
+              </option>
             </select>
           </a>
         </li>
@@ -70,26 +70,23 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { PAGINATION_OPTIONS_DEFAULT } from '../../services/filters/constant';
 import messages from '../../app-text/components/common/pagination.json';
 const { t } = useI18n({ messages });
 
 const props = defineProps({
   recordCount: { type: Number, required: true },
-  recordsPerPage: { type: Number, default: 5 },
+  recordsPerPage: { type: Number, default: 25 },
   currentPage: { type: Number, required: true },
-  pageSizeOptions: { type: Array, default: () => [5, 25, 50, 100, 200, 300] } // ToDo : this will be get from constant  
+  pageSizeOptions: {
+    type: Array,
+    default: () => PAGINATION_OPTIONS_DEFAULT
+  } 
 });
 const emit = defineEmits(['changePage', 'pageSizeChanged']);
 
 // model and props mixing so assign to new variable
 const recordsPerPageSize = ref(props.recordsPerPage);
-//or
-// reactive recordsPerPage with setter
-// const recordsPerPageSize = computed({
-//   get: () => props.recordsPerPage,
-//   set: (val) => emit('pageSizeChanged', val)
-// });
-
 
 const pageCount = computed(() => Math.ceil(props.recordCount / recordsPerPageSize.value));
 
