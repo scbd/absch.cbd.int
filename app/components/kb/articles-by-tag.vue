@@ -158,9 +158,9 @@
                   groupSkip
                 });
                 if (result?.length) {
-
+                //toDo: simplify
                   result.forEach(element => {
-                    articlesCount = articlesCount + element.count;
+                    articlesCount = element.count;
                     articles.value = [...articles.value, ...element.articles];
                   });
                 }
