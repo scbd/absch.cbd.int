@@ -130,8 +130,9 @@
 				loading.value = true;
             	const result = await articlesApi.queryArticleGroup('adminTags', {  q, f, groupLimit, groupSort, groupTags, groupSkip });
             if (result?.length) {
+				//ToDo: check if this can be simplified
               result.forEach(element => {
-                faqCount.value += element.count;
+                faqCount.value = element.count;
             	faqs.value = [...faqs.value, ...element.articles];
               });
             }
