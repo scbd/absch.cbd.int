@@ -1,5 +1,5 @@
 <template>
-  <div>
+
     <nav :aria-label="t('pagination')" v-if="pageCount > 0">
       <ul class="pagination d-flex justify-content-center text-center">
         <!-- Page count -->
@@ -102,17 +102,6 @@
       </ul>
     </nav>
 
-    <!-- For Search crawlers create hidden href -->
-    <div style="display:none">
-      <a
-        v-for="page in pageCount"
-        :key="page"
-        :href="`/search?currentPage=${encodeURIComponent(page)}`"
-      >
-        {{ page }}
-      </a>
-    </div>
-  </div>
 </template>
 
 <script setup>
