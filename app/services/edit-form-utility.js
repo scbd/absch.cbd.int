@@ -1,10 +1,18 @@
 import KmDocumentApi from "~/api/km-document";
 // import { useRealm } from '~/services/composables/realm.js';
 
+const apiToken = {
+    "$$state": {
+        "status": 1,
+        "value": {
+            "token": "FEEE7DD27AFE93666B1651769882DB97CD217A70FCFD576433A8A20F03C9387B2B95DB4D368ACE00787D47080B01C0E9771CC677096EAD5BA378C2C3C4EAF6EA3A12ADF2EA08555D31452E40389F87B3294C488DEA0AF7357E3EB96715E8C40661FDD3F39A2641B0E0CD4642EE9CAA97F1000981D5855BA973686B798A81B176",
+            "expiration": "2025-09-04T16:56:06.8133993Z"
+        }
+    }
+}
+const kmDocumentApi = new KmDocumentApi({ tokenReader: () => apiToken?.value?.token });
 
-const kmDocumentApi = new KmDocumentApi({});
 
-// const { user } = useAuth();
 const user = {
     "userID": 87354,
     "name": "Tahmeed Shah",
@@ -29,7 +37,7 @@ const user = {
     "isEmailVerified": true
 }
 // const realm = useRealm();
-
+// renme to edit-for-uti
 export const documentService = {
 
 
@@ -42,21 +50,19 @@ export const documentService = {
 
         // Use async/await to simplify the promise chain.
         try {
-            const hasDraft = await kmDocumentApi.existsDraft(identifier, { info: "" });
-            console.log('Draft exists:', hasDraft);
-            // Call the correct security check based on draft existence.
-            const securityCheck = hasDraft 
-                ? await kmDocumentApi.canUpdate(identifier, { metadata })
-                : await kmDocumentApi.canCreate(identifier, { metadata });
-            console.log('Security check result:', securityCheck);
-            if (!securityCheck?.isAllowed) {
-                // Throw an error if the user is not authorized.
-                throw new Error("Not authorized to save draft");
-            }
-
-            // Call the put method on the instantiated API object.
-            //return storage.drafts.put(identifier, document);
-            return await kmDocumentApi.draftPut(identifier, document, { schema: document.header.schema });
+            // const hasDraft = await kmDocumentApi.existsDraft(identifier);
+            // console.log('Draft exists:', hasDraft);
+            // // Call the correct security check based on draft existence.
+            // //storage.drafts.security.canUpdate(identifier, document.header.schema, metadata)
+            // const securityCheck = hasDraft 
+            //     ? await kmDocumentApi.canUpdateDraft(identifier, document.header.schema,  metadata)
+            //     : await kmDocumentApi.canCreateDraft(identifier, document.header.schema,  metadata);
+            // console.log('Security check result:', securityCheck);
+            // if (!securityCheck?.isAllowed) {
+            //     // Throw an error if the user is not authorized.
+            //     throw new Error("Not authorized to save draft");
+            // }
+            return await kmDocumentApi.putDraft(identifier, document);
 
         } catch (error) {
             // Re-throw the error to be handled by the calling component.
@@ -76,9 +82,9 @@ export const documentService = {
         if (document.government) {
             metadata.government = document?.government?.identifier;
         }
-        
+        //metadata.government = user.value?.government;
         if (!metadata.government) {
-            metadata.government = user.government //user.value?.government;
+            metadata.government = 'va'
         }
 
         return metadata;

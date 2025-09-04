@@ -28,7 +28,7 @@ export default class KmDocumentApi extends ApiBase
     }
 
     //
-    // Public Document Methods
+    //  Document Methods
     //
     async queryDocuments(params) {
         return this.http.get(serviceUrls.documentQueryUrl(), { params })
@@ -49,7 +49,7 @@ export default class KmDocumentApi extends ApiBase
     }
 
     async exists(identifier, params) {
-        return this.http.head(serviceUrls.documentUrl(identifier), { params })
+        return this.http.head(serviceUrls.documentUrl(identifier), { method:'head', params })
                    .then(res => res.data)
                    .catch(tryCastToApiError);
     }
@@ -60,8 +60,10 @@ export default class KmDocumentApi extends ApiBase
                    .catch(tryCastToApiError);
     }
 
+    // todo: parms need to be defind
+    // const data =  await useAPIFetch(serviceUrls.draftUrl(identifier),  { method:'delete', params })
     async delete(identifier, params) {
-        return this.http.delete(serviceUrls.documentUrl(identifier), { params })
+        return this.http.delete(serviceUrls.documentUrl(identifier), { method:'delete', params })
                    .then(res => res.data)
                    .catch(tryCastToApiError);
     }
@@ -89,8 +91,8 @@ export default class KmDocumentApi extends ApiBase
 
     async existsDraft(identifier, params) {
         console.log('Checking draft existence for identifier:', identifier);
-        //return storage.drafts.get(identifier, { info: "" }).then(function() {
-        return this.http.head(serviceUrls.draftUrl(identifier), { params })
+        //token is not passed to head request
+        return this.http.head(serviceUrls.draftUrl(identifier), { method:'head', params })
                    .then(() => true)
                    .catch(err => {
                         if (err.status === 404) return false;
@@ -98,11 +100,16 @@ export default class KmDocumentApi extends ApiBase
                    });
     }
 
-    async putDraft(identifier, body, params) {
-        console.log('PUT body:', body);
-        return this.http.put(serviceUrls.draftUrl(identifier), body, { params })
+    async putDraft(identifier, body, params){
+        const requestParams = _.clone(params || {});
+        if (!requestParams.schema && body?.header?.schema) {
+            requestParams.schema = body.header.schema;
+        }
+
+        const data = await this.http.put( serviceUrls.draftUrl(identifier), body, { params: requestParams })
                    .then(res => res.data)
                    .catch(tryCastToApiError);
+        return data;
     }
 
     async deleteDraft(identifier, params) {
@@ -135,14 +142,15 @@ export default class KmDocumentApi extends ApiBase
     //
     // Draft Security Methods
     //
+    //await useAPIFetch(serviceUrls.draftSecurityUrl(identifier, 'create'),  { method:'get', params })
     async canCreateDraft(identifier, params) {
-        return this.http.get(serviceUrls.draftSecurityUrl(identifier, 'create'), { params })
+        return this.http.get(serviceUrls.draftSecurityUrl(identifier, 'create'), { method:'get', params })
                    .then(res => res.data.isAllowed)
                    .catch(tryCastToApiError);
     }
-
+    // await useAPIFetch(serviceUrls.draftSecurityUrl(identifier, 'update'),  { method:'get', params })
     async canUpdateDraft(identifier, params) {
-        return this.http.get(serviceUrls.draftSecurityUrl(identifier, 'update'), { params })
+        return this.http.get(serviceUrls.draftSecurityUrl(identifier, 'update'), { method:'get', params })
                    .then(res => res.data.isAllowed)
                    .catch(tryCastToApiError);
     }
