@@ -54,7 +54,8 @@ export default class ApiBase
 
 async function loadAsyncHeaders(baseConfig, path) {
 
-  const { tokenReader, tokenType, realm, ...config } = baseConfig || {}
+  // will be changed to config
+  const { tokenReader, tokenType, realm="BCH-DEV", ...config } = baseConfig || {}
 
   const headers = { ...(config.headers || {}) };
 

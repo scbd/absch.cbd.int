@@ -77,7 +77,7 @@
 
   import editRecord from '~/components/register/edit-record.vue';
   import deleteRecord from '~/components/register/delete-record.vue';
-  import duplicateRecord from '~/components/register/duplcate-record.vue';
+  import duplicateRecord from '~/components/register/duplicate-record.vue';
   import userInfo from '~/components/register/user-info.vue'
   import pagination from '~/components/common/pagination.vue'
 
