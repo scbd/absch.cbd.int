@@ -18,7 +18,7 @@
       tabindex="-1" 
       @click.self="closeDialog"
     >
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog mt-3" style="min-width:70%;">
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
@@ -40,26 +40,12 @@
           </div>
           <!-- Modal Footer -->
           <div class="modal-footer">
-            <button 
-              :disabled="isLoading" 
-              type="button" 
-              class="btn btn-secondary" 
-              @click="closeDialog"
-            >
-              Cancel
-            </button>
-            <button 
-              :disabled="isLoading" 
-              type="button" 
-              class="btn btn-primary" 
-              @click="duplicateRecord"
-            >
-              Duplicate
-            </button>
-          </div>
-        </div>
+            <button :disabled="isLoading" type="button" class="btn btn-secondary" @click="closeDialog">Cancel</button>
+            <button :disabled="isLoading" type="button" class="btn btn-primary" @click="duplicateRecord">Duplicate</button>
       </div>
     </div>
+  </div>
+</div>
   </div>
 </template>
 
