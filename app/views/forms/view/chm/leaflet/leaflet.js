@@ -4,6 +4,7 @@ var template =
 '<div>'+
 ' <div ref="map" style="height:400px;margin-bottom:10px" class="angular-leaflet-map"></div>'+
 ' <div ref="disclaimer" class="small"></div>'+
+' <style> .leaflet-attribution-flag { display: none !important; } </style>'+
 '</div>';
 
 app.directive("leaflet", ["$http", "$log", "$q", "$timeout", function ($http, $log, $q, $timeout) {
