@@ -67,7 +67,7 @@
 import { ref, defineProps, defineEmits } from "vue";
 import { useI18n } from "vue-i18n";
 import messages from "../../app-text/views/register/record-list.json"
-import { documentService } from "~/services/edit-form-utility.js";
+// import { documentService } from "~/services/edit-form-utility.js";
 import KmDocumentApi from "~/api/km-document";
 import { useAuth } from '@scbd/angular-vue/src/index.js';
 
@@ -145,7 +145,7 @@ const duplicateRecord = async () => {
     }
 
     // Call the service to save the duplicated record as a new draft
-    await documentService.saveDraft(documentToDuplicate);
+    await kmDocumentApi.saveDraft(documentToDuplicate);
     
     duplicateSuccess.value = true;
     
