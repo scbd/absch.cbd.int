@@ -33,21 +33,27 @@
                 </details>
             </main>
         </div>
-		<div v-if="faqCount>10">
-			<paginate :records-per-page="recordsPerPage" :record-count="faqCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>
+		<div v-if="faqCount>25">
+			<paginate 
+				:records-per-page="recordsPerPage" 
+				:record-count="faqCount" 
+				:current-page="pageNumber"
+				@changePage="onChangePage"
+				@pageSizeChanged="handlePageSizeChanged" 
+			></paginate>
 		</div>
     </div>
 </template>
 <script setup>
 	import { ref, onMounted, computed } from 'vue';
-	import Paginate from '../common/pagination.vue';
+	import Paginate from '~/components/common/pagination.vue';
     import cbdAddNewViewArticle from '~/components/common/cbd-add-new-view-article.vue';
-	import ArticlesApi from './article-api';
+	import ArticlesApi from '~/components/kb/article-api.js';
 	import { loadKbCategories , getUrl , getRealmArticleTag  } from '../../services/composables/articles.js'
 	import { lstring } from './filters';
 	import { useI18n } from 'vue-i18n';
-	import messages from '../../app-text/components/kb.json';
-	import { useRealm } from '../../services/composables/realm.js';
+	import messages from '~/app-text/components/kb.json';
+	import { useRealm } from '~/services/composables/realm.js';
 	import {  useRoute, useAuth } from "@scbd/angular-vue/src/index.js";
     import { OASIS_ARTICLE_EDITOR_ROLES } from '~/constants/roles.js'; 
     const auth = useAuth();
@@ -62,7 +68,7 @@
 	const faqCount = ref(0);
 	// let pageNumber = 1;
 	let pageNumber = ref(1);
-	let recordsPerPage = 10;
+	const recordsPerPage = ref(25);
 
 	const realmArticleTag = getRealmArticleTag();
     const hasEditRights = computed(()=> auth?.check(OASIS_ARTICLE_EDITOR_ROLES));
@@ -91,19 +97,20 @@
     };
 
 	const onChangePage = function(p) {
-		pageNumber.value = p;
-		// article=[];
-		faqs.value = [];
-		loading.value = true;
 		window.scrollTo(0,0);
 		loadFaqs(p);
 	};
-	
-	const loadFaqs = async function (pageNumber){
 
+	const handlePageSizeChanged = async (size) => {
+        recordsPerPage.value = size;
+        window.scrollTo(0, 0);
+        await loadFaqs(1);
+    }
+	
+	const loadFaqs = async function (page){
+				pageNumber.value = page;
 				faqCount.value = 0;
 				faqs.value = [];
-				const realmTag = realmArticleTag;    
 				const q = { 
 					$and : [
 						{ adminTags : { $all : adminTags.value?.map(encodeURIComponent)}}
@@ -112,18 +119,20 @@
 				const f = { 
 					[`title`]	: 1,
 					[`content`]	: 1,
-					adminTags 					: 1, _id:1
-				} ;
+					adminTags : 1, _id:1
+				};
 				const groupTags = JSON.stringify([faqFilterTag.value ? faqFilterTag.value : 'faq']);
-				const groupLimit = recordsPerPage;
-				const groupSkip  = (pageNumber-1) * recordsPerPage
+				const groupLimit = recordsPerPage.value;
+				const groupSkip  = (page-1) * recordsPerPage.value
 				const groupSort  = { "meta.modifiedOn":-1 };
 
 			try {
+				loading.value = true;
             	const result = await articlesApi.queryArticleGroup('adminTags', {  q, f, groupLimit, groupSort, groupTags, groupSkip });
             if (result?.length) {
+				//ToDo: check if this can be simplified
               result.forEach(element => {
-                faqCount.value += element.count;
+                faqCount.value = element.count;
             	faqs.value = [...faqs.value, ...element.articles];
               });
             }
