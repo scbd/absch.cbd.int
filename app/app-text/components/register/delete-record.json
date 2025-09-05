@@ -1,0 +1,19 @@
+{
+    "draftUpper": "DRAFT",
+    "refresh": "Refresh",
+    "title": "Title:",
+    "confirmDelete": "Are you sure you want to delete this record?",
+    "draftRecord": "DRAFT RECORD",
+    "uniqueId": "Unique ID:",
+    "summary": "Summary:",
+    "deleteDraft": "Delete draft",
+    "publishedRecord": "PUBLISHED RECORD",
+    "irrcInfo": "Published Internationally Recognized Certificates of Compliance (IRCC) records can only be revoked. A revoked IRCC will no longer be valid and will remain published in the ABSCH for traceability and transparency. Revoked IRCCs will be clearly marked as revoked in the search and display of the record.",
+    "amendmentDescription": "Provide a summary of the reason for revoking this IRCC",
+    "enterSummary": "Please enter a summary of the reason for revoking this IRCC",
+    "revokeIrrc": "Revoke this IRCC",
+    "deleteDraftRecord": "The draft record must be deleted before the published record can be removed.",
+    "note": "Note: Any pending draft will also be deleted",
+    "requestDeletion": "Request deletion of this record", 
+    "deleteRecord": "Delete the record"
+}

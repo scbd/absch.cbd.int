@@ -89,4 +89,43 @@ export const documentService = {
 
         return metadata;
     },
+    deleteDocument(document, additionalInfo) {
+
+			var draftInfo = {
+				identifier 				: document.identifier,
+				documentID			 	: document.documentID,
+				workingDocumentTitle	: document.title,
+				workingDocumentSummary	: document.summary,
+				workingDocumentMetadata	: document.metadata
+			};
+			var workflowType = {
+				name : 'deleteRecord', version : "0.4"
+			}	
+			
+			return createWorkflow(draftInfo, additionalInfo, workflowType); // return workflow info
+	
+	},
+	//$q.when(editFormUtility.deleteDocument(record, $scope.additionalInfo))
+	createWorkflow(draftInfo, additionalInfo, type){
+
+		var schema = realm.schemas[draftInfo.type]
+
+		if(!type)
+		 	type = schemasWorkflowTypes[schema.type];
+
+		if(!type)
+			throw "No workflow type defined for this record type: " + draftInfo.type;
+
+		var workflowData = {
+			"realm"      		: realm.value,
+			"documentID" 		: draftInfo.documentID,
+			"identifier" 		: draftInfo.identifier,
+			"title"      		: draftInfo.workingDocumentTitle,
+			"abstract"   		: draftInfo.workingDocumentSummary,
+			"metadata"   		: draftInfo.workingDocumentMetadata,
+			"additionalInfo"	: additionalInfo
+		};
+		// use api/workflows.create
+		return workflows.create(type.name, type.version, workflowData); // return workflow info
+	}
 };

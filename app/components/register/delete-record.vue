@@ -143,15 +143,13 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref, defineProps, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import KmDocumentApi from "~/api/km-document";
-import messages from "../../app-text/views/register/record-list.json"
+import messages from "~/app-text/components/register/delete-record.json"
+
 const props = defineProps({
-  record: { type: Object, required: true },
-  isIRCC: { type: Boolean, default: false },
-  canDeletePublished: { type: Boolean, default: false },
-  security: { type: Object, default: () => ({}) }
+  record: { type: Object, required: true }
 });
 const emit = defineEmits(['refresh']);
 const showModal = ref(false);
@@ -163,7 +161,29 @@ import { lstring } from '~/components/kb/filters';
 const auth = useAuth();
 const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
 const { t } = useI18n({ messages });
- 
+
+const security = computed( async()=>{
+  const allowed =  kmDocumentApi.canDelete(props.record.identifier)
+  return { canDelete : allowed };
+})
+const canDeletePublished = computed(()=>{
+  if(isPublished(props.record) && isDraft(props.record)){
+                        return true
+                    }
+                    else{
+                      return false
+                    }
+})
+const isIRCC = computed(()=>{
+  if (props.record.type == 'absPermit' && isPublished(props.record)){
+    return true
+  }
+// $scope.recordToDelete = record;
+// $scope.recordToDelete.document = result.data;
+// $scope.recordToDelete.document.amendmentDescription = undefined;
+  
+})
+
 const openDialog = () => {
   isLoading.value = false;
   error.value = null;

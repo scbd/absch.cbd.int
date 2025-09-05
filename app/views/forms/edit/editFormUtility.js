@@ -204,7 +204,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 	
 		}
 	};
-
+	//$q.when(editFormUtility.deleteDocument(record, $scope.additionalInfo))
 	function createWorkflow(draftInfo, additionalInfo, type){
 
 		var schema = realm.schemas[draftInfo.type]
@@ -224,7 +224,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 			"metadata"   		: draftInfo.workingDocumentMetadata,
 			"additionalInfo"	: additionalInfo
 		};
-
+		// use api/workflows.create
 		return workflows.create(type.name, type.version, workflowData); // return workflow info
 	}
 
