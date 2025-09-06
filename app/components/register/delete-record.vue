@@ -1,5 +1,6 @@
 <template>
-  <div>    
+  <div>
+    <!-- Delete button -->
     <button 
       class="btn btn-outline-secondary" 
       :title="t('delete')" 
@@ -12,14 +13,13 @@
     <!-- Modal -->
     <div 
       v-if="showModal" 
-      class="modal fade" 
-      :class="{ 'd-block show': showModal }" 
+      class="modal fade d-block show" 
       tabindex="-1" 
       @click.self="closeDialog"
     >
-      <div class="modal-dialog mt-3" style="min-width:70%;">
+      <div class="modal-dialog mt-3 w-75">
         <div class="modal-content">
-
+          
           <!-- Modal Header -->
           <div class="modal-header bg-danger text-white">
             <h4 class="modal-title">
@@ -33,30 +33,28 @@
           <div class="modal-body bg-white">
 
             <!-- Draft Section -->
-            <div v-if="isDraft(record)" class="card">
+            <div v-if="isDraft" class="card">
               <div class="card-header text-start">{{ t('draftRecord') }}</div>
-
-             <div class="p-3 mt-2 text-start">
-              <div class="mb-2">
-                <strong>{{ t('title') }}:</strong> 
-                <span>{{ lstring(record.workingDocumentTitle) }}</span>
+              <div class="p-3 mt-2 text-start">
+                <div class="mb-2">
+                  <strong>{{ t('title') }}:</strong> 
+                  <span>{{ lstring(record.workingDocumentTitle) }}</span>
+                </div>
+                <div class="mb-2">
+                  <strong>{{ t('uniqueId') }}:</strong> 
+                  <i>{{ t('draftUpper') }}</i>
+                </div>
+                <div v-if="record.workingDocumentSummary" class="mb-2">
+                  <strong>{{ t('summary') }}:</strong> 
+                  <span>{{ lstring(record.workingDocumentSummary) }}</span>
+                </div>
               </div>
-              <div class="mb-2">
-                <strong>{{ t('uniqueId') }}:</strong> 
-                <i>{{ t('draftUpper') }}</i>
-              </div>
-              <div v-if="record.workingDocumentSummary" class="mb-2">
-                <strong>{{ t('summary') }}:</strong> 
-                <span>{{ lstring(record.workingDocumentSummary) }}</span>
-              </div>
-            </div>
-
               <div class="p-3">
                 <button 
                   type="button" 
                   class="btn btn-danger float-end" 
                   :disabled="isLoading" 
-                  @click="deleteDraft(record)"
+                  @click="deleteDraft"
                 >
                   {{ t('deleteDraft') }}
                 </button>
@@ -64,7 +62,7 @@
             </div>
 
             <!-- Published Section -->
-            <div v-if="isPublished(record)" class="card mt-2">
+            <div v-if="isPublished" class="card mt-2">
               <div class="card-header">{{ t('publishedRecord') }}</div>
 
               <div v-if="isIRCC" class="p-3">
@@ -75,18 +73,24 @@
                 <div><strong>{{ t('title') }}:</strong> {{ record.title }}</div>
                 <div>
                   <strong>{{ t('uniqueId') }}:</strong> 
-                  <a :href="`/database/${uniqueIDWithoutRevision(record)}`" target="_blank">
-                    {{ uniqueIDWithoutRevision(record) }}
+                  <a :href="`/database/${uniqueIDWithoutRevision}`" target="_blank">
+                    {{ uniqueIDWithoutRevision }}
                   </a>
                 </div>
-                <div v-if="record.summary"><strong>{{ t('summary') }}:</strong> <span v-html="record.summary"></span></div>
+                <div v-if="record.summary">
+                  <strong>{{ t('summary') }}:</strong> 
+                  <span v-html="record.summary"></span>
+                </div>
               </div>
 
               <!-- IRCC Section -->
               <div v-if="isIRCC" class="p-3">
-                <km-form-languages multiple v-model="record.document.header.languages" class="float-end"></km-form-languages>
-                <br />
-                <div class="km-control-group">
+                <km-form-languages 
+                  multiple 
+                  v-model="record.document.header.languages" 
+                  class="float-end"
+                />
+                <div class="km-control-group mt-3">
                   <div class="km-control-group" name="amendmentDescription" required :caption="t('amendmentDescription')">
                     <km-textbox-ml 
                       v-model="record.document.amendmentDescription" 
@@ -95,7 +99,7 @@
                     />
                   </div>
                 </div>
-                <div class="alert alert-danger" v-if="record.showRevokeError">
+                <div class="alert alert-danger mt-2" v-if="record.showRevokeError">
                   {{ t('enterSummary') }}
                 </div>
                 <button 
@@ -114,27 +118,32 @@
                   {{ t('deleteDraftRecord') }}
                 </div>
                 <button 
-                  v-if="security" 
+                  v-if="security.canDelete" 
                   type="button" 
                   class="btn btn-danger float-end m-2" 
                   :disabled="isLoading || !canDeletePublished" 
-                  @click="deleteRecord(record)" 
-                  data-bs-toggle="tooltip" 
-                  data-placement="top" 
+                  @click="deleteRecord"
                   :title="t('note')"
                 >
-                  <span v-if="!security.canDelete">{{ t('requestDeletion') }}</span>
-                  <span v-else>{{ t('deleteRecord') }}</span>
+                  {{ t('deleteRecord') }}
+                </button>
+                <button 
+                  v-else 
+                  type="button" 
+                  class="btn btn-danger float-end m-2" 
+                  disabled
+                >
+                  {{ t('requestDeletion') }}
                 </button>
               </div>
 
             </div>
           </div>
 
-          <!-- After deletion feedback error-->
-            <div v-if="error" class="alert alert-danger mt-4" role="alert">
-              Error: {{ error }}
-            </div>
+          <!-- Error -->
+          <div v-if="error" class="alert alert-danger m-3" role="alert">
+            {{ error }}
+          </div>
 
         </div>
       </div>
@@ -146,80 +155,95 @@
 import { ref, defineProps, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import KmDocumentApi from "~/api/km-document";
-import messages from "~/app-text/components/register/delete-record.json"
+import messages from "~/app-text/components/register/delete-record.json";
+import { useAuth } from '@scbd/angular-vue/src/index.js';
+import { lstring } from '~/components/kb/filters';
 
 const props = defineProps({
   record: { type: Object, required: true }
 });
-const emit = defineEmits(['refresh']);
-const showModal = ref(false);
-const isLoading = ref(false);
-const error = ref(null);
-import { useAuth } from '@scbd/angular-vue/src/index.js';
-import { lstring } from '~/components/kb/filters';
+const emit = defineEmits(["refresh"]);
+
+const showModal   = ref(false);
+const isLoading   = ref(false);
+const error       = ref(null);
+const security    = ref({ canDelete: false });
 
 const auth = useAuth();
-const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
+const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token() });
 const { t } = useI18n({ messages });
 
-const security = computed( async()=>{
-  const allowed =  kmDocumentApi.canDelete(props.record.identifier)
-  return { canDelete : allowed };
-})
-const canDeletePublished = computed(()=>{
-  if(isPublished(props.record) && isDraft(props.record)){
-                        return true
-                    }
-                    else{
-                      return false
-                    }
-})
-const isIRCC = computed(()=>{
-  if (props.record.type == 'absPermit' && isPublished(props.record)){
-    return true
-  }
-// $scope.recordToDelete = record;
-// $scope.recordToDelete.document = result.data;
-// $scope.recordToDelete.document.amendmentDescription = undefined;
-  
-})
+/* --------------------------
+   Computed Helpers
+-------------------------- */
+const isDraft     = computed(() => props.record?.workingDocumentCreatedOn && !props.record?.workingDocumentLock);
+const isPublished = computed(() => !!props.record?.documentID);
+const isIRCC      = computed(() => props.record?.type === "absPermit" && isPublished.value);
+const canDeletePublished = computed(() => isPublished.value);
+const uniqueIDWithoutRevision = computed(() => props.record.identifier);
 
-const openDialog = () => {
+/* --------------------------
+   Modal Controls
+-------------------------- */
+const openDialog = async () => {
   isLoading.value = false;
   error.value = null;
   showModal.value = true;
+  await checkSecurity(); // only check when opening
 };
 const closeDialog = () => (showModal.value = false);
- 
-const isDraft = (entity) => entity?.workingDocumentCreatedOn && !entity?.workingDocumentLock;
-const isPublished = (entity) => entity?.documentID;
 
-// will be use this filter later
-const uniqueIDWithoutRevision = (record) => record.identifier;
+/* --------------------------
+   API Actions
+-------------------------- */
+const checkSecurity = async () => {
+  let allowed = false;
+
+  try {
+    allowed = isDraft.value
+      ? await kmDocumentApi.canDeleteDraft(props.record.identifier)
+      : await kmDocumentApi.canDelete(props.record.identifier);
+
+    allowed = allowed === true; // enforce strict boolean
+  } catch (e) {
+    allowed = false; // any error means not allowed
+  }
+console.log("allowed:", allowed)
+  security.value = { canDelete: allowed };
+};
+
+
 
 const deleteDraft = async () => {
   isLoading.value = true;
   error.value = null;
-
   try {
-    
-    const deleteResponse = await kmDocumentApi.deleteDraft(props.record.identifier);
-    console.log('deleteResponse:', deleteResponse); 
+    await kmDocumentApi.deleteDraft(props.record.identifier);
     emit("refresh");
-
+    closeDialog();
   } catch (err) {
-    console.error("Failed to delete record:", err);
-    if (err?.status === 403) {
-      error.value = "You are not authorized to delete records.";
-    } else {
-      error.value = err.message || "An unexpected error occurred.";
-    }
+    error.value = err?.message || t("unexpectedError");
   } finally {
     isLoading.value = false;
   }
-}
+};
 
-const deleteRecord = (record) => console.log("Deleting record:", record);
-const revokeRecord = (record) => console.log("Revoking record:", record);
+const deleteRecord = async () => {
+  isLoading.value = true;
+  error.value = null;
+  try {
+    await kmDocumentApi.delete(props.record.identifier);
+    emit("refresh");
+    closeDialog();
+  } catch (err) {
+    error.value = err?.message || t("unexpectedError");
+  } finally {
+    isLoading.value = false;
+  }
+};
 
+const revokeRecord = async (record) => {
+  console.log("Revoking record:", record);
+  // TODO: integrate API
+};
 </script>

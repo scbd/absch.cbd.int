@@ -55,7 +55,7 @@
         $top: pageSize.value,
         $skip: skip,
         $orderby: 'updatedOn desc',
-        collection: 'mydraft'
+        collection: 'my'
       }
 
       const res = await kmDocumentApi.queryDocuments(query)
