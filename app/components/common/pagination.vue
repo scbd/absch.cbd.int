@@ -1,16 +1,15 @@
 <template>
-
     <nav :aria-label="t('pagination')" v-if="pageCount > 0">
-      <ul class="pagination d-flex justify-content-center text-center">
+      <ul class="pagination justify-content-center text-center">
         <!-- Page count -->
-        <li class="page-item d-none d-lg-inline-block disabled pagination-page-count">
+        <li class="page-item d-none d-lg-inline-block disabled">
           <span class="page-link">
             <strong>{{ t('page') }} {{ currentPage }} {{ t('of') }} {{ pageCount }}</strong>
           </span>
         </li>
 
         <!-- First -->
-        <li :class="{ disabled: currentPage === 1 }" class="page-item d-none d-sm-inline-block pagination-btn-first">
+        <li :class="{ disabled: currentPage === 1 }" class="page-item d-none d-sm-inline-block">
           <a
             class="page-link"
             :tabindex="currentPage === 1 ? -1 : 0"
@@ -22,7 +21,7 @@
         </li>
 
         <!-- Prev -->
-        <li :class="{ disabled: currentPage === 1 }" class="page-item pagination-btn-prev">
+        <li :class="{ disabled: currentPage === 1 }" class="page-item">
           <a
             class="page-link"
             :tabindex="currentPage === 1 ? -1 : 0"
@@ -38,7 +37,7 @@
           v-for="page in visiblePageNumbers"
           :key="page"
           :class="{ active: page === currentPage }"
-          class="page-item pagination-btn-page-number"
+          class="page-item"
         >
           <a
             class="page-link"
@@ -50,7 +49,7 @@
         </li>
 
         <!-- Next -->
-        <li :class="{ disabled: currentPage === pageCount }" class="page-item pagination-btn-next">
+        <li :class="{ disabled: currentPage === pageCount }" class="page-item">
           <a
             class="page-link"
             :tabindex="currentPage === pageCount ? -1 : 0"
@@ -62,7 +61,7 @@
         </li>
 
         <!-- Last -->
-        <li :class="{ disabled: currentPage === pageCount }" class="page-item d-none d-sm-inline-block pagination-btn-last">
+        <li :class="{ disabled: currentPage === pageCount }" class="page-item d-none d-sm-inline-block">
           <a
             class="page-link"
             :tabindex="currentPage === pageCount ? -1 : 0"
@@ -74,18 +73,18 @@
         </li>
 
         <!-- Record count -->
-        <li class="page-item d-none d-lg-inline-block disabled pagination-record-count">
+        <li class="page-item d-none d-lg-inline-block disabled">
           <span class="page-link">
             <strong>{{ startRecord }} - {{ endRecord }} {{ t('of') }} {{ recordCount }}</strong>
           </span>
         </li>
 
         <!-- Items per page -->
-        <li class="page-item d-none d-md-inline-block pagination-items-per-page">
+        <li class="page-item d-none d-md-inline-block">
           <label class="page-link mb-0">
             <span class="d-none d-lg-inline-block text-black-50 me-1">{{ t('itemsPerPage') }}</span>
             <select
-              style="color:#0d6efd;"
+              class="pagination-select"
               v-model.number="recordsPerPageSize"
               @change="updatePageSize"
             >
@@ -101,7 +100,6 @@
         </li>
       </ul>
     </nav>
-
 </template>
 
 <script setup>
@@ -182,9 +180,14 @@ const endRecord = computed(() =>
 <style scoped>
 .pagination {
   font-size: 14px;
+}
+.page-link {
   cursor: pointer;
 }
 .disabled {
-  cursor:default !important;
+  cursor: default !important;
+}
+.pagination-select {
+  color: #0d6efd;
 }
 </style>
