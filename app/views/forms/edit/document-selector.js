@@ -37,7 +37,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             query    : "=",
             onRecordsFetched    : '&?',
             onBuildQuery        : '&?',
-            skipLinkRevision: "@?"
+            excludeRevision: "@?"
 		},
 		link : function($scope, $element, $attr, ngModelController) {
             var dialogId;
@@ -85,7 +85,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                         $scope.selectedRawDocuments.push(doc);
 
                         var document = {identifier: doc.identifier_s};
-                        if ($scope.skipLinkRevision !== "true") {
+                        if ($scope.excludeRevision !== "true") {
                             document.identifier += "@" + doc._revision_i;
                         }
                         if($scope.type == 'radio')

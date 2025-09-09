@@ -214,7 +214,7 @@
 											<div class="km-control-group" name="compatibleSpecies" caption="{{::('editOrganismT.compatibleSpecies'|$translate)}}">
 												<div class="hel-block">{{::('editOrganismT.compatibleSpeciesInfo'|$translate)}}</div>
 												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies"
-													 on-build-query="onOrganismQuery(searchText)" allow-new-schema="organism" skip-link-revision="true"></div>
+													 on-build-query="onOrganismQuery(searchText)" allow-new-schema="organism" exclude-revision="true"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">

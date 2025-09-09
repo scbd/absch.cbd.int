@@ -67,7 +67,7 @@
 												<div class="col-12">
 													<div class="km-control-group" name="organizations" required caption="{{::('editRiskAssessmentT.institution'|$translate)}}">											
 														<div document-selector ng-model="document.organizations" question="organizations"
-																on-build-query="onBuildOrganizationQuery(searchText)" allow-new-schema="organization" allow-new="true" skip-link-revision="true"></div>
+																on-build-query="onBuildOrganizationQuery(searchText)" allow-new-schema="organization" allow-new="true" exclude-revision="true"></div>
 													</div>
 												</div>
 											</div>	
@@ -75,7 +75,7 @@
 												<div class="col-12 label-space">
 													<div class="km-control-group" name="authorities" required caption="{{::('editRiskAssessmentT.competentNationalAuthorities'|$translate)}}">											
 														<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities"
-																on-build-query="onBuildAuthorityQuery(searchText)" allow-new-schema="authority" allow-new="true" skip-link-revision="true"></div>
+																on-build-query="onBuildAuthorityQuery(searchText)" allow-new-schema="authority" allow-new="true" exclude-revision="true"></div>
 
 													</div>
 												</div>
@@ -85,7 +85,7 @@
 												<div class="col-12 label-space">
 													<div class="km-control-group" name="contacts" caption="{{::('editRiskAssessmentT.contactDetails'|$translate)}}">											
 														<div document-selector ng-model="document.contacts" question="contacts"
-																on-build-query="onBuildContactQuery(searchText)" allow-new-schema="contact" allow-new="true" skip-link-revision="true"></div>
+																on-build-query="onBuildContactQuery(searchText)" allow-new-schema="contact" allow-new="true" exclude-revision="true"></div>
 
 													</div>
 												</div>
@@ -100,7 +100,7 @@
 												<div class="col-12">
 													<div class="km-control-group" name="modifiedOrganisms" required caption="{{::('editRiskAssessmentT.modifiedOrganisms'|$translate)}}">											
 														<div document-selector  ng-model="document.modifiedOrganisms" question="modifiedOrganisms" 
-																on-build-query="onBuildModifiedOrganismQuery(searchText)" allow-new-schema="modifiedOrganism" allow-new="true" skip-link-revision="true"></div>
+																on-build-query="onBuildModifiedOrganismQuery(searchText)" allow-new-schema="modifiedOrganism" allow-new="true" exclude-revision="true"></div>
 													</div>
 												</div>
 											</div>
