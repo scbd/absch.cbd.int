@@ -37,7 +37,8 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             hideSelf : "=hideSelf",
             query    : "=",
             onRecordsFetched    : '&?',
-            onBuildQuery        : '&?'
+            onBuildQuery        : '&?',
+            skipLinkRevision: "@?"
 		},
 		link : function($scope, $element, $attr, ngModelController) {
             $scope.paginationOptions = PAGINATION_OPTIONS_WITH_ALL;
@@ -86,9 +87,9 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                         $scope.selectedRawDocuments.push(doc);
 
                         var document = {identifier: doc.identifier_s};
-                        if($attr.identifierWithoutRevision!='true')
-                            document.identifier += "@"+ doc._revision_i;
-
+                        if ($scope.skipLinkRevision !== "true") {
+                            document.identifier += "@" + doc._revision_i;
+                        }
                         if($scope.type == 'radio')
                             currentModel = document;
                         else
