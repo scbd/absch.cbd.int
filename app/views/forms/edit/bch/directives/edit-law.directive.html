@@ -51,7 +51,7 @@
 
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.amendedRecords" question="amendedRecords" caption="Law, Regulation or Guideline"
 													on-build-query="onBuildAmendedLawQuery(searchText)" allow-new="true"
-													allow-new-schema="biosafetyLaw" skip-link-revision="true"></div>
+													allow-new-schema="biosafetyLaw" exclude-revision="true"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
@@ -211,7 +211,7 @@
 													
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.relatedRecords" question="relatedRecords" caption="Law, Regulation or Guideline"
 													on-build-query="onBuildLawQuery(searchText)"  allow-new="true"
-																allow-new-schema="biosafetyLaw" skip-link-revision="true">
+																allow-new-schema="biosafetyLaw" exclude-revision="true">
 													</div>
 											</div>
 										</div>
@@ -236,7 +236,7 @@
 												 	
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities" 
 																on-build-query="onBuildAuthoritiesQuery(searchText)" allow-new="true"
-																allow-new-schema="authority,supplementaryAuthority" skip-link-revision="true"></div>
+																allow-new-schema="authority,supplementaryAuthority" exclude-revision="true"></div>
 											</div>
 										</div>
 									</div>

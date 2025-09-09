@@ -44,7 +44,7 @@
                                     <div document-selector ng-model="document.contacts" allow-new="true" allow-new-schema="contact"
                                          question="contacts"
                                          on-build-query="onContactQuery(searchText)"
-                                         filter="true" skip-link-revision="{{isBch}}">
+                                         filter="true" exclude-revision="{{isBch}}">
                                     </div>
 
                                 </div>
@@ -202,7 +202,7 @@
                                         <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
                                              question="linkedOrganizations"
                                              on-build-query="onBuildQuery(searchText)"
-                                             filter="true" skip-link-revision="{{isBch}}"></div>
+                                             filter="true" exclude-revision="{{isBch}}"></div>
                                     </div>
                                 </div>
                             </div>
