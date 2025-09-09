@@ -26,7 +26,7 @@
                                 <div class="km-control-group" required name="organization" caption="{{::('editLabDetectionT.organization'|$translate)}}">
                                     <!-- <div class="help-block">Lab information...</div> -->
                                     <div document-selector required ng-model="document.organization" allow-new="true" allow-new-schema="organization"
-                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
+                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true" skip-link-revision="true"></div>
                             </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 <div class="km-control-group" name="relatedOrganization" caption="{{::('editLabDetectionT.relatedOrganization'|$translate)}}">
                                     <div class="help-block">{{::('editLabDetectionT.relatedOrganizationInfo'|$translate)}}</div>
                                    <div document-selector required ng-model="document.relatedOrganization" allow-new="true" allow-new-schema="organization"
-                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
+                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true" skip-link-revision="true"></div>
                             </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                             <div class="col-md-12">
                                <div class="km-control-group" name="detectableLmos" caption="{{::('editLabDetectionT.detectableLmos'|$translate)}}">
                                     <div document-selector ng-model="document.detectableLmos" allow-new="true" allow-new-schema="modifiedOrganism"
-                                        question="detectableLmos" on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" filter="true">
+                                        question="detectableLmos" on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" filter="true" skip-link-revision="true">
                                         
                                         <selected-records>
                                             <table class="table" style="padding-bottom:3px;width:100%;">
@@ -115,7 +115,7 @@
                             <div class="col-md-12">
                                 <div class="km-control-group" name="detectableGenes" required caption="{{::('editLabDetectionT.detectableGenes'|$translate)}}">
                                     <div document-selector ng-model="document.detectableGenes" required allow-new="true" allow-new-schema="dnaSequence"
-                                        question="detectableGenes" on-build-query="onBuildQuery(searchText,'dnaSequence')" filter="true"></div>
+                                        question="detectableGenes" on-build-query="onBuildQuery(searchText,'dnaSequence')" filter="true" skip-link-revision="true"></div>
                                 </div>
                             </div>
                         </div>
