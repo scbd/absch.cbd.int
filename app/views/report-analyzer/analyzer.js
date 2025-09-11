@@ -27,7 +27,7 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
             //
             //========================================
             try {
-                 console.log('regions')
+
                 const regions = await thesaurusService.getDomainTerms('regions');
                 var data = $location.search();
 
@@ -56,7 +56,7 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
             } finally {
                 //sessionStorage.removeItem('nrAnalyzerData');
             }
-            
+            $scope.$applyAsync();
             analyze($scope.activeReport ? true : false);
             
 
@@ -111,13 +111,13 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
                 $route.updateParams({ reportType: $scope.selectedReportType });
                 //Pass query string
                 $location.search({
-                    type: $scope.selectedReportType,
-                    // regions: $scope.selectedRegions.join(','),
                     regions: $scope.selectedRegions?.map(id => id.split('-')[0])?.join(','), // Extract first part before dash,
                     questions: $scope.selectedQuestions?.join(','),
+                    type: $scope.selectedReportType,
                     regionsPreset: $scope.selectedRegionsPreset,
                     regionsPresetFilter: $scope.selectedRegionsPresetFilter
                 });
+                $scope.$applyAsync();
         }
         //========================================
         //

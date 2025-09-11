@@ -40,6 +40,8 @@ app.directive("leaflet", ["$http", "$log", "$q", "$timeout", function ($http, $l
 
             var map = new L.Map($el, opt);
 
+            map.attributionControl.setPrefix(false)
+
             if(mapConfig.disclaimer)
                 element.find('[ref="disclaimer"]').html(mapConfig.disclaimer),
 

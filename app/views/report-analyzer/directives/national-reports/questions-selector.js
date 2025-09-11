@@ -120,12 +120,7 @@ app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs',
                 //
                 //====================================
                 $scope.$watchCollection('selectedRegions', function() {
-                    if($scope.selectedRegions.length>10){
-                        $scope.isMaxRegionsSelected = true;
-                    }
-                    else{
-                        $scope.isMaxRegionsSelected = false
-                    }
+                    
                     if(_.includes(['protocolParties', 'protocolNonParties','NKLSParty'], $scope.selectedRegionsPreset))
                         return;
 
