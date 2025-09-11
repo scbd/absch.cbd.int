@@ -71,6 +71,14 @@
         "ru": "https://www.cbd.int/abs/common-formats/ru/ABSCH-CPC-ru.doc",
         "zh": "https://www.cbd.int/abs/common-formats/zh/ABSCH-CPC-zh.doc"
     },
+    "npInterimNationalReport1": {
+        "ar": "https://www.cbd.int/abs/ar/commonformats/NR-ar.doc",
+        "en": "https://www.cbd.int/abs/en/commonformats/NR-en.doc",
+        "es": "https://www.cbd.int/abs/es/commonformats/NR-es.doc",
+        "fr": "https://www.cbd.int/abs/fr/commonformats/NR-fr.doc",
+        "ru": "https://www.cbd.int/abs/ru/commonformats/NR-ru.doc",
+        "zh": "https://www.cbd.int/abs/zh/commonformats/NR-zh.doc"
+    },
     "absNationalReport": {
         "ar": "https://www.cbd.int/abs/common-formats/ar/ABSCH-NR-ar.doc",
         "en": "https://www.cbd.int/abs/common-formats/en/ABSCH-NR-en.doc",
