@@ -6,7 +6,8 @@ import '~/views/directives/party-status';
 import './result-default';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import viewResultT from '~/app-text/views/search/search-results/view-result.json';
-import {exportRecords} from './export'
+import {exportRecords} from './export';
+import { CACHE_PAGINATION_SEARCH_PAGE_SIZE } from '~/services/filters/constant.js';
 
 app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$location', 'translationService', '$http',
     function (searchService, realm, $timeout, $location, translationService, $http) {
@@ -33,6 +34,12 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
                     rowsPerPage: 25
                 } 
                 // ,                    sortBy     : 'updatedDate_dt desc'
+                 const cachedPageSizeOption = localStorage.getItem(CACHE_PAGINATION_SEARCH_PAGE_SIZE);
+                 if (cachedPageSizeOption) {
+                    $scope.searchResult.rowsPerPage = parseInt(cachedPageSizeOption, 10);
+                 } else {
+                    localStorage.setItem(CACHE_PAGINATION_SEARCH_PAGE_SIZE, $scope.searchResult.rowsPerPage);
+                 }              
                 function updateResult(queryOptions, sort, pageNumber){
                    
                     $scope.loading = true;
@@ -103,6 +110,7 @@ app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$l
                 }
 
                 $scope.onPageSizeChanged = function(size){
+                    localStorage.setItem(CACHE_PAGINATION_SEARCH_PAGE_SIZE, size);
                     $scope.searchResult.rowsPerPage = size;  
                     $scope.searchResult.currentPage = 1; //reset to page 1                   
                     $scope.onPageChange($scope.searchResult.currentPage);
