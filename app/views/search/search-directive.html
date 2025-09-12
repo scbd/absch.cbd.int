@@ -1,5 +1,15 @@
 <div id="innerPage">
-    <div class="mastHead pt-4 global-filters" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS,'bg-chm':isCHM}">
+    <div ng-if="includeSubmission" class="mastHead global-filters" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS,'bg-chm':isCHM}">
+            <div class="offset-lg-1 search-content-sort" ng-if="pageInitialized && !isAlertSearch">
+                <result-view-options class="float-end d-inline-block"
+                    current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields"
+                    view-type="searchResult.viewType" group-by-fields="searchResult.groupByFields"
+                    on-sort-by-change="onSortByChange(fields)" on-view-type-change="onViewTypeChange(options)"
+                    on-export="onExportClick(options)"></result-view-options>
+        </div>
+    </div> 
+
+    <div ng-if="!includeSubmission" class="mastHead pt-4 global-filters" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS,'bg-chm':isCHM}">
         <h1 class="text-white">{{::('searchDirectiveT.search'|$translate)}}</h1>
         <div id="search-new" >
             <div class="row">
