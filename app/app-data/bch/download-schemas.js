@@ -179,12 +179,12 @@ export const downloadSchemas = {
 		"executingAgencies"  : commonFieldsT["capacityBuildingInitiative.executingAgencies"]
 	},
 	"submission":{
-        "uniqueId"                   : commonFieldsT["uniqueId"],
-        "government"                 : commonFieldsT["country"],
-        "organizations"              : commonFieldsT["submission.organizations"],
-        "title"                      : commonFieldsT["submission.title"],
-		"notifications"				 : commonFieldsT["submission.notifications"],
-        "dateSubmission"             : commonFieldsT["submission.dateSubmission"],
-        "publishedOn"                : commonFieldsT["publishedOn"]
-    }
+		"uniqueId"                   : fieldsT["uniqueId"],
+		"government"                 : fieldsT["country"],
+		"title"                      : fieldsT["submission.title"],
+		"dateSubmission"             : fieldsT["submission.dateSubmission"],
+		"organizations"              : fieldsT["submission.organizations"],
+		"notifications"				 : fieldsT["submission.notifications"],
+		"publishedOn"                : fieldsT["publishedOn"]
+	}
 }
