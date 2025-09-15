@@ -1223,7 +1223,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         if(facets.regions){
                             _.forEach(facets.countries, function(con, key){
                                 if(facets.regions[key])
-                                    facets.countries[key] = (facets.countries[key]||0) + facets.regions[key];
+                                    facets.countries[key] =  facets.regions[key]; // duplication may occer
                             })
                         }
                         if(facets.countries){
