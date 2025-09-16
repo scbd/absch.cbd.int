@@ -10,8 +10,8 @@ import dataMatrixT from '~/app-text/views/reports/matrix/data-matrix.json';
 
 let downloadSchemas;
 
-app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter', 'translationService',
-    function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter, translationService) {
+app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter', 'translationService', '$location',
+    function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter, translationService, $location) {
 	
 		return{
 			template:template,
@@ -25,7 +25,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
 			link($scope, $element, $attr, searchDirectiveCtrl){
                 translationService.set('dataMatrixT', dataMatrixT);
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
-
+                const params = $location.search();  
                 var pivotUIConf;
                 var pivotResult;
                 var defaultMessage        = $element.find('#loadingMessage').text()
@@ -66,24 +66,16 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                             downloadSchemas = (await import('~/app-data/chm/download-schemas')).downloadSchemas;
                         }
                     }
-                    // Find the "{!tag=schema}" query
-                    const schemaTagQuery = queryOptions.tagQueries.find(q => q.startsWith("{!tag=schema}"));
-
-                    let schemaName;
                     let fields = {
                                 uniqueId : "BCH record ID", 
                                 government : "Country",
                                 publishedOn : "Publication Date"
                         };
-                        // use the same logic as used in export to get the schema
-                    if (schemaTagQuery) {
-                        const match = schemaTagQuery.match(/schema_s\s*:\s*\(([^)]+)\)/);
-                        if (match) {
-                            const values = match[1].trim().split(/\s+/); // split by spaces
-                            schemaName = values.length === 1 ? values[0] : undefined;
-                        }
+ 
+                    let schemaName = undefined; 
+                    if (Array.isArray(params.schema) && params.schema.length === 1) {
+                        schemaName = params.schema[0];
                     }
-
                     console.log("schemaName:", schemaName);
                     if(schemaName){
                         fields = downloadSchemas[schemaName];
@@ -119,7 +111,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 }
 
                 // New function to fetch data from the server-side download API
-                function fetchRecordsFromServer({ query, fields, schema }) {
+                async function fetchRecordsFromServer({ query, fields, schema }) {
                     $scope.matrixProgress = defaultMessage;
 
                     const searchQuery = {
@@ -134,38 +126,56 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     if (!_.find(searchQuery.fq, function(q) { return ~q.indexOf('realm_ss:'); })) {
                         searchQuery.fq.push('realm_ss:' + realm.value.toLowerCase());
                     }
+                    $scope.isLoading = true;
 
-                // Check if a specific schema exists to decide which service to use
-                    if (schema) {
-                        // Use the specific download API for a known schema
-                        return $http.post(`/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
-                                { query: searchQuery, fields }, { timeout: queryCanceler.promise })
-                        .then(function(result) {
-                        // Process and transform the data
-                            let docs = result.data;
-                            docs = _.map(docs, function(row) {
-                                if (row.updatedOn)
-                                    row.Year = $filter("formatDate")(row.updatedOn, "YYYY");
-                                return row;
-                            });
-                            return { rows: docs, numFound: docs.length, isGeneric: false, schema: schema, schemaFields: fields };
-                        });
-                    } else {
-                    // If schema is undefined, use the generic search service.
-                        const genericFields = 'Government:government_EN_t,RecordType:schema_EN_t, updatedOn:updatedDate_dt, government_s,schemaType:schemaType_s,countryRegions_ss';
-                        return searchService.list({ ...searchQuery, fields: genericFields }, queryCanceler.promise)
-                        .then(function(result) { // use await asyn
-                            let docs = result.data.response.docs;
-                            const numFound = result.data.response.numFound;
-
-                            docs = _.map(docs, function(row) {
-                                if (row.updatedOn)
-                                    row.Year = $filter("formatDate")(row.updatedOn, "YYYY");
-                                        return row;
-                                    });
-                                return { rows: docs, numFound: numFound, isGeneric: true, schema: schema, schemaFields: fields };
-                            });
+                    try {
+                    // Check if a specific schema exists to decide which service to use
+                    let result;
+                    let isGeneric = false; 
+                    if (schema) { 
+                            result = await $http.post(
+                                `/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
+                                { query: searchQuery, fields },
+                                { timeout: queryCanceler.promise }
+                            );
+                        } else {
+                        // If schema is undefined, use the generic search service.
+                            isGeneric = true;    
+                            fields = 'RecordType:schema_EN_t, updatedOn:updatedDate_dt,schemaType:schemaType_s,countryRegions_ss';
+                            if (Array.isArray(params.schema) && params.schema.some(s => realm.nationalSchemas.includes(s))) {
+                                fields = 'Government:government_EN_t, ' + fields;
+                            }   
+                            result = await searchService.list(
+                                    { ...searchQuery, fields },
+                                    queryCanceler.promise
+                            );
                         }
+
+                        // normalize docs
+                        let docs = schema ? result.data : result.data.response.docs;
+                        const numFound = schema ? docs.length : result.data.response.numFound;
+
+                        docs = _.map(docs, (row) => {
+                            if (row.updatedOn)
+                                row.Year = $filter("formatDate")(row.updatedOn, "YYYY");
+                            return row;
+                        }); 
+                        return {
+                            rows: docs,
+                            numFound,
+                            isGeneric,
+                            schema,
+                            schemaFields: fields
+                        };
+                        }
+                    catch (err) {
+                    console.error("Error while fetching docs", err); 
+                    }
+                    finally { 
+                        $scope.$applyAsync(() => {
+                            $scope.isLoading = false;
+                        });
+                    }
                 }
                 function loadRegions(){
                     var DefaultRegions = [
