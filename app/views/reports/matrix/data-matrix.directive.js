@@ -145,6 +145,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         let docs = schema ? result.data : result.data.response.docs;
                         const numFound = schema ? docs.length : result.data.response.numFound;
 
+
                         docs = _.map(docs, (row) => {
                             if (row.updatedOn || row.publishedOn)
                                 row.Year = $filter("formatDate")(row.updatedOn || row.publishedOn, "YYYY");
@@ -166,15 +167,23 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                     ["Schema Type"]  : (row.schemaType||'').replace(/[a-z]/, function(match){ return match.toUpperCase()})
                                 }
                             } else {
+
+                                 return {...row, Year : row.Year}
+                            }
+                        }); 
+
+                        if (schema) {
+                            docs = _.map(docs, (row) => {
                                 for (const [key, label] of Object.entries(fields)) {
+
                                     if (_.has(row, key)) {
                                         row[label] = _.get(row, key); // add new key
                                         delete row[key];              // remove old key
                                     }
                                 }
-                                 return {...row, Year : row.Year}
-                            }
-                        }); 
+                                return row;
+                            });
+                        }
 
                         return {
                             rows: docs,
