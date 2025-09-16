@@ -10,8 +10,8 @@ import dataMatrixT from '~/app-text/views/reports/matrix/data-matrix.json';
 
 let downloadSchemas;
 
-app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter', 'translationService', '$location',
-    function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter, translationService, $location) {
+app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter', 'translationService', '$location', 'commonjs',
+    function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter, translationService, $location, commonjs) {
 	
 		return{
 			template:template,
@@ -25,7 +25,14 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
 			link($scope, $element, $attr, searchDirectiveCtrl){
                 translationService.set('dataMatrixT', dataMatrixT);
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
-
+                let countries  = {};
+                $q.when(commonjs.getCountries()).then(function(data) {           
+                    _.forEach(data, function(c) { countries[c.code.toLowerCase()] = c.name.en; });
+                    countries.eur = countries.eur || countries.eu;
+                }).catch(function(error) {
+                    console.log('ERROR:', error);
+                });
+                            
                 const params               = $location.search();  
                 let pivotUIConf;
                 let pivotResult;
@@ -157,6 +164,11 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                     return _.includes(reg.narrowerTerms, row.government_s);
                                 });
                             }
+                             if(schema && row.government){
+                                region = _.find(regions, function(reg){
+                                    return _.includes(reg.narrowerTerms, getCountryCode(row.government));
+                                });
+                            }
 
                             if(!schema){
                                 return {
@@ -168,7 +180,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                 }
                             } else {
 
-                                 return {...row, Year : row.Year}
+                                 return {...row, Year : row.Year, Region : region ? region.title[locale] : 'No Region', }
                             }
                         }); 
 
@@ -201,6 +213,15 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                             $scope.isLoading = false;
                         });
                     }
+                }
+
+                function getCountryCode(countryName) {
+                    for (const [code, name] of Object.entries(countries)) {
+                        if (name.toLowerCase() === countryName.toLowerCase()) {
+                           return code;
+                        }
+                    }
+                    return null;
                 }
                 function loadRegions(){
                     const DefaultRegions = [
