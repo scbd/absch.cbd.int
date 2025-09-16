@@ -25,17 +25,18 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
 			link($scope, $element, $attr, searchDirectiveCtrl){
                 translationService.set('dataMatrixT', dataMatrixT);
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
-                const params = $location.search();  
-                var pivotUIConf;
-                var pivotResult;
-                var defaultMessage        = $element.find('#loadingMessage').text()
-                var exportFileName        = "Matrix-view"
-                    $scope.matrixProgress = defaultMessage;
-                var pageSize              = 1000;
-                var queryCanceler         = undefined;
-                var regions               = [];
+
+                const params               = $location.search();  
+                let pivotUIConf;
+                let pivotResult;
+                const defaultMessage       = $element.find('#loadingMessage').text() || "Loading...";
+                const exportFileName       = "Matrix-view";
+                const pageSize             = 1000;
+                $scope.matrixProgress = defaultMessage;
+                let queryCanceler;
+                let regions                = [];
                 
-                $scope.api          = {
+                $scope.api            = {
                     updateResult : updateResult,
                     onExport     : onExport,
                     isBusy       : false
@@ -43,11 +44,10 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
 
                 // ASYNC update function to handle dynamic imports
                 async function updateResult(queryOptions){
-                   
                     if(queryCanceler){
                         queryCanceler.resolve();
                         $scope.matrixProgress   = defaultMessage;
-                        $scope.matrixProgress  += '<br/>' + $element.find('#resetFilterMessage').text()
+                        $scope.matrixProgress  += '<br/>' + ($element.find('#resetFilterMessage').text() || '');
                     }
                     else{
                         $scope.matrixProgress   = defaultMessage;
@@ -66,39 +66,37 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                             downloadSchemas = (await import('~/app-data/chm/download-schemas')).downloadSchemas;
                         }
                     }
+
                     let fields = {
-                                uniqueId : "BCH record ID", 
-                                government : "Country",
-                                publishedOn : "Publication Date"
-                        };
+                        uniqueId   : "BCH record ID", 
+                        government : "Country",
+                        publishedOn: "Publication Date"
+                    };
  
-                    let schemaName = undefined; 
+                    let schemaName; 
                     if (Array.isArray(params.schema) && params.schema.length === 1) {
                         schemaName = params.schema[0];
                     }
-                    console.log("schemaName:", schemaName);
                     if(schemaName){
                         fields = downloadSchemas[schemaName];
-                        
                     }
-                    console.log("fileds:",fields)
 
-                    var query = {
-                        fields      : fields, // Use dynamic fields from the download schema
-                        fieldQuery  : _.uniq(queryOptions.tagQueries),
-                        query       : queryOptions.query||undefined,
-                        facet          : true,
-                        facetFields    : queryOptions.facetFields,
-                        pivotFacetFields    : queryOptions.pivotFacetFields,
-                        rowsPerPage: 10000 //pageSize Get all records, as done in export.js 'all' listType
+                    const query = {
+                        fields           : fields, // Use dynamic fields from the download schema
+                        fieldQuery       : _.uniq(queryOptions.tagQueries),
+                        query            : queryOptions.query||undefined,
+                        facet            : true,
+                        facetFields      : queryOptions.facetFields,
+                        pivotFacetFields : queryOptions.pivotFacetFields,
+                        rowsPerPage      : 10000 // Get all records (same as export.js 'all' listType)
                     };
-                    return fetchRecordsFromServer({query: query,fields: fields,schema: schemaName})
-                        .then(function(result){
-                                queryCanceler   = null;                               
-                                pivotResult     = result;
-                                pivotUI(pivotResult);
-                                return result;
 
+                    return fetchRecordsFromServer({query, fields, schema: schemaName})
+                        .then(function(result){
+                            queryCanceler   = null;                               
+                            pivotResult     = result;
+                            pivotUI(pivotResult);
+                            return result;
                         })
                         .catch(function(err){
                             if(err.xhrStatus!="abort")
@@ -110,17 +108,16 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         });   
                 }
 
-                // New function to fetch data from the server-side download API
                 async function fetchRecordsFromServer({ query, fields, schema }) {
                     $scope.matrixProgress = defaultMessage;
 
                     const searchQuery = {
-                        df: searchService.localizeFields(query.df || 'text_EN_txt'),
-                        fq: _([query.fieldQuery]).flatten().compact().uniq().value(),
-                        q: query.query,
-                        sort: searchService.localizeFields(query.sort),
+                        df   : searchService.localizeFields(query.df || 'text_EN_txt'),
+                        fq   : _([query.fieldQuery]).flatten().compact().uniq().value(),
+                        q    : query.query,
+                        sort : searchService.localizeFields(query.sort),
                         start: 0,
-                        rows: query.rowsPerPage,
+                        rows : query.rowsPerPage,
                     };
 
                     if (!_.find(searchQuery.fq, function(q) { return ~q.indexOf('realm_ss:'); })) {
@@ -129,47 +126,59 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     $scope.isLoading = true;
 
                     try {
-                    // Check if a specific schema exists to decide which service to use
-                    let result;
-                    let isGeneric = false; 
-                    if (schema) { 
+                        let result;
+                        if (schema) { 
                             result = await $http.post(
                                 `/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
                                 { query: searchQuery, fields },
                                 { timeout: queryCanceler.promise }
                             );
                         } else {
-                        // If schema is undefined, use the generic search service.
-                            isGeneric = true;    
-                            fields = 'RecordType:schema_EN_t, updatedOn:updatedDate_dt,schemaType:schemaType_s,countryRegions_ss';
-                            if (Array.isArray(params.schema) && params.schema.some(s => realm.nationalSchemas.includes(s))) {
-                                fields = 'Government:government_EN_t, ' + fields;
-                            }   
+                            // If schema is undefined, use the generic search service. 
+                            fields = 'Government:government_EN_t,RecordType:schema_EN_t, updatedOn:updatedDate_dt, government_s,schemaType:schemaType_s,countryRegions_ss';  
                             result = await searchService.list(
-                                    { ...searchQuery, fields },
-                                    queryCanceler.promise
+                                { ...query, fields },
+                                queryCanceler.promise
                             );
                         }
 
-                        // normalize docs
                         let docs = schema ? result.data : result.data.response.docs;
                         const numFound = schema ? docs.length : result.data.response.numFound;
 
                         docs = _.map(docs, (row) => {
-                            if (row.updatedOn)
-                                row.Year = $filter("formatDate")(row.updatedOn, "YYYY");
-                            return row;
+                            if (row.updatedOn || row.publishedOn)
+                                row.Year = $filter("formatDate")(row.updatedOn || row.publishedOn, "YYYY");
+
+                            let region;
+                            if(row.government_s){
+                                region = _.find(regions, function(reg){
+                                    return _.includes(reg.narrowerTerms, row.government_s);
+                                });
+                            }
+
+                            if(!schema){
+                                return {
+                                    Government       : row.Government || 'x - Reference record',
+                                    Year             : row.Year,
+                                    ["Record Type"]  : row.RecordType,
+                                    Region           : region ? region.title[locale] : 'No Region',
+                                    ["Schema Type"]  : (row.schemaType||'').replace(/[a-z]/, function(match){ return match.toUpperCase()})
+                                }
+                            } else {
+                                return {...row, Year : row.Year, Region : region ? region.title[locale] : 'No Region'}
+                            }
                         }); 
+
                         return {
                             rows: docs,
                             numFound,
-                            isGeneric,
                             schema,
                             schemaFields: fields
                         };
-                        }
+                    }
                     catch (err) {
-                    console.error("Error while fetching docs", err); 
+                        console.error("Error while fetching docs", err); 
+                        throw err;
                     }
                     finally { 
                         $scope.$applyAsync(() => {
@@ -178,14 +187,14 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     }
                 }
                 function loadRegions(){
-                    var DefaultRegions = [
+                    const DefaultRegions = [
                         "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
                         "5E5B7AA4-2420-4147-825B-0820F7EC5A4B", // CBD Regional Groups - Asia and the Pacific
                         "942E40CA-4C23-4D3A-A0B4-736CD0EFCD54", // CBD Regional Groups - Central and Eastern Europe
                         "3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E", // CBD Regional Groups - Latin America and the Caribbean
                         "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B"  // CBD Regional Groups - Western Europe and Others
                     ];
-                    var regionsQuery = _.map(DefaultRegions, function(region){return thesaurusService.getTerms(region, {relations:true})})
+                    const regionsQuery = _.map(DefaultRegions, function(region){return thesaurusService.getTerms(region, {relations:true})});
                     
                     return $q.all(regionsQuery)
                             .then(function(regionData){
@@ -236,11 +245,11 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         if(pivotUIConf && pivotUIConf.rendererName.indexOf('Chart')>0){
                             pivotUI(pivotResult, format, fileName);
                             $timeout(function(){
-                                var btn = $element.find('.modebar-container .modebar .modebar-group .modebar-btn:first()')[0]
-                                btn.click()
+                                const btn = $element.find('.modebar-container .modebar .modebar-group .modebar-btn:first()')[0];
+                                if(btn) btn.click();
                             }, 200);
                         }
-                        else{ // not sure where we are using this 
+                        else{ // TODO: confirm if Excel export is still used
                             // Excel export
                             require(['tableexport'], function(){
                                 var tableExport = $element.find('.pvtTable').tableExport({
