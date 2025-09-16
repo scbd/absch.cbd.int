@@ -88,7 +88,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         facet            : true,
                         facetFields      : queryOptions.facetFields,
                         pivotFacetFields : queryOptions.pivotFacetFields,
-                        rowsPerPage      : 10000 // Get all records (same as export.js 'all' listType)
+                        rowsPerPage      : 100000 // Get all records (same as export.js 'all' listType)
                     };
 
                     return fetchRecordsFromServer({query, fields, schema: schemaName})
@@ -150,7 +150,8 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                 row.Year = $filter("formatDate")(row.updatedOn || row.publishedOn, "YYYY");
 
                             let region;
-                            if(row.government_s){
+                            //downloadSchemas[schemaName] rows do not have government_s
+                            if(!schema && row.government_s){
                                 region = _.find(regions, function(reg){
                                     return _.includes(reg.narrowerTerms, row.government_s);
                                 });
@@ -165,7 +166,13 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                     ["Schema Type"]  : (row.schemaType||'').replace(/[a-z]/, function(match){ return match.toUpperCase()})
                                 }
                             } else {
-                                return {...row, Year : row.Year, Region : region ? region.title[locale] : 'No Region'}
+                                for (const [key, label] of Object.entries(fields)) {
+                                    if (_.has(row, key)) {
+                                        row[label] = _.get(row, key); // add new key
+                                        delete row[key];              // remove old key
+                                    }
+                                }
+                                 return {...row, Year : row.Year}
                             }
                         }); 
 
