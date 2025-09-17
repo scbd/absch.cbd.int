@@ -201,7 +201,8 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                             rows: docs,
                             numFound,
                             schema,
-                            schemaFields: fields
+                            schemaFields: fields,
+                            facets: result.data.facet_counts ? searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts) : undefined
                         };
                     }
                     catch (err) {
