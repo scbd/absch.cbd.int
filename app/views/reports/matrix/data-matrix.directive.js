@@ -98,7 +98,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         rowsPerPage      : 100000 // Get all records (same as export.js 'all' listType)
                     };
 
-                    return fetchRecordsFromServer({query, fields, schema: schemaName})
+                    return loadMatrixRecords({query, fields, schema: schemaName})
                         .then(function(result){
                             queryCanceler   = null;                               
                             pivotResult     = result;
@@ -115,7 +115,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         });   
                 }
 
-                async function fetchRecordsFromServer({ query, fields, schema }) {
+                async function loadMatrixRecords({ query, fields, schema }) {
                     $scope.matrixProgress = defaultMessage;
 
                     const searchQuery = {
@@ -134,41 +134,39 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
 
                     try {
                         let result;
-                        if (schema) { 
+                        let facetResult;
+                        const facetFields = 'Government:government_EN_t,RecordType:schema_EN_t,updatedOn:updatedDate_dt,government_s,schemaType:schemaType_s,countryRegions_ss';
+
+                        if (schema) 
+                            query.rowsPerPage = 0;
+
+                        // call list once (always)
+                        facetResult = await searchService.list({ ...query, fields: facetFields }, queryCanceler.promise);
+
+                        if (schema) {
+                            // schema-specific download for records
                             result = await $http.post(
                                 `/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
                                 { query: searchQuery, fields },
                                 { timeout: queryCanceler.promise }
                             );
-                        } else {
-                            // If schema is undefined, use the generic search service. 
-                            fields = 'Government:government_EN_t,RecordType:schema_EN_t, updatedOn:updatedDate_dt, government_s,schemaType:schemaType_s,countryRegions_ss';  
-                            result = await searchService.list(
-                                { ...query, fields },
-                                queryCanceler.promise
-                            );
+                        }
+                        else {
+                            // otherwise use same list result
+                            fields = facetFields;
+                            result = facetResult;
                         }
 
                         let docs = schema ? result.data : result.data.response.docs;
                         const numFound = schema ? docs.length : result.data.response.numFound;
 
-
                         docs = _.map(docs, (row) => {
+
                             if (row.updatedOn || row.publishedOn)
                                 row.Year = $filter("formatDate")(row.updatedOn || row.publishedOn, "YYYY");
 
-                            let region;
-                            //downloadSchemas[schemaName] rows do not have government_s
-                            if(!schema && row.government_s){
-                                region = _.find(regions, function(reg){
-                                    return _.includes(reg.narrowerTerms, row.government_s);
-                                });
-                            }
-                             if(schema && row.government){
-                                region = _.find(regions, function(reg){
-                                    return _.includes(reg.narrowerTerms, getCountryCode(row.government));
-                                });
-                            }
+                            const code   = row.government_s || getCountryCode(row.government);
+                            const region = code ? _.find(regions, reg => _.includes(reg.narrowerTerms, code)) : undefined;
 
                             if(!schema){
                                 return {
@@ -183,7 +181,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                  return {...row, Year : row.Year, Region : region ? region.title[locale] : 'No Region', }
                             }
                         }); 
-
+                        // use translated fields
                         if (schema) {
                             docs = _.map(docs, (row) => {
                                 for (const [key, label] of Object.entries(fields)) {
@@ -202,7 +200,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                             numFound,
                             schema,
                             schemaFields: fields,
-                            facets: result.data.facet_counts ? searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts) : undefined
+                            facets: facetResult.data.facet_counts ? searchDirectiveCtrl.sanitizeFacets(facetResult.data.facet_counts) : undefined
                         };
                     }
                     catch (err) {
@@ -216,14 +214,13 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     }
                 }
 
-                function getCountryCode(countryName) {
-                    for (const [code, name] of Object.entries(countries)) {
-                        if (name.toLowerCase() === countryName.toLowerCase()) {
-                           return code;
-                        }
-                    }
-                    return null;
+               function getCountryCode(countryName) {
+                    const entry = Object.entries(countries)
+                        .find(([code, name]) => name.toLowerCase() === countryName.toLowerCase());
+
+                    return entry ? entry[0] : null;
                 }
+                
                 function loadRegions(){
                     const DefaultRegions = [
                         "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
