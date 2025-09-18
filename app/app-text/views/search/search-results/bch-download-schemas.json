@@ -80,6 +80,9 @@
   "submission.title"                                 :"Title of the submission",
   "submission.organizations"                         :"Organization(s)",
   "submission.dateSubmission"                        :"Date of submission",
-  "submission.notifications"                         :"Related notification(s)",
+  "submission.notificationsTitle"                    :"Notifications title",
+  "submission.notificationsLink"                     :"Notifications link",
+  "submission.notificationsSymbol"                   :"Notifications symbol",
+  "submission.notificationsReference"                :"Notifications reference",
   "submission.thematicAreas"                         :"Thematic areas"
 }
