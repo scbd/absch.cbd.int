@@ -11,5 +11,7 @@
     "Year": "Year",
     "RecordType": "Record Type",
     "Region": "Region",
-    "SchemaType": "Schema Type"
+    "SchemaType": "Schema Type",
+    "noRegion": "No Region",
+    "xReferenceRecord": "x - Reference record"
 }
