@@ -6,6 +6,7 @@ import '~/services/main';
 import '~/views/directives/block-region-directive';
 import 'pivottable';
 import 'ngDialog'; ;
+import { mergeTranslationKeys } from '~/services/translation-merge';
 import dataMatrixT from '~/app-text/views/reports/matrix/data-matrix.json';
 
 let downloadSchemas;
@@ -24,6 +25,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
             },
 			link($scope, $element, $attr, searchDirectiveCtrl){
                 translationService.set('dataMatrixT', dataMatrixT);
+                const fieldsT 		= mergeTranslationKeys(dataMatrixT);
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
                 let countries  = {};
                 $q.when(commonjs.getCountries()).then(function(data) {           
@@ -170,14 +172,13 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
 
                             if(!schema){
                                 return {
-                                    Government       : row.Government || 'x - Reference record',
-                                    Year             : row.Year,
-                                    ["Record Type"]  : row.RecordType,
-                                    Region           : region ? region.title[locale] : 'No Region',
-                                    ["Schema Type"]  : (row.schemaType||'').replace(/[a-z]/, function(match){ return match.toUpperCase()})
+                                    [fieldsT["Government"]]       : row.Government || 'x - Reference record',
+                                    [fieldsT["Year"]]             : row.Year,
+                                    [fieldsT["RecordType"]]       : row.RecordType,
+                                    [fieldsT["Region"]]           : region ? region.title[locale] : 'No Region',
+                                    [fieldsT["SchemaType"]]       : (row.schemaType||'').replace(/[a-z]/, function(match){ return match.toUpperCase()})
                                 }
                             } else {
-
                                  return {...row, Year : row.Year, Region : region ? region.title[locale] : 'No Region', }
                             }
                         }); 
@@ -191,6 +192,17 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                         delete row[key];              // remove old key
                                     }
                                 }
+
+                                // handle Year & Region translation separately
+                                if (_.has(row, "Year")) {
+                                    row[fieldsT["Year"]] = row["Year"];
+                                    delete row["Year"];
+                                }
+                                if (_.has(row, "Region")) {
+                                    row[fieldsT["Region"]] = row["Region"];
+                                    delete row["Region"];
+                                }
+
                                 return row;
                             });
                         }

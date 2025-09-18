@@ -6,5 +6,10 @@
     "csv": "comma separated values",
     "name": "File name :",
     "close": "Close",
-    "download": "Download"
+    "download": "Download",
+    "Government": "Government",
+    "Year": "Year",
+    "RecordType": "Record Type",
+    "Region": "Region",
+    "SchemaType": "Schema Type"
 }
