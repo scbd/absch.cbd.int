@@ -298,7 +298,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     if(!pivotUIConf){
                         pivotUIConf = {
                             renderers: renderers,
-                            rows: ["Government"],
+                            rows: ["Year"],
                             cols: ["RecordType"],
                             aggregatorName: "Count",
                             rendererOptions: {
