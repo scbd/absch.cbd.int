@@ -64,7 +64,7 @@
 										<div class="km-control-group" required name="contacts" caption="{{::('editCBIT.contactPerson'|$translate)}}">
 											<div document-selector ng-model="document.contacts" question="contacts"
 													on-build-query="onContactQuery(searchText)" allow-new="true" filter="true"
-													allow-new-schema="contact"></div>
+													allow-new-schema="contact" exclude-revision="{{isBCH}}"></div>
 										</div>
 									</div>
 								</div>
@@ -232,7 +232,7 @@
 										<div class="col-md-5">
 										<div class="km-control-group" required name="broaderProjects" caption="{{::('editCBIT.linkProjectOrProgramme'|$translate)}}">
 											<div document-selector ng-model="document.broaderProjects" question="broaderProjects"
-													on-build-query="onBuildQuery(searchText,'capacityBuildingInitiative')" allow-new-schema="capacityBuildingInitiative" allow-new="true" filter="true"></div>
+													on-build-query="onBuildQuery(searchText,'capacityBuildingInitiative')" allow-new-schema="capacityBuildingInitiative" allow-new="true" filter="true" exclude-revision="{{isBCH}}"></div>
 										</div>
 										</div>
 										</div>
@@ -249,7 +249,7 @@
 														<div class="help-info pt-1">{{::('editCBIT.implementingAgenciesInfo'|$translate)}}</div>
 
 														<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies"
-																on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
+																on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true" exclude-revision="{{isBCH}}"></div>
 													</div>
 												</div>
 											</div>
@@ -260,7 +260,7 @@
 													<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="{{::('editCBIT.executingAgencies'|$translate)}}">
 														<div class="help-info pt-1">{{::('editCBIT.executingAgenciesInfo'|$translate)}}</div>
 														<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
-																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
+																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true" exclude-revision="{{isBCH}}"></div>
 													</div>
 												</div>
 											</div>
@@ -271,7 +271,7 @@
 														<div class="help-info pt-1">{{::('editCBIT.collaboratingPartnersInfo'|$translate)}}
 														</div>
 														<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"
-																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
+																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true" exclude-revision="{{isBCH}}"></div>
 													</div>
 												</div>
 											</div>
@@ -393,7 +393,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" name="coFinancingSources" caption="{{::('editCBIT.primaryFunding'|$translate)}}">
 											<div document-selector ng-model="document.coreFundingSources" question="coreFundingSources"
-													on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
+													on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true" exclude-revision="{{isBCH}}"></div>
 
 										</div>
 									</div>
@@ -403,7 +403,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" name="coFinancingSources" caption="{{::('editCBIT.coFundingSources'|$translate)}}">
 											<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources"
-													on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
+													on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true" exclude-revision="{{isBCH}}"></div>
 
 										</div>
 									</div>
@@ -453,7 +453,7 @@
 												<div class="km-control-group" name="resultsReference" caption="{{::('editCBIT.resultsReference'|$translate)}}">
 													<div document-selector ng-model="document.resultsReference" question="resultsReference"
 													on-build-query="onBuildQuery(searchText,'resource')" allow-new="true" filter="true"
-															allow-new-schema="resource"></div>
+															allow-new-schema="resource" exclude-revision="{{isBCH}}"></div>
 												</div>
 											</div>
 										</div>
