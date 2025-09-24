@@ -65,11 +65,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 if (query && !collection)
                     params.collection = "my";
 
-                var useCache = !!params.cache;
 
                 var oTrans = transformPath(serviceUrls.documentQueryUrl(), params);
 
-                return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
             },
@@ -81,18 +80,11 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params = clone(params || {});
                 params.identifier = identifier;
 
-                var useCache = !!params.cache;
-                if(!useCache){//special logic for records with revision @[0-9]{1,3} cache them as there will be no change
-                    var revisionRegex =  /@([0-9]{1,3})/;
-                    if(revisionRegex.test(identifier))
-                        useCache = true;
-                }
-                if(useCache)
-                    useCache = storageDocumentCacheFactory;
+                
                     
                 var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
-                return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
 
@@ -105,11 +97,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params = clone(params || {});
                 params.identifier = identifier;
 
-                var useCache = !!params.cache;
 
                 var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
-                return $http.head(oTrans.url, getConfig(config, oTrans.params, useCache)).then(function() {
+                return $http.head(oTrans.url, getConfig(config, oTrans.params)).then(function() {
 
                     return true;
 
@@ -129,13 +120,12 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params = clone(params || {});
                 params.identifier = identifier;
 
-                var useCache = !!params.cache;
                 if (!params.schema && data && data.header && data.header.schema)
                     params.schema = data.header.schema;
 
                 var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
-                return $http.put(oTrans.url, data, getConfig(config, oTrans.params, useCache)).then(function(result) {
+                return $http.put(oTrans.url, data, getConfig(config, oTrans.params)).then(function(result) {
                     return result.data;
                 });
             },
@@ -146,10 +136,9 @@ const storageT = mergeTranslationKeys(storageTranslations);
             "delete": function(identifier, params, config) {
                 params = clone(params || {});
                 params.identifier = identifier;
-                var useCache = !!params.cache;
                 var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
-                return $http.delete(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.delete(oTrans.url, getConfig(config, oTrans.params));
             },
 
             //===========================
@@ -160,10 +149,9 @@ const storageT = mergeTranslationKeys(storageTranslations);
 
                 if (!params.schema && document && document.header && document.header.schema)
                     params.schema = document.header.schema;
-                var useCache = !!params.cache;
                 var oTrans = transformPath(serviceUrls.validateUrl(), params);
 
-                return $http.put(oTrans.url, document, getConfig(config, oTrans.params, useCache));
+                return $http.put(oTrans.url, document, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
             },
@@ -201,11 +189,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params.collection = "mydraft";
                 params.$filter = query;
 
-                var useCache = !!params.cache;
 
                 var oTrans = transformPath(serviceUrls.documentQueryUrl(), params);
 
-                return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
             },
@@ -218,14 +205,13 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params = clone(params || {});
                 params.identifier = identifier;
 
-                var useCache = !!params.cache;
 
                 if (!params.cache)
                     params.cache = true;
 
                 var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
-                return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
             },
@@ -237,11 +223,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params = clone(params || {});
                 params.identifier = identifier;
 
-                var useCache = !!params.cache;
 
                 var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
-                return $http.head(oTrans.url, getConfig(config, oTrans.params, useCache)).then(function() {
+                return $http.head(oTrans.url, getConfig(config, oTrans.params)).then(function() {
 
                     return true;
 
@@ -263,10 +248,9 @@ const storageT = mergeTranslationKeys(storageTranslations);
 
                 if (!params.schema && data && data.header && data.header.schema)
                     params.schema = data.header.schema;
-                var useCache = !!params.cache;
                 var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
-                return $http.put(oTrans.url, data, getConfig(config, oTrans.params, useCache)).then(function(result) {
+                return $http.put(oTrans.url, data, getConfig(config, oTrans.params)).then(function(result) {
                     return result.data;
                 });
             },
@@ -277,10 +261,9 @@ const storageT = mergeTranslationKeys(storageTranslations);
             "delete": function(identifier, params, config) {
                 params = clone(params || {});
                 params.identifier = identifier;
-                var useCache = !!params.cache;
                 var oTrans = transformPath(serviceUrls.draftUrl(), params);
 
-                return $http.delete(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.delete(oTrans.url, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
             },
@@ -311,13 +294,12 @@ const storageT = mergeTranslationKeys(storageTranslations);
                     params = clone(params || {});
                     params.identifier = identifier;
 
-                    var useCache = !!params.cache;
 
                     var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
 
 
 
-                    return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                    return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
                     //TODO: return result.data;
 
@@ -329,11 +311,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
                     params = clone(params || {});
                     params.identifier = identifier;
 
-                    var useCache = !!params.cache;
 
                     var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
 
-                    return $http.head(oTrans.url, getConfig(config, oTrans.params, useCache)).then(function() {
+                    return $http.head(oTrans.url, getConfig(config, oTrans.params)).then(function() {
 
                         return true;
 
@@ -352,10 +333,9 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 "put": function(identifier, params, config) {
                     params = clone(params || {});
                     params.identifier = identifier;
-                    var useCache = !!params.cache;
                     var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
                     var data = null;
-                    return $http.put(oTrans.url, data, getConfig(config, oTrans.params, useCache)).then(function(result) {
+                    return $http.put(oTrans.url, data, getConfig(config, oTrans.params)).then(function(result) {
                         return result.data;
                     });
                 },
@@ -370,10 +350,9 @@ const storageT = mergeTranslationKeys(storageTranslations);
                         identifier: identifier,
                         lockID: lockID
                     };
-                    var useCache = !!params.cache;
                     var oTrans = transformPath(serviceUrls.draftLockUrl(), params);
 
-                    return $http.delete(oTrans.url, getConfig(config, oTrans.params, useCache)).then(function(success) {
+                    return $http.delete(oTrans.url, getConfig(config, oTrans.params)).then(function(success) {
                         return success.data;
                     });
                 }
@@ -456,12 +435,11 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params = clone(params || {});
                 params.identifier = identifier;
 
-                var useCache = !!params.cache;
 
 
                 var oTrans = transformPath(serviceUrls.documentVersionUrl(), params);
 
-                return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
 
@@ -483,11 +461,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params.query = query;
                 params.$filter = filter;
 
-                var useCache = !!params.cache;
 
                 var oTrans = transformPath(serviceUrls.documentBodyQueryUrl(), params);
 
-                return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
             },
@@ -499,11 +476,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
                 params = angular.extend({}, params || {});
                 params.$filter = filter;
 
-                var useCache = !!params.cache;
 
                 var oTrans = transformPath(serviceUrls.documentFacetsQueryUrl(), params);
 
-                return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
                 //TODO: return result.data;
             }
@@ -622,10 +598,9 @@ const storageT = mergeTranslationKeys(storageTranslations);
                     "metadata": metadata
                 };
 
-                var useCache = !!params.cache;
                 var oTrans = transformPath(patternPath, params);
 
-                return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
+                return $http.get(oTrans.url, getConfig(config, oTrans.params));
 
             }).then(function(res) {
 
@@ -643,11 +618,10 @@ const storageT = mergeTranslationKeys(storageTranslations);
             return str.substring(0, index) + newText + str.substring(index + len);
         };
 
-        function getConfig(config, params, useCache){
+        function getConfig(config, params){
             config = angular.copy(config) || {};
 
             config.params = angular.extend(config.params||{}, params||{});
-            config.cache  = useCache;
             return config;
         }
 
