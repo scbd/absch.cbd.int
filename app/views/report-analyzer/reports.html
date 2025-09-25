@@ -1,10 +1,15 @@
 ﻿<div id="innerPage">
     <div class="mastHead" ng-class="{'bg-abs':isABS,'bg-bch':isBCH,'bg-chm':isCHM }">
-         <div class="text-white" ng-if="cbdArticleComponent && articleQuery">
-            <cbd-article ng-vue="cbdArticleComponent" :query="articleQuery"
+         <div class="text-white" ng-if="cbdVueComponent && articleQuery">
+            <cbd-article ng-vue="cbdVueComponent" :query="articleQuery"
              :show-cover-image="false" :show-edit="true" :admin-tags="adminTags">
             </cbd-article>
-        </div>   
+        </div> 
+        
+        <div class="text-white" ng-if="cbdVueComponent">
+            <time-line ng-vue="cbdVueComponent" chart-query="{dateType: 'createdDate_dt', startDate: '20-09-2021', endDate: '20-09-2025'}"></time-line>
+
+        </div>  
     </div>
 
     <div class="innerPageContent">
