@@ -7,8 +7,7 @@
         </div> 
         
         <div class="text-white" ng-if="cbdVueComponent">
-            <time-line ng-vue="cbdVueComponent" chart-query="{dateType: 'createdDate_dt', startDate: '20-09-2021', endDate: '20-09-2025'}"></time-line>
-
+            <time-line ng-vue="cbdVueComponent" :chart-schemas="nrSchemas"></time-line>
         </div>  
     </div>
 
