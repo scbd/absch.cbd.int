@@ -18,4 +18,8 @@ export default class KmDocumentApi extends ApiBase
         return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
     }
 
+    async queryFacetsDocuments(params)  {
+            return this.http.get(`api/v2013/index/select`, { params }).then(res => res.data).catch(tryCastToApiError);
+    }
+
 }
