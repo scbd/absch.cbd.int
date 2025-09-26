@@ -227,6 +227,12 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 if (queryParams.status) {
                     $scope.setPartyFilter(queryParams.status);
                 }
+				if (queryParams.order) {
+                     $scope.sortTable($scope.sortTerm, queryParams.order);
+				}
+				if (queryParams.sortTerm) {
+                     $scope.sortTable(queryParams.sortTerm, $scope.orderList);
+				}
             }
             loadFromUrlQueryString();
             //*************************************************************************************************************************************
@@ -258,13 +264,21 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 } else {
                     $scope.sortTerm = term;
                     $scope.orderList = true;
+                    $location.search('sortTerm', $scope.sortTerm);
+                    $location.search('order', null);
                 }
 
-                if (order == "ASC")
+                if (order == "ASC"){
                     $scope.orderList = false;
+                    $location.search('order', 'ASC');
+                    $location.search('sortTerm', null);
+                }
 
-                if (order == "DESC")
+                if (order == "DESC"){
                     $scope.orderList = true;
+                    $location.search('order', 'DESC');
+                    $location.search('sortTerm', null);
+                }  			
 
             };
 
