@@ -29,7 +29,8 @@ const auth = useAuth();
 const realm = useRealm();
 
 const props = defineProps({
-  chartSchemas: { type: Array, required: true } // Array of schema names
+  chartSchemas: { type: Array, required: true }, // Array of schema names
+  chartQuery: { type: String, required: false }
 });
 
 // Component State
@@ -52,7 +53,12 @@ const COLORS = [
   "#d32f2f", // red
   "#388e3c", // green
   "#fbc02d", // yellow
-  "#7b1fa2"  // purple
+  "#7b1fa2", // purple
+  "#ff9800", // orange
+  "#0097a7", // teal
+  "#c2185b", // pink
+  "#512da8", // deep purple
+  "#455a64"  // gray
 ];
 
 // Utility to format a date into a YYYY-MM key
@@ -69,12 +75,12 @@ const fetchSchemaData = async (schema) => {
         "facet.range.gap": "+1MONTH",
         "facet.range.start": "NOW+1MONTH/MONTH-191MONTH",
         fl: "id",
-        q: `(realm_ss:${realm.uIdPrefix}) AND NOT version_s:* AND schema_s:(${schema})`,
+        q: `(realm_ss:${realm.uIdPrefix}) AND NOT version_s:* AND schema_s:(${schema}) AND  (${props.chartQuery || "*:*" })`,
         rows: 0,
         wt: "json"
     };
 
-    const documentApi = new DocumentApi({tokenReader:()=>auth.token(), realm:realm.uIdPrefix});
+    const documentApi = new DocumentApi({tokenReader:()=>auth.token(), realm:realm.uIdPrefix}); // add at solr 
     const response = await documentApi.queryFacetsDocuments(params);
     const rawCounts = response.facet_counts.facet_ranges.createdDate_dt.counts;
     const parsedMap = new Map();
@@ -94,7 +100,7 @@ const loadData = async () => {
 
         const results = await Promise.all(props.chartSchemas.map(fetchSchemaData));
 
-        const allDateKeys = [...new Set(results.flatMap(map => [...map.keys()]))].sort();
+        const allDateKeys = [...new Set(results.flatMap(map => [...map.keys()]))].sort(); // ["2025-01", "2025-02", "2025-03"]
 
         if (allDateKeys.length === 0) {
             chartData.value = { labels: [], datasets: [] };

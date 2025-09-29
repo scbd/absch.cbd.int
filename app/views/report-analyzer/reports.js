@@ -27,10 +27,11 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
             };
 
             $scope.nrSchemas = ["cpbNationalReport1" ,
-  "cpbNationalReport2",  
-  "cpbNationalReport3",
-  "cpbNationalReport4",
-  "cpbNationalReport5"]
+                                "cpbNationalReport2",  
+                                "cpbNationalReport3",
+                                "cpbNationalReport4",
+                                "cpbNationalReport5"
+                            ]
             $scope.cbdVueComponent = {
                 components:{cbdArticle, timeLine}, 
             }
