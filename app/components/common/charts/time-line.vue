@@ -60,11 +60,14 @@ const auth = useAuth();
 const realm = useRealm();
 
 const props = defineProps({
-  chartSchemas: { type: Array, required: true }, // Array of schema names
-  chartQuery: { type: String, required: false }
+  chartQuery: { type: String, required: true }
 });
 
-// Component State
+//  Extract schema list from chartQuery: schema_s:(a b c)
+const schemaMatch = props.chartQuery.match(/schema_s:\(([^)]+)\)/);
+const chartSchemas = schemaMatch ? schemaMatch[1].trim().split(/\s+/) : [];
+
+// State
 const chartReady = ref(false);
 const chartData = ref({ labels: [], datasets: [] });
 const frequency = ref("+1MONTH"); // default gap: monthly
@@ -77,7 +80,7 @@ const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    title: { display: false, text: "" },
+    title: { display: false },
     legend: { display: true }
   }
 };
@@ -100,8 +103,14 @@ const COLORS = [
 const formatKey = (date) =>
   `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
 
-// Fetches and parses facet data for a single schema
+//  Build query per schema
 const fetchSchemaData = async (schema) => {
+    // Replace schema_s:(...) with just schema_s:schema
+    const queryForSchema = props.chartQuery.replace(
+      /schema_s:\([^)]+\)/,
+      `schema_s:${schema}`
+    );
+
     const params = {
         facet: "true",
         "facet.limit": 1012,
@@ -115,7 +124,7 @@ const fetchSchemaData = async (schema) => {
           "facet.range.end": "NOW"
         }),
         fl: "id",
-        q: `(realm_ss:${realm.uIdPrefix}) AND NOT version_s:* AND schema_s:(${schema}) AND (${props.chartQuery || "*:*"})`,
+        q: queryForSchema,
         rows: 0,
         wt: "json"
     };
@@ -136,9 +145,9 @@ const fetchSchemaData = async (schema) => {
 // Load chart data
 const loadData = async () => {
     try {
-        if (!props.chartSchemas || props.chartSchemas.length === 0) return;
+        if (chartSchemas.length === 0) return;
 
-        const results = await Promise.all(props.chartSchemas.map(fetchSchemaData));
+        const results = await Promise.all(chartSchemas.map(fetchSchemaData));
 
         const allDateKeys = [...new Set(results.flatMap(map => [...map.keys()]))].sort();
 
@@ -177,7 +186,7 @@ const loadData = async () => {
 
         // Build the datasets for the chart
         const datasets = results.map((dataMap, i) => {
-            const schemaKey = props.chartSchemas[i];
+            const schemaKey = chartSchemas[i];
             return {
                 label: realm.schemas[schemaKey]?.title[locale.value] || schemaKey,
                 data: monthKeys.map((key) => dataMap.get(key) || 0),
