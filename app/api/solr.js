@@ -25,6 +25,11 @@ export default class SolrApi extends ApiBase
   
     }
 
+    
+    async queryFacets(params)  {
+            return this.http.get(`api/v2013/index/select`, { params }).then(res => res.data).catch(tryCastToApiError);
+    }
+
     localizeFields(fields, locale) {
       if (!fields)
         return;

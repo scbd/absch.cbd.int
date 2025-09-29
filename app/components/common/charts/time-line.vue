@@ -1,11 +1,11 @@
 <template>
   <div style="width:100%; height:400px">
      <!-- Controls -->
-    <div class="mb-4 flex items-center gap-4">
+    <div class="mb-3 d-flex align-items-center gap-3">
       <!-- Frequency Dropdown -->
-      <div>
-        <label class="mr-2 font-semibold">Frequency:</label>
-        <select v-model="frequency" @change="loadData" class="border p-1 rounded">
+      <div class="d-flex align-items-center">
+        <label class="me-2 fw-semibold">Frequency:</label>
+        <select v-model="frequency" @change="loadData" class="form-select form-select-sm w-auto">
           <option value="+1MONTH">Monthly</option>
           <option value="+3MONTH">Quarterly</option>
           <option value="+1YEAR">Yearly</option>
@@ -13,12 +13,12 @@
       </div>
 
       <!-- Date Range Toggle -->
-      <div class="relative">
-        <button class="border p-1 rounded bg-gray-100" @click="showDateRange = !showDateRange">
+      <div class="position-relative">
+        <button class="btn btn-sm btn-light border" @click="showDateRange = !showDateRange">
           {{ start && end ? `${start} → ${end}` : 'Select Date Range' }}
         </button>
 
-        <div v-if="showDateRange" class="absolute z-50 bg-white shadow-lg border rounded p-3 mt-2">
+        <div v-if="showDateRange" class="position-absolute z-50 bg-white shadow border rounded p-3 mt-2">
           <km-date-picker-range 
             v-model:start="start" 
             v-model:end="end"
@@ -30,11 +30,12 @@
 
     <!-- Chart -->
     <Line v-if="chartReady" class="bg-white" :data="chartData" :options="chartOptions"></Line>
-    <div v-else class="flex items-center justify-center h-full">
+    <div v-else class="d-flex align-items-center justify-content-center h-100">
         <p>Loading chart...</p>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from "vue";
@@ -44,7 +45,7 @@ import {
   Title, Tooltip, Legend,
   LineElement, CategoryScale, LinearScale, PointElement
 } from "chart.js";
-import DocumentApi from "~/api/km-document";
+import SolrApi from "~/api/solr.js";
 import { useAuth } from "@scbd/angular-vue/src/index.js";
 import { useRealm } from '~/services/composables/realm.js';
 import { useI18n } from 'vue-i18n';
@@ -119,8 +120,8 @@ const fetchSchemaData = async (schema) => {
         wt: "json"
     };
 
-    const documentApi = new DocumentApi({tokenReader:()=>auth.token(), realm:realm.uIdPrefix});
-    const response = await documentApi.queryFacetsDocuments(params);
+    const solrAPI = new SolrApi({tokenReader:()=>auth.token(), realm:realm.uIdPrefix});
+    const response = await solrAPI.queryFacets(params);
     const rawCounts = response.facet_counts.facet_ranges.createdDate_dt.counts;
     const parsedMap = new Map();
 
@@ -200,7 +201,7 @@ const loadData = async () => {
 
 const onDateRangeChange = () => {
   loadData();
-  showDateRange.value = false; // ✅ close on apply
+  showDateRange.value = false; //close on apply
 };
 
 onMounted(loadData);
