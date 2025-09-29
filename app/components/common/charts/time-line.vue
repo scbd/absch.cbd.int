@@ -1,15 +1,34 @@
 <template>
   <div style="width:100%; height:400px">
-     <!-- Dropdown -->
-    <div class="mb-4">
-      <label class="mr-2 font-semibold">Frequency:</label>
-      <select v-model="frequency" @change="loadData" class="border p-1 rounded">
-        <option value="+1MONTH">Monthly</option>
-        <option value="+3MONTH">Quarterly</option>
-        <option value="+1YEAR">Yearly</option>
-      </select>
+     <!-- Controls -->
+    <div class="mb-4 flex items-center gap-4">
+      <!-- Frequency Dropdown -->
+      <div>
+        <label class="mr-2 font-semibold">Frequency:</label>
+        <select v-model="frequency" @change="loadData" class="border p-1 rounded">
+          <option value="+1MONTH">Monthly</option>
+          <option value="+3MONTH">Quarterly</option>
+          <option value="+1YEAR">Yearly</option>
+        </select>
+      </div>
+
+      <!-- Date Range Toggle -->
+      <div class="relative">
+        <button class="border p-1 rounded bg-gray-100" @click="showDateRange = !showDateRange">
+          {{ start && end ? `${start} → ${end}` : 'Select Date Range' }}
+        </button>
+
+        <div v-if="showDateRange" class="absolute z-50 bg-white shadow-lg border rounded p-3 mt-2">
+          <km-date-picker-range 
+            v-model:start="start" 
+            v-model:end="end"
+            @change="onDateRangeChange"
+          />
+        </div>
+      </div>
     </div>
 
+    <!-- Chart -->
     <Line v-if="chartReady" class="bg-white" :data="chartData" :options="chartOptions"></Line>
     <div v-else class="flex items-center justify-center h-full">
         <p>Loading chart...</p>
@@ -29,6 +48,7 @@ import DocumentApi from "~/api/km-document";
 import { useAuth } from "@scbd/angular-vue/src/index.js";
 import { useRealm } from '~/services/composables/realm.js';
 import { useI18n } from 'vue-i18n';
+import kmDatePickerRange from "~/components/km/km-date-picker-range.vue";
 
 // Register Chart.js components
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement);
@@ -47,6 +67,9 @@ const props = defineProps({
 const chartReady = ref(false);
 const chartData = ref({ labels: [], datasets: [] });
 const frequency = ref("+1MONTH"); // default gap: monthly
+const showDateRange = ref(false);
+const start = ref(null);
+const end = ref(null);
 
 // Chart Configuration
 const chartOptions = {
@@ -82,16 +105,21 @@ const fetchSchemaData = async (schema) => {
         facet: "true",
         "facet.limit": 1012,
         "facet.range": "createdDate_dt",
-        "facet.range.end": "NOW+1MONTH/MONTH",
-        "facet.range.gap": frequency.value, // <-- dynamic gap based on user selection
-        "facet.range.start": "NOW+1MONTH/MONTH-191MONTH",
+        "facet.range.gap": frequency.value,
+        ...(start.value && end.value ? {
+          "facet.range.start": `${start.value}T00:00:00Z`,
+          "facet.range.end": `${end.value}T23:59:59Z`
+        } : {
+          "facet.range.start": "NOW-10YEAR",
+          "facet.range.end": "NOW"
+        }),
         fl: "id",
-        q: `(realm_ss:${realm.uIdPrefix}) AND NOT version_s:* AND schema_s:(${schema}) AND  (${props.chartQuery || "*:*" })`,
+        q: `(realm_ss:${realm.uIdPrefix}) AND NOT version_s:* AND schema_s:(${schema}) AND (${props.chartQuery || "*:*"})`,
         rows: 0,
         wt: "json"
     };
 
-    const documentApi = new DocumentApi({tokenReader:()=>auth.token(), realm:realm.uIdPrefix}); // add at solr 
+    const documentApi = new DocumentApi({tokenReader:()=>auth.token(), realm:realm.uIdPrefix});
     const response = await documentApi.queryFacetsDocuments(params);
     const rawCounts = response.facet_counts.facet_ranges.createdDate_dt.counts;
     const parsedMap = new Map();
@@ -104,14 +132,14 @@ const fetchSchemaData = async (schema) => {
     return parsedMap;
 };
 
-// Main function to load, process, and set all chart data
+// Load chart data
 const loadData = async () => {
     try {
         if (!props.chartSchemas || props.chartSchemas.length === 0) return;
 
         const results = await Promise.all(props.chartSchemas.map(fetchSchemaData));
 
-        const allDateKeys = [...new Set(results.flatMap(map => [...map.keys()]))].sort(); // ["2025-01", "2025-02", "2025-03"]
+        const allDateKeys = [...new Set(results.flatMap(map => [...map.keys()]))].sort();
 
         if (allDateKeys.length === 0) {
             chartData.value = { labels: [], datasets: [] };
@@ -153,7 +181,7 @@ const loadData = async () => {
                 label: realm.schemas[schemaKey]?.title[locale.value] || schemaKey,
                 data: monthKeys.map((key) => dataMap.get(key) || 0),
                 borderColor: COLORS[i % COLORS.length],
-                backgroundColor: COLORS[i % COLORS.length] + "33", // Lighter fill with transparency
+                backgroundColor: COLORS[i % COLORS.length] + "33",
                 fill: false,
                 tension: 0.4,
                 pointRadius: 3,
@@ -164,10 +192,15 @@ const loadData = async () => {
         chartData.value = { labels, datasets };
     } catch (error) {
         console.error("Failed to load chart data:", error);
-        chartData.value = { labels: [], datasets: [] }; // Set empty chart on error
+        chartData.value = { labels: [], datasets: [] };
     } finally {
         chartReady.value = true;
     }
+};
+
+const onDateRangeChange = () => {
+  loadData();
+  showDateRange.value = false; // ✅ close on apply
 };
 
 onMounted(loadData);
