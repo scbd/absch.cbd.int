@@ -50,11 +50,25 @@ import {formatDate} from '~/services/datetime';
           $scope.isPopupVisible = false;
         };
         
-        $scope.$watch('binding', function(newVal, old) {
+        $scope.$watch('binding', function(newVal) {
           if(!newVal){
-            $scope.dateRangeText = '';
-            $scope.filterDates.start = ''; 
-            $scope.filterDates.end = '';
+            $scope.dateRangeText  = '';
+            $scope.filterDates.start = null; 
+            $scope.filterDates.end   = null;
+            return;
+          }
+
+          $scope.filterDates.start = newVal.start ? new Date(newVal.start) : null;
+          $scope.filterDates.end   = newVal.end   ? new Date(newVal.end)   : null;
+
+          if ($scope.filterDates.start && $scope.filterDates.end) {
+            $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - ${formatDate($scope.filterDates.end)}`;
+          }
+          else if ($scope.filterDates.start) {
+            $scope.dateRangeText = `After ${formatDate($scope.filterDates.start)}`;
+          }
+          else if ($scope.filterDates.end) {
+            $scope.dateRangeText = `Before ${formatDate($scope.filterDates.end)}`;
           }
         });
       }
