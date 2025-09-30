@@ -25,8 +25,10 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 if(realm.is('ABS')) return 'absch';
                 if(realm.is('CHM')) return 'chm';
             };
-
-            $scope.chartQuery = `realm_ss:${realm.value} AND NOT version_s:* AND schema_s:(cpbNationalReport1 cpbNationalReport2 cpbNationalReport3 cpbNationalReport4 cpbNationalReport5)`;
+            if($scope.isBCH)
+                $scope.chartQuery = `realm_ss:${realm.value} AND NOT version_s:* AND schema_s:(cpbNationalReport1 cpbNationalReport2 cpbNationalReport3 cpbNationalReport4 cpbNationalReport5)`;
+            if($scope.isABS)
+                $scope.chartQuery = `realm_ss:${realm.value} AND NOT version_s:* AND schema_s:(absNationalReport, absNationalReport1)`;
             $scope.cbdVueComponent = {
                 components:{cbdArticle, timeLine}, 
             }
