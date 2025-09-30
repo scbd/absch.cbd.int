@@ -4,11 +4,11 @@
     <div class="mb-3 d-flex align-items-center gap-3">
       <!-- Frequency Dropdown -->
       <div class="d-flex align-items-center">
-        <label class="me-2 fw-semibold">Frequency:</label>
+        <label class="me-2 fw-semibold">{{ t('timeIntervals') }}</label>
         <select v-model="frequency" @change="loadData" class="form-select form-select-sm w-auto">
-          <option value="+1MONTH">Monthly</option>
-          <option value="+3MONTH">Quarterly</option>
-          <option value="+1YEAR">Yearly</option>
+          <option value="+1MONTH">{{ t('monthly') }}</option>
+          <option value="+3MONTH">{{ t('quarterly') }}</option>
+          <option value="+1YEAR">{{ t('yearly') }}</option>
         </select>
       </div>
 
@@ -31,7 +31,7 @@
     <!-- Chart -->
     <Line v-if="chartReady" class="bg-white" :data="chartData" :options="chartOptions"></Line>
     <div v-else class="d-flex align-items-center justify-content-center h-100">
-        <p>Loading chart...</p>
+        <p> {{ t('loading') }}</p>
     </div>
   </div>
 </template>
@@ -50,12 +50,13 @@ import { useAuth } from "@scbd/angular-vue/src/index.js";
 import { useRealm } from '~/services/composables/realm.js';
 import { useI18n } from 'vue-i18n';
 import kmDatePickerRange from "~/components/km/km-date-picker-range.vue";
+import messages from '~/app-text/common/charts/time-line.json';
 
 // Register Chart.js components
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement);
 
 // Vue Composables
-const { locale } = useI18n();
+const { t, locale } = useI18n({ messages });
 const auth = useAuth();
 const realm = useRealm();
 
