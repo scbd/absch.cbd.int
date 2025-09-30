@@ -13,7 +13,7 @@
       </div>
 
       <!-- Date Range Toggle -->
-      <div class="position-relative">
+      <div>
         <button class="btn btn-sm btn-light border" @click="showDateRange = !showDateRange">
           {{ start && end ? `${start} → ${end}` : 'Select Date Range' }}
         </button>
@@ -63,7 +63,8 @@ const props = defineProps({
   chartQuery: { type: String, required: true }
 });
 
-//  Extract schema list from chartQuery: schema_s:(a b c)
+// NOTE: Please always pass schemas inside parentheses,
+// even for a single schema. Example: schema_s:(schema1)
 const schemaMatch = props.chartQuery.match(/schema_s:\(([^)]+)\)/);
 const chartSchemas = schemaMatch ? schemaMatch[1].trim().split(/\s+/) : [];
 
@@ -133,7 +134,7 @@ const fetchSchemaData = async (schema) => {
     const response = await solrAPI.queryFacets(params);
     const rawCounts = response.facet_counts.facet_ranges.createdDate_dt.counts;
     const parsedMap = new Map();
-
+    //Iterates through the rawCounts array in steps of 2 (since it’s [date, count, date, count, ...])
     for (let i = 0; i < rawCounts.length; i += 2) {
         const d = new Date(rawCounts[i]);
         parsedMap.set(formatKey(d), rawCounts[i + 1]);
@@ -148,7 +149,8 @@ const loadData = async () => {
         if (chartSchemas.length === 0) return;
 
         const results = await Promise.all(chartSchemas.map(fetchSchemaData));
-
+        
+        // Removes duplicates ["2025-01", "2025-02", "2025-02", "2025-03"]
         const allDateKeys = [...new Set(results.flatMap(map => [...map.keys()]))].sort();
 
         if (allDateKeys.length === 0) {
