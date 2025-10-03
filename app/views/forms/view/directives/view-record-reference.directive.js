@@ -51,7 +51,9 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 
 			$scope.refreshRecord = function(identifier, cacheBuster){
 				$scope.loading = true;
-				return loadReferenceDocument(identifier, cacheBuster)
+				const recordIdentifier = realm.is('BCH') ? documentIdWithoutRevision(identifier) : identifier;
+				// in BCH we always load the latest version of the linked record.
+				return loadReferenceDocument(recordIdentifier, cacheBuster)
 				.then(function(data) {
 					$scope.document = data;
 					
@@ -210,28 +212,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				}
 				return false;
 			}
-			
-			// if the parent directive finds that there is a latest version of the linked record fetch the latest one
-			// since http calls are cached.
-			$rootScope.$on('evt:updateLinkedRecordRevision', async function(evt, ids){
-				
-				const identifier = documentIdWithoutRevision($scope.model?.identifier);
-				const currentId = ids.find(e=>e.identifier == identifier)
-				
-				if(currentId?.latestRevision > currentId?.currentRevision){					
-					if($scope.loading) //TODO: use canceler instead of this.
-						await sleep(500);
-					$scope.revisionLoading = true;
-					try {
-						await $scope.refreshRecord(`${currentId.identifier}@${currentId.latestRevision}`, new Date().getTime());
-					} finally {
-						$scope.$applyAsync(() => {
-							$scope.revisionLoading = false;
-						}); 
-					}
-				}
-				
-			});
+			//Todo:need to revert change of : https://github.com/scbd/absch.cbd.int/commit/0554d1d138c14fc636a658094bb2fa1df9bd54ea
 		 }
 	};
 }]);
