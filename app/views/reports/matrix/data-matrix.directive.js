@@ -76,11 +76,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         }
                     }
 
-                    let fields = {
-                        uniqueId   : "BCH record ID", 
-                        government : "Country",
-                        publishedOn: "Publication Date"
-                    };
+                    let fields = {};
  
                     let schemaName; 
                     if (Array.isArray(params.schema) && params.schema.length === 1) {
@@ -274,7 +270,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                 if(btn) btn.click();
                             }, 200);
                         }
-                        else{ // TODO: confirm if Excel export is still used
+                        else{
                             // Excel export
                             require(['tableexport'], function(){
                                 var tableExport = $element.find('.pvtTable').tableExport({
