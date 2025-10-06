@@ -39,10 +39,10 @@ app.directive("viewLmoReference", [function () {
 
 
 			function loadReferenceDocument(identifier){
-				console.log('loadReferenceDocument', identifier);
-				const recordIdentifier = realm.is('BCH') ? documentIdWithoutRevision(identifier) : identifier;
+				if(realm.is('BCH'))
+					identifier = documentIdWithoutRevision(identifier)
 				// in BCH we always load the latest version of the linked record.
-				return storage.documents.get(recordIdentifier, { info : true})
+				return storage.documents.get(identifier, { info : true})
 						.then(function(result){
 							return result.data;
 						})
