@@ -125,7 +125,7 @@
                                     <div ng-class="{'exclude-filter':filter.excludeResult}">
                                         <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">{{::('leftSideFilterT.not'|$translate)}}</span>
                                         <!-- {{filter.selectedItems}} -->
-                                        <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="{{filter.selectionType||'checkbox'}}"
+                                        <div document-selector exclude-revision="true" ng-model="filter.selectedItems" question="searchResult" type="{{filter.selectionType||'checkbox'}}"
                                             on-build-query="onBuildQuery(searchText, tab, filter)" on-records-fetched="onRecordsFetched(data, query, filter)"
                                             lookup-field={{::filter.query.lookupField}} skip-sync-documents="true" instance-id="{{filter.$$hashKey}}"
                                             filter="true" ng-change="recordSelected(item, filter)" skip-government="true" list-view="true">

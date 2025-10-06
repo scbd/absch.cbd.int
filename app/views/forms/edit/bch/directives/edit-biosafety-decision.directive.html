@@ -54,7 +54,7 @@
 													</div>	
 													<div document-selector ng-model="document.amendedRecords" question="amendedRecords" allow-new="true" allow-new-schema="biosafetyDecision"
 															on-build-query="onBuildQuery(searchText, 'biosafetyDecision')"  caption="{{::('editBiosafetyDecisionT.countryDecision'|$translate)}}"
-														ng-disabled="!document.government.identifier"></div>			
+														ng-disabled="!document.government.identifier" exclude-revision="true"></div>			
 												</div>
 												<div class="col-xs-12" ng-if="document.isAmendment">
 													<div class="km-control-group" ng-required="document.isAmendment ||documentExists" name="amendmentsDetails" caption="{{::('editBiosafetyDecisionT.amendmentsDetails'|$translate)}}">
@@ -69,7 +69,7 @@
 										<div class="col-xs-12">
 											<div  class="km-control-group" name="authorities" caption="{{::('editBiosafetyDecisionT.authorities'|$translate)}}" required>											
 												<div document-selector ng-disabled="!document.government.identifier" required ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-												 on-build-query="onAuthorityBuildQuery(searchText)" ng-disabled="waiting"></div>
+												 on-build-query="onAuthorityBuildQuery(searchText)" ng-disabled="waiting" exclude-revision="true"></div>
 											</div>
 										</div>
 									</div>
@@ -185,13 +185,13 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="exporters" caption="{{::('editBiosafetyDecisionT.exporters'|$translate)}}">
 												<div document-selector required ng-model="document.exporters" question="exporters"
-												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
+												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact" exclude-revision="true"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group"required name="importers" caption="{{::('editBiosafetyDecisionT.importers'|$translate)}}">
 												<div document-selector required ng-model="document.importers" question="importers"
-												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
+												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact" exclude-revision="true"></div>
 											</div>
 										</div>
 									</div>
@@ -204,7 +204,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="importers" required caption="{{::('editBiosafetyDecisionT.ApplicantDetails'|$translate)}}">											
 												<div document-selector ng-model="document.importers" question="importers"
-												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
+												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact" exclude-revision="true"></div>
 											</div>
 										</div>
 									</div>
@@ -273,19 +273,19 @@
 												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoImport">
 													<div class="km-control-group" name="exporters" caption="{{::('editBiosafetyDecisionT.exporters'|$translate)}}">											
 														<div document-selector ng-model="document.exporters" question="exporters"
-														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact" exclude-revision="true"></div>
 													</div>
 												</div>
 												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoImport">
 													<div class="km-control-group" name="importers" required caption="{{::('editBiosafetyDecisionT.importerApplicant'|$translate)}}">											
 														<div document-selector ng-model="document.importers" question="importers"
-														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact" exclude-revision="true"></div>
 													</div>
 												</div>
 												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoDomesticUse && !decisions.isDecisionOnLmoImport">
 													<div class="km-control-group" name="importers" required caption="{{::('editBiosafetyDecisionT.ApplicantDetails'|$translate)}}">											
 														<div document-selector ng-model="document.importers" question="importers"
-														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact" exclude-revision="true"></div>
 													</div>
 												</div>
 											</div>
@@ -417,7 +417,7 @@
 												<div class="col-xs-12">
 													<div class="km-control-group" name="pointOfContact" caption="{{::('editBiosafetyDecisionT.pointOfContact'|$translate)}}">
 														<div document-selector ng-model="document.pointOfContact" question="pointOfContact" allow-new="true" allow-new-schema="contact"
-															on-build-query="onContactQuery(searchText)"></div>
+															on-build-query="onContactQuery(searchText)" exclude-revision="true"></div>
 													</div>
 												</div>
 											</div>											
@@ -430,7 +430,7 @@
 														<div class="col-xs-12 padding-left-2 mt-3">														
 															<div class="km-control-group" name="modifiedOrganisms" caption="{{::('editBiosafetyDecisionT.modifiedOrganisms'|$translate)}}">
 																<div document-selector ng-model="document.modifiedOrganisms"  allow-new="true" allow-new-schema="modifiedOrganism"
-																	on-build-query="onBuildSkipGovernmentQuery(searchText, 'modifiedOrganism')"></div>
+																	on-build-query="onBuildSkipGovernmentQuery(searchText, 'modifiedOrganism')" exclude-revision="true"></div>
 															</div>
 														</div>
 														<div class="col-sm-12 padding-left-2">
@@ -492,7 +492,7 @@
 											<div class="km-control-group" name="modifiedOrganisms" caption="{{::('editBiosafetyDecisionT.modifiedOrganisms'|$translate)}}"
 												ng-required="isLmoMandatory()">
                         						<div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
-												on-build-query="onBuildSkipGovernmentQuery(searchText,'modifiedOrganism')"></div>
+												on-build-query="onBuildSkipGovernmentQuery(searchText,'modifiedOrganism')" exclude-revision="true"></div>
 											</div>
 										</div>
 									</div>
@@ -502,7 +502,7 @@
 											<div class="km-control-group" name="riskAssessments" 
 												ng-required="isRiskAssessmentMandatory()" caption="{{::('editBiosafetyDecisionT.riskAssessments'|$translate)}}">	
 												<div document-selector ng-disabled="!document.government.identifier" ng-model="document.riskAssessments" question="nationalRiskAssessment" allow-new="true" allow-new-schema="nationalRiskAssessment"
-													on-build-query="onRiskAssesmentBuildQuery(searchText)"></div>
+													on-build-query="onRiskAssesmentBuildQuery(searchText)" exclude-revision="true"></div>
 											</div>
 										</div>
 									</div>

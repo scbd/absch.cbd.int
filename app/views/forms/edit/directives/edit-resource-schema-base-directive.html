@@ -63,7 +63,7 @@
 											<div class="km-control-group" name="organizations" caption="{{::('editVLRT.organizations'|$translate)}}">
 												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations"
 													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true"
-													 schema="(organization contact)"  allow-new-schema="organization,contact"></div>
+													 schema="(organization contact)"  allow-new-schema="organization,contact" exclude-revision="{{ isBCH}}"></div>
 											</div>
 										</div>
 									</div>
@@ -262,7 +262,7 @@
 														<div class="km-control-group" required name="biosafety.modifiedOrganisms"  caption="{{::('editVLRT.modifiedOrganisms'|$translate)}}">
 															<div document-selector name="biosafety.modifiedOrganisms" required type="checkbox"  ng-model="document.biosafety.modifiedOrganisms"
 															   on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true"  filter="true"
-															   allow-new-schema="modifiedOrganism"></div>
+															   allow-new-schema="modifiedOrganism" exclude-revision="{{ isBCH}}"></div>
 														</div>
 													</div>
 												</div>
@@ -280,7 +280,7 @@
 														<div class="km-control-group" required name="biosafety.organisms"  caption="{{::('editVLRT.organismIdentification'|$translate)}}">
 															<div document-selector name="biosafety.organisms" required ng-model="document.biosafety.organisms"
 																 on-build-query="onBuildQuery(searchText, 'organism')" allow-new="true"
-																 allow-new-schema="organism"></div>
+																 allow-new-schema="organism"  exclude-revision="{{isBCH}}"></div>
 														</div>
 													</div>
 													
@@ -303,7 +303,7 @@
 														<div class="km-control-group" required name="biosafety.genes"  caption="{{::('editVLRT.geneIdentification'|$translate)}}">
 															<div document-selector name="biosafety.genes" required type="checkbox"  ng-model="document.biosafety.genes"
 																   on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true"  filter="true"
-																   allow-new-schema="dnaSequence"></div>
+																   allow-new-schema="dnaSequence" exclude-revision="{{isBCH}}"></div>
 														</div>
 													</div>
 													
