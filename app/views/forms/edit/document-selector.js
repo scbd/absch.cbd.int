@@ -8,6 +8,7 @@ import 'ngDialog';
 import '~/services/main'; // jshint ignore:line
 import documentSelectorT from '~/app-text/views/forms/edit/document-selector.json';
 import { documentIdRevision, documentIdWithoutRevision } from '~/components/scbd-angularjs-services/services/utilities.js';
+import { PAGINATION_OPTIONS_WITH_ALL, CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE } from '~/services/filters/constant.js';
 import {Tooltip} from 'bootstrap';
 import KmDocumentApi from "~/api/km-document";
 
@@ -36,9 +37,11 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             hideSelf : "=hideSelf",
             query    : "=",
             onRecordsFetched    : '&?',
-            onBuildQuery        : '&?'
+            onBuildQuery        : '&?',
+            excludeRevision: "@?"
 		},
 		link : function($scope, $element, $attr, ngModelController) {
+            $scope.paginationOptions = PAGINATION_OPTIONS_WITH_ALL;
             var dialogId;
             var focalPointRegex = /^52000000cbd022/;            
             translationService.set('documentSelectorT', documentSelectorT);
@@ -84,9 +87,9 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                         $scope.selectedRawDocuments.push(doc);
 
                         var document = {identifier: doc.identifier_s};
-                        if($attr.identifierWithoutRevision!='true')
-                            document.identifier += "@"+ doc._revision_i;
-
+                        if ($scope.excludeRevision !== "true") {
+                            document.identifier += "@" + doc._revision_i;
+                        }
                         if($scope.type == 'radio')
                             currentModel = document;
                         else
@@ -405,7 +408,11 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     rawQuery.fieldQueries.push(myRecordsQuery);
                 }
                 else if($scope.activeTab == 'myGovernmentRecords' && $scope.userGov){
-                    var myGovernmentQuery = '_ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase());
+
+                    var myGovernmentQuery = solr.andOr(['_ownership_s:country\\:' + solr.escape($scope.userGov.toLowerCase()),
+                                                        'government_s:' + solr.escape($scope.userGov.toLowerCase())
+                                                        ], 'OR');
+
                     rawQuery.fieldQueries.push(myGovernmentQuery);
                 } 
                 else if($scope.activeTab == 'pendingRequests'){
@@ -416,8 +423,14 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 //if the custom query wants custom pagination
                 if(rawQuery.currentPage)
                     $scope.searchResult.currentPage = rawQuery.currentPage;
-                if(rawQuery.rowsPerPage)
-                    $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+
+                const cachedPageSizeOption = localStorage.getItem(CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE);
+                if (cachedPageSizeOption) { 
+                $scope.searchResult.rowsPerPage = parseInt(cachedPageSizeOption, 10);
+                } else if (rawQuery.rowsPerPage) { 
+                $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+                localStorage.setItem(CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE, rawQuery.rowsPerPage);
+                } 
 
                 var queryParameters = {
                     fields        : rawQuery.fields,
@@ -545,6 +558,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
             $scope.onPageSizeChanged = function(size){
                 $scope.searchResult.rowsPerPage = size;
                 $scope.searchResult.currentPage = 1;
+                localStorage.setItem(CACHE_PAGINATION_DOCUMENT_SELECTOR_PAGE_SIZE, size);
                 getDocs();
             }
 

@@ -417,9 +417,11 @@ export const absLeftMenuFilters = {
 		},
 		{
 			"type": "thesaurus",
-			"term": "aichiTargets",
-			"title": absFilters.aichiTargets,
-			"field": "aichiTargets_ss"
+			"term": "gbfTargets",
+			"title": absFilters.gbfTargets,
+			"field": "gbfTargets_ss",
+			"otherTerm":false,
+			"relatedField": "gbfTargets_REL_ss"
 		},
 		{
 			"type" : "customListFn",

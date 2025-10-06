@@ -3487,6 +3487,9 @@ embed-footer{
     background-color:#f1f1f1;
     opacity: 50%;
 }
+.has-cover {
+    min-height: 96px;
+}
 @media (min-width: 1281px) {
     .responsive-search {
         float: right;

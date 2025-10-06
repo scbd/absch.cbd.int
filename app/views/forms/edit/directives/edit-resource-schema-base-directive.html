@@ -63,7 +63,7 @@
 											<div class="km-control-group" name="organizations" caption="{{::('editVLRT.organizations'|$translate)}}">
 												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations"
 													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true"
-													 schema="(organization contact)"  allow-new-schema="organization,contact"></div>
+													 schema="(organization contact)"  allow-new-schema="organization,contact" exclude-revision="{{ isBCH}}"></div>
 											</div>
 										</div>
 									</div>
@@ -115,7 +115,8 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="cover" caption="{{::('editVLRT.cover'|$translate)}}">
-												<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png"
+												<div class="help-block">{{::('editVLRT.aspectRatioHelp'|$translate)}}</div>	
+												<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mime-types="image/jpeg;image/png;image/webp"
 												 identifier="document.header.identifier"></div>
 											</div>
 										</div>
@@ -261,7 +262,7 @@
 														<div class="km-control-group" required name="biosafety.modifiedOrganisms"  caption="{{::('editVLRT.modifiedOrganisms'|$translate)}}">
 															<div document-selector name="biosafety.modifiedOrganisms" required type="checkbox"  ng-model="document.biosafety.modifiedOrganisms"
 															   on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true"  filter="true"
-															   allow-new-schema="modifiedOrganism"></div>
+															   allow-new-schema="modifiedOrganism" exclude-revision="{{ isBCH}}"></div>
 														</div>
 													</div>
 												</div>
@@ -279,7 +280,7 @@
 														<div class="km-control-group" required name="biosafety.organisms"  caption="{{::('editVLRT.organismIdentification'|$translate)}}">
 															<div document-selector name="biosafety.organisms" required ng-model="document.biosafety.organisms"
 																 on-build-query="onBuildQuery(searchText, 'organism')" allow-new="true"
-																 allow-new-schema="organism"></div>
+																 allow-new-schema="organism"  exclude-revision="{{isBCH}}"></div>
 														</div>
 													</div>
 													
@@ -302,7 +303,7 @@
 														<div class="km-control-group" required name="biosafety.genes"  caption="{{::('editVLRT.geneIdentification'|$translate)}}">
 															<div document-selector name="biosafety.genes" required type="checkbox"  ng-model="document.biosafety.genes"
 																   on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true"  filter="true"
-																   allow-new-schema="dnaSequence"></div>
+																   allow-new-schema="dnaSequence" exclude-revision="{{isBCH}}"></div>
 														</div>
 													</div>
 													

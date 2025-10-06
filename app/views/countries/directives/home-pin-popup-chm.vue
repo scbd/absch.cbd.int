@@ -25,7 +25,7 @@
                     <td>
                         <span class="rounded badge ms-2 "  :class="{'bg-gray-300' : schema.count==0, 'bg-chm':schema.count>0 }" >{{schema.count}}</span>
                     </td>
-                    <td >                  
+                    <td class="p-2">                  
                         <a rel="noopener" v-if="country.code"  @click="toggleCountyList(schema.shortCode,country.code)" class="text-black cursor-pointer" style="color:#fff" >
                             <span >{{lstring(schema.title,locale)}}</span>                        
                         </a>                

@@ -185,7 +185,6 @@
         </div>   
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> {{::('recordLoaderT.loading'|$translate)}}</span>
         <div id="schemaView" ng-show="internalDocument"></div>
-        <validate-referenced-record-version ng-if="isBCH && !loading && internalDocument" document="internalDocument"></validate-referenced-record-version>
         </div>   
     </div>
     <div id="printContentFooter" ng-if="printMode" ng-include="'view-print-footer.html'"></div>

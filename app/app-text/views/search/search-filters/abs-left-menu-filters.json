@@ -74,6 +74,7 @@
   "cbiTAkeyAreas":"Thematic Areas",
   "cbiFundingSrc":"Type(s) of funding source(s)",
   "buildContactsUserCountry":"Country of the person/entity to whom PIC was granted",
-  "absCheckpointReferencedByCPC":"Checkpoints that have been referenced in a checkpoint communiqué"
+  "absCheckpointReferencedByCPC":"Checkpoints that have been referenced in a checkpoint communiqué",
+  "gbfTargets": "GBF Targets"
 
 }

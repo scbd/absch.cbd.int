@@ -8,8 +8,8 @@ import '~/components/scbd-angularjs-services/main';
 import '~/views/forms/edit/editFormUtility';
 import editContactT from '~/app-text/views/forms/edit/directives/edit-contact.json';
 
-app.directive("editContact", ["$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'thesaurusService', 'editFormUtility', 'locale', '$controller', 'translationService',
-function($http, $filter, $rootScope, $location, $q, storage, roleService, thesaurusService, editFormUtility, locale, $controller, translationService){
+app.directive("editContact", ["$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'thesaurusService', 'editFormUtility', 'locale', '$controller', 'translationService', "realm",
+function($http, $filter, $rootScope, $location, $q, storage, roleService, thesaurusService, editFormUtility, locale, $controller, translationService, realm){
 
 	return {
 		restrict   : "E",
@@ -30,7 +30,8 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
             $scope.isDialog         = $attr.isDialog;
             $scope.isNationalUser   = roleService.isNationalUser();
             $scope.canEditGovernment = roleService.isAdministrator();
-            $scope.prefilledContactType = $attr.contactType
+            $scope.prefilledContactType = $attr.contactType;
+            $scope.isBCH = realm.is('BCH');
 
             _.extend($scope.options, {            
                 organizationTypes : function() {
