@@ -129,45 +129,40 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         searchQuery.fq.push('realm_ss:' + realm.value.toLowerCase());
                     }
                     $scope.isLoading = true;
-
                     try {
-                        let result;
-                        let facetResult;
                         const facetFields = 'Government:government_EN_t,RecordType:schema_EN_t,updatedOn:updatedDate_dt,government_s,schemaType:schemaType_s,countryRegions_ss';
-                        // Always get facet results from searchService.list
-                        if (schema) 
+                        
+                        // if schema is provided do not load from solr, get records from download api.
+                        // just get facets from solr.
+                        if (schema)
                             query.rowsPerPage = 0;
-                        
-                        facetResult = await searchService.list({ ...query, fields: facetFields }, queryCanceler.promise);
-                        
+                       
+                        const searchResult = await searchService.list({ ...query, fields: facetFields }, queryCanceler.promise)
+                        const numFound = searchResult.data.response.numFound;
+                        const facet_counts = searchResult.data.facet_counts;
+                        let docs = searchResult.data.response.docs || [];
+                       
                         if (schema) {
                             // Fetch all records from download API for schema
-                            result = await $http.post(
+                            docs = (await $http.post(
                                 `/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
                                 { query: searchQuery, fields },
                                 { timeout: queryCanceler.promise }
-                            );
-                        } else {
-                            // Use same searchService.list result for records
-                            fields = facetFields;
-                            result = facetResult;
-                        }
-                        
-                        let docs = schema ? result.data : result.data.response.docs;
-                        const numFound = schema ? docs.length : result.data.response.numFound;
-
+                            )).data;
+                        } 
+ 
                         docs = _.map(docs, (row) => {
                             const formattedRow = {};
-                            
+                           
                             // Add derived fields first with translated labels
                             if (row.updatedOn || row.publishedOn) {
                                 formattedRow[fieldsT["Year"]] = $filter("formatDate")(row.updatedOn || row.publishedOn, "YYYY");
                             }
-                            
+                           
                             const code = row.government_s || getCountryCode(row.government);
                             const region = code ? _.find(regions, reg => _.includes(reg.narrowerTerms, code)) : undefined;
                             formattedRow[fieldsT["Region"]] = region ? region.title[locale] : 'No Region';
-                            
+                           
                             if(!schema){
                                 formattedRow[fieldsT["Government"]] = row.Government || 'x - Reference record';
                                 formattedRow[fieldsT["RecordType"]] = row.RecordType;
@@ -181,14 +176,14 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                 }
                             }
                             return formattedRow;
-                        }); 
-                        
+                        });
+                       
                         return {
                             rows: docs,
                             numFound,
                             schema,
                             schemaFields: fields,
-                            facets: facetResult.data.facet_counts ? searchDirectiveCtrl.sanitizeFacets(facetResult.data.facet_counts) : undefined
+                            facets: searchDirectiveCtrl.sanitizeFacets(facet_counts)
                         };
                     } catch (err) {
                         console.error("Error while fetching docs", err); 
