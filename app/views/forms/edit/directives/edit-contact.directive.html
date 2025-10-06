@@ -91,7 +91,7 @@
 															question="contactOrganization" allow-new="{{allowNew}}"
 															government="document.government" ng-change="contactOrganizationChanged()"
 															on-build-query="onContactQuery(searchText)"
-															allow-new-schema="contact" allow-new-attributes="{{::newDialogAttributes()}}" exclude-revision="true">
+															allow-new-schema="contact" allow-new-attributes="{{::newDialogAttributes()}}" exclude-revision="{{isBCH}}">
 														</div>
 													</div>
 												</div>
