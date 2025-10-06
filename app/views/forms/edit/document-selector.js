@@ -407,7 +407,11 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     rawQuery.fieldQueries.push(myRecordsQuery);
                 }
                 else if($scope.activeTab == 'myGovernmentRecords' && $scope.userGov){
-                    var myGovernmentQuery = '(_ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase())+') OR government_s:'+solr.escape($scope.userGov.toLowerCase());
+
+                    var myGovernmentQuery = solr.andOr(['_ownership_s:country\\:' + solr.escape($scope.userGov.toLowerCase()),
+                                                        'government_s:' + solr.escape($scope.userGov.toLowerCase())
+                                                        ], 'OR');
+
                     rawQuery.fieldQueries.push(myGovernmentQuery);
                 } 
                 else if($scope.activeTab == 'pendingRequests'){
