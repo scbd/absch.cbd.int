@@ -212,7 +212,6 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 				}
 				return false;
 			}
-			//Todo:need to revert change of : https://github.com/scbd/absch.cbd.int/commit/0554d1d138c14fc636a658094bb2fa1df9bd54ea
 		 }
 	};
 }]);

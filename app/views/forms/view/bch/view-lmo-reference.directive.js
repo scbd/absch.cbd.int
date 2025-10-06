@@ -2,6 +2,7 @@ import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-lmo-reference.directive.html";
 import '~/components/scbd-angularjs-services/main';
+import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/services/utilities.js';
 
 app.directive("viewLmoReference", [function () {
 	return {
@@ -14,8 +15,8 @@ app.directive("viewLmoReference", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "IStorage", "$filter", '$q', '$rootScope',
-			 function ($scope, storage, $filter, $q, $rootScope) {
+		controller: ["$scope", "IStorage", "$filter", '$q', 'realm',
+			 function ($scope, storage, $filter, $q, realm) {
 
 
 			// $scope.document = $scope.model;
@@ -38,8 +39,10 @@ app.directive("viewLmoReference", [function () {
 
 
 			function loadReferenceDocument(identifier){
-
-				return storage.documents.get(identifier, { info : true})
+				console.log('loadReferenceDocument', identifier);
+				const recordIdentifier = realm.is('BCH') ? documentIdWithoutRevision(identifier) : identifier;
+				// in BCH we always load the latest version of the linked record.
+				return storage.documents.get(recordIdentifier, { info : true})
 						.then(function(result){
 							return result.data;
 						})
@@ -56,17 +59,6 @@ app.directive("viewLmoReference", [function () {
 			}
 
 
-			$rootScope.$on('evt:updateLinkedRecordRevision', function(evt, ids){
-				
-				const currentId = ids.find(e=>e.identifier == $scope.document?.identifier)
-				if(currentId?.latestRevision > currentId?.currentRevision){
-					loadReferenceDocument(`${currentId.identifier}@${currentId.latestRevision}`)
-					.then((latestDocument)=>{
-						$scope.$applyAsync(()=>$scope.document = latestDocument);
-					});
-				}
-				
-			});
 		 }] //controller
 	};
 }]);
