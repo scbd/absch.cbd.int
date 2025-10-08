@@ -1,7 +1,7 @@
 
 
 import { useI18n } from 'vue-i18n';
-import scbdSchemas from '~/components/scbd-angularjs-services/filters/schema-name.json' assert { type:'json'};
+import scbdSchemas from '~/components/scbd-angularjs-services/filters/schema-name.json' with { type:'json'};
 import { useRealm } from "./realm";
 import { lstring } from '../filters/lstring';
 

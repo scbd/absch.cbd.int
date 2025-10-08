@@ -1,4 +1,4 @@
-import interimReportT from '../../../app-text/report-analyzer/abs-npInterimNationalReport1.json' assert {type:'json'};
+import interimReportT from '../../../app-text/report-analyzer/abs-npInterimNationalReport1.json' with {type:'json'};
 import { mergeTranslationKeys } from '../../../services/translation-merge.js';
 const nr1Data = mergeTranslationKeys(interimReportT);
 export const npInterimNationalReport1 = [

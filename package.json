@@ -19,6 +19,7 @@
     "html-to-text": "^9.0.5",
     "http-proxy": "1.17.0",
     "isbot": "^5.1.6",
+    "jsdom": "^27.0.0",
     "ky": "0.26.0",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
@@ -68,5 +69,6 @@
   },
   "engines": {
     "yarn": ">= 1.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

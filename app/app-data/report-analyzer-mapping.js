@@ -1,7 +1,7 @@
-import reportTranslation from '../app-text/report-analyzer/report-analyzer-mapping.json' assert { type: "json" };
+import reportTranslation from '../app-text/report-analyzer/report-analyzer-mapping.json' with { type: "json" };
 import { mergeTranslationKeys } from '../services/translation-merge.js';
-import absOfflineFormats from '../app-data/abs/offline-formats.json' assert { type: 'json' };
-import bchOfflineFormats from '../app-data/bch/offline-formats.json' assert { type: 'json' };
+import absOfflineFormats from '../app-data/abs/offline-formats.json' with { type: 'json' };
+import bchOfflineFormats from '../app-data/bch/offline-formats.json' with { type: 'json' };
 
 const reportAnalyzerMappingJson = mergeTranslationKeys(reportTranslation);
 export const analyzerMapping =

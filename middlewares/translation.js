@@ -1,9 +1,14 @@
 ﻿import { stat } from 'fs/promises';
 import _       from 'lodash';
 import { bundleUrls } from '../app/boot.js';
+import { JSDOM } from 'jsdom';
+import DOMPurify from 'dompurify';
 
 const siteAlert      = process.env.SITE_ALERT || '';
 const siteAlertLevel = process.env.SITE_ALERT_LEVEL || 'danger';
+
+const window = new JSDOM('').window;
+const purify = DOMPurify(window);
 
  export async function renderApplicationTemplate(req, res){
 
@@ -41,7 +46,8 @@ const siteAlertLevel = process.env.SITE_ALERT_LEVEL || 'danger';
                     isCrawler          : req.headers['x-is-crawler'],
                     apiUrl             : global.app.apiUrl,
                     accountsUrl        : global.app.accountsUrl,
-                    siteAlert,
+                    //rendering html alert
+                    siteAlert          : purify.sanitize(siteAlert),
                     siteAlertLevel
                 };
 
