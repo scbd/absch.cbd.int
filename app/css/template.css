@@ -3514,6 +3514,17 @@ embed-footer{
     color: #009B48;
 
 }
+.text-chm{
+    color: #7C92E4 !important;
+}
+
+.text-bch{
+    color: #00405C !important;
+}
+.text-abs{
+    color: #009B48 !important;
+
+}
 @media (min-width: 1281px) {
     .responsive-search {
         float: right;
