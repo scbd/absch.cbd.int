@@ -35,7 +35,8 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     console.log('ERROR:', error);
                 });
                             
-                const params               = $location.search();  
+                const params               = $location.search();
+                let schemaName = "";  
                 let pivotUIConf;
                 let pivotResult;
                 const defaultMessage       = $element.find('#loadingMessage').text() || "Loading...";
@@ -78,9 +79,10 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
 
                     let fields = {};
  
-                    let schemaName; 
                     if (Array.isArray(params.schema) && params.schema.length === 1) {
                         schemaName = params.schema[0];
+                    } else {
+                        schemaName = "";
                     }
                     if(schemaName){
                         fields = downloadSchemas[schemaName];
@@ -280,17 +282,14 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 }
 
                 function pivotUI(result, chartExportFormat, fileName){
-
-
                     chartExportFormat = chartExportFormat || 'jpeg';
-
                     var derivers = $.pivotUtilities.derivers;
                     var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
                     if(!pivotUIConf){
                         pivotUIConf = {
                             renderers: renderers,
-                            rows: ["Year"],
-                            cols: ["RecordType"],
+                            rows: [realm.nationalSchemas.includes(schemaName) ? fieldsT["Country"] : fieldsT["Year"]],
+                            cols: [!schemaName ? fieldsT["RecordType"] : null],
                             aggregatorName: "Count",
                             rendererOptions: {
                                 plotly:{
@@ -312,6 +311,9 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     else{
                         pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.format    = chartExportFormat;
                         pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.filename  = fileName||exportFileName;
+                        // Reset rows and cols to default on schema change
+                        pivotUIConf.rows = [realm.nationalSchemas.includes(schemaName) ? fieldsT["Country"] : fieldsT["Year"]];
+                        pivotUIConf.cols = [!schemaName ? fieldsT["RecordType"] : null];
                     }
 
                     $element.find("#output").pivotUI(
