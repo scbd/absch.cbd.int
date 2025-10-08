@@ -6,6 +6,7 @@ import 'ngDialog'
 import '~/components/scbd-angularjs-services/main';
 import documentSharingT from '~/app-text/views/forms/directives/document-sharing.json';
 import { getRecaptchaToken } from '~/services/reCaptcha'
+import moment from 'moment';
 
 app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout', 'IGenericService', '$document', '$window', '$rootScope', 'realm', 'locale', 'translationService',
     function ($http, $q, $route, ngDialog, $timeout, genericService, $document, $window, $rootScope, realm, locale, translationService) {
@@ -80,6 +81,8 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
                 if($scope.restrictionFieldValue)
                 newDocument.sharedData.restrictionFieldValue = $scope.restrictionFieldValue.toString();
 
+                //3 months expiry by default
+                newDocument.expiry = moment().add(3, 'months').toDate();
                 newDocument.sharedWith = { "link" : true };
                 
                 return saveLink(newDocument);
