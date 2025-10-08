@@ -102,7 +102,9 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
                     },
                     sharedWith: {
                         emails           : shareEmails
-                    }
+                    },
+                    //3 months expiry by default
+                    expiry : moment().add(3, 'months').toDate()
                 }
                 if($scope.restrictionFieldValue)
                     document.sharedData.restrictionFieldValue = $scope.restrictionFieldValue.toString();                   
