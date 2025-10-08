@@ -66,8 +66,8 @@
                                                 <td >
                                                     <div class="btn-group w-100">
                                                         <div class="input-group" >
-                                                            <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control d-none d-sm-inline-block" value="{{::link.sharedWith.emails}}" disabled readonly/>
-                                                            <input ng-if="!link.sharedWith.emails" type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control d-none d-sm-inline-block" value="{{::getUrl(link.urlHash)}}" disabled readonly/>
+                                                            <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareUrl_{{$index+1}}" class="form-control d-none d-sm-inline-block" value="{{::link.sharedWith.emails}}" disabled readonly/>
+                                                            <input ng-if="!link.sharedWith.emails" type="text" width="100%" id="shareUrl_{{$index+1}}" class="form-control d-none d-sm-inline-block" value="{{::getUrl(link.urlHash)}}" disabled readonly/>
                                                             <span  ng-if="!link.sharedWith.emails" class="input-group-text cursor-pointer" id="basic-addon1">
                                                                 <a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"> </i> 
                                                                     <span class="d-none d-sm-inline-block">Open</span></a>
