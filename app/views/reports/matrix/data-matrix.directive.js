@@ -29,7 +29,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
                 let countries  = {};
                 $q.when(commonjs.getCountries()).then(function(data) {           
-                    _.forEach(data, function(c) { countries[c.code.toLowerCase()] = c.name.en; });
+                    _.forEach(data, function(c) { countries[c.code.toLowerCase()] = c.name[locale]; });
                     countries.eur = countries.eur || countries.eu;
                 }).catch(function(error) {
                     console.log('ERROR:', error);
@@ -160,7 +160,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                             if (row.updatedOn || row.publishedOn) {
                                 formattedRow[fieldsT["Year"]] = $filter("formatDate")(row.updatedOn || row.publishedOn, "YYYY");
                             }
-                           
+                            // row.government_s from the solr field, row.government from the download API
                             const code = row.government_s || getCountryCode(row.government);
                             const region = code ? _.find(regions, reg => _.includes(reg.narrowerTerms, code)) : undefined;
                             formattedRow[fieldsT["Region"]] = region ? region.title[locale] : 'No Region';
@@ -198,9 +198,13 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 }
 
                function getCountryCode(countryName) {
-                    const entry = Object.entries(countries)
-                        .find(([code, name]) => name.toLowerCase() === countryName?.toLowerCase());
+                    if (!countryName) return null;
 
+                    countryName = countryName.trim().toLowerCase();
+
+                    const entry = Object.entries(countries).find(
+                        ([code, name]) => name.toLowerCase() === countryName
+                    );
                     return entry ? entry[0] : null;
                 }
                 
