@@ -32,7 +32,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     _.forEach(data, function(c) { countries[c.code.toLowerCase()] = c.name[locale]; });
                     countries.eur = countries.eur || countries.eu;
                 }).catch(function(error) {
-                    console.log('ERROR:', error);
+                    console.error('ERROR:', error);
                 });
                             
                 const params               = $location.search();
