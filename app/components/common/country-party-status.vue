@@ -52,21 +52,25 @@
   const partyStatuses = [
     {
       key: 'isCBDParty', realm: 'CHM', label: t("partyToConvention"), notLabel: t("notPartyToConvention"),
-      ...props.country.CHM, class: 'text-chm'
+      ...props.country?.CHM, class: 'text-chm'
     },
     {
       key: 'isNagoyaParty', realm: 'ABS', label: t("partyToNagoya"), notLabel: t("notPartyToNagoya"),
-      ...props.country.ABS, class: 'text-abs'
+      ...props.country?.ABS, class: 'text-abs'
     },
     {
       key: 'isCartagenaParty', realm: 'BCH', label: t("partyToCartagena"), notLabel: t("notPartyToCartagena"),
-      ...props.country.BCH, class: 'text-bch'
+      ...props.country?.BCH, class: 'text-bch'
     },
     {
       key: 'isNKLSParty', realm: 'BCH', label: t("partyToSuppProtocol"), notLabel: t("notPartyToSuppProtocol"),
-      isParty: props.country.isNKLSParty, partyToDate: props.country.partyToNKLSPDate, class: 'color-NKLSP'
+      isParty: props.country?.isNKLSParty, partyToDate: props.country?.partyToNKLSPDate, class: 'color-NKLSP'
     }
-  ].filter(p => props.visiblePartyRealms.length === 0 || props.visiblePartyRealms.includes(p.realm))
+  ].filter(p => {
+    // normalize visible realms by removing anything after a dash (e.g., ABS-DEV → ABS)
+    const normalizedVisibleRealms = props.visiblePartyRealms.map(r => r.split('-')[0]);
+    return normalizedVisibleRealms.length === 0 || normalizedVisibleRealms.includes(p.realm);
+  })
   .sort((a, b) => {
       if (!a.entryIntoForce) return 1;
       if (!b.entryIntoForce) return -1;
