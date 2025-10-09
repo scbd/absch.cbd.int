@@ -197,7 +197,24 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     }
                 }
 
-               function getCountryCode(countryName) {
+                async function executeSolrQueryInBatch({start, rowsPerPage, ...other}, queryCanceler, result){
+                    
+                    const searchResult = await searchService.list({ ...other, start, rowsPerPage }, queryCanceler)
+                    if(searchResult?.data?.response){
+                        const data = searchResult.data.response;
+                        result              = result || {docs:[], numFound:0, pageNumber:0, facet_counts: searchResult.data.facet_counts};
+                        result.docs         = [...result.docs, ...data.docs];
+                        result.numFound     = data.numFound;
+                        result.pageNumber   = result.pageNumber + 1;
+                        if(result.docs.length < result.numFound){
+                            other.facet = false;
+                            return executeSolrQueryInBatch({start:result?.pageNumber * rowsPerPage, rowsPerPage, ...other}, queryCanceler, result);
+                        }
+                    }
+                    return result;
+                }
+
+                function getCountryCode(countryName) {
                     if (!countryName) return null;
 
                     countryName = countryName.trim().toLowerCase();
