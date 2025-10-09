@@ -139,10 +139,10 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         if (schema)
                             query.rowsPerPage = 0;
                        
-                        const searchResult = await searchService.list({ ...query, fields: facetFields }, queryCanceler.promise)
-                        const numFound = searchResult.data.response.numFound;
-                        const facet_counts = searchResult.data.facet_counts;
-                        let docs = searchResult.data.response.docs || [];
+                        const searchResult = await executeSolrQueryInBatch({ ...query, fields: facetFields }, queryCanceler.promise)
+                        const numFound = searchResult.numFound;
+                        const facet_counts = searchResult.facet_counts;
+                        let docs = searchResult.docs || [];
                        
                         if (schema) {
                             // Fetch all records from download API for schema
