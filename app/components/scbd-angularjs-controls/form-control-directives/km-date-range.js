@@ -2,8 +2,10 @@ import app from '~/app';
 import kmDatePickerRange from '../../km/km-date-picker-range.vue';
 import template from 'text!./km-date-range.html';
 import {formatDate} from '~/services/datetime';
+import dateTranslations from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-date-range.json' with { type: "json" };
+import { mergeTranslationKeys } from '~/services/translation-merge';
+const dateT = mergeTranslationKeys(dateTranslations);
 
-  ;
   //============================================================
   //
   //
@@ -40,10 +42,10 @@ import {formatDate} from '~/services/datetime';
           }
           $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - ${formatDate($scope.filterDates.end)}`;
           if(!$scope.filterDates.start){
-            $scope.dateRangeText = `Before ${formatDate($scope.filterDates.end)}`;
+            $scope.dateRangeText = `${dateT.before} ${formatDate($scope.filterDates.end)}`;
           }
           if(!$scope.filterDates.end){
-            $scope.dateRangeText = `After ${formatDate($scope.filterDates.start)}`; // if only start: After xxx
+            $scope.dateRangeText = `${dateT.after} ${formatDate($scope.filterDates.start)}`; // if only start: After xxx
           }
          
           ngModelController.$setViewValue($scope.binding);
@@ -65,10 +67,10 @@ import {formatDate} from '~/services/datetime';
             $scope.dateRangeText = `${formatDate($scope.filterDates.start)} - ${formatDate($scope.filterDates.end)}`;
           }
           else if ($scope.filterDates.start) {
-            $scope.dateRangeText = `After ${formatDate($scope.filterDates.start)}`;
+            $scope.dateRangeText = `${dateT.after} ${formatDate($scope.filterDates.start)}`;
           }
           else if ($scope.filterDates.end) {
-            $scope.dateRangeText = `Before ${formatDate($scope.filterDates.end)}`;
+            $scope.dateRangeText = `${dateT.before} ${formatDate($scope.filterDates.end)}`;
           }
         });
       }
