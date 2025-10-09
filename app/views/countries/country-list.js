@@ -115,6 +115,31 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 }
             });
 
+            $scope.sortTable = function (term, order) {
+
+                if ($scope.sortTerm == term) {
+                    $scope.orderList = !$scope.orderList;
+                } else {
+                    $scope.sortTerm = term;
+                    $scope.orderList = true;
+                    $location.search('sortTerm', $scope.sortTerm);
+                    $location.search('order', null);
+                }
+
+                if (order == "ASC"){
+                    $scope.orderList = false;
+                    $location.search('order', 'ASC');
+                    $location.search('sortTerm', null);
+                }
+
+                if (order == "DESC"){
+                    $scope.orderList = true;
+                    $location.search('order', 'DESC');
+                    $location.search('sortTerm', null);
+                }  			
+
+            };
+
             $scope.$watch('regions', function (newVal, oldVal) {
                 if(newVal){
                     setParams('regions', newVal)
@@ -227,6 +252,12 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
                 if (queryParams.status) {
                     $scope.setPartyFilter(queryParams.status);
                 }
+				if (queryParams.order) {
+                     $scope.sortTable($scope.sortTerm, queryParams.order);
+				}
+				if (queryParams.sortTerm) {
+                     $scope.sortTable(queryParams.sortTerm, $scope.orderList);
+				}
             }
             loadFromUrlQueryString();
             //*************************************************************************************************************************************
@@ -251,22 +282,7 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 
 
             //==================================================================================
-            $scope.sortTable = function (term, order) {
 
-                if ($scope.sortTerm == term) {
-                    $scope.orderList = !$scope.orderList;
-                } else {
-                    $scope.sortTerm = term;
-                    $scope.orderList = true;
-                }
-
-                if (order == "ASC")
-                    $scope.orderList = false;
-
-                if (order == "DESC")
-                    $scope.orderList = true;
-
-            };
 
             //==================================================================================
             $scope.sortTermFilter = function (data) {
