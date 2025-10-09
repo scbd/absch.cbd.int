@@ -6,10 +6,13 @@ import '~/services/main';
 import '~/views/directives/block-region-directive';
 import 'pivottable';
 import 'ngDialog'; ;
+import { mergeTranslationKeys } from '~/services/translation-merge';
 import dataMatrixT from '~/app-text/views/reports/matrix/data-matrix.json';
 
-app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter', 'translationService',
-    function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter, translationService) {
+let downloadSchemas;
+
+app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter', 'translationService', '$location', 'commonjs',
+    function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter, translationService, $location, commonjs) {
 	
 		return{
 			template:template,
@@ -22,28 +25,38 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
             },
 			link($scope, $element, $attr, searchDirectiveCtrl){
                 translationService.set('dataMatrixT', dataMatrixT);
+                const fieldsT 		= mergeTranslationKeys(dataMatrixT);
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
-
-                var pivotUIConf;
-                var pivotResult;
-                var defaultMessage        = $element.find('#loadingMessage').text()
-                var exportFileName        = "Matrix-view"
-                    $scope.matrixProgress = defaultMessage;
-                var pageSize              = 1000;
-                var queryCanceler         = undefined;
-                var regions               = [];
+                let countries  = {};
+                $q.when(commonjs.getCountries()).then(function(data) {           
+                    _.forEach(data, function(c) { countries[c.code.toLowerCase()] = c.name[locale]; });
+                    countries.eur = countries.eur || countries.eu;
+                }).catch(function(error) {
+                    console.error('ERROR:', error);
+                });
+                            
+                const params               = $location.search();
+                let pivotUIConf;
+                let pivotResult;
+                const defaultMessage       = $element.find('#loadingMessage').text() || "Loading...";
+                const exportFileName       = "Matrix-view";
+                const pageSize             = 2000;
+                $scope.matrixProgress = defaultMessage;
+                let queryCanceler;
+                let regions                = [];
                 
-                $scope.api          = {
+                $scope.api            = {
                     updateResult : updateResult,
                     onExport     : onExport,
                     isBusy       : false
                 };
 
-                function updateResult(queryOptions){
+                // ASYNC update function to handle dynamic imports
+                async function updateResult(queryOptions){
                     if(queryCanceler){
                         queryCanceler.resolve();
                         $scope.matrixProgress   = defaultMessage;
-                        $scope.matrixProgress  += '<br/>' + $element.find('#resetFilterMessage').text()
+                        $scope.matrixProgress  += '<br/>' + ($element.find('#resetFilterMessage').text() || '');
                     }
                     else{
                         $scope.matrixProgress   = defaultMessage;
@@ -51,102 +64,191 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     queryCanceler = $q.defer();
 
                     $scope.api.isBusy = $scope.loading = true;
-                    queryOptions = queryOptions||{};
-                    queryOptions.query   = queryOptions.query||'grp_government_schema_s:*';
 
-                    var query = {
-                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, updatedOn:updatedDate_dt, government_s,schemaType:schemaType_s,countryRegions_ss',
-                        fieldQuery  : _.uniq(queryOptions.tagQueries),
-                        query       : queryOptions.query||undefined,
-                        facet          : true,
-                        facetFields    : queryOptions.facetFields,
-                        pivotFacetFields    : queryOptions.pivotFacetFields,
-                        rowsPerPage    : pageSize
+                    // Dynamically import the download schemas based on the realm
+                    if (!downloadSchemas) {
+                        if (realm.is('ABS')) {
+                            downloadSchemas = (await import('~/app-data/abs/download-schemas')).downloadSchemas;
+                        } else if (realm.is('BCH')) {
+                            downloadSchemas = (await import('~/app-data/bch/download-schemas')).downloadSchemas;
+                        } else if (realm.is('CHM')) {
+                            downloadSchemas = (await import('~/app-data/chm/download-schemas')).downloadSchemas;
+                        }
                     }
-                    return fetchRecords(query, {rows:[], pageNumber:0})
-                        .then(function(result){
-                                queryCanceler   = null;                               
-                                pivotResult     = result;
-                                pivotUI(pivotResult);
-                                return result;
 
+                    let fields = {};
+                    let schemaName;
+                    if (Array.isArray(params.schema) && params.schema.length === 1) {
+                        schemaName = params.schema[0];
+                    }
+                    if(schemaName){
+                        fields = downloadSchemas[schemaName];
+                    }
+                    //if there are no fields for schema fallback to generic fields
+                    if(!fields){
+                        // Default fields when no schema or multiple schemas are selected
+                        schemaName = null;
+                    }
+
+                    const query = {
+                        fields           : fields, // Use dynamic fields from the download schema
+                        fieldQuery       : _.uniq(queryOptions.tagQueries),
+                        query            : queryOptions.query||undefined,
+                        facet            : true,
+                        facetFields      : queryOptions.facetFields,
+                        pivotFacetFields : queryOptions.pivotFacetFields,
+                        rowsPerPage      : pageSize // Get all records (same as export.js 'all' listType)
+                    };
+
+                    $scope.isLoading = true;
+                    return loadMatrixRecords({query, fields, schema: schemaName})
+                        .then(function(result){
+                            queryCanceler   = null;                               
+                            pivotResult     = result;
+                            pivotUI(pivotResult);
+                            return result;
                         })
                         .catch(function(err){
                             if(err.xhrStatus!="abort")
                                 throw err;
                         })
                         .finally(function(){
-                            if(!queryCanceler)
-                                $scope.api.isBusy = $scope.loading = false;
+                            if(!queryCanceler)                                
+                                $scope.$applyAsync(() => {
+                                    $scope.api.isBusy = $scope.loading = false;
+                                });
                         });   
                 }
 
-                function executeQuery(query){
-                    return searchService.list(query, queryCanceler.promise)
-                    .then(function(result){
-                        var data = (result.data.response.docs);        
-                        data = _.map(data, function(row){
+                async function loadMatrixRecords({ query, fields, schema }) {
+                    $scope.matrixProgress = defaultMessage;
 
-                            // $scope.onRecordFormatting({row:row});
-                            if(row.updatedOn)
-                                row.Year = $filter("formatDate")(row.updatedOn, "YYYY");
-                            
-                            var region;
-                            if(row.government_s){
-                                region = _.find(regions, function(reg){
-                                    return _.includes(reg.narrowerTerms, row.government_s)
-                                });
+                    const searchQuery = {
+                        df   : searchService.localizeFields(query.df || 'text_EN_txt'),
+                        fq   : _([query.fieldQuery]).flatten().compact().uniq().value(),
+                        q    : query.query,
+                        sort : searchService.localizeFields(query.sort),
+                        start: 0,
+                        rows : query.rowsPerPage,
+                    };
+
+                    if (!_.find(searchQuery.fq, function(q) { return ~q.indexOf('realm_ss:'); })) {
+                        searchQuery.fq.push('realm_ss:' + realm.value.toLowerCase());
+                    }
+                        const facetFields = 'Government:government_EN_t,RecordType:schema_EN_t,updatedOn:updatedDate_dt,government_s,schemaType:schemaType_s,countryRegions_ss';
+                        
+                        // if schema is provided do not load from solr, get records from download api.
+                        // just get facets from solr.
+                        if (schema)
+                            query.rowsPerPage = 0;
+                       
+                        const searchResult = await executeSolrQueryInBatch({ ...query, fields: facetFields }, queryCanceler.promise)
+                        const numFound = searchResult.numFound;
+                        const facet_counts = searchResult.facet_counts;
+                        let docs = searchResult.docs || [];
+                       
+                        if (schema) {
+                            // Fetch all records from download API for schema
+                            docs = await executeTransformedQueryInBatch(schema, { ...searchQuery,start:0, rows: pageSize },fields, queryCanceler.promise, {docs:[], numFound, pageNumber:0});                            
+                        } 
+ 
+                        docs = _.map(docs, (row) => {
+                            const formattedRow = {};
+                           
+                            // Add derived fields first with translated labels
+                            if (row.updatedOn || row.publishedOn) {
+                                formattedRow[fieldsT["Year"]] = $filter("formatDate")(row.updatedOn || row.publishedOn, "YYYY");
                             }
-
-                            return {
-                                Government       :   row.Government||'x - Reference record',
-                                Year             :   row.Year,
-                                ["Record Type"]  :   row.RecordType,
-                                Region           :   region ? region.title[locale] : 'No Region',
-                                ["Schema Type"]  :   (row.schemaType||'').replace(/[a-z]/, function(match){ return match.toUpperCase()})
-                            }
-                        });
-
-                        return { 
-                                rows : data, 
-                                numFound:result.data.response.numFound, 
-                                facets: result.data.facet_counts ? searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts) : undefined
-                        };
-                    }); 
-                }
-
-                function fetchRecords(query, result){
-                    var message = '';
-                    if(result.numFound>0)
-                        message = query.start + " of " + result.numFound;
-                    $scope.matrixProgress = '<br/>' + message;
-                         
-                    query.start = result.pageNumber * pageSize;
-                    
-                    return executeQuery(query)
-                            .then(function(data){
-                                result.rows         = _.union(result.rows, data.rows);
-                                result.numFound     = data.numFound;
-                                result.pageNumber  += 1;
-                                result.facets       = result.facets || data.facets;
-                                if(result.rows.length < result.numFound){
-                                    query.facet = false;
-                                    return fetchRecords(query, result);
+                            // row.government_s from the solr field, row.government from the download API
+                            const code = row.government_s || getCountryCode(row.government);
+                            const region = code ? _.find(regions, reg => _.includes(reg.narrowerTerms, code)) : undefined;
+                            formattedRow[fieldsT["Region"]] = region ? region.title[locale] : 'No Region';
+                           
+                            if(!schema){
+                                formattedRow[fieldsT["Government"]] = row.Government || 'x - Reference record';
+                                formattedRow[fieldsT["RecordType"]] = row.RecordType;
+                                formattedRow[fieldsT["SchemaType"]] = (row.schemaType||'').replace(/[a-z]/, function(match){ return match.toUpperCase()});
+                            } else {
+                                // For schema downloads, apply translation for schema-defined fields
+                                for (const [key, label] of Object.entries(fields)) {
+                                    if (_.has(row, key)) {
+                                        formattedRow[label] = _.get(row, key);
+                                    }
                                 }
-
-                                return result;
-                            });
+                            }
+                            return formattedRow;
+                        });
+                       
+                        return {
+                            rows: docs,
+                            numFound,
+                            schema,
+                            schemaFields: fields,
+                            facets: searchDirectiveCtrl.sanitizeFacets(facet_counts)
+                        };
                 }
 
+                async function executeSolrQueryInBatch({start, rowsPerPage, ...other}, queryCanceler, result){
+                    let message = fieldsT.loading
+                    if(result?.numFound>0)
+                        message = start + " of " + result.numFound;
+                    $scope.matrixProgress = '<br/>' + message;
+                    const searchResult = await searchService.list({ ...other, start, rowsPerPage }, queryCanceler)
+                    if(searchResult?.data?.response){
+                        const data = searchResult.data.response;
+                        result              = result || {docs:[], numFound:0, pageNumber:0, facet_counts: searchResult.data.facet_counts};
+                        result.docs         = [...result.docs, ...data.docs];
+                        result.numFound     = data.numFound;
+                        result.pageNumber   = result.pageNumber + 1;
+                        if(rowsPerPage > 0 && result.docs.length < result.numFound){
+                            other.facet = false;
+                            return executeSolrQueryInBatch({start:result?.pageNumber * rowsPerPage, rowsPerPage, ...other}, queryCanceler, result);
+                        }
+                    }
+                    return result;
+                }
+
+                async function executeTransformedQueryInBatch(schema, {start, rows, ...searchQuery}, fields, queryCanceler, result){
+
+                    let message = ''
+                    if(result?.numFound>0)
+                        message = start + " of " + result.numFound;
+                    $scope.matrixProgress = '<br/>' + message;
+
+                    const searchResult = (await $http.post(`/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
+                                            { query: {...searchQuery, start, rows}, fields }, { timeout: queryCanceler } )).data;
+                    
+                    if(searchResult?.length){
+                        result              = result || {docs:[], numFound:0, pageNumber:0};
+                        result.docs         = [...result.docs, ...searchResult];
+                        result.pageNumber   = result.pageNumber + 1;
+                        if(rows > 0 && result.docs.length < result.numFound){
+                            return executeTransformedQueryInBatch(schema, {start:result?.pageNumber * rows, rows, ...searchQuery}, fields, queryCanceler, result);
+                        }
+                    }
+                    return result.docs;
+                }
+
+                function getCountryCode(countryName) {
+                    if (!countryName) return null;
+
+                    countryName = countryName.trim().toLowerCase();
+
+                    const entry = Object.entries(countries).find(
+                        ([code, name]) => name.toLowerCase() === countryName
+                    );
+                    return entry ? entry[0] : null;
+                }
+                
                 function loadRegions(){
-                    var DefaultRegions = [
+                    const DefaultRegions = [
                         "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
                         "5E5B7AA4-2420-4147-825B-0820F7EC5A4B", // CBD Regional Groups - Asia and the Pacific
                         "942E40CA-4C23-4D3A-A0B4-736CD0EFCD54", // CBD Regional Groups - Central and Eastern Europe
                         "3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E", // CBD Regional Groups - Latin America and the Caribbean
                         "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B"  // CBD Regional Groups - Western Europe and Others
                     ];
-                    var regionsQuery = _.map(DefaultRegions, function(region){return thesaurusService.getTerms(region, {relations:true})})
+                    const regionsQuery = _.map(DefaultRegions, function(region){return thesaurusService.getTerms(region, {relations:true})});
                     
                     return $q.all(regionsQuery)
                             .then(function(regionData){
@@ -197,8 +299,8 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         if(pivotUIConf && pivotUIConf.rendererName.indexOf('Chart')>0){
                             pivotUI(pivotResult, format, fileName);
                             $timeout(function(){
-                                var btn = $element.find('.modebar-container .modebar .modebar-group .modebar-btn:first()')[0]
-                                btn.click()
+                                const btn = $element.find('.modebar-container .modebar .modebar-group .modebar-btn:first()')[0];
+                                if(btn) btn.click();
                             }, 200);
                         }
                         else{
@@ -216,17 +318,23 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 }
 
                 function pivotUI(result, chartExportFormat, fileName){
-
-
                     chartExportFormat = chartExportFormat || 'jpeg';
-
                     var derivers = $.pivotUtilities.derivers;
                     var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
+
+                    let rowColumn
+                    if(result.rows.find(r => r[fieldsT["Country"]]))
+                        rowColumn = "Country"                    
+                    else if(result.rows.find(r => r[fieldsT["Government"]]))
+                        rowColumn = "Government"
+                    else 
+                        rowColumn = "Year"
+
                     if(!pivotUIConf){
                         pivotUIConf = {
                             renderers: renderers,
-                            rows: ["Government"],
-                            cols: ["RecordType"],
+                            rows: [fieldsT[rowColumn]],
+                            cols: [fieldsT["RecordType"]],
                             aggregatorName: "Count",
                             rendererOptions: {
                                 plotly:{
@@ -248,6 +356,9 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     else{
                         pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.format    = chartExportFormat;
                         pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.filename  = fileName||exportFileName;
+                        // Reset rows and cols to default on schema change
+                        pivotUIConf.rows = [fieldsT[rowColumn]];
+                        pivotUIConf.cols = [fieldsT["RecordType"]];
                     }
 
                     $element.find("#output").pivotUI(

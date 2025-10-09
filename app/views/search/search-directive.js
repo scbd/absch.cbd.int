@@ -1363,14 +1363,13 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     function buildSchemaQuery() {
                         
                         var filters = getSelectedFilters('schema')
+
+                        updateQueryString('schema',  _.map(filters, 'id'));
                         if (!(filters||[]).length){  
                             return "(*:*)";
                         }                                            
                                                 
                         var query = buildAdvanceSettingsQuery(filters, 'schema_s');
-
-                        updateQueryString('schema',  _.map(filters, 'id'));
-
                         return query;
                     }
 
