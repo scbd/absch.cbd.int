@@ -36,12 +36,12 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 });
                             
                 const params               = $location.search();
-                let schemaName = "";  
+                let schemaName;  
                 let pivotUIConf;
                 let pivotResult;
                 const defaultMessage       = $element.find('#loadingMessage').text() || "Loading...";
                 const exportFileName       = "Matrix-view";
-                const pageSize             = 1000;
+                const pageSize             = 2000;
                 $scope.matrixProgress = defaultMessage;
                 let queryCanceler;
                 let regions                = [];
@@ -78,11 +78,8 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     }
 
                     let fields = {};
- 
                     if (Array.isArray(params.schema) && params.schema.length === 1) {
                         schemaName = params.schema[0];
-                    } else {
-                        schemaName = "";
                     }
                     if(schemaName){
                         fields = downloadSchemas[schemaName];
@@ -95,7 +92,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         facet            : true,
                         facetFields      : queryOptions.facetFields,
                         pivotFacetFields : queryOptions.pivotFacetFields,
-                        rowsPerPage      : 100000 // Get all records (same as export.js 'all' listType)
+                        rowsPerPage      : pageSize // Get all records (same as export.js 'all' listType)
                     };
 
                     return loadMatrixRecords({query, fields, schema: schemaName})
