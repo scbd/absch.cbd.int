@@ -36,7 +36,6 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 });
                             
                 const params               = $location.search();
-                let schemaName;  
                 let pivotUIConf;
                 let pivotResult;
                 const defaultMessage       = $element.find('#loadingMessage').text() || "Loading...";
@@ -78,11 +77,17 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     }
 
                     let fields = {};
+                    let schemaName;
                     if (Array.isArray(params.schema) && params.schema.length === 1) {
                         schemaName = params.schema[0];
                     }
                     if(schemaName){
                         fields = downloadSchemas[schemaName];
+                    }
+                    //if there are no fields for schema fallback to generic fields
+                    if(!fields){
+                        // Default fields when no schema or multiple schemas are selected
+                        schemaName = null;
                     }
 
                     const query = {
@@ -95,6 +100,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         rowsPerPage      : pageSize // Get all records (same as export.js 'all' listType)
                     };
 
+                    $scope.isLoading = true;
                     return loadMatrixRecords({query, fields, schema: schemaName})
                         .then(function(result){
                             queryCanceler   = null;                               
@@ -107,8 +113,10 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                 throw err;
                         })
                         .finally(function(){
-                            if(!queryCanceler)
-                                $scope.api.isBusy = $scope.loading = false;
+                            if(!queryCanceler)                                
+                                $scope.$applyAsync(() => {
+                                    $scope.api.isBusy = $scope.loading = false;
+                                });
                         });   
                 }
 
@@ -127,8 +135,6 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     if (!_.find(searchQuery.fq, function(q) { return ~q.indexOf('realm_ss:'); })) {
                         searchQuery.fq.push('realm_ss:' + realm.value.toLowerCase());
                     }
-                    $scope.isLoading = true;
-                    try {
                         const facetFields = 'Government:government_EN_t,RecordType:schema_EN_t,updatedOn:updatedDate_dt,government_s,schemaType:schemaType_s,countryRegions_ss';
                         
                         // if schema is provided do not load from solr, get records from download api.
@@ -143,11 +149,7 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                        
                         if (schema) {
                             // Fetch all records from download API for schema
-                            docs = (await $http.post(
-                                `/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
-                                { query: searchQuery, fields },
-                                { timeout: queryCanceler.promise }
-                            )).data;
+                            docs = await executeTransformedQueryInBatch(schema, { ...searchQuery,start:0, rows: pageSize },fields, queryCanceler.promise, {docs:[], numFound, pageNumber:0});                            
                         } 
  
                         docs = _.map(docs, (row) => {
@@ -184,18 +186,13 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                             schemaFields: fields,
                             facets: searchDirectiveCtrl.sanitizeFacets(facet_counts)
                         };
-                    } catch (err) {
-                        console.error("Error while fetching docs", err); 
-                        throw err;
-                    } finally { 
-                        $scope.$applyAsync(() => {
-                            $scope.isLoading = false;
-                        });
-                    }
                 }
 
                 async function executeSolrQueryInBatch({start, rowsPerPage, ...other}, queryCanceler, result){
-                    
+                    let message = fieldsT.loading
+                    if(result?.numFound>0)
+                        message = start + " of " + result.numFound;
+                    $scope.matrixProgress = '<br/>' + message;
                     const searchResult = await searchService.list({ ...other, start, rowsPerPage }, queryCanceler)
                     if(searchResult?.data?.response){
                         const data = searchResult.data.response;
@@ -203,12 +200,33 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         result.docs         = [...result.docs, ...data.docs];
                         result.numFound     = data.numFound;
                         result.pageNumber   = result.pageNumber + 1;
-                        if(result.docs.length < result.numFound){
+                        if(rowsPerPage > 0 && result.docs.length < result.numFound){
                             other.facet = false;
                             return executeSolrQueryInBatch({start:result?.pageNumber * rowsPerPage, rowsPerPage, ...other}, queryCanceler, result);
                         }
                     }
                     return result;
+                }
+
+                async function executeTransformedQueryInBatch(schema, {start, rows, ...searchQuery}, fields, queryCanceler, result){
+
+                    let message = ''
+                    if(result?.numFound>0)
+                        message = start + " of " + result.numFound;
+                    $scope.matrixProgress = '<br/>' + message;
+
+                    const searchResult = (await $http.post(`/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
+                                            { query: {...searchQuery, start, rows}, fields }, { timeout: queryCanceler } )).data;
+                    
+                    if(searchResult?.length){
+                        result              = result || {docs:[], numFound:0, pageNumber:0};
+                        result.docs         = [...result.docs, ...searchResult];
+                        result.pageNumber   = result.pageNumber + 1;
+                        if(rows > 0 && result.docs.length < result.numFound){
+                            return executeTransformedQueryInBatch(schema, {start:result?.pageNumber * rows, rows, ...searchQuery}, fields, queryCanceler, result);
+                        }
+                    }
+                    return result.docs;
                 }
 
                 function getCountryCode(countryName) {
@@ -303,11 +321,20 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     chartExportFormat = chartExportFormat || 'jpeg';
                     var derivers = $.pivotUtilities.derivers;
                     var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
+
+                    let rowColumn
+                    if(result.rows.find(r => r[fieldsT["Country"]]))
+                        rowColumn = "Country"                    
+                    else if(result.rows.find(r => r[fieldsT["Government"]]))
+                        rowColumn = "Government"
+                    else 
+                        rowColumn = "Year"
+
                     if(!pivotUIConf){
                         pivotUIConf = {
                             renderers: renderers,
-                            rows: [realm.nationalSchemas.includes(schemaName) ? fieldsT["Country"] : fieldsT["Year"]],
-                            cols: [!schemaName ? fieldsT["RecordType"] : null],
+                            rows: [fieldsT[rowColumn]],
+                            cols: [fieldsT["RecordType"]],
                             aggregatorName: "Count",
                             rendererOptions: {
                                 plotly:{
@@ -330,8 +357,8 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.format    = chartExportFormat;
                         pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.filename  = fileName||exportFileName;
                         // Reset rows and cols to default on schema change
-                        pivotUIConf.rows = [realm.nationalSchemas.includes(schemaName) ? fieldsT["Country"] : fieldsT["Year"]];
-                        pivotUIConf.cols = [!schemaName ? fieldsT["RecordType"] : null];
+                        pivotUIConf.rows = [fieldsT[rowColumn]];
+                        pivotUIConf.cols = [fieldsT["RecordType"]];
                     }
 
                     $element.find("#output").pivotUI(
