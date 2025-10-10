@@ -29,7 +29,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 			translationService.set('viewRecordReferenceT', viewRecordReferenceT);
 
 			const realmsApi   = new RealmsApi();
-
+			$scope.baseURL = realm.baseURL;
 			$scope.self = $scope;
 			$scope.hideSchema = $attr.hideSchema=='true'
 			
@@ -111,6 +111,11 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 
 				let headers = {};
 				var focalPointRegex = /^52000000cbd022/;
+
+				if( focalPointRegex.test(identifier)){
+					 $scope.baseURL = realm.baseURL.replace(/https:\/\/[^.]+(?=\.cbd)/i, 'https://chm');
+				}
+				
 				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
 					headers = { realm:undefined }
 				if(otherRealm)
@@ -151,6 +156,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 									const ownerRealm                = await realmsApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
 									const isSameEnvironment         = await compareRealmEnvironment(ownerRealm, realm.realm, realm.environment);
 									if(isSameEnvironment){
+										$scope.baseURL = realm.baseURL.replace(/https:\/\/[^.]+(?=\.cbd)/i, 'https://chm');
 										return loadReferenceDocument(identifier, cacheBuster, ownerRealm);
 									}
 								}
