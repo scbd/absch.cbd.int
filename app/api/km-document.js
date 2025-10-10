@@ -10,17 +10,14 @@ export default class KmDocumentApi extends ApiBase
         return this.http.get(`api/v2013/documents/`, { params }).then(res => res.data).catch(tryCastToApiError);
     }
   
-    async getDocument(identifier)  {
-        return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
-    }
+    async getDocument(identifier, {includeDeleted, info, body})  {
+        const params = { info, body };
+        if(includeDeleted)
+            params['include-deleted'] = includeDeleted;
 
-    async getDeletedRecord(identifier) {
-        const params = {
-            'include-deleted': true
-        };
-        return this.http.get(`api/v2013/documents/${identifier}`, {
-            params})
-            .then(res => res.data).catch(tryCastToApiError);
+        return this.http.get(`api/v2013/documents/${identifier}`, { params })
+                .then(res => res.data)
+                .catch(tryCastToApiError);
     }
 
 }

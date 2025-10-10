@@ -22,6 +22,7 @@ import shareRecord from '~/components/common/share-record.vue';
 import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 import documentDebugInfo from '~/components/km/document-debug-info.vue';
 import KmDocumentApi from "~/api/km-document";
+import { API_ERRORS } from '~/constants/km-document.js';
 
 	const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
 
@@ -253,24 +254,22 @@ import KmDocumentApi from "~/api/km-document";
 							loadViewDirective($scope.internalDocument.header.schema);
 							$scope.error = undefined;
 						}).catch( async function (error) {
-							if (error.status == 404 && version != 'draft') {
-								
-							
-								const kmDocumentApi = new KmDocumentApi();
-								const result = await kmDocumentApi.getDeletedRecord(identifier);
-								const isNationalSchema = _.includes(realm.nationalSchemas, result.header.schema);
-
-								if(result?.header.schema && isNationalSchema) {
-									const schemaShortCode = $filter('schemaShortName')(result.header.schema);
-									$scope.nfpCountryCode = result.country.identifier.toUpperCase()+"/"+schemaShortCode;
+							console.log(error)
+							if (error.status == 404 && version != 'draft') {	
+								console.log('h')
+								//special case for NFP, NFP are only in CHM realm.	
+								if (error.data?.message === API_ERRORS.NOT_FOUND_IN_REALM) {								
+									$scope.nfpCountryProfilePath = await getNfpCountryProfilePath(identifier)	
 								}
-								$scope.load(identifier, 'draft', otherRealm);
+								// if(!$scope.nfpCountryProfilePath){													
+									$scope.load(identifier, 'draft', otherRealm);
+								// }
 								$scope.error = error;
 							}								
 						})
 						.finally(function () {
 							$scope.loading = false;
-							$scope.showRecord = $scope.internalDocumentInfo.deletedOn ? false : true;
+							$scope.showRecord = $scope.internalDocumentInfo?.deletedOn ? false : true;
 						})
 
 					};
@@ -588,6 +587,23 @@ import KmDocumentApi from "~/api/km-document";
 
 							if(chmRealm.length)
 								return chmRealm[0];
+						}
+					}
+
+					async function getNfpCountryProfilePath(identifier){
+						try{
+							//do not pass realm so that chm nfp record can be fetched.
+							const kmDocumentApi = new KmDocumentApi({});
+							const nfpDocument = await kmDocumentApi.getDocument(identifier, {includeDelete:true, info:true, body:true});
+							$scope.internalDocumentInfo = nfpDocument;
+
+							if(nfpDocument?.header?.schema == 'focalPoint') {
+								const schemaShortCode = $filter('schemaShortName')(nfpDocument.header.schema);
+								return `/countries/${nfpDocument.government.identifier.toUpperCase()}/${schemaShortCode}`;
+							}
+						}
+						catch(e){
+							console.error(e);
 						}
 					}
 
