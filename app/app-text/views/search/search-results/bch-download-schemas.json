@@ -74,5 +74,15 @@
   "organism.plantCultivar"                           : "Additional classification",
   "organism.organismType"                            : "Type of organism",
   "organism.commonUses"                              : "Common use(s)",
-  "organism.compatibleSpecies"                       : "Cross-compatible species"
+  "organism.compatibleSpecies"                       : "Cross-compatible species",
+
+
+  "submission.title"                                 :"Title of the submission",
+  "submission.organizations"                         :"Organization(s)",
+  "submission.dateSubmission"                        :"Date of submission",
+  "submission.notificationsTitle"                    :"Notifications title",
+  "submission.notificationsLink"                     :"Notifications link",
+  "submission.notificationsSymbol"                   :"Notifications symbol",
+  "submission.notificationsReference"                :"Notifications reference",
+  "submission.thematicAreas"                         :"Thematic areas"
 }
