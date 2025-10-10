@@ -146,7 +146,6 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 								
 								// Execute the logic when this error is raised
 								if (error.data?.message === API_ERRORS.NOT_FOUND_IN_REALM) {
-									console.log(error)
 									const identifierWithoutRevision = documentIdWithoutRevision(identifier);
 									const ownerRealm                = await realmsApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
 									const isSameEnvironment         = await compareRealmEnvironment(ownerRealm, realm.realm, realm.environment);
