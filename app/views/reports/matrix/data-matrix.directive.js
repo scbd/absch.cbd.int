@@ -29,18 +29,18 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
                 let countries  = {};
                 $q.when(commonjs.getCountries()).then(function(data) {           
-                    _.forEach(data, function(c) { countries[c.code.toLowerCase()] = c.name.en; });
+                    _.forEach(data, function(c) { countries[c.code.toLowerCase()] = c.name[locale]; });
                     countries.eur = countries.eur || countries.eu;
                 }).catch(function(error) {
-                    console.log('ERROR:', error);
+                    console.error('ERROR:', error);
                 });
                             
-                const params               = $location.search();  
+                const params               = $location.search();
                 let pivotUIConf;
                 let pivotResult;
                 const defaultMessage       = $element.find('#loadingMessage').text() || "Loading...";
                 const exportFileName       = "Matrix-view";
-                const pageSize             = 1000;
+                const pageSize             = 2000;
                 $scope.matrixProgress = defaultMessage;
                 let queryCanceler;
                 let regions                = [];
@@ -76,18 +76,18 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         }
                     }
 
-                    let fields = {
-                        uniqueId   : "BCH record ID", 
-                        government : "Country",
-                        publishedOn: "Publication Date"
-                    };
- 
-                    let schemaName; 
+                    let fields = {};
+                    let schemaName;
                     if (Array.isArray(params.schema) && params.schema.length === 1) {
                         schemaName = params.schema[0];
                     }
                     if(schemaName){
                         fields = downloadSchemas[schemaName];
+                    }
+                    //if there are no fields for schema fallback to generic fields
+                    if(!fields){
+                        // Default fields when no schema or multiple schemas are selected
+                        schemaName = null;
                     }
 
                     const query = {
@@ -97,9 +97,10 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                         facet            : true,
                         facetFields      : queryOptions.facetFields,
                         pivotFacetFields : queryOptions.pivotFacetFields,
-                        rowsPerPage      : 100000 // Get all records (same as export.js 'all' listType)
+                        rowsPerPage      : pageSize // Get all records (same as export.js 'all' listType)
                     };
 
+                    $scope.isLoading = true;
                     return loadMatrixRecords({query, fields, schema: schemaName})
                         .then(function(result){
                             queryCanceler   = null;                               
@@ -112,8 +113,10 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                 throw err;
                         })
                         .finally(function(){
-                            if(!queryCanceler)
-                                $scope.api.isBusy = $scope.loading = false;
+                            if(!queryCanceler)                                
+                                $scope.$applyAsync(() => {
+                                    $scope.api.isBusy = $scope.loading = false;
+                                });
                         });   
                 }
 
@@ -132,46 +135,35 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     if (!_.find(searchQuery.fq, function(q) { return ~q.indexOf('realm_ss:'); })) {
                         searchQuery.fq.push('realm_ss:' + realm.value.toLowerCase());
                     }
-                    $scope.isLoading = true;
-
-                    try {
-                        let result;
-                        let facetResult;
                         const facetFields = 'Government:government_EN_t,RecordType:schema_EN_t,updatedOn:updatedDate_dt,government_s,schemaType:schemaType_s,countryRegions_ss';
-                        // Always get facet results from searchService.list
-                        if (schema) 
+                        
+                        // if schema is provided do not load from solr, get records from download api.
+                        // just get facets from solr.
+                        if (schema)
                             query.rowsPerPage = 0;
-                        
-                        facetResult = await searchService.list({ ...query, fields: facetFields }, queryCanceler.promise);
-                        
+                       
+                        const searchResult = await executeSolrQueryInBatch({ ...query, fields: facetFields }, queryCanceler.promise)
+                        const numFound = searchResult.numFound;
+                        const facet_counts = searchResult.facet_counts;
+                        let docs = searchResult.docs || [];
+                       
                         if (schema) {
                             // Fetch all records from download API for schema
-                            result = await $http.post(
-                                `/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
-                                { query: searchQuery, fields },
-                                { timeout: queryCanceler.promise }
-                            );
-                        } else {
-                            // Use same searchService.list result for records
-                            fields = facetFields;
-                            result = facetResult;
-                        }
-                        
-                        let docs = schema ? result.data : result.data.response.docs;
-                        const numFound = schema ? docs.length : result.data.response.numFound;
-
+                            docs = await executeTransformedQueryInBatch(schema, { ...searchQuery,start:0, rows: pageSize },fields, queryCanceler.promise, {docs:[], numFound, pageNumber:0});                            
+                        } 
+ 
                         docs = _.map(docs, (row) => {
                             const formattedRow = {};
-                            
+                           
                             // Add derived fields first with translated labels
                             if (row.updatedOn || row.publishedOn) {
                                 formattedRow[fieldsT["Year"]] = $filter("formatDate")(row.updatedOn || row.publishedOn, "YYYY");
                             }
-                            
+                            // row.government_s from the solr field, row.government from the download API
                             const code = row.government_s || getCountryCode(row.government);
                             const region = code ? _.find(regions, reg => _.includes(reg.narrowerTerms, code)) : undefined;
                             formattedRow[fieldsT["Region"]] = region ? region.title[locale] : 'No Region';
-                            
+                           
                             if(!schema){
                                 formattedRow[fieldsT["Government"]] = row.Government || 'x - Reference record';
                                 formattedRow[fieldsT["RecordType"]] = row.RecordType;
@@ -185,29 +177,66 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                                 }
                             }
                             return formattedRow;
-                        }); 
-                        
+                        });
+                       
                         return {
                             rows: docs,
                             numFound,
                             schema,
                             schemaFields: fields,
-                            facets: facetResult.data.facet_counts ? searchDirectiveCtrl.sanitizeFacets(facetResult.data.facet_counts) : undefined
+                            facets: searchDirectiveCtrl.sanitizeFacets(facet_counts)
                         };
-                    } catch (err) {
-                        console.error("Error while fetching docs", err); 
-                        throw err;
-                    } finally { 
-                        $scope.$applyAsync(() => {
-                            $scope.isLoading = false;
-                        });
-                    }
                 }
 
-               function getCountryCode(countryName) {
-                    const entry = Object.entries(countries)
-                        .find(([code, name]) => name.toLowerCase() === countryName?.toLowerCase());
+                async function executeSolrQueryInBatch({start, rowsPerPage, ...other}, queryCanceler, result){
+                    let message = fieldsT.loading
+                    if(result?.numFound>0)
+                        message = start + " of " + result.numFound;
+                    $scope.matrixProgress = '<br/>' + message;
+                    const searchResult = await searchService.list({ ...other, start, rowsPerPage }, queryCanceler)
+                    if(searchResult?.data?.response){
+                        const data = searchResult.data.response;
+                        result              = result || {docs:[], numFound:0, pageNumber:0, facet_counts: searchResult.data.facet_counts};
+                        result.docs         = [...result.docs, ...data.docs];
+                        result.numFound     = data.numFound;
+                        result.pageNumber   = result.pageNumber + 1;
+                        if(rowsPerPage > 0 && result.docs.length < result.numFound){
+                            other.facet = false;
+                            return executeSolrQueryInBatch({start:result?.pageNumber * rowsPerPage, rowsPerPage, ...other}, queryCanceler, result);
+                        }
+                    }
+                    return result;
+                }
 
+                async function executeTransformedQueryInBatch(schema, {start, rows, ...searchQuery}, fields, queryCanceler, result){
+
+                    let message = ''
+                    if(result?.numFound>0)
+                        message = start + " of " + result.numFound;
+                    $scope.matrixProgress = '<br/>' + message;
+
+                    const searchResult = (await $http.post(`/api/v2022/documents/schemas/${encodeURIComponent(schema)}/download`,
+                                            { query: {...searchQuery, start, rows}, fields }, { timeout: queryCanceler } )).data;
+                    
+                    if(searchResult?.length){
+                        result              = result || {docs:[], numFound:0, pageNumber:0};
+                        result.docs         = [...result.docs, ...searchResult];
+                        result.pageNumber   = result.pageNumber + 1;
+                        if(rows > 0 && result.docs.length < result.numFound){
+                            return executeTransformedQueryInBatch(schema, {start:result?.pageNumber * rows, rows, ...searchQuery}, fields, queryCanceler, result);
+                        }
+                    }
+                    return result.docs;
+                }
+
+                function getCountryCode(countryName) {
+                    if (!countryName) return null;
+
+                    countryName = countryName.trim().toLowerCase();
+
+                    const entry = Object.entries(countries).find(
+                        ([code, name]) => name.toLowerCase() === countryName
+                    );
                     return entry ? entry[0] : null;
                 }
                 
@@ -289,17 +318,23 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                 }
 
                 function pivotUI(result, chartExportFormat, fileName){
-
-
                     chartExportFormat = chartExportFormat || 'jpeg';
-
                     var derivers = $.pivotUtilities.derivers;
                     var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
+
+                    let rowColumn
+                    if(result.rows.find(r => r[fieldsT["Country"]]))
+                        rowColumn = "Country"                    
+                    else if(result.rows.find(r => r[fieldsT["Government"]]))
+                        rowColumn = "Government"
+                    else 
+                        rowColumn = "Year"
+
                     if(!pivotUIConf){
                         pivotUIConf = {
                             renderers: renderers,
-                            rows: ["Year"],
-                            cols: ["RecordType"],
+                            rows: [fieldsT[rowColumn]],
+                            cols: [fieldsT["RecordType"]],
                             aggregatorName: "Count",
                             rendererOptions: {
                                 plotly:{
@@ -321,6 +356,9 @@ app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesauru
                     else{
                         pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.format    = chartExportFormat;
                         pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.filename  = fileName||exportFileName;
+                        // Reset rows and cols to default on schema change
+                        pivotUIConf.rows = [fieldsT[rowColumn]];
+                        pivotUIConf.cols = [fieldsT["RecordType"]];
                     }
 
                     $element.find("#output").pivotUI(

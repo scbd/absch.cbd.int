@@ -1,4 +1,4 @@
-﻿import app from '~/app';
+import app from '~/app';
 import _ from 'lodash';
 import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
@@ -116,7 +116,6 @@ const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
             });
 
             $scope.sortTable = function (term, order) {
-                console.log("term :"+term, "order : "+order)
 
                 if ($scope.sortTerm == term) {
                     $scope.orderList = !$scope.orderList;
