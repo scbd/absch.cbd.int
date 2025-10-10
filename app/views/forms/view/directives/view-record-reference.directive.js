@@ -7,6 +7,7 @@ import {documentIdWithoutRevision} from '~/components/scbd-angularjs-services/se
 import { sleep } from '~/services/composables/utils.js';
 import { API_ERRORS } from '~/constants/km-document.js';
 import RealmsApi from '~/api/realms';
+import { chmUrl } from '~/services/composables/utils.js';
 
 app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', '$rootScope', 'searchService', 'solr', 'realm',
 	 function (storage, $timeout, translationService, $rootScope, searchService, solr, realm,) {
@@ -111,9 +112,10 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 
 				let headers = {};
 				var focalPointRegex = /^52000000cbd022/;
-
+				// Special case for focal point, as focal point identifier are different across realms, the NFP record is exists but roles are revoked
+				// ToDo: find a better solution
 				if( focalPointRegex.test(identifier)){
-					 $scope.baseURL = realm.baseURL.replace(/https:\/\/[^.]+(?=\.cbd)/i, 'https://chm');
+					 $scope.baseURL = chmUrl();
 				}
 				
 				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
@@ -156,7 +158,8 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationServic
 									const ownerRealm                = await realmsApi.getOwnerRealm(solr.escape(identifierWithoutRevision));
 									const isSameEnvironment         = await compareRealmEnvironment(ownerRealm, realm.realm, realm.environment);
 									if(isSameEnvironment){
-										$scope.baseURL = realm.baseURL.replace(/https:\/\/[^.]+(?=\.cbd)/i, 'https://chm');
+										//in case of same environment, we try to load the document from the owner realm
+										$scope.baseURL = chmUrl(ownerRealm); // ToDo : find better solution
 										return loadReferenceDocument(identifier, cacheBuster, ownerRealm);
 									}
 								}

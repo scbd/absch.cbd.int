@@ -3,3 +3,7 @@ export const oasisUrl = ()=>{
 }
 
 export const sleep = (ms)=>new Promise((resolve)=>setTimeout(resolve, ms));
+
+export const chmUrl = (realm)=>{
+    return window.scbdApp.accountsUrl.replace('accounts', realm ? realm : 'chm')
+}
