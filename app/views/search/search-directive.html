@@ -10,7 +10,6 @@
                             class="text-white border bg-transparent">
                             <span class="filter-chip-text dropdown bring-to-front p-2 border rounded">
                                 <span ng-if="filter.edit" class="input-group edit">
-
                                     <input type="textbox" ng-model="filter.editValue"
                                         ng-keydown="onKeyDown($event, filter)" class="form-control form-control-small">
                                     <span class="btn btn-sm bold filter-chips-edit-addon input-group-text"
@@ -25,7 +24,7 @@
                                 <span class="color-white bold filter-chip-text dropdown bring-to-front cursor-pointer"
                                     style="cursor: pointer;" type="button" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"
-                                    ng-class="{'strikeout':filter.disabled}">
+                                    ng-class="{'text-decoration-line-through':filter.disabled}">
                                     <i class="fa fa-cog color-white" aria-hidden="true"></i>
                                     <span ng-if="filter.excludeResult" class="label label-danger border-bottom">{{::('searchDirectiveT.not'|$translate)}}</span>
                                     <span ng-bind="filter.name|lstring:locale" class="text-white"></span>
@@ -61,8 +60,6 @@
                                     </li>
                                 </ul>
                             </span>
-
-
                         </span>
 
 
