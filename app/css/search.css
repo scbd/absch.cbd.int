@@ -32,10 +32,6 @@
 #Search-Filter .search-filter-settings li > a{
     padding-left: 0.25rem;
 }
-.strikeout{
-    text-decoration: line-through;
-    pointer-events: none;
-}
 #Search-Filter .bring-to-front{
     z-index: 1000000;
 }
