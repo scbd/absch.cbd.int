@@ -8,11 +8,11 @@
                         <span ng-if="filter.type" class="btn-group filter-chip"
                             ng-class="{'exclude-filter':filter.excludeResult}"
                             class="text-white border bg-transparent">
-                            <span class="filter-chip-text dropdown bring-to-front p-2 border rounded">
-                                <span ng-if="filter.edit" class="input-group edit">
+                            <span class="filter-chip-text dropdown bring-to-front d-flex border rounded">
+                                <span ng-if="filter.edit" class="input-group edit m-2 bg-light">
                                     <input type="textbox" ng-model="filter.editValue"
                                         ng-keydown="onKeyDown($event, filter)" class="form-control form-control-small">
-                                    <span class="btn btn-sm bold filter-chips-edit-addon input-group-text"
+                                    <span class="btn btn-sm bold filter-chips-edit-addon input-group-text ps-3"
                                         title="{{::('searchDirectiveT.saveFilter'|$translate)}}" ng-click="onEditFreeTextFilterDone(filter)">
                                         <i class="fa fa-check"></i>
                                     </span>
@@ -21,7 +21,7 @@
                                         <i class="fa fa-times"></i>
                                     </span>
                                 </span>
-                                <span class="color-white bold filter-chip-text dropdown bring-to-front cursor-pointer"
+                                <span class="color-white bold filter-chip-text dropdown bring-to-front cursor-pointer p-2"
                                     style="cursor: pointer;" type="button" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"
                                     ng-class="{'text-decoration-line-through':filter.disabled}">
