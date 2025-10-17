@@ -262,5 +262,12 @@ export const categories = [
         "identifier": "619c55430c1ff000011c1c2c"
       }
     ]
-  }
+  },
+  {
+    "title": categoryTitle.webinars,
+    "adminTags": [
+      "webinars"
+    ],
+    "articles": []
+  },
 ]
