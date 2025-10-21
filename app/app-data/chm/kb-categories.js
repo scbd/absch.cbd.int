@@ -89,12 +89,5 @@ export const categories = [
       "chm-related-articles"
     ],
     "articles": []
-  },
-  {
-    "title": categoryTitle.webinars,
-    "adminTags": [
-      "webinars"
-    ],
-    "articles": []
-  },
+  }
 ]
