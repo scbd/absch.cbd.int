@@ -41,6 +41,13 @@ export const categories = [
     ]
   },
   {
+    "title": categoryTitle.webinars,
+    "adminTags": [
+      "webinars"
+    ],
+    "articles": []
+  },
+  {
     "title": categoryTitle.gettingStarted,
     "adminTags": [
       "getting-started"
@@ -234,13 +241,6 @@ export const categories = [
     "title": categoryTitle.donors,
     "adminTags": [
       "donors"
-    ],
-    "articles": []
-  },
-  {
-    "title": categoryTitle.webinars,
-    "adminTags": [
-      "webinars"
     ],
     "articles": []
   },
