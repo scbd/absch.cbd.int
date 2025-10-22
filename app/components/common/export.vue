@@ -262,7 +262,7 @@
     }
     const exportRecords = async () => {
         loading.value   = true; 
-        let fileName    = props.fileName||`${realm.uIdPrefix}-${schema}-${new Date().getTime().toString(36)}.${downloadFormat.value}`
+        let fileName    = props.fileName||`${realm.uIdPrefix}-${schema || 'generic'}-${new Date().getTime().toString(36)}`
         try
         {
             if(isGeneric.value){
