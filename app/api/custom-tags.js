@@ -30,18 +30,18 @@ export default class KmDocumentApi extends ApiBase
 
     async getDocumentsWithTags(params){
         return [
-            { "identifier": "xyz-abc-123", "title": "Test CNA Title 1", "schema":"Competent National Authority (CNA)",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
-            { "identifier": "xyz-abc-123", "title": "Test CNA Title 2", "schema":"Competent National Authority (CNA)",  "adminTags": [ "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
-            { "identifier": "xyz-abc-123", "title": "Test CNA Title 3", "schema":"Competent National Authority (CNA)",  "adminTags": [ "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
-            { "identifier": "xyz-abc-123", "title": "Test CNA Title 4", "schema":"Competent National Authority (CNA)",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
-            { "identifier": "xyz-abc-123", "title": "Test CNA Title 5", "schema":"Competent National Authority (CNA)",  "adminTags": [ "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
-            { "identifier": "xyz-abc-123", "title": "Test CNA Title 6", "schema":"Competent National Authority (CNA)",  "adminTags": [ "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "Test CNA Title 1", "schema":"cna",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "Test CNA Title 2", "schema":"cna",  "adminTags": [ "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "Test CNA Title 3", "schema":"cna",  "adminTags": [ "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "Test CNA Title 4", "schema":"cna",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "Test CNA Title 5", "schema":"cna",  "adminTags": [ "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "Test CNA Title 6", "schema":"cna",  "adminTags": [ "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
             
-            { "identifier": "xyz-abc-123", "title": "LAW Title 1", "schema":"Biosafety Laws, Regulations, Guidelines and Agreements (LAW)",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
-            { "identifier": "xyz-abc-123", "title": "LAW Title 2", "schema":"Biosafety Laws, Regulations, Guidelines and Agreements (LAW)", "adminTags": ["Info", "Intro"] },
-            { "identifier": "xyz-abc-123", "title": "LAW Title 3", "schema":"Biosafety Laws, Regulations, Guidelines and Agreements (LAW)", "adminTags": ["BCH", "CHM"] },{ "identifier": "xyz-abc-123", "title": "LAW Title 1", "schema":"Biosafety Laws, Regulations, Guidelines and Agreements (LAW)",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
-            { "identifier": "xyz-abc-123", "title": "LAW Title 4", "schema":"Biosafety Laws, Regulations, Guidelines and Agreements (LAW)", "adminTags": ["Info", "Intro"] },
-            { "identifier": "xyz-abc-123", "title": "LAW Title 5", "schema":"Biosafety Laws, Regulations, Guidelines and Agreements (LAW)", "adminTags": ["BCH", "CHM"] },
+            { "identifier": "xyz-abc-123", "title": "LAW Title 1", "schema":"law",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "LAW Title 2", "schema":"law", "adminTags": ["Info", "Intro"] },
+            { "identifier": "xyz-abc-123", "title": "LAW Title 3", "schema":"law", "adminTags": ["BCH", "CHM"] },{ "identifier": "xyz-abc-123", "title": "LAW Title 1", "schema":"law",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
+            { "identifier": "xyz-abc-123", "title": "LAW Title 4", "schema":"law", "adminTags": ["Info", "Intro"] },
+            { "identifier": "xyz-abc-123", "title": "LAW Title 5", "schema":"law", "adminTags": ["BCH", "CHM"] },
 
             { "identifier": "xyz-abc-123", "title": "Sample Title 1", "schema":"Capacity Development Initiatives (CDI)",  "adminTags": ["Submit", "Home", "Info", "Intro", "CHM", "BCH", "ABSCH", "ZYX", "TEST", "HUMPTY", "DUMPTY"] },
             { "identifier": "xyz-abc-123", "title": "Sample Title 2", "schema":"Capacity Development Initiatives (CDI)", "adminTags": ["Info", "Intro"] },

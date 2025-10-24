@@ -1,12 +1,12 @@
 <template>
   <div id="multiSelect" class="d-inline">
 
-    <a rel="noopener" href="#" class="plain-text"  @click="openModal">
-      <i class="fa fa-tag" aria-hidden="true"></i>
+    <button type="button" class="border-0 bg-transparent p-0 text-body" @click="openModal">
+      <i class="bi bi-tag-fill"></i>
       <slot>{{ t("addTags") }}</slot>
-    </a>
+    </button>
 
-    <div class="modal fade" ref="multiSelectModal" data-backdrop="static" tabindex="-1" aria-hidden="true" id="share-modal">
+    <div class="modal fade" ref="multiSelectModal" tabindex="-1" aria-hidden="true" id="share-modal">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-  import { ref, onMounted, shallowRef, defineProps } from "vue";
+  import { ref, onMounted, shallowRef, defineProps, onBeforeUnmount } from "vue";
   import VueMultiselect from "vue-multiselect";
   import "vue-multiselect/dist/vue-multiselect.css";
   import CustomTagsApi from "~/api/custom-tags.js";
@@ -75,7 +75,6 @@
     documentTitle: { type: String, required: false }
   });
 
-
   const clearError = () => {
     errorMessage.value = "";
   };
@@ -90,7 +89,12 @@
       };
 
       const data = await tagApi.getAdminTags(qs);
-      return data.map(tag => tag.title);
+
+      // Ensure correct array structure
+      if (Array.isArray(data))
+        return data.map(tag => tag.title || tag);
+
+      return [];
     } catch (error) {
       console.error("Error loading tags:", error);
       return [];
@@ -98,16 +102,28 @@
   };
 
   const handleSearch = async (search) => {
-    if (search) {
-      taggingOptions.value = await loadAdminTags(search);
+    try {
+      if (!search) return; // avoid empty calls
+      const tags = await loadAdminTags(search);
+      taggingOptions.value = tags;
+    } catch (error) {
+      console.error("Error searching tags:", error);
     }
   };
 
   const openModal = async () => {
     try {
       errorMessage.value = "";
+      taggingOptions.value = [];
+      taggingSelected.value = [];
+
       const documentTags = await tagApi.getDocumentTags(props.documentId);
-      taggingSelected.value = [...documentTags];
+
+      // ensure consistent format for v-model binding
+      taggingSelected.value = Array.isArray(documentTags)
+        ? documentTags.map(tag => tag.title || tag)
+        : [];
+
       modal.show();
     } catch (error) {
       console.error("Error fetching tags:", error);
@@ -130,8 +146,16 @@
         documentUid: props.documentId,
         adminTags: [...taggingSelected.value]
       };
-      await tagApi.saveTags(payload);
-      closeDialog();
+
+      const response = await tagApi.saveTags(payload);
+
+      // Optional: handle API response validation
+      if (response && response.status === "success") {
+        closeDialog();
+      } else {
+        closeDialog(); // still close modal for UX
+      }
+
     } catch (error) {
       console.error("Error saving tags:", error);
       errorMessage.value = t("failedToSave");
@@ -139,6 +163,11 @@
   };
 
   onMounted(() => {
-    modal = new Modal(multiSelectModal.value);
+    // Bootstrap 5 modal initialization
+    modal = new Modal(multiSelectModal.value, { backdrop: "static", keyboard: true });
+  });
+
+  onBeforeUnmount(() => {
+    modal?.dispose();
   });
 </script>
