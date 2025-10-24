@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "rootDir": "app",
+    "skipLibCheck": true,
+    "noUnusedParameters": false, // Do not allow unused parameters in functions.
+    "noUnusedLocals": false, // Similar to noUnusedParameters, but for local variables.
+    "noUncheckedIndexedAccess": true, // it ensures that indexed access types are checked for undefined values,
+    "esModuleInterop": true, // Enables compatibility with CommonJS modules, allowing default imports from modules with no default export.
+    "noImplicitOverride": true,
+    "noErrorTruncation": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnreachableCode": false
+  },
+  "include": [
+    "app/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]  
+}
+
+
