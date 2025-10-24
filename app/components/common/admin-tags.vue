@@ -54,7 +54,7 @@
 
 <script setup>
   import { ref, onMounted } from "vue";
-  import KmDocumentApi from "~/api/km-document";
+  import CustomTagsApi from "~/api/custom-tags.js";
   import { useI18n } from "vue-i18n";
   import messages from "~/app-text/components/common/add-tags.json";
   import { useAuth } from "@scbd/angular-vue/src/index.js";
@@ -62,7 +62,7 @@
   // import { lstring } from '../../components/kb/filters';
   const { t } = useI18n({ messages });
   const auth = useAuth();
-  const tagApi = new KmDocumentApi({ tokenReader: () => auth.token() });
+  const tagApi = new CustomTagsApi({ tokenReader: () => auth.token() });
 
   const records = ref([]);
   const loading = ref(true);

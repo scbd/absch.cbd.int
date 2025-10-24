@@ -53,7 +53,7 @@
   import { ref, onMounted, shallowRef, defineProps } from "vue";
   import VueMultiselect from "vue-multiselect";
   import "vue-multiselect/dist/vue-multiselect.css";
-  import KmDocumentApi from "~/api/km-document";
+  import CustomTagsApi from "~/api/custom-tags.js";
   import { Modal } from "bootstrap";
   import { useI18n } from "vue-i18n";
   import messages from "~/app-text/components/common/add-tags.json";
@@ -61,7 +61,7 @@
 
   const { t } = useI18n({ messages });
   const auth = useAuth();
-  const tagApi = new KmDocumentApi({ tokenReader: () => auth.token() });
+  const tagApi = new CustomTagsApi({ tokenReader: () => auth.token() });
 
   const multiSelectModal = shallowRef(null);
   let modal = null;
