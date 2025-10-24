@@ -25,7 +25,8 @@
     "lodash-es": "^4.17.21",
     "mime": "1.4.1",
     "path-to-regexp": "^6.2.1",
-    "superagent": "5.0.8"
+    "superagent": "5.0.8",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
@@ -38,9 +39,16 @@
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "eslint": "^9.38.0",
+    "eslint-config-problems": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-vue": "^10.5.1",
     "fs-finder": "^1.8.1",
     "glob": "^7.1.6",
     "glob-to-regexp": "^0.4.1",
+    "globals": "^16.4.0",
+    "jiti": "^2.6.1",
     "rollup": "4.12.0",
     "rollup-plugin-amd": "^4.0.0",
     "rollup-plugin-copy": "^3.5.0",
