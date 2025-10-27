@@ -11,7 +11,7 @@ import '~/views/register/directives/register-top-menu';
 import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/workflow-arrow-buttons';
 import './edit-header';
-import { genericMapping, genericFilter } from '~/services/filters/arrays';
+import { genericMapping, genericFilter } from '~/services/filters/arrays.ts';
 import { onBuildDocumentSelectorQuery } from '~/services/solr/queries.js';
 import { sanitizeDocument } from '~/services/filters/common';
 
