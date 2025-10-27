@@ -1,0 +1,6 @@
+{
+    "selectAll": "Select All",
+    "clearAll": "Clear All",
+    "loading": "Loading...",
+    "loadError": "Failed to load schema options.",
+    "selectSchemas": "Select Schemas"}

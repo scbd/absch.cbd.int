@@ -1,6 +1,35 @@
 ﻿<template>
   <div class="p-3">
     <div class="card shadow-sm p-4 rounded-3">
+
+      <div class="row mb-3 g-2 align-items-end">
+        <div class="col-md-12">
+          <select-schemas v-model="selectedSchemas" />
+        </div>
+      </div>
+
+      <div class="row mb-3 g-2 align-items-end">
+
+       
+
+        <!-- Text Search -->
+        <div class="col-md-4"> 
+            <input
+              v-model="search"
+              type="text"
+              class="form-control"
+              placeholder="Search by title"
+              @keyup.enter="onSearch"
+            /> 
+        </div>
+        <div class="col-md-2"> 
+            <button class="btn btn-primary" type="button" @click="onSearch">
+              <i class="bi bi-search"></i> Search
+            </button> 
+        </div>    
+      </div>
+
+      <!-- Results Table -->
       <div class="table-responsive">
         <table class="table table-hover table-bordered align-middle">
           <thead class="table-light">
@@ -59,11 +88,13 @@
   import messages from "~/app-text/components/common/add-tags.json";
   import { useAuth } from "@scbd/angular-vue/src/index.js";
   import addTags from "./add-tags.vue";
+  import selectSchemas from "./select-schemas.vue";
   // import { lstring } from '../../components/kb/filters';
   const { t } = useI18n({ messages });
   const auth = useAuth();
   const tagApi = new CustomTagsApi({ tokenReader: () => auth.token() });
 
+  const selectedSchemas = ref([]);
   const records = ref([]);
   const loading = ref(true);
 
@@ -82,10 +113,6 @@
 </script>
 
 <style scoped>
-  .w-35 {
-    width: 35%;
-  }
-   .w-15 {
-    width: 15%;
-  }
+.w-35 { width: 35%; }
+.w-15 { width: 15%; }
 </style>
