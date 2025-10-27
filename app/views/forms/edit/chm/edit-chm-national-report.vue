@@ -180,7 +180,7 @@
     import "~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js"
     import messages from '~/app-text/views/forms/edit/chm/edit-chm-national-report.json';
     import { useI18n } from 'vue-i18n';  
-    import { genericMapping, genericFilter } from '~/services/filters/arrays.ts';
+    import { genericMapping, genericFilter } from '~/services/filters/arrays';
     import  { THESAURUS } from '~/services/filters/constant';
     import { sanitizeDocument } from '~/services/filters/common';
     import { useAuth, useRoute } from "@scbd/angular-vue/src/index.js";
