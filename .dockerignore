@@ -9,6 +9,7 @@ app/libs
 .nyc_output
 .vscode
 Dockerfile
+tsconfig.tsbuildinfo
 deploy.sh
 dist
 node_modules
