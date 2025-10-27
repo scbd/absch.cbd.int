@@ -8,6 +8,7 @@ app/libs
 .jshintrc
 .nyc_output
 .vscode
+.rollup.cache
 Dockerfile
 tsconfig.tsbuildinfo
 deploy.sh
