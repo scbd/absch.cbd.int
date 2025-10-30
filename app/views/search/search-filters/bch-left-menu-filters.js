@@ -102,7 +102,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:commonNames_EN_txt,url_ss",
+                "fl": "identifier_s,rec_title:commonNames_EN_ss,url_ss",
                 "fq": [ "schema_s:organism AND commonNames_EN_txt:*"],
                 "searchFields":["commonNames_EN_txt"]
             },
