@@ -443,7 +443,11 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 if(!options.sorting && rawQuery.sort)
                     queryParameters.sort = rawQuery.sort;
                 else if(!$scope.search.keyword || options.sorting){
-                    var sortExpression  = getSortField(rawQuery.fields)
+                    //.split(/\s+/)[0] removes the asc/desc part
+                    //rawQuery.s is using in BCH and rawQuery.sort is used in ABS
+                    var sortExpression = (rawQuery.s ? rawQuery.s.split(/\s+/)[0] : null)
+                                        || (rawQuery.sort ? rawQuery.sort.split(/\s+/)[0] : null)
+                                        || getSortField(rawQuery.fields);
                     var sortSequence    = $scope.search.sortSequence||' asc';
 
                     if(!sortExpression){
