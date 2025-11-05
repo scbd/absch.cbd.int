@@ -1,0 +1,14 @@
+{
+    "generalInfo": "General Information",
+    "languageToPublish": "Please select in which language(s) you wish to submit this record:",
+    "country": "Country",
+    "selectOption": "Please select a country...",
+    "additionalInformation": "Additional information for the country profile",
+    "relevantInformationInfo": "Please use this field to provide any relevant additional information that will appear as part of your country profile.",
+    "notes": "Notes",
+    "notesInfo": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.",
+    "countryProfile": "Country Profile for Biosafety Clearing-House",
+    "countryProfileInfo": "Only one country profile record is allowed in the Biosafety Clearing-House for each government. The country profile for your government already exists in the Biosafety Clearing-House. You will be redirected to that record in",
+    "seconds": "seconds.",
+    "redirectNow": "Redirect now"
+}

@@ -1,0 +1,13 @@
+{
+    "generalInfo": "General Information",
+    "country": "Country",
+    "title": "Title",
+    "summary": "Summary or abstract",
+    "jurisdiction": "Area of jurisdiction:",
+    "relevantMeasures": "Relevant ABS Measure(s):",
+    "keywords": "Keywords",
+    "thematicArea": "Thematic area(s):",
+    "attachments": "Attached files, documents, or resources",
+    "addInfo":   "Additional information",
+    "links": "Links or attached files or documents"
+}

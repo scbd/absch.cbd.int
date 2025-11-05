@@ -1,0 +1,11 @@
+{
+    "resistanceDiseasesAndPests": "Resistance to diseases and pests",
+    "resistanceToHerbicides": "Resistance to herbicides",
+    "resistanceToAtibiotics": "Resistance to antibiotics",
+    "toleranceToAbioticStress": "Tolerance to abiotic stress",
+    "changesInPhysiology": "Changes in physiology and/or production",
+    "changesInQualityContent": "Changes in quality and/or metabolite content",
+    "productionOfMedical": "Production of medical or pharmaceutical compounds (human or animal)",
+    "useInIndustrialApplications": "Use in industrial applications",
+    "engineeredApplication": "Engineered gene drive application"
+}

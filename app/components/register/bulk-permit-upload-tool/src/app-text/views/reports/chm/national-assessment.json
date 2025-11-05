@@ -1,0 +1,20 @@
+{
+    "generalInformation": "General information",
+    "country": "Country",    
+    "targets": "Targets",
+    "categoryOfProgressTowardsTheImplementationOfTheSelectedTarget":  "Category of progress towards the implementation of the selected target",
+    "rateOfProgressesTowardTheImplementationOfTheSelectedTarget":  "Rate of progresses toward the implementation of the selected target",
+    "dateTheAssessmentWasDone":  "Date the assessment was done",
+    "summaryOfTheAssessmentOfProgressesTowardTheImplementationOfTheSelectedTarget":"Summary of the assessment of progresses toward the implementation of the selected target",
+    "indicatorsAndActivities": "Indicators and Activities",
+    "indicatorsUsedInThisAssessment":"Indicator(s)used in this assessment",    
+    "anyOtherToolsOrMeansUsedForAssessingProgress":"Any other tools or means used for assessing progress",
+    "relevantWebsitesLinksAndFiles":"Relevant websites, links, and files",
+    "levelOfConfidence":"Level of confidence",
+    "levelOfConfidenceOfTheAboveAssessment": "Level of confidence of the above assessment",
+    "adequacyOfMonitoringInformationToSupportAssessment": "Adequacy of monitoring information to support assessment",
+    "monitoringSystemForTheTarget":"Monitoring system for the target",
+    "otherRelevantWebsiteAddressOrAttachedDocuments":"Other relevant website address or attached documents"
+}
+
+

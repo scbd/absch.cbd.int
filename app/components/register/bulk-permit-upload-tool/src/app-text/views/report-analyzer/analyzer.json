@@ -1,0 +1,12 @@
+{
+    "report": "Report:",
+    "analysis": "Analysis:",
+    "breakdownCbdRegions": "Breakdown by CBD regions",
+    "selectCountries": "Select countries",
+    "selectRegions": "Select regions",
+    "breakdownProtocolParties": "Breakdown by Protocol Parties",
+    "breakdownProtocolNonParties": "Breakdown by Protocol Non-Parties",
+    "nationalReportAnalyzer": "National report analyzer",
+    "nationalReportAnalyzerInfo": "This tool allows you to select specific sections or questions of the report and to display the results by country/region.",
+    "analyze": "Analyze"
+}
