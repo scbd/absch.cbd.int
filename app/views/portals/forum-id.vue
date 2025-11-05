@@ -112,7 +112,6 @@
       <simple-modal v-if="hasHelp" ref="refHelpModal" :title="lstring(helpArticle?.title)">
         <cbd-article :article="helpArticle" :show-cover-image="true" :show-edit="false"  />
       </simple-modal>
-
     </div>
 
     <loading v-if="loading" />
