@@ -27,23 +27,44 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         resourceTypes      : function() {return thesaurusService.getDomainTerms('resourceTypesVlr');},
         gbfGoalsTargets      : function() {return thesaurusService.getDomainTerms('gbfGoalsTargets');},
         cbdSubjects      : function() {return thesaurusService.getDomainTerms('cbdSubjects');},
-        mainstreamingBiodiversity : function() {
-                                return thesaurusService.getDomainTerms('cbdSubjects').then(function(o) {					
-                                    return _.filter(o, function(item){
-                                        return _.includes(item.broaderTerms, 'CBD-SUBJECT-CROSS-CUTTING') // Todo: update
-                                    });
-                                });
-                            },
-        financialResourcesMechanism : function() {
-                                return thesaurusService.getDomainTerms('cbdSubjects').then(function(o) {					
-                                    return _.filter(o, function(item){
-                                        return _.includes(item.broaderTerms, 'CBD-SUBJECT-BIOMES') // Todo: update
-                                    });
-                                });
-                            },
+        crossCuttingIssues : function(subjectOptions) { 
+            console.log("subjectOptions:", subjectOptions)
+           return thesaurusService.getDomainTerms('cbdSubjects')
+                      .then(function(o){
+                      var subjects = subjectOptions || ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
+                      var items = [];
+                        _.forEach(subjects, function(subject) {
+                          var term = _.find(o, {'identifier': subject } );
+                          items.push(term);
+                          _(term.narrowerTerms).forEach(function (term) {
+                            items.push(_.find(o, {'identifier':term}));
+                          })
+                        });
+                        return items;
+                      });
+                    },
 
     });
+  $scope.crossCutting = {};
+    $scope.selectedSubjects = [];
+    $scope.crossCuttingTerms = []; // holds resolved list
 
+    $scope.updateCrossCutting = function () {
+      $scope.selectedSubjects = [];
+
+      angular.forEach($scope.crossCutting, function (isChecked, key) {
+        if (isChecked) $scope.selectedSubjects.push(key);
+      });
+
+      // Load terms whenever checkboxes change
+      if ($scope.selectedSubjects.length) {
+        $scope.options.crossCuttingIssues($scope.selectedSubjects).then(function (items) {
+          $scope.crossCuttingTerms = items;
+        });
+      } else {
+        $scope.crossCuttingTerms = [];
+      }
+};
     $scope.onContactQuery = function(searchText){
       
       var queryOptions = {

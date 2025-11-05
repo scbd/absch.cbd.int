@@ -219,31 +219,42 @@
 									</div>
 
                                     <hr class="mb-4">
-                                    <div class="row">
-										<div  class="col-xs-12">
-											<div class="km-control-group" caption="{{::('editsubmissionT.crossCuttingIssues'|$translate)}}">
-												<div>		
-													<input type="checkbox" id="mainstreamingBiodiversity" ng-model="document.mainstreamingBiodiversity" name="mainstreamingBiodiversity" />
-													<label for="mainstreamingBiodiversity" class="light-label">
-														{{::('editsubmissionT.mainstreamingBiodiversity'|$translate)}}
-													</label>	
-												</div>
-												<div>													
-													<input name="financialResourcesMechanism" id="financialResourcesMechanism" ng-model="document.financialResourcesMechanism" type="checkbox" /> 
-													<label for="financialResourcesMechanism" class="light-label">
-														<span>{{::('editsubmissionT.financialResourcesMechanism'|$translate)}}</span>
-													</label>
-												</div>
-											</div>
-											
-											<div class="km-control-group" name="crossCuttingIssues" caption="{{::('editsubmissionT.cbdSubjectsInfo'|$translate)}}" 
-												ng-if="document.mainstreamingBiodiversity">
-												<div km-term-check tabular-shape="true" name="crossCuttingIssues" ng-model="document.crossCuttingIssues"  terms="options.mainstreamingBiodiversity()"
-															binding-type="term[]" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
+                                    
 
+                                    <div class="row">
+                                        <div class="col-xs-12">
+
+                                            <!-- Two checkboxes -->
+                                            <div class="km-control-group" caption="Cross Cutting Issues">
+                                            <label>
+                                                <input type="checkbox"
+                                                    ng-model="crossCutting['CBD-SUBJECT-BIOMES']"
+                                                    ng-change="updateCrossCutting()" />
+                                                a.	Mainstreaming Biodiversity 
+                                            </label>
+
+                                            <label>
+                                                <input type="checkbox"
+                                                    ng-model="crossCutting['CBD-SUBJECT-CROSS-CUTTING']"
+                                                    ng-change="updateCrossCutting()" />
+                                                b.	Financial Resources and Mechanism
+                                            </label>
+                                            </div>
+
+                                            <!-- Show list when at least one is checked -->
+                                             selectedSubjects : {{selectedSubjects}}
+                                            <div class="km-control-group" ng-if="crossCuttingTerms.length">
+                                                <div km-term-check
+                                                    name="crossCuttingIssues"
+                                                    ng-model="document.crossCuttingIssues"
+                                                    terms="crossCuttingTerms"
+                                                    binding-type="term[]"
+                                                    locales="document.header.languages">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
 
 
                                     
