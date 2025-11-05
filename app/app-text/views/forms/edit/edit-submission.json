@@ -18,5 +18,12 @@
     "relevantInformationInfo": "Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.",
     "notes": "Notes",
     "notesInfos": "The “Notes” field is for your personal use. It can only be seen when the record is being edited but is not visible when the record is published. This field is not meant to be used for confidential information.",
-    "selectOne": "Please select one of the following:"
+    "selectOne": "Please select one of the following:",
+    "typeOfResource": "Type of resource",
+    "typeOfResourceInfo": "Select as many options as needed in order to best describe the resource(s)",
+    "metadataTitle": "Submission metadata",
+    "gbfKeywords": "GBF keywords (GBF targets and GBF goals)",
+    "gbfKeywordsInfo": "Select as many options as needed in order to best describe the record",
+    "cbdSubjects": "CBD subject areas",
+    "cbdSubjectsInfo": "Select as many options as needed in order to best describe the record"
 }
