@@ -19,6 +19,8 @@ COPY . ./
 
 RUN git restore-mtime --force
 
+ENV NODE_OPTIONS='--max-old-space-size=4096'
+
 RUN yarn install --ignore-scripts --prefer-offline && \
     yarn cache clean && \
     rm -rf /usr/src/app/.git \
