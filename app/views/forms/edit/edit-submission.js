@@ -12,6 +12,7 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
     translationService.set('editsubmissionT', editsubmissionT);
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
+    $scope.isChm = realm.is('CHM');
 
     $scope.notificationQuery = {
         q   : "schema_s:notification",
@@ -22,7 +23,10 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
 
     _.extend($scope.options, { 
         bchThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'}); },
-        absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');} 
+        absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');},
+        resourceTypes      : function() {return thesaurusService.getDomainTerms('resourceTypesVlr');},
+        gbfGoalsTargets      : function() {return thesaurusService.getDomainTerms('gbfGoalsTargets');},
+        cbdSubjects      : function() {return thesaurusService.getDomainTerms('cbdSubjects');},
     });
 
     $scope.onContactQuery = function(searchText){
