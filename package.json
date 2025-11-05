@@ -11,6 +11,7 @@
     "@scbd/angular-vue": "https://github.com/scbd/angular-vue.git#ng-vue-3",
     "@scbd/common": "^0.0.10",
     "axios": "^1.6.8",
+    "bootstrap": "5.3.8",
     "cheerio": "1.0.0-rc.3",
     "compression": "1.7.4",
     "cookie-parser": "1.4.3",
