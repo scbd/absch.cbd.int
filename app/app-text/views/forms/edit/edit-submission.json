@@ -25,5 +25,9 @@
     "gbfKeywords": "GBF keywords (GBF targets and GBF goals)",
     "gbfKeywordsInfo": "Select as many options as needed in order to best describe the record",
     "cbdSubjects": "CBD subject areas",
-    "cbdSubjectsInfo": "Select as many options as needed in order to best describe the record"
+    "cbdSubjectsInfo": "Select as many options as needed in order to best describe the record",
+    "crossCuttingIssues": "Cross Cutting Issues",
+    "crossCuttingIssuesInfo": "Select as many options as needed in order to best describe the record",
+    "mainstreamingBiodiversity": "a. Mainstreaming Biodiversity",
+    "financialResourcesMechanism": "b. Financial Resources and Mechanism"
 }

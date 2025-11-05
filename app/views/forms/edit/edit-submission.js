@@ -27,6 +27,21 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         resourceTypes      : function() {return thesaurusService.getDomainTerms('resourceTypesVlr');},
         gbfGoalsTargets      : function() {return thesaurusService.getDomainTerms('gbfGoalsTargets');},
         cbdSubjects      : function() {return thesaurusService.getDomainTerms('cbdSubjects');},
+        mainstreamingBiodiversity : function() {
+                                return thesaurusService.getDomainTerms('cbdSubjects').then(function(o) {					
+                                    return _.filter(o, function(item){
+                                        return _.includes(item.broaderTerms, 'CBD-SUBJECT-CROSS-CUTTING') // Todo: update
+                                    });
+                                });
+                            },
+        financialResourcesMechanism : function() {
+                                return thesaurusService.getDomainTerms('cbdSubjects').then(function(o) {					
+                                    return _.filter(o, function(item){
+                                        return _.includes(item.broaderTerms, 'CBD-SUBJECT-BIOMES') // Todo: update
+                                    });
+                                });
+                            },
+
     });
 
     $scope.onContactQuery = function(searchText){
