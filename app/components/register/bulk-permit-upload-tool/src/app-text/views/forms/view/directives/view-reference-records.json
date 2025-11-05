@@ -1,0 +1,14 @@
+{
+    "recordsReferencing": "Records referencing this document",
+    "showInSearch": "Show in search",
+    "recordType": "Record type",
+    "field": "Field",
+    "records": "Record(s)",
+    "hide": "Hide",
+    "show": "Show",
+    "country": "Country",
+    "title": "Title",
+    "updatedOn": "Updated on",
+    "noRecords":"This record is not referenced in other record(s)",
+    "showInSubmissions":"Show in submissions"
+}

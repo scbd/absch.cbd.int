@@ -1,0 +1,14 @@
+{
+    "overview": "Overview",
+    "report": "Report",
+    "deadline": "Deadline",
+    "numberOfParties": "Number of Parties",
+    "atTheDeadline": "at the deadline",
+    "byParties": "By Parties*",
+    "byNonParties": "By Non-Parties*",
+    "total": "Total",
+    "partyStatusReport": "Party status at the date of the deadline for submission of the report",
+    "nationalReportAnalyzer": "National report analyzer",
+    "nationalReportAnalyzerInfo": "This tool allows you to select specific sections or questions of the report and to display the results by country/region.",
+    "analyze": "Analyze"
+}

@@ -1,0 +1,21 @@
+{
+    "generalInfo": "General information",
+    "title":  "Title",
+    "name": "Name of genetic element",
+    "synonymNames": "Alternate genetic element name(s) (synonym(s))",
+    "abbreviation": "Abbreviation",
+    "category": "Category",
+    "isSynthetic": "Is this genetic element a synthetic molecule?",
+    "yes":  "Yes",
+    "no": "No",
+    "donorOrganism": "Donor organism",
+    "donorOrganisms": "Donor organism(s)",
+    "donorOrganismCollectionPoint": "Point of collection or acquisition of the donor organism(s)",
+    "geographicCoordinates": "Geographic coordinates",
+    "characteristicsSequence": "Characteristics of the protein coding sequence",
+    "proteinName": "Name of the protein expressed by the coding sequence",
+    "biologicalFunction": "Biological function of the protein",
+    "traits": "Related trait(s) or use(s) in biotechnology",
+    "additionalInformation": "Additional Information",
+    "anyOtherInformation": "Other relevant website addresses and/or attached documents"
+}

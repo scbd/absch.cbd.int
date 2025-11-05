@@ -1,0 +1,11 @@
+{
+    "sessionExpired": "Session Expired.",
+    "sessionHasExpired": "Your session has expired, please log-in to continue.",
+    "loginFailed": "Login failed.",
+    "incorrectMsg": "The email address and password combination you entered is incorrect.",
+    "operationFailed": "Operation failed.",
+    "serviceNotAvailable": "The service is not available. Please try again later.",
+    "signInAccount": "Sign in to your account",
+    "forgotPassword": "Forgot password?",
+    "createAccount": "Create an account"
+}

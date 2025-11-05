@@ -1,0 +1,15 @@
+{
+    "generalInfo": "General Information",
+    "country":  "Country",
+    "checkpointName": "Name of the checkpoint",
+    "cpResponsibilities":  "Checkpoint Responsibilities",
+    "stage": "Stage at which information is collected or received",
+    "jurisdiction": "Area of jurisdiction",
+    "authority": "Authority/ies to receive courtesy copies of checkpoint communiqués",
+    "authorityInfo": "The contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint.",
+    "allCnaOne": "All Competent National Authorities designated for",
+    "allCnaTow": "have been selected to automatically receive checkpoint communiqués by email published from this checkpoint.",
+    "noAddAuthorities": "No additional authorities have been selected to receive the automatic email copies of checkpoint communiqués published from this checkpoint.",
+    "additionalInformation": "Additional Information",
+    "relevantLinks": "Other relevant links or attached documents"
+}

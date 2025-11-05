@@ -1,0 +1,20 @@
+{
+    "registries": "Registries",
+    "geneticElementRegistry": "Genetic Element Registry",
+    "lmoTitle": "LMO Registry",
+    "organismRegistry": "Organism Registry",
+    "lmoRegistry": "Living Modified Organism (LMO) Registry",
+    "lmoInfo": "The LMO Registry provides summary information on all living modified organisms registered in the BCH, including transformation events, genetic modifications and the",
+    "uniqueCode": "unique identification code",
+    "lmoLink": "(if available) for each record. Links to all decisions and risk assessment reports that refer to these organisms are accessible through the records in the registry.",
+    "clickHere": "Click <a class='text-decoration-underline' rel='noopener' translation-url href='/search?currentPage=1&schema=modifiedOrganism'>here</a> to perform an in-depth search of all LMO records available in this Registry.",
+    "loading": "Loading...",
+    "error": "Error loading registry records, please try again.",
+    "totalRecords": "Total records:",
+    "export": "Export",
+    "recordID": "Record ID",
+    "name": "Unique identification",
+    "identity": "Identity & transformation event",
+    "organism": "Organism",
+    "description": "Description"
+}

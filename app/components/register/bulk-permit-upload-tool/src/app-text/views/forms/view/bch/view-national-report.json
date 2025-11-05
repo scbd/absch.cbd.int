@@ -1,0 +1,14 @@
+{
+    "generalInfo": "General Information",
+    "contactPerson": "Contact person submitting the report",
+    "country": "Country",
+    "organizationsStakeholders": "Organizations/stakeholders who were consulted or participated in the preparation of this report",
+    "timePeriod": "Time period covered by this report",
+    "submissionDate": "Date of submission",
+    "from": "From",
+    "to": "To",
+    "q005_title": "If your country is not a Party to the Cartagena Protocol on Biosafety, is there any national process in place towards becoming a Party?",
+    "q006_title": "Please use the space below to provide any further details:",
+    "seconds": "seconds.",
+    "redirectNow": "Redirect now"
+}

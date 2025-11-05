@@ -1,0 +1,16 @@
+{
+  "buttonEdit" : "Edit",
+  "buttonPinThread" : "Pin",
+  "buttonUnpinThread" : "Unpin",
+  "buttonOpenThread" : "Open",
+  "buttonCloseThread" : "Close",
+  "buttonDeletePost" : "Delete",
+  "buttonReplyToPost" : "Reply",
+  "buttonReplyToMainThread" : "Reply to the main topic",
+  "buttonReplyToPerson" : "Reply to {name}",
+  "buttonSignInToReply" : "Sign-in to reply",
+  "replyToId" : "This is a reply to # {postId}",
+  "titleAttachments" : "Attachment(s)",
+  "replies" : "1 reply | {count} replies",
+  "notAllowedToPost" : "Sorry you are not allowed to post to this forum."
+}

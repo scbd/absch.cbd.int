@@ -1,0 +1,22 @@
+{
+    "admin": "Admin",
+    "viewList": "View list of records reported by users",
+    "manageReportedRecords": "Manage Reported Records",
+    "commonIssues": "Common Issues",
+    "commonAbschIssues": "Common ABSCH Issues",
+    "manageWorkflowRecords": "Manage Workflow Records",
+    "viewStatus": "View ABSCH records workflow status",
+    "multipleFilters": "View ABSCH counts with graph option and mutiple filters",
+    "reportCounts": "Report counts",
+    "viewIrrcCount": "View IRCC count",
+    "irrcCounts": "IRCC counts",
+    "viewCountries": "View countries with/without ABSCH roles",
+    "userRoleReport": "User Role Report",
+    "viewEmailList": "View list of users using the email subscription.",
+    "subscriptions": "Subscriptions",
+    "viewClientError": "View client side errors",
+    "errorLogs": "Error Logs",
+    "validateTranslation": "Validate translation",
+    "enable": "Enable",
+    "disable": "Disable"
+}

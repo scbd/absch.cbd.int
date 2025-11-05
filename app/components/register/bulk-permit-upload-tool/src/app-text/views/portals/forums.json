@@ -1,0 +1,21 @@
+{
+   "tableOfContents": "Table of Contents",
+   "buttonForumProperties": "Forum properties",
+   "buttonSubscribe": "Subscribe to mailing list",
+   "buttonUnsubscribe": "Unsubscribe from mailing list",
+   "buttonHelp" : "Help",
+   "buttonCreateThread" : "New Topic",
+   "buttonReadPost": "Read the post »",
+   "buttonReadReply": "Read the reply »",
+   "buttonReadReplies": "Read the {count} replies »",
+   "linkNoReplies": "No replies",
+   "linkOneReply": "One reply",
+   "linkXReplies": "{count} replies",
+   "forumIsClosedForComments" : "This forum is closed for comments.",
+   "threadIsClosedForComments" : "This thread is closed for comments.",
+   "pinnedThread" : "This post is pinned to remain at the top of the thread list",
+   "LastReplyOn" : "Last reply {datetime}",
+   "LastReplyBy" : "by {name}",
+   "loading" : "Loading...",
+   "refreshing" : "Refreshing..."
+}

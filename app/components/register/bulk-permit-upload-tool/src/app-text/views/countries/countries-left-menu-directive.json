@@ -1,0 +1,12 @@
+{
+    "countryInformation": "Country Information",
+    "map": "Map",
+    "selectCountry": "Select a country",
+    "filterByStatus":  "Filter by Nagoya Protocol Party Status",
+    "all":  "All",
+    "party":    "Party",
+    "nonParty":    "Non-Party",
+    "filterByRecordTypes": "Filter Country by Record Types",
+    "countries": "Countries",
+    "records": "Records"
+}

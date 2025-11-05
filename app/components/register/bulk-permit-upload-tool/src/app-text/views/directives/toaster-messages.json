@@ -1,0 +1,8 @@
+﻿{
+"draftSaveMessage"   : "Your record has been saved as a draft",
+"closeWithoutSaving"    : "Your record has been closed without saving.",
+"publishRequestedSCBD"  : "Record saved. A publishing request has been sent to your SCBD.",
+"publishRequestedABS"    : "Record saved. A publishing request has been sent to your Publishing Authority.",
+"publishRequestedBCH"    : "Record saved. A publishing request has been sent to your BCH-NFP.",
+"recordPublished"       : "Record published. The record will be now publicly accessible on the Clearing-House."  
+}

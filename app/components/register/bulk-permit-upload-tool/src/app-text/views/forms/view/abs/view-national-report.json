@@ -1,0 +1,9 @@
+{
+    "generalInfo": "General Information",
+    "country": "Country",
+    "timePeriod": "Time period covered by this report",
+    "from": "From",
+    "to": "To",
+    "seconds": "seconds.",
+    "redirectNow": "Redirect now"
+}

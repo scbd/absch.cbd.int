@@ -1,0 +1,23 @@
+{
+    "freeText":"Free text",    
+    "keywords":"Keywords",
+    "chmKeywords":"CHM keywords",    
+    "contactType":"Type", 
+    "provider": "Provider",
+    "typesOFResource": "Type(s)",
+    "languageOfResource": "Language",
+    "aichiTargets": "Aichi Targets",
+    "cbdSubjectAreas": "CBD subject areas",
+    "chmKeyAreas": "CHM key areas",
+    "contactOrganizationType":"Organization type",
+    "contactAddressCountry":"Country address",
+    "focalPointAdditionalResponsibilities":"Additional responsibilities",    
+    "publicationDate":"Publication date",
+    "cbiGeographicScope":"Geographic scope",
+    "cbiStatus":"Status",
+    "cbiCats":"Category(ies) of capacity development activities",
+    "cbiAudience":"Main target group(s)/beneficiary(ies)",
+    "cbiTAkeyAreas":"Thematic Areas",
+    "cbiFundingSrc":"Type(s) of funding source(s)"   
+  }
+  

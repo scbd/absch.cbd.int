@@ -1,0 +1,9 @@
+{
+    "keywords": "keywords selected.",
+    "search": "Search the list (min 3 chars to begin search)",
+    "keywordNotFound": "Keyword not found.",
+    "clearSelection": "Clear selection",
+    "loading": "Loading...",
+    "pleaseSpecify": "Please specify",
+    "otherElement": "other element"
+}
