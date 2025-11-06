@@ -120,6 +120,28 @@
                 </div>
             </div>
 
+            <div class="col-md-12" ng-if="document.resourceTypes">
+                <label>{{::('viewSubmissionT.resourceTypes'|$translate)}}</label>
+                <div class="km-value" compare-val="resourceTypes">
+					<view-terms-hierarchy ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
+				</div>
+            </div>
+
+            <div class="col-md-12" ng-if="document.gbfGoalsTargets">
+                <label>{{::('viewSubmissionT.gbfGoalsTargets'|$translate)}}</label>
+                <div class="km-value" compare-val="gbfGoalsTargets">
+					<view-terms-hierarchy ng-model="document.gbfGoalsTargets" locale="locale" term-domain="gbfGoalsTargets"></view-terms-hierarchy>
+				</div>
+            </div>
+
+
+            <div class="col-md-12" ng-if="document.cbdSubjects">
+                <label>{{::('viewSubmissionT.cbdSubjects'|$translate)}}</label>
+                <div class="km-value" compare-val="cbdSubjects">
+					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
+				</div>
+            </div>
+
             <div class="col-md-12">
                 <div ng-show="document.relevantDocuments">
                     <legend>{{::('viewSubmissionT.documents'|$translate)}}</legend>
