@@ -1,27 +1,20 @@
 import Schema from './schema'
-import type { IIRCCDocumentMap, IDocumentMap } from './types'
+import type { IIRCCDocumentAttributes, IContactFields } from '../../../utilities/xlsx-file-to-document-attributes/types'
 
 export default class IrccSchema extends Schema {
-  getDocumentMap (): IIRCCDocumentMap {
-    return {
-      ...super.getDocumentMap(),
-      absCNA: 'C',
-    }
-  }
-
   async parseXLSXFileToDocumentJson () {
-    const map: IDocumentMap = this.mapXLSXFileDataToAttributeNames(this.getDocumentMap())
-    const sheet :IIRCCDocumentMap = map as IIRCCDocumentMap
+    const sheet :IIRCCDocumentAttributes = this.xlsxFileData as IIRCCDocumentAttributes
+    const schema = IrccSchema
     return {
       header: {
         identifier: 'CB51626B-CF45-2AA0-3A24-459669DDCC34',
       },
       schema: 'absPermit',
       languages: [
-        this.getLanguageCode(sheet.language)
+        schema.getLanguageCode(sheet.language)
       ],
       absCNA: {
-        identifier: this.getDocumentIdentifierByUid(sheet.absCNA)
+        identifier: schema.getDocumentIdentifierByUid(sheet.absCNA)
       },
       title: sheet.title,
       referenceToNationalPermit: {
@@ -30,16 +23,16 @@ export default class IrccSchema extends Schema {
       dateOfIssuance: sheet.dateOfIssuance,
       providers: [
         {
-          identifier: this.getProviderIdentifier(sheet.provider)
+          identifier: schema.getProviderIdentifier(sheet.provider as IContactFields)
         }
       ],
-      providersConfidential: this.getIsConfidential(sheet.provider.type),
+      providersConfidential: schema.getIsConfidential(sheet.provider as IContactFields),
       entitiesToWhomPICGranted: [
         {
-          identifier: this.getDocumentIdentifier(sheet.pic)
+          identifier: schema.getDocumentIdentifier(sheet.pic as IContactFields)
         }
       ],
-      entitiesToWhomPICGrantedConfidential: this.getIsConfidential(sheet.pic.type),
+      entitiesToWhomPICGrantedConfidential: schema.getIsConfidential(sheet.pic as IContactFields),
       subjectMatter: {
         [this.language]: this.getSubjectMatter(sheet.subjectMatter)
       },
@@ -51,7 +44,7 @@ export default class IrccSchema extends Schema {
       ],
       specimens: this.parseFileReference(sheet.specimens),
       taxonomies: this.parseFileReference(sheet.taxonomies),
-      picGranted: (sheet.pic.consent || '').toLowerCase() === 'yes',
+      picGranted: schema.parseTextToBoolean(((sheet.pic as IContactFields).consent)),
       picInformation: {
         en: '<div><!--block-->asdfasdfasdf</div>'
       },
@@ -62,7 +55,7 @@ export default class IrccSchema extends Schema {
           language: 'en'
         }
       ],
-      matEstablished: sheet.matEstablished.toLowerCase() === 'yes',
+      matEstablished: schema.parseTextToBoolean(sheet.matEstablished),
       matInformation: {
         en: '<div><!--block-->asdf</div>'
       },
@@ -81,7 +74,7 @@ export default class IrccSchema extends Schema {
       },
       dateOfExpiry: '2024-07-16',
       permitFiles: this.parseFileReference(sheet.permitFiles),
-      notes: this.getColumnValue(sheet.additionalInformation)
+      notes: sheet.additionalInformation
     }
   }
 }

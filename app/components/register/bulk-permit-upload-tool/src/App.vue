@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="wrapper">
-      <BulkDocumentsUploader doucment-type="ircc" />
+      <BulkDocumentsUploader document-type="ircc" />
     </div>
   </header>
 </template>

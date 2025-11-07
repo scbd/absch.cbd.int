@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
+import * as XLSX from 'xlsx'
 import readXLSXFile from '../../utilities/read-xlsx-file'
-import { type IWorkBook } from 'xlsx'
 
 type DocErrorsType = {
   fileRead: string | null
+}
+
+type EmptyWorkBook = {
+  Sheets: object
 }
 
 /**
@@ -12,7 +16,7 @@ type DocErrorsType = {
  * Stores data parsed from xlsx file.
  */
 type DocStateType = {
-  parsedFile: IWorkBook | object;
+  parsedFile: XLSX.WorkBook | EmptyWorkBook;
   errors: DocErrorsType;
   isLoading: boolean;
   selectedSheetIndex: number;
@@ -22,7 +26,7 @@ type DocStateType = {
 
 export const useXlSXSheetStore = defineStore('xlsx-sheet', {
   state: (): DocStateType => ({
-    parsedFile: {},
+    parsedFile: { Sheets: {} },
     errors: { fileRead: null },
     isLoading: false,
     selectedSheetIndex: 0,
@@ -35,22 +39,19 @@ export const useXlSXSheetStore = defineStore('xlsx-sheet', {
   },
 
   actions: {
-    async parseFile (changeEvent: Event) {
-      let parsedFile = {}
-      try {
-        parsedFile = await readXLSXFile(changeEvent)
-      } catch {
-        parsedFile = {}
+    async parseFile (changeEvent: Event): Promise<XLSX.WorkBook> {
+      const readFileResult = await readXLSXFile(changeEvent)
+
+      if (readFileResult.error) {
         this.errors = { fileRead: 'An error occurred while reading the file.' }
       }
-      return parsedFile
+      return readFileResult.workbook
     },
 
-    async readFile (changeEvent: Event) {
+    async readFile (changeEvent: Event): Promise<XLSX.WorkBook> {
       this.$reset()
       this.isLoading = false
       const parsedFile = await this.parseFile(changeEvent)
-      this.parsedFile = parsedFile
       return parsedFile
     },
 
