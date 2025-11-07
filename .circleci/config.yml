@@ -8,6 +8,8 @@ _defaults: &defaults
     image: ubuntu-2204:edge
   working_directory: ~/scbd/absch.cbd.int
   parallelism: 1
+  environment:
+    NODE_OPTIONS='--max-old-space-size=4096'
 
 _run:
   buildDocker: &buildDocker
@@ -32,8 +34,6 @@ jobs:
       - checkout
       - run: *buildDocker
       - run: *testImage
-    environment:
-      NODE_OPTIONS='--max-old-space-size=4096'
 
   build-deploy-branches:
     <<: *defaults
