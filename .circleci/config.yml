@@ -32,6 +32,8 @@ jobs:
       - checkout
       - run: *buildDocker
       - run: *testImage
+    environment:
+      NODE_OPTIONS='--max-old-space-size=4096'
 
   build-deploy-branches:
     <<: *defaults
