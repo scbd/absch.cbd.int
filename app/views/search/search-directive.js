@@ -110,6 +110,11 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         $scope.hideSubFilters = false;
                         $scope.isInternalEmbed = $attrs.internalEmbed == 'true';
                         const includeSchemas   = $attrs.includeSchemas?.split(',')
+                        $scope.tabOrder = {
+                            allRecords      : ['updatedDate_dt desc'],
+                            nationalRecords : ['government_EN_s asc', 'updatedDate_dt desc'],
+                            referenceRecords: ['updatedDate_dt desc'],  
+                        }
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
@@ -509,9 +514,14 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     };
 
                     $scope.switchTab = function(tab){
-                        if($scope.searchResult.currentTab == tab)
+                        const previousTab = $scope.searchResult.currentTab;
+                        if(previousTab == tab)
                             return;
                         $scope.searchResult.currentTab = tab;
+
+                        if(previousTab === 'nationalRecords') {
+                            $scope.searchResult.sortFields = $scope.tabOrder[tab] || ['updatedDate_dt desc'];
+                        }
                         updateQueryString('tab',tab);
                         updateQueryResult();
                     }
@@ -789,6 +799,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         }
 
                         if (filters?.subFilters ) {
+                            
                             const subFilters = filters.subFilters;
                             for ( const subFilterKey in subFilters) {
                                 const subFilter = subFilters[subFilterKey];
@@ -803,6 +814,10 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                                 ...($scope.searchFilters[item]||{})
                                             }
                                         };
+
+                                        if (filter.filterValue !== undefined) {
+                                            filterItem.filterValue = filter.filterValue;
+                                        }
                                     }
                                 })
                             }
@@ -1289,25 +1304,46 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         }, 0)
                     }
 
+                    const hasFilterValue = (filter) => {
+                        if (filter.type === 'date') {
+                            return filter.filterValue && (filter.filterValue.start || filter.filterValue.end);
+                        }
+                        return filter.filterValue === true || filter.filterValue === false || !_.isEmpty(filter.filterValue);
+                    };
+
 
                     function getAllSearchFilters() {
                         
                         let leftFilterQuery = {}
                         _.forEach(leftMenuFilters, function (f, key) {
                             _.forEach(f, function (filter) {
-                                if (!_.isEmpty(filter.selectedItems)) {
-                                    leftFilterQuery[key] = leftFilterQuery[key] || [];
-                                    const { field, relatedField, searchRelated, term, title, type } = filter
-                                    leftFilterQuery[key].push({ field, relatedField, searchRelated, selectedItems: filter.selectedItems, term, title, type });
-                                }
-                            });
-                        });
+                            const hasSelected = !_.isEmpty(filter.selectedItems);
+                            const hasValue = hasFilterValue(filter);
 
-                        return {
-                            filters     :   _.values($scope.setFilters),
-                            subFilters  :   leftFilterQuery                            
-                        }
-                    }
+                            if (hasSelected || hasValue) {
+                                leftFilterQuery[key] = leftFilterQuery[key] || [];
+                                const { field, relatedField, searchRelated, term, title, type, filterValue, selectedItems, value } = filter;
+
+                                leftFilterQuery[key].push({
+                                    field,
+                                    relatedField,
+                                    searchRelated,
+                                    term,
+                                    title,
+                                    type,
+                                    value,
+                                    selectedItems: hasSelected ? selectedItems : undefined,
+                                    filterValue : hasValue ? filterValue : undefined
+                                });
+                            }
+                        });
+                    });
+
+                    return {
+                        filters    : _.values($scope.setFilters),
+                        subFilters : leftFilterQuery
+                    };
+                }
 
                     function buildSearchQuery(){
                         var tagQueries          = {};
