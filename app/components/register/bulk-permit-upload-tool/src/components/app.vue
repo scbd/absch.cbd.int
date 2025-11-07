@@ -49,6 +49,8 @@ const onFileChange = async (changeEvent: Event) => {
   const sheet: XLSX.WorkSheet | Array<string> = workbook.Sheets.Sheet3 || []
   // Parse File to JSON matching the attributes of a given document
   const documentAttributesList :IIRCCDocumentAttributes = xlsxFileToDocumentAttributes(docType, sheet)
+  console.log('documentAttributesList', documentAttributesList)
+
   // Match document attributes to the API Schema
   const apiJson = await mapDocumentAttributesToAPIJSON(documentAttributesList, docType)
   console.log('apiJson', apiJson)

@@ -1,8 +1,8 @@
+import { getDocument } from '../../../api/make-api-request'
+import languageMapping from './languageMapping'
 import type { LanguageCode, LanguageType } from '../../../mappings/types'
 import type { SubjectMatter, FileReference } from './types'
 import type { AttributeValue, IContactFields, IIRCCDocumentAttributes } from '../../../utilities/xlsx-file-to-document-attributes/types'
-
-import languageMapping from '../../../mappings/languageMapping'
 
 export default class Schema {
   language: LanguageCode = 'en'
@@ -26,9 +26,26 @@ export default class Schema {
     return languageMapping[lang as LanguageType]
   }
 
-  static getDocumentIdentifierByUid (col: AttributeValue): AttributeValue {
-    // TODO: Implement
-    return col
+  static async getDocumentIdentifierByUid (uniqueId: AttributeValue): Promise<string> {
+    const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
+    console.log('uid', uid)
+
+    if (uid === null) {
+      const error = 'getDocumentIdentifierByUid: No valid uid provided.'
+      console.warn(error)
+      return error
+    }
+
+    console.log('uid[4]', uid[4])
+
+    const { data } = await getDocument(uid[4] || '')
+    if (!data) {
+      const error = `getDocumentIdentifierByUid: No valid document found or uid: ${uid}`
+      console.warn(error)
+      return error
+    }
+
+    return data.header.identifier + '@' + uid[5]
   }
 
   static getDocumentIdentifier (document: IContactFields): string {
@@ -50,7 +67,8 @@ export default class Schema {
     const providerType: string = subDocument.type
     return providerType === 'confidential'
   }
-  static parseTextToBoolean(columnValue: AttributeValue) {
+
+  static parseTextToBoolean (columnValue: string | undefined) {
     return String(columnValue).toLowerCase() === 'yes'
   }
 
@@ -58,7 +76,7 @@ export default class Schema {
     return {
       url: reference || '',
       name: reference || '',
-      [this.language]: reference 'en'
+      [this.language]: reference || 'en'
     } as FileReference
   }
 }

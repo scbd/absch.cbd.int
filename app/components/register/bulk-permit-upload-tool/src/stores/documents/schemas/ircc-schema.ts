@@ -14,11 +14,11 @@ export default class IrccSchema extends Schema {
         schema.getLanguageCode(sheet.language)
       ],
       absCNA: {
-        identifier: schema.getDocumentIdentifierByUid(sheet.absCNA)
+        identifier: await schema.getDocumentIdentifierByUid(sheet.absCNAId)
       },
-      title: sheet.title,
+      title: sheet.permitEquivalent,
       referenceToNationalPermit: {
-        en: 'strsgfsgfdxgf'
+        [this.language]: 'strsgfsgfdxgf'
       },
       dateOfIssuance: sheet.dateOfIssuance,
       providers: [
@@ -46,7 +46,7 @@ export default class IrccSchema extends Schema {
       taxonomies: this.parseFileReference(sheet.taxonomies),
       picGranted: schema.parseTextToBoolean(((sheet.pic as IContactFields).consent)),
       picInformation: {
-        en: '<div><!--block-->asdfasdfasdf</div>'
+        [this.language]: '<div><!--block-->asdfasdfasdf</div>'
       },
       picDocuments: [
         {
@@ -55,7 +55,7 @@ export default class IrccSchema extends Schema {
           language: 'en'
         }
       ],
-      matEstablished: schema.parseTextToBoolean(sheet.matEstablished),
+      matEstablished: schema.parseTextToBoolean(sheet.matEstablished as string),
       matInformation: {
         en: '<div><!--block-->asdf</div>'
       },
