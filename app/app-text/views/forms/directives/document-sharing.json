@@ -1,6 +1,7 @@
 {
     "shareDraftRecord": "Share draft record:",
     "share": "Share",
+    "link": "Link(s)",
     "sendByURL": "Send by URL",
     "sendByEmail": "Send by email",
     "loading": "loading...",
@@ -15,13 +16,15 @@
     "copy": "Copy",
     "revoke": "Revoke",
     "noSharedLinks": "No shared links found this document.",
+    "noSharedEmails": "No shared emails found this document.",
     "emailInfo": "Recipients will receive an email with a link to view this draft document.",
-    "emails": "Emails",
+    "emails": "Email(s)",
     "send": "Send",
     "instruction": "Use commas to separate multiple email addresses. Recipients must log in to the Clearing-House with this email address in order to view the draft record.",
     "updating": "updating...",
     "close": "Close",
     "generatePDFRecord": "Generate a PDF of this draft record:",
     "pleaseNote": "<strong>Please Note!</strong> This process takes a long time to load. The recommended method to share draft records is to use the <strong>Share</strong> function.",
-    "selectLanguage": "Select a language to initiate the PDF generation process."
+    "selectLanguage": "Select a language to initiate the PDF generation process.",
+    "open": "Open"
 }
