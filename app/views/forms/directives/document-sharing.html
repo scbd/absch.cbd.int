@@ -52,10 +52,10 @@
                                             <tr>
                                                 <td>#</td>
                                                 <td>{{::('documentSharingT.expiry'|$translate)}}</td>
-                                                <td>{{::('documentSharingT.linkEmail'|$translate)}}</td>
-                                                <td class="d-none d-sm-table-cell text-start">Created on</td>
+                                                <td>{{::('documentSharingT.link'|$translate)}}</td>
+                                                <td class="d-none d-sm-table-cell text-start">{{::('documentSharingT.createdOn'|$translate)}}</td>
                                             </tr>
-                                            <tr ng-repeat="link in sharedLinks | orderBy:'-meta.createdOn'">
+                                            <tr ng-repeat="link in sharedLinks | filter:{ shareType: 'link' } | orderBy:'-meta.createdOn'">
                                                 <td ng-bind="$index+1"></td>
                                                 <td>
                                                     <span ng-bind="link.expiry|formatDateWithTime"></span>
@@ -66,11 +66,10 @@
                                                 <td >
                                                     <div class="btn-group w-100">
                                                         <div class="input-group" >
-                                                            <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareUrl_{{$index+1}}" class="form-control d-none d-sm-inline-block" value="{{::link.sharedWith.emails}}" disabled readonly/>
                                                             <input ng-if="!link.sharedWith.emails" type="text" width="100%" id="shareUrl_{{$index+1}}" class="form-control d-none d-sm-inline-block" value="{{::getUrl(link.urlHash)}}" disabled readonly/>
                                                             <span  ng-if="!link.sharedWith.emails" class="input-group-text cursor-pointer" id="basic-addon1">
                                                                 <a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"> </i> 
-                                                                    <span class="d-none d-sm-inline-block">Open</span></a>
+                                                                    <span class="d-none d-sm-inline-block">{{::('documentSharingT.open'|$translate)}}</span></a>
                                                             </span>
                                                             <span  ng-if="!link.sharedWith.emails" class="input-group-text cursor-pointer" id="basic-addon2" ng-click="copyUrl($index+1)">
                                                                 <i class="fa fa-copy"> </i> <span class="d-none d-sm-inline-block">{{::('documentSharingT.copy'|$translate)}}</span></span>
@@ -82,7 +81,7 @@
                                                 </td>
                                                 <td class="d-none d-sm-table-cell align-middle" ng-bind="link.meta.createdOn|formatDateWithTime"></td>
                                             </tr>
-                                            <tr ng-if="!sharedLinks.length">
+                                            <tr ng-if="!(sharedLinks | filter:{ shareType: 'link' }).length">
                                                 <td colspan="4">
                                                     <strong>{{::('documentSharingT.noSharedLinks'|$translate)}}</strong>
                                                 </td>
@@ -116,6 +115,44 @@
                                     <div>
                                         <span ng-if="status=='creatingLink'">
                                             <i class="fa fa-spin fa-spinner"></i> {{::('documentSharingT.updating'|$translate)}} </span>                                       
+                                    </div>
+
+                                    <div>
+                                        <table class="table table-stripped w-100">
+                                            <tr>
+                                                <td>#</td>
+                                                <td>{{::('documentSharingT.expiry'|$translate)}}</td>
+                                                <td>{{::('documentSharingT.emails'|$translate)}}</td>
+                                                <td class="d-none d-sm-table-cell text-start">{{::('documentSharingT.createdOn'|$translate)}}</td>
+                                            </tr>
+                                            <tr ng-repeat="link in sharedLinks | filter:{ shareType: 'email' } | orderBy:'-meta.createdOn'">
+                                                <td ng-bind="$index+1"></td>
+                                                <td>
+                                                    <span ng-bind="link.expiry|formatDateWithTime"></span>
+                                                    <span ng-if="hasStatus('active', link)"class="label label-success">{{::('documentSharingT.active'|$translate)}}</span>
+                                                    <span ng-if="hasStatus('expired', link)"class="label label-danger">{{::('documentSharingT.expired'|$translate)}}</span>
+                                                    <span ng-if="hasStatus('revoked', link)"class="label label-danger">{{::('documentSharingT.revoked'|$translate)}}</span>
+                                                </td>
+                                                <td >
+                                                    <div class="btn-group w-100">
+                                                        <div class="input-group" >
+                                                            <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareEmail_{{$index+1}}" class="form-control d-none d-sm-inline-block" value="{{::link.sharedWith.emails}}" disabled readonly/>
+                                                             <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" class="input-group-text cursor-pointer" id="basic-addon3" ng-click="revokeLink(link)">
+                                                                <i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i>
+                                                                <i class="fa fa-thumbs-down"> </i> <span class="d-none d-sm-inline-block">{{::('documentSharingT.revoke'|$translate)}}</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="d-none d-sm-table-cell align-middle" ng-bind="link.meta.createdOn|formatDateWithTime"></td>
+                                            </tr>
+                                            <tr ng-if="!(sharedLinks | filter:{ shareType: 'email' }).length">
+                                                <td colspan="4">
+                                                    <strong>{{::('documentSharingT.noSharedEmails'|$translate)}}</strong>
+                                                </td>
+                                            </tr>
+                                        </table>
+
                                     </div>
                                     <br/>
                                 </div>
