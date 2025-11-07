@@ -490,7 +490,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                             
                             return unlockAndSaveDraft(document, metadata)
                             .then(function(draftInfo) {
-                                showShareDocument(draftInfo); // not sure if this is needed here.
+                                showShareDocument(draftInfo);
                                 return afterDraftSaved(draftInfo);
                             })
                             .catch(function(error){
@@ -517,6 +517,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                                     $location.path($location.path().replace(/\/new/, '/' + draftInfo.identifier + '/edit')).search({softReload:'true'});;
                                 }
                             }
+                            showShareDocument(draftInfo);
                             return draftInfo;
                         }
 
