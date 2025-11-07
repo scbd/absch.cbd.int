@@ -85,7 +85,7 @@ app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 't
                     const searchTextTrimmed = (searchText || '').trim();
                     if(searchTextTrimmed) {
                         const escapedSearchText = escape(searchTextTrimmed);    
-                        const fields = ['text_EN_txt', 'title_EN_txt', 'summary_EN_txt', 'content_EN_txt'];
+                        const fields = ['text_EN_txt',  'summary_EN_txt', 'content_EN_txt'];
                         const queryFields = fields.map(f => `${localizeFields(f, localeKey)}:${escapedSearchText}`);
                         query.push(andOr(queryFields, 'OR'));
                     }
