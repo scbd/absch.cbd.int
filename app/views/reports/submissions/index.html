@@ -1,11 +1,10 @@
 <div id="innerPage">
 	<style>
-		.search-tabs, .global-filters{
+		#nationalRecordsTab, #referenceRecordsTab, #scbdRecordsTab{
 			display: none;
 		}
-		#search-new{
-			padding-left: 0px!important;
-			padding-top: 0px!important;
+		.mastHead {
+			min-height: 80px;
 		}
 	</style>
 	<div class="mastHead text-white">
@@ -15,7 +14,6 @@
 		</div>
 		<div>{{::('submissionsOnNotificationsT.info2'|$translate)}}</div>
 	</div>
-	<div class="innerPageContent">
 		<div class="registry-sections">
 			<div class="row pt-2 easing">
 				<div class="col-md-12" style="margin-top:5px;padding: 0px 20px;" ng-if="notification">                   
@@ -38,12 +36,11 @@
 						</cbd-article>
 					</div>                
 				</div>
-				<div class="col-md-12">					
+				<div class="col-md-12" style="margin-top: -50px;">					
 					<search-directive internal-embed="true" include-schemas="submission">
 					</search-directive>
 				</div>
 			</div>
 		</div>
-	</div>
 
 </div>

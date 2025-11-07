@@ -109,7 +109,8 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         }   
                         $scope.hideSubFilters = false;
                         $scope.isInternalEmbed = $attrs.internalEmbed == 'true';
-                        const includeSchemas   = $attrs.includeSchemas?.split(',')
+                        const includeSchemas   = $attrs.includeSchemas?.split(',');
+                        $scope.isIncludeSubmission = includeSchemas && includeSchemas[0] === 'submission' ? true : false;
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
