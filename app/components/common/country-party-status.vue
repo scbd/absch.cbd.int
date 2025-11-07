@@ -45,8 +45,7 @@
   const currentRealm = realm.realm || 'CHM'; // Default to 'chm' if realm is not set
 
   const props = defineProps({
-    country: { type: Object, required: true },
-    visiblePartyRealms: { type: Array, default: () => [] }
+    country: { type: Object, required: true }
   });
 
   const partyStatuses = [
@@ -55,25 +54,26 @@
       ...props.country?.CHM, class: 'text-chm'
     },
     {
-      key: 'isNagoyaParty', realm: 'ABS', label: t("partyToNagoya"), notLabel: t("notPartyToNagoya"),
-      ...props.country?.ABS, class: 'text-abs'
-    },
-    {
       key: 'isCartagenaParty', realm: 'BCH', label: t("partyToCartagena"), notLabel: t("notPartyToCartagena"),
       ...props.country?.BCH, class: 'text-bch'
+    },
+    {
+      key: 'isNagoyaParty', realm: 'ABS', label: t("partyToNagoya"), notLabel: t("notPartyToNagoya"),
+      ...props.country?.ABS, class: 'text-abs'
     },
     {
       key: 'isNKLSParty', realm: 'BCH', label: t("partyToSuppProtocol"), notLabel: t("notPartyToSuppProtocol"),
       isParty: props.country?.isNKLSParty, partyToDate: props.country?.partyToNKLSPDate, class: 'color-NKLSP'
     }
-  ].filter(p => {
-    // normalize visible realms by removing anything after a dash (e.g., ABS-DEV → ABS)
-    const normalizedVisibleRealms = props.visiblePartyRealms.map(r => r.split('-')[0]);
-    return normalizedVisibleRealms.length === 0 || normalizedVisibleRealms.includes(p.realm);
+  ].filter(p => { 
+    const isCHM = realm.is('CHM');
+    if(isCHM) 
+      return true;    
+    return realm.is(p.realm);
   })
   .sort((a, b) => {
       if (!a.entryIntoForce) return 1;
       if (!b.entryIntoForce) return -1;
-      return new Date(b.entryIntoForce) - new Date(a.entryIntoForce);
+      return new Date(a.entryIntoForce) - new Date(b.entryIntoForce);
   });
 </script>
