@@ -5,6 +5,7 @@ import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';
 import 'flag-icons-css';
+import countryPartyStatus from '../../components/common/country-party-status.vue'
 import countryProfileT from '~/app-text/views/countries/country-profile.json';
 
   export { default as template } from './country-profile.html';
@@ -13,9 +14,15 @@ import countryProfileT from '~/app-text/views/countries/country-profile.json';
     function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService, translationService) {
       translationService.set('countryProfileT', countryProfileT);
       $scope.code      = $route.current.params.code;
+      $scope.realm     = realm;
       $scope.isBCH     = realm.is('BCH');
       $scope.isABS     = realm.is('ABS');
+      $scope.isCHM     = realm.is('CHM');
       $scope.locale    = locale;
+
+      $scope.vueComponent = {
+          components: { countryPartyStatus },
+      }
 
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){ 
