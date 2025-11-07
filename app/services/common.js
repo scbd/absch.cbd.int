@@ -340,6 +340,7 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                     country.name = countryDetails.name;
                     country.code = countryDetails.code;
                     country.isCBDParty = isPartyToCBD(countryDetails) || country.code == 'EU';
+                    country.partyToCBDDate = countryDetails.treaties.XXVII8.party || null;
                     country.isParty = isParty(countryDetails) || country.code == 'EU';
                     country.isSignatory = isSignatory(countryDetails) || country.code == 'EU';
                     country.isRatified = isRatified(countryDetails) || country.code == 'EU';
@@ -349,10 +350,37 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                     country.instrument  = countryDetails.treaties[appTreaties[appName]].instrument;
                     country.dateSigned  = countryDetails.treaties[appTreaties[appName]].signature;
                     country.treaties    = countryDetails.treaties;
-                    if(isBch){
-                        country.isNKLSParty = isPartyToNKLSP(countryDetails);
-                        country.partyToNKLSPDate = countryDetails.treaties.XXVII8c.party || null;
-                    }
+
+                    country.CHM = {
+                        isParty: isParty(countryDetails, 'chm'),
+                        partyToDate : countryDetails.treaties.XXVII8.party || null,
+                        isSignatory: isSignatory(countryDetails, 'chm'),
+                        dateSigned: countryDetails.treaties.XXVII8.signature,
+                        isInbetweenParty : moment.utc().diff(moment.utc(treaties[appTreaties['chm']].deposit), 'days') < 90,
+                        entryIntoForce : isParty(countryDetails, 'chm') ? moment.utc(treaties[appTreaties['chm']].deposit).add(90, 'day') : null
+                    };
+                    country.ABS = {
+                        isParty: isParty(countryDetails, 'abs'),
+                        partyToDate : countryDetails.treaties.XXVII8b.party || null,
+                        isSignatory: isSignatory(countryDetails, 'abs'),
+                        dateSigned: countryDetails.treaties.XXVII8b.signature,
+                        isInbetweenParty : moment.utc().diff(moment.utc(treaties[appTreaties['abs']].deposit), 'days') < 90,
+                        entryIntoForce : isParty(countryDetails, 'abs') ? moment.utc(treaties[appTreaties['abs']].deposit).add(90, 'day') : null
+                    };
+                    country.BCH = {
+                        isParty         : isParty(countryDetails, 'bch'),
+                        partyToDate     : countryDetails.treaties.XXVII8a.party || null,
+                        isSignatory     : isSignatory(countryDetails, 'bch'),
+                        dateSigned      : countryDetails.treaties.XXVII8a.signature,
+                        isInbetweenParty: moment.utc().diff(moment.utc(treaties[appTreaties['bch']].deposit), 'days') < 90,
+                        entryIntoForce  : isParty(countryDetails, 'bch') ? moment.utc(treaties[appTreaties['bch']].deposit).add(90, 'day') : null,
+                        isNKLSParty     : isPartyToNKLSP(countryDetails),
+                        partyToNKLSPDate: isPartyToNKLSP(countryDetails) ? moment.utc(countryDetails.treaties.XXVII8c.party).add(90, 'day'): null
+                    };
+                    
+                    country.isNKLSParty = country.BCH?.isNKLSParty;
+                    country.partyToNKLSPDate = country.BCH?.partyToNKLSPDate;
+
                     if (country.isInbetweenParty)
                         country.entryIntoForce = moment.utc(treaties[appTreaties[appName]].deposit).add(90, 'day');
                     else
@@ -362,7 +390,8 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
                 }                
 
                 //==================================================================================
-                function isParty(entity) {
+                function isParty(entity, realm) {
+                    realm = realm || appName;
 
                     if (entity && entity.isParty != undefined)
                         return entity.isParty;
@@ -372,15 +401,15 @@ export { safeApply, safeDelegate } from '@scbd/angular-vue/src/index.js';
 
                     return entity &&                         
                         (   
-                            moment.utc().diff(moment.utc(entity.treaties[appTreaties[appName]].deposit), 'days') >= 90 || 
-                            moment.utc(entity.treaties[appTreaties[appName]].party) <= moment.utc()
+                            moment.utc().diff(moment.utc(entity.treaties[appTreaties[realm]].deposit), 'days') >= 90 || 
+                            moment.utc(entity.treaties[appTreaties[realm]].party) <= moment.utc()
                         ) && 
                         (
-                            entity.treaties[appTreaties[appName]].instrument == "ratification"  ||
-                            entity.treaties[appTreaties[appName]].instrument == "accession"     ||
-                            entity.treaties[appTreaties[appName]].instrument == "acceptance"    || 
-                            entity.treaties[appTreaties[appName]].instrument == "approval"      ||
-                            entity.treaties[appTreaties[appName]].instrument == "succession"
+                            entity.treaties[appTreaties[realm]].instrument == "ratification"  ||
+                            entity.treaties[appTreaties[realm]].instrument == "accession"     ||
+                            entity.treaties[appTreaties[realm]].instrument == "acceptance"    || 
+                            entity.treaties[appTreaties[realm]].instrument == "approval"      ||
+                            entity.treaties[appTreaties[realm]].instrument == "succession"
                         );
                 }
                 //==================================================================================
