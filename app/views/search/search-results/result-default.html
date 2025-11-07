@@ -84,7 +84,7 @@
                     </li>
                     <li class="hidden-xs meta-border" ng-if="::doc.rec_meta1 && doc.schema_s !=='database' && type != reference" id="meta1">
                         <span ng-if="::doc.schema_s ==='absCheckpointCommunique'" class="text-secondary">CP:</span>
-                        <span ng-bind="doc.rec_meta1.join(', ')"></span>
+                        <span title="{{ doc.rec_meta1.join(', ') }}" ng-bind="(doc.rec_meta1 | limitTo:7).join(', ') + (doc.rec_meta1.length > 7 ? ', ...' : '')"></span>
                     </li>
                     <li class="hidden-xs" ng-if="::doc.rec_meta2 && doc.schema_s !=='absPermit' && type != reference" id="meta2">
                         <span ng-if="::doc.schema_s ==='absCheckpointCommunique'" class="text-secondary">{{::('resultDefaultT.source'|$translate)}}</span>
