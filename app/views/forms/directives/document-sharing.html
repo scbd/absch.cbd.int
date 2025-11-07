@@ -106,7 +106,7 @@
                                     <div class="input-group" >
                                         <input type="text" placeholder="enter email"  class="form-control" ng-model="shareEmails" />
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary float-end" ng-click="shareEmail(shareEmails)" ng-disabled="status=='creatingLink'">{{::('documentSharingT.send'|$translate)}}</button>
+                                            <button type="button" class="btn btn-primary float-end" ng-click="shareEmail(shareEmails); shareEmails=''" ng-disabled="status=='creatingLink'">{{::('documentSharingT.send'|$translate)}}</button>
                                         </span>
                                     </div>
                                     <div>
