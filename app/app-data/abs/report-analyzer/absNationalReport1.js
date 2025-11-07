@@ -2226,16 +2226,6 @@ export const absNationalReport1 = [
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
-               },
-               {
-                  "question": "Q044_A_3",
-                  "values": [
-                     "true",
-                     "false",
-                     "false.na",
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
                }
             ]
          },
@@ -2324,14 +2314,6 @@ export const absNationalReport1 = [
             "validations": [
                {
                   "question": "Q044_B_1",
-                  "values": [
-                     "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               },
-               {
-                  "question": "Q044_B_2",
                   "values": [
                      "true"
                   ],
@@ -2426,16 +2408,6 @@ export const absNationalReport1 = [
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
-               },
-               {
-                  "question": "Q045_A_3",
-                  "values": [
-                     "true",
-                     "false",
-                     "false.na"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
                }
             ]
          },
@@ -2527,16 +2499,6 @@ export const absNationalReport1 = [
                   "question": "Q045_B_1",
                   "values": [
                      "true"
-                  ],
-                  "type": "@hasValues",
-                  "trigger": "enable"
-               },
-               {
-                  "question": "Q045_B_2",
-                  "values": [
-                     "true",
-                     "false",
-                     "false.na"
                   ],
                   "type": "@hasValues",
                   "trigger": "enable"
