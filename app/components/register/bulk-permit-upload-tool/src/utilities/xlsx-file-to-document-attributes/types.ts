@@ -1,23 +1,28 @@
-export interface IDocumentMap {
-  language: string;
-  title: string;
-  dateOfIssuance: string;
-  dateOfExpiry: string;
-  provider: IContactFields;
-  pic: IContactFields;
-  matEstablished: string;
-  subjectMatter: string;
-  keywords: string;
-  specimens: string;
-  taxonomies: string;
-  usage: string;
-  usageDescription: string;
-  conditionsThirdPartyTransfer: string;
-  permitFiles: string;
-  additionalInformation: string;
+export type AttributeValue = string | IContactFields | IIRCCDocumentMap
+
+export interface IIRCCDocumentAttributes {
+  language: AttributeValue;
+  absCNA: AttributeValue;
+  title: AttributeValue;
+  dateOfIssuance: AttributeValue;
+  dateOfExpiry: AttributeValue;
+  provider: AttributeValue;
+  pic: AttributeValue;
+  matEstablished: AttributeValue;
+  subjectMatter: AttributeValue;
+  keywords: AttributeValue;
+  specimens: AttributeValue;
+  taxonomies: AttributeValue;
+  usage: AttributeValue;
+  usageDescription: AttributeValue;
+  conditionsThirdPartyTransfer: AttributeValue;
+  permitFiles: AttributeValue;
+  additionalInformation: AttributeValue;
 }
 
-export type DocumentKeys = keyof IDocumentMap
+export type IIRCCDocumentMap = { [key in keyof IIRCCDocumentAttributes]?: object | string }
+
+export type DocumentKeys = keyof IIRCCDocumentAttributes
 
 export interface IContactFields {
   type: string;

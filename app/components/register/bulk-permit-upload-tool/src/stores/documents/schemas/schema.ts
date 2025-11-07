@@ -1,59 +1,64 @@
 import type { LanguageCode, LanguageType } from '../../../mappings/types'
 import type { SubjectMatter, FileReference } from './types'
+import type { AttributeValue, IContactFields, IIRCCDocumentAttributes } from '../../../utilities/xlsx-file-to-document-attributes/types'
 
 import languageMapping from '../../../mappings/languageMapping'
 
 export default class Schema {
   language: LanguageCode = 'en'
-  xlsxFileData: IFileData = { X: { w: '' } }
+  xlsxFileData: IIRCCDocumentAttributes
   documentNumber: number = 1
 
-  constructor (xlsxData: IFileData) {
+  constructor (xlsxData: IIRCCDocumentAttributes) {
     this.xlsxFileData = xlsxData
   }
 
-  getSubjectMatter (subjectMatter: string): SubjectMatter {
-    if (subjectMatter.trim() === '') { return { [this.language]: '' } as SubjectMatter }
+  getSubjectMatter (subjectMatter: AttributeValue): SubjectMatter {
+    if (String(subjectMatter).trim() === '') { return { [this.language]: '' } as SubjectMatter }
 
     return {
       [this.language]: `<div>${subjectMatter} </div>`,
     } as SubjectMatter
   }
 
-  getLanguageCode (langValue: string): LanguageCode {
-    const lang: string = langValue.toLowerCase()
+  static getLanguageCode (langValue: AttributeValue): LanguageCode {
+    const lang: string = String(langValue).toLowerCase()
     return languageMapping[lang as LanguageType]
   }
 
-  getDocumentIdentifierByUid (col: string): string {
+  static getDocumentIdentifierByUid (col: AttributeValue): AttributeValue {
     // TODO: Implement
     return col
   }
 
-  getDocumentIdentifier (document: IContactFields): string {
+  static getDocumentIdentifier (document: IContactFields): string {
     // TODO: Implement
     return document.email
   }
 
-  parseDate (col: string): string {
+  static parseDate (col: string): string {
     // TODO: Implement
     return col
   }
 
-  getProviderIdentifier (provider: IContactFields): string {
+  static getProviderIdentifier (provider: IContactFields): string {
     // TODO: Implement
     return provider.type
   }
 
-  getIsConfidential (providerType: string): boolean {
+  static getIsConfidential (subDocument: IContactFields): boolean {
+    const providerType: string = subDocument.type
     return providerType === 'confidential'
   }
+  static parseTextToBoolean(columnValue: AttributeValue) {
+    return String(columnValue).toLowerCase() === 'yes'
+  }
 
-  parseFileReference (col: string): FileReference {
+  parseFileReference (reference: AttributeValue): FileReference {
     return {
-      url: this.xlsxFileData[col] || '',
-      name: this.xlsxFileData[col] || '',
-      [this.language]: this.xlsxFileData[col] || 'en'
+      url: reference || '',
+      name: reference || '',
+      [this.language]: reference 'en'
     } as FileReference
   }
 }

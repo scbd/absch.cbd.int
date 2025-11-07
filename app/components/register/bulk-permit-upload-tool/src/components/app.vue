@@ -21,20 +21,20 @@
   </Modal>
 </template>
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import * as XLSX from 'xlsx'
 import BulkUploaderFooter from './bulk-uploader-footer.vue'
 import BulkUploaderHeader from './bulk-uploader-header.vue'
 import UploadButton from './upload-button.vue'
 import Modal from './modal.vue'
 import { useXlSXSheetStore } from '../stores/xlsx-sheet/index'
-import xlsxFileToDocumentAPIJSON from '../utilities/xlsx-data-to-api-json'
+import xlsxFileToDocumentAttributes from '../utilities/xlsx-file-to-document-attributes'
+import mapDocumentAttributesToAPIJSON from '../utilities/document-attributes-to-api-json'
+import { type IIRCCDocumentAttributes } from '../utilities/xlsx-file-to-document-attributes/types'
+import { type DocumentType } from '../types'
 
-const props = defineProps({
-  documentType: {
-    type: String,
-    default: 'ircc',
-  },
-})
+const props = defineProps<{
+  documentType: DocumentType;
+}>()
 
 const xlsxSheetStore = useXlSXSheetStore()
 
@@ -43,14 +43,16 @@ const handleConfirm = () => {
 }
 
 const onFileChange = async (changeEvent: Event) => {
+  const docType :DocumentType = props.documentType
   // Read File
-  const file = await xlsxSheetStore.readFile(changeEvent)
-  // Parse File to JSON matching the documents API Schema
-  const docType = props.documentType
-  console.log('docType', docType)
-
-  const apiJson = await xlsxFileToDocumentAPIJSON(file.Sheets.Sheet3, docType)
+  const workbook = await xlsxSheetStore.readFile(changeEvent)
+  const sheet: XLSX.WorkSheet | Array<string> = workbook.Sheets.Sheet3 || []
+  // Parse File to JSON matching the attributes of a given document
+  const documentAttributesList :IIRCCDocumentAttributes = xlsxFileToDocumentAttributes(docType, sheet)
+  // Match document attributes to the API Schema
+  const apiJson = await mapDocumentAttributesToAPIJSON(documentAttributesList, docType)
   console.log('apiJson', apiJson)
+
   return apiJson
 }
 </script>
