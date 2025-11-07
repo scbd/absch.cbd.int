@@ -2,8 +2,8 @@ export type AttributeValue = string | IContactFields | IIRCCDocumentMap
 
 export interface IIRCCDocumentAttributes {
   language: AttributeValue;
-  absCNA: AttributeValue;
-  title: AttributeValue;
+  absCNAId: AttributeValue;
+  permitEquivalent: AttributeValue;
   dateOfIssuance: AttributeValue;
   dateOfExpiry: AttributeValue;
   provider: AttributeValue;

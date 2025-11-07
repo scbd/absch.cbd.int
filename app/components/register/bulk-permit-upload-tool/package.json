@@ -28,7 +28,7 @@
     "@tsconfig/node22": "^22.0.2",
     "@types/jsdom": "^27.0.0",
     "@types/lodash": "^4.17.20",
-    "@types/node": "^22.18.11",
+    "@types/node": "^24.10.0",
     "@types/xlsx": "^0.0.35",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitest/eslint-plugin": "^1.3.23",
