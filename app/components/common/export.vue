@@ -14,7 +14,7 @@
                         <button type="button" class="border-0 close" @click="closeDialog()" aria-label="Close" ><i class="bi bi-x-circle-fill icon-lg"></i></button>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
+                        <div v-if="isGeneric" class="row">
                             <div class="col-12">
                                 <div class="alert alert-info">
                                     {{t('exportInformation')}}
@@ -262,7 +262,7 @@
     }
     const exportRecords = async () => {
         loading.value   = true; 
-        let fileName    = props.fileName||`${realm.uIdPrefix}-${schema}-${new Date().getTime().toString(36)}.${downloadFormat.value}`
+        let fileName    = props.fileName||`${realm.uIdPrefix}${schema ? '-' + schema : ''}-${new Date().getTime().toString(36)}`;
         try
         {
             if(isGeneric.value){

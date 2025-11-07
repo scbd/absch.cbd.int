@@ -321,6 +321,12 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                 //==============================
                 function clear(){
                     $scope.selectedItems=[];
+                    $scope.rootTerms.forEach(term => {
+                        const identifier = term.identifier;
+                        const checkbox = $element.find('#chk_' + $filter('escapeHtmlAttributeId')(identifier));
+                        if (checkbox) checkbox.prop('indeterminate', false);
+                    });
+
                     save();
                 }
                 //==============================
