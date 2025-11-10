@@ -15,6 +15,7 @@ import injectCssToDom           from './rollup/inject-css-to-dom.js';
 import resolveLocalized         from './rollup/resolve-localized.js';
 import stripBom                 from './rollup/strip-bom.js';
 import mergeI18n                from './rollup/merge-i18n.js'
+import typescript               from '@rollup/plugin-typescript';
 
 const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
@@ -94,6 +95,7 @@ function bundle(entryPoint, locale, baseDir='app') {
       string({ include: "**/*.html" }),
       json({ namedExports: true }),
       vue(),
+      typescript(),
       injectCssToDom(),
       dynamicImportVariables({ include:`${baseDir}/**/*.js` }),
       commonjs({ include: 'node_modules/**/*.js'}),
