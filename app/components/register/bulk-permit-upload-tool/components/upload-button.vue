@@ -16,8 +16,6 @@
   </button>
 </template>
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue'
-
 const props = defineProps({
   isLoading: {
     type: Boolean,
@@ -28,6 +26,9 @@ const props = defineProps({
 const $emit = defineEmits(['onFileChange'])
 
 const onFileInputClick = (event: Event) => {
-  event.target.value = ''
+  const { target } = event
+  if (target === null) { return }
+
+  (target as HTMLInputElement).value = ''
 }
 </script>

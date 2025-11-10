@@ -3,8 +3,7 @@ import type {
   DocumentAttributesMap,
   IFileData
 } from './types'
-import type { DocumentTypes } from '../../data/document-types-list'
-import { documentsList } from '../../data/document-types-list'
+import { type DocumentTypes, documentsList } from '../../data/document-types-list'
 
 function getColumnValue (sheet: XLSX.WorkSheet | IFileData, col: string, documentNumber: number): string {
   const location = `${col}${documentNumber + 2}`
