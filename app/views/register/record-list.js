@@ -12,7 +12,7 @@ import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge';
-import importFile from "~/components/common/import-file.vue";
+import importFile from "~/components/register/bulk-permit-upload-tool/components/app.vue";
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
