@@ -33,6 +33,10 @@ app.directive("viewAbsPermit", ['translationService', function (translationServi
 
 			$scope.gisMapLayers = null;
 			$scope.gisMapCenter = null;
+			$scope.mapConfig = mapConfig;
+
+			
+			
 			
 			//====================
 			//
