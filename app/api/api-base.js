@@ -19,13 +19,13 @@ const HttpStatusApiCode = {
 export default class ApiBase
 {
   constructor(options) { //{ tokenReader, prefixUrl, timeout, tokenType }
+
     options = options || {};
     // ToDo: weill find a better way to handle tokenReader
     // if(isFunction(options.tokenReader)) options = { tokenReader : options }
     if(isFunction(options)) options = { tokenReader : options }
 
-    const { tokenReader, realm, prefixUrl, timeout, tokenType } = { ...defaultOptions, ...options }
-
+    const { tokenReader, prefixUrl, timeout, tokenType, realm } = { ...defaultOptions, ...options }
 
     const baseConfig = {
       baseURL : prefixUrl,
@@ -54,7 +54,7 @@ export default class ApiBase
 
 async function loadAsyncHeaders(baseConfig, path) {
 
-  const { tokenReader, realm, tokenType, ...config } = baseConfig || {}
+  const { tokenReader, tokenType, realm, ...config } = baseConfig || {}
 
   const headers = { ...(config.headers || {}) };
 
@@ -80,9 +80,6 @@ async function loadAsyncHeaders(baseConfig, path) {
         headers.realm = realm;
       }
     }
-  }
-  if(realm){
-    headers.realm = realm;
   }
 
   return axios.create({ ...config, headers } );
