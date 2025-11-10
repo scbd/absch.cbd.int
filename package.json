@@ -65,7 +65,7 @@
     "server": "node server",
     "start": "node server.js",
     "build": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
-    "dev": "rm -rf ./dist && rm -rf ./i18n-build && NODE_OPTIONS='--max-old-space-size=4096' && npx rollup --strictDeprecations -c --watch",
+    "dev": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup --strictDeprecations -c --watch",
     "eslint": "npx eslint . --fix",
     "clean-reinstall": "rm -rf ./node_modules && yarn install",
     "import-translation": "node script/copy-translation-files.js"
