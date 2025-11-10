@@ -1,8 +1,0 @@
-{
-    "accessPermission": "Grant / Revoke Roles",
-    "selectFunction": "Please select which functions you want assign to the user",
-    "granted": "role(s) will be granted",
-    "revoked": "role(s) will be revoked",
-    "cancel": "cancel",
-    "next": "Next"
-}
