@@ -126,6 +126,7 @@ import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
     //
     //==================================
     $scope.getCleanDocument = function(document) {
+
       document = document || $scope.document;
 
       if (!document)
