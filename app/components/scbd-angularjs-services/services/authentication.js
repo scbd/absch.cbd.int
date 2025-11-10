@@ -64,6 +64,8 @@ import './apiUrl';
 
                     if (message.authenticationEmail)
                         $rootScope.lastLoginEmail = message.authenticationEmail;
+                    //                        console.log('signin called');
+                    //                    $rootScope.$broadcast('signIn', null);
 
                 }
                 else {
@@ -220,7 +222,6 @@ import './apiUrl';
 
             }).then(function(user) {
 
-                user.government = true;
                 setUser(user);
 
                 return user;
@@ -256,7 +257,6 @@ import './apiUrl';
                 email = (email || "").toLowerCase();
 
                 apiToken.set(token.authenticationToken, email, token.expiration);
-                user.government = true;
                 setUser(user);
 
                 $rootScope.$broadcast('signIn', user);
@@ -440,6 +440,7 @@ import './apiUrl';
                             parseUrl += ".js";
                           url = window.getHashFileName(parseUrl);
                         }
+                        console.log(url);
                         if (url.indexOf("v=") < 0 && !window.hasHashUrl(url)) {
                           url = window.addAppVersionToUrl(url);
                         }
