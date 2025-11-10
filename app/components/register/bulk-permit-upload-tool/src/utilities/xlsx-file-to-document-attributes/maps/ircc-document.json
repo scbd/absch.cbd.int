@@ -6,6 +6,7 @@
   "dateOfIssuance": "E",
   "dateOfExpiry": "F",
   "provider": {
+    "consent": "ZZ",
     "type": "G",
     "existing": "H",
     "orgName": "I",

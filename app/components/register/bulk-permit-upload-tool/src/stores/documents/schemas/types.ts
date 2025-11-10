@@ -11,6 +11,10 @@ export interface IKeyword {
   nonPreferedTerms: string[];
 }
 
+export type SubDocument = {
+  type: string
+}
+
 export type LanguageCode = 'ar' | 'en' | 'es' | 'fr' | 'ru' | 'zh'
 
 export type LanguageType = 'arabic' | 'english' | 'spanish' | 'french' | 'russian' | 'chinese'

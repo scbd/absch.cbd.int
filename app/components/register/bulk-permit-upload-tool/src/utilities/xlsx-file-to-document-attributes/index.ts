@@ -1,48 +1,54 @@
-import documentMapIRCC from './maps/ircc-document.json'
-import type { WorkSheet } from 'xlsx'
+import * as XLSX from 'xlsx'
 import type {
-  IIRCCDocumentAttributes, IContactFields, AttributeValue,
-  IIRCCDocumentMap, DocumentKeys,
+  DocumentAttributesMap,
   IFileData
 } from './types'
 import type { DocumentType } from '../../types'
+import { documentsList } from '../../data/document-types-list'
 
-type DocumentMapsList = {
-  ircc: IIRCCDocumentMap;
-}
-
-function getColumnValue (sheet: WorkSheet | IFileData, col: string, documentNumber: number): AttributeValue {
+function getColumnValue (sheet: XLSX.WorkSheet | IFileData, col: string, documentNumber: number): string {
   const location = `${col}${documentNumber + 2}`
   return (sheet[location] || {}).w || ''
 }
 
-export function mapXLSXFileToAttributeNames (documentMap: IIRCCDocumentMap, sheet: WorkSheet | IFileData): IIRCCDocumentAttributes {
+export function mapXLSXFileToAttributeNames (documentMap: DocumentAttributesMap, sheet: XLSX.WorkSheet | IFileData): DocumentAttributesMap {
   const documentNumber :number = 1
 
-  const mapKeyToColumn = (map: IContactFields | IIRCCDocumentAttributes): IIRCCDocumentAttributes => {
-    const mappedObject: IIRCCDocumentAttributes = documentMap as IIRCCDocumentAttributes
-    Object.entries(map).forEach(([k, value]) => {
-      const key: DocumentKeys = k as DocumentKeys
-      if (typeof value === 'string') {
-        mappedObject[key] = getColumnValue(sheet, value, documentNumber)
+  const getColumnString = (value: string | undefined): string => {
+    if (typeof value === 'string') {
+      return getColumnValue(sheet, value, documentNumber) as string
+    }
+    return 'Column not readable'
+  }
+
+  const mapColumnToDocumentAttribute = (attributesMap: DocumentAttributesMap): DocumentAttributesMap => {
+    const map = { language: '' } as DocumentAttributesMap
+    Object.entries(attributesMap).forEach(([key, value]) => {
+      if (typeof value === 'object') {
+        map[key] = mapColumnToDocumentAttribute(value)
         return
       }
-      if (typeof value === 'object') {
-        mappedObject[key] = mapKeyToColumn(value)
-      }
+      map[key] = getColumnString(value)
     })
-    return mappedObject
+
+    return map
   }
 
-  return mapKeyToColumn(documentMap as IIRCCDocumentAttributes)
+  return mapColumnToDocumentAttribute(documentMap)
 }
 
-export default function mapXLSXFileToDocumentAttributes (documentType: DocumentType, sheet: WorkSheet | Array<string>): IIRCCDocumentAttributes {
-  const documentMapsList: DocumentMapsList = {
-    ircc: documentMapIRCC
+export default function mapXLSXFileToDocumentAttributes (documentType: DocumentType, sheet: XLSX.WorkSheet | Array<string>): DocumentAttributesMap {
+  const documentMap = (documentsList[documentType] || {}).attributesMap
+  console.log('documentsList[documentType]', documentsList[documentType])
+
+  if (documentMap === undefined) { return {} }
+
+  const attributes = mapXLSXFileToAttributeNames(documentMap as DocumentAttributesMap, sheet)
+
+  switch (documentType) {
+    case 'ircc':
+      return attributes
+    default:
+      return attributes
   }
-
-  const documentMap = documentMapsList[documentType]
-
-  return mapXLSXFileToAttributeNames(documentMap, sheet)
 }

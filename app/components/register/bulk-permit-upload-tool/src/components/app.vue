@@ -29,7 +29,7 @@ import Modal from './modal.vue'
 import { useXlSXSheetStore } from '../stores/xlsx-sheet/index'
 import xlsxFileToDocumentAttributes from '../utilities/xlsx-file-to-document-attributes'
 import mapDocumentAttributesToAPIJSON from '../utilities/document-attributes-to-api-json'
-import { type IIRCCDocumentAttributes } from '../utilities/xlsx-file-to-document-attributes/types'
+import { type DocumentAttributesMap } from '../utilities/xlsx-file-to-document-attributes/types'
 import { type DocumentType } from '../types'
 
 const props = defineProps<{
@@ -48,7 +48,7 @@ const onFileChange = async (changeEvent: Event) => {
   const workbook = await xlsxSheetStore.readFile(changeEvent)
   const sheet: XLSX.WorkSheet | Array<string> = workbook.Sheets.Sheet3 || []
   // Parse File to JSON matching the attributes of a given document
-  const documentAttributesList :IIRCCDocumentAttributes = xlsxFileToDocumentAttributes(docType, sheet)
+  const documentAttributesList :DocumentAttributesMap = xlsxFileToDocumentAttributes(docType, sheet)
   console.log('documentAttributesList', documentAttributesList)
 
   // Match document attributes to the API Schema
