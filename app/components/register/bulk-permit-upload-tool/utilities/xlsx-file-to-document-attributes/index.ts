@@ -37,17 +37,9 @@ export function mapXLSXFileToAttributeNames (documentMap: DocumentAttributesMap,
 }
 
 export default function mapXLSXFileToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkSheet | Array<string>): DocumentAttributesMap {
-  const documentMap = (documentsList[documentType] || {}).attributesMap
-  console.log('documentsList[documentType]', documentsList[documentType])
+  const documentAttributesMap = (documentsList[documentType] || {}).attributesMap
 
-  if (documentMap === undefined) { return {} }
+  if (documentAttributesMap === undefined) { return {} }
 
-  const attributes = mapXLSXFileToAttributeNames(documentMap as DocumentAttributesMap, sheet)
-
-  switch (documentType) {
-    case 'ircc':
-      return attributes
-    default:
-      return attributes
-  }
+  return mapXLSXFileToAttributeNames(documentAttributesMap as DocumentAttributesMap, sheet)
 }
