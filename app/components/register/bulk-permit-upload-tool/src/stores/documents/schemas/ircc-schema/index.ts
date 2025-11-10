@@ -1,20 +1,21 @@
-import Schema from './schema'
-import type { IIRCCDocumentAttributes, IContactFields } from '../../../utilities/xlsx-file-to-document-attributes/types'
+import Schema from '../schema'
+import type { IContactFields, IIRCCDocumentAttributes } from './types'
 
 export default class IrccSchema extends Schema {
   async parseXLSXFileToDocumentJson () {
-    const sheet :IIRCCDocumentAttributes = this.xlsxFileData as IIRCCDocumentAttributes
-    const schema = IrccSchema
+    const sheet: IIRCCDocumentAttributes = this.xlsxFileData as IIRCCDocumentAttributes
+
+    const Schema = IrccSchema
     return {
       header: {
         identifier: 'CB51626B-CF45-2AA0-3A24-459669DDCC34',
       },
-      schema: 'absPermit',
+      Schema: 'absPermit',
       languages: [
-        schema.getLanguageCode(sheet.language)
+        Schema.getLanguageCode(sheet.language)
       ],
       absCNA: {
-        identifier: await schema.getDocumentIdentifierByUid(sheet.absCNAId)
+        identifier: await Schema.getDocumentIdentifierByUid(sheet.absCNAId)
       },
       title: sheet.permitEquivalent,
       referenceToNationalPermit: {
@@ -23,16 +24,16 @@ export default class IrccSchema extends Schema {
       dateOfIssuance: sheet.dateOfIssuance,
       providers: [
         {
-          identifier: schema.getProviderIdentifier(sheet.provider as IContactFields)
+          identifier: Schema.getProviderIdentifier(sheet.provider as IContactFields)
         }
       ],
-      providersConfidential: schema.getIsConfidential(sheet.provider as IContactFields),
+      providersConfidential: Schema.getIsConfidential(sheet.provider as IContactFields),
       entitiesToWhomPICGranted: [
         {
-          identifier: schema.getDocumentIdentifier(sheet.pic as IContactFields)
+          identifier: Schema.getDocumentIdentifier(sheet.pic as IContactFields)
         }
       ],
-      entitiesToWhomPICGrantedConfidential: schema.getIsConfidential(sheet.pic as IContactFields),
+      entitiesToWhomPICGrantedConfidential: Schema.getIsConfidential(sheet.pic as IContactFields),
       subjectMatter: {
         [this.language]: this.getSubjectMatter(sheet.subjectMatter)
       },
@@ -44,7 +45,7 @@ export default class IrccSchema extends Schema {
       ],
       specimens: this.parseFileReference(sheet.specimens),
       taxonomies: this.parseFileReference(sheet.taxonomies),
-      picGranted: schema.parseTextToBoolean(((sheet.pic as IContactFields).consent)),
+      picGranted: Schema.parseTextToBoolean(((sheet.pic as IContactFields).consent)),
       picInformation: {
         [this.language]: '<div><!--block-->asdfasdfasdf</div>'
       },
@@ -55,7 +56,7 @@ export default class IrccSchema extends Schema {
           language: 'en'
         }
       ],
-      matEstablished: schema.parseTextToBoolean(sheet.matEstablished as string),
+      matEstablished: Schema.parseTextToBoolean(sheet.matEstablished as string),
       matInformation: {
         en: '<div><!--block-->asdf</div>'
       },

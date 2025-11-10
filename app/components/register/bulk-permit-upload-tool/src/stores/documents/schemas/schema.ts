@@ -1,19 +1,22 @@
 import { getDocument } from '../../../api/make-api-request'
 import languageMapping from './languageMapping'
-import type { LanguageCode, LanguageType } from '../../../mappings/types'
-import type { SubjectMatter, FileReference } from './types'
-import type { AttributeValue, IContactFields, IIRCCDocumentAttributes } from '../../../utilities/xlsx-file-to-document-attributes/types'
+import type {
+  LanguageCode, LanguageType,
+  SubjectMatter, FileReference,
+  SubDocument
+} from './types'
+import type { DocumentAttributesMap } from '../../../utilities/xlsx-file-to-document-attributes/types'
 
 export default class Schema {
   language: LanguageCode = 'en'
-  xlsxFileData: IIRCCDocumentAttributes
+  xlsxFileData: DocumentAttributesMap
   documentNumber: number = 1
 
-  constructor (xlsxData: IIRCCDocumentAttributes) {
+  constructor (xlsxData: DocumentAttributesMap) {
     this.xlsxFileData = xlsxData
   }
 
-  getSubjectMatter (subjectMatter: AttributeValue): SubjectMatter {
+  getSubjectMatter (subjectMatter: string): SubjectMatter {
     if (String(subjectMatter).trim() === '') { return { [this.language]: '' } as SubjectMatter }
 
     return {
@@ -21,12 +24,12 @@ export default class Schema {
     } as SubjectMatter
   }
 
-  static getLanguageCode (langValue: AttributeValue): LanguageCode {
+  static getLanguageCode (langValue: string): LanguageCode {
     const lang: string = String(langValue).toLowerCase()
     return languageMapping[lang as LanguageType]
   }
 
-  static async getDocumentIdentifierByUid (uniqueId: AttributeValue): Promise<string> {
+  static async getDocumentIdentifierByUid (uniqueId: string): Promise<string> {
     const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
     console.log('uid', uid)
 
@@ -35,8 +38,6 @@ export default class Schema {
       console.warn(error)
       return error
     }
-
-    console.log('uid[4]', uid[4])
 
     const { data } = await getDocument(uid[4] || '')
     if (!data) {
@@ -48,9 +49,9 @@ export default class Schema {
     return data.header.identifier + '@' + uid[5]
   }
 
-  static getDocumentIdentifier (document: IContactFields): string {
+  static getDocumentIdentifier (document: object): string {
     // TODO: Implement
-    return document.email
+    return 'document.email'
   }
 
   static parseDate (col: string): string {
@@ -58,13 +59,13 @@ export default class Schema {
     return col
   }
 
-  static getProviderIdentifier (provider: IContactFields): string {
+  static getProviderIdentifier (provider: object): string {
     // TODO: Implement
-    return provider.type
+    return 'provider.type'
   }
 
-  static getIsConfidential (subDocument: IContactFields): boolean {
-    const providerType: string = subDocument.type
+  static getIsConfidential (subDocument: SubDocument): boolean {
+    const providerType: string = String(subDocument.type)
     return providerType === 'confidential'
   }
 
@@ -72,11 +73,15 @@ export default class Schema {
     return String(columnValue).toLowerCase() === 'yes'
   }
 
-  parseFileReference (reference: AttributeValue): FileReference {
+  parseFileReference (reference: string): FileReference {
     return {
       url: reference || '',
       name: reference || '',
       [this.language]: reference || 'en'
     } as FileReference
+  }
+
+  async parseXLSXFileToDocumentJson () {
+    return {}
   }
 }

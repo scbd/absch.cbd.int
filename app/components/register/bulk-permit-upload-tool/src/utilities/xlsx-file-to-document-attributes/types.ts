@@ -1,40 +1,12 @@
-export type AttributeValue = string | IContactFields | IIRCCDocumentMap
+// export interface CPCDocumentAttributes {
+//   language: AttributeValue;
+//   absIRCCs: AttributeValue;
+//   etc: AttributeValue;
+// }
 
-export interface IIRCCDocumentAttributes {
-  language: AttributeValue;
-  absCNAId: AttributeValue;
-  permitEquivalent: AttributeValue;
-  dateOfIssuance: AttributeValue;
-  dateOfExpiry: AttributeValue;
-  provider: AttributeValue;
-  pic: AttributeValue;
-  matEstablished: AttributeValue;
-  subjectMatter: AttributeValue;
-  keywords: AttributeValue;
-  specimens: AttributeValue;
-  taxonomies: AttributeValue;
-  usage: AttributeValue;
-  usageDescription: AttributeValue;
-  conditionsThirdPartyTransfer: AttributeValue;
-  permitFiles: AttributeValue;
-  additionalInformation: AttributeValue;
-}
+// export type DocumentKeys = keyof IIRCCDocumentAttributes | keyof CPCDocumentAttributes
 
-export type IIRCCDocumentMap = { [key in keyof IIRCCDocumentAttributes]?: object | string }
-
-export type DocumentKeys = keyof IIRCCDocumentAttributes
-
-export interface IContactFields {
-  type: string;
-  existing: string;
-  org_name: string;
-  acronym: string;
-  address: string;
-  city: string;
-  country: string;
-  email: string;
-  consent?: string;
-}
+export type DocumentAttributesMap = { [key: string]: string | DocumentAttributesMap }
 
 export type CellValue = {
   w: string;
