@@ -48,12 +48,20 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-
+<script setup>
+// , type ShallowRef
 import { shallowRef, onMounted, watch } from 'vue'
 import { Modal } from 'bootstrap'
-const modalRef = shallowRef(null)
-let modal = null
+// const modalRef: ShallowRef<Element> = shallowRef(new Element())
+let modalRef = shallowRef(null)
+
+// type ModalType = {
+//   show: Function,
+//   hide: Function,
+// }
+// 
+// let modal :ModalType = { show: () => {}, hide: () => {} } 
+let modal = { show: () => {}, hide: () => {} } 
 
 const props = defineProps({
   title: {
@@ -80,8 +88,16 @@ watch(() => props.isShown, (newValue) => {
 })
 
 onMounted(() => {
-  modal = new Modal(modalRef.value)
-  if (props.isShown) { show() }
+  const value = modalRef.value
+  console.log(value)
+  console.log('props.isShown', props.isShown)
+
+  modal = new Modal(value)
+  console.log('ok')
+  if (props.isShown) {
+    console.log('show')
+    show()
+  }
 })
 
 defineExpose({ show, close })

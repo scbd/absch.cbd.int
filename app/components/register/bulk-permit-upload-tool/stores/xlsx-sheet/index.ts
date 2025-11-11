@@ -50,12 +50,12 @@ export const useXlSXSheetStore = defineStore('xlsx-sheet', {
     },
 
     async readFile (changeEvent: Event): Promise<XLSX.WorkBook> {
-      this.$reset()
-      this.isLoading = false
-      console.log('parsedFile', this.parsedFile.SheetNames.length > 0)
-      this.parsedFile = await this.parseFile(changeEvent)
+      // this.$reset()
+      // this.isLoading = false
+      // console.log('parsedFile', this.parsedFile.SheetNames.length > 0)
+      // this.parsedFile = await this.parseFile(changeEvent)
 
-      console.log('parsedFile', this.parsedFile.SheetNames.length > 0)
+      // console.log('parsedFile', this.parsedFile.SheetNames.length > 0)
       return this.parsedFile as XLSX.WorkBook
     },
 

@@ -97,9 +97,9 @@ function bundle(entryPoint, locale, baseDir='app') {
       vue(),
       typescript(),
       injectCssToDom(),
-      dynamicImportVariables({ include:`${baseDir}/**/*.js` }),
+      dynamicImportVariables({ include:[`${baseDir}/**/*.js`, `${baseDir}/**/*.vue`, `${baseDir}/**/*.ts`] }),
       commonjs({ include: 'node_modules/**/*.js'}),
-      nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
+      nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ], extensions: [".tsx", ".ts", ".jsx", ".js", ".json", ".vue"] }),
       isWatchOn ? null : getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"} ], { plugins: ['@babel/plugin-transform-private-methods'] }],
         plugins: ['@babel/plugin-proposal-class-properties'],

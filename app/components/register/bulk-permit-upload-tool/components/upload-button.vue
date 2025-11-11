@@ -10,7 +10,7 @@
       name="file"
       accept=".xlsx, .xls"
       class="position-absolute fs-1 opacity-0 top-0 start-0 w-100 h-100"
-      @change="(changeEvent: Event) => $emit('onFileChange', changeEvent)"
+      @change="onChange"
       @click="onFileInputClick"
     >
   </button>
@@ -22,8 +22,12 @@ const props = defineProps({
     default: false,
   },
 })
-
 const $emit = defineEmits(['onFileChange'])
+
+const onChange = (changeEvent: Event) => {
+  $emit('onFileChange', changeEvent as Event)
+}
+
 
 const onFileInputClick = (event: Event) => {
   const { target } = event

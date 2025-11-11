@@ -222,6 +222,7 @@ import './apiUrl';
 
             }).then(function(user) {
 
+                user.government = true
                 setUser(user);
 
                 return user;
@@ -257,6 +258,7 @@ import './apiUrl';
                 email = (email || "").toLowerCase();
 
                 apiToken.set(token.authenticationToken, email, token.expiration);
+                user.government = true
                 setUser(user);
 
                 $rootScope.$broadcast('signIn', user);
