@@ -27,6 +27,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
 
+                window.isBulkUploaderOpen = true 
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
@@ -443,6 +444,10 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return "";
                 };
 
+                $scope.openBulkUploader = function () {
+                  window.isBulkUploaderOpen = true 
+                }
+
                 $scope.showAddButton = function () {
 
                     return roleService.isPublishingAuthority() ||
@@ -779,6 +784,11 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.isDisableEdit = function (schema){
                     return  realm.schemas[schema].disableEdit;
                 }
+                console.log('$rootScope.user', $rootScope.user)
+                $scope.exportVueComponent = {
+                    components:{ importFile }
+                }
+
                 if($routeParams.document_type === "IRCC" && $rootScope.user?.government){
                     $scope.exportVueComponent = {
                         components:{ importFile }
