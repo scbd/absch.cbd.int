@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+// import { defineStore } from 'pinia'
 import * as XLSX from 'xlsx'
 import readXLSXFile from '../../utilities/read-xlsx-file'
 
@@ -24,56 +24,43 @@ type DocStateType = {
   multipleImportSheets: Array<string>;
   progressTracking: number | null;
 }
-
-export const useXlSXSheetStore = defineStore('xlsx-sheet', {
-  state: (): DocStateType => ({
-    parsedFile: { Sheets: {}, SheetNames: [] },
-    errors: { fileRead: null },
-    isLoading: false,
-    selectedSheetIndex: 0,
-    multipleImportSheets: [],
-    progressTracking: null
-  }),
-
-  getters: {
-    hasParsedFiles: (state) => state.parsedFile.SheetNames.length > 0
-  },
-
-  actions: {
-    async parseFile (changeEvent: Event): Promise<XLSX.WorkBook> {
-      const readFileResult = await readXLSXFile(changeEvent)
-
-      if (readFileResult.error) {
-        this.errors = { fileRead: 'An error occurred while reading the file.' }
-      }
-      return readFileResult.workbook
-    },
-
-    async readFile (changeEvent: Event): Promise<XLSX.WorkBook> {
-      // this.$reset()
-      // this.isLoading = false
-      // console.log('parsedFile', this.parsedFile.SheetNames.length > 0)
-      // this.parsedFile = await this.parseFile(changeEvent)
-
-      // console.log('parsedFile', this.parsedFile.SheetNames.length > 0)
-      return this.parsedFile as XLSX.WorkBook
-    },
-
-    handleClearFile () {
-      this.$reset()
-    },
-
-    handleSelectedSheetChange () {
-      try {
-        if (this.selectedSheetIndex == null) { return }
-        this.errors = { fileRead: null }
-        this.progressTracking = null
-      } catch (err) {
-        console.warn('ERR', err)
-        this.parsedFile = { SheetNames: [], Sheets: {} }
-        this.errors = { fileRead: 'An error occurred while reading the file.' }
-      }
-      this.isLoading = false
-    }
-  },
+// 
+// export const useXlSXSheetStore = defineStore('xlsx-sheet', {
+//
+const state: DocStateType = ({
+  parsedFile: { Sheets: {}, SheetNames: [] },
+  errors: { fileRead: null },
+  isLoading: false,
+  selectedSheetIndex: 0,
+  multipleImportSheets: [],
+  progressTracking: null
 })
+
+async function parseFile (changeEvent: Event): Promise<XLSX.WorkBook> {
+  const readFileResult = await readXLSXFile(changeEvent)
+
+  if (readFileResult.error) {
+    state.errors = { fileRead: 'An error occurred while reading the file.' }
+  }
+  return readFileResult.workbook
+}
+
+export async function readFile (changeEvent: Event): Promise<XLSX.WorkBook> {
+  // this.$reset()
+  state.isLoading = false
+  console.log('parsedFile', state.parsedFile.SheetNames.length > 0)
+  state.parsedFile = await parseFile(changeEvent)
+
+  return state.parsedFile as XLSX.WorkBook
+}
+
+function handleClearFile () {
+  // this.$reset()
+}
+
+const storeObject = {
+   getters: {
+     hasParsedFiles: (state: DocStateType) => state.parsedFile.SheetNames.length > 0
+   },
+ 
+}
