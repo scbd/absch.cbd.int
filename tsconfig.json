@@ -3,7 +3,8 @@
     "incremental": true,
     "sourceMap": false,
     "strict": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
+    "target": "esnext",
     "rootDir": "app",
     "skipLibCheck": true,
     "noUnusedParameters": false, // Do not allow unused parameters in functions.
@@ -26,5 +27,3 @@
     "dist"
   ]  
 }
-
-
