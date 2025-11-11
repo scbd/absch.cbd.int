@@ -2,7 +2,7 @@ import Schema from '../schema'
 import type { IContactFields, IIRCCDocumentAttributes } from './types'
 
 export default class IrccSchema extends Schema {
-  async parseXLSXFileToDocumentJson () {
+  override async parseXLSXFileToDocumentJson () {
     const sheet: IIRCCDocumentAttributes = this.xlsxFileData as IIRCCDocumentAttributes
 
     const Schema = IrccSchema
