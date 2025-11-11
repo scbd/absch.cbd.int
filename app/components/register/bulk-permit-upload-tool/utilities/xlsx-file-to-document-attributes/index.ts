@@ -37,16 +37,11 @@ export function mapXLSXFileToAttributeNames (documentMap: DocumentAttributesMap,
 }
 
 export default function mapXLSXFileToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkSheet | Array<string>): DocumentAttributesMap {
-  console.log('documentType', documentType)
-  console.log('documentType', documentsList[documentType])
-
+  if (!documentType) {
+    console.warn('No document type defined')
+    return {}
+  }
   const documentAttributesMap = documentsList[documentType]?.attributesMap
-  console.log('documentsList[documentType]', documentsList[documentType]?.attributesMap)
-  console.log('documentsList[documentType]', documentsList[documentType]?.ApiSchema)
-
-  console.log('documentsList', documentsList)
-
-  console.log('documentAttributesMap', documentAttributesMap?.language)
 
 
   if (documentAttributesMap === undefined) { return {} }

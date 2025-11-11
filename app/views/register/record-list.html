@@ -52,9 +52,17 @@
                 <div class="col-md-5 col-12">
                     <div class="btn-group-sm float-md-end">
                         <!-- Import -->
-                        <span ng-if="exportVueComponent">
-                           <import-file ng-vue="exportVueComponent" @refresh-record="refreshList(schema);" :document-type="'ircc'"></import-file>
-                        </span>
+                        <div ng-if="exportVueComponent">
+                          <div ng-if="isBulkUploaderOpen">
+                            <import-file
+                              ng-vue="exportVueComponent"
+                              @refresh-record="refreshList(schema);"
+                              @on-close="onBulkUploaderClose();"
+                              :document-type="'ircc'"
+                            >
+                            </import-file>
+                          </div>
+                        </div>
                         <div class="btn border fs-small-8" ng-if="offlineFormats">{{::('recordListT.offlineFormat'|$translate)}}
                             <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
                                 ng-show="::offlineFormats[schema][code]" class="padding-left-right-2">
