@@ -9,18 +9,13 @@ export default class IrccSchema extends Schema {
     return {
       header: {
         identifier: 'CB51626B-CF45-2AA0-3A24-459669DDCC34',
+        schema: "absPermit",
+        languages: [ Schema.getLanguageCode(sheet.language)]
       },
-      Schema: 'absPermit',
-      languages: [
-        Schema.getLanguageCode(sheet.language)
-      ],
       absCNA: {
         identifier: await Schema.getDocumentIdentifierByUid(sheet.absCNAId)
       },
       title: sheet.permitEquivalent,
-      referenceToNationalPermit: {
-        [this.language]: 'strsgfsgfdxgf'
-      },
       dateOfIssuance: sheet.dateOfIssuance,
       providers: [
         {
