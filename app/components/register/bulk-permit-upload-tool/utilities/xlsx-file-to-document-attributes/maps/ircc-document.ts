@@ -1,4 +1,4 @@
-{
+export default {
   "language": "A",
   "country": "B",
   "absCNAId": "C",

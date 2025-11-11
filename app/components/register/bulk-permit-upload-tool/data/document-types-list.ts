@@ -1,6 +1,6 @@
 import IrccSchema from '../utilities/document-attributes-to-api-json/schemas/ircc-schema/index'
 import Schema from '../utilities/document-attributes-to-api-json/schemas/schema'
-import irccAttributesMap from '../utilities/xlsx-file-to-document-attributes/maps/ircc-document.json'
+import irccAttributesMap from '../utilities/xlsx-file-to-document-attributes/maps/ircc-document'
 
 
 type AttributesMap = {
