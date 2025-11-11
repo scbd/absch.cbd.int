@@ -12,7 +12,7 @@ import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge';
-import importFile from "~/components/register/bulk-permit-upload-tool/components/app.vue";
+import importFile from "~/components/register/bulk-permit-upload-tool/App.vue";
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
@@ -26,8 +26,8 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
+                $scope.isBulkUploaderOpen = false 
 
-                window.isBulkUploaderOpen = true 
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
@@ -445,7 +445,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 };
 
                 $scope.openBulkUploader = function () {
-                  window.isBulkUploaderOpen = true 
+                  $scope.isBulkUploaderOpen = true 
                 }
 
                 $scope.showAddButton = function () {
@@ -504,8 +504,14 @@ const recordListError = mergeTranslationKeys(recordListT);
                     evtServerPushNotification();
                 })
 
-                $scope.refreshList = function (schema) {
+                $scope.refreshList = function () {
                     loadRecords(1);
+                };
+
+                $scope.onBulkUploaderClose = function () {
+                  console.log('onBulkUploaderClose')
+                  $scope.isBulkUploaderOpen = false
+                  return $scope.isBulkUploaderOpen
                 };
 
                 $scope.closeDialog = function(){

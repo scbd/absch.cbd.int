@@ -1,7 +1,12 @@
 <template>
-  <Modal>
+  <Modal
+    :is-shown="true"
+    @on-close="onModalClose"
+  >
     <template #header>
-      <BulkUploaderHeader />
+      <BulkUploaderHeader
+        @close-modal="onModalClose"
+      />
     </template>
 
     <UploadButton
@@ -11,7 +16,7 @@
 
     <template #footer>
       <BulkUploaderFooter
-        v-if="hasParsedFiles()"
+        v-if="hasParsedFiles"
         :is-loading="false"
         @handle-confirm="handleConfirm"
         @handle-clear="handleClearFile"
@@ -21,8 +26,9 @@
   </Modal>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue'
 import * as XLSX from 'xlsx'
-import ModalFooter from './bulk-uploader-footer.vue'
+import BulkUploaderFooter from './bulk-uploader-footer.vue'
 import BulkUploaderHeader from './bulk-uploader-header.vue'
 import UploadButton from './upload-button.vue'
 import Modal from '../../../common/modal.vue'
@@ -35,9 +41,14 @@ import { type DocumentTypes } from '../data/document-types-list'
 
 const props = defineProps<{
   documentType: DocumentTypes;
+  onClose: Function;
 }>()
 
 // const xlsxSheetStore = useXlSXSheetStore()
+const hasParsedFiles = ref(false) 
+
+let sheet: XLSX.WorkSheet | Array<string> = []
+
 
 const handleConfirm = () => {
   // POST to API to create Document Draft
@@ -45,20 +56,22 @@ const handleConfirm = () => {
 
 const handleClearFile = () => {
   // POST to API to create Document Draft
-}
-const hasParsedFiles = () => {
-  return true
+  hasParsedFiles.value = false
 }
 
-
+const onModalClose = () => {
+  console.log('onModalClose')
+  console.log(' props.onClose',  props.onClose)
+  props.onClose()
+}
 
 const onFileChange = async (changeEvent: Event) => {
   const docType :DocumentTypes = props.documentType
   // Read File
   // const readFile = xlsxSheetStore.readFile
   const workbook = await readFile(changeEvent)
-  const sheet: XLSX.WorkSheet | Array<string> = workbook.Sheets['Sheet3'] || []
-  console.log('sheet', sheet)
+  sheet = workbook.Sheets['Sheet3'] || []
+  hasParsedFiles.value = true
 
   // // Parse File to JSON matching the attributes of a given document
   // const documentAttributesList :DocumentAttributesMap = xlsxFileToDocumentAttributes(docType, sheet)
@@ -72,3 +85,9 @@ const onFileChange = async (changeEvent: Event) => {
   // return apiJson
 }
 </script>
+
+<style>
+  .modal-dialog {
+    margin: 30vh auto;  
+  }
+</style>

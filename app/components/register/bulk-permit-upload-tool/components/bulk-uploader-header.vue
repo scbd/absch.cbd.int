@@ -11,12 +11,15 @@
     <button
       type="button"
       class="btn-close"
-      data-bs-dismiss="modal"
       aria-label="Close"
+      data-bs-dismiss="modal"
+      @click="$emit('closeModal')"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+
+const $emit = defineEmits(['closeModal'])
 
 </script>

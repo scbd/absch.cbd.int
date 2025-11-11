@@ -3,6 +3,7 @@
     ref="modalRef"
     class="modal fade"
     aria-hidden="true"
+    @click.self="close"
   >
     <div
       class="modal-dialog modal-xl"
@@ -21,6 +22,7 @@
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              @click="close"
             />
           </slot>
         </div>
@@ -36,6 +38,7 @@
                   type="button"
                   class="btn btn-secondary"
                   data-bs-dismiss="modal"
+                  @click="close"
                 >
                   {{ $t("closeButton") }}
                 </button>
@@ -71,8 +74,10 @@ const props = defineProps({
   isShown: {
     type: Boolean,
     default: true,
-  }
+  },
 })
+
+const $emit = defineEmits(['onClose'])
 
 const show = () => {
   modal.show('static')
@@ -80,6 +85,7 @@ const show = () => {
 
 const close = () => {
   modal.hide()
+  $emit('onClose')
 }
 
 watch(() => props.isShown, (newValue) => {
@@ -90,7 +96,7 @@ watch(() => props.isShown, (newValue) => {
 onMounted(() => {
   const value = modalRef.value
   console.log(value)
-  console.log('props.isShown', props.isShown)
+  console.log('modal', props.isShown)
 
   modal = new Modal(value)
   console.log('ok')
@@ -102,3 +108,6 @@ onMounted(() => {
 
 defineExpose({ show, close })
 </script>
+
+<style>
+</style>
