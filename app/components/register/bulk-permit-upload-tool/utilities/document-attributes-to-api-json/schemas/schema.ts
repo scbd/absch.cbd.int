@@ -54,9 +54,13 @@ export default class Schema {
     return 'document.email'
   }
 
-  static parseDate (col: string): string {
-    // TODO: Implement
-    return col
+  static parseDate (dateValue: string): string {
+    // TODO: Test to ensure it is correct 
+    const date = new Date(Date.parse(dateValue))
+    const options :Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const dateFormat = 'en-US'
+    console.log('date.toLocaleDateString(dateFormat, options)', date.toLocaleDateString(dateFormat, options))
+    return date.toLocaleDateString(dateFormat, options)
   }
 
   static getProviderIdentifier (provider: object): string {
