@@ -1,7 +1,6 @@
 import IrccSchema from '../utilities/document-attributes-to-api-json/schemas/ircc-schema/index'
 import Schema from '../utilities/document-attributes-to-api-json/schemas/schema'
-import { irccAttributesMap, IRCCAttributesMap } from '../utilities/xlsx-file-to-document-attributes/maps/ircc-document'
-
+import irccAttributesMap from '../utilities/xlsx-file-to-document-attributes/maps/ircc-document.json'
 
 type AttributesMap = {
   [key: string]: string | AttributesMap
@@ -11,7 +10,7 @@ export type DocumentTypes = 'ircc' // | 'cpc' | 'contact'
 
 type DocumentInfo = {
   ApiSchema: typeof Schema
-  attributesMap: IRCCAttributesMap
+  attributesMap: AttributesMap 
 }
 
 export type DocumentsList = {
