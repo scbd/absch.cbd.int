@@ -15,7 +15,7 @@ import injectCssToDom           from './rollup/inject-css-to-dom.js';
 import resolveLocalized         from './rollup/resolve-localized.js';
 import stripBom                 from './rollup/strip-bom.js';
 import mergeI18n                from './rollup/merge-i18n.js'
-import typescript               from '@rollup/plugin-typescript';
+import typescript               from 'rollup-plugin-typescript2';
 
 const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
