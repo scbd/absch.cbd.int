@@ -24,14 +24,16 @@ export default function resolveLocalized(options = { }) {
   return {
     name: 'resolveLocalized',
 
-    async resolveId(importeeId, importer) {
+    async resolveId(importeeId, importer, options) {
+      const resolveOptions = Object.assign({}, options, { skipSelf: true })
+      const resolved = await this.resolve(importeeId, importer, resolveOptions);
 
-      const resolved = await this.resolve(importeeId, importer, { skipSelf: true });
-
-      if(!resolved)
-        console.debug(importeeId, importer);
+      if(!resolved) {
+         console.debug('Error: unresolved import:', importeeId, importer);
+      }
       
       const { external, id: absolutePath }  = resolved;
+
 
       if(external) return resolved;
 
@@ -46,7 +48,7 @@ export default function resolveLocalized(options = { }) {
         let shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath);
 
         if (shouldUse) {
-          return this.resolve(localizedFilePath, importer, { skipSelf: true });
+          return this.resolve(localizedFilePath, importer, resolveOptions);
         }
       }
 
