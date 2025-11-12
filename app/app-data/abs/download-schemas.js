@@ -1,7 +1,7 @@
 import fieldsTranslations from '~/app-text/views/search/search-results/abs-download-schemas.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
 import { downloadSchemas as commonDownloadSchemas } from '~/app-data/common-download-schemas';
-import commonFieldsTranslations from '../app-text/views/search/search-results/common-download-schemas.json';
+import commonFieldsTranslations from '~/app-text/views/search/search-results/common-download-schemas.json';
 
 const fieldsT = mergeTranslationKeys(fieldsTranslations);
 const commonFieldsT = mergeTranslationKeys(commonFieldsTranslations);

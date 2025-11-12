@@ -42,7 +42,6 @@ export default async function(){
 }
 
 function bundle(entryPoint, locale, baseDir='app') {
-
   const entryPointPath = path.join(baseDir||'', entryPoint);
   const targetDir      = path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(entryPoint));
 
@@ -58,7 +57,6 @@ function bundle(entryPoint, locale, baseDir='app') {
     external: externals,
     plugins : [
       alias({ entries : [
-        { find: /^(..\/)+(.*)\.json$/,   replacement:`${process.cwd()}/${baseDir}/$2.json` },
         { find: /^~\/(.*)/,   replacement:`${process.cwd()}/${baseDir}/$1` },
         { find: /^json!(.*)/, replacement:`$1` },
         { find: /^text!(.*)/, replacement:`$1` },
@@ -99,7 +97,7 @@ function bundle(entryPoint, locale, baseDir='app') {
       injectCssToDom(),
       dynamicImportVariables({ include:[`${baseDir}/**/*.js`, `${baseDir}/**/*.vue`, `${baseDir}/**/*.ts`] }),
       commonjs({ include: 'node_modules/**/*.js'}),
-      nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ], extensions: [".tsx", ".ts", ".jsx", ".js", ".json", ".vue"] }),
+      nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
       isWatchOn ? null : getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"} ], { plugins: ['@babel/plugin-transform-private-methods'] }],
         plugins: ['@babel/plugin-proposal-class-properties'],
