@@ -41,11 +41,11 @@
     const loading :Ref<boolean> = ref(true);
   
     const goToAdminTag = (adminTag: string) => {
-        if (adminTag === 'faq') {
+      if (adminTag === 'faq') {
         router.push({ path: 'kb/faqs' });
-        } else {
+      } else {
         router.push({ path: `kb/tags/${encodeURIComponent(adminTag)}` });
-        }
+      }
     };
   
     onMounted(async () => {
