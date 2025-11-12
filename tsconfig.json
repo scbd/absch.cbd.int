@@ -2,10 +2,17 @@
   "compilerOptions": {
     "baseUrl": ".",
     "moduleResolution": "node",
-    "target": "esnext"
+    "target": "esnext",
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noEmitOnError": true
   },
+  
   "include": [
     "**/*.ts",
-    "**/*.vue"
+    "**/*.vue",
+    "**/*.json"
   ]
 }
