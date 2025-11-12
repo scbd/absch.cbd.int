@@ -5,6 +5,7 @@
     "strict": true,
     "moduleResolution": "node",
     "target": "esnext",
+<<<<<<< HEAD
     "rootDir": "app",
     "skipLibCheck": true,
     "noUnusedParameters": false, // Do not allow unused parameters in functions.
@@ -17,8 +18,17 @@
     "noFallthroughCasesInSwitch": true,
     "noPropertyAccessFromIndexSignature": true,
     "allowUnreachableCode": false
+=======
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noEmitOnError": true
+>>>>>>> 50eac950f (modifies tsconfig to allow for json file importing and prevents compile from failing if there are typescript errors)
   },
+  
   "include": [
+<<<<<<< HEAD
     "app/**/*.vue",
     "app/**/*.ts"
   ],
@@ -26,4 +36,10 @@
     "node_modules",
     "dist"
   ]  
+=======
+    "**/*.ts",
+    "**/*.vue",
+    "**/*.json"
+  ]
+>>>>>>> 50eac950f (modifies tsconfig to allow for json file importing and prevents compile from failing if there are typescript errors)
 }
