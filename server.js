@@ -109,10 +109,10 @@ app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*',
 
 // Start server
 app.listen(process.env.PORT || 2010, '0.0.0.0',function () {
-    console.log('Server listening on ', this.address());
+    console.log(`   Server listening on: http://localhost:${this.address().port}`);
     console.log(`               VERSION: ${appVersion}`);
     console.log(`               API Url: ${apiUrl}`);
-    console.info(`              CDN Url: ${cdnUrl}`);
+    console.info(`               CDN Url: ${cdnUrl}`);
     console.log(`      Node environment: ${process.env.NODE_ENV||'-'}`);
     console.log();
 });
