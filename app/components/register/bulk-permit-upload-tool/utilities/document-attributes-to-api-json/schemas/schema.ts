@@ -1,27 +1,31 @@
 import { getDocument } from '../../../api/make-api-request'
-import languageMapping from './languageMapping'
+import langMapping from '../data/languageMapping.json'
+import keywordMapping from '../data/keywordMapping.json'
+import usageMapping from '../data/usageMapping.json'
+
 import type {
   LanguageCode, LanguageType,
-  SubjectMatter, FileReference,
-  SubDocument
+  ELink, Keywords, LanguageMapType,
+  ApiDocumentType
 } from './types'
 import type { DocumentAttributesMap } from '../../../utilities/xlsx-file-to-document-attributes/types'
 
+const languageMapping = langMapping as LanguageMapType
+
 export default class Schema {
-  language: LanguageCode = 'en'
-  xlsxFileData: DocumentAttributesMap
+  language: LanguageCode = 'en' // Default
+  documentAttributes: DocumentAttributesMap
   documentNumber: number = 1
 
-  constructor (xlsxData: DocumentAttributesMap) {
-    this.xlsxFileData = xlsxData
+  constructor (documentAttrs: DocumentAttributesMap) {
+    this.documentAttributes = documentAttrs
+    this.language = Schema.getLanguageCode(this.documentAttributes.language as string)
   }
 
-  getSubjectMatter (subjectMatter: string): SubjectMatter {
-    if (String(subjectMatter).trim() === '') { return { [this.language]: '' } as SubjectMatter }
+  static getAsHtmlElement (value: string): string {
+    if (String(value).trim() === '') { return '' }
 
-    return {
-      [this.language]: `<div>${subjectMatter} </div>`,
-    } as SubjectMatter
+    return `<div>${value}</div>`
   }
 
   static getLanguageCode (langValue: string): LanguageCode {
@@ -29,9 +33,40 @@ export default class Schema {
     return languageMapping[lang as LanguageType]
   }
 
+  static getUsageMapping (usage: string): string {
+    if (Schema.getIsConfidential(usage)) { return undefined }
+    return usageMapping[usage.replace('-', '')]
+  }
+
+  static getELinkData (value: string): Array<ELink> {
+    if (value === '') { return [] }
+    const links: Array<string> = value.split(',')
+    return links.map((url: string) => ({ url }))
+  }
+
+  static getKeywords (keywordsValue: string): Keywords {
+    const keywords = keywordsValue.trim().split(',')
+    return keywords.reduce((acc: Keywords, keyword: string): Keywords => {
+      if (keyword.trim() === '') { return acc }
+
+      const mapping = keywordMapping
+        .find((map) => map.name.toLowerCase() === keyword.toLowerCase().trim())
+
+      if (mapping) {
+        acc.processedKeywords.push({ identifier: mapping.identifier })
+        return acc
+      }
+
+      acc.processedKeywords
+        .push({ identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' }) // TODO Fix magic string. Find out how to generate this string
+      acc.otherKeywords += ` ${keyword}`
+
+      return acc
+    }, { processedKeywords: [], otherKeywords: '' })
+  }
+
   static async getDocumentIdentifierByUid (uniqueId: string): Promise<string> {
     const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
-    console.log('uid', uid)
 
     if (uid === null) {
       const error = 'getDocumentIdentifierByUid: No valid uid provided.'
@@ -49,43 +84,43 @@ export default class Schema {
     return data.header.identifier + '@' + uid[5]
   }
 
-  static getDocumentIdentifier (document: object): string {
-    // TODO: Implement
-    return 'document.email'
+  static generateUID () {
+    const S4 = (): string => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+
+    return (`SIMP-"${S4()}${S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`).toUpperCase()
+  }
+
+  static async findOrCreateContact (contacts: string) {
+    if ((contacts).trim() !== '') {
+      const existingContacts = contacts.split(',')
+
+      return existingContacts
+        .map(async (contactUid) => ({ identifier: await Schema.getDocumentIdentifierByUid(contactUid) }))
+    }
+
+    const contact = {
+      identifier: Schema.generateUID()
+    }
+    return [contact]
   }
 
   static parseDate (dateValue: string): string {
-    // TODO: Test to ensure it is correct 
-    const date = new Date(Date.parse(dateValue))
-    const options :Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    const dateFormat = 'en-US'
-    console.log('date.toLocaleDateString(dateFormat, options)', date.toLocaleDateString(dateFormat, options))
+    const date:Date = new Date(Date.parse(`${dateValue} GMT-05:00`))
+    const options :Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }
+    const dateFormat = 'fr-CA'
+
     return date.toLocaleDateString(dateFormat, options)
   }
 
-  static getProviderIdentifier (provider: object): string {
-    // TODO: Implement
-    return 'provider.type'
-  }
-
-  static getIsConfidential (subDocument: SubDocument): boolean {
-    const providerType: string = String(subDocument.type)
-    return providerType === 'confidential'
+  static getIsConfidential (value: string): boolean {
+    return value === 'confidential'
   }
 
   static parseTextToBoolean (columnValue: string | undefined) {
     return String(columnValue).toLowerCase() === 'yes'
   }
 
-  parseFileReference (reference: string): FileReference {
-    return {
-      url: reference || '',
-      name: reference || '',
-      [this.language]: reference || 'en'
-    } as FileReference
-  }
-
-  async parseXLSXFileToDocumentJson () {
-    return {}
+  async parseXLSXFileToDocumentJson () :Promise<ApiDocumentType> {
+    return { header: { identifier: '' } }
   }
 }

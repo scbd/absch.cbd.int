@@ -17,8 +17,6 @@ export type DocumentsList = {
   [key: string]: DocumentInfo
 }
 
-console.log('irccAttributesMap', irccAttributesMap)
-
 export const documentsList: DocumentsList = {
   ircc: { ApiSchema: IrccSchema, attributesMap: irccAttributesMap }
 }

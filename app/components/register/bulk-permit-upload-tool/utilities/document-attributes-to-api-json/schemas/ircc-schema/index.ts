@@ -1,76 +1,52 @@
 import Schema from '../schema'
-import type { IContactFields, IIRCCDocumentAttributes } from './types'
+import type { IIRCCDocumentAttributes } from './types'
 
 export default class IrccSchema extends Schema {
   override async parseXLSXFileToDocumentJson () {
-    const sheet: IIRCCDocumentAttributes = this.xlsxFileData as IIRCCDocumentAttributes
+    const sheet: IIRCCDocumentAttributes = this.documentAttributes as IIRCCDocumentAttributes
 
     const Schema = IrccSchema
+
     return {
       header: {
-        identifier: 'CB51626B-CF45-2AA0-3A24-459669DDCC34',
-        schema: "absPermit",
-        languages: [ Schema.getLanguageCode(sheet.language)]
+        identifier: Schema.generateUID(), // ✅
+        schema: 'absPermit', // ✅
+        languages: [Schema.getLanguageCode(sheet.language)] // ✅
       },
       absCNA: {
-        identifier: await Schema.getDocumentIdentifierByUid(sheet.absCNAId)
+        identifier: await Schema.getDocumentIdentifierByUid(sheet.absCNAId) // ✅
       },
-      title: sheet.permitEquivalent,
-      dateOfIssuance: sheet.dateOfIssuance,
-      providers: [
-        {
-          identifier: Schema.getProviderIdentifier(sheet.provider as IContactFields)
-        }
-      ],
-      providersConfidential: Schema.getIsConfidential(sheet.provider as IContactFields),
-      entitiesToWhomPICGranted: [
-        {
-          identifier: Schema.getDocumentIdentifier(sheet.pic as IContactFields)
-        }
-      ],
-      entitiesToWhomPICGrantedConfidential: Schema.getIsConfidential(sheet.pic as IContactFields),
+      title: {
+        [this.language]: sheet.permitEquivalent // ✅
+      },
+      dateOfIssuance: Schema.parseDate(sheet.dateOfIssuance), // ✅
+      dateOfExpiry: Schema.parseDate(sheet.dateOfExpiry), // ✅
+      providers: await Schema.findOrCreateContact(sheet.provider.existing), // ✅
+      providersConfidential: Schema.getIsConfidential(sheet.provider.type), // ✅
+      entitiesToWhomPICGranted: await Schema.findOrCreateContact(sheet.pic.existing), // ✅
+      entitiesToWhomPICGrantedConfidential: Schema.getIsConfidential(sheet.pic.type), // ✅
+      picGranted: Schema.parseTextToBoolean(sheet.pic.consent), // ✅
       subjectMatter: {
-        [this.language]: this.getSubjectMatter(sheet.subjectMatter)
+        [this.language]: Schema.getAsHtmlElement(sheet.subjectMatter) // ✅
       },
-      subjectMatterConfidential: true,
-      keywords: [
-        {
-          identifier: '357DBB22-6A6C-4C49-BA1F-037320B09247'
-        }
-      ],
-      specimens: this.parseFileReference(sheet.specimens),
-      taxonomies: this.parseFileReference(sheet.taxonomies),
-      picGranted: Schema.parseTextToBoolean(((sheet.pic as IContactFields).consent)),
-      picInformation: {
-        [this.language]: '<div><!--block-->asdfasdfasdf</div>'
-      },
-      picDocuments: [
-        {
-          url: 'https://www.google.com',
-          name: 'Google',
-          language: 'en'
-        }
-      ],
-      matEstablished: Schema.parseTextToBoolean(sheet.matEstablished as string),
-      matInformation: {
-        en: '<div><!--block-->asdf</div>'
-      },
-      matDocuments: this.parseFileReference(sheet.matEstablished),
+      keywords: Schema.getKeywords(sheet.keywords).processedKeywords, // ✅
+      matEstablished: Schema.parseTextToBoolean(sheet.matEstablished), // ✅
       usages: [
         {
-          identifier: '5E833A3F-87D1-4ADD-8701-9F1B76383017'
+          identifier: Schema.getUsageMapping(sheet.usage) // ✅
         }
       ],
-      usagesConfidential: true,
+      usagesConfidential: Schema.getIsConfidential(sheet.usage), // ✅
       usagesDescription: {
-        en: '<div><!--block-->asdf</div>'
+        [this.language]: Schema.getAsHtmlElement(sheet.usageDescription) // ✅
       },
       thirdPartyTransferCondition: {
-        en: '<div><!--block-->asdf</div>'
+        [this.language]: Schema.getAsHtmlElement(sheet.conditionsThirdPartyTransfer) // ✅
       },
-      dateOfExpiry: '2024-07-16',
-      permitFiles: this.parseFileReference(sheet.permitFiles),
-      notes: sheet.additionalInformation
+      specimens: Schema.getELinkData(sheet.specimens), // ✅
+      taxonomies: Schema.getELinkData(sheet.taxonomies) // ✅
+      // permitFiles: this.parseFileReference(sheet.permitFiles), // TODO Determine if this is relevant as it is included in the original import-ircc script but not parsed
+      // notes: sheet.additionalInformation // TODO Determine if this is relevant as it is included in the original import-ircc script but not parsed
     }
   }
 }
