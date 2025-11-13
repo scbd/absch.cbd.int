@@ -1,54 +1,101 @@
-# bulk-permit-upload-tool
+# Bulk Document Upload Tool
 
-This template should help get you started developing with Vue 3 in Vite.
+The bulk document upload tool allows National Authorized Users and Publishing Authorities to create multiple documents in our system using a standardized Excel or CSV template.
 
-## Recommended IDE Setup
+## Creating a New Document Type for Bulk Uploading
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+If you have decided there is a need for parsing information into a new document type. You will need to make the following changes:
 
-## Recommended Browser Setup
+### Creating an Attributes Map 
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+You must create a "Document Attributes Map" `json` file, mapping each of your document attributes to columns in your Excel or CSV file.
+The "Document Attributes Map" must be in the following folder: `app/components/register/bulk-permit-upload-tool/utilities/xlsx-file-to-document-attributes/maps`
+An example of a "Document Attributes Map" can be found in the folder above.
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```
+// Document Attributes Map Example:
+{
+  "language": "A", // With A being the excel column name.
+  "country": "B", // With B being the excel column name.
+  "provider": {
+    "consent": "C", // With C being the excel column name.
+  },
+}
 ```
 
-### Compile and Hot-Reload for Development
+### Creating Document API Schema 
 
-```sh
-npm run dev
+Additionally, you must create a "Document API Schema" that matches document attributes to attributes in the JSON that will be sent to the API.
+The _Document API Schema_ must extend the `Schema` class and be located in the following folder: `app/components/register/bulk-permit-upload-tool/utilities/document-attributes-to-api-json/schemas`
+An example of a "Document API Schema" can be found in the folder above.
+
+```
+// Creating Document a API Example:
+{
+import Schema from '../schema'
+import type { <Your Document Schema Name>DocumentAttributes } from './types'
+
+export default class <Your Document Schema Name>Schema extends Schema {
+  override async parseXLSXFileToDocumentJson () {
+    const sheet: <Your Document Schema Name>DocumentAttributes = this.documentAttributes as <Your Schema Name>DocumentAttributes
+    const Schema = <Your Document Schema Name>Schema
+
+    return {
+      header: {
+        identifier: 'CB51626B-CF45-2AA0-3A24-459669DDCC34',
+        schema: "<Your Document Schema Name>",
+        languages: [ Schema.getLanguageCode(sheet.language)]
+      },
+      title: sheet.permitEquivalent,
+      dateOfIssuance: sheet.dateOfIssuance,
+      providers: [
+        {
+          identifier: Schema.getProviderIdentifier(sheet.provider as IContactFields)
+        }
+      ],
+    }
+  }
+}
+},
 ```
 
-### Type-Check, Compile and Minify for Production
+### Adding New the Document Type to the Document Types List
 
-```sh
-npm run build
+You must modify the document types list to include your new document.
+
+The document types list can be found here: `app/components/register/bulk-permit-upload-tool/data/document-types-list.ts`
+
+First add the new document type string to the list of document types:
+
+```
+export type DocumentTypes = 'ircc' | '<Your Document Type Name>'
+```
+ 
+Then add the attributes map and the API schema to the `documentsList` variable. 
+
+```
+export const documentsList: DocumentsList = {
+  ircc: { ApiSchema: IrccSchema, attributesMap: irccAttributesMap }.
+  <Your Document Type Name>: { ApiSchema: <YourSchema>, attributesMap: <YourAttributesMap> }
+}
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Passing Your Document Type to the Vue Component
 
-```sh
-npm run test:unit
+Finally you must pass the new document name to the Vue Component when it is initialized.
+
+```
+<bulk-document-uploader
+  @refresh-record="refreshList(schema);"
+  @on-close="onBulkUploaderClose();"
+  document-type="<Your Document Name>"
+/>
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+That's all!
 
-```sh
-npm run lint
-```
+## UML Diagram
+
+<img width="856" height="890" alt="BulkUploaderUML" src="https://github.com/user-attachments/assets/2db384ed-6d99-4c1d-98c6-1467a5e3c320" />
+ 
+### Thanks! 
