@@ -191,7 +191,7 @@ function buildMenu() {
 }
 
 
-function toMenu({ slug, url: menuUrl, title, content, menus }, basePath) {
+function toMenu({ slug, url: menuUrl, title, content, menus, isExpanded }, basePath) {
 
   const menuPath = [basePath, slug].filter(o=>o).join('/');
   const { url, target } = menuUrl || {};
@@ -199,6 +199,7 @@ function toMenu({ slug, url: menuUrl, title, content, menus }, basePath) {
   const menu = {
     url: url || menuPath,
     title,
+    isExpanded: isExpanded || false,
     hasContent: !!content,
     target: url && target
   };
