@@ -3,7 +3,7 @@
 
     <h1 v-if="!article && forum">{{ lstring(forum.title) }}</h1>
 
-    <cbd-article ref="refCbdArticle" :query="articleQuery" v-if="articleQuery" :show-cover-image="false" :show-edit="true" :admin-tags="articleAdminTags">
+    <cbd-article ref="refCbdArticle" :query="articleQuery" v-if="articleQuery" :show-cover-image="showCoverImage" :show-edit="true" :admin-tags="articleAdminTags">
       <template #article-empty>&nbsp;</template>
     </cbd-article>
 
@@ -169,6 +169,10 @@ const hasHelp = computed(() => !!helpArticle.value);
 const props = defineProps({
   forumId: {
     type: Number
+  },
+  showCoverImage: {
+    type: Boolean,
+    default: true
   }
 });
 
