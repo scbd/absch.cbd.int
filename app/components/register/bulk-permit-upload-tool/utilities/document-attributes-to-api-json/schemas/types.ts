@@ -11,10 +11,6 @@ export interface IKeyword {
   nonPreferedTerms: string[];
 }
 
-export type SubDocument = {
-  type: string
-}
-
 export type LanguageCode = 'ar' | 'en' | 'es' | 'fr' | 'ru' | 'zh'
 
 export type LanguageType = 'arabic' | 'english' | 'spanish' | 'french' | 'russian' | 'chinese'
@@ -27,12 +23,25 @@ export interface IMapData {
   [key: string]: string | IMapData;
 }
 
+type SubDocument = {
+  identifier: string
+}
+
+export type Keywords = {
+  processedKeywords: Array<SubDocument>
+  otherKeywords: string
+}
+
 export type SubjectMatter = {
   [key in LanguageCode]: string;
 }
 
-export type FileReference = {
-  url: string;
-  name: string;
-  language: LanguageCode;
+export type ELink = {
+  url: string
+}
+
+export type ApiDocumentType = {
+  header: {
+    identifier: string
+  }
 }

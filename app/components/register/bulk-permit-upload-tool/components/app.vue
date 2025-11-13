@@ -14,6 +14,11 @@
       @on-file-change="onFileChange"
     />
 
+    <div class="preview">
+      <div> Data: </div>
+      <pre> {{ apiJson }} </pre>
+    </div>
+
     <template #footer>
       <BulkUploaderFooter
         v-if="hasParsedFiles"
@@ -26,7 +31,7 @@
   </Modal>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 import * as XLSX from 'xlsx'
 import BulkUploaderFooter from './bulk-uploader-footer.vue'
 import BulkUploaderHeader from './bulk-uploader-header.vue'
@@ -36,22 +41,25 @@ import Modal from '../../../common/modal.vue'
 import { readFile } from '../stores/xlsx-sheet/index'
 import xlsxFileToDocumentAttributes from '../utilities/xlsx-file-to-document-attributes'
 import mapDocumentAttributesToAPIJSON from '../utilities/document-attributes-to-api-json'
+import { createDocument } from '../api/make-api-request'
 import { type DocumentAttributesMap } from '../utilities/xlsx-file-to-document-attributes/types'
 import { type DocumentTypes } from '../data/document-types-list'
+import { type ApiDocumentType } from '../utilities/document-attributes-to-api-json/schemas/types'
 
 const props = defineProps<{
   documentType: DocumentTypes;
-  onClose: Function;
+  onClose: () => undefined;
 }>()
 
 // const xlsxSheetStore = useXlSXSheetStore()
-const hasParsedFiles = ref(false) 
+const hasParsedFiles = ref(false)
+const apiJson :Ref<ApiDocumentType> = ref({ header: { identifier: '' } })
 
 let sheet: XLSX.WorkSheet | Array<string> = []
 
-
 const handleConfirm = () => {
-  // POST to API to create Document Draft
+  console.log('handleConfirm', apiJson.value)
+  createDocument(apiJson.value)
 }
 
 const handleClearFile = () => {
@@ -60,8 +68,6 @@ const handleClearFile = () => {
 }
 
 const onModalClose = () => {
-  console.log('onModalClose')
-  console.log(' props.onClose',  props.onClose)
   props.onClose()
 }
 
@@ -79,8 +85,9 @@ const onFileChange = async (changeEvent: Event) => {
   console.log('documentAttributesList', documentAttributesList)
 
   // // Match document attributes to the API Schema
-  const apiJson = await mapDocumentAttributesToAPIJSON(documentAttributesList, docType)
-  console.log('apiJson', apiJson)
+  const json = await mapDocumentAttributesToAPIJSON(documentAttributesList, docType)
+  apiJson.value = json
+  console.log('hello ', apiJson.value)
 
   // return apiJson
 }
@@ -88,6 +95,10 @@ const onFileChange = async (changeEvent: Event) => {
 
 <style>
   .modal-dialog {
-    margin: 30vh auto;  
+    margin: 30vh auto;
+  }
+  .preview {
+    max-height: 400px;
+    overflow: scroll;
   }
 </style>
