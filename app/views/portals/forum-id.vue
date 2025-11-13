@@ -172,7 +172,7 @@ const props = defineProps({
   },
   showCoverImage: {
     type: Boolean,
-    default: true
+    default: false
   }
 });
 
