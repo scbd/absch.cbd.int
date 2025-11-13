@@ -1,6 +1,6 @@
 <template>
   <div>
-    <cbd-article ref="refCbdArticle" :query="articleQuery" v-if="articleQuery" :show-cover-image="false" :show-edit="true">
+    <cbd-article ref="refCbdArticle" :query="articleQuery" v-if="articleQuery" :show-cover-image="showCoverImage" :show-edit="true">
       <template #article-empty>&nbsp;</template>
     </cbd-article>
   </div>
@@ -15,6 +15,10 @@
         articleId: {
           type: String,
           required: true
+        },
+        showCoverImage: {
+          type: Boolean,
+          default: true
         }
   });
 

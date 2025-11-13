@@ -37,7 +37,7 @@
   const hasSubMenu = computed(() => !!props.menu.menus?.length);
   const isSelected = computed(() => route.value.path === `/${props.menu.url}`);
 
-  const isExpanded = ref(false);
+  const isExpanded = ref(props.menu.isExpanded || false);
   const subMenuRef = ref(null);
 
   let bsCollapse = null; // Collapse instance for Bootstrap
@@ -61,7 +61,7 @@
   };
     //automatically tracks dependencies—No need to explicitly specify route.value.path
     watchEffect(() => {
-      isExpanded.value = route.value.path.startsWith(`/${props.menu.url}`);
+      isExpanded.value = props.menu.isExpanded || route.value.path.startsWith(`/${props.menu.url}`);
     });
 
     // Watch for changes in isExpanded to trigger collapse behavior
