@@ -6,7 +6,7 @@
 import { onMounted, createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
 
-import App from './components/app.vue'
+import UploadModal from './uploader-modal.vue'
 
 const props = defineProps<{
   documentType: string;
@@ -37,7 +37,7 @@ onMounted(() => {
     $emit('onClose')
   }
 
-  const app = createApp(App, {
+  const app = createApp(UploadModal, {
     documentType: props.documentType,
     onClose: handleClose
   })
