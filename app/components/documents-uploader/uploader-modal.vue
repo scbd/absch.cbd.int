@@ -33,18 +33,17 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
 import * as XLSX from 'xlsx'
-import BulkUploaderFooter from './bulk-uploader-footer.vue'
-import BulkUploaderHeader from './bulk-uploader-header.vue'
+import BulkUploaderHeader from './uploader-header.vue'
+import BulkUploaderFooter from './uploader-footer.vue'
 import UploadButton from './upload-button.vue'
-import Modal from '../../../common/modal.vue'
-// import { useXlSXSheetStore } from '../stores/xlsx-sheet/index'
-import { readFile } from '../stores/xlsx-sheet/index'
-import xlsxFileToDocumentAttributes from '../utilities/xlsx-file-to-document-attributes'
-import mapDocumentAttributesToAPIJSON from '../utilities/document-attributes-to-api-json'
-import { createDocument } from '../api/make-api-request'
-import { type DocumentAttributesMap } from '../utilities/xlsx-file-to-document-attributes/types'
-import { type DocumentTypes } from '../data/document-types-list'
-import { type ApiDocumentType } from '../utilities/document-attributes-to-api-json/schemas/types'
+import Modal from '../common/modal.vue'
+import { readFile } from './utilities/xlsx-sheet/index'
+import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
+import mapDocumentAttributesToAPIJSON from './utilities/document-attributes-to-api-json'
+import { createDocument } from './api/make-api-request'
+import { type DocumentAttributesMap } from './utilities/xlsx-file-to-document-attributes/types'
+import { type DocumentTypes } from './data/document-types-list'
+import { type ApiDocumentType } from './utilities/document-attributes-to-api-json/schemas/types'
 
 const props = defineProps<{
   documentType: DocumentTypes;
