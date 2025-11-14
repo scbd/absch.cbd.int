@@ -318,6 +318,9 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                            // $scope.tab = "review";
                             $scope.validationReport = validationReport;
                         }
+                        else if(validationReport?.warnings?.length) {                            
+                            $scope.validationReport = validationReport;
+                        }
                         else
                             $scope.validationReport = {};
                     }).catch(function(error){
