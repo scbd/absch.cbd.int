@@ -81,33 +81,41 @@ import kmDocumentValidationT from '~/app-text/components/scbd-angularjs-controls
                     if (newVal || oldVal)
                         $scope.onLoad = false;
                     
-                    if(newVal && (newVal.errors||{}).length >0){
+                    if(newVal?.errors?.length){
 
                         for (var index = 0; index < newVal.errors.length; index++) {
                             var error = newVal.errors[index];
-                            error.typeLabel     = getTranslation(error.code);
-
-                            if(error.properties){
-                                for (var i in error.properties) {
-                                    var field = error.properties[i];
-                                    var property = {};
-                                    property.typeLabel     = getTranslation(error.code);
-                                    property.propertyLabel = getLabel(field);
-                                    property.property      = field;
-                                    error.properties[i] = property;
-                                }
-                            }
-                            else{
-                                error.propertyLabel = getLabel(error.property);
-                            }
-                        }    
+                            normalizeProperty(error);
+                        }  
+                        $scope.showErrors=true;
                     }
-                    
+                    if(newVal?.warnings?.length){
                         
-                    $scope.show=true;
+                        for (var index = 0; index < newVal.warnings.length; index++) {
+                            var error = newVal.warnings[index];
+                            normalizeProperty(error);
+                        }   
+                        $scope.showWarnings=true;
+                    }
                 });
 
+                function normalizeProperty(error){
+                    error.typeLabel     = getTranslation(error.code);
 
+                    if(error.properties){
+                        for (var i in error.properties) {
+                            var field = error.properties[i];
+                            var property = {};
+                            property.typeLabel     = getTranslation(error.code);
+                            property.propertyLabel = getLabel(field);
+                            property.property      = field;
+                            error.properties[i] = property;
+                        }
+                    }
+                    else{
+                        error.propertyLabel = getLabel(error.property);
+                    }
+                }
                 //====================
                 //
                 //====================
@@ -136,6 +144,7 @@ import kmDocumentValidationT from '~/app-text/components/scbd-angularjs-controls
                     if (code == "Error.UnspecifiedLocale"   ) return messages.unspecifiedLocale
                     if (code == "Error.UnexpectedTerm"      ) return messages.unexpectedTerm
                     if (code == "Error.InvalidType"         ) return messages.invalidType
+                    if (code == "Error.InvalidLinkedRecord" ) return messages.invalidLinkedRecord
                     return code;
                 };
 
