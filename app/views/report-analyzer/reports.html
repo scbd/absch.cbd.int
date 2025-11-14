@@ -1,10 +1,10 @@
 ﻿<div id="innerPage">
     <div class="mastHead" ng-class="{'bg-abs':isABS,'bg-bch':isBCH,'bg-chm':isCHM }">
-         <div class="text-white" ng-if="cbdArticleComponent && articleQuery">
-            <cbd-article ng-vue="cbdArticleComponent" :query="articleQuery"
+         <div class="text-white" ng-if="cbdVueComponent && articleQuery">
+            <cbd-article ng-vue="cbdVueComponent" :query="articleQuery"
              :show-cover-image="false" :show-edit="true" :admin-tags="adminTags">
             </cbd-article>
-        </div>   
+        </div> 
     </div>
 
     <div class="innerPageContent">
@@ -69,11 +69,14 @@
                         </tr>
                     </tfoot>
                 </table>
+                <div class="text-white mb-3" ng-if="cbdVueComponent">
+                    <time-line ng-vue="cbdVueComponent" :chart-query="chartQuery"></time-line>
+                </div> 
             </div>
         </div>
         <br>
 
-        <div ng-if="!isCHM" class="register-content-content" style="padding:5px;">
+        <div ng-if="!isCHM" class="register-content-content mt-3" style="padding:5px;">
             <div class="panel panel-default">
 
                 <div class="panel-heading">

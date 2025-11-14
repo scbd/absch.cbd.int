@@ -4,6 +4,7 @@ import '~/views/report-analyzer/directives/national-reports/questions-selector';
 import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import reportsT from '~/app-text/views/report-analyzer/reports.json';
 import  cbdArticle  from '../../components/common/cbd-article.vue';
+import timeLine from '../../components/common/charts/time-line.vue';
 
     export { default as template } from './reports.html'
 export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService','$timeout',
@@ -24,9 +25,12 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
                 if(realm.is('ABS')) return 'absch';
                 if(realm.is('CHM')) return 'chm';
             };
-
-            $scope.cbdArticleComponent = {
-                components:{cbdArticle} 
+            if($scope.isBCH)
+                $scope.chartQuery = `realm_ss:${realm.value} AND NOT version_s:* AND schema_s:(cpbNationalReport1 cpbNationalReport2 cpbNationalReport3 cpbNationalReport4 cpbNationalReport5)`;
+            if($scope.isABS)
+                $scope.chartQuery = `realm_ss:${realm.value} AND NOT version_s:* AND schema_s:(absNationalReport, absNationalReport1)`;
+            $scope.cbdVueComponent = {
+                components:{cbdArticle, timeLine}, 
             }
             $scope.$on('onReportTypeChanged', function(event, reportType) {
                $scope.reportType = reportType;

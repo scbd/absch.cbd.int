@@ -1,0 +1,9 @@
+{
+    "title": "Time Line Chart",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "loading": "Loading chart...",
+    "timeIntervals": "Time Intervals:"
+}
