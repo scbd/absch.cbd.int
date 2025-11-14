@@ -1,4 +1,4 @@
-import { getDocument } from '../../../api/make-api-request'
+import KmDocumentApi from "../../../../../api/km-document";
 import langMapping from '../data/languageMapping.json'
 import keywordMapping from '../data/keywordMapping.json'
 import usageMapping from '../data/usageMapping.json'
@@ -11,6 +11,8 @@ import type {
 import type { DocumentAttributesMap } from '../../../utilities/xlsx-file-to-document-attributes/types'
 
 const languageMapping = langMapping as LanguageMapType
+const kmDocumentApi = new KmDocumentApi()
+
 
 export default class Schema {
   language: LanguageCode = 'en' // Default
@@ -74,7 +76,7 @@ export default class Schema {
       return error
     }
 
-    const { data } = await getDocument(uid[4] || '')
+    const data = await kmDocumentApi.getDocument(uid[4] || '')
     if (!data) {
       const error = `getDocumentIdentifierByUid: No valid document found or uid: ${uid}`
       console.warn(error)
