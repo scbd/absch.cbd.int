@@ -44,9 +44,8 @@ export default class IrccSchema extends Schema {
         [this.language]: Schema.getAsHtmlElement(sheet.conditionsThirdPartyTransfer) // ✅
       },
       specimens: Schema.getELinkData(sheet.specimens), // ✅
-      taxonomies: Schema.getELinkData(sheet.taxonomies) // ✅
-      // permitFiles: this.parseFileReference(sheet.permitFiles), // TODO Determine if this is relevant as it is included in the original import-ircc script but not parsed
-      // notes: sheet.additionalInformation // TODO Determine if this is relevant as it is included in the original import-ircc script but not parsed
+      taxonomies: Schema.getELinkData(sheet.taxonomies), // ✅
+      relevantInformation: sheet.additionalInformation // ✅
     }
   }
 }
