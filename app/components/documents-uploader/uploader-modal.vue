@@ -30,8 +30,8 @@
     </template>
   </Modal>
 </template>
-<script setup lang="ts">
-import { ref, Ref } from 'vue'
+<script setup>
+import { ref } from 'vue'
 import * as XLSX from 'xlsx'
 import BulkUploaderHeader from './uploader-header.vue'
 import BulkUploaderFooter from './uploader-footer.vue'
@@ -39,26 +39,45 @@ import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import { readFile } from './utilities/xlsx-sheet/index'
 import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
+import { createDocument } from '../../api/document'
 import mapDocumentAttributesToAPIJSON from './utilities/document-attributes-to-api-json'
-import { createDocument } from './api/make-api-request'
-import { type DocumentAttributesMap } from './utilities/xlsx-file-to-document-attributes/types'
-import { type DocumentTypes } from './data/document-types-list'
-import { type ApiDocumentType } from './utilities/document-attributes-to-api-json/schemas/types'
+import { useAuth, useUser } from "@scbd/angular-vue/src/index.js";
+import { useRealm } from "../../services/composables/realm.js";
+//import { createDocument } from './api/make-api-request'
+// import { type DocumentAttributesMap } from './utilities/xlsx-file-to-document-attributes/types'
+// import { type DocumentTypes } from './data/document-types-list'
+// import { type ApiDocumentType } from './utilities/document-attributes-to-api-json/schemas/types'
 
-const props = defineProps<{
-  documentType: DocumentTypes;
-  onClose: () => undefined;
-}>()
+
+const props = defineProps({
+  documentType: {
+    type: String,
+    default: 'ircc',
+  },
+  onClose: {
+    type: Function,
+    default: () => {},
+  }
+})
 
 // const xlsxSheetStore = useXlSXSheetStore()
 const hasParsedFiles = ref(false)
-const apiJson :Ref<ApiDocumentType> = ref({ header: { identifier: '' } })
+const apiJson = ref({ header: { identifier: '' } })
 
-let sheet: XLSX.WorkSheet | Array<string> = []
+let sheet = []
 
-const handleConfirm = () => {
-  console.log('handleConfirm', apiJson.value)
-  createDocument(apiJson.value)
+
+const handleConfirm = async () => {
+  //const realm = useRealm();
+  //const user = useUser();
+  const auth = useAuth();
+  const token = auth.token()
+  console.log('token', token)
+  console.log('token', auth)
+  console.log('token', user)
+
+  const options = { tokenReader: () => token }
+  createDocument(apiJson.value, options)
 }
 
 const handleClearFile = () => {
@@ -70,8 +89,8 @@ const onModalClose = () => {
   props.onClose()
 }
 
-const onFileChange = async (changeEvent: Event) => {
-  const docType :DocumentTypes = props.documentType
+const onFileChange = async (changeEvent) => {
+  const docType = props.documentType
   // Read File
   // const readFile = xlsxSheetStore.readFile
   const workbook = await readFile(changeEvent)
@@ -80,7 +99,7 @@ const onFileChange = async (changeEvent: Event) => {
 
   // // Parse File to JSON matching the attributes of a given document
   // const documentAttributesList :DocumentAttributesMap = xlsxFileToDocumentAttributes(docType, sheet)
-  const documentAttributesList :DocumentAttributesMap = xlsxFileToDocumentAttributes(docType, sheet)
+  const documentAttributesList = xlsxFileToDocumentAttributes(docType, sheet)
   console.log('documentAttributesList', documentAttributesList)
 
   // // Match document attributes to the API Schema
