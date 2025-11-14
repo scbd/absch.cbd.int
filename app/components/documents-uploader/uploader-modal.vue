@@ -14,7 +14,10 @@
       @on-file-change="onFileChange"
     />
 
-    <div class="previews-list">
+    <div
+      v-if="hasParsedFiles"
+      class="previews-list"
+    >
       <div
         v-for="documentJson in apiJson"
         :key="documentJson.header.identifier"
@@ -22,7 +25,6 @@
       >
         <h6> {{ documentJson.header.identifier }} </h6>
         <div
-          v-if="documentJson.header.identifier.length > 0"
           class="preview"
         >
           <div> <strong>Data: </strong> </div>
@@ -43,7 +45,7 @@
   </Modal>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import BulkUploaderHeader from './uploader-header.vue'
 import BulkUploaderFooter from './uploader-footer.vue'
 import UploadButton from './upload-button.vue'
@@ -67,33 +69,37 @@ const props = defineProps({
   }
 })
 
-const hasParsedFiles = ref(false)
-const apiJson = ref([{ header: { identifier: '' } }])
+// Refs
+const defaultApiJson = [{ header: { identifier: '' } }]
+const apiJson = ref(defaultApiJson)
 
-let sheet = []
+// Computed Properties
+const hasParsedFiles = computed(() => {
+  return apiJson.value[0].header.identifier.length > 0
+})
 
-const handleConfirm = async () => {
+// Methods
+function handleConfirm () {
   apiJson.value.forEach((doc) => {
     props.createDocument(doc)
   })
 }
 
-const handleClearFile = () => {
+function handleClearFile () {
   // POST to API to create Document Draft
-  hasParsedFiles.value = false
+  apiJson.value = defaultApiJson
 }
 
-const onModalClose = () => {
+function onModalClose () {
   props.onClose()
 }
 
-const onFileChange = async (changeEvent) => {
+async function onFileChange (changeEvent) {
   const docType = props.documentType
   // Read File
   // const readFile = xlsxSheetStore.readFile
   const workbook = await readFile(changeEvent)
-  sheet = workbook.Sheets['Sheet3'] || []
-  hasParsedFiles.value = true
+  const sheet = workbook.Sheets['Sheet3'] || []
 
   // // Parse File to JSON matching the attributes of a given document
   const documents = xlsxFileToDocumentAttributes(docType, sheet)
