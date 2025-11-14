@@ -2,15 +2,18 @@
   <div id="bulk-documents-uploader" />
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onMounted, createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
 
 import UploadModal from './uploader-modal.vue'
 
-const props = defineProps<{
-  documentType: string;
-}>()
+const props = defineProps({
+  documentType: {
+    type: String,
+    default: '',
+  }
+})
 
 const $emit = defineEmits(['onClose'])
 

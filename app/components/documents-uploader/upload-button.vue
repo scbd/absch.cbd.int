@@ -15,7 +15,7 @@
     >
   </button>
 </template>
-<script setup lang="ts">
+<script setup>
 const props = defineProps({
   isLoading: {
     type: Boolean,
@@ -24,15 +24,15 @@ const props = defineProps({
 })
 const $emit = defineEmits(['onFileChange'])
 
-const onChange = (changeEvent: Event) => {
-  $emit('onFileChange', changeEvent as Event)
+const onChange = (changeEvent) => {
+  $emit('onFileChange', changeEvent)
 }
 
 
-const onFileInputClick = (event: Event) => {
+const onFileInputClick = (event) => {
   const { target } = event
   if (target === null) { return }
 
-  (target as HTMLInputElement).value = ''
+  target.value = ''
 }
 </script>
