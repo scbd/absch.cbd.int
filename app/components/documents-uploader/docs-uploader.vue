@@ -3,15 +3,25 @@
 </template>
 
 <script setup>
+import { useAuth } from "@scbd/angular-vue/src/index.js";
+
 import { onMounted, createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
+import KmDocumentApi from "~/api/km-document";
 
 import UploadModal from './uploader-modal.vue'
+
+const auth = useAuth()
+const kmDocumentApi = new KmDocumentApi({ tokenReader: ()=>auth.token() })
 
 const props = defineProps({
   documentType: {
     type: String,
     default: '',
+  },
+  createDocument: {
+    type: Function,
+    default: () => [],
   }
 })
 
@@ -36,13 +46,17 @@ onMounted(() => {
   })
 
   const handleClose = () => {
-    console.log('handleClose', handleClose)
     $emit('onClose')
+  }
+
+  const createDocument = (apiJson) => {
+    kmDocumentApi.createDocument(apiJson)
   }
 
   const app = createApp(UploadModal, {
     documentType: props.documentType,
-    onClose: handleClose
+    onClose: handleClose,
+    createDocument 
   })
 
   app.use(i18n)

@@ -39,10 +39,7 @@ import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import { readFile } from './utilities/xlsx-sheet/index'
 import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
-import { createDocument } from '../../api/document'
 import mapDocumentAttributesToAPIJSON from './utilities/document-attributes-to-api-json'
-import { useAuth, useUser } from "@scbd/angular-vue/src/index.js";
-import { useRealm } from "../../services/composables/realm.js";
 //import { createDocument } from './api/make-api-request'
 // import { type DocumentAttributesMap } from './utilities/xlsx-file-to-document-attributes/types'
 // import { type DocumentTypes } from './data/document-types-list'
@@ -57,6 +54,10 @@ const props = defineProps({
   onClose: {
     type: Function,
     default: () => {},
+  },
+  createDocument: {
+    type: Function,
+    default: () => {},
   }
 })
 
@@ -68,16 +69,7 @@ let sheet = []
 
 
 const handleConfirm = async () => {
-  //const realm = useRealm();
-  //const user = useUser();
-  const auth = useAuth();
-  const token = auth.token()
-  console.log('token', token)
-  console.log('token', auth)
-  console.log('token', user)
-
-  const options = { tokenReader: () => token }
-  createDocument(apiJson.value, options)
+   props.createDocument(apiJson.value)
 }
 
 const handleClearFile = () => {
