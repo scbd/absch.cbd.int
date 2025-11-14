@@ -1,4 +1,4 @@
-# Bulk Document Upload Tool
+# Bulk Documents Uploader
 
 The bulk document upload tool allows National Authorized Users and Publishing Authorities to create multiple documents in our system using a standardized Excel or CSV template.
 
@@ -9,7 +9,7 @@ If you have decided there is a need for parsing information into a new document 
 ### Creating an Attributes Map 
 
 You must create a "Document Attributes Map" `json` file, mapping each of your document attributes to columns in your Excel or CSV file.
-The "Document Attributes Map" must be in the following folder: `app/components/register/bulk-permit-upload-tool/utilities/xlsx-file-to-document-attributes/maps`
+The "Document Attributes Map" must be in the following folder: `app/components/register/bulk-documents-uploader/utilities/xlsx-file-to-document-attributes/maps`
 An example of a "Document Attributes Map" can be found in the folder above.
 
 ```
@@ -26,7 +26,7 @@ An example of a "Document Attributes Map" can be found in the folder above.
 ### Creating Document API Schema 
 
 Additionally, you must create a "Document API Schema" that matches document attributes to attributes in the JSON that will be sent to the API.
-The _Document API Schema_ must extend the `Schema` class and be located in the following folder: `app/components/register/bulk-permit-upload-tool/utilities/document-attributes-to-api-json/schemas`
+The _Document API Schema_ must extend the `Schema` class and be located in the following folder: `app/components/register/bulk-documents-uploader/utilities/document-attributes-to-api-json/schemas`
 An example of a "Document API Schema" can be found in the folder above.
 
 ```
@@ -63,7 +63,7 @@ export default class <Your Document Schema Name>Schema extends Schema {
 
 You must modify the document types list to include your new document.
 
-The document types list can be found here: `app/components/register/bulk-permit-upload-tool/data/document-types-list.ts`
+The document types list can be found here: `app/components/register/bulk-documents-uploader/data/document-types-list.ts`
 
 First add the new document type string to the list of document types:
 
