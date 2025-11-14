@@ -3,25 +3,24 @@
 </template>
 
 <script setup>
-import { useAuth } from "@scbd/angular-vue/src/index.js";
-
+import { useAuth } from '@scbd/angular-vue/src/index.js'
 import { onMounted, createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
-import KmDocumentApi from "~/api/km-document";
+import KmDocumentApi from '~/api/km-document'
 
 import UploadModal from './uploader-modal.vue'
 
 const auth = useAuth()
-const kmDocumentApi = new KmDocumentApi({ tokenReader: ()=>auth.token() })
+const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token() })
 
 const props = defineProps({
   documentType: {
     type: String,
-    default: '',
+    default: ''
   },
   createDocument: {
     type: Function,
-    default: () => [],
+    default: () => []
   }
 })
 
@@ -56,7 +55,7 @@ onMounted(() => {
   const app = createApp(UploadModal, {
     documentType: props.documentType,
     onClose: handleClose,
-    createDocument 
+    createDocument
   })
 
   app.use(i18n)
