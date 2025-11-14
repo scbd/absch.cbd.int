@@ -48,6 +48,8 @@
     "fs-finder": "^1.8.1",
     "glob": "^7.1.6",
     "glob-to-regexp": "^0.4.1",
+    "globals": "^16.5.0",
+    "jiti": "^2.6.1",
     "neostandard": "^0.12.2",
     "rollup": "4.12.0",
     "rollup-plugin-amd": "^4.0.0",
