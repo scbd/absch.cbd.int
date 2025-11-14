@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
 const $emit = defineEmits(['closeModal'])
 
