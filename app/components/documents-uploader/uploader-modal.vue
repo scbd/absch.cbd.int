@@ -14,12 +14,12 @@
       @on-file-change="onFileChange"
     />
 
-    <div
-      v-for="documentJson in apiJson"
-      :key="documentJson.header.identifier"
-      class="previews-list"
-    >
-      <div class="preview-box">
+    <div class="previews-list">
+      <div
+        v-for="documentJson in apiJson"
+        :key="documentJson.header.identifier"
+        class="preview-box"
+      >
         <h6> {{ documentJson.header.identifier }} </h6>
         <div
           v-if="documentJson.header.identifier.length > 0"
@@ -115,12 +115,14 @@ const onFileChange = async (changeEvent) => {
 
   .previews-list {
     max-height: 400px;
+    overflow: scroll;
+    padding: 10px;
   }
   .preview-box {
     margin-top: 2em;
   }
   .preview {
-    max-height: 200px;
+    max-height: 130px;
     overflow: scroll;
     background: #f1f1f1;
     border: 2px solid;
