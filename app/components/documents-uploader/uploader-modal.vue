@@ -14,9 +14,21 @@
       @on-file-change="onFileChange"
     />
 
-    <div class="preview">
-      <div> Data: </div>
-      <pre> {{ apiJson }} </pre>
+    <div
+      v-for="documentJson in apiJson"
+      :key="documentJson.header.identifier"
+      class="previews-list"
+    >
+      <div class="preview-box">
+        <h6> {{ documentJson.header.identifier }} </h6>
+        <div
+          v-if="documentJson.header.identifier.length > 0"
+          class="preview"
+        >
+          <div> <strong>Data: </strong> </div>
+          <pre> {{ apiJson }} </pre>
+        </div>
+      </div>
     </div>
 
     <template #footer>
@@ -32,7 +44,6 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import * as XLSX from 'xlsx'
 import BulkUploaderHeader from './uploader-header.vue'
 import BulkUploaderFooter from './uploader-footer.vue'
 import UploadButton from './upload-button.vue'
@@ -44,27 +55,27 @@ import mapDocumentAttributesToAPIJSON from './utilities/document-attributes-to-a
 const props = defineProps({
   documentType: {
     type: String,
-    default: 'ircc',
+    default: 'ircc'
   },
   onClose: {
     type: Function,
-    default: () => {},
+    default: () => {}
   },
   createDocument: {
     type: Function,
-    default: () => {},
+    default: () => {}
   }
 })
 
-// const xlsxSheetStore = useXlSXSheetStore()
 const hasParsedFiles = ref(false)
-const apiJson = ref({ header: { identifier: '' } })
+const apiJson = ref([{ header: { identifier: '' } }])
 
 let sheet = []
 
-
 const handleConfirm = async () => {
-   props.createDocument(apiJson.value)
+  apiJson.value.forEach((doc) => {
+    props.createDocument(doc)
+  })
 }
 
 const handleClearFile = () => {
@@ -85,12 +96,11 @@ const onFileChange = async (changeEvent) => {
   hasParsedFiles.value = true
 
   // // Parse File to JSON matching the attributes of a given document
-  // const documentAttributesList :DocumentAttributesMap = xlsxFileToDocumentAttributes(docType, sheet)
-  const documentAttributesList = xlsxFileToDocumentAttributes(docType, sheet)
-  console.log('Document Attributes List:', documentAttributesList)
+  const documents = xlsxFileToDocumentAttributes(docType, sheet)
+  console.log('Document Attributes List:', documents)
 
   // // Match document attributes to the API Schema
-  const json = await mapDocumentAttributesToAPIJSON(documentAttributesList, docType)
+  const json = await mapDocumentAttributesToAPIJSON(documents, docType)
   console.log('API JSON:', json)
   apiJson.value = json
 
@@ -102,8 +112,18 @@ const onFileChange = async (changeEvent) => {
   .modal-dialog {
     margin: 30vh auto;
   }
-  .preview {
+
+  .previews-list {
     max-height: 400px;
+  }
+  .preview-box {
+    margin-top: 2em;
+  }
+  .preview {
+    max-height: 200px;
     overflow: scroll;
+    background: #f1f1f1;
+    border: 2px solid;
+    padding: 4px;
   }
 </style>
