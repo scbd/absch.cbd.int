@@ -17,8 +17,6 @@ export default class KmDocumentApi extends ApiBase
 
     async createDocument(documentJson) {
       const id = documentJson.header.identifier
-      console.log('createDocument', documentJson)
-      //return axios.put(`api/v2013/documents/${id}/versions/draft`, { params: documentJson })
       return this.http.put(`api/v2013/documents/${id}`, { params: documentJson })
     }
 }

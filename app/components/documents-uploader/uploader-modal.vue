@@ -40,11 +40,6 @@ import Modal from '../common/modal.vue'
 import { readFile } from './utilities/xlsx-sheet/index'
 import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
 import mapDocumentAttributesToAPIJSON from './utilities/document-attributes-to-api-json'
-//import { createDocument } from './api/make-api-request'
-// import { type DocumentAttributesMap } from './utilities/xlsx-file-to-document-attributes/types'
-// import { type DocumentTypes } from './data/document-types-list'
-// import { type ApiDocumentType } from './utilities/document-attributes-to-api-json/schemas/types'
-
 
 const props = defineProps({
   documentType: {
@@ -92,12 +87,12 @@ const onFileChange = async (changeEvent) => {
   // // Parse File to JSON matching the attributes of a given document
   // const documentAttributesList :DocumentAttributesMap = xlsxFileToDocumentAttributes(docType, sheet)
   const documentAttributesList = xlsxFileToDocumentAttributes(docType, sheet)
-  console.log('documentAttributesList', documentAttributesList)
+  console.log('Document Attributes List:', documentAttributesList)
 
   // // Match document attributes to the API Schema
   const json = await mapDocumentAttributesToAPIJSON(documentAttributesList, docType)
+  console.log('API JSON:', json)
   apiJson.value = json
-  console.log('hello ', apiJson.value)
 
   // return apiJson
 }
