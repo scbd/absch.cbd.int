@@ -2,6 +2,7 @@ import ApiBase, { tryCastToApiError } from './api-base';
 
 export default class KmDocumentApi extends ApiBase
 {
+
     constructor(options) {
         super(options);
     }
@@ -14,8 +15,12 @@ export default class KmDocumentApi extends ApiBase
         return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
     }
 
-    async getDocument(identifier)  {
-        return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
+    async createDocument(documentJson) {
+      const id = documentJson.header.identifier
+      console.log('createDocument', createDocument)
+      //return axios.put(`api/v2013/documents/${id}/versions/draft`, { params: documentJson })
+      return this.http.put(`api/v2013/documents/${id}`, { params: documentJson })
     }
-
 }
+
+
