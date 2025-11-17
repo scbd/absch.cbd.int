@@ -7,12 +7,15 @@ export default class IrccSchema extends Schema {
 
     const Schema = IrccSchema
 
+    const keywords = this.getKeywords(sheet.keywords)
+    const processKeywords = await keywords.processedKeywords
+    const { otherKeywords } = keywords
     return {
       type: 'organization',
       header: {
         identifier: Schema.generateUID(),
         schema: 'absPermit',
-        languages: [Schema.getLanguageCode(sheet.language)]
+        languages: [this.language]
       },
       absCNA: {
         identifier: await Schema.getDocumentIdentifierByUid(sheet.absCNAId)
@@ -30,7 +33,8 @@ export default class IrccSchema extends Schema {
       subjectMatter: {
         [this.language]: Schema.getAsHtmlElement(sheet.subjectMatter)
       },
-      keywords: Schema.getKeywords(sheet.keywords).processedKeywords,
+      keywords: processKeywords,
+      otherKeywords,
       matEstablished: Schema.parseTextToBoolean(sheet.matEstablished),
       usages: [
         {

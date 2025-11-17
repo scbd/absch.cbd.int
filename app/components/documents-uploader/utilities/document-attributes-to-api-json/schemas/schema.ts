@@ -1,7 +1,4 @@
-import KmDocumentApi from "../../../../../api/km-document";
-import langMapping from '../data/languageMapping.json'
-import keywordMapping from '../data/keywordMapping.json'
-import usageMapping from '../data/usageMapping.json'
+import KmDocumentApi from '../../../../../api/km-document'
 
 import type {
   LanguageCode, LanguageType,
@@ -10,18 +7,18 @@ import type {
 } from './types'
 import type { DocumentAttributesMap } from '../../../utilities/xlsx-file-to-document-attributes/types'
 
-const languageMapping = langMapping as LanguageMapType
 const kmDocumentApi = new KmDocumentApi()
-
 
 export default class Schema {
   language: LanguageCode = 'en' // Default
   documentAttributes: DocumentAttributesMap
   documentNumber: number = 1
+  keywordsMap = []
 
-  constructor (documentAttrs: DocumentAttributesMap) {
+  constructor (documentAttrs: DocumentAttributesMap, languageMapping: Array<LanguageMapType>, keywordsMap) {
     this.documentAttributes = documentAttrs
-    this.language = Schema.getLanguageCode(this.documentAttributes.language as string)
+    this.language = Schema.getLanguageCode(this.documentAttributes.language as string, languageMapping)
+    this.keywordsMap = keywordsMap
   }
 
   static getAsHtmlElement (value: string): string {
@@ -30,12 +27,21 @@ export default class Schema {
     return `<div>${value}</div>`
   }
 
-  static getLanguageCode (langValue: string): LanguageCode {
-    const lang: string = String(langValue).toLowerCase()
-    return languageMapping[lang as LanguageType]
+  static getLanguageCode (langValue: string, languageMapping: Array<LanguageMapType>): LanguageCode {
+    const lang: string = `${String(langValue).toLowerCase()}`
+    const langType = languageMapping
+      .find((language) => language.name.toLowerCase() === lang)
+
+    return langType.identifier.replace('lang-', '') as LanguageCode
   }
 
   static getUsageMapping (usage: string): string {
+    // TODO: Possibly move to API call to avoid magic strings
+    const usageMapping = {
+      commercial: '5E833A3F-87D1-4ADD-8701-9F1B76383017',
+      noncommercial: '60EA2F49-A9DD-406F-921A-8A1C9AA8DFDD'
+    }
+
     if (Schema.getIsConfidential(usage)) { return undefined }
     return usageMapping[usage.replace('-', '')]
   }
@@ -46,28 +52,41 @@ export default class Schema {
     return links.map((url: string) => ({ url }))
   }
 
-  static getKeywords (keywordsValue: string): Keywords {
+  getKeywords (keywordsValue: string): Keywords {
+    // TODO: Handle errors
     const keywords = keywordsValue.trim().split(',')
-    return keywords.reduce((acc: Keywords, keyword: string): Keywords => {
-      if (keyword.trim() === '') { return acc }
 
-      const mapping = keywordMapping
-        .find((map) => map.name.toLowerCase() === keyword.toLowerCase().trim())
+    const processedKeywords = []
+    let otherKeywords = ''
 
-      if (mapping) {
-        acc.processedKeywords.push({ identifier: mapping.identifier })
-        return acc
+    keywords.forEach((keywordVal: string) => {
+      const keywordValue = keywordVal.toLowerCase().trim()
+      if (keywordValue === '') { return }
+
+      // TODO Improve keyword mapping
+      const keyword = this.keywordsMap
+        .find((keyword) => {
+          if (keyword.identifier === keywordVal.trim()) { return true }
+
+          const name = keyword.title === 'object' ? keyword.title[this.language] : keyword.name
+          return name.toLowerCase().trim() === keywordValue
+        })
+
+      if (keyword) {
+        return processedKeywords.push({ identifier: keyword.identifier.toUpperCase() })
       }
 
-      acc.processedKeywords
-        .push({ identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' }) // TODO Fix magic string. Find out how to generate this string
-      acc.otherKeywords += ` ${keyword}`
-
-      return acc
-    }, { processedKeywords: [], otherKeywords: '' })
+      // TODO: Fix magic string. Find out how to generate this string
+      processedKeywords
+        .push({ identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' })
+      otherKeywords += ` ${keywordVal}`
+    })
+    return { processedKeywords: Promise.all(processedKeywords), otherKeywords }
   }
 
+  // TODO: Store this request to avoid repeatedly making a request for the same document type
   static async getDocumentIdentifierByUid (uniqueId: string): Promise<string> {
+    // TODO: Handle errors
     const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
 
     if (uid === null) {
@@ -105,6 +124,8 @@ export default class Schema {
     return [contact]
   }
 
+  // In case the date format is not correct in the XLSX sheet
+  // attempt to parse the date inorder to still get a date as a backup
   static parseDate (dateValue: string): string {
     const date:Date = new Date(Date.parse(`${dateValue} GMT-05:00`))
     const options :Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }
