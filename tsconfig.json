@@ -7,10 +7,13 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "noEmit": true,
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "paths": {
+      "~/*": ["./app/*"]
+    }
   },
-  
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.vue"
   ]
 }
