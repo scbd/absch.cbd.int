@@ -299,7 +299,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.duplicate = function (entity) {
                     $scope.loading = true;
                     var document;
-                    //	console.log(entity);
+
                     if ($scope.isDraft(entity) || $scope.isRequest(entity)) {
                         document = storage.drafts.get(entity.identifier)
                     } else if ($scope.isPublished(entity)) {
@@ -307,7 +307,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     }
 
                     return $q.when(document).then(function (document) {
-                        //console.log(document);
                         if (!document.data)
                             throw "Invalid document";
 
@@ -361,7 +360,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                 };
 
                 $scope.deleteWorkflowRequest = function (record) {
-                    console.log(record);
                     $scope.loading = true;
                     IWorkflows.cancel(record.workingDocumentLock.lockID.replace('workflow-', ''), { 'action': 'cancel' })
                         .then(function (data) {
@@ -505,11 +503,10 @@ const recordListError = mergeTranslationKeys(recordListT);
                 })
 
                 $scope.refreshList = function () {
-                    loadRecords(1);
+                    return loadRecords(1);
                 };
 
                 $scope.onBulkUploaderClose = function () {
-                  console.log('onBulkUploaderClose')
                   $scope.isBulkUploaderOpen = false
                   return $scope.isBulkUploaderOpen
                 };
@@ -790,7 +787,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.isDisableEdit = function (schema){
                     return  realm.schemas[schema].disableEdit;
                 }
-                console.log('$rootScope.user', $rootScope.user)
+
                 $scope.exportVueComponent = {
                     components:{ importFile }
                 }
