@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex w-100">
-    <div class="py-0 px-1">
+    <div class="py-0 px-1 flex-grow-1">
       <h5 class="modal-title">
         {{ $t("importIrccExcel") }}
       </h5>
@@ -10,16 +10,13 @@
     </div>
     <button
       type="button"
-      class="btn-close"
-      aria-label="Close"
+      class="btn-close btn-secondary"
+      aria-label="Dismiss"
       data-bs-dismiss="modal"
       @click="$emit('closeModal')"
     />
   </div>
 </template>
-
 <script setup>
-
 const $emit = defineEmits(['closeModal'])
-
 </script>
