@@ -8,6 +8,8 @@ import { useRealm } from '../../services/composables/realm.js'
 import { onMounted, createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
 import KmDocumentApi from '~/api/km-document'
+// TODO: Improve translation import process and refine translation keys
+import englishMessages from '~/app-text/components/common/import-file.json'
 import UploadModal from './uploader-modal.vue'
 
 const { realm } = useRealm()
@@ -26,42 +28,26 @@ const props = defineProps({
   }
 })
 
-const $emit = defineEmits(['onClose'])
+const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 onMounted(() => {
-  const englishMessages = {
-    importIrccExcel: 'Import IRCC Excel Document',
-    confirm: 'Confirm',
-    clear: 'Clear Imported Records',
-    pleaseSelectExcelInfo: 'Please select a excel file to begin importing data.',
-    browse: 'Browse'
-  }
-
   const i18n = createI18n({
     fallbackLocale: 'en',
     legacy: false,
     locale: 'en',
-    messages: {
-      en: englishMessages
-    }
+    messages: englishMessages
   })
 
-  const handleClose = () => {
-    $emit('onClose')
-  }
-
-  const createDocument = (apiJson) => {
-    kmDocumentApi.createDocument(apiJson)
-  }
+  const createDocument = (apiJson) => kmDocumentApi.createDocument(apiJson)
 
   const app = createApp(UploadModal, {
     documentType: props.documentType,
-    onClose: handleClose,
-    createDocument
+    onClose: () => $emit('onClose'),
+    createDocument,
+    recordRefresh: () => $emit('refreshRecord')
   })
 
   app.use(i18n)
-
   app.mount('#bulk-documents-uploader')
 })
 </script>
