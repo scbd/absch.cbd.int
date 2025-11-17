@@ -4,14 +4,16 @@
 
 <script setup>
 import { useAuth } from '@scbd/angular-vue/src/index.js'
+import { useRealm } from '../../services/composables/realm.js'
 import { onMounted, createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
 import KmDocumentApi from '~/api/km-document'
-
 import UploadModal from './uploader-modal.vue'
 
+const { realm } = useRealm()
+
 const auth = useAuth()
-const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token() })
+const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
 
 const props = defineProps({
   documentType: {
