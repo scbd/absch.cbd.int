@@ -1,7 +1,7 @@
 <template>
   <div
     ref="modalRef"
-    class="modal fade"
+    class="modal fade overflow-hidden pt-5 pb-5"
     aria-hidden="true"
     @click.self="close"
   >
@@ -52,28 +52,16 @@
 </template>
 
 <script setup>
-// , type ShallowRef
-import { shallowRef, onMounted, watch } from 'vue'
+import { shallowRef, onMounted } from 'vue'
 import { Modal } from 'bootstrap'
-// const modalRef: ShallowRef<Element> = shallowRef(new Element())
-let modalRef = shallowRef(null)
+const modalRef = shallowRef(null)
 
-// type ModalType = {
-//   show: Function,
-//   hide: Function,
-// }
-// 
-// let modal :ModalType = { show: () => {}, hide: () => {} } 
 let modal = { show: () => {}, hide: () => {} } 
 
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     default: '',
-  },
-  isShown: {
-    type: Boolean,
-    default: true,
   },
 })
 
@@ -88,26 +76,11 @@ const close = () => {
   $emit('onClose')
 }
 
-watch(() => props.isShown, (newValue) => {
-  if (newValue) { return show() }
-  close()
-})
-
 onMounted(() => {
   const value = modalRef.value
-  console.log(value)
-  console.log('modal', props.isShown)
 
   modal = new Modal(value)
-  console.log('ok')
-  if (props.isShown) {
-    console.log('show')
-    show()
-  }
 })
 
 defineExpose({ show, close })
 </script>
-
-<style>
-</style>
