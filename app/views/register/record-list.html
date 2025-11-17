@@ -56,9 +56,9 @@
                           <div ng-if="isBulkUploaderOpen">
                             <import-file
                               ng-vue="exportVueComponent"
-                              @refresh-record="refreshList(schema);"
-                              @on-close="onBulkUploaderClose();"
                               :document-type="'ircc'"
+                              @refresh-record="refreshList();"
+                              @on-close="onBulkUploaderClose();"
                             >
                             </import-file>
                           </div>
