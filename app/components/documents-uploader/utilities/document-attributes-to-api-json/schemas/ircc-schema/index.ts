@@ -8,7 +8,7 @@ export default class IrccSchema extends Schema {
     const Schema = IrccSchema
 
     return {
-      type: 'absPermit',
+      type: 'organization',
       header: {
         identifier: Schema.generateUID(),
         schema: 'absPermit',

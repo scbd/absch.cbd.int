@@ -1,9 +1,21 @@
 import * as XLSX from 'xlsx'
+import type {
+  DocStateType, ReadFileResult
+} from './types'
 
-type ReadFileResult = {
-  workbook: XLSX.WorkBook
-  error: boolean
-}
+/**
+ * Read XLSX Workbook
+ *
+ * Stores data parsed from xlsx file.
+ */
+export const state: DocStateType = ({
+  parsedFile: { Sheets: {}, SheetNames: [] },
+  errors: { fileRead: null },
+  isLoading: false,
+  selectedSheetIndex: 0,
+  multipleImportSheets: [],
+  progressTracking: null
+})
 
 async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
   return new Promise((resolve) => {
@@ -36,4 +48,19 @@ async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileResult> {
   return readFileResult
 }
 
-export default readXLSXFIle
+async function parseFile (changeEvent: Event): Promise<XLSX.WorkBook> {
+  const readFileResult = await readXLSXFIle(changeEvent)
+
+  if (readFileResult.error) {
+    state.errors = { fileRead: 'An error occurred while reading the file.' }
+  }
+  return readFileResult.workbook
+}
+
+export default async function readFile (changeEvent: Event): Promise<XLSX.WorkBook> {
+  // this.$reset()
+  state.isLoading = false
+  state.parsedFile = await parseFile(changeEvent)
+
+  return state.parsedFile as XLSX.WorkBook
+}
