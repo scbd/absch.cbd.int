@@ -1,3 +1,6 @@
+import { DocumentTypes } from '../../../data/document-types-list'
+import { DocumentAttributesMap, KeywordType } from '../../xlsx-file-to-document-attributes/types'
+
 export interface IKeyword {
   identifier: string;
   name: string;
@@ -16,7 +19,8 @@ export type LanguageCode = 'ar' | 'en' | 'es' | 'fr' | 'ru' | 'zh'
 export type LanguageType = 'arabic' | 'english' | 'spanish' | 'french' | 'russian' | 'chinese'
 
 export type LanguageMapType = {
-  [key in LanguageType]: LanguageCode;
+  identifier: string
+  name: LanguageType
 }
 
 export interface IMapData {
@@ -28,7 +32,7 @@ type SubDocument = {
 }
 
 export type Keywords = {
-  processedKeywords: Array<SubDocument>
+  processedKeywords: Promise<Array<SubDocument>>
   otherKeywords: string
 }
 
@@ -44,4 +48,11 @@ export type ApiDocumentType = {
   header: {
     identifier: string
   }
+}
+
+export type MapToJsonParams = {
+  documents: Array<DocumentAttributesMap>
+  documentType: DocumentTypes
+  languageMap: Array<LanguageMapType>
+  keywordsMap: Array<KeywordType>
 }
