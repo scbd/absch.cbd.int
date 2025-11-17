@@ -15,7 +15,7 @@ import injectCssToDom           from './rollup/inject-css-to-dom.js';
 import resolveLocalized         from './rollup/resolve-localized.js';
 import stripBom                 from './rollup/strip-bom.js';
 import mergeI18n                from './rollup/merge-i18n.js'
-import typescript               from '@rollup/plugin-typescript';
+import typescript               from 'rollup-plugin-typescript2';
 
 const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
@@ -42,6 +42,7 @@ export default async function(){
 }
 
 function bundle(entryPoint, locale, baseDir='app') {
+
   const entryPointPath = path.join(baseDir||'', entryPoint);
   const targetDir      = path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(entryPoint));
 
@@ -57,6 +58,7 @@ function bundle(entryPoint, locale, baseDir='app') {
     external: externals,
     plugins : [
       alias({ entries : [
+        { find: /^(..\/)+(.*)\.json$/,   replacement:`${process.cwd()}/${baseDir}/$2.json` },
         { find: /^~\/(.*)/,   replacement:`${process.cwd()}/${baseDir}/$1` },
         { find: /^json!(.*)/, replacement:`$1` },
         { find: /^text!(.*)/, replacement:`$1` },
@@ -95,7 +97,7 @@ function bundle(entryPoint, locale, baseDir='app') {
       vue(),
       typescript(),
       injectCssToDom(),
-      dynamicImportVariables({ include:[`${baseDir}/**/*.js`, `${baseDir}/**/*.vue`, `${baseDir}/**/*.ts`] }),
+      dynamicImportVariables({ include:`${baseDir}/**/*.js` }),
       commonjs({ include: 'node_modules/**/*.js'}),
       nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
       isWatchOn ? null : getBabelOutputPlugin({
