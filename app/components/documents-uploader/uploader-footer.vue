@@ -1,30 +1,28 @@
 <template>
-  <div class="w-100">
+  <div class="w-100 d-flex gap-2 justify-content-end">
     <button
-      class="btn btn-primary float-start"
+      class="btn btn-secondary"
       type="button"
-      :disabled="props.isLoading"
-      @click="$emit('handleConfirm')"
-    >
-      {{ $t("confirm") }}
-    </button>
-    <button
-      class="btn btn-secondary float-end"
-      type="button"
-      :disabled="props.isLoading"
       @click="$emit('handleClear')"
     >
       {{ $t("clear") }}
     </button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      :disabled="hasErrors"
+      @click="$emit('handleConfirm')"
+    >
+      {{ $t("confirm") }}
+    </button>
   </div>
 </template>
-
 <script setup>
-const props = defineProps({
-  isLoading: {
+defineProps({
+  hasErrors: {
     type: Boolean,
-    default: false,
-  },
+    default: false
+  }
 })
 
 const $emit = defineEmits(['handleConfirm', 'handleClear'])
