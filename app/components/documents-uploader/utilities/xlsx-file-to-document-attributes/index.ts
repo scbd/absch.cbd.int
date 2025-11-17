@@ -1,15 +1,9 @@
 import * as XLSX from 'xlsx'
 import type {
   DocumentAttributesMap,
-  IFileData
+  IFileData, MapParams
 } from './types'
 import { type DocumentTypes, documentsList } from '../../data/document-types-list'
-
-type MapParams = {
-  documentMap: DocumentAttributesMap
-  sheet: XLSX.WorkSheet | IFileData
-  rowNumber: number
-}
 
 function getColumnValue (sheet: XLSX.WorkSheet | IFileData, col: string, rowNumber: number): string {
   const location = `${col}${rowNumber}`
@@ -17,6 +11,7 @@ function getColumnValue (sheet: XLSX.WorkSheet | IFileData, col: string, rowNumb
 }
 
 export function mapXLSXFileToAttributeNames ({ documentMap, sheet, rowNumber }: MapParams): DocumentAttributesMap {
+  // Get the string value of a cell in the XLSX sheet given a column name and row number.
   const getColumnString = (value: string | undefined): string => {
     if (typeof value === 'string') {
       return getColumnValue(sheet, value, rowNumber) as string
@@ -24,6 +19,10 @@ export function mapXLSXFileToAttributeNames ({ documentMap, sheet, rowNumber }: 
     return 'Column not readable'
   }
 
+  // Iterate over each attribute in the document attribute map.
+  // Match the attribute to the string stored in the XLSX sheet. Use the column name paired with the attribute.
+  // If the attribute is an object recursively call this function in order to match nested object attributes
+  // with the correct string.
   const mapColumnToDocumentAttribute = (attributesMap: DocumentAttributesMap): DocumentAttributesMap => {
     const map = { language: '' } as DocumentAttributesMap
     Object.entries(attributesMap).forEach(([key, value]) => {
@@ -53,6 +52,8 @@ export default function mapXLSXFileToDocumentAttributes (documentType: DocumentT
     console.warn('No document type defined')
     return [{}]
   }
+  // Get the map between XLSX sheet columns and document attributes
+  // matching the current document type.
   const documentMap = documentsList[documentType]?.attributesMap as DocumentAttributesMap
 
   if (documentMap === undefined) { return [{}] }
@@ -64,6 +65,8 @@ export default function mapXLSXFileToDocumentAttributes (documentType: DocumentT
 
   const documents = []
 
+  // Iterate over each XLSX sheet row and map the data
+  // in that row to get a list of document attributes with their names i.e. document.title, etc.
   for (let i = rangeStart; i < rangeEnd; i += 1) {
     if (isRowEmpty(i, documentMap, sheet)) { continue }
 
