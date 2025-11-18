@@ -10,7 +10,7 @@
     </template>
 
     <UploadButton
-      v-if="!hasParsedFiles"
+      v-if="!hasParsedFiles && !hasErrors"
       :is-loading="isLoading"
       @on-file-change="onFileChange"
     />
