@@ -3,7 +3,7 @@
     <button
       class="btn btn-primary position-relative p-10"
       type="button"
-      :disabled="props.isLoading"
+      :disabled="isLoading"
     >
       {{ $t("browse") }}
       <input
@@ -27,7 +27,7 @@
 </template>
 <script setup>
 import CircleLoader from './circle-loader.vue'
-const props = defineProps({
+defineProps({
   isLoading: {
     type: Boolean,
     default: false
