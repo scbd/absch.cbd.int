@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx'
 import type {
-  DocStateType, ReadFileResult
+  ReadFileResult
 } from './types'
 
 /**
@@ -8,15 +8,6 @@ import type {
  *
  * Stores data parsed from xlsx file.
  */
-export const state: DocStateType = ({
-  parsedFile: { Sheets: {}, SheetNames: [] },
-  errors: { fileRead: null },
-  isLoading: false,
-  selectedSheetIndex: 0,
-  multipleImportSheets: [],
-  progressTracking: null
-})
-
 async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
   return new Promise((resolve) => {
     const reader = new FileReader()
@@ -32,10 +23,13 @@ async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
 async function handleFileError (): Promise<ReadFileResult> {
   const a :BlobPart = '' as BlobPart
   const emptyFile: File = new File([a], 'error')
-  return { workbook: await loadXLSXFile(emptyFile), error: true }
+  // TODO: Get this this error message from translations
+  const message = 'Error: The uploaded Excel file could not be parsed. Please reformat the excel file and try again.'
+  const error = { value: { message }, index: 1 }
+  return { workbook: await loadXLSXFile(emptyFile), errors: [error] }
 }
 
-async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileResult> {
+export async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileResult> {
   const target = fileChangeEvent.target as HTMLInputElement
 
   const files: FileList | null = target.files
@@ -43,24 +37,7 @@ async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileResult> {
   const file: File | undefined = files[0]
 
   if (!file) { return await handleFileError() }
-  const readFileResult: ReadFileResult = { workbook: await loadXLSXFile(file), error: false }
+  const readFileResult: ReadFileResult = { workbook: await loadXLSXFile(file), errors: [] }
 
   return readFileResult
-}
-
-async function parseFile (changeEvent: Event): Promise<XLSX.WorkBook> {
-  const readFileResult = await readXLSXFIle(changeEvent)
-
-  if (readFileResult.error) {
-    state.errors = { fileRead: 'An error occurred while reading the file.' }
-  }
-  return readFileResult.workbook
-}
-
-export default async function readFile (changeEvent: Event): Promise<XLSX.WorkBook> {
-  // this.$reset()
-  state.isLoading = false
-  state.parsedFile = await parseFile(changeEvent)
-
-  return state.parsedFile as XLSX.WorkBook
 }

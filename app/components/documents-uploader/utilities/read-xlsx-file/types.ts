@@ -9,16 +9,11 @@ export type EmptyWorkBook = {
   SheetNames: Array<string>
 }
 
-export type DocStateType = {
-  parsedFile: XLSX.WorkBook | EmptyWorkBook;
-  errors: DocErrorsType;
-  isLoading: boolean;
-  selectedSheetIndex: number;
-  multipleImportSheets: Array<string>;
-  progressTracking: number | null;
+type ReadError = {
+  index: number
+  value: { message: string }
 }
-
 export type ReadFileResult = {
   workbook: XLSX.WorkBook
-  error: boolean
+  errors: Array<ReadError>
 }

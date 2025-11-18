@@ -51,7 +51,7 @@ import CircleLoader from './loader-overly.vue'
 import ModalErrors from './modal-errors.vue'
 import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
-import readFile from './utilities/read-xlsx-file'
+import { readXLSXFIle } from './utilities/read-xlsx-file'
 import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
 import { mapDocumentAttributesToAPIJSON, getLanguageMap, getKeywordsMap } from './utilities/document-attributes-to-api-json'
 
@@ -145,8 +145,10 @@ async function onFileChange (changeEvent) {
   const { documentType } = props
 
   // Read File
-  const workbook = await readFile(changeEvent)
-  const sheet = workbook.Sheets['Sheet3'] || []
+  const fileRead = await readXLSXFIle(changeEvent)
+  errors.value = [...errors.value, ...fileRead.errors]
+
+  const sheet = fileRead.workbook.Sheets['Sheet3'] || []
 
   // Parse File to JSON matching the attributes of a given document
   const documents = xlsxFileToDocumentAttributes(documentType, sheet)
