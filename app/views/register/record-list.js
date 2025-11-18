@@ -792,12 +792,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     components:{ importFile }
                 }
 
-                if($routeParams.document_type === "IRCC" && $rootScope.user?.government){
-                    $scope.exportVueComponent = {
-                        components:{ importFile }
-                    }
-                }
-
                 function loadmyTasks(schema){
 
                     if(!_.includes(realm.referenceSchemas, schema)){
