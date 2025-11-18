@@ -34,7 +34,6 @@ export default class ApiBase
       tokenReader,
       realm
     }
-    this.baseConfig = baseConfig 
     
     const http = async function (...args) {
       return (await loadAsyncHeaders(baseConfig))(...args);
@@ -51,13 +50,9 @@ export default class ApiBase
 
     this.http = http;
   }
-
-  getBaseConfig() {
-    return this.baseConfig
-  }
 }
 
-export async function loadAsyncHeaders(baseConfig, path) {
+async function loadAsyncHeaders(baseConfig, path) {
 
   const { tokenReader, tokenType, realm, ...config } = baseConfig || {}
 
