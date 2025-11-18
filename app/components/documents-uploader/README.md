@@ -1,6 +1,6 @@
 # Bulk Documents Uploader
 
-The bulk document upload tool allows National Authorized Users and Publishing Authorities to create multiple documents in our system using a standardized Excel or CSV template.
+The bulk document upload tool allows National Authorized Users and Publishing Authorities to create multiple documents in our system using a standardized Excel template.
 
 ## Creating a New Document Type for Bulk Uploading
 
