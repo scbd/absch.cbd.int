@@ -129,7 +129,7 @@ async function handleConfirm () {
       props.recordRefresh()
       handleClearFile()
       // Avoid emiting two function calls at once
-      // as ng-vue only seems able to handle one function call at a time
+      // as ng-vue only seems to be able to handle one function call at a time
       // TODO: Investigate further why ng-vue only allows emitting one function call at a time
       setTimeout(() => {
         modalRef.value.close()

@@ -32,7 +32,7 @@ export async function mapDocumentAttributesToAPIJSON ({
   const documentsJson = []
   const errors = []
 
-  // Iterate over each document in XLSX file and generate it's
+  // Iterate over each document in XLSX file and generate
   // the JSON that will be sent to the API to create a draft.
   for (let i = 0; i < documents.length; i += 1) {
     const schema = new documentsList[documentType].ApiSchema(documents[i], languageMap, keywordsMap)
