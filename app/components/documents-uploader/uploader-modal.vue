@@ -99,15 +99,10 @@ onMounted(async () => {
   isLoading.value = true
 
   keywordsMap.value = await getKeywordsMap()
-    .catch((error) => {
-      errors.value.push({ value: error, index: 0 })
-      isLoading.value = false
-    })
+    .catch((error) => errors.value.push({ value: error, index: 0 }))
+
   languageMap.value = await getLanguageMap()
-    .catch((error) => {
-      errors.value.push({ value: error, index: 1 })
-      isLoading.value = false
-    })
+    .catch((error) => errors.value.push({ value: error, index: 1 }))
 
   isLoading.value = false
 })
