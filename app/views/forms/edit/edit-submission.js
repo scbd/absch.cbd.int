@@ -4,14 +4,19 @@ import '~/views/forms/edit/edit';
 import '~/views/forms/view/view-submission.directive';
 import '~/services/main';
 import editsubmissionT from '~/app-text/views/forms/edit/edit-submission.json';
+import ThesaurusApi from '~/api/thesaurus';
+import { THESAURUS_DOMAINS, THESAURUS_TERMS } from '~/constants/thesaurus';
 
-  export { default as template } from './edit-submission.html';
+export { default as template } from './edit-submission.html';
 
 export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService', 'translationService', '$location',
   function ($scope, $http, $controller, realm, searchService, solr, thesaurusService, translationService, $location) {
+    const thesaurusApi = new ThesaurusApi();
+
     translationService.set('editsubmissionT', editsubmissionT);
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
+    $scope.isChm = realm.is('CHM');
 
     $scope.notificationQuery = {
         q   : "schema_s:notification",
@@ -22,8 +27,22 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
 
     _.extend($scope.options, { 
         bchThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'}); },
-        absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');} 
+        absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');},
+        resourceTypes      : function() {return thesaurusService.getDomainTerms('resourceTypesVlr');},
+        gbfGoalsAndTargets   : function() {return thesaurusService.getDomainTerms('gbfGoalsAndTargets');},
+        cbdThematicAreas     : function() {return thesaurusService.getDomainTerms('cbdSubjects');},
+        betiFinanceKeywords       : function() {return thesaurusApi.getNarrowerTerms(THESAURUS_TERMS.BETI_FINANCE, {domainCode:THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING});},
+        betiMainstreamingKeywords : function() {return thesaurusApi.getNarrowerTerms(THESAURUS_TERMS.BETI_MAINSTREAMING, {domainCode:THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING});},
+        
     });
+
+    $scope.hasFinanceKeywords = function(){
+        return $scope.document?.cbdThematicAreas?.map(e=>e.identifier)?.includes(THESAURUS_TERMS.BETI_FINANCE);
+    }
+
+    $scope.hasMainstreamingKeywords = function(){
+        return $scope.document?.cbdThematicAreas?.map(e=>e.identifier)?.includes(THESAURUS_TERMS.BETI_MAINSTREAMING);
+    }
 
     $scope.onContactQuery = function(searchText){
       
@@ -84,6 +103,14 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         var documentCopy = _.clone(document);
 
         delete documentCopy.organizationsRef;
+      
+        if(!$scope.hasMainstreamingKeywords()){
+            documentCopy.betiMainstreamingKeywords = undefined;
+        }
+        
+        if(!$scope.hasFinanceKeywords()){
+            documentCopy.betiFinanceKeywords = undefined;
+        }
 
         return $scope.sanitizeDocument(documentCopy);
     };

@@ -66,6 +66,20 @@
 				</div>
             </div>
 
+            <div class="col-md-12" ng-if="document.resourceTypes">
+                <label>{{::('viewSubmissionT.resourceTypes'|$translate)}}</label>
+                <div class="km-value" compare-val="resourceTypes">
+                    <view-terms-hierarchy ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
+                </div>
+            </div>
+
+            <div class="col-md-12" ng-if="document.gbfGoalsAndTargets">
+                <label>{{::('viewSubmissionT.gbfGoalsAndTargets'|$translate)}}</label>
+                <div class="km-value" compare-val="gbfGoalsAndTargets">
+                    <view-terms-hierarchy ng-model="document.gbfGoalsAndTargets" locale="locale" term-domain="gbfGoalsAndTargets"></view-terms-hierarchy>
+                </div>
+            </div>
+            
             <div class="col-md-12"
                 ng-if="document.cbdThematicAreas || document.absThematicAreas || document.cpbThematicAreas">
                 <legend>{{::('viewSubmissionT.thematicAreas'|$translate)}}</legend>
@@ -86,6 +100,22 @@
                 <div ng-if="document.cpbThematicAreas">
                     <div class="km-value" compare-val>
                         <view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale" term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
+                    </div>
+                </div>
+                <div ng-if="document.betiFinanceKeywords">
+                    <label>{{::('viewSubmissionT.betiFinanceKeywords'|$translate)}}</label>
+                    <div class="km-value" compare-val>
+                        <ul  class="list">
+                            <li ng-repeat="term in document.betiFinanceKeywords" ng-bind="term | term:locale"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div ng-if="document.betiMainstreamingKeywords">
+                    <label>{{::('viewSubmissionT.betiMainstreamingKeywords'|$translate)}}</label>
+                    <div class="km-value" compare-val>
+                        <ul  class="list">
+                            <li ng-repeat="term in document.betiMainstreamingKeywords" ng-bind="term | term:locale"></li>
+                        </ul>
                     </div>
                 </div>
             </div>

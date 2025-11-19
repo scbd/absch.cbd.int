@@ -45,7 +45,13 @@ export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translati
                     $scope.selectedQuestions = data.questions.split(',');
     
                 if (data.regions)
-                    $scope.selectedRegions = data.regions.split(',').map(e=>regions.find(r=>r.identifier.startsWith(e))?.identifier);
+                    $scope.selectedRegions = data.regions.split(',')
+                                                .map(e=>{
+                                                    if(['cbdRegions', 'regions'].includes(data.regionsPreset))
+                                                        return regions.find(r=>r.identifier.startsWith(e))?.identifier
+                                                    else 
+                                                        return e
+                                                });
 
                 $scope.selectedRegionsPreset    = data.regionsPreset;
                 $scope.selectedRegionsPresetFilter    = data.regionsPresetFilter;
