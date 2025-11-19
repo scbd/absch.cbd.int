@@ -146,7 +146,7 @@ import _ from 'lodash';
                 languages              : "ISO639-2",
                 aichiTargets           : 'AICHI-TARGETS',
                 gbfTargets             : 'GBF-TARGETS',
-                gbfGoalsTargets        : 'GBF-GOALS-TARGETS',
+                gbfGoalsAndTargets     : 'GBF-GOALS-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
                 bchRaAuthorAffiliation :   'Organization Types',
                 transboundaryMovementTypes : 'TransboundaryMovementTypes',
