@@ -51,6 +51,23 @@ export default class ThesaurusApi extends ApiBase
     return cache[termIdentifier];
   }
 
+  async getNarrowerTerms(termCode, {immediate = false, domainCode = undefined} = {})  {
+
+    if(cache[termCode])
+        return cache[termCode];
+
+    cache[termCode]  = this.http.get(`/api/v2013/thesaurus/terms/${encodeURIComponent(termCode)}/narrowers`,  
+                                { method:'GET',   params: { immediate, domain: domainCode } }) 
+                                    .then(res =>{
+                                      cache[termCode] = res.data;
+                                      addToStorage(cacheKey, cache)
+                                      return cache[termCode];
+                                    })
+                                    .catch(tryCastToApiError);
+    
+    return cache[termCode];
+  }
+
 }
 
 function initStorage(key){
