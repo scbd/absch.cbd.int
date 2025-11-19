@@ -35,9 +35,6 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         betiMainstreamingKeywords : function() {return thesaurusApi.getNarrowerTerms(THESAURUS_TERMS.BETI_MAINSTREAMING, {domainCode:THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING});},
         
     });
-  $scope.crossCutting = {};
-    $scope.selectedSubjects = [];
-    $scope.crossCuttingTerms = []; // holds resolved list
 
     $scope.hasFinanceKeywords = function(){
         return $scope.document?.cbdThematicAreas?.map(e=>e.identifier)?.includes(THESAURUS_TERMS.BETI_FINANCE);
