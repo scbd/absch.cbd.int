@@ -4,11 +4,15 @@ import '~/views/forms/edit/edit';
 import '~/views/forms/view/view-submission.directive';
 import '~/services/main';
 import editsubmissionT from '~/app-text/views/forms/edit/edit-submission.json';
+import ThesaurusApi from '~/api/thesaurus';
+import { THESAURUS_DOMAINS, THESAURUS_TERMS } from '~/constants/thesaurus';
 
-  export { default as template } from './edit-submission.html';
+export { default as template } from './edit-submission.html';
 
 export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService', 'translationService', '$location',
   function ($scope, $http, $controller, realm, searchService, solr, thesaurusService, translationService, $location) {
+    const thesaurusApi = new ThesaurusApi();
+
     translationService.set('editsubmissionT', editsubmissionT);
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
@@ -25,46 +29,21 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         bchThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'}); },
         absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');},
         resourceTypes      : function() {return thesaurusService.getDomainTerms('resourceTypesVlr');},
-        gbfGoalsTargets      : function() {return thesaurusService.getDomainTerms('gbfGoalsTargets');},
-        cbdSubjects      : function() {return thesaurusService.getDomainTerms('cbdSubjects');},
-        crossCuttingIssues : function(subjectOptions) { 
-            console.log("subjectOptions:", subjectOptions)
-           return thesaurusService.getDomainTerms('cbdSubjects')
-                      .then(function(o){
-                      var subjects = subjectOptions || ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
-                      var items = [];
-                        _.forEach(subjects, function(subject) {
-                          var term = _.find(o, {'identifier': subject } );
-                          items.push(term);
-                          _(term.narrowerTerms).forEach(function (term) {
-                            items.push(_.find(o, {'identifier':term}));
-                          })
-                        });
-                        return items;
-                      });
-                    },
-
+        gbfGoalsAndTargets   : function() {return thesaurusService.getDomainTerms('gbfGoalsAndTargets');},
+        cbdThematicAreas     : function() {return thesaurusService.getDomainTerms('cbdSubjects');},
+        betiFinanceKeywords       : function() {return thesaurusApi.getNarrowerTerms(THESAURUS_TERMS.BETI_FINANCE, {domainCode:THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING});},
+        betiMainstreamingKeywords : function() {return thesaurusApi.getNarrowerTerms(THESAURUS_TERMS.BETI_MAINSTREAMING, {domainCode:THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING});},
+        
     });
-  $scope.crossCutting = {};
-    $scope.selectedSubjects = [];
-    $scope.crossCuttingTerms = []; // holds resolved list
 
-    $scope.updateCrossCutting = function () {
-      $scope.selectedSubjects = [];
+    $scope.hasFinanceKeywords = function(){
+        return $scope.document?.cbdThematicAreas?.map(e=>e.identifier)?.includes(THESAURUS_TERMS.BETI_FINANCE);
+    }
 
-      angular.forEach($scope.crossCutting, function (isChecked, key) {
-        if (isChecked) $scope.selectedSubjects.push(key);
-      });
+    $scope.hasMainstreamingKeywords = function(){
+        return $scope.document?.cbdThematicAreas?.map(e=>e.identifier)?.includes(THESAURUS_TERMS.BETI_MAINSTREAMING);
+    }
 
-      // Load terms whenever checkboxes change
-      if ($scope.selectedSubjects.length) {
-        $scope.options.crossCuttingIssues($scope.selectedSubjects).then(function (items) {
-          $scope.crossCuttingTerms = items;
-        });
-      } else {
-        $scope.crossCuttingTerms = [];
-      }
-};
     $scope.onContactQuery = function(searchText){
       
       var queryOptions = {
@@ -124,6 +103,14 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         var documentCopy = _.clone(document);
 
         delete documentCopy.organizationsRef;
+      
+        if(!$scope.hasMainstreamingKeywords()){
+            documentCopy.betiMainstreamingKeywords = undefined;
+        }
+        
+        if(!$scope.hasFinanceKeywords()){
+            documentCopy.betiFinanceKeywords = undefined;
+        }
 
         return $scope.sanitizeDocument(documentCopy);
     };

@@ -198,9 +198,8 @@
                                     <hr class="mb-4">
                                     <div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group tabular-term-check" name="gbfGoalsTargets" caption="{{::('editsubmissionT.gbfGoalsTargets'|$translate)}}">
-													<!-- <div class="help-block">{{::('editsubmissionT.gbfKeywordsInfo'|$translate)}}</div> -->
-													<div km-term-check name="gbfGoalsTargets" ng-model="document.gbfGoalsTargets"  terms="options.gbfGoalsTargets()"
+											<div class="km-control-group tabular-term-check" name="gbfGoalsAndTargets" caption="{{::('editsubmissionT.gbfGoalsAndTargets'|$translate)}}">
+													<div km-term-check name="gbfGoalsAndTargets" ng-model="document.gbfGoalsAndTargets"  terms="options.gbfGoalsAndTargets()"
 															binding-type="term[]" locales="document.header.languages"></div>												
 											</div>
 										</div>
@@ -209,50 +208,34 @@
                                     <hr class="mb-4">
                                     <div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group tabular-term-check" name="cbdSubjects" caption="{{::('editsubmissionT.cbdSubjects'|$translate)}}">
+											<div class="km-control-group tabular-term-check" name="cbdThematicAreas" caption="{{::('editsubmissionT.cbdThematicAreas'|$translate)}}">
 													
-													<div km-term-check tabular-shape="true" name="cbdSubjects" ng-model="document.cbdSubjects"  terms="options.cbdSubjects()"
+													<div km-term-check tabular-shape="true" name="cbdThematicAreas" ng-model="document.cbdThematicAreas"  terms="options.cbdThematicAreas()"
 															binding-type="term[]" locales="document.header.languages"></div>												
 											</div>
 										</div>
 									</div>
 
-                                    <!-- <hr class="mb-4">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="km-control-group" caption="Cross Cutting Issues">
-                                            <label>
-                                                <input type="checkbox"
-                                                    ng-model="crossCutting['CBD-SUBJECT-BIOMES']"
-                                                    ng-change="updateCrossCutting()" />
-                                                a.	Mainstreaming Biodiversity 
-                                            </label>
-
-                                            <label>
-                                                <input type="checkbox"
-                                                    ng-model="crossCutting['CBD-SUBJECT-CROSS-CUTTING']"
-                                                    ng-change="updateCrossCutting()" />
-                                                b.	Financial Resources and Mechanism
-                                            </label>
+                                    <div class="row" ng-if="hasFinanceKeywords()">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="betiFinanceKeywords" 
+                                            caption="{{::('editsubmissionT.betiFinanceKeywords'|$translate)}}">
+                                                <div km-term-check name="betiFinanceKeywords"
+                                                    ng-model="document.betiFinanceKeywords"
+                                                    terms="options.betiFinanceKeywords()" binding-type="term[]"></div>
                                             </div>
-
-                                            
-                                             selectedSubjects : {{selectedSubjects}}
-                                            <div class="km-control-group" ng-if="crossCuttingTerms.length">
-                                                <div km-term-check
-                                                    name="crossCuttingIssues"
-                                                    ng-model="document.crossCuttingIssues"
-                                                    terms="crossCuttingTerms"
-                                                    binding-type="term[]"
-                                                    locales="document.header.languages">
-                                                </div>
-                                            </div>
-
                                         </div>
-                                    </div> -->
-
-
-                                    
+                                    </div>
+                                    <div class="row" ng-if="hasMainstreamingKeywords()">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="betiMainstreamingKeywords"
+                                            caption="{{::('editsubmissionT.betiMainstreamingKeywords'|$translate)}}">
+                                                <div km-term-check name="betiMainstreamingKeywords"
+                                                    ng-model="document.betiMainstreamingKeywords"
+                                                    terms="options.betiMainstreamingKeywords()" binding-type="term[]"></div>
+                                            </div>
+                                        </div>
+                                    </div>                                 
                                 </div>
                             </section>
 
