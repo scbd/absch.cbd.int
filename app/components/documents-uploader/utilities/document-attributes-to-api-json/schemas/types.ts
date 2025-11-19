@@ -36,10 +36,6 @@ export type Keywords = {
   otherKeywords: string
 }
 
-export type SubjectMatter = {
-  [key in LanguageCode]: string;
-}
-
 export type ELink = {
   url: string
 }

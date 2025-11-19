@@ -21,7 +21,6 @@ function getError () :DocumentsJson {
 export async function mapDocumentAttributesToAPIJSON ({
   documents,
   documentType,
-  languageMap,
   keywordsMap
 }: MapToJsonParams) :Promise<DocumentsJson> {
   // Handle the file type not exixting
@@ -35,7 +34,7 @@ export async function mapDocumentAttributesToAPIJSON ({
   // Iterate over each document in XLSX file and generate
   // the JSON that will be sent to the API to create a draft.
   for (let i = 0; i < documents.length; i += 1) {
-    const schema = new documentsList[documentType].ApiSchema(documents[i], languageMap, keywordsMap)
+    const schema = new documentsList[documentType].ApiSchema(documents[i], keywordsMap)
 
     let json = await schema.parseXLSXFileToDocumentJson()
       .catch((error) => {
@@ -47,11 +46,6 @@ export async function mapDocumentAttributesToAPIJSON ({
   return { documentsJson, errors }
 }
 
-// TODO: Find a place that is available more globally to fetch this information
-export async function getLanguageMap () {
-  const langRequest = await kmDocumentApi.getLanguages()
-  return langRequest.data
-}
 // TODO: Find a place that is available more globally to fetch this information
 export async function getKeywordsMap () {
   // TODO Remove magic string by fetching the ABS Permit Keyword category

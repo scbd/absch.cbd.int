@@ -53,7 +53,7 @@ import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import { readXLSXFIle } from './utilities/read-xlsx-file'
 import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
-import { mapDocumentAttributesToAPIJSON, getLanguageMap, getKeywordsMap } from './utilities/document-attributes-to-api-json'
+import { mapDocumentAttributesToAPIJSON, getKeywordsMap } from './utilities/document-attributes-to-api-json'
 
 const props = defineProps({
   documentType: {
@@ -79,7 +79,6 @@ const defaultApiJson = [{ header: { identifier: '' } }]
 const apiJson = ref(defaultApiJson)
 const isLoading = ref(false)
 const errors = ref([])
-const languageMap = ref([])
 const keywordsMap = ref([])
 const modalRef = shallowRef(null)
 
@@ -100,9 +99,6 @@ onMounted(async () => {
 
   keywordsMap.value = await getKeywordsMap()
     .catch((error) => errors.value.push({ value: error, index: 0 }))
-
-  languageMap.value = await getLanguageMap()
-    .catch((error) => errors.value.push({ value: error, index: 1 }))
 
   isLoading.value = false
 })
@@ -152,7 +148,6 @@ async function onFileChange (changeEvent) {
   const mapInfo = await mapDocumentAttributesToAPIJSON({
     documents,
     documentType,
-    languageMap: languageMap.value,
     keywordsMap: keywordsMap.value
   })
 

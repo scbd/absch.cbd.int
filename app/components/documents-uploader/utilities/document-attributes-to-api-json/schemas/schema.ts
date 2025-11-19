@@ -1,10 +1,13 @@
 import KmDocumentApi from '../../../../../api/km-document'
 
 import type {
-  LanguageCode, LanguageType,
-  ELink, Keywords, LanguageMapType,
+  LanguageCode,
+  ELink, Keywords,
   ApiDocumentType
 } from './types'
+import {
+  type LanguagesType, languages, englishLanguages,
+} from '~/app-data/un-languages'
 import type { DocumentAttributesMap } from '../../../utilities/xlsx-file-to-document-attributes/types'
 
 const kmDocumentApi = new KmDocumentApi()
@@ -15,9 +18,9 @@ export default class Schema {
   documentNumber: number = 1
   keywordsMap = []
 
-  constructor (documentAttrs: DocumentAttributesMap, languageMapping: Array<LanguageMapType>, keywordsMap) {
+  constructor (documentAttrs: DocumentAttributesMap, keywordsMap) {
     this.documentAttributes = documentAttrs
-    this.language = Schema.getLanguageCode(this.documentAttributes.language as string, languageMapping)
+    this.language = Schema.getLanguageCode(this.documentAttributes.language as string)
     this.keywordsMap = keywordsMap
   }
 
@@ -27,12 +30,16 @@ export default class Schema {
     return `<div>${value}</div>`
   }
 
-  static getLanguageCode (langValue: string, languageMapping: Array<LanguageMapType>): LanguageCode {
+  static getLanguageCode (langValue: string): LanguageCode {
     const lang: string = `${String(langValue).toLowerCase()}`
-    const langType = languageMapping
-      .find((language) => language.name.toLowerCase() === lang)
+    const languageMap = [...Object.entries(languages), ...Object.entries(englishLanguages)]
 
-    return langType.identifier.replace('lang-', '') as LanguageCode
+    const langKey = languageMap
+      .find(entry => entry[1].toLowerCase() === lang.toLowerCase())
+
+    if (!langKey) { return null }
+
+    return langKey[0] as LanguageCode
   }
 
   static getUsageMapping (usage: string): string {
