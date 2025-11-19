@@ -16,16 +16,4 @@ export default class KmDocumentApi extends ApiBase
       const url = `api/v2013/documents/${identifier}/versions/draft`
       return this.http.put(url, documentJson, { params: { schema } })
     }
-
-    // TODO: Remove this from here and use proper service file
-    async getKeyword(identifier) {
-      const url = `/api/v2013/thesaurus/domains/${identifier}/terms`
-      return this.http.get(url)
-    }
-
-    // TODO: Remove this from here and fetch this information using an existing service
-    async getLanguages() {
-      const url = `http://localhost:2010/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms`
-      return this.http.get(url)
-    }
 }

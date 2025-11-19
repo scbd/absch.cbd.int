@@ -4,9 +4,9 @@ import {
   DocumentsJson
 } from '../xlsx-file-to-document-attributes/types'
 import { documentsList } from '../../data/document-types-list'
-import KmDocumentApi from '../../../../api/km-document'
+import ThesaurusApi from '../../../../api/thesaurus.js'
 
-const kmDocumentApi = new KmDocumentApi()
+const thesaurusApi = new ThesaurusApi()
 
 const defaultJson: ApiDocumentType = { header: { identifier: '' } }
 function getError () :DocumentsJson {
@@ -46,10 +46,9 @@ export async function mapDocumentAttributesToAPIJSON ({
   return { documentsJson, errors }
 }
 
-// TODO: Find a place that is available more globally to fetch this information
 export async function getKeywordsMap () {
   // TODO Remove magic string by fetching the ABS Permit Keyword category
   // identifier via the API
-  const keywordsResponse = await kmDocumentApi.getKeyword('1A22EAAB-9BBC-4543-890E-DEF913F59E98')
-  return keywordsResponse.data
+  const keywordsResponse = await thesaurusApi.getDomainTerms('1A22EAAB-9BBC-4543-890E-DEF913F59E98')
+  return keywordsResponse
 }
