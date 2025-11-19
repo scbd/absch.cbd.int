@@ -44,6 +44,10 @@
 </template>
 <script setup>
 import { ref, computed, onMounted, shallowRef } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useAuth } from '@scbd/angular-vue/src/index.js'
+import { useRealm } from '../../services/composables/realm.js'
+import KmDocumentApi from '~/api/km-document'
 import BulkUploaderHeader from './uploader-header.vue'
 import BulkUploaderFooter from './uploader-footer.vue'
 import DocumentsPreview from './documents-preview.vue'
@@ -53,26 +57,27 @@ import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import { readXLSXFIle } from './utilities/read-xlsx-file'
 import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
+// TODO: Improve translation import process and refine translation keys
+import messages from '~/app-text/components/common/import-file.json'
 import { mapDocumentAttributesToAPIJSON, getKeywordsMap } from './utilities/document-attributes-to-api-json'
+const { realm } = useRealm()
+const i18n = useI18n()
+const auth = useAuth()
+const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
+
+// Set global translation messages to avoid having to import vue-i18n in each child component.
+// TODO: Determine if this is supported by our current translations system.
+Object.entries(messages)
+  .forEach(([key, value]) => i18n.mergeLocaleMessage(key, value))
 
 const props = defineProps({
   documentType: {
     type: String,
     default: 'ircc'
-  },
-  onClose: {
-    type: Function,
-    default: () => {}
-  },
-  recordRefresh: {
-    type: Function,
-    default: () => {}
-  },
-  createDocument: {
-    type: Function,
-    default: () => {}
   }
 })
+
+const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 // Refs
 const defaultApiJson = [{ header: { identifier: '' } }]
@@ -113,20 +118,19 @@ function handleClearFile () {
 async function handleConfirm () {
   isLoading.value = true
 
-  const requestPromises = apiJson.value.map((doc) => props.createDocument(doc))
+  const requestPromises = apiJson.value.map((doc) => kmDocumentApi.createDocument(doc))
 
   return Promise.all(requestPromises)
     .then(() => {
-      props.recordRefresh()
+      $emit('refreshRecord')
       handleClearFile()
-      // Avoid emiting two function calls at once
-      // as ng-vue only seems to be able to handle one function call at a time
-      // TODO: Investigate further why ng-vue only allows emitting one function call at a time
-      setTimeout(() => {
-        modalRef.value.close()
-        props.onClose()
-      }, 1)
+      onClose()
+      modalRef.value.close()
     })
+}
+
+function onClose () {
+  $emit('onClose')
 }
 
 async function onFileChange (changeEvent) {
