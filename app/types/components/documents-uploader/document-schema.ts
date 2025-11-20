@@ -1,31 +1,6 @@
 import { DocumentTypes } from './document-types-list'
 import { DocumentAttributesMap, KeywordType } from './xlsx-file-to-document-attributes'
-
-export interface IKeyword {
-  identifier: string;
-  name: string;
-  title: { [key: string]: string };
-  shortTitle: { [key: string]: string };
-  description: string;
-  source: string;
-  broaderTerms: string[];
-  narrowerTerms: string[];
-  relatedTerms: string[];
-  nonPreferedTerms: string[];
-}
-
-export type LanguageCode = 'ar' | 'en' | 'es' | 'fr' | 'ru' | 'zh'
-
-export type LanguageType = 'arabic' | 'english' | 'spanish' | 'french' | 'russian' | 'chinese'
-
-export type LanguageMapType = {
-  identifier: string
-  name: LanguageType
-}
-
-export interface IMapData {
-  [key: string]: string | IMapData;
-}
+import { LanguageMapType } from '~/app-data/un-languages'
 
 type SubDocument = {
   identifier: string
@@ -64,9 +39,6 @@ export interface IContactFields {
   email: string;
   consent: string;
 }
-
-export type DocumentKeys = keyof IIRCCDocumentAttributes
-export type AttributeValue = string | IContactFields
 
 export interface IIRCCDocumentAttributes extends Record<string, string | IContactFields> {
   language: string;

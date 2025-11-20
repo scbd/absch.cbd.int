@@ -1,12 +1,11 @@
 import KmDocumentApi from '../../../../../api/km-document'
 
 import type {
-  LanguageCode,
   ELink, Keywords,
   DocumentJsonType
 } from '~/types/components/documents-uploader/document-schema'
 import {
-  languages, englishLanguages
+  type LanguageCode, languages, englishLanguages
 } from '~/app-data/un-languages'
 import type { DocumentAttributesMap } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 
