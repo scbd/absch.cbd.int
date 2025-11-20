@@ -4,11 +4,11 @@ import type {
   LanguageCode,
   ELink, Keywords,
   DocumentJsonType
-} from './types'
+} from '~/types/components/documents-uploader/document-schema'
 import {
   languages, englishLanguages
 } from '~/app-data/un-languages'
-import type { DocumentAttributesMap } from '../../../utilities/xlsx-file-to-document-attributes/types'
+import type { DocumentAttributesMap } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 
 const kmDocumentApi = new KmDocumentApi()
 

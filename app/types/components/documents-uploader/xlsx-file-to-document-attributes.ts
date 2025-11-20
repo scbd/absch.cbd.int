@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx'
 
-import { DocumentJsonType } from '../document-attributes-to-schema-json/schemas/types'
+import { DocumentJsonType } from '~/types/components/documents-uploader/document-schema'
 export type DocumentAttributesMap = { [key: string]: string | DocumentAttributesMap }
 
 export type CellValue = {

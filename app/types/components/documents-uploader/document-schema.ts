@@ -1,5 +1,5 @@
-import { DocumentTypes } from '../../../data/document-types-list'
-import { DocumentAttributesMap, KeywordType } from '../../xlsx-file-to-document-attributes/types'
+import { DocumentTypes } from './document-types-list'
+import { DocumentAttributesMap, KeywordType } from './xlsx-file-to-document-attributes'
 
 export interface IKeyword {
   identifier: string;
@@ -51,4 +51,39 @@ export type MapToJsonParams = {
   documentType: DocumentTypes
   languageMap: Array<LanguageMapType>
   keywordsMap: Array<KeywordType>
+}
+
+export interface IContactFields {
+  type: string;
+  existing: string;
+  orgName: string;
+  acronym: string;
+  address: string;
+  city: string;
+  country: string;
+  email: string;
+  consent: string;
+}
+
+export type DocumentKeys = keyof IIRCCDocumentAttributes
+export type AttributeValue = string | IContactFields
+
+export interface IIRCCDocumentAttributes extends Record<string, string | IContactFields> {
+  language: string;
+  absCNAId: string;
+  permitEquivalent: string;
+  dateOfIssuance: string;
+  dateOfExpiry: string;
+  provider: IContactFields;
+  pic: IContactFields;
+  matEstablished: string;
+  subjectMatter: string;
+  keywords: string;
+  specimens: string;
+  taxonomies: string;
+  usage: string;
+  usageDescription: string;
+  conditionsThirdPartyTransfer: string;
+  permitFiles: string;
+  additionalInformation: string;
 }

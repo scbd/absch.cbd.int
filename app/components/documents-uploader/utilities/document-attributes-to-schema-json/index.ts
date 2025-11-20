@@ -1,9 +1,10 @@
-import { MapToJsonParams, DocumentJsonType } from './schemas/types'
+import { MapToJsonParams, DocumentJsonType } from '~/types/components/documents-uploader/document-schema'
 import {
   DocError,
   DocumentsJson
-} from '../xlsx-file-to-document-attributes/types'
-import { documentsList, type DocumentTypes } from '../../data/document-types-list'
+} from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+import { documentsList } from '../../data/document-types-list'
+import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import ThesaurusApi from '../../../../api/thesaurus.js'
 
 const thesaurusApi = new ThesaurusApi()

@@ -1,7 +1,7 @@
 import * as XLSX from 'xlsx'
 import type {
   ReadFileResult
-} from './types'
+} from '~/types/components/documents-uploader/read-xlsx-file'
 
 /**
  * Read XLSX Workbook

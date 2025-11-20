@@ -2,8 +2,9 @@ import * as XLSX from 'xlsx'
 import type {
   DocumentAttributesMap,
   IFileData, MapParams
-} from './types'
-import { type DocumentTypes, documentsList } from '../../data/document-types-list'
+} from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+import { documentsList } from '../../data/document-types-list'
+import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 
 function getColumnValue (sheet: XLSX.WorkSheet | IFileData, col: string, rowNumber: number): string {
   const location = `${col}${rowNumber}`
