@@ -96,6 +96,6 @@ That's all!
 
 ## UML Diagram
 
-<img width="856" height="890" alt="BulkUploaderUML" src="https://github.com/user-attachments/assets/2db384ed-6d99-4c1d-98c6-1467a5e3c320" />
+<img width="863" height="873" alt="bulk-documents-uploader-uml" src="https://github.com/user-attachments/assets/6efbd416-e8f3-485e-97aa-a322e33726ba" />
  
 ### Thanks! 
