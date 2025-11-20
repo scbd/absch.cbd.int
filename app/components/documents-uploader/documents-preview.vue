@@ -7,7 +7,7 @@
     <div
       v-for="documentJson in documents"
       :key="documentJson.header.identifier"
-      class="mt-2 "
+      class="mt-3"
     >
       <h6> {{ documentJson.header.identifier }} </h6>
       <div
