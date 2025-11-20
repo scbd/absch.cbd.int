@@ -8,21 +8,25 @@
       <ul class="flex-1">
         <li
           v-for="error in errors"
-          :key="error"
+          :key="error.message"
         >
-          Error creating draft record
-          on row {{ error.index + 1 }} - {{ error.value.message }}
+          Error: {{ error.message }}
         </li>
       </ul>
     </div>
   </div>
 </template>
 <script setup>
+import { watch } from 'vue'
 // TODO: Display meaningful errors to the user
-defineProps({
+const props = defineProps({
   errors: {
     type: Array,
     default: () => []
   }
+})
+
+watch((props.errors), (newValue) => {
+  console.log(newValue)
 })
 </script>

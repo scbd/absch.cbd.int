@@ -61,14 +61,14 @@ import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attr
 import messages from '~/app-text/components/bulk-documents-uploader.json'
 import { mapDocumentAttributesToSchemaJson, getKeywordsMap } from './utilities/document-attributes-to-schema-json'
 const { realm } = useRealm()
-const i18n = useI18n()
+const { mergeLocaleMessage, t } = useI18n()
 const auth = useAuth()
 const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
 
 // Set global translation messages to avoid having to import vue-i18n in each child component.
 // TODO: Determine if this is supported by our current translations system.
 Object.entries(messages)
-  .forEach(([key, value]) => i18n.mergeLocaleMessage(key, value))
+  .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
 const props = defineProps({
   documentType: {
@@ -103,8 +103,10 @@ onMounted(async () => {
   isLoading.value = true
 
   keywordsMap.value = await getKeywordsMap(props.documentType)
-    .catch((error) => errors.value.push({ value: error, index: 0 }))
-
+    .catch((error) => {
+      storeErrors([{ message: 'keywordsListError' }])
+      console.error(error)
+    })
   isLoading.value = false
 })
 
@@ -133,6 +135,12 @@ function onClose () {
   $emit('onClose')
 }
 
+function storeErrors (newErrors) {
+  newErrors.forEach((error) => {
+    errors.value.push({ message: t(error.message) })
+  })
+}
+
 async function onFileChange (changeEvent) {
   handleClearFile()
 
@@ -141,24 +149,25 @@ async function onFileChange (changeEvent) {
 
   // Read File
   const fileRead = await readXLSXFIle(changeEvent)
-  errors.value = [...errors.value, ...fileRead.errors]
-
+  storeErrors(fileRead.errors)
   const sheet = fileRead.workbook.Sheets['Sheet3'] || []
 
   // Parse File to JSON matching the attributes of a given document
-  const attributesList = xlsxFileToDocumentAttributes(documentType, sheet)
+  const getAttributesResult = xlsxFileToDocumentAttributes(documentType, sheet)
+  storeErrors(getAttributesResult.errors)
 
-  // Match document attributes to the Document Schema
-  const mapInfo = await mapDocumentAttributesToSchemaJson({
-    attributesList,
+  // Map document attributes to the document schema
+  const mapResult = await mapDocumentAttributesToSchemaJson({
+    attributesList: getAttributesResult.documents,
     documentType,
     keywordsMap: keywordsMap.value
   })
+  errors.value = mapResult.errors.map(result => ({ message: `${t(result.error.message)} Document Row: ${result.index}` }))
+
+  // Store document schema
+  documents.value = mapResult.documentsJson
 
   isLoading.value = false
-  documents.value = mapInfo.documentsJson
-  errors.value = mapInfo.errors
-
   return documents
 }
 </script>

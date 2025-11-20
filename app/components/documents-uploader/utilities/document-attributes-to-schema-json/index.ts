@@ -3,6 +3,7 @@ import {
   DocError,
   DocumentsJson
 } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+import { ReadError } from '~/types/components/documents-uploader/error'
 import { documentsList } from '../../data/document-types-list'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import ThesaurusApi from '../../../../api/thesaurus.js'
@@ -38,7 +39,8 @@ export async function mapDocumentAttributesToSchemaJson ({
 
     const json = await schema.parseXLSXFileToDocumentJson()
       .catch((error) => {
-        errors.push({ value: error, index })
+        console.warn(error)
+        errors.push({ error, index })
       })
 
     return json === undefined ? defaultJson : json as DocumentJsonType
@@ -50,9 +52,12 @@ export async function mapDocumentAttributesToSchemaJson ({
 
 export async function getKeywordsMap (documentType: DocumentTypes) {
   const { keywordDomains } = documentsList[documentType]
+
   const keywordPromises = keywordDomains
     .map((keywordDomain) => thesaurusApi.getDomainTerms(keywordDomain))
 
   const allKeywords = await Promise.all(keywordPromises)
+    .catch((errors) => { throw errors })
+
   return allKeywords.flat()
 }

@@ -8,6 +8,7 @@ import {
   type LanguageCode, languages, englishLanguages
 } from '~/app-data/un-languages'
 import type { DocumentAttributesMap } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+import { ReadError } from '~/types/components/documents-uploader/error'
 
 const kmDocumentApi = new KmDocumentApi()
 
@@ -69,7 +70,7 @@ export default class Schema {
       const keywordValue = keywordVal.toLowerCase().trim()
       if (keywordValue === '') { return }
 
-      // TODO Improve keyword mapping
+      // TODO: Improve keyword mapping
       const keyword = this.keywordsMap
         .find((keyword) => {
           if (keyword.identifier === keywordVal.trim()) { return true }
@@ -95,18 +96,16 @@ export default class Schema {
     // TODO: Handle errors
     const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
 
+    const error = { message: 'cannotFindRelevantDocumentError' }
     if (uid === null) {
-      const error = 'getDocumentIdentifierByUid: No valid uid provided.'
-      console.warn(error)
-      return error
+      throw error
     }
 
     const data = await kmDocumentApi.getDocument(uid[4] || '')
-    if (!data) {
-      const error = `getDocumentIdentifierByUid: No valid document found or uid: ${uid}`
-      console.warn(error)
-      return error
-    }
+      .catch((serverError: ReadError) => {
+        console.warn(serverError)
+        throw error
+      })
 
     return data.header.identifier + '@' + uid[5]
   }

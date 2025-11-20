@@ -1,7 +1,10 @@
 import * as XLSX from 'xlsx'
-import type {
-  ReadFileResult
-} from '~/types/components/documents-uploader/read-xlsx-file'
+import { ReadError } from '~/types/components/documents-uploader/error'
+
+type ReadFileResult = {
+  workbook: XLSX.WorkBook
+  errors: Array<ReadError>
+}
 
 /**
  * Read XLSX Workbook
@@ -9,35 +12,41 @@ import type {
  * Stores data parsed from xlsx file.
  */
 async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    const error = { message: 'fileReadError' }
     const reader = new FileReader()
     reader.readAsBinaryString(file)
     reader.onload = (e) => {
       const data = e.target?.result
-      const workbook = XLSX.read(data, { type: 'binary' })
-      resolve(workbook)
+      try {
+        const workbook = XLSX.read(data, { type: 'binary' })
+        resolve(workbook)
+      } catch {
+        reject(error)
+      }
+    }
+    reader.onerror = () => {
+      reject(error)
+      return error
     }
   })
 }
 
-async function handleFileError (): Promise<ReadFileResult> {
-  const a :BlobPart = '' as BlobPart
-  const emptyFile: File = new File([a], 'error')
-  // TODO: Get this this error message from translations
-  const message = 'Error: The uploaded Excel file could not be parsed. Please reformat the excel file and try again.'
-  const error = { value: { message }, index: 1 }
-  return { workbook: await loadXLSXFile(emptyFile), errors: [error] }
-}
-
 export async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileResult> {
   const target = fileChangeEvent.target as HTMLInputElement
+  const errors = []
 
-  const files: FileList | null = target.files
-  if (!files) { return await handleFileError() }
-  const file: File | undefined = files[0]
+  const files = target.files
 
-  if (!file) { return await handleFileError() }
-  const readFileResult: ReadFileResult = { workbook: await loadXLSXFile(file), errors: [] }
+  const file = files[0]
 
-  return readFileResult
+  if (!file) {
+    const message = 'fileParseError'
+    errors.push({ message })
+  }
+
+  const workbook = await loadXLSXFile(file)
+    .catch(error => errors.push(error))
+
+  return { workbook: workbook as XLSX.WorkBook, errors }
 }
