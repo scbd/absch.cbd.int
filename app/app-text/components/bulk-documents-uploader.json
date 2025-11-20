@@ -3,5 +3,7 @@
     "browseFiles": "Browse",
     "pleaseSelectExcelInfo": "Please select a excel file to import data.",
     "clearImportedRecords":" Clear Imported Records",
-    "confirmCreateDraftRecords": "Create Draft Records"
+    "confirmCreateDraftRecords": "Create Draft Records",
+    "creatingDocumentsLoader": "Creating draft documents...",
+    "uploadingLoader": "Processing your files..."
 }

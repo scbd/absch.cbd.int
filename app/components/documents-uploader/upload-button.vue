@@ -5,7 +5,7 @@
       type="button"
       :disabled="isLoading"
     >
-      {{ $t("browseFiles") }}
+      {{ $t('browseFiles') }}
       <input
         type="file"
         name="file"
@@ -20,7 +20,7 @@
       class="ms-3 align-content-center"
     >
       <Loader
-        caption="Processing your files..."
+        :caption="$t('uploadingLoader')"
       />
     </div>
   </div>

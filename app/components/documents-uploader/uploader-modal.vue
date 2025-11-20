@@ -23,7 +23,7 @@
 
     <LoadingOverlay
       v-if="isLoading && hasParsedFiles"
-      caption="Creating draft documents..."
+      :caption="$t('creatingDocumentsLoader')"
     />
 
     <!-- TODO: Display Meaningful Errors  -->
