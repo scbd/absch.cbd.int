@@ -5,7 +5,7 @@
       type="button"
       @click="$emit('handleClear')"
     >
-      {{ $t("clear") }}
+      {{ $t("clearImportedRecords") }}
     </button>
     <button
       class="btn btn-primary"
@@ -13,7 +13,7 @@
       :disabled="hasErrors"
       @click="$emit('handleConfirm')"
     >
-      {{ $t("confirm") }}
+      {{ $t("confirmCreateDraftRecords") }}
     </button>
   </div>
 </template>

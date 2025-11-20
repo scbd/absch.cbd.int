@@ -1,0 +1,7 @@
+{
+    "importIrccExcel": "Import IRCC Excel",
+    "browseFiles": "Browse",
+    "pleaseSelectExcelInfo": "Please select a excel file to import data.",
+    "clearImportedRecords":" Clear Imported Records",
+    "confirmCreateDraftRecords": "Create Draft Records"
+}

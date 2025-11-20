@@ -5,7 +5,7 @@
       type="button"
       :disabled="isLoading"
     >
-      {{ $t("browse") }}
+      {{ $t("browseFiles") }}
       <input
         type="file"
         name="file"

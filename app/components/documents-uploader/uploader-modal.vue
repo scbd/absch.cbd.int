@@ -57,8 +57,7 @@ import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import { readXLSXFIle } from './utilities/read-xlsx-file'
 import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
-// TODO: Improve translation import process and refine translation keys
-import messages from '~/app-text/components/common/import-file.json'
+import messages from '~/app-text/components/bulk-documents-uploader.json'
 import { mapDocumentAttributesToSchemaJson, getKeywordsMap } from './utilities/document-attributes-to-schema-json'
 const { realm } = useRealm()
 const i18n = useI18n()
