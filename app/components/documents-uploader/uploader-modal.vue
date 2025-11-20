@@ -21,8 +21,9 @@
       :documents="documents"
     />
 
-    <CircleLoader
+    <LoadingOverlay
       v-if="isLoading && hasParsedFiles"
+      caption="Creating draft documents..."
     />
 
     <!-- TODO: Display Meaningful Errors  -->
@@ -51,7 +52,7 @@ import KmDocumentApi from '~/api/km-document'
 import BulkUploaderHeader from './uploader-header.vue'
 import BulkUploaderFooter from './uploader-footer.vue'
 import DocumentsPreview from './documents-preview.vue'
-import CircleLoader from './loader-overly.vue'
+import LoadingOverlay from '../common/loading-overlay.vue'
 import ModalErrors from './modal-errors.vue'
 import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
