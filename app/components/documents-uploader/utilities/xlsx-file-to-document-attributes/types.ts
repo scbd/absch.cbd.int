@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx'
 
-import { ApiDocumentType } from '../document-attributes-to-api-json/schemas/types'
+import { DocumentJsonType } from '../document-attributes-to-schema-json/schemas/types'
 export type DocumentAttributesMap = { [key: string]: string | DocumentAttributesMap }
 
 export type CellValue = {
@@ -17,7 +17,7 @@ export type DocError = {
 }
 
 export type DocumentsJson = {
-  documentsJson: Array<ApiDocumentType>
+  documentsJson: Array<DocumentJsonType>
   errors: Array<DocError>
 }
 

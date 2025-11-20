@@ -23,14 +23,14 @@ An example of a "Document Attributes Map" can be found in the folder above.
 }
 ```
 
-### Creating Document API Schema 
+### Creating Document Schema 
 
-Additionally, you must create a "Document API Schema" that matches document attributes to attributes in the JSON that will be sent to the API.
-The _Document API Schema_ must extend the `Schema` class and be located in the following folder: `app/components/register/bulk-documents-uploader/utilities/document-attributes-to-api-json/schemas`
-An example of a "Document API Schema" can be found in the folder above.
+Additionally, you must create a "Document Schema" that matches document attributes to attributes in the JSON that will be used to create a document in our system.
+The _Document Schema_ must extend the `Schema` class and be located in the following folder: `app/components/documents-uploader/utilities/document-attributes-to-schema-json`
+An example of a "Document Schema" can be found in the folder above.
 
 ```
-// Creating Document a API Example:
+// Creating a Document Schema Example:
 {
 import Schema from '../schema'
 import type { <Your Document Schema Name>DocumentAttributes } from './types'
@@ -71,12 +71,12 @@ First add the new document type string to the list of document types:
 export type DocumentTypes = 'ircc' | '<Your Document Type Name>'
 ```
  
-Then add the attributes map and the API schema to the `documentsList` variable. 
+Then add the attributes map and the Document Schema to the `documentsList` variable. 
 
 ```
 export const documentsList: DocumentsList = {
-  ircc: { ApiSchema: IrccSchema, attributesMap: irccAttributesMap }.
-  <Your Document Type Name>: { ApiSchema: <YourSchema>, attributesMap: <YourAttributesMap> }
+ircc: { DocumentSchema: IrccSchema, attributesMap: irccAttributesMap, keywordDomains: ['1A22EAAB-9BBC-4543-890E-DEF913F59E98']  }.
+  <Your Document Type Name>: { DocumentSchema: <YourSchema>, attributesMap: <YourAttributesMap> }
 }
 ```
 

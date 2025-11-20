@@ -5,7 +5,7 @@
     class="preview-list ps-3 pe-3 overflow-auto"
   >
     <div
-      v-for="documentJson in apiJson"
+      v-for="documentJson in documents"
       :key="documentJson.header.identifier"
       class="mt-2 "
     >
@@ -14,14 +14,14 @@
         class="preview overflow-scroll h-50 p-2 mt-2 bg-gray-200 border border-tertiary border-2"
       >
         <div> <strong>Data: </strong> </div>
-        <pre> {{ apiJson }} </pre>
+        <pre> {{ documentJson }} </pre>
       </div>
     </div>
   </div>
 </template>
 <script setup>
 defineProps({
-  apiJson: {
+  documents: {
     type: Array,
     default: () => [{ header: { identifier: '' } }]
   }

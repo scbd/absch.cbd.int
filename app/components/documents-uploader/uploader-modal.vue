@@ -18,7 +18,7 @@
     <!-- TODO: Display Document Preview -->
     <DocumentsPreview
       v-if="hasParsedFiles"
-      :api-json="apiJson"
+      :documents="documents"
     />
 
     <CircleLoader
@@ -59,7 +59,7 @@ import { readXLSXFIle } from './utilities/read-xlsx-file'
 import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
 // TODO: Improve translation import process and refine translation keys
 import messages from '~/app-text/components/common/import-file.json'
-import { mapDocumentAttributesToAPIJSON, getKeywordsMap } from './utilities/document-attributes-to-api-json'
+import { mapDocumentAttributesToSchemaJson, getKeywordsMap } from './utilities/document-attributes-to-schema-json'
 const { realm } = useRealm()
 const i18n = useI18n()
 const auth = useAuth()
@@ -80,8 +80,8 @@ const props = defineProps({
 const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 // Refs
-const defaultApiJson = [{ header: { identifier: '' } }]
-const apiJson = ref(defaultApiJson)
+const defaultDocumentJson = [{ header: { identifier: '' } }]
+const documents = ref(defaultDocumentJson)
 const isLoading = ref(false)
 const errors = ref([])
 const keywordsMap = ref([])
@@ -93,7 +93,7 @@ const hasErrors = computed(() => {
 })
 
 const hasParsedFiles = computed(() => {
-  return apiJson.value[0].header.identifier.length > 0
+  return documents.value[0].header.identifier.length > 0
 })
 
 // Event Hooks
@@ -102,7 +102,7 @@ onMounted(async () => {
 
   isLoading.value = true
 
-  keywordsMap.value = await getKeywordsMap()
+  keywordsMap.value = await getKeywordsMap(props.documentType)
     .catch((error) => errors.value.push({ value: error, index: 0 }))
 
   isLoading.value = false
@@ -112,13 +112,13 @@ onMounted(async () => {
 function handleClearFile () {
   isLoading.value = false
   errors.value = []
-  apiJson.value = defaultApiJson
+  documents.value = defaultDocumentJson
 }
 
 async function handleConfirm () {
   isLoading.value = true
 
-  const requestPromises = apiJson.value.map((doc) => kmDocumentApi.createDocument(doc))
+  const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocument(doc))
 
   return Promise.all(requestPromises)
     .then(() => {
@@ -146,19 +146,19 @@ async function onFileChange (changeEvent) {
   const sheet = fileRead.workbook.Sheets['Sheet3'] || []
 
   // Parse File to JSON matching the attributes of a given document
-  const documents = xlsxFileToDocumentAttributes(documentType, sheet)
+  const attributesList = xlsxFileToDocumentAttributes(documentType, sheet)
 
-  // Match document attributes to the API Schema
-  const mapInfo = await mapDocumentAttributesToAPIJSON({
-    documents,
+  // Match document attributes to the Document Schema
+  const mapInfo = await mapDocumentAttributesToSchemaJson({
+    attributesList,
     documentType,
     keywordsMap: keywordsMap.value
   })
 
   isLoading.value = false
-  apiJson.value = mapInfo.documentsJson
+  documents.value = mapInfo.documentsJson
   errors.value = mapInfo.errors
 
-  return apiJson
+  return documents
 }
 </script>

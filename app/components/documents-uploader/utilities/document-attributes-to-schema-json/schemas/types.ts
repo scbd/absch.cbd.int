@@ -40,14 +40,14 @@ export type ELink = {
   url: string
 }
 
-export type ApiDocumentType = {
+export type DocumentJsonType = {
   header: {
     identifier: string
   }
 }
 
 export type MapToJsonParams = {
-  documents: Array<DocumentAttributesMap>
+  attributesList: Array<DocumentAttributesMap>
   documentType: DocumentTypes
   languageMap: Array<LanguageMapType>
   keywordsMap: Array<KeywordType>

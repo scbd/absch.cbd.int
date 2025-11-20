@@ -3,10 +3,10 @@ import KmDocumentApi from '../../../../../api/km-document'
 import type {
   LanguageCode,
   ELink, Keywords,
-  ApiDocumentType
+  DocumentJsonType
 } from './types'
 import {
-  type LanguagesType, languages, englishLanguages,
+  languages, englishLanguages
 } from '~/app-data/un-languages'
 import type { DocumentAttributesMap } from '../../../utilities/xlsx-file-to-document-attributes/types'
 
@@ -43,7 +43,7 @@ export default class Schema {
   }
 
   static getUsageMapping (usage: string): string {
-    // TODO: Possibly move to API call to avoid magic strings
+    // TODO: Possibly move to API call or app-data folder to avoid magic strings
     const usageMapping = {
       commercial: '5E833A3F-87D1-4ADD-8701-9F1B76383017',
       noncommercial: '60EA2F49-A9DD-406F-921A-8A1C9AA8DFDD'
@@ -149,7 +149,7 @@ export default class Schema {
     return String(columnValue).toLowerCase() === 'yes'
   }
 
-  async parseXLSXFileToDocumentJson () :Promise<ApiDocumentType> {
+  async parseXLSXFileToDocumentJson () :Promise< DocumentJsonType> {
     return { header: { identifier: '' } }
   }
 }
