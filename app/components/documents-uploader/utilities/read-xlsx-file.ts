@@ -1,9 +1,9 @@
 import * as XLSX from 'xlsx'
-import { ReadError } from '~/types/components/documents-uploader/error'
+import { StandardError } from '~/types/errors'
 
 type ReadFileResult = {
   workbook: XLSX.WorkBook
-  errors: Array<ReadError>
+  errors: Array<StandardError>
 }
 
 /**
@@ -13,7 +13,7 @@ type ReadFileResult = {
  */
 async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
   return new Promise((resolve, reject) => {
-    const error = { message: 'fileReadError' }
+    const error = { message: 'fileStandardError' }
     const reader = new FileReader()
     reader.readAsBinaryString(file)
     reader.onload = (e) => {

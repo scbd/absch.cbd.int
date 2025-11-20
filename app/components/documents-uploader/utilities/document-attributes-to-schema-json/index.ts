@@ -3,7 +3,6 @@ import {
   DocError,
   DocumentsJson
 } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
-import { ReadError } from '~/types/components/documents-uploader/error'
 import { documentsList } from '../../data/document-types-list'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import ThesaurusApi from '../../../../api/thesaurus.js'

@@ -4,7 +4,7 @@ import type {
   IFileData, MapParams,
   MapResult, DocumentsMapResult
 } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
-import { ReadError } from '~/types/components/documents-uploader/error'
+import { StandardError } from '~/types/errors'
 import { documentsList } from '../../data/document-types-list'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 
@@ -14,7 +14,7 @@ function getColumnValue (sheet: XLSX.WorkSheet | IFileData, col: string, rowNumb
 }
 
 export function mapXLSXFileToAttributeNames ({ documentMap, sheet, rowNumber }: MapParams): MapResult {
-  const errors :Array<ReadError> = []
+  const errors :Array<StandardError> = []
   // Get the string value of a cell in the XLSX sheet given a column name and row number.
   const getColumnString = (value: string | undefined): string => {
     if (typeof value === 'string') {

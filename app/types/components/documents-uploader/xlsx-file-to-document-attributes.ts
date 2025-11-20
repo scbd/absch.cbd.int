@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx'
 import { DocumentJsonType } from '~/types/components/documents-uploader/document-schema'
-import { ReadError } from './error'
+import { StandardError } from '../../errors'
 
 export type DocumentAttributesMap = { [key: string]: string | DocumentAttributesMap }
 
@@ -35,10 +35,10 @@ export type MapParams = {
 
 export type DocumentsMapResult = {
   documents: Array<DocumentAttributesMap>
-  errors: Array<ReadError>
+  errors: Array<StandardError>
 }
 
 export type MapResult = {
   document: DocumentAttributesMap
-  errors: Array<ReadError>
+  errors: Array<StandardError>
 }

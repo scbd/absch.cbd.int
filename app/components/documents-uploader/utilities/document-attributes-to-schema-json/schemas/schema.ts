@@ -8,7 +8,7 @@ import {
   type LanguageCode, languages, englishLanguages
 } from '~/app-data/un-languages'
 import type { DocumentAttributesMap } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
-import { ReadError } from '~/types/components/documents-uploader/error'
+import { StandardError } from '~/types/errors'
 
 const kmDocumentApi = new KmDocumentApi()
 
@@ -102,7 +102,7 @@ export default class Schema {
     }
 
     const data = await kmDocumentApi.getDocument(uid[4] || '')
-      .catch((serverError: ReadError) => {
+      .catch((serverError: StandardError) => {
         console.warn(serverError)
         throw error
       })
