@@ -19,14 +19,14 @@
       v-if="isLoading"
       class="ms-3 align-content-center"
     >
-      <CircleLoader
-        :size="22"
+      <Loader
+        caption="Processing your files..."
       />
     </div>
   </div>
 </template>
 <script setup>
-import CircleLoader from './circle-loader.vue'
+import Loader from '../common/loading.vue'
 defineProps({
   isLoading: {
     type: Boolean,
