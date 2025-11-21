@@ -36,7 +36,7 @@ export async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileRes
   const target = fileChangeEvent.target as HTMLInputElement
   const errors = []
 
-  const files = target.files
+  const files = target.files || []
 
   const file = files[0]
 
@@ -45,7 +45,7 @@ export async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileRes
     errors.push({ message })
   }
 
-  const workbook = await loadXLSXFile(file)
+  const workbook = await loadXLSXFile(file as File)
     .catch(error => errors.push(error))
 
   return { workbook: workbook as XLSX.WorkBook, errors }
