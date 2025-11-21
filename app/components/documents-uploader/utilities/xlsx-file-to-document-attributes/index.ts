@@ -57,7 +57,7 @@ function handleError (message: string) {
   throw error
 }
 
-function mapToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkSheet | Array<string>) :Array<DocumentAttributesMap> {
+function mapToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkSheet) :Array<DocumentAttributesMap> {
   if (!documentType) {
     handleError('noDocumentTypeError')
   }
@@ -71,8 +71,8 @@ function mapToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkS
 
   const range = sheet['!ref']
   const headerCount: number = 3
-  const rangeEnd = XLSX.utils.decode_range(range).e.r
-  const rangeStart = XLSX.utils.decode_range(range).s.r + headerCount
+  const rangeEnd = XLSX.utils.decode_range(range as string).e.r
+  const rangeStart = XLSX.utils.decode_range(range as string).s.r + headerCount
 
   const documents = []
 
@@ -92,6 +92,6 @@ export default function mapXLSXFileToDocumentAttributes (documentType: DocumentT
   try {
     return { documents: mapToDocumentAttributes(documentType, sheet), errors: [] }
   } catch (error) {
-    return { documents: [], errors: [error] }
+    return { documents: [], errors: [error as StandardError] }
   }
 }
