@@ -12,7 +12,9 @@
     "noDocumentTypeError": "Cannot map attributes. No document type selected.",
     "noDocumentParser": "Cannot parse document. No parser specified for given document type.",
     "attributeMapError": "Problem mapping document attribute. Column not readable.",
+    "attributeRequiredError": "Required document attribute is missing.",
     "keywordsListError": "Could not fetch keywords list from the server.",
     "documentParseError": "A problem occured parsing the document from the excel sheet.",
-    "cannotFindRelevantDocumentError": "Could not find linked document. No valid document found with given document ID."
+    "cannotFindRelevantDocumentError": "Could not find linked document. No valid document found with given document ID.",
+    "documentEmptyError": "Document Empty. Not populated rows found in document."
 }

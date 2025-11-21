@@ -1,5 +1,5 @@
 import { DocumentTypes } from './document-types-list'
-import { DocumentAttributesMap, KeywordType } from './xlsx-file-to-document-attributes'
+import { DocumentAttributes, KeywordType } from './xlsx-file-to-document-attributes'
 
 type SubDocument = {
   identifier: string
@@ -22,7 +22,7 @@ export type DocumentJsonType = {
 export type DocumentsJsonArray = Array<DocumentJsonType>
 
 export type MapToJsonParams = {
-  attributesList: Array<DocumentAttributesMap>
+  attributesList: Array<DocumentAttributes>
   documentType: DocumentTypes
   keywordsMap: Array<KeywordType>
 }

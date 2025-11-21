@@ -1,6 +1,8 @@
 import Schema from '~/components/documents-uploader/utilities/document-attributes-to-schema-json/schemas/schema'
+import { AttributeDefinition } from './xlsx-file-to-document-attributes'
+
 type AttributesMap = {
-  [key: string]: string | AttributesMap
+  [key: string]: AttributeDefinition | AttributesMap
 }
 
 export type DocumentTypes = 'ircc' // | 'cpc' | 'contact'

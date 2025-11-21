@@ -7,7 +7,7 @@ import type {
 import {
   type LanguageCode, languages, englishLanguages
 } from '~/app-data/un-languages'
-import type { DocumentAttributesMap } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+import type { DocumentAttributes } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 import { StandardError } from '~/types/errors'
 import { KeywordType } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 
@@ -15,11 +15,11 @@ const kmDocumentApi = new KmDocumentApi()
 
 export default class Schema {
   language: LanguageCode = 'en' // Default
-  documentAttributes: DocumentAttributesMap
+  documentAttributes: DocumentAttributes
   documentNumber: number = 1
   keywordsMap = []
 
-  constructor (documentAttrs: DocumentAttributesMap, keywordsMap: Array<KeywordType>) {
+  constructor (documentAttrs: DocumentAttributes, keywordsMap: Array<KeywordType>) {
     this.documentAttributes = documentAttrs
     this.language = Schema.getLanguageCode(this.documentAttributes.language as string)
     this.keywordsMap = keywordsMap

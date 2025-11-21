@@ -2,7 +2,15 @@ import * as XLSX from 'xlsx'
 import { DocumentJsonType } from '~/types/components/documents-uploader/document-schema'
 import { StandardError } from '../../errors'
 
-export type DocumentAttributesMap = { [key: string]: string | DocumentAttributesMap }
+export type AttributeDefinition = {
+  column: string
+  required?: boolean
+  schema?: DocumentAttributesMap
+}
+
+export type DocumentAttributesMap = { [key: string]: AttributeDefinition | DocumentAttributesMap }
+
+export type DocumentAttributes = { [key: string]: string | DocumentAttributes }
 
 export type CellValue = {
   w: string;
@@ -36,11 +44,11 @@ export type MapParams = {
 }
 
 export type DocumentsMapResult = {
-  documents: Array<DocumentAttributesMap>
-  errors: Array<StandardError>
+  documents: Array<DocumentAttributes | StandardError>
+  errors: Array<DocError>
 }
 
 export type MapResult = {
-  document: DocumentAttributesMap
+  document: DocumentAttributes
   errors: Array<StandardError>
 }

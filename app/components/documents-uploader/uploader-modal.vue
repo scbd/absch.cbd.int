@@ -150,11 +150,8 @@ async function onFileChange (changeEvent) {
 
   isLoading.value = false
 
-  if (importDocuments.errors.length > 0) {
-    // Store errors
-    errors.value = importDocuments.errors
-    return []
-  }
+  // Store errors
+  errors.value = importDocuments.errors
 
   // Store document schema
   documents.value = documentsJson

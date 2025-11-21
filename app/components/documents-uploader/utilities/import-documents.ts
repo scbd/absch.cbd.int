@@ -5,18 +5,19 @@ import { mapDocumentAttributesToSchemaJson } from './document-attributes-to-sche
 import { readXLSXFIle } from './read-xlsx-file'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
-import { DocError, DocumentAttributesMap, type KeywordType } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+import { DocError, DocumentAttributes, type KeywordType } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 import { DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
 import ThesaurusApi from '../../../api/thesaurus.js'
 
+type Translations = (arg: string) => string
 export class ImportDocuments {
-  t = (arg: string) :string => arg
+  t: Translations = (arg) => arg
   errors: Array<StandardError> = []
   keywordsMap: Array<KeywordType> = []
   thesaurusApi: ThesaurusApi = {}
   documentType: DocumentTypes
 
-  constructor (t, documentType: DocumentTypes) {
+  constructor (t: Translations, documentType: DocumentTypes) {
     this.t = t
     this.errors = []
     this.documentType = documentType
@@ -33,13 +34,19 @@ export class ImportDocuments {
     return fileRead.workbook.Sheets['Sheet3'] || []
   }
 
-  xlsxFileToDocumentAttributes (sheet: XLSX.WorkSheet) :Array<DocumentAttributesMap> {
+  getMessage (err: DocError) {
+    return `${this.t(err.message)} Document Row: ${err.index}, Column: ${err.column}, Value: ${err.value}`
+  }
+
+  xlsxFileToDocumentAttributes (sheet: XLSX.WorkSheet) :Array<DocumentAttributes> {
     const getAttributesResult = xlsxFileToDocumentAttributes(this.documentType, sheet)
-    this.storeErrors(getAttributesResult.errors)
+    this.errors = getAttributesResult.errors
+      .map((docError) => ({ message: this.getMessage(docError) }))
+
     return getAttributesResult.documents
   }
 
-  async mapDocumentAttributesToSchemaJson (attributesList: Array<DocumentAttributesMap>) :Promise<DocumentsJsonArray> {
+  async mapDocumentAttributesToSchemaJson (attributesList: Array<DocumentAttributes>) :Promise<DocumentsJsonArray> {
     const mapResult = await mapDocumentAttributesToSchemaJson({
       attributesList,
       documentType: this.documentType,
@@ -47,9 +54,8 @@ export class ImportDocuments {
     })
 
     if (mapResult.errors.length > 0) {
-      const getMessage = (err: DocError) => `${this.t(err.message)} Document Row: ${err.index}, Column: ${err.column}, Value: ${err.value}`
       this.errors = mapResult.errors
-        .map((docError) => ({ message: getMessage(docError) }))
+        .map((docError) => ({ message: this.getMessage(docError) }))
       return [{ header: { identifier: '' } }]
     }
 

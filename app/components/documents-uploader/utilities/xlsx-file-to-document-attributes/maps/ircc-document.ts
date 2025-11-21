@@ -1,40 +1,43 @@
 export default {
-  language: 'A',
-  country: 'B',
-  absCNAId: 'C',
-  permitEquivalent: 'D',
-  dateOfIssuance: 'E',
-  dateOfExpiry: 'F',
+  language: { column: 'A', required: true },
+  country: { column: 'B', required: true },
+  absCNAId: { column: 'C', required: true },
+  permitEquivalent: { column: 'D' },
+  dateOfIssuance: { column: 'E', required: true },
+  dateOfExpiry: { column: 'F', required: true },
   provider: {
-    consent: 'ZZ',
-    type: 'G',
-    existing: 'H',
-    orgName: 'I',
-    acronym: 'J',
-    address: 'K',
-    city: 'L',
-    country: 'M',
-    email: 'N'
+    schema: {
+      type: { column: 'G' },
+      existing: { column: 'H' },
+      orgName: { column: 'I' },
+      acronym: { column: 'J' },
+      address: { column: 'K' },
+      city: { column: 'L' },
+      country: { column: 'M' },
+      email: { column: 'N' }
+    }
   },
   pic: {
-    consent: 'O',
-    type: 'P',
-    existing: 'Q',
-    orgName: 'R',
-    acronym: 'S',
-    address: 'T',
-    city: 'U',
-    country: 'V',
-    email: 'W'
+    schema: {
+      consent: { column: 'O' },
+      type: { column: 'P' },
+      existing: { column: 'Q' },
+      orgName: { column: 'R' },
+      acronym: { column: 'S' },
+      address: { column: 'T' },
+      city: { column: 'U' },
+      country: { column: 'V' },
+      email: { column: 'W' }
+    }
   },
-  matEstablished: 'X',
-  subjectMatter: 'Y',
-  keywords: 'Z',
-  specimens: 'AA',
-  taxonomies: 'AB',
-  usage: 'AC',
-  usageDescription: 'AD',
-  conditionsThirdPartyTransfer: 'AE',
-  permitFiles: 'AF',
-  additionalInformation: 'AG'
+  matEstablished: { column: 'X' },
+  subjectMatter: { column: 'Y' },
+  keywords: { column: 'Z' },
+  specimens: { column: 'AA' },
+  taxonomies: { column: 'AB' },
+  usage: { column: 'AC' },
+  usageDescription: { column: 'AD' },
+  conditionsThirdPartyTransfer: { column: 'AE' },
+  permitFiles: { column: 'AF' },
+  additionalInformation: { column: 'AG' }
 }
