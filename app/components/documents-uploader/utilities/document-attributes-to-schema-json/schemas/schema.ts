@@ -24,12 +24,18 @@ export default class Schema {
     this.keywordsMap = keywordsMap
   }
 
+  /**
+  * Wrap string from excel sheet in a div.
+  */
   static getAsHtmlElement (value: string): string {
     if (String(value).trim() === '') { return '' }
 
     return `<div>${value}</div>`
   }
 
+  /**
+  * Map language as input in the excel sheet to a language code.
+  */
   static getLanguageCode (langValue: string): LanguageCode {
     const lang: string = `${String(langValue).toLowerCase()}`
     const languageMap = [...Object.entries(languages), ...Object.entries(englishLanguages)]
@@ -42,6 +48,9 @@ export default class Schema {
     return langKey[0] as LanguageCode
   }
 
+  /**
+  * Get GUID for usage map from usage map document attribute string.
+  */
   static getUsageMapping (usage: string): string {
     // TODO: Possibly move to API call or app-data folder to avoid magic strings
     const usageMapping = {
@@ -59,6 +68,10 @@ export default class Schema {
     return links.map((url: string) => ({ url }))
   }
 
+  /**
+  * Map all keywords from their description in the excel sheet to
+  * a GUID determined by a keywords list.
+  */
   getKeywords (keywordsValue: string): Keywords {
     // TODO: Handle errors
     const keywords = keywordsValue.trim().split(',')
@@ -91,8 +104,11 @@ export default class Schema {
     return { processedKeywords: Promise.all(processedKeywords), otherKeywords }
   }
 
-  // TODO: Store this request to avoid repeatedly making a request for the same document type
-  static async getDocumentIdentifierByUid (uniqueId: string): Promise<string> {
+  /**
+  * Fetch a document it's GUID from our servers and return it's identifier.
+  * TODO: Store this request to avoid repeatedly making a request for the same document type.
+  */
+  static async getDocumentIdentifierByGUID (uniqueId: string): Promise<string> {
     // TODO: Handle errors
     const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
 
@@ -110,27 +126,35 @@ export default class Schema {
     return data.header.identifier + '@' + uid[5]
   }
 
-  static generateUID () {
+  /**
+  * Generate a GUID using the Math.random function.
+  */
+  static generateGUID () {
     const S4 = (): string => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
     return (`SIMP-${S4()}${S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`).toUpperCase()
   }
 
+  /**
+  * Generate a GUID using the Math.random function.
+  */
   static async findOrCreateContact (contacts: string) {
     if ((contacts).trim() !== '') {
       const existingContacts = contacts.split(',')
 
       return existingContacts
-        .map(async (contactUid) => ({ identifier: await Schema.getDocumentIdentifierByUid(contactUid) }))
+        .map(async (contactUid) => ({ identifier: await Schema.getDocumentIdentifierByGUID(contactUid) }))
     }
 
     const contact = {
-      identifier: Schema.generateUID()
+      identifier: Schema.generateGUID()
     }
     return [contact]
   }
 
-  // In case the date format is not correct in the XLSX sheet
-  // attempt to parse the date inorder to still get a date as a backup
+  /**
+  * In case the date format is not correct in the XLSX sheet
+  * attempt to parse the date in order to still get a date as a backup.
+  */
   static parseDate (dateValue: string): string {
     const date:Date = new Date(Date.parse(`${dateValue} GMT-05:00`))
     const options :Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }
@@ -139,14 +163,25 @@ export default class Schema {
     return date.toLocaleDateString(dateFormat, options)
   }
 
+  /**
+  * Map confidential string from excel sheet to a boolean.
+  */
   static getIsConfidential (value: string): boolean {
     return value === 'confidential'
   }
 
+  /**
+  * Map yes or no string from excel sheet to a boolean.
+  */
   static parseTextToBoolean (columnValue: string | undefined) {
     return String(columnValue).toLowerCase() === 'yes'
   }
 
+  /**
+  * Parse the string document attributes taken from the excel sheet to
+  * document JSON used to create a document draft in our system.
+  * To be overridden by the document schema class extending this class.
+  */
   async parseXLSXFileToDocumentJson () :Promise< DocumentJsonType> {
     return { header: { identifier: '' } }
   }

@@ -13,12 +13,12 @@ export default class IrccSchema extends Schema {
     return {
       type: 'organization',
       header: {
-        identifier: Schema.generateUID(),
+        identifier: Schema.generateGUID(),
         schema: 'absPermit',
         languages: [this.language]
       },
       absCNA: {
-        identifier: await Schema.getDocumentIdentifierByUid(sheet.absCNAId)
+        identifier: await Schema.getDocumentIdentifierByGUID(sheet.absCNAId)
       },
       title: {
         [this.language]: sheet.permitEquivalent
