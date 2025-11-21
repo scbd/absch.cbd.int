@@ -5,7 +5,7 @@ import { mapDocumentAttributesToSchemaJson } from './document-attributes-to-sche
 import { readXLSXFIle } from './read-xlsx-file'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
-import { DocumentAttributesMap, type KeywordType } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+import { DocError, DocumentAttributesMap, type KeywordType } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 import { DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
 import ThesaurusApi from '../../../api/thesaurus.js'
 
@@ -47,8 +47,9 @@ export class ImportDocuments {
     })
 
     if (mapResult.errors.length > 0) {
+      const getMessage = (err: DocError) => `${this.t(err.message)} Document Row: ${err.index}, Column: ${err.column}, Value: ${err.value}`
       this.errors = mapResult.errors
-        .map((docError) => ({ message: `${this.t(docError.message)} Document Row: ${docError.index}` }))
+        .map((docError) => ({ message: getMessage(docError) }))
       return [{ header: { identifier: '' } }]
     }
 

@@ -9,6 +9,7 @@ import {
 } from '~/app-data/un-languages'
 import type { DocumentAttributesMap } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 import { StandardError } from '~/types/errors'
+import { KeywordType } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 
 const kmDocumentApi = new KmDocumentApi()
 
@@ -18,7 +19,7 @@ export default class Schema {
   documentNumber: number = 1
   keywordsMap = []
 
-  constructor (documentAttrs: DocumentAttributesMap, keywordsMap) {
+  constructor (documentAttrs: DocumentAttributesMap, keywordsMap: Array<KeywordType>) {
     this.documentAttributes = documentAttrs
     this.language = Schema.getLanguageCode(this.documentAttributes.language as string)
     this.keywordsMap = keywordsMap
@@ -34,7 +35,7 @@ export default class Schema {
   }
 
   /**
-  * Map language as input in the excel sheet to a language code.
+  * Map language from human-readable string in the excel sheet to a language code.
   */
   static getLanguageCode (langValue: string): LanguageCode {
     const lang: string = `${String(langValue).toLowerCase()}`
@@ -73,7 +74,6 @@ export default class Schema {
   * a GUID determined by a keywords list.
   */
   getKeywords (keywordsValue: string): Keywords {
-    // TODO: Handle errors
     const keywords = keywordsValue.trim().split(',')
 
     const processedKeywords = []
@@ -108,11 +108,14 @@ export default class Schema {
   * Fetch a document it's GUID from our servers and return it's identifier.
   * TODO: Store this request to avoid repeatedly making a request for the same document type.
   */
-  static async getDocumentIdentifierByGUID (uniqueId: string): Promise<string> {
+  async getDocumentIdentifierByGUID (uniqueId: string): Promise<string> {
     // TODO: Handle errors
     const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
 
-    const error = { message: 'cannotFindRelevantDocumentError' }
+    const [erroredColumn, erroredValue] = Object.entries(this.documentAttributes)
+      .find((entry) => entry[1] === uniqueId)
+
+    const error = { message: 'cannotFindRelevantDocumentError', column: erroredColumn, value: erroredValue }
     if (uid === null) {
       throw error
     }
@@ -135,14 +138,14 @@ export default class Schema {
   }
 
   /**
-  * Generate a GUID using the Math.random function.
+  * Find a contact by its GUID or create a GUID for the new contact.
   */
-  static async findOrCreateContact (contacts: string) {
+  async findOrCreateContact (contacts: string) {
     if ((contacts).trim() !== '') {
       const existingContacts = contacts.split(',')
 
       return existingContacts
-        .map(async (contactUid) => ({ identifier: await Schema.getDocumentIdentifierByGUID(contactUid) }))
+        .map(async (contactUid) => ({ identifier: await this.getDocumentIdentifierByGUID(contactUid) }))
     }
 
     const contact = {

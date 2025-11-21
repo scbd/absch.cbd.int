@@ -15,6 +15,8 @@ export interface IFileData {
 export type DocError = {
   message: string
   index: number
+  value?: string
+  column?: number
 }
 
 export type DocumentsJson = {

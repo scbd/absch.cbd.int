@@ -18,16 +18,16 @@ export default class IrccSchema extends Schema {
         languages: [this.language]
       },
       absCNA: {
-        identifier: await Schema.getDocumentIdentifierByGUID(sheet.absCNAId)
+        identifier: await this.getDocumentIdentifierByGUID(sheet.absCNAId)
       },
       title: {
         [this.language]: sheet.permitEquivalent
       },
       dateOfIssuance: Schema.parseDate(sheet.dateOfIssuance),
       dateOfExpiry: Schema.parseDate(sheet.dateOfExpiry),
-      providers: await Schema.findOrCreateContact(sheet.provider.existing),
+      providers: await this.findOrCreateContact(sheet.provider.existing),
       providersConfidential: Schema.getIsConfidential(sheet.provider.type),
-      entitiesToWhomPICGranted: await Schema.findOrCreateContact(sheet.pic.existing),
+      entitiesToWhomPICGranted: await this.findOrCreateContact(sheet.pic.existing),
       entitiesToWhomPICGrantedConfidential: Schema.getIsConfidential(sheet.pic.type),
       picGranted: Schema.parseTextToBoolean(sheet.pic.consent),
       subjectMatter: {

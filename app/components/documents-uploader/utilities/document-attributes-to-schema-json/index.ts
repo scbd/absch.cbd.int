@@ -9,7 +9,9 @@ const defaultJson: DocumentJsonType = { header: { identifier: '' } }
 function getError () :DocumentsJson {
   const error: DocError = {
     message: 'noDocumentParser',
-    index: 1
+    index: 1,
+    column: null,
+    value: ''
   }
   const errors: Array<DocError> = [error]
   return { documentsJson: [defaultJson], errors }
@@ -35,7 +37,7 @@ export async function mapDocumentAttributesToSchemaJson ({
     const json = await schema.parseXLSXFileToDocumentJson()
       .catch((error) => {
         console.warn(error)
-        errors.push({ message: error.message, index })
+        errors.push({ message: error.message, index, column: error.column, value: error.value })
       })
 
     return json === undefined ? defaultJson : json as DocumentJsonType
