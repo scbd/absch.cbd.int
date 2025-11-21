@@ -1,5 +1,4 @@
 import * as XLSX from 'xlsx'
-import { DocumentJsonType } from '~/types/components/documents-uploader/document-schema'
 import { StandardError } from '../../errors'
 
 export type DocumentAttributesMap = { [key: string]: string | DocumentAttributesMap }
@@ -17,11 +16,6 @@ export type DocError = {
   index: number
   value?: string
   column?: number
-}
-
-export type DocumentsJson = {
-  documentsJson: Array<DocumentJsonType>
-  errors: Array<DocError>
 }
 
 export type KeywordType = {
