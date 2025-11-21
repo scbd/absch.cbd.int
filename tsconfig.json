@@ -15,7 +15,10 @@
     "noErrorTruncation": true,
     "noFallthroughCasesInSwitch": true,
     "noPropertyAccessFromIndexSignature": true,
-    "allowUnreachableCode": false
+    "allowUnreachableCode": false,
+    "paths": {
+      "~/*": ["./app/*"]
+    }
   },
   "include": [
     "app/**/*.vue",
