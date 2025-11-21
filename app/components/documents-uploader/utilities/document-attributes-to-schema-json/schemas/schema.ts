@@ -170,7 +170,7 @@ export default class Schema {
   * Map confidential string from excel sheet to a boolean.
   */
   static getIsConfidential (value: string): boolean {
-    return value === 'confidential'
+    return value.toLowerCase() === 'confidential'
   }
 
   /**
