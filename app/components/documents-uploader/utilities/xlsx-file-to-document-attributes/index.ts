@@ -8,11 +8,21 @@ import { StandardError } from '~/types/errors'
 import { documentsList } from '../../data/document-types-list'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 
+/**
+* Map XLSX File to Document Attriubutes
+*
+* Map columns in an Excel sheet to named attributes of a given document type.
+*/
+
+// Get a string column value for a given row number and column name
 function getColumnValue (sheet: XLSX.WorkSheet | IFileData, col: string, rowNumber: number): string {
   const location = `${col}${rowNumber}`
   return (sheet[location] || {}).w || ''
 }
 
+/**
+* Match excel columns to document attributes using a map of column names to document attribute names.
+*/
 export function mapXLSXFileToAttributeNames ({ documentMap, sheet, rowNumber }: MapParams): MapResult {
   const errors :Array<StandardError> = []
   // Get the string value of a cell in the XLSX sheet given a column name and row number.
