@@ -112,6 +112,7 @@ onMounted(async () => {
 function handleClearFile () {
   isLoading.value = false
   errors.value = []
+  importDocuments.setErrors([])
   documents.value = defaultDocumentJson
 }
 
@@ -140,16 +141,12 @@ async function onFileChange (changeEvent) {
 
   // Read File
   const sheet = await importDocuments.readXLSXFIle(changeEvent)
-  console.log('sheet', sheet)
 
   // Parse File to JSON matching the attributes of a given document
   const attributesList = importDocuments.xlsxFileToDocumentAttributes(sheet)
-  console.log('attributesList', attributesList)
 
   // Map document attributes to the document schema
   const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(attributesList)
-  console.log('documentsJson', documentsJson)
-  console.log(importDocuments)
 
   isLoading.value = false
 

@@ -17,16 +17,11 @@
   </div>
 </template>
 <script setup>
-import { watch } from 'vue'
 // TODO: Display meaningful errors to the user
-const props = defineProps({
+defineProps({
   errors: {
     type: Array,
     default: () => []
   }
-})
-
-watch((props.errors), (newValue) => {
-  console.log(newValue)
 })
 </script>

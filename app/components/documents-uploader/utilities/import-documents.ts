@@ -6,6 +6,7 @@ import { readXLSXFIle } from './read-xlsx-file'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
 import { DocumentAttributesMap, type KeywordType } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+import { DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
 import ThesaurusApi from '../../../api/thesaurus.js'
 
 export class ImportDocuments {
@@ -23,28 +24,34 @@ export class ImportDocuments {
     this.thesaurusApi = new ThesaurusApi()
   }
 
-  async readXLSXFIle (changeEvent: Event) {
+  async readXLSXFIle (changeEvent: Event) :Promise<XLSX.WorkSheet> {
     const fileRead = await readXLSXFIle(changeEvent)
     this.storeErrors(fileRead.errors)
+
+    if (!fileRead.workbook.Sheets) { return [] }
+
     return fileRead.workbook.Sheets['Sheet3'] || []
   }
 
-  xlsxFileToDocumentAttributes (sheet: XLSX.WorkSheet) {
+  xlsxFileToDocumentAttributes (sheet: XLSX.WorkSheet) :Array<DocumentAttributesMap> {
     const getAttributesResult = xlsxFileToDocumentAttributes(this.documentType, sheet)
     this.storeErrors(getAttributesResult.errors)
     return getAttributesResult.documents
   }
 
-  async mapDocumentAttributesToSchemaJson (attributesList: Array<DocumentAttributesMap>) {
+  async mapDocumentAttributesToSchemaJson (attributesList: Array<DocumentAttributesMap>) :Promise<DocumentsJsonArray> {
     const mapResult = await mapDocumentAttributesToSchemaJson({
       attributesList,
       documentType: this.documentType,
       keywordsMap: this.keywordsMap
     })
 
-    this.errors = mapResult.errors.map(docError => {
-      return { message: `${this.t(docError.message)} Document Row: ${docError.index}` } as StandardError
-    })
+    if (mapResult.errors.length > 0) {
+      this.errors = mapResult.errors
+        .map((docError) => ({ message: `${this.t(docError.message)} Document Row: ${docError.index}` }))
+      return [{ header: { identifier: '' } }]
+    }
+
     return mapResult.documentsJson
   }
 
@@ -54,6 +61,10 @@ export class ImportDocuments {
     })
   }
 
+  setErrors (value: Array<StandardError>) {
+    this.errors = value
+  }
+
   async getKeywordsMap () {
     const { keywordDomains } = documentsList[this.documentType]
 
@@ -61,7 +72,12 @@ export class ImportDocuments {
       .map((keywordDomain: string) => this.thesaurusApi.getDomainTerms(keywordDomain))
 
     const allKeywords = await Promise.all(keywordPromises)
-      .catch((errors) => { throw errors })
+      .catch(() => {
+        this.storeErrors([{ message: 'keywordsListError' }])
+      })
+
+    if (!Array.isArray(allKeywords)) { return [] }
+
     const keywords = allKeywords.flat()
     this.keywordsMap = keywords
     return keywords

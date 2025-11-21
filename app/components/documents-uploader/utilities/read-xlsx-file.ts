@@ -13,7 +13,7 @@ type ReadFileResult = {
  */
 async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
   return new Promise((resolve, reject) => {
-    const error = { message: 'fileStandardError' }
+    const error = { message: 'fileReadError' }
     const reader = new FileReader()
     reader.readAsBinaryString(file)
     reader.onload = (e) => {

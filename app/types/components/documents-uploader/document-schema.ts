@@ -19,6 +19,7 @@ export type DocumentJsonType = {
     identifier: string
   }
 }
+export type DocumentsJsonArray = Array<DocumentJsonType>
 
 export type MapToJsonParams = {
   attributesList: Array<DocumentAttributesMap>
