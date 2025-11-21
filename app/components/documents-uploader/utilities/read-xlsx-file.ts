@@ -21,11 +21,13 @@ async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
       try {
         const workbook = XLSX.read(data, { type: 'binary' })
         resolve(workbook)
-      } catch {
+      } catch (fileError) {
+        console.warn(fileError)
         reject(error)
       }
     }
-    reader.onerror = () => {
+    reader.onerror = (readerError) => {
+      console.warn(readerError)
       reject(error)
       return error
     }
