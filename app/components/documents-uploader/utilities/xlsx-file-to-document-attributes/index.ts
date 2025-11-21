@@ -1,12 +1,12 @@
 import * as XLSX from 'xlsx'
 import type {
-  DocumentAttributesMap,
-  IFileData, MapParams,
+  DocumentAttributesMap, DocumentAttributes,
+  IFileData, MapParams, AttributeDefinition,
   MapResult, DocumentsMapResult
 } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
-import { StandardError } from '~/types/errors'
 import { documentsList } from '../../data/document-types-list'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
+import { DocError } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 
 /**
 * Map XLSX File to Document Attriubutes
@@ -24,13 +24,13 @@ function getColumnValue (sheet: XLSX.WorkSheet | IFileData, col: string, rowNumb
 * Match excel columns to document attributes using a map object i.e. { attributeName: 'C' }.
 */
 export function mapXLSXFileToAttributeNames ({ documentMap, sheet, rowNumber }: MapParams): MapResult {
-  const errors :Array<StandardError> = []
+  const errors :Array<DocError> = []
   // Get the string value of a cell in the XLSX sheet given a column name and row number.
-  const getColumnString = (value: string | undefined): string => {
-    if (typeof value === 'string') {
-      return getColumnValue(sheet, value, rowNumber) as string
+  const getColumnString = (column: string | undefined): string => {
+    if (typeof column === 'string') {
+      return getColumnValue(sheet, column, rowNumber) as string
     }
-    const err = { message: 'attributeMapError' }
+    const err = { message: 'attributeMapError', index: rowNumber, column }
     throw err
   }
 
@@ -38,14 +38,24 @@ export function mapXLSXFileToAttributeNames ({ documentMap, sheet, rowNumber }: 
   // Match the attribute to the string stored in the XLSX sheet. Use the column name paired with the attribute.
   // If the attribute is an object recursively call this function in order to match nested object attributes
   // with the correct string.
-  const mapColumnToDocumentAttribute = (attributesMap: DocumentAttributesMap): DocumentAttributesMap => {
-    const map = { language: '' } as DocumentAttributesMap
-    Object.entries(attributesMap).forEach(([key, value]) => {
-      if (typeof value === 'object') {
-        map[key] = mapColumnToDocumentAttribute(value)
+  const mapColumnToDocumentAttribute = (attributesMap: DocumentAttributesMap) :DocumentAttributes => {
+    const map = { language: '' } as DocumentAttributes
+
+    Object.entries(attributesMap).forEach((entry) => {
+      const key :string = entry[0]
+      const value :AttributeDefinition = entry[1] as AttributeDefinition
+
+      if (typeof value.schema === 'object') {
+        map[key] = mapColumnToDocumentAttribute(value.schema)
         return
       }
-      map[key] = getColumnString(value)
+      const attributeValue = getColumnString(value.column)
+
+      if (attributeValue.length < 1 && value.required) {
+        const err = { message: 'attributeRequiredError', index: rowNumber, column: key }
+        throw err
+      }
+      map[key] = attributeValue
     })
 
     return map
@@ -56,9 +66,9 @@ export function mapXLSXFileToAttributeNames ({ documentMap, sheet, rowNumber }: 
 
 function isRowEmpty (rowNumber: number, map: DocumentAttributesMap, sheet: XLSX.Sheet) {
   return !Object.values(map)
-    .some((col) => {
-      if (typeof col === 'object') { return false }
-      return getColumnValue(sheet, col as string, rowNumber).length > 0
+    .some((attributeDef) => {
+      if (typeof attributeDef.schema === 'object') { return false }
+      return getColumnValue(sheet, attributeDef.column as string, rowNumber).length > 0
     })
 }
 
@@ -67,7 +77,7 @@ function handleError (message: string) {
   throw error
 }
 
-function mapToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkSheet) :Array<DocumentAttributesMap> {
+function mapToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkSheet) :DocumentsMapResult {
   if (!documentType) {
     handleError('noDocumentTypeError')
   }
@@ -85,23 +95,31 @@ function mapToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkS
   const rangeStart = XLSX.utils.decode_range(range as string).s.r + headerCount
 
   const documents = []
+  const errors = []
 
   // Iterate over each XLSX sheet row and map the data
   // in that row to get a list of document attributes with their names i.e. document.title, etc.
   for (let i = rangeStart; i < rangeEnd; i += 1) {
     if (isRowEmpty(i, documentMap, sheet)) { continue }
 
-    const mapResult = mapXLSXFileToAttributeNames({ documentMap, sheet, rowNumber: i })
-    documents.push(mapResult.document)
+    try {
+      const mapResult = mapXLSXFileToAttributeNames({ documentMap, sheet, rowNumber: i })
+      documents.push(mapResult.document)
+    } catch (error) {
+      errors.push(error as DocError)
+    }
   }
 
-  return documents
+  // Handle empty document
+  if (documents.length < 1) { handleError('documentEmptyError') }
+
+  return { documents, errors }
 }
 
 export default function mapXLSXFileToDocumentAttributes (documentType: DocumentTypes, sheet: XLSX.WorkSheet | Array<string>) :DocumentsMapResult {
   try {
-    return { documents: mapToDocumentAttributes(documentType, sheet), errors: [] }
+    return mapToDocumentAttributes(documentType, sheet)
   } catch (error) {
-    return { documents: [], errors: [error as StandardError] }
+    return { documents: [], errors: [error as DocError] }
   }
 }
