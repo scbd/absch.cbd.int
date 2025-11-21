@@ -1,5 +1,5 @@
 import fieldsTranslations from '../../app-text/views/search/search-results/bch-download-schemas.json';
-import commonFieldsTranslations from '../app-text/views/search/search-results/common-download-schemas.json';
+import commonFieldsTranslations from '~/app-text/views/search/search-results/common-download-schemas.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
 import { downloadSchemas as commonDownloadSchemas } from '../common-download-schemas.js';
 
