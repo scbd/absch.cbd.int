@@ -13,7 +13,7 @@ export interface IFileData {
 }
 
 export type DocError = {
-  value: Error
+  message: string
   index: number
 }
 

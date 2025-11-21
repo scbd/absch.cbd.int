@@ -10,8 +10,9 @@
     "fileReadError": "Could not read file. Please try formatting your file and uploading the file again.",
     "noDocumentMapError": "Cannot map attributes. No document attributes map specified.",
     "noDocumentTypeError": "Cannot map attributes. No document type selected.",
+    "noDocumentParser": "Cannot parse document. No parser specified for given document type.",
     "attributeMapError": "Problem mapping document attribute. Column not readable.",
     "keywordsListError": "Could not fetch keywords list from the server.",
     "documentParseError": "A problem occured parsing the document from the excel sheet.",
-    "cannotFindRelevantDocumentError": "Could not find linked document. No valid document found or given document id."
+    "cannotFindRelevantDocumentError": "Could not find linked document. No valid document found with given document id."
 }

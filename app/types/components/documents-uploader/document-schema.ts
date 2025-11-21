@@ -1,6 +1,5 @@
 import { DocumentTypes } from './document-types-list'
 import { DocumentAttributesMap, KeywordType } from './xlsx-file-to-document-attributes'
-import { LanguageMapType } from '~/app-data/un-languages'
 
 type SubDocument = {
   identifier: string
@@ -24,7 +23,6 @@ export type DocumentJsonType = {
 export type MapToJsonParams = {
   attributesList: Array<DocumentAttributesMap>
   documentType: DocumentTypes
-  languageMap: Array<LanguageMapType>
   keywordsMap: Array<KeywordType>
 }
 

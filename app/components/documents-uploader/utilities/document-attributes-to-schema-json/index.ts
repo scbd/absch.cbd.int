@@ -4,15 +4,11 @@ import {
   DocumentsJson
 } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 import { documentsList } from '../../data/document-types-list'
-import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
-import ThesaurusApi from '../../../../api/thesaurus.js'
-
-const thesaurusApi = new ThesaurusApi()
 
 const defaultJson: DocumentJsonType = { header: { identifier: '' } }
 function getError () :DocumentsJson {
   const error: DocError = {
-    value: new Error('There is no parser for the given file type.'),
+    message: 'noDocumentParser',
     index: 1
   }
   const errors: Array<DocError> = [error]
@@ -39,7 +35,7 @@ export async function mapDocumentAttributesToSchemaJson ({
     const json = await schema.parseXLSXFileToDocumentJson()
       .catch((error) => {
         console.warn(error)
-        errors.push({ error, index })
+        errors.push({ message: error.message, index })
       })
 
     return json === undefined ? defaultJson : json as DocumentJsonType
@@ -47,16 +43,4 @@ export async function mapDocumentAttributesToSchemaJson ({
 
   const documentsJson = await Promise.all(parsePromises)
   return { documentsJson, errors }
-}
-
-export async function getKeywordsMap (documentType: DocumentTypes) {
-  const { keywordDomains } = documentsList[documentType]
-
-  const keywordPromises = keywordDomains
-    .map((keywordDomain) => thesaurusApi.getDomainTerms(keywordDomain))
-
-  const allKeywords = await Promise.all(keywordPromises)
-    .catch((errors) => { throw errors })
-
-  return allKeywords.flat()
 }

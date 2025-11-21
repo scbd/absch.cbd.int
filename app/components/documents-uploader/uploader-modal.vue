@@ -56,14 +56,12 @@ import LoadingOverlay from '../common/loading-overlay.vue'
 import ModalErrors from './modal-errors.vue'
 import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
-import { readXLSXFIle } from './utilities/read-xlsx-file'
-import xlsxFileToDocumentAttributes from './utilities/xlsx-file-to-document-attributes'
 import messages from '~/app-text/components/bulk-documents-uploader.json'
-import { mapDocumentAttributesToSchemaJson, getKeywordsMap } from './utilities/document-attributes-to-schema-json'
+import { ImportDocuments } from './utilities/import-documents.js'
+
 const { realm } = useRealm()
 const { mergeLocaleMessage, t } = useI18n()
 const auth = useAuth()
-const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
 
 // Set global translation messages to avoid having to import vue-i18n in each child component.
 // TODO: Determine if this is supported by our current translations system.
@@ -77,6 +75,9 @@ const props = defineProps({
   }
 })
 
+const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
+const importDocuments = new ImportDocuments(t, props.documentType)
+
 const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 // Refs
@@ -84,7 +85,6 @@ const defaultDocumentJson = [{ header: { identifier: '' } }]
 const documents = ref(defaultDocumentJson)
 const isLoading = ref(false)
 const errors = ref([])
-const keywordsMap = ref([])
 const modalRef = shallowRef(null)
 
 // Computed Properties
@@ -102,11 +102,9 @@ onMounted(async () => {
 
   isLoading.value = true
 
-  keywordsMap.value = await getKeywordsMap(props.documentType)
-    .catch((error) => {
-      storeErrors([{ message: 'keywordsListError' }])
-      console.error(error)
-    })
+  await importDocuments.getKeywordsMap()
+
+  errors.value = importDocuments.errors
   isLoading.value = false
 })
 
@@ -135,39 +133,35 @@ function onClose () {
   $emit('onClose')
 }
 
-function storeErrors (newErrors) {
-  newErrors.forEach((error) => {
-    errors.value.push({ message: t(error.message) })
-  })
-}
-
 async function onFileChange (changeEvent) {
   handleClearFile()
 
   isLoading.value = true
-  const { documentType } = props
 
   // Read File
-  const fileRead = await readXLSXFIle(changeEvent)
-  storeErrors(fileRead.errors)
-  const sheet = fileRead.workbook.Sheets['Sheet3'] || []
+  const sheet = await importDocuments.readXLSXFIle(changeEvent)
+  console.log('sheet', sheet)
 
   // Parse File to JSON matching the attributes of a given document
-  const getAttributesResult = xlsxFileToDocumentAttributes(documentType, sheet)
-  storeErrors(getAttributesResult.errors)
+  const attributesList = importDocuments.xlsxFileToDocumentAttributes(sheet)
+  console.log('attributesList', attributesList)
 
   // Map document attributes to the document schema
-  const mapResult = await mapDocumentAttributesToSchemaJson({
-    attributesList: getAttributesResult.documents,
-    documentType,
-    keywordsMap: keywordsMap.value
-  })
-  errors.value = mapResult.errors.map(result => ({ message: `${t(result.error.message)} Document Row: ${result.index}` }))
-
-  // Store document schema
-  documents.value = mapResult.documentsJson
+  const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(attributesList)
+  console.log('documentsJson', documentsJson)
+  console.log(importDocuments)
 
   isLoading.value = false
+
+  if (importDocuments.errors.length > 0) {
+    // Store errors
+    errors.value = importDocuments.errors
+    return []
+  }
+
+  // Store document schema
+  documents.value = documentsJson
+
   return documents
 }
 </script>
