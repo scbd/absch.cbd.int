@@ -15,11 +15,10 @@ async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
   return new Promise((resolve, reject) => {
     const error = { message: 'fileReadError' }
     const reader = new FileReader()
-    reader.readAsBinaryString(file)
     reader.onload = (e) => {
       const data = e.target?.result
       try {
-        const workbook = XLSX.read(data, { type: 'binary' })
+        const workbook = XLSX.read(data, { type: 'array' })
         resolve(workbook)
       } catch (fileError) {
         console.warn(fileError)
@@ -31,6 +30,8 @@ async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
       reject(error)
       return error
     }
+
+    reader.readAsArrayBuffer(file)
   })
 }
 
