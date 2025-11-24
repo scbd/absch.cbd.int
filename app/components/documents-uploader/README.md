@@ -9,7 +9,7 @@ If you have decided there is a need for parsing information into a new document 
 ### Creating an Attributes Map 
 
 You must create a "Document Attributes Map" `json` file, mapping each of your document attributes to columns in your Excel or CSV file.
-The "Document Attributes Map" must be in the following folder: `app/components/register/bulk-documents-uploader/utilities/xlsx-file-to-document-attributes/maps`
+The "Document Attributes Map" must be in the following folder: `app/components/documents-uploader/data/maps`
 An example of a "Document Attributes Map" can be found in the folder above.
 
 ```
@@ -63,7 +63,7 @@ export default class <Your Document Schema Name>Schema extends Schema {
 
 You must modify the document types list to include your new document.
 
-The document types list can be found here: `app/components/register/bulk-documents-uploader/data/document-types-list.ts`
+The document types list can be found here: `app/components/documents-uploader/data/document-types-list.ts`
 
 First add the new document type string to the list of document types:
 
@@ -96,6 +96,6 @@ That's all!
 
 ## UML Diagram
 
-<img width="863" height="873" alt="bulk-documents-uploader-uml" src="https://github.com/user-attachments/assets/6efbd416-e8f3-485e-97aa-a322e33726ba" />
+<img width="863" height="873" alt="documents-uploader-uml" src="https://github.com/user-attachments/assets/6efbd416-e8f3-485e-97aa-a322e33726ba" />
  
 ### Thanks! 
