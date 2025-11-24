@@ -2204,13 +2204,14 @@ a.disabled{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
-.tabular-term-check .tabular-terms {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-}
+
 .tabular-term-check.fourth-column .tabular-terms {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+}
+.tabular-term-check.six-column .tabular-terms {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
 }
 .tabular-terms-header {
     text-align: center;
