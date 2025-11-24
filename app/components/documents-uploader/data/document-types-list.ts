@@ -1,5 +1,5 @@
 import IrccSchema from '../utilities/document-attributes-to-schema-json/schemas/ircc-schema'
-import irccAttributesMap from '../utilities/xlsx-file-to-document-attributes/maps/ircc-document'
+import irccAttributesMap from './maps/ircc-document'
 import { DocumentsList } from '~/types/components/documents-uploader/document-types-list'
 
 export const documentsList: DocumentsList = {
