@@ -12,27 +12,8 @@ type ReadFileResult = {
  * Stores data parsed from xlsx file.
  */
 async function loadXLSXFile (file: File): Promise<XLSX.WorkBook> {
-  return new Promise((resolve, reject) => {
-    const error = { message: 'fileReadError' }
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      const data = e.target?.result
-      try {
-        const workbook = XLSX.read(data, { type: 'array' })
-        resolve(workbook)
-      } catch (fileError) {
-        console.warn(fileError)
-        reject(error)
-      }
-    }
-    reader.onerror = (readerError) => {
-      console.warn(readerError)
-      reject(error)
-      return error
-    }
-
-    reader.readAsArrayBuffer(file)
-  })
+  const data = await file.arrayBuffer()
+  return XLSX.read(data, { type: 'array' })
 }
 
 export async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileResult> {
@@ -49,7 +30,10 @@ export async function readXLSXFIle (fileChangeEvent: Event): Promise<ReadFileRes
   }
 
   const workbook = await loadXLSXFile(file as File)
-    .catch(error => errors.push(error))
+    .catch(error => {
+      console.warn(error)
+      errors.push(error)
+    })
 
   return { workbook: workbook as XLSX.WorkBook, errors }
 }
