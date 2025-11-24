@@ -35,7 +35,7 @@ import _ from 'lodash';
                     throw "Domain term is missing";
 
                     options = options || {};
-                var url     = '/api/v2013/thesaurus/domains/' + encodeURIComponent(domainTerms[termIdentifier]) + '/terms';
+                var url     = '/api/v2013/thesaurus/domains/' + encodeURIComponent(domainTerms[termIdentifier]||termIdentifier) + '/terms';
 
                 if(options.other){
                     var urlOther = '/api/v2013/thesaurus/terms/' + encodeURIComponent(domainTerms['other']);

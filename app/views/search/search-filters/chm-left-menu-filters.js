@@ -1,5 +1,6 @@
 import chmFiltersTranslations from '~/app-text/views/search/search-filters/chm-left-menu-filters.json';
 import { mergeTranslationKeys } from '../../../services/translation-merge.js';
+import { THESAURUS_DOMAINS, THESAURUS_TERMS } from '~/constants/thesaurus';
 
 const chmFilters = mergeTranslationKeys(chmFiltersTranslations);
 
@@ -204,6 +205,43 @@ export const chmLeftMenuFilters = {
 			"type": "date",
 			"title": chmFilters.resourceDate,
 			"field": "date_dt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbdSubjects",
+			"title": chmFilters.cbdThematicAreas,
+			"field": "cbdThematicAreas_ss",
+			"relatedField": "cbdThematicAreas_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "resourceTypes",
+			"title": chmFilters.resourceTypes,
+			"field": "resourceTypes_ss",
+			"relatedField": "resourceTypes_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "gbfGoalsAndTargets",
+			"title": chmFilters.gbfGoalsAndTargets,
+			"field": "gbfGoalsAndTargets_ss",
+			"relatedField": "gbfGoalsAndTargets_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING,
+            "narrowerOf":THESAURUS_TERMS.BETI_FINANCE,
+			"title": chmFilters.betiFinanceKeywords,
+			"field": "betiFinanceKeywords_ss",
+			"relatedField": "betiFinanceKeywords_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING,
+            "narrowerOf":THESAURUS_TERMS.BETI_MAINSTREAMING,
+			"title": chmFilters.betiMainstreamingKeywords,
+			"field": "betiMainstreamingKeywords_ss",
+			"relatedField": "betiMainstreamingKeywords_REL_ss"
 		}
 	]
 }
