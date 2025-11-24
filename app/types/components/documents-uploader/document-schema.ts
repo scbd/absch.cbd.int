@@ -1,12 +1,41 @@
 import { DocumentTypes } from './document-types-list'
-import { DocumentAttributes, KeywordType } from './xlsx-file-to-document-attributes'
+
+export type CellValue = string | number | boolean | typeof Date
+
+export type DocumentAttributesMap = { [key: string]: AttributeDefinition }
+
+export type DocumentAttributes = { [key: string]: CellValue }
+
+export type AttributeDefinition = {
+  column: string
+  required?: boolean
+  schema?: DocumentAttributesMap
+}
+
+export type DocError = {
+  reason: string
+  row: number
+  value?: string
+  column?: string
+  error?: string
+}
+
+export type DocumentsJson = {
+  documentsJson: Array<DocumentJsonType>
+  errors: Array<DocError>
+}
+
+export type KeywordType = {
+  name: string
+  identifier: string
+}
 
 type SubDocument = {
   identifier: string
 }
 
 export type Keywords = {
-  processedKeywords: Promise<Array<SubDocument>>
+  processedKeywords: Array<SubDocument>
   otherKeywords: string
 }
 

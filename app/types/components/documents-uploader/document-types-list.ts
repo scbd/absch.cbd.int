@@ -1,5 +1,5 @@
 import Schema from '~/components/documents-uploader/utilities/document-attributes-to-schema-json/schemas/schema'
-import { AttributeDefinition } from './xlsx-file-to-document-attributes'
+import { AttributeDefinition } from './document-schema'
 
 type AttributesMap = {
   [key: string]: AttributeDefinition | AttributesMap

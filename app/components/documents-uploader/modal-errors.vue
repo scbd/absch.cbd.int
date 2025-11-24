@@ -8,9 +8,9 @@
       <ul class="flex-1">
         <li
           v-for="error in errors"
-          :key="error.message"
+          :key="error.reason"
         >
-          Error: {{ error.message }}
+          Error: {{ error.reason }}
         </li>
       </ul>
     </div>

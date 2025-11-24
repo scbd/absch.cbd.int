@@ -2,14 +2,13 @@ import KmDocumentApi from '../../../../../api/km-document'
 
 import type {
   ELink, Keywords,
-  DocumentJsonType
+  DocumentJsonType,
+  DocumentAttributes, KeywordType
 } from '~/types/components/documents-uploader/document-schema'
 import {
   type LanguageCode, languages, englishLanguages
 } from '~/app-data/un-languages'
-import type { DocumentAttributes } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 import { StandardError } from '~/types/errors'
-import { KeywordType } from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
 
 const kmDocumentApi = new KmDocumentApi()
 
@@ -64,7 +63,7 @@ export default class Schema {
   }
 
   static getELinkData (value: string): Array<ELink> {
-    if (value === '') { return [] }
+    if (!value || value === '') { return [] }
     const links: Array<string> = value.split(',')
     return links.map((url: string) => ({ url }))
   }
@@ -74,6 +73,8 @@ export default class Schema {
   * a GUID determined by a keywords list.
   */
   getKeywords (keywordsValue: string): Keywords {
+    if (!keywordsValue || keywordsValue === '') { return { processedKeywords: null, otherKeywords: '' } }
+
     const keywords = keywordsValue.trim().split(',')
 
     const processedKeywords = []
@@ -101,7 +102,8 @@ export default class Schema {
         .push({ identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' })
       otherKeywords += ` ${keywordVal}`
     })
-    return { processedKeywords: Promise.all(processedKeywords), otherKeywords }
+
+    return { processedKeywords, otherKeywords }
   }
 
   /**
@@ -115,7 +117,7 @@ export default class Schema {
     const [erroredColumn, erroredValue] = Object.entries(this.documentAttributes)
       .find((entry) => entry[1] === uniqueId)
 
-    const error = { message: 'cannotFindRelevantDocumentError', column: erroredColumn, value: erroredValue }
+    const error = { reason: 'cannotFindRelevantDocumentError', column: erroredColumn, value: erroredValue }
     if (uid === null) {
       throw error
     }
@@ -141,7 +143,7 @@ export default class Schema {
   * Find a contact by its GUID or create a GUID for the new contact.
   */
   async findOrCreateContact (contacts: string) {
-    if ((contacts).trim() !== '') {
+    if (!!contacts && (contacts).trim() !== '') {
       const existingContacts = contacts.split(',')
 
       return existingContacts
@@ -155,11 +157,14 @@ export default class Schema {
   }
 
   /**
+  * Covert Date to correct time zone.
   * In case the date format is not correct in the XLSX sheet
   * attempt to parse the date in order to still get a date as a backup.
   */
-  static parseDate (dateValue: string): string {
-    const date:Date = new Date(Date.parse(`${dateValue} GMT-05:00`))
+  static parseDate (dateValue: string | Date): string {
+    if (!dateValue) { return '' }
+    const dateString = typeof dateValue === 'string' ? dateValue : dateValue.toUTCString()
+    const date:Date = new Date(Date.parse(`${dateString} GMT-05:00`))
     const options :Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }
     const dateFormat = 'fr-CA'
 
@@ -185,7 +190,7 @@ export default class Schema {
   * document JSON used to create a document draft in our system.
   * To be overridden by the document schema class extending this class.
   */
-  async parseXLSXFileToDocumentJson () :Promise< DocumentJsonType> {
+  async parseXLSXFileToDocumentJson () :Promise<DocumentJsonType> {
     return { header: { identifier: '' } }
   }
 }

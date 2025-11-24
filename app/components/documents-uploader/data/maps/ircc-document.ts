@@ -4,7 +4,7 @@ export default {
   absCNAId: { column: 'C', required: true },
   permitEquivalent: { column: 'D' },
   dateOfIssuance: { column: 'E', required: true },
-  dateOfExpiry: { column: 'F', required: true },
+  dateOfExpiry: { column: 'F', required: false },
   provider: {
     schema: {
       type: { column: 'G' },

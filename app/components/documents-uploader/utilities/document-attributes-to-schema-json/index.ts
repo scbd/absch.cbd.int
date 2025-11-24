@@ -1,15 +1,13 @@
-import { MapToJsonParams, DocumentJsonType } from '~/types/components/documents-uploader/document-schema'
 import {
-  DocError,
-  DocumentsJson
-} from '~/types/components/documents-uploader/xlsx-file-to-document-attributes'
+  MapToJsonParams, DocumentJsonType, DocError, DocumentsJson
+} from '~/types/components/documents-uploader/document-schema'
 import { documentsList } from '../../data/document-types-list'
 
 const defaultJson: DocumentJsonType = { header: { identifier: '' } }
 function getError () :DocumentsJson {
   const error: DocError = {
-    message: 'noDocumentParser',
-    index: 1,
+    reason: 'noDocumentParser',
+    row: 1,
     column: null,
     value: ''
   }
@@ -37,7 +35,7 @@ export async function mapDocumentAttributesToSchemaJson ({
     const json = await schema.parseXLSXFileToDocumentJson()
       .catch((error) => {
         console.warn(error)
-        errors.push({ message: error.message, index, column: error.column, value: error.value })
+        errors.push({ reason: error.reason, row: index, column: error.column, value: error.value })
       })
 
     return json === undefined ? defaultJson : json as DocumentJsonType
