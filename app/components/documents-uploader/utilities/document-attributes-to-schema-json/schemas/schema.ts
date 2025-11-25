@@ -6,8 +6,9 @@ import type {
   DocumentAttributes, KeywordType
 } from '~/types/components/documents-uploader/document-schema'
 import {
-  type LanguageCode, languages, englishLanguages
+  languages, englishLanguages
 } from '~/app-data/un-languages'
+import { LanguageCode } from '~/types/languages'
 import { StandardError } from '~/types/errors'
 
 const kmDocumentApi = new KmDocumentApi()
