@@ -1,11 +1,15 @@
 import readExcelFile from 'read-excel-file'
 import { documentsList } from '../data/document-types-list'
-import { DocError } from '~/types/components/documents-uploader/document-schema'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
-import { DocumentAttributes, CellValue } from '~/types/components/documents-uploader/document-schema'
+import { DocumentAttributes, CellValue, AttributeDefinition, DocError } from '~/types/components/documents-uploader/document-schema'
 
-type Schema = { [x: string]: any; }
+type Schema<T> = { [x: string]: T; }
 type Row = CellValue[]
+
+interface ParseWithSchemaOptions<Object> {
+  schema: Schema<Object>
+  transformData?: (rows: Row[]) => Row[]
+}
 
 type ReadFileResult = {
   workbook: Array<DocumentAttributes>
@@ -13,7 +17,7 @@ type ReadFileResult = {
 }
 
 type ReadExcelOptions = {
-  schema: Schema 
+  schema: Schema<AttributeDefinition>
   transformData: (rows: Row[]) => Row[]
 }
 
@@ -64,7 +68,7 @@ export async function readXLSXFIle (fileChangeEvent: Event, documentType: Docume
     }
   }
 
-  const readResult = await readExcelFile(file as File, options as ReadExcelOptions)
+  const readResult = await readExcelFile(file as File, options as ParseWithSchemaOptions<ReadExcelOptions>)
   const workbook = readResult.rows as Array<DocumentAttributes>
   const readErrors = readResult.errors as Array<DocError>
 

@@ -7,7 +7,7 @@ export type DocumentAttributesMap = { [key: string]: AttributeDefinition }
 export type DocumentAttributes = { [key: string]: CellValue }
 
 export type AttributeDefinition = {
-  column: string
+  column?: string
   required?: boolean
   schema?: DocumentAttributesMap
 }
