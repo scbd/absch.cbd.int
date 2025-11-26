@@ -24,7 +24,12 @@ export class ImportDocuments {
   }
 
   async readXLSXFIle (changeEvent: Event) {
-    const fileRead = await readXLSXFIle(changeEvent, this.documentType)
+    const target = changeEvent.target as HTMLInputElement
+    const files = target.files || []
+
+    const file = files[0]
+
+    const fileRead = await readXLSXFIle(file, this.documentType)
     this.errors = [...this.errors, ...this.getErrorDescriptions(fileRead.errors)]
 
     return fileRead.workbook
