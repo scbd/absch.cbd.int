@@ -68,6 +68,8 @@ export interface IContactFields {
   consent: string;
 }
 
+// Extend Record to allow the generic DocumentAttributes type to be asserted as this type.
+// Necessary for having different types of document schemas for different document types.
 export interface IIRCCDocumentAttributes extends Record<string, string | IContactFields> {
   language: string;
   absCNAId: string;
