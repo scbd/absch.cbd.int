@@ -3,8 +3,8 @@ import { mapDocumentAttributesToSchemaJson } from './document-attributes-to-sche
 import { readXLSXFIle } from './read-xlsx-file'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
-import { DocError, DocumentAttributes, type KeywordType } from '~/types/components/documents-uploader/document-schema'
-import { DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
+import { DocError, DocumentAttributes, DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
+import { KeywordType } from '~/types/common/documents'
 import ThesaurusApi from '../../../api/thesaurus.js'
 
 type Translations = (arg: string) => string

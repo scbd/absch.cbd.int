@@ -1,10 +1,8 @@
 import KmDocumentApi from '../../../../../api/km-document'
 
-import type {
-  ELink, Keywords,
-  DocumentJsonType,
-  DocumentAttributes, KeywordType
-} from '~/types/components/documents-uploader/document-schema'
+import { DocumentAttributes } from '~/types/components/documents-uploader/document-schema'
+import { KeywordType, ELink, DocumentRequest, Keywords } from '~/types/common/documents'
+
 import {
   languages, englishLanguages
 } from '~/app-data/un-languages'
@@ -191,7 +189,7 @@ export default class Schema {
   * document JSON used to create a document draft in our system.
   * To be overridden by the document schema class extending this class.
   */
-  async parseXLSXFileToDocumentJson () :Promise<DocumentJsonType> {
+  async parseXLSXFileToDocumentJson () :Promise<DocumentRequest> {
     return { header: { identifier: '' } }
   }
 }
