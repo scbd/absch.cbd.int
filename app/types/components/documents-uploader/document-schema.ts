@@ -1,4 +1,5 @@
 import { DocumentTypes } from './document-types-list'
+import { KeywordType, DocumentRequest } from '~/types/common/documents'
 
 
 export type CellValue = string | number | boolean | typeof Date
@@ -22,34 +23,11 @@ export type DocError = {
 }
 
 export type DocumentsJson = {
-  documentsJson: Array<DocumentJsonType>
+  documentsJson: Array<DocumentRequest>
   errors: Array<DocError>
 }
 
-export type KeywordType = {
-  name: string
-  identifier: string
-}
-
-type SubDocument = {
-  identifier: string
-}
-
-export type Keywords = {
-  processedKeywords: Array<SubDocument>
-  otherKeywords: string
-}
-
-export type ELink = {
-  url: string
-}
-
-export type DocumentJsonType = {
-  header: {
-    identifier: string
-  }
-}
-export type DocumentsJsonArray = Array<DocumentJsonType>
+export type DocumentsJsonArray = Array<DocumentRequest>
 
 export type MapToJsonParams = {
   attributesList: Array<DocumentAttributes>
