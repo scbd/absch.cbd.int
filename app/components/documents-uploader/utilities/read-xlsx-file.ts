@@ -12,8 +12,9 @@ interface ParseWithSchemaOptions<Object> {
 }
 
 type ReadFileResult = {
-  workbook: Array<DocumentAttributes>
+  data: Array<DocumentAttributes>
   errors: Array<DocError>
+  headers: Array<CellValue>
 }
 
 type ReadExcelOptions = {
@@ -28,6 +29,7 @@ type ReadExcelOptions = {
  */
 export async function readXLSXFIle (file: File, documentType: DocumentTypes): Promise<ReadFileResult> {
   const { attributesMap } = documentsList[documentType]
+  let headers = []
 
   const options: ReadExcelOptions = {
     schema: attributesMap,
@@ -36,6 +38,8 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
     transformData (data: Row[]) {
       const letterBreak = 26
       const firstRow :Row = data[0] || []
+      headers = firstRow
+
       const letters = firstRow.map((_value: CellValue, index: number) => {
         // Get index number from a column letter
         const getChar = (n: number) => String.fromCharCode(96 + n)
@@ -56,7 +60,7 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
   }
 
   const readResult = await readExcelFile(file as File, options as ParseWithSchemaOptions<ReadExcelOptions>)
-  const workbook = readResult.rows as Array<DocumentAttributes>
+  const data = readResult.rows as Array<DocumentAttributes>
   const readErrors = readResult.errors as Array<DocError>
 
   const errors = readErrors.map((error) => {
@@ -65,5 +69,5 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
     return error
   })
 
-  return { workbook, errors }
+  return { data, errors, headers }
 }

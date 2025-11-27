@@ -88,6 +88,7 @@ const $emit = defineEmits(['onClose', 'refreshRecord'])
 const defaultDocumentJson = [{ header: { identifier: '' } }]
 const documents = ref(defaultDocumentJson)
 const sheet = ref([{ permitEquivalent: '' }])
+const headers = ref([])
 const isLoading = ref(false)
 const errors = ref([])
 const modalSize = ref('xl')
@@ -148,10 +149,9 @@ async function onFileChange (changeEvent) {
 
   // Read File
   sheet.value = await importDocuments.readXLSXFIle(changeEvent)
-  console.log(sheet.value)
 
   // Map document attributes to the document schema
-  const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value)
+  const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value.data)
 
   isLoading.value = false
 

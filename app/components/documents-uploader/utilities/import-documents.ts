@@ -32,7 +32,7 @@ export class ImportDocuments {
     const fileRead = await readXLSXFIle(file, this.documentType)
     this.errors = [...this.errors, ...this.getErrorDescriptions(fileRead.errors)]
 
-    return fileRead.workbook
+    return fileRead
   }
 
   getErrorDescriptions (errors: Array<DocError>) {
