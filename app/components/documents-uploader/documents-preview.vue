@@ -16,7 +16,7 @@
         <div
           v-for="[index, value] in document"
           :key="index"
-          class="preview-box border bg-white text-center flex-fill"
+          class="preview-box border border-2 bg-white text-center flex-fill"
         >
           <div
             v-if="Boolean(value) && value instanceof Array"
