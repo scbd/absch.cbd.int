@@ -41,7 +41,7 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
       data.shift()
 
       const columnsIndex = Array.from((data[0] || []).keys())
-      data[0] = columnsIndex.map((a) => String(a))
+      data[0] = columnsIndex.map(String)
       return data
     }
   }
