@@ -1,7 +1,7 @@
 {
     "importIrccExcel": "Import IRCC Documents From an Excel File",
     "browseFiles": "Browse",
-    "pleaseSelectExcelInfo": "Please select a excel file to import data.",
+    "pleaseSelectExcelInfo": "Please select an Excel file to begin importing data.",
     "clearImportedRecords":" Clear Imported Records",
     "confirmCreateDraftRecords": "Create Draft Records",
     "creatingDocumentsLoader": "Creating draft documents...",
