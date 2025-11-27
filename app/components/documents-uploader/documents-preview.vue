@@ -207,6 +207,6 @@ function toggleSubDocument (index, row) {
     position: absolute;
     top: 0;
     left: 0;
-    max-height: 50vh;
+    max-height: 100vh;
   }
 </style>
