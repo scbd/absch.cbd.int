@@ -143,34 +143,48 @@ function toggleSubDocument (index, row) {
 </script>
 <style scoped>
   .preview-list  {
-    max-height: 70vh;
+    max-height: 60vh;
   }
+
   @media screen and (max-height: 800px) {
     .preview-list  {
       max-height: 50vh;
     }
   }
+
   .bg-greendark {
     background-color: var(--bs-green);
   }
+
   .preview-list > div:not(:first-child) {
     margin-top: 1.5rem;
   }
+
   .preview-box {
     max-height: 5em;
     width: 12.5%;
   }
+
+  @media screen and (max-width: 1200px) {
+    .preview-box {
+      width: 16.67%;
+    }
+  }
+
   @media screen and (max-width: 992px) {
     .preview-box {
       width: 25%;
     }
   }
+
   .preview-box > div > div:first-child {
     max-height: 3em;
   }
+
   .bg-grey2 {
     background-color: #eaeaea;
   }
+
   .document-accordian-icon {
     transition: transform 0.2s ease-in-out;
     transform: rotate(-90deg);
