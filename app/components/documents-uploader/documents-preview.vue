@@ -5,18 +5,18 @@
     <div
       v-for="(document, documentIndex) in documents"
       :key="document.permitEquivalent"
-      class="h-50 bg-gray-100 border"
+      class="h-50 bg-gray-100"
     >
-      <h6 class="p-1 m-0 page-content border-bottom">
+      <h6 class="p-1 m-0 bg-greendark color-white">
         {{ document[3][1] }}
       </h6>
       <div
-        class="d-flex p-2 my-1 justify-content-center gap-2 flex-wrap mw-100 "
+        class="d-flex p-2 justify-content-center border border-bottom border-left border-right gap-2 flex-wrap mw-100 "
       >
         <div
           v-for="[index, value] in document"
           :key="index"
-          class="preview-box border bg-white text-center flex-fill shadow-sm"
+          class="preview-box border bg-white text-center flex-fill"
         >
           <div
             v-if="Boolean(value) && value instanceof Array"
@@ -149,6 +149,9 @@ function toggleSubDocument (index, row) {
     .preview-list  {
       max-height: 50vh;
     }
+  }
+  .bg-greendark {
+    background-color: var(--bs-green);
   }
   .preview-list > div:not(:first-child) {
     margin-top: 1.5rem;
