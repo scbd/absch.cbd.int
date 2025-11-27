@@ -1,5 +1,5 @@
 {
-    "importIrccExcel": "Import IRCC Excel",
+    "importIrccExcel": "Import IRCC Documents From an Excel File",
     "browseFiles": "Browse",
     "pleaseSelectExcelInfo": "Please select a excel file to import data.",
     "clearImportedRecords":" Clear Imported Records",
