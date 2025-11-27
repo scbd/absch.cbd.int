@@ -7,7 +7,7 @@
       :key="document.permitEquivalent"
       class="h-50 bg-gray-100"
     >
-      <h6 class="p-1 m-0 bg-greendark color-white border-bottom border-2 border-dark">
+      <h6 class="p-1 m-0 bg-greendark color-white border-bottom border-2">
         {{ document[3][1] }}
       </h6>
       <div
