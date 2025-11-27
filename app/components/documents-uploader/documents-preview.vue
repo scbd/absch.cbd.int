@@ -7,7 +7,7 @@
       :key="document.permitEquivalent"
       class="h-50 bg-gray-100"
     >
-      <h6 class="p-1 m-0 bg-greendark color-white border-bottom border-2 border-warning">
+      <h6 class="p-1 m-0 bg-greendark color-white border-bottom border-2 border-dark">
         {{ document[3][1] }}
       </h6>
       <div
@@ -85,7 +85,7 @@ const props = defineProps({
     type: Object,
     default: () => ({ headers: [], data: [], errors: [] })
   }
-}, row)
+})
 
 const openedSubDocuments = ref({})
 
