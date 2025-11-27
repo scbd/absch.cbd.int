@@ -2,7 +2,7 @@
     "importIrccExcel": "Import IRCC Documents From an Excel File",
     "browseFiles": "Browse",
     "pleaseSelectExcelInfo": "Please select an Excel file to begin importing data.",
-    "clearImportedRecords":" Clear Records List",
+    "clearImportedRecords":" Clear Documents List",
     "confirmCreateDraftRecords": "Create Draft Records",
     "creatingDocumentsLoader": "Creating draft documents...",
     "uploadingLoader": "Processing your files...",
