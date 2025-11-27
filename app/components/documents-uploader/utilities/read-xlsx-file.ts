@@ -12,8 +12,9 @@ interface ParseWithSchemaOptions<Object> {
 }
 
 type ReadFileResult = {
-  workbook: Array<DocumentAttributes>
+  data: Array<DocumentAttributes>
   errors: Array<DocError>
+  headers: Array<CellValue>
 }
 
 type ReadExcelOptions = {
@@ -28,35 +29,25 @@ type ReadExcelOptions = {
  */
 export async function readXLSXFIle (file: File, documentType: DocumentTypes): Promise<ReadFileResult> {
   const { attributesMap } = documentsList[documentType]
+  let headers :Row = []
 
   const options: ReadExcelOptions = {
     schema: attributesMap,
-    // In order to map column letters to named document attributes i.e 'C' -> 'Issuing Authority'
-    // We must replace the first header rows of the document with the column letters.
+    // Set the first column of data as an index so that we can map the index
+    // in the document schema to Excel columns.
     transformData (data: Row[]) {
-      const letterBreak = 26
-      const firstRow :Row = data[0] || []
-      const letters = firstRow.map((_value: CellValue, index: number) => {
-        // Get index number from a column letter
-        const getChar = (n: number) => String.fromCharCode(96 + n)
-        const charCode = index % letterBreak
-        // For handling columns with two or more letters i.e., AA, ABF etc
-        const columnLetterCount = Math.floor(index / letterBreak)
+      headers = data[0] as Row
 
-        let char = getChar(charCode + 1)
-        // If we extend past column Z return with AA AB etc.
-        for (let i = 0; i < columnLetterCount; i += 1) {
-          char = `${getChar(columnLetterCount)}${char}`
-        }
-        return char.toUpperCase() as CellValue
-      })
-      data.splice(0, 2)
-      return [letters].concat(data)
+      data.shift()
+
+      const columnsIndex = Array.from((data[0] || []).keys())
+      data[0] = columnsIndex.map((a) => String(a))
+      return data
     }
   }
 
   const readResult = await readExcelFile(file as File, options as ParseWithSchemaOptions<ReadExcelOptions>)
-  const workbook = readResult.rows as Array<DocumentAttributes>
+  const data = readResult.rows as Array<DocumentAttributes>
   const readErrors = readResult.errors as Array<DocError>
 
   const errors = readErrors.map((error) => {
@@ -65,5 +56,5 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
     return error
   })
 
-  return { workbook, errors }
+  return { data, errors, headers }
 }
