@@ -7,7 +7,7 @@
       :key="document.permitEquivalent"
       class="h-50 bg-gray-100"
     >
-      <h6 class="p-1 m-0 bg-greendark color-white border-bottom border-2">
+      <h6 class="p-1 m-0 bg-gray-600 color-white border-bottom border-2">
         {{ document[3][1] }}
       </h6>
       <div
@@ -150,10 +150,6 @@ function toggleSubDocument (index, row) {
     .preview-list  {
       max-height: 50vh;
     }
-  }
-
-  .bg-greendark {
-    background-color: var(--bs-green);
   }
 
   .preview-list > div:not(:first-child) {
