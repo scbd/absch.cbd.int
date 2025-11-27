@@ -6,7 +6,8 @@
     @click.self="close"
   >
     <div
-      class="modal-dialog modal-xl"
+      class="modal-dialog"
+      :class="`modal-${modalSize}`"
     >
       <div class="modal-content">
         <div class="modal-header">
@@ -62,6 +63,10 @@ defineProps({
   title: {
     type: String,
     default: '',
+  },
+  modalSize: {
+    type: String,
+    default: 'xl',
   },
 })
 

@@ -1,6 +1,7 @@
 <template>
   <Modal
     ref="modalRef"
+    :modal-size="modalSize"
     @on-close="onClose"
   >
     <template #header>
@@ -18,7 +19,7 @@
     <!-- TODO: Display Document Preview -->
     <DocumentsPreview
       v-if="hasParsedFiles"
-      :documents="documents"
+      :sheet="sheet"
     />
 
     <LoadingOverlay
@@ -39,7 +40,10 @@
         @handle-confirm="handleConfirm"
         @handle-clear="handleClearFile"
       />
-      <div v-else />
+      <div
+        v-else
+        class="m-4"
+      />
     </template>
   </Modal>
 </template>
@@ -83,8 +87,10 @@ const $emit = defineEmits(['onClose', 'refreshRecord'])
 // Refs
 const defaultDocumentJson = [{ header: { identifier: '' } }]
 const documents = ref(defaultDocumentJson)
+const sheet = ref([{ permitEquivalent: '' }])
 const isLoading = ref(false)
 const errors = ref([])
+const modalSize = ref('xl')
 const modalRef = shallowRef(null)
 
 // Computed Properties
@@ -114,6 +120,7 @@ function handleClearFile () {
   errors.value = []
   importDocuments.setErrors([])
   documents.value = defaultDocumentJson
+  modalSize.value = 'xl'
 }
 
 async function handleConfirm () {
@@ -140,19 +147,34 @@ async function onFileChange (changeEvent) {
   isLoading.value = true
 
   // Read File
-  const attributesList = await importDocuments.readXLSXFIle(changeEvent)
+  sheet.value = await importDocuments.readXLSXFIle(changeEvent)
+  console.log(sheet.value)
 
   // Map document attributes to the document schema
-  const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(attributesList)
+  const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value)
 
   isLoading.value = false
 
   // Store errors
   errors.value = importDocuments.errors
 
-  // Store document schema
+  // Store document json
   documents.value = documentsJson
+  modalSize.value = 'xxl'
 
   return documents
 }
 </script>
+<style>
+.modal-xxl {
+  max-width: 95%;
+}
+import-file > .modal.fade > .modal-dialog {
+  transition: transform .3s ease-out, max-width 0.1s ease-in-out;
+}
+
+.modal-header, .modal-footer {
+  background-color: #EEE;
+  color: #555;
+}
+</style>
