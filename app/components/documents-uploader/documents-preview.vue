@@ -3,26 +3,26 @@
     class="preview-list ps-3 pe-3 overflow-auto"
   >
     <div
-      v-for="document in documents"
+      v-for="(document, index) in documents"
       :key="document.permitEquivalent"
       class="h-50 bg-gray-100"
     >
       <h6 class="p-1 m-0 bg-gray-600 color-white border-bottom border-2">
-        {{ document[3][1] }}
+        {{ sheet.data[index].permitEquivalent }}
       </h6>
       <div
         class="d-flex p-2 gap-1 justify-content-center border border-bottom border-left border-right flex-wrap mw-100 "
       >
         <div
-          v-for="([header, value], index) in document"
-          :key="index"
+          v-for="([key, value]) in document"
+          :key="key"
           class="preview-box border border-2 bg-white text-center flex-fill"
         >
           <div>
             <div
               class="fw-bold small bg-grey2 px-2 border-bottom overflow-hidden"
             >
-              {{ parseHeader(header) }}
+              {{ $t(parseHeader(key)) }}
             </div>
 
             <div
@@ -39,32 +39,42 @@
 <script setup>
 import { computed } from 'vue'
 import Schema from './utilities/document-attributes-to-schema-json/schemas/schema'
+import { documentsList } from './data/document-types-list'
 
 const props = defineProps({
   sheet: {
     type: Object,
     default: () => ({ headers: [], data: [], errors: [] })
+  },
+  documentType: {
+    type: String,
+    default: 'ircc'
   }
 })
+const { attributesMap } = (documentsList[props.documentType] || { attributesMap: {} })
 
 // Filter any empty cells
-const documents = computed(() => props.sheet.headers
-  .map((row) => row
-    .filter((column) => typeof column[1] === 'string'
-      ? column[1].trim().length > 0
-      : Boolean(column[1])
-    )
+const documents = computed(() => props.sheet.data
+  .map((row) =>
+    Object.entries(row).filter((entry) => doesValueExist(entry[1]))
   )
 )
+
+function doesValueExist (val) {
+  return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
+}
 
 function parseValue (val) {
   const getIsDate = (val) => val instanceof Date
   return getIsDate(val) ? Schema.parseDate(val) : val
 }
 
-function parseHeader (header) {
-  if (typeof header !== 'string') { return '' }
-  return header.replace('*', '').trim()
+function parseHeader (key) {
+  if (typeof key !== 'string') { return '' }
+
+  const { languageKey } = attributesMap[key] || {}
+
+  return languageKey || 'contactInformation'
 }
 
 </script>

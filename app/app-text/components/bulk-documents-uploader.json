@@ -16,5 +16,6 @@
     "keywordsListError": "Could not fetch keywords list from the server.",
     "documentParseError": "A problem occured parsing the document from the excel sheet.",
     "cannotFindRelevantDocumentError": "Could not find linked document. No valid document found with given document ID.",
-    "documentEmptyError": "Document Empty. Not populated rows found in document."
+    "documentEmptyError": "Document Empty. Not populated rows found in document.",
+    "contactInformation": "Contact Information"
 }

@@ -20,6 +20,7 @@
     <DocumentsPreview
       v-if="hasParsedFiles"
       :sheet="sheet"
+      :document-type="documentType"
     />
 
     <LoadingOverlay
@@ -60,7 +61,9 @@ import LoadingOverlay from '../common/loading-overlay.vue'
 import ModalErrors from './modal-errors.vue'
 import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
-import messages from '~/app-text/components/bulk-documents-uploader.json'
+import uploaderMessages from '~/app-text/components/bulk-documents-uploader.json'
+import absMessages from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
+import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
 
 const { realm } = useRealm()
@@ -69,6 +72,15 @@ const auth = useAuth()
 
 // Set global translation messages to avoid having to import vue-i18n in each child component.
 // TODO: Determine if this is supported by our current translations system.
+const messages = {
+  en: Object.assign(
+    {},
+    uploaderMessages.en,
+    absMessages.en,
+    contactMessages.en
+  )
+}
+
 Object.entries(messages)
   .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
@@ -88,7 +100,6 @@ const $emit = defineEmits(['onClose', 'refreshRecord'])
 const defaultDocumentJson = [{ header: { identifier: '' } }]
 const documents = ref(defaultDocumentJson)
 const sheet = ref([{ permitEquivalent: '' }])
-const headers = ref([])
 const isLoading = ref(false)
 const errors = ref([])
 const modalSize = ref('xl')
