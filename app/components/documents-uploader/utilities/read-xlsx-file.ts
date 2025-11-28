@@ -1,7 +1,10 @@
 import readExcelFile from 'read-excel-file'
 import { documentsList } from '../data/document-types-list'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
-import { DocumentAttributes, CellValue, AttributeDefinition, DocError } from '~/types/components/documents-uploader/document-schema'
+import {
+  DocumentAttributes, CellValue,
+  AttributeDefinition, DocError
+} from '~/types/components/documents-uploader/document-schema'
 
 type Schema<T> = { [x: string]: T; }
 type Row = CellValue[]
@@ -36,11 +39,15 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
     transformData (data: Row[]) {
       // Set the first column of data as an index so that we can map the index
       // in the document schema to Excel columns.
-      headers = data[0]
+      const headersDescriptions = data[0]
 
-      data.shift()
+      data.splice(0, 2)
 
-      data[0] = Object.keys(data[0]).map(String)
+      headers = data
+        .map((row) => row
+          .map((cell, columnIndex) => [headersDescriptions[columnIndex], cell]))
+
+      data.unshift(Object.keys(data[0]).map(String))
       return data
     }
   }

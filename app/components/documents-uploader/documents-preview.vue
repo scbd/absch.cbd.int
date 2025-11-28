@@ -3,7 +3,7 @@
     class="preview-list ps-3 pe-3 overflow-auto"
   >
     <div
-      v-for="(document, documentIndex) in documents"
+      v-for="document in documents"
       :key="document.permitEquivalent"
       class="h-50 bg-gray-100"
     >
@@ -11,64 +11,24 @@
         {{ document[3][1] }}
       </h6>
       <div
-        class="d-flex p-2 justify-content-center border border-bottom border-left border-right gap-2 flex-wrap mw-100 "
+        class="d-flex p-2 gap-1 justify-content-center border border-bottom border-left border-right flex-wrap mw-100 "
       >
         <div
-          v-for="[index, value] in document"
+          v-for="([header, value], index) in document"
           :key="index"
           class="preview-box border border-2 bg-white text-center flex-fill"
         >
-          <div
-            v-if="Boolean(value) && value instanceof Array"
-            role="button"
-            class="position-relative"
-            @click="() => toggleSubDocument(index, documentIndex)"
-          >
+          <div>
             <div
-              class="d-flex justify-content-center fw-bold bg-grey2 px-2 border-bottom overflow-hidden"
+              class="fw-bold small bg-grey2 px-2 border-bottom overflow-hidden"
             >
-              <div class="me-2 text-truncate">
-                {{ getHeader(index) }}
-              </div>
-              <div
-                class="document-accordian-icon"
-                :class="{ 'document-accordian-icon--open': getIsDocumentOpen(index, documentIndex) }"
-              >
-                <i class="fa fa-chevron-down" />
-              </div>
-            </div>
-
-            <div
-              class="accordian-box"
-              :class="{ 'accordian-box--open': getIsDocumentOpen(index, documentIndex) }"
-            >
-              <div class="mw-100 bg-white border px-2 py-1 overflow-hidden">
-                <div
-                  v-for="[subIndex, subValue] in value"
-                  :key="subValue"
-                  class="mb-1"
-                >
-                  <div class="fw-bold">
-                    {{ getHeader(subIndex) }}:
-                  </div>
-                  <div>
-                    {{ subValue }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div v-else>
-            <div
-              class="fw-bold bg-grey2 px-2 border-bottom overflow-hidden"
-            >
-              {{ getHeader(index) }}
+              {{ parseHeader(header) }}
             </div>
 
             <div
               class="px-2 text-truncate"
             >
-              {{ value }}
+              {{ parseValue(value) }}
             </div>
           </div>
         </div>
@@ -77,7 +37,7 @@
   </div>
 </template>
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import Schema from './utilities/document-attributes-to-schema-json/schemas/schema'
 
 const props = defineProps({
@@ -87,55 +47,24 @@ const props = defineProps({
   }
 })
 
-const openedSubDocuments = ref({})
+// Filter any empty cells
+const documents = computed(() => props.sheet.headers
+  .map((row) => row
+    .filter((column) => typeof column[1] === 'string'
+      ? column[1].trim().length > 0
+      : Boolean(column[1])
+    )
+  )
+)
 
-const documents = computed(() => {
+function parseValue (val) {
   const getIsDate = (val) => val instanceof Date
-  const getParsedValue = (val) => getIsDate(val) ? Schema.parseDate(val) : val
+  return getIsDate(val) ? Schema.parseDate(val) : val
+}
 
-  const mapRow = (row) => {
-    let index = 0
-    const parseRow = (currentRow) => {
-      const mappedRow = []
-      Object.values(currentRow).forEach((value) => {
-        if (!value || (value || '').length < 1) {
-          index += 1
-          return
-        }
-
-        if (!getIsDate(value) && value instanceof Object) {
-          return mappedRow.push([index, parseRow(value)])
-        }
-
-        mappedRow.push([index, getParsedValue(value)])
-        index += 1
-      })
-      return mappedRow
-    }
-    return parseRow(row)
-  }
-
-  return props.sheet.data.map(mapRow)
-})
-
-function getHeader (index) {
-  if (typeof index !== 'number') { return '' }
-  const header = props.sheet.headers[index] || ''
+function parseHeader (header) {
+  if (typeof header !== 'string') { return '' }
   return header.replace('*', '').trim()
-}
-
-function getIsDocumentOpen (index, row) {
-  return (openedSubDocuments.value[row] || []).indexOf(index) > -1
-}
-
-function toggleSubDocument (index, row) {
-  const arr = openedSubDocuments.value[row] || []
-  openedSubDocuments.value = { row: [] }
-
-  const i = arr.indexOf(index)
-  if (i < 0) {
-    openedSubDocuments.value[row] = [index]
-  }
 }
 
 </script>
