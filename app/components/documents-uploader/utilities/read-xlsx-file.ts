@@ -17,7 +17,6 @@ interface ParseWithSchemaOptions<Object> {
 type ReadFileResult = {
   data: Array<DocumentAttributes>
   errors: Array<DocError>
-  headers: Array<CellValue>
 }
 
 type ReadExcelOptions = {
@@ -32,20 +31,13 @@ type ReadExcelOptions = {
  */
 export async function readXLSXFIle (file: File, documentType: DocumentTypes): Promise<ReadFileResult> {
   const { attributesMap } = (documentsList[documentType] || { attributesMap: {} })
-  let headers = []
 
   const options: ReadExcelOptions = {
     schema: attributesMap,
     transformData (data: Row[]) {
       // Set the first column of data as an index so that we can map the index
       // in the document schema to Excel columns.
-      const headersDescriptions = data[0]
-
       data.splice(0, 2)
-
-      headers = data
-        .map((row) => row
-          .map((cell, columnIndex) => [headersDescriptions[columnIndex], cell]))
 
       data.unshift(Object.keys(data[0]).map(String))
       return data
@@ -62,5 +54,5 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
     return error
   })
 
-  return { data, errors, headers }
+  return { data, errors }
 }

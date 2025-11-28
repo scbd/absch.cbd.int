@@ -3,14 +3,20 @@ import { KeywordType, DocumentRequest } from '~/types/common/documents'
 
 export type CellValue = string | number | boolean | typeof Date
 
+export type CellEntry = {
+  index: number
+  value: CellValue
+}
+
 export type DocumentAttributesMap = { [key: string]: AttributeDefinition }
 
-export type DocumentAttributes = { [key: string]: CellValue }
+export type DocumentAttributes = { [key: string]: CellValue | CellEntry }
 
 export type AttributeDefinition = {
   column?: string
   required?: boolean
   schema?: DocumentAttributesMap
+  languageKey?: string
 }
 
 export type DocError = {
