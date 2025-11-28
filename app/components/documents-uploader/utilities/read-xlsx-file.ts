@@ -1,7 +1,10 @@
 import readExcelFile from 'read-excel-file'
 import { documentsList } from '../data/document-types-list'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
-import { DocumentAttributes, CellValue, AttributeDefinition, DocError } from '~/types/components/documents-uploader/document-schema'
+import {
+  DocumentAttributes, CellValue,
+  AttributeDefinition, DocError
+} from '~/types/components/documents-uploader/document-schema'
 
 type Schema<T> = { [x: string]: T; }
 type Row = CellValue[]
@@ -14,7 +17,6 @@ interface ParseWithSchemaOptions<Object> {
 type ReadFileResult = {
   data: Array<DocumentAttributes>
   errors: Array<DocError>
-  headers: Array<CellValue>
 }
 
 type ReadExcelOptions = {
@@ -29,19 +31,18 @@ type ReadExcelOptions = {
  */
 export async function readXLSXFIle (file: File, documentType: DocumentTypes): Promise<ReadFileResult> {
   const { attributesMap } = (documentsList[documentType] || { attributesMap: {} })
-  let headers :Row = []
 
   const options: ReadExcelOptions = {
     schema: attributesMap,
-    // Set the first column of data as an index so that we can map the index
-    // in the document schema to Excel columns.
     transformData (data: Row[]) {
-      headers = data[0] as Row
+      // Do not parse the first two rows of the Excel sheet
+      // because they are headers and will not be parsed as a part of a document
+      data.splice(0, 2)
 
-      data.shift()
-
+      // Set the first column of data as an index so that we can map the index
+      // in the document schema to Excel columns.
       const columnsIndex = Array.from((data[0] || []).keys())
-      data[0] = columnsIndex.map(String)
+      data.unshift(columnsIndex.map(String))
       return data
     }
   }
@@ -56,5 +57,5 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
     return error
   })
 
-  return { data, errors, headers }
+  return { data, errors }
 }
