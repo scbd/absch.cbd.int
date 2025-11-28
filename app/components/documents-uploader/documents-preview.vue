@@ -93,37 +93,35 @@ const documents = computed(() => {
   const getIsDate = (val) => val instanceof Date
   const getParsedValue = (val) => getIsDate(val) ? Schema.parseDate(val) : val
 
-  const map = (row) => {
+  const mapRow = (row) => {
     let index = 0
-
-    const mapRow = (currentRow) => {
+    const parseRow = (currentRow) => {
       const mappedRow = []
-      Object.values(currentRow)
-        .forEach((value) => {
-          if (!value || (value || '').length < 1) {
-            index += 1
-            return
-          }
-
-          if (!getIsDate(value) && value instanceof Object) {
-            mappedRow.push([index, mapRow(value)])
-            return
-          }
-
-          mappedRow.push([index, getParsedValue(value)])
+      Object.values(currentRow).forEach((value) => {
+        if (!value || (value || '').length < 1) {
           index += 1
-        })
+          return
+        }
+
+        if (!getIsDate(value) && value instanceof Object) {
+          return mappedRow.push([index, parseRow(value)])
+        }
+
+        mappedRow.push([index, getParsedValue(value)])
+        index += 1
+      })
       return mappedRow
     }
-
-    return mapRow(row)
+    return parseRow(row)
   }
 
-  return props.sheet.data.map(map)
+  return props.sheet.data.map(mapRow)
 })
 
 function getHeader (index) {
-  return props.sheet.headers[index].replace('*', '').trim()
+  if (typeof index !== 'number') { return '' }
+  const header = props.sheet.headers[index] || ''
+  return header.replace('*', '').trim()
 }
 
 function getIsDocumentOpen (index, row) {
