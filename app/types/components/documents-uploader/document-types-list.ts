@@ -7,6 +7,7 @@ type DocumentInfo = {
   DocumentSchema: typeof Schema
   attributesMap: DocumentAttributesMap
   keywordDomains: Array<string>
+  headerRows: Array<number>
 }
 
 export type DocumentsList = {

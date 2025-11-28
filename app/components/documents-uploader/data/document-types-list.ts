@@ -6,6 +6,7 @@ export const documentsList: DocumentsList = {
   ircc: {
     DocumentSchema: IrccSchema,
     attributesMap: irccAttributesMap,
-    keywordDomains: ['1A22EAAB-9BBC-4543-890E-DEF913F59E98'] // TODO: Remove magic string by fetching the ABS Permit Keyword category. Possible fetch from env variable
+    keywordDomains: ['1A22EAAB-9BBC-4543-890E-DEF913F59E98'], // TODO: Remove magic string by fetching the ABS Permit Keyword category. Possible fetch from env variable
+    headerRows: [0, 1]
   }
 }
