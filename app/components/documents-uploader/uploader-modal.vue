@@ -2,6 +2,8 @@
   <Modal
     ref="modalRef"
     :modal-size="modalSize"
+    header-class="bg-grey"
+    footer-class="bg-grey"
     @on-close="onClose"
   >
     <template #header>
@@ -176,16 +178,3 @@ async function onFileChange (changeEvent) {
   return documents
 }
 </script>
-<style>
-.modal-xxl {
-  max-width: 95%;
-}
-import-file > .modal.fade > .modal-dialog {
-  transition: transform .3s ease-out, max-width 0.1s ease-in-out;
-}
-
-.modal-header, .modal-footer {
-  background-color: #EEE;
-  color: #555;
-}
-</style>

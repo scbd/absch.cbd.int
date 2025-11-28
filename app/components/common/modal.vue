@@ -10,7 +10,10 @@
       :class="`modal-${modalSize}`"
     >
       <div class="modal-content">
-        <div class="modal-header">
+        <div
+          class="modal-header"
+          :class="headerClass"
+        >
           <slot name="header">
             <h5
               id="staticBackdropLabel"
@@ -30,7 +33,10 @@
         <div class="modal-body">
           <slot name="default" />
         </div>
-        <div class="modal-footer">
+        <div
+          class="modal-footer"
+          :class="footerClass"
+        >
           <slot name="footer">
             <div class="row w-100">
               <div class="col" />
@@ -67,6 +73,14 @@ defineProps({
   modalSize: {
     type: String,
     default: 'xl',
+  },
+  headerClass: {
+    type: String,
+    default: '',
+  },
+  footerClass: {
+    type: String,
+    default: '',
   },
 })
 
