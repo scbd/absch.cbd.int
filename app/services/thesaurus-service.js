@@ -2,7 +2,7 @@ import app from '~/app';
 import _ from 'lodash';
 
     app.factory('thesaurusService', ['$http', '$q', 'cacheService', function ($http, $q, cacheService) {
-        var termsCacheFactory = cacheService.getCacheFactory({name:'terms', storageMode:'localStorage', maxAge:24*60*60*1000})//one day cache for terms
+        var termsCacheFactory = cacheService.getCacheFactory({name:'terms', storageMode:'localStorage', maxAge:5*60*60*1000})//one day cache for terms
 
         return new function () {
 
