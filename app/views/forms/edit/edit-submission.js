@@ -30,7 +30,7 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
         absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');},
         resourceTypes      : function() {return thesaurusService.getDomainTerms('resourceTypesVlr');},
         gbfGoalsAndTargets   : function() {return thesaurusService.getDomainTerms('gbfGoalsAndTargets');},
-        cbdThematicAreas     : function() {return thesaurusService.getDomainTerms('cbdSubjects');},
+        cbdThematicAreas     : function() {return thesaurusService.getDomainTerms('cbdSubjects').then(loadLimitedChmKeywords);},
         betiFinanceKeywords       : function() {return thesaurusApi.getNarrowerTerms(THESAURUS_TERMS.BETI_FINANCE, {domainCode:THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING});},
         betiMainstreamingKeywords : function() {return thesaurusApi.getNarrowerTerms(THESAURUS_TERMS.BETI_MAINSTREAMING, {domainCode:THESAURUS_DOMAINS.BETI_FINANCE_MAINSTREAMING});},
         
@@ -157,6 +157,22 @@ export default ["$scope", "$http", "$controller", "realm", 'searchService', 'sol
 			      row.rec_title 	 = (row.reference_s||'') + ' (' + (row.symbol_s||'') + ')';
         });
         return docs;
+    }
+
+    function loadLimitedChmKeywords(terms){
+      
+      const subjects = ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
+      const items = [];
+
+      _.forEach(subjects, function(subject) {
+        const term = _.find(terms, {'identifier': subject } );
+        items.push(term);
+        _(term.narrowerTerms).forEach(function (term) {
+          items.push(_.find(terms, {'identifier':term}));
+        })
+      });
+      
+      return items;
     }
 
     $scope.setDocument({}, true).then(function(doc) {
