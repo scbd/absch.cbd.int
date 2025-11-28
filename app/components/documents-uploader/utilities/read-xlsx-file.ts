@@ -30,16 +30,21 @@ type ReadExcelOptions = {
  * Stores data parsed from xlsx file.
  */
 export async function readXLSXFIle (file: File, documentType: DocumentTypes): Promise<ReadFileResult> {
-  const { attributesMap } = (documentsList[documentType] || { attributesMap: {} })
+  const documentInfo = documentsList[documentType] || { attributesMap: {}, headerRows: [0] }
+  const { attributesMap, headerRows } = documentInfo
 
   const options: ReadExcelOptions = {
     schema: attributesMap,
     transformData (data: Row[]) {
-      // Set the first column of data as an index so that we can map the index
-      // in the document schema to Excel columns.
-      data.splice(0, 2)
+      // Do not parse the rows in the Excel sheet that are marked as headers
+      // because they will not be parsed as a part of a document.
+      data = data
+        .filter((_val, index) => !headerRows.includes(index))
 
-      data.unshift(Object.keys(data[0]).map(String))
+      // Set the first column of data as an index so that we can map the indices
+      // in the document schema to Excel columns.
+      const columnsIndex = Array.from((data[0] || []).keys())
+      data.unshift(columnsIndex.map(String))
       return data
     }
   }
