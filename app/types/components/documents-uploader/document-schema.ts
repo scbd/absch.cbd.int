@@ -16,7 +16,7 @@ export type AttributeDefinition = {
   column?: string
   required?: boolean
   schema?: DocumentAttributesMap
-  languageKey?: string
+  translationKey?: string
 }
 
 export type ErrorLevel = 'warning' | 'error' | 'info'
@@ -25,7 +25,7 @@ export type DocError = {
   reason: string
   row: number
   value?: string
-  column?: string
+  column?: string | number
   error?: string
   level?: ErrorLevel
 }

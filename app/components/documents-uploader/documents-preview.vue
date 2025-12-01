@@ -58,11 +58,15 @@ const { t } = useI18n()
 const props = defineProps({
   sheet: {
     type: Object,
-    default: () => ({ headers: [], data: [], errors: [] })
+    default: () => ({ data: [] })
   },
   documentType: {
     type: String,
     default: 'ircc'
+  },
+  errors: {
+    type: Array,
+    default: () => []
   }
 })
 const { attributesMap } = (documentsList[props.documentType] || { attributesMap: {} })
@@ -80,14 +84,19 @@ function doesValueExist (val) {
 }
 
 function getDocumentErrors (row) {
+  const getReaseon = (error, key) => {
+    const translationKey = attributesMap[key].translationKey
+    return `${t(error.reason)} → ${t(translationKey)}.`
+  }
+
   return Object.keys(props.sheet.data[row])
     .reduce((errors, key) => {
       const columnErrors = getColumnErrors(key, row)
         .map((error) => {
           return Object.assign(
-            {},
+            { level: 'warning' },
             error,
-            { reason: `${error.reason} → ${t(attributesMap[key].languageKey)}.`, level: 'warning' }
+            { reason: getReaseon(error, key) }
           )
         })
 
@@ -98,8 +107,15 @@ function getDocumentErrors (row) {
 }
 
 function getColumnErrors (key, row) {
-  return props.sheet.errors
-    .filter((error) => error.column === (attributesMap[key] || {}).column && error.row === (row + 1))
+  return props.errors
+    .filter((error) => {
+      const columnComparitor = Number.isInteger(error.column)
+        ? parseInt((attributesMap[key] || {}).column, 10)
+        : key
+      const columnMatch = error.column === columnComparitor
+
+      return error.row === (row + 1) && columnMatch
+    })
 }
 
 function hasColumnErrors (key, row) {
@@ -114,9 +130,9 @@ function parseValue (val) {
 function parseHeader (key) {
   if (typeof key !== 'string') { return '' }
 
-  const { languageKey } = attributesMap[key] || {}
+  const { translationKey } = attributesMap[key] || {}
 
-  return languageKey || 'contactInformation'
+  return translationKey || 'contactInformation'
 }
 
 </script>
