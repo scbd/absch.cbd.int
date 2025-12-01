@@ -80,8 +80,6 @@ function doesValueExist (val) {
 }
 
 function getDocumentErrors (row) {
-  console.log('props.sheet.errors', props.sheet.errors, row)
-
   return Object.keys(props.sheet.data[row])
     .reduce((errors, key) => {
       const columnErrors = getColumnErrors(key, row)
@@ -89,7 +87,7 @@ function getDocumentErrors (row) {
           return Object.assign(
             {},
             error,
-            { reason: `${error.reason}, ${t(attributesMap[key].languageKey)}`, level: 'warning' }
+            { reason: `${error.reason} → ${t(attributesMap[key].languageKey)}.`, level: 'warning' }
           )
         })
 
