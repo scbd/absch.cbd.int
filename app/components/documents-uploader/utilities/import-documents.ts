@@ -30,7 +30,7 @@ export class ImportDocuments {
     const file = files[0]
 
     const fileRead = await readXLSXFIle(file, this.documentType)
-    this.errors = [...this.errors, ...this.getErrorDescriptions(fileRead.errors)]
+    // this.errors = [...this.errors, ...this.getErrorDescriptions(fileRead.errors)]
 
     return fileRead
   }
@@ -38,7 +38,11 @@ export class ImportDocuments {
   getErrorDescriptions (errors: Array<DocError>) {
     const getReason = (err: DocError) => `${this.t(err.reason)} Document Row: ${err.row}, Column: ${err.column}, Value: ${err.value}`
     return errors
-      .map((docError) => ({ reason: getReason(docError) }))
+      .map((docError: DocError) => {
+        docError.reason = getReason(docError)
+        docError.level = 'warning'
+        return docError
+      })
   }
 
   async mapDocumentAttributesToSchemaJson (attributesList: Array<DocumentAttributes>) :Promise<DocumentsJsonArray> {

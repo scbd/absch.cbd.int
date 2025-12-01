@@ -19,12 +19,15 @@ export type AttributeDefinition = {
   languageKey?: string
 }
 
+export type ErrorLevel = 'warning' | 'error' | 'info'
+
 export type DocError = {
   reason: string
   row: number
   value?: string
   column?: string
   error?: string
+  level?: ErrorLevel
 }
 
 export type DocumentsJson = {
