@@ -22,6 +22,7 @@
     <DocumentsPreview
       v-if="hasParsedFiles"
       :sheet="sheet"
+      :errors="errors"
       :document-type="documentType"
     />
 
@@ -30,15 +31,9 @@
       :caption="$t('creatingDocumentsLoader')"
     />
 
-    <!-- TODO: Display Meaningful Errors  -->
-    <ModalErrors
-      v-if="hasErrors"
-      :errors="errors"
-    />
-
     <template #footer>
       <BulkUploaderFooter
-        v-if="hasParsedFiles || hasErrors"
+        v-if="hasParsedFiles"
         :has-errors="hasErrors"
         @handle-confirm="handleConfirm"
         @handle-clear="handleClearFile"
@@ -60,7 +55,6 @@ import BulkUploaderHeader from './uploader-header.vue'
 import BulkUploaderFooter from './uploader-footer.vue'
 import DocumentsPreview from './documents-preview.vue'
 import LoadingOverlay from '../common/loading-overlay.vue'
-import ModalErrors from './modal-errors.vue'
 import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import uploaderMessages from '~/app-text/components/bulk-documents-uploader.json'
@@ -101,19 +95,18 @@ const $emit = defineEmits(['onClose', 'refreshRecord'])
 // Refs
 const defaultDocumentJson = [{ header: { identifier: '' } }]
 const documents = ref(defaultDocumentJson)
-const sheet = ref([{ permitEquivalent: '' }])
+const sheet = ref({ data: [], errors: [] })
 const isLoading = ref(false)
 const errors = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef(null)
 
 // Computed Properties
-const hasErrors = computed(() => {
-  return errors.value.length > 0
-})
+const hasErrors = computed(() => errors.value
+  .some((error) => error.level === 'error'))
 
 const hasParsedFiles = computed(() => {
-  return documents.value[0].header.identifier.length > 0
+  return sheet.value.data.length > 0
 })
 
 // Event Hooks
@@ -135,6 +128,7 @@ function handleClearFile () {
   importDocuments.setErrors([])
   documents.value = defaultDocumentJson
   modalSize.value = 'xl'
+  sheet.value = { data: [], errors: [] }
 }
 
 async function handleConfirm () {

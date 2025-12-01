@@ -56,6 +56,7 @@ export async function readXLSXFIle (file: File, documentType: DocumentTypes): Pr
   const errors = readErrors.map((error) => {
     if (error.reason) { return error }
     error.reason = error.error as string
+    error.column = parseInt(error.column as string, 10)
     return error
   })
 

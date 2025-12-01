@@ -1,5 +1,4 @@
 import KmDocumentApi from '../../../../../api/km-document'
-
 import { DocumentAttributes } from '~/types/components/documents-uploader/document-schema'
 import { KeywordType, ELink, DocumentRequest, Keywords } from '~/types/common/documents'
 
@@ -110,13 +109,17 @@ export default class Schema {
   * TODO: Store this request to avoid repeatedly making a request for the same document type.
   */
   async getDocumentIdentifierByGUID (uniqueId: string): Promise<string> {
-    // TODO: Handle errors
     const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
 
     const [erroredColumn, erroredValue] = Object.entries(this.documentAttributes)
       .find((entry) => entry[1] === uniqueId)
 
-    const error = { reason: 'cannotFindRelevantDocumentError', column: erroredColumn, value: erroredValue }
+    const error = {
+      reason: 'cannotFindRelevantDocumentError',
+      column: erroredColumn,
+      value: erroredValue,
+      level: 'error'
+    }
     if (uid === null) {
       throw error
     }

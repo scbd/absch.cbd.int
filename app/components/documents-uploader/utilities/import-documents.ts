@@ -3,7 +3,7 @@ import { mapDocumentAttributesToSchemaJson } from './document-attributes-to-sche
 import { readXLSXFIle } from './read-xlsx-file'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
-import { DocError, DocumentAttributes, DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
+import { DocumentAttributes, DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
 import { KeywordType } from '~/types/common/documents'
 import ThesaurusApi from '../../../api/thesaurus.js'
 
@@ -30,19 +30,9 @@ export class ImportDocuments {
     const file = files[0]
 
     const fileRead = await readXLSXFIle(file, this.documentType)
-    // this.errors = [...this.errors, ...this.getErrorDescriptions(fileRead.errors)]
+    this.errors = fileRead.errors
 
     return fileRead
-  }
-
-  getErrorDescriptions (errors: Array<DocError>) {
-    const getReason = (err: DocError) => `${this.t(err.reason)} Document Row: ${err.row}, Column: ${err.column}, Value: ${err.value}`
-    return errors
-      .map((docError: DocError) => {
-        docError.reason = getReason(docError)
-        docError.level = 'warning'
-        return docError
-      })
   }
 
   async mapDocumentAttributesToSchemaJson (attributesList: Array<DocumentAttributes>) :Promise<DocumentsJsonArray> {
@@ -53,7 +43,7 @@ export class ImportDocuments {
     })
 
     if (mapResult.errors.length > 0) {
-      this.errors = [...this.errors, ...this.getErrorDescriptions(mapResult.errors)]
+      this.errors = [...this.errors, ...mapResult.errors]
       return [{ header: { identifier: '' } }]
     }
 

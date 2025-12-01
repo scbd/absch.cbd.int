@@ -35,8 +35,10 @@ export async function mapDocumentAttributesToSchemaJson ({
 
     const json = await schema.parseXLSXFileToDocumentJson()
       .catch((error) => {
+        error.row = index
+
         console.warn(error)
-        errors.push({ reason: error.reason, row: index, column: error.column, value: error.value })
+        errors.push(error)
       })
 
     return json === undefined ? defaultJson : json as DocumentRequest

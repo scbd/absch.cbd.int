@@ -17,5 +17,6 @@
     "documentParseError": "A problem occured parsing the document from the excel sheet.",
     "cannotFindRelevantDocumentError": "Could not find linked document. No valid document found with given document ID.",
     "documentEmptyError": "Document Empty. Not populated rows found in document.",
-    "contactInformation": "Contact Information"
+    "contactInformation": "Contact Information",
+    "required": "Value required."
 }
