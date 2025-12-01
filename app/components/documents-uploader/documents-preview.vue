@@ -1,6 +1,6 @@
 <template>
   <div
-    class="preview-list ps-3 pe-3 overflow-auto"
+    class="preview-list px-4 overflow-auto"
   >
     <div
       v-for="(document, index) in documents"
@@ -16,11 +16,14 @@
         <div
           v-for="([key, value]) in document"
           :key="key"
-          class="preview-box border border-2 bg-white text-center flex-fill"
+          class="preview-box border border-2 bg-white text-center flex-fill overflow-hidden"
         >
-          <div>
+          <div
+            class="h-100"
+            :class="{ 'alert-danger': hasColumnErrors(key, index) }"
+          >
             <div
-              class="fw-bold small bg-grey2 px-2 border-bottom overflow-hidden"
+              class="fw-bold text-dark small bg-grey2 px-2 border-bottom overflow-hidden"
             >
               {{ $t(parseHeader(key)) }}
             </div>
@@ -33,13 +36,24 @@
           </div>
         </div>
       </div>
+
+      <div class="mt-3">
+        <ModalErrors
+          v-if="getDocumentErrors(index).length > 0"
+          :errors="getDocumentErrors(index)"
+        />
+      </div>
     </div>
   </div>
 </template>
 <script setup>
+import ModalErrors from './modal-errors.vue'
 import { computed } from 'vue'
 import Schema from './utilities/document-attributes-to-schema-json/schemas/schema'
 import { documentsList } from './data/document-types-list'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps({
   sheet: {
@@ -53,15 +67,45 @@ const props = defineProps({
 })
 const { attributesMap } = (documentsList[props.documentType] || { attributesMap: {} })
 
-// Filter any empty cells
+// Filter any empty cells unless the cell has errors
 const documents = computed(() => props.sheet.data
-  .map((row) =>
-    Object.entries(row).filter((entry) => doesValueExist(entry[1]))
+  .map((row, rowIndex) =>
+    Object.entries(row)
+      .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, rowIndex))
   )
 )
 
 function doesValueExist (val) {
   return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
+}
+
+function getDocumentErrors (row) {
+  console.log('props.sheet.errors', props.sheet.errors, row)
+
+  return Object.keys(props.sheet.data[row])
+    .reduce((errors, key) => {
+      const columnErrors = getColumnErrors(key, row)
+        .map((error) => {
+          return Object.assign(
+            {},
+            error,
+            { reason: `${error.reason}, ${t(attributesMap[key].languageKey)}`, level: 'warning' }
+          )
+        })
+
+      if (columnErrors.length < 1) { return errors }
+
+      return columnErrors
+    }, [])
+}
+
+function getColumnErrors (key, row) {
+  return props.sheet.errors
+    .filter((error) => error.column === (attributesMap[key] || {}).column && error.row === (row + 1))
+}
+
+function hasColumnErrors (key, row) {
+  return getColumnErrors(key, row).length > 0
 }
 
 function parseValue (val) {
