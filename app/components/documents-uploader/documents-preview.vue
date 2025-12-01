@@ -1,6 +1,6 @@
 <template>
   <div
-    class="preview-list px-4 overflow-auto"
+    class="preview-list pt-3 px-lg-5 px-md-2 overflow-auto"
   >
     <div
       v-for="(document, index) in documents"
@@ -149,6 +149,12 @@ function parseHeader (key) {
   @media screen and (max-width: 992px) {
     .preview-box {
       width: 25%;
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    .preview-box {
+      width: 40%;
     }
   }
 
