@@ -1,12 +1,16 @@
 import KmDocumentApi from '../../../../../api/km-document'
 import { DocumentAttributes } from '~/types/components/documents-uploader/document-schema'
-import { KeywordType, ELink, DocumentRequest, Keywords } from '~/types/common/documents'
+import {
+  KeywordType, ELink, UsageKey,
+  DocumentRequest, Keywords, UsageMapping
+} from '~/types/common/documents'
 
 import {
   languages, englishLanguages
 } from '~/app-data/un-languages'
 import { LanguageCode } from '~/types/languages'
 import { StandardError } from '~/types/errors'
+import { THESAURUS_TERMS } from '~/constants/thesaurus'
 
 const kmDocumentApi = new KmDocumentApi()
 
@@ -50,14 +54,9 @@ export default class Schema {
   * Get GUID for usage map from usage map document attribute string.
   */
   static getUsageMapping (usage: string): string {
-    // TODO: Possibly move to API call or app-data folder to avoid magic strings
-    const usageMapping = {
-      commercial: '5E833A3F-87D1-4ADD-8701-9F1B76383017',
-      noncommercial: '60EA2F49-A9DD-406F-921A-8A1C9AA8DFDD'
-    }
-
-    if (Schema.getIsConfidential(usage)) { return undefined }
-    return usageMapping[usage.replace('-', '')]
+    if (Schema.getIsConfidential(usage)) { return '' }
+    const usageMapping :UsageMapping = THESAURUS_TERMS
+    return usageMapping[usage.replace('-', '').toUpperCase() as UsageKey]
   }
 
   static getELinkData (value: string): Array<ELink> {
