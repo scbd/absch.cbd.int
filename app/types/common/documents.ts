@@ -28,7 +28,7 @@ export type Keywords = {
   processedKeywords: Array<SubDocument>
   otherKeywords: string
 }
-export type UsageKey = 'commercial' | 'noncommercial'
+export type UsageKey = 'COMMERCIAL' | 'NONCOMMERCIAL'
 
 export type UsageMapping = {
   [key in UsageKey]: string 
