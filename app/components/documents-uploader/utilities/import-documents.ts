@@ -5,10 +5,10 @@ import { DocumentTypes } from '~/types/components/documents-uploader/document-ty
 import { documentsList } from '../data/document-types-list'
 import { DocumentAttributes, DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
 import { KeywordType } from '~/types/common/documents'
+import { Translations } from '~/types/languages'
 // @ts-ignore
 import ThesaurusApi from '../../../api/thesaurus.js'
 
-type Translations = (arg: string) => string
 export class ImportDocuments {
   t: Translations = (arg) => arg
   errors: Array<StandardError> = []
