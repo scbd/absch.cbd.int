@@ -12,6 +12,7 @@ import {
 } from '~/app-data/un-languages'
 import { LanguageCode } from '~/types/languages'
 import { StandardError } from '~/types/errors'
+import { THESAURUS_TERMS } from '~/constants/thesaurus' 
 
 const kmDocumentApi = new KmDocumentApi()
 
@@ -55,14 +56,9 @@ export default class Schema {
   * Get GUID for usage map from usage map document attribute string.
   */
   static getUsageMapping (usage: string): string {
-    // TODO: Possibly move to API call or app-data folder to avoid magic strings
-    const usageMapping: UsageMapping = {
-      commercial: '5E833A3F-87D1-4ADD-8701-9F1B76383017',
-      noncommercial: '60EA2F49-A9DD-406F-921A-8A1C9AA8DFDD'
-    }
-
     if (Schema.getIsConfidential(usage)) { return '' }
-    return usageMapping[usage.replace('-', '') as UsageKey]
+    const usageMapping :UsageMapping = THESAURUS_TERMS
+    return usageMapping[usage.replace('-', '').toUpperCase() as UsageKey]
   }
 
   static getELinkData (value: string): Array<ELink> {
@@ -144,7 +140,7 @@ export default class Schema {
 
   /**
   * Generate a GUID using the Math.random function.
-currentValue  */
+  */
   static generateGUID () {
     const S4 = (): string => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
     return (`SIMP-${S4()}${S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`).toUpperCase()
