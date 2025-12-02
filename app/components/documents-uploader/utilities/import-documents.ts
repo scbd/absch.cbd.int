@@ -65,12 +65,13 @@ export class ImportDocuments {
     const { keywordDomains } = documentsList[this.documentType]
 
     const keywordPromises = keywordDomains
-      .map((keywordDomain: string) => this.thesaurusApi.getDomainTerms(keywordDomain))
+      .map((keywordDomain: string) => this.thesaurusApi.getDomainTerms(keywordDomain)
+        .catch((error: Error) => {
+          this.storeErrors([{ reason: 'keywordsListError' }])
+          console.warn(error)
+        }))
 
     const allKeywords = await Promise.all(keywordPromises)
-      .catch(() => {
-        this.storeErrors([{ reason: 'keywordsListError' }])
-      })
 
     if (!Array.isArray(allKeywords)) { return [] }
 
