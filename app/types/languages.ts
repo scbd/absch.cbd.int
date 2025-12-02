@@ -18,3 +18,5 @@ export type LanguageMapType = {
   identifier: string
   name: LanguageType
 }
+
+export type Translations = (arg: string) => string
