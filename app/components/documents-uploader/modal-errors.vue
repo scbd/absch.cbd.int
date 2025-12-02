@@ -3,10 +3,10 @@
     class="error__container"
   >
     <div
-      class="col-12 alert d-flex justify-content-between align-items-center"
-      :class="errType(error).class"
       v-for="error in errors"
       :key="error.reason"
+      class="col-12 alert d-flex justify-content-between align-items-center"
+      :class="errType(error).class"
     >
       <ul class="flex-1 m-0">
         <li>

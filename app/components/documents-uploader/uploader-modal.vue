@@ -31,6 +31,10 @@
       :caption="$t('creatingDocumentsLoader')"
     />
 
+    <ModalErrors
+      :errors="modalErrors"
+    />
+
     <template #footer>
       <BulkUploaderFooter
         v-if="hasParsedFiles"
@@ -51,6 +55,7 @@ import { useI18n } from 'vue-i18n'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
 import { useRealm } from '../../services/composables/realm.js'
 import KmDocumentApi from '~/api/km-document'
+import ModalErrors from './modal-errors.vue'
 import BulkUploaderHeader from './uploader-header.vue'
 import BulkUploaderFooter from './uploader-footer.vue'
 import DocumentsPreview from './documents-preview.vue'
@@ -105,6 +110,9 @@ const modalRef = shallowRef(null)
 const hasErrors = computed(() => errors.value
   .some((error) => error.level === 'error'))
 
+const modalErrors = computed(() => errors.value
+  .filter((error) => !Number.isInteger(error.row)))
+
 const hasParsedFiles = computed(() => {
   return sheet.value.data.length > 0
 })
@@ -118,6 +126,7 @@ onMounted(async () => {
   await importDocuments.getKeywordsMap()
 
   errors.value = importDocuments.errors
+
   isLoading.value = false
 })
 

@@ -17,7 +17,6 @@ const kmDocumentApi = new KmDocumentApi()
 export default class Schema {
   language: LanguageCode = 'en' // Default
   documentAttributes: DocumentAttributes
-  documentNumber: number = 1
   keywordsMap = []
 
   constructor (documentAttrs: DocumentAttributes, keywordsMap: Array<KeywordType>) {
