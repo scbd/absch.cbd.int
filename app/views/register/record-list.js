@@ -27,6 +27,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
                 $scope.isBulkUploaderOpen = false 
+                $scope.showImportDocumentsButton = $routeParams.document_type === "IRCC" && $rootScope.user?.government 
 
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
