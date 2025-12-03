@@ -164,7 +164,7 @@ async function onFileChange (changeEvent) {
   isLoading.value = true
 
   // Read File
-  sheet.value = await importDocuments.readXLSXFIle(changeEvent)
+  sheet.value = await importDocuments.readXLSXFile(changeEvent)
 
   // Map document attributes to the document schema
   const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value.data)
