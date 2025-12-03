@@ -29,6 +29,9 @@
           <div
             v-else
             class="h-100 overflow-hidden"
+            data-toggle="tooltip"
+            data-placement="top"
+            :title="parseValue(value, key)"
             :class="{ 'alert-danger': hasColumnErrors(key, index) }"
           >
             <div
