@@ -143,7 +143,7 @@ function handleClearFile () {
 async function handleConfirm () {
   isLoading.value = true
 
-  const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocument(doc))
+  const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocumentDraft(doc))
 
   return Promise.all(requestPromises)
     .then(() => {
