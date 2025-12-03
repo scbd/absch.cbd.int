@@ -59,7 +59,7 @@ export default class <Your Document Schema Name>Schema extends Schema {
 },
 ```
 
-### Adding New the Document Type to the Document Types List
+### Adding the New Document Type to the Document Types List
 
 You must modify the document types list to include your new document.
 
@@ -75,7 +75,7 @@ Then add the attributes map and the Document Schema to the `documentsList` varia
 
 ```
 export const documentsList: DocumentsList = {
-ircc: { DocumentSchema: IrccSchema, attributesMap: irccAttributesMap, keywordDomains: ['1A22EAAB-9BBC-4543-890E-DEF913F59E98']  }.
+  ircc: { DocumentSchema: IrccSchema, attributesMap: irccAttributesMap, keywordDomains: ['1A22EAAB-9BBC-4543-890E-DEF913F59E98']  },
   <Your Document Type Name>: { DocumentSchema: <YourSchema>, attributesMap: <YourAttributesMap> }
 }
 ```
