@@ -3399,6 +3399,15 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
 .modal-open .modal.login.show{
     z-index: 100001!important;
 }
+
+.modal > .modal-xxl {
+  max-width: 95%;
+}
+
+#SubmitPage .modal.fade > .modal-dialog {
+  transition: transform .3s ease-out, max-width 0.1s ease-in-out;
+}
+
 .modal-open .multi-modal.modal-backdrop{
     z-index: 100000!important;
 }
