@@ -1,6 +1,6 @@
 import { StandardError } from '~/types/errors'
 import { mapDocumentAttributesToSchemaJson } from './document-attributes-to-schema-json'
-import { readXLSXFIle } from './read-xlsx-file'
+import { readXLSXFile } from './read-xlsx-file'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
 import { DocumentAttributes, DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
@@ -24,13 +24,13 @@ export class ImportDocuments {
     this.thesaurusApi = new ThesaurusApi()
   }
 
-  async readXLSXFIle (changeEvent: Event) {
+  async readXLSXFile (changeEvent: Event) {
     const target = changeEvent.target as HTMLInputElement
     const files = target.files || []
 
     const file = files[0]
 
-    const fileRead = await readXLSXFIle(file as File, this.documentType)
+    const fileRead = await readXLSXFile(file as File, this.documentType)
     this.errors = fileRead.errors
 
     return fileRead
