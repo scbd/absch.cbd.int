@@ -5,7 +5,9 @@
             <span class="lh-sm fs-4 color-white my-3">
                 {{::('bchHomeT.bchDescription'|$translate)}}
             </span>
-
+            <div ng-if="exportVueComponent">
+                <vue-typescript-test ng-vue="exportVueComponent"></vue-typescript-test>
+            </div>
             <div class="row mt-2 py-3">
                 <div class="col-sm-12 col-md-4 p-2 d-none d-sm-none d-md-none d-lg-block" style="white-space:nowrap;">
                     <a class="text-decoration-none cursor-pointer link-light" ng-click="scrollTo('homePageMapSection');">
