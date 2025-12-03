@@ -1,6 +1,7 @@
 {
     "importIrccExcel": "Import IRCC Documents From an Excel File",
     "browseFiles": "Browse",
+    "uniqueIdentifier": "Existing unique contact identifier",
     "pleaseSelectExcelInfo": "Please select an Excel file to begin importing data.",
     "clearImportedRecords":" Clear Documents List",
     "confirmCreateDraftRecords": "Create Draft Records",

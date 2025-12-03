@@ -16,22 +16,31 @@
         <div
           v-for="([key, value]) in document"
           :key="key"
-          class="preview-box border border-2 bg-white text-center flex-fill overflow-hidden"
+          class="preview-box border border-2 bg-white text-center flex-fill"
         >
+          <SuportingDocument
+            v-if="getIsNestedDocument(value)"
+            :document="parseValue(value, key)"
+            :title="parseHeader(key, document)"
+            :is-open="getIsDocumentOpen(key, index)"
+            role="button"
+            @click="() => toggleAccordian(key, index)"
+          />
           <div
-            class="h-100"
+            v-else
+            class="h-100 overflow-hidden"
             :class="{ 'alert-danger': hasColumnErrors(key, index) }"
           >
             <div
               class="fw-bold text-dark small bg-grey2 px-2 border-bottom overflow-hidden"
             >
-              {{ $t(parseHeader(key)) }}
+              {{ parseHeader(key) }}
             </div>
 
             <div
               class="px-2 text-truncate"
             >
-              {{ parseValue(value) }}
+              {{ parseValue(value, key) }}
             </div>
           </div>
         </div>
@@ -48,7 +57,8 @@
 </template>
 <script setup>
 import ModalErrors from './modal-errors.vue'
-import { computed } from 'vue'
+import SuportingDocument from './supporting-document.vue'
+import { computed, ref } from 'vue'
 import Schema from './utilities/document-attributes-to-schema-json/schemas/schema'
 import { documentsList } from './data/document-types-list'
 import { useI18n } from 'vue-i18n'
@@ -69,6 +79,8 @@ const props = defineProps({
     default: () => []
   }
 })
+
+const openedSupportingDocuments = ref({})
 const { attributesMap } = (documentsList[props.documentType] || { attributesMap: {} })
 
 // Filter any empty cells unless the cell has errors
@@ -78,6 +90,10 @@ const documents = computed(() => props.sheet.data
       .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, rowIndex))
   )
 )
+
+function getIsNestedDocument (value) {
+  return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
+}
 
 function doesValueExist (val) {
   return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
@@ -122,17 +138,42 @@ function hasColumnErrors (key, row) {
   return getColumnErrors(key, row).length > 0
 }
 
-function parseValue (val) {
+function parseValue (val, key) {
   const getIsDate = (val) => val instanceof Date
-  return getIsDate(val) ? Schema.parseDate(val) : val
+  if (getIsDate(val)) {
+    return Schema.parseDate(val)
+  }
+
+  if (getIsNestedDocument(val)) {
+    return Object.entries(val)
+      .map(([subkey, subvalue]) => [parseHeader(subkey, attributesMap[key].schema), parseValue(subvalue)])
+  }
+
+  return val
 }
 
-function parseHeader (key) {
+function parseHeader (key, attributesList = attributesMap) {
   if (typeof key !== 'string') { return '' }
+  if (typeof attributesList !== 'object' || !attributesList) { return '' }
 
-  const { translationKey } = attributesMap[key] || {}
+  const { translationKey } = attributesList[key] || { translationKey: 'contactInformation' }
 
-  return translationKey || 'contactInformation'
+  // console.log('translationKey', translationKey, attributesList, key)
+
+  return t(translationKey)
+}
+
+function toggleAccordian (index, row) {
+  const arr = openedSupportingDocuments.value[row] || []
+  openedSupportingDocuments.value = { row: [] }
+  const i = arr.indexOf(index)
+  if (i < 0) {
+    openedSupportingDocuments.value[row] = [index]
+  }
+}
+
+function getIsDocumentOpen (index, row) {
+  return (openedSupportingDocuments.value[row] || []).indexOf(index) > -1
 }
 
 </script>
@@ -180,30 +221,5 @@ function parseHeader (key) {
 
   .bg-grey2 {
     background-color: #eaeaea;
-  }
-
-  .document-accordian-icon {
-    transition: transform 0.2s ease-in-out;
-    transform: rotate(-90deg);
-  }
-
-  .document-accordian-icon.document-accordian-icon--open {
-    transform: rotate(0);
-  }
-  .accordian-box > div {
-    transition: max-height 0.2s ease-in-out;
-    z-index: 1;
-    max-height: 3em;
-  }
-
-  .accordian-box--open {
-    position: relative;
-  }
-
-  .accordian-box--open > div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    max-height: 100vh;
   }
 </style>
