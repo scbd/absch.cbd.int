@@ -9,8 +9,8 @@ import {
 type Schema<T> = { [x: string]: T; }
 type Row = CellValue[]
 
-interface ParseWithSchemaOptions<Object> {
-  schema: Schema<Object>
+interface ParseWithSchemaOptions<T> {
+  schema: Schema<T>
   transformData?: (rows: Row[]) => Row[]
 }
 
