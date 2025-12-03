@@ -43,8 +43,8 @@ export async function readXLSXFile (file: File, documentType: DocumentTypes): Pr
 
       // Set the first column of data as an index so that we can map the indices
       // in the document schema to Excel columns.
-      const columnsIndices = Array.from((data[0] || []).keys())
-      data.unshift(columnsIndices.map(String))
+      const columnsIndex = Array.from((data[0] || []).keys())
+      data.unshift(columnsIndex.map(String))
       return data
     }
   }
@@ -56,6 +56,7 @@ export async function readXLSXFile (file: File, documentType: DocumentTypes): Pr
   const errors = readErrors.map((error) => {
     if (error.reason) { return error }
     error.reason = error.error as string
+    error.column = parseInt(error.column as string, 10)
     return error
   })
 
