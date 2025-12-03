@@ -12,6 +12,7 @@ import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json'; 
 import { mergeTranslationKeys } from '../../services/translation-merge';
+import importFile from "~/components/documents-uploader/uploader-modal.vue";
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
@@ -25,6 +26,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
+                $scope.isBulkUploaderOpen = false 
 
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
@@ -297,7 +299,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.duplicate = function (entity) {
                     $scope.loading = true;
                     var document;
-                    //	console.log(entity);
+
                     if ($scope.isDraft(entity) || $scope.isRequest(entity)) {
                         document = storage.drafts.get(entity.identifier)
                     } else if ($scope.isPublished(entity)) {
@@ -305,7 +307,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     }
 
                     return $q.when(document).then(function (document) {
-                        //console.log(document);
                         if (!document.data)
                             throw "Invalid document";
 
@@ -359,7 +360,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                 };
 
                 $scope.deleteWorkflowRequest = function (record) {
-                    console.log(record);
                     $scope.loading = true;
                     IWorkflows.cancel(record.workingDocumentLock.lockID.replace('workflow-', ''), { 'action': 'cancel' })
                         .then(function (data) {
@@ -428,7 +428,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     if (status === 'requests' || status === 'request')
                         $scope.statusFilter = $scope.isRequest;
                 }
-
                 //============================================================
                 //
                 //
@@ -442,6 +441,10 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                     return "";
                 };
+
+                $scope.openBulkUploader = function () {
+                  $scope.isBulkUploaderOpen = true 
+                }
 
                 $scope.showAddButton = function () {
 
@@ -499,8 +502,13 @@ const recordListError = mergeTranslationKeys(recordListT);
                     evtServerPushNotification();
                 })
 
-                $scope.refreshList = function (schema) {
-                    loadRecords(1);
+                $scope.refreshList = function () {
+                    return loadRecords(1);
+                };
+
+                $scope.onBulkUploaderClose = function () {
+                  $scope.isBulkUploaderOpen = false
+                  return $scope.isBulkUploaderOpen
                 };
 
                 $scope.closeDialog = function(){
@@ -778,6 +786,10 @@ const recordListError = mergeTranslationKeys(recordListT);
                 }
                 $scope.isDisableEdit = function (schema){
                     return  realm.schemas[schema].disableEdit;
+                }
+
+                $scope.exportVueComponent = {
+                    components:{ importFile }
                 }
 
                 function loadmyTasks(schema){
