@@ -29,7 +29,7 @@ type ReadExcelOptions = {
  *
  * Stores data parsed from xlsx file.
  */
-export async function readXLSXFIle (file: File, documentType: DocumentTypes): Promise<ReadFileResult> {
+export async function readXLSXFile (file: File, documentType: DocumentTypes): Promise<ReadFileResult> {
   const documentInfo = documentsList[documentType] || { attributesMap: {}, headerRows: [0] }
   const { attributesMap, headerRows } = documentInfo
 
