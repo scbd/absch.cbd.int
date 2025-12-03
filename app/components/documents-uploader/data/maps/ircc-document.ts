@@ -9,12 +9,12 @@ export default {
     schema: {
       type: { column: '6', required: true, translationKey: 'theProvider' }, // G
       existing: { column: '7', translationKey: 'uniqueIdentifier' }, // H
-      orgName: { column: '8', required: true, translationKey: 'nameOfTheOrganization' }, // I
+      orgName: { column: '8', required: true, translationKey: 'organizationFullName' }, // I
       acronym: { column: '9', required: true, translationKey: 'acronym' }, // J
       address: { column: '10', translationKey: 'address' }, // K
       city: { column: '11', translationKey: 'city' }, // L
       country: { column: '12', required: true, translationKey: 'country' }, // M
-      email: { column: '13', required: true, translationKey: 'email' } // N
+      email: { column: '13', required: true, translationKey: 'emails' } // N
     }
   },
   pic: {
@@ -27,7 +27,7 @@ export default {
       address: { column: '19', translationKey: 'address' }, // T
       city: { column: '20', translationKey: 'city' }, // U
       country: { column: '21', required: true, translationKey: 'country' }, // V
-      email: { column: '22', required: true, translationKey: 'email' } // W
+      email: { column: '22', required: true, translationKey: 'emails' } // W
     }
   },
   matEstablished: { column: '23', translationKey: 'mutuallyInformation' }, // X
