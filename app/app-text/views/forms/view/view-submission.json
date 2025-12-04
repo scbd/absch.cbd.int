@@ -9,6 +9,11 @@
     "records": "Related record(s)",
     "thematicAreas": "Thematic areas",
     "documents": "Documents",
-    "otherRelevantInformation": "Any other relevant information"
+    "otherRelevantInformation": "Any other relevant information",
+    "resourceTypes": "Type of resource",
+    "gbfGoalsAndTargets": "Global Biodiversity Framework Target(s)",
+    "cbdThematicAreas": "CBD subject areas",
+    "betiMainstreamingKeywords": "Mainstreaming Biodiversity",
+    "betiFinanceKeywords": "Financial Resources and Mechanism"
 
 }
