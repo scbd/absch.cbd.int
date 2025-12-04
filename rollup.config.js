@@ -104,14 +104,6 @@ function bundle(entryPoint, locale, baseDir='app') {
         preprocessStyles: true,
         cache: false
       }),
-
-      // typescript({
-      //   tsconfig: 'tsconfig.json',
-      //   clean: true,                     // <- wipe cache on each rebuild in watch
-      //   tsconfigOverride: {
-      //     compilerOptions: { incremental: false }
-      //   }
-      // }),
       esbuild({
         include: /\.[jt]s$/,             // ts, js (vue already turned <script lang="ts"> into JS)
         target: 'es2022',
