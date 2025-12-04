@@ -2,7 +2,7 @@ import app from '~/app';
 import _ from 'lodash';
 
     app.factory('thesaurusService', ['$http', '$q', 'cacheService', function ($http, $q, cacheService) {
-        var termsCacheFactory = cacheService.getCacheFactory({name:'terms', storageMode:'localStorage', maxAge:5*60*60*1000})//one day cache for terms
+        var termsCacheFactory = cacheService.getCacheFactory({name:'terms', storageMode:'localStorage', maxAge:24*60*60*1000})//one day cache for terms
 
         return new function () {
 
@@ -35,7 +35,7 @@ import _ from 'lodash';
                     throw "Domain term is missing";
 
                     options = options || {};
-                var url     = '/api/v2013/thesaurus/domains/' + encodeURIComponent(domainTerms[termIdentifier]||termIdentifier) + '/terms';
+                var url     = '/api/v2013/thesaurus/domains/' + encodeURIComponent(domainTerms[termIdentifier]) + '/terms';
 
                 if(options.other){
                     var urlOther = '/api/v2013/thesaurus/terms/' + encodeURIComponent(domainTerms['other']);
@@ -143,7 +143,6 @@ import _ from 'lodash';
                 regions                : "regions",
                 languages              : "ISO639-2",
                 gbfTargets             : 'GBF-TARGETS',
-                gbfGoalsAndTargets     : 'GBF-GOALS-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
                 bchRaAuthorAffiliation :   'Organization Types',
                 transboundaryMovementTypes : 'TransboundaryMovementTypes',
