@@ -8,7 +8,7 @@ app.directive("existingPermit", [ function () {
 
 	return {
 		restrict   : "EA",
-		template: template ,
+    template,
 		replace    : true,
 		transclude : false,
 		scope      : {

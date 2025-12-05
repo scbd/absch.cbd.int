@@ -6,10 +6,11 @@ import '~/components/scbd-angularjs-controls/main';
 import '~/views/measure-matrix/measure-matrix-elements-directive';
 import '~/views/forms/view/record-loader.directive';
 
+
     app.directive("measureMatrixCountriesDirective", function() {
         return {
             restrict: "EAC",
-            template: template, 
+            template, 
             replace: true,
             transclude: false,
             scope: {
