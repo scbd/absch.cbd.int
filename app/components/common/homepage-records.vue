@@ -110,7 +110,7 @@
   const seeMore = () => {
       if(type == 'reference') 
           router.push({path: 'search', query: { currentPage: '1', tab: 'referenceRecords' }});
-      else router.push({path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', /* group: 'schema' */ }});
+      else router.push({path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'schema' }});
   };
   const recordUrl = (record) => {
       if(!record.uniqueIdentifier_s)
