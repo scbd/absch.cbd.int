@@ -20,7 +20,7 @@
     "deleted": "DELETED",
     "revoked": "REVOKED",
     "history": "History:",
-    "viewing": "This record has been deleted. However, since it is being referenced by a published record it is displayed here for reference.",
+    "viewing": "This record has been deleted. Since it is linked to a published record, it is available here for reference purposes only.",
     "recordInformationDisplayed": "Click here to view the deleted record",
     "publishedVersion": "This document has been updated. This is not the latest published version.",
     "latestVersion": "Click here to view the latest version of the record.",
