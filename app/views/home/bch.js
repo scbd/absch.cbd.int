@@ -5,7 +5,6 @@ import '~/views/directives/home-articles';
 import homepageRecords from '~/components/common/homepage-records.vue';
 export { default as template } from './bch.html';
 import bchHomeT from '~/app-text/views/home/bch.json';
-import vueTypescriptTest from '~/components/common/test-typescript.vue'
 
 export default ['$scope', 'articlesService', '$rootScope', 'translationService', function ($scope, articlesService, $rootScope, translationService) {
         translationService.set('bchHomeT', bchHomeT);
@@ -16,7 +15,7 @@ export default ['$scope', 'articlesService', '$rootScope', 'translationService',
         }
 
         $scope.exportVueComponent = {
-          components: { homepageRecords, vueTypescriptTest }
+          components: { homepageRecords }
         }
       $scope.scrollTo = function (anchor){
         $('html, body').animate({
