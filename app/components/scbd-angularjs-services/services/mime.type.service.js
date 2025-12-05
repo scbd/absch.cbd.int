@@ -8266,7 +8266,7 @@ import _ from 'lodash';
         }
         return {
             lookup:lookup,
-            mimeIcon, mimeIcon
+            mimeIcon,
         };
     }]);
 

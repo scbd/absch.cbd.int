@@ -31,11 +31,11 @@ export default function resolveLocalized(options = { }) {
       if(!resolved)
         console.debug(importeeId, importer);
       
-      const { external, id: absolutePath }  = resolved;
+      const { external, id: absolutePath }  = resolved || {};
 
       if(external) return resolved;
 
-      const relativeUnixPath = upath.relative(cwd, resolved.id);
+      const relativeUnixPath = upath.relative(cwd, resolved?.id || "");
       
       if (basePatternRe.test(relativeUnixPath)) {
 
