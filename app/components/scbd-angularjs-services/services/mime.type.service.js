@@ -8265,7 +8265,7 @@ import _ from 'lodash';
             return extension && extension[1];
         }
         return {
-            lookup:lookup,
+            lookup,
             mimeIcon,
         };
     }]);
