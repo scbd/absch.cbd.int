@@ -2,7 +2,6 @@ import app from '~/app';
 import _ from 'lodash';
 import '~/views/forms/edit/edit';
 import '~/views/forms/view/abs/view-abs-checkpoint-communique.directive';
-import '~/views/forms/edit/permit-selection-directive';
 import '~/services/main';
 import '~/views/forms/view/chm/leaflet/leaflet.js';
 import { mapConfig } from '~/views/forms/view/chm/leaflet/config.js';
