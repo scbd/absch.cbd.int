@@ -503,6 +503,11 @@ const recordListError = mergeTranslationKeys(recordListT);
                     evtServerPushNotification();
                 })
 
+                $scope.handleNewDocumentCreation = function () {
+                  toastr.success(translationService.get('recordListT.draftCreateSuccess'))
+                  return loadRecords(1)
+                };
+
                 $scope.refreshList = function () {
                     return loadRecords(1);
                 };
