@@ -57,9 +57,14 @@
                             <import-file
                               ng-vue="exportVueComponent"
                               :document-type="'ircc'"
+                              :header="bulkUploaderHeader"
                               @refresh-record="handleNewDocumentCreation();"
                               @on-close="onBulkUploaderClose();"
                             >
+                              <template #header>
+                                <h5 class="modal-title"> {{ header }} </h5>
+                                <p class="m-0"> {{ subHeader }} </p>
+                              </template>
                             </import-file>
                           </div>
                         </div>
