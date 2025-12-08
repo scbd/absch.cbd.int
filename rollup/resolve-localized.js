@@ -23,7 +23,7 @@ export default function resolveLocalized (options = { }) {
       const resolved = await this.resolve(importeeId, importer, { skipSelf: true })
 
       if (!resolved) {
-        console.debug(`Could not import file: ${importer} -> ${importeeId}`)
+        console.error(`Could not import file: ${importer} -> ${importeeId}`)
       }
 
       const { external, id: absolutePath } = resolved || {}
