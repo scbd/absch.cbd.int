@@ -627,7 +627,6 @@ export const cpbNationalReport5 = [
                   "mandatory":true,
                   "title": nr5T.articles7_10_question26_question0_title,
                   "multiple":false,
-                  "mandatory": true
                },
                {
                   "key":"Q027",
@@ -2229,7 +2228,6 @@ export const cpbNationalReport5 = [
                      "type":"lstring"
                   }
                ],
-               "mandatory":true
             },
             {
                "key":"Q072",
@@ -2621,7 +2619,6 @@ export const cpbNationalReport5 = [
                      "type":"lstring"
                   }
                ],
-               "mandatory":true
             },
             {
                "key":"Q087",

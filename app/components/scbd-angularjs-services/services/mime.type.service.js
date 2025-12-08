@@ -8265,8 +8265,8 @@ import _ from 'lodash';
             return extension && extension[1];
         }
         return {
-            lookup:lookup,
-            mimeIcon, mimeIcon
+            lookup,
+            mimeIcon
         };
     }]);
 
