@@ -526,7 +526,6 @@
   "./.jshintrc",
   "./script/copy-translation-files.js",
   "./rollup.config.js",
-  "./rollup/resolve-localized.js",
   "./rollup/inject-css-to-dom.js",
   "./rollup/strip-bom.js",
   "./rollup/merge-i18n.js"
