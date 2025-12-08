@@ -795,7 +795,15 @@ const recordListError = mergeTranslationKeys(recordListT);
                 }
 
                 $scope.exportVueComponent = {
-                    components:{ importFile }
+                  components: {
+                    importFile,
+                  },
+                  setup() {
+                    return {
+                      header: translationService.get('recordListT.importIrccExcel'),
+                      subHeader: translationService.get('recordListT.pleaseSelectExcelInfo')
+                    };
+                  },
                 }
 
                 function loadmyTasks(schema){

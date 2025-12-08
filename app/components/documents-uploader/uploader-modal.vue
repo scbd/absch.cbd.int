@@ -9,7 +9,11 @@
     <template #header>
       <BulkUploaderHeader
         @close-modal="onClose"
-      />
+      >
+        <template #header>
+          <slot name="header" />
+        </template>
+      </BulkUploaderHeader>
     </template>
 
     <UploadButton
@@ -64,6 +68,7 @@ import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import uploaderMessages from '~/app-text/components/bulk-documents-uploader.json'
 import absMessages from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
+import recordListMessages from '~/app-text/views/register/record-list.json'; 
 import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
 
@@ -78,7 +83,8 @@ const messages = {
     {},
     uploaderMessages.en,
     absMessages.en,
-    contactMessages.en
+    contactMessages.en,
+    recordListMessages.en
   )
 }
 
