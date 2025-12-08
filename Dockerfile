@@ -9,7 +9,7 @@ RUN curl https://raw.githubusercontent.com/MestreLion/git-tools/main/git-restore
     chmod u+x /usr/bin/git-restore-mtime
 
 ARG BRANCH='master'
-ENV BRANCH $BRANCH
+ENV BRANCH=$BRANCH
 
 RUN echo 'branch:' $BRANCH
 
@@ -30,13 +30,13 @@ RUN yarn install --ignore-scripts --prefer-offline && \
 # run rollup build script 
 RUN yarn run build
 
-ENV PORT 8000
+ENV PORT=8000
 EXPOSE 8000
 
 ARG TAG
-ENV TAG $TAG
+ENV TAG=$TAG
 
 ARG COMMIT
-ENV COMMIT $COMMIT
+ENV COMMIT=$COMMIT
 
 CMD [ "node", "server" ]
