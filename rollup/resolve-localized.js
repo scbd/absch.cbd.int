@@ -2,75 +2,67 @@
 import path from 'path'
 import upath from 'upath'
 import fs from 'fs'
-import _ from 'lodash'
-import globToRegExp from 'glob-to-regexp';
+import globToRegExp from 'glob-to-regexp'
 
-
-
-
-export default function resolveLocalized(options = { }) {
-
+export default function resolveLocalized (options = { }) {
   const {
     include,
     baseDir,
-    localizedDir,
-  } = options;
+    localizedDir
+  } = options
 
-  const cwd = process.cwd();
-  const baseDirPath      = path.join(cwd, baseDir);
-  const localizedDirPath = path.join(cwd, localizedDir);
-  const basePatternRe    = globToRegExp(upath.join(baseDir, include || '**'));
+  const cwd = process.cwd()
+  const baseDirPath = path.join(cwd, baseDir)
+  const localizedDirPath = path.join(cwd, localizedDir)
+  const basePatternRe = globToRegExp(upath.join(baseDir, include || '**'))
 
   return {
     name: 'resolveLocalized',
 
-    async resolveId(importeeId, importer) {
+    async resolveId (importeeId, importer) {
+      const resolved = await this.resolve(importeeId, importer, { skipSelf: true })
 
-      const resolved = await this.resolve(importeeId, importer, { skipSelf: true });
+      if (!resolved) {
+        console.debug(`Could not import file: ${importer} -> ${importeeId}`)
+      }
 
-      if(!resolved)
-        console.debug(importeeId, importer);
-      
-      const { external, id: absolutePath }  = resolved || {};
+      const { external, id: absolutePath } = resolved || {}
 
-      if(external) return resolved;
+      if (external) return resolved
 
-      const relativeUnixPath = upath.relative(cwd, resolved?.id || "");
-      
+      const relativeUnixPath = upath.relative(cwd, resolved?.id || '')
+
       if (basePatternRe.test(relativeUnixPath)) {
+        const originalFilePath = absolutePath
+        const relativeFilePath = path.relative(baseDirPath, absolutePath)
+        const localizedFilePath = path.join(localizedDirPath, relativeFilePath)
 
-        const originalFilePath  = absolutePath;
-        const relativeFilePath  = path.relative(baseDirPath, absolutePath);
-        const localizedFilePath = path.join(localizedDirPath, relativeFilePath);
-
-        let shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath);
+        const shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath)
 
         if (shouldUse) {
-          return this.resolve(localizedFilePath, importer, { skipSelf: true });
+          return this.resolve(localizedFilePath, importer, { skipSelf: true })
         }
       }
 
-      return null;
-    },
-  };
-
+      return null
+    }
+  }
 }
 
-export function isUseLocalizedVersion(oFilePath, lFilePath) {
+export function isUseLocalizedVersion (oFilePath, lFilePath) {
+  if (!fs.existsSync(lFilePath)) return false
+  if (!fs.existsSync(oFilePath)) return false
 
+  const lStats = fs.statSync(lFilePath)
+  const oStats = fs.statSync(oFilePath)
 
-  if (!fs.existsSync(lFilePath)) return false;
-  if (!fs.existsSync(oFilePath)) return false;
-
-  const lStats = fs.statSync(lFilePath);
-  const oStats = fs.statSync(oFilePath);
-
-  if (!lStats.isFile()) return false;
-  if (!oStats.isFile()) return false;
+  if (!lStats.isFile()) return false
+  if (!oStats.isFile()) return false
 
   // For all json file return true to resolve based on text hash
-  if(path.extname(oFilePath) == '.json')
-    return true;
+  if (path.extname(oFilePath) === '.json') {
+    return true
+  }
 
-  return lStats.mtimeMs >= oStats.mtimeMs;
+  return lStats.mtimeMs >= oStats.mtimeMs
 }
