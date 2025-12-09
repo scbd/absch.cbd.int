@@ -16,7 +16,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 defineProps({
   caption: {
     type: String,
