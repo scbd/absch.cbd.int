@@ -5,7 +5,7 @@
     </span>
 </template>
 
-<script setup>
+<script setup lang="ts">
     const { caption } = defineProps({
         caption: {
         type: String,
