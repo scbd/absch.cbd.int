@@ -64,22 +64,25 @@ defineProps({
   }
 
   .accordian-box > div {
-    transition: max-height 0.2s ease-in-out;
+    transition: max-height, z-index;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
     z-index: 1;
-    max-height: 3em;
+    max-height: calc(3em - 4px);
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
-  .accordian-box--open {
+  .accordian-box {
     position: relative;
   }
 
   .accordian-box--open > div {
-    position: absolute;
-    top: 0;
-    left: 0;
     max-height: 100vh;
     border: 2px solid #dee2e6;
     border-bottom: 3px solid #dee2e6;
+    z-index: 2;
   }
   .bg-grey2 {
     background-color: #eaeaea;
