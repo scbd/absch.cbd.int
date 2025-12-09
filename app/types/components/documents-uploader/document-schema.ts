@@ -1,26 +1,39 @@
 import { DocumentTypes } from './document-types-list'
 import { KeywordType, DocumentRequest } from '~/types/common/documents'
-
+import { ErrorLevel } from '~/types/errors'
 
 export type CellValue = string | number | boolean | typeof Date
 
+export type CellEntry = {
+  index: number
+  value: CellValue
+}
+
+export type DocValue = CellEntry | CellValue 
+
 export type DocumentAttributesMap = { [key: string]: AttributeDefinition }
 
-export type DocumentAttributes = { [key: string]: CellValue }
+export type DocumentAttributes = { [key: string]: DocValue }
 
 export type AttributeDefinition = {
   column?: string
   required?: boolean
   schema?: DocumentAttributesMap
+  translationKey?: string
 }
 
 export type DocError = {
   reason: string
   row: number
   value?: string
-  column?: string
+  column?: string | number
   error?: string
+  level?: ErrorLevel
 }
+
+export type DocumentData = [string, DocValue][]
+
+export type Documents = Array<DocumentData> 
 
 export type DocumentsJson = {
   documentsJson: Array<DocumentRequest>
