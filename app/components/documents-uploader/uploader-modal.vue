@@ -22,7 +22,6 @@
       @on-file-change="onFileChange"
     />
 
-    <!-- TODO: Display Document Preview -->
     <DocumentsPreview
       v-if="hasParsedFiles"
       :sheet="sheet.data"
