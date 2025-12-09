@@ -8,8 +8,8 @@
       class="h-50 bg-gray-100"
     >
       <DocumentGrid
-        :errors="errors"
         :title="(sheet[index] || {})['permitEquivalent'] as string"
+        :errors="errors"
         :document-type="documentType"
         :index="index"
         :document-attributes="document"
