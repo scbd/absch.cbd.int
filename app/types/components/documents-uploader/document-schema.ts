@@ -31,10 +31,6 @@ export type DocError = {
   level?: ErrorLevel
 }
 
-export type DocumentData = [string, DocValue][]
-
-export type Documents = Array<DocumentData> 
-
 export type DocumentsJson = {
   documentsJson: Array<DocumentRequest>
   errors: Array<DocError>
