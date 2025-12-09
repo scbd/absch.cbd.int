@@ -57,6 +57,7 @@ export async function readXLSXFile (file: File, documentType: DocumentTypes): Pr
     if (error.reason) { return error }
     error.reason = error.error as string
     error.column = parseInt(error.column as string, 10)
+    error.row = error.row - headerRows.length
     return error
   })
 
