@@ -121,7 +121,7 @@ const modalErrors = computed(() => errors.value
   .filter((error) => !Number.isInteger((error as DocError).row)))
 
 const documentErrors :ComputedRef<DocError[]> = computed(() => (errors.value as DocError[])
-  .filter((error) => Number.isInteger((error as DocError).row)))
+  .filter((error) => Number.isInteger(error.row)))
 
 const hasParsedFiles = computed(() => {
   return sheet.value.data.length > 0
