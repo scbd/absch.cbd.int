@@ -14,14 +14,14 @@ interface ParseWithSchemaOptions<T> {
   transformData?: (rows: Row[]) => Row[]
 }
 
-type ReadFileResult = {
-  data: Array<DocumentAttributes>
-  errors: Array<DocError>
-}
-
 type ReadExcelOptions = {
   schema: Schema<AttributeDefinition>
   transformData: (rows: Row[]) => Row[]
+}
+
+export type ReadFileResult = {
+  data: Array<DocumentAttributes>
+  errors: Array<DocError>
 }
 
 /**
@@ -56,6 +56,7 @@ export async function readXLSXFile (file: File, documentType: DocumentTypes): Pr
   const errors = readErrors.map((error) => {
     if (error.reason) { return error }
     error.reason = error.error as string
+    error.column = parseInt(error.column as string, 10)
     return error
   })
 
