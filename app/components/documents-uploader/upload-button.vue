@@ -25,22 +25,19 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import Loader from '../common/loading.vue'
-defineProps({
-  isLoading: {
-    type: Boolean,
-    default: false
-  }
-})
+defineProps<{
+  isLoading: boolean 
+}>()
 const $emit = defineEmits(['onFileChange'])
 
-const onChange = (changeEvent) => {
+function onChange (changeEvent: Event) {
   $emit('onFileChange', changeEvent)
 }
 
-const onFileInputClick = (event) => {
-  const { target } = event
+function onFileInputClick (event: Event) {
+  const target = event.target as HTMLInputElement
   if (target === null) { return }
 
   target.value = ''

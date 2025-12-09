@@ -221,9 +221,8 @@ import './apiUrl';
                 return anonymous();
 
             }).then(function(user) {
-
+                user.government = true
                 setUser(user);
-
                 return user;
             });
         }

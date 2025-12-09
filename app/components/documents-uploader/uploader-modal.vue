@@ -26,7 +26,7 @@
     <DocumentsPreview
       v-if="hasParsedFiles"
       :sheet="sheet"
-      :errors="errors"
+      :errors="documentErrors"
       :document-type="documentType"
     />
 
@@ -53,11 +53,15 @@
     </template>
   </Modal>
 </template>
-<script setup>
-import { ref, computed, onMounted, shallowRef } from 'vue'
+<script setup lang="ts">
+import { ref, computed, onMounted, shallowRef, Ref, ComputedRef } from 'vue'
+// @ts-ignore
 import { useI18n } from 'vue-i18n'
+// @ts-ignore
 import { useAuth } from '@scbd/angular-vue/src/index.js'
+// @ts-ignore
 import { useRealm } from '../../services/composables/realm.js'
+// @ts-ignore
 import KmDocumentApi from '~/api/km-document'
 import ModalErrors from './modal-errors.vue'
 import BulkUploaderHeader from './uploader-header.vue'
@@ -71,32 +75,30 @@ import absMessages from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
 import recordListMessages from '~/app-text/views/register/record-list.json'; 
 import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
+import { DocumentTypes} from '~/types/components/documents-uploader/document-types-list.js'
+import { DocError } from '~/types/components/documents-uploader/document-schema.js'
+import { StandardError } from '~/types/errors.js'
+import { ReadFileResult } from './utilities/read-xlsx-file.js'
 
 const { realm } = useRealm()
 const { mergeLocaleMessage, t } = useI18n()
 const auth = useAuth()
 
-// Set global translation messages to avoid having to import vue-i18n in each child component.
-// TODO: Determine if this is supported by our current translations system.
-const messages = {
-  en: Object.assign(
-    {},
-    uploaderMessages.en,
-    absMessages.en,
-    contactMessages.en,
-    recordListMessages.en
-  )
-}
+const messages = [
+  uploaderMessages,
+  absMessages,
+  contactMessages,
+  recordListMessages
+] 
 
-Object.entries(messages)
-  .forEach(([key, value]) => mergeLocaleMessage(key, value))
-
-const props = defineProps({
-  documentType: {
-    type: String,
-    default: 'ircc'
-  }
+messages.forEach((messageGroup) => {
+  Object.entries(messageGroup)
+    .forEach(([key, value]) => mergeLocaleMessage(key, value))
 })
+
+const props = defineProps<{
+  documentType: DocumentTypes
+}>()
 
 const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
 const importDocuments = new ImportDocuments(t, props.documentType)
@@ -106,18 +108,21 @@ const $emit = defineEmits(['onClose', 'refreshRecord'])
 // Refs
 const defaultDocumentJson = [{ header: { identifier: '' } }]
 const documents = ref(defaultDocumentJson)
-const sheet = ref({ data: [], errors: [] })
+const sheet :Ref<ReadFileResult> = ref({ data: [], errors: [] })
 const isLoading = ref(false)
-const errors = ref([])
+const errors :Ref<Array<StandardError | DocError>> = ref([])
 const modalSize = ref('xl')
-const modalRef = shallowRef(null)
+const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
 
 // Computed Properties
 const hasErrors = computed(() => errors.value
   .some((error) => error.level === 'error'))
 
 const modalErrors = computed(() => errors.value
-  .filter((error) => !Number.isInteger(error.row)))
+  .filter((error) => !Number.isInteger((error as DocError).row)))
+
+const documentErrors :ComputedRef<DocError[]> = computed(() => (errors.value as DocError[])
+  .filter((error) => Number.isInteger((error as DocError).row)))
 
 const hasParsedFiles = computed(() => {
   return sheet.value.data.length > 0
@@ -164,7 +169,7 @@ function onClose () {
   $emit('onClose')
 }
 
-async function onFileChange (changeEvent) {
+async function onFileChange (changeEvent: Event) {
   handleClearFile()
 
   isLoading.value = true
