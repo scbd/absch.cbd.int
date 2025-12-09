@@ -58,12 +58,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { shallowRef, onMounted } from 'vue'
+// @ts-ignore
 import { Modal } from 'bootstrap'
-const modalRef = shallowRef(null)
 
-let modal = { show: () => {}, hide: () => {} } 
+let modal = { show: (value: string) => value, hide: () => {} } 
+const modalRef = shallowRef(modal)
 
 defineProps({
   title: {
