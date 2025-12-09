@@ -56,8 +56,7 @@
                           <div ng-if="isBulkUploaderOpen">
                             <import-file
                               ng-vue="exportVueComponent"
-                              :document-type="'ircc'"
-                              :header="bulkUploaderHeader"
+                              document-type="ircc"
                               @refresh-record="handleNewDocumentCreation();"
                               @on-close="onBulkUploaderClose();"
                             >
