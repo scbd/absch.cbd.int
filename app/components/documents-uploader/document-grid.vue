@@ -107,7 +107,7 @@ const documentErrors :ComputedRef<DocError[]> = computed(() => {
     }, [])
 })
 
-
+// Functions
 function getIsNestedDocumentOpen (index: number) {
   return openedNestedDocuments.value.indexOf(index) > -1
 }
