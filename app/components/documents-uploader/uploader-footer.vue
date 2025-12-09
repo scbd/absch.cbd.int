@@ -17,13 +17,10 @@
     </button>
   </div>
 </template>
-<script setup>
-defineProps({
-  hasErrors: {
-    type: Boolean,
-    default: false
-  }
-})
+<script setup lang="ts">
+defineProps<{
+  hasErrors: boolean 
+}>()
 
 const $emit = defineEmits(['handleConfirm', 'handleClear'])
 </script>
