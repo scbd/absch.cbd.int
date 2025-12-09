@@ -26,7 +26,7 @@
           data-toggle="tooltip"
           data-placement="top"
           :title="parseValue(value, key) as string"
-          :class="{ 'alert-danger': hasColumnErrors(key, index) }"
+          :class="{ 'alert-danger': hasColumnErrors(key, documentErrors) }"
         >
           <div
             class="fw-bold text-dark small bg-grey2 px-2 border-bottom overflow-hidden"
@@ -44,14 +44,14 @@
     </div>
     <div class="mt-3">
       <ModalErrors
-        v-if="errors.length > 0"
-        :errors="getDocumentErrors(index)"
+        v-if="documentErrors.length > 0"
+        :errors="documentErrors"
       />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
+import { ref, Ref, computed, ComputedRef, watch } from 'vue'
 // @ts-ignore
 import { useI18n } from 'vue-i18n'
 import SuportingDocument from './supporting-document.vue'
@@ -65,6 +65,7 @@ type DocumentData = [string, DocValue][]
 
 const { t } = useI18n()
 
+// Props
 const props = defineProps<{
   title: string
   documentType: DocumentTypes
@@ -77,8 +78,35 @@ const openedNestedDocuments :Ref<number[]> = ref([])
 
 const attributesMap  = documentsList[props.documentType]?.attributesMap
 
-const documentData :Ref<DocumentData> = ref(Object.entries(props.documentAttributes)
-    .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, props.index)))
+// Computed Properties
+const documentData :ComputedRef<DocumentData> = computed(() => Object
+  .entries(props.documentAttributes)
+  .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, props.errors)))
+
+// Reactive Errors
+const documentErrors :ComputedRef<DocError[]> = computed(() => {
+  const getReason = (error: DocError, key: string) => {
+    const translationKey = attributesMap[key]?.translationKey
+    return `${t(error.reason)} → ${t(translationKey)}.`
+  }
+
+  return Object.keys(props.documentAttributes)
+    .reduce((errors: DocError[], key: string) => {
+      const columnErrors = getColumnErrors(key, props.errors)
+        .map((error) => {
+          return Object.assign(
+            { level: 'warning' },
+            error,
+            { reason: getReason(error, key) }
+          ) as DocError
+        })
+
+      if (columnErrors.length < 1) { return errors }
+
+      return [...columnErrors, ...errors]
+    }, [])
+})
+
 
 function getIsNestedDocumentOpen (index: number) {
   return openedNestedDocuments.value.indexOf(index) > -1
@@ -102,43 +130,20 @@ function getIsNestedDocument (value: DocValue) {
   return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
 }
 
-function getDocumentErrors (rowIndex: number) {
-  const getReason = (error: DocError, key: string) => {
-    const translationKey = attributesMap[key]?.translationKey
-    return `${t(error.reason)} → ${t(translationKey)}.`
-  }
-
-  return Object.keys(props.documentAttributes)
-    .reduce((errors: DocError[], key: string) => {
-      const columnErrors = getColumnErrors(key, rowIndex)
-        .map((error) => {
-          return Object.assign(
-            { level: 'warning' },
-            error,
-            { reason: getReason(error, key) }
-          ) as DocError
-        })
-
-      if (columnErrors.length < 1) { return errors }
-
-      return columnErrors
-    }, [])
-}
-
-function getColumnErrors (key: string, rowIndex: number) {
-  return props.errors
+function getColumnErrors (key: string, errors: DocError[]) {
+  return (errors || [])
     .filter((error) => {
       const columnComparitor = Number.isInteger(error.column)
         ? parseInt(attributesMap[key]?.column as string, 10)
         : key
       const columnMatch = error.column === columnComparitor
 
-      return error.row === (rowIndex + 1) && columnMatch
+      return error.row === props.index && columnMatch
     })
 }
 
-function hasColumnErrors (key: string, rowIndex: number) {
-  return getColumnErrors(key, rowIndex).length > 0
+function hasColumnErrors (key: string, errors: DocError[]) {
+  return getColumnErrors(key, errors).length > 0
 }
 
 function parseValue (val: DocValue, key: string) {
