@@ -7,7 +7,7 @@
       :key="index"
       class="h-50 bg-gray-100"
     >
-      <h6 class="p-1 m-0 bg-gray-600 color-white border-bottom border-2">
+      <h6 class="p-1 ps-2 m-0 bg-gray-700 color-white border-bottom border-2">
         {{ (sheet.data[index] || {})['permitEquivalent'] }}
       </h6>
       <div
