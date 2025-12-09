@@ -3,186 +3,30 @@
     class="preview-list pt-3 px-lg-5 px-md-2 overflow-auto"
   >
     <div
-      v-for="(document, index) in documents"
+      v-for="(document, index) in sheet"
       :key="index"
       class="h-50 bg-gray-100"
     >
-      <h6 class="p-1 ps-2 m-0 bg-gray-700 color-white border-bottom border-2">
-        {{ (sheet[index] || {})['permitEquivalent'] }}
-      </h6>
-      <div
-        class="d-flex p-2 gap-1 justify-content-center border border-bottom border-left border-right flex-wrap mw-100 "
-      >
-        <div
-          v-for="([key, value], attributeIndex) in document"
-          :key="key"
-          class="preview-box border border-2 bg-white text-center flex-fill"
-        >
-          <SuportingDocument
-            v-if="getIsNestedDocument(value)"
-            :document="parseValue(value, key) as DocumentData"
-            :title="parseHeader(key)"
-            :is-open="getIsDocumentOpen(attributeIndex, index)"
-            role="button"
-            @click="() => toggleAccordian(attributeIndex, index)"
-          />
-          <div
-            v-else
-            class="h-100 overflow-hidden"
-            data-toggle="tooltip"
-            data-placement="top"
-            :title="parseValue(value, key) as string"
-            :class="{ 'alert-danger': hasColumnErrors(key, index) }"
-          >
-            <div
-              class="fw-bold text-dark small bg-grey2 px-2 border-bottom overflow-hidden"
-            >
-              {{ parseHeader(key) }}
-            </div>
-
-            <div
-              class="px-2 text-truncate"
-            >
-              {{ parseValue(value, key) }}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-3">
-        <ModalErrors
-          v-if="getDocumentErrors(index).length > 0"
-          :errors="getDocumentErrors(index)"
-        />
-      </div>
+      <DocumentGrid
+        :errors="errors"
+        :title="(sheet[index] || {})['permitEquivalent'] as string"
+        :document-type="documentType"
+        :index="index"
+        :document-attributes="document"
+      />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, Ref, ComputedRef } from 'vue'
-// @ts-ignore
-import { useI18n } from 'vue-i18n'
-import ModalErrors from './modal-errors.vue'
-import SuportingDocument from './supporting-document.vue'
-import Schema from './utilities/document-attributes-to-schema-json/schemas/schema'
-import { documentsList } from './data/document-types-list'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
-import {
-  DocValue, DocumentAttributes,
-  DocError, Documents, DocumentData
-} from '~/types/components/documents-uploader/document-schema'
+import DocumentGrid from './document-grid.vue'
+import { DocumentAttributes, DocError } from '~/types/components/documents-uploader/document-schema'
 
-type OpenedIndicator = { [key: number]: Array<number> }
-type ParsedValue = string | Array<[string, DocValue]>
-
-const props = defineProps<{
-  sheet: Array<DocumentAttributes>
+defineProps<{
+  sheet: DocumentAttributes[]
   documentType: DocumentTypes
-  errors: Array<DocError>
+  errors: DocError[]
 }>()
-
-const { t } = useI18n()
-
-const openedSupportingDocuments :Ref<OpenedIndicator> = ref({})
-const { attributesMap } = (documentsList[props.documentType] || { attributesMap: {} })
-
-// Filter any empty cells unless the cell has errors
-const documents :ComputedRef<Documents> = computed(() => props.sheet
-  .map((row: DocumentAttributes, rowIndex: number) =>
-    Object.entries(row)
-      .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, rowIndex))
-  )
-)
-
-function getIsNestedDocument (value: DocValue) {
-  return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
-}
-
-function doesValueExist (val: DocValue) {
-  return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
-}
-
-function getDocumentErrors (rowIndex: number) {
-  const getReaseon = (error: DocError, key: string) => {
-    const translationKey = attributesMap[key]?.translationKey
-    return `${t(error.reason)} → ${t(translationKey)}.`
-  }
-
-  const row = props.sheet[rowIndex] || []
-
-  return Object.keys(row)
-    .reduce((errors: DocError[], key: string) => {
-      const columnErrors = getColumnErrors(key, rowIndex)
-        .map((error) => {
-          return Object.assign(
-            { level: 'warning' },
-            error,
-            { reason: getReaseon(error, key) }
-          ) as DocError
-        })
-
-      if (columnErrors.length < 1) { return errors }
-
-      return columnErrors
-    }, [])
-}
-
-function getColumnErrors (key: string, rowIndex: number) {
-  return props.errors
-    .filter((error) => {
-      const columnComparitor = Number.isInteger(error.column)
-        ? parseInt(attributesMap[key]?.column as string, 10)
-        : key
-      const columnMatch = error.column === columnComparitor
-
-      return error.row === (rowIndex + 1) && columnMatch
-    })
-}
-
-function hasColumnErrors (key: string, rowIndex: number) {
-  return getColumnErrors(key, rowIndex).length > 0
-}
-
-function parseValue (val: DocValue, key: string) :ParsedValue {
-  const getIsDate = (val: DocValue) => val instanceof Date
-  if (getIsDate(val)) {
-    return Schema.parseDate(val)
-  }
-
-  if (getIsNestedDocument(val)) {
-    return Object.entries(val)
-      .map(([subkey, subvalue]) => {
-        const header = parseHeader(subkey, (attributesMap[key] || {}).schema)
-        const value = parseValue(subvalue, key) as DocValue
-        return [header, value]
-      })
-  }
-
-  return val as string
-}
-
-function parseHeader (key: string, attributesList = attributesMap) :string {
-  if (typeof key !== 'string') { return '' }
-  if (typeof attributesList !== 'object' || !attributesList) { return '' }
-
-  const translationKey = attributesList[key]?.translationKey || 'contactInformation'
-
-  return t(translationKey)
-}
-
-function toggleAccordian (index: number, rowIndex: number) {
-  const arr = openedSupportingDocuments.value[rowIndex] || []
-  openedSupportingDocuments.value = {}
-  const i = arr.indexOf(index)
-  if (i < 0) {
-    openedSupportingDocuments.value[rowIndex] = [index]
-  }
-}
-
-function getIsDocumentOpen (index: number, rowIndex: number) {
-  return (openedSupportingDocuments.value[rowIndex] || []).indexOf(index) > -1
-}
-
 </script>
 <style scoped>
   .preview-list  {
@@ -197,36 +41,5 @@ function getIsDocumentOpen (index: number, rowIndex: number) {
 
   .preview-list > div:not(:first-child) {
     margin-top: 1.5rem;
-  }
-
-  .preview-box {
-    max-height: 5em;
-    width: 12.5%;
-  }
-
-  @media screen and (max-width: 1200px) {
-    .preview-box {
-      width: 16.67%;
-    }
-  }
-
-  @media screen and (max-width: 992px) {
-    .preview-box {
-      width: 25%;
-    }
-  }
-
-  @media screen and (max-width: 850px) {
-    .preview-box {
-      width: 40%;
-    }
-  }
-
-  .preview-box > div > div:first-child {
-    max-height: 3em;
-  }
-
-  .bg-grey2 {
-    background-color: #eaeaea;
   }
 </style>
