@@ -25,7 +25,7 @@
     <!-- TODO: Display Document Preview -->
     <DocumentsPreview
       v-if="hasParsedFiles"
-      :sheet="sheet"
+      :sheet="sheet.data"
       :errors="documentErrors"
       :document-type="documentType"
     />

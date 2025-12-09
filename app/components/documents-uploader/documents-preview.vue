@@ -8,7 +8,7 @@
       class="h-50 bg-gray-100"
     >
       <h6 class="p-1 ps-2 m-0 bg-gray-700 color-white border-bottom border-2">
-        {{ (sheet.data[index] || {})['permitEquivalent'] }}
+        {{ (sheet[index] || {})['permitEquivalent'] }}
       </h6>
       <div
         class="d-flex p-2 gap-1 justify-content-center border border-bottom border-left border-right flex-wrap mw-100 "
@@ -76,7 +76,7 @@ type OpenedIndicator = { [key: number]: Array<number> }
 type ParsedValue = string | Array<[string, DocValue]>
 
 const props = defineProps<{
-  sheet: { data: Array<DocumentAttributes>, errors: Array<DocError> }
+  sheet: Array<DocumentAttributes>
   documentType: DocumentTypes
   errors: Array<DocError>
 }>()
@@ -87,7 +87,7 @@ const openedSupportingDocuments :Ref<OpenedIndicator> = ref({})
 const { attributesMap } = (documentsList[props.documentType] || { attributesMap: {} })
 
 // Filter any empty cells unless the cell has errors
-const documents :ComputedRef<Documents> = computed(() => props.sheet.data
+const documents :ComputedRef<Documents> = computed(() => props.sheet
   .map((row: DocumentAttributes, rowIndex: number) =>
     Object.entries(row)
       .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, rowIndex))
@@ -108,7 +108,7 @@ function getDocumentErrors (rowIndex: number) {
     return `${t(error.reason)} → ${t(translationKey)}.`
   }
 
-  const row = props.sheet.data[rowIndex] || []
+  const row = props.sheet[rowIndex] || []
 
   return Object.keys(row)
     .reduce((errors: DocError[], key: string) => {
