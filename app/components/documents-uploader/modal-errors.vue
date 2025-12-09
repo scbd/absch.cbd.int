@@ -16,23 +16,27 @@
     </div>
   </div>
 </template>
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { StandardError } from '~/types/errors';
 
-// TODO: Display meaningful errors to the user
-defineProps({
-  errors: {
-    type: Array,
-    default: () => []
-  }
-})
-const errorTypes = ref({
+type ErrorData = { text: string, class: string }
+type ErrorTypes = {
+  error: ErrorData,
+  warning: ErrorData,
+  info: ErrorData,
+}
+
+defineProps<{
+  errors: Array<StandardError> 
+}>()
+
+const errorTypes: ErrorTypes = {
   error: { text: 'Error', class: 'alert-danger' },
   warning: { text: 'Warning', class: 'alert-warning' },
   info: { text: 'Info', class: 'alert-info' }
-})
+}
 
-function errType (error) {
-  return errorTypes.value[error.level] || errorTypes.value.error
+function errType (error: StandardError) {
+  return errorTypes[error.level || 'error']
 }
 </script>

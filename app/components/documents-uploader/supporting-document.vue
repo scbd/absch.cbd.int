@@ -36,56 +36,49 @@
     </div>
   </div>
 </template>
-<script setup>
-defineProps({
-  document: {
-    type: Object,
-    default: () => {}
-  },
-  title: {
-    type: String,
-    default: ''
-  },
-  isOpen: {
-    type: Boolean,
-    default: false
-  }
-})
+<script setup lang="ts">
+import { DocumentData } from '~/types/components/documents-uploader/document-schema';
+
+defineProps<{
+  document: DocumentData 
+  title: string 
+  isOpen: Boolean 
+}>()
 
 </script>
 <style scoped>
-  .document-accordian-icon {
-    transition: transform 0.2s ease-in-out;
-    transform: rotate(-90deg);
-  }
+.document-accordian-icon {
+  transition: transform 0.2s ease-in-out;
+  transform: rotate(-90deg);
+}
 
-  .document-accordian-icon.document-accordian-icon--open {
-    transform: rotate(0);
-  }
+.document-accordian-icon.document-accordian-icon--open {
+  transform: rotate(0);
+}
 
-  .accordian-box > div {
-    transition: max-height, z-index;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
-    z-index: 1;
-    max-height: calc(3em - 4px);
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+.accordian-box > div {
+  transition: max-height, z-index;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  z-index: 1;
+  max-height: calc(3em - 4px);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
-  .accordian-box {
-    position: relative;
-  }
+.accordian-box {
+  position: relative;
+}
+ 
 
-  .accordian-box--open > div {
-    max-height: 100vh;
-    border: 2px solid #dee2e6;
-    border-bottom: 3px solid #dee2e6;
-    z-index: 2;
-  }
-  .bg-grey2 {
-    background-color: #eaeaea;
-  }
-
+.accordian-box--open > div {
+  max-height: 100vh;
+  border: 2px solid #dee2e6;
+  border-bottom: 3px solid #dee2e6;
+  z-index: 2;
+}
+.bg-grey2 {
+  background-color: #eaeaea;
+}
  </style>
