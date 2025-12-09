@@ -3,15 +3,16 @@ import { mapDocumentAttributesToSchemaJson } from './document-attributes-to-sche
 import { readXLSXFile } from './read-xlsx-file'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
-import { DocumentAttributes, DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
+import { DocError, DocumentAttributes, DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
 import { KeywordType } from '~/types/common/documents'
 import { Translations } from '~/types/languages'
+import { ReadFileResult } from './read-xlsx-file'
 // @ts-ignore
 import ThesaurusApi from '../../../api/thesaurus.js'
 
 export class ImportDocuments {
   t: Translations = (arg) => arg
-  errors: Array<StandardError> = []
+  errors: Array<StandardError | DocError> = []
   keywordsMap: Array<KeywordType> = []
   thesaurusApi: ThesaurusApi = {}
   documentType: DocumentTypes
@@ -24,7 +25,7 @@ export class ImportDocuments {
     this.thesaurusApi = new ThesaurusApi()
   }
 
-  async readXLSXFile (changeEvent: Event) {
+  async readXLSXFile (changeEvent: Event) :Promise<ReadFileResult> {
     const target = changeEvent.target as HTMLInputElement
     const files = target.files || []
 
