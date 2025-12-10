@@ -38,6 +38,14 @@
       :errors="modalErrors"
     />
 
+    <WarningOverlay
+      v-if="isWarningIndicatorOpen"
+      :sheet="sheet.data"
+      :document-errors="documentErrors"
+      @handle-confirm="handleConfirm"
+      @close="() => isWarningIndicatorOpen = false"
+    />
+
     <template #footer>
       <BulkUploaderFooter
         v-if="hasParsedFiles"
@@ -53,7 +61,7 @@
   </Modal>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted, shallowRef, Ref, ComputedRef } from 'vue'
+import { ref, computed, onMounted, shallowRef, Ref } from 'vue'
 // @ts-ignore
 import { useI18n } from 'vue-i18n'
 // @ts-ignore
@@ -78,6 +86,7 @@ import { DocumentTypes} from '~/types/components/documents-uploader/document-typ
 import { DocError } from '~/types/components/documents-uploader/document-schema.js'
 import { StandardError } from '~/types/errors.js'
 import { ReadFileResult } from './utilities/read-xlsx-file.js'
+import WarningOverlay from './warning-overlay.vue'
 
 const { realm } = useRealm()
 const { mergeLocaleMessage, t } = useI18n()
@@ -112,6 +121,7 @@ const isLoading = ref(false)
 const errors :Ref<Array<StandardError | DocError>> = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
+const isWarningIndicatorOpen = ref(false) 
 
 // Computed Properties
 const hasErrors = computed(() => errors.value
@@ -120,8 +130,7 @@ const hasErrors = computed(() => errors.value
 const modalErrors = computed(() => errors.value
   .filter((error) => !Number.isInteger((error as DocError).row)))
 
-const documentErrors :ComputedRef<DocError[]> = computed(() => (errors.value as DocError[])
-  .filter((error) => Number.isInteger(error.row)))
+const documentErrors :Ref<Array<DocError[]>> = ref([]) 
 
 const hasParsedFiles = computed(() => {
   return sheet.value.data.length > 0
@@ -148,11 +157,19 @@ function handleClearFile () {
   documents.value = defaultDocumentJson
   modalSize.value = 'xl'
   sheet.value = { data: [], errors: [] }
+  isWarningIndicatorOpen.value = false
 }
 
 async function handleConfirm () {
-  isLoading.value = true
+  if (documentErrors.value.length > 0 && !isWarningIndicatorOpen.value) {
+    isWarningIndicatorOpen.value = true
+    return
+  }
+  createDocumnets()
+}
 
+async function createDocumnets() {
+  isLoading.value = true
   const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocumentDraft(doc))
 
   return Promise.all(requestPromises)
@@ -183,6 +200,8 @@ async function onFileChange (changeEvent: Event) {
 
   // Store errors
   errors.value = importDocuments.errors
+  documentErrors.value = importDocuments.parseDocumentErrors()
+  console.log('documentErrors.value', documentErrors.value)
 
   // Store document json
   documents.value = documentsJson

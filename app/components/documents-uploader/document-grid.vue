@@ -26,7 +26,7 @@
           data-toggle="tooltip"
           data-placement="top"
           :title="parseValue(value, key) as string"
-          :class="{ 'alert-danger': hasColumnErrors(key, documentErrors) }"
+          :class="{ 'alert-danger': hasColumnErrors(key, errors) }"
         >
           <div
             class="fw-bold text-dark small bg-grey2 px-2 border-bottom overflow-hidden"
@@ -44,14 +44,14 @@
     </div>
     <div class="mt-3">
       <ModalErrors
-        v-if="documentErrors.length > 0"
-        :errors="documentErrors"
+        v-if="errors.length > 0"
+        :errors="errors"
       />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, Ref, computed, ComputedRef, watch } from 'vue'
+import { ref, Ref, computed, ComputedRef } from 'vue'
 // @ts-ignore
 import { useI18n } from 'vue-i18n'
 import SuportingDocument from './supporting-document.vue'
@@ -78,72 +78,36 @@ const openedNestedDocuments :Ref<number[]> = ref([])
 
 const attributesMap  = documentsList[props.documentType]?.attributesMap
 
-// Computed Properties
+// Filter empty document attributes
 const documentData :ComputedRef<DocumentData> = computed(() => Object
   .entries(props.documentAttributes)
   .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, props.errors)))
-
-// Reactive Errors
-const documentErrors :ComputedRef<DocError[]> = computed(() => {
-  const getReason = (error: DocError, key: string) => {
-    const translationKey = attributesMap[key]?.translationKey
-    return `${t(error.reason)} → ${t(translationKey)}.`
-  }
-
-  return Object.keys(props.documentAttributes)
-    .reduce((errors: DocError[], key: string) => {
-      const columnErrors = getColumnErrors(key, props.errors)
-        .map((error) => {
-          return Object.assign(
-            { level: 'warning' },
-            error,
-            { reason: getReason(error, key) }
-          ) as DocError
-        })
-
-      if (columnErrors.length < 1) { return errors }
-
-      return [...columnErrors, ...errors]
-    }, [])
-})
 
 // Functions
 function getIsNestedDocumentOpen (index: number) {
   return openedNestedDocuments.value.indexOf(index) > -1
 }
-  
+
 function doesValueExist (val: DocValue) {
   return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
 }
 
+function hasColumnErrors (key: string, errors: DocError[]) {
+  return errors.some(error => error?.column === key)
+}
+
 function toggleAccordian (index: number) {
-  const isClosed :boolean = openedNestedDocuments.value.indexOf(index) < 0 
+  const isClosed :boolean = openedNestedDocuments.value.indexOf(index) < 0
   if (isClosed) {
-    openedNestedDocuments.value.push(index) 
+    openedNestedDocuments.value.push(index)
     return index
   }
   openedNestedDocuments.value = openedNestedDocuments.value.filter(value => value !== index)
-  return index 
+  return index
 }
 
 function getIsNestedDocument (value: DocValue) {
   return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
-}
-
-function getColumnErrors (key: string, errors: DocError[]) {
-  return (errors || [])
-    .filter((error) => {
-      const columnComparitor = Number.isInteger(error.column)
-        ? parseInt(attributesMap[key]?.column as string, 10)
-        : key
-      const columnMatch = error.column === columnComparitor
-
-      return error.row === props.index && columnMatch
-    })
-}
-
-function hasColumnErrors (key: string, errors: DocError[]) {
-  return getColumnErrors(key, errors).length > 0
 }
 
 function parseValue (val: DocValue, key: string) {
