@@ -19,5 +19,5 @@
     "contactInformation": "Contact Information",
     "required": "Value required.",
     "incorrectFields": "The following imported documents may contain fields with incorrect values.",
-    "confirmWithErrors": "Would you like to create your draft documents regardless?"
+    "confirmWithErrors": "Would you like to create the draft documents regardless?"
 }
