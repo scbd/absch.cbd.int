@@ -12,9 +12,13 @@ Fade out the screen and show a warning message in the foreground.
       <div
         class="d-flex flex-column mb-3 rounded"
       >
-        <h1 class="mt-2"> <i class="bi bi-exclamation-triangle-fill"></i> Warning </h1>
-        <div class="mx-3 mt-4 mb-3 lead"> {{ $t('incorrectFields') }} </div>
-        
+        <h1 class="mt-2">
+          <i class="bi bi-exclamation-triangle-fill" />
+          Warning
+        </h1>
+        <div class="mx-3 mt-4 mb-3 lead">
+          {{ $t('incorrectFields') }}
+        </div>
         <div
           class="d-flex flex-column px-3 flex-grow-1 overflow-auto"
         >
@@ -23,14 +27,18 @@ Fade out the screen and show a warning message in the foreground.
             :key="index"
             class="w-100"
           >
-            <h2 class="m-1 mb-2"> {{ (sheet[index] || {})['permitEquivalent'] }} </h2>
+            <h2 class="m-1 mb-2">
+              {{ (sheet[index] || {})['permitEquivalent'] }}
+            </h2>
             <ModalErrors
               :errors="errors"
             />
           </div>
         </div>
 
-        <div class="mx-3 my-4 lead"> {{ $t('confirmWithErrors') }} </div>
+        <div class="mx-3 my-4 lead">
+          {{ $t('confirmWithErrors') }}
+        </div>
         <button
           class="mx-auto w-20 btn btn-primary"
           type="button"
@@ -51,7 +59,7 @@ import ModalErrors from './modal-errors.vue'
 type DocumentErrors = [number, DocError[]]
 
 const props = defineProps<{
-  sheet: DocumentAttributes[] 
+  sheet: DocumentAttributes[]
   documentErrors: DocError[][]
 }>()
 
