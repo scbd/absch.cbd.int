@@ -1,28 +1,21 @@
+<!--
+Loading Overlay
+
+Fade out screen and show loader in the foreground .
+-->
 <template>
-  <div
-    data-backdrop="static"
-    tabindex="-1"
-    class="inverted dimmer modal fade show"
-    aria-modal="true"
-    role="dialog"
-    style="display: block"
-  >
-    <div
-      class="loader-max-height position-absolute h-100 w-100 top-0 start-0 d-flex align-items-center justify-content-center"
-    >
-      <div class="text-white lead fw-bold">
-        <i class="fa fa-cog fa-spin me-2" />{{ caption || "" }}
-      </div>
+  <Overlay>
+    <div class="text-white lead fw-bold">
+      <i class="fa fa-cog fa-spin me-2" />{{ caption }}
     </div>
-  </div>
+  </Overlay>
 </template>
 <script setup lang="ts">
-defineProps({
-  caption: {
-    type: String,
-    default: null
-  }
-})
+import Overlay from './overlay.vue';
+
+defineProps<{
+  caption: string 
+}>()
 </script>
 <style scoped>
 .loader-max-height {
