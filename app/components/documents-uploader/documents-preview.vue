@@ -9,7 +9,7 @@
     >
       <DocumentGrid
         :title="(sheet[index] || {})['permitEquivalent'] as string"
-        :errors="errors"
+        :errors="errors[index] || []"
         :document-type="documentType"
         :index="index"
         :document-attributes="document"
@@ -25,7 +25,7 @@ import { DocumentAttributes, DocError } from '~/types/components/documents-uploa
 defineProps<{
   sheet: DocumentAttributes[]
   documentType: DocumentTypes
-  errors: DocError[]
+  errors: DocError[][]
 }>()
 </script>
 <style scoped>

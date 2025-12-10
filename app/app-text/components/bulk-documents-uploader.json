@@ -17,5 +17,7 @@
     "cannotFindRelevantDocumentError": "Could not find linked document. No valid document found with given document ID.",
     "documentEmptyError": "Document Empty. Not populated rows found in document.",
     "contactInformation": "Contact Information",
-    "required": "Value required."
+    "required": "Value required.",
+    "incorrectFields": "The following imported documents may contain fields with incorrect values.",
+    "confirmWithErrors": "Would you like to create your draft documents regardless?"
 }
