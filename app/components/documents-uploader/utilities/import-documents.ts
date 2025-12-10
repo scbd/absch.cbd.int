@@ -110,10 +110,6 @@ export class ImportDocuments {
     })
   }
 
-  hasColumnErrors (key: string, errors: DocError[], index: number) {
-    return this.getColumnErrors(key, errors, index).length > 0
-  }
-
   async getKeywordsMap () {
     const { keywordDomains } = documentsList[this.documentType]
 
