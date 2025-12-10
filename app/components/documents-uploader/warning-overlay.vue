@@ -10,7 +10,7 @@ Fade out the screen and show a warning message in the foreground.
   >
     <div class="d-flex justify-content-center p-5 w-50 h-75 bg-white">
       <div
-        class="d-flex flex-column mb-3"
+        class="d-flex flex-column mb-3 rounded"
       >
         <h1 class="mt-2"> <i class="bi bi-exclamation-triangle-fill"></i> Warning </h1>
         <div class="mx-3 mt-4 mb-3 lead"> {{ $t('incorrectFields') }} </div>
