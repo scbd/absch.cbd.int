@@ -42,7 +42,7 @@
       v-if="isWarningIndicatorOpen"
       :sheet="sheet.data"
       :document-errors="documentErrors"
-      @handle-confirm="handleConfirm"
+      @handle-confirm="createDocuments"
       @close="() => isWarningIndicatorOpen = false"
     />
 
@@ -161,7 +161,9 @@ function handleClearFile () {
 }
 
 async function handleConfirm () {
-  if (documentErrors.value.length > 0 && !isWarningIndicatorOpen.value) {
+  const hasErrors = documentErrors.value.some((errors: DocError[]) => errors.length > 0)
+
+  if (hasErrors && !isWarningIndicatorOpen.value) {
     isWarningIndicatorOpen.value = true
     return
   }
@@ -201,7 +203,6 @@ async function onFileChange (changeEvent: Event) {
   // Store errors
   errors.value = importDocuments.errors
   documentErrors.value = importDocuments.parseDocumentErrors()
-  console.log('documentErrors.value', documentErrors.value)
 
   // Store document json
   documents.value = documentsJson
