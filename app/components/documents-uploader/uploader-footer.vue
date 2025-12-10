@@ -19,7 +19,7 @@
 </template>
 <script setup lang="ts">
 defineProps<{
-  hasErrors: boolean 
+  hasErrors: boolean
 }>()
 
 const $emit = defineEmits(['handleConfirm', 'handleClear'])

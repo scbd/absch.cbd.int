@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import Loader from '../common/loading.vue'
 defineProps<{
-  isLoading: boolean 
+  isLoading: boolean
 }>()
 const $emit = defineEmits(['onFileChange'])
 
