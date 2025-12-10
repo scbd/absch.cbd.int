@@ -17,7 +17,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { StandardError } from '~/types/errors';
+import { StandardError } from '~/types/errors'
 
 type ErrorData = { text: string, class: string }
 type ErrorTypes = {
@@ -27,7 +27,7 @@ type ErrorTypes = {
 }
 
 defineProps<{
-  errors: Array<StandardError> 
+  errors: Array<StandardError>
 }>()
 
 const errorTypes: ErrorTypes = {
