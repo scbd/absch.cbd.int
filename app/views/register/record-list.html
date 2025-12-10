@@ -84,6 +84,7 @@
                             <span class="d-none d-md-block ps-1 float-end">{{::('recordListT.addNew'|$translate)}}</span>
                         </a>
                         <a
+                          ng-if="showImportDocumentsButton"
                           type="button"
                           class="btn btn-primary btn-sm px-1"
                           rel="noopener"
