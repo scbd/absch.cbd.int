@@ -3,7 +3,10 @@ import { mapDocumentAttributesToSchemaJson } from './document-attributes-to-sche
 import { readXLSXFile } from './read-xlsx-file'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
-import { DocError, DocumentAttributes, DocumentsJsonArray } from '~/types/components/documents-uploader/document-schema'
+import {
+  DocError, DocumentAttributes,
+  DocumentAttributesMap, DocumentsJsonArray
+} from '~/types/components/documents-uploader/document-schema'
 import { KeywordType } from '~/types/common/documents'
 import { Translations } from '~/types/languages'
 import { ReadFileResult } from './read-xlsx-file'
@@ -16,6 +19,8 @@ export class ImportDocuments {
   keywordsMap: Array<KeywordType> = []
   thesaurusApi: ThesaurusApi = {}
   documentType: DocumentTypes
+  sheet: ReadFileResult 
+  attributesMap: DocumentAttributesMap 
 
   constructor (t: Translations, documentType: DocumentTypes) {
     this.t = t
@@ -23,6 +28,8 @@ export class ImportDocuments {
     this.documentType = documentType
 
     this.thesaurusApi = new ThesaurusApi()
+    this.attributesMap = documentsList[this.documentType]?.attributesMap
+    this.sheet = { data: [], errors: [] }
   }
 
   async readXLSXFile (changeEvent: Event) :Promise<ReadFileResult> {
@@ -31,10 +38,10 @@ export class ImportDocuments {
 
     const file = files[0]
 
-    const fileRead = await readXLSXFile(file as File, this.documentType)
-    this.errors = fileRead.errors
+    this.sheet = await readXLSXFile(file as File, this.documentType)
+    this.errors = this.sheet.errors
 
-    return fileRead
+    return this.sheet 
   }
 
   async mapDocumentAttributesToSchemaJson (attributesList: Array<DocumentAttributes>) :Promise<DocumentsJsonArray> {
@@ -60,6 +67,51 @@ export class ImportDocuments {
 
   setErrors (value: Array<StandardError>) {
     this.errors = value
+  }
+
+  getColumnErrors (key: string, errors: Array<DocError | StandardError>, index: number) {
+    const errs = errors || [] as Array<DocError> 
+    return errs
+      .filter((err) => {
+        const error = err as DocError
+        const columnComparitor = Number.isInteger(error.column)
+          ? parseInt(this.attributesMap[key]?.column as string, 10)
+          : key
+        const columnMatch = error.column === columnComparitor
+  
+        return error.row === index && columnMatch
+      })
+  }
+  
+  parseDocumentErrors() :DocError[][] {
+    return this.sheet.data.map((documentAttributes: DocumentAttributes, index: number) => {
+      const getReason = (error: DocError, key: string) => {
+        const translationKey = this.attributesMap[key]?.translationKey
+        return `${this.t(error.reason || '')} → ${this.t(translationKey || '')}.`
+      }
+
+      return Object.keys(documentAttributes)
+        .reduce((errors: DocError[], key: string) => {
+          const columnErrors = this.getColumnErrors(key, this.errors, index)
+            .map((err) => {
+              const error = err as DocError
+              error.reason = getReason(error, key)
+              error.column = key 
+              return Object.assign(
+                { level: 'warning' },
+                error,
+              ) as DocError
+            })
+
+          if (columnErrors.length < 1) { return errors }
+
+          return [...columnErrors, ...errors]
+        }, [])
+    })
+  }
+
+  hasColumnErrors (key: string, errors: DocError[], index: number) {
+    return this.getColumnErrors(key, errors, index).length > 0
   }
 
   async getKeywordsMap () {
