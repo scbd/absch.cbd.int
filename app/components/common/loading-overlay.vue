@@ -1,7 +1,7 @@
 <!--
 Loading Overlay
 
-Fade out screen and show loader in the foreground .
+Fade-out screen and show loader in the foreground.
 -->
 <template>
   <Overlay>
@@ -11,10 +11,10 @@ Fade out screen and show loader in the foreground .
   </Overlay>
 </template>
 <script setup lang="ts">
-import Overlay from './overlay.vue';
+import Overlay from './overlay.vue'
 
 defineProps<{
-  caption: string 
+  caption: string
 }>()
 </script>
 <style scoped>
