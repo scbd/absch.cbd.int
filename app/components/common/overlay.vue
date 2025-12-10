@@ -1,7 +1,7 @@
 <!--
 Overlay
 
-Fade out the screen behind a message in the foreground such as a loader.
+Fade-out the screen behind a message in the foreground such as a loader.
 
 Used in ./loading-overlay.vue and ./components/documents-uploader/warning-overlay.vue
 -->
@@ -23,7 +23,7 @@ Used in ./loading-overlay.vue and ./components/documents-uploader/warning-overla
   </div>
 </template>
 <script setup lang="ts">
-import { withDefaults } from 'vue';
+import { withDefaults } from 'vue'
 withDefaults(
   defineProps<{ opacity?: number }>(),
   { opacity: 0.3 }
