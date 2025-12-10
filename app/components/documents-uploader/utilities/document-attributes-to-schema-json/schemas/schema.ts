@@ -1,7 +1,7 @@
-// @ts-ignore
+// @ts-expect-error importing js file
 import KmDocumentApi from '../../../../../api/km-document'
 import { DocumentAttributes } from '~/types/components/documents-uploader/document-schema'
-import { 
+import {
   KeywordType, ELink, UsageKey,
   DocumentRequest, Keywords,
   SubDocument, UsageMapping
@@ -12,7 +12,7 @@ import {
 } from '~/app-data/un-languages'
 import { LanguageCode } from '~/types/languages'
 import { StandardError } from '~/types/errors'
-import { THESAURUS_TERMS } from '~/constants/thesaurus' 
+import { THESAURUS_TERMS } from '~/constants/thesaurus'
 
 const kmDocumentApi = new KmDocumentApi()
 
