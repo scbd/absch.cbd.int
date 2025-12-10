@@ -66,7 +66,7 @@
 </template>
 <script setup lang="ts">
 import { ref, Ref, computed, ComputedRef } from 'vue'
-// @ts-ignore
+// @ts-expect-error import js file
 import { useI18n } from 'vue-i18n'
 import SuportingDocument from './supporting-document.vue'
 import ModalErrors from './modal-errors.vue'
@@ -90,7 +90,7 @@ const props = defineProps<{
 
 const openedNestedDocuments :Ref<number[]> = ref([])
 
-const attributesMap  = documentsList[props.documentType]?.attributesMap
+const attributesMap = documentsList[props.documentType]?.attributesMap
 
 // Filter empty document attributes
 const documentData :ComputedRef<DocumentData> = computed(() => Object

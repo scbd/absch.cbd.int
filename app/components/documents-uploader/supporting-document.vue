@@ -37,12 +37,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { DocumentData } from '~/types/components/documents-uploader/document-schema';
+import { DocValue } from '~/types/components/documents-uploader/document-schema'
 
 defineProps<{
-  document: DocumentData 
-  title: string 
-  isOpen: Boolean 
+  document: [string, DocValue][]
+  title: string
+  isOpen: boolean
 }>()
 
 </script>
@@ -70,7 +70,6 @@ defineProps<{
 .accordian-box {
   position: relative;
 }
- 
 
 .accordian-box--open > div {
   max-height: 100vh;

@@ -62,13 +62,13 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted, shallowRef, Ref } from 'vue'
-// @ts-ignore
+// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-// @ts-ignore
+// @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-// @ts-ignore
+// @ts-expect-error importing js file
 import { useRealm } from '../../services/composables/realm.js'
-// @ts-ignore
+// @ts-expect-error importing js file
 import KmDocumentApi from '~/api/km-document'
 import ModalErrors from './modal-errors.vue'
 import BulkUploaderHeader from './uploader-header.vue'
@@ -79,10 +79,10 @@ import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import uploaderMessages from '~/app-text/components/bulk-documents-uploader.json'
 import absMessages from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
-import recordListMessages from '~/app-text/views/register/record-list.json'; 
+import recordListMessages from '~/app-text/views/register/record-list.json'
 import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
-import { DocumentTypes} from '~/types/components/documents-uploader/document-types-list.js'
+import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
 import { DocError } from '~/types/components/documents-uploader/document-schema.js'
 import { StandardError } from '~/types/errors.js'
 import { ReadFileResult } from './utilities/read-xlsx-file.js'
@@ -97,7 +97,7 @@ const messages = [
   absMessages,
   contactMessages,
   recordListMessages
-] 
+]
 
 messages.forEach((messageGroup) => {
   Object.entries(messageGroup)
@@ -121,7 +121,7 @@ const isLoading = ref(false)
 const errors :Ref<Array<StandardError | DocError>> = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
-const isWarningIndicatorOpen = ref(false) 
+const isWarningIndicatorOpen = ref(false)
 
 // Computed Properties
 const hasErrors = computed(() => errors.value
@@ -130,7 +130,7 @@ const hasErrors = computed(() => errors.value
 const modalErrors = computed(() => errors.value
   .filter((error) => !Number.isInteger((error as DocError).row)))
 
-const documentErrors :Ref<Array<DocError[]>> = ref([]) 
+const documentErrors :Ref<Array<DocError[]>> = ref([])
 
 const hasParsedFiles = computed(() => {
   return sheet.value.data.length > 0
@@ -165,10 +165,10 @@ async function handleConfirm () {
     isWarningIndicatorOpen.value = true
     return
   }
-  createDocumnets()
+  createDocuments()
 }
 
-async function createDocumnets() {
+async function createDocuments () {
   isLoading.value = true
   const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocumentDraft(doc))
 
