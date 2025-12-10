@@ -1,7 +1,21 @@
 <template>
   <div>
-    <h6 class="p-1 ps-2 m-0 bg-gray-700 color-white border-bottom border-2">
+    <h6 class="p-1 d-flex ps-2 m-0 bg-gray-700 color-white border-bottom border-2">
       {{ title }}
+      <div class="ms-2">
+        <i
+          v-if="errors.filter(e => e.level === 'error').length > 0"
+          class="bi bi-exclamation-octagon-fill text-danger"
+        />
+        <i
+          v-else-if="errors.length > 0"
+          class="bi bi-exclamation-triangle-fill text-warning"
+        />
+        <i
+          v-else
+          class="bi bi-check-circle-fill color-check-green"
+        />
+      </div>
     </h6>
 
     <div
@@ -167,5 +181,8 @@ function parseHeader (key: string, attributesList = attributesMap) {
 
   .bg-grey2 {
     background-color: #eaeaea;
+  }
+  .color-check-green {
+    color: #45d045 !important;
   }
 </style>
