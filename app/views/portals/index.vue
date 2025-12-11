@@ -19,10 +19,6 @@
             class="m-0 text-dark  stretched-link text-decoration-none card-title"
             :href="article.url"
           />
-          <span class="badge bg-secondary rounded position-absolute top-0 end-0 m-2">
-            {{ formatDate(article.meta.createdOn) }}
-          </span>
-
           <img
             v-if="article.coverImage"
             :src="article.coverImage.url"
@@ -52,8 +48,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref, Ref } from 'vue';
-// @ts-expect-error importing js file
-import { formatDate } from '~/services/datetime';
 // @ts-expect-error importing js file
 import { lstring } from '~/components/kb/filters';
 // @ts-expect-error importing js file
