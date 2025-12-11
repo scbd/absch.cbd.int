@@ -77,7 +77,7 @@ const { locale } = useI18n()
 type ContentSchema = {
   article: { articleId: string }
 }
-type ArticleSchema = {
+type PortalSchema = {
   [key: string]: string | boolean | number | ContentSchema
 }
 type Image = { position: string, size: string, url: string }
@@ -115,8 +115,8 @@ onMounted(async () => {
   const portals = await portalsApi.queryPortals({ q: { realms: realm } })
 
   const articleOidQueries = portals
-    .filter((article: ArticleSchema) => isObjectId(article['_id']))
-    .map((article: ArticleSchema) => ({ $oid: mapObjectId((article['content'] as ContentSchema).article.articleId) }))
+    .filter((article: PortalSchema) => isObjectId(article['_id']))
+    .map((portalSchema: PortalSchema) => ({ $oid: mapObjectId((portalSchema['content'] as ContentSchema).article.articleId) }))
 
   const query = [{ $match: {_id: { $in: articleOidQueries } } }]
 
