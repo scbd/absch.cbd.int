@@ -4,7 +4,7 @@
     class="px-5 py-4"
   >
     <h4 class="fs-4 mb-4 fw-bold">
-      Forums
+      {{ t('forums') }}
     </h4>
     <div class="row">
       <div
@@ -63,9 +63,10 @@ import { useRealm  } from '~/services/composables/realm.js';
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
+import messages from '~/app-text/templates/bch/footer.json'
 
 const { realm } = useRealm()
-const { locale } = useI18n()
+const { locale, t } = useI18n({ messages })
 
 type LocalizedValue = { en: string }
 type PortalSchema = {
