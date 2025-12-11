@@ -34,10 +34,9 @@
               {{ lstring(article.title, locale) }}
             </h5>
 
-            <!-- TODO: Do not use v-html as it can lead to an XSS attack -->
             <div
               class="card-text article-text w-100 overflow-hidden"
-              v-html="lstring(article.content, locale)"
+              v-html="article.content"
             />
           </div>
         </div>
@@ -62,6 +61,8 @@ import { useAuth } from '@scbd/angular-vue/src/index.js';
 import { useRealm  } from '~/services/composables/realm.js';
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
+// @ts-expect-error importing js file
+import { sanitizeHtml } from '~/services/html.sanitize'
 
 
 const { realm } = useRealm()
@@ -117,6 +118,7 @@ onMounted(async () => {
   const articleData = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
 
   articles.value = articleData.map((article: Article) => {
+    article.content = sanitizeHtml(lstring(article.content, locale))
     if (!article.adminTags) {
       article.url = `${PORTALS_URL}/${FORUM_URLS[article._id]}`
       return article
