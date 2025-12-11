@@ -14,7 +14,6 @@
       >
         <div
           class="card h-100 position-relative visited-background"
-          :href="article.url"
         >
           <a
             class="m-0 text-dark  stretched-link text-decoration-none card-title"
