@@ -6,7 +6,14 @@
     <h4 class="fs-4 mb-4 fw-bold">
       {{ t('forums') }}
     </h4>
-    <div class="row">
+    <Loading
+      v-if="isLoading"
+      :caption="t('loading')"
+    />
+    <div
+      v-else
+      class="row"
+    >
       <div
         v-for="(article, index) in articles"
         :key="index"
@@ -63,10 +70,16 @@ import { useRealm  } from '~/services/composables/realm.js';
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
+// @ts-expect-error importing js file
+import Loading from '~/components/common/loading.vue'
 import messages from '~/app-text/templates/bch/footer.json'
+import forumMessages from '~/app-text/views/portals/forums.json'
 
 const { realm } = useRealm()
-const { locale, t } = useI18n({ messages })
+
+const { locale, t, mergeLocaleMessage } = useI18n({ messages })
+Object.entries(forumMessages)
+  .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
 type LocalizedValue = { en: string }
 type PortalSchema = {
@@ -95,9 +108,13 @@ const articles :Ref<Article[]> = ref([])
 
 const PORTALS_URL = 'portals'
 
+const isLoading = ref(false);
+
 onMounted(async () => {
+  isLoading.value = true
   // http://localhost:2030/api/v2023/portals?q={"realms": "realm"}
   const portals = await portalsApi.queryPortals({ q: { realms: realm } })
+    .catch((err: Error) => console.error(err))
 
   const articleOidQueries = portals
     .filter((portalSchema: PortalSchema) => isObjectId(portalSchema['_id']))
@@ -106,6 +123,8 @@ onMounted(async () => {
   const query = [{ $match: {_id: { $in: articleOidQueries } } }]
 
   const articleData = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
+    .catch((err: Error) => console.error(err))
+  isLoading.value = false
 
   articles.value = articleData.map((article: Article) => {
     article.content = sanitizeHtml(lstring(article.content, locale))
