@@ -24,7 +24,7 @@
         >
           <a
             class="m-0 text-dark  stretched-link text-decoration-none card-title"
-            :href="article.url"
+            :href="article.portalUrl"
           />
           <img
             v-if="article.coverImage"
@@ -98,7 +98,7 @@ type Article = {
   content: LocalizedValue
   meta: { createdOn: string }
   adminTags?: string[]
-  url?: string
+  portalUrl?: string
 }
 
 const auth = useAuth();
@@ -133,7 +133,7 @@ onMounted(async () => {
       .find((portalSchema: PortalSchema) => portalSchema.content.article.articleId === article._id)
       .slug
 
-    article.url = `${PORTALS_URL}/${encodeURIComponent(portalSlug)}`
+    article.portalUrl = `${PORTALS_URL}/${encodeURIComponent(portalSlug)}`
     return article
   })
 })
