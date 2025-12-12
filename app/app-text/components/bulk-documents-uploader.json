@@ -1,0 +1,23 @@
+{
+    "browseFiles": "Browse",
+    "uniqueIdentifier": "Existing unique contact identifier",
+    "clearImportedRecords":" Clear Documents List",
+    "confirmCreateDraftRecords": "Create Draft Records",
+    "creatingDocumentsLoader": "Creating draft documents...",
+    "uploadingLoader": "Processing your files...",
+    "fileParseError": "The uploaded Excel file could not be parsed. Please reformat the excel file and try again",
+    "fileReadError": "Could not read file. Please try formatting your file and uploading the file again.",
+    "noDocumentMapError": "Cannot map attributes. No document attributes map specified.",
+    "noDocumentTypeError": "Cannot map attributes. No document type selected.",
+    "noDocumentParser": "Cannot parse document. No parser specified for given document type.",
+    "attributeMapError": "Problem mapping document attribute. Column not readable.",
+    "attributeRequiredError": "Required document attribute is missing.",
+    "keywordsListError": "Could not fetch keywords list from the server.",
+    "documentParseError": "A problem occured parsing the document from the excel sheet.",
+    "cannotFindRelevantDocumentError": "Could not find linked document. No valid document found with given document ID.",
+    "documentEmptyError": "Document Empty. Not populated rows found in document.",
+    "contactInformation": "Contact Information",
+    "required": "Value required.",
+    "incorrectFields": "The following imported documents may contain fields with incorrect values.",
+    "confirmWithErrors": "Would you like to create the draft documents regardless?"
+}

@@ -10,14 +10,15 @@ import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
-import recordListT from '~/app-text/views/register/record-list.json'; 
+import recordListT from '~/app-text/views/register/record-list.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
+import importFile from "~/components/documents-uploader/uploader-modal.vue";
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
 
         export default ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
-            'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
+            'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter",
     "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr', 'joyrideService', 'translationService',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
                 $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr, joyrideService, translationService) {
@@ -25,6 +26,8 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
+                $scope.isBulkUploaderOpen = false
+                $scope.isImportingDocumentsSupported = $routeParams.document_type === "IRCC" && $rootScope.user?.government
 
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
@@ -50,104 +53,125 @@ const recordListError = mergeTranslationKeys(recordListT);
                     breadcrumbs.options = {
                         'document_type': $filter("schemaName")(type)
                     };
-                    ngMeta.resetMeta();                       
+                    ngMeta.resetMeta();
                     ngMeta.setTitle('List | ', $filter("schemaName")(type));
                 }
                 $scope.tour = function(){
                     $scope.tourOn = true;
                     var joyride = joyrideService;
+                    const steps = [
+                      {
+                          appendToBody: true,
+                          title       : joyRideText.welcomeTitle,
+                          content     : joyRideText.welcomeContent
+                      },
+                      {
+                          appendToBody: true,
+                          type        : 'element',
+                          selector    : "#publishedRecords",
+                          title       : joyRideText.filtersTitle,
+                          content     : joyRideText.filtersContent,
+                          placement   : 'top',
+
+                      },
+                      {
+                          appendToBody: true,
+                          type        : 'element',
+                          selector    : "#searchKeyword",
+                          title       : joyRideText.KeywordTitle,
+                          content     : joyRideText.KeywordContent,
+                          placement   : 'top',
+                      },
+                      {
+                          appendToBody: true,
+                          type        : 'element',
+                          selector    : "#add-new-btn",
+                          title       : joyRideText.addingTitle,
+                          content     : joyRideText.addingContent,
+                          placement   : 'left'
+                      },
+                      {
+                          appendToBody: true,
+                          type        : 'element',
+                          selector    : "#duplicateRecord",
+                          title       : joyRideText.duplicateTitle,
+                          content     : joyRideText.duplicateContent,
+                          placement   : 'left'
+
+                      },
+                      {
+                          appendToBody: true,
+                          type        : 'element',
+                          selector    : "#editRecord",
+                          title       : joyRideText.editTitle,
+                          content     : joyRideText.editContent,
+                          placement   : 'left'
+                      },
+                      {
+                          appendToBody: true,
+                          type        : 'element',
+                          selector    : "#deleteRecord",
+                          title       : joyRideText.deleteTitle,
+                          content     : joyRideText.deleteContent,
+                          placement   : 'left'
+                      },
+                      {
+                          appendToBody:true,
+                          type        : 'element',
+                          selector    : "#needHelp",
+                          title       : joyRideText.needHelpTitle,
+                          content     : joyRideText.needHelpContent,
+                          placement   : 'bottom',
+                          beforeStep  : gotoSectionHelp,
+                          customClass : "need-help-jr"
+
+                      },
+                      {
+                          appendToBody:true,
+                          type        : 'element',
+                          selector    : "#slaask-button-cross",
+                          title       : joyRideText.needMoreHelpTitle,
+                          content     : joyRideText.needMoreHelpContent,
+                          placement   : 'top',
+                          customClass : "need-more-help-jr"
+                      }
+                    ]
+                    // Add the "Import IRCC" button to the Tour if it exists.
+                    if ($scope.isImportingDocumentsSupported) {
+                      const importDocumentsStep = {
+                        appendToBody: true,
+                        type        : 'element',
+                        selector    : "#import-document",
+                        title       : joyRideText.importDocument,
+                        content     : joyRideText.importIRCCDocument,
+                        placement   : 'left'
+                      }
+                      const previousElementId = '#add-new-btn'
+                      const addButtonStepIndex = steps.findIndex(step => step.selector === previousElementId)
+
+                      if (addButtonStepIndex > -1) {
+                        steps.splice(addButtonStepIndex + 1, 0, importDocumentsStep)
+                      } else {
+                        steps.push(importDocumentsStep)
+                      }
+                    }
+
                     joyride.config = {
                         overlay: true,
                         onStepChange: function(){  },
                         onStart: function(){  },
+                        steps,
                         onFinish: function(){
                             joyride.start = false;
                             $scope.tourOn = false;
                         },
-                        steps : [
-                            {
-                                appendToBody: true,
-                                title       : joyRideText.welcomeTitle,
-                                content     : joyRideText.welcomeContent
-                            },
-                            {
-                                appendToBody: true,
-                                type        : 'element',
-                                selector    : "#publishedRecords",
-                                title       : joyRideText.filtersTitle,
-                                content     : joyRideText.filtersContent,
-                                placement   : 'top',
-
-                            },
-                            {
-                                appendToBody: true,
-                                type        : 'element',
-                                selector    : "#searchKeyword",
-                                title       : joyRideText.KeywordTitle,
-                                content     : joyRideText.KeywordContent,
-                                placement   : 'top',
-                            },
-                            {
-                                appendToBody: true,
-                                type        : 'element',
-                                selector    : "#add-new-btn",
-                                title       : joyRideText.addingTitle,
-                                content     : joyRideText.addingContent,
-                                placement   : 'left'
-                            },
-                            {
-                                appendToBody: true,
-                                type        : 'element',
-                                selector    : "#duplicateRecord",
-                                title       : joyRideText.duplicateTitle,
-                                content     : joyRideText.duplicateContent,
-                                placement   : 'left'
-
-                            },
-                            {
-                                appendToBody: true,
-                                type        : 'element',
-                                selector    : "#editRecord",
-                                title       : joyRideText.editTitle,
-                                content     : joyRideText.editContent,
-                                placement   : 'left'
-                            },
-                            {
-                                appendToBody: true,
-                                type        : 'element',
-                                selector    : "#deleteRecord",
-                                title       : joyRideText.deleteTitle,
-                                content     : joyRideText.deleteContent,
-                                placement   : 'left'
-                            },
-                            {
-                                appendToBody:true,
-                                type        : 'element',
-                                selector    : "#needHelp",
-                                title       : joyRideText.needHelpTitle,
-                                content     : joyRideText.needHelpContent,
-                                placement   : 'bottom',
-                                beforeStep  : gotoSectionHelp,
-                                customClass : "need-help-jr"
-
-                            },
-                            {
-                                appendToBody:true,
-                                type        : 'element',
-                                selector    : "#slaask-button-cross",
-                                title       : joyRideText.needMoreHelpTitle,
-                                content     : joyRideText.needMoreHelpContent,
-                                placement   : 'top',
-                                customClass : "need-more-help-jr"
-                            }
-                        ]
                     };
                     joyride.start = true;
+
                     function gotoSectionHelp (resumeJoyride){
                         $('html,body').scrollTop(0);
                         $timeout(resumeJoyride, 100);
                     }
-
                 }
                 $scope.toggleOrderBy = function (key) {
                     if (key == $scope.orderBy[0].substr(1))
@@ -184,10 +208,10 @@ const recordListError = mergeTranslationKeys(recordListT);
                         $scope.canDeletePublished = false;
                     }
                     if (record.type == 'absPermit' && $scope.isPublished(record)) {
-                        $scope.loading = true;                        
+                        $scope.loading = true;
                         $scope.isIRCC = true;
                         $q.when(storage.documents.get(record.identifier))
-                        .then(function (result) {   
+                        .then(function (result) {
                             $scope.recordToDelete = record;
                             $scope.recordToDelete.document = result.data;
                             $scope.recordToDelete.document.amendmentDescription = undefined;
@@ -225,7 +249,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                                 $scope.closeDialog();
                             }
                         } else {
-                          toastr.error(recordListError.errorDeletingDraft);  
+                          toastr.error(recordListError.errorDeletingDraft);
                         }
                     }).finally(function () {
                         delete $scope.loading
@@ -262,14 +286,14 @@ const recordListError = mergeTranslationKeys(recordListT);
                         return;
                     if(!record.document.amendmentDescription || _.values(record.document.amendmentDescription).length == 0)
                         return record.showRevokeError = true;
-                    
+
                     $scope.loading = true;
                     var document = record.document;
                     document.amendmentIntent = 1;
                     record.showRevokeError = false;
 
                     return $q.when(editFormUtility.publishRequest(document))
-                            .then(function (document) {                                 
+                            .then(function (document) {
                                 $scope.amendmentDocument = {locales:['en']};
                                 $scope.recordToDelete = null;
 
@@ -297,7 +321,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.duplicate = function (entity) {
                     $scope.loading = true;
                     var document;
-                    //	console.log(entity);
+
                     if ($scope.isDraft(entity) || $scope.isRequest(entity)) {
                         document = storage.drafts.get(entity.identifier)
                     } else if ($scope.isPublished(entity)) {
@@ -305,7 +329,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     }
 
                     return $q.when(document).then(function (document) {
-                        //console.log(document);
                         if (!document.data)
                             throw "Invalid document";
 
@@ -332,16 +355,16 @@ const recordListError = mergeTranslationKeys(recordListT);
                         $scope.closeDialog();
                          var message;
                         if (error.status == 403) {
-                            message = 'You are not authorized to create duplicate records.'                           
+                            message = 'You are not authorized to create duplicate records.'
                         }
                         else
                             message = error.message||(error.data||{}).message;
                          var close = $scope.closeDialog;
-                         ngDialog.open({template: 'errorModal', 
+                         ngDialog.open({template: 'errorModal',
                                         controller: ['$scope', function($scope) {
                                            $scope.errorMessage = message;
                                            $scope.closeDialog = close;
-                                        }]});                        
+                                        }]});
 
                     }).finally(function () {
                         $scope.loading = false;
@@ -359,7 +382,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                 };
 
                 $scope.deleteWorkflowRequest = function (record) {
-                    console.log(record);
                     $scope.loading = true;
                     IWorkflows.cancel(record.workingDocumentLock.lockID.replace('workflow-', ''), { 'action': 'cancel' })
                         .then(function (data) {
@@ -428,7 +450,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     if (status === 'requests' || status === 'request')
                         $scope.statusFilter = $scope.isRequest;
                 }
-
                 //============================================================
                 //
                 //
@@ -443,13 +464,17 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return "";
                 };
 
+                $scope.openBulkUploader = function () {
+                  $scope.isBulkUploaderOpen = true
+                }
+
                 $scope.showAddButton = function () {
 
                     return roleService.isPublishingAuthority() ||
                         roleService.isNationalAuthorizedUser() ||
                         roleService.isNationalFocalPoint() ||
                         roleService.isIAC() ||
-                        roleService.isAdministrator()|| 
+                        roleService.isAdministrator()||
                         roleService.isPublishingAuthority($scope.schema) ||
                         roleService.isNationalAuthorizedUser($scope.schema);
 
@@ -457,31 +482,31 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                 $scope.isIAC = function () {
                     return roleService.isIAC();
-                }   
+                }
 
                 var evtServerPushNotification = $rootScope.$on('event:server-pushNotification', function(evt,data){
                     if((data.type == 'workflowActivityStatus' || data.type == 'userNotification') &&
                       data.data && data.data.identifier){
-                          
+
                         var document = _.find($scope.records, {identifier: data.data.identifier})
                         var updateDocument = true;
                         if(localStorageService.get('workflow-activity-status')){
-                            
+
                             var localStorageDocument = localStorageService.get('workflow-activity-status');
-                            if(localStorageDocument.identifier == data.data.identifier){ 
+                            if(localStorageDocument.identifier == data.data.identifier){
                                 if( (data.data.workflowActivity == 'document-lock' && _.includes(['revoke', 'request'], localStorageDocument.type)) ||
                                     (data.data.workflowActivity == 'create-revision-from-draft' && _.includes(['revoke', 'publish'], localStorageDocument.type)) ||
                                     (data.data.workflowActivity == 'document-deleted' && 'delete'==localStorageDocument.type)){
 
                                     if(document && localStorageDocument.type == 'revoke' && data.data.workflowActivity == 'create-revision-from-draft')
                                         document.revoked = true;
-                                     
+
                                     localStorageService.remove('workflow-activity-status');
                                 }
                                 else
                                     updateDocument = false;
                             }
-                        }                        
+                        }
                         if(document && updateDocument){
                             if(data.data.workflowActivity == 'document-deleted'){
                                 recordDeleted(document);
@@ -499,8 +524,18 @@ const recordListError = mergeTranslationKeys(recordListT);
                     evtServerPushNotification();
                 })
 
-                $scope.refreshList = function (schema) {
-                    loadRecords(1);
+                $scope.handleNewDocumentCreation = function () {
+                  toastr.success(translationService.get('recordListT.draftCreateSuccess'))
+                  return loadRecords(1)
+                };
+
+                $scope.refreshList = function () {
+                    return loadRecords(1);
+                };
+
+                $scope.onBulkUploaderClose = function () {
+                  $scope.isBulkUploaderOpen = false
+                  return $scope.isBulkUploaderOpen
                 };
 
                 $scope.closeDialog = function(){
@@ -555,7 +590,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.isAdditionDisabled = function (schema){
                     return  realm.schemas[schema].disableAdd;
                 }
-                
+
                 function loadRecords(pageNumebr) {
                     $scope.loading = true;
                     $scope.records = [];
@@ -571,7 +606,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                     var qAnd = [];
 
                     qAnd.push("(type eq '" + schema + "')");
-                    
+
                     var publishedParams = {
                         cache: false,
                         $top: $scope.listResult.rowsPerPage,
@@ -585,7 +620,7 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                     if (schema == "contact")
                         publishedParams.body = true;
-                        
+
                     var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined ,undefined, publishedParams);
 
                     var draftParams = {
@@ -675,7 +710,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                         $scope.loading = false;
                     });
                 }
-                
+
                 function recordDeleted(doc, isDraft) {
                     if (isDraft && $scope.isPublished(doc)){
                         updateDocumentStatus(doc.identifier, 'draftDeleted')
@@ -726,7 +761,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 }
 
                 function updateDocumentStatus(identifier, workflowActivity, draft){
-                  
+
                   var docQuery = storage.documents.get(identifier, {'info': true });
                   if(draft)
                      docQuery = storage.drafts.get(identifier, {'info': true });
@@ -735,12 +770,12 @@ const recordListError = mergeTranslationKeys(recordListT);
                         .then(function (data) {
 
                             var currentDocument = _.find($scope.records, {identifier: identifier})
-                            
+
                             if(data.data.deletedOn){
                                 $scope.records.splice($scope.records.indexOf(currentDocument), 1);
                                 return;
                             }
-                            
+
                             currentDocument.title = data.data.title;
                             currentDocument.documentID = data.data.documentID;
                             currentDocument.workflowActivityStatus =  workflowActivity
@@ -780,6 +815,18 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return  realm.schemas[schema].disableEdit;
                 }
 
+                $scope.exportVueComponent = {
+                  components: {
+                    importFile,
+                  },
+                  setup() {
+                    return {
+                      header: translationService.get('recordListT.importIrccExcel'),
+                      subHeader: translationService.get('recordListT.pleaseSelectExcelInfo')
+                    };
+                  },
+                }
+
                 function loadmyTasks(schema){
 
                     if(!_.includes(realm.referenceSchemas, schema)){
@@ -805,14 +852,14 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                 async function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
-                        const data = await import('~/app-data/bch/offline-formats.json');                        
+                        const data = await import('~/app-data/bch/offline-formats.json');
                         $scope.offlineFormats = data.default;
                         $timeout(function(){
                             $element.find("[data-bs-toggle='tooltip']").tooltip({
                                 trigger: 'hover'
                             });
                         }, 100)
-                        
+
                     }
                 }
                 loadRecords(1);
