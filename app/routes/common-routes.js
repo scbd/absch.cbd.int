@@ -171,7 +171,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/submissions-to-notifications',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.submissionsOnNotifications, "resolve":{ ...commonRouteUrls.submissionsOnNotifications,         },"param":"true","resolveController":true,"reloadOnSearch":false}).
   whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}}).
 
-  //whenAsync('/portals',                                           { ...mapView(vueViewWrapper),                        "label":routesLabels.portals,       "resolve":{ ...commonRouteUrls.portal, },  "param":"true","resolveController":true}).
+  whenAsync('/portals',                                           { ...mapView(vueViewWrapper),                        "label":routesLabels.portals,       "resolve":{ ...commonRouteUrls.portal, },  "param":"true","resolveController":true}).
   whenAsync('/portals/:portalId/:subPath*?',                      { ...mapView(vueViewWrapper),                        "label":routesLabels.portalId,                   "resolve":{ ...commonRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false })
 
 }]);
