@@ -38,7 +38,7 @@
               v-if="article.title"
               class="card-title"
             >
-              {{ lstring(article.title, locale) }}
+              {{ article.title }}
             </h5>
 
             <div
@@ -128,6 +128,7 @@ onMounted(async () => {
 
   articles.value = articleData.map((article: Article) => {
     article.content = sanitizeHtml(lstring(article.content, locale))
+    article.title = lstring(article.title, locale)
     const portalSlug = portals
       .find((portalSchema: PortalSchema) => portalSchema.content.article.articleId === article._id)
       .slug
