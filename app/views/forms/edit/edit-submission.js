@@ -1,4 +1,4 @@
-﻿import app from '~/app';
+import app from '~/app';
 import _ from 'lodash';
 import '~/views/forms/edit/edit';
 import '~/views/forms/view/view-submission.directive';
