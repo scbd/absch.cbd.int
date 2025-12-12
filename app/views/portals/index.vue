@@ -15,8 +15,8 @@
       class="row"
     >
       <div
-        v-for="(article, index) in articles"
-        :key="index"
+        v-for="portal in portals"
+        :key="portal._id"
         class="col-md-4 mb-4"
       >
         <div
@@ -24,26 +24,26 @@
         >
           <a
             class="m-0 text-dark  stretched-link text-decoration-none card-title"
-            :href="article.portalUrl"
+            :href="portal.url"
           />
           <img
-            v-if="article.coverImage"
-            :src="article.coverImage.url"
+            v-if="portal.article.coverImage"
+            :src="portal.article.coverImage.url"
             class="card-img-top cover-image"
             alt="Article Cover"
           >
 
           <div class="card-body">
             <h5
-              v-if="article.title"
+              v-if="portal.title"
               class="card-title"
             >
-              {{ article.title }}
+              {{ portal.title }}
             </h5>
 
             <div
               class="card-text article-text w-100 overflow-hidden"
-              v-html="article.content"
+              v-html="portal.article.content"
             />
           </div>
         </div>
@@ -82,11 +82,13 @@ Object.entries(forumMessages)
   .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
 type LocalizedValue = { en: string }
-type PortalSchema = {
+type Portal = {
   _id: string
   title: LocalizedValue
   slug: string
   content: { article: { articleId: string } }
+  article: Article
+  url: string
 }
 type Image = { position: string, size: string, url: string }
 
@@ -98,13 +100,12 @@ type Article = {
   content: LocalizedValue
   meta: { createdOn: string }
   adminTags?: string[]
-  portalUrl?: string
 }
 
 const auth = useAuth();
 const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
 const portalsApi = new PortalsApi();
-const articles :Ref<Article[]> = ref([])
+const portals :Ref<Portal[]> = ref([])
 
 const PORTALS_URL = 'portals'
 
@@ -113,28 +114,31 @@ const isLoading = ref(false);
 onMounted(async () => {
   isLoading.value = true
   // http://localhost:2030/api/v2023/portals?q={"realms": "realm"}
-  const portals = await portalsApi.queryPortals({ q: { realms: realm } })
+  const portalsData = await portalsApi.queryPortals({ q: { realms: realm } })
     .catch((err: Error) => console.error(err))
 
-  const articleOidQueries = portals
-    .filter((portalSchema: PortalSchema) => isObjectId(portalSchema['_id']))
-    .map((portalSchema: PortalSchema) => ({ $oid: mapObjectId(portalSchema.content.article.articleId) }))
+  const articleOidQueries = portalsData
+    .filter((portalSchema: Portal) => isObjectId(portalSchema['_id']))
+    .map((portalSchema: Portal) => ({ $oid: mapObjectId(portalSchema.content.article.articleId) }))
 
   const query = [{ $match: {_id: { $in: articleOidQueries } } }]
 
-  const articleData = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
+  const articles :Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
     .catch((err: Error) => console.error(err))
   isLoading.value = false
 
-  articles.value = articleData.map((article: Article) => {
-    article.content = sanitizeHtml(lstring(article.content, locale))
-    article.title = lstring(article.title, locale)
-    const portalSlug = portals
-      .find((portalSchema: PortalSchema) => portalSchema.content.article.articleId === article._id)
-      .slug
+  portals.value = portalsData.map((portal: Portal) => {
+    const article = articles
+      .find((article: Article) => portal.content.article.articleId === article._id)
 
-    article.portalUrl = `${PORTALS_URL}/${encodeURIComponent(portalSlug)}`
-    return article
+    portal.article = article || {} as Article
+
+    portal.article.content = sanitizeHtml(lstring(article?.content || '', locale))
+
+    portal.title = lstring(portal?.title || '', locale)
+
+    portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
+    return portal
   })
 })
 </script>
