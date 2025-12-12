@@ -6,6 +6,7 @@ import nodeResolve              from '@rollup/plugin-node-resolve'
 import json                     from '@rollup/plugin-json';
 import commonjs                 from '@rollup/plugin-commonjs';
 import dynamicImportVariables   from '@rollup/plugin-dynamic-import-vars';
+import esbuild                  from 'rollup-plugin-esbuild';
 import vue                      from 'rollup-plugin-vue';
 import copy                     from 'rollup-plugin-copy';
 import { string }               from "rollup-plugin-string";
@@ -92,18 +93,32 @@ function bundle(entryPoint, locale, baseDir='app') {
         }]
       }),
       string({ include: "**/*.html" }),
-      json({ namedExports: true }),
-      vue(),
+      json({ namedExports: true }),      
+      nodeResolve({
+        browser: true,
+        mainFields: ['browser', 'module', 'main'],
+        extensions: ['.mjs', '.js', '.ts', '.vue', '.json']
+      }),
+      commonjs({ include: 'node_modules/**/*.js' }),
+      vue({
+        preprocessStyles: true,
+        cache: false
+      }),
+      esbuild({
+        include: /\.[jt]s$/,             // ts, js (vue already turned <script lang="ts"> into JS)
+        target: 'es2022',
+        tsconfig: 'tsconfig.json',
+        sourceMap: true
+      }),
       injectCssToDom(),
-      dynamicImportVariables({ include:`${baseDir}/**/*.js` }),
-      commonjs({ include: 'node_modules/**/*.js'}),
-      nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
+      dynamicImportVariables({ include: `${baseDir}/**/*.js` }),
+      commonjs({ include: 'node_modules/**/*.js' }),
       isWatchOn ? null : getBabelOutputPlugin({
-        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"} ], { plugins: ['@babel/plugin-transform-private-methods'] }],
+        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead" }], { plugins: ['@babel/plugin-transform-private-methods'] }],
         plugins: ['@babel/plugin-proposal-class-properties'],
         allowAllFormats: true
       }),
-      isWatchOn ? null : terser({ mangle: false }) // DISABLE IN DEV
+      isWatchOn ? null : terser({ mangle: false }), // DISABLE IN DEV
     ]
   }
 }

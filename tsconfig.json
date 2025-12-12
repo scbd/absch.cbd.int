@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "sourceMap": false,
+    "strict": true,
+    "moduleResolution": "bundler",
+    "rootDir": "app",
+    "skipLibCheck": true,
+    "noUnusedParameters": false, // Do not allow unused parameters in functions.
+    "noUnusedLocals": false, // Similar to noUnusedParameters, but for local variables.
+    "noUncheckedIndexedAccess": true, // it ensures that indexed access types are checked for undefined values,
+    "resolveJsonModule": true,
+    "esModuleInterop": true, // Enables compatibility with CommonJS modules, allowing default imports from modules with no default export.
+    "noImplicitOverride": true,
+    "noErrorTruncation": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnreachableCode": false,
+    "paths": {
+      "~/*": ["./app/*"]
+    }
+  },
+  "include": [
+    "app/**/*.vue",
+    "app/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]  
+}
+
+
