@@ -84,7 +84,6 @@ export default class Schema {
       const keywordValue = keywordVal.toLowerCase().trim()
       if (keywordValue === '') { return }
 
-      // TODO: Improve keyword mapping
       const keyword = this.keywordsMap
         .find((keyword) => {
           if (keyword.identifier === keywordVal.trim()) { return true }
@@ -99,9 +98,8 @@ export default class Schema {
         return processedKeywords.push({ identifier: keyword.identifier.toUpperCase() })
       }
 
-      // TODO: Fix magic string. Find out how to generate this string
       processedKeywords
-        .push({ identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' })
+        .push({ identifier: THESAURUS_TERMS.ABS_OTHER_KEYWORD })
       otherKeywords += ` ${keywordVal}`
     })
 
