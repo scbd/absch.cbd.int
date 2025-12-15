@@ -279,7 +279,7 @@ import kmSelectT from '~/app-text/components/scbd-angularjs-controls/form-contro
           var oNames = $scope.getTitles();
 
           if (truncate) {
-            oNames = _.map(oNames, (name) => {
+            oNames = _.map(oNames, function(name) {
               return $filter('truncate')(name, 60, '...')
             });
           }
