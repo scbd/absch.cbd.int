@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { isFunction, isObject } from 'lodash'
-import {useAuth} from '@scbd/angular-vue/src/index.js';
+import { isFunction } from 'lodash';
 
 
 

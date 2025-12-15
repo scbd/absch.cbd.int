@@ -1,4 +1,6 @@
 <template>
+<nr1-analysis/>
+  </hr>
 <div class="home-page-records">
   <h6 class="card-title ps-1">{{ t("recentlyPublished") }}</h6>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ t("loading") }}...</div>
@@ -66,6 +68,8 @@
   import { useI18n } from 'vue-i18n';
   import { useRealm } from '../../services/composables/realm.js';
   import {  useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
+  import nr1Analysis from '../reports/abs/nr1-analysis.vue';
+
   const { t } = useI18n({ messages }); 
   const auth = useAuth();
   const router = useRouter();
