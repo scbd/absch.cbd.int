@@ -1,48 +1,48 @@
 ﻿<span class="km-select-item">
-	<script type="text/ng-template"  id="select-tree-renderer.html">
-		<a rel="noopener" ng-click="clicked(item)" href=""
-		  ng-bind="item.title||item.name | lstring:currentLocale | truncate:120:'...'" class="text-decoration-none text-secondary ps-3 dropdown-item">
-		</a>
-		<div class="km-select-description py-1 px-5" ng-if="showDescription=='true' && item.description" ng-bind="item.description|lstring:currentLocale">
-		</div>
-		<i class="bi bi-check position-absolute fw-bolder color-black fs-5" ng-show="item.selected"></i>
-		<ul class="dropdown-inline-submenu" ng-if="item.children">
-			<li ng:repeat="item in item.children" ng-include="'select-tree-renderer.html'" class="position-relative">
-		</ul>
-	</script>
+  <script type="text/ng-template"  id="select-tree-renderer.html">
+    <a rel="noopener" ng-click="clicked(item)" href=""
+      ng-bind="item.title||item.name | lstring:currentLocale | truncate:120:'...'" class="text-decoration-none text-secondary ps-3 dropdown-item">
+    </a>
+    <div class="km-select-description py-1 px-5" ng-if="showDescription=='true' && item.description" ng-bind="item.description|lstring:currentLocale">
+    </div>
+    <i class="bi bi-check position-absolute fw-bolder color-black fs-5" ng-show="item.selected"></i>
+    <ul class="dropdown-inline-submenu" ng-if="item.children">
+      <li ng:repeat="item in item.children" ng-include="'select-tree-renderer.html'" class="position-relative">
+    </ul>
+  </script>
 
 
-	<div ng-show="error">
-		<div class="alert alert-warning" ng-bind="error">
-		</div>
-	</div>
+  <div ng-show="error">
+    <div class="alert alert-warning" ng-bind="error">
+    </div>
+  </div>
 
-	<span>		
-		<div class="btn-group dropdown" role="group" id="select-dropdown">
-			<button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle {{size}}" 
-			data-bs-toggle="dropdown" aria-expanded="false" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn()}">
-				{{getTitle(displayCount, true)}}
-				<span class="caret"></span>
-			</button>
+  <span>    
+    <div class="btn-group dropdown" role="group" id="select-dropdown">
+      <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle {{size}}" 
+      data-bs-toggle="dropdown" aria-expanded="false" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn()}">
+        {{getTitle(displayCount, true)}}
+        <span class="caret"></span>
+      </button>
 
-			<ul class="dropdown-menu ps-2 overflow-auto fs-small-8" style="max-height: 23rem;" aria-labelledby="btnGroupDrop1">
-			  <li ng-hide="!!rootItems">
-				  <a class="dropdown-item" rel="noopener" href>
-					<i class="fa fa-spinner fa-spin" />
- 					<em>{{::('kmSelectT.loading'|$translate)}}...</em></a>
-				</li>
-				<li ng-show="rootItems.length==0">
-					<a class="dropdown-item" rel="noopener" href><em>{{::('kmSelectT.nothingToSelect'|$translate)}}...</em></a>
-				</li>
-				<li ng-show="!!rootItems && (searchEnabled || getMinimum()==0 || allowOther == 'true')" class="p-0 px-1" id="filterText">
-					<div class="input-group mb-1">
-						<input type="textbox"  ng-show="searchEnabled || getMinimum()==0 && rootItems.length!=0" ng-model="filterText" class="form-control p-0 px-1"/>
-						<span class="input-group-text cursor-pointer" id="basic-addon1" title="Clear search text" ng-click="clearFilter($event)">
-							<i  class="fa" ng-class="{'fa-remove color-red' : filterText, 'fa-search': !filterText}"></i>
-						</span>
-					</div>
-					<div>
-						<button type="button"
+      <ul class="dropdown-menu ps-2 overflow-auto fs-small-8" style="max-height: 23rem;" aria-labelledby="btnGroupDrop1">
+        <li ng-hide="!!rootItems">
+          <a class="dropdown-item" rel="noopener" href>
+          <i class="fa fa-spinner fa-spin" />
+           <em>{{::('kmSelectT.loading'|$translate)}}...</em></a>
+        </li>
+        <li ng-show="rootItems.length==0">
+          <a class="dropdown-item" rel="noopener" href><em>{{::('kmSelectT.nothingToSelect'|$translate)}}...</em></a>
+        </li>
+        <li ng-show="!!rootItems && (searchEnabled || getMinimum()==0 || allowOther == 'true')" class="p-0 px-1" id="filterText">
+          <div class="input-group mb-1">
+            <input type="textbox"  ng-show="searchEnabled || getMinimum()==0 && rootItems.length!=0" ng-model="filterText" class="form-control p-0 px-1"/>
+            <span class="input-group-text cursor-pointer" id="basic-addon1" title="Clear search text" ng-click="clearFilter($event)">
+              <i  class="fa" ng-class="{'fa-remove color-red' : filterText, 'fa-search': !filterText}"></i>
+            </span>
+          </div>
+          <div>
+            <button type="button"
               style="padding: 7px;"
               class="btn btn-outline-secondary fs-small-8"
               ng-show="hasSelectedItems()"type ="button"
@@ -51,7 +51,7 @@
             >
               {{::('kmSelectT.clearSelection'|$translate)}}
             </button>
-						<button
+            <button
               style="padding: 7px;"
               class="btn btn-outline-secondary fs-small-8"
               ng-show="allowOther == 'true'"
@@ -61,19 +61,19 @@
             >
               {{::('kmSelectT.specifyAnother'|$translate)}}
             </button>
-					</div>
-				</li>
-				<li ng:repeat="item in rootItems | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" class="text-decoration-none position-relative text-secondary">
-				</li>
-				<li class="border-top mt-1" ng-if="hasOtherSource">
-					<a class="dropdown-item cursor-pointer" rel="noopener" ng-click="showOtherSource($event)">
-						<i class="fa fa-spin fa-spinner" ng-if="loadingOtherSource"></i>
-						<span ng-if="!secondarySource">{{::('kmSelectT.showOthers'|$translate)}}</span>
-					</a>
-				</li>
-				<li ng-if="hasOtherSource && secondarySource" ng:repeat="item in secondarySource | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" class="text-decoration-none position-relative text-secondary">
-				</li>
-			</ul>
-		  </div>
-	</span>
+          </div>
+        </li>
+        <li ng:repeat="item in rootItems | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" class="text-decoration-none position-relative text-secondary">
+        </li>
+        <li class="border-top mt-1" ng-if="hasOtherSource">
+          <a class="dropdown-item cursor-pointer" rel="noopener" ng-click="showOtherSource($event)">
+            <i class="fa fa-spin fa-spinner" ng-if="loadingOtherSource"></i>
+            <span ng-if="!secondarySource">{{::('kmSelectT.showOthers'|$translate)}}</span>
+          </a>
+        </li>
+        <li ng-if="hasOtherSource && secondarySource" ng:repeat="item in secondarySource | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" class="text-decoration-none position-relative text-secondary">
+        </li>
+      </ul>
+      </div>
+  </span>
 </span>
