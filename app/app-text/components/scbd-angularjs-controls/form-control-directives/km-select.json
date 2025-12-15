@@ -1,0 +1,14 @@
+{
+    "clearSelection": "Clear selection",
+    "loading": "Loading",
+    "specifyAnother": "Specify another value",
+    "showOthers": "Show others",
+    "nothingToSelect": "Nothing to select",
+    "nothingToSelected": "Nothing to selected",
+    "selected": "selected",
+    "of": "of",
+    "notLoaded": "Data not loaded",
+    "mustBeArray": "Value must be array",
+    "itemsNotFound": "Items not found",
+    "unknownError": "Unknown error"
+}
