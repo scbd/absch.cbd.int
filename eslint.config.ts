@@ -1,9 +1,10 @@
 import globals from 'globals'
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+import { defineConfigWithVueTs } from '@vue/eslint-config-typescript'
 import { globalIgnores } from 'eslint/config'
 import pluginVue from 'eslint-plugin-vue'
 import eslintMinimalFilesList from './.config/eslintminimal.json'
 import standard from 'neostandard'
+import love from 'eslint-config-love'
 
 const standardStyles = standard({ ts: true })
   .find((config) => config.name === 'neostandard/style') || {}
@@ -14,6 +15,10 @@ export default defineConfigWithVueTs(
     languageOptions: {
       globals: globals.browser
     }
+  },
+  {
+    ...love,
+    files: ['**/*.js', '**/*.ts']
   },
   ...standard({
     files: ['**/*.{ts,mts,tsx,vue,js}'],
@@ -26,6 +31,6 @@ export default defineConfigWithVueTs(
     plugins: standardStyles.plugins,
     ignores: eslintMinimalFilesList
   },
-  pluginVue.configs['flat/recommended'],
-  vueTsConfigs.recommended
+  pluginVue.configs['flat/recommended']
+  // vueTsConfigs.recommended
 )

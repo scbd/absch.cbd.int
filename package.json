@@ -43,6 +43,7 @@
     "@vue/eslint-config-typescript": "^14.6.0",
     "esbuild": "^0.27.1",
     "eslint": "^9.39.1",
+    "eslint-config-love": "^137.0.0",
     "eslint-plugin-vue": "^10.5.1",
     "fs-finder": "^1.8.1",
     "glob": "^7.1.6",
