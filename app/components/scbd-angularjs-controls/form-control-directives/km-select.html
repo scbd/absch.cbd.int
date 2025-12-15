@@ -28,11 +28,11 @@
 			<ul class="dropdown-menu ps-2 overflow-auto fs-small-8" style="max-height: 23rem;" aria-labelledby="btnGroupDrop1">
 			  <li ng-hide="!!rootItems">
 				  <a class="dropdown-item" rel="noopener" href>
-					  <i class="fa fa-spinner fa-spin">
-                   </i> <em>Loading...</em></a>
+					<i class="fa fa-spinner fa-spin" />
+ 					<em>{{::('kmSelectT.loading'|$translate)}}...</em></a>
 				</li>
 				<li ng-show="rootItems.length==0">
-					<a class="dropdown-item" rel="noopener" href><em>Nothing to select...</em></a>
+					<a class="dropdown-item" rel="noopener" href><em>{{::('kmSelectT.nothingToSelect'|$translate)}}...</em></a>
 				</li>
 				<li ng-show="!!rootItems && (searchEnabled || getMinimum()==0 || allowOther == 'true')" class="p-0 px-1" id="filterText">
 					<div class="input-group mb-1">
@@ -42,8 +42,25 @@
 						</span>
 					</div>
 					<div>
-						<button type="button" style="padding: 7px;" class="btn btn-outline-secondary fs-small-8" ng-show="hasSelectedItems()"type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
-						<button style="padding: 7px;" class="btn btn-outline-secondary fs-small-8" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Specify another value</button>
+						<button type="button"
+              style="padding: 7px;"
+              class="btn btn-outline-secondary fs-small-8"
+              ng-show="hasSelectedItems()"type ="button"
+              ng-click="clearSelection()"
+              ng-disabled="!hasSelectedItems()"
+            >
+              {{::('kmSelectT.clearSelection'|$translate)}}
+            </button>
+						<button
+              style="padding: 7px;"
+              class="btn btn-outline-secondary fs-small-8"
+              ng-show="allowOther == 'true'"
+              type="button"
+              ng-click="chooseOther()"
+              ng-show="allowOther"
+            >
+              {{::('kmSelectT.specifyAnother'|$translate)}}
+            </button>
 					</div>
 				</li>
 				<li ng:repeat="item in rootItems | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" class="text-decoration-none position-relative text-secondary">
@@ -51,14 +68,12 @@
 				<li class="border-top mt-1" ng-if="hasOtherSource">
 					<a class="dropdown-item cursor-pointer" rel="noopener" ng-click="showOtherSource($event)">
 						<i class="fa fa-spin fa-spinner" ng-if="loadingOtherSource"></i>
-						<span ng-if="!secondarySource">Show others</span>
+						<span ng-if="!secondarySource">{{::('kmSelectT.showOthers'|$translate)}}</span>
 					</a>
 				</li>
 				<li ng-if="hasOtherSource && secondarySource" ng:repeat="item in secondarySource | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" class="text-decoration-none position-relative text-secondary">
 				</li>
 			</ul>
 		  </div>
-
 	</span>
-	
 </span>
