@@ -14,8 +14,4 @@ export default class KmDocumentApi extends ApiBase
         return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
     }
 
-    async getDocument(identifier)  {
-        return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
-    }
-
 }

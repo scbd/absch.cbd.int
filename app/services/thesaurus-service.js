@@ -86,7 +86,7 @@ import _ from 'lodash';
                 absSubjects            : "CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924",
                 keyAreas               : '2B2A5166-F949-4B1E-888F-A7976E76320B', 
                 aBSkeyareas            : '2B2A5166-F949-4B1E-888F-A7976E76320B',
-                status                 : "ED7CDBD8-7762-4A84-82DD-30C01458A799", // ToDo: having conflict with B91693BB-648B-4601-9C4E-5B6ABE160D35
+                // status                 : "ED7CDBD8-7762-4A84-82DD-30C01458A799", // ToDo: having conflict with B91693BB-648B-4601-9C4E-5B6ABE160D35
                 msrStatus              : 'ED7CDBD8-7762-4A84-82DD-30C01458A799', // was mSR_status, used in abs-left-filters.jason replaced with status
                 typeOfDocuments        : "144CF550-7629-43F3-817E-CACDED34837E", 
                 msrTypes               : '144CF550-7629-43F3-817E-CACDED34837E', // was mSR_types, not used, duplicate of typeOfDocuments
@@ -99,8 +99,8 @@ import _ from 'lodash';
                 absFunctions           : '8102E184-E282-47F7-A49F-4C219B0EE235',
                 usage                  : "A7B77788-8C90-4849-9327-E181E9522F3A",
                 resourceTypesVlr       : "A762DF7E-B8D1-40D6-9DAC-D25E48C65528", //TODO used in VLR only need to rename
-                resourceTypes          : "83BA4728-A843-442B-9664-705F55A8EC52", // TODO: will move to duplicate
-                jurisdictions          : '4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A', 
+                // resourceTypes          : "83BA4728-A843-442B-9664-705F55A8EC52", // TODO: will move to duplicate
+                // jurisdictions          : '4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A', 
                 dnaSequenceFamily      : '82DAAF04-6698-4CA6-81D5-F200AE64C63A',
                 dnaSequenceTraits      : 'B8EB2261-7695-4DC5-9C4E-026D380DA7CB',
                 domestication          : 'B89720B8-81BF-4A6B-8084-8D464403C25A',
@@ -144,7 +144,7 @@ import _ from 'lodash';
                 countries              : "countries",
                 regions                : "regions",
                 languages              : "ISO639-2",
-                aichiTargets           : 'AICHI-TARGETS',
+                // aichiTargets           : 'AICHI-TARGETS',
                 gbfTargets             : 'GBF-TARGETS',
                 gbfGoalsAndTargets     : 'GBF-GOALS-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
@@ -190,18 +190,18 @@ import _ from 'lodash';
                 aichiTargets                       : 'AICHI-TARGETS',
                 aichiTargetsComponents             : 'AICHI-TARGETS-COMPONENTS',  
                 adequacyMonitoring                 : '23643DAC-74BB-47BC-A603-123D20EAB824',
-                gbfTargets                         : 'GBF-TARGETS',
-                cbdSubjects                        : 'CBD-SUBJECTS',                
-                organizationTypes                  : 'Organization Types', 
+                // gbfTargets                         : 'GBF-TARGETS',
+                // cbdSubjects                        : 'CBD-SUBJECTS',                
+                // organizationTypes                  : 'Organization Types', 
                 capacityBuildingProjectFundingTypes: 'Capacity Building Project Funding Types',
                 capacityBuildingProjectStatus      : 'Capacity Building Project Status',   
                 geographicScope                    : '4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A',
                 absKeyAreas                        : '2B2A5166-F949-4B1E-888F-A7976E76320B',
-                cbiTypes                           : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',
+                // cbiTypes                           : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',
                 activityScope                      : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17',
                 scales                             : '96FCD864-D388-4148-94DB-28B484047BA5',                
                 gspcCategoryProgress               : '254B8AE2-05F2-43C7-8DB1-ADC702AE14A8',
-                confidence                         : 'B40C65BE-CFBF-4AA2-B2AA-C65F358C1D8D',
+                // confidence                         : 'B40C65BE-CFBF-4AA2-B2AA-C65F358C1D8D', TODO: Conflicts with line duplicate key AB782477-9942-4C6B-B9F0-79A82915A069
                 categoryProgress                   : 'EF99BEFD-5070-41C4-91F0-C051B338EEA6',
                 assessment                         : '8D3DFD9C-EE6D-483D-A586-A0DDAD9A99E0',
                 gspcTargets                        : '8D405050-50AF-45EA-95F7-A31A11196424',
@@ -209,7 +209,7 @@ import _ from 'lodash';
                 reportStatus                       : '7F0D898A-6BF1-4CE6-AA77-7FEAED3429C6',
                 approvedBody                       : 'F1A5BFF1-F555-40D1-A24C-BBE1BE8E82BF',
                 approvedStatus                     : 'E27760AB-4F87-4FBB-A8EA-927BDE375B48',
-                status                             : 'B91693BB-648B-4601-9C4E-5B6ABE160D35', // ToDo: having conflict with  ED7CDBD8-7762-4A84-82DD-30C01458A799
+                status                             : 'B91693BB-648B-4601-9C4E-5B6ABE160D35', // TODO: having conflict with  ED7CDBD8-7762-4A84-82DD-30C01458A799
                 statusCapacity                     : '4E7731C7-791E-46E9-A579-7272AF261FED',
                 supportTools                       : 'B63B9640-1CB8-4868-89DA-3D0571638870',
                 jurisdictions                      : '50AC1489-92B8-4D99-965A-AAE97A80F38E',
@@ -224,7 +224,7 @@ import _ from 'lodash';
                 purposes                           : 'E712C9CD-437E-454F-BA72-E7D20E4C28ED',
                 resourceTypes                      : 'A762DF7E-B8D1-40D6-9DAC-D25E48C65528',
                 resourceTypesCapacity              : '7E688641-F642-4C46-A024-70ED76D3DF40',
-                bchRaSubjects                      : '69B43BB5-693B-4ED9-8FE0-95895E144142',
+                // bchRaSubjects                      : '69B43BB5-693B-4ED9-8FE0-95895E144142',
                 bchSubject                         : '043C7F0D-2226-4E54-A56F-EE0B74CCC984',
                 absSubject                         : 'CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924',
                 availability                       : '1FEF5AB7-3C90-4AE7-859F-787949FA9046'               
