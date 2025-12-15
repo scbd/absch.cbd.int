@@ -286,8 +286,7 @@ import kmSelectT from '~/app-text/components/scbd-angularjs-controls/form-contro
 
           if (oNames.length === 0) {
             return $scope.placeholder || translationService.get('kmSelectT.nothingToSelected')
-          }
-          else if (maxCount < 0 || oNames.length <= maxCount) {
+          } else if (maxCount < 0 || oNames.length <= maxCount) {
             return oNames.join(', ')
           }
 
@@ -393,8 +392,10 @@ import kmSelectT from '~/app-text/components/scbd-angularjs-controls/form-contro
 
           if (error.status == 404) {
             $scope.error = translationService.get('kmSelectT.itemsNotFound');
-          }
-          else $scope.error = error.data || translationService.get('kmSelectT.unknownError');
+            return
+          } 
+
+          $scope.error = error.data || translationService.get('kmSelectT.unknownError');
         };
 
         //==============================
