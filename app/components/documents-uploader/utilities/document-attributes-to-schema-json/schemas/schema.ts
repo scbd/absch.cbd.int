@@ -1,17 +1,15 @@
+import type { DocError, DocumentAttributes, DocValue } from '~/types/components/documents-uploader/document-schema'
+import type {
+  KeywordType, ELink, UsageKey,
+  Keywords, DocumentRequest,
+  SubDocument
+} from '~/types/common/documents'
 // @ts-expect-error importing js file
 import KmDocumentApi from '../../../../../api/km-document'
-import { DocumentAttributes } from '~/types/components/documents-uploader/document-schema'
-import {
-  KeywordType, ELink, UsageKey,
-  DocumentRequest, Keywords,
-  SubDocument, UsageMapping
-} from '~/types/common/documents'
-
 import {
   languages, englishLanguages
 } from '~/app-data/un-languages'
-import { LanguageCode } from '~/types/languages'
-import { StandardError } from '~/types/errors'
+import type { LanguageCode, GetKeys } from '~/types/languages'
 import { THESAURUS_TERMS } from '~/constants/thesaurus'
 
 const kmDocumentApi = new KmDocumentApi()
@@ -19,19 +17,19 @@ const kmDocumentApi = new KmDocumentApi()
 export default class Schema {
   language: LanguageCode = 'en' // Default
   documentAttributes: DocumentAttributes
-  keywordsMap: Array<KeywordType> = []
-
-  constructor (documentAttrs: DocumentAttributes, keywordsMap: Array<KeywordType>) {
+  keywordsMap: KeywordType[] = []
+  constructor (documentAttrs: DocumentAttributes, keywordsMap: KeywordType[]) {
     this.documentAttributes = documentAttrs
-    this.language = Schema.getLanguageCode(this.documentAttributes['language'] as string)
+    this.language = Schema.getLanguageCode(this.documentAttributes.language)
     this.keywordsMap = keywordsMap
   }
 
   /**
   * Wrap string from excel sheet in a div.
   */
-  static getAsHtmlElement (value: string): string {
-    if (String(value).trim() === '') { return '' }
+  static getAsHtmlElement (value: string | undefined): string {
+    if (value === undefined) { return '' }
+    if (value.trim() === '') { return '' }
 
     return `<div>${value}</div>`
   }
@@ -40,29 +38,41 @@ export default class Schema {
   * Map language from human-readable string in the excel sheet to a language code.
   */
   static getLanguageCode (langValue: string): LanguageCode {
-    const lang: string = `${String(langValue).toLowerCase()}`
-    const languageMap = [...Object.entries(languages), ...Object.entries(englishLanguages)]
+    const languageMap = Object.assign(englishLanguages, languages)
+    const defaultKeys: GetKeys = () => []
+    const getKeys: GetKeys = typeof languageMap.keys === 'function' ? languageMap.keys : defaultKeys
 
-    const langKey = languageMap
-      .find(entry => entry[1].toLowerCase() === lang.toLowerCase())
+    const langKey: LanguageCode | undefined = getKeys()
+      .find((k) => {
+        const key = k
+        const { [key]: value } = languageMap
+        return value.toLowerCase() === langValue.toLowerCase()
+      })
 
-    if (!langKey) { return 'en' }
+    if (langKey === undefined) { return 'en' }
 
-    return langKey[0] as LanguageCode
+    return langKey
+  }
+
+  static isEmpty (value: string | undefined | null | Date): boolean {
+    return value === null || value === ''
   }
 
   /**
   * Get GUID for usage map from usage map document attribute string.
   */
-  static getUsageMapping (usage: string): string {
+  static getUsageMapping (usage: string | undefined): string {
+    if (Schema.isEmpty(usage) || usage === undefined) { return '' }
     if (Schema.getIsConfidential(usage)) { return '' }
-    const usageMapping :UsageMapping = THESAURUS_TERMS
-    return usageMapping[usage.replace('-', '').toUpperCase() as UsageKey]
+    const key = usage.replace('-', '').toUpperCase()
+    const usageKey: UsageKey = (key === 'NONCOMMERCIAL' || key === 'COMMERCIAL') ? key : 'NONCOMMERCIAL'
+
+    return THESAURUS_TERMS[usageKey]
   }
 
-  static getELinkData (value: string): Array<ELink> {
-    if (!value || value === '') { return [] }
-    const links: Array<string> = value.split(',')
+  static getELinkData (value: string | undefined): ELink[] {
+    if (Schema.isEmpty(value) || value === undefined) { return [] }
+    const links: string[] = value.split(',')
     return links.map((url: string) => ({ url }))
   }
 
@@ -70,14 +80,14 @@ export default class Schema {
   * Map all keywords from their description in the excel sheet to
   * a GUID determined by a keywords list.
   */
-  getKeywords (keywordsValue: string): Keywords {
-    if (!keywordsValue || keywordsValue === '') {
+  getKeywords (keywordsValue: string | undefined): Keywords {
+    if (Schema.isEmpty(keywordsValue) || keywordsValue === undefined) {
       return { processedKeywords: [], otherKeywords: '' }
     }
 
     const keywords = keywordsValue.trim().split(',')
 
-    const processedKeywords :Array<SubDocument> = []
+    const processedKeywords: SubDocument[] = []
     let otherKeywords = ''
 
     keywords.forEach((keywordVal: string) => {
@@ -94,7 +104,7 @@ export default class Schema {
           return name.toLowerCase().trim() === keywordValue
         })
 
-      if (keyword) {
+      if (typeof keyword === 'object') {
         return processedKeywords.push({ identifier: keyword.identifier.toUpperCase() })
       }
 
@@ -110,48 +120,78 @@ export default class Schema {
   * Fetch a document it's GUID from our servers and return it's identifier.
   * TODO: Store this request to avoid repeatedly making a request for the same document type.
   */
-  async getDocumentIdentifierByGUID (uniqueId: string): Promise<string> {
-    const uid = String(uniqueId).trim().match(/^([a-z]+)-([a-z]+)-([a-z]+)-([0-9]+)-([0-9]+)$/i)
+  async getDocumentIdentifierByGUID (uniqueId: string | undefined): Promise<string> {
+    if (uniqueId === undefined) { return '' }
+    const regExp = /^(?<p1>[a-z]+)-(?<p2>[a-z]+)-(?<p3>[a-z]+)-(?<p4>\d+)-(?<p5>\d+)$/i
+    const documentUIDOffset = 4
+    const uid = regExp.exec(uniqueId.trim())
 
-    const [currentColumn, currentValue] = Object.entries(this.documentAttributes)
-      .find((entry) => entry[1] === uniqueId) || []
+    const entry: [string, DocValue] | undefined = Object.entries(this.documentAttributes)
+      .find(([_key, value]) => value === uniqueId)
 
-    const error = {
+    const [currentColumn, currentValue] = Array.isArray(entry) ? entry : []
+
+    const value = typeof currentValue === 'string' ? currentValue : ''
+
+    const error: DocError = {
       reason: 'cannotFindRelevantDocumentError',
       column: currentColumn,
-      value: currentValue,
-      level: 'error'
-    }
-    if (uid === null) {
-      throw error
+      value,
+      level: 'warning',
+      message: 'warning',
+      name: 'cannotFindRelevantDocumentError'
     }
 
-    const data = await kmDocumentApi.getDocument(uid[4] || '')
-      .catch((serverError: StandardError) => {
-        console.warn(serverError)
+    if (uid === null) {
+      console.warn('Error: Uid value not provided') // eslint-disable-line no-console -- Show error in console
+      return ''
+    }
+
+    const documentId = typeof uid[documentUIDOffset] === 'string' ? uid[documentUIDOffset] : ''
+    const data = await kmDocumentApi.getDocument(documentId)
+      .catch((serverError: unknown) => {
+        console.warn(serverError) // eslint-disable-line no-console -- Show error in console
         throw error
       })
 
-    return data.header.identifier + '@' + uid[5]
+    if (typeof data !== 'object' || data === null) {
+      throw error
+    }
+    const finalUidSectionIndex = 5
+    return data.header.identifier + '@' + uid[finalUidSectionIndex]
   }
 
   /**
   * Generate a GUID using the Math.random function.
   */
-  static generateGUID () {
-    const S4 = (): string => (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+  static generateGUID (): string {
+    const bitCount = 16
+    const subStringCount = 1
+    const hexOffset = 0x10000
+    const bitWiseOrValue = 0
+    const S4 = (): string => (((subStringCount + Math.random()) * hexOffset) | bitWiseOrValue)
+      .toString(bitCount)
+      .substring(subStringCount)
     return (`SIMP-${S4()}${S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`).toUpperCase()
   }
 
   /**
   * Find a contact by its GUID or create a GUID for the new contact.
   */
-  async findOrCreateContact (contacts: string) {
-    if (!!contacts && (contacts).trim() !== '') {
+  async findOrCreateContact (value: string | undefined | null): Promise<SubDocument[] | undefined> {
+    if (value === undefined) { return }
+    const contacts = value ?? ''
+    if (contacts.trim() !== '') {
       const existingContacts = contacts.split(',')
+      const createContactPromises = existingContacts
+        .map(async (contactUid: string) => await this.getDocumentIdentifierByGUID(contactUid))
 
-      return existingContacts
-        .map(async (contactUid) => ({ identifier: await this.getDocumentIdentifierByGUID(contactUid) }))
+      const contactIdentifiers = await Promise.all(createContactPromises)
+      const subDocuments: SubDocument[] = contactIdentifiers
+        .filter(identifier => typeof identifier === 'string')
+        .map(identifier => ({ identifier }))
+
+      return subDocuments
     }
 
     const contact = {
@@ -165,11 +205,11 @@ export default class Schema {
   * In case the date format is not correct in the XLSX sheet
   * attempt to parse the date in order to still get a date as a backup.
   */
-  static parseDate (dateValue: string | Date): string {
-    if (!dateValue) { return '' }
+  static parseDate (dateValue: string | Date | undefined | null): string {
+    if (dateValue === null || dateValue === undefined) { return '' }
     const dateString = typeof dateValue === 'string' ? dateValue : dateValue.toUTCString()
-    const date:Date = new Date(Date.parse(`${dateString} GMT-05:00`))
-    const options :Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }
+    const date: Date = new Date(Date.parse(`${dateString} GMT-05:00`))
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }
     const dateFormat = 'fr-CA'
 
     return date.toLocaleDateString(dateFormat, options)
@@ -178,23 +218,20 @@ export default class Schema {
   /**
   * Map confidential string from excel sheet to a boolean.
   */
-  static getIsConfidential (value: string): boolean {
-    return (value || '').toLowerCase() === 'confidential'
+  static getIsConfidential (value: string | undefined | null): boolean {
+    if (value === undefined) { return true }
+    return (value ?? '').toLowerCase() === 'confidential'
   }
 
   /**
   * Map yes or no string from excel sheet to a boolean.
   */
-  static parseTextToBoolean (columnValue: string | undefined) {
+  static parseTextToBoolean (columnValue: string | undefined | null): boolean {
     return String(columnValue).toLowerCase() === 'yes'
   }
 
-  /**
-  * Parse the string document attributes taken from the excel sheet to
-  * document JSON used to create a document draft in our system.
-  * To be overridden by the document schema class extending this class.
-  */
-  async parseXLSXFileToDocumentJson () :Promise<DocumentRequest> {
-    return { header: { identifier: '' } }
+  async parseXLSXFileToDocumentJson (): Promise<DocumentRequest> {
+    const identifier = await this.getDocumentIdentifierByGUID(Schema.generateGUID())
+    return { header: { identifier } }
   }
 }

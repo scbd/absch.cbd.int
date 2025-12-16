@@ -83,7 +83,7 @@ import recordListMessages from '~/app-text/views/register/record-list.json'
 import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
 import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
-import { DocError } from '~/types/components/documents-uploader/document-schema.js'
+import { DocError, HTMLInputEvent } from '~/types/components/documents-uploader/document-schema.js'
 import { StandardError } from '~/types/errors.js'
 import { ReadFileResult } from './utilities/read-xlsx-file.js'
 import WarningOverlay from './warning-overlay.vue'
@@ -116,9 +116,9 @@ const $emit = defineEmits(['onClose', 'refreshRecord'])
 // Refs
 const defaultDocumentJson = [{ header: { identifier: '' } }]
 const documents = ref(defaultDocumentJson)
-const sheet :Ref<ReadFileResult> = ref({ data: [], errors: [] })
+const sheet: Ref<ReadFileResult> = ref({ data: [], errors: [] })
 const isLoading = ref(false)
-const errors :Ref<Array<StandardError | DocError>> = ref([])
+const errors: Ref<Array<StandardError | DocError>> = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
 const isWarningIndicatorOpen = ref(false)
@@ -128,9 +128,13 @@ const hasErrors = computed(() => errors.value
   .some((error) => error.level === 'error'))
 
 const modalErrors = computed(() => errors.value
-  .filter((error) => !Number.isInteger((error as DocError).row)))
+  .filter((error) => {
+    const e = error as DocError
+    if (e.row === undefined) { return true }
+    return !Number.isInteger(e.row) || e.row < 0
+  }))
 
-const documentErrors :Ref<Array<DocError[]>> = ref([])
+const documentErrors: Ref<Array<DocError[]>> = ref([])
 
 const hasParsedFiles = computed(() => {
   return sheet.value.data.length > 0
@@ -172,6 +176,7 @@ async function handleConfirm () {
 
 async function createDocuments () {
   isLoading.value = true
+
   const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocumentDraft(doc))
 
   return Promise.all(requestPromises)
@@ -187,7 +192,7 @@ function onClose () {
   $emit('onClose')
 }
 
-async function onFileChange (changeEvent: Event) {
+async function onFileChange (changeEvent: HTMLInputEvent) {
   handleClearFile()
 
   isLoading.value = true

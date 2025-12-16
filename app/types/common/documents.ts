@@ -1,35 +1,45 @@
-import { LanguageCode } from "../languages"
+import type { LanguageCode } from '../languages'
 
-type KeywordTitle = {
-  [key in LanguageCode]: string 
+type KeywordTitle = Record<LanguageCode, string>
+
+type DocumentData = Record<string, string>
+
+type DocumentValue = string | number | boolean | SubDocument |
+  DocumentData | DocumentData[] | SubDocument[] | Date | Header | ELink[]
+
+export type EmptyDocumentValue = DocumentValue | undefined | EmptySubDocument
+
+export interface Header {
+  identifier: string
+  schema?: string,
+  languages?: LanguageCode[]
 }
 
-export type SubDocument = {
+export interface EmptySubDocument {
+  identifier?: string
+}
+
+export interface SubDocument {
   identifier: string
 }
 
-export type ELink = {
+export interface ELink {
   url: string
 }
-
-export type DocumentRequest = {
-  header: {
-    identifier: string
-  }
+export interface DocumentRequest extends Record<string, DocumentValue> {
+  header: Header
 }
 
-export type KeywordType = {
+export type EmptyDocumentRequest = Record<string, EmptyDocumentValue>
+
+export interface KeywordType {
   name: string
   title: KeywordTitle
   identifier: string
 }
 
-export type Keywords = {
-  processedKeywords: Array<SubDocument>
+export interface Keywords {
+  processedKeywords: SubDocument[]
   otherKeywords: string
 }
 export type UsageKey = 'COMMERCIAL' | 'NONCOMMERCIAL'
-
-export type UsageMapping = {
-  [key in UsageKey]: string 
-}

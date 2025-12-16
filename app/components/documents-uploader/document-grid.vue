@@ -88,12 +88,12 @@ const props = defineProps<{
   errors: DocError[]
 }>()
 
-const openedNestedDocuments :Ref<number[]> = ref([])
+const openedNestedDocuments: Ref<number[]> = ref([])
 
 const attributesMap = documentsList[props.documentType]?.attributesMap
 
 // Filter empty document attributes
-const documentData :ComputedRef<DocumentData> = computed(() => Object
+const documentData: ComputedRef<DocumentData> = computed(() => Object
   .entries(props.documentAttributes)
   .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, props.errors)))
 
@@ -111,7 +111,7 @@ function hasColumnErrors (key: string, errors: DocError[]) {
 }
 
 function toggleAccordian (index: number) {
-  const isClosed :boolean = openedNestedDocuments.value.indexOf(index) < 0
+  const isClosed: boolean = openedNestedDocuments.value.indexOf(index) < 0
   if (isClosed) {
     openedNestedDocuments.value.push(index)
     return index

@@ -1,15 +1,13 @@
-import Schema from '~/components/documents-uploader/utilities/document-attributes-to-schema-json/schemas/schema'
-import { DocumentAttributesMap } from './document-schema'
+import type Schema from '~/components/documents-uploader/utilities/document-attributes-to-schema-json/schemas/schema'
+import type { DocumentAttributesMap } from './document-schema'
 
 export type DocumentTypes = 'ircc' // | 'cpc' | 'contact'
 
-type DocumentInfo = {
+interface DocumentInfo {
   DocumentSchema: typeof Schema
   attributesMap: DocumentAttributesMap
-  keywordDomains: Array<string>
-  headerRows: Array<number>
+  keywordDomains: string[]
+  headerRows: number[]
 }
 
-export type DocumentsList = {
-  [key in DocumentTypes]: DocumentInfo
-}
+export type DocumentsList = Record<DocumentTypes, DocumentInfo>

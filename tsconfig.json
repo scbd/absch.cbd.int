@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "incremental": true,
+    "target": "es2022",
     "sourceMap": false,
     "strict": true,
     "moduleResolution": "bundler",

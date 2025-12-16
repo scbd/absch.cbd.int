@@ -1,6 +1,6 @@
 export type ErrorLevel = 'warning' | 'error' | 'info'
 
-export type StandardError = {
+export interface StandardError {
   reason: string
-  level?: ErrorLevel 
+  level?: ErrorLevel
 }

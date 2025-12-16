@@ -1,40 +1,56 @@
 import Schema from './schema'
-import type { IIRCCDocumentAttributes } from '~/types/components/documents-uploader/document-schema'
+import type { DocError, IIRCCDocumentAttributes } from '~/types/components/documents-uploader/document-schema'
+import type { DocumentRequest, EmptyDocumentRequest } from '~/types/common/documents'
+
+let error: DocError | null = null
+interface ParseError extends Error {
+  data: EmptyDocumentRequest
+}
 
 export default class IrccSchema extends Schema {
-  override async parseXLSXFileToDocumentJson () {
+  override async parseXLSXFileToDocumentJson (): Promise<DocumentRequest> {
     const sheet: IIRCCDocumentAttributes = this.documentAttributes as IIRCCDocumentAttributes
 
     const Schema = IrccSchema
 
+    error = null
+    const handleError = (err: DocError): undefined => {
+      error = err
+    }
+
     const keywords = this.getKeywords(sheet.keywords)
-    const processKeywords = await keywords.processedKeywords
+    const { processedKeywords } = keywords
     const { otherKeywords } = keywords
-    return {
-      type: 'organization',
+
+    const absCNAIdentifier = await this.getDocumentIdentifierByGUID(sheet.absCNAId)
+      .catch(handleError)
+    const provider = await this.findOrCreateContact(sheet.provider.existing)
+      .catch(handleError)
+    const entitiesToWhomPICGranted = await this.findOrCreateContact(sheet.pic.existing)
+      .catch(handleError)
+
+    const data: EmptyDocumentRequest = {
       header: {
         identifier: Schema.generateGUID(),
         schema: 'absPermit',
         languages: [this.language]
       },
-      absCNA: {
-        identifier: await this.getDocumentIdentifierByGUID(sheet.absCNAId)
-      },
+      absCNA: { identifier: absCNAIdentifier },
       title: {
         [this.language]: sheet.permitEquivalent
       },
       dateOfIssuance: Schema.parseDate(sheet.dateOfIssuance),
       dateOfExpiry: Schema.parseDate(sheet.dateOfExpiry),
-      providers: await this.findOrCreateContact(sheet.provider.existing),
       providersConfidential: Schema.getIsConfidential(sheet.provider.type),
-      entitiesToWhomPICGranted: await this.findOrCreateContact(sheet.pic.existing),
       entitiesToWhomPICGrantedConfidential: Schema.getIsConfidential(sheet.pic.type),
       picGranted: Schema.parseTextToBoolean(sheet.pic.consent),
       subjectMatter: {
         [this.language]: Schema.getAsHtmlElement(sheet.subjectMatter)
       },
-      keywords: processKeywords,
+      keywords: processedKeywords,
       otherKeywords,
+      provider,
+      entitiesToWhomPICGranted,
       matEstablished: Schema.parseTextToBoolean(sheet.matEstablished),
       usages: [
         {
@@ -52,5 +68,12 @@ export default class IrccSchema extends Schema {
       taxonomies: Schema.getELinkData(sheet.taxonomies),
       relevantInformation: sheet.additionalInformation
     }
+
+    if (error !== null) {
+      const parseError: ParseError = Object.assign(error, { data })
+      throw parseError
+    }
+
+    return data
   }
 }

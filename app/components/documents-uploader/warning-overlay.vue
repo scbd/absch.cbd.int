@@ -28,7 +28,7 @@ Fade out the screen and show a warning message in the foreground.
             class="w-100"
           >
             <h2 class="m-1 mb-2">
-              {{ (sheet[index] || {})['permitEquivalent'] }}
+              {{ getTitle(index) }}
             </h2>
             <ModalErrors
               :errors="errors"
@@ -63,7 +63,7 @@ const props = defineProps<{
   documentErrors: DocError[][]
 }>()
 
-const erroredDocuments :ComputedRef<DocumentErrors[]> = computed(() => props.sheet
+const erroredDocuments: ComputedRef<DocumentErrors[]> = computed(() => props.sheet
   .reduce((arr: DocumentErrors[], _attributes: DocumentAttributes, index: number) => {
     const errors = props.documentErrors[index] || []
     if (errors.length > 0) { arr.push([index, errors]) }
@@ -72,4 +72,10 @@ const erroredDocuments :ComputedRef<DocumentErrors[]> = computed(() => props.she
 )
 
 const $emit = defineEmits(['handleConfirm', 'close'])
+
+function getTitle (index: number) {
+  const attributes = props.sheet[index]
+  if (typeof attributes !== 'object') { return '' }
+  return attributes['permitEquivalent']
+}
 </script>
