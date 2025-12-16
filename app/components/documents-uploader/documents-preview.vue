@@ -8,7 +8,7 @@
       class="h-50 bg-gray-100"
     >
       <DocumentGrid
-        :title="(sheet[index] || {})['permitEquivalent'] as string"
+        :title="getTitle(index)"
         :errors="errors[index] || []"
         :document-type="documentType"
         :index="index"
@@ -18,15 +18,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
+import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import DocumentGrid from './document-grid.vue'
-import { DocumentAttributes, DocError } from '~/types/components/documents-uploader/document-schema'
+import type { DocError, AttrsList } from '~/types/components/documents-uploader/document-schema'
+import { ImportDocuments } from './utilities/import-documents'
 
-defineProps<{
-  sheet: DocumentAttributes[]
+const props = defineProps<{
+  sheet: AttrsList
   documentType: DocumentTypes
   errors: DocError[][]
 }>()
+
+function getTitle (index: number): string {
+  return ImportDocuments.getTitle(index, props.sheet)
+}
 </script>
 <style scoped>
   .preview-list  {

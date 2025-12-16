@@ -61,7 +61,10 @@
   </Modal>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted, shallowRef, Ref } from 'vue'
+import {
+  ref, computed, onMounted, shallowRef,
+  type Ref, type ComputedRef
+} from 'vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
@@ -82,15 +85,17 @@ import absMessages from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
 import recordListMessages from '~/app-text/views/register/record-list.json'
 import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
-import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
-import { DocError } from '~/types/components/documents-uploader/document-schema.js'
-import { StandardError } from '~/types/errors.js'
-import { ReadFileResult } from './utilities/read-xlsx-file.js'
+import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
+import type { DocError, HTMLInputEvent } from '~/types/components/documents-uploader/document-schema.js'
+import type { DocumentRequest } from '~/types/common/documents.js'
+import type { ReadFileResult } from './utilities/read-xlsx-file.js'
 import WarningOverlay from './warning-overlay.vue'
 
 const { realm } = useRealm()
 const { mergeLocaleMessage, t } = useI18n()
 const auth = useAuth()
+
+type DocsResp = DocumentRequest[]
 
 const messages = [
   uploaderMessages,
@@ -115,10 +120,10 @@ const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 // Refs
 const defaultDocumentJson = [{ header: { identifier: '' } }]
-const documents = ref(defaultDocumentJson)
-const sheet :Ref<ReadFileResult> = ref({ data: [], errors: [] })
+const documents: Ref<DocumentRequest[]> = ref(defaultDocumentJson)
+const sheet: Ref<ReadFileResult> = ref({ data: [], errors: [] })
 const isLoading = ref(false)
-const errors :Ref<Array<StandardError | DocError>> = ref([])
+const errors: Ref<DocError[]> = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
 const isWarningIndicatorOpen = ref(false)
@@ -128,13 +133,15 @@ const hasErrors = computed(() => errors.value
   .some((error) => error.level === 'error'))
 
 const modalErrors = computed(() => errors.value
-  .filter((error) => !Number.isInteger((error as DocError).row)))
+  .filter((error) => {
+    const e = error
+    if (e.row === undefined) { return true }
+    return !Number.isInteger(e.row) || e.row < 0
+  }))
 
-const documentErrors :Ref<Array<DocError[]>> = ref([])
+const documentErrors: Ref<DocError[][]> = ref([])
 
-const hasParsedFiles = computed(() => {
-  return sheet.value.data.length > 0
-})
+const hasParsedFiles: ComputedRef<boolean> = computed(() => sheet.value.data.length > 0)
 
 // Event Hooks
 onMounted(async () => {
@@ -144,13 +151,14 @@ onMounted(async () => {
 
   await importDocuments.getKeywordsMap()
 
-  errors.value = importDocuments.errors
+  const { errors: docErrors } = importDocuments
+  errors.value = docErrors
 
   isLoading.value = false
 })
 
 // Methods
-function handleClearFile () {
+function handleClearFile (): undefined {
   isLoading.value = false
   errors.value = []
   importDocuments.setErrors([])
@@ -160,34 +168,36 @@ function handleClearFile () {
   isWarningIndicatorOpen.value = false
 }
 
-async function handleConfirm () {
+async function handleConfirm (): Promise<DocsResp> {
   const hasErrors = documentErrors.value.some((errors: DocError[]) => errors.length > 0)
 
   if (hasErrors && !isWarningIndicatorOpen.value) {
     isWarningIndicatorOpen.value = true
-    return
+    return []
   }
-  createDocuments()
+  return await createDocuments()
 }
 
-async function createDocuments () {
+async function createDocuments (): Promise<DocsResp> {
   isLoading.value = true
+
   const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocumentDraft(doc))
 
-  return Promise.all(requestPromises)
-    .then(() => {
+  return await Promise.all(requestPromises)
+    .then((data) => {
       $emit('refreshRecord')
       handleClearFile()
       onClose()
       modalRef.value.close()
+      return data
     })
 }
 
-function onClose () {
+function onClose (): undefined {
   $emit('onClose')
 }
 
-async function onFileChange (changeEvent: Event) {
+async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocsResp> {
   handleClearFile()
 
   isLoading.value = true
@@ -201,13 +211,14 @@ async function onFileChange (changeEvent: Event) {
   isLoading.value = false
 
   // Store errors
-  errors.value = importDocuments.errors
+  const { errors: docErrors } = importDocuments
+  errors.value = docErrors
   documentErrors.value = importDocuments.parseDocumentErrors()
 
   // Store document json
   documents.value = documentsJson
   modalSize.value = 'xxl'
 
-  return documents
+  return documentsJson
 }
 </script>

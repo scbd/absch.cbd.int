@@ -10,7 +10,6 @@
     <button
       class="btn btn-primary"
       type="button"
-      :disabled="hasErrors"
       @click="$emit('handleConfirm')"
     >
       {{ $t("confirmCreateDraftRecords") }}
