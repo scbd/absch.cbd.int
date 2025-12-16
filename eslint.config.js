@@ -9,15 +9,21 @@ import love from 'eslint-config-love'
 const standardStyles = standard({ ts: true, filesTs: ['**/*.{ts,mts,tsx,vue,js}'] })
   .find((config) => config.name === 'neostandard/style') || {}
 
-const vueTs = defineConfigWithVueTs([ 
-  pluginVue.configs['flat/recommended'],
-  vueTsConfigs.recommended,
-])
-
 standardStyles.rules['@stylistic/type-annotation-spacing'] = ["error", { "before": false, "after": true }]
 love.rules['@typescript-eslint/no-magic-numbers'] = ["error", { "ignoreArrayIndexes": true, "ignore": [0, 1] }]
+love.rules['no-useless-assignment'] = ["off"]
 
-export default defineConfig([ 
+const vueTs = defineConfigWithVueTs([
+  pluginVue.configs['flat/recommended'],
+  vueTsConfigs.recommended,
+  {
+    rules: { ...love.rules, ...{ 'no-useless-assignment': [ "off" ] } },
+    plugins: love.plugins,
+    files: ['**/*.vue'],
+  }
+])
+
+export default defineConfig([
   globalIgnores(['.config/', 'dist/', 'node_modules/']),
   {
     languageOptions: {
@@ -26,7 +32,7 @@ export default defineConfig([
   },
   ...standard({
     files: ['**/*.{ts,mts,tsx,vue,js}'],
-    noStyle: true 
+    noStyle: true
   }),
   {
     name: 'include styles for new files',
