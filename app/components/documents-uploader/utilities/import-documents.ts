@@ -1,21 +1,21 @@
-import { StandardError } from '~/types/errors'
 import { mapDocumentAttributesToSchemaJson } from './document-attributes-to-schema-json'
 import { readXLSXFile, type ReadFileResult } from './read-xlsx-file'
-import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import { documentsList } from '../data/document-types-list'
-import {
-  DocError, DocumentAttributes,
-  DocumentAttributesMap, DocumentsJsonArray
+import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
+import type {
+  DocError, DocumentAttributes, HTMLInputEvent,
+  DocumentAttributesMap, DocumentsJsonArray, AttrsList,
+  AttrTypes
 } from '~/types/components/documents-uploader/document-schema'
-import { KeywordType } from '~/types/common/documents'
-import { Translations } from '~/types/languages'
+import type { KeywordType } from '~/types/common/documents'
+import type { Translations } from '~/types/languages'
 // @ts-expect-error import js file
 import ThesaurusApi from '../../../api/thesaurus.js'
 
 export class ImportDocuments {
   t: Translations = (arg) => arg
-  errors: Array<StandardError | DocError> = []
-  keywordsMap: Array<KeywordType> = []
+  errors: DocError[] = []
+  keywordsMap: KeywordType[] = []
   thesaurusApi: ThesaurusApi = {}
   documentType: DocumentTypes
   sheet: ReadFileResult
@@ -27,23 +27,32 @@ export class ImportDocuments {
     this.documentType = documentType
 
     this.thesaurusApi = new ThesaurusApi()
-    this.attributesMap = documentsList[this.documentType]?.attributesMap
+
+    const { [this.documentType]: docList } = documentsList
+    const { attributesMap } = docList
+    this.attributesMap = attributesMap
     this.sheet = { data: [], errors: [] }
   }
 
-  async readXLSXFile (changeEvent: Event) :Promise<ReadFileResult> {
-    const target = changeEvent.target as HTMLInputElement
-    const files = target.files || []
+  async readXLSXFile (changeEvent: HTMLInputEvent): Promise<ReadFileResult> {
+    const { target } = changeEvent
 
-    const file = files[0]
+    const { files } = target
+    if (files === null) { return this.sheet }
 
-    this.sheet = await readXLSXFile(file as File, this.documentType)
-    this.errors = this.sheet.errors
+    const file = files.item(0)
+    if (file === null) { return this.sheet }
+
+    const sheet = await readXLSXFile(file, this.documentType)
+
+    const { errors } = sheet
+    this.sheet = sheet
+    this.errors = errors
 
     return this.sheet
   }
 
-  async mapDocumentAttributesToSchemaJson (attributesList: Array<DocumentAttributes>) :Promise<DocumentsJsonArray> {
+  async mapDocumentAttributesToSchemaJson (attributesList: AttrsList): Promise<DocumentsJsonArray> {
     const mapResult = await mapDocumentAttributesToSchemaJson({
       attributesList,
       documentType: this.documentType,
@@ -52,29 +61,36 @@ export class ImportDocuments {
 
     if (mapResult.errors.length > 0) {
       this.errors = [...this.errors, ...mapResult.errors]
-      return [{ header: { identifier: '' } }]
     }
+    const { documentsJson } = mapResult
 
-    return mapResult.documentsJson
+    return typeof documentsJson === 'object' ? documentsJson : [{ header: { identifier: '' } }]
   }
 
-  storeErrors (newErrors: Array<StandardError>) {
-    newErrors.forEach((error: StandardError) => {
-      this.errors.push({ reason: this.t(error.reason) })
+  storeErrors (newErrors: DocError[]): DocError[] {
+    newErrors.forEach((error: DocError) => {
+      const reason = this.t(error.reason)
+      this.errors.push({ reason, message: reason, name: error.reason })
     })
+    return newErrors
   }
 
-  setErrors (value: Array<StandardError>) {
+  setErrors (value: DocError[]): DocError[] {
     this.errors = value
+    return this.errors
   }
 
-  getColumnErrors (key: string, errors: Array<DocError | StandardError>, index: number) {
-    const errs = errors || [] as Array<DocError>
+  getColumnErrors (key: string, errors: DocError[], index: number): DocError[] {
+    const errs = errors
+    const { attributesMap } = this
+
     return errs
-      .filter((err) => {
-        const error = err as DocError
+      .filter((error) => {
+        const { [key]: attribute } = attributesMap
+        if (attribute === undefined) { return false }
+        const { column } = attribute
         const columnComparitor = Number.isInteger(error.column)
-          ? parseInt(this.attributesMap[key]?.column as string, 10)
+          ? parseInt(String(column), 10)
           : key
         const columnMatch = error.column === columnComparitor
 
@@ -82,18 +98,19 @@ export class ImportDocuments {
       })
   }
 
-  parseDocumentErrors () :DocError[][] {
-    return this.sheet.data.map((documentAttributes: DocumentAttributes, index: number) => {
-      const getReason = (error: DocError, key: string) => {
+  parseDocumentErrors (): DocError[][] {
+    return this.sheet.data.map((documentAttributes: DocumentAttributes<AttrTypes>, index: number) => {
+      const getReason = (error: DocError, key: string): string => {
         const translationKey = this.attributesMap[key]?.translationKey
-        return `${this.t(error.reason || '')} → ${this.t(translationKey || '')}.`
+        const errorString = this.t(String(translationKey))
+        return `${this.t(error.reason)} → ${errorString}.`
       }
 
       return Object.keys(documentAttributes)
         .reduce((errors: DocError[], key: string) => {
           const columnErrors = this.getColumnErrors(key, this.errors, index)
             .map((err) => {
-              const error = err as DocError
+              const error = err
               error.reason = getReason(error, key)
               error.column = key
               return Object.assign(
@@ -109,14 +126,22 @@ export class ImportDocuments {
     })
   }
 
-  async getKeywordsMap () {
-    const { keywordDomains } = documentsList[this.documentType]
+  static getTitle (index: number, sheet: AttrsList): string {
+    const { [index]: doc } = sheet
+    if (typeof doc !== 'object') { return '' }
+    if (typeof doc.permitEquivalent !== 'string') { return '' }
+    return doc.permitEquivalent
+  }
+
+  async getKeywordsMap (): Promise<KeywordType[]> {
+    const { [this.documentType]: documentSchema } = documentsList
+    const { keywordDomains } = documentSchema
 
     const keywordPromises = keywordDomains
       .map((keywordDomain: string) => this.thesaurusApi.getDomainTerms(keywordDomain)
-        .catch((error: Error) => {
+        .catch((error: unknown) => {
           this.storeErrors([{ reason: 'keywordsListError' }])
-          console.warn(error)
+          return error
         }))
 
     const allKeywords = await Promise.all(keywordPromises)
