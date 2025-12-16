@@ -28,7 +28,7 @@
       >
         <SuportingDocument
           v-if="getIsNestedDocument(value)"
-          :document="parseValue(value, key) as DocumentData"
+          :document="getSubDocumentAttributes(value, key)"
           :title="parseHeader(key)"
           :is-open="getIsNestedDocumentOpen(attributeIndex)"
           role="button"
@@ -65,17 +65,18 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, Ref, computed, ComputedRef } from 'vue'
+import { ref, computed, type Ref } from 'vue'
 // @ts-expect-error import js file
 import { useI18n } from 'vue-i18n'
 import SuportingDocument from './supporting-document.vue'
 import ModalErrors from './modal-errors.vue'
-import { DocValue, DocError, DocumentAttributes } from '~/types/components/documents-uploader/document-schema'
 import Schema from './utilities/document-attributes-to-schema-json/schemas/schema'
 import { documentsList } from './data/document-types-list'
-import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
-
-type DocumentData = [string, DocValue][]
+import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
+import type {
+  GridValue, DocError, AttrTypes,
+  DocumentAttributes, DocumentAttrsList
+} from '~/types/components/documents-uploader/document-schema'
 
 const { t } = useI18n()
 
@@ -84,34 +85,34 @@ const props = defineProps<{
   title: string
   documentType: DocumentTypes
   index: number
-  documentAttributes: DocumentAttributes
+  documentAttributes: DocumentAttributes<AttrTypes>
   errors: DocError[]
 }>()
 
-const openedNestedDocuments :Ref<number[]> = ref([])
+const openedNestedDocuments: Ref<number[]> = ref([])
 
-const attributesMap = documentsList[props.documentType]?.attributesMap
+const { [props.documentType]: { attributesMap } } = documentsList
 
 // Filter empty document attributes
-const documentData :ComputedRef<DocumentData> = computed(() => Object
+const documentData = computed(() => Object
   .entries(props.documentAttributes)
   .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, props.errors)))
 
 // Functions
-function getIsNestedDocumentOpen (index: number) {
-  return openedNestedDocuments.value.indexOf(index) > -1
+function getIsNestedDocumentOpen (index: number): boolean {
+  return openedNestedDocuments.value.includes(index)
 }
 
-function doesValueExist (val: DocValue) {
+function doesValueExist (val: GridValue): boolean {
   return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
 }
 
-function hasColumnErrors (key: string, errors: DocError[]) {
-  return errors.some(error => error?.column === key)
+function hasColumnErrors (key: string, errors: DocError[]): boolean {
+  return errors.some(error => error.column === key)
 }
 
-function toggleAccordian (index: number) {
-  const isClosed :boolean = openedNestedDocuments.value.indexOf(index) < 0
+function toggleAccordian (index: number): number {
+  const isClosed = !getIsNestedDocumentOpen(index)
   if (isClosed) {
     openedNestedDocuments.value.push(index)
     return index
@@ -120,33 +121,40 @@ function toggleAccordian (index: number) {
   return index
 }
 
-function getIsNestedDocument (value: DocValue) {
+function getIsNestedDocument (value: GridValue): boolean {
   return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
 }
 
-function parseValue (val: DocValue, key: string) {
-  const getIsDate = (val: DocValue) => val instanceof Date
-  if (getIsDate(val)) {
+function parseValue (val: GridValue, key: string): GridValue {
+  if (val instanceof Date) {
     return Schema.parseDate(val)
   }
 
-  if (getIsNestedDocument(val)) {
+  if (Boolean(val) && typeof val === 'object' && !(val instanceof Date)) {
     return Object.entries(val)
       .map(([subkey, subvalue]) => {
-        const header = parseHeader(subkey, (attributesMap[key] || {}).schema)
-        const value = parseValue(subvalue, key) as DocValue
+        const header = parseHeader(subkey, attributesMap[key]?.schema)
+        const value = parseValue(subvalue, key)
         return [header, value]
       })
   }
 
-  return val as string
+  return val
 }
 
-function parseHeader (key: string, attributesList = attributesMap) {
-  if (typeof key !== 'string') { return '' }
-  if (typeof attributesList !== 'object' || !attributesList) { return '' }
+function getSubDocumentAttributes (value: GridValue, key: string): DocumentAttrsList {
+  if (typeof value !== 'object') { return [] }
+  const subattributesMap = attributesMap[key]?.schema ?? {}
+  return Object.entries(value)
+    .filter(([_subkey, value]) => !Schema.isEmpty(value))
+    .map(([subkey, value]) => [subattributesMap[subkey]?.translationKey ?? '', value])
+}
 
-  const translationKey = attributesList[key]?.translationKey || 'contactInformation'
+function parseHeader (key: string, attributesList = attributesMap): string {
+  if (typeof key !== 'string') { return '' }
+  if (typeof attributesList !== 'object') { return '' }
+
+  const translationKey = attributesList[key]?.translationKey ?? 'contactInformation'
 
   return t(translationKey)
 }

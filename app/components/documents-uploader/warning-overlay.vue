@@ -28,7 +28,7 @@ Fade out the screen and show a warning message in the foreground.
             class="w-100"
           >
             <h2 class="m-1 mb-2">
-              {{ (sheet[index] || {})['permitEquivalent'] }}
+              {{ getTitle(index) }}
             </h2>
             <ModalErrors
               :errors="errors"
@@ -51,25 +51,31 @@ Fade out the screen and show a warning message in the foreground.
   </Overlay>
 </template>
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue'
-import { DocError, DocumentAttributes } from '~/types/components/documents-uploader/document-schema'
+import { computed, type ComputedRef } from 'vue'
+import type { AttrsList, DocError, DocumentAttributes, AttrTypes } from '~/types/components/documents-uploader/document-schema'
 import Overlay from '../common/overlay.vue'
 import ModalErrors from './modal-errors.vue'
+import { ImportDocuments } from './utilities/import-documents'
 
 type DocumentErrors = [number, DocError[]]
 
 const props = defineProps<{
-  sheet: DocumentAttributes[]
+  sheet: AttrsList
   documentErrors: DocError[][]
 }>()
 
-const erroredDocuments :ComputedRef<DocumentErrors[]> = computed(() => props.sheet
-  .reduce((arr: DocumentErrors[], _attributes: DocumentAttributes, index: number) => {
-    const errors = props.documentErrors[index] || []
+const erroredDocuments: ComputedRef<DocumentErrors[]> = computed(() => props.sheet
+  .reduce((arr: DocumentErrors[], _attributes: DocumentAttributes<AttrTypes>, index: number) => {
+    const { documentErrors: { [index]: errors } } = props
+    if (errors === undefined) { return arr }
     if (errors.length > 0) { arr.push([index, errors]) }
     return arr
   }, [])
 )
 
 const $emit = defineEmits(['handleConfirm', 'close'])
+
+function getTitle (index: number): string {
+  return ImportDocuments.getTitle(index, props.sheet)
+}
 </script>
