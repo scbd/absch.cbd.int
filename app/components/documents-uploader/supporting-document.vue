@@ -19,14 +19,14 @@
       class="accordian-box"
       :class="{ 'accordian-box--open': isOpen }"
     >
-      <div class="mw-100 bg-white px-2 py-1 overflow-hidden">
+      <div class="mw-100 position-relative  bg-white px-2 py-1 overflow-hidden">
         <div
           v-for="[header, value] in document"
           :key="header"
           class="mb-1"
         >
           <div class="fw-bold text-dark small">
-            {{ header }}:
+            {{ $t(header) }}:
           </div>
           <div>
             {{ value || '⠀' }}
@@ -37,10 +37,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { DocValue } from '~/types/components/documents-uploader/document-schema'
+import type { DocumentAttrsList } from '~/types/components/documents-uploader/document-schema'
 
 defineProps<{
-  document: [string, DocValue][]
+  document: DocumentAttrsList
   title: string
   isOpen: boolean
 }>()
