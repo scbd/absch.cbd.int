@@ -1,40 +1,52 @@
 import Schema from './schema'
-import type { IIRCCDocumentAttributes } from '~/types/components/documents-uploader/document-schema'
+import type { DocError, DocumentAttributes, IIRCCDocumentAttributes } from '~/types/components/documents-uploader/document-schema'
+import type { DocumentRequest, EmptyDocumentRequest } from '~/types/common/documents'
+
+interface ParseError extends DocError {
+  data: EmptyDocumentRequest
+}
 
 export default class IrccSchema extends Schema {
-  override async parseXLSXFileToDocumentJson () {
-    const sheet: IIRCCDocumentAttributes = this.documentAttributes as IIRCCDocumentAttributes
+  override async parseXLSXFileToDocumentJson (): Promise<DocumentRequest> {
+    const sheet: DocumentAttributes<IIRCCDocumentAttributes> = this.documentAttributes
 
     const Schema = IrccSchema
 
+    let error: DocError | null = null
+    const getError = (): DocError | null => error
+    const handleError = (err: DocError): undefined => {
+      error = err
+    }
+
     const keywords = this.getKeywords(sheet.keywords)
-    const processKeywords = await keywords.processedKeywords
+    const { processedKeywords } = keywords
     const { otherKeywords } = keywords
-    return {
-      type: 'organization',
+
+    const absCNAIdentifier = await this.getDocumentIdentifierByGUID(sheet.absCNAId)
+      .catch(handleError)
+    const provider = await this.findOrCreateContact(sheet.provider)
+      .catch(handleError)
+    const entitiesToWhomPICGranted = await this.findOrCreateContact(sheet.pic)
+      .catch(handleError)
+
+    const data: EmptyDocumentRequest = {
       header: {
         identifier: Schema.generateGUID(),
         schema: 'absPermit',
         languages: [this.language]
       },
-      absCNA: {
-        identifier: await this.getDocumentIdentifierByGUID(sheet.absCNAId)
-      },
-      title: {
-        [this.language]: sheet.permitEquivalent
-      },
+      absCNA: Schema.getSubDocument(absCNAIdentifier),
+      title: this.getLocaleValue(sheet.permitEquivalent),
       dateOfIssuance: Schema.parseDate(sheet.dateOfIssuance),
       dateOfExpiry: Schema.parseDate(sheet.dateOfExpiry),
-      providers: await this.findOrCreateContact(sheet.provider.existing),
-      providersConfidential: Schema.getIsConfidential(sheet.provider.type),
-      entitiesToWhomPICGranted: await this.findOrCreateContact(sheet.pic.existing),
-      entitiesToWhomPICGrantedConfidential: Schema.getIsConfidential(sheet.pic.type),
-      picGranted: Schema.parseTextToBoolean(sheet.pic.consent),
-      subjectMatter: {
-        [this.language]: Schema.getAsHtmlElement(sheet.subjectMatter)
-      },
-      keywords: processKeywords,
+      providersConfidential: Schema.getIsConfidential(sheet.provider?.type),
+      entitiesToWhomPICGrantedConfidential: Schema.getIsConfidential(sheet.pic?.type),
+      picGranted: Schema.parseTextToBoolean(sheet.pic?.consent),
+      subjectMatter: this.getLocaleElement(sheet.subjectMatter),
+      keywords: processedKeywords,
       otherKeywords,
+      provider,
+      entitiesToWhomPICGranted,
       matEstablished: Schema.parseTextToBoolean(sheet.matEstablished),
       usages: [
         {
@@ -42,15 +54,20 @@ export default class IrccSchema extends Schema {
         }
       ],
       usagesConfidential: Schema.getIsConfidential(sheet.usage),
-      usagesDescription: {
-        [this.language]: Schema.getAsHtmlElement(sheet.usageDescription)
-      },
-      thirdPartyTransferCondition: {
-        [this.language]: Schema.getAsHtmlElement(sheet.conditionsThirdPartyTransfer)
-      },
+      usagesDescription: this.getLocaleElement(sheet.usageDescription),
+      thirdPartyTransferCondition: this.getLocaleElement(sheet.conditionsThirdPartyTransfer),
       specimens: Schema.getELinkData(sheet.specimens),
       taxonomies: Schema.getELinkData(sheet.taxonomies),
       relevantInformation: sheet.additionalInformation
     }
+
+    if (getError() !== null) {
+      const errorBase = { data, name: 'parse error', message: 'parse error' }
+      const parseError: ParseError = Object.assign(errorBase, getError())
+      console.warn(error) // eslint-disable-line no-console -- show error in console
+      throw parseError
+    }
+
+    return Schema.removeEmptyValues(data)
   }
 }
