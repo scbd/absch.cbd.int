@@ -80,6 +80,7 @@ export interface IContactFields {
 export interface IIRCCDocumentAttributes extends Record<string, string | SupportingDocument<IContactFields> | DocValue | undefined> {
   language: string;
   absCNAId?: string;
+  country?: string;
   permitEquivalent?: string;
   dateOfIssuance?: string;
   dateOfExpiry?: string;
