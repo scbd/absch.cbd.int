@@ -53,19 +53,19 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, Ref } from 'vue';
+import { onMounted, ref, type Ref } from 'vue'
 // @ts-expect-error importing js file
-import { lstring } from '~/components/kb/filters';
+import { lstring } from '~/components/kb/filters'
 // @ts-expect-error importing js file
-import { mapObjectId, isObjectId } from '~/api/api-base.js';
+import { mapObjectId, isObjectId } from '~/api/api-base.js'
 // @ts-expect-error importing js file
-import ArticlesApi from '../../components/kb/article-api';
+import ArticlesApi from '../../components/kb/article-api'
 // @ts-expect-error importing js file
 import PortalsApi from '~/api/portals'
 // @ts-expect-error importing js file
-import { useAuth } from '@scbd/angular-vue/src/index.js';
+import { useAuth } from '@scbd/angular-vue/src/index.js'
 // @ts-expect-error importing js file
-import { useRealm  } from '~/services/composables/realm.js';
+import { useRealm } from '~/services/composables/realm.js'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
@@ -81,8 +81,8 @@ const { locale, t, mergeLocaleMessage } = useI18n({ messages })
 Object.entries(forumMessages)
   .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
-type LocalizedValue = { en: string }
-type Portal = {
+interface LocalizedValue { en: string }
+interface Portal {
   _id: string
   title: LocalizedValue
   slug: string
@@ -90,9 +90,9 @@ type Portal = {
   article: Article
   url: string
 }
-type Image = { position: string, size: string, url: string }
+interface Image { position: string, size: string, url: string }
 
-type Article = {
+interface Article {
   _id: string
   coverImage: Image
   summary: LocalizedValue
@@ -102,40 +102,42 @@ type Article = {
   adminTags?: string[]
 }
 
-const auth = useAuth();
-const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
-const portalsApi = new PortalsApi();
-const portals :Ref<Portal[]> = ref([])
+const auth = useAuth()
+const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
+const portalsApi = new PortalsApi()
+const portals: Ref<Portal[]> = ref([])
 
 const PORTALS_URL = 'portals'
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 
 onMounted(async () => {
   isLoading.value = true
   // http://localhost:2030/api/v2023/portals?q={"realms": "realm"}
   const portalsData = await portalsApi.queryPortals({ q: { realms: realm } })
-    .catch((err: Error) => console.error(err))
+    .catch((err: Error) => { console.error(err) }) // eslint-disable-line no-console -- show error in consol
 
   const articleOidQueries = portalsData
-    .filter((portalSchema: Portal) => isObjectId(portalSchema['_id']))
+    .filter((portalSchema: Portal) => isObjectId(portalSchema._id))
     .map((portalSchema: Portal) => ({ $oid: mapObjectId(portalSchema.content.article.articleId) }))
 
-  const query = [{ $match: {_id: { $in: articleOidQueries } } }]
+  const query = [{ $match: { _id: { $in: articleOidQueries } } }]
 
-  const articles :Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
-    .catch((err: Error) => console.error(err))
+  const articles: Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
+    .catch((err: Error) => { console.error(err) }) // eslint-disable-line no-console -- show error in consol
   isLoading.value = false
 
-  portals.value = portalsData.map((portal: Portal) => {
+  portals.value = portalsData.map((p: Portal) => {
+    const portal = p
     const article = articles
       .find((article: Article) => portal.content.article.articleId === article._id)
+    if (article === undefined) { return portal }
 
-    portal.article = article || {} as Article
+    portal.article = article
 
-    portal.article.content = sanitizeHtml(lstring(article?.content || '', locale))
+    portal.article.content = sanitizeHtml(lstring(article.content, locale))
 
-    portal.title = lstring(portal?.title || '', locale)
+    portal.title = lstring(portal.title, locale)
 
     portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
     return portal
