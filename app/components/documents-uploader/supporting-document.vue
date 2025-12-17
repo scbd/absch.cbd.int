@@ -4,6 +4,9 @@
   >
     <div
       class="d-flex justify-content-center fw-bold small bg-grey2 px-2 border-bottom overflow-hidden"
+      data-toggle="tooltip"
+      data-placement="top"
+      :title="title"
     >
       <div class="me-2 text-dark text-truncate">
         {{ title }}
