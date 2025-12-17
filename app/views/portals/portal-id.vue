@@ -173,7 +173,10 @@ function toRoutes({ slug, menus, content }, parentPath) {
 }
 
 function buildMenu() {
-  
+  if (typeof this.$route.params.portalId !== 'string') {
+    return {}
+  }
+
   const basePath = compile(`${this.basePath}`)(this.$route.params).replace(/^\//g, '');
 
   const { portalMenu } = this;

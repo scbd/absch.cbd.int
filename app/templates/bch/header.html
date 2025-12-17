@@ -74,8 +74,14 @@
                 </li>
 
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
-                    <a id="countryProfile" rel="noopener" translation-url href="/countries" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
-                          id="dropdownMenuButton2" aria-expanded="false">
+                    <a
+                      id="countryProfile"
+                      rel="noopener"
+                      translation-url
+                      href="/countries"
+                      class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
+                      aria-expanded="false"
+                    >
                              <span class="d-sm-none d-md-inline-block">{{::('bchHeaderT.countryProfiles'|$translate)}}</span> 
                              <span class="d-none d-sm-inline-block d-md-none">
                         {{::('bchHeaderT.countries'|$translate)}} </span>
@@ -117,8 +123,15 @@
                 </li>
              
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
-                    <a href="#" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
-                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">{{::('bchHeaderT.forums'|$translate)}}</a>
+                    <a
+                      id="dropdownMenuButton3"
+                      href="/portals"
+                      rel="noopener"
+                      class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
+                      aria-expanded="false"
+                    >
+                      {{::('bchHeaderT.forums'|$translate)}}
+                    </a>
                     <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
                         <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/bch-on-bch">{{::('bchHeaderT.bchForum'|$translate)}}</a></li>
                         <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/portals/risk-assessment/forum">{{::('bchHeaderT.portalsRiskAssessment'|$translate)}}</a></li>
