@@ -35,6 +35,7 @@ export default class IrccSchema extends Schema {
         schema: 'absPermit',
         languages: [this.language]
       },
+      government: Schema.getSubDocument(sheet.country?.toLowerCase()),
       absCNA: Schema.getSubDocument(absCNAIdentifier),
       title: this.getLocaleValue(sheet.permitEquivalent),
       dateOfIssuance: Schema.parseDate(sheet.dateOfIssuance),
