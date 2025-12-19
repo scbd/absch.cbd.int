@@ -86,16 +86,14 @@ import recordListMessages from '~/app-text/views/register/record-list.json'
 import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
-import type { DocError, HTMLInputEvent } from '~/types/components/documents-uploader/document-schema.js'
-import type { DocumentRequest } from '~/types/common/documents.js'
+import type { DocError, HTMLInputEvent, DocsResp } from '~/types/components/documents-uploader/document-schema.js'
+import type { DocumentStore, CreateMethod } from '~/types/common/documents.js'
 import type { ReadFileResult } from './utilities/read-xlsx-file.js'
 import WarningOverlay from './warning-overlay.vue'
 
 const { realm } = useRealm()
 const { mergeLocaleMessage, t } = useI18n()
 const auth = useAuth()
-
-type DocsResp = DocumentRequest[]
 
 const messages = [
   uploaderMessages,
@@ -119,8 +117,8 @@ const importDocuments = new ImportDocuments(t, props.documentType)
 const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 // Refs
-const defaultDocumentJson = [{ header: { identifier: '' } }]
-const documents: Ref<DocumentRequest[]> = ref(defaultDocumentJson)
+const emptyDoc = { header: { identifier: '' } }
+const documents: Ref<DocumentStore[]> = ref([{ create: () => emptyDoc }])
 const sheet: Ref<ReadFileResult> = ref({ data: [], errors: [] })
 const isLoading = ref(false)
 const errors: Ref<DocError[]> = ref([])
@@ -162,7 +160,7 @@ function handleClearFile (): undefined {
   isLoading.value = false
   errors.value = []
   importDocuments.setErrors([])
-  documents.value = defaultDocumentJson
+  documents.value = [{ create: () => emptyDoc }]
   modalSize.value = 'xl'
   sheet.value = { data: [], errors: [] }
   isWarningIndicatorOpen.value = false
@@ -179,25 +177,26 @@ async function handleConfirm (): Promise<DocsResp> {
 }
 
 async function createDocuments (): Promise<DocsResp> {
+  const create: CreateMethod = async data => await kmDocumentApi.createDocument(data)
+  const createDraft: CreateMethod = async data => await kmDocumentApi.createDocumentDraft(data)
+
   isLoading.value = true
+  const resp = await Promise.all(documents.value.map(async (doc) => await doc.create(create, createDraft)))
 
-  const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocumentDraft(doc))
+  isLoading.value = false
+  $emit('refreshRecord')
+  handleClearFile()
+  onClose()
+  modalRef.value.close()
 
-  return await Promise.all(requestPromises)
-    .then((data) => {
-      $emit('refreshRecord')
-      handleClearFile()
-      onClose()
-      modalRef.value.close()
-      return data
-    })
+  return resp
 }
 
 function onClose (): undefined {
   $emit('onClose')
 }
 
-async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocsResp> {
+async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocumentStore[]> {
   handleClearFile()
 
   isLoading.value = true
@@ -206,7 +205,7 @@ async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocsResp> {
   sheet.value = await importDocuments.readXLSXFile(changeEvent)
 
   // Map document attributes to the document schema
-  const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value.data)
+  const documentsJson: DocumentStore[] = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value.data)
 
   isLoading.value = false
 
