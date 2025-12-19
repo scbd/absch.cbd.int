@@ -10,9 +10,21 @@ export default class KmDocumentApi extends ApiBase
         return this.http.get(`api/v2013/documents/${identifier}`).then(res => res.data).catch(tryCastToApiError);
     }
 
-    async createDocumentDraft(documentJson) {
+    async createDoc(documentJson, isDraft) {
       const { identifier, schema} = documentJson.header
-      const url = `api/v2013/documents/${identifier}/versions/draft`
+      let url = `api/v2013/documents/${identifier}`
+      if (isDraft) {
+        url = `${url}/versions/draft`
+      }
+
       return this.http.put(url, documentJson, { params: { schema } })
+    }
+
+    async createDocumentDraft(documentJson) {
+      return this.createDoc(documentJson, true)
+    }
+
+    async createDocument(documentJson) {
+      return this.createDoc(documentJson, false)
     }
 }

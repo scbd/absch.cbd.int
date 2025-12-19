@@ -1,10 +1,11 @@
 import type {
   MapToJsonParams, DocError, DocumentsJson
 } from '~/types/components/documents-uploader/document-schema'
-import type { DocumentRequest } from '~/types/common/documents'
+import type { DocumentStore } from '~/types/common/documents'
 import { documentsList } from '../../data/document-types-list'
 
-const defaultJson: DocumentRequest = { header: { identifier: '' } }
+const emptyDoc = { header: { identifier: '' } }
+const emptyStore: DocumentStore = { create: () => emptyDoc }
 function getError (): DocumentsJson {
   const error: DocError = {
     reason: 'noDocumentParser',
@@ -14,7 +15,7 @@ function getError (): DocumentsJson {
     name: ''
   }
   const errors: DocError[] = [error]
-  return { documentsJson: [defaultJson], errors }
+  return { documentsJson: [emptyStore], errors }
 }
 
 export async function mapDocumentAttributesToSchemaJson ({
@@ -31,7 +32,7 @@ export async function mapDocumentAttributesToSchemaJson ({
 
   // Iterate over each document in XLSX file and generate
   // the Schema JSON that representing a draft document.
-  const parsePromises = attributesList.map(async (attributes, index): Promise<DocumentRequest> => {
+  const parsePromises = attributesList.map(async (attributes, index): Promise<DocumentStore> => {
     const schema = new documentsList[documentType].DocumentSchema(attributes, keywordsMap)
 
     const json = await schema.parseXLSXFileToDocumentJson()
@@ -42,12 +43,12 @@ export async function mapDocumentAttributesToSchemaJson ({
 
         errors.push(error)
         console.warn(error) // eslint-disable-line no-console -- show error in console
-        const data: DocumentRequest = { header: { identifier: '' } }
-        const parseError = Object.assign({ data }, e)
+        const emptyDoc = { header: { identifier: '' } }
+        const store: DocumentStore = { create: () => emptyDoc }
+        const parseError = Object.assign({ store }, e)
 
-        return parseError.data
+        return parseError.store
       })
-
     return json
   })
 
