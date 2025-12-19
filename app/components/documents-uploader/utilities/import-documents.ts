@@ -4,16 +4,15 @@ import { documentsList } from '../data/document-types-list'
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import type {
   DocError, DocumentAttributes, HTMLInputEvent,
-  DocumentAttributesMap, DocumentsJsonArray, AttrsList,
-  AttrTypes
+  DocumentAttributesMap, AttrsList, AttrTypes
 } from '~/types/components/documents-uploader/document-schema'
-import type { KeywordType } from '~/types/common/documents'
+import type { KeywordType, DocumentStore } from '~/types/common/documents'
 import type { Translations } from '~/types/languages'
 // @ts-expect-error import js file
 import ThesaurusApi from '../../../api/thesaurus.js'
 
 export class ImportDocuments {
-  t: Translations = (arg) => arg
+  static t: Translations = (arg) => arg
   errors: DocError[] = []
   keywordsMap: KeywordType[] = []
   thesaurusApi: ThesaurusApi = {}
@@ -22,10 +21,12 @@ export class ImportDocuments {
   attributesMap: DocumentAttributesMap
 
   constructor (t: Translations, documentType: DocumentTypes) {
-    this.t = t
+    ImportDocuments.t = t
     this.errors = []
     this.documentType = documentType
 
+    // TODO: Add types to API functions or use Vue Composables to make API calls.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- Call new on a js object without a type
     this.thesaurusApi = new ThesaurusApi()
 
     const { [this.documentType]: docList } = documentsList
@@ -52,7 +53,7 @@ export class ImportDocuments {
     return this.sheet
   }
 
-  async mapDocumentAttributesToSchemaJson (attributesList: AttrsList): Promise<DocumentsJsonArray> {
+  async mapDocumentAttributesToSchemaJson (attributesList: AttrsList): Promise<DocumentStore[]> {
     const mapResult = await mapDocumentAttributesToSchemaJson({
       attributesList,
       documentType: this.documentType,
@@ -64,12 +65,13 @@ export class ImportDocuments {
     }
     const { documentsJson } = mapResult
 
-    return typeof documentsJson === 'object' ? documentsJson : [{ header: { identifier: '' } }]
+    const emptyDoc = { header: { identifier: '' } }
+    return typeof documentsJson === 'object' ? documentsJson : [{ create: () => emptyDoc }]
   }
 
   storeErrors (newErrors: DocError[]): DocError[] {
     newErrors.forEach((error: DocError) => {
-      const reason = this.t(error.reason)
+      const reason = ImportDocuments.t(error.reason)
       this.errors.push({ reason, message: reason, name: error.reason })
     })
     return newErrors
@@ -102,8 +104,8 @@ export class ImportDocuments {
     return this.sheet.data.map((documentAttributes: DocumentAttributes<AttrTypes>, index: number) => {
       const getReason = (error: DocError, key: string): string => {
         const translationKey = this.attributesMap[key]?.translationKey
-        const errorString = this.t(String(translationKey))
-        return `${this.t(error.reason)} → ${errorString}.`
+        const errorString = ImportDocuments.t(String(translationKey))
+        return `${ImportDocuments.t(error.reason)} → ${errorString}.`
       }
 
       return Object.keys(documentAttributes)
