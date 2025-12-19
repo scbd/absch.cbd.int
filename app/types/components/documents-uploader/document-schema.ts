@@ -1,8 +1,14 @@
 import type { DocumentTypes } from './document-types-list'
-import type { KeywordType, DocumentRequest } from '~/types/common/documents'
+import type {
+  KeywordType, SupportingDocument,
+  IContactFields, SubDocumentTypes,
+  DocumentStore, DocumentRequest
+} from '~/types/common/documents'
 import type { ErrorLevel } from '~/types/errors'
 
 export type CellValue = string | number | boolean | typeof Date
+
+export type DocsResp = DocumentRequest[]
 
 export interface CellEntry {
   index: number
@@ -42,37 +48,14 @@ export type DocumentAttributes<T extends AttrTypes> =
 export type AttrsList = Array<DocumentAttributes<AttrTypes>>
 
 export interface DocumentsJson {
-  documentsJson: DocumentRequest[]
+  documentsJson: DocumentStore[]
   errors: DocError[]
 }
-
-export type DocumentsJsonArray = DocumentRequest[]
 
 export interface MapToJsonParams {
   attributesList: AttrsList
   documentType: DocumentTypes
   keywordsMap: KeywordType[]
-}
-
-interface GenericDocument {
-  type?: string
-}
-
-// Generic Sub-documents
-export type SubDocumentTypes = IContactFields | GenericDocument
-export type SupportingDocument<T extends SubDocumentTypes> =
-  T extends IContactFields ? IContactFields : SubDocumentTypes
-
-export interface IContactFields {
-  type?: string;
-  existing?: string;
-  orgName?: string;
-  acronym?: string;
-  address?: string;
-  city?: string;
-  country?: string;
-  email?: string;
-  consent?: string;
 }
 
 // Extend Record to allow the generic DocumentAttributes type to be asserted as this type.
