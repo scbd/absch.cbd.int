@@ -1,11 +1,13 @@
 import type { LanguageCode } from '../languages'
 
+type FieldValue = string | null
+
 export type TextValue = Partial<Record<LanguageCode, string>>
 
 export type DocumentValue = string | number | boolean | SubDocument | TextValue |
- SubDocument[] | Date | Header | ELink[]
+ SubDocument[] | Date | Header | ELink[] | string[] | Array<SupportingDocument<SubDocumentTypes>>
 
-export type EmptyDocumentValue = DocumentValue | undefined | SubDocument | null | Header
+export type EmptyDocumentValue = DocumentValue | undefined | null
 
 export interface Header {
   identifier: string
@@ -35,3 +37,29 @@ export interface Keywords {
   otherKeywords: string
 }
 export type UsageKey = 'COMMERCIAL' | 'NONCOMMERCIAL'
+
+// Generic Sub-documents
+interface GenericDocument {
+  type?: string
+}
+export type SubDocumentTypes = IContactFields | GenericDocument
+export type SupportingDocument<T extends SubDocumentTypes> =
+  T extends IContactFields ? IContactFields : SubDocumentTypes
+
+export interface IContactFields {
+  type?: FieldValue;
+  existing?: FieldValue;
+  orgName?: FieldValue;
+  acronym?: FieldValue;
+  address?: FieldValue;
+  city?: FieldValue;
+  country?: FieldValue;
+  email?: FieldValue;
+  consent?: FieldValue;
+}
+
+export type CreateMethod = (data: DocumentRequest | SupportingDocument<SubDocumentTypes>)=> Promise<DocumentRequest>
+
+export interface DocumentStore {
+  create: (create: CreateMethod, createDraft: CreateMethod)=> Promise<DocumentRequest> | DocumentRequest
+}
