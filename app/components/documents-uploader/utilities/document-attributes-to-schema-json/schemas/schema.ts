@@ -1,9 +1,12 @@
-import type { DocError, DocumentAttributes, DocValue, AttrTypes, IContactFields } from '~/types/components/documents-uploader/document-schema'
 import type {
-  KeywordType, ELink, UsageKey,
-  Keywords, DocumentRequest, DocumentValue,
-  SubDocument, EmptyDocumentRequest,
-  TextValue, EmptyDocumentValue
+  DocError, DocumentAttributes,
+  DocValue, AttrTypes
+} from '~/types/components/documents-uploader/document-schema'
+import type {
+  KeywordType, ELink, UsageKey, SupportingDocument,
+  Keywords, DocumentStore, DocumentValue, SubDocumentTypes,
+  SubDocument, EmptyDocumentRequest, IContactFields,
+  TextValue, EmptyDocumentValue, DocumentRequest
 } from '~/types/common/documents'
 // @ts-expect-error importing js file
 import KmDocumentApi from '../../../../../api/km-document'
@@ -224,11 +227,12 @@ export default class Schema {
   /**
   * Find a contact by its GUID or create a GUID for the new contact.
   */
-  async findOrCreateContact (data: IContactFields | undefined | null): Promise<SubDocument[] | undefined> {
-    if (Schema.isEmpty(data?.existing) || data?.existing === undefined) { return }
-    const { existing: contacts } = data
-    if (contacts.trim() !== '') {
-      const existingContacts = contacts.split(',')
+  async findContactOrGenerateId (data: IContactFields | undefined | null): Promise<SubDocument[]> {
+    if (data === undefined || data === null) { return [] }
+    const { existing } = data
+
+    if (typeof existing === 'string' && existing.trim() !== '') {
+      const existingContacts = existing.split(',')
       const createContactPromises = existingContacts
         .map(async (contactUid: string) => await this.getDocumentIdentifierByGUID(contactUid))
 
@@ -240,9 +244,7 @@ export default class Schema {
       return subDocuments
     }
 
-    const contact = {
-      identifier: Schema.generateGUID()
-    }
+    const contact = { identifier: Schema.generateGUID() }
     return [contact]
   }
 
@@ -262,6 +264,31 @@ export default class Schema {
   }
 
   /**
+  * Get the schema object for a contact linked to the document, such as a PIC or provider.
+  */
+  getContactSchema (contact: SupportingDocument<SubDocumentTypes> | undefined, identifier: string | undefined): SupportingDocument<SubDocumentTypes> {
+    if (contact === undefined) { return {} }
+    if (typeof identifier !== 'string') { return {} }
+    const data: EmptyDocumentRequest = {
+      header: {
+        identifier,
+        schema: 'contact',
+        languages: [
+          this.language
+        ]
+      },
+      type: contact.type,
+      government: Schema.getSubDocument(this.documentAttributes.country?.toLowerCase()),
+      organization: this.getLocaleValue(contact.orgName ?? ''),
+      country: Schema.getSubDocument(this.documentAttributes.country?.toLowerCase()),
+      city: this.getLocaleValue(contact.city ?? ''),
+      address: this.getLocaleValue(contact.address ?? ''),
+      emails: typeof contact.email === 'string' ? [contact.email] : undefined
+    }
+    return Schema.removeEmptyValues(data)
+  }
+
+  /**
   * Map confidential string from excel sheet to a boolean.
   */
   static getIsConfidential (value: string | undefined | null): boolean {
@@ -276,8 +303,8 @@ export default class Schema {
     return String(columnValue).toLowerCase() === 'yes'
   }
 
-  async parseXLSXFileToDocumentJson (): Promise<DocumentRequest> {
+  async parseXLSXFileToDocumentJson (): Promise<DocumentStore> {
     const identifier = await this.getDocumentIdentifierByGUID(Schema.generateGUID())
-    return { header: { identifier } }
+    return { doc: { header: { identifier } } }
   }
 }
