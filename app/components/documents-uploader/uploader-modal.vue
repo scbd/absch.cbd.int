@@ -179,13 +179,14 @@ async function createDocuments (): Promise<DocsResp> {
   isLoading.value = true
 
   // Create subdocuments. PIC, The Provider etc..
-  documents.value.subDocuments
+  const subdocuments = documents.value.subDocuments
     .map((doc) => kmDocumentApi.createDocument(doc))
 
-  // Create documents
-  const resp = await Promise.all(
-    documents.value.documents
-      .map(async (doc) => await kmDocumentApi.createDocumentDraft(doc)))
+  const docs = documents.value.documents
+    .map(async (doc) => await kmDocumentApi.createDocumentDraft(doc))
+
+  // Create all documents
+  const resp = await Promise.all([...docs, ...subdocuments])
 
   isLoading.value = false
   $emit('refreshRecord')
