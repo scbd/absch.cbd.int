@@ -179,9 +179,8 @@ async function createDocuments (): Promise<DocsResp> {
   isLoading.value = true
 
   // Create subdocuments. PIC, The Provider etc..
-  await Promise.all(
-    documents.value.subDocuments
-      .map(async (doc) => await kmDocumentApi.createDocument(doc)))
+  documents.value.subDocuments
+    .map((doc) => kmDocumentApi.createDocument(doc))
 
   // Create documents
   const resp = await Promise.all(
