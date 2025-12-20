@@ -1,16 +1,13 @@
 import Schema from './schema'
 import type { DocError, DocumentAttributes, IIRCCDocumentAttributes } from '~/types/components/documents-uploader/document-schema'
-import type {
-  DocumentStore, EmptyDocumentRequest, SubDocument,
-  DocumentRequest, CreateMethod
-} from '~/types/common/documents'
+import type { DocumentRequest, EmptyDocumentRequest } from '~/types/common/documents'
 
 interface ParseError extends DocError {
-  store: DocumentStore
+  data: EmptyDocumentRequest
 }
 
 export default class IrccSchema extends Schema {
-  override async parseXLSXFileToDocumentJson (): Promise<DocumentStore> {
+  override async parseXLSXFileToDocumentJson (): Promise<DocumentRequest> {
     const sheet: DocumentAttributes<IIRCCDocumentAttributes> = this.documentAttributes
 
     const Schema = IrccSchema
@@ -19,7 +16,6 @@ export default class IrccSchema extends Schema {
     const getError = (): DocError | null => error
     const handleError = (e: unknown): undefined => {
       const err: DocError = Object.assign({ row: -1, reason: '', name: 'Parse Error', message: '' }, e)
-
       error = err
     }
 
@@ -29,10 +25,12 @@ export default class IrccSchema extends Schema {
 
     const absCNAIdentifier = await this.getDocumentIdentifierByGUID(sheet.absCNAId)
       .catch(handleError)
-    const providers: SubDocument[] = await this.findContactOrGenerateId(sheet.provider)
-      .catch((error: unknown) => { handleError(error); return [] })
-    const entitiesToWhomPICGranted: SubDocument[] = await this.findContactOrGenerateId(sheet.pic)
-      .catch((error: unknown) => { handleError(error); return [] })
+
+    const providers = await this.findContactOrGenerateId(sheet.provider)
+      .catch(handleError)
+
+    const entitiesToWhomPICGranted = await this.findContactOrGenerateId(sheet.pic)
+      .catch(handleError)
 
     const data: EmptyDocumentRequest = {
       header: {
@@ -67,30 +65,13 @@ export default class IrccSchema extends Schema {
       relevantInformation: sheet.additionalInformation
     }
 
-    const doc = Schema.removeEmptyValues(data)
-    const providerDocuments = providers.map((provider) => this.getContactSchema(sheet.provider, provider.identifier))
-    const contactDocuments = entitiesToWhomPICGranted.map((contact) => this.getContactSchema(sheet.pic, contact.identifier))
-
-    // To be called when the user as confirmed they want to create the document
-    const create = async (create: CreateMethod, createDraft: CreateMethod): Promise<DocumentRequest> => {
-      // Create contacts before attempting to create the document draft
-      // NOTE: PIC is being created published document not as a draft.
-      await Promise.all(contactDocuments.map(async (pic) => await create(pic)))
-      // Create providers before attempting to create the document draft
-      // NOTE: Provider is being created published document not as a draft.
-      await Promise.all(providerDocuments.map(async (provider) => await create(provider)))
-      return await createDraft(doc)
-    }
-
-    const store: DocumentStore = { create }
-
     if (getError() !== null) {
-      const errorBase = { store, name: 'parse error', message: 'parse error' }
+      const errorBase = { data, name: 'parse error', message: 'parse error' }
       const parseError: ParseError = Object.assign(errorBase, getError())
       console.warn(error) // eslint-disable-line no-console -- show error in console
       throw parseError
     }
 
-    return store
+    return Schema.removeEmptyValues(data)
   }
 }
