@@ -87,7 +87,7 @@ import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact
 import { ImportDocuments } from './utilities/import-documents.js'
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
 import type { DocError, HTMLInputEvent, DocsResp } from '~/types/components/documents-uploader/document-schema.js'
-import type { DocumentStore, CreateMethod } from '~/types/common/documents.js'
+import type { DocumentStore } from '~/types/common/documents.js'
 import type { ReadFileResult } from './utilities/read-xlsx-file.js'
 import WarningOverlay from './warning-overlay.vue'
 
@@ -117,8 +117,7 @@ const importDocuments = new ImportDocuments(t, props.documentType)
 const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 // Refs
-const emptyDoc = { header: { identifier: '' } }
-const documents: Ref<DocumentStore[]> = ref([{ create: () => emptyDoc }])
+const documents: Ref<DocumentStore> = ref({ documents: [], subDocuments: [] })
 const sheet: Ref<ReadFileResult> = ref({ data: [], errors: [] })
 const isLoading = ref(false)
 const errors: Ref<DocError[]> = ref([])
@@ -160,7 +159,7 @@ function handleClearFile (): undefined {
   isLoading.value = false
   errors.value = []
   importDocuments.setErrors([])
-  documents.value = [{ create: () => emptyDoc }]
+  documents.value = { documents: [], subDocuments: [] }
   modalSize.value = 'xl'
   sheet.value = { data: [], errors: [] }
   isWarningIndicatorOpen.value = false
@@ -177,11 +176,17 @@ async function handleConfirm (): Promise<DocsResp> {
 }
 
 async function createDocuments (): Promise<DocsResp> {
-  const create: CreateMethod = async data => await kmDocumentApi.createDocument(data)
-  const createDraft: CreateMethod = async data => await kmDocumentApi.createDocumentDraft(data)
-
   isLoading.value = true
-  const resp = await Promise.all(documents.value.map(async (doc) => await doc.create(create, createDraft)))
+
+  // Create subdocuments. PIC, The Provider etc..
+  await Promise.all(
+    documents.value.subDocuments
+      .map(async (doc) => await kmDocumentApi.createDocument(doc)))
+
+  // Create documents
+  const resp = await Promise.all(
+    documents.value.documents
+      .map(async (doc) => await kmDocumentApi.createDocumentDraft(doc)))
 
   isLoading.value = false
   $emit('refreshRecord')
@@ -196,7 +201,7 @@ function onClose (): undefined {
   $emit('onClose')
 }
 
-async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocumentStore[]> {
+async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocumentStore> {
   handleClearFile()
 
   isLoading.value = true
@@ -205,7 +210,7 @@ async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocumentStore
   sheet.value = await importDocuments.readXLSXFile(changeEvent)
 
   // Map document attributes to the document schema
-  const documentsJson: DocumentStore[] = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value.data)
+  const documentStore: DocumentStore = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value.data)
 
   isLoading.value = false
 
@@ -215,9 +220,9 @@ async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocumentStore
   documentErrors.value = importDocuments.parseDocumentErrors()
 
   // Store document json
-  documents.value = documentsJson
+  documents.value = documentStore
   modalSize.value = 'xxl'
 
-  return documentsJson
+  return documentStore
 }
 </script>
