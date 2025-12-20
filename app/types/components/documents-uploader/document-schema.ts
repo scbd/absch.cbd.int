@@ -48,7 +48,7 @@ export type DocumentAttributes<T extends AttrTypes> =
 export type AttrsList = Array<DocumentAttributes<AttrTypes>>
 
 export interface DocumentsJson {
-  documentsJson: DocumentStore[]
+  documentsStore: DocumentStore
   errors: DocError[]
 }
 
