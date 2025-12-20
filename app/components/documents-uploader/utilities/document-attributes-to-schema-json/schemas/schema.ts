@@ -190,16 +190,16 @@ export default class Schema {
   */
   getLocaleElement (value: string | undefined): TextValue | undefined {
     if (typeof value !== 'string') { return undefined }
-    return { [this.language]: Schema.getAsHtmlElement(value) }
+    return { [this.language]: Schema.getAsHtmlElement(value.trim()) }
   }
 
   /**
   * Generate return Object containing string with the language code as the key.
   * to be stored in our system.
   */
-  getLocaleValue (value: string | undefined): TextValue | undefined {
+  getLocaleValue (value: string | undefined | null): TextValue | undefined {
     if (typeof value !== 'string') { return undefined }
-    return { [this.language]: value }
+    return { [this.language]: value.trim() }
   }
 
   /**
@@ -298,12 +298,21 @@ export default class Schema {
       },
       type: contact.type,
       government: Schema.getSubDocument(this.documentAttributes.country?.toLowerCase()),
-      organization: this.getLocaleValue(contact.orgName ?? ''),
       country: Schema.getSubDocument(this.documentAttributes.country?.toLowerCase()),
-      city: this.getLocaleValue(contact.city ?? ''),
-      address: this.getLocaleValue(contact.address ?? ''),
+      city: this.getLocaleValue(contact.city),
+      address: this.getLocaleValue(contact.address),
       emails: typeof contact.email === 'string' ? [contact.email] : undefined
     }
+
+    if (contact.type === 'organization') {
+      data['organization'] = this.getLocaleValue(contact.orgName)
+      data['organizationAcronym'] = this.getLocaleValue(contact.acronym)
+    } else {
+      data['type'] = 'person'
+      data['firstName'] = (contact.orgName ?? '').trim()
+      data['lastName'] = (contact.acronym ?? '').trim()
+    }
+
     return Schema.removeEmptyValues(data)
   }
 
