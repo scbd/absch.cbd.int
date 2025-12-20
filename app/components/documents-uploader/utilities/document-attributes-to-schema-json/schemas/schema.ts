@@ -4,8 +4,8 @@ import type {
 } from '~/types/components/documents-uploader/document-schema'
 import type {
   KeywordType, ELink, UsageKey, SupportingDocument,
-  Keywords, DocumentStore, DocumentValue, SubDocumentTypes,
-  SubDocument, EmptyDocumentRequest, IContactFields,
+  Keywords, DocumentValue, SubDocumentTypes,
+  SubDocument, EmptyDocumentRequest, IContactFields, SubDocumentStore,
   TextValue, EmptyDocumentValue, DocumentRequest
 } from '~/types/common/documents'
 // @ts-expect-error importing js file
@@ -13,7 +13,7 @@ import KmDocumentApi from '../../../../../api/km-document'
 import {
   languages, englishLanguages
 } from '~/app-data/un-languages'
-import type { LanguageCode, GetKeys } from '~/types/languages'
+import type { LanguageCode } from '~/types/languages'
 import { THESAURUS_TERMS } from '~/constants/thesaurus'
 
 const kmDocumentApi = new KmDocumentApi()
@@ -21,11 +21,13 @@ const kmDocumentApi = new KmDocumentApi()
 export default class Schema {
   language: LanguageCode = 'en' // Default
   documentAttributes: DocumentAttributes<AttrTypes>
+  subDocumentStore: SubDocumentStore
   keywordsMap: KeywordType[] = []
-  constructor (documentAttrs: DocumentAttributes<AttrTypes>, keywordsMap: KeywordType[]) {
+  constructor (documentAttrs: DocumentAttributes<AttrTypes>, keywordsMap: KeywordType[], subDocumentStore: SubDocumentStore) {
     this.documentAttributes = documentAttrs
     this.language = Schema.getLanguageCode(this.documentAttributes.language)
     this.keywordsMap = keywordsMap
+    this.subDocumentStore = subDocumentStore
   }
 
   /**
@@ -41,34 +43,34 @@ export default class Schema {
   * Map language from human-readable string in the excel sheet to a language code.
   */
   static getLanguageCode (langValue: string): LanguageCode {
-    const languageMap = Object.assign(englishLanguages, languages)
-    const defaultKeys: GetKeys = () => []
-    const getKeys: GetKeys = typeof languageMap.keys === 'function' ? languageMap.keys : defaultKeys
+    const getKeys = Object.keys as <T extends object>(obj: T)=> Array<keyof T>
 
-    const langKey: LanguageCode | undefined = getKeys()
-      .find((k) => {
-        const key = k
-        const { [key]: value } = languageMap
-        return value.toLowerCase() === langValue.toLowerCase()
-      })
+    let langKey = getKeys(englishLanguages)
+      .find(key => englishLanguages[key].toLowerCase() === langValue.toLowerCase())
+    if (typeof langKey === 'string') { return langKey }
 
-    if (langKey === undefined) { return 'en' }
+    langKey = getKeys(languages)
+      .find(key => languages[key].toLowerCase() === langValue.toLowerCase())
+    if (typeof langKey === 'string') { return langKey }
 
-    return langKey
+    return 'en'
   }
 
-  static isEmpty (value: EmptyDocumentValue): boolean {
+  /**
+  * Check if attribute value is empty null, undefined, empty Array, or empty string.
+  */
+  static isEmpty (value: EmptyDocumentValue): value is null | undefined {
     if (Array.isArray(value)) {
       return value.length < 1
     }
-    return value === null || value === ''
+    return value === null || value === '' || value === undefined
   }
 
   /**
   * Get GUID for usage map from usage map document attribute string.
   */
   static getUsageMapping (usage: string | undefined): string {
-    if (Schema.isEmpty(usage) || usage === undefined) { return '' }
+    if (Schema.isEmpty(usage)) { return '' }
     if (Schema.getIsConfidential(usage)) { return '' }
     const key = usage.replace('-', '').toUpperCase()
     const usageKey: UsageKey = (key === 'NONCOMMERCIAL' || key === 'COMMERCIAL') ? key : 'NONCOMMERCIAL'
@@ -77,7 +79,7 @@ export default class Schema {
   }
 
   static getELinkData (value: string | undefined): ELink[] {
-    if (Schema.isEmpty(value) || value === undefined) { return [] }
+    if (Schema.isEmpty(value)) { return [] }
     const links: string[] = value.split(',')
     return links.map((url: string) => ({ url }))
   }
@@ -87,7 +89,7 @@ export default class Schema {
   * a GUID determined by a keywords list.
   */
   getKeywords (keywordsValue: string | undefined): Keywords {
-    if (Schema.isEmpty(keywordsValue) || keywordsValue === undefined) {
+    if (Schema.isEmpty(keywordsValue)) {
       return { processedKeywords: [], otherKeywords: '' }
     }
 
@@ -175,7 +177,7 @@ export default class Schema {
   static removeEmptyValues (data: EmptyDocumentRequest): DocumentRequest {
     const documentRequest: Record<string, DocumentValue> = { header: { identifier: '' } }
     Object.entries(data).forEach(([key, value]) => {
-      if (!Schema.isEmpty(value) && value !== undefined && value !== null) {
+      if (!Schema.isEmpty(value)) {
         documentRequest[key] = value
       }
     })
@@ -231,21 +233,39 @@ export default class Schema {
     if (data === undefined || data === null) { return [] }
     const { existing } = data
 
-    if (typeof existing === 'string' && existing.trim() !== '') {
+    // If the spreadsheet contains an identifier for an existing contact.
+    if (typeof existing === 'string' && existing.trim().length > 0) {
       const existingContacts = existing.split(',')
       const createContactPromises = existingContacts
         .map(async (contactUid: string) => await this.getDocumentIdentifierByGUID(contactUid))
 
-      const contactIdentifiers = await Promise.all(createContactPromises)
-      const subDocuments: SubDocument[] = contactIdentifiers
+      const fetchedContacts = await Promise.all(createContactPromises)
+
+      const subDocuments: SubDocument[] = fetchedContacts
         .filter(identifier => typeof identifier === 'string')
         .map(identifier => ({ identifier }))
 
       return subDocuments
     }
 
-    const contact = { identifier: Schema.generateGUID() }
-    return [contact]
+    const contactSchema = this.getContactSchema(data)
+
+    // If the spreadsheet contains multiple of the same contact
+    // and we have already generated data for that contact
+    // don't re-create the contact to avoid creating duplicate db entries.
+    const { header: _header, ...schema } = contactSchema
+    const subDocument = this.subDocumentStore.find(subDoc => {
+      const { header: _header, ...doc } = subDoc
+      return JSON.stringify(doc) === JSON.stringify(schema)
+    })
+    const subDocumentExists = typeof subDocument === 'object'
+    if (subDocumentExists) {
+      return [{ identifier: subDocument.header?.identifier ?? '' }]
+    }
+
+    this.subDocumentStore.push(contactSchema)
+    // If no existing contact can be found
+    return [{ identifier: contactSchema.header?.identifier ?? '' }]
   }
 
   /**
@@ -266,12 +286,11 @@ export default class Schema {
   /**
   * Get the schema object for a contact linked to the document, such as a PIC or provider.
   */
-  getContactSchema (contact: SupportingDocument<SubDocumentTypes> | undefined, identifier: string | undefined): SupportingDocument<SubDocumentTypes> {
+  getContactSchema (contact: SupportingDocument<SubDocumentTypes> | undefined): SupportingDocument<SubDocumentTypes> {
     if (contact === undefined) { return {} }
-    if (typeof identifier !== 'string') { return {} }
     const data: EmptyDocumentRequest = {
       header: {
-        identifier,
+        identifier: Schema.generateGUID(),
         schema: 'contact',
         languages: [
           this.language
@@ -303,8 +322,8 @@ export default class Schema {
     return String(columnValue).toLowerCase() === 'yes'
   }
 
-  async parseXLSXFileToDocumentJson (): Promise<DocumentStore> {
+  async parseXLSXFileToDocumentJson (): Promise<DocumentRequest> {
     const identifier = await this.getDocumentIdentifierByGUID(Schema.generateGUID())
-    return { doc: { header: { identifier } } }
+    return { header: { identifier } }
   }
 }
