@@ -47,6 +47,7 @@ export type SupportingDocument<T extends SubDocumentTypes> =
   T extends IContactFields ? IContactFields : SubDocumentTypes
 
 export interface IContactFields {
+  header?: { identifier?: string, schema?: string, language?: string[] };
   type?: FieldValue;
   existing?: FieldValue;
   orgName?: FieldValue;
@@ -58,8 +59,9 @@ export interface IContactFields {
   consent?: FieldValue;
 }
 
-export type CreateMethod = (data: DocumentRequest | SupportingDocument<SubDocumentTypes>)=> Promise<DocumentRequest>
+export type SubDocumentStore = Array<SupportingDocument<SubDocumentTypes>>
 
 export interface DocumentStore {
-  create: (create: CreateMethod, createDraft: CreateMethod)=> Promise<DocumentRequest> | DocumentRequest
+  documents: DocumentRequest[]
+  subDocuments: SubDocumentStore
 }
