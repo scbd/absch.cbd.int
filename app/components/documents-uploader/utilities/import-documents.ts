@@ -53,7 +53,7 @@ export class ImportDocuments {
     return this.sheet
   }
 
-  async mapDocumentAttributesToSchemaJson (attributesList: AttrsList): Promise<DocumentStore[]> {
+  async mapDocumentAttributesToSchemaJson (attributesList: AttrsList): Promise<DocumentStore> {
     const mapResult = await mapDocumentAttributesToSchemaJson({
       attributesList,
       documentType: this.documentType,
@@ -63,10 +63,10 @@ export class ImportDocuments {
     if (mapResult.errors.length > 0) {
       this.errors = [...this.errors, ...mapResult.errors]
     }
-    const { documentsJson } = mapResult
+    const { documentsStore } = mapResult
 
-    const emptyDoc = { header: { identifier: '' } }
-    return typeof documentsJson === 'object' ? documentsJson : [{ create: () => emptyDoc }]
+    const emptyStore = { documents: [], subDocuments: [] }
+    return typeof documentsStore === 'object' ? documentsStore : emptyStore
   }
 
   storeErrors (newErrors: DocError[]): DocError[] {
