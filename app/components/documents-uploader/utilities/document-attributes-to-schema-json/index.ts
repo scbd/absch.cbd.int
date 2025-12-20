@@ -1,11 +1,11 @@
 import type {
   MapToJsonParams, DocError, DocumentsJson
 } from '~/types/components/documents-uploader/document-schema'
-import type { DocumentStore } from '~/types/common/documents'
+import type { DocumentRequest, DocumentStore } from '~/types/common/documents'
 import { documentsList } from '../../data/document-types-list'
 
 const emptyDoc = { header: { identifier: '' } }
-const emptyStore: DocumentStore = { create: () => emptyDoc }
+const emptyStore: DocumentStore = { documents: [], subDocuments: [] }
 function getError (): DocumentsJson {
   const error: DocError = {
     reason: 'noDocumentParser',
@@ -15,7 +15,7 @@ function getError (): DocumentsJson {
     name: ''
   }
   const errors: DocError[] = [error]
-  return { documentsJson: [emptyStore], errors }
+  return { documentsStore: emptyStore, errors }
 }
 
 export async function mapDocumentAttributesToSchemaJson ({
@@ -32,8 +32,9 @@ export async function mapDocumentAttributesToSchemaJson ({
 
   // Iterate over each document in XLSX file and generate
   // the Schema JSON that representing a draft document.
-  const parsePromises = attributesList.map(async (attributes, index): Promise<DocumentStore> => {
-    const schema = new documentsList[documentType].DocumentSchema(attributes, keywordsMap)
+  const documentsStore: DocumentStore = { documents: [], subDocuments: [] }
+  const parsePromises = attributesList.map(async (attributes, index): Promise<DocumentRequest> => {
+    const schema = new documentsList[documentType].DocumentSchema(attributes, keywordsMap, documentsStore.subDocuments)
 
     const json = await schema.parseXLSXFileToDocumentJson()
       .catch((e: unknown) => {
@@ -43,16 +44,19 @@ export async function mapDocumentAttributesToSchemaJson ({
 
         errors.push(error)
         console.warn(error) // eslint-disable-line no-console -- show error in console
-        const emptyDoc = { header: { identifier: '' } }
-        const store: DocumentStore = { create: () => emptyDoc }
-        const parseError = Object.assign({ store }, e)
+        const data: DocumentRequest = emptyDoc
+        const parseError = Object.assign({ data }, e)
 
-        return parseError.store
+        return parseError.data
       })
+
+    const { subDocumentStore } = schema
+    documentsStore.subDocuments = subDocumentStore
     return json
   })
 
   const documentsJson = await Promise.all(parsePromises)
+  documentsStore.documents = documentsJson
 
-  return { documentsJson, errors }
+  return { documentsStore, errors }
 }
