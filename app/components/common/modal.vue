@@ -2,8 +2,9 @@
   <div
     ref="modalRef"
     class="modal fade overflow-hidden pt-5 pb-5"
+    :data-bs-backdrop="backdrop"
     aria-hidden="true"
-    @click.self="close"
+    @click.self="clickBackdrop"
   >
     <div
       class="modal-dialog"
@@ -82,6 +83,10 @@ defineProps({
   footerClass: {
     type: String,
     default: ''
+  },
+  backdrop: {
+    type: String,
+    default: 'default'
   }
 })
 
@@ -94,6 +99,12 @@ const show = (): undefined => {
 const close = (): undefined => {
   modal.hide()
   $emit('onClose')
+}
+
+const clickBackdrop = (event: Event): undefined => {
+  if (!(event.target instanceof HTMLElement)) { return }
+  if (event.target.dataset['bsBackdrop'] === 'static') { return }
+  close()
 }
 
 onMounted(() => {
