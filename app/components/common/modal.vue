@@ -60,44 +60,44 @@
 
 <script setup lang="ts">
 import { shallowRef, onMounted } from 'vue'
-// @ts-ignore
+// @ts-expect-error importing js file
 import { Modal } from 'bootstrap'
 
-let modal = { show: (value: string) => value, hide: () => {} } 
+let modal = { show: (value: string) => value, hide: () => undefined }
 const modalRef = shallowRef(modal)
 
 defineProps({
   title: {
     type: String,
-    default: '',
+    default: ''
   },
   modalSize: {
     type: String,
-    default: 'xl',
+    default: 'xl'
   },
   headerClass: {
     type: String,
-    default: '',
+    default: ''
   },
   footerClass: {
     type: String,
-    default: '',
-  },
+    default: ''
+  }
 })
 
 const $emit = defineEmits(['onClose'])
 
-const show = () => {
+const show = (): undefined => {
   modal.show('static')
 }
 
-const close = () => {
+const close = (): undefined => {
   modal.hide()
   $emit('onClose')
 }
 
 onMounted(() => {
-  const value = modalRef.value
+  const { value } = modalRef
 
   modal = new Modal(value)
 })
