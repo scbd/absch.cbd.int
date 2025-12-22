@@ -2,6 +2,7 @@
   <Modal
     ref="modalRef"
     :modal-size="modalSize"
+    backdrop="static"
     header-class="bg-grey"
     footer-class="bg-grey"
     @on-close="onClose"
