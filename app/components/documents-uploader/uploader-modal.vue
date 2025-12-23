@@ -82,10 +82,6 @@ import DocumentsPreview from './documents-preview.vue'
 import LoadingOverlay from '../common/loading-overlay.vue'
 import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
-import uploaderMessages from '~/app-text/components/bulk-documents-uploader.json'
-import absMessages from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
-import recordListMessages from '~/app-text/views/register/record-list.json'
-import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
 import type { DocError, HTMLInputEvent, DocsResp } from '~/types/components/documents-uploader/document-schema.js'
@@ -94,24 +90,12 @@ import type { ReadFileResult } from './utilities/read-xlsx-file.js'
 import WarningOverlay from './warning-overlay.vue'
 
 const { realm } = useRealm()
-const { mergeLocaleMessage, t } = useI18n()
 const auth = useAuth()
-
-const messages = [
-  uploaderMessages,
-  absMessages,
-  contactMessages,
-  recordListMessages
-]
-
-messages.forEach((messageGroup) => {
-  Object.entries(messageGroup)
-    .forEach(([key, value]) => mergeLocaleMessage(key, value))
-})
 
 const props = defineProps<{
   documentType: DocumentTypes
 }>()
+const { t } = useI18n()
 
 const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
 const importDocuments = new ImportDocuments(t, props.documentType)

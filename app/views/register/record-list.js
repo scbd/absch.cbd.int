@@ -12,7 +12,7 @@ import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
-import importFile from "~/components/documents-uploader/uploader-modal.vue";
+import DocumentsUploader from "~/components/documents-uploader/documents-uploader.vue";
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
@@ -27,7 +27,8 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
                 $scope.isBulkUploaderOpen = false
-                $scope.isImportingDocumentsSupported = $routeParams.document_type === "IRCC"
+                $scope.documentType = ($routeParams.document_type || '').toLowerCase()
+                $scope.isImportingDocumentsSupported = $scope.documentType === 'ircc'
 
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
@@ -817,13 +818,7 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                 $scope.exportVueComponent = {
                   components: {
-                    importFile,
-                  },
-                  setup() {
-                    return {
-                      header: translationService.get('recordListT.importIrccExcel'),
-                      subHeader: translationService.get('recordListT.pleaseSelectExcelInfo')
-                    };
+                    DocumentsUploader,
                   },
                 }
 
