@@ -40,11 +40,11 @@
     />
 
     <WarningOverlay
-      v-if="isWarningIndicatorOpen"
+      v-if="isConfirmationIndicatorOpen"
       :sheet="sheet.data"
       :document-errors="documentErrors"
       @handle-confirm="createDocuments"
-      @close="() => isWarningIndicatorOpen = false"
+      @close="() => isConfirmationIndicatorOpen = false"
     />
 
     <template #footer>
@@ -53,6 +53,7 @@
         :has-errors="hasErrors"
         @handle-confirm="handleConfirm"
         @handle-clear="handleClearFile"
+        @close-modal="onClose"
       />
       <div
         v-else
@@ -124,7 +125,7 @@ const isLoading = ref(false)
 const errors: Ref<DocError[]> = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
-const isWarningIndicatorOpen = ref(false)
+const isConfirmationIndicatorOpen = ref(false)
 
 // Computed Properties
 const hasErrors = computed(() => errors.value
@@ -163,14 +164,12 @@ function handleClearFile (): undefined {
   documents.value = { documents: [], subDocuments: [] }
   modalSize.value = 'xl'
   sheet.value = { data: [], errors: [] }
-  isWarningIndicatorOpen.value = false
+  isConfirmationIndicatorOpen.value = false
 }
 
 async function handleConfirm (): Promise<DocsResp> {
-  const hasErrors = documentErrors.value.some((errors: DocError[]) => errors.length > 0)
-
-  if (hasErrors && !isWarningIndicatorOpen.value) {
-    isWarningIndicatorOpen.value = true
+  if (!isConfirmationIndicatorOpen.value) {
+    isConfirmationIndicatorOpen.value = true
     return []
   }
   return await createDocuments()
