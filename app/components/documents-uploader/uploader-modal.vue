@@ -32,7 +32,7 @@
 
     <LoadingOverlay
       v-if="isLoading && hasParsedFiles"
-      :caption="$t('creatingDocumentsLoader')"
+      :caption="loaderText"
     />
 
     <ModalErrors
@@ -122,6 +122,7 @@ const $emit = defineEmits(['onClose', 'refreshRecord'])
 const documents: Ref<DocumentStore> = ref({ documents: [], subDocuments: [] })
 const sheet: Ref<ReadFileResult> = ref({ data: [], errors: [] })
 const isLoading = ref(false)
+const loaderText = ref(t('uploadingLoader'))
 const errors: Ref<DocError[]> = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
@@ -165,6 +166,7 @@ function handleClearFile (): undefined {
   modalSize.value = 'xl'
   sheet.value = { data: [], errors: [] }
   isConfirmationIndicatorOpen.value = false
+  loaderText.value = t('uploadingLoader')
 }
 
 async function handleConfirm (): Promise<DocsResp> {
@@ -176,6 +178,7 @@ async function handleConfirm (): Promise<DocsResp> {
 }
 
 async function createDocuments (): Promise<DocsResp> {
+  loaderText.value = t('creatingDocumentsLoader')
   isLoading.value = true
 
   // Create subdocuments. PIC, The Provider etc..
