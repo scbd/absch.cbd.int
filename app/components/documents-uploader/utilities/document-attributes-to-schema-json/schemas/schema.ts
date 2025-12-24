@@ -1,6 +1,7 @@
 import type {
   DocError, DocumentAttributes,
-  DocValue, AttrTypes
+  DocValue, AttrTypes,
+  GridValue
 } from '~/types/components/documents-uploader/document-schema'
 import type {
   KeywordType, ELink, UsageKey, SupportingDocument,
@@ -59,7 +60,7 @@ export default class Schema {
   /**
   * Check if attribute value is empty null, undefined, empty Array, or empty string.
   */
-  static isEmpty (value: EmptyDocumentValue): value is null | undefined {
+  static isEmpty (value: EmptyDocumentValue | GridValue): value is null | undefined {
     if (Array.isArray(value)) {
       return value.length < 1
     }
