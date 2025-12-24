@@ -88,7 +88,7 @@ Fade out the screen and show a warning message in the foreground.
 </template>
 <script setup lang="ts">
 import { computed, type ComputedRef } from 'vue'
-import type { AttrsList, DocError, DocumentAttributes, AttrTypes } from '~/types/components/documents-uploader/document-schema'
+import type { GridValue, DocError, SheetData } from '~/types/components/documents-uploader/document-schema'
 import Overlay from '../common/overlay.vue'
 import ModalErrors from './modal-errors.vue'
 import { ImportDocuments } from './utilities/import-documents'
@@ -96,12 +96,12 @@ import { ImportDocuments } from './utilities/import-documents'
 type DocumentErrors = [number, DocError[]]
 
 const props = defineProps<{
-  sheet: AttrsList
+  sheet: SheetData
   documentErrors: DocError[][]
 }>()
 
 const erroredDocuments: ComputedRef<DocumentErrors[]> = computed(() => props.sheet
-  .reduce((arr: DocumentErrors[], _attributes: DocumentAttributes<AttrTypes>, index: number) => {
+  .reduce((arr: DocumentErrors[], _attributes: Array<[string, GridValue]>, index: number) => {
     const { documentErrors: { [index]: errors } } = props
     if (errors === undefined) { return arr }
     if (errors.length > 0) { arr.push([index, errors]) }
@@ -114,7 +114,7 @@ const hasErrors = computed(() => erroredDocuments.value.length > 0)
 const $emit = defineEmits(['handleConfirm', 'close'])
 
 function getTitle (index: number): string {
-  return ImportDocuments.getTitle(index, props.sheet)
+  return ImportDocuments.getTitle(props.sheet[index] ?? [])
 }
 </script>
 <style scoped>

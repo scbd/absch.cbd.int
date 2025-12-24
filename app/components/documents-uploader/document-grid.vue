@@ -28,8 +28,8 @@
       >
         <SuportingDocument
           v-if="getIsNestedDocument(value)"
-          :document="getSubDocumentAttributes(value, key)"
-          :title="parseHeader(key)"
+          :document="value as DocumentAttrsList"
+          :title="key"
           :is-open="getIsNestedDocumentOpen(attributeIndex)"
           role="button"
           @click="() => toggleAccordian(attributeIndex)"
@@ -39,19 +39,19 @@
           class="h-100 overflow-hidden"
           data-toggle="tooltip"
           data-placement="top"
-          :title="parseValue(value, key) as string"
+          :title="value as string"
           :class="{ 'alert-danger': hasColumnErrors(key, errors) }"
         >
           <div
             class="fw-bold text-dark small bg-grey2 px-2 border-bottom overflow-hidden"
           >
-            {{ parseHeader(key) }}
+            {{ key }}
           </div>
 
           <div
             class="px-2 text-truncate"
           >
-            {{ parseValue(value, key) }}
+            {{ value }}
           </div>
         </div>
       </div>
@@ -65,50 +65,30 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed, type Ref } from 'vue'
-// @ts-expect-error import js file
-import { useI18n } from 'vue-i18n'
+import { ref, type Ref } from 'vue'
 import SuportingDocument from './supporting-document.vue'
 import ModalErrors from './modal-errors.vue'
-import Schema from './utilities/document-attributes-to-schema-json/schemas/schema'
-import { documentsList } from './data/document-types-list'
+import { ImportDocuments } from './utilities/import-documents'
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import type {
-  GridValue, DocError, AttrTypes,
-  DocumentAttributes, DocumentAttrsList
+  GridValue, DocError,
+  DocumentAttrsList
 } from '~/types/components/documents-uploader/document-schema'
 
-const { t } = useI18n()
-
 // Props
-const props = defineProps<{
+defineProps<{
   title: string
   documentType: DocumentTypes
   index: number
-  documentAttributes: DocumentAttributes<AttrTypes>
+  documentData: Array<[string, GridValue]>
   errors: DocError[]
 }>()
 
 const openedNestedDocuments: Ref<number[]> = ref([])
 
-const { [props.documentType]: { attributesMap } } = documentsList
-
-// Filter empty document attributes
-const documentData = computed(() => Object
-  .entries(props.documentAttributes)
-  .filter(([key, value]) => doesValueExist(value) || hasColumnErrors(key, props.errors)))
-
 // Functions
 function getIsNestedDocumentOpen (index: number): boolean {
   return openedNestedDocuments.value.includes(index)
-}
-
-function doesValueExist (val: GridValue): boolean {
-  return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
-}
-
-function hasColumnErrors (key: string, errors: DocError[]): boolean {
-  return errors.some(error => error.column === key)
 }
 
 function toggleAccordian (index: number): number {
@@ -122,41 +102,11 @@ function toggleAccordian (index: number): number {
 }
 
 function getIsNestedDocument (value: GridValue): boolean {
-  return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
+  return ImportDocuments.getIsNestedDocument(value)
 }
 
-function parseValue (val: GridValue, key: string): GridValue {
-  if (val instanceof Date) {
-    return Schema.parseDate(val)
-  }
-
-  if (Boolean(val) && typeof val === 'object' && !(val instanceof Date)) {
-    return Object.entries(val)
-      .map(([subkey, subvalue]) => {
-        const header = parseHeader(subkey, attributesMap[key]?.schema)
-        const value = parseValue(subvalue, key)
-        return [header, value]
-      })
-  }
-
-  return val
-}
-
-function getSubDocumentAttributes (value: GridValue, key: string): DocumentAttrsList {
-  if (typeof value !== 'object') { return [] }
-  const subattributesMap = attributesMap[key]?.schema ?? {}
-  return Object.entries(value)
-    .filter(([_subkey, value]) => !Schema.isEmpty(value))
-    .map(([subkey, value]) => [subattributesMap[subkey]?.translationKey ?? '', value])
-}
-
-function parseHeader (key: string, attributesList = attributesMap): string {
-  if (typeof key !== 'string') { return '' }
-  if (typeof attributesList !== 'object') { return '' }
-
-  const translationKey = attributesList[key]?.translationKey ?? 'contactInformation'
-
-  return t(translationKey)
+function hasColumnErrors (key: string, errors: DocError[]): boolean {
+  return ImportDocuments.hasColumnErrors(key, errors)
 }
 </script>
 <style scoped>
