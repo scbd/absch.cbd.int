@@ -25,7 +25,7 @@
 
     <DocumentsPreview
       v-if="hasParsedFiles"
-      :sheet="sheet.data"
+      :sheet="sheet"
       :errors="documentErrors"
       :document-type="documentType"
     />
@@ -41,7 +41,7 @@
 
     <WarningOverlay
       v-if="isConfirmationIndicatorOpen"
-      :sheet="sheet.data"
+      :sheet="sheet"
       :document-errors="documentErrors"
       @handle-confirm="createDocuments"
       @close="() => isConfirmationIndicatorOpen = false"
@@ -84,9 +84,8 @@ import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
 import { ImportDocuments } from './utilities/import-documents.js'
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
-import type { DocError, HTMLInputEvent, DocsResp } from '~/types/components/documents-uploader/document-schema.js'
+import type { DocError, HTMLInputEvent, DocsResp, SheetData } from '~/types/components/documents-uploader/document-schema.js'
 import type { DocumentStore } from '~/types/common/documents.js'
-import type { ReadFileResult } from './utilities/read-xlsx-file.js'
 import WarningOverlay from './warning-overlay.vue'
 
 const { realm } = useRealm()
@@ -95,16 +94,16 @@ const auth = useAuth()
 const props = defineProps<{
   documentType: DocumentTypes
 }>()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
-const importDocuments = new ImportDocuments(t, props.documentType)
+const importDocuments = new ImportDocuments(t, locale.value, props.documentType)
 
 const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 // Refs
 const documents: Ref<DocumentStore> = ref({ documents: [], subDocuments: [] })
-const sheet: Ref<ReadFileResult> = ref({ data: [], errors: [] })
+const sheet: Ref<SheetData> = ref([])
 const isLoading = ref(false)
 const loaderText = ref(t('uploadingLoader'))
 const errors: Ref<DocError[]> = ref([])
@@ -125,7 +124,7 @@ const modalErrors = computed(() => errors.value
 
 const documentErrors: Ref<DocError[][]> = ref([])
 
-const hasParsedFiles: ComputedRef<boolean> = computed(() => sheet.value.data.length > 0)
+const hasParsedFiles: ComputedRef<boolean> = computed(() => sheet.value.length > 0)
 
 // Event Hooks
 onMounted(async () => {
@@ -148,7 +147,7 @@ function handleClearFile (): undefined {
   importDocuments.setErrors([])
   documents.value = { documents: [], subDocuments: [] }
   modalSize.value = 'xl'
-  sheet.value = { data: [], errors: [] }
+  sheet.value = []
   isConfirmationIndicatorOpen.value = false
   loaderText.value = t('uploadingLoader')
 }
@@ -194,10 +193,11 @@ async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocumentStore
   isLoading.value = true
 
   // Read File
-  sheet.value = await importDocuments.readXLSXFile(changeEvent)
+  const readResult = await importDocuments.readXLSXFile(changeEvent)
+  sheet.value = await importDocuments.parseSheetForDisplay(readResult.data)
 
   // Map document attributes to the document schema
-  const documentStore: DocumentStore = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value.data)
+  const documentStore: DocumentStore = await importDocuments.mapDocumentAttributesToSchemaJson(readResult.data)
 
   isLoading.value = false
 

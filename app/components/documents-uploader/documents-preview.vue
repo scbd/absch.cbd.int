@@ -12,7 +12,7 @@
         :errors="errors[index] || []"
         :document-type="documentType"
         :index="index"
-        :document-attributes="document"
+        :document-data="document"
       />
     </div>
   </div>
@@ -20,17 +20,17 @@
 <script setup lang="ts">
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import DocumentGrid from './document-grid.vue'
-import type { DocError, AttrsList } from '~/types/components/documents-uploader/document-schema'
+import type { DocError, SheetData } from '~/types/components/documents-uploader/document-schema'
 import { ImportDocuments } from './utilities/import-documents'
 
 const props = defineProps<{
-  sheet: AttrsList
+  sheet: SheetData
   documentType: DocumentTypes
   errors: DocError[][]
 }>()
 
 function getTitle (index: number): string {
-  return ImportDocuments.getTitle(index, props.sheet)
+  return ImportDocuments.getTitle(props.sheet[index] ?? [])
 }
 </script>
 <style scoped>

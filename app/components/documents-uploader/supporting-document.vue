@@ -29,7 +29,7 @@
           class="mb-1"
         >
           <div class="fw-bold text-dark small">
-            {{ $t(header) }}:
+            {{ header }}:
           </div>
           <div>
             {{ value || '⠀' }}
