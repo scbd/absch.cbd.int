@@ -17,6 +17,8 @@ export interface CellEntry {
 
 export type DocValue = CellEntry | CellValue
 
+export type SheetData = Array<Array<[string, GridValue]>>
+
 // For Excel Parser
 export type DocumentAttributesMap = Record<string, AttributeDefinition>
 export interface AttributeDefinition {
