@@ -26,6 +26,7 @@ export class ImportDocuments {
   static t: Translations = (arg) => arg
   locale = 'en'
   errors: DocError[] = []
+  documentErrors: DocError[][] = []
   keywordsMap: KeywordType[] = []
   thesaurusApi: ThesaurusApi = {}
   documentType: DocumentTypes
@@ -75,18 +76,23 @@ export class ImportDocuments {
   * Parse the spreasheet object into header(description), and value pairs parsed to be displayed to the user.
   */
   async parseSheetForDisplay (sheet: Array<DocumentAttributes<AttrTypes>>): Promise<SheetData> {
+    // Parse errors for display
+    this.documentErrors = this.parseDocumentErrors(this.errors)
+    ImportDocuments.hasColumnErrors(ImportDocuments.t('dateOfExpiry'), this.errors)
+
+    // Headers(descriptions) and values for display
     return await Promise.all(sheet.map(async (doc) => {
-      // For dispalying values
       const documentData = Object
         .entries(doc)
-        .filter(([key, value]) => ImportDocuments.doesValueExist(value) || ImportDocuments.hasColumnErrors(key, this.errors))
 
-      return await Promise.all(documentData
+      const data: Array<[string, GridValue]> = await Promise.all(documentData
         .map(async ([key, value]) => {
-          const val = await this.parseValue(value, key)
+          const val = await this.parseValue(value ?? '', key)
           const header = this.parseHeader(key)
           return [header, val]
         }))
+      return data
+        .filter(([key, val]) => ImportDocuments.doesValueExist(val) || ImportDocuments.hasColumnErrors(key, this.errors))
     }))
   }
 
@@ -154,7 +160,7 @@ export class ImportDocuments {
   /**
   * Translate document errors and match them to their given document attributes.
   */
-  parseDocumentErrors (): DocError[][] {
+  parseDocumentErrors (errors: DocError[]): DocError[][] {
     return this.sheet.data.map((documentAttributes: DocumentAttributes<AttrTypes>, index: number) => {
       const getReason = (error: DocError, key: string): string => {
         const translationKey = this.attributesMap[key]?.translationKey
@@ -163,8 +169,8 @@ export class ImportDocuments {
       }
 
       return Object.keys(documentAttributes)
-        .reduce((errors: DocError[], key: string) => {
-          const columnErrors = this.getColumnErrors(key, this.errors, index)
+        .reduce((documentErrors: DocError[], key: string) => {
+          const columnErrors = this.getColumnErrors(key, errors, index)
             .map((err) => {
               const error = err
               error.reason = getReason(error, key)
@@ -175,9 +181,9 @@ export class ImportDocuments {
               ) as DocError
             })
 
-          if (columnErrors.length < 1) { return errors }
+          if (columnErrors.length < 1) { return documentErrors }
 
-          return [...columnErrors, ...errors]
+          return [...columnErrors, ...documentErrors]
         }, [])
     })
   }
@@ -288,7 +294,12 @@ export class ImportDocuments {
   /**
   * Determine if a document value has errors.
   */
-  static hasColumnErrors (key: string, errors: DocError[]): boolean {
-    return errors.some(error => error.column === key)
+  static hasColumnErrors (key: string | number, errors: DocError[]): boolean {
+    return errors.some(error => {
+      if (typeof error.column === 'string') {
+        return ImportDocuments.t(error.column) === key
+      }
+      return error.column === key
+    })
   }
 }
