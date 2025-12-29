@@ -17,7 +17,9 @@ export interface CellEntry {
 
 export type DocValue = CellEntry | CellValue
 
-export type SheetData = Array<Array<[string, GridValue]>>
+export interface GridData { value: GridValue | GridData[] | GridData, header: string, key: string }
+
+export type SheetData = GridData[][]
 
 // For Excel Parser
 export type DocumentAttributesMap = Record<string, AttributeDefinition>
@@ -59,10 +61,10 @@ export interface MapToJsonParams {
   documentType: DocumentTypes
   keywordsMap: KeywordType[]
 }
-
+export type DocumentAttributeValue<T extends SubDocumentTypes> = string | SupportingDocument<T> | DocValue | undefined
 // Extend Record to allow the generic DocumentAttributes type to be asserted as this type.
 // Necessary for having different types of document schemas for different document types.
-export interface IIRCCDocumentAttributes extends Record<string, string | SupportingDocument<IContactFields> | DocValue | undefined> {
+export interface IIRCCDocumentAttributes extends Record<string, DocumentAttributeValue<IContactFields>> {
   language: string;
   absCNAId?: string;
   country?: string;
@@ -87,8 +89,6 @@ export interface IIRCCDocumentAttributes extends Record<string, string | Support
 type DocumentData = Record<string, string>
 
 export type GridValue = undefined | SupportingDocument<SubDocumentTypes> | DocValue | DocumentData | GridValue[]
-
-export type DocumentAttrsList = Array<[string, GridValue]>
 
 // For uploading files
 export interface HTMLInputEvent extends Event {
