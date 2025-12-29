@@ -88,7 +88,7 @@ Fade out the screen and show a warning message in the foreground.
 </template>
 <script setup lang="ts">
 import { computed, type ComputedRef } from 'vue'
-import type { GridValue, DocError, SheetData } from '~/types/components/documents-uploader/document-schema'
+import type { GridData, DocError, SheetData } from '~/types/components/documents-uploader/document-schema'
 import Overlay from '../common/overlay.vue'
 import ModalErrors from './modal-errors.vue'
 import { ImportDocuments } from './utilities/import-documents'
@@ -101,7 +101,7 @@ const props = defineProps<{
 }>()
 
 const erroredDocuments: ComputedRef<DocumentErrors[]> = computed(() => props.sheet
-  .reduce((arr: DocumentErrors[], _attributes: Array<[string, GridValue]>, index: number) => {
+  .reduce((arr: DocumentErrors[], _attributes: GridData[], index: number) => {
     const { documentErrors: { [index]: errors } } = props
     if (errors === undefined) { return arr }
     if (errors.length > 0) { arr.push([index, errors]) }
