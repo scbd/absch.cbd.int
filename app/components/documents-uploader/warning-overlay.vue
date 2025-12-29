@@ -114,7 +114,7 @@ const hasErrors = computed(() => erroredDocuments.value.length > 0)
 const $emit = defineEmits(['handleConfirm', 'close'])
 
 function getTitle (index: number): string {
-  return ImportDocuments.getTitle(props.sheet[index] ?? [])
+  return `${index + 1} → ${ImportDocuments.getTitle(props.sheet[index] ?? [])}`
 }
 </script>
 <style scoped>
