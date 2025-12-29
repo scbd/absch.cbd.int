@@ -1,6 +1,11 @@
 <template>
   <div>
     <h6 class="p-1 d-flex ps-2 m-0 bg-gray-700 color-white border-bottom border-2">
+      <div
+        class="d-flex me-2 pe-1 fw-bolder text-center"
+      >
+        {{ index + 1 }}.
+      </div>
       {{ title }}
       <div class="ms-2">
         <i
