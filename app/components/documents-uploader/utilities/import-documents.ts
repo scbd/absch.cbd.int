@@ -7,9 +7,10 @@ import Schema from './document-attributes-to-schema-json/schemas/schema'
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
 import type {
   DocError, DocumentAttributes, HTMLInputEvent, SheetData,
-  DocumentAttributesMap, AttrsList, AttrTypes, GridValue
+  DocumentAttributesMap, AttrsList, AttrTypes, GridValue,
+  DocumentAttributeValue, GridData
 } from '~/types/components/documents-uploader/document-schema'
-import type { KeywordType, DocumentStore } from '~/types/common/documents'
+import type { KeywordType, DocumentStore, SubDocumentTypes } from '~/types/common/documents'
 import type { Translations } from '~/types/languages'
 // @ts-expect-error import js file
 import ThesaurusApi from '../../../api/thesaurus.js'
@@ -78,21 +79,20 @@ export class ImportDocuments {
   async parseSheetForDisplay (sheet: Array<DocumentAttributes<AttrTypes>>): Promise<SheetData> {
     // Parse errors for display
     this.documentErrors = this.parseDocumentErrors(this.errors)
-    ImportDocuments.hasColumnErrors(ImportDocuments.t('dateOfExpiry'), this.errors)
 
     // Headers(descriptions) and values for display
     return await Promise.all(sheet.map(async (doc) => {
       const documentData = Object
         .entries(doc)
 
-      const data: Array<[string, GridValue]> = await Promise.all(documentData
-        .map(async ([key, value]) => {
-          const val = await this.parseValue(value ?? '', key)
+      const data: GridData[] = await Promise.all(documentData
+        .map(async ([key, v]) => {
+          const value = await this.parseValue(v ?? '', key)
           const header = this.parseHeader(key)
-          return [header, val]
+          return { header, value, key }
         }))
       return data
-        .filter(([key, val]) => ImportDocuments.doesValueExist(val) || ImportDocuments.hasColumnErrors(key, this.errors))
+        .filter(entry => !this.isValidAndEmpty(entry.value, entry.key, this.attributesMap))
     }))
   }
 
@@ -108,24 +108,17 @@ export class ImportDocuments {
     })
 
     if (mapResult.errors.length > 0) {
-      this.errors = [...this.errors, ...mapResult.errors]
+      const resultErrors = mapResult.errors.map(error => {
+        const { column } = error
+        const indexedColumn = this.attributesMap[column ?? '']?.column
+        return Object.assign(error, { column: parseInt(indexedColumn ?? '-1', 10) })
+      })
+      this.errors = [...this.errors, ...resultErrors]
     }
     const { documentsStore } = mapResult
 
     const emptyStore = { documents: [], subDocuments: [] }
     return typeof documentsStore === 'object' ? documentsStore : emptyStore
-  }
-
-  /**
-  * Store translated errors during the document handling process.
-  */
-  storeErrors (newErrors: DocError[]): DocError[] {
-    newErrors.forEach((error: DocError) => {
-      const reason = ImportDocuments.t(error.reason)
-
-      this.errors.push({ reason, message: reason, name: error.reason })
-    })
-    return newErrors
   }
 
   /**
@@ -139,65 +132,75 @@ export class ImportDocuments {
   /**
   * Find all errors matching a given document and document attribute i.e. (Document 1, Title)
   */
-  getColumnErrors (key: string, errors: DocError[], index: number): DocError[] {
-    const errs = errors
-    const { attributesMap } = this
+  static getColumnErrors (column: number, row: number, errors: DocError[]): DocError[] {
+    return errors
+      .filter((error) => error.row === row && error.column === column)
+  }
 
-    return errs
-      .filter((error) => {
-        const { [key]: attribute } = attributesMap
-        if (attribute === undefined) { return false }
-        const { column } = attribute
-        const columnComparitor = Number.isInteger(error.column)
-          ? parseInt(String(column), 10)
-          : key
-        const columnMatch = error.column === columnComparitor
-
-        return error.row === index && columnMatch
-      })
+  /**
+  * Is object a list of attributes.
+  */
+  static isAttrsList (obj: DocumentAttributeValue<SubDocumentTypes> | null): obj is Record<string, DocumentAttributeValue<SubDocumentTypes>> {
+    return typeof obj === 'object' && !(obj instanceof Date) && obj !== null
   }
 
   /**
   * Translate document errors and match them to their given document attributes.
   */
   parseDocumentErrors (errors: DocError[]): DocError[][] {
-    return this.sheet.data.map((documentAttributes: DocumentAttributes<AttrTypes>, index: number) => {
-      const getReason = (error: DocError, key: string): string => {
-        const translationKey = this.attributesMap[key]?.translationKey
-        const errorString = ImportDocuments.t(String(translationKey))
-        return `${ImportDocuments.t(error.reason)} → ${errorString}.`
-      }
+    const getReason = (error: DocError, key: string, attrsMap: DocumentAttributesMap): string => {
+      const translationKey = attrsMap[key]?.translationKey
+      const errorString = ImportDocuments.t(String(translationKey))
+      return `${ImportDocuments.t(error.reason)} → ${errorString}.`
+    }
 
-      return Object.keys(documentAttributes)
-        .reduce((documentErrors: DocError[], key: string) => {
-          const columnErrors = this.getColumnErrors(key, errors, index)
-            .map((err) => {
-              const error = err
-              error.reason = getReason(error, key)
-              error.column = key
-              return Object.assign(
-                { level: 'warning' },
-                error
-              ) as DocError
-            })
+    const getError = (err: DocError, column: number, key: string, attrsMap: DocumentAttributesMap): DocError => {
+      const error = err
+      error.reason = getReason(error, key, attrsMap)
+      error.column = column
+      return Object.assign(
+        { level: 'warning' },
+        error
+      ) as DocError
+    }
 
-          if (columnErrors.length < 1) { return documentErrors }
+    const mapErrors = (attributes: DocumentAttributes<AttrTypes> | DocumentAttributeValue<SubDocumentTypes>, attributesMap: DocumentAttributesMap, index: number): DocError[] => Object.keys(attributes ?? {})
+      .reduce((documentErrors: DocError[], key: string) => {
+        if (!ImportDocuments.isAttrsList(attributes)) { return documentErrors }
 
-          return [...columnErrors, ...documentErrors]
-        }, [])
-    })
+        if (ImportDocuments.isAttrsList(attributes[key])) {
+          const map: DocumentAttributesMap | undefined = attributesMap[key]?.schema
+          if (map === undefined) { return documentErrors }
+          return [...mapErrors(attributes[key], map, index), ...documentErrors]
+        }
+
+        const column = parseInt(attributesMap[key]?.column ?? '-1', 10)
+
+        const columnErrors = ImportDocuments.getColumnErrors(column, index, errors)
+          .map((err) => getError(err, column, key, attributesMap))
+
+        if (columnErrors.length < 1) { return documentErrors }
+
+        return [...columnErrors, ...documentErrors]
+      }, [])
+
+    return this.sheet.data
+      .map((documentAttributes: DocumentAttributes<AttrTypes>, index: number) => mapErrors(documentAttributes, this.attributesMap, index))
   }
 
   /**
   * Get the document title from a set of parsed document headers, and values.
   */
-  static getTitle (doc: Array<[string, GridValue]>): string {
+  static getTitle (doc: GridData[]): string {
     if (!Array.isArray(doc)) { return '' }
 
-    const [, title] = doc.find(([key]) => key === ImportDocuments.t('detailsPermit')) ?? []
+    const entry: GridData | undefined = doc.find(entry => entry.key === 'permitEquivalent')
+    if (entry === undefined) { return '' }
 
-    if (typeof title !== 'string') { return '' }
-    return title
+    const { value } = entry
+
+    if (typeof value !== 'string') { return '' }
+    return value
   }
 
   /**
@@ -207,11 +210,12 @@ export class ImportDocuments {
     const { [this.documentType]: documentSchema } = documentsList
     const { keywordDomains } = documentSchema
 
+    // TODO: Convert Thesaurus Api to Typescript to aviod TS errors here.
     const keywordPromises = keywordDomains
       .map((keywordDomain: string) => this.thesaurusApi.getDomainTerms(keywordDomain)
         .catch((error: unknown) => {
-          const reason = 'keywordsListError'
-          this.storeErrors([{ reason, name: reason, message: reason }])
+          const reason = ImportDocuments.t('keywordsListError')
+          this.errors.push({ reason, name: reason, message: reason })
           return error
         }))
 
@@ -246,7 +250,7 @@ export class ImportDocuments {
   /**
   * Parse a spreadsheet value into the value that will be displayed to the user.
   */
-  async parseValue (val: GridValue, key: string): Promise<GridValue> {
+  async parseValue (val: GridValue, key: string): Promise<GridValue | GridData[]> {
     if (val instanceof Date) {
       return Schema.parseDate(val)
     }
@@ -259,17 +263,28 @@ export class ImportDocuments {
     // Parse subdocument into an array of [header, value]
     // if the value is a subdocument.
     if (typeof val === 'object' && !(val instanceof Date)) {
-      const subDocumentData = await Promise.all(Object.entries(val)
+      const subDocuments = await Promise.all(Object.entries(val)
         .map(async ([subkey, subvalue]) => {
           const header = this.parseHeader(subkey, this.attributesMap[key]?.schema)
           const v = typeof subvalue === 'string' ? subvalue : ''
-          const value = await this.parseValue(v, key)
-          return [header, value]
+          const parsedVal = await this.parseValue(v, key)
+          const value = typeof parsedVal === 'string' ? parsedVal : ''
+          return { header, value, key: subkey }
         }))
-      return subDocumentData.filter(([, value]) => !Schema.isEmpty(value))
+
+      return subDocuments
+        .filter((entry) => !this.isValidAndEmpty(entry.value, entry.key, this.attributesMap[key]?.schema ?? {}))
     }
 
     return val
+  }
+
+  /**
+  * Remove all non-errored empty values.
+  */
+  isValidAndEmpty (value: GridValue | GridData | GridData[], key: string, attributesMap: DocumentAttributesMap): boolean {
+    return !ImportDocuments.doesValueExist(value) &&
+      !ImportDocuments.hasColumnErrors(key, this.errors, attributesMap)
   }
 
   /**
@@ -287,19 +302,15 @@ export class ImportDocuments {
   /**
   * Determine if a document value is empty.
   */
-  static doesValueExist (val: GridValue): boolean {
+  static doesValueExist (val: GridValue | GridData | GridData[]): boolean {
     return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
   }
 
   /**
   * Determine if a document value has errors.
   */
-  static hasColumnErrors (key: string | number, errors: DocError[]): boolean {
-    return errors.some(error => {
-      if (typeof error.column === 'string') {
-        return ImportDocuments.t(error.column) === key
-      }
-      return error.column === key
-    })
+  static hasColumnErrors (key: string, errors: DocError[], attributesMap: DocumentAttributesMap): boolean {
+    const { column } = attributesMap[key] ?? {}
+    return errors.some(error => error.column === parseInt(column ?? '-1', 10))
   }
 }
