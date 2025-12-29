@@ -101,12 +101,12 @@ function toggleAccordian (index: number): number {
   return index
 }
 
-function getIsNestedDocument (value: GridValue): boolean {
-  return ImportDocuments.getIsNestedDocument(value)
-}
-
 function hasColumnErrors (key: string, errors: DocError[]): boolean {
   return ImportDocuments.hasColumnErrors(key, errors)
+}
+
+function getIsNestedDocument (value: GridValue): value is Array<[string, GridValue]> {
+  return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
 }
 </script>
 <style scoped>
