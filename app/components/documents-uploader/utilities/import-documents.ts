@@ -13,6 +13,15 @@ import type { KeywordType, DocumentStore } from '~/types/common/documents'
 import type { Translations } from '~/types/languages'
 // @ts-expect-error import js file
 import ThesaurusApi from '../../../api/thesaurus.js'
+
+/**
+ * Import Documents
+ *
+ * Read a spreadsheet.
+ * Process that spreadsheet into document attributes to be displayed to the user.
+ * Build a PUT/Create object to be sent to a server from a spreadsheet.
+ * Handles errors and business logic for Vue components.
+ */
 export class ImportDocuments {
   static t: Translations = (arg) => arg
   locale = 'en'
@@ -40,6 +49,10 @@ export class ImportDocuments {
     this.sheet = { data: [], errors: [] }
   }
 
+  /**
+  * Use library to read spreadsheet and store that as object with keys based on
+  * the document's corresponding attribute map.
+  */
   async readXLSXFile (changeEvent: HTMLInputEvent): Promise<ReadFileResult> {
     const { target } = changeEvent
 
@@ -58,6 +71,9 @@ export class ImportDocuments {
     return this.sheet
   }
 
+  /**
+  * Parse the spreasheet object into header(description), and value pairs parsed to be displayed to the user.
+  */
   async parseSheetForDisplay (sheet: Array<DocumentAttributes<AttrTypes>>): Promise<SheetData> {
     return await Promise.all(sheet.map(async (doc) => {
       // For dispalying values
@@ -74,6 +90,10 @@ export class ImportDocuments {
     }))
   }
 
+  /**
+  * Map the document spreadsheet object to server request JSON used to make the PUT/CREATE
+  * request to the server.
+  */
   async mapDocumentAttributesToSchemaJson (attributesList: AttrsList): Promise<DocumentStore> {
     const mapResult = await mapDocumentAttributesToSchemaJson({
       attributesList,
@@ -90,19 +110,29 @@ export class ImportDocuments {
     return typeof documentsStore === 'object' ? documentsStore : emptyStore
   }
 
+  /**
+  * Store translated errors during the document handling process.
+  */
   storeErrors (newErrors: DocError[]): DocError[] {
     newErrors.forEach((error: DocError) => {
       const reason = ImportDocuments.t(error.reason)
+
       this.errors.push({ reason, message: reason, name: error.reason })
     })
     return newErrors
   }
 
+  /**
+  * Set the errors list to a given value.
+  */
   setErrors (value: DocError[]): DocError[] {
     this.errors = value
     return this.errors
   }
 
+  /**
+  * Find all errors matching a given document and document attribute i.e. (Document 1, Title)
+  */
   getColumnErrors (key: string, errors: DocError[], index: number): DocError[] {
     const errs = errors
     const { attributesMap } = this
@@ -121,6 +151,9 @@ export class ImportDocuments {
       })
   }
 
+  /**
+  * Translate document errors and match them to their given document attributes.
+  */
   parseDocumentErrors (): DocError[][] {
     return this.sheet.data.map((documentAttributes: DocumentAttributes<AttrTypes>, index: number) => {
       const getReason = (error: DocError, key: string): string => {
@@ -149,6 +182,9 @@ export class ImportDocuments {
     })
   }
 
+  /**
+  * Get the document title from a set of parsed document headers, and values.
+  */
   static getTitle (doc: Array<[string, GridValue]>): string {
     if (!Array.isArray(doc)) { return '' }
 
@@ -158,6 +194,9 @@ export class ImportDocuments {
     return title
   }
 
+  /**
+  * Fetch the keywords list that describe what each document pertains to.
+  */
   async getKeywordsMap (): Promise<KeywordType[]> {
     const { [this.documentType]: documentSchema } = documentsList
     const { keywordDomains } = documentSchema
@@ -165,7 +204,8 @@ export class ImportDocuments {
     const keywordPromises = keywordDomains
       .map((keywordDomain: string) => this.thesaurusApi.getDomainTerms(keywordDomain)
         .catch((error: unknown) => {
-          this.storeErrors([{ reason: 'keywordsListError' }])
+          const reason = 'keywordsListError'
+          this.storeErrors([{ reason, name: reason, message: reason }])
           return error
         }))
 
@@ -178,22 +218,40 @@ export class ImportDocuments {
     return keywords
   }
 
+  /**
+  * Fetch the locale name of a country based on it's country code from the server.
+  */
   async getCountryName (val: GridValue): Promise<string> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- Call new on a js object without a type
     const country = await getCountry(val)
+      .catch((error: unknown) => {
+        console.warn(error) // eslint-disable-line no-console -- Show error in console
+        const reason = typeof val === 'string'
+          ? ImportDocuments.t('countryNotFound', { msg: val })
+          : ImportDocuments.t('countryNotFound')
+
+        this.errors.push({ reason, message: reason, name: reason })
+        return { name: { en: 'Error: Not found' } }
+      })
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- import js object
     return country.name[this.locale]
   }
 
+  /**
+  * Parse a spreadsheet value into the value that will be displayed to the user.
+  */
   async parseValue (val: GridValue, key: string): Promise<GridValue> {
     if (val instanceof Date) {
       return Schema.parseDate(val)
     }
 
+    // Fetch country's full name if value is a country code
     if (key === 'country' && typeof val === 'string') {
       return await this.getCountryName(val)
     }
 
+    // Parse subdocument into an array of [header, value]
+    // if the value is a subdocument.
     if (typeof val === 'object' && !(val instanceof Date)) {
       const subDocumentData = await Promise.all(Object.entries(val)
         .map(async ([subkey, subvalue]) => {
@@ -208,6 +266,9 @@ export class ImportDocuments {
     return val
   }
 
+  /**
+  * Parse the spreadsheet header value into the value that will be displayed to the user.
+  */
   parseHeader (key: string, attributesList = this.attributesMap): string {
     if (typeof key !== 'string') { return '' }
     if (typeof attributesList !== 'object') { return '' }
@@ -217,15 +278,17 @@ export class ImportDocuments {
     return ImportDocuments.t(translationKey)
   }
 
+  /**
+  * Determine if a document value is empty.
+  */
   static doesValueExist (val: GridValue): boolean {
     return typeof val === 'string' ? val.trim().length > 0 : Boolean(val)
   }
 
+  /**
+  * Determine if a document value has errors.
+  */
   static hasColumnErrors (key: string, errors: DocError[]): boolean {
     return errors.some(error => error.column === key)
-  }
-
-  static getIsNestedDocument (value: GridValue): value is Array<[string, GridValue]> {
-    return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
   }
 }
