@@ -15,4 +15,4 @@ export interface LanguageMapType {
   name: LanguageType
 }
 
-export type Translations = (arg: string)=> string
+export type Translations = (arg: string, message?: { msg: string })=> string
