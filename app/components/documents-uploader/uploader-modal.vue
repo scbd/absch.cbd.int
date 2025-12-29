@@ -35,9 +35,17 @@
       :caption="loaderText"
     />
 
-    <ModalErrors
-      :errors="modalErrors"
-    />
+    <div
+      v-if="modalErrors.length > 0"
+      class="z10 h-25 overflow-auto border-top bg-white position-absolute bottom-0 start-0 w-100 px-5 py-3"
+    >
+      <h2 class="mb-2 text-danger">
+        {{ $t('errorsList') }}
+      </h2>
+      <ModalErrors
+        :errors="modalErrors"
+      />
+    </div>
 
     <WarningOverlay
       v-if="isConfirmationIndicatorOpen"
@@ -175,7 +183,16 @@ async function createDocuments (): Promise<DocsResp> {
       }))
 
   const docs = documents.value.documents
-    .map(async (doc) => await kmDocumentApi.createDocumentDraft(doc))
+    .map(async (doc, row) => await kmDocumentApi.createDocumentDraft(doc)
+      .catch((error: Error) => {
+        const reason = `${t('createError', { documentNumber: row + 1 })} ${error.message}`
+        const e: DocError = { level: 'error', reason, message: reason, name: 'createError' }
+        errors.value.push(e)
+        isLoading.value = false
+        console.error(error) // eslint-disable-line no-console -- Show error in console
+        throw new Error(reason)
+      })
+    )
 
   // Create all documents
   const resp = await Promise.all([...docs, ...subdocuments])
