@@ -22,17 +22,29 @@
       class="accordian-box"
       :class="{ 'accordian-box--open': isOpen }"
     >
-      <div class="mw-100 position-relative  bg-white px-2 py-1 overflow-hidden">
+      <div
+        class="mw-100 position-relative px-2 py-1 overflow-hidden"
+        :class="[hasDocumentError ? 'alert-danger' : 'bg-white']"
+      >
         <div
-          v-for="[header, value] in document"
-          :key="header"
+          v-for="entry in document"
+          :key="entry.key"
           class="mb-1"
         >
           <div class="fw-bold text-dark small">
-            {{ header }}:
+            {{ entry.header }}:
           </div>
           <div>
-            {{ value || '⠀' }}
+            <span
+              v-if="checkColumnErrors(entry.key)"
+              class="fw-bold me-1"
+            >
+              <i
+                class="bi bi-x-circle-fill text-danger"
+              />
+              Warning:
+            </span>
+            {{ entry.value || '⠀' }}
           </div>
         </div>
       </div>
@@ -40,13 +52,26 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { DocumentAttrsList } from '~/types/components/documents-uploader/document-schema'
+import { ref } from 'vue'
+import type { DocError, GridData } from '~/types/components/documents-uploader/document-schema'
 
-defineProps<{
-  document: DocumentAttrsList
+const props = defineProps<{
+  document: GridData[]
   title: string
   isOpen: boolean
+  errors: DocError[]
+  hasColumnErrors: (key: string)=> boolean
 }>()
+
+const hasDocumentError = ref(false)
+
+function checkColumnErrors (key: string): boolean {
+  const hasColumnError = props.hasColumnErrors(key)
+  if (hasColumnError) {
+    hasDocumentError.value = true
+  }
+  return hasColumnError
+}
 
 </script>
 <style scoped>

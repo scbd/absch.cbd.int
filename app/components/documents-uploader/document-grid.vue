@@ -22,16 +22,18 @@
       class="d-flex p-2 gap-1 justify-content-center border border-bottom border-left border-right flex-wrap mw-100 "
     >
       <div
-        v-for="([key, value], attributeIndex) in documentData"
-        :key="key"
+        v-for="(entry, attributeIndex) in documentData"
+        :key="entry.key"
         class="preview-box border border-2 bg-white text-center flex-fill"
       >
         <SuportingDocument
-          v-if="getIsNestedDocument(value)"
-          :document="value as DocumentAttrsList"
-          :title="key"
+          v-if="getIsNestedDocument(entry.value)"
+          :document="entry.value as GridData[]"
+          :title="entry.header"
           :is-open="getIsNestedDocumentOpen(attributeIndex)"
           role="button"
+          :errors="errors"
+          :has-column-errors="(subkey) => hasColumnErrors(subkey, errors, entry.key)"
           @click="() => toggleAccordian(attributeIndex)"
         />
         <div
@@ -39,19 +41,19 @@
           class="h-100 overflow-hidden"
           data-toggle="tooltip"
           data-placement="top"
-          :title="value as string"
-          :class="{ 'alert-danger': hasColumnErrors(key, errors) }"
+          :title="entry.value as string"
+          :class="{ 'alert-danger': hasColumnErrors(entry.key, errors) }"
         >
           <div
             class="fw-bold text-dark small bg-grey2 px-2 border-bottom overflow-hidden"
           >
-            {{ key }}
+            {{ entry.header }}
           </div>
 
           <div
             class="px-2 text-truncate"
           >
-            {{ value }}
+            {{ entry.value }}
           </div>
         </div>
       </div>
@@ -70,20 +72,21 @@ import SuportingDocument from './supporting-document.vue'
 import ModalErrors from './modal-errors.vue'
 import { ImportDocuments } from './utilities/import-documents'
 import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list'
+import { documentsList } from './data/document-types-list'
 import type {
-  GridValue, DocError,
-  DocumentAttrsList
+  GridValue, DocError, GridData, DocumentAttributesMap
 } from '~/types/components/documents-uploader/document-schema'
 
 // Props
-defineProps<{
+const props = defineProps<{
   title: string
   documentType: DocumentTypes
   index: number
-  documentData: Array<[string, GridValue]>
+  documentData: GridData[]
   errors: DocError[]
 }>()
 
+const { [props.documentType]: { attributesMap } } = documentsList
 const openedNestedDocuments: Ref<number[]> = ref([])
 
 // Functions
@@ -101,11 +104,17 @@ function toggleAccordian (index: number): number {
   return index
 }
 
-function hasColumnErrors (key: string, errors: DocError[]): boolean {
-  return ImportDocuments.hasColumnErrors(key, errors)
+function hasColumnErrors (key: string, errors: DocError[], subDocumentKey?: string): boolean {
+  if (typeof subDocumentKey === 'string') {
+    const map: DocumentAttributesMap | undefined = attributesMap[subDocumentKey]?.schema
+    if (map !== undefined) {
+      return ImportDocuments.hasColumnErrors(key, errors, map)
+    }
+  }
+  return ImportDocuments.hasColumnErrors(key, errors, attributesMap)
 }
 
-function getIsNestedDocument (value: GridValue): value is Array<[string, GridValue]> {
+function getIsNestedDocument (value: GridValue | GridData[] | GridData): value is GridData[] {
   return Boolean(value) && typeof value === 'object' && !(value instanceof Date)
 }
 </script>
