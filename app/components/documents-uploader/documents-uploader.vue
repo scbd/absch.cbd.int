@@ -9,10 +9,10 @@
     >
       <template #header>
         <h5 class="modal-title">
-          {{ $t('importIrccExcel') }}
+          {{ $t('importDocumentsFromSheet', { documentType: documentType.toUpperCase() }) }}
         </h5>
         <p class="m-0">
-          {{ $t('pleaseSelectExcelInfo') }}
+          {{ $t('pleaseSelectSheetInfo') }}
         </p>
       </template>
     </component>
@@ -33,7 +33,7 @@
     >
       <i class="bi bi-file-earmark-arrow-up-fill ms-md-1 float-start" />
       <span class="d-none d-md-block float-end px-2">
-        {{ $t('importIrcc') }}
+        {{ $t('importDocumentType', { documentType: documentType.toUpperCase() }) }}
       </span>
     </a>
   </div>

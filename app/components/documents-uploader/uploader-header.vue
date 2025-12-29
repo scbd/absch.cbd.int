@@ -4,10 +4,10 @@
       <div class="py-0 px-1 flex-grow-1">
         <slot name="header">
           <h5 class="modal-title">
-            {{ $t("importExcel") }}
+            {{ $t("importSheet") }}
           </h5>
           <p class="m-0">
-            {{ $t("pleaseSelectExcelInfo") }}
+            {{ $t("pleaseSelectSheetInfo") }}
           </p>
         </slot>
       </div>

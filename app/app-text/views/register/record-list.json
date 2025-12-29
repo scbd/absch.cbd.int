@@ -55,9 +55,5 @@
     "bySystem": "By system",
     "deleteDraftRecord": "The draft record must be deleted before the published record can be removed.",
     "errorDeletingDraft": "There was an error in deleting draft record.",
-    "draftCreateSuccess": "Document draft(s) created.",
-    "importExcel": "Import Documents From an Excel File",
-    "importIrccExcel": "Import IRCC Documents From an Excel File",
-    "pleaseSelectExcelInfo": "Please select an Excel file to begin importing data.",
-    "importIrcc": "Import IRCC"
+    "draftCreateSuccess": "Document draft(s) created."
 }
