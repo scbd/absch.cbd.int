@@ -194,17 +194,19 @@ async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocumentStore
 
   // Read File
   const readResult = await importDocuments.readXLSXFile(changeEvent)
-  sheet.value = await importDocuments.parseSheetForDisplay(readResult.data)
 
   // Map document attributes to the document schema
   const documentStore: DocumentStore = await importDocuments.mapDocumentAttributesToSchemaJson(readResult.data)
 
+  // Parse the spreasheet object into header(description), and value pairs parsed to be displayed to the user.
+  sheet.value = await importDocuments.parseSheetForDisplay(readResult.data)
+
   isLoading.value = false
 
   // Store errors
-  const { errors: docErrors } = importDocuments
-  errors.value = docErrors
-  documentErrors.value = importDocuments.parseDocumentErrors()
+  const { errors: importErrors, documentErrors: docErrors } = importDocuments
+  errors.value = importErrors
+  documentErrors.value = docErrors
 
   // Store document json
   documents.value = documentStore
