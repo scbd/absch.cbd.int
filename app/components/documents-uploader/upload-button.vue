@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex">
     <button
+      id="upload-button"
       class="btn btn-primary position-relative p-10"
       type="button"
       :disabled="isLoading"
@@ -45,3 +46,8 @@ function onFileInputClick (event: Event): undefined {
   }
 }
 </script>
+<style scoped>
+#upload-button > input {
+  cursor: pointer;
+}
+</style>
