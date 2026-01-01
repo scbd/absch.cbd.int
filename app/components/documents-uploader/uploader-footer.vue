@@ -4,7 +4,7 @@
       class="flex-fill"
     >
       <button
-        class="btn btn-secondary"
+        class="btn btn-dark"
         type="button"
         @click="$emit('closeModal')"
       >
