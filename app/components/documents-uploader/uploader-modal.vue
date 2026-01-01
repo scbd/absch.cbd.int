@@ -5,11 +5,11 @@
     backdrop="static"
     header-class="bg-grey"
     footer-class="bg-grey"
-    @on-close="onClose"
+    :is-keyboard-closable="false"
   >
     <template #header>
       <BulkUploaderHeader
-        @close-modal="onClose"
+        @close-modal="handleCloseClick"
       >
         <template #header>
           <slot name="header" />
@@ -55,13 +55,27 @@
       @close="() => isConfirmationIndicatorOpen = false"
     />
 
+    <ActionConfirmation
+      v-if="isCloseConfirmationOpen"
+      :title="t('closeConfirmation')"
+      @confirm="onClose"
+      @cancel="() => isCloseConfirmationOpen = false"
+    />
+
+    <ActionConfirmation
+      v-if="isEraseConfirmationOpen"
+      :title="t('eraseConfirmation')"
+      @confirm="handleClearFile"
+      @cancel="() => isEraseConfirmationOpen = false"
+    />
+
     <template #footer>
       <BulkUploaderFooter
         v-if="hasParsedFiles"
         :has-errors="hasErrors"
         @handle-confirm="handleConfirm"
-        @handle-clear="handleClearFile"
-        @close-modal="onClose"
+        @handle-clear="clearDocuments"
+        @close-modal="handleCloseClick"
       />
       <div
         v-else
@@ -73,7 +87,7 @@
 <script setup lang="ts">
 import {
   ref, computed, onMounted, shallowRef,
-  type Ref, type ComputedRef
+  onBeforeUnmount, type Ref, type ComputedRef
 } from 'vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
@@ -95,6 +109,7 @@ import type { DocumentTypes } from '~/types/components/documents-uploader/docume
 import type { DocError, HTMLInputEvent, DocsResp, SheetData } from '~/types/components/documents-uploader/document-schema.js'
 import type { DocumentStore } from '~/types/common/documents.js'
 import WarningOverlay from './warning-overlay.vue'
+import ActionConfirmation from './action-confirmation.vue'
 
 const { realm } = useRealm()
 const auth = useAuth()
@@ -118,7 +133,12 @@ const errors: Ref<DocError[]> = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
 const isConfirmationIndicatorOpen = ref(false)
+const isEraseConfirmationOpen = ref(false)
+const isCloseConfirmationOpen = ref(false)
+const documentErrors: Ref<DocError[][]> = ref([])
 
+// Confirm the deletion of information if more than X documents have been parsed.
+const confirmEraseDocumentNumber = 12
 // Computed Properties
 const hasErrors = computed(() => errors.value
   .some((error) => error.level === 'error'))
@@ -130,16 +150,13 @@ const modalErrors = computed(() => errors.value
     return !Number.isInteger(e.row) || e.row < 0
   }))
 
-const documentErrors: Ref<DocError[][]> = ref([])
-
 const hasParsedFiles: ComputedRef<boolean> = computed(() => sheet.value.length > 0)
 
 // Event Hooks
 onMounted(async () => {
   modalRef.value.show()
-
   isLoading.value = true
-
+  window.addEventListener('keydown', handleEscapeKey)
   await importDocuments.getKeywordsMap()
 
   const { errors: docErrors } = importDocuments
@@ -147,8 +164,17 @@ onMounted(async () => {
 
   isLoading.value = false
 })
+onBeforeUnmount(() => { window.removeEventListener('keydown', handleEscapeKey) })
 
 // Methods
+function clearDocuments (): undefined {
+  if (sheet.value.length >= confirmEraseDocumentNumber && !isEraseConfirmationOpen.value) {
+    isEraseConfirmationOpen.value = true
+    return
+  }
+  handleClearFile()
+}
+
 function handleClearFile (): undefined {
   isLoading.value = false
   errors.value = []
@@ -157,6 +183,8 @@ function handleClearFile (): undefined {
   modalSize.value = 'xl'
   sheet.value = []
   isConfirmationIndicatorOpen.value = false
+  isEraseConfirmationOpen.value = false
+  isCloseConfirmationOpen.value = false
   loaderText.value = t('uploadingLoader')
 }
 
@@ -206,7 +234,22 @@ async function createDocuments (): Promise<DocsResp> {
   return resp
 }
 
+function handleCloseClick (): undefined {
+  // Make user confirm if they are closing the modal after having parsed
+  // many documents to avoid losing data.
+  if (sheet.value.length >= confirmEraseDocumentNumber && !isCloseConfirmationOpen.value) {
+    isCloseConfirmationOpen.value = true
+    return
+  }
+  onClose()
+}
+
+function handleEscapeKey (e: KeyboardEvent): undefined {
+  if (e.key === 'Escape') { handleCloseClick() }
+}
+
 function onClose (): undefined {
+  modalRef.value.close()
   $emit('onClose')
 }
 

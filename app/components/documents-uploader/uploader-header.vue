@@ -13,6 +13,7 @@
       </div>
     </div>
     <CloseModalButton
+      :is-closing-modal="false"
       @close-modal="$emit('closeModal')"
     />
   </div>
