@@ -3,7 +3,7 @@
     class="preview-list pt-2 px-lg-5 px-md-2 overflow-auto"
   >
     <h2
-      class="color-white fw-bold p-1 ps-2 m-0 mb-3 border-bottom border-top bg-dark"
+      class="fw-bold p-1 ps-0 m-0 mb-3 border-bottom border-top"
     >
       {{ $t('documents', { documentType: documentType.toUpperCase(), count: sheet.length }) }}
     </h2>
@@ -53,5 +53,8 @@ function getTitle (index: number): string {
 
   .documents-container > div:not(:first-child) {
     margin-top: 1.5rem;
+  }
+  .preview-list > h2 {
+    color: var(--bs-body-color);
   }
 </style>
