@@ -4,6 +4,7 @@
     class="modal fade overflow-hidden pt-5 pb-5"
     :data-bs-backdrop="backdrop"
     aria-hidden="true"
+    :data-bs-keyboard="isKeyboardClosable"
     @click.self="clickBackdrop"
   >
     <div
@@ -87,6 +88,10 @@ defineProps({
   backdrop: {
     type: String,
     default: 'default'
+  },
+  isKeyboardClosable: {
+    type: Boolean,
+    default: true
   }
 })
 
