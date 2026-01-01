@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h6 class="p-1 d-flex ps-2 m-0 bg-gray-700 color-white border-bottom border-2">
+    <h6
+      class="p-1 d-flex ps-2 m-0 color-white border-bottom border-2"
+      :class="[index % 2 === 0 ? 'bg-gray-700' : 'bg-gray-600']"
+    >
       <div
         class="d-flex me-2 pe-1 fw-bolder text-center"
       >
