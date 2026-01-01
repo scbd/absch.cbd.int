@@ -1,19 +1,26 @@
 <template>
   <div
-    class="preview-list pt-3 px-lg-5 px-md-2 overflow-auto"
+    class="preview-list pt-2 px-lg-5 px-md-2 overflow-auto"
   >
-    <div
-      v-for="(document, index) in sheet"
-      :key="index"
-      class="h-50 bg-gray-100"
+    <h2
+      class="color-white fw-bold p-1 ps-2 m-0 mb-3 border-bottom border-top bg-dark"
     >
-      <DocumentGrid
-        :title="getTitle(index)"
-        :errors="errors[index] || []"
-        :document-type="documentType"
-        :index="index"
-        :document-data="document"
-      />
+      {{ $t('documents', { documentType: documentType.toUpperCase(), count: sheet.length }) }}
+    </h2>
+    <div class="documents-container">
+      <div
+        v-for="(document, index) in sheet"
+        :key="index"
+        class="h-50 bg-gray-100"
+      >
+        <DocumentGrid
+          :title="getTitle(index)"
+          :errors="errors[index] || []"
+          :document-type="documentType"
+          :index="index"
+          :document-data="document"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +51,7 @@ function getTitle (index: number): string {
     }
   }
 
-  .preview-list > div:not(:first-child) {
+  .documents-container > div:not(:first-child) {
     margin-top: 1.5rem;
   }
 </style>
