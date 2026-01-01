@@ -12,15 +12,13 @@
         </slot>
       </div>
     </div>
-    <button
-      type="button"
-      class="btn-close btn-secondary"
-      aria-label="Dismiss"
-      data-bs-dismiss="modal"
-      @click="$emit('closeModal')"
+    <CloseModalButton
+      @close-modal="$emit('closeModal')"
     />
   </div>
 </template>
 <script setup lang="ts">
+import CloseModalButton from '../common/close-modal-button.vue'
+
 const $emit = defineEmits(['closeModal'])
 </script>
