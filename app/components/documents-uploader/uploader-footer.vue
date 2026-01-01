@@ -5,7 +5,6 @@
     >
       <button
         class="btn btn-secondary"
-        data-bs-dismiss="modal"
         type="button"
         @click="$emit('closeModal')"
       >

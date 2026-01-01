@@ -65,7 +65,6 @@ Fade out the screen and show a warning message in the foreground.
             </div>
           </div>
         </div>
-
         <div class="mt-4 w-100 d-flex gap-2 justify-content-center">
           <button
             class="btn btn-secondary"
@@ -79,7 +78,7 @@ Fade out the screen and show a warning message in the foreground.
             type="button"
             @click="() => $emit('handleConfirm')"
           >
-            {{ $t("confirmCreate") }}
+            {{ $t("confirmAction") }}
           </button>
         </div>
       </div>
