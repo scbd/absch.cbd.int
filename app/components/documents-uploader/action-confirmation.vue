@@ -3,7 +3,7 @@
     :opacity="1"
     @click="() => $emit('cancel')"
   >
-    <div class="overlay-box d-flex p-5 w-50 bg-white">
+    <div class="overlay-box justify-content-center d-flex p-5 bg-white">
       <div class="d-flex flex-column">
         <h1 class="mb-3">
           {{ title }}
@@ -45,3 +45,8 @@ defineProps({
 
 const $emit = defineEmits(['confirm', 'cancel'])
 </script>
+<style scoped>
+.overlay-box {
+  max-width: 50%;
+}
+</style>

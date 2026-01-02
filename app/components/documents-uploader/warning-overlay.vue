@@ -8,8 +8,8 @@ Fade out the screen and show a warning message in the foreground.
     :opacity="1"
     @click="() => $emit('close')"
   >
-    <div class="overlay-box d-flex p-5 w-50 bg-white">
-      <div class="d-flex flex-column">
+    <div class="overlay-box justify-content-center d-flex p-5 w-50 bg-white">
+      <div class="d-flex flex-column w-100">
         <div
           v-if="hasErrors"
           class="d-flex flex-fill flex-column"
