@@ -20,10 +20,11 @@ app.config(["toastrConfig", function(toastrConfig) {
         containerId:'toast-container',
         maxOpened:1,
         newestOnTop:true,
-        positionClass: 'toast-top-right',
+        positionClass: 'toast-top-center',
         preventDuplicates:true,
         preventOpenDuplicates:false,
         target:'body',
+        toastClass:'angular-toastr',
         timeOut:2000,
     });
 }]);
