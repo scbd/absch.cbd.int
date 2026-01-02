@@ -279,6 +279,7 @@ export default class Schema {
     const dateString = typeof dateValue === 'string' ? dateValue : dateValue.toUTCString()
     const date: Date = new Date(Date.parse(`${dateString} GMT-05:00`))
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' }
+    // Parse date to french canadian when sending the date in server request as that format is compatible with the back-end.
     const dateFormat = 'fr-CA'
 
     return date.toLocaleDateString(dateFormat, options)
