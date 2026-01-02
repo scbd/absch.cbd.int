@@ -15,11 +15,11 @@ An example of a "Document Attributes Map" can be found in the folder above.
 ```
 // Document Attributes Map Example:
 {
-  "language": "A", // With A being the excel column name.
-  "country": "B", // With B being the excel column name.
-  "provider": {
-    "consent": "C", // With C being the excel column name.
-  },
+  language: { column: '0', required: true, translationKey: 'generalInfo' }, // A
+  country: { column: '1', required: true, translationKey: 'country' }, // B
+  permitEquivalent: { column: '3', translationKey: 'detailsPermit' }, // D
+  dateOfIssuance: { column: '4', required: true, translationKey: 'dateOfIssuance' }, // E
+  dateOfExpiry: { column: '5', required: true, translationKey: 'dateOfExpiry' }, // F
 }
 ```
 
@@ -48,11 +48,6 @@ export default class <Your Document Schema Name>Schema extends Schema {
       },
       title: sheet.permitEquivalent,
       dateOfIssuance: sheet.dateOfIssuance,
-      providers: [
-        {
-          identifier: Schema.getProviderIdentifier(sheet.provider as IContactFields)
-        }
-      ],
     }
   }
 }
@@ -75,8 +70,8 @@ Then add the attributes map and the Document Schema to the `documentsList` varia
 
 ```
 export const documentsList: DocumentsList = {
-  ircc: { DocumentSchema: IrccSchema, attributesMap: irccAttributesMap, keywordDomains: ['1A22EAAB-9BBC-4543-890E-DEF913F59E98']  },
-  <Your Document Type Name>: { DocumentSchema: <YourSchema>, attributesMap: <YourAttributesMap> }
+  ircc: { DocumentSchema: IrccSchema, attributesMap: irccAttributesMap, keywordDomains: [THESAURUS_DOMAINS.ABS_PERMIT_KEYWORD]  },
+  <Your Document Type Name>: { DocumentSchema: <YourSchema>, attributesMap: <YourAttributesMap> keywordDomains: [<Your list of relevant keyword domains>] }
 }
 ```
 
