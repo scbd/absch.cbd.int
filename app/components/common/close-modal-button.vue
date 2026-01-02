@@ -35,7 +35,7 @@ const $emit = defineEmits(['closeModal'])
   }
 
 button.close > div {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.25);
   transform: scale(1.00);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   height: max-content;
