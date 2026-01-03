@@ -16,5 +16,7 @@
       "needHelpTitle": "Need help?",
       "needHelpContent": "<p>Click here to access contextual help where you can find more information related to this page.</p>",
       "needMoreHelpTitle": "Need more help?",
-      "needMoreHelpContent": "<p>Us the Chat feature to message us for additional support.</p>"
+      "needMoreHelpContent": "<p>Us the Chat feature to message us for additional support.</p>",
+      "importIRCCDocument": "<p>Click on the <b>“Import”</b> button to to create multiple documents from a formatted spreadsheet.</p>",
+      "importDocument": "Import multiple records"
 }

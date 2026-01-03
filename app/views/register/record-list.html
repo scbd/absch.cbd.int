@@ -4,21 +4,21 @@
 
     <span register-top-menu></span>
     <div id="innerPage" class="card card-1-notrans bg-white innerPageContent mx-1 mx-lg-3 mt-3 mb-5">
-        
+
         <div class="register-content-header"  ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
             <div class="p-1">
                 <span class="btn-group float-end dashboard-tour pt-1">
-                    <a class="text-decoration-none text-secondary d-inline-flex text-white help-tour link2" rel="noopener" ng-href="#" ng-click="tour()"> 
-                        <i class="bi bi-question-circle"></i> 
+                    <a class="text-decoration-none text-secondary d-inline-flex text-white help-tour link2" rel="noopener" ng-href="#" ng-click="tour()">
+                        <i class="bi bi-question-circle"></i>
                         <span class="d-none d-sm-block ps-1"> {{::('recordListT.tour'|$translate)}}</span>
                     </a>
                 </span>
                 <h3 class="p-0 px-1 m-0 fw-normal">
-                <a class="text-decoration-none text-white" rel="noopener" href="/register" ><span ng-bind="schema|mapSchema|schemaNamePlural"></span> ( <span ng-bind="schema | schemaShortName"></span>)  </a>                                
+                <a class="text-decoration-none text-white" rel="noopener" href="/register" ><span ng-bind="schema|mapSchema|schemaNamePlural"></span> ( <span ng-bind="schema | schemaShortName"></span>)  </a>
                 </h3>
             </div>
         </div>
-        
+
         <div class="register-content-content">
             <div ng-show="msg" class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
@@ -50,28 +50,34 @@
                     </div>
                 </div>
                 <div class="col-md-5 col-12">
-                    <div class="btn-group-sm float-md-end">
+                    <div class="btn-group-sm d-flex gap-1 float-md-end">
                         <div class="btn border fs-small-8" ng-if="offlineFormats">{{::('recordListT.offlineFormat'|$translate)}}
-                            <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
+                            <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body"
                                 ng-show="::offlineFormats[schema][code]" class="padding-left-right-2">
-                                <a class="text-decoration-none" rel="noopener" target="_blank" ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a>
+                                <a class="text-decoration-none d-flex" rel="noopener" target="_blank" ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a>
                                 <span ng-if="::!$last">|</span>
                             </span>
                         </div>
-                        
-                        <a type="button" class="btn btn-outline-secondary btn-sm px-1" ng-click="refreshList(schema);" ng-if="showAddButton()">
+
+                        <a type="button" class="btn btn-outline-secondary btn-sm px-1 text-nowrap d-flex" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="bi bi-arrow-repeat float-start"></i> <span class="fs-small-8 d-none d-md-block ps-1 float-end">{{::('recordListT.refresh'|$translate)}}</span>
                         </a>
-                        <a type="button" class="btn btn-primary btn-sm px-1" ng-if="!isAdditionDisabled(schema) || tourOn" id="add-new-btn" rel="noopener" translation-url 
+                        <a type="button" class="btn btn-primary btn-sm px-1 text-nowrap d-flex" ng-if="!isAdditionDisabled(schema) || tourOn" id="add-new-btn" rel="noopener" translation-url
                             ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new">
                             <i class="bi bi-plus float-start"></i>
                             <span class="d-none d-md-block ps-1 float-end">{{::('recordListT.addNew'|$translate)}}</span>
                         </a>
-                        <a type="button" class="btn btn-secondary btn-sm px-1" rel="noopener" translation-url  ng-href="/register" id="close_button">
+                        <div ng-if="isImportingDocumentsSupported">
+                          <documents-uploader
+                            ng-vue="exportVueComponent"
+                            @refresh-record="handleNewDocumentCreation();"
+                            :document-type="documentType"
+                          />
+                        </div>
+                        <a type="button" class="btn btn-secondary btn-sm px-1 text-nowrap d-flex" rel="noopener" translation-url  ng-href="/register" id="close_button">
                             <i class="bi bi-x-circle-fill float-start d-block d-md-none"></i>
                             <span class="d-none d-md-block float-end px-2">{{::('recordListT.close'|$translate)}}</span>
                         </a>
-
                     </div>
                 </div>
             </div>
@@ -95,7 +101,7 @@
                 <tr ng-if="tourOn">
                     <td class="ps-1 py-3 fs-small-8 w-25">
                         {{::('recordListT.sampleRecord'|$translate)}} <strong>{{schema|urlSchemaShortName}}</strong>
-                    </td> 
+                    </td>
                     <td class="ps-1 py-3 fs-small-8 align-middle">
                         <a class="text-decoration-none">
                             <strong>{{::('recordListT.bySystem'|$translate)}}</strong>
@@ -246,11 +252,11 @@
                                 <button class="btn btn-outline-secondary" id="deleteRecord" title="{{::('recordListT.delete'|$translate)}}" ng-show="!record.revoked && !isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" ng-click="askDelete(record)">
                                     <i class="bi bi-trash"></i>
                                 </button>
-                           
+
 
                             </div>
                             <div class="btn-group document_buttons btn-group-sm">
-                             
+
                             </div>
                         </td>
                     </tr>
@@ -291,46 +297,46 @@
                 page-count="listResult.pageCount" on-page-change="onPageChange(page)" page-size="listResult.rowsPerPage"
                 num-found="listResult.recordsFound" on-page-size-changed="onPageSizeChanged(size)"></pagination>
 
-            <script type="text/ng-template" trados-translation="true" id="deleteRecordModal">              
-                
+            <script type="text/ng-template" trados-translation="true" id="deleteRecordModal">
+
                     <div class="modal-header bg-danger text-white">
                        <h4 class="modal-title" >{{::('recordListT.confirmDelete'|$translate)}} <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
                     </div>
                     <div class="modal-body bg-white" >
                         <div ng-show="isDraft(recordToDelete)" class="card">
                             <div class="card-header">{{::('recordListT.draftRecord'|$translate)}} </div>
-                            <div class="row ps-3 mt-2">     
+                            <div class="row ps-3 mt-2">
                                 <div class="col-2 fw-bold">{{::('recordListT.title'|$translate)}}</div> <div class="col-10" ng-bind="recordToDelete.workingDocumentTitle|lstring"></div>
                               </div>
-                             <div class="row ps-3 mt-2">    
+                             <div class="row ps-3 mt-2">
                                 <div class="col-2 fw-bold">{{::('recordListT.uniqueId'|$translate)}}</div> <div class="col-10"> <i>{{::('recordListT.draftUpper'|$translate)}} </i></div>
                              </div>
-                            <div class="row ps-3 mt-2"> 
+                            <div class="row ps-3 mt-2">
                                 <div class="col-2 fw-bold" >{{::('recordListT.summary'|$translate)}}</div> <div class="col-10"> <span ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></span></div>
                              </div>
-                            <div class="row m-2 ps-3"> 
+                            <div class="row m-2 ps-3">
                                 <div class="col-12"> <button type="button" class="btn btn-danger float-end" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">{{::('recordListT.deleteDraft'|$translate)}}</button></div>
                             </div>
                         </div>
 
                         <div ng-show="isPublished(recordToDelete)" class="card mt-2">
                             <div class="card-header">{{::('recordListT.publishedRecord'|$translate)}}</div>
-                             <div class="row mb-2  mt-2"  ng-show="isIRCC">     
+                             <div class="row mb-2  mt-2"  ng-show="isIRCC">
                                  <div class="col-12 bold">
                                     {{::('recordListT.irrcInfo'|$translate)}}
                                 </div>
                               </div>
-                            <div class="row ps-3  mt-2">     
+                            <div class="row ps-3  mt-2">
                                 <div class="col-2 fw-bold">{{::('recordListT.title'|$translate)}}</div> <div class="col-10" ng-bind="recordToDelete.title|lstring"></div>
                               </div>
-                             <div class="row ps-3  mt-2">    
+                             <div class="row ps-3  mt-2">
                                 <div class="col-2 fw-bold">{{::('recordListT.uniqueId'|$translate)}}</div> <div class="col-10"> <a class="text-decoration-none" rel="noopener" translation-url  href="/database/{{recordToDelete | uniqueIDWithoutRevision}}" target="_blank" ng-bind="recordToDelete | uniqueIDWithoutRevision"></a></div>
                              </div>
-                            <div class="row ps-3  mt-2"> 
+                            <div class="row ps-3  mt-2">
                                 <div class="col-2 fw-bold" >{{::('recordListT.summary'|$translate)}}</div> <div class="col-10"> <span ng-bind-html="recordToDelete.summary|lstring"></span></div>
                              </div>
 
-                              <div class="row" ng-show="isIRCC"> 
+                              <div class="row" ng-show="isIRCC">
                                    <div class="col-12">
                                         <div km-form-languages multiple ng-model="recordToDelete.document.header.languages" class="float-end"></div><br>
                                         <div class="km-control-group">
@@ -346,19 +352,19 @@
                              </div>
 
                             <div class="row mt-2" ng-show="!isIRCC">
-                                <div class="col-12 px-4">  
-                                    <div ng-show="!canDeletePublished" class="alert alert-warning" role="alert">{{::('recordListT.deleteDraftRecord'|$translate)}}</div> 
+                                <div class="col-12 px-4">
+                                    <div ng-show="!canDeletePublished" class="alert alert-warning" role="alert">{{::('recordListT.deleteDraftRecord'|$translate)}}</div>
                                     <button ng-show="security" type="button" class="btn btn-danger float-end m-2" ng-disabled="loading || !canDeletePublished" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="{{::('recordListT.note'|$translate)}}">
-                                        <span ng-if="!security.canDelete">{{::('recordListT.requestDeletion'|$translate)}} </span> 
+                                        <span ng-if="!security.canDelete">{{::('recordListT.requestDeletion'|$translate)}} </span>
                                         <span ng-if="security.canDelete"> {{::('recordListT.deleteRecord'|$translate)}} </span>
-                                    </button> 
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                     </div>
                    <!-- <div class="modal-footer" >
-                         <button type="button" class="btn btn-default" ng-click="closeDialog()">{{::('recordListT.cancel'|$translate)}}</button> 
+                         <button type="button" class="btn btn-default" ng-click="closeDialog()">{{::('recordListT.cancel'|$translate)}}</button>
                     </div>-->
             </script>
 
