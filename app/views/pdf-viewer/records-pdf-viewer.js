@@ -2,7 +2,7 @@
 import pdfObject from 'pdf-object';
 import '~/components/scbd-angularjs-services/main';
 import pdfViewerT from '~/app-text/views/pdf-viewer/records-pdf-viewer.json';
-import { languages } from '~/app-data/un-languages.js';
+import { languages } from '~/app-data/un-languages';
     app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',
