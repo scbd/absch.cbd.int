@@ -66,5 +66,12 @@
             </div>
         </div>
     </div>
-   
+
+    <div ng-if="vueComponent">
+      <country-summary
+        ng-vue="vueComponent"
+        :country-records="countryRecords"
+      />
+    </div>
 </div>
+

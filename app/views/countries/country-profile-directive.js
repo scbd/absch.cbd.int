@@ -1,12 +1,12 @@
 import app from '~/app';
 import template from 'text!./country-profile-directive.html';
 import _ from 'lodash';
-import '~/views/search/search-results/result-default'
 
 import '~/views/search/search-results/result-default';
 import '~/services/main';
 import '~/views/directives/export-directive';
 import { iconFields } from '~/views/forms/view/bch/icons';
+import countrySummary from '~/components/countries/country-summary.vue'
 import countryProfileDirectiveT from '~/app-text/views/countries/country-profile-directive.json';
 
 app.directive('countryProfile', function() {
@@ -23,6 +23,9 @@ app.directive('countryProfile', function() {
                 translationService.set('countryProfileDirectiveT', countryProfileDirectiveT);
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
+                }
+                $scope.vueComponent = {
+                  components: { countrySummary },
                 }
                
                 $scope.loadRecords  = loadRecords;
@@ -131,6 +134,7 @@ app.directive('countryProfile', function() {
                                 key, ...countryRecords[key]
                             })
                         });
+                        console.log($scope.countryRecords)
                     });
                 }
 

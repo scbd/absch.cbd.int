@@ -27,6 +27,7 @@ import countryProfileT from '~/app-text/views/countries/country-profile.json';
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){ 
           $scope.country = country;
+          console.log('country', $scope.country)
           $scope.country.code = $scope.country.code.toLowerCase();
           $scope.country.name = $scope.country.name[locale];
           breadcrumbs.options = { 'country_name': $scope.country.name };
