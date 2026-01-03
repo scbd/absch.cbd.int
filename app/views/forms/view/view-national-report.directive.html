@@ -1,5 +1,4 @@
 ﻿<div class="national-report-view">
-
     <div class="section-pane panel panel-default" ng-repeat="section in reportQuestions" id="section{{$index+1}}" style="margin-bottom:3px!important">
         <div class="panel-heading border-bottom">
             <div comapre-val>
@@ -13,93 +12,39 @@
             </div>
         </div>
         <div class="panel-body" style="padding:0px">
-           
-            <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px" class="row py-3"
-                ng-class="{'disabled': !document[question.key] && question.type!= 'legend' && !question.questions, 'isLegend': question.type == 'legend'}">
-                <div ng-include="'question-answer'"></div>
-
-                <div ng-if="question.questions" ng-repeat="subQuestion in question.questions"
-                    style="border:1px solid #eee;margin:10px" class="row  py-3"
-                    ng-class="{'disabled': !document[subQuestion.key]}">
-                    <div ng-include="'question-answer'" ng-if="question.questions" onload="question=subQuestion"></div>
+            <div
+                ng-repeat="question in section.questions"
+                style="border:1px solid #eee;margin:5px"
+                class="row py-3"
+                ng-class="{'disabled': !document[question.key] && question.type!= 'legend' && !question.questions, 'isLegend': question.type == 'legend'}"
+            >
+                <div ng-if="vueComponent">
+                  <document-question
+                    ng-vue="vueComponent"
+                    :question-key="question.key"
+                    :question-map="makeReactive(question)"
+                    :report-data="makeReactive(document)"
+                  />
                 </div>
-            </div>
+
+                <div
+                  ng-if="question.questions"
+                  ng-repeat="subQuestion in question.questions"
+                  style="border:1px solid #eee;margin:10px"
+                  class="row  py-3"
+                  ng-class="{'disabled': !document[subQuestion.key]}"
+                >
+                    <div ng-if="vueComponent">
+                        <document-question
+                          ng-vue="vueComponent"
+                          :question-key="subQuestion.key"
+                          :question-map="makeReactive(subQuestion)"
+                          :report-data="makeReactive(document)"
+                        />
+                    </div>
+                </div>
+          </div>
         </div>
-        <script type="text/ng-template" id="question-answer">
-
-            <div>
-
-                <div style="padding-left:0px;padding-right: 0px;">
-                    <strong>
-                        <div comapre-val>
-                        <label ng-if="question.type!= 'legend'" name="{{question.key}}" for="{{question.key}}"
-                                ng-bind-html="::spaceSubQuestion(question.number) + question.title" ></label>
-                        </div>
-                    </strong>
-                </div>
-                <div ng-switch="question.type">
-
-                    <div ng-switch-when="option|term" ng-switch-when-separator="|">
-                        <div ng-switch="question.multiple">
-                            <div ng-switch-when="false">
-                                <km-value-ml ng-if="document[question.key].value"
-                                    value="displayText(document[question.key].value, question)" locales="locale"></km-value-ml>
-                            </div>
-                            <div ng-switch-when="true" class="km-value" comapre-val>
-                                <ul class="list">
-                                    <li ng-repeat="item in document[question.key]">
-                                        <span ng-bind-html="displayText(item.value, question)"></span>
-                                        <span ng-if="item.additionalInformation!=undefined"
-                                            ng-bind-html="'(' + (item.additionalInformation|lstring:locale) + ')'"></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div ng-switch-when="lstring">
-                        <div comapre-val>
-                            <km-value-ml value="document[question.key].value" locales="locale"></km-value-ml>
-                        </div>
-                    </div>
-                
-                    <div ng-switch-when="lstringRte">
-                        <div comapre-val>
-                            <km-value-ml value="document[question.key].value" html locales="locale"></km-value-ml>
-                        </div>
-                    </div>
-                
-                    <div ng-switch-when="int">
-                        <div comapre-val>
-                            <km-value-ml value="document[question.key].value" locales="locale"></km-value-ml>
-                        </div>
-                    </div>
-                
-                    <div ng-switch-when="link">
-                        <div comapre-val>
-                            <label class="ng-binding">{{::('viewNationalReportT.websiteName'|$translate)}}</label>
-                            <km-link-list ng-model="document[question.key].links" class="mt-1"></km-link-list>
-                        </div>
-                    </div>
-                    <div ng-switch-when="legend">
-                         <legend ng-bind-html="question.title"></legend>
-                    </div>
-
-                    <div ng-switch-when="sub-section">
-                       <!-- ToDo: remove after testing-->
-                    </div>
-                    <div ng-switch-default>
-                        {{question}}
-                    </div>
-                    <div ng-if="document[question.key].additionalInformation">
-                        <label>{{::('viewNationalReportT.additionalInformation'|$translate)}}</label>
-                        <div comapre-val>
-                            <km-value-ml value="::document[question.key].additionalInformation" html locales="locale"></km-value-ml>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </script>
-    </div>
-    <div document-metadata class="panel-footer"></div>
+      </div>
+      <div document-metadata class="panel-footer" />
 </div>

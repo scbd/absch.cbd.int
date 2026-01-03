@@ -1,6 +1,8 @@
 import app from '~/app';
+import { reactive } from 'vue';
 import template from "text!./view-national-report.directive.html";
 import viewNationalReportT from '~/app-text/views/forms/view/view-national-report.json';
+import DocumentQuestion from '~/components/common/document-question/document-question.vue'
 
 app.directive("viewNationalReport", ['translationService', function (translationService) {
 	return {
@@ -15,7 +17,13 @@ app.directive("viewNationalReport", ['translationService', function (translation
 		},
 		link: function ($scope) {
 
+      $scope.vueComponent = {
+        components: { DocumentQuestion },
+      }
 			translationService.set('viewNationalReportT', viewNationalReportT);
+
+      $scope.makeReactive = (value) => reactive(value)
+
 			$scope.display = function (field) {
 
 				if (!$scope.hide) return true; //show all fields

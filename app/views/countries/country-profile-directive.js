@@ -1,12 +1,12 @@
 import app from '~/app';
 import template from 'text!./country-profile-directive.html';
 import _ from 'lodash';
-import '~/views/search/search-results/result-default'
 
 import '~/views/search/search-results/result-default';
 import '~/services/main';
 import '~/views/directives/export-directive';
 import { iconFields } from '~/views/forms/view/bch/icons';
+import RelatedInformationFromNr1 from '~/components/countries/related-information-from-nr1.vue'
 import countryProfileDirectiveT from '~/app-text/views/countries/country-profile-directive.json';
 
 app.directive('countryProfile', function() {
@@ -19,14 +19,20 @@ app.directive('countryProfile', function() {
             code : '='
         },
         controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr','thesaurusService', 'translationService',
-            function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr, thesaurusService, translationService) {
+            async function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr, thesaurusService, translationService) {
                 translationService.set('countryProfileDirectiveT', countryProfileDirectiveT);
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
                 }
+
+                $scope.vueComponent = {
+                  components: { RelatedInformationFromNr1 },
+                }
                
                 $scope.loadRecords  = loadRecords;
                 $scope.sortMeasure  = "[jurisdiction_sort, type_sort, status_sort, createdDate_dt, title_t]";
+                $scope.countryRecords = [];
+
                 var countryRecords  = {};
                 var nationalSchemas = []
                 var eUSchemas = [];
@@ -45,7 +51,7 @@ app.directive('countryProfile', function() {
                         await import('~/views/measure-matrix/measure-matrix-countries-directive')
                 }
 
-                $scope.$watch('code', function(newVal){
+                $scope.$watch('code', async function(newVal){
                     if(newVal){
                         loadCountryRecords(newVal.toLowerCase());
                     }
@@ -125,7 +131,6 @@ app.directive('countryProfile', function() {
                                 }
                             }, 500)
                         }
-                        $scope.countryRecords = [];
                         Object.keys(countryRecords).forEach((key)=>{
                             $scope.countryRecords.push({
                                 key, ...countryRecords[key]

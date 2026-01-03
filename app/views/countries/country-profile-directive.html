@@ -66,5 +66,13 @@
             </div>
         </div>
     </div>
-   
+
+    <div ng-if="vueComponent && countryRecords.length > 0">
+      <related-information-from-nr1
+        ng-vue="vueComponent"
+        :code="code"
+        :country-records="countryRecords"
+      />
+    </div>
 </div>
+
