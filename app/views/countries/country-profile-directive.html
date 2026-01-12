@@ -10,10 +10,12 @@
     <br/>
     
     <div class="country-profile-list bg-white" ng-repeat="schema in countryRecords | orderBy:'index'" ng-if="schema">
-        
-        <h4 id="div{{schema.shortCode}}" class=" bg-grey link1 border-bottom p-2" 
-        ng-click="showHideRecords(schema)"
-        ng-class="{'color-litegrey': schema.numFound == 0}">
+        <h4
+          id="div{{schema.shortCode}}"
+          class="bg-grey link1 border-bottom p-2" 
+          ng-click="showHideRecords(schema)"
+          ng-class="{ 'color-litegrey': schema.numFound === 0 && !relatedQuestions[schema.key] }"
+        >
             <i class="fs-6 fw-bold bi" ng-class="{'bi-chevron-down':!schema.display, 'bi-chevron-up':schema.display}"></i> 
             <span ng-if="schema.isRegional">({{schema.government}}) </span>
             <span ng-bind="schema.title|lstring:locale" class="f-5"></span> (<span ng-bind="schema.shortCode"></span>)  
@@ -64,14 +66,16 @@
                         <div ng-hide="(schema.docs|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="schema.docs"></div>
                    </div>
             </div>
+          </div>
+            <div ng-if="vueComponent && schema.display && !schema.isLoading">
+                <information-from-nr1
+                  ng-vue="vueComponent"
+                  :country-code="code"
+                  :related-questions="relatedQuestions[schema.key]"
+                  :first-national-report-record="reactive(firstNationalReportRecord)"
+                  :national-report-data="reactive(firstNationalReportData)"
+                />
+            </div>
         </div>
-    </div>
-    <div ng-if="vueComponent">
-        <related-information-from-nr1
-            ng-vue="vueComponent"
-            :country-records="countryRecords"
-            :country-code="code"
-        />
-    </div>
-   
+            
 </div>

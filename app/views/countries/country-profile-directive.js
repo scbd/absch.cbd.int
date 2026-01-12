@@ -1,14 +1,15 @@
 import app from '~/app';
+import { reactive } from 'vue'
 import template from 'text!./country-profile-directive.html';
 import _ from 'lodash';
 import '~/views/search/search-results/result-default'
-
 import '~/views/search/search-results/result-default';
 import '~/services/main';
 import '~/views/directives/export-directive';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import countryProfileDirectiveT from '~/app-text/views/countries/country-profile-directive.json';
-import RelatedInformationFromNr1 from '~/components/common/document-report/related-information-from-nr1.vue';
+import InformationFromNr1 from '~/components/common/document-report/information-from-nr1.vue';
+import FirstNationalReportApi from '~/api/first-national-report'
 
 app.directive('countryProfile', function() {
     return {
@@ -28,13 +29,24 @@ app.directive('countryProfile', function() {
                
                 $scope.loadRecords  = loadRecords;
                 $scope.sortMeasure  = "[jurisdiction_sort, type_sort, status_sort, createdDate_dt, title_t]";
-                var countryRecords  = {};
-                var nationalSchemas = []
-                var eUSchemas = [];
-                var index=0;
+                $scope.firstNationalReportData = {} 
+                $scope.firstNationalReportRecord = {} 
+                // Determines what information will be shown from the NR1 if
+                // the country is missing document data.
+                $scope.relatedQuestions = {
+                  focalPoint: ['Q003'],
+                  authority: ['Q004', 'Q004_a', 'Q004_b', 'Q011'],
+                  absCheckpoint: ['Q005', 'Q005_a', 'Q005_b'],
+                  measure: ['Q007', 'Q007_a'],
+                  absCheckpointCommunique: ['Q010', 'Q010_a', 'Q021a', 'Q021_b', 'Q021_c'],
+                  absPermit: ['Q012', 'Q012_a', 'Q012_b'],
+                  absNationalModelContractualClause: ['Q013', 'Q013_a']
+                }
+                let countryRecords  = {};
+                const nationalSchemas = []
+                let index = 0
 
                 async function init(){
-                    
                     _(realm.schemas).map(function(schema, key){
                         if(schema.type=='national' && key!= 'contact' && key!= 'countryProfile'){
                             countryRecords[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
@@ -43,31 +55,68 @@ app.directive('countryProfile', function() {
                     }).value();
 
                     if(realm.is('ABS')) {
-                        $scope.vueComponent = {
-                          components: { RelatedInformationFromNr1 }
-                        }
                         await import('~/views/measure-matrix/measure-matrix-countries-directive')
+                        $scope.vueComponent = {
+                          components: { InformationFromNr1 }
+                        }
                     }
                 }
 
-                $scope.$watch('code', function(newVal){
+                $scope.$watch('code', async function(newVal){
                     if(newVal){
-                        loadCountryRecords(newVal.toLowerCase());
+                        countryRecords = await loadCountryRecords(newVal.toLowerCase());
+                        console.log('countryRecords', countryRecords)
+
+                        if(realm.is('ABS')) {
+                          await loadRelatedInformationFromNationalReport(countryRecords)
+                        }
                     }
                 })
                 $scope.showHideRecords = function(schema){
                     schema.display = !schema.display;
-                    if(schema.key == 'measure' && schema.display){ //for measure load all remaining records to build the measure matrix
+                    if(schema.key === 'measure' && schema.display){ //for measure load all remaining records to build the measure matrix
                         loadRecords(schema)
                     }
-
                 }
+
                 $scope.getExportQuery = function(){
                     return $scope.exportQuery;
-                
                 }
 
-                
+                $scope.reactive = reactive
+
+                async function loadRelatedInformationFromNationalReport (countryRecords) {
+
+                  console.log('$scope.countryRecords', countryRecords)
+                  const getCountryRecord = (key) => countryRecords
+                    .find(countryRecord => countryRecord.key === key)
+                  console.log('$scope.countryRecords', countryRecords)
+
+                  // Get question keys that will be displayed from the NR1 based on the documents
+                  // missing from the current country's report.
+                  const relevantQuestionsList = Object.entries($scope.relatedQuestions)
+                    .filter(([key]) => (getCountryRecord(key)?.docs ?? []).length < 1)
+                    .map(entry => entry[1])
+                    .flat()
+
+                  console.log('relevantQuestionsList', relevantQuestionsList)
+
+                  const api = new FirstNationalReportApi()
+                  // Fetch all questions relevant to the country profile from the NR
+                  const nr1 = await api.fetchReportData($scope.code, realm, relevantQuestionsList)
+                    .catch(error => console.error(error))
+
+                  const [nrData] = nr1 
+
+                  if (nrData === undefined) { return }
+
+                  $scope.firstNationalReportData = nrData
+                  console.log('firstNationalReportData', $scope.firstNationalReportData)
+
+                  $scope.firstNationalReportRecord = $scope.countryRecords
+                    .find(countryRecord => countryRecord.shortCode === 'NR1')
+                  console.log('firstNationalReportData', $scope.firstNationalReportRecord)
+                }
 
                 async function loadCountryRecords(code){
                     const groupField = 'grp_government_schema_s';
@@ -90,7 +139,7 @@ app.directive('countryProfile', function() {
                     else{
                         searchQuery.query = [`government_s:${solr.escape(code)}`];
                     }
-                    searchService.group(searchQuery)
+                    return await searchService.group(searchQuery)
                     .then(function(result){
 
                         var countryResult   = result.data.grouped[groupField];
@@ -100,7 +149,7 @@ app.directive('countryProfile', function() {
 
                             var gpDetails = (group.groupValue||'').split('_');
                             if(!gpDetails.length)
-                                return;
+                                return
                             var schema      = gpDetails[1];
                             if(schema=='measure'){
                                 formatting(group.doclist.docs);
@@ -136,6 +185,7 @@ app.directive('countryProfile', function() {
                                 key, ...countryRecords[key]
                             })
                         });
+                        return $scope.countryRecords
                     });
                 }
 
