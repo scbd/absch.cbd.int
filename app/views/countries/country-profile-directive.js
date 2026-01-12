@@ -65,7 +65,6 @@ app.directive('countryProfile', function() {
 
                 $scope.$watch('code', async function(newVal){
                     if(newVal){
-                      console.log('newVal', newVal)
                       const records = await loadCountryRecords(newVal.toLowerCase())
                       if(realm.is('ABS')) {
                         await loadRelatedInformationFromNationalReport(records)
@@ -161,10 +160,6 @@ app.directive('countryProfile', function() {
                                     countryRecords[schema].code = group.doclist.docs[0].government_s
                                     countryRecords[schema].government = group.doclist.docs[0].government_EN_t
                                 }
-
-                                console.log('schema', schema)
-                                console.log('group', group)
-
                             }
                             countryRecords[schema]     = _.extend(countryRecords[schema], group.doclist);
                         });
