@@ -33,7 +33,7 @@ app.directive('countryProfile', function() {
                 $scope.firstNationalReportRecord = {} 
                 // Determines what information will be shown from the NR1 if
                 // the country is missing document data.
-                $scope.relatedQuestions = {
+                $scope.relatedQuestionsFromNR1 = {
                   focalPoint: ['Q003'],
                   authority: ['Q004', 'Q004_a', 'Q004_b', 'Q011'],
                   absCheckpoint: ['Q005', 'Q005_a', 'Q005_b'],
@@ -65,10 +65,15 @@ app.directive('countryProfile', function() {
                 $scope.$watch('code', async function(newVal){
                     if(newVal){
                         countryRecords = await loadCountryRecords(newVal.toLowerCase());
-                        console.log('countryRecords', countryRecords)
 
                         if(realm.is('ABS')) {
                           await loadRelatedInformationFromNationalReport(countryRecords)
+                          $scope.countryRecords.forEach((schema, index) => {
+                            const relatedQuestions = $scope.relatedQuestionsFromNR1[schema.key]
+                            if (Array.isArray(relatedQuestions) && (relatedQuestions || []).length > 0 && schema.numFound === 0) {
+                              $scope.countryRecords[index].numFound = 1
+                            }
+                          })
                         }
                     }
                 })
@@ -86,20 +91,15 @@ app.directive('countryProfile', function() {
                 $scope.reactive = reactive
 
                 async function loadRelatedInformationFromNationalReport (countryRecords) {
-
-                  console.log('$scope.countryRecords', countryRecords)
                   const getCountryRecord = (key) => countryRecords
                     .find(countryRecord => countryRecord.key === key)
-                  console.log('$scope.countryRecords', countryRecords)
 
                   // Get question keys that will be displayed from the NR1 based on the documents
                   // missing from the current country's report.
-                  const relevantQuestionsList = Object.entries($scope.relatedQuestions)
+                  const relevantQuestionsList = Object.entries($scope.relatedQuestionsFromNR1)
                     .filter(([key]) => (getCountryRecord(key)?.docs ?? []).length < 1)
                     .map(entry => entry[1])
                     .flat()
-
-                  console.log('relevantQuestionsList', relevantQuestionsList)
 
                   const api = new FirstNationalReportApi()
                   // Fetch all questions relevant to the country profile from the NR
@@ -111,11 +111,9 @@ app.directive('countryProfile', function() {
                   if (nrData === undefined) { return }
 
                   $scope.firstNationalReportData = nrData
-                  console.log('firstNationalReportData', $scope.firstNationalReportData)
 
                   $scope.firstNationalReportRecord = $scope.countryRecords
                     .find(countryRecord => countryRecord.shortCode === 'NR1')
-                  console.log('firstNationalReportData', $scope.firstNationalReportRecord)
                 }
 
                 async function loadCountryRecords(code){
