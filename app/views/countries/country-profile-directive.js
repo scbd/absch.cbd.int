@@ -23,8 +23,9 @@ app.directive('countryProfile', function() {
         controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr','thesaurusService', 'translationService',
             function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr, thesaurusService, translationService) {
                 translationService.set('countryProfileDirectiveT', countryProfileDirectiveT);
+
                 $scope.api = {
-                    loadCountryDetails : loadCountryRecords
+                    loadCountryDetails: loadCountryRecords
                 }
                
                 $scope.loadRecords  = loadRecords;
@@ -42,7 +43,7 @@ app.directive('countryProfile', function() {
                   absPermit: ['Q012', 'Q012_a', 'Q012_b'],
                   absNationalModelContractualClause: ['Q013', 'Q013_a']
                 }
-                let countryRecords  = {};
+                const countryRecords  = {};
                 const nationalSchemas = []
                 let index = 0
 
@@ -64,19 +65,14 @@ app.directive('countryProfile', function() {
 
                 $scope.$watch('code', async function(newVal){
                     if(newVal){
-                        countryRecords = await loadCountryRecords(newVal.toLowerCase());
-
-                        if(realm.is('ABS')) {
-                          await loadRelatedInformationFromNationalReport(countryRecords)
-                          $scope.countryRecords.forEach((schema, index) => {
-                            const relatedQuestions = $scope.relatedQuestionsFromNR1[schema.key]
-                            if (Array.isArray(relatedQuestions) && (relatedQuestions || []).length > 0 && schema.numFound === 0) {
-                              $scope.countryRecords[index].numFound = 1
-                            }
-                          })
-                        }
+                      console.log('newVal', newVal)
+                      const records = await loadCountryRecords(newVal.toLowerCase())
+                      if(realm.is('ABS')) {
+                        await loadRelatedInformationFromNationalReport(records)
+                      }
                     }
                 })
+
                 $scope.showHideRecords = function(schema){
                     schema.display = !schema.display;
                     if(schema.key === 'measure' && schema.display){ //for measure load all remaining records to build the measure matrix
@@ -144,7 +140,6 @@ app.directive('countryProfile', function() {
                         var totalCount      = countryResult.ngroups;
 
                         _.forEach(countryResult.groups, function(group){
-
                             var gpDetails = (group.groupValue||'').split('_');
                             if(!gpDetails.length)
                                 return
@@ -152,20 +147,28 @@ app.directive('countryProfile', function() {
                             if(schema=='measure'){
                                 formatting(group.doclist.docs);
                             }
-                            if(gpDetails[0]!= code){
+
+                            if(gpDetails[0] != code){
                                 schema += `${gpDetails[0]}`;
-                                if(!countryRecords[schema])
+                                if(!countryRecords[schema]) {
                                     countryRecords[schema] = {docs:[], index:0, numFound:0, ...countryRecords[gpDetails[1]] };
+                                }
+
                                 countryRecords[schema].isRegional = true;
-                                if(group.doclist.numFound){
+
+                                if (group.doclist.numFound) {
                                     countryRecords[schema].numFound = group.doclist.numFound
                                     countryRecords[schema].code = group.doclist.docs[0].government_s
                                     countryRecords[schema].government = group.doclist.docs[0].government_EN_t
                                 }
+
+                                console.log('schema', schema)
+                                console.log('group', group)
+
                             }
                             countryRecords[schema]     = _.extend(countryRecords[schema], group.doclist);
-
                         });
+
                         var schemaName = $filter('mapSchema')($routeParams.schema);
                         if($routeParams.code && $routeParams.schema && $routeParams.schema == countryRecords[schemaName].shortCode){
                             countryRecords[schemaName].display = true;
@@ -179,6 +182,12 @@ app.directive('countryProfile', function() {
                         }
                         $scope.countryRecords = [];
                         Object.keys(countryRecords).forEach((key)=>{
+                            // If related information from the NR1 exists set the number of documenst to 1
+                            const relatedQuestions = $scope.relatedQuestionsFromNR1[key]
+                            if (Array.isArray(relatedQuestions) && (relatedQuestions || []).length > 0 && countryRecords[key].numFound === 0) {
+                                countryRecords[key].numFound = 1
+                            }
+
                             $scope.countryRecords.push({
                                 key, ...countryRecords[key]
                             })
