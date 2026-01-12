@@ -20,7 +20,7 @@
 
     <div v-if="hasAdditionalInfo(question)">
       <label> {{ $t('additionalInformation') }} </label>
-      <LocaleValue
+      <KmValueMl
         :question="getAdditionalInfo(question)"
         :locales="[locale]"
         :html="true"
@@ -32,7 +32,7 @@
 import {
   computed, type ComputedRef, type Component
 } from 'vue'
-import LocaleValue from './locale-value.vue'
+import KmValueMl from './km-value-ml.vue'
 import OptionsValue from './options-value.vue'
 import DocumentLegend from './document-legend.vue'
 // @ts-expect-error importing js file
@@ -53,17 +53,17 @@ const questionComponent: ComputedRef<Component> = computed(() => {
 
   switch (type) {
     case 'lstringRte':
-      return LocaleValue
+      return KmValueMl
     case 'int':
     case 'lstring':
-      return LocaleValue
+      return KmValueMl
     case 'term':
     case 'option':
       return OptionsValue
     case 'legend':
       return DocumentLegend
     default:
-      return LocaleValue
+      return KmValueMl
   }
 })
 
