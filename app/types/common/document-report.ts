@@ -58,13 +58,3 @@ export interface CountryRecord {
   docs: CountryRecordDoc[]
   shortCode: string
 }
-
-export interface AnalyzerMap {
-  type: string
-  dataUrl: string
-}
-
-export interface RelatedQuestionsList {
-  questions: string[]
-  key: string
-}

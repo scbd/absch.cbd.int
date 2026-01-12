@@ -1,6 +1,5 @@
 import ApiBase, { tryCastToApiError } from './api-base'
 import { analyzerMapping } from '~/app-data/report-analyzer-mapping.js'
-import axios from 'axios'
 
 export default class KmDocumentApi extends ApiBase {
   /**
@@ -31,7 +30,7 @@ export default class KmDocumentApi extends ApiBase {
       }, {})
     }
     // https://absch.cbddev.xyz/api/v2019/report-analyzer/abs-national-report-1
-    return await axios.get(map.dataUrl, { params })
+    return await this.http.get(map.dataUrl, { params })
       .then(res => res.data)
       .catch(tryCastToApiError)
   }

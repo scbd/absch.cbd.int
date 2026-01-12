@@ -31,12 +31,10 @@ import {
   type ComputedRef, type Component
 } from 'vue'
 import LocaleValue from './locale-value.vue'
-import LinksListValue from './links-list-value.vue'
 import OptionsValue from './options-value.vue'
 import DocumentLegend from './document-legend.vue'
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
-import { vCompareValue } from './compare-value-directive'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import type { QuestionMap, Question, DocumentValue } from '~/types/common/document-report'
@@ -57,12 +55,10 @@ const questionComponent: ComputedRef<Component> = computed(() => {
 
   switch (type) {
     case 'lstringRte':
-      return withDirectives(h('div', h(LocaleValue, Object.assign(componentProps, { html: true }))), [[vCompareValue]])
+      return defineComponent(() => () => h('div', h(LocaleValue, Object.assign(componentProps, { html: true }))))
     case 'int':
     case 'lstring':
-      return withDirectives(h('div', h(LocaleValue, componentProps)), [[vCompareValue]])
-    case 'link':
-      return withDirectives(h('div', h(LinksListValue, componentProps)), [[vCompareValue]])
+      return defineComponent(() => () => h('div', h(LocaleValue, componentProps)))
     case 'term':
     case 'option':
       return defineComponent(() => () => h('div', h(OptionsValue, componentProps)))
