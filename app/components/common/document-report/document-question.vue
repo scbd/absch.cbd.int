@@ -13,6 +13,9 @@
 
     <component
       :is="questionComponent"
+      :question="question"
+      :locales="[locale]"
+      :html="question.data.type === 'lstringRte'"
     />
 
     <div v-if="hasAdditionalInfo(question)">
@@ -27,8 +30,7 @@
 </template>
 <script setup lang="ts">
 import {
-  computed, defineComponent, h, withDirectives,
-  type ComputedRef, type Component
+  computed, type ComputedRef, type Component
 } from 'vue'
 import LocaleValue from './locale-value.vue'
 import OptionsValue from './options-value.vue'
@@ -48,24 +50,20 @@ const props = defineProps<{
 // Directives
 const questionComponent: ComputedRef<Component> = computed(() => {
   const { question: { data: { type } } } = props
-  const componentProps = {
-    question: props.question,
-    locales: [locale.value]
-  }
 
   switch (type) {
     case 'lstringRte':
-      return defineComponent(() => () => h('div', h(LocaleValue, Object.assign(componentProps, { html: true }))))
+      return LocaleValue
     case 'int':
     case 'lstring':
-      return defineComponent(() => () => h('div', h(LocaleValue, componentProps)))
+      return LocaleValue
     case 'term':
     case 'option':
-      return defineComponent(() => () => h('div', h(OptionsValue, componentProps)))
+      return OptionsValue
     case 'legend':
-      return defineComponent(() => () => h('div', h(DocumentLegend, componentProps)))
+      return DocumentLegend
     default:
-      return defineComponent(() => () => h('div', props.question.values[0]?.title))
+      return LocaleValue
   }
 })
 
