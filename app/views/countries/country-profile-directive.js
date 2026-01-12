@@ -8,7 +8,6 @@ import '~/services/main';
 import '~/views/directives/export-directive';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import countryProfileDirectiveT from '~/app-text/views/countries/country-profile-directive.json';
-import InformationFromNr1 from '~/components/common/document-report/information-from-nr1.vue';
 import FirstNationalReportApi from '~/api/first-national-report'
 
 app.directive('countryProfile', function() {
@@ -57,9 +56,12 @@ app.directive('countryProfile', function() {
 
                     if(realm.is('ABS')) {
                         await import('~/views/measure-matrix/measure-matrix-countries-directive')
-                        $scope.vueComponent = {
-                          components: { InformationFromNr1 }
-                        }
+                        await import ('~/components/common/document-report/information-from-nr1.vue')
+                            .then(({ default: InformationFromNr1 }) => {
+                                $scope.vueComponent = {
+                                  components: { InformationFromNr1 }
+                                }
+                            })
                     }
                 }
 
