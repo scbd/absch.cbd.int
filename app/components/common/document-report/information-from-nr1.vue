@@ -46,9 +46,9 @@ import viewNationalReportT from '~/app-text/views/forms/view/view-national-repor
 import { getQuestionValues } from './getQuestionData'
 import DocumentQuestion from './document-question.vue'
 // @ts-expect-error importing js file
-import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1.js'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
+// @ts-expect-error importing js file
+import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1.js'
 
 import type {
   DocumentData, QuestionMap, ReportSection, Question, CountryRecord
@@ -68,27 +68,25 @@ const props = withDefaults(defineProps<Props>(), {
 
 // Translation Keys
 const { mergeLocaleMessage, locale } = useI18n()
-
 const messageGroups = [
   countryProfileT,
   editAbsNationalReportT,
   editNationalReportT,
   viewNationalReportT
 ]
-
-const nr1Url = computed(() => `/database/${props.firstNationalReportRecord.shortCode}/${props.firstNationalReportRecord.docs[0]?.uniqueIdentifier_s.toUpperCase()}`)
-
 messageGroups.forEach((messageGroup) => {
   Object.entries(messageGroup)
     .forEach(([key, value]) => mergeLocaleMessage(key, value))
 })
 
-// Constants
+// Computed
 const publishedDate = computed(() => parseDate(props.firstNationalReportRecord.docs[0]?.rec_date))
 
 const questions = computed(() => props.relatedQuestions
   .map((questionKey: string) => getQuestion(questionKey))
   .filter(doesQuestionExist))
+
+const nr1Url = computed(() => `/database/${props.firstNationalReportRecord.shortCode}/${props.firstNationalReportRecord.docs[0]?.uniqueIdentifier_s.toUpperCase()}`)
 
 // Methods
 function parseDate (dateString: string | undefined): string {
