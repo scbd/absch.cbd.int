@@ -21,7 +21,7 @@
       </ul>
     </div>
     <div v-else>
-      <LocaleValue
+      <KmValueMl
         v-if="hasSingleValue(question.values)"
         :question="question"
         :locales="locales"
@@ -33,7 +33,7 @@
 <script setup lang="ts">
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
-import LocaleValue from './locale-value.vue'
+import KmValueMl from './km-value-ml.vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import type { Question, DocumentValue, QuestionMap } from '~/types/common/document-report'
