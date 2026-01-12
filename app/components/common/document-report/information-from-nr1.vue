@@ -8,7 +8,7 @@ Used on the countries profile page e.g. /en/countries/BH
 <template>
   <div
     v-if="questions.length > 0"
-    id="country-summary"
+    id="related-information"
     class="px-4 pb-3 pt-2 bg-white"
   >
     <slot name="header">
