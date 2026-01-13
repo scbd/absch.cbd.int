@@ -49,14 +49,12 @@ import DocumentQuestion from './document-question.vue'
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
 import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1.js'
-
 import type {
   DocumentData, QuestionMap, ReportSection, Question, CountryRecord
 } from '~/types/common/document-report'
 
 // Props
 export interface Props {
-  countryCode: string
   relatedQuestions?: string[]
   firstNationalReportRecord: CountryRecord
   nationalReportData: DocumentData
