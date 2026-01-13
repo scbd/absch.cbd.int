@@ -25,9 +25,28 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             $location, $filter, ngDialog, $timeout, toastr, IWorkflows, commonjs, joyrideService, $element, translationService) {
             
             $scope.schemas          = realm.schemas        
+            console.log('$scope.schemas', $scope.schemas.absNationalReport1)
+            const lfo = {
+              type: 'national',
+              title: {
+                en: 'Legal Framework Overview',
+              },
+              description: {
+                en: 'Overview of the legal framwork protecting organic resources.'
+              },
+              shortCode: 'LFO',
+              titlePlural: {
+                en: 'Legal Framework Overview'
+              }
+            }
+            console.log(realm)
+            $scope.schemas.legalFramework = lfo
+
             $scope.languages        = commonjs.languages;
             $scope.Math             = window.Math;
-            $scope.nationalSchemas  = _.without(realm.nationalSchemas, 'contact', 'focalPoint', 'absMeasureStatus');
+            $scope.nationalSchemas  = _.without([...realm.nationalSchemas, 'legalFramework'], 'contact', 'focalPoint', 'absMeasureStatus');
+            console.log('$scope.nationalSchemas', $scope.nationalSchemas)
+
             $scope.referenceSchemas = _.without(realm.referenceSchemas);
             $scope.otherRecordSchemas = ['contact'];
             $scope.topRecords       = {};

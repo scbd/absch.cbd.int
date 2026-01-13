@@ -37,6 +37,7 @@
       ]
     },
     "schemas": {
+
       "focalPoint": {
           "type": "national",
           "title": {

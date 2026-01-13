@@ -40,6 +40,19 @@
         ]
       },
       "schemas": {
+        "legalFramework": {
+          "type": "national",
+          "title": {
+            "en": "Legal Framework Overview"
+          },
+          "description": {
+            "en": "Overview of the legal framwork protecting organic resources."
+          },
+          "shortCode": "LFO",
+          "titlePlural": {
+            "en": "Legal Framework Overview"
+          }
+        },
         "focalPoint": {
             "type": "national",
             "title": {
