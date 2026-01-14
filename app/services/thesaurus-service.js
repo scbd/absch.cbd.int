@@ -100,7 +100,7 @@ import _ from 'lodash';
                 usage                  : "A7B77788-8C90-4849-9327-E181E9522F3A",
                 resourceTypesVlr       : "A762DF7E-B8D1-40D6-9DAC-D25E48C65528", //TODO used in VLR only need to rename
                 // resourceTypes          : "83BA4728-A843-442B-9664-705F55A8EC52", // TODO: will move to duplicate
-                // jurisdictions          : '4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A', 
+                jurisdictions          : '4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A', // Previous Domain with a more limited set of terms: '50AC1489-92B8-4D99-965A-AAE97A80F38E'
                 dnaSequenceFamily      : '82DAAF04-6698-4CA6-81D5-F200AE64C63A',
                 dnaSequenceTraits      : 'B8EB2261-7695-4DC5-9C4E-026D380DA7CB',
                 domestication          : 'B89720B8-81BF-4A6B-8084-8D464403C25A',
@@ -212,7 +212,6 @@ import _ from 'lodash';
                 status                             : 'B91693BB-648B-4601-9C4E-5B6ABE160D35', // TODO: having conflict with  ED7CDBD8-7762-4A84-82DD-30C01458A799
                 statusCapacity                     : '4E7731C7-791E-46E9-A579-7272AF261FED',
                 supportTools                       : 'B63B9640-1CB8-4868-89DA-3D0571638870',
-                jurisdictions                      : '50AC1489-92B8-4D99-965A-AAE97A80F38E',
                 actions                            : 'A9AB3215-353C-4077-8E8C-AF1BF0A89645',
                 types                              : '6BDB1F2A-FDD8-4922-BB40-D67C22236581',
                 categories                         : '33D62DA5-D4A9-48A6-AAE0-3EEAA23D5EB0',
