@@ -9,15 +9,16 @@ export default class KmDocumentApi extends ApiBase {
    * @param {string} countryCode
    * @param {Realm} realm -> For determining the url and which realm the NR1 belongs to.
    * @param {string[]} questionsList -> What questions are relevant to the
+   * @param {string} reportKey -> The key of the first national report
    * @return {Promise} - Http request
    */
-  async fetchReportData (countryCode, realm, questionsList) {
+  async fetchReportData (countryCode, realm, reportKey, questionsList = null) {
     const q = { government_REL: { $in: [countryCode.toLowerCase()] } }
 
     const realmKey = realm.notificationTemplateFolder.toLowerCase()
 
     const map = analyzerMapping[realmKey]
-      .find(map => map.type === 'absNationalReport1')
+      .find(map => map.type === reportKey)
     // Params to fetch NR1 for the current country from the server.
     const params = { q, realm: realm.realm }
 
