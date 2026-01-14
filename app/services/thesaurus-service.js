@@ -86,7 +86,6 @@ import _ from 'lodash';
                 absSubjects            : "CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924",
                 keyAreas               : '2B2A5166-F949-4B1E-888F-A7976E76320B', 
                 aBSkeyareas            : '2B2A5166-F949-4B1E-888F-A7976E76320B',
-                // status                 : "ED7CDBD8-7762-4A84-82DD-30C01458A799", // ToDo: having conflict with B91693BB-648B-4601-9C4E-5B6ABE160D35
                 msrStatus              : 'ED7CDBD8-7762-4A84-82DD-30C01458A799', // was mSR_status, used in abs-left-filters.jason replaced with status
                 typeOfDocuments        : "144CF550-7629-43F3-817E-CACDED34837E", 
                 msrTypes               : '144CF550-7629-43F3-817E-CACDED34837E', // was mSR_types, not used, duplicate of typeOfDocuments
@@ -99,7 +98,6 @@ import _ from 'lodash';
                 absFunctions           : '8102E184-E282-47F7-A49F-4C219B0EE235',
                 usage                  : "A7B77788-8C90-4849-9327-E181E9522F3A",
                 resourceTypesVlr       : "A762DF7E-B8D1-40D6-9DAC-D25E48C65528", //TODO used in VLR only need to rename
-                // resourceTypes          : "83BA4728-A843-442B-9664-705F55A8EC52", // TODO: will move to duplicate
                 jurisdictions          : '4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A', // Previous Domain with a more limited set of terms: '50AC1489-92B8-4D99-965A-AAE97A80F38E'
                 dnaSequenceFamily      : '82DAAF04-6698-4CA6-81D5-F200AE64C63A',
                 dnaSequenceTraits      : 'B8EB2261-7695-4DC5-9C4E-026D380DA7CB',
@@ -201,7 +199,6 @@ import _ from 'lodash';
                 activityScope                      : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17',
                 scales                             : '96FCD864-D388-4148-94DB-28B484047BA5',                
                 gspcCategoryProgress               : '254B8AE2-05F2-43C7-8DB1-ADC702AE14A8',
-                // confidence                         : 'B40C65BE-CFBF-4AA2-B2AA-C65F358C1D8D', TODO: Conflicts with line duplicate key AB782477-9942-4C6B-B9F0-79A82915A069
                 categoryProgress                   : 'EF99BEFD-5070-41C4-91F0-C051B338EEA6',
                 assessment                         : '8D3DFD9C-EE6D-483D-A586-A0DDAD9A99E0',
                 gspcTargets                        : '8D405050-50AF-45EA-95F7-A31A11196424',
@@ -209,7 +206,7 @@ import _ from 'lodash';
                 reportStatus                       : '7F0D898A-6BF1-4CE6-AA77-7FEAED3429C6',
                 approvedBody                       : 'F1A5BFF1-F555-40D1-A24C-BBE1BE8E82BF',
                 approvedStatus                     : 'E27760AB-4F87-4FBB-A8EA-927BDE375B48',
-                status                             : 'B91693BB-648B-4601-9C4E-5B6ABE160D35', // TODO: having conflict with  ED7CDBD8-7762-4A84-82DD-30C01458A799
+                status                             : 'B91693BB-648B-4601-9C4E-5B6ABE160D35', // Previous term: ED7CDBD8-7762-4A84-82DD-30C01458A799
                 statusCapacity                     : '4E7731C7-791E-46E9-A579-7272AF261FED',
                 supportTools                       : 'B63B9640-1CB8-4868-89DA-3D0571638870',
                 actions                            : 'A9AB3215-353C-4077-8E8C-AF1BF0A89645',
@@ -217,11 +214,11 @@ import _ from 'lodash';
                 categories                         : '33D62DA5-D4A9-48A6-AAE0-3EEAA23D5EB0',
                 categoriesCapacity                 : '579F448B-ECA8-4258-B130-3EAA68056D1F',
                 ownerBehalf                        : '1FBEF0A8-EE94-4E6B-8547-8EDFCB1E2301',
-                confidence                         : 'AB782477-9942-4C6B-B9F0-79A82915A069',
+                confidence                         : 'AB782477-9942-4C6B-B9F0-79A82915A069', // Prvious term: "B40C65BE-CFBF-4AA2-B2AA-C65F358C1D8D"
                 expertiseLevels                    : '1B57D9C3-F5F8-4875-94DC-93E427F3BFD8',
                 targetGroups                       : 'AFB155C4-93A6-402C-B812-CFC7488ED651',
                 purposes                           : 'E712C9CD-437E-454F-BA72-E7D20E4C28ED',
-                resourceTypes                      : 'A762DF7E-B8D1-40D6-9DAC-D25E48C65528',
+                resourceTypes                      : 'A762DF7E-B8D1-40D6-9DAC-D25E48C65528', // Previous term "83BA4728-A843-442B-9664-705F55A8EC52"
                 resourceTypesCapacity              : '7E688641-F642-4C46-A024-70ED76D3DF40',
                 // bchRaSubjects                      : '69B43BB5-693B-4ED9-8FE0-95895E144142',
                 bchSubject                         : '043C7F0D-2226-4E54-A56F-EE0B74CCC984',
