@@ -1,5 +1,5 @@
 import app from '~/app';
-// import template from "text!./measure-matrix-countries-directive.html";
+import template from "text!./measure-matrix-countries-directive.html";
 import _ from 'lodash';
 import '~/components/scbd-angularjs-services/main';
 import '~/components/scbd-angularjs-controls/main';
@@ -9,7 +9,7 @@ import '~/views/forms/view/record-loader.directive';
     app.directive("measureMatrixCountriesDirective", function() {
         return {
             restrict: "EAC",
-            // template: template, 
+            template: template, 
             replace: true,
             transclude: false,
             scope: {
