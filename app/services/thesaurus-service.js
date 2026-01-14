@@ -142,7 +142,6 @@ import _ from 'lodash';
                 countries              : "countries",
                 regions                : "regions",
                 languages              : "ISO639-2",
-                // aichiTargets           : 'AICHI-TARGETS',
                 gbfTargets             : 'GBF-TARGETS',
                 gbfGoalsAndTargets     : 'GBF-GOALS-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
@@ -188,14 +187,10 @@ import _ from 'lodash';
                 aichiTargets                       : 'AICHI-TARGETS',
                 aichiTargetsComponents             : 'AICHI-TARGETS-COMPONENTS',  
                 adequacyMonitoring                 : '23643DAC-74BB-47BC-A603-123D20EAB824',
-                // gbfTargets                         : 'GBF-TARGETS',
-                // cbdSubjects                        : 'CBD-SUBJECTS',                
-                // organizationTypes                  : 'Organization Types', 
                 capacityBuildingProjectFundingTypes: 'Capacity Building Project Funding Types',
                 capacityBuildingProjectStatus      : 'Capacity Building Project Status',   
                 geographicScope                    : '4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A',
                 absKeyAreas                        : '2B2A5166-F949-4B1E-888F-A7976E76320B',
-                // cbiTypes                           : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',
                 activityScope                      : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17',
                 scales                             : '96FCD864-D388-4148-94DB-28B484047BA5',                
                 gspcCategoryProgress               : '254B8AE2-05F2-43C7-8DB1-ADC702AE14A8',
@@ -214,13 +209,12 @@ import _ from 'lodash';
                 categories                         : '33D62DA5-D4A9-48A6-AAE0-3EEAA23D5EB0',
                 categoriesCapacity                 : '579F448B-ECA8-4258-B130-3EAA68056D1F',
                 ownerBehalf                        : '1FBEF0A8-EE94-4E6B-8547-8EDFCB1E2301',
-                confidence                         : 'AB782477-9942-4C6B-B9F0-79A82915A069', // Prvious term: "B40C65BE-CFBF-4AA2-B2AA-C65F358C1D8D"
+                confidence                         : 'AB782477-9942-4C6B-B9F0-79A82915A069', // Previous term: "B40C65BE-CFBF-4AA2-B2AA-C65F358C1D8D"
                 expertiseLevels                    : '1B57D9C3-F5F8-4875-94DC-93E427F3BFD8',
                 targetGroups                       : 'AFB155C4-93A6-402C-B812-CFC7488ED651',
                 purposes                           : 'E712C9CD-437E-454F-BA72-E7D20E4C28ED',
                 resourceTypes                      : 'A762DF7E-B8D1-40D6-9DAC-D25E48C65528', // Previous term "83BA4728-A843-442B-9664-705F55A8EC52"
                 resourceTypesCapacity              : '7E688641-F642-4C46-A024-70ED76D3DF40',
-                // bchRaSubjects                      : '69B43BB5-693B-4ED9-8FE0-95895E144142',
                 bchSubject                         : '043C7F0D-2226-4E54-A56F-EE0B74CCC984',
                 absSubject                         : 'CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924',
                 availability                       : '1FEF5AB7-3C90-4AE7-859F-787949FA9046'               
