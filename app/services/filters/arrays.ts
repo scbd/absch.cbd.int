@@ -8,11 +8,11 @@ interface MappingItem {
   [key: string]: any;
 }
 
-export function genericFilter ($query: string, items: FilterItem[] | undefined): FilterItem[] | undefined {
+export function genericFilter (query: string, items: FilterItem[] | undefined): FilterItem[] | undefined {
   if (!items) {
     return
   }
-  const lowerCaseQuery = $query.toLowerCase()
+  const lowerCaseQuery = query.toLowerCase()
   return items.filter(item => item.__value.toLowerCase().indexOf(lowerCaseQuery) !== -1)
 }
 
