@@ -84,14 +84,24 @@ function getQuestionLabel (questionMap: QuestionMap): string {
   return sanitizeHtml(questionMap.title ?? '')
 }
 
+/**
+ * Does the value include a translated string?
+ */
 function hasLocaleValue (value: string | Record<string, string> | null | undefined): value is string | Record<string, string> {
   return typeof value === 'string' || typeof value === 'object'
 }
+
+/**
+ * Does the value have additional information included with it?
+ */
 function hasAdditionalInfo (q: Question): boolean {
   if (q.values.length !== 1) { return false }
   return hasLocaleValue(q.values[0]?.additionalInformation) || hasLocaleValue(q.values[0]?.details)
 }
 
+/**
+ * Get the translated additional information string (stored either under the details or additionalInformation key).
+ */
 function getAdditionalInfo (q: Question): Question {
   const getAdditionalInfo = (value: string | Record<string, string> | undefined | null): string => {
     const langKey = locale.value.toLowerCase()
