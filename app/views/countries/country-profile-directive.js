@@ -100,7 +100,7 @@ app.directive('countryProfile', function() {
 
                   const api = new FirstNationalReportApi()
                   // Fetch all questions relevant to the country profile from the NR
-                  const nr1 = await api.fetchReportData($scope.code, realm, relevantQuestionsList)
+                  const nr1 = await api.fetchReportData($scope.code, realm, 'absNationalReport1', relevantQuestionsList)
                     .catch(error => console.error(error))
 
                   const [nrData] = nr1 
