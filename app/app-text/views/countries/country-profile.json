@@ -28,6 +28,8 @@
     "addIno": "Additional information for the country profile",
     "lastUpdated": "Last updated",
     "partyToConvention":"Party to the convention",
-    "notPartyToConvention":"Not a party to the convention"
-
+    "notPartyToConvention":"Not a party to the convention",
+    "relatedInformation":" Related information from the",
+    "firstNR": "first national report",
+    "publishedOn": "published on {date}"
 }
