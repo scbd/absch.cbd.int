@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
     "rootDir": "app",
