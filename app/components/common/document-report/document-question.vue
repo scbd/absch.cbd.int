@@ -12,10 +12,8 @@
     />
 
     <component
-      :is="questionComponent"
-      :question="question"
-      :locales="[locale]"
-      :html="question.data.type === 'lstringRte'"
+      :is="questionComponent.component"
+      v-bind="questionComponent.props"
     />
 
     <div v-if="hasAdditionalInfo(question)">
@@ -39,7 +37,7 @@ import DocumentLegend from './document-legend.vue'
 import { sanitizeHtml } from '~/services/html.sanitize'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-import type { QuestionMap, Question, DocumentValue } from '~/types/common/document-report'
+import type { QuestionMap, Question, DocumentValue, QuestionProps } from '~/types/common/document-report'
 
 const { locale, t } = useI18n()
 
@@ -47,26 +45,33 @@ const props = defineProps<{
   question: Question,
 }>()
 
-// Directives
-const questionComponent: ComputedRef<Component> = computed(() => {
+// Computed
+const questionComponent: ComputedRef<{ component: Component, props: QuestionProps }> = computed(() => {
   const { question: { data: { type } } } = props
+  const questionProps: QuestionProps = { question: props.question, locales: [locale.value] }
 
   switch (type) {
     case 'lstringRte':
-      return KmValueMl
+      questionProps.html = true
+      return { component: KmValueMl, props: questionProps }
     case 'int':
     case 'lstring':
-      return KmValueMl
+      return { component: KmValueMl, props: questionProps }
     case 'term':
     case 'option':
-      return OptionsValue
+      return { component: OptionsValue, props: questionProps }
     case 'legend':
-      return DocumentLegend
+      return { component: DocumentLegend, props: { title: props.question.data.title } }
     default:
-      return KmValueMl
+      return { component: KmValueMl, props: questionProps }
   }
 })
 
+// Methods
+
+/**
+ * Get label for question including the question number and sanatize any HTML in the label.
+ */
 function getQuestionLabel (questionMap: QuestionMap): string {
   const spaceSubQuestion = (number: string | undefined): string => {
     if (number === '' || number === undefined) { return '' }

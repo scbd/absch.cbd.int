@@ -58,3 +58,10 @@ export interface CountryRecord {
   docs: CountryRecordDoc[]
   shortCode: string
 }
+
+export interface QuestionProps {
+  question?: Question
+  locales?: LanguageCode[]
+  html?: boolean
+  title?: string
+}
