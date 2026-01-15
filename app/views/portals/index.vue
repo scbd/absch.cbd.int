@@ -4,7 +4,7 @@
     class="px-5 py-4"
   >
     <h4 class="fs-4 mb-4 fw-bold">
-      {{ t('forums') }}
+      {{ t('portals') }}
     </h4>
     <loading
       v-if="isLoading"
@@ -79,14 +79,18 @@ import loading from '~/components/common/loading.vue'
 import serverError from '~/components/common/error.vue'
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
+import commonRoutesMessages from '~/app-text/routes/common-routes-labels.json'
 import type { Portal, Article } from '~/types/common/forums'
-import type { LString } from '~/types/languages'
 
 const { realm } = useRealm()
 
 const { locale, t, mergeLocaleMessage } = useI18n({ messages })
-Object.entries(forumMessages)
-  .forEach(([key, value]) => mergeLocaleMessage(key, value))
+
+const translations = [forumMessages, commonRoutesMessages]
+translations.forEach((value) => {
+  Object.entries(value)
+    .forEach(([key, value]) => mergeLocaleMessage(key, value))
+})
 
 const auth = useAuth()
 const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
