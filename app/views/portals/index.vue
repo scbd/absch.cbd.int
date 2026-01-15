@@ -11,7 +11,7 @@
       :caption="t('loading')"
     />
     <server-error
-      v-if="typeof error === 'object'"
+      v-else-if="typeof error === 'object'"
       :error="error"
     />
     <div
@@ -103,7 +103,7 @@ const error: Ref<Error | undefined> = ref()
 
 onMounted(async () => {
   isLoading.value = true
-  // http://localhost:2030/api/v2023/portals?q={"realms": "realm"}
+
   const portalsData = await portalsApi.queryPortals({ q: { realms: realm } })
     .catch((err: Error) => {
       console.error(err) // eslint-disable-line no-console -- show error in console
