@@ -75,33 +75,15 @@ import { sanitizeHtml } from '~/services/html.sanitize'
 import loading from '~/components/common/loading.vue'
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
+import { languages } from '~/app-data/un-languages'
+import type { Portal, Article } from '~/types/common/forums'
+import type { LString, LanguageCode } from '~/types/languages'
 
 const { realm } = useRealm()
 
 const { locale, t, mergeLocaleMessage } = useI18n({ messages })
 Object.entries(forumMessages)
   .forEach(([key, value]) => mergeLocaleMessage(key, value))
-
-interface LocalizedValue { en: string }
-interface Portal {
-  _id: string
-  title: LocalizedValue
-  slug: string
-  content: { article: { articleId: string } }
-  article: Article
-  url: string
-}
-interface Image { position: string, size: string, url: string }
-
-interface Article {
-  _id: string
-  coverImage: Image
-  summary: LocalizedValue
-  title: LocalizedValue
-  content: LocalizedValue
-  meta: { createdOn: string }
-  adminTags?: string[]
-}
 
 const auth = useAuth()
 const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
