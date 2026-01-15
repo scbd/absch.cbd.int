@@ -160,4 +160,8 @@ img.cover-image {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.card.visited-background:hover * span {
+  background-color: #e1e1e1 !important;
+}
 </style>
