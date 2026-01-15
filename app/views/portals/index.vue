@@ -34,7 +34,7 @@
             v-if="portal.article.coverImage"
             :src="portal.article.coverImage.url"
             class="card-img-top cover-image"
-            :alt="getLString(portal.article.title)"
+            :alt="lstring(portal.article.title)"
           >
 
           <div class="card-body">
@@ -48,7 +48,7 @@
             <div
               class="card-text article-text w-100 overflow-hidden"
             >
-              {{ getLString(portal.article.summary) }}
+              {{ lstring(portal.article.summary) }}
             </div>
           </div>
         </div>
@@ -79,9 +79,8 @@ import loading from '~/components/common/loading.vue'
 import serverError from '~/components/common/error.vue'
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
-import { languages } from '~/app-data/un-languages'
 import type { Portal, Article } from '~/types/common/forums'
-import type { LString, LanguageCode } from '~/types/languages'
+import type { LString } from '~/types/languages'
 
 const { realm } = useRealm()
 
@@ -151,15 +150,6 @@ onMounted(async () => {
     return portal
   })
 })
-
-// Methods
-function getLString(lstring: LString | undefined): string {
-  if (lstring === undefined) { return '' }
-  const isLangKey = (value: string): value is LanguageCode => Object.keys(languages).includes(value)
-  const { value: localeVal } = locale
-  if (!isLangKey(localeVal)) { return '' }
-  return lstring[localeVal] ?? ''
-}
 </script>
 <style scoped>
 img.cover-image {
