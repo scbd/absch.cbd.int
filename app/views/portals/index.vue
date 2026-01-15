@@ -127,20 +127,11 @@ onMounted(async () => {
 
   isLoading.value = false
 
-  const defaultVal: LString = { en: '' }
-  const defaultArticle: Article = {
-    _id: '',
-    coverImage: { position: '', size: '', url: '' },
-    summary: defaultVal,
-    title: defaultVal,
-    content: defaultVal,
-    meta: { createdOn: '' }
-  }
-
   portals.value = portalsData.map((p: Portal) => {
     const portal = p
-    const article: Article = articles
-      .find((article: Article) => portal.content.article.articleId === article._id) ?? defaultArticle
+    const article: Article | undefined = articles
+      .find((article: Article) => portal.content.article.articleId === article._id)
+    if (article === undefined) { return portal }
 
     portal.article = article
 
@@ -149,6 +140,7 @@ onMounted(async () => {
     portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
     return portal
   })
+  .filter((portal: Portal) => typeof portal.article === 'object')
 })
 </script>
 <style scoped>
