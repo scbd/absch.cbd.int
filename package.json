@@ -10,6 +10,7 @@
     "@bower_components/require-shim": "zetlen/require-shim#95b5aaea4530fb2861cc475497c7b4c62204628d",
     "@scbd/angular-vue": "https://github.com/scbd/angular-vue.git#ng-vue-3",
     "@scbd/common": "^0.0.10",
+    "chart.js": "^4.5.0",
     "cheerio": "1.0.0-rc.3",
     "compression": "1.7.4",
     "cookie-parser": "1.4.3",
@@ -25,7 +26,8 @@
     "lodash-es": "^4.17.21",
     "mime": "1.4.1",
     "path-to-regexp": "^6.2.1",
-    "superagent": "5.0.8"
+    "superagent": "5.0.8",
+    "vue-chartjs": "^5.3.2"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
