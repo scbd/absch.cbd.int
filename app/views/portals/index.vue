@@ -74,8 +74,6 @@ import { useRealm } from '~/services/composables/realm.js'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
-import { sanitizeHtml } from '~/services/html.sanitize'
-// @ts-expect-error importing js file
 import loading from '~/components/common/loading.vue'
 // @ts-expect-error importing js file
 import serverError from '~/components/common/error.vue'
@@ -115,9 +113,13 @@ onMounted(async () => {
     .filter((portalSchema: Portal) => isObjectId(portalSchema._id))
     .map((portalSchema: Portal) => ({ $oid: mapObjectId(portalSchema.content.article.articleId) }))
 
-  const query = [{ $match: { _id: { $in: articleOidQueries } } }]
+  const articleFields = { _id: 1, title: 1, summary: 1, coverImage: 1 }
+  const query = [
+    { $match: { _id: { $in: articleOidQueries } } },
+    { $project: articleFields }
+  ]
 
-  const articles: Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
+  const articles: Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) }, { cache: true })
     .catch((err: Error) => {
       console.error(err) // eslint-disable-line no-console -- show error in console
       error.value = err
@@ -143,8 +145,6 @@ onMounted(async () => {
 
     portal.article = article
 
-    portal.article.content = sanitizeHtml(lstring(article.content, locale))
-
     portal.title = lstring(portal.title, locale)
 
     portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
@@ -153,7 +153,8 @@ onMounted(async () => {
 })
 
 // Methods
-function getLString(lstring: LString): string {
+function getLString(lstring: LString | undefined): string {
+  if (lstring === undefined) { return '' }
   const isLangKey = (value: string): value is LanguageCode => Object.keys(languages).includes(value)
   const { value: localeVal } = locale
   if (!isLangKey(localeVal)) { return '' }
