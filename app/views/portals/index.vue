@@ -10,6 +10,10 @@
       v-if="isLoading"
       :caption="t('loading')"
     />
+    <server-error
+      v-if="typeof error === 'object'"
+      :error="error"
+    />
     <div
       v-else
       class="row"
@@ -73,6 +77,8 @@ import { useI18n } from 'vue-i18n'
 import { sanitizeHtml } from '~/services/html.sanitize'
 // @ts-expect-error importing js file
 import loading from '~/components/common/loading.vue'
+// @ts-expect-error importing js file
+import serverError from '~/components/common/error.vue'
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
 import { languages } from '~/app-data/un-languages'
@@ -93,6 +99,7 @@ const portals: Ref<Portal[]> = ref([])
 const PORTALS_URL = 'portals'
 
 const isLoading = ref(false)
+const error: Ref<Error | undefined> = ref()
 
 onMounted(async () => {
   isLoading.value = true
@@ -100,6 +107,7 @@ onMounted(async () => {
   const portalsData = await portalsApi.queryPortals({ q: { realms: realm } })
     .catch((err: Error) => {
       console.error(err) // eslint-disable-line no-console -- show error in console
+      error.value = err
       return []
     })
 
@@ -112,6 +120,7 @@ onMounted(async () => {
   const articles: Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
     .catch((err: Error) => {
       console.error(err) // eslint-disable-line no-console -- show error in console
+      error.value = err
       return []
     })
 
