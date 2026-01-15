@@ -6,7 +6,7 @@
     <h4 class="fs-4 mb-4 fw-bold">
       {{ t('forums') }}
     </h4>
-    <Loading
+    <loading
       v-if="isLoading"
       :caption="t('loading')"
     />
@@ -43,8 +43,9 @@
 
             <div
               class="card-text article-text w-100 overflow-hidden"
-              v-html="portal.article.content"
-            />
+            >
+              {{ getLString(portal.article.summary) }}
+            </div>
           </div>
         </div>
       </div>
@@ -71,7 +72,7 @@ import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
 // @ts-expect-error importing js file
-import Loading from '~/components/common/loading.vue'
+import loading from '~/components/common/loading.vue'
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
 
@@ -143,6 +144,14 @@ onMounted(async () => {
     return portal
   })
 })
+
+// Methods
+function getLString(lstring: LString): string {
+  const isLangKey = (value: string): value is LanguageCode => Object.keys(languages).includes(value)
+  const localeVal = locale.value
+  if (!isLangKey(localeVal)) { return '' }
+  return lstring[localeVal]
+}
 </script>
 <style scoped>
 img.cover-image {
@@ -159,9 +168,5 @@ img.cover-image {
   -webkit-line-clamp: 10;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.card.visited-background:hover * span {
-  background-color: #e1e1e1 !important;
 }
 </style>
