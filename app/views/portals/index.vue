@@ -98,7 +98,10 @@ onMounted(async () => {
   isLoading.value = true
   // http://localhost:2030/api/v2023/portals?q={"realms": "realm"}
   const portalsData = await portalsApi.queryPortals({ q: { realms: realm } })
-    .catch((err: Error) => { console.error(err) }) // eslint-disable-line no-console -- show error in consol
+    .catch((err: Error) => {
+      console.error(err) // eslint-disable-line no-console -- show error in console
+      return []
+    })
 
   const articleOidQueries = portalsData
     .filter((portalSchema: Portal) => isObjectId(portalSchema._id))
@@ -107,14 +110,27 @@ onMounted(async () => {
   const query = [{ $match: { _id: { $in: articleOidQueries } } }]
 
   const articles: Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
-    .catch((err: Error) => { console.error(err) }) // eslint-disable-line no-console -- show error in consol
+    .catch((err: Error) => {
+      console.error(err) // eslint-disable-line no-console -- show error in console
+      return []
+    })
+
   isLoading.value = false
+
+  const defaultVal: LString = { en: '' }
+  const defaultArticle: Article = {
+    _id: '',
+    coverImage: { position: '', size: '', url: '' },
+    summary: defaultVal,
+    title: defaultVal,
+    content: defaultVal,
+    meta: { createdOn: '' }
+  }
 
   portals.value = portalsData.map((p: Portal) => {
     const portal = p
-    const article = articles
-      .find((article: Article) => portal.content.article.articleId === article._id)
-    if (article === undefined) { return portal }
+    const article: Article = articles
+      .find((article: Article) => portal.content.article.articleId === article._id) ?? defaultArticle
 
     portal.article = article
 
@@ -130,9 +146,9 @@ onMounted(async () => {
 // Methods
 function getLString(lstring: LString): string {
   const isLangKey = (value: string): value is LanguageCode => Object.keys(languages).includes(value)
-  const localeVal = locale.value
+  const { value: localeVal } = locale
   if (!isLangKey(localeVal)) { return '' }
-  return lstring[localeVal]
+  return lstring[localeVal] ?? ''
 }
 </script>
 <style scoped>

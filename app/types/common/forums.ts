@@ -8,12 +8,13 @@ export interface Portal {
   article: Article
   url: string
 }
+
 interface Image { position: string, size: string, url: string }
 
 export interface Article {
   _id: string
   coverImage: Image
-  summary: LString 
+  summary: LString
   title: LString
   content: LString
   meta: { createdOn: string }
