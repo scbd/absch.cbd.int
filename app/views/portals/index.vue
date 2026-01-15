@@ -34,7 +34,7 @@
             v-if="portal.article.coverImage"
             :src="portal.article.coverImage.url"
             class="card-img-top cover-image"
-            :alt="lstring(portal.article.title)"
+            :alt="lstring(portal.title)"
           >
 
           <div class="card-body">
