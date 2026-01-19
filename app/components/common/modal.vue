@@ -2,8 +2,10 @@
   <div
     ref="modalRef"
     class="modal fade overflow-hidden pt-5 pb-5"
+    :data-bs-backdrop="backdrop"
     aria-hidden="true"
-    @click.self="close"
+    :data-bs-keyboard="isKeyboardClosable"
+    @click.self="clickBackdrop"
   >
     <div
       class="modal-dialog"
@@ -60,44 +62,58 @@
 
 <script setup lang="ts">
 import { shallowRef, onMounted } from 'vue'
-// @ts-ignore
+// @ts-expect-error importing js file
 import { Modal } from 'bootstrap'
 
-let modal = { show: (value: string) => value, hide: () => {} } 
+let modal = { show: (value: string) => value, hide: () => undefined }
 const modalRef = shallowRef(modal)
 
 defineProps({
   title: {
     type: String,
-    default: '',
+    default: ''
   },
   modalSize: {
     type: String,
-    default: 'xl',
+    default: 'xl'
   },
   headerClass: {
     type: String,
-    default: '',
+    default: ''
   },
   footerClass: {
     type: String,
-    default: '',
+    default: ''
   },
+  backdrop: {
+    type: String,
+    default: 'default'
+  },
+  isKeyboardClosable: {
+    type: Boolean,
+    default: true
+  }
 })
 
 const $emit = defineEmits(['onClose'])
 
-const show = () => {
+const show = (): undefined => {
   modal.show('static')
 }
 
-const close = () => {
+const close = (): undefined => {
   modal.hide()
   $emit('onClose')
 }
 
+const clickBackdrop = (event: Event): undefined => {
+  if (!(event.target instanceof HTMLElement)) { return }
+  if (event.target.dataset['bsBackdrop'] === 'static') { return }
+  close()
+}
+
 onMounted(() => {
-  const value = modalRef.value
+  const { value } = modalRef
 
   modal = new Modal(value)
 })

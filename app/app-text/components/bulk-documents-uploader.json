@@ -18,6 +18,21 @@
     "documentEmptyError": "Document Empty. Not populated rows found in document.",
     "contactInformation": "Contact Information",
     "required": "Value required.",
-    "incorrectFields": "The following imported documents may contain fields with incorrect values.",
-    "confirmWithErrors": "Would you like to create the draft documents regardless?"
+    "incorrectFields": "The following documents may contain fields with incorrect values.",
+    "confirmWithErrors": "Would you like to create the draft documents regardless?",
+    "createDraftConfirmation": "Create draft records for the following items?",
+    "countryNotFound": "The country with the country code {msg} code could not be found.",
+    "warning": "Warning",
+    "cancel": "Cancel",
+    "confirmAction": "Confirm",
+    "importSheet": "Import Documents From an Excel File",
+    "importDocumentsFromSheet": "Import {documentType} Documents From an Excel File",
+    "pleaseSelectSheetInfo": "Please select an Excel file to begin importing data.",
+    "importDocumentType": "Import {documentType}",
+    "errorsList": "Errors List",
+    "createError": "An error occured while creating document {documentNumber}.",
+    "closeConfirmation": "Are you sure you would like to exit this modal?",
+    "eraseConfirmation": "Are you sure you would like clear all loaded documents?",
+    "closeConfirmationInfo": "All document information will be lost.",
+    "documents": "{documentType} Documents - {count} total"
 }

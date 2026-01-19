@@ -4,23 +4,22 @@
       <div class="py-0 px-1 flex-grow-1">
         <slot name="header">
           <h5 class="modal-title">
-            {{ $t("importExcel") }}
+            {{ $t("importSheet") }}
           </h5>
           <p class="m-0">
-            {{ $t("pleaseSelectExcelInfo") }}
+            {{ $t("pleaseSelectSheetInfo") }}
           </p>
         </slot>
       </div>
     </div>
-    <button
-      type="button"
-      class="btn-close btn-secondary"
-      aria-label="Dismiss"
-      data-bs-dismiss="modal"
-      @click="$emit('closeModal')"
+    <CloseModalButton
+      :is-closing-modal="false"
+      @close-modal="$emit('closeModal')"
     />
   </div>
 </template>
 <script setup lang="ts">
+import CloseModalButton from '../common/close-modal-button.vue'
+
 const $emit = defineEmits(['closeModal'])
 </script>

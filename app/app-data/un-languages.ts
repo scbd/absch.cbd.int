@@ -1,19 +1,19 @@
-import { LanguagesType, EnglishLanguagesType } from "~/types/languages"
+import type { LanguagesType, EnglishLanguages } from '~/types/languages'
 
-export const languages = {
+export const languages: LanguagesType = {
   ar: 'العربية',
   zh: '中文',
   en: 'English',
   es: 'Español',
   fr: 'Françai', // TODO: Fix this typo
   ru: 'Русский'
-} as LanguagesType
+} as const
 
-export const englishLanguages = {
+export const englishLanguages: EnglishLanguages = {
   ar: 'Arabic',
   zh: 'Chinese',
   en: 'English',
   es: 'Spanish',
   fr: 'French',
   ru: 'Russian'
-} as EnglishLanguagesType
+} as const

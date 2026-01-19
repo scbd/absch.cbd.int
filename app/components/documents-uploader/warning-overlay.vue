@@ -8,68 +8,123 @@ Fade out the screen and show a warning message in the foreground.
     :opacity="1"
     @click="() => $emit('close')"
   >
-    <div class="d-flex justify-content-center p-5 w-50 h-75 bg-white">
-      <div
-        class="d-flex flex-column mb-3 rounded"
-      >
-        <h1 class="mt-2">
-          <i class="bi bi-exclamation-triangle-fill" />
-          Warning
-        </h1>
-        <div class="mx-3 mt-4 mb-3 lead">
-          {{ $t('incorrectFields') }}
-        </div>
+    <div class="overlay-box justify-content-center d-flex p-5 w-50 bg-white">
+      <div class="d-flex flex-column w-100">
         <div
-          class="d-flex flex-column px-3 flex-grow-1 overflow-auto"
+          v-if="hasErrors"
+          class="d-flex flex-fill flex-column"
         >
+          <h1>
+            <i class="bi bi-exclamation-triangle-fill " />
+            {{ $t('warning') }}
+          </h1>
           <div
-            v-for="([index, errors]) in erroredDocuments"
-            :key="index"
-            class="w-100"
+            class="mx-3 mt-2 mb-3 lead"
           >
-            <h2 class="m-1 mb-2">
-              {{ (sheet[index] || {})['permitEquivalent'] }}
-            </h2>
-            <ModalErrors
-              :errors="errors"
-            />
+            {{ $t('incorrectFields') }}
+          </div>
+          <div
+            class="d-flex flex-column px-3 py-2 overflow-auto bg-gray-100 border rounded"
+          >
+            <div
+              v-for="([index, errors]) in erroredDocuments"
+              :key="index"
+              class="w-100"
+            >
+              <h2 class="m-1 mb-2">
+                {{ getTitle(index) }}
+              </h2>
+              <ModalErrors
+                :errors="errors"
+              />
+            </div>
+          </div>
+
+          <div class="mx-3 mt-3 lead">
+            {{ $t('confirmWithErrors') }}
           </div>
         </div>
 
-        <div class="mx-3 my-4 lead">
-          {{ $t('confirmWithErrors') }}
-        </div>
-        <button
-          class="mx-auto w-20 btn btn-primary"
-          type="button"
-          @click="() => $emit('handleConfirm')"
+        <div
+          v-else
+          class="d-flex flex-fill flex-column"
         >
-          {{ $t("confirmCreateDraftRecords") }}
-        </button>
+          <h1 class="mb-3">
+            {{ $t("createDraftConfirmation") }}
+          </h1>
+
+          <div class="d-flex flex-column px-3 py-2 overflow-auto bg-gray-100 border rounded">
+            <div
+              v-for="(_doc, index) in sheet"
+              :key="index"
+              class="w-100"
+            >
+              <h2 class="m-1 mb-2">
+                {{ getTitle(index) }}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 w-100 d-flex gap-2 justify-content-center">
+          <button
+            class="btn btn-secondary"
+            type="button"
+            @click="() => $emit('close')"
+          >
+            {{ $t("cancel") }}
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            @click="() => $emit('handleConfirm')"
+          >
+            {{ $t("confirmAction") }}
+          </button>
+        </div>
       </div>
     </div>
   </Overlay>
 </template>
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue'
-import { DocError, DocumentAttributes } from '~/types/components/documents-uploader/document-schema'
+import { computed, type ComputedRef } from 'vue'
+import type { GridData, DocError, SheetData } from '~/types/components/documents-uploader/document-schema'
 import Overlay from '../common/overlay.vue'
 import ModalErrors from './modal-errors.vue'
+import { ImportDocuments } from './utilities/import-documents'
 
 type DocumentErrors = [number, DocError[]]
 
 const props = defineProps<{
-  sheet: DocumentAttributes[]
+  sheet: SheetData
   documentErrors: DocError[][]
 }>()
 
-const erroredDocuments :ComputedRef<DocumentErrors[]> = computed(() => props.sheet
-  .reduce((arr: DocumentErrors[], _attributes: DocumentAttributes, index: number) => {
-    const errors = props.documentErrors[index] || []
+const erroredDocuments: ComputedRef<DocumentErrors[]> = computed(() => props.sheet
+  .reduce((arr: DocumentErrors[], _attributes: GridData[], index: number) => {
+    const { documentErrors: { [index]: errors } } = props
+    if (errors === undefined) { return arr }
     if (errors.length > 0) { arr.push([index, errors]) }
     return arr
   }, [])
 )
 
+const hasErrors = computed(() => erroredDocuments.value.length > 0)
+
 const $emit = defineEmits(['handleConfirm', 'close'])
+
+function getTitle (index: number): string {
+  return `${index + 1} → ${ImportDocuments.getTitle(props.sheet[index] ?? [])}`
+}
 </script>
+<style scoped>
+.overlay-box {
+  max-height: 77%;
+}
+.overlay-box > div {
+  max-height: 100%;
+}
+
+.overlay-box > div > div:first-child {
+  min-height: 0;
+}
+</style>

@@ -1,7 +1,7 @@
 import IrccSchema from '../utilities/document-attributes-to-schema-json/schemas/ircc-schema'
 import irccAttributesMap from './maps/ircc-document'
-import { DocumentsList } from '~/types/components/documents-uploader/document-types-list'
 import { THESAURUS_DOMAINS } from '~/constants/thesaurus'
+import type { DocumentsList } from '~/types/components/documents-uploader/document-types-list'
 
 export const documentsList: DocumentsList = {
   ircc: {

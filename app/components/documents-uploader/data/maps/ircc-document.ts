@@ -7,7 +7,7 @@ export default {
   dateOfExpiry: { column: '5', required: true, translationKey: 'dateOfExpiry' }, // F
   provider: {
     schema: {
-      type: { column: '6', required: true, translationKey: 'theProvider' }, // G
+      type: { column: '6', required: true, translationKey: 'type' }, // G
       existing: { column: '7', translationKey: 'uniqueIdentifier' }, // H
       orgName: { column: '8', required: true, translationKey: 'organizationFullName' }, // I
       acronym: { column: '9', required: true, translationKey: 'acronym' }, // J
@@ -15,12 +15,13 @@ export default {
       city: { column: '11', translationKey: 'city' }, // L
       country: { column: '12', required: true, translationKey: 'country' }, // M
       email: { column: '13', required: true, translationKey: 'emails' } // N
-    }
+    },
+    translationKey: 'theProvider'
   },
   pic: {
     schema: {
       consent: { column: '14', translationKey: 'picGranted' }, // O
-      type: { column: '15', required: true, translationKey: 'entitiesConfidential' }, // P
+      type: { column: '15', required: true, translationKey: 'type' }, // P
       existing: { column: '16', translationKey: 'uniqueIdentifier' }, // Q
       orgName: { column: '17', required: true, translationKey: 'firstName' }, // R
       acronym: { column: '18', required: true, translationKey: 'acronym' }, // S
@@ -28,7 +29,8 @@ export default {
       city: { column: '20', translationKey: 'city' }, // U
       country: { column: '21', required: true, translationKey: 'country' }, // V
       email: { column: '22', required: true, translationKey: 'emails' } // W
-    }
+    },
+    translationKey: 'entitiesConfidential'
   },
   matEstablished: { column: '23', translationKey: 'mutuallyInformation' }, // X
   subjectMatter: { column: '24', required: true, translationKey: 'subjectMatter' }, // Y

@@ -16,5 +16,3 @@ export interface LanguageMapType {
 }
 
 export type Translations = (arg: string, message?: { msg: string })=> string
-
-export type LString = Partial<Record<LanguageCode, string>>

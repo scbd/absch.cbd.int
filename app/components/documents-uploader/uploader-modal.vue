@@ -2,13 +2,14 @@
   <Modal
     ref="modalRef"
     :modal-size="modalSize"
+    backdrop="static"
     header-class="bg-grey"
     footer-class="bg-grey"
-    @on-close="onClose"
+    :is-keyboard-closable="false"
   >
     <template #header>
       <BulkUploaderHeader
-        @close-modal="onClose"
+        @close-modal="handleCloseClick"
       >
         <template #header>
           <slot name="header" />
@@ -24,26 +25,48 @@
 
     <DocumentsPreview
       v-if="hasParsedFiles"
-      :sheet="sheet.data"
+      :sheet="sheet"
       :errors="documentErrors"
       :document-type="documentType"
     />
 
     <LoadingOverlay
       v-if="isLoading && hasParsedFiles"
-      :caption="$t('creatingDocumentsLoader')"
+      :caption="loaderText"
     />
 
-    <ModalErrors
-      :errors="modalErrors"
-    />
+    <div
+      v-if="modalErrors.length > 0"
+      class="z10 h-25 overflow-auto border-top bg-white position-absolute bottom-0 start-0 w-100 px-5 py-3"
+    >
+      <h2 class="mb-2 text-danger">
+        {{ $t('errorsList') }}
+      </h2>
+      <ModalErrors
+        :errors="modalErrors"
+      />
+    </div>
 
     <WarningOverlay
-      v-if="isWarningIndicatorOpen"
-      :sheet="sheet.data"
+      v-if="isConfirmationIndicatorOpen"
+      :sheet="sheet"
       :document-errors="documentErrors"
       @handle-confirm="createDocuments"
-      @close="() => isWarningIndicatorOpen = false"
+      @close="() => isConfirmationIndicatorOpen = false"
+    />
+
+    <ActionConfirmation
+      v-if="isCloseConfirmationOpen"
+      :title="t('closeConfirmation')"
+      @confirm="onClose"
+      @cancel="() => isCloseConfirmationOpen = false"
+    />
+
+    <ActionConfirmation
+      v-if="isEraseConfirmationOpen"
+      :title="t('eraseConfirmation')"
+      @confirm="handleClearFile"
+      @cancel="() => isEraseConfirmationOpen = false"
     />
 
     <template #footer>
@@ -51,7 +74,8 @@
         v-if="hasParsedFiles"
         :has-errors="hasErrors"
         @handle-confirm="handleConfirm"
-        @handle-clear="handleClearFile"
+        @handle-clear="clearDocuments"
+        @close-modal="handleCloseClick"
       />
       <div
         v-else
@@ -61,7 +85,10 @@
   </Modal>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted, shallowRef, Ref } from 'vue'
+import {
+  ref, computed, onMounted, shallowRef,
+  onBeforeUnmount, type Ref, type ComputedRef
+} from 'vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
@@ -77,137 +104,180 @@ import DocumentsPreview from './documents-preview.vue'
 import LoadingOverlay from '../common/loading-overlay.vue'
 import UploadButton from './upload-button.vue'
 import Modal from '../common/modal.vue'
-import uploaderMessages from '~/app-text/components/bulk-documents-uploader.json'
-import absMessages from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
-import recordListMessages from '~/app-text/views/register/record-list.json'
-import contactMessages from '~/app-text/views/forms/edit/directives/edit-contact.json'
 import { ImportDocuments } from './utilities/import-documents.js'
-import { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
-import { DocError } from '~/types/components/documents-uploader/document-schema.js'
-import { StandardError } from '~/types/errors.js'
-import { ReadFileResult } from './utilities/read-xlsx-file.js'
+import type { DocumentTypes } from '~/types/components/documents-uploader/document-types-list.js'
+import type { DocError, HTMLInputEvent, DocsResp, SheetData } from '~/types/components/documents-uploader/document-schema.js'
+import type { DocumentStore } from '~/types/common/documents.js'
 import WarningOverlay from './warning-overlay.vue'
+import ActionConfirmation from './action-confirmation.vue'
 
 const { realm } = useRealm()
-const { mergeLocaleMessage, t } = useI18n()
 const auth = useAuth()
-
-const messages = [
-  uploaderMessages,
-  absMessages,
-  contactMessages,
-  recordListMessages
-]
-
-messages.forEach((messageGroup) => {
-  Object.entries(messageGroup)
-    .forEach(([key, value]) => mergeLocaleMessage(key, value))
-})
 
 const props = defineProps<{
   documentType: DocumentTypes
 }>()
+const { t, locale } = useI18n()
 
 const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
-const importDocuments = new ImportDocuments(t, props.documentType)
+const importDocuments = new ImportDocuments(t, locale.value, props.documentType)
 
 const $emit = defineEmits(['onClose', 'refreshRecord'])
 
 // Refs
-const defaultDocumentJson = [{ header: { identifier: '' } }]
-const documents = ref(defaultDocumentJson)
-const sheet :Ref<ReadFileResult> = ref({ data: [], errors: [] })
+const documents: Ref<DocumentStore> = ref({ documents: [], subDocuments: [] })
+const sheet: Ref<SheetData> = ref([])
 const isLoading = ref(false)
-const errors :Ref<Array<StandardError | DocError>> = ref([])
+const loaderText = ref(t('uploadingLoader'))
+const errors: Ref<DocError[]> = ref([])
 const modalSize = ref('xl')
 const modalRef = shallowRef({ show: () => undefined, close: () => undefined })
-const isWarningIndicatorOpen = ref(false)
+const isConfirmationIndicatorOpen = ref(false)
+const isEraseConfirmationOpen = ref(false)
+const isCloseConfirmationOpen = ref(false)
+const documentErrors: Ref<DocError[][]> = ref([])
 
+// Confirm the deletion of information if more than X documents have been parsed.
+const confirmEraseDocumentNumber = 12
 // Computed Properties
 const hasErrors = computed(() => errors.value
   .some((error) => error.level === 'error'))
 
 const modalErrors = computed(() => errors.value
-  .filter((error) => !Number.isInteger((error as DocError).row)))
+  .filter((error) => {
+    const e = error
+    if (e.row === undefined) { return true }
+    return !Number.isInteger(e.row) || e.row < 0
+  }))
 
-const documentErrors :Ref<Array<DocError[]>> = ref([])
-
-const hasParsedFiles = computed(() => {
-  return sheet.value.data.length > 0
-})
+const hasParsedFiles: ComputedRef<boolean> = computed(() => sheet.value.length > 0)
 
 // Event Hooks
 onMounted(async () => {
   modalRef.value.show()
-
   isLoading.value = true
-
+  window.addEventListener('keydown', handleEscapeKey)
   await importDocuments.getKeywordsMap()
 
-  errors.value = importDocuments.errors
+  const { errors: docErrors } = importDocuments
+  errors.value = docErrors
 
   isLoading.value = false
 })
+onBeforeUnmount(() => { window.removeEventListener('keydown', handleEscapeKey) })
 
 // Methods
-function handleClearFile () {
+function clearDocuments (): undefined {
+  if (sheet.value.length >= confirmEraseDocumentNumber && !isEraseConfirmationOpen.value) {
+    isEraseConfirmationOpen.value = true
+    return
+  }
+  handleClearFile()
+}
+
+function handleClearFile (): undefined {
   isLoading.value = false
   errors.value = []
   importDocuments.setErrors([])
-  documents.value = defaultDocumentJson
+  documents.value = { documents: [], subDocuments: [] }
   modalSize.value = 'xl'
-  sheet.value = { data: [], errors: [] }
-  isWarningIndicatorOpen.value = false
+  sheet.value = []
+  isConfirmationIndicatorOpen.value = false
+  isEraseConfirmationOpen.value = false
+  isCloseConfirmationOpen.value = false
+  loaderText.value = t('uploadingLoader')
 }
 
-async function handleConfirm () {
-  const hasErrors = documentErrors.value.some((errors: DocError[]) => errors.length > 0)
+async function handleConfirm (): Promise<DocsResp> {
+  if (!isConfirmationIndicatorOpen.value) {
+    isConfirmationIndicatorOpen.value = true
+    return []
+  }
+  return await createDocuments()
+}
 
-  if (hasErrors && !isWarningIndicatorOpen.value) {
-    isWarningIndicatorOpen.value = true
+async function createDocuments (): Promise<DocsResp> {
+  loaderText.value = t('creatingDocumentsLoader')
+  isLoading.value = true
+
+  // Create subdocuments. PIC, The Provider etc..
+  const subdocuments = documents.value.subDocuments
+    .map((doc) => kmDocumentApi.createDocument(doc)
+      .catch((error: unknown) => {
+        // Attempt to create a document draft of the supporting document
+        // if the supporting document contains errors.
+        console.warn(error) // eslint-disable-line no-console -- Show error in console
+        kmDocumentApi.createDocumentDraft(doc)
+      }))
+
+  const docs = documents.value.documents
+    .map(async (doc, row) => await kmDocumentApi.createDocumentDraft(doc)
+      .catch((error: Error) => {
+        const reason = `${t('createError', { documentNumber: row + 1 })} ${error.message}`
+        const e: DocError = { level: 'error', reason, message: reason, name: 'createError' }
+        errors.value.push(e)
+        isLoading.value = false
+        console.error(error) // eslint-disable-line no-console -- Show error in console
+        throw new Error(reason)
+      })
+    )
+
+  // Create all documents
+  const resp = await Promise.all([...docs, ...subdocuments])
+
+  isLoading.value = false
+  $emit('refreshRecord')
+  handleClearFile()
+  onClose()
+  modalRef.value.close()
+
+  return resp
+}
+
+function handleCloseClick (): undefined {
+  // Make user confirm if they are closing the modal after having parsed
+  // many documents to avoid losing data.
+  if (sheet.value.length >= confirmEraseDocumentNumber && !isCloseConfirmationOpen.value) {
+    isCloseConfirmationOpen.value = true
     return
   }
-  createDocuments()
+  onClose()
 }
 
-async function createDocuments () {
-  isLoading.value = true
-  const requestPromises = documents.value.map((doc) => kmDocumentApi.createDocumentDraft(doc))
-
-  return Promise.all(requestPromises)
-    .then(() => {
-      $emit('refreshRecord')
-      handleClearFile()
-      onClose()
-      modalRef.value.close()
-    })
+function handleEscapeKey (e: KeyboardEvent): undefined {
+  if (e.key === 'Escape') { handleCloseClick() }
 }
 
-function onClose () {
+function onClose (): undefined {
+  modalRef.value.close()
   $emit('onClose')
 }
 
-async function onFileChange (changeEvent: Event) {
+async function onFileChange (changeEvent: HTMLInputEvent): Promise<DocumentStore> {
   handleClearFile()
 
   isLoading.value = true
 
   // Read File
-  sheet.value = await importDocuments.readXLSXFile(changeEvent)
+  const readResult = await importDocuments.readXLSXFile(changeEvent)
 
   // Map document attributes to the document schema
-  const documentsJson = await importDocuments.mapDocumentAttributesToSchemaJson(sheet.value.data)
+  const documentStore: DocumentStore = await importDocuments.mapDocumentAttributesToSchemaJson(readResult.data)
+
+  // Parse the spreasheet object into header(description), and value pairs parsed to be displayed to the user.
+  sheet.value = await importDocuments.parseSheetForDisplay(readResult.data)
 
   isLoading.value = false
 
   // Store errors
-  errors.value = importDocuments.errors
-  documentErrors.value = importDocuments.parseDocumentErrors()
+  const { errors: importErrors, documentErrors: docErrors } = importDocuments
+  errors.value = importErrors
+  documentErrors.value = docErrors
 
   // Store document json
-  documents.value = documentsJson
+  documents.value = documentStore
   modalSize.value = 'xxl'
 
-  return documents
+  return documentStore
 }
 </script>

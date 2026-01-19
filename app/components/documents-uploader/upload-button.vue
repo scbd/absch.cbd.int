@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex">
     <button
+      id="upload-button"
       class="btn btn-primary position-relative p-10"
       type="button"
       :disabled="isLoading"
@@ -32,14 +33,21 @@ defineProps<{
 }>()
 const $emit = defineEmits(['onFileChange'])
 
-function onChange (changeEvent: Event) {
+function onChange (changeEvent: Event): undefined {
   $emit('onFileChange', changeEvent)
 }
 
-function onFileInputClick (event: Event) {
-  const target = event.target as HTMLInputElement
+function onFileInputClick (event: Event): undefined {
+  const { target } = event
   if (target === null) { return }
 
-  target.value = ''
+  if (target instanceof HTMLInputElement) {
+    target.value = ''
+  }
 }
 </script>
+<style scoped>
+#upload-button > input {
+  cursor: pointer;
+}
+</style>

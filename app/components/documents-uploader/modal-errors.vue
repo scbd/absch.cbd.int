@@ -17,17 +17,17 @@
   </div>
 </template>
 <script setup lang="ts">
-import { StandardError } from '~/types/errors'
+import type { StandardError } from '~/types/errors'
 
-type ErrorData = { text: string, class: string }
-type ErrorTypes = {
+interface ErrorData { text: string, class: string }
+interface ErrorTypes {
   error: ErrorData,
   warning: ErrorData,
   info: ErrorData,
 }
 
 defineProps<{
-  errors: Array<StandardError>
+  errors: StandardError[]
 }>()
 
 const errorTypes: ErrorTypes = {
@@ -36,7 +36,7 @@ const errorTypes: ErrorTypes = {
   info: { text: 'Info', class: 'alert-info' }
 }
 
-function errType (error: StandardError) {
-  return errorTypes[error.level || 'error']
+function errType (error: StandardError): ErrorData {
+  return errorTypes[error.level ?? 'error']
 }
 </script>
