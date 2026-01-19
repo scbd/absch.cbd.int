@@ -4,11 +4,15 @@
     class="px-5 py-4"
   >
     <h4 class="fs-4 mb-4 fw-bold">
-      {{ t('forums') }}
+      {{ t('portals') }}
     </h4>
-    <Loading
+    <loading
       v-if="isLoading"
       :caption="t('loading')"
+    />
+    <server-error
+      v-else-if="typeof error === 'object'"
+      :error="error"
     />
     <div
       v-else
@@ -30,7 +34,7 @@
             v-if="portal.article.coverImage"
             :src="portal.article.coverImage.url"
             class="card-img-top cover-image"
-            alt="Article Cover"
+            :alt="lstring(portal.title)"
           >
 
           <div class="card-body">
@@ -43,8 +47,9 @@
 
             <div
               class="card-text article-text w-100 overflow-hidden"
-              v-html="portal.article.content"
-            />
+            >
+              {{ lstring(portal.article.summary) }}
+            </div>
           </div>
         </div>
       </div>
@@ -53,93 +58,93 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, Ref } from 'vue';
+import { onMounted, ref, type Ref } from 'vue'
 // @ts-expect-error importing js file
-import { lstring } from '~/components/kb/filters';
+import { lstring } from '~/components/kb/filters'
 // @ts-expect-error importing js file
-import { mapObjectId, isObjectId } from '~/api/api-base.js';
+import { mapObjectId, isObjectId } from '~/api/api-base.js'
 // @ts-expect-error importing js file
-import ArticlesApi from '../../components/kb/article-api';
+import ArticlesApi from '../../components/kb/article-api'
 // @ts-expect-error importing js file
 import PortalsApi from '~/api/portals'
 // @ts-expect-error importing js file
-import { useAuth } from '@scbd/angular-vue/src/index.js';
+import { useAuth } from '@scbd/angular-vue/src/index.js'
 // @ts-expect-error importing js file
-import { useRealm  } from '~/services/composables/realm.js';
+import { useRealm } from '~/services/composables/realm.js'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
-import { sanitizeHtml } from '~/services/html.sanitize'
+import loading from '~/components/common/loading.vue'
 // @ts-expect-error importing js file
-import Loading from '~/components/common/loading.vue'
+import serverError from '~/components/common/error.vue'
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
+import commonRoutesMessages from '~/app-text/routes/common-routes-labels.json'
+import type { Portal, Article } from '~/types/common/forums'
 
 const { realm } = useRealm()
 
 const { locale, t, mergeLocaleMessage } = useI18n({ messages })
-Object.entries(forumMessages)
-  .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
-type LocalizedValue = { en: string }
-type Portal = {
-  _id: string
-  title: LocalizedValue
-  slug: string
-  content: { article: { articleId: string } }
-  article: Article
-  url: string
-}
-type Image = { position: string, size: string, url: string }
+const translations = [forumMessages, commonRoutesMessages]
+translations.forEach((value) => {
+  Object.entries(value)
+    .forEach(([key, value]) => mergeLocaleMessage(key, value))
+})
 
-type Article = {
-  _id: string
-  coverImage: Image
-  summary: LocalizedValue
-  title: LocalizedValue
-  content: LocalizedValue
-  meta: { createdOn: string }
-  adminTags?: string[]
-}
-
-const auth = useAuth();
-const articlesApi = new ArticlesApi({tokenReader:()=>auth.token()});
-const portalsApi = new PortalsApi();
-const portals :Ref<Portal[]> = ref([])
+const auth = useAuth()
+const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
+const portalsApi = new PortalsApi()
+const portals: Ref<Portal[]> = ref([])
 
 const PORTALS_URL = 'portals'
 
-const isLoading = ref(false);
+const isLoading = ref(false)
+const error: Ref<Error | undefined> = ref()
 
 onMounted(async () => {
   isLoading.value = true
-  // http://localhost:2030/api/v2023/portals?q={"realms": "realm"}
+
   const portalsData = await portalsApi.queryPortals({ q: { realms: realm } })
-    .catch((err: Error) => console.error(err))
+    .catch((err: Error) => {
+      console.error(err) // eslint-disable-line no-console -- show error in console
+      error.value = err
+      return []
+    })
 
   const articleOidQueries = portalsData
-    .filter((portalSchema: Portal) => isObjectId(portalSchema['_id']))
+    .filter((portalSchema: Portal) => isObjectId(portalSchema._id))
     .map((portalSchema: Portal) => ({ $oid: mapObjectId(portalSchema.content.article.articleId) }))
 
-  const query = [{ $match: {_id: { $in: articleOidQueries } } }]
+  const articleFields = { _id: 1, title: 1, summary: 1, coverImage: 1 }
+  const query = [
+    { $match: { _id: { $in: articleOidQueries } } },
+    { $project: articleFields }
+  ]
 
-  const articles :Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) })
-    .catch((err: Error) => console.error(err))
+  const articles: Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(query) }, { cache: true })
+    .catch((err: Error) => {
+      console.error(err) // eslint-disable-line no-console -- show error in console
+      error.value = err
+      return []
+    })
+
   isLoading.value = false
 
-  portals.value = portalsData.map((portal: Portal) => {
-    const article = articles
+  portals.value = portalsData.map((p: Portal) => {
+    const portal = p
+    const article: Article | undefined = articles
       .find((article: Article) => portal.content.article.articleId === article._id)
+    if (article === undefined) { return portal }
 
-    portal.article = article || {} as Article
+    portal.article = article
 
-    portal.article.content = sanitizeHtml(lstring(article?.content || '', locale))
-
-    portal.title = lstring(portal?.title || '', locale)
+    portal.title = lstring(portal.title, locale)
 
     portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
     return portal
   })
+  .filter((portal: Portal) => typeof portal.article === 'object')
 })
 </script>
 <style scoped>

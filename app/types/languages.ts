@@ -6,17 +6,15 @@ export type EnglishLanguageType = 'Arabic' | 'English' | 'Spanish' | 'French'
 // TODO: Fix Francai typo
 export type LanguageType = 'العربية' | '中文' | 'Español' | 'Françai' | 'Русский' | 'English'
 
-export type LanguagesType = {
-  [key in LanguageCode]: LanguageType
-}
+export type LanguagesType = Record<LanguageCode, LanguageType>
 
-export type EnglishLanguagesType = {
-  [key in LanguageCode]: EnglishLanguageType
-}
+export type EnglishLanguages = Record<LanguageCode, EnglishLanguageType>
 
-export type LanguageMapType = {
+export interface LanguageMapType {
   identifier: string
   name: LanguageType
 }
 
-export type Translations = (arg: string) => string
+export type Translations = (arg: string, message?: { msg: string })=> string
+
+export type LString = Partial<Record<LanguageCode, string>>
