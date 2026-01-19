@@ -384,8 +384,8 @@
                         </table>    
                         
                         <!-- CHM wants the option to display ORT records types under CHM for navigation -->
-                        <ort-record-types  ng-if="isChm && vueComponent" 
-                        ng-vue="vueComponent"></ort-record-types>                        
+                        <div ng-if="isChm && vueComponent">
+                            <ort-record-types ng-vue="vueComponent"></ort-record-types>
                     </div>
                 </div>
 
