@@ -65,16 +65,19 @@ app.directive('countryProfile', function() {
                     }
                 }
 
-                $scope.$watch('code', async function(newVal){
+                $scope.$watch('code', function(newVal) {
                     if(newVal){
-                      const records = await loadCountryRecords(newVal.toLowerCase())
-                      $scope.firstNationalReportRecord = Object.values(records)
-                        .find(countryRecord => countryRecord.shortCode === 'NR1')
-                      const hasFirstNationalReport = $scope.firstNationalReportRecord?.numFound > 0
+                      loadCountryRecords(newVal.toLowerCase())
+                        .then((records) => {
+                          $scope.firstNationalReportRecord = Object.values(records)
+                            .find(countryRecord => countryRecord.shortCode === 'NR1')
 
-                      if(realm.is('ABS') && hasFirstNationalReport) {
-                        await loadRelatedInformationFromNationalReport(records)
-                      }
+                          const hasFirstNationalReport = $scope.firstNationalReportRecord?.numFound > 0
+
+                          if(realm.is('ABS') && hasFirstNationalReport) {
+                            loadRelatedInformationFromNationalReport(records)
+                          }
+                        })
                     }
                 })
 
@@ -92,6 +95,7 @@ app.directive('countryProfile', function() {
                 $scope.reactive = reactive
 
                 async function loadRelatedInformationFromNationalReport (countryRecords) {
+                  const records = countryRecords 
                   const getCountryRecordIndex = (key) => countryRecords
                     .findIndex(countryRecord => countryRecord.key === key)
 
@@ -101,7 +105,7 @@ app.directive('countryProfile', function() {
                     .filter(([key]) => {
                       const index = getCountryRecordIndex(key)
                       $scope.countryRecords[index].isLoading = true
-                      return ($scope.countryRecords[index]?.docs ?? []).length < 1
+                      return (records[index]?.docs ?? []).length < 1
                     })
                     .map(entry => entry[1])
                     .flat()
@@ -118,7 +122,7 @@ app.directive('countryProfile', function() {
                   $scope.firstNationalReportData = nrData
 
                   // If related information from the NR1 exists set the number of documenst to 1
-                  Object.values($scope.countryRecords).forEach((countryRecord, index) => {
+                  Object.values(records).forEach((countryRecord, index) => {
                     const relatedQuestions = $scope.relatedQuestionsFromNR1[countryRecord.key]
                     const hasRelatedQuestions = Array.isArray(relatedQuestions)
                       && (relatedQuestions || []).length > 0
@@ -127,11 +131,15 @@ app.directive('countryProfile', function() {
                     const hasNoDocuments = countryRecord.numFound < 1
 
                     if (hasRelatedQuestions && hasNoDocuments) {
-                        $scope.countryRecords[index].numFound = 1
+                        records[index].numFound = 1
                     }
 
-                    $scope.countryRecords[index].isLoading = false
+                    records[index].isLoading = false
                   })
+
+                  $scope.countryRecords = records
+
+                  return records
                 }
 
                 async function loadCountryRecords(code){
