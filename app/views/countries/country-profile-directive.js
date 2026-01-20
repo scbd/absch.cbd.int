@@ -8,7 +8,7 @@ import '~/services/main';
 import '~/views/directives/export-directive';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import countryProfileDirectiveT from '~/app-text/views/countries/country-profile-directive.json';
-import FirstNationalReportApi from '~/api/first-national-report'
+import NationalReportAnalyzerApi from '~/api/national-report-analyzer'
 
 app.directive('countryProfile', function() {
     return {
@@ -98,7 +98,7 @@ app.directive('countryProfile', function() {
                     .map(entry => entry[1])
                     .flat()
 
-                  const api = new FirstNationalReportApi()
+                  const api = new NationalReportAnalyzerApi()
                   // Fetch all questions relevant to the country profile from the NR
                   const nr1 = await api.fetchReportData($scope.code, realm, 'absNationalReport1', relevantQuestionsList)
                     .catch(error => console.error(error))
