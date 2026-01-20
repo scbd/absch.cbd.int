@@ -8,7 +8,7 @@
       :name="question.data.key"
       :for="question.data.key"
       class="question-label px-0"
-      v-html="getQuestionLabel(question.data)"
+      v-html="sanitizeHtml(label)"
     />
 
     <component
@@ -16,10 +16,10 @@
       v-bind="questionComponent.props"
     />
 
-    <div v-if="hasAdditionalInfo(question)">
+    <div v-if="question.values[0]?.details !== undefined">
       <label> {{ $t('additionalInformation') }} </label>
       <KmValueMl
-        :question="getAdditionalInfo(question)"
+        :value="question.values[0]?.details"
         :locales="[locale]"
         :html="true"
       />
@@ -37,18 +37,19 @@ import DocumentLegend from './document-legend.vue'
 import { sanitizeHtml } from '~/services/html.sanitize'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-import type { QuestionMap, Question, DocumentValue, QuestionProps } from '~/types/common/document-report'
+import type { Question, QuestionProps } from '~/types/common/document-report'
 
-const { locale, t } = useI18n()
+const { locale } = useI18n()
 
 const props = defineProps<{
   question: Question,
+  label: string,
 }>()
 
 // Computed
 const questionComponent: ComputedRef<{ component: Component, props: QuestionProps }> = computed(() => {
   const { question: { data: { type } } } = props
-  const questionProps: QuestionProps = { question: props.question, locales: [locale.value] }
+  const questionProps: QuestionProps = { value: props.question.values[0]?.value, locales: [locale.value] }
 
   switch (type) {
     case 'lstringRte':
@@ -59,70 +60,13 @@ const questionComponent: ComputedRef<{ component: Component, props: QuestionProp
       return { component: KmValueMl, props: questionProps }
     case 'term':
     case 'option':
-      return { component: OptionsValue, props: questionProps }
+      return { component: OptionsValue, props: { question: props.question, locales: [locale.value] } }
     case 'legend':
       return { component: DocumentLegend, props: { title: props.question.data.title } }
     default:
       return { component: KmValueMl, props: questionProps }
   }
 })
-
-// Methods
-
-/**
- * Get label for question including the question number and sanatize any HTML in the label.
- */
-function getQuestionLabel (questionMap: QuestionMap): string {
-  const spaceSubQuestion = (number: string | undefined): string => {
-    if (number === '' || number === undefined) { return '' }
-    return number.replace(/(?:[0-9]{1,3})(?:[a-z])/, '$1 $2') + '. '
-  }
-
-  if (parseInt(questionMap.number, 10) >= 0) {
-    return `${spaceSubQuestion(questionMap.number)}${questionMap.title ?? ''}`
-  }
-  return sanitizeHtml(questionMap.title ?? '')
-}
-
-/**
- * Does the value include a translated string?
- */
-function hasLocaleValue (value: string | Record<string, string> | null | undefined): value is string | Record<string, string> {
-  return typeof value === 'string' || typeof value === 'object'
-}
-
-/**
- * Does the value have additional information included with it?
- */
-function hasAdditionalInfo (q: Question): boolean {
-  if (q.values.length !== 1) { return false }
-  return hasLocaleValue(q.values[0]?.additionalInformation) || hasLocaleValue(q.values[0]?.details)
-}
-
-/**
- * Get the translated additional information string (stored either under the details or additionalInformation key).
- */
-function getAdditionalInfo (q: Question): Question {
-  const getAdditionalInfo = (value: string | Record<string, string> | undefined | null): string => {
-    const langKey = locale.value.toLowerCase()
-    if (typeof value === 'object' && value !== null && typeof value[langKey] === 'string') {
-      return value[langKey]
-    }
-    if (typeof value === 'string') {
-      return value
-    }
-    return ''
-  }
-
-  const value = getAdditionalInfo(q.values[0]?.details ?? q.values[0]?.additionalInformation)
-  const values: DocumentValue[] = [{
-    value,
-    title: value,
-    caption: t('additionalInformation'),
-    type: 'lstring'
-  }]
-  return { values, data: q.data }
-}
 </script>
 <style scoped>
 label.question-label + div {

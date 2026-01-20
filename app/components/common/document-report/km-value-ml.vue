@@ -16,7 +16,7 @@
         }]"
         aria-describedby="basic-addon1"
       >
-        {{ getValue(question, locale) }}
+        {{ lstring(value, locales[0]) }}
       </div>
 
       <!-- HTML version -->
@@ -27,7 +27,7 @@
           'km-pre': kmPre
         }]"
         aria-describedby="basic-addon1"
-        v-html="sanitizeHtml(getValue(question, locale))"
+        v-html="sanitizeHtml(lstring(value, locales[0]))"
       />
 
       <span
@@ -43,11 +43,13 @@
 <script setup lang="ts">
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
-import type { Question } from '~/types/common/document-report'
+// @ts-expect-error importing js file
+import { lstring } from '~/services/filters/lstring'
+import type { LString } from '~/types/languages'
 
 interface Props {
   locales: string[]
-  question: Question
+  value: LString
   markdown?: boolean
   kmPre?: boolean
   html?: boolean
@@ -59,25 +61,8 @@ withDefaults(defineProps<Props>(), {
   html: false
 })
 
-function getValue (q: Question, locale: string): string {
-  if (q.data.type === 'option') {
-    return q.values[0]?.title ?? parseLocaleValue(q.values[0]?.value, locale)
-  }
-  return parseLocaleValue(q.values[0]?.value, locale)
-}
-
 function isLast (index: number, totalLength: number): boolean {
   return index === totalLength - 1
-}
-
-function parseLocaleValue (value: string | Record<string, string> | undefined, locale: string): string {
-  if (typeof value === 'object' && typeof value[locale] === 'string') {
-    return value[locale]
-  }
-  if (typeof value === 'string') { return value }
-
-  if (typeof value !== 'object') { return String(value) }
-  return ''
 }
 
 function getLocaleDisplay (locale: string | undefined | object): string {

@@ -1,4 +1,4 @@
-import type { LanguageCode } from '../languages'
+import type { LanguageCode, LString } from '../languages'
 
 export interface Link {
   url?: string
@@ -19,19 +19,23 @@ export interface QuestionMap {
 }
 
 export interface DocumentValue {
-  value: string | Record<string, string>
+  value: LString
   title?: string
   type?: string
   caption?: string
-  details?: string | Record<string, string>
-  additionalInformation?: string | Record<string, string>
+  details?: LString
   url?: string
   name?: string
   tag?: string
   links?: Link[]
 }
 
-interface QuestionData { value: string | Record<LanguageCode, string> }
+export interface QuestionData {
+  value: number | string | LString | undefined | null,
+  additionalInformation?: string | LString,
+  details?: string | LString,
+  title?: string
+}
 
 export type DocumentData = Record<string, QuestionData | QuestionData[]>
 
@@ -60,7 +64,7 @@ export interface CountryRecord {
 }
 
 export interface QuestionProps {
-  question?: Question
+  value?: LString
   locales?: LanguageCode[]
   html?: boolean
   title?: string

@@ -32,13 +32,14 @@ Used on the countries profile page e.g. /en/countries/BH
       >
         <DocumentQuestion
           :question="question"
+          :label="getQuestionLabel(question.data)"
         />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref, type Ref } from 'vue'
 import countryProfileT from '~/app-text/views/countries/country-profile.json'
 import editAbsNationalReportT from '~/app-text/views/forms/edit/abs/edit-abs-national-report.json'
 import editNationalReportT from '~/app-text/views/forms/edit/abs/edit-national-report-1.json'
@@ -76,28 +77,41 @@ messageGroups.forEach((messageGroup) => {
   Object.entries(messageGroup)
     .forEach(([key, value]) => mergeLocaleMessage(key, value))
 })
+// Refs
+const questions: Ref<Question[]> = ref([])
 
 // Computed
 const publishedDate = computed(() => parseDate(props.firstNationalReportRecord.docs[0]?.rec_date))
 
-const questions = computed(() => props.relatedQuestions
-  .map((questionKey: string) => getQuestion(questionKey))
-  .filter(doesQuestionExist))
+onMounted(() => {
+  questions.value = props.relatedQuestions
+    .map((questionKey: string) => getQuestion(questionKey, props.nationalReportData))
+    .filter(doesQuestionExist)
+})
 
 const nr1Url = computed(() => `/database/${props.firstNationalReportRecord.shortCode}/${props.firstNationalReportRecord.docs[0]?.uniqueIdentifier_s.toUpperCase()}`)
 
 // Methods
+
+/**
+ * Parse the date to DD MMM YYYY for the NR1 published date.
+ */
 function parseDate (dateString: string | undefined): string {
   if (dateString === undefined) { return '' }
   const date = new Date(dateString)
   return `${date.toLocaleString(locale, { day: 'numeric' })} ${date.toLocaleString(locale, { month: 'short' })} ${date.getFullYear()}`
 }
-
-function getQuestion (questionKey: string): Question {
+/**
+ * Get information needed to render question from the document report (absNationalReport1)
+ * AND the NR1 document data fetched from server
+ */
+function getQuestion (questionKey: string, reportData: DocumentData): Question {
   const questionMap: QuestionMap = getQuestionMap(questionKey)
-  return { values: getQuestionValues(props.nationalReportData, questionMap), data: questionMap }
+  return { values: getQuestionValues(reportData, questionMap, locale.value), data: questionMap }
 }
-
+/**
+ * Get information needed from the document report (absNationalReport1)
+ */
 function getQuestionMap (questionKey: string): QuestionMap {
   let question: QuestionMap = { type: '', key: '', options: [], number: '-1', multiple: false }
   absNationalReport1.forEach((section: ReportSection) => {
@@ -110,9 +124,23 @@ function getQuestionMap (questionKey: string): QuestionMap {
   })
   return question
 }
+/**
+ * Get label for question including the question number in the label.
+ */
+function getQuestionLabel (questionMap: QuestionMap): string {
+  const spaceSubQuestion = (number: string | undefined): string => {
+    if (number === '' || number === undefined) { return '' }
+    return number.replace(/(?:[0-9]{1,3})(?:[a-z])/, '$1 $2') + '. '
+  }
+
+  if (parseInt(questionMap.number, 10) >= 0) {
+    return `${spaceSubQuestion(questionMap.number)}${questionMap.title ?? ''}`
+  }
+  return questionMap.title ?? ''
+}
 
 function doesQuestionExist (q: Question): boolean {
   if (typeof q.values[0] !== 'object') { return false }
-  return q.values[0].title !== '' && q.data.type !== ''
+  return (q.values[0].title !== '' || typeof q.values[0].value === 'object') && q.data.type !== ''
 }
 </script>
