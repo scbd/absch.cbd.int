@@ -53,7 +53,7 @@ export function getQuestionValues (reportData: DocumentData, questionMap: Questi
 }
 
 /**
- * Parse a document QuestionData fetched from the server into the hard typed DocumentData type needed to render the questions.
+ * Parse the document QuestionData fetched from the server into the hard typed DocumentData type needed to render the questions.
  */
 function parseToValue (data: QuestionData | undefined, locale: string, defaultValue: DocumentValue): DocumentValue {
   if (data === undefined) { return defaultValue }
