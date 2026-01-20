@@ -1,7 +1,7 @@
 import ApiBase, { tryCastToApiError } from './api-base'
 import { analyzerMapping } from '~/app-data/report-analyzer-mapping.js'
 
-export default class KmDocumentApi extends ApiBase {
+export default class NationalReportAnalyzerApi extends ApiBase {
   /**
    * fetchReportData - For getting an array of question answers from the first national report.
    * Makes GET request to https://absch.cbddev.xyz/api/v2019/report-analyzer/abs-national-report-1
