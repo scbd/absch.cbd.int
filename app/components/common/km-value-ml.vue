@@ -49,7 +49,7 @@ import type { LString } from '~/types/languages'
 
 interface Props {
   locales: string[]
-  value: LString
+  value: LString | number | string
   markdown?: boolean
   kmPre?: boolean
   html?: boolean

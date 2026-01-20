@@ -19,7 +19,7 @@ export interface QuestionMap {
 }
 
 export interface DocumentValue {
-  value: LString
+  value: LString | string
   title?: string
   type?: string
   caption?: string
@@ -64,7 +64,7 @@ export interface CountryRecord {
 }
 
 export interface QuestionProps {
-  value?: LString
+  value?: LString | number | string
   locales?: LanguageCode[]
   html?: boolean
   title?: string

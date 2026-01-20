@@ -107,7 +107,7 @@ function parseDate (dateString: string | undefined): string {
  */
 function getQuestion (questionKey: string, reportData: DocumentData): Question {
   const questionMap: QuestionMap = getQuestionMap(questionKey)
-  return { values: getQuestionValues(reportData, questionMap, locale.value), data: questionMap }
+  return { values: getQuestionValues(reportData, questionMap), data: questionMap }
 }
 /**
  * Get information needed from the document report (absNationalReport1)
