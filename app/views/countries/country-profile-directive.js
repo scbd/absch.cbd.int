@@ -68,7 +68,11 @@ app.directive('countryProfile', function() {
                 $scope.$watch('code', async function(newVal){
                     if(newVal){
                       const records = await loadCountryRecords(newVal.toLowerCase())
-                      if(realm.is('ABS')) {
+                      $scope.firstNationalReportRecord = Object.values(records)
+                        .find(countryRecord => countryRecord.shortCode === 'NR1')
+                      const hasFirstNationalReport = $scope.firstNationalReportRecord?.numFound > 0
+
+                      if(realm.is('ABS') && hasFirstNationalReport) {
                         await loadRelatedInformationFromNationalReport(records)
                       }
                     }
@@ -109,8 +113,19 @@ app.directive('countryProfile', function() {
 
                   $scope.firstNationalReportData = nrData
 
-                  $scope.firstNationalReportRecord = $scope.countryRecords
-                    .find(countryRecord => countryRecord.shortCode === 'NR1')
+                  // If related information from the NR1 exists set the number of documenst to 1
+                  Object.values($scope.countryRecords).forEach((countryRecord, index) => {
+                    const relatedQuestions = $scope.relatedQuestionsFromNR1[countryRecord.key]
+                    const hasRelatedQuestions = Array.isArray(relatedQuestions)
+                      && (relatedQuestions || []).length > 0
+                      && relatedQuestions.some((key) => nrData[key]?.value !== undefined && nrData[key]?.value !== null)
+
+                    const hasNoDocuments = countryRecord.numFound < 1
+
+                    if (hasRelatedQuestions && hasNoDocuments) {
+                        $scope.countryRecords[index].numFound = 1
+                    }
+                  })
                 }
 
                 async function loadCountryRecords(code){
@@ -178,13 +193,8 @@ app.directive('countryProfile', function() {
                             }, 500)
                         }
                         $scope.countryRecords = [];
-                        Object.keys(countryRecords).forEach((key)=>{
-                            // If related information from the NR1 exists set the number of documenst to 1
-                            const relatedQuestions = $scope.relatedQuestionsFromNR1[key]
-                            if (Array.isArray(relatedQuestions) && (relatedQuestions || []).length > 0 && countryRecords[key].numFound === 0) {
-                                countryRecords[key].numFound = 1
-                            }
 
+                        Object.keys(countryRecords).forEach((key)=>{
                             $scope.countryRecords.push({
                                 key, ...countryRecords[key]
                             })
