@@ -92,13 +92,17 @@ app.directive('countryProfile', function() {
                 $scope.reactive = reactive
 
                 async function loadRelatedInformationFromNationalReport (countryRecords) {
-                  const getCountryRecord = (key) => countryRecords
-                    .find(countryRecord => countryRecord.key === key)
+                  const getCountryRecordIndex = (key) => countryRecords
+                    .findIndex(countryRecord => countryRecord.key === key)
 
                   // Get question keys that will be displayed from the NR1 based on the documents
                   // missing from the current country's report.
                   const relevantQuestionsList = Object.entries($scope.relatedQuestionsFromNR1)
-                    .filter(([key]) => (getCountryRecord(key)?.docs ?? []).length < 1)
+                    .filter(([key]) => {
+                      const index = getCountryRecordIndex(key)
+                      $scope.countryRecords[index].isLoading = true
+                      return ($scope.countryRecords[index]?.docs ?? []).length < 1
+                    })
                     .map(entry => entry[1])
                     .flat()
 
@@ -125,6 +129,8 @@ app.directive('countryProfile', function() {
                     if (hasRelatedQuestions && hasNoDocuments) {
                         $scope.countryRecords[index].numFound = 1
                     }
+
+                    $scope.countryRecords[index].isLoading = false
                   })
                 }
 
