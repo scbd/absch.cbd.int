@@ -141,6 +141,6 @@ function getQuestionLabel (questionMap: QuestionMap): string {
 
 function doesQuestionExist (q: Question): boolean {
   if (typeof q.values[0] !== 'object') { return false }
-  return (q.values[0].title !== '' || typeof q.values[0].value === 'object') && q.data.type !== ''
+  return (q.values[0].title !== '' || q.values[0].value !== undefined) && q.data.type !== ''
 }
 </script>

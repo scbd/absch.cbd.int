@@ -19,7 +19,7 @@ export interface QuestionMap {
 }
 
 export interface DocumentValue {
-  value: LString | string
+  value: LString | string | number | undefined
   title?: string
   type?: string
   caption?: string
