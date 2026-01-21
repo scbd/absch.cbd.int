@@ -63,8 +63,13 @@ const props = withDefaults(defineProps<Props>(), {
   html: false
 })
 
+/**
+ * If we are passing more than one locale value to display but the document does not have a value for that locale
+ * do not display a value box element for that locale.
+ */
 const displayLocales = computed(() => props.locales.filter(hasLocaleValue))
 
+// Methods
 function hasLocaleValue (locale: string): boolean {
   if (props.locales.length === 1) { return true }
 
