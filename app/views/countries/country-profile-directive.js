@@ -104,11 +104,13 @@ app.directive('countryProfile', function() {
                   const relevantQuestionsList = Object.entries($scope.relatedQuestionsFromNR1)
                     .filter(([key]) => {
                       const index = getCountryRecordIndex(key)
-                      $scope.countryRecords[index].isLoading = true
+                      records[index].isLoading = true
                       return (records[index]?.docs ?? []).length < 1
                     })
                     .map(entry => entry[1])
                     .flat()
+
+                  $scope.countryRecords = records
 
                   const api = new NationalReportAnalyzerApi()
                   // Fetch all questions relevant to the country profile from the NR
@@ -137,7 +139,10 @@ app.directive('countryProfile', function() {
                     records[index].isLoading = false
                   })
 
-                  $scope.countryRecords = records
+                  // Use scope apply to ensure record numbers are updated otherwise they will not update in all cases.
+                  $scope.$apply(function () {
+                    $scope.countryRecords = records
+                  })
 
                   return records
                 }
