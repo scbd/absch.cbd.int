@@ -60,7 +60,7 @@ function parseToValue (data: QuestionData | undefined, defaultValue: DocumentVal
 }
 
 /**
- * Get the value from the document value parsed from the server under the key detaul, or additionalInformation
+ * Get the value from the document value parsed from the server under the key detail, or additionalInformation
  * and covert it to an LString to ensure consistent data types.
  */
 function parseDetails (questionData: QuestionData): LString | string | undefined {
