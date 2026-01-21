@@ -1,7 +1,7 @@
 <template>
   <div id="km-value-ml">
     <div
-      v-for="(locale, index) in locales"
+      v-for="(locale, index) in displayLocales"
       :key="locale"
       :class="['input-group', {
         'multiple-languages': locales.length > 1 && !isLast(index, locales.length)
@@ -41,11 +41,13 @@
   </div>
 </template>
 <script setup lang="ts">
+import { computed } from 'vue'
+import { languages } from '~/app-data/un-languages'
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
 // @ts-expect-error importing js file
 import { lstring } from '~/services/filters/lstring'
-import type { LString } from '~/types/languages'
+import type { LanguageCode, LString } from '~/types/languages'
 
 interface Props {
   locales: string[]
@@ -55,11 +57,24 @@ interface Props {
   html?: boolean
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   markdown: false,
   kmPre: false,
   html: false
 })
+
+const displayLocales = computed(() => props.locales.filter(hasLocaleValue))
+
+function hasLocaleValue (locale: string): boolean {
+  if (props.locales.length === 1) { return true }
+
+  if (typeof props.value !== 'object') { return true }
+
+  const isLangCode = (value: string): value is LanguageCode => Object.keys(languages).includes(value)
+  if (!isLangCode(locale)) { return false }
+
+  return props.value[locale] !== undefined
+}
 
 function isLast (index: number, totalLength: number): boolean {
   return index === totalLength - 1
