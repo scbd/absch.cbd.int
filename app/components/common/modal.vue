@@ -1,62 +1,122 @@
-
 <template>
-    <div ref="modalRef" class="modal fade"  aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-        <div class="modal-header">
-            <slot name="header">
-                <h5 class="modal-title" id="staticBackdropLabel">
-                    {{ lstring(title, locale) }}
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </slot>
+  <div
+    ref="modalRef"
+    class="modal fade overflow-hidden pt-5 pb-5"
+    :data-bs-backdrop="backdrop"
+    aria-hidden="true"
+    :data-bs-keyboard="isKeyboardClosable"
+    @click.self="clickBackdrop"
+  >
+    <div
+      class="modal-dialog"
+      :class="`modal-${modalSize}`"
+    >
+      <div class="modal-content">
+        <div
+          class="modal-header"
+          :class="headerClass"
+        >
+          <slot name="header">
+            <h5
+              id="staticBackdropLabel"
+              class="modal-title"
+            >
+              {{ title }}
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              @click="close"
+            />
+          </slot>
         </div>
         <div class="modal-body">
-            <slot name="default">
-            </slot>
+          <slot name="default" />
         </div>
-        <div class="modal-footer">
-            <slot name="footer">
-                <div class="row w-100">
-                    <div class="col">
-                    </div>
-                    <div class="col-auto">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ t("closeButton") }}</button>
-                    </div>
-                </div>
-            </slot>
+        <div
+          class="modal-footer"
+          :class="footerClass"
+        >
+          <slot name="footer">
+            <div class="row w-100">
+              <div class="col" />
+              <div class="col-auto">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                  @click="close"
+                >
+                  {{ $t("closeButton") }}
+                </button>
+              </div>
+            </div>
+          </slot>
         </div>
-        </div>
+      </div>
     </div>
-    </div>
-
+  </div>
 </template>
-<script setup>
-    import { shallowRef, onMounted } from "vue";
-    import { Modal } from "bootstrap";
-    import { useI18n } from 'vue-i18n';
-    import messages from '../../app-text/components/common/modal.json';
-    import { lstring } from '../../components/kb/filters';
-    const { t, locale } = useI18n({ messages });
-    const modalRef = shallowRef(null);
-    let modal = null;
-    
-    const props = defineProps({
-        title: [String, Object], 
-        required: true,
-    });
 
-    onMounted(() => {
-        modal = new Modal(modalRef.value);
-    });
+<script setup lang="ts">
+import { shallowRef, onMounted } from 'vue'
+// @ts-expect-error importing js file
+import { Modal } from 'bootstrap'
 
-    const show = () => {
-        modal.show('static');
-    };
+let modal = { show: (value: string) => value, hide: () => undefined }
+const modalRef = shallowRef(modal)
 
-    const close = () => {
-        modal.hide();
-    };
+defineProps({
+  title: {
+    type: String,
+    default: ''
+  },
+  modalSize: {
+    type: String,
+    default: 'xl'
+  },
+  headerClass: {
+    type: String,
+    default: ''
+  },
+  footerClass: {
+    type: String,
+    default: ''
+  },
+  backdrop: {
+    type: String,
+    default: 'default'
+  },
+  isKeyboardClosable: {
+    type: Boolean,
+    default: true
+  }
+})
 
-    defineExpose({show, close})
+const $emit = defineEmits(['onClose'])
+
+const show = (): undefined => {
+  modal.show('static')
+}
+
+const close = (): undefined => {
+  modal.hide()
+  $emit('onClose')
+}
+
+const clickBackdrop = (event: Event): undefined => {
+  if (!(event.target instanceof HTMLElement)) { return }
+  if (event.target.dataset['bsBackdrop'] === 'static') { return }
+  close()
+}
+
+onMounted(() => {
+  const { value } = modalRef
+
+  modal = new Modal(value)
+})
+
+defineExpose({ show, close })
 </script>
