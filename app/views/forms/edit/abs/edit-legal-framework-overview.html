@@ -27,7 +27,7 @@
             <div ng-if="shareVueComponent">
               <edit-legal-framework-overview
                 ng-vue="shareVueComponent"
-                v-model="document"
+                v-model="reactive(document)"
               />
             </div> 
           </form>
@@ -36,7 +36,7 @@
           <div ng-if="shareVueComponent && tab == 'review'">
             <legal-framework-overview
               ng-vue="shareVueComponent"
-              :document-info="{ body : review.document }"
+              :document-info="{ body: review.document }"
               :locale="review.locale"
               allow-drafts="true"
             />

@@ -335,7 +335,11 @@
         if (level ==="noInformation") return "bg-secondary";
     };
 
-    const document = computed(()=>props.documentInfo?.body);
+    const document = computed(()=> {
+      console.log('computed', props.documentInfo)
+      console.log(props.documentInfo?.body)
+      props.documentInfo?.body
+    });
     
     const approvedByCopDecision = computed(()=>{        
         if(document?.value?.approvedByCopDecision?.identifier?.indexOf('0001')===0)           

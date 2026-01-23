@@ -2,7 +2,7 @@ import app from '~/app'
 import '~/views/forms/edit/edit'
 import editLegalFrameworkOverview from './edit-legal-framework-overview.vue'
 import legalFrameworkOverview from '~/views/forms/view/abs/legal-framework-overview.vue'
-import { provide } from 'vue'
+import { provide, reactive } from 'vue'
 import { safeDelegate } from '~/services/common'
 export { default as template } from './edit-legal-framework-overview.html'
 
@@ -20,6 +20,8 @@ export default ['$scope', '$controller',
         vueCleanDocument = options
       }))
     }
+
+    $scope.reactive = reactive
 
     $scope.shareVueComponent = {
       components: { editLegalFrameworkOverview, legalFrameworkOverview },
