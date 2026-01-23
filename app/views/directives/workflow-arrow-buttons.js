@@ -1,4 +1,5 @@
 import app from '~/app';
+import { reactive } from 'vue'
 import template from 'text!./workflow-arrow-buttons.html';
 import 'lodash';
 import '~/views/directives/workflow-history-directive';
@@ -86,6 +87,8 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                 $scope.locale                      = locale;
                 $scope.offlineLanguages            = commonjs.languages;
                 $scope.blockText                   = 'loading form...'
+                $scope.reactive                    = reactive 
+
                 if(!$scope.tab)
                     $scope.tab = 'intro';
 

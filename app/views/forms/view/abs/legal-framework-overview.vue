@@ -4,15 +4,37 @@
     class="record"
   >
     <div
+      v-if="legalFrameworkDocument"
       class="record-body bg-white"
     >
       <document-date
         :document-info="documentInfo"
       />
 
-      <section>
+      <section v-if="legalFrameworkDocument.summary || legalFrameworkDocument.areaIntroduction || legalFrameworkDocument.title">
         <legend>{{ t('generalInformation') }} </legend>
-        <div v-if="legalFrameworkDocument?.countries">
+        <div v-if="legalFrameworkDocument.title">
+          <label>{{ t('title') }} </label>
+          <ng
+            v-vue-ng:km-value-ml
+            :value="legalFrameworkDocument.title"
+            :locales="locale"
+            html
+          />
+        </div>
+
+        <div v-if="legalFrameworkDocument.summary">
+          <label>{{ t('summary') }} </label>
+          <ng
+            v-vue-ng:km-value-ml
+            :value="legalFrameworkDocument.summary"
+            :locales="locale"
+            html
+            km-pre
+          />
+        </div>
+
+        <div v-if="legalFrameworkDocument.countries">
           <label>{{ t('relatedCountries') }}</label>
           <div class="km-value">
             <li
@@ -29,15 +51,20 @@
       </section>
       <div>
         <ng
-          v-model:ng-model="docHeader.identifier"
+          v-model:ng-model="legalFrameworkDocument.header.identifier"
           v-vue-ng:view-referenced-records
         />
       </div>
     </div>
+
+    <ng
+      v-vue-ng:document-metadata-vue
+      :document-info="documentInfo"
+    />
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, type ModelRef } from 'vue'
+import { computed } from 'vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
 // @ts-expect-error importing js file
 import documentDate from '~/views/forms/view/directives/document-date.vue'
@@ -46,25 +73,12 @@ import kmTerm from '~/components/km/KmTerm.vue'
 import messages from '~/app-text/views/reports/chm/marine-ebsa.json'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
 
 const { t } = useI18n({ messages })
-interface Props {
-  documentInfo: { body: LegalFrameworkDocument }
-  locale: string
-}
-const props = defineProps<Props>()
-const header = {
-  identifier: '',
-  schema: '',
-  languages: []
-}
-
-const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
-const docHeader = ref(header)
-
-onMounted(() => {
-  ({ documentInfo: { body: legalFrameworkDocument.value } } = props)
+const props = defineProps({
+  documentInfo: { type: Object, required: true },
+  locale: { type: String, required: true }
 })
 
+const legalFrameworkDocument = computed(() => props.documentInfo['body'])
 </script>
