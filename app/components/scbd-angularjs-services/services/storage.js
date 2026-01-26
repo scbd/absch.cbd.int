@@ -147,8 +147,14 @@ const storageT = mergeTranslationKeys(storageTranslations);
             "validate": function(document, params, config) {
                 params = clone(params || {});
 
-                if (!params.schema && document && document.header && document.header.schema)
+                if (!params.schema && document && document.header && document.header.schema) {
                     params.schema = document.header.schema;
+                }
+
+                if (params.schema === 'measure') {
+                  return new Promise((resolve) => resolve(document))
+                }
+      
                 var oTrans = transformPath(serviceUrls.validateUrl(), params);
 
                 return $http.put(oTrans.url, document, getConfig(config, oTrans.params));
