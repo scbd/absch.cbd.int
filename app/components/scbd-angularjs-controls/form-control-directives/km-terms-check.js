@@ -76,19 +76,25 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                 function init() {
                     $scope.setError(null);
                     $scope.__loading = true;
+                    console.log('$scope.termsFn', $scope.termsFn)
+                    console.log('$scope.termsFn', $scope.termsFn())
 
-                    var qData = $scope.termsFn();
-
-                    if (qData === undefined)
-                        return $timeout(init, 250); // MEGA UGLY PATCH
+                    var qData = $scope.termsFn()
+                    
+                    if (qData === undefined) {
+                      return $timeout(init, 250) // MEGA UGLY PATCH
+                    }
 
                     $q.when(qData,
                         function(data) { // on success
+                            console.log('good data', data)
+                            console.log('isData arary', $.isArray(data))
                             $scope.__loading = false;
                             $scope.terms = data;
                         },
                         function(error) { // on error
                             $scope.__loading = false;
+                            console.log('km-term-check error', error)
                             $scope.setError(error);
                         });
                 };
@@ -103,12 +109,12 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                     var oNewIdentifiers = {};
                     var oNewOthers = {};
                     if (!$.isArray($scope.terms))
-                        throw "Type must be array";
+                        throw "Terms: Type must be array";
 
                     if ($scope.binding) {
 
                         if (!$.isArray($scope.binding))
-                            throw "Type must be array";
+                            throw "Binding: Type must be array";
 
                         for (var i = 0; i < $scope.binding.length; ++i) {
                             if(!$scope.binding[i])

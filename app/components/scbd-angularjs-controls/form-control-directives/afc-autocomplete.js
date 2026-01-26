@@ -185,7 +185,7 @@ import '~/components/scbd-angularjs-services/main';
                         if ($scope.selected != -1) {
                             var i;
                             for (i = 0; i != $scope.displayItems.length; ++i) {
-                                if (($scope.displayItems[i]||{}).__value == $scope.current.__value) {
+                                if (($scope.displayItems[i]||{}).__value === ($scope.current || {}).__value) {
                                     $scope.updateSelected(i);
                                     break;
                                 }

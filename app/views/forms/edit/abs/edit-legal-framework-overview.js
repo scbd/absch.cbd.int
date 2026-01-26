@@ -1,5 +1,7 @@
 import app from '~/app'
 import '~/views/forms/edit/edit'
+import '~/views/forms/directives/nr-yes-no'
+import '~/views/forms/edit/document-selector'
 import editLegalFrameworkOverview from './edit-legal-framework-overview.vue'
 import legalFrameworkOverview from '~/views/forms/view/abs/legal-framework-overview.vue'
 import { provide, reactive } from 'vue'
@@ -11,6 +13,12 @@ export default ['$scope', '$controller',
     $controller('editController', {
       $scope
     })
+    console.log('$scope', $scope)
+    console.log('$scope', $scope.review.document)
+    $scope.header = { indentifier: '', schema: '', languages: [] }
+    $scope.title = { en: '' }
+    $scope.reviewData = { body: { header: $scope.header, title: $scope.title } }
+    $scope.documentCountries = []
 
     let vueCleanDocument = null
 
@@ -28,8 +36,16 @@ export default ['$scope', '$controller',
       setup: setupFunctions
     }
 
-    $scope.getCleanDocument = function (doc) {
-      if (vueCleanDocument) { return vueCleanDocument?.getCleanDocument(doc) }
+    $scope.getCleanDocument = (doc) => {
+      if (vueCleanDocument) {
+        const cleanDocument = vueCleanDocument?.getCleanDocument(doc)
+        $scope.reviewData = { body: cleanDocument }
+        $scope.header = cleanDocument.header
+        $scope.title = cleanDocument.title
+        $scope.documentCountries = cleanDocument.countries ?? []
+
+        return cleanDocument
+      }
     }
 
     $scope.setDocument()
