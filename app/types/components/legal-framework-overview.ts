@@ -2,6 +2,12 @@ import type { LanguageCode, LString } from '../languages'
 export interface ETerm {
   identifier: string
 }
+
+export interface Header {
+  identifier: string,
+  schema: string,
+  languages: LanguageCode[]
+}
 // Types
 export interface LegalFrameworkDocument {
   notes?: string
@@ -11,25 +17,22 @@ export interface LegalFrameworkDocument {
   jurisdictionImplementation: LString
   countryEstablished: string
   geneticResources: string
-  establishedMesasure: string
+  establishedMeasure: string
+  agrMeasureForAccess: string
   agrSubjectToPic: string
   agrCommercialPermitRequired: string
   agrCommercialPermitException: string
   agrNonCommercialPermitRequired: string
   agrNonCommercialPermitException: string
   tkSubjectToPic: string
-  tkMesasureForAccess: string
+  tkMeasureForAccess: string
   tkCommercialPermitRequired: string
   tkCommercialPermitException: string
   tkNonCommercialPermitRequired: string
   tkNonCommercialPermitException: string
   article53Implemented: string
   article55Implemented: string
-  header: {
-    identifier: string,
-    schema: string,
-    languages: LanguageCode[]
-  }
+  header: Header
   status: string
 }
 

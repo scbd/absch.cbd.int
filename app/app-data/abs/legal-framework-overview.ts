@@ -1,5 +1,12 @@
-import type { Translations } from '~/types/languages'
-import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
+import type { LString, Translations, LanguageCode } from '~/types/languages'
+import type { ETerm, LegalFrameworkDocument, Header } from '~/types/components/legal-framework-overview'
+
+export interface Validation {
+  question: keyof LegalFrameworkDocument
+  values: Array<string | ETerm | LString | Header | Partial<Record<LanguageCode, string>>>
+  trigger: string
+  type: string
+}
 
 export interface Option {
   value: string
@@ -17,11 +24,15 @@ export interface AttributeMap<Key> {
   type: string
   title: string
   multiple?: boolean
-  subQuestion?: Question
   bold?: boolean
 }
 
-export type Question = AttributeMap<keyof LegalFrameworkDocument>
+export interface Question extends AttributeMap<keyof LegalFrameworkDocument> {
+  validations?: Validation[]
+  questions?: Question[]
+  enable?: boolean
+  onChange?: ()=> Question | Legend
+}
 export type Legend = AttributeMap<string>
 
 export function legalFrameworkOverviewAttributes (t: Translations): Array<Question | Legend> {
@@ -64,7 +75,36 @@ export function legalFrameworkOverviewAttributes (t: Translations): Array<Questi
       type: 'option',
       options: casesOptions,
       key: 'agrSubjectToPic',
-      title: t('agrSubjectToPic', { geneticResources: geneticResourcesBold })
+      title: t('agrSubjectToPic', { geneticResources: geneticResourcesBold }),
+      validations: [
+        {
+          question: 'agrMeasureForAccess',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        },
+        {
+          question: 'agrCommercialPermitRequired',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        },
+        {
+          question: 'agrNonCommercialPermitRequired',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        }
+      ]
     },
     {
       type: 'option',
@@ -80,12 +120,14 @@ export function legalFrameworkOverviewAttributes (t: Translations): Array<Questi
         type: `<u class="text-focus">${t('commercial')}</u>`,
         geneticResources: geneticResourcesBold
       }),
-      subQuestion: {
-        type: 'option',
-        options: yesNoOptions,
-        key: 'agrCommercialPermitException',
-        title: t('anyExceptions')
-      }
+      questions: [
+        {
+          type: 'option',
+          options: yesNoOptions,
+          key: 'agrCommercialPermitException',
+          title: t('anyExceptions')
+        }
+      ]
     },
     {
       type: 'option',
@@ -95,12 +137,14 @@ export function legalFrameworkOverviewAttributes (t: Translations): Array<Questi
         type: `<u class="text-focus">${t('nonCommercial')}</u>`,
         geneticResources: geneticResourcesBold
       }),
-      subQuestion: {
-        type: 'option',
-        options: yesNoOptions,
-        key: 'agrNonCommercialPermitException',
-        title: t('anyExceptions')
-      }
+      questions: [
+        {
+          type: 'option',
+          options: yesNoOptions,
+          key: 'agrNonCommercialPermitException',
+          title: t('anyExceptions')
+        }
+      ]
     },
     // Access to traditional knowledge associated with genetic resources
     {
@@ -113,7 +157,36 @@ export function legalFrameworkOverviewAttributes (t: Translations): Array<Questi
       type: 'option',
       options: casesOptions,
       key: 'tkSubjectToPic',
-      title: t('tkSubjectToPic', { traditionalKnowledge: traditionalKnowledgeBold })
+      title: t('tkSubjectToPic', { traditionalKnowledge: traditionalKnowledgeBold }),
+      validations: [
+        {
+          question: 'tkMeasureForAccess',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        },
+        {
+          question: 'tkCommercialPermitRequired',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        },
+        {
+          question: 'tkNonCommercialPermitRequired',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        }
+      ]
     },
     {
       type: 'option',
@@ -129,12 +202,14 @@ export function legalFrameworkOverviewAttributes (t: Translations): Array<Questi
         type: `<u class="text-focus">${t('commercial')}</u>`,
         traditionalKnowledge: traditionalKnowledgeBold
       }),
-      subQuestion: {
-        type: 'option',
-        options: yesNoOptions,
-        key: 'tkCommercialPermitException',
-        title: t('anyExceptions')
-      }
+      questions: [
+        {
+          type: 'option',
+          options: yesNoOptions,
+          key: 'tkCommercialPermitException',
+          title: t('anyExceptions')
+        }
+      ]
     },
     {
       type: 'option',
@@ -144,12 +219,14 @@ export function legalFrameworkOverviewAttributes (t: Translations): Array<Questi
         type: `<u class="text-focus">${t('nonCommercial')}</u>`,
         traditionalKnowledge: traditionalKnowledgeBold
       }),
-      subQuestion: {
-        type: 'option',
-        options: yesNoOptions,
-        key: 'tkNonCommercialPermitException',
-        title: t('anyExceptions')
-      }
+      questions: [
+        {
+          type: 'option',
+          options: yesNoOptions,
+          key: 'tkNonCommercialPermitException',
+          title: t('anyExceptions')
+        }
+      ]
     },
     {
       key: 'benefitSharing',
