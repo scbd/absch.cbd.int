@@ -51,7 +51,7 @@ export function legalFrameworkOverviewAttributes (t: Translations): Array<Questi
       type: 'option',
       options: measureOptions,
       key: 'establishedMeasure',
-      title: t('establishedMeasure', { establishedMeasuresInclude: `<div class="text-focus">${t('establishedMeasuresInclude')}</div>` })
+      title: t('establishedMeasure', { establishedMeasuresInclude: `<br/><span class="text-focus">${t('establishedMeasuresInclude')}</span>` })
     },
     // Access to genetic resources
     {

@@ -28,8 +28,9 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <km-control-group
-              :required="true"
+            <ng
+              v-vue-ng:km-control-group
+              required
               name="government"
               :caption="t('country')"
               :bold="true"
@@ -47,7 +48,7 @@
                 name="government"
                 ng-disabled="userHasGovernment"
               />
-            </km-control-group>
+            </ng>
           </div>
         </div>
 
@@ -56,8 +57,9 @@
             <div
               class="document-attribute border border-1 p-2"
             >
-              <km-control-group
-                :required="true"
+              <ng
+                v-vue-ng:km-control-group
+                required
                 name="jurisdiction"
                 :caption="t('jurisdiction')"
                 :bold="true"
@@ -70,6 +72,7 @@
                     class="radio-option"
                   >
                     <label
+                      class="radio-inline"
                       :for="`jurisdiction-${option.title}`"
                     >
                       <input
@@ -84,10 +87,11 @@
                     </label>
                   </div>
                 </div>
-              </km-control-group>
+              </ng>
 
-              <km-control-group
-                :required="true"
+              <ng
+                v-vue-ng:km-control-group
+                required
                 name="jurisdictionImplementation"
                 :caption="jurisdictionImplementationCaption"
                 :has-margins="false"
@@ -101,7 +105,7 @@
                     name="jurisdictionImplementation"
                   />
                 </div>
-              </km-control-group>
+              </ng>
             </div>
           </div>
         </div>
@@ -118,8 +122,9 @@
             <div
               class="document-attribute border border-1 p-2"
             >
-              <km-control-group
-                :required="true"
+              <ng
+                v-vue-ng:km-control-group
+                required
                 :name="attribute.key"
                 :caption="attribute.title"
                 :bold="attribute.bold"
@@ -135,12 +140,13 @@
                   binding-type="term[]"
                   class="mt-2 ps-1"
                 />
-              </km-control-group>
+              </ng>
 
               <!-- SubQuestion -->
-              <km-control-group
+              <ng
                 v-if="typeof attribute.subQuestion === 'object'"
-                :required="true"
+                v-vue-ng:km-control-group
+                required
                 :name="attribute.subQuestion.key"
                 :caption="attribute.subQuestion.title"
                 :bold="attribute.subQuestion.bold"
@@ -157,7 +163,7 @@
                   binding-type="term[]"
                   class="mt-2 ps-1"
                 />
-              </km-control-group>
+              </ng>
             </div>
           </div>
           <div
@@ -177,7 +183,6 @@
 import { inject, onMounted, ref, type Ref, type ModelRef } from 'vue'
 import { legalFrameworkOverviewAttributes } from '~/app-data/abs/legal-framework-overview'
 import documentLegend from '~/components/common/document-legend.vue'
-import kmControlGroup from '~/components/common/km-control-group.vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js'
 // @ts-expect-error importing js file
 import { sanitizeDocument } from '~/services/filters/common'
@@ -206,7 +211,7 @@ Object.entries(legalFramewordOverviewT)
 
 const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
 const userHasGovernment = ref(true)
-const jurisdictionImplementationCaption = `<div>${t('jurisdictionImplementationSubNational')}</div> <div class='mt-2'>${t('jurisdictionImplementationNational')}</div>`
+const jurisdictionImplementationCaption = `<span>${t('jurisdictionImplementationSubNational')}</span><br/><span class='mt-2'>${t('jurisdictionImplementationNational')}</span>`
 
 // Refs
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
