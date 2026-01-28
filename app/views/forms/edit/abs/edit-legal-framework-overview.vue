@@ -1,5 +1,7 @@
 <template>
-  <div v-if="legalFrameworkDocument?.header">
+  <div
+    v-if="legalFrameworkDocument?.header"
+  >
     <section class="panel">
       <div class="panel-body mb-5">
         <legend>{{ t("generalInformation") }}</legend>
@@ -120,7 +122,7 @@
                 :required="true"
                 :name="attribute.key"
                 :caption="attribute.title"
-                :bold="true"
+                :bold="attribute.bold"
                 :has-margins="false"
               >
                 <ng
@@ -141,7 +143,7 @@
                 :required="true"
                 :name="attribute.subQuestion.key"
                 :caption="attribute.subQuestion.title"
-                :bold="true"
+                :bold="attribute.subQuestion.bold"
                 :has-margins="false"
                 class="mt-3"
               >
@@ -173,6 +175,7 @@
 </template>
 <script setup lang="ts">
 import { inject, onMounted, ref, type Ref, type ModelRef } from 'vue'
+import { legalFrameworkOverviewAttributes } from '~/app-data/abs/legal-framework-overview'
 import documentLegend from '~/components/common/document-legend.vue'
 import kmControlGroup from '~/components/common/km-control-group.vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js'
@@ -191,28 +194,7 @@ import { useAuth, useUser } from '@scbd/angular-vue/src/index.js'
 import { useI18n } from 'vue-i18n'
 import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { Inject, LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
-
-interface Option {
-  value: string
-  title: string
-  type?: string
-  name?: string
-  identifier?: string
-  caption?: string
-}
-
-interface AttributeMap<Key> {
-  options?: Option[]
-  key: Key
-  section?: string
-  type: string
-  title: string
-  multiple?: boolean
-  subQuestion?: Question
-}
-
-type Question = AttributeMap<keyof LegalFrameworkDocument>
-type Legend = AttributeMap<string>
+import type { Question, Legend, Option } from '~/app-data/abs/legal-framework-overview'
 
 // Constants
 const auth = useAuth()
@@ -227,10 +209,10 @@ const userHasGovernment = ref(true)
 const jurisdictionImplementationCaption = `<div>${t('jurisdictionImplementationSubNational')}</div> <div class='mt-2'>${t('jurisdictionImplementationNational')}</div>`
 
 // Refs
-const documentAttributes: Ref<Array<Question | Legend>> = ref([])
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const countries: Ref<Option[]> = ref([])
 const jurisdictions: Ref<Option[]> = ref([])
+const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOverviewAttributes(t))
 
 onMounted(async () => {
   const jurisdictionsFetch = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.CP_JURISDICTIONS)
@@ -240,150 +222,10 @@ onMounted(async () => {
 
   const { government } = useUser()
   userHasGovernment.value = government !== undefined && government !== null
+})
 
-  const measureOptions = [
-    { value: 'true', title: t('yesAllMeasures'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'true.some', title: t('yesToSomeExtent'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'false', title: t('no'), type: 'lstring', caption: t('pleaseExplain') }
-  ]
-
-  const yesNoOptions = [
-    { value: 'true', title: t('yes'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'false', title: t('no'), type: 'lstring', caption: t('pleaseExplain') }
-  ]
-
-  const casesOptions = [
-    { value: 'true', title: t('yesAllCases'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'true.some', title: t('yesSomeCases'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'false', title: t('noCountryDetermined'), type: 'lstring', caption: t('pleaseExplain') }
-  ]
-
-  const getArgCaption = (type: string): string => (`${t('argPermitRequired')} <span class="label-hightlight">${type}</span> ${t('argPermitUtilization')}`)
-
-  documentAttributes.value = [
-    // General Information
-    {
-      type: 'option',
-      options: measureOptions,
-      key: 'establishedMeasure',
-      title: t('establishedMeasure')
-    },
-    // Access to genetic resources
-    {
-      key: 'geneticResources',
-      section: 'GeneticResources',
-      type: 'legend',
-      title: t('geneticResources')
-    },
-    {
-      type: 'option',
-      options: measureOptions,
-      key: 'agrMeasureForAccess',
-      title: t('agrMeasureForAccess')
-    },
-    {
-      type: 'option',
-      options: casesOptions,
-      key: 'agrSubjectToPic',
-      title: t('agrSubjectToPic')
-    },
-    {
-      type: 'option',
-      options: yesNoOptions,
-      key: 'agrCommercialPermitRequired',
-      title: getArgCaption(t('commercial')),
-      subQuestion: {
-        type: 'option',
-        options: yesNoOptions,
-        key: 'agrCommercialPermitException',
-        title: t('anyExceptions')
-      }
-    },
-    {
-      type: 'option',
-      options: yesNoOptions,
-      key: 'agrNonCommercialPermitRequired',
-      title: getArgCaption(t('nonCommercial')),
-      subQuestion: {
-        type: 'option',
-        options: yesNoOptions,
-        key: 'agrNonCommercialPermitException',
-        title: t('anyExceptions')
-      }
-    },
-    {
-      key: 'knowledgeAccess',
-      section: 'knowledgeAccess',
-      type: 'legend',
-      title: t('knowledgeAccess')
-    },
-    {
-      type: 'option',
-      options: casesOptions,
-      key: 'tkSubjectToPic',
-      title: t('tkSubjectToPic')
-    },
-    {
-      type: 'option',
-      options: measureOptions,
-      key: 'tkMeasureForAccess',
-      title: t('tkMeasureForAccess')
-    },
-    {
-      type: 'option',
-      options: yesNoOptions,
-      key: 'tkCommercialPermitRequired',
-      title: t('tkPermitRequired', { msg: t('commercial') }),
-      subQuestion: {
-        type: 'option',
-        options: yesNoOptions,
-        key: 'tkCommercialPermitException',
-        title: t('anyExceptions')
-      }
-    },
-    {
-      type: 'option',
-      options: yesNoOptions,
-      key: 'tkNonCommercialPermitRequired',
-      title: t('tkPermitRequired', { msg: t('nonCommercial') }),
-      subQuestion: {
-        type: 'option',
-        options: yesNoOptions,
-        key: 'tkNonCommercialPermitException',
-        title: t('anyExceptions')
-      }
-    },
-    {
-      key: 'benefitSharing',
-      section: 'benefitSharing',
-      type: 'legend',
-      title: t('benefitSharing')
-    },
-    {
-      key: 'Article5_3',
-      section: 'Article_5_3',
-      type: 'legend',
-      title: `<a href='https://www.cbd.int/abs/text/articles/?sec=abs-05' target='_blank'>${t('article5_3')}</a>`
-    },
-    {
-      type: 'option',
-      options: measureOptions,
-      key: 'article53Implemented',
-      title: t('article53Implemented')
-    },
-    {
-      key: 'Article5_5',
-      section: 'Article_5_5',
-      type: 'legend',
-      title: `<a href='https://www.cbd.int/abs/text/articles/?sec=abs-05' target='_blank'>${t('article5_5')}</a>`
-    },
-    {
-      type: 'option',
-      options: measureOptions,
-      key: 'article55Implemented',
-      title: t('article55Implemented')
-    }
-  ]
+angularGetCleanDocument({
+  getCleanDocument
 })
 
 // Methods
@@ -396,13 +238,8 @@ function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFramew
     if (/^\s*$/g.test(lDocument.notes)) { lDocument.notes = undefined }
   }
 
-  onSubmissionStatusChange()
   return sanitizeDocument(lDocument)
 }
-
-angularGetCleanDocument({
-  getCleanDocument
-})
 
 function isQuestion (value: Question | Legend): value is Question {
   return value.type !== 'legend'
@@ -412,32 +249,14 @@ async function fetchCountries (): Promise<Option[]> {
   const terms = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES)
   return terms.map((country: Option) => Object.assign(country, { __value: lstring(country.title, locale) }))
 }
-
-// function updateAnswer (question: Question): undefined {
-//   console.log('hellp', question)
-//   if (typeof legalFrameworkDocument.value !== 'object') { return }
-//   console.log(legalFrameworkDocument.value.jurisdiction)
-//   // legalFrameworkDocument.value[term] = ''
-// }
-
-// TODO: Implement if needed
-function onSubmissionStatusChange (): string {
-  return legalFrameworkDocument.value?.status ?? ''
-  // if (legalFrameworkDocument.value.status !== 'approved') {
-  //   legalFrameworkDocument.value.approvedByCopDecision = undefined
-  //   legalFrameworkDocument.value.approvedByGovernment = undefined
-  //   legalFrameworkDocument.value.approvedByGovernmentOn = undefined
-  // }
-}
 </script>
 <style scope>
   .document-attribute {
     margin: 0 0 20px 0;
   }
 
-  .label-hightlight {
-    font-size: 1.1em;
+  .text-focus {
+    font-size: 1.05em;
     font-weight: 1000;
-    text-decoration: underline;
   }
 </style>
