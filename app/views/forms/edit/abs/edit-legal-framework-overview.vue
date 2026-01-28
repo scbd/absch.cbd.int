@@ -68,7 +68,8 @@
               <ng
                 v-vue-ng:km-control-group
                 required
-                name="jurisdiction" :caption="t('jurisdiction')"
+                name="jurisdiction"
+                :caption="t('jurisdiction')"
                 :bold="true"
                 class="mb-2"
               >

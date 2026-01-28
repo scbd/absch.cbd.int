@@ -48,9 +48,9 @@ export function legalFrameworkOverviewAttributes (t: Translations): Array<Questi
   ]
 
   const casesOptions = [
-    { value: 'true', title: t('yesAllCases'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'true.some', title: t('yesSomeCases'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'false', title: t('noCountryDetermined'), type: 'lstring', caption: t('pleaseExplain') }
+    { value: 'true', title: t('yesAllCases'), caption: t('pleaseExplain') },
+    { value: 'true.some', title: t('yesSomeCases'), caption: t('pleaseExplain') },
+    { value: 'false', title: t('noCountryDetermined'), caption: t('pleaseExplain') }
   ]
 
   const geneticResourcesBold = `<span class="text-focus">${t('geneticResources')}</span>`
