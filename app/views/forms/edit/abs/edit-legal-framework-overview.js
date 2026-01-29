@@ -13,8 +13,7 @@ export default ['$scope', '$controller',
     $controller('editController', {
       $scope
     })
-    console.log('$scope', $scope)
-    console.log('$scope', $scope.review.document)
+
     $scope.header = { indentifier: '', schema: '', languages: [] }
     $scope.title = { en: '' }
     $scope.reviewData = { body: { header: $scope.header, title: $scope.title } }
