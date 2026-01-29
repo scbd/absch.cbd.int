@@ -1,7 +1,6 @@
 //fixed a bug with the comment up here ;)
 import app from '~/app';
 import _ from 'lodash';
-import { reactive } from 'vue'
 import Enumerable from 'linqjs';
 import '~/services/main';
 import '~/views/forms/edit/editFormUtility';
@@ -33,7 +32,6 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
     else
       $scope.schemaType = 'referenceRecords';
       
-    $scope.reactive = reactive 
     $scope.status   = "loading";
     $scope.error    = null;
     if(!$scope.tab)
@@ -127,10 +125,8 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
     //
     //==================================
     $scope.$watch("tab", function(tab) {
-      if (tab === "review" || tab === 'publish') {
-        console.log('update document', $scope.getCleanDocument())
-        $scope.review.document = $scope.getCleanDocument();
-      }
+      if(tab == "review" || tab=='publish')
+       $scope.review.document = $scope.getCleanDocument();
     });
 
 

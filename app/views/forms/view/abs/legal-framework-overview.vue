@@ -12,16 +12,6 @@
 
       <section>
         <legend>{{ t('generalInformation') }} </legend>
-        <div v-if="legalFrameworkDocument?.title">
-          <label>{{ t('title') }} </label>
-          <ng
-            v-vue-ng:km-value-ml
-            :value="legalFrameworkDocument.title"
-            :locales="locale"
-            html
-          />
-        </div>
-
         <div v-if="legalFrameworkDocument?.countries">
           <label>{{ t('relatedCountries') }}</label>
           <div class="km-value">
@@ -44,12 +34,6 @@
         />
       </div>
     </div>
-    <!--
-    <ng
-      v-vue-ng:document-metadata-vue
-      :document-info="documentInfo"
-    />
-    -->
   </div>
 </template>
 <script setup lang="ts">

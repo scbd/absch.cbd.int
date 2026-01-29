@@ -204,7 +204,7 @@
 
     <div ng-show="tab=='review'" km-tab="review" id="schemaView" class="mb-5 mt-2">
         <div ng-if="debugInfoComponent && tab=='review'">
-            <document-debug-info ng-vue="debugInfoComponent" v-bind:document-info="reactive($parent.$parent.review)"></document-debug-info>
+            <document-debug-info ng-vue="debugInfoComponent" v-bind:document-info="$parent.$parent.review"></document-debug-info>
         </div>
         <div class="record-Options-div language-btn-options float-end">
             <div class="btn-group btn-group-xs" role="group" ng-if="languages.length>1">

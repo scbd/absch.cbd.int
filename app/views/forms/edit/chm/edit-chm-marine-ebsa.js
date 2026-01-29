@@ -4,7 +4,7 @@ import '~/views/forms/edit/edit';
 import editChmMarineEbsaEditForm from  './edit-chm-marine-ebsa.vue';
 import marineEbsa from '~/views/forms/view/chm/marine-ebsa.vue';
 export { default as template } from './edit-chm-marine-ebsa.html';
-import { provide, reactive } from 'vue';
+import { provide } from 'vue';
 import { safeDelegate } from '~/services/common'
 export default ["$scope", "$http", "$filter",  "$controller", "$location", 
     function ($scope,$http, $filter,  $controller, $location) {
@@ -19,7 +19,6 @@ export default ["$scope", "$http", "$filter",  "$controller", "$location",
                 vueCleanDocument = options
             }));
         }
-        $scope.reactive = reactive
         
         $scope.shareVueComponent = {
             components:{editChmMarineEbsaEditForm, marineEbsa}    ,

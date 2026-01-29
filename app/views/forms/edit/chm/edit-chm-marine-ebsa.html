@@ -19,7 +19,7 @@
                 </edit-form>
                 <review-form>
                     <div ng-if="shareVueComponent && tab == 'review'">
-                        <marine-ebsa  ng-vue="shareVueComponent" :document-info="reactive({ body : review.document })" :locale="review.locale" allow-drafts="true"></marine-ebsa>
+                        <marine-ebsa  ng-vue="shareVueComponent" :document-info="{ body : review.document }" :locale="review.locale" allow-drafts="true"></marine-ebsa>
                     </div>
                 </review-form>                
             </workflow-arrow-buttons>
