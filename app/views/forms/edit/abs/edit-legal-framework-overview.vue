@@ -99,13 +99,13 @@
 
               <label
                 class="fw-semibold mb-2"
-                :class="{ inactive: isNational }"
+                :class="{ inactive: !isNational && isJurisdictionDefined }"
               >
                 {{ t('jurisdictionImplementationNational') }}
               </label>
               <label
                 class="fw-semibold"
-                :class="{ inactive: !isNational }"
+                :class="{ inactive: isNational && isJurisdictionDefined }"
               >
                 {{ t('jurisdictionImplementationSubNational') }}
               </label>
@@ -238,7 +238,7 @@ const { government } = useUser()
 const userHasGovernment = government !== undefined && government !== null
 
 // Refs
-const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>({ default: { jurisdiction: { identifier: '' } } })
+const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const countries: Ref<Option[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
 const jurisdictions: Ref<Option[]> = ref([])
 const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOverviewQuestions(t)
@@ -251,6 +251,7 @@ const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOver
 const nationalJurisdiction = computed(() => jurisdictions.value
   .find((jurisdiction) => jurisdiction.value === 'National / Federal'))
 const isNational = computed(() => nationalJurisdiction.value?.identifier === legalFrameworkDocument.value?.jurisdiction?.identifier)
+const isJurisdictionDefined = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier !== undefined)
 
 // Hooks
 onMounted(async () => {
