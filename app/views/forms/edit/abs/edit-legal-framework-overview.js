@@ -41,5 +41,18 @@ export default ['$scope', '$controller',
       }
     }
 
+    // Update validation errors on question answer change
+    $scope.$watch('document', function (oldValue, newValue) {
+      if (typeof $scope.validationReport !== 'object') { return }
+      if (!Array.isArray($scope.validationReport.errors)) { return }
+      if (newValue === undefined || oldValue === undefined) { return }
+
+      const updatedKey = Object.keys(newValue)
+        .find(key => JSON.stringify(newValue[key]) !== JSON.stringify(oldValue[key]) && key !== 'header')
+
+      $scope.validationReport.errors = $scope.validationReport.errors
+        .filter((error) => error.property !== updatedKey)
+    }, true)
+
     $scope.setDocument()
   }]
