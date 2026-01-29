@@ -1,13 +1,5 @@
-import type { LanguageCode, LString } from '../languages'
-export interface ETerm {
-  identifier: string
-}
-
-export interface Header {
-  identifier: string,
-  schema: string,
-  languages: LanguageCode[]
-}
+import type { LString } from '../languages'
+import type { ETerm, Header } from '../common/documents'
 // Types
 export interface LegalFrameworkDocument {
   notes?: string

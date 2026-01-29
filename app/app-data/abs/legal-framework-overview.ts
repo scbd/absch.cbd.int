@@ -1,5 +1,6 @@
 import type { LString, Translations, LanguageCode } from '~/types/languages'
-import type { ETerm, LegalFrameworkDocument, Header } from '~/types/components/legal-framework-overview'
+import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
+import type { ETerm, Header } from '~/types/common/documents'
 
 export interface Validation {
   question: keyof LegalFrameworkDocument
@@ -33,6 +34,7 @@ export interface Question extends AttributeMap<keyof LegalFrameworkDocument> {
   enable?: boolean
   onChange?: ()=> Question | Legend
 }
+
 export type Legend = AttributeMap<string>
 
 export function legalFrameworkOverviewQuestions (t: Translations): Array<Question | Legend> {
