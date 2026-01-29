@@ -63,7 +63,7 @@
         >
           <div class="col-xs-12">
             <div
-              class="document-attribute border border-1 p-2"
+              class="document-question border border-1 p-2"
             >
               <ng
                 v-vue-ng:km-control-group
@@ -79,19 +79,19 @@
                     :key="option.value"
                     class="radio-option"
                   >
-                    <label
-                      class="radio-inline"
-                      :for="`jurisdiction-${option.title}`"
+                    <input
+                      :id="`jurisdictions-option-${option.value}`"
+                      v-model="legalFrameworkDocument.jurisdiction"
+                      type="radio"
+                      :value="{ identifier: option.identifier }"
+                      :name="option.value"
+                      class="me-1"
+                      @change="setJurisdictionCaption"
                     >
-                      <input
-                        :id="`option-${option.value}`"
-                        v-model="legalFrameworkDocument.jurisdiction"
-                        type="radio"
-                        :value="{ identifier: option.identifier }"
-                        :name="option.title"
-                        class="me-1"
-                        @change="setJurisdictionCaption"
-                      >
+                    <label
+                      :for="`jurisdictions-option-${option.value}`"
+                      class="radio-inline"
+                    >
                       {{ option.title }}
                     </label>
                   </div>
@@ -119,34 +119,34 @@
 
         <!-- Dynamic Questions -->
         <div
-          v-for="attribute in documentAttributes"
-          :key="attribute.key"
+          v-for="question in documentAttributes"
+          :key="question.key"
           class="row"
         >
           <div
-            v-if="isQuestion(attribute)"
+            v-if="isQuestion(question)"
             class="col-xs-12"
           >
             <div
-              class="document-attribute border border-1 p-2"
-              :class="{ 'inactive pe-none': isQuestionDisabled(attribute) }"
+              class="document-question border border-1 p-2"
+              :class="{ 'inactive pe-none': isQuestionDisabled(question) }"
             >
               <ng
                 v-vue-ng:km-control-group
                 required
-                :name="attribute.key"
-                :caption="attribute.title"
-                :class="{ 'form-group--bold': attribute.bold }"
+                :name="question.key"
+                :caption="question.title"
+                :class="{ 'form-group--bold': question.bold }"
               >
                 <div class="open-box">
                   <ng
-                    v-model:ng-model="legalFrameworkDocument[attribute.key]"
+                    v-model:ng-model="legalFrameworkDocument[question.key]"
                     v-vue-ng:nr-yes-no
-                    :ng-change="typeof attribute.onChange === 'function' ? attribute.onChange() : () => {}"
+                    :ng-change="typeof question.onChange === 'function' ? question.onChange() : () => {}"
                     :required="true"
-                    :question="attribute"
+                    :question="question"
                     :locales="legalFrameworkDocument.header.languages"
-                    :name="attribute.key"
+                    :name="question.key"
                     binding-type="term[]"
                     class="ps-1"
                   />
@@ -156,7 +156,7 @@
               <!-- SubQuestion -->
               <div class="open-box">
                 <ng
-                  v-for="subQuestion in attribute.questions"
+                  v-for="subQuestion in question.questions"
                   :key="subQuestion.key"
                   v-vue-ng:km-control-group
                   :name="subQuestion.key"
@@ -184,7 +184,7 @@
             class="col-xs-12"
           >
             <document-legend
-              :title="attribute.title"
+              :title="question.title"
             />
           </div>
         </div>
@@ -194,7 +194,7 @@
 </template>
 <script setup lang="ts">
 import { inject, shallowRef, onMounted, ref, type Ref, type ModelRef, type ComponentPublicInstance } from 'vue'
-import { legalFrameworkOverviewAttributes } from '~/app-data/abs/legal-framework-overview'
+import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
 import documentLegend from '~/components/common/document-legend.vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js'
 // @ts-expect-error importing js file
@@ -231,17 +231,23 @@ const jurisdictionImplementationCaption = ref(`<div class="national-jurisdiction
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const countries: Ref<Option[]> = ref([])
 const jurisdictions: Ref<Option[]> = ref([])
-const documentAttributes: Ref<Array<Question | Legend>> = ref(getTransformedDocumentAttributes())
+const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOverviewQuestions(t)
+  .map((question) => {
+    if (!isQuestion(question)) { return question }
+    return Object.assign(question, { onChange: () => enableOrDisableQuestions(question) })
+  }))
+
 const jurisdictionCaption = shallowRef<ComponentPublicInstance>()
 
 onMounted(async () => {
   documentAttributes.value
-    .forEach(attribute => enableOrDisableQuestions(attribute))
+    .forEach(question => enableOrDisableQuestions(question))
 
   const jurisdictionsFetch = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.CP_JURISDICTIONS)
   jurisdictions.value = jurisdictionsFetch.map((j: Option) => ({ title: lstring(j.title, locale), value: j.name, type: j.type, identifier: j.identifier }))
 
-  countries.value = await fetchCountries()
+  const countryTerms = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES)
+  countries.value = countryTerms.map((country: Option) => Object.assign(country, { __value: lstring(country.title, locale) }))
 
   const { government } = useUser()
   userHasGovernment.value = government !== undefined && government !== null
@@ -252,6 +258,10 @@ angularGetCleanDocument({
 })
 
 // Methods
+
+/**
+* Allow parent Angular component to get the document data from then form to pass the data to the recview and submit page.
+*/
 function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFrameworkDocument | undefined {
   // TODO: Determine what needs to be done here.
   const lDocument = doc ?? legalFrameworkDocument.value
@@ -264,19 +274,28 @@ function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFramew
   return sanitizeDocument(lDocument)
 }
 
+/**
+* Validate if document attribute types is a question to prevent accessing undefined attributes.
+*/
 function isQuestion (value: Question | Legend): value is Question {
   return value.type !== 'legend'
 }
 
-function isQuestionDisabled (attribute: Question): boolean {
-  if (attribute.enable === undefined) { return false }
-  return !attribute.enable
+/**
+* Determine if the question is disabled based on the questions enabled property.
+*/
+function isQuestionDisabled (question: Question): boolean {
+  if (question.enable === undefined) { return false }
+  return !question.enable
 }
 
-function enableOrDisableQuestions (attribute: Question | Legend): Question | Legend {
-  if (!isQuestion(attribute)) { return attribute }
-  if (!Array.isArray(attribute.validations)) { return attribute }
-  attribute.validations.forEach((validation) => {
+/**
+* Set each questions enable property based on validations data from the questions map.
+*/
+function enableOrDisableQuestions (question: Question | Legend): Question | Legend {
+  if (!isQuestion(question)) { return question }
+  if (!Array.isArray(question.validations)) { return question }
+  question.validations.forEach((validation) => {
     const validationQuestionIndex = documentAttributes.value.findIndex(attr => attr.key === validation.question)
 
     if (typeof legalFrameworkDocument.value !== 'object') { return }
@@ -285,25 +304,12 @@ function enableOrDisableQuestions (attribute: Question | Legend): Question | Leg
 
     if (!isQuestion(documentAttributes.value[validationQuestionIndex])) { return }
 
-    const currentValue = legalFrameworkDocument.value[attribute.key] ?? { value: '' }
+    const currentValue = legalFrameworkDocument.value[question.key] ?? { value: '' }
 
     const isEnabled = validation.values.includes(lstring(currentValue))
     documentAttributes.value[validationQuestionIndex].enable = isEnabled
   })
-  return attribute
-}
-
-function getTransformedDocumentAttributes (): Array<Question | Legend> {
-  const attributes = legalFrameworkOverviewAttributes(t)
-
-  attributes.forEach((_, index) => {
-    const { [index]: attribute } = attributes
-    if (attribute === undefined) { return }
-    if (!isQuestion(attribute)) { return }
-
-    attribute.onChange = () => enableOrDisableQuestions(attribute)
-  })
-  return attributes
+  return question
 }
 
 function setJurisdictionCaption (): undefined {
@@ -324,14 +330,9 @@ function setJurisdictionCaption (): undefined {
   nationalEl?.classList.add('inactive')
   subNationalEl?.classList.remove('inactive')
 }
-
-async function fetchCountries (): Promise<Option[]> {
-  const terms = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES)
-  return terms.map((country: Option) => Object.assign(country, { __value: lstring(country.title, locale) }))
-}
 </script>
 <style scope>
-  .document-attribute {
+  .document-question {
     position: relative;
     opacity: 1;
     background: none;
@@ -346,11 +347,11 @@ async function fetchCountries (): Promise<Option[]> {
     margin-bottom: 10px;
   }
 
-  div.row:has(+ .row > div > .document-attribute.inactive) {
+  div.row:has(+ .row > div > .document-question.inactive) {
     margin-bottom: 5px;
   }
 
-  div.row:has(> div > .document-attribute):has(+ .row > div > legend) {
+  div.row:has(> div > .document-question):has(+ .row > div > legend) {
     margin-bottom: 20px
   }
 
@@ -367,7 +368,7 @@ async function fetchCountries (): Promise<Option[]> {
     margin: 0px 0px 5px 0px;
   }
 
-  .document-attribute.inactive .form-group {
+  .document-question.inactive .form-group {
     margin: 0;
   }
 
@@ -376,20 +377,20 @@ async function fetchCountries (): Promise<Option[]> {
     background-color: rgba(0, 0, 0, .26);
   }
 
-  .document-attribute .open-box {
+  .document-question .open-box {
     grid-template-rows: 0fr;
     display: grid;
   }
 
-  .document-attribute:not(.inactive) .open-box {
+  .document-question:not(.inactive) .open-box {
     grid-template-rows: 1fr;
   }
 
-  .document-attribute:not(.inactive) .form-group > label {
+  .document-question:not(.inactive) .form-group > label {
     margin-bottom: 0.5rem;
   }
 
-  .document-attribute .open-box > div {
+  .document-question .open-box > div {
     overflow: hidden;
   }
 </style>
