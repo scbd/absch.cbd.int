@@ -239,7 +239,7 @@ const userHasGovernment = government !== undefined && government !== null
 
 // Refs
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>({ default: { jurisdiction: { identifier: '' } } })
-const countries: Ref<Option[]> = ref([])
+const countries: Ref<Option[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
 const jurisdictions: Ref<Option[]> = ref([])
 const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOverviewQuestions(t)
   .map((question) => {
