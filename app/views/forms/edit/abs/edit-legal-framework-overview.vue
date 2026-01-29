@@ -52,7 +52,7 @@
                 :mapping="genericMapping"
                 :placeholder="t('selectCountry')"
                 name="government"
-                ng-disabled="userHasGovernment"
+                :ng-disabled="userHasGovernment"
               />
             </ng>
           </div>
@@ -76,20 +76,19 @@
                 <div class="ps-1">
                   <div
                     v-for="option in jurisdictions"
-                    :key="option.value"
+                    :key="option.identifier"
                     class="radio-option"
                   >
                     <input
-                      :id="`jurisdictions-option-${option.value}`"
+                      :id="`jurisdictions-option-${option.identifier}`"
                       v-model="legalFrameworkDocument.jurisdiction"
                       type="radio"
                       :value="{ identifier: option.identifier }"
                       :name="option.value"
                       class="me-1"
-                      @change="setJurisdictionCaption"
                     >
                     <label
-                      :for="`jurisdictions-option-${option.value}`"
+                      :for="`jurisdictions-option-${option.identifier}`"
                       class="radio-inline"
                     >
                       {{ option.title }}
@@ -98,12 +97,23 @@
                 </div>
               </ng>
 
+              <label
+                class="fw-semibold mb-2"
+                :class="{ inactive: isNational }"
+              >
+                {{ t('jurisdictionImplementationNational') }}
+              </label>
+              <label
+                class="fw-semibold"
+                :class="{ inactive: !isNational }"
+              >
+                {{ t('jurisdictionImplementationSubNational') }}
+              </label>
               <ng
-                ref="jurisdictionCaption"
                 v-vue-ng:km-control-group
                 required
                 name="jurisdictionImplementation"
-                :caption="jurisdictionImplementationCaption"
+                caption=""
                 class="mb-2"
               >
                 <ng
@@ -193,7 +203,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { inject, shallowRef, onMounted, ref, type Ref, type ModelRef, type ComponentPublicInstance } from 'vue'
+import { inject, onMounted, computed, ref, type Ref, type ModelRef } from 'vue'
 import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
 import documentLegend from '~/components/common/document-legend.vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js'
@@ -223,12 +233,12 @@ Object.entries(legalFramewordOverviewT)
   .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
 const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
-const userHasGovernment = ref(true)
 
-const jurisdictionImplementationCaption = ref(`<div class="national-jurisdiction mb-2">${t('jurisdictionImplementationNational')}</div><span class="subnational-jurisdiction">${t('jurisdictionImplementationSubNational')}</span>`)
+const { government } = useUser()
+const userHasGovernment = government !== undefined && government !== null
 
 // Refs
-const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
+const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>({ default: { jurisdiction: { identifier: '' } } })
 const countries: Ref<Option[]> = ref([])
 const jurisdictions: Ref<Option[]> = ref([])
 const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOverviewQuestions(t)
@@ -237,8 +247,12 @@ const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOver
     return Object.assign(question, { onChange: () => enableOrDisableQuestions(question) })
   }))
 
-const jurisdictionCaption = shallowRef<ComponentPublicInstance>()
+// Computed
+const nationalJurisdiction = computed(() => jurisdictions.value
+  .find((jurisdiction) => jurisdiction.value === 'National / Federal'))
+const isNational = computed(() => nationalJurisdiction.value?.identifier === legalFrameworkDocument.value?.jurisdiction?.identifier)
 
+// Hooks
 onMounted(async () => {
   documentAttributes.value
     .forEach(question => enableOrDisableQuestions(question))
@@ -248,9 +262,6 @@ onMounted(async () => {
 
   const countryTerms = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES)
   countries.value = countryTerms.map((country: Option) => Object.assign(country, { __value: lstring(country.title, locale) }))
-
-  const { government } = useUser()
-  userHasGovernment.value = government !== undefined && government !== null
 })
 
 angularGetCleanDocument({
@@ -258,7 +269,6 @@ angularGetCleanDocument({
 })
 
 // Methods
-
 /**
 * Allow parent Angular component to get the document data from then form to pass the data to the recview and submit page.
 */
@@ -310,25 +320,6 @@ function enableOrDisableQuestions (question: Question | Legend): Question | Lege
     documentAttributes.value[validationQuestionIndex].enable = isEnabled
   })
   return question
-}
-
-function setJurisdictionCaption (): undefined {
-  const currentJurisidiction = jurisdictions.value
-    .find((jurisdiction) => jurisdiction.identifier === legalFrameworkDocument.value?.jurisdiction?.identifier)
-
-  if (currentJurisidiction === undefined) { return }
-
-  const isNational = currentJurisidiction.value === 'National / Federal'
-  const nationalEl = jurisdictionCaption.value?.$el.$ngElement.getElementsByClassName('national-jurisdiction')[0]
-  const subNationalEl = jurisdictionCaption.value?.$el.$ngElement.getElementsByClassName('subnational-jurisdiction')[0]
-
-  if (isNational) {
-    nationalEl?.classList.remove('inactive')
-    subNationalEl?.classList.add('inactive')
-    return
-  }
-  nationalEl?.classList.add('inactive')
-  subNationalEl?.classList.remove('inactive')
 }
 </script>
 <style scope>
