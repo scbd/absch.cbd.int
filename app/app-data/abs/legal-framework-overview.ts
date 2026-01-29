@@ -35,7 +35,7 @@ export interface Question extends AttributeMap<keyof LegalFrameworkDocument> {
 }
 export type Legend = AttributeMap<string>
 
-export function legalFrameworkOverviewAttributes (t: Translations): Array<Question | Legend> {
+export function legalFrameworkOverviewQuestions (t: Translations): Array<Question | Legend> {
   const measureOptions = [
     { value: 'true', title: t('yesAllMeasures'), type: 'lstring', caption: t('pleaseExplain') },
     { value: 'true.some', title: t('yesToSomeExtent'), type: 'lstring', caption: t('pleaseExplain') },
