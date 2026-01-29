@@ -40,6 +40,7 @@
               required
               name="government"
               :caption="t('country')"
+              bold="true"
               class="border border-1 p-2"
             >
               <ng
@@ -70,7 +71,7 @@
                 required
                 name="jurisdiction"
                 :caption="t('jurisdiction')"
-                :bold="true"
+                bold="true"
                 class="mb-2"
               >
                 <div class="ps-1">

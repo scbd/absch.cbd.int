@@ -14,10 +14,7 @@ export default ['$scope', '$controller',
       $scope
     })
 
-    $scope.header = { indentifier: '', schema: '', languages: [] }
-    $scope.title = { en: '' }
-    $scope.reviewData = { body: { header: $scope.header, title: $scope.title } }
-    $scope.documentCountries = []
+    $scope.reviewData = { body: {} }
 
     let vueCleanDocument = null
 
@@ -39,9 +36,6 @@ export default ['$scope', '$controller',
       if (vueCleanDocument) {
         const cleanDocument = vueCleanDocument?.getCleanDocument(doc)
         $scope.reviewData = { body: cleanDocument }
-        $scope.header = cleanDocument.header
-        $scope.title = cleanDocument.title
-        $scope.documentCountries = cleanDocument.countries ?? []
 
         return cleanDocument
       }

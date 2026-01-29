@@ -28,6 +28,7 @@
               <edit-legal-framework-overview
                 ng-vue="shareVueComponent"
                 v-model="reactive(document)"
+                @on-model-change="getCleanDocument"
               />
             </div> 
           </form>
