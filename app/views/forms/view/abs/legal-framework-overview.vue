@@ -23,7 +23,7 @@
             {{ t('country') }}
           </label>
           <km-value-ml
-            :value="legalFrameworkDocument?.government?.identifier ?? ''"
+            :value="government"
             :locales="legalFrameworkDocument?.header.languages ?? []"
           />
         </div>
@@ -36,7 +36,7 @@
             {{ t('jurisdiction') }}
           </label>
           <km-value-ml
-            :value="legalFrameworkDocument?.jurisdiction?.identifier ?? ''"
+            :value="jurisdiction"
             :locales="legalFrameworkDocument?.header.languages ?? []"
           />
         </div>
@@ -61,7 +61,7 @@
         :related-questions="relatedQuestions"
         :national-report-data="legalFrameworkDocument"
         :questions-map="[ { questions: reportQuestions, key: 'lfo', title: 'lfo' }]"
-        class="mt-2"
+        class="my-2"
       >
         <slot name="header" />
       </document-review>
@@ -84,14 +84,20 @@ import documentReview from '~/components/common/document-report/document-review.
 import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
 import messages from '~/app-text/views/reports/chm/marine-ebsa.json'
 // @ts-expect-error importing js file
+import ThesaurusApi from '~/api/thesaurus'
+// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
+// @ts-expect-error importing js file
+import { useAuth } from '@scbd/angular-vue/src/index.js'
 import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
+import type { LanguageCode, LString } from '~/types/languages'
+import type { ETerm } from '~/types/common/documents'
 
 const { t, mergeLocaleMessage } = useI18n({ messages })
 interface Props {
   documentInfo: { body: LegalFrameworkDocument }
-  locale: string
+  locale: LanguageCode
 }
 
 Object.entries(legalFramewordOverviewT)
@@ -104,14 +110,20 @@ const header = {
   languages: []
 }
 
+const auth = useAuth()
+const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
+
 const reportQuestions = legalFrameworkOverviewQuestions(t)
 const relatedQuestions: string[] = reportQuestions.map((question) => question.key)
 
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const docHeader = ref(header)
+const government = ref()
+const jurisdiction = ref()
 
-onMounted(() => {
+onMounted(async () => {
   const data: LegalFrameworkDocument = props.documentInfo.body
+  // Show empty lstring as default empty document value
   Object.entries(data).forEach(([key, value]) => {
     if (typeof value !== 'object' || value === null) {
       const questionMapIndex = reportQuestions.findIndex((q) => q.key === key)
@@ -120,9 +132,19 @@ onMounted(() => {
     }
   })
   legalFrameworkDocument.value = data
-  console.log('legalFrameworkDocument.value', legalFrameworkDocument.value)
+
+  government.value = await getTerm(legalFrameworkDocument.value.government)
+  jurisdiction.value = await getTerm(legalFrameworkDocument.value.jurisdiction)
 })
-</script>
+
+async function getTerm (value: ETerm | undefined): Promise<LString> {
+  const id: string | undefined = value?.identifier
+  if (id === undefined) { return { [props.locale]: '' } }
+  const request = await thesaurusApi.getTerm(id)
+  const { title } = request
+  return title
+}
+</script>jk
 <style scoped>
 .legal-framework-overview-review {
   font-size: 1.2em;
