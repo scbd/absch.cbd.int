@@ -32,7 +32,7 @@ import {
 } from 'vue'
 import KmValueMl from '~/components/common/km-value-ml.vue'
 import OptionsValue from './options-value.vue'
-import DocumentLegend from './document-legend.vue'
+import DocumentLegend from '../document-legend.vue'
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
 // @ts-expect-error importing js file
@@ -44,12 +44,13 @@ const { locale } = useI18n()
 const props = defineProps<{
   question: Question,
   label: string,
+  locales?: string[],
 }>()
 
 // Computed
 const questionComponent: ComputedRef<{ component: Component, props: QuestionProps }> = computed(() => {
   const { question: { data: { type } } } = props
-  const questionProps: QuestionProps = { value: props.question.values[0]?.value, locales: [locale.value] }
+  const questionProps: QuestionProps = { value: props.question.values[0]?.value, locales: props.locales ?? [locale.value] }
 
   switch (type) {
     case 'lstringRte':

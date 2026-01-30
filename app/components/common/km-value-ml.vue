@@ -50,7 +50,7 @@ import { lstring } from '~/services/filters/lstring'
 import type { LanguageCode, LString } from '~/types/languages'
 
 interface Props {
-  locales: string[]
+  locales: string[] | LanguageCode[]
   value: LString | number | string
   markdown?: boolean
   kmPre?: boolean
