@@ -1,4 +1,5 @@
-import type { QuestionMap, DocumentData, DocumentValue, QuestionData } from '~/types/common/document-report'
+import type { QuestionMap, DocumentData, DocumentValue } from '~/types/common/document-report'
+import type { QuestionData } from '~/types/common/documents'
 import type { LString } from '~/types/languages'
 
 /**
