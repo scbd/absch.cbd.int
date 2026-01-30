@@ -11,20 +11,6 @@ Used on the countries profile page e.g. /en/countries/BH
     id="related-information"
     class="px-4 pb-3 pt-2 bg-white"
   >
-    <slot name="header">
-      <h3 class="text-dark mb-2">
-        {{ $t('relatedInformation') }}
-        <a
-          class="text-primary"
-          type="button>?"
-          :href="nr1Url"
-        >
-          {{ $t('firstNR') }}
-        </a>
-        {{ $t('publishedOn') }}
-        {{ publishedDate }}
-      </h3>
-    </slot>
     <div class="d-flex flex-column gap-3">
       <div
         v-for="question in questions"
@@ -33,13 +19,14 @@ Used on the countries profile page e.g. /en/countries/BH
         <DocumentQuestion
           :question="question"
           :label="getQuestionLabel(question.data)"
+          :locales="locales ?? [locale]"
         />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, ref, type Ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import countryProfileT from '~/app-text/views/countries/country-profile.json'
 import editAbsNationalReportT from '~/app-text/views/forms/edit/abs/edit-abs-national-report.json'
 import editNationalReportT from '~/app-text/views/forms/edit/abs/edit-national-report-1.json'
@@ -48,25 +35,24 @@ import { getQuestionValues } from './getQuestionData'
 import DocumentQuestion from './document-question.vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-// @ts-expect-error importing js file
-import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1.js'
 import type {
-  DocumentData, QuestionMap, ReportSection, Question, CountryRecord
+  DocumentData, QuestionMap, ReportSection, Question
 } from '~/types/common/document-report'
 
+const { mergeLocaleMessage, locale } = useI18n()
 // Props
 export interface Props {
   relatedQuestions?: string[]
-  firstNationalReportRecord: CountryRecord
   nationalReportData: DocumentData
+  questionsMap: ReportSection[]
+  locales?: string[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  relatedQuestions: () => []
+  relatedQuestions: () => [],
 })
 
 // Translation Keys
-const { mergeLocaleMessage, locale } = useI18n()
 const messageGroups = [
   countryProfileT,
   editAbsNationalReportT,
@@ -80,29 +66,18 @@ messageGroups.forEach((messageGroup) => {
 // Refs
 const questions: Ref<Question[]> = ref([])
 
-// Computed
-const publishedDate = computed(() => parseDate(props.firstNationalReportRecord.docs[0]?.rec_date))
-
 onMounted(() => {
   questions.value = props.relatedQuestions
     .map((questionKey: string) => getQuestion(questionKey, props.nationalReportData))
-    .filter(doesQuestionExist)
+    // .filter(doesQuestionExist)
+  console.log('questions.value', questions.value)
+  console.log('questionsMap', props.questionsMap)
 })
-
-const nr1Url = computed(() => `/database/${props.firstNationalReportRecord.shortCode}/${props.firstNationalReportRecord.docs[0]?.uniqueIdentifier_s.toUpperCase()}`)
 
 // Methods
 
 /**
- * Parse the date to DD MMM YYYY for the NR1 published date.
- */
-function parseDate (dateString: string | undefined): string {
-  if (dateString === undefined) { return '' }
-  const date = new Date(dateString)
-  return `${date.toLocaleString(locale, { day: 'numeric' })} ${date.toLocaleString(locale, { month: 'short' })} ${date.getFullYear()}`
-}
-/**
- * Get information needed to render question from the document report (absNationalReport1)
+ * Get information needed to render question from the document report (questionMap)
  * AND the NR1 document data fetched from server
  */
 function getQuestion (questionKey: string, reportData: DocumentData): Question {
@@ -114,7 +89,7 @@ function getQuestion (questionKey: string, reportData: DocumentData): Question {
  */
 function getQuestionMap (questionKey: string): QuestionMap {
   let question: QuestionMap = { type: '', key: '', options: [], number: '-1', multiple: false }
-  absNationalReport1.forEach((section: ReportSection) => {
+  props.questionsMap.forEach((section: ReportSection) => {
     if (section.questions === undefined) { return }
     section.questions.forEach((q) => {
       if (q.key === questionKey) {
