@@ -37,15 +37,19 @@ import { sanitizeHtml } from '~/services/html.sanitize'
 import { lstring } from '~/services/filters/lstring'
 import KmValueMl from '~/components/common/km-value-ml.vue'
 import type { Question, QuestionMap } from '~/types/common/document-report'
+import type { DocumentData } from '~/types/common/documents'
 
-defineProps<{
+const props = defineProps<{
   question: Question
   locales: string[]
 }>()
 
-function displayText (answer: string | Record<string, string>, question: QuestionMap): string {
+function displayText (answer: string | Record<string, string>, question: QuestionMap<DocumentData>): string {
   if (Array.isArray(question.options) && typeof answer === 'string') {
     const option = question.options.find(option => option.value === answer)
+    if (typeof option?.title === 'object') {
+      return lstring(option.title, props.locales[0])
+    }
     return option?.title ?? answer
   }
   if (typeof answer === 'string') { return answer }
