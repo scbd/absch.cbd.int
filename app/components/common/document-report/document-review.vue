@@ -49,7 +49,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  relatedQuestions: () => [],
+  relatedQuestions: () => []
 })
 
 // Translation Keys
@@ -69,7 +69,7 @@ const questions: Ref<Question[]> = ref([])
 onMounted(() => {
   questions.value = props.relatedQuestions
     .map((questionKey: string) => getQuestion(questionKey, props.nationalReportData))
-    // .filter(doesQuestionExist)
+    .filter(doesQuestionExist)
   console.log('questions.value', questions.value)
   console.log('questionsMap', props.questionsMap)
 })

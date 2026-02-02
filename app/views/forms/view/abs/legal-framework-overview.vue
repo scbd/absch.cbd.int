@@ -14,7 +14,9 @@
           :title="t('generalInformation')"
           class="pt-3"
         />
-        <div>
+        <div
+          v-if="typeof legalFrameworkDocument?.government === 'object'"
+        >
           <label
             name="government"
             for="government"
@@ -23,11 +25,13 @@
             {{ t('country') }}
           </label>
           <km-value-ml
-            :value="government"
+            :value="government?.title"
             :locales="legalFrameworkDocument?.header.languages ?? []"
           />
         </div>
-        <div>
+        <div
+          v-if="typeof legalFrameworkDocument?.jurisdiction === 'object'"
+        >
           <label
             name="jurisdiction"
             for="jurisdiction"
@@ -36,18 +40,28 @@
             {{ t('jurisdiction') }}
           </label>
           <km-value-ml
-            :value="jurisdiction"
+            :value="jurisdiction?.title"
             :locales="legalFrameworkDocument?.header.languages ?? []"
           />
         </div>
-        <div>
+        <div
+          v-if="typeof legalFrameworkDocument?.jurisdictionImplementation === 'object'"
+        >
           <label
-            name="jurisdictionImplementation"
-            for="jurisdictionImplementation"
-            class="question-label px-0"
+            class="fw-semibold d-flex flex-column"
           >
-            <div class="fw-bold mb-1">{{ t('jurisdictionImplementationNational') }}</div>
-            <div class="fw-bold mb-1">{{ t('jurisdictionImplementationSubNational') }}</div>
+            <span
+              :class="{ inactive: !isNational }"
+              class="mb-2 me-auto"
+            >
+              {{ t('jurisdictionImplementationNational') }}
+            </span>
+            <span
+              :class="{ inactive: isNational }"
+              class="mb-1 me-auto"
+            >
+              {{ t('jurisdictionImplementationSubNational') }}
+            </span>
           </label>
           <km-value-ml
             :value="legalFrameworkDocument?.jurisdictionImplementation ?? ''"
@@ -61,7 +75,7 @@
         :related-questions="relatedQuestions"
         :national-report-data="legalFrameworkDocument"
         :questions-map="[ { questions: reportQuestions, key: 'lfo', title: 'lfo' }]"
-        class="my-2"
+        class="mt-2 mb-4"
       >
         <slot name="header" />
       </document-review>
@@ -75,7 +89,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, type ModelRef } from 'vue'
+import { onMounted, ref, computed, type ModelRef } from 'vue'
 // @ts-expect-error importing js file
 import documentDate from '~/views/forms/view/directives/document-date.vue'
 import documentLegend from '~/components/common/document-legend.vue'
@@ -91,7 +105,7 @@ import { useI18n } from 'vue-i18n'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
 import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
-import type { LanguageCode, LString } from '~/types/languages'
+import type { LanguageCode } from '~/types/languages'
 import type { ETerm } from '~/types/common/documents'
 
 const { t, mergeLocaleMessage } = useI18n({ messages })
@@ -120,31 +134,28 @@ const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = def
 const docHeader = ref(header)
 const government = ref()
 const jurisdiction = ref()
+// Computed
+const isNational = computed(() => jurisdiction.value?.name === 'National / Federal')
 
 onMounted(async () => {
   const data: LegalFrameworkDocument = props.documentInfo.body
-  // Show empty lstring as default empty document value
-  Object.entries(data).forEach(([key, value]) => {
-    if (typeof value !== 'object' || value === null) {
-      const questionMapIndex = reportQuestions.findIndex((q) => q.key === key)
-      if (reportQuestions[questionMapIndex] === undefined) { return }
-      reportQuestions[questionMapIndex].type = 'lstring'
-    }
-  })
   legalFrameworkDocument.value = data
 
   government.value = await getTerm(legalFrameworkDocument.value.government)
   jurisdiction.value = await getTerm(legalFrameworkDocument.value.jurisdiction)
 })
 
-async function getTerm (value: ETerm | undefined): Promise<LString> {
+async function getTerm (value: ETerm | undefined): Promise<ETerm> {
   const id: string | undefined = value?.identifier
-  if (id === undefined) { return { [props.locale]: '' } }
-  const request = await thesaurusApi.getTerm(id)
-  const { title } = request
-  return title
+  if (id === undefined) {
+    return {
+      title: { [props.locale]: '' },
+      identifier: ''
+    }
+  }
+  return await thesaurusApi.getTerm(id)
 }
-</script>jk
+</script>
 <style scoped>
 .legal-framework-overview-review {
   font-size: 1.2em;
