@@ -1,16 +1,16 @@
-import type { QuestionMap, DocumentData, DocumentValue } from '~/types/common/document-report'
-import type { QuestionData } from '~/types/common/documents'
+import type { QuestionMap } from '~/types/common/document-report'
+import type { QuestionData, DocumentData } from '~/types/common/documents'
 import type { LString } from '~/types/languages'
 
 /**
  * Parse question values fetched from the server into the
- * consistently typed DocumentValue[] type used to render a list of document questions.
+ * consistently typed QuestionData[] type used to render a list of document questions.
  */
-export function getQuestionValues (reportData: DocumentData, questionMap: QuestionMap): DocumentValue[] {
+export function getQuestionValues (documentData: DocumentData, questionMap: QuestionMap<DocumentData>): QuestionData[] {
   const { key: questionKey } = questionMap
-  const { [questionKey]: questionValueData } = reportData
+  const questionValueData: QuestionData | QuestionData[] | undefined | LString = documentData[questionKey]
 
-  const defaultDocumentValue: DocumentValue = {
+  const defaultQuestionData: QuestionData = {
     value: '',
     title: '',
     type: '',
@@ -19,13 +19,13 @@ export function getQuestionValues (reportData: DocumentData, questionMap: Questi
 
   if (questionMap.type === 'option') {
     // Remap the chosen option to the options title if there is one
-    const mapSelectedValues = (value: QuestionData[]): DocumentValue[] => value.map((data: QuestionData) => {
+    const mapSelectedValues = (value: QuestionData[]): QuestionData[] => value.map((data: QuestionData) => {
       if (typeof data.title === 'string') {
         const val = Object.assign({}, questionValueData, data, { value: data.title }) // include questionValueData to ensure we parse details or additionalInformation information
-        return parseToValue(val, defaultDocumentValue)
+        return parseToValue(val, defaultQuestionData)
       }
 
-      return parseToValue(data, defaultDocumentValue)
+      return parseToValue(data, defaultQuestionData)
     })
 
     if (Array.isArray(questionValueData)) {
@@ -36,26 +36,31 @@ export function getQuestionValues (reportData: DocumentData, questionMap: Questi
       .filter((option: QuestionData) => {
         const { value } = option
         const optionValue = typeof value === 'string' ? value : ''
-
-        return questionValueData?.value === optionValue
+        if (typeof questionValueData !== 'object') { return false }
+        if ('value' in questionValueData) {
+          return questionValueData.value === optionValue
+        }
+        return false
       })
     return mapSelectedValues(selectedValues)
   }
 
   if (Array.isArray(questionValueData)) {
     return questionValueData
-      .map((data: QuestionData) => parseToValue(data, defaultDocumentValue))
+      .map((data: QuestionData) => parseToValue(data, defaultQuestionData))
   }
 
-  return [parseToValue(questionValueData, defaultDocumentValue)]
+  return [parseToValue(questionValueData, defaultQuestionData)]
 }
 
 /**
  * Parse the document QuestionData fetched from the server into the hard typed DocumentData type needed to render the questions.
  */
-function parseToValue (data: QuestionData | undefined, defaultValue: DocumentValue): DocumentValue {
+function parseToValue (data: QuestionData | undefined | LString, defaultValue: QuestionData): QuestionData {
   if (data === undefined) { return defaultValue }
-  const questionData = data
+  const isQuestion = (value: QuestionData | LString): value is QuestionData => 'value' in value
+
+  const questionData: QuestionData = isQuestion(data) ? data : { value: data }
   questionData.details = parseDetails(questionData)
   return Object.assign({}, defaultValue, questionData)
 }

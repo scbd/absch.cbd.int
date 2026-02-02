@@ -65,7 +65,7 @@
           </label>
           <km-value-ml
             :value="legalFrameworkDocument?.jurisdictionImplementation ?? ''"
-            :locales="legalFrameworkDocument?.header.languages ?? []"
+            :locales="legalFrameworkDocument?.header.languages"
           />
         </div>
       </div>
@@ -73,9 +73,10 @@
       <document-review
         v-if="legalFrameworkDocument !== undefined"
         :related-questions="relatedQuestions"
-        :national-report-data="legalFrameworkDocument"
-        :questions-map="[ { questions: reportQuestions, key: 'lfo', title: 'lfo' }]"
-        class="mt-2 mb-4"
+        :document-data="legalFrameworkDocument"
+        :report-sections="reportSection"
+        :locales="legalFrameworkDocument?.header.languages"
+        class="mt-2 mb-4 px-4 bg-white d-flex flex-column gap-3"
       >
         <slot name="header" />
       </document-review>
@@ -103,10 +104,12 @@ import ThesaurusApi from '~/api/thesaurus'
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
+import countryProfileT from '~/app-text/views/countries/country-profile.json'
 import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
 import type { LanguageCode } from '~/types/languages'
 import type { ETerm } from '~/types/common/documents'
+import type { ReportSection } from '~/types/common/document-report'
 
 const { t, mergeLocaleMessage } = useI18n({ messages })
 interface Props {
@@ -114,8 +117,15 @@ interface Props {
   locale: LanguageCode
 }
 
-Object.entries(legalFramewordOverviewT)
-  .forEach(([key, value]) => mergeLocaleMessage(key, value))
+// Translation Keys
+const messageGroups = [
+  countryProfileT,
+  legalFramewordOverviewT
+]
+messageGroups.forEach((messageGroup) => {
+  Object.entries(messageGroup)
+    .forEach(([key, value]) => mergeLocaleMessage(key, value))
+})
 
 const props = defineProps<Props>()
 const header = {
@@ -129,6 +139,7 @@ const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
 
 const reportQuestions = legalFrameworkOverviewQuestions(t)
 const relatedQuestions: string[] = reportQuestions.map((question) => question.key)
+const reportSection: ReportSection[] = [{ questions: reportQuestions, key: 'lfo', title: 'lfo' }]
 
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const docHeader = ref(header)
@@ -150,7 +161,8 @@ async function getTerm (value: ETerm | undefined): Promise<ETerm> {
   if (id === undefined) {
     return {
       title: { [props.locale]: '' },
-      identifier: ''
+      identifier: '',
+      value: ''
     }
   }
   return await thesaurusApi.getTerm(id)
