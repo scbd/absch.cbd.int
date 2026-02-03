@@ -6,7 +6,6 @@
   "selectCountry": "Please select a country...",
   "generalInformation": "General Information",
   "languageToPublish": "Please select in which language(s) you wish to submit this record:",
-  "selectCountry": "Please select a country...",
   "jurisdiction": "Jurisdiction",
   "jurisdictionImplementationNational": "If you selected National above, please provide any additional information related to the implementation of the Protocol",
   "jurisdictionImplementationSubNational": "If you selected Subnational or Community above, please indicate to how the selected jurisdiction’s application differs from the national application of the of the Protocol.",
@@ -38,5 +37,6 @@
   "community":" Community",
   "geneticResources": "genetic resources",
   "no": "No",
-  "yes": "Yes"
+  "yes": "Yes",
+	"additionalInformation": "Additional Information"
 }
