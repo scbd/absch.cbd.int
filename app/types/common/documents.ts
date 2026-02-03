@@ -1,5 +1,4 @@
 import type { LanguageCode, LString } from '../languages'
-<<<<<<< HEAD
 export interface Link {
   url?: string
   language: string
@@ -7,10 +6,6 @@ export interface Link {
   icon?: string
   name?: string
   tag?: string
-=======
-export interface ETerm {
-  identifier: string
->>>>>>> 569404052 (initial setup of review page CHM-879)
 }
 
 // Document value that is fetched from the server.
@@ -36,11 +31,4 @@ export interface Header extends QuestionData {
   identifier: string,
   schema: string,
   languages: LanguageCode[]
-}
-
-export interface QuestionData {
-  value: number | string | LString | undefined | null,
-  additionalInformation?: string | LString,
-  details?: string | LString,
-  title?: string
 }
