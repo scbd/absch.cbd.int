@@ -1,13 +1,6 @@
-import type { LString, Translations, LanguageCode } from '~/types/languages'
-import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
-import type { ETerm, Header } from '~/types/common/documents'
-
-export interface Validation {
-  question: keyof LegalFrameworkDocument
-  values: Array<string | ETerm | LString | Header | Partial<Record<LanguageCode, string>>>
-  trigger: string
-  type: string
-}
+import type { Translations } from '~/types/languages'
+import type { DocumentData } from '~/types/common/documents'
+import type { QuestionMap, Validation } from '~/types/common/document-report'
 
 export interface Option {
   value: string
@@ -18,24 +11,14 @@ export interface Option {
   caption?: string
 }
 
-export interface AttributeMap<Key> {
-  options?: Option[]
-  key: Key
-  section?: string
-  type: string
-  title: string
-  multiple?: boolean
-  bold?: boolean
-}
-
-export interface Question extends AttributeMap<keyof LegalFrameworkDocument> {
+export interface Question extends QuestionMap<DocumentData> {
   validations?: Validation[]
   questions?: Question[]
   enable?: boolean
   onChange?: ()=> Question | Legend
 }
 
-export type Legend = AttributeMap<string>
+export type Legend = QuestionMap<DocumentData>
 
 export function legalFrameworkOverviewQuestions (t: Translations): Array<Question | Legend> {
   const measureOptions = [
