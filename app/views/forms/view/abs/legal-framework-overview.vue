@@ -68,21 +68,20 @@
             :locales="legalFrameworkDocument?.header.languages"
           />
         </div>
-      </div>
 
-      <document-review
-        v-if="legalFrameworkDocument !== undefined"
-        :related-questions="relatedQuestions"
-        :document-data="legalFrameworkDocument"
-        :report-sections="reportSection"
-        :locales="legalFrameworkDocument?.header.languages"
-        class="mt-2 mb-4 px-4 bg-white d-flex flex-column gap-3"
-      />
-      <div>
-        <ng
-          v-model:ng-model="docHeader.identifier"
-          v-vue-ng:view-referenced-records
+        <document-review
+          v-if="legalFrameworkDocument !== undefined"
+          :related-questions="relatedQuestions"
+          :document-data="legalFrameworkDocument"
+          :report-sections="reportSection"
+          :locales="legalFrameworkDocument?.header.languages"
         />
+        <div>
+          <ng
+            v-model:ng-model="docHeader.identifier"
+            v-vue-ng:view-referenced-records
+          />
+        </div>
       </div>
     </div>
   </div>
