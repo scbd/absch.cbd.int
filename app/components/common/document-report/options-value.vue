@@ -38,10 +38,11 @@ import { lstring } from '~/services/filters/lstring'
 import KmValueMl from '~/components/common/km-value-ml.vue'
 import type { Question, QuestionMap } from '~/types/common/document-report'
 import type { DocumentData } from '~/types/common/documents'
+import type { LanguageCode } from '~/types/languages'
 
 const props = defineProps<{
   question: Question
-  locales: string[]
+  locales: string[] | LanguageCode[]
 }>()
 
 function displayText (answer: string | Record<string, string>, question: QuestionMap<DocumentData>): string {
