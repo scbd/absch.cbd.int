@@ -99,23 +99,27 @@
               </ng>
 
               <label
-                class="fw-semibold mb-2"
-                :class="{ inactive: !isNational && isJurisdictionDefined }"
+                class="fw-semibold d-flex flex-column"
               >
-                {{ t('jurisdictionImplementationNational') }}
-              </label>
-              <label
-                class="fw-semibold"
-                :class="{ inactive: isNational && isJurisdictionDefined }"
-              >
-                {{ t('jurisdictionImplementationSubNational') }}
+                <span
+                  class="mb-2 me-auto"
+                  :class="{ inactive: !isNational && isJurisdictionDefined }"
+                >
+                  {{ t('jurisdictionImplementationNational') }}
+                </span>
+                <span
+                  class="me-auto"
+                  :class="{ inactive: isNational && isJurisdictionDefined }"
+                >
+                  {{ t('jurisdictionImplementationSubNational') }}
+                </span>
               </label>
               <ng
                 v-vue-ng:km-control-group
                 required
                 name="jurisdictionImplementation"
                 caption=""
-                class="mb-2"
+                class="mb-2 d-flex flex-column"
               >
                 <ng
                   v-model:ng-model="legalFrameworkDocument.jurisdictionImplementation"
