@@ -16,7 +16,7 @@
         }]"
         aria-describedby="basic-addon1"
       >
-        {{ lstring(value, locales[0]) }}
+        {{ lstring(value, locale) }}
       </div>
 
       <!-- HTML version -->
@@ -27,7 +27,7 @@
           'km-pre': kmPre
         }]"
         aria-describedby="basic-addon1"
-        v-html="sanitizeHtml(lstring(value, locales[0]))"
+        v-html="sanitizeHtml(lstring(value, locale))"
       />
 
       <span
