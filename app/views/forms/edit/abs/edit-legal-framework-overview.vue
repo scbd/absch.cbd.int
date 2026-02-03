@@ -244,6 +244,7 @@ const userHasGovernment = government !== undefined && government !== null
 
 // Refs
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
+
 const countries: Ref<Option[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
 const jurisdictions: Ref<Option[]> = ref([])
 const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOverviewQuestions(t)
@@ -282,10 +283,6 @@ function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFramew
   // TODO: Determine what needs to be done here.
   const lDocument = doc ?? legalFrameworkDocument.value
   if (typeof lDocument !== 'object') { return undefined }
-
-  if (lDocument.notes !== undefined) {
-    if (/^\s*$/g.test(lDocument.notes)) { lDocument.notes = undefined }
-  }
 
   return sanitizeDocument(lDocument)
 }
