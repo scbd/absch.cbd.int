@@ -1,31 +1,30 @@
+import type { DocumentData, ETerm, Header, QuestionData } from '../common/documents'
 import type { LString } from '../languages'
-import type { ETerm, Header } from '../common/documents'
 // Types
-export interface LegalFrameworkDocument {
-  notes?: string
+export interface LegalFrameworkDocument extends DocumentData {
   government?: ETerm
-  title: string | LString
+  title: QuestionData
   jurisdiction?: ETerm
   jurisdictionImplementation: LString
-  countryEstablished: string
-  geneticResources: string
-  establishedMeasure: string
-  agrMeasureForAccess: string
-  agrSubjectToPic: string
-  agrCommercialPermitRequired: string
-  agrCommercialPermitException: string
-  agrNonCommercialPermitRequired: string
-  agrNonCommercialPermitException: string
-  tkSubjectToPic: string
-  tkMeasureForAccess: string
-  tkCommercialPermitRequired: string
-  tkCommercialPermitException: string
-  tkNonCommercialPermitRequired: string
-  tkNonCommercialPermitException: string
-  article53Implemented: string
-  article55Implemented: string
+  countryEstablished: QuestionData
+  geneticResources: QuestionData
+  establishedMeasure: QuestionData
+  agrMeasureForAccess: QuestionData
+  agrSubjectToPic: QuestionData
+  agrCommercialPermitRequired: QuestionData
+  agrCommercialPermitException: QuestionData
+  agrNonCommercialPermitRequired: QuestionData
+  agrNonCommercialPermitException: QuestionData
+  tkSubjectToPic: QuestionData
+  tkMeasureForAccess: QuestionData
+  tkCommercialPermitRequired: QuestionData
+  tkCommercialPermitException: QuestionData
+  tkNonCommercialPermitRequired: QuestionData
+  tkNonCommercialPermitException: QuestionData
+  article53Implemented: QuestionData
+  article55Implemented: QuestionData
   header: Header
-  status: string
+  status: QuestionData
 }
 
 export type Inject = (arg0: { getCleanDocument: (doc: LegalFrameworkDocument)=> LegalFrameworkDocument | undefined })=> undefined
