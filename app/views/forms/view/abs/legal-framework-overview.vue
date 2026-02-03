@@ -77,9 +77,7 @@
         :report-sections="reportSection"
         :locales="legalFrameworkDocument?.header.languages"
         class="mt-2 mb-4 px-4 bg-white d-flex flex-column gap-3"
-      >
-        <slot name="header" />
-      </document-review>
+      />
       <div>
         <ng
           v-model:ng-model="docHeader.identifier"
