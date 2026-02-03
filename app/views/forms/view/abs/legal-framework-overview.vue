@@ -26,7 +26,7 @@
           </label>
           <km-value-ml
             :value="government?.title"
-            :locales="legalFrameworkDocument?.header.languages ?? []"
+            :locales="[locale]"
           />
         </div>
         <div
@@ -41,7 +41,7 @@
           </label>
           <km-value-ml
             :value="jurisdiction?.title"
-            :locales="legalFrameworkDocument?.header.languages ?? []"
+            :locales="[locale]"
           />
         </div>
         <div
@@ -65,7 +65,7 @@
           </label>
           <km-value-ml
             :value="legalFrameworkDocument?.jurisdictionImplementation ?? ''"
-            :locales="legalFrameworkDocument?.header.languages"
+            :locales="[locale]"
           />
         </div>
 
@@ -74,7 +74,7 @@
           :related-questions="relatedQuestions"
           :document-data="legalFrameworkDocument"
           :report-sections="reportSection"
-          :locales="legalFrameworkDocument?.header.languages"
+          :locales="[locale]"
         />
         <div>
           <ng
