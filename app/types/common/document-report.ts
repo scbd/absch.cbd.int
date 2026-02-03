@@ -45,7 +45,7 @@ export interface CountryRecord {
 
 export interface QuestionProps {
   value?: LString | number | string
-  locales?: LanguageCode[]
+  locales?: string[] | LanguageCode[]
   html?: boolean
   title?: string
 }

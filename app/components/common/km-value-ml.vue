@@ -16,7 +16,7 @@
         }]"
         aria-describedby="basic-addon1"
       >
-        {{ lstring(value, locales[0]) }}
+        {{ lstring(value, locale) }}
       </div>
 
       <!-- HTML version -->
@@ -27,7 +27,7 @@
           'km-pre': kmPre
         }]"
         aria-describedby="basic-addon1"
-        v-html="sanitizeHtml(lstring(value, locales[0]))"
+        v-html="sanitizeHtml(lstring(value, locale))"
       />
 
       <span
@@ -50,7 +50,7 @@ import { lstring } from '~/services/filters/lstring'
 import type { LanguageCode, LString } from '~/types/languages'
 
 interface Props {
-  locales: string[]
+  locales: string[] | LanguageCode[]
   value: LString | number | string
   markdown?: boolean
   kmPre?: boolean
