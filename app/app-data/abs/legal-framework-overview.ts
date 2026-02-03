@@ -2,15 +2,6 @@ import type { Translations } from '~/types/languages'
 import type { DocumentData } from '~/types/common/documents'
 import type { QuestionMap, Validation } from '~/types/common/document-report'
 
-export interface Option {
-  value: string
-  title: string
-  type?: string
-  name?: string
-  identifier?: string
-  caption?: string
-}
-
 export interface Question extends QuestionMap<DocumentData> {
   validations?: Validation[]
   questions?: Question[]

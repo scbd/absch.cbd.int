@@ -85,7 +85,7 @@
                       v-model="legalFrameworkDocument.jurisdiction"
                       type="radio"
                       :value="{ identifier: option.identifier }"
-                      :name="option.value"
+                      :name="lstring(option.value)"
                       class="me-1"
                     >
                     <label
@@ -227,7 +227,8 @@ import { useAuth, useUser } from '@scbd/angular-vue/src/index.js'
 import { useI18n } from 'vue-i18n'
 import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { Inject, LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
-import type { Question, Legend, Option } from '~/app-data/abs/legal-framework-overview'
+import type { Question, Legend } from '~/app-data/abs/legal-framework-overview'
+import type { ETerm } from '~/types/common/documents'
 
 // Constants
 const auth = useAuth()
@@ -245,8 +246,9 @@ const userHasGovernment = government !== undefined && government !== null
 // Refs
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 
-const countries: Ref<Option[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
-const jurisdictions: Ref<Option[]> = ref([])
+const countries: Ref<ETerm[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
+const jurisdictions: Ref<ETerm[]> = ref([])
+
 const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOverviewQuestions(t)
   .map((question) => {
     if (!isQuestion(question)) { return question }
@@ -265,10 +267,10 @@ onMounted(async () => {
     .forEach(question => enableOrDisableQuestions(question))
 
   const jurisdictionsFetch = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.CP_JURISDICTIONS)
-  jurisdictions.value = jurisdictionsFetch.map((j: Option) => ({ title: lstring(j.title, locale), value: j.name, type: j.type, identifier: j.identifier }))
+  jurisdictions.value = jurisdictionsFetch.map((j: ETerm) => ({ title: lstring(j.title, locale), value: j.name, type: j.type, identifier: j.identifier }))
 
   const countryTerms = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES)
-  countries.value = countryTerms.map((country: Option) => Object.assign(country, { __value: lstring(country.title, locale) }))
+  countries.value = countryTerms.map((country: ETerm) => Object.assign(country, { __value: lstring(country.title, locale) }))
 })
 
 angularGetCleanDocument({
