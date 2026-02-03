@@ -171,6 +171,7 @@ async function getTerm (value: ETerm | undefined): Promise<ETerm> {
 <style scoped>
 #Record.legal-framework-overview-review :deep(label) {
   font-size: 15px;
+  color: #333;
 }
 #Record .record-body :deep(legend) {
   font-size: 20px;
