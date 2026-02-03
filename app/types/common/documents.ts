@@ -1,9 +1,32 @@
-import type { LanguageCode } from '../languages'
-export interface ETerm {
-  identifier: string
+import type { LanguageCode, LString } from '../languages'
+export interface Link {
+  url?: string
+  language: string
+  target?: string
+  icon?: string
+  name?: string
+  tag?: string
 }
 
-export interface Header {
+// Document value that is fetched from the server.
+export interface QuestionData {
+  value: string | LString
+  additionalInformation?: string | LString,
+  title?: string | LString
+  type?: string
+  caption?: string
+  details?: LString | string
+  links?: Link[]
+}
+
+export type DocumentData = Record<string, QuestionData | QuestionData[] | undefined | LString>
+
+export interface ETerm extends QuestionData {
+  identifier: string
+  name?: string
+}
+
+export interface Header extends QuestionData {
   identifier: string,
   schema: string,
   languages: LanguageCode[]
