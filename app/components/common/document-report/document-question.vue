@@ -32,7 +32,7 @@ import {
 } from 'vue'
 import KmValueMl from '~/components/common/km-value-ml.vue'
 import OptionsValue from './options-value.vue'
-import DocumentLegend from './document-legend.vue'
+import DocumentLegend from '../document-legend.vue'
 // @ts-expect-error importing js file
 import { sanitizeHtml } from '~/services/html.sanitize'
 // @ts-expect-error importing js file
