@@ -1,53 +1,33 @@
 import type { LanguageCode, LString } from '../languages'
+import type { DocumentData, QuestionData, ETerm, Header } from './documents'
 
-export interface Link {
-  url?: string
-  language: string
-  target?: string
-  icon?: string
-  name?: string
-  tag?: string
-}
-
-export interface QuestionMap {
-  key: string
-  number: string
+export interface Validation {
+  question: keyof DocumentData
+  values: Array<string | ETerm | LString | Header | Partial<Record<LanguageCode, string>>>
+  trigger: string
   type: string
-  title?: string
-  options?: DocumentValue[]
-  multiple: boolean
 }
 
-export interface DocumentValue {
-  value: LString | string | number | undefined
+export interface QuestionMap<Map extends DocumentData> {
+  key: keyof Map
+  type: string
+  number?: string
   title?: string
-  type?: string
-  caption?: string
-  details?: LString
-  url?: string
-  name?: string
-  tag?: string
-  links?: Link[]
+  options?: QuestionData[]
+  multiple?: boolean
+  section?: string
+  bold?: boolean
 }
-
-export interface QuestionData {
-  value: number | string | LString | undefined | null,
-  additionalInformation?: string | LString,
-  details?: string | LString,
-  title?: string
-}
-
-export type DocumentData = Record<string, QuestionData | QuestionData[]>
 
 export interface Question {
-  values: DocumentValue[],
-  data: QuestionMap
+  values: QuestionData[],
+  data: QuestionMap<DocumentData>
 }
 
 export interface ReportSection {
   key: string
   title: string
-  questions?: Array<QuestionMap | ReportSection>
+  questions?: Array<QuestionMap<DocumentData> | ReportSection>
 }
 
 interface CountryRecordDoc {

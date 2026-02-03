@@ -1627,7 +1627,7 @@ div.recordDefault:hover {
 #Record .panel-body ul{
     padding: 0;
 }
-#Record .km-value, #related-information .km-value {
+#Record .km-value, .related-information .km-value {
     margin-bottom: 5px;
 }
 #Record .panel-heading {
@@ -1647,7 +1647,7 @@ div.recordDefault:hover {
     text-transform: uppercase;
     color: white!important;
 }
-#Record label, #related-information label {
+#Record label, .related-information label {
     margin-bottom: 0;
     font-weight: 500!important;
     color: #666;
