@@ -199,7 +199,7 @@
             class="col-xs-12"
           >
             <document-legend
-              :title="question.title"
+              :title="question.title ?? ''"
             />
           </div>
         </div>
