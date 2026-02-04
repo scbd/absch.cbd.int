@@ -37,7 +37,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
   const geneticResourcesBold = `<span class="text-focus">${t('geneticResources')}</span>`
   const traditionalKnowledgeBold = `<span class="text-focus">${t('traditionalKnowledge')}</span>`
 
-  return [
+  const questionsMap = [
     // General Information
     {
       type: 'option',
