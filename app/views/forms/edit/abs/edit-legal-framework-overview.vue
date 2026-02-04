@@ -162,6 +162,7 @@
                     :question="question"
                     :locales="legalFrameworkDocument.header.languages"
                     :name="question.key"
+                    :info-label="`${question.key}.additionalInformation`"
                     binding-type="term[]"
                     class="ps-1"
                   />
@@ -187,6 +188,7 @@
                     :question="subQuestion"
                     :locales="legalFrameworkDocument.header.languages"
                     :name="subQuestion.key"
+                    :info-label="`${subQuestion.key}.additionalInformation`"
                     binding-type="term[]"
                     class="ps-1"
                   />

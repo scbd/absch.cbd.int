@@ -49,6 +49,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     },
     {
       type: 'option',
+      number: '1',
       options: casesOptions,
       key: 'agrSubjectToPic',
       title: t('agrSubjectToPic', { geneticResources: geneticResourcesBold }),
@@ -84,12 +85,14 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     },
     {
       type: 'option',
+      number: '2',
       options: measureOptions,
       key: 'agrMeasureForAccess',
       title: t('agrMeasureForAccess', { geneticResources: geneticResourcesBold })
     },
     {
       type: 'option',
+      number: '3',
       options: yesNoOptions,
       key: 'agrCommercialPermitRequired',
       title: t('argPermitRequired', {
@@ -107,6 +110,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     },
     {
       type: 'option',
+      number: '4',
       options: yesNoOptions,
       key: 'agrNonCommercialPermitRequired',
       title: t('argPermitRequired', {
@@ -131,6 +135,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     },
     {
       type: 'option',
+      number: '5',
       options: casesOptions,
       key: 'tkSubjectToPic',
       title: t('tkSubjectToPic', { traditionalKnowledge: traditionalKnowledgeBold }),
@@ -166,12 +171,14 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     },
     {
       type: 'option',
+      number: '6',
       options: measureOptions,
       key: 'tkMeasureForAccess',
       title: t('tkMeasureForAccess', { traditionalKnowledge: traditionalKnowledgeBold })
     },
     {
       type: 'option',
+      number: '7',
       options: yesNoOptions,
       key: 'tkCommercialPermitRequired',
       title: t('tkPermitRequired', {
@@ -189,6 +196,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     },
     {
       type: 'option',
+      number: '8',
       options: yesNoOptions,
       key: 'tkNonCommercialPermitRequired',
       title: t('tkPermitRequired', {
@@ -218,6 +226,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     },
     {
       type: 'option',
+      number: '9',
       options: measureOptions,
       key: 'article53Implemented',
       title: t('article53Implemented'),
@@ -231,6 +240,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     },
     {
       type: 'option',
+      number: '10',
       options: measureOptions,
       key: 'article55Implemented',
       title: t('article55Implemented'),
