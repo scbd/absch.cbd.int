@@ -308,6 +308,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
       bold: true
     }
   ]
+  return questionsMap
 }
 
 /**
