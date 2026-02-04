@@ -22,7 +22,7 @@
             for="government"
             class="question-label px-0 "
           >
-            {{ t('country') }}
+            1. {{ t('country') }}
           </label>
           <km-value-ml
             :value="government?.title"
@@ -37,7 +37,7 @@
             for="jurisdiction"
             class="question-label px-0"
           >
-            {{ t('jurisdiction') }}
+            2. {{ t('jurisdiction') }}
           </label>
           <km-value-ml
             :value="jurisdiction?.title"
