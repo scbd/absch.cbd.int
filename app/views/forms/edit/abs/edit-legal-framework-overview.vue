@@ -39,9 +39,8 @@
               v-vue-ng:km-control-group
               required
               name="government"
-              :caption="t('country')"
-              bold="true"
-              class="border border-1 p-2"
+              :caption="`1. ${t('country')}`"
+              class="form-group--bold border border-1 p-2"
             >
               <ng
                 v-model:ng-model="legalFrameworkDocument.government"
@@ -70,9 +69,8 @@
                 v-vue-ng:km-control-group
                 required
                 name="jurisdiction"
-                :caption="t('jurisdiction')"
-                bold="true"
-                class="mb-2"
+                :caption="`2. ${t('jurisdiction')}`"
+                class="form-group--bold mb-2"
               >
                 <div class="ps-1">
                   <div
@@ -150,7 +148,7 @@
                 v-vue-ng:km-control-group
                 required
                 :name="question.key"
-                :caption="question.title"
+                :caption="`${question.number}. ${question.title}`"
                 :class="{ 'form-group--bold': question.bold }"
               >
                 <div class="open-box">
@@ -247,7 +245,6 @@ const userHasGovernment = government !== undefined && government !== null
 
 // Refs
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
-
 const countries: Ref<ETerm[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
 const jurisdictions: Ref<ETerm[]> = ref([])
 

@@ -9,6 +9,7 @@ export interface Validation {
 }
 
 export interface QuestionMap<Map extends DocumentData> {
+  validations?: Validation[]
   key: keyof Map
   type: string
   number?: string
