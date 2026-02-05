@@ -109,8 +109,8 @@
                         v-model:ng-model="legalFrameworkDocument.jurisdiction.customValue"
                         v-vue-ng:km-textbox-ml
                         :locales="legalFrameworkDocument.header.languages"
+                        :placeholder="jurisdictionNamePlaceholder"
                         name="custom-value"
-                        placeholder="Name"
                       />
                     </ng>
                   </div>
@@ -276,10 +276,14 @@ const documentAttributes: Ref<Array<DocQuestion | Legend>> = ref(legalFrameworkO
   }))
 
 // Computed
-const nationalJurisdiction = computed(() => jurisdictions.value
-  .find((jurisdiction) => jurisdiction.value === 'National / Federal'))
-const isNational = computed(() => nationalJurisdiction.value?.identifier === legalFrameworkDocument.value?.jurisdiction?.identifier)
 const isJurisdictionDefined = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier !== undefined)
+const currentJurisdiction = computed(() => jurisdictions.value
+  .find((jurisdiction) => jurisdiction.identifier === legalFrameworkDocument.value?.jurisdiction?.identifier))
+const isNational = computed(() => currentJurisdiction.value?.value === 'National / Federal' &&
+  typeof currentJurisdiction.value.value === 'string')
+const jurisdictionNamePlaceholder = computed(() => currentJurisdiction.value?.value === 'Community'
+  ? t('communityName')
+  : t('subNationalName'))
 
 // Hooks
 onMounted(async () => {
