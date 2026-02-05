@@ -26,7 +26,7 @@ Show a list of document questions and answers given a list of questions.
 <script setup lang="ts">
 import { onMounted, ref, type Ref } from 'vue'
 
-import { getQuestionValues } from './getQuestionData'
+import { getQuestionValues } from './get-question-data'
 import DocumentQuestion from './document-question.vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
