@@ -6,7 +6,7 @@
     <div
       class="record-body bg-white"
     >
-      <div class="px-4 bg-white d-flex flex-column gap-3">
+      <div class="px-4 bg-white d-flex flex-column gap-4">
         <document-date
           :document-info="documentInfo"
         />
