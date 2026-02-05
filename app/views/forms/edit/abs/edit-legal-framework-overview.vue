@@ -222,7 +222,7 @@ import ThesaurusApi from '~/api/thesaurus'
 import { lstring } from '~/services/filters/lstring'
 import { genericFilter, genericMapping } from '~/services/filters/arrays'
 // @ts-expect-error importing js file
-import { useAuth, useUser } from '@scbd/angular-vue/src/index.js'
+import { useAuth } from '@scbd/angular-vue/src/index.js'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
@@ -240,7 +240,7 @@ Object.entries(legalFramewordOverviewT)
 
 const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
 
-const { government } = useUser()
+const { government } = auth.user()
 const userHasGovernment = government !== undefined && government !== null
 
 // Refs
