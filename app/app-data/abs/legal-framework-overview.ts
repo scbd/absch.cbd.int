@@ -27,7 +27,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
   const geneticResourcesBold = `<span class="text-focus">${t('geneticResources')}</span>`
   const traditionalKnowledgeBold = `<span class="text-focus">${t('traditionalKnowledge')}</span>`
 
-  const questionsMap = [
+  return [
     // General Information
     {
       type: 'option',
@@ -310,5 +310,11 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
       ]
     }
   ]
-  return questionsMap
+}
+
+/**
+* Validate if document attribute types is a question to prevent accessing undefined attributes.
+*/
+export function isQuestion (value: DocQuestion | Legend): value is DocQuestion {
+  return value.type !== 'legend'
 }
