@@ -93,7 +93,7 @@ import documentDate from '~/views/forms/view/directives/document-date.vue'
 import documentLegend from '~/components/common/document-legend.vue'
 import kmValueMl from '~/components/common/km-value-ml.vue'
 import documentReview from '~/components/common/document-report/document-review.vue'
-import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
+import { legalFrameworkOverviewQuestions, isQuestion, type Legend, type DocQuestion } from '~/app-data/abs/legal-framework-overview'
 import messages from '~/app-text/views/reports/chm/marine-ebsa.json'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
@@ -135,6 +135,14 @@ const auth = useAuth()
 const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
 
 const reportQuestions = legalFrameworkOverviewQuestions(t)
+  .reduce((acc: Array<DocQuestion | Legend>, question) => {
+    acc.push(question)
+
+    if (!isQuestion(question)) { return acc }
+    if (!Array.isArray(question.questions)) { return acc }
+    return [...acc, ...question.questions]
+  }, [])
+console.log('reportQuestions', reportQuestions)
 const relatedQuestions: string[] = reportQuestions.map((question) => question.key)
 const reportSection: ReportSection[] = [{ questions: reportQuestions, key: 'lfo', title: 'lfo' }]
 
@@ -164,6 +172,7 @@ async function getTerm (value: ETerm | undefined): Promise<ETerm> {
   }
   return await thesaurusApi.getTerm(id)
 }
+
 </script>
 <style scoped>
 #Record.legal-framework-overview-review :deep(label) {
