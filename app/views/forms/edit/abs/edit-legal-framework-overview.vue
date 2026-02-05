@@ -76,22 +76,43 @@
                   <div
                     v-for="option in jurisdictions"
                     :key="option.identifier"
-                    class="radio-option"
+                    class="d-flex flex-column"
                   >
-                    <input
-                      :id="`jurisdictions-option-${option.identifier}`"
-                      v-model="legalFrameworkDocument.jurisdiction"
-                      type="radio"
-                      :value="{ identifier: option.identifier }"
-                      :name="lstring(option.value)"
-                      class="me-1"
+                    <div
+                      class="radio-option"
                     >
-                    <label
-                      :for="`jurisdictions-option-${option.identifier}`"
-                      class="radio-inline"
+                      <input
+                        :id="`jurisdictions-option-${option.identifier}`"
+                        v-model="legalFrameworkDocument.jurisdiction"
+                        type="radio"
+                        :value="{ identifier: option.identifier }"
+                        :name="lstring(option.value)"
+                        class="me-1"
+                      >
+                      <label
+                        :for="`jurisdictions-option-${option.identifier}`"
+                        class="radio-inline"
+                      >
+                        {{ option.title }}
+                      </label>
+                    </div>
+                    <ng
+                      v-if="!isNational && option.identifier === legalFrameworkDocument.jurisdiction?.identifier"
+                      v-vue-ng:km-control-group
+                      :caption="t('jurisdictionCustomValue')"
+                      required="true"
+                      name="jurisdiction.customValue"
+                      class="ms-3 my-1 hidden-label d-flex flex-column"
                     >
-                      {{ option.title }}
-                    </label>
+                      <ng
+                        id="jurisdiction-custom-value"
+                        v-model:ng-model="legalFrameworkDocument.jurisdiction.customValue"
+                        v-vue-ng:km-textbox-ml
+                        :locales="legalFrameworkDocument.header.languages"
+                        name="custom-value"
+                        placeholder="Name"
+                      />
+                    </ng>
                   </div>
                 </div>
               </ng>
@@ -116,8 +137,8 @@
                 v-vue-ng:km-control-group
                 required
                 name="jurisdictionImplementation"
-                caption=""
-                class="mb-2 d-flex flex-column"
+                :caption="t('jurisdictionImplementation')"
+                class="mb-2 d-flex flex-column hidden-label"
               >
                 <ng
                   v-model:ng-model="legalFrameworkDocument.jurisdictionImplementation"
@@ -380,5 +401,9 @@ function enableOrDisableQuestions (question: DocQuestion | Legend): DocQuestion 
 
   .document-question .open-box > div {
     overflow: hidden;
+  }
+
+  .hidden-label label {
+    visibility: collapse;
   }
 </style>

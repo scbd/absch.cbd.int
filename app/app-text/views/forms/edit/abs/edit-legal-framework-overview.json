@@ -1,6 +1,7 @@
 {
   "country": "Country",
-  "article5_3": "Article 5.3",
+  "jurisdictionImplementation": "Jurisdiction implementation",
+  "jurisdictionCustomValue": "Jurisdiction name",
   "article5_5": "Article 5.5",
   "title": "Title",
   "selectCountry": "Please select a country...",

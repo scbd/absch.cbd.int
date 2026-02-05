@@ -38,7 +38,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
       type: 'option',
       number: '3',
       options: measureOptions,
-      mandatory: true,
+      mandatory: false,
       key: 'establishedMeasure',
       title: t('establishedMeasure', { establishedMeasuresInclude: `<br/><span class="text-focus">${t('establishedMeasuresInclude')}</span>` })
     },

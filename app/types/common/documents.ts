@@ -24,6 +24,7 @@ export type DocumentData = Record<string, QuestionData | QuestionData[] | undefi
 export interface ETerm extends QuestionData {
   identifier: string
   name?: string
+  customValue?: string
 }
 
 export interface Header extends QuestionData {
