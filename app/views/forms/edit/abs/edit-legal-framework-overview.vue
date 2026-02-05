@@ -152,7 +152,7 @@
 
         <!-- Dynamic Questions -->
         <div
-          v-for="question in documentAttributes"
+          v-for="question in documentQuestions"
           :key="question.key"
           class="row"
         >
@@ -268,7 +268,7 @@ const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = def
 const countries: Ref<ETerm[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
 const jurisdictions: Ref<ETerm[]> = ref([])
 
-const documentAttributes: Ref<Array<DocQuestion | Legend>> = ref(legalFrameworkOverviewQuestions(t)
+const documentQuestions: Ref<Array<DocQuestion | Legend>> = ref(legalFrameworkOverviewQuestions(t)
   .map((question) => {
     if (!isQuestion(question)) { return question }
     return Object.assign(question, { onChange: () => enableOrDisableQuestions(question) })
@@ -286,7 +286,7 @@ const jurisdictionNamePlaceholder = computed(() => currentJurisdiction.value?.va
 
 // Hooks
 onMounted(async () => {
-  documentAttributes.value
+  documentQuestions.value
     .forEach(question => enableOrDisableQuestions(question))
 
   const jurisdictionsFetch = await thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.CP_JURISDICTIONS)
@@ -327,18 +327,18 @@ function enableOrDisableQuestions (question: DocQuestion | Legend): DocQuestion 
   if (!isQuestion(question)) { return question }
   if (!Array.isArray(question.validations)) { return question }
   question.validations.forEach((validation) => {
-    const validationQuestionIndex = documentAttributes.value.findIndex(attr => attr.key === validation.question)
+    const validationQuestionIndex = documentQuestions.value.findIndex(attr => attr.key === validation.question)
 
     if (typeof legalFrameworkDocument.value !== 'object') { return }
 
-    if (typeof documentAttributes.value[validationQuestionIndex] !== 'object') { return }
+    if (typeof documentQuestions.value[validationQuestionIndex] !== 'object') { return }
 
-    if (!isQuestion(documentAttributes.value[validationQuestionIndex])) { return }
+    if (!isQuestion(documentQuestions.value[validationQuestionIndex])) { return }
 
     const currentValue = legalFrameworkDocument.value[question.key] ?? { value: '' }
 
     const isEnabled = validation.values.includes(lstring(currentValue))
-    documentAttributes.value[validationQuestionIndex].enable = isEnabled
+    documentQuestions.value[validationQuestionIndex].enable = isEnabled
   })
   return question
 }
