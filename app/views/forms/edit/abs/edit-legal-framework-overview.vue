@@ -27,7 +27,6 @@
                 v-vue-ng:km-form-languages
                 multiple
                 required
-                html
               />
             </ng>
           </div>
