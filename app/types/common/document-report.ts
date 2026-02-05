@@ -18,6 +18,7 @@ export interface QuestionMap<Map extends DocumentData> {
   multiple?: boolean
   section?: string
   bold?: boolean
+  mandatory?: boolean
 }
 
 export interface Question {

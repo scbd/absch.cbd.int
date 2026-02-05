@@ -2,16 +2,16 @@ import type { Translations } from '~/types/languages'
 import type { DocumentData } from '~/types/common/documents'
 import type { QuestionMap, Validation } from '~/types/common/document-report'
 
-export interface Question extends QuestionMap<DocumentData> {
+export interface DocQuestion extends QuestionMap<DocumentData> {
   validations?: Validation[]
-  questions?: Question[]
+  questions?: DocQuestion[]
   enable?: boolean
-  onChange?: ()=> Question | Legend
+  onChange?: ()=> DocQuestion | Legend
 }
 
 export type Legend = QuestionMap<DocumentData>
 
-export function legalFrameworkOverviewQuestions (t: Translations): Array<Question | Legend> {
+export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQuestion | Legend> {
   const measureOptions = [
     { value: 'true', title: t('yesAllMeasures'), type: 'lstring', caption: t('pleaseExplain') },
     { value: 'true.some', title: t('yesToSomeExtent'), type: 'lstring', caption: t('pleaseExplain') },
@@ -38,6 +38,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
       type: 'option',
       number: '3',
       options: measureOptions,
+      mandatory: true,
       key: 'establishedMeasure',
       title: t('establishedMeasure', { establishedMeasuresInclude: `<br/><span class="text-focus">${t('establishedMeasuresInclude')}</span>` })
     },
@@ -52,6 +53,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
       type: 'option',
       number: '4',
       options: casesOptions,
+      mandatory: true,
       key: 'agrSubjectToPic',
       title: t('agrSubjectToPic', { geneticResources: geneticResourcesBold }),
       validations: [
@@ -87,6 +89,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '5',
+      mandatory: false,
       options: measureOptions,
       key: 'agrMeasureForAccess',
       title: t('agrMeasureForAccess', { geneticResources: geneticResourcesBold })
@@ -94,6 +97,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '6',
+      mandatory: false,
       options: yesNoOptions,
       key: 'agrCommercialPermitRequired',
       title: t('argPermitRequired', {
@@ -103,6 +107,8 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
       questions: [
         {
           type: 'option',
+          number: '6.1',
+          mandatory: false,
           options: yesNoOptions,
           key: 'agrCommercialPermitException',
           title: t('anyExceptions')
@@ -112,6 +118,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '7',
+      mandatory: false,
       options: yesNoOptions,
       key: 'agrNonCommercialPermitRequired',
       title: t('argPermitRequired', {
@@ -121,6 +128,8 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
       questions: [
         {
           type: 'option',
+          number: '7.1',
+          mandatory: false,
           options: yesNoOptions,
           key: 'agrNonCommercialPermitException',
           title: t('anyExceptions')
@@ -137,6 +146,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '8',
+      mandatory: true,
       options: casesOptions,
       key: 'tkSubjectToPic',
       title: t('tkSubjectToPic', { traditionalKnowledge: traditionalKnowledgeBold }),
@@ -173,6 +183,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '9',
+      mandatory: false,
       options: measureOptions,
       key: 'tkMeasureForAccess',
       title: t('tkMeasureForAccess', { traditionalKnowledge: traditionalKnowledgeBold })
@@ -180,6 +191,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '10',
+      mandatory: false,
       options: yesNoOptions,
       key: 'tkCommercialPermitRequired',
       title: t('tkPermitRequired', {
@@ -189,6 +201,8 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
       questions: [
         {
           type: 'option',
+          number: '10.1',
+          mandatory: false,
           options: yesNoOptions,
           key: 'tkCommercialPermitException',
           title: t('anyExceptions')
@@ -198,6 +212,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '11',
+      mandatory: false,
       options: yesNoOptions,
       key: 'tkNonCommercialPermitRequired',
       title: t('tkPermitRequired', {
@@ -207,6 +222,8 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
       questions: [
         {
           type: 'option',
+          number: '11.1',
+          mandatory: false,
           options: yesNoOptions,
           key: 'tkNonCommercialPermitException',
           title: t('anyExceptions')
@@ -228,6 +245,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '12',
+      mandatory: false,
       options: measureOptions,
       key: 'article53Implemented',
       title: t('article53Implemented'),
@@ -242,10 +260,18 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<Questio
     {
       type: 'option',
       number: '13',
+      mandatory: false,
       options: measureOptions,
       key: 'article55Implemented',
       title: t('article55Implemented'),
       bold: true
     }
   ]
+}
+
+/**
+* Validate if document attribute types is a question to prevent accessing undefined attributes.
+*/
+export function isQuestion (value: DocQuestion | Legend): value is DocQuestion {
+  return value.type !== 'legend'
 }

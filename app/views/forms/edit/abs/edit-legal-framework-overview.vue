@@ -37,7 +37,7 @@
           <div class="col-xs-12">
             <ng
               v-vue-ng:km-control-group
-              required
+              required="true"
               name="government"
               :caption="`1. ${t('country')}`"
               class="form-group--bold border border-1 p-2"
@@ -67,7 +67,7 @@
             >
               <ng
                 v-vue-ng:km-control-group
-                required
+                required="true"
                 name="jurisdiction"
                 :caption="`2. ${t('jurisdiction')}`"
                 class="form-group--bold mb-2"
@@ -146,7 +146,7 @@
             >
               <ng
                 v-vue-ng:km-control-group
-                required
+                :required="question.mandatory"
                 :name="question.key"
                 :caption="`${question.number}. ${question.title}`"
                 :class="{ 'form-group--bold': question.bold }"
@@ -156,11 +156,11 @@
                     v-model:ng-model="legalFrameworkDocument[question.key]"
                     v-vue-ng:nr-yes-no
                     :ng-change="typeof question.onChange === 'function' ? question.onChange() : () => {}"
-                    :required="true"
                     :question="question"
                     :locales="legalFrameworkDocument.header.languages"
                     :name="question.key"
                     :info-label="`${question.key}.additionalInformation`"
+                    :required="question.mandatory"
                     binding-type="term[]"
                     class="ps-1"
                   />
@@ -174,15 +174,15 @@
                   :key="subQuestion.key"
                   v-vue-ng:km-control-group
                   :name="subQuestion.key"
-                  :caption="subQuestion.title"
+                  :caption="`${subQuestion.number}. ${subQuestion.title}`"
                   :bold="String(subQuestion.bold)"
-                  required
+                  :required="subQuestion.mandatory"
                   class="mt-3"
                 >
                   <ng
                     v-model:ng-model="legalFrameworkDocument[subQuestion.key]"
                     v-vue-ng:nr-yes-no
-                    :required="true"
+                    :required="subQuestion.mandatory"
                     :question="subQuestion"
                     :locales="legalFrameworkDocument.header.languages"
                     :name="subQuestion.key"
@@ -209,7 +209,7 @@
 </template>
 <script setup lang="ts">
 import { inject, onMounted, computed, ref, type Ref, type ModelRef } from 'vue'
-import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
+import { legalFrameworkOverviewQuestions, isQuestion } from '~/app-data/abs/legal-framework-overview'
 import documentLegend from '~/components/common/document-legend.vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js'
 // @ts-expect-error importing js file
@@ -227,7 +227,7 @@ import { useAuth, useUser } from '@scbd/angular-vue/src/index.js'
 import { useI18n } from 'vue-i18n'
 import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { Inject, LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
-import type { Question, Legend } from '~/app-data/abs/legal-framework-overview'
+import type { DocQuestion, Legend } from '~/app-data/abs/legal-framework-overview'
 import type { ETerm } from '~/types/common/documents'
 
 // Constants
@@ -248,7 +248,7 @@ const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = def
 const countries: Ref<ETerm[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
 const jurisdictions: Ref<ETerm[]> = ref([])
 
-const documentAttributes: Ref<Array<Question | Legend>> = ref(legalFrameworkOverviewQuestions(t)
+const documentAttributes: Ref<Array<DocQuestion | Legend>> = ref(legalFrameworkOverviewQuestions(t)
   .map((question) => {
     if (!isQuestion(question)) { return question }
     return Object.assign(question, { onChange: () => enableOrDisableQuestions(question) })
@@ -289,16 +289,9 @@ function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFramew
 }
 
 /**
-* Validate if document attribute types is a question to prevent accessing undefined attributes.
-*/
-function isQuestion (value: Question | Legend): value is Question {
-  return value.type !== 'legend'
-}
-
-/**
 * Determine if the question is disabled based on the questions enabled property.
 */
-function isQuestionDisabled (question: Question): boolean {
+function isQuestionDisabled (question: DocQuestion): boolean {
   if (question.enable === undefined) { return false }
   return !question.enable
 }
@@ -306,7 +299,7 @@ function isQuestionDisabled (question: Question): boolean {
 /**
 * Set each questions enable property based on validations data from the questions map.
 */
-function enableOrDisableQuestions (question: Question | Legend): Question | Legend {
+function enableOrDisableQuestions (question: DocQuestion | Legend): DocQuestion | Legend {
   if (!isQuestion(question)) { return question }
   if (!Array.isArray(question.validations)) { return question }
   question.validations.forEach((validation) => {
