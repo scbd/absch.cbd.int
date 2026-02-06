@@ -76,7 +76,25 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           trigger: 'enable'
         },
         {
+          question: 'agrCommercialPermitException',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        },
+        {
           question: 'agrNonCommercialPermitRequired',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        },
+        {
+          question: 'agrNonCommercialPermitException',
           values: [
             'true',
             'true.some'
@@ -170,7 +188,25 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           trigger: 'enable'
         },
         {
+          question: 'tkCommercialPermitException',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        },
+        {
           question: 'tkNonCommercialPermitRequired',
+          values: [
+            'true',
+            'true.some'
+          ],
+          type: '@hasValues',
+          trigger: 'enable'
+        },
+        {
+          question: 'tkNonCommercialPermitException',
           values: [
             'true',
             'true.some'

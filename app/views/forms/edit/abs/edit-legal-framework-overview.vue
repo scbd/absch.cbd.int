@@ -305,9 +305,11 @@ angularGetCleanDocument({
 * Allow parent Angular component to get the document data from then form to pass the data to the recview and submit page.
 */
 function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFrameworkDocument | undefined {
-  // TODO: Determine what needs to be done here.
-  const lDocument = doc ?? legalFrameworkDocument.value
-  if (typeof lDocument !== 'object') { return undefined }
+  const dirtyDocument = doc ?? legalFrameworkDocument.value
+
+  if (typeof dirtyDocument !== 'object') { return undefined }
+
+  const lDocument = removeDisabledValues(dirtyDocument)
 
   return sanitizeDocument(lDocument)
 }
@@ -318,6 +320,28 @@ function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFramew
 function isQuestionDisabled (question: DocQuestion): boolean {
   if (question.enable === undefined) { return false }
   return !question.enable
+}
+
+function removeDisabledValues (doc: LegalFrameworkDocument): LegalFrameworkDocument {
+  const cleanDocument = doc
+  // If value have been set in Questions that are now disabled then remove those values.
+  Object.entries(cleanDocument).forEach(([key, questionData]) => {
+    if (questionData === undefined) { return }
+
+    const questionMap = documentQuestions.value
+      .find((map) => map.key === key)
+
+    if (questionMap === undefined) { return }
+    if (!('value' in questionData)) { return }
+
+    if (!Array.isArray(questionMap.validations)) { return }
+
+    questionMap.validations.forEach((validation) => {
+      if (validation.values.includes(lstring(questionData.value))) { return }
+      cleanDocument[validation.question] = undefined
+    })
+  })
+  return cleanDocument
 }
 
 /**
