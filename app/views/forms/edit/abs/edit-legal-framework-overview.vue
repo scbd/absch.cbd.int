@@ -248,18 +248,14 @@ import type { Inject, LegalFrameworkDocument } from '~/types/components/legal-fr
 import type { DocQuestion, Legend } from '~/app-data/abs/legal-framework-overview'
 import type { ETerm } from '~/types/common/documents'
 
+const user = useAuth().user()
 // Constants
-const auth = useAuth()
 const angularGetCleanDocument: Inject = inject('getCleanDocument') ?? (() => undefined)
-
 const { t, mergeLocaleMessage, locale } = useI18n()
 Object.entries(legalFramewordOverviewT)
   .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
 const thesaurusApi = new ThesaurusApi()
-
-const { government } = auth.user()
-const userHasGovernment = government !== undefined && government !== null
 
 // Refs
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
@@ -281,6 +277,7 @@ const isNational = computed(() => currentJurisdiction.value?.value === 'National
 const jurisdictionNamePlaceholder = computed(() => currentJurisdiction.value?.value === 'Community'
   ? t('communityName')
   : t('subNationalName'))
+const userHasGovernment = computed(() => user.government !== undefined && user.government !== null)
 
 // Hooks
 onMounted(async () => {
