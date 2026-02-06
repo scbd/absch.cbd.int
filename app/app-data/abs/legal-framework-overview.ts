@@ -18,6 +18,11 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
     { value: 'false', title: t('no'), type: 'lstring', caption: t('pleaseExplain') }
   ]
 
+  const yesNoOptionsOptionalAddInfo = [
+    { value: 'true', title: t('yes'), type: 'lstring', caption: t('pleaseExplain') },
+    { value: 'false', title: t('no'), caption: t('pleaseExplain') }
+  ]
+
   const yesNoOptions = [
     { value: 'true', title: t('yes'), type: 'lstring', caption: t('pleaseExplain') },
     { value: 'false', title: t('no'), type: 'lstring', caption: t('pleaseExplain') }
@@ -127,7 +132,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '6.1',
           mandatory: false,
-          options: yesNoOptions,
+          options: yesNoOptionsOptionalAddInfo,
           key: 'agrCommercialPermitException',
           title: t('anyExceptions')
         }
@@ -148,7 +153,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '7.1',
           mandatory: false,
-          options: yesNoOptions,
+          options: yesNoOptionsOptionalAddInfo,
           key: 'agrNonCommercialPermitException',
           title: t('anyExceptions')
         }
@@ -239,7 +244,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '10.1',
           mandatory: false,
-          options: yesNoOptions,
+          options: yesNoOptionsOptionalAddInfo,
           key: 'tkCommercialPermitException',
           title: t('anyExceptions')
         }
@@ -260,7 +265,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '11.1',
           mandatory: false,
-          options: yesNoOptions,
+          options: yesNoOptionsOptionalAddInfo,
           key: 'tkNonCommercialPermitException',
           title: t('anyExceptions')
         }
