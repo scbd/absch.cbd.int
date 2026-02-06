@@ -181,7 +181,6 @@
                     :name="question.key"
                     :info-label="`${question.key}.additionalInformation`"
                     :required="question.mandatory"
-                    binding-type="term[]"
                     class="ps-1"
                   />
                 </div>
@@ -207,7 +206,6 @@
                     :locales="legalFrameworkDocument.header.languages"
                     :name="subQuestion.key"
                     :info-label="`${subQuestion.key}.additionalInformation`"
-                    binding-type="term[]"
                     class="ps-1"
                   />
                 </ng>
