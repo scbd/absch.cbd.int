@@ -194,9 +194,9 @@
                   v-vue-ng:km-control-group
                   :name="subQuestion.key"
                   :caption="`${subQuestion.number}. ${subQuestion.title}`"
-                  :bold="String(subQuestion.bold)"
                   :required="subQuestion.mandatory"
                   class="mt-3"
+                  :class="{ 'form-group--bold': question.bold }"
                 >
                   <ng
                     v-model:ng-model="legalFrameworkDocument[subQuestion.key]"
