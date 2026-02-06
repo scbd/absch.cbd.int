@@ -142,7 +142,7 @@ const reportQuestions = legalFrameworkOverviewQuestions(t)
     if (!Array.isArray(question.questions)) { return acc }
     return [...acc, ...question.questions]
   }, [])
-console.log('reportQuestions', reportQuestions)
+
 const relatedQuestions: string[] = reportQuestions.map((question) => question.key)
 const reportSection: ReportSection[] = [{ questions: reportQuestions, key: 'lfo', title: 'lfo' }]
 
