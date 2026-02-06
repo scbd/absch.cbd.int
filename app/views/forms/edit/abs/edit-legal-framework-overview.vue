@@ -256,7 +256,7 @@ const { t, mergeLocaleMessage, locale } = useI18n()
 Object.entries(legalFramewordOverviewT)
   .forEach(([key, value]) => mergeLocaleMessage(key, value))
 
-const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
+const thesaurusApi = new ThesaurusApi()
 
 const { government } = auth.user()
 const userHasGovernment = government !== undefined && government !== null
