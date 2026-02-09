@@ -106,6 +106,8 @@
     import i18n from "../../app-text/components/common/shared-links.json"; 
     import '../kb/filters';
     import { Modal, Toast } from "bootstrap";
+    import { useRealm } from '~/services/composables/realm.js';
+    import { useAuth } from "@scbd/angular-vue/src/index.js";
     export default {
         name:'mySharing',
         props: ["tokenReader"],
@@ -115,8 +117,16 @@
                 sharedLinks: [],
             }
         },
+        setup(){
+            const realm = useRealm();
+            const auth = useAuth();
+            return {
+                realm,
+                auth
+            }
+        },  
         created() {
-            this.documentShareApi = new DocumentShareApi(this.tokenReader);
+            this.documentShareApi = new DocumentShareApi({tokenReader:()=>auth.token(), realm: realm.value});
         },
         async mounted() {
             this.toast = new Toast(this.$refs.clipboardToast);

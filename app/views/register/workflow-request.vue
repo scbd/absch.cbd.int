@@ -14,7 +14,7 @@
     const route = useRoute().value;
     const realm = useRealm();
 
-    const workflowsApi = new WorkflowsApi({tokenReader:()=>auth.token()});
+    const workflowsApi = new WorkflowsApi({tokenReader:()=>auth.token(), realm: realm.value});
 
     try{
         const workflow = await workflowsApi.getWorkflow(route.params.workflowId)
