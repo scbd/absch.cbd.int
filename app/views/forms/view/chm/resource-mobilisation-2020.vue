@@ -270,7 +270,7 @@
         return  _.orderBy( document?.value?.nationalPlansData?.internationalSources, 'name');
     });
 
-   const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});    
+   const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token(), realm: realm.value});    
    const solrAPI = new SolrApi({tokenReader:()=>auth.token()});  
    const hasBaselineDocument = ref(false);
    const baselineDocument = ref({});  

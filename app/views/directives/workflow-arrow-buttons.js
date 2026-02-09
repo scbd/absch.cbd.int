@@ -65,7 +65,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
                 const realmApi            = new RealmApi({ tokenReader: () => undefined});
-                const workflowsApi        = new WorkflowsApi({ tokenReader: () => apiToken.get() });
+                const workflowsApi        = new WorkflowsApi({ tokenReader: () => apiToken.get(), realm: realm.value });
                 const environmentRealms   = await realmApi.getRealmConfigurations(realm.environment);
 
                 $scope.vueComponent = {
