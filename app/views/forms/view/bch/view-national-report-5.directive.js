@@ -25,7 +25,7 @@ import numbers from '~/app-text/common/numbers.json';
 				translationService.set('numbers', numbers);
 				$scope.nr5Data = cpbNationalReport5;	
 				$scope.$watch('document', function(){
-					$scope.isParty = $scope.document?.Q005.value=='true'?true:false;
+					$scope.isParty = $scope.document?.Q005?.value=='true'?true:false;
 				})
 			}
 		};

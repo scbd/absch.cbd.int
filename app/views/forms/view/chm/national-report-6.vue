@@ -354,10 +354,12 @@
     import { useI18n } from 'vue-i18n';    
     import { lstring } from '~/components/kb/filters';  
     import { useAuth } from "@scbd/angular-vue/src/index.js"; 
+    import { useRealm } from '~/services/composables/realm.js';
   
 
     const auth = useAuth();
-    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});    
+    const realm = useRealm();
+    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token(), realm: realm.value});    
     const { t } = useI18n({ messages });        
     const nationalTargets = ref([]); 
     const progressAssessments = ref([]);

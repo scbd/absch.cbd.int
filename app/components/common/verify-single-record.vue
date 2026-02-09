@@ -49,7 +49,7 @@
     const realm = useRealm();
     const route = useRoute().value;
     const router = useRouter();
-    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token()});
+    const kmDocumentApi = new KmDocumentApi({tokenReader:()=>auth.token(), realm: realm.value});
 
     let modal = null;
     const schemaTitle = ref('');

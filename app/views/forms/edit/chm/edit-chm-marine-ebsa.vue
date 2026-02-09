@@ -486,7 +486,7 @@
     const auth                    = useAuth();
     const gisLayer                = shallowRef([]);
     const thesaurusApi            = new ThesaurusApi({tokenReader:()=>auth.token()});
-    const kmDocumentApi           = new KmDocumentApi({tokenReader:()=>auth.token()});
+    const kmDocumentApi           = new KmDocumentApi({tokenReader:()=>auth.token(), realm: realm.value});
     const solrApi                 = new SolrApi({tokenReader:()=>auth.token()});
     const isReady                 = ref(false);
 
