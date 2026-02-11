@@ -124,11 +124,15 @@ const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
 
 const reportQuestions = legalFrameworkOverviewQuestions(t)
   .reduce((acc: Array<DocQuestion | Legend>, question) => {
-    acc.push(question)
+    const q = setCaptionToAdditonalInfo(question)
 
-    if (!isQuestion(question)) { return acc }
-    if (!Array.isArray(question.questions)) { return acc }
-    return [...acc, ...question.questions]
+    acc.push(q)
+
+    if (!isQuestion(q)) { return acc }
+
+    if (!Array.isArray(q.questions)) { return acc }
+    q.questions.map(subQuestion => setCaptionToAdditonalInfo(subQuestion))
+    return [...acc, ...q.questions]
   }, [])
 
 const relatedQuestions: string[] = reportQuestions.map((question) => question.key)
@@ -160,7 +164,12 @@ async function getTerm (value: ETerm | undefined): Promise<ETerm> {
   }
   return await thesaurusApi.getTerm(id)
 }
-
+function setCaptionToAdditonalInfo (question: DocQuestion): DocQuestion {
+  const q = question
+  if (!Array.isArray(q.options)) { return q }
+  q.options = q.options.map((option) => Object.assign(option, { caption: t('additionalInformation') }))
+  return q
+}
 </script>
 <style scoped>
 #Record.legal-framework-overview-review :deep(label) {

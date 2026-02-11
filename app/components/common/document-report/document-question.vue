@@ -15,12 +15,11 @@
       :is="questionComponent.component"
       v-bind="questionComponent.props"
     />
-
     <div
       v-if="question.values[0]?.details !== undefined"
       class="additional-information mt-1"
     >
-      <label> {{ t('additionalInformation') }} </label>
+      <label> {{ question.values[0].caption ?? t('additionalInformation') }} </label>
       <KmValueMl
         :value="question.values[0]?.details"
         :locales="definedLocales"
