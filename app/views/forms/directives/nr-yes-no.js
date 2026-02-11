@@ -14,14 +14,18 @@ import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
                 question:'=',
                 ngDisabledFn: '&ngDisabled',
                 required: "@",
-                locales: "="
+                locales: "=",
+                infoLabel: "@"
             },
             link: function($scope, $element, $attr, ngModelController) {
                 translationService.set('nrYesNoT', nrYesNoT);
                 $scope.answer = {}
+
+                if (typeof $scope.infoLabel !== 'string') {
+                  $scope.infoLabel = `question${$scope.question.key}_additionalInformation`
+                }
                 
                 $scope.updateAnswer = function(){
-                    
                     var additionalInformation = $scope.answer.additionalInformation;
                     var value = $scope.question.options[$scope.answer.value].value;
 
