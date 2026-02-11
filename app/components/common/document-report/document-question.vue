@@ -17,7 +17,7 @@
     />
 
     <div v-if="question.values[0]?.details !== undefined">
-      <label> {{ $t('additionalInformation') }} </label>
+      <label> {{ t('additionalInformation') }} </label>
       <KmValueMl
         :value="question.values[0]?.details"
         :locales="definedLocales"
@@ -37,10 +37,11 @@ import DocumentLegend from '../document-legend.vue'
 import { sanitizeHtml } from '~/services/html.sanitize'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
+import messages from '~/app-text/components/common/document-question.json'
 import type { Question, QuestionProps } from '~/types/common/document-report'
 import type { LanguageCode } from '~/types/languages'
 
-const { locale } = useI18n()
+const { t, locale } = useI18n({ messages })
 
 const props = defineProps<{
   question: Question,
