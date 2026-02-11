@@ -51,7 +51,7 @@ export default ['$scope', '$controller',
         .find(key => JSON.stringify(newValue[key]) !== JSON.stringify(oldValue[key]) && key !== 'header')
 
       $scope.validationReport.errors = $scope.validationReport.errors
-        .filter((error) => error.property !== updatedKey)
+        .filter((error) => !error.property.includes(updatedKey))
     }, true)
 
     $scope.setDocument()
