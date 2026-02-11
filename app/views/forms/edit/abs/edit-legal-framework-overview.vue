@@ -243,7 +243,7 @@ import { genericFilter, genericMapping } from '~/services/filters/arrays'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
+import messages from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { Inject, LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
 import type { DocQuestion, Legend } from '~/app-data/abs/legal-framework-overview'
 import type { ETerm } from '~/types/common/documents'
@@ -251,9 +251,7 @@ import type { ETerm } from '~/types/common/documents'
 const user = useAuth().user()
 // Constants
 const angularGetCleanDocument: Inject = inject('getCleanDocument') ?? (() => undefined)
-const { t, mergeLocaleMessage, locale } = useI18n()
-Object.entries(legalFramewordOverviewT)
-  .forEach(([key, value]) => mergeLocaleMessage(key, value))
+const { t, locale } = useI18n({ messages })
 
 const thesaurusApi = new ThesaurusApi()
 
