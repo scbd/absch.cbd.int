@@ -94,35 +94,23 @@ import documentLegend from '~/components/common/document-legend.vue'
 import kmValueMl from '~/components/common/km-value-ml.vue'
 import documentReview from '~/components/common/document-report/document-review.vue'
 import { legalFrameworkOverviewQuestions, isQuestion, type Legend, type DocQuestion } from '~/app-data/abs/legal-framework-overview'
-import messages from '~/app-text/views/reports/chm/marine-ebsa.json'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-import countryProfileT from '~/app-text/views/countries/country-profile.json'
-import legalFramewordOverviewT from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
+import messages from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
 import type { LanguageCode } from '~/types/languages'
 import type { ETerm } from '~/types/common/documents'
 import type { ReportSection } from '~/types/common/document-report'
 
-const { t, mergeLocaleMessage } = useI18n({ messages })
+const { t } = useI18n({ messages })
 interface Props {
   documentInfo: { body: LegalFrameworkDocument }
   locale: LanguageCode
 }
-
-// Translation Keys
-const messageGroups = [
-  countryProfileT,
-  legalFramewordOverviewT
-]
-messageGroups.forEach((messageGroup) => {
-  Object.entries(messageGroup)
-    .forEach(([key, value]) => mergeLocaleMessage(key, value))
-})
 
 const props = defineProps<Props>()
 const header = {
