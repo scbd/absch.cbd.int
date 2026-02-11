@@ -157,7 +157,7 @@
           class="row"
         >
           <div
-            v-if="isQuestion(question)"
+            v-if="'onChange' in question"
             class="col-xs-12"
           >
             <div
