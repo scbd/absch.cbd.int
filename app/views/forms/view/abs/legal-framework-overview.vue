@@ -1,58 +1,117 @@
 <template>
   <div
     id="Record"
-    class="record"
+    class="record legal-framework-overview-review"
   >
     <div
       class="record-body bg-white"
     >
-      <document-date
-        :document-info="documentInfo"
-      />
-
-      <section>
-        <legend>{{ t('generalInformation') }} </legend>
-        <div v-if="legalFrameworkDocument?.countries">
-          <label>{{ t('relatedCountries') }}</label>
-          <div class="km-value">
-            <li
-              v-for="term in legalFrameworkDocument.countries"
-              :key="term"
-            >
-              <km-term
-                :value="term"
-                :locale="locale"
-              />
-            </li>
-          </div>
-        </div>
-      </section>
-      <div>
-        <ng
-          v-model:ng-model="docHeader.identifier"
-          v-vue-ng:view-referenced-records
+      <div class="px-4 bg-white d-flex flex-column gap-4">
+        <document-date
+          :document-info="documentInfo"
         />
+        <document-legend
+          :title="t('generalInformation')"
+          class="pt-3"
+        />
+        <div
+          v-if="typeof legalFrameworkDocument?.government === 'object'"
+        >
+          <label
+            name="government"
+            for="government"
+            class="question-label px-0 "
+          >
+            1. {{ t('country') }}
+          </label>
+          <km-value-ml
+            :value="government?.title"
+            :locales="[locale]"
+          />
+        </div>
+        <div
+          v-if="typeof legalFrameworkDocument?.jurisdiction === 'object'"
+        >
+          <label
+            name="jurisdiction"
+            for="jurisdiction"
+            class="question-label px-0"
+          >
+            2. {{ t('jurisdiction') }}
+          </label>
+          <km-value-ml
+            :value="jurisdiction?.title"
+            :locales="[locale]"
+          />
+        </div>
+        <div
+          v-if="typeof legalFrameworkDocument?.jurisdictionImplementation === 'object'"
+        >
+          <label
+            class="fw-semibold d-flex flex-column"
+          >
+            <span
+              :class="{ inactive: !isNational }"
+              class="mb-2 me-auto"
+            >
+              {{ t('jurisdictionImplementationNational') }}
+            </span>
+            <span
+              :class="{ inactive: isNational }"
+              class="mb-1 me-auto"
+            >
+              {{ t('jurisdictionImplementationSubNational') }}
+            </span>
+          </label>
+          <km-value-ml
+            :value="legalFrameworkDocument?.jurisdictionImplementation ?? ''"
+            :locales="[locale]"
+          />
+        </div>
+
+        <document-review
+          v-if="legalFrameworkDocument !== undefined"
+          :related-questions="relatedQuestions"
+          :document-data="legalFrameworkDocument"
+          :report-sections="reportSection"
+          :locales="[locale]"
+        />
+        <div>
+          <ng
+            v-model:ng-model="docHeader.identifier"
+            v-vue-ng:view-referenced-records
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, type ModelRef } from 'vue'
-import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
+import { onMounted, ref, computed, type ModelRef } from 'vue'
 // @ts-expect-error importing js file
 import documentDate from '~/views/forms/view/directives/document-date.vue'
+import documentLegend from '~/components/common/document-legend.vue'
+import kmValueMl from '~/components/common/km-value-ml.vue'
+import documentReview from '~/components/common/document-report/document-review.vue'
+import { legalFrameworkOverviewQuestions, isQuestion, type Legend, type DocQuestion } from '~/app-data/abs/legal-framework-overview'
 // @ts-expect-error importing js file
-import kmTerm from '~/components/km/KmTerm.vue'
-import messages from '~/app-text/views/reports/chm/marine-ebsa.json'
+import ThesaurusApi from '~/api/thesaurus'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
+// @ts-expect-error importing js file
+import { useAuth } from '@scbd/angular-vue/src/index.js'
+import messages from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
+import type { LanguageCode } from '~/types/languages'
+import type { ETerm } from '~/types/common/documents'
+import type { ReportSection } from '~/types/common/document-report'
 
 const { t } = useI18n({ messages })
 interface Props {
   documentInfo: { body: LegalFrameworkDocument }
-  locale: string
+  locale: LanguageCode
 }
+
 const props = defineProps<Props>()
 const header = {
   identifier: '',
@@ -60,11 +119,67 @@ const header = {
   languages: []
 }
 
+const auth = useAuth()
+const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
+
+const reportQuestions = legalFrameworkOverviewQuestions(t)
+  .reduce((acc: Array<DocQuestion | Legend>, question) => {
+    const q = setCaptionToAdditonalInfo(question)
+
+    acc.push(q)
+
+    if (!isQuestion(q)) { return acc }
+
+    if (!Array.isArray(q.questions)) { return acc }
+    q.questions.map(subQuestion => setCaptionToAdditonalInfo(subQuestion))
+    return [...acc, ...q.questions]
+  }, [])
+
+const relatedQuestions: string[] = reportQuestions.map((question) => question.key)
+const reportSection: ReportSection[] = [{ questions: reportQuestions, key: 'lfo', title: 'lfo' }]
+
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const docHeader = ref(header)
+const government = ref()
+const jurisdiction = ref()
+// Computed
+const isNational = computed(() => jurisdiction.value?.name === 'National / Federal')
 
-onMounted(() => {
-  ({ documentInfo: { body: legalFrameworkDocument.value } } = props)
+onMounted(async () => {
+  const data: LegalFrameworkDocument = props.documentInfo.body
+  legalFrameworkDocument.value = data
+
+  government.value = await getTerm(legalFrameworkDocument.value.government)
+  jurisdiction.value = await getTerm(legalFrameworkDocument.value.jurisdiction)
 })
 
+async function getTerm (value: ETerm | undefined): Promise<ETerm> {
+  const id: string | undefined = value?.identifier
+  if (id === undefined) {
+    return {
+      title: { [props.locale]: '' },
+      identifier: '',
+      value: ''
+    }
+  }
+  return await thesaurusApi.getTerm(id)
+}
+function setCaptionToAdditonalInfo (question: DocQuestion): DocQuestion {
+  const q = question
+  if (!Array.isArray(q.options)) { return q }
+  q.options = q.options.map((option) => Object.assign(option, { caption: t('additionalInformation') }))
+  return q
+}
 </script>
+<style scoped>
+#Record.legal-framework-overview-review :deep(label) {
+  font-size: 15px;
+  color: #333;
+}
+#Record .record-body :deep(legend) {
+  font-size: 20px;
+}
+#Record.legal-framework-overview-review :deep(.km-value) {
+  font-size: 15px;
+}
+</style>
