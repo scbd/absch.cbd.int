@@ -56,11 +56,13 @@ app.directive('loginAccount', [function() {
                   $window.location.href = 'https://accounts.cbd.int/signup?redirect_uri='+redirect_uri;
               };
 
-              $rootScope.$on('event:auth-sessionExpired', function(evt, data){                
+              $rootScope.$on('event:auth-sessionExpired', function(evt, data){   
                   $scope.user = undefined;
                   $scope.sessionExpiredAlert = true;
-                  if($route.current.$$route.resolve.securized) //show login dialog only when the route is required signin. probably a bad hack.
+                  if($route.current.$$route.resolve.securized){ //show login dialog only when the route is required signin. probably a bad hack.
                     $('#loginDialog').modal({backdrop: "static", keyboard:false});
+                    $('#loginDialog').modal('show');
+                  }
               })
 
             }]
