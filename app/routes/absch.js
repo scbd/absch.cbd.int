@@ -17,11 +17,12 @@ const abschRouteUrls = {
   //  register_SMSR_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-measure-status')) },
    register_NDB_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-database')) },
    register_IRCC_edit                  : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absPermit')) },
+   register_LFO_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-legal-framework-overview')) },
    register_CP_edit                    : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absCheckpoint')) },
    register_PRO_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absProcedure')) },
    register_CPC_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absCheckpointCommunique')) },
    register_NR_edit                    : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-absNationalReport')) },
-   register_NR1_edit                    : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-national-report-1')) },
+   register_NR1_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-national-report-1')) },
    register_CDI_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-capacityBuildingInitiative')) },
    register_A19A20_edit                : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-modelContractualClause')) },
    register_CPP_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-communityProtocol')) },
@@ -60,6 +61,7 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/register/NDB/new',                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NDB","resolve":{ ...abschRouteUrls.register_NDB_edit,                                            "securized":securize(null,true,true)}}).
   whenAsync('/register/IRCC/new',                                 { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"IRCC","resolve":{ ...abschRouteUrls.register_IRCC_edit,                                           "securized":securize(null,true,true)}}).
   whenAsync('/register/CP/new',                                   { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"CP","resolve":{ ...abschRouteUrls.register_CP_edit,                                             "securized":securize(null,true,true)}}).
+  whenAsync('/register/LFO/new',                                 { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"LFO","resolve":{ ...abschRouteUrls.register_LFO_edit,                                           "securized":securize(null,true,true)}}).
   whenAsync('/register/PRO/new',                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"PRO","resolve":{ ...abschRouteUrls.register_PRO_edit,                                            "securized":securize(null,true,true)}}).
   whenAsync('/register/CPC/new',                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"CPC","resolve":{ ...abschRouteUrls.register_CPC_edit,                                            "securized":securize(null,true,true)}}).
   whenAsync('/register/NR/new',                                   { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NR","resolve":{ ...abschRouteUrls.register_NR_edit,                                             "securized":securize(null,true,true)}}).

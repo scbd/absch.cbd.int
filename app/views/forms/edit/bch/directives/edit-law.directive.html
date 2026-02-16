@@ -110,11 +110,11 @@
 															</h4>
 														</div>
 													</div>
-			
+		
 													<div ng-if="regionalMeasuresMapping[document.government.identifier]">
 														<div class="help-info"> {{::('editLawT.subNationalJurisdictionInfo'|$translate)}} <a href="mailto:bch@cbd.int">bch@cbd.int</a>.</div>
 														<div class="km-control-group" required name="jurisdictionScope" caption="{{::('editLawT.regionalMeasuresMapping'|$translate)}}">
-															<button type="button" class="btn btn-info" ng-bind="document.jurisdictionScope[0]|term"></button>
+															<button type="button" class="btn btn-info ml-1" ng-repeat="region in document.jurisdictionScope||[]" ng-bind="region|term"></button>
 														</div>
 													</div>
 												</div>

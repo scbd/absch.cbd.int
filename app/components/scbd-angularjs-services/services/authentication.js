@@ -33,7 +33,7 @@ import './apiUrl';
         //
         //
         //============================================================
-        function getToken() {
+        function getToken(retry) {
 
             return $q.when(authenticationFrameQ).then(function(authenticationFrame){
 
@@ -66,6 +66,16 @@ import './apiUrl';
                         $rootScope.lastLoginEmail = message.authenticationEmail;
                     //                        console.log('signin called');
                     //                    $rootScope.$broadcast('signIn', null);
+
+                }
+                else if (message.type == 'authenticationTokenUpdated') {
+                    if(message.authenticationToken)
+                        defer.resolve({ token : message.authenticationToken, expiration : message.expiration });
+                    else if(!retry) {
+                        return getToken(true);
+                    }
+                    else
+                        defer.resolve(null);
 
                 }
                 else {
@@ -149,7 +159,7 @@ import './apiUrl';
                 if(new Date(authenticationToken.expiration).getTime() < new Date().getTime()){
                     pToken = null;
                     $rootScope.$broadcast('event:auth-sessionExpired');
-                    throw 'session token expired';
+                    throw new Error('session token expired');
                 }
             }
 

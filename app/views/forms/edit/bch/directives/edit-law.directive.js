@@ -21,7 +21,8 @@ app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$fi
 				translationService.set('editLawT', editLawT);
 				$scope.ctrl = $scope;
 				$scope.regionalMeasuresMapping = {
-					"eu"    : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"
+					"eu"    : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e",
+					"ar"    : ["ar"]//Add more as they get approval
 				}
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
@@ -87,7 +88,15 @@ app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$fi
 					var document = $scope.document;					
 
 					if(document.jurisdiction.identifier == '528B1187-F1BD-4479-9FB3-ADBD9076D361' && $scope.regionalMeasuresMapping[document.government.identifier]){
-					   document.jurisdictionScope = [{"identifier":$scope.regionalMeasuresMapping[document.government.identifier]}];
+						if(Array.isArray($scope.regionalMeasuresMapping[document.government.identifier])){
+							document.jurisdictionScope = $scope.regionalMeasuresMapping[document.government.identifier]
+								.map(function(identifier){
+									return {"identifier":identifier};
+								});
+						}
+						else{
+							document.jurisdictionScope = [{"identifier":$scope.regionalMeasuresMapping[document.government.identifier]}];
+						}
 					}
 					else
 						document.jurisdictionScope = null;

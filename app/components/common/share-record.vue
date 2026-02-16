@@ -212,8 +212,8 @@
   const realm = useRealm();
   const isUserSignedIn = computed(()=> auth.user()?.isAuthenticated);
   onMounted(async () => {  
-      documentShareApi = new DocumentShareApi({tokenReader:()=>auth.token()});
-      subscriptionsApi = new SubscriptionsApi({tokenReader:()=>auth.token()});
+      documentShareApi = new DocumentShareApi({tokenReader:()=>auth.token(), realm: realm.value});
+      subscriptionsApi = new SubscriptionsApi({tokenReader:()=>auth.token(), realm: realm.value});
       modal = new Modal(shareModal.value);
       toast = new Toast(clipboardToast.value);
   });

@@ -4,6 +4,7 @@ import $ from 'jquery';
 import _ from 'lodash';
 import template from 'text!./km-select.html';
 import '~/components/scbd-angularjs-services/main';
+import kmSelectT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-select.json'
   //============================================================
   //
   //
@@ -31,7 +32,6 @@ import '~/components/scbd-angularjs-services/main';
         // ,locale: '@?'
       },
       link: function($scope, $element, $attrs, ngModelController) {
-       
         $scope.hasOtherSource = $attrs.showOthers!=undefined;
         $scope.identifier = null;
         $scope.rootItems = null;
@@ -50,9 +50,9 @@ import '~/components/scbd-angularjs-services/main';
         $scope.$watch('items', $scope.load);
 
         $scope.$watch('binding', function(newBinding) {
-          
+
           if (newBinding)
-            $scope.autoInit().then($scope.load);          
+            $scope.autoInit().then($scope.load);
         });
 
         if ($scope.watchItems)
@@ -75,10 +75,10 @@ import '~/components/scbd-angularjs-services/main';
               var oNames = _.map($scope.getTitles(), function(o) {
                 return o;
               });
-          
+
               if (!oNames || !oNames.length)
                 return null;
-          
+
               return "<ul><li style=\"width:500px;\">" + oNames.join("</li>\n<li>") + "</li></ul>";
             }
           });
@@ -129,16 +129,17 @@ import '~/components/scbd-angularjs-services/main';
 
           $scope.binding = oBindings;
           ngModelController.$setViewValue($scope.binding, 'change');
-          
+
         };
 
       },
-      controller: ["$scope", "$q", "$filter", "$timeout", "locale", function($scope, $q, $filter, $timeout, locale) {
-
+    controller: ["$scope", "$q", "$filter", "translationService", "$timeout", "locale",
+      function($scope, $q, $filter, translationService, $timeout, locale) {
         var revisionRegex =  /@([0-9]{1,3})/;
-        
+
         $scope.currentLocale = locale;
 
+        translationService.set('kmSelectT', kmSelectT)
 
         $scope.api = {
           unSelectItem: onUnSelectItem,
@@ -238,7 +239,7 @@ import '~/components/scbd-angularjs-services/main';
               if ($scope.allItems)
                 deferred.resolve();
               else
-                deferred.reject("Data not loaded");
+                deferred.reject(translationService.get('kmSelectT.notLoaded'));
             });
           } else {
             $scope.isInit = true;
@@ -267,26 +268,30 @@ import '~/components/scbd-angularjs-services/main';
         //
         //==============================
         $scope.getTitle = function(maxCount, truncate) {
-          if ($scope.__loading)
-            return "Loading...";
+          if ($scope.__loading) {
+            return `${translationService.get('kmSelectT.loading')}...`
+          }
 
-          if (maxCount === undefined || maxCount === null)
+          if (maxCount === undefined || maxCount === null) {
             maxCount = -1;
+          }
 
           var oNames = $scope.getTitles();
 
           if (truncate) {
             oNames = _.map(oNames, function(name) {
-              return $filter('truncate')(name, 60, '...');
+              return $filter('truncate')(name, 60, '...')
             });
           }
 
-          if (oNames.length === 0)
-            return $scope.placeholder || "Nothing selected...";
-          else if (maxCount < 0 || oNames.length <= maxCount)
-            return oNames.join(', ');
+          if (oNames.length === 0) {
+            return $scope.placeholder || translationService.get('kmSelectT.nothingToSelected')
+          } else if (maxCount < 0 || oNames.length <= maxCount) {
+            return oNames.join(', ')
+          }
 
-          return "" + oNames.length + " of " + getAllItems().length + " selected";
+          return `${oNames.length} ${translationService.get('kmSelectT.of')} ${getAllItems().length}
+            ${translationService.get('kmSelectT.selected')}`;
         };
 
         //==============================
@@ -325,7 +330,7 @@ import '~/components/scbd-angularjs-services/main';
         //==============================
         // in tree order /deep first
         //==============================
-        $scope.getSelectedItems = function() {  
+        $scope.getSelectedItems = function() {
           return _.filter(getAllItems(), { selected: true });
         };
 
@@ -348,8 +353,9 @@ import '~/components/scbd-angularjs-services/main';
             if (!_.isArray(oBinding) && (_.isString(oBinding) || _.isObject(oBinding)))
             oBinding = [oBinding];
 
-          if (!_.isArray(oBinding))
-            throw "Value must be array";
+          if (!_.isArray(oBinding)) {
+            throw translationService.get('kmSelectT.mustBeArray');
+          }
 
           oBinding = _.map(oBinding, function(item) {
             return _.isString(item) ? {
@@ -366,7 +372,7 @@ import '~/components/scbd-angularjs-services/main';
           });
         };
 
-        
+
 
         //==============================
         //
@@ -384,8 +390,12 @@ import '~/components/scbd-angularjs-services/main';
             return;
           }
 
-          if (error.status == 404) $scope.error = "Items not found";
-          else $scope.error = error.data || "unknown error";
+          if (error.status == 404) {
+            $scope.error = translationService.get('kmSelectT.itemsNotFound');
+            return
+          } 
+
+          $scope.error = error.data || translationService.get('kmSelectT.unknownError');
         };
 
         //==============================
@@ -401,8 +411,8 @@ import '~/components/scbd-angularjs-services/main';
         $scope.clearSelection = function(identifier) {
           var items = _.union(($scope.secondarySource||[]), ($scope.allItems||[]));
           if (!identifier) {
-            _.forEach(items, function(item) { 
-              item.selected = false; 
+            _.forEach(items, function(item) {
+              item.selected = false;
             });
           } else {
             var item = _.find(items, { identifier: identifier });
@@ -453,12 +463,12 @@ import '~/components/scbd-angularjs-services/main';
             var title = $filter('lstring')(item.title, $scope.currentLocale)
             if(!title)
               title = $filter('lstring')(item.name, $scope.currentLocale)
-                        
+
             if($scope.filterType == 'startsWith')
               return _.startsWith(title.toLowerCase(), $scope.filterText.toLowerCase());
 
             return _.includes(title.toLowerCase(), $scope.filterText.toLowerCase())
-            
+
           }
           return true;
         }
@@ -502,4 +512,3 @@ import '~/components/scbd-angularjs-services/main';
       }]
     };
   });
-

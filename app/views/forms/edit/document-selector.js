@@ -338,7 +338,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                     params.$filter = query;
 
             
-                    const kmDocumentApi = new KmDocumentApi({ tokenReader: () => apiToken.get() });
+                    const kmDocumentApi = new KmDocumentApi({ tokenReader: () => apiToken.get(), realm: realm.value });
                     const result = await kmDocumentApi.queryDocuments(params);
                     
                     const pendingDocuments = result?.Items?.length ? result.Items : [];

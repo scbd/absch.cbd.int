@@ -65,7 +65,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
                 const realmApi            = new RealmApi({ tokenReader: () => undefined});
-                const workflowsApi        = new WorkflowsApi({ tokenReader: () => apiToken.get() });
+                const workflowsApi        = new WorkflowsApi({ tokenReader: () => apiToken.get(), realm: realm.value });
                 const environmentRealms   = await realmApi.getRealmConfigurations(realm.environment);
 
                 $scope.vueComponent = {
@@ -640,10 +640,17 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 
                         $('#divShowError').show('slow');
 
-                        if(data.error && data.error.data && (data.error.data.Message||data.error.data.message))
+                        if(data?.error?.data && (data.error.data.Message||data.error.data.message))
                             $scope.errorMessage += data.error.data.Message||data.error.data.message;
-                        else if(data.error && data.error.data)
-                            $scope.errorMessage += data.error.data;
+                        else if(data?.error?.status == 401){
+                            //if there is 401 here it means the token has expired and probably the user left the page open for too long
+                            $scope.errorMessage += 'Your session has expired, you are not authorized to perform this action';
+                            $rootScope.$broadcast('event:auth-sessionExpired');
+                        }
+                        else if(data?.error?.data)
+                            $scope.errorMessage += JSON.stringify(data.error.data);
+                        else if(data?.error)
+                            $scope.errorMessage += data.error;  
 
                         if(!$scope.validationReport)
                             $scope.validationReport = {};
