@@ -624,19 +624,30 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     $(".step" + tab).prevAll().addClass('active');
 
                 }
+                $scope.getHeaderColor = function(schemaName) {
+                    const schema	 = realm.schemas[schemaName];
+                    const defaultColor = 'bg-darkgrey';
+                    if(schema?.type == 'national') 	return 'bg-blue';
+                    if(schema?.type == 'reference') return 'bg-orange';
+                    if(schema?.type == 'scbd') 		return defaultColor;		
+                    return defaultColor
+                }
 
-                $scope.onPdfClick = async function () {                    
+                $scope.onPdfClick = async function () { 
                     $scope.generatingPdf = true;
                     if($scope.tab != "review"){
                         $scope.blockText = translationService.get('workflowButtonsT.preparingPdfPreview');
                         $scope.switchTab("review");
                         await sleep(5000);
                     }
-                    
-                    $scope.blockText = translationService.get('workflowButtonsT.generatingPdf');
+
+                    safeApply(()=>{
+                        $scope.generatedOn = new Date();
+                        $scope.blockText = translationService.get('workflowButtonsT.generatingPdf');
+                    });
                     let fileName    = `${realm.uIdPrefix}-${$filter("urlSchemaShortName")($scope.documentType)}-draft-${formatDate(new Date(), 'DDMMYYYYHHMM')}`;
                     await pdfThis("#pdfSection", { downloadFileName: fileName, base:true, baseUrl: realm.baseURL, captchaToken: $scope.captchaToken });
-                    $scope.$apply(()=>{
+                    safeApply(()=>{
                         $scope.generatingPdf = false;
                         $scope.blockText = undefined;
                     });
@@ -690,7 +701,9 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 				//====================
 				//
                 //====================
-                
+                function safeApply(fn) {
+                    ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
+                }
                 function openUnAuthorizedDialog(){
                     ngDialog.open({
                         template: 'dialogUnauthorise',

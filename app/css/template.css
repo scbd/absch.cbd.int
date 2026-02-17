@@ -1923,6 +1923,10 @@ legend+ .help-info {
         position: relative;
         top: 240px;
     }
+    .draft-document-status-pdf{
+        position: relative;
+        top: 20px;
+    }
     .record-Options-div{
         top:210px;
     }
