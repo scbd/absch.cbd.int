@@ -14,6 +14,16 @@ import cbdAddNewViewArticle from '~/components/common/cbd-add-new-view-article.v
 import documentDebugInfo from '~/components/km/document-debug-info.vue';
 import RealmApi from '~/api/realms';
 import WorkflowsApi from '~/api/workflows';
+import printHeaderTemplate from 'text!../forms/view/print-header.html';
+import printFooterTemplate from 'text!../forms/view/print-footer.html';
+import { sleep } from '~/services/composables/utils.js';
+import { pdfThis } from '~/services/pdf-this';
+import { formatDate } from '~/components/kb/filters';
+
+app.run(function($templateCache){
+	$templateCache.put('view-print-header.html', printHeaderTemplate)
+	$templateCache.put('view-print-footer.html', printFooterTemplate)
+});
 
 const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
@@ -61,6 +71,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                 var saveDraftVersionTimer;
                 var previousDraftVersion;
                 $scope.isBch = realm.is('BCH');
+                $scope.realm = realm;
                 //BOOTSTRAP Dialog handling
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
@@ -610,6 +621,35 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                     $(".step" + tab).prevAll().addClass('active');
 
                 }
+                $scope.getHeaderColor = function(schemaName) {
+                    const schema	 = realm.schemas[schemaName];
+                    const defaultColor = 'bg-darkgrey';
+                    if(schema?.type == 'national') 	return 'bg-blue';
+                    if(schema?.type == 'reference') return 'bg-orange';
+                    if(schema?.type == 'scbd') 		return defaultColor;		
+                    return defaultColor
+                }
+
+                $scope.onPdfClick = async function () { 
+                    $scope.generatingPdf = true;
+                    if($scope.tab != "review"){
+                        $scope.blockText = translationService.get('workflowButtonsT.preparingPdfPreview');
+                        $scope.switchTab("review");
+                        await sleep(5000);
+                    }
+
+                    safeApply(()=>{
+                        $scope.generatedOn = new Date();
+                        $scope.blockText = translationService.get('workflowButtonsT.generatingPdf');
+                    });
+                    let fileName    = `${realm.uIdPrefix}-${$filter("urlSchemaShortName")($scope.documentType)}-draft-${formatDate(new Date(), 'DDMMYYYYHHMM')}`;
+                    await pdfThis("#pdfSection", { downloadFileName: fileName, base:true, baseUrl: realm.baseURL, captchaToken: $scope.captchaToken });
+                    safeApply(()=>{
+                        $scope.generatingPdf = false;
+                        $scope.blockText = undefined;
+                    });
+                };
+
                 $scope.onReviewLanguageChange = function(lang){
                     $scope.selectedLanguage=lang;
                     $scope.onReviewLanguageChangeFn({lang:lang})
@@ -658,7 +698,9 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
 				//====================
 				//
                 //====================
-                
+                function safeApply(fn) {
+                    ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
+                }
                 function openUnAuthorizedDialog(){
                     ngDialog.open({
                         template: 'dialogUnauthorise',

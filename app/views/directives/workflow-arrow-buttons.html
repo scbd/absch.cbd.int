@@ -139,7 +139,7 @@
             width: 50% !important;
         }
     </style>
-    <span block-region activate="loading" ng-if="loading" update-parent-position="true" dynamic-text="blockText"
+    <span block-region activate="loading||generatingPdf" ng-if="loading||generatingPdf" update-parent-position="true" dynamic-text="blockText"
         block-text="Processing..."></span>
 
     <div class="workflow-arrows mb-3">
@@ -261,6 +261,23 @@
         </div>
         <div ng-transclude="reviewForm"></div>
     </div>
+    <div class="d-none">
+        <div id="pdfSection" class="mt-5">   
+            <div id="printContentHeader" ng-include="'view-print-header.html'"></div>
+            <div class="d-flex" ng-class="getHeaderColor(documentType)">
+                <span class=" color-white text-uppercase p-2">
+                    <span ng-bind="documentType|schemaName"></span>
+                    <span>(<span ng-bind="(documentType|schemaShortName)"></span>)</span>
+                </span>  
+            </div> 
+            <div class="float-end pe-3 draft-document-status-pdf">
+                <span class="hidden-xs">{{::('workflowButtonsT.documentStatus'|$translate)}}</span> <span class="badge bg-warning">Draft</span>
+                <span class="hidden-xs">{{::('workflowButtonsT.generatedOn'|$translate)}}</span> <span class="date badge bg-secondary" ng-bind="generatedOn | formatDateWithTime"></span>
+            </div>
+            <div ng-transclude="reviewForm"></div>      
+            <div id="printContentFooter" ng-include="'view-print-footer.html'"></div>
+        </div>
+    </div>
     <br />
     <div class="workflow-tabs">
         <ng-include onload="workflowScope=workflowScope;" src="'template/workflow-arrows'"></ng-include>
@@ -351,9 +368,19 @@
                         ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                             <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                             {{::('workflowButtonsT.saveDraft'|$translate)}}</button>
+
                             <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" class="pt-0" 
                             class="btn btn-sm" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
-                            identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
+                            identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"
+                            allow-sharing="true" allow-pdf="false"></document-sharing>
+
+                            <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="onPdfClick()"
+                            title="{{::('workflowButtonsT.pdf'|$translate)}}" ng-if="documentShare.workingDocumentID">
+                                <i ng-if="generatingPdf" class="fa fa-spinner fa-spin"></i>
+                                <i ng-if="!generatingPdf" class="fa fa-file-pdf-o"></i>
+                                <span class="d-none d-sm-inline-block">{{::('workflowButtonsT.pdf'|$translate)}}</span>    
+                            </button>
+                            
                             <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" 
                             class="btn btn-secondary text-white" id="close_button" ng-if="!isDialog">
                                     <i class="bi bi-x-circle-fill"></i> <span class="hidden-xs"></span> 
@@ -440,4 +467,5 @@
         </div>
     </script>
     <joyride ng-if="tourOn"></joyride>
+    
 </div>
