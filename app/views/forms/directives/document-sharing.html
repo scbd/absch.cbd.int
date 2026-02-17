@@ -1,11 +1,11 @@
 ﻿<div class="document-sharing">
     <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="shareDocument()"
-    title="Share">
+    title="Share" ng-if="allowSharing">
         <i class="fa fa-paper-plane"></i>
         <span class="d-none d-sm-inline-block">{{::('documentSharingT.share'|$translate)}}</span>
     </button>
     <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="getPdf()"
-    title="PDF">
+    title="PDF" ng-if="allowPdf">
         <i class="fa fa-file-pdf-o"></i>
         <span class="d-none d-sm-inline-block">PDF</span>    
     </button>
