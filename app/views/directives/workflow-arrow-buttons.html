@@ -264,7 +264,17 @@
     <div class="d-none">
         <div id="pdfSection" class="mt-5">   
             <div id="printContentHeader" ng-include="'view-print-header.html'"></div>
-            <div ng-transclude="reviewForm"></div>
+            <div class="d-flex" ng-class="getHeaderColor(documentType)">
+                <span class=" color-white text-uppercase p-2">
+                    <span ng-bind="documentType|schemaName"></span>
+                    <span>(<span ng-bind="(documentType|schemaShortName)"></span>)</span>
+                </span>  
+            </div> 
+            <div class="float-end pe-3 draft-document-status-pdf">
+                <span class="hidden-xs">{{::('workflowButtonsT.documentStatus'|$translate)}}</span> <span class="badge bg-warning">Draft</span>
+                <span class="hidden-xs">{{::('workflowButtonsT.generatedOn'|$translate)}}</span> <span class="date badge bg-secondary" ng-bind="generatedOn | formatDateWithTime"></span>
+            </div>
+            <div ng-transclude="reviewForm"></div>      
             <div id="printContentFooter" ng-include="'view-print-footer.html'"></div>
         </div>
     </div>
