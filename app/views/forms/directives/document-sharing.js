@@ -23,11 +23,13 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
             disabled		    : "=?ngDisabled",
             getLocales          : '&',
         },
-        link : function($scope, $element)
+        link : function($scope, $element, $attrs)
         {
             $scope.self = $scope;
             $scope.status   = "";
             $scope.error    = null;
+            $scope.allowSharing = $attrs.allowSharing !== 'false';
+            $scope.allowPdf = $attrs.allowPdf !== 'false';
             translationService.set('documentSharingT', documentSharingT);
 
             $scope.shareDocument = function(){

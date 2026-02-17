@@ -33,5 +33,8 @@
     "unauthorizedAccess": "Unauthorized Access",
     "warning": "Warning",
     "rights": "You do not have rights to submit information.",
-    "rightsMsg": "If you think this is an error please try reloading the page or contact the Secretariat using the ? icon at the bottom of the page"
+    "rightsMsg": "If you think this is an error please try reloading the page or contact the Secretariat using the ? icon at the bottom of the page",
+    "pdf": "PDF",
+    "preparingPdfPreview": "Preparing PDF preview...",
+    "generatingPdf": "Generating PDF..."
 }
