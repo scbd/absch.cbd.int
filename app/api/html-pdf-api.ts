@@ -2,22 +2,22 @@ import ApiBase, { tryCastToApiError } from './api-base';
 
 export default class HtmlPdfApi extends ApiBase
 {
-    constructor() {
-        super();
+    constructor(options?: any) {
+        super(options);
     }
 
     async generatePdf(html: string, downloadFileName: string, baseUrl: string, captchaToken: string) {
         try {
-            const response = await this.http.post('/api/v2017/generate-pdf', {
+            const response = await this.http.post('/api/v2017/generate-pdf/', {
                 html
             }, { 
                 params : {
                     'attachment-name' : downloadFileName,
-                    baseurl:baseUrl
+                    baseUrl
                 },
                 responseType: "blob", 
                 headers:{
-                    'x-captcha-v2-badge-token' : captchaToken
+                    'x-captcha-v2-badge-token' : captchaToken       
                 }
             })
 
