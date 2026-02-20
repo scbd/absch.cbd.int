@@ -15,6 +15,6 @@ export interface LanguageMapType {
   name: LanguageType
 }
 
-export type Translations = (arg: string, message?: { msg: string })=> string
+export type Translations = (arg: string, message?: Record<string, string>)=> string
 
 export type LString = Partial<Record<LanguageCode, string>>
