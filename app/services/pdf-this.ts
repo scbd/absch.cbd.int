@@ -150,14 +150,16 @@ function appendBody(body: HTMLElement, elements: Element[], options: PdfOptions)
 }
 
 // ---- Main API ----
-
-const htmlPdfApi = new HtmlPdfApi();
-
+// In "production" (per original logic), force API_DIRECT_URL
 const API_DIRECT_URL = "https://api-direct.cbd.int";
+const htmlPdfApi = new HtmlPdfApi({
+    prefixUrl: isProduction() ? API_DIRECT_URL : '/'
+});
+
 
 function isProduction(): boolean {
   // Preserved original logic
-  return (window.scbdApp?.accountsUrl || "").indexOf("accounts.cbddev.xyz") >= 0;
+  return (window.scbdApp?.accountsUrl || "").indexOf("accounts.cbd.int") >= 0;
 }
 
 /**
@@ -337,24 +339,21 @@ export async function pdfThis(
   // Dispatch to API and download
   await sendHtmlToPdf(
     html,
-    resolved.downloadFileName
+    resolved.downloadFileName,
+    baseURL
   );
 }
 
 async function sendHtmlToPdf(
   html: string,
   downloadFileName: string,
+  baseUrl:string
 ): Promise<void> {
   try {
 
-    let apiBaseUrl = '/';
     const captchaToken = await getRecaptchaToken();
-    // In "production" (per original logic), force API_DIRECT_URL
-    if (isProduction()) {
-      apiBaseUrl = API_DIRECT_URL;
-    }
-
-    const pdfBlob: Blob = await htmlPdfApi.generatePdf(html, downloadFileName, apiBaseUrl as any, captchaToken as any);
+    
+    const pdfBlob: Blob = await htmlPdfApi.generatePdf(html, downloadFileName, baseUrl as any, captchaToken as any);
 
     // Create an object URL and trigger download
     const url = window.URL.createObjectURL(pdfBlob);

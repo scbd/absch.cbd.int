@@ -642,7 +642,7 @@ const toasterMessages = mergeTranslationKeys(toasterMessagesTranslations);
                         $scope.generatedOn = new Date();
                         $scope.blockText = translationService.get('workflowButtonsT.generatingPdf');
                     });
-                    let fileName    = `${realm.uIdPrefix}-${$filter("urlSchemaShortName")($scope.documentType)}-draft-${formatDate(new Date(), 'DDMMYYYYHHMM')}`;
+                    let fileName    = `${realm.uIdPrefix}-${$filter("urlSchemaShortName")($scope.documentType)}-draft-${formatDate(new Date(), 'DDMMYYYYHHMM')}.pdf`;
                     await pdfThis("#pdfSection", { downloadFileName: fileName, base:true, baseUrl: realm.baseURL, captchaToken: $scope.captchaToken });
                     safeApply(()=>{
                         $scope.generatingPdf = false;
