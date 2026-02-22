@@ -2,6 +2,7 @@ import reportTranslation from '../app-text/report-analyzer/report-analyzer-mappi
 import { mergeTranslationKeys } from '../services/translation-merge.js';
 import absOfflineFormats from '../app-data/abs/offline-formats.json' with { type: 'json' };
 import bchOfflineFormats from '../app-data/bch/offline-formats.json' with { type: 'json' };
+import _ from 'lodash';
 
 const reportAnalyzerMappingJson = mergeTranslationKeys(reportTranslation);
 export const analyzerMapping =
@@ -112,3 +113,42 @@ export const analyzerMapping =
         }
     ]
 }
+
+export const appendAnalyzerMappingForFrozenDataAnalysis = (appName, analyzerMapping) =>{
+    const analyzerMappingCopy = [...analyzerMapping];
+    if(appName === 'abs'){
+        const type = 'absNationalReport1FrozenFebruary282026';
+        if(!analyzerMappingCopy.find(e=>e.type == type)){
+            analyzerMappingCopy.push({
+                    "type"         : type,
+                    "title"        : reportAnalyzerMappingJson.absNR1Title + ' (frozen 28 February 2026)',
+                    "questionsUrl" : "app-data/abs/report-analyzer/absNationalReport1",
+                    "dataUrl"      : `/api/v2019/report-analyzer/${_.kebabCase(type)}`,
+                    "year"          : "2024",
+                    "deadline"      : "2026-02-28",
+                    "offlineFormats": absOfflineFormats.absNationalReport1,
+            });
+        }
+    }
+    if(appName === 'bch'){
+        const type  = 'cpbNationalReport5FrozenFebruary282026';
+        if(!analyzerMappingCopy.find(e=>e.type == type)){
+            analyzerMappingCopy.push({
+                "type"          : type,
+                "title"         :  reportAnalyzerMappingJson.bchNR5Title + ' (frozen 28 February 2026)',                               
+                "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport5",
+                "dataUrl"       : `/api/v2019/report-analyzer/${_.kebabCase(type)}`,
+                "year"          : "2024",
+                "deadline"      : "2026-02-28",
+                "compare"       : [ 
+                                    {"title": "Compare with 4th National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport5-4.json"},
+                                    {"title": "Compare with 3rd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-3.json"},
+                                    {"title": "Compare with 2nd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-2.json"}
+                                ],
+                "offlineFormats": bchOfflineFormats.cpbNationalReport5,		
+            });
+        }
+    }
+    return analyzerMappingCopy;
+}
+
