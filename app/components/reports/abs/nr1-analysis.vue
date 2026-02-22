@@ -57,6 +57,11 @@
                 Pivot (Wide)
               </button>
             </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="comparison-tab" data-bs-toggle="tab" data-bs-target="#comparison" type="button" role="tab">
+                Comparison
+              </button>
+            </li>
           </ul>
           
           <div class="tab-content pt-3">
@@ -66,7 +71,8 @@
                 <table class="table table-bordered table-hover align-middle">
                   <thead class="table-light">
                     <tr>
-                      <th v-for="key in columnKeys" :key="key" class="text-uppercase small text-muted">
+                      <th v-for="key in columnKeys" :key="key" class="text-uppercase small text-muted"
+                      :style="{ 'min-width': key.indexOf('-Info') > -1 ? '350px' : 'auto' }">
                         <span v-if="key.startsWith('Q.')" data-bs-toggle="tooltip" data-bs-placement="top" 
                         :title="questionMap.get(key)?.title || 'Additional Information'">
                           {{ formatHeaderName(key) }}
@@ -77,12 +83,53 @@
                   </thead>
                   <tbody>
                     <tr v-for="(row, idx) in tableData" :key="idx">
-                      <td v-for="key in columnKeys" :key="key">
+                      <td v-for="key in columnKeys" :key="key" >
                         <span v-if="key === 'status'" class="badge rounded-pill"
                               :class="row[key] === 'Party' ? 'bg-success' : 'bg-secondary'">
                           {{ row[key] }}
                         </span>
                         <span v-else>{{ formatCellValue(row[key]) }}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Comparison -->
+            <div class="tab-pane fade" id="comparison" role="tabpanel" aria-labelledby="comparison-tab">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th v-for="key in comparisonColumnKeys" :key="key" class="text-uppercase small text-muted">
+                        <span v-if="key.startsWith('Q.')" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        :title="questionMap.get(key)?.title || 'Question ' + key.replace('Q.', '')">
+                          {{ key.replace('Q.', '') }}
+                        </span>
+                        <span v-else data-bs-toggle="tooltip" data-bs-placement="top" :title="formatHeaderName(key)">
+                          {{ formatHeaderName(key) }}
+                        </span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(row, idx) in tableData" :key="idx">
+                      <td v-for="key in comparisonColumnKeys" :key="key" >
+                        <span v-if="key === 'status'" class="badge rounded-pill"
+                              :class="row[key] === 'Party' ? 'bg-success' : 'bg-secondary'"
+                              data-bs-toggle="tooltip" data-bs-placement="top" :title="`Country Status: ${row[key]}`">
+                          {{ row[key] }}
+                        </span>
+                        <span v-else-if="key.startsWith('Q.')">
+                          <span :class="getComparisonCell(row, key).class"
+                                data-bs-toggle="tooltip" data-bs-placement="top" :title="getComparisonCell(row, key).tooltip">
+                            {{ getComparisonCell(row, key).text }}
+                          </span>
+                        </span>
+                        <span v-else :title="formatCellValue(row[key])" data-bs-toggle="tooltip" data-bs-placement="top">
+                          {{ formatCellValue(row[key]) }}
+                        </span>
                       </td>
                     </tr>
                   </tbody>
@@ -125,6 +172,9 @@ import { lstring } from '~/components/kb/filters';
 import nr1Translation from '~/app-text/views/forms/edit/abs/edit-national-report-1.json' with {type:'json'};
 import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1.js';
 import { mergeTranslationKeys } from '~/services/translation-merge.js';
+import { useRealm } from '~/services/composables/realm.js';
+
+const realm = useRealm();
 const nr1T = mergeTranslationKeys(nr1Translation);
 
 const { locale } = useI18n();
@@ -157,11 +207,11 @@ interface TableRow {
 }
 
 /* ---------------------------- Constants -------------------------- */
-const API_BASE      = 'https://absch.cbddev.xyz/api/v2019/report-analyzer/abs-national-report-1';
-const COUNTRIES_API = 'https://api.cbd.int/api/v2013/countries';
-const REGIONAL_API  = 'https://api.cbd.int/api/v2013/thesaurus/domains/E6566232-EE63-4C7B-AF8B-46A26CC295A5/terms?relations';
-const PIVOT_API     = 'https://absch.cbddev.xyz/api/v2013/index/select';
-const REALM_CONFIG  = 'https://api.cbd.int/api/v2018/realm-configurations/absch.cbd.int';
+const REPORT_ANALYZER_API = `${window.scbdApp.apiUrl}/api/v2019/report-analyzer/abs-national-report-1`;
+const COUNTRIES_API = `${window.scbdApp.apiUrl}/api/v2013/countries`;
+const REGIONAL_API  = `${window.scbdApp.apiUrl}/api/v2013/thesaurus/domains/E6566232-EE63-4C7B-AF8B-46A26CC295A5/terms?relations`;
+const PIVOT_API     = `${window.scbdApp.apiUrl}/api/v2013/index/select`;
+const REALM_CONFIG  = `${window.scbdApp.apiUrl}/api/v2018/realm-configurations/absch.cbd.int`;
 
 /* -------------------------- Reactive state ----------------------- */
 const tableData        = ref<TableRow[]>([]);
@@ -172,17 +222,43 @@ const pivotLongRows    = ref<any[]>([]);
 const loading = ref<boolean>(true);
 const error   = ref<string>('');
 const questionMap = new Map<string, any>();
-
+const rawValuesMap = new Map<string, any>();
 
 let flatted:any[] = [];
 /* --------------------------- Computed ---------------------------- */
-// union of keys across rows so we don’t lose late columns
 const columnKeys = computed(() => {
   const keys = new Set<string>();
-  for (const row of tableData.value) Object.keys(row).forEach(k => keys.add(k));
+  for (const row of tableData.value) {
+    Object.keys(row).forEach(k => keys.add(k));
+  }
   const preferred = ['country','countryCode','status','regionalGroup','documentId'];
   const rest = Array.from(keys).filter(k => !preferred.includes(k));
   return [...preferred.filter(k => keys.has(k)), ...rest];
+});
+
+const comparisonColumnKeys = computed(() => {
+  const preferred = ['country', 'countryCode', 'status', 'regionalGroup', 'documentId'];
+  const baseQuestions = new Set<string>();
+  
+  for (const key of columnKeys.value) {
+    if (key.startsWith('Q.') && !key.includes('Info')) {
+      baseQuestions.add(key);
+    }
+  }
+  
+  const sortedQs = Array.from(baseQuestions).sort((a, b) => {
+    const parse = (str: string) => str.replace('Q.', '').split('.').map(Number);
+    const partsA = parse(a);
+    const partsB = parse(b);
+    for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+        const valA = partsA[i] || 0;
+        const valB = partsB[i] || 0;
+        if (valA !== valB) return valA - valB;
+    }
+    return 0;
+  });
+  
+  return [...preferred, ...sortedQs];
 });
 
 /* -------------------------- Utilities ---------------------------- */
@@ -231,6 +307,49 @@ function formatCellValue(value: any): string {
   return String(value);
 }
 
+function getComparisonCell(row: TableRow, key: string) {
+  const val = formatCellValue(row[key]);
+  
+  if (key.startsWith('Q.') && !key.includes('Info')) {
+    const rawVal = rawValuesMap.get(`${row.documentId}|${key}`);
+    const pivotRow = pivotWideRows.value.find(p => p['Government'] === row.countryCode);
+    
+    // Determine the corresponding Pivot Wide column to compare against
+    let pivotColumn = '';
+    if (key === 'Q.3') pivotColumn = 'ABS National Focal Point';
+    // User can define mapping for remaining questions here, for example:
+    else if (key.startsWith('Q.4')) pivotColumn = 'Competent National Authority';
+    else if (key.startsWith('Q.5')) pivotColumn = 'Checkpoint';
+    else if (key.startsWith('Q.7')) pivotColumn = 'Legislative, Administrative or Policy Measure';
+    // else if (key.startsWith('Q.8')) pivotColumn = '';
+    else if (key.startsWith('Q.10')) pivotColumn = 'ABS Procedure';
+    else if (key.startsWith('Q.12')) pivotColumn = 'Internationally Recognized Certificates of Compliance';
+    else if (key.startsWith('Q.21')) pivotColumn = 'Checkpoint Communiqué';  
+    const count = pivotRow && pivotColumn && pivotRow[pivotColumn] ? Number(pivotRow[pivotColumn]) : 0;
+    
+    // Positive values: true, true.some. Else: false
+    const isPositive = rawVal === 'true' || rawVal === true || rawVal === 'true.some';
+    const isNegative = !isPositive; // else false
+if(row['countryCode'] == 'AT'){
+  // debugger ;
+      if(key.startsWith('Q.21') ){
+        console.log(key, row.documentId,pivotColumn, rawVal, isPositive, isNegative, count, row);
+      }
+    }
+    if (isPositive && count === 0) {
+      return { text: 'Missing form ABSCH', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: 'Missing associated form in ABSCH pivot' };
+    }
+    if (isNegative && count > 0) {
+      return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: 'Discrepancy: Answered negative but records exist in pivot' };
+    }
+    if ((isPositive && count > 0) || (isNegative && count === 0)) {
+      return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: 'Data matches with ABSCH pivot records' };
+    }
+  }
+  
+  return { text: val, class: '', tooltip: val };
+}
+
 // Flatten absNationalReport1 definitions
 function flattenQuestions(questions: any[]): any[] {
   const flattened: any[] = [];
@@ -266,7 +385,7 @@ async function getSchemaTitleMap(): Promise<Map<string,string>> {
 
 async function fetchPivotJson() {
   const body = {
-    fq: ["realm_ss:abs-dev","_state_s:public"],
+    fq: [`realm_ss:${realm.realm}`,"_state_s:public"],
     q: "NOT virtual_b:* AND schema_s:(focalPoint authority measure absMeasureStatus absProcedure absNationalModelContractualClause absPermit database absCheckpoint absCheckpointCommunique absNationalReport1 absNationalReport)",
     fl: "",
     wt: "json",
@@ -449,14 +568,14 @@ const fetchData = async () => {
         ]
       }
     };
-    const apiUrl = `${API_BASE}?f=${encodeURIComponent(JSON.stringify(fields))}&q=${encodeURIComponent(JSON.stringify(query))}&realm=abs-dev`;
+    const apiUrl = `${REPORT_ANALYZER_API}?f=${encodeURIComponent(JSON.stringify(fields))}&q=${encodeURIComponent(JSON.stringify(query))}&realm=${realm.realm}`;
 
     const reportRes = await fetch(apiUrl);
     if (!reportRes.ok) throw new Error('Failed to fetch report data');
     const reports: ReportData[] = await reportRes.json();
 
     // Map report rows -> Detail table
-    const processed: TableRow[] = reports.map((report) => {
+    const processed: TableRow[] = reports.map((report, index) => {
       const iso2 = (report.government?.identifier || '').toUpperCase();
       const country = countriesByIso.get(iso2);
 
@@ -467,6 +586,9 @@ const fetchData = async () => {
         regionalGroup: (regionalByIso.get(iso2) || []).join('; ') || 'N/A',
         documentId: report.documentId
       };
+      // if(index%2 === 0){
+      //   report.Q003.value = 'true';
+      // }
 
       // Add question columns mapped to "Q.<number>" and "Q.<number>-Info"
       Object.keys(report).forEach((key) => {
@@ -484,6 +606,7 @@ const fetchData = async () => {
           const value = (report as any)[key]?.value;
           const label = qDef.options?.find((opt: any) => opt.value === value)?.title || value;
           row[formattedNumber] = label;
+          rawValuesMap.set(`${report.documentId}|${formattedNumber}`, value);
           const infoHtml = lstring((report as any)[key]?.details, locale.value);
           row[formattedNumber + '-Info'] = stripHtmlToText(infoHtml);
         }
@@ -493,6 +616,7 @@ const fetchData = async () => {
       return row;
     });
 
+console.log(rawValuesMap)
     tableData.value = processed;
 
     // Build pivot sheets
@@ -504,15 +628,19 @@ const fetchData = async () => {
     const { rows: wideRows, headers: wideHeaders } =
       buildPivotWide(pivotRoot, countriesByIso, regionalByIso, schemaTitleMap);
 
-    pivotWideRows.value    = wideRows;
+    pivotWideRows.value    = wideRows.filter(r => tableData.value.some(tr => tr.countryCode === r['Government']));
     pivotWideHeaders.value = wideHeaders;
 
     const longRows = flattenPivotLong(pivotRoot, countriesByIso, regionalByIso, schemaTitleMap);
-    pivotLongRows.value    = longRows;
+    pivotLongRows.value    = longRows.filter(r => tableData.value.some(tr => tr.countryCode === r['Government']));
     pivotLongHeaders.value = [
       'Government','Country Name','Country Status','Regional Group',
       'Government Total','Schema','Schema Count'
     ];
+
+    nextTick(() => {
+      initTooltips();
+    });
 
   } catch (err: any) {
     error.value = err?.message || 'Failed to fetch data';
@@ -544,6 +672,59 @@ const exportToExcel = () => {
     XLSX.utils.book_append_sheet(wb, wideSheet, 'Pivot Wide');
   }
 
+  // Comparison
+  if (comparisonColumnKeys.value.length) {
+    const compData: any[] = [];
+    tableData.value.forEach(row => {
+      const rowData: any = {};
+      comparisonColumnKeys.value.forEach(key => {
+        if (key.startsWith('Q.')) {
+          rowData[key] = getComparisonCell(row, key).text;
+        } else if (key === 'status') {
+          rowData[key] = row[key];
+        } else {
+          rowData[key] = formatCellValue(row[key]);
+        }
+      });
+      compData.push(rowData);
+    });
+
+    const compSheet = XLSX.utils.json_to_sheet(compData, { header: comparisonColumnKeys.value });
+    
+    // Add styles manually
+    const range = XLSX.utils.decode_range(compSheet['!ref'] || '');
+    for (let R = range.s.r + 1; R <= range.e.r; ++R) {
+      for (let C = range.s.c; C <= range.e.c; ++C) {
+        const key = comparisonColumnKeys.value[C];
+        if (key && key.startsWith('Q.')) {
+          const row = tableData.value[R - 1];
+          if (row) {
+            const compCell = getComparisonCell(row, key);
+            const cellAddr = XLSX.utils.encode_cell({ c: C, r: R });
+            const cell = compSheet[cellAddr];
+            if (cell) {
+              let rgb = '';
+              if (compCell.class.includes('bg-success')) rgb = 'C6EFCE'; // Light Green
+              else if (compCell.class.includes('bg-danger')) rgb = 'FFC7CE'; // Light Red
+              else if (compCell.class.includes('bg-warning')) rgb = 'FFEB9C'; // Light Orange
+
+              if (rgb) {
+                cell.s = { fill: { patternType: 'solid', fgColor: { rgb } } };
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // Format headers slightly
+    const headerRow = comparisonColumnKeys.value.map(k => k.startsWith('Q.') ? k.replace('.', '') : formatHeaderName(k));
+    XLSX.utils.sheet_add_aoa(compSheet, [headerRow], { origin: 'A1' });
+
+    compSheet['!cols'] = comparisonColumnKeys.value.map(h => ({ wch: Math.max(16, h.length + 2) }));
+    XLSX.utils.book_append_sheet(wb, compSheet, 'Comparison');
+  }
+
   const fileName = `abs-national-reports-${new Date().toISOString().split('T')[0]}.xlsx`;
   XLSX.writeFile(wb, fileName);
 };
@@ -554,12 +735,28 @@ onMounted(() => {
     fetchData(); 
 
     nextTick(() => {
-     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-        Array.from(tooltipTriggerList).forEach(tooltipTriggerEl => new Tooltip(tooltipTriggerEl, {
-            boundary: document.body
-        }));
+      initTooltips();
+      
+      // Reinitialize tooltips when tabs change
+      const tabElements = document.querySelectorAll('button[data-bs-toggle="tab"]');
+      tabElements.forEach(elm => {
+        elm.addEventListener('shown.bs.tab', () => {
+          setTimeout(initTooltips, 50); // Small timeout to ensure tab is visible before binding sizes
+        });
+      });
     });
 });
+
+function initTooltips() {
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  Array.from(tooltipTriggerList).forEach(tooltipTriggerEl => {
+    // avoid re-initializing if it already exists
+    const instance = Tooltip.getInstance(tooltipTriggerEl);
+    if (!instance) {
+      new Tooltip(tooltipTriggerEl, { boundary: document.body, trigger: 'hover', html: true });
+    }
+  });
+}
 </script>
 
 <style scoped>
