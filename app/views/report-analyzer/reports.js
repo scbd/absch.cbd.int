@@ -1,13 +1,13 @@
 ﻿import _ from 'lodash';
 import moment from 'moment';
 import '~/views/report-analyzer/directives/national-reports/questions-selector';
-import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
+import {analyzerMapping, appendAnalyzerMappingForFrozenDataAnalysis} from '~/app-data/report-analyzer-mapping';
 import reportsT from '~/app-text/views/report-analyzer/reports.json';
 import  cbdArticle  from '../../components/common/cbd-article.vue';
 
     export { default as template } from './reports.html'
-export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService','$timeout',
-    function ($scope, $location, commonjs, $q, $http, realm, translationService, $timeout) {
+export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService','$timeout', 'roleService', '$rootScope',
+    function ($scope, $location, commonjs, $q, $http, realm, translationService, $timeout, roleService, $rootScope) {
         $scope.isABS = realm.is('ABS');
         $scope.isBCH = realm.is('BCH');
         $scope.isCHM = realm.is('CHM');
@@ -15,7 +15,17 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
         translationService.set('reportsT', reportsT); 
         $scope.overview = {};
         $scope.self = $scope ; 
-            //========================================
+
+        const appName = realm.value.replace(/-.*/,'').toLowerCase();     
+        $scope.reportData = analyzerMapping[appName];
+
+        var unwatch = $rootScope.$watch('user', function (user) {
+            if(roleService.isAdministrator()){
+                $scope.reportData = appendAnalyzerMappingForFrozenDataAnalysis(appName, analyzerMapping[appName]);
+                unwatch();
+            }
+        });
+        //========================================
             //
             //
             //========================================
@@ -72,9 +82,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
             ];
             // $scope.regionMapping = {};
             
-
-            var appName = realm.value.replace(/-.*/,'').toLowerCase();            
-            $scope.reportData = analyzerMapping[appName];        
+             
             var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+region+'?relations')})
             var regionMapping = {}
             
@@ -104,7 +112,7 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
         
                 var activeReport = _.find($scope.reportData, {type:reportType});                
                 if(activeReport.dataUrl){
-                    return $http.get(activeReport.dataUrl, {  params: { q : query, f : fields }, cache : true })
+                    return $http.get(activeReport.dataUrl, {  params: { q : query, f : fields } })
                             .then(function(result){
                                 _.forEach(activeReport.regionMapping, function(region){
                                     region.count = 0;

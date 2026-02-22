@@ -2,7 +2,7 @@ import nr5Translation from '../../../app-text/views/forms/edit/bch/edit-national
 import { mergeTranslationKeys } from '../../../services/translation-merge.js';
 
 const nr5T = mergeTranslationKeys(nr5Translation);
-export const cpbNationalReport5 = [
+const questions = [
    {
             "key":"Article2",
             "title": nr5T.article2_title,
@@ -5676,3 +5676,5 @@ export const cpbNationalReport5 = [
          ]
       }
 ]
+export const cpbNationalReport5 = questions;
+export const cpbNationalReport5FrozenFebruary282026 = questions;
