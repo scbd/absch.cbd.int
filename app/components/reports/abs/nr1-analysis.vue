@@ -1,6 +1,6 @@
 <template>
   <div class="bg-light py-4">
-    <div class="container">
+    <div class="m-5">
       <div class="card border-0 shadow-sm">
 
         <!-- Header -->
@@ -9,7 +9,7 @@
             <div>
               <h1 class="h4 mb-1">ABS National Reports</h1>
               <p class="text-muted mb-0">
-                {{ loading ? 'Loading...' : `Showing ${tableData.length} report${tableData.length !== 1 ? 's' : ''}` }}
+                {{ loading ? 'Loading...' : `Showing ${reportCount} report${reportCount !== 1 ? 's' : ''}` }}
               </p>
             </div>
 
@@ -114,7 +114,7 @@
                       </th>
                     </tr>
                     <tr>
-                      <th v-for="sub in comparisonSubHeaders" :key="sub.key" class="small text-muted fw-normal border-start bg-light align-top p-2" style="min-width: 15vw;">
+                      <th v-for="sub in comparisonSubHeaders" :key="sub.key" class="small text-muted fw-normal border-start bg-light align-top p-2">
                         <span data-bs-toggle="tooltip" data-bs-placement="top" :title="questionMap.get(sub.key)?.title || 'Question ' + sub.key.replace('Q.', '')">
                           <strong class="text-dark">{{ sub.key.replace('Q.', '') }}</strong><br/>
                           <span style="font-size: 0.85em;">{{ sub.title }}</span>
@@ -297,6 +297,10 @@ const comparisonSubHeaders = [
 
 const comparisonColumnKeys = computed(() => {
   return [...preferredComparisonKeys, ...comparisonSubHeaders.map(s => s.key)];
+});
+
+const reportCount = computed(() => {
+  return tableData.value?.filter(r => r.documentId !== "")?.length;
 });
 
 /* -------------------------- Utilities ---------------------------- */
@@ -851,7 +855,7 @@ function initTooltips() {
 
 <style scoped>
 .custom-scroll-table {
-  max-height: calc(100vh - 250px);
+  /* max-height: calc(100vh - 250px); */
   overflow-y: auto;
   overflow-x: auto;
 }
@@ -859,8 +863,11 @@ function initTooltips() {
 .custom-scroll-table th {
   position: sticky;
   top: 0;
-  z-index: 1020;
+  /* z-index: 20; */
   background-color: #f8f9fa !important;
   box-shadow: inset 0 -1px 0 #dee2e6, inset 0 1px 0 #dee2e6;
+}
+.sticky-top{
+  z-index: 10;
 }
 </style>
