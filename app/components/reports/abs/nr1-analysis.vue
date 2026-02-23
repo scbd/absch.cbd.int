@@ -1,4 +1,3 @@
-
 <template>
   <div class="bg-light py-4">
     <div class="container">
@@ -49,12 +48,12 @@
           <ul class="nav nav-tabs" id="reportTabs" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="detail-tab" data-bs-toggle="tab" data-bs-target="#detail" type="button" role="tab">
-                Detail
+                National Report 1
               </button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="pivot-wide-tab" data-bs-toggle="tab" data-bs-target="#pivot-wide" type="button" role="tab">
-                Pivot (Wide)
+                Country Profiles
               </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -67,9 +66,9 @@
           <div class="tab-content pt-3">
             <!-- Detail -->
             <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="detail-tab">
-              <div class="table-responsive">
-                <table class="table table-bordered table-hover align-middle">
-                  <thead class="table-light">
+              <div class="table-responsive bg-white custom-scroll-table">
+                <table class="table table-bordered align-middle mb-0">
+                  <thead class="table-light sticky-top shadow-sm">
                     <tr>
                       <th v-for="key in columnKeys" :key="key" class="text-uppercase small text-muted"
                       :style="{ 'min-width': key.indexOf('-Info') > -1 ? '350px' : 'auto' }">
@@ -83,11 +82,14 @@
                   </thead>
                   <tbody>
                     <tr v-for="(row, idx) in tableData" :key="idx">
-                      <td v-for="key in columnKeys" :key="key" >
+                      <td v-for="key in columnKeys" :key="key">
                         <span v-if="key === 'status'" class="badge rounded-pill"
                               :class="row[key] === 'Party' ? 'bg-success' : 'bg-secondary'">
                           {{ row[key] }}
                         </span>
+                        <a v-else-if="key === 'country'" :href="`${realm.baseURL}/${locale}/database/NR1/${row.documentId}`" target="_blank" rel="noopener">
+                          {{ row[key] }}
+                        </a>
                         <span v-else>{{ formatCellValue(row[key]) }}</span>
                       </td>
                     </tr>
@@ -98,29 +100,39 @@
 
             <!-- Comparison -->
             <div class="tab-pane fade" id="comparison" role="tabpanel" aria-labelledby="comparison-tab">
-              <div class="table-responsive">
-                <table class="table table-bordered table-hover align-middle">
-                  <thead class="table-light">
+              <div class="table-responsive bg-white custom-scroll-table">
+                <table class="table table-bordered  align-middle mb-0">
+                  <thead class="table-light sticky-top shadow-sm">
                     <tr>
-                      <th v-for="key in comparisonColumnKeys" :key="key" class="text-uppercase small text-muted">
-                        <span v-if="key.startsWith('Q.')" data-bs-toggle="tooltip" data-bs-placement="top" 
-                        :title="questionMap.get(key)?.title || 'Question ' + key.replace('Q.', '')">
-                          {{ key.replace('Q.', '') }}
-                        </span>
-                        <span v-else data-bs-toggle="tooltip" data-bs-placement="top" :title="formatHeaderName(key)">
+                      <th v-for="key in preferredComparisonKeys" :key="'group-'+key" rowspan="2" class="text-uppercase small text-muted align-bottom text-nowrap bg-light">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" :title="formatHeaderName(key)">
                           {{ formatHeaderName(key) }}
+                        </span>
+                      </th>
+                      <th v-for="group in comparisonGroups" :key="group.title" :colspan="group.colspan" class="text-center fw-bold border-start bg-light align-middle text-uppercase small text-dark p-2">
+                        {{ group.title }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th v-for="sub in comparisonSubHeaders" :key="sub.key" class="small text-muted fw-normal border-start bg-light align-top p-2" style="min-width: 15vw;">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" :title="questionMap.get(sub.key)?.title || 'Question ' + sub.key.replace('Q.', '')">
+                          <strong class="text-dark">{{ sub.key.replace('Q.', '') }}</strong><br/>
+                          <span style="font-size: 0.85em;">{{ sub.title }}</span>
                         </span>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="(row, idx) in tableData" :key="idx">
-                      <td v-for="key in comparisonColumnKeys" :key="key" >
+                      <td v-for="key in comparisonColumnKeys" :key="key">
                         <span v-if="key === 'status'" class="badge rounded-pill"
                               :class="row[key] === 'Party' ? 'bg-success' : 'bg-secondary'"
                               data-bs-toggle="tooltip" data-bs-placement="top" :title="`Country Status: ${row[key]}`">
                           {{ row[key] }}
                         </span>
+                        <a v-else-if="key === 'country'" :href="`${realm.baseURL}/${locale}/database/NR1/${row.documentId}`" target="_blank" rel="noopener">
+                          {{ row[key] }}
+                        </a>
                         <span v-else-if="key.startsWith('Q.')">
                           <span :class="getComparisonCell(row, key).class"
                                 data-bs-toggle="tooltip" data-bs-placement="top" :title="getComparisonCell(row, key).tooltip">
@@ -139,9 +151,9 @@
 
             <!-- Pivot Wide -->
             <div class="tab-pane fade" id="pivot-wide" role="tabpanel" aria-labelledby="pivot-wide-tab">
-              <div class="table-responsive">
-                <table class="table table-bordered table-hover align-middle">
-                  <thead class="table-light">
+              <div class="table-responsive bg-white custom-scroll-table">
+                <table class="table table-bordered  align-middle mb-0">
+                  <thead class="table-light sticky-top shadow-sm">
                     <tr>
                       <th v-for="header in pivotWideHeaders" :key="header">{{ header }}</th>
                     </tr>
@@ -149,6 +161,24 @@
                   <tbody>
                     <tr v-for="(row, idx) in pivotWideRows" :key="idx">
                       <td v-for="header in pivotWideHeaders" :key="header">{{ row[header] }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Pivot Long -->
+            <div class="tab-pane fade" id="pivot-long" role="tabpanel" aria-labelledby="pivot-long-tab">
+              <div class="table-responsive bg-white custom-scroll-table">
+                <table class="table table-bordered  align-middle mb-0">
+                  <thead class="table-light sticky-top shadow-sm">
+                    <tr>
+                      <th v-for="header in pivotLongHeaders" :key="header">{{ header }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(row, idx) in pivotLongRows" :key="idx">
+                      <td v-for="header in pivotLongHeaders" :key="header">{{ row[header] }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -231,34 +261,42 @@ const columnKeys = computed(() => {
   for (const row of tableData.value) {
     Object.keys(row).forEach(k => keys.add(k));
   }
-  const preferred = ['country','countryCode','status','regionalGroup','documentId'];
-  const rest = Array.from(keys).filter(k => !preferred.includes(k));
+  // countryCode and documentId excluded from display
+  const excluded = new Set(['countryCode', 'documentId']);
+  const preferred = ['country', 'status', 'regionalGroup'];
+  const rest = Array.from(keys).filter(k => !preferred.includes(k) && !excluded.has(k));
   return [...preferred.filter(k => keys.has(k)), ...rest];
 });
 
+// countryCode and documentId excluded from display and export
+const preferredComparisonKeys = ['country', 'status', 'regionalGroup'];
+
+const comparisonGroups = [
+  { title: 'NFP', colspan: 1 },
+  { title: 'CNA', colspan: 2 },
+  { title: 'CP', colspan: 2 },
+  { title: 'ABS measures', colspan: 2 },
+  { title: 'ABS procedures', colspan: 1 },
+  { title: 'IRCC', colspan: 2 },
+  { title: 'CPC', colspan: 1 }
+];
+
+const comparisonSubHeaders = [
+  { key: 'Q.3', title: 'Designation Yes, no' },
+  { key: 'Q.4', title: 'Designation ( yes, yes and planning additional, no)' },
+  { key: 'Q.4.1', title: 'Publication (yes, yes to some extent, no but has info)' },
+  { key: 'Q.5', title: 'Designation ( yes, yes and planning additional, no)' },
+  { key: 'Q.5.1', title: 'Publication (yes, yes to some extent, no but has info)' },
+  { key: 'Q.7', title: 'Adoption ( yes, yes and planning additional, no)' },
+  { key: 'Q.7.1', title: 'Publication (yes, yes to some extent, no but has info)' },
+  { key: 'Q.10.1', title: 'Publication (yes, yes to some extent, no but has info)' },
+  { key: 'Q.12', title: 'Publication (yes, yes to some extent, no)' },
+  { key: 'Q.12.2', title: 'N of Permits' },
+  { key: 'Q.21.2', title: 'Publication (yes, yes to some extent, no but has info)' }
+];
+
 const comparisonColumnKeys = computed(() => {
-  const preferred = ['country', 'countryCode', 'status', 'regionalGroup', 'documentId'];
-  const baseQuestions = new Set<string>();
-  
-  for (const key of columnKeys.value) {
-    if (key.startsWith('Q.') && !key.includes('Info')) {
-      baseQuestions.add(key);
-    }
-  }
-  
-  const sortedQs = Array.from(baseQuestions).sort((a, b) => {
-    const parse = (str: string) => str.replace('Q.', '').split('.').map(Number);
-    const partsA = parse(a);
-    const partsB = parse(b);
-    for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
-        const valA = partsA[i] || 0;
-        const valB = partsB[i] || 0;
-        if (valA !== valB) return valA - valB;
-    }
-    return 0;
-  });
-  
-  return [...preferred, ...sortedQs];
+  return [...preferredComparisonKeys, ...comparisonSubHeaders.map(s => s.key)];
 });
 
 /* -------------------------- Utilities ---------------------------- */
@@ -309,6 +347,11 @@ function formatCellValue(value: any): string {
 
 function getComparisonCell(row: TableRow, key: string) {
   const val = formatCellValue(row[key]);
+
+  // Country has not submitted an NR1 — show blank for question columns
+  if (key.startsWith('Q.') && !row.documentId) {
+    return { text: '', class: '', tooltip: '' };
+  }
   
   if (key.startsWith('Q.') && !key.includes('Info')) {
     const rawVal = rawValuesMap.get(`${row.documentId}|${key}`);
@@ -317,33 +360,33 @@ function getComparisonCell(row: TableRow, key: string) {
     // Determine the corresponding Pivot Wide column to compare against
     let pivotColumn = '';
     if (key === 'Q.3') pivotColumn = 'ABS National Focal Point';
-    // User can define mapping for remaining questions here, for example:
     else if (key.startsWith('Q.4')) pivotColumn = 'Competent National Authority';
     else if (key.startsWith('Q.5')) pivotColumn = 'Checkpoint';
     else if (key.startsWith('Q.7')) pivotColumn = 'Legislative, Administrative or Policy Measure';
-    // else if (key.startsWith('Q.8')) pivotColumn = '';
     else if (key.startsWith('Q.10')) pivotColumn = 'ABS Procedure';
     else if (key.startsWith('Q.12')) pivotColumn = 'Internationally Recognized Certificates of Compliance';
     else if (key.startsWith('Q.21')) pivotColumn = 'Checkpoint Communiqué';  
+    
     const count = pivotRow && pivotColumn && pivotRow[pivotColumn] ? Number(pivotRow[pivotColumn]) : 0;
     
     // Positive values: true, true.some. Else: false
     const isPositive = rawVal === 'true' || rawVal === true || rawVal === 'true.some';
     const isNegative = !isPositive; // else false
-if(row['countryCode'] == 'AT'){
-  // debugger ;
-      if(key.startsWith('Q.21') ){
-        console.log(key, row.documentId,pivotColumn, rawVal, isPositive, isNegative, count, row);
-      }
-    }
+
+    // if(key.startsWith('Q.4')) {
+    //   // console.clear();
+    //   console.log(pivotRow, pivotRow['ABS National Focal Point'], 
+    //     pivotColumn,pivotRow[pivotColumn] );
+    //   console.log('Q.4', rawVal, isPositive, isNegative, count);
+    // }
     if (isPositive && count === 0) {
-      return { text: 'Missing form ABSCH', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: 'Missing associated form in ABSCH pivot' };
+      return { text: 'Missing form ABSCH', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: `Missing associated form in ABSCH pivot (Pivot count: ${count})` };
     }
     if (isNegative && count > 0) {
-      return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: 'Discrepancy: Answered negative but records exist in pivot' };
+      return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: `Discrepancy: Answered negative but records exist in pivot (Pivot count: ${count})` };
     }
     if ((isPositive && count > 0) || (isNegative && count === 0)) {
-      return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: 'Data matches with ABSCH pivot records' };
+      return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Data matches with ABSCH pivot records (Pivot count: ${count})` };
     }
   }
   
@@ -468,9 +511,10 @@ function buildPivotWide(
   }).sort((a,b)=>a['Country Name'].localeCompare(b['Country Name']));
 
 
-console.log(schemaKeys, schemaTitleMap)
+// console.log(schemaKeys, schemaTitleMap)
+  // 'Government' (ISO code) excluded from headers/export
   const headers = [
-    'Government','Country Name','Country Status','Regional Group',
+    'Country Name','Country Status','Regional Group',
     ...schemaKeys.map(k => schemaTitleMap.get(k) || k),
     'Government Total'
   ];
@@ -484,7 +528,14 @@ function flattenPivotLong(
   schemaTitleMap: Map<string, string>
 ) {
   const out: any[] = [];
-  const list = pivotRoot?.facet_counts?.facet_pivot?.["government_s,schema_s"] || [];
+  const list: PivotGov[] = pivotRoot?.facet_counts?.facet_pivot?.["government_s,schema_s"] || [];
+
+  // Add missing countries (those with no pivot data) so all countries appear
+  for (const [iso2] of Array.from(countriesByIso.entries())) {
+    if (!list.find(g => (g.value || '').toUpperCase() === iso2)) {
+      list.push({ value: iso2, count: 0, pivot: [] });
+    }
+  }
 
   for (const g of list) {
     const iso2 = (g?.value || '').toUpperCase();
@@ -520,12 +571,13 @@ function flattenPivotLong(
     }
   }
 
-  return out;
+  // Sort by Country Name
+  return out.sort((a, b) => (a['Country Name'] || '').localeCompare(b['Country Name'] || ''));
 }
 
 const getQuestionByKey = (key: string, type:string) => {
-if(type === 'title')
-console.log(key)
+// if(type === 'title')
+// console.log(key)
   return flatted.find(q => q.key === key);
 };  
 /* ------------------------- Fetch & process ----------------------- */
@@ -554,7 +606,7 @@ const fetchData = async () => {
       Q003: 1, Q004: 1, Q004_a: 1, Q004_b: 1,
       Q005: 1, Q005_a: 1, Q005_b: 1,
       Q007: 1, Q007_a: 1, Q008: 1, Q010_a: 1,
-      Q012_a: 1, Q012_b: 1, Q021_b: 1,
+      Q012: 1, Q012_a: 1, Q012_b: 1, Q021_b: 1,
       documentId: 1, government: 1
     };
     const query = {
@@ -566,7 +618,12 @@ const fetchData = async () => {
           '3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E',
           '0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B'
         ]
-      }
+      },
+      // 'government.identifier': {
+      //   $in: [
+      //     'sn'
+      //   ]
+      // }
     };
     const apiUrl = `${REPORT_ANALYZER_API}?f=${encodeURIComponent(JSON.stringify(fields))}&q=${encodeURIComponent(JSON.stringify(query))}&realm=${realm.realm}`;
 
@@ -616,7 +673,23 @@ const fetchData = async () => {
       return row;
     });
 
-console.log(rawValuesMap)
+    // Append stub rows for countries with no NR1 submission
+    const reportedCodes = new Set(processed.map(r => r.countryCode));
+    for (const [iso2, country] of Array.from(countriesByIso.entries())) {
+      if (reportedCodes.has(iso2)) continue;
+      processed.push({
+        country: country?.name?.en || iso2,
+        countryCode: iso2,
+        status: getCountryStatus(country),
+        regionalGroup: (regionalByIso.get(iso2) || []).join('; ') || 'N/A',
+        documentId: ''
+      });
+    }
+
+    // Sort all rows by country name
+    processed.sort((a, b) => a.country.localeCompare(b.country));
+
+// console.log(rawValuesMap)
     tableData.value = processed;
 
     // Build pivot sheets
@@ -628,13 +701,16 @@ console.log(rawValuesMap)
     const { rows: wideRows, headers: wideHeaders } =
       buildPivotWide(pivotRoot, countriesByIso, regionalByIso, schemaTitleMap);
 
-    pivotWideRows.value    = wideRows.filter(r => tableData.value.some(tr => tr.countryCode === r['Government']));
+    // All countries are already included in wideRows (sorted by country name)
+    pivotWideRows.value    = wideRows;
     pivotWideHeaders.value = wideHeaders;
 
     const longRows = flattenPivotLong(pivotRoot, countriesByIso, regionalByIso, schemaTitleMap);
-    pivotLongRows.value    = longRows.filter(r => tableData.value.some(tr => tr.countryCode === r['Government']));
+    // All countries are already included in longRows
+    pivotLongRows.value    = longRows;
+    // 'Government' (ISO code) excluded from display and export
     pivotLongHeaders.value = [
-      'Government','Country Name','Country Status','Regional Group',
+      'Country Name','Country Status','Regional Group',
       'Government Total','Schema','Schema Count'
     ];
 
@@ -663,65 +739,79 @@ const exportToExcel = () => {
   );
   const detailSheet = XLSX.utils.json_to_sheet(tableData.value, { header: detailHeaders });
   detailSheet['!cols'] = detailHeaders.map(h => ({ wch: Math.max(12, h.length + 2) }));
-  XLSX.utils.book_append_sheet(wb, detailSheet, 'Detail');
+  XLSX.utils.book_append_sheet(wb, detailSheet, 'National Report 1');
 
   // Pivot Wide
   if (pivotWideRows.value.length) {
     const wideSheet = XLSX.utils.json_to_sheet(pivotWideRows.value, { header: pivotWideHeaders.value });
     wideSheet['!cols'] = pivotWideHeaders.value.map(h => ({ wch: Math.max(16, h.length + 2) }));
-    XLSX.utils.book_append_sheet(wb, wideSheet, 'Pivot Wide');
+    XLSX.utils.book_append_sheet(wb, wideSheet, 'Country Profiles');
   }
 
   // Comparison
   if (comparisonColumnKeys.value.length) {
-    const compData: any[] = [];
-    tableData.value.forEach(row => {
-      const rowData: any = {};
-      comparisonColumnKeys.value.forEach(key => {
-        if (key.startsWith('Q.')) {
-          rowData[key] = getComparisonCell(row, key).text;
-        } else if (key === 'status') {
-          rowData[key] = row[key];
-        } else {
-          rowData[key] = formatCellValue(row[key]);
-        }
-      });
-      compData.push(rowData);
+    const compSheet = XLSX.utils.aoa_to_sheet([]);
+
+    // Build header row 1: preferred cols (blank) + group labels spanning their sub-cols
+    const prefCols = preferredComparisonKeys;
+    const groupRow1: string[] = [...prefCols.map(() => '')];
+    const subRow2: string[] = [...prefCols.map(k => formatHeaderName(k))];
+
+    // Track merge ranges
+    const merges: {s:{r:number,c:number},e:{r:number,c:number}}[] = [];
+    // Preferred columns span 2 rows in place (row 0 and 1)
+    prefCols.forEach((_, i) => {
+      merges.push({ s: { r: 0, c: i }, e: { r: 1, c: i } });
     });
 
-    const compSheet = XLSX.utils.json_to_sheet(compData, { header: comparisonColumnKeys.value });
-    
-    // Add styles manually
-    const range = XLSX.utils.decode_range(compSheet['!ref'] || '');
-    for (let R = range.s.r + 1; R <= range.e.r; ++R) {
-      for (let C = range.s.c; C <= range.e.c; ++C) {
-        const key = comparisonColumnKeys.value[C];
-        if (key && key.startsWith('Q.')) {
-          const row = tableData.value[R - 1];
-          if (row) {
-            const compCell = getComparisonCell(row, key);
-            const cellAddr = XLSX.utils.encode_cell({ c: C, r: R });
-            const cell = compSheet[cellAddr];
-            if (cell) {
-              let rgb = '';
-              if (compCell.class.includes('bg-success')) rgb = 'C6EFCE'; // Light Green
-              else if (compCell.class.includes('bg-danger')) rgb = 'FFC7CE'; // Light Red
-              else if (compCell.class.includes('bg-warning')) rgb = 'FFEB9C'; // Light Orange
-
-              if (rgb) {
-                cell.s = { fill: { patternType: 'solid', fgColor: { rgb } } };
-              }
-            }
-          }
-        }
+    let colOffset = prefCols.length;
+    comparisonGroups.forEach(group => {
+      groupRow1.push(group.title);
+      // Fill remaining colspan cells with empty so AOA indices are correct
+      for (let i = 1; i < group.colspan; i++) groupRow1.push('');
+      // Merge group header across its colspan
+      if (group.colspan > 1) {
+        merges.push({ s: { r: 0, c: colOffset }, e: { r: 0, c: colOffset + group.colspan - 1 } });
       }
-    }
-    
-    // Format headers slightly
-    const headerRow = comparisonColumnKeys.value.map(k => k.startsWith('Q.') ? k.replace('.', '') : formatHeaderName(k));
-    XLSX.utils.sheet_add_aoa(compSheet, [headerRow], { origin: 'A1' });
+      colOffset += group.colspan;
+    });
 
-    compSheet['!cols'] = comparisonColumnKeys.value.map(h => ({ wch: Math.max(16, h.length + 2) }));
+    // Sub-header row 2: sub-question numbers + validation description
+    comparisonSubHeaders.forEach(sub => {
+      subRow2.push(`${sub.key.replace('Q.', '')} – ${sub.title}`);
+    });
+
+    // Data rows start at row index 2
+    const compData: any[] = tableData.value.map(row => {
+      const rowData: any[] = [
+        ...prefCols.map(k => (k === 'status' ? row[k] : formatCellValue(row[k]))),
+        ...comparisonSubHeaders.map(sub => getComparisonCell(row, sub.key).text)
+      ];
+      return rowData;
+    });
+
+    XLSX.utils.sheet_add_aoa(compSheet, [groupRow1, subRow2, ...compData], { origin: 'A1' });
+
+    // Apply cell styles on Q columns (data starts at row index 2)
+    const range = XLSX.utils.decode_range(compSheet['!ref'] || '');
+    for (let R = 2; R <= range.e.r; ++R) {
+      comparisonSubHeaders.forEach((sub, idx) => {
+        const C = prefCols.length + idx;
+        const cellAddr = XLSX.utils.encode_cell({ c: C, r: R });
+        const cell = compSheet[cellAddr];
+        if (cell) {
+          const compCell = getComparisonCell(tableData.value[R - 2], sub.key);
+          let rgb = '';
+          if (compCell.class.includes('bg-success')) rgb = 'C6EFCE';
+          else if (compCell.class.includes('bg-danger')) rgb = 'FFC7CE';
+          else if (compCell.class.includes('bg-warning')) rgb = 'FFEB9C';
+          if (rgb) cell.s = { fill: { patternType: 'solid', fgColor: { rgb } } };
+        }
+      });
+    }
+
+    compSheet['!merges'] = merges;
+    compSheet['!cols'] = comparisonColumnKeys.value.map(() => ({ wch: 22 }));
     XLSX.utils.book_append_sheet(wb, compSheet, 'Comparison');
   }
 
@@ -760,5 +850,17 @@ function initTooltips() {
 </script>
 
 <style scoped>
-/* Optional: small tweaks if desired */
+.custom-scroll-table {
+  max-height: calc(100vh - 250px);
+  overflow-y: auto;
+  overflow-x: auto;
+}
+/* Sticky top headers */
+.custom-scroll-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background-color: #f8f9fa !important;
+  box-shadow: inset 0 -1px 0 #dee2e6, inset 0 1px 0 #dee2e6;
+}
 </style>

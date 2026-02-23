@@ -2,6 +2,7 @@ import app from '~/app';
 import commonRoutes from "./common-routes";
 import { securize, asyncLogError, mapView } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
+import * as vueViewWrapper from '~/views/shared/vue-view-wrapper'
 import routesLabelsTranslations from '~/app-text/routes/abs-route-labels.json';
 import { mergeTranslationKeys } from '../services/translation-merge';
 import * as theAbs from '~/views/home/index';
@@ -13,6 +14,7 @@ const routesLabels = mergeTranslationKeys(routesLabelsTranslations);
 const abschRouteUrls = {
    theAbs,
    register_admin_ircc_counts          : { component: ()=>asyncLogError(import('~/views/register/admin/ircc-counts')) },
+   register_admin_nr_1_analysis        : { component: ()=>asyncLogError(import('~/components/reports/abs/nr1-analysis.vue')) },
    register_MSR_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-measure')) },
   //  register_SMSR_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/abs/edit-measure-status')) },
    register_NDB_edit                   : { component: ()=>asyncLogError(import('~/views/forms/edit/edit-database')) },
@@ -55,6 +57,7 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/forums/art10_groups',                               { redirectTo: "portals/forums/article-10" }).
   whenAsync('/forums/art10_groups/:threadId',                     { redirectTo: "portals/forums/article-10/threads/:threadId" }).
   whenAsync('/register/admin/ircc-counts',                        { ...mapView(angularViewWrapper),                    "label":routesLabels.irccCounts,"param":"true","resolveController":true,"resolve":{ ...abschRouteUrls.register_admin_ircc_counts,                                  "securized":securize(['Administrator'])}}).
+  whenAsync('/register/admin/nr-1-analysis',                      { ...mapView(vueViewWrapper),                    "label":routesLabels.nr1Analysis,"param":"true","resolveController":true,"resolve":{ ...abschRouteUrls.register_admin_nr_1_analysis,                                  "securized":securize(['Administrator'])}}).
   whenAsync('/register/MSR/new',                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"MSR","resolve":{ ...abschRouteUrls.register_MSR_edit,                                            "securized":securize(null,true,true)}}).
   // whenAsync('/register/SMSR/new',                                 { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"SMSR","resolve":{ ...abschRouteUrls.register_SMSR_edit,                                            "securized":securize(null,true,true)}}).
   whenAsync('/register/NDB/new',                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"NDB","resolve":{ ...abschRouteUrls.register_NDB_edit,                                            "securized":securize(null,true,true)}}).
