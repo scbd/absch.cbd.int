@@ -7,7 +7,8 @@ import '~/components/scbd-angularjs-services/main';
 import '~/components/scbd-angularjs-controls/main';
 import '../directives/breadcrumbs';
 import abschHeaderT from '~/app-text/templates/absch/header.json';
-
+import AppVersionWatcher from '~/components/common/app-version-watcher.vue';
+    
     app.directive('abschHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q', 'realm' , 'translationService', function (locale, $location, breadcrumbs, commonjs, $q, realm, translationService) {
         return {
             restrict: 'E',
@@ -21,6 +22,10 @@ import abschHeaderT from '~/app-text/templates/absch/header.json';
                 $scope.isBCH = realm.is('BCH');
                 $scope.isDEV = realm.value.includes("DEV");
                 $scope.isTRG = realm.value.includes("TRG");
+
+                $scope.vueComponent = {
+                    components: { AppVersionWatcher },
+                }
                 
                 var sortField = 'name.'+(locale||'en');
                 $q.when(commonjs.getCountries(sortField))
