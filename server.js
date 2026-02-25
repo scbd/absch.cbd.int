@@ -85,6 +85,7 @@ app.all('/sitemap(:num([0-9]{1,3})?).xml', siteMap);
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 app.post('/error-logs', errorLogs(proxy, {apiUrl:apiUrl, appVersion:appVersion}));
+app.get('/version', (req, res) => res.send(appVersion));
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));
