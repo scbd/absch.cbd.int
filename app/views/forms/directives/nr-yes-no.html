@@ -1,17 +1,17 @@
 <div>
     <div ng-repeat="option in question.options">
         <label class="radio-inline">
-            <input type="radio" ng-model="answer.value" ng-value="{{$index}}" name="{{question.key}}"  
+            <input type="radio" ng-model="answer.value" ng-value="{{$index}}" name="{{question.key}}"
                 ng-disabled="ngDisabledFn()" ng-change="updateAnswer()"/>
             <span ng-bind-html="option.title"></span>
         </label>
     </div>
     <div class="pt-2" ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value">
-        <div class="km-control-group" name="question{{question.key}}_additionalInformation" ng-attr-caption="{{getNumberedCaption()}}">
+        <div class="km-control-group" name="{{infoLabel}}" ng-attr-caption="{{getNumberedCaption()}}">
         <div ng-if="hasAdditionalInformation.footnote" ng-bind-html="hasAdditionalInformation.footnote"  class="small text-muted"></div>
-            <div ng-if="hasAdditionalInformation.type == 'lstring'" km-textbox-ml name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales" 
+            <div ng-if="hasAdditionalInformation.type == 'lstring'" km-textbox-ml name="{{infoLabel}}" ng-model="answer.additionalInformation" locales="locales"
                 ng-change="updateAnswer()"></div>
-            <div ng-if="hasAdditionalInformation.type == 'lstringRte'" km-rich-textbox rows="4" name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales" 
+            <div ng-if="hasAdditionalInformation.type == 'lstringRte'" km-rich-textbo="4" name="{{infoLabel}}" ng-model="answer.additionalInformation" locales="locales"
                 ng-change="updateAnswer()"></div>
         </div>
     </div>
