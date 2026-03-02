@@ -195,7 +195,14 @@
 
 <script setup lang="ts">
 import { Tooltip } from 'bootstrap';
-import { ref, computed, onMounted, nextTick } from 'vue';
+import { ref, computed, onMounted, nextTick, watch } from 'vue';
+// popper is required by bootstrap tooltips; in this project we load
+// `bootstrap.bundle` (see `app/boot.js`), which already contains Popper,
+// so no additional installation is normally necessary. The ESM
+// `Tooltip` class imported above will work as long as the bundle is
+// available at runtime. If you ever switch to a non-bundled build or get
+// a console error about "Popper is not defined", you can add
+// `@popperjs/core` and import it explicitly (`import '@popperjs/core';`).
 import * as XLSX from 'xlsx';
 import { useI18n } from 'vue-i18n';
 import { lstring } from '~/components/kb/filters';
@@ -303,6 +310,14 @@ const reportCount = computed(() => {
   return tableData.value?.filter(r => r.documentId !== "")?.length;
 });
 
+// whenever the table rows or column keys change we need to re-bind
+// bootstrap's JavaScript tooltip instances; the initial call in
+// onMounted/after fetch handles the first render but Vue may update the
+// DOM later which doesn't automatically reinit the third‑party plugin.
+watch([tableData, comparisonColumnKeys, pivotWideRows, pivotLongRows], () => {
+  nextTick(initTooltips);
+});
+
 /* -------------------------- Utilities ---------------------------- */
 function stripHtmlToText(html?: string): string {
   if (!html) return '';
@@ -372,19 +387,82 @@ function getComparisonCell(row: TableRow, key: string) {
     else if (key.startsWith('Q.21')) pivotColumn = 'Checkpoint Communiqué';  
     
     const count = pivotRow && pivotColumn && pivotRow[pivotColumn] ? Number(pivotRow[pivotColumn]) : 0;
-    
-    // Positive values: true, true.some. Else: false
-    const isPositive = rawVal === 'true' || rawVal === true || rawVal === 'true.some';
-    const isNegative = !isPositive; // else false
 
-    // if(key.startsWith('Q.4')) {
-    //   // console.clear();
-    //   console.log(pivotRow, pivotRow['ABS National Focal Point'], 
-    //     pivotColumn,pivotRow[pivotColumn] );
-    //   console.log('Q.4', rawVal, isPositive, isNegative, count);
-    // }
+    // normalize raw values
+    const isTrue = rawVal === 'true' || rawVal === true;
+    const isTrueSome = rawVal === 'true.some';
+    const isPositive = isTrue || isTrueSome;
+    const isNegative = !isPositive;
+
+    // question classification groups for new rules
+    const abschKeys = ['Q.4.1','Q.5.1','Q.7.1','Q.10.1','Q.12.2','Q.21.2'];
+    const mainKeys   = ['Q.4','Q.5','Q.7','Q.10','Q.12.1','Q.21.1'];
+
+    // helper to quickly return consistent missing cell
+    const missingCell = (tooltipMsg = `Missing associated form in ABSCH pivot (Pivot count: ${count})`) => {
+      return { text: 'Missing from ABS Clearing-House', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: tooltipMsg };
+    };
+
+    // ABSCH-specific questions: anything other than a definite "yes" should flag missing,
+    // but if pivot records exist despite a non-yes answer we treat it as an error.
+    if (abschKeys.includes(key)) {
+      if (isTrue) {
+        // only if they answered yes do we consider pivot count
+        if (count > 0) {
+          return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Data matches with ABSCH pivot records (Pivot count: ${count})` };
+        }
+        return missingCell();
+      }
+      // for "yes to some extent" or "no" responses
+      if (count > 0) {
+        return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: `Discrepancy: responded "${val}" but ABSCH pivot count is ${count}` };
+      }
+      return missingCell(`Response not fully affirmative (${val})`);
+    }
+
+    // Main questions use the normal pivot comparison, but also check the paired ABSCH question
+    if (mainKeys.includes(key)) {
+      // check cross dependency
+      const pairMap: Record<string,string> = {
+        'Q.4':'Q.4.1',
+        'Q.5':'Q.5.1',
+        'Q.7':'Q.7.1',
+        'Q.10':'Q.10.1',
+        'Q.12.1':'Q.12.2',
+        'Q.21.1':'Q.21.2'
+      };
+      const paired = pairMap[key];
+      const pairedRaw = paired ? rawValuesMap.get(`${row.documentId}|${paired}`) : null;
+      const pairedNegative = pairedRaw === 'false' || pairedRaw === false;
+
+      // "yes to some extent" should be treated as good regardless of pivot count
+      if (isTrueSome) {
+        if (pairedNegative) {
+          return missingCell('Main question answered positively but ABSCH response is No');
+        }
+        return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Positive response (${val})` };
+      }
+
+      if (isTrue) {
+        if (pairedNegative) {
+          return missingCell('Main question answered positively but ABSCH response is No');
+        }
+        if (count > 0) {
+          return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Data matches with ABSCH pivot records (Pivot count: ${count})` };
+        }
+        return missingCell();
+      }
+
+      // negative responses to main questions should generate an error if pivot data exists
+      if (count > 0) {
+        return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: `Discrepancy: Answered negative but records exist in pivot (Pivot count: ${count})` };
+      }
+      return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Data matches with ABSCH pivot records (Pivot count: ${count})` };
+    }
+
+    // generic fallback (pre‑existing logic)
     if (isPositive && count === 0) {
-      return { text: 'Missing form ABSCH', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: `Missing associated form in ABSCH pivot (Pivot count: ${count})` };
+      return { text: 'Missing from ABS Clearing-House', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: `Missing associated form in ABSCH pivot (Pivot count: ${count})` };
     }
     if (isNegative && count > 0) {
       return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: `Discrepancy: Answered negative but records exist in pivot (Pivot count: ${count})` };
@@ -844,11 +922,13 @@ onMounted(() => {
 function initTooltips() {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
   Array.from(tooltipTriggerList).forEach(tooltipTriggerEl => {
-    // avoid re-initializing if it already exists
     const instance = Tooltip.getInstance(tooltipTriggerEl);
-    if (!instance) {
-      new Tooltip(tooltipTriggerEl, { boundary: document.body, trigger: 'hover', html: true });
+    if (instance) {
+      // Dispose old instance in case Vue updated the DOM/title
+      instance.dispose();
     }
+    // Set container:'body' so it doesn't get clipped by overflow tables
+    new Tooltip(tooltipTriggerEl, { container: 'body', boundary: document.body, trigger: 'hover', html: true });
   });
 }
 </script>
