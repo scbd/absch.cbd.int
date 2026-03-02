@@ -1,4 +1,4 @@
-﻿import _ from 'lodash';
+import _ from 'lodash';
 import moment from 'moment';
 import '~/views/report-analyzer/directives/national-reports/questions-selector';
 import {analyzerMapping, appendAnalyzerMappingForFrozenDataAnalysis} from '~/app-data/report-analyzer-mapping';
@@ -6,8 +6,8 @@ import reportsT from '~/app-text/views/report-analyzer/reports.json';
 import  cbdArticle  from '../../components/common/cbd-article.vue';
 
     export { default as template } from './reports.html'
-export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService','$timeout', 'roleService', '$rootScope',
-    function ($scope, $location, commonjs, $q, $http, realm, translationService, $timeout, roleService, $rootScope) {
+export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService','$timeout', 'roleService', '$rootScope', 'user',
+    function ($scope, $location, commonjs, $q, $http, realm, translationService, $timeout, roleService, $rootScope, user) {
         $scope.isABS = realm.is('ABS');
         $scope.isBCH = realm.is('BCH');
         $scope.isCHM = realm.is('CHM');
@@ -18,13 +18,9 @@ export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'tran
 
         const appName = realm.value.replace(/-.*/,'').toLowerCase();     
         $scope.reportData = analyzerMapping[appName];
-
-        var unwatch = $rootScope.$watch('user', function (user) {
             if(roleService.isAdministrator()){
                 $scope.reportData = appendAnalyzerMappingForFrozenDataAnalysis(appName, analyzerMapping[appName]);
-                unwatch();
             }
-        });
         //========================================
             //
             //
