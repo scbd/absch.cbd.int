@@ -27,16 +27,18 @@
             <div ng-if="shareVueComponent">
               <edit-legal-framework-overview
                 ng-vue="shareVueComponent"
-                v-model="document"
+                v-model="reactive(document)"
+                @on-model-change="getCleanDocument"
               />
             </div> 
           </form>
         </edit-form>
+
         <review-form>
           <div ng-if="shareVueComponent && tab == 'review'">
             <legal-framework-overview
               ng-vue="shareVueComponent"
-              :document-info="{ body : review.document }"
+              :document-info="reactive(reviewData)"
               :locale="review.locale"
               allow-drafts="true"
             />
