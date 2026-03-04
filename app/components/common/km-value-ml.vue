@@ -71,8 +71,6 @@ const displayLocales = computed(() => props.locales.filter(hasLocaleValue))
 
 // Methods
 function hasLocaleValue (locale: string): boolean {
-  if (props.locales.length === 1) { return true }
-
   if (typeof props.value !== 'object') { return true }
 
   const isLangCode = (value: string): value is LanguageCode => Object.keys(languages).includes(value)
