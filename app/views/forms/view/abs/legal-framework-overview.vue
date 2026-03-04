@@ -6,7 +6,7 @@
     <div
       class="record-body bg-white"
     >
-      <div class="px-4 bg-white d-flex flex-column gap-4">
+      <div class="px-4 bg-white d-flex flex-column gap-1">
         <document-date
           :document-info="documentInfo"
         />
@@ -52,7 +52,7 @@
           >
             <span
               :class="{ inactive: !isNational }"
-              class="mb-2 me-auto"
+              class="mb-1 me-auto"
             >
               {{ t('jurisdictionImplementationNational') }}
             </span>
@@ -75,6 +75,7 @@
           :document-data="legalFrameworkDocument"
           :report-sections="reportSection"
           :locales="[locale]"
+          class="mb-5"
         />
         <div>
           <ng
@@ -165,14 +166,7 @@ async function getTerm (value: ETerm | undefined): Promise<ETerm> {
 }
 </script>
 <style scoped>
-#Record.legal-framework-overview-review :deep(label) {
-  font-size: 15px;
-  color: #333;
-}
-#Record .record-body :deep(legend) {
-  font-size: 20px;
-}
-#Record.legal-framework-overview-review :deep(.km-value) {
-  font-size: 15px;
+#Record.legal-framework-overview-review :deep(div[data-key="Article5_3"]) > legend {
+  margin-top: 0px;
 }
 </style>
