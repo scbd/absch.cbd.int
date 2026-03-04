@@ -45,7 +45,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
       options: measureOptions,
       mandatory: false,
       key: 'establishedMeasure',
-      title: t('establishedMeasure', { establishedMeasuresInclude: `<br/><span class="text-focus">${t('establishedMeasuresInclude')}</span>` })
+      title: t('establishedMeasure', { establishedMeasuresInclude: `<br/><span class="help-info">${t('establishedMeasuresInclude')}</span>` })
     },
     // Access to genetic resources
     {
