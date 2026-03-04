@@ -2,6 +2,7 @@
   <div
     :data-question-type="question.data.type"
     :data-key="question.data.key"
+    :class="{ 'mb-1': question.data.type !== 'legend' }"
   >
     <label
       v-if="question.data.type !== 'legend'"
@@ -17,7 +18,7 @@
     />
     <div
       v-if="isDetailsDefined(question.values[0]?.details)"
-      class="additional-information mt-1"
+      class="additional-information"
     >
       <label> {{ question.values[0].caption ?? t('additionalInformation') }} </label>
       <KmValueMl
