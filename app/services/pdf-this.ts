@@ -36,7 +36,7 @@ export interface PdfOptions {
 // Ensure window typing for scbdApp usage
 declare global {
   interface Window {
-    scbdApp?: { accountsUrl: string };
+    scbdApp?: { accountsUrl: string, version: string };
   }
 }
 
