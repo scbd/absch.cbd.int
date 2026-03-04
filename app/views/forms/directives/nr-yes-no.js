@@ -14,6 +14,7 @@ import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
                 question:'=',
                 ngDisabledFn: '&ngDisabled',
                 required: "@",
+                addInfoRequired: "@",
                 locales: "=",
                 infoLabel: "@"
             },

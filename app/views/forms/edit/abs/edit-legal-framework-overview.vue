@@ -181,6 +181,7 @@
                     :name="question.key"
                     :info-label="`${question.key}.additionalInformation`"
                     :required="question.mandatory"
+                    :add-info-required="true"
                     class="ps-1"
                   />
                 </div>
@@ -202,6 +203,7 @@
                     v-model:ng-model="legalFrameworkDocument[subQuestion.key]"
                     v-vue-ng:nr-yes-no
                     :required="subQuestion.mandatory"
+                    :add-info-required="true"
                     :question="subQuestion"
                     :locales="legalFrameworkDocument.header.languages"
                     :name="subQuestion.key"
