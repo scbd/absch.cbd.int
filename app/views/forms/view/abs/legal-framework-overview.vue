@@ -124,14 +124,13 @@ const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
 
 const reportQuestions = legalFrameworkOverviewQuestions(t)
   .reduce((acc: Array<DocQuestion | Legend>, question) => {
-    const q = setCaptionToAdditonalInfo(question)
+    const q = question
 
     acc.push(q)
 
     if (!isQuestion(q)) { return acc }
 
     if (!Array.isArray(q.questions)) { return acc }
-    q.questions.map(subQuestion => setCaptionToAdditonalInfo(subQuestion))
     return [...acc, ...q.questions]
   }, [])
 
@@ -163,12 +162,6 @@ async function getTerm (value: ETerm | undefined): Promise<ETerm> {
     }
   }
   return await thesaurusApi.getTerm(id)
-}
-function setCaptionToAdditonalInfo (question: DocQuestion): DocQuestion {
-  const q = question
-  if (!Array.isArray(q.options)) { return q }
-  q.options = q.options.map((option) => Object.assign(option, { caption: t('additionalInformation') }))
-  return q
 }
 </script>
 <style scoped>
