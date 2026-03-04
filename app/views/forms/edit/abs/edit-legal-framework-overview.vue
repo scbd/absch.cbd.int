@@ -223,6 +223,27 @@
             />
           </div>
         </div>
+        <!-- Notes -->
+        <section>
+          <legend> {{ t('notes') }} </legend>
+          <div class="row">
+            <div class="col-xs-12">
+              <div
+                class="km-control-group"
+                name="notes"
+              >
+                <div class="help-info">
+                  {{ t('notesInfos') }}
+                </div>
+                <ng
+                  v-model:ng-model="legalFrameworkDocument['notes']"
+                  v-vue-ng:km-notes
+                  name="notes"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
   </div>
