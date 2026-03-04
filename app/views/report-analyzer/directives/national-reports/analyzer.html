@@ -278,40 +278,41 @@
                    
                     <div ng-repeat="item in countriesTexts">
                         <div class="float-end" ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments'">
-                            <span  ng-repeat="(locale, text) in ::item.text" class="locale" ng-class="{ selected : (item.text|locale:item.locale)==locale }">
+                            <span  ng-repeat="(locale, text) in ::(item.text.value||item.text)" class="locale" ng-class="{ selected : ((item.text.value||item.text)|locale:item.locale)==locale }">
                                 <a rel="noopener" href="#" ng-click="item.locale=locale" ng-bind="::locale|uppercase"></a>
                             </span>
                         </div>
                         <h5 ng-bind="::allRegionsMap[item.government].title|lstring"></h5>
                         
                         <pre ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && item.type!='number'"
-                            style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }">
-                            <span ng-bind="item.text|lstring:item.locale"></span>
+                            style="white-space:pre-line" ng-style="{ direction : ((item.text.value||item.text)|direction:item.locale) }">
+                            <span ng-bind="(item.text.value||item.text)|lstring:item.locale"></span>
                         </pre>
-                        <div class="km-value" ng-style="{ direction : (item.text|direction:item.locale) }" ng-if="item.field=='relevantDocuments'"> 
-                            <div ng-repeat="file in item.text">
+                        <div class="km-value" ng-style="{ direction : ((item.text.value||item.text)|direction:item.locale) }" ng-if="item.field=='relevantDocuments'"> 
+                            <div ng-repeat="file in (item.text.value||item.text)">
                                 <a rel="noopener" target="_blank" ng-href="{{file.url|encodeURI}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
                                 <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
                             </div>
                         </div> 
-                        <div ng-if="::item.field=='documentReferenceIDs' && item.type!='number'" ng-style="{ direction : (item.text|direction:item.locale) }">
-                            <!-- {{item.text|lstring:item.locale}} -->
+                        <div ng-if="::item.field=='documentReferenceIDs' && item.type!='number'" ng-style="{ direction : ((item.text.value||item.text)|direction:item.locale) }">
+                            <!-- {{(item.text.value||item.text)|lstring:item.locale}} -->
                             <div class="col-xs-12">
-                                <view-reference-document identifier='item.text[0].identifier'></view-reference-document>
+                                <view-reference-document identifier='(item.text.value||item.text)[0].identifier'></view-reference-document>
                             </div>
                         </div>
-                        <pre ng-if="::item.type=='number'" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }">
-                            <span ng-bind="item.text"></span>
+                        <pre ng-if="::item.type=='number'" style="white-space:pre-line" ng-style="{ direction : ((item.text.value||item.text)|direction:item.locale) }">
+                            <span ng-bind="(item.text.value||item.text)"></span>
                         </pre>
                     </div>
                     <div style="height:0px;width:0px;overflow:hidden" ng-if="exporting">
                             <table id="forExport" style="height:0px;width:0px">
                                     <tr>
-                                        <td></td>
-                                        <td colspan="5">
+                                        <td colspan="10">
                                             {{::('analyzerT.question'|$translate)}} <span ng-bind="currentQuestion.number"></span>.
-                                            <span ng-bind="currentQuestion.title|lstring"></span>
-                                            {{::('analyzerT.subSection'|$translate)}} :-<span ng-bind="subTitle|lstring"></span>
+                                            <span ng-bind-html="currentQuestion.title|lstring"></span>
+                                            <span ng-if="subTitle">
+                                                {{::('analyzerT.subSection'|$translate)}} :-<span ng-bind-html="subTitle|lstring"></span>
+                                            </span>
                                        </td>
                                     </tr>
                                     <tr>
@@ -324,18 +325,18 @@
                                         <td ng-bind="::allRegionsMap[item.government].title|lstring"></td>
                                         <td ng-repeat="lang in ['en', 'ar', 'fr', 'es', 'zh', 'ru']" class="tableexport-string">  
                                             
-                                            <pre ng-if="::item.text[lang] && item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && item.type!='number'"
-                                                style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
-                                                <span ng-bind="item.text|lstring:lang"></span>
+                                            <pre ng-if="::(item.text.value||item.text)[lang] && item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && item.type!='number'"
+                                                style="white-space:pre-line" ng-style="{ direction : ((item.text.value||item.text)|direction:lang) }">
+                                                <span ng-bind="(item.text.value||item.text)|lstring:lang"></span>
                                             </pre>
-                                            <div class="km-value" ng-style="{ direction : (item.text|direction:lang) }" ng-if="item.field=='relevantDocuments'">
-                                                <div ng-repeat="file in item.text">
+                                            <div class="km-value" ng-style="{ direction : ((item.text.value||item.text)|direction:lang) }" ng-if="item.field=='relevantDocuments'">
+                                                <div ng-repeat="file in (item.text.value||item.text)">
                                                     <a rel="noopener" target="_blank" ng-href="{{file.url|encodeURI}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
                                                     <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
                                                 </div>
                                             </div> 
-                                            <pre ng-if="::item.type=='number' && item.text[lang]" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
-                                                <span ng-bind="item.text|lstring:lang"></span>
+                                            <pre ng-if="::item.type=='number' && (item.text.value||item.text)[lang]" style="white-space:pre-line" ng-style="{ direction : ((item.text.value||item.text)|direction:lang) }">
+                                                <span ng-bind="(item.text.value||item.text)|lstring:lang"></span>
                                             </pre>
                                         </td>                                        	
                                     <tr>

@@ -4,21 +4,17 @@ import {analyzerMapping, appendAnalyzerMappingForFrozenDataAnalysis} from '~/app
 import reportAnalyzerT from '~/app-text/views/report-analyzer/analyzer.json';
 
     export { default as template } from './analyzer.html';
-export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translationService', 'thesaurusService', 'roleService', '$rootScope',
-    function ($scope, $location, realm, $timeout, $route, translationService, thesaurusService, roleService, $rootScope) {
+export default ['$scope', '$location', 'realm', '$timeout', '$route', 'translationService', 'thesaurusService', 'roleService', '$rootScope','user',
+    function ($scope, $location, realm, $timeout, $route, translationService, thesaurusService, roleService, $rootScope, user) {
         var appName         = realm.value.replace(/-.*/,'').toLowerCase();
         $scope.showAnalyzer = false;
         $scope.self         = $scope;
         $scope.reportData   = analyzerMapping[appName];
         translationService.set('reportAnalyzerT', reportAnalyzerT);
 
-
-        var unwatch = $rootScope.$watch('user', function (user) {
             if(roleService.isAdministrator()){
                 $scope.reportData = appendAnalyzerMappingForFrozenDataAnalysis(appName, analyzerMapping[appName]);
-                unwatch();
             }
-        });
 
         $timeout(async function(){
 

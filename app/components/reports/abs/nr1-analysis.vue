@@ -44,6 +44,22 @@
         <!-- Tabs + Tables -->
         <div v-else class="card-body">
 
+          <!-- Country Filter -->
+          <div class="mb-3">
+            <label for="countryFilter" class="form-label fw-bold">Filter by Country (Optional)</label>
+            <select 
+              id="countryFilter"
+              v-model="selectedCountry" 
+              @change="onCountryFilterChange(selectedCountry)"
+              class="form-select"
+            >
+              <option value="">Show All Countries</option>
+              <option v-for="country in availableCountries" :key="country.code" :value="country.code">
+                {{ country.name }} ({{ country.code }})
+              </option>
+            </select>
+          </div>
+
           <!-- BS5 tabs -->
           <ul class="nav nav-tabs" id="reportTabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -81,7 +97,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(row, idx) in tableData" :key="idx">
+                    <tr v-for="(row, idx) in filteredTableData" :key="idx">
                       <td v-for="key in columnKeys" :key="key">
                         <span v-if="key === 'status'" class="badge rounded-pill"
                               :class="row[key] === 'Party' ? 'bg-success' : 'bg-secondary'">
@@ -123,7 +139,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(row, idx) in tableData" :key="idx">
+                    <tr v-for="(row, idx) in filteredTableData" :key="idx">
                       <td v-for="key in comparisonColumnKeys" :key="key">
                         <span v-if="key === 'status'" class="badge rounded-pill"
                               :class="row[key] === 'Party' ? 'bg-success' : 'bg-secondary'"
@@ -195,7 +211,14 @@
 
 <script setup lang="ts">
 import { Tooltip } from 'bootstrap';
-import { ref, computed, onMounted, nextTick } from 'vue';
+import { ref, computed, onMounted, nextTick, watch } from 'vue';
+// popper is required by bootstrap tooltips; in this project we load
+// `bootstrap.bundle` (see `app/boot.js`), which already contains Popper,
+// so no additional installation is normally necessary. The ESM
+// `Tooltip` class imported above will work as long as the bundle is
+// available at runtime. If you ever switch to a non-bundled build or get
+// a console error about "Popper is not defined", you can add
+// `@popperjs/core` and import it explicitly (`import '@popperjs/core';`).
 import * as XLSX from 'xlsx';
 import { useI18n } from 'vue-i18n';
 import { lstring } from '~/components/kb/filters';
@@ -253,6 +276,8 @@ const loading = ref<boolean>(true);
 const error   = ref<string>('');
 const questionMap = new Map<string, any>();
 const rawValuesMap = new Map<string, any>();
+const selectedCountry = ref<string>(''); // empty = show all countries
+const allCountriesRef = ref<Country[]>([]);
 
 let flatted:any[] = [];
 /* --------------------------- Computed ---------------------------- */
@@ -290,8 +315,8 @@ const comparisonSubHeaders = [
   { key: 'Q.7', title: 'Adoption ( yes, yes and planning additional, no)' },
   { key: 'Q.7.1', title: 'Publication (yes, yes to some extent, no but has info)' },
   { key: 'Q.10.1', title: 'Publication (yes, yes to some extent, no but has info)' },
-  { key: 'Q.12', title: 'Publication (yes, yes to some extent, no)' },
-  { key: 'Q.12.2', title: 'N of Permits' },
+  { key: 'Q.12.1', title: 'N of Permits' },
+  { key: 'Q.12.2', title: 'Publication (yes, yes to some extent, no but has info)' },
   { key: 'Q.21.2', title: 'Publication (yes, yes to some extent, no but has info)' }
 ];
 
@@ -301,6 +326,27 @@ const comparisonColumnKeys = computed(() => {
 
 const reportCount = computed(() => {
   return tableData.value?.filter(r => r.documentId !== "")?.length;
+});
+
+// List of available countries for the dropdown (sorted by name)
+const availableCountries = computed(() => {
+  return Array.from(allCountriesRef.value || [])
+    .map(c => ({ code: c.code.toUpperCase(), name: c.name?.en || c.code }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+});
+
+// Filter tableData based on selected country
+const filteredTableData = computed(() => {
+  if (!selectedCountry.value) return tableData.value;
+  return tableData.value.filter(row => row.countryCode === selectedCountry.value.toUpperCase());
+});
+
+// whenever the table rows or column keys change we need to re-bind
+// bootstrap's JavaScript tooltip instances; the initial call in
+// onMounted/after fetch handles the first render but Vue may update the
+// DOM later which doesn't automatically reinit the third‑party plugin.
+watch([tableData, comparisonColumnKeys, pivotWideRows, pivotLongRows], () => {
+  nextTick(initTooltips);
 });
 
 /* -------------------------- Utilities ---------------------------- */
@@ -359,6 +405,11 @@ function getComparisonCell(row: TableRow, key: string) {
   
   if (key.startsWith('Q.') && !key.includes('Info')) {
     const rawVal = rawValuesMap.get(`${row.documentId}|${key}`);
+    // If the question was intentionally grayed out (no answer provided),
+    // treat it as not-applicable rather than an error.
+    if (rawVal === undefined || rawVal === null) {
+      return { text: 'N/A', class: '', tooltip: '' };
+    }
     const pivotRow = pivotWideRows.value.find(p => p['Government'] === row.countryCode);
     
     // Determine the corresponding Pivot Wide column to compare against
@@ -372,19 +423,88 @@ function getComparisonCell(row: TableRow, key: string) {
     else if (key.startsWith('Q.21')) pivotColumn = 'Checkpoint Communiqué';  
     
     const count = pivotRow && pivotColumn && pivotRow[pivotColumn] ? Number(pivotRow[pivotColumn]) : 0;
-    
-    // Positive values: true, true.some. Else: false
-    const isPositive = rawVal === 'true' || rawVal === true || rawVal === 'true.some';
-    const isNegative = !isPositive; // else false
 
-    // if(key.startsWith('Q.4')) {
-    //   // console.clear();
-    //   console.log(pivotRow, pivotRow['ABS National Focal Point'], 
-    //     pivotColumn,pivotRow[pivotColumn] );
-    //   console.log('Q.4', rawVal, isPositive, isNegative, count);
-    // }
+    // normalize raw values
+    const isTrue = rawVal === 'true' || rawVal === true || rawVal > 0;
+    const isTrueSome = rawVal === 'true.some';
+    const isPositive = isTrue || isTrueSome;
+    const isNegative = !isPositive;
+
+    // question classification groups for new rules
+    const abschKeys = ['Q.4.1','Q.5.1','Q.7.1','Q.10.1','Q.12.2','Q.21.2'];
+    const mainKeys   = ['Q.4','Q.5','Q.7','Q.10','Q.12.1','Q.21.1'];
+
+    // helper to quickly return consistent missing cell
+    const missingCell = (tooltipMsg = `Missing associated form in ABSCH pivot (Pivot count: ${count})`) => {
+      return { text: 'Missing from ABS Clearing-House', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: tooltipMsg };
+    };
+
+    // ABSCH-specific questions: treat 'yes' as normal; also treat
+    // 'yes to some extent' as Good (per Bea's list). Grayed-out answers
+    // were handled above as N/A.
+    if (abschKeys.includes(key)) {
+
+      if (isTrue) {
+        // only if they answered yes do we consider pivot count
+        if (count > 0) {
+          return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Data matches with ABSCH pivot records (Pivot count: ${count})` };
+        }
+        return missingCell();
+      }
+      if (isTrueSome) {
+        // Per request, 'yes to some extent' should be reflected as Good
+        return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Positive response (${val})` };
+      }
+      // for other responses (explicitly no)
+      if (count > 0) {
+        return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: `Discrepancy: responded "${val}" but ABSCH pivot count is ${count}` };
+      }
+      return missingCell(`Response not fully affirmative (${val})`);
+    }
+
+    // Main questions use the normal pivot comparison, but also check the paired ABSCH question
+    if (mainKeys.includes(key)) {
+      // check cross dependency
+      const pairMap: Record<string,string> = {
+        'Q.4':'Q.4.1',
+        'Q.5':'Q.5.1',
+        'Q.7':'Q.7.1',
+        'Q.10':'Q.10.1',
+        'Q.12.1':'Q.12.2',
+        'Q.21.1':'Q.21.2'
+      };
+      const paired = pairMap[key];
+      const pairedRaw = paired ? rawValuesMap.get(`${row.documentId}|${paired}`) : null;
+      const pairedNegative = pairedRaw === 'false' || pairedRaw === false;
+
+      // "yes to some extent" should be treated as good regardless of pivot count
+      if (isTrueSome) {
+        if (pairedNegative) {
+          return missingCell('Main question answered positively but ABSCH response is No');
+        }
+        return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Positive response (${val})` };
+      }
+
+      if (isTrue) {
+        if (pairedNegative) {
+          return missingCell('Main question answered positively but ABSCH response is No');
+        }
+        if (count > 0) {
+          return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Data matches with ABSCH pivot records (Pivot count: ${count})` };
+        }
+        return missingCell();
+      }
+
+      // negative responses to main questions should generate an error if pivot data exists
+      if (count > 0) {
+        return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: `Discrepancy: Answered negative but records exist in pivot (Pivot count: ${count})` };
+      }
+      return { text: 'Good', class: 'bg-success text-white px-2 py-1 rounded small', tooltip: `Data matches with ABSCH pivot records (Pivot count: ${count})` };
+    }
+
+    // generic fallback (pre‑existing logic)
     if (isPositive && count === 0) {
-      return { text: 'Missing form ABSCH', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: `Missing associated form in ABSCH pivot (Pivot count: ${count})` };
+      return { text: 'Missing from ABS Clearing-House', class: 'bg-warning text-dark px-2 py-1 rounded small', tooltip: `Missing associated form in ABSCH pivot (Pivot count: ${count})` };
     }
     if (isNegative && count > 0) {
       return { text: 'Error', class: 'bg-danger text-white px-2 py-1 rounded small', tooltip: `Discrepancy: Answered negative but records exist in pivot (Pivot count: ${count})` };
@@ -585,7 +705,7 @@ const getQuestionByKey = (key: string, type:string) => {
   return flatted.find(q => q.key === key);
 };  
 /* ------------------------- Fetch & process ----------------------- */
-const fetchData = async () => {
+const fetchData = async (filterByCountry?: string) => {
   try {
     loading.value = true;
     error.value   = '';
@@ -602,6 +722,7 @@ const fetchData = async () => {
       countriesRes.json() as Promise<Country[]>,
       regionalRes.json()  as Promise<RegionalGroup[]>
     ]);
+    allCountriesRef.value = countries;
     const countriesByIso = indexCountriesByCode(countries);
     const regionalByIso  = indexRegionalGroups(regionalGroups);
 
@@ -613,8 +734,12 @@ const fetchData = async () => {
       Q012: 1, Q012_a: 1, Q012_b: 1, Q021_b: 1,
       documentId: 1, government: 1
     };
-    const query = {
-      government_REL: {
+    // Build query: filter by country if specified, otherwise use org filter
+    let query: any = {};
+    if (filterByCountry) {
+      query['government.identifier'] = filterByCountry.toLowerCase();
+    } else {
+      query['government_REL'] = {
         $in: [
           'D50FE62D-8A5E-4407-83F8-AFCAAF708EA4',
           '5E5B7AA4-2420-4147-825B-0820F7EC5A4B',
@@ -622,13 +747,8 @@ const fetchData = async () => {
           '3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E',
           '0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B'
         ]
-      },
-      // 'government.identifier': {
-      //   $in: [
-      //     'sn'
-      //   ]
-      // }
-    };
+      };
+    }
     const apiUrl = `${REPORT_ANALYZER_API}?f=${encodeURIComponent(JSON.stringify(fields))}&q=${encodeURIComponent(JSON.stringify(query))}&realm=${realm.realm}`;
 
     const reportRes = await fetch(apiUrl);
@@ -650,7 +770,6 @@ const fetchData = async () => {
       // if(index%2 === 0){
       //   report.Q003.value = 'true';
       // }
-
       // Add question columns mapped to "Q.<number>" and "Q.<number>-Info"
       Object.keys(report).forEach((key) => {
         if (!key.startsWith('Q')) return;
@@ -662,18 +781,22 @@ const fetchData = async () => {
           questionMap.set(formattedNumber, qDef);
         }
         
+          const value = (report as any)[key]?.value;
         // OPTION type mapping
         if (qDef.type === 'option') {
-          const value = (report as any)[key]?.value;
           const label = qDef.options?.find((opt: any) => opt.value === value)?.title || value;
           row[formattedNumber] = label;
           rawValuesMap.set(`${report.documentId}|${formattedNumber}`, value);
           const infoHtml = lstring((report as any)[key]?.details, locale.value);
           row[formattedNumber + '-Info'] = stripHtmlToText(infoHtml);
         }
+        else{
+          row[formattedNumber] = value;
+          rawValuesMap.set(`${report.documentId}|${formattedNumber}`, value);
+          
+        }
         // Other types can be added here if needed
       });
-
       return row;
     });
 
@@ -721,7 +844,6 @@ const fetchData = async () => {
     nextTick(() => {
       initTooltips();
     });
-
   } catch (err: any) {
     error.value = err?.message || 'Failed to fetch data';
     console.error('Error fetching data:', err);
@@ -730,18 +852,32 @@ const fetchData = async () => {
   }
 };
 
+  // Handler to refetch data when country filter changes
+  const onCountryFilterChange = async (countryCode: string) => {
+    selectedCountry.value = countryCode;
+    loading.value = true;
+    try {
+      await fetchData(countryCode);
+    } catch (err: any) {
+      error.value = err?.message || 'Failed to filter data';
+      console.error('Error filtering data:', err);
+    } finally {
+      loading.value = false;
+    }
+  };
+
 /* ------------------------- Excel export -------------------------- */
 const exportToExcel = () => {
   const wb = XLSX.utils.book_new();
 
   // Detail
   const detailHeaders = Array.from(
-    tableData.value.reduce((set, row) => {
+    filteredTableData.value.reduce((set, row) => {
       Object.keys(row).forEach(k => set.add(k));
       return set;
     }, new Set<string>())
   );
-  const detailSheet = XLSX.utils.json_to_sheet(tableData.value, { header: detailHeaders });
+  const detailSheet = XLSX.utils.json_to_sheet(filteredTableData.value, { header: detailHeaders });
   detailSheet['!cols'] = detailHeaders.map(h => ({ wch: Math.max(12, h.length + 2) }));
   XLSX.utils.book_append_sheet(wb, detailSheet, 'National Report 1');
 
@@ -786,7 +922,7 @@ const exportToExcel = () => {
     });
 
     // Data rows start at row index 2
-    const compData: any[] = tableData.value.map(row => {
+    const compData: any[] = filteredTableData.value.map(row => {
       const rowData: any[] = [
         ...prefCols.map(k => (k === 'status' ? row[k] : formatCellValue(row[k]))),
         ...comparisonSubHeaders.map(sub => getComparisonCell(row, sub.key).text)
@@ -804,7 +940,7 @@ const exportToExcel = () => {
         const cellAddr = XLSX.utils.encode_cell({ c: C, r: R });
         const cell = compSheet[cellAddr];
         if (cell) {
-          const compCell = getComparisonCell(tableData.value[R - 2], sub.key);
+          const compCell = getComparisonCell(filteredTableData.value[R - 2], sub.key);
           let rgb = '';
           if (compCell.class.includes('bg-success')) rgb = 'C6EFCE';
           else if (compCell.class.includes('bg-danger')) rgb = 'FFC7CE';
@@ -844,11 +980,13 @@ onMounted(() => {
 function initTooltips() {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
   Array.from(tooltipTriggerList).forEach(tooltipTriggerEl => {
-    // avoid re-initializing if it already exists
     const instance = Tooltip.getInstance(tooltipTriggerEl);
-    if (!instance) {
-      new Tooltip(tooltipTriggerEl, { boundary: document.body, trigger: 'hover', html: true });
+    if (instance) {
+      // Dispose old instance in case Vue updated the DOM/title
+      instance.dispose();
     }
+    // Set container:'body' so it doesn't get clipped by overflow tables
+    new Tooltip(tooltipTriggerEl, { container: 'body', boundary: document.body, trigger: 'hover', html: true });
   });
 }
 </script>
