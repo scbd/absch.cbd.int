@@ -9,7 +9,7 @@ Show a list of document questions and answers given a list of questions.
     class="document-review"
   >
     <slot name="header" />
-    <div class="review-questions d-flex flex-column gap-3">
+    <div class="review-questions d-flex flex-column gap-4">
       <div
         v-for="question in questions"
         :key="question.data.key"
