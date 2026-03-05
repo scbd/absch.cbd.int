@@ -159,7 +159,7 @@ const jurisdictionValue: ComputedRef<string> = computed(() => {
   if (customValue === undefined || isNational.value) {
     return lstring(title, props.locale)
   }
-  return `${lstring(title, props.locale)} - ${lstring(customValue, props.locale)}`
+  return `${lstring(title, props.locale)} / ${lstring(customValue, props.locale)}`
 })
 
 onMounted(async () => {
