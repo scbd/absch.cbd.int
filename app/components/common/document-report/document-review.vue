@@ -10,16 +10,13 @@ Show a list of document questions and answers given a list of questions.
   >
     <slot name="header" />
     <div class="review-questions d-flex flex-column gap-1">
-      <div
+      <DocumentQuestion
         v-for="question in questions"
         :key="question.data.key"
-      >
-        <DocumentQuestion
-          :question="question"
-          :label="getQuestionLabel(question.data)"
-          :locales="locales ?? [locale]"
-        />
-      </div>
+        :question="question"
+        :label="getQuestionLabel(question.data)"
+        :locales="locales ?? [locale]"
+      />
     </div>
   </div>
 </template>

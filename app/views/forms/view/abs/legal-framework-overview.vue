@@ -13,9 +13,11 @@
         <document-legend
           :title="t('generalInformation')"
           class="pt-3"
+          data-question-type="legend"
         />
         <div
           v-if="typeof legalFrameworkDocument?.government === 'object'"
+          data-question-type="option"
         >
           <label
             name="government"
@@ -31,6 +33,7 @@
         </div>
         <div
           v-if="typeof legalFrameworkDocument?.jurisdiction === 'object'"
+          data-question-type="option"
         >
           <label
             name="jurisdiction"
@@ -46,6 +49,7 @@
         </div>
         <div
           v-if="typeof legalFrameworkDocument?.jurisdictionImplementation === 'object'"
+          data-question-type="option"
         >
           <label
             class="fw-semibold d-flex flex-column"
@@ -166,7 +170,17 @@ async function getTerm (value: ETerm | undefined): Promise<ETerm> {
 }
 </script>
 <style scoped>
-#Record.legal-framework-overview-review :deep(div[data-key="Article5_3"]) > legend {
+#Record.legal-framework-overview-review :deep(div[data-key*="Article"]) > legend {
   margin-top: 0px;
+}
+
+/* Only show legend when there are answered questions underneath it. */
+.legal-framework-overview-review :deep(*[data-question-type="legend"]) {
+  display: none;
+}
+
+.legal-framework-overview-review :deep(*[data-question-type="legend"]:has(+ *[data-question-type="option"], + .document-review > * [data-question-type="option"]:first-child)),
+.legal-framework-overview-review :deep(*[data-key="benefitSharing"]:has(~ *[data-key*="Article"] + *[data-question-type="option"])) {
+  display: initial;
 }
 </style>
