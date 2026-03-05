@@ -37,8 +37,16 @@ export default ['$scope', '$controller',
 
     $scope.getCleanDocument = (doc) => {
       if (vueCleanDocument) {
-        const cleanDocument = vueCleanDocument?.getCleanDocument(doc)
-        $scope.reviewData = { body: cleanDocument }
+        const legalFrameworkOverview = vueCleanDocument?.getCleanDocument(doc)
+        $scope.reviewData = { body: legalFrameworkOverview }
+
+        const cleanDocument = Object.assign({}, legalFrameworkOverview)
+
+        const jurisdiction = cleanDocument.jurisdiction
+
+        if (jurisdiction !== undefined) {
+          cleanDocument.jurisdiction = { identifier: jurisdiction.identifier, customValue: jurisdiction.customValue }
+        }
 
         return cleanDocument
       }
