@@ -79,7 +79,6 @@
           :document-data="legalFrameworkDocument"
           :report-sections="reportSection"
           :locales="[locale]"
-          class="mb-5"
         />
         <div>
           <ng
