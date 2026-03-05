@@ -15,6 +15,7 @@
           class="pt-3"
           data-question-type="legend"
         />
+        <!-- Government -->
         <div
           v-if="typeof legalFrameworkDocument?.government === 'object'"
           data-question-type="option"
@@ -31,6 +32,8 @@
             :locales="[locale]"
           />
         </div>
+
+        <!-- Jurisdiction -->
         <div
           v-if="typeof legalFrameworkDocument?.jurisdiction === 'object'"
           data-question-type="option"
@@ -42,10 +45,39 @@
           >
             2. {{ t('jurisdiction') }}
           </label>
-          <km-value-ml
-            :value="jurisdictionValue"
-            :locales="[locale]"
+          <ng
+
+            :value="legalFrameworkDocument.jurisdiction"
+            :locale="locale"
           />
+          <div
+            class="input-group"
+          >
+            <div
+              class="form-control km-value km-value-ml-div km-value-ml-html"
+              aria-describedby="basic-addon1"
+            >
+              <span>
+                <km-term
+                  :value="legalFrameworkDocument.jurisdiction"
+                  :locale="locale"
+                />
+                <span
+                  v-if="!isNational"
+                  class="ms-1"
+                >
+                  {{ `(${lstring(legalFrameworkDocument.jurisdiction.customValue, locale)})` }}
+                </span>
+              </span>
+            </div>
+            <span
+              id="basic-addon1"
+              class="input-group-text"
+              style="cursor: default"
+            >
+              {{ locale.toUpperCase() }}
+            </span>
+          </div>
         </div>
         <div
           v-if="typeof legalFrameworkDocument?.jurisdictionImplementation === 'object'"
@@ -66,6 +98,7 @@
           />
         </div>
 
+        <!-- Radio Questions -->
         <document-review
           v-if="legalFrameworkDocument !== undefined"
           :related-questions="relatedQuestions"
@@ -84,9 +117,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, computed, type ModelRef, type ComputedRef } from 'vue'
+import { onMounted, ref, computed, type ModelRef } from 'vue'
 // @ts-expect-error importing js file
 import documentDate from '~/views/forms/view/directives/document-date.vue'
+// @ts-expect-error importing js file
+import kmTerm from '~/components/km/KmTerm.vue'
 import documentLegend from '~/components/common/document-legend.vue'
 import kmValueMl from '~/components/common/km-value-ml.vue'
 import documentReview from '~/components/common/document-report/document-review.vue'
@@ -141,24 +176,13 @@ const reportSection: ReportSection[] = [{ questions: reportQuestions, key: 'lfo'
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const docHeader = ref(header)
 const government = ref()
-const jurisdiction = ref()
 // Computed
 const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION)
-const jurisdictionValue: ComputedRef<string> = computed(() => {
-  if (jurisdiction.value === undefined) { return '' }
-  const { value: { title } } = jurisdiction
-  const customValue = legalFrameworkDocument.value?.jurisdiction?.customValue
-  if (customValue === undefined || isNational.value) {
-    return lstring(title, props.locale)
-  }
-  return `${lstring(title, props.locale)} / ${lstring(customValue, props.locale)}`
-})
 
 onMounted(async () => {
   const data: LegalFrameworkDocument = props.documentInfo.body
   legalFrameworkDocument.value = data
 
-  jurisdiction.value = await getTerm(legalFrameworkDocument.value.jurisdiction)
   government.value = await getTerm(legalFrameworkDocument.value.government)
 })
 
