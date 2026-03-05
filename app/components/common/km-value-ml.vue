@@ -17,6 +17,7 @@
         aria-describedby="basic-addon1"
       >
         {{ lstring(value, locale) }}
+        <slot />
       </div>
 
       <!-- HTML version -->
