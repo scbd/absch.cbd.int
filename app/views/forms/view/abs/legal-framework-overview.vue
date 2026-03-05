@@ -149,10 +149,12 @@ const reportSection: ReportSection[] = [{ questions: reportQuestions, key: 'lfo'
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const docHeader = ref(header)
 const government = ref()
+const jurisdiction = ref()
 // Computed
 const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION)
 const jurisdictionValue: ComputedRef<string> = computed(() => {
-  const title = legalFrameworkDocument.value?.jurisdiction?.title
+  if (jurisdiction.value === undefined) { return '' }
+  const { value: { title } } = jurisdiction
   const customValue = legalFrameworkDocument.value?.jurisdiction?.customValue
   if (customValue === undefined) { return lstring(title, props.locale) }
   return `${lstring(title, props.locale)} - ${lstring(customValue, props.locale)}`
@@ -162,6 +164,7 @@ onMounted(async () => {
   const data: LegalFrameworkDocument = props.documentInfo.body
   legalFrameworkDocument.value = data
 
+  jurisdiction.value = await getTerm(legalFrameworkDocument.value.jurisdiction)
   government.value = await getTerm(legalFrameworkDocument.value.government)
 })
 
