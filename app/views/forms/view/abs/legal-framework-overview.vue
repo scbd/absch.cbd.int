@@ -43,7 +43,7 @@
             2. {{ t('jurisdiction') }}
           </label>
           <km-value-ml
-            :value="legalFrameworkDocument?.jurisdiction.title ?? ''"
+            :value="jurisdictionValue"
             :locales="[locale]"
           />
         </div>
@@ -92,7 +92,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, computed, type ModelRef } from 'vue'
+import { onMounted, ref, computed, type ModelRef, type ComputedRef } from 'vue'
 // @ts-expect-error importing js file
 import documentDate from '~/views/forms/view/directives/document-date.vue'
 import documentLegend from '~/components/common/document-legend.vue'
@@ -103,6 +103,8 @@ import { legalFrameworkOverviewQuestions, isQuestion, type Legend, type DocQuest
 import { THESAURUS_TERMS } from '~/constants/thesaurus'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
+// @ts-expect-error importing js file
+import { lstring } from '~/services/filters/lstring'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
@@ -149,6 +151,12 @@ const docHeader = ref(header)
 const government = ref()
 // Computed
 const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION)
+const jurisdictionValue: ComputedRef<string> = computed(() => {
+  const title = legalFrameworkDocument.value?.jurisdiction?.title
+  const customValue = legalFrameworkDocument.value?.jurisdiction?.customValue
+  if (customValue === undefined) { return lstring(title, props.locale) }
+  return `${lstring(title, props.locale)} - ${lstring(customValue, props.locale)}`
+})
 
 onMounted(async () => {
   const data: LegalFrameworkDocument = props.documentInfo.body
