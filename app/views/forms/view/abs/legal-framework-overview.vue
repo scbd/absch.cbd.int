@@ -156,7 +156,9 @@ const jurisdictionValue: ComputedRef<string> = computed(() => {
   if (jurisdiction.value === undefined) { return '' }
   const { value: { title } } = jurisdiction
   const customValue = legalFrameworkDocument.value?.jurisdiction?.customValue
-  if (customValue === undefined) { return lstring(title, props.locale) }
+  if (customValue === undefined || isNational.value) {
+    return lstring(title, props.locale)
+  }
   return `${lstring(title, props.locale)} - ${lstring(customValue, props.locale)}`
 })
 
