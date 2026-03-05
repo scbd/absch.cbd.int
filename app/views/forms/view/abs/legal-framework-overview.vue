@@ -1,7 +1,7 @@
 <template>
   <div
     id="Record"
-    class="record legal-framework-overview-review"
+    class="record legal-framework-overview-review pb-4"
   >
     <div
       class="record-body bg-white"
