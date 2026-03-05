@@ -43,7 +43,7 @@
             2. {{ t('jurisdiction') }}
           </label>
           <km-value-ml
-            :value="jurisdiction?.title"
+            :value="legalFrameworkDocument?.jurisdiction.title ?? ''"
             :locales="[locale]"
           />
         </div>
@@ -100,6 +100,8 @@ import kmValueMl from '~/components/common/km-value-ml.vue'
 import documentReview from '~/components/common/document-report/document-review.vue'
 import { legalFrameworkOverviewQuestions, isQuestion, type Legend, type DocQuestion } from '~/app-data/abs/legal-framework-overview'
 // @ts-expect-error importing js file
+import { THESAURUS_TERMS } from '~/constants/thesaurus'
+// @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
@@ -145,16 +147,14 @@ const reportSection: ReportSection[] = [{ questions: reportQuestions, key: 'lfo'
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const docHeader = ref(header)
 const government = ref()
-const jurisdiction = ref()
 // Computed
-const isNational = computed(() => jurisdiction.value?.name === 'National / Federal')
+const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION)
 
 onMounted(async () => {
   const data: LegalFrameworkDocument = props.documentInfo.body
   legalFrameworkDocument.value = data
 
   government.value = await getTerm(legalFrameworkDocument.value.government)
-  jurisdiction.value = await getTerm(legalFrameworkDocument.value.jurisdiction)
 })
 
 async function getTerm (value: ETerm | undefined): Promise<ETerm> {
