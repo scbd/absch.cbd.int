@@ -55,16 +55,9 @@
             class="fw-semibold d-flex flex-column"
           >
             <span
-              :class="{ inactive: !isNational }"
               class="mb-1 me-auto"
             >
-              {{ t('jurisdictionImplementationNational') }}
-            </span>
-            <span
-              :class="{ inactive: isNational }"
-              class="mb-1 me-auto"
-            >
-              {{ t('jurisdictionImplementationSubNational') }}
+              {{ isNational ? t('jurisdictionImplementationNational') : t('jurisdictionImplementationSubNational') }}
             </span>
           </label>
           <km-value-ml
