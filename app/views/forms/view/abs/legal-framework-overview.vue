@@ -61,7 +61,7 @@
                 :locale="locale"
               />
               <span
-                v-if="!isNational"
+                v-if="!isNational && legalFrameworkDocument.jurisdiction.customValue !== undefined"
                 class="ms-1"
               >
                 {{ `(${lstring(legalFrameworkDocument.jurisdiction.customValue, locale)})` }}
@@ -153,3 +153,9 @@ onMounted(() => {
   legalFrameworkDocument.value = data
 })
 </script>
+<style scoped>
+#Record.legal-framework-overview-review :deep(div[data-key*="Article"]) > legend {
+  margin-top: 0px;
+  padding-top: 8px;
+}
+</style>
