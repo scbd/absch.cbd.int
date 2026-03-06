@@ -10,6 +10,7 @@ export interface Validation {
 
 export interface QuestionMap<Map extends DocumentData> {
   validations?: Validation[]
+  questions?: DocQuestion[]
   key: keyof Map
   type: string
   number?: string
@@ -24,12 +25,6 @@ export interface QuestionMap<Map extends DocumentData> {
 export interface Question {
   values: QuestionData[],
   data: QuestionMap<DocumentData>
-}
-
-export interface ReportSection {
-  key: string
-  title: string
-  questions?: Array<QuestionMap<DocumentData> | ReportSection>
 }
 
 interface CountryRecordDoc {
@@ -51,3 +46,11 @@ export interface QuestionProps {
   html?: boolean
   title?: string
 }
+
+export interface DocQuestion extends QuestionMap<DocumentData> {
+  validations?: Validation[]
+  enable?: boolean
+  onChange?: ()=> DocQuestion | Legend
+}
+
+export type Legend = QuestionMap<DocumentData>
