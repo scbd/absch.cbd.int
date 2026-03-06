@@ -9,6 +9,7 @@ import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/view-reference-document';
 import '~/views/report-analyzer/reportAnalyzerService'; ;
 import analyzerT from '~/app-text/views/report-analyzer/directives/national-reports/analyzer.json';
+import { sanitizeHtml } from '~/services/html.sanitize.js';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -60,7 +61,7 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
 
                 $scope.sumType  = 'percentGlobal';
                 $scope.sumTypes = ['percentGlobal', 'percentColumn', 'percentRow', 'sum' ];
-
+                $scope.sanitizeHtml = sanitizeHtml;
                 //====================================
                 //
                 //
