@@ -311,10 +311,3 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
     }
   ]
 }
-
-/**
-* Validate if document attribute types is a question to prevent accessing undefined attributes.
-*/
-export function isQuestion (value: DocQuestion | Legend): value is DocQuestion {
-  return value.type !== 'legend'
-}
