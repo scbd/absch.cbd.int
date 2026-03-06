@@ -38,7 +38,7 @@
               v-vue-ng:km-control-group
               required="true"
               name="government"
-              :caption="`1. ${t('country')}`"
+              :caption="`${t('country')}`"
               class="form-group--bold border border-1 p-2"
             >
               <ng
@@ -68,7 +68,7 @@
                 v-vue-ng:km-control-group
                 required="true"
                 name="jurisdiction"
-                :caption="`2. ${t('jurisdiction')}`"
+                :caption="t('jurisdiction')"
                 class="form-group--bold mb-2"
               >
                 <div class="ps-1">
