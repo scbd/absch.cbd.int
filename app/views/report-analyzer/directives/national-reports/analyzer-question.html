@@ -62,7 +62,7 @@
         </tr>
 
         <!-- OPTIONS + TERMS -->
-        <tr ng-if="::question.type!='text' && question.type!='lstring' && question.type!='number' && question.type!='link'" class="option {{sumType}}" ng-repeat="row in rows" ng-class="{ 'first': $first, 'last' : $last, 'info': row.filterOn, 'filter-on': row.filterOn, 'filter': filter }">
+        <tr ng-if="::isOptionTypeQuestion()" class="option {{sumType}}" ng-repeat="row in rows" ng-class="{ 'first': $first, 'last' : $last, 'info': row.filterOn, 'filter-on': row.filterOn, 'filter': filter }">
             <td class="filter">
                 <i ng-if="::row.fullSum"  class="fa fa-filter fa-lg" style="cursor:pointer" ng-click="toggleFilter(row)" data-bs-toggle="popover" data-placement="top" data-content="Filter: Include only reports which have this answer selected."></i>
                 <i ng-if="::!row.fullSum" class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
@@ -107,7 +107,7 @@
         </tr>
 
         <!-- FREE TEXT -->
-        <tr ng-if="::question.type=='text' || question.type=='lstring' ||question.type=='number' || question.type=='link'">
+        <tr ng-if="::!isOptionTypeQuestion()">
             <td class="filter">
                 <i class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
             </td>

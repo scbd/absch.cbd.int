@@ -144,7 +144,9 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                     else if(!!text.number && type == 'number')
                         text =  text.number;          
                     else if(!field && isLString(text))
-                        text = text                          
+                        text = text   
+                    else if(!field && type == 'lstringRte')
+                        text = text.value                          
                     else if(!field && type == 'string'){
                         text = text
                     }
@@ -164,7 +166,9 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                     else if(!!text.number && type == 'number')
                         text =  text.number;         
                     else if(!field && isLString(text))
-                        text = text                            
+                        text = text    
+                    else if(!field && type == 'lstringRte')
+                        text = text.value                                 
                     else if(!field && type == 'string')
                         text = text
                     else
@@ -297,6 +301,10 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                     }
                 }
 
+                $scope.isOptionTypeQuestion = function(){
+                    var question = $scope.question;
+                    return !['text','lstring','number','link', 'lstringRte'].includes(question.type);
+                }
                 //==============================================
                 //
                 //
@@ -345,6 +353,8 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                             text =  text.number;         
                         else if(!field && (isLString(text) || type == 'lstring'))
                             text = text          
+                        else if(!!text.value && type == 'lstringRte')
+                            text = text.value;
                         else if((!field && (type == 'text' || type == 'string')))
                             text = text       
                         else
@@ -387,7 +397,7 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                     if(!$scope.regions) return;
                     if(!$scope.question) return;
 
-                    if(_.includes(['text', 'number', 'lstring', 'link'], $scope.question.type)) {
+                    if(_.includes(['text', 'number', 'lstring', 'link', 'lstringRte'], $scope.question.type)) {
                         $scope.question.options = [{ value: $scope.question.type }];  // text responses don't have predefine values; Simulate a fake one
                     }
 
@@ -650,6 +660,8 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
 
                     if(answers && $scope.question.type=='lstring' && !!answers)
                         answers = 'lstring';
+                    if(answers && $scope.question.type=='lstringRte' && !!answers)
+                        answers = 'lstringRte';
 
                     if(answers && $scope.question.type=='text' && !!answers)
                         answers = 'text';
