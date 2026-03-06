@@ -44,7 +44,7 @@ const { t } = useI18n({ messages });
 const currentVersion = ref<string>((window?.scbdApp||{}).version||'0.0.0')
 const remoteVersion = ref<string | null>(null)
 const modalRef = shallowRef(null);
-const timerInterval = 170*60*1000 // 170 minutes interval
+const timerInterval = 17*60*1000 // 17 minutes interval
 let currentTimerId: number | undefined;
 let appVersionModal: Modal | null = null;
 
