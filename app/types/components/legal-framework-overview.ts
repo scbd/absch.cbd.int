@@ -5,7 +5,6 @@ export interface LegalFrameworkDocument extends DocumentData {
   government?: ETerm
   title: QuestionData
   jurisdiction?: ETerm
-  customValue?: LString
   jurisdictionImplementation: LString
   countryEstablished: QuestionData
   geneticResources: QuestionData
