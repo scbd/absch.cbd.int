@@ -139,19 +139,7 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                 //
                 //==============================================
                 $scope.hasText = function(government, text, field, type) {
-                    if(text && (text.details || text[field]))
-                        text =  (text.details || text[field]);
-                    else if(!!text.number && type == 'number')
-                        text =  text.number;          
-                    else if(!field && isLString(text))
-                        text = text   
-                    else if(!field && type == 'lstringRte')
-                        text = text.value                          
-                    else if(!field && type == 'string'){
-                        text = text
-                    }
-                    else
-                        text = undefined;
+                    text = resolveText(text, field, type);
                     
                     return text!==undefined;
                 };
@@ -161,18 +149,7 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                 //
                 //==============================================
                 $scope.showText = function(government, text, field, type) {
-                    if(text && (text.details ||text[field]))
-                        text =  (text.details || text[field]);
-                    else if(!!text.number && type == 'number')
-                        text =  text.number;         
-                    else if(!field && isLString(text))
-                        text = text    
-                    else if(!field && type == 'lstringRte')
-                        text = text.value                                 
-                    else if(!field && type == 'string')
-                        text = text
-                    else
-                        text = undefined;
+                    text = resolveText(text, field, type);
                     
                     nrAnalyzer.showTexts([{
                         government : government,
@@ -186,8 +163,8 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                 //
                 //
                 //==============================================
-                $scope.showTexts = function(governments, field, type) {
-                    var results = getTexts(governments, field, type);
+                $scope.showTexts = function(governments, field, type, optionValue) {
+                    var results = getTexts(governments, field, type, optionValue);
                     nrAnalyzer.showTexts(results, $scope.question);
                 };
 
@@ -322,7 +299,27 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                     return q;
                 };
 
-                function getTexts(governments, field, type){
+                function resolveText(text, field, type){
+                    
+                    if(text && (text.details ||text[field]))
+                        text =  (text.details || text[field]);
+                    else if(!!text.number && type == 'number')
+                        text =  text.number;         
+                    else if(!!text.value && (isLString(text) || type == 'lstring'))
+                        text = text.value;       
+                    else if(!field && isLString(text))
+                        text = text;          
+                    else if(!!text.value && type == 'lstringRte')
+                        text = text.value                                 
+                    else if(!field && type == 'string')
+                        text = text
+                    else
+                        text = undefined;
+
+                    return text;
+                }
+                
+                function getTexts(governments, field, type, optionValue){
                     if(!governments)
                         governments = _.map($scope.reports, 'government');
                     
@@ -340,6 +337,12 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                         return !_.isEmpty(report[$scope.question.key]);
 
                     }).filter(function(report) {
+                        if(optionValue=== undefined)
+                            return true;
+
+                        return report[$scope.question.key].value == optionValue;
+
+                    }).filter(function(report) {
 
                         return !filter || filter.matchingCountriesMap[report.government];
 
@@ -347,18 +350,7 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
 
                         var text = report[$scope.question.key];
 
-                        if(text && (text.details ||text[field]))
-                            text =  (text.details || text[field]);
-                        else if(!!text.number && type == 'number')
-                            text =  text.number;         
-                        else if(!field && (isLString(text) || type == 'lstring'))
-                            text = text          
-                        else if(!!text.value && type == 'lstringRte')
-                            text = text.value;
-                        else if((!field && (type == 'text' || type == 'string')))
-                            text = text       
-                        else
-                            text = undefined;
+                       text = resolveText(text, field, type);   
                         
                         return {
                             government : report.government,
@@ -372,8 +364,8 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                     return results;
                 }
 
-                function hasTexts(governments, field, type) {
-                    var results = getTexts(governments, field, type);
+                function hasTexts(governments, field, type, optionValue) {
+                    var results = getTexts(governments, field, type, optionValue);
                     return results?.filter(r=>r.text).length > 0;
                 };
                 //==============================================
@@ -479,7 +471,10 @@ import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-r
                     $scope.filter     = nrAnalyzer.filter();
                     $scope.reportsMap = data.reports;
                     $scope.fullSum    = data.fullSum;
-                    $scope.rows       = _.values(data.rows);
+                    $scope.rows       = _.values(data.rows).map(function(row){
+                        row.hasTexts = hasTexts(undefined, question.key, question.type, $scope.isOptionTypeQuestion() ? row.value : undefined);
+                        return row;
+                    });
                     $scope.additionalInfo    = data.additionalInfo;
                     $scope.question.hasTexts = hasTexts(undefined, question.key, question.type);
                 }
