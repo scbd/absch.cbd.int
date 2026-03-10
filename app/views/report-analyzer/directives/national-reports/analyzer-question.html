@@ -81,8 +81,8 @@
                 </div>
             </td>
             <td class="text-center">
-                <img ng-if="::question.hasTexts && (question.options[0].sum||rows[0].sum)" src="/app/views/report-analyzer/resources/nr-documents.png" 
-                ng-click="showTexts(undefined, question.field, question.type)" style="cursor:pointer">
+                <img ng-if="::row.hasTexts && (question.options[0].sum||rows[0].sum)" src="/app/views/report-analyzer/resources/nr-documents.png" 
+                ng-click="showTexts(undefined, question.field, question.type, row.value)" style="cursor:pointer">
             </td>   
             <td class="text-center region" ng-class="{ first: $first, last: $last, expanded: expanded[cell.identifier] }" ng-style="  { 'background-color': cell.backgroundColor[sumType], 'color' : cell.textColor[sumType] }" ng-repeat-start="cell in ::row.cells" >
                 <span class="cell-value" ng-bind="cell[sumType] | number : sumType=='sum'? 0 : digits"></span>
