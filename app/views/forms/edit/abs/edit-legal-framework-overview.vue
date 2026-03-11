@@ -275,8 +275,7 @@ import documentLegend from '~/components/common/document-legend.vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js'
 // @ts-expect-error importing js file
 import { sanitizeDocument } from '~/services/filters/common'
-// @ts-expect-error importing js file
-import { THESAURUS_DOMAINS, THESAURUS_TERMS } from '~/constants/thesaurus.js'
+import { THESAURUS_DOMAINS, THESAURUS_TERMS } from '~/constants/thesaurus'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
 // @ts-expect-error importing js file
