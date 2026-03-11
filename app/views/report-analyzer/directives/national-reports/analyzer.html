@@ -286,7 +286,7 @@
                         
                         <pre ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && item.type!='number'"
                             style="white-space:pre-line" ng-style="{ direction : ((item.text.value||item.text)|direction:item.locale) }">
-                            <span ng-bind="(item.text.value||item.text)|lstring:item.locale"></span>
+                            <span ng-bind-html="sanitizeHtml((item.text.value||item.text)|lstring:item.locale)"></span>
                         </pre>
                         <div class="km-value" ng-style="{ direction : ((item.text.value||item.text)|direction:item.locale) }" ng-if="item.field=='relevantDocuments'"> 
                             <div ng-repeat="file in (item.text.value||item.text)">
