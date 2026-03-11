@@ -38,7 +38,7 @@
               v-vue-ng:km-control-group
               required="true"
               name="government"
-              :caption="`1. ${t('country')}`"
+              :caption="`${t('country')}`"
               class="form-group--bold border border-1 p-2"
             >
               <ng
@@ -68,7 +68,7 @@
                 v-vue-ng:km-control-group
                 required="true"
                 name="jurisdiction"
-                :caption="`2. ${t('jurisdiction')}`"
+                :caption="t('jurisdiction')"
                 class="form-group--bold mb-2"
               >
                 <div class="ps-1">
@@ -84,7 +84,7 @@
                         :id="`jurisdictions-option-${option.identifier}`"
                         v-model="legalFrameworkDocument.jurisdiction"
                         type="radio"
-                        :value="{ identifier: option.identifier }"
+                        :value="{ identifier: option.identifier, customValue: legalFrameworkDocument.jurisdiction?.customValue }"
                         :name="lstring(option.value)"
                         class="me-1"
                       >
@@ -181,6 +181,7 @@
                     :name="question.key"
                     :info-label="`${question.key}.additionalInformation`"
                     :required="question.mandatory"
+                    :add-info-required="true"
                     class="ps-1"
                   />
                 </div>
@@ -202,6 +203,7 @@
                     v-model:ng-model="legalFrameworkDocument[subQuestion.key]"
                     v-vue-ng:nr-yes-no
                     :required="subQuestion.mandatory"
+                    :add-info-required="true"
                     :question="subQuestion"
                     :locales="legalFrameworkDocument.header.languages"
                     :name="subQuestion.key"
@@ -221,19 +223,41 @@
             />
           </div>
         </div>
+        <!-- Notes -->
+        <section>
+          <legend> {{ t('notes') }} </legend>
+          <div class="row">
+            <div class="col-xs-12">
+              <div
+                class="km-control-group"
+                name="notes"
+              >
+                <div class="help-info">
+                  {{ t('notesInfos') }}
+                </div>
+                <ng
+                  v-model:ng-model="legalFrameworkDocument['notes']"
+                  v-vue-ng:km-notes
+                  name="notes"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
   </div>
 </template>
 <script setup lang="ts">
 import { inject, onMounted, computed, ref, type Ref, type ModelRef } from 'vue'
-import { legalFrameworkOverviewQuestions, isQuestion } from '~/app-data/abs/legal-framework-overview'
+import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
+import { flattenQuestions, isQuestion } from '~/components/common/document-report/get-question-data'
 import documentLegend from '~/components/common/document-legend.vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-form-languages.js'
 // @ts-expect-error importing js file
 import { sanitizeDocument } from '~/services/filters/common'
 // @ts-expect-error importing js file
-import { THESAURUS_DOMAINS } from '~/constants/thesaurus.js'
+import { THESAURUS_DOMAINS, THESAURUS_TERMS } from '~/constants/thesaurus.js'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
 // @ts-expect-error importing js file
@@ -245,7 +269,7 @@ import { useAuth } from '@scbd/angular-vue/src/index.js'
 import { useI18n } from 'vue-i18n'
 import messages from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { Inject, LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
-import type { DocQuestion, Legend } from '~/app-data/abs/legal-framework-overview'
+import type { DocQuestion, Legend } from '~/types/common/document-report'
 import type { ETerm } from '~/types/common/documents'
 
 const user = useAuth().user()
@@ -260,19 +284,28 @@ const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = def
 const countries: Ref<ETerm[]> = ref(thesaurusApi.getDomainTerms(THESAURUS_DOMAINS.COUNTRIES))
 const jurisdictions: Ref<ETerm[]> = ref([])
 
-const documentQuestions: Ref<Array<DocQuestion | Legend>> = ref(legalFrameworkOverviewQuestions(t)
-  .map((question) => {
-    if (!isQuestion(question)) { return question }
-    return Object.assign(question, { onChange: () => enableOrDisableQuestions(question) })
-  }))
+const flattenedQuestions = flattenQuestions(legalFrameworkOverviewQuestions(t))
+  .reduce((acc: Array<DocQuestion | Legend>, q: DocQuestion | Legend) => {
+    acc.push(q)
+    if (!isQuestion(q) && Array.isArray(q.questions) && q.key.includes('Article')) {
+      return [...acc, ...q.questions]
+    }
+    return acc
+  }, [])
+  .map((q) => {
+    if (isQuestion(q)) {
+      return Object.assign(q, { onChange: () => enableOrDisableQuestions(q) })
+    }
+    return q
+  })
+
+const documentQuestions: Ref<Array<DocQuestion | Legend>> = ref(flattenedQuestions)
 
 // Computed
 const isJurisdictionDefined = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier !== undefined)
-const currentJurisdiction = computed(() => jurisdictions.value
-  .find((jurisdiction) => jurisdiction.identifier === legalFrameworkDocument.value?.jurisdiction?.identifier))
-const isNational = computed(() => currentJurisdiction.value?.value === 'National / Federal' &&
-  typeof currentJurisdiction.value.value === 'string')
-const jurisdictionNamePlaceholder = computed(() => currentJurisdiction.value?.value === 'Community'
+const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION &&
+  typeof legalFrameworkDocument.value?.jurisdiction?.identifier === 'string')
+const jurisdictionNamePlaceholder = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.COMMUNITY_JURISDICTION
   ? t('communityName')
   : t('subNationalName'))
 const userHasGovernment = computed(() => user.government !== undefined && user.government !== null)
@@ -376,12 +409,16 @@ function enableOrDisableQuestions (question: DocQuestion | Legend): DocQuestion 
     margin-bottom: 10px;
   }
 
+  div.row:has(legend):has(+ div > div > legend) {
+    margin-bottom: 0px;
+  }
+
   div.row:has(+ .row > div > .document-question.inactive) {
     margin-bottom: 5px;
   }
 
   div.row:has(> div > .document-question):has(+ .row > div > legend) {
-    margin-bottom: 20px
+    margin-bottom: 12px;
   }
 
   .text-focus {

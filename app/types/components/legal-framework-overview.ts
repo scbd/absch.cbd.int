@@ -5,7 +5,6 @@ export interface LegalFrameworkDocument extends DocumentData {
   government?: ETerm
   title: QuestionData
   jurisdiction?: ETerm
-  customValue?: LString
   jurisdictionImplementation: LString
   countryEstablished: QuestionData
   geneticResources: QuestionData
@@ -26,6 +25,7 @@ export interface LegalFrameworkDocument extends DocumentData {
   article55Implemented: QuestionData
   header: Header
   status: QuestionData
+  notes: QuestionData
 }
 
 export type Inject = (arg0: { getCleanDocument: (doc: LegalFrameworkDocument)=> LegalFrameworkDocument | undefined })=> undefined

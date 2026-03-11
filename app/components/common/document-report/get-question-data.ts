@@ -1,4 +1,4 @@
-import type { QuestionMap } from '~/types/common/document-report'
+import type { QuestionMap, DocQuestion, Legend } from '~/types/common/document-report'
 import type { QuestionData, DocumentData } from '~/types/common/documents'
 import type { LString } from '~/types/languages'
 
@@ -77,4 +77,30 @@ function parseDetails (questionData: QuestionData): LString | string | undefined
   if (data.details !== undefined) {
     return data.details
   }
+}
+
+/**
+ * Take a list of question sections and flatten them into an array.
+ */
+export function flattenQuestions (sections: Array<DocQuestion | Legend>, depth: number | null = 1): Array<DocQuestion | Legend> {
+  const flatten = (questions: Array<DocQuestion | Legend>, currentDepth: number): Array<DocQuestion | Legend> => questions
+    .reduce((acc: Array<DocQuestion | Legend>, question) => {
+      const q = question
+
+      acc.push(q)
+
+      if (!Array.isArray(q.questions)) { return acc }
+      if (currentDepth >= (depth ?? 0) && depth !== null) { return acc }
+
+      return [...acc, ...flatten(q.questions, currentDepth + 1)]
+    }, [])
+
+  return flatten(sections, 0)
+}
+
+/**
+* Validate if document attribute types is a question to prevent accessing undefined attributes.
+*/
+export function isQuestion (value: DocQuestion | Legend): value is DocQuestion {
+  return value.type !== 'legend'
 }

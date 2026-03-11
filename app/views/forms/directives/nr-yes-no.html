@@ -7,7 +7,7 @@
         </label>
     </div>
     <div class="pt-2" ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value">
-        <div class="km-control-group" name="{{infoLabel}}" ng-attr-caption="{{getNumberedCaption()}}">
+        <div class="km-control-group" name="{{infoLabel}}" ng-attr-caption="{{getNumberedCaption()}}" ng-required="addInfoRequired">
         <div ng-if="hasAdditionalInformation.footnote" ng-bind-html="hasAdditionalInformation.footnote"  class="small text-muted"></div>
             <div ng-if="hasAdditionalInformation.type == 'lstring'" km-textbox-ml name="{{infoLabel}}" ng-model="answer.additionalInformation" locales="locales"
                 ng-change="updateAnswer()"></div>
