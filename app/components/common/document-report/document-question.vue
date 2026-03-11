@@ -2,6 +2,7 @@
   <div
     :data-question-type="question.data.type"
     :data-key="question.data.key"
+    :class="{ 'mb-1': question.data.type !== 'legend' }"
   >
     <label
       v-if="question.data.type !== 'legend'"
@@ -16,8 +17,8 @@
       v-bind="questionComponent.props"
     />
     <div
-      v-if="question.values[0]?.details !== undefined"
-      class="additional-information mt-1"
+      v-if="isDetailsDefined(question.values[0]?.details)"
+      class="additional-information"
     >
       <label> {{ question.values[0].caption ?? t('additionalInformation') }} </label>
       <KmValueMl
@@ -41,18 +42,18 @@ import { sanitizeHtml } from '~/services/html.sanitize'
 import { useI18n } from 'vue-i18n'
 import messages from '~/app-text/components/common/document-question.json'
 import type { Question, QuestionProps } from '~/types/common/document-report'
-import type { LanguageCode } from '~/types/languages'
+import type { LanguageCode, LString } from '~/types/languages'
 
 const { t, locale } = useI18n({ messages })
 
 const props = defineProps<{
   question: Question,
   label: string,
-  locales?: string[] | LanguageCode[],
+  locales?: LanguageCode[],
 }>()
 
 // Computed
-const definedLocales: ComputedRef<string[] | LanguageCode[]> = computed(() => props.locales ?? [locale.value])
+const definedLocales: ComputedRef<LanguageCode[]> = computed(() => props.locales ?? [locale.value])
 
 const questionComponent: ComputedRef<{ component: Component, props: QuestionProps }> = computed(() => {
   const { question: { data: { type } } } = props
@@ -74,6 +75,14 @@ const questionComponent: ComputedRef<{ component: Component, props: QuestionProp
       return { component: KmValueMl, props: questionProps }
   }
 })
+
+function isDetailsDefined (details: string | LString | undefined): details is string | LString {
+  if (details === undefined) { return false }
+
+  if (typeof details === 'string') { return true }
+
+  return definedLocales.value.some((locale) => details[locale] !== undefined)
+}
 </script>
 <style scoped>
 label.question-label + div {
