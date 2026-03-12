@@ -1,10 +1,10 @@
 <template>
   <div
     id="Record"
-    class="record legal-framework-overview-review pb-4"
+    class="record legal-framework-overview-review"
   >
     <div
-      class="record-body bg-white"
+      class="record-body bg-white pb-4"
     >
       <div class="px-4 bg-white d-flex flex-column gap-1">
         <document-date
@@ -104,10 +104,15 @@
         </div>
       </div>
     </div>
+    <ng
+      v-if="legalFrameworkDocument !== undefined"
+      v-vue-ng:document-metadata-vue
+      :document-info="documentInfo"
+    />
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, computed, type ModelRef } from 'vue'
+import { onMounted, computed, type ModelRef } from 'vue'
 // @ts-expect-error importing js file
 import documentDate from '~/views/forms/view/directives/document-date.vue'
 // @ts-expect-error importing js file
@@ -118,7 +123,6 @@ import documentLegend from '~/components/common/document-legend.vue'
 import kmValueMl from '~/components/common/km-value-ml.vue'
 import documentReview from '~/components/common/document-report/document-review.vue'
 import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
-// @ts-expect-error importing js file
 import { THESAURUS_TERMS } from '~/constants/thesaurus'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
@@ -128,9 +132,15 @@ import type { LanguageCode } from '~/types/languages'
 
 const { t } = useI18n({ messages })
 interface Props {
-  documentInfo: { body: LegalFrameworkDocument }
+  documentInfo: {
+    body: LegalFrameworkDocument
+    identifier: string
+    documentID: string
+    type: string
+  }
   locale: LanguageCode
 }
+
 
 const props = defineProps<Props>()
 const header = {
@@ -140,7 +150,7 @@ const header = {
 }
 
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
-const docHeader = ref(header)
+const docHeader = computed(() => props.documentInfo.body.header ?? header)
 // Computed
 const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION)
 const showGeneralInformation = computed(() => legalFrameworkDocument.value?.jurisdiction !== undefined ||
