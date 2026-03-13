@@ -116,36 +116,40 @@
                 </div>
               </ng>
 
-              <label
-                class="fw-semibold d-flex flex-column"
+              <div
+                v-if="isJurisdictionDefined"
               >
-                <span
-                  class="mb-2 me-auto"
-                  :class="{ inactive: !isNational && isJurisdictionDefined }"
+                <label
+                  class="fw-semibold d-flex flex-column"
                 >
-                  {{ t('jurisdictionImplementationNational') }}
-                </span>
-                <span
-                  class="me-auto"
-                  :class="{ inactive: isNational && isJurisdictionDefined }"
-                >
-                  {{ t('jurisdictionImplementationSubNational') }}
-                </span>
-              </label>
-              <ng
-                v-vue-ng:km-control-group
-                required
-                name="jurisdictionImplementation"
-                :caption="t('jurisdictionImplementation')"
-                class="mb-2 d-flex flex-column hidden-label"
-              >
+                  <span
+                    v-if="isNational"
+                    class="mb-1 me-auto"
+                  >
+                    {{ t('jurisdictionImplementationNational') }}
+                  </span>
+                  <span
+                    v-else
+                    class="mb-1 me-auto"
+                  >
+                    {{ t('jurisdictionImplementationSubNational') }}
+                  </span>
+                </label>
                 <ng
-                  v-model:ng-model="legalFrameworkDocument.jurisdictionImplementation"
-                  v-vue-ng:km-textbox-ml
-                  :locales="legalFrameworkDocument.header.languages"
+                  v-vue-ng:km-control-group
+                  required
                   name="jurisdictionImplementation"
-                />
-              </ng>
+                  :caption="t('jurisdictionImplementation')"
+                  class="mb-2 d-flex flex-column hidden-label"
+                >
+                  <ng
+                    v-model:ng-model="legalFrameworkDocument.jurisdictionImplementation"
+                    v-vue-ng:km-textbox-ml
+                    :locales="legalFrameworkDocument.header.languages"
+                    name="jurisdictionImplementation"
+                  />
+                </ng>
+              </div>
             </div>
           </div>
         </div>
@@ -304,7 +308,7 @@ const documentQuestions: Ref<Array<DocQuestion | Legend>> = ref(flattenedQuestio
 // Computed
 const isJurisdictionDefined = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier !== undefined)
 const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION &&
-  typeof legalFrameworkDocument.value?.jurisdiction?.identifier === 'string')
+  typeof legalFrameworkDocument.value.jurisdiction.identifier === 'string')
 const jurisdictionNamePlaceholder = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.COMMUNITY_JURISDICTION
   ? t('communityName')
   : t('subNationalName'))
