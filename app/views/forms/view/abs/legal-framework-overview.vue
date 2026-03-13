@@ -167,4 +167,7 @@ onMounted(() => {
   margin-top: 0px;
   padding-top: 8px;
 }
+#Record :deep(.km-value) {
+  margin-bottom: 0px;
+}
 </style>
