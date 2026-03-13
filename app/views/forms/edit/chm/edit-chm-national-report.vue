@@ -185,7 +185,7 @@
     import { sanitizeDocument } from '~/services/filters/common';
     import { useAuth, useRoute } from "@scbd/angular-vue/src/index.js";
     import ThesaurusApi  from "~/api/thesaurus.js";
-    import { THESAURUS_TERMS } from '~/constants/thesaurus.js'
+    import { THESAURUS_TERMS } from '~/constants/thesaurus'
  
     
    

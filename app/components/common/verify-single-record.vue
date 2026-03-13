@@ -1,7 +1,12 @@
 <template>
     <div>
-        <div v-if="isLoading" class="fs-5">
-            <loading-modal :caption="t('validatingRecord')"/>
+        <div
+          v-if="isLoading"
+          class="fs-5 loader-container pe-none position-absolute top-0 start-0 h-100 w-100"
+        >
+          <div class="pe-auto h-100 position-relative">
+            <loading-overlay :caption="t('validatingRecord')"/>
+          </div>
         </div>
         <div class="modal fade" ref="verifyModal" data-bs-backdrop="static" data-bs-keyboard="false" 
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">      
@@ -43,7 +48,7 @@
     import { useRoute, useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
     import KmDocumentApi from "~/api/km-document";
     import { Modal } from "bootstrap";
-    import LoadingModal  from '~/components/common/loading-modal.vue';
+    import LoadingOverlay  from '~/components/common/loading-overlay.vue';
     const auth = useAuth();
     const { t } = useI18n({ messages });
     const realm = useRealm();
@@ -125,3 +130,8 @@
             }
     }
 </script>
+<style scoped>
+.loader-container {
+  padding-top: 20%;
+}
+</style>
