@@ -1,7 +1,6 @@
 {
   "country": "1. Country",
-  "jurisdictionImplementation": "Jurisdiction implementation",
-  "jurisdictionCustomValue": "Jurisdiction name",
+  "jurisdictionImplementation": "Jurisdiction details",
   "subNationalName": "Subnational name",
   "communityName": "Community name",
   "article5_3": "Article 5.3",

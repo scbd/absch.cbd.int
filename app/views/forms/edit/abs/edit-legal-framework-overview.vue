@@ -12,7 +12,7 @@
             />
           </div>
         </div>
-
+        <!-- Languages -->
         <div class="row">
           <div class="col-xs-12">
             <ng
@@ -31,14 +31,14 @@
             </ng>
           </div>
         </div>
-
+        <!-- Country -->
         <div class="row">
           <div class="col-xs-12">
             <ng
               v-vue-ng:km-control-group
               required="true"
               name="government"
-              :caption="`${t('country')}`"
+              :caption="t('country')"
               class="form-group--bold border border-1 p-2"
             >
               <ng
@@ -56,7 +56,7 @@
             </ng>
           </div>
         </div>
-
+        <!-- Jurisdiction -->
         <div
           class="row"
         >
@@ -95,45 +95,58 @@
                         {{ option.title }}
                       </label>
                     </div>
-                    <ng
-                      v-if="!isNational && option.identifier === legalFrameworkDocument.jurisdiction?.identifier"
-                      v-vue-ng:km-control-group
-                      :caption="t('jurisdictionCustomValue')"
-                      required="true"
-                      name="jurisdiction.customValue"
-                      class="ms-3 my-1 hidden-label d-flex flex-column"
-                    >
-                      <ng
-                        id="jurisdiction-custom-value"
-                        v-model:ng-model="legalFrameworkDocument.jurisdiction.customValue"
-                        v-vue-ng:km-textbox-ml
-                        :locales="legalFrameworkDocument.header.languages"
-                        :placeholder="jurisdictionNamePlaceholder"
-                        name="custom-value"
-                      />
-                    </ng>
                   </div>
                 </div>
               </ng>
 
               <div
+                v-if="!isNational && legalFrameworkDocument.jurisdiction !== undefined"
+                class="mb-1"
+              >
+                <div v-if="isCommunityJurisdiction">
+                  <ng
+                    v-vue-ng:km-control-group
+                    required="true"
+                    name="jurisdiction.customValue"
+                    :caption="t('communityName')"
+                  >
+                    <ng
+                      id="jurisdiction-custom-value"
+                      v-model:ng-model="legalFrameworkDocument.jurisdiction.customValue"
+                      v-vue-ng:km-textbox-ml
+                      name="custom-value"
+                      :locales="legalFrameworkDocument.header.languages"
+                      :placeholder="t('communityName')"
+                    />
+                  </ng>
+                </div>
+                <div v-else>
+                  <ng
+                    v-vue-ng:km-control-group
+                    required="true"
+                    name="jurisdiction.customValue"
+                    :caption="t('subNationalName')"
+                  >
+                    <ng
+                      id="jurisdiction-custom-value"
+                      v-model:ng-model="legalFrameworkDocument.jurisdiction.customValue"
+                      v-vue-ng:km-textbox-ml
+                      :locales="legalFrameworkDocument.header.languages"
+                      name="custom-value"
+                      :placeholder="t('subNationalName')"
+                    />
+                  </ng>
+                </div>
+              </div>
+
+              <div
                 v-if="isJurisdictionDefined"
               >
                 <label
-                  class="fw-semibold d-flex flex-column"
+                  class="fw-semibold control-label"
+                  required="required"
                 >
-                  <span
-                    v-if="isNational"
-                    class="mb-1 me-auto"
-                  >
-                    {{ t('jurisdictionImplementationNational') }}
-                  </span>
-                  <span
-                    v-else
-                    class="mb-1 me-auto"
-                  >
-                    {{ t('jurisdictionImplementationSubNational') }}
-                  </span>
+                  {{ isNational ? t('jurisdictionImplementationNational') : t('jurisdictionImplementationSubNational') }}
                 </label>
                 <ng
                   v-vue-ng:km-control-group
@@ -147,6 +160,7 @@
                     v-vue-ng:km-textbox-ml
                     :locales="legalFrameworkDocument.header.languages"
                     name="jurisdictionImplementation"
+                    :placeholder="t('jurisdictionImplementation')"
                   />
                 </ng>
               </div>
@@ -254,7 +268,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { inject, onMounted, computed, ref, type Ref, type ModelRef } from 'vue'
+import { inject, onMounted, computed, ref, type Ref, type ModelRef, reactive } from 'vue'
 import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
 import { flattenQuestions, isQuestion } from '~/components/common/document-report/get-question-data'
 import documentLegend from '~/components/common/document-legend.vue'
@@ -310,9 +324,7 @@ const documentQuestions: Ref<Array<DocQuestion | Legend>> = ref(flattenedQuestio
 const isJurisdictionDefined = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier !== undefined)
 const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION &&
   typeof legalFrameworkDocument.value?.jurisdiction?.identifier === 'string')
-const jurisdictionNamePlaceholder = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.COMMUNITY_JURISDICTION
-  ? t('communityName')
-  : t('subNationalName'))
+const isCommunityJurisdiction = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.COMMUNITY_JURISDICTION)
 const userHasGovernment = computed(() => user.government !== undefined && user.government !== null)
 
 // Hooks
@@ -457,8 +469,8 @@ function enableOrDisableQuestions (question: DocQuestion | Legend): DocQuestion 
     grid-template-rows: 1fr;
   }
 
-  .document-question:not(.inactive) .form-group > label {
-    margin-bottom: 0.5rem;
+  .document-question:not(.inactive) .form-group > label.control-label  {
+    margin-bottom: 0.2rem;
   }
 
   .document-question .open-box > div {
