@@ -308,7 +308,7 @@ const documentQuestions: Ref<Array<DocQuestion | Legend>> = ref(flattenedQuestio
 // Computed
 const isJurisdictionDefined = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier !== undefined)
 const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION &&
-  typeof legalFrameworkDocument.value.jurisdiction.identifier === 'string')
+  typeof legalFrameworkDocument.value?.jurisdiction?.identifier === 'string')
 const jurisdictionNamePlaceholder = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.COMMUNITY_JURISDICTION
   ? t('communityName')
   : t('subNationalName'))
