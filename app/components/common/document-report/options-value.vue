@@ -25,6 +25,7 @@
         v-if="typeof question.values[0] === 'object'"
         :value="question.values[0].value"
         :locales="locales"
+        :is-showing-locale="false"
       />
     </div>
   </div>

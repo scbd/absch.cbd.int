@@ -10,10 +10,8 @@
       <!-- Non-HTML version -->
       <div
         v-if="!html"
-        :class="['form-control', 'km-value', 'km-value-ml-div', {
-          markdown: markdown,
-          'km-pre': kmPre
-        }]"
+        class="form-control km-value"
+        :class="{ markdown, 'km-pre': kmPre, 'km-value-ml-div': isShowingLocale }"
         aria-describedby="basic-addon1"
       >
         {{ lstring(value, locale) }}
@@ -23,15 +21,14 @@
       <!-- HTML version -->
       <div
         v-else
-        :class="['form-control', 'km-value', 'km-value-ml-div', 'km-value-ml-html', {
-          markdown: markdown,
-          'km-pre': kmPre
-        }]"
+        class="form-control km-value"
+        :class="{ markdown, 'km-pre': kmPre, 'km-value-ml-div': isShowingLocale }"
         aria-describedby="basic-addon1"
         v-html="sanitizeHtml(lstring(value, locale))"
       />
 
       <span
+        v-if="isShowingLocale"
         id="basic-addon1"
         class="input-group-text"
         style="cursor: default"
@@ -56,12 +53,14 @@ interface Props {
   markdown?: boolean
   kmPre?: boolean
   html?: boolean
+  isShowingLocale?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   markdown: false,
   kmPre: false,
-  html: false
+  html: false,
+  isShowingLocale: true
 })
 
 /**
