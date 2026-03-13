@@ -54,5 +54,6 @@
     "sampleRecord": "Sample record for",
     "bySystem": "By system",
     "deleteDraftRecord": "The draft record must be deleted before the published record can be removed.",
-    "errorDeletingDraft": "There was an error in deleting draft record."
+    "errorDeletingDraft": "There was an error in deleting draft record.",
+    "draftCreateSuccess": "Document draft(s) created."
 }
