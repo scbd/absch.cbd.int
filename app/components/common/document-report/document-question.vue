@@ -70,7 +70,10 @@ const questionComponent: ComputedRef<{ component: Component, props: QuestionProp
     case 'option':
       return { component: OptionsValue, props: { question: props.question, locales: definedLocales.value } }
     case 'legend':
-      return { component: DocumentLegend, props: { title: props.question.data.title } }
+      return {
+        component: DocumentLegend,
+        props: { title: props.question.data.title, linkHref: props.question.data.linkHref }
+      }
     default:
       return { component: KmValueMl, props: questionProps }
   }
