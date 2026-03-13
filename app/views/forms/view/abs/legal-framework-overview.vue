@@ -141,7 +141,6 @@ interface Props {
   locale: LanguageCode
 }
 
-
 const props = defineProps<Props>()
 const header = {
   identifier: '',
