@@ -275,7 +275,8 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           key: 'Article5_3',
           section: 'Article_5_3',
           type: 'legend',
-          title: `<a href='https://www.cbd.int/abs/text/articles/?sec=abs-05' target='_blank'>${t('article5_3')}</a>`,
+          linkHref: 'https://www.cbd.int/abs/text/articles/?sec=abs-05',
+          title: t('article5_3'),
           questions: [
             {
               type: 'option',
@@ -292,7 +293,8 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           key: 'Article5_5',
           section: 'Article_5_5',
           type: 'legend',
-          title: `<a href='https://www.cbd.int/abs/text/articles/?sec=abs-05' target='_blank'>${t('article5_5')}</a>`,
+          linkHref: 'https://www.cbd.int/abs/text/articles/?sec=abs-05',
+          title: t('article5_5'),
           questions: [
             {
               type: 'option',

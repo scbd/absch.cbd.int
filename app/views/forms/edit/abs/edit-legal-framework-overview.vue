@@ -224,6 +224,7 @@
           >
             <document-legend
               :title="question.title ?? ''"
+              :link-href="question?.linkHref"
             />
           </div>
         </div>

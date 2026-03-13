@@ -20,6 +20,7 @@ export interface QuestionMap<Map extends DocumentData> {
   section?: string
   bold?: boolean
   mandatory?: boolean
+  linkHref?: string
 }
 
 export interface Question {

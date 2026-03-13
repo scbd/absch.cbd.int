@@ -1,5 +1,17 @@
 <template>
   <legend
+    v-if="typeof linkHref === 'string'"
+  >
+    <a
+      :href="linkHref"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {{ title }}
+    </a>
+  </legend>
+  <legend
+    v-else
     v-html="sanitizeHtml(title)"
   />
 </template>
@@ -10,5 +22,6 @@ import { sanitizeHtml } from '~/services/html.sanitize'
 
 defineProps<{
   title: string
+  linkHref?: string
 }>()
 </script>
