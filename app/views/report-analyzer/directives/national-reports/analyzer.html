@@ -172,7 +172,12 @@
         <button ng-show="sections" type="button" class="btn btn-default"  ng-click="showSettings();" id="returnQuestions">
             « {{::('analyzerT.backToSettings'|$translate)}}
         </button>
-
+       
+        <span ng-if="exportToExcelVueComponent && sectionHasData()">
+            <export-to-excel :sections="sections" :filename="'national-report-analyzer'"
+            ng-vue="exportToExcelVueComponent"/>
+        </span> 
+            
         <div class="clearfix"></div>
 
     <div id="filterBox" class="filter card bg-primary" ng-show="filter">
