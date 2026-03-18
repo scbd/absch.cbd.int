@@ -4,12 +4,13 @@
     class="record legal-framework-overview-review"
   >
     <div
-      class="record-body bg-white pb-4"
+      class="record-body bg-white pb-4 d-flex flex-column"
     >
-      <div class="px-4 bg-white d-flex flex-column gap-2">
-        <document-date
-          :document-info="documentInfo"
-        />
+      <document-date
+        :document-info="documentInfo"
+        class="d-flex justify-content-end"
+      />
+      <div class="bg-white d-flex flex-column gap-2">
         <div
           v-if="showGeneralInformation"
           class="d-flex flex-column gap-2"
