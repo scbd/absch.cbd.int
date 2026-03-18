@@ -10,10 +10,10 @@
         :document-info="documentInfo"
         class="d-flex justify-content-end"
       />
-      <div class="bg-white d-flex flex-column gap-2">
+      <div class="bg-white d-flex flex-column gap-1">
         <div
           v-if="showGeneralInformation"
-          class="d-flex flex-column gap-2"
+          class="d-flex flex-column gap-1"
         >
           <document-legend
             :title="t('generalInformation')"
