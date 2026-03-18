@@ -174,7 +174,7 @@ onMounted(() => {
 #Record :deep(.km-value) {
   margin-bottom: 0px;
 }
-#Record :deep(label.question-label + div) {
-  margin-top: 2px;
+#Record :deep(label + div) {
+  margin-top: 0.25rem;
 }
 </style>

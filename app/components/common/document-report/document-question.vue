@@ -18,7 +18,7 @@
     />
     <div
       v-if="isDetailsDefined(question.values[0]?.details)"
-      class="additional-information"
+      class="additional-information mt-1"
     >
       <label> {{ question.values[0].caption ?? t('additionalInformation') }} </label>
       <KmValueMl
