@@ -6,12 +6,13 @@
     <div
       class="record-body bg-white pb-4"
     >
-      <div class="px-4 bg-white d-flex flex-column gap-1">
+      <div class="px-4 bg-white d-flex flex-column gap-2">
         <document-date
           :document-info="documentInfo"
         />
         <div
           v-if="showGeneralInformation"
+          class="d-flex flex-column gap-2"
         >
           <document-legend
             :title="t('generalInformation')"
@@ -41,50 +42,52 @@
             </km-value-ml>
           </div>
           <!-- Jurisdiction -->
-          <div
-            v-if="typeof legalFrameworkDocument?.jurisdiction === 'object'"
-            data-question-type="option"
-          >
-            <label
-              name="jurisdiction"
-              for="jurisdiction"
-              class="question-label px-0"
+          <div>
+            <div
+              v-if="typeof legalFrameworkDocument?.jurisdiction === 'object'"
+              data-question-type="option"
             >
-              {{ t('jurisdiction') }}
-            </label>
-            <km-value-ml
-              :value="''"
-              :locales="[locale]"
+              <label
+                name="jurisdiction"
+                for="jurisdiction"
+                class="question-label px-0"
+              >
+                {{ t('jurisdiction') }}
+              </label>
+              <km-value-ml
+                :value="''"
+                :locales="[locale]"
+              >
+                <km-term
+                  :value="legalFrameworkDocument.jurisdiction"
+                  :locale="locale"
+                />
+                <span
+                  v-if="!isNational && legalFrameworkDocument.jurisdiction.customValue !== undefined"
+                  class="ms-1"
+                >
+                  {{ `(${lstring(legalFrameworkDocument.jurisdiction.customValue, locale)})` }}
+                </span>
+              </km-value-ml>
+            </div>
+            <div
+              v-if="typeof legalFrameworkDocument?.jurisdictionImplementation === 'object'"
+              data-question-type="option"
             >
-              <km-term
-                :value="legalFrameworkDocument.jurisdiction"
-                :locale="locale"
+              <label
+                class="fw-semibold d-flex flex-column question-label"
+              >
+                <span
+                  class="mt-1 me-auto"
+                >
+                  {{ isNational ? t('jurisdictionImplementationNational') : t('jurisdictionImplementationSubNational') }}
+                </span>
+              </label>
+              <km-value-ml
+                :value="legalFrameworkDocument?.jurisdictionImplementation ?? ''"
+                :locales="[locale]"
               />
-              <span
-                v-if="!isNational && legalFrameworkDocument.jurisdiction.customValue !== undefined"
-                class="ms-1"
-              >
-                {{ `(${lstring(legalFrameworkDocument.jurisdiction.customValue, locale)})` }}
-              </span>
-            </km-value-ml>
-          </div>
-          <div
-            v-if="typeof legalFrameworkDocument?.jurisdictionImplementation === 'object'"
-            data-question-type="option"
-          >
-            <label
-              class="fw-semibold d-flex flex-column"
-            >
-              <span
-                class="mb-1 me-auto"
-              >
-                {{ isNational ? t('jurisdictionImplementationNational') : t('jurisdictionImplementationSubNational') }}
-              </span>
-            </label>
-            <km-value-ml
-              :value="legalFrameworkDocument?.jurisdictionImplementation ?? ''"
-              :locales="[locale]"
-            />
+            </div>
           </div>
         </div>
 
@@ -169,5 +172,8 @@ onMounted(() => {
 }
 #Record :deep(.km-value) {
   margin-bottom: 0px;
+}
+#Record :deep(label.question-label + div) {
+  margin-top: 2px;
 }
 </style>
