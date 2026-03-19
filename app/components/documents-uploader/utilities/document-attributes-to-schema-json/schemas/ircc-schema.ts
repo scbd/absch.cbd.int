@@ -48,7 +48,7 @@ export default class IrccSchema extends Schema {
       picGranted: Schema.parseTextToBoolean(sheet.pic?.consent),
       subjectMatter: this.getLocaleElement(sheet.subjectMatter),
       keywords: processedKeywords,
-      otherKeywords,
+      keywordOther: this.getLocaleValue(otherKeywords),
       providers,
       entitiesToWhomPICGranted,
       matEstablished: Schema.parseTextToBoolean(sheet.matEstablished),
