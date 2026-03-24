@@ -386,6 +386,7 @@
                         <!-- CHM wants the option to display ORT records types under CHM for navigation -->
                         <div ng-if="isChm && vueComponent">
                             <ort-record-types ng-vue="vueComponent"></ort-record-types>
+                        </div>        
                     </div>
                 </div>
 
@@ -420,6 +421,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
                             <tr class="visited-background" ng-repeat-start="schema in referenceSchemas">
                                 <td class="table_width">
                                     <div class="btn-group align-middle btn-group-sm table_width" role="group">
