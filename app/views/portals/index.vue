@@ -105,8 +105,8 @@ const auth = useAuth()
 const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
 const portalsApi = new PortalsApi()
 const portals: Ref<Portal[]> = ref([])
-const articleAdminTags = ref(['portals2']);
-const ag = [{ $match: { adminTags: { $all: articleAdminTags.value } } }];
+const articleAdminTags = ['bch', 'portals', 'home', 'introduction'];
+const ag = [{ $match: { adminTags: { $all: articleAdminTags } } }];
 const articleQuery = ref({ ag: JSON.stringify(ag) });
 
 const PORTALS_URL = 'portals'
