@@ -32,7 +32,6 @@ const props = defineProps({
 const isExporting = ref(false);
 
 const hasData = computed(() =>{
-    console.log(props.sections);
     return Array.isArray(props.sections) &&
     props.sections.some(s => s.reports?.length > 0)
     }

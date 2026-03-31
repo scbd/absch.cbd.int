@@ -430,7 +430,7 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
                     var lstring = $filter('lstring');
 
                     countriesTexts = _.filter(countriesTexts||[], function(item){
-                        return item.text?.value||item.text;
+                        return item.text?.value!==null && item.text?.value!==''||item.text!==null && item.text!=='' ;
                     });
 
                     countriesTexts = _.sortBy(countriesTexts||[], function(item){
