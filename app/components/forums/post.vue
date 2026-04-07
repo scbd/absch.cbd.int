@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col align-self-center">
                     <div class="user">
-                        <span class="username">{{ post.createdBy }} </span>
-                        <span class="organization">{{ post.createdByOrganization }} </span>
+                        <span class="username" v-html="sanitizeHtml(post.createdBy)"></span>
+                        <span class="organization" v-html="sanitizeHtml(post.createdByOrganization)"></span>
                         <span class="text-muted" >#{{post.postId}}</span> 
                     </div>
                 </div>
@@ -107,7 +107,10 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#" @click.prevent="reply(post.threadId)"> <i class="fa fa-reply"></i> {{ t('buttonReplyToMainThread') }} </a></li>
-                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> {{ t('buttonReplyToPerson', {name: post.createdBy }) }}</a></li>
+                                <li><a class="dropdown-item" href="#" @click.prevent="reply(post.postId, getSelection())"> <i class="fa fa-reply-all"></i> 
+                                    <span v-html="sanitizeHtml(post.createdBy)"></span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div v-else>
@@ -147,6 +150,7 @@ import RelativeDatetime from '~/components/common/relative-datetime.vue';
 import { useRoute, useRouter, useAuth } from "@scbd/angular-vue/src/index.js";
 import messages from "~/app-text/components/forums/post.json";
 import { useI18n } from 'vue-i18n';
+import { sanitizeHtml } from "~/services/html.sanitize";
 
 const router = useRouter();
 const route = useRoute();
@@ -255,7 +259,7 @@ const deletePost = async()=> {
 
     const { postId, createdBy } = props.post;
 
-    const msg = `You are about to delete message #${postId} from ${createdBy}.\n\nAre you sure you want to continue?`; // ToDo: need translation
+    const msg = `You are about to delete message #${postId} from ${sanitizeHtml(createdBy).replace(/<[^>]*>/g, '')}. \n\nAre you sure you want to continue?`; // ToDo: need translation
 
     if(!confirm(msg)) return;
 
