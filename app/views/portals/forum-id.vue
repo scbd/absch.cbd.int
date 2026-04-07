@@ -98,7 +98,7 @@
                 <span v-if="thread.lastPostId && thread.lastPostId!=thread.threadId">
                   <a :href="`${getThreadUrl(thread.threadId)}#${thread.lastPostId}`">
                     {{ t('LastReplyOn', {datetime: ""}) }} <relative-datetime class="date" :date="thread.lastPostOn" />
-                    {{ t('LastReplyBy', {name: thread.lastPostBy }) }}                   </a>
+                    <span v-html="t('LastReplyBy', {name: sanitizeHtml(thread.lastPostBy) }) "></span>                   </a>
                 </span>
               </div>
             </div>
@@ -138,6 +138,7 @@ import messages from "~/app-text/views/portals/forums.json";
 import { lstring } from '../../components/kb/filters';
 import { useI18n } from 'vue-i18n';
 import { getRealmArticleTag } from "../../services/composables/articles.js";
+import { sanitizeHtml } from "~/services/html.sanitize";
 
 const articleRealmTag = getRealmArticleTag();
 const auth = useAuth();
