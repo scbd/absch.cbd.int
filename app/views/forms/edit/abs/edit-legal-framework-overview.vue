@@ -405,6 +405,10 @@ function removeDisabledValues (doc: LegalFrameworkDocument): LegalFrameworkDocum
 
     questionMap.validations.forEach((validation) => {
       if (validation.values.includes(lstring(questionData.value))) { return }
+      if (validation.question === questionMap.key) {
+        questionMap.questions?.forEach((q) => { cleanDocument[q.key] = undefined })
+        return
+      }
       cleanDocument[validation.question] = undefined
     })
   })
