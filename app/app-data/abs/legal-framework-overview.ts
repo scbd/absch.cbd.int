@@ -23,6 +23,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
     { value: 'true.some', title: t('yesSomeCases'), caption: t('pleaseExplain') },
     { value: 'false', title: t('noCountryDetermined'), caption: t('pleaseExplain') }
   ]
+  const caseOptionsAddInfo = casesOptions.map(option => Object.assign({}, option, { type: 'lstring' }))
 
   const geneticResourcesBold = `<span class="text-focus">${t('geneticResources')}</span>`
   const traditionalKnowledgeBold = `<span class="text-focus">${t('traditionalKnowledge')}</span>`
@@ -31,7 +32,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
     // General Information
     {
       type: 'option',
-      number: '3',
+      number: '4',
       options: measureOptions,
       mandatory: false,
       key: 'establishedMeasure',
@@ -46,7 +47,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
       questions: [
         {
           type: 'option',
-          number: '4',
+          number: '5',
           options: casesOptions,
           mandatory: true,
           key: 'agrSubjectToPic',
@@ -101,7 +102,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
         },
         {
           type: 'option',
-          number: '5',
+          number: '6',
           mandatory: false,
           options: measureOptions,
           key: 'agrMeasureForAccess',
@@ -109,7 +110,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
         },
         {
           type: 'option',
-          number: '6',
+          number: '7',
           mandatory: false,
           options: yesNoOptions,
           key: 'agrCommercialPermitRequired',
@@ -120,7 +121,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           questions: [
             {
               type: 'option',
-              number: '6.1',
+              number: '7.1',
               mandatory: false,
               options: yesNoOptionsOptionalAddInfo,
               key: 'agrCommercialPermitException',
@@ -130,7 +131,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
         },
         {
           type: 'option',
-          number: '7',
+          number: '8',
           mandatory: false,
           options: yesNoOptions,
           key: 'agrNonCommercialPermitRequired',
@@ -141,13 +142,68 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           questions: [
             {
               type: 'option',
-              number: '7.1',
+              number: '8.1',
               mandatory: false,
               options: yesNoOptionsOptionalAddInfo,
               key: 'agrNonCommercialPermitException',
               title: t('anyExceptions')
             }
           ]
+        }
+      ]
+    },
+    // Special considerations
+    {
+      key: 'specialConsiderations',
+      section: 'specialConsiderations',
+      type: 'legend',
+      title: t('specialConsiderations'),
+      questions: [
+        {
+          type: 'option',
+          number: '9',
+          mandatory: false,
+          options: caseOptionsAddInfo, // TODO: Add Not applicable option
+          key: 'developmentAndImplementationNonCommercial',
+          title: t('developmentAndImplementationNonCommercial')
+        },
+        {
+          type: 'option',
+          number: '10',
+          mandatory: false,
+          options: caseOptionsAddInfo,
+          key: 'developmentAndImplementationHealth',
+          title: t('developmentAndImplementationHealth'),
+          subQuestionsEnabled: false,
+          questions: [
+            {
+              type: 'option',
+              number: '10.1',
+              mandatory: false,
+              options: yesNoOptions,
+              key: 'developmentAndImplementationTreatment',
+              title: t('developmentAndImplementationTreatment')
+            }
+          ],
+          validations: [
+            {
+              question: 'developmentAndImplementationHealth',
+              values: [
+                'true',
+                'true.some'
+              ],
+              type: '@hasValues',
+              trigger: 'enable'
+            }
+          ]
+        },
+        {
+          type: 'option',
+          number: '11',
+          mandatory: false,
+          options: caseOptionsAddInfo,
+          key: 'developmentAndImplementationFoodSecurity',
+          title: t('developmentAndImplementationFoodSecurity')
         }
       ]
     },
@@ -160,17 +216,16 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
       questions: [
         {
           type: 'option',
-          number: '8',
-          mandatory: true,
-          options: casesOptions,
-          key: 'tkSubjectToPic',
-          title: t('tkSubjectToPic', { traditionalKnowledge: traditionalKnowledgeBold }),
+          number: '12',
+          mandatory: false,
+          options: yesNoOptions,
+          key: 'indigenousPeoples',
+          title: t('indigenousPeoples'),
           validations: [
             {
-              question: 'tkMeasureForAccess',
+              question: 'traditionalKnowledgeMeasuresTaken',
               values: [
-                'true',
-                'true.some'
+                'true'
               ],
               type: '@hasValues',
               trigger: 'enable'
@@ -178,17 +233,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
             {
               question: 'tkCommercialPermitRequired',
               values: [
-                'true',
-                'true.some'
-              ],
-              type: '@hasValues',
-              trigger: 'enable'
-            },
-            {
-              question: 'tkCommercialPermitException',
-              values: [
-                'true',
-                'true.some'
+                'true'
               ],
               type: '@hasValues',
               trigger: 'enable'
@@ -196,17 +241,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
             {
               question: 'tkNonCommercialPermitRequired',
               values: [
-                'true',
-                'true.some'
-              ],
-              type: '@hasValues',
-              trigger: 'enable'
-            },
-            {
-              question: 'tkNonCommercialPermitException',
-              values: [
-                'true',
-                'true.some'
+                'true'
               ],
               type: '@hasValues',
               trigger: 'enable'
@@ -215,15 +250,15 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
         },
         {
           type: 'option',
-          number: '9',
+          number: '13',
           mandatory: false,
-          options: measureOptions,
-          key: 'tkMeasureForAccess',
-          title: t('tkMeasureForAccess', { traditionalKnowledge: traditionalKnowledgeBold })
+          options: caseOptionsAddInfo,
+          key: 'traditionalKnowledgeMeasuresTaken',
+          title: t('traditionalKnowledgeMeasuresTaken')
         },
         {
           type: 'option',
-          number: '10',
+          number: '14',
           mandatory: false,
           options: yesNoOptions,
           key: 'tkCommercialPermitRequired',
@@ -234,7 +269,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           questions: [
             {
               type: 'option',
-              number: '10.1',
+              number: '14.1',
               mandatory: false,
               options: yesNoOptionsOptionalAddInfo,
               key: 'tkCommercialPermitException',
@@ -244,7 +279,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
         },
         {
           type: 'option',
-          number: '11',
+          number: '15',
           mandatory: false,
           options: yesNoOptions,
           key: 'tkNonCommercialPermitRequired',
@@ -255,10 +290,97 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           questions: [
             {
               type: 'option',
-              number: '11.1',
+              number: '15.1',
               mandatory: false,
               options: yesNoOptionsOptionalAddInfo,
               key: 'tkNonCommercialPermitException',
+              title: t('anyExceptions')
+            }
+          ]
+        },
+        {
+          type: 'option',
+          number: '16',
+          mandatory: false,
+          options: casesOptions,
+          key: 'indigenousPeoplesRights',
+          title: t('indigenousPeoplesRights'),
+          validations: [
+            {
+              question: 'ipclsInformedConsent',
+              values: [
+                'true',
+                'true.some'
+              ],
+              type: '@hasValues',
+              trigger: 'enable'
+            },
+            {
+              question: 'ipclsCommercialAccess',
+              values: [
+                'true',
+                'true.some'
+              ],
+              type: '@hasValues',
+              trigger: 'enable'
+            },
+            {
+              question: 'ipclsNonCommercialAccess',
+              values: [
+                'true',
+                'true.some'
+              ],
+              type: '@hasValues',
+              trigger: 'enable'
+            }
+          ]
+        },
+        {
+          type: 'option',
+          number: '17',
+          mandatory: false,
+          options: casesOptions,
+          key: 'ipclsInformedConsent',
+          title: t('ipclsInformedConsent')
+        },
+        {
+          type: 'option',
+          number: '18',
+          mandatory: false,
+          options: casesOptions,
+          key: 'ipclsCommercialAccess',
+          title: t('argPermitRequired', {
+            type: `<u class="text-focus">${t('commercial')}</u>`,
+            geneticResources: `<span class="text-focus">${t('ipclsAccess')}</span>`
+          }),
+          questions: [
+            {
+              type: 'option',
+              number: '18.1',
+              mandatory: false,
+              options: yesNoOptionsOptionalAddInfo,
+              key: 'ipclsCommercialAccessException',
+              title: t('anyExceptions')
+            }
+          ]
+        },
+        {
+          type: 'option',
+          number: '19',
+          mandatory: false,
+          options: casesOptions,
+          key: 'ipclsNonCommercialAccess',
+          title: t('argPermitRequired', {
+            type: `<u class="text-focus">${t('nonCommercial')}</u>`,
+            geneticResources: `<span class="text-focus">${t('ipclsAccess')}</span>`
+          }),
+          questions: [
+            {
+              type: 'option',
+              number: '19.1',
+              mandatory: false,
+              options: yesNoOptionsOptionalAddInfo,
+              key: 'ipclsNonCommercialAccessException',
               title: t('anyExceptions')
             }
           ]
@@ -266,43 +388,61 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
       ]
     },
     {
-      key: 'benefitSharing',
-      section: 'benefitSharing',
+      key: 'measuresOnCompliance',
+      section: 'measuresOnCompliance',
       type: 'legend',
-      title: t('benefitSharing'),
+      title: t('measuresOnCompliance'),
       questions: [
         {
-          key: 'Article5_3',
-          section: 'Article_5_3',
+          key: 'Article_15',
+          section: 'Article_15',
           type: 'legend',
-          linkHref: 'https://www.cbd.int/abs/text/articles/?sec=abs-05',
-          title: t('article5_3'),
+          linkHref: 'https://www.cbd.int/abs/text/articles/?sec=abs-15',
+          title: t('article15'),
           questions: [
             {
               type: 'option',
-              number: '12',
+              number: '20',
               mandatory: false,
               options: measureOptions,
-              key: 'article53Implemented',
-              title: t('article53Implemented'),
+              key: 'measuresProvidedOtherParties',
+              title: t('measuresProvidedOtherParties'),
               bold: true
             }
           ]
         },
         {
-          key: 'Article5_5',
-          section: 'Article_5_5',
+          key: 'Article_16',
+          section: 'Article_16',
           type: 'legend',
-          linkHref: 'https://www.cbd.int/abs/text/articles/?sec=abs-05',
-          title: t('article5_5'),
+          linkHref: 'https://www.cbd.int/abs/text/articles/?sec=abs-16',
+          title: t('article16'),
           questions: [
             {
               type: 'option',
-              number: '13',
+              number: '21',
               mandatory: false,
               options: measureOptions,
-              key: 'article55Implemented',
-              title: t('article55Implemented'),
+              key: 'measuresProvidedOtherIpcls',
+              title: t('measuresProvidedOtherIpcls'),
+              bold: true
+            }
+          ]
+        },
+        {
+          key: 'Article_17',
+          section: 'Article_17',
+          type: 'legend',
+          linkHref: 'https://www.cbd.int/abs/text/articles/?sec=abs-17',
+          title: t('article17'),
+          questions: [
+            {
+              type: 'option',
+              number: '22',
+              mandatory: false,
+              options: measureOptions,
+              key: 'article17InformationRequired',
+              title: t('article17InformationRequired'),
               bold: true
             }
           ]

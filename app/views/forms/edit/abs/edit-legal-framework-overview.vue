@@ -138,29 +138,48 @@
                   </ng>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
-              <div
-                v-if="isJurisdictionDefined"
-              >
-                <label
-                  class="fw-semibold control-label"
-                  required="required"
-                >
-                  {{ isNational ? t('jurisdictionImplementationNational') : t('jurisdictionImplementationSubNational') }}
-                </label>
+        <div
+          class="row"
+        >
+          <div class="col-xs-12">
+            <div
+              class="document-question border border-1 p-2"
+            >
+              <div v-if="isNational">
                 <ng
                   v-vue-ng:km-control-group
                   required
                   name="jurisdictionImplementation"
-                  :caption="t('jurisdictionImplementation')"
-                  class="mb-2 d-flex flex-column hidden-label"
+                  :caption="t('jurisdictionImplementationDetails')"
+                  class="mb-2 d-flex flex-column"
                 >
                   <ng
                     v-model:ng-model="legalFrameworkDocument.jurisdictionImplementation"
                     v-vue-ng:km-textbox-ml
                     :locales="legalFrameworkDocument.header.languages"
                     name="jurisdictionImplementation"
-                    :placeholder="t('jurisdictionImplementation')"
+                    :placeholder="t('jurisdictionImplementationNational')"
+                  />
+                </ng>
+              </div>
+              <div v-else>
+                <ng
+                  v-vue-ng:km-control-group
+                  required
+                  name="jurisdictionImplementation"
+                  :caption="t('jurisdictionImplementationDetails')"
+                  class="mb-2 d-flex flex-column"
+                >
+                  <ng
+                    v-model:ng-model="legalFrameworkDocument.jurisdictionImplementation"
+                    v-vue-ng:km-textbox-ml
+                    :locales="legalFrameworkDocument.header.languages"
+                    name="jurisdictionImplementation"
+                    :placeholder="t('jurisdictionImplementationSubNational')"
                   />
                 </ng>
               </div>
@@ -206,29 +225,35 @@
               </ng>
 
               <!-- SubQuestion -->
-              <div class="open-box">
-                <ng
+              <div
+                class="open-box"
+              >
+                <div
                   v-for="subQuestion in question.questions"
                   :key="subQuestion.key"
-                  v-vue-ng:km-control-group
-                  :name="subQuestion.key"
-                  :caption="`${subQuestion.number}. ${subQuestion.title}`"
-                  :required="subQuestion.mandatory"
+                  :class="{ 'inactive pe-none': question.subQuestionsEnabled !== undefined && !question.subQuestionsEnabled }"
                   class="mt-3"
-                  :class="{ 'form-group--bold': question.bold }"
                 >
                   <ng
-                    v-model:ng-model="legalFrameworkDocument[subQuestion.key]"
-                    v-vue-ng:nr-yes-no
-                    :required="subQuestion.mandatory"
-                    :add-info-required="true"
-                    :question="subQuestion"
-                    :locales="legalFrameworkDocument.header.languages"
+                    v-vue-ng:km-control-group
                     :name="subQuestion.key"
-                    :info-label="`${subQuestion.key}.additionalInformation`"
-                    class="ps-1"
-                  />
-                </ng>
+                    :caption="`${subQuestion.number}. ${subQuestion.title}`"
+                    :required="subQuestion.mandatory"
+                    :class="{ 'form-group--bold': question.bold }"
+                  >
+                    <ng
+                      v-model:ng-model="legalFrameworkDocument[subQuestion.key]"
+                      v-vue-ng:nr-yes-no
+                      :required="subQuestion.mandatory"
+                      :add-info-required="true"
+                      :question="subQuestion"
+                      :locales="legalFrameworkDocument.header.languages"
+                      :name="subQuestion.key"
+                      :info-label="`${subQuestion.key}.additionalInformation`"
+                      class="ps-1"
+                    />
+                  </ng>
+                </div>
               </div>
             </div>
           </div>
@@ -268,7 +293,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { inject, onMounted, computed, ref, type Ref, type ModelRef, reactive } from 'vue'
+import { inject, onMounted, computed, ref, type Ref, type ModelRef } from 'vue'
 import { legalFrameworkOverviewQuestions } from '~/app-data/abs/legal-framework-overview'
 import { flattenQuestions, isQuestion } from '~/components/common/document-report/get-question-data'
 import documentLegend from '~/components/common/document-legend.vue'
@@ -321,9 +346,8 @@ const flattenedQuestions = flattenQuestions(legalFrameworkOverviewQuestions(t))
 const documentQuestions: Ref<Array<DocQuestion | Legend>> = ref(flattenedQuestions)
 
 // Computed
-const isJurisdictionDefined = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier !== undefined)
 const isNational = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.NATIONAL_JURISDICTION &&
-  typeof legalFrameworkDocument.value?.jurisdiction?.identifier === 'string')
+  typeof legalFrameworkDocument.value.jurisdiction.identifier === 'string')
 const isCommunityJurisdiction = computed(() => legalFrameworkDocument.value?.jurisdiction?.identifier === THESAURUS_TERMS.COMMUNITY_JURISDICTION)
 const userHasGovernment = computed(() => user.government !== undefined && user.government !== null)
 
@@ -390,7 +414,8 @@ function removeDisabledValues (doc: LegalFrameworkDocument): LegalFrameworkDocum
 /**
 * Set each questions enable property based on validations data from the questions map.
 */
-function enableOrDisableQuestions (question: DocQuestion | Legend): DocQuestion | Legend {
+function enableOrDisableQuestions (docQuestion: DocQuestion | Legend): DocQuestion | Legend {
+  const question = docQuestion
   if (!isQuestion(question)) { return question }
   if (!Array.isArray(question.validations)) { return question }
   question.validations.forEach((validation) => {
@@ -405,8 +430,16 @@ function enableOrDisableQuestions (question: DocQuestion | Legend): DocQuestion 
     const currentValue = legalFrameworkDocument.value[question.key] ?? { value: '' }
 
     const isEnabled = validation.values.includes(lstring(currentValue))
+
+    // Disable nested questions
+    if (documentQuestions.value[validationQuestionIndex].key === question.key) {
+      documentQuestions.value[validationQuestionIndex].subQuestionsEnabled = isEnabled
+      return
+    }
+
     documentQuestions.value[validationQuestionIndex].enable = isEnabled
   })
+
   return question
 }
 </script>
