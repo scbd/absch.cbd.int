@@ -74,7 +74,7 @@ function getTitle (index: number): string {
   }
 
   .documents-container {
-    min-height: 25vh;
+    min-height: 30vh;
   }
 
   .documents-container > div:not(:first-child) {
