@@ -65,13 +65,16 @@ function getTitle (index: number): string {
 <style scoped>
   .preview-list  {
     max-height: 60vh;
-    min-height: 25vh;
   }
 
   @media screen and (max-height: 800px) {
     .preview-list  {
       max-height: 50vh;
     }
+  }
+
+  .documents-container {
+    min-height: 25vh;
   }
 
   .documents-container > div:not(:first-child) {
