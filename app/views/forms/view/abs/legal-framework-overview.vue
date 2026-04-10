@@ -109,7 +109,7 @@
 
         <!-- Additional Information -->
         <div
-          v-if="typeof legalFrameworkDocument?.additionalInformation !== undefined || typeof legalFrameworkDocument?.relevantDocuments === 'object'"
+          v-if="legalFrameworkDocument?.additionalInformation !== undefined || typeof legalFrameworkDocument?.relevantDocuments === 'object'"
           data-question-type="option"
         >
           <document-legend
@@ -128,7 +128,7 @@
           </label>
 
           <km-value-ml
-            v-if="typeof legalFrameworkDocument?.additionalInformation !== undefined && legalFrameworkDocument !== undefined"
+            v-if="legalFrameworkDocument?.additionalInformation !== undefined && legalFrameworkDocument !== undefined"
             :value="legalFrameworkDocument.additionalInformation"
             :locales="[locale]"
             :html="true"
