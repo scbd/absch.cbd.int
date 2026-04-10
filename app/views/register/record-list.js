@@ -28,7 +28,9 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.canDeletePublished = true;
                 $scope.isBulkUploaderOpen = false
                 $scope.documentType = ($routeParams.document_type || '').toLowerCase()
-                $scope.isImportingDocumentsSupported = $scope.documentType === 'ircc'
+                //$scope.isImportingDocumentsSupported = $scope.documentType === 'ircc'
+                // NOTE: Delete below and uncomment above to enable bulk docuuments uploader.
+                $scope.isImportingDocumentsSupported = false
 
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
