@@ -21,16 +21,23 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
   const casesOptions = [
     { value: 'true', title: t('yesAllCases'), caption: t('pleaseExplain') },
     { value: 'true.some', title: t('yesSomeCases'), caption: t('pleaseExplain') },
+    { value: 'false', title: t('no'), caption: t('pleaseExplain') }
+  ]
+
+  const casesOptionsPIC = [
+    { value: 'true', title: t('yesAllCases'), caption: t('pleaseExplain') },
+    { value: 'true.some', title: t('yesSomeCases'), caption: t('pleaseExplain') },
     { value: 'false', title: t('noCountryDetermined'), caption: t('pleaseExplain') }
   ]
   const caseOptionsAddInfo = casesOptions.map(option => Object.assign({}, option, { type: 'lstring' }))
 
-  const caseOptionsNa = [
+  const someExtent = [
     { value: 'true', title: t('yes'), type: 'lstring', caption: t('pleaseExplain') },
     { value: 'true.some', title: t('yesToSomeExtent'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'false', title: t('no'), type: 'lstring', caption: t('pleaseExplain') },
-    { value: 'na', title: t('notApplicable'), type: 'lstring', caption: t('pleaseExplain') }
+    { value: 'false', title: t('no'), type: 'lstring', caption: t('pleaseExplain') }
   ]
+
+  const someExtentNa = [...someExtent, { value: 'na', title: t('notApplicable'), type: 'lstring', caption: t('pleaseExplain') }]
 
   const geneticResourcesBold = `<span class="text-focus">${t('geneticResources')}</span>`
   const traditionalKnowledgeBold = `<span class="text-focus">${t('traditionalKnowledge')}</span>`
@@ -55,7 +62,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
         {
           type: 'option',
           number: '5',
-          options: casesOptions,
+          options: casesOptionsPIC,
           mandatory: true,
           key: 'agrSubjectToPic',
           title: t('agrSubjectToPic', { geneticResources: geneticResourcesBold }),
@@ -170,7 +177,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '9',
           mandatory: false,
-          options: caseOptionsNa,
+          options: someExtentNa,
           placeholder: t('developmentNonCommercialExplain'),
           key: 'developmentAndImplementationNonCommercial',
           title: t('developmentAndImplementationNonCommercial')
@@ -312,7 +319,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '16',
           mandatory: false,
-          options: caseOptionsAddInfo,
+          options: someExtent,
           placeholder: t('indigenousPeoplesRightsExplain'),
           key: 'indigenousPeoplesRights',
           title: t('indigenousPeoplesRights'),
@@ -350,7 +357,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '17',
           mandatory: false,
-          options: caseOptionsAddInfo,
+          options: someExtent,
           key: 'ipclsInformedConsent',
           title: t('ipclsInformedConsent')
         },
@@ -358,7 +365,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '18',
           mandatory: false,
-          options: caseOptionsAddInfo,
+          options: yesNoOptions,
           key: 'ipclsCommercialAccess',
           title: t('argPermitRequired', {
             type: `<u class="text-focus">${t('commercial')}</u>`,
@@ -379,7 +386,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '19',
           mandatory: false,
-          options: caseOptionsAddInfo,
+          options: yesNoOptions,
           key: 'ipclsNonCommercialAccess',
           title: t('argPermitRequired', {
             type: `<u class="text-focus">${t('nonCommercial')}</u>`,
@@ -451,7 +458,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
               type: 'option',
               number: '22',
               mandatory: false,
-              options: measureOptions,
+              options: caseOptionsAddInfo,
               key: 'article17InformationRequired',
               title: t('article17InformationRequired'),
               bold: true
