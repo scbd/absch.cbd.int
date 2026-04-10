@@ -3,12 +3,13 @@ import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescri
 import { globalIgnores, defineConfig } from 'eslint/config'
 import pluginVue from 'eslint-plugin-vue'
 import eslintMinimalFilesList from './.config/eslintminimal.json' with { type: 'json' }
-import standard from 'neostandard'
-import love from 'eslint-config-love'
+import standard from 'neostandard' // Standard for ESLint
+import love from 'eslint-config-love' // Standard for TypeScript
 
 const standardStyles = standard({ ts: true, filesTs: ['**/*.{ts,mts,tsx,vue,js}'] })
   .find((config) => config.name === 'neostandard/style') || {}
 
+// Discrepancies between ESLint standard library and JSStandard package.
 standardStyles.rules['@stylistic/type-annotation-spacing'] = ['error', { before: false, after: true }]
 love.rules['@typescript-eslint/no-magic-numbers'] = ['error', { ignoreArrayIndexes: true, ignore: [0, 1] }]
 
@@ -38,7 +39,7 @@ export default defineConfig([
     files: ['**/*.{ts,mts,tsx,vue,js}'],
     rules: standardStyles.rules,
     plugins: standardStyles.plugins,
-    ignores: eslintMinimalFilesList
+    ignores: eslintMinimalFilesList // Only highlight critical errors for old files to avoid every line showing an error.
   },
   vueTs,
   {
