@@ -278,32 +278,35 @@
             <document-legend
               :title="t('additionalInformation')"
             />
-            <ng
-              v-vue-ng:km-control-group
-              name="additionalInformation"
-              :caption="t('additionalImportantInfo')"
-              :required="false"
-            >
-              <ng
-                v-model:ng-model="legalFrameworkDocument.additionalInformation"
-                v-vue-ng:km-rich-textbox
-                :required="false"
-                name="additionalInformation"
-                :rows="3"
-                :locales="legalFrameworkDocument.header.languages"
-              />
-            </ng>
 
-            <ng
-              v-model:ng-model="legalFrameworkDocument.relevantDocuments"
-              v-vue-ng:km-link
-              :required="false"
-              name="relevantDocuments"
-              :allow-link="true"
-              :allow-file="true"
-              identifier="document.header.identifier"
-              class="mt-3"
-            />
+            <div class="document-question">
+              <ng
+                v-vue-ng:km-control-group
+                name="additionalInformation"
+                :caption="t('additionalImportantInfo')"
+                :required="false"
+              >
+                <ng
+                  v-model:ng-model="legalFrameworkDocument.additionalInformation"
+                  v-vue-ng:km-rich-textbox
+                  :required="false"
+                  name="additionalInformation"
+                  :rows="3"
+                  :locales="legalFrameworkDocument.header.languages"
+                />
+              </ng>
+
+              <ng
+                v-model:ng-model="legalFrameworkDocument.relevantDocuments"
+                v-vue-ng:km-link
+                :required="false"
+                name="relevantDocuments"
+                :allow-link="true"
+                :allow-file="true"
+                identifier="document.header.identifier"
+                class="mt-3"
+              />
+            </div>
           </div>
         </div>
 
