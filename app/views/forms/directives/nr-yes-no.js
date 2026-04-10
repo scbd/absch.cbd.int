@@ -16,7 +16,8 @@ import nrYesNoT from '~/app-text/views/forms/directives/nr-yes-no.json';
                 required: "@",
                 addInfoRequired: "@",
                 locales: "=",
-                infoLabel: "@"
+                infoLabel: "@",
+                placeholderText: "@"
             },
             link: function($scope, $element, $attr, ngModelController) {
                 translationService.set('nrYesNoT', nrYesNoT);
