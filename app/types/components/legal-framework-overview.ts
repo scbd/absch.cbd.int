@@ -23,7 +23,7 @@ export interface LegalFrameworkDocument extends DocumentData {
   tkNonCommercialPermitException: QuestionData
   article53Implemented: QuestionData
   article55Implemented: QuestionData
-  header: Header
+  header?: Header
   status: QuestionData
   notes: QuestionData
   relevantDocuments: QuestionData
