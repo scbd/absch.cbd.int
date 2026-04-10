@@ -171,6 +171,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           number: '9',
           mandatory: false,
           options: caseOptionsNa,
+          placeholder: t('developmentNonCommercialExplain'),
           key: 'developmentAndImplementationNonCommercial',
           title: t('developmentAndImplementationNonCommercial')
         },
@@ -180,6 +181,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           mandatory: false,
           options: caseOptionsAddInfo,
           key: 'developmentAndImplementationHealth',
+          placeholder: t('developmentNonCommercialExplain'),
           title: t('developmentAndImplementationHealth'),
           subQuestionsEnabled: false,
           questions: [
@@ -209,6 +211,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           number: '11',
           mandatory: false,
           options: caseOptionsAddInfo,
+          placeholder: t('developmentNonCommercialExplain'),
           key: 'developmentAndImplementationFoodSecurity',
           title: t('developmentAndImplementationFoodSecurity')
         }
@@ -310,6 +313,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           number: '16',
           mandatory: false,
           options: caseOptionsAddInfo,
+          placeholder: t('indigenousPeoplesRightsExplain'),
           key: 'indigenousPeoplesRights',
           title: t('indigenousPeoplesRights'),
           validations: [

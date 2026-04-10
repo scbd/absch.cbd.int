@@ -52,6 +52,7 @@ export interface DocQuestion extends QuestionMap<DocumentData> {
   validations?: Validation[]
   enable?: boolean
   subQuestionsEnabled?: boolean
+  placeholder?: string
   onChange?: ()=> DocQuestion | Legend
 }
 

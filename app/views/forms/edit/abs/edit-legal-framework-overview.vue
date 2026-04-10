@@ -219,6 +219,7 @@
                     :info-label="`${question.key}.additionalInformation`"
                     :required="question.mandatory"
                     :add-info-required="true"
+                    :placeholder-text="question.placeholder"
                     class="ps-1"
                   />
                 </div>
@@ -250,6 +251,7 @@
                       :locales="legalFrameworkDocument.header.languages"
                       :name="subQuestion.key"
                       :info-label="`${subQuestion.key}.additionalInformation`"
+                      :placeholder-text="subQuestion.placeholder"
                       class="ps-1"
                     />
                   </ng>
