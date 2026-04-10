@@ -7,7 +7,7 @@
     >
       {{ $t('documents', { documentType: documentType.toUpperCase(), count: flatSheet.length }) }}
     </h2>
-    <div class="documents-container mb-3 overflow-auto">
+    <div class="documents-container mb-3 overflow-scroll">
       <table
         class="table table-hover table-responsive-sm"
       >
