@@ -106,6 +106,41 @@
             />
           </div>
         </div>
+
+        <!-- Additional Information -->
+        <div
+          v-if="typeof legalFrameworkDocument?.additionalInformation !== undefined || typeof legalFrameworkDocument?.relevantDocuments === 'object'"
+          data-question-type="option"
+        >
+          <document-legend
+            :title="t('additionalInformation')"
+            class="pt-3"
+            data-question-type="legend"
+          />
+          <label
+            class="fw-semibold d-flex flex-column question-label"
+          >
+            <span
+              class="mt-1 me-auto"
+            >
+              {{ t('additionalImportantInfo') }}
+            </span>
+          </label>
+
+          <km-value-ml
+            v-if="typeof legalFrameworkDocument?.additionalInformation !== undefined && legalFrameworkDocument !== undefined"
+            :value="legalFrameworkDocument.additionalInformation"
+            :locales="[locale]"
+            :html="true"
+          />
+
+          <ng
+            v-if="typeof legalFrameworkDocument?.relevantDocuments === 'object'"
+            v-model:ng-model="legalFrameworkDocument.relevantDocuments"
+            v-vue-ng:km-link-list
+            class="mt-1"
+          />
+        </div>
       </div>
     </div>
     <ng
