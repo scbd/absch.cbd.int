@@ -25,6 +25,13 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
   ]
   const caseOptionsAddInfo = casesOptions.map(option => Object.assign({}, option, { type: 'lstring' }))
 
+  const caseOptionsNa = [
+    { value: 'true', title: t('yes'), type: 'lstring', caption: t('pleaseExplain') },
+    { value: 'true.some', title: t('yesToSomeExtent'), type: 'lstring', caption: t('pleaseExplain') },
+    { value: 'false', title: t('no'), type: 'lstring', caption: t('pleaseExplain') },
+    { value: 'na', title: t('notApplicable'), type: 'lstring', caption: t('pleaseExplain') }
+  ]
+
   const geneticResourcesBold = `<span class="text-focus">${t('geneticResources')}</span>`
   const traditionalKnowledgeBold = `<span class="text-focus">${t('traditionalKnowledge')}</span>`
 
@@ -163,7 +170,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '9',
           mandatory: false,
-          options: caseOptionsAddInfo, // TODO: Add Not applicable option
+          options: caseOptionsNa,
           key: 'developmentAndImplementationNonCommercial',
           title: t('developmentAndImplementationNonCommercial')
         },

@@ -36,6 +36,7 @@
   "measuresOnCompliance": "Measures on compliance with domestic legislation or regulatory requirements on ABS and monitoring the utilization of genetic resources",
   "yesAllCases": "Yes, in all cases",
   "yesSomeCases": "Yes, in some cases",
+  "notApplicable": "Not Applicable",
   "noCountryDetermined": "No, my country has determined that access to its genetic resources is not subject to prior informed consent",
   "knowledgeAccess": "Access to traditional knowledge associated with genetic resources",
   "tkMeasureForAccess": "Are ABS measures in place related to access to {traditionalKnowledge}?",
