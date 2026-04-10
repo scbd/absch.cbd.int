@@ -302,7 +302,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '16',
           mandatory: false,
-          options: casesOptions,
+          options: caseOptionsAddInfo,
           key: 'indigenousPeoplesRights',
           title: t('indigenousPeoplesRights'),
           validations: [
@@ -339,7 +339,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '17',
           mandatory: false,
-          options: casesOptions,
+          options: caseOptionsAddInfo,
           key: 'ipclsInformedConsent',
           title: t('ipclsInformedConsent')
         },
@@ -347,7 +347,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '18',
           mandatory: false,
-          options: casesOptions,
+          options: caseOptionsAddInfo,
           key: 'ipclsCommercialAccess',
           title: t('argPermitRequired', {
             type: `<u class="text-focus">${t('commercial')}</u>`,
@@ -368,7 +368,7 @@ export function legalFrameworkOverviewQuestions (t: Translations): Array<DocQues
           type: 'option',
           number: '19',
           mandatory: false,
-          options: casesOptions,
+          options: caseOptionsAddInfo,
           key: 'ipclsNonCommercialAccess',
           title: t('argPermitRequired', {
             type: `<u class="text-focus">${t('nonCommercial')}</u>`,
