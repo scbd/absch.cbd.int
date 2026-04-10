@@ -27,7 +27,7 @@ export interface LegalFrameworkDocument extends DocumentData {
   status: QuestionData
   notes: QuestionData
   relevantDocuments: QuestionData
-  additionalInformation: QuestionData
+  additionalInformation: LString
 }
 
 export type Inject = (arg0: { getCleanDocument: (doc: LegalFrameworkDocument)=> LegalFrameworkDocument | undefined })=> undefined
