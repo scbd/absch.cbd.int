@@ -1,6 +1,8 @@
 import app from '~/app'
 import '~/views/forms/edit/edit'
 import '~/views/forms/directives/nr-yes-no'
+import '~/components/scbd-angularjs-controls/form-control-directives/km-link'
+import '~/components/scbd-angularjs-controls/form-control-directives/km-rich-textbox'
 import '~/views/forms/edit/document-selector'
 import editLegalFrameworkOverview from './edit-legal-framework-overview.vue'
 import legalFrameworkOverview from '~/views/forms/view/abs/legal-framework-overview.vue'
