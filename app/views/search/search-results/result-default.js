@@ -69,9 +69,9 @@ app.directive('resultDefault', ["$timeout", "translationService", 'realm', "$fil
                         const url = doc.url_ss[0];
 
                         if(url.startsWith('http')){
-                            if(doc.schema_s == 'decision')
+                            const excludedSchemas = ['cpbNationalReportInterim', 'cpbNationalReport1', 'decision'];
+                            if(excludedSchemas.includes(doc.schema_s))
                                 return false;
-
                             // ALL SCBD records should open inline
                             const realmSchema = realm.schemas[doc.schema_s];
                             if(realmSchema?.type == 'scbd')
