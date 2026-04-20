@@ -1,0 +1,8 @@
+{
+    "dialogTitle": "New Version Available",
+    "newVersionAvailable": "A new version of this application has just been released.\n\nThis update may include important fixes, new features, or visual improvements.\n\nTo avoid unexpected behavior and ensure you’re working with the latest information, please refresh the page.\n\nClick Refresh Now to update immediately.",
+    "notNow": "Not now",
+    "refresh": "Refresh Now",
+    "currentVersion": "Your version",
+    "remoteVersion": "New version"   
+}
