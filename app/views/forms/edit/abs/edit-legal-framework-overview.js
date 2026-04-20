@@ -1,8 +1,14 @@
 import app from '~/app'
 import '~/views/forms/edit/edit'
+import '~/views/forms/directives/nr-yes-no'
+import '~/components/scbd-angularjs-controls/form-control-directives/km-link'
+import '~/components/scbd-angularjs-controls/form-control-directives/km-rich-textbox'
+import '~/components/scbd-angularjs-controls/form-control-directives/km-link-list'
+import '~/views/forms/edit/document-selector'
+import '~/views/directives/document-metadata-vue-directive.js'
 import editLegalFrameworkOverview from './edit-legal-framework-overview.vue'
 import legalFrameworkOverview from '~/views/forms/view/abs/legal-framework-overview.vue'
-import { provide } from 'vue'
+import { provide, reactive } from 'vue'
 import { safeDelegate } from '~/services/common'
 export { default as template } from './edit-legal-framework-overview.html'
 
@@ -11,6 +17,8 @@ export default ['$scope', '$controller',
     $controller('editController', {
       $scope
     })
+
+    $scope.reviewData = { body: {} }
 
     let vueCleanDocument = null
 
@@ -21,14 +29,34 @@ export default ['$scope', '$controller',
       }))
     }
 
+    $scope.reactive = reactive
+
     $scope.shareVueComponent = {
       components: { editLegalFrameworkOverview, legalFrameworkOverview },
       setup: setupFunctions
     }
 
-    $scope.getCleanDocument = function (doc) {
-      if (vueCleanDocument) { return vueCleanDocument?.getCleanDocument(doc) }
+    $scope.getCleanDocument = (doc) => {
+      if (vueCleanDocument) {
+        const cleanDocument = vueCleanDocument?.getCleanDocument(doc)
+        $scope.reviewData = { body: cleanDocument }
+
+        return cleanDocument
+      }
     }
+
+    // Update validation errors on question answer change
+    $scope.$watch('document', function (oldValue, newValue) {
+      if (typeof $scope.validationReport !== 'object') { return }
+      if (!Array.isArray($scope.validationReport.errors)) { return }
+      if (newValue === undefined || oldValue === undefined) { return }
+
+      const updatedKey = Object.keys(newValue)
+        .find(key => JSON.stringify(newValue[key]) !== JSON.stringify(oldValue[key]) && key !== 'header')
+
+      $scope.validationReport.errors = $scope.validationReport.errors
+        .filter((error) => !error.property.includes(updatedKey))
+    }, true)
 
     $scope.setDocument()
   }]

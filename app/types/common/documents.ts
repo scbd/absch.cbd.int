@@ -1,67 +1,34 @@
-import type { LanguageCode } from '../languages'
-
-type FieldValue = string | null
-
-export type TextValue = Partial<Record<LanguageCode, string>>
-
-export type DocumentValue = string | number | boolean | SubDocument | TextValue |
- SubDocument[] | Date | Header | ELink[] | string[] | Array<SupportingDocument<SubDocumentTypes>>
-
-export type EmptyDocumentValue = DocumentValue | undefined | null
-
-export interface Header {
-  identifier: string
-  schema?: string,
-  languages?: LanguageCode[]
+import type { LanguageCode, LString } from '../languages'
+export interface Link {
+  url?: string
+  language: string
+  target?: string
+  icon?: string
+  name?: string
+  tag?: string
 }
 
-export interface SubDocument {
-  identifier: string
-}
-
-export interface ELink {
-  url: string
-}
-export type DocumentRequest = Record<string, DocumentValue>
-
-export type EmptyDocumentRequest = Record<string, EmptyDocumentValue>
-
-export interface KeywordType {
-  name: string
-  title: TextValue
-  identifier: string
-}
-
-export interface Keywords {
-  processedKeywords: SubDocument[]
-  otherKeywords: string
-}
-export type UsageKey = 'COMMERCIAL' | 'NONCOMMERCIAL'
-
-// Generic Sub-documents
-interface GenericDocument {
+// Document value that is fetched from the server.
+export interface QuestionData {
+  value: string | LString
+  additionalInformation?: string | LString,
+  title?: string | LString
   type?: string
-}
-export type SubDocumentTypes = IContactFields | GenericDocument
-export type SupportingDocument<T extends SubDocumentTypes> =
-  T extends IContactFields ? IContactFields : SubDocumentTypes
-
-export interface IContactFields {
-  header?: { identifier?: string, schema?: string, language?: string[] };
-  type?: FieldValue;
-  existing?: FieldValue;
-  orgName?: FieldValue;
-  acronym?: FieldValue;
-  address?: FieldValue;
-  city?: FieldValue;
-  country?: FieldValue;
-  email?: FieldValue;
-  consent?: FieldValue;
+  caption?: string
+  details?: LString | string
+  links?: Link[]
 }
 
-export type SubDocumentStore = Array<SupportingDocument<SubDocumentTypes>>
+export type DocumentData = Record<string, QuestionData | QuestionData[] | undefined | LString>
 
-export interface DocumentStore {
-  documents: DocumentRequest[]
-  subDocuments: SubDocumentStore
+export interface ETerm extends QuestionData {
+  identifier: string
+  name?: string
+  customValue?: string
+}
+
+export interface Header extends QuestionData {
+  identifier: string,
+  schema: string,
+  languages: LanguageCode[]
 }
