@@ -3,17 +3,21 @@
     id="forums"
     class="px-5 py-4"
   >
-    <cbd-article
-      :query="articleQuery"
-      :show-edit="true"
-      :admin-tags="articleAdminTags"
-    >
-      <template #missing-article>
-        <h4 class="fs-4 mb-4 fw-bold">
-          {{ t('portals') }}
-        </h4>
-      </template>
-    </cbd-article>
+    <div class="card mb-4">
+      <div class="card-body">
+      <cbd-article
+        :query="articleQuery"
+        :show-edit="true"
+        :admin-tags="articleAdminTags"
+      >
+        <template #missing-article>
+          <h4 class="fs-4 mb-4 fw-bold">
+            {{ t('portals') }}
+          </h4>
+        </template>
+      </cbd-article>
+      </div>
+    </div>
     <loading
       v-if="isLoading"
       :caption="t('loading')"
