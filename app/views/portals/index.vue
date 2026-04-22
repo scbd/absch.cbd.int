@@ -121,7 +121,10 @@ const error: Ref<Error | undefined> = ref()
 onMounted(async () => {
   isLoading.value = true
 
-  const portalsData = await portalsApi.queryPortals({ q: { realms: realm } })
+  const portalsData = await portalsApi.queryPortals({ 
+      q: { realms: realm, $or : [{active: true}, {active: {$exists : false}}] }, 
+      s: { sortOrder: 1 } 
+    })
     .catch((err: Error) => {
       console.error(err) // eslint-disable-line no-console -- show error in console
       error.value = err
