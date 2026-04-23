@@ -11,11 +11,10 @@
             </cbd-add-new-view-article>         
             
             <cbd-view-article :article="viewArticle" :show-cover-image="showCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
-            
-            <div v-if="!viewArticle" class="article-not-found-section">
-                <slot name="missingArticle">
-                </slot>
-            </div>
+        </div>
+
+        <div v-if="!loading && !viewArticle" class="article-not-found-section">
+            <slot name="missing-article" />
         </div>
     </div>
 </template>

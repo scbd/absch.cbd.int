@@ -3,9 +3,21 @@
     id="forums"
     class="px-5 py-4"
   >
-    <h4 class="fs-4 mb-4 fw-bold">
-      {{ t('portals') }}
-    </h4>
+    <div class="card mb-4">
+      <div class="card-body">
+      <cbd-article
+        :query="articleQuery"
+        :show-edit="true"
+        :admin-tags="articleAdminTags"
+      >
+        <template #missing-article>
+          <h4 class="fs-4 mb-4 fw-bold">
+            {{ t('portals') }}
+          </h4>
+        </template>
+      </cbd-article>
+      </div>
+    </div>
     <loading
       v-if="isLoading"
       :caption="t('loading')"
@@ -73,10 +85,11 @@ import { useAuth } from '@scbd/angular-vue/src/index.js'
 import { useRealm } from '~/services/composables/realm.js'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-// @ts-expect-error importing js file
 import loading from '~/components/common/loading.vue'
 // @ts-expect-error importing js file
 import serverError from '~/components/common/error.vue'
+// @ts-expect-error importing js file
+import CbdArticle from '~/components/common/cbd-article.vue';
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
 import commonRoutesMessages from '~/app-text/routes/common-routes-labels.json'
@@ -96,6 +109,9 @@ const auth = useAuth()
 const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
 const portalsApi = new PortalsApi()
 const portals: Ref<Portal[]> = ref([])
+const articleAdminTags = ['bch', 'portals', 'home', 'introduction'];
+const ag = [{ $match: { adminTags: { $all: articleAdminTags } } }];
+const articleQuery = ref({ ag: JSON.stringify(ag) });
 
 const PORTALS_URL = 'portals'
 
@@ -105,7 +121,10 @@ const error: Ref<Error | undefined> = ref()
 onMounted(async () => {
   isLoading.value = true
 
-  const portalsData = await portalsApi.queryPortals({ q: { realms: realm } })
+  const portalsData = await portalsApi.queryPortals({ 
+      q: { realms: realm, $or : [{active: true}, {active: {$exists : false}}] }, 
+      s: { sortOrder: 1 } 
+    })
     .catch((err: Error) => {
       console.error(err) // eslint-disable-line no-console -- show error in console
       error.value = err
