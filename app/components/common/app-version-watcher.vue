@@ -38,6 +38,7 @@ import { onMounted, onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Modal } from "bootstrap";
 import messages from '../../app-text/common/app-version-watcher.json';
 import { useI18n } from 'vue-i18n';
+import axios from 'axios'
 const { t } = useI18n({ messages });
 
 // ---------- State ----------
@@ -51,7 +52,7 @@ let appVersionModal: Modal | null = null;
 async function checkVersion() {
   try {
     if(appVersionModal?._isShown) return;
-    const res = await fetch('/version')
+    const res = await axios.get('/version')
     if (!res.ok) return
     const version = await res.text()
 
