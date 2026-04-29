@@ -37,7 +37,7 @@ let cdnUrl              = (process.env.CDN_URL || 'https://cdn.jsdelivr.net/').r
 const iframeAllowedUrls = [/^\/((ar|en|es|fr|ru|zh)\/)?share\/embed/]
 
 if(!appVersion || appVersion.trim()==''){
-    appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||''))||process.env.COMMIT;
+    appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||process.env.COMMIT));
 }  
 
 app.set('view engine', 'ejs');
