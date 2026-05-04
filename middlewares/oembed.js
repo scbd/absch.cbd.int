@@ -41,7 +41,9 @@ export default async function(req, res){
         oEmbedResponse.resources = [{src: `${parsedUrl.origin}/widgets.js`, type: 'javascript'}];
         oEmbedResponse.html      = `<div class="scbd-chm-embed" width="100%" ${attributes.join(' ')}>
                                         ${clearingHouse.toUpperCase()} embed is missing resources
-                                    </div>`;
+                                    </div>
+                                    <script src="${parsedUrl.origin}/widgets.js"></script>
+                                    `;
 
         return res.status(200).json(oEmbedResponse);
         
