@@ -21,29 +21,20 @@ import app from '~/app';
                     return window.scbdApp.accountsUrl;
             }
 
-
-            // /^https:\/\/accounts.cbddev.xyz\//i,
-            // /^https:\/\/absch.cbddev.xyz\//i,
-            // /^https:\/\/chm.cbddev.xyz\//i,
             function isAppDevelopment() {
-                var knownDevUrls = [
-                    /^https:\/\/\w+.cbddev.xyz\//i, //everything under cbddev.xyz
-                ];
+                return !isProduction();
+            }
 
-                var url = $location.$$absUrl;
-
-                for (var i = 0; i < knownDevUrls.length; i++) {
-                    if (url.match(knownDevUrls[i])) {
-                        return true;
-                    }
-                }
-                return false;
+            function isProduction() {
+              // Preserved original logic
+              return (window.scbdApp?.accountsUrl || "").indexOf("accounts.cbd.int") >= 0;
             }
 
             return {
                 devApiUrl       : devApiUrl,
                 devAccountsUrl  : devAccountsUrl,
-                isAppDevelopment: isAppDevelopment
+                isAppDevelopment: isAppDevelopment,
+                isProduction    : isProduction
             };
     }]);
 
