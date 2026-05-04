@@ -106,7 +106,40 @@ function initWidget(){
                 var type = getAttributeValue(widget, 'type')   || 'chm-document';
                 
                 let iframeSrc = `${origin}/${locale}/share/embed/${type}`
-                if(widget.dataset.accessKey)
+                if(widget.dataset.url){
+                    try {
+                        const dataUrl = new URL(widget.dataset.url);
+                        if(dataUrl.origin == origin){
+                            const safeParams = new URLSearchParams();
+                            safeParams.set('embed', 'true');
+                            
+                            // Safely pass through query parameters
+                            for (const [key, value] of dataUrl.searchParams) {
+                                // Filter out dangerous protocols and HTML injection attempts
+                                if (/javascript:|data:|vbscript:/i.test(value) || /[<>]/.test(key) || /[<>]/.test(value)) {
+                                    continue; 
+                                }
+                                // Ensure we don't accidentally overwrite the embed flag
+                                if (key.toLowerCase() !== 'embed') {
+                                    safeParams.append(key, value);
+                                }
+                            }
+
+                            // Clean leading slashes from pathname to avoid double-slashes in the final URL
+                            const cleanPathname = dataUrl.pathname.replace(/^\/+/, '');
+                            iframeSrc = `${origin}/${cleanPathname}?${safeParams.toString()}`;
+                        }
+                        else {
+                            embedIFrame(widget, {src: `${origin}/app/assets/param-missing.html`});
+                            continue;
+                        }
+                    } catch (e) {
+                        // URL is invalid
+                        embedIFrame(widget, {src: `${origin}/app/assets/param-missing.html`});
+                        continue;
+                    }
+                }
+                else if(widget.dataset.accessKey)
                     iframeSrc += `/${widget.dataset.accessKey}?embed=true`;
                 else if(widget.dataset.legacySchema || widget.dataset.legacyCountries || widget.dataset.legacyRegions){
                     iframeSrc += `/legacy-widget?embed=true`
