@@ -9,9 +9,11 @@ import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/view-reference-document';
 import '~/views/report-analyzer/reportAnalyzerService'; ;
 import analyzerT from '~/app-text/views/report-analyzer/directives/national-reports/analyzer.json';
+import { sanitizeHtml } from '~/services/html.sanitize.js';
+import exportToExcel from '~/views/report-analyzer/components/export-to-excel.vue';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
-
+    
     //====================================
     //
     //
@@ -60,7 +62,10 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
 
                 $scope.sumType  = 'percentGlobal';
                 $scope.sumTypes = ['percentGlobal', 'percentColumn', 'percentRow', 'sum' ];
-
+                $scope.sanitizeHtml = sanitizeHtml;
+                $scope.sectionHasData = function(){
+                    return $scope.sections?.some(s => s.reports && s.reports.length > 0);
+                }
                 //====================================
                 //
                 //
@@ -388,6 +393,11 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
 
                 authentication.getUser().then(function(res){
                     isScbd = !!~res.roles.indexOf('ScbdStaff');
+                    if(isScbd){
+                        $scope.exportToExcelVueComponent = {
+                            components: { exportToExcel }
+                        }
+                    }   
                 });
 
                 //====================================
@@ -420,7 +430,7 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
                     var lstring = $filter('lstring');
 
                     countriesTexts = _.filter(countriesTexts||[], function(item){
-                        return item.text;
+                        return item.text?.value!==null && item.text?.value!==''||item.text!==null && item.text!=='' ;
                     });
 
                     countriesTexts = _.sortBy(countriesTexts||[], function(item){

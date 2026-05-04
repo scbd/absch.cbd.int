@@ -23,8 +23,10 @@ export function sanitizeDocument (document){
           fieldValue = sanitize(fieldValue);
           fieldValue = _.omit(fieldValue, isNullOrUndefinedOrEmpty);
         }
-
-        doc[key] = fieldValue;
+        if(!isNullOrUndefinedOrEmpty(fieldValue))
+          doc[key] = fieldValue;
+        else 
+          delete doc[key];
 
       });
       

@@ -253,9 +253,9 @@ export default function bootApp(window, require, defineX) {
     defineX('linqjs' ,  [],()=>window.Enumerable);
 // 
     defineX('externalCss', [], ()=>warnImport)
-    defineX('slaask', ['https://cdn.slaask.com/chat.js'], function (chat_js) {
-        return window._slaask;
-    });
+    // defineX('slaask', ['https://cdn.slaask.com/chat.js'], function (chat_js) {
+    //     return window._slaask;
+    // });
 
     if(templateName){
         import(`./templates/${templateName}/index.js`);

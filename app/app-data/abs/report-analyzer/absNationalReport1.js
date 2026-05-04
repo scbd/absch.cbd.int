@@ -1,7 +1,7 @@
 import nr1Translation from '../../../app-text/views/forms/edit/abs/edit-national-report-1.json' with {type:'json'};
 import { mergeTranslationKeys } from '../../../services/translation-merge.js';
 const nr1T = mergeTranslationKeys(nr1Translation);
-export const absNationalReport1 = [
+const questions = [
    {
       "key": "Part-II",
       "title": nr1T.part_II_title,
@@ -3381,3 +3381,5 @@ export const absNationalReport1 = [
    }
 
 ]
+export const absNationalReport1 = questions;
+export const absNationalReport1FrozenFebruary282026 = questions;

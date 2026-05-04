@@ -46,15 +46,12 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             var schemaFacets = {};
             $scope.showRecordsSection=true;
 
-            $scope.vueComponent = {
-                components: { 
-                    otherClearingHouseLinks,
-                    ortRecordTypes 
-                }
-            }
-            $scope.vueOrtComponent = {
-                components: { 
-                    ortRecordTypes 
+            if(realm.is('CHM')){
+                $scope.vueComponent = {
+                    components: { 
+                        otherClearingHouseLinks,
+                        ortRecordTypes 
+                    }
                 }
             }
             //====================================================================================
