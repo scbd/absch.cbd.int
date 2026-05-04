@@ -221,7 +221,7 @@ export default function bootApp(window, require, defineX) {
         return window.Vue;
     })
 
-    defineX('realmConf', [`json!/api/v2018/realm-configurations/${(window?.scbdApp?.host||'')}`], function(realmConf){
+    defineX('realmConf', [`json!${window?.scbdApp?.apiUrl}/api/v2018/realm-configurations/${(window?.scbdApp?.host||'')}`], function(realmConf){
         return realmConf;
     })
 
