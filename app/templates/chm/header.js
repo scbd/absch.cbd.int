@@ -6,6 +6,7 @@ import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
 import '~/components/scbd-angularjs-controls/main';
 import chmHeaderT from '~/app-text/templates/chm/header.json';
+import AppVersionWatcher from '~/components/common/app-version-watcher.vue';
 
 app.directive('chmHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q','realm','translationService',  function (locale, $location, breadcrumbs, commonjs, $q, realm, translationService) {
     return {
@@ -21,6 +22,10 @@ app.directive('chmHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q
             $scope.isTRG = realm.value.includes("TRG");
 
             $scope.breadcrumbs     = breadcrumbs;
+            
+            $scope.vueComponent = {
+                components: { AppVersionWatcher },
+            }
             
             var sortField = 'name.'+(locale||'en');
             $q.when(commonjs.getCountries(sortField))

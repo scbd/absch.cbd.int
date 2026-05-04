@@ -37,7 +37,7 @@ let cdnUrl              = (process.env.CDN_URL || 'https://cdn.jsdelivr.net/').r
 const iframeAllowedUrls = [/^\/((ar|en|es|fr|ru|zh)\/)?share\/embed/]
 
 if(!appVersion || appVersion.trim()==''){
-    appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||''))||process.env.COMMIT;
+    appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||process.env.COMMIT));
 }  
 
 app.set('view engine', 'ejs');
@@ -85,6 +85,7 @@ app.all('/sitemap(:num([0-9]{1,3})?).xml', siteMap);
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 app.post('/error-logs', errorLogs(proxy, {apiUrl:apiUrl, appVersion:appVersion}));
+app.get('/version', (req, res) => res.send(appVersion));
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));
