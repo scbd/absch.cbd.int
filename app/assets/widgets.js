@@ -99,7 +99,7 @@ function initWidget(){
         if (Object.hasOwnProperty.call(widgets, key)) {
             const widget = widgets[key];   
             const locale = widget.dataset.locale || 'en'        
-            if(widget.dataset.accessKey || widget.dataset.legacySchema || widget.dataset.legacyCountries){            
+            if(widget.dataset.accessKey || widget.dataset.legacySchema || widget.dataset.legacyCountries || widget.dataset.url){            
 
                 var width = getAttributeValue(widget, 'width')   || '100%';
                 var height = getAttributeValue(widget, 'height') || '500';
