@@ -47,8 +47,7 @@ export default async function(req, res){
 
     const html = `<div class="scbd-chm-embed" style="width:100%" ${attributes}>` +
                     `${escapeHtml(clearingHouse.toUpperCase())} embed is missing resources` +
-                `</div>` +
-                `<script async src="${escapeHtml(scriptSrc)}"></script>`;
+                `</div>` ;
 
     return res.status(200).json({
         version: '1.0',
