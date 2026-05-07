@@ -1,0 +1,114 @@
+# Secrets required:
+#
+# Registry (org-level):
+#   DOCKERHUB_USERNAME  - Docker Hub username
+#   DOCKERHUB_TOKEN     - Docker Hub access token
+#
+# Deployment webhooks (repo-level, optional — omit if no deploy target):
+#   WEBHOOK_URL_DEV     - Portainer service webhook URL for dev redeploy
+
+name: CI
+
+on:
+  push:
+    branches: ['**']
+    tags: ['[0-9][0-9][0-9][0-9].[0-9]*']
+  pull_request:
+    branches: [master, dev]
+
+permissions:
+  contents: read
+
+env:
+  IMAGE_NAME: scbd/absch.cbd.int
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Logic:
+      #   calver tag (YYYY.N.N) → tags=<tag> + latest,              push=true
+      #   master/dev           → tags=<branch>,                     push=true
+      #   other branches       → tags=build-<sha>,                  push=false
+      - name: Resolve image tags
+        id: meta
+        run: |
+          SHORT_SHA="${GITHUB_SHA::7}"
+          IMAGE="${{ env.IMAGE_NAME }}"
+          REF="${GITHUB_REF}"
+          if [[ "${REF}" =~ ^refs/tags/[0-9]{4}\.[0-9]+(\.[0-9]+)*$ ]]; then
+            TAG="${REF#refs/tags/}"
+            echo "tags<<EOF"          >> $GITHUB_OUTPUT
+            echo "${IMAGE}:${TAG}"    >> $GITHUB_OUTPUT
+            echo "${IMAGE}:latest"    >> $GITHUB_OUTPUT
+            echo "EOF"                >> $GITHUB_OUTPUT
+            echo "push=true"          >> $GITHUB_OUTPUT
+            echo "branch="            >> $GITHUB_OUTPUT
+            echo "build_tag=${TAG}"   >> $GITHUB_OUTPUT
+          elif [[ "${REF}" =~ ^refs/heads/(master|dev)$ ]]; then
+            BRANCH="${BASH_REMATCH[1]}"
+            echo "tags=${IMAGE}:${BRANCH}" >> $GITHUB_OUTPUT
+            echo "push=true"               >> $GITHUB_OUTPUT
+            echo "branch=${BRANCH}"        >> $GITHUB_OUTPUT
+            echo "build_tag="              >> $GITHUB_OUTPUT
+          else
+            echo "tags=${IMAGE}:build-${SHORT_SHA}" >> $GITHUB_OUTPUT
+            echo "push=false"                        >> $GITHUB_OUTPUT
+            echo "branch="                           >> $GITHUB_OUTPUT
+            echo "build_tag="                        >> $GITHUB_OUTPUT
+          fi
+
+      - name: Log in to Docker Hub
+        if: steps.meta.outputs.push == 'true'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          build-args: |
+            COMMIT=${{ github.sha }}
+            BRANCH=${{ steps.meta.outputs.branch }}
+            TAG=${{ steps.meta.outputs.build_tag }}
+          load: true
+          tags: ci-build:local
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Test image
+        run: |
+          docker run --name absch -d -p 8000:8000 \
+            -e CLEARINGHOUSE=absch \
+            -e CLEARINGHOUSE_HOST=absch.local \
+            -e API_HOST=https://api.cbddev.xyz \
+            -e ACCOUNTS_URL=https://accounts.cbddev.xyz \
+            ci-build:local
+          sleep 10
+          docker exec absch curl --retry 10 --retry-delay 5 -v http://localhost:8000
+
+      - name: Push image
+        if: steps.meta.outputs.push == 'true'
+        run: |
+          while IFS= read -r tag; do
+            [[ -z "$tag" ]] && continue
+            docker tag ci-build:local "$tag"
+            docker push "$tag"
+          done <<< "${{ steps.meta.outputs.tags }}"
+
+      # Portainer webhooks — non-critical, a failed redeploy never blocks CI.
+
+      - name: Deploy to Portainer (dev)
+        if: steps.meta.outputs.branch == 'dev'
+        continue-on-error: true
+        uses: newarifrh/portainer-service-webhook@v1
+        with:
+          webhook_url: ${{ secrets.WEBHOOK_URL_DEV }}

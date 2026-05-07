@@ -5,9 +5,6 @@ RUN apk update  -q && \
     apk add     -q --no-cache bash git curl python3 && \
     rm -rf /var/cache/apk/*
 
-RUN curl https://raw.githubusercontent.com/MestreLion/git-tools/main/git-restore-mtime > /usr/bin/git-restore-mtime && \
-    chmod u+x /usr/bin/git-restore-mtime
-
 ARG BRANCH='master'
 ENV BRANCH=$BRANCH
 
@@ -16,8 +13,6 @@ RUN echo 'branch:' $BRANCH
 WORKDIR /usr/src/app
 
 COPY . ./
-
-RUN git restore-mtime --force
 
 RUN yarn install --ignore-scripts --prefer-offline && \
     yarn cache clean && \
@@ -38,8 +33,5 @@ ENV TAG=$TAG
 
 ARG COMMIT
 ENV COMMIT=$COMMIT
-
-ARG VERSION
-ENV VERSION=$VERSION
 
 CMD [ "node", "server" ]
