@@ -42,5 +42,7 @@
     "additionalInformation": "Additional Information",
     "otherRelevantInformation": "Any other relevant information",
     "otherRelevantWebsite": "Other relevant website addresses and/or attached documents",
-    "gbfTargets":"Related Kunming-Montreal Global Biodiversity Framework Target(s)" 
+    "gbfTargets":"Related Kunming-Montreal Global Biodiversity Framework Target(s)",
+    "note":"Note:",    
+    "initiativeComplete":"Based on the indicated “End date”, this capacity development initiative has been completed."
 }

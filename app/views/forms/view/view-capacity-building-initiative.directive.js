@@ -27,20 +27,20 @@ app.directive("viewCapacityBuildingInitiative", ["translationService", function 
 			$scope.isBCH = realm.is('BCH');
 			$scope.isCHM = realm.is('CHM');
 			$scope.onThematicAreasTerms = function(terms){
-			if(($scope.document||{}).cpbThematicAreas){
-				_.forEach(terms, function(item){
-					if(item.broaderTerms.length == 0 || item.broaderTerms == []){
-						var parent =_.find($scope.document.cpbThematicAreas, {identifier: item.identifier});
-						if(parent){
-							terms = _.filter(terms, function(t){
-								return !_.includes(item.narrowerTerms, t.identifier)
-							})
+				if(($scope.document||{}).cpbThematicAreas){
+					_.forEach(terms, function(item){
+						if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+							var parent =_.find($scope.document.cpbThematicAreas, {identifier: item.identifier});
+							if(parent){
+								terms = _.filter(terms, function(t){
+									return !_.includes(item.narrowerTerms, t.identifier)
+								})
+							}
 						}
-					}
-				});
-				return terms;
+					});
+					return terms;
+				}
 			}
-		}
 
 			$scope.onTargetGroupsTerms = function(terms){
 				if(($scope.document||{}).targetGroups){
@@ -82,6 +82,10 @@ app.directive("viewCapacityBuildingInitiative", ["translationService", function 
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			};
+
+			$scope.isInitiativeComplete = function(){
+				return $scope.document.endDate && new Date($scope.document.endDate) < new Date();
+			}
 
 		}]
 	};
