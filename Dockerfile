@@ -2,7 +2,7 @@ FROM node:22-alpine
 
 RUN apk update  -q && \
     apk upgrade -q && \
-    apk add     -q --no-cache bash curl python3 && \
+    apk add     -q --no-cache bash git curl python3 && \
     rm -rf /var/cache/apk/*
 
 ARG BRANCH='master'
