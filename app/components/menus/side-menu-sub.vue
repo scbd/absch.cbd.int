@@ -8,7 +8,10 @@
     >
     {{ lstring(menu.title, $locale) }}
 
-    <span v-if="!!menu.target">
+    <span v-if="menu.isUnauthorized || menu.isForbidden" class="float-end">
+      &nbsp;<i class="fa fa-lock" aria-hidden="true"></i>
+    </span>
+    <span v-if="!!menu.target" class="float-end">
       &nbsp;<i class="fa fa-external-link" aria-hidden="true"></i>
     </span>
   </a>
