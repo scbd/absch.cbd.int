@@ -26,6 +26,7 @@ import { compile }  from "path-to-regexp";
 import PageNotFound from '~/views/shared/404.vue';
 import { useRealm  } from '~/services/composables/realm.js';
 import { useAuth, useUser } from "@scbd/angular-vue/src/index.js";
+import ErrorPane from '~/components/common/error.vue';
 
 let subRouter = new SubRouter([]);
 
@@ -110,7 +111,7 @@ function onRouteChange() {
   this.viewComponent = null;
   this.viewProps     = null;
 
-  if(component) { // instanciate component into placeholder location
+  if(component) { // instantiate component into placeholder location
 
     const matchParams    = match?.params;
     const subRouteParams = match?.route?.params;
@@ -136,20 +137,28 @@ function combine(...parts) {
 }
 
 function buildRoutes(portalMenu) {
-
   const routes = toRoutes({ ...portalMenu, slug: '' }, '/');
 
   return new SubRouter(routes);
 }
 
-function toRoutes({ slug, menus, content }, parentPath) {
+function toRoutes({ slug, menus, content, isUnauthorized, isForbidden }, parentPath) {
 
   const path         = combine(parentPath, slug);
   const [ type ]     = Object.keys(content || {});
   const contentType  = CONTENT_TYPES[type||'*'] || CONTENT_TYPES['*'];
-  const { component, subRoutes } = contentType || {};
+  let { component, subRoutes } = contentType || {};
 
-  const params = !content ? {} : { ... (content[type] || {}) };
+  let params = !content ? {} : { ... (content[type] || {}) };
+
+  if(isForbidden || isUnauthorized){
+     component = ErrorPane;
+     params = { 
+        error: {
+            code: isForbidden ? 'forbidden' : 'unauthorized'
+        }
+     };
+  }
 
   const routes = [
     { path, component, params }
@@ -194,7 +203,7 @@ function buildMenu() {
 }
 
 
-function toMenu({ slug, url: menuUrl, title, content, menus, isExpanded }, basePath) {
+function toMenu({ slug, url: menuUrl, title, content, menus, isExpanded, isUnauthorized, isForbidden }, basePath) {
 
   const menuPath = [basePath, slug].filter(o=>o).join('/');
   const { url, target } = menuUrl || {};
@@ -204,7 +213,9 @@ function toMenu({ slug, url: menuUrl, title, content, menus, isExpanded }, baseP
     title,
     isExpanded: isExpanded || false,
     hasContent: !!content,
-    target: url && target
+    target: url && target,
+    isUnauthorized,
+    isForbidden
   };
 
   for(let child of menus || []) {
