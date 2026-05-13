@@ -22,11 +22,9 @@
             <p>
                 {{ t('unauthorizedText') }} <a class="alert-link" href="#" @click.prevent="login()">{{ t('signIn') }}</a>
                 {{ t('usingCredential') }} 
-            </p>
+            </p>            
             <p>
-                {{ t('unauthorizedBenefits') }}</p>
-            <p>
-                {{ t('unauthorizedApology') }}
+                {{ t('thankYou') }}
             </p>
 
             <hr>
@@ -44,16 +42,10 @@
             <p>
                 {{ t('forbiddenContact') }} 
                 <a class="alert-link" href="mailto:secretariat@cbd.int">{{ t('contact') }}</a>.
-            </p>
-
+            </p>            
             <p>
-                {{ t('youCan') }} <a @click.prevent="refresh()" href="#" class="alert-link">{{ t('try') }} </a> {{ t('watch') }}
+                {{ t('thankYou') }}
             </p>
-
-            <p>
-                {{ t('forbiddenApology') }}
-            </p>
-
         </div>
 
 

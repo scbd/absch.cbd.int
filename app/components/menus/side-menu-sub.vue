@@ -8,9 +8,6 @@
     >
     {{ lstring(menu.title, $locale) }}
 
-    <span v-if="menu.isUnauthorized || menu.isForbidden" class="float-end">
-      &nbsp;<i class="fa fa-lock" aria-hidden="true"></i>
-    </span>
     <span v-if="!!menu.target" class="float-end">
       &nbsp;<i class="fa fa-external-link" aria-hidden="true"></i>
     </span>
@@ -36,8 +33,8 @@
     level : { type: Number, default: 0 },
   });
 
-  const menus = computed(() => props.menu?.menus || []); // ToDo: we can use menu?.menus directly in template
-  const hasSubMenu = computed(() => !!props.menu.menus?.length);
+  const menus = computed(() => props.menu?.menus?.filter(e=>!e.isUnauthorized && !e.isForbidden) || []); // ToDo: we can use menu?.menus directly in template
+  const hasSubMenu = computed(() => menus.value?.length);
   const isSelected = computed(() => route.value.path === `/${props.menu.url}`);
 
   const isExpanded = ref(props.menu.isExpanded || false);
