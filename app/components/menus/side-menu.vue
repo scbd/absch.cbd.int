@@ -12,7 +12,7 @@
         
         <div v-if="menu.menus && menu.menus.length" class="main-menus d-sm-block" :class="{'d-none' : !expandMenu }">
           <ul class="list-unstyled" :class="[`level-0`]">
-            <side-menu-sub v-for="(menu, index) in menu.menus" :key="index" :level="1" :menu="menu" />
+            <side-menu-sub v-for="(menu, index) in menu.menus.filter(e=>!e.isUnauthorized && !e.isForbidden)" :key="index" :level="1" :menu="menu" />
           </ul>
         </div>
       </li>
