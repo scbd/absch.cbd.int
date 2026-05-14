@@ -40,8 +40,7 @@
                 {{ t('forbiddenText') }} 
             </p>
             <p>
-                {{ t('forbiddenContact') }} 
-                <a class="alert-link" href="mailto:secretariat@cbd.int">{{ t('contact') }}</a>.
+                {{ t('forbiddenContact') }} <a class="alert-link" href="mailto:secretariat@cbd.int">{{ t('contact') }}</a>
             </p>            
             <p>
                 {{ t('thankYou') }}
@@ -56,7 +55,7 @@
                 {{ t('unexpectedText') }} </p>
 
             <p>
-                {{ t('youCan') }} <a @click.prevent="refresh()" href="#" class="alert-link">{{ t('try') }} </a> {{ t('watch') }}
+                {{ t('youCan') }} <a @click.prevent="refresh()" href="#" class="alert-link">{{ t('try') }}</a> {{ t('watch') }}
             </p>
 
             <p>
@@ -67,7 +66,7 @@
             <hr>
 
             <div>
-                {{ t('moreInfoLink') }} <a class="alert-link" href="#" @click.prevent="moreInfo()">{{ t('moreInformation') }} </a>, {{ t('youCan') }} <a class="alert-link" href="#" @click.prevent="moreInfo()">{{ t('clickHere') }}</a>.
+                {{ t('moreInfoLink') }} <a class="alert-link" href="#" @click.prevent="moreInfo()">{{ t('moreInformation') }}</a>, {{ t('youCan') }} <a class="alert-link" href="#" @click.prevent="moreInfo()">{{ t('clickHere') }}</a>
             </div>
 
             <div v-if="showMoreInfo">
