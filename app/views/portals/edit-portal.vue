@@ -106,19 +106,36 @@
           </button>
         </div>
         <div class="card-body">
-          <div v-if="!portal.menus?.length" class="text-muted fst-italic small">
-            No menu items yet. Click "Add menu item" to get started.
+          <div class="row g-3">
+            <!-- Editor -->
+            <div class="col-12 col-xl-7">
+              <div v-if="!portal.menus?.length" class="text-muted fst-italic small">
+                No menu items yet. Click "Add menu item" to get started.
+              </div>
+              <menu-item-editor
+                v-for="(menu, i) in portal.menus"
+                :key="i"
+                :item="menu"
+                :can-move-up="i > 0"
+                :can-move-down="i < portal.menus.length - 1"
+                @delete="removeMenu(i)"
+                @move-up="moveMenu(i, -1)"
+                @move-down="moveMenu(i, 1)"
+              />
+            </div>
+            <!-- Live preview -->
+            <div class="col-12 col-xl-5">
+              <div class="sticky-top" style="top: 1rem">
+                <div class="text-muted small fw-semibold mb-2 text-uppercase" style="letter-spacing:.05em">Preview</div>
+                <!-- @click.capture.prevent calls preventDefault() during the capture phase — 
+                 the browser never follows any href — but the event still propagates down to 
+                 the <a> elements so the Bootstrap collapse / Vue toggleMenu handlers fire normally. -->
+                <div style="user-select:none;opacity:0.85">
+                  <side-menu :menu="previewMenu" />
+                </div>
+              </div>
+            </div>
           </div>
-          <menu-item-editor
-            v-for="(menu, i) in portal.menus"
-            :key="i"
-            :item="menu"
-            :can-move-up="i > 0"
-            :can-move-down="i < portal.menus.length - 1"
-            @delete="removeMenu(i)"
-            @move-up="moveMenu(i, -1)"
-            @move-down="moveMenu(i, 1)"
-          />
         </div>
       </div>
 
@@ -160,6 +177,8 @@ import Loading from '~/components/common/loading.vue';
 import ServerError from '~/components/common/error.vue';
 // @ts-expect-error no types
 import MenuItemEditor from '~/components/portals/menu-item-editor.vue';
+// @ts-expect-error no types
+import SideMenu from '~/components/menus/side-menu.vue';
 import messages from '~/app-text/views/portals/edit-portal.json';
 
 const { t } = useI18n({ messages });
@@ -190,6 +209,25 @@ const portal = ref({
   content: { article: { articleId: '', showCoverImage: false } },
   menus: [] as unknown[],
 });
+
+function toPreviewMenu(item: any, basePath: string): any {
+  const path = [basePath, item.slug].filter(Boolean).join('/');
+  const { url, target } = item.url || {};
+  return {
+    url: url || path,
+    title: item.title,
+    isExpanded: item.isExpanded || false,
+    hasContent: !!item.content,
+    target: url ? target : undefined,
+    menus: (item.menus || []).map((child: any) => toPreviewMenu(child, path)),
+  };
+}
+
+const previewMenu = computed(() => ({
+  url: `portals/${portal.value.slug}`,
+  title: portal.value.title,
+  menus: (portal.value.menus as any[]).map(m => toPreviewMenu(m, `portals/${portal.value.slug}`)),
+}));
 
 const realmsInput = computed({
   get() { return (portal.value.realms || []).join(' '); },
