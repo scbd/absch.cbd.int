@@ -18,6 +18,12 @@
       </cbd-article>
       </div>
     </div>
+    <div v-if="isAdmin" class="text-end mb-3">
+      <a href="/portals/new" class="btn btn-sm btn-outline-primary">
+        <i class="fa fa-plus me-1"></i>{{ t('newButton') }}
+      </a>
+    </div>
+
     <loading
       v-if="isLoading"
       :caption="t('loading')"
@@ -63,6 +69,11 @@
               {{ lstring(portal.article.summary) }}
             </div>
           </div>
+          <div v-if="isAdmin" class="card-footer bg-transparent border-0 text-end" style="position:relative;z-index:1">
+            <a :href="`/portals/${encodeURIComponent(portal.slug)}/edit`" class="btn btn-sm btn-outline-secondary">
+              <i class="fa fa-pencil me-1"></i>{{ t('editButton') }}
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -70,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, type Ref } from 'vue'
+import { computed, onMounted, ref, type Ref } from 'vue'
 // @ts-expect-error importing js file
 import { lstring } from '~/components/kb/filters'
 // @ts-expect-error importing js file
@@ -93,19 +104,21 @@ import CbdArticle from '~/components/common/cbd-article.vue';
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
 import commonRoutesMessages from '~/app-text/routes/common-routes-labels.json'
+import editPortalMessages from '~/app-text/views/portals/edit-portal.json'
 import type { Portal, Article } from '~/types/common/forums'
 
 const { realm } = useRealm()
 
 const { locale, t, mergeLocaleMessage } = useI18n({ messages })
 
-const translations = [forumMessages, commonRoutesMessages]
+const translations = [forumMessages, commonRoutesMessages, editPortalMessages]
 translations.forEach((value) => {
   Object.entries(value)
     .forEach(([key, value]) => mergeLocaleMessage(key, value))
 })
 
 const auth = useAuth()
+const isAdmin = computed(() => auth.check?.(['Administrator']) ?? false)
 const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
 const portalsApi = new PortalsApi()
 const portals: Ref<Portal[]> = ref([])
