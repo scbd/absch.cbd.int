@@ -1,14 +1,12 @@
 <template>
   <div class="menu-item-editor border rounded mb-2">
-    <div class="d-flex align-items-center gap-2 p-2 bg-light rounded-top">
-      <button type="button" class="btn btn-sm btn-link p-0 text-secondary" @click="expanded = !expanded">
-        <i class="fa" :class="expanded ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
-      </button>
+    <div class="d-flex align-items-center gap-2 p-2 bg-light rounded-top" style="cursor:pointer" @click="expanded = !expanded">
+      <i class="fa fa-fw" :class="expanded ? 'fa-chevron-down' : 'fa-chevron-right'" style="font-size:0.8rem;color:#6c757d"></i>
       <span class="flex-grow-1 fw-semibold text-truncate small">
         {{ item.title?.en || item.slug || t('unnamed') }}
         <span v-if="contentType" class="badge bg-secondary ms-1 fw-normal">{{ contentType }}</span>
       </span>
-      <div class="btn-group btn-group-sm">
+      <div class="btn-group btn-group-sm" @click.stop>
         <button type="button" class="btn btn-outline-secondary" :disabled="!canMoveUp" @click="$emit('move-up')" :title="t('moveUp')">
           <i class="fa fa-arrow-up"></i>
         </button>
@@ -16,7 +14,7 @@
           <i class="fa fa-arrow-down"></i>
         </button>
       </div>
-      <button type="button" class="btn btn-sm btn-outline-danger" @click="$emit('delete')" :title="t('deleteItem')">
+      <button type="button" class="btn btn-sm btn-outline-danger" @click.stop="$emit('delete')" :title="t('deleteItem')">
         <i class="fa fa-trash"></i>
       </button>
     </div>
