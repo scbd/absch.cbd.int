@@ -78,7 +78,7 @@
                         }
                         else{
                             remoteResource.rel = 'stylesheet';
-                            link.href = resource.src
+                            remoteResource.href = resource.src
                         }
 
                         head.appendChild(remoteResource);
