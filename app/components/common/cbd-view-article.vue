@@ -1,7 +1,7 @@
 <template>
     <div class="border-0 mt-1">
         <div v-if="article">
-            <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@35.0.0/build/content-style.css">
+            <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@48.1.1/build/content-style.css">
             <div v-if="showCoverImage && article?.coverImage?.url">
                 <cbd-article-cover-image :cover-image="article.coverImage" :cover-image-size="coverImageSize"></cbd-article-cover-image>
             </div> 
