@@ -65,8 +65,10 @@
 			
 			<label>{{::('viewCdiT.status'|$translate)}}</label>
 			<div ng-class="{'alert alert-info': isInitiativeComplete()}">
-				<strong>{{::('viewCdiT.note'|$translate)}}</strong>
-				{{::('viewCdiT.initiativeComplete'|$translate)}}
+				<span ng-if="isInitiativeComplete()">
+					<strong>{{::('viewCdiT.note'|$translate)}}</strong>
+					{{::('viewCdiT.initiativeComplete'|$translate)}}
+				</span>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.status|term:locale"></span>
 				</div>
