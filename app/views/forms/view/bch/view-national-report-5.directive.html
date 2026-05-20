@@ -1,4 +1,4 @@
-﻿<div id="Record" class="record panel panel-default">
+<div id="Record" class="record panel panel-default">
 
 	<div class="record-body panel-body bg-white">
 
@@ -6,7 +6,8 @@
 		<div class="section-pane panel panel-default" style="margin-bottom:3px!important">
 
 			<div class="panel-heading">
-			<strong>{{::('viewNr5T.generalInfo'|$translate)}}</strong>
+				<document-date></document-date>
+				<strong>{{::('viewNr5T.generalInfo'|$translate)}}</strong>
 			</div>
 			<div class="panel-body" style="padding:0px">
 				<div style="margin:5px" class="row">
@@ -83,9 +84,6 @@
 				</div>
 			</div>
 		</div>
-
-		<document-date></document-date>
-
 		<div view-national-report document="document" report-questions="nr5Data" locale="locale"></div>
 
 	</div>
