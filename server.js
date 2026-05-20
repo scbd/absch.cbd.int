@@ -14,6 +14,7 @@ import robotTxt from './middlewares/robots.js';
 import siteMap from './middlewares/sitemap.js';
 import errorLogs from './middlewares/error-logs.js';
 import { rejectBotsPdf } from "./middlewares/reject-bots-pdf.js";
+import oembed from './middlewares/oembed.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -61,6 +62,7 @@ if(process.env.COMPRESS=='true'){
 // Set routes
 app.get('/national-report-questions/:report', nationalReportsQuestions);
 app.use('/widgets.js',                               express.static(`${__dirname}/dist/en/app/assets/widgets.js`));
+app.use('/oembed',                                   oembed);
 app.use('/legacy-ajax-plugin.js',                    express.static(`${__dirname}/dist/en/app/assets/legacy-ajax-plugin.js`));
 app.use('/app/assets/widget-example.html',           express.static(`${__dirname}/app/assets/${process.env.CLEARINGHOUSE}-widget-example.html`));
 app.use('/app/img/cbd-logo-en.svg',                  express.static(`${__dirname}/app/img/cbd-logo-green-en.svg`));
