@@ -12,7 +12,7 @@
     "export": "Export",
     "recordID": "Record ID",
     "name": "Name",
-    "traits": "Trait(s)",
+    "traits": "Category | Trait(s)",
     "donorOrganism": "Donor organism",
     "function": "Function"
 }
