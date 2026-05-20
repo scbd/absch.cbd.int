@@ -1,0 +1,7 @@
+{
+    "relevance": "Relevance",
+    "updatedDate": "Last updated on",
+    "schema"    : "Record type",
+    "government" : "Country",
+    "uniqueIdentifier" : "UID"
+}
