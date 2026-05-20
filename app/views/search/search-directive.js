@@ -367,6 +367,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                             }
                       }
                         if((filter||{}).type == 'schema'){
+                            $scope.searchResult.sortFields = $scope.tabOrder[$scope.searchResult.currentTab]
                             $scope.leftMenuEnabled = true;
                             if($scope.onSchemaFilterChanged){
                                 leftMenuFilters = $scope.onSchemaFilterChanged(doc.id, $scope.setFilters[doc.id])
@@ -519,9 +520,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                             return;
                         $scope.searchResult.currentTab = tab;
 
-                        if(previousTab === 'nationalRecords') {
-                            $scope.searchResult.sortFields = $scope.tabOrder[tab] || ['updatedDate_dt desc'];
-                        }
+                        resetSort();
                         updateQueryString('tab',tab);
                         updateQueryResult();
                     }
@@ -1251,6 +1250,11 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         return facets;
                     }
 
+                    function resetSort(){
+                        if($scope.searchResult.currentTab === 'nationalRecords') {
+                            $scope.searchResult.sortFields = $scope.tabOrder[$scope.searchResult.currentTab] || ['updatedDate_dt desc'];
+                        }
+                    }
                     function updateQueryResult(pageNumber){
                         $timeout(function(){//call digest cycle to update the directive api params
                             $scope.searchResult.loading = true;
