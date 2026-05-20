@@ -7,6 +7,10 @@ import tableExport from '~/components/common/export.vue';
 import shareRecord from '~/components/common/share-record.vue';
 import resultViewOptionsT from '~/app-text/views/search/directives/result-view-options.json';
 import { safeDelegate } from '~/services/common'
+import { searchSortMapping } from '~/app-data/common-search-sort-mapping';
+import { searchSortMapping as bchSearchSortMapping } from '~/app-data/bch/search-sort-mapping';
+import { searchSortMapping as absSearchSortMapping } from '~/app-data/abs/search-sort-mapping';
+import { searchSortMapping as chmSearchSortMapping } from '~/app-data/chm/search-sort-mapping';
 
 app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', '$rootScope', 'translationService',
     function ($location, ngDialog, locale, $rootScope, translationService) {
@@ -70,14 +74,26 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', '$rootSco
                         selectedFields = [selectedFields]
                     ngDialog.open({
                         template : 'sortByDialog',
-                        controller: ['$scope', function($scope){
-                            $scope.sortByFields = [
-                                {field:'relevance'                            , title: 'Relevance'       ,direction: 'asc'},
-                                {field:'updatedDate_dt'                       , title: 'Last Updated On' ,direction: 'asc'},
-                                {field:'schema_EN_s'.replace('EN', locale.toUpperCase())    , title: 'Record Type'     ,direction: 'asc'},
-                                {field:'government_EN_s'.replace('EN', locale.toUpperCase()), title: 'Country'         ,direction: 'asc'},
-                                {field:'uniqueIdentifier_s', title: 'UID'         ,direction: 'asc'}
-                            ]
+                        controller: ['$scope', 'realm', function($scope, realm){
+                            $scope.sortByFields = [...searchSortMapping].flat()
+                            const filters = searchDirectiveCtrl.getSelectedFilters('schema');
+                            if(filters.length == 1){
+                                const schema = filters[0].id;
+                                let realmSortMapping = {};
+                                if(realm.is('BCH') ){
+                                    realmSortMapping = bchSearchSortMapping;
+                                }
+                                else if(realm.is('ABS') ){
+                                    realmSortMapping = absSearchSortMapping;
+                                }
+                                else if(realm.is('CHM') ){
+                                    realmSortMapping = chmSearchSortMapping;
+                                }
+                                if(realmSortMapping?.[schema]){
+                                    $scope.sortByFields = [...$scope.sortByFields, ...realmSortMapping[schema]];
+                                }
+                            }
+                            $scope.sortByFields = $scope.sortByFields.map(e=>({...e, selected:false}))
 
                             _.forEach(selectedFields, function(field){
                                 var splitField = field.split(' ')
