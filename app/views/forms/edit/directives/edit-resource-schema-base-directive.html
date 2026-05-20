@@ -139,26 +139,30 @@
 									<div class="row">
     
 										<div class="col-xs-12">
-											<label>{{::('editVLRT.countryRegionalResource'|$translate)}}</label>
-										</div>
-										<div class="col-md-3">
-											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="{{::('editVLRT.countryRegions'|$translate)}}">
-												<div km-select multiple name="countryRegions.regions"
-													 ng-model="countryRegions.regions" placeholder="{{::('editVLRT.selectOption'|$translate)}}"
-													 items="options.regions()"></div>
-											</div>
-										</div>
+											<div class="km-control-group" ng-required="document.header.schema==='communityProtocol'" 
+											 	name="countryRegions" caption="{{::('editVLRT.countryRegionalResource'|$translate)}}">
+												<div class="row">
+													<div class="col-md-3">
+														<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="{{::('editVLRT.countryRegions'|$translate)}}">
+															<div km-select multiple name="countryRegions.regions"
+																ng-model="countryRegions.regions" placeholder="{{::('editVLRT.selectOption'|$translate)}}"
+																items="options.regions()"></div>
+														</div>
+													</div>
 
-										<div class="col-md-1">
-											<div class="km-control-group small country-list" name="countryRegions.countries" caption="{{::('editVLRT.andOr'|$translate)}}"></div></div>
-									
-										<div class="col-md-3">
-											<div class="km-control-group small country-list" name="countryRegions.countries" caption="{{::('editVLRT.countryName'|$translate)}}">
-												<div km-select multiple name="countryRegions.countries" filter-type="startsWith" 
-												ng-model="countryRegions.countries" placeholder="{{::('editVLRT.selectOption'|$translate)}}" items="options.countries()"></div>
+													<div class="col-md-1 d-flex align-items-center">
+														<strong class="small country-list">{{::('editVLRT.andOr'|$translate)}}</strong>
+													</div>
+												
+													<div class="col-md-3">
+														<div class="km-control-group small country-list" name="countryRegions.countries" caption="{{::('editVLRT.countryName'|$translate)}}">
+															<div km-select multiple name="countryRegions.countries" filter-type="startsWith" 
+															ng-model="countryRegions.countries" placeholder="{{::('editVLRT.selectOption'|$translate)}}" items="options.countries()"></div>
+														</div>
+													</div>
+												</div>
 											</div>
 										</div>
-										
 									</div>
 
 								</div>
