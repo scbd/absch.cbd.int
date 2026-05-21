@@ -10,7 +10,7 @@ export default class PortalApi extends ApiBase
   async queryPortals(params)  {
     params = stringifyUrlParams(params);
 
-    return this.http.get(`api/v2023/portals`, { params })
+    return this.http.get(`/api/v2023/portals`, { params })
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
