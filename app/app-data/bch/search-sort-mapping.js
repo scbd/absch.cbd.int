@@ -16,7 +16,10 @@ export const searchSortMapping = {
     ],
     "resource":[
         { field:'title_s', title: fieldsT['title'],direction: 'asc' },
-        { field:'publicationDate_dt', title: fieldsT['resource.date'],direction: 'asc' }
+        { field:'publicationDate_dt', title: fieldsT['resource.publicationDate'],direction: 'asc' }
+    ],
+    "organization":[
+        { field:'title_s', title: fieldsT['organizationName'],direction: 'asc' }
     ],
     "modifiedOrganism":[
         { field:'uniqueIdentification_s', title: fieldsT['modifiedOrganism.uniqueIdentification'],direction: 'asc' },
@@ -34,7 +37,7 @@ export const searchSortMapping = {
         { field:'riskAssessmentDate_dt', title: fieldsT['independentRiskAssessment.date'],direction: 'asc' }
     ],
     "capacityBuildingInitiative":[
-        { field:'title_s', title: fieldsT['title'],direction: 'asc' },
+        { field:'title_s', title: fieldsT['capacityBuildingInitiative.title'],direction: 'asc' },
         { field:'startDate_dt', title: fieldsT['capacityBuildingInitiative.startDate'],direction: 'asc' },
         { field:'endDate_dt', title: fieldsT['capacityBuildingInitiative.endDate'],direction: 'asc' }
     ]
