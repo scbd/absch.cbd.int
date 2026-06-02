@@ -49,62 +49,64 @@
         </div>
       </div>
 
-      <!-- Content type -->
-      <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('contentType') }}</label>
-        <div class="col-sm-9">
-          <select class="form-select form-select-sm" v-model="contentType">
-            <option value="">{{ t('contentTypeNone') }}</option>
-            <option value="article">{{ t('contentTypeArticle') }}</option>
-            <option value="forum">{{ t('contentTypeForum') }}</option>
-            <option value="forumLoP">{{ t('contentTypeForumLoP') }}</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Article fields -->
-      <template v-if="contentType === 'article'">
+      <!-- Content type + sub-fields -->
+      <div class="rounded border bg-light px-3 pt-2 pb-1 mb-3">
         <div class="mb-2 row">
-          <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('articleId') }}</label>
+          <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('contentType') }}</label>
           <div class="col-sm-9">
-            <div class="d-flex align-items-center gap-2">
-              <span v-if="selectedArticleTitle" class="flex-grow-1 small">
-                <span class="fw-semibold">{{ selectedArticleTitle }}</span>
-                <span class="text-muted font-monospace ms-2">{{ item.content.article.articleId }}</span>
-              </span>
-              <span v-else-if="item.content.article.articleId" class="text-muted small font-monospace flex-grow-1">
-                {{ item.content.article.articleId }}
-              </span>
-              <span v-else class="text-muted fst-italic small flex-grow-1">No article selected</span>
-              <button type="button" class="btn btn-sm btn-outline-primary" @click="articlePickerRef?.show()">
-                <i class="fa fa-search me-1"></i>{{ item.content.article.articleId ? 'Change' : 'Choose article' }}
-              </button>
-              <button v-if="item.content.article.articleId" type="button" class="btn btn-sm btn-outline-secondary" @click="clearArticle">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-            <article-picker ref="articlePickerRef" @select="onArticleSelect" />
+            <select class="form-select form-select-sm" v-model="contentType">
+              <option value="">{{ t('contentTypeNone') }}</option>
+              <option value="article">{{ t('contentTypeArticle') }}</option>
+              <option value="forum">{{ t('contentTypeForum') }}</option>
+              <option value="forumLoP">{{ t('contentTypeForumLoP') }}</option>
+            </select>
           </div>
         </div>
-        <div class="mb-3 row">
-          <div class="col-sm-9 offset-sm-3">
-            <div class="form-check form-check-sm">
-              <input class="form-check-input" type="checkbox" v-model="item.content.article.showCoverImage" :id="`cover-${uid}`" />
-              <label class="form-check-label" :for="`cover-${uid}`">{{ t('showCoverImage') }}</label>
-            </div>
-          </div>
-        </div>
-      </template>
 
-      <!-- Forum / ForumLoP fields -->
-      <template v-if="contentType === 'forum' || contentType === 'forumLoP'">
-        <div class="mb-3 row">
-          <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('forumId') }}</label>
-          <div class="col-sm-9">
-            <input type="number" class="form-control form-control-sm" v-model.number="item.content[contentType].forumId" />
+        <!-- Article fields -->
+        <template v-if="contentType === 'article'">
+          <div class="mb-2 row">
+            <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('articleId') }}</label>
+            <div class="col-sm-9">
+              <div class="d-flex align-items-center gap-2">
+                <span v-if="selectedArticleTitle" class="flex-grow-1 small">
+                  <span class="fw-semibold">{{ selectedArticleTitle }}</span>
+                  <span class="text-muted font-monospace ms-2">{{ item.content.article.articleId }}</span>
+                </span>
+                <span v-else-if="item.content.article.articleId" class="text-muted small font-monospace flex-grow-1">
+                  {{ item.content.article.articleId }}
+                </span>
+                <span v-else class="text-muted fst-italic small flex-grow-1">No article selected</span>
+                <button type="button" class="btn btn-sm btn-outline-primary" @click="articlePickerRef?.show()">
+                  <i class="fa fa-search me-1"></i>{{ item.content.article.articleId ? 'Change' : 'Choose article' }}
+                </button>
+                <button v-if="item.content.article.articleId" type="button" class="btn btn-sm btn-outline-secondary" @click="clearArticle">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+              <article-picker ref="articlePickerRef" @select="onArticleSelect" />
+            </div>
           </div>
-        </div>
-      </template>
+          <div class="mb-2 row">
+            <div class="col-sm-9 offset-sm-3">
+              <div class="form-check form-check-sm">
+                <input class="form-check-input" type="checkbox" v-model="item.content.article.showCoverImage" :id="`cover-${uid}`" />
+                <label class="form-check-label" :for="`cover-${uid}`">{{ t('showCoverImage') }}</label>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <!-- Forum / ForumLoP fields -->
+        <template v-if="contentType === 'forum' || contentType === 'forumLoP'">
+          <div class="mb-2 row">
+            <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('forumId') }}</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control form-control-sm" v-model.number="item.content[contentType].forumId" />
+            </div>
+          </div>
+        </template>
+      </div>
 
       <!-- URL -->
       <div class="mb-3 row">
@@ -131,11 +133,9 @@
       </div>
 
       <!-- ACL -->
-      <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">Access control</label>
-        <div class="col-sm-9">
-          <acl-editor v-model="item.acl" />
-        </div>
+      <div class="rounded border bg-light px-3 pt-2 pb-3 mb-3">
+        <div class="small fw-semibold text-muted mb-2">Access control</div>
+        <acl-editor v-model="item.acl" />
       </div>
 
       <!-- Sub-menus -->
