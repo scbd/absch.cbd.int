@@ -67,7 +67,23 @@
         <div class="mb-2 row">
           <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('articleId') }}</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control form-control-sm font-monospace" v-model="item.content.article.articleId" placeholder="ObjectId hex" />
+            <div class="d-flex align-items-center gap-2">
+              <span v-if="selectedArticleTitle" class="flex-grow-1 small">
+                <span class="fw-semibold">{{ selectedArticleTitle }}</span>
+                <span class="text-muted font-monospace ms-2">{{ item.content.article.articleId }}</span>
+              </span>
+              <span v-else-if="item.content.article.articleId" class="text-muted small font-monospace flex-grow-1">
+                {{ item.content.article.articleId }}
+              </span>
+              <span v-else class="text-muted fst-italic small flex-grow-1">No article selected</span>
+              <button type="button" class="btn btn-sm btn-outline-primary" @click="articlePickerRef?.show()">
+                <i class="fa fa-search me-1"></i>{{ item.content.article.articleId ? 'Change' : 'Choose article' }}
+              </button>
+              <button v-if="item.content.article.articleId" type="button" class="btn btn-sm btn-outline-secondary" @click="clearArticle">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+            <article-picker ref="articlePickerRef" @select="onArticleSelect" />
           </div>
         </div>
         <div class="mb-3 row">
@@ -114,6 +130,14 @@
         </div>
       </div>
 
+      <!-- ACL -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label col-form-label-sm">Access control</label>
+        <div class="col-sm-9">
+          <acl-editor v-model="item.acl" />
+        </div>
+      </div>
+
       <!-- Sub-menus -->
       <div class="border-top pt-3">
         <div class="d-flex align-items-center mb-2">
@@ -141,9 +165,11 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import messages from '~/app-text/views/portals/edit-portal.json';
+import ArticlePicker from '~/components/portals/article-picker.vue';
+import AclEditor from '~/components/portals/acl-editor.vue';
 
 defineOptions({ name: 'MenuItemEditor' });
 
@@ -162,9 +188,12 @@ const showAllLangs = ref(false);
 
 const uid = Math.random().toString(36).slice(2, 8);
 const expanded = ref(false);
+const articlePickerRef = ref(null);
+const selectedArticleTitle = ref('');
 
 if (!props.item.title) props.item.title = {};
 if (!props.item.menus) props.item.menus = [];
+if (!props.item.acl)   props.item.acl   = { enabled: false, read: [], update: [] };
 
 const contentType = computed({
   get() {
@@ -210,9 +239,22 @@ const urlTarget = computed({
   }
 });
 
+function onArticleSelect(article) {
+  props.item.content.article.articleId = article._id;
+  const t = article.title;
+  if (!t) { selectedArticleTitle.value = ''; return; }
+  if (typeof t === 'string') { selectedArticleTitle.value = t; return; }
+  selectedArticleTitle.value = t['en'] || t['fr'] || t['es'] || Object.values(t).find(Boolean) || '';
+}
+
+function clearArticle() {
+  props.item.content.article.articleId = '';
+  selectedArticleTitle.value = '';
+}
+
 function addSubMenu() {
   if (!props.item.menus) props.item.menus = [];
-  props.item.menus.push({ slug: '', title: {}, menus: [] });
+  props.item.menus.push({ slug: '', title: {}, menus: [], acl: { enabled: false, read: [], update: [] } });
 }
 
 function removeSubMenu(i) {

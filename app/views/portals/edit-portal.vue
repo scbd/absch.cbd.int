@@ -65,7 +65,7 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">{{ t('realms') }}</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" v-model="realmsInput" :placeholder="t('realmsHelp')" />
+              <input type="text" class="form-control text-uppercase" v-model="realmsInput" placeholder="BCH, ABS, CHM" />
               <div class="form-text">{{ t('realmsHelp') }}</div>
             </div>
           </div>
@@ -81,9 +81,26 @@
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">{{ t('articleId') }}</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control font-monospace" v-model="portal.content.article.articleId" placeholder="ObjectId hex" />
+              <div class="d-flex align-items-center gap-2">
+                <span v-if="selectedArticleTitle" class="flex-grow-1">
+                  <span class="fw-semibold">{{ selectedArticleTitle }}</span>
+                  <span class="text-muted small font-monospace ms-2">{{ portal.content.article.articleId }}</span>
+                </span>
+                <span v-else-if="portal.content.article.articleId" class="text-muted small font-monospace flex-grow-1">
+                  {{ portal.content.article.articleId }}
+                </span>
+                <span v-else class="text-muted fst-italic flex-grow-1">No article selected</span>
+                <button type="button" class="btn btn-sm btn-outline-primary" @click="articlePickerRef?.show()">
+                  <i class="fa fa-search me-1"></i>{{ portal.content.article.articleId ? 'Change' : 'Choose article' }}
+                </button>
+                <button v-if="portal.content.article.articleId" type="button" class="btn btn-sm btn-outline-secondary" @click="clearArticle">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
             </div>
           </div>
+
+          <article-picker ref="articlePickerRef" @select="onArticleSelect" />
 
           <div class="mb-3 row">
             <div class="col-sm-10 offset-sm-2">
@@ -94,6 +111,14 @@
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <!-- ACL card -->
+      <div class="card mb-4">
+        <div class="card-header fw-semibold">Access control</div>
+        <div class="card-body">
+          <acl-editor v-model="portal.acl" />
         </div>
       </div>
 
@@ -179,6 +204,8 @@ import ServerError from '~/components/common/error.vue';
 import MenuItemEditor from '~/components/portals/menu-item-editor.vue';
 // @ts-expect-error no types
 import SideMenu from '~/components/menus/side-menu.vue';
+import ArticlePicker from '~/components/portals/article-picker.vue';
+import AclEditor from '~/components/portals/acl-editor.vue';
 import messages from '~/app-text/views/portals/edit-portal.json';
 
 const { t } = useI18n({ messages });
@@ -201,6 +228,23 @@ const loadError = ref<unknown>(null);
 const saveError = ref<unknown>(null);
 const savedOk = ref(false);
 
+const articlePickerRef = ref<InstanceType<typeof ArticlePicker> | null>(null);
+const selectedArticleTitle = ref('');
+
+function onArticleSelect(article: { _id: string; title: unknown }) {
+  portal.value.content.article.articleId = article._id;
+  const t = article.title;
+  if (!t) { selectedArticleTitle.value = ''; return; }
+  if (typeof t === 'string') { selectedArticleTitle.value = t; return; }
+  const obj = t as Record<string, string>;
+  selectedArticleTitle.value = obj['en'] || obj['fr'] || obj['es'] || Object.values(obj).find(Boolean) || '';
+}
+
+function clearArticle() {
+  portal.value.content.article.articleId = '';
+  selectedArticleTitle.value = '';
+}
+
 const portal = ref({
   slug: '',
   title: {} as Record<string, string>,
@@ -208,6 +252,7 @@ const portal = ref({
   realms: [] as string[],
   content: { article: { articleId: '', showCoverImage: false } },
   menus: [] as unknown[],
+  acl: { enabled: false, read: [] as number[], update: [] as number[] },
 });
 
 function toPreviewMenu(item: any, basePath: string): any {
@@ -230,9 +275,9 @@ const previewMenu = computed(() => ({
 }));
 
 const realmsInput = computed({
-  get() { return (portal.value.realms || []).join(' '); },
+  get() { return (portal.value.realms || []).join(', '); },
   set(val: string) {
-    portal.value.realms = val.split(/[\s,]+/).map(s => s.trim()).filter(Boolean);
+    portal.value.realms = val.split(/,+/).map(s => s.trim().toUpperCase()).filter(Boolean);
   }
 });
 
@@ -251,6 +296,7 @@ onMounted(async () => {
         ? data.content
         : { article: { articleId: '', showCoverImage: false } },
       menus: data.menus || [],
+      acl: { enabled: data.acl?.enabled || false, read: data.acl?.read || [], update: data.acl?.update || [] },
     };
   } catch (err) {
     loadError.value = err;
@@ -260,7 +306,7 @@ onMounted(async () => {
 });
 
 function addMenu() {
-  portal.value.menus.push({ slug: '', title: {}, menus: [] });
+  portal.value.menus.push({ slug: '', title: {}, menus: [], acl: { enabled: false, read: [], update: [] } });
 }
 
 function removeMenu(i: number) {
