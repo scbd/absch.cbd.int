@@ -198,11 +198,20 @@
             </div>
           </section>
 
-          <!-- Danger zone -->
-          <div v-if="portalSlug" class="ep-danger-zone">
-            <button class="ep-btn-danger" type="button" :disabled="isDeleting" @click="deletePortal">
+          <!-- ─── Actions ─────────────────────────── -->
+          <div class="ep-actions">
+            <button v-if="portalSlug" class="ep-btn-danger ep-actions-delete" type="button" :disabled="isDeleting" @click="deletePortal">
               <i v-if="isDeleting" class="fa fa-cog fa-spin"></i>
               {{ isDeleting ? t('deleting') : t('deletePortal') }}
+            </button>
+            <div class="ep-status" :class="isDirty ? 'ep-unsaved' : 'ep-saved'">
+              <span class="ep-dot"></span>
+              {{ isDirty ? 'Unsaved changes' : 'All changes saved' }}
+            </div>
+            <a href="/portals" class="ep-btn-ghost">Cancel</a>
+            <button class="ep-btn-primary" type="button" :disabled="isSaving || isLoading" @click="save">
+              <i v-if="isSaving" class="fa fa-cog fa-spin"></i>
+              {{ isSaving ? t('saving') : t('save') }}
             </button>
           </div>
 
@@ -212,23 +221,6 @@
 
     <!-- Article picker (modal, lives outside scroll area) -->
     <article-picker ref="articlePickerRef" @select="onArticleSelect" />
-
-    <!-- ─── Sticky save bar ───────────────────────── -->
-    <div class="ep-savebar">
-      <div class="ep-savebar-inner">
-        <div class="ep-status" :class="isDirty ? 'ep-unsaved' : 'ep-saved'">
-          <span class="ep-dot"></span>
-          {{ isDirty ? 'Unsaved changes' : 'All changes saved' }}
-        </div>
-        <div class="ep-savebar-actions">
-          <a href="/portals" class="ep-btn-ghost">Cancel</a>
-          <button class="ep-btn-primary" type="button" :disabled="isSaving || isLoading" @click="save">
-            <i v-if="isSaving" class="fa fa-cog fa-spin"></i>
-            {{ isSaving ? t('saving') : t('save') }}
-          </button>
-        </div>
-      </div>
-    </div>
 
   </div>
 </template>
@@ -463,7 +455,7 @@ async function deletePortal() {
   background: var(--bg);
   color: var(--ink);
   font-size: 14px;
-  padding-bottom: 72px;
+  padding-bottom: 32px;
 }
 
 /* ── Shell (nav + main) ────────────────────────────────── */
@@ -795,13 +787,6 @@ async function deletePortal() {
 .ep-btn-danger:hover:not(:disabled) { background: #fdf1f0; }
 .ep-btn-danger:disabled { opacity: .6; cursor: not-allowed; }
 
-/* ── Danger zone ───────────────────────────────────────── */
-.ep-danger-zone {
-  display: flex;
-  justify-content: flex-end;
-  padding: 4px 0 8px;
-}
-
 /* ── Alert ─────────────────────────────────────────────── */
 .ep-alert-danger {
   display: flex;
@@ -815,24 +800,14 @@ async function deletePortal() {
   font-size: 13.5px;
 }
 
-/* ── Sticky save bar ───────────────────────────────────── */
-.ep-savebar {
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
-  z-index: 100;
-  background: #fff;
-  border-top: 1px solid var(--line);
-  box-shadow: 0 -3px 14px rgba(11,59,77,.07);
-}
-.ep-savebar-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 12px 24px;
+/* ── Actions row ───────────────────────────────────────── */
+.ep-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 10px;
+  padding: 8px 0 4px;
 }
+.ep-actions-delete { margin-right: auto; }
 .ep-status { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--ink-3); }
 .ep-dot    { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); flex-shrink: 0; }
 .ep-unsaved .ep-dot {

@@ -59,6 +59,7 @@
               <option value="article">{{ t('contentTypeArticle') }}</option>
               <option value="forum">{{ t('contentTypeForum') }}</option>
               <option value="forumLoP">{{ t('contentTypeForumLoP') }}</option>
+              <option value="link">Link</option>
             </select>
           </div>
         </div>
@@ -106,20 +107,22 @@
             </div>
           </div>
         </template>
-      </div>
 
-      <!-- URL -->
-      <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('url') }}</label>
-        <div class="col-sm-9">
-          <div class="input-group input-group-sm">
-            <input type="text" class="form-control" v-model="urlHref" :placeholder="t('urlPlaceholder')" />
-            <select class="form-select" style="max-width:160px" v-model="urlTarget">
-              <option value="">{{ t('urlTargetSelf') }}</option>
-              <option value="_blank">{{ t('urlTargetBlank') }}</option>
-            </select>
+        <!-- Link fields -->
+        <template v-if="contentType === 'link'">
+          <div class="mb-2 row">
+            <label class="col-sm-3 col-form-label col-form-label-sm">{{ t('url') }}</label>
+            <div class="col-sm-9">
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" v-model="urlHref" :placeholder="t('urlPlaceholder')" />
+                <select class="form-select" style="max-width:160px" v-model="urlTarget">
+                  <option value="">{{ t('urlTargetSelf') }}</option>
+                  <option value="_blank">{{ t('urlTargetBlank') }}</option>
+                </select>
+              </div>
+            </div>
           </div>
-        </div>
+        </template>
       </div>
 
       <!-- isExpanded -->
@@ -194,6 +197,7 @@ const selectedArticleTitle = ref('');
 if (!props.item.title) props.item.title = {};
 if (!props.item.menus) props.item.menus = [];
 if (!props.item.acl)   props.item.acl   = { enabled: false, read: [], update: [] };
+if (!props.item.content && props.item.url?.url) props.item.content = { link: {} };
 
 const contentType = computed({
   get() {
@@ -212,6 +216,8 @@ const contentType = computed({
     } else if (newType === 'forumLoP') {
       const prev = props.item.content?.forumLoP || {};
       props.item.content = { forumLoP: { forumId: prev.forumId ?? null } };
+    } else if (newType === 'link') {
+      props.item.content = { link: {} };
     }
   }
 });
