@@ -94,7 +94,7 @@
         "{!tag=contact}(*:* NOT schema_s:contact)",
         "realm_ss:" + realm.value
       ],
-      "q": "''",
+      "q": "*:*",
       "sort": sort,
       "fl": "id, schema_EN_t, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t, covers_ss",
       "wt": "json",

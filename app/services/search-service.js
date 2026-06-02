@@ -20,7 +20,7 @@ import './solr';
                     groupField  : 'government_s',
                     groupLimit  : 100000,
                     fieldQuery  : [],
-                    query       : "''"
+                    query       : "*:*"
                 }
 
                 // groupSort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
