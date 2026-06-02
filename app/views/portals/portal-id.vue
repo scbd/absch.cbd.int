@@ -107,7 +107,7 @@ function onRouteChange() {
 
   const match     = subRouter.match(path);
   const component = match?.route?.component || PageNotFound;
-  
+  console.log(subRouter, path, match)
   this.viewComponent = null;
   this.viewProps     = null;
 
@@ -128,7 +128,7 @@ function onRouteChange() {
 const CONTENT_TYPES = {
   "*"     : { },
   article : { component: Article },
-  forum   : { component: Forum, subRoutes: [ { path: '/thread/:threadId', component: Thread } ] },
+  forum   : { component: Forum, end: false, subRoutes: [ { path: '/thread/:threadId', component: Thread } ] },
   forumLoP: { component: ForumLoP }
 }
 
@@ -160,14 +160,12 @@ function toRoutes({ slug, menus, content, isUnauthorized, isForbidden }, parentP
      };
   }
 
-  const routes = [
-    { path, component, params }
-  ];
+  const routes = [];
 
   for(let subRoute of subRoutes || []) {
     routes.push({ 
       path      : combine(path, subRoute.path), 
-      component : subRoute.component || component, 
+      component : isForbidden || isUnauthorized ? component : (subRoute.component || component), 
       params    : subRoute.params
     })
   }
@@ -177,6 +175,10 @@ function toRoutes({ slug, menus, content, isUnauthorized, isForbidden }, parentP
       routes.push(route);
     }
   }
+
+  const end = (isForbidden || isUnauthorized) ? false : contentType.end;
+
+  routes.push({ path, component, params, end });
 
   return routes;
 }

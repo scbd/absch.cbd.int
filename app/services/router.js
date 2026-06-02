@@ -13,14 +13,14 @@ export default class Router {
 
         const { path, name } = options;
 
-        if(name) this.#routes = this.#routes.filter(o=>o!==name); //remove existing
-        if(path) this.#routes = this.#routes.filter(o=>o!==path); //remove existing
+        if(name) this.#routes = this.#routes.filter(o=>o.name!==name); //remove existing
+        if(path) this.#routes = this.#routes.filter(o=>o.path!==path); //remove existing
 
         this.#routes.push({
             ...options,
             path,
             name,
-            match: match(path),
+            match: match(path, { end: options.end !== undefined ? options.end : true }),
             compile: compile(path)
         });
 
