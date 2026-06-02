@@ -248,7 +248,7 @@ app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$
                     group.isLoading = true;
                     var recQuery = $scope.searchResult.query;
                     
-                    if(recQuery=="''") 
+                    if(recQuery=="*:*") 
                         recQuery = groupFieldQuery(group)
                     else 
                         recQuery += ' AND (' + groupFieldQuery(group) + ')'
