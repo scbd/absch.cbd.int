@@ -197,7 +197,8 @@ onMounted(async () => {
 
       portal.title = lstring(portal.title, locale)
 
-      portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
+      if(portal.slug)
+        portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
       portal.forumCount = countForums(portal.menus);
       return portal
     })
