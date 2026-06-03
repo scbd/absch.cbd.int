@@ -49,10 +49,8 @@
               <p class="card-portal-desc">{{ lstring(portal.article && portal.article.summary) }}</p>
             </div>
             <div class="card-footer-inner">
-              <span class="status-dot active"></span>
-              <span class="status-label">{{ t('statusOpen') }}</span>
-              <span v-if="countForums(portal.menus) > 0" class="forum-count-badge">
-                <i class="fa fa-comments me-1"></i>{{ countForums(portal.menus) }} {{ t('forumsLabel') }}
+              <span v-if="portal.forumCount > 0" class="forum-count-badge">
+                <i class="fa fa-comments me-1"></i>{{ portal.forumCount }} {{ t('forumsLabel') }}
               </span>
               <a v-if="isAdmin" :href="`${portal.url}/edit`" class="card-edit-link ms-auto">
                 <i class="fa fa-pencil me-1"></i>{{ t('editButton') }}
@@ -72,6 +70,10 @@
             <div class="stat-row">
               <span class="stat-label">{{ t('statsPortals') }}</span>
               <span class="stat-value">{{ portals.length }}</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">{{ t('statsForums') }}</span>
+              <span class="stat-value">{{ totalForums }}</span>
             </div>
             <div class="stat-row">
               <span class="stat-label">{{ t('statsActive') }}</span>
@@ -125,6 +127,8 @@ import commonRoutesMessages from '~/app-text/routes/common-routes-labels.json'
 import editPortalMessages from '~/app-text/views/portals/edit-portal.json'
 import type { Portal, PortalMenu, Article } from '~/types/common/forums'
 
+type PortalData = Portal & { forumCount: number }
+
 const { realm } = useRealm()
 
 const { locale, t, mergeLocaleMessage } = useI18n({ messages })
@@ -139,7 +143,7 @@ const auth = useAuth()
 const isAdmin = computed(() => auth.check?.(['Administrator']) ?? false)
 const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
 const portalsApi = new PortalsApi()
-const portals: Ref<Portal[]> = ref([])
+const portals: Ref<PortalData[]> = ref([])
 const articleAdminTags = ['bch', 'portals', 'home', 'introduction'];
 const ag = [{ $match: { adminTags: { $all: articleAdminTags } } }];
 const articleQuery = ref({ ag: JSON.stringify(ag) });
@@ -157,53 +161,55 @@ function countForums(menus: PortalMenu[] | undefined): number {
   }, 0)
 }
 
+const totalForums = computed(() => portals.value.reduce((n, p) => n + p.forumCount, 0))
 
 onMounted(async () => {
-  isLoading.value = true
 
-  const portalsData = await portalsApi.queryPortals({
-      q: { realms: realm, $or : [{active: true}, {active: {$exists : false}}] },
-      s: { sortOrder: 1 }
+  try{
+    isLoading.value = true
+
+    const portalsData = await portalsApi.queryPortals({
+        q: { realms: realm, $or : [{active: true}, {active: {$exists : false}}] },
+        s: { sortOrder: 1 }
+      })
+
+    const articleOidQueries = portalsData
+      .filter((portalSchema: Portal) => isObjectId(portalSchema._id))
+      .map((portalSchema: Portal) => ({ $oid: mapObjectId(portalSchema.content.article.articleId) }))
+
+    const articleFields = { _id: 1, title: 1, summary: 1, coverImage: 1 }
+    const queryAg = [
+      { $match: { _id: { $in: articleOidQueries } } },
+      { $project: articleFields }
+    ]
+
+    const articles: Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(queryAg) }, { cache: true })    
+
+    isLoading.value = false
+
+    portals.value = portalsData.map((p: PortalData) => {
+      const portal = p
+      const article: Article | undefined = articles
+        .find((article: Article) => portal.content.article.articleId === article._id)
+      if (article === undefined) { return portal }
+
+      portal.article = article
+
+      portal.title = lstring(portal.title, locale)
+
+      portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
+      portal.forumCount = countForums(portal.menus);
+      return portal
     })
-    .catch((err: Error) => {
-      console.error(err) // eslint-disable-line no-console -- show error in console
-      error.value = err
-      return []
-    })
-
-  const articleOidQueries = portalsData
-    .filter((portalSchema: Portal) => isObjectId(portalSchema._id))
-    .map((portalSchema: Portal) => ({ $oid: mapObjectId(portalSchema.content.article.articleId) }))
-
-  const articleFields = { _id: 1, title: 1, summary: 1, coverImage: 1 }
-  const queryAg = [
-    { $match: { _id: { $in: articleOidQueries } } },
-    { $project: articleFields }
-  ]
-
-  const articles: Article[] = await articlesApi.queryArticles({ ag: JSON.stringify(queryAg) }, { cache: true })
-    .catch((err: Error) => {
-      console.error(err) // eslint-disable-line no-console -- show error in console
-      error.value = err
-      return []
-    })
-
-  isLoading.value = false
-
-  portals.value = portalsData.map((p: Portal) => {
-    const portal = p
-    const article: Article | undefined = articles
-      .find((article: Article) => portal.content.article.articleId === article._id)
-    if (article === undefined) { return portal }
-
-    portal.article = article
-
-    portal.title = lstring(portal.title, locale)
-
-    portal.url = `${PORTALS_URL}/${encodeURIComponent(portal.slug)}`
-    return portal
-  })
-  .filter((portal: Portal) => typeof portal.article === 'object')
+    .filter((portal: Portal) => typeof portal.article === 'object')
+  }
+  catch(err: Error) {
+    console.error(err) // eslint-disable-line no-console -- show error in console
+    error.value = err
+  }
+  finally{
+    isLoading.value = false
+  }
 })
 </script>
 
