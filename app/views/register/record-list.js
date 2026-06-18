@@ -12,7 +12,6 @@ import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
-import DocumentsUploader from "~/components/documents-uploader/documents-uploader.vue";
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
@@ -28,10 +27,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.canDeletePublished = true;
                 $scope.isBulkUploaderOpen = false
                 $scope.documentType = ($routeParams.document_type || '').toLowerCase()
-                //$scope.isImportingDocumentsSupported = $scope.documentType === 'ircc'
-                // NOTE: Delete below and uncomment above to enable bulk docuuments uploader.
-                $scope.isImportingDocumentsSupported = false
-
+                
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
@@ -818,12 +814,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return  realm.schemas[schema].disableEdit;
                 }
 
-                $scope.exportVueComponent = {
-                  components: {
-                    DocumentsUploader,
-                  },
-                }
-
                 function loadmyTasks(schema){
 
                     if(!_.includes(realm.referenceSchemas, schema)){
@@ -859,7 +849,23 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                     }
                 }
+
+                async function loadBulkUploadComponent(){
+
+                    if($scope.documentType === 'ircc'){
+                        //components/documents-uploader/documents-uploader.vue
+                        const module = await import('~/components/bulk-import/bulk-import-trigger.vue');
+                        $scope.exportVueComponent = {
+                            components: {
+                                DocumentsUploader : module.default,
+                            }
+                        }
+                        $scope.$apply();
+                    }
+                }
+
                 loadRecords(1);
                 loadOfflineFormatDetails();
+                loadBulkUploadComponent();
 
             }];

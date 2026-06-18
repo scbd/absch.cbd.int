@@ -1,0 +1,232 @@
+import type {
+  RawRow, LinkedRecordStore, ApiClient, SchemaInstance
+} from './types'
+import type {
+  DocumentRequest, EmptyDocumentRequest, DocumentValue,
+  TextValue, SubDocument, ELink, UsageKey, SupportingDocument,
+  SubDocumentTypes, IContactFields
+} from '~/types/common/documents'
+import type { LanguageCode } from '~/types/languages'
+import { languages, englishLanguages } from '~/app-data/un-languages'
+import { THESAURUS_TERMS } from '~/constants/thesaurus'
+
+export interface KeywordType {
+  name: string
+  title: Partial<Record<LanguageCode, string>>
+  identifier: string
+}
+
+export interface Keywords {
+  processedKeywords: SubDocument[]
+  otherKeywords: string
+}
+
+export abstract class Schema implements SchemaInstance {
+  protected readonly language: LanguageCode
+
+  constructor(
+    protected readonly row: RawRow,
+    protected readonly linkedRecords: LinkedRecordStore,
+    protected readonly api: ApiClient,
+    language: LanguageCode
+  ) {
+    this.language = language
+  }
+
+  abstract buildSchemaDocument(): Promise<DocumentRequest>
+
+  // -------------------------------------------------------------------------
+  // Static utilities
+  // -------------------------------------------------------------------------
+
+  static generateId(): string {
+    return (`SIMP-${crypto.randomUUID()}`).toUpperCase()
+  }
+
+  static isEmpty(value: unknown): value is null | undefined {
+    if (Array.isArray(value)) return value.length === 0
+    return value === null || value === '' || value === undefined
+  }
+
+  static getSubDocument(identifier: string | undefined): SubDocument | undefined {
+    if (typeof identifier !== 'string' || identifier.trim() === '') return undefined
+    return { identifier }
+  }
+
+  static getELinkData(value: string | undefined): ELink[] {
+    if (Schema.isEmpty(value)) return []
+    return value!.split(',').map(url => ({ url: url.trim() }))
+  }
+
+  static getAsHtmlElement(value: string | undefined): string {
+    if (typeof value !== 'string' || value.trim() === '') return ''
+    return `<div>${value}</div>`
+  }
+
+  static getLanguageCode(langValue: string): LanguageCode {
+    const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
+
+    let key = getKeys(englishLanguages).find(
+      k => (englishLanguages as Record<string, string>)[k as string].toLowerCase() === langValue.toLowerCase()
+    )
+    if (typeof key === 'string') return key as LanguageCode
+
+    key = getKeys(languages).find(
+      k => (languages as Record<string, string>)[k as string].toLowerCase() === langValue.toLowerCase()
+    )
+    if (typeof key === 'string') return key as LanguageCode
+
+    return 'en'
+  }
+
+  static parseDate(dateValue: string | Date | undefined | null): string {
+    if (dateValue === null || dateValue === undefined) return ''
+    // Parse as UTC — no hardcoded timezone offset
+    const raw = dateValue instanceof Date ? dateValue.toISOString() : dateValue
+    const date = new Date(raw)
+    if (isNaN(date.getTime())) return ''
+    // fr-CA gives YYYY-MM-DD which the backend expects
+    return date.toLocaleDateString('fr-CA', {
+      year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC'
+    })
+  }
+
+  static getIsConfidential(value: string | undefined | null): boolean {
+    if (typeof value !== 'string') return true
+    return value.toLowerCase() === 'confidential'
+  }
+
+  static parseTextToBoolean(value: string | undefined | null): boolean {
+    return String(value).toLowerCase() === 'yes'
+  }
+
+  static getUsageMapping(usage: string | undefined): string {
+    if (Schema.isEmpty(usage)) return ''
+    if (Schema.getIsConfidential(usage)) return ''
+    const key = usage!.replace('-', '').toUpperCase()
+    const usageKey: UsageKey = (key === 'NONCOMMERCIAL' || key === 'COMMERCIAL') ? key : 'NONCOMMERCIAL'
+    return THESAURUS_TERMS[usageKey]
+  }
+
+  static removeEmptyValues(data: EmptyDocumentRequest): DocumentRequest {
+    const result: Record<string, DocumentValue> = { header: { identifier: '' } }
+    for (const [key, value] of Object.entries(data)) {
+      if (!Schema.isEmpty(value)) result[key] = value as DocumentValue
+    }
+    return result
+  }
+
+  // -------------------------------------------------------------------------
+  // Instance utilities
+  // -------------------------------------------------------------------------
+
+  getLocaleValue(value: string | undefined | null): TextValue | undefined {
+    if (typeof value !== 'string') return undefined
+    return { [this.language]: value.trim() }
+  }
+
+  getLocaleElement(value: string | undefined): TextValue | undefined {
+    if (typeof value !== 'string') return undefined
+    return { [this.language]: Schema.getAsHtmlElement(value.trim()) }
+  }
+
+  getKeywords(keywordsValue: string | undefined, keywordsMap: KeywordType[]): Keywords {
+    if (Schema.isEmpty(keywordsValue)) return { processedKeywords: [], otherKeywords: '' }
+
+    const processedKeywords: SubDocument[] = []
+    let otherKeywords = ''
+
+    for (const raw of keywordsValue!.trim().split(',')) {
+      const val = raw.toLowerCase().trim()
+      if (val === '') continue
+
+      const match = keywordsMap.find(kw => {
+        if (kw.identifier === raw.trim()) return true
+        const name = typeof kw.title === 'object' ? kw.title[this.language] : kw.name
+        return String(name).toLowerCase().trim() === val
+      })
+
+      if (match) {
+        processedKeywords.push({ identifier: match.identifier.toUpperCase() })
+      } else {
+        processedKeywords.push({ identifier: THESAURUS_TERMS.ABS_OTHER_KEYWORD })
+        otherKeywords += ` ${raw}`
+      }
+    }
+
+    return { processedKeywords, otherKeywords }
+  }
+
+  getContactSchema(contact: SupportingDocument<SubDocumentTypes> | undefined): SupportingDocument<SubDocumentTypes> {
+    if (contact === undefined) return {}
+    const data: EmptyDocumentRequest = {
+      header: {
+        identifier: Schema.generateId(),
+        schema: 'contact',
+        languages: [this.language]
+      },
+      type: (contact as IContactFields).type,
+      government: Schema.getSubDocument((this.row['country'] as string | undefined)?.toLowerCase()),
+      country: Schema.getSubDocument((this.row['country'] as string | undefined)?.toLowerCase()),
+      city: this.getLocaleValue((contact as IContactFields).city),
+      address: this.getLocaleValue((contact as IContactFields).address),
+      emails: typeof (contact as IContactFields).email === 'string'
+        ? [(contact as IContactFields).email as string]
+        : undefined
+    }
+
+    if ((contact as IContactFields).type === 'organization') {
+      data['organization'] = this.getLocaleValue((contact as IContactFields).orgName)
+      data['organizationAcronym'] = this.getLocaleValue((contact as IContactFields).acronym)
+    } else {
+      data['type'] = 'person'
+      data['firstName'] = ((contact as IContactFields).orgName ?? '').trim()
+      data['lastName'] = ((contact as IContactFields).acronym ?? '').trim()
+    }
+
+    return Schema.removeEmptyValues(data)
+  }
+
+  async findContactOrCreate(
+    contact: SupportingDocument<IContactFields> | undefined
+  ): Promise<SubDocument[]> {
+    if (contact === undefined || contact === null) return []
+
+    const { existing } = contact as IContactFields
+    if (typeof existing === 'string' && existing.trim().length > 0) {
+      const ids = await Promise.all(
+        existing.split(',').map(uid => this.resolveDocumentIdentifier(uid.trim()))
+      )
+      return ids
+        .filter((id): id is string => typeof id === 'string' && id.length > 0)
+        .map(identifier => ({ identifier }))
+    }
+
+    const schema = this.getContactSchema(contact)
+    const { header: _h, ...body } = schema as Record<string, unknown>
+    const existing_ = this.linkedRecords.find(rec => {
+      const { header: _h2, ...b } = rec as Record<string, unknown>
+      return JSON.stringify(b) === JSON.stringify(body)
+    })
+
+    if (existing_) {
+      const h = (existing_ as Record<string, { identifier?: string }>)['header']
+      return [{ identifier: h?.identifier ?? '' }]
+    }
+
+    this.linkedRecords.push(schema)
+    const h = (schema as Record<string, { identifier?: string }>)['header']
+    return [{ identifier: h?.identifier ?? '' }]
+  }
+
+  protected async resolveDocumentIdentifier(uniqueId: string): Promise<string> {
+    const regExp = /^(?<p1>[a-z]+)-(?<p2>[a-z]+)-(?<p3>[a-z]+)-(?<p4>\d+)-(?<p5>\d+)$/i
+    const match = regExp.exec(uniqueId)
+    if (!match) return ''
+
+    const documentId = match[4]
+    const data = await this.api.getDocument(documentId) as Record<string, { identifier: string }> | null
+    if (!data || typeof data !== 'object') return ''
+    return `${data.header.identifier}@${match[5]}`
+  }
+}
