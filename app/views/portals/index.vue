@@ -38,7 +38,7 @@
                 class="card-cover"
                 :alt="portal.title"
               >
-              <div v-else class="card-cover-placeholder">
+              <div v-else class="card-cover-placeholder" :class="{'bg-bch': realm.is('BCH'), 'bg-abs': realm.is('ABS')}">
                 <i class="fa fa-globe"></i>
               </div>
             </a>
@@ -63,7 +63,7 @@
       <!-- Sidebar -->
       <aside class="forums-sidebar">
         <div class="sidebar-widget">
-          <div class="widget-header">
+          <div class="widget-header" :class="{'bg-bch': realm.is('BCH'), 'bg-abs': realm.is('ABS')}">
             <i class="fa fa-bar-chart me-2"></i>{{ t('statsTitle') }}
           </div>
           <div class="widget-body">
@@ -83,7 +83,7 @@
         </div>
 
         <div class="sidebar-widget">
-          <div class="widget-header">
+          <div class="widget-header" :class="{'bg-bch': realm.is('BCH'), 'bg-abs': realm.is('ABS')}">
             <i class="fa fa-tags me-2"></i>{{ t('browseLabel') }}
           </div>
           <div class="widget-body tag-cloud">
@@ -129,7 +129,7 @@ import type { Portal, PortalMenu, Article } from '~/types/common/forums'
 
 type PortalData = Portal & { forumCount: number }
 
-const { realm } = useRealm()
+const realm = useRealm()
 
 const { locale, t, mergeLocaleMessage } = useI18n({ messages })
 
@@ -139,12 +139,16 @@ translations.forEach((value) => {
     .forEach(([key, value]) => mergeLocaleMessage(key, value))
 })
 
+const realmColor900 = computed(() => realm.is('ABS') ? '#564c4d' : '#00405C')
+const realmColor800 = computed(() => realm.is('ABS') ? '#6c757d' : '#507395')
+const realmAccent   = computed(() => realm.is('ABS') ? '#e4572e' : '#A05800')
+
 const auth = useAuth()
 const isAdmin = computed(() => auth.check?.(['Administrator']) ?? false)
 const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
 const portalsApi = new PortalsApi()
 const portals: Ref<PortalData[]> = ref([])
-const articleAdminTags = ['bch', 'portals', 'home', 'introduction'];
+const articleAdminTags = [realm.realm.toLowerCase(), 'portals', 'home', 'introduction'];
 const ag = [{ $match: { adminTags: { $all: articleAdminTags } } }];
 const articleQuery = ref({ ag: JSON.stringify(ag) });
 
@@ -169,7 +173,7 @@ onMounted(async () => {
     isLoading.value = true
 
     const portalsData = await portalsApi.queryPortals({
-        q: { realms: realm, $or : [{active: true}, {active: {$exists : false}}] },
+        q: { realms: realm.realm, $or : [{active: true}, {active: {$exists : false}}] },
         s: { sortOrder: 1 }
       })
 
@@ -215,19 +219,10 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-:root {
-  --navy-900: #0b3b4d;
-  --navy-800: #0e4f69;
-  --orange: #e4572e;
-  --card: #ffffff;
-  --line: #dde4e8;
-  --text-muted: #6c7a89;
-}
-
 .forums-root {
-  --navy-900: #0b3b4d;
-  --navy-800: #0e4f69;
-  --orange: #e4572e;
+  --navy-900: v-bind(realmColor900);
+  --navy-800: v-bind(realmColor800);
+  --orange: v-bind(realmAccent);
   --card: #ffffff;
   --line: #dde4e8;
   --text-muted: #6c7a89;
@@ -322,7 +317,6 @@ onMounted(async () => {
 .card-cover-placeholder {
   width: 100%;
   height: 160px;
-  background: linear-gradient(135deg, var(--navy-900, #0b3b4d), var(--navy-800, #0e4f69));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -424,7 +418,6 @@ onMounted(async () => {
 }
 
 .widget-header {
-  background: var(--navy-900, #0b3b4d);
   color: #fff;
   font-size: 0.8rem;
   font-weight: 700;
