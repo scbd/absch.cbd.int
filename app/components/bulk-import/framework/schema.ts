@@ -27,10 +27,11 @@ export abstract class Schema implements SchemaInstance {
   constructor(
     protected readonly row: RawRow,
     protected readonly linkedRecords: LinkedRecordStore,
+    //api client passed here because of token fn is fetched from composable
     protected readonly api: ApiClient,
-    language: LanguageCode
+    rawLanguage: string
   ) {
-    this.language = language
+    this.language = Schema.getLanguageCode(rawLanguage)
   }
 
   abstract buildSchemaDocument(): Promise<DocumentRequest>
@@ -66,11 +67,13 @@ export abstract class Schema implements SchemaInstance {
   static getLanguageCode(langValue: string): LanguageCode {
     const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
 
+    // Try to match against English names first (e.g. "English" → "en")
     let key = getKeys(englishLanguages).find(
       k => (englishLanguages as Record<string, string>)[k as string].toLowerCase() === langValue.toLowerCase()
     )
     if (typeof key === 'string') return key as LanguageCode
 
+    //if language is not in english, try to match against native names (e.g. "Français" → "fr")
     key = getKeys(languages).find(
       k => (languages as Record<string, string>)[k as string].toLowerCase() === langValue.toLowerCase()
     )
@@ -79,6 +82,7 @@ export abstract class Schema implements SchemaInstance {
     return 'en'
   }
 
+  //TODO : validate why we need time
   static parseDate(dateValue: string | Date | undefined | null): string {
     if (dateValue === null || dateValue === undefined) return ''
     // Parse as UTC — no hardcoded timezone offset
@@ -90,7 +94,7 @@ export abstract class Schema implements SchemaInstance {
       year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC'
     })
   }
-
+  //todo move to schema, this is specific to IRCC 
   static getIsConfidential(value: string | undefined | null): boolean {
     if (typeof value !== 'string') return true
     return value.toLowerCase() === 'confidential'
@@ -100,6 +104,7 @@ export abstract class Schema implements SchemaInstance {
     return String(value).toLowerCase() === 'yes'
   }
 
+  //todo move to schema, this is specific to IRCC 
   static getUsageMapping(usage: string | undefined): string {
     if (Schema.isEmpty(usage)) return ''
     if (Schema.getIsConfidential(usage)) return ''
@@ -224,6 +229,7 @@ export abstract class Schema implements SchemaInstance {
     const match = regExp.exec(uniqueId)
     if (!match) return ''
 
+    if(match[4] === undefined || match[5] === undefined) return ''
     const documentId = match[4]
     const data = await this.api.getDocument(documentId) as Record<string, { identifier: string }> | null
     if (!data || typeof data !== 'object') return ''

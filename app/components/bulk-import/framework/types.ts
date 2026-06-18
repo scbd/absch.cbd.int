@@ -1,5 +1,4 @@
 import type { DocumentRequest, SubDocumentStore } from '~/types/common/documents'
-import type { LanguageCode } from '~/types/languages'
 
 // ---------------------------------------------------------------------------
 // Raw sheet data (straight from read-excel-file, before any mapping)
@@ -109,13 +108,13 @@ export interface DocumentTypeDefinition {
     row: RawRow,
     linkedRecords: LinkedRecordStore,
     api: ApiClient,
-    language: LanguageCode
+    rawLanguage: string,
   ) => SchemaInstance
+  getLanguage(row: RawRow): string
   attributesMap: AttributesMap
   messages: Record<string, unknown>
   headerRows: number[]
   keywordDomains?: string[]
-  resolvers?: Record<string, (value: string) => Promise<string>>
 }
 
 export interface SchemaInstance {

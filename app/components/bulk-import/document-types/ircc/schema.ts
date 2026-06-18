@@ -1,7 +1,6 @@
 import { Schema, type KeywordType } from '../../framework/schema'
 import type { RawRow, LinkedRecordStore, ApiClient } from '../../framework/types'
 import type { DocumentRequest, EmptyDocumentRequest, IContactFields } from '~/types/common/documents'
-import type { LanguageCode } from '~/types/languages'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
 import { THESAURUS_DOMAINS } from '~/constants/thesaurus'
@@ -17,8 +16,8 @@ async function fetchKeywords(): Promise<KeywordType[]> {
 }
 
 export class IrccSchema extends Schema {
-  constructor(row: RawRow, linkedRecords: LinkedRecordStore, api: ApiClient, language: LanguageCode) {
-    super(row, linkedRecords, api, language)
+  constructor(row: RawRow, linkedRecords: LinkedRecordStore, api: ApiClient, rawLanguage: string) {
+    super(row, linkedRecords, api, rawLanguage)
   }
 
   override async buildSchemaDocument(): Promise<DocumentRequest> {

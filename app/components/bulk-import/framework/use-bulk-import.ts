@@ -13,7 +13,6 @@ import { buildDocuments } from './build-documents'
 import { submitDocuments } from './submit-documents'
 import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep } from './types'
 import { registry } from '../registry'
-import { Schema } from './schema'
 
 function countColumns(map: AttributesMap): number {
   let n = 0
@@ -33,19 +32,19 @@ export function useBulkImport(documentType: DocumentTypes) {
 
   const definition = registry[documentType]
 
-  // Merge this document type's i18n strings into the active locale
+  // Merge this document type's i18n strings into the active locale,
+  // namespacing flat keys under bulkImport.<documentType>.
   for (const [locale, msgs] of Object.entries(definition.messages)) {
-    mergeLocaleMessage(locale, msgs)
+    const prefixed = Object.fromEntries(
+      Object.entries(msgs as Record<string, string>).map(([k, v]) => [`bulkImport.${documentType}.${k}`, v])
+    )
+    mergeLocaleMessage(locale, prefixed)
   }
 
   const state = reactive<UploaderState>({ phase: 'empty' })
 
   function getApi() {
     return new KmDocumentApi({ tokenReader: () => auth.token(), realm })
-  }
-
-  function getLanguage(): string {
-    return auth.user?.()?.government ?? 'en'
   }
 
   async function onFileChange(file: File): Promise<void> {
@@ -81,7 +80,6 @@ export function useBulkImport(documentType: DocumentTypes) {
         rows,
         definition.attributesMap,
         sheetErrors,
-        definition.resolvers,
         () => {
           setStep('validateRows', 'done')
           setStep('buildPreview', 'active')
@@ -109,9 +107,8 @@ export function useBulkImport(documentType: DocumentTypes) {
     Object.assign(state, { phase: 'importing', preview, rawRows, progress })
 
     const api = getApi()
-    const language = Schema.getLanguageCode(getLanguage())
 
-    const { documents, linkedRecords } = await buildDocuments(rawRows, definition, api, language)
+    const { documents, linkedRecords } = await buildDocuments(rawRows, definition, api)
 
     const { imported, failed } = await submitDocuments(
       documents,
@@ -144,7 +141,8 @@ export function useBulkImport(documentType: DocumentTypes) {
       Object.assign(state, { phase: 'empty' })
     } else {
       const s = state as Extract<UploaderState, { preview: unknown; rawRows: RawRow[] }>
-      Object.assign(state, { phase: 'confirm-close', preview: s.preview, rawRows: s.rawRows, errors: (s as any).errors ?? [] })
+      const errors = (s as any).errors ?? []
+      Object.assign(state, { phase: 'confirm-close', preview: s.preview, rawRows: s.rawRows, errors })
     }
   }
 
