@@ -9,7 +9,6 @@ import type {
   SubDocument, EmptyDocumentRequest, IContactFields, SubDocumentStore,
   TextValue, EmptyDocumentValue, DocumentRequest
 } from '~/types/common/documents'
-// @ts-expect-error importing js file
 import KmDocumentApi from '../../../../../api/km-document'
 import {
   languages, englishLanguages
@@ -168,7 +167,8 @@ export default class Schema {
       throw error
     }
     const finalUidSectionIndex = 5
-    return data.header.identifier + '@' + uid[finalUidSectionIndex]
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- getDocument returns unknown; header.identifier exists at runtime
+    return (data as unknown as { header: { identifier: string } }).header.identifier + '@' + uid[finalUidSectionIndex]
   }
 
   /**

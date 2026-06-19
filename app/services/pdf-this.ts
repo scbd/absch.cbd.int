@@ -2,7 +2,8 @@
 // html-pdf.ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import HtmlPdfApi from "../api/html-pdf-api";
-  import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
+// @ts-expect-error no type declarations
+import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
 
 // ---- Types ----
 
@@ -37,7 +38,7 @@ export interface PdfOptions {
 // Ensure window typing for scbdApp usage
 declare global {
   interface Window {
-    scbdApp?: { accountsUrl: string, version: string };
+    scbdApp?: { accountsUrl: string; version: string; apiUrl: string };
   }
 }
 
@@ -264,7 +265,7 @@ export async function pdfThis(
   }
 
   // Copy root tag classes (kept original semantics: only handles 'b' branch here)
-  let tag: CopyTagMode = resolved.copyTagClasses;
+  let tag: CopyTagMode | undefined = resolved.copyTagClasses;
   if (tag) {
     tag = tag === true ? "bh" : tag;
     if ((tag as string).indexOf("b") !== -1) {

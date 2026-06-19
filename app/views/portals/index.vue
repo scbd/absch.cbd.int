@@ -73,7 +73,6 @@
 import { onMounted, ref, type Ref } from 'vue'
 // @ts-expect-error importing js file
 import { lstring } from '~/components/kb/filters'
-// @ts-expect-error importing js file
 import { mapObjectId, isObjectId } from '~/api/api-base.js'
 // @ts-expect-error importing js file
 import ArticlesApi from '../../components/kb/article-api'

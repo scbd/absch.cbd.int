@@ -103,7 +103,7 @@
                               :class="row[key] === 'Party' ? 'bg-success' : 'bg-secondary'">
                           {{ row[key] }}
                         </span>
-                        <a v-else-if="key === 'country'" :href="`${realm.baseURL}/${locale}/database/NR1/${row.documentId}`" target="_blank" rel="noopener">
+                        <a v-else-if="key === 'country'" :href="`${realm.baseURL}/${locale}/database/NR1/${row['documentId']}`" target="_blank" rel="noopener">
                           {{ row[key] }}
                         </a>
                         <span v-else>{{ formatCellValue(row[key]) }}</span>
@@ -146,7 +146,7 @@
                               data-bs-toggle="tooltip" data-bs-placement="top" :title="`Country Status: ${row[key]}`">
                           {{ row[key] }}
                         </span>
-                        <a v-else-if="key === 'country'" :href="`${realm.baseURL}/${locale}/database/NR1/${row.documentId}`" target="_blank" rel="noopener">
+                        <a v-else-if="key === 'country'" :href="`${realm.baseURL}/${locale}/database/NR1/${row['documentId']}`" target="_blank" rel="noopener">
                           {{ row[key] }}
                         </a>
                         <span v-else-if="key.startsWith('Q.')">
@@ -220,12 +220,18 @@ import { ref, computed, onMounted, nextTick, watch } from 'vue';
 // available at runtime. If you ever switch to a non-bundled build or get
 // a console error about "Popper is not defined", you can add
 // `@popperjs/core` and import it explicitly (`import '@popperjs/core';`).
+// @ts-expect-error no type declarations for xlsx
 import * as XLSX from 'xlsx';
+// @ts-expect-error no type declarations for vue-i18n
 import { useI18n } from 'vue-i18n';
+// @ts-expect-error importing js file
 import { lstring } from '~/components/kb/filters';
 import nr1Translation from '~/app-text/views/forms/edit/abs/edit-national-report-1.json' with {type:'json'};
+// @ts-expect-error importing js file
 import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1.js';
+// @ts-expect-error importing js file
 import { mergeTranslationKeys } from '~/services/translation-merge.js';
+// @ts-expect-error importing js file
 import { useRealm } from '~/services/composables/realm.js';
 
 const realm = useRealm();
@@ -261,11 +267,13 @@ interface TableRow {
 }
 
 /* ---------------------------- Constants -------------------------- */
-const REPORT_ANALYZER_API = `${window.scbdApp.apiUrl}/api/v2019/report-analyzer/abs-national-report-1`;
-const COUNTRIES_API = `${window.scbdApp.apiUrl}/api/v2013/countries`;
-const REGIONAL_API  = `${window.scbdApp.apiUrl}/api/v2013/thesaurus/domains/E6566232-EE63-4C7B-AF8B-46A26CC295A5/terms?relations`;
-const PIVOT_API     = `${window.scbdApp.apiUrl}/api/v2013/index/select`;
-const REALM_CONFIG  = `${window.scbdApp.apiUrl}/api/v2018/realm-configurations/absch.cbd.int`;
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- window.scbdApp is always set by boot.js before this component loads
+const { apiUrl } = window.scbdApp!;
+const REPORT_ANALYZER_API = `${apiUrl}/api/v2019/report-analyzer/abs-national-report-1`;
+const COUNTRIES_API = `${apiUrl}/api/v2013/countries`;
+const REGIONAL_API  = `${apiUrl}/api/v2013/thesaurus/domains/E6566232-EE63-4C7B-AF8B-46A26CC295A5/terms?relations`;
+const PIVOT_API     = `${apiUrl}/api/v2013/index/select`;
+const REALM_CONFIG  = `${apiUrl}/api/v2018/realm-configurations/absch.cbd.int`;
 
 /* -------------------------- Reactive state ----------------------- */
 const tableData        = ref<TableRow[]>([]);
@@ -326,7 +334,7 @@ const comparisonColumnKeys = computed(() => {
 });
 
 const reportCount = computed(() => {
-  return tableData.value?.filter(r => r.documentId !== "")?.length;
+  return tableData.value?.filter(r => r['documentId'] !== "")?.length;
 });
 
 // List of available countries for the dropdown (sorted by name)
@@ -400,12 +408,12 @@ function getComparisonCell(row: TableRow, key: string) {
   const val = formatCellValue(row[key]);
 
   // Country has not submitted an NR1 — show blank for question columns
-  if (key.startsWith('Q.') && !row.documentId) {
+  if (key.startsWith('Q.') && !row['documentId']) {
     return { text: '', class: '', tooltip: '' };
   }
-  
+
   if (key.startsWith('Q.') && !key.includes('Info')) {
-    const rawVal = rawValuesMap.get(`${row.documentId}|${key}`);
+    const rawVal = rawValuesMap.get(`${row['documentId']}|${key}`);
     // If the question was intentionally grayed out (no answer provided),
     // treat it as not-applicable rather than an error.
     if (rawVal === undefined || rawVal === null) {
@@ -475,7 +483,7 @@ function getComparisonCell(row: TableRow, key: string) {
         'Q.21.1':'Q.21.2'
       };
       const paired = pairMap[key];
-      const pairedRaw = paired ? rawValuesMap.get(`${row.documentId}|${paired}`) : null;
+      const pairedRaw = paired ? rawValuesMap.get(`${row['documentId']}|${paired}`) : null;
       const pairedNegative = pairedRaw === 'false' || pairedRaw === false;
 
       // "yes to some extent" should be treated as good regardless of pivot count
@@ -700,7 +708,7 @@ function flattenPivotLong(
   return out.sort((a, b) => (a['Country Name'] || '').localeCompare(b['Country Name'] || ''));
 }
 
-const getQuestionByKey = (key: string, type:string) => {
+const getQuestionByKey = (key: string, type?: string) => {
 // if(type === 'title')
 // console.log(key)
   return flatted.find(q => q.key === key);
@@ -940,8 +948,9 @@ const exportToExcel = () => {
         const C = prefCols.length + idx;
         const cellAddr = XLSX.utils.encode_cell({ c: C, r: R });
         const cell = compSheet[cellAddr];
-        if (cell) {
-          const compCell = getComparisonCell(filteredTableData.value[R - 2], sub.key);
+        const tableRow = filteredTableData.value[R - 2]
+        if (cell && tableRow !== undefined) {
+          const compCell = getComparisonCell(tableRow, sub.key);
           let rgb = '';
           if (compCell.class.includes('bg-success')) rgb = 'C6EFCE';
           else if (compCell.class.includes('bg-danger')) rgb = 'FFC7CE';
