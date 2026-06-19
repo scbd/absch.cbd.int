@@ -114,7 +114,6 @@ export interface DocumentTypeDefinition {
   attributesMap: AttributesMap
   messages: Record<string, unknown>
   headerRows: number[]
-  keywordDomains?: string[]
 }
 
 export interface SchemaInstance {

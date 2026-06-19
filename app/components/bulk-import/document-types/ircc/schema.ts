@@ -16,7 +16,8 @@ async function fetchKeywords(): Promise<KeywordType[]> {
 }
 
 export class IrccSchema extends Schema {
-  constructor(row: RawRow, linkedRecords: LinkedRecordStore, api: ApiClient, rawLanguage: string) {
+  constructor(row: RawRow, linkedRecords: LinkedRecordStore, 
+              api: ApiClient, rawLanguage: string) {
     super(row, linkedRecords, api, rawLanguage)
   }
 
@@ -27,7 +28,7 @@ export class IrccSchema extends Schema {
     const providers = await this.findContactOrCreate(this.contactFromRow('provider'))
     const entitiesToWhomPICGranted = await this.findContactOrCreate(this.contactFromRow('pic'))
     const { processedKeywords, otherKeywords } = this.getKeywords(
-      this.str('keywords'), keywordsMap
+      this.columnValue('keywords'), keywordsMap
     )
 
     const data: EmptyDocumentRequest = {
@@ -36,60 +37,50 @@ export class IrccSchema extends Schema {
         schema: 'absPermit',
         languages: [this.language]
       },
-      government:                            Schema.getSubDocument(this.str('country')?.toLowerCase()),
-      absCNA:                                Schema.getSubDocument(absCNAIdentifier),
-      title:                                 this.getLocaleValue(this.str('permitEquivalent')),
-      dateOfIssuance:                        Schema.parseDate(this.str('dateOfIssuance')),
-      dateOfExpiry:                          Schema.parseDate(this.str('dateOfExpiry')),
-      providersConfidential:                 Schema.getIsConfidential(this.nestedStr('provider', 'type')),
-      entitiesToWhomPICGrantedConfidential:  Schema.getIsConfidential(this.nestedStr('pic', 'type')),
-      picGranted:                            Schema.parseTextToBoolean(this.nestedStr('pic', 'consent')),
-      subjectMatter:                         this.getLocaleElement(this.str('subjectMatter')),
+      government:                            Schema.toETerm(this.columnValue('country')?.toLowerCase()),
+      absCNA:                                Schema.toEReference(absCNAIdentifier),
+      title:                                 this.getLocaleValue(this.columnValue('permitEquivalent')),
+      dateOfIssuance:                        Schema.parseDate(this.columnValue('dateOfIssuance')),
+      dateOfExpiry:                          Schema.parseDate(this.columnValue('dateOfExpiry')),
+      providersConfidential:                 Schema.getIsConfidential(this.nestedColumnValue('provider', 'type')),
+      entitiesToWhomPICGrantedConfidential:  Schema.getIsConfidential(this.nestedColumnValue('pic', 'type')),
+      picGranted:                            Schema.parseTextToBoolean(this.nestedColumnValue('pic', 'consent')),
+      subjectMatter:                         this.getLocaleElement(this.columnValue('subjectMatter')),
       keywords:                              processedKeywords,
       keywordOther:                          this.getLocaleValue(otherKeywords.trim() || undefined),
       providers,
       entitiesToWhomPICGranted,
-      matEstablished:                        Schema.parseTextToBoolean(this.str('matEstablished')),
-      usages:                                [{ identifier: Schema.getUsageMapping(this.str('usage')) }],
-      usagesConfidential:                    Schema.getIsConfidential(this.str('usage')),
-      usagesDescription:                     this.getLocaleElement(this.str('usageDescription')),
-      thirdPartyTransferCondition:           this.getLocaleElement(this.str('conditionsThirdPartyTransfer')),
-      specimens:                             Schema.getELinkData(this.str('specimens')),
-      taxonomies:                            Schema.getELinkData(this.str('taxonomies')),
-      relevantInformation:                   this.str('additionalInformation')
+      matEstablished:                        Schema.parseTextToBoolean(this.columnValue('matEstablished')),
+      usages:                                [{ identifier: Schema.getUsageMapping(this.columnValue('usage')) }],
+      usagesConfidential:                    Schema.getIsConfidential(this.columnValue('usage')),
+      usagesDescription:                     this.getLocaleElement(this.columnValue('usageDescription')),
+      thirdPartyTransferCondition:           this.getLocaleElement(this.columnValue('conditionsThirdPartyTransfer')),
+      specimens:                             Schema.getELinkData(this.columnValue('specimens')),
+      taxonomies:                            Schema.getELinkData(this.columnValue('taxonomies')),
+      relevantInformation:                   this.columnValue('additionalInformation')
     }
 
     return Schema.removeEmptyValues(data)
   }
 
-  private str(key: string): string | undefined {
-    const v = this.row[key]
-    return typeof v === 'string' ? v : undefined
-  }
-
-  private nestedStr(group: string, key: string): string | undefined {
-    const v = this.row[`${group}.${key}`]
-    return typeof v === 'string' ? v : undefined
-  }
-
   private contactFromRow(prefix: string): IContactFields | undefined {
-    const type = this.nestedStr(prefix, 'type')
+    const type = this.nestedColumnValue(prefix, 'type')
     if (Schema.isEmpty(type)) return undefined
     return {
       type,
-      existing:  this.nestedStr(prefix, 'existing'),
-      orgName:   this.nestedStr(prefix, 'orgName'),
-      acronym:   this.nestedStr(prefix, 'acronym'),
-      address:   this.nestedStr(prefix, 'address'),
-      city:      this.nestedStr(prefix, 'city'),
-      country:   this.nestedStr(prefix, 'country'),
-      email:     this.nestedStr(prefix, 'email'),
-      consent:   this.nestedStr(prefix, 'consent')
+      existing:  this.nestedColumnValue(prefix, 'existing'),
+      orgName:   this.nestedColumnValue(prefix, 'orgName'),
+      acronym:   this.nestedColumnValue(prefix, 'acronym'),
+      address:   this.nestedColumnValue(prefix, 'address'),
+      city:      this.nestedColumnValue(prefix, 'city'),
+      country:   this.nestedColumnValue(prefix, 'country'),
+      email:     this.nestedColumnValue(prefix, 'email'),
+      consent:   this.nestedColumnValue(prefix, 'consent')
     }
   }
 
   private async resolveAbsCna(): Promise<string | undefined> {
-    const id = this.str('absCNAId')
+    const id = this.columnValue('absCNAId')
     if (Schema.isEmpty(id)) return undefined
     try {
       const result = await this.resolveDocumentIdentifier(id!)

@@ -12,7 +12,7 @@ const irccAttributesMap: AttributesMap = {
       type:     { column: '6',  required: true,  translationKey: 'type' },                   // G
       existing: { column: '7',                   translationKey: 'uniqueIdentifier' },        // H
       orgName:  { column: '8',  required: true,  translationKey: 'organizationFullName' },    // I
-      acronym:  { column: '9',  required: true,  translationKey: 'acronym' },                 // J
+      acronym:  { column: '9',  required: false, translationKey: 'acronym' },                 // J
       address:  { column: '10',                  translationKey: 'address' },                 // K
       city:     { column: '11',                  translationKey: 'city' },                    // L
       country:  { column: '12', required: true,  translationKey: 'country' },                 // M
@@ -26,7 +26,7 @@ const irccAttributesMap: AttributesMap = {
       type:     { column: '15', required: true,  translationKey: 'type' },                   // P
       existing: { column: '16',                  translationKey: 'uniqueIdentifier' },        // Q
       orgName:  { column: '17', required: true,  translationKey: 'firstName' },              // R
-      acronym:  { column: '18', required: true,  translationKey: 'acronym' },                // S
+      acronym:  { column: '18', required: false, translationKey: 'acronym' },                // S
       address:  { column: '19',                  translationKey: 'address' },                 // T
       city:     { column: '20',                  translationKey: 'city' },                    // U
       country:  { column: '21', required: true,  translationKey: 'country' },                // V

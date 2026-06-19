@@ -49,7 +49,12 @@ export abstract class Schema implements SchemaInstance {
     return value === null || value === '' || value === undefined
   }
 
-  static getSubDocument(identifier: string | undefined): SubDocument | undefined {
+  static toETerm(identifier: string | undefined): SubDocument | undefined {
+    if (typeof identifier !== 'string' || identifier.trim() === '') return undefined
+    return { identifier }
+  }
+
+  static toEReference(identifier: string | undefined): SubDocument | undefined {
     if (typeof identifier !== 'string' || identifier.trim() === '') return undefined
     return { identifier }
   }
@@ -82,14 +87,18 @@ export abstract class Schema implements SchemaInstance {
     return 'en'
   }
 
-  //TODO : validate why we need time
   static parseDate(dateValue: string | Date | undefined | null): string {
     if (dateValue === null || dateValue === undefined) return ''
-    // Parse as UTC — no hardcoded timezone offset
-    const raw = dateValue instanceof Date ? dateValue.toISOString() : dateValue
-    const date = new Date(raw)
+    if (dateValue instanceof Date) {
+      if (isNaN(dateValue.getTime())) return ''
+      // fr-CA gives YYYY-MM-DD which the backend expects; Excel dates are UTC midnight
+      return dateValue.toLocaleDateString('fr-CA', {
+        year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC'
+      })
+    }
+    // String: validate it parses as a date, then normalise to YYYY-MM-DD
+    const date = new Date(dateValue)
     if (isNaN(date.getTime())) return ''
-    // fr-CA gives YYYY-MM-DD which the backend expects
     return date.toLocaleDateString('fr-CA', {
       year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC'
     })
@@ -124,6 +133,16 @@ export abstract class Schema implements SchemaInstance {
   // -------------------------------------------------------------------------
   // Instance utilities
   // -------------------------------------------------------------------------
+
+  protected columnValue(key: string): string | undefined {
+    const v = this.row[key]
+    return typeof v === 'string' ? v : undefined
+  }
+
+  protected nestedColumnValue(group: string, key: string): string | undefined {
+    const v = this.row[`${group}.${key}`]
+    return typeof v === 'string' ? v : undefined
+  }
 
   getLocaleValue(value: string | undefined | null): TextValue | undefined {
     if (typeof value !== 'string') return undefined
@@ -164,29 +183,28 @@ export abstract class Schema implements SchemaInstance {
 
   getContactSchema(contact: SupportingDocument<SubDocumentTypes> | undefined): SupportingDocument<SubDocumentTypes> {
     if (contact === undefined) return {}
+    const contactFields = contact as IContactFields
     const data: EmptyDocumentRequest = {
       header: {
         identifier: Schema.generateId(),
         schema: 'contact',
         languages: [this.language]
       },
-      type: (contact as IContactFields).type,
-      government: Schema.getSubDocument((this.row['country'] as string | undefined)?.toLowerCase()),
-      country: Schema.getSubDocument((this.row['country'] as string | undefined)?.toLowerCase()),
-      city: this.getLocaleValue((contact as IContactFields).city),
-      address: this.getLocaleValue((contact as IContactFields).address),
-      emails: typeof (contact as IContactFields).email === 'string'
-        ? [(contact as IContactFields).email as string]
-        : undefined
+      type: contactFields.type,
+      government: Schema.toETerm(this.columnValue('country')?.toLowerCase()),
+      country: Schema.toETerm(contactFields.country?.toLowerCase()),
+      city: this.getLocaleValue(contactFields.city),
+      address: this.getLocaleValue(contactFields.address),
+      emails: typeof contactFields.email === 'string' ? [contactFields.email] : undefined
     }
 
-    if ((contact as IContactFields).type === 'organization') {
-      data['organization'] = this.getLocaleValue((contact as IContactFields).orgName)
-      data['organizationAcronym'] = this.getLocaleValue((contact as IContactFields).acronym)
+    if (contactFields.type === 'organization') {
+      data['organization'] = this.getLocaleValue(contactFields.orgName)
+      data['organizationAcronym'] = this.getLocaleValue(contactFields.acronym)
     } else {
       data['type'] = 'person'
-      data['firstName'] = ((contact as IContactFields).orgName ?? '').trim()
-      data['lastName'] = ((contact as IContactFields).acronym ?? '').trim()
+      data['firstName'] = (contactFields.orgName ?? '').trim()
+      data['lastName'] = (contactFields.acronym ?? '').trim()
     }
 
     return Schema.removeEmptyValues(data)

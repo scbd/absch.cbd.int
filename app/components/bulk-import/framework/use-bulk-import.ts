@@ -76,15 +76,9 @@ export function useBulkImport(documentType: DocumentTypes) {
       await delay(300)
 
       // Steps 3+4: validate & build preview
-      const preview = await buildPreview(
-        rows,
-        definition.attributesMap,
-        sheetErrors,
-        () => {
-          setStep('validateRows', 'done')
-          setStep('buildPreview', 'active')
-        }
-      )
+      setStep('validateRows', 'done')
+      setStep('buildPreview', 'active')
+      const preview = buildPreview(rows, definition.attributesMap, sheetErrors)
 
       setStep('buildPreview', 'done')
       await delay(400)

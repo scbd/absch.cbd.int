@@ -8,6 +8,7 @@ export const irccDocumentType: DocumentTypeDefinition = {
   getLanguage: (row) => typeof row['language'] === 'string' ? row['language'] : '',
   attributesMap,
   messages: { en: irccMessages },
+  // each document type can have diff header rows,
+  // incase of ircc there are 2 header rows.
   headerRows: [0, 1],
-  keywordDomains: []
 }

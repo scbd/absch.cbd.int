@@ -19,7 +19,7 @@ function getColumnKeys(attributesMap: AttributesMap): string[] {
 
 function formatCell(value: CellPrimitive): string {
   if (value === null || value === undefined) return ''
-  if (value instanceof Date) return value.toLocaleDateString('fr-CA')
+  if (value instanceof Date) return value.toLocaleDateString('fr-CA', { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC' })
   return String(value)
 }
 
@@ -29,17 +29,14 @@ function rowStatus(cellErrors: CellError[]): PreviewRow['status'] {
   return 'ready'
 }
 
-export async function buildPreview(
+export function buildPreview(
   rows: RawRow[],
   attributesMap: AttributesMap,
   sheetErrors: SheetError[],
-  onProgress?: (event: 'building') => void
-): Promise<PreviewData> {
+): PreviewData {
   const columnKeys = getColumnKeys(attributesMap)
 
-  onProgress?.('building')
-
-  // Index sheet errors by row
+  // Any errors when reading the excel
   const errorsByRow = new Map<number, SheetError[]>()
   for (const e of sheetErrors) {
     if (!errorsByRow.has(e.row)) errorsByRow.set(e.row, [])
