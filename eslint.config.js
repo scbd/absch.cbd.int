@@ -55,12 +55,15 @@ export default defineConfig([
     files: ['**/*.{ts,mts,tsx,vue,js}'],
     noStyle: true
   }),
+  // Grandfathered legacy files — no rules enforced.
+  // To upgrade a file: remove it from .config/eslintminimal.json and fix the errors.
+  // New files (not in the list) automatically get full linting.
+  { ignores: eslintMinimalFilesList },
   {
     name: 'include styles for new files',
     files: ['**/*.{ts,mts,tsx,vue,js}'],
     rules: standardStyles.rules,
-    plugins: standardStyles.plugins,
-    ignores: eslintMinimalFilesList // Only highlight critical errors for old files to avoid every line showing an error.
+    plugins: standardStyles.plugins
   },
   vueTs,
   {

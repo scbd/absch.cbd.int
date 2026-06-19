@@ -528,5 +528,16 @@
   "./rollup.config.js",
   "./rollup/inject-css-to-dom.js",
   "./rollup/strip-bom.js",
-  "./rollup/merge-i18n.js"
+  "./rollup/merge-i18n.js",
+  "./app/api/html-pdf-api.ts",
+  "./app/components/common/app-version-watcher.vue",
+  "./app/components/common/country-party-status.vue",
+  "./app/components/common/loading.vue",
+  "./app/components/common/overlay.vue",
+  "./app/components/documents-uploader/utilities/document-attributes-to-schema-json/schemas/schema.ts",
+  "./app/components/documents-uploader/utilities/import-documents.ts",
+  "./app/components/reports/abs/nr1-analysis.vue",
+  "./app/services/filters/arrays.ts",
+  "./app/services/pdf-this.ts",
+  "./app/views/report-analyzer/components/export-to-excel.vue"
 ]
