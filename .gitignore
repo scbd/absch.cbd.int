@@ -24,3 +24,6 @@ TestCases
 package-lock.json
 sourceMap
 dist
+*.tsbuildinfo
+
+.claude/
