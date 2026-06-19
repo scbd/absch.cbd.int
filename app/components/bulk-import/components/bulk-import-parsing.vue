@@ -1,18 +1,61 @@
 <template>
   <div class="bi-parsing">
     <div class="bi-parsing__icon">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <svg
+        width="26"
+        height="26"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line
+        x1="16"
+        y1="13"
+        x2="8"
+        y2="13"
+      /><line
+        x1="16"
+        y1="17"
+        x2="8"
+        y2="17"
+      /><polyline points="10 9 9 9 8 9" /></svg>
     </div>
-    <div class="bi-parsing__name">{{ fileName }}</div>
-    <div class="bi-parsing__sub">{{ t('bulkImport.parsingTitle', 'Reading and validating your file...') }}</div>
+    <div class="bi-parsing__name">
+      {{ fileName }}
+    </div>
+    <div class="bi-parsing__sub">
+      {{ t('bulkImport.parsingTitle', 'Reading and validating your file...') }}
+    </div>
     <div class="bi-parsing__bar-track">
-      <div class="bi-parsing__bar-fill" :style="{ width: progress + '%' }" />
+      <div
+        class="bi-parsing__bar-fill"
+        :style="{ width: progress + '%' }"
+      />
     </div>
     <ul class="bi-parsing__steps">
-      <li v-for="step in steps" :key="step.key" class="bi-parsing__step" :class="`bi-parsing__step--${step.status}`">
+      <li
+        v-for="step in steps"
+        :key="step.key"
+        class="bi-parsing__step"
+        :class="`bi-parsing__step--${step.status}`"
+      >
         <span class="bi-parsing__step-ic">
-          <svg v-if="step.status === 'done'" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span v-else-if="step.status === 'active'" class="bi-parsing__spinner" />
+          <svg
+            v-if="step.status === 'done'"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+          ><polyline points="20 6 9 17 4 12" /></svg>
+          <span
+            v-else-if="step.status === 'active'"
+            class="bi-parsing__spinner"
+          />
         </span>
         <span>{{ stepLabel(step) }}</span>
       </li>
@@ -29,9 +72,9 @@ defineProps<{ fileName: string; steps: ParseStep[]; progress: number }>()
 
 const { t } = useI18n()
 
-function stepLabel(step: ParseStep): string {
-  if (step.key === 'openSheet')    return t('bulkImport.step.openSheet', 'Workbook opened · sheet found')
-  if (step.key === 'mapColumns')   return step.detail ? `Mapped ${step.detail} columns to IRCC fields` : 'Mapping columns…'
+function stepLabel (step: ParseStep): string {
+  if (step.key === 'openSheet') return t('bulkImport.step.openSheet', 'Workbook opened · sheet found')
+  if (step.key === 'mapColumns') return step.detail ? `Mapped ${step.detail} columns to IRCC fields` : 'Mapping columns…'
   if (step.key === 'validateRows') return step.detail ? `Validating ${step.detail} rows against registries…` : 'Validating rows…'
   if (step.key === 'buildPreview') return t('bulkImport.step.buildPreview', 'Building preview')
   return step.key

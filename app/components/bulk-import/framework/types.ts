@@ -42,7 +42,7 @@ export interface PreviewCell {
   errors: CellError[]
 }
 
-export type PreviewRow = {
+export interface PreviewRow {
   rowIndex: number
   cells: Record<string, PreviewCell>
   status: 'ready' | 'warn' | 'error'
@@ -109,20 +109,20 @@ export interface DocumentTypeDefinition {
     linkedRecords: LinkedRecordStore,
     api: ApiClient,
     rawLanguage: string,
-  ) => SchemaInstance
-  getLanguage(row: RawRow): string
+  )=> SchemaInstance
+  getLanguage: (row: RawRow)=> string
   attributesMap: AttributesMap
   messages: Record<string, unknown>
   headerRows: number[]
 }
 
 export interface SchemaInstance {
-  buildSchemaDocument(): Promise<DocumentRequest>
+  buildSchemaDocument: ()=> Promise<DocumentRequest>
 }
 
-export type ApiClient = {
-  createDocumentDraft(doc: DocumentRequest): Promise<unknown>
-  getDocument(identifier: string): Promise<unknown>
+export interface ApiClient {
+  createDocumentDraft: (doc: DocumentRequest)=> Promise<unknown>
+  getDocument: (identifier: string)=> Promise<unknown>
 }
 
 // ---------------------------------------------------------------------------
@@ -132,9 +132,9 @@ export type ApiClient = {
 export type UploaderState =
   | { phase: 'empty' }
   | { phase: 'parsing'; fileName: string; steps: ParseStep[] }
-  | { phase: 'preview';        preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
+  | { phase: 'preview'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'confirm-import'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'confirm-close';  preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'confirm-erase';  preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'importing';      preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
+  | { phase: 'confirm-close'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
+  | { phase: 'confirm-erase'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
+  | { phase: 'importing'; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
   | { phase: 'done'; imported: number; failed: number }

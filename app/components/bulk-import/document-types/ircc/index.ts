@@ -10,5 +10,5 @@ export const irccDocumentType: DocumentTypeDefinition = {
   messages: { en: irccMessages },
   // each document type can have diff header rows,
   // incase of ircc there are 2 header rows.
-  headerRows: [0, 1],
+  headerRows: [0, 1]
 }

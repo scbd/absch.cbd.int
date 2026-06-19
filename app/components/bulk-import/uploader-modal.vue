@@ -1,7 +1,13 @@
 <template>
-  <div class="bi-backdrop" @click.self="onClose">
-    <div class="bi-panel" role="dialog" aria-modal="true">
-
+  <div
+    class="bi-backdrop"
+    @click.self="onClose"
+  >
+    <div
+      class="bi-panel"
+      role="dialog"
+      aria-modal="true"
+    >
       <BulkImportHeader
         :phase="state.phase"
         :file-name="fileName"
@@ -10,7 +16,10 @@
         @clear="onClear"
       />
 
-      <BulkImportBanner :banner="banner" :banner-errors="bannerErrors" />
+      <BulkImportBanner
+        :banner="banner"
+        :banner-errors="bannerErrors"
+      />
 
       <BulkImportToolbar
         v-if="hasPreview"
@@ -21,7 +30,10 @@
       />
 
       <div class="bi-body">
-        <BulkImportDropzone v-if="state.phase === 'empty'" @file="onFilePicked" />
+        <BulkImportDropzone
+          v-if="state.phase === 'empty'"
+          @file="onFilePicked"
+        />
 
         <BulkImportParsing
           v-else-if="state.phase === 'parsing'"
@@ -39,7 +51,10 @@
           :row-progress-list="rowProgressList"
         />
 
-        <div v-else-if="state.phase === 'done'" class="bi-loading">
+        <div
+          v-else-if="state.phase === 'done'"
+          class="bi-loading"
+        >
           <i class="fa fa-check-circle text-success bi-done-icon" />
           <p class="mt-3">
             {{ t('bulkImport.doneMsg', 'Done — {imported} created, {failed} failed.', doneState) }}
@@ -48,26 +63,67 @@
       </div>
 
       <div class="bi-foot">
-        <button type="button" class="bi-btn-ghost" @click="onClose">
+        <button
+          type="button"
+          class="bi-btn-ghost"
+          @click="onClose"
+        >
           {{ t('bulkImport.close', 'Close') }}
         </button>
 
         <span class="bi-foot__spacer" />
 
         <template v-if="hasPreview && state.phase !== 'importing'">
-          <span v-if="hasErrors" class="bi-foot__err">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span
+            v-if="hasErrors"
+            class="bi-foot__err"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            ><circle
+              cx="12"
+              cy="12"
+              r="10"
+            /><line
+              x1="12"
+              y1="8"
+              x2="12"
+              y2="12"
+            /><line
+              x1="12"
+              y1="16"
+              x2="12.01"
+              y2="16"
+            /></svg>
             {{ t('bulkImport.resolveErrors', 'Resolve all errors to enable import.') }}
           </span>
-          <button type="button" class="bi-btn-ghost" @click="onClear">
+          <button
+            type="button"
+            class="bi-btn-ghost"
+            @click="onClear"
+          >
             {{ t('bulkImport.clearList', 'Clear list') }}
           </button>
-          <button type="button" class="bi-btn-orange" :disabled="hasErrors" @click="onConfirmImport">
+          <button
+            type="button"
+            class="bi-btn-orange"
+            :disabled="hasErrors"
+            @click="onConfirmImport"
+          >
             {{ t('bulkImport.createDrafts', 'Create draft records') }}
           </button>
         </template>
 
-        <span v-if="state.phase === 'importing'" class="bi-foot__muted">
+        <span
+          v-if="state.phase === 'importing'"
+          class="bi-foot__muted"
+        >
           {{ t('bulkImport.importing', 'Importing…') }}
         </span>
       </div>
@@ -98,7 +154,6 @@
         @confirm="onConfirmErase"
         @cancel="onCancelConfirm"
       />
-
     </div>
   </div>
 </template>
@@ -120,7 +175,7 @@ import BulkImportTable from './components/bulk-import-table.vue'
 import BulkImportConfirmDialog from './components/bulk-import-confirm-dialog.vue'
 
 const props = defineProps<{ documentType: DocumentTypes }>()
-const emit = defineEmits<{ (e: 'close'): void }>()
+const emit = defineEmits<(e: 'close')=> void>()
 
 const { t } = useI18n()
 const {
@@ -129,15 +184,15 @@ const {
   onConfirmErase: _onConfirmErase, onCancelConfirm
 } = useBulkImport(props.documentType)
 
-function onClose() {
+function onClose () {
   _onClose()
   if (state.phase === 'empty') emit('close')
 }
-function onForceClose() {
+function onForceClose () {
   _onForceClose()
   emit('close')
 }
-function onConfirmErase() {
+function onConfirmErase () {
   _onConfirmErase()
 }
 
@@ -146,7 +201,7 @@ function onConfirmErase() {
 // -------------------------------------------------------------------------
 const fileName = ref('')
 
-function onFilePicked(file: File) {
+function onFilePicked (file: File) {
   fileName.value = file.name
   onFileChange(file)
 }
@@ -155,7 +210,7 @@ function onFilePicked(file: File) {
 // Parsing progress
 // -------------------------------------------------------------------------
 const parsingSteps = computed(() =>
-  state.phase === 'parsing' ? (state as Extract<typeof state, { phase: 'parsing' }>).steps ?? [] : []
+  state.phase === 'parsing' ? (state).steps ?? [] : []
 )
 
 const parseProgress = computed(() => {
@@ -202,16 +257,16 @@ const filteredRows = computed(() => {
 
 type StateWithErrors = Extract<typeof state, { errors: unknown[] }>
 const sheetErrors = computed(() =>
-  hasPreview.value ? ((state as StateWithErrors).errors ?? []) as import('./framework/types').SheetError[] : []
+  hasPreview.value ? ((state as StateWithErrors).errors ?? []) as Array<import('./framework/types').SheetError> : []
 )
 
 const banner = computed(() => {
   if (!hasPreview.value) return null
   if (sheetErrors.value.length === 0) return { level: 'ok' as const, text: t('bulkImport.ready', 'Ready to import') }
-  const errCount  = sheetErrors.value.filter(e => e.level === 'error').length
+  const errCount = sheetErrors.value.filter(e => e.level === 'error').length
   const warnCount = sheetErrors.value.filter(e => e.level === 'warning').length
   const parts = [
-    errCount  ? `${errCount} error${errCount  !== 1 ? 's' : ''}` : '',
+    errCount ? `${errCount} error${errCount !== 1 ? 's' : ''}` : '',
     warnCount ? `${warnCount} warning${warnCount !== 1 ? 's' : ''}` : ''
   ].filter(Boolean).join(' and ')
   const affected = new Set(sheetErrors.value.map(e => e.row)).size
@@ -236,7 +291,7 @@ const hasErrors = computed(() => sheetErrors.value.some(e => e.level === 'error'
 
 const rowProgressList = computed<RowProgress[]>(() =>
   state.phase === 'importing'
-    ? (state as Extract<typeof state, { progress: RowProgress[] }>).progress
+    ? (state).progress
     : []
 )
 
@@ -283,10 +338,10 @@ const columnGroups = computed<ColumnGroup[]>(() => [
     label: t('bulkImport.ircc.groups.usesConditions', 'Uses & conditions'),
     keys: ['usage', 'usageDescription', 'conditionsThirdPartyTransfer']
   },
-  { label: t('bulkImport.ircc.groups.documentation', 'Documentation'), keys: ['permitFiles','additionalInformation'] }
+  { label: t('bulkImport.ircc.groups.documentation', 'Documentation'), keys: ['permitFiles', 'additionalInformation'] }
 ].filter(g => g.keys.some(k => scrollableColumnKeys.value.includes(k))))
 
-function columnLabel(key: string): string {
+function columnLabel (key: string): string {
   return t(`bulkImport.ircc.columns.${key}`, key)
 }
 

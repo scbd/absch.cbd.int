@@ -3,10 +3,17 @@
     <div class="bi-confirm">
       <p>{{ message }}</p>
       <div class="mt-3 d-flex gap-2 justify-content-end">
-        <button class="btn btn-secondary" @click="emit('cancel')">
+        <button
+          class="btn btn-secondary"
+          @click="emit('cancel')"
+        >
           {{ t('bulkImport.cancel', 'Cancel') }}
         </button>
-        <button class="btn" :class="confirmClass" @click="emit('confirm')">
+        <button
+          class="btn"
+          :class="confirmClass"
+          @click="emit('confirm')"
+        >
           {{ confirmLabel }}
         </button>
       </div>

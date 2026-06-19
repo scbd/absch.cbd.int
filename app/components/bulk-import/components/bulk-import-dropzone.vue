@@ -1,21 +1,76 @@
 <template>
-  <div class="bi-dropzone" @dragover.prevent @drop.prevent="handleDrop">
+  <div
+    class="bi-dropzone"
+    @dragover.prevent
+    @drop.prevent="handleDrop"
+  >
     <div class="bi-dz-icon">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="12"/><line x1="15" y1="15" x2="12" y2="12"/></svg>
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line
+        x1="12"
+        y1="18"
+        x2="12"
+        y2="12"
+      /><line
+        x1="9"
+        y1="15"
+        x2="12"
+        y2="12"
+      /><line
+        x1="15"
+        y1="15"
+        x2="12"
+        y2="12"
+      /></svg>
     </div>
-    <div class="bi-dz-ttl">{{ t('bulkImport.dropTitle', 'Drag an Excel file here') }}</div>
-    <div class="bi-dz-sub">{{ t('bulkImport.dropSub', 'or browse your computer to select a completed IRCC import template.') }}</div>
+    <div class="bi-dz-ttl">
+      {{ t('bulkImport.dropTitle', 'Drag an Excel file here') }}
+    </div>
+    <div class="bi-dz-sub">
+      {{ t('bulkImport.dropSub', 'or browse your computer to select a completed IRCC import template.') }}
+    </div>
     <label class="bi-browse-btn">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line
+        x1="12"
+        y1="3"
+        x2="12"
+        y2="15"
+      /></svg>
       {{ t('bulkImport.browse', 'Browse files') }}
-      <input type="file" accept=".xlsx,.xls" hidden @change="handleFileInput" />
+      <input
+        type="file"
+        accept=".xlsx,.xls"
+        hidden
+        @change="handleFileInput"
+      >
     </label>
     <div class="bi-dz-meta">
       <span>{{ t('bulkImport.accepted', 'Accepted:') }} <b>.xlsx</b>, <b>.xls</b></span>
       <span>{{ t('bulkImport.maxSize', 'Max') }} <b>5 MB</b> · {{ t('bulkImport.upTo', 'up to') }} <b>500 {{ t('bulkImport.rows', 'rows') }}</b></span>
       <span>33 {{ t('bulkImport.columnsDesc', 'columns across 10 sections') }}</span>
     </div>
-    <a class="bi-dz-tmpl" href="#" @click.prevent>↓ {{ t('bulkImport.downloadTemplate', 'Download the IRCC template') }}</a>
+    <a
+      class="bi-dz-tmpl"
+      href="#"
+      @click.prevent
+    >↓ {{ t('bulkImport.downloadTemplate', 'Download the IRCC template') }}</a>
   </div>
 </template>
 
@@ -23,15 +78,15 @@
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 
-const emit = defineEmits<{ (e: 'file', file: File): void }>()
+const emit = defineEmits<(e: 'file', file: File)=> void>()
 const { t } = useI18n()
 
-function handleFileInput(e: Event) {
+function handleFileInput (e: Event) {
   const file = (e.target as HTMLInputElement).files?.[0]
   if (file) emit('file', file)
 }
 
-function handleDrop(e: DragEvent) {
+function handleDrop (e: DragEvent) {
   const file = e.dataTransfer?.files?.[0]
   if (file) emit('file', file)
 }

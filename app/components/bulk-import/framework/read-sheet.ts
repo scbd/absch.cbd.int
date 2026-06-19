@@ -9,7 +9,7 @@ export interface ReadSheetResult {
 // Flatten a nested AttributesMap into the schema format read-excel-file expects:
 //   { propName: { column: '0', required?: boolean } }
 // Nested groups are inlined with dot-key prop names (e.g. 'provider.type').
-function flattenAttributesMap(map: AttributesMap): Record<string, { column: string; required?: boolean }> {
+function flattenAttributesMap (map: AttributesMap): Record<string, { column: string; required?: boolean }> {
   const flat: Record<string, { column: string; required?: boolean }> = {}
 
   for (const [key, entry] of Object.entries(map)) {
@@ -25,7 +25,7 @@ function flattenAttributesMap(map: AttributesMap): Record<string, { column: stri
   return flat
 }
 
-export async function readSheet(
+export async function readSheet (
   file: File,
   attributesMap: AttributesMap,
   headerRows: number[]
@@ -41,7 +41,7 @@ export async function readSheet(
   // @ts-expect-error read-excel-file lacks TS declarations
   const { rows, errors: rawErrors } = await readExcelFile(file, {
     schema,
-    transformData(allRows: unknown[][]) {
+    transformData (allRows: unknown[][]) {
       const dataRows = allRows.filter((_row, i) => !headerRows.includes(i))
       const firstRow = Array.isArray(dataRows[0]) ? dataRows[0] : []
       const indices = Array.from(firstRow.keys())

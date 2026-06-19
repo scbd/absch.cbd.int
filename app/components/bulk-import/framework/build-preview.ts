@@ -3,7 +3,7 @@ import type {
   PreviewRow, PreviewData, CellPrimitive, CellError
 } from './types'
 
-function getColumnKeys(attributesMap: AttributesMap): string[] {
+function getColumnKeys (attributesMap: AttributesMap): string[] {
   const keys: string[] = []
   for (const [key, entry] of Object.entries(attributesMap)) {
     if ('column' in entry) {
@@ -17,22 +17,22 @@ function getColumnKeys(attributesMap: AttributesMap): string[] {
   return keys
 }
 
-function formatCell(value: CellPrimitive): string {
+function formatCell (value: CellPrimitive): string {
   if (value === null || value === undefined) return ''
   if (value instanceof Date) return value.toLocaleDateString('fr-CA', { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC' })
   return String(value)
 }
 
-function rowStatus(cellErrors: CellError[]): PreviewRow['status'] {
+function rowStatus (cellErrors: CellError[]): PreviewRow['status'] {
   if (cellErrors.some(e => e.level === 'error')) return 'error'
   if (cellErrors.some(e => e.level === 'warning')) return 'warn'
   return 'ready'
 }
 
-export function buildPreview(
+export function buildPreview (
   rows: RawRow[],
   attributesMap: AttributesMap,
-  sheetErrors: SheetError[],
+  sheetErrors: SheetError[]
 ): PreviewData {
   const columnKeys = getColumnKeys(attributesMap)
 

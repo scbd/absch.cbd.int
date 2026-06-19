@@ -6,11 +6,11 @@ export interface SubmitResult {
   failed: number
 }
 
-export async function submitDocuments(
+export async function submitDocuments (
   documents: DocumentRequest[],
   linkedRecords: LinkedRecordStore,
   api: ApiClient,
-  onProgress: (progress: RowProgress) => void
+  onProgress: (progress: RowProgress)=> void
 ): Promise<SubmitResult> {
   // Submit linked records first (contacts, etc.) — fire-and-wait, not fire-and-forget
   for (const record of linkedRecords) {

@@ -24,70 +24,70 @@ export interface Keywords {
 export abstract class Schema implements SchemaInstance {
   protected readonly language: LanguageCode
 
-  constructor(
+  constructor (
     protected readonly row: RawRow,
     protected readonly linkedRecords: LinkedRecordStore,
-    //api client passed here because of token fn is fetched from composable
+    // api client passed here because of token fn is fetched from composable
     protected readonly api: ApiClient,
     rawLanguage: string
   ) {
     this.language = Schema.getLanguageCode(rawLanguage)
   }
 
-  abstract buildSchemaDocument(): Promise<DocumentRequest>
+  abstract buildSchemaDocument (): Promise<DocumentRequest>
 
   // -------------------------------------------------------------------------
   // Static utilities
   // -------------------------------------------------------------------------
 
-  static generateId(): string {
+  static generateId (): string {
     return (`SIMP-${crypto.randomUUID()}`).toUpperCase()
   }
 
-  static isEmpty(value: unknown): value is null | undefined {
+  static isEmpty (value: unknown): value is null | undefined {
     if (Array.isArray(value)) return value.length === 0
     return value === null || value === '' || value === undefined
   }
 
-  static toETerm(identifier: string | undefined): SubDocument | undefined {
+  static toETerm (identifier: string | undefined): SubDocument | undefined {
     if (typeof identifier !== 'string' || identifier.trim() === '') return undefined
     return { identifier }
   }
 
-  static toEReference(identifier: string | undefined): SubDocument | undefined {
+  static toEReference (identifier: string | undefined): SubDocument | undefined {
     if (typeof identifier !== 'string' || identifier.trim() === '') return undefined
     return { identifier }
   }
 
-  static getELinkData(value: string | undefined): ELink[] {
+  static getELinkData (value: string | undefined): ELink[] {
     if (Schema.isEmpty(value)) return []
-    return value!.split(',').map(url => ({ url: url.trim() }))
+    return value.split(',').map(url => ({ url: url.trim() }))
   }
 
-  static getAsHtmlElement(value: string | undefined): string {
+  static getAsHtmlElement (value: string | undefined): string {
     if (typeof value !== 'string' || value.trim() === '') return ''
     return `<div>${value}</div>`
   }
 
-  static getLanguageCode(langValue: string): LanguageCode {
-    const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
+  static getLanguageCode (langValue: string): LanguageCode {
+    const getKeys = Object.keys as <T extends object>(obj: T)=> Array<keyof T>
 
     // Try to match against English names first (e.g. "English" → "en")
     let key = getKeys(englishLanguages).find(
       k => (englishLanguages as Record<string, string>)[k as string].toLowerCase() === langValue.toLowerCase()
     )
-    if (typeof key === 'string') return key as LanguageCode
+    if (typeof key === 'string') return key
 
-    //if language is not in english, try to match against native names (e.g. "Français" → "fr")
+    // if language is not in english, try to match against native names (e.g. "Français" → "fr")
     key = getKeys(languages).find(
       k => (languages as Record<string, string>)[k as string].toLowerCase() === langValue.toLowerCase()
     )
-    if (typeof key === 'string') return key as LanguageCode
+    if (typeof key === 'string') return key
 
     return 'en'
   }
 
-  static parseDate(dateValue: string | Date | undefined | null): string {
+  static parseDate (dateValue: string | Date | undefined | null): string {
     if (dateValue === null || dateValue === undefined) return ''
     if (dateValue instanceof Date) {
       if (isNaN(dateValue.getTime())) return ''
@@ -103,29 +103,30 @@ export abstract class Schema implements SchemaInstance {
       year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC'
     })
   }
-  //todo move to schema, this is specific to IRCC 
-  static getIsConfidential(value: string | undefined | null): boolean {
+
+  // todo move to schema, this is specific to IRCC
+  static getIsConfidential (value: string | undefined | null): boolean {
     if (typeof value !== 'string') return true
     return value.toLowerCase() === 'confidential'
   }
 
-  static parseTextToBoolean(value: string | undefined | null): boolean {
+  static parseTextToBoolean (value: string | undefined | null): boolean {
     return String(value).toLowerCase() === 'yes'
   }
 
-  //todo move to schema, this is specific to IRCC 
-  static getUsageMapping(usage: string | undefined): string {
+  // todo move to schema, this is specific to IRCC
+  static getUsageMapping (usage: string | undefined): string {
     if (Schema.isEmpty(usage)) return ''
     if (Schema.getIsConfidential(usage)) return ''
-    const key = usage!.replace('-', '').toUpperCase()
+    const key = usage.replace('-', '').toUpperCase()
     const usageKey: UsageKey = (key === 'NONCOMMERCIAL' || key === 'COMMERCIAL') ? key : 'NONCOMMERCIAL'
     return THESAURUS_TERMS[usageKey]
   }
 
-  static removeEmptyValues(data: EmptyDocumentRequest): DocumentRequest {
+  static removeEmptyValues (data: EmptyDocumentRequest): DocumentRequest {
     const result: Record<string, DocumentValue> = { header: { identifier: '' } }
     for (const [key, value] of Object.entries(data)) {
-      if (!Schema.isEmpty(value)) result[key] = value as DocumentValue
+      if (!Schema.isEmpty(value)) result[key] = value
     }
     return result
   }
@@ -134,33 +135,33 @@ export abstract class Schema implements SchemaInstance {
   // Instance utilities
   // -------------------------------------------------------------------------
 
-  protected columnValue(key: string): string | undefined {
+  protected columnValue (key: string): string | undefined {
     const v = this.row[key]
     return typeof v === 'string' ? v : undefined
   }
 
-  protected nestedColumnValue(group: string, key: string): string | undefined {
+  protected nestedColumnValue (group: string, key: string): string | undefined {
     const v = this.row[`${group}.${key}`]
     return typeof v === 'string' ? v : undefined
   }
 
-  getLocaleValue(value: string | undefined | null): TextValue | undefined {
+  getLocaleValue (value: string | undefined | null): TextValue | undefined {
     if (typeof value !== 'string') return undefined
     return { [this.language]: value.trim() }
   }
 
-  getLocaleElement(value: string | undefined): TextValue | undefined {
+  getLocaleElement (value: string | undefined): TextValue | undefined {
     if (typeof value !== 'string') return undefined
     return { [this.language]: Schema.getAsHtmlElement(value.trim()) }
   }
 
-  getKeywords(keywordsValue: string | undefined, keywordsMap: KeywordType[]): Keywords {
+  getKeywords (keywordsValue: string | undefined, keywordsMap: KeywordType[]): Keywords {
     if (Schema.isEmpty(keywordsValue)) return { processedKeywords: [], otherKeywords: '' }
 
     const processedKeywords: SubDocument[] = []
     let otherKeywords = ''
 
-    for (const raw of keywordsValue!.trim().split(',')) {
+    for (const raw of keywordsValue.trim().split(',')) {
       const val = raw.toLowerCase().trim()
       if (val === '') continue
 
@@ -181,9 +182,9 @@ export abstract class Schema implements SchemaInstance {
     return { processedKeywords, otherKeywords }
   }
 
-  getContactSchema(contact: SupportingDocument<SubDocumentTypes> | undefined): SupportingDocument<SubDocumentTypes> {
+  getContactSchema (contact: SupportingDocument<SubDocumentTypes> | undefined): SupportingDocument<SubDocumentTypes> {
     if (contact === undefined) return {}
-    const contactFields = contact as IContactFields
+    const contactFields = contact
     const data: EmptyDocumentRequest = {
       header: {
         identifier: Schema.generateId(),
@@ -210,15 +211,15 @@ export abstract class Schema implements SchemaInstance {
     return Schema.removeEmptyValues(data)
   }
 
-  async findContactOrCreate(
+  async findContactOrCreate (
     contact: SupportingDocument<IContactFields> | undefined
   ): Promise<SubDocument[]> {
     if (contact === undefined || contact === null) return []
 
-    const { existing } = contact as IContactFields
+    const { existing } = contact
     if (typeof existing === 'string' && existing.trim().length > 0) {
       const ids = await Promise.all(
-        existing.split(',').map(uid => this.resolveDocumentIdentifier(uid.trim()))
+        existing.split(',').map(async uid => await this.resolveDocumentIdentifier(uid.trim()))
       )
       return ids
         .filter((id): id is string => typeof id === 'string' && id.length > 0)
@@ -242,12 +243,12 @@ export abstract class Schema implements SchemaInstance {
     return [{ identifier: h?.identifier ?? '' }]
   }
 
-  protected async resolveDocumentIdentifier(uniqueId: string): Promise<string> {
+  protected async resolveDocumentIdentifier (uniqueId: string): Promise<string> {
     const regExp = /^(?<p1>[a-z]+)-(?<p2>[a-z]+)-(?<p3>[a-z]+)-(?<p4>\d+)-(?<p5>\d+)$/i
     const match = regExp.exec(uniqueId)
     if (!match) return ''
 
-    if(match[4] === undefined || match[5] === undefined) return ''
+    if (match[4] === undefined || match[5] === undefined) return ''
     const documentId = match[4]
     const data = await this.api.getDocument(documentId) as Record<string, { identifier: string }> | null
     if (!data || typeof data !== 'object') return ''

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <button type="button" class="btn btn-sm btn-outline-primary" @click="open">
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-primary"
+      @click="open"
+    >
       <i class="fa fa-file-excel-o me-1" />
       Import IRCC
     </button>
@@ -23,7 +27,7 @@ defineProps<{ documentType: DocumentTypes }>()
 const modal: Ref<Component> = shallowRef(defineComponent(() => () => null))
 const isOpen = ref(false)
 
-async function open() {
+async function open () {
   await import('./uploader-modal.vue')
     .then(({ default: mod }) => { modal.value = mod })
     .catch((err: unknown) => { console.error('[bulk-import] load error:', err) }) // eslint-disable-line no-console

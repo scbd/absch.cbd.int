@@ -10,10 +10,10 @@ export interface BuildDocumentsResult {
   errors: DocBuildError[]
 }
 
-export async function buildDocuments(
+export async function buildDocuments (
   rows: RawRow[],
   definition: DocumentTypeDefinition,
-  api: ApiClient,
+  api: ApiClient
 ): Promise<BuildDocumentsResult> {
   const linkedRecords: LinkedRecordStore = []
   const documents: DocumentRequest[] = []

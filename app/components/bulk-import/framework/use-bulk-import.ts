@@ -14,7 +14,7 @@ import { submitDocuments } from './submit-documents'
 import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep } from './types'
 import { registry } from '../registry'
 
-function countColumns(map: AttributesMap): number {
+function countColumns (map: AttributesMap): number {
   let n = 0
   for (const entry of Object.values(map)) {
     if ('column' in entry) n++
@@ -23,9 +23,9 @@ function countColumns(map: AttributesMap): number {
   return n
 }
 
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+const delay = async (ms: number) => await new Promise(resolve => setTimeout(resolve, ms))
 
-export function useBulkImport(documentType: DocumentTypes) {
+export function useBulkImport (documentType: DocumentTypes) {
   const { mergeLocaleMessage } = useI18n()
   const auth = useAuth()
   const { realm } = useRealm()
@@ -43,20 +43,20 @@ export function useBulkImport(documentType: DocumentTypes) {
 
   const state = reactive<UploaderState>({ phase: 'empty' })
 
-  function getApi() {
+  function getApi () {
     return new KmDocumentApi({ tokenReader: () => auth.token(), realm })
   }
 
-  async function onFileChange(file: File): Promise<void> {
+  async function onFileChange (file: File): Promise<void> {
     const steps: ParseStep[] = [
-      { key: 'openSheet',    status: 'active' },
-      { key: 'mapColumns',   status: 'pending' },
+      { key: 'openSheet', status: 'active' },
+      { key: 'mapColumns', status: 'pending' },
       { key: 'validateRows', status: 'pending' },
-      { key: 'buildPreview', status: 'pending' },
+      { key: 'buildPreview', status: 'pending' }
     ]
     Object.assign(state, { phase: 'parsing', fileName: file.name, steps })
 
-    function setStep(key: string, status: ParseStep['status'], detail?: string) {
+    function setStep (key: string, status: ParseStep['status'], detail?: string) {
       const s = state as Extract<UploaderState, { phase: 'parsing' }>
       const idx = s.steps.findIndex(st => st.key === key)
       if (idx !== -1) s.steps.splice(idx, 1, { key, status, detail })
@@ -70,8 +70,8 @@ export function useBulkImport(documentType: DocumentTypes) {
       ])
 
       const columnCount = countColumns(definition.attributesMap)
-      setStep('openSheet',    'done')
-      setStep('mapColumns',   'done', String(columnCount))
+      setStep('openSheet', 'done')
+      setStep('mapColumns', 'done', String(columnCount))
       setStep('validateRows', 'active', String(rows.length))
       await delay(300)
 
@@ -91,7 +91,7 @@ export function useBulkImport(documentType: DocumentTypes) {
     }
   }
 
-  async function onImport(): Promise<void> {
+  async function onImport (): Promise<void> {
     const current = state as Extract<UploaderState, { phase: 'confirm-import' }>
     if (current.phase !== 'confirm-import') return
 
@@ -117,7 +117,7 @@ export function useBulkImport(documentType: DocumentTypes) {
     Object.assign(state, { phase: 'done', imported, failed })
   }
 
-  function onConfirmImport(): void {
+  function onConfirmImport (): void {
     const current = state as Extract<UploaderState, { phase: 'preview' }>
     if (current.phase !== 'preview') return
     Object.assign(state, {
@@ -128,7 +128,7 @@ export function useBulkImport(documentType: DocumentTypes) {
     })
   }
 
-  function onClose(): void {
+  function onClose (): void {
     const { phase } = state as UploaderState
     if (phase === 'importing') return
     if (phase === 'empty' || phase === 'done') {
@@ -140,11 +140,11 @@ export function useBulkImport(documentType: DocumentTypes) {
     }
   }
 
-  function onForceClose(): void {
+  function onForceClose (): void {
     Object.assign(state, { phase: 'empty' })
   }
 
-  function onClear(): void {
+  function onClear (): void {
     const s = state as UploaderState
     if (s.phase === 'preview' || s.phase === 'confirm-import') {
       Object.assign(state, {
@@ -156,11 +156,11 @@ export function useBulkImport(documentType: DocumentTypes) {
     }
   }
 
-  function onConfirmErase(): void {
+  function onConfirmErase (): void {
     Object.assign(state, { phase: 'empty' })
   }
 
-  function onCancelConfirm(): void {
+  function onCancelConfirm (): void {
     const s = state as UploaderState
     if (s.phase === 'confirm-close' || s.phase === 'confirm-erase' || s.phase === 'confirm-import') {
       Object.assign(state, {
@@ -181,6 +181,6 @@ export function useBulkImport(documentType: DocumentTypes) {
     onForceClose,
     onClear,
     onConfirmErase,
-    onCancelConfirm,
+    onCancelConfirm
   }
 }

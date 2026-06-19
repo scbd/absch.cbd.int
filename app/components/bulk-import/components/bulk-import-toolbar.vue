@@ -15,15 +15,23 @@
       class="bi-toolbar__search"
       :placeholder="t('bulkImport.search', 'Search documents...')"
       @input="emit('update:search', ($event.target as HTMLInputElement).value)"
-    />
+    >
 
     <select
       :value="jumpSection"
       class="bi-toolbar__jump"
       @change="emit('update:jumpSection', ($event.target as HTMLSelectElement).value)"
     >
-      <option value="">{{ t('bulkImport.jumpSection', 'Jump to section...') }}</option>
-      <option v-for="grp in columnGroups" :key="grp.label" :value="grp.label">{{ grp.label }}</option>
+      <option value="">
+        {{ t('bulkImport.jumpSection', 'Jump to section...') }}
+      </option>
+      <option
+        v-for="grp in columnGroups"
+        :key="grp.label"
+        :value="grp.label"
+      >
+        {{ grp.label }}
+      </option>
     </select>
   </div>
 </template>

@@ -202,7 +202,7 @@ async function createDocuments (): Promise<DocsResp> {
 
   // Create subdocuments. PIC, The Provider etc..
   const subdocuments = documents.value.subDocuments
-    .map((doc) => kmDocumentApi.createDocument(doc)
+    .map(async (doc) => await kmDocumentApi.createDocument(doc)
       .catch((error: unknown) => {
         // Attempt to create a document draft of the supporting document
         // if the supporting document contains errors.

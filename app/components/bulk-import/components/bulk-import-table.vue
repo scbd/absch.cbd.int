@@ -1,12 +1,35 @@
 <template>
-  <div class="bi-table-scroll" :class="{ 'bi-table--compact': compact, 'bi-table--wrap': wrapText }">
+  <div
+    class="bi-table-scroll"
+    :class="{ 'bi-table--compact': compact, 'bi-table--wrap': wrapText }"
+  >
     <table class="bi-table">
       <thead>
         <tr class="bi-table__grp-row">
-          <th class="bi-pin bi-pin--0 bi-grp" rowspan="2">#</th>
-          <th class="bi-pin bi-pin--1 bi-grp" rowspan="2">{{ t('bulkImport.status', 'Status') }}</th>
-          <th class="bi-pin bi-pin--2 bi-grp" rowspan="2">{{ t('bulkImport.ircc.columns.permitEquivalent', 'Permit reference') }}</th>
-          <th v-for="grp in columnGroups" :key="grp.label" :colspan="grp.keys.length" class="bi-grp">
+          <th
+            class="bi-pin bi-pin--0 bi-grp"
+            rowspan="2"
+          >
+            #
+          </th>
+          <th
+            class="bi-pin bi-pin--1 bi-grp"
+            rowspan="2"
+          >
+            {{ t('bulkImport.status', 'Status') }}
+          </th>
+          <th
+            class="bi-pin bi-pin--2 bi-grp"
+            rowspan="2"
+          >
+            {{ t('bulkImport.ircc.columns.permitEquivalent', 'Permit reference') }}
+          </th>
+          <th
+            v-for="grp in columnGroups"
+            :key="grp.label"
+            :colspan="grp.keys.length"
+            class="bi-grp"
+          >
             {{ grp.label }}
           </th>
         </tr>
@@ -27,10 +50,12 @@
           :key="row.rowIndex"
           :class="{
             'bi-row--error': row.status === 'error',
-            'bi-row--warn':  row.status === 'warn'
+            'bi-row--warn': row.status === 'warn'
           }"
         >
-          <td class="bi-pin bi-pin--0 bi-idx">{{ row.rowIndex + 1 }}</td>
+          <td class="bi-pin bi-pin--0 bi-idx">
+            {{ row.rowIndex + 1 }}
+          </td>
 
           <td class="bi-pin bi-pin--1">
             <span
@@ -40,7 +65,11 @@
             >
               <span class="bi-stat__dot" />{{ rowProgressFor(row.rowIndex)?.status }}
             </span>
-            <span v-else class="bi-stat" :class="`bi-stat--${row.status}`">
+            <span
+              v-else
+              class="bi-stat"
+              :class="`bi-stat--${row.status}`"
+            >
               <span class="bi-stat__dot" />{{ row.status }}
             </span>
           </td>
@@ -53,18 +82,35 @@
             v-for="key in scrollableColumnKeys"
             :key="key"
             :class="{
-              'bi-cell--err':  cellHasError(row, key),
+              'bi-cell--err': cellHasError(row, key),
               'bi-cell--warn': cellHasWarn(row, key)
             }"
           >
-            <span v-if="isBoolYes(row.cells[key]?.display ?? '')" class="bi-chip bi-chip--yes">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span
+              v-if="isBoolYes(row.cells[key]?.display ?? '')"
+              class="bi-chip bi-chip--yes"
+            >
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+              ><polyline points="20 6 9 17 4 12" /></svg>
               {{ row.cells[key].display }}
             </span>
-            <span v-else-if="isBoolNo(row.cells[key]?.display ?? '')" class="bi-chip bi-chip--no">
+            <span
+              v-else-if="isBoolNo(row.cells[key]?.display ?? '')"
+              class="bi-chip bi-chip--no"
+            >
               {{ row.cells[key].display }}
             </span>
-            <span v-else-if="isChipVal(row.cells[key]?.display ?? '')" class="bi-chip">
+            <span
+              v-else-if="isChipVal(row.cells[key]?.display ?? '')"
+              class="bi-chip"
+            >
               {{ row.cells[key].display }}
             </span>
             <span v-else>{{ row.cells[key]?.display ?? '' }}</span>
@@ -73,7 +119,30 @@
               class="bi-cellnote"
               :class="cellHasError(row, key) ? 'bi-cellnote--err' : 'bi-cellnote--warn'"
             >
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                style="flex-shrink:0;margin-top:1px"
+              ><circle
+                cx="12"
+                cy="12"
+                r="10"
+              /><line
+                x1="12"
+                y1="8"
+                x2="12"
+                y2="12"
+              /><line
+                x1="12"
+                y1="16"
+                x2="12.01"
+                y2="16"
+              /></svg>
               {{ row.cells[key]?.errors[0]?.message }}
             </span>
           </td>
@@ -102,33 +171,33 @@ const props = defineProps<{
 
 const { t } = useI18n()
 
-function columnLabel(key: string): string {
+function columnLabel (key: string): string {
   return t(`bulkImport.ircc.columns.${key}`, key)
 }
 
-function rowProgressFor(rowIndex: number): RowProgress | undefined {
+function rowProgressFor (rowIndex: number): RowProgress | undefined {
   return props.rowProgressList.find(p => p.rowIndex === rowIndex)
 }
 
-function cellHasError(row: PreviewRow, key: string): boolean {
+function cellHasError (row: PreviewRow, key: string): boolean {
   return row.cells[key]?.errors.some(e => e.level === 'error') ?? false
 }
 
-function cellHasWarn(row: PreviewRow, key: string): boolean {
+function cellHasWarn (row: PreviewRow, key: string): boolean {
   return row.cells[key]?.errors.some(e => e.level === 'warning') ?? false
 }
 
-function isBoolYes(v: string): boolean {
+function isBoolYes (v: string): boolean {
   const u = v.trim().toLowerCase()
   return u === 'yes' || u === 'true'
 }
 
-function isBoolNo(v: string): boolean {
+function isBoolNo (v: string): boolean {
   const u = v.trim().toLowerCase()
   return u === 'no' || u === 'false'
 }
 
-function isChipVal(v: string): boolean {
+function isChipVal (v: string): boolean {
   return v.trim().length > 0 && v.trim().length <= 25 && !v.includes('\n')
 }
 </script>
