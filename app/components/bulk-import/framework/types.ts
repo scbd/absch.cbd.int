@@ -1,4 +1,5 @@
 import type { DocumentRequest, SubDocumentStore } from '~/types/common/documents'
+import type { KmDraftsApi } from '~/api/km-document'
 
 // ---------------------------------------------------------------------------
 // Raw sheet data (straight from read-excel-file, before any mapping)
@@ -120,10 +121,7 @@ export interface SchemaInstance {
   buildSchemaDocument: ()=> Promise<DocumentRequest>
 }
 
-export interface ApiClient {
-  createDocumentDraft: (doc: DocumentRequest)=> Promise<unknown>
-  getDocument: (identifier: string)=> Promise<unknown>
-}
+export type ApiClient = KmDraftsApi
 
 // ---------------------------------------------------------------------------
 // Uploader state machine

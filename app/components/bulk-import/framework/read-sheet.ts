@@ -50,7 +50,8 @@ export async function readSheet (
     }
   })
 
-  const errors: SheetError[] = (rawErrors as Array<{
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- read-excel-file has no TS declarations
+  const errors: SheetError[] = (rawErrors as unknown as Array<{
     row: number
     column: string | number
     reason: unknown
@@ -65,9 +66,10 @@ export async function readSheet (
       level: 'warning' as const,
       // FIX: was `e.reason === 'string'` — always false. Use typeof check.
       message: typeof e.reason === 'string' ? e.reason : e.error,
-      value: e.value !== undefined ? String(e.value) : undefined
+      value: e.value
     }
   })
 
-  return { rows: rows as RawRow[], errors }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- read-excel-file has no TS declarations
+  return { rows: rows as unknown as RawRow[], errors }
 }

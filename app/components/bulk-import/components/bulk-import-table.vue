@@ -99,19 +99,19 @@
                 stroke-width="3"
                 stroke-linecap="round"
               ><polyline points="20 6 9 17 4 12" /></svg>
-              {{ row.cells[key].display }}
+              {{ row.cells[key]?.display }}
             </span>
             <span
               v-else-if="isBoolNo(row.cells[key]?.display ?? '')"
               class="bi-chip bi-chip--no"
             >
-              {{ row.cells[key].display }}
+              {{ row.cells[key]?.display }}
             </span>
             <span
               v-else-if="isChipVal(row.cells[key]?.display ?? '')"
               class="bi-chip"
             >
-              {{ row.cells[key].display }}
+              {{ row.cells[key]?.display }}
             </span>
             <span v-else>{{ row.cells[key]?.display ?? '' }}</span>
             <span

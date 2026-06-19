@@ -163,7 +163,7 @@ import { ref, computed } from 'vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import { useBulkImport } from './framework/use-bulk-import'
-import type { DocumentTypes, PreviewRow, RowProgress } from './framework/types'
+import type { DocumentTypes, PreviewRow, RowProgress, SheetError } from './framework/types'
 import irccAttributesMap from './document-types/ircc/attributes-map'
 import BulkImportHeader from './components/bulk-import-header.vue'
 import BulkImportBanner from './components/bulk-import-banner.vue'
@@ -202,21 +202,22 @@ function onConfirmErase () {
 const fileName = ref('')
 
 function onFilePicked (file: File) {
-  fileName.value = file.name
-  onFileChange(file)
+  const { name } = file
+  fileName.value = name
+  void onFileChange(file)
 }
 
 // -------------------------------------------------------------------------
 // Parsing progress
 // -------------------------------------------------------------------------
 const parsingSteps = computed(() =>
-  state.phase === 'parsing' ? (state).steps ?? [] : []
+  state.phase === 'parsing' ? (state).steps : []
 )
 
 const parseProgress = computed(() => {
-  const steps = parsingSteps.value
+  const { value: steps } = parsingSteps
   if (!steps.length) return 0
-  const done = steps.filter(s => s.status === 'done').length
+  const { length: done } = steps.filter(s => s.status === 'done')
   const hasActive = steps.some(s => s.status === 'active')
   return Math.round(((done + (hasActive ? 0.5 : 0)) / steps.length) * 100)
 })
@@ -241,12 +242,13 @@ const hasPreview = computed(() =>
 
 const previewRows = computed<PreviewRow[]>(() => {
   if (!hasPreview.value) return []
-  return (state as Extract<typeof state, { preview: { rows: PreviewRow[] } }>).preview?.rows ?? []
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- hasPreview guards all phases that have preview
+  return (state as Extract<typeof state, { preview: { rows: PreviewRow[] } }>).preview.rows
 })
 
 const filteredRows = computed(() => {
-  let rows = previewRows.value
-  if (search.value.trim()) {
+  let { value: rows } = previewRows
+  if (search.value.trim() !== '') {
     const q = search.value.toLowerCase()
     rows = rows.filter(r =>
       Object.values(r.cells).some(c => c.display.toLowerCase().includes(q))
@@ -256,20 +258,22 @@ const filteredRows = computed(() => {
 })
 
 type StateWithErrors = Extract<typeof state, { errors: unknown[] }>
-const sheetErrors = computed(() =>
-  hasPreview.value ? ((state as StateWithErrors).errors ?? []) as Array<import('./framework/types').SheetError> : []
-)
+const sheetErrors = computed<SheetError[]>(() => {
+  if (!hasPreview.value) return []
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- hasPreview guards phases that have errors
+  return (state as StateWithErrors).errors
+})
 
 const banner = computed(() => {
   if (!hasPreview.value) return null
   if (sheetErrors.value.length === 0) return { level: 'ok' as const, text: t('bulkImport.ready', 'Ready to import') }
-  const errCount = sheetErrors.value.filter(e => e.level === 'error').length
-  const warnCount = sheetErrors.value.filter(e => e.level === 'warning').length
+  const { length: errCount } = sheetErrors.value.filter(e => e.level === 'error')
+  const { length: warnCount } = sheetErrors.value.filter(e => e.level === 'warning')
   const parts = [
-    errCount ? `${errCount} error${errCount !== 1 ? 's' : ''}` : '',
-    warnCount ? `${warnCount} warning${warnCount !== 1 ? 's' : ''}` : ''
+    errCount ? `${errCount} error${errCount === 1 ? '' : 's'}` : '',
+    warnCount ? `${warnCount} warning${warnCount === 1 ? '' : 's'}` : ''
   ].filter(Boolean).join(' and ')
-  const affected = new Set(sheetErrors.value.map(e => e.row)).size
+  const { size: affected } = new Set(sheetErrors.value.map(e => e.row))
   return {
     level: 'danger' as const,
     text: t('bulkImport.hasErrors', `${affected} of ${previewRows.value.length} rows can't be imported yet — ${parts}.`)
@@ -280,7 +284,8 @@ const bannerErrors = computed<BannerErrorGroup[]>(() => {
   const groups = new Map<number, BannerErrorGroup>()
   for (const e of sheetErrors.value) {
     if (!groups.has(e.row)) groups.set(e.row, { row: e.row, worstLevel: e.level, items: [] })
-    const g = groups.get(e.row)!
+    const g = groups.get(e.row)
+    if (g === undefined) continue
     if (e.level === 'error') g.worstLevel = 'error'
     g.items.push({ fieldLabel: columnLabel(String(e.column)), message: e.message, level: e.level })
   }
@@ -302,7 +307,8 @@ const PINNED_KEY = 'permitEquivalent'
 
 const allColumnKeys = computed(() => {
   if (!hasPreview.value) return []
-  return (state as Extract<typeof state, { preview: unknown }>).preview?.columnKeys ?? []
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- hasPreview guards phases that have preview
+  return (state as Extract<typeof state, { preview: { columnKeys: string[] } }>).preview.columnKeys
 })
 
 const scrollableColumnKeys = computed(() =>
@@ -348,10 +354,17 @@ function columnLabel (key: string): string {
 const requiredKeys = computed<Set<string>>(() => new Set(
   allColumnKeys.value.filter((key: string) => {
     const parts = key.split('.')
-    const entry = parts.length === 1
-      ? irccAttributesMap[key]
-      : (irccAttributesMap[parts[0]!] as { schema: Record<string, { required?: boolean }> })?.schema?.[parts[1]!]
-    return !!(entry && 'required' in entry && (entry as { required?: boolean }).required)
+    if (parts.length === 1) {
+      const { [key]: entry } = irccAttributesMap
+      return entry !== undefined && 'required' in entry && entry.required === true
+    }
+    const [group, field] = parts
+    if (group === undefined || field === undefined) return false
+    const { [group]: groupEntry } = irccAttributesMap
+    if (groupEntry === undefined || !('schema' in groupEntry)) return false
+    // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
+    const { [field]: entry } = groupEntry.schema
+    return entry?.required === true
   })
 ))
 </script>

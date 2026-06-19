@@ -207,13 +207,13 @@ async function createDocuments (): Promise<DocsResp> {
         // Attempt to create a document draft of the supporting document
         // if the supporting document contains errors.
         console.warn(error) // eslint-disable-line no-console -- Show error in console
-        kmDocumentApi.createDocumentDraft(doc)
+        void kmDocumentApi.createDocumentDraft(doc)
       }))
 
   const docs = documents.value.documents
     .map(async (doc, row) => await kmDocumentApi.createDocumentDraft(doc)
-      .catch((error: Error) => {
-        const reason = `${t('createError', { documentNumber: row + 1 })} ${error.message}`
+      .catch((error: unknown) => {
+        const reason = `${t('createError', { documentNumber: row + 1 })} ${error instanceof Error ? error.message : String(error)}`
         const e: DocError = { level: 'error', reason, message: reason, name: 'createError' }
         errors.value.push(e)
         isLoading.value = false

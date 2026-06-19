@@ -31,7 +31,7 @@ defineProps<{
   confirmClass: string
 }>()
 
-const emit = defineEmits<{ (e: 'confirm'): void; (e: 'cancel'): void }>()
+const emit = defineEmits<(e: 'confirm' | 'cancel')=> void>()
 const { t } = useI18n()
 </script>
 

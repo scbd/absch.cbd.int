@@ -82,12 +82,13 @@ const emit = defineEmits<(e: 'file', file: File)=> void>()
 const { t } = useI18n()
 
 function handleFileInput (e: Event) {
-  const file = (e.target as HTMLInputElement).files?.[0]
+  if (!(e.target instanceof HTMLInputElement)) return
+  const file = e.target.files?.[0]
   if (file) emit('file', file)
 }
 
 function handleDrop (e: DragEvent) {
-  const file = e.dataTransfer?.files?.[0]
+  const file = e.dataTransfer?.files[0]
   if (file) emit('file', file)
 }
 </script>

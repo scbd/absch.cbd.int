@@ -74,13 +74,13 @@ export abstract class Schema implements SchemaInstance {
 
     // Try to match against English names first (e.g. "English" → "en")
     let key = getKeys(englishLanguages).find(
-      k => (englishLanguages as Record<string, string>)[k as string].toLowerCase() === langValue.toLowerCase()
+      k => (englishLanguages as Record<string, string>)[k as string]?.toLowerCase() === langValue.toLowerCase()
     )
     if (typeof key === 'string') return key
 
     // if language is not in english, try to match against native names (e.g. "Français" → "fr")
     key = getKeys(languages).find(
-      k => (languages as Record<string, string>)[k as string].toLowerCase() === langValue.toLowerCase()
+      k => (languages as Record<string, string>)[k as string]?.toLowerCase() === langValue.toLowerCase()
     )
     if (typeof key === 'string') return key
 
@@ -136,12 +136,15 @@ export abstract class Schema implements SchemaInstance {
   // -------------------------------------------------------------------------
 
   protected columnValue (key: string): string | undefined {
-    const v = this.row[key]
+    // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
+    const { [key]: v } = this.row
     return typeof v === 'string' ? v : undefined
   }
 
   protected nestedColumnValue (group: string, key: string): string | undefined {
-    const v = this.row[`${group}.${key}`]
+    const nestedKey = `${group}.${key}`
+    // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
+    const { [nestedKey]: v } = this.row
     return typeof v === 'string' ? v : undefined
   }
 
@@ -171,11 +174,11 @@ export abstract class Schema implements SchemaInstance {
         return String(name).toLowerCase().trim() === val
       })
 
-      if (match) {
-        processedKeywords.push({ identifier: match.identifier.toUpperCase() })
-      } else {
+      if (match === undefined) {
         processedKeywords.push({ identifier: THESAURUS_TERMS.ABS_OTHER_KEYWORD })
         otherKeywords += ` ${raw}`
+      } else {
+        processedKeywords.push({ identifier: match.identifier.toUpperCase() })
       }
     }
 
@@ -214,7 +217,7 @@ export abstract class Schema implements SchemaInstance {
   async findContactOrCreate (
     contact: SupportingDocument<IContactFields> | undefined
   ): Promise<SubDocument[]> {
-    if (contact === undefined || contact === null) return []
+    if (contact === undefined) return []
 
     const { existing } = contact
     if (typeof existing === 'string' && existing.trim().length > 0) {
@@ -227,31 +230,36 @@ export abstract class Schema implements SchemaInstance {
     }
 
     const schema = this.getContactSchema(contact)
-    const { header: _h, ...body } = schema as Record<string, unknown>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SupportingDocument has dynamic shape at runtime
+    const { header: _h, ...body } = schema as unknown as Record<string, unknown>
     const existing_ = this.linkedRecords.find(rec => {
-      const { header: _h2, ...b } = rec as Record<string, unknown>
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have dynamic shape
+      const { header: _h2, ...b } = rec as unknown as Record<string, unknown>
       return JSON.stringify(b) === JSON.stringify(body)
     })
 
-    if (existing_) {
-      const h = (existing_ as Record<string, { identifier?: string }>)['header']
+    if (existing_ !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have dynamic shape
+      const { header: h } = existing_ as unknown as Record<string, { identifier?: string }>
       return [{ identifier: h?.identifier ?? '' }]
     }
 
     this.linkedRecords.push(schema)
-    const h = (schema as Record<string, { identifier?: string }>)['header']
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SupportingDocument has dynamic shape at runtime
+    const { header: h } = schema as unknown as Record<string, { identifier?: string }>
     return [{ identifier: h?.identifier ?? '' }]
   }
 
   protected async resolveDocumentIdentifier (uniqueId: string): Promise<string> {
     const regExp = /^(?<p1>[a-z]+)-(?<p2>[a-z]+)-(?<p3>[a-z]+)-(?<p4>\d+)-(?<p5>\d+)$/i
     const match = regExp.exec(uniqueId)
-    if (!match) return ''
+    if (match === null) return ''
 
     if (match[4] === undefined || match[5] === undefined) return ''
-    const documentId = match[4]
+    const [,,, , documentId] = match
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- external API returns unknown shape
     const data = await this.api.getDocument(documentId) as Record<string, { identifier: string }> | null
-    if (!data || typeof data !== 'object') return ''
-    return `${data.header.identifier}@${match[5]}`
+    if (data === null || typeof data !== 'object') return ''
+    return `${data['header']?.identifier ?? ''}@${match[5]}`
   }
 }

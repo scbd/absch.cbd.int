@@ -1,5 +1,4 @@
 import { Schema, type KeywordType } from '../../framework/schema'
-import type { RawRow, LinkedRecordStore, ApiClient } from '../../framework/types'
 import type { DocumentRequest, EmptyDocumentRequest, IContactFields } from '~/types/common/documents'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
@@ -9,18 +8,15 @@ let keywordsCache: KeywordType[] | null = null
 
 async function fetchKeywords (): Promise<KeywordType[]> {
   if (keywordsCache !== null) return keywordsCache
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- ThesaurusApi is a JS module
   const api = new ThesaurusApi()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- ThesaurusApi is a JS module
   const terms = await api.getDomainTerms(THESAURUS_DOMAINS.ABS_PERMIT_KEYWORD) as KeywordType[]
   keywordsCache = Array.isArray(terms) ? terms : []
   return keywordsCache
 }
 
 export class IrccSchema extends Schema {
-  constructor (row: RawRow, linkedRecords: LinkedRecordStore,
-    api: ApiClient, rawLanguage: string) {
-    super(row, linkedRecords, api, rawLanguage)
-  }
-
   override async buildSchemaDocument (): Promise<DocumentRequest> {
     const keywordsMap = await fetchKeywords()
 
@@ -47,7 +43,7 @@ export class IrccSchema extends Schema {
       picGranted: Schema.parseTextToBoolean(this.nestedColumnValue('pic', 'consent')),
       subjectMatter: this.getLocaleElement(this.columnValue('subjectMatter')),
       keywords: processedKeywords,
-      keywordOther: this.getLocaleValue(otherKeywords.trim() || undefined),
+      keywordOther: this.getLocaleValue(otherKeywords.trim() === '' ? undefined : otherKeywords.trim()),
       providers,
       entitiesToWhomPICGranted,
       matEstablished: Schema.parseTextToBoolean(this.columnValue('matEstablished')),
@@ -84,7 +80,7 @@ export class IrccSchema extends Schema {
     if (Schema.isEmpty(id)) return undefined
     try {
       const result = await this.resolveDocumentIdentifier(id)
-      return result || undefined
+      return result === '' ? undefined : result
     } catch {
       return undefined
     }

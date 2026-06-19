@@ -18,7 +18,7 @@ function getColumnKeys (attributesMap: AttributesMap): string[] {
 }
 
 function formatCell (value: CellPrimitive): string {
-  if (value === null || value === undefined) return ''
+  if (value === null) return ''
   if (value instanceof Date) return value.toLocaleDateString('fr-CA', { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC' })
   return String(value)
 }
@@ -40,7 +40,7 @@ export function buildPreview (
   const errorsByRow = new Map<number, SheetError[]>()
   for (const e of sheetErrors) {
     if (!errorsByRow.has(e.row)) errorsByRow.set(e.row, [])
-    errorsByRow.get(e.row)!.push(e)
+    errorsByRow.get(e.row)?.push(e)
   }
 
   const previewRows: PreviewRow[] = rows.map((row, rowIndex) => {

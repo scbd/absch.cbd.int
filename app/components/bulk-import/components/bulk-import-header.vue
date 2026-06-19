@@ -89,7 +89,7 @@
 import { useI18n } from 'vue-i18n'
 
 defineProps<{ phase: string; fileName: string; rowCount: number }>()
-const emit = defineEmits<{ (e: 'close'): void; (e: 'clear'): void }>()
+const emit = defineEmits<(e: 'close' | 'clear')=> void>()
 const { t } = useI18n()
 </script>
 

@@ -5,46 +5,69 @@ import { useI18n } from 'vue-i18n'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
 // @ts-expect-error importing js file
 import { useRealm } from '~/services/composables/realm.js'
-// @ts-expect-error importing js file
-import KmDocumentApi from '~/api/km-document'
+import { KmDraftsApi } from '~/api/km-document'
 import { readSheet } from './read-sheet'
 import { buildPreview } from './build-preview'
 import { buildDocuments } from './build-documents'
 import { submitDocuments } from './submit-documents'
-import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep } from './types'
+import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep, SheetError, PreviewData } from './types'
 import { registry } from '../registry'
+
+const PARSE_MIN_DURATION_MS = 800
+const VALIDATE_DELAY_MS = 300
+const PREVIEW_DELAY_MS = 400
 
 function countColumns (map: AttributesMap): number {
   let n = 0
   for (const entry of Object.values(map)) {
-    if ('column' in entry) n++
+    if ('column' in entry) n += 1
     else if ('schema' in entry) n += Object.keys(entry.schema).length
   }
   return n
 }
 
-const delay = async (ms: number) => await new Promise(resolve => setTimeout(resolve, ms))
+// eslint-disable-next-line promise/avoid-new, @typescript-eslint/promise-function-async -- wrapping setTimeout; no async needed since we return the promise directly
+const delay = (ms: number): Promise<void> => new Promise<void>(resolve => { setTimeout(resolve, ms) })
 
-export function useBulkImport (documentType: DocumentTypes) {
+type StateWithErrors = Extract<UploaderState, { errors: SheetError[] }>
+type StateWithPreview = Extract<UploaderState, { preview: PreviewData; rawRows: RawRow[] }>
+
+export function useBulkImport (documentType: DocumentTypes): {
+  state: UploaderState
+  onFileChange: (file: File)=> Promise<void>
+  onImport: ()=> Promise<void>
+  onConfirmImport: ()=> void
+  onClose: ()=> void
+  onForceClose: ()=> void
+  onClear: ()=> void
+  onConfirmErase: ()=> void
+  onCancelConfirm: ()=> void
+} {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- useI18n is a JS module
   const { mergeLocaleMessage } = useI18n()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- useAuth is a JS module
   const auth = useAuth()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- useRealm is a JS module
   const { realm } = useRealm()
 
-  const definition = registry[documentType]
+  const { [documentType]: definition } = registry
 
   // Merge this document type's i18n strings into the active locale,
   // namespacing flat keys under bulkImport.<documentType>.
   for (const [locale, msgs] of Object.entries(definition.messages)) {
     const prefixed = Object.fromEntries(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- messages values are string maps per DocumentTypeDefinition contract
       Object.entries(msgs as Record<string, string>).map(([k, v]) => [`bulkImport.${documentType}.${k}`, v])
     )
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- mergeLocaleMessage is from JS module
     mergeLocaleMessage(locale, prefixed)
   }
 
   const state = reactive<UploaderState>({ phase: 'empty' })
 
-  function getApi () {
-    return new KmDocumentApi({ tokenReader: () => auth.token(), realm })
+  function getApi (): KmDraftsApi {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- auth is a JS module
+    return new KmDraftsApi({ tokenReader: () => auth.token(), realm })
   }
 
   async function onFileChange (file: File): Promise<void> {
@@ -56,24 +79,25 @@ export function useBulkImport (documentType: DocumentTypes) {
     ]
     Object.assign(state, { phase: 'parsing', fileName: file.name, steps })
 
-    function setStep (key: string, status: ParseStep['status'], detail?: string) {
-      const s = state as Extract<UploaderState, { phase: 'parsing' }>
+    function setStep (key: string, status: ParseStep['status'], detail?: string): void {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- state is always 'parsing' here
+      const s = state as unknown as Extract<UploaderState, { phase: 'parsing' }>
       const idx = s.steps.findIndex(st => st.key === key)
-      if (idx !== -1) s.steps.splice(idx, 1, { key, status, detail })
+      if (idx >= 0) s.steps.splice(idx, 1, { key, status, detail })
     }
 
     try {
-      // Steps 1+2: read the sheet (minimum 800ms so the animation is visible)
+      // Steps 1+2: read the sheet (minimum duration so the animation is visible)
       const [{ rows, errors: sheetErrors }] = await Promise.all([
         readSheet(file, definition.attributesMap, definition.headerRows),
-        delay(800)
+        delay(PARSE_MIN_DURATION_MS)
       ])
 
       const columnCount = countColumns(definition.attributesMap)
       setStep('openSheet', 'done')
       setStep('mapColumns', 'done', String(columnCount))
       setStep('validateRows', 'active', String(rows.length))
-      await delay(300)
+      await delay(VALIDATE_DELAY_MS)
 
       // Steps 3+4: validate & build preview
       setStep('validateRows', 'done')
@@ -81,7 +105,7 @@ export function useBulkImport (documentType: DocumentTypes) {
       const preview = buildPreview(rows, definition.attributesMap, sheetErrors)
 
       setStep('buildPreview', 'done')
-      await delay(400)
+      await delay(PREVIEW_DELAY_MS)
 
       Object.assign(state, { phase: 'preview', preview, rawRows: rows, errors: sheetErrors })
     } catch (err: unknown) {
@@ -92,8 +116,8 @@ export function useBulkImport (documentType: DocumentTypes) {
   }
 
   async function onImport (): Promise<void> {
+    if (state.phase !== 'confirm-import') return
     const current = state as Extract<UploaderState, { phase: 'confirm-import' }>
-    if (current.phase !== 'confirm-import') return
 
     const { preview, rawRows } = current
     const progress: RowProgress[] = rawRows.map((_, i) => ({ rowIndex: i, status: 'pending' as const }))
@@ -110,7 +134,7 @@ export function useBulkImport (documentType: DocumentTypes) {
       api,
       (p: RowProgress) => {
         const idx = progress.findIndex(r => r.rowIndex === p.rowIndex)
-        if (idx !== -1) progress[idx] = p
+        if (idx >= 0) progress[idx] = p
       }
     )
 
@@ -118,8 +142,8 @@ export function useBulkImport (documentType: DocumentTypes) {
   }
 
   function onConfirmImport (): void {
+    if (state.phase !== 'preview') return
     const current = state as Extract<UploaderState, { phase: 'preview' }>
-    if (current.phase !== 'preview') return
     Object.assign(state, {
       phase: 'confirm-import',
       preview: current.preview,
@@ -134,8 +158,9 @@ export function useBulkImport (documentType: DocumentTypes) {
     if (phase === 'empty' || phase === 'done') {
       Object.assign(state, { phase: 'empty' })
     } else {
-      const s = state as Extract<UploaderState, { preview: unknown; rawRows: RawRow[] }>
-      const errors = (s as any).errors ?? []
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- non-importing/empty/done phases all have errors+preview
+      const s = state as StateWithErrors & StateWithPreview
+      const { errors } = s
       Object.assign(state, { phase: 'confirm-close', preview: s.preview, rawRows: s.rawRows, errors })
     }
   }
@@ -147,11 +172,13 @@ export function useBulkImport (documentType: DocumentTypes) {
   function onClear (): void {
     const s = state as UploaderState
     if (s.phase === 'preview' || s.phase === 'confirm-import') {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- preview and confirm-import phases always have errors+preview
+      const ps = state as StateWithErrors & StateWithPreview
       Object.assign(state, {
         phase: 'confirm-erase',
-        preview: (s as any).preview,
-        rawRows: (s as any).rawRows,
-        errors: (s as any).errors ?? []
+        preview: ps.preview,
+        rawRows: ps.rawRows,
+        errors: ps.errors
       })
     }
   }
@@ -163,11 +190,13 @@ export function useBulkImport (documentType: DocumentTypes) {
   function onCancelConfirm (): void {
     const s = state as UploaderState
     if (s.phase === 'confirm-close' || s.phase === 'confirm-erase' || s.phase === 'confirm-import') {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- all confirm phases have errors+preview
+      const ps = state as StateWithErrors & StateWithPreview
       Object.assign(state, {
         phase: 'preview',
-        preview: s.preview,
-        rawRows: s.rawRows,
-        errors: s.errors
+        preview: ps.preview,
+        rawRows: ps.rawRows,
+        errors: ps.errors
       })
     }
   }

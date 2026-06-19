@@ -49,10 +49,7 @@ defineProps<{
   jumpSection: string
 }>()
 
-const emit = defineEmits<{
-  (e: 'update:search', value: string): void
-  (e: 'update:jumpSection', value: string): void
-}>()
+const emit = defineEmits<(e: 'update:search' | 'update:jumpSection', value: string)=> void>()
 
 const { t } = useI18n()
 </script>
