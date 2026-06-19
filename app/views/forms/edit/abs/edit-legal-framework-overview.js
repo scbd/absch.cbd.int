@@ -1,4 +1,3 @@
-import app from '~/app'
 import '~/views/forms/edit/edit'
 import editLegalFrameworkOverview from './edit-legal-framework-overview.vue'
 import legalFrameworkOverview from '~/views/forms/view/abs/legal-framework-overview.vue'
