@@ -23,7 +23,7 @@
       /><polyline points="10 9 9 9 8 9" /></svg>
     </div>
     <div class="bi-head__ttl">
-      <h1>{{ t('bulkImport.ircc.title') }}</h1>
+      <h1>{{ t('title') }}</h1>
       <div class="bi-head__sub">
         <span v-if="phase === 'empty'">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
         <span v-else-if="phase === 'parsing'">{{ t('bulkImport.reading', 'Reading file…') }}</span>

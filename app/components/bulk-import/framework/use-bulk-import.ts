@@ -52,15 +52,9 @@ export function useBulkImport (documentType: DocumentTypes): {
 
   const { [documentType]: definition } = registry
 
-  // Merge this document type's i18n strings into the active locale,
-  // namespacing flat keys under bulkImport.<documentType>.
   for (const [locale, msgs] of Object.entries(definition.messages)) {
-    const prefixed = Object.fromEntries(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- messages values are string maps per DocumentTypeDefinition contract
-      Object.entries(msgs as Record<string, string>).map(([k, v]) => [`bulkImport.${documentType}.${k}`, v])
-    )
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- mergeLocaleMessage is from JS module
-    mergeLocaleMessage(locale, prefixed)
+    mergeLocaleMessage(locale, msgs)
   }
 
   const state = reactive<UploaderState>({ phase: 'empty' })

@@ -41,7 +41,6 @@
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@vue/eslint-config-typescript": "^14.6.0",
-
     "esbuild": "^0.27.1",
     "eslint": "^9.39.1",
     "eslint-config-love": "^137.0.0",
@@ -80,7 +79,7 @@
     "lint:fix": "npx eslint app/ --fix",
     "build": "npx eslint app/ --max-warnings=0 && rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "typecheck": "vue-tsc --noEmit",
-    "dev": "npx eslint app/ --max-warnings=0 && rm -rf ./dist && rm -rf ./i18n-build && node rollup/dev-watch.js",
+    "dev": "NODE_ENV=development npx eslint app/ --max-warnings=0 && rm -rf ./dist && rm -rf ./i18n-build && node rollup/dev-watch.js",
     "eslint": "npx eslint . --fix",
     "clean-reinstall": "rm -rf ./node_modules && yarn install",
     "import-translation": "node script/copy-translation-files.js"

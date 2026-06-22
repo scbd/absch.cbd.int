@@ -57,7 +57,7 @@
         >
           <i class="fa fa-check-circle text-success bi-done-icon" />
           <p class="mt-3">
-            {{ t('bulkImport.doneMsg', 'Done — {imported} created, {failed} failed.', doneState) }}
+            {{ t('bulkImport.doneMsg', doneState) }}
           </p>
         </div>
       </div>
@@ -68,7 +68,7 @@
           class="bi-btn-ghost"
           @click="onClose"
         >
-          {{ t('bulkImport.close', 'Close') }}
+          {{ t('bulkImport.close') }}
         </button>
 
         <span class="bi-foot__spacer" />
@@ -101,14 +101,14 @@
               x2="12.01"
               y2="16"
             /></svg>
-            {{ t('bulkImport.resolveErrors', 'Resolve all errors to enable import.') }}
+            {{ t('bulkImport.resolveErrors') }}
           </span>
           <button
             type="button"
             class="bi-btn-ghost"
             @click="onClear"
           >
-            {{ t('bulkImport.clearList', 'Clear list') }}
+            {{ t('bulkImport.clearList') }}
           </button>
           <button
             type="button"
@@ -116,7 +116,7 @@
             :disabled="hasErrors"
             @click="onConfirmImport"
           >
-            {{ t('bulkImport.createDrafts', 'Create draft records') }}
+            {{ t('bulkImport.createDrafts') }}
           </button>
         </template>
 
@@ -124,14 +124,14 @@
           v-if="state.phase === 'importing'"
           class="bi-foot__muted"
         >
-          {{ t('bulkImport.importing', 'Importing…') }}
+          {{ t('bulkImport.importing') }}
         </span>
       </div>
 
       <BulkImportConfirmDialog
         v-if="state.phase === 'confirm-import'"
-        :message="t('bulkImport.confirmMsg', 'Create draft records for all rows?')"
-        :confirm-label="t('bulkImport.confirm', 'Confirm')"
+        :message="t('bulkImport.confirmMsg')"
+        :confirm-label="t('bulkImport.confirm')"
         confirm-class="btn-primary bi-btn--orange"
         @confirm="onImport"
         @cancel="onCancelConfirm"
@@ -139,8 +139,8 @@
 
       <BulkImportConfirmDialog
         v-if="state.phase === 'confirm-close'"
-        :message="t('bulkImport.closeConfirm', 'Close and discard all loaded data?')"
-        :confirm-label="t('bulkImport.confirmClose', 'Yes, close')"
+        :message="t('bulkImport.closeConfirm')"
+        :confirm-label="t('bulkImport.confirmClose')"
         confirm-class="btn-danger"
         @confirm="onForceClose"
         @cancel="onCancelConfirm"
@@ -148,8 +148,8 @@
 
       <BulkImportConfirmDialog
         v-if="state.phase === 'confirm-erase'"
-        :message="t('bulkImport.eraseConfirm', 'Clear all loaded records?')"
-        :confirm-label="t('bulkImport.confirmErase', 'Yes, clear')"
+        :message="t('bulkImport.eraseConfirm')"
+        :confirm-label="t('bulkImport.confirmErase')"
         confirm-class="btn-danger"
         @confirm="onConfirmErase"
         @cancel="onCancelConfirm"
@@ -162,9 +162,10 @@
 import { ref, computed } from 'vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
+import modalMessages from '~/app-text/components/bulk-import/bulk-import-modal.json'
 import { useBulkImport } from './framework/use-bulk-import'
 import type { DocumentTypes, PreviewRow, RowProgress, SheetError } from './framework/types'
-import irccAttributesMap from './document-types/ircc/attributes-map'
+import { registry } from './registry'
 import BulkImportHeader from './components/bulk-import-header.vue'
 import BulkImportBanner from './components/bulk-import-banner.vue'
 import type { BannerErrorGroup } from './components/bulk-import-banner.vue'
@@ -177,7 +178,13 @@ import BulkImportConfirmDialog from './components/bulk-import-confirm-dialog.vue
 const props = defineProps<{ documentType: DocumentTypes }>()
 const emit = defineEmits<(e: 'close')=> void>()
 
-const { t } = useI18n()
+const { t, mergeLocaleMessage } = useI18n()
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- plugin wraps JSON in locale object at runtime
+Object.entries(modalMessages as unknown as Record<string, unknown>).forEach(([locale, msgs]) => {
+  mergeLocaleMessage(locale, { bulkImport: msgs })
+})
+
 const {
   state, onFileChange, onImport, onConfirmImport,
   onClose: _onClose, onForceClose: _onForceClose, onClear,
@@ -266,7 +273,7 @@ const sheetErrors = computed<SheetError[]>(() => {
 
 const banner = computed(() => {
   if (!hasPreview.value) return null
-  if (sheetErrors.value.length === 0) return { level: 'ok' as const, text: t('bulkImport.ready', 'Ready to import') }
+  if (sheetErrors.value.length === 0) return { level: 'ok' as const, text: t('bulkImport.ready') }
   const { length: errCount } = sheetErrors.value.filter(e => e.level === 'error')
   const { length: warnCount } = sheetErrors.value.filter(e => e.level === 'warning')
   const parts = [
@@ -276,10 +283,11 @@ const banner = computed(() => {
   const { size: affected } = new Set(sheetErrors.value.map(e => e.row))
   return {
     level: 'danger' as const,
-    text: t('bulkImport.hasErrors', `${affected} of ${previewRows.value.length} rows can't be imported yet — ${parts}.`)
+    text: t('bulkImport.hasErrors', { affected, total: previewRows.value.length, parts })
   }
 })
 
+// groups multiple errors on the same row into one banner item with multiple messages
 const bannerErrors = computed<BannerErrorGroup[]>(() => {
   const groups = new Map<number, BannerErrorGroup>()
   for (const e of sheetErrors.value) {
@@ -303,7 +311,7 @@ const rowProgressList = computed<RowProgress[]>(() =>
 // -------------------------------------------------------------------------
 // Table column metadata
 // -------------------------------------------------------------------------
-const PINNED_KEY = 'permitEquivalent'
+const { [props.documentType]: docTypeDef } = registry
 
 const allColumnKeys = computed(() => {
   if (!hasPreview.value) return []
@@ -311,62 +319,42 @@ const allColumnKeys = computed(() => {
   return (state as Extract<typeof state, { preview: { columnKeys: string[] } }>).preview.columnKeys
 })
 
-const scrollableColumnKeys = computed(() =>
-  allColumnKeys.value.filter((k: string) => k !== PINNED_KEY)
-)
+const scrollableColumnKeys = computed(() => {
+  const pinned = new Set(docTypeDef.pinnedColumns ?? [])
+  return allColumnKeys.value.filter((k: string) => !pinned.has(k))
+})
 
 interface ColumnGroup { label: string; keys: string[] }
-const columnGroups = computed<ColumnGroup[]>(() => [
-  { label: t('bulkImport.ircc.groups.general', 'General'), keys: ['language'] },
-  { label: t('bulkImport.ircc.groups.country', 'Country'), keys: ['country'] },
-  { label: t('bulkImport.ircc.groups.issuingAuthority', 'Issuing authority'), keys: ['absCNAId'] },
-  { label: t('bulkImport.ircc.groups.permitEquivalent', 'Permit / equivalent'), keys: ['dateOfIssuance', 'dateOfExpiry'] },
-  {
-    label: t('bulkImport.ircc.groups.provider', 'The provider'),
-    keys: [
-      'provider.type', 'provider.existing', 'provider.orgName', 'provider.acronym',
-      'provider.address', 'provider.city', 'provider.country', 'provider.email'
-    ]
-  },
-  {
-    label: t('bulkImport.ircc.groups.pic', 'PIC'),
-    keys: [
-      'pic.consent', 'pic.type', 'pic.existing', 'pic.orgName', 'pic.acronym',
-      'pic.address', 'pic.city', 'pic.country', 'pic.email'
-    ]
-  },
-  { label: t('bulkImport.ircc.groups.mat', 'MAT'), keys: ['matEstablished'] },
-  {
-    label: t('bulkImport.ircc.groups.geneticResource', 'Genetic resource'),
-    keys: ['subjectMatter', 'keywords', 'specimens', 'taxonomies']
-  },
-  {
-    label: t('bulkImport.ircc.groups.usesConditions', 'Uses & conditions'),
-    keys: ['usage', 'usageDescription', 'conditionsThirdPartyTransfer']
-  },
-  { label: t('bulkImport.ircc.groups.documentation', 'Documentation'), keys: ['permitFiles', 'additionalInformation'] }
-].filter(g => g.keys.some(k => scrollableColumnKeys.value.includes(k))))
+const columnGroups = computed<ColumnGroup[]>(() => {
+  const cols = new Set(scrollableColumnKeys.value)
+  return (docTypeDef.columnGroups ?? [])
+    .map(g => ({ label: t(g.translationKey), keys: g.keys.filter(k => cols.has(k)) }))
+    .filter(g => g.keys.length > 0)
+})
 
 function columnLabel (key: string): string {
-  return t(`bulkImport.ircc.columns.${key}`, key)
+  return t(`columns.${key}`, key)
 }
 
-const requiredKeys = computed<Set<string>>(() => new Set(
-  allColumnKeys.value.filter((key: string) => {
-    const parts = key.split('.')
-    if (parts.length === 1) {
-      const { [key]: entry } = irccAttributesMap
-      return entry !== undefined && 'required' in entry && entry.required === true
-    }
-    const [group, field] = parts
-    if (group === undefined || field === undefined) return false
-    const { [group]: groupEntry } = irccAttributesMap
-    if (groupEntry === undefined || !('schema' in groupEntry)) return false
-    // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
-    const { [field]: entry } = groupEntry.schema
-    return entry?.required === true
-  })
-))
+const requiredKeys = computed<Set<string>>(() => {
+  const { attributesMap } = docTypeDef
+  return new Set(
+    allColumnKeys.value.filter((key: string) => {
+      const parts = key.split('.')
+      if (parts.length === 1) {
+        const { [key]: entry } = attributesMap
+        return entry !== undefined && 'required' in entry && entry.required === true
+      }
+      const [group, field] = parts
+      if (group === undefined || field === undefined) return false
+      const { [group]: groupEntry } = attributesMap
+      if (groupEntry === undefined || !('schema' in groupEntry)) return false
+      // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
+      const { [field]: entry } = groupEntry.schema
+      return entry?.required === true
+    })
+  )
+})
 </script>
 
 <style scoped>
@@ -421,7 +409,9 @@ const requiredKeys = computed<Set<string>>(() => new Set(
 }
 .bi-foot__muted { font-size: 12.5px; color: #888; }
 .bi-btn-ghost {
-  background: none; border: 1px solid var(--line); border-radius: 6px;
+  background: none;
+  border: 1px solid var(--line) !important;
+  border-radius: 6px;
   color: #445; padding: 7px 14px; font-size: 13.5px; cursor: pointer;
 }
 .bi-btn-ghost:hover { background: #f4f6f8; }

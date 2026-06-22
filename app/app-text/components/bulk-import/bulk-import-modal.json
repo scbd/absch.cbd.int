@@ -1,0 +1,16 @@
+{
+  "close": "Close",
+  "clearList": "Clear list",
+  "createDrafts": "Create draft records",
+  "importing": "Importing…",
+  "resolveErrors": "Resolve all errors to enable import.",
+  "ready": "Ready to import",
+  "hasErrors": "{affected} of {total} rows can't be imported yet — {parts}.",
+  "doneMsg": "Done — {imported} created, {failed} failed.",
+  "confirmMsg": "Create draft records for all rows?",
+  "confirm": "Confirm",
+  "closeConfirm": "Close and discard all loaded data?",
+  "confirmClose": "Yes, close",
+  "eraseConfirm": "Clear all loaded records?",
+  "confirmErase": "Yes, clear"
+}

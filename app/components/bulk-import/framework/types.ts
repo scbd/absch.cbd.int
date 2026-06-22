@@ -102,7 +102,13 @@ export type LinkedRecordStore = SubDocumentStore
 // Document type plugin contract
 // ---------------------------------------------------------------------------
 
+// Union of all supported document types (e.g. 'ircc', 'cpcp', etc.)
 export type DocumentTypes = 'ircc'
+
+export interface ColumnGroup {
+  translationKey: string
+  keys: string[]
+}
 
 export interface DocumentTypeDefinition {
   Schema: new (
@@ -115,6 +121,8 @@ export interface DocumentTypeDefinition {
   attributesMap: AttributesMap
   messages: Record<string, unknown>
   headerRows: number[]
+  pinnedColumns?: string[]
+  columnGroups?: ColumnGroup[]
 }
 
 export interface SchemaInstance {

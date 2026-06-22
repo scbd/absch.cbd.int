@@ -22,7 +22,7 @@
             class="bi-pin bi-pin--2 bi-grp"
             rowspan="2"
           >
-            {{ t('bulkImport.ircc.columns.permitEquivalent', 'Permit reference') }}
+            {{ columnLabel('permitEquivalent') }}
           </th>
           <th
             v-for="grp in columnGroups"
@@ -83,7 +83,8 @@
             :key="key"
             :class="{
               'bi-cell--err': cellHasError(row, key),
-              'bi-cell--warn': cellHasWarn(row, key)
+              'bi-cell--warn': cellHasWarn(row, key),
+              'bi-cell--long': isLongText(row.cells[key]?.display ?? '')
             }"
           >
             <span
@@ -172,7 +173,7 @@ const props = defineProps<{
 const { t } = useI18n()
 
 function columnLabel (key: string): string {
-  return t(`bulkImport.ircc.columns.${key}`, key)
+  return t(`columns.${key}`, key)
 }
 
 function rowProgressFor (rowIndex: number): RowProgress | undefined {
@@ -199,6 +200,10 @@ function isBoolNo (v: string): boolean {
 
 function isChipVal (v: string): boolean {
   return v.trim().length > 0 && v.trim().length <= 25 && !v.includes('\n')
+}
+
+function isLongText (v: string): boolean {
+  return v.length > 200
 }
 </script>
 
@@ -243,6 +248,7 @@ function isChipVal (v: string): boolean {
 .bi-row--warn  .bi-pin { background: var(--warn-50); }
 .bi-cell--err  { background: var(--danger-50); box-shadow: inset 0 0 0 1px var(--danger-line); }
 .bi-cell--warn { background: var(--warn-50);   box-shadow: inset 0 0 0 1px var(--warn-line); }
+.bi-cell--long { white-space: normal; min-width: 260px; max-width: 420px; }
 .bi-chip {
   display: inline-flex; align-items: center; gap: 4px;
   background: #eef1f4; color: #334; border-radius: 5px;
