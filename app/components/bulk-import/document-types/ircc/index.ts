@@ -13,20 +13,20 @@ export const irccDocumentType: DocumentTypeDefinition = {
   headerRows: [0, 1],
   pinnedColumns: ['permitEquivalent'],
   columnGroups: [
-    { translationKey: 'groups.general', keys: ['language', 'country'] },
-    { translationKey: 'groups.issuingAuthority', keys: ['absCNAId'] },
-    { translationKey: 'groups.permitEquivalent', keys: ['dateOfIssuance', 'dateOfExpiry'] },
+    { translationKey: 'general', keys: ['language', 'country'] },
+    { translationKey: 'issuingAuthority', keys: ['absCNAId'] },
+    { translationKey: 'permitDetails', keys: ['dateOfIssuance', 'dateOfExpiry'] },
     {
-      translationKey: 'groups.provider',
+      translationKey: 'providerSection',
       keys: ['provider.type', 'provider.existing', 'provider.orgName', 'provider.acronym', 'provider.address', 'provider.city', 'provider.country', 'provider.email']
     },
     {
-      translationKey: 'groups.pic',
+      translationKey: 'picSection',
       keys: ['pic.consent', 'pic.type', 'pic.existing', 'pic.orgName', 'pic.acronym', 'pic.address', 'pic.city', 'pic.country', 'pic.email']
     },
-    { translationKey: 'groups.mat', keys: ['matEstablished'] },
-    { translationKey: 'groups.geneticResource', keys: ['subjectMatter', 'keywords', 'specimens', 'taxonomies'] },
-    { translationKey: 'groups.usesConditions', keys: ['usage', 'usageDescription', 'conditionsThirdPartyTransfer'] },
-    { translationKey: 'groups.documentation', keys: ['permitFiles', 'additionalInformation'] }
+    { translationKey: 'mat', keys: ['matEstablished'] },
+    { translationKey: 'geneticResource', keys: ['subjectMatter', 'keywords', 'specimens', 'taxonomies'] },
+    { translationKey: 'usesConditions', keys: ['usage', 'usageDescription', 'conditionsThirdPartyTransfer'] },
+    { translationKey: 'documentation', keys: ['permitFiles', 'additionalInformation'] }
   ]
 }

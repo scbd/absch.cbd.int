@@ -19,10 +19,12 @@
             {{ t('bulkImport.status', 'Status') }}
           </th>
           <th
-            class="bi-pin bi-pin--2 bi-grp"
+            v-for="(key, i) in pinnedColumnKeys"
+            :key="key"
+            :class="`bi-pin bi-pin--${i + 2} bi-grp`"
             rowspan="2"
           >
-            {{ columnLabel('permitEquivalent') }}
+            {{ columnLabel(key) }}
           </th>
           <th
             v-for="grp in columnGroups"
@@ -74,8 +76,12 @@
             </span>
           </td>
 
-          <td class="bi-pin bi-pin--2">
-            {{ row.cells['permitEquivalent']?.display ?? '' }}
+          <td
+            v-for="(key, i) in pinnedColumnKeys"
+            :key="key"
+            :class="`bi-pin bi-pin--${i + 2}`"
+          >
+            {{ row.cells[key]?.display ?? '' }}
           </td>
 
           <td
@@ -162,6 +168,7 @@ interface ColumnGroup { label: string; keys: string[] }
 
 const props = defineProps<{
   rows: PreviewRow[]
+  pinnedColumnKeys: string[]
   scrollableColumnKeys: string[]
   columnGroups: ColumnGroup[]
   requiredKeys: Set<string>
@@ -173,7 +180,7 @@ const props = defineProps<{
 const { t } = useI18n()
 
 function columnLabel (key: string): string {
-  return t(`columns.${key}`, key)
+  return t(key, key)
 }
 
 function rowProgressFor (rowIndex: number): RowProgress | undefined {

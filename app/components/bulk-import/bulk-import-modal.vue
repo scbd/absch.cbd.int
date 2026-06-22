@@ -45,6 +45,7 @@
         <BulkImportTable
           v-else-if="hasPreview"
           :rows="filteredRows"
+          :pinned-column-keys="docTypeDef.pinnedColumns ?? []"
           :scrollable-column-keys="scrollableColumnKeys"
           :column-groups="columnGroups"
           :required-keys="requiredKeys"
@@ -333,7 +334,7 @@ const columnGroups = computed<ColumnGroup[]>(() => {
 })
 
 function columnLabel (key: string): string {
-  return t(`columns.${key}`, key)
+  return t(key, key)
 }
 
 const requiredKeys = computed<Set<string>>(() => {
