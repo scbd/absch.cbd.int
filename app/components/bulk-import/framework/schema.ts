@@ -153,7 +153,7 @@ export abstract class Schema implements SchemaInstance {
     return { [this.language]: value.trim() }
   }
 
-  getLocaleElement (value: string | undefined): TextValue | undefined {
+  getTextToHtml (value: string | undefined): TextValue | undefined {
     if (typeof value !== 'string') return undefined
     return { [this.language]: Schema.getAsHtmlElement(value.trim()) }
   }

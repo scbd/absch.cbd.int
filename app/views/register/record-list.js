@@ -854,7 +854,7 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                     if($scope.documentType === 'ircc'){
                         //components/documents-uploader/documents-uploader.vue
-                        const module = await import('~/components/bulk-import/bulk-import-trigger.vue');
+                        const module = await import('~/components/bulk-import/bulk-import.vue');
                         $scope.exportVueComponent = {
                             components: {
                                 DocumentsUploader : module.default,

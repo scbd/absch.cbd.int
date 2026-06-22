@@ -6,29 +6,57 @@ export interface SubmitResult {
   failed: number
 }
 
+async function publishLinkedRecords (
+  linkedRecords: LinkedRecordStore,
+  api: ApiClient
+): Promise<Set<string>> {
+  const failedIds = new Set<string>()
+  for (const record of linkedRecords) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have header.identifier/schema at runtime
+    const { header } = record as unknown as { header: { identifier: string; schema: string } }
+    try {
+      // eslint-disable-next-line no-await-in-loop -- sequential linked-record publish
+      await api.publishDraft(header.schema, header.identifier, record)
+    } catch {
+      failedIds.add(header.identifier)
+    }
+  }
+  return failedIds
+}
+
+function referencesFailedLinkedRecord (doc: DocumentRequest, failedIds: Set<string>): boolean {
+  function walk (value: unknown): boolean {
+    if (value === null || value === undefined) return false
+    if (Array.isArray(value)) return value.some(walk)
+    if (typeof value === 'object') {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- walking arbitrary document values at runtime
+      const obj = value as Record<string, unknown>
+      if (typeof obj['identifier'] === 'string' && failedIds.has(obj['identifier'])) return true
+      return Object.values(obj).some(walk)
+    }
+    return false
+  }
+  return walk(doc)
+}
+
 export async function submitDocuments (
   documents: DocumentRequest[],
   linkedRecords: LinkedRecordStore,
   api: ApiClient,
   onProgress: (progress: RowProgress)=> void
 ): Promise<SubmitResult> {
-  // Submit linked records first (contacts, etc.) — fire-and-wait, not fire-and-forget
-  for (const record of linkedRecords) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have header.identifier/schema at runtime
-    const { header } = record as unknown as { header: { identifier: string; schema: string } }
-    try {
-      // eslint-disable-next-line no-await-in-loop -- sequential linked-record submit
-      await api.saveDraft(header.identifier, record, header.schema)
-    } catch (err: unknown) {
-      // Log but don't abort — a missing contact degrades the record, it doesn't block the import
-      console.warn('[bulk-import] linked record failed:', err) // eslint-disable-line no-console -- intentional warning visible in dev tools
-    }
-  }
+  const failedLinkedIds = await publishLinkedRecords(linkedRecords, api)
 
   let imported = 0
   let failed = 0
 
   for (const [rowIndex, doc] of documents.entries()) {
+    if (failedLinkedIds.size > 0 && referencesFailedLinkedRecord(doc, failedLinkedIds)) {
+      failed += 1
+      onProgress({ rowIndex, status: 'error', message: 'A linked record (e.g. contact) failed to publish' })
+      continue
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- DocumentRequest always has header.identifier/schema set by schema builders
     const { header } = doc as unknown as { header: { identifier: string; schema: string } }
     try {
