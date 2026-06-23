@@ -60,7 +60,7 @@ export default defineConfig([
   // Grandfathered legacy files — no rules enforced.
   // To upgrade a file: remove it from .config/eslintminimal.json and fix the errors.
   // New files (not in the list) automatically get full linting.
-  { ignores: eslintMinimalFilesList },
+  globalIgnores(eslintMinimalFilesList),
   {
     name: 'include styles for new files',
     files: ['**/*.{ts,mts,tsx,vue,js}'],
