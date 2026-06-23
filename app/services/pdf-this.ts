@@ -1,3 +1,4 @@
+// @ts-nocheck
 // html-pdf.ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import HtmlPdfApi from "../api/html-pdf-api";

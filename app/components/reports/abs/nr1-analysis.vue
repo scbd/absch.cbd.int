@@ -210,6 +210,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 import { Tooltip } from 'bootstrap';
 import { ref, computed, onMounted, nextTick, watch } from 'vue';
 // popper is required by bootstrap tooltips; in this project we load

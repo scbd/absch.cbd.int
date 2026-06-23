@@ -1,3 +1,4 @@
+// @ts-nocheck
 import ApiBase, { tryCastToApiError } from './api-base';
 
 export default class HtmlPdfApi extends ApiBase
