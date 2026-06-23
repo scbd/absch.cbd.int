@@ -103,7 +103,8 @@ import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
         return;
 
       if(info.identifier)//$scope.status=="loading"
-          $q.when(editFormUtility.documentExists(info.identifier),function(exists){
+      
+          $q.when(editFormUtility.documentExists(info.identifier),async function(exists){
               $scope.documentExists = exists;
              
               //amendment intent should be entered by users for every edit/ clear it on load if any from previous update
@@ -114,9 +115,14 @@ import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
                 if(!$scope.isIRCCRevoked)  
                   $scope.document.amendmentIntent = undefined;
               }
-
-              if(!$scope.isIRCCRevoked && $scope.document.amendmentDescription)
-                $scope.document.amendmentDescription = undefined;
+              if(!$scope.isIRCCRevoked && $scope.document.amendmentDescription){
+                // verify if the document has been updated since the last time it was published, if not clear the amendment description
+                // countries need to provide new amendment description for every update to the document
+                const documentInfo = (await storage.drafts.get(info.identifier, { info: true, body:false }))?.data
+                if(!documentInfo?.workingDocumentUpdatedOn){
+                  $scope.document.amendmentDescription = undefined;
+                }
+              }
 
           });
     });
@@ -183,7 +189,9 @@ import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
       }
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
-
+      
+      // clear obsolete field
+      document.amendmentsDescription = undefined;
       return $scope.sanitizeDocument(document);
     };
 

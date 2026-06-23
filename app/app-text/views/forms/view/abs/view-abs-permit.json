@@ -41,5 +41,6 @@
     "amendmentHistory": "Amendment history",
     "infoUtilization": "Information on the utilization of the genetic resource(s)",
     "expired": "Expired",
-    "expiredMessage": "The permit or its equivalent related to this internationally recognized certificate  of compliance (IRCC) has expired."
+    "expiredMessage": "The permit or its equivalent related to this internationally recognized certificate  of compliance (IRCC) has expired.",
+    "amendmentStatus": "The certificate (IRCC) has been amended"
 }
