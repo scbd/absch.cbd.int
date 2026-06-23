@@ -337,6 +337,7 @@ function columnLabel (key: string): string {
   return t(key, key)
 }
 
+// the columns are nested in the document schema, so we need to traverse the schema to find the required columns
 const requiredKeys = computed<Set<string>>(() => {
   const { attributesMap } = docTypeDef
   return new Set(

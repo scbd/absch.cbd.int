@@ -27,7 +27,9 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.canDeletePublished = true;
                 $scope.isBulkUploaderOpen = false
                 $scope.documentType = ($routeParams.document_type || '').toLowerCase()
-                
+                // the button text is inside the vue component,
+                // so we need to get the translation from the translation service and pass it to the vue component
+                $scope.buttonText = translationService.get('recordListT.bulkImport')
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });

@@ -6,7 +6,7 @@
       @click="open"
     >
       <i class="fa fa-file-excel-o me-1" />
-      Import IRCC
+      {{ title }}
     </button>
 
     <component
@@ -22,7 +22,10 @@
 import { ref, shallowRef, defineComponent, type Ref, type Component } from 'vue'
 import type { DocumentTypes } from './framework/types'
 
-defineProps<{ documentType: DocumentTypes }>()
+defineProps<{
+  documentType: DocumentTypes,
+  title: string
+}>()
 
 const modal: Ref<Component> = shallowRef(defineComponent(() => () => null))
 const isOpen = ref(false)
