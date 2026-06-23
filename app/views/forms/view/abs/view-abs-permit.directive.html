@@ -15,6 +15,11 @@
 
 		<div ng-if="isExpired(document.dateOfExpiry)" class="alert alert-warning" role="alert">
 			<h3>{{::('viewAbsPermitT.expiredMessage'|$translate)}}</h3>
+		</div>
+		//show obsolete field is new one is missing
+		<div ng-if="document.amendmentDescription|| document.amendmentsDescription" class="alert alert-info" role="alert">
+			<span class="fs-4 fw-bold">{{::('viewAbsPermitT.amendmentStatus'|$translate)}}</span>
+			<div class="km-pre" ng-bind-html="(document.amendmentDescription|| document.amendmentsDescription) | lstring:locale"></div>			
 		</div>	
 				
 		<document-date></document-date>		
@@ -31,11 +36,11 @@
 			</div>
 
 
-			<div ng-show="document.government || document.updateReasons">
+			<div ng-show="document.government || document.amendmentDescription">
 				<div ng-show="showPdf && document">
 					<label>{{::('viewAbsPermitT.uniqueIdentifier'|$translate)}}</label>
 					<div compare-val>
-					<div class="km-value"><span ng-bind="document | uniqueID"></span></div>
+					<div class="km-value">{{ document | uniqueID}}</div>
 					</div>
 				</div>
 
@@ -50,10 +55,10 @@
 					</div>
 				</div>
 
-				<div ng-show="document.updateReasons">
+				<div ng-show="document.amendmentDescription">
 					<label>{{::('viewAbsPermitT.amendmentDescription'|$translate)}}</label>
 					<div compare-val>
-					<div class="km-value km-pre"><span ng-bind="document.updateReasons | lstring:locale"></span></div>
+						<div class="km-value km-pre" ng-bind-html="document.amendmentDescription | lstring:locale"></div>
 					</div>
 				</div>
 			</div>
