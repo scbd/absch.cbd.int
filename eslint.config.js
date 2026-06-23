@@ -29,6 +29,8 @@ const vueTs = defineConfigWithVueTs([
   }
 ])
 
+const isDev = process.env.NODE_ENV === 'development'
+
 export default defineConfig([
   globalIgnores(['.config/', 'dist/', 'node_modules/', 'app/views/pdf-viewer/pdfjs/']),
   {
@@ -99,6 +101,14 @@ export default defineConfig([
       '@typescript-eslint/no-unnecessary-condition': 'off',
       '@typescript-eslint/no-require-imports': 'off',
       'new-cap': 'off'
+    }
+  },
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: isDev ? 'off' : 'error'
+    },
+    rules: {
+      'no-console': isDev ? 'off' : 'error'
     }
   }
 ])
