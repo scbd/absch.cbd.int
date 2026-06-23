@@ -1,4 +1,4 @@
-﻿<div>
+<div>
     <link rel="stylesheet" href="/app/css/record.css">
     <div id="printContentHeader" ng-include="'view-print-header.html'" ng-if="printMode"></div>
     <style>
@@ -119,13 +119,13 @@
                     <span ng-bind="::internalDocumentInfo.type|schemaName"></span>
                     <span>(<span ng-bind="::(internalDocumentInfo.type|schemaShortName)"></span>)</span>
                 </span>  
-                <div class="float-end position-relative text-white d-flex">
-                    <div record-options></div>
-                    <div id="sendRecords" ng-if="shareVueComponent && internalDocumentInfo" class="full-text-display ps-2 pe-1 float-end compare-buttons">
+                <div class="float-end position-relative text-white d-flex flex-wrap align-items-center justify-content-end">
+                    <div record-options class="text-nowrap d-flex align-items-center"></div>
+                    <div id="sendRecords" ng-if="shareVueComponent && internalDocumentInfo" class="full-text-display ps-2 pe-1 text-nowrap d-flex align-items-center compare-buttons">
                         <span class="color-white">|&nbsp;</span>
                         <share-record ng-vue="shareVueComponent"></share-record>
                     </div>
-                    <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">
+                    <div class="position-relative btn-edit-record text-nowrap d-flex align-items-center" ng-if="!isIRCCRevoked && internalCanEdit">
                         <div>
                             <span class="color-white">|&nbsp;</span>
                             <a rel="noopener" translation-url title="{{::('recordLoaderT.edit'|$translate)}}" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
@@ -141,7 +141,7 @@
                         </div>
                     </div> 
 
-                    <div ng-if="showDifferenceButton||showComparison" class="full-text-display float-end compare-buttons pe-2 position-relative text-white">
+                    <div ng-if="showDifferenceButton||showComparison" class="full-text-display compare-buttons pe-2 position-relative text-white text-nowrap d-flex align-items-center">
                         <button type="button" ng-if="showDifferenceButton" ng-disabled="isComparing" class="btn btn-success btn-sm"
                             ng-click="showDifference()">
                             <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> {{::('recordLoaderT.showDifference'|$translate)}}
@@ -173,7 +173,7 @@
                             <div id="compareSchemaView"></div>
                         </div>
                     </div> 
-                    <div ng-show="hideClose" class="full-text-display float-end compare-buttons pe-2 ps-2 position-relative text-white">
+                    <div ng-show="hideClose" class="full-text-display compare-buttons pe-2 ps-2 position-relative text-white text-nowrap d-flex align-items-center">
                         <span class="color-white">|&nbsp;</span>
                         <a rel="noopener" title="{{::('resultDefaultT.close'|$translate)}}"
                             class="btn btn-sm   p-0 px-1 color-white"
