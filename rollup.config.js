@@ -112,7 +112,7 @@ function bundle(entryPoint, locale, baseDir='app') {
       }),
       esbuild({
         include: /\.[jt]s$/,             // ts, js (vue already turned <script lang="ts"> into JS)
-        target: 'es2022',
+        target: 'es2019',
         tsconfig: 'tsconfig.json',
         sourceMap: true
       }),
