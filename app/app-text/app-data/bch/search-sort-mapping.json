@@ -1,0 +1,18 @@
+{
+    "biosafetyLaw.entryIntoForce": "Date of entry into force",
+    "biosafetyDecision.date": "Date of decision",
+    "nationalRiskAssessment.date": "Date of risk assessment",
+    "independentRiskAssessment.date": "Date of risk assessment",
+    "title": "Title",
+    "capacityBuildingInitiative.title": "Title of the initiative",
+    "capacityBuildingInitiative.startDate": "Start date",
+    "capacityBuildingInitiative.endDate": "End date",
+    "modifiedOrganism.uniqueIdentification": "Unique identification",
+    "modifiedOrganism.transformationEvent": "Transformation event",
+    "modifiedOrganism.identity": "Name",
+    "organism.scientificName": "Scientific name",
+    "dnaSequence.name": "Name of genetic element",
+    "dnaSequence.abbreviation": "Abbreviation",    
+    "resource.publicationDate": "Publication date",
+    "organizationName": "Name of the organization"
+}
