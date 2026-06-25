@@ -159,6 +159,7 @@ export abstract class Schema implements SchemaInstance {
   }
 
   getKeywords (keywordsValue: string | undefined, keywordsMap: KeywordType[]): Keywords {
+    // match keywords to thesaurus terms, and return any unmatched keywords as a string
     if (Schema.isEmpty(keywordsValue)) return { processedKeywords: [], otherKeywords: '' }
 
     const processedKeywords: SubDocument[] = []

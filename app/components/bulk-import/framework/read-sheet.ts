@@ -42,8 +42,11 @@ export async function readSheet (
   const { rows, errors: rawErrors } = await readExcelFile(file, {
     schema,
     transformData (allRows: unknown[][]) {
+      // Strip configured header rows (title row, column-label row, etc.)
       const dataRows = allRows.filter((_row, i) => !headerRows.includes(i))
       const firstRow = Array.isArray(dataRows[0]) ? dataRows[0] : []
+      // Build a synthetic header row of numeric column indices ("0", "1", ...)
+      // so read-excel-file matches columns by position, not by header text
       const indices = Array.from(firstRow.keys())
       dataRows.unshift(indices.map(String))
       return dataRows

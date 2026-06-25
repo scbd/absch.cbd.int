@@ -3,6 +3,8 @@ import type {
   PreviewRow, PreviewData, CellPrimitive, CellError
 } from './types'
 
+// build a nested column list so that sub-columns can uniquely be identifier
+// for eg. provider.type, provider.orgName, pic.type, pic.orgName, etc.
 function getColumnKeys (attributesMap: AttributesMap): string[] {
   const keys: string[] = []
   for (const [key, entry] of Object.entries(attributesMap)) {
@@ -19,6 +21,7 @@ function getColumnKeys (attributesMap: AttributesMap): string[] {
 
 function formatCell (value: CellPrimitive): string {
   if (value === null) return ''
+  // fr-CA produces YYYY-MM-DD
   if (value instanceof Date) return value.toLocaleDateString('fr-CA', { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC' })
   return String(value)
 }
