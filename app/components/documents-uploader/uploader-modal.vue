@@ -118,7 +118,7 @@ const props = defineProps<{
 }>()
 const { t, locale } = useI18n()
 
-const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
+const kmDocumentApi = new KmDocumentApi({ tokenReader: async () => await auth.token(), realm })
 const importDocuments = new ImportDocuments(t, locale.value, props.documentType)
 
 const $emit = defineEmits(['onClose', 'refreshRecord'])

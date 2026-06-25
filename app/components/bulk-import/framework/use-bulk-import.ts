@@ -61,7 +61,7 @@ export function useBulkImport (documentType: DocumentTypes): {
 
   function getApi (): KmDraftsApi {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- auth is a JS module
-    return new KmDraftsApi({ tokenReader: () => auth.token(), realm })
+    return new KmDraftsApi({ tokenReader: async () => await auth.token(), realm })
   }
 
   async function onFileChange (file: File): Promise<void> {
