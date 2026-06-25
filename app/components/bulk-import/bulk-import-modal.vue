@@ -161,7 +161,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import modalMessages from '~/app-text/components/bulk-import/bulk-import-modal.json'
 import { useBulkImport } from './framework/use-bulk-import'
