@@ -56,7 +56,6 @@ import { sanitizeDocument } from '~/services/filters/common'
 import { THESAURUS } from '~/services/filters/constant'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
-// @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
@@ -65,7 +64,7 @@ import messages from '~/app-text/views/forms/edit/abs/edit-legal-framework-overv
 import type { Inject, LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
 
 // Constants
-const thesaurusApi = new ThesaurusApi({ tokenReader: () => auth.token() })
+const thesaurusApi = new ThesaurusApi({ tokenReader: async () => await auth.token() })
 const auth = useAuth()
 const angularGetCleanDocument: Inject = (inject('getCleanDocument') ?? (() => undefined))
 const { t } = useI18n({ messages })

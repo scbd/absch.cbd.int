@@ -231,7 +231,6 @@ import nr1Translation from '~/app-text/views/forms/edit/abs/edit-national-report
 import { absNationalReport1 } from '~/app-data/abs/report-analyzer/absNationalReport1.js';
 // @ts-expect-error importing js file
 import { mergeTranslationKeys } from '~/services/translation-merge.js';
-// @ts-expect-error importing js file
 import { useRealm } from '~/services/composables/realm.js';
 
 const realm = useRealm();

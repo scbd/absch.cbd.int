@@ -1,12 +1,12 @@
 declare module '~/services/composables/realm.js' {
-  export function useRealm (): { realm: string }
+  export function useRealm (): { realm: string; baseURL: string }
 }
 
 declare module '@scbd/angular-vue/src/index.js' {
   import type { ComputedRef } from 'vue'
 
   interface NgVueInjector {
-    get(name: string): unknown
+    get: (name: string)=> unknown
   }
 
   interface NgVue {
@@ -14,11 +14,11 @@ declare module '@scbd/angular-vue/src/index.js' {
   }
 
   interface Auth {
-    token(name?: string): Promise<string | undefined>
-    user(): unknown
-    check(roles: string | string[]): boolean
-    login(options?: unknown): Promise<void>
-    logout(options?: { makeRequest?: boolean }): void
+    token: (name?: string)=> Promise<string | undefined>
+    user: ()=> unknown
+    check: (roles: string | string[])=> boolean
+    login: (options?: unknown)=> Promise<void>
+    logout: (options?: { makeRequest?: boolean })=> void
   }
 
   interface Route {
@@ -30,8 +30,8 @@ declare module '@scbd/angular-vue/src/index.js' {
   }
 
   interface Router {
-    push(path: string): void
-    replace(path: string): void
+    push: (path: string)=> void
+    replace: (path: string)=> void
   }
 
   export function useNgVue (): NgVue

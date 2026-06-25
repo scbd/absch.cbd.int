@@ -78,9 +78,7 @@ import { mapObjectId, isObjectId } from '~/api/api-base.js'
 import ArticlesApi from '../../components/kb/article-api'
 // @ts-expect-error importing js file
 import PortalsApi from '~/api/portals'
-// @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-// @ts-expect-error importing js file
 import { useRealm } from '~/services/composables/realm.js'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'

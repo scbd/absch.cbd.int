@@ -1,9 +1,7 @@
 import { reactive } from 'vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-// @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-// @ts-expect-error importing js file
 import { useRealm } from '~/services/composables/realm.js'
 import { KmDraftsApi } from '~/api/km-document'
 import { readSheet } from './read-sheet'
@@ -45,9 +43,7 @@ export function useBulkImport (documentType: DocumentTypes): {
 } {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- useI18n is a JS module
   const { mergeLocaleMessage } = useI18n()
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- useAuth is a JS module
   const auth = useAuth()
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- useRealm is a JS module
   const { realm } = useRealm()
 
   const { [documentType]: definition } = registry
@@ -60,7 +56,6 @@ export function useBulkImport (documentType: DocumentTypes): {
   const state = reactive<UploaderState>({ phase: 'empty' })
 
   function getApi (): KmDraftsApi {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- auth is a JS module
     return new KmDraftsApi({ tokenReader: async () => await auth.token(), realm })
   }
 

@@ -79,7 +79,7 @@
     "lint:fix": "npx eslint app/ --fix",
     "build": "npx eslint app/ --max-warnings=0 && rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "typecheck": "vue-tsc --noEmit",
-    "dev": "NODE_ENV=development npx eslint app/ --max-warnings=0 && rm -rf ./dist && rm -rf ./i18n-build && node rollup/dev-watch.js",
+    "dev": "npx eslint app/ --max-warnings=0 && rm -rf ./dist && rm -rf ./i18n-build && node rollup/dev-watch.js",
     "eslint": "npx eslint . --fix",
     "clean-reinstall": "rm -rf ./node_modules && yarn install",
     "import-translation": "node script/copy-translation-files.js"

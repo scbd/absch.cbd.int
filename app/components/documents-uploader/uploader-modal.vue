@@ -91,10 +91,8 @@ import {
 } from 'vue'
 // @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-// @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-// @ts-expect-error importing js file
-import { useRealm } from '../../services/composables/realm.js'
+import { useRealm } from '~/services/composables/realm.js'
 import KmDocumentApi from '~/api/km-document'
 import ModalErrors from './modal-errors.vue'
 import BulkUploaderHeader from './uploader-header.vue'

@@ -137,13 +137,15 @@ interface Toastr {
 const props = defineProps<{ selectedRecords: ListRecord[] }>()
 const emit = defineEmits<(e: 'deleted', payload: { deletedIds: string[], pendingIds: string[] })=> void>()
 
-const { token } = useAuth()
+const auth = useAuth()
 const { realm } = useRealm()
 const { $injector } = useNgVue()
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- AngularJS injector is untyped
 const editFormUtility = $injector.get('editFormUtility') as EditFormUtility
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- AngularJS injector is untyped
 const toastr = $injector.get('toastr') as Toastr
 
-const draftsApi = new KmDraftsApi({ tokenReader: token, realm })
+const draftsApi = new KmDraftsApi({ tokenReader: async () => await auth.token(), realm })
 const showConfirm = ref(false)
 const loading = ref(false)
 const progress = ref<RecordProgress[]>([])
@@ -173,13 +175,16 @@ async function onConfirm () {
   const pendingIds: string[] = []
 
   for (const item of progress.value) {
-    const record = props.selectedRecords.find(r => r.identifier === item.identifier)!
+    const record = props.selectedRecords.find(r => r.identifier === item.identifier)
+    if (!record) continue
     item.status = 'deleting'
     try {
       if (isDraftOnly(record)) {
+        // eslint-disable-next-line no-await-in-loop -- sequential deletion for per-item progress tracking
         await draftsApi.delete(record.identifier)
         deletedIds.push(record.identifier)
       } else if (isPublishedOnly(record)) {
+        // eslint-disable-next-line no-await-in-loop -- sequential deletion for per-item progress tracking
         await editFormUtility.deleteDocument(record, undefined)
         pendingIds.push(record.identifier)
       }
