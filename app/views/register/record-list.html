@@ -59,6 +59,13 @@
                             </span>
                         </div>
 
+                        <div ng-if="bulkDeleteVueComponent.components.BulkDeleteButton && showAddButton()">
+                            <bulk-delete-button
+                                ng-vue="bulkDeleteVueComponent"
+                                :selected-records="selectedRecords"
+                                @deleted="onBulkDeleted($event)">
+                            </bulk-delete-button>
+                        </div>
                         <a type="button" class="btn btn-outline-secondary btn-sm px-1 text-nowrap d-flex" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="bi bi-arrow-repeat float-start"></i> <span class="fs-small-8 d-none d-md-block ps-1 float-end">{{::('recordListT.refresh'|$translate)}}</span>
                         </a>
@@ -86,6 +93,9 @@
             <table class="table table-hover overflow-hidden w-100 mt-3">
                 <thead>
                     <tr class="text-secondary">
+                        <th ng-if="showAddButton()" class="text-center" style="width:36px;">
+                            <input type="checkbox" ng-checked="isAllSelected()" ng-click="toggleSelectAll()" title="Select all" />
+                        </th>
                         <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">{{::('recordListT.title'|$translate)}}</th>
                         <!-- ToDo: need to pass correct field -->
                         <!-- <th ng-click="onSort('title.en', 'asc')" id="titleHeader">Title</th> -->
@@ -97,9 +107,10 @@
                     </tr>
                 </thead>
                 <tr ng-cloak ng-show="loading">
-                    <td class="ps-1 text-center p-4" colspan="6"><i class="fa fa-spin fa-cog" ></i> {{::('recordListT.loading'|$translate)}}</td>
+                    <td class="ps-1 text-center p-4" ng-attr-colspan="{{ (showAddButton() ? 1 : 0) + (schema == 'contact' ? 7 : 6) }}"><i class="fa fa-spin fa-cog" ></i> {{::('recordListT.loading'|$translate)}}</td>
                 </tr>
                 <tr ng-if="tourOn">
+                    <td ng-if="showAddButton()" class="text-center align-middle" style="width:36px;"></td>
                     <td class="ps-1 py-3 fs-small-8 w-25">
                         {{::('recordListT.sampleRecord'|$translate)}} <strong>{{schema|urlSchemaShortName}}</strong>
                     </td>
@@ -131,13 +142,21 @@
                     </td>
                 </tr>
                 <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
-                    <td class="ps-1 text-center p-4" colspan="6"> <strong>{{::('recordListT.noRecordsFound'|$translate)}}</strong></td>
+                    <td class="ps-1 text-center p-4" ng-attr-colspan="{{ (showAddButton() ? 1 : 0) + (schema == 'contact' ? 7 : 6) }}"> <strong>{{::('recordListT.noRecordsFound'|$translate)}}</strong></td>
                 </tr>
 
 <!--                <tbody ng-repeat="record in  records">-->
                 <tbody class="border-0" ng-repeat="record in (filteredRecords = (records | filter:statusFilter | orderBy:orderBy))">
                     <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
 
+                        <td ng-if="showAddButton()" class="text-center align-middle" style="width:36px;">
+                            <input type="checkbox"
+                                ng-show="record.workflowActivityStatus != 'pending'"
+                                ng-checked="isSelected(record)"
+                                ng-disabled="!isSelectable(record)"
+                                ng-click="toggleSelection(record)"
+                                title="{{ isDraft(record) && isPublished(record) ? 'Cannot bulk-delete records that have both a draft and a published version' : 'Select for deletion' }}" />
+                        </td>
                         <td class="ps-1 fs-small-8 w-25">
                             <span ng-show="isPublished(record) && !isDraft(record) && !isRequest(record)">
                             <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view" ng-show="record.documentID">
@@ -262,7 +281,7 @@
                         </td>
                     </tr>
                     <tr ng-if="displayReference && record.body && record.body.badRevisions && record.body.badRevisions.length > 0" class="border-0" ng-class="{'bg-grey': displayReference}">
-                        <td class="ps-1 fs-small-8 border-0" colspan="6" >
+                        <td class="ps-1 fs-small-8 border-0" ng-attr-colspan="{{ (showAddButton() ? 1 : 0) + (schema == 'contact' ? 7 : 6) }}" >
 
                             <div ng-show="displayReference" block-region activate=" loading">
 
