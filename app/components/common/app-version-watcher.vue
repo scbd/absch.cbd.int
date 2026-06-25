@@ -33,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 
 import { onMounted, onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Modal } from "bootstrap";

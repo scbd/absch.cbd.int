@@ -29,6 +29,8 @@ const vueTs = defineConfigWithVueTs([
   }
 ])
 
+const isDev = process.env.NODE_ENV === 'development'
+
 export default defineConfig([
   globalIgnores(['.config/', 'dist/', 'node_modules/', 'app/views/pdf-viewer/pdfjs/']),
   {
@@ -58,7 +60,7 @@ export default defineConfig([
   // Grandfathered legacy files — no rules enforced.
   // To upgrade a file: remove it from .config/eslintminimal.json and fix the errors.
   // New files (not in the list) automatically get full linting.
-  { ignores: eslintMinimalFilesList },
+  globalIgnores(eslintMinimalFilesList),
   {
     name: 'include styles for new files',
     files: ['**/*.{ts,mts,tsx,vue,js}'],
@@ -99,6 +101,14 @@ export default defineConfig([
       '@typescript-eslint/no-unnecessary-condition': 'off',
       '@typescript-eslint/no-require-imports': 'off',
       'new-cap': 'off'
+    }
+  },
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: isDev ? 'off' : 'error'
+    },
+    rules: {
+      'no-console': isDev ? 'off' : 'error'
     }
   }
 ])

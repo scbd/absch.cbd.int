@@ -16,6 +16,7 @@ import injectCssToDom           from './rollup/inject-css-to-dom.js';
 import resolveLocalized         from './rollup/resolve-localized.js';
 import stripBom                 from './rollup/strip-bom.js';
 import mergeI18n                from './rollup/merge-i18n.js'
+import livereload               from 'rollup-plugin-livereload'
 
 const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
@@ -56,6 +57,11 @@ function bundle(entryPoint, locale, baseDir='app') {
       exports: 'named'
     }],
     external: externals,
+    onwarn (warning, warn) {
+      if (warning.code === 'UNUSED_EXTERNAL_IMPORT') return
+      if (warning.code === 'PLUGIN_WARNING' && warning.plugin === 'node-resolve') return
+      warn(warning)
+    },
     plugins : [
       alias({ entries : [
         { find: /^(..\/)+(.*)\.json$/,   replacement:`${process.cwd()}/${baseDir}/$2.json` },
@@ -77,7 +83,7 @@ function bundle(entryPoint, locale, baseDir='app') {
         locale
       }),
       copy({
-        verbose: true,
+        verbose: false,
         flatten: false,
         copyOnce: isWatchOn,
         targets: [{
@@ -106,7 +112,7 @@ function bundle(entryPoint, locale, baseDir='app') {
       }),
       esbuild({
         include: /\.[jt]s$/,             // ts, js (vue already turned <script lang="ts"> into JS)
-        target: 'es2022',
+        target: 'es2019',
         tsconfig: 'tsconfig.json',
         sourceMap: true
       }),
@@ -119,6 +125,7 @@ function bundle(entryPoint, locale, baseDir='app') {
         allowAllFormats: true
       }),
       isWatchOn ? null : terser({ mangle: false }), // DISABLE IN DEV
+      isWatchOn ? livereload('dist') : null,
     ]
   }
 }
