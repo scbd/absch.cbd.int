@@ -1,3 +1,12 @@
+declare module 'vue-i18n' {
+  import type { Ref } from 'vue'
+  export function useI18n (options?: unknown): {
+    locale: Ref<string>
+    t: (key: string, defaultValue?: unknown)=> string
+    mergeLocaleMessage: (locale: string, messages: unknown)=> void
+  }
+}
+
 declare module '~/services/composables/realm.js' {
   export function useRealm (): { realm: string; baseURL: string }
 }

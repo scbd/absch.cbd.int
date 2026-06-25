@@ -89,7 +89,6 @@ import {
   ref, computed, onMounted, shallowRef,
   onBeforeUnmount, type Ref, type ComputedRef
 } from 'vue'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
 import { useRealm } from '~/services/composables/realm.js'

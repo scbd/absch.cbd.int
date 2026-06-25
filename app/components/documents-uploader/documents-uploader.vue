@@ -39,7 +39,6 @@
   </div>
 </template>
 <script setup lang="ts">
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import LoadingOverlay from '../common/loading-overlay.vue'
 import {

@@ -64,7 +64,6 @@
 </template>
 
 <script setup lang="ts">
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import type { ParseStep } from '../framework/types'
 

@@ -57,7 +57,6 @@ import { THESAURUS } from '~/services/filters/constant'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 // TODO: Create use existing translations files if there are any
 import messages from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'

@@ -85,7 +85,6 @@
 </template>
 
 <script setup lang="ts">
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 
 defineProps<{ phase: string; fileName: string; rowCount: number }>()

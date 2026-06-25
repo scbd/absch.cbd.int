@@ -1,5 +1,4 @@
 import { reactive } from 'vue'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
 import { useRealm } from '~/services/composables/realm.js'
@@ -41,7 +40,6 @@ export function useBulkImport (documentType: DocumentTypes): {
   onConfirmErase: ()=> void
   onCancelConfirm: ()=> void
 } {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- useI18n is a JS module
   const { mergeLocaleMessage } = useI18n()
   const auth = useAuth()
   const { realm } = useRealm()
@@ -49,7 +47,6 @@ export function useBulkImport (documentType: DocumentTypes): {
   const { [documentType]: definition } = registry
 
   for (const [locale, msgs] of Object.entries(definition.messages)) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- mergeLocaleMessage is from JS module
     mergeLocaleMessage(locale, msgs)
   }
 

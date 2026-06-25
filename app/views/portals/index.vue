@@ -80,7 +80,6 @@ import ArticlesApi from '../../components/kb/article-api'
 import PortalsApi from '~/api/portals'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
 import { useRealm } from '~/services/composables/realm.js'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import loading from '~/components/common/loading.vue'
 // @ts-expect-error importing js file
