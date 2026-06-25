@@ -16,7 +16,7 @@
 		<div ng-if="isExpired(document.dateOfExpiry)" class="alert alert-warning" role="alert">
 			<h3>{{::('viewAbsPermitT.expiredMessage'|$translate)}}</h3>
 		</div>
-		//show obsolete field is new one is missing
+		<!-- //show obsolete field is new one is missing -->
 		<div ng-if="document.amendmentDescription|| document.amendmentsDescription" class="alert alert-info" role="alert">
 			<span class="fs-4 fw-bold">{{::('viewAbsPermitT.amendmentStatus'|$translate)}}</span>
 			<div class="km-pre" ng-bind-html="(document.amendmentDescription|| document.amendmentsDescription) | lstring:locale"></div>			
