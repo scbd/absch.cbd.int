@@ -9,6 +9,10 @@ import type {
 import type { LanguageCode } from '~/types/languages'
 import { languages, englishLanguages } from '~/app-data/un-languages'
 import { THESAURUS_TERMS } from '~/constants/thesaurus'
+// @ts-expect-error js module
+import { getCountries } from '~/api/countries'
+
+interface CountryRecord { code: string; name: Partial<Record<LanguageCode, string>> }
 
 export interface KeywordType {
   name: string
@@ -23,6 +27,8 @@ export interface Keywords {
 
 export abstract class Schema implements SchemaInstance {
   protected readonly language: LanguageCode
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly -- mutable by design: set once on first API call
+  private static countriesCachePromise: Promise<CountryRecord[]> | undefined = undefined
 
   constructor (
     protected readonly row: RawRow,
@@ -148,6 +154,21 @@ export abstract class Schema implements SchemaInstance {
     return typeof v === 'string' ? v : undefined
   }
 
+  static async resolveCountryIso (country: string | undefined): Promise<string | undefined> {
+    if (typeof country !== 'string' || country.trim() === '') return undefined
+    const value = country.trim()
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- external API returns unknown shape
+    Schema.countriesCachePromise ??= (getCountries as ()=> Promise<unknown>)() as Promise<CountryRecord[]>
+    const countries = await Schema.countriesCachePromise
+    let match: CountryRecord | undefined
+    if (/^[a-z]{2}$/i.test(value)) {
+      match = countries.find((c: CountryRecord) => c.code.toLowerCase() === value.toLowerCase())
+    } else {
+      match = countries.find((c: CountryRecord) => Object.values(c.name).some(n => n !== undefined && n.toLowerCase() === value.toLowerCase()))
+    }
+    return match?.code.toLowerCase()
+  }
+
   getLocaleValue (value: string | undefined | null): TextValue | undefined {
     if (typeof value !== 'string') return undefined
     return { [this.language]: value.trim() }
@@ -186,7 +207,7 @@ export abstract class Schema implements SchemaInstance {
     return { processedKeywords, otherKeywords }
   }
 
-  getContactSchema (contact: SupportingDocument<SubDocumentTypes> | undefined): SupportingDocument<SubDocumentTypes> {
+  async getContactSchema (contact: SupportingDocument<SubDocumentTypes> | undefined): Promise<SupportingDocument<SubDocumentTypes>> {
     if (contact === undefined) return {}
     const contactFields = contact
     const data: EmptyDocumentRequest = {
@@ -196,8 +217,8 @@ export abstract class Schema implements SchemaInstance {
         languages: [this.language]
       },
       type: contactFields.type,
-      government: Schema.toETerm(this.columnValue('country')?.toLowerCase()),
-      country: Schema.toETerm(contactFields.country?.toLowerCase()),
+      government: Schema.toETerm(await Schema.resolveCountryIso(this.columnValue('country'))),
+      country: Schema.toETerm(await Schema.resolveCountryIso(contactFields.country ?? undefined)),
       city: this.getLocaleValue(contactFields.city),
       address: this.getLocaleValue(contactFields.address),
       emails: typeof contactFields.email === 'string' ? [contactFields.email] : undefined
@@ -230,7 +251,7 @@ export abstract class Schema implements SchemaInstance {
         .map(identifier => ({ identifier }))
     }
 
-    const schema = this.getContactSchema(contact)
+    const schema = await this.getContactSchema(contact)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SupportingDocument has dynamic shape at runtime
     const { header: _h, ...body } = schema as unknown as Record<string, unknown>
     const existing_ = this.linkedRecords.find(rec => {

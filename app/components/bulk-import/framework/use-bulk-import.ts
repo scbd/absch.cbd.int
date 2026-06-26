@@ -86,14 +86,16 @@ export function useBulkImport (documentType: DocumentTypes): {
       await delay(VALIDATE_DELAY_MS)
 
       // Steps 3+4: validate & build preview
+      const validationErrors = definition.validateRows ? await definition.validateRows(rows) : []
+      const allErrors = [...sheetErrors, ...validationErrors]
       setStep('validateRows', 'done')
       setStep('buildPreview', 'active')
-      const preview = buildPreview(rows, definition.attributesMap, sheetErrors)
+      const preview = buildPreview(rows, definition.attributesMap, allErrors)
 
       setStep('buildPreview', 'done')
       await delay(PREVIEW_DELAY_MS)
 
-      Object.assign(state, { phase: 'preview', preview, rawRows: rows, errors: sheetErrors })
+      Object.assign(state, { phase: 'preview', preview, rawRows: rows, errors: allErrors })
     } catch (err: unknown) {
       // Reset so the user can try again — don't leave stuck in 'parsing'
       Object.assign(state, { phase: 'empty' })

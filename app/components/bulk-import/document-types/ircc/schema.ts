@@ -27,13 +27,15 @@ export class IrccSchema extends Schema {
       this.columnValue('keywords'), keywordsMap
     )
 
+    const countryIso = await Schema.resolveCountryIso(this.columnValue('country'))
+
     const data: EmptyDocumentRequest = {
       header: {
         identifier: Schema.generateId(),
         schema: 'absPermit',
         languages: [this.language]
       },
-      government: Schema.toETerm(this.columnValue('country')?.toLowerCase()),
+      government: Schema.toETerm(countryIso),
       absCNA: Schema.toEReference(absCNAIdentifier),
       title: this.getLocaleValue(this.columnValue('permitEquivalent')),
       dateOfIssuance: Schema.parseDate(this.columnValue('dateOfIssuance')),

@@ -123,6 +123,7 @@ export interface DocumentTypeDefinition {
   headerRows: number[]
   pinnedColumns?: string[]
   columnGroups?: ColumnGroup[]
+  validateRows?: (rows: RawRow[])=> Promise<SheetError[]>
 }
 
 export interface SchemaInstance {
