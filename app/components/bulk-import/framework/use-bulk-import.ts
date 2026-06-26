@@ -96,10 +96,8 @@ export function useBulkImport (documentType: DocumentTypes): {
       await delay(PREVIEW_DELAY_MS)
 
       Object.assign(state, { phase: 'preview', preview, rawRows: rows, errors: allErrors })
-    } catch (err: unknown) {
-      // Reset so the user can try again — don't leave stuck in 'parsing'
-      Object.assign(state, { phase: 'empty' })
-      throw err
+    } catch {
+      Object.assign(state, { phase: 'parse-error' })
     }
   }
 
@@ -112,21 +110,25 @@ export function useBulkImport (documentType: DocumentTypes): {
 
     Object.assign(state, { phase: 'importing', preview, rawRows, progress })
 
-    const api = getApi()
+    try {
+      const api = getApi()
 
-    const { documents, linkedRecords } = await buildDocuments(rawRows, definition, api)
+      const { documents, linkedRecords } = await buildDocuments(rawRows, definition, api)
 
-    const { imported, failed } = await submitDocuments(
-      documents,
-      linkedRecords,
-      api,
-      (p: RowProgress) => {
-        const idx = progress.findIndex(r => r.rowIndex === p.rowIndex)
-        if (idx >= 0) progress[idx] = p
-      }
-    )
+      const { imported, failed } = await submitDocuments(
+        documents,
+        linkedRecords,
+        api,
+        (p: RowProgress) => {
+          const idx = progress.findIndex(r => r.rowIndex === p.rowIndex)
+          if (idx >= 0) progress[idx] = p
+        }
+      )
 
-    Object.assign(state, { phase: 'done', imported, failed })
+      Object.assign(state, { phase: 'done', imported, failed })
+    } catch {
+      Object.assign(state, { phase: 'import-error' })
+    }
   }
 
   function onConfirmImport (): void {
@@ -143,7 +145,7 @@ export function useBulkImport (documentType: DocumentTypes): {
   function onClose (): void {
     const { phase } = state as UploaderState
     if (phase === 'importing') return
-    if (phase === 'empty' || phase === 'done') {
+    if (phase === 'empty' || phase === 'done' || phase === 'parse-error' || phase === 'import-error') {
       Object.assign(state, { phase: 'empty' })
     } else {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- non-importing/empty/done phases all have errors+preview

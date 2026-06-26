@@ -25,12 +25,12 @@
     <div class="bi-head__ttl">
       <h1>{{ t('title') }}</h1>
       <div class="bi-head__sub">
-        <span v-if="phase === 'empty'">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
+        <span v-if="phase === 'empty' || phase === 'parse-error'">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
         <span v-else-if="phase === 'parsing'">{{ t('bulkImport.reading', 'Reading file…') }}</span>
         <span v-else>{{ t('bulkImport.previewReady', 'Review the records below before importing') }}</span>
       </div>
       <div
-        v-if="phase !== 'empty' && phase !== 'parsing'"
+        v-if="phase !== 'empty' && phase !== 'parsing' && phase !== 'parse-error'"
         class="bi-file-chip"
       >
         <svg

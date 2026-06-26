@@ -145,3 +145,5 @@ export type UploaderState =
   | { phase: 'confirm-erase'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'importing'; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
   | { phase: 'done'; imported: number; failed: number }
+  | { phase: 'parse-error' }
+  | { phase: 'import-error' }

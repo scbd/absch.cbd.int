@@ -7,6 +7,8 @@
   "ready": "Ready to import",
   "hasErrors": "{affected} of {total} rows can't be imported yet — {parts}.",
   "doneMsg": "Done — {imported} created, {failed} failed.",
+  "parseError": "Could not read this file. Please check it's a valid Excel file and try again.",
+  "importError": "Something went wrong during import. Please close and try again.",
   "confirmMsg": "Create draft records for all rows?",
   "confirm": "Confirm",
   "closeConfirm": "Close and discard all loaded data?",

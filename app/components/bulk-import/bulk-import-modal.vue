@@ -30,8 +30,38 @@
       />
 
       <div class="bi-body">
+        <div
+          v-if="state.phase === 'parse-error'"
+          class="bi-parse-error"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          ><circle
+            cx="12"
+            cy="12"
+            r="10"
+          /><line
+            x1="12"
+            y1="8"
+            x2="12"
+            y2="12"
+          /><line
+            x1="12"
+            y1="16"
+            x2="12.01"
+            y2="16"
+          /></svg>
+          {{ t('bulkImport.parseError') }}
+        </div>
+
         <BulkImportDropzone
-          v-if="state.phase === 'empty'"
+          v-if="state.phase === 'empty' || state.phase === 'parse-error'"
           @file="onFilePicked"
         />
 
@@ -59,6 +89,16 @@
           <i class="fa fa-check-circle text-success bi-done-icon" />
           <p class="mt-3">
             {{ t('bulkImport.doneMsg', doneState) }}
+          </p>
+        </div>
+
+        <div
+          v-else-if="state.phase === 'import-error'"
+          class="bi-loading"
+        >
+          <i class="fa fa-exclamation-circle text-danger bi-done-icon" />
+          <p class="mt-3">
+            {{ t('bulkImport.importError') }}
           </p>
         </div>
       </div>
@@ -393,6 +433,12 @@ const requiredKeys = computed<Set<string>>(() => {
 }
 .bi-body {
   flex: 1; overflow: hidden; display: flex; flex-direction: column;
+}
+.bi-parse-error {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; margin: 12px 20px 0;
+  background: #fff3f3; border: 1px solid #f5c6c6; border-radius: 8px;
+  font-size: 13px; color: var(--danger);
 }
 .bi-loading {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
