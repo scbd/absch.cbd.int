@@ -2,6 +2,7 @@
   <div class="bi-confirm-overlay">
     <div class="bi-confirm">
       <p>{{ message }}</p>
+      <slot />
       <div class="mt-3 d-flex gap-2 justify-content-end">
         <button
           class="btn btn-secondary"
@@ -43,4 +44,9 @@ const { t } = useI18n()
   background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
   padding: 24px 32px; max-width: 400px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,.12);
 }
+:deep(.bi-confirm-counts) {
+  list-style: none; padding: 0; margin: 0 0 4px;
+  font-size: 13px; color: #555; text-align: left;
+}
+:deep(.bi-confirm-counts li) { padding: 3px 0; }
 </style>

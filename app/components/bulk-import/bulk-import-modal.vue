@@ -154,10 +154,10 @@
           <button
             type="button"
             class="bi-btn-orange"
-            :disabled="hasErrors"
-            @click="onConfirmImport"
+            :disabled="hasErrors || isBuilding"
+            @click="onClickConfirmImport"
           >
-            {{ t('bulkImport.createDrafts') }}
+            {{ isBuilding ? t('bulkImport.building') : t('bulkImport.createDrafts') }}
           </button>
         </template>
 
@@ -176,7 +176,14 @@
         confirm-class="btn-primary bi-btn--orange"
         @confirm="onImport"
         @cancel="onCancelConfirm"
-      />
+      >
+        <ul class="bi-confirm-counts">
+          <li>{{ t('bulkImport.confirmDraftCount', { n: state.draftCount }) }}</li>
+          <li v-if="state.linkedCount > 0">
+            {{ t('bulkImport.confirmLinkedCount', { n: state.linkedCount }) }}
+          </li>
+        </ul>
+      </BulkImportConfirmDialog>
 
       <BulkImportConfirmDialog
         v-if="state.phase === 'confirm-close'"
@@ -241,6 +248,13 @@ function onForceClose () {
 }
 function onConfirmErase () {
   _onConfirmErase()
+}
+
+const isBuilding = ref(false)
+async function onClickConfirmImport () {
+  isBuilding.value = true
+  await onConfirmImport()
+  isBuilding.value = false
 }
 
 // -------------------------------------------------------------------------

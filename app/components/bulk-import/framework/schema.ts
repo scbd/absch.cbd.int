@@ -28,7 +28,6 @@ export interface Keywords {
 
 export abstract class Schema implements SchemaInstance {
   protected readonly language: LanguageCode
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly -- mutable by design: set once on first API call
   private static countriesCachePromise: Promise<CountryRecord[]> | undefined = undefined
 
   constructor (

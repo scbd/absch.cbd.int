@@ -143,7 +143,7 @@ export type UploaderState =
   | { phase: 'empty' }
   | { phase: 'parsing'; fileName: string; steps: ParseStep[] }
   | { phase: 'preview'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'confirm-import'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
+  | { phase: 'confirm-import'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[]; draftCount: number; linkedCount: number; documents: DocumentRequest[]; linkedRecords: LinkedRecordStore }
   | { phase: 'confirm-close'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'confirm-erase'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'importing'; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }

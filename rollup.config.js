@@ -17,6 +17,7 @@ import resolveLocalized         from './rollup/resolve-localized.js';
 import stripBom                 from './rollup/strip-bom.js';
 import mergeI18n                from './rollup/merge-i18n.js'
 import livereload               from 'rollup-plugin-livereload'
+import devErrorOverlay          from './rollup/dev-error-overlay.js'
 
 const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
@@ -126,6 +127,7 @@ function bundle(entryPoint, locale, baseDir='app') {
       }),
       isWatchOn ? null : terser({ mangle: false }), // DISABLE IN DEV
       isWatchOn ? livereload('dist') : null,
+      isWatchOn ? devErrorOverlay() : null,
     ]
   }
 }

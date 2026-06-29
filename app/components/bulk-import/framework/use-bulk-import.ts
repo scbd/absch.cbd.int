@@ -31,7 +31,7 @@ export function useBulkImport (documentType: DocumentTypes): {
   state: UploaderState
   onFileChange: (file: File)=> Promise<void>
   onImport: ()=> Promise<void>
-  onConfirmImport: ()=> void
+  onConfirmImport: ()=> Promise<void>
   onClose: ()=> void
   onForceClose: ()=> void
   onClear: ()=> void
@@ -81,7 +81,10 @@ export function useBulkImport (documentType: DocumentTypes): {
       await delay(VALIDATE_DELAY_MS)
 
       // Steps 3+4: validate & build preview
-      const validationErrors = definition.validateRows ? await definition.validateRows(rows, tokenReader) : []
+      let validationErrors: SheetError[] = []
+      if (definition.validateRows !== undefined) {
+        validationErrors = await definition.validateRows(rows, tokenReader)
+      }
       const allErrors = [...sheetErrors, ...validationErrors]
       setStep('validateRows', 'done')
       setStep('buildPreview', 'active')
@@ -106,7 +109,7 @@ export function useBulkImport (documentType: DocumentTypes): {
     Object.assign(state, { phase: 'importing', preview, rawRows, progress })
 
     try {
-      const { documents, linkedRecords } = await buildDocuments(rawRows, definition, tokenReader)
+      const { documents, linkedRecords } = current
 
       const { imported, failed } = await submitDocuments(
         documents,
@@ -124,14 +127,20 @@ export function useBulkImport (documentType: DocumentTypes): {
     }
   }
 
-  function onConfirmImport (): void {
+  async function onConfirmImport (): Promise<void> {
     if (state.phase !== 'preview') return
     const current = state as Extract<UploaderState, { phase: 'preview' }>
+    const { documents, linkedRecords } = await buildDocuments(current.rawRows, definition, tokenReader)
+    if (state.phase !== 'preview') return
     Object.assign(state, {
       phase: 'confirm-import',
       preview: current.preview,
       rawRows: current.rawRows,
-      errors: current.errors
+      errors: current.errors,
+      draftCount: current.rawRows.length,
+      linkedCount: linkedRecords.length,
+      documents,
+      linkedRecords
     })
   }
 
