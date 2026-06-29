@@ -1,5 +1,5 @@
 import type {
-  RawRow, LinkedRecordStore, ApiClient, DocBuildError, DocumentTypeDefinition
+  RawRow, LinkedRecordStore, TokenReader, DocBuildError, DocumentTypeDefinition
 } from './types'
 import type { DocumentRequest } from '~/types/common/documents'
 import { Schema } from './schema'
@@ -13,7 +13,7 @@ export interface BuildDocumentsResult {
 export async function buildDocuments (
   rows: RawRow[],
   definition: DocumentTypeDefinition,
-  api: ApiClient
+  tokenReader: TokenReader
 ): Promise<BuildDocumentsResult> {
   const linkedRecords: LinkedRecordStore = []
   const documents: DocumentRequest[] = []
@@ -22,7 +22,7 @@ export async function buildDocuments (
   await Promise.all(
     rows.map(async (row, rowIndex) => {
       try {
-        const instance = new definition.Schema(row, linkedRecords, api, definition.getLanguage(row))
+        const instance = new definition.Schema(row, linkedRecords, tokenReader, definition.getLanguage(row))
         const doc = await instance.buildSchemaDocument()
         documents[rowIndex] = doc
       } catch (err: unknown) {

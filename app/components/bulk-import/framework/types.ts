@@ -1,5 +1,10 @@
 import type { DocumentRequest, SubDocumentStore } from '~/types/common/documents'
-import type { KmDraftsApi } from '~/api/km-document'
+export type TokenReader = ()=> Promise<string>
+
+export interface ApiOptions {
+  tokenReader: TokenReader
+  realm: string
+}
 
 // ---------------------------------------------------------------------------
 // Raw sheet data (straight from read-excel-file, before any mapping)
@@ -114,7 +119,7 @@ export interface DocumentTypeDefinition {
   Schema: new (
     row: RawRow,
     linkedRecords: LinkedRecordStore,
-    api: ApiClient,
+    tokenReader: TokenReader,
     rawLanguage: string,
   )=> SchemaInstance
   getLanguage: (row: RawRow)=> string
@@ -123,14 +128,12 @@ export interface DocumentTypeDefinition {
   headerRows: number[]
   pinnedColumns?: string[]
   columnGroups?: ColumnGroup[]
-  validateRows?: (rows: RawRow[])=> Promise<SheetError[]>
+  validateRows?: (rows: RawRow[], tokenReader: TokenReader)=> Promise<SheetError[]>
 }
 
 export interface SchemaInstance {
   buildSchemaDocument: ()=> Promise<DocumentRequest>
 }
-
-export type ApiClient = KmDraftsApi
 
 // ---------------------------------------------------------------------------
 // Uploader state machine

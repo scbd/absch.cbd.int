@@ -1,13 +1,11 @@
 import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-import { useRealm } from '~/services/composables/realm.js'
-import { KmDraftsApi } from '~/api/km-document'
 import { readSheet } from './read-sheet'
 import { buildPreview } from './build-preview'
 import { buildDocuments } from './build-documents'
 import { submitDocuments } from './submit-documents'
-import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep, SheetError, PreviewData } from './types'
+import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep, SheetError, PreviewData, TokenReader } from './types'
 import { registry } from '../registry'
 
 const PARSE_MIN_DURATION_MS = 800
@@ -42,8 +40,6 @@ export function useBulkImport (documentType: DocumentTypes): {
 } {
   const { mergeLocaleMessage } = useI18n()
   const auth = useAuth()
-  const { realm } = useRealm()
-
   const { [documentType]: definition } = registry
 
   for (const [locale, msgs] of Object.entries(definition.messages)) {
@@ -52,9 +48,8 @@ export function useBulkImport (documentType: DocumentTypes): {
 
   const state = reactive<UploaderState>({ phase: 'empty' })
 
-  function getApi (): KmDraftsApi {
-    return new KmDraftsApi({ tokenReader: async () => await auth.token(), realm })
-  }
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- token is always present when the user is authenticated
+  const tokenReader: TokenReader = async () => (await auth.token())!
 
   async function onFileChange (file: File): Promise<void> {
     const steps: ParseStep[] = [
@@ -86,7 +81,7 @@ export function useBulkImport (documentType: DocumentTypes): {
       await delay(VALIDATE_DELAY_MS)
 
       // Steps 3+4: validate & build preview
-      const validationErrors = definition.validateRows ? await definition.validateRows(rows) : []
+      const validationErrors = definition.validateRows ? await definition.validateRows(rows, tokenReader) : []
       const allErrors = [...sheetErrors, ...validationErrors]
       setStep('validateRows', 'done')
       setStep('buildPreview', 'active')
@@ -111,14 +106,12 @@ export function useBulkImport (documentType: DocumentTypes): {
     Object.assign(state, { phase: 'importing', preview, rawRows, progress })
 
     try {
-      const api = getApi()
-
-      const { documents, linkedRecords } = await buildDocuments(rawRows, definition, api)
+      const { documents, linkedRecords } = await buildDocuments(rawRows, definition, tokenReader)
 
       const { imported, failed } = await submitDocuments(
         documents,
         linkedRecords,
-        api,
+        tokenReader,
         (p: RowProgress) => {
           const idx = progress.findIndex(r => r.rowIndex === p.rowIndex)
           if (idx >= 0) progress[idx] = p

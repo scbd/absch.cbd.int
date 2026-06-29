@@ -9,28 +9,28 @@ const irccAttributesMap: AttributesMap = {
   dateOfExpiry: { column: '5', required: true, translationKey: 'dateOfExpiry' }, // F
   provider: {
     schema: {
-      type: { column: '6', required: true, translationKey: 'type' }, // G
+      type: { column: '6', translationKey: 'type' }, // G
       existing: { column: '7', translationKey: 'uniqueIdentifier' }, // H
-      orgName: { column: '8', required: true, translationKey: 'organizationFullName' }, // I
-      acronym: { column: '9', required: false, translationKey: 'acronym' }, // J
+      orgName: { column: '8', translationKey: 'organizationFullName' }, // I
+      acronym: { column: '9', translationKey: 'acronym' }, // J
       address: { column: '10', translationKey: 'address' }, // K
       city: { column: '11', translationKey: 'city' }, // L
-      country: { column: '12', required: true, translationKey: 'country' }, // M
-      email: { column: '13', required: true, translationKey: 'emails' } // N
+      country: { column: '12', translationKey: 'country' }, // M
+      email: { column: '13', translationKey: 'emails' } // N
     },
     translationKey: 'theProvider'
   },
   pic: {
     schema: {
       consent: { column: '14', translationKey: 'picGranted' }, // O
-      type: { column: '15', required: true, translationKey: 'type' }, // P
+      type: { column: '15', translationKey: 'type' }, // P
       existing: { column: '16', translationKey: 'uniqueIdentifier' }, // Q
-      orgName: { column: '17', required: true, translationKey: 'firstName' }, // R
-      acronym: { column: '18', required: false, translationKey: 'acronym' }, // S
+      orgName: { column: '17', translationKey: 'firstName' }, // R
+      acronym: { column: '18', translationKey: 'acronym' }, // S
       address: { column: '19', translationKey: 'address' }, // T
       city: { column: '20', translationKey: 'city' }, // U
-      country: { column: '21', required: true, translationKey: 'country' }, // V
-      email: { column: '22', required: true, translationKey: 'emails' } // W
+      country: { column: '21', translationKey: 'country' }, // V
+      email: { column: '22', translationKey: 'emails' } // W
     },
     translationKey: 'entitiesConfidential'
   },

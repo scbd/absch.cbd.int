@@ -1,5 +1,6 @@
-import type { LinkedRecordStore, ApiClient, RowProgress } from './types'
+import type { LinkedRecordStore, TokenReader, RowProgress } from './types'
 import type { DocumentRequest } from '~/types/common/documents'
+import { KmDraftsApi } from '~/api/km-document'
 
 export interface SubmitResult {
   imported: number
@@ -8,7 +9,7 @@ export interface SubmitResult {
 
 async function publishLinkedRecords (
   linkedRecords: LinkedRecordStore,
-  api: ApiClient
+  api: KmDraftsApi
 ): Promise<Set<string>> {
   const failedIds = new Set<string>()
   for (const record of linkedRecords) {
@@ -42,9 +43,10 @@ function referencesFailedLinkedRecord (doc: DocumentRequest, failedIds: Set<stri
 export async function submitDocuments (
   documents: DocumentRequest[],
   linkedRecords: LinkedRecordStore,
-  api: ApiClient,
+  tokenReader: TokenReader,
   onProgress: (progress: RowProgress)=> void
 ): Promise<SubmitResult> {
+  const api = new KmDraftsApi({ tokenReader })
   const failedLinkedIds = await publishLinkedRecords(linkedRecords, api)
 
   let imported = 0

@@ -1,13 +1,62 @@
-import type { DocumentTypeDefinition, RawRow, SheetError } from '../../framework/types'
+import type { DocumentTypeDefinition, RawRow, SheetError, TokenReader } from '../../framework/types'
+import { KmDocumentsApi } from '~/api/km-document'
 import { Schema } from '../../framework/schema'
 import { IrccSchema } from './schema'
 import attributesMap from './attributes-map'
 import irccMessages from '~/app-text/components/bulk-import/document-types/ircc.json'
 
 const COUNTRY_COLUMNS = ['country', 'provider.country', 'pic.country']
+const CONTACT_PREFIXES = ['provider', 'pic'] as const
+const CONTACT_DETAIL_FIELDS = ['orgName', 'acronym', 'address', 'city', 'country', 'email'] as const
+const CONTACT_REQUIRED_FIELDS = ['type', 'orgName', 'country', 'email'] as const
 
-async function validateRows (rows: RawRow[]): Promise<SheetError[]> {
+const EXISTING_ID_REGEXP = /^[a-z]+-[a-z]+-[a-z]+-(?<documentId>\d+)(?:-\d{1,3})?$/i
+
+async function validateExistingIds (existing: string, column: string, rowIndex: number, api: KmDocumentsApi): Promise<SheetError[]> {
   const errors: SheetError[] = []
+  for (const uid of existing.split(',').map(s => s.trim()).filter(Boolean)) {
+    const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
+    if (documentId === undefined) {
+      errors.push({ row: rowIndex, column, level: 'error', message: `Invalid contact ID format: "${uid}"`, value: uid })
+      continue
+    }
+    // eslint-disable-next-line no-await-in-loop -- sequential is fine; IDs per row are typically 1
+    const exists = await api.exists(documentId).catch(() => false)
+    if (!exists) {
+      errors.push({ row: rowIndex, column, level: 'error', message: `Contact ID not found: "${uid}"`, value: uid })
+    }
+  }
+  return errors
+}
+
+async function validateContact (
+  row: RawRow,
+  rowIndex: number,
+  prefix: typeof CONTACT_PREFIXES[number],
+  api: KmDocumentsApi
+): Promise<SheetError[]> {
+  // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
+  const existing = row[`${prefix}.existing`]
+  const hasExisting = typeof existing === 'string' && existing.trim() !== ''
+
+  if (!hasExisting) {
+    return CONTACT_REQUIRED_FIELDS
+      .filter(field => Schema.isEmpty(row[`${prefix}.${field}`]))
+      .map(field => ({ row: rowIndex, column: `${prefix}.${field}`, level: 'error' as const, message: 'This field is required' }))
+  }
+
+  const column = `${prefix}.existing`
+  const hasContactInfo = CONTACT_DETAIL_FIELDS.some(field => !Schema.isEmpty(row[`${prefix}.${field}`]))
+  if (hasContactInfo) {
+    return [{ row: rowIndex, column, level: 'error', message: 'Provide either an existing contact ID or contact details, not both' }]
+  }
+
+  return await validateExistingIds(existing, column, rowIndex, api)
+}
+
+async function validateRows (rows: RawRow[], tokenReader: TokenReader): Promise<SheetError[]> {
+  const errors: SheetError[] = []
+  const api = new KmDocumentsApi({ tokenReader })
 
   await Promise.all(rows.map(async (row, rowIndex) => {
     await Promise.all(COUNTRY_COLUMNS.map(async (key) => {
@@ -18,6 +67,9 @@ async function validateRows (rows: RawRow[]): Promise<SheetError[]> {
         errors.push({ row: rowIndex, column: key, level: 'error', message: `Unrecognized country: "${value}"`, value })
       }
     }))
+
+    const contactErrors = await Promise.all(CONTACT_PREFIXES.map(async prefix => await validateContact(row, rowIndex, prefix, api)))
+    errors.push(...contactErrors.flat())
   }))
 
   return errors

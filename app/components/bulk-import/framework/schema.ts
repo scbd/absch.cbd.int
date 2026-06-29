@@ -1,6 +1,7 @@
 import type {
-  RawRow, LinkedRecordStore, ApiClient, SchemaInstance
+  RawRow, LinkedRecordStore, TokenReader, SchemaInstance
 } from './types'
+import { KmDraftsApi } from '~/api/km-document'
 import type {
   DocumentRequest, EmptyDocumentRequest, DocumentValue,
   TextValue, SubDocument, ELink, UsageKey, SupportingDocument,
@@ -33,12 +34,14 @@ export abstract class Schema implements SchemaInstance {
   constructor (
     protected readonly row: RawRow,
     protected readonly linkedRecords: LinkedRecordStore,
-    // api client passed here because of token fn is fetched from composable
-    protected readonly api: ApiClient,
+    tokenReader: TokenReader,
     rawLanguage: string
   ) {
     this.language = Schema.getLanguageCode(rawLanguage)
+    this.api = new KmDraftsApi({ tokenReader })
   }
+
+  protected readonly api: KmDraftsApi
 
   abstract buildSchemaDocument (): Promise<DocumentRequest>
 
@@ -160,12 +163,10 @@ export abstract class Schema implements SchemaInstance {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- external API returns unknown shape
     Schema.countriesCachePromise ??= (getCountries as ()=> Promise<unknown>)() as Promise<CountryRecord[]>
     const countries = await Schema.countriesCachePromise
-    let match: CountryRecord | undefined
-    if (/^[a-z]{2}$/i.test(value)) {
-      match = countries.find((c: CountryRecord) => c.code.toLowerCase() === value.toLowerCase())
-    } else {
-      match = countries.find((c: CountryRecord) => Object.values(c.name).some(n => n !== undefined && n.toLowerCase() === value.toLowerCase()))
-    }
+    const match: CountryRecord | undefined = /^[a-z]{2}$/i.test(value)
+      ? countries.find((c: CountryRecord) => c.code.toLowerCase() === value.toLowerCase())
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Object.values on Partial<Record> can yield undefined at runtime
+      : countries.find((c: CountryRecord) => Object.values(c.name).some(n => n?.toLowerCase() === value.toLowerCase()))
     return match?.code.toLowerCase()
   }
 
@@ -243,12 +244,15 @@ export abstract class Schema implements SchemaInstance {
 
     const { existing } = contact
     if (typeof existing === 'string' && existing.trim().length > 0) {
+      const hasContactInfo = (['orgName', 'acronym', 'address', 'city', 'country', 'email', 'type', 'consent'] as const)
+        .some(field => !Schema.isEmpty(contact[field]))
+      if (hasContactInfo) {
+        throw new Error('Provide either an existing contact ID or contact details, not both')
+      }
       const ids = await Promise.all(
         existing.split(',').map(async uid => await this.resolveDocumentIdentifier(uid.trim()))
       )
-      return ids
-        .filter((id): id is string => typeof id === 'string' && id.length > 0)
-        .map(identifier => ({ identifier }))
+      return ids.map(identifier => ({ identifier }))
     }
 
     const schema = await this.getContactSchema(contact)
@@ -275,13 +279,15 @@ export abstract class Schema implements SchemaInstance {
   protected async resolveDocumentIdentifier (uniqueId: string): Promise<string> {
     const regExp = /^(?<p1>[a-z]+)-(?<p2>[a-z]+)-(?<p3>[a-z]+)-(?<p4>\d+)-(?<p5>\d+)$/i
     const match = regExp.exec(uniqueId)
-    if (match === null) return ''
-
-    if (match[4] === undefined || match[5] === undefined) return ''
+    if (match?.[4] === undefined || match[5] === undefined) {
+      throw new Error(`Invalid existing ID format: "${uniqueId}"`)
+    }
     const [,,, , documentId] = match
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- external API returns unknown shape
     const data = await this.api.getDocument(documentId) as Record<string, { identifier: string }> | null
-    if (data === null || typeof data !== 'object') return ''
+    if (data === null || typeof data !== 'object') {
+      throw new Error(`Existing ID "${uniqueId}" could not be found`)
+    }
     return `${data['header']?.identifier ?? ''}@${match[5]}`
   }
 }

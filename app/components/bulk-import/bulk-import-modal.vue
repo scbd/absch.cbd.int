@@ -331,7 +331,7 @@ const banner = computed(() => {
 const bannerErrors = computed<BannerErrorGroup[]>(() => {
   const groups = new Map<number, BannerErrorGroup>()
   for (const e of sheetErrors.value) {
-    if (!groups.has(e.row)) groups.set(e.row, { row: e.row, worstLevel: e.level, items: [] })
+    if (!groups.has(e.row)) groups.set(e.row, { row: e.row + 1, worstLevel: e.level, items: [] })
     const g = groups.get(e.row)
     if (g === undefined) continue
     if (e.level === 'error') g.worstLevel = 'error'
