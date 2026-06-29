@@ -1,10 +1,15 @@
 <template>
   <div
     v-if="banner"
-    class="bi-banner"
+    class="d-flex gap-3 align-items-start small border-bottom flex-shrink-0 overflow-hidden"
     :class="banner.level === 'ok' ? 'bi-banner--ok' : 'bi-banner--danger'"
+    style="padding: 12px 20px; flex: 0 1 auto;"
   >
-    <div class="bi-banner__ic">
+    <div
+      class="d-flex align-items-center justify-content-center flex-shrink-0"
+      :class="banner.level === 'ok' ? 'bi-ic--ok' : 'bi-ic--danger'"
+      style="width: 22px; height: 22px; margin-top: 1px;"
+    >
       <svg
         v-if="banner.level === 'ok'"
         width="16"
@@ -40,29 +45,41 @@
         y2="16"
       /></svg>
     </div>
-    <div class="bi-banner__body">
-      <div class="bi-banner__head">
+    <div
+      class="d-flex flex-column flex-grow-1 overflow-hidden"
+      style="min-height: 0;"
+    >
+      <div
+        class="fw-semibold"
+        :class="banner.level === 'ok' ? 'bi-head--ok' : 'bi-head--danger'"
+      >
         {{ banner.text }}
       </div>
       <ul
         v-if="bannerErrors.length"
-        class="bi-banner__list"
+        class="list-unstyled mt-2 mb-0 p-0 d-flex flex-column gap-1"
+        style="max-height: 180px; overflow-y: auto;"
       >
         <li
           v-for="group in bannerErrors"
           :key="group.row"
+          class="d-flex align-items-start gap-2"
         >
           <span
-            class="bi-rk"
+            class="font-monospace fw-bold rounded-1 border flex-shrink-0"
             :class="group.worstLevel === 'error' ? 'bi-rk--error' : 'bi-rk--warn'"
+            style="font-size: 11.5px; padding: 1px 6px; white-space: nowrap; margin-top: 1px;"
           >
             Row {{ group.row }}
           </span>
-          <span class="bi-rk-items">
+          <span
+            class="d-flex flex-column"
+            style="gap: 2px;"
+          >
             <span
               v-for="(item, i) in group.items"
               :key="i"
-              class="bi-rk-item"
+              class="d-block"
             >
               <b>{{ item.fieldLabel }}</b> — {{ item.message }}
             </span>
@@ -71,7 +88,8 @@
       </ul>
       <div
         v-if="bannerErrors.length"
-        class="bi-banner__hint"
+        class="mt-2 small"
+        :class="banner.level === 'ok' ? 'bi-hint--ok' : 'bi-hint--warn'"
       >
         {{ t('bulkImport.fixHint', 'Fix the highlighted cells in your Excel file and upload it again. Rows without issues are kept.') }}
       </div>
@@ -103,40 +121,14 @@ const { t } = useI18n()
 </script>
 
 <style scoped>
-.bi-banner {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding: 12px 20px; font-size: 13px;
-  border-bottom: 1px solid transparent;
-  min-height: 0; overflow: hidden;
-  flex: 0 1 auto;
-}
-.bi-banner__body {
-  display: flex; flex-direction: column; min-height: 0; flex: 1; overflow: hidden;
-}
 .bi-banner--ok     { background: var(--ok-50);     border-color: #c3e0cc; }
 .bi-banner--danger { background: var(--danger-50); border-color: var(--danger-line); }
-.bi-banner__ic {
-  width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px;
-  display: flex; align-items: center; justify-content: center;
-}
-.bi-banner--ok .bi-banner__ic { color: var(--ok); }
-.bi-banner--danger .bi-banner__ic { color: var(--danger); }
-.bi-banner__head { font-weight: 600; color: inherit; line-height: 1.4; }
-.bi-banner--ok .bi-banner__head { color: #1a5c35; }
-.bi-banner--danger .bi-banner__head { color: #a8322e; }
-.bi-banner__list {
-  margin: 6px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px;
-  flex: 1; overflow-y: auto; min-height: 0;
-}
-.bi-banner__list li { display: flex; align-items: flex-start; gap: 7px; font-size: 12.5px; color: #4a2828; }
-.bi-rk {
-  font-family: monospace; font-size: 11.5px; font-weight: 600; border-radius: 4px;
-  padding: 1px 6px; white-space: nowrap; flex-shrink: 0; margin-top: 1px;
-}
-.bi-rk--error { background: #fff; border: 1px solid var(--danger-line); color: #a8322e; }
-.bi-rk--warn  { background: #fff; border: 1px solid var(--warn-line);   color: #7a5010; }
-.bi-rk-items { display: flex; flex-direction: column; gap: 2px; }
-.bi-rk-item { display: block; }
-.bi-banner__hint { margin-top: 8px; font-size: 12px; color: #7a5010; }
-.bi-banner--ok .bi-banner__hint { color: #1a5c35; }
+.bi-ic--ok     { color: var(--ok); }
+.bi-ic--danger { color: var(--danger); }
+.bi-head--ok     { color: #1a5c35; }
+.bi-head--danger { color: #a8322e; }
+.bi-rk--error { border-color: var(--danger-line) !important; color: #a8322e; }
+.bi-rk--warn  { border-color: var(--warn-line) !important;   color: #7a5010; }
+.bi-hint--ok   { color: #1a5c35; }
+.bi-hint--warn { color: #7a5010; }
 </style>

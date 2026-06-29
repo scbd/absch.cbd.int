@@ -1,6 +1,9 @@
 <template>
-  <div class="bi-parsing">
-    <div class="bi-parsing__icon">
+  <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center gap-2 p-5">
+    <div
+      class="d-flex align-items-center justify-content-center rounded-3 mb-1"
+      style="width: 56px; height: 56px; background: var(--ok-50); color: var(--ok);"
+    >
       <svg
         width="26"
         height="26"
@@ -22,26 +25,43 @@
         y2="17"
       /><polyline points="10 9 9 9 8 9" /></svg>
     </div>
-    <div class="bi-parsing__name">
+    <div
+      class="fw-bold"
+      style="font-size: 15px; color: #1a2e3b;"
+    >
       {{ fileName }}
     </div>
-    <div class="bi-parsing__sub">
+    <div class="small text-muted">
       {{ t('bulkImport.parsingTitle', 'Reading and validating your file...') }}
     </div>
-    <div class="bi-parsing__bar-track">
+    <div
+      class="progress mt-2"
+      style="width: min(440px, 90%); height: 7px;"
+    >
       <div
-        class="bi-parsing__bar-fill"
-        :style="{ width: progress + '%' }"
+        class="progress-bar"
+        role="progressbar"
+        :style="{ width: progress + '%', background: 'var(--orange)' }"
+        :aria-valuenow="progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
       />
     </div>
-    <ul class="bi-parsing__steps">
+    <ul
+      class="list-unstyled m-0 mt-1 p-0 d-flex flex-column gap-2"
+      style="width: min(440px, 90%);"
+    >
       <li
         v-for="step in steps"
         :key="step.key"
-        class="bi-parsing__step"
-        :class="`bi-parsing__step--${step.status}`"
+        class="bi-step d-flex align-items-center gap-2 small"
+        :class="`bi-step--${step.status}`"
       >
-        <span class="bi-parsing__step-ic">
+        <span
+          class="d-flex align-items-center justify-content-center rounded-circle flex-shrink-0"
+          :class="step.status === 'done' ? 'bg-success text-white' : 'bi-step-ic--ring'"
+          style="width: 20px; height: 20px;"
+        >
           <svg
             v-if="step.status === 'done'"
             width="12"
@@ -54,7 +74,8 @@
           ><polyline points="20 6 9 17 4 12" /></svg>
           <span
             v-else-if="step.status === 'active'"
-            class="bi-parsing__spinner"
+            class="spinner-border"
+            style="width: 14px; height: 14px; border-width: 2px; color: var(--orange);"
           />
         </span>
         <span>{{ stepLabel(step) }}</span>
@@ -81,52 +102,8 @@ function stepLabel (step: ParseStep): string {
 </script>
 
 <style scoped>
-.bi-parsing {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 10px; padding: 40px 24px;
-}
-.bi-parsing__icon {
-  width: 56px; height: 56px; border-radius: 14px;
-  background: var(--ok-50); color: var(--ok);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 4px;
-}
-.bi-parsing__name { font-size: 15px; font-weight: 700; color: #1a2e3b; }
-.bi-parsing__sub  { font-size: 13px; color: #667; }
-.bi-parsing__bar-track {
-  width: min(440px, 90%); height: 7px; border-radius: 99px;
-  background: #e4eaed; overflow: hidden; margin: 6px 0;
-}
-.bi-parsing__bar-fill {
-  height: 100%; border-radius: 99px;
-  background: var(--orange);
-  transition: width 0.5s ease;
-}
-.bi-parsing__steps {
-  list-style: none; margin: 4px 0 0; padding: 0;
-  display: flex; flex-direction: column; gap: 8px;
-  width: min(440px, 90%);
-}
-.bi-parsing__step {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 13.5px; color: #aab;
-}
-.bi-parsing__step--done   { color: var(--ok); }
-.bi-parsing__step--active { color: #1a2e3b; font-weight: 500; }
-.bi-parsing__step-ic {
-  width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-}
-.bi-parsing__step--done   .bi-parsing__step-ic { background: var(--ok); color: #fff; }
-.bi-parsing__step--active .bi-parsing__step-ic { border: 2px solid #e0e5e8; }
-.bi-parsing__step--pending .bi-parsing__step-ic { border: 2px solid #dde; }
-.bi-parsing__spinner {
-  width: 14px; height: 14px; border-radius: 50%;
-  border: 2.5px solid #e0e5e8;
-  border-top-color: var(--orange);
-  animation: bi-spin 0.7s linear infinite;
-  display: block;
-}
-@keyframes bi-spin { to { transform: rotate(360deg); } }
+.bi-step         { color: #aab; }
+.bi-step--done   { color: var(--ok); }
+.bi-step--active { color: #1a2e3b; font-weight: 500; }
+.bi-step-ic--ring { border: 2px solid #e0e5e8; }
 </style>

@@ -1,127 +1,48 @@
 <template>
   <div
-    class="bi-backdrop"
-    @click.self="onClose"
+    class="modal show d-block"
+    tabindex="-1"
+    data-bs-backdrop="static"
   >
     <div
-      class="bi-panel"
-      role="dialog"
-      aria-modal="true"
+      class="modal-dialog m-auto d-flex flex-column"
+      style="max-width: min(1560px, 97vw); height: min(940px, 95vh);"
     >
-      <BulkImportHeader
-        :phase="state.phase"
-        :file-name="fileName"
-        :row-count="previewRows.length"
-        @close="onClose"
-        @clear="onClear"
-      />
-
-      <BulkImportBanner
-        :banner="banner"
-        :banner-errors="bannerErrors"
-      />
-
-      <BulkImportToolbar
-        v-if="hasPreview"
-        v-model:search="search"
-        v-model:jump-section="jumpSection"
-        :row-count="previewRows.length"
-        :column-groups="columnGroups"
-      />
-
-      <div class="bi-body">
-        <div
-          v-if="state.phase === 'parse-error'"
-          class="bi-parse-error"
-        >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-          ><circle
-            cx="12"
-            cy="12"
-            r="10"
-          /><line
-            x1="12"
-            y1="8"
-            x2="12"
-            y2="12"
-          /><line
-            x1="12"
-            y1="16"
-            x2="12.01"
-            y2="16"
-          /></svg>
-          {{ t('bulkImport.parseError') }}
+      <div
+        class="modal-content flex-grow-1 d-flex flex-column overflow-hidden position-relative"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="modal-header d-block p-0 border-0">
+          <BulkImportHeader
+            :phase="state.phase"
+            :file-name="fileName"
+            :row-count="previewRows.length"
+            @close="onClose"
+            @clear="onClear"
+          />
         </div>
 
-        <BulkImportDropzone
-          v-if="state.phase === 'empty' || state.phase === 'parse-error'"
-          @file="onFilePicked"
-        />
+        <div class="modal-body p-0 overflow-hidden d-flex flex-column">
+          <BulkImportBanner
+            :banner="banner"
+            :banner-errors="bannerErrors"
+          />
 
-        <BulkImportParsing
-          v-else-if="state.phase === 'parsing'"
-          :file-name="state.fileName"
-          :steps="parsingSteps"
-          :progress="parseProgress"
-        />
+          <BulkImportToolbar
+            v-if="hasPreview"
+            v-model:search="search"
+            :row-count="previewRows.length"
+          />
 
-        <BulkImportTable
-          v-else-if="hasPreview"
-          :rows="filteredRows"
-          :pinned-column-keys="docTypeDef.pinnedColumns ?? []"
-          :scrollable-column-keys="scrollableColumnKeys"
-          :column-groups="columnGroups"
-          :required-keys="requiredKeys"
-          :row-progress-list="rowProgressList"
-        />
-
-        <div
-          v-else-if="state.phase === 'done'"
-          class="bi-loading"
-        >
-          <i class="fa fa-check-circle text-success bi-done-icon" />
-          <p class="mt-3">
-            {{ t('bulkImport.doneMsg', doneState) }}
-          </p>
-        </div>
-
-        <div
-          v-else-if="state.phase === 'import-error'"
-          class="bi-loading"
-        >
-          <i class="fa fa-exclamation-circle text-danger bi-done-icon" />
-          <p class="mt-3">
-            {{ t('bulkImport.importError') }}
-          </p>
-        </div>
-      </div>
-
-      <div class="bi-foot">
-        <button
-          type="button"
-          class="bi-btn-ghost"
-          @click="onClose"
-        >
-          {{ t('bulkImport.close') }}
-        </button>
-
-        <span class="bi-foot__spacer" />
-
-        <template v-if="hasPreview && state.phase !== 'importing'">
-          <span
-            v-if="hasErrors"
-            class="bi-foot__err"
+          <div
+            v-if="state.phase === 'parse-error'"
+            class="d-flex align-items-center gap-2 small text-danger rounded border mx-4 mt-3 p-2"
+            style="background: #fff3f3; border-color: #f5c6c6 !important;"
           >
             <svg
-              width="14"
-              height="14"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -142,68 +63,152 @@
               x2="12.01"
               y2="16"
             /></svg>
-            {{ t('bulkImport.resolveErrors') }}
-          </span>
-          <button
-            type="button"
-            class="bi-btn-ghost"
-            @click="onClear"
-          >
-            {{ t('bulkImport.clearList') }}
-          </button>
-          <button
-            type="button"
-            class="bi-btn-orange"
-            :disabled="hasErrors || isBuilding"
-            @click="onClickConfirmImport"
-          >
-            {{ isBuilding ? t('bulkImport.building') : t('bulkImport.createDrafts') }}
-          </button>
-        </template>
+            {{ t('bulkImport.parseError') }}
+          </div>
 
-        <span
-          v-if="state.phase === 'importing'"
-          class="bi-foot__muted"
+          <BulkImportDropzone
+            v-if="state.phase === 'empty' || state.phase === 'parse-error'"
+            @file="onFilePicked"
+          />
+
+          <BulkImportParsing
+            v-else-if="state.phase === 'parsing'"
+            :file-name="state.fileName"
+            :steps="parsingSteps"
+            :progress="parseProgress"
+          />
+
+          <BulkImportTable
+            v-else-if="hasPreview"
+            :rows="filteredRows"
+            :pinned-column-keys="docTypeDef.pinnedColumns ?? []"
+            :scrollable-column-keys="scrollableColumnKeys"
+            :column-groups="columnGroups"
+            :required-keys="requiredKeys"
+            :row-progress-list="rowProgressList"
+          />
+
+          <div
+            v-else-if="state.phase === 'import-error'"
+            class="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-muted"
+          >
+            <i
+              class="fa fa-exclamation-circle text-danger"
+              style="font-size: 3rem;"
+            />
+            <p class="mt-3">
+              {{ t('bulkImport.importError') }}
+            </p>
+          </div>
+        </div>
+
+        <div class="modal-footer justify-content-start gap-2 px-4 py-3">
+          <button
+            type="button"
+            class="btn btn-sm btn-link text-secondary text-decoration-none"
+            @click="onClose"
+          >
+            {{ t('bulkImport.close') }}
+          </button>
+
+          <span class="flex-grow-1" />
+
+          <template v-if="state.phase === 'preview' || state.phase === 'confirm-import' || state.phase === 'confirm-close' || state.phase === 'confirm-erase'">
+            <span
+              v-if="hasErrors"
+              class="d-flex align-items-center gap-1 small fw-medium text-danger"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              ><circle
+                cx="12"
+                cy="12"
+                r="10"
+              /><line
+                x1="12"
+                y1="8"
+                x2="12"
+                y2="12"
+              /><line
+                x1="12"
+                y1="16"
+                x2="12.01"
+                y2="16"
+              /></svg>
+              {{ t('bulkImport.resolveErrors') }}
+            </span>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              @click="onClear"
+            >
+              {{ t('bulkImport.clearList') }}
+            </button>
+            <button
+              type="button"
+              class="bi-btn-orange"
+              :disabled="hasErrors || isBuilding"
+              @click="onClickConfirmImport"
+            >
+              {{ isBuilding ? t('bulkImport.building') : t('bulkImport.createDrafts') }}
+            </button>
+          </template>
+
+          <span
+            v-if="state.phase === 'importing'"
+            class="small text-muted"
+          >{{ t('bulkImport.importing') }}</span>
+
+          <span
+            v-if="state.phase === 'done'"
+            class="small"
+            :class="state.failed > 0 ? 'text-danger' : 'text-success'"
+          >{{ t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed }) }}</span>
+        </div>
+
+        <BulkImportConfirmDialog
+          v-if="state.phase === 'confirm-import'"
+          :message="t('bulkImport.confirmMsg')"
+          :confirm-label="t('bulkImport.confirm')"
+          confirm-class="btn-primary bi-btn--orange"
+          @confirm="onImport"
+          @cancel="onCancelConfirm"
         >
-          {{ t('bulkImport.importing') }}
-        </span>
+          <ul class="list-unstyled small text-muted text-start mb-1">
+            <li>{{ t('bulkImport.confirmDraftCount', { n: state.draftCount }) }}</li>
+            <li v-if="state.linkedCount > 0">
+              {{ t('bulkImport.confirmLinkedCount', { n: state.linkedCount }) }}
+            </li>
+          </ul>
+        </BulkImportConfirmDialog>
+
+        <BulkImportConfirmDialog
+          v-if="state.phase === 'confirm-close'"
+          :message="t('bulkImport.closeConfirm')"
+          :confirm-label="t('bulkImport.confirmClose')"
+          confirm-class="btn-danger"
+          @confirm="onForceClose"
+          @cancel="onCancelConfirm"
+        />
+
+        <BulkImportConfirmDialog
+          v-if="state.phase === 'confirm-erase'"
+          :message="t('bulkImport.eraseConfirm')"
+          :confirm-label="t('bulkImport.confirmErase')"
+          confirm-class="btn-danger"
+          @confirm="onConfirmErase"
+          @cancel="onCancelConfirm"
+        />
       </div>
-
-      <BulkImportConfirmDialog
-        v-if="state.phase === 'confirm-import'"
-        :message="t('bulkImport.confirmMsg')"
-        :confirm-label="t('bulkImport.confirm')"
-        confirm-class="btn-primary bi-btn--orange"
-        @confirm="onImport"
-        @cancel="onCancelConfirm"
-      >
-        <ul class="bi-confirm-counts">
-          <li>{{ t('bulkImport.confirmDraftCount', { n: state.draftCount }) }}</li>
-          <li v-if="state.linkedCount > 0">
-            {{ t('bulkImport.confirmLinkedCount', { n: state.linkedCount }) }}
-          </li>
-        </ul>
-      </BulkImportConfirmDialog>
-
-      <BulkImportConfirmDialog
-        v-if="state.phase === 'confirm-close'"
-        :message="t('bulkImport.closeConfirm')"
-        :confirm-label="t('bulkImport.confirmClose')"
-        confirm-class="btn-danger"
-        @confirm="onForceClose"
-        @cancel="onCancelConfirm"
-      />
-
-      <BulkImportConfirmDialog
-        v-if="state.phase === 'confirm-erase'"
-        :message="t('bulkImport.eraseConfirm')"
-        :confirm-label="t('bulkImport.confirmErase')"
-        confirm-class="btn-danger"
-        @confirm="onConfirmErase"
-        @cancel="onCancelConfirm"
-      />
     </div>
   </div>
+  <div class="modal-backdrop show" />
 </template>
 
 <script setup lang="ts">
@@ -287,18 +292,14 @@ const parseProgress = computed(() => {
 // Derived display state
 // -------------------------------------------------------------------------
 const search = ref('')
-const jumpSection = ref('')
-
-const doneState = computed(() =>
-  state.phase === 'done' ? state : { imported: 0, failed: 0 }
-)
 
 const hasPreview = computed(() =>
   state.phase === 'preview' ||
   state.phase === 'confirm-import' ||
   state.phase === 'confirm-close' ||
   state.phase === 'confirm-erase' ||
-  state.phase === 'importing'
+  state.phase === 'importing' ||
+  state.phase === 'done'
 )
 
 const previewRows = computed<PreviewRow[]>(() => {
@@ -357,7 +358,7 @@ const bannerErrors = computed<BannerErrorGroup[]>(() => {
 const hasErrors = computed(() => sheetErrors.value.some(e => e.level === 'error'))
 
 const rowProgressList = computed<RowProgress[]>(() =>
-  state.phase === 'importing'
+  state.phase === 'importing' || state.phase === 'done'
     ? (state).progress
     : []
 )
@@ -414,7 +415,7 @@ const requiredKeys = computed<Set<string>>(() => {
 
 <style scoped>
 /* Design tokens — inherited by all child components via CSS variable cascade */
-.bi-backdrop {
+.modal {
   --navy-900: #0b3b4d;
   --orange:   #e4572e;
   --ok:       #2e8b57;
@@ -431,56 +432,10 @@ const requiredKeys = computed<Set<string>>(() => {
   --cell-py:  13px;
   --cell-px:  10px;
 }
-.bi-backdrop {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.45);
-  z-index: 1060;
-  display: flex; align-items: center; justify-content: center;
-}
-.bi-panel {
-  background: #fff;
-  border-radius: var(--radius);
-  width: min(1560px, 97vw);
-  height: min(940px, 95vh);
-  display: flex; flex-direction: column;
-  position: relative; overflow: hidden;
-}
-.bi-body {
-  flex: 1; overflow: hidden; display: flex; flex-direction: column;
-}
-.bi-parse-error {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 16px; margin: 12px 20px 0;
-  background: #fff3f3; border: 1px solid #f5c6c6; border-radius: 8px;
-  font-size: 13px; color: var(--danger);
-}
-.bi-loading {
-  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  color: #666;
-}
-.bi-done-icon { font-size: 3rem; }
-.bi-foot {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 20px; border-top: 1px solid var(--line); flex-shrink: 0;
-}
-.bi-foot__spacer { flex: 1; }
-.bi-foot__err {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 12.5px; color: var(--danger); font-weight: 500;
-}
-.bi-foot__muted { font-size: 12.5px; color: #888; }
-.bi-btn-ghost {
-  background: none;
-  border: 1px solid var(--line) !important;
-  border-radius: 6px;
-  color: #445; padding: 7px 14px; font-size: 13.5px; cursor: pointer;
-}
-.bi-btn-ghost:hover { background: #f4f6f8; }
 .bi-btn-orange {
   background: var(--orange); color: #fff; border: none; border-radius: 6px;
   padding: 7px 16px; font-size: 13.5px; font-weight: 600; cursor: pointer;
 }
 .bi-btn-orange:hover:not(:disabled) { background: #c94827; }
 .bi-btn-orange:disabled { opacity: .45; cursor: not-allowed; }
-.bi-foot .bi-btn-ghost:first-child { border-color: transparent; }
 </style>

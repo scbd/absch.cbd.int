@@ -1,6 +1,8 @@
 import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
+// @ts-expect-error importing js file
+import { useRealm } from '~/services/composables/realm.js'
 import { readSheet } from './read-sheet'
 import { buildPreview } from './build-preview'
 import { buildDocuments } from './build-documents'
@@ -40,6 +42,8 @@ export function useBulkImport (documentType: DocumentTypes): {
 } {
   const { mergeLocaleMessage } = useI18n()
   const auth = useAuth()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- realm.js is a JS module
+  const realm = useRealm()
   const { [documentType]: definition } = registry
 
   for (const [locale, msgs] of Object.entries(definition.messages)) {
@@ -83,7 +87,8 @@ export function useBulkImport (documentType: DocumentTypes): {
       // Steps 3+4: validate & build preview
       let validationErrors: SheetError[] = []
       if (definition.validateRows !== undefined) {
-        validationErrors = await definition.validateRows(rows, tokenReader)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- realm.js is a JS module
+        validationErrors = await definition.validateRows(rows, tokenReader, realm.value as string)
       }
       const allErrors = [...sheetErrors, ...validationErrors]
       setStep('validateRows', 'done')
@@ -111,17 +116,19 @@ export function useBulkImport (documentType: DocumentTypes): {
     try {
       const { documents, linkedRecords } = current
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- realm.js is a JS module
       const { imported, failed } = await submitDocuments(
         documents,
         linkedRecords,
         tokenReader,
+        realm.value as string,
         (p: RowProgress) => {
           const idx = progress.findIndex(r => r.rowIndex === p.rowIndex)
           if (idx >= 0) progress[idx] = p
         }
       )
 
-      Object.assign(state, { phase: 'done', imported, failed })
+      Object.assign(state, { phase: 'done', imported, failed, preview, rawRows, progress })
     } catch {
       Object.assign(state, { phase: 'import-error' })
     }

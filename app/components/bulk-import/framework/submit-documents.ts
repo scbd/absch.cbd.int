@@ -10,32 +10,32 @@ export interface SubmitResult {
 async function publishLinkedRecords (
   linkedRecords: LinkedRecordStore,
   api: KmDraftsApi
-): Promise<Set<string>> {
-  const failedIds = new Set<string>()
+): Promise<Map<string, string>> {
+  const failedIds = new Map<string, string>()
   for (const record of linkedRecords) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have header.identifier/schema at runtime
     const { header } = record as unknown as { header: { identifier: string; schema: string } }
     try {
       // eslint-disable-next-line no-await-in-loop -- sequential linked-record publish
       await api.publishDraft(header.schema, header.identifier, record)
-    } catch {
-      failedIds.add(header.identifier)
+    } catch (err: unknown) {
+      failedIds.set(header.identifier, err instanceof Error ? err.message : String(err))
     }
   }
   return failedIds
 }
 
-function referencesFailedLinkedRecord (doc: DocumentRequest, failedIds: Set<string>): boolean {
-  function walk (value: unknown): boolean {
-    if (value === null || value === undefined) return false
-    if (Array.isArray(value)) return value.some(walk)
+function referencesFailedLinkedRecord (doc: DocumentRequest, failedIds: Map<string, string>): string | undefined {
+  function walk (value: unknown): string | undefined {
+    if (value === null || value === undefined) return undefined
+    if (Array.isArray(value)) return value.reduce<string | undefined>((acc, v) => acc ?? walk(v), undefined)
     if (typeof value === 'object') {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- walking arbitrary document values at runtime
       const obj = value as Record<string, unknown>
-      if (typeof obj['identifier'] === 'string' && failedIds.has(obj['identifier'])) return true
-      return Object.values(obj).some(walk)
+      if (typeof obj['identifier'] === 'string' && failedIds.has(obj['identifier'])) return failedIds.get(obj['identifier'])
+      return Object.values(obj).reduce<string | undefined>((acc, v) => acc ?? walk(v), undefined)
     }
-    return false
+    return undefined
   }
   return walk(doc)
 }
@@ -44,18 +44,20 @@ export async function submitDocuments (
   documents: DocumentRequest[],
   linkedRecords: LinkedRecordStore,
   tokenReader: TokenReader,
+  realm: string,
   onProgress: (progress: RowProgress)=> void
 ): Promise<SubmitResult> {
-  const api = new KmDraftsApi({ tokenReader })
+  const api = new KmDraftsApi({ tokenReader, realm })
   const failedLinkedIds = await publishLinkedRecords(linkedRecords, api)
 
   let imported = 0
   let failed = 0
 
   for (const [rowIndex, doc] of documents.entries()) {
-    if (failedLinkedIds.size > 0 && referencesFailedLinkedRecord(doc, failedLinkedIds)) {
+    const linkedError = failedLinkedIds.size > 0 ? referencesFailedLinkedRecord(doc, failedLinkedIds) : undefined
+    if (linkedError !== undefined) {
       failed += 1
-      onProgress({ rowIndex, status: 'error', message: 'A linked record (e.g. contact) failed to publish' })
+      onProgress({ rowIndex, status: 'error', message: `Linked record failed to publish: ${linkedError}` })
       continue
     }
 

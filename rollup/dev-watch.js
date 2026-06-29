@@ -7,7 +7,9 @@
  *   2. On every save, vue-tsc recompiles:
  *        - "Found 0 errors"  → rollup starts (or stays running)
  *        - "Found N errors"  → rollup is killed; type errors are printed in red
- *   3. Ctrl-C shuts down both child processes cleanly.
+ *   3. On every save, eslint --fix runs on the changed file. Rollup is blocked
+ *      until ALL previously-errored files are clean (tracked per-file via a Set).
+ *   4. Ctrl-C shuts down both child processes cleanly.
  *
  * Invoked by `npm run dev` — do not run directly while the dev script is running.
  *
@@ -48,10 +50,10 @@ wss.on('connection', client => {
 
 let rollupProc = null
 let tscClean = false
-let lintClean = true
+const lintErrors = new Set() // tracks files with outstanding lint errors
 
 function startRollup () {
-  if (rollupProc || !tscClean || !lintClean) return
+  if (rollupProc || !tscClean || lintErrors.size > 0) return
   process.stdout.write(DIM + '[rollup] starting build...' + RESET + '\n')
   rollupProc = spawn('npx', ['rollup', '--strictDeprecations', '-c', '--watch'], { stdio: 'inherit' })
   rollupProc.on('close', () => { rollupProc = null })
@@ -116,8 +118,8 @@ watch(resolve('app'), { recursive: true }, (_, filename) => {
     eslint.stdout.on('data', flushEslint)
     eslint.stderr.on('data', flushEslint)
     eslint.on('close', code => {
-      if (code === 0) { lintClean = true; startRollup() }
-      else { lintClean = false; stopRollup('fix lint errors first') }
+      if (code === 0) { lintErrors.delete(filename); startRollup() }
+      else { lintErrors.add(filename); stopRollup('fix lint errors first') }
     })
   }, 300))
 })

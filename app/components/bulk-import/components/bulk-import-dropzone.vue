@@ -1,10 +1,14 @@
 <template>
   <div
-    class="bi-dropzone"
+    class="bi-dropzone flex-grow-1 d-flex flex-column align-items-center justify-content-center gap-2 rounded m-4"
+    style="color: #667; background: #fafbfc;"
     @dragover.prevent
     @drop.prevent="handleDrop"
   >
-    <div class="bi-dz-icon">
+    <div
+      class="d-flex align-items-center justify-content-center rounded-3 mb-1"
+      style="width: 60px; height: 60px; background: var(--ok-50); color: var(--ok);"
+    >
       <svg
         width="28"
         height="28"
@@ -31,13 +35,19 @@
         y2="12"
       /></svg>
     </div>
-    <div class="bi-dz-ttl">
+    <div
+      class="fw-bold"
+      style="font-size: 16px; color: #1a2e3b;"
+    >
       {{ t('bulkImport.dropTitle', 'Drag an Excel file here') }}
     </div>
-    <div class="bi-dz-sub">
+    <div
+      class="small text-muted text-center"
+      style="max-width: 420px;"
+    >
       {{ t('bulkImport.dropSub', 'or browse your computer to select a completed IRCC import template.') }}
     </div>
-    <label class="bi-browse-btn">
+    <label class="bi-browse-btn d-inline-flex align-items-center gap-2 fw-semibold text-white mt-1">
       <svg
         width="15"
         height="15"
@@ -61,13 +71,14 @@
         @change="handleFileInput"
       >
     </label>
-    <div class="bi-dz-meta">
-      <span>{{ t('bulkImport.accepted', 'Accepted:') }} <b>.xlsx</b>, <b>.xls</b></span>
-      <span>{{ t('bulkImport.maxSize', 'Max') }} <b>5 MB</b> · {{ t('bulkImport.upTo', 'up to') }} <b>500 {{ t('bulkImport.rows', 'rows') }}</b></span>
+    <div class="d-flex align-items-center gap-4 small text-muted mt-2">
+      <span>{{ t('bulkImport.accepted', 'Accepted:') }} <b class="text-secondary">xlsx</b>, <b class="text-secondary">.xls</b></span>
+      <span>{{ t('bulkImport.maxSize', 'Max') }} <b class="text-secondary">5 MB</b> · {{ t('bulkImport.upTo', 'up to') }} <b class="text-secondary">500 {{ t('bulkImport.rows', 'rows') }}</b></span>
       <span>33 {{ t('bulkImport.columnsDesc', 'columns across 10 sections') }}</span>
     </div>
     <a
-      class="bi-dz-tmpl"
+      class="small fw-medium text-decoration-none"
+      style="color: var(--ok);"
       href="#"
       @click.prevent
     >↓ {{ t('bulkImport.downloadTemplate', 'Download the IRCC template') }}</a>
@@ -93,32 +104,10 @@ function handleDrop (e: DragEvent) {
 </script>
 
 <style scoped>
-.bi-dropzone {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 10px;
-  border: 2px dashed var(--line); border-radius: var(--radius);
-  margin: 24px; color: #667; background: #fafbfc;
-}
-.bi-dz-icon {
-  width: 60px; height: 60px; border-radius: 14px;
-  background: var(--ok-50); color: var(--ok);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 6px;
-}
-.bi-dz-ttl { font-size: 16px; font-weight: 700; color: #1a2e3b; }
-.bi-dz-sub { font-size: 13.5px; color: #667; max-width: 420px; text-align: center; }
+.bi-dropzone { border: 2px dashed var(--line); }
 .bi-browse-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--orange); color: #fff; border: none; border-radius: 7px;
-  padding: 9px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
-  margin-top: 6px;
+  background: var(--orange); border: none; border-radius: 7px;
+  padding: 9px 20px; font-size: 14px; cursor: pointer;
 }
 .bi-browse-btn:hover { background: #c94827; }
-.bi-dz-meta {
-  display: flex; align-items: center; gap: 18px;
-  font-size: 12.5px; color: #889; margin-top: 8px;
-}
-.bi-dz-meta b { color: #445; }
-.bi-dz-tmpl { font-size: 13px; color: var(--ok); text-decoration: none; font-weight: 500; }
-.bi-dz-tmpl:hover { text-decoration: underline; }
 </style>

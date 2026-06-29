@@ -128,7 +128,7 @@ export interface DocumentTypeDefinition {
   headerRows: number[]
   pinnedColumns?: string[]
   columnGroups?: ColumnGroup[]
-  validateRows?: (rows: RawRow[], tokenReader: TokenReader)=> Promise<SheetError[]>
+  validateRows?: (rows: RawRow[], tokenReader: TokenReader, realm: string)=> Promise<SheetError[]>
 }
 
 export interface SchemaInstance {
@@ -147,6 +147,6 @@ export type UploaderState =
   | { phase: 'confirm-close'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'confirm-erase'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'importing'; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
-  | { phase: 'done'; imported: number; failed: number }
+  | { phase: 'done'; imported: number; failed: number; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
   | { phase: 'parse-error' }
   | { phase: 'import-error' }

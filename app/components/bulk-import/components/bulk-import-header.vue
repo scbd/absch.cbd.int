@@ -1,6 +1,12 @@
 <template>
-  <div class="bi-head">
-    <div class="bi-head__ic">
+  <div
+    class="d-flex align-items-start gap-3 bg-white border-bottom flex-shrink-0"
+    style="padding: 18px 22px;"
+  >
+    <div
+      class="d-flex align-items-center justify-content-center flex-shrink-0 rounded-2"
+      style="width: 42px; height: 42px; background: var(--ok-50); color: var(--ok);"
+    >
       <svg
         width="22"
         height="22"
@@ -22,16 +28,25 @@
         y2="17"
       /><polyline points="10 9 9 9 8 9" /></svg>
     </div>
-    <div class="bi-head__ttl">
-      <h1>{{ t('title') }}</h1>
-      <div class="bi-head__sub">
+    <div
+      class="flex-grow-1"
+      style="min-width: 0;"
+    >
+      <h1
+        class="m-0 fw-bold"
+        style="font-size: 18px; color: #0b3b4d; line-height: 1.2;"
+      >
+        {{ t('title') }}
+      </h1>
+      <div class="small text-muted mt-1">
         <span v-if="phase === 'empty' || phase === 'parse-error'">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
         <span v-else-if="phase === 'parsing'">{{ t('bulkImport.reading', 'Reading file…') }}</span>
         <span v-else>{{ t('bulkImport.previewReady', 'Review the records below before importing') }}</span>
       </div>
       <div
         v-if="phase !== 'empty' && phase !== 'parsing' && phase !== 'parse-error'"
-        class="bi-file-chip"
+        class="d-inline-flex align-items-center gap-2 bg-white border rounded-2 small mt-2"
+        style="padding: 5px 8px 5px 11px; color: #445;"
       >
         <svg
           width="13"
@@ -43,12 +58,13 @@
           stroke-linecap="round"
           stroke-linejoin="round"
         ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
-        <b>{{ fileName }}</b>
-        <span class="bi-file-chip__sep">·</span>
-        <span class="bi-file-chip__rows">{{ rowCount }} {{ t('bulkImport.rows', 'rows') }}</span>
+        <b class="fw-semibold">{{ fileName }}</b>
+        <span>·</span>
+        <span>{{ rowCount }} {{ t('bulkImport.rows', 'rows') }}</span>
         <button
           type="button"
-          class="bi-file-chip__replace"
+          class="btn btn-outline-secondary btn-sm"
+          style="font-size: .78rem; padding: 2px 8px;"
           @click="emit('clear')"
         >
           {{ t('bulkImport.replace', 'Replace') }}
@@ -57,7 +73,8 @@
     </div>
     <button
       type="button"
-      class="bi-head__close"
+      class="btn btn-outline-secondary d-flex align-items-center justify-content-center flex-shrink-0 p-0"
+      style="width: 34px; height: 34px; border-radius: 7px;"
       :disabled="phase === 'importing'"
       @click="emit('close')"
     >
@@ -91,41 +108,3 @@ defineProps<{ phase: string; fileName: string; rowCount: number }>()
 const emit = defineEmits<(e: 'close' | 'clear')=> void>()
 const { t } = useI18n()
 </script>
-
-<style scoped>
-.bi-head {
-  display: flex; align-items: flex-start; gap: 16px;
-  background: #fff;
-  padding: 18px 22px;
-  border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
-}
-.bi-head__ic {
-  width: 42px; height: 42px; border-radius: 9px;
-  background: var(--ok-50); color: var(--ok);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.bi-head__ttl { flex: 1; min-width: 0; }
-.bi-head__ttl h1 { margin: 0; font-size: 18px; font-weight: 700; color: #0b3b4d; line-height: 1.2; }
-.bi-head__sub { font-size: 13px; color: #667; margin-top: 2px; }
-.bi-head__close {
-  width: 34px; height: 34px; border-radius: 7px;
-  border: 1px solid var(--line); background: #fff; color: #667;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; flex-shrink: 0; padding: 0;
-}
-.bi-head__close:hover { background: #f4f6f8; }
-.bi-file-chip {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #fff; border: 1px solid var(--line); border-radius: 8px;
-  padding: 5px 8px 5px 11px; font-size: .82rem; margin-top: 8px;
-  color: #445;
-}
-.bi-file-chip b { font-weight: 600; }
-.bi-file-chip__replace {
-  background: none; border: 1px solid var(--line); border-radius: 5px;
-  color: #445; cursor: pointer; font-size: .78rem; padding: 2px 8px;
-}
-.bi-file-chip__replace:hover { background: #f4f6f8; }
-</style>

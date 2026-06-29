@@ -54,9 +54,29 @@ async function validateContact (
   return await validateExistingIds(existing, column, rowIndex, api)
 }
 
-async function validateRows (rows: RawRow[], tokenReader: TokenReader): Promise<SheetError[]> {
+async function resolveUniqueCnaIds (rows: RawRow[], api: KmDocumentsApi): Promise<Map<string, boolean>> {
+  const uidToDocumentId = new Map<string, string>()
+  for (const row of rows) {
+    const { absCNAId: value } = row
+    if (typeof value !== 'string' || value.trim() === '') continue
+    const uid = value.trim()
+    if (uidToDocumentId.has(uid)) continue
+    const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
+    if (documentId !== undefined) uidToDocumentId.set(uid, documentId)
+  }
+
+  const results = new Map<string, boolean>()
+  await Promise.all([...uidToDocumentId.entries()].map(async ([uid, documentId]) => {
+    results.set(uid, await api.exists(documentId).catch(() => false))
+  }))
+  return results
+}
+
+async function validateRows (rows: RawRow[], tokenReader: TokenReader, realm: string): Promise<SheetError[]> {
   const errors: SheetError[] = []
-  const api = new KmDocumentsApi({ tokenReader })
+  const api = new KmDocumentsApi({ tokenReader, realm })
+
+  const cnaResults = await resolveUniqueCnaIds(rows, api)
 
   await Promise.all(rows.map(async (row, rowIndex) => {
     await Promise.all(COUNTRY_COLUMNS.map(async (key) => {
@@ -67,6 +87,17 @@ async function validateRows (rows: RawRow[], tokenReader: TokenReader): Promise<
         errors.push({ row: rowIndex, column: key, level: 'error', message: `Unrecognized country: "${value}"`, value })
       }
     }))
+
+    const cnaValue = row['absCNAId']
+    if (typeof cnaValue === 'string' && cnaValue.trim() !== '') {
+      const uid = cnaValue.trim()
+      const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
+      if (documentId === undefined) {
+        errors.push({ row: rowIndex, column: 'absCNAId', level: 'error', message: `Invalid ABS CNA ID format: "${uid}"`, value: uid })
+      } else if (!cnaResults.get(uid)) {
+        errors.push({ row: rowIndex, column: 'absCNAId', level: 'error', message: `ABS CNA not found: "${uid}"`, value: uid })
+      }
+    }
 
     const contactErrors = await Promise.all(CONTACT_PREFIXES.map(async prefix => await validateContact(row, rowIndex, prefix, api)))
     errors.push(...contactErrors.flat())

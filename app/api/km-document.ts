@@ -152,7 +152,7 @@ export class KmDraftsApi extends ApiBase {
   }
 
   async publishDraft (schema: string, identifier: string, document: object,
-    options: { additionalInfo: string; isNew?: boolean } = { additionalInfo: '' }): Promise<unknown> {
+    options: { additionalInfo?: string; isNew?: boolean } = { }): Promise<unknown> {
     const body = { document, additionalInfo: options.additionalInfo }
     const url = serviceUrls.publishDraftUrl(schema, identifier)
     return await (options.isNew === true ? this.http.post(url, body) : this.http.put(url, body))
