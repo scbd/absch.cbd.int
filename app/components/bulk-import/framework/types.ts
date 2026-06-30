@@ -134,7 +134,7 @@ export interface DocumentTypeDefinition {
   headerRows: number[]
   pinnedColumns?: string[]
   columnGroups?: ColumnGroup[]
-  validateRows?: (rows: RawRow[], tokenReader: TokenReader, realm: string)=> Promise<SheetError[]>
+  validateRows?: (rows: RawRow[], tokenReader: TokenReader, realm: string, userGovernment?: string)=> Promise<SheetError[]>
 }
 
 export interface SchemaInstance {
@@ -149,7 +149,7 @@ export type UploaderState =
   | { phase: 'empty' }
   | { phase: 'parsing'; fileName: string; steps: ParseStep[] }
   | { phase: 'preview'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'confirm-import'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[]; draftCount: number; linkedCount: number; documents: DocumentRequest[]; linkedRecords: LinkedRecordStore }
+  | { phase: 'confirm-import'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[]; draftCount: number; linkedCount: number; documents: DocumentRequest[]; linkedRecords: LinkedRecordStore; buildErrors: DocBuildError[] }
   | { phase: 'confirm-close'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'confirm-erase'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'importing'; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[]; currentPush?: PushProgress }

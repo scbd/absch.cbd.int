@@ -4,27 +4,14 @@ import type {
 import { KmDraftsApi } from '~/api/km-document'
 import type {
   DocumentRequest, EmptyDocumentRequest, DocumentValue,
-  TextValue, SubDocument, ELink, UsageKey, SupportingDocument,
-  SubDocumentTypes, IContactFields
+  TextValue, SubDocument, ELink
 } from '~/types/common/documents'
 import type { LanguageCode } from '~/types/languages'
 import { languages, englishLanguages } from '~/app-data/un-languages'
-import { THESAURUS_TERMS } from '~/constants/thesaurus'
 // @ts-expect-error js module
 import { getCountries } from '~/api/countries'
 
 interface CountryRecord { code: string; name: Partial<Record<LanguageCode, string>> }
-
-export interface KeywordType {
-  name: string
-  title: Partial<Record<LanguageCode, string>>
-  identifier: string
-}
-
-export interface Keywords {
-  processedKeywords: SubDocument[]
-  otherKeywords: string
-}
 
 export abstract class Schema implements SchemaInstance {
   protected readonly language: LanguageCode
@@ -112,23 +99,8 @@ export abstract class Schema implements SchemaInstance {
     })
   }
 
-  // todo move to schema, this is specific to IRCC
-  static getIsConfidential (value: string | undefined | null): boolean {
-    if (typeof value !== 'string') return true
-    return value.toLowerCase() === 'confidential'
-  }
-
   static parseTextToBoolean (value: string | undefined | null): boolean {
     return String(value).toLowerCase() === 'yes'
-  }
-
-  // todo move to schema, this is specific to IRCC
-  static getUsageMapping (usage: string | undefined): string {
-    if (Schema.isEmpty(usage)) return ''
-    if (Schema.getIsConfidential(usage)) return ''
-    const key = usage.replace('-', '').toUpperCase()
-    const usageKey: UsageKey = (key === 'NONCOMMERCIAL' || key === 'COMMERCIAL') ? key : 'NONCOMMERCIAL'
-    return THESAURUS_TERMS[usageKey]
   }
 
   static removeEmptyValues (data: EmptyDocumentRequest): DocumentRequest {
@@ -177,102 +149,6 @@ export abstract class Schema implements SchemaInstance {
   getTextToHtml (value: string | undefined): TextValue | undefined {
     if (typeof value !== 'string') return undefined
     return { [this.language]: Schema.getAsHtmlElement(value.trim()) }
-  }
-
-  getKeywords (keywordsValue: string | undefined, keywordsMap: KeywordType[]): Keywords {
-    // match keywords to thesaurus terms, and return any unmatched keywords as a string
-    if (Schema.isEmpty(keywordsValue)) return { processedKeywords: [], otherKeywords: '' }
-
-    const processedKeywords: SubDocument[] = []
-    let otherKeywords = ''
-
-    for (const raw of keywordsValue.trim().split(',')) {
-      const val = raw.toLowerCase().trim()
-      if (val === '') continue
-
-      const match = keywordsMap.find(kw => {
-        if (kw.identifier === raw.trim()) return true
-        const name = typeof kw.title === 'object' ? kw.title[this.language] : kw.name
-        return String(name).toLowerCase().trim() === val
-      })
-
-      if (match === undefined) {
-        processedKeywords.push({ identifier: THESAURUS_TERMS.ABS_OTHER_KEYWORD })
-        otherKeywords += ` ${raw}`
-      } else {
-        processedKeywords.push({ identifier: match.identifier.toUpperCase() })
-      }
-    }
-
-    return { processedKeywords, otherKeywords }
-  }
-
-  async getContactSchema (contact: SupportingDocument<SubDocumentTypes> | undefined): Promise<SupportingDocument<SubDocumentTypes>> {
-    if (contact === undefined) return {}
-    const contactFields = contact
-    const data: EmptyDocumentRequest = {
-      header: {
-        identifier: Schema.generateId(),
-        schema: 'contact',
-        languages: [this.language]
-      },
-      type: contactFields.type,
-      government: Schema.toETerm(await Schema.resolveCountryIso(this.columnValue('country'))),
-      country: Schema.toETerm(await Schema.resolveCountryIso(contactFields.country ?? undefined)),
-      city: this.getLocaleValue(contactFields.city),
-      address: this.getLocaleValue(contactFields.address),
-      emails: typeof contactFields.email === 'string' ? [contactFields.email] : undefined
-    }
-
-    if (contactFields.type === 'organization') {
-      data['organization'] = this.getLocaleValue(contactFields.orgName)
-      data['organizationAcronym'] = this.getLocaleValue(contactFields.acronym)
-    } else {
-      data['type'] = 'person'
-      data['firstName'] = (contactFields.orgName ?? '').trim()
-      data['lastName'] = (contactFields.acronym ?? '').trim()
-    }
-
-    return Schema.removeEmptyValues(data)
-  }
-
-  async findContactOrCreate (
-    contact: SupportingDocument<IContactFields> | undefined
-  ): Promise<SubDocument[]> {
-    if (contact === undefined) return []
-
-    const { existing } = contact
-    if (typeof existing === 'string' && existing.trim().length > 0) {
-      const hasContactInfo = (['orgName', 'acronym', 'address', 'city', 'country', 'email', 'type', 'consent'] as const)
-        .some(field => !Schema.isEmpty(contact[field]))
-      if (hasContactInfo) {
-        throw new Error('Provide either an existing contact ID or contact details, not both')
-      }
-      const ids = await Promise.all(
-        existing.split(',').map(async uid => await this.resolveDocumentIdentifier(uid.trim()))
-      )
-      return ids.map(identifier => ({ identifier }))
-    }
-
-    const schema = await this.getContactSchema(contact)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SupportingDocument has dynamic shape at runtime
-    const { header: _h, ...body } = schema as unknown as Record<string, unknown>
-    const existing_ = this.linkedRecords.find(rec => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have dynamic shape
-      const { header: _h2, ...b } = rec as unknown as Record<string, unknown>
-      return JSON.stringify(b) === JSON.stringify(body)
-    })
-
-    if (existing_ !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have dynamic shape
-      const { header: h } = existing_ as unknown as Record<string, { identifier?: string }>
-      return [{ identifier: h?.identifier ?? '' }]
-    }
-
-    this.linkedRecords.push(schema)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SupportingDocument has dynamic shape at runtime
-    const { header: h } = schema as unknown as Record<string, { identifier?: string }>
-    return [{ identifier: h?.identifier ?? '' }]
   }
 
   protected async resolveDocumentIdentifier (uniqueId: string): Promise<string> {

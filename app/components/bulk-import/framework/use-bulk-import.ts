@@ -85,7 +85,9 @@ export function useBulkImport (documentType: DocumentTypes): {
       // Steps 3+4: validate & build preview
       let validationErrors: SheetError[] = []
       if (definition.validateRows !== undefined) {
-        validationErrors = await definition.validateRows(rows, tokenReader, realm.realm)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- auth.user() shape is defined by the backend token
+        const userGovernment = (auth.user() as { government?: string } | null)?.government
+        validationErrors = await definition.validateRows(rows, tokenReader, realm.realm, userGovernment)
       }
       const allErrors = [...sheetErrors, ...validationErrors]
       setStep('validateRows', 'done')
@@ -111,12 +113,12 @@ export function useBulkImport (documentType: DocumentTypes): {
     Object.assign(state, { phase: 'importing', preview, rawRows, progress })
 
     try {
-      const { documents, linkedRecords } = current
+      const { documents, linkedRecords, buildErrors } = current
 
       const { imported, failed } = await submitDocuments(
         documents,
         linkedRecords,
-        { tokenReader, realm: realm.realm },
+        { tokenReader, realm: realm.realm, buildErrors },
         {
           onProgress: (p: RowProgress) => {
             // Must mutate through the reactive proxy (state.progress) so Vue tracks the change.
@@ -144,7 +146,7 @@ export function useBulkImport (documentType: DocumentTypes): {
   async function onConfirmImport (): Promise<void> {
     if (state.phase !== 'preview') return
     const current = state as Extract<UploaderState, { phase: 'preview' }>
-    const { documents, linkedRecords } = await buildDocuments(current.rawRows, definition, tokenReader)
+    const { documents, linkedRecords, errors: buildErrors } = await buildDocuments(current.rawRows, definition, tokenReader)
     if ((state as UploaderState).phase !== 'preview') return
     Object.assign(state, {
       phase: 'confirm-import',
@@ -154,7 +156,8 @@ export function useBulkImport (documentType: DocumentTypes): {
       draftCount: current.rawRows.length,
       linkedCount: linkedRecords.length,
       documents,
-      linkedRecords
+      linkedRecords,
+      buildErrors
     })
   }
 

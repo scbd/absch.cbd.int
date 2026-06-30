@@ -100,7 +100,7 @@ function runInitialLint () {
       const results = JSON.parse(out)
       for (const r of results) {
         if (r.errorCount === 0 && r.warningCount === 0) continue
-        const rel = relative(process.cwd(), r.filePath)
+        const rel = relative(resolve('app'), r.filePath)
         lintErrors.add(rel)
         for (const m of r.messages) {
           const sev = m.severity === 2 ? RED + 'error' + RESET : '\x1b[33mwarning\x1b[0m'

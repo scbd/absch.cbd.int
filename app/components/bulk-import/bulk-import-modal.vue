@@ -210,6 +210,12 @@
           @confirm="onConfirmErase"
           @cancel="onCancelConfirm"
         />
+
+        <BulkImportDoneDialog
+          v-if="state.phase === 'done' && !doneDialogDismissed"
+          :message="t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed })"
+          @close="onDoneDialogClose"
+        />
       </div>
     </div>
   </div>
@@ -217,7 +223,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import modalMessages from '~/app-text/components/bulk-import/bulk-import-modal.json'
 import { useBulkImport } from './framework/use-bulk-import'
@@ -231,9 +237,13 @@ import BulkImportDropzone from './components/bulk-import-dropzone.vue'
 import BulkImportParsing from './components/bulk-import-parsing.vue'
 import BulkImportTable from './components/bulk-import-table.vue'
 import BulkImportConfirmDialog from './components/bulk-import-confirm-dialog.vue'
+import BulkImportDoneDialog from './components/bulk-import-done-dialog.vue'
 
 const props = defineProps<{ documentType: DocumentTypes }>()
-const emit = defineEmits<(e: 'close')=> void>()
+const emit = defineEmits<{
+  close: []
+  imported: []
+}>()
 
 const { t, mergeLocaleMessage } = useI18n()
 
@@ -258,6 +268,16 @@ function onForceClose () {
 }
 function onConfirmErase () {
   _onConfirmErase()
+}
+
+const doneDialogDismissed = ref(false)
+watch(() => state.phase, phase => {
+  if (phase === 'done') doneDialogDismissed.value = false
+})
+
+function onDoneDialogClose () {
+  doneDialogDismissed.value = true
+  emit('imported')
 }
 
 const isBuilding = ref(false)
@@ -333,6 +353,7 @@ const sheetErrors = computed<SheetError[]>(() => {
 
 const banner = computed(() => {
   if (!hasPreview.value) return null
+  if (state.phase === 'importing') return { level: 'importing' as const, text: t('bulkImport.processing') }
   if (sheetErrors.value.length === 0) return { level: 'ok' as const, text: t('bulkImport.ready') }
   const { length: errCount } = sheetErrors.value.filter(e => e.level === 'error')
   const { length: warnCount } = sheetErrors.value.filter(e => e.level === 'warning')

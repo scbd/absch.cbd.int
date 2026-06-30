@@ -14,6 +14,7 @@
       v-if="isOpen"
       :document-type="documentType"
       @close="isOpen = false"
+      @imported="emit('imported')"
     />
   </div>
 </template>
@@ -26,6 +27,7 @@ defineProps<{
   documentType: DocumentTypes,
   title: string
 }>()
+const emit = defineEmits<{ imported: [] }>()
 
 const modal: Ref<Component> = shallowRef(defineComponent(() => () => null))
 const isOpen = ref(false)

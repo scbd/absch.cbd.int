@@ -72,7 +72,7 @@ async function resolveUniqueCnaIds (rows: RawRow[], api: KmDocumentsApi): Promis
   return results
 }
 
-async function validateRows (rows: RawRow[], tokenReader: TokenReader, realm: string): Promise<SheetError[]> {
+async function validateRows (rows: RawRow[], tokenReader: TokenReader, realm: string, userGovernment?: string): Promise<SheetError[]> {
   const errors: SheetError[] = []
   const api = new KmDocumentsApi({ tokenReader, realm })
 
@@ -85,6 +85,8 @@ async function validateRows (rows: RawRow[], tokenReader: TokenReader, realm: st
       const resolved = await Schema.resolveCountryIso(value)
       if (resolved === undefined) {
         errors.push({ row: rowIndex, column: key, level: 'error', message: `Unrecognized country: "${value}"`, value })
+      } else if (key === 'country' && userGovernment !== undefined && resolved !== userGovernment.toLowerCase()) {
+        errors.push({ row: rowIndex, column: key, level: 'error', message: `Country "${value}" does not match your account's government`, value })
       }
     }))
 

@@ -45,6 +45,7 @@
               <ul
                 v-if="loading"
                 class="list-unstyled mb-0"
+                style="max-height: 320px; overflow-y: auto;"
               >
                 <li
                   v-for="item in progress"
@@ -77,6 +78,7 @@
               <ul
                 v-else
                 class="list-unstyled mb-0"
+                style="max-height: 320px; overflow-y: auto;"
               >
                 <li
                   v-for="record in selectedRecords"

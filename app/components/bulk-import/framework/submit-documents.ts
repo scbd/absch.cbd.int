@@ -1,10 +1,16 @@
-import type { LinkedRecordStore, TokenReader, RowProgress, PushProgress } from './types'
+import type { LinkedRecordStore, TokenReader, RowProgress, PushProgress, DocBuildError } from './types'
 import type { DocumentRequest } from '~/types/common/documents'
 import { KmDraftsApi } from '~/api/km-document'
 
 export interface SubmitResult {
   imported: number
   failed: number
+}
+
+function extractErrorMessage (err: unknown): string {
+  if (err instanceof Error) return err.message
+  if (typeof err === 'object' && err !== null && 'message' in err) return String((err as { message: unknown }).message)
+  return String(err)
 }
 
 async function publishLinkedRecords (
@@ -48,17 +54,25 @@ function referencesFailedLinkedRecord (doc: DocumentRequest, failedIds: Map<stri
 export async function submitDocuments (
   documents: DocumentRequest[],
   linkedRecords: LinkedRecordStore,
-  { tokenReader, realm }: { tokenReader: TokenReader; realm: string },
+  { tokenReader, realm, buildErrors }: { tokenReader: TokenReader; realm: string; buildErrors: DocBuildError[] },
   { onProgress, onPush }: { onProgress: (progress: RowProgress)=> void; onPush?: (push: PushProgress)=> void }
 ): Promise<SubmitResult> {
   const api = new KmDraftsApi({ tokenReader, realm })
+
+  const buildErrorByRow = new Map(buildErrors.map(e => [e.row, e.message]))
+  for (const [rowIndex, message] of buildErrorByRow) {
+    onProgress({ rowIndex, status: 'error', message: `Failed to build document: ${message}` })
+  }
+
   const failedLinkedIds = await publishLinkedRecords(linkedRecords, api, onPush)
 
   let imported = 0
   let failed = 0
+  failed += buildErrorByRow.size
   const { length: total } = documents
 
   for (const [rowIndex, doc] of documents.entries()) {
+    if (buildErrorByRow.has(rowIndex)) continue
     onPush?.({ label: 'document', current: rowIndex + 1, total })
     const linkedError = failedLinkedIds.size > 0 ? referencesFailedLinkedRecord(doc, failedLinkedIds) : undefined
     if (linkedError !== undefined) {
@@ -76,8 +90,7 @@ export async function submitDocuments (
       onProgress({ rowIndex, status: 'ok' })
     } catch (err: unknown) {
       failed += 1
-      const message = err instanceof Error ? err.message : String(err)
-      onProgress({ rowIndex, status: 'error', message })
+      onProgress({ rowIndex, status: 'error', message: extractErrorMessage(err) })
     }
   }
 

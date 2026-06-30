@@ -93,8 +93,8 @@
             <table class="table table-hover overflow-hidden w-100 mt-3">
                 <thead>
                     <tr class="text-secondary">
-                        <th ng-if="showAddButton()" class="text-center" style="width:36px;">
-                            <input type="checkbox" ng-checked="isAllSelected()" ng-click="toggleSelectAll()" title="Select all" />
+                        <th ng-if="showAddButton()" class="text-center bi-select-cell" ng-click="toggleSelectAll()" style="width:36px;" title="Select all">
+                            <input type="checkbox" ng-checked="isAllSelected()" class="bi-select-checkbox" />
                         </th>
                         <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">{{::('recordListT.title'|$translate)}}</th>
                         <!-- ToDo: need to pass correct field -->
@@ -147,15 +147,18 @@
 
 <!--                <tbody ng-repeat="record in  records">-->
                 <tbody class="border-0" ng-repeat="record in (filteredRecords = (records | filter:statusFilter | orderBy:orderBy))">
-                    <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
+                    <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest, 'bi-row-selected': isSelected(record)}">
 
-                        <td ng-if="showAddButton()" class="text-center align-middle" style="width:36px;">
+                        <td ng-if="showAddButton()" class="text-center align-middle bi-select-cell"
+                            ng-class="{'bi-select-cell--disabled': !isSelectable(record)}"
+                            ng-click="toggleSelection(record)"
+                            style="width:36px;"
+                            title="{{ isDraft(record) && isPublished(record) ? 'Cannot bulk-delete records that have both a draft and a published version' : 'Select for deletion' }}">
                             <input type="checkbox"
                                 ng-show="record.workflowActivityStatus != 'pending'"
                                 ng-checked="isSelected(record)"
                                 ng-disabled="!isSelectable(record)"
-                                ng-click="toggleSelection(record)"
-                                title="{{ isDraft(record) && isPublished(record) ? 'Cannot bulk-delete records that have both a draft and a published version' : 'Select for deletion' }}" />
+                                class="bi-select-checkbox" />
                         </td>
                         <td class="ps-1 fs-small-8 w-25">
                             <span ng-show="isPublished(record) && !isDraft(record) && !isRequest(record)">

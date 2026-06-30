@@ -2,12 +2,12 @@
   <div
     v-if="banner"
     class="d-flex gap-3 align-items-start small border-bottom flex-shrink-0 overflow-hidden"
-    :class="banner.level === 'ok' ? 'bi-banner--ok' : 'bi-banner--danger'"
+    :class="banner.level === 'ok' ? 'bi-banner--ok' : banner.level === 'importing' ? 'bi-banner--importing' : 'bi-banner--danger'"
     style="padding: 12px 20px; flex: 0 1 auto;"
   >
     <div
       class="d-flex align-items-center justify-content-center flex-shrink-0"
-      :class="banner.level === 'ok' ? 'bi-ic--ok' : 'bi-ic--danger'"
+      :class="banner.level === 'ok' ? 'bi-ic--ok' : banner.level === 'importing' ? 'bi-ic--importing' : 'bi-ic--danger'"
       style="width: 22px; height: 22px; margin-top: 1px;"
     >
       <svg
@@ -20,6 +20,22 @@
         stroke-width="2.5"
         stroke-linecap="round"
       ><polyline points="20 6 9 17 4 12" /></svg>
+      <svg
+        v-else-if="banner.level === 'importing'"
+        class="bi-spinner"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+      ><circle
+        cx="12"
+        cy="12"
+        r="10"
+        stroke-opacity="0.25"
+      /><path d="M12 2a10 10 0 0 1 10 10" /></svg>
       <svg
         v-else
         width="16"
@@ -51,7 +67,7 @@
     >
       <div
         class="fw-semibold"
-        :class="banner.level === 'ok' ? 'bi-head--ok' : 'bi-head--danger'"
+        :class="banner.level === 'ok' ? 'bi-head--ok' : banner.level === 'importing' ? 'bi-head--importing' : 'bi-head--danger'"
       >
         {{ banner.text }}
       </div>
@@ -113,7 +129,7 @@ export interface BannerErrorGroup {
 }
 
 defineProps<{
-  banner: { level: 'ok' | 'danger'; text: string } | null
+  banner: { level: 'ok' | 'danger' | 'importing'; text: string } | null
   bannerErrors: BannerErrorGroup[]
 }>()
 
@@ -121,12 +137,17 @@ const { t } = useI18n()
 </script>
 
 <style scoped>
-.bi-banner--ok     { background: var(--ok-50);     border-color: #c3e0cc; }
-.bi-banner--danger { background: var(--danger-50); border-color: var(--danger-line); }
-.bi-ic--ok     { color: var(--ok); }
-.bi-ic--danger { color: var(--danger); }
-.bi-head--ok     { color: #1a5c35; }
-.bi-head--danger { color: #a8322e; }
+.bi-banner--ok        { background: var(--ok-50);     border-color: #c3e0cc; }
+.bi-banner--danger    { background: var(--danger-50); border-color: var(--danger-line); }
+.bi-banner--importing { background: #f0f4ff;          border-color: #c5d0f0; }
+.bi-ic--ok        { color: var(--ok); }
+.bi-ic--danger    { color: var(--danger); }
+.bi-ic--importing { color: #4a6cf7; }
+.bi-head--ok        { color: #1a5c35; }
+.bi-head--danger    { color: #a8322e; }
+.bi-head--importing { color: #2a3eb1; }
+@keyframes bi-spin { to { transform: rotate(360deg); } }
+.bi-spinner { animation: bi-spin 0.8s linear infinite; }
 .bi-rk--error { border-color: var(--danger-line) !important; color: #a8322e; }
 .bi-rk--warn  { border-color: var(--warn-line) !important;   color: #7a5010; }
 .bi-hint--ok   { color: #1a5c35; }
