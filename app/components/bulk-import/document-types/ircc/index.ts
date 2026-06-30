@@ -88,13 +88,13 @@ async function validateRows (rows: RawRow[], tokenReader: TokenReader, realm: st
       }
     }))
 
-    const cnaValue = row['absCNAId']
+    const { absCNAId: cnaValue } = row
     if (typeof cnaValue === 'string' && cnaValue.trim() !== '') {
       const uid = cnaValue.trim()
       const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
       if (documentId === undefined) {
         errors.push({ row: rowIndex, column: 'absCNAId', level: 'error', message: `Invalid ABS CNA ID format: "${uid}"`, value: uid })
-      } else if (!cnaResults.get(uid)) {
+      } else if (cnaResults.get(uid) !== true) {
         errors.push({ row: rowIndex, column: 'absCNAId', level: 'error', message: `ABS CNA not found: "${uid}"`, value: uid })
       }
     }

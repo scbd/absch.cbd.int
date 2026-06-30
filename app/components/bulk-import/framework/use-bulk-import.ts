@@ -1,7 +1,6 @@
 import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-// @ts-expect-error importing js file
 import { useRealm } from '~/services/composables/realm.js'
 import { readSheet } from './read-sheet'
 import { buildPreview } from './build-preview'
@@ -42,7 +41,6 @@ export function useBulkImport (documentType: DocumentTypes): {
 } {
   const { mergeLocaleMessage } = useI18n()
   const auth = useAuth()
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- realm.js is a JS module
   const realm = useRealm()
   const { [documentType]: definition } = registry
 
@@ -87,8 +85,7 @@ export function useBulkImport (documentType: DocumentTypes): {
       // Steps 3+4: validate & build preview
       let validationErrors: SheetError[] = []
       if (definition.validateRows !== undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- realm.js is a JS module
-        validationErrors = await definition.validateRows(rows, tokenReader, realm.value as string)
+        validationErrors = await definition.validateRows(rows, tokenReader, realm.realm)
       }
       const allErrors = [...sheetErrors, ...validationErrors]
       setStep('validateRows', 'done')
@@ -116,15 +113,18 @@ export function useBulkImport (documentType: DocumentTypes): {
     try {
       const { documents, linkedRecords } = current
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- realm.js is a JS module
       const { imported, failed } = await submitDocuments(
         documents,
         linkedRecords,
-        tokenReader,
-        realm.value as string,
+        { tokenReader, realm: realm.realm },
         (p: RowProgress) => {
-          const idx = progress.findIndex(r => r.rowIndex === p.rowIndex)
-          if (idx >= 0) progress[idx] = p
+          // Must mutate through the reactive proxy (state.progress) so Vue tracks the change.
+          // Mutating the raw `progress` array directly bypasses the proxy and silently no-ops.
+          // Cast to full union: TS narrows `state` to confirm-import above, but Object.assign changed it.
+          const s = state as UploaderState
+          if (s.phase !== 'importing') return
+          const idx = s.progress.findIndex(r => r.rowIndex === p.rowIndex)
+          if (idx >= 0) s.progress.splice(idx, 1, p)
         }
       )
 
@@ -138,7 +138,7 @@ export function useBulkImport (documentType: DocumentTypes): {
     if (state.phase !== 'preview') return
     const current = state as Extract<UploaderState, { phase: 'preview' }>
     const { documents, linkedRecords } = await buildDocuments(current.rawRows, definition, tokenReader)
-    if (state.phase !== 'preview') return
+    if ((state as UploaderState).phase !== 'preview') return
     Object.assign(state, {
       phase: 'confirm-import',
       preview: current.preview,

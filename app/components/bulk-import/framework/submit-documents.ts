@@ -17,7 +17,7 @@ async function publishLinkedRecords (
     const { header } = record as unknown as { header: { identifier: string; schema: string } }
     try {
       // eslint-disable-next-line no-await-in-loop -- sequential linked-record publish
-      await api.publishDraft(header.schema, header.identifier, record)
+      await api.publishDraft(header.schema, header.identifier, record, { isNew: true })
     } catch (err: unknown) {
       failedIds.set(header.identifier, err instanceof Error ? err.message : String(err))
     }
@@ -43,8 +43,7 @@ function referencesFailedLinkedRecord (doc: DocumentRequest, failedIds: Map<stri
 export async function submitDocuments (
   documents: DocumentRequest[],
   linkedRecords: LinkedRecordStore,
-  tokenReader: TokenReader,
-  realm: string,
+  { tokenReader, realm }: { tokenReader: TokenReader; realm: string },
   onProgress: (progress: RowProgress)=> void
 ): Promise<SubmitResult> {
   const api = new KmDraftsApi({ tokenReader, realm })
