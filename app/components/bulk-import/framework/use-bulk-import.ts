@@ -6,7 +6,7 @@ import { readSheet } from './read-sheet'
 import { buildPreview } from './build-preview'
 import { buildDocuments } from './build-documents'
 import { submitDocuments } from './submit-documents'
-import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep, SheetError, PreviewData, TokenReader } from './types'
+import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep, SheetError, PreviewData, TokenReader, PushProgress } from './types'
 import { registry } from '../registry'
 
 const PARSE_MIN_DURATION_MS = 800
@@ -117,14 +117,21 @@ export function useBulkImport (documentType: DocumentTypes): {
         documents,
         linkedRecords,
         { tokenReader, realm: realm.realm },
-        (p: RowProgress) => {
-          // Must mutate through the reactive proxy (state.progress) so Vue tracks the change.
-          // Mutating the raw `progress` array directly bypasses the proxy and silently no-ops.
-          // Cast to full union: TS narrows `state` to confirm-import above, but Object.assign changed it.
-          const s = state as UploaderState
-          if (s.phase !== 'importing') return
-          const idx = s.progress.findIndex(r => r.rowIndex === p.rowIndex)
-          if (idx >= 0) s.progress.splice(idx, 1, p)
+        {
+          onProgress: (p: RowProgress) => {
+            // Must mutate through the reactive proxy (state.progress) so Vue tracks the change.
+            // Mutating the raw `progress` array directly bypasses the proxy and silently no-ops.
+            // Cast to full union: TS narrows `state` to confirm-import above, but Object.assign changed it.
+            const s = state as UploaderState
+            if (s.phase !== 'importing') return
+            const idx = s.progress.findIndex(r => r.rowIndex === p.rowIndex)
+            if (idx >= 0) s.progress.splice(idx, 1, p)
+          },
+          onPush: (p: PushProgress) => {
+            const s = state as UploaderState
+            if (s.phase !== 'importing') return
+            s.currentPush = p
+          }
         }
       )
 

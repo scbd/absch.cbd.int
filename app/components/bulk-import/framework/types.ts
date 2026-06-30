@@ -89,6 +89,12 @@ export interface RowProgress {
   message?: string
 }
 
+export interface PushProgress {
+  label: 'linked' | 'document'
+  current: number
+  total: number
+}
+
 export type ParseStepStatus = 'pending' | 'active' | 'done'
 
 export interface ParseStep {
@@ -146,7 +152,7 @@ export type UploaderState =
   | { phase: 'confirm-import'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[]; draftCount: number; linkedCount: number; documents: DocumentRequest[]; linkedRecords: LinkedRecordStore }
   | { phase: 'confirm-close'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: 'confirm-erase'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'importing'; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
+  | { phase: 'importing'; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[]; currentPush?: PushProgress }
   | { phase: 'done'; imported: number; failed: number; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
   | { phase: 'parse-error' }
   | { phase: 'import-error' }

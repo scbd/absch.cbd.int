@@ -74,6 +74,12 @@
             >
               <span class="bi-stat__dot" />{{ row.status }}
             </span>
+            <div
+              v-if="rowProgressFor(row.rowIndex)?.message"
+              class="bi-push-err"
+            >
+              {{ rowProgressFor(row.rowIndex)?.message }}
+            </div>
           </td>
 
           <td
@@ -281,4 +287,5 @@ function isLongText (v: string): boolean {
 .bi-stat--error .bi-stat__dot { background: var(--danger); }
 .bi-stat--pending { color: #888; }
 .bi-stat--pending .bi-stat__dot { background: #bbb; }
+.bi-push-err { font-size: .72rem; color: var(--danger); margin-top: 3px; line-height: 1.3; white-space: normal; max-width: 200px; }
 </style>

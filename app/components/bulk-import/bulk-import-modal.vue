@@ -111,6 +111,11 @@
             {{ t('bulkImport.close') }}
           </button>
 
+          <span
+            v-if="state.phase === 'importing'"
+            class="small text-muted"
+          >{{ currentPushLabel }}</span>
+
           <span class="flex-grow-1" />
 
           <template v-if="state.phase === 'preview' || state.phase === 'confirm-import' || state.phase === 'confirm-close' || state.phase === 'confirm-erase'">
@@ -163,7 +168,7 @@
           <span
             v-if="state.phase === 'importing'"
             class="small text-muted"
-          >{{ t('bulkImport.importing') }}</span>
+          >{{ t('bulkImport.liveCount', { imported: liveImported, failed: liveFailed }) }}</span>
 
           <span
             v-if="state.phase === 'done'"
@@ -362,6 +367,17 @@ const rowProgressList = computed<RowProgress[]>(() =>
     ? (state).progress
     : []
 )
+
+const liveImported = computed(() => rowProgressList.value.filter(p => p.status === 'ok').length)
+const liveFailed = computed(() => rowProgressList.value.filter(p => p.status === 'error').length)
+
+const currentPushLabel = computed(() => {
+  if (state.phase !== 'importing') return ''
+  const { currentPush } = state
+  if (currentPush === undefined) return t('bulkImport.importing')
+  if (currentPush.label === 'linked') return t('bulkImport.pushingLinked', { current: currentPush.current, total: currentPush.total })
+  return t('bulkImport.pushingDocument', { current: currentPush.current, total: currentPush.total })
+})
 
 // -------------------------------------------------------------------------
 // Table column metadata

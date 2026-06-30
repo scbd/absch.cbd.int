@@ -1,4 +1,4 @@
-import type { LinkedRecordStore, TokenReader, RowProgress } from './types'
+import type { LinkedRecordStore, TokenReader, RowProgress, PushProgress } from './types'
 import type { DocumentRequest } from '~/types/common/documents'
 import { KmDraftsApi } from '~/api/km-document'
 
@@ -9,10 +9,15 @@ export interface SubmitResult {
 
 async function publishLinkedRecords (
   linkedRecords: LinkedRecordStore,
-  api: KmDraftsApi
+  api: KmDraftsApi,
+  onPush?: (p: PushProgress)=> void
 ): Promise<Map<string, string>> {
   const failedIds = new Map<string, string>()
+  const { length: total } = linkedRecords
+  let current = 0
   for (const record of linkedRecords) {
+    current += 1
+    onPush?.({ label: 'linked', current, total })
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have header.identifier/schema at runtime
     const { header } = record as unknown as { header: { identifier: string; schema: string } }
     try {
@@ -44,15 +49,17 @@ export async function submitDocuments (
   documents: DocumentRequest[],
   linkedRecords: LinkedRecordStore,
   { tokenReader, realm }: { tokenReader: TokenReader; realm: string },
-  onProgress: (progress: RowProgress)=> void
+  { onProgress, onPush }: { onProgress: (progress: RowProgress)=> void; onPush?: (push: PushProgress)=> void }
 ): Promise<SubmitResult> {
   const api = new KmDraftsApi({ tokenReader, realm })
-  const failedLinkedIds = await publishLinkedRecords(linkedRecords, api)
+  const failedLinkedIds = await publishLinkedRecords(linkedRecords, api, onPush)
 
   let imported = 0
   let failed = 0
+  const { length: total } = documents
 
   for (const [rowIndex, doc] of documents.entries()) {
+    onPush?.({ label: 'document', current: rowIndex + 1, total })
     const linkedError = failedLinkedIds.size > 0 ? referencesFailedLinkedRecord(doc, failedLinkedIds) : undefined
     if (linkedError !== undefined) {
       failed += 1
