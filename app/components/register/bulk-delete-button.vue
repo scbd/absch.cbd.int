@@ -53,17 +53,17 @@
                   class="d-flex align-items-center gap-2 py-1 fs-small-8"
                 >
                   <i
-                    v-if="item.status === 'deleting'"
+                    v-if="item.status === RECORD_PROGRESS_STATUS.deleting"
                     class="fa fa-spinner fa-spin text-secondary"
                     style="width:14px;"
                   />
                   <i
-                    v-else-if="item.status === 'done'"
+                    v-else-if="item.status === RECORD_PROGRESS_STATUS.done"
                     class="bi bi-check-circle-fill text-success"
                     style="width:14px;"
                   />
                   <i
-                    v-else-if="item.status === 'failed'"
+                    v-else-if="item.status === RECORD_PROGRESS_STATUS.failed"
                     class="bi bi-x-circle-fill text-danger"
                     style="width:14px;"
                   />
@@ -72,7 +72,7 @@
                     class="bi bi-circle text-muted"
                     style="width:14px;"
                   />
-                  <span :class="{ 'text-muted': item.status === 'pending' }">{{ item.title }}</span>
+                  <span :class="{ 'text-muted': item.status === RECORD_PROGRESS_STATUS.pending }">{{ item.title }}</span>
                 </li>
               </ul>
               <ul
@@ -150,10 +150,13 @@ interface ListRecord {
   workingDocumentTitle?: Record<string, string>
 }
 
+const RECORD_PROGRESS_STATUS = { pending: 'pending', deleting: 'deleting', done: 'done', failed: 'failed' } as const
+type RecordProgressStatus = typeof RECORD_PROGRESS_STATUS[keyof typeof RECORD_PROGRESS_STATUS]
+
 interface RecordProgress {
   identifier: string
   title: string
-  status: 'pending' | 'deleting' | 'done' | 'failed'
+  status: RecordProgressStatus
 }
 
 interface EditFormUtility {
@@ -204,7 +207,7 @@ async function onConfirm () {
   progress.value = props.selectedRecords.map(r => ({
     identifier: r.identifier,
     title: recordTitle(r),
-    status: 'pending' as const
+    status: RECORD_PROGRESS_STATUS.pending
   }))
 
   const deletedIds: string[] = []
@@ -213,7 +216,8 @@ async function onConfirm () {
   for (const item of progress.value) {
     const record = props.selectedRecords.find(r => r.identifier === item.identifier)
     if (!record) continue
-    item.status = 'deleting'
+    // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- dot notation is clearer for status transitions
+    item.status = RECORD_PROGRESS_STATUS.deleting
     try {
       if (isDraftOnly(record)) {
         // eslint-disable-next-line no-await-in-loop -- sequential deletion for per-item progress tracking
@@ -224,9 +228,11 @@ async function onConfirm () {
         await editFormUtility.deleteDocument(record, undefined)
         pendingIds.push(record.identifier)
       }
-      item.status = 'done'
+      // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- dot notation is clearer for status transitions
+      item.status = RECORD_PROGRESS_STATUS.done
     } catch {
-      item.status = 'failed'
+      // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- dot notation is clearer for status transitions
+      item.status = RECORD_PROGRESS_STATUS.failed
       toastr.error(`Failed to delete: ${item.title}`)
     }
   }

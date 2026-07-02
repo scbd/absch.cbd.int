@@ -86,18 +86,19 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { PARSE_STEP_KEY } from '../framework/types'
 import type { ParseStep } from '../framework/types'
 
 defineProps<{ fileName: string; steps: ParseStep[]; progress: number }>()
 
 const { t } = useI18n()
+const { openSheet, mapColumns, validateRows } = PARSE_STEP_KEY
 
 function stepLabel (step: ParseStep): string {
-  if (step.key === 'openSheet') return t('bulkImport.step.openSheet', 'Workbook opened · sheet found')
-  if (step.key === 'mapColumns') return step.detail ? `Mapped ${step.detail} columns to IRCC fields` : 'Mapping columns…'
-  if (step.key === 'validateRows') return step.detail ? `Validating ${step.detail} rows against registries…` : 'Validating rows…'
-  if (step.key === 'buildPreview') return t('bulkImport.step.buildPreview', 'Building preview')
-  return step.key
+  if (step.key === openSheet) return t('bulkImport.step.openSheet', 'Workbook opened · sheet found')
+  if (step.key === mapColumns) return step.detail ? `Mapped ${step.detail} columns to IRCC fields` : 'Mapping columns…'
+  if (step.key === validateRows) return step.detail ? `Validating ${step.detail} rows against registries…` : 'Validating rows…'
+  return t('bulkImport.step.buildPreview', 'Building preview')
 }
 </script>
 

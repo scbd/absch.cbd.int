@@ -81,7 +81,8 @@ export interface DocBuildError {
 // Submission progress
 // ---------------------------------------------------------------------------
 
-export type RowImportStatus = 'pending' | 'ok' | 'error'
+export const ROW_IMPORT_STATUS = { pending: 'pending', ok: 'ok', error: 'error' } as const
+export type RowImportStatus = typeof ROW_IMPORT_STATUS[keyof typeof ROW_IMPORT_STATUS]
 
 export interface RowProgress {
   rowIndex: number
@@ -95,10 +96,14 @@ export interface PushProgress {
   total: number
 }
 
-export type ParseStepStatus = 'pending' | 'active' | 'done'
+export const PARSE_STEP_STATUS = { pending: 'pending', active: 'active', done: 'done' } as const
+export const PARSE_STEP_KEY = { openSheet: 'openSheet', mapColumns: 'mapColumns', validateRows: 'validateRows', buildPreview: 'buildPreview' } as const
+
+export type ParseStepStatus = typeof PARSE_STEP_STATUS[keyof typeof PARSE_STEP_STATUS]
+export type ParseStepKey = typeof PARSE_STEP_KEY[keyof typeof PARSE_STEP_KEY]
 
 export interface ParseStep {
-  key: string
+  key: ParseStepKey
   status: ParseStepStatus
   detail?: string
 }
@@ -156,3 +161,5 @@ export type UploaderState =
   | { phase: 'done'; imported: number; failed: number; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
   | { phase: 'parse-error' }
   | { phase: 'import-error' }
+
+export type UploaderPhase = UploaderState['phase']

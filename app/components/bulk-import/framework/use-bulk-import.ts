@@ -6,13 +6,16 @@ import { readSheet } from './read-sheet'
 import { buildPreview } from './build-preview'
 import { buildDocuments } from './build-documents'
 import { submitDocuments } from './submit-documents'
+import { PARSE_STEP_KEY, PARSE_STEP_STATUS, ROW_IMPORT_STATUS } from './types'
 import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep, SheetError, PreviewData, TokenReader, PushProgress } from './types'
 import { registry } from '../registry'
+import { sleep } from '~/services/composables/utils.js'
 
 const PARSE_MIN_DURATION_MS = 800
 const VALIDATE_DELAY_MS = 300
 const PREVIEW_DELAY_MS = 400
 
+// nest sub-columns under their parent column so that they can be uniquely identified
 function countColumns (map: AttributesMap): number {
   let n = 0
   for (const entry of Object.values(map)) {
@@ -21,9 +24,6 @@ function countColumns (map: AttributesMap): number {
   }
   return n
 }
-
-// eslint-disable-next-line promise/avoid-new, @typescript-eslint/promise-function-async -- wrapping setTimeout; no async needed since we return the promise directly
-const delay = (ms: number): Promise<void> => new Promise<void>(resolve => { setTimeout(resolve, ms) })
 
 type StateWithErrors = Extract<UploaderState, { errors: SheetError[] }>
 type StateWithPreview = Extract<UploaderState, { preview: PreviewData; rawRows: RawRow[] }>
@@ -44,6 +44,8 @@ export function useBulkImport (documentType: DocumentTypes): {
   const realm = useRealm()
   const { [documentType]: definition } = registry
 
+  // Each document type owns its translation strings; merge them in at runtime so
+  // bulk-import components can call t() without knowing which type is loaded.
   for (const [locale, msgs] of Object.entries(definition.messages)) {
     mergeLocaleMessage(locale, msgs)
   }
@@ -55,14 +57,14 @@ export function useBulkImport (documentType: DocumentTypes): {
 
   async function onFileChange (file: File): Promise<void> {
     const steps: ParseStep[] = [
-      { key: 'openSheet', status: 'active' },
-      { key: 'mapColumns', status: 'pending' },
-      { key: 'validateRows', status: 'pending' },
-      { key: 'buildPreview', status: 'pending' }
+      { key: PARSE_STEP_KEY.openSheet, status: PARSE_STEP_STATUS.active },
+      { key: PARSE_STEP_KEY.mapColumns, status: PARSE_STEP_STATUS.pending },
+      { key: PARSE_STEP_KEY.validateRows, status: PARSE_STEP_STATUS.pending },
+      { key: PARSE_STEP_KEY.buildPreview, status: PARSE_STEP_STATUS.pending }
     ]
     Object.assign(state, { phase: 'parsing', fileName: file.name, steps })
 
-    function setStep (key: string, status: ParseStep['status'], detail?: string): void {
+    function setStep (key: ParseStep['key'], status: ParseStep['status'], detail?: string): void {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- state is always 'parsing' here
       const s = state as unknown as Extract<UploaderState, { phase: 'parsing' }>
       const idx = s.steps.findIndex(st => st.key === key)
@@ -73,14 +75,14 @@ export function useBulkImport (documentType: DocumentTypes): {
       // Steps 1+2: read the sheet (minimum duration so the animation is visible)
       const [{ rows, errors: sheetErrors }] = await Promise.all([
         readSheet(file, definition.attributesMap, definition.headerRows),
-        delay(PARSE_MIN_DURATION_MS)
+        sleep(PARSE_MIN_DURATION_MS)
       ])
 
       const columnCount = countColumns(definition.attributesMap)
-      setStep('openSheet', 'done')
-      setStep('mapColumns', 'done', String(columnCount))
-      setStep('validateRows', 'active', String(rows.length))
-      await delay(VALIDATE_DELAY_MS)
+      setStep(PARSE_STEP_KEY.openSheet, PARSE_STEP_STATUS.done)
+      setStep(PARSE_STEP_KEY.mapColumns, PARSE_STEP_STATUS.done, String(columnCount))
+      setStep(PARSE_STEP_KEY.validateRows, PARSE_STEP_STATUS.active, String(rows.length))
+      await sleep(VALIDATE_DELAY_MS)
 
       // Steps 3+4: validate & build preview
       let validationErrors: SheetError[] = []
@@ -90,12 +92,12 @@ export function useBulkImport (documentType: DocumentTypes): {
         validationErrors = await definition.validateRows(rows, tokenReader, realm.realm, userGovernment)
       }
       const allErrors = [...sheetErrors, ...validationErrors]
-      setStep('validateRows', 'done')
-      setStep('buildPreview', 'active')
+      setStep(PARSE_STEP_KEY.validateRows, PARSE_STEP_STATUS.done)
+      setStep(PARSE_STEP_KEY.buildPreview, PARSE_STEP_STATUS.active)
       const preview = buildPreview(rows, definition.attributesMap, allErrors)
 
-      setStep('buildPreview', 'done')
-      await delay(PREVIEW_DELAY_MS)
+      setStep(PARSE_STEP_KEY.buildPreview, PARSE_STEP_STATUS.done)
+      await sleep(PREVIEW_DELAY_MS)
 
       Object.assign(state, { phase: 'preview', preview, rawRows: rows, errors: allErrors })
     } catch {
@@ -108,7 +110,7 @@ export function useBulkImport (documentType: DocumentTypes): {
     const current = state as Extract<UploaderState, { phase: 'confirm-import' }>
 
     const { preview, rawRows } = current
-    const progress: RowProgress[] = rawRows.map((_, i) => ({ rowIndex: i, status: 'pending' as const }))
+    const progress: RowProgress[] = rawRows.map((_, i) => ({ rowIndex: i, status: ROW_IMPORT_STATUS.pending }))
 
     Object.assign(state, { phase: 'importing', preview, rawRows, progress })
 

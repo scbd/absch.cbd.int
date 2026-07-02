@@ -103,8 +103,9 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import type { UploaderPhase } from '../framework/types'
 
-defineProps<{ phase: string; fileName: string; rowCount: number }>()
+defineProps<{ phase: UploaderPhase; fileName: string; rowCount: number }>()
 const emit = defineEmits<(e: 'close' | 'clear')=> void>()
 const { t } = useI18n()
 </script>

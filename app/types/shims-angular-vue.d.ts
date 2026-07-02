@@ -11,6 +11,11 @@ declare module '~/services/composables/realm.js' {
   export function useRealm (): { realm: string; baseURL: string }
 }
 
+declare module '~/services/composables/utils.js' {
+  export const oasisUrl: ()=> string
+  export const sleep: (ms: number)=> Promise<void>
+}
+
 declare module '@scbd/angular-vue/src/index.js' {
   import type { ComputedRef } from 'vue'
 
