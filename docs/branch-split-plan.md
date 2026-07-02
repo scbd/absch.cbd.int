@@ -2,6 +2,8 @@
 
 8 PRs total. Each branch depends on the one(s) listed under "Depends on".
 
+**Commit style:** each branch is built as a series of small, logical commits (not one squashed blob) — e.g. tooling config separate from the lint fixes it triggered, API conversion separate from consumer updates. Every commit message describes what changed and why, following the repo's commit conventions.
+
 ---
 
 ## Branch 1 — `blaise/chore/eslint-tsc-rollup-devwatch`
