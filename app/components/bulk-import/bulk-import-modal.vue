@@ -105,7 +105,7 @@
         <div class="modal-footer justify-content-start gap-2 px-4 py-3">
           <button
             type="button"
-            class="btn btn-sm btn-link text-secondary text-decoration-none"
+            class="btn btn-sm btn-outline-secondary"
             @click="onClose"
           >
             {{ t('bulkImport.close') }}
@@ -223,7 +223,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import modalMessages from '~/app-text/components/bulk-import/bulk-import-modal.json'
 import { useBulkImport } from './framework/use-bulk-import'
@@ -241,8 +241,8 @@ import BulkImportDoneDialog from './components/bulk-import-done-dialog.vue'
 
 const props = defineProps<{ documentType: DocumentTypes }>()
 const emit = defineEmits<{
-  close: []
-  imported: []
+  onClose: []
+  onImported: []
 }>()
 
 const { t, mergeLocaleMessage } = useI18n()
@@ -260,24 +260,21 @@ const {
 
 function onClose () {
   _onClose()
-  if (state.phase === 'empty') emit('close')
+  if (state.phase === 'empty') emit('onClose')
 }
 function onForceClose () {
   _onForceClose()
-  emit('close')
+  emit('onClose')
 }
 function onConfirmErase () {
   _onConfirmErase()
 }
 
 const doneDialogDismissed = ref(false)
-watch(() => state.phase, phase => {
-  if (phase === 'done') doneDialogDismissed.value = false
-})
 
 function onDoneDialogClose () {
   doneDialogDismissed.value = true
-  emit('imported')
+  emit('onImported')
 }
 
 const isBuilding = ref(false)
@@ -354,6 +351,10 @@ const sheetErrors = computed<SheetError[]>(() => {
 const banner = computed(() => {
   if (!hasPreview.value) return null
   if (state.phase === 'importing') return { level: 'importing' as const, text: t('bulkImport.processing') }
+  if (state.phase === 'done') {
+    if (state.failed === 0) return { level: 'ok' as const, text: t('bulkImport.importSuccess') }
+    return { level: 'danger' as const, text: t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed }) }
+  }
   if (sheetErrors.value.length === 0) return { level: 'ok' as const, text: t('bulkImport.ready') }
   const { length: errCount } = sheetErrors.value.filter(e => e.level === 'error')
   const { length: warnCount } = sheetErrors.value.filter(e => e.level === 'warning')
@@ -370,6 +371,7 @@ const banner = computed(() => {
 
 // groups multiple errors on the same row into one banner item with multiple messages
 const bannerErrors = computed<BannerErrorGroup[]>(() => {
+  if (state.phase === 'done') return []
   const groups = new Map<number, BannerErrorGroup>()
   for (const e of sheetErrors.value) {
     if (!groups.has(e.row)) groups.set(e.row, { row: e.row + 1, worstLevel: e.level, items: [] })

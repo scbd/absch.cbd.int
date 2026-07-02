@@ -78,7 +78,7 @@
                         data-bs-toggle="tooltip" title="{{::('recordListT.bulkImportDesc'|$translate)}}">                        
                             <documents-uploader :title="buttonText"
                                 ng-vue="exportVueComponent"
-                                @refresh-record="handleNewDocumentCreation();"
+                                @on-imported="refreshList($event)"
                                 :document-type="documentType">
                             </documents-uploader>
                         </div>
@@ -101,7 +101,7 @@
                         <!-- <th ng-click="onSort('title.en', 'asc')" id="titleHeader">Title</th> -->
                         <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">{{::('recordListT.type'|$translate)}}</th>
                         <th ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">{{::('recordListT.lastPublished'|$translate)}}</th>
-                        <th class="d-none d-md-block" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">{{::('recordListT.lastUpdated'|$translate)}}</th>
+                        <th class="d-none d-md-table-cell" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">{{::('recordListT.lastUpdated'|$translate)}}</th>
                         <th ng-click="toggleOrderBy('status')" id="statusHeader">{{::('recordListT.status'|$translate)}}</th>
                         <th class="text-end th_width" ng-bind="filteredRecords.length+' Record(s)'"></th>
                     </tr>

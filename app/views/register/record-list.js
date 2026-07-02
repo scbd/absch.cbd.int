@@ -25,7 +25,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
-                $scope.isBulkUploaderOpen = false
                 $scope.documentType = ($routeParams.document_type || '').toLowerCase()
                 $scope.selectedRecords = [];
                 // the button text is inside the vue component,
@@ -466,10 +465,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return "";
                 };
 
-                $scope.openBulkUploader = function () {
-                  $scope.isBulkUploaderOpen = true
-                }
-
                 $scope.showAddButton = function () {
 
                     return roleService.isPublishingAuthority() ||
@@ -525,11 +520,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.$on('$destroy', function(){
                     evtServerPushNotification();
                 })
-
-                $scope.handleNewDocumentCreation = function () {
-                  toastr.success(translationService.get('recordListT.draftCreateSuccess'))
-                  return loadRecords(1)
-                };
 
                 $scope.refreshList = function () {
                     return loadRecords(1);
