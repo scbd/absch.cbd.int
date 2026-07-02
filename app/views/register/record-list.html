@@ -59,6 +59,13 @@
                             </span>
                         </div>
 
+                        <div ng-if="bulkDeleteVueComponent.components.BulkDeleteButton && showAddButton()">
+                            <bulk-delete-button
+                                ng-vue="bulkDeleteVueComponent"
+                                :selected-records="selectedRecords"
+                                @deleted="onBulkDeleted($event)">
+                            </bulk-delete-button>
+                        </div>
                         <a type="button" class="btn btn-outline-secondary btn-sm px-1 text-nowrap d-flex" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="bi bi-arrow-repeat float-start"></i> <span class="fs-small-8 d-none d-md-block ps-1 float-end">{{::('recordListT.refresh'|$translate)}}</span>
                         </a>
@@ -67,12 +74,13 @@
                             <i class="bi bi-plus float-start"></i>
                             <span class="d-none d-md-block ps-1 float-end">{{::('recordListT.addNew'|$translate)}}</span>
                         </a>
-                        <div ng-if="isImportingDocumentsSupported">
-                          <documents-uploader
-                            ng-vue="exportVueComponent"
-                            @refresh-record="handleNewDocumentCreation();"
-                            :document-type="documentType"
-                          />
+                        <div ng-if="exportVueComponent.components.DocumentsUploader"
+                        data-bs-toggle="tooltip" title="{{::('recordListT.bulkImportDesc'|$translate)}}">                        
+                            <documents-uploader :title="buttonText"
+                                ng-vue="exportVueComponent"
+                                @on-imported="refreshList($event)"
+                                :document-type="documentType">
+                            </documents-uploader>
                         </div>
                         <a type="button" class="btn btn-secondary btn-sm px-1 text-nowrap d-flex" rel="noopener" translation-url  ng-href="/register" id="close_button">
                             <i class="bi bi-x-circle-fill float-start d-block d-md-none"></i>
@@ -85,20 +93,24 @@
             <table class="table table-hover overflow-hidden w-100 mt-3">
                 <thead>
                     <tr class="text-secondary">
+                        <th ng-if="showAddButton()" class="text-center bi-select-cell" ng-click="toggleSelectAll()" style="width:36px;" title="Select all">
+                            <input type="checkbox" ng-checked="isAllSelected()" class="bi-select-checkbox" />
+                        </th>
                         <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">{{::('recordListT.title'|$translate)}}</th>
                         <!-- ToDo: need to pass correct field -->
                         <!-- <th ng-click="onSort('title.en', 'asc')" id="titleHeader">Title</th> -->
                         <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">{{::('recordListT.type'|$translate)}}</th>
                         <th ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">{{::('recordListT.lastPublished'|$translate)}}</th>
-                        <th class="d-none d-md-block" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">{{::('recordListT.lastUpdated'|$translate)}}</th>
+                        <th class="d-none d-md-table-cell" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">{{::('recordListT.lastUpdated'|$translate)}}</th>
                         <th ng-click="toggleOrderBy('status')" id="statusHeader">{{::('recordListT.status'|$translate)}}</th>
                         <th class="text-end th_width" ng-bind="filteredRecords.length+' Record(s)'"></th>
                     </tr>
                 </thead>
                 <tr ng-cloak ng-show="loading">
-                    <td class="ps-1 text-center p-4" colspan="6"><i class="fa fa-spin fa-cog" ></i> {{::('recordListT.loading'|$translate)}}</td>
+                    <td class="ps-1 text-center p-4" ng-attr-colspan="{{ (showAddButton() ? 1 : 0) + (schema == 'contact' ? 7 : 6) }}"><i class="fa fa-spin fa-cog" ></i> {{::('recordListT.loading'|$translate)}}</td>
                 </tr>
                 <tr ng-if="tourOn">
+                    <td ng-if="showAddButton()" class="text-center align-middle" style="width:36px;"></td>
                     <td class="ps-1 py-3 fs-small-8 w-25">
                         {{::('recordListT.sampleRecord'|$translate)}} <strong>{{schema|urlSchemaShortName}}</strong>
                     </td>
@@ -130,13 +142,24 @@
                     </td>
                 </tr>
                 <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
-                    <td class="ps-1 text-center p-4" colspan="6"> <strong>{{::('recordListT.noRecordsFound'|$translate)}}</strong></td>
+                    <td class="ps-1 text-center p-4" ng-attr-colspan="{{ (showAddButton() ? 1 : 0) + (schema == 'contact' ? 7 : 6) }}"> <strong>{{::('recordListT.noRecordsFound'|$translate)}}</strong></td>
                 </tr>
 
 <!--                <tbody ng-repeat="record in  records">-->
                 <tbody class="border-0" ng-repeat="record in (filteredRecords = (records | filter:statusFilter | orderBy:orderBy))">
-                    <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
+                    <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest, 'bi-row-selected': isSelected(record)}">
 
+                        <td ng-if="showAddButton()" class="text-center align-middle bi-select-cell"
+                            ng-class="{'bi-select-cell--disabled': !isSelectable(record)}"
+                            ng-click="toggleSelection(record)"
+                            style="width:36px;"
+                            title="{{ isDraft(record) && isPublished(record) ? 'Cannot bulk-delete records that have both a draft and a published version' : 'Select for deletion' }}">
+                            <input type="checkbox"
+                                ng-show="record.workflowActivityStatus != 'pending'"
+                                ng-checked="isSelected(record)"
+                                ng-disabled="!isSelectable(record)"
+                                class="bi-select-checkbox" />
+                        </td>
                         <td class="ps-1 fs-small-8 w-25">
                             <span ng-show="isPublished(record) && !isDraft(record) && !isRequest(record)">
                             <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view" ng-show="record.documentID">
@@ -261,7 +284,7 @@
                         </td>
                     </tr>
                     <tr ng-if="displayReference && record.body && record.body.badRevisions && record.body.badRevisions.length > 0" class="border-0" ng-class="{'bg-grey': displayReference}">
-                        <td class="ps-1 fs-small-8 border-0" colspan="6" >
+                        <td class="ps-1 fs-small-8 border-0" ng-attr-colspan="{{ (showAddButton() ? 1 : 0) + (schema == 'contact' ? 7 : 6) }}" >
 
                             <div ng-show="displayReference" block-region activate=" loading">
 

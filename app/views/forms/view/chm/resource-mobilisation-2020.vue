@@ -231,7 +231,7 @@
    import documentDate from '~/views/forms/view/directives/document-date.vue'; 
    import { useI18n } from 'vue-i18n';
    import { lstring } from '~/services/filters/lstring.js'; 
-   import KmDocumentApi from "~/api/km-document.js";
+   import KmDocumentApi from "~/api/km-document";
    import SolrApi from "~/api/solr.js";
    import { useAuth } from "@scbd/angular-vue/src/index.js";
    import _ from 'lodash';

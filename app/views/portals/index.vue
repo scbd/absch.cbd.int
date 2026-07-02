@@ -104,17 +104,13 @@
 import { computed, onMounted, ref, type Ref } from 'vue'
 // @ts-expect-error importing js file
 import { lstring } from '~/components/kb/filters'
-// @ts-expect-error importing js file
 import { mapObjectId, isObjectId } from '~/api/api-base.js'
 // @ts-expect-error importing js file
 import ArticlesApi from '../../components/kb/article-api'
 // @ts-expect-error importing js file
 import PortalsApi from '~/api/portals'
-// @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-// @ts-expect-error importing js file
 import { useRealm } from '~/services/composables/realm.js'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import loading from '~/components/common/loading.vue'
 // @ts-expect-error importing js file

@@ -89,13 +89,9 @@ import {
   ref, computed, onMounted, shallowRef,
   onBeforeUnmount, type Ref, type ComputedRef
 } from 'vue'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
-// @ts-expect-error importing js file
 import { useAuth } from '@scbd/angular-vue/src/index.js'
-// @ts-expect-error importing js file
-import { useRealm } from '../../services/composables/realm.js'
-// @ts-expect-error importing js file
+import { useRealm } from '~/services/composables/realm.js'
 import KmDocumentApi from '~/api/km-document'
 import ModalErrors from './modal-errors.vue'
 import BulkUploaderHeader from './uploader-header.vue'
@@ -119,7 +115,7 @@ const props = defineProps<{
 }>()
 const { t, locale } = useI18n()
 
-const kmDocumentApi = new KmDocumentApi({ tokenReader: () => auth.token(), realm })
+const kmDocumentApi = new KmDocumentApi({ tokenReader: async () => await auth.token(), realm })
 const importDocuments = new ImportDocuments(t, locale.value, props.documentType)
 
 const $emit = defineEmits(['onClose', 'refreshRecord'])
@@ -202,18 +198,21 @@ async function createDocuments (): Promise<DocsResp> {
 
   // Create subdocuments. PIC, The Provider etc..
   const subdocuments = documents.value.subDocuments
-    .map((doc) => kmDocumentApi.createDocument(doc)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- IContactFields header is compatible with DocumentJson at runtime
+    .map(async (doc) => await kmDocumentApi.createDocument(doc as unknown as Parameters<typeof kmDocumentApi.createDocument>[0])
       .catch((error: unknown) => {
         // Attempt to create a document draft of the supporting document
         // if the supporting document contains errors.
         console.warn(error) // eslint-disable-line no-console -- Show error in console
-        kmDocumentApi.createDocumentDraft(doc)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- same as above
+        void kmDocumentApi.createDocumentDraft(doc as unknown as Parameters<typeof kmDocumentApi.createDocumentDraft>[0])
       }))
 
   const docs = documents.value.documents
-    .map(async (doc, row) => await kmDocumentApi.createDocumentDraft(doc)
-      .catch((error: Error) => {
-        const reason = `${t('createError', { documentNumber: row + 1 })} ${error.message}`
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- DocumentRequest with header field is compatible at runtime
+    .map(async (doc, row) => await kmDocumentApi.createDocumentDraft(doc as unknown as Parameters<typeof kmDocumentApi.createDocumentDraft>[0])
+      .catch((error: unknown) => {
+        const reason = `${t('createError', { documentNumber: row + 1 })} ${error instanceof Error ? error.message : String(error)}`
         const e: DocError = { level: 'error', reason, message: reason, name: 'createError' }
         errors.value.push(e)
         isLoading.value = false
@@ -231,7 +230,8 @@ async function createDocuments (): Promise<DocsResp> {
   onClose()
   modalRef.value.close()
 
-  return resp
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- Promise.all result matches DocsResp at runtime
+  return resp as DocsResp
 }
 
 function handleCloseClick (): undefined {

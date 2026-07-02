@@ -55,5 +55,12 @@
     "bySystem": "By system",
     "deleteDraftRecord": "The draft record must be deleted before the published record can be removed.",
     "errorDeletingDraft": "There was an error in deleting draft record.",
-    "draftCreateSuccess": "Document draft(s) created."
+    "draftCreateSuccess": "Document draft(s) created.",
+    "bulkImport": "Bulk import",
+    "bulkImportDesc": "Import multiple records at once using a excel file.",
+    "deleteSelected": "Delete selected",
+    "confirmBulkDelete": "Are you sure you want to delete the selected records? This action cannot be undone.",
+    "bulkDeleteSuccess": "record(s) processed for deletion.",
+    "selectForDeletion": "Select for deletion",
+    "cannotBulkDelete": "Cannot bulk-delete records that have both a draft and a published version"
 }

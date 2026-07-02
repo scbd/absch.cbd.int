@@ -50,6 +50,8 @@ app.factory('translationService',  ['locale', function(locale) {
 app.filter('$translate', ['translationService', function(translationService){
 
     return function(key){
+        if(key == 'recordListT.bulkImport')
+            console.log('translationService.get', key);
         return translationService.get(key) || key;
     };
 
