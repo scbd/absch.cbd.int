@@ -42,9 +42,9 @@
   
     const goToAdminTag = (adminTag: string) => {
       if (adminTag === 'faq') {
-        router.push({ path: 'kb/faqs' });
+        router.push('kb/faqs');
       } else {
-        router.push({ path: `kb/tags/${encodeURIComponent(adminTag)}` });
+        router.push(`kb/tags/${encodeURIComponent(adminTag)}`);
       }
     };
   

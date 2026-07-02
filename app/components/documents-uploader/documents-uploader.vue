@@ -39,11 +39,10 @@
   </div>
 </template>
 <script setup lang="ts">
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import LoadingOverlay from '../common/loading-overlay.vue'
 import {
-  ref, shallowRef, defineEmits, defineComponent,
+  ref, shallowRef, defineComponent,
   type Ref, type Component
 } from 'vue'
 import uploaderMessages from '~/app-text/components/bulk-documents-uploader.json'

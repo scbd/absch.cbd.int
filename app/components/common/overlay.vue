@@ -23,7 +23,6 @@ Used in ./loading-overlay.vue and ./components/documents-uploader/warning-overla
   </div>
 </template>
 <script setup lang="ts">
-import { withDefaults } from 'vue'
 withDefaults(
   defineProps<{ opacity?: number }>(),
   { opacity: 0.3 }
