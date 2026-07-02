@@ -100,8 +100,9 @@ Core business logic for the bulk import feature.
 - `app/components/bulk-import/framework/build-preview.ts`
 - `app/components/bulk-import/framework/build-documents.ts`
 - `app/components/bulk-import/framework/submit-documents.ts`
-- `app/components/bulk-import/framework/use-bulk-import.ts`
-- `app/components/bulk-import/registry.ts`
+
+> **Note:** `use-bulk-import.ts` and `registry.ts` moved to branch 3d — both import the ircc
+> document type (via `registry.ts`), so they can't compile before 3d lands.
 
 **Depends on:** Branches 3a + 3b
 
@@ -116,6 +117,8 @@ IRCC document type implementation.
 - `app/components/bulk-import/document-types/ircc/attributes-map.ts`
 - `app/components/bulk-import/document-types/ircc/schema.ts`
 - `app/app-text/components/bulk-import/document-types/ircc.json`
+- `app/components/bulk-import/registry.ts` *(moved from 3c — imports ircc)*
+- `app/components/bulk-import/framework/use-bulk-import.ts` *(moved from 3c — imports registry)*
 
 **Depends on:** Branch 3c
 
