@@ -150,16 +150,29 @@ export interface SchemaInstance {
 // Uploader state machine
 // ---------------------------------------------------------------------------
 
-export type UploaderState =
-  | { phase: 'empty' }
-  | { phase: 'parsing'; fileName: string; steps: ParseStep[] }
-  | { phase: 'preview'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'confirm-import'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[]; draftCount: number; linkedCount: number; documents: DocumentRequest[]; linkedRecords: LinkedRecordStore; buildErrors: DocBuildError[] }
-  | { phase: 'confirm-close'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'confirm-erase'; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
-  | { phase: 'importing'; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[]; currentPush?: PushProgress }
-  | { phase: 'done'; imported: number; failed: number; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
-  | { phase: 'parse-error' }
-  | { phase: 'import-error' }
+export const UPLOADER_PHASE = {
+  empty: 'empty',
+  parsing: 'parsing',
+  preview: 'preview',
+  confirmImport: 'confirm-import',
+  confirmClose: 'confirm-close',
+  confirmErase: 'confirm-erase',
+  importing: 'importing',
+  done: 'done',
+  parseError: 'parse-error',
+  importError: 'import-error'
+} as const
 
-export type UploaderPhase = UploaderState['phase']
+export type UploaderPhase = typeof UPLOADER_PHASE[keyof typeof UPLOADER_PHASE]
+
+export type UploaderState =
+  | { phase: typeof UPLOADER_PHASE.empty }
+  | { phase: typeof UPLOADER_PHASE.parsing; fileName: string; steps: ParseStep[] }
+  | { phase: typeof UPLOADER_PHASE.preview; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
+  | { phase: typeof UPLOADER_PHASE.confirmImport; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[]; draftCount: number; linkedCount: number; documents: DocumentRequest[]; linkedRecords: LinkedRecordStore; buildErrors: DocBuildError[] }
+  | { phase: typeof UPLOADER_PHASE.confirmClose; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
+  | { phase: typeof UPLOADER_PHASE.confirmErase; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
+  | { phase: typeof UPLOADER_PHASE.importing; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[]; currentPush?: PushProgress }
+  | { phase: typeof UPLOADER_PHASE.done; imported: number; failed: number; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
+  | { phase: typeof UPLOADER_PHASE.parseError }
+  | { phase: typeof UPLOADER_PHASE.importError }

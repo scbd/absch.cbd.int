@@ -16,10 +16,8 @@
     <span class="flex-grow-1" />
 
     <input
-      :value="search"
-      type="search"
-      class="form-control form-control-sm"
-      style="width: 210px;"
+      :value="search" type="search"
+      class="form-control form-control-sm" style="width: 210px;"
       :placeholder="t('bulkImport.search', 'Search documents...')"
       @input="emit('update:search', ($event.target as HTMLInputElement).value)"
     >

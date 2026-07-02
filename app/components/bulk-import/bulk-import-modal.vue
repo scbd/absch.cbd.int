@@ -1,39 +1,24 @@
 <template>
-  <div
-    class="modal show d-block"
-    tabindex="-1"
-    data-bs-backdrop="static"
-  >
+  <div class="modal show d-block" tabindex="-1" data-bs-backdrop="static">
     <div
       class="modal-dialog m-auto d-flex flex-column"
       style="max-width: min(1560px, 97vw); height: min(940px, 95vh);"
     >
       <div
         class="modal-content flex-grow-1 d-flex flex-column overflow-hidden position-relative"
-        role="dialog"
-        aria-modal="true"
+        role="dialog" aria-modal="true"
       >
         <div class="modal-header d-block p-0 border-0">
           <BulkImportHeader
-            :phase="state.phase"
-            :file-name="fileName"
-            :row-count="previewRows.length"
-            @close="onClose"
-            @clear="onClear"
+            :phase="state.phase" :file-name="fileName" :row-count="previewRows.length"
+            @on-close="onClose" @on-clear="onClear"
           />
         </div>
 
         <div class="modal-body p-0 overflow-hidden d-flex flex-column">
-          <BulkImportBanner
-            :banner="banner"
-            :banner-errors="bannerErrors"
-          />
+          <BulkImportBanner :banner="banner" :banner-errors="bannerErrors" />
 
-          <BulkImportToolbar
-            v-if="hasPreview"
-            v-model:search="search"
-            :row-count="previewRows.length"
-          />
+          <BulkImportToolbar v-if="hasPreview" v-model:search="search" :row-count="previewRows.length" />
 
           <div
             v-if="state.phase === 'parse-error'"
@@ -41,61 +26,31 @@
             style="background: #fff3f3; border-color: #f5c6c6 !important;"
           >
             <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-            ><circle
-              cx="12"
-              cy="12"
-              r="10"
-            /><line
-              x1="12"
-              y1="8"
-              x2="12"
-              y2="12"
-            /><line
-              x1="12"
-              y1="16"
-              x2="12.01"
-              y2="16"
-            /></svg>
+              width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            ><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
             {{ t('bulkImport.parseError') }}
           </div>
 
-          <BulkImportDropzone
-            v-if="state.phase === 'empty' || state.phase === 'parse-error'"
-            @file="onFilePicked"
-          />
+          <BulkImportDropzone v-if="state.phase === 'empty' || state.phase === 'parse-error'" @on-file-selected="onFilePicked" />
 
           <BulkImportParsing
             v-else-if="state.phase === 'parsing'"
-            :file-name="state.fileName"
-            :steps="parsingSteps"
-            :progress="parseProgress"
+            :file-name="state.fileName" :steps="parsingSteps" :progress="parseProgress"
           />
 
           <BulkImportTable
             v-else-if="hasPreview"
-            :rows="filteredRows"
-            :pinned-column-keys="docTypeDef.pinnedColumns ?? []"
-            :scrollable-column-keys="scrollableColumnKeys"
-            :column-groups="columnGroups"
-            :required-keys="requiredKeys"
-            :row-progress-list="rowProgressList"
+            :rows="filteredRows" :pinned-column-keys="docTypeDef.pinnedColumns ?? []"
+            :scrollable-column-keys="scrollableColumnKeys" :column-groups="columnGroups"
+            :required-keys="requiredKeys" :row-progress-list="rowProgressList"
           />
 
           <div
             v-else-if="state.phase === 'import-error'"
             class="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-muted"
           >
-            <i
-              class="fa fa-exclamation-circle text-danger"
-              style="font-size: 3rem;"
-            />
+            <i class="fa fa-exclamation-circle text-danger" style="font-size: 3rem;" />
             <p class="mt-3">
               {{ t('bulkImport.importError') }}
             </p>
@@ -103,63 +58,28 @@
         </div>
 
         <div class="modal-footer justify-content-start gap-2 px-4 py-3">
-          <button
-            type="button"
-            class="btn btn-sm btn-outline-secondary"
-            @click="onClose"
-          >
+          <button type="button" class="btn btn-sm btn-outline-secondary" @click="onClose">
             {{ t('bulkImport.close') }}
           </button>
 
-          <span
-            v-if="state.phase === 'importing'"
-            class="small text-muted"
-          >{{ currentPushLabel }}</span>
+          <span v-if="state.phase === 'importing'" class="small text-muted">{{ currentPushLabel }}</span>
 
           <span class="flex-grow-1" />
 
           <template v-if="state.phase === 'preview' || state.phase === 'confirm-import' || state.phase === 'confirm-close' || state.phase === 'confirm-erase'">
-            <span
-              v-if="hasErrors"
-              class="d-flex align-items-center gap-1 small fw-medium text-danger"
-            >
+            <span v-if="hasErrors" class="d-flex align-items-center gap-1 small fw-medium text-danger">
               <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-              ><circle
-                cx="12"
-                cy="12"
-                r="10"
-              /><line
-                x1="12"
-                y1="8"
-                x2="12"
-                y2="12"
-              /><line
-                x1="12"
-                y1="16"
-                x2="12.01"
-                y2="16"
-              /></svg>
+                width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              ><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
               {{ t('bulkImport.resolveErrors') }}
             </span>
-            <button
-              type="button"
-              class="btn btn-sm btn-outline-secondary"
-              @click="onClear"
-            >
+            <button type="button" class="btn btn-sm btn-outline-secondary" @click="onClear">
               {{ t('bulkImport.clearList') }}
             </button>
             <button
-              type="button"
-              class="bi-btn-orange"
-              :disabled="hasErrors || isBuilding"
-              @click="onClickConfirmImport"
+              type="button" class="bi-btn-orange"
+              :disabled="hasErrors || isBuilding" @click="onClickConfirmImport"
             >
               {{ isBuilding ? t('bulkImport.building') : t('bulkImport.createDrafts') }}
             </button>
@@ -172,18 +92,15 @@
 
           <span
             v-if="state.phase === 'done'"
-            class="small"
-            :class="state.failed > 0 ? 'text-danger' : 'text-success'"
+            class="small" :class="state.failed > 0 ? 'text-danger' : 'text-success'"
           >{{ t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed }) }}</span>
         </div>
 
         <BulkImportConfirmDialog
           v-if="state.phase === 'confirm-import'"
-          :message="t('bulkImport.confirmMsg')"
-          :confirm-label="t('bulkImport.confirm')"
+          :message="t('bulkImport.confirmMsg')" :confirm-label="t('bulkImport.confirm')"
           confirm-class="btn-primary bi-btn--orange"
-          @confirm="onImport"
-          @cancel="onCancelConfirm"
+          @on-confirm="onImport" @on-cancel="onCancelConfirm"
         >
           <ul class="list-unstyled small text-muted text-start mb-1">
             <li>{{ t('bulkImport.confirmDraftCount', { n: state.draftCount }) }}</li>
@@ -195,26 +112,22 @@
 
         <BulkImportConfirmDialog
           v-if="state.phase === 'confirm-close'"
-          :message="t('bulkImport.closeConfirm')"
-          :confirm-label="t('bulkImport.confirmClose')"
+          :message="t('bulkImport.closeConfirm')" :confirm-label="t('bulkImport.confirmClose')"
           confirm-class="btn-danger"
-          @confirm="onForceClose"
-          @cancel="onCancelConfirm"
+          @on-confirm="onForceClose" @on-cancel="onCancelConfirm"
         />
 
         <BulkImportConfirmDialog
           v-if="state.phase === 'confirm-erase'"
-          :message="t('bulkImport.eraseConfirm')"
-          :confirm-label="t('bulkImport.confirmErase')"
+          :message="t('bulkImport.eraseConfirm')" :confirm-label="t('bulkImport.confirmErase')"
           confirm-class="btn-danger"
-          @confirm="onConfirmErase"
-          @cancel="onCancelConfirm"
+          @on-confirm="onConfirmErase" @on-cancel="onCancelConfirm"
         />
 
         <BulkImportDoneDialog
           v-if="state.phase === 'done' && !doneDialogDismissed"
           :message="t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed })"
-          @close="onDoneDialogClose"
+          @on-close="onDoneDialogClose"
         />
       </div>
     </div>
@@ -239,6 +152,9 @@ import BulkImportTable from './components/bulk-import-table.vue'
 import BulkImportConfirmDialog from './components/bulk-import-confirm-dialog.vue'
 import BulkImportDoneDialog from './components/bulk-import-done-dialog.vue'
 
+interface ColumnGroup { label: string; keys: string[] }
+type StateWithErrors = Extract<typeof state, { errors: unknown[] }>
+
 const props = defineProps<{ documentType: DocumentTypes }>()
 const emit = defineEmits<{
   onClose: []
@@ -258,42 +174,12 @@ const {
   onConfirmErase: _onConfirmErase, onCancelConfirm
 } = useBulkImport(props.documentType)
 
-function onClose () {
-  _onClose()
-  if (state.phase === 'empty') emit('onClose')
-}
-function onForceClose () {
-  _onForceClose()
-  emit('onClose')
-}
-function onConfirmErase () {
-  _onConfirmErase()
-}
+const { [props.documentType]: docTypeDef } = registry
 
-const doneDialogDismissed = ref(false)
-
-function onDoneDialogClose () {
-  doneDialogDismissed.value = true
-  emit('onImported')
-}
-
-const isBuilding = ref(false)
-async function onClickConfirmImport () {
-  isBuilding.value = true
-  await onConfirmImport()
-  isBuilding.value = false
-}
-
-// -------------------------------------------------------------------------
-// File handling
-// -------------------------------------------------------------------------
 const fileName = ref('')
-
-function onFilePicked (file: File) {
-  const { name } = file
-  fileName.value = name
-  void onFileChange(file)
-}
+const search = ref('')
+const doneDialogDismissed = ref(false)
+const isBuilding = ref(false)
 
 // -------------------------------------------------------------------------
 // Parsing progress
@@ -313,8 +199,6 @@ const parseProgress = computed(() => {
 // -------------------------------------------------------------------------
 // Derived display state
 // -------------------------------------------------------------------------
-const search = ref('')
-
 const hasPreview = computed(() =>
   state.phase === 'preview' ||
   state.phase === 'confirm-import' ||
@@ -341,7 +225,6 @@ const filteredRows = computed(() => {
   return rows
 })
 
-type StateWithErrors = Extract<typeof state, { errors: unknown[] }>
 const sheetErrors = computed<SheetError[]>(() => {
   if (!hasPreview.value) return []
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- hasPreview guards phases that have errors
@@ -378,7 +261,7 @@ const bannerErrors = computed<BannerErrorGroup[]>(() => {
     const g = groups.get(e.row)
     if (g === undefined) continue
     if (e.level === 'error') g.worstLevel = 'error'
-    g.items.push({ fieldLabel: columnLabel(String(e.column)), message: e.message, level: e.level })
+    g.items.push({ fieldLabel: t(String(e.column), String(e.column)), message: e.message, level: e.level })
   }
   return [...groups.values()].sort((a, b) => a.row - b.row)
 })
@@ -405,8 +288,6 @@ const currentPushLabel = computed(() => {
 // -------------------------------------------------------------------------
 // Table column metadata
 // -------------------------------------------------------------------------
-const { [props.documentType]: docTypeDef } = registry
-
 const allColumnKeys = computed(() => {
   if (!hasPreview.value) return []
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- hasPreview guards phases that have preview
@@ -418,17 +299,12 @@ const scrollableColumnKeys = computed(() => {
   return allColumnKeys.value.filter((k: string) => !pinned.has(k))
 })
 
-interface ColumnGroup { label: string; keys: string[] }
 const columnGroups = computed<ColumnGroup[]>(() => {
   const cols = new Set(scrollableColumnKeys.value)
   return (docTypeDef.columnGroups ?? [])
     .map(g => ({ label: t(g.translationKey), keys: g.keys.filter(k => cols.has(k)) }))
     .filter(g => g.keys.length > 0)
 })
-
-function columnLabel (key: string): string {
-  return t(key, key)
-}
 
 // the columns are nested in the document schema, so we need to traverse the schema to find the required columns
 const requiredKeys = computed<Set<string>>(() => {
@@ -450,6 +326,40 @@ const requiredKeys = computed<Set<string>>(() => {
     })
   )
 })
+
+// -------------------------------------------------------------------------
+// Event handlers
+// -------------------------------------------------------------------------
+function onClose () {
+  _onClose()
+  if (state.phase === 'empty') emit('onClose')
+}
+
+function onForceClose () {
+  _onForceClose()
+  emit('onClose')
+}
+
+function onConfirmErase () {
+  _onConfirmErase()
+}
+
+function onDoneDialogClose () {
+  doneDialogDismissed.value = true
+  emit('onImported')
+}
+
+async function onClickConfirmImport () {
+  isBuilding.value = true
+  await onConfirmImport()
+  isBuilding.value = false
+}
+
+function onFilePicked (file: File) {
+  const { name } = file
+  fileName.value = name
+  void onFileChange(file)
+}
 </script>
 
 <style scoped>

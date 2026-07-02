@@ -6,7 +6,7 @@ import { readSheet } from './read-sheet'
 import { buildPreview } from './build-preview'
 import { buildDocuments } from './build-documents'
 import { submitDocuments } from './submit-documents'
-import { PARSE_STEP_KEY, PARSE_STEP_STATUS, ROW_IMPORT_STATUS } from './types'
+import { PARSE_STEP_KEY, PARSE_STEP_STATUS, ROW_IMPORT_STATUS, UPLOADER_PHASE } from './types'
 import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep, SheetError, PreviewData, TokenReader, PushProgress } from './types'
 import { registry } from '../registry'
 import { sleep } from '~/services/composables/utils.js'
@@ -50,7 +50,7 @@ export function useBulkImport (documentType: DocumentTypes): {
     mergeLocaleMessage(locale, msgs)
   }
 
-  const state = reactive<UploaderState>({ phase: 'empty' })
+  const state = reactive<UploaderState>({ phase: UPLOADER_PHASE.empty })
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- token is always present when the user is authenticated
   const tokenReader: TokenReader = async () => (await auth.token())!
@@ -62,16 +62,19 @@ export function useBulkImport (documentType: DocumentTypes): {
       { key: PARSE_STEP_KEY.validateRows, status: PARSE_STEP_STATUS.pending },
       { key: PARSE_STEP_KEY.buildPreview, status: PARSE_STEP_STATUS.pending }
     ]
-    Object.assign(state, { phase: 'parsing', fileName: file.name, steps })
+    Object.assign(state, { phase: UPLOADER_PHASE.parsing, fileName: file.name, steps })
 
     function setStep (key: ParseStep['key'], status: ParseStep['status'], detail?: string): void {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- state is always 'parsing' here
-      const s = state as unknown as Extract<UploaderState, { phase: 'parsing' }>
+      const s = state as unknown as Extract<UploaderState, { phase: typeof UPLOADER_PHASE.parsing }>
       const idx = s.steps.findIndex(st => st.key === key)
+      // use splice to keep reativity
       if (idx >= 0) s.steps.splice(idx, 1, { key, status, detail })
     }
 
     try {
+      // faking a delay so that the animation is visible
+
       // Steps 1+2: read the sheet (minimum duration so the animation is visible)
       const [{ rows, errors: sheetErrors }] = await Promise.all([
         readSheet(file, definition.attributesMap, definition.headerRows),
@@ -99,20 +102,20 @@ export function useBulkImport (documentType: DocumentTypes): {
       setStep(PARSE_STEP_KEY.buildPreview, PARSE_STEP_STATUS.done)
       await sleep(PREVIEW_DELAY_MS)
 
-      Object.assign(state, { phase: 'preview', preview, rawRows: rows, errors: allErrors })
+      Object.assign(state, { phase: UPLOADER_PHASE.preview, preview, rawRows: rows, errors: allErrors })
     } catch {
-      Object.assign(state, { phase: 'parse-error' })
+      Object.assign(state, { phase: UPLOADER_PHASE.parseError })
     }
   }
 
   async function onImport (): Promise<void> {
-    if (state.phase !== 'confirm-import') return
-    const current = state as Extract<UploaderState, { phase: 'confirm-import' }>
+    if (state.phase !== UPLOADER_PHASE.confirmImport) return
+    const current = state as Extract<UploaderState, { phase: typeof UPLOADER_PHASE.confirmImport }>
 
     const { preview, rawRows } = current
     const progress: RowProgress[] = rawRows.map((_, i) => ({ rowIndex: i, status: ROW_IMPORT_STATUS.pending }))
 
-    Object.assign(state, { phase: 'importing', preview, rawRows, progress })
+    Object.assign(state, { phase: UPLOADER_PHASE.importing, preview, rawRows, progress })
 
     try {
       const { documents, linkedRecords, buildErrors } = current
@@ -127,31 +130,31 @@ export function useBulkImport (documentType: DocumentTypes): {
             // Mutating the raw `progress` array directly bypasses the proxy and silently no-ops.
             // Cast to full union: TS narrows `state` to confirm-import above, but Object.assign changed it.
             const s = state as UploaderState
-            if (s.phase !== 'importing') return
+            if (s.phase !== UPLOADER_PHASE.importing) return
             const idx = s.progress.findIndex(r => r.rowIndex === p.rowIndex)
             if (idx >= 0) s.progress.splice(idx, 1, p)
           },
           onPush: (p: PushProgress) => {
             const s = state as UploaderState
-            if (s.phase !== 'importing') return
+            if (s.phase !== UPLOADER_PHASE.importing) return
             s.currentPush = p
           }
         }
       )
 
-      Object.assign(state, { phase: 'done', imported, failed, preview, rawRows, progress })
+      Object.assign(state, { phase: UPLOADER_PHASE.done, imported, failed, preview, rawRows, progress })
     } catch {
-      Object.assign(state, { phase: 'import-error' })
+      Object.assign(state, { phase: UPLOADER_PHASE.importError })
     }
   }
 
   async function onConfirmImport (): Promise<void> {
-    if (state.phase !== 'preview') return
-    const current = state as Extract<UploaderState, { phase: 'preview' }>
+    if (state.phase !== UPLOADER_PHASE.preview) return
+    const current = state as Extract<UploaderState, { phase: typeof UPLOADER_PHASE.preview }>
     const { documents, linkedRecords, errors: buildErrors } = await buildDocuments(current.rawRows, definition, tokenReader)
-    if ((state as UploaderState).phase !== 'preview') return
+    if ((state as UploaderState).phase !== UPLOADER_PHASE.preview) return
     Object.assign(state, {
-      phase: 'confirm-import',
+      phase: UPLOADER_PHASE.confirmImport,
       preview: current.preview,
       rawRows: current.rawRows,
       errors: current.errors,
@@ -165,28 +168,28 @@ export function useBulkImport (documentType: DocumentTypes): {
 
   function onClose (): void {
     const { phase } = state as UploaderState
-    if (phase === 'importing') return
-    if (phase === 'empty' || phase === 'done' || phase === 'parse-error' || phase === 'import-error') {
-      Object.assign(state, { phase: 'empty' })
+    if (phase === UPLOADER_PHASE.importing) return
+    if (phase === UPLOADER_PHASE.empty || phase === UPLOADER_PHASE.done || phase === UPLOADER_PHASE.parseError || phase === UPLOADER_PHASE.importError) {
+      Object.assign(state, { phase: UPLOADER_PHASE.empty })
     } else {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- non-importing/empty/done phases all have errors+preview
       const s = state as StateWithErrors & StateWithPreview
       const { errors } = s
-      Object.assign(state, { phase: 'confirm-close', preview: s.preview, rawRows: s.rawRows, errors })
+      Object.assign(state, { phase: UPLOADER_PHASE.confirmClose, preview: s.preview, rawRows: s.rawRows, errors })
     }
   }
 
   function onForceClose (): void {
-    Object.assign(state, { phase: 'empty' })
+    Object.assign(state, { phase: UPLOADER_PHASE.empty })
   }
 
   function onClear (): void {
     const s = state as UploaderState
-    if (s.phase === 'preview' || s.phase === 'confirm-import') {
+    if (s.phase === UPLOADER_PHASE.preview || s.phase === UPLOADER_PHASE.confirmImport) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- preview and confirm-import phases always have errors+preview
       const ps = state as StateWithErrors & StateWithPreview
       Object.assign(state, {
-        phase: 'confirm-erase',
+        phase: UPLOADER_PHASE.confirmErase,
         preview: ps.preview,
         rawRows: ps.rawRows,
         errors: ps.errors
@@ -195,16 +198,16 @@ export function useBulkImport (documentType: DocumentTypes): {
   }
 
   function onConfirmErase (): void {
-    Object.assign(state, { phase: 'empty' })
+    Object.assign(state, { phase: UPLOADER_PHASE.empty })
   }
 
   function onCancelConfirm (): void {
     const s = state as UploaderState
-    if (s.phase === 'confirm-close' || s.phase === 'confirm-erase' || s.phase === 'confirm-import') {
+    if (s.phase === UPLOADER_PHASE.confirmClose || s.phase === UPLOADER_PHASE.confirmErase || s.phase === UPLOADER_PHASE.confirmImport) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- all confirm phases have errors+preview
       const ps = state as StateWithErrors & StateWithPreview
       Object.assign(state, {
-        phase: 'preview',
+        phase: UPLOADER_PHASE.preview,
         preview: ps.preview,
         rawRows: ps.rawRows,
         errors: ps.errors

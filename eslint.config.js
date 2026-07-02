@@ -20,6 +20,8 @@ const vueTs = defineConfigWithVueTs([
     rules: {
       ...love.rules,
       'no-useless-assignment': 'off',
+      // Allow grouping several attributes per line instead of one-per-line
+      'vue/max-attributes-per-line': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/strict-boolean-expressions': 'off',
       '@typescript-eslint/no-magic-numbers': 'off'

@@ -12,59 +12,21 @@
     >
       <svg
         v-if="banner.level === 'ok'"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
+        width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
       ><polyline points="20 6 9 17 4 12" /></svg>
       <svg
         v-else-if="banner.level === 'importing'"
-        class="bi-spinner"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-      ><circle
-        cx="12"
-        cy="12"
-        r="10"
-        stroke-opacity="0.25"
-      /><path d="M12 2a10 10 0 0 1 10 10" /></svg>
+        class="bi-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+      ><circle cx="12" cy="12" r="10" stroke-opacity="0.25" /><path d="M12 2a10 10 0 0 1 10 10" /></svg>
       <svg
         v-else
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-      ><circle
-        cx="12"
-        cy="12"
-        r="10"
-      /><line
-        x1="12"
-        y1="8"
-        x2="12"
-        y2="12"
-      /><line
-        x1="12"
-        y1="16"
-        x2="12.01"
-        y2="16"
-      /></svg>
+        width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+      ><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
     </div>
-    <div
-      class="d-flex flex-column flex-grow-1 overflow-hidden"
-      style="min-height: 0;"
-    >
+    <div class="d-flex flex-column flex-grow-1 overflow-hidden" style="min-height: 0;">
       <div
         class="fw-semibold"
         :class="banner.level === 'ok' ? 'bi-head--ok' : banner.level === 'importing' ? 'bi-head--importing' : 'bi-head--danger'"
@@ -76,11 +38,7 @@
         class="list-unstyled mt-2 mb-0 p-0 d-flex flex-column gap-1"
         style="max-height: 180px; overflow-y: auto;"
       >
-        <li
-          v-for="group in bannerErrors"
-          :key="group.row"
-          class="d-flex align-items-start gap-2"
-        >
+        <li v-for="group in bannerErrors" :key="group.row" class="d-flex align-items-start gap-2">
           <span
             class="font-monospace fw-bold rounded-1 border flex-shrink-0"
             :class="group.worstLevel === 'error' ? 'bi-rk--error' : 'bi-rk--warn'"
@@ -88,15 +46,8 @@
           >
             Row {{ group.row }}
           </span>
-          <span
-            class="d-flex flex-column"
-            style="gap: 2px;"
-          >
-            <span
-              v-for="(item, i) in group.items"
-              :key="i"
-              class="d-block"
-            >
+          <span class="d-flex flex-column" style="gap: 2px;">
+            <span v-for="(item, i) in group.items" :key="i" class="d-block">
               <b>{{ item.fieldLabel }}</b> — {{ item.message }}
             </span>
           </span>

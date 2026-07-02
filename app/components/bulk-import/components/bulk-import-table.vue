@@ -1,59 +1,37 @@
 <template>
-  <div
-    class="bi-table-scroll"
-    :class="{ 'bi-table--compact': compact, 'bi-table--wrap': wrapText }"
-  >
+  <div class="bi-table-scroll" :class="{ 'bi-table--compact': compact, 'bi-table--wrap': wrapText }">
     <table class="bi-table">
       <thead>
         <tr class="bi-table__grp-row">
-          <th
-            class="bi-pin bi-pin--0 bi-grp"
-            rowspan="2"
-          >
+          <th class="bi-pin bi-pin--0 bi-grp" rowspan="2">
             #
           </th>
-          <th
-            class="bi-pin bi-pin--1 bi-grp"
-            rowspan="2"
-          >
+          <th class="bi-pin bi-pin--1 bi-grp" rowspan="2">
             {{ t('bulkImport.status', 'Status') }}
           </th>
           <th
-            v-for="(key, i) in pinnedColumnKeys"
-            :key="key"
-            :class="`bi-pin bi-pin--${i + 2} bi-grp`"
-            rowspan="2"
+            v-for="(key, i) in pinnedColumnKeys" :key="key"
+            :class="`bi-pin bi-pin--${i + 2} bi-grp`" rowspan="2"
           >
-            {{ columnLabel(key) }}
+            {{ t(key, key) }}
           </th>
-          <th
-            v-for="grp in columnGroups"
-            :key="grp.label"
-            :colspan="grp.keys.length"
-            class="bi-grp"
-          >
+          <th v-for="grp in columnGroups" :key="grp.label" :colspan="grp.keys.length" class="bi-grp">
             {{ grp.label }}
           </th>
         </tr>
         <tr class="bi-table__col-row">
           <th
-            v-for="key in scrollableColumnKeys"
-            :key="key"
-            class="bi-col"
-            :class="{ 'bi-col--required': requiredKeys.has(key) }"
+            v-for="key in scrollableColumnKeys" :key="key"
+            class="bi-col" :class="{ 'bi-col--required': requiredKeys.has(key) }"
           >
-            {{ columnLabel(key) }}
+            {{ t(key, key) }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr
-          v-for="row in rows"
-          :key="row.rowIndex"
-          :class="{
-            'bi-row--error': row.status === 'error',
-            'bi-row--warn': row.status === 'warn'
-          }"
+          v-for="row in rows" :key="row.rowIndex"
+          :class="{ 'bi-row--error': row.status === 'error', 'bi-row--warn': row.status === 'warn' }"
         >
           <td class="bi-pin bi-pin--0 bi-idx">
             {{ row.rowIndex + 1 }}
@@ -61,101 +39,54 @@
 
           <td class="bi-pin bi-pin--1">
             <span
-              v-if="rowProgressFor(row.rowIndex)"
-              class="bi-stat"
-              :class="`bi-stat--${rowProgressFor(row.rowIndex)?.status}`"
+              v-if="progressByRow.get(row.rowIndex)"
+              class="bi-stat" :class="`bi-stat--${progressByRow.get(row.rowIndex)?.status}`"
             >
-              <span class="bi-stat__dot" />{{ rowProgressFor(row.rowIndex)?.status }}
+              <span class="bi-stat__dot" />{{ progressByRow.get(row.rowIndex)?.status }}
             </span>
-            <span
-              v-else
-              class="bi-stat"
-              :class="`bi-stat--${row.status}`"
-            >
+            <span v-else class="bi-stat" :class="`bi-stat--${row.status}`">
               <span class="bi-stat__dot" />{{ row.status }}
             </span>
-            <div
-              v-if="rowProgressFor(row.rowIndex)?.message"
-              class="bi-push-err"
-            >
-              {{ rowProgressFor(row.rowIndex)?.message }}
+            <div v-if="progressByRow.get(row.rowIndex)?.message" class="bi-push-err">
+              {{ progressByRow.get(row.rowIndex)?.message }}
             </div>
           </td>
 
-          <td
-            v-for="(key, i) in pinnedColumnKeys"
-            :key="key"
-            :class="`bi-pin bi-pin--${i + 2}`"
-          >
+          <td v-for="(key, i) in pinnedColumnKeys" :key="key" :class="`bi-pin bi-pin--${i + 2}`">
             {{ row.cells[key]?.display ?? '' }}
           </td>
 
           <td
-            v-for="key in scrollableColumnKeys"
-            :key="key"
+            v-for="key in scrollableColumnKeys" :key="key"
             :class="{
               'bi-cell--err': cellHasError(row, key),
               'bi-cell--warn': cellHasWarn(row, key),
               'bi-cell--long': isLongText(row.cells[key]?.display ?? '')
             }"
           >
-            <span
-              v-if="isBoolYes(row.cells[key]?.display ?? '')"
-              class="bi-chip bi-chip--yes"
-            >
+            <span v-if="isBoolYes(row.cells[key]?.display ?? '')" class="bi-chip bi-chip--yes">
               <svg
-                width="11"
-                height="11"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-                stroke-linecap="round"
+                width="11" height="11" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="3" stroke-linecap="round"
               ><polyline points="20 6 9 17 4 12" /></svg>
               {{ row.cells[key]?.display }}
             </span>
-            <span
-              v-else-if="isBoolNo(row.cells[key]?.display ?? '')"
-              class="bi-chip bi-chip--no"
-            >
+            <span v-else-if="isBoolNo(row.cells[key]?.display ?? '')" class="bi-chip bi-chip--no">
               {{ row.cells[key]?.display }}
             </span>
-            <span
-              v-else-if="isChipVal(row.cells[key]?.display ?? '')"
-              class="bi-chip"
-            >
+            <span v-else-if="isChipVal(row.cells[key]?.display ?? '')" class="bi-chip">
               {{ row.cells[key]?.display }}
             </span>
             <span v-else>{{ row.cells[key]?.display ?? '' }}</span>
             <span
               v-if="cellHasError(row, key) || cellHasWarn(row, key)"
-              class="bi-cellnote"
-              :class="cellHasError(row, key) ? 'bi-cellnote--err' : 'bi-cellnote--warn'"
+              class="bi-cellnote" :class="cellHasError(row, key) ? 'bi-cellnote--err' : 'bi-cellnote--warn'"
             >
               <svg
-                width="11"
-                height="11"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
+                width="11" height="11" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                 style="flex-shrink:0;margin-top:1px"
-              ><circle
-                cx="12"
-                cy="12"
-                r="10"
-              /><line
-                x1="12"
-                y1="8"
-                x2="12"
-                y2="12"
-              /><line
-                x1="12"
-                y1="16"
-                x2="12.01"
-                y2="16"
-              /></svg>
+              ><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
               {{ row.cells[key]?.errors[0]?.message }}
             </span>
           </td>
@@ -166,6 +97,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { PreviewRow, RowProgress } from '../framework/types'
 
@@ -184,13 +116,7 @@ const props = defineProps<{
 
 const { t } = useI18n()
 
-function columnLabel (key: string): string {
-  return t(key, key)
-}
-
-function rowProgressFor (rowIndex: number): RowProgress | undefined {
-  return props.rowProgressList.find(p => p.rowIndex === rowIndex)
-}
+const progressByRow = computed(() => new Map(props.rowProgressList.map(p => [p.rowIndex, p])))
 
 function cellHasError (row: PreviewRow, key: string): boolean {
   return row.cells[key]?.errors.some(e => e.level === 'error') ?? false
