@@ -12,7 +12,6 @@ import 'angular-joyride';
 import joyRideTextTranslations from '~/app-text/views/register/submit-summary-joyride-tour.json';
 import recordListT from '~/app-text/views/register/record-list.json';
 import { mergeTranslationKeys } from '../../services/translation-merge';
-import DocumentsUploader from "~/components/documents-uploader/documents-uploader.vue";
 const joyRideText = mergeTranslationKeys(joyRideTextTranslations);
 const recordListError = mergeTranslationKeys(recordListT);
         export { default as template } from './record-list.html';
@@ -26,12 +25,10 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
-                $scope.isBulkUploaderOpen = false
                 $scope.documentType = ($routeParams.document_type || '').toLowerCase()
-                //$scope.isImportingDocumentsSupported = $scope.documentType === 'ircc'
-                // NOTE: Delete below and uncomment above to enable bulk docuuments uploader.
-                $scope.isImportingDocumentsSupported = false
-
+                // the button text is inside the vue component,
+                // so we need to get the translation from the translation service and pass it to the vue component
+                $scope.buttonText = translationService.get('recordListT.bulkImport')
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
@@ -467,10 +464,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return "";
                 };
 
-                $scope.openBulkUploader = function () {
-                  $scope.isBulkUploaderOpen = true
-                }
-
                 $scope.showAddButton = function () {
 
                     return roleService.isPublishingAuthority() ||
@@ -526,11 +519,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.$on('$destroy', function(){
                     evtServerPushNotification();
                 })
-
-                $scope.handleNewDocumentCreation = function () {
-                  toastr.success(translationService.get('recordListT.draftCreateSuccess'))
-                  return loadRecords(1)
-                };
 
                 $scope.refreshList = function () {
                     return loadRecords(1);
@@ -818,12 +806,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return  realm.schemas[schema].disableEdit;
                 }
 
-                $scope.exportVueComponent = {
-                  components: {
-                    DocumentsUploader,
-                  },
-                }
-
                 function loadmyTasks(schema){
 
                     if(!_.includes(realm.referenceSchemas, schema)){
@@ -859,7 +841,22 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                     }
                 }
+
+                async function loadBulkUploadComponent(){
+
+                    if($scope.documentType === 'ircc'){
+                        const module = await import('~/components/bulk-import/bulk-import.vue');
+                        $scope.exportVueComponent = {
+                            components: {
+                                DocumentsUploader : module.default,
+                            }
+                        }
+                        $scope.$apply();
+                    }
+                }
+
                 loadRecords(1);
                 loadOfflineFormatDetails();
+                loadBulkUploadComponent();
 
             }];
