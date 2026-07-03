@@ -848,7 +848,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                         const module = await import('~/components/bulk-import/bulk-import.vue');
                         $scope.exportVueComponent = {
                             components: {
-                                DocumentsUploader : module.default,
+                                BulkImport : module.default,
                             }
                         }
                         $scope.$apply();

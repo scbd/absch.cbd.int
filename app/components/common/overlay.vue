@@ -3,7 +3,7 @@ Overlay
 
 Fade-out the screen behind a message in the foreground such as a loader.
 
-Used in ./loading-overlay.vue and ./components/documents-uploader/warning-overlay.vue
+Used in ./loading-overlay.vue
 -->
 <template>
   <div
