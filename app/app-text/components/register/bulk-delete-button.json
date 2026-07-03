@@ -1,0 +1,8 @@
+{
+  "draft": "Draft",
+  "published": "Published",
+  "deleteSelected": "Delete selected",
+  "deleteTitle": "Delete {count} records?",
+  "deleteWarning": "Are you sure you want to delete {count} records? This action cannot be undone.",
+  "cancel": "Cancel"
+}
