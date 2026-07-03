@@ -4,6 +4,36 @@
 
 **Commit style:** each branch is built as a series of small, logical commits (not one squashed blob) — e.g. tooling config separate from the lint fixes it triggered, API conversion separate from consumer updates. Every commit message describes what changed and why, following the repo's commit conventions.
 
+## Status: DONE (2026-07-03) — 7 branches built, all pass eslint + vue-tsc
+
+Deviations from the original plan, discovered while splitting:
+
+- **3a was folded into branch 1 and 3b.** `shims-angular-vue.d.ts` moved to
+  branch 1 (the lint fixes there need it), leaving 3a with only the 6-line
+  `EHeader.ts`, which went into 3b's first commit instead of its own PR.
+- **Branch 1 also absorbed** `api-base.d.ts`, the `html-pdf-api.ts`
+  `@ts-nocheck`, and the trivial fixes in `documents-uploader.vue` /
+  `uploader-modal.vue` (stale directives, `defineEmits` import) — without
+  them branch 1 does not typecheck.
+- **Branch 2 is stacked on 3b, not branch 1** — `bulk-delete-button.vue`
+  imports `KmDraftsApi` from the TypeScript `km-document` module.
+- **`registry.ts` and `use-bulk-import.ts` moved from 3c to 3d** — both
+  import the ircc document type.
+- The debug `console.log` in `translation-service.js` was dropped (not
+  carried into any branch), per the pre-branching checklist.
+
+Final merge sequence:
+
+```
+1  chore/eslint-tsc-rollup-devwatch
+└─ 3b feat/bulk-upload-api            (includes former 3a)
+   ├─ 2  feat/bulk-delete
+   └─ 3c feat/bulk-upload-framework
+      └─ 3d feat/bulk-upload-document-types  (+ registry, use-bulk-import)
+         └─ 3e-i feat/bulk-upload-sub-components
+            └─ 3e-ii feat/bulk-upload-entry-point
+```
+
 ---
 
 ## Branch 1 — `blaise/chore/eslint-tsc-rollup-devwatch`
