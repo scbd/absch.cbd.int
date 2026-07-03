@@ -134,3 +134,25 @@
 	font-size:12px!important;
 	color:#999;
 }
+
+.bi-select-cell {
+	cursor: pointer;
+	padding-top: 14px!important;
+	padding-bottom: 14px!important;
+}
+.bi-select-cell--disabled {
+	cursor: not-allowed;
+}
+.bi-select-checkbox {
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	pointer-events: none;
+}
+.bi-select-cell--disabled .bi-select-checkbox {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+tr.bi-row-selected {
+	background-color: #eaf2ff;
+}
