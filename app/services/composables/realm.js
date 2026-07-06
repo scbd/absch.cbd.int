@@ -1,6 +1,5 @@
-import { useNgVue  } from "@scbd/angular-vue/src/index.js";
+import { getRealm } from '~/services/realm';
 
 export function useRealm() {
-    var ngVue = useNgVue();
-    return ngVue.$injector.get('realm');
+    return getRealm();
 }
