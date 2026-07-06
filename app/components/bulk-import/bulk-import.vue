@@ -1,20 +1,13 @@
 <template>
   <div>
-    <button
-      type="button"
-      class="btn btn-sm btn-outline-primary"
-      @click="open"
-    >
+    <button type="button" class="btn btn-sm btn-outline-primary" @click="open">
       <i class="fa fa-file-excel-o me-1" />
       {{ title }}
     </button>
 
     <component
-      :is="modal"
-      v-if="isOpen"
-      :document-type="documentType"
-      @on-close="onClose"
-      @on-imported="onImported"
+      :is="modal" v-if="isOpen" :document-type="documentType"
+      @on-close="onClose" @on-imported="onImported"
     />
   </div>
 </template>

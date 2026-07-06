@@ -26,7 +26,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                 $scope.amendmentDocument = {locales:['en']};
                 $scope.canDeletePublished = true;
                 $scope.documentType = ($routeParams.document_type || '').toLowerCase()
-                $scope.selectedRecords = [];
                 // the button text is inside the vue component,
                 // so we need to get the translation from the translation service and pass it to the vue component
                 $scope.buttonText = translationService.get('recordListT.bulkImport')
@@ -900,30 +899,18 @@ const recordListError = mergeTranslationKeys(recordListT);
                 async function loadBulkUploadComponent(){
 
                     if($scope.documentType === 'ircc'){
-                        //components/documents-uploader/documents-uploader.vue
                         const module = await import('~/components/bulk-import/bulk-import.vue');
                         $scope.exportVueComponent = {
                             components: {
-                                DocumentsUploader : module.default,
+                                BulkImport : module.default,
                             }
                         }
                         $scope.$apply();
                     }
                 }
 
-                async function loadBulkDeleteComponent(){
-                    const module = await import('~/components/register/bulk-delete-button.vue');
-                    $scope.bulkDeleteVueComponent = {
-                        components: {
-                            BulkDeleteButton: module.default,
-                        }
-                    };
-                    $scope.$apply();
-                }
-
                 loadRecords(1);
                 loadOfflineFormatDetails();
                 loadBulkUploadComponent();
-                loadBulkDeleteComponent();
 
             }];

@@ -39,10 +39,11 @@
   </div>
 </template>
 <script setup lang="ts">
+// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import LoadingOverlay from '../common/loading-overlay.vue'
 import {
-  ref, shallowRef, defineComponent,
+  ref, shallowRef, defineEmits, defineComponent,
   type Ref, type Component
 } from 'vue'
 import uploaderMessages from '~/app-text/components/bulk-documents-uploader.json'
@@ -64,7 +65,7 @@ const messages = [
 
 messages.forEach((messageGroup) => {
   Object.entries(messageGroup)
-    .forEach(([key, value]) => mergeLocaleMessage(key, value))
+    .forEach(([key, value]) => { mergeLocaleMessage(key, value) })
 })
 
 defineProps<{
