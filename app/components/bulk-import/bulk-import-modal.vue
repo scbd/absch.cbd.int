@@ -16,9 +16,9 @@
         </div>
 
         <div class="modal-body p-0 overflow-hidden d-flex flex-column">
-          <BulkImportBanner :banner="banner" :banner-errors="bannerErrors" />
+          <BulkImportToolbar v-if="hasPreview" v-model:search="search" />
 
-          <BulkImportToolbar v-if="hasPreview" v-model:search="search" :row-count="previewRows.length" />
+          <BulkImportBanner :banner="banner" :banner-errors="bannerErrors" :stats="bannerStats" />
 
           <div
             v-if="state.phase === 'parse-error'"
@@ -140,7 +140,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import modalMessages from '~/app-text/components/bulk-import/bulk-import-modal.json'
 import { useBulkImport } from './framework/use-bulk-import'
-import type { DocumentTypes, PreviewRow, RowProgress, SheetError } from './framework/types'
+import type { BannerStats, DocumentTypes, PreviewRow, RowProgress, SheetError } from './framework/types'
 import { registry } from './registry'
 import BulkImportHeader from './components/bulk-import-header.vue'
 import BulkImportBanner from './components/bulk-import-banner.vue'
@@ -267,6 +267,16 @@ const bannerErrors = computed<BannerErrorGroup[]>(() => {
 })
 
 const hasErrors = computed(() => sheetErrors.value.some(e => e.level === 'error'))
+
+const bannerStats = computed<BannerStats | null>(() => {
+  if (!hasPreview.value || state.phase === 'importing' || state.phase === 'done') return null
+  return {
+    documents: previewRows.value.length,
+    errors: sheetErrors.value.filter(e => e.level === 'error').length,
+    warnings: sheetErrors.value.filter(e => e.level === 'warning').length,
+    ready: previewRows.value.filter(r => r.status === 'ready').length
+  }
+})
 
 const rowProgressList = computed<RowProgress[]>(() =>
   state.phase === 'importing' || state.phase === 'done'
