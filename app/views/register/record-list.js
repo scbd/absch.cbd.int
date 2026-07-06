@@ -909,8 +909,20 @@ const recordListError = mergeTranslationKeys(recordListT);
                     }
                 }
 
+
+                async function loadBulkDeleteComponent(){
+                    const module = await import('~/components/register/bulk-delete-button.vue');
+                    $scope.bulkDeleteVueComponent = {
+                        components: {
+                            BulkDeleteButton: module.default,
+                        }
+                    };
+                    $scope.$apply();
+                }
+
                 loadRecords(1);
                 loadOfflineFormatDetails();
+                loadBulkDeleteComponent();
                 loadBulkUploadComponent();
 
             }];
