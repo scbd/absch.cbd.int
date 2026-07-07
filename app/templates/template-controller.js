@@ -1,5 +1,6 @@
 import angular from 'angular-flex';
 import app from '~/app';
+import { initRealm } from '~/services/realm';
 import 'bootstrap';
 import 'ng-breadcrumbs';
 import 'toastr';
@@ -186,8 +187,9 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
     }
 ]
 
-export const bootstrapApp = ()=>{
+export const bootstrapApp = async ()=>{
     try{
+        await initRealm();
         angular.bootstrap(document, [app.name]);
     }
     catch(e){

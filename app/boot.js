@@ -221,10 +221,6 @@ export default function bootApp(window, require, defineX) {
         return window.Vue;
     })
 
-    defineX('realmConf', [`json!${window?.scbdApp?.apiUrl}/api/v2018/realm-configurations/${(window?.scbdApp?.host||'')}`], function(realmConf){
-        return realmConf;
-    })
-
     const noop = ()=>warnImport
     const warnImport = ()=>{ console.warn('lib loaded in bundle, import not required!'); }
 

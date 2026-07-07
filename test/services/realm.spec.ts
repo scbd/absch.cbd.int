@@ -1,8 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { createRealm } from '~/services/realm'
+import { createRealm, initRealm, getRealm } from '~/services/realm'
 import type { Realm } from '~/types/realm'
 import realmConfigurations from './__fixtures__/realm-configurations'
 import scbdJsonSchemas from '~/components/scbd-angularjs-services/filters/schema-name.json' with { type: 'json' }
+
+vi.mock('~/api/realms', () => ({
+  default: class {
+    async getRealmConfigurationsByHost (): Promise<unknown> {
+      return structuredClone(realmConfigurations)
+    }
+  }
+}))
 
 function absRealm (): Realm {
   return createRealm(structuredClone(realmConfigurations), 'absch.cbd.int')
@@ -179,5 +187,24 @@ describe('realm.fallbackRoles', () => {
   it('returns the role name for an invalid schema type, with a warning', () => {
     expect(absRealm().fallbackRoles('bogus', 'someRole')).toEqual(['someRole'])
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('invalid schemaType'))
+  })
+})
+
+describe('getRealm / initRealm', () => {
+  it('throws when the realm is accessed before initRealm()', () => {
+    expect(() => getRealm()).toThrow(/before initRealm/)
+  })
+
+  it('fetches the configurations and seeds the singleton', async () => {
+    vi.stubGlobal('window', {
+      location: { host: 'training.bch.cbd.int' },
+      scbdApp: { host: 'training.bch.cbd.int' }
+    })
+
+    await initRealm()
+
+    expect(getRealm().value).toBe('BCH-TRG')
+
+    vi.unstubAllGlobals()
   })
 })
