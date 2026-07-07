@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Architecture review — absch.cbd.int</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+    </script>
+    <style>
+      .seam { stroke-dasharray: 4 4; }
+      .leak { stroke: #dc2626; }
+      .deep { background: linear-gradient(135deg, #0f172a, #1e293b); }
+    </style>
+  </head>
+  <body class="bg-stone-50 text-slate-900 font-sans">
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+
+      <header class="border-b border-stone-300 pb-6">
+        <h1 class="font-serif text-3xl">Architecture review — <span class="text-indigo-700">absch.cbd.int</span></h1>
+        <p class="text-sm text-slate-500 mt-2">2026-07-07 · informed by CONTEXT.md, ADR&nbsp;0001 (route manifest), ADR&nbsp;0002 (service inversion), MIGRATION-PLAN.md</p>
+        <div class="flex gap-6 mt-4 text-xs text-slate-600 items-center flex-wrap">
+          <span class="flex items-center gap-2"><span class="inline-block w-6 h-4 border border-slate-500 bg-white"></span> module</span>
+          <span class="flex items-center gap-2"><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#475569" stroke-width="1.5" class="seam"/></svg> seam</span>
+          <span class="flex items-center gap-2"><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" stroke="#dc2626" stroke-width="2"/></svg> leakage</span>
+          <span class="flex items-center gap-2"><span class="inline-block w-6 h-4 deep rounded-sm"></span> deep module</span>
+        </div>
+      </header>
+
+      <section id="candidates" class="space-y-10">
+
+        <!-- ============ 1. SEARCH ============ -->
+        <article id="c1" class="rounded-xl border border-stone-200 bg-white shadow-sm p-8 space-y-5">
+          <div class="flex items-start justify-between flex-wrap gap-3">
+            <h2 class="font-serif text-2xl">1 · One Search module over the solr index</h2>
+            <div class="flex gap-2">
+              <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">Strong</span>
+              <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600">in-process</span>
+            </div>
+          </div>
+          <p class="font-mono text-sm text-slate-600">app/services/search-service.js (312) · app/services/solr/queries.js (108) · app/api/solr.js (38) · app/services/solr.js (13)</p>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Before</p>
+              <pre class="mermaid">
+flowchart TB
+  V["search views ×33"] --> SS[searchService]
+  V2["record selectors"] --> Q["solr/queries.js"]
+  V3["Vue components ×3"] --> SA["api/solr.js"]
+  SS --> Q
+  SS -- "localizeFields #2" --> H1[$http]
+  Q -- "localizeFields #1" --> H1
+  SA -- "localizeFields #3" --> AX[axios]
+  V4["~15 files"] -- "raw index/select" --> H1
+  classDef leak stroke:#dc2626,stroke-width:2px;
+  class V4,H1 leak
+              </pre>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">After</p>
+              <div class="relative h-[300px] flex flex-col items-center justify-center gap-3">
+                <div class="text-xs uppercase tracking-wider text-slate-500">all callers</div>
+                <svg width="20" height="26"><line x1="10" y1="0" x2="10" y2="20" stroke="#475569" stroke-width="1.5" class="seam"/><path d="M5 18 L10 26 L15 18 Z" fill="#475569"/></svg>
+                <div class="deep text-white rounded-lg px-8 py-5 w-64 text-center">
+                  <p class="text-xs uppercase tracking-wider text-emerald-300">Search module</p>
+                  <p class="text-sm mt-1 font-mono">query() · facets() · group()</p>
+                  <p class="text-[10px] mt-3 text-slate-400">inside: FQ builder · escape · localizeFields ×1 · realm/locale defaults · facet normalization</p>
+                </div>
+                <svg width="20" height="26"><line x1="10" y1="6" x2="10" y2="26" stroke="#475569" stroke-width="1.5"/><path d="M5 18 L10 26 L15 18 Z" fill="#475569"/></svg>
+                <div class="text-xs uppercase tracking-wider text-slate-500">one HTTP adapter (app/api)</div>
+              </div>
+            </div>
+          </div>
+
+          <p><strong>Problem:</strong> one search touches five modules; <code class="font-mono text-sm">localizeFields</code> is implemented three times; two FQ-building idioms exist for the same index; facet normalization is trapped inside the <code class="font-mono text-sm">searchService</code> closure.</p>
+          <p><strong>Solution:</strong> deepen into one TypeScript Search module in <code class="font-mono text-sm">app/api/</code> — typed query description in, normalized results out; query building, escaping, localization, and realm/state defaults become implementation.</p>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li>leverage: one interface, 33+ call sites</li>
+            <li>locality: query bugs concentrate in one module</li>
+            <li>interface is the test surface — pure query building under vitest</li>
+            <li>delete localizeFields ×2, solr.js pass-through</li>
+            <li>gates the search Views in the Phase-2 queue</li>
+          </ul>
+          <p class="text-sm text-emerald-800 bg-emerald-50 rounded px-3 py-2">Aligns with ADR 0002 — this <em>is</em> the searchService inversion, done as a deepening rather than a 1:1 port.</p>
+        </article>
+
+        <!-- ============ 2. RECORD STORE ============ -->
+        <article id="c2" class="rounded-xl border border-stone-200 bg-white shadow-sm p-8 space-y-5">
+          <div class="flex items-start justify-between flex-wrap gap-3">
+            <h2 class="font-serif text-2xl">2 · Collapse the Record write path into a Record store</h2>
+            <div class="flex gap-2">
+              <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">Strong</span>
+              <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600">ports &amp; adapters</span>
+            </div>
+          </div>
+          <p class="font-mono text-sm text-slate-600">scbd-angularjs-services/services/storage.js (632) · views/forms/edit/editFormUtility.js (234) · services/workflows.js (88) · generic-service.js (84)</p>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Before — a call crosses four thin bands</p>
+              <div class="space-y-1 mt-6">
+                <div class="h-12 border-l-4 border-slate-400 bg-stone-100 flex items-center px-4 text-sm">edit-*.directive — re-derives government, exists? branch</div>
+                <div class="h-12 border-l-4 border-slate-400 bg-stone-100 flex items-center px-4 text-sm">editFormUtility — canX check, then put (×3 copies)</div>
+                <div class="h-12 border-l-4 border-slate-400 bg-stone-100 flex items-center px-4 text-sm">IStorage — 12 URL constants, 3-line $http bodies</div>
+                <div class="h-12 border-l-4 border-red-400 bg-red-50 flex items-center px-4 text-sm">IWorkflows — six one-line $http functions</div>
+                <p class="text-xs text-slate-500 pt-2">632 + 234 + 88 LOC; the security-then-write boilerplate repeats at every band. IStorage injected in 32 files.</p>
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">After — one thick band</p>
+              <div class="mt-6 space-y-1">
+                <div class="h-12 border-l-4 border-slate-300 bg-stone-50 flex items-center px-4 text-sm text-slate-500">edit Views — call the store, render the result</div>
+                <div class="h-36 deep text-white flex flex-col justify-center px-4 rounded">
+                  <p class="text-xs uppercase tracking-wider text-emerald-300">Record store</p>
+                  <p class="font-mono text-sm mt-1">load · saveDraft · publish · canEdit</p>
+                  <p class="text-[10px] text-slate-400 mt-2">inside: URL mapping · security-then-write invariant (once) · draft→document fallback · workflow create/cancel</p>
+                </div>
+                <p class="text-xs text-slate-500 pt-2">Two adapters justify the seam: HTTP in prod, in-memory fake for form tests.</p>
+              </div>
+            </div>
+          </div>
+
+          <p><strong>Problem:</strong> the write path stacks three shallow modules — each adds a URL string and <code class="font-mono text-sm">.then(r=&gt;r.data)</code>; the one real invariant (security check before write) is copy-pasted, not owned.</p>
+          <p><strong>Solution:</strong> one deep Record store module (TS, in <code class="font-mono text-sm">app/api/</code>): load/draft/publish/security/workflow behind one interface; <code class="font-mono text-sm">IStorage</code> and <code class="font-mono text-sm">editFormUtility</code> become thin ng adapters over it, then die with their Views.</p>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li>locality: publish invariant lives once</li>
+            <li>leverage: 32 IStorage call sites, one interface</li>
+            <li>edit-form tests need no ng injector</li>
+            <li>deletion test: IStorage vanishes, nothing reappears</li>
+          </ul>
+          <p class="text-sm text-amber-800 bg-amber-50 rounded px-3 py-2">Sequencing: the edit-form Views are untested and late in every realm's Phase-2 queue — invert the interface early, migrate its callers late.</p>
+        </article>
+
+        <!-- ============ 3. TERMS ============ -->
+        <article id="c3" class="rounded-xl border border-stone-200 bg-white shadow-sm p-8 space-y-5">
+          <div class="flex items-start justify-between flex-wrap gap-3">
+            <h2 class="font-serif text-2xl">3 · One Terms module (thesaurus fetch + cache + tree)</h2>
+            <div class="flex gap-2">
+              <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">Strong</span>
+              <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600">local-substitutable</span>
+            </div>
+          </div>
+          <p class="font-mono text-sm text-slate-600">services/thesaurus-service.js (224, 12 callers) · app/api/thesaurus.js (81, 6 callers) · utilities.js buildTree (10+ callers)</p>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Before — mass diagram: three modules, same job</p>
+              <div class="flex items-end justify-around h-[280px] pt-4">
+                <div class="flex flex-col items-center gap-1 w-1/4">
+                  <div class="w-full h-24 border-2 border-slate-500 bg-stone-100 flex items-center justify-center text-[10px] uppercase tracking-wider text-center px-1">interface: 9 fns + cache config</div>
+                  <div class="w-full h-28 bg-slate-300 flex items-center justify-center text-[10px] text-center px-1">$http + angular-cache</div>
+                  <p class="text-[10px] uppercase tracking-wider text-slate-500 mt-1">thesaurusService</p>
+                </div>
+                <div class="flex flex-col items-center gap-1 w-1/4">
+                  <div class="w-full h-16 border-2 border-slate-500 bg-stone-100 flex items-center justify-center text-[10px] uppercase tracking-wider text-center px-1">interface: 4 fns</div>
+                  <div class="w-full h-20 bg-slate-300 flex items-center justify-center text-[10px] text-center px-1">axios + localStorage cache</div>
+                  <p class="text-[10px] uppercase tracking-wider text-slate-500 mt-1">ThesaurusApi</p>
+                </div>
+                <div class="flex flex-col items-center gap-1 w-1/4">
+                  <div class="w-full h-10 border-2 border-red-500 bg-red-50 flex items-center justify-center text-[10px] uppercase tracking-wider text-center px-1">buildTree</div>
+                  <div class="w-full h-10 bg-slate-300"></div>
+                  <p class="text-[10px] uppercase tracking-wider text-slate-500 mt-1">utilities.js</p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">After — one deep module</p>
+              <div class="flex items-end justify-center h-[280px] pt-4">
+                <div class="flex flex-col items-center gap-1 w-2/5">
+                  <div class="w-full h-12 border-2 border-slate-700 bg-white flex items-center justify-center text-[10px] uppercase tracking-wider text-center px-1">getDomain(id) · getTerm(id) · tree(domain)</div>
+                  <div class="w-full h-48 deep text-slate-300 flex items-center justify-center text-[10px] text-center px-2 rounded-b">fetch · one cache policy · localization · buildTree · "other"-term handling</div>
+                  <p class="text-[10px] uppercase tracking-wider text-slate-500 mt-1">Terms module</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p><strong>Problem:</strong> the same domain fetch has three implementations with two different cache policies; <code class="font-mono text-sm">buildTree</code> floats free in utilities.js and every caller re-wires fetch→cache→tree by hand.</p>
+          <p><strong>Solution:</strong> one Terms module: fetch, single cache policy, localization, and tree building behind a three-function interface; ng factory wrapper + composable per ADR 0002.</p>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li>locality: one cache policy, not two</li>
+            <li>leverage: 18+ call sites converge</li>
+            <li>km-terms controls get a testable dependency</li>
+            <li>delete a 224-LOC module outright</li>
+          </ul>
+        </article>
+
+        <!-- ============ 4. LOCALE ============ -->
+        <article id="c4" class="rounded-xl border border-stone-200 bg-white shadow-sm p-8 space-y-5">
+          <div class="flex items-start justify-between flex-wrap gap-3">
+            <h2 class="font-serif text-2xl">4 · One definition of "current locale"</h2>
+            <div class="flex gap-2">
+              <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">Strong</span>
+              <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600">in-process</span>
+            </div>
+          </div>
+          <p class="font-mono text-sm text-slate-600">scbd-angularjs-services/services/locale.js (79) · services/translation-service.js (55) · translation-merge.js · app.js:79</p>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Before — five sources of truth</p>
+              <div class="relative h-[280px]">
+                <div class="absolute top-2 left-2 w-40 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">locale provider<br/><span class="text-slate-500">pathname regex + cookie</span></div>
+                <div class="absolute top-2 right-2 w-40 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">urlHasLocale<br/><span class="text-slate-500">same regex, again</span></div>
+                <div class="absolute top-24 left-2 w-40 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">app.js createI18n<br/><span class="text-slate-500">copies ng value once</span></div>
+                <div class="absolute top-24 right-2 w-40 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">vue-i18n locale<br/><span class="text-slate-500">drifts after copy</span></div>
+                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-44 border border-red-400 bg-red-50 rounded px-2 py-1 text-[11px]">translationService<br/><span class="text-red-600">second translation runtime, fed imperatively</span></div>
+                <svg class="absolute inset-0 w-full h-full pointer-events-none">
+                  <line x1="45%" y1="40" x2="55%" y2="40" stroke="#dc2626" stroke-width="1.5"/>
+                  <line x1="22%" y1="115" x2="60%" y2="115" stroke="#dc2626" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">After</p>
+              <div class="h-[280px] flex flex-col items-center justify-center gap-3">
+                <div class="deep text-white rounded-lg px-8 py-5 w-64 text-center">
+                  <p class="text-xs uppercase tracking-wider text-emerald-300">Locale module</p>
+                  <p class="font-mono text-sm mt-1">current() · direction() · switch()</p>
+                  <p class="text-[10px] text-slate-400 mt-2">inside: URL parse · cookie · fallback · supported-locale list (once)</p>
+                </div>
+                <div class="flex gap-8 text-[11px] text-slate-500">
+                  <span>↓ ng adapter</span><span>↓ vue-i18n adapter</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p><strong>Problem:</strong> "current locale" is computed in five places; ng and vue-i18n each hold a copy seeded once at bootstrap; a second translation runtime (<code class="font-mono text-sm">translationService</code>) coexists with vue-i18n; locale.js self-admits its filters are duplicates.</p>
+          <p><strong>Solution:</strong> invert locale into one TS module owning parse/cookie/fallback and the supported-locale list; ng <code class="font-mono text-sm">locale</code> and vue-i18n become two adapters at the same seam.</p>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li>two adapters — the seam is real</li>
+            <li>locality: locale list lives once</li>
+            <li>next in the Phase-1 inversion queue anyway</li>
+            <li>realm.ts pattern is the template (done once already)</li>
+          </ul>
+        </article>
+
+        <!-- ============ 5. KM-TERMS ============ -->
+        <article id="c5" class="rounded-xl border border-stone-200 bg-white shadow-sm p-8 space-y-5">
+          <div class="flex items-start justify-between flex-wrap gap-3">
+            <h2 class="font-serif text-2xl">5 · Extract the term-binding state machine from km-terms-*</h2>
+            <div class="flex gap-2">
+              <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-100 text-amber-800">Worth exploring</span>
+              <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600">in-process</span>
+            </div>
+          </div>
+          <p class="font-mono text-sm text-slate-600">scbd-angularjs-controls/form-control-directives/km-terms-radio.js (197) · km-terms-check.js (443) · km-terms.js (69)</p>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">Before — the same machine, three times</p>
+              <div class="flex justify-around h-[280px] items-center">
+                <template id="x"></template>
+                <div class="w-1/4 border border-slate-400 rounded bg-stone-100 p-2 text-[10px] space-y-1">
+                  <p class="uppercase tracking-wider text-slate-500">km-terms-radio</p>
+                  <div class="bg-white border px-1">init + $timeout(250) poll</div>
+                  <div class="bg-white border px-1">load / save</div>
+                  <div class="bg-white border px-1">bindingType switch</div>
+                  <div class="bg-white border px-1">"other" GUID</div>
+                </div>
+                <div class="w-1/4 border border-slate-400 rounded bg-stone-100 p-2 text-[10px] space-y-1">
+                  <p class="uppercase tracking-wider text-slate-500">km-terms-check</p>
+                  <div class="bg-white border px-1">init + poll (copy)</div>
+                  <div class="bg-white border px-1">load / save (arrays)</div>
+                  <div class="bg-white border px-1">bindingType switch</div>
+                  <div class="bg-white border px-1">"other" GUID</div>
+                </div>
+                <div class="w-1/4 border border-slate-400 rounded bg-stone-100 p-2 text-[10px] space-y-1">
+                  <p class="uppercase tracking-wider text-slate-500">km-terms</p>
+                  <div class="bg-white border px-1">third variant</div>
+                  <div class="bg-white border px-1">load / save</div>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-lg border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-wider text-slate-400 mb-2">After — collapse into one module</p>
+              <div class="h-[280px] flex flex-col items-center justify-center gap-3">
+                <div class="deep text-white rounded-lg px-6 py-4 w-72 text-center">
+                  <p class="text-xs uppercase tracking-wider text-emerald-300">term-binding module (TS)</p>
+                  <p class="font-mono text-xs mt-1">bind(value, type) · select(term) · validate()</p>
+                  <p class="text-[10px] text-slate-400 mt-2">inside (faded): bindingType switch · "other" handling · tree loading</p>
+                </div>
+                <div class="flex gap-3 text-[10px] text-slate-500">
+                  <span class="border border-slate-300 rounded px-2 py-1">ng radio adapter</span>
+                  <span class="border border-slate-300 rounded px-2 py-1">ng check adapter</span>
+                  <span class="border border-emerald-500 text-emerald-700 rounded px-2 py-1">future Vue km-terms</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p><strong>Problem:</strong> three controls carry a copied state machine (init-poll hack, bindingType switch, hard-coded "other" GUID); all logic sits in ng <code class="font-mono text-sm">link:</code> functions — untestable through any interface.</p>
+          <p><strong>Solution:</strong> extract one term-binding module; the three ng directives become adapters; the Vue km-terms the migration plan requires is built on the same module instead of a fourth copy.</p>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li>the Vue rebuild is the second adapter — real seam</li>
+            <li>locality: "other"-term rules live once</li>
+            <li>kills the $timeout(250) poll in one place</li>
+          </ul>
+          <p class="text-sm text-amber-800 bg-amber-50 rounded px-3 py-2">Timing: per MIGRATION-PLAN, do this when the first migrating form needs a Vue term control — not before.</p>
+        </article>
+
+        <!-- ============ 6. ARTICLES ============ -->
+        <article id="c6" class="rounded-xl border border-stone-200 bg-white shadow-sm p-8 space-y-5">
+          <div class="flex items-start justify-between flex-wrap gap-3">
+            <h2 class="font-serif text-2xl">6 · Delete the duplicate Articles adapter</h2>
+            <div class="flex gap-2">
+              <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-100 text-amber-800">Worth exploring</span>
+              <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600">in-process</span>
+            </div>
+          </div>
+          <p class="font-mono text-sm text-slate-600">components/kb/article-api.js (51) · app/api/articles.js (53) · services/articles-service.js (71) · composables/articles.js</p>
+
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <pre class="mermaid">
+flowchart LR
+  subgraph before [" "]
+    C1["kb Vue components"] --> A1["ArticlesApi (kb copy)"]
+    C2["composables/articles.js"] --> A1
+    C3["ng views"] --> A3["articlesService ($http)"]
+    C4["2 imports"] --> A2["ArticlesApi (app/api)"]
+  end
+  A1 -. "same class name,<br/>same methods" .- A2
+  classDef leak stroke:#dc2626,stroke-width:2px;
+  class A1 leak
+            </pre>
+          </div>
+
+          <p><strong>Problem:</strong> two classes named <code class="font-mono text-sm">ArticlesApi</code> with overlapping interfaces; the composable imports the copy, not the canonical one; a third $http implementation serves the ng Views.</p>
+          <p><strong>Solution:</strong> merge into <code class="font-mono text-sm">app/api/articles.js</code> (absorbing the kb copy's <code class="font-mono text-sm">getRecords</code>), repoint the composable, give ng an adapter per ADR 0002, delete two files.</p>
+          <ul class="list-disc pl-6 text-sm space-y-1">
+            <li>deletion test passes: nothing reappears</li>
+            <li>small, mechanical, one afternoon</li>
+            <li>good second rep of the inversion recipe</li>
+          </ul>
+        </article>
+
+      </section>
+
+      <!-- ============ FOLDER STRUCTURE ============ -->
+      <section id="folders" class="rounded-xl border border-stone-200 bg-white shadow-sm p-8 space-y-5">
+        <div class="flex items-start justify-between flex-wrap gap-3">
+          <h2 class="font-serif text-2xl">7 · Folder structure — protect the contract, let the migration do the moving</h2>
+          <div class="flex gap-2">
+            <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-100 text-amber-800">Worth exploring</span>
+            <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600">navigability</span>
+          </div>
+        </div>
+        <p class="text-sm text-slate-600">Judged by one question: does a reader (or an AI agent) know where a thing lives, and where new code goes?</p>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <p class="text-xs uppercase tracking-wider text-slate-400 mb-3">Today — homes vs junk drawers</p>
+            <div class="font-mono text-[12px] leading-6">
+              <p><span class="text-emerald-700">app/api/</span> <span class="text-slate-400">— HTTP, one rule, works</span></p>
+              <p><span class="text-emerald-700">app/routes/</span> <span class="text-slate-400">— per clearing-house, matches deploys</span></p>
+              <p><span class="text-emerald-700">app/types/ · test/</span> <span class="text-slate-400">— established this week</span></p>
+              <p><span class="text-red-700">app/services/</span> <span class="text-slate-400">— 30 entries: domain + utils + infra + dead code</span></p>
+              <p><span class="text-red-700">…/scbd-angularjs-services/services/</span> <span class="text-slate-400">— second “services” home</span></p>
+              <p><span class="text-red-700">app/components/</span> <span class="text-slate-400">— features + generic UI + vendored ng packages, one level</span></p>
+              <p><span class="text-amber-700">filters ×3</span> <span class="text-slate-400">— services/filters.js, services/filters/, scbd-*/filters/</span></p>
+              <p><span class="text-amber-700">components/maxin/</span> <span class="text-slate-400">— typo’d “mixins”, unfindable</span></p>
+            </div>
+          </div>
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <p class="text-xs uppercase tracking-wider text-slate-400 mb-3">The scatter tax — one feature, five homes</p>
+            <div class="relative h-[210px]">
+              <div class="absolute top-0 left-0 w-36 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">views/kb/</div>
+              <div class="absolute top-0 right-0 w-36 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">components/kb/</div>
+              <div class="absolute top-14 left-0 w-44 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">services/composables/articles.js</div>
+              <div class="absolute top-14 right-0 w-40 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">services/articles-service.js</div>
+              <div class="absolute top-28 left-0 w-36 border border-slate-400 bg-stone-100 rounded px-2 py-1 text-[11px]">app/api/articles.js</div>
+              <div class="absolute top-28 right-0 w-44 border-2 border-red-500 bg-red-50 rounded px-2 py-1 text-[11px]">components/kb/article-api.js<br/><span class="text-red-600">the duplicate this scatter produced</span></div>
+              <p class="absolute bottom-0 text-xs text-slate-500">No single obvious home → people create local copies. The by-kind split only works with a “one feature, one name, no feature-local HTTP” rule.</p>
+            </div>
+          </div>
+        </div>
+
+        <p><strong>Problem:</strong> the top level matches CONTEXT.md and is worth protecting, but <code class="font-mono text-sm">services/</code> is a junk drawer, “services” has two homes, and <code class="font-mono text-sm">components/</code> hides which subtrees are frozen ng-era packages — so every session re-derives where things live.</p>
+        <p><strong>Solution:</strong> no big-bang reshuffle (ng-era trees die at Phase 5; moving them buys nothing). Three cheap moves, then let each Phase-1 inversion relocate logic to its end-state home for free.</p>
+        <ul class="list-disc pl-6 text-sm space-y-1">
+          <li>write the folder contract into CLAUDE.md — incl. “scbd-angularjs-* is frozen legacy”</li>
+          <li>“one feature, one name” rule; fix the live violation (candidate <a href="#c6" class="underline">6</a>)</li>
+          <li>rename maxin/ → mixins/; pick one filters home when filter inversions start</li>
+        </ul>
+        <p class="text-sm text-amber-800 bg-amber-50 rounded px-3 py-2">Decide before Phase 2: kind-first (today) vs feature-first (<code class="font-mono">features/kb/{views,components,api}</code>) for Vue-era code. 127 routes get touched in Phase 2 — files can land in the right place for free, but only if the shape is chosen first.</p>
+      </section>
+
+      <!-- ============ UI / CSS ============ -->
+      <section id="ui" class="rounded-xl border border-stone-200 bg-white shadow-sm p-8 space-y-5">
+        <div class="flex items-start justify-between flex-wrap gap-3">
+          <h2 class="font-serif text-2xl">8 · Theming — tokens, not overrides</h2>
+          <div class="flex gap-2">
+            <span class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">Strong</span>
+            <span class="text-xs uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-600">ui / css</span>
+          </div>
+        </div>
+        <p class="font-mono text-sm text-slate-600">app/css/template.css (3,523 · 282 !important) · css/{abs,bch,chm}/template.css · templates/{absch,bch,chm}/header.html (141/172/121) · Bootstrap 5.1.3 CDN · bootstrap-icons + font-awesome 4.7</p>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <p class="text-xs uppercase tracking-wider text-slate-400 mb-3">Before — a theme is a specificity war</p>
+            <div class="space-y-1 mt-2">
+              <div class="h-10 border-l-4 border-slate-400 bg-stone-100 flex items-center px-4 text-sm">bootstrap.min.css 5.1.3</div>
+              <div class="h-10 border-l-4 border-slate-400 bg-stone-100 flex items-center px-4 text-sm">template.css — 3,523 lines, 282 !important</div>
+              <div class="h-10 border-l-4 border-red-400 bg-red-50 flex items-center px-4 text-sm font-mono text-[12px]">.bch-header { background: #A05800 !important } ×every selector</div>
+              <div class="h-10 border-l-4 border-red-400 bg-red-50 flex items-center px-4 text-sm">3 header.html files — structural duplicates</div>
+              <div class="h-10 border-l-4 border-amber-400 bg-amber-50 flex items-center px-4 text-sm">two icon fonts · full RTL stylesheet swap</div>
+            </div>
+          </div>
+          <div class="rounded-lg border border-slate-200 bg-white p-4">
+            <p class="text-xs uppercase tracking-wider text-slate-400 mb-3">After — a theme is six variables</p>
+            <div class="h-[230px] flex flex-col items-center justify-center gap-3">
+              <div class="flex gap-2 text-[11px]">
+                <span class="rounded px-3 py-2 text-white" style="background:#564c4d">[data-realm=abs]</span>
+                <span class="rounded px-3 py-2 text-white" style="background:#a05800">[data-realm=bch]</span>
+                <span class="rounded px-3 py-2 text-white" style="background:#007b3a">[data-realm=chm]</span>
+              </div>
+              <svg width="20" height="24"><line x1="10" y1="0" x2="10" y2="18" stroke="#475569" stroke-width="1.5" class="seam"/><path d="M5 16 L10 24 L15 16 Z" fill="#475569"/></svg>
+              <div class="deep text-white rounded-lg px-6 py-4 w-80 text-center">
+                <p class="text-xs uppercase tracking-wider text-emerald-300">token seam</p>
+                <p class="font-mono text-xs mt-1">--ch-primary · --ch-header-bg · --ch-accent…</p>
+                <p class="text-[10px] text-slate-400 mt-2">inside: one Vue header (realm-config-driven, built at the CHM Flip) · @layer bootstrap, template, realm · --bs-* fed from tokens</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p><strong>Problem:</strong> the three clearing-house themes are hex values repeated per selector and defended with <code class="font-mono text-sm">!important</code>; the headers are three copies of the same structure; two icon fonts ship on every page.</p>
+        <p><strong>Solution:</strong> CSS custom properties per realm (<code class="font-mono text-sm">[data-realm=…]</code> token blocks), Bootstrap 5.3 (its <code class="font-mono text-sm">--bs-*</code> vars + color modes consume the tokens), cascade layers to retire the <code class="font-mono text-sm">!important</code>s, one realm-config-driven Vue header built when the Flip needs it anyway.</p>
+        <ul class="list-disc pl-6 text-sm space-y-1">
+          <li>a new theme = one token block, no override rules</li>
+          <li>dark mode falls out of the token model</li>
+          <li>3 headers → 1 component at the CHM Flip</li>
+          <li>drop font-awesome 4.7; logical properties shrink RTL exceptions</li>
+          <li>migrated Views take scoped styles; global page CSS dissolves</li>
+        </ul>
+        <p class="text-sm text-emerald-800 bg-emerald-50 rounded px-3 py-2">Sequencing: tokens + Bootstrap 5.3 + @layer now (migration-independent) · Vue header at the CHM Flip (Phase 3 requires the shell anyway) · scoped styles per migrated View (Phase 2 opportunistic rule).</p>
+      </section>
+
+      <!-- ============ TOP RECOMMENDATION ============ -->
+      <section id="top-recommendation" class="rounded-xl deep text-white p-10">
+        <p class="text-xs uppercase tracking-wider text-emerald-300">Top recommendation</p>
+        <h2 class="font-serif text-3xl mt-2"><a href="#c1" class="underline decoration-emerald-400 underline-offset-4">1 · One Search module over the solr index</a></h2>
+        <p class="mt-4 text-slate-300 max-w-3xl">Highest leverage of the six: 33+ call sites, three copies of the same localization logic, and query building is pure — the whole implementation lands under vitest through one interface. It is also the searchService inversion the Phase-1 plan already demands, and the search Views it unblocks are the largest cluster in the Phase-2 route queue. Candidate 4 (Locale) is the runner-up: smaller, already next in the inversion queue, and the realm.ts recipe applies verbatim. One decision has a deadline rather than a priority: the kind-first vs feature-first folder shape (<a href="#folders" class="underline decoration-emerald-400 underline-offset-4">card 7</a>) must be settled before Phase 2 starts moving 127 routes.</p>
+      </section>
+
+    </main>
+  </body>
+</html>
