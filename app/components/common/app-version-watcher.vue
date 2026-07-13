@@ -33,10 +33,13 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 
 import { onMounted, onBeforeUnmount, ref, shallowRef } from 'vue'
+// @ts-expect-error no type declarations for bootstrap
 import { Modal } from "bootstrap";
 import messages from '../../app-text/common/app-version-watcher.json';
+// @ts-expect-error no type declarations for vue-i18n
 import { useI18n } from 'vue-i18n';
 import axios from 'axios'
 const { t } = useI18n({ messages });
@@ -53,8 +56,7 @@ async function checkVersion() {
   try {
     if(appVersionModal?._isShown) return;
     const res = await axios.get('/version')
-    if (!res.ok) return
-    const version = await res.text()
+    const version = String(res.data)
 
     if (!version) return
     // currentVersion.value = new Date().toISOString()

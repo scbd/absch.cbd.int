@@ -167,7 +167,7 @@ app.directive("viewReferencedRecords", [function () {
 				const field = $scope.referenceRecords[key].fields[fieldKey];
 
 				// Toggle reverse
-				field.reverse = !field.reverse ?? false;
+				field.reverse = !field.reverse;
 				field.docs = _.orderBy(
 					field.docs,
 					doc => {

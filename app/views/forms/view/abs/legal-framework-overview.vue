@@ -44,7 +44,6 @@ import documentDate from '~/views/forms/view/directives/document-date.vue'
 // @ts-expect-error importing js file
 import kmTerm from '~/components/km/KmTerm.vue'
 import messages from '~/app-text/views/reports/chm/marine-ebsa.json'
-// @ts-expect-error importing js file
 import { useI18n } from 'vue-i18n'
 import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
 
