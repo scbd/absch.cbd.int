@@ -57,10 +57,10 @@ export function findContactInLinkedRecords (contact: SupportingDocument<IContact
 
 export async function resolveExistingContactIds (
   existing: string,
-  resolveDocumentIdentifier: (uid: string)=> Promise<string>
+  getDocumentByUid: (uid: string)=> Promise<string>
 ): Promise<SubDocument[]> {
   const ids = await Promise.all(
-    existing.split(',').map(async uid => await resolveDocumentIdentifier(uid.trim()))
+    existing.split(',').map(async uid => await getDocumentByUid(uid.trim()))
   )
   return ids.map(identifier => ({ identifier }))
 }
@@ -99,8 +99,10 @@ export async function findExistingContact (
     ...buildContactVerificationQuery(contact)
   ].join(' AND ')
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-type-assertion -- SolrApi is a JS module
-  const data = await (solrApi.query({ query, fields: 'identifier_s' })) as { response: { docs: Array<{ identifier_s?: string }> } }
-  return data.response.docs[0]?.identifier_s
+  const data = await (solrApi.query({ query, fields: 'identifier_s,_revision_i' })) as { response: { docs: Array<{ identifier_s?: string; _revision_i?: number }> } }
+  const { response: { docs: [doc] } } = data
+  if (doc?.identifier_s === undefined) return undefined
+  return `${doc.identifier_s}@${doc._revision_i ?? 1}`
 }
 
 export async function buildContactDocument (
@@ -148,18 +150,19 @@ export async function findContactOrCreate (
     countryIso: string | undefined
     language: LanguageCode
     getLocaleValue: (value: string | undefined | null)=> TextValue | undefined
-    resolveDocumentIdentifier: (uid: string)=> Promise<string>
+    getDocumentByUid: (uid: string)=> Promise<string>
   }
 ): Promise<SubDocument[]> {
   if (contact === undefined) return []
 
   const { existing } = contact
   if (typeof existing === 'string' && existing.trim().length > 0) {
-    return await resolveExistingContactIds(existing, opts.resolveDocumentIdentifier)
+    return await resolveExistingContactIds(existing, opts.getDocumentByUid)
   }
 
+  // Newly created records are published as revision 1, so references to them use @1.
   const linkedId = findContactInLinkedRecords(contact, linkedRecords)
-  if (linkedId !== undefined) return [{ identifier: linkedId }]
+  if (linkedId !== undefined) return [{ identifier: `${linkedId}@1` }]
 
   const solrIdentifier = await findExistingContact(contact, opts.countryIso, opts.solrApi)
   if (solrIdentifier !== undefined) return [{ identifier: solrIdentifier }]
@@ -172,5 +175,5 @@ export async function findContactOrCreate (
   linkedRecords.push(doc)
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SupportingDocument has dynamic shape at runtime
   const { header: h } = doc as unknown as Record<string, { identifier?: string }>
-  return [{ identifier: h?.identifier ?? '' }]
+  return [{ identifier: `${h?.identifier ?? ''}@1` }]
 }

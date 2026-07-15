@@ -80,7 +80,7 @@ export class IrccSchema extends Schema {
       countryIso,
       language: this.language,
       getLocaleValue: this.getLocaleValue.bind(this),
-      resolveDocumentIdentifier: this.resolveDocumentIdentifier.bind(this)
+      getDocumentByUid: this.getDocumentByUid.bind(this)
     }
 
     const providers = await findContactOrCreate(this.contactFromRow('provider'), this.linkedRecords, contactOpts)
@@ -139,7 +139,7 @@ export class IrccSchema extends Schema {
     const id = this.columnValue('absCNAId')
     if (Schema.isEmpty(id)) return undefined
     try {
-      const result = await this.resolveDocumentIdentifier(id)
+      const result = await this.getDocumentByUid(id)
       return result === '' ? undefined : result
     } catch {
       return undefined

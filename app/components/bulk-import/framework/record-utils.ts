@@ -1,6 +1,6 @@
 import type { KmDocumentsApi } from '~/api/km-document'
 
-export const EXISTING_ID_REGEXP = /^[a-z]+-[a-z]+-[a-z]+-(?<documentId>\d+)(?:-\d{1,3})?$/i
+export const EXISTING_ID_REGEXP = /^[a-z]+-[a-z]+-[a-z]+-(?<documentId>\d+)(?:-(?<revision>\d{1,3}))?$/i
 
 export interface LinkedRecordVerification {
   exists: boolean

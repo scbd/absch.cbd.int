@@ -1,7 +1,7 @@
 import type {
   RawRow, LinkedRecordStore, TokenReader, SchemaInstance
 } from './types'
-import { KmDraftsApi } from '~/api/km-document'
+import { KmDocumentsApi } from '~/api/km-document'
 import type {
   DocumentRequest, EmptyDocumentRequest, DocumentValue,
   TextValue, SubDocument, ELink
@@ -10,6 +10,7 @@ import type { LanguageCode } from '~/types/languages'
 import { languages, englishLanguages } from '~/app-data/un-languages'
 // @ts-expect-error js module
 import { getCountries } from '~/api/countries'
+import { EXISTING_ID_REGEXP } from './record-utils'
 
 interface CountryRecord { code: string; name: Partial<Record<LanguageCode, string>> }
 
@@ -27,10 +28,10 @@ export abstract class Schema implements SchemaInstance {
     rawLanguage: string
   ) {
     this.language = Schema.getLanguageCode(rawLanguage)
-    this.api = new KmDraftsApi({ tokenReader })
+    this.api = new KmDocumentsApi({ tokenReader })
   }
 
-  protected readonly api: KmDraftsApi
+  protected readonly api: KmDocumentsApi
 
   abstract buildSchemaDocument (): Promise<DocumentRequest>
 
@@ -164,18 +165,20 @@ export abstract class Schema implements SchemaInstance {
     return { [this.language]: Schema.getAsHtmlElement(value.trim()) }
   }
 
-  protected async resolveDocumentIdentifier (uniqueId: string): Promise<string> {
-    const regExp = /^(?<p1>[a-z]+)-(?<p2>[a-z]+)-(?<p3>[a-z]+)-(?<p4>\d+)-(?<p5>\d+)$/i
-    const match = regExp.exec(uniqueId)
-    if (match?.[4] === undefined || match[5] === undefined) {
+  // Resolves an uploaded unique ID (e.g. "ABSCH-CNA-XX-123456" or "...-123456-2") to
+  // the reference form "identifier@revision". The identifier always comes from the
+  // fetched document; the revision comes from the uploaded ID when provided, otherwise
+  // from the fetched document's latest revision.
+  protected async getDocumentByUid (uniqueId: string): Promise<string> {
+    const { documentId, revision } = EXISTING_ID_REGEXP.exec(uniqueId)?.groups ?? {}
+    if (documentId === undefined) {
       throw new Error(`Invalid existing ID format: "${uniqueId}"`)
     }
-    const [,,, , documentId] = match
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- external API returns unknown shape
-    const data = await this.api.getDocument(documentId) as Record<string, { identifier: string }> | null
-    if (data === null || typeof data !== 'object') {
+    const data = await this.api.get(documentId, { info: 'true' }) as { identifier?: string; latestRevision?: number } | null
+    if (data === null || typeof data !== 'object' || typeof data.identifier !== 'string') {
       throw new Error(`Existing ID "${uniqueId}" could not be found`)
     }
-    return `${data['header']?.identifier ?? ''}@${match[5]}`
+    return `${data.identifier}@${revision ?? data.latestRevision ?? 1}`
   }
 }

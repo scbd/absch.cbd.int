@@ -43,7 +43,11 @@ function referencesFailedLinkedRecord (doc: DocumentRequest, failedIds: Map<stri
     if (typeof value === 'object') {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- walking arbitrary document values at runtime
       const obj = value as Record<string, unknown>
-      if (typeof obj['identifier'] === 'string' && failedIds.has(obj['identifier'])) return failedIds.get(obj['identifier'])
+      if (typeof obj['identifier'] === 'string') {
+        // References carry an @revision suffix; failedIds is keyed by bare identifier.
+        const bareId = obj['identifier'].replace(/@\d+$/, '')
+        if (failedIds.has(bareId)) return failedIds.get(bareId)
+      }
       return Object.values(obj).reduce<string | undefined>((acc, v) => acc ?? walk(v), undefined)
     }
     return undefined

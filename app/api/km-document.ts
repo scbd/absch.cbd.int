@@ -171,8 +171,9 @@ export class KmDraftsApi extends ApiBase {
   //     return await this.saveDraft(identifier, documentJson, schema)
   //   }
 
-  async getDocument (identifier: string): Promise<unknown> {
-    return await this.http.get(serviceUrls.documentUrl(identifier))
+  async getDocument (identifier: string, { info, body }: GetOptions = {}): Promise<unknown> {
+    const params = { info, body }
+    return await this.http.get(serviceUrls.documentUrl(identifier), { params })
       .then(res => res.data as unknown)
       .catch(tryCastToApiError)
   }
