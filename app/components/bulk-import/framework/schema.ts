@@ -124,6 +124,16 @@ export abstract class Schema implements SchemaInstance {
     return typeof v === 'string' ? v : undefined
   }
 
+  // Date-formatted cells are parsed as native Date objects by the sheet reader.
+  // columnValue would strip them (returns strings only), so dates need their own
+  // accessor that preserves Date to hand to parseDate.
+  protected dateColumnValue (key: string): string | Date | undefined {
+    // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
+    const { [key]: v } = this.row
+    if (v instanceof Date) return v
+    return typeof v === 'string' ? v : undefined
+  }
+
   protected nestedColumnValue (group: string, key: string): string | undefined {
     const nestedKey = `${group}.${key}`
     // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
