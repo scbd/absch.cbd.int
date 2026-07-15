@@ -15,9 +15,9 @@
           {{ t('title') }}
         </h1>
         <div class="small text-muted mt-1">
-          <span v-if="phase === 'empty' || phase === 'parse-error'">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
-          <span v-else-if="phase === 'parsing'">{{ t('bulkImport.reading', 'Reading file…') }}</span>
-          <span v-else>{{ t('bulkImport.previewReady', 'Review the records below before importing') }}</span>
+          <span v-if="phase === 'empty' || phase === 'parse-error'">{{ t('bulkImport.selectFile') }}</span>
+          <span v-else-if="phase === 'parsing'">{{ t('bulkImport.reading') }}</span>
+          <span v-else>{{ t('bulkImport.previewReady') }}</span>
         </div>
       </div>
       <div
@@ -31,13 +31,11 @@
         ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
         <b class="fw-semibold">{{ fileName }}</b>
         <span>·</span>
-        <span>{{ rowCount }} {{ t('bulkImport.rows', 'rows') }}</span>
-        <button
-          type="button" class="btn btn-outline-secondary btn-sm"
-          style="font-size: .78rem; padding: 2px 8px;" @click="emit('onClear')"
-        >
-          {{ t('bulkImport.replace', 'Replace') }}
-        </button>
+        <span>{{ rowCount }} {{ t('bulkImport.rows') }}</span>
+        <label class="btn btn-outline-secondary btn-sm mb-0" style="font-size: .78rem; padding: 2px 8px;">
+          {{ t('bulkImport.replace') }}
+          <input type="file" accept=".xlsx,.xls" hidden @change="handleReplaceInput">
+        </label>
       </div>
     </div>
     <button
@@ -59,6 +57,18 @@ import { useI18n } from 'vue-i18n'
 import type { UploaderPhase } from '../framework/types'
 
 defineProps<{ phase: UploaderPhase; fileName: string; rowCount: number }>()
-const emit = defineEmits<(e: 'onClose' | 'onClear')=> void>()
+const emit = defineEmits<{
+  onClose: []
+  onReplaceFile: [file: File]
+}>()
 const { t } = useI18n()
+
+function handleReplaceInput (e: Event) {
+  const { target } = e
+  if (!(target instanceof HTMLInputElement)) return
+  const file = target.files?.[0]
+  // reset so picking the same (fixed) file again still fires change
+  target.value = ''
+  if (file) emit('onReplaceFile', file)
+}
 </script>
