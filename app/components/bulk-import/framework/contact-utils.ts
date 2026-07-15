@@ -5,15 +5,49 @@ import type {
 import type { LanguageCode } from '~/types/languages'
 import type { LinkedRecordStore } from './types'
 import { Schema } from './schema'
-// @ts-expect-error js module
 import { escape as solrEscape } from '~/services/solr/queries'
 
-export function findEmailInLinkedRecords (email: string | undefined, linkedRecords: LinkedRecordStore): string | undefined {
+function normalize (value: unknown): string | undefined {
+  if (typeof value !== 'string') return undefined
+  const trimmed = value.trim()
+  return trimmed === '' ? undefined : trimmed.toLowerCase()
+}
+
+// A built contact's name field may be a plain string (person first/last name) or
+// a locale-keyed TextValue object (organization name); collect the comparable strings.
+function localeValues (value: unknown): string[] {
+  if (typeof value === 'string') return [value]
+  if (value !== null && typeof value === 'object') {
+    return Object.values(value).filter((v): v is string => typeof v === 'string')
+  }
+  return []
+}
+
+// Whether the uploaded contact's name matches an already-built record. A blank
+// uploaded name is not compared (email + government alone decide the match); a
+// present name must match so a same-email contact with a different name is not merged.
+function contactMatchesRecord (contact: SupportingDocument<IContactFields>, record: Record<string, unknown>): boolean {
+  if (contact.type === 'organization') {
+    const target = normalize(contact.orgName)
+    if (target === undefined) return true
+    return localeValues(record['organization']).some(v => normalize(v) === target)
+  }
+  const first = normalize(contact.orgName)
+  const last = normalize(contact.acronym)
+  const firstMatches = first === undefined || normalize(record['firstName']) === first
+  const lastMatches = last === undefined || normalize(record['lastName']) === last
+  return firstMatches && lastMatches
+}
+
+export function findContactInLinkedRecords (contact: SupportingDocument<IContactFields>, linkedRecords: LinkedRecordStore): string | undefined {
+  const { email } = contact
   if (typeof email !== 'string') return undefined
   const match = linkedRecords.find((rec: unknown) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have dynamic shape
-    const { emails } = rec as Record<string, unknown>
-    return Array.isArray(emails) && emails.includes(email)
+    const record = rec as Record<string, unknown>
+    const { emails } = record
+    if (!Array.isArray(emails) || !emails.includes(email)) return false
+    return contactMatchesRecord(contact, record)
   })
   if (match === undefined) return undefined
   // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- SubDocumentStore entries have dynamic shape
@@ -31,25 +65,41 @@ export async function resolveExistingContactIds (
   return ids.map(identifier => ({ identifier }))
 }
 
-export async function findExistingContactByEmail (
-  email: string | undefined,
+// Name clauses added to the contact lookup so a match also requires the name,
+// not just email + government (person names are exact-string fields, organization
+// name is analyzed text).
+function buildContactVerificationQuery (contact: SupportingDocument<IContactFields>): string[] {
+  if (contact.type === 'organization') {
+    const org = contact.orgName?.trim()
+    if (Schema.isEmpty(org)) return []
+    return [`organization_EN_t:"${solrEscape(org)}"`]
+  }
+  const clauses: string[] = []
+  const first = contact.orgName?.trim()
+  const last = contact.acronym?.trim()
+  if (!Schema.isEmpty(first)) clauses.push(`firstName_s:"${solrEscape(first)}"`)
+  if (!Schema.isEmpty(last)) clauses.push(`lastName_s:"${solrEscape(last)}"`)
+  return clauses
+}
+
+export async function findExistingContact (
+  contact: SupportingDocument<IContactFields>,
   governmentRaw: string | undefined,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- SolrApi is a JS module with no type declarations
   solrApi: any
 ): Promise<string | undefined> {
+  const { email } = contact
   if (Schema.isEmpty(email) || Schema.isEmpty(governmentRaw)) return undefined
   const governmentIso = await Schema.resolveCountryIso(governmentRaw)
   if (governmentIso === undefined) return undefined
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- solrEscape is a JS function
-  const escapedEmail: unknown = solrEscape(email)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- solrEscape is a JS function
-  const escapedGov: unknown = solrEscape(governmentIso)
-  if (typeof escapedEmail !== 'string' || typeof escapedGov !== 'string') return undefined
+  const query = [
+    'schema_s:contact',
+    `text_EN_txt:"${solrEscape(email)}"`,
+    `government_s:${solrEscape(governmentIso)}`,
+    ...buildContactVerificationQuery(contact)
+  ].join(' AND ')
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-type-assertion -- SolrApi is a JS module
-  const data = await (solrApi.query({
-    query: `schema_s:contact AND text_EN_txt:"${escapedEmail}" AND government_s:${escapedGov}`,
-    fields: 'identifier_s'
-  })) as { response: { docs: Array<{ identifier_s?: string }> } }
+  const data = await (solrApi.query({ query, fields: 'identifier_s' })) as { response: { docs: Array<{ identifier_s?: string }> } }
   return data.response.docs[0]?.identifier_s
 }
 
@@ -108,11 +158,10 @@ export async function findContactOrCreate (
     return await resolveExistingContactIds(existing, opts.resolveDocumentIdentifier)
   }
 
-  const email = contact.email ?? undefined
-  const linkedId = findEmailInLinkedRecords(email, linkedRecords)
+  const linkedId = findContactInLinkedRecords(contact, linkedRecords)
   if (linkedId !== undefined) return [{ identifier: linkedId }]
 
-  const solrIdentifier = await findExistingContactByEmail(email, opts.countryIso, opts.solrApi)
+  const solrIdentifier = await findExistingContact(contact, opts.countryIso, opts.solrApi)
   if (solrIdentifier !== undefined) return [{ identifier: solrIdentifier }]
 
   const doc = await buildContactDocument(contact, {

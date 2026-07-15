@@ -6,7 +6,6 @@ declare module 'vue-i18n' {
     mergeLocaleMessage: (locale: string, messages: unknown)=> void
   }
 }
-
 declare module '~/services/composables/realm.js' {
   export function useRealm (): { realm: string; baseURL: string }
 }
@@ -14,6 +13,11 @@ declare module '~/services/composables/realm.js' {
 declare module '~/services/composables/utils.js' {
   export const oasisUrl: ()=> string
   export const sleep: (ms: number)=> Promise<void>
+}
+
+declare module '~/services/solr/queries' {
+  // returns undefined for null/undefined/'' — pass non-empty strings only
+  export function escape (value: string): string
 }
 
 declare module '@scbd/angular-vue/src/index.js' {
