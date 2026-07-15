@@ -78,6 +78,14 @@ export interface SheetError {
   value?: string
 }
 
+// Produced by document-type validators, which stay i18n-free: `code` is a key in
+// the document type's messages JSON; the composable resolves it to a SheetError
+// message with t(code, params).
+export interface ValidationError extends Omit<SheetError, 'message'> {
+  code: string
+  params?: Record<string, string>
+}
+
 export interface DocBuildError {
   row: number
   message: string
@@ -133,6 +141,12 @@ export interface ColumnGroup {
   keys: string[]
 }
 
+export interface ValidateRowsContext {
+  tokenReader: TokenReader
+  realm: string
+  userGovernment?: string
+}
+
 export interface DocumentTypeDefinition {
   Schema: new (
     row: RawRow,
@@ -146,7 +160,7 @@ export interface DocumentTypeDefinition {
   headerRows: number[]
   pinnedColumns?: string[]
   columnGroups?: ColumnGroup[]
-  validateRows?: (rows: RawRow[], tokenReader: TokenReader, realm: string, userGovernment?: string)=> Promise<SheetError[]>
+  validateRows?: (rows: RawRow[], ctx: ValidateRowsContext)=> Promise<ValidationError[]>
 }
 
 export interface SchemaInstance {

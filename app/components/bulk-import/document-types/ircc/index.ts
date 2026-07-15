@@ -1,5 +1,7 @@
-import type { DocumentTypeDefinition, RawRow, SheetError, TokenReader } from '../../framework/types'
+import type { DocumentTypeDefinition, RawRow, ValidateRowsContext, ValidationError } from '../../framework/types'
+import type { LinkedRecordVerification } from '../../framework/record-utils'
 import { KmDocumentsApi } from '~/api/km-document'
+import { EXISTING_ID_REGEXP, isUserRecordOwner, verifyLinkedRecord } from '../../framework/record-utils'
 import { Schema } from '../../framework/schema'
 import { IrccSchema } from './schema'
 import attributesMap from './attributes-map'
@@ -10,20 +12,18 @@ const CONTACT_PREFIXES = ['provider', 'pic'] as const
 const CONTACT_DETAIL_FIELDS = ['orgName', 'acronym', 'address', 'city', 'country', 'email'] as const
 const CONTACT_REQUIRED_FIELDS = ['type', 'orgName', 'country', 'email'] as const
 
-const EXISTING_ID_REGEXP = /^[a-z]+-[a-z]+-[a-z]+-(?<documentId>\d+)(?:-\d{1,3})?$/i
-
-async function validateExistingIds (existing: string, column: string, rowIndex: number, api: KmDocumentsApi): Promise<SheetError[]> {
-  const errors: SheetError[] = []
+async function validateExistingIds (existing: string, column: string, rowIndex: number, api: KmDocumentsApi): Promise<ValidationError[]> {
+  const errors: ValidationError[] = []
   for (const uid of existing.split(',').map(s => s.trim()).filter(Boolean)) {
     const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
     if (documentId === undefined) {
-      errors.push({ row: rowIndex, column, level: 'error', message: `Invalid contact ID format: "${uid}"`, value: uid })
+      errors.push({ row: rowIndex, column, level: 'error', code: 'errorInvalidContactId', params: { uid }, value: uid })
       continue
     }
     // eslint-disable-next-line no-await-in-loop -- sequential is fine; IDs per row are typically 1
     const exists = await api.exists(documentId).catch(() => false)
     if (!exists) {
-      errors.push({ row: rowIndex, column, level: 'error', message: `Contact ID not found: "${uid}"`, value: uid })
+      errors.push({ row: rowIndex, column, level: 'error', code: 'errorContactIdNotFound', params: { uid }, value: uid })
     }
   }
   return errors
@@ -34,7 +34,7 @@ async function validateContact (
   rowIndex: number,
   prefix: typeof CONTACT_PREFIXES[number],
   api: KmDocumentsApi
-): Promise<SheetError[]> {
+): Promise<ValidationError[]> {
   // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
   const existing = row[`${prefix}.existing`]
   const hasExisting = typeof existing === 'string' && existing.trim() !== ''
@@ -42,38 +42,65 @@ async function validateContact (
   if (!hasExisting) {
     return CONTACT_REQUIRED_FIELDS
       .filter(field => Schema.isEmpty(row[`${prefix}.${field}`]))
-      .map(field => ({ row: rowIndex, column: `${prefix}.${field}`, level: 'error' as const, message: 'This field is required' }))
+      .map(field => ({ row: rowIndex, column: `${prefix}.${field}`, level: 'error' as const, code: 'errorFieldRequired' }))
   }
 
   const column = `${prefix}.existing`
   const hasContactInfo = CONTACT_DETAIL_FIELDS.some(field => !Schema.isEmpty(row[`${prefix}.${field}`]))
   if (hasContactInfo) {
-    return [{ row: rowIndex, column, level: 'error', message: 'Provide either an existing contact ID or contact details, not both' }]
+    return [{ row: rowIndex, column, level: 'error', code: 'errorContactIdOrDetails' }]
   }
 
   return await validateExistingIds(existing, column, rowIndex, api)
 }
 
-async function resolveUniqueCnaIds (rows: RawRow[], api: KmDocumentsApi): Promise<Map<string, boolean>> {
-  const uidToDocumentId = new Map<string, string>()
+async function resolveUniqueCnaIds (rows: RawRow[], api: KmDocumentsApi): Promise<Map<string, LinkedRecordVerification>> {
+  const uids = new Set<string>()
   for (const row of rows) {
     const { absCNAId: value } = row
     if (typeof value !== 'string' || value.trim() === '') continue
-    const uid = value.trim()
-    if (uidToDocumentId.has(uid)) continue
-    const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
-    if (documentId !== undefined) uidToDocumentId.set(uid, documentId)
+    uids.add(value.trim())
   }
 
-  const results = new Map<string, boolean>()
-  await Promise.all([...uidToDocumentId.entries()].map(async ([uid, documentId]) => {
-    results.set(uid, await api.exists(documentId).catch(() => false))
+  const results = new Map<string, LinkedRecordVerification>()
+  await Promise.all([...uids].map(async uid => {
+    results.set(uid, await verifyLinkedRecord(uid, api))
   }))
   return results
 }
 
-async function validateRows (rows: RawRow[], tokenReader: TokenReader, realm: string, userGovernment?: string): Promise<SheetError[]> {
-  const errors: SheetError[] = []
+function validateCna (
+  row: RawRow,
+  rowIndex: number,
+  cnaResults: Map<string, LinkedRecordVerification>,
+  userGovernment?: string
+): ValidationError[] {
+  const { absCNAId: cnaValue } = row
+  if (typeof cnaValue !== 'string' || cnaValue.trim() === '') return []
+
+  const uid = cnaValue.trim()
+  function cnaError (code: string): ValidationError[] {
+    return [{ row: rowIndex, column: 'absCNAId', level: 'error', code, params: { uid }, value: uid }]
+  }
+
+  const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
+  if (documentId === undefined) {
+    return cnaError('errorInvalidCnaFormat')
+  }
+
+  const cnaResult = cnaResults.get(uid)
+  if (cnaResult?.exists !== true) {
+    return cnaError('errorCnaNotFound')
+  }
+  if (!isUserRecordOwner(cnaResult, userGovernment)) {
+    return cnaError('errorCnaGovernmentMismatch')
+  }
+  return []
+}
+
+async function validateRows (rows: RawRow[], ctx: ValidateRowsContext): Promise<ValidationError[]> {
+  const { tokenReader, realm, userGovernment } = ctx
+  const errors: ValidationError[] = []
   const api = new KmDocumentsApi({ tokenReader, realm })
 
   const cnaResults = await resolveUniqueCnaIds(rows, api)
@@ -84,22 +111,13 @@ async function validateRows (rows: RawRow[], tokenReader: TokenReader, realm: st
       if (value === undefined || value === '') return
       const resolved = await Schema.resolveCountryIso(value)
       if (resolved === undefined) {
-        errors.push({ row: rowIndex, column: key, level: 'error', message: `Unrecognized country: "${value}"`, value })
+        errors.push({ row: rowIndex, column: key, level: 'error', code: 'errorUnrecognizedCountry', params: { value }, value })
       } else if (key === 'country' && userGovernment !== undefined && resolved !== userGovernment.toLowerCase()) {
-        errors.push({ row: rowIndex, column: key, level: 'error', message: `Country "${value}" does not match your account's government`, value })
+        errors.push({ row: rowIndex, column: key, level: 'error', code: 'errorCountryGovernmentMismatch', params: { value }, value })
       }
     }))
 
-    const { absCNAId: cnaValue } = row
-    if (typeof cnaValue === 'string' && cnaValue.trim() !== '') {
-      const uid = cnaValue.trim()
-      const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
-      if (documentId === undefined) {
-        errors.push({ row: rowIndex, column: 'absCNAId', level: 'error', message: `Invalid ABS CNA ID format: "${uid}"`, value: uid })
-      } else if (cnaResults.get(uid) !== true) {
-        errors.push({ row: rowIndex, column: 'absCNAId', level: 'error', message: `ABS CNA not found: "${uid}"`, value: uid })
-      }
-    }
+    errors.push(...validateCna(row, rowIndex, cnaResults, userGovernment))
 
     const contactErrors = await Promise.all(CONTACT_PREFIXES.map(async prefix => await validateContact(row, rowIndex, prefix, api)))
     errors.push(...contactErrors.flat())
