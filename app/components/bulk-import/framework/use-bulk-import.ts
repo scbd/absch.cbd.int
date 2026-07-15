@@ -39,7 +39,7 @@ export function useBulkImport (documentType: DocumentTypes): {
   onConfirmErase: ()=> void
   onCancelConfirm: ()=> void
 } {
-  const { mergeLocaleMessage } = useI18n()
+  const { t, mergeLocaleMessage } = useI18n()
   const auth = useAuth()
   const realm = useRealm()
   const { [documentType]: definition } = registry
@@ -92,7 +92,9 @@ export function useBulkImport (documentType: DocumentTypes): {
       if (definition.validateRows !== undefined) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- auth.user() shape is defined by the backend token
         const userGovernment = (auth.user() as { government?: string } | null)?.government
-        validationErrors = await definition.validateRows(rows, tokenReader, realm.realm, userGovernment)
+        const issues = await definition.validateRows(rows, { tokenReader, realm: realm.realm, userGovernment })
+        // Validators stay i18n-free and return message codes; resolve them here
+        validationErrors = issues.map(({ code, params, ...rest }) => ({ ...rest, message: t(code, params ?? {}) }))
       }
       const allErrors = [...sheetErrors, ...validationErrors]
       setStep(PARSE_STEP_KEY.validateRows, PARSE_STEP_STATUS.done)

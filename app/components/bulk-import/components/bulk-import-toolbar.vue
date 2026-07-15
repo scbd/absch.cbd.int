@@ -3,7 +3,7 @@
     <input
       :value="search" type="search"
       class="form-control form-control-sm" style="width: 210px;"
-      :placeholder="t('bulkImport.search', 'Search documents...')"
+      :placeholder="t('bulkImport.search')"
       @input="emit('update:search', ($event.target as HTMLInputElement).value)"
     >
   </div>

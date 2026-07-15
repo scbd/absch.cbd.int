@@ -8,7 +8,7 @@
       <slot />
       <div class="mt-3 d-flex gap-2 justify-content-end">
         <button class="btn btn-secondary" @click="emit('onCancel')">
-          {{ t('bulkImport.cancel', 'Cancel') }}
+          {{ t('bulkImport.cancel') }}
         </button>
         <button class="btn" :class="confirmClass" @click="emit('onConfirm')">
           {{ confirmLabel }}

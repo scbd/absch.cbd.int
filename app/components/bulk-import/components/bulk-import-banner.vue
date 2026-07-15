@@ -35,15 +35,15 @@
           {{ banner.text }}
         </div>
         <template v-if="stats">
-          <span class="fw-semibold">{{ stats.documents }} {{ t('bulkImport.documents', 'documents') }}</span>
+          <span class="fw-semibold">{{ stats.documents }} {{ t('bulkImport.documents') }}</span>
           <span class="d-inline-flex align-items-center gap-1 fw-semibold text-danger">
-            <span class="bi-stat__dot bg-danger" />{{ stats.errors }} {{ t('bulkImport.countErrors', 'errors') }}
+            <span class="bi-stat__dot bg-danger" />{{ stats.errors }} {{ t('bulkImport.countErrors') }}
           </span>
           <span class="d-inline-flex align-items-center gap-1 fw-semibold text-warning">
-            <span class="bi-stat__dot bg-warning" />{{ stats.warnings }} {{ t('bulkImport.countWarnings', 'warnings') }}
+            <span class="bi-stat__dot bg-warning" />{{ stats.warnings }} {{ t('bulkImport.countWarnings') }}
           </span>
           <span class="d-inline-flex align-items-center gap-1 fw-semibold text-success">
-            <span class="bi-stat__dot bg-success" />{{ stats.ready }} {{ t('bulkImport.countReady', 'ready') }}
+            <span class="bi-stat__dot bg-success" />{{ stats.ready }} {{ t('bulkImport.countReady') }}
           </span>
         </template>
         <span class="flex-grow-1" />
@@ -52,7 +52,7 @@
           type="button" class="bi-collapse-btn d-inline-flex align-items-center gap-1"
           @click="collapsed = !collapsed"
         >
-          {{ collapsed ? t('bulkImport.showDetails', 'Show details') : t('bulkImport.hideDetails', 'Hide details') }}
+          {{ collapsed ? t('bulkImport.showDetails') : t('bulkImport.hideDetails') }}
           <svg
             width="12" height="12" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
@@ -85,7 +85,7 @@
         class="mt-2 small"
         :class="banner.level === 'ok' ? 'bi-hint--ok' : 'bi-hint--warn'"
       >
-        {{ t('bulkImport.fixHint', 'Fix the highlighted cells in your Excel file and upload it again. Rows without issues are kept.') }}
+        {{ t('bulkImport.fixHint') }}
       </div>
     </div>
   </div>

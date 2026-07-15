@@ -11,7 +11,7 @@
         <div class="modal-header d-block p-0 border-0">
           <BulkImportHeader
             :phase="state.phase" :file-name="fileName" :row-count="previewRows.length"
-            @on-close="onClose" @on-clear="onClear"
+            @on-close="onClose" @on-replace-file="onFilePicked"
           />
         </div>
 

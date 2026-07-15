@@ -7,7 +7,7 @@
             #
           </th>
           <th class="bi-pin bi-pin--1 bi-grp" rowspan="2">
-            {{ t('bulkImport.rowStatus', 'Row status') }}
+            {{ t('bulkImport.rowStatus') }}
           </th>
           <th
             v-for="(key, i) in pinnedColumnKeys" :key="key"
@@ -15,14 +15,20 @@
           >
             {{ t(key, key) }}
           </th>
-          <th v-for="grp in columnGroups" :key="grp.label" :colspan="grp.keys.length" class="bi-grp">
+          <th
+            v-for="grp in columnGroups" :key="grp.label" :colspan="grp.keys.length"
+            class="bi-grp bi-grp-boundary"
+          >
             {{ grp.label }}
           </th>
         </tr>
         <tr class="bi-table__col-row">
           <th
             v-for="key in scrollableColumnKeys" :key="key"
-            class="bi-col" :class="{ 'bi-col--required': requiredKeys.has(key) }"
+            class="bi-col" :class="{
+              'bi-col--required': requiredKeys.has(key),
+              'bi-grp-boundary': groupStartKeys.has(key)
+            }"
           >
             {{ t(key, key) }}
           </th>
@@ -61,7 +67,8 @@
             :class="{
               'bi-cell--err': cellHasError(row, key),
               'bi-cell--warn': cellHasWarn(row, key),
-              'bi-cell--long': isLongText(row.cells[key]?.display ?? '')
+              'bi-cell--long': isLongText(row.cells[key]?.display ?? ''),
+              'bi-grp-boundary': groupStartKeys.has(key)
             }"
           >
             <span v-if="isBoolYes(row.cells[key]?.display ?? '')" class="bi-chip bi-chip--yes">
@@ -118,6 +125,11 @@ const { t } = useI18n()
 
 const progressByRow = computed(() => new Map(props.rowProgressList.map(p => [p.rowIndex, p])))
 
+// first column of each group carries the boundary border separating it from the previous group
+const groupStartKeys = computed(() => new Set(
+  props.columnGroups.map(g => g.keys[0]).filter((k): k is string => k !== undefined)
+))
+
 function cellHasError (row: PreviewRow, key: string): boolean {
   return row.cells[key]?.errors.some(e => e.level === 'error') ?? false
 }
@@ -164,14 +176,18 @@ function isLongText (v: string): boolean {
 .bi-table td::before, .bi-table td::after { display: none !important; content: none !important; }
 .bi-table__grp-row th {
   background: #e8eef2; color: #1a3a4a !important;
-  text-align: center; text-transform: uppercase;
+  text-align: left; text-transform: uppercase;
   font-size: 10.5px; letter-spacing: .07em; font-weight: 700 !important;
-  padding: 8px 13px; border-bottom: 1px solid var(--line, #dde4e8);
+  padding: 8px 13px;
+  /* collapsed borders don't stick with sticky cells; paint the line as an inset shadow instead */
+  box-shadow: inset 0 -2px 0 #a9bcc7;
 }
+.bi-table th.bi-grp-boundary, .bi-table td.bi-grp-boundary { border-left: 2px solid #a9bcc7; }
 .bi-table__col-row th {
   background: #f7f9fa;
   color: var(--ink-2, #3c4e57); font-weight: 600; font-size: 11px;
-  padding: 8px 13px; border-bottom: 1px solid var(--line, #dde4e8);
+  padding: 8px 13px;
+  box-shadow: inset 0 -2px 0 #a9bcc7;
 }
 .bi-col--required::after { content: ' *'; color: var(--orange); }
 .bi-table__grp-row th { position: sticky; top: 0; z-index: 3; }

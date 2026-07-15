@@ -80,7 +80,7 @@ export class IrccSchema extends Schema {
       countryIso,
       language: this.language,
       getLocaleValue: this.getLocaleValue.bind(this),
-      resolveDocumentIdentifier: this.resolveDocumentIdentifier.bind(this)
+      getDocumentByUid: this.getDocumentByUid.bind(this)
     }
 
     const providers = await findContactOrCreate(this.contactFromRow('provider'), this.linkedRecords, contactOpts)
@@ -96,8 +96,8 @@ export class IrccSchema extends Schema {
       government: Schema.toETerm(countryIso),
       absCNA: Schema.toEReference(await this.resolveAbsCna()),
       title: this.getLocaleValue(this.columnValue('permitEquivalent')),
-      dateOfIssuance: Schema.parseDate(this.columnValue('dateOfIssuance')),
-      dateOfExpiry: Schema.parseDate(this.columnValue('dateOfExpiry')),
+      dateOfIssuance: Schema.parseDate(this.dateColumnValue('dateOfIssuance')),
+      dateOfExpiry: Schema.parseDate(this.dateColumnValue('dateOfExpiry')),
       providersConfidential: IrccSchema.getIsConfidential(this.nestedColumnValue('provider', 'type')),
       entitiesToWhomPICGrantedConfidential: IrccSchema.getIsConfidential(this.nestedColumnValue('pic', 'type')),
       picGranted: Schema.parseTextToBoolean(this.nestedColumnValue('pic', 'consent')),
@@ -139,7 +139,7 @@ export class IrccSchema extends Schema {
     const id = this.columnValue('absCNAId')
     if (Schema.isEmpty(id)) return undefined
     try {
-      const result = await this.resolveDocumentIdentifier(id)
+      const result = await this.getDocumentByUid(id)
       return result === '' ? undefined : result
     } catch {
       return undefined

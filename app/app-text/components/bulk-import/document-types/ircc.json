@@ -38,9 +38,18 @@
   "issuingAuthority": "Issuing authority",
   "permitDetails": "Permit / equivalent",
   "providerSection": "The provider",
-  "picSection": "PIC",
+  "picSection": "Contact details of the person or entity to whom PIC was granted",
   "mat": "MAT",
   "geneticResource": "Genetic resource",
   "usesConditions": "Uses & conditions",
-  "documentation": "Documentation"
+  "documentation": "Documentation",
+  "errorFieldRequired": "This field is required",
+  "errorContactIdOrDetails": "Provide either an existing contact ID or contact details, not both",
+  "errorInvalidContactId": "Invalid contact ID format: \"{uid}\"",
+  "errorContactIdNotFound": "Contact ID not found: \"{uid}\"",
+  "errorInvalidCnaFormat": "Invalid ABS CNA ID format: \"{uid}\"",
+  "errorCnaNotFound": "ABS CNA not found: \"{uid}\"",
+  "errorCnaGovernmentMismatch": "ABS CNA \"{uid}\" does not match your account's government",
+  "errorUnrecognizedCountry": "Unrecognized country: \"{value}\"",
+  "errorCountryGovernmentMismatch": "Country \"{value}\" does not match your account's government"
 }

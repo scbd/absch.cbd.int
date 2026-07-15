@@ -49,7 +49,7 @@
                   data-bs-dismiss="modal"
                   @click="close"
                 >
-                  {{ $t("closeButton") }}
+                  {{ t("closeButton") }}
                 </button>
               </div>
             </div>
@@ -62,8 +62,17 @@
 
 <script setup lang="ts">
 import { shallowRef, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 // @ts-expect-error importing js file
 import { Modal } from 'bootstrap'
+import modalMessages from '~/app-text/components/common/modal.json'
+
+const { t, mergeLocaleMessage } = useI18n()
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- plugin wraps JSON in locale object at runtime
+Object.entries(modalMessages as unknown as Record<string, unknown>).forEach(([locale, msgs]) => {
+  mergeLocaleMessage(locale, msgs)
+})
 
 let modal = { show: (value: string) => value, hide: () => undefined }
 const modalRef = shallowRef(modal)

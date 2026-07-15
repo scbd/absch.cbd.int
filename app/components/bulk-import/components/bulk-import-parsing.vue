@@ -13,7 +13,7 @@
       {{ fileName }}
     </div>
     <div class="small text-muted">
-      {{ t('bulkImport.parsingTitle', 'Reading and validating your file...') }}
+      {{ t('bulkImport.parsingTitle') }}
     </div>
     <div class="progress mt-2" style="width: min(440px, 90%); height: 7px;">
       <div
@@ -64,10 +64,20 @@ const { t } = useI18n()
 const { openSheet, mapColumns, validateRows } = PARSE_STEP_KEY
 
 function stepLabel (step: ParseStep): string {
-  if (step.key === openSheet) return t('bulkImport.step.openSheet', 'Workbook opened · sheet found')
-  if (step.key === mapColumns) return step.detail ? `Mapped ${step.detail} columns to IRCC fields` : 'Mapping columns…'
-  if (step.key === validateRows) return step.detail ? `Validating ${step.detail} rows against registries…` : 'Validating rows…'
-  return t('bulkImport.step.buildPreview', 'Building preview')
+  if (step.key === openSheet) return t('bulkImport.stepOpenSheet')
+  if (step.key === mapColumns) {
+    if (step.detail) {
+      return t('bulkImport.stepMapColumns', { n: step.detail })
+    }
+    return t('bulkImport.stepMapColumnsActive')
+  }
+  if (step.key === validateRows) {
+    if (step.detail) {
+      return t('bulkImport.stepValidateRows', { n: step.detail })
+    }
+    return t('bulkImport.stepValidateRowsActive')
+  }
+  return t('bulkImport.stepBuildPreview')
 }
 </script>
 

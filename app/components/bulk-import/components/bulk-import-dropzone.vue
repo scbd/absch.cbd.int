@@ -14,28 +14,28 @@
       ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><line x1="9" y1="15" x2="12" y2="12" /><line x1="15" y1="15" x2="12" y2="12" /></svg>
     </div>
     <div class="fw-bold" style="font-size: 16px; color: #1a2e3b;">
-      {{ t('bulkImport.dropTitle', 'Drag an Excel file here') }}
+      {{ t('bulkImport.dropTitle') }}
     </div>
     <div class="small text-muted text-center" style="max-width: 420px;">
-      {{ t('bulkImport.dropSub', 'or browse your computer to select a completed IRCC import template.') }}
+      {{ t('bulkImport.dropSub') }}
     </div>
     <label class="bi-browse-btn d-inline-flex align-items-center gap-2 fw-semibold text-white mt-1">
       <svg
         width="15" height="15" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
       ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" /></svg>
-      {{ t('bulkImport.browse', 'Browse files') }}
+      {{ t('bulkImport.browse') }}
       <input type="file" accept=".xlsx,.xls" hidden @change="handleFileInput">
     </label>
     <div class="d-flex align-items-center gap-4 small text-muted mt-2">
-      <span>{{ t('bulkImport.accepted', 'Accepted:') }} <b class="text-secondary">xlsx</b>, <b class="text-secondary">.xls</b></span>
-      <span>{{ t('bulkImport.maxSize', 'Max') }} <b class="text-secondary">5 MB</b> · {{ t('bulkImport.upTo', 'up to') }} <b class="text-secondary">500 {{ t('bulkImport.rows', 'rows') }}</b></span>
-      <span>33 {{ t('bulkImport.columnsDesc', 'columns across 10 sections') }}</span>
+      <span>{{ t('bulkImport.accepted') }} <b class="text-secondary">xlsx</b>, <b class="text-secondary">.xls</b></span>
+      <span>{{ t('bulkImport.maxSize') }} <b class="text-secondary">5 MB</b> · {{ t('bulkImport.upTo') }} <b class="text-secondary">500 {{ t('bulkImport.rows') }}</b></span>
+      <span>33 {{ t('bulkImport.columnsDesc') }}</span>
     </div>
     <a
       class="small fw-medium text-decoration-none" style="color: var(--ok);"
       href="#" @click.prevent
-    >↓ {{ t('bulkImport.downloadTemplate', 'Download the IRCC template') }}</a>
+    >↓ {{ t('bulkImport.downloadTemplate') }}</a>
   </div>
 </template>
 
