@@ -5,11 +5,12 @@ export const EXISTING_ID_REGEXP = /^[a-z]+-[a-z]+-[a-z]+-(?<documentId>\d+)(?:-(
 export interface LinkedRecordVerification {
   exists: boolean
   government?: string
+  schema?: string
 }
 
 // Verifies a uid that references an existing published record (e.g. "ABSCH-CNA-XX-123456-1"):
-// confirms the document exists on the server and reports its government so callers
-// can cross-check ownership.
+// confirms the document exists on the server and reports its government and schema so
+// callers can cross-check ownership and record type.
 export async function verifyLinkedRecord (uid: string, api: KmDocumentsApi): Promise<LinkedRecordVerification> {
   const { documentId } = EXISTING_ID_REGEXP.exec(uid)?.groups ?? {}
   if (documentId === undefined) return { exists: false }
@@ -17,8 +18,8 @@ export async function verifyLinkedRecord (uid: string, api: KmDocumentsApi): Pro
   if (doc === undefined || doc === null || typeof doc !== 'object') {
     return { exists: false }
   }
-  const { government } = doc as { government?: { identifier?: string } }
-  return { exists: true, government: government?.identifier }
+  const { government, header } = doc as { government?: { identifier?: string }, header?: { schema?: string } }
+  return { exists: true, government: government?.identifier, schema: header?.schema }
 }
 
 // When either government is unknown, ownership can't be verified — assume owner.
