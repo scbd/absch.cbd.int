@@ -47,8 +47,10 @@
   "errorContactIdOrDetails": "Provide either an existing contact ID or contact details, not both",
   "errorInvalidContactId": "Invalid contact ID format: \"{uid}\"",
   "errorContactIdNotFound": "Contact ID not found: \"{uid}\"",
+  "errorContactSchemaMismatch": "\"{uid}\" is not a contact record",
   "errorInvalidCnaFormat": "Invalid ABS CNA ID format: \"{uid}\"",
   "errorCnaNotFound": "ABS CNA not found: \"{uid}\"",
+  "errorCnaSchemaMismatch": "\"{uid}\" is not a competent national authority record",
   "errorCnaGovernmentMismatch": "ABS CNA \"{uid}\" does not match your account's government",
   "errorUnrecognizedCountry": "Unrecognized country: \"{value}\"",
   "errorCountryGovernmentMismatch": "Country \"{value}\" does not match your account's government"

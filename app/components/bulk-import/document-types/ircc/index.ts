@@ -1,6 +1,7 @@
 import type { DocumentTypeDefinition, RawRow, ValidateRowsContext, ValidationError } from '../../framework/types'
 import type { LinkedRecordVerification } from '../../framework/record-utils'
 import { KmDocumentsApi } from '~/api/km-document'
+import { SCHEMAS } from '~/constants/schemas'
 import { EXISTING_ID_REGEXP, isUserRecordOwner, verifyLinkedRecord } from '../../framework/record-utils'
 import { Schema } from '../../framework/schema'
 import { IrccSchema } from './schema'
@@ -21,9 +22,11 @@ async function validateExistingIds (existing: string, column: string, rowIndex: 
       continue
     }
     // eslint-disable-next-line no-await-in-loop -- sequential is fine; IDs per row are typically 1
-    const exists = await api.exists(documentId).catch(() => false)
-    if (!exists) {
+    const result = await verifyLinkedRecord(uid, api)
+    if (!result.exists) {
       errors.push({ row: rowIndex, column, level: 'error', code: 'errorContactIdNotFound', params: { uid }, value: uid })
+    } else if (result.schema !== SCHEMAS.CONTACT) {
+      errors.push({ row: rowIndex, column, level: 'error', code: 'errorContactSchemaMismatch', params: { uid }, value: uid })
     }
   }
   return errors
@@ -91,6 +94,9 @@ function validateCna (
   const cnaResult = cnaResults.get(uid)
   if (cnaResult?.exists !== true) {
     return cnaError('errorCnaNotFound')
+  }
+  if (cnaResult.schema !== SCHEMAS.AUTHORITY) {
+    return cnaError('errorCnaSchemaMismatch')
   }
   if (!isUserRecordOwner(cnaResult, userGovernment)) {
     return cnaError('errorCnaGovernmentMismatch')

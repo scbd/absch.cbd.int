@@ -6,6 +6,7 @@ import type { LanguageCode } from '~/types/languages'
 import type { LinkedRecordStore } from './types'
 import { Schema } from './schema'
 import { escape as solrEscape } from '~/services/solr/queries'
+import { SCHEMAS } from '~/constants/schemas'
 
 function normalize (value: unknown): string | undefined {
   if (typeof value !== 'string') return undefined
@@ -118,7 +119,7 @@ export async function buildContactDocument (
   const data: EmptyDocumentRequest = {
     header: {
       identifier: Schema.generateId(),
-      schema: 'contact',
+      schema: SCHEMAS.CONTACT,
       languages: [language]
     },
     type: contactFields.type,

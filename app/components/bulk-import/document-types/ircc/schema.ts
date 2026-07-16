@@ -6,6 +6,7 @@ import ThesaurusApi from '~/api/thesaurus'
 // @ts-expect-error js module
 import SolrApi from '~/api/solr'
 import { THESAURUS_DOMAINS, THESAURUS_TERMS } from '~/constants/thesaurus'
+import { SCHEMAS } from '~/constants/schemas'
 import type { LanguageCode } from '~/types/languages'
 
 interface KeywordType {
@@ -90,7 +91,7 @@ export class IrccSchema extends Schema {
     const data: EmptyDocumentRequest = {
       header: {
         identifier: Schema.generateId(),
-        schema: 'absPermit',
+        schema: SCHEMAS.ABS_PERMIT,
         languages: [this.language]
       },
       government: Schema.toETerm(countryIso),
