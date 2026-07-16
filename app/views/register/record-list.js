@@ -29,6 +29,8 @@ const recordListError = mergeTranslationKeys(recordListT);
                 // the button text is inside the vue component,
                 // so we need to get the translation from the translation service and pass it to the vue component
                 $scope.buttonText = translationService.get('recordListT.bulkImport')
+
+                $scope.selectedRecords = [];
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
@@ -909,8 +911,19 @@ const recordListError = mergeTranslationKeys(recordListT);
                     }
                 }
 
+                async function loadBulkDeleteComponent(){
+                    const module = await import('~/components/register/bulk-delete-button.vue');
+                    $scope.bulkDeleteVueComponent = {
+                        components: {
+                            BulkDeleteButton: module.default,
+                        }
+                    };
+                    $scope.$apply();
+                }
+
                 loadRecords(1);
                 loadOfflineFormatDetails();
                 loadBulkUploadComponent();
+                loadBulkDeleteComponent();
 
             }];
