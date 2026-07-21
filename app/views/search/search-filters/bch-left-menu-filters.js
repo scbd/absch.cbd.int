@@ -217,6 +217,41 @@ export const bchLeftMenuFilters = {
             "field": "text_EN_txt"
         }
     ],
+    "cpbNationalReport1": [
+        {
+            "type": "freeText",
+            "title": bchFilters.freeText,
+            "field": "text_EN_txt"
+        }
+    ],
+    "cpbNationalReport2": [
+        {
+            "type": "freeText",
+            "title": bchFilters.freeText,
+            "field": "text_EN_txt"
+        }
+    ],
+    "cpbNationalReport3": [
+        {
+            "type": "freeText",
+            "title": bchFilters.freeText,
+            "field": "text_EN_txt"
+        }
+    ],
+    "cpbNationalReport4": [
+        {
+            "type": "freeText",
+            "title": bchFilters.freeText,
+            "field": "text_EN_txt"
+        }
+    ],
+    "cpbNationalReport5": [
+        {
+            "type": "freeText",
+            "title": bchFilters.freeText,
+            "field": "text_EN_txt"
+        }
+    ],
     "database": [
         {
             "type": "freeText",

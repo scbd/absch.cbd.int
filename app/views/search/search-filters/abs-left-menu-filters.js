@@ -390,7 +390,12 @@ export const absLeftMenuFilters = {
 		"type": "freeText",
 		"title": absFilters.freeText,
 		"field": "text_EN_txt"
-		}],
+	}],
+	"absNationalReport1" : [{
+		"type": "freeText",
+		"title": absFilters.freeText,
+		"field": "text_EN_txt"
+	}],
 	"resource": [
 		{
 			"type": "freeText",
