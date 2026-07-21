@@ -1234,18 +1234,18 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     };
                         //combine regions and countries facets to match the count.
                         // if any fields has regions than selecting any country from that region should return result
-                        if(facets.regions){
-                            _.forEach(facets.countries, function(con, key){
-                                if(facets.regions[key])
-                                    facets.countries[key] = (facets.countries[key]||0) + facets.regions[key];
-                            })
-                        }
-                        if(facets.countries){
-                            _.forEach(facets.regions, function(reg, key){
-                                if(facets.countries[key])
-                                    facets.regions[key] = (facets.regions[key]||0) + facets.countries[key];
-                            })
-                        }
+                        // if(facets.regions){
+                        //     _.forEach(facets.countries, function(con, key){
+                        //         if(facets.regions[key])
+                        //             facets.countries[key] = (facets.countries[key]||0) + facets.regions[key];
+                        //     })
+                        // }
+                        // if(facets.countries){
+                        //     _.forEach(facets.regions, function(reg, key){
+                        //         if(facets.countries[key])
+                        //             facets.regions[key] = (facets.regions[key]||0) + facets.countries[key];
+                        //     })
+                        // }
 
                         return facets;
                     }
