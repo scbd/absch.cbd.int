@@ -164,8 +164,7 @@ export default ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$
                         queries.$and.push({ "data.metadata.schema": { $in: $scope.filterType }})
 
                     var expired = moment.utc(new Date()).subtract("12", "weeks");
-                    console.log(expired);
-
+                    
                     var status = $scope.filterStatus || 'Pending';
 
                     if((roleService.isPublishingAuthority() || roleService.isNationalAuthorizedUser() || roleService.isNationalFocalPoint()) && $rootScope.user.government ){

@@ -62,14 +62,15 @@ import app from '~/app';
         //===========================
         //
         //===========================
-        function query(query, count, length, skip, sort) {
+        function query(query, count, length, skip, sort, fields) {
             return $http.get("/api/v2013/workflows", {
                 params: {
                     q: JSON.stringify(query),
                     l: length,
                     s: sort,
                     sk: skip,
-                    c: count
+                    c: count,
+                    f: fields ? JSON.stringify(fields) : undefined
                 }
             }).then(function(resp) {
                 return resp.data;
