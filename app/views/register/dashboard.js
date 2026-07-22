@@ -327,40 +327,31 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             }
             
             function loadmyTaskFacets(){
-                    // TODO: can be just one query instead of 5!!!!
-                    var taskQuery = [];
-                    var referenceApproverRoles = {
-                        "resource"                  : realm.schemaRoles("resource"),
-                        "capacityBuildingInitiative": realm.schemaRoles("capacityBuildingInitiative")
-                    };
-                    if(realm.is('ABS', true)){
-                        referenceApproverRoles["modelContractualClause"  ]  = realm.schemaRoles("modelContractualClause"    )
-                        referenceApproverRoles["communityProtocol"       ]  = realm.schemaRoles("communityProtocol"         )
-                    }
-                    _.forEach(referenceApproverRoles, function(roles, schema){
+                    var approverSchemas = (realm.referenceSchemas || []).filter(function(schema){
+                        return roleService.isUserInRoles(realm.schemaRoles(schema));
+                    });
 
-                        if(roleService.isUserInRoles(roles)){
-                        
-                            var myUserID = $scope.$root.user.userID;
-                            var query    = {
-                                $and : [
-                                    { "activities.assignedTo": myUserID } ,
-                                    { "closedOn"             : { $exists : false } },
-                                    { "data.realm"           : realm.value },
-                                    { "data.metadata.schema" : schema }
-                                ]
-                            };
-                            var query = IWorkflows.query(query,true)
-                                        .then(function(data){
-                                            var facetData = {data : {}};
-                                            facetData.data[schema] = data.count;
-                                            return facetData;
-                                        });
-                            taskQuery.push(query);
-                        }
-                    })
-                    
-                    return taskQuery;
+                    if(approverSchemas.length == 0)
+                        return [];
+
+                    var myUserID = $scope.$root.user.userID;
+                    var expired  = moment.utc(new Date()).subtract("12", "weeks");
+                    var query    = {
+                        $and : [
+                            { "activities.assignedTo": myUserID } ,
+                            { "closedOn"             : { $exists : false } },
+                            { "data.realm"           : realm.value },
+                            { "data.metadata.schema" : { $in : approverSchemas } }
+                        ]
+                    };
+                    query.$and.push( {"$and" : [ { "state": 'running'}, {activities : {$gt: []}}, {"createdOn": {"$gte": expired }} ] });
+                    var fields = { "createdBy_info": 1, "data.title": 1, "data.metadata.schema": 1 };
+                    var taskQuery = IWorkflows.query(query, null, null, null, null, fields)
+                                .then(function(workflows){
+                                    return { data : _.countBy(workflows, 'data.metadata.schema') };
+                                });
+
+                    return [taskQuery];
             }
             $scope.isAdditionDisabled = function (schema){
                 return  realm.schemas[schema].disableAdd;

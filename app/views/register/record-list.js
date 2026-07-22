@@ -694,17 +694,28 @@ const recordListError = mergeTranslationKeys(recordListT);
 
                         myTasks.forEach(function(workflow) { //tweaks
 
-                            if (workflow.data && !_.find(recordList, {identifier: workflow.data.identifier})){
-                                recordList.push({
-                                    identifier  : workflow.data.identifier,
-                                    title       : workflow.data.title,
-                                    metadata    : workflow.data.metadata,
-                                    type        : workflow.data.metadata.schema
-                                });
-                            }
-                            updateDocumentStatus(workflow.data.identifier, 'status', true)
+                            if (!workflow.data)
+                                return;
+
+                            var row = _.find(recordList, {identifier: workflow.data.identifier});
+                            var taskRow = row || {
+                                identifier  : workflow.data.identifier,
+                                title       : workflow.data.title,
+                                metadata    : workflow.data.metadata,
+                                type        : workflow.data.metadata.schema
+                            };
+                            if(!row && $scope.statusType == 'allRecords')
+                                recordList.push(taskRow);
+
+                            $scope.requestsList = $scope.requestsList || [];
+                            if(!_.find($scope.requestsList, {identifier: workflow.data.identifier}))
+                                $scope.requestsList.push(taskRow);
+
+                            if(row || $scope.statusType == 'allRecords')
+                                updateDocumentStatus(workflow.data.identifier, 'status', true)
 
                         });
+                        $scope.listCount.request = ($scope.requestsList || []).length;
                           if (recordList)
                             $scope.records = recordList;
                         return $scope.records;
@@ -824,6 +835,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                   },
                 }
 
+                var myTasksPromise = null;
                 function loadmyTasks(schema){
 
                     if(!_.includes(realm.referenceSchemas, schema)){
@@ -833,7 +845,9 @@ const recordListError = mergeTranslationKeys(recordListT);
                         return defer.promise;
                     }
 
-                    var myUserID = $scope.$root.user.userID;
+                    if(!myTasksPromise){
+                        var myUserID = $scope.$root.user.userID;
+                        var expired  = moment.utc(new Date()).subtract("12", "weeks");
                         var query    = {
                             $and : [
                                 { "activities.assignedTo" : myUserID } ,
@@ -842,8 +856,17 @@ const recordListError = mergeTranslationKeys(recordListT);
                                 { "data.metadata.schema" : schema }
                             ]
                         };
+                        query.$and.push({
+                            "$and" : [
+                                { "state": 'running'},
+                                {activities : {$gt: []}},
+                                {"createdOn": {"$gte": expired }}
+                            ]
+                        });
+                        myTasksPromise = IWorkflows.query(query);
+                    }
 
-                    return IWorkflows.query(query);
+                    return myTasksPromise;
 
                 }
 
