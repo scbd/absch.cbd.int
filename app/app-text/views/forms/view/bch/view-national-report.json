@@ -1,6 +1,8 @@
 {
     "generalInfo": "General Information",
     "contactPerson": "Contact person submitting the report",
+    "currentNfpInfo": "To view the current National Focal Point information, click",
+    "currentNfpInfoLink": "here",
     "country": "Country",
     "organizationsStakeholders": "Organizations/stakeholders who were consulted or participated in the preparation of this report",
     "timePeriod": "Time period covered by this report",
