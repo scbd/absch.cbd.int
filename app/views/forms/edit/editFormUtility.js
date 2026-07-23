@@ -205,7 +205,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 		}
 	};
 
-	function createWorkflow(draftInfo, additionalInfo, type){
+	function createWorkflow(draftInfo, additionalInfo, type, additionalFields){
 
 		var schema = realm.schemas[draftInfo.type]
 
@@ -222,7 +222,8 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 			"title"      		: draftInfo.workingDocumentTitle,
 			"abstract"   		: draftInfo.workingDocumentSummary,
 			"metadata"   		: draftInfo.workingDocumentMetadata,
-			"additionalInfo"	: additionalInfo
+			"additionalInfo"	: additionalInfo,
+			additionalFields
 		};
 
 		return workflows.create(type.name, type.version, workflowData); // return workflow info

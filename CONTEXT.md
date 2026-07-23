@@ -18,6 +18,13 @@ definition during design sessions.
 - **Schema** — The definition of a record type; drives the edit and view forms.
 - **Register** — The authenticated workspace where users manage their records
   (dashboards, requests, workflows, admin).
+- **Workflow** — An approval request that carries a Record draft through review
+  to publication or deletion. Surfaced in the Register as "requests"; avoid
+  "task".
+- **Record snapshot** — Record-derived fields (`recordFields`) copied onto a
+  Workflow when it is created, so Register views can filter and display
+  requests by record content without loading each record. Only record types
+  that opt in produce one; submission is the first.
 
 ## Architecture language
 
