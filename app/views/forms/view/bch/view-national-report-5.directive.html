@@ -27,6 +27,11 @@
 							<view-record-reference ng-model='document.contact' locale="locale" skip-realm="true">
 							</view-record-reference>
 						</div>
+						<div class="help-info">
+							{{::('viewNr5T.currentNfpInfo'|$translate)}}
+							<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}/NFP"
+								target="{{target || '_blank'}}">{{::('viewNr5T.currentNfpInfoLink'|$translate)}}</a>.
+						</div>
 					</div>
 
 					<div ng-show="document.stakeholders">

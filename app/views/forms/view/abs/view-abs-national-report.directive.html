@@ -29,6 +29,11 @@
 						<div view-record-reference ng-model="document.contact" locale="locale"  ng-if="document.contact"></div>
 					</div>
 					<div  class="km-value" ng-if="!document.contact">{{::('viewAbsNRT.noContactProvided'|$translate)}}</div>
+					<div class="help-info" ng-if="document.government">
+						{{::('viewAbsNRT.currentNfpInfo'|$translate)}}
+						<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}/NFP"
+							target="{{target || '_blank'}}">{{::('viewAbsNRT.currentNfpInfoLink'|$translate)}}</a>.
+					</div>
 				</div>
 			</div>
 		</div>
