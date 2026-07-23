@@ -32,6 +32,9 @@
 						<p class="fst-italic py-2 color-black fw-bold">
 							<span ng-bind-html="::('viewLabRegistryT.clickHere'|$translate)"></span>
 						</p>
+						<p class="fst-italic py-2 color-black fw-bold">
+							<span ng-bind-html="::('viewLabRegistryT.networkOfLabs'|$translate)"></span>
+						</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> {{::('viewLabRegistryT.loading'|$translate)}}</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> {{::('viewLabRegistryT.error'|$translate)}}</h3></div>
 						<div ng-if="!isLoading && !isError">						
