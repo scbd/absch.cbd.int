@@ -61,6 +61,11 @@ The same codebase serves three clearing-houses: **ABSCH** (Access and Benefit-Sh
 
 See [`CONTEXT.md`](CONTEXT.md) at the repo root for authoritative definitions of domain terms (Clearing-House, Realm, Record, Schema, Register) and architecture language (Bridge, VueRegistry, View, Route table, Service inversion, Flip, Ratchet, Migration unit).
 
+**Consuming the domain docs:**
+- Before working in an area, read [`CONTEXT.md`](CONTEXT.md) and any [`docs/adr/`](docs/adr/) that touch it. If a file doesn't exist, proceed silently — don't flag its absence or suggest creating it; `/grill-with-docs` produces these lazily as terms and decisions get resolved.
+- When your output names a domain concept (issue title, proposal, hypothesis, test name), use the term as defined in `CONTEXT.md`; don't drift to synonyms it avoids. If a concept isn't in the glossary, that's a signal — either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/grill-with-docs`).
+- If your change contradicts an ADR, surface it explicitly and cite it by number (e.g. "Contradicts ADR-0002 (service inversion) because…") rather than silently overriding.
+
 ### Migration to Vue 3
 
 The codebase is mid-migration from AngularJS to a pure Vue 3 app. See [`docs/MIGRATION-PLAN.md`](docs/MIGRATION-PLAN.md) and [`docs/adr/`](docs/adr/) for the strategy and decisions.
@@ -103,7 +108,7 @@ Applies across the SCBD platform — follow consistently in both JS and TS files
 
 Surface design decisions before coding. If you are about to make a non-trivial design choice the human hasn't seen, stop and present the options rather than picking silently. For significant features, ask the human to run `/grill-with-docs` before starting implementation.
 
-If a change contradicts a prior decision, acknowledge it explicitly ("contradicts the previous approach because…") rather than silently diverging.
+If a change contradicts a prior decision, acknowledge it explicitly ("contradicts the previous approach because…") rather than silently diverging. When that decision is recorded as an ADR, cite it by number — see *Consuming the domain docs* above.
 
 ## Code conventions
 
