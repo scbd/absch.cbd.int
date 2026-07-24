@@ -86,7 +86,8 @@ component at all.
 transitions** distinct from the SCBD/DEV flow assumed by `scbd-agent-jira`. Do not
 assume `IN PROGRESS → PEER REVIEW → Completed` — look up the real transitions per
 ticket (`getTransitionsForJiraIssue`) before transitioning, and map to the closest
-matching state.
+matching state. The enumerated CHM transition map lives in
+[`docs/agents/chm-jira-workflow.md`](docs/agents/chm-jira-workflow.md).
 
 ## Architecture
 
