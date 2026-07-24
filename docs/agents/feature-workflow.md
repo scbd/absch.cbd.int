@@ -4,6 +4,9 @@ How to take a user-raised Jira ticket from request to PR using the skills in thi
 repo, from lightest to most automated. See [AGENTS.md](../../AGENTS.md) for the
 rules that back this flow ("a human decides before code exists").
 
+No ticket yet — just an idea? Start with
+[feature-from-idea.md](feature-from-idea.md) instead.
+
 ## Recommended path (step-by-step)
 
 Each step has a matching CHM Jira status (see
