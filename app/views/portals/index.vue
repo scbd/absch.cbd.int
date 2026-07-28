@@ -36,7 +36,7 @@
                 v-if="portal.article && portal.article.coverImage"
                 :src="portal.article.coverImage.url"
                 class="card-cover"
-                :alt="portal.title"
+                :alt="lstring(portal.title, locale)"
               >
               <div v-else class="card-cover-placeholder" :class="{'bg-bch': realm.is('BCH'), 'bg-abs': realm.is('ABS')}">
                 <i class="fa fa-globe"></i>
@@ -52,7 +52,7 @@
               <span v-if="portal.forumCount > 0" class="forum-count-badge">
                 <i class="fa fa-comments me-1"></i>{{ portal.forumCount }} {{ t('forumsLabel') }}
               </span>
-              <a v-if="isAdmin" :href="`${portal.url}/edit`" class="card-edit-link ms-auto">
+              <a v-if="isAdmin" :href="`${PORTALS_URL}/${portal._id}/edit`" class="card-edit-link ms-auto">
                 <i class="fa fa-pencil me-1"></i>{{ t('editButton') }}
               </a>
             </div>
@@ -151,7 +151,7 @@ const articleQuery = ref({ ag: JSON.stringify(ag) });
 const PORTALS_URL = 'portals'
 
 const isLoading = ref(false)
-const error: Ref<Error | undefined> = ref()
+const error: Ref<unknown> = ref()
 
 function countForums(menus: PortalMenu[] | undefined): number {
   if (!menus) return 0
@@ -204,7 +204,7 @@ onMounted(async () => {
     })
     .filter((portal: Portal) => typeof portal.article === 'object')
   }
-  catch(err: Error) {
+  catch(err) {
     console.error(err) // eslint-disable-line no-console -- show error in console
     error.value = err
   }

@@ -35,6 +35,12 @@ export default class PortalApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
+  async getPortalForEdit(id) {
+    return this.http.get(`/api/v2023/portals/${id}/edit`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
   async createPortal(portal) {
     return this.http.post(`/api/v2023/portals`, portal)
                     .then(res => res.data)
@@ -42,7 +48,7 @@ export default class PortalApi extends ApiBase
   }
 
   async updatePortal(id, portal) {
-    return this.http.put(`/api/v2023/portals/${id}`, portal)
+    return this.http.put(`/api/v2023/portals/${id}/edit`, portal)
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
