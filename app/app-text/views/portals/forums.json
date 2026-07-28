@@ -16,5 +16,13 @@
    "LastReplyBy" : "by {name}",
    "loading" : "Loading...",
    "refreshing" : "Refreshing...",
-   "backToForum" : "Back to forum"
+   "backToForum" : "Back to forum",
+   "statusOpen" : "Open",
+   "noResults" : "No portals match your search.",
+   "statsTitle" : "Statistics",
+   "statsPortals" : "Total portals",
+   "statsActive" : "Active",
+   "browseLabel" : "Browse portals",
+   "forumsLabel" : "Forums",
+   "statsForums" : "Total forums"
 }
