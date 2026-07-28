@@ -15,11 +15,11 @@ export default class PortalApi extends ApiBase
                     .catch(tryCastToApiError);
   }
 
-  async getPortalByCode(realm, slug) { 
+  async getPortalByCode(realm, slug) {
 
-    const q = { 
-      slug, 
-      realms: realm 
+    const q = {
+      slug,
+      realms: realm
     };
 
     const [ portal ] = await this.queryPortals({ q })
@@ -27,6 +27,40 @@ export default class PortalApi extends ApiBase
     if(!portal) throw { code:'notFound', statusCode: 404, message: "not found" };
 
     return portal;
-  }  
+  }
+
+  async getPortal(id) {
+    return this.http.get(`/api/v2023/portals/${id}`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async getPortalForEdit(id) {
+    // TEMP: local backend while the /:id/edit endpoint is in development — remove baseURL before merge.
+    // Per-request baseURL keeps the path relative so the auth token is still attached (api-base only
+    // adds Authorization when the path starts with /api/v20xx).
+    return this.http.get(`/api/v2023/portals/${id}/edit`, { baseURL: 'http://localhost:8000' })
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async createPortal(portal) {
+    return this.http.post(`/api/v2023/portals`, portal)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async updatePortal(id, portal) {
+    // TEMP: local backend while the /:id/edit endpoint is in development — remove baseURL before merge.
+    return this.http.put(`/api/v2023/portals/${id}/edit`, portal, { baseURL: 'http://localhost:8000' })
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
+
+  async deletePortal(id) {
+    return this.http.delete(`/api/v2023/portals/${id}`)
+                    .then(res => res.data)
+                    .catch(tryCastToApiError);
+  }
 
 }
