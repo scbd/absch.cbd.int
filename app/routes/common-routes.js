@@ -75,6 +75,8 @@ const commonRouteUrls = {
     submissionsOnNotifications                  : { component: ()=>asyncLogError(import('~/views/reports/submissions')) },
     portal                                      : { component: ()=>asyncLogError(import('~/views/portals/index.vue')) },
     portalId                                    : { component: ()=>asyncLogError(import('~/views/portals/portal-id.vue')) },
+    portalNew                                   : { component: ()=>asyncLogError(import('~/views/portals/edit-portal.vue')) },
+    portalEdit                                  : { component: ()=>asyncLogError(import('~/views/portals/edit-portal.vue')) },
   }
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -172,6 +174,8 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}}).
 
   whenAsync('/portals',                                           { ...mapView(vueViewWrapper),                        "label":routesLabels.portals,       "resolve":{ ...commonRouteUrls.portal, },  "param":"true","resolveController":true}).
+  whenAsync('/portals/new',                                       { ...mapView(vueViewWrapper),                        "label":"New Portal",               "resolve":{ ...commonRouteUrls.portalNew,  user: currentUser(), "securized":securize(['Administrator']) },"param":"true","resolveController":true}).
+  whenAsync('/portals/:portalId/edit',                            { ...mapView(vueViewWrapper),                        "label":"Edit Portal",              "resolve":{ ...commonRouteUrls.portalEdit, user: currentUser(), "securized":securize(['Administrator']) },"param":"true","resolveController":true}).
   whenAsync('/portals/:portalId/:subPath*?',                      { ...mapView(vueViewWrapper),                        "label":routesLabels.portalId,                   "resolve":{ ...commonRouteUrls.portalId,   user: currentUser(), basePath:()=>'/portals/:portalId' },"param":"true","resolveController":true, reloadOnUrl:false })
 
 }]);
