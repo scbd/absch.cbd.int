@@ -7,13 +7,14 @@ export default class RealmsApi extends ApiBase
     this.solrApi = new SolrApi({});
   }
 
-  async getRealmConfigurations(realmEnvironment)  {
+  async getRealmConfigurations(realmEnvironment, f)  {
     const params = stringifyUrlParams({
       q : {
         environment:realmEnvironment
-      }
+      },
+      f
     })
-    
+
     return this.http.get(`api/v2018/realm-configurations`,{ params }).then(res => res.data).catch(tryCastToApiError);
   }
 
