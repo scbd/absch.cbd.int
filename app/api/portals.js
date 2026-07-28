@@ -36,10 +36,7 @@ export default class PortalApi extends ApiBase
   }
 
   async getPortalForEdit(id) {
-    // TEMP: local backend while the /:id/edit endpoint is in development — remove baseURL before merge.
-    // Per-request baseURL keeps the path relative so the auth token is still attached (api-base only
-    // adds Authorization when the path starts with /api/v20xx).
-    return this.http.get(`/api/v2023/portals/${id}/edit`, { baseURL: 'http://localhost:8000' })
+    return this.http.get(`/api/v2023/portals/${id}/edit`)
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
@@ -51,8 +48,7 @@ export default class PortalApi extends ApiBase
   }
 
   async updatePortal(id, portal) {
-    // TEMP: local backend while the /:id/edit endpoint is in development — remove baseURL before merge.
-    return this.http.put(`/api/v2023/portals/${id}/edit`, portal, { baseURL: 'http://localhost:8000' })
+    return this.http.put(`/api/v2023/portals/${id}/edit`, portal)
                     .then(res => res.data)
                     .catch(tryCastToApiError);
   }
