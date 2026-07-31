@@ -324,18 +324,6 @@
 }
 .ep-btn-ghost-sm:hover { border-color: var(--scbd-navy); color: var(--scbd-navy); }
 
-.ep-btn-danger {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: transparent; color: var(--scbd-danger);
-  border: 1px solid var(--scbd-danger);
-  border-radius: var(--scbd-radius);
-  font: 600 13.5px inherit;
-  padding: 9px 16px;
-  cursor: pointer;
-}
-.ep-btn-danger:hover:not(:disabled) { background: var(--scbd-danger-50); }
-.ep-btn-danger:disabled { opacity: .6; cursor: not-allowed; }
-
 /* ── Alert ─────────────────────────────────────────────── */
 .ep-alert-danger {
   display: flex;
@@ -353,10 +341,10 @@
 .ep-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
   padding: 8px 0 4px;
 }
-.ep-actions-delete { margin-right: auto; }
 .ep-status { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--scbd-ink-3); }
 .ep-dot    { width: 8px; height: 8px; border-radius: 50%; background: var(--scbd-ink-3); flex-shrink: 0; }
 .ep-unsaved .ep-dot {
