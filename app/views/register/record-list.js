@@ -873,12 +873,6 @@ const recordListError = mergeTranslationKeys(recordListT);
                     return  realm.schemas[schema].disableEdit;
                 }
 
-                $scope.exportVueComponent = {
-                  components: {
-                    DocumentsUploader,
-                  },
-                }
-
                 var myTasksPromise = null;
                 function loadmyTasks(schema){
 
