@@ -39,9 +39,5 @@
   "savedSuccessfully": "Portal saved successfully.",
   "errorSaving": "Error saving portal.",
   "editButton": "Edit Portal",
-  "newButton": "New Portal",
-  "deletePortal": "Delete Portal",
-  "confirmDelete": "Are you sure you want to delete this portal? This action cannot be undone.",
-  "deleting": "Deleting...",
-  "deletedSuccessfully": "Portal deleted successfully."
+  "newButton": "New Portal"
 }
