@@ -195,10 +195,6 @@
 
           <!-- ─── Actions ─────────────────────────── -->
           <div class="ep-actions">
-            <button v-if="portalId" class="ep-btn-danger ep-actions-delete" type="button" :disabled="isDeleting" @click="deletePortal">
-              <i v-if="isDeleting" class="fa fa-cog fa-spin" />
-              {{ isDeleting ? t('deleting') : t('deletePortal') }}
-            </button>
             <div class="ep-status" :class="isDirty ? 'ep-unsaved' : 'ep-saved'">
               <span class="ep-dot" />
               {{ isDirty ? 'Unsaved changes' : 'All changes saved' }}
@@ -215,6 +211,18 @@
 
     <!-- Article picker (modal, lives outside scroll area) -->
     <article-picker ref="articlePickerRef" @on-select="onArticleSelect" />
+
+    <!-- Save success toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index:100000">
+      <div ref="savedToast" class="toast hide align-items-center text-white bg-success border-0" role="status" aria-live="polite" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            <i class="fa fa-check-circle" /> {{ t('savedSuccessfully') }}
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -222,6 +230,8 @@
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuth, useRoute } from '@scbd/angular-vue/src/index.js'
+// @ts-expect-error importing js file
+import { Toast } from 'bootstrap'
 import { useRealm } from '~/services/composables/realm.js'
 // @ts-expect-error importing js file
 import PortalsApi from '~/api/portals'
@@ -237,12 +247,10 @@ import MenuItemEditor from '~/components/portals/menu-item-editor.vue'
 import SideMenu from '~/components/menus/side-menu.vue'
 import ArticlePicker from '~/components/portals/article-picker.vue'
 import AclEditor from '~/components/portals/acl-editor.vue'
+import { toPortalDraft } from '~/views/portals/portal-draft'
 import messages from '~/app-text/views/portals/edit-portal.json'
 import type { LanguageCode } from '~/types/languages'
-import type {
-  MenuArticleContent, PortalAcl, PortalMenuItem,
-  PortalData, PortalDraft, PortalMenuItemData, PreviewMenu
-} from '~/types/portals'
+import type { PortalMenuItem, PortalDraft, PreviewMenu } from '~/types/portals'
 
 const { t } = useI18n({ messages })
 const auth = useAuth()
@@ -259,7 +267,6 @@ const showAllTitleLangs = ref(false)
 
 const isLoading = ref(false)
 const isSaving = ref(false)
-const isDeleting = ref(false)
 const loadError = ref<unknown>(null)
 const saveError = ref<unknown>(null)
 
@@ -317,6 +324,9 @@ async function loadRealms () {
   }
 }
 
+// ── Save toast ───────────────────────────────────────────
+const savedToast = ref<HTMLElement | null>(null)
+
 // ── Article picker ───────────────────────────────────────
 const articlePickerRef = ref<{ show: ()=> void } | null>(null)
 const selectedArticleTitle = ref('')
@@ -344,40 +354,6 @@ const portal = ref<PortalDraft>({
 })
 
 watch(portal, () => { isDirty.value = snapshot() !== cleanSnapshot }, { deep: true })
-
-function toAclDraft (acl: Partial<PortalAcl> | undefined): PortalAcl {
-  return { enabled: acl?.enabled ?? false, read: acl?.read ?? [], update: acl?.update ?? [] }
-}
-
-function toArticleDraft (article: Partial<MenuArticleContent> | undefined): MenuArticleContent {
-  return { articleId: article?.articleId ?? '', showCoverImage: article?.showCoverImage ?? false }
-}
-
-function toMenuItemDraft (item: PortalMenuItemData): PortalMenuItem {
-  const menu: PortalMenuItem = {
-    slug: item.slug ?? '',
-    title: item.title ?? {},
-    isExpanded: item.isExpanded,
-    content: item.content,
-    url: item.url,
-    acl: toAclDraft(item.acl),
-    menus: (item.menus ?? []).map(toMenuItemDraft)
-  }
-  if (!menu.content && menu.url?.url) menu.content = { link: {} }
-  return menu
-}
-
-function toPortalDraft (data: PortalData): PortalDraft {
-  return {
-    slug: data.slug ?? '',
-    title: data.title ?? {},
-    sortOrder: data.sortOrder ?? 0,
-    realms: data.realms ?? [],
-    content: { article: toArticleDraft(data.content?.article) },
-    menus: (data.menus ?? []).map(toMenuItemDraft),
-    acl: toAclDraft(data.acl)
-  }
-}
 
 // ── Preview ───────────────────────────────────────────────
 function toPreviewMenu (item: PortalMenuItem, basePath: string): PreviewMenu {
@@ -488,6 +464,7 @@ async function save () {
     }
     cleanSnapshot = snapshot()
     isDirty.value = false
+    if (savedToast.value) Toast.getOrCreateInstance(savedToast.value).show()
   } catch (err) {
     saveError.value = err
   } finally {
@@ -495,17 +472,6 @@ async function save () {
   }
 }
 
-async function deletePortal () {
-  if (!confirm(t('confirmDelete'))) return // eslint-disable-line no-alert -- native confirm is intentional for a destructive delete
-  isDeleting.value = true
-  try {
-    await portalsApi.deletePortal(portalDbId.value)
-    window.location.href = '/portals'
-  } catch (err) {
-    saveError.value = err
-    isDeleting.value = false
-  }
-}
 </script>
 
 <style scoped src="./edit-portal.css"></style>
