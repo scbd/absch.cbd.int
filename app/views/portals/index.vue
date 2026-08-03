@@ -81,20 +81,6 @@
             </div>
           </div>
         </div>
-
-        <div class="sidebar-widget">
-          <div class="widget-header" :class="{'bg-bch': realm.is('BCH'), 'bg-abs': realm.is('ABS')}">
-            <i class="fa fa-tags me-2"></i>{{ t('browseLabel') }}
-          </div>
-          <div class="widget-body tag-cloud">
-            <a
-              v-for="portal in portals"
-              :key="portal._id"
-              :href="portal.url"
-              class="tag-chip"
-            >{{ portal.title }}</a>
-          </div>
-        </div>
       </aside>
     </div>
   </div>
