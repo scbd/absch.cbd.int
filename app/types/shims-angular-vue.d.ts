@@ -8,7 +8,7 @@ declare module 'vue-i18n' {
 }
 
 declare module '~/services/composables/realm.js' {
-  export function useRealm (): { realm: string; baseURL: string }
+  export function useRealm (): { realm: string; baseURL: string; value: string }
 }
 
 declare module '~/services/composables/utils.js' {

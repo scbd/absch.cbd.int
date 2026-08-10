@@ -64,6 +64,8 @@
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
     "upath": "^2.0.1",
+    "vite": "^8.2.1",
+    "vitest": "^4.1.10",
     "vue": "3.4.19",
     "vue-tsc": "^3.2.7"
   },
@@ -79,6 +81,7 @@
     "lint:fix": "npx eslint app/ --fix",
     "build": "npx eslint app/ --max-warnings=0 && rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
     "dev": "rm -rf ./dist && rm -rf ./i18n-build && node rollup/dev-watch.js",
     "eslint": "npx eslint . --fix",
     "clean-reinstall": "rm -rf ./node_modules && yarn install",
