@@ -1,0 +1,9 @@
+{
+    "title": "Submission triage",
+    "loading": "Loading",
+    "titleColumn": "Title",
+    "requested": "Requested",
+    "requestedBy": "Requested by",
+    "requestsFound": "requests found",
+    "noResultFound": "No pending submission requests found"
+}

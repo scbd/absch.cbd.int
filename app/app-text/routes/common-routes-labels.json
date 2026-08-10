@@ -25,6 +25,7 @@
   "registerEdit":"Edit",
   "view":"View",
   "pendingRequests":"Pending requests",
+  "submissionTriage":"Submission triage",
   "reportedRecords":"Reported records",
   "reportCounts":"Report counts",
   "errorLogs":"Error logs",
