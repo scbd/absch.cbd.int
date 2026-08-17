@@ -24,5 +24,6 @@
    "statsActive" : "Active",
    "browseLabel" : "Browse portals",
    "forumsLabel" : "Forums",
-   "statsForums" : "Total forums"
+   "statsForums" : "Total forums",
+   "statsOpenForums" : "Open forums"
 }

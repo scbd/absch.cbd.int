@@ -1,6 +1,19 @@
 
 import ApiBase, { tryCastToApiError, stringifyUrlParams } from './api-base';
 
+// tryCastToApiError discards the raw response body once it recognizes the HTTP status code,
+// so portal save validation errors (menus[].title, etc.) need to be re-attached here.
+function tryCastToApiErrorWithDetails(error) {
+  const details = error?.response?.data?.error?.details;
+
+  try {
+    tryCastToApiError(error);
+  } catch (castError) {
+    if(details && typeof castError === 'object') castError.details = details;
+    throw castError;
+  }
+}
+
 export default class PortalApi extends ApiBase
 {
   constructor(options) {
@@ -44,13 +57,13 @@ export default class PortalApi extends ApiBase
   async createPortal(portal) {
     return this.http.post(`/api/v2023/portals`, portal)
                     .then(res => res.data)
-                    .catch(tryCastToApiError);
+                    .catch(tryCastToApiErrorWithDetails);
   }
 
   async updatePortal(id, portal) {
     return this.http.put(`/api/v2023/portals/${id}/edit`, portal)
                     .then(res => res.data)
-                    .catch(tryCastToApiError);
+                    .catch(tryCastToApiErrorWithDetails);
   }
 
   async deletePortal(id) {

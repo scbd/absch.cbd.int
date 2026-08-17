@@ -4,7 +4,7 @@ export interface PortalMenu {
   slug?: string
   title?: LString
   content?: {
-    forum?: { forumId?: number }
+    forum?: { forumId?: number, isOpen?: boolean }
     article?: { articleId?: string }
     url?: string
   }
