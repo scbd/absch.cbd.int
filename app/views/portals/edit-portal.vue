@@ -34,10 +34,7 @@
             </span>
           </div>
 
-          <div v-if="saveError" class="ep-alert-danger">
-            <i class="fa fa-exclamation-triangle" />
-            {{ t('errorSaving') }}: {{ saveErrorMessage }}
-          </div>
+          <save-error-alert :error="saveError" :message="saveErrorMessage" :details="saveErrorDetails" />
 
           <!-- ─── Details ──────────────────────────── -->
           <section id="sec-details" class="ep-card">
@@ -158,6 +155,7 @@
               <h2>
                 <i class="fa fa-bars ep-ic-accent" /> {{ t('menus') }}
                 <span v-if="portal.menus.length" class="ep-nav-count" style="margin-left:4px">{{ portal.menus.length }}</span>
+                <span v-if="openForumsCount" class="ep-nav-count" style="margin-left:4px">{{ t('openForumsCount', { count: openForumsCount }) }}</span>
               </h2>
               <button class="ep-btn-primary-sm" type="button" @click="addMenu">
                 <i class="fa fa-plus" /> {{ t('addMenu') }}
@@ -173,6 +171,7 @@
                     v-for="(menu, i) in portal.menus"
                     :key="i"
                     :item="menu"
+                    :index="i"
                     :can-move-up="i > 0"
                     :can-move-down="i < portal.menus.length - 1"
                     @on-delete="removeMenu(i)"
@@ -194,6 +193,7 @@
           </section>
 
           <!-- ─── Actions ─────────────────────────── -->
+          <save-error-alert :error="saveError" :message="saveErrorMessage" :details="saveErrorDetails" />
           <div class="ep-actions">
             <div class="ep-status" :class="isDirty ? 'ep-unsaved' : 'ep-saved'">
               <span class="ep-dot" />
@@ -247,6 +247,7 @@ import MenuItemEditor from '~/components/portals/menu-item-editor.vue'
 import SideMenu from '~/components/menus/side-menu.vue'
 import ArticlePicker from '~/components/portals/article-picker.vue'
 import AclEditor from '~/components/portals/acl-editor.vue'
+import SaveErrorAlert from '~/components/portals/save-error-alert.vue'
 import { toPortalDraft } from '~/views/portals/portal-draft'
 import messages from '~/app-text/views/portals/edit-portal.json'
 import type { LanguageCode } from '~/types/languages'
@@ -275,6 +276,14 @@ const saveErrorMessage = computed(() => {
   if (err instanceof Error) return err.message
   if (typeof err === 'string') return err
   return JSON.stringify(err)
+})
+
+const saveErrorDetails = computed(() => {
+  const { value: err } = saveError
+  if (!err || typeof err !== 'object' || !('details' in err) || !Array.isArray(err.details)) return []
+  return err.details
+    .map((d: { message?: string }) => d.message)
+    .filter((m): m is string => !!m)
 })
 
 // ── Dirty tracking ───────────────────────────────────────
@@ -368,6 +377,15 @@ function toPreviewMenu (item: PortalMenuItem, basePath: string): PreviewMenu {
     menus: item.menus.map(c => toPreviewMenu(c, path))
   }
 }
+
+function countOpenForums (menus: PortalMenuItem[]): number {
+  return menus.reduce((n, m) => {
+    const self = m.content?.forum?.isOpen ? 1 : 0
+    return n + self + countOpenForums(m.menus)
+  }, 0)
+}
+
+const openForumsCount = computed(() => countOpenForums(portal.value.menus))
 
 const previewMenu = computed(() => ({
   url: `portals/${portal.value.slug}`,

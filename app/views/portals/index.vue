@@ -76,6 +76,10 @@
               <span class="stat-value">{{ totalForums }}</span>
             </div>
             <div class="stat-row">
+              <span class="stat-label">{{ t('statsOpenForums') }}</span>
+              <span class="stat-value">{{ totalOpenForums }}</span>
+            </div>
+            <div class="stat-row">
               <span class="stat-label">{{ t('statsActive') }}</span>
               <span class="stat-value accent">{{ portals.length }}</span>
             </div>
@@ -147,7 +151,16 @@ function countForums(menus: PortalMenu[] | undefined): number {
   }, 0)
 }
 
+function countOpenForums(menus: PortalMenu[] | undefined): number {
+  if (!menus) return 0
+  return menus.reduce((n, m) => {
+    const self = m.content?.forum?.isOpen ? 1 : 0
+    return n + self + countOpenForums(m.menus)
+  }, 0)
+}
+
 const totalForums = computed(() => portals.value.reduce((n, p) => n + p.forumCount, 0))
+const totalOpenForums = computed(() => portals.value.reduce((n, p) => n + countOpenForums(p.menus), 0))
 
 onMounted(async () => {
 
