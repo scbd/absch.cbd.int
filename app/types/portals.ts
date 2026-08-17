@@ -13,6 +13,7 @@ export interface MenuArticleContent {
 
 export interface MenuForumContent {
   forumId: number | null
+  isOpen?: boolean
 }
 
 export interface MenuContent {

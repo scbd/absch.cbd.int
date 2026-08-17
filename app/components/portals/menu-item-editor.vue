@@ -3,9 +3,11 @@
   <div class="menu-item-editor border rounded mb-2">
     <div class="d-flex align-items-center gap-2 p-2 bg-light rounded-top" role="button" @click="expanded = !expanded">
       <i class="fa fa-fw small text-secondary" :class="expanded ? 'fa-chevron-down' : 'fa-chevron-right'" />
+      <span class="badge bg-light text-muted border fw-normal font-monospace">{{ index }}</span>
       <span class="flex-grow-1 fw-semibold text-truncate small">
         {{ item.title?.en || item.slug || t('unnamed') }}
         <span v-if="contentType" class="badge bg-secondary ms-1 fw-normal">{{ contentType }}</span>
+        <span v-if="contentType === 'forum' && forumContent?.isOpen" class="badge bg-success ms-1 fw-normal">{{ t('openBadge') }}</span>
       </span>
       <div class="btn-group btn-group-sm" @click.stop>
         <button type="button" class="btn btn-outline-secondary" :disabled="!canMoveUp" :title="t('moveUp')" @click="$emit('onMoveUp')">
@@ -116,6 +118,14 @@
               <input v-model.number="forumContent.forumId" type="number" class="form-control form-control-sm">
             </div>
           </div>
+          <div v-if="contentType === 'forum'" class="mb-2 row">
+            <div class="col-sm-9 offset-sm-3">
+              <div class="form-check form-check-sm">
+                <input :id="`open-${uid}`" v-model="forumContent.isOpen" class="form-check-input" type="checkbox">
+                <label class="form-check-label" :for="`open-${uid}`">{{ t('isOpenForum') }}</label>
+              </div>
+            </div>
+          </div>
         </template>
 
         <!-- Link fields -->
@@ -170,6 +180,7 @@
             v-for="(sub, i) in item.menus"
             :key="i"
             :item="sub"
+            :index="i"
             :can-move-up="i > 0"
             :can-move-down="i < item.menus.length - 1"
             @on-delete="removeSubMenu(i)"
@@ -194,7 +205,7 @@ import AclEditor from '~/components/portals/acl-editor.vue'
 import type { LanguageCode } from '~/types/languages'
 import type { MenuContent, PortalMenuItem } from '~/types/portals'
 
-const props = defineProps<{ item: PortalMenuItem; canMoveUp?: boolean; canMoveDown?: boolean }>()
+const props = defineProps<{ item: PortalMenuItem; index: number; canMoveUp?: boolean; canMoveDown?: boolean }>()
 
 defineEmits(['onDelete', 'onMoveUp', 'onMoveDown'])
 
