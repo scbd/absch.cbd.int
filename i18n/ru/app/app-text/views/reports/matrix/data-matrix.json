@@ -7,10 +7,18 @@
   "name": "Имя файла:",
   "close": "Закрыть",
   "download": "Загрузить",
+  "Country": "Страна",
+  "Government": "Правительство",
+  "Year": "Год",
+  "RecordType": "Тип записи",
+  "Region": "Регион",
+  "SchemaType": "Тип схемы",
+  "noRegion": "Без указания региона",
+  "xReferenceRecord": "х ­- Справочная запись",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:27.128Z",
+    "hashedOn": "2026-05-13T16:42:11.258Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "loading": "e6364f3f9cbfd7032fe86511b5d0d00a",
       "filter": "00f670b235796c6ad1f6537ffcfcb54e",
@@ -19,7 +27,15 @@
       "csv": "32b225e519e13615192fb671d116c205",
       "name": "2c5a005db9fe4bbf85500002d6c20584",
       "close": "d3d2e617335f08df83599665eef8a418",
-      "download": "801ab24683a4a8c433c6eb40c48bcd9d"
+      "download": "801ab24683a4a8c433c6eb40c48bcd9d",
+      "Country": "59716c97497eb9694541f7c3d37b1a4d",
+      "Government": "18450de39aceed82b26abe218d377740",
+      "Year": "537c66b24ef5c83b7382cdc3f34885f2",
+      "RecordType": "af7f7ca9a0f0bd801f9f8a91425b4152",
+      "Region": "f447ac856e7e72435904956e3b15f433",
+      "SchemaType": "7c326ab5625a20ebb1aae5587445df0c",
+      "noRegion": "f84aa19cd8aa7d4a955748646046ca89",
+      "xReferenceRecord": "46e6e74bfc1d6c8c4d0a0ee2c6f9c68d"
     }
   }
 }

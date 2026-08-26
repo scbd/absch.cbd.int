@@ -1,7 +1,7 @@
 {
   "chm": "信息交换机制",
   "clearingHouseMechanism": "信息交换所机制",
-  "development": "发展",
+  "development": "开发",
   "training": "培训",
   "home": "主页",
   "about": "关于",
@@ -32,13 +32,13 @@
   "suppProtocol": "补充议定书",
   "submissionsOnNotifications": "提交以发布通知",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.533Z",
+    "hashedOn": "2026-05-13T16:42:11.332Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "chm": "3668be3c3fe28daef09bbb0be387af10",
       "clearingHouseMechanism": "e598fcd079ffc93c504a040e1a073a8e",
-      "development": "aa9518d8fd57a2d7ea001ccd04ce3d5d",
+      "development": "fcee1a292eac6108bef8021e1c3d4c83",
       "training": "7c95c63fdc6550e5b33eed35360778c3",
       "home": "106a6c241b8797f52e1e77317b96a201",
       "about": "46b3931b9959c927df4fc65fdee94b07",

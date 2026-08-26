@@ -1,6 +1,6 @@
 {
   "generalInfo": "Informations générales",
-  "country": "Pays",
+  "country": "Gouvernement",
   "organization": "Organisation(s)",
   "submissionInformation": "Soumettre une information",
   "titleSubmission": "Titre de la soumission",
@@ -10,13 +10,18 @@
   "thematicAreas": "Domaines thématiques",
   "documents": "Documents",
   "otherRelevantInformation": "Tout autre information utile",
+  "resourceTypes": "Type de ressource",
+  "gbfGoalsAndTargets": "Objectif(s) du Cadre mondial pour la biodiversité",
+  "cbdThematicAreas": "Domaines thématiques de la CDB",
+  "betiMainstreamingKeywords": "Intégrer la biodiversité",
+  "betiFinanceKeywords": "Ressources financières et mécanisme de financement",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.856Z",
+    "hashedOn": "2026-05-13T16:42:11.232Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
-      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "country": "18450de39aceed82b26abe218d377740",
       "organization": "a7c82b23c912089916ea06a96a7c90aa",
       "submissionInformation": "014775b71e16f2d9ff4a879b9b7796de",
       "titleSubmission": "3a4e07c57fefe5f7e038b7e43f743d4d",
@@ -25,7 +30,12 @@
       "records": "fc8124528e05438806b21fe01fb0cab0",
       "thematicAreas": "b5b4fe9749eeb44445cbb4a27f24fe80",
       "documents": "f28128b38efbc6134dc40751ee21fd29",
-      "otherRelevantInformation": "d53a40e7430a9a1e5e2c5310d504dd23"
+      "otherRelevantInformation": "d53a40e7430a9a1e5e2c5310d504dd23",
+      "resourceTypes": "a2f3d9e11f2a7d46f760a0e55478b2fc",
+      "gbfGoalsAndTargets": "67f9894e8310dc98e1707ded6bc4f012",
+      "cbdThematicAreas": "8052ce467130810ef5a36ff4028ab5c9",
+      "betiMainstreamingKeywords": "f7fd9222ea1a1f265e869e9224cc34a6",
+      "betiFinanceKeywords": "9d41d7ad7ed2a77bab4d03d340989b0c"
     }
   }
 }

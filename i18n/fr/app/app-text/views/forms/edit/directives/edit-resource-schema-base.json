@@ -1,6 +1,6 @@
 {
   "generalInfo": "Informations générales",
-  "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
+  "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre cette fiche :",
   "title": "Titre",
   "titleInfo": "Ceci apparaîtra en tant que titre du fichier",
   "typeOfResource": "Type de ressource",
@@ -28,7 +28,7 @@
   "andOr": "et/ou",
   "countryName": "Nom du/des pays",
   "keywordsFacilitating": "Mots clés pour faciliter la recherche d’informations dans les centre de partage d’informations.",
-  "aichiTargets": "Objectifs d'Aichi pour la biodiversité",
+  "aichiTargets": "Objectifs d'Aichi",
   "cbdSubjects": "Domaines thématiques liés de la CDB",
   "keywordsRelatedBiosafety": "Mots clés liés à la prévention des risques biotechnologiques",
   "biosafetyThematicAreas": "Domaines thématiques de la prévention des risques biotechnologiques",
@@ -40,12 +40,12 @@
   "addressGenes": "Ces ressources traitent-elles d'une ou de plusieurs éléments génétiques spécifiques ?",
   "modifiedOrganisms": "Identification du ou des OVM",
   "organismIdentification": "Identification du ou des organismes",
-  "geneIdentification": "Identification du ou des élément(s) génétique(s)",
+  "geneIdentification": "Identification d'un ou de plusieurs éléments génétiques",
   "geneIdentificationInfo": "Les informations sur les éléments génétiques portent sur les séquences d'ADN, notamment les gènes, les régions régulatrices d'ADN et d’autres acides nucléiques utilisés pour créer un organisme vivant modifié. Ils peuvent coder une protéine ou avoir une fonction régulatrice spécifique.",
   "keywordsRelatedAccess": "Mots clés liés à l'accès et au partage des avantages",
   "mccKeywords": "Veuillez sélectionner les mots clés pertinents pour décrire le contenu du code de conduite, des lignes directrices et des pratiques exemplaires et/ou normes que vous soumettez. :",
   "absThematicAreas": "Domaines thématiques APA",
-  "keyAreas": "Domaines clés et mesures stratégiques pour le renforcement et le développement des capacités abordés par la ressource",
+  "keyAreas": "Domaines clés et mesures stratégiques en matière de renforcement des capacités et de développement abordés dans la présente ressource",
   "keyAreasInfo": "Si cette ressource est liée au renforcement des capacités pour le Protocole de Nagoya, veuillez fournir des options applicables à partir de :",
   "additionalInformation": "Informations supplémentaires",
   "otherRelevantInformation": "Tout autre information utile",
@@ -55,10 +55,11 @@
   "notes": "Notes",
   "notesInfos": "Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.",
   "gbfTargets": "Objectif(s) du Cadre mondial de la biodiversité de Kunming-Montréal",
+  "aspectRatioHelp": "Pour obtenir les meilleurs résultats et éviter toute déformation des images de couverture dans les résultats de recherche, veuillez télécharger une image dont le rapport hauteur/largeur est d'environ 8,5:11 (proportions standard du format Letter ou A4).",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.742Z",
+    "hashedOn": "2026-05-13T16:42:11.273Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "generalInfo": "997c785cce775d7c1014ffbd6e446d50",
       "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
@@ -115,7 +116,8 @@
       "relevantDocumentsInfo": "827ec9763b88a691ae0c558061a9bd90",
       "notes": "f4c6f851b00d5518bf888815de279aba",
       "notesInfos": "f2563113602fac78e819342c05316863",
-      "gbfTargets": "307d8d4d33952c4bf91268579512e2b3"
+      "gbfTargets": "307d8d4d33952c4bf91268579512e2b3",
+      "aspectRatioHelp": "8f29f1dc89661fa48375309130c9812e"
     }
   }
 }

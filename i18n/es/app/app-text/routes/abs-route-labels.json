@@ -11,9 +11,9 @@
   "checkpointCommnunique": "Comunicado del punto de verificación",
   "ircc": "CCRI",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.498Z",
+    "hashedOn": "2026-05-13T16:42:11.207Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "theAbs": "f0bbbaa4859846b40d104014f08ea98e",
       "idlo": "b38b21aa5e243a16fcaa9a0621c2bce3",
@@ -25,7 +25,8 @@
       "aboutCode": "144ff1966f9320966352ab07bf29d473",
       "absContact": "461c69a576e4a9a2619629f246b200b4",
       "checkpointCommnunique": "c63fda3a267df877f963a3a114e7091a",
-      "ircc": "91b5626f1f59af68ee4d3036685e811b"
+      "ircc": "91b5626f1f59af68ee4d3036685e811b",
+      "nr1Analysis": "1cac1a6cef659abfc852cb2cc73951d3"
     }
   }
 }

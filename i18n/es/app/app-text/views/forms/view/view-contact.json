@@ -1,6 +1,7 @@
 {
   "type": "Tipo",
   "country": "País",
+  "government": "Publicado por un Gobierno",
   "name": "Nombre",
   "typeOfOrganization": "Tipo de organización",
   "jobTitle": "Cargo",
@@ -14,12 +15,13 @@
   "additionalInfo": "Información adicional",
   "otherRelevant": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.842Z",
+    "hashedOn": "2026-05-13T16:42:11.328Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "type": "a1fa27779242b4902f7ae3bdd5c6d508",
       "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "government": "6119de8d9d165a4077f8657aa00c13ff",
       "name": "49ee3087348e8d44e1feda1917443987",
       "typeOfOrganization": "be9304654f12758a9c7932b1566427a7",
       "jobTitle": "f4a73825484d63d2d63282d17cafebdc",

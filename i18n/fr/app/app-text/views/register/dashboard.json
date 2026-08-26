@@ -22,7 +22,7 @@
   "countryDesignation": "Chaque pays peut désigner un correspondant du CEPRB dont le rôle est de publier les registres nationaux dans le CEPRB. Le correspondant focal du CEPRB peut créer, éditer et publier des  fichiers nationaux. Le correspondant du CEPRB peut également désigner des utilisateurs nationaux autorisés qui peuvent préparer des projets de  fichiers pour leur pays et les soumettre au correspondant du CEPRB pour vérification et publication.",
   "NAU": "Utilisateurs nationaux autorisés (UNA)",
   "bchNAU": "L'utilisateur national autorisé (UNA) peut créer des projets de  fichiers nationaux et les soumettre au correspondant du BCH pour vérification et publication.",
-  "absNAU": "L'utilisateur national autorisé (UNA) peut créer des projets de notices nationalesr des projets de notices nationales et les soumettre à l'autorité de publication pour approbation.",
+  "absNAU": "L'utilisateur national autorisé (UNA) peut créer des projets de notices nationales des projets de notices nationales et les soumettre à l'autorité de publication pour approbation.",
   "chmNAU": "L'utilisateur national autorisé (UNA) peut créer des projets de  fichiers nationaux et les soumettre au correspondant du CHM pour vérification et publication.",
   "registeredUser": "Utilisateurs enregistrés",
   "admin": "Admin",
@@ -48,17 +48,18 @@
   "close": "Fermer",
   "CBDSecretariat": "Les utilisateurs réguliers peuvent créer des documents de référence provisoires et demander leur publication auprès du Secrétariat de la CBD.",
   "quickView": "Vue rapide des 10 fichiers les plus récents",
-  "addRecord": "Ajouter un nouveau fichier<p>",
+  "addRecord": "Ajouter un nouveau fichier",
   "viewAllRecords": "Voir la liste de tous les fichiers",
   "addUpdatePA": "Ajouter/mettre à jour les AP",
   "referenceRecordsAbs": "Les fichiers de référence inclut un nombre de ressources et d’informations pertinentes pour l’APA et peuvent être soumises par tout utilisateur inscrit et seront validées par le Secrétariat avant leur publication.",
   "bchTrainingSiteMessage": "Par défaut, les utilisateurs enregistrés ne peuvent publier que des « enregistrements de référence ». Les fichiers nationaux sont publiés par les gouvernements et incluent des informations supplémentaires pour la mise en œuvre du Protocole ainsi que des informations que les Parties sont obligées de fournir conformément au Protocole. Si la section « Fichiers nationaux » n'apparaît pas ci-dessous, veuillez nous contacter à l'adresse <a href='mailto:bch@cbd.int'> bch@cbd.int</a> et le Secrétariat vous attribuera un rôle national qui ne s'appliquera qu'au site de formation. Alternativement, vous pouvez utiliser des comptes préexistants pour vous entraîner à soumettre des informations. Pour consulter ces rôles et leurs mots de passes, cliquez ici <a href='https://bch.cbd.int/en/kb/tags/getting-help/Training-Site-User-Roles/628e3a4464c53e000142d9b0'></a>.",
   "absTrainingSiteMessage": "Par défaut, les utilisateurs enregistrés ne peuvent publier que des « enregistrements de référence ». Les fichiers nationaux sont publiés par les gouvernements et incluent des informations supplémentaires pour la mise en œuvre du Protocole ainsi que des informations que les Parties sont obligées de fournir conformément au Protocole. Si la section « Fichiers nationaux » n'apparaît pas ci-dessous, veuillez nous contacter à l'adresse <a href='mailto:absch@cbd.int'> absch@cbd.int</a> et le Secrétariat vous attribuera un rôle national qui ne s'appliquera qu'au site de formation.",
   "chmTrainingSiteMessage": "Par défaut, les utilisateurs enregistrés ne peuvent publier que des « enregistrements de référence ». Les fichiers nationaux sont publiés par les gouvernements et incluent des informations supplémentaires pour la mise en œuvre du Protocole ainsi que des informations que les Parties sont obligées de fournir conformément à la Convention. Si la section « Fichiers nationaux » n'apparaît pas ci-dessous, veuillez nous contacter à l'adresse <a href='mailto:chm@cbd.int'> chm@cbd.int</a> et le Secrétariat vous attribuera un rôle national qui ne s'appliquera qu'au site de formation.",
+  "otherSystems": "Autres applications de la chambre de compensation",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.885Z",
+    "hashedOn": "2026-05-13T16:42:11.313Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "dashboardTour": "ca919db6ac0783573c01419e565fa3c6",
       "dashboard": "2938c7f7e560ed972f8a4f68e80ff834",
@@ -115,7 +116,8 @@
       "referenceRecordsAbs": "2ec320ea9dbf12ebde82659c01c3a8cc",
       "bchTrainingSiteMessage": "7ed776ff77379675d8e69e084c8f23f9",
       "absTrainingSiteMessage": "c3ca759371a6ba9cd7c29c36e097a63d",
-      "chmTrainingSiteMessage": "6a47ed3ff7ce6fd4d9a52612f976dd6f"
+      "chmTrainingSiteMessage": "6a47ed3ff7ce6fd4d9a52612f976dd6f",
+      "otherSystems": "4e48fa57974c25325c506b3b2f45eb56"
     }
   }
 }
