@@ -19,15 +19,15 @@
   "usersGeneticResources": "Пользователи генетических ресурсов",
   "businessPrivateSector": "Деловой/частный сектор",
   "researchAcademia": "Исследовательское/научное сообщество",
-  "indigenousPeoples": "Коренные народы",
-  "localCommunities": "Местные общины",
+  "indigenousPeoplesAndLocalCommunities": "Коренные народы и местные общины",
   "capacityBuildingPartners": "Партнеры по созданию потенциала",
   "donors": "Доноры",
   "nr1": "Первый национальный доклад",
+  "webinars": "Вебинары",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.346Z",
+    "hashedOn": "2026-05-13T16:42:11.245Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "announcements": "2b59bbfc9d431d23f4564d01b0182808",
       "aboutAbsch": "0d08687233e0f650e8abba89be02a3f3",
@@ -49,11 +49,11 @@
       "usersGeneticResources": "ec2960750ae5ca921a07e148a386d685",
       "businessPrivateSector": "5084abc3087eadd851364bf1ff3c2998",
       "researchAcademia": "d57dbf5b8ffcb1fc0f5709c5f767f1aa",
-      "indigenousPeoples": "a28875f1fd5b6660cd4cafcc63b4e28f",
-      "localCommunities": "d3768602d7d6749b83ce8c8967494701",
+      "indigenousPeoplesAndLocalCommunities": "ba63edd51a4122be39ec1afc23e71639",
       "capacityBuildingPartners": "ae2a2c21506f6a36082e1b9eb5c2504f",
       "donors": "854004dff32749e7a55597f6a62c1666",
-      "nr1": "ed1b0deb958d4e8b8efad5f857ce9cf2"
+      "nr1": "ed1b0deb958d4e8b8efad5f857ce9cf2",
+      "webinars": "9fd00dae267994cf34ac273c6348673b"
     }
   }
 }

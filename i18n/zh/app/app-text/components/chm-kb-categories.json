@@ -1,0 +1,37 @@
+{
+  "announcements": "公告",
+  "about": "关于信息交换所机制的信息交换所",
+  "gettingStarted": "开始使用",
+  "submittingInformation": "提交信息",
+  "findingInformation": "查找信息",
+  "nationalChm": "国家信息交换所机制",
+  "interoperability": "互操作性",
+  "eLearning": "远程教育",
+  "gettingHelp": "需要帮助吗？",
+  "FAQs": "常见问题",
+  "bioland": "Bioland",
+  "chmAwards": "信息交换所机制奖",
+  "chmRelatedArticles": "信息交换所机制相关文章",
+  "webinars": "网络研讨会",
+  "#meta": {
+    "hashedOn": "2026-05-13T16:42:11.249Z",
+    "algorithm": "md5",
+    "branch": "2026.19.0",
+    "hashes": {
+      "announcements": "2b59bbfc9d431d23f4564d01b0182808",
+      "about": "15fe02cc3ce8cbac894ed2731829d020",
+      "gettingStarted": "cb59b87e00d11222bfd9159d0d23836f",
+      "submittingInformation": "9d945d25363823497d5518556dcbfaac",
+      "findingInformation": "1e07fecc73eaa93c21a3c1aa3e53272c",
+      "nationalChm": "dd166878b295b03924c9510f97a2b1c8",
+      "interoperability": "67a915151759ecc737f698391f7cfd08",
+      "eLearning": "2cb8dba696a6c323f43bbce27cc27d4b",
+      "gettingHelp": "62e73598c417367bd692eaaf38981be1",
+      "FAQs": "ecb9cf6fba4c7813330c6bf373d2719c",
+      "bioland": "b59b06114ecb28a39a1f2a36cb301376",
+      "chmAwards": "1b9641516aec08ef9fca21e76fa07fdc",
+      "chmRelatedArticles": "47aa014a0112d8662837d97bc20d5c33",
+      "webinars": "9fd00dae267994cf34ac273c6348673b"
+    }
+  }
+}

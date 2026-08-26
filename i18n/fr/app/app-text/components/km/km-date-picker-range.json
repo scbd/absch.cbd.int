@@ -1,0 +1,35 @@
+{
+  "from": "À partir de",
+  "to": "Jusqu’au",
+  "apply": "Appliquer",
+  "last7Days": "7 derniers jours",
+  "last30Days": "Au cours des 30 derniers jours",
+  "last6Month": "Au cours des 6 derniers mois",
+  "last12Month": "Au cours des 12 derniers mois",
+  "last2Years": "Ces deux dernières années",
+  "last5Years": "Au cours des 5 dernières années",
+  "selectBothDates": "Veuillez sélectionner à la fois une date de début et une date de fin.",
+  "selectValidStartDate": "Veuillez sélectionner une date de début valide.",
+  "selectValidEndDate": "Veuillez sélectionner une date de fin valide.",
+  "earlierThanStartDate": "La date de fin ne peut pas être antérieure à la date de début.",
+  "#meta": {
+    "hashedOn": "2026-05-13T16:42:11.326Z",
+    "algorithm": "md5",
+    "branch": "2026.19.0",
+    "hashes": {
+      "from": "5da618e8e4b89c66fe86e32cdafde142",
+      "to": "e12167aa0a7698e6ebc92b4ce3909b53",
+      "apply": "9639e32cab248434a17ab32237cb3b71",
+      "last7Days": "4b299435d7b213389dfcb754217ab570",
+      "last30Days": "015a82ad52283ebee50f2819fc99d3eb",
+      "last6Month": "c4d0ea932eaf761be13eceb3175a485b",
+      "last12Month": "bbab00cedb95547e411ef8e5e8d27de2",
+      "last2Years": "dd3a8902f9f2ccbd2a376d42171564b7",
+      "last5Years": "4556ca4cc0f0a8076bcde5e80fc07714",
+      "selectBothDates": "2946f902d9ef28ad54871d1a4e0689a4",
+      "selectValidStartDate": "89b6c48414b7be433214c348d61e9390",
+      "selectValidEndDate": "23690cebfa721de3134e133a0217ba08",
+      "earlierThanStartDate": "39f4b3f461b8684754342149f06b4595"
+    }
+  }
+}

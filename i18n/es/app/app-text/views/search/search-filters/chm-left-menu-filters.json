@@ -15,8 +15,6 @@
   "publicationDate": "Fecha de publicación",
   "cbiGeographicScope": "Alcance geográfico",
   "cbiStatus": "Estado",
-  "cbiCats": "Categoría(s) de las actividades de desarrollo de las capacidades",
-  "cbiAudience": "Grupo(s) principal(es) de destinatarios/beneficiario(s)",
   "cbiTAkeyAreas": "Áreas temáticas",
   "cbiFundingSrc": "Tipo(s) de fuentes de financiación",
   "resourcePublicationDate": "Fecha de publicación",
@@ -28,10 +26,15 @@
   "submissionByTypeParty": "Parte",
   "submissionByTypeNonParty": "No Parte",
   "submissionByTypeOrganization": "Organización",
+  "gbfGoalsAndTargets": "Objetivos y Metas del Marco Mundial de Biodiversidad de Kunming-Montreal",
+  "resourceTypes": "Tipo(s) de recurso",
+  "cbdThematicAreas": "Áreas temáticas del CDB",
+  "betiMainstreamingKeywords": "Incorporación de la diversidad biológica",
+  "betiFinanceKeywords": "Recursos financieros y mecanismo financiero",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:27.15Z",
+    "hashedOn": "2026-05-13T16:42:11.235Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "freeText": "973883daf161694844f41596a9183847",
       "keywords": "867343577fa1f33caa632a19543bd252",
@@ -61,7 +64,13 @@
       "submissionByType": "8159a3cf1f10faeda5ab6f8aa39e585c",
       "submissionByTypeParty": "094a173d3b32f44f5b5c996e8710ae28",
       "submissionByTypeNonParty": "f2d080b45ad3573468d78da57e9d64da",
-      "submissionByTypeOrganization": "d6b258792ff06f82933c74eeb8aef591"
+      "submissionByTypeOrganization": "d6b258792ff06f82933c74eeb8aef591",
+      "gbfTargets": "c86560755dbb2a8aee75723e9fbd3402",
+      "gbfGoalsAndTargets": "96e8e6fa3bc88c8ce1b8ff8eef76457f",
+      "resourceTypes": "52808b4f967a27f210a75603d5d8c8ae",
+      "cbdThematicAreas": "8052ce467130810ef5a36ff4028ab5c9",
+      "betiMainstreamingKeywords": "f7fd9222ea1a1f265e869e9224cc34a6",
+      "betiFinanceKeywords": "9d41d7ad7ed2a77bab4d03d340989b0c"
     }
   }
 }

@@ -2,7 +2,7 @@
   "countryProfilesTitle": "国家概况",
   "countryProfilesContent": "在顶部导航栏的“国家概况”下拉列表中，您可以选择一个感兴趣的国家来查看其概况页面。<br><br>您也可以访问所有国家的国家记录概览。<br><br>让我们探索“概述 — 列出所有国家”。",
   "listOfRecordsTitle": "记录列表",
-  "listOfRecordsContent": "在本页上，您可以看到所有国家记录的概览。黑圈中的数字代表每个记录类型下已发布记录的总数。在<span style='color:#1FA65D;'>绿色方块</span>中显示的数字表明，在一个特定的国家有多少条该类型的记录。<br><br><u>提示：</u>将光标放在一个缩写词（例如：国家联络点（NFP））上来查看该国家记录类型的全称。",
+  "listOfRecordsContent": "在本页上，您可以看到所有国家记录的概览。黑圈中的数字代表每个记录类型下已发布记录的总数。<span style='color:#1FA65D;'>绿色方块</span>中显示的数字表示给定国家存在多少条此类型的记录。<br><br><u>提示：</u>将光标放在一个缩写词（例如：国家联络点（NFP））来查看该国家记录类型的全称。",
   "sortingRecordsTitle": "记录排序",
   "sortingRecordsContent": "您可以按照字母顺序的升序/降序对记录进行排序，也可以按照记录类型进行排序。",
   "sortingRecordsNFPTitle": "记录排序",
@@ -20,9 +20,9 @@
   "needMoreHelpTitle": "需要更多帮助吗？",
   "needMoreHelpContent": "使用聊天功能给我们发消息以获得更多支持。",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.547Z",
+    "hashedOn": "2026-05-13T16:42:11.315Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "countryProfilesTitle": "5a4d9fc55baf2bb0539773744fa36fa7",
       "countryProfilesContent": "0e008c43b534d6fc9d26be8b2d87e8b2",

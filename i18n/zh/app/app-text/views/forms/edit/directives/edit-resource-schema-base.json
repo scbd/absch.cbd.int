@@ -55,10 +55,11 @@
   "notes": "注",
   "notesInfos": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。",
   "gbfTargets": "昆明-蒙特利尔全球生物多样性框架目标",
+  "aspectRatioHelp": "为获得最佳效果并避免封面图片在搜索结果中失真，请上传宽高比约为8.5:11（标准信纸或A4比例）的图片。",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.742Z",
+    "hashedOn": "2026-05-13T16:42:11.273Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "generalInfo": "997c785cce775d7c1014ffbd6e446d50",
       "languageToPublish": "af1ffab641f4ed8dff7f7555fd993b33",
@@ -115,7 +116,8 @@
       "relevantDocumentsInfo": "827ec9763b88a691ae0c558061a9bd90",
       "notes": "f4c6f851b00d5518bf888815de279aba",
       "notesInfos": "f2563113602fac78e819342c05316863",
-      "gbfTargets": "307d8d4d33952c4bf91268579512e2b3"
+      "gbfTargets": "307d8d4d33952c4bf91268579512e2b3",
+      "aspectRatioHelp": "8f29f1dc89661fa48375309130c9812e"
     }
   }
 }
