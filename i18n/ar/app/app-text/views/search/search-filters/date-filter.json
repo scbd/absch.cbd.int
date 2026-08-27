@@ -1,14 +1,14 @@
 {
   "date": "التاريخ",
-  "search": "البحث عن السجلات المنشورة في نطاق زمني معين.",
+  "search": "البحث في السجل (السجلات) حسب تاريخ آخر نشر لها.",
   "publishedOn": "تاريخ النشر",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:27.153Z",
+    "hashedOn": "2026-05-13T16:42:11.285Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "date": "44749712dbec183e983dcd78a7736c41",
-      "search": "f75860fc29271f6f931cfca59e81db1e",
+      "search": "6ad42c2928e590b0b2bb0696029b8c03",
       "publishedOn": "ddbc197c69b2e4a35afeeb269ed25808"
     }
   }

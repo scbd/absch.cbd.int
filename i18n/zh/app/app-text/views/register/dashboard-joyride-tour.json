@@ -20,9 +20,9 @@
   "needMoreHelpTitle": "需要更多帮助吗？",
   "needMoreHelpContent": "<p>使用聊天功能给我们发消息以获得更多支持。</p>",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.881Z",
+    "hashedOn": "2026-05-13T16:42:11.321Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "welcomeTitle": "4960270312fe93f8f70a281c0487e3e9",
       "welcomeContent": "89db0c88ac18123ccc240db3b17a99f8",
