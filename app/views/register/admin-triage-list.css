@@ -1,0 +1,100 @@
+.triage-page {
+  --accent: #0f6e5c;
+  --accent-soft: #e2efeb;
+  --accent-ink: #0a473b;
+  --pending: #b8791b;   --pending-bg: #fbf0dc;
+  --approved: #2f8f4e;  --approved-bg: #e4f2e7;
+  --rejected: #b5443a;  --rejected-bg: #f7e5e2;
+  --expired: #6b7a86;   --expired-bg: #eceff1;
+  --canceled: #8a7f6b;  --canceled-bg: #efece5;
+  --radius: 9px;
+  --shadow: 0 1px 2px rgba(17, 32, 28, .06), 0 4px 16px rgba(17, 32, 28, .05);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Bootstrap has no fixed-size circle utility; this is the one case here that
+   genuinely needs custom CSS rather than a BS5 class. */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.triage-page .card {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.triage-page .table-loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.triage-page .nav-tabs .nav-link.active {
+  color: var(--accent-ink);
+  border-bottom-color: var(--accent);
+}
+.triage-page .nav-tabs .badge {
+  background: var(--bs-secondary-bg);
+  color: var(--bs-secondary-color);
+  font-variant-numeric: tabular-nums;
+}
+.triage-page .nav-tabs .nav-link.active .badge {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.triage-page .status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .7rem;
+  font-weight: 620;
+  padding: 3px 9px 3px 8px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.triage-page .status-pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.triage-page .status-pill.pending  { color: var(--pending);  background: var(--pending-bg); }
+.triage-page .status-pill.approved { color: var(--approved); background: var(--approved-bg); }
+.triage-page .status-pill.rejected { color: var(--rejected); background: var(--rejected-bg); }
+.triage-page .status-pill.expired  { color: var(--expired);  background: var(--expired-bg); }
+.triage-page .status-pill.canceled { color: var(--canceled); background: var(--canceled-bg); }
+.triage-page .status-pill.other    { color: var(--bs-secondary-color); background: var(--bs-secondary-bg); }
+.triage-page .status-pill.pending .dot  { background: var(--pending); }
+.triage-page .status-pill.approved .dot { background: var(--approved); }
+.triage-page .status-pill.rejected .dot { background: var(--rejected); }
+.triage-page .status-pill.expired .dot  { background: var(--expired); }
+.triage-page .status-pill.canceled .dot { background: var(--canceled); }
+.triage-page .status-pill.other .dot    { background: var(--bs-secondary-color); }
+
+.triage-page td.stripe {
+  padding: 0;
+  width: 3px;
+}
+.triage-page td.stripe .bar {
+  width: 3px;
+  height: 100%;
+  min-height: 46px;
+  background: var(--row-color, transparent);
+}
+.triage-page tr.s-pending  { --row-color: var(--pending); }
+.triage-page tr.s-approved { --row-color: var(--approved); }
+.triage-page tr.s-rejected { --row-color: var(--rejected); }
+.triage-page tr.s-expired  { --row-color: var(--expired); }
+.triage-page tr.s-canceled { --row-color: var(--canceled); }

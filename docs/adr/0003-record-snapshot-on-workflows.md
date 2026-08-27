@@ -41,6 +41,15 @@ filters never silently hide pending requests.
 > extractor map to realm schema configuration, with server-side extraction
 > kept as the baseline for fields the caller omits.
 
+> **Revision (2026-08-26):** `recordFields` is the *request* shape — the
+> create-workflow call takes a `recordFields` object. On persistence, the
+> API flattens those fields directly onto the workflow's `data` (e.g.
+> `data.notifications`, `data.government`), not nested under a
+> `data.recordFields` key. A field may land as a single value (`government:
+> "in"`) or an array (`notifications: ["2025-144"]`) depending on the
+> underlying schema field. Readers (frontend queries, facet paths) must use
+> `data.<field>` directly.
+
 ## Considered Options
 
 - Join at query time (filter drafts in Solr, intersect with workflows by
@@ -77,7 +86,7 @@ filtering, the workflow API must grow beyond returning documents:
   extraction over them, so filters never silently hide them and extraction
   exists in exactly one place.
 - **Contextual facets** — triage filter dropdowns are populated from the
-  distinct `data.recordFields.*` values (with counts) among the workflows
+  distinct `data.*` snapshot-field values (with counts) among the workflows
   matching the *current* query context, not the paginated result page. This
   requires a facet/distinct mode on the workflow API that honors the same
   query filters as the results request. Facet values are identifiers; the
