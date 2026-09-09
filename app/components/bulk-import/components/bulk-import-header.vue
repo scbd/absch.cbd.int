@@ -44,6 +44,20 @@
       type="button"
       class="btn btn-outline-secondary d-flex align-items-center justify-content-center flex-shrink-0 p-0"
       style="width: 34px; height: 34px; border-radius: 7px;"
+      :class="{ active: showArticle }"
+      :aria-pressed="showArticle"
+      :title="t('bulkImport.showInfo')" :aria-label="t('bulkImport.showInfo')"
+      @click="emit('onToggleArticle')"
+    >
+      <svg
+        width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      ><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary d-flex align-items-center justify-content-center flex-shrink-0 p-0"
+      style="width: 34px; height: 34px; border-radius: 7px;"
       :disabled="phase === UPLOADER_PHASE.importing" @click="emit('onClose')"
     >
       <svg
@@ -59,7 +73,7 @@ import { useI18n } from 'vue-i18n'
 import { UPLOADER_PHASE } from '../framework/types'
 import type { UploaderPhase } from '../framework/types'
 
-defineProps<{ phase: UploaderPhase; fileName: string; rowCount: number }>()
-const emit = defineEmits<(e: 'onClose' | 'onClear')=> void>()
+defineProps<{ phase: UploaderPhase; fileName: string; rowCount: number; showArticle: boolean }>()
+const emit = defineEmits<(e: 'onClose' | 'onClear' | 'onToggleArticle')=> void>()
 const { t } = useI18n()
 </script>
