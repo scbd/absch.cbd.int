@@ -130,7 +130,7 @@ const realmColor800 = computed(() => realm.is('ABS') ? '#6c757d' : '#507395')
 const realmAccent   = computed(() => realm.is('ABS') ? '#e4572e' : '#A05800')
 
 const auth = useAuth()
-const isAdmin = computed(() => auth.check?.(['Administrator']) ?? false)
+const isAdmin = computed(() => auth.check?.(realm.getRole('administrator')) ?? false)
 const articlesApi = new ArticlesApi({ tokenReader: () => auth.token() })
 const portalsApi = new PortalsApi()
 const portals: Ref<PortalData[]> = ref([])

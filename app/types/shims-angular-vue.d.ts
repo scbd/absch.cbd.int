@@ -14,6 +14,7 @@ declare module '~/services/composables/realm.js' {
     value: string
     environment: string
     is: (realm: string, strict?: boolean)=> boolean
+    getRole: (roleName: string, schema?: string, schemaType?: string)=> string[]
   }
 }
 
