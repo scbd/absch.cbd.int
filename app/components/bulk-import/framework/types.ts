@@ -161,6 +161,8 @@ export interface DocumentTypeDefinition {
   pinnedColumns?: string[]
   columnGroups?: ColumnGroup[]
   validateRows?: (rows: RawRow[], ctx: ValidateRowsContext)=> Promise<ValidationError[]>
+  // path prefix for the downloadable blank template, one file per locale: `${templateBasePath}-${locale}.xlsx`
+  templateBasePath?: string
 }
 
 export interface SchemaInstance {

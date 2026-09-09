@@ -51,10 +51,15 @@
   "delete": "Supprimer",
   "edit": "Modifier",
   "note": "Note : Tout brouillon en attente sera aussi supprimé",
+  "sampleRecord": "Exemple d'enregistrement pour",
+  "bySystem": "Par système",
+  "deleteDraftRecord": "Le brouillon de l'enregistrement doit être supprimé avant que l'enregistrement publié puisse être supprimé.",
+  "errorDeletingDraft": "Une erreur s'est produite lors de la suppression du brouillon.",
+  "draftCreateSuccess": "Création du/des brouillon(s) du document effectuée.",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.955Z",
+    "hashedOn": "2026-05-13T16:42:11.199Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "tour": "35903b376bf7a3a0d9e72fc2e5595dc2",
       "all": "b1c94ca2fbc3e78fc30069c8d0f01680",
@@ -107,7 +112,12 @@
       "locked": "d9ea5c7d5837ec5d7b92e977a24cdb77",
       "delete": "f2a6c498fb90ee345d997f888fce3b18",
       "edit": "7dce122004969d56ae2e0245cb754d35",
-      "note": "14e0ae0b99d6069a58a7c6224f35e37e"
+      "note": "14e0ae0b99d6069a58a7c6224f35e37e",
+      "sampleRecord": "d77f4fa2dbd660426b74377e954964d4",
+      "bySystem": "3a893c32885c9dcd7fb69d0f3286b3a8",
+      "deleteDraftRecord": "28a0abc312c5e1048c70202d6d7aa343",
+      "errorDeletingDraft": "630dbea2207895a88f9d9ebc62bb529a",
+      "draftCreateSuccess": "5c8c0dbbde28e60810e57cfc10948c80"
     }
   }
 }

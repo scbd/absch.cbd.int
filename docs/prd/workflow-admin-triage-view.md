@@ -24,12 +24,15 @@ with filter dropdowns that show only the values (and counts) present in the
 current queue, so staff can see at a glance where the volume is and drill in.
 
 The view is powered by the **record snapshot** (ADR-0003): when a submission
-Workflow is created, the workflow API loads the referenced draft and copies
-the filterable record fields onto the Workflow (`data.recordFields`), making
-the workflow store the single paginated, sortable source for triage queries.
-Extraction is server-side so no caller — including external users of the
-workflow API — can omit or misstate the fields. Older pending Workflows that
-predate the snapshot are backfilled with the same extractor, so filters never
+Workflow is created, the workflow API stores the filterable record fields on
+the Workflow (`data.recordFields`, persisted with the workflow document in
+Mongo), making the workflow store the single paginated, sortable source for
+triage queries. Callers may pass `recordFields` when creating a Workflow —
+the backend validates them against the referenced draft — and the realm
+schema configuration defines which fields the API extracts from the draft
+itself for anything the caller did not supply, so every Workflow gets a
+baseline snapshot regardless of caller. Older pending Workflows that predate
+the snapshot are backfilled with the same extraction, so filters never
 silently hide requests.
 
 ## User Stories
@@ -46,23 +49,29 @@ silently hide requests.
 10. As an SCBD administrator, I want to open a request from the triage list and land on the existing request review flow, so that triage connects directly to acting on the request.
 11. As an SCBD administrator, I want the triage view restricted to administrators, so that regular users cannot see other users' pending requests.
 12. As a submitting user, I want my request to behave exactly as before (create, edit-frozen-while-pending, re-request), so that the triage feature changes nothing about how I publish records.
-13. As a developer, I want record types to opt in to the snapshot through a single per-schema extractor map in the workflow API, so that onboarding the next record type never touches any client and no caller can bypass or forge the snapshot.
-14. As a developer, I want the triage filter control to take its option source as an injected strategy, so that notification options can come from Solr while organization/government options come from the workflow facet endpoint, without the control knowing the difference.
+13. As a developer, I want record types to opt in to the snapshot through the realm schema configuration, so that onboarding the next record type is a configuration change and every Workflow gets a baseline snapshot even when the caller supplies nothing.
+14. As an API caller, I want to pass `recordFields` when creating a Workflow and have the backend validate them against the referenced draft, so that I can enrich the snapshot without being able to silently break triage filtering.
+15. As a developer, I want the triage filter control to take its option source as an injected strategy, so that notification options can come from Solr while organization/government options come from the workflow facet endpoint, without the control knowing the difference.
 
 ## Implementation Decisions
 
-- **Record snapshot at creation time, server-side** (ADR-0003): the workflow
-  API loads the referenced draft when a Workflow is created and a per-schema
-  extractor map computes `data.recordFields`. Only schemas with an extractor
-  entry produce a snapshot; `submission` is the first. Delete-record
-  Workflows never see the full document and get none. The snapshot cannot go
+- **Record snapshot at creation time** (ADR-0003, as revised): the snapshot
+  is merged from two sources when a Workflow is created. Callers may pass
+  `recordFields` in the create request; the backend **validates** supplied
+  fields against the referenced draft's data (whether custom fields with no
+  draft counterpart are allowed is decided during implementation). The
+  **realm schema configuration** defines which `recordFields` the API
+  extracts from the draft itself, filling in anything the caller did not
+  supply — caller-supplied values take precedence. The merged result is
+  stored on the Workflow's `data` object in Mongo and consumed by the
+  frontend through the workflow queries. Delete-record Workflows never see
+  the full document and get no extracted snapshot. The snapshot cannot go
   stale while a Workflow is pending, because a draft is frozen until its
   request is resolved; a re-request creates a fresh Workflow.
-- Extraction is **not supplied by any caller** — the workflow API is callable
-  by external users, so a client-side extractor could be bypassed (fields
-  omitted or forged). Caller-supplied fields and a frontend extractor map
-  were both rejected in ADR-0003 for the same scattering/bypass reason. The
-  web frontend sends nothing extra when creating a Workflow.
+- **Realm configuration is the opt-in point**: only schemas with
+  `recordFields` defined in the realm configuration get server-side
+  extraction; `submission` is the first. Onboarding the next record type is
+  a configuration change, not an API code change.
 - For `submission`, the snapshot fields are **notification, organization, and
   government** — stored as identifiers; the frontend resolves display names
   separately.
@@ -71,8 +80,8 @@ silently hide requests.
   Workflows matching the *current* query context (not the paginated page).
   Neither the AngularJS workflow service nor the Vue workflows API class has
   any facet capability today — this is net-new on both sides of the wire.
-- **Backfill runs the same server-side extractor** (API repository) over
-  existing pending submission Workflows that predate `recordFields`, so
+- **Backfill runs the same realm-config-driven extraction** (API repository)
+  over existing pending submission Workflows that predate `recordFields`, so
   filters never silently hide pending requests and extraction exists in
   exactly one place.
 - **The triage view is a new Vue 3 view** slotted into the existing Register
@@ -99,11 +108,14 @@ observable outputs out — never internal call sequences.
 
 Seams, highest first, preferring existing ones:
 
-- **The extractor map** (new, pure): given a draft document of a schema, it
-  returns the `recordFields` snapshot — or nothing for schemas without an
-  entry and for delete Workflows. Pure data-in/data-out. This seam lives in
-  the API repository with the server-side extractor and is tested there; it
-  is the highest seam capturing the ADR's core contract.
+- **The snapshot validate-and-merge step** (new, pure): given caller-supplied
+  `recordFields`, the realm schema configuration, and the referenced draft
+  document, it returns the merged snapshot — validating supplied fields
+  against the draft, extracting configured fields the caller omitted, and
+  returning nothing for schemas with no configuration and no supplied fields
+  and for delete Workflows. Pure data-in/data-out. This seam lives in the
+  API repository and is tested there; it is the highest seam capturing the
+  ADR's core contract.
 - **The workflow query/facet API methods** (extended Vue API class): given
   filter state (notification/organization/government selections, paging,
   sorting), they produce the correct request parameters, and normalize facet
@@ -126,7 +138,10 @@ Seams, highest first, preferring existing ones:
 - Triage actions beyond navigation to the existing request review flow (bulk
   approve/reject, assignment, etc.).
 - Rejected alternatives (recorded in ADR-0003): query-time join between Solr
-  drafts and workflows; caller-supplied snapshot fields per edit form.
+  drafts and workflows; frontend extractor map; a hardcoded per-schema
+  extractor map in the API with caller-supplied fields rejected (the
+  original decision, revised to realm-config extraction + validated
+  caller-supplied fields).
 
 ## Further Notes
 
@@ -134,7 +149,8 @@ Seams, highest first, preferring existing ones:
   the feature ships behind the CHM clearing-house; the view and routes must
   not break ABSCH/BCH deployments of the same codebase.
 - A WIP commit on `workflow-admin-view` threaded an `additionalFields`
-  parameter through the frontend's workflow creation; that approach was
-  superseded by server-side extraction (see ADR-0003's rejected options) and
-  the change has been reverted.
+  parameter through the frontend's workflow creation and was reverted. The
+  revised ADR-0003 reinstates the idea in validated form: callers may pass
+  `recordFields`, but the backend validates them and realm-config extraction
+  guarantees the baseline snapshot either way.
 - Suggested triage label on filing: `ready-for-agent`.

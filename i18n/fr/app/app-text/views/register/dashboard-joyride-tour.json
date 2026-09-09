@@ -17,12 +17,12 @@
   "viewAllRecordsContent": "<p>Cliquez sur l'icône « liste » pour afficher un résumé de tous les fichiers pour le type de fichier correspondant. Sur la page qui s'ouvre, vous pourrez filtrer les fichiers existants et en créer de nouveaux, ainsi que dupliquer, modifier ou supprimer un fichier.<br><br><u>Conseil :</u>  Vous pouvez également cliquer sur le titre du type d'enregistrement (par exemple, cliquez sur « Contact (CON) »).</p>",
   "needHelpTitle": "Besoin d'aide?",
   "needHelpContent": "<p>Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur le tableau de bord.</p>",
-  "needMoreHelpTitle": "Encore besoin d’aide?",
+  "needMoreHelpTitle": "Encore besoin d’aide ?",
   "needMoreHelpContent": "<p>Utilisez la fonction de chat pour nous envoyer un message et obtenir plus d’aide.</p>",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.881Z",
+    "hashedOn": "2026-05-13T16:42:11.321Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "welcomeTitle": "4960270312fe93f8f70a281c0487e3e9",
       "welcomeContent": "89db0c88ac18123ccc240db3b17a99f8",

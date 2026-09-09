@@ -1,0 +1,17 @@
+{
+  "storageMissingIdentifier": "No se dispone del número identificador del documento. No se puede dar lugar a la carga.",
+  "storageInvalid": "El archivo no existe o no tiene un nombre válido. Seleccione un archivo válido.",
+  "storageTemporary": "No se ha podido crear una ranura de almacenamiento temporal. Intente nuevamente luego.",
+  "storagePersisted": "El archivo se ha cargado, pero no se ha podido guardar en el almacenamiento. Por favor, contactarse con el servicio de ayuda.",
+  "#meta": {
+    "hashedOn": "2026-05-13T16:42:11.289Z",
+    "algorithm": "md5",
+    "branch": "2026.19.0",
+    "hashes": {
+      "storageMissingIdentifier": "bda10076f472684db018204e06e68c5b",
+      "storageInvalid": "c3d6844713ffe854bc406e92250587ff",
+      "storageTemporary": "4e3b1831a2162c3fd800e7eed09dd497",
+      "storagePersisted": "44a4a476450b14342beba16b168fd7d7"
+    }
+  }
+}

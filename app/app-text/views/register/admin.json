@@ -12,6 +12,7 @@
     "irrcCounts": "IRCC counts",
     "viewCountries": "View countries with/without ABSCH roles",
     "userRoleReport": "User Role Report",
+    "viewSubmissionTriage": "View pending submission requests triage list",
     "viewEmailList": "View list of users using the email subscription.",
     "subscriptions": "Subscriptions",
     "viewClientError": "View client side errors",

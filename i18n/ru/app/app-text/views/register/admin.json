@@ -19,10 +19,11 @@
   "validateTranslation": "Проверить перевод",
   "enable": "Активировать",
   "disable": "Деактивировать",
+  "viewNr1Analysis": "Просмотр анализа НД-1",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.879Z",
+    "hashedOn": "2026-05-13T16:42:11.21Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "admin": "e3afed0047b08059d0fada10f400c1e5",
       "viewList": "e9059e369fba09805997745c47f97293",
@@ -43,7 +44,8 @@
       "errorLogs": "39e0bf0df5c6b288dab8e1780b107e2a",
       "validateTranslation": "6d3668571774ffdca5ccd1a4780a91f4",
       "enable": "2faec1f9f8cc7f8f40d521c4dd574f49",
-      "disable": "bcfaccebf745acfd5e75351095a5394a"
+      "disable": "bcfaccebf745acfd5e75351095a5394a",
+      "viewNr1Analysis": "aa68a9a407bcebe528736ea65245abaf"
     }
   }
 }

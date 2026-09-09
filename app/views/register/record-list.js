@@ -939,6 +939,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                     $scope.bulkDeleteVueComponent = {
                         components: {
                             BulkDeleteButton: module.default,
+
                         }
                     };
                     $scope.$apply();

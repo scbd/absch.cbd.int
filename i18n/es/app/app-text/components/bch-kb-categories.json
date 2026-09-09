@@ -9,10 +9,11 @@
   "informalAdvisoryCommittee": "Comité Asesor Oficioso",
   "gettingHelp": "Solicitud de ayuda",
   "FAQs": "Preguntas frecuentes",
+  "webinars": "Seminarios en línea",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.348Z",
+    "hashedOn": "2026-05-13T16:42:11.247Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "announcements": "2b59bbfc9d431d23f4564d01b0182808",
       "about": "8f7f4c1ce7a4f933663d10543562b096",
@@ -23,7 +24,8 @@
       "interoperability": "67a915151759ecc737f698391f7cfd08",
       "informalAdvisoryCommittee": "e619f172759e7378a8d8efa71f5ce18a",
       "gettingHelp": "20c404f3ca0633629eee9b1b4ccd6737",
-      "FAQs": "ecb9cf6fba4c7813330c6bf373d2719c"
+      "FAQs": "ecb9cf6fba4c7813330c6bf373d2719c",
+      "webinars": "9fd00dae267994cf34ac273c6348673b"
     }
   }
 }

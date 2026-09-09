@@ -1,0 +1,33 @@
+{
+  "clearSelection": "Effacer la sélection",
+  "loading": "Chargement en cours...",
+  "specifyAnother": "Indiquer une autre valeur",
+  "showOthers": "Montrer les autres",
+  "nothingToSelect": "Rien à sélectionner",
+  "nothingToSelected": "Aucun élément sélectionné",
+  "selected": "sélectionné",
+  "of": "sur",
+  "notLoaded": "Données non chargées",
+  "mustBeArray": "La valeur doit être un tableau",
+  "itemsNotFound": "Éléments introuvables",
+  "unknownError": "Erreur inconnue",
+  "#meta": {
+    "hashedOn": "2026-05-13T16:42:11.221Z",
+    "algorithm": "md5",
+    "branch": "2026.19.0",
+    "hashes": {
+      "clearSelection": "80ffff123555bd5173345bc8f144edeb",
+      "loading": "16bfbf9c462762cf1cba4134ec53c504",
+      "specifyAnother": "6f6431b03e25759a030fa90211b2584e",
+      "showOthers": "c0401817acf4d744cb8f5e1710c243e3",
+      "nothingToSelect": "38f06bb81592ecba55c831688a40fc01",
+      "nothingToSelected": "6eab1ece0e9e7dc67fe6a3bbe20dbc6d",
+      "selected": "ef7de3f485174ff47f061ad27d83d0ee",
+      "of": "8bf8854bebe108183caeb845c7676ae4",
+      "notLoaded": "3a29f653ef1f912d3d421d565caef04b",
+      "mustBeArray": "7da5e4954ce766e9d912643e8c39e620",
+      "itemsNotFound": "0c07d90dc51ebd2efbed4003d3528e70",
+      "unknownError": "aee9784c03b80d38d3271cde2b252b8d"
+    }
+  }
+}

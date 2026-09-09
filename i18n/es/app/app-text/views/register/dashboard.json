@@ -55,10 +55,11 @@
   "bchTrainingSiteMessage": "De manera predeterminada, los usuarios registrados  solo pueden publicar \"Registros de referencia\". Los registros nacionales son publicados por los gobiernos y comprenden información del país pertinente para la aplicación, así como información que las Partes están obligadas a proporcionar de conformidad con el Protocolo. Si la sección \"Registros nacionales\" no aparece abajo, sírvase ponerse en contacto con nosotros en la siguiente dirección de correo electrónico: <a href='mailto:bch@cbd.int'>bch@cbd.int</a> y la Secretaría le asignará una función nacional que servirá solo para el Sitio de capacitación. Alternativamente, puede usar las cuentas preexistentes para practicar la publicación de información. Para ver estas funciones y las contraseñas asociadas, haga clic aquí: <a href='https://bch.cbd.int/en/kb/tags/getting-help/Training-Site-User-Roles/628e3a4464c53e000142d9b0'></a>.",
   "absTrainingSiteMessage": "De manera predeterminada, los usuarios registrados  solo pueden publicar \"Registros de referencia\". Los registros nacionales son publicados por los gobiernos y comprenden información del país pertinente para la aplicación, así como información que las Partes están obligadas a proporcionar de conformidad con el Protocolo. Si la sección \"Registros nacionales\" no aparece abajo, sírvase ponerse en contacto con nosotros en la siguiente dirección de correo electrónico: <a href='mailto:absch@cbd.int'>absch@cbd.int</a> y la Secretaría le asignará una función nacional que servirá solo para el Sitio de capacitación.",
   "chmTrainingSiteMessage": "De manera predeterminada, los usuarios registrados  solo pueden publicar \"Registros de referencia\". Los registros nacionales son publicados por los gobiernos y comprenden información del país pertinente para la aplicación, así como información que las Partes están obligadas a proporcionar de conformidad con el Convenio. Si la sección \"Registros nacionales\" no aparece abajo, sírvase ponerse en contacto con nosotros en la siguiente dirección de correo electrónico: <a href='mailto:chm@cbd.int'>chm@cbd.int</a> y la Secretaría le asignará una función nacional que servirá solo para el Sitio de capacitación.",
+  "otherSystems": "Otras aplicaciones del Centro de Intercambio de Información",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.885Z",
+    "hashedOn": "2026-05-13T16:42:11.313Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "dashboardTour": "ca919db6ac0783573c01419e565fa3c6",
       "dashboard": "2938c7f7e560ed972f8a4f68e80ff834",
@@ -115,7 +116,8 @@
       "referenceRecordsAbs": "2ec320ea9dbf12ebde82659c01c3a8cc",
       "bchTrainingSiteMessage": "7ed776ff77379675d8e69e084c8f23f9",
       "absTrainingSiteMessage": "c3ca759371a6ba9cd7c29c36e097a63d",
-      "chmTrainingSiteMessage": "6a47ed3ff7ce6fd4d9a52612f976dd6f"
+      "chmTrainingSiteMessage": "6a47ed3ff7ce6fd4d9a52612f976dd6f",
+      "otherSystems": "4e48fa57974c25325c506b3b2f45eb56"
     }
   }
 }

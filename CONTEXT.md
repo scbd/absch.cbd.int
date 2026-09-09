@@ -21,10 +21,12 @@ definition during design sessions.
 - **Workflow** — An approval request that carries a Record draft through review
   to publication or deletion. Surfaced in the Register as "requests"; avoid
   "task".
-- **Record snapshot** — Record-derived fields (`recordFields`) copied onto a
-  Workflow when it is created, so Register views can filter and display
-  requests by record content without loading each record. Only record types
-  that opt in produce one; submission is the first.
+- **Record snapshot** — Record-derived fields (`recordFields`) stored on a
+  Workflow's `data` when it is created, so Register views can filter and
+  display requests by record content without loading each record. Merged from
+  validated caller-supplied fields and fields the API extracts per the realm
+  schema configuration — the config is the opt-in point; submission is the
+  first.
 
 ## Architecture language
 

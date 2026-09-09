@@ -1,0 +1,31 @@
+{
+  "country": "国家",
+  "name": "名称",
+  "type": "联络点类型",
+  "address": "地址",
+  "function": "职能",
+  "department": "部门",
+  "organization": "机构",
+  "email": "电子邮件",
+  "telephone": "电话",
+  "fax": "传真",
+  "treaties": "条约",
+  "#meta": {
+    "hashedOn": "2026-05-13T16:42:11.294Z",
+    "algorithm": "md5",
+    "branch": "2026.19.0",
+    "hashes": {
+      "country": "59716c97497eb9694541f7c3d37b1a4d",
+      "name": "49ee3087348e8d44e1feda1917443987",
+      "type": "780de5e98032f33177f12c022bcc6452",
+      "address": "dd7bf230fde8d4836917806aff6a6b27",
+      "function": "86408593c34af77fdd90df932f8b5261",
+      "department": "1d17cb9923b99f823da9f5a16dc460e5",
+      "organization": "d6b258792ff06f82933c74eeb8aef591",
+      "email": "ce8ae9da5b7cd6c3df2929543a9af92d",
+      "telephone": "b2a1e8c4e743228e0a3719e3abc4cc1e",
+      "fax": "9810aa2b9f44401be4bf73188ef2b67d",
+      "treaties": "a1f87434dcd6f16d8d6ab10ccca4d311"
+    }
+  }
+}

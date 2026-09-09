@@ -1,0 +1,35 @@
+{
+  "from": "发件人",
+  "to": "收件人",
+  "apply": "应用",
+  "last7Days": "过去7天",
+  "last30Days": "过去30天",
+  "last6Month": "过去6个月",
+  "last12Month": "过去12个月",
+  "last2Years": "过去2年",
+  "last5Years": "过去5年",
+  "selectBothDates": "请同时选择开始日期和结束日期。",
+  "selectValidStartDate": "请选择一个有效的开始日期。",
+  "selectValidEndDate": "请选择一个有效的结束日期。",
+  "earlierThanStartDate": "结束日期不能早于开始日期。",
+  "#meta": {
+    "hashedOn": "2026-05-13T16:42:11.326Z",
+    "algorithm": "md5",
+    "branch": "2026.19.0",
+    "hashes": {
+      "from": "5da618e8e4b89c66fe86e32cdafde142",
+      "to": "e12167aa0a7698e6ebc92b4ce3909b53",
+      "apply": "9639e32cab248434a17ab32237cb3b71",
+      "last7Days": "4b299435d7b213389dfcb754217ab570",
+      "last30Days": "015a82ad52283ebee50f2819fc99d3eb",
+      "last6Month": "c4d0ea932eaf761be13eceb3175a485b",
+      "last12Month": "bbab00cedb95547e411ef8e5e8d27de2",
+      "last2Years": "dd3a8902f9f2ccbd2a376d42171564b7",
+      "last5Years": "4556ca4cc0f0a8076bcde5e80fc07714",
+      "selectBothDates": "2946f902d9ef28ad54871d1a4e0689a4",
+      "selectValidStartDate": "89b6c48414b7be433214c348d61e9390",
+      "selectValidEndDate": "23690cebfa721de3134e133a0217ba08",
+      "earlierThanStartDate": "39f4b3f461b8684754342149f06b4595"
+    }
+  }
+}

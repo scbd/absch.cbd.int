@@ -40,10 +40,12 @@
   "relevantDocuments": "Autres sites web pertinents et/ou documents en pièce jointe",
   "amendmentHistory": "Historique des amendements",
   "infoUtilization": "Informations sur l’utilisation de la ou des ressources génétiques",
+  "expired": "Expiré",
+  "expiredMessage": "Le permis ou son équivalent lié à ce certificat de conformité reconnu au niveau international (IRCC) a expiré.",
   "#meta": {
-    "hashedOn": "2024-11-22T14:18:26.772Z",
+    "hashedOn": "2026-05-13T16:42:11.287Z",
     "algorithm": "md5",
-    "branch": "2024.46.0",
+    "branch": "2026.19.0",
     "hashes": {
       "generalInfo": "bf1c03ecd0d85d824c36b782ed8d19d8",
       "revokeCertificate": "6e93f4afb7b5d2ce5d8f2d8a84fc8816",
@@ -85,7 +87,9 @@
       "addInfo": "092bf78f9c97ba171b8232ddff585392",
       "relevantDocuments": "aedb646b5a6c26b6299c97a9893e5409",
       "amendmentHistory": "c60cfa5d33eaeb26cf91453b67f6ba95",
-      "infoUtilization": "db79b2c78e7f2fedb3020b190bb6d426"
+      "infoUtilization": "db79b2c78e7f2fedb3020b190bb6d426",
+      "expired": "24fe48030f7d3097d5882535b04c3fa8",
+      "expiredMessage": "a7591214e4bdbe2659bd7e75f57544d3"
     }
   }
 }
