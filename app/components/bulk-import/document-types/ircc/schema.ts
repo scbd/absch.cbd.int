@@ -3,7 +3,6 @@ import { findContactOrCreate } from '../../framework/contact-utils'
 import type { DocumentRequest, EmptyDocumentRequest, IContactFields, SubDocument, UsageKey } from '~/types/common/documents'
 // @ts-expect-error importing js file
 import ThesaurusApi from '~/api/thesaurus'
-// @ts-expect-error js module
 import SolrApi from '~/api/solr'
 import { THESAURUS_DOMAINS, THESAURUS_TERMS } from '~/constants/thesaurus'
 import { SCHEMAS } from '~/constants/schemas'
@@ -28,7 +27,6 @@ async function fetchKeywords (): Promise<KeywordType[]> {
 }
 
 export class IrccSchema extends Schema {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call -- SolrApi is a JS module
   private readonly solrApi = new SolrApi({})
 
   static getIsConfidential (value: string | undefined | null): boolean {
@@ -76,7 +74,6 @@ export class IrccSchema extends Schema {
 
     const countryIso = await Schema.resolveCountryIso(this.columnValue('country'))
     const contactOpts = {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- SolrApi is a JS module
       solrApi: this.solrApi,
       countryIso,
       language: this.language,

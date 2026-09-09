@@ -33,3 +33,19 @@ describe('WorkflowsApi.queryWorkflows', () => {
     expect(result).toEqual({ count: 4 });
   });
 });
+
+describe('WorkflowsApi.getWorkflowFacets', () => {
+  it('builds the fields/q params and returns the facet response', async () => {
+    const workflowsApi = new WorkflowsApi();
+    const query = { $and: [{ state: 'running' }] };
+    const facetResponse = { notifications: [{ count: 1, value: '2024-100' }], organizations: [], government: [] };
+    workflowsApi.http.get = vi.fn().mockResolvedValue({ data: facetResponse });
+
+    const result = await workflowsApi.getWorkflowFacets({ query, fields: ['notifications', 'organizations', 'government'] });
+
+    expect(workflowsApi.http.get).toHaveBeenCalledWith('api/v2013/workflows/facets', {
+      params: { q: JSON.stringify(query), fields: 'notifications,organizations,government' }
+    });
+    expect(result).toEqual(facetResponse);
+  });
+});

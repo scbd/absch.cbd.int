@@ -39,7 +39,7 @@ export default class ApiBase
       return (await loadAsyncHeaders(baseConfig))(...args);
     }
 
-    http.get     = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).get    (...args);
+    http.get     = (...args)=> getWithCache(baseConfig, ...args);
     http.head    = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).head   (...args);
     http.post    = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).post    (...args);
     http.put     = async (...args)=> (await loadAsyncHeaders(baseConfig, args[0])).put    (...args);
@@ -59,7 +59,7 @@ async function loadAsyncHeaders(baseConfig, path) {
   const headers = { ...(config.headers || {}) };
 
   const trusted = /^https:\/\/.*.(cbd.int|cbddev.xyz)(\/)?/i.test(config.baseURL) ||
-                  /^http:\/\/localhost[:\/]/i.test(config.baseUR);
+                  /^http:\/\/localhost[:\/]/i.test(config.baseURL);
 
   if(/^(\/)?api\/v20\d{2}\/*/.test(path) ){
     if( trusted && tokenReader) {
@@ -83,6 +83,31 @@ async function loadAsyncHeaders(baseConfig, path) {
   }
 
   return axios.create({ ...config, headers } );
+}
+
+// Callers opt in per-request with `{ cache: true }` (e.g. app/api/countries.js).
+// Caches the in-flight/resolved promise, keyed by baseURL+path+params, so
+// concurrent callers for the same resource share one network request. A
+// failed request removes itself from the cache so the next call retries.
+function getWithCache(baseConfig, path, config) {
+  if(!config?.cache) {
+    return (async () => (await loadAsyncHeaders(baseConfig, path)).get(path, config))();
+  }
+
+  const { cache: _cacheOption, ...axiosConfig } = config;
+  const cacheKey = buildCacheKey(baseConfig.baseURL, path, axiosConfig.params);
+
+  if(!cache.has(cacheKey)) {
+    const requestPromise = (async () => (await loadAsyncHeaders(baseConfig, path)).get(path, axiosConfig))();
+    requestPromise.catch(() => cache.delete(cacheKey));
+    cache.set(cacheKey, requestPromise);
+  }
+
+  return cache.get(cacheKey);
+}
+
+function buildCacheKey(baseURL, path, params) {
+  return `${baseURL || ''}|${path}|${JSON.stringify(params || {})}`;
 }
 
 //////////////////////////

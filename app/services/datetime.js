@@ -8,6 +8,10 @@ export function formatDateISO(date) {
   return moment(date).format("YYYY-MM-DD"); // 2024-11-28
 }
 
+export function formatDateShort(date) {
+  return moment(date).format("D MMM"); // "19 Jan"
+}
+
 export function formatDateTime(datetime) {
     return moment(datetime).format('DD MMM YYYY HH:mm');
 }
