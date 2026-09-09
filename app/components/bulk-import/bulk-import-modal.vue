@@ -20,6 +20,19 @@
 
           <BulkImportBanner :banner="banner" :banner-errors="bannerErrors" :stats="bannerStats" />
 
+          <CbdArticle
+            v-if="showArticle"
+            :admin-tags="articleAdminTags"
+            :query="articleQuery" :show-cover-image="false" :show-edit="true"
+            class="mx-4 mt-2 mb-1"
+          >
+            <template #missing-article>
+              <p class="small text-muted mb-0">
+                {{ t('bulkImport.noArticle') }}
+              </p>
+            </template>
+          </CbdArticle>
+
           <div
             v-if="isParseError"
             class="d-flex align-items-center gap-2 small text-danger rounded border mx-4 mt-3 p-2"
@@ -138,6 +151,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRealm } from '~/services/composables/realm.js'
 import modalMessages from '~/app-text/components/bulk-import/bulk-import-modal.json'
 import { useBulkImport } from './framework/use-bulk-import'
 import { UPLOADER_PHASE } from './framework/types'
@@ -152,6 +166,8 @@ import BulkImportParsing from './components/bulk-import-parsing.vue'
 import BulkImportTable from './components/bulk-import-table.vue'
 import BulkImportConfirmDialog from './components/bulk-import-confirm-dialog.vue'
 import BulkImportDoneDialog from './components/bulk-import-done-dialog.vue'
+// @ts-expect-error importing js file
+import CbdArticle from '../common/cbd-article.vue'
 
 interface ColumnGroup { label: string; keys: string[] }
 type StateWithErrors = Extract<typeof state, { errors: unknown[] }>
@@ -177,7 +193,13 @@ const {
 
 const { [props.documentType]: docTypeDef } = registry
 
+const realm = useRealm()
+
 const fileName = ref('')
+const showArticle = ref(true)
+const articleAdminTags = [realm.value, 'bulk-import', 'introduction', props.documentType]
+const articleQueryFilter = [{ $match: { adminTags: { $all: articleAdminTags } } }]
+const articleQuery = ref({ ag: JSON.stringify(articleQueryFilter) })
 const search = ref('')
 const doneDialogDismissed = ref(false)
 const isBuilding = ref(false)
