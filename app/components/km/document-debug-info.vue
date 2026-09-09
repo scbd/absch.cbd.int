@@ -48,13 +48,15 @@
     import { useAuth } from '@scbd/angular-vue/src/index.js';
     import copyToClipboard from '~/components/common/copy-to-clipboard.vue';
     import { oasisUrl } from '~/services/composables/utils.js';
+    import { useRealm } from '~/services/composables/realm.js'
     
     const props = defineProps({
         documentInfo : { type:Object, required:true}
     });
     
+    const realm = useRealm()
     const auth = useAuth();
-    const isAdministrator = computed(()=> auth.check(['Administrator']));
+    const isAdministrator = computed(()=> auth.check(realm.getRole('administrator')));
 
     const showDebugInfo = ref(false);
 </script>
