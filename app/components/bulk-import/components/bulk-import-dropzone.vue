@@ -32,18 +32,33 @@
       <span>{{ t('bulkImport.maxSize', 'Max') }} <b class="text-secondary">5 MB</b> · {{ t('bulkImport.upTo', 'up to') }} <b class="text-secondary">500 {{ t('bulkImport.rows', 'rows') }}</b></span>
       <span>33 {{ t('bulkImport.columnsDesc', 'columns across 10 sections') }}</span>
     </div>
-    <a
-      class="small fw-medium text-decoration-none" style="color: var(--ok);"
-      href="#" @click.prevent
-    >↓ {{ t('bulkImport.downloadTemplate', 'Download the IRCC template') }}</a>
+    <div v-if="templateLinks.length > 0" class="d-flex align-items-center gap-2 small text-muted">
+      <span>↓ {{ t('bulkImport.downloadTemplate', 'Download the IRCC template') }}:</span>
+      <a
+        v-for="link in templateLinks" :key="link.code"
+        class="fw-medium text-decoration-none" style="color: var(--ok);"
+        :href="link.url" download
+      >{{ link.label }}</a>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { languages } from '~/app-data/un-languages'
 
+const props = defineProps<{ templateBasePath?: string }>()
 const emit = defineEmits<(e: 'onFileSelected', file: File)=> void>()
 const { t } = useI18n()
+
+const templateLinks = computed(() => {
+  const { templateBasePath } = props
+  if (templateBasePath === undefined) return []
+  return Object.entries(languages).map(([code, label]) => ({
+    code, label, url: `${templateBasePath}-${code}.xlsx`
+  }))
+})
 
 function handleFileInput (e: Event) {
   if (!(e.target instanceof HTMLInputElement)) return
