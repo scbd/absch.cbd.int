@@ -391,6 +391,7 @@ async function onClickConfirmImport () {
 function onFilePicked (file: File) {
   const { name } = file
   fileName.value = name
+  showArticle.value = false
   void onFileChange(file)
 }
 </script>
