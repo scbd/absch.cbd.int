@@ -46,7 +46,10 @@
             {{ t('bulkImport.parseError') }}
           </div>
 
-          <BulkImportDropzone v-if="state.phase === 'empty' || state.phase === 'parse-error'" @on-file-selected="onFilePicked" />
+          <BulkImportDropzone
+            v-if="state.phase === 'empty' || state.phase === 'parse-error'"
+            :template-base-path="docTypeDef.templateBasePath" @on-file-selected="onFilePicked"
+          />
 
           <BulkImportParsing
             v-else-if="state.phase === 'parsing'"

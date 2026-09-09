@@ -117,6 +117,7 @@ export const irccDocumentType: DocumentTypeDefinition = {
   // each document type can have diff header rows,
   // incase of ircc there are 2 header rows.
   headerRows: [0, 1],
+  templateBasePath: '/app/assets/bulk-import/ircc-template',
   pinnedColumns: ['permitEquivalent'],
   columnGroups: [
     { translationKey: 'general', keys: ['language', 'country'] },
