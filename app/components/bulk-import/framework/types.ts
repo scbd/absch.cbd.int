@@ -147,6 +147,8 @@ export interface DocumentTypeDefinition {
   pinnedColumns?: string[]
   columnGroups?: ColumnGroup[]
   validateRows?: (rows: RawRow[], tokenReader: TokenReader, realm: string, userGovernment?: string)=> Promise<SheetError[]>
+  // path prefix for the downloadable blank template, one file per locale: `${templateBasePath}-${locale}.xlsx`
+  templateBasePath?: string
 }
 
 export interface SchemaInstance {
