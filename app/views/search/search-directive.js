@@ -1609,7 +1609,7 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                             }).compact().uniq().value();
                         
                         if(freeTextVals.length)
-                            query = _.map(freeTextVals, function(val){return buildBoostQuery(boostFields, val)}).join(' AND ');
+                            query = _(freeTextVals).map(function(val){return buildBoostQuery(boostFields, val)}).compact().join(' AND ');
 
                         if(excludedValues.length){
                             var excludeQuery = '(*:* NOT ' + buildBoostQuery(boostFields, excludedValues) + ')'
@@ -1625,16 +1625,19 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                     }
 
                     function buildBoostQuery(boostFields, val){
-                        // to avoid solr falling back to default field when 
-                        // search has multiple words put text inside ()                            
-                        return  '(' + 
-                                    _(boostFields).map(function(boost, boostField){
-                                        if(~val.indexOf('-'))//not sure if its good idea
-                                            return `(${boostField}:("${val}")^${boost})`;
+                        // to avoid solr falling back to default field when
+                        // search has multiple words put text inside ()
+                        var boostQueries = _(boostFields).map(function(boost, boostField){
+                                                if(~val.indexOf('-'))//not sure if its good idea
+                                                    return `(${boostField}:("${val}")^${boost})`;
 
-                                        return `(${constructSolrFreeTextQuery(val, boostField, 'OR')}^${boost})`;
-                                    }).value().join(' OR ') +
-                                ')'
+                                                var freeTextQuery = constructSolrFreeTextQuery(val, boostField, 'OR');
+                                                if(freeTextQuery)
+                                                    return `(${freeTextQuery}^${boost})`;
+                                            }).compact().value();
+
+                        if(boostQueries.length)
+                            return '(' + boostQueries.join(' OR ') + ')';
                     }
 
                     function buildReferencedByQuery(filter){
