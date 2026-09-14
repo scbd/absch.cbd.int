@@ -239,11 +239,12 @@ app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeou
                             var searchFields = filter.query.searchFields||['text_EN_txt'];
 
                             queryText = '(' + solr.escape(searchText) + ')';
-                            var freeTextQuery   = _.map(searchFields, function(field, i){
+                            var freeTextQuery   = _(searchFields).map(function(field, i){
                                                     return constructSolrFreeTextQuery(searchText, localizeFields(field,locale), 'AND');
-                                                }).join(' OR ');
+                                                }).compact().join(' OR ');
 
-                            lQueries.push(freeTextQuery);
+                            if(freeTextQuery)
+                                lQueries.push(freeTextQuery);
                         }
 
                         if(lQueries.length)
