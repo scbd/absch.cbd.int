@@ -106,7 +106,7 @@ const onChangePage = async (page: number): Promise<void> => {
 }
 
 const openRequest = (workflowId: string): void => {
-  router.push(`/register/requests/${workflowId}`)
+  router.push({ path: `/register/requests/${workflowId}` })
 }
 
 const PENDING_MAX_AGE_WEEKS = 12
