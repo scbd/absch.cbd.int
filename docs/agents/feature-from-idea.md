@@ -11,7 +11,7 @@ ticket that existed before the branch).
 
 | You have… | Start with |
 |---|---|
-| A Jira ticket (user-raised or filed) | [feature-workflow.md](feature-workflow.md) |
+| A Jira ticket (feature or bug — both follow the same steps) | [feature-workflow.md](feature-workflow.md) |
 | An idea, no ticket yet | this document |
 
 ## Step A — Grill the design, capture the docs
