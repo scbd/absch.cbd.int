@@ -117,20 +117,24 @@ const realmApi = new RealmApi({ tokenReader: () => undefined });
                 if(documentId === undefined)
                     documentId = "DRAFT";
 
-				if(document.government_s)
-                    government = document.government_s;
-                else if(document.government)
-                    government = document.government.identifier;
-                else if(document.metadata && document.metadata.government)
-                    government = document.metadata.government;
-                else if(document.body && document.body.government)
-                    government = document.body.government.identifier;
+				var schemaKey = document.type||document.schema_s||document.schema;
+
+				if((realm.schemas[schemaKey]||{}).type !== 'reference'){
+					if(document.government_s)
+	                    government = document.government_s;
+	                else if(document.government)
+	                    government = document.government.identifier;
+	                else if(document.metadata && document.metadata.government)
+	                    government = document.metadata.government;
+	                else if(document.body && document.body.government)
+	                    government = document.body.government.identifier;
+				}
 
 				if(document.type == 'focalPoint')
 					uIdPrefix = 'CHM';
 					
 				var unique = uIdPrefix +
-							'-' + $filter("schemaShortName")(document.type||document.schema_s||document.schema) +
+							'-' + $filter("schemaShortName")(schemaKey) +
 							'-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
 							'-' + documentId;
 
