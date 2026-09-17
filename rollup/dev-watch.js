@@ -153,10 +153,10 @@ tsc.on('close', () => {
   stopRollup('tsc exited')
 })
 
-// Debounced eslint --fix on any changed .vue / .ts file under app/
+// Debounced eslint --fix on any changed .vue / .ts / .js file under app/
 const lintTimers = new Map()
 watch(resolve('app'), { recursive: true }, (_, filename) => {
-  if (!filename || !/\.(vue|ts)$/.test(filename)) return
+  if (!filename || !/\.(vue|ts|js)$/.test(filename)) return
   clearTimeout(lintTimers.get(filename))
   lintTimers.set(filename, setTimeout(() => {
     lintTimers.delete(filename)
