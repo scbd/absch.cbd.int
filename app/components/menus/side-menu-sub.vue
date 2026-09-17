@@ -61,7 +61,8 @@
   };
     //automatically tracks dependencies—No need to explicitly specify route.value.path
     watchEffect(() => {
-      isExpanded.value = props.menu.isExpanded || route.value.path.startsWith(`/${props.menu.url}`);
+      const isDescendantRoute = route.value.path.startsWith(`/${props.menu.url}/`);
+      isExpanded.value = props.menu.isExpanded || isDescendantRoute;
     });
 
     // Watch for changes in isExpanded to trigger collapse behavior

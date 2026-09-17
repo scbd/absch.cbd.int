@@ -1,7 +1,10 @@
 <template>
-  <div id="forums" class="forums-root px-5 py-4">
+  <div>
+    <page-masthead>{{ t('portals') }}</page-masthead>
 
-    <div class="card mb-4">
+    <div id="forums" class="forums-root px-5 py-4">
+
+    <div v-if="hasArticle" class="card mb-4">
       <div class="card-body position-relative">
         <div v-if="isAdmin" class="admin-ribbon">
           <i class="fa fa-shield me-1"></i> Admin
@@ -10,10 +13,9 @@
           :query="articleQuery"
           :show-edit="true"
           :admin-tags="articleAdminTags"
+          @on-article-load="onArticleLoad"
         >
-          <template #missing-article>
-            <h4 class="fs-4 mb-2 fw-bold">{{ t('portals') }}</h4>
-          </template>
+          <template #missing-article>&nbsp;</template>
         </cbd-article>
       </div>
     </div>
@@ -79,14 +81,11 @@
               <span class="stat-label">{{ t('statsOpenForums') }}</span>
               <span class="stat-value">{{ totalOpenForums }}</span>
             </div>
-            <div class="stat-row">
-              <span class="stat-label">{{ t('statsActive') }}</span>
-              <span class="stat-value accent">{{ portals.length }}</span>
-            </div>
           </div>
         </div>
       </aside>
     </div>
+  </div>
   </div>
 </template>
 
@@ -107,6 +106,7 @@ import loading from '~/components/common/loading.vue'
 import serverError from '~/components/common/error.vue'
 // @ts-expect-error importing js file
 import CbdArticle from '~/components/common/cbd-article.vue';
+import PageMasthead from '~/components/portals/page-masthead.vue';
 import messages from '~/app-text/templates/bch/footer.json'
 import forumMessages from '~/app-text/views/portals/forums.json'
 import commonRoutesMessages from '~/app-text/routes/common-routes-labels.json'
@@ -142,6 +142,11 @@ const PORTALS_URL = 'portals'
 
 const isLoading = ref(false)
 const error: Ref<unknown> = ref()
+const hasArticle = ref(true)
+
+function onArticleLoad(article: Article | undefined) {
+  hasArticle.value = !!article
+}
 
 function countForums(menus: PortalMenu[] | undefined): number {
   if (!menus) return 0
@@ -445,10 +450,6 @@ onMounted(async () => {
 .stat-value {
   font-weight: 700;
   color: var(--navy-900, #0b3b4d);
-}
-
-.stat-value.accent {
-  color: #22c55e;
 }
 
 .tag-cloud {
