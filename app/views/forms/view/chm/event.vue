@@ -263,8 +263,9 @@
         if (!document.value.websites) return [];     
         return document.value.websites.filter(checkYoutubeLinks )
     });
-    const otherLinks = computed(()=>{ 
-        if (!document.websites) return [];  
+    const otherLinks = computed(()=>{
+        // TODO: missing .value — document is a ref, so document.websites is always undefined and otherLinks is always empty
+        if (!document.websites) return [];
         return document.websites.filter(checkOtherLinks)
     });          
    

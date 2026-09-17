@@ -27,6 +27,7 @@
     });
     const createdOn = computed(()=>{
         var createdOn = props.documentInfo?.createdOn;
+        // TODO: moment.utc(updatedOn) receives the computed ref, not updatedOn.value — the same-day check is always false
         if (createdOn && createdOn!=props.documentInfo?.updatedOn && !moment.utc(createdOn).isSame(moment.utc(updatedOn), 'day')){
             return createdOn;
         }        

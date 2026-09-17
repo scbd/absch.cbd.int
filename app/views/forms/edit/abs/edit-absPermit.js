@@ -216,6 +216,7 @@ import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
     //==================================
     $scope.editContact = function(property) {
       $scope.editedProperty = property;
+      // TODO: 'clone' is not defined in this scope — editContact throws a ReferenceError when invoked
       $scope.editedContact  = clone($scope.document[property] || { source : guid(),  type: "organization" });
     };
 
@@ -242,6 +243,7 @@ import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json'
       if(!$scope.editedProperty)
         return;
 
+      // TODO: 'clone' is not defined in this scope — saveContact throws a ReferenceError when invoked
       $scope.document[$scope.editedProperty] = clone($scope.editedContact);
     };
 

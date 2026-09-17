@@ -122,6 +122,7 @@ async function load() {
 }
 
 async function toggleSubscription() {
+  // TODO: destructures the ref object, not subscription.value — watching is always undefined, so this only ever subscribes and never unsubscribes
   const { watching } = subscription || { watching: false };
   const qWatch = watching 
               ? forumsApi.deleteThreadSubscription(props.threadId)
