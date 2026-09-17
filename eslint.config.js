@@ -2,7 +2,6 @@ import globals from 'globals'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import { globalIgnores, defineConfig } from 'eslint/config'
 import pluginVue from 'eslint-plugin-vue'
-import eslintMinimalFilesList from './.config/eslintminimal.json' with { type: 'json' }
 import standard from 'neostandard' // Standard for ESLint
 import love from 'eslint-config-love' // Standard for TypeScript
 
@@ -33,7 +32,24 @@ const vueTs = defineConfigWithVueTs([
 
 const isDev = process.env.NODE_ENV === 'development'
 
-export default defineConfig([
+// `yarn build` runs eslint with --max-warnings=0, so a warning already blocks the
+// build. Recording warnings as errors makes `yarn lint` agree with the build and
+// lets eslint-suppressions.json carry the existing debt (suppressions only cover
+// error-severity findings).
+function warningsAsErrors (configs) {
+  for (const config of configs.flat(Infinity)) {
+    for (const [name, value] of Object.entries(config.rules ?? {})) {
+      if (value === 'warn' || value === 1) {
+        config.rules[name] = 'error'
+      } else if (Array.isArray(value) && (value[0] === 'warn' || value[0] === 1)) {
+        config.rules[name] = ['error', ...value.slice(1)]
+      }
+    }
+  }
+  return configs
+}
+
+export default defineConfig(warningsAsErrors([
   globalIgnores(['.config/', 'dist/', 'node_modules/', 'app/views/pdf-viewer/pdfjs/']),
   {
     languageOptions: {
@@ -59,10 +75,6 @@ export default defineConfig([
     files: ['**/*.{ts,mts,tsx,vue,js}'],
     noStyle: true
   }),
-  // Grandfathered legacy files — no rules enforced.
-  // To upgrade a file: remove it from .config/eslintminimal.json and fix the errors.
-  // New files (not in the list) automatically get full linting.
-  globalIgnores(eslintMinimalFilesList),
   {
     name: 'include styles for new files',
     files: ['**/*.{ts,mts,tsx,vue,js}'],
@@ -113,4 +125,4 @@ export default defineConfig([
       'no-console': isDev ? 'off' : 'error'
     }
   }
-])
+]))

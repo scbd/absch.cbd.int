@@ -78,7 +78,9 @@ function runInitialLint () {
   process.stdout.write(DIM + '[eslint] scanning...' + RESET + '\n')
   let out = ''
   const eslint = spawn(
-    'npx', ['eslint', 'app/', '--format', 'json', '--max-warnings=0'],
+    // --pass-on-unpruned-suppressions: NODE_ENV=development turns some rules off
+    // (no-console), which would otherwise fail on their now-unused suppressions.
+    'npx', ['eslint', 'app/', '--format', 'json', '--max-warnings=0', '--pass-on-unpruned-suppressions'],
     { stdio: ['inherit', 'pipe', 'pipe'], env: { ...process.env, NODE_ENV: 'development' } }
   )
   eslint.stdout.on('data', d => { out += d })
@@ -159,7 +161,7 @@ watch(resolve('app'), { recursive: true }, (_, filename) => {
   lintTimers.set(filename, setTimeout(() => {
     lintTimers.delete(filename)
     const abs = resolve('app', filename)
-    const eslint = spawn('npx', ['eslint', '--fix', abs], {
+    const eslint = spawn('npx', ['eslint', '--fix', '--pass-on-unpruned-suppressions', abs], {
       stdio: ['inherit', 'pipe', 'pipe'],
       env: { ...process.env, NODE_ENV: 'development' }
     })
