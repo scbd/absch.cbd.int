@@ -51,6 +51,7 @@ yarn dev          # build + watch (dev, English only)
 yarn build        # full production build (all 6 locales: en, es, fr, ar, ru, zh)
 yarn lint         # run ESLint on app/ (~12s)
 yarn lint:fix     # run ESLint with auto-fix
+yarn lint:prune   # lint + drop retired entries from eslint-suppressions.json
 yarn test         # run the vitest suite (~1s)
 yarn typecheck    # vue-tsc type-check (no emit)
 node server.js    # start Express server (requires env vars below)
@@ -71,8 +72,9 @@ before handing work to a human; it takes seconds.
   `--suppress-rule` re-baseline; they are not fixes. That is the one
   prohibited move.
 - When you touch a file that carries suppressions, fix what you reasonably
-  can, then run `npx eslint app/ --prune-suppressions` to drop the entries
-  you retired. That is how the count ratchets down.
+  can, then run `yarn lint:prune` — it fails on new violations and drops the
+  entries you retired in one go. Commit the shrunk `eslint-suppressions.json`
+  with your change. That is how the count ratchets down.
 
 ## Tests
 

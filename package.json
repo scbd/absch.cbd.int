@@ -79,6 +79,7 @@
     "start": "node server.js",
     "lint": "npx eslint app/",
     "lint:fix": "npx eslint app/ --fix",
+    "lint:prune": "npx eslint app/ --prune-suppressions",
     "build": "npx eslint app/ --max-warnings=0 && rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "typecheck": "vue-tsc --noEmit",
     "test": "vitest run",
