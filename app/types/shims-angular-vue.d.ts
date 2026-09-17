@@ -43,9 +43,15 @@ declare module '@scbd/angular-vue/src/index.js' {
     params: Record<string, string>
   }
 
+  interface RouterPushOptions {
+    path?: string
+    query?: Record<string, string>
+    hash?: string
+  }
+
   interface Router {
-    push: (path: string)=> void
-    replace: (path: string)=> void
+    push: (options: RouterPushOptions)=> void
+    replace: (options: RouterPushOptions)=> void
   }
 
   export function useNgVue (): NgVue
