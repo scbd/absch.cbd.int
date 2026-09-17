@@ -49,23 +49,39 @@ Full text: https://github.com/multica-ai/andrej-karpathy-skills/blob/main/skills
 ```bash
 yarn dev          # build + watch (dev, English only)
 yarn build        # full production build (all 6 locales: en, es, fr, ar, ru, zh)
-yarn lint         # run ESLint on app/
+yarn lint         # run ESLint on app/ (~12s)
 yarn lint:fix     # run ESLint with auto-fix
+yarn test         # run the vitest suite (~1s)
 yarn typecheck    # vue-tsc type-check (no emit)
 node server.js    # start Express server (requires env vars below)
 ```
 
 Required env vars for the server: `CLEARINGHOUSE` (`ABS` or `BCH`) and `CLEARINGHOUSE_HOST` (e.g. `absch.local`).
 
+## Lint debt (ratchet)
+
+Lint runs in CI on every push and blocks the image build — run `yarn lint`
+before handing work to a human; it takes seconds.
+
+- `eslint-suppressions.json` is recorded debt, per file and per rule — not a
+  blanket disable. Existing debt passes; a **new** violation of a suppressed
+  rule in the same file fails, as does any violation of a rule not in the
+  baseline.
+- **Never add suppressions to get a build green.** `--suppress-all` and
+  `--suppress-rule` re-baseline; they are not fixes. That is the one
+  prohibited move.
+- When you touch a file that carries suppressions, fix what you reasonably
+  can, then run `npx eslint app/ --prune-suppressions` to drop the entries
+  you retired. That is how the count ratchets down.
+
 ## Tests
 
-There is **no automated test suite wired up yet** — `vitest` is not installed and
-there are no spec files. UI validation is done manually via the browser.
+**vitest** is wired up: specs live under `test/**/*.spec.ts` and run with
+`yarn test`, locally and in CI (CI blocks the image build on them). Coverage
+is still thin, so UI validation is largely still manual via the browser.
 
-The migration plan intends **vitest** as services and filters are inverted to Vue:
-new service-level tests go under `test/**/*.spec.ts` and ship in the same PR (see
-the migration ratchet under *Architecture*). Wire up vitest before relying on a
-`yarn vitest` command.
+As services and filters are inverted to Vue, new service-level tests ship in
+the same PR (see the migration ratchet under *Architecture*).
 
 ## SCBD agent suite
 
