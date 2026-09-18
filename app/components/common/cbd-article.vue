@@ -4,7 +4,7 @@
             <i class="fa fa-cog fa-spin fa-lg"></i> 
             {{ t("loading") }}...
         </div>
-        <div v-if="!loading && viewArticle">
+        <div v-if="!loading">
             <cbd-add-new-view-article v-if="showEdit && hasEditRights" 
                 :tags="tags" :admin-tags="adminTags" :custom-tags="customTags" :id="(viewArticle||{})._id" :target="target"
                 class="btn btn-secondary float-end">
