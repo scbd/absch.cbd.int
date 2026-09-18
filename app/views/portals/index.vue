@@ -4,18 +4,14 @@
 
     <div id="forums" class="forums-root px-5 py-4">
 
-    <div v-if="hasArticle" class="card mb-4">
-      <div class="card-body position-relative">
-        <div v-if="isAdmin" class="admin-ribbon">
-          <i class="fa fa-shield me-1"></i> Admin
-        </div>
+    <div :class="hasArticle ? 'card mb-4' : ''">
+      <div :class="hasArticle ? 'card-body position-relative' : ''">
         <cbd-article
           :query="articleQuery"
           :show-edit="true"
           :admin-tags="articleAdminTags"
           @on-article-load="onArticleLoad"
         >
-          <template #missing-article>&nbsp;</template>
         </cbd-article>
       </div>
     </div>
