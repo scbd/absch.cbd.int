@@ -9,18 +9,20 @@
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
       ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
     </div>
-    <div class="flex-grow-1" style="min-width: 0;">
-      <h1 class="m-0 fw-bold" style="font-size: 18px; color: #0b3b4d; line-height: 1.2;">
-        {{ t('title') }}
-      </h1>
-      <div class="small text-muted mt-1">
-        <span v-if="phase === 'empty' || phase === 'parse-error'">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
-        <span v-else-if="phase === 'parsing'">{{ t('bulkImport.reading', 'Reading file…') }}</span>
-        <span v-else>{{ t('bulkImport.previewReady', 'Review the records below before importing') }}</span>
+    <div class="flex-grow-1 d-flex align-items-center gap-3 flex-wrap" style="min-width: 0;">
+      <div style="min-width: 0;">
+        <h1 class="m-0 fw-bold" style="font-size: 18px; color: #0b3b4d; line-height: 1.2;">
+          {{ t('title') }}
+        </h1>
+        <div class="small text-muted mt-1">
+          <span v-if="phase === 'empty' || phase === 'parse-error'">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
+          <span v-else-if="phase === 'parsing'">{{ t('bulkImport.reading', 'Reading file…') }}</span>
+          <span v-else>{{ t('bulkImport.previewReady', 'Review the records below before importing') }}</span>
+        </div>
       </div>
       <div
         v-if="phase !== 'empty' && phase !== 'parsing' && phase !== 'parse-error'"
-        class="d-inline-flex align-items-center gap-2 bg-white border rounded-2 small mt-2"
+        class="d-inline-flex align-items-center gap-2 bg-white border rounded-2 small"
         style="padding: 5px 8px 5px 11px; color: #445;"
       >
         <svg
@@ -42,6 +44,20 @@
       type="button"
       class="btn btn-outline-secondary d-flex align-items-center justify-content-center flex-shrink-0 p-0"
       style="width: 34px; height: 34px; border-radius: 7px;"
+      :class="{ active: showArticle }"
+      :aria-pressed="showArticle"
+      :title="t('bulkImport.showInfo')" :aria-label="t('bulkImport.showInfo')"
+      @click="emit('onToggleArticle')"
+    >
+      <svg
+        width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      ><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary d-flex align-items-center justify-content-center flex-shrink-0 p-0"
+      style="width: 34px; height: 34px; border-radius: 7px;"
       :disabled="phase === 'importing'" @click="emit('onClose')"
     >
       <svg
@@ -56,7 +72,7 @@
 import { useI18n } from 'vue-i18n'
 import type { UploaderPhase } from '../framework/types'
 
-defineProps<{ phase: UploaderPhase; fileName: string; rowCount: number }>()
-const emit = defineEmits<(e: 'onClose' | 'onClear')=> void>()
+defineProps<{ phase: UploaderPhase; fileName: string; rowCount: number; showArticle: boolean }>()
+const emit = defineEmits<(e: 'onClose' | 'onClear' | 'onToggleArticle')=> void>()
 const { t } = useI18n()
 </script>
