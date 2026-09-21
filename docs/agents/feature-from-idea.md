@@ -55,7 +55,8 @@ ones (full map: [chm-jira-workflow.md](chm-jira-workflow.md)).
 
 ## Step C — Hand off to the ticket flow
 
-Continue at [feature-workflow.md](feature-workflow.md) **Step 1 — Plan**
-(`/scbd-agent-plan ticket=CHM-XXX`); Step 0 (design) is already done. Remember
+Continue at [feature-workflow.md](feature-workflow.md) **Step 1 — Branch +
+Plan** (`/scbd-agent-github ticket=CHM-XXX action=prepare-branch`, then
+`/scbd-agent-plan ticket=CHM-XXX`); Step 0 (design) is already done. Remember
 component is ticket-scoped — pass `component=<ABSCH|BCH|CHM>` to match where
 the feature ships.
