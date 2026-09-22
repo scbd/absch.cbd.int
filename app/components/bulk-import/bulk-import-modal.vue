@@ -21,7 +21,7 @@
           <BulkImportBanner :banner="banner" :banner-errors="bannerErrors" :stats="bannerStats" />
 
           <div
-            v-if="state.phase === 'parse-error'"
+            v-if="isParseError"
             class="d-flex align-items-center gap-2 small text-danger rounded border mx-4 mt-3 p-2"
             style="background: #fff3f3; border-color: #f5c6c6 !important;"
           >
@@ -32,10 +32,10 @@
             {{ t('bulkImport.parseError') }}
           </div>
 
-          <BulkImportDropzone v-if="state.phase === 'empty' || state.phase === 'parse-error'" @on-file-selected="onFilePicked" />
+          <BulkImportDropzone v-if="isEmpty || isParseError" @on-file-selected="onFilePicked" />
 
           <BulkImportParsing
-            v-else-if="state.phase === 'parsing'"
+            v-else-if="state.phase === UPLOADER_PHASE.parsing"
             :file-name="state.fileName" :steps="parsingSteps" :progress="parseProgress"
           />
 
@@ -47,7 +47,7 @@
           />
 
           <div
-            v-else-if="state.phase === 'import-error'"
+            v-else-if="isImportError"
             class="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-muted"
           >
             <i class="fa fa-exclamation-circle text-danger" style="font-size: 3rem;" />
@@ -62,11 +62,11 @@
             {{ t('bulkImport.close') }}
           </button>
 
-          <span v-if="state.phase === 'importing'" class="small text-muted">{{ currentPushLabel }}</span>
+          <span v-if="isImporting" class="small text-muted">{{ currentPushLabel }}</span>
 
           <span class="flex-grow-1" />
 
-          <template v-if="state.phase === 'preview' || state.phase === 'confirm-import' || state.phase === 'confirm-close' || state.phase === 'confirm-erase'">
+          <template v-if="isPreview || isConfirmImport || isConfirmClose || isConfirmErase">
             <span v-if="hasErrors" class="d-flex align-items-center gap-1 small fw-medium text-danger">
               <svg
                 width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -86,18 +86,18 @@
           </template>
 
           <span
-            v-if="state.phase === 'importing'"
+            v-if="isImporting"
             class="small text-muted"
           >{{ t('bulkImport.liveCount', { imported: liveImported, failed: liveFailed }) }}</span>
 
           <span
-            v-if="state.phase === 'done'"
+            v-if="state.phase === UPLOADER_PHASE.done"
             class="small" :class="state.failed > 0 ? 'text-danger' : 'text-success'"
           >{{ t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed }) }}</span>
         </div>
 
         <BulkImportConfirmDialog
-          v-if="state.phase === 'confirm-import'"
+          v-if="state.phase === UPLOADER_PHASE.confirmImport"
           :message="t('bulkImport.confirmMsg')" :confirm-label="t('bulkImport.confirm')"
           confirm-class="btn-primary bi-btn--orange"
           @on-confirm="onImport" @on-cancel="onCancelConfirm"
@@ -111,21 +111,21 @@
         </BulkImportConfirmDialog>
 
         <BulkImportConfirmDialog
-          v-if="state.phase === 'confirm-close'"
+          v-if="isConfirmClose"
           :message="t('bulkImport.closeConfirm')" :confirm-label="t('bulkImport.confirmClose')"
           confirm-class="btn-danger"
           @on-confirm="onForceClose" @on-cancel="onCancelConfirm"
         />
 
         <BulkImportConfirmDialog
-          v-if="state.phase === 'confirm-erase'"
+          v-if="isConfirmErase"
           :message="t('bulkImport.eraseConfirm')" :confirm-label="t('bulkImport.confirmErase')"
           confirm-class="btn-danger"
           @on-confirm="onConfirmErase" @on-cancel="onCancelConfirm"
         />
 
         <BulkImportDoneDialog
-          v-if="state.phase === 'done' && !doneDialogDismissed"
+          v-if="state.phase === UPLOADER_PHASE.done && !doneDialogDismissed"
           :message="t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed })"
           @on-close="onDoneDialogClose"
         />
@@ -140,6 +140,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import modalMessages from '~/app-text/components/bulk-import/bulk-import-modal.json'
 import { useBulkImport } from './framework/use-bulk-import'
+import { UPLOADER_PHASE } from './framework/types'
 import type { BannerStats, DocumentTypes, PreviewRow, RowProgress, SheetError } from './framework/types'
 import { registry } from './registry'
 import BulkImportHeader from './components/bulk-import-header.vue'
@@ -185,7 +186,7 @@ const isBuilding = ref(false)
 // Parsing progress
 // -------------------------------------------------------------------------
 const parsingSteps = computed(() =>
-  state.phase === 'parsing' ? (state).steps : []
+  state.phase === UPLOADER_PHASE.parsing ? state.steps : []
 )
 
 const parseProgress = computed(() => {
@@ -197,15 +198,28 @@ const parseProgress = computed(() => {
 })
 
 // -------------------------------------------------------------------------
+// Phase flags
+// -------------------------------------------------------------------------
+const isEmpty = computed(() => state.phase === UPLOADER_PHASE.empty)
+const isParseError = computed(() => state.phase === UPLOADER_PHASE.parseError)
+const isImportError = computed(() => state.phase === UPLOADER_PHASE.importError)
+const isPreview = computed(() => state.phase === UPLOADER_PHASE.preview)
+const isConfirmImport = computed(() => state.phase === UPLOADER_PHASE.confirmImport)
+const isConfirmClose = computed(() => state.phase === UPLOADER_PHASE.confirmClose)
+const isConfirmErase = computed(() => state.phase === UPLOADER_PHASE.confirmErase)
+const isImporting = computed(() => state.phase === UPLOADER_PHASE.importing)
+const isDone = computed(() => state.phase === UPLOADER_PHASE.done)
+
+// -------------------------------------------------------------------------
 // Derived display state
 // -------------------------------------------------------------------------
 const hasPreview = computed(() =>
-  state.phase === 'preview' ||
-  state.phase === 'confirm-import' ||
-  state.phase === 'confirm-close' ||
-  state.phase === 'confirm-erase' ||
-  state.phase === 'importing' ||
-  state.phase === 'done'
+  isPreview.value ||
+  isConfirmImport.value ||
+  isConfirmClose.value ||
+  isConfirmErase.value ||
+  isImporting.value ||
+  isDone.value
 )
 
 const previewRows = computed<PreviewRow[]>(() => {
@@ -233,8 +247,8 @@ const sheetErrors = computed<SheetError[]>(() => {
 
 const banner = computed(() => {
   if (!hasPreview.value) return null
-  if (state.phase === 'importing') return { level: 'importing' as const, text: t('bulkImport.processing') }
-  if (state.phase === 'done') {
+  if (isImporting.value) return { level: 'importing' as const, text: t('bulkImport.processing') }
+  if (state.phase === UPLOADER_PHASE.done) {
     if (state.failed === 0) return { level: 'ok' as const, text: t('bulkImport.importSuccess') }
     return { level: 'danger' as const, text: t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed }) }
   }
@@ -254,7 +268,7 @@ const banner = computed(() => {
 
 // groups multiple errors on the same row into one banner item with multiple messages
 const bannerErrors = computed<BannerErrorGroup[]>(() => {
-  if (state.phase === 'done') return []
+  if (isDone.value) return []
   const groups = new Map<number, BannerErrorGroup>()
   for (const e of sheetErrors.value) {
     if (!groups.has(e.row)) groups.set(e.row, { row: e.row + 1, worstLevel: e.level, items: [] })
@@ -269,7 +283,7 @@ const bannerErrors = computed<BannerErrorGroup[]>(() => {
 const hasErrors = computed(() => sheetErrors.value.some(e => e.level === 'error'))
 
 const bannerStats = computed<BannerStats | null>(() => {
-  if (!hasPreview.value || state.phase === 'importing' || state.phase === 'done') return null
+  if (!hasPreview.value || isImporting.value || isDone.value) return null
   return {
     documents: previewRows.value.length,
     errors: sheetErrors.value.filter(e => e.level === 'error').length,
@@ -279,8 +293,8 @@ const bannerStats = computed<BannerStats | null>(() => {
 })
 
 const rowProgressList = computed<RowProgress[]>(() =>
-  state.phase === 'importing' || state.phase === 'done'
-    ? (state).progress
+  state.phase === UPLOADER_PHASE.importing || state.phase === UPLOADER_PHASE.done
+    ? state.progress
     : []
 )
 
@@ -288,7 +302,7 @@ const liveImported = computed(() => rowProgressList.value.filter(p => p.status =
 const liveFailed = computed(() => rowProgressList.value.filter(p => p.status === 'error').length)
 
 const currentPushLabel = computed(() => {
-  if (state.phase !== 'importing') return ''
+  if (state.phase !== UPLOADER_PHASE.importing) return ''
   const { currentPush } = state
   if (currentPush === undefined) return t('bulkImport.importing')
   if (currentPush.label === 'linked') return t('bulkImport.pushingLinked', { current: currentPush.current, total: currentPush.total })
@@ -342,7 +356,7 @@ const requiredKeys = computed<Set<string>>(() => {
 // -------------------------------------------------------------------------
 function onClose () {
   _onClose()
-  if (state.phase === 'empty') emit('onClose')
+  if (isEmpty.value) emit('onClose')
 }
 
 function onForceClose () {
