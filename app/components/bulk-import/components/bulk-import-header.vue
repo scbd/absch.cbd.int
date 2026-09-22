@@ -15,13 +15,13 @@
           {{ t('title') }}
         </h1>
         <div class="small text-muted mt-1">
-          <span v-if="phase === 'empty' || phase === 'parse-error'">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
-          <span v-else-if="phase === 'parsing'">{{ t('bulkImport.reading', 'Reading file…') }}</span>
+          <span v-if="phase === UPLOADER_PHASE.empty || phase === UPLOADER_PHASE.parseError">{{ t('bulkImport.selectFile', 'Select a file to begin') }}</span>
+          <span v-else-if="phase === UPLOADER_PHASE.parsing">{{ t('bulkImport.reading', 'Reading file…') }}</span>
           <span v-else>{{ t('bulkImport.previewReady', 'Review the records below before importing') }}</span>
         </div>
       </div>
       <div
-        v-if="phase !== 'empty' && phase !== 'parsing' && phase !== 'parse-error'"
+        v-if="phase !== UPLOADER_PHASE.empty && phase !== UPLOADER_PHASE.parsing && phase !== UPLOADER_PHASE.parseError"
         class="d-inline-flex align-items-center gap-2 bg-white border rounded-2 small"
         style="padding: 5px 8px 5px 11px; color: #445;"
       >
@@ -44,7 +44,7 @@
       type="button"
       class="btn btn-outline-secondary d-flex align-items-center justify-content-center flex-shrink-0 p-0"
       style="width: 34px; height: 34px; border-radius: 7px;"
-      :disabled="phase === 'importing'" @click="emit('onClose')"
+      :disabled="phase === UPLOADER_PHASE.importing" @click="emit('onClose')"
     >
       <svg
         width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -56,6 +56,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { UPLOADER_PHASE } from '../framework/types'
 import type { UploaderPhase } from '../framework/types'
 
 defineProps<{ phase: UploaderPhase; fileName: string; rowCount: number }>()
