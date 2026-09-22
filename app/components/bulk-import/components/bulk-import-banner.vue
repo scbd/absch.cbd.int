@@ -27,14 +27,41 @@
       ><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
     </div>
     <div class="d-flex flex-column flex-grow-1 overflow-hidden" style="min-height: 0;">
-      <div
-        class="fw-semibold"
-        :class="banner.level === 'ok' ? 'bi-head--ok' : banner.level === 'importing' ? 'bi-head--importing' : 'bi-head--danger'"
-      >
-        {{ banner.text }}
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <div
+          class="fw-semibold"
+          :class="banner.level === 'ok' ? 'bi-head--ok' : banner.level === 'importing' ? 'bi-head--importing' : 'bi-head--danger'"
+        >
+          {{ banner.text }}
+        </div>
+        <template v-if="stats">
+          <span class="fw-semibold">{{ stats.documents }} {{ t('bulkImport.documents', 'documents') }}</span>
+          <span class="d-inline-flex align-items-center gap-1 fw-semibold text-danger">
+            <span class="bi-stat__dot bg-danger" />{{ stats.errors }} {{ t('bulkImport.countErrors', 'errors') }}
+          </span>
+          <span class="d-inline-flex align-items-center gap-1 fw-semibold text-warning">
+            <span class="bi-stat__dot bg-warning" />{{ stats.warnings }} {{ t('bulkImport.countWarnings', 'warnings') }}
+          </span>
+          <span class="d-inline-flex align-items-center gap-1 fw-semibold text-success">
+            <span class="bi-stat__dot bg-success" />{{ stats.ready }} {{ t('bulkImport.countReady', 'ready') }}
+          </span>
+        </template>
+        <span class="flex-grow-1" />
+        <button
+          v-if="bannerErrors.length"
+          type="button" class="bi-collapse-btn d-inline-flex align-items-center gap-1"
+          @click="collapsed = !collapsed"
+        >
+          {{ collapsed ? t('bulkImport.showDetails', 'Show details') : t('bulkImport.hideDetails', 'Hide details') }}
+          <svg
+            width="12" height="12" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+            :style="collapsed ? '' : 'transform: rotate(180deg);'"
+          ><polyline points="6 9 12 15 18 9" /></svg>
+        </button>
       </div>
       <ul
-        v-if="bannerErrors.length"
+        v-if="bannerErrors.length && !collapsed"
         class="list-unstyled mt-2 mb-0 p-0 d-flex flex-column gap-1"
         style="max-height: 180px; overflow-y: auto;"
       >
@@ -65,7 +92,9 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import type { BannerStats } from '../framework/types'
 
 export interface BannerErrorItem {
   fieldLabel: string
@@ -82,9 +111,12 @@ export interface BannerErrorGroup {
 defineProps<{
   banner: { level: 'ok' | 'danger' | 'importing'; text: string } | null
   bannerErrors: BannerErrorGroup[]
+  stats: BannerStats | null
 }>()
 
 const { t } = useI18n()
+
+const collapsed = ref(false)
 </script>
 
 <style scoped>
@@ -103,4 +135,10 @@ const { t } = useI18n()
 .bi-rk--warn  { border-color: var(--warn-line) !important;   color: #7a5010; }
 .bi-hint--ok   { color: #1a5c35; }
 .bi-hint--warn { color: #7a5010; }
+.bi-stat__dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.bi-collapse-btn {
+  background: none; border: 1px solid currentColor; border-radius: 5px;
+  color: inherit; font-size: 12px; font-weight: 600; padding: 2px 8px; cursor: pointer;
+}
+.bi-collapse-btn svg { transition: transform .15s ease; }
 </style>
