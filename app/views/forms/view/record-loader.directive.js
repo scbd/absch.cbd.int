@@ -52,7 +52,7 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment','nationalReport',
 					'nationalTarget',"implementationActivity",'strategicPlanIndicator',
 					'undbActor','undbParty','undbAction','undbPartner','event','marineEbsa',
-					'resourceMobilisation','resourceMobilisation2020','nationalReport6', 'nbsap'];
+					'resourceMobilisation','resourceMobilisation2020','nationalReport6', 'nbsap', 'absLegalFramework'];
 		
 				$scope.hideClose = false;
 				if($attr.hideClose){ 

@@ -35,7 +35,10 @@
         </edit-form>
 
         <review-form>
-          <div ng-if="shareVueComponent && tab == 'review'">
+          <div
+            ng-if="shareVueComponent && tab === 'review' || tab === 'publish'"
+            class="mb-5"
+          >
             <legal-framework-overview
               ng-vue="shareVueComponent"
               :document-info="reactive(reviewData)"

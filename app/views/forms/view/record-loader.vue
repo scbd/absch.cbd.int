@@ -33,6 +33,11 @@
                     :document-info="documentInfo" :locale="locale"></resource-mobilisation-2020 >
             <national-report-6 v-if="documentInfo?.type == 'nationalReport6'"  
                     :document-info="documentInfo" :locale="locale"></national-report-6>  
+            <legal-framework-overview
+              v-if="documentInfo?.type == 'absLegalFramework'"
+              :document-info="documentInfo"
+              :locale="locale"
+            />
             <!-- loading state via #fallback slot -->
             <!-- <template #fallback>
 
@@ -60,6 +65,7 @@
     import financialReport2015 from '~/views/forms/view/chm/financial-report-2015.vue'
     import resourceMobilisation2020 from '~/views/forms/view/chm/resource-mobilisation-2020.vue' 
     import nationalReport6 from '~/views/forms/view/chm/national-report-6.vue'
+    import legalFrameworkOverview from '~/views/forms/view/abs/legal-framework-overview.vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
