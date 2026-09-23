@@ -1,0 +1,20 @@
+{
+  "explore": "Explore",
+  "recordType": "Record type",
+  "country": "Country",
+  "region": "Region",
+  "allCountries": "All countries",
+  "allRegions": "All regions",
+  "loadingLocations": "Loading locations...",
+  "geographyError": "Unable to load countries and regions.",
+  "appliedFilters": "Applied filters",
+  "removeFilter": "Remove {label} filter",
+  "countryFilter": "Country: {name}",
+  "regionFilter": "Region: {name}",
+  "overview": "Overview",
+  "characteristics": "Record characteristics",
+  "trends": "Trends",
+  "geography": "Geographic distribution",
+  "analysis": "Analysis",
+  "compliance": "Compliance"
+}
