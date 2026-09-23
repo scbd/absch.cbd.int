@@ -27,5 +27,8 @@
     "trainingMaterials": "Training Materials",
     "protocol": "Protocol",
     "nagoya": "Nagoya",
-    "nagoyaProtocol": "Nagoya Protocol"
+    "nagoyaProtocol": "Nagoya Protocol",
+    "explore": "Explore",
+    "ircc": "Certificates (IRCC)",
+    "cpc": "Checkpoint communiqués (CPC)"
 }

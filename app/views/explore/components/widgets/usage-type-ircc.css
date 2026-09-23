@@ -1,0 +1,97 @@
+.usage-type-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.usage-type-chart {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex: 0 0 150px;
+  border-radius: 50%;
+}
+
+.usage-type-chart-centre {
+  position: absolute;
+  inset: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.usage-type-chart-centre strong {
+  font-size: 1.5rem;
+}
+
+.usage-type-chart-centre small {
+  color: #6c757d;
+}
+
+.usage-type-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.usage-type-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.usage-type-button {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.usage-type-button:hover,
+.usage-type-button:focus-visible {
+  background-color: #f8f9fa;
+}
+
+.usage-type-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.usage-type-button.selected {
+  border-color: #6c757d;
+  background-color: #f8f9fa;
+}
+
+.usage-type-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  border-radius: 50%;
+}
+
+.usage-type-dot-commercial {
+  background-color: #0d6efd;
+}
+
+.usage-type-dot-non-commercial {
+  background-color: #198754;
+}
+
+.usage-type-dot-confidential {
+  background-color: #6f42c1;
+}
+
+@media (max-width: 575.98px) {
+  .usage-type-content {
+    flex-direction: column;
+  }
+}
