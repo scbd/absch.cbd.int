@@ -7,7 +7,7 @@
             #
           </th>
           <th class="bi-pin bi-pin--1 bi-grp" rowspan="2">
-            {{ t('bulkImport.status', 'Status') }}
+            {{ t('bulkImport.rowStatus', 'Row status') }}
           </th>
           <th
             v-for="(key, i) in pinnedColumnKeys" :key="key"
@@ -157,7 +157,7 @@ function isLongText (v: string): boolean {
   border: 1px solid rgba(255,255,255,.08);
   vertical-align: top;
 }
-.bi-table td { border-color: var(--line-2); }
+.bi-table td { border-color: var(--line-2); border-bottom-color: #c6d2d9; }
 .bi-table th, .bi-table td { cursor: default; }
 .bi-table::before, .bi-table::after,
 .bi-table th::before, .bi-table th::after,

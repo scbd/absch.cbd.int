@@ -54,6 +54,13 @@ export interface PreviewRow {
   status: 'ready' | 'warn' | 'error'
 }
 
+export interface BannerStats {
+  documents: number
+  errors: number
+  warnings: number
+  ready: number
+}
+
 export interface PreviewData {
   rows: PreviewRow[]
   columnKeys: string[]
