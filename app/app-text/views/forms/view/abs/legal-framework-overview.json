@@ -1,0 +1,65 @@
+{
+  "generalInformation": "General Information",
+  "country": "1. Country",
+
+  "jurisdictionSectionTitle": "Jurisdiction of the Legal Framework",
+  "jurisdiction": "2. Jurisdiction covered by the ABS legal framework",
+  "jurisdictionName": "Name",
+  "jurisdictionScopeDescription": "3. Scope of the ABS framework",
+
+  "generalAbsMeasuresTitle": "General ABS Measures",
+  "establishedMeasure": "4. To what extent have legislative, administrative or policy measures on ABS been established for this jurisdiction?",
+
+  "accessToGeneticResourcesTitle": "Access to genetic resources",
+  "agrSubjectToPic": "5. Is access to genetic resources subject to prior informed consent (PIC)?",
+  "agrCommercialPermitRequired": "6. Is an ABS permit or its equivalent required for the commercial utilisation of genetic resources?",
+  "agrCommercialPermitException": "Are there any exceptions to this requirement?",
+  "agrNonCommercialPermitRequired": "7. Is an ABS permit or its equivalent required for the non-commercial utilisation of genetic resources?",
+  "agrNonCommercialPermitException": "Are there any exceptions to this requirement?",
+
+  "iplcSectionTitle": "Access involving indigenous peoples and local communities (IPLCs)",
+  "iplcPresent": "8. Are there indigenous peoples and local communities in this jurisdiction?",
+
+  "tkAccessTitle": "Access to traditional knowledge associated with genetic resources",
+  "tkSubjectToPic": "9. Are measures in place to ensure that traditional knowledge associated with genetic resources is accessed with the prior informed consent, or approval and involvement, of the indigenous peoples and local communities (IPLCs) that hold the knowledge?",
+  "tkCommercialPermitRequired": "10. Is an ABS permit or its equivalent required to access traditional knowledge associated with genetic resources for commercial utilisation?",
+  "tkCommercialPermitException": "Are there any exceptions to this requirement?",
+  "tkNonCommercialPermitRequired": "11. Is an ABS permit or its equivalent required to access traditional knowledge associated with genetic resources for non-commercial utilisation?",
+  "tkNonCommercialPermitException": "Are there any exceptions to this requirement?",
+
+  "iplcGrTitle": "Access to genetic resources held by indigenous peoples and local communities (IPLCs)",
+  "iplcDomesticLawRecognizesRight": "12. Does the applicable domestic law recognise the right of indigenous peoples and local communities (IPLCs) in this jurisdiction to grant access to genetic resources?",
+  "iplcAccessBasedOnPic": "13. Are measures in place to ensure that access to genetic resources is based on the prior informed consent (PIC), or approval and involvement, of the indigenous peoples and local communities (IPLCs) concerned?",
+  "iplcCommercialPermitRequired": "14. Is an ABS permit or its equivalent required for commercial utilization of genetic resources held by indigenous peoples and local communities (IPLCs)?",
+  "iplcCommercialPermitException": "Are there any exceptions to this requirement?",
+  "iplcNonCommercialPermitRequired": "15. Is an ABS permit or its equivalent required for non-commercial utilization of genetic resources held by indigenous peoples and local communities (IPLCs)?",
+  "iplcNonCommercialPermitException": "Are there any exceptions to this requirement?",
+
+  "article8Title": "Special considerations (Article 8)",
+  "article8ResearchSupport": "16. Do the ABS measures for this jurisdiction promote and encourage research that contributes to the conservation and sustainable use of biodiversity?",
+  "article8SimplifiedAccessMeasures": "Does this include simplified access measures for non-commercial research?",
+  "article8Emergencies": "17. Do the ABS measures for this jurisdiction take account of present or imminent emergencies that threaten or damage human, animal or plant health?",
+  "article8FoodSecurity": "18. Do the ABS measures for this jurisdiction take into account the importance of genetic resources for food and agriculture and their special role in food security?",
+
+  "complianceTitle": "Measures on compliance with domestic legislation or regulatory requirements on ABS and monitoring the utilization of genetic resources",
+  "article15Implemented": "19. Are appropriate, effective and proportionate measures in place to ensure that genetic resources utilised in this jurisdiction were accessed in accordance with the prior informed consent and mutually agreed terms required by the domestic ABS legislation or regulatory requirements of the other Party?",
+  "article16Implemented": "20. Are appropriate, effective and proportionate measures in place to ensure that traditional knowledge associated with genetic resources and utilised in this jurisdiction was accessed in accordance with applicable requirements?",
+  "article17Implemented": "21. Are users of genetic resources required to provide the information specified in Article 17, paragraph 1(a)(i), to one or more designated checkpoints in this jurisdiction?",
+
+  "faqTitle": "Frequently Asked Questions",
+  "faqQuestion": "FAQ",
+  "faqAnswer": "Answer",
+
+  "additionalInfoTitle": "Additional information",
+  "additionalInformation": "Additional information",
+  "additionalDocuments": "Supporting documents and links",
+
+  "yesAllCases": "Yes, all measures are in place",
+  "yesSomeCases": "Yes, to some extent",
+  "agrSubjectToPicYesAllCases": "Yes, in all cases",
+  "agrSubjectToPicYesSomeCases": "Yes, in some cases",
+  "yes": "Yes",
+  "no": "No",
+  "notApplicable": "Not applicable",
+  "explanation": "Explanation"
+}
