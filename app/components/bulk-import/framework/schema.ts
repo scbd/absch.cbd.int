@@ -13,9 +13,12 @@ import { getCountries } from '~/api/countries'
 
 interface CountryRecord { code: string; name: Partial<Record<LanguageCode, string>> }
 
+// Module-level rather than a static class field: the build pipeline's Babel
+// stage cannot parse the static blocks esbuild emits for static fields.
+let countriesCachePromise: Promise<CountryRecord[]> | null = null
+
 export abstract class Schema implements SchemaInstance {
   protected readonly language: LanguageCode
-  private static countriesCachePromise: Promise<CountryRecord[]> | undefined = undefined
 
   constructor (
     protected readonly row: RawRow,
@@ -132,8 +135,8 @@ export abstract class Schema implements SchemaInstance {
     if (typeof country !== 'string' || country.trim() === '') return undefined
     const value = country.trim()
     // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- external API returns unknown shape
-    Schema.countriesCachePromise ??= (getCountries as ()=> Promise<unknown>)() as Promise<CountryRecord[]>
-    const countries = await Schema.countriesCachePromise
+    countriesCachePromise ??= (getCountries as ()=> Promise<unknown>)() as Promise<CountryRecord[]>
+    const countries = await countriesCachePromise
     const match: CountryRecord | undefined = /^[a-z]{2}$/i.test(value)
       ? countries.find((c: CountryRecord) => c.code.toLowerCase() === value.toLowerCase())
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Object.values on Partial<Record> can yield undefined at runtime
