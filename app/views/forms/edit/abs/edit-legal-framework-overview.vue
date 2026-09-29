@@ -56,8 +56,6 @@
       </legend>
       <div class="help-info">
         {{ t("jurisdictionSectionInfo") }}
-        <br>
-        {{ t("jurisdictionRecordUniquenessInfo") }}
       </div>
 
       <div class="row">
@@ -71,17 +69,24 @@
             required
             :caption="t('jurisdiction')"
           >
-            <ng
-              v-model:ng-model="legalFrameworkDocument.jurisdiction"
-              v-vue-ng:afc-autocomplete
-              name="jurisdiction"
-              required
-              :source="jurisdictions"
-              :placeholder="t('selectJurisdiction')"
-              :selectbox="true"
-              :filter="genericFilter"
-              :mapping="genericMapping"
-            />
+            <div>
+              <div class="help-info">
+                {{ t("jurisdictionRecordUniquenessInfo") }}
+                <br>
+                {{ t("jurisdictionSubNationalInfo") }}
+              </div>
+              <ng
+                v-model:ng-model="legalFrameworkDocument.jurisdiction"
+                v-vue-ng:afc-autocomplete
+                name="jurisdiction"
+                required
+                :source="jurisdictions"
+                :placeholder="t('selectJurisdiction')"
+                :selectbox="true"
+                :filter="genericFilter"
+                :mapping="genericMapping"
+              />
+            </div>
           </ng>
         </div>
         <div
@@ -112,13 +117,18 @@
             required
             :caption="t('jurisdictionScopeDescription')"
           >
-            <ng
-              v-model:ng-model="legalFrameworkDocument.jurisdictionImplementation"
-              v-vue-ng:km-textbox-ml
-              required
-              rows="3"
-              :locales="legalFrameworkDocument.header.languages"
-            />
+            <div>
+              <div class="help-info">
+                {{ t("jurisdictionScopeDescriptionInfo") }}
+              </div>
+              <ng
+                v-model:ng-model="legalFrameworkDocument.jurisdictionImplementation"
+                v-vue-ng:km-textbox-ml
+                required
+                rows="3"
+                :locales="legalFrameworkDocument.header.languages"
+              />
+            </div>
           </ng>
         </div>
       </div>
@@ -134,13 +144,18 @@
             required
             :caption="t('establishedMeasure')"
           >
-            <ng
-              v-model:ng-model="legalFrameworkDocument.establishedMeasure"
-              v-vue-ng:nr-yes-no
-              required
-              :question="establishedMeasureQuestion"
-              :locales="legalFrameworkDocument.header.languages"
-            />
+            <div>
+              <div class="help-info">
+                {{ t("establishedMeasureInfo") }}
+              </div>
+              <ng
+                v-model:ng-model="legalFrameworkDocument.establishedMeasure"
+                v-vue-ng:nr-yes-no
+                required
+                :question="establishedMeasureQuestion"
+                :locales="legalFrameworkDocument.header.languages"
+              />
+            </div>
           </ng>
         </div>
       </div>
@@ -231,60 +246,10 @@
       </div>
     </section>
 
-    <section class="card mb-4 p-4">
-      <legend>{{ t("complianceTitle") }}</legend>
-
-      <div class="row">
-        <div class="col-sm-12">
-          <ng
-            v-vue-ng:km-control-group
-            name="article15Implemented"
-            :caption="t('article15Implemented')"
-          >
-            <ng
-              v-model:ng-model="legalFrameworkDocument.article15Implemented"
-              v-vue-ng:nr-yes-no
-              :question="article15ImplementedQuestion"
-              :locales="legalFrameworkDocument.header.languages"
-            />
-          </ng>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12">
-          <ng
-            v-vue-ng:km-control-group
-            name="article16Implemented"
-            :caption="t('article16Implemented')"
-          >
-            <ng
-              v-model:ng-model="legalFrameworkDocument.article16Implemented"
-              v-vue-ng:nr-yes-no
-              :question="article16ImplementedQuestion"
-              :locales="legalFrameworkDocument.header.languages"
-            />
-          </ng>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12">
-          <ng
-            v-vue-ng:km-control-group
-            name="article17Implemented"
-            :caption="t('article17Implemented')"
-          >
-            <ng
-              v-model:ng-model="legalFrameworkDocument.article17Implemented"
-              v-vue-ng:nr-yes-no
-              :question="article17ImplementedQuestion"
-              :locales="legalFrameworkDocument.header.languages"
-            />
-          </ng>
-        </div>
-      </div>
-    </section>
+    <edit-legal-framework-overview-compliance
+      v-model="legalFrameworkDocument"
+      :locales="legalFrameworkDocument.header.languages"
+    />
 
     <section class="card mb-4 p-4">
       <legend>{{ t("faqTitle") }}</legend>
@@ -357,6 +322,7 @@ import type { LString } from '~/types/languages'
 import legalFrameworkOverviewFaqs from '~/components/forms/edit/abs/lfo/legal-framework-overview-faqs.vue'
 import editLegalFrameworkOverviewAccess from '~/components/forms/edit/abs/lfo/edit-legal-framework-overview-access.vue'
 import editLegalFrameworkOverviewIplc from '~/components/forms/edit/abs/lfo/edit-legal-framework-overview-iplc.vue'
+import editLegalFrameworkOverviewCompliance from '~/components/forms/edit/abs/lfo/edit-legal-framework-overview-compliance.vue'
 import { isYesOrSome, threeWayOptions as sharedThreeWayOptions, fourWayOptions as sharedFourWayOptions } from '~/components/forms/edit/abs/lfo/legal-framework-overview-options'
 
 // Model
@@ -414,8 +380,8 @@ const jurisdictionCustomValue = computed({
 })
 
 // Methods
-function threeWayOptions (labels?: { true?: string, trueSome?: string }) {
-  return sharedThreeWayOptions(t, labels)
+function threeWayOptions (labels?: { true?: string, trueSome?: string }, footnote?: string) {
+  return sharedThreeWayOptions(t, labels, footnote)
 }
 
 function fourWayOptions (labels?: { true?: string, trueSome?: string }) {
@@ -438,7 +404,7 @@ const article8ResearchSupportQuestion = computed(() => ({
   key: 'article8ResearchSupport',
   options: fourWayOptions(),
   additionalKeyName: 'article8ResearchSupport.additionalInformation',
-  additionalMandatoryValues: ['true.some', 'false']
+  additionalMandatoryValues: ['true.some']
 }))
 
 const article8SimplifiedAccessMeasuresQuestion = computed(() => ({
@@ -450,37 +416,16 @@ const article8SimplifiedAccessMeasuresQuestion = computed(() => ({
 
 const article8EmergenciesQuestion = computed(() => ({
   key: 'article8Emergencies',
-  options: threeWayOptions(),
+  options: threeWayOptions(undefined, t('article8EmergenciesInfo')),
   additionalKeyName: 'article8Emergencies.additionalInformation',
-  additionalMandatoryValues: ['true.some', 'false']
+  additionalMandatoryValues: ['true.some']
 }))
 
 const article8FoodSecurityQuestion = computed(() => ({
   key: 'article8FoodSecurity',
-  options: threeWayOptions(),
+  options: threeWayOptions(undefined, t('article8FoodSecurityInfo')),
   additionalKeyName: 'article8FoodSecurity.additionalInformation',
-  additionalMandatoryValues: ['true.some', 'false']
-}))
-
-const article15ImplementedQuestion = computed(() => ({
-  key: 'article15Implemented',
-  options: threeWayOptions(),
-  additionalKeyName: 'article15Implemented.additionalInformation',
-  additionalMandatoryValues: []
-}))
-
-const article16ImplementedQuestion = computed(() => ({
-  key: 'article16Implemented',
-  options: threeWayOptions(),
-  additionalKeyName: 'article16Implemented.additionalInformation',
-  additionalMandatoryValues: []
-}))
-
-const article17ImplementedQuestion = computed(() => ({
-  key: 'article17Implemented',
-  options: threeWayOptions(),
-  additionalKeyName: 'article17Implemented.additionalInformation',
-  additionalMandatoryValues: []
+  additionalMandatoryValues: ['true.some']
 }))
 
 function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFrameworkDocument | undefined {
@@ -497,11 +442,4 @@ angularGetCleanDocument({
   getCleanDocument
 })
 </script>
-<style scoped>
-/* Matches the darker gray of the national-report edit form's disabled sub-questions
-   (.disabled + the block-region dimmer overlay stacked on top, template.css:1018-1053),
-   without pulling in that loading-spinner directive just for its color effect. */
-.disabled-section {
-  background-color: rgba(0, 0, 0, 0.26);
-}
-</style>
+<style scoped src="./edit-legal-framework-overview.css"></style>

@@ -70,20 +70,20 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.tkCommercialPermitRequired) }"
+      :class="{ 'disabled-section': !isAnswered(document.tkCommercialPermitRequired) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
           v-vue-ng:km-control-group
           name="tkCommercialPermitException"
-          :caption="t('permitException')"
+          :caption="t('tkCommercialPermitException')"
         >
           <ng
             v-model:ng-model="document.tkCommercialPermitException"
             v-vue-ng:nr-yes-no
             :question="tkCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.tkCommercialPermitRequired)"
+            @ng-disabled="() => !isAnswered(document.tkCommercialPermitRequired) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -111,20 +111,20 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.tkNonCommercialPermitRequired) }"
+      :class="{ 'disabled-section': !isAnswered(document.tkNonCommercialPermitRequired) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
           v-vue-ng:km-control-group
           name="tkNonCommercialPermitException"
-          :caption="t('permitException')"
+          :caption="t('tkNonCommercialPermitException')"
         >
           <ng
             v-model:ng-model="document.tkNonCommercialPermitException"
             v-vue-ng:nr-yes-no
             :question="tkNonCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.tkNonCommercialPermitRequired)"
+            @ng-disabled="() => !isAnswered(document.tkNonCommercialPermitRequired) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -132,7 +132,10 @@
 
     <legend>{{ t("iplcGrTitle") }}</legend>
 
-    <div class="row">
+    <div
+      class="row"
+      :class="{ 'disabled-section': !isYes(document.iplcPresent) }"
+    >
       <div class="col-sm-12">
         <ng
           v-vue-ng:km-control-group
@@ -144,6 +147,7 @@
             v-vue-ng:nr-yes-no
             :question="iplcDomesticLawRecognizesRightQuestion"
             :locales="locales"
+            @ng-disabled="() => !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -158,7 +162,7 @@
 
     <div
       class="row"
-      :class="{ 'disabled-section': !isYesOrSome(document.iplcDomesticLawRecognizesRight) }"
+      :class="{ 'disabled-section': !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
@@ -171,7 +175,7 @@
             v-vue-ng:nr-yes-no
             :question="iplcAccessBasedOnPicQuestion"
             :locales="locales"
-            @ng-disabled="() => !isYesOrSome(document.iplcDomesticLawRecognizesRight)"
+            @ng-disabled="() => !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -179,7 +183,7 @@
 
     <div
       class="row"
-      :class="{ 'disabled-section': !isYesOrSome(document.iplcDomesticLawRecognizesRight) }"
+      :class="{ 'disabled-section': !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
@@ -192,27 +196,27 @@
             v-vue-ng:nr-yes-no
             :question="iplcCommercialPermitRequiredQuestion"
             :locales="locales"
-            @ng-disabled="() => !isYesOrSome(document.iplcDomesticLawRecognizesRight)"
+            @ng-disabled="() => !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.iplcCommercialPermitRequired) }"
+      :class="{ 'disabled-section': !isAnswered(document.iplcCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
           v-vue-ng:km-control-group
           name="iplcCommercialPermitException"
-          :caption="t('permitException')"
+          :caption="t('iplcCommercialPermitException')"
         >
           <ng
             v-model:ng-model="document.iplcCommercialPermitException"
             v-vue-ng:nr-yes-no
             :question="iplcCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.iplcCommercialPermitRequired)"
+            @ng-disabled="() => !isAnswered(document.iplcCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -220,7 +224,7 @@
 
     <div
       class="row"
-      :class="{ 'disabled-section': !isYesOrSome(document.iplcDomesticLawRecognizesRight) }"
+      :class="{ 'disabled-section': !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
@@ -233,27 +237,27 @@
             v-vue-ng:nr-yes-no
             :question="iplcNonCommercialPermitRequiredQuestion"
             :locales="locales"
-            @ng-disabled="() => !isYesOrSome(document.iplcDomesticLawRecognizesRight)"
+            @ng-disabled="() => !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.iplcNonCommercialPermitRequired) }"
+      :class="{ 'disabled-section': !isAnswered(document.iplcNonCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
           v-vue-ng:km-control-group
           name="iplcNonCommercialPermitException"
-          :caption="t('permitException')"
+          :caption="t('iplcNonCommercialPermitException')"
         >
           <ng
             v-model:ng-model="document.iplcNonCommercialPermitException"
             v-vue-ng:nr-yes-no
             :question="iplcNonCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.iplcNonCommercialPermitRequired)"
+            @ng-disabled="() => !isAnswered(document.iplcNonCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -297,14 +301,14 @@ const iplcPresentQuestion = computed(() => ({
 
 const tkSubjectToPicQuestion = computed(() => ({
   key: 'tkSubjectToPic',
-  options: threeWayOptions(t),
+  options: threeWayOptions(t, undefined, t('tkSubjectToPicInfo')),
   additionalKeyName: 'tkSubjectToPic.additionalInformation',
   additionalMandatoryValues: []
 }))
 
 const tkCommercialPermitRequiredQuestion = computed(() => ({
   key: 'tkCommercialPermitRequired',
-  options: twoWayOptions(t),
+  options: twoWayOptions(t, t('tkCommercialPermitRequiredInfo')),
   additionalKeyName: 'tkCommercialPermitRequired.additionalInformation',
   additionalMandatoryValues: []
 }))
@@ -318,7 +322,7 @@ const tkCommercialPermitExceptionQuestion = computed(() => ({
 
 const tkNonCommercialPermitRequiredQuestion = computed(() => ({
   key: 'tkNonCommercialPermitRequired',
-  options: twoWayOptions(t),
+  options: twoWayOptions(t, t('tkNonCommercialPermitRequiredInfo')),
   additionalKeyName: 'tkNonCommercialPermitRequired.additionalInformation',
   additionalMandatoryValues: []
 }))

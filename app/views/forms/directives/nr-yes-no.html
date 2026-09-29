@@ -6,13 +6,13 @@
             <span ng-bind-html="option.title"></span>
         </label>
     </div>
-    <div class="pt-2" ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value">
+    <div class="pt-2 ps-4" ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value">
         <div class="km-control-group" name="{{ question.additionalKeyName || 'question' + question.key + '_additionalInformation'}}" required="{{isAdditionalInformationRequired()}}" ng-attr-caption="{{getNumberedCaption()}}">
         <div ng-if="hasAdditionalInformation.footnote" ng-bind-html="hasAdditionalInformation.footnote"  class="small text-muted"></div>
-            <div ng-if="hasAdditionalInformation.type == 'lstring'" km-textbox-ml name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales" 
-                ng-change="updateAnswer()"></div>
-            <div ng-if="hasAdditionalInformation.type == 'lstringRte'" km-rich-textbox rows="4" name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales" 
-                ng-change="updateAnswer()"></div>
+            <div ng-if="hasAdditionalInformation.type == 'lstring'" km-textbox-ml name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales"
+                ng-change="updateAnswer()" ng-disabled="ngDisabledFn()"></div>
+            <div ng-if="hasAdditionalInformation.type == 'lstringRte'" km-rich-textbox rows="4" name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales"
+                ng-change="updateAnswer()" ng-disabled="ngDisabledFn()"></div>
         </div>
     </div>
 

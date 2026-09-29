@@ -52,20 +52,20 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.agrCommercialPermitRequired) }"
+      :class="{ 'disabled-section': !isAnswered(document.agrCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic) }"
     >
       <div class="col-sm-12">
         <ng
           v-vue-ng:km-control-group
           name="agrCommercialPermitException"
-          :caption="t('permitException')"
+          :caption="t('agrCommercialPermitException')"
         >
           <ng
             v-model:ng-model="document.agrCommercialPermitException"
             v-vue-ng:nr-yes-no
             :question="agrCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.agrCommercialPermitRequired)"
+            @ng-disabled="() => !isAnswered(document.agrCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic)"
           />
         </ng>
       </div>
@@ -95,20 +95,20 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.agrNonCommercialPermitRequired) }"
+      :class="{ 'disabled-section': !isAnswered(document.agrNonCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic) }"
     >
       <div class="col-sm-12">
         <ng
           v-vue-ng:km-control-group
           name="agrNonCommercialPermitException"
-          :caption="t('permitException')"
+          :caption="t('agrNonCommercialPermitException')"
         >
           <ng
             v-model:ng-model="document.agrNonCommercialPermitException"
             v-vue-ng:nr-yes-no
             :question="agrNonCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.agrNonCommercialPermitRequired)"
+            @ng-disabled="() => !isAnswered(document.agrNonCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic)"
           />
         </ng>
       </div>
@@ -154,7 +154,7 @@ const agrSubjectToPicQuestion = computed(() => ({
 
 const agrCommercialPermitRequiredQuestion = computed(() => ({
   key: 'agrCommercialPermitRequired',
-  options: twoWayOptions(t),
+  options: twoWayOptions(t, t('agrCommercialPermitRequiredInfo')),
   additionalKeyName: 'agrCommercialPermitRequired.additionalInformation',
   additionalMandatoryValues: []
 }))
@@ -168,7 +168,7 @@ const agrCommercialPermitExceptionQuestion = computed(() => ({
 
 const agrNonCommercialPermitRequiredQuestion = computed(() => ({
   key: 'agrNonCommercialPermitRequired',
-  options: twoWayOptions(t),
+  options: twoWayOptions(t, t('agrNonCommercialPermitRequiredInfo')),
   additionalKeyName: 'agrNonCommercialPermitRequired.additionalInformation',
   additionalMandatoryValues: []
 }))
