@@ -4,13 +4,13 @@
             <i class="fa fa-cog fa-spin fa-lg"></i> 
             {{ t("loading") }}...
         </div>
-        <div v-if="!loading && viewArticle">
+        <div v-if="!loading">
             <cbd-add-new-view-article v-if="showEdit && hasEditRights" 
                 :tags="tags" :admin-tags="adminTags" :custom-tags="customTags" :id="(viewArticle||{})._id" :target="target"
                 class="btn btn-secondary float-end">
             </cbd-add-new-view-article>         
             
-            <cbd-view-article :article="viewArticle" :show-cover-image="showCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
+            <cbd-view-article v-if="viewArticle" :article="viewArticle" :show-cover-image="showCoverImage" :cover-image-size="coverImageSize"></cbd-view-article>
         </div>
 
         <div v-if="!loading && !viewArticle" class="article-not-found-section">

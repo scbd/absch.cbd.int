@@ -17,6 +17,8 @@
   "countReady": "ready",
   "showDetails": "Show details",
   "hideDetails": "Hide details",
+  "showInfo": "Show info",
+  "noArticle": "No help article has been added for this document type yet.",
   "rowStatus": "Row status",
   "doneMsg": "Done — {imported} created, {failed} failed.",
   "importSuccess": "Import successful",
