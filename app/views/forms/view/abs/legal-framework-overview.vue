@@ -3,30 +3,303 @@
     id="Record"
     class="record"
   >
-    <div
-      class="record-body bg-white"
-    >
-      <document-date
-        :document-info="documentInfo"
-      />
+    <div class="record-body bg-white">
+      <document-date :document-info="documentInfo" />
 
       <section>
-        <legend>{{ t('generalInformation') }} </legend>
-        <div v-if="legalFrameworkDocument?.countries">
-          <label>{{ t('relatedCountries') }}</label>
+        <legend>{{ t('generalInformation') }}</legend>
+        <div v-if="legalFrameworkDocument?.government">
+          <label>{{ t('country') }}</label>
           <div class="km-value">
-            <li
-              v-for="term in legalFrameworkDocument.countries"
-              :key="term"
-            >
-              <km-term
-                :value="term"
-                :locale="locale"
-              />
-            </li>
+            <km-term
+              :value="legalFrameworkDocument.government"
+              :locale="locale"
+            />
           </div>
         </div>
       </section>
+
+      <section>
+        <legend>{{ t('jurisdictionSectionTitle') }}</legend>
+        <div v-if="legalFrameworkDocument?.jurisdiction">
+          <label>{{ t('jurisdiction') }}</label>
+          <div class="km-value">
+            <km-term
+              :value="legalFrameworkDocument.jurisdiction"
+              :locale="locale"
+            />
+          </div>
+        </div>
+        <div v-if="legalFrameworkDocument?.jurisdiction?.customValue">
+          <label>{{ t('jurisdictionName') }}</label>
+          <div class="km-value">
+            <ng
+              v-vue-ng:km-value-ml
+              :value="legalFrameworkDocument.jurisdiction.customValue"
+              :locales="locale"
+            />
+          </div>
+        </div>
+        <div v-if="legalFrameworkDocument?.jurisdictionImplementation">
+          <label>{{ t('jurisdictionScopeDescription') }}</label>
+          <div class="km-value">
+            <ng
+              v-vue-ng:km-value-ml
+              :value="legalFrameworkDocument.jurisdictionImplementation"
+              :locales="locale"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <legend>{{ t('generalAbsMeasuresTitle') }}</legend>
+        <response-value
+          :caption="t('establishedMeasure')"
+          :response="legalFrameworkDocument?.establishedMeasure"
+          :options="threeWayOptions({ true: t('yesAllCases') })"
+          :locale="locale"
+        />
+      </section>
+
+      <section>
+        <legend>{{ t('accessToGeneticResourcesTitle') }}</legend>
+        <response-value
+          :caption="t('agrSubjectToPic')"
+          :response="legalFrameworkDocument?.agrSubjectToPic"
+          :options="threeWayOptions({ true: t('agrSubjectToPicYesAllCases'), trueSome: t('agrSubjectToPicYesSomeCases') })"
+          :locale="locale"
+        />
+        <template v-if="isYesOrSome(legalFrameworkDocument?.agrSubjectToPic)">
+          <response-value
+            :caption="t('agrCommercialPermitRequired')"
+            :response="legalFrameworkDocument?.agrCommercialPermitRequired"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            v-if="isAnswered(legalFrameworkDocument?.agrCommercialPermitRequired)"
+            :caption="t('agrCommercialPermitException')"
+            :response="legalFrameworkDocument?.agrCommercialPermitException"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            :caption="t('agrNonCommercialPermitRequired')"
+            :response="legalFrameworkDocument?.agrNonCommercialPermitRequired"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            v-if="isAnswered(legalFrameworkDocument?.agrNonCommercialPermitRequired)"
+            :caption="t('agrNonCommercialPermitException')"
+            :response="legalFrameworkDocument?.agrNonCommercialPermitException"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+        </template>
+      </section>
+
+      <section>
+        <legend>{{ t('iplcSectionTitle') }}</legend>
+        <response-value
+          :caption="t('iplcPresent')"
+          :response="legalFrameworkDocument?.iplcPresent"
+          :options="twoWayOptions()"
+          :locale="locale"
+        />
+
+        <template v-if="isYes(legalFrameworkDocument?.iplcPresent)">
+          <h4>{{ t('tkAccessTitle') }}</h4>
+          <response-value
+            :caption="t('tkSubjectToPic')"
+            :response="legalFrameworkDocument?.tkSubjectToPic"
+            :options="threeWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            :caption="t('tkCommercialPermitRequired')"
+            :response="legalFrameworkDocument?.tkCommercialPermitRequired"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            v-if="isAnswered(legalFrameworkDocument?.tkCommercialPermitRequired)"
+            :caption="t('tkCommercialPermitException')"
+            :response="legalFrameworkDocument?.tkCommercialPermitException"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            :caption="t('tkNonCommercialPermitRequired')"
+            :response="legalFrameworkDocument?.tkNonCommercialPermitRequired"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            v-if="isAnswered(legalFrameworkDocument?.tkNonCommercialPermitRequired)"
+            :caption="t('tkNonCommercialPermitException')"
+            :response="legalFrameworkDocument?.tkNonCommercialPermitException"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+        </template>
+
+        <h4>{{ t('iplcGrTitle') }}</h4>
+        <response-value
+          :caption="t('iplcDomesticLawRecognizesRight')"
+          :response="legalFrameworkDocument?.iplcDomesticLawRecognizesRight"
+          :options="threeWayOptions()"
+          :locale="locale"
+        />
+        <template v-if="isYesOrSome(legalFrameworkDocument?.iplcDomesticLawRecognizesRight)">
+          <response-value
+            :caption="t('iplcAccessBasedOnPic')"
+            :response="legalFrameworkDocument?.iplcAccessBasedOnPic"
+            :options="threeWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            :caption="t('iplcCommercialPermitRequired')"
+            :response="legalFrameworkDocument?.iplcCommercialPermitRequired"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            v-if="isAnswered(legalFrameworkDocument?.iplcCommercialPermitRequired)"
+            :caption="t('iplcCommercialPermitException')"
+            :response="legalFrameworkDocument?.iplcCommercialPermitException"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            :caption="t('iplcNonCommercialPermitRequired')"
+            :response="legalFrameworkDocument?.iplcNonCommercialPermitRequired"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+          <response-value
+            v-if="isAnswered(legalFrameworkDocument?.iplcNonCommercialPermitRequired)"
+            :caption="t('iplcNonCommercialPermitException')"
+            :response="legalFrameworkDocument?.iplcNonCommercialPermitException"
+            :options="twoWayOptions()"
+            :locale="locale"
+          />
+        </template>
+      </section>
+
+      <section>
+        <legend>{{ t('article8Title') }}</legend>
+        <response-value
+          :caption="t('article8ResearchSupport')"
+          :response="legalFrameworkDocument?.article8ResearchSupport"
+          :options="fourWayOptions()"
+          :locale="locale"
+        />
+        <response-value
+          v-if="isYesOrSome(legalFrameworkDocument?.article8ResearchSupport)"
+          :caption="t('article8SimplifiedAccessMeasures')"
+          :response="legalFrameworkDocument?.article8SimplifiedAccessMeasures"
+          :options="threeWayOptions()"
+          :locale="locale"
+        />
+        <response-value
+          :caption="t('article8Emergencies')"
+          :response="legalFrameworkDocument?.article8Emergencies"
+          :options="threeWayOptions()"
+          :locale="locale"
+        />
+        <response-value
+          :caption="t('article8FoodSecurity')"
+          :response="legalFrameworkDocument?.article8FoodSecurity"
+          :options="threeWayOptions()"
+          :locale="locale"
+        />
+      </section>
+
+      <section>
+        <legend>{{ t('complianceTitle') }}</legend>
+        <response-value
+          :caption="t('article15Implemented')"
+          :response="legalFrameworkDocument?.article15Implemented"
+          :options="threeWayOptions()"
+          :locale="locale"
+        />
+        <response-value
+          :caption="t('article16Implemented')"
+          :response="legalFrameworkDocument?.article16Implemented"
+          :options="threeWayOptions()"
+          :locale="locale"
+        />
+        <response-value
+          :caption="t('article17Implemented')"
+          :response="legalFrameworkDocument?.article17Implemented"
+          :options="threeWayOptions()"
+          :locale="locale"
+        />
+      </section>
+
+      <section v-if="legalFrameworkDocument?.faqs?.length">
+        <legend>{{ t('faqTitle') }}</legend>
+        <div
+          :id="faqAccordionId"
+          class="accordion"
+        >
+          <div
+            v-for="(faq, index) in legalFrameworkDocument.faqs"
+            :key="index"
+            class="accordion-item"
+          >
+            <h3 class="accordion-header">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                :data-bs-target="`#${faqAccordionId}-collapse-${index}`"
+                aria-expanded="true"
+                :aria-controls="`${faqAccordionId}-collapse-${index}`"
+              >
+                {{ lstring(faq.question) }}
+              </button>
+            </h3>
+            <div
+              :id="`${faqAccordionId}-collapse-${index}`"
+              class="accordion-collapse collapse show"
+            >
+              <div class="accordion-body">
+                {{ lstring(faq.answer) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section v-if="legalFrameworkDocument?.additionalInformation || legalFrameworkDocument?.additionalDocuments?.length">
+        <legend>{{ t('additionalInfoTitle') }}</legend>
+        <div v-if="legalFrameworkDocument?.additionalInformation">
+          <label>{{ t('additionalInformation') }}</label>
+          <div class="km-value">
+            <ng
+              v-vue-ng:km-value-ml
+              :value="legalFrameworkDocument.additionalInformation"
+              :locales="locale"
+              html
+              km-pre
+            />
+          </div>
+        </div>
+        <div v-if="legalFrameworkDocument?.additionalDocuments?.length">
+          <label>{{ t('additionalDocuments') }}</label>
+          <div class="km-value">
+            <ng
+              v-vue-ng:km-link-list
+              :value="legalFrameworkDocument.additionalDocuments"
+              :locale="locale"
+            />
+          </div>
+        </div>
+      </section>
+
       <div>
         <ng
           v-model:ng-model="docHeader.identifier"
@@ -43,9 +316,12 @@ import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml
 import documentDate from '~/views/forms/view/directives/document-date.vue'
 // @ts-expect-error importing js file
 import kmTerm from '~/components/km/KmTerm.vue'
-import messages from '~/app-text/views/reports/chm/marine-ebsa.json'
+import messages from '~/app-text/views/forms/view/abs/legal-framework-overview.json'
 import { useI18n } from 'vue-i18n'
-import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
+// @ts-expect-error importing js file
+import { lstring } from '~/components/kb/filters'
+import type { LegalFrameworkDocument, NrResponse } from '~/types/components/legal-framework-overview'
+import responseValue from '~/components/forms/view/abs/lfo/legal-framework-overview-response-value.vue'
 
 const { t } = useI18n({ messages })
 interface Props {
@@ -61,9 +337,50 @@ const header = {
 
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
 const docHeader = ref(header)
+const faqAccordionId = `faq-accordion-${Math.random().toString(36).slice(2)}`
 
 onMounted(() => {
   ({ documentInfo: { body: legalFrameworkDocument.value } } = props)
 })
 
+// Methods
+function isYes (response?: NrResponse) {
+  return response?.value === 'true'
+}
+
+function isYesOrSome (response?: NrResponse) {
+  return response?.value === 'true' || response?.value === 'true.some'
+}
+
+function isAnswered (response?: NrResponse) {
+  return response?.value !== undefined
+}
+
+function twoWayOptions () {
+  return [
+    { value: 'true', title: t('yes') },
+    { value: 'false', title: t('no') }
+  ]
+}
+
+// labels overrides the 'true'/'true.some' wording for questions whose doc text differs from the
+// generic "Yes"/"Yes, to some extent" (e.g. establishedMeasure's "Yes, all measures are in place").
+function threeWayOptions (labels?: { true?: string, trueSome?: string }) {
+  return [
+    { value: 'true', title: labels?.true ?? t('yes') },
+    { value: 'true.some', title: labels?.trueSome ?? t('yesSomeCases') },
+    { value: 'false', title: t('no') }
+  ]
+}
+
+function fourWayOptions (labels?: { true?: string, trueSome?: string }) {
+  return [
+    { value: 'true', title: labels?.true ?? t('yes') },
+    { value: 'true.some', title: labels?.trueSome ?? t('yesSomeCases') },
+    { value: 'false', title: t('no') },
+    { value: 'na', title: t('notApplicable') }
+  ]
+}
 </script>
+<style scoped>
+</style>

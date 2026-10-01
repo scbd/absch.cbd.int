@@ -388,7 +388,11 @@ import '~/components/scbd-angularjs-services/main';
                 //////Initializing//////
                 $scope.items = []; //start empty, but then attempt to fill it.                
                 GetSourceItems(0).then(function(items) {                    
-                    $scope.items = items;
+                    $scope.items = items.map(e=>{
+                        if(!e.__value);
+                            e.__value = $filter("lstring")(e.title, $scope.currentLocale)
+                        return e;
+                    })
                 });
 
                 $scope.bindingDisplay = ""; //so the display won't be empty.

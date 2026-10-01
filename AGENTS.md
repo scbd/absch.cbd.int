@@ -137,7 +137,7 @@ The codebase is mid-migration from AngularJS to a pure Vue 3 app. See [`docs/MIG
 
 **Ratchets — apply to all new code:**
 - No new AngularJS directives, controllers, or components.
-- No new Vue forms that wrap an ng km-control through the Bridge.
+- Bridging an *existing* ng km-control into a new Vue form (`v-vue-ng:...`) is fine — every recent form does this, and porting a control to native Vue only happens when that form's needs justify the cost (a genuinely new control with no ng equivalent, e.g. one built purely in Vue).
 - No new `$injector` escapes in Vue code.
 - Feature work that touches an ng view should migrate it to Vue rather than patch it.
 - Every newly inverted service or filter ships with vitest tests in the same PR.
