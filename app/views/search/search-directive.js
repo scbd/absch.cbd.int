@@ -1355,9 +1355,9 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                         var schemaQuery         = buildSchemaQuery();                        
                         var schemaSubQuery      = buildSchemaSubQuery()||{};                        
                         var keywordQuery        = buildFieldQuery('keyword',  'all_terms_ss')
-                        var countryQuery        = _.compact([buildFieldQuery('country',  'countryRegions_ss'), buildFieldQuery('country',  'countryRegions_REL_ss')]).join(' OR ');
+                        var countryQuery        = _.compact([buildFieldQuery('country',  'countryRegions_ss')]).join(' OR ');
                         var partyStatusQuery    = buildPartyStatusQuery();
-                        var regionQuery         = _.compact([buildFieldQuery('region',   'countryRegions_ss'), buildFieldQuery('region',   'countryRegions_REL_ss')]).join(' OR ');
+                        var regionQuery         = _.compact([buildFieldQuery('region',   'countryRegions_REL_ss')]).join(' OR ');
                         var textQuery           = buildFreeTextQuery('freeText', 'text_EN_txt');
                         var rawQuery            = buildRawQuery(); //TODO find if there is any use and switch to new query based approach
 
