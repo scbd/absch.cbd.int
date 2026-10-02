@@ -22,13 +22,6 @@
     </div>
 
     <div
-      v-if="!isYesOrSome(document.agrSubjectToPic)"
-      class="alert alert-info"
-    >
-      {{ t('agrPermitSectionInfo') }}
-    </div>
-
-    <div
       class="row"
       :class="{ 'disabled-section': !isYesOrSome(document.agrSubjectToPic) }"
     >
@@ -52,7 +45,7 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.agrCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic) }"
+      :class="{ 'disabled-section': !isYes(document.agrCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic) }"
     >
       <div class="col-sm-12">
         <ng
@@ -65,7 +58,7 @@
             v-vue-ng:nr-yes-no
             :question="agrCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.agrCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic)"
+            @ng-disabled="() => !isYes(document.agrCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic)"
           />
         </ng>
       </div>
@@ -95,7 +88,7 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.agrNonCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic) }"
+      :class="{ 'disabled-section': !isYes(document.agrNonCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic) }"
     >
       <div class="col-sm-12">
         <ng
@@ -108,7 +101,7 @@
             v-vue-ng:nr-yes-no
             :question="agrNonCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.agrNonCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic)"
+            @ng-disabled="() => !isYes(document.agrNonCommercialPermitRequired) || !isYesOrSome(document.agrSubjectToPic)"
           />
         </ng>
       </div>
@@ -121,7 +114,7 @@ import '~/views/forms/directives/nr-yes-no.js'
 import { useI18n } from 'vue-i18n'
 import messages from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
-import { isYesOrSome, isAnswered, twoWayOptions, threeWayOptions, yesExplainOnlyOptions } from './legal-framework-overview-options'
+import { isYes, isYesOrSome, twoWayOptions, threeWayOptions, yesExplainOnlyOptions } from './legal-framework-overview-options'
 import type { LanguageCode } from '~/types/languages'
 
 // Types

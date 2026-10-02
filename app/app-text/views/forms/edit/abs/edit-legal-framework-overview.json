@@ -27,13 +27,11 @@
   "agrCommercialPermitException": "6.1 Are there any exceptions to this requirement?",
   "agrNonCommercialPermitException": "7.1 Are there any exceptions to this requirement?",
   "pleaseExplainYourAnswer": "Please explain your answer",
-  "agrPermitSectionInfo": "Please complete the rest of this section if you answered \"Yes, in all cases\" or \"Yes, in some cases\" above. If NO, skip to the section on special considerations.",
 
   "iplcSectionTitle": "Access involving indigenous peoples and local communities (IPLCs)",
   "iplcPresent": "8. Are there indigenous peoples and local communities in this jurisdiction?",
 
   "tkAccessTitle": "Access to traditional knowledge associated with genetic resources",
-  "tkAccessSectionInfo": "Please complete the rest of this section if you answered YES above. If NO, skip to the next section (Access to genetic resources held by indigenous peoples and local communities (IPLCs)).",
   "tkSubjectToPic": "9. Are measures in place to ensure that traditional knowledge associated with genetic resources is accessed with the prior informed consent, or approval and involvement, of the indigenous peoples and local communities (IPLCs) that hold the knowledge?",
   "tkSubjectToPicInfo": "For example, what is considered traditional knowledge associated with genetic resources according to your ABS framework.",
   "tkCommercialPermitRequired": "10. Is an ABS permit or its equivalent required to access traditional knowledge associated with genetic resources for commercial utilisation?",
@@ -44,7 +42,6 @@
   "tkNonCommercialPermitException": "11.1 Are there any exceptions to this requirement?",
 
   "iplcGrTitle": "Access to genetic resources held by indigenous peoples and local communities (IPLCs)",
-  "iplcGrSectionInfo": "Please complete the rest of this section if you answered YES or YES, TO SOME EXTENT above. If NO, skip to the section on special considerations.",
   "iplcDomesticLawRecognizesRight": "12. Does the applicable domestic law recognise the right of indigenous peoples and local communities (IPLCs) in this jurisdiction to grant access to genetic resources?",
   "iplcAccessBasedOnPic": "13. Are measures in place to ensure that access to genetic resources is based on the prior informed consent (PIC), or approval and involvement, of the indigenous peoples and local communities (IPLCs) concerned?",
   "iplcCommercialPermitRequired": "14. Is an ABS permit or its equivalent required for commercial utilization of genetic resources held by indigenous peoples and local communities (IPLCs)?",
@@ -54,7 +51,7 @@
 
   "article8Title": "Special considerations (Article 8)",
   "article8ResearchSupport": "16. Do the ABS measures for this jurisdiction promote and encourage research that contributes to the conservation and sustainable use of biodiversity?",
-  "article8SimplifiedAccessMeasures": "If either 'yes' is selected, please indicate whether this includes simplified access measures for non-commercial research.",
+  "article8SimplifiedAccessMeasures": "16.1. If either 'yes' is selected, please indicate whether this includes simplified access measures for non-commercial research.",
   "article8Emergencies": "17. Do the ABS measures for this jurisdiction take account of present or imminent emergencies that threaten or damage human, animal or plant health?",
   "article8EmergenciesInfo": "Please explain how the measures address the need for expeditious access to genetic resources and expeditious fair and equitable benefit-sharing, including access to affordable treatments by those in need.",
   "article8FoodSecurity": "18. Do the ABS measures for this jurisdiction take into account the importance of genetic resources for food and agriculture and their special role in food security?",
@@ -91,6 +88,5 @@
   "agrSubjectToPicYesAllCases": "Yes, in all cases",
   "agrSubjectToPicYesSomeCases": "Yes, in some cases",
   "yes": "Yes",
-  "no": "No",
-  "notApplicable": "Not applicable"
+  "no": "No"
 }

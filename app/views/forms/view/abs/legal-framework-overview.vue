@@ -209,7 +209,7 @@
         <response-value
           :caption="t('article8ResearchSupport')"
           :response="legalFrameworkDocument?.article8ResearchSupport"
-          :options="fourWayOptions()"
+          :options="threeWayOptions()"
           :locale="locale"
         />
         <response-value
@@ -390,15 +390,6 @@ function threeWayOptions (labels?: { true?: string, trueSome?: string }) {
     { value: 'true', title: labels?.true ?? t('yes') },
     { value: 'true.some', title: labels?.trueSome ?? t('yesSomeCases') },
     { value: 'false', title: t('no') }
-  ]
-}
-
-function fourWayOptions (labels?: { true?: string, trueSome?: string }) {
-  return [
-    { value: 'true', title: labels?.true ?? t('yes') },
-    { value: 'true.some', title: labels?.trueSome ?? t('yesSomeCases') },
-    { value: 'false', title: t('no') },
-    { value: 'na', title: t('notApplicable') }
   ]
 }
 </script>
