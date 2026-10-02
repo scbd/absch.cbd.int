@@ -323,7 +323,7 @@ import legalFrameworkOverviewFaqs from '~/components/forms/edit/abs/lfo/legal-fr
 import editLegalFrameworkOverviewAccess from '~/components/forms/edit/abs/lfo/edit-legal-framework-overview-access.vue'
 import editLegalFrameworkOverviewIplc from '~/components/forms/edit/abs/lfo/edit-legal-framework-overview-iplc.vue'
 import editLegalFrameworkOverviewCompliance from '~/components/forms/edit/abs/lfo/edit-legal-framework-overview-compliance.vue'
-import { isYesOrSome, threeWayOptions as sharedThreeWayOptions, fourWayOptions as sharedFourWayOptions } from '~/components/forms/edit/abs/lfo/legal-framework-overview-options'
+import { isYesOrSome, threeWayOptions as sharedThreeWayOptions } from '~/components/forms/edit/abs/lfo/legal-framework-overview-options'
 
 // Model
 const legalFrameworkDocument: ModelRef<LegalFrameworkDocument | undefined> = defineModel<LegalFrameworkDocument>()
@@ -384,10 +384,6 @@ function threeWayOptions (labels?: { true?: string, trueSome?: string }, footnot
   return sharedThreeWayOptions(t, labels, footnote)
 }
 
-function fourWayOptions (labels?: { true?: string, trueSome?: string }) {
-  return sharedFourWayOptions(t, labels)
-}
-
 // Question objects are memoized so their identity stays stable across re-renders - the
 // ng-vue bridge does a strict `===` check before pushing a prop into Angular, so a fresh
 // object literal on every render (e.g. typing into any field re-renders this component)
@@ -402,9 +398,9 @@ const establishedMeasureQuestion = computed(() => ({
 
 const article8ResearchSupportQuestion = computed(() => ({
   key: 'article8ResearchSupport',
-  options: fourWayOptions(),
+  options: threeWayOptions(),
   additionalKeyName: 'article8ResearchSupport.additionalInformation',
-  additionalMandatoryValues: ['true.some']
+  additionalMandatoryValues: []
 }))
 
 const article8SimplifiedAccessMeasuresQuestion = computed(() => ({
@@ -418,14 +414,14 @@ const article8EmergenciesQuestion = computed(() => ({
   key: 'article8Emergencies',
   options: threeWayOptions(undefined, t('article8EmergenciesInfo')),
   additionalKeyName: 'article8Emergencies.additionalInformation',
-  additionalMandatoryValues: ['true.some']
+  additionalMandatoryValues: []
 }))
 
 const article8FoodSecurityQuestion = computed(() => ({
   key: 'article8FoodSecurity',
   options: threeWayOptions(undefined, t('article8FoodSecurityInfo')),
   additionalKeyName: 'article8FoodSecurity.additionalInformation',
-  additionalMandatoryValues: ['true.some']
+  additionalMandatoryValues: []
 }))
 
 function getCleanDocument (doc: LegalFrameworkDocument | undefined): LegalFrameworkDocument | undefined {

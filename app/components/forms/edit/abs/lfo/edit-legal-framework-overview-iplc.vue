@@ -21,13 +21,6 @@
     <legend>{{ t("tkAccessTitle") }}</legend>
 
     <div
-      v-if="!isYes(document.iplcPresent)"
-      class="alert alert-info"
-    >
-      {{ t('tkAccessSectionInfo') }}
-    </div>
-
-    <div
       class="row"
       :class="{ 'disabled-section': !isYes(document.iplcPresent) }"
     >
@@ -70,7 +63,7 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.tkCommercialPermitRequired) || !isYes(document.iplcPresent) }"
+      :class="{ 'disabled-section': !isYes(document.tkCommercialPermitRequired) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
@@ -83,7 +76,7 @@
             v-vue-ng:nr-yes-no
             :question="tkCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.tkCommercialPermitRequired) || !isYes(document.iplcPresent)"
+            @ng-disabled="() => !isYes(document.tkCommercialPermitRequired) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -111,7 +104,7 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.tkNonCommercialPermitRequired) || !isYes(document.iplcPresent) }"
+      :class="{ 'disabled-section': !isYes(document.tkNonCommercialPermitRequired) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
@@ -124,7 +117,7 @@
             v-vue-ng:nr-yes-no
             :question="tkNonCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.tkNonCommercialPermitRequired) || !isYes(document.iplcPresent)"
+            @ng-disabled="() => !isYes(document.tkNonCommercialPermitRequired) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -151,13 +144,6 @@
           />
         </ng>
       </div>
-    </div>
-
-    <div
-      v-if="!isYesOrSome(document.iplcDomesticLawRecognizesRight)"
-      class="alert alert-info"
-    >
-      {{ t('iplcGrSectionInfo') }}
     </div>
 
     <div
@@ -203,7 +189,7 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.iplcCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
+      :class="{ 'disabled-section': !isYes(document.iplcCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
@@ -216,7 +202,7 @@
             v-vue-ng:nr-yes-no
             :question="iplcCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.iplcCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
+            @ng-disabled="() => !isYes(document.iplcCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -244,7 +230,7 @@
     </div>
     <div
       class="row"
-      :class="{ 'disabled-section': !isAnswered(document.iplcNonCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
+      :class="{ 'disabled-section': !isYes(document.iplcNonCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent) }"
     >
       <div class="col-sm-12">
         <ng
@@ -257,7 +243,7 @@
             v-vue-ng:nr-yes-no
             :question="iplcNonCommercialPermitExceptionQuestion"
             :locales="locales"
-            @ng-disabled="() => !isAnswered(document.iplcNonCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
+            @ng-disabled="() => !isYes(document.iplcNonCommercialPermitRequired) || !isYesOrSome(document.iplcDomesticLawRecognizesRight) || !isYes(document.iplcPresent)"
           />
         </ng>
       </div>
@@ -270,7 +256,7 @@ import '~/views/forms/directives/nr-yes-no.js'
 import { useI18n } from 'vue-i18n'
 import messages from '~/app-text/views/forms/edit/abs/edit-legal-framework-overview.json'
 import type { LegalFrameworkDocument } from '~/types/components/legal-framework-overview'
-import { isYes, isYesOrSome, isAnswered, twoWayOptions, threeWayOptions, yesExplainOnlyOptions } from './legal-framework-overview-options'
+import { isYes, isYesOrSome, twoWayOptions, threeWayOptions, yesExplainOnlyOptions } from './legal-framework-overview-options'
 import type { LanguageCode } from '~/types/languages'
 
 // Types

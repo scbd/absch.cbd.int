@@ -32,28 +32,26 @@
         </div>
         <div v-if="legalFrameworkDocument?.jurisdiction?.customValue">
           <label>{{ t('jurisdictionName') }}</label>
-          <div class="km-value">
-            <ng
-              v-vue-ng:km-value-ml
-              :value="legalFrameworkDocument.jurisdiction.customValue"
-              :locales="locale"
-            />
-          </div>
+          <ng
+            v-vue-ng:km-value-ml
+            :value="legalFrameworkDocument.jurisdiction.customValue"
+            :locales="locale"
+          />
         </div>
         <div v-if="legalFrameworkDocument?.jurisdictionImplementation">
           <label>{{ t('jurisdictionScopeDescription') }}</label>
-          <div class="km-value">
-            <ng
-              v-vue-ng:km-value-ml
-              :value="legalFrameworkDocument.jurisdictionImplementation"
-              :locales="locale"
-            />
-          </div>
+          <ng
+            v-vue-ng:km-value-ml
+            :value="legalFrameworkDocument.jurisdictionImplementation"
+            :locales="locale"
+          />
         </div>
       </section>
 
       <section>
-        <legend>{{ t('generalAbsMeasuresTitle') }}</legend>
+        <legend class="border-bottom pb-1 mb-3">
+          {{ t('generalAbsMeasuresTitle') }}
+        </legend>
         <response-value
           :caption="t('establishedMeasure')"
           :response="legalFrameworkDocument?.establishedMeasure"
@@ -63,7 +61,9 @@
       </section>
 
       <section>
-        <legend>{{ t('accessToGeneticResourcesTitle') }}</legend>
+        <legend class="border-bottom pb-1 mb-3">
+          {{ t('accessToGeneticResourcesTitle') }}
+        </legend>
         <response-value
           :caption="t('agrSubjectToPic')"
           :response="legalFrameworkDocument?.agrSubjectToPic"
@@ -76,6 +76,7 @@
             :response="legalFrameworkDocument?.agrCommercialPermitRequired"
             :options="twoWayOptions()"
             :locale="locale"
+            :no-border="isAnswered(legalFrameworkDocument?.agrCommercialPermitRequired)"
           />
           <response-value
             v-if="isAnswered(legalFrameworkDocument?.agrCommercialPermitRequired)"
@@ -83,12 +84,14 @@
             :response="legalFrameworkDocument?.agrCommercialPermitException"
             :options="twoWayOptions()"
             :locale="locale"
+            nested
           />
           <response-value
             :caption="t('agrNonCommercialPermitRequired')"
             :response="legalFrameworkDocument?.agrNonCommercialPermitRequired"
             :options="twoWayOptions()"
             :locale="locale"
+            :no-border="isAnswered(legalFrameworkDocument?.agrNonCommercialPermitRequired)"
           />
           <response-value
             v-if="isAnswered(legalFrameworkDocument?.agrNonCommercialPermitRequired)"
@@ -96,12 +99,15 @@
             :response="legalFrameworkDocument?.agrNonCommercialPermitException"
             :options="twoWayOptions()"
             :locale="locale"
+            nested
           />
         </template>
       </section>
 
       <section>
-        <legend>{{ t('iplcSectionTitle') }}</legend>
+        <legend class="border-bottom pb-1 mb-3">
+          {{ t('iplcSectionTitle') }}
+        </legend>
         <response-value
           :caption="t('iplcPresent')"
           :response="legalFrameworkDocument?.iplcPresent"
@@ -122,6 +128,7 @@
             :response="legalFrameworkDocument?.tkCommercialPermitRequired"
             :options="twoWayOptions()"
             :locale="locale"
+            :no-border="isAnswered(legalFrameworkDocument?.tkCommercialPermitRequired)"
           />
           <response-value
             v-if="isAnswered(legalFrameworkDocument?.tkCommercialPermitRequired)"
@@ -129,12 +136,14 @@
             :response="legalFrameworkDocument?.tkCommercialPermitException"
             :options="twoWayOptions()"
             :locale="locale"
+            nested
           />
           <response-value
             :caption="t('tkNonCommercialPermitRequired')"
             :response="legalFrameworkDocument?.tkNonCommercialPermitRequired"
             :options="twoWayOptions()"
             :locale="locale"
+            :no-border="isAnswered(legalFrameworkDocument?.tkNonCommercialPermitRequired)"
           />
           <response-value
             v-if="isAnswered(legalFrameworkDocument?.tkNonCommercialPermitRequired)"
@@ -142,6 +151,7 @@
             :response="legalFrameworkDocument?.tkNonCommercialPermitException"
             :options="twoWayOptions()"
             :locale="locale"
+            nested
           />
         </template>
 
@@ -164,6 +174,7 @@
             :response="legalFrameworkDocument?.iplcCommercialPermitRequired"
             :options="twoWayOptions()"
             :locale="locale"
+            :no-border="isAnswered(legalFrameworkDocument?.iplcCommercialPermitRequired)"
           />
           <response-value
             v-if="isAnswered(legalFrameworkDocument?.iplcCommercialPermitRequired)"
@@ -171,12 +182,14 @@
             :response="legalFrameworkDocument?.iplcCommercialPermitException"
             :options="twoWayOptions()"
             :locale="locale"
+            nested
           />
           <response-value
             :caption="t('iplcNonCommercialPermitRequired')"
             :response="legalFrameworkDocument?.iplcNonCommercialPermitRequired"
             :options="twoWayOptions()"
             :locale="locale"
+            :no-border="isAnswered(legalFrameworkDocument?.iplcNonCommercialPermitRequired)"
           />
           <response-value
             v-if="isAnswered(legalFrameworkDocument?.iplcNonCommercialPermitRequired)"
@@ -184,16 +197,19 @@
             :response="legalFrameworkDocument?.iplcNonCommercialPermitException"
             :options="twoWayOptions()"
             :locale="locale"
+            nested
           />
         </template>
       </section>
 
       <section>
-        <legend>{{ t('article8Title') }}</legend>
+        <legend class="border-bottom pb-1 mb-3">
+          {{ t('article8Title') }}
+        </legend>
         <response-value
           :caption="t('article8ResearchSupport')"
           :response="legalFrameworkDocument?.article8ResearchSupport"
-          :options="fourWayOptions()"
+          :options="threeWayOptions()"
           :locale="locale"
         />
         <response-value
@@ -218,7 +234,9 @@
       </section>
 
       <section>
-        <legend>{{ t('complianceTitle') }}</legend>
+        <legend class="border-bottom pb-1 mb-3">
+          {{ t('complianceTitle') }}
+        </legend>
         <response-value
           :caption="t('article15Implemented')"
           :response="legalFrameworkDocument?.article15Implemented"
@@ -240,7 +258,9 @@
       </section>
 
       <section v-if="legalFrameworkDocument?.faqs?.length">
-        <legend>{{ t('faqTitle') }}</legend>
+        <legend class="border-bottom pb-1 mb-3">
+          {{ t('faqTitle') }}
+        </legend>
         <div
           :id="faqAccordionId"
           class="accordion"
@@ -275,18 +295,18 @@
       </section>
 
       <section v-if="legalFrameworkDocument?.additionalInformation || legalFrameworkDocument?.additionalDocuments?.length">
-        <legend>{{ t('additionalInfoTitle') }}</legend>
+        <legend class="border-bottom pb-1 mb-3">
+          {{ t('additionalInfoTitle') }}
+        </legend>
         <div v-if="legalFrameworkDocument?.additionalInformation">
           <label>{{ t('additionalInformation') }}</label>
-          <div class="km-value">
-            <ng
-              v-vue-ng:km-value-ml
-              :value="legalFrameworkDocument.additionalInformation"
-              :locales="locale"
-              html
-              km-pre
-            />
-          </div>
+          <ng
+            v-vue-ng:km-value-ml
+            :value="legalFrameworkDocument.additionalInformation"
+            :locales="locale"
+            html
+            km-pre
+          />
         </div>
         <div v-if="legalFrameworkDocument?.additionalDocuments?.length">
           <label>{{ t('additionalDocuments') }}</label>
@@ -370,15 +390,6 @@ function threeWayOptions (labels?: { true?: string, trueSome?: string }) {
     { value: 'true', title: labels?.true ?? t('yes') },
     { value: 'true.some', title: labels?.trueSome ?? t('yesSomeCases') },
     { value: 'false', title: t('no') }
-  ]
-}
-
-function fourWayOptions (labels?: { true?: string, trueSome?: string }) {
-  return [
-    { value: 'true', title: labels?.true ?? t('yes') },
-    { value: 'true.some', title: labels?.trueSome ?? t('yesSomeCases') },
-    { value: 'false', title: t('no') },
-    { value: 'na', title: t('notApplicable') }
   ]
 }
 </script>

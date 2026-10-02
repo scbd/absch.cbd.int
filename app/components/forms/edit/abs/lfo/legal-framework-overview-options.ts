@@ -39,15 +39,6 @@ export function threeWayOptions (t: (key: string)=> string, labels?: { true?: st
   ]
 }
 
-export function fourWayOptions (t: (key: string)=> string, labels?: { true?: string, trueSome?: string }): Option[] {
-  return [
-    { value: 'true', title: labels?.true ?? t('yes'), type: 'lstring', caption: t('pleaseExplainYourAnswer') },
-    { value: 'true.some', title: labels?.trueSome ?? t('yesSomeCases'), type: 'lstring', caption: t('pleaseExplainYourAnswer') },
-    { value: 'false', title: t('no'), type: 'lstring', caption: t('pleaseExplainYourAnswer') },
-    { value: 'na', title: t('notApplicable'), type: 'lstring', caption: t('pleaseExplainYourAnswer') }
-  ]
-}
-
 export function yesExplainOnlyOptions (t: (key: string)=> string): Option[] {
   return [
     { value: 'true', title: t('yes'), type: 'lstring', caption: t('pleaseExplainYourAnswer') },
