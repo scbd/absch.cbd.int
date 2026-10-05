@@ -26,6 +26,10 @@
 	padding:10px 20px 10px 20px;
 }
 
+.panel-heading .align-items-center.d-flex.flex-wrap.float-end.justify-content-end.position-relative.text-white > :last-child{
+	padding-right: 0 !important;
+}
+
 
 #Record .record-title-national{
 	color: #428BCA;

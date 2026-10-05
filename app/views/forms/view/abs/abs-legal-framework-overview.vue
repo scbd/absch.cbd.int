@@ -6,7 +6,7 @@
     <div class="record-body bg-white">
       <document-date :document-info="documentInfo" />
 
-      <section>
+      <section v-if="legalFrameworkDocument?.government">
         <legend>{{ t('generalInformation') }}</legend>
         <div v-if="legalFrameworkDocument?.government">
           <label>{{ t('country') }}</label>
@@ -19,8 +19,16 @@
         </div>
       </section>
 
-      <section>
+      <section v-if="legalFrameworkDocument?.jurisdiction || legalFrameworkDocument?.jurisdictionImplementation">
         <legend>{{ t('jurisdictionSectionTitle') }}</legend>
+        <div v-if="legalFrameworkDocument?.jurisdiction?.customValue">
+          <label class="fw-bold">{{ t('jurisdictionName') }}</label>
+          <ng
+            v-vue-ng:km-value-ml
+            :value="legalFrameworkDocument.jurisdiction.customValue"
+            :locales="locale"
+          />
+        </div>
         <div v-if="legalFrameworkDocument?.jurisdiction">
           <label>{{ t('jurisdiction') }}</label>
           <div class="km-value">
@@ -29,14 +37,6 @@
               :locale="locale"
             />
           </div>
-        </div>
-        <div v-if="legalFrameworkDocument?.jurisdiction?.customValue">
-          <label>{{ t('jurisdictionName') }}</label>
-          <ng
-            v-vue-ng:km-value-ml
-            :value="legalFrameworkDocument.jurisdiction.customValue"
-            :locales="locale"
-          />
         </div>
         <div v-if="legalFrameworkDocument?.jurisdictionImplementation">
           <label>{{ t('jurisdictionScopeDescription') }}</label>
@@ -48,7 +48,7 @@
         </div>
       </section>
 
-      <section>
+      <section v-if="isAnswered(legalFrameworkDocument?.establishedMeasure)">
         <legend class="border-bottom pb-1 mb-3">
           {{ t('generalAbsMeasuresTitle') }}
         </legend>
@@ -60,7 +60,7 @@
         />
       </section>
 
-      <section>
+      <section v-if="isAnswered(legalFrameworkDocument?.agrSubjectToPic)">
         <legend class="border-bottom pb-1 mb-3">
           {{ t('accessToGeneticResourcesTitle') }}
         </legend>
@@ -104,7 +104,7 @@
         </template>
       </section>
 
-      <section>
+      <section v-if="isAnswered(legalFrameworkDocument?.iplcPresent) || isAnswered(legalFrameworkDocument?.iplcDomesticLawRecognizesRight)">
         <legend class="border-bottom pb-1 mb-3">
           {{ t('iplcSectionTitle') }}
         </legend>
@@ -155,13 +155,15 @@
           />
         </template>
 
-        <h4>{{ t('iplcGrTitle') }}</h4>
-        <response-value
-          :caption="t('iplcDomesticLawRecognizesRight')"
-          :response="legalFrameworkDocument?.iplcDomesticLawRecognizesRight"
-          :options="threeWayOptions()"
-          :locale="locale"
-        />
+        <template v-if="isAnswered(legalFrameworkDocument?.iplcDomesticLawRecognizesRight)">
+          <h4>{{ t('iplcGrTitle') }}</h4>
+          <response-value
+            :caption="t('iplcDomesticLawRecognizesRight')"
+            :response="legalFrameworkDocument?.iplcDomesticLawRecognizesRight"
+            :options="threeWayOptions()"
+            :locale="locale"
+          />
+        </template>
         <template v-if="isYesOrSome(legalFrameworkDocument?.iplcDomesticLawRecognizesRight)">
           <response-value
             :caption="t('iplcAccessBasedOnPic')"
@@ -202,7 +204,7 @@
         </template>
       </section>
 
-      <section>
+      <section v-if="isAnswered(legalFrameworkDocument?.article8ResearchSupport) || isAnswered(legalFrameworkDocument?.article8Emergencies) || isAnswered(legalFrameworkDocument?.article8FoodSecurity)">
         <legend class="border-bottom pb-1 mb-3">
           {{ t('article8Title') }}
         </legend>
@@ -233,7 +235,7 @@
         />
       </section>
 
-      <section>
+      <section v-if="isAnswered(legalFrameworkDocument?.article15Implemented) || isAnswered(legalFrameworkDocument?.article16Implemented) || isAnswered(legalFrameworkDocument?.article17Implemented)">
         <legend class="border-bottom pb-1 mb-3">
           {{ t('complianceTitle') }}
         </legend>
@@ -396,4 +398,10 @@ function threeWayOptions (labels?: { true?: string, trueSome?: string }) {
 }
 </script>
 <style scoped>
+.accordion-button,
+.accordion-button:not(.collapsed) {
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+}
 </style>
