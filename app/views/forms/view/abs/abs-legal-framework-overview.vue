@@ -327,6 +327,7 @@
         />
       </div>
     </div>
+    <ng v-vue-ng:document-metadata-vue :document-info="documentInfo" />
   </div>
 </template>
 <script setup lang="ts">
@@ -342,6 +343,7 @@ import { useI18n } from 'vue-i18n'
 import { lstring } from '~/components/kb/filters'
 import type { LegalFrameworkDocument, NrResponse } from '~/types/components/legal-framework-overview'
 import responseValue from '~/components/forms/view/abs/lfo/legal-framework-overview-response-value.vue'
+import '~/views/directives/document-metadata-vue-directive'
 
 const { t } = useI18n({ messages })
 interface Props {
