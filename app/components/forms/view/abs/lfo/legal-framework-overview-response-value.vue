@@ -1,18 +1,18 @@
 <template>
   <div
     v-if="response?.value"
-    class="d-flex gap-3 py-2"
-    :class="{ 'ps-5': nested, 'border-bottom': !noBorder }"
+    class="d-flex gap-4 py-2"
+    :class="{ 'border-bottom': !noBorder }"
   >
     <i
       class="bi fs-3 lh-1 flex-shrink-0"
-      :class="variantIcon"
+      :class="[variantIcon, { invisible: nested }]"
     />
     <div class="flex-grow-1">
       <div>
         {{ caption }}
         <span
-          class="badge ms-1"
+          class="badge lfo-badge ms-1"
           :class="variantBadge"
         >{{ label }}</span>
       </div>
@@ -74,3 +74,9 @@ const variantBadge = computed(() => {
   }
 })
 </script>
+<style scoped>
+.lfo-badge {
+  font-size: 0.85rem;
+  padding: 0.35em 0.6em;
+}
+</style>
