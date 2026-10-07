@@ -1472,7 +1472,9 @@ const searchDirectiveMergeT = mergeTranslationKeys(searchDirectiveT);
                                     }
 
                                     else if(filter.type == 'radioList' && filter.filterValue!== undefined){
-                                        subQuery = filter.field + ':' + solr.escape(filter.filterValue);
+                                        const selectedOption = _.find(filter.values, { value : filter.filterValue });
+                                        const queryValues    = selectedOption?.queryValues || [filter.filterValue];
+                                        subQuery = filter.field + ':(' + _.map(queryValues, solr.escape).join(' OR ') + ')';
                                     }
                                     else if(filter.type == 'check' && filter.filterValue!== undefined && filter.filterValue!==false){
                                         subQuery = filter.field + ':' + solr.escape(filter.value);
