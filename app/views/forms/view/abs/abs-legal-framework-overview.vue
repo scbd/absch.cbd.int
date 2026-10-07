@@ -3,7 +3,7 @@
     id="Record"
     class="record"
   >
-    <div class="record-body bg-white">
+    <div class="record-body bg-white mb-5">
       <document-date :document-info="documentInfo" />
 
       <section v-if="legalFrameworkDocument?.government">
@@ -400,7 +400,7 @@ function threeWayOptions (labels?: { true?: string, trueSome?: string }) {
 <style scoped>
 .accordion-button,
 .accordion-button:not(.collapsed) {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: #666;
 }

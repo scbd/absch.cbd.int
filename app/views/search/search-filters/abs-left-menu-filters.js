@@ -31,6 +31,206 @@ export const absLeftMenuFilters = {
 			"field": "country_s"
 		}
 	],
+	"absLegalFramework" : [
+		{
+			"type": "freeText",
+			"title": absFilters.freeText,
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cnaJurisdictions",
+			"title": absFilters.jurisdiction,
+			"field": "jurisdiction_s"
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ4,
+			"field": "establishedMeasure_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "label",
+			"title": absFilters.lfoAccess
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ5,
+			"field": "agrSubjectToPic_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ6,
+			"field": "agrCommercialPermitRequired_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true' },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ7,
+			"field": "agrNonCommercialPermitRequired_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true' },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "label",
+			"title": absFilters.lfoAccessIplc
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ8,
+			"field": "iplcPresent_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true' },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ9,
+			"field": "tkSubjectToPic_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ10,
+			"field": "tkCommercialPermitRequired_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true' },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ11,
+			"field": "tkNonCommercialPermitRequired_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true' },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ12,
+			"field": "iplcDomesticLawRecognizesRight_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ13,
+			"field": "iplcAccessBasedOnPic_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ14,
+			"field": "iplcCommercialPermitRequired_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true' },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ15,
+			"field": "iplcNonCommercialPermitRequired_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true' },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "label",
+			"title": absFilters.lfoArticle8
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ16,
+			"field": "article8ResearchSupport_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ16_1,
+			"field": "article8SimplifiedAccessMeasures_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ17,
+			"field": "article8Emergencies_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ18,
+			"field": "article8FoodSecurity_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "label",
+			"title": absFilters.lfoCompliance
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ19,
+			"field": "article15Implemented_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ20,
+			"field": "article16Implemented_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		},
+		{
+			"type": "radioList",
+			"title": absFilters.lfoQ21,
+			"field": "article17Implemented_s",
+			"values": [
+				{ label: absFilters.lfoYes, value: 'true', queryValues: ['true', 'true.some'] },
+				{ label: absFilters.lfoNo, value: 'false' }
+			]
+		}
+	],
 	"focalPoint" : [{
 			"type": "freeText",
 			"title": absFilters.freeText,
