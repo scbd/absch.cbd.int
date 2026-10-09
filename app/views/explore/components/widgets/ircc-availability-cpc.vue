@@ -1,8 +1,8 @@
 <template>
-  <!-- IRCC availability
-Applicable records: cpc
-Compares the number of CPC that reference an IRCC and those that do not.
--->
+  <!--
+  Compares CPCs that reference an IRCC with those that do not; selecting a segment filters Explore.
+  Displayed for CPCs in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">

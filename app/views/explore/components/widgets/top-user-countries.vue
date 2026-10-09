@@ -1,5 +1,8 @@
 <template>
-  <!-- displays top user countries for irccs based on the country of the entity granted PIC -->
+  <!--
+  Ranks countries where users receiving PIC are located on permits; selecting a row filters Explore to that user country.
+  Displayed for permits in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">
@@ -59,7 +62,7 @@
 
           <span class="progress">
             <span
-              class="progress-bar bg-success"
+              class="progress-bar user-country-progress-bar"
               role="progressbar"
               :style="{
                 width:
@@ -400,5 +403,9 @@ watch(
 
 .progress {
   height: 0.75rem;
+}
+
+.user-country-progress-bar {
+  background-color: #6f42c1;
 }
 </style>

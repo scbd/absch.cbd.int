@@ -1,7 +1,8 @@
 <template>
-  <!-- Party participation
-Shows the number of NP parties that have published at least one record of a selected record type
--->
+  <!--
+  Shows the percentage of Nagoya Protocol Parties that have published at least one matching record.
+  Displayed for permits, CPCs, measures, procedures, authorities, and checkpoints in global or region scope; hidden in country scope or for other record types.
+  -->
   <div class="card h-100">
     <div
       class="card-body d-flex flex-column text-center"

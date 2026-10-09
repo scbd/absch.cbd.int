@@ -187,6 +187,20 @@
     </div>
 
     <div class="container py-4">
+      <div class="d-flex justify-content-end mb-3">
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="openSearchResults"
+        >
+          <i
+            class="fa fa-list me-2"
+            aria-hidden="true"
+          />
+          {{ t('viewRecords') }}
+        </button>
+      </div>
+
       <div
         v-if="filters.length > 0"
         class="d-flex flex-wrap align-items-center gap-2 mb-4"
@@ -198,9 +212,41 @@
         <span
           v-for="filter in filters"
           :key="filter.id"
-          class="badge rounded-pill bg-warning text-dark d-inline-flex align-items-center"
+          class="badge rounded-pill d-inline-flex align-items-center"
+          :class="
+            filter.excluded
+              ? 'bg-danger text-white'
+              : 'bg-warning text-dark'
+          "
         >
           {{ getFilterLabel(filter) }}
+
+          <button
+            type="button"
+            class="btn btn-sm border-0 p-0 ms-2 text-reset filter-mode-button"
+            :aria-label="
+              t(
+                filter.excluded
+                  ? 'includeFilter'
+                  : 'excludeFilter',
+                {
+                  label: getFilterLabel(filter)
+                }
+              )
+            "
+            :aria-pressed="Boolean(filter.excluded)"
+            @click="toggleFilterMode(filter.id)"
+          >
+            <i
+              class="fa"
+              :class="
+                filter.excluded
+                  ? 'fa-plus-circle'
+                  : 'fa-minus-circle'
+              "
+              aria-hidden="true"
+            />
+          </button>
 
           <button
             type="button"
@@ -241,15 +287,10 @@
               :schema="schema"
               :scope="scope"
               :filters="filters"
-              :country="
-                selectedCountryCode ||
-                  undefined
-              "
-              :region="
-                selectedRegionId ||
-                  undefined
-              "
+              :country="includedCountryCode"
+              :region="includedRegionId"
               @filter-change="onFilterChange"
+              @view-records="openCpcsReceivedRecords"
             />
           </div>
         </div>
@@ -290,18 +331,24 @@ import type {
   ExploreFilter,
   ExploreFilterChange
 } from './explore-filters'
+import {
+  buildExploreSearchQuery,
+  buildCpcsReceivedSearchQuery,
+  parseExploreFilters
+} from './explore-filters'
 
 defineOptions({
   name: 'ExplorePage'
 })
 
-const {
-  t,
-  te,
-  locale
-} = useI18n({
+const i18n = useI18n({
   messages
 })
+
+const {
+  t,
+  locale
+} = i18n
 
 const COUNTRY_FILTER_ID =
   'dashboard-country'
@@ -314,6 +361,9 @@ const COUNTRY_URL_PARAMETER =
 
 const REGION_URL_PARAMETER =
   'region'
+
+const FILTERS_URL_PARAMETER =
+  'exploreFilters'
 
 // Older links stored every filter, including its Solr query, in this parameter.
 const LEGACY_FILTERS_URL_PARAMETER =
@@ -335,12 +385,42 @@ const regionGroups =
 const selectedCountryCode = ref('')
 const selectedRegionId = ref('')
 
+const includedCountryCode = computed(() => {
+  if (selectedCountryCode.value === '') {
+    return undefined
+  }
+
+  const countryFilter =
+    filters.value.find(
+      ({ id }) => id === COUNTRY_FILTER_ID
+    )
+
+  return countryFilter?.excluded === true
+    ? undefined
+    : selectedCountryCode.value
+})
+
+const includedRegionId = computed(() => {
+  if (selectedRegionId.value === '') {
+    return undefined
+  }
+
+  const regionFilter =
+    filters.value.find(
+      ({ id }) => id === REGION_FILTER_ID
+    )
+
+  return regionFilter?.excluded === true
+    ? undefined
+    : selectedRegionId.value
+})
+
 const scope = computed(() => {
-  if (selectedCountryCode.value !== '') {
+  if (includedCountryCode.value !== undefined) {
     return 'country'
   }
 
-  return selectedRegionId.value === ''
+  return includedRegionId.value === undefined
     ? 'global'
     : 'region'
 })
@@ -360,11 +440,11 @@ const { recordType = '' } = params
 
 const schemaAliases: Record<string, string> = {
   ircc: 'absPermit',
-  cpc: 'absCheckpointCommunique',
-  cp: 'absCheckpoint',
-  pro: 'absProcedure',
-  msr: 'measure',
-  cna: 'authority'
+  cpc: 'absCheckpointCommunique'
+  // cp: 'absCheckpoint',
+  // pro: 'absProcedure',
+  // msr: 'measure',
+  // cna: 'authority'
 }
 
 const selectedRecordType = ref(recordType)
@@ -434,6 +514,10 @@ function restoreStateFromUrl (): void {
         REGION_URL_PARAMETER
       )
       : ''
+  const restoredFilters =
+    parseExploreFilters(
+      parameters.get(FILTERS_URL_PARAMETER)
+    )
 
   selectedCountryCode.value =
     restoredCountry
@@ -442,7 +526,7 @@ function restoreStateFromUrl (): void {
     restoredRegion
 
   const otherFilters =
-    filters.value.filter(
+    restoredFilters.filter(
       ({ id }) =>
         id !== COUNTRY_FILTER_ID &&
         id !== REGION_FILTER_ID
@@ -451,7 +535,11 @@ function restoreStateFromUrl (): void {
   if (restoredCountry !== '') {
     filters.value = [
       ...otherFilters,
-      createGeographyFilter(
+      restoredFilters.find(
+        ({ id, value }) =>
+          id === COUNTRY_FILTER_ID &&
+          value === restoredCountry
+      ) ?? createGeographyFilter(
         COUNTRY_FILTER_ID,
         restoredCountry,
         buildCountryFieldQuery
@@ -464,7 +552,11 @@ function restoreStateFromUrl (): void {
   if (restoredRegion !== '') {
     filters.value = [
       ...otherFilters,
-      createGeographyFilter(
+      restoredFilters.find(
+        ({ id, value }) =>
+          id === REGION_FILTER_ID &&
+          value === restoredRegion
+      ) ?? createGeographyFilter(
         REGION_FILTER_ID,
         restoredRegion,
         buildRegionFieldQuery
@@ -487,6 +579,17 @@ function saveStateToUrl (): void {
   searchParams.delete(
     LEGACY_FILTERS_URL_PARAMETER
   )
+
+  if (filters.value.length > 0) {
+    searchParams.set(
+      FILTERS_URL_PARAMETER,
+      JSON.stringify(filters.value)
+    )
+  } else {
+    searchParams.delete(
+      FILTERS_URL_PARAMETER
+    )
+  }
 
   searchParams.delete(
     COUNTRY_URL_PARAMETER
@@ -650,23 +753,78 @@ function getCategoryTitle (
   id: string,
   title: string
 ): string {
-  return te(id)
+  return hasTranslation(i18n, id)
     ? t(id)
     : title
+}
+
+function hasTranslation (
+  value: unknown,
+  key: string
+): boolean {
+  if (
+    typeof value !== 'object' ||
+    value === null ||
+    !('te' in value) ||
+    typeof value.te !== 'function'
+  ) {
+    return false
+  }
+
+  return value.te(key)
 }
 
 function onFilterChange (
   { id, filter }: ExploreFilterChange
 ): void {
+  const otherGeographyFilterId =
+    id === COUNTRY_FILTER_ID
+      ? REGION_FILTER_ID
+      : id === REGION_FILTER_ID
+        ? COUNTRY_FILTER_ID
+        : null
+
+  updateGeographySelection(id, filter)
+
   const remainingFilters =
     filters.value.filter(
       ({ id: existingId }) =>
-        existingId !== id
+        existingId !== id &&
+        (
+          filter === null ||
+          otherGeographyFilterId === null ||
+          existingId !== otherGeographyFilterId
+        )
     )
 
   filters.value = filter === null
     ? remainingFilters
     : [...remainingFilters, filter]
+}
+
+function updateGeographySelection (
+  filterId: string,
+  filter: ExploreFilter | null
+): void {
+  if (filterId === COUNTRY_FILTER_ID) {
+    selectedCountryCode.value =
+      typeof filter?.value === 'string'
+        ? filter.value
+        : ''
+
+    if (filter !== null) {
+      selectedRegionId.value = ''
+    }
+  } else if (filterId === REGION_FILTER_ID) {
+    selectedRegionId.value =
+      typeof filter?.value === 'string'
+        ? filter.value
+        : ''
+
+    if (filter !== null) {
+      selectedCountryCode.value = ''
+    }
+  }
 }
 
 interface GeographyFilterConfig {
@@ -801,6 +959,61 @@ function removeFilter (
   }
 }
 
+function toggleFilterMode (
+  filterId: string
+): void {
+  filters.value = filters.value.map(
+    filter => filter.id === filterId
+      ? {
+          ...filter,
+          excluded: !filter.excluded
+        }
+      : filter
+  )
+}
+
+function openSearchResults (): void {
+  navigateToSearch(
+    buildExploreSearchQuery(filters.value)
+  )
+}
+
+function navigateToSearch (
+  searchQuery: string
+): void {
+  const searchUrl = new URL(
+    '/search',
+    window.location.origin
+  )
+
+  searchUrl.searchParams.set(
+    'schema',
+    schema.value
+  )
+
+  if (searchQuery !== '') {
+    searchUrl.searchParams.set(
+      'raw-query',
+      searchQuery
+    )
+  }
+
+  window.location.assign(
+    `${searchUrl.pathname}${searchUrl.search}`
+  )
+}
+
+function openCpcsReceivedRecords (
+  countryCode: string
+): void {
+  navigateToSearch(
+    buildCpcsReceivedSearchQuery(
+      filters.value,
+      countryCode
+    )
+  )
+}
+
 async function loadGeographyOptions (): Promise<void> {
   geographyLoading.value = true
   geographyError.value = false
@@ -859,6 +1072,12 @@ watch(
   saveStateToUrl
 )
 
+watch(
+  filters,
+  saveStateToUrl,
+  { deep: true }
+)
+
 onMounted(async () => {
   window.addEventListener(
     'popstate',
@@ -877,6 +1096,10 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+.filter-mode-button {
+  line-height: 1;
+}
+
 .filter-remove-button {
   width: 0.65rem;
   height: 0.65rem;

@@ -1,9 +1,8 @@
 <template>
-  <!-- Internal vs external
-Applicable records: cpc
-External (international) CPCs are CPCs where the source country is not the same as the country publishing the record
-Internal (national) CPCs are CPCs where the source country is the same as the country publishing the record
--->
+  <!--
+  Compares CPCs whose source country matches the publishing country (internal) with those that do not (external); selecting a segment filters Explore.
+  Displayed for CPCs in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">
@@ -105,7 +104,10 @@ import {
 import { useRealm } from '~/services/composables/realm.js'
 import SolrApi from '~/api/solr.js'
 import {
+  buildCpcTypeQuery,
   buildExploreFieldQueries,
+  getCpcInternalCountFromPivot,
+  getCpcTypeCountry,
   type ExploreFilter,
   type ExploreFilterChange
 } from '../../explore-filters'
@@ -117,7 +119,6 @@ type CpcType =
 interface CpcTypeConfig {
   type: CpcType
   label: string
-  query: string
   colour: string
 }
 
@@ -128,8 +129,8 @@ interface CpcTypeCount extends CpcTypeConfig {
 const CPC_TYPE_FILTER_ID =
   'internal-external-cpc'
 
-const CPC_TYPE_FIELD =
-  'picGrantedCountryTypes_ss'
+const CPC_COUNTRY_PIVOT =
+  'government_s,sourceCountries_ss'
 
 const EMPTY_COLOUR = '#e9ecef'
 const RESULT_ROWS = 1
@@ -139,13 +140,11 @@ const CPC_TYPES: readonly [CpcTypeConfig, CpcTypeConfig] = [
   {
     type: 'internal',
     label: 'Internal',
-    query: `${CPC_TYPE_FIELD}:[* TO *]`,
     colour: '#198754'
   },
   {
     type: 'external',
     label: 'External',
-    query: `-${CPC_TYPE_FIELD}:[* TO *]`,
     colour: '#0d6efd'
   }
 ]
@@ -164,7 +163,8 @@ const emit = defineEmits<{
 
 const {
   schema,
-  filters
+  filters,
+  country
 } = toRefs(props)
 
 const realm = useRealm()
@@ -172,6 +172,12 @@ const solrApi = new SolrApi()
 
 const typeCounts =
   ref<CpcTypeCount[]>([])
+
+const typeFilterQueries =
+  ref<Record<CpcType, string>>({
+    internal: buildCpcTypeQuery('internal'),
+    external: buildCpcTypeQuery('external')
+  })
 
 const loading = ref(true)
 const error = ref(false)
@@ -256,8 +262,7 @@ function selectType (
 ): void {
   const {
     type,
-    label,
-    query
+    label
   } = typeItem
 
   if (selectedType.value === type) {
@@ -274,21 +279,25 @@ function selectType (
     filter: {
       id: CPC_TYPE_FILTER_ID,
       label: `CPC type: ${label}`,
-      fieldQuery: query,
+      fieldQuery: typeFilterQueries.value[type],
       value: type
     }
   })
 }
 
 function buildBaseFieldQueries (): string[] {
+  const filtersWithoutCpcType =
+    filters.value.filter(
+      ({ id }) => id !== CPC_TYPE_FILTER_ID
+    )
+
   return [
     `schema_s:${schema.value}`,
     `realm_ss:${realm.value.toLowerCase()}`,
     '_state_s:public',
     '_latest_s:true',
     ...buildExploreFieldQueries(
-      filters.value,
-      [CPC_TYPE_FILTER_ID]
+      filtersWithoutCpcType
     )
   ]
 }
@@ -321,13 +330,81 @@ async function loadCounts (): Promise<void> {
     const fieldQueries =
       buildBaseFieldQueries()
 
-    const counts = await Promise.all(
-      CPC_TYPES.map(
-        async ({ query }) =>
-          await getCount(fieldQueries, query)
-      )
+    const countryCode = getCpcTypeCountry(
+      country.value,
+      filters.value
     )
+    let queries: Record<CpcType, string> = {
+      internal: buildCpcTypeQuery('internal'),
+      external: buildCpcTypeQuery('external')
+    }
 
+    let counts: number[] = []
+
+    if (countryCode === undefined) {
+      const result = await solrApi.query({
+        fieldQueries,
+        query: '*:*',
+        fields: 'id',
+        rowsPerPage: RESULT_ROWS,
+        facetPivot: CPC_COUNTRY_PIVOT,
+        facetLimit: -1,
+        facetMinCount: 1
+      })
+
+      const publisherSourcePivot =
+        result.facet_counts?.facet_pivot?.[
+          CPC_COUNTRY_PIVOT
+        ]
+      const internalCount =
+        getCpcInternalCountFromPivot(
+          publisherSourcePivot
+        )
+
+      queries = {
+        internal: buildCpcTypeQuery(
+          'internal',
+          undefined,
+          publisherSourcePivot
+        ),
+        external: buildCpcTypeQuery(
+          'external',
+          undefined,
+          publisherSourcePivot
+        )
+      }
+
+      counts = [
+        internalCount,
+        Math.max(
+          0,
+          result.response.numFound - internalCount
+        )
+      ]
+    } else {
+      queries = {
+        internal: buildCpcTypeQuery(
+          'internal',
+          countryCode
+        ),
+        external: buildCpcTypeQuery(
+          'external',
+          countryCode
+        )
+      }
+
+      counts = await Promise.all(
+        CPC_TYPES.map(
+          async ({ type }) =>
+            await getCount(
+              fieldQueries,
+              queries[type]
+            )
+        )
+      )
+    }
+
+    typeFilterQueries.value = queries
     typeCounts.value = CPC_TYPES.map(
       (config, index) => ({
         ...config,
@@ -336,6 +413,10 @@ async function loadCounts (): Promise<void> {
     )
   } catch {
     typeCounts.value = []
+    typeFilterQueries.value = {
+      internal: buildCpcTypeQuery('internal'),
+      external: buildCpcTypeQuery('external')
+    }
     error.value = true
   } finally {
     loading.value = false
@@ -345,7 +426,8 @@ async function loadCounts (): Promise<void> {
 watch(
   [
     schema,
-    filters
+    filters,
+    country
   ],
   async () => {
     await loadCounts()

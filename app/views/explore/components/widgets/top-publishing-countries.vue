@@ -1,4 +1,8 @@
 <template>
+  <!--
+  Ranks the countries publishing the most matching public, latest records; selecting a row filters Explore to that country.
+  Displayed for permits, CPCs, measures, procedures, authorities, and checkpoints in global or region scope; hidden in country scope or for other record types.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">
@@ -102,7 +106,7 @@ interface CountryCount {
 }
 
 const COUNTRY_FILTER_ID =
-  'publishing-country'
+  'dashboard-country'
 
 const COUNTRY_FACET_FIELD =
   'government_s'
@@ -294,8 +298,7 @@ function selectCountry (
     id: COUNTRY_FILTER_ID,
     filter: {
       id: COUNTRY_FILTER_ID,
-      label:
-        `Publishing country: ${countryName}`,
+      label: `Country: ${countryName}`,
       fieldQuery:
         `${COUNTRY_FACET_FIELD}:${code}`,
       value: code

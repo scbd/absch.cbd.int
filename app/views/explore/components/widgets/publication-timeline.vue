@@ -1,5 +1,8 @@
 <template>
-  <!-- Number of records published per year since 2014 -->
+  <!--
+  Shows matching records published per year since 2014; selecting a year filters Explore.
+  Displayed for permits, CPCs, measures, procedures, authorities, and checkpoints in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">

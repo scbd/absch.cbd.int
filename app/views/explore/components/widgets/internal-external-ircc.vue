@@ -1,10 +1,10 @@
 <template>
+  <!-- Compares permits by PIC-granted country type (internal, external, confidential); selecting a segment filters Explore. Shown for permits in global, country, or region scope; hidden for other record types or scopes. -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">
         Internal vs External
       </h5>
-
       <div
         v-if="loading"
         class="py-4 text-center text-muted"
@@ -194,9 +194,7 @@ function getPercentage (count: number): number {
   )
 }
 
-const internalPercent = computed(() =>
-  getPercentage(internal.value)
-)
+const internalPercent = computed(() => getPercentage(internal.value))
 
 const externalPercent = computed(() =>
   getPercentage(external.value)
@@ -437,7 +435,6 @@ watch(
   }
 )
 </script>
-
 <style scoped>
 .country-type-content {
   display: flex;

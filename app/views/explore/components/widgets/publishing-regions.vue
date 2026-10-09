@@ -1,4 +1,8 @@
 <template>
+  <!--
+  Shows matching records distributed by CBD region of the publishing country; selecting a region filters Explore.
+  Displayed for permits, CPCs, measures, procedures, authorities, and checkpoints in global scope; hidden in country or region scope and for other record types.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">
@@ -123,7 +127,7 @@ interface PublishingRegionCount
 }
 
 const PUBLISHING_REGION_FILTER_ID =
-  'publishing-region'
+  'dashboard-region'
 
 const PUBLISHING_REGION_FIELD =
   'countryRegions_REL_ss'
@@ -298,7 +302,7 @@ function selectRegion (
     id: PUBLISHING_REGION_FILTER_ID,
     filter: {
       id: PUBLISHING_REGION_FILTER_ID,
-      label: `Publishing region: ${label}`,
+      label: `Region: ${label}`,
       fieldQuery: buildRegionQuery(id),
       value: id
     }

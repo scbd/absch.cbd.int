@@ -1,5 +1,8 @@
 <template>
-  <!-- compares commercial vs non-commercial vs confidential -->
+  <!--
+  Compares permits by commercial, non-commercial, and confidential usage; selecting a segment filters Explore.
+  Displayed for permits in global or country scope; hidden in region scope or for other record types.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">

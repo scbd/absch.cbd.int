@@ -1,5 +1,8 @@
 <template>
-  <!-- displays the number of records published in the last 12 months, 6 months, 3 months or 1 month. -->
+  <!--
+  Shows the count of matching records published within the selected recent period.
+  Displayed for permits, CPCs, measures, procedures, authorities, and checkpoints in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body d-flex flex-column text-center">
       <h5 class="card-title mb-0">

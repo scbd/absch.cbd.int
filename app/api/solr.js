@@ -6,7 +6,7 @@ export default class SolrApi extends ApiBase
         super(options);
     }
     
-    async query({ searchField, fieldQueries, query, sort, fields, start, rowsPerPage, facetFields, facetLimit, facetMinCount, facetSort } = {}) {
+    async query({ searchField, fieldQueries, query, sort, fields, start, rowsPerPage, facetFields, facetPivot, facetLimit, facetMinCount, facetSort } = {}) {
 
       const params = ( { 
           df: searchField? searchField:'text_EN_txt',
@@ -14,8 +14,9 @@ export default class SolrApi extends ApiBase
           q: query,
           sort: this.localizeFields(sort),
           fl: this.localizeFields(fields),
-          facet: facetFields ? true : undefined,
+          facet: facetFields || facetPivot ? true : undefined,
           'facet.field': facetFields,
+          'facet.pivot': facetPivot,
           'facet.limit': facetLimit,
           'facet.mincount': facetMinCount,
           'facet.sort': facetSort,

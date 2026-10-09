@@ -114,7 +114,9 @@ export const widgets: ExploreWidget[] = [
       'absPermit'
     ],
     scopes: [
-      'global', 'region'
+      'global',
+      'country',
+      'region'
     ],
     category: 'geography',
     columnClass: 'col-md-4'
@@ -261,7 +263,7 @@ export const widgets: ExploreWidget[] = [
     scopes: [
       'country'
     ],
-    category: 'overview',
+    category: 'geography',
     columnClass: 'col-md-4'
   },
   {

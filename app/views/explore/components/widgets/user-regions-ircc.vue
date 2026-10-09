@@ -1,5 +1,8 @@
 <template>
-  <!-- show publication by region -->
+  <!--
+  Shows how permits with a user location are distributed across CBD regions; selecting a region filters Explore.
+  Displayed for permits in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">

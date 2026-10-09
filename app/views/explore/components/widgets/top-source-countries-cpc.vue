@@ -1,5 +1,8 @@
 <template>
-  <!-- shows top 10 source countries for cpcs  -->
+  <!--
+  Ranks the source countries named by matching CPCs; selecting a row filters Explore to that source country.
+  Displayed for CPCs in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">
@@ -61,7 +64,7 @@
 
           <span class="progress">
             <span
-              class="progress-bar bg-success"
+              class="progress-bar source-country-progress-bar"
               role="progressbar"
               :style="{
                 width:
@@ -443,6 +446,10 @@ watch(
 
 .progress {
   height: 0.75rem;
+}
+
+.source-country-progress-bar {
+  background-color: #0d6efd;
 }
 
 .country-count {

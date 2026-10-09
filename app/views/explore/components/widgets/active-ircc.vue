@@ -1,4 +1,8 @@
 <template>
+  <!--
+  Compares permits with active certificates to permits that have expired; selecting a segment filters Explore.
+  Displayed for permits in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center">

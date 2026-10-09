@@ -1,5 +1,8 @@
 <template>
-  <!-- campares the gr types + atk keywords for irccs and cpcs -->
+  <!--
+  Compares related genetic-resource types and associated traditional-knowledge keywords in permits and CPCs; selecting a category filters Explore.
+  Displayed for permits or CPCs in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body">
       <h5 class="card-title text-center mb-2">

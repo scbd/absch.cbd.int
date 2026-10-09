@@ -1,5 +1,8 @@
 <template>
-  <!-- display count of total records -->
+  <!--
+  Shows the number of public, latest records matching the selected record type and Explore filters.
+  Displayed for permits, CPCs, measures, procedures, authorities, and checkpoints in global, country, or region scope; hidden for other record types or scopes.
+  -->
   <div class="card h-100">
     <div class="card-body text-center">
       <h5 class="card-title">
