@@ -36,6 +36,8 @@ const abschRouteUrls = {
    pdf_templates_contacts_schema                  : { component: ()=>asyncLogError(import('~/views/pdf-templates/abs-contacts-pdf')) },
    pdf_templates_checkpoint_communique_documentId : { component: ()=>asyncLogError(import('~/views/pdf-templates/checkpoint-communique')) },
    pdf_templates_ircc_documentId                  : { component: ()=>asyncLogError(import('~/views/pdf-templates/ircc')) },
+   explore                               : { component: ()=>asyncLogError(import('~/views/explore/explore')) },
+   
 };
 
 app.config(["$routeProvider", function ($routeProvider) {
@@ -111,6 +113,7 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/pdf-templates/contacts/:schema',                    { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.absContact,"resolve":{ ...abschRouteUrls.pdf_templates_contacts_schema,                               }}).
   whenAsync('/pdf-templates/checkpoint-communique/:documentId',   { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.checkpointCommnunique,"resolve":{ ...abschRouteUrls.pdf_templates_checkpoint_communique_documentId,              }}).
   whenAsync('/pdf-templates/ircc/:documentId',                    { ...mapView(angularViewWrapper),                    "resolveController":true,"resolveUser":false,"label":routesLabels.ircc,"resolve":{ ...abschRouteUrls.pdf_templates_ircc_documentId,                               }}).
+  whenAsync('/explore/:recordType',                     { ...mapView(vueViewWrapper),                         "label": routesLabels.explore, "param": 'true', "resolveController": true, "resolve": { ...abschRouteUrls.explore } }). 
   otherwise({ templateUrl: commonRoutes.baseUrl + "views/shared/404.html", label: "404 Error" });
 
 }]);
