@@ -3,9 +3,9 @@
 | Step | Jira status before the step | Transition to fire → resulting status | Command |
 |---|---|---|---|
 | 0 — Design | Draft | 121 "Draft To Review" → In Review | `/grilling` |
-| 1 — Plan | In Review | 171 "Accepted for Development" → Selected for Development | `/scbd-agent-plan ticket=CHM-XXX` |
+| 1 — Branch + Plan | In Review | 171 "Accepted for Development" → Selected for Development | `/scbd-agent-github ticket=CHM-XXX action=prepare-branch`<br>`/scbd-agent-plan ticket=CHM-XXX`<br>commit the plan file alone once approved |
 | 2 — Implement | Selected for Development | 111 "Review To Progress" → In Progress | `/scbd-agent-implement ticket=CHM-XXX` |
-| 3 — Ship (PR open) | In Progress | 141 "Code Review" → Peer Review | `/scbd-agent-github ticket=CHM-XXX action=prepare-branch`<br>`/scbd-agent-github ticket=CHM-XXX action=open-pr`<br>`/scbd-agent-jira ticket=CHM-XXX action=peer-review` |
+| 3 — Ship (PR open) | In Progress | 141 "Code Review" → Peer Review | `/scbd-agent-github ticket=CHM-XXX action=open-pr`<br>`/scbd-agent-jira ticket=CHM-XXX action=peer-review` |
 | 0-3 — One-shot (all steps) | wherever the ticket currently is | runs the transitions above end-to-end | `/scbd-agent-workflow CHM-XXX component=CHM` |
 
 Full transition map, including the gotchas about transition names not
@@ -16,6 +16,17 @@ transition at each step boundary via `/scbd-agent-jira` (or manually in
 Jira). Always verify the available transitions first with
 `getTransitionsForJiraIssue`.
 
+**Branch before any file work, not after.** The ticket's branch is created
+at the *start* of Step 1, before `/scbd-agent-plan` even runs — not at Ship
+time. Both the plan file and the implementation diff land on that branch
+from the moment they exist, never sitting uncommitted on `dev`/`master`
+where a stray `git checkout`/`pull`/`stash`, or a second ticket started in
+the same working tree, could clobber or mix them together. This was a real
+gap (found 2026-09-21, mid-CHM-989): `/scbd-agent-implement`'s own
+boundaries correctly keep it git-inert (no `switch`), but the *recipe*
+above previously only created the branch in Step 3, leaving Steps 1-2's
+work exposed on whatever branch happened to be checked out.
+
 ## How to take a ticket from request to PR
 
 How to take a user-raised Jira ticket from request to PR using the skills in this
@@ -24,7 +35,7 @@ rules that back this flow ("a human decides before code exists").
 
 **Feature and bug tickets follow the exact same steps below** — a bug report
 still needs Step 0's review before work begins; it doesn't skip straight to
-`Selected for Development`. The only difference is the branch type in Step 3
+`Selected for Development`. The only difference is the branch type in Step 1
 (`feat` vs `bug`), which just matches the ticket's Jira issue type.
 
 No ticket yet — just an idea for a feature? Start with
@@ -43,15 +54,26 @@ vague — user-raised tickets often are — stress-test the requirements first:
 **Jira:** move the ticket `Draft → In Review` (121 "Draft To Review") when the
 design review starts.
 
-### Step 1 — Plan
+### Step 1 — Branch + Plan
 
 ```
+/scbd-agent-github ticket=CHM-XXX action=prepare-branch
 /scbd-agent-plan ticket=CHM-XXX
 ```
 
-Reads the Jira ticket, git history, and GitHub context (read-only) and writes an
-uncommitted plan under `docs/plans/`. Review and approve the plan before any code
-exists.
+Create and check out the ticket's branch (`<username>/<type>/CHM-XXX-short-desc`
+off `origin/master`, where `<type>` matches the ticket's Jira issue type — `feat`
+for a feature, `bug` for a bug — this repo's naming convention, overriding
+`scbd-agent-github`'s own `feature/<ticket-key>-slug` default) **before**
+running `/scbd-agent-plan`, so the plan is written onto that branch rather
+than onto `dev`/`master`. `/scbd-agent-plan` reads the Jira ticket, git
+history, and GitHub context (read-only) and writes an uncommitted plan under
+`docs/plans/`. Review and approve the plan before any code exists.
+
+Once approved, commit the plan file **on its own** —
+`docs(CHM-XXX): add implementation plan` — before moving to Step 2. This
+keeps the plan safe on the branch immediately, rather than sitting
+uncommitted alongside (and getting lost in) the implementation diff.
 
 **Jira:** move the ticket `In Review → Selected for Development`
 (171 "Accepted for Development") when the design is accepted and planning begins.
@@ -62,17 +84,18 @@ exists.
 /scbd-agent-implement ticket=CHM-XXX
 ```
 
-Implements the ticket (using the plan if one exists), leaving changes
-**uncommitted** and touching nothing external. Review the diff.
+Implements the ticket (using the plan if one exists) onto the branch already
+checked out in Step 1, leaving the implementation changes **uncommitted** and
+touching nothing external. Review the diff.
 
 **Jira:** move the ticket `Selected for Development → In Progress`
 (111 "Review To Progress") when implementation starts.
 
 ### Step 3 — Ship
 
-- `/scbd-agent-github` — branch (`<username>/<type>/CHM-XXX-short-desc` off
-  `origin/master`, where `<type>` matches the ticket's Jira issue type — `feat`
-  for a feature, `bug` for a bug), commit, and PR.
+- `/scbd-agent-github action=open-pr` — commit the implementation diff and
+  open the PR. The branch already exists from Step 1, so this step is
+  commit + PR only, not branch creation.
 - `/scbd-agent-jira` — ticket transitions: move the ticket
   `In Progress → Peer Review` (141 "Code Review") when the PR opens. It looks up
   the real transitions first; CHM uses custom ones, not the SCBD/DEV default
