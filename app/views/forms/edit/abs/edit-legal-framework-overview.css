@@ -1,0 +1,6 @@
+/* Matches the darker gray of the national-report edit form's disabled sub-questions
+   (.disabled + the block-region dimmer overlay stacked on top, template.css:1018-1053),
+   without pulling in that loading-spinner directive just for its color effect. */
+.disabled-section {
+  background-color: rgba(0, 0, 0, 0.26);
+}
