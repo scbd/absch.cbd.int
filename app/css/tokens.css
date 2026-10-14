@@ -1,0 +1,42 @@
+/*
+  SCBD design tokens — single source of truth for the app's design language.
+  Consume with var(--scbd-*) from component styles; do not hardcode these values.
+
+  Each clearing-house (ABSCH, BCH, CHM) has its own color identity: these are the
+  base defaults. Per-clearing-house palettes override them via a :root block in
+  app/css/<ch>/tokens.css, linked after this file from app/templates/<ch>/index.ejs
+  (same override pattern as app/css/<ch>/template.css).
+
+  See docs/adr/0003-design-system-direction.md
+*/
+:root {
+  /* Brand */
+  --scbd-navy: #0b3b4d;
+  --scbd-navy-50: #eef4f7;
+  --scbd-accent: #e4572e;
+  --scbd-accent-50: #fde9e1;
+  --scbd-accent-600: #c8451f;
+
+  /* Text */
+  --scbd-ink: #1b2a33;
+  --scbd-ink-2: #3c4e57;
+  --scbd-ink-3: #6a7d87;
+
+  /* Surfaces & lines */
+  --scbd-line: #dde4e8;
+  --scbd-line-2: #eef2f4;
+  --scbd-bg: #eef1f4;
+  --scbd-card: #ffffff;
+
+  /* Feedback */
+  --scbd-ok: #2e8b57;
+  --scbd-danger: #d64541;
+  --scbd-danger-50: #fdf1f0;
+  --scbd-danger-200: #f1c4c2;
+
+  /* Focus */
+  --scbd-focus: #2a6fdb;
+
+  /* Shape */
+  --scbd-radius: 7px;
+}
