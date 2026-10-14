@@ -33,33 +33,23 @@
                     :document-info="documentInfo" :locale="locale"></resource-mobilisation-2020 >
             <national-report-6 v-if="documentInfo?.type == 'nationalReport6'"  
                     :document-info="documentInfo" :locale="locale"></national-report-6>  
-            <!-- loading state via #fallback slot -->
-            <!-- <template #fallback>
-
-                Loading...
-            </template> -->
-        <!-- </Suspense> -->
+            
+                <!-- ABS -->
+                <view-abs-legal-framework-overview v-if="documentInfo?.type == 'absLegalFramework'"  
+                        :document-info="documentInfo" :locale="locale"></view-abs-legal-framework-overview>                
+                        <!-- ABS -->
+                <!-- loading state via #fallback slot -->
+                <!-- <template #fallback>
+                        Loading...
+                </template>
+        </Suspense> -->
         <!-- TODO: put schema view definition element and add v-if for schema name -->
     </div>
 </template>
 
 <script setup>
 
-    import aichiTarget from '~/views/forms/view/chm/aichi-target.vue'
-    import nationalAssessment from '~/views/forms/view/chm/national-assessment.vue'
-    import nationalReport from '~/views/forms/view/chm/national-report.vue'
-    import nationalTarget from '~/views/forms/view/chm/national-target.vue'  
-    import implementationActivity from '~/views/forms/view/chm/implementation-activity.vue'
-    import strategicPlanIndicator from '~/views/forms/view/chm/strategic-plan-indicator.vue'
-    import undbActor from '~/views/forms/view/chm/undb-actor.vue'
-    import undbAction from '~/views/forms/view/chm/undb-action.vue'
-    import undbParty from '~/views/forms/view/chm/undb-party.vue'
-    import undbPartner from '~/views/forms/view/chm/undb-partner.vue'
-    import event from '~/views/forms/view/chm/event.vue'
-    import marineEbsa from '~/views/forms/view/chm/marine-ebsa.vue'
-    import financialReport2015 from '~/views/forms/view/chm/financial-report-2015.vue'
-    import resourceMobilisation2020 from '~/views/forms/view/chm/resource-mobilisation-2020.vue' 
-    import nationalReport6 from '~/views/forms/view/chm/national-report-6.vue'
+    import { defineAsyncComponent } from 'vue'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},
@@ -67,8 +57,22 @@
         documentInfo        : { type : Object, required:true },
     })
 
-    //TODO : use defineAsyncComponent to load components based on the schema 
-    // const aichiTarget = defineAsyncComponent(()=>import('~/views/forms/view/chm/aichi-target.vue'));
+    const aichiTarget = defineAsyncComponent(() => import('~/views/forms/view/chm/aichi-target.vue').then(m => m.default))
+    const nationalAssessment = defineAsyncComponent(() => import('~/views/forms/view/chm/national-assessment.vue').then(m => m.default))
+    const nationalReport = defineAsyncComponent(() => import('~/views/forms/view/chm/national-report.vue').then(m => m.default))
+    const nationalTarget = defineAsyncComponent(() => import('~/views/forms/view/chm/national-target.vue').then(m => m.default))
+    const implementationActivity = defineAsyncComponent(() => import('~/views/forms/view/chm/implementation-activity.vue').then(m => m.default))
+    const strategicPlanIndicator = defineAsyncComponent(() => import('~/views/forms/view/chm/strategic-plan-indicator.vue').then(m => m.default))
+    const undbActor = defineAsyncComponent(() => import('~/views/forms/view/chm/undb-actor.vue').then(m => m.default))
+    const undbAction = defineAsyncComponent(() => import('~/views/forms/view/chm/undb-action.vue').then(m => m.default))
+    const undbParty = defineAsyncComponent(() => import('~/views/forms/view/chm/undb-party.vue').then(m => m.default))
+    const undbPartner = defineAsyncComponent(() => import('~/views/forms/view/chm/undb-partner.vue').then(m => m.default))
+    const event = defineAsyncComponent(() => import('~/views/forms/view/chm/event.vue').then(m => m.default))
+    const marineEbsa = defineAsyncComponent(() => import('~/views/forms/view/chm/marine-ebsa.vue').then(m => m.default))
+    const financialReport2015 = defineAsyncComponent(() => import('~/views/forms/view/chm/financial-report-2015.vue').then(m => m.default))
+    const resourceMobilisation2020 = defineAsyncComponent(() => import('~/views/forms/view/chm/resource-mobilisation-2020.vue').then(m => m.default))
+    const nationalReport6 = defineAsyncComponent(() => import('~/views/forms/view/chm/national-report-6.vue').then(m => m.default))
+    const viewAbsLegalFrameworkOverview = defineAsyncComponent(() => import('~/views/forms/view/abs/abs-legal-framework-overview.vue').then(m => m.default))
 </script>
 
 <style lang="scss" scoped>

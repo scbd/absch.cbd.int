@@ -52,7 +52,8 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 				const vueComponentSchemas = ['aichiTarget', 'nationalAssessment','nationalReport',
 					'nationalTarget',"implementationActivity",'strategicPlanIndicator',
 					'undbActor','undbParty','undbAction','undbPartner','event','marineEbsa',
-					'resourceMobilisation','resourceMobilisation2020','nationalReport6', 'nbsap'];
+					'resourceMobilisation','resourceMobilisation2020','nationalReport6', 'nbsap',
+					'absLegalFramework'];
 		
 				$scope.hideClose = false;
 				if($attr.hideClose){ 
@@ -260,7 +261,7 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 						})
 						.finally(function () {
 							$scope.loading = false;
-							$scope.showRecord = $scope.internalDocumentInfo.deletedOn ? false : true;
+							$scope.showRecord = $scope.internalDocumentInfo?.deletedOn ? false : true;
 						})
 
 					};
@@ -519,6 +520,7 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 						if(schema == 'measure'                          ){ return await import('~/views/forms/view/abs/view-measure.directive') };
 						if(schema == 'absNationalModelContractualClause'){ return await import('~/views/forms/view/abs/view-abs-national-model-contractual-clause.directive') };
 						if(schema == 'absProcedure'                     ){ return await import('~/views/forms/view/abs/view-abs-procedure.directive') };
+						if(schema == 'absLegalFramework'                ){ return await import('~/views/forms/view/abs/view-abs-legal-framework.directive') };
 						if(schema == 'capacityBuildingInitiative'       ){ return await import('~/views/forms/view/view-capacity-building-initiative.directive') };
 						if(schema == 'contact'                          ){ return await import('~/views/forms/view/view-contact.directive') };
 						if(schema == 'authority'                        ){ return await import('~/views/forms/view/view-authority.directive') };

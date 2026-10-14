@@ -60,7 +60,8 @@
     padding-left: 0.25rem;
     padding-right: 1rem;
 }
-#Search-Filter .filter-item:hover{
+#Search-Filter .filter-item:hover,
+#Search-Filter .filter-item-label{
     background:#ddd;
 }
 

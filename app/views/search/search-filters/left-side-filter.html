@@ -32,7 +32,7 @@
                     </div>
 
 
-                    <div class="list-group-item filter-item" ng-repeat="filter in filters"  ng-show="!state[schema]">
+                    <div class="list-group-item filter-item" ng-class="{'filter-item-label': filter.type=='label'}" ng-repeat="filter in filters"  ng-show="!state[schema]">
                         
                         <div class="dropdown float-start bring-to-front" ng-if="filter.filterValue!=undefined||hasItems(filter.selectedItems)">
                             <button class="btn btn-sm btn-default search-cog-button" type="button"
