@@ -29,6 +29,8 @@ const recordListError = mergeTranslationKeys(recordListT);
                 // the button text is inside the vue component,
                 // so we need to get the translation from the translation service and pass it to the vue component
                 $scope.buttonText = translationService.get('recordListT.bulkImport')
+
+                $scope.selectedRecords = [];
                 $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
@@ -549,6 +551,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 }
                 $scope.changeFilter = function (type ) {
                     if($scope.loading) return;
+                    $scope.selectedRecords = [];
                     $scope.recordFilter = type;
                     $scope.isDraftRecord = false;
                     if(type==''){
@@ -585,6 +588,7 @@ const recordListError = mergeTranslationKeys(recordListT);
                 function loadRecords(pageNumebr) {
                     $scope.loading = true;
                     $scope.records = [];
+                    $scope.selectedRecords = [];
                     var schema = $filter("mapSchema")($routeParams.document_type);
 
                     if (schema === null || schema == undefined)
@@ -813,6 +817,58 @@ const recordListError = mergeTranslationKeys(recordListT);
                                 updateDocumentStatus(identifier, workflowActivity, true);
                         });;
                 }
+                //============================================================
+                //
+                //
+                //============================================================
+                $scope.isSelectable = function (record) {
+                    if (!record || record.revoked) return false;
+                    if ($scope.isRequest(record)) return false;
+                    if (record.workflowActivityStatus === 'pending') return false;
+                    var hasDraft     = $scope.isDraft(record);
+                    var hasPublished = $scope.isPublished(record);
+                    return (hasDraft && !hasPublished) || (!hasDraft && hasPublished);
+                };
+
+                $scope.isSelected = function (record) {
+                    return _.some($scope.selectedRecords, { identifier: record.identifier });
+                };
+
+                $scope.toggleSelection = function (record) {
+                    if (!$scope.isSelectable(record)) return;
+                    var already = _.some($scope.selectedRecords, { identifier: record.identifier });
+                    if (already) {
+                        $scope.selectedRecords = $scope.selectedRecords.filter(function (r) { return r.identifier !== record.identifier; });
+                    } else {
+                        $scope.selectedRecords = $scope.selectedRecords.concat([record]);
+                    }
+                };
+
+                $scope.isAllSelected = function () {
+                    var selectable = ($scope.filteredRecords || []).filter($scope.isSelectable);
+                    return selectable.length > 0 && selectable.every($scope.isSelected);
+                };
+
+                $scope.toggleSelectAll = function () {
+                    if ($scope.isAllSelected()) {
+                        $scope.selectedRecords = [];
+                    } else {
+                        $scope.selectedRecords = ($scope.filteredRecords || []).filter($scope.isSelectable);
+                    }
+                };
+
+                $scope.onBulkDeleted = function (result) {
+                    (result.deletedIds || []).forEach(function (id) {
+                        var idx = _.findIndex($scope.records, { identifier: id });
+                        if (idx >= 0) $scope.records.splice(idx, 1);
+                    });
+                    (result.pendingIds || []).forEach(function (id) {
+                        var cur = _.find($scope.records, { identifier: id });
+                        if (cur) cur.workflowActivityStatus = 'pending';
+                    });
+                    $scope.selectedRecords = [];
+                };
+
                 $scope.isDisableEdit = function (schema){
                     return  realm.schemas[schema].disableEdit;
                 }
@@ -878,8 +934,19 @@ const recordListError = mergeTranslationKeys(recordListT);
                     }
                 }
 
+                async function loadBulkDeleteComponent(){
+                    const module = await import('~/components/register/bulk-delete-button.vue');
+                    $scope.bulkDeleteVueComponent = {
+                        components: {
+                            BulkDeleteButton: module.default,
+                        }
+                    };
+                    $scope.$apply();
+                }
+
                 loadRecords(1);
                 loadOfflineFormatDetails();
                 loadBulkUploadComponent();
+                loadBulkDeleteComponent();
 
             }];
