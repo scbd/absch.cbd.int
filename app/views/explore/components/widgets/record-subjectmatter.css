@@ -1,0 +1,103 @@
+.subject-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.subject-chart {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  flex: 0 0 112px;
+  border-radius: 50%;
+}
+
+.subject-chart-centre {
+  position: absolute;
+  inset: 23px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.subject-chart-centre strong {
+  font-size: 1rem;
+}
+
+.subject-chart-centre small {
+  color: #6c757d;
+  font-size: 0.65rem;
+}
+
+.subject-legend {
+  min-width: 0;
+  flex: 1;
+}
+
+.subject-button {
+  display: grid;
+  grid-template-columns:
+    0.75rem minmax(0, 1fr) auto;
+  gap: 0.4rem;
+  align-items: center;
+  width: 100%;
+  padding: 0.2rem 0.3rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.subject-button:hover,
+.subject-button:focus-visible,
+.subject-button.selected {
+  background-color: #f8f9fa;
+}
+
+.subject-button:focus-visible {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+.subject-button.selected {
+  border-color: #6c757d;
+}
+
+.subject-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.subject-name {
+  overflow: hidden;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subject-count {
+  font-size: 0.8rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.subject-count small {
+  color: #6c757d;
+}
+
+@media (max-width: 575.98px) {
+  .subject-content {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .subject-chart {
+    align-self: center;
+  }
+}
