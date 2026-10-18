@@ -23,7 +23,7 @@ export default ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$e
             if ($routeParams.code) {
                 var queryParameters = {
                     'q': 'realm_ss:' + realm.value.toLowerCase() + ' AND schema_s:measure AND government_s:' + $routeParams.code.toLowerCase(),
-                    'sort': 'government_EN_t asc',
+                    'sort': 'government_EN_s asc',
                     'fl': 'id,identifier_s,title_t,createdDate_dt,summary_t,government_EN_t,status_EN_t,type_EN_t,jurisdiction_EN_t,adoption_dt,entryIntoForce_dt,retired_dt,limitedApplication_dt',
                     'wt': 'json',
                     'start': $scope.currentPage * $scope.itemsPerPage,
