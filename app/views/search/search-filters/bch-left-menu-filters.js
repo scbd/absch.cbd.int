@@ -87,7 +87,7 @@ export const bchLeftMenuFilters = {
                 "fl": "identifier_s,rec_title:title_EN_t",
                 "fq": [ "schema_s:dnaSequence AND title_EN_t:*"],
                 "searchFields":["title_EN_t"],
-                "s": "title_EN_t asc"
+                "s": "title_EN_s asc"
             },
             "title": bchFilters.geneticElement,
             "field": "geneIdentifiers_ss"
@@ -289,7 +289,7 @@ export const bchLeftMenuFilters = {
                 "fl": "identifier_s,rec_title:title_EN_t",
                 "fq": [ "schema_s:dnaSequence AND title_EN_t:*"],
                 "searchFields":["title_EN_t"],
-                "s": "title_EN_t asc"
+                "s": "title_EN_s asc"
             },
             "title": bchFilters.geneticElement,
             "field": "identifier_s"
@@ -387,7 +387,7 @@ export const bchLeftMenuFilters = {
                 "fl": "identifier_s,rec_title:title_EN_t",
                 "fq": [ "schema_s:dnaSequence AND title_EN_t:*"],
                 "searchFields":["title_EN_t"],
-                "s": "title_EN_t asc"
+                "s": "title_EN_s asc"
             },
             "title": bchFilters.geneticElement,
             "field": "geneIdentifiers_ss"
@@ -467,7 +467,7 @@ export const bchLeftMenuFilters = {
                 "fl": "identifier_s,rec_title:title_EN_t",
                 "fq": [ "schema_s:dnaSequence AND title_EN_t:*"],
                 "searchFields":["title_EN_t"],
-                "s": "title_EN_t asc"
+                "s": "title_EN_s asc"
             },
             "title": bchFilters.geneticElement,
             "field": "geneIdentifiers_ss"
@@ -551,7 +551,7 @@ export const bchLeftMenuFilters = {
                 "fl": "identifier_s,rec_title:title_EN_t",
                 "fq": [ "schema_s:dnaSequence AND title_EN_t:*"],
                 "searchFields":["title_EN_t"],
-                "s": "title_EN_t asc"
+                "s": "title_EN_s asc"
             },
             "title": bchFilters.geneticElement,
             "field": "geneIdentifiers_ss"
