@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "_id": "54009e5ab02e1ab8752d2123",
     "hosts": [
@@ -132,28 +132,28 @@
           "type": "national",
           "title": {
               "en": "ABS Legal Framework Overview",
-              "ar": "[NEEDS TRANSLATION] ABS Legal Framework Overview",
-              "es": "[NEEDS TRANSLATION] ABS Legal Framework Overview",
-              "fr": "[NEEDS TRANSLATION] ABS Legal Framework Overview",
-              "ru": "[NEEDS TRANSLATION] ABS Legal Framework Overview",
-              "zh": "[NEEDS TRANSLATION] ABS Legal Framework Overview"
+              "ar": "ABS Legal Framework Overview",
+              "es": "ABS Legal Framework Overview",
+              "fr": "ABS Legal Framework Overview",
+              "ru": "ABS Legal Framework Overview",
+              "zh": "ABS Legal Framework Overview"
           },
           "description": {
               "en": "ABS Legal Framework Overview",
-              "ar": "[NEEDS TRANSLATION] ABS Legal Framework Overview",
-              "es": "[NEEDS TRANSLATION] ABS Legal Framework Overview",
-              "fr": "[NEEDS TRANSLATION] ABS Legal Framework Overview",
-              "ru": "[NEEDS TRANSLATION] ABS Legal Framework Overview",
-              "zh": "[NEEDS TRANSLATION] ABS Legal Framework Overview"
+              "ar": "ABS Legal Framework Overview",
+              "es": "ABS Legal Framework Overview",
+              "fr": "ABS Legal Framework Overview",
+              "ru": "ABS Legal Framework Overview",
+              "zh": "ABS Legal Framework Overview"
           },
           "shortCode": "LFO",
           "titlePlural": {
               "en": "ABS Legal Framework Overviews",
-              "ar": "[NEEDS TRANSLATION] ABS Legal Framework Overviews",
-              "es": "[NEEDS TRANSLATION] ABS Legal Framework Overviews",
-              "fr": "[NEEDS TRANSLATION] ABS Legal Framework Overviews",
-              "ru": "[NEEDS TRANSLATION] ABS Legal Framework Overviews",
-              "zh": "[NEEDS TRANSLATION] ABS Legal Framework Overviews"
+              "ar": "ABS Legal Framework Overviews",
+              "es": "ABS Legal Framework Overviews",
+              "fr": "ABS Legal Framework Overviews",
+              "ru": "ABS Legal Framework Overviews",
+              "zh": "ABS Legal Framework Overviews"
           }
       },
       "absProcedure": {

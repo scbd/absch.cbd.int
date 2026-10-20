@@ -39,7 +39,7 @@ export default ['$scope', '$http', '$location', '$routeParams', '$filter', '$q',
                     'type_ss,email_ss,fax_ss,telephone_ss,government_CEN_s,type_EN_t',
             q   : '(realm_ss:' + realm.toLowerCase() + ') AND (schema_s:' + schemaQuery + ')',
             rows:1000,
-            sort:'createdDate_dt desc,title_t asc',
+            sort:'createdDate_dt desc,title_s asc',
             start:0
         }
         var queryProfile = $http.get(queryURL, { cache: true, params:params });
