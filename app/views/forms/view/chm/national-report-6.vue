@@ -379,24 +379,28 @@
     );
 
     const loadNationalTargets = async function() {
-        isLoadingTargets.value = true;
-        await Promise.all(document.value.nationalTargets?.map(async (item) => {
-            const result = await kmDocumentApi.getDocument((item.identifier)); 
-            result.government=undefined;          
-            nationalTargets.value[item.identifier]={body:result};                           
-        }));
+        if(document.value.nationalTargets?.length>0){
+            isLoadingTargets.value = true;
+            await Promise.all(document.value.nationalTargets?.map(async (item) => {
+                const result = await kmDocumentApi.getDocument((item.identifier)); 
+                result.government=undefined;          
+                nationalTargets.value[item.identifier]={body:result};                           
+            }));
+        }
         isLoadingTargets.value = false;
     }
    
     const loadProgressAssessments = async function() {
-        isLoadingAssessments.value = true;   
-        await Promise.all(document.value.progressAssessments?.map(async (item) => {
-            if (item?.assessment?.identifier){
-                const result = await kmDocumentApi.getDocument((item.assessment.identifier)); 
-                result.government=undefined;                           
-                progressAssessments.value[item.assessment.identifier]={body:result};   
-            }
-        }));  
+        if(document.value.progressAssessments?.length>0){
+            isLoadingAssessments.value = true;   
+            await Promise.all(document.value.progressAssessments?.map(async (item) => {
+                if (item?.assessment?.identifier){
+                    const result = await kmDocumentApi.getDocument((item.assessment.identifier)); 
+                    result.government=undefined;                           
+                    progressAssessments.value[item.assessment.identifier]={body:result};   
+                }
+            }));  
+        }
         isLoadingAssessments.value = false;   
     }
 
