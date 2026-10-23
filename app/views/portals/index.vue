@@ -98,9 +98,7 @@ import { useAuth } from '@scbd/angular-vue/src/index.js'
 import { useRealm } from '~/services/composables/realm.js'
 import { useI18n } from 'vue-i18n'
 import loading from '~/components/common/loading.vue'
-// @ts-expect-error importing js file
 import serverError from '~/components/common/error.vue'
-// @ts-expect-error importing js file
 import CbdArticle from '~/components/common/cbd-article.vue';
 import PageMasthead from '~/components/portals/page-masthead.vue';
 import messages from '~/app-text/templates/bch/footer.json'
