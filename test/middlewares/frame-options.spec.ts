@@ -16,6 +16,18 @@ describe('setFrameOptions', () => {
     expect(headers['X-Frame-Options']).toBe('ALLOW');
   });
 
+  it('frames record pages but not other routes with ?embed=true', () => {
+    expect(run('/en/database/abc?embed=true', { embed: 'true' })['Content-Security-Policy']).toMatch(/^frame-ancestors /);
+    expect(run('/database/abc?embed=true', { embed: 'true' })['X-Frame-Options']).toBe('ALLOW');
+    expect(run('/en/register?embed=true', { embed: 'true' })).toEqual({});
+    expect(run('/en/searchx?embed=true', { embed: 'true' })).toEqual({});
+  });
+
+  it('ignores duplicate embed params', () => {
+    expect(run('/en/search?embed=true&embed=false', { embed: ['true', 'false'] })).toEqual({});
+    expect(run('/en/search?embed=true&embed=true', { embed: ['true', 'true'] })).toEqual({});
+  });
+
   it('covers the pre-redirect URL without a language prefix', () => {
     expect(run('/search?embed=true', { embed: 'true' })['Content-Security-Policy']).toMatch(/^frame-ancestors /);
   });
