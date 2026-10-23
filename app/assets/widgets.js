@@ -1,5 +1,9 @@
 
-const origin = findOrigin() || 'https://absch.cbddev.xyz';
+// var (not const): cbd-events re-runs this script on each article visit, and a
+// top-level const would throw "already declared" on the second run.
+// Prefer the script element that is executing now, so a page loading both the
+// CHM and ABSCH/BCH widgets.js gives each run its own origin.
+var defaultOrigin = scriptOrigin(document.currentScript) || findOrigin() || 'https://absch.cbddev.xyz';
 
 function embedIFrame(widget, options){
 
@@ -14,26 +18,69 @@ function embedIFrame(widget, options){
     iframe.setAttribute('height', options.height||500);
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('data-scbd-widget', '');
 
     widget.parentNode.replaceChild(iframe, widget);
-    
-    window.addEventListener('message', function(evt){
-        var trustedHosts = [
-            /.*\.cbddev\.xyz$/i, /.*\.cbd\.int$/i,
-            /localhost:\d/
-        ];
-        
-        const isTrustedHost = trustedHosts.find(e=>{
-            return e.test(evt.origin)
-        });
-            
-        if(isTrustedHost && evt.data && typeof evt.data == 'string'){
-            var data = JSON.parse(evt.data);
-            if(data.type == 'setClientHeight' && data.iframe == iframe.name){
-                iframe.setAttribute('height', data.height ? (data.height+20) : iframe.height);
-            }
+
+    // One listener per window, however many iframes or script runs.
+    if(!window.scbdChWidgetMessageListener){
+        window.scbdChWidgetMessageListener = onWidgetMessage;
+        window.addEventListener('message', onWidgetMessage);
+    }
+}
+
+function onWidgetMessage(evt){
+    if(!isTrustedOrigin(evt.origin) || !evt.data || typeof evt.data != 'string')
+        return;
+
+    var data;
+    try { data = JSON.parse(evt.data); } catch (e) { return; }
+    if(!data || data.type != 'setClientHeight')
+        return;
+
+    const iframe = [...document.querySelectorAll('iframe[data-scbd-widget]')]
+                    .find(e=>e.name == data.iframe && e.contentWindow == evt.source);
+    // the message must come from the iframe's own provider origin
+    if(!iframe || scriptOrigin(iframe) != evt.origin)
+        return;
+
+    iframe.setAttribute('height', data.height ? (data.height+20) : iframe.height);
+}
+
+function isTrustedOrigin(value){
+    try {
+        const url = new URL(value);
+        return /^https?:$/.test(url.protocol) &&
+            (/\.cbd\.int$/i.test(url.hostname) || /\.cbddev\.xyz$/i.test(url.hostname) || url.hostname == 'localhost');
+    } catch (e) {
+        return false;
+    }
+}
+
+function scriptOrigin(element){
+    if(!element || !element.src)
+        return;
+    try {
+        const url = new URL(element.src);
+        return isTrustedOrigin(url.origin) ? url.origin : undefined;
+    } catch (e) {
+        return undefined;
+    }
+}
+
+// A placeholder with a data-url from a trusted clearing-house belongs to that
+// provider, whichever widgets.js happens to process it.
+function widgetOrigin(widget, fallback){
+    if(widget.dataset.url){
+        try {
+            const urlOrigin = new URL(widget.dataset.url).origin;
+            if(isTrustedOrigin(urlOrigin))
+                return urlOrigin;
+        } catch (e) {
+            // invalid URL: handled by initWidget
         }
-    })
+    }
+    return fallback;
 }
 
 function embedRecord(){
@@ -46,7 +93,7 @@ function embedRecord(){
         if (Object.hasOwnProperty.call(widgetInfo, key)) {
             const widget = widgetInfo[key];                
             if(widget.dataset.type == 'record' && widget.dataset.recordId){            
-                var iframeSrc = `${origin}/database/${widget.dataset.recordId}?embed=true`
+                var iframeSrc = `${defaultOrigin}/database/${widget.dataset.recordId}?embed=true`
                 var width = getAttributeValue(widget, 'width') || '100%';
                 var height = getAttributeValue(widget, 'height') || '500';
                 
@@ -92,12 +139,13 @@ function onReady(callbackFunc) {
     }
 }
 
-function initWidget(){
+function initWidget(runOrigin){
     const widgets = findScbdWidgets();
     
     for (var key in widgets) {
         if (Object.hasOwnProperty.call(widgets, key)) {
             const widget = widgets[key];   
+            const origin = widgetOrigin(widget, runOrigin);
             const locale = widget.dataset.locale || 'en'        
             if(widget.dataset.accessKey || widget.dataset.legacySchema || widget.dataset.legacyCountries || widget.dataset.url){            
 
@@ -201,5 +249,5 @@ function findOrigin(){
 //     embedCountryProfile,
 //     embedSearchResult
 // }
-onReady(initWidget);
+onReady(function(){ initWidget(defaultOrigin); });
     
