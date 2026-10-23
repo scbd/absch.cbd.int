@@ -335,9 +335,7 @@
 <script setup lang="ts">
 import { onMounted, ref, type ModelRef } from 'vue'
 import '~/components/scbd-angularjs-controls/form-control-directives/km-value-ml.js'
-// @ts-expect-error importing js file
 import documentDate from '~/views/forms/view/directives/document-date.vue'
-// @ts-expect-error importing js file
 import kmTerm from '~/components/km/KmTerm.vue'
 import messages from '~/app-text/views/forms/view/abs/legal-framework-overview.json'
 import { useI18n } from 'vue-i18n'

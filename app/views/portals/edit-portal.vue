@@ -240,10 +240,8 @@ import RealmsApi from '~/api/realms'
 // @ts-expect-error importing js file
 import { lstring } from '~/services/filters/lstring'
 import Loading from '~/components/common/loading.vue'
-// @ts-expect-error importing js file
 import ServerError from '~/components/common/error.vue'
 import MenuItemEditor from '~/components/portals/menu-item-editor.vue'
-// @ts-expect-error no types
 import SideMenu from '~/components/menus/side-menu.vue'
 import ArticlePicker from '~/components/portals/article-picker.vue'
 import AclEditor from '~/components/portals/acl-editor.vue'

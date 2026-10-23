@@ -170,7 +170,6 @@ import BulkImportParsing from './components/bulk-import-parsing.vue'
 import BulkImportTable from './components/bulk-import-table.vue'
 import BulkImportConfirmDialog from './components/bulk-import-confirm-dialog.vue'
 import BulkImportDoneDialog from './components/bulk-import-done-dialog.vue'
-// @ts-expect-error importing js file
 import CbdArticle from '../common/cbd-article.vue'
 
 interface ColumnGroup { label: string; keys: string[] }
