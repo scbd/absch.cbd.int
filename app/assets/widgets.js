@@ -1,9 +1,12 @@
 
-// var (not const): cbd-events re-runs this script on each article visit, and a
-// top-level const would throw "already declared" on the second run.
-// Prefer the script element that is executing now, so a page loading both the
-// CHM and ABSCH/BCH widgets.js gives each run its own origin.
-var defaultOrigin = scriptOrigin(document.currentScript) || findOrigin() || 'https://absch.cbddev.xyz';
+// The whole file is one IIFE: helpers are not page globals, and each execution
+// captures its own origin when it runs. cbd-events re-runs this script on each
+// article visit, and a page can load both the CHM and ABSCH/BCH widgets.js.
+// Only window.scbdChWidgetMessageListener is shared, so one listener serves
+// every execution.
+(function(){
+
+const defaultOrigin = scriptOrigin(document.currentScript) || findOrigin() || 'https://absch.cbddev.xyz';
 
 function embedIFrame(widget, options){
 
@@ -44,14 +47,17 @@ function onWidgetMessage(evt){
     if(!iframe || scriptOrigin(iframe) != evt.origin)
         return;
 
-    iframe.setAttribute('height', data.height ? (data.height+20) : iframe.height);
+    const height = Number(data.height);
+    iframe.setAttribute('height', (isFinite(height) && height > 0) ? (height+20) : iframe.height);
 }
 
 function isTrustedOrigin(value){
     try {
         const url = new URL(value);
-        return /^https?:$/.test(url.protocol) &&
-            (/\.cbd\.int$/i.test(url.hostname) || /\.cbddev\.xyz$/i.test(url.hostname) || url.hostname == 'localhost');
+        if(url.hostname == 'localhost')
+            return /^https?:$/.test(url.protocol);
+        return url.protocol == 'https:' &&
+            (/\.cbd\.int$/i.test(url.hostname) || /\.cbddev\.xyz$/i.test(url.hostname));
     } catch (e) {
         return false;
     }
@@ -234,13 +240,9 @@ function findOrigin(){
 
     for (let i = 0; i < scripts.length; i++) {
         const element = scripts[i];
-        if(element.src){
-            const url = new URL(element.src)       
-            if(/\/widgets\.js/.test(url.pathname) && (/\.cbd\.int/.test(url.host) || 
-                            /\.cbddev\.xyz/.test(url.host) ||  /localhost:2010/.test(url.host))){
-                return url.origin;
-            }
-        }
+        const origin = scriptOrigin(element);
+        if(origin && /\/widgets\.js/.test(new URL(element.src).pathname))
+            return origin;
     }
 }
 
@@ -250,4 +252,6 @@ function findOrigin(){
 //     embedSearchResult
 // }
 onReady(function(){ initWidget(defaultOrigin); });
+
+})();
     
