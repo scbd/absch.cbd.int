@@ -19,6 +19,7 @@ import '~/views/forms/directives/compare-val';
 import printHeaderTemplate from 'text!./print-header.html';
 import printFooterTemplate from 'text!./print-footer.html';
 import shareRecord from '~/components/common/share-record.vue';
+import pdfProgressDialog from '~/components/common/pdf-progress-dialog.vue';
 import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 import documentDebugInfo from '~/components/km/document-debug-info.vue';
 
@@ -99,6 +100,9 @@ import documentDebugInfo from '~/components/km/document-debug-info.vue';
 					$scope.shareVueComponent = {
 						components:{shareRecord},
 						 setup:  shareRecordsFunctions
+					}
+					$scope.pdfProgressComponent = {
+						components:{pdfProgressDialog}
 					}
 					$scope.debugInfoComponent = {
 						components:{documentDebugInfo}
