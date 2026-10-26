@@ -50,6 +50,7 @@
 <script setup>
 
     import { defineAsyncComponent } from 'vue'
+    import '~/views/directives/document-metadata-vue-directive'
 
     const props = defineProps({
         linkTarget          : { type : String, default:'_blank'},

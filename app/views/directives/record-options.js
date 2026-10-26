@@ -3,7 +3,12 @@ import template from 'text!./record-options.html';
 import _ from 'lodash';
 import '~/components/scbd-angularjs-services/main';
 import '~/services/main';
+import { pdfThis, PDF_STORAGE_URL } from '~/services/pdf-this';
+import HtmlPdfApi from '~/api/html-pdf-api';
 import recordOptionsT from '~/app-text/views/directives/record-options.json';
+
+const PDF_SLOW_AFTER_MS = 8000;
+const htmlPdfApi        = new HtmlPdfApi();
 
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm', 'translationService',
     function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm, translationService) {
@@ -76,6 +81,126 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     });	
                     $timeout(function(){$scope.printing = false;},200);
                     
+                }
+
+                // The tab opens only after the PDF is ready: a blank tab opened first would hide the reCAPTCHA challenge.
+                // A stored copy of a published record is offered to the user first, otherwise the pdf is generated.
+                // Falls back to the server rendered /pdf route when generation fails.
+                $scope.openPdf = async function($evt){
+
+                    $evt.preventDefault();
+                    //clicking while it runs in the background brings the progress dialog back
+                    if($scope.pdfInBackground){
+                        $scope.pdfInBackground = false;
+                        return;
+                    }
+
+                    if($scope.generatingPdf || $scope.cachedPdfUrl || $scope.readyPdfUrl)
+                        return;
+
+                    $scope.generatingPdf = true;
+
+                    const key = `${realm.value.toLowerCase()}/${$filter('uniqueID')($scope.internalDocumentInfo||$scope.internalDocument)}-${$scope.currentLocale}.pdf`;
+                    const isDraft = !!($scope.internalDocumentInfo||{}).workingDocumentID;//drafts change, a stored copy would be stale
+
+                    if(!isDraft){
+                        const storedUrl = `${PDF_STORAGE_URL}/${key}`;
+                        const exists = await htmlPdfApi.hasPregeneratedPdf(storedUrl);
+
+                        if(exists){
+                            $timeout(function(){
+                                $scope.generatingPdf = false;
+                                $scope.cachedPdfUrl  = getPdfViewerUrl(key);
+                                $scope.cachedPdfKey  = key;
+                            });
+                            return;
+                        }
+                    }
+
+                    await generatePdf(key);
+                };
+
+                $scope.openCachedPdf = function(){
+                    const url = $scope.cachedPdfUrl;
+                    $scope.cachedPdfUrl = undefined;
+                    window.open(url, '_blank');//still inside the user's click, so not blocked
+                };
+
+                $scope.generateFreshPdf = function(){
+                    $scope.cachedPdfUrl  = undefined;
+                    $scope.generatingPdf = true;
+                    generatePdf($scope.cachedPdfKey);
+                };
+
+                //hides the progress dialog, it comes back with the pdf link once it is ready
+                $scope.pdfToBackground = function(){
+                    $scope.pdfInBackground = true;
+                };
+
+                $scope.showPdfDialog = function(){
+                    $scope.pdfInBackground = false;
+                };
+
+                $scope.closePdfDialog = function(){
+                    $scope.cachedPdfUrl = undefined;
+                    $scope.readyPdfUrl  = undefined;
+                };
+
+                //offers to continue in the background when generating takes a while
+                let slowTimer;
+                function startSlowTimer(){
+                    $timeout.cancel(slowTimer);
+                    slowTimer = $timeout(function(){ $scope.pdfSlow = true; }, PDF_SLOW_AFTER_MS);
+                }
+
+                async function generatePdf(key){
+
+                    startSlowTimer();
+                    let url;
+                    try{
+                        let header = (await import('~/views/forms/view/print-header.html')).default;
+                        let footer = (await import('~/views/forms/view/print-footer.html')).default;
+                        header = $compile(header)($scope);
+                        footer = $compile(footer)($scope);
+                        await $timeout();//let the compiled header/footer render before they are cloned
+                        header.css('padding-top', '30px');
+
+                        //the api stores the pdf under the attachment name, which is the cache key
+                        //the coloured record header (type and id) followed by the record view
+                        const recordElements = [$element.closest('.panel-heading')[0], $element.parent().parent().parent().find('#schemaView')[0]];
+                        url = await pdfThis(recordElements, {
+                            downloadFileName: key, base:true, baseUrl: realm.baseURL, returnUrl:true,
+                            header, footer
+                        });
+                    }
+                    catch(e){
+                        console.error('PDF generation failed:', e);
+                    }
+
+                    openPdfTab(getPdfViewerUrl(url ? key : undefined));
+                }
+
+                //the pdf viewer page, showing the stored pdf when a key is given, otherwise generating it
+                function getPdfViewerUrl(storedKey){
+                    let viewerUrl = `/${appLocale}${$scope.pdfUrl}`;
+
+                    if(storedKey)
+                        viewerUrl += `?storedKey=${encodeURIComponent(storedKey)}`;
+
+                    return viewerUrl;
+                }
+
+                function openPdfTab(target){
+                    $timeout.cancel(slowTimer);
+                    $timeout(function(){
+                        $scope.pdfSlow         = false;
+                        $scope.generatingPdf   = false;
+                        $scope.pdfInBackground = false;
+                    });
+
+                    //popup blockers can reject window.open after the await or a background run, then the dialog offers a link to click
+                    if(!window.open(target, '_blank'))
+                        $timeout(function(){ $scope.readyPdfUrl = target; });
                 }
 
                 function getPdfUrl(){

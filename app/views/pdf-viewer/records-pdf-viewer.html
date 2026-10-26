@@ -19,7 +19,7 @@
     </style>
     <div class="row title-bar">
         <div class="col-4 mt-1 mb-1">       
-            <span class="me-2">{{::('pdfViewerT.viewIn'|$translate)}}
+            <span class="me-2" ng-if="!isStored">{{::('pdfViewerT.viewIn'|$translate)}}
                 <div class="btn-group ms-2 languages">
                     <a ng-repeat="(key, value) in languages" rel="noopener" ng-href="#" ng-click="loadLangPdf(key)"
                      ng-bind="key|uppercase" data-bs-toggle="tooltip" data-bs-placement="top" 
@@ -32,11 +32,11 @@
         </div>
         <div class="col-4 mt-1 mb-1">
             <div class="btn-group float-end" role="group">
-                <a rel="noopener" ng-href="{{pdf.src}}" download="{{pdf.fileName|encodeURIComponent}}"
-                 class="btn btn-primary px-1 me-2 rounded" target="_blank" ng-class="{'disabled':loading}">
-                    <i class="fa fa-download"></i> {{::('pdfViewerT.download'|$translate)}}
+                <a rel="noopener" ng-href="{{pdf.src}}" download="{{pdf.fileName|encodeURIComponent}}" ng-click="downloadPdf($event)"
+                 class="btn btn-primary px-1 me-2 rounded" target="_blank" ng-class="{'disabled':loading||downloading}">
+                    <i class="fa" ng-class="downloading ? 'fa-spinner fa-spin' : 'fa-download'"></i> {{::('pdfViewerT.download'|$translate)}}
                 </a>
-                <a rel="noopener" ng-click="loadLangPdf(pdfLocale, true)" ng-class="{'active': lang == pdfLocale, 'disabled':loading}" 
+                <a rel="noopener" ng-if="!isStored" ng-click="loadLangPdf(pdfLocale, true)" ng-class="{'active': lang == pdfLocale, 'disabled':loading}" 
                     class="btn btn-primary px-1 rounded bs-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="{{('pdfViewerT.toolTipMessage'|$translate)}}">
                     <i class="fa fa-refresh"></i> {{::('pdfViewerT.regeneratePdf'|$translate)}} ({{pdfLocale|uppercase}})
                 </a>

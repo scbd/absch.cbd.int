@@ -5,6 +5,9 @@ import HtmlPdfApi from "../api/html-pdf-api";
 // @ts-expect-error no type declarations
 import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
 
+// Where the api stores the pdfs generated with saveToStorage
+export const PDF_STORAGE_URL = 'https://s3.amazonaws.com/pdf-cache-prod';
+
 // ---- Types ----
 
 type Appendable = string | Node | ArrayLike<Node> | null | undefined;
@@ -33,6 +36,7 @@ export interface PdfOptions {
 
   // Required for download (moved here from implicit global references)
   downloadFileName: string;        // e.g., "report.pdf"
+  returnUrl?: boolean;             // store the PDF and resolve with its url instead of downloading it
 }
 
 // Ensure window typing for scbdApp usage
@@ -172,7 +176,7 @@ function isProduction(): boolean {
 export async function pdfThis(
   selector: string | Node | ArrayLike<Node>,
   options: PdfOptions
-): Promise<void> {
+): Promise<string | void> {
   const resolved: PdfOptions = {
     ...defaultOptions,
     ...options,
@@ -339,23 +343,29 @@ export async function pdfThis(
   if (existingFrame) existingFrame.remove();
 
   // Dispatch to API and download
-  await sendHtmlToPdf(
+  return sendHtmlToPdf(
     html,
     resolved.downloadFileName,
-    baseURL
+    baseURL,
+    resolved.returnUrl
   );
 }
 
 async function sendHtmlToPdf(
   html: string,
   downloadFileName: string,
-  baseUrl:string
-): Promise<void> {
+  baseUrl:string,
+  returnUrl = false
+): Promise<string | void> {
   try {
 
     const captchaToken = await getRecaptchaToken();
     
-    const pdfBlob: Blob = await htmlPdfApi.generatePdf(html, downloadFileName, baseUrl as any, captchaToken as any);
+    const result = await htmlPdfApi.generatePdf(html, downloadFileName, baseUrl as any, captchaToken as any, returnUrl);
+
+    if (returnUrl) return result as string;
+
+    const pdfBlob = result as Blob;
 
     // Create an object URL and trigger download
     const url = window.URL.createObjectURL(pdfBlob);
