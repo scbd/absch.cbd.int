@@ -3,6 +3,7 @@ import pdfObject from 'pdf-object';
 import '~/components/scbd-angularjs-services/main';
 import pdfViewerT from '~/app-text/views/pdf-viewer/records-pdf-viewer.json';
 import { languages } from '~/app-data/un-languages';
+import { PDF_STORAGE_URL } from '~/services/pdf-this';
     app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',
@@ -28,6 +29,10 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
         $scope.languages = languages;
         $scope.pdfLocale = $location.search()?.lang || locale;
         $scope.pdf = {};
+
+        //a pdf already generated and stored by the api, shown as is: no language switch or regenerate
+        const { storedKey } = $location.search();
+        $scope.isStored = /^[\w-]+\/[\w.-]+\.pdf$/i.test(storedKey||'');
         $scope.loading = true;
                 
         var uniqueId = ($route.current.params.documentId + '-' + ($route.current.params.revision||'')).replace(/-$/, '')
@@ -67,11 +72,47 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             }, 500)
         }
 
+        //the download attribute is ignored for the cross origin stored pdf, which would open it in a tab instead
+        $scope.downloadPdf = async function($event){
+            if(!$scope.isStored)
+                return;
+
+            $event.preventDefault();
+            if($scope.downloading)
+                return;
+
+            $scope.downloading = true;
+            try{
+                const blob = await fetch($scope.pdf.src).then(res => {
+                    if(!res.ok) throw new Error(res.status);
+                    return res.blob();
+                });
+                const url  = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href     = url;
+                link.download = $scope.pdf.fileName;
+                link.click();
+                window.URL.revokeObjectURL(url);
+            }
+            catch(e){
+                console.error('PDF download failed:', e);
+                window.open($scope.pdf.src, '_blank');
+            }
+            finally{
+                $timeout(()=>{ $scope.downloading = false; });
+            }
+        }
+
         $scope.trustSrc = function(src) {
             return $sce.trustAsResourceUrl(src);
         }
         
         function getPdfSrc(pdfLocale, force){
+            if($scope.isStored){
+                $scope.pdf.fileName = storedKey.split('/').pop();
+                return `${PDF_STORAGE_URL}/${storedKey}`;
+            }
+
             $scope.pdf.fileName = uniqueId + '-' + pdfLocale + '.pdf';
             
             var devRealm = /-DEV$/
