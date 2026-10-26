@@ -148,3 +148,9 @@ body{
 body.print .page-content {
     background-color: #fff;
 }
+/* the pdf renderer ignores display:flow-root, so the floated header content collapses */
+.panel-heading.d-flow-root::after {
+    content: "";
+    display: table;
+    clear: both;
+}
