@@ -4,9 +4,11 @@ import _ from 'lodash';
 import '~/components/scbd-angularjs-services/main';
 import '~/services/main';
 import { pdfThis, PDF_STORAGE_URL } from '~/services/pdf-this';
+import HtmlPdfApi from '~/api/html-pdf-api';
 import recordOptionsT from '~/app-text/views/directives/record-options.json';
 
 const PDF_SLOW_AFTER_MS = 8000;
+const htmlPdfApi        = new HtmlPdfApi();
 
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm', 'translationService',
     function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm, translationService) {
@@ -103,7 +105,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
 
                     if(!isDraft){
                         const storedUrl = `${PDF_STORAGE_URL}/${key}`;
-                        const exists = await fetch(storedUrl, { method:'HEAD' }).then(res => res.ok).catch(() => false);
+                        const exists = await htmlPdfApi.hasPregeneratedPdf(storedUrl);
 
                         if(exists){
                             $timeout(function(){

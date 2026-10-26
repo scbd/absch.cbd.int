@@ -36,4 +36,24 @@ export default class HtmlPdfApi extends ApiBase
             throw tryCastToApiError(error);
         }
     }
+
+    // true when the stored pdf at the given url exists, any failure counts as not stored
+    async hasPregeneratedPdf(url: string) {
+        try {
+            await this.http.head(url);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    async getPregeneratedPdf(url: string) {
+        try {
+            const response = await this.http.get(url, { responseType: "blob" });
+
+            return response.data;
+        } catch (error) {
+            throw tryCastToApiError(error);
+        }
+    }
 }

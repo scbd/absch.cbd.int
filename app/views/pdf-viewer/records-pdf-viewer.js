@@ -4,6 +4,7 @@ import '~/components/scbd-angularjs-services/main';
 import pdfViewerT from '~/app-text/views/pdf-viewer/records-pdf-viewer.json';
 import { languages } from '~/app-data/un-languages';
 import { PDF_STORAGE_URL } from '~/services/pdf-this';
+import HtmlPdfApi from '~/api/html-pdf-api';
     app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',
@@ -83,10 +84,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
 
             $scope.downloading = true;
             try{
-                const blob = await fetch($scope.pdf.src).then(res => {
-                    if(!res.ok) throw new Error(res.status);
-                    return res.blob();
-                });
+                const blob = await new HtmlPdfApi().getPregeneratedPdf($scope.pdf.src);
                 const url  = window.URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href     = url;
