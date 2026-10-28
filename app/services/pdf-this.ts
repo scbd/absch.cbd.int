@@ -378,5 +378,8 @@ async function sendHtmlToPdf(
     // Safer logging
     const err = e as Error;
     console.error("PDF generation failed:", err?.message || e);
+
+    // the caller reports the failure when it asked for the stored pdf url
+    if (returnUrl) throw e;
   }
 }

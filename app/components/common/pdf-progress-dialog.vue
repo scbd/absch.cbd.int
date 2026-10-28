@@ -1,15 +1,23 @@
 <template>
   <div>
-    <template v-if="generating || cached || readyUrl">
+    <template v-if="generating || cached || readyUrl || failedUrl">
       <div class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">
-                {{ cached ? t('cachedTitle') : readyUrl ? t('readyTitle') : t('title') }}
+                {{ failedUrl ? t('failedTitle') : cached ? t('cachedTitle') : readyUrl ? t('readyTitle') : t('title') }}
               </h5>
             </div>
-            <div v-if="cached" class="modal-body">
+            <div v-if="failedUrl" class="modal-body">
+              <p>
+                {{ t('failedMessage') }}
+              </p>
+              <p class="mb-0 text-muted">
+                {{ t(`failedReason_${failedReason}`) }}
+              </p>
+            </div>
+            <div v-else-if="cached" class="modal-body">
               <p class="mb-0">
                 {{ t('cachedMessage') }}
               </p>
@@ -29,7 +37,15 @@
                 {{ t('backgroundHint') }}
               </p>
             </div>
-            <div v-if="slow && !readyUrl && !cached" class="modal-footer">
+            <div v-if="failedUrl" class="modal-footer">
+              <a class="btn btn-primary" :href="failedUrl" target="_blank" rel="noopener" @click="emit('onClose')">
+                {{ t('openPdfPage') }}
+              </a>
+              <button type="button" class="btn btn-secondary" @click="emit('onClose')">
+                {{ t('cancel') }}
+              </button>
+            </div>
+            <div v-else-if="slow && !readyUrl && !cached" class="modal-footer">
               <button type="button" class="btn btn-secondary" @click="emit('onBackground')">
                 {{ t('background') }}
               </button>
@@ -79,7 +95,9 @@ const props = defineProps({
   cached: { type: Boolean, default: false },
   background: { type: Boolean, default: false },
   slow: { type: Boolean, default: false },
-  readyUrl: { type: String, default: '' }
+  readyUrl: { type: String, default: '' },
+  failedUrl: { type: String, default: '' },
+  failedReason: { type: String, default: 'generic' }
 })
 
 const emit = defineEmits(['onOpenCached', 'onGenerateFresh', 'onBackground', 'onShow', 'onClose'])
