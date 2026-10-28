@@ -18,7 +18,7 @@ export default class HtmlPdfApi extends ApiBase
                     saveToStorage
                 },
                 responseType: "blob", 
-                timeout: 120 * 1000,//generating and storing a pdf can take longer than the 30s default
+                timeout: 0,//no client timeout, generating a large pdf can take several minutes
                 headers:{
                     'x-captcha-v2-badge-token' : captchaToken       
                 }
