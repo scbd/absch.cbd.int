@@ -16,9 +16,5 @@
     "copied": "Copied",
     "failedTitle": "PDF could not be prepared",
     "failedMessage": "Your PDF could not be prepared. You can open the PDF page instead, which generates it again on the server.",
-    "openPdfPage": "Open PDF page",
-    "failedReason_cancelled": "The request was cancelled before it finished.",
-    "failedReason_timeout": "The request took too long and timed out.",
-    "failedReason_network": "The server could not be reached. Check your connection and try again.",
-    "failedReason_generic": "The server reported an error while generating the PDF."
+    "openPdfPage": "Open PDF page"
 }

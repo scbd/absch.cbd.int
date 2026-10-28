@@ -157,7 +157,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 async function generatePdf(key){
 
                     startSlowTimer();
-                    let url, failure;
+                    let url;
                     try{
                         let header = (await import('~/views/forms/view/print-header.html')).default;
                         let footer = (await import('~/views/forms/view/print-footer.html')).default;
@@ -176,13 +176,12 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     }
                     catch(e){
                         console.error('PDF generation failed:', e);
-                        failure = e;
                     }
 
                     if(url)
                         openPdfTab(getPdfViewerUrl(key));
                     else
-                        failPdf(failure);
+                        failPdf();
                 }
 
                 //the pdf viewer page, showing the stored pdf when a key is given, otherwise generating it
@@ -205,23 +204,11 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 }
 
                 //the dialog reports the failure and offers the server rendered pdf page instead
-                function failPdf(error){
+                function failPdf(){
                     endPdfRun();
                     $timeout(function(){
-                        $scope.failedPdfReason = getPdfFailureReason(error);
                         $scope.failedPdfUrl    = getPdfViewerUrl();
                     });
-                }
-
-                //what the dialog tells the user: the request was cancelled, timed out, could not reach the server, or failed on it
-                function getPdfFailureReason(error){
-                    const code = error?.cause?.code || error?.code;
-
-                    if(code == 'ERR_CANCELED')                         return 'cancelled';
-                    if(code == 'ECONNABORTED' || code == 'ETIMEDOUT')  return 'timeout';
-                    if(code == 'ERR_NETWORK')                          return 'network';
-
-                    return 'generic';
                 }
 
                 function openPdfTab(target){

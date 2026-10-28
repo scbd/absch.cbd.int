@@ -10,11 +10,8 @@
               </h5>
             </div>
             <div v-if="failedUrl" class="modal-body">
-              <p>
+              <p class="mb-0">
                 {{ t('failedMessage') }}
-              </p>
-              <p class="mb-0 text-muted">
-                {{ t(`failedReason_${failedReason}`) }}
               </p>
             </div>
             <div v-else-if="cached" class="modal-body">
@@ -96,8 +93,7 @@ const props = defineProps({
   background: { type: Boolean, default: false },
   slow: { type: Boolean, default: false },
   readyUrl: { type: String, default: '' },
-  failedUrl: { type: String, default: '' },
-  failedReason: { type: String, default: 'generic' }
+  failedUrl: { type: String, default: '' }
 })
 
 const emit = defineEmits(['onOpenCached', 'onGenerateFresh', 'onBackground', 'onShow', 'onClose'])
