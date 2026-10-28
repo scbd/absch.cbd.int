@@ -95,7 +95,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                         return;
                     }
 
-                    if($scope.generatingPdf || $scope.cachedPdfUrl || $scope.readyPdfUrl)
+                    if($scope.generatingPdf || $scope.cachedPdfUrl || $scope.readyPdfUrl || $scope.failedPdfUrl)
                         return;
 
                     $scope.generatingPdf = true;
@@ -144,6 +144,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 $scope.closePdfDialog = function(){
                     $scope.cachedPdfUrl = undefined;
                     $scope.readyPdfUrl  = undefined;
+                    $scope.failedPdfUrl = undefined;
                 };
 
                 //offers to continue in the background when generating takes a while
@@ -156,7 +157,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 async function generatePdf(key){
 
                     startSlowTimer();
-                    let url;
+                    let url, failure;
                     try{
                         let header = (await import('~/views/forms/view/print-header.html')).default;
                         let footer = (await import('~/views/forms/view/print-footer.html')).default;
@@ -175,9 +176,13 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     }
                     catch(e){
                         console.error('PDF generation failed:', e);
+                        failure = e;
                     }
 
-                    openPdfTab(getPdfViewerUrl(url ? key : undefined));
+                    if(url)
+                        openPdfTab(getPdfViewerUrl(key));
+                    else
+                        failPdf(failure);
                 }
 
                 //the pdf viewer page, showing the stored pdf when a key is given, otherwise generating it
@@ -190,13 +195,37 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     return viewerUrl;
                 }
 
-                function openPdfTab(target){
+                function endPdfRun(){
                     $timeout.cancel(slowTimer);
                     $timeout(function(){
                         $scope.pdfSlow         = false;
                         $scope.generatingPdf   = false;
                         $scope.pdfInBackground = false;
                     });
+                }
+
+                //the dialog reports the failure and offers the server rendered pdf page instead
+                function failPdf(error){
+                    endPdfRun();
+                    $timeout(function(){
+                        $scope.failedPdfReason = getPdfFailureReason(error);
+                        $scope.failedPdfUrl    = getPdfViewerUrl();
+                    });
+                }
+
+                //what the dialog tells the user: the request was cancelled, timed out, could not reach the server, or failed on it
+                function getPdfFailureReason(error){
+                    const code = error?.cause?.code || error?.code;
+
+                    if(code == 'ERR_CANCELED')                         return 'cancelled';
+                    if(code == 'ECONNABORTED' || code == 'ETIMEDOUT')  return 'timeout';
+                    if(code == 'ERR_NETWORK')                          return 'network';
+
+                    return 'generic';
+                }
+
+                function openPdfTab(target){
+                    endPdfRun();
 
                     //popup blockers can reject window.open after the await or a background run, then the dialog offers a link to click
                     if(!window.open(target, '_blank'))
