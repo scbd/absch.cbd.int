@@ -1,0 +1,20 @@
+{
+    "title": "Preparing PDF",
+    "message": "Your PDF is being generated. This may take a few moments, please do not close this browser tab or refresh the page.",
+    "cancel": "Cancel",
+    "readyTitle": "PDF ready",
+    "readyMessage": "Your PDF is ready.",
+    "openPdf": "Open PDF",
+    "cachedTitle": "PDF already available",
+    "cachedMessage": "A previously generated PDF of this record is available. Open it now, or generate a fresh copy.",
+    "openNow": "Open now",
+    "generateFresh": "Generate fresh",
+    "backgroundHint": "This is taking longer than usual. You can keep working and we will let you know when the PDF is ready, but please do not close this browser tab or refresh the page.",
+    "background": "Continue in background",
+    "preparingBackground": "Preparing PDF... click to view",
+    "copyLink": "Copy link",
+    "copied": "Copied",
+    "failedTitle": "PDF could not be prepared",
+    "failedMessage": "Your PDF could not be prepared. You can open the PDF page instead, which generates it again on the server.",
+    "openPdfPage": "Open PDF page"
+}
