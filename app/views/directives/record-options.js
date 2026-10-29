@@ -46,8 +46,9 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                            $scope.internalDocumentInfo.revision < $scope.internalDocumentInfo.latestRevision)
                             $scope.hidePdf = true;
                     }
-                    $timeout(function(){
-                        $scope.pdfUrl = getPdfUrl();                        
+                    $timeout(async function(){
+                        $scope.pdfUrl = await getPdfUrl();
+                        $scope.$applyAsync();
                         $element.find('.lang-tooltip').tooltip()
                     }, 200);
                 })
@@ -219,8 +220,9 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                         $timeout(function(){ $scope.readyPdfUrl = target; });
                 }
 
-                function getPdfUrl(){
+                async function getPdfUrl(){
 
+                    await $filter('uniqueID')($scope.internalDocument);//resolves async the first time, uniqueIDWithoutRevision needs the cached value
                     const documentId = $filter('uniqueIDWithoutRevision')($scope.internalDocument);                    
                     let pdfType = 'documents'
                     let pdfDownloadUrl  =  '/pdf/:type/:schema/:documentId/:revision';
