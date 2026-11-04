@@ -6,7 +6,7 @@ const irccAttributesMap: AttributesMap = {
   absCNAId: { column: '2', required: true, translationKey: 'issuingAuthority' }, // C
   permitEquivalent: { column: '3', translationKey: 'detailsPermit' }, // D
   dateOfIssuance: { column: '4', required: true, translationKey: 'dateOfIssuance' }, // E
-  dateOfExpiry: { column: '5', required: true, translationKey: 'dateOfExpiry' }, // F
+  dateOfExpiry: { column: '5', translationKey: 'dateOfExpiry' }, // F
   provider: {
     schema: {
       type: { column: '6', translationKey: 'type' }, // G
