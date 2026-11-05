@@ -318,7 +318,7 @@ ul.km-value {
 }
 .record-callout-national {
     border-left-color: #428BCA !important;
-    height:7.8rem;
+    min-height:7.8rem;
 }
 .record-callout-reference {
     border-left-color: #fa6938 !important;
@@ -532,12 +532,6 @@ body.modal-open .modal-backdrop.fade.show{
     font-weight: bold;
     margin-left: 8px;
     text-decoration: none;
-}
-.country-records-sub-options{
-    position: absolute;
-    bottom: 5px;
-    width: 100%;
-    margin-left: -5px;
 }
 .xuser-notification-bell {
     position: relative;
