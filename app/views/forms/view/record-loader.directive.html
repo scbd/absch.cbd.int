@@ -14,6 +14,11 @@
                 color: #555;
         }
     </style>
+    <!-- outside the record header and view: those are cloned into the pdf -->
+    <div ng-if="pdfProgressComponent">
+        <pdf-progress-dialog ng-vue="pdfProgressComponent" :generating="!!generatingPdf && !pdfInBackground" :background="!!pdfInBackground" :slow="!!pdfSlow" :cached="!!cachedPdfUrl" :ready-url="readyPdfUrl" :failed-url="failedPdfUrl"
+            @on-open-cached="openCachedPdf()" @on-generate-fresh="generateFreshPdf()" @on-background="pdfToBackground()" @on-show="showPdfDialog()" @on-close="closePdfDialog()"></pdf-progress-dialog>
+    </div>
     <div id="recordContent" class="mb-5">
         <div ng-if="!printMode && debugInfoComponent">
             <document-debug-info ng-vue="debugInfoComponent" :document-info="internalDocumentInfo"></document-debug-info>

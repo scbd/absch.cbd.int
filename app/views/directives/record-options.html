@@ -2,8 +2,9 @@
     <div class="record-Options-div d-inline-block ms-1 mb-1">
         <div class="d-md-none hide-on-print">
             <span ng-if="!hidePdf">
-                <a rel="noopener" translation-url href="{{pdfUrl}}" target="_blank" class="text-decoration-none text-white">
-                    <i class="bi bi-file-earmark-pdf"></i>
+                <a rel="noopener" translation-url href="{{pdfUrl}}" ng-click="openPdf($event)" class="text-decoration-none text-white">
+                    <i class="fa fa-spinner fa-spin" ng-if="pdfInBackground"></i>
+                    <i class="bi bi-file-earmark-pdf" ng-if="!pdfInBackground"></i>
                 </a>
             </span>
             &nbsp; | &nbsp;
@@ -20,9 +21,11 @@
             </span>            
             <span class="hide-on-print"ng-if="!hidePdf">
                 &nbsp; | &nbsp; 
-                <a rel="noopener" translation-url class="text-decoration-none text-white" rel="noopener" href="{{pdfUrl}}" target="_blank" >                    
-                    <i class="bi bi-file-earmark-pdf"></i>
-                    <span class="d-none d-sm-inline-block">{{::('recordOptionsT.pdf'|$translate)}}</span>
+                <a rel="noopener" translation-url class="text-decoration-none text-white" rel="noopener" href="{{pdfUrl}}" ng-click="openPdf($event)">                    
+                    <i class="fa fa-spinner fa-spin pe-1" ng-if="generatingPdf"></i>
+                    <i class="bi bi-file-earmark-pdf" ng-if="!generatingPdf"></i>
+                    <span class="d-none d-sm-inline-block" ng-if="!pdfInBackground">{{::('recordOptionsT.pdf'|$translate)}}</span>
+                    <span class="d-none d-sm-inline-block" ng-if="pdfInBackground">{{::('recordOptionsT.pdfPreparing'|$translate)}}</span>
                 </a>
                 &nbsp;
                 <span class="text-light"> | </span> &nbsp;

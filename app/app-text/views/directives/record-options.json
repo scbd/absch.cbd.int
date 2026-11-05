@@ -1,5 +1,6 @@
 {
     "print": "Print",
     "languagesAvailable": "languages available:",
-    "pdf":  "PDF"
+    "pdf": "PDF",
+    "pdfPreparing": "Preparing PDF..."
 }
