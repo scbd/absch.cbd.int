@@ -31,5 +31,8 @@
   "closeConfirm": "Close and discard all loaded data?",
   "confirmClose": "Yes, close",
   "eraseConfirm": "Clear all loaded records?",
-  "confirmErase": "Yes, clear"
+  "confirmErase": "Yes, clear",
+  "confirmImportTitle": "Confirm import",
+  "confirmCloseTitle": "Discard changes?",
+  "confirmEraseTitle": "Erase data?"
 }
