@@ -219,7 +219,7 @@
 
 				<div class="d-inline ms-1 ps-3">
 					<span class="fs-5"
-						ng-class="{'color-party': (country.isParty && isBCH), 'color-green': (country.isParty && isABS), 'color-grey color-non-party':!country.isParty, 'color-inbetween': country.isInbetweenParty}">
+						ng-class="{'color-party': (country.isParty && isBCH), 'color-green': (country.isParty && isABS), 'color-grey color-non-party':!country.isParty && !country.isInbetweenParty, 'color-inbetween': country.isInbetweenParty}">
 						<span ng-bind="country.name|lstring:locale"></span></span>
 				</div>
 				<div class="ms-4 ps-2 text-uppercase fw-bold">
