@@ -337,7 +337,7 @@ import countryMapTranslation from '~/app-text/views/countries/country-map.json';
               return;
               
               if (country && mapCountry) {
-                  if (($scope.isABS && country.isInbetweenParty))
+                  if ((($scope.isABS || $scope.isBCH) && country.isInbetweenParty))
                       mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.inBetweenParty;
                   else if (country.isParty)
                       mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.party;
