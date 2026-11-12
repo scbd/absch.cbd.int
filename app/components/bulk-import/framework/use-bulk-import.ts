@@ -6,6 +6,7 @@ import { readSheet } from './read-sheet'
 import { buildPreview } from './build-preview'
 import { buildDocuments } from './build-documents'
 import { submitDocuments } from './submit-documents'
+import { publishDrafts } from './publish-drafts'
 import { PARSE_STEP_KEY, PARSE_STEP_STATUS, ROW_IMPORT_STATUS, UPLOADER_PHASE } from './types'
 import type { UploaderState, DocumentTypes, RowProgress, RawRow, AttributesMap, ParseStep, SheetError, PreviewData, TokenReader, PushProgress } from './types'
 import { registry } from '../registry'
@@ -32,6 +33,7 @@ export function useBulkImport (documentType: DocumentTypes): {
   state: UploaderState
   onFileChange: (file: File)=> Promise<void>
   onImport: ()=> Promise<void>
+  onPublishDrafts: ()=> Promise<void>
   onConfirmImport: ()=> Promise<void>
   onClose: ()=> void
   onForceClose: ()=> void
@@ -39,7 +41,7 @@ export function useBulkImport (documentType: DocumentTypes): {
   onConfirmErase: ()=> void
   onCancelConfirm: ()=> void
 } {
-  const { mergeLocaleMessage } = useI18n()
+  const { mergeLocaleMessage, t } = useI18n()
   const auth = useAuth()
   const realm = useRealm()
   const { [documentType]: definition } = registry
@@ -144,7 +146,45 @@ export function useBulkImport (documentType: DocumentTypes): {
         }
       )
 
-      Object.assign(state, { phase: UPLOADER_PHASE.done, imported, failed, preview, rawRows, progress })
+      Object.assign(state, { phase: UPLOADER_PHASE.done, imported, failed, preview, rawRows, progress, documents })
+    } catch {
+      Object.assign(state, { phase: UPLOADER_PHASE.importError })
+    }
+  }
+
+  async function onPublishDrafts (): Promise<void> {
+    if (state.phase !== UPLOADER_PHASE.done) return
+    const { documents, preview, rawRows, progress } = state
+
+    Object.assign(state, { phase: UPLOADER_PHASE.publishing, preview, rawRows, progress })
+
+    try {
+      const { published, left } = await publishDrafts(
+        documents,
+        progress,
+        { tokenReader, realm: realm.realm },
+        {
+          // server properties missing from the Excel are column keys; show their header
+          labelFor: (property: string) => {
+            const label = t(property, property)
+            if (label === property) return undefined
+            return label
+          },
+          onProgress: (p: RowProgress) => {
+            // mutate through the reactive proxy so Vue tracks the change
+            const s = state as UploaderState
+            if (s.phase !== UPLOADER_PHASE.publishing) return
+            const idx = s.progress.findIndex(r => r.rowIndex === p.rowIndex)
+            if (idx >= 0) s.progress.splice(idx, 1, p)
+          },
+          onPush: (p: PushProgress) => {
+            const s = state as UploaderState
+            if (s.phase !== UPLOADER_PHASE.publishing) return
+            s.currentPush = p
+          }
+        }
+      )
+      Object.assign(state, { phase: UPLOADER_PHASE.published, published, left, preview, rawRows, progress })
     } catch {
       Object.assign(state, { phase: UPLOADER_PHASE.importError })
     }
@@ -170,8 +210,8 @@ export function useBulkImport (documentType: DocumentTypes): {
 
   function onClose (): void {
     const { phase } = state as UploaderState
-    if (phase === UPLOADER_PHASE.importing) return
-    if (phase === UPLOADER_PHASE.empty || phase === UPLOADER_PHASE.done || phase === UPLOADER_PHASE.parseError || phase === UPLOADER_PHASE.importError) {
+    if (phase === UPLOADER_PHASE.importing || phase === UPLOADER_PHASE.publishing) return
+    if (phase === UPLOADER_PHASE.empty || phase === UPLOADER_PHASE.done || phase === UPLOADER_PHASE.published || phase === UPLOADER_PHASE.parseError || phase === UPLOADER_PHASE.importError) {
       Object.assign(state, { phase: UPLOADER_PHASE.empty })
     } else {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- non-importing/empty/done phases all have errors+preview
@@ -221,6 +261,7 @@ export function useBulkImport (documentType: DocumentTypes): {
     state,
     onFileChange,
     onImport,
+    onPublishDrafts,
     onConfirmImport,
     onClose,
     onForceClose,
