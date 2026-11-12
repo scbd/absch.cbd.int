@@ -124,6 +124,14 @@ export abstract class Schema implements SchemaInstance {
     return typeof v === 'string' ? v : undefined
   }
 
+  // date cells arrive as Date objects, text cells as strings
+  protected dateColumnValue (key: string): string | Date | undefined {
+    // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule
+    const { [key]: v } = this.row
+    if (v instanceof Date || typeof v === 'string') return v
+    return undefined
+  }
+
   protected nestedColumnValue (group: string, key: string): string | undefined {
     const nestedKey = `${group}.${key}`
     // eslint-disable-next-line @typescript-eslint/prefer-destructuring -- computed key destructuring not recognised by rule

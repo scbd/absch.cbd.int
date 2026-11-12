@@ -4,7 +4,7 @@ const irccAttributesMap: AttributesMap = {
   language: { column: '0', required: true, translationKey: 'generalInfo' }, // A
   country: { column: '1', required: true, translationKey: 'country' }, // B
   absCNAId: { column: '2', required: true, translationKey: 'issuingAuthority' }, // C
-  permitEquivalent: { column: '3', translationKey: 'detailsPermit' }, // D
+  permitEquivalent: { column: '3', required: true, translationKey: 'detailsPermit' }, // D
   dateOfIssuance: { column: '4', required: true, translationKey: 'dateOfIssuance' }, // E
   dateOfExpiry: { column: '5', translationKey: 'dateOfExpiry' }, // F
   provider: {
@@ -22,7 +22,7 @@ const irccAttributesMap: AttributesMap = {
   },
   pic: {
     schema: {
-      consent: { column: '14', translationKey: 'picGranted' }, // O
+      consent: { column: '14', required: true, translationKey: 'picGranted' }, // O
       type: { column: '15', translationKey: 'type' }, // P
       existing: { column: '16', translationKey: 'uniqueIdentifier' }, // Q
       orgName: { column: '17', translationKey: 'firstName' }, // R
@@ -34,7 +34,7 @@ const irccAttributesMap: AttributesMap = {
     },
     translationKey: 'entitiesConfidential'
   },
-  matEstablished: { column: '23', translationKey: 'mutuallyInformation' }, // X
+  matEstablished: { column: '23', required: true, translationKey: 'mutuallyInformation' }, // X
   subjectMatter: { column: '24', required: true, translationKey: 'subjectMatter' }, // Y
   keywords: { column: '25', translationKey: 'keywords' }, // Z
   specimens: { column: '26', translationKey: 'specimens' }, // AA
