@@ -1,28 +1,40 @@
 <template>
-  <div
-    class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-    style="background: rgba(255,255,255,.85); z-index: 10;"
-  >
-    <div class="bg-white border rounded p-4 text-center shadow" style="max-width: 400px;">
-      <p class="fw-semibold mb-1">
-        {{ t('bulkImport.importSuccess') }}
-      </p>
-      <p class="small text-muted mb-0">
-        {{ message }}
-      </p>
-      <div class="mt-3 d-flex justify-content-end">
-        <button class="btn btn-primary" @click="emit('onClose')">
-          {{ t('bulkImport.close') }}
-        </button>
+  <div>
+    <div
+      class="modal d-block" tabindex="-1" role="dialog" aria-modal="true"
+      aria-labelledby="bi-done-title" @keydown.esc="emit('onClose')"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="bi-done-title" class="modal-title">
+              {{ t('bulkImport.importSuccess') }}
+            </h5>
+          </div>
+          <div class="modal-body">
+            {{ message }}
+          </div>
+          <div class="modal-footer">
+            <button ref="closeButton" type="button" class="btn btn-primary" @click="emit('onClose')">
+              {{ t('bulkImport.close') }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="modal-backdrop show" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 defineProps<{ message: string }>()
 const emit = defineEmits<(e: 'onClose')=> void>()
 const { t } = useI18n()
+
+const closeButton = ref<HTMLButtonElement | null>(null)
+
+onMounted(() => closeButton.value?.focus())
 </script>
