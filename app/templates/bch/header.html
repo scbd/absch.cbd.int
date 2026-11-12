@@ -98,7 +98,7 @@
                             <li ng-repeat="c in countries | filter:matchesQuery track by c.code">
                                 <a rel="noopener" translation-url class="dropdown-item  fw-bold fs-small-8"
                                     ng-href="countries/{{::c.code|encodeURIComponent}}">
-                                    <span ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
+                                    <span ng-class="{'color-party': c.isParty, 'color-inbetween': c.isInbetweenParty, 'color-non-party':!c.isParty && !c.isInbetweenParty}">
                                         {{::c.name | lstring:locale}}
                                     </span> </a>
                             </li>

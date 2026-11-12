@@ -84,7 +84,7 @@ app.directive("viewCapacityBuildingInitiative", ["translationService", function 
 			};
 
 			$scope.isInitiativeComplete = function(){
-				return $scope.document.endDate && new Date($scope.document.endDate) < new Date();
+				return $scope.document?.endDate && new Date($scope.document.endDate) < new Date();
 			}
 
 		}]

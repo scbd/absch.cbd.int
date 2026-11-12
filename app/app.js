@@ -28,6 +28,7 @@ app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProv
   ngMetaProvider.setDefaultTitleSuffix(" | " + window.scbdApp.title);
   ngMetaProvider.setDefaultTag("description", " | " + (window.scbdApp.description || window.scbdApp.title));
 }]);
+const loggedErrors = new Set();
 app.factory("$exceptionHandler", ["$log", function ($log) {
   return function myExceptionHandler(exception, cause) {
     if (typeof exception == "string" && (/^Possibly unhandled rejection: /).test(exception)) {
@@ -47,6 +48,10 @@ app.factory("$exceptionHandler", ["$log", function ($log) {
       exception += `\n URl : ${window.location.href}`
     else
       exception.errorUrl = exception += `\n URl : ${window.location.href}`;
+    const errorKey = String(exception);
+    if (loggedErrors.has(errorKey))
+      return;
+    loggedErrors.add(errorKey);
     $log.error(exception);
   };
 }]);
