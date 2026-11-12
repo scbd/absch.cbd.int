@@ -91,10 +91,14 @@ export interface DocBuildError {
 export const ROW_IMPORT_STATUS = { pending: 'pending', ok: 'ok', error: 'error' } as const
 export type RowImportStatus = typeof ROW_IMPORT_STATUS[keyof typeof ROW_IMPORT_STATUS]
 
+export const ROW_PUBLISH_STATUS = { published: 'published', draft: 'draft' } as const
+export type RowPublishStatus = typeof ROW_PUBLISH_STATUS[keyof typeof ROW_PUBLISH_STATUS]
+
 export interface RowProgress {
   rowIndex: number
   status: RowImportStatus
   message?: string
+  publish?: RowPublishStatus
 }
 
 export interface PushProgress {
@@ -168,6 +172,8 @@ export const UPLOADER_PHASE = {
   confirmErase: 'confirm-erase',
   importing: 'importing',
   done: 'done',
+  publishing: 'publishing',
+  published: 'published',
   parseError: 'parse-error',
   importError: 'import-error'
 } as const
@@ -182,6 +188,8 @@ export type UploaderState =
   | { phase: typeof UPLOADER_PHASE.confirmClose; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: typeof UPLOADER_PHASE.confirmErase; preview: PreviewData; rawRows: RawRow[]; errors: SheetError[] }
   | { phase: typeof UPLOADER_PHASE.importing; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[]; currentPush?: PushProgress }
-  | { phase: typeof UPLOADER_PHASE.done; imported: number; failed: number; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
+  | { phase: typeof UPLOADER_PHASE.done; imported: number; failed: number; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[]; documents: DocumentRequest[] }
+  | { phase: typeof UPLOADER_PHASE.publishing; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[]; currentPush?: PushProgress }
+  | { phase: typeof UPLOADER_PHASE.published; published: number; left: number; preview: PreviewData; rawRows: RawRow[]; progress: RowProgress[] }
   | { phase: typeof UPLOADER_PHASE.parseError }
   | { phase: typeof UPLOADER_PHASE.importError }
