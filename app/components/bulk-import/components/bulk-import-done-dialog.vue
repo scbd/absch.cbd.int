@@ -12,11 +12,25 @@
             </h5>
           </div>
           <div class="modal-body">
-            {{ message }}
+            <p :class="{ 'mb-2': canPublish }">
+              {{ message }}
+            </p>
+            <p v-if="canPublish" class="mb-0">
+              {{ t('bulkImport.publishPrompt') }}
+            </p>
           </div>
           <div class="modal-footer">
-            <button ref="closeButton" type="button" class="btn btn-primary" @click="emit('onClose')">
-              {{ t('bulkImport.close') }}
+            <button
+              v-if="canPublish" ref="primaryButton" type="button"
+              class="btn btn-primary" @click="emit('onPublish')"
+            >
+              {{ t('bulkImport.publishNow') }}
+            </button>
+            <button
+              ref="closeButton" type="button" :class="canPublish ? 'btn btn-secondary' : 'btn btn-primary'"
+              @click="emit('onClose')"
+            >
+              {{ canPublish ? t('bulkImport.later') : t('bulkImport.close') }}
             </button>
           </div>
         </div>
@@ -30,11 +44,12 @@
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-defineProps<{ message: string }>()
-const emit = defineEmits<(e: 'onClose')=> void>()
+defineProps<{ message: string; canPublish: boolean }>()
+const emit = defineEmits<(e: 'onClose' | 'onPublish')=> void>()
 const { t } = useI18n()
 
+const primaryButton = ref<HTMLButtonElement | null>(null)
 const closeButton = ref<HTMLButtonElement | null>(null)
 
-onMounted(() => closeButton.value?.focus())
+onMounted(() => (primaryButton.value ?? closeButton.value)?.focus())
 </script>

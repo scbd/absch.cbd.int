@@ -58,7 +58,7 @@
       type="button"
       class="btn btn-outline-secondary d-flex align-items-center justify-content-center flex-shrink-0 p-0"
       style="width: 34px; height: 34px; border-radius: 7px;"
-      :disabled="phase === UPLOADER_PHASE.importing" @click="emit('onClose')"
+      :disabled="phase === UPLOADER_PHASE.importing || phase === UPLOADER_PHASE.publishing" @click="emit('onClose')"
     >
       <svg
         width="14" height="14" viewBox="0 0 24 24" fill="none"
