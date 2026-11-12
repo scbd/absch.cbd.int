@@ -107,6 +107,12 @@
             class="small text-muted"
           >{{ t('bulkImport.liveCount', { imported: liveImported, failed: liveFailed }) }}</span>
 
+          <span v-if="isPublishing" class="small text-muted">{{ currentPushLabel }}</span>
+          <span
+            v-if="state.phase === UPLOADER_PHASE.published"
+            class="small" :class="state.left > 0 ? 'text-danger' : 'text-success'"
+          >{{ t('bulkImport.publishDone', { published: state.published, left: state.left }) }}</span>
+
           <span
             v-if="state.phase === UPLOADER_PHASE.done"
             class="small" :class="state.failed > 0 ? 'text-danger' : 'text-success'"
@@ -147,7 +153,8 @@
         <BulkImportDoneDialog
           v-if="state.phase === UPLOADER_PHASE.done && !doneDialogDismissed"
           :message="t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed })"
-          @on-close="onDoneDialogClose"
+          :can-publish="canPublish"
+          @on-close="onDoneDialogClose" @on-publish="onPublish"
         />
       </div>
     </div>
@@ -194,7 +201,7 @@ Object.entries(modalMessages as unknown as Record<string, unknown>).forEach(([lo
 const {
   state, onFileChange, onImport, onConfirmImport,
   onClose: _onClose, onForceClose: _onForceClose, onClear,
-  onConfirmErase: _onConfirmErase, onCancelConfirm
+  onConfirmErase: _onConfirmErase, onCancelConfirm, onPublishDrafts
 } = useBulkImport(props.documentType)
 
 const { [props.documentType]: docTypeDef } = registry
@@ -237,6 +244,8 @@ const isConfirmClose = computed(() => state.phase === UPLOADER_PHASE.confirmClos
 const isConfirmErase = computed(() => state.phase === UPLOADER_PHASE.confirmErase)
 const isImporting = computed(() => state.phase === UPLOADER_PHASE.importing)
 const isDone = computed(() => state.phase === UPLOADER_PHASE.done)
+const isPublishing = computed(() => state.phase === UPLOADER_PHASE.publishing)
+const isPublished = computed(() => state.phase === UPLOADER_PHASE.published)
 
 // -------------------------------------------------------------------------
 // Derived display state
@@ -247,7 +256,9 @@ const hasPreview = computed(() =>
   isConfirmClose.value ||
   isConfirmErase.value ||
   isImporting.value ||
-  isDone.value
+  isDone.value ||
+  isPublishing.value ||
+  isPublished.value
 )
 
 const previewRows = computed<PreviewRow[]>(() => {
@@ -273,13 +284,25 @@ const sheetErrors = computed<SheetError[]>(() => {
   return (state as StateWithErrors).errors
 })
 
-const banner = computed(() => {
-  if (!hasPreview.value) return null
+// banner for the phases after the import has started (importing, done, publishing, published)
+const resultBanner = computed(() => {
   if (isImporting.value) return { level: 'importing' as const, text: t('bulkImport.processing') }
   if (state.phase === UPLOADER_PHASE.done) {
     if (state.failed === 0) return { level: 'ok' as const, text: t('bulkImport.importSuccess') }
     return { level: 'danger' as const, text: t('bulkImport.doneMsg', { imported: state.imported, failed: state.failed }) }
   }
+  if (isPublishing.value) return { level: 'importing' as const, text: t('bulkImport.publishing') }
+  if (state.phase === UPLOADER_PHASE.published) {
+    const text = t('bulkImport.publishDone', { published: state.published, left: state.left })
+    if (state.left === 0) return { level: 'ok' as const, text }
+    return { level: 'danger' as const, text }
+  }
+  return null
+})
+
+const banner = computed(() => {
+  if (!hasPreview.value) return null
+  if (resultBanner.value !== null) return resultBanner.value
   if (sheetErrors.value.length === 0) return { level: 'ok' as const, text: t('bulkImport.ready') }
   const { length: errCount } = sheetErrors.value.filter(e => e.level === 'error')
   const { length: warnCount } = sheetErrors.value.filter(e => e.level === 'warning')
@@ -296,7 +319,7 @@ const banner = computed(() => {
 
 // groups multiple errors on the same row into one banner item with multiple messages
 const bannerErrors = computed<BannerErrorGroup[]>(() => {
-  if (isDone.value) return []
+  if (isDone.value || isPublishing.value || isPublished.value) return []
   const groups = new Map<number, BannerErrorGroup>()
   for (const e of sheetErrors.value) {
     if (!groups.has(e.row)) groups.set(e.row, { row: e.row + 1, worstLevel: e.level, items: [] })
@@ -311,7 +334,7 @@ const bannerErrors = computed<BannerErrorGroup[]>(() => {
 const hasErrors = computed(() => sheetErrors.value.some(e => e.level === 'error'))
 
 const bannerStats = computed<BannerStats | null>(() => {
-  if (!hasPreview.value || isImporting.value || isDone.value) return null
+  if (!hasPreview.value || isImporting.value || isDone.value || isPublishing.value || isPublished.value) return null
   return {
     documents: previewRows.value.length,
     errors: sheetErrors.value.filter(e => e.level === 'error').length,
@@ -321,18 +344,21 @@ const bannerStats = computed<BannerStats | null>(() => {
 })
 
 const rowProgressList = computed<RowProgress[]>(() =>
-  state.phase === UPLOADER_PHASE.importing || state.phase === UPLOADER_PHASE.done
+  state.phase === UPLOADER_PHASE.importing || state.phase === UPLOADER_PHASE.done ||
+  state.phase === UPLOADER_PHASE.publishing || state.phase === UPLOADER_PHASE.published
     ? state.progress
     : []
 )
 
 const liveImported = computed(() => rowProgressList.value.filter(p => p.status === 'ok').length)
+const canPublish = computed(() => state.phase === UPLOADER_PHASE.done && state.imported > 0)
 const liveFailed = computed(() => rowProgressList.value.filter(p => p.status === 'error').length)
 
 const currentPushLabel = computed(() => {
-  if (state.phase !== UPLOADER_PHASE.importing) return ''
+  if (state.phase !== UPLOADER_PHASE.importing && state.phase !== UPLOADER_PHASE.publishing) return ''
   const { currentPush } = state
   if (currentPush === undefined) return t('bulkImport.importing')
+  if (state.phase === UPLOADER_PHASE.publishing) return t('bulkImport.publishProgress', { current: currentPush.current, total: currentPush.total })
   if (currentPush.label === 'linked') return t('bulkImport.pushingLinked', { current: currentPush.current, total: currentPush.total })
   return t('bulkImport.pushingDocument', { current: currentPush.current, total: currentPush.total })
 })
@@ -398,6 +424,12 @@ function onConfirmErase () {
 
 function onDoneDialogClose () {
   doneDialogDismissed.value = true
+  emit('onImported')
+}
+
+async function onPublish () {
+  doneDialogDismissed.value = true
+  await onPublishDrafts()
   emit('onImported')
 }
 

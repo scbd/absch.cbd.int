@@ -34,5 +34,11 @@
   "confirmErase": "Yes, clear",
   "confirmImportTitle": "Confirm import",
   "confirmCloseTitle": "Discard changes?",
-  "confirmEraseTitle": "Erase data?"
+  "confirmEraseTitle": "Erase data?",
+  "publishPrompt": "Publish the draft records or leave them as drafts to publish later.",
+  "publishNow": "Publish now",
+  "later": "Later",
+  "publishing": "Publishing…",
+  "publishProgress": "Publishing record {current} / {total}",
+  "publishDone": "{published} published, {left} left as drafts."
 }

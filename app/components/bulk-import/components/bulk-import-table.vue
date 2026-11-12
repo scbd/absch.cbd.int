@@ -40,9 +40,9 @@
           <td class="bi-pin bi-pin--1">
             <span
               v-if="progressByRow.get(row.rowIndex)"
-              class="bi-stat" :class="`bi-stat--${progressByRow.get(row.rowIndex)?.status}`"
+              class="bi-stat" :class="`bi-stat--${rowStatus(row.rowIndex)}`"
             >
-              <span class="bi-stat__dot" />{{ progressByRow.get(row.rowIndex)?.status }}
+              <span class="bi-stat__dot" />{{ rowStatus(row.rowIndex) }}
             </span>
             <span v-else class="bi-stat" :class="`bi-stat--${row.status}`">
               <span class="bi-stat__dot" />{{ row.status }}
@@ -126,6 +126,12 @@ const props = defineProps<{
 const { t } = useI18n()
 
 const progressByRow = computed(() => new Map(props.rowProgressList.map(p => [p.rowIndex, p])))
+
+// a publish result takes over from the draft-save result once the workflow has been tried
+function rowStatus (rowIndex: number): string | undefined {
+  const progress = progressByRow.value.get(rowIndex)
+  return progress?.publish ?? progress?.status
+}
 
 function cellHasError (row: PreviewRow, key: string): boolean {
   return row.cells[key]?.errors.some(e => e.level === 'error') ?? false
@@ -220,6 +226,10 @@ function isLongText (v: string): boolean {
 .bi-stat--warn  .bi-stat__dot { background: var(--warn); }
 .bi-stat--error { color: var(--danger); }
 .bi-stat--error .bi-stat__dot { background: var(--danger); }
+.bi-stat--published { color: var(--ok); }
+.bi-stat--published .bi-stat__dot { background: var(--ok); }
+.bi-stat--draft { color: var(--warn); }
+.bi-stat--draft .bi-stat__dot { background: var(--warn); }
 .bi-stat--pending { color: #888; }
 .bi-stat--pending .bi-stat__dot { background: #bbb; }
 .bi-push-err { font-size: .72rem; color: var(--danger); margin-top: 3px; line-height: 1.3; white-space: normal; max-width: 200px; }
