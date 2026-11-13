@@ -1,17 +1,17 @@
-* {
+.pdf-ircc, .pdf-ircc * {
     font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue";
     text-rendering: optimizeLegibility;
     overflow: visible !important;
 }
 
-h1 {
+.pdf-ircc h1 {
     font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue";
     font-size: 24px;
     font-weight: bold;
     padding-bottom: 5px;
 }
 
-h3 {
+.pdf-ircc h3 {
     margin-bottom: 15px;
     border-bottom: 1px solid #666;
     font-size: 18px;
@@ -19,22 +19,22 @@ h3 {
     font-weight: bold;
 }
 
-.color-green {
+.pdf-ircc .color-green {
     color: #1FA65D!important;
 }
 
-.color-litegreen {
+.pdf-ircc .color-litegreen {
     color: #DFF0D8!important;
 }
 
-legend {
+.pdf-ircc legend {
     margin-top: 20px;
     margin-bottom: 0;
     border: 0;
     color: #1FA65D!important;
 }
 
-.row {
+.pdf-ircc .row {
     margin-top: 0;
     padding-left: 15px;
     padding-top: 15px;
@@ -43,27 +43,27 @@ legend {
     margin-left:0px;
 }
 
-.top-border {
+.pdf-ircc .top-border {
     border-top: 1px solid #777;
 }
 
-.text {
+.pdf-ircc .text {
     background-color: white!important;
 }
 
-.bg-lightblue {
+.pdf-ircc .bg-lightblue {
     background-color: #eee!important;
 }
 
-.bg-litegreen {
+.pdf-ircc .bg-litegreen {
     background-color: #DFF0D8!important;
 }
 
-.bg-green {
+.pdf-ircc .bg-green {
     background-color: #1FA65D!important;
 }
 
-.ircc-row {
+.pdf-ircc .ircc-row {
     background-color: #DFF0D8!important;
     margin-bottom: 15px;
     padding-top: 10px;
@@ -72,7 +72,7 @@ legend {
     border-bottom: 1px solid #ddd;
 }
 
-.ircc-title {
+.pdf-ircc .ircc-title {
     text-transform: uppercase;
     background-color: #bbb!important;
     padding-top: 3px;
@@ -81,20 +81,20 @@ legend {
     font-weight: bold!important;
 }
 
-a {
+.pdf-ircc a {
     color: #333;
 }
 
-body {
+.pdf-ircc {
     background-color: #fff!important;
 }
 
-.color-white {
+.pdf-ircc .color-white {
     color: #FFF!important;
     font-weight: bold!important;
 }
 
-.help-block {
+.pdf-ircc .help-block {
     font-size: 11px;
     color: #999;
     padding: 0 0 0 3px;
@@ -104,25 +104,25 @@ body {
     text-transform: none;
 }
 
-label {
+.pdf-ircc label {
     font-size: 12px;
     /*text-transform: uppercase;*/
     font-weight: bold;
     color: #1FA65D!important;
 }
 
-.history-text-date {
+.pdf-ircc .history-text-date {
     font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue";
     font-size: 12px;
     text-transform: uppercase;
 }
 
-.history-text {
+.pdf-ircc .history-text {
     font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue";
     font-size: 12px;
 }
 
-.text {
+.pdf-ircc .text {
     font-family: sans-serif, Trebuchet MS, Helvetica, "Helvetica Neue";
     font-size: 12px;
     min-height: 20px;
@@ -136,11 +136,11 @@ label {
     margin-top: 0;
 }
 
-.label-primary {
+.pdf-ircc .label-primary {
     margin-bottom: 10px!important;
 }
 
-.confidential {
+.pdf-ircc .confidential {
     color: #a94442!important;
     /*background-color: #DDD!important;*/
     text-transform: uppercase;
@@ -148,7 +148,7 @@ label {
     font-weight: bold;
 }
 
-.confidential-text {
+.pdf-ircc .confidential-text {
     color: #a94442!important;
     background-color: #DDD!important;
     text-transform: uppercase;
@@ -156,33 +156,33 @@ label {
     font-weight: bold;
 }
 
-.alert-text {
+.pdf-ircc .alert-text {
     color: #aa6708!important;
     text-transform: uppercase;
     font-weight: bold;
     background-color: #F2DEDE!important;
 }
 
-.alert-danger {
+.pdf-ircc .alert-danger {
     color: #FFF!important;
     text-transform: uppercase;
     font-weight: bold;
     background-color: #C7532C!important;
 }
 
-.watermark {
+.pdf-ircc .watermark {
     background-image: url(../img/testwatermark.png);
     background-repeat: repeat;
     background-attachment: fixed;
     background-size: 150px;
 }
 
-a[href]:after {
+.pdf-ircc a[href]:after {
     content: '';
 }
 
 ;
-.selected-reference-uid {
+.pdf-ircc .selected-reference-uid {
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
@@ -191,7 +191,7 @@ a[href]:after {
     display: inline;
 }
 
-.selected-reference-name {
+.pdf-ircc .selected-reference-name {
     font-size: 12px;
     font-weight: 500;
     /*text-transform: uppercase;*/
@@ -202,7 +202,7 @@ a[href]:after {
     display: inline;
 }
 
-.selected-reference-title {
+.pdf-ircc .selected-reference-title {
     font-size: 12px;
     font-weight: 500;
     /*text-transform: uppercase;*/
@@ -211,16 +211,46 @@ a[href]:after {
     display: inline;
 }
 
-.main-nav {
+.pdf-ircc .main-nav {
     border-bottom: 0px solid #fff;
     padding-top: 0px;
 }
-.unep-logo {
+.pdf-ircc .unep-logo {
     height: 60px!important;
 }
-.cbd-logo {
+.pdf-ircc .cbd-logo {
     height: 50px!important;
 }
-.un-logo {
+.pdf-ircc .un-logo {
     height: 60px!important;
+}
+
+
+/* the amendment history table: bootstrap 5 has no col-xs-*, so the columns are sized here and long comments wrap */
+.pdf-ircc table.table {
+    width: 100%;
+}
+.pdf-ircc table.table td {
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+.pdf-ircc table.table td.col-xs-2 {
+    width: 16.67%;
+}
+.pdf-ircc table.table td.col-xs-4 {
+    width: 33.33%;
+}
+.pdf-ircc .row:has(> table.table) {
+    display: block;
+}
+
+/* the shared print header stacks row padding, my-4 and a br above the title banner, close that gap */
+.pdf-ircc #printContentHeader {
+    margin-bottom: 10px !important;
+}
+.pdf-ircc #printContentHeader .row {
+    padding-bottom: 0;
+}
+.pdf-ircc #printContentHeader br {
+    display: none;
 }
