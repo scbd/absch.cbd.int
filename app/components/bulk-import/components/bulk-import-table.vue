@@ -11,7 +11,7 @@
           </th>
           <th
             v-for="(key, i) in pinnedColumnKeys" :key="key"
-            :class="`bi-pin bi-pin--${i + 2} bi-grp`" rowspan="2"
+            :class="[`bi-pin bi-pin--${i + 2} bi-grp`, { 'bi-col--required': requiredKeys.has(key) }]" rowspan="2"
           >
             {{ t(key, key) }}
           </th>
@@ -52,8 +52,17 @@
             </div>
           </td>
 
-          <td v-for="(key, i) in pinnedColumnKeys" :key="key" :class="`bi-pin bi-pin--${i + 2}`">
+          <td
+            v-for="(key, i) in pinnedColumnKeys" :key="key"
+            :class="[`bi-pin bi-pin--${i + 2}`, { 'bi-cell--err': cellHasError(row, key), 'bi-cell--warn': cellHasWarn(row, key) }]"
+          >
             {{ row.cells[key]?.display ?? '' }}
+            <span
+              v-if="cellHasError(row, key) || cellHasWarn(row, key)"
+              class="bi-cellnote" :class="cellHasError(row, key) ? 'bi-cellnote--err' : 'bi-cellnote--warn'"
+            >
+              {{ row.cells[key]?.errors[0]?.message }}
+            </span>
           </td>
 
           <td
@@ -173,7 +182,7 @@ function isLongText (v: string): boolean {
   color: var(--ink-2, #3c4e57); font-weight: 600; font-size: 11px;
   padding: 8px 13px; border-bottom: 1px solid var(--line, #dde4e8);
 }
-.bi-col--required::after { content: ' *'; color: var(--orange); }
+.bi-table th.bi-col--required::after { display: inline !important; content: ' *' !important; color: var(--orange); }
 .bi-table__grp-row th { position: sticky; top: 0; z-index: 3; }
 .bi-table__col-row th { position: sticky; top: 33px; z-index: 3; }
 .bi-pin { position: sticky; z-index: 2; background: #fff; }
