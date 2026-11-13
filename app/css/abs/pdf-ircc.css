@@ -254,3 +254,12 @@
 .pdf-ircc #printContentHeader br {
     display: none;
 }
+
+/* a list used as a box (permit files, relevant documents) is flush with the other boxes, and lists inside a box add no space below an empty one */
+.pdf-ircc ul.text {
+    margin-left: 0;
+    padding-left: 9px;
+}
+.pdf-ircc .text > ul {
+    margin-bottom: 0;
+}

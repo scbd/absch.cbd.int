@@ -164,3 +164,12 @@ background-size: 150px;
 .pdf-communique #printContentHeader br {
     display: none;
 }
+
+/* a list used as a box (attached documents) is flush with the other boxes, and lists inside a box add no space below an empty one */
+.pdf-communique ul.text {
+    margin-left: 0;
+    padding-left: 9px;
+}
+.pdf-communique .text > ul {
+    margin-bottom: 0;
+}
