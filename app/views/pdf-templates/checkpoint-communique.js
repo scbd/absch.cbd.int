@@ -48,6 +48,11 @@ export default ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
 				})
 		});
 
+		//counts the permit sections that finished loading, so a host can tell when the whole communique is on screen
+		$scope.onPermitLoaded = function(){
+			$scope.permitsLoaded = ($scope.permitsLoaded||0) + 1;
+		};
+
 		$scope.renderHtml = function(html_code)
 		{
 			return $sce.trustAsHtml($filter("lstring")(html_code,sLocale));

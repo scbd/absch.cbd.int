@@ -8,10 +8,11 @@ import HtmlPdfApi from '~/api/html-pdf-api';
 import recordOptionsT from '~/app-text/views/directives/record-options.json';
 
 const PDF_SLOW_AFTER_MS = 8000;
+const CERTIFICATE_RENDER_TIMEOUT_MS = 30000;
 const htmlPdfApi        = new HtmlPdfApi();
 
-app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm', 'translationService',
-    function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm, translationService) {
+app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm', 'translationService', '$controller',
+    function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm, translationService, $controller) {
         return {
             restrict: 'EAC',
             template : template,
@@ -159,30 +160,94 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
 
                     startSlowTimer();
                     let url;
+                    let certificate;
                     try{
-                        let header = (await import('~/views/forms/view/print-header.html')).default;
-                        let footer = (await import('~/views/forms/view/print-footer.html')).default;
-                        header = $compile(header)($scope);
-                        footer = $compile(footer)($scope);
-                        await $timeout();//let the compiled header/footer render before they are cloned
-                        header.css('padding-top', '30px');
+                        if(_.includes(['absPermit', 'absCheckpointCommunique'], $scope.internalDocument.header.schema)){
+                            //the certificates have their own header and footer and are not the record view
+                            certificate = await renderAbsCertificate();
+                            url = await pdfThis([certificate.element], {
+                                downloadFileName: key, base:true, baseUrl: realm.baseURL, returnUrl:true
+                            });
+                        }
+                        else{
+                            let header = (await import('~/views/forms/view/print-header.html')).default;
+                            let footer = (await import('~/views/forms/view/print-footer.html')).default;
+                            header = $compile(header)($scope);
+                            footer = $compile(footer)($scope);
+                            await $timeout();//let the compiled header/footer render before they are cloned
+                            header.css('padding-top', '30px');
 
-                        //the api stores the pdf under the attachment name, which is the cache key
-                        //the coloured record header (type and id) followed by the record view
-                        const recordElements = [$element.closest('.panel-heading')[0], $element.parent().parent().parent().find('#schemaView')[0]];
-                        url = await pdfThis(recordElements, {
-                            downloadFileName: key, base:true, baseUrl: realm.baseURL, returnUrl:true,
-                            header, footer
-                        });
+                            //the api stores the pdf under the attachment name, which is the cache key
+                            //the coloured record header (type and id) followed by the record view
+                            const recordElements = [$element.closest('.panel-heading')[0], $element.parent().parent().parent().find('#schemaView')[0]];
+                            url = await pdfThis(recordElements, {
+                                downloadFileName: key, base:true, baseUrl: realm.baseURL, returnUrl:true,
+                                header, footer
+                            });
+                        }
                     }
                     catch(e){
                         console.error('PDF generation failed:', e);
+                    }
+                    finally{
+                        if(certificate)
+                            certificate.destroy();
                     }
 
                     if(url)
                         openPdfTab(getPdfViewerUrl(key));
                     else
                         failPdf();
+                }
+
+                //The ABS IRCC/CPC has a different tempalate for pdf, so load them instead of traditional record view.
+                //renders the certificate template of the record off screen, resolves once it has loaded its data
+                async function renderAbsCertificate(){
+                    const scope     = $scope.$new(true);
+                    const isIrcc    = 'absPermit' == $scope.internalDocument.header.schema;
+                    const uniqueId  = $filter('uniqueID')($scope.internalDocumentInfo||$scope.internalDocument);
+                    const style     = 'position:absolute;left:-10000px;top:0;width:900px';
+                    let view;
+                    let isLoaded;
+
+                    //the certificate views are route controllers and templates, run here with the record id as their route param
+                    if(isIrcc){
+                        view     = await import('~/views/pdf-templates/ircc');
+                        isLoaded = function(){ return scope.loaded; };
+                    }
+                    else{
+                        view     = await import('~/views/pdf-templates/checkpoint-communique');
+                        isLoaded = function(){
+                            return scope.document && scope.documentVersion && scope.emailList && (scope.permitsLoaded||0) == (scope.document.absIRCCs||[]).length;
+                        };
+                    }
+
+                    $controller(view.default, { $scope: scope, $routeParams: { documentId: uniqueId } });
+                    const container = $compile(`<div style="${style}">${view.template.replace(/^\ufeff/, '')}</div>`)(scope);
+
+                    const destroy  = function(){
+                        scope.$destroy();
+                        container.remove();
+                    };
+                    const deadline = Date.now() + CERTIFICATE_RENDER_TIMEOUT_MS;
+
+                    document.body.appendChild(container[0]);
+
+                    try{
+                        //the referenced records, e.g. the issuing authority, load on their own after the document
+                        while(!(isLoaded() && !container[0].querySelector('.fa-spin'))){
+                            if(Date.now() > deadline)
+                                throw new Error('certificate render timed out');
+
+                            await new Promise(function(done){ setTimeout(done, 100); });
+                        }
+                    }
+                    catch(e){
+                        destroy();
+                        throw e;
+                    }
+
+                    return { element: container[0].firstChild, destroy };
                 }
 
                 //the pdf viewer page, showing the stored pdf when a key is given, otherwise generating it
