@@ -16,47 +16,56 @@ import printFooterTemplate from 'text!../forms/view/print-footer.html';
             restrict: "EAC",
             template: template,
             scope: {
-                documentId: "="
+                documentId: "=",
+                onLoaded: "&"
             },
-            controller: ['$scope', '$http', '$location', '$filter', 'realm',
-                function($scope, $http, $location, $filter, realm) {
+            controller: ['$scope', '$http', '$location', '$filter', 'realm', '$q',
+                function($scope, $http, $location, $filter, realm, $q) {
     
                     var sLocale = "en";
                     $scope.locale = sLocale;
                     $scope.realm = realm;
                     
                     $scope.load = function() {
-                        $http.get('/api/v2013/documents/' + $scope.documentId, {}).then(function(res) {
+                        const documentLoaded = $http.get('/api/v2013/documents/' + $scope.documentId, {}).then(function(res) {
     
                             $scope.document = res.data;
                             var usageDetails = []
+                            const termsLoaded = [];
     
                             if ($scope.document.usage) {
                                 $scope.document.usage.forEach(function(usage) {
     
-                                    $scope.getTerm(usage.identifier).then(function(data) {
+                                    termsLoaded.push($scope.getTerm(usage.identifier).then(function(data) {
                                         usageDetails.push(data);
-                                    });
+                                    }));
                                 });
                             }
                             $scope.document.usage = usageDetails;
-                            $scope.getTerm($scope.document.government.identifier)
+                            termsLoaded.push($scope.getTerm($scope.document.government.identifier)
                                 .then(function(data) {
                                     $scope.document.government = data;
-                                });
+                                }));
+
+                            return $q.all(termsLoaded);
                         });
     
                         var identifierWithoutRevision = $scope.documentId;
                         if(identifierWithoutRevision.indexOf('@')>0)
                             identifierWithoutRevision = identifierWithoutRevision.substr(0, identifierWithoutRevision.indexOf('@'));
     
-                        $http.get('/api/v2013/documents/' + identifierWithoutRevision + '/versions?body=true&cache=true')
+                        const versionsLoaded = $http.get('/api/v2013/documents/' + identifierWithoutRevision + '/versions?body=true&cache=true')
                             .then(function(res) {
                                 $scope.versions = res.data.Items;
                             });
     
-                        $http.get('/api/v2013/documents/' + $scope.documentId + '?info', {}).then(function(res) {
+                        const infoLoaded = $http.get('/api/v2013/documents/' + $scope.documentId + '?info', {}).then(function(res) {
                             $scope.documentInfo = res.data;
+                        });
+
+                        //tells the host when everything is on screen, so it can be captured
+                        $q.all([documentLoaded, versionsLoaded, infoLoaded]).then(function(){
+                            $scope.onLoaded();
                         });
                     }
                     $scope.renderHtml = function(html_code) {

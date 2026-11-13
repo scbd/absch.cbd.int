@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div class="pdf-communique">
 
     <!-- <script src="absCommon.js"></script> -->
 
@@ -282,7 +282,7 @@
                 </table>
 
                 <div ng-repeat="permit  in document.absIRCCs" style="page-break-before:always">
-                    <div pdf-ircc-partial-view document-id="permit.identifier"></div>
+                    <div pdf-ircc-partial-view document-id="permit.identifier" on-loaded="onPermitLoaded()"></div>
                 </div>
 
             </div>

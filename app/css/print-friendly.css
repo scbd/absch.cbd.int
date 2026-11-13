@@ -34,28 +34,48 @@
     }
 }
 
- nav, .navbar.navbar-portal, #PortalLinks1, .footer, .slaask-button, 
- body.print .hide-on-print, body.print .expander, body.print .pdf-download-buttons,body.print .compare-buttons, body.print .compare-message,
- body.print i[class*="bi-"], body.print  i[class*="fa-"],
-.slaask-alert-overlay, .slaask-alert,.lang-alert,
-.bch-header, #reference-records-table, .animated-container,
-scbd-header, bch-header, bch-footer, absch-header, absch-footer, scbd-footer, chm-header, chm-footer  {
+body:is(.print, .embed) nav,
+body:is(.print, .embed) .navbar.navbar-portal,
+body:is(.print, .embed) #PortalLinks1,
+body:is(.print, .embed) .footer,
+body:is(.print, .embed) .slaask-button,
+body.print .hide-on-print,
+body.print .expander,
+body.print .pdf-download-buttons,
+body.print .compare-buttons,
+body.print .compare-message,
+body.print i[class*="bi-"],
+body.print  i[class*="fa-"],
+body:is(.print, .embed) .slaask-alert-overlay,
+body:is(.print, .embed) .slaask-alert,
+body:is(.print, .embed) .lang-alert,
+body:is(.print, .embed) .bch-header,
+body:is(.print, .embed) #reference-records-table,
+body:is(.print, .embed) .animated-container,
+body:is(.print, .embed) scbd-header,
+body:is(.print, .embed) bch-header,
+body:is(.print, .embed) bch-footer,
+body:is(.print, .embed) absch-header,
+body:is(.print, .embed) absch-footer,
+body:is(.print, .embed) scbd-footer,
+body:is(.print, .embed) chm-header,
+body:is(.print, .embed) chm-footer {
     display: none!important
 }
-.training-bg {
+body:is(.print, .embed) .training-bg {
     background: none
 }
-html, body, .container-full {
+html:has(> body:is(.print, .embed)), body:is(.print, .embed), body:is(.print, .embed) .container-full {
     background: #fff;
 }
-#page-content-wrapper,
-.container-full.page-content,
-#wrapper .container-full{
+body:is(.print, .embed) #page-content-wrapper,
+body:is(.print, .embed) .container-full.page-content,
+body:is(.print, .embed) #wrapper .container-full{
     margin: 0px!important;
     padding:0px!important;
 }
-.container-full.page-content .container,
-#wrapper .container-full .container{
+body:is(.print, .embed) .container-full.page-content .container,
+body:is(.print, .embed) #wrapper .container-full .container{
     width           : 100%!important;
     padding-right   : 0px!important;
     padding-left    : 0px!important;
@@ -81,7 +101,7 @@ html, body, .container-full {
 
 }
 
-body{
+body:is(.print, .embed){
     margin:20px;
     margin-top: -30px;
 }
@@ -140,7 +160,7 @@ body{
 }
 
 @media (max-width:768px) {
-    body{
+    body:is(.print, .embed){
         padding:20px;
     }
 }
