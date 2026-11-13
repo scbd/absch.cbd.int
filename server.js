@@ -15,6 +15,7 @@ import siteMap from './middlewares/sitemap.js';
 import errorLogs from './middlewares/error-logs.js';
 import { rejectBotsPdf } from "./middlewares/reject-bots-pdf.js";
 import oembed from './middlewares/oembed.js';
+import { setFrameOptions } from './middlewares/frame-options.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -34,8 +35,6 @@ let cdnUrl              = (process.env.CDN_URL || 'https://cdn.jsdelivr.net/').r
     global.app.cdnUrl   = cdnUrl;
     global.app.apiUrl = apiUrl;
     global.app.accountsUrl = accountsUrl;
-
-const iframeAllowedUrls = [/^\/((ar|en|es|fr|ru|zh)\/)?share\/embed/]
 
 if(!appVersion || appVersion.trim()==''){
     appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.COMMIT||''));
@@ -97,12 +96,7 @@ app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*',
         global.app.version = appVersion;
         res.setHeader('Cache-Control', 'public');    
         res.cookie('VERSION', appVersion);
-        
-        for (let i = 0; i < iframeAllowedUrls.length; i++) {
-            const url = iframeAllowedUrls[i];
-            if(url.test(req.url))
-                res.setHeader('X-Frame-Options', 'ALLOW')
-        }     
+        setFrameOptions(req, res);
         
         next();
     },
