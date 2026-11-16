@@ -94,7 +94,9 @@ export function useBulkImport (documentType: DocumentTypes): {
         const userGovernment = (auth.user() as { government?: string } | null)?.government
         validationErrors = await definition.validateRows(rows, tokenReader, realm.realm, userGovernment)
       }
-      const allErrors = [...sheetErrors, ...validationErrors]
+      // a validation error on a cell supersedes the reader's warning for that same cell
+      const erroredCells = new Set(validationErrors.map(e => `${e.row}:${e.column}`))
+      const allErrors = [...sheetErrors.filter(e => !erroredCells.has(`${e.row}:${e.column}`)), ...validationErrors]
       setStep(PARSE_STEP_KEY.validateRows, PARSE_STEP_STATUS.done)
       setStep(PARSE_STEP_KEY.buildPreview, PARSE_STEP_STATUS.active)
       const preview = buildPreview(rows, definition.attributesMap, allErrors)

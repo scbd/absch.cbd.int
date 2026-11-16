@@ -10,6 +10,15 @@ const CONTACT_PREFIXES = ['provider', 'pic'] as const
 const CONTACT_DETAIL_FIELDS = ['orgName', 'acronym', 'address', 'city', 'country', 'email'] as const
 const CONTACT_REQUIRED_FIELDS = ['type', 'orgName', 'country', 'email'] as const
 
+// flat column keys (e.g. 'matEstablished', 'pic.consent') flagged `required` in the attributes map
+const REQUIRED_COLUMNS = Object.entries(attributesMap).flatMap(([key, entry]) => {
+  if ('schema' in entry) {
+    return Object.entries(entry.schema).filter(([, leaf]) => leaf.required === true).map(([field]) => `${key}.${field}`)
+  }
+  if (entry.required === true) return [key]
+  return []
+})
+
 const EXISTING_ID_REGEXP = /^[a-z]+-[a-z]+-[a-z]+-(?<documentId>\d+)(?:-\d{1,3})?$/i
 
 async function validateExistingIds (existing: string, column: string, rowIndex: number, api: KmDocumentsApi): Promise<SheetError[]> {
@@ -25,6 +34,19 @@ async function validateExistingIds (existing: string, column: string, rowIndex: 
     if (!exists) {
       errors.push({ row: rowIndex, column, level: 'error', message: `Contact ID not found: "${uid}"`, value: uid })
     }
+  }
+  return errors
+}
+
+function validateRequiredColumns (row: RawRow, rowIndex: number): SheetError[] {
+  const errors: SheetError[] = REQUIRED_COLUMNS
+    .filter(column => Schema.isEmpty(row[column]))
+    .map(column => ({ row: rowIndex, column, level: 'error' as const, message: 'This field is required' }))
+
+  // the edit form's MAT toggle only passes when set, so anything other than "yes" fails like a blank
+  const { matEstablished } = row
+  if (!Schema.isEmpty(matEstablished) && !Schema.parseTextToBoolean(String(matEstablished))) {
+    errors.push({ row: rowIndex, column: 'matEstablished', level: 'error', message: 'MAT must be established ("yes")', value: String(matEstablished) })
   }
   return errors
 }
@@ -100,6 +122,8 @@ async function validateRows (rows: RawRow[], tokenReader: TokenReader, realm: st
         errors.push({ row: rowIndex, column: 'absCNAId', level: 'error', message: `ABS CNA not found: "${uid}"`, value: uid })
       }
     }
+
+    errors.push(...validateRequiredColumns(row, rowIndex))
 
     const contactErrors = await Promise.all(CONTACT_PREFIXES.map(async prefix => await validateContact(row, rowIndex, prefix, api)))
     errors.push(...contactErrors.flat())
