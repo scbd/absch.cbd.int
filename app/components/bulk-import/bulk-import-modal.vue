@@ -115,6 +115,7 @@
 
         <BulkImportConfirmDialog
           v-if="state.phase === UPLOADER_PHASE.confirmImport"
+          :title="t('bulkImport.confirmImportTitle')"
           :message="t('bulkImport.confirmMsg')" :confirm-label="t('bulkImport.confirm')"
           confirm-class="btn-primary bi-btn--orange"
           @on-confirm="onImport" @on-cancel="onCancelConfirm"
@@ -129,6 +130,7 @@
 
         <BulkImportConfirmDialog
           v-if="isConfirmClose"
+          :title="t('bulkImport.confirmCloseTitle')"
           :message="t('bulkImport.closeConfirm')" :confirm-label="t('bulkImport.confirmClose')"
           confirm-class="btn-danger"
           @on-confirm="onForceClose" @on-cancel="onCancelConfirm"
@@ -136,6 +138,7 @@
 
         <BulkImportConfirmDialog
           v-if="isConfirmErase"
+          :title="t('bulkImport.confirmEraseTitle')"
           :message="t('bulkImport.eraseConfirm')" :confirm-label="t('bulkImport.confirmErase')"
           confirm-class="btn-danger"
           @on-confirm="onConfirmErase" @on-cancel="onCancelConfirm"
