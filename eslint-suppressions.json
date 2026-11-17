@@ -227,38 +227,47 @@
     "@stylistic/brace-style": {
       "count": 1
     },
-    "@stylistic/eol-last": {
+    "@stylistic/comma-spacing": {
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 25
+      "count": 47
     },
     "@stylistic/key-spacing": {
       "count": 4
+    },
+    "@stylistic/keyword-spacing": {
+      "count": 1
     },
     "@stylistic/no-trailing-spaces": {
       "count": 3
     },
     "@stylistic/quotes": {
-      "count": 1
+      "count": 2
     },
     "@stylistic/semi": {
-      "count": 6
+      "count": 13
     },
     "@stylistic/space-before-function-paren": {
-      "count": 2
+      "count": 4
+    },
+    "@stylistic/spaced-comment": {
+      "count": 1
     },
     "@typescript-eslint/ban-ts-comment": {
       "count": 1
     },
     "@typescript-eslint/explicit-function-return-type": {
+      "count": 3
+    },
+    "@typescript-eslint/max-params": {
       "count": 1
     },
     "@typescript-eslint/no-explicit-any": {
       "count": 1
     },
     "@typescript-eslint/no-unnecessary-condition": {
-      "count": 1
+      "count": 2
     },
     "@typescript-eslint/no-unsafe-argument": {
       "count": 1
@@ -270,12 +279,21 @@
       "count": 1
     },
     "@typescript-eslint/no-unsafe-member-access": {
-      "count": 1
+      "count": 3
+    },
+    "@typescript-eslint/no-unsafe-return": {
+      "count": 2
     },
     "@typescript-eslint/no-useless-constructor": {
       "count": 1
     },
     "@typescript-eslint/only-throw-error": {
+      "count": 2
+    },
+    "@typescript-eslint/strict-boolean-expressions": {
+      "count": 1
+    },
+    "curly": {
       "count": 1
     },
     "no-useless-constructor": {
@@ -334,13 +352,13 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 2
+      "count": 12
     },
     "@stylistic/key-spacing": {
       "count": 1
     },
     "@stylistic/keyword-spacing": {
-      "count": 1
+      "count": 2
     },
     "@stylistic/no-multi-spaces": {
       "count": 1
@@ -349,19 +367,19 @@
       "count": 1
     },
     "@stylistic/no-trailing-spaces": {
-      "count": 6
+      "count": 1
     },
     "@stylistic/padded-blocks": {
       "count": 2
     },
     "@stylistic/quotes": {
-      "count": 2
+      "count": 3
     },
     "@stylistic/semi": {
-      "count": 7
+      "count": 16
     },
     "@stylistic/space-before-function-paren": {
-      "count": 3
+      "count": 9
     },
     "no-throw-literal": {
       "count": 1
@@ -396,7 +414,7 @@
       "count": 2
     },
     "@stylistic/no-trailing-spaces": {
-      "count": 2
+      "count": 1
     },
     "@stylistic/padded-blocks": {
       "count": 2
@@ -436,14 +454,11 @@
     "@stylistic/comma-dangle": {
       "count": 1
     },
-    "@stylistic/comma-spacing": {
-      "count": 2
-    },
     "@stylistic/eol-last": {
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 26
+      "count": 32
     },
     "@stylistic/no-trailing-spaces": {
       "count": 8
@@ -468,9 +483,6 @@
     },
     "@stylistic/space-infix-ops": {
       "count": 5
-    },
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
     },
     "curly": {
       "count": 1
@@ -1089,7 +1101,7 @@
       "count": 50
     },
     "@stylistic/semi": {
-      "count": 48
+      "count": 52
     },
     "@stylistic/space-before-function-paren": {
       "count": 4
@@ -1101,7 +1113,7 @@
       "count": 2
     },
     "curly": {
-      "count": 2
+      "count": 3
     },
     "eqeqeq": {
       "count": 2
@@ -2488,25 +2500,6 @@
       "count": 2
     }
   },
-  "app/components/documents-uploader/documents-uploader.vue": {
-    "@typescript-eslint/no-confusing-void-expression": {
-      "count": 1
-    }
-  },
-  "app/components/documents-uploader/utilities/import-documents.ts": {
-    "@typescript-eslint/no-unsafe-assignment": {
-      "count": 2
-    },
-    "@typescript-eslint/no-unsafe-call": {
-      "count": 2
-    },
-    "@typescript-eslint/no-unsafe-member-access": {
-      "count": 3
-    },
-    "@typescript-eslint/no-unsafe-return": {
-      "count": 2
-    }
-  },
   "app/components/forums/attachment-upload.vue": {
     "@stylistic/array-bracket-spacing": {
       "count": 2
@@ -3852,7 +3845,7 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 10
+      "count": 12
     },
     "@stylistic/key-spacing": {
       "count": 3
@@ -4002,7 +3995,7 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 53
+      "count": 54
     },
     "@stylistic/key-spacing": {
       "count": 1
@@ -4020,7 +4013,7 @@
       "count": 1
     },
     "@stylistic/semi": {
-      "count": 27
+      "count": 28
     },
     "@stylistic/spaced-comment": {
       "count": 1
@@ -4297,6 +4290,9 @@
     }
   },
   "app/components/scbd-angularjs-controls/form-control-directives/afc-autocomplete.js": {
+    "@stylistic/arrow-spacing": {
+      "count": 2
+    },
     "@stylistic/block-spacing": {
       "count": 1
     },
@@ -4307,13 +4303,13 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 368
+      "count": 372
     },
     "@stylistic/key-spacing": {
       "count": 1
     },
     "@stylistic/keyword-spacing": {
-      "count": 7
+      "count": 8
     },
     "@stylistic/no-mixed-operators": {
       "count": 2
@@ -4331,7 +4327,7 @@
       "count": 11
     },
     "@stylistic/quotes": {
-      "count": 7
+      "count": 8
     },
     "@stylistic/semi": {
       "count": 157
@@ -4707,7 +4703,7 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 129
+      "count": 130
     },
     "@stylistic/keyword-spacing": {
       "count": 6
@@ -4716,7 +4712,7 @@
       "count": 1
     },
     "@stylistic/no-multi-spaces": {
-      "count": 14
+      "count": 15
     },
     "@stylistic/no-multiple-empty-lines": {
       "count": 4
@@ -4731,7 +4727,7 @@
       "count": 8
     },
     "@stylistic/quotes": {
-      "count": 25
+      "count": 26
     },
     "@stylistic/semi": {
       "count": 51
@@ -4743,7 +4739,7 @@
       "count": 11
     },
     "@stylistic/space-in-parens": {
-      "count": 8
+      "count": 9
     },
     "@stylistic/space-infix-ops": {
       "count": 10
@@ -4758,7 +4754,7 @@
       "count": 8
     },
     "eqeqeq": {
-      "count": 9
+      "count": 10
     },
     "no-var": {
       "count": 14
@@ -7455,40 +7451,40 @@
   },
   "app/routes/absch.js": {
     "@stylistic/arrow-spacing": {
-      "count": 42
+      "count": 44
     },
     "@stylistic/comma-dangle": {
       "count": 10
     },
     "@stylistic/comma-spacing": {
-      "count": 189
+      "count": 195
     },
     "@stylistic/dot-location": {
-      "count": 65
+      "count": 67
     },
     "@stylistic/indent": {
-      "count": 87
+      "count": 90
     },
     "@stylistic/key-spacing": {
-      "count": 239
+      "count": 246
     },
     "@stylistic/no-multi-spaces": {
-      "count": 137
+      "count": 142
     },
     "@stylistic/no-trailing-spaces": {
-      "count": 18
+      "count": 20
     },
     "@stylistic/object-curly-spacing": {
-      "count": 101
+      "count": 103
     },
     "@stylistic/padded-blocks": {
       "count": 1
     },
     "@stylistic/quote-props": {
-      "count": 218
+      "count": 228
     },
     "@stylistic/quotes": {
-      "count": 306
+      "count": 318
     },
     "@stylistic/semi": {
       "count": 11
@@ -7599,40 +7595,40 @@
   },
   "app/routes/common-routes.js": {
     "@stylistic/arrow-spacing": {
-      "count": 128
+      "count": 132
     },
     "@stylistic/comma-dangle": {
       "count": 37
     },
     "@stylistic/comma-spacing": {
-      "count": 279
+      "count": 283
     },
     "@stylistic/dot-location": {
-      "count": 88
+      "count": 90
     },
     "@stylistic/indent": {
-      "count": 152
+      "count": 156
     },
     "@stylistic/key-spacing": {
-      "count": 466
+      "count": 478
     },
     "@stylistic/no-multi-spaces": {
-      "count": 272
+      "count": 279
     },
     "@stylistic/no-trailing-spaces": {
       "count": 66
     },
     "@stylistic/object-curly-spacing": {
-      "count": 132
+      "count": 134
     },
     "@stylistic/padded-blocks": {
       "count": 1
     },
     "@stylistic/quote-props": {
-      "count": 404
+      "count": 414
     },
     "@stylistic/quotes": {
-      "count": 517
+      "count": 531
     },
     "@stylistic/semi": {
       "count": 37
@@ -8236,16 +8232,16 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 231
+      "count": 234
     },
     "@stylistic/key-spacing": {
       "count": 4
     },
     "@stylistic/keyword-spacing": {
-      "count": 56
+      "count": 57
     },
     "@stylistic/no-mixed-spaces-and-tabs": {
-      "count": 30
+      "count": 37
     },
     "@stylistic/no-multi-spaces": {
       "count": 14
@@ -8254,7 +8250,7 @@
       "count": 4
     },
     "@stylistic/no-tabs": {
-      "count": 255
+      "count": 265
     },
     "@stylistic/no-trailing-spaces": {
       "count": 11
@@ -8269,13 +8265,13 @@
       "count": 63
     },
     "@stylistic/semi": {
-      "count": 123
+      "count": 124
     },
     "@stylistic/semi-spacing": {
       "count": 3
     },
     "@stylistic/space-before-blocks": {
-      "count": 9
+      "count": 10
     },
     "@stylistic/space-before-function-paren": {
       "count": 17
@@ -8284,7 +8280,7 @@
       "count": 21
     },
     "@stylistic/space-infix-ops": {
-      "count": 36
+      "count": 37
     },
     "@stylistic/spaced-comment": {
       "count": 16
@@ -8305,7 +8301,7 @@
       "count": 1
     },
     "no-var": {
-      "count": 13
+      "count": 14
     },
     "unicode-bom": {
       "count": 1
@@ -8712,7 +8708,7 @@
       "count": 1
     },
     "@stylistic/no-multi-spaces": {
-      "count": 18
+      "count": 19
     },
     "@stylistic/no-multiple-empty-lines": {
       "count": 1
@@ -8727,7 +8723,7 @@
       "count": 73
     },
     "@stylistic/semi": {
-      "count": 112
+      "count": 116
     },
     "@stylistic/space-before-blocks": {
       "count": 1
@@ -8750,6 +8746,9 @@
     "@typescript-eslint/no-confusing-void-expression": {
       "count": 3
     },
+    "@typescript-eslint/no-invalid-void-type": {
+      "count": 2
+    },
     "@typescript-eslint/no-magic-numbers": {
       "count": 2
     },
@@ -8763,7 +8762,7 @@
       "count": 2
     },
     "@typescript-eslint/no-unsafe-assignment": {
-      "count": 2
+      "count": 3
     },
     "@typescript-eslint/no-unsafe-call": {
       "count": 1
@@ -8772,7 +8771,7 @@
       "count": 3
     },
     "@typescript-eslint/no-unsafe-type-assertion": {
-      "count": 14
+      "count": 16
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
@@ -8785,6 +8784,9 @@
     },
     "@typescript-eslint/prefer-nullish-coalescing": {
       "count": 4
+    },
+    "@typescript-eslint/return-await": {
+      "count": 1
     },
     "@typescript-eslint/strict-boolean-expressions": {
       "count": 32
@@ -11758,22 +11760,22 @@
       "count": 3
     },
     "@stylistic/brace-style": {
-      "count": 1
+      "count": 6
     },
     "@stylistic/comma-spacing": {
       "count": 5
     },
     "@stylistic/indent": {
-      "count": 85
+      "count": 254
     },
     "@stylistic/key-spacing": {
-      "count": 10
+      "count": 14
     },
     "@stylistic/keyword-spacing": {
-      "count": 16
+      "count": 35
     },
     "@stylistic/no-multi-spaces": {
-      "count": 10
+      "count": 25
     },
     "@stylistic/no-multiple-empty-lines": {
       "count": 2
@@ -11782,34 +11784,40 @@
       "count": 3
     },
     "@stylistic/no-trailing-spaces": {
-      "count": 11
+      "count": 10
     },
-    "@stylistic/padded-blocks": {
+    "@stylistic/object-property-newline": {
       "count": 4
     },
+    "@stylistic/padded-blocks": {
+      "count": 6
+    },
     "@stylistic/semi": {
-      "count": 42
+      "count": 141
     },
     "@stylistic/space-before-blocks": {
-      "count": 11
+      "count": 41
     },
     "@stylistic/space-before-function-paren": {
-      "count": 7
+      "count": 29
     },
     "@stylistic/space-infix-ops": {
-      "count": 8
+      "count": 13
     },
     "@stylistic/spaced-comment": {
-      "count": 2
+      "count": 19
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
     "curly": {
-      "count": 6
+      "count": 13
     },
     "eqeqeq": {
-      "count": 2
+      "count": 4
+    },
+    "no-console": {
+      "count": 1
     },
     "object-shorthand": {
       "count": 3
@@ -11817,8 +11825,11 @@
     "prefer-const": {
       "count": 1
     },
+    "promise/param-names": {
+      "count": 1
+    },
     "yoda": {
-      "count": 2
+      "count": 3
     }
   },
   "app/views/directives/report-record.js": {
@@ -12554,13 +12565,13 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 50
+      "count": 60
     },
     "@stylistic/key-spacing": {
       "count": 4
     },
     "@stylistic/keyword-spacing": {
-      "count": 3
+      "count": 4
     },
     "@stylistic/no-multi-spaces": {
       "count": 3
@@ -12569,7 +12580,7 @@
       "count": 2
     },
     "@stylistic/no-trailing-spaces": {
-      "count": 7
+      "count": 3
     },
     "@stylistic/object-curly-spacing": {
       "count": 1
@@ -12581,7 +12592,7 @@
       "count": 3
     },
     "@stylistic/semi": {
-      "count": 20
+      "count": 26
     },
     "@stylistic/space-before-blocks": {
       "count": 4
@@ -12590,16 +12601,16 @@
       "count": 5
     },
     "@stylistic/space-infix-ops": {
-      "count": 2
+      "count": 1
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 2
     },
-    "eqeqeq": {
+    "curly": {
       "count": 1
     },
     "no-var": {
-      "count": 2
+      "count": 4
     },
     "object-shorthand": {
       "count": 2
@@ -18958,10 +18969,13 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 58
+      "count": 62
     },
     "@stylistic/key-spacing": {
       "count": 6
+    },
+    "@stylistic/keyword-spacing": {
+      "count": 2
     },
     "@stylistic/no-multiple-empty-lines": {
       "count": 4
@@ -18982,13 +18996,13 @@
       "count": 35
     },
     "@stylistic/space-before-blocks": {
-      "count": 1
+      "count": 3
     },
     "@stylistic/space-before-function-paren": {
       "count": 2
     },
     "@stylistic/space-infix-ops": {
-      "count": 5
+      "count": 7
     },
     "arrow-body-style": {
       "count": 1
@@ -19942,25 +19956,25 @@
       "count": 10
     },
     "@stylistic/indent": {
-      "count": 477
+      "count": 482
     },
     "@stylistic/key-spacing": {
-      "count": 18
+      "count": 19
     },
     "@stylistic/keyword-spacing": {
-      "count": 79
+      "count": 80
     },
     "@stylistic/no-mixed-spaces-and-tabs": {
       "count": 3
     },
     "@stylistic/no-multi-spaces": {
-      "count": 60
+      "count": 61
     },
     "@stylistic/no-multiple-empty-lines": {
       "count": 4
     },
     "@stylistic/no-tabs": {
-      "count": 524
+      "count": 529
     },
     "@stylistic/no-trailing-spaces": {
       "count": 39
@@ -19969,7 +19983,7 @@
       "count": 2
     },
     "@stylistic/object-curly-spacing": {
-      "count": 17
+      "count": 19
     },
     "@stylistic/padded-blocks": {
       "count": 26
@@ -19978,16 +19992,16 @@
       "count": 44
     },
     "@stylistic/semi": {
-      "count": 186
+      "count": 187
     },
     "@stylistic/space-before-blocks": {
-      "count": 77
+      "count": 78
     },
     "@stylistic/space-before-function-paren": {
       "count": 24
     },
     "@stylistic/space-in-parens": {
-      "count": 47
+      "count": 48
     },
     "@stylistic/space-infix-ops": {
       "count": 4
@@ -20005,7 +20019,7 @@
       "count": 30
     },
     "eqeqeq": {
-      "count": 68
+      "count": 69
     },
     "n/handle-callback-err": {
       "count": 1
@@ -20040,7 +20054,7 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 22
+      "count": 23
     },
     "@stylistic/key-spacing": {
       "count": 9
@@ -20051,9 +20065,6 @@
     "@stylistic/object-curly-spacing": {
       "count": 1
     },
-    "@stylistic/spaced-comment": {
-      "count": 1
-    },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
     },
@@ -20061,19 +20072,19 @@
       "count": 1
     },
     "vue/first-attribute-linebreak": {
-      "count": 16
+      "count": 17
     },
     "vue/html-closing-bracket-newline": {
-      "count": 16
+      "count": 17
     },
     "vue/html-closing-bracket-spacing": {
       "count": 2
     },
     "vue/html-indent": {
-      "count": 38
+      "count": 41
     },
     "vue/html-self-closing": {
-      "count": 16
+      "count": 17
     }
   },
   "app/views/forms/view/records-id.js": {
@@ -22096,7 +22107,7 @@
       "count": 7
     },
     "@stylistic/indent": {
-      "count": 108
+      "count": 112
     },
     "@stylistic/key-spacing": {
       "count": 23
@@ -22114,7 +22125,7 @@
       "count": 2
     },
     "@stylistic/no-tabs": {
-      "count": 122
+      "count": 126
     },
     "@stylistic/no-trailing-spaces": {
       "count": 4
@@ -22132,16 +22143,19 @@
       "count": 14
     },
     "@stylistic/semi": {
-      "count": 45
+      "count": 47
     },
     "@stylistic/space-before-blocks": {
-      "count": 20
+      "count": 21
     },
     "@stylistic/space-before-function-paren": {
-      "count": 19
+      "count": 20
     },
     "@stylistic/space-infix-ops": {
-      "count": 7
+      "count": 8
+    },
+    "@stylistic/spaced-comment": {
+      "count": 1
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
@@ -22164,7 +22178,7 @@
       "count": 2
     },
     "@stylistic/indent": {
-      "count": 58
+      "count": 65
     },
     "@stylistic/keyword-spacing": {
       "count": 1
@@ -22182,22 +22196,22 @@
       "count": 4
     },
     "@stylistic/quotes": {
-      "count": 5
+      "count": 6
     },
     "@stylistic/semi": {
-      "count": 31
+      "count": 35
     },
     "@stylistic/space-before-blocks": {
-      "count": 2
+      "count": 3
     },
     "@stylistic/space-before-function-paren": {
-      "count": 14
+      "count": 15
     },
     "@stylistic/space-infix-ops": {
       "count": 1
     },
     "@stylistic/spaced-comment": {
-      "count": 1
+      "count": 2
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 1
@@ -22323,22 +22337,22 @@
   },
   "app/views/pdf-viewer/records-pdf-viewer.js": {
     "@stylistic/arrow-spacing": {
-      "count": 6
+      "count": 8
     },
     "@stylistic/brace-style": {
-      "count": 2
+      "count": 4
     },
     "@stylistic/indent": {
-      "count": 115
+      "count": 147
     },
     "@stylistic/key-spacing": {
       "count": 1
     },
     "@stylistic/keyword-spacing": {
-      "count": 9
+      "count": 15
     },
     "@stylistic/no-multi-spaces": {
-      "count": 1
+      "count": 3
     },
     "@stylistic/no-multiple-empty-lines": {
       "count": 1
@@ -22353,27 +22367,33 @@
       "count": 13
     },
     "@stylistic/semi": {
-      "count": 45
+      "count": 66
     },
     "@stylistic/space-before-blocks": {
-      "count": 14
+      "count": 17
     },
     "@stylistic/space-before-function-paren": {
-      "count": 13
+      "count": 14
     },
     "@stylistic/space-in-parens": {
       "count": 6
     },
     "@stylistic/space-infix-ops": {
-      "count": 5
+      "count": 6
+    },
+    "@stylistic/spaced-comment": {
+      "count": 2
     },
     "@typescript-eslint/no-unused-expressions": {
       "count": 1
     },
     "curly": {
-      "count": 2
+      "count": 4
     },
     "eqeqeq": {
+      "count": 1
+    },
+    "no-console": {
       "count": 1
     },
     "no-var": {
@@ -22537,32 +22557,62 @@
     }
   },
   "app/views/portals/index.vue": {
+    "@stylistic/brace-style": {
+      "count": 2
+    },
     "@stylistic/indent": {
       "count": 4
     },
     "@stylistic/key-spacing": {
       "count": 2
     },
+    "@stylistic/keyword-spacing": {
+      "count": 4
+    },
+    "@stylistic/no-multi-spaces": {
+      "count": 1
+    },
     "@stylistic/no-trailing-spaces": {
-      "count": 3
+      "count": 2
     },
     "@stylistic/object-curly-spacing": {
       "count": 6
     },
+    "@stylistic/padded-blocks": {
+      "count": 1
+    },
     "@stylistic/semi": {
-      "count": 4
+      "count": 6
+    },
+    "@stylistic/space-before-function-paren": {
+      "count": 3
     },
     "@typescript-eslint/no-confusing-void-expression": {
       "count": 1
     },
+    "@typescript-eslint/no-unnecessary-condition": {
+      "count": 2
+    },
     "@typescript-eslint/promise-function-async": {
       "count": 1
     },
+    "curly": {
+      "count": 1
+    },
     "vue/html-indent": {
-      "count": 11
+      "count": 74
+    },
+    "vue/html-self-closing": {
+      "count": 5
     },
     "vue/multi-word-component-names": {
       "count": 1
+    },
+    "vue/multiline-html-element-content-newline": {
+      "count": 2
+    },
+    "vue/singleline-html-element-content-newline": {
+      "count": 2
     }
   },
   "app/views/portals/portal-id.vue": {
@@ -23940,13 +23990,13 @@
       "count": 5
     },
     "@stylistic/indent": {
-      "count": 746
+      "count": 804
     },
     "@stylistic/key-spacing": {
-      "count": 78
+      "count": 79
     },
     "@stylistic/keyword-spacing": {
-      "count": 46
+      "count": 47
     },
     "@stylistic/no-mixed-operators": {
       "count": 2
@@ -23955,7 +24005,7 @@
       "count": 1
     },
     "@stylistic/no-multi-spaces": {
-      "count": 13
+      "count": 14
     },
     "@stylistic/no-multiple-empty-lines": {
       "count": 5
@@ -23973,25 +24023,25 @@
       "count": 2
     },
     "@stylistic/padded-blocks": {
-      "count": 25
+      "count": 26
     },
     "@stylistic/quote-props": {
       "count": 11
     },
     "@stylistic/quotes": {
-      "count": 52
+      "count": 51
     },
     "@stylistic/semi": {
-      "count": 301
+      "count": 337
     },
     "@stylistic/semi-spacing": {
       "count": 1
     },
     "@stylistic/space-before-blocks": {
-      "count": 57
+      "count": 60
     },
     "@stylistic/space-before-function-paren": {
-      "count": 30
+      "count": 32
     },
     "@stylistic/space-in-parens": {
       "count": 6
@@ -24000,7 +24050,7 @@
       "count": 19
     },
     "@stylistic/spaced-comment": {
-      "count": 29
+      "count": 30
     },
     "@typescript-eslint/no-unused-vars": {
       "count": 3
@@ -24024,7 +24074,7 @@
       "count": 1
     },
     "no-var": {
-      "count": 40
+      "count": 46
     },
     "object-shorthand": {
       "count": 1
@@ -25805,10 +25855,10 @@
       "count": 30
     },
     "@stylistic/indent": {
-      "count": 1657
+      "count": 1659
     },
     "@stylistic/key-spacing": {
-      "count": 194
+      "count": 195
     },
     "@stylistic/keyword-spacing": {
       "count": 147
@@ -25817,7 +25867,7 @@
       "count": 1
     },
     "@stylistic/no-multi-spaces": {
-      "count": 250
+      "count": 249
     },
     "@stylistic/no-multiple-empty-lines": {
       "count": 9
@@ -25847,7 +25897,7 @@
       "count": 59
     },
     "@stylistic/semi": {
-      "count": 610
+      "count": 612
     },
     "@stylistic/semi-spacing": {
       "count": 17
@@ -25918,16 +25968,16 @@
       "count": 1
     },
     "@stylistic/indent": {
-      "count": 624
+      "count": 824
     },
     "@stylistic/key-spacing": {
-      "count": 56
+      "count": 57
     },
     "@stylistic/no-multi-spaces": {
       "count": 1
     },
     "@stylistic/no-tabs": {
-      "count": 632
+      "count": 832
     },
     "@stylistic/no-trailing-spaces": {
       "count": 9
@@ -25936,10 +25986,10 @@
       "count": 2
     },
     "@stylistic/quote-props": {
-      "count": 403
+      "count": 495
     },
     "@stylistic/quotes": {
-      "count": 681
+      "count": 820
     },
     "@stylistic/semi": {
       "count": 3
