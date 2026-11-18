@@ -198,6 +198,13 @@ export const categories = [
     ]
   },
   {
+    "title": categoryTitle.eLearningCourses,
+    "adminTags": [
+      "e-learning"
+    ],
+    "articles": []
+  },
+  {
     "title": categoryTitle.gettingHelp,
     "adminTags": [
       "getting-help"
