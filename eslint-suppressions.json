@@ -810,23 +810,6 @@
       "count": 4
     }
   },
-  "app/app-data/bch/kb-categories.js": {
-    "@stylistic/indent": {
-      "count": 179
-    },
-    "@stylistic/no-multiple-empty-lines": {
-      "count": 1
-    },
-    "@stylistic/quote-props": {
-      "count": 124
-    },
-    "@stylistic/quotes": {
-      "count": 229
-    },
-    "@stylistic/semi": {
-      "count": 3
-    }
-  },
   "app/app-data/bch/kibana-reports.js": {
     "@stylistic/eol-last": {
       "count": 1
