@@ -22,7 +22,7 @@
             <ng
               v-vue-ng:km-control-group
               :name="`faq_${index}_question`"
-              :caption="t('faqQuestion')"
+              :caption="`${t('faqQuestion')} ${index + 1}`"
             >
               <ng
                 v-model:ng-model="faq.question"
@@ -42,6 +42,28 @@
                 :locales="locales"
               />
             </ng>
+          </div>
+          <div class="btn-group ms-2">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              :disabled="index === 0"
+              :aria-label="t('moveFaqUp')"
+              :title="t('moveFaqUp')"
+              @click="move(index, -1)"
+            >
+              <i class="fa fa-arrow-up" />
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              :disabled="index === faqs.length - 1"
+              :aria-label="t('moveFaqDown')"
+              :title="t('moveFaqDown')"
+              @click="move(index, 1)"
+            >
+              <i class="fa fa-arrow-down" />
+            </button>
           </div>
           <button
             type="button"
@@ -98,6 +120,15 @@ const hasEmptyFaq = computed(() => faqs.value.some(faq => !faq.question && !faq.
 function add () {
   if (hasEmptyFaq.value) { return }
   faqs.value = [...faqs.value, {}]
+}
+
+function move (index: number, offset: -1 | 1) {
+  const target = index + offset
+  if (target < 0 || target >= faqs.value.length) { return }
+
+  const reordered = [...faqs.value]
+  reordered.splice(target, 0, ...reordered.splice(index, 1))
+  faqs.value = reordered
 }
 
 function remove (index: number) {
