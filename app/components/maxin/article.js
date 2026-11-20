@@ -4,6 +4,7 @@ export default {
     methods: {
         async loadKbCategories(){
             let categories
+            // TODO: 'isBch' is not defined — loadKbCategories throws a ReferenceError when it runs
             if(!isBch) {
                 categories = (await import('~/app-data/abs/kb-categories.js')).categories;
             }

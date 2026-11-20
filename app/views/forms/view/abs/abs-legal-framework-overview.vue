@@ -314,9 +314,8 @@
           <label>{{ t('additionalDocuments') }}</label>
           <div class="km-value">
             <ng
+              v-model:ng-model="legalFrameworkDocument.additionalDocuments"
               v-vue-ng:km-link-list
-              :value="legalFrameworkDocument.additionalDocuments"
-              :locale="locale"
             />
           </div>
         </div>

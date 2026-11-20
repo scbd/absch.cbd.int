@@ -1,9 +1,13 @@
-FROM node:22-alpine
+FROM node:26-alpine
 
 RUN apk update  -q && \
     apk upgrade -q && \
     apk add     -q --no-cache bash git curl python3 && \
     rm -rf /var/cache/apk/*
+
+# node:26 images no longer ship yarn/corepack. Install yarn from npm, never via
+# apk (that would pull in a second, unpatched Alpine nodejs as /usr/bin/node).
+RUN npm install -g --ignore-scripts yarn@1.22.22
 
 ARG BRANCH='master'
 ENV BRANCH=$BRANCH

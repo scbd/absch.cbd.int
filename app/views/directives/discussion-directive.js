@@ -43,6 +43,7 @@ import 'cbd-forums';
                                                 });
                                         });
                                 } else {
+                                    // TODO: 'resutl' is a typo for 'result' — this branch throws a ReferenceError when it runs
                                     $scope.threadId = resutl.data.threadId;
                                     $scope.discussionMessage = 'Discussion alreay exists and may be in approval process, please contact ABS team for further details.';
                                     createPost();
@@ -51,6 +52,7 @@ import 'cbd-forums';
                             }).catch(function(error) {
                                 $scope.discussionMessage = error.message;
                             }).finally(function() {
+                                // TODO: $timeout is not injected in this directive — this throws a ReferenceError when it runs
                                 $timeout(function() {
                                     $scope.discussionMessage = null;
                                 }, 10000)

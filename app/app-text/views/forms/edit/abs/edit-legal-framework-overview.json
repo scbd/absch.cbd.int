@@ -67,6 +67,8 @@
   "faqAnswer": "Answer",
   "addFaq": "Add FAQ",
   "removeFaq": "Remove FAQ",
+  "moveFaqUp": "Move FAQ up",
+  "moveFaqDown": "Move FAQ down",
   "faqSuggestionsTitle": "Additional FAQ suggestions",
   "faqSuggestion1": "What activities constitute the utilization of genetic resources?",
   "faqSuggestion2": "When is an ABS permit required?",

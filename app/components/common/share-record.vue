@@ -300,6 +300,7 @@ const shareLinkMail = async () => {
       }
       await saveShareDocument(undefined, captchaToken);
     } 
+    // TODO: sharedData.type reads the ref object (always undefined) — this guard never matches, so .link is never set here
     if(sharedData.value[sharedData.type]) {
       sharedData.value[sharedData.type].link = `${realm.baseURL}/${locale.value}/share/link/${sharedData.value.storageType}/${sharedData.value[sharedData.value.type].urlHash}`;
     }
@@ -342,6 +343,7 @@ const generateEmbedCode = async () => {
       else if (sharedData.value.storageType == "chm-search-result") {
         sharedData.value.embed.code += `<div class="scbd-chm-embed" data-type="chm-search-result" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
       }
+      // TODO: missing .value — sharedData.embed is undefined so this branch never runs, and the next line writes sharedData.code instead of sharedData.value.embed.code
       else if (sharedData.embed.storageType == "chm-country-profile") {
         sharedData.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${sharedData.value.embed.urlHash}" width="100%"></div>`;
       }

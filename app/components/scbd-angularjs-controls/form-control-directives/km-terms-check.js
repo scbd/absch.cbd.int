@@ -339,6 +339,7 @@ app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translat
                         return;
                     var keyword = $scope.searchKeyword;
                     if($scope.beforeSearch)
+                        // TODO: '||keywords' is a typo for '||keyword' — throws a ReferenceError when beforeSearch returns a falsy value
                         keyword     = $scope.beforeSearch({keyword:keyword})||keywords;
                     var title = term.searchTitle[locale]
                     if(!title)
