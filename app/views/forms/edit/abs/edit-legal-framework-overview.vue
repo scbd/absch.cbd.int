@@ -405,7 +405,8 @@ const article8ResearchSupportQuestion = computed(() => ({
 
 const article8SimplifiedAccessMeasuresQuestion = computed(() => ({
   key: 'article8SimplifiedAccessMeasures',
-  options: threeWayOptions(),
+  // the hint only applies when "Yes" is selected
+  options: threeWayOptions().map(option => option.value === 'true' ? { ...option, footnote: t('article8SimplifiedAccessMeasuresInfo') } : option),
   additionalKeyName: 'article8SimplifiedAccessMeasures.additionalInformation',
   additionalMandatoryValues: ['true.some', 'false']
 }))
