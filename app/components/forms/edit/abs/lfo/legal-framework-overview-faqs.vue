@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p>{{ t('faqIntro') }}</p>
     <div class="alert alert-info">
       <strong>{{ t('faqSuggestionsTitle') }}</strong>
       <ul class="mb-0">

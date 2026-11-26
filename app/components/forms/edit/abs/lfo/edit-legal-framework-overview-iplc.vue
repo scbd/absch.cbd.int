@@ -322,7 +322,7 @@ const tkNonCommercialPermitExceptionQuestion = computed(() => ({
 
 const iplcDomesticLawRecognizesRightQuestion = computed(() => ({
   key: 'iplcDomesticLawRecognizesRight',
-  options: threeWayOptions(t),
+  options: threeWayOptions(t, undefined, t('iplcDomesticLawRecognizesRightInfo')),
   additionalKeyName: 'iplcDomesticLawRecognizesRight.additionalInformation',
   additionalMandatoryValues: []
 }))
